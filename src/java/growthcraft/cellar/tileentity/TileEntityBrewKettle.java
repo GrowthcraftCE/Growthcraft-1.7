@@ -15,6 +15,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -399,36 +400,42 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 			time = v;
 			break;
 		case 1:
+			if (FluidRegistry.getFluid(v) == null) {
+				return;
+			}
 			if (tank[0].getFluid() == null) 
 			{
 				tank[0].setFluid(new FluidStack(v, 0));
 			} else 
 			{
-				tank[0].getFluid().fluidID = v;
+				tank[0].setFluid(new FluidStack(v, tank[0].getFluid().amount));
 			}
 			break;
 		case 2:
 			if (tank[0].getFluid() == null) 
 			{
-				tank[0].setFluid(new FluidStack(0, v));
+				tank[0].setFluid(new FluidStack(FluidRegistry.WATER, v));
 			} else 
 			{
 				tank[0].getFluid().amount = v;
 			}
 			break;
 		case 3:
+			if (FluidRegistry.getFluid(v) == null) {
+				return;
+			}
 			if (tank[1].getFluid() == null) 
 			{
 				tank[1].setFluid(new FluidStack(v, 0));
 			} else 
 			{
-				tank[1].getFluid().fluidID = v;
+				tank[1].setFluid(new FluidStack(v, tank[1].getFluid().amount));
 			}
 			break;
 		case 4:
 			if (tank[1].getFluid() == null) 
 			{
-				tank[1].setFluid(new FluidStack(0, v));
+				tank[1].setFluid(new FluidStack(FluidRegistry.WATER, v));
 			} else 
 			{
 				tank[1].getFluid().amount = v;
@@ -440,9 +447,9 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	public void sendGUINetworkData(ContainerBrewKettle container, ICrafting iCrafting) 
 	{
 		iCrafting.sendProgressBarUpdate(container, 0, time);
-		iCrafting.sendProgressBarUpdate(container, 1, tank[0].getFluid() != null ? tank[0].getFluid().fluidID : 0);
+		iCrafting.sendProgressBarUpdate(container, 1, tank[0].getFluid() != null ? tank[0].getFluid().getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, 2, tank[0].getFluid() != null ? tank[0].getFluid().amount : 0);
-		iCrafting.sendProgressBarUpdate(container, 3, tank[1].getFluid() != null ? tank[1].getFluid().fluidID : 0);
+		iCrafting.sendProgressBarUpdate(container, 3, tank[1].getFluid() != null ? tank[1].getFluid().getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, 4, tank[1].getFluid() != null ? tank[1].getFluid().amount : 0);
 	}
 
