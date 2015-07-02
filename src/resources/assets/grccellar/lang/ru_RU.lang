@@ -1,0 +1,28 @@
+﻿
+itemGroup.tabGrCCellar=Growthcraft: Погреб
+
+tile.grc.fruitPress.name=Плодовый пресс
+tile.grc.fruitPresser.name=Плодовый пресс
+tile.grc.brewKettle.name=Сусловарочный котёл
+tile.grc.fermentBarrel.name=Бочка для брожения
+
+item.grc.boozeBucket.name=Ведро
+
+container.grc.fruitPress=Плодовый пресс
+container.grc.brewKettle=Сусловарочный котёл
+container.grc.fermentBarrel=Бочка для брожения
+
+grc.potion.tipsy=Опьянение
+
+grc.booze=Booze
+gui.grc.empty=Пусто
+gui.grc.discard=Discard
+gui.grc.switch=Переключить
+gui.grc.cantferment=Нельзя начать брожение.
+
+achievement.craftBarrel=Добыча алкоголя
+achievement.craftBarrel.desc=Сделайте бочку для брожения из трёх деревянных досок и шести железных слитков.
+achievement.fermentBooze=Я мог сделать дрожжи.
+achievement.fermentBooze.desc=Сбродите алкогольный напиток.
+achievement.getDrunk=Пивоварение - это проблема?
+achievement.getDrunk.desc=Получите опьянение V.
