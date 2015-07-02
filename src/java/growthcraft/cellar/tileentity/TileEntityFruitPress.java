@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -373,18 +374,21 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 			time = v;
 			break;
 		case 1:
+			if (FluidRegistry.getFluid(v) == null) {
+				return;
+			}
 			if (tank.getFluid() == null) 
 			{
 				tank.setFluid(new FluidStack(v, 0));
 			} else 
 			{
-				tank.getFluid().fluidID = v;
+				tank.setFluid(new FluidStack(v, tank.getFluid().amount));
 			}
 			break;
 		case 2:
 			if (tank.getFluid() == null) 
 			{
-				tank.setFluid(new FluidStack(0, v));
+				tank.setFluid(new FluidStack(FluidRegistry.WATER, v));
 			} else 
 			{
 				tank.getFluid().amount = v;
@@ -396,7 +400,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	public void sendGUINetworkData(ContainerFruitPress container, ICrafting iCrafting) 
 	{
 		iCrafting.sendProgressBarUpdate(container, 0, time);
-		iCrafting.sendProgressBarUpdate(container, 1, tank.getFluid() != null ? tank.getFluid().fluidID : 0);
+		iCrafting.sendProgressBarUpdate(container, 1, tank.getFluid() != null ? tank.getFluid().getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, 2, tank.getFluid() != null ? tank.getFluid().amount : 0);
 	}
 
