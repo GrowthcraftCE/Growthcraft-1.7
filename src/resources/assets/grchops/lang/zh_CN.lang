@@ -1,0 +1,18 @@
+﻿
+tile.grc.hopVine.name=啤酒花
+
+item.grc.hops.name=啤酒花
+item.grc.hopSeeds.name=啤酒花种子
+	
+fluid.grc.hopAle=麦芽酒
+fluid.grc.hopAle0=麦芽酒
+fluid.grc.hopAle1=麦芽酒
+fluid.grc.hopAle2=麦芽酒
+fluid.grc.hopAle3=麦芽酒
+fluid.grc.hopAle4=麦芽酒
+
+fluid.grc.hopAle0.modifier=啤酒花, 轻度
+fluid.grc.hopAle1.modifier=啤酒花, 发酵
+fluid.grc.hopAle2.modifier=啤酒花, 发酵, 高度
+fluid.grc.hopAle3.modifier=啤酒花, 发酵, 烈度
+fluid.grc.hopAle4.modifier=无啤酒花, 轻度

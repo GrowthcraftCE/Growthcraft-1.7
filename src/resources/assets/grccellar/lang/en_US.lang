@@ -1,0 +1,28 @@
+﻿
+itemGroup.tabGrCCellar=Growthcraft Cellar
+
+tile.grc.fruitPress.name=Fruit Press
+tile.grc.fruitPresser.name=Fruit Press
+tile.grc.brewKettle.name=Brew Kettle
+tile.grc.fermentBarrel.name=Ferment Barrel
+
+item.grc.boozeBucket.name=Bucket of
+
+container.grc.fruitPress=Fruit Press
+container.grc.brewKettle=Brew Kettle
+container.grc.fermentBarrel=Ferment Barrel
+
+grc.potion.tipsy=Tipsy
+
+grc.booze=Booze
+gui.grc.empty=Empty
+gui.grc.discard=Discard
+gui.grc.switch=Switch
+gui.grc.cantferment=Cannot Ferment.
+
+achievement.craftBarrel=Cooper Extraction
+achievement.craftBarrel.desc=Craft a fermenting barrel with three wooden planks and six iron ingots.
+achievement.fermentBooze=Yeast I could do.
+achievement.fermentBooze.desc=Ferment an alcoholic beverage.
+achievement.getDrunk=Is Trouble Brewing?
+achievement.getDrunk.desc=Acquire Tipsy V.

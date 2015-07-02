@@ -1,0 +1,21 @@
+﻿
+tile.grc.beeBox.name=Bienenhaus
+tile.grc.beeHive.name=Bienenstock
+
+item.grc.honeyComb.empty.name=Honigwabe
+item.grc.honeyComb.full.name=Honigwabe
+item.grc.honeyJar.name=Honig
+item.grc.bee.name=Biene
+
+container.grc.beeBox=Bienenhaus
+	
+fluid.grc.honeyMead=Met
+fluid.grc.honeyMead0=Met
+fluid.grc.honeyMead1=Met
+fluid.grc.honeyMead2=Met
+fluid.grc.honeyMead3=Met
+
+fluid.grc.honeyMead0.modifier=Jung
+fluid.grc.honeyMead1.modifier=Gegoren
+fluid.grc.honeyMead2.modifier=Gegoren, Stark
+fluid.grc.honeyMead3.modifier=Gegoren, Verlängert

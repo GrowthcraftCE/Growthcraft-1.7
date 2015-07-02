@@ -1,0 +1,17 @@
+﻿
+tile.grc.appleBlock.name=Apfel
+tile.grc.appleSapling.name=Apfelbaum Setzling
+tile.grc.appleLeaves.name=Apfelbaum Blätter
+
+item.grc.appleSeeds.name=Apfelkern
+
+fluid.grc.appleCider=Apfelwein
+fluid.grc.appleCider0=Apfelwein
+fluid.grc.appleCider1=Apfelwein
+fluid.grc.appleCider2=Apfelwein
+fluid.grc.appleCider3=Apfelwein
+
+fluid.grc.appleCider0.modifier=Jung
+fluid.grc.appleCider1.modifier=Gegoren
+fluid.grc.appleCider2.modifier=Gegoren, Stark
+fluid.grc.appleCider3.modifier=Gegoren, Verlängert

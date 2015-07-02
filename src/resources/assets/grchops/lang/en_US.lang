@@ -1,0 +1,18 @@
+﻿
+tile.grc.hopVine.name=Hops
+
+item.grc.hops.name=Hops
+item.grc.hopSeeds.name=Hop Seeds
+
+fluid.grc.hopAle=Ale
+fluid.grc.hopAle0=Ale
+fluid.grc.hopAle1=Ale
+fluid.grc.hopAle2=Ale
+fluid.grc.hopAle3=Ale
+fluid.grc.hopAle4=Ale
+
+fluid.grc.hopAle0.modifier=Hopped, Young
+fluid.grc.hopAle1.modifier=Hopped, Fermented
+fluid.grc.hopAle2.modifier=Hopped, Fermented, Potent
+fluid.grc.hopAle3.modifier=Hopped, Fermented, Extended
+fluid.grc.hopAle4.modifier=No Hops, Young

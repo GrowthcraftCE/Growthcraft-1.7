@@ -1,0 +1,12 @@
+﻿
+itemGroup.tabGrowthCraft=Growthcraft
+
+tile.grc.fenceRope.name=Zaun mit Seil
+tile.grc.ropeBlock.name=Seil
+
+item.grc.rope.name=Seil
+
+fluid.tile.water=Wasser
+fluid.tile.lava=Lava
+
+achievementPage.pageGrowthCraft=Growthcraft

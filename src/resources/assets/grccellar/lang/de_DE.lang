@@ -1,0 +1,28 @@
+﻿
+itemGroup.tabGrCCellar=Growthcraft Keller
+
+tile.grc.fruitPress.name=Fruchtpresse
+tile.grc.fruitPresser.name=Fruchtpresse
+tile.grc.brewKettle.name=Braukessel
+tile.grc.fermentBarrel.name=Reifefass
+
+item.grc.boozeBucket.name=Eimer mit
+
+container.grc.fruitPress=Fruchtpresse
+container.grc.brewKettle=Braukessel
+container.grc.fermentBarrel=Reifefass
+
+grc.potion.tipsy=Angetrunken
+
+grc.booze=Alkohol
+gui.grc.empty=Leer
+gui.grc.discard=Leeren
+gui.grc.switch=Tauschen
+gui.grc.cantferment=Kann nicht gären
+
+achievement.craftBarrel=Ein Fass aufmachen
+achievement.craftBarrel.desc=achievement.craftBarrel.desc=Craft a fermenting barrel with three wooden planks and six iron ingots.
+achievement.fermentBooze=Was soll sich klären, muss erst gären
+achievement.fermentBooze.desc=Stelle Alkohol durch gärung her.
+achievement.getDrunk=Es braut sich etwas zusammen
+achievement.getDrunk.desc=Erreiche Angetrunkenheit V.

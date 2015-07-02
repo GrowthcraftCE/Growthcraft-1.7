@@ -1,0 +1,17 @@
+﻿
+tile.grc.appleBlock.name=苹果
+tile.grc.appleSapling.name=苹果树苗
+tile.grc.appleLeaves.name=苹果树叶
+
+item.grc.appleSeeds.name=苹果核
+	
+fluid.grc.appleCider=苹果西打酒
+fluid.grc.appleCider0=苹果西打酒
+fluid.grc.appleCider1=苹果西打酒
+fluid.grc.appleCider2=苹果西打酒
+fluid.grc.appleCider3=苹果西打酒
+
+fluid.grc.appleCider0.modifier=低度
+fluid.grc.appleCider1.modifier=发酵
+fluid.grc.appleCider2.modifier=发酵, 高度
+fluid.grc.appleCider3.modifier=发酵, 烈度

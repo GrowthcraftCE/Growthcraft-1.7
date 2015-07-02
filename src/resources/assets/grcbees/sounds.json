@@ -1,0 +1,9 @@
+{
+	"buzz": {
+		"category": "block",
+		"sounds": [
+			"buzz1", 
+			"buzz2"
+		]
+	}
+}

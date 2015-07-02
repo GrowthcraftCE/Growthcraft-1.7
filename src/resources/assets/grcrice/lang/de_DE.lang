@@ -1,0 +1,17 @@
+﻿
+tile.grc.paddyField.name=Reisfeld
+tile.grc.riceBlock.name=Reis
+
+item.grc.rice.name=Reis
+item.grc.riceBall.name=Onigiri
+
+fluid.grc.riceSake=Sake
+fluid.grc.riceSake0=Sake
+fluid.grc.riceSake1=Sake
+fluid.grc.riceSake2=Sake
+fluid.grc.riceSake3=Sake
+
+fluid.grc.riceSake0.modifier=Jung
+fluid.grc.riceSake1.modifier=Gegoren
+fluid.grc.riceSake2.modifier=Gegoren, Stark
+fluid.grc.riceSake3.modifier=Gegoren, Verlängert

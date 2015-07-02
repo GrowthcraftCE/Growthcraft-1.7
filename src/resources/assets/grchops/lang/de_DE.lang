@@ -1,0 +1,18 @@
+﻿
+tile.grc.hopVine.name=Hopfen
+
+item.grc.hops.name=Hopfen
+item.grc.hopSeeds.name=Hopfensamen
+
+fluid.grc.hopAle=Bier
+fluid.grc.hopAle0=Bier
+fluid.grc.hopAle1=Bier
+fluid.grc.hopAle2=Bier
+fluid.grc.hopAle3=Bier
+fluid.grc.hopAle4=Bier
+
+fluid.grc.hopAle0.modifier=Gehopft, Jung
+fluid.grc.hopAle1.modifier=Gehopft, Gegoren
+fluid.grc.hopAle2.modifier=Gehopft, Gegoren, Stark
+fluid.grc.hopAle3.modifier=Gehopft, Gegoren, Verlängert
+fluid.grc.hopAle4.modifier=Ungehopft, Jung

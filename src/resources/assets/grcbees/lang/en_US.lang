@@ -1,0 +1,21 @@
+﻿
+tile.grc.beeBox.name=Bee Box
+tile.grc.beeHive.name=Bee Hive
+
+item.grc.honeyComb.empty.name=Honeycomb
+item.grc.honeyComb.full.name=Honeycomb
+item.grc.honeyJar.name=Honey
+item.grc.bee.name=Bee
+
+container.grc.beeBox=Bee Box
+	
+fluid.grc.honeyMead=Mead
+fluid.grc.honeyMead0=Mead
+fluid.grc.honeyMead1=Mead
+fluid.grc.honeyMead2=Mead
+fluid.grc.honeyMead3=Mead
+
+fluid.grc.honeyMead0.modifier=Young
+fluid.grc.honeyMead1.modifier=Fermented
+fluid.grc.honeyMead2.modifier=Fermented, Potent
+fluid.grc.honeyMead3.modifier=Fermented, Extended

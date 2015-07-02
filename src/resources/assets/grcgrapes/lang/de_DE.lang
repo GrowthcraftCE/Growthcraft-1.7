@@ -1,0 +1,19 @@
+﻿
+tile.grc.grapeVine0.name=Weinrebe Stamm
+tile.grc.grapeVine1.name=Weinrebe Stamm
+tile.grc.grapeLeaves.name=Weinblätter
+tile.grc.grapeBlock.name=Weintraube
+
+item.grc.grapes.name=Weintraube
+item.grc.grapeSeeds.name=Traubensamen
+
+fluid.grc.grapeWine=Wein
+fluid.grc.grapeWine0=Wein
+fluid.grc.grapeWine1=Wein
+fluid.grc.grapeWine2=Wein
+fluid.grc.grapeWine3=Wein
+
+fluid.grc.grapeWine0.modifier=Jung
+fluid.grc.grapeWine1.modifier=Gegoren
+fluid.grc.grapeWine2.modifier=Gegoren, Stark
+fluid.grc.grapeWine3.modifier=Gegoren, Verlängert

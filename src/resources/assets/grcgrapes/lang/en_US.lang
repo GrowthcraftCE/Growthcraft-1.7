@@ -1,0 +1,19 @@
+﻿
+tile.grc.grapeVine0.name=Grape Trunk
+tile.grc.grapeVine1.name=Grape Trunk
+tile.grc.grapeLeaves.name=Grape Leaves
+tile.grc.grapeBlock.name=Grapes
+
+item.grc.grapes.name=Grapes
+item.grc.grapeSeeds.name=Grape Seeds
+
+fluid.grc.grapeWine=Grape Wine
+fluid.grc.grapeWine0=Grape Wine
+fluid.grc.grapeWine1=Grape Wine
+fluid.grc.grapeWine2=Grape Wine
+fluid.grc.grapeWine3=Grape Wine
+
+fluid.grc.grapeWine0.modifier=Young
+fluid.grc.grapeWine1.modifier=Fermented
+fluid.grc.grapeWine2.modifier=Fermented, Potent
+fluid.grc.grapeWine3.modifier=Fermented, Extended

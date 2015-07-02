@@ -1,0 +1,17 @@
+﻿
+tile.grc.paddyField.name=稻田
+tile.grc.riceBlock.name=稻米
+
+item.grc.rice.name=稻米
+item.grc.riceBall.name=饭团
+
+fluid.grc.riceSake=Sake
+fluid.grc.riceSake0=Sake
+fluid.grc.riceSake1=Sake
+fluid.grc.riceSake2=Sake
+fluid.grc.riceSake3=Sake
+
+fluid.grc.riceSake0.modifier=米酒
+fluid.grc.riceSake1.modifier=轻度
+fluid.grc.riceSake2.modifier=发酵, 高度
+fluid.grc.riceSake3.modifier=发酵, 烈度

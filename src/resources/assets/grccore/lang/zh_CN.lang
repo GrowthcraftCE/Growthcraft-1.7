@@ -1,0 +1,12 @@
+﻿
+itemGroup.tabGrowthCraft=Growthcraft
+
+tile.grc.fenceRope.name=围栏绳
+tile.grc.ropeBlock.name=绳子
+
+item.grc.rope.name=绳子
+
+fluid.tile.water=水
+fluid.tile.lava=岩浆
+
+achievementPage.pageGrowthCraft=Growthcraft

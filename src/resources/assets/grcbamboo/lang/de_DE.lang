@@ -1,0 +1,21 @@
+﻿
+tile.grc.bambooStalk.name=Bambus
+tile.grc.bambooBlock.name=Bambus
+tile.grc.bambooLeaves.name=Bambusblätter
+tile.grc.bambooFence.name=Bambuszaun
+tile.grc.bambooShoot.name=Bambusspross
+tile.grc.bambooSlab.name=Bambusstufe
+tile.grc.bambooStairs.name=Bambustreppe
+tile.grc.bambooWall.name=Bambuswand
+tile.grc.bambooFenceGate.name=Bambuszaun Tor
+tile.grc.bambooScaffold.name=Bambus-Gerüst
+tile.grc.bambooDoor.name=Bambustür
+
+item.grc.bamboo.name=Bambus
+item.grc.bambooDoor.name=Bambustür
+item.grc.bambooSlab.name=Bambusstufe
+item.grc.bambooRaft.name=Bambusfloß
+item.grc.bambooCoal.name=Bambus-Kohle
+item.grc.bambooShootFood.name=Bambusspross
+
+entity.Growthcraft|Bamboo.bambooRaft.name=Bambusfloß
