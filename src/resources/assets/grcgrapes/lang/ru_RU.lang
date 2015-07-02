@@ -1,0 +1,19 @@
+﻿
+tile.grc.grapeVine0.name=Виноградный ствол
+tile.grc.grapeVine1.name=Виноградный ствол
+tile.grc.grapeLeaves.name=Виноградная листва
+tile.grc.grapeBlock.name=Виноград
+
+item.grc.grapes.name=Виноград
+item.grc.grapeSeeds.name=Виноградные семена
+
+fluid.grc.grapeWine=Виноградное вино
+fluid.grc.grapeWine0=Виноградное вино
+fluid.grc.grapeWine1=Виноградное вино
+fluid.grc.grapeWine2=Виноградное вино
+fluid.grc.grapeWine3=Виноградное вино
+
+fluid.grc.grapeWine0.modifier=Молодое
+fluid.grc.grapeWine1.modifier=Сброженное
+fluid.grc.grapeWine2.modifier=Сброженное, крепкое
+fluid.grc.grapeWine3.modifier=Сброженное, расширенное

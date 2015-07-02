@@ -1,0 +1,21 @@
+﻿
+tile.grc.beeBox.name=Пчелиный ящик
+tile.grc.beeHive.name=Пчелиный улей
+
+item.grc.honeyComb.empty.name=Медовые соты
+item.grc.honeyComb.full.name=Медовые соты
+item.grc.honeyJar.name=Мёд
+item.grc.bee.name=Пчела
+
+container.grc.beeBox=Пчелиный ящик
+	
+fluid.grc.honeyMead=Медовуха
+fluid.grc.honeyMead0=Медовуха
+fluid.grc.honeyMead1=Медовуха
+fluid.grc.honeyMead2=Медовуха
+fluid.grc.honeyMead3=Медовуха
+
+fluid.grc.honeyMead0.modifier=Молодая
+fluid.grc.honeyMead1.modifier=Сброженная
+fluid.grc.honeyMead2.modifier=Сброженная, крепкая
+fluid.grc.honeyMead3.modifier=Сброженная, расширенная

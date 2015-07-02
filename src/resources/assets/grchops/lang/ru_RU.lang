@@ -1,0 +1,18 @@
+﻿
+tile.grc.hopVine.name=Хмель
+
+item.grc.hops.name=Хмель
+item.grc.hopSeeds.name=Семена хмеля
+
+fluid.grc.hopAle=Эль
+fluid.grc.hopAle0=Эль
+fluid.grc.hopAle1=Эль
+fluid.grc.hopAle2=Эль
+fluid.grc.hopAle3=Эль
+fluid.grc.hopAle4=Эль
+
+fluid.grc.hopAle0.modifier=Хмельной, молодой
+fluid.grc.hopAle1.modifier=Хмельной, сброженный
+fluid.grc.hopAle2.modifier=Хмельной, сброженный, крепкий
+fluid.grc.hopAle3.modifier=Хмельной, сброженный, расширенный
+fluid.grc.hopAle4.modifier=Нехмельной, молодой

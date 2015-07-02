@@ -1,0 +1,12 @@
+﻿
+itemGroup.tabGrowthCraft=Growthcraft
+
+tile.grc.fenceRope.name=Забор с верёвкой
+tile.grc.ropeBlock.name=Верёвка
+
+item.grc.rope.name=Верёвка
+
+fluid.tile.water=Вода
+fluid.tile.lava=Лава
+
+achievementPage.pageGrowthCraft=Growthcraft

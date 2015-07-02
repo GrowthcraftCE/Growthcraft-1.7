@@ -1,0 +1,17 @@
+﻿
+tile.grc.appleBlock.name=Яблоко
+tile.grc.appleSapling.name=Саженец яблони
+tile.grc.appleLeaves.name=Листва яблони
+
+item.grc.appleSeeds.name=Яблочный огрызок
+	
+fluid.grc.appleCider=Яблочный сидр
+fluid.grc.appleCider0=Яблочный сидр
+fluid.grc.appleCider1=Яблочный сидр
+fluid.grc.appleCider2=Яблочный сидр
+fluid.grc.appleCider3=Яблочный сидр
+
+fluid.grc.appleCider0.modifier=Молодой
+fluid.grc.appleCider1.modifier=Сброженный
+fluid.grc.appleCider2.modifier=Сброженный, крепкий
+fluid.grc.appleCider3.modifier=Сброженный, расширенный
