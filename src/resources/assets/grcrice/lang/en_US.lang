@@ -2,7 +2,7 @@
 tile.grc.paddyField.name=Rice Paddy
 tile.grc.riceBlock.name=Paddy Rice
 
-item.grc.rice.name=Rice
+item.grc.rice.name=Paddy Rice Grain
 item.grc.riceBall.name=Onigiri
 	
 fluid.grc.riceSake=Sake
