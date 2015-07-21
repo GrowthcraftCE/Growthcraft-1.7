@@ -2,7 +2,7 @@
 tile.grc.beeBox.name=Bee Box
 tile.grc.beeHive.name=Bee Hive
 
-item.grc.honeyComb.empty.name=Honeycomb
+item.grc.honeyComb.empty.name=Empty Honeycomb
 item.grc.honeyComb.full.name=Honeycomb
 item.grc.honeyJar.name=Honey
 item.grc.bee.name=Bee
