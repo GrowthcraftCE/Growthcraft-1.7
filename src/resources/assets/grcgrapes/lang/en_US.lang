@@ -2,10 +2,10 @@
 tile.grc.grapeVine0.name=Grape Trunk
 tile.grc.grapeVine1.name=Grape Trunk
 tile.grc.grapeLeaves.name=Grape Leaves
-tile.grc.grapeBlock.name=Grapes
+tile.grc.grapeBlock.name=Common Grapes
 
-item.grc.grapes.name=Grapes
-item.grc.grapeSeeds.name=Grape Seeds
+item.grc.grapes.name=Common Grapes
+item.grc.grapeSeeds.name=Common Grape Seeds
 
 fluid.grc.grapeWine=Grape Wine
 fluid.grc.grapeWine0=Grape Wine
