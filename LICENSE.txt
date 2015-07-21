@@ -1,4 +1,8 @@
-This document is Copyright © (2014-2015) "Gwafu" and is the intellectual property of the author.
+Update Jun 11, 2015: Gwafu has made the code readily available for anyone to pull and fix the Forge issues. Gawfu has stated that he does not have the time nor does he plan on continuing the develop at this time. 
+
+# Orginal License
+
+This document is Copyright Â© (2014-2015) "Gwafu" and is the intellectual property of the author.
 
 Terms regarding file hosting:
 Only minecraftforum.net is able to host any of these materials without the author's consent. You can just simply ask the author to allow you to host it in your website or distribute it.
