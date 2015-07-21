@@ -1,4 +1,6 @@
-Update Jun 11, 2015: Gwafu has made the code readily available for anyone to pull and fix the Forge issues. Gawfu has stated that he does not have the time nor does he plan on continuing the develop at this time. 
+Update Jun 11, 2015: Gwafu has made the code readily available for anyone to pull and 
+fix the Forge issues. Gawfu has stated that he does not have the time nor does he plan 
+on continuing the develop at this time. 
 
 # Orginal License
 
