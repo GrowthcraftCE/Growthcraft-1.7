@@ -1,8 +1,8 @@
 ﻿
-tile.grc.hopVine.name=Hops
+tile.grc.hopVine.name=Common Hops
 
-item.grc.hops.name=Hops
-item.grc.hopSeeds.name=Hop Seeds
+item.grc.hops.name=Common Hops
+item.grc.hopSeeds.name=Common Hop Seeds
 
 fluid.grc.hopAle=Ale
 fluid.grc.hopAle0=Ale
