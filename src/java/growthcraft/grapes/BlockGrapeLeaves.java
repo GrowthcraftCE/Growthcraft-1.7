@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope 
+public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 {
 	//Constants
 	private final int growth = GrowthCraftGrapes.grapeLeaves_growth;
@@ -28,7 +28,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	public static IIcon[] tex;
 	//public static Boolean graphicFlag;
 
-	protected BlockGrapeLeaves() 
+	protected BlockGrapeLeaves()
 	{
 		super(Material.leaves, false);
 		this.setTickRandomly(true);
@@ -103,7 +103,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 					return;
 				}
 			}
-		}		
+		}
 	}
 
 	private boolean checkValidity(World world, int x, int y, int z)
@@ -255,7 +255,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -276,7 +276,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	}
 
 	@Override
-	public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z) 
+	public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z)
 	{
 		if (world.getBlock(x, y, z) instanceof IBlockRope)
 		{
@@ -292,7 +292,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
@@ -364,7 +364,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	/************
 	 * COLORS
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()

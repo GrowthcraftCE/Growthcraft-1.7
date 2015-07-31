@@ -20,12 +20,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBambooScaffold extends Block 
+public class BlockBambooScaffold extends Block
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockBambooScaffold() 
+	public BlockBambooScaffold()
 	{
 		super(Material.wood);
 		this.setStepSound(soundTypeWood);
@@ -55,13 +55,13 @@ public class BlockBambooScaffold extends Block
 		{
 			if (itemstack.getItem() == Item.getItemFromBlock(this))
 			{
-				int j = y + 1; 
+				int j = y + 1;
 				for (int loop = world.getActualHeight(); j < loop; j++)
 				{
 					Block block = world.getBlock(x, j, z);
 					if ((block == null) || (world.isAirBlock(x, j, z)) || (block.isReplaceable(world, x, j, z)))
 					{
-						if (!world.isRemote) 
+						if (!world.isRemote)
 						{
 							if ((world.setBlock(x, j, z, this, 0, 3) & !player.capabilities.isCreativeMode))
 							{
@@ -122,11 +122,11 @@ public class BlockBambooScaffold extends Block
 
 
 		/*entity.fallDistance = 0.0F;
-		if (entity.isCollidedHorizontally) 
+		if (entity.isCollidedHorizontally)
 		{
 			entity.motionY = 0.2D;
-		} 
-		else 
+		}
+		else
 		{
 			entity.motionY = 0.0D;
 		}*/
@@ -174,7 +174,7 @@ public class BlockBambooScaffold extends Block
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	/*@Override
 	public boolean isLadder(IBlockAccess world, int x, int y, int z, EntityLivingBase entity)
 	{
@@ -189,7 +189,7 @@ public class BlockBambooScaffold extends Block
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister reg)
@@ -261,7 +261,7 @@ public class BlockBambooScaffold extends Block
 
 		this.setBlockBounds(minx, 0.0F, minz, maxx, 1.0F, maxz);
 		AxisAlignedBB bb = getCollisionBoundingBoxFromPool(world, x, y, z);
-		if ((bb != null) && (aabb.intersectsWith(bb))) 
+		if ((bb != null) && (aabb.intersectsWith(bb)))
 		{
 			list.add(bb);
 		}

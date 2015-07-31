@@ -13,11 +13,11 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class CellarRegistry 
+public class CellarRegistry
 {
 	/**
 	 * Gwafu:
-	 * 
+	 *
 	 * Main API. Consult the javadocs of each functions for more information.
 	 *
 	 **/
@@ -48,32 +48,32 @@ public class CellarRegistry
 
 	/**
 	 * Fluid strings (for use with the 'String' versions of the methods.
-	 * 
+	 *
 	 * Apple Cider
 	 * - "grc.appleCider0' - young
 	 * - "grc.appleCider1' - fermented
 	 * - "grc.appleCider2' - fermented, potent
 	 * - "grc.appleCider3' - fermented, extended
-	 * 
+	 *
 	 * Grape Wine
 	 * - "grc.grapeWine0' - young
 	 * - "grc.grapeWine1' - fermented
 	 * - "grc.grapeWine2' - fermented, potent
 	 * - "grc.grapeWine3' - fermented, extended
-	 * 
+	 *
 	 * Ale
 	 * - "grc.hopAle0' - hopped, young
 	 * - "grc.hopAle1' - hopped, fermented
 	 * - "grc.hopAle2' - hopped, fermented, potent
 	 * - "grc.hopAle3' - hopped, fermented, extended
 	 * - "grc.hopAle4' - no hops, young
-	 * 
+	 *
 	 * Sake
 	 * - "grc.riceSake0' - young
 	 * - "grc.riceSake1' - fermented
 	 * - "grc.riceSake2' - fermented, potent
 	 * - "grc.riceSake3' - fermented, extended
-	 * 
+	 *
 	 * Mead
 	 * - "grc.honeyMead0' - young
 	 * - "grc.honeyMead1' - fermented
@@ -92,10 +92,10 @@ public class CellarRegistry
 	//////////////////////////////////////////////////////////////////
 	/**
 	 * addHeatSource()
-	 * 
+	 *
 	 * Adds a valid heat source (like fire, lava, etc.)
 	 * Currently only used by Brew Kettle.
-	 * 
+	 *
 	 * @param block - The block. (This is not metadata sensitive, and will never be).
 	 **/
 	public void addHeatSource(Block block)
@@ -108,15 +108,15 @@ public class CellarRegistry
 	//////////////////////////////////////////////////////////////////
 	/**
 	 * createBooze()
-	 * 
+	 *
 	 * Creates a Booze to the CellarRegistry.
-	 * 
+	 *
 	 * Example Usage:
 	 * CellarRegistry.instance().createBooze(appleCider_booze, 8737829, "fluid.grc.appleCider");
-	 * 
+	 *
 	 * @param fluid           - The fluid array to be registered.
 	 * @param color           - The color of the fluids.
-	 * @param unlocalizedName - The unlocalized name to be used as the 'main name' of the fluids/boozes. 
+	 * @param unlocalizedName - The unlocalized name to be used as the 'main name' of the fluids/boozes.
 	 **/
 	public void createBooze(Fluid[] fluid, int color, String unlocalizedName)
 	{
@@ -150,13 +150,13 @@ public class CellarRegistry
 
 	/**
 	 * addBoozeAlternative()
-	 * 
+	 *
 	 * Adds an alternative fluid to the mod that will act as an alternative for the booze.
 	 * You will almost always want to use this if you dont want to go into the trouble of creating boozes.
-	 * 
+	 *
 	 * Example Usage:
 	 * CellarRegistry.instance().addBoozeAlternative(appleCider_booze_alt, appleCider_booze);
-	 * 
+	 *
 	 * @param altfluid - The alternate fluid.
 	 * @param fluid    - The main fluid/booze.
 	 **/
@@ -201,15 +201,14 @@ public class CellarRegistry
 	////////////////////////////////////////////////////////////////////////
 	/**
 	 * addPressing()
-	 * 
+	 *
 	 * Example Usage:
 	 * CellarRegistry.instance().addPressing(Item.appleRed, appleCider_booze[0], 20, 37, 0.3F);
-	 * 
+	 *
 	 * @param raw     - The source/input Block/Item/ID
-	 * @param meta    - The metadata of @param raw
 	 * @param fluid   - The resulting fluid.
 	 * @param time    - The time needed for the item/block to be pressed.
-	 * @param amount  - The amount of booze the item/block produces. 
+	 * @param amount  - The amount of booze the item/block produces.
 	 * @param residue - The amount of residue this will produce.
 	 */
 	// NON-META
@@ -217,27 +216,18 @@ public class CellarRegistry
 	{
 		this.addPressing(Item.getItemFromBlock(raw), fluid, time, amount, residue);
 	}
+
 	public void addPressing(Item raw, Fluid fluid, int time, int amount, float residue)
 	{
 		this.pressingList.put(raw, new PressResults(fluid, time, amount, residue));
 	}
 
-	// META
-	public void addPressing(Block raw, int meta, Fluid fluid, int time, int amount, float residue)
-	{
-		this.addPressing(Item.getItemFromBlock(raw), meta, fluid, time, amount, residue);
-	}
-	public void addPressing(Item raw, int meta, Fluid fluid, int time, int amount, float residue)
-	{
-		this.metaPressingList.put(Arrays.asList(raw, meta), new PressResults(fluid, time, amount, residue));
-	}
-
 	// Fluid Parameters as Strings
-	// NON-META
 	public void addPressing(Block raw, String fluid, int time, int amount, float residue)
 	{
 		this.addPressing(Item.getItemFromBlock(raw), fluid, time, amount, residue);
 	}
+
 	public void addPressing(Item raw, String fluid, int time, int amount, float residue)
 	{
 		if (FluidUtils.doesFluidExist(fluid))
@@ -246,11 +236,34 @@ public class CellarRegistry
 		}
 	}
 
-	//META
+	/**
+	 * addPressing()
+	 *
+	 * Example Usage:
+	 * CellarRegistry.instance().addPressing(Item.appleRed, appleCider_booze[0], 20, 37, 0.3F);
+	 *
+	 * @param raw     - The source/input Block/Item/ID
+	 * @param meta    - The metadata of @param raw
+	 * @param fluid   - The resulting fluid.
+	 * @param time    - The time needed for the item/block to be pressed.
+	 * @param amount  - The amount of booze the item/block produces.
+	 * @param residue - The amount of residue this will produce.
+	 */
+	public void addPressing(Block raw, int meta, Fluid fluid, int time, int amount, float residue)
+	{
+		this.addPressing(Item.getItemFromBlock(raw), meta, fluid, time, amount, residue);
+	}
+
+	public void addPressing(Item raw, int meta, Fluid fluid, int time, int amount, float residue)
+	{
+		this.metaPressingList.put(Arrays.asList(raw, meta), new PressResults(fluid, time, amount, residue));
+	}
+
 	public void addPressing(Block raw, int meta, String fluid, int time, int amount, float residue)
 	{
 		this.addPressing(Item.getItemFromBlock(raw), meta, fluid, time, amount, residue);
 	}
+
 	public void addPressing(Item raw, int meta, String fluid, int time, int amount, float residue)
 	{
 		if (FluidUtils.doesFluidExist(fluid))
@@ -264,17 +277,17 @@ public class CellarRegistry
 	////////////////////////////////////////////////////////////////////////
 	/**
 	 * addBrewing()
-	 * 
+	 *
 	 * Example Usage:
 	 * CellarRegistry.instance().addBrewing(FluidRegistry.WATER, Item.wheat, hopAle_booze, 20, 37, 0.3F);
-	 * 
+	 *
 	 * @param sourceFluid - The source Fluid.
 	 * @param raw         - The source/input Item/BlockItemStack.
 	 * @param resultFluid - The resulting Fluid.
 	 * @param time        - The time needed for the item/block to be brewed.
-	 * @param amount      - The amount of booze the item/block produces. 
+	 * @param amount      - The amount of booze the item/block produces.
 	 * @param residue     - The amount of residue this will produce.
-	 */	
+	 */
 	//NON-META
 	public void addBrewing(Fluid sourceFluid, Block raw, Fluid resultFluid, int time, int amount, float residue)
 	{
@@ -412,18 +425,18 @@ public class CellarRegistry
 		return true;
 	}
 
-	public Fluid[] getBoozeArray(Fluid f) 
-	{ 
+	public Fluid[] getBoozeArray(Fluid f)
+	{
 		if (this.isAlternateBooze(f))
 		{
 			Fluid alt = this.getAlternateBooze(f);
 			return (Fluid[])this.boozeMap.get(alt.getID()).get(0);
 		}
-		return (Fluid[])this.boozeMap.get(f.getID()).get(0); 
+		return (Fluid[])this.boozeMap.get(f.getID()).get(0);
 	}
 
-	public int getBoozeColor(Fluid f) 
-	{ 
+	public int getBoozeColor(Fluid f)
+	{
 		if (this.isFluidBooze(f))
 		{
 			return (Integer)this.boozeMap.get(f.getID()).get(1);
@@ -475,7 +488,7 @@ public class CellarRegistry
 	// FRUIT PRESS ///////////////////////////////////////////////////
 	public boolean isPressingRecipe(ItemStack itemstack)
 	{
-		return this.getPressingResults(itemstack)!= null; 
+		return this.getPressingResults(itemstack)!= null;
 	}
 
 	public PressResults getPressingResults(ItemStack itemstack)
@@ -485,7 +498,7 @@ public class CellarRegistry
 			return null;
 		}
 		PressResults ret = (PressResults)metaPressingList.get(Arrays.asList(itemstack.getItem(), itemstack.getItemDamage()));
-		if (ret != null) 
+		if (ret != null)
 		{
 			return ret;
 		}
@@ -535,7 +548,7 @@ public class CellarRegistry
 	// BREW KETTLE ///////////////////////////////////////////////////
 	public boolean isBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
 	{
-		return this.getBrewingResults(fluidstack, itemstack)!= null; 
+		return this.getBrewingResults(fluidstack, itemstack)!= null;
 	}
 
 	public BrewResults getBrewingResults(FluidStack fluidstack, ItemStack itemstack)
@@ -550,7 +563,7 @@ public class CellarRegistry
 			f = this.getAlternateBooze(f);
 		}
 		BrewResults ret = (BrewResults)metaBrewingList.get(Arrays.asList(f, itemstack.getItem(), itemstack.getItemDamage()));
-		if (ret != null) 
+		if (ret != null)
 		{
 			return ret;
 		}
@@ -564,7 +577,7 @@ public class CellarRegistry
 			return false;
 		}
 		boolean ret = metaBrewingIngredients.contains(Arrays.asList(itemstack.getItem(), itemstack.getItemDamage()));
-		if (ret) 
+		if (ret)
 		{
 			return ret;
 		}

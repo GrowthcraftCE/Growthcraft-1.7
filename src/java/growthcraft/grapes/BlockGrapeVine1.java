@@ -31,7 +31,7 @@ public class BlockGrapeVine1 extends Block implements IPlantable
 	public static IIcon[] tex;
 	public boolean graphicFlag;
 
-	public BlockGrapeVine1() 
+	public BlockGrapeVine1()
 	{
 		super(Material.plants);
 		this.setTickRandomly(true);
@@ -165,7 +165,7 @@ public class BlockGrapeVine1 extends Block implements IPlantable
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -181,7 +181,7 @@ public class BlockGrapeVine1 extends Block implements IPlantable
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
@@ -196,7 +196,7 @@ public class BlockGrapeVine1 extends Block implements IPlantable
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -288,19 +288,19 @@ public class BlockGrapeVine1 extends Block implements IPlantable
 	 * IPLANTABLE
 	 ************/
 	@Override
-	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z) 
+	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
 	{
 		return EnumPlantType.Crop;
 	}
 
 	@Override
-	public Block getPlant(IBlockAccess world, int x, int y, int z) 
+	public Block getPlant(IBlockAccess world, int x, int y, int z)
 	{
 		return this;
 	}
 
 	@Override
-	public int getPlantMetadata(IBlockAccess world, int x, int y, int z) 
+	public int getPlantMetadata(IBlockAccess world, int x, int y, int z)
 	{
 		return world.getBlockMetadata(x, y, z);
 	}

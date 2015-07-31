@@ -9,7 +9,7 @@ import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class RenderHops implements ISimpleBlockRenderingHandler 
+public class RenderHops implements ISimpleBlockRenderingHandler
 {
 	public static int id = RenderingRegistry.getNextAvailableRenderId();
 
@@ -17,7 +17,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) 
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
 		if (modelId == id)
 		{
@@ -116,7 +116,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 				tessellator.setColorOpaque_F(r * 1.0F, g * 1.0F, b * 1.0F);
 
 				if (meta == 1)
-				{					
+				{
 					minX = (double)x + 0.5D - 0.125D;
 					maxX = (double)x + 0.5D + 0.125D;
 					minZ = (double)z + 0.5D - 0.25D;
@@ -160,7 +160,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 					tessellator.addVertexWithUV(maxX, minY + 8*d, maxZ, maxU, minV);
 				}
 				else
-				{					
+				{
 					minX = (double)x + 0.5D - 0.25D;
 					maxX = (double)x + 0.5D + 0.25D;
 					minZ = (double)z + 0.5D - 0.5D;
@@ -372,7 +372,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 	public boolean shouldRender3DInInventory(int modelID) { return false; }
 
 	@Override
-	public int getRenderId() 
+	public int getRenderId()
 	{
 		return id;
 	}

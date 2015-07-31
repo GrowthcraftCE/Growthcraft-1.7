@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBambooDoor extends Item 
+public class ItemBambooDoor extends Item
 {
 	public ItemBambooDoor()
 	{

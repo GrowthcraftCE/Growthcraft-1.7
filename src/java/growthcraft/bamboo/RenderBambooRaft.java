@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderBambooRaft extends Render 
+public class RenderBambooRaft extends Render
 {
 	private static final ResourceLocation res = new ResourceLocation("grcbamboo", "textures/entity/raft.png");
 	protected ModelBase model;
@@ -20,7 +20,7 @@ public class RenderBambooRaft extends Render
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float f, float f1) 
+	public void doRender(Entity entity, double x, double y, double z, float f, float f1)
 	{
 		this.renderBambooRaft((EntityBambooRaft)entity, x, y, z, f, f1);
 	}
@@ -53,7 +53,7 @@ public class RenderBambooRaft extends Render
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) 
+	protected ResourceLocation getEntityTexture(Entity entity)
 	{
 		return res;
 	}

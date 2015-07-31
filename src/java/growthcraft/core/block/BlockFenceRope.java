@@ -27,7 +27,7 @@ public class BlockFenceRope extends Block implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockFenceRope() 
+	public BlockFenceRope()
 	{
 		super(Material.wood);
 		this.setHardness(2.0F);
@@ -39,7 +39,7 @@ public class BlockFenceRope extends Block implements IBlockRope
 
 	/************
 	 * TRIGGERS
-	 ************/	
+	 ************/
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7, float par8, float par9)
 	{
@@ -62,7 +62,7 @@ public class BlockFenceRope extends Block implements IBlockRope
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -71,14 +71,14 @@ public class BlockFenceRope extends Block implements IBlockRope
 	}
 
 	@Override
-	public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z) 
+	public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z)
 	{
 		return world.getBlock(x, y, z) instanceof IBlockRope;
 	}
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
@@ -103,7 +103,7 @@ public class BlockFenceRope extends Block implements IBlockRope
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)

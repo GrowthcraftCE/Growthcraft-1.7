@@ -35,7 +35,7 @@ public class BlockBrewKettle extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockBrewKettle() 
+	public BlockBrewKettle()
 	{
 		super(Material.iron);
 		this.isBlockContainer = true;
@@ -176,7 +176,7 @@ public class BlockBrewKettle extends BlockContainer
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -192,7 +192,7 @@ public class BlockBrewKettle extends BlockContainer
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random random, int par3)
 	{
@@ -207,7 +207,7 @@ public class BlockBrewKettle extends BlockContainer
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -229,7 +229,7 @@ public class BlockBrewKettle extends BlockContainer
 
 	/************
 	 * RENDERS
-	 ************/	
+	 ************/
 	@Override
 	public int getRenderType()
 	{

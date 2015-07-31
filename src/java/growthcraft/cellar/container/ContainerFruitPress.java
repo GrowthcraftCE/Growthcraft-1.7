@@ -120,14 +120,14 @@ public class ContainerFruitPress extends Container
 	{
 		super.addCraftingToCrafters(iCrafting);
 		te.sendGUINetworkData(this, iCrafting);
-	}	
+	}
 
 	@Override
 	public void detectAndSendChanges()
 	{
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < crafters.size(); i++) 
+		for (int i = 0; i < crafters.size(); i++)
 		{
 			te.sendGUINetworkData(this, (ICrafting) crafters.get(i));
 		}

@@ -48,7 +48,7 @@ public class ItemBoozeBottle extends ItemFood
 
 	private int color = 16777215;
 
-	public ItemBoozeBottle(int nut, float sat, Fluid[] booze) 
+	public ItemBoozeBottle(int nut, float sat, Fluid[] booze)
 	{
 		super(nut, sat, false);
 		this.setAlwaysEdible();

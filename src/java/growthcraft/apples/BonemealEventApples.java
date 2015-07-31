@@ -4,7 +4,7 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class BonemealEventApples 
+public class BonemealEventApples
 {
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
@@ -21,7 +21,7 @@ public class BonemealEventApples
 			event.setResult(Result.ALLOW);
 		}
 		else if (event.block == GrowthCraftApples.appleLeaves)
-		{			
+		{
 			int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
 			if ((meta & 3) != 0)
 			{

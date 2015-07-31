@@ -7,7 +7,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityFruitPresser extends TileEntity 
+public class TileEntityFruitPresser extends TileEntity
 {
 	public float trans;
 	public float transPrev;
@@ -57,7 +57,7 @@ public class TileEntityFruitPresser extends TileEntity
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);	
+		super.readFromNBT(nbt);
 		this.trans = nbt.getFloat("trans");
 		this.transPrev = nbt.getFloat("transprev");
 	}
@@ -72,9 +72,9 @@ public class TileEntityFruitPresser extends TileEntity
 
 	/************
 	 * PACKETS
-	 ************/	
+	 ************/
 	@Override
-	public Packet getDescriptionPacket() 
+	public Packet getDescriptionPacket()
 	{
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		this.writeToNBT(nbtTag);

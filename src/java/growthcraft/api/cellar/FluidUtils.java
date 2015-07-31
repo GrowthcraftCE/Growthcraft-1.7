@@ -3,7 +3,7 @@ package growthcraft.api.cellar;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class FluidUtils 
+public class FluidUtils
 {
 	public static boolean doesFluidExist(String name)
 	{

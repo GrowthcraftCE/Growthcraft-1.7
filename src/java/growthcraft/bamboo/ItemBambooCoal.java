@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBambooCoal extends Item 
+public class ItemBambooCoal extends Item
 {
 	public ItemBambooCoal()
 	{

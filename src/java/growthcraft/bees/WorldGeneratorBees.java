@@ -17,7 +17,7 @@ public class WorldGeneratorBees implements IWorldGenerator
 	//private final int rarity = 8;
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
 		if (world.provider.dimensionId == 0)
 		{
@@ -25,7 +25,7 @@ public class WorldGeneratorBees implements IWorldGenerator
 		}
 	}
 
-	private void generateSurface(World world, Random random, int chunkX, int chunkZ) 
+	private void generateSurface(World world, Random random, int chunkX, int chunkZ)
 	{
 		if (!world.getWorldInfo().getTerrainType().getWorldTypeName().startsWith("flat"))
 		{
@@ -38,7 +38,7 @@ public class WorldGeneratorBees implements IWorldGenerator
 			{
 				BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
 				flag = (BiomeDictionary.isBiomeOfType(biome, Type.FOREST) ||
-						BiomeDictionary.isBiomeOfType(biome, Type.PLAINS)) 
+						BiomeDictionary.isBiomeOfType(biome, Type.PLAINS))
 						&& !BiomeDictionary.isBiomeOfType(biome, Type.FROZEN);
 			}
 			else

@@ -13,14 +13,14 @@ import net.minecraft.util.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemHoneyComb extends Item 
+public class ItemHoneyComb extends Item
 {
 	private IIcon[] tex;
 
-	public ItemHoneyComb() 
+	public ItemHoneyComb()
 	{
-		super();   
-		this.setHasSubtypes(true); 
+		super();
+		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
 		this.setUnlocalizedName("grc.honeyComb");
 		this.setCreativeTab(GrowthCraftCore.tab);

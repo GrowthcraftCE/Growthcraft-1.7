@@ -23,7 +23,7 @@ public class BlockRice extends Block implements IPaddyCrop
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockRice() 
+	public BlockRice()
 	{
 		super(Material.plants);
 		this.setHardness(0.0F);
@@ -56,7 +56,7 @@ public class BlockRice extends Block implements IPaddyCrop
 					world.setBlockMetadataWithNotify(x, y - 1, z, world.getBlockMetadata(x, y - 1, z) - 1, 2);
 				}
 			}
-		}	
+		}
 	}
 
 	private float getGrowthRate(World world, int x, int y, int z)
@@ -171,7 +171,7 @@ public class BlockRice extends Block implements IPaddyCrop
 		super.dropBlockAsItemWithChance(world, x, y, z, par5, par6, 0);
 	}
 
-	@Override 
+	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = super.getDrops(world, x, y, z, metadata, fortune);

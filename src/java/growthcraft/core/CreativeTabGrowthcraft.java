@@ -6,16 +6,16 @@ import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class CreativeTabGrowthcraft extends CreativeTabs 
+public class CreativeTabGrowthcraft extends CreativeTabs
 {
-	public CreativeTabGrowthcraft(String index) 
+	public CreativeTabGrowthcraft(String index)
 	{
 		super(index);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getTabIconItem() 
+	public Item getTabIconItem()
 	{
 		return Item.getItemFromBlock(Blocks.sapling);
 	}

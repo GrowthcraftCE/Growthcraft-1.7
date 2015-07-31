@@ -5,7 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotFruitPressResidue extends Slot 
+public class SlotFruitPressResidue extends Slot
 {
 	final ContainerFruitPress con;
 

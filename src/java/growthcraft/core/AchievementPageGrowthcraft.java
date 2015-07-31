@@ -8,7 +8,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.AchievementPage;
 
 public class AchievementPageGrowthcraft
-{	
+{
 	public static List chievMasterList = new ArrayList();
 
 	public static void init(AchievementPage chievPage)

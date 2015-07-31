@@ -42,7 +42,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "Growthcraft|Bees",name = "GrowthCraft Bees",version = "2.1.0",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
 
-public class GrowthCraftBees 
+public class GrowthCraftBees
 {
 	@Instance("Growthcraft|Bees")
 	public static GrowthCraftBees instance;
@@ -201,9 +201,9 @@ public class GrowthCraftBees
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event) 
+	public void onTextureStitchPost(TextureStitchEvent.Post event)
 	{
-		if (event.map.getTextureType() == 0) 
+		if (event.map.getTextureType() == 0)
 		{
 			for (int i = 0; i < honeyMead_booze.length; ++i)
 			{
@@ -257,7 +257,7 @@ public class GrowthCraftBees
 
 				FMLLog.info("[Growthcraft|Bees] Successfully integrated with Forestry.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Bees] Forestry not found. No integration made.", new Object[0]);
 			}
@@ -291,7 +291,7 @@ public class GrowthCraftBees
 
 				FMLLog.info("[Growthcraft|Bees] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Bees] Thaumcraft not found. No integration made.", new Object[0]);
 			}

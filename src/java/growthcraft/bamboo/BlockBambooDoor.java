@@ -20,7 +20,7 @@ public class BlockBambooDoor extends BlockDoor
 	@SideOnly(Side.CLIENT)
 	private IIcon[] tex;
 
-	protected BlockBambooDoor() 
+	protected BlockBambooDoor()
 	{
 		super(Material.wood);
 		this.setStepSound(soundTypeWood);

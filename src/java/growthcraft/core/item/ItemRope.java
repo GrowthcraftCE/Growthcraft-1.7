@@ -12,9 +12,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemRope extends Item 
+public class ItemRope extends Item
 {
-	public ItemRope() 
+	public ItemRope()
 	{
 		super();
 		this.setUnlocalizedName("grc.rope");
@@ -23,7 +23,7 @@ public class ItemRope extends Item
 
 	/************
 	 * MAIN
-	 ************/	
+	 ************/
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
 	{

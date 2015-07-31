@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL12;
 
 public class GuiCellar extends GuiContainer
 {
-	public GuiCellar(Container container) 
+	public GuiCellar(Container container)
 	{
 		super(container);
 	}

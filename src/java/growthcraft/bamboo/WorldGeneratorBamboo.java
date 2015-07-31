@@ -17,7 +17,7 @@ public class WorldGeneratorBamboo implements IWorldGenerator
 	private final int rarity = GrowthCraftBamboo.bambooWorldGen_rarity;
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
 		if (world.provider.dimensionId == 0)
 		{
@@ -25,7 +25,7 @@ public class WorldGeneratorBamboo implements IWorldGenerator
 		}
 	}
 
-	private void generateSurface(World world, Random random, int chunkX, int chunkZ) 
+	private void generateSurface(World world, Random random, int chunkX, int chunkZ)
 	{
 		if (!world.getWorldInfo().getTerrainType().getWorldTypeName().startsWith("flat"))
 		{
@@ -40,7 +40,7 @@ public class WorldGeneratorBamboo implements IWorldGenerator
 				flag = (BiomeDictionary.isBiomeOfType(biome, Type.FOREST) ||
 						BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE) ||
 						BiomeDictionary.isBiomeOfType(biome, Type.WATER) ||
-						BiomeDictionary.isBiomeOfType(biome, Type.PLAINS)) 
+						BiomeDictionary.isBiomeOfType(biome, Type.PLAINS))
 						&& !BiomeDictionary.isBiomeOfType(biome, Type.FROZEN);
 			}
 			else

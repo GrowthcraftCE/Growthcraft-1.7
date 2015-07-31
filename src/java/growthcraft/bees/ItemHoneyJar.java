@@ -12,7 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemHoneyJar extends ItemFood
 {
-	public ItemHoneyJar() 
+	public ItemHoneyJar()
 	{
 		super(6, false);
 		this.setUnlocalizedName("grc.honeyJar");

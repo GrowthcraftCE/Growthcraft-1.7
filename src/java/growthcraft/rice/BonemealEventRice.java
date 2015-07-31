@@ -9,7 +9,7 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class BonemealEventRice 
+public class BonemealEventRice
 {
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)

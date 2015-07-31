@@ -19,10 +19,10 @@ public class ItemBambooShoot extends ItemFood implements IPlantable
 {
 	private Block cropBlock;
 
-	public ItemBambooShoot() 
+	public ItemBambooShoot()
 	{
 		super(4, 0.6F, false);
-		this.cropBlock = GrowthCraftBamboo.bambooShoot; 
+		this.cropBlock = GrowthCraftBamboo.bambooShoot;
 		this.setUnlocalizedName("grc.bambooShootFood");
 		this.setCreativeTab(GrowthCraftCore.tab);
 	}

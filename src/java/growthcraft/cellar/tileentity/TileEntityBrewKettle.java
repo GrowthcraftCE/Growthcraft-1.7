@@ -37,7 +37,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	/************
 	 * UPDATE
-	 ************/	
+	 ************/
 	public void updateEntity()
 	{
 		super.updateEntity();
@@ -104,7 +104,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	public boolean hasFire()
 	{
-		return CellarRegistry.instance().isBlockHeatSource(this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord)); 
+		return CellarRegistry.instance().isBlockHeatSource(this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord));
 	}
 
 	public void brewItem()
@@ -167,7 +167,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	/************
 	 * INVENTORY
-	 ************/	
+	 ************/
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
@@ -391,10 +391,10 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	/************
 	 * PACKETS
-	 ************/	
-	public void getGUINetworkData(int id, int v) 
+	 ************/
+	public void getGUINetworkData(int id, int v)
 	{
-		switch (id) 
+		switch (id)
 		{
 		case 0:
 			time = v;
@@ -403,19 +403,19 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 			if (FluidRegistry.getFluid(v) == null) {
 				return;
 			}
-			if (tank[0].getFluid() == null) 
+			if (tank[0].getFluid() == null)
 			{
 				tank[0].setFluid(new FluidStack(v, 0));
-			} else 
+			} else
 			{
 				tank[0].setFluid(new FluidStack(v, tank[0].getFluid().amount));
 			}
 			break;
 		case 2:
-			if (tank[0].getFluid() == null) 
+			if (tank[0].getFluid() == null)
 			{
 				tank[0].setFluid(new FluidStack(FluidRegistry.WATER, v));
-			} else 
+			} else
 			{
 				tank[0].getFluid().amount = v;
 			}
@@ -424,19 +424,19 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 			if (FluidRegistry.getFluid(v) == null) {
 				return;
 			}
-			if (tank[1].getFluid() == null) 
+			if (tank[1].getFluid() == null)
 			{
 				tank[1].setFluid(new FluidStack(v, 0));
-			} else 
+			} else
 			{
 				tank[1].setFluid(new FluidStack(v, tank[1].getFluid().amount));
 			}
 			break;
 		case 4:
-			if (tank[1].getFluid() == null) 
+			if (tank[1].getFluid() == null)
 			{
 				tank[1].setFluid(new FluidStack(FluidRegistry.WATER, v));
-			} else 
+			} else
 			{
 				tank[1].getFluid().amount = v;
 			}
@@ -444,7 +444,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 		}
 	}
 
-	public void sendGUINetworkData(ContainerBrewKettle container, ICrafting iCrafting) 
+	public void sendGUINetworkData(ContainerBrewKettle container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, 0, time);
 		iCrafting.sendProgressBarUpdate(container, 1, tank[0].getFluid() != null ? tank[0].getFluid().getFluidID() : 0);
@@ -454,7 +454,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	}
 
 	@Override
-	public Packet getDescriptionPacket() 
+	public Packet getDescriptionPacket()
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		writeTankToNBT(nbt);
@@ -462,7 +462,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) 
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
 		readTankFromNBT(packet.func_148857_g());
 		this.worldObj.func_147479_m(this.xCoord, this.yCoord, this.zCoord);
@@ -470,9 +470,9 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	/************
 	 * FLUID
-	 ************/	
+	 ************/
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) 
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
 		int f = this.tank[0].fill(resource, doFill);
 
@@ -485,9 +485,9 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) 
+	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
 	{
-		if (resource == null || !resource.isFluidEqual(this.tank[1].getFluid())) 
+		if (resource == null || !resource.isFluidEqual(this.tank[1].getFluid()))
 		{
 			return null;
 		}
@@ -496,7 +496,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) 
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
 		FluidStack d = this.tank[1].drain(maxDrain, doDrain);
 
@@ -509,19 +509,19 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) 
+	public boolean canFill(ForgeDirection from, Fluid fluid)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) 
+	public boolean canDrain(ForgeDirection from, Fluid fluid)
 	{
 		return true;
 	}
 
 	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) 
+	public FluidTankInfo[] getTankInfo(ForgeDirection from)
 	{
 		return new FluidTankInfo[] { this.tank[0].getInfo(), this.tank[1].getInfo() };
 	}

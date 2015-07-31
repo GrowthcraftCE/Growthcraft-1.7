@@ -19,17 +19,17 @@ public class ItemAppleSeeds extends Item implements IPlantable
 {
 	private Block cropBlock;
 
-	public ItemAppleSeeds() 
+	public ItemAppleSeeds()
 	{
 		super();
-		this.cropBlock = GrowthCraftApples.appleSapling; 
+		this.cropBlock = GrowthCraftApples.appleSapling;
 		this.setUnlocalizedName("grc.appleSeeds");
 		this.setCreativeTab(GrowthCraftCore.tab);
 	}
 
 	/************
 	 * MAIN
-	 ************/	
+	 ************/
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
 	{

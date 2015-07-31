@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBamboo extends Item
 {
-	public ItemBamboo() 
+	public ItemBamboo()
 	{
 		super();
 		this.setUnlocalizedName("grc.bamboo");
@@ -23,7 +23,7 @@ public class ItemBamboo extends Item
 
 	/************
 	 * MAIN
-	 ************/	
+	 ************/
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
 	{

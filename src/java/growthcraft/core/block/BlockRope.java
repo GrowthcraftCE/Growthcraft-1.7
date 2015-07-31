@@ -23,7 +23,7 @@ public class BlockRope extends Block implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockRope() 
+	public BlockRope()
 	{
 		super(Material.circuits);
 		this.setHardness(0.5F);
@@ -34,7 +34,7 @@ public class BlockRope extends Block implements IBlockRope
 
 	/************
 	 * TRIGGERS
-	 ************/	
+	 ************/
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
@@ -52,7 +52,7 @@ public class BlockRope extends Block implements IBlockRope
 
 	/************
 	 * CONDITIONS
-	 ************/	
+	 ************/
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
@@ -73,7 +73,7 @@ public class BlockRope extends Block implements IBlockRope
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -82,14 +82,14 @@ public class BlockRope extends Block implements IBlockRope
 	}
 
 	@Override
-	public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z) 
+	public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z)
 	{
 		return world.getBlock(x, y, z) instanceof IBlockRope;
 	}
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{

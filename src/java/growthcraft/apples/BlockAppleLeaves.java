@@ -22,14 +22,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 {
 	//Constants
-	private final int growth = GrowthCraftApples.appleLeaves_growth;	
+	private final int growth = GrowthCraftApples.appleLeaves_growth;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 	//public static Boolean graphicFlag;
 	int[] adjacentTreeBlocks;
 
-	protected BlockAppleLeaves() 
+	protected BlockAppleLeaves()
 	{
 		super(Material.leaves, false);
 		this.setTickRandomly(true);
@@ -225,7 +225,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -253,7 +253,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
@@ -292,7 +292,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -335,7 +335,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 
 	/************
 	 * COLORS
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
@@ -378,7 +378,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 
 	/************
 	 * SHEARS
-	 ************/	
+	 ************/
 	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
 	{

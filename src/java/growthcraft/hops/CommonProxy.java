@@ -1,6 +1,6 @@
 package growthcraft.hops;
 
-public class CommonProxy 
+public class CommonProxy
 {
 	public void initRenders(){}
 }

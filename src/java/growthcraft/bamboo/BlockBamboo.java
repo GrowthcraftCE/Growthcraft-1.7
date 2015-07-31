@@ -7,9 +7,9 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBamboo extends Block 
+public class BlockBamboo extends Block
 {
-	public BlockBamboo() 
+	public BlockBamboo()
 	{
 		super(Material.wood);
 		this.setStepSound(soundTypeWood);
@@ -21,7 +21,7 @@ public class BlockBamboo extends Block
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)

@@ -324,7 +324,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 
 	/************
 	 * SHEARS
-	 ************/	
+	 ************/
 	@Override
 	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
 	{

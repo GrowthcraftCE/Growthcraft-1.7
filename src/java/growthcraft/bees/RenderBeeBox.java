@@ -9,12 +9,12 @@ import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class RenderBeeBox implements ISimpleBlockRenderingHandler 
+public class RenderBeeBox implements ISimpleBlockRenderingHandler
 {
 	public static int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) 
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		if (modelID == id)
 		{
@@ -72,7 +72,7 @@ public class RenderBeeBox implements ISimpleBlockRenderingHandler
 	public boolean shouldRender3DInInventory(int modelID) {return true;}
 
 	@Override
-	public int getRenderId() 
+	public int getRenderId()
 	{
 		return id;
 	}

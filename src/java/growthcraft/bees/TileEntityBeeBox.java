@@ -19,13 +19,13 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 
 	/************
 	 * UPDATE
-	 ************/	
+	 ************/
 	public void updateEntity()
 	{
 		super.updateEntity();
 
 		if (!this.worldObj.isRemote)
-		{			
+		{
 			--this.time;
 			if (this.time <= 0)
 			{
@@ -323,9 +323,9 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 
 	/************
 	 * PACKETS
-	 ************/	
+	 ************/
 	/*@Override
-	public Packet getDescriptionPacket() 
+	public Packet getDescriptionPacket()
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		this.writeToNBT(nbt);
@@ -333,7 +333,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	}
 
 	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) 
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet)
 	{
 		NBTTagCompound nbt = packet.data;
 		this.readFromNBT(nbt);
@@ -342,7 +342,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 
 	/************
 	 * HOPPER
-	 ************/	
+	 ************/
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 	{

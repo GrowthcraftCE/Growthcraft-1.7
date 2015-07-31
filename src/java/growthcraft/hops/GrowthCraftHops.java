@@ -42,7 +42,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "Growthcraft|Hops",name = "Growthcraft Hops",version = "2.1.0",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
-public class GrowthCraftHops 
+public class GrowthCraftHops
 {
 	@Instance("Growthcraft|Hops")
 	public static GrowthCraftHops instance;
@@ -162,7 +162,7 @@ public class GrowthCraftHops
 
 		//====================
 		// ORE DICTIONARY
-		//====================	
+		//====================
 		OreDictionary.registerOre("cropHops", hops);
 		OreDictionary.registerOre("materialHops", hops);
 		OreDictionary.registerOre("seedHops", hopSeeds);
@@ -191,9 +191,9 @@ public class GrowthCraftHops
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event) 
+	public void onTextureStitchPost(TextureStitchEvent.Post event)
 	{
-		if (event.map.getTextureType() == 0) 
+		if (event.map.getTextureType() == 0)
 		{
 			for (int i = 0; i < hopAle_booze.length; ++i)
 			{
@@ -232,11 +232,11 @@ public class GrowthCraftHops
 				{
 					BackpackManager.backpackItems[2].add(new ItemStack(hopSeeds));
 					BackpackManager.backpackItems[2].add(new ItemStack(hops));
-				}				
+				}
 
 				FMLLog.info("[Growthcraft|Hops] Successfully integrated with Forestry.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Hops] Forestry not found. No integration made.", new Object[0]);
 			}
@@ -267,7 +267,7 @@ public class GrowthCraftHops
 
 				FMLLog.info("[Growthcraft|Hops] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Hops] Thaumcraft not found. No integration made.", new Object[0]);
 			}
@@ -278,7 +278,7 @@ public class GrowthCraftHops
 	{
 		RecipeManagers.fermenterManager.addRecipe(stack, value, 1.0F, FluidRegistry.getFluidStack(fluid, 1), FluidRegistry.getFluidStack("water", 1));
 
-		if (FluidRegistry.isFluidRegistered("juice")) 
+		if (FluidRegistry.isFluidRegistered("juice"))
 		{
 			RecipeManagers.fermenterManager.addRecipe(stack, value, 1.5F, FluidRegistry.getFluidStack(fluid, 1), FluidRegistry.getFluidStack("juice", 1));
 		}

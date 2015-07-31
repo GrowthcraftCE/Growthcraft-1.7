@@ -8,11 +8,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class BeesRegistry 
+public class BeesRegistry
 {
 	/**
 	 * Gwafu:
-	 * 
+	 *
 	 * Yes, it's the same functons/methods as Forge's tall grass hook.
 	 */
 
@@ -29,7 +29,7 @@ public class BeesRegistry
 	 * addBee()
 	 * Adds a custom bee the mod.
 	 * NOTE: This is not meta-sensitive.
-	 * 
+	 *
 	 * @param bee - The Item/Block to be registered.
 	 */
 	public void addBee(Block bee)
@@ -46,7 +46,7 @@ public class BeesRegistry
 	 * addFlower()
 	 * Adds a custom flower the mod.
 	 * NOTE: This is meta-sensitive.
-	 * 
+	 *
 	 * @param flower - Block to be registered.
 	 * @param meta   - Metadata of the block to be registered.
 	 */

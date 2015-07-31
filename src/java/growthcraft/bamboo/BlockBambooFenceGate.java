@@ -8,7 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBambooFenceGate extends BlockFenceGate
-{	
+{
 	public BlockBambooFenceGate()
 	{
 		super();

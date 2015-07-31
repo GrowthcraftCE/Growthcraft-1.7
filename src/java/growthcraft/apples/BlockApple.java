@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockApple extends Block 
+public class BlockApple extends Block
 {
 	//Constants
 	private final int growth = GrowthCraftApples.appleBlock_growth;
@@ -89,7 +89,7 @@ public class BlockApple extends Block
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -99,7 +99,7 @@ public class BlockApple extends Block
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{

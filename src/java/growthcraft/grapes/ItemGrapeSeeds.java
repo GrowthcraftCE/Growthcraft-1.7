@@ -11,9 +11,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemGrapeSeeds extends Item 
+public class ItemGrapeSeeds extends Item
 {
-	public ItemGrapeSeeds() 
+	public ItemGrapeSeeds()
 	{
 		super();
 		this.setUnlocalizedName("grc.grapeSeeds");
@@ -22,7 +22,7 @@ public class ItemGrapeSeeds extends Item
 
 	/************
 	 * MAIN
-	 ************/	
+	 ************/
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
 	{

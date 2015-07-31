@@ -6,7 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerFishTrap extends Container 
+public class ContainerFishTrap extends Container
 {
 	private TileEntityFishTrap te;
 
@@ -37,7 +37,7 @@ public class ContainerFishTrap extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer player) 
+	public boolean canInteractWith(EntityPlayer player)
 	{
 		return this.te.isUseableByPlayer(player);
 	}
