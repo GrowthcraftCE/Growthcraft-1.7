@@ -14,12 +14,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockGrapeBlock extends Block 
+public class BlockGrapeBlock extends Block
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockGrapeBlock() 
+	public BlockGrapeBlock()
 	{
 		super(Material.plants);
 		//this.setTickRandomly(true);
@@ -67,7 +67,7 @@ public class BlockGrapeBlock extends Block
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -83,7 +83,7 @@ public class BlockGrapeBlock extends Block
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
@@ -98,7 +98,7 @@ public class BlockGrapeBlock extends Block
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)

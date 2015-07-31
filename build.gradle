@@ -1,0 +1,108 @@
+// swiped from BuildCraft
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+version = "2.1.0"
+group= "com.growthcraft"
+// the name that all artifacts will use as a base. artifacts names follow this pattern: [baseName]-[appendix]-[version]-[classifier].[extension]
+archivesBaseName = "growthcraft"
+
+minecraft {
+    version = "1.7.10-10.13.4.1448-1.7.10" // McVersion-ForgeVersion
+
+    runDir = "run" // the directory for ForgeGradle to run Minecraft in
+
+    // replacing stuff in the source
+    replace '@VERSION@', project.version
+    replace '@MC_VERSION@', version
+}
+
+// configure  the source folders
+sourceSets {
+    // this builds everything into the main package
+    main {
+        java {
+            srcDir 'src/java'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+    api {
+        java {
+            srcDir 'src/java/growthcraft/api'
+        }
+    }
+}
+
+processResources
+{
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        // replace version and mcversion
+        // ${version}   and    ${mcversion}    are the exact strings being replaced
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+
+    // copy everything else, that's not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+// --------------------
+// extra jar section
+// -------------------
+
+// add a source jar
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    from sourceSets.api.allSource
+    classifier = 'sources'
+}
+
+// add api classes to javadoc
+javadoc {
+    source += sourceSets.api.allSource
+}
+
+// add a javadoc jar
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
+}
+
+// because the normal output has been made to be obfuscated
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    from sourceSets.api.output
+    classifier = 'dev'
+}
+
+task apiJar(type: Jar) {
+    from sourceSets.api.output
+    classifier = 'api'
+}
+
+// add api classes to main package
+jar {
+  from sourceSets.api.output
+}
+
+// make sure all of these happen when we run build
+build.dependsOn sourceJar, javadocJar, deobfJar, apiJar

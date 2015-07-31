@@ -369,7 +369,7 @@ public class BlockBeeBox extends BlockContainer
 
 	/************
 	 * CONDITIONS
-	 ************/	
+	 ************/
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
@@ -378,7 +378,7 @@ public class BlockBeeBox extends BlockContainer
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -394,7 +394,7 @@ public class BlockBeeBox extends BlockContainer
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random rand, int par3)
 	{
@@ -409,7 +409,7 @@ public class BlockBeeBox extends BlockContainer
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -441,7 +441,7 @@ public class BlockBeeBox extends BlockContainer
 
 	/************
 	 * RENDERS
-	 ************/	
+	 ************/
 	@Override
 	public int getRenderType()
 	{

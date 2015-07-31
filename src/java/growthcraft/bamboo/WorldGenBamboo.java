@@ -128,7 +128,7 @@ public class WorldGenBamboo extends WorldGenerator
 							{
 								this.setBlockAndNotifyAdequately(world, x, y, z, this.leaves, 0);
 							}
-						}	
+						}
 					}
 
 					x = i;

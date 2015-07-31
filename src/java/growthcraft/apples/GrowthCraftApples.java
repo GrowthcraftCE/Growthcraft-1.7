@@ -39,7 +39,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "Growthcraft|Apples",name = "Growthcraft Apples",version = "2.1.0",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
-public class GrowthCraftApples 
+public class GrowthCraftApples
 {
 	@Instance("Growthcraft|Apples")
 	public static GrowthCraftApples instance;
@@ -159,7 +159,7 @@ public class GrowthCraftApples
 
 		//====================
 		// ORE DICTIONARY
-		//====================	
+		//====================
 		OreDictionary.registerOre("saplingTree", appleSapling);
 		OreDictionary.registerOre("treeSapling", appleSapling);
 		OreDictionary.registerOre("seedApple", appleSeeds);
@@ -188,9 +188,9 @@ public class GrowthCraftApples
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event) 
+	public void onTextureStitchPost(TextureStitchEvent.Post event)
 	{
-		if (event.map.getTextureType() == 0) 
+		if (event.map.getTextureType() == 0)
 		{
 			for (int i = 0; i < appleCider_booze.length; ++i)
 			{
@@ -224,7 +224,7 @@ public class GrowthCraftApples
 
 				FMLLog.info("[Growthcraft|Apples] Successfully integrated with Forestry.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Apples] Forestry not found. No integration made.", new Object[0]);
 			}
@@ -256,7 +256,7 @@ public class GrowthCraftApples
 
 				FMLLog.info("[Growthcraft|Apples] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Apples] Thaumcraft not found. No integration made.", new Object[0]);
 			}

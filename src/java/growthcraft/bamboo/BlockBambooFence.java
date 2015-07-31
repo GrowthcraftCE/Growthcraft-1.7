@@ -17,12 +17,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBambooFence extends Block 
+public class BlockBambooFence extends Block
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockBambooFence() 
+	public BlockBambooFence()
 	{
 		super(Material.wood);
 		this.useNeighborBrightness = true;
@@ -35,7 +35,7 @@ public class BlockBambooFence extends Block
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	public boolean getBlocksMovement(IBlockAccess world, int x, int y, int z)
 	{
@@ -64,7 +64,7 @@ public class BlockBambooFence extends Block
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -85,7 +85,7 @@ public class BlockBambooFence extends Block
 
 	/************
 	 * RENDERS
-	 ************/	
+	 ************/
 	@Override
 	public int getRenderType()
 	{
@@ -113,7 +113,7 @@ public class BlockBambooFence extends Block
 
 	/************
 	 * BOXES
-	 ************/	
+	 ************/
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{

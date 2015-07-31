@@ -14,7 +14,7 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 
-public class VillageHandlerGrapes implements IVillageTradeHandler, IVillageCreationHandler 
+public class VillageHandlerGrapes implements IVillageTradeHandler, IVillageCreationHandler
 {
 	@Override
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
@@ -26,19 +26,19 @@ public class VillageHandlerGrapes implements IVillageTradeHandler, IVillageCreat
 	}
 
 	@Override
-	public PieceWeight getVillagePieceWeight(Random random, int i) 
+	public PieceWeight getVillagePieceWeight(Random random, int i)
 	{
 		return new PieceWeight(ComponentVillageGrapeVineyard.class, 21, MathHelper.getRandomIntegerInRange(random, 0 + i, 1 + i));
 	}
 
 	@Override
-	public Class<?> getComponentClass() 
+	public Class<?> getComponentClass()
 	{
 		return ComponentVillageGrapeVineyard.class;
 	}
 
 	@Override
-	public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5) 
+	public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
 	{
 		return ComponentVillageGrapeVineyard.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);
 	}

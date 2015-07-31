@@ -32,7 +32,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = "Growthcraft|Bamboo",name = "Growthcraft Bamboo",version = "2.1.1",dependencies = "required-after:Growthcraft")
 
-public class GrowthCraftBamboo 
+public class GrowthCraftBamboo
 {
 	@Instance("Growthcraft|Bamboo")
 	public static GrowthCraftBamboo instance;
@@ -215,7 +215,7 @@ public class GrowthCraftBamboo
 
 		//====================
 		// ORE DICTIONARY
-		//====================	
+		//====================
 		OreDictionary.registerOre("stickWood", bamboo);
 		OreDictionary.registerOre("woodStick", bamboo);
 		OreDictionary.registerOre("plankWood", bambooBlock);
@@ -333,7 +333,7 @@ public class GrowthCraftBamboo
 		if (Loader.isModLoaded(modid))
 		{
 			try
-			{			
+			{
 				if (RecipeManagers.fermenterManager != null)
 				{
 					addFermenterRecipe(new ItemStack(bambooShoot), 250, "biomass");
@@ -351,7 +351,7 @@ public class GrowthCraftBamboo
 
 				FMLLog.info("[Growthcraft|Bamboo] Successfully integrated with Forestry.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Bamboo] Forestry not found. No integration made.", new Object[0]);
 			}
@@ -361,7 +361,7 @@ public class GrowthCraftBamboo
 		if (Loader.isModLoaded(modid))
 		{
 			try
-			{	
+			{
 				ThaumcraftApi.registerObjectTag(bambooBlock.blockID, -1, new AspectList().add(Aspect.TREE, 1));
 				ThaumcraftApi.registerObjectTag(bambooShoot.blockID, -1, new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 1).add(Aspect.SEED, 1));
 				ThaumcraftApi.registerObjectTag(bambooLeaves.blockID, -1, new AspectList().add(Aspect.PLANT, 1));
@@ -377,7 +377,7 @@ public class GrowthCraftBamboo
 
 				FMLLog.info("[Growthcraft|Bamboo] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Bamboo] Thaumcraft not found. No integration made.", new Object[0]);
 			}
@@ -388,7 +388,7 @@ public class GrowthCraftBamboo
 	{
 		RecipeManagers.fermenterManager.addRecipe(stack, value, 1.0F, FluidRegistry.getFluidStack(fluid, 1), FluidRegistry.getFluidStack("water", 1));
 
-		if (FluidRegistry.isFluidRegistered("juice")) 
+		if (FluidRegistry.isFluidRegistered("juice"))
 		{
 			RecipeManagers.fermenterManager.addRecipe(stack, value, 1.5F, FluidRegistry.getFluidStack(fluid, 1), FluidRegistry.getFluidStack("juice", 1));
 		}

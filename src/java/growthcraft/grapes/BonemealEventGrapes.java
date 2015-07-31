@@ -7,7 +7,7 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class BonemealEventGrapes 
+public class BonemealEventGrapes
 {
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
@@ -143,7 +143,7 @@ public class BonemealEventGrapes
 				}
 
 				event.setResult(Result.ALLOW);
-			}		
+			}
 		}
 	}
 

@@ -32,7 +32,7 @@ public class BlockFruitPress extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockFruitPress() 
+	public BlockFruitPress()
 	{
 		super(Material.wood);
 		this.isBlockContainer = true;
@@ -218,7 +218,7 @@ public class BlockFruitPress extends BlockContainer
 
 	/************
 	 * CONDITIONS
-	 ************/	
+	 ************/
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
@@ -238,7 +238,7 @@ public class BlockFruitPress extends BlockContainer
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
@@ -266,7 +266,7 @@ public class BlockFruitPress extends BlockContainer
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random random, int par3)
 	{
@@ -281,7 +281,7 @@ public class BlockFruitPress extends BlockContainer
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -301,7 +301,7 @@ public class BlockFruitPress extends BlockContainer
 
 	/************
 	 * RENDERS
-	 ************/	
+	 ************/
 	@Override
 	public int getRenderType()
 	{

@@ -137,7 +137,7 @@ public class GuiFermentBarrel extends GuiCellar
 				{
 					itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, new ItemStack(Items.redstone), w + 114, h + 32);
 				}
-			}  
+			}
 			itemRender.zLevel = 0.0F;
 		}
 	}
@@ -150,7 +150,7 @@ public class GuiFermentBarrel extends GuiCellar
 		IIcon icon = null;
 		Fluid fluid = fluidstack.getFluid();
 		int color = fluid.getColor();
-		if (fluid != null && fluid.getStillIcon() != null) 
+		if (fluid != null && fluid.getStillIcon() != null)
 		{
 			icon = fluid.getStillIcon();
 		}
@@ -164,7 +164,7 @@ public class GuiFermentBarrel extends GuiCellar
 	}
 
 	@Override
-	protected void drawToolTipAtMousePos(int par1, int par2) 
+	protected void drawToolTipAtMousePos(int par1, int par2)
 	{
 		int w = (this.width - this.xSize) / 2;
 		int h = (this.height - this.ySize) / 2;

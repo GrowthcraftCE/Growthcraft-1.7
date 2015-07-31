@@ -4,7 +4,7 @@ import net.minecraftforge.fluids.Fluid;
 
 public class Booze extends Fluid
 {
-	public Booze(String fluidName) 
+	public Booze(String fluidName)
 	{
 		super(fluidName);
 	}

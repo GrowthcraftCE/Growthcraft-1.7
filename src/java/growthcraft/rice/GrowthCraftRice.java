@@ -39,7 +39,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "Growthcraft|Rice",name = "Growthcraft Rice",version = "2.1.0a",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
 
-public class GrowthCraftRice 
+public class GrowthCraftRice
 {
 	@Instance("Growthcraft|Rice")
 	public static GrowthCraftRice instance;
@@ -49,7 +49,7 @@ public class GrowthCraftRice
 
 	public static Block riceBlock;
 	public static Block paddyField;
-	public static Item rice;	
+	public static Item rice;
 	public static Item riceSake;
 	public static Item riceSake_bucket;
 	public static Item riceBall;
@@ -91,7 +91,7 @@ public class GrowthCraftRice
 			cfgC.comment = "[Higher -> Slower] Default : " + v;
 			this.riceSake_speed = cfgC.getInt(v);
 		}
-		finally 
+		finally
 		{
 			if (config.hasChanged()) { config.save(); }
 
@@ -143,7 +143,7 @@ public class GrowthCraftRice
 
 		//====================
 		// ORE DICTIONARY
-		//====================	
+		//====================
 		OreDictionary.registerOre("cropRice", rice);
 		OreDictionary.registerOre("seedRice", rice);
 		// For Pam's HarvestCraft
@@ -161,7 +161,7 @@ public class GrowthCraftRice
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();	
+		proxy.initRenders();
 
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.villagerBrewer_id, new VillageHandlerRice());
 
@@ -170,9 +170,9 @@ public class GrowthCraftRice
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event) 
+	public void onTextureStitchPost(TextureStitchEvent.Post event)
 	{
-		if (event.map.getTextureType() == 0) 
+		if (event.map.getTextureType() == 0)
 		{
 			for (int i = 0; i < riceSake_booze.length; ++i)
 			{
@@ -207,11 +207,11 @@ public class GrowthCraftRice
 				if (BackpackManager.backpackItems[2] != null)
 				{
 					BackpackManager.backpackItems[2].add(new ItemStack(rice));
-				}				
+				}
 
 				FMLLog.info("[Growthcraft|Rice] Successfully integrated with Forestry.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Rice] Forestry not found. No integration made.", new Object[0]);
 			}
@@ -241,7 +241,7 @@ public class GrowthCraftRice
 
 				FMLLog.info("[Growthcraft|Rice] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Rice] Thaumcraft not found. No integration made.", new Object[0]);
 			}

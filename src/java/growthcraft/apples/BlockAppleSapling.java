@@ -18,12 +18,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockAppleSapling extends BlockBush
 {
 	//Constants
-	private final int growth = GrowthCraftApples.appleSapling_growth;	
+	private final int growth = GrowthCraftApples.appleSapling_growth;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon tex;
 
-	public BlockAppleSapling() 
+	public BlockAppleSapling()
 	{
 		super(Material.plants);
 		this.setHardness(0.0F);
@@ -37,7 +37,7 @@ public class BlockAppleSapling extends BlockBush
 
 	/************
 	 * MAIN
-	 ************/	
+	 ************/
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
 		if (!world.isRemote)
@@ -82,7 +82,7 @@ public class BlockAppleSapling extends BlockBush
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)

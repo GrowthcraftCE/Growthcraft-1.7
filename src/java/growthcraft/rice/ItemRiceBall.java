@@ -8,12 +8,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemRiceBall extends ItemFood
 {
-	public ItemRiceBall() 
+	public ItemRiceBall()
 	{
 		super(5, 0.6F, false);
 		this.setUnlocalizedName("grc.riceBall");
 		this.setCreativeTab(GrowthCraftCore.tab);
-	}	
+	}
 
 	/************
 	 * TEXTURES

@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class PlayerInteractEventRice 
+public class PlayerInteractEventRice
 {
 	@SubscribeEvent
 	public void PlayerInteract(PlayerInteractEvent event)

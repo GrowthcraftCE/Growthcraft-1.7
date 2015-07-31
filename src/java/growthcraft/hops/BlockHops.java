@@ -36,7 +36,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 	public static IIcon[] tex;
 	public static Boolean graphicFlag;
 
-	public BlockHops() 
+	public BlockHops()
 	{
 		super(Material.plants);
 		this.setTickRandomly(true);
@@ -72,14 +72,14 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 				{
 					++meta;
 					world.setBlockMetadataWithNotify(x, y, z, meta, 3);
-				}					
+				}
 			}
 			else if ((meta == 2 || meta == 3) && world.getBlock(x, y + 1, z) == GrowthCraftCore.ropeBlock && this.canBlockStay(world, x, y + 1, z))
 			{
 				if (random.nextInt((int)(this.growth / f) + 1) == 0)
 				{
 					world.setBlock(x, y + 1, z, this, 2, 3);
-				}	
+				}
 			}
 			else if (meta == 2)
 			{
@@ -239,7 +239,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -255,7 +255,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 	}
 
 	@Override
-	public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z) 
+	public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z)
 	{
 		if (world.getBlock(x, y, z) instanceof IBlockRope)
 		{
@@ -266,7 +266,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
@@ -354,7 +354,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 
 	/************
 	 * COLORS
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
@@ -495,19 +495,19 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 	 * IPLANTABLE
 	 ************/
 	@Override
-	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z) 
+	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
 	{
 		return EnumPlantType.Crop;
 	}
 
 	@Override
-	public Block getPlant(IBlockAccess world, int x, int y, int z) 
+	public Block getPlant(IBlockAccess world, int x, int y, int z)
 	{
 		return this;
 	}
 
 	@Override
-	public int getPlantMetadata(IBlockAccess world, int x, int y, int z) 
+	public int getPlantMetadata(IBlockAccess world, int x, int y, int z)
 	{
 		return world.getBlockMetadata(x, y, z);
 	}

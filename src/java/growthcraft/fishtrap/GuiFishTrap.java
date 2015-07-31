@@ -36,4 +36,4 @@ public class GuiFishTrap extends GuiContainer
 		int h = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize);
 	}
-}	
+}

@@ -5,7 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotBrewKettleResidue extends Slot 
+public class SlotBrewKettleResidue extends Slot
 {
 	final ContainerBrewKettle con;
 

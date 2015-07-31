@@ -22,12 +22,12 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBeeHive extends Block 
+public class BlockBeeHive extends Block
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockBeeHive() 
+	public BlockBeeHive()
 	{
 		super(Material.plants);
 		this.setHardness(0.6F);
@@ -121,7 +121,7 @@ public class BlockBeeHive extends Block
 
 	/************
 	 * CONDITIONS
-	 ************/	
+	 ************/
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
 		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
@@ -148,7 +148,7 @@ public class BlockBeeHive extends Block
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata)
 	{
@@ -157,7 +157,7 @@ public class BlockBeeHive extends Block
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random rand, int par3)
 	{
@@ -194,7 +194,7 @@ public class BlockBeeHive extends Block
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -214,7 +214,7 @@ public class BlockBeeHive extends Block
 
 	/************
 	 * RENDERS
-	 ************/	
+	 ************/
 	@Override
 	public int getRenderType()
 	{

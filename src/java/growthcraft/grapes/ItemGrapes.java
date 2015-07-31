@@ -8,12 +8,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemGrapes extends ItemFood
 {
-	public ItemGrapes() 
+	public ItemGrapes()
 	{
 		super(2, 0.3F, false);
 		this.setUnlocalizedName("grc.grapes");
 		this.setCreativeTab(GrowthCraftCore.tab);
-	}	
+	}
 
 	/************
 	 * TEXTURES

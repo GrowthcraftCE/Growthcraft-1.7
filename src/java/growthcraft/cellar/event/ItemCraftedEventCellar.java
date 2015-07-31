@@ -8,7 +8,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 public class ItemCraftedEventCellar
 {
 	@SubscribeEvent
-	public void onItemCrafting(ItemCraftedEvent event) 
+	public void onItemCrafting(ItemCraftedEvent event)
 	{
 		if (event.crafting.getItem() == Item.getItemFromBlock(GrowthCraftCellar.fermentBarrel))
 		{

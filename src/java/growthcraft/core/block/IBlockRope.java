@@ -9,15 +9,15 @@ public interface IBlockRope
 {
 	/**
 	 * Example usage:
-	 * 
-	 * 	public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z) 
-		{
-			if (Block.blocksList[world.getBlockId(x, y, z)] instanceof IBlockRope)
-			{
-				return true;
-			}
-			return false;
-		}
+	 *
+	 * 	public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z)
+	 * {
+	 * 	 if (Block.blocksList[world.getBlockId(x, y, z)] instanceof IBlockRope)
+	 * 	 {
+	 * 	 	 return true;
+	 * 	 }
+	 * 	 return false;
+	 * }
 	 */
 	public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z);
 }

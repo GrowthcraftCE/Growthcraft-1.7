@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class HarvestDropsEventCore 
+public class HarvestDropsEventCore
 {
 	private final int r = 5;
 

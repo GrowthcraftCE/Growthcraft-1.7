@@ -12,17 +12,17 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class RenderBambooFence implements ISimpleBlockRenderingHandler 
+public class RenderBambooFence implements ISimpleBlockRenderingHandler
 {
 	public static int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) 
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		if (modelID == id)
 		{
 			Tessellator tessellator = Tessellator.instance;
-			IIcon[] icon = new IIcon[6]; 
+			IIcon[] icon = new IIcon[6];
 			int color;
 			float r;
 			float g;
@@ -125,8 +125,8 @@ public class RenderBambooFence implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) 
-	{		
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
+	{
 		if (modelId == id)
 		{
 			boolean flag = false;
@@ -214,7 +214,7 @@ public class RenderBambooFence implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public int getRenderId() 
+	public int getRenderId()
 	{
 		return id;
 	}

@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBambooStalk extends Block 
+public class BlockBambooStalk extends Block
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
@@ -171,7 +171,7 @@ public class BlockBambooStalk extends Block
 	public Item getItem(World world, int x, int y, int z)
 	{
 		return GrowthCraftBamboo.bamboo;
-	}  
+	}
 
 	@Override
 	public boolean canSustainLeaves(IBlockAccess world, int x, int y, int z)

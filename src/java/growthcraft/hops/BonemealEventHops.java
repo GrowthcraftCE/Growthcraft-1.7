@@ -7,7 +7,7 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class BonemealEventHops 
+public class BonemealEventHops
 {
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
@@ -28,7 +28,7 @@ public class BonemealEventHops
 				if (!event.world.isRemote)
 				{
 					++meta;
-					event.world.setBlockMetadataWithNotify(event.x, event.y, event.z, meta, 3);	
+					event.world.setBlockMetadataWithNotify(event.x, event.y, event.z, meta, 3);
 				}
 				event.setResult(Result.ALLOW);
 			}

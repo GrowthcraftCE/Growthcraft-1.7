@@ -17,11 +17,11 @@ public class FishTrapEntry extends WeightedRandom.Item
 		this.fishable = fish;
 	}
 
-	public ItemStack getFishable(Random random) 
+	public ItemStack getFishable(Random random)
 	{
 		ItemStack ret = this.fishable.copy();
 
-		if (this.damage > 0.0F) 
+		if (this.damage > 0.0F)
 		{
 			int i = (int)(this.damage * this.fishable.getMaxDamage());
 			int j = ret.getMaxDamage() - random.nextInt(random.nextInt(i) + 1);
@@ -30,7 +30,7 @@ public class FishTrapEntry extends WeightedRandom.Item
 			ret.setItemDamage(j);
 		}
 
-		if (this.isEnchantable) 
+		if (this.isEnchantable)
 		{
 			EnchantmentHelper.addRandomEnchantment(random, ret, 30);
 			//1.6.4
@@ -50,13 +50,13 @@ public class FishTrapEntry extends WeightedRandom.Item
 		return ret;
 	}
 
-	public FishTrapEntry setDamage(float f) 
+	public FishTrapEntry setDamage(float f)
 	{
 		this.damage = f;
 		return this;
 	}
 
-	public FishTrapEntry setEnchantable() 
+	public FishTrapEntry setEnchantable()
 	{
 		this.isEnchantable = true;
 		return this;

@@ -31,7 +31,7 @@ public class ItemBoozeBucket extends Item
 	private IIcon contents;
 
 	private int color = 16777215;
-	public ItemBoozeBucket(Fluid[] booze) 
+	public ItemBoozeBucket(Fluid[] booze)
 	{
 		super();
 		this.setMaxStackSize(1);

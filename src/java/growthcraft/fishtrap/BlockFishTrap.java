@@ -86,7 +86,7 @@ public class BlockFishTrap extends BlockContainer
 		}
 
 		if (random.nextInt((int)(this.chance / f) + 1) == 0 || debugFlag)
-		{			
+		{
 			ItemStack item = pickCatch(world);
 			if (item != null)
 			{
@@ -106,13 +106,13 @@ public class BlockFishTrap extends BlockContainer
 		f3 = MathHelper.clamp_float(f3, 0.0F, 1.0F);
 
 		ItemStack item;
-		if (f1 < f2) 
+		if (f1 < f2)
 		{
 			return FishTrapRegistry.instance().getJunkList(world);
 		}
 		f1 -= f2;
 
-		if (f1 < f3) 
+		if (f1 < f3)
 		{
 			return FishTrapRegistry.instance().getTreasureList(world);
 		}
@@ -248,7 +248,7 @@ public class BlockFishTrap extends BlockContainer
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -276,7 +276,7 @@ public class BlockFishTrap extends BlockContainer
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random rand, int par3)
 	{
@@ -297,7 +297,7 @@ public class BlockFishTrap extends BlockContainer
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -323,7 +323,7 @@ public class BlockFishTrap extends BlockContainer
 
 	/************
 	 * RENDERS
-	 ************/	
+	 ************/
 	/*@Override
 	public int getRenderType()
 	{

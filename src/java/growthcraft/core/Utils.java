@@ -18,7 +18,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import org.lwjgl.opengl.GL11;
 
-public class Utils 
+public class Utils
 {
 	public static void debug(String msg)
 	{
@@ -38,7 +38,7 @@ public class Utils
 			if (tempID != 2147483647)
 			{
 				if (tempID == id)
-					return true; 
+					return true;
 			}
 		}
 		return false;
@@ -56,7 +56,7 @@ public class Utils
 	}
 
 	public static void drawFace(String face, Block block, RenderBlocks renderer, Tessellator tes, IIcon icon, double i, double j, double k)
-	{		
+	{
 		float f = 0.0F;
 		tes.startDrawingQuads();
 		if (face == "yneg") { tes.addTranslation(0.0F, f, 0.0F); tes.setNormal(0.0F, -1.0F, 0.0F); tes.addTranslation(0.0F, -f, 0.0F); renderer.renderFaceYNeg(block, i, j, k, icon); }
@@ -100,17 +100,17 @@ public class Utils
 		tessellator.addVertexWithUV(minX, maxY, minZ, maxU, minV);
 		tessellator.addVertexWithUV(maxX, maxY, minZ, minU, minV);
 		tessellator.addVertexWithUV(maxX, minY, maxZ, minU, maxV);
-		//		
+		//
 		tessellator.addVertexWithUV(maxX, minY, maxZ, maxU, maxV);
 		tessellator.addVertexWithUV(maxX, maxY, minZ, maxU, minV);
 		tessellator.addVertexWithUV(minX, maxY, minZ, minU, minV);
-		tessellator.addVertexWithUV(minX, minY, maxZ, minU, maxV);	
+		tessellator.addVertexWithUV(minX, minY, maxZ, minU, maxV);
 		//
 		tessellator.addVertexWithUV(minX, minY, minZ, maxU, maxV);
 		tessellator.addVertexWithUV(minX, maxY, maxZ, maxU, minV);
 		tessellator.addVertexWithUV(maxX, maxY, maxZ, minU, minV);
 		tessellator.addVertexWithUV(maxX, minY, minZ, minU, maxV);
-		//		
+		//
 		tessellator.addVertexWithUV(maxX, minY, minZ, maxU, maxV);
 		tessellator.addVertexWithUV(maxX, maxY, maxZ, maxU, minV);
 		tessellator.addVertexWithUV(minX, maxY, maxZ, minU, minV);
@@ -124,17 +124,17 @@ public class Utils
 		tessellator.addVertexWithUV(maxX, maxY, minZ, maxU, minV);
 		tessellator.addVertexWithUV(minX, maxY, maxZ, minU, minV);
 		tessellator.addVertexWithUV(minX, minY, maxZ, minU, maxV);
-		//		
+		//
 		tessellator.addVertexWithUV(minX, minY, maxZ, maxU, maxV);
 		tessellator.addVertexWithUV(minX, maxY, maxZ, maxU, minV);
 		tessellator.addVertexWithUV(maxX, maxY, minZ, minU, minV);
-		tessellator.addVertexWithUV(maxX, minY, minZ, minU, maxV);	
+		tessellator.addVertexWithUV(maxX, minY, minZ, minU, maxV);
 		//
 		tessellator.addVertexWithUV(minX, minY, minZ, maxU, maxV);
 		tessellator.addVertexWithUV(minX, maxY, minZ, maxU, minV);
 		tessellator.addVertexWithUV(maxX, maxY, maxZ, minU, minV);
 		tessellator.addVertexWithUV(maxX, minY, maxZ, minU, maxV);
-		//		
+		//
 		tessellator.addVertexWithUV(maxX, minY, maxZ, maxU, maxV);
 		tessellator.addVertexWithUV(maxX, maxY, maxZ, maxU, minV);
 		tessellator.addVertexWithUV(minX, maxY, minZ, minU, minV);
@@ -148,7 +148,7 @@ public class Utils
 		tessellator.addVertexWithUV(maxX, minY, minZ, maxU, minV);
 		tessellator.addVertexWithUV(maxX, maxY, minZ, minU, minV);
 		tessellator.addVertexWithUV(minX, maxY, maxZ, minU, maxV);
-		//		
+		//
 		tessellator.addVertexWithUV(maxX, minY, minZ, maxU, maxV);
 		tessellator.addVertexWithUV(minX, minY, maxZ, maxU, minV);
 		tessellator.addVertexWithUV(minX, maxY, maxZ, minU, minV);
@@ -158,7 +158,7 @@ public class Utils
 		tessellator.addVertexWithUV(minX, minY, minZ, maxU, minV);
 		tessellator.addVertexWithUV(minX, maxY, minZ, minU, minV);
 		tessellator.addVertexWithUV(maxX, maxY, maxZ, minU, maxV);
-		//		
+		//
 		tessellator.addVertexWithUV(minX, minY, minZ, maxU, maxV);
 		tessellator.addVertexWithUV(maxX, minY, maxZ, maxU, minV);
 		tessellator.addVertexWithUV(maxX, maxY, maxZ, minU, minV);
@@ -172,17 +172,17 @@ public class Utils
 		tessellator.addVertexWithUV(minX, maxY, minZ, maxU, minV);
 		tessellator.addVertexWithUV(minX, maxY, maxZ, minU, minV);
 		tessellator.addVertexWithUV(maxX, minY, maxZ, minU, maxV);
-		//		
+		//
 		tessellator.addVertexWithUV(maxX, minY, maxZ, maxU, maxV);
 		tessellator.addVertexWithUV(minX, maxY, maxZ, maxU, minV);
 		tessellator.addVertexWithUV(minX, maxY, minZ, minU, minV);
-		tessellator.addVertexWithUV(maxX, minY, minZ, minU, maxV);	
+		tessellator.addVertexWithUV(maxX, minY, minZ, minU, maxV);
 		//
 		tessellator.addVertexWithUV(minX, minY, minZ, maxU, maxV);
 		tessellator.addVertexWithUV(maxX, maxY, minZ, maxU, minV);
 		tessellator.addVertexWithUV(maxX, maxY, maxZ, minU, minV);
 		tessellator.addVertexWithUV(minX, minY, maxZ, minU, maxV);
-		//		
+		//
 		tessellator.addVertexWithUV(minX, minY, maxZ, maxU, maxV);
 		tessellator.addVertexWithUV(maxX, maxY, maxZ, maxU, minV);
 		tessellator.addVertexWithUV(maxX, maxY, minZ, minU, minV);
@@ -232,16 +232,16 @@ public class Utils
 	{
 		if (itemstack.stackSize == 1)
 		{
-			if (itemstack.getItem().hasContainerItem(itemstack)) 
+			if (itemstack.getItem().hasContainerItem(itemstack))
 			{
 				return itemstack.getItem().getContainerItem(itemstack);
-			} 
-			else 
+			}
+			else
 			{
 				return null;
 			}
-		} 
-		else 
+		}
+		else
 		{
 			itemstack.splitStack(1);
 			return itemstack;
@@ -258,7 +258,7 @@ public class Utils
 			{
 				int used = tank.fill(ForgeDirection.UNKNOWN, heldContents, true);
 
-				if (used > 0) 
+				if (used > 0)
 				{
 					ItemStack consumed = held.getItem().getContainerItem(held);
 					if (!player.inventory.addItemStackToInventory(consumed))
@@ -293,12 +293,12 @@ public class Utils
 			FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
 			FluidStack available = tank.drain(ForgeDirection.UNKNOWN, Integer.MAX_VALUE, false);
 
-			if (available != null) 
+			if (available != null)
 			{
 				ItemStack filled = FluidContainerRegistry.fillFluidContainer(available, held);
 				heldContents = FluidContainerRegistry.getFluidForFilledItem(filled);
 
-				if (heldContents != null) 
+				if (heldContents != null)
 				{
 					if (!player.inventory.addItemStackToInventory(filled))
 					{

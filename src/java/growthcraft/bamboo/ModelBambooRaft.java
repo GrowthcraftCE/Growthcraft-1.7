@@ -7,7 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ModelBambooRaft extends ModelBase 
+public class ModelBambooRaft extends ModelBase
 {
 	public ModelRenderer box;
 

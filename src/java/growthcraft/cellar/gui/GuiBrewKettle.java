@@ -133,7 +133,7 @@ public class GuiBrewKettle extends GuiCellar
 		IIcon icon = null;
 		Fluid fluid = fluidstack.getFluid();
 		int color = fluid.getColor();
-		if (fluid != null && fluid.getStillIcon() != null) 
+		if (fluid != null && fluid.getStillIcon() != null)
 		{
 			icon = fluid.getStillIcon();
 		}
@@ -147,7 +147,7 @@ public class GuiBrewKettle extends GuiCellar
 	}
 
 	@Override
-	protected void drawToolTipAtMousePos(int par1, int par2) 
+	protected void drawToolTipAtMousePos(int par1, int par2)
 	{
 		int w = (this.width - this.xSize) / 2;
 		int h = (this.height - this.ySize) / 2;
@@ -197,7 +197,7 @@ public class GuiBrewKettle extends GuiCellar
 			}
 
 			drawText(toolTip, par1, par2, this.fontRendererObj);
-		}		
+		}
 		else if ((par1 > w + 27) && (par2 > h + 54) && (par1 < w + 27 + 16) && (par2 < h + 54 + 16))
 		{
 			ArrayList toolTip = new ArrayList();

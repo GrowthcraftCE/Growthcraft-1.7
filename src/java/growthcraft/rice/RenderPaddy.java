@@ -14,12 +14,12 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class RenderPaddy implements ISimpleBlockRenderingHandler 
+public class RenderPaddy implements ISimpleBlockRenderingHandler
 {
 	public static int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) 
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		Tessellator tes = Tessellator.instance;
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
@@ -89,7 +89,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) 
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
 		if (modelId == id)
 		{
@@ -125,7 +125,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 				boolean boolYNeg = ((BlockPaddy)block).canConnectPaddyTo(world, x, y, z - 1, meta);
 
 				if (boolXPos == false)
-				{			
+				{
 					i1 = 1.0D - thick;
 					i2 = 1.0D;
 					k1 = 0.0D + thick;
@@ -136,7 +136,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 				}
 
 				if (boolXNeg == false)
-				{			
+				{
 					i1 = 0.0D;
 					i2 = 0.0D + thick;
 					k1 = 0.0D + thick;
@@ -147,7 +147,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 				}
 
 				if (boolYPos == false)
-				{			
+				{
 					i1 = 0.0D + thick;
 					i2 = 1.0D - thick;
 					k1 = 1.0D - thick;
@@ -158,7 +158,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 				}
 
 				if (boolYNeg == false)
-				{			
+				{
 					i1 = 0.0D + thick;
 					i2 = 1.0D - thick;
 					k1 = 0.0D;
@@ -271,7 +271,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 	public boolean shouldRender3DInInventory(int modelID) { return true; }
 
 	@Override
-	public int getRenderId() 
+	public int getRenderId()
 	{
 		return id;
 	}

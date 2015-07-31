@@ -27,7 +27,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "Growthcraft",name = "Growthcraft",version = "2.1.0a")
-public class GrowthCraftCore 
+public class GrowthCraftCore
 {
 	@Instance("Growthcraft")
 	public static GrowthCraftCore instance;
@@ -109,18 +109,18 @@ public class GrowthCraftCore
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
 		//		MinecraftForge.EVENT_BUS.register(new PlayerSleepInBed());
 
-		/*String modid; 
+		/*String modid;
 
 		modid = "Thaumcraft";
 		if (Loader.isModLoaded(modid))
 		{
 			try
 			{
-				ThaumcraftApi.registerObjectTag(rope.itemID, -1, new AspectList().add(Aspect.BEAST, 1).add(Aspect.CLOTH, 1));			
+				ThaumcraftApi.registerObjectTag(rope.itemID, -1, new AspectList().add(Aspect.BEAST, 1).add(Aspect.CLOTH, 1));
 
 				FMLLog.info("[Growthcraft|Core] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Core] Thaumcraft not found. No integration made.", new Object[0]);
 			}

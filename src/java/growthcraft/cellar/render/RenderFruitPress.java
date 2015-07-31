@@ -11,13 +11,13 @@ import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class RenderFruitPress implements ISimpleBlockRenderingHandler 
+public class RenderFruitPress implements ISimpleBlockRenderingHandler
 {
 	public static int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) 
-	{		
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
+	{
 		if (modelID == id)
 		{
 			Tessellator tes = Tessellator.instance;
@@ -103,7 +103,7 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) 
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
 		if (modelId == id)
 		{
@@ -263,13 +263,13 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelID) 
+	public boolean shouldRender3DInInventory(int modelID)
 	{
 		return true;
 	}
 
 	@Override
-	public int getRenderId() 
+	public int getRenderId()
 	{
 		return id;
 	}

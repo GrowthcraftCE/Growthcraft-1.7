@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockBambooSlab extends BlockSlab 
+public class BlockBambooSlab extends BlockSlab
 {
 	public BlockBambooSlab(boolean par2)
 	{
@@ -31,7 +31,7 @@ public class BlockBambooSlab extends BlockSlab
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List list)
@@ -63,7 +63,7 @@ public class BlockBambooSlab extends BlockSlab
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
@@ -77,7 +77,7 @@ public class BlockBambooSlab extends BlockSlab
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)

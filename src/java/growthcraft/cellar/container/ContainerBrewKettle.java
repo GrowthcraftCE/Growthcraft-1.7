@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ContainerBrewKettle extends Container 
+public class ContainerBrewKettle extends Container
 {
 	private TileEntityBrewKettle te;
 
@@ -120,13 +120,13 @@ public class ContainerBrewKettle extends Container
 	{
 		super.addCraftingToCrafters(iCrafting);
 		te.sendGUINetworkData(this, iCrafting);
-	}	
+	}
 
 	@Override
 	public void detectAndSendChanges()
 	{
 		super.detectAndSendChanges();
-		for (int i = 0; i < crafters.size(); i++) 
+		for (int i = 0; i < crafters.size(); i++)
 		{
 			te.sendGUINetworkData(this, (ICrafting) crafters.get(i));
 		}

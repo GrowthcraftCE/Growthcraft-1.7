@@ -7,11 +7,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 
-public class CoreRegistry 
+public class CoreRegistry
 {
 	/**
 	 * Gwafu:
-	 * 
+	 *
 	 * Yes, it's the same functons/methods as Forge's tall grass hook.
 	 */
 
@@ -27,7 +27,7 @@ public class CoreRegistry
 	/**
 	 * addVineDrop()
 	 * Adds a drop to vines.
-	 * 
+	 *
 	 * @param item   - The item/block to be added.
 	 * @param weight - Weight. Used for randoming. Higher numbers means lesser chance.
 	 */
@@ -58,7 +58,7 @@ public class CoreRegistry
 		}
 		return entry.vine.copy();
 	}
-	
+
 	public List<VineEntry> getList(){ return vineList; }
 
 	final List<VineEntry> vineList = new ArrayList<VineEntry>();

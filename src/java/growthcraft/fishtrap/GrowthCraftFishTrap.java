@@ -25,7 +25,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = "Growthcraft|Fishtrap",name = "Growthcraft Fishtrap",version = "2.1.0a",dependencies = "required-after:Growthcraft")
 
-public class GrowthCraftFishTrap 
+public class GrowthCraftFishTrap
 {
 	@Instance("Growthcraft|Fishtrap")
 	public static GrowthCraftFishTrap instance;
@@ -123,18 +123,18 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		/*String modid; 
+		/*String modid;
 
 		modid = "Thaumcraft";
 		if (Loader.isModLoaded(modid))
 		{
 			try
 			{
-				ThaumcraftApi.registerObjectTag(fishTrap.blockID, -1, new AspectList().add(Aspect.WATER, 2));			
+				ThaumcraftApi.registerObjectTag(fishTrap.blockID, -1, new AspectList().add(Aspect.WATER, 2));
 
 				FMLLog.info("[Growthcraft|Fishtrap] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Fishtrap] Thaumcraft not found. No integration made.", new Object[0]);
 			}

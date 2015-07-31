@@ -43,7 +43,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "Growthcraft|Grapes",name = "Growthcraft Grapes",version = "2.1.0",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
 
-public class GrowthCraftGrapes 
+public class GrowthCraftGrapes
 {
 	@Instance("Growthcraft|Grapes")
 	public static GrowthCraftGrapes instance;
@@ -182,7 +182,7 @@ public class GrowthCraftGrapes
 
 		//====================
 		// ORE DICTIONARY
-		//====================	
+		//====================
 		OreDictionary.registerOre("cropGrapes", grapes);
 		OreDictionary.registerOre("foodGrapes", grapes);
 		OreDictionary.registerOre("seedGrapes", grapeSeeds);
@@ -215,9 +215,9 @@ public class GrowthCraftGrapes
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event) 
+	public void onTextureStitchPost(TextureStitchEvent.Post event)
 	{
-		if (event.map.getTextureType() == 0) 
+		if (event.map.getTextureType() == 0)
 		{
 			for (int i = 0; i < grapeWine_booze.length; ++i)
 			{
@@ -258,11 +258,11 @@ public class GrowthCraftGrapes
 				{
 					BackpackManager.backpackItems[2].add(new ItemStack(grapes));
 					BackpackManager.backpackItems[2].add(new ItemStack(grapeSeeds));
-				}				
+				}
 
 				FMLLog.info("[Growthcraft|Grapes] Successfully integrated with Forestry.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Grapes] Forestry not found. No integration made.", new Object[0]);
 			}
@@ -293,7 +293,7 @@ public class GrowthCraftGrapes
 
 				FMLLog.info("[Growthcraft|Grapes] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Grapes] Thaumcraft not found. No integration made.", new Object[0]);
 			}

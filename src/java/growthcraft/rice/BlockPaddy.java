@@ -24,12 +24,12 @@ import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPaddy extends Block 
+public class BlockPaddy extends Block
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockPaddy() 
+	public BlockPaddy()
 	{
 		super(Material.ground);
 		this.setHardness(0.5F);
@@ -81,17 +81,17 @@ public class BlockPaddy extends Block
 		{
 			ItemStack itemstack = player.inventory.getCurrentItem();
 			if (itemstack != null)
-			{	
+			{
 				if (FluidContainerRegistry.isFilledContainer(itemstack))
 				{
 					FluidStack addF = FluidContainerRegistry.getFluidForFilledItem(itemstack);
 					if (addF != null)
 					{
-						int radius = addF.amount * 2 / FluidContainerRegistry.BUCKET_VOLUME; 
-						if (radius % 2 == 0) 
+						int radius = addF.amount * 2 / FluidContainerRegistry.BUCKET_VOLUME;
+						if (radius % 2 == 0)
 						{
 							radius -= 1;
-						} 
+						}
 
 						if (addF.getFluid() == FluidRegistry.WATER && radius > 0)
 						{
@@ -214,7 +214,7 @@ public class BlockPaddy extends Block
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
@@ -315,7 +315,7 @@ public class BlockPaddy extends Block
 		boolean boolYNeg = canConnectPaddyTo(world, i, j, k - 1, meta);
 
 		if (boolXPos == false)
-		{			
+		{
 			i1 = 1.0F - thick;
 			i2 = 1.0F;
 			k1 = 0.0F + thick;
@@ -326,7 +326,7 @@ public class BlockPaddy extends Block
 		}
 
 		if (boolXNeg == false)
-		{			
+		{
 			i1 = 0.0F;
 			i2 = 0.0F + thick;
 			k1 = 0.0F + thick;
@@ -337,7 +337,7 @@ public class BlockPaddy extends Block
 		}
 
 		if (boolYPos == false)
-		{			
+		{
 			i1 = 0.0F + thick;
 			i2 = 1.0F - thick;
 			k1 = 1.0F - thick;
@@ -348,7 +348,7 @@ public class BlockPaddy extends Block
 		}
 
 		if (boolYNeg == false)
-		{			
+		{
 			i1 = 0.0F + thick;
 			i2 = 1.0F - thick;
 			k1 = 0.0F;

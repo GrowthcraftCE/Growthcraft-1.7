@@ -10,9 +10,9 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemRice extends Item 
+public class ItemRice extends Item
 {
-	public ItemRice() 
+	public ItemRice()
 	{
 		super();
 		this.setUnlocalizedName("grc.rice");
@@ -21,7 +21,7 @@ public class ItemRice extends Item
 
 	/************
 	 * MAIN
-	 ************/	
+	 ************/
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
 	{
