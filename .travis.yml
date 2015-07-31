@@ -1,7 +1,6 @@
 language: java
 jdk:
   - openjdk7
-  - openjdk8
 
 install: ./gradlew setupCIWorkspace -S
 script: ./gradlew build
