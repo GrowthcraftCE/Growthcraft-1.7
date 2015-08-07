@@ -63,7 +63,7 @@ public class BlockApple extends Block implements IGrowable
 	/* Can the Apple accept bonemeal? */
 	public boolean func_149852_a(World world, Random random, int x, int y, int z)
 	{
-		return true;
+		return !world.isRemote;
 	}
 
 	/* Apply bonemeal effect */

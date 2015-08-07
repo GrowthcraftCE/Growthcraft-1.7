@@ -41,23 +41,5 @@ public class BonemealEventApples
 				event.setResult(Result.ALLOW);
 			}
 		}
-		else if (event.block == GrowthCraftApples.appleBlock)
-		{
-			int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
-			if (meta >= 2)
-			{
-				event.setResult(Result.DENY);
-			}
-			else
-			{
-				if (!event.world.isRemote)
-				{
-					++meta;
-					event.world.setBlockMetadataWithNotify(event.x, event.y, event.z, meta, 2);
-				}
-
-				event.setResult(Result.ALLOW);
-			}
-		}
 	}
 }
