@@ -2,7 +2,14 @@ package growthcraft.apples;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
@@ -13,10 +20,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import squeek.applecore.api.AppleCoreAPI;
 
-public class BlockApple extends Block
+public class BlockApple extends Block implements IGrowable
 {
 	//Constants
 	private final int growth = GrowthCraftApples.appleBlock_growth;
@@ -37,6 +43,52 @@ public class BlockApple extends Block
 		this.setCreativeTab(null);
 	}
 
+	@Optional.Method(modid = "AppleCore")
+	public Event.Result validateAppleCoreGrowthTick(World world, int x, int y, int z, Random random)
+	{
+		return AppleCoreAPI.dispatcher.validatePlantGrowth(this, world, x, y, z, random);
+	}
+
+	@Optional.Method(modid = "AppleCore")
+	public void announceAppleCoreGrowthTick(World world, int x, int y, int z, int previousMetadata)
+	{
+		AppleCoreAPI.dispatcher.announcePlantGrowth(this, world, x, y, z, previousMetadata);
+	}
+
+	void incrementGrowth(World world, int x, int y, int z, int meta)
+	{
+		int previousMetadata = meta;
+		++meta;
+		world.setBlockMetadataWithNotify(x, y, z, meta, 3);
+		if (Loader.isModLoaded("AppleCore"))
+		{
+			announceAppleCoreGrowthTick(world, x, y, z, previousMetadata);
+		}
+	}
+
+	/* IGrowable interface
+	 *	Check: http://www.minecraftforge.net/forum/index.php?topic=22571.0
+	 *	if you have no idea what this stuff means
+	 */
+
+	/* Can the Apple grow anymore? */
+	public boolean func_149851_a(World world, int x, int y, int z, boolean p_149851_5_)
+	{
+		return world.getBlockMetadata(x, y, z) < 2;
+	}
+
+	/* Can the Apple accept bonemeal? */
+	public boolean func_149852_a(World world, Random random, int x, int y, int z)
+	{
+		return true;
+	}
+
+	/* Apply bonemeal effect */
+	public void func_149853_b(World world, Random random, int x, int y, int z)
+	{
+		incrementGrowth(world, x, y, z, world.getBlockMetadata(x, y, z));
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -48,19 +100,29 @@ public class BlockApple extends Block
 			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 			world.setBlock(x, y, z, Blocks.air, 0, 3);
 		}
-		else if (world.rand.nextInt(this.growth) == 0)
+		else
 		{
-			int meta = world.getBlockMetadata(x, y, z);
-
-			if (meta < 2)
+			Event.Result allowGrowthResult = Event.Result.DEFAULT;
+			if (Loader.isModLoaded("AppleCore"))
 			{
-				++meta;
-				world.setBlockMetadataWithNotify(x, y, z, meta, 3);
+				allowGrowthResult = validateAppleCoreGrowthTick(world, x, y, z, random);
 			}
-			else if (meta >= 2 && this.dropFlag && world.rand.nextInt(this.dropChance) == 0)
+			if (allowGrowthResult == Event.Result.DENY)
+				return;
+
+			boolean continueGrowth = world.rand.nextInt(this.growth) == 0;
+			if (allowGrowthResult == Event.Result.ALLOW || continueGrowth)
 			{
-				this.dropBlockAsItem(world, x, y, z, new ItemStack(Items.apple));
-				world.setBlockToAir(x, y, z);
+				int meta = world.getBlockMetadata(x, y, z);
+				if (meta < 2)
+				{
+					incrementGrowth(world, x, y, z, meta);
+				}
+				else if (meta >= 2 && this.dropFlag && world.rand.nextInt(this.dropChance) == 0)
+				{
+					this.dropBlockAsItem(world, x, y, z, new ItemStack(Items.apple));
+					world.setBlockToAir(x, y, z);
+				}
 			}
 		}
 	}
