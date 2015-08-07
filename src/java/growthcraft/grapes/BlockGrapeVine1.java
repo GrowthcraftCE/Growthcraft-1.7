@@ -45,7 +45,7 @@ public class BlockGrapeVine1 extends Block implements IPlantable
 		this.setCreativeTab(null);
 	}
 
-	void incrementGrowth(World world, int x, int y, int z, int meta)
+	public void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
 		int previousMetadata = meta;
 		++meta;
