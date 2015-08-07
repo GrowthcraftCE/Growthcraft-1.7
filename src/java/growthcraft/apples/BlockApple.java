@@ -4,8 +4,6 @@ import java.util.Random;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -20,7 +18,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import squeek.applecore.api.AppleCoreAPI;
+import growthcraft.core.integration.AppleCore;
 
 public class BlockApple extends Block implements IGrowable
 {
@@ -43,27 +41,12 @@ public class BlockApple extends Block implements IGrowable
 		this.setCreativeTab(null);
 	}
 
-	@Optional.Method(modid = "AppleCore")
-	public Event.Result validateAppleCoreGrowthTick(World world, int x, int y, int z, Random random)
-	{
-		return AppleCoreAPI.dispatcher.validatePlantGrowth(this, world, x, y, z, random);
-	}
-
-	@Optional.Method(modid = "AppleCore")
-	public void announceAppleCoreGrowthTick(World world, int x, int y, int z, int previousMetadata)
-	{
-		AppleCoreAPI.dispatcher.announcePlantGrowth(this, world, x, y, z, previousMetadata);
-	}
-
 	void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
 		int previousMetadata = meta;
 		++meta;
 		world.setBlockMetadataWithNotify(x, y, z, meta, 3);
-		if (Loader.isModLoaded("AppleCore"))
-		{
-			announceAppleCoreGrowthTick(world, x, y, z, previousMetadata);
-		}
+		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
 	}
 
 	/* IGrowable interface
@@ -102,11 +85,7 @@ public class BlockApple extends Block implements IGrowable
 		}
 		else
 		{
-			Event.Result allowGrowthResult = Event.Result.DEFAULT;
-			if (Loader.isModLoaded("AppleCore"))
-			{
-				allowGrowthResult = validateAppleCoreGrowthTick(world, x, y, z, random);
-			}
+			Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);
 			if (allowGrowthResult == Event.Result.DENY)
 				return;
 
