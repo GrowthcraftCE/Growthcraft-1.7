@@ -2,6 +2,11 @@ package growthcraft.grapes;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.core.integration.AppleCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,8 +20,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockGrapeVine0 extends Block implements IPlantable
 {
@@ -35,6 +38,14 @@ public class BlockGrapeVine0 extends Block implements IPlantable
 		this.setCreativeTab(null);
 	}
 
+	public void incrementGrowth(World world, int x, int y, int z, int meta)
+	{
+		int previousMetadata = meta;
+		++meta;
+		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -50,16 +61,19 @@ public class BlockGrapeVine0 extends Block implements IPlantable
 
 		if (world.getBlockLightValue(x, y + 1, z) >= 9)
 		{
-			int meta = world.getBlockMetadata(x, y, z);
+			Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);
+			if (allowGrowthResult == Event.Result.DENY)
+				return;
 
+			int meta = world.getBlockMetadata(x, y, z);
 			float f = this.getGrowthRate(world, x, y, z);
 
-			if (random.nextInt((int)(this.growth / f) + 1) == 0)
+			boolean continueGrowth = random.nextInt((int)(this.growth / f) + 1) == 0;
+			if (allowGrowthResult == Event.Result.ALLOW || continueGrowth)
 			{
 				if (meta == 0)
 				{
-					++meta;
-					world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+					incrementGrowth(world, x, y, z, meta);
 				}
 				else if (meta == 1)
 				{

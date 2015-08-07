@@ -3,6 +3,11 @@ package growthcraft.rice;
 import java.util.ArrayList;
 import java.util.Random;
 
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.core.integration.AppleCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,8 +17,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockRice extends Block implements IPaddyCrop
 {
@@ -33,26 +36,37 @@ public class BlockRice extends Block implements IPaddyCrop
 		this.setStepSound(soundTypeGrass);
 	}
 
+	void incrementGrowth(World world, int x, int y, int z, int meta)
+	{
+		int previousMetadata = meta;
+		++meta;
+		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
+	}
+
 	/************
 	 * TICK
 	 ************/
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand)
+	public void updateTick(World world, int x, int y, int z, Random random)
 	{
 		this.checkCropChange(world, x, y, z);
 
 		if (world.getBlockLightValue(x, y + 1, z) >= 9 && world.getBlockMetadata(x, y - 1, z) > 0)
 		{
+			Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);
+			if (allowGrowthResult == Event.Result.DENY)
+				return;
+
 			int meta = world.getBlockMetadata(x, y, z);
 
 			if (meta < 7)
 			{
 				float f = this.getGrowthRate(world, x, y, z);
 
-				if (rand.nextInt((int)(this.growth / f) + 1) == 0)
+				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.growth / f) + 1) == 0))
 				{
-					++meta;
-					world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+					incrementGrowth(world, x, y, z, meta);
 					world.setBlockMetadataWithNotify(x, y - 1, z, world.getBlockMetadata(x, y - 1, z) - 1, 2);
 				}
 			}

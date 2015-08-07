@@ -5,6 +5,11 @@ import growthcraft.core.GrowthCraftCore;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.core.integration.AppleCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;
@@ -20,8 +25,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockGrapeVine1 extends Block implements IPlantable
 {
@@ -42,6 +45,14 @@ public class BlockGrapeVine1 extends Block implements IPlantable
 		this.setCreativeTab(null);
 	}
 
+	public void incrementGrowth(World world, int x, int y, int z, int meta)
+	{
+		int previousMetadata = meta;
+		++meta;
+		world.setBlockMetadataWithNotify(x, y, z, meta, 3);
+		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -55,28 +66,30 @@ public class BlockGrapeVine1 extends Block implements IPlantable
 		// 2 - hard sapling
 		// 3 - trunk
 
-		int meta = world.getBlockMetadata(x, y, z);
+		Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);
+		if (allowGrowthResult == Event.Result.DENY)
+			return;
 
+		int meta = world.getBlockMetadata(x, y, z);
 		float f = this.getGrowthRate(world, x, y, z);
 
-		if (random.nextInt((int)(this.growth / f) + 1) == 0)
+		boolean continueGrowth = random.nextInt((int)(this.growth / f) + 1) == 0;
+		if (allowGrowthResult == Event.Result.ALLOW || continueGrowth)
 		{
+			/* Is here a rope block above this? */
 			if (meta == 0 && world.getBlock(x, y + 1, z) == GrowthCraftCore.ropeBlock)
 			{
-				++meta;
-				world.setBlockMetadataWithNotify(x, y, z, meta, 3);
+				incrementGrowth(world, x, y, z, meta);
 				world.setBlock(x, y + 1, z, GrowthCraftGrapes.grapeLeaves, 0, 3);
 			}
 			if (meta == 0 && world.isAirBlock(x, y + 1, z))
 			{
-				++meta;
-				world.setBlockMetadataWithNotify(x, y, z, meta, 3);
+				incrementGrowth(world, x, y, z, meta);
 				world.setBlock(x, y + 1, z, this, 0, 3);
 			}
-			else if (meta == 0 && world.getBlock(x, y + 1, z) ==  GrowthCraftGrapes.grapeLeaves)
+			else if (meta == 0 && world.getBlock(x, y + 1, z) == GrowthCraftGrapes.grapeLeaves)
 			{
-				++meta;
-				world.setBlockMetadataWithNotify(x, y, z, meta, 3);
+				incrementGrowth(world, x, y, z, meta);
 			}
 		}
 	}

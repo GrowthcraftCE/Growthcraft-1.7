@@ -14,6 +14,7 @@ public class BonemealEventGrapes
 	{
 		if (event.block == GrowthCraftGrapes.grapeVine0)
 		{
+			BlockGrapeVine0 vine = (BlockGrapeVine0)event.block;
 			int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
 
 			if (!event.world.isRemote)
@@ -23,7 +24,7 @@ public class BonemealEventGrapes
 				{
 					if (i == 1)
 					{
-						event.world.setBlockMetadataWithNotify(event.x, event.y, event.z, 1, 2);
+						vine.incrementGrowth(event.world, event.x, event.y, event.z, meta);
 					}
 					else if (i == 2)
 					{
@@ -54,13 +55,13 @@ public class BonemealEventGrapes
 		}
 		else if (event.block == GrowthCraftGrapes.grapeVine1)
 		{
+			BlockGrapeVine1 vine = (BlockGrapeVine1)event.block;
 			int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
 			if (meta == 0 && event.world.getBlock(event.x, event.y + 1, event.z) == GrowthCraftCore.ropeBlock)
 			{
 				if (!event.world.isRemote)
 				{
-					++meta;
-					event.world.setBlockMetadataWithNotify(event.x, event.y, event.z, meta, 3);
+					vine.incrementGrowth(event.world, event.x, event.y, event.z, meta);
 					event.world.setBlock(event.x, event.y + 1, event.z, GrowthCraftGrapes.grapeLeaves, 0, 3);
 				}
 				event.setResult(Result.ALLOW);
@@ -69,8 +70,7 @@ public class BonemealEventGrapes
 			{
 				if (!event.world.isRemote)
 				{
-					++meta;
-					event.world.setBlockMetadataWithNotify(event.x, event.y, event.z, meta, 3);
+					vine.incrementGrowth(event.world, event.x, event.y, event.z, meta);
 					event.world.setBlock(event.x, event.y + 1, event.z, GrowthCraftGrapes.grapeVine1, 0, 3);
 				}
 				event.setResult(Result.ALLOW);
@@ -79,8 +79,7 @@ public class BonemealEventGrapes
 			{
 				if (!event.world.isRemote)
 				{
-					++meta;
-					event.world.setBlockMetadataWithNotify(event.x, event.y, event.z, meta, 3);
+					vine.incrementGrowth(event.world, event.x, event.y, event.z, meta);
 				}
 				event.setResult(Result.ALLOW);
 			}

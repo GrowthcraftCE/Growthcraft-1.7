@@ -13,6 +13,13 @@ buildscript {
     }
 }
 
+repositories {
+    maven {
+        name = "AppleCore"
+        url = "http://www.ryanliptak.com/maven/"
+    }
+}
+
 apply plugin: 'forge'
 
 version = "2.1.0"
@@ -63,6 +70,10 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+dependencies {
+    compile "applecore:AppleCore:1.7.10-1.2.1+104.62391:api"
 }
 
 // --------------------
