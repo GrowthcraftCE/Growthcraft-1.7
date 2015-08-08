@@ -1,8 +1,13 @@
-package growthcraft.bamboo;
+package growthcraft.bamboo.block;
 
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.bamboo.renderer.RenderBamboo;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
@@ -17,8 +22,6 @@ import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBambooStalk extends Block
 {

@@ -1,12 +1,15 @@
-package growthcraft.bamboo;
+package growthcraft.bamboo.event;
 
 import java.util.Random;
 
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.bamboo.block.BlockBambooShoot;
+
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.BonemealEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class BonemealEventBamboo
 {

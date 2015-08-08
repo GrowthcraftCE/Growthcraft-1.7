@@ -1,6 +1,8 @@
-package growthcraft.bamboo;
+package growthcraft.bamboo.world;
 
 import java.util.Random;
+
+import growthcraft.bamboo.GrowthCraftBamboo;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;

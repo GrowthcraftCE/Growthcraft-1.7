@@ -1,7 +1,12 @@
-package growthcraft.bamboo;
+package growthcraft.bamboo.block;
 
 import java.util.Random;
 
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.bamboo.world.WorldGenBamboo;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
@@ -14,8 +19,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBambooShoot extends BlockBush
 {

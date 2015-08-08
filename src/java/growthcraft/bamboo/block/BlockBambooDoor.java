@@ -1,7 +1,11 @@
-package growthcraft.bamboo;
+package growthcraft.bamboo.block;
 
 import java.util.Random;
 
+import growthcraft.bamboo.GrowthCraftBamboo;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.IconFlipped;
@@ -10,8 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBambooDoor extends BlockDoor
 {
@@ -20,7 +22,7 @@ public class BlockBambooDoor extends BlockDoor
 	@SideOnly(Side.CLIENT)
 	private IIcon[] tex;
 
-	protected BlockBambooDoor()
+	public BlockBambooDoor()
 	{
 		super(Material.wood);
 		this.setStepSound(soundTypeWood);

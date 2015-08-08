@@ -1,6 +1,10 @@
-package growthcraft.bamboo;
+package growthcraft.bamboo.item;
 
+import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.core.GrowthCraftCore;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -12,8 +16,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBambooShoot extends ItemFood implements IPlantable
 {

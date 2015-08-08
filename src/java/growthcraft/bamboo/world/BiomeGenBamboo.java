@@ -1,4 +1,4 @@
-package growthcraft.bamboo;
+package growthcraft.bamboo.world;
 
 import java.util.Random;
 

@@ -1,16 +1,17 @@
-package growthcraft.bamboo;
+package growthcraft.bamboo.renderer;
 
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.bamboo.block.BlockBambooWall;
+
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class RenderBambooWall implements ISimpleBlockRenderingHandler
 {

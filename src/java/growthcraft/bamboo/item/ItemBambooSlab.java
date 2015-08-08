@@ -1,4 +1,6 @@
-package growthcraft.bamboo;
+package growthcraft.bamboo.item;
+
+import growthcraft.bamboo.GrowthCraftBamboo;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemSlab;

@@ -1,15 +1,16 @@
-package growthcraft.bamboo;
-
-import growthcraft.core.Utils;
+package growthcraft.bamboo.world;
 
 import java.util.Random;
 
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.core.Utils;
+
+import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGeneratorBamboo implements IWorldGenerator
 {

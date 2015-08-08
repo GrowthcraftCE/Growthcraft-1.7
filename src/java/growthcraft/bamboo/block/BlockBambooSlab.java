@@ -1,10 +1,13 @@
-package growthcraft.bamboo;
-
-import growthcraft.core.GrowthCraftCore;
+package growthcraft.bamboo.block;
 
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.core.GrowthCraftCore;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
@@ -13,8 +16,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBambooSlab extends BlockSlab
 {
