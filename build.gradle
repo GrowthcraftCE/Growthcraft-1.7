@@ -27,7 +27,7 @@ repositories {
 apply plugin: 'forge'
 
 version = "2.1.0"
-group= "com.growthcraft"
+group= "mod.growthcraft"
 archivesBaseName = "growthcraft"
 
 minecraft {
