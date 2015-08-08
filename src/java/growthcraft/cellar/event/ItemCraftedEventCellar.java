@@ -1,9 +1,10 @@
 package growthcraft.cellar.event;
 
 import growthcraft.cellar.GrowthCraftCellar;
-import net.minecraft.item.Item;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
+import net.minecraft.item.Item;
 
 public class ItemCraftedEventCellar
 {

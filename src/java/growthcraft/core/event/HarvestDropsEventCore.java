@@ -1,14 +1,14 @@
 package growthcraft.core.event;
 
-import growthcraft.api.core.CoreRegistry;
-
 import java.util.Random;
 
+import growthcraft.api.core.CoreRegistry;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class HarvestDropsEventCore
 {

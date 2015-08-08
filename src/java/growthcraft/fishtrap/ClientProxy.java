@@ -1,6 +1,5 @@
 package growthcraft.fishtrap;
 
-
 public class ClientProxy extends CommonProxy
 {
 	@Override

@@ -1,13 +1,15 @@
 package growthcraft.cellar.block;
 
+import java.util.Random;
+
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.render.RenderFermentBarrel;
+import growthcraft.cellar.renderer.RenderFermentBarrel;
 import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
 import growthcraft.core.Utils;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPistonBase;
@@ -29,8 +31,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFermentBarrel extends BlockContainer
 {

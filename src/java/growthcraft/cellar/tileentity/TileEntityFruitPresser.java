@@ -1,6 +1,7 @@
 package growthcraft.cellar.tileentity;
 
 import growthcraft.cellar.GrowthCraftCellar;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;

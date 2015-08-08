@@ -2,7 +2,7 @@ Growthcraft
 ===========
 
 [![Minecraft Version](http://img.shields.io/minecraft/1.7.10.png?color=green)](https://minecraft.net/)
-[![Growthcraft Version](http://img.shields.io/growthcraft/2.1.0b.png?color=green)](https://github.com/alatyami/Growthcraft-1.7)
+[![Growthcraft Version](http://img.shields.io/growthcraft/2.2.0.png?color=green)](https://github.com/alatyami/Growthcraft-1.7)
 [![Forge Version](http://img.shields.io/forge/10.13.4.1448.png?color=green)](http://files.minecraftforge.net/)
 [![Build Status](https://travis-ci.org/alatyami/Growthcraft-1.7.svg?branch=master)](https://travis-ci.org/alatyami/Growthcraft-1.7)
 

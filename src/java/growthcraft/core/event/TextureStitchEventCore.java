@@ -1,10 +1,11 @@
 package growthcraft.core.event;
 
 import growthcraft.core.GrowthCraftCore;
-import net.minecraftforge.client.event.TextureStitchEvent;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.client.event.TextureStitchEvent;
 
 public class TextureStitchEventCore
 {

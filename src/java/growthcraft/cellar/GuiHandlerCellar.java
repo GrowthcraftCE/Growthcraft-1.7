@@ -9,10 +9,11 @@ import growthcraft.cellar.gui.GuiFruitPress;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.tileentity.TileEntityFruitPress;
+
+import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandlerCellar implements IGuiHandler
 {
