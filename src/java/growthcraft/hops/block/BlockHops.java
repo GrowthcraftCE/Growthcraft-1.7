@@ -1,17 +1,19 @@
-package growthcraft.hops;
-
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.block.IBlockRope;
+package growthcraft.hops.block;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.block.IBlockRope;
+import growthcraft.core.integration.AppleCore;
+import growthcraft.hops.GrowthCraftHops;
+import growthcraft.hops.renderer.RenderHops;
+
 import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.core.integration.AppleCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.material.Material;

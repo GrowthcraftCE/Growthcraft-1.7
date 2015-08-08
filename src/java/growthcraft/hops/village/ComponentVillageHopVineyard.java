@@ -1,9 +1,10 @@
-package growthcraft.hops;
-
-import growthcraft.core.GrowthCraftCore;
+package growthcraft.hops.village;
 
 import java.util.List;
 import java.util.Random;
+
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.hops.GrowthCraftHops;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;

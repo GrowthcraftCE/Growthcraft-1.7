@@ -1,11 +1,13 @@
-package growthcraft.hops;
+package growthcraft.hops.event;
 
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.hops.GrowthCraftHops;
+
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.BonemealEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class BonemealEventHops
 {

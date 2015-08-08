@@ -1,8 +1,13 @@
-package growthcraft.hops;
+package growthcraft.hops.village;
 
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.hops.GrowthCraftHops;
+import growthcraft.hops.village.ComponentVillageHopVineyard;
+
+import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
+import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -11,8 +16,6 @@ import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 
 public class VillageHandlerHops implements IVillageTradeHandler, IVillageCreationHandler
 {
