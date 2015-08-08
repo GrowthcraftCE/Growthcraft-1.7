@@ -1,11 +1,11 @@
 package growthcraft.cellar.network;
 
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.render.RenderBrewKettle;
-import growthcraft.cellar.render.RenderFermentBarrel;
-import growthcraft.cellar.render.RenderFruitPress;
-import growthcraft.cellar.render.RenderFruitPresser;
-import growthcraft.cellar.render.TileEntityFruitPresserRenderer;
+import growthcraft.cellar.renderer.RenderBrewKettle;
+import growthcraft.cellar.renderer.RenderFermentBarrel;
+import growthcraft.cellar.renderer.RenderFruitPress;
+import growthcraft.cellar.renderer.RenderFruitPresser;
+import growthcraft.cellar.renderer.TileEntityFruitPresserRenderer;
 import growthcraft.cellar.tileentity.TileEntityFruitPresser;
 
 import cpw.mods.fml.client.registry.ClientRegistry;

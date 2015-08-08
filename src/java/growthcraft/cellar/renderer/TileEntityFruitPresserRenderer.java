@@ -1,4 +1,4 @@
-package growthcraft.cellar.render;
+package growthcraft.cellar.renderer;
 
 import growthcraft.cellar.tileentity.TileEntityFruitPresser;
 
@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+@SideOnly(Side.CLIENT)
 public class TileEntityFruitPresserRenderer extends TileEntitySpecialRenderer
 {
 	private static final ResourceLocation res = new ResourceLocation("grccellar" , "textures/blocks/modelfruitpresser.png");

@@ -3,7 +3,7 @@ package growthcraft.cellar.block;
 import java.util.Random;
 
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.render.RenderFruitPress;
+import growthcraft.cellar.renderer.RenderFruitPress;
 import growthcraft.cellar.tileentity.TileEntityFruitPress;
 import growthcraft.core.Utils;
 

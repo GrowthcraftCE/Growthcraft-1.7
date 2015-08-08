@@ -1,4 +1,4 @@
-package growthcraft.cellar.render;
+package growthcraft.cellar.renderer;
 
 import growthcraft.cellar.block.BlockFruitPress;
 import growthcraft.core.Utils;

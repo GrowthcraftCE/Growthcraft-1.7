@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.render.RenderBrewKettle;
+import growthcraft.cellar.renderer.RenderBrewKettle;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
 import growthcraft.core.Utils;
 

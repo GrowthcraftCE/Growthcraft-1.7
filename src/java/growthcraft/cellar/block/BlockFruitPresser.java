@@ -3,7 +3,7 @@ package growthcraft.cellar.block;
 import java.util.Random;
 
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.render.RenderFruitPresser;
+import growthcraft.cellar.renderer.RenderFruitPresser;
 import growthcraft.cellar.tileentity.TileEntityFruitPresser;
 
 import cpw.mods.fml.relauncher.Side;

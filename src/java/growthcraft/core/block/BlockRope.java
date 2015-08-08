@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.render.RenderRope;
+import growthcraft.core.renderer.RenderRope;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

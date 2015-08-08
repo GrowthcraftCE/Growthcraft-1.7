@@ -1,4 +1,4 @@
-package growthcraft.cellar.render;
+package growthcraft.cellar.renderer;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

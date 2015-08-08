@@ -1,4 +1,4 @@
-package growthcraft.cellar.render;
+package growthcraft.cellar.renderer;
 
 import growthcraft.cellar.block.BlockBrewKettle;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;

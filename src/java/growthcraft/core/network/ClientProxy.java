@@ -1,7 +1,7 @@
 package growthcraft.core.network;
 
-import growthcraft.core.render.RenderFenceRope;
-import growthcraft.core.render.RenderRope;
+import growthcraft.core.renderer.RenderFenceRope;
+import growthcraft.core.renderer.RenderRope;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 

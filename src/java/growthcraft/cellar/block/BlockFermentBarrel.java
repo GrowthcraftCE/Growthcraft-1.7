@@ -4,7 +4,7 @@ import java.util.Random;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.render.RenderFermentBarrel;
+import growthcraft.cellar.renderer.RenderFermentBarrel;
 import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
 import growthcraft.core.Utils;
 
