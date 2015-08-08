@@ -1,6 +1,8 @@
-package growthcraft.bees;
+package growthcraft.bees.entity;
 
 import growthcraft.api.bees.BeesRegistry;
+import growthcraft.bees.GrowthCraftBees;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;

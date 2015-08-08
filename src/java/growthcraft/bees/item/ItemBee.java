@@ -1,10 +1,11 @@
-package growthcraft.bees;
+package growthcraft.bees.item;
 
 import growthcraft.core.GrowthCraftCore;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.Item;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
 
 public class ItemBee extends Item
 {

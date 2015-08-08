@@ -1,15 +1,37 @@
 package growthcraft.bees;
 
+import java.io.File;
+
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.bees.block.BlockBeeBox;
+import growthcraft.bees.block.BlockBeeHive;
+import growthcraft.bees.entity.TileEntityBeeBox;
+import growthcraft.bees.gui.GuiHandlerBees;
+import growthcraft.bees.item.ItemBee;
+import growthcraft.bees.item.ItemHoneyComb;
+import growthcraft.bees.item.ItemHoneyJar;
+import growthcraft.bees.village.VillageHandlerBees;
+import growthcraft.bees.world.WorldGeneratorBees;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucket;
 import growthcraft.core.GrowthCraftCore;
 
-import java.io.File;
-
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -26,21 +48,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-@Mod(modid = "Growthcraft|Bees",name = "GrowthCraft Bees",version = "2.1.0",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
 
 public class GrowthCraftBees
 {

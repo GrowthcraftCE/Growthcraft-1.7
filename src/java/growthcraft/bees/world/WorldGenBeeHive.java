@@ -1,6 +1,8 @@
-package growthcraft.bees;
+package growthcraft.bees.world;
 
 import java.util.Random;
+
+import growthcraft.bees.GrowthCraftBees;
 
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;

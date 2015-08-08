@@ -1,13 +1,15 @@
-package growthcraft.bees;
+package growthcraft.bees.village;
 
 import java.util.Random;
 
+import growthcraft.bees.GrowthCraftBees;
+
+import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 
 public class VillageHandlerBees implements IVillageTradeHandler
 {

@@ -1,10 +1,12 @@
-package growthcraft.bees;
+package growthcraft.bees.gui;
+
+import growthcraft.bees.block.ContainerBeeBox;
+import growthcraft.bees.entity.TileEntityBeeBox;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 public class GuiBeeBox extends GuiContainer

@@ -1,6 +1,9 @@
-package growthcraft.bees;
+package growthcraft.bees.inventory;
 
 import growthcraft.api.bees.BeesRegistry;
+import growthcraft.bees.GrowthCraftBees;
+import growthcraft.bees.block.ContainerBeeBox;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
