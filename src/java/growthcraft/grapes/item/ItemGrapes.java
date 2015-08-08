@@ -1,10 +1,11 @@
-package growthcraft.grapes;
+package growthcraft.grapes.item;
 
 import growthcraft.core.GrowthCraftCore;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemFood;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.ItemFood;
 
 public class ItemGrapes extends ItemFood
 {

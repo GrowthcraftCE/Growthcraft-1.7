@@ -1,8 +1,13 @@
-package growthcraft.grapes;
+package growthcraft.grapes.village;
 
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.grapes.village.ComponentVillageGrapeVineyard;
+
+import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
+import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -11,8 +16,6 @@ import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 
 public class VillageHandlerGrapes implements IVillageTradeHandler, IVillageCreationHandler
 {

@@ -1,9 +1,10 @@
-package growthcraft.grapes;
-
-import growthcraft.core.GrowthCraftCore;
+package growthcraft.grapes.village;
 
 import java.util.List;
 import java.util.Random;
+
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.grapes.GrowthCraftGrapes;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

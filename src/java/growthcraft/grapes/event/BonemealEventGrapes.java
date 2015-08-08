@@ -1,11 +1,15 @@
-package growthcraft.grapes;
+package growthcraft.grapes.event;
 
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.grapes.block.BlockGrapeVine0;
+import growthcraft.grapes.block.BlockGrapeVine1;
+
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.BonemealEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class BonemealEventGrapes
 {

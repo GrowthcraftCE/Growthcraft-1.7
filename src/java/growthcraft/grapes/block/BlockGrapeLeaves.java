@@ -1,10 +1,14 @@
-package growthcraft.grapes;
-
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.block.IBlockRope;
+package growthcraft.grapes.block;
 
 import java.util.Random;
 
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.block.IBlockRope;
+import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.grapes.renderer.RenderGrapeLeaves;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,8 +19,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 {
@@ -28,7 +30,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	public static IIcon[] tex;
 	//public static Boolean graphicFlag;
 
-	protected BlockGrapeLeaves()
+	public BlockGrapeLeaves()
 	{
 		super(Material.leaves, false);
 		this.setTickRandomly(true);
