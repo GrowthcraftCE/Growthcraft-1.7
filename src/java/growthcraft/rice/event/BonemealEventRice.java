@@ -1,13 +1,15 @@
-package growthcraft.rice;
+package growthcraft.rice.event;
 
 import java.util.Random;
 
+import growthcraft.rice.GrowthCraftRice;
+
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.BonemealEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class BonemealEventRice
 {

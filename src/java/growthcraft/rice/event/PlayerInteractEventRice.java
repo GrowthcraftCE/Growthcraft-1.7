@@ -1,12 +1,14 @@
-package growthcraft.rice;
+package growthcraft.rice.event;
 
+import growthcraft.rice.GrowthCraftRice;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class PlayerInteractEventRice
 {

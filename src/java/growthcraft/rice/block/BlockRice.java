@@ -1,13 +1,17 @@
-package growthcraft.rice;
+package growthcraft.rice.block;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
+import growthcraft.core.integration.AppleCore;
+import growthcraft.rice.GrowthCraftRice;
+import growthcraft.rice.block.IPaddyCrop;
+import growthcraft.rice.renderer.RenderRice;
+
 import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.core.integration.AppleCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;

@@ -1,10 +1,16 @@
-package growthcraft.rice;
-
-import growthcraft.core.Utils;
+package growthcraft.rice.block;
 
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.core.Utils;
+import growthcraft.rice.GrowthCraftRice;
+import growthcraft.rice.block.IPaddyCrop;
+import growthcraft.rice.renderer.RenderPaddy;
+import growthcraft.rice.ClientProxy;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -21,8 +27,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPaddy extends Block
 {
