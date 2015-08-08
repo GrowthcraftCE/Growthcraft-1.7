@@ -46,6 +46,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
+@Mod(modid = "Growthcraft|Cellar",name = "Growthcraft Cellar",version = "@VERSION@",dependencies = "required-after:Growthcraft")
 public class GrowthCraftCellar
 {
 	@Instance("Growthcraft|Cellar")

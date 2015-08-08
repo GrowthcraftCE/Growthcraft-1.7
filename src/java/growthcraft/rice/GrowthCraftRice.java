@@ -44,6 +44,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
+@Mod(modid = "Growthcraft|Rice",name = "Growthcraft Rice",version = "@VERSION@",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
 public class GrowthCraftRice
 {
 	@Instance("Growthcraft|Rice")

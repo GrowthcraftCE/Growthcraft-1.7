@@ -26,6 +26,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
+@Mod(modid = "Growthcraft|Fishtrap",name = "Growthcraft Fishtrap",version = "@VERSION@",dependencies = "required-after:Growthcraft")
 public class GrowthCraftFishTrap
 {
 	@Instance("Growthcraft|Fishtrap")

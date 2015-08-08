@@ -53,6 +53,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.OreDictionary;
 
+@Mod(modid = "Growthcraft|Bamboo",name = "Growthcraft Bamboo",version = "@VERSION@",dependencies = "required-after:Growthcraft")
 public class GrowthCraftBamboo
 {
 	@Instance("Growthcraft|Bamboo")

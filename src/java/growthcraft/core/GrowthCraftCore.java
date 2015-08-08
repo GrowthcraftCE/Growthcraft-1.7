@@ -27,6 +27,7 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
 
+@Mod(modid = "Growthcraft",name = "Growthcraft",version = "@VERSION@")
 public class GrowthCraftCore
 {
 	@Instance("Growthcraft")

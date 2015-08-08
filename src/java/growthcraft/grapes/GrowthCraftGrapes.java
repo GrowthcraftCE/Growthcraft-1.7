@@ -50,6 +50,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+@Mod(modid = "Growthcraft|Grapes",name = "Growthcraft Grapes",version = "@VERSION@",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
 public class GrowthCraftGrapes
 {
 	@Instance("Growthcraft|Grapes")
