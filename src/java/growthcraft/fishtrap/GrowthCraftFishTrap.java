@@ -1,18 +1,13 @@
 package growthcraft.fishtrap;
 
-import growthcraft.api.fishtrap.FishTrapEntry;
-import growthcraft.api.fishtrap.FishTrapRegistry;
-
 import java.io.File;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemFishFood;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-import net.minecraftforge.oredict.ShapedOreRecipe;
+import growthcraft.api.fishtrap.FishTrapEntry;
+import growthcraft.api.fishtrap.FishTrapRegistry;
+import growthcraft.fishtrap.block.BlockFishTrap;
+import growthcraft.fishtrap.entity.TileEntityFishTrap;
+import growthcraft.fishtrap.gui.GuiHandlerFishTrap;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -22,8 +17,14 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-
-@Mod(modid = "Growthcraft|Fishtrap",name = "Growthcraft Fishtrap",version = "2.1.0a",dependencies = "required-after:Growthcraft")
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemFishFood;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class GrowthCraftFishTrap
 {

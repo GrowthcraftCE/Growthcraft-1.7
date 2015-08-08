@@ -1,10 +1,12 @@
-package growthcraft.fishtrap;
+package growthcraft.fishtrap.gui;
+
+import growthcraft.fishtrap.block.ContainerFishTrap;
+import growthcraft.fishtrap.entity.TileEntityFishTrap;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 public class GuiFishTrap extends GuiContainer

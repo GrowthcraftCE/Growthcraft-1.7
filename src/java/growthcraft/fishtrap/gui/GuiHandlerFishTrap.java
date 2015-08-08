@@ -1,9 +1,13 @@
-package growthcraft.fishtrap;
+package growthcraft.fishtrap.gui;
 
+import growthcraft.fishtrap.block.ContainerFishTrap;
+import growthcraft.fishtrap.entity.TileEntityFishTrap;
+import growthcraft.fishtrap.gui.GuiFishTrap;
+
+import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandlerFishTrap implements IGuiHandler
 {

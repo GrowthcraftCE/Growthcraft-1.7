@@ -1,4 +1,6 @@
-package growthcraft.fishtrap;
+package growthcraft.fishtrap.block;
+
+import growthcraft.fishtrap.entity.TileEntityFishTrap;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

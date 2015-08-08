@@ -1,12 +1,14 @@
-package growthcraft.fishtrap;
+package growthcraft.fishtrap.renderer;
 
+import growthcraft.fishtrap.block.BlockFishTrap;
+
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class RenderFishTrap implements ISimpleBlockRenderingHandler
 {

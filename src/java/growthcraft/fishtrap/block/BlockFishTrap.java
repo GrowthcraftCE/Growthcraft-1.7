@@ -1,11 +1,16 @@
-package growthcraft.fishtrap;
+package growthcraft.fishtrap.block;
+
+import java.util.Random;
 
 import growthcraft.api.fishtrap.FishTrapRegistry;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.Utils;
+import growthcraft.fishtrap.entity.TileEntityFishTrap;
+import growthcraft.fishtrap.GrowthCraftFishTrap;
+import growthcraft.fishtrap.renderer.RenderFishTrap;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -25,8 +30,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFishTrap extends BlockContainer
 {
