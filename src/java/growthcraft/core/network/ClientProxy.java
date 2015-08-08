@@ -2,6 +2,7 @@ package growthcraft.core.network;
 
 import growthcraft.core.render.RenderFenceRope;
 import growthcraft.core.render.RenderRope;
+
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
