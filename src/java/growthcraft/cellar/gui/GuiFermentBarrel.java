@@ -1,13 +1,13 @@
 package growthcraft.cellar.gui;
 
+import java.util.ArrayList;
+
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.container.ContainerFermentBarrel;
 import growthcraft.cellar.network.PacketClearTankButton;
 import growthcraft.cellar.tileentity.CellarTank;
 import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
-
-import java.util.ArrayList;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -20,7 +20,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-
 import org.lwjgl.opengl.GL11;
 
 public class GuiFermentBarrel extends GuiCellar

@@ -1,17 +1,15 @@
 package growthcraft.cellar.render;
 
 import growthcraft.cellar.tileentity.TileEntityFruitPresser;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-@SideOnly(Side.CLIENT)
 public class TileEntityFruitPresserRenderer extends TileEntitySpecialRenderer
 {
 	private static final ResourceLocation res = new ResourceLocation("grccellar" , "textures/blocks/modelfruitpresser.png");

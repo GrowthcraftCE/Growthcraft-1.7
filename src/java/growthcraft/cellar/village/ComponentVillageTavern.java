@@ -1,9 +1,9 @@
 package growthcraft.cellar.village;
 
-import growthcraft.cellar.GrowthCraftCellar;
-
 import java.util.List;
 import java.util.Random;
+
+import growthcraft.cellar.GrowthCraftCellar;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;

@@ -7,10 +7,11 @@ import growthcraft.cellar.render.RenderFruitPress;
 import growthcraft.cellar.render.RenderFruitPresser;
 import growthcraft.cellar.render.TileEntityFruitPresserRenderer;
 import growthcraft.cellar.tileentity.TileEntityFruitPresser;
-import net.minecraft.util.ResourceLocation;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import net.minecraft.util.ResourceLocation;
 
 public class ClientProxy extends CommonProxy
 {

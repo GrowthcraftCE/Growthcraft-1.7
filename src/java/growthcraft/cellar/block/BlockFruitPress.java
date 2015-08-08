@@ -1,12 +1,14 @@
 package growthcraft.cellar.block;
 
+import java.util.Random;
+
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.render.RenderFruitPress;
 import growthcraft.cellar.tileentity.TileEntityFruitPress;
 import growthcraft.core.Utils;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -23,8 +25,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFruitPress extends BlockContainer
 {
