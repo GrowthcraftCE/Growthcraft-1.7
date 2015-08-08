@@ -24,15 +24,11 @@ apply plugin: 'forge'
 
 version = "2.1.0"
 group= "com.growthcraft"
-// the name that all artifacts will use as a base. artifacts names follow this pattern: [baseName]-[appendix]-[version]-[classifier].[extension]
 archivesBaseName = "growthcraft"
 
 minecraft {
-    version = "1.7.10-10.13.4.1448-1.7.10" // McVersion-ForgeVersion
-
-    runDir = "run" // the directory for ForgeGradle to run Minecraft in
-
-    // replacing stuff in the source
+    version = "1.7.10-10.13.4.1448-1.7.10"
+    runDir = "run"
     replace '@VERSION@', project.version
     replace '@MC_VERSION@', version
 }
@@ -55,20 +51,11 @@ sourceSets {
     }
 }
 
-processResources
-{
+processResources {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-
-        // replace version and mcversion
-        // ${version}   and    ${mcversion}    are the exact strings being replaced
         expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-
-    // copy everything else, that's not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
     }
 }
 
