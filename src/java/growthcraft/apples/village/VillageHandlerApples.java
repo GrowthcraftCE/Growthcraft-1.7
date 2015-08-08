@@ -1,13 +1,15 @@
-package growthcraft.apples;
+package growthcraft.apples.village;
 
 import java.util.Random;
 
+import growthcraft.apples.GrowthCraftApples;
+
+import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 
 public class VillageHandlerApples implements IVillageTradeHandler
 {

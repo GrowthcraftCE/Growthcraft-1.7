@@ -1,6 +1,8 @@
-package growthcraft.apples;
+package growthcraft.apples.world;
 
 import java.util.Random;
+
+import growthcraft.apples.GrowthCraftApples;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;

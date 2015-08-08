@@ -1,9 +1,13 @@
-package growthcraft.apples;
-
-import growthcraft.core.GrowthCraftCore;
+package growthcraft.apples.block;
 
 import java.util.Random;
 
+import growthcraft.apples.GrowthCraftApples;
+import growthcraft.apples.world.WorldGenAppleTree;
+import growthcraft.core.GrowthCraftCore;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -12,8 +16,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockAppleSapling extends BlockBush
 {

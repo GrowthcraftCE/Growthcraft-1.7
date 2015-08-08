@@ -1,9 +1,13 @@
-package growthcraft.apples;
+package growthcraft.apples.block;
 
 import java.util.Random;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
+import growthcraft.apples.GrowthCraftApples;
+import growthcraft.apples.renderer.RenderApple;
+import growthcraft.core.integration.AppleCore;
+
 import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -18,7 +22,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import growthcraft.core.integration.AppleCore;
 
 public class BlockApple extends Block implements IGrowable
 {
