@@ -64,7 +64,8 @@ processResources {
 }
 
 dependencies {
-    compile "applecore:AppleCore:1.7.10-1.2.1+104.62391:api"
+    //compile "applecore:AppleCore:1.7.10-1.2.1+104.62391:api"
+    compile "applecore:AppleCore:1.7.10-1.1.0:api"
 }
 
 // --------------------
