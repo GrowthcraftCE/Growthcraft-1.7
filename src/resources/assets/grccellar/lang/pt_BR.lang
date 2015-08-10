@@ -1,0 +1,28 @@
+
+itemGroup.tabGrCCellar=Growthcraft Adega
+
+tile.grc.fruitPress.name=Esmagador de Frutas
+tile.grc.fruitPresser.name=Esmagador de Frutas
+tile.grc.brewKettle.name=Caldeira de Fabricação
+tile.grc.fermentBarrel.name=Barril de Fermentação
+
+item.grc.boozeBucket.name=Balde de
+
+container.grc.fruitPress=Esmagador de Frutas
+container.grc.brewKettle=Caldeira de Fabricação
+container.grc.fermentBarrel=Barril de Fermentação
+
+grc.potion.tipsy=Embriaguez
+
+grc.booze=Bebida Alcoólica
+gui.grc.empty=Vazio
+gui.grc.discard=Descartar
+gui.grc.switch=Trocar
+gui.grc.cantferment=Não Pode Fermentar
+
+achievement.craftBarrel=Fabricação de Barris
+achievement.craftBarrel.desc=Produza um Barril de Fermentação com 3 Tábuas de Madeira e 6 Barras de Ferro
+achievement.fermentBooze=É o que eu posso fermentar...
+achievement.fermentBooze.desc=Fermente uma bebida alcóolica
+achievement.getDrunk=O Problema é Fazer?
+achievement.getDrunk.desc=Alcance Embriguez 5
