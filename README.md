@@ -9,6 +9,10 @@ Growthcraft
 This is a community fork of the original GrowthCraft developed by Gwafu. The 
 original forum post can be found on the [Minecraft Forums mod page](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1286298-growthcraft-jul-15-2014-proper-1-7-10-release)
 
+## Wiki
+
+We are using the [Gamepedia FTB Wiki](http://ftb.gamepedia.com/GrowthCraft) for publishing how the plugins work and tutorials. 
+
 ## Contributing 
 
 For any contributions to this project, please either create a branch or work from the development branch. 
