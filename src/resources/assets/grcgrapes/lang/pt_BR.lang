@@ -1,0 +1,19 @@
+
+tile.grc.grapeVine0.name=Videira
+tile.grc.grapeVine1.name=Videira
+tile.grc.grapeLeaves.name=Folhas de Videira
+tile.grc.grapeBlock.name=Uvas Normais
+
+item.grc.grapes.name=Uvas Normais
+item.grc.grapeSeeds.name=Sementes de Uva
+
+fluid.grc.grapeWine=Vinho
+fluid.grc.grapeWine0=Vinho
+fluid.grc.grapeWine1=Vinho
+fluid.grc.grapeWine2=Vinho
+fluid.grc.grapeWine3=Vinho
+
+fluid.grc.grapeWine0.modifier=Fresco
+fluid.grc.grapeWine1.modifier=Fermentado
+fluid.grc.grapeWine2.modifier=Fermentado, Potente
+fluid.grc.grapeWine3.modifier=Fermentado, Extendido
