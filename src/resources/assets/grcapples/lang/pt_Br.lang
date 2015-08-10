@@ -1,0 +1,15 @@
+tile.grc.appleBlock.name=Maçã
+tile.grc.appleSapling.name=Muda de Macieira
+tile.grc.appleLeaves.name=Folhas de Macieira
+
+item.grc.appleSeeds.name=Sementes de Maçã
+fluid.grc.appleCider=Cidra de Maçã
+fluid.grc.appleCider0=Cidra de Maçã
+fluid.grc.appleCider1=Cidra de Maçã
+fluid.grc.appleCider2=Cidra de Maçã
+fluid.grc.appleCider3=Cidra de Maçã
+
+fluid.grc.appleCider0.modifier=Fresca
+fluid.grc.appleCider1.modifier=Fermentada
+fluid.grc.appleCider2.modifier=Fermentada, Potente
+fluid.grc.appleCider3.modifier=Fermentada, Extendida
