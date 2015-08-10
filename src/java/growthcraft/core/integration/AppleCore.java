@@ -31,7 +31,11 @@ public class AppleCore
 	@Optional.Method(modid = "AppleCore")
 	private static void announceGrowthTick_AC(Block block, World world, int x, int y, int z, int previousMetadata)
 	{
-		AppleCoreAPI.dispatcher.announcePlantGrowth(block, world, x, y, z, previousMetadata);
+		// 1.2.x - until there is an official 1.2.x release of AppleCore
+		//AppleCoreAPI.dispatcher.announcePlantGrowth(block, world, x, y, z, previousMetadata);
+
+		// 1.1.x
+		AppleCoreAPI.dispatcher.announcePlantGrowth(block, world, x, y, z);
 	}
 
 	public static void announceGrowthTick(Block block, World world, int x, int y, int z, int previousMetadata)

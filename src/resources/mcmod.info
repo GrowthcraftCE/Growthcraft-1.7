@@ -4,7 +4,7 @@
     "name": "Growthcraft Apples",
     "description": "Growthcraft Apples is a mod which changes how apples are farmed in-game. In addition to this, it also adds Apple Ciders as a new product from apples.",
     "version": "${version}",
-    "mcversion": "${mcversion}"
+    "mcversion": "${mcversion}",
     "url": "http://www.minecraftforum.net/topic/1510394-/",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -22,7 +22,7 @@
     "name": "Growthcraft Bamboo",
     "description": "Growthcraft Bamboo is a mod which adds a new plant to the game: bamboos, which focuses on construction rather food.",
     "version": "${version}",
-    "mcversion": "${mcversion}"
+    "mcversion": "${mcversion}",
     "url": "http://www.minecraftforum.net/topic/1510394-/",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -40,7 +40,7 @@
     "name": "Growthcraft Bees",
     "description": "Growthcraft Bees is a mod which adds a new in-game hobby: beekeeping.",
     "version": "${version}",
-    "mcversion": "${mcversion}"
+    "mcversion": "${mcversion}",
     "url": "http://www.minecraftforum.net/topic/1510394-/",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -58,7 +58,7 @@
     "name": "Growthcraft Cellar",
     "description": "Growthcraft Cellar is a mod which adds a new in-game hobby: brewing alcoholic beverages.",
     "version": "${version}",
-    "mcversion": "${mcversion}"
+    "mcversion": "${mcversion}",
     "url": "http://www.minecraftforum.net/topic/1510394-/",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -76,7 +76,7 @@
     "name": "Growthcraft",
     "description": "Growthcraft Core is as a mod which acts a central hub for the other mods. It will provide of resources needed in common by two or more Growthcraft mods.",
     "version": "${version}",
-    "mcversion": "${mcversion}"
+    "mcversion": "${mcversion}",
     "url": "http://www.minecraftforum.net/topic/1510394-/",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -94,7 +94,7 @@
     "name": "Growthcraft Fishtrap",
     "description": "Growthcraft Fishtrap is a mod which adds a block; Fishtrap, that automatically catches fish (and other stuff) for you! ",
     "version": "${version}",
-    "mcversion": "${mcversion}"
+    "mcversion": "${mcversion}",
     "url": "http://www.minecraftforum.net/topic/1510394-/",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -112,7 +112,7 @@
     "name": "Growthcraft Grapes",
     "description": "Growthcraft Grapes is a mod which adds a new totally crop to the game: grapes. It also comes with Wine-making.",
     "version": "${version}",
-    "mcversion": "${mcversion}"
+    "mcversion": "${mcversion}",
     "url": "http://www.minecraftforum.net/topic/1510394-/",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -130,7 +130,7 @@
     "name": "Growthcraft Hops",
     "description": "Growthcraft Hops is a mod which adds a new crop to the game, hops. It also comes with Ale-brewing. ",
     "version": "${version}",
-    "mcversion": "${mcversion}"
+    "mcversion": "${mcversion}",
     "url": "http://www.minecraftforum.net/topic/1510394-/",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -148,7 +148,7 @@
     "name": "Growthcraft Rice",
     "description": "Growthcraft Rice is a mod which adds a new crop; rice. Alongside it also comes a new brew type; sake.",
     "version": "${version}",
-    "mcversion": "${mcversion}"
+    "mcversion": "${mcversion}",
     "url": "http://www.minecraftforum.net/topic/1510394-/",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
