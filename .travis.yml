@@ -8,8 +8,8 @@ before_install:
 install: ./gradlew setupCIWorkspace -S
 
 script: 
- - ls
  - ./gradlew build
+ - ls *
 
 deploy:
   provider: releases
