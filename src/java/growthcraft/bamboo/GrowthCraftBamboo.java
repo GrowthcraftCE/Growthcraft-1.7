@@ -23,34 +23,38 @@ import growthcraft.bamboo.item.ItemBambooDoor;
 import growthcraft.bamboo.item.ItemBambooRaft;
 import growthcraft.bamboo.item.ItemBambooShoot;
 import growthcraft.bamboo.item.ItemBambooSlab;
+import growthcraft.bamboo.village.ComponentVillageBambooYard;
+import growthcraft.bamboo.village.VillageHandlerBamboo;
 import growthcraft.bamboo.world.BiomeGenBamboo;
 import growthcraft.bamboo.world.WorldGenBamboo;
 import growthcraft.bamboo.world.WorldGeneratorBamboo;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.common.SidedProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeDictionary;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(modid = "Growthcraft|Bamboo",name = "Growthcraft Bamboo",version = "@VERSION@",dependencies = "required-after:Growthcraft")
@@ -235,6 +239,12 @@ public class GrowthCraftBamboo
 		addRecipe(recipes, new ItemStack(bambooScaffold, 16), "BBB", " A ", "A A", 'A', bamboo, 'B', bambooBlock);
 		GameRegistry.addRecipe(new ItemStack(Blocks.torch, 2), new Object[] {"A", "B", 'A', bambooCoal, 'B', Items.stick});
 
+		try
+		{
+			MapGenStructureIO.func_143031_a(ComponentVillageBambooYard.class, "grc.bambooyard");
+		}
+		catch (Throwable e) {}
+
 		//====================
 		// ORE DICTIONARY
 		//====================
@@ -342,6 +352,8 @@ public class GrowthCraftBamboo
 	public void load(FMLInitializationEvent event)
 	{
 		proxy.initRenders();
+		VillageHandlerBamboo handler = new VillageHandlerBamboo();
+		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 	}
 
 	@EventHandler
