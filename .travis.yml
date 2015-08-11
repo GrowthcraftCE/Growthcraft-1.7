@@ -9,7 +9,7 @@ install: ./gradlew setupCIWorkspace -S
 
 script: 
  - ./gradlew build
- - ls gradle/wrapper
+ - find . -name growthcraft*.jar -type f
 
 deploy:
   provider: releases
