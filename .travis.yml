@@ -3,6 +3,13 @@ jdk:
   - openjdk7
 
 install: ./gradlew setupCIWorkspace -S
+
 script: ./gradlew build
 
-
+deploy:
+  provider: releases
+  api_key: "42c1b36e0833ce72af6b908b54c8259645e36191"
+  file: "wrapper/dists/*.jar"
+  skip_cleanup: true
+  on:
+    tags: true
