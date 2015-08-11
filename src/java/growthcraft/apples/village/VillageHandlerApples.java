@@ -30,7 +30,7 @@ public class VillageHandlerApples implements IVillageTradeHandler, IVillageCreat
 	@Override
 	public PieceWeight getVillagePieceWeight(Random random, int i)
 	{
-		return new PieceWeight(ComponentVillageAppleFarm.class, 21, MathHelper.getRandomIntegerInRange(random, 1 + i, 2 + i));
+		return new PieceWeight(ComponentVillageAppleFarm.class, 21, MathHelper.getRandomIntegerInRange(random, 0 + i, 1 + i));
 	}
 
 	@Override

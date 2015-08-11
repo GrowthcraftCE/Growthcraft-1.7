@@ -31,7 +31,7 @@ public class VillageHandlerRice implements IVillageTradeHandler, IVillageCreatio
 	@Override
 	public PieceWeight getVillagePieceWeight(Random random, int i)
 	{
-		return new PieceWeight(ComponentVillageRiceField.class, 21, MathHelper.getRandomIntegerInRange(random, 1 + i, 2 + i));
+		return new PieceWeight(ComponentVillageRiceField.class, 21, MathHelper.getRandomIntegerInRange(random, 0 + i, 1 + i));
 	}
 
 	@Override
