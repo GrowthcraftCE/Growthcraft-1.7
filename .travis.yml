@@ -7,7 +7,9 @@ before_install:
  
 install: ./gradlew setupCIWorkspace -S
 
-script: ./gradlew build
+script: 
+ - ls
+ - ./gradlew build
 
 deploy:
   provider: releases
