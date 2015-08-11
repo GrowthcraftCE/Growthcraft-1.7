@@ -4,3 +4,5 @@ jdk:
 
 install: ./gradlew setupCIWorkspace -S
 script: ./gradlew build
+script: ls -la
+
