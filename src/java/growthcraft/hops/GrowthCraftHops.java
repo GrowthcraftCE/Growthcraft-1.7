@@ -70,6 +70,7 @@ public class GrowthCraftHops
 	public static int hops_vineDropChance;
 	public static int hopAle_speed;
 	public static int hopAle_speed2;
+	public static boolean config_genHopVineyard;
 
 	public static final int color = 13290055;
 
@@ -108,6 +109,11 @@ public class GrowthCraftHops
 			Property cfgE = config.get(Configuration.CATEGORY_GENERAL, "Hop Ale (hopped) brew time", v);
 			cfgE.comment = "[Higher -> Slower] Default : " + v;
 			this.hopAle_speed2 = cfgE.getInt(v);
+
+			boolean b = true;
+			Property genHopVineyard = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Hop Vineyards", v);
+			genHopVineyard.comment = "Controls hop vineyards spawning in villages Default : " + b;
+			this.config_genHopVineyard = genHopVineyard.getBoolean(b);
 		}
 		finally
 		{

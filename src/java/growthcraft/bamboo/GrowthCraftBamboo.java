@@ -91,6 +91,7 @@ public class GrowthCraftBamboo
 	public static int bambooWorldGen_density;
 	public static int bambooStalk_growth;
 	public static int bambooShoot_growth;
+	public static boolean config_genBambooYard;
 
 	@SidedProxy(clientSide="growthcraft.bamboo.ClientProxy", serverSide="growthcraft.bamboo.CommonProxy")
 	public static CommonProxy proxy;
@@ -144,6 +145,11 @@ public class GrowthCraftBamboo
 			Property cfgF = config.get(Configuration.CATEGORY_GENERAL, "Bamboo Shoot growth rate", v);
 			cfgF.comment = "[Higher -> Slower] Default : " + v;
 			this.bambooShoot_growth = cfgF.getInt(v);
+
+			boolean b = false;
+			Property genBambooYard = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Bamboo Yard", b);
+			genBambooYard.comment = "Controls bamboo yard spawning in villages Default : " + b;
+			this.config_genBambooYard = genBambooYard.getBoolean(b);
 		}
 		finally
 		{

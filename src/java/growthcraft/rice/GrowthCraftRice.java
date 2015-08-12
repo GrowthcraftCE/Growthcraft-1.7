@@ -64,10 +64,11 @@ public class GrowthCraftRice
 
 	public static Fluid[] riceSake_booze;
 
+	// these properties should be moved to a Config class
 	public static float riceBlock_growth;
 	public static int rice_grassDropChance;
 	public static int riceSake_speed;
-
+	public static boolean config_genRiceField;
 	public static final int color = 15331319;
 
 	// Constants
@@ -98,6 +99,11 @@ public class GrowthCraftRice
 			Property cfgC = config.get(Configuration.CATEGORY_GENERAL, "Rice Sake brew time", v);
 			cfgC.comment = "[Higher -> Slower] Default : " + v;
 			this.riceSake_speed = cfgC.getInt(v);
+
+			boolean b = false;
+			Property cfgD = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Rice Fields", b);
+			cfgD.comment = "Controls rice field spawning in villages Default : " + b;
+			this.config_genRiceField = cfgD.getBoolean(b);
 		}
 		finally
 		{

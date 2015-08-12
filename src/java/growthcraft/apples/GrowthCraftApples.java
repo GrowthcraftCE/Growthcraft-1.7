@@ -70,6 +70,7 @@ public class GrowthCraftApples
 	public static int appleLeaves_growth;
 	public static int appleSapling_growth;
 	public static int appleCider_speed;
+	public static boolean config_genAppleFarm;
 
 	public static final int color = 8737829;
 
@@ -112,6 +113,11 @@ public class GrowthCraftApples
 			Property cfgF = config.get(Configuration.CATEGORY_GENERAL, "Apple Cider press time", v);
 			cfgF.comment = "[Higher -> Slower] Default : " + v;
 			this.appleCider_speed = cfgF.getInt(v);
+
+			boolean b = false;
+			Property genAppleFarm = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Apple Farms", v);
+			genAppleFarm.comment = "Controls apple farms spawning in villages Default : " + b;
+			this.config_genAppleFarm = genAppleFarm.getBoolean(b);
 		}
 		finally
 		{
