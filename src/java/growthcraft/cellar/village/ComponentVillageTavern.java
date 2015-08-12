@@ -1,9 +1,9 @@
 package growthcraft.cellar.village;
 
-import growthcraft.cellar.GrowthCraftCellar;
-
 import java.util.List;
 import java.util.Random;
+
+import growthcraft.cellar.GrowthCraftCellar;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -46,7 +46,7 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 		int x, y, z;
 
 		this.fillWithBlocks(world, box, 1, 1, 1, 11, 4, 6, Blocks.air, Blocks.air, false);
-		this.fillWithBlocks(world, box, 0, 0, 0, 12, 0, 6, Blocks.cobblestone, Blocks.cobblestone, false);        
+		this.fillWithBlocks(world, box, 0, 0, 0, 12, 0, 6, Blocks.cobblestone, Blocks.cobblestone, false);
 		this.fillWithBlocks(world, box, 0, 6, 3, 12, 6, 3, Blocks.planks, Blocks.planks, false);
 
 		for (z = -1; z <= 1; ++z)

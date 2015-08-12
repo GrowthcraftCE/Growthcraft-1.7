@@ -6,15 +6,7 @@ import growthcraft.core.event.HarvestDropsEventCore;
 import growthcraft.core.event.TextureStitchEventCore;
 import growthcraft.core.item.ItemRope;
 import growthcraft.core.network.CommonProxy;
-import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraftforge.common.AchievementPage;
-import net.minecraftforge.common.MinecraftForge;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -25,9 +17,18 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = "Growthcraft",name = "Growthcraft",version = "2.1.0a")
-public class GrowthCraftCore 
+@Mod(modid = "Growthcraft",name = "Growthcraft",version = "@VERSION@")
+public class GrowthCraftCore
 {
 	@Instance("Growthcraft")
 	public static GrowthCraftCore instance;
@@ -109,18 +110,18 @@ public class GrowthCraftCore
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
 		//		MinecraftForge.EVENT_BUS.register(new PlayerSleepInBed());
 
-		/*String modid; 
+		/*String modid;
 
 		modid = "Thaumcraft";
 		if (Loader.isModLoaded(modid))
 		{
 			try
 			{
-				ThaumcraftApi.registerObjectTag(rope.itemID, -1, new AspectList().add(Aspect.BEAST, 1).add(Aspect.CLOTH, 1));			
+				ThaumcraftApi.registerObjectTag(rope.itemID, -1, new AspectList().add(Aspect.BEAST, 1).add(Aspect.CLOTH, 1));
 
 				FMLLog.info("[Growthcraft|Core] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Core] Thaumcraft not found. No integration made.", new Object[0]);
 			}

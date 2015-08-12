@@ -1,10 +1,12 @@
 package growthcraft.cellar.item;
 
+import java.util.List;
+
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,8 +20,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBoozeBucket extends Item
 {
@@ -31,7 +31,7 @@ public class ItemBoozeBucket extends Item
 	private IIcon contents;
 
 	private int color = 16777215;
-	public ItemBoozeBucket(Fluid[] booze) 
+	public ItemBoozeBucket(Fluid[] booze)
 	{
 		super();
 		this.setMaxStackSize(1);

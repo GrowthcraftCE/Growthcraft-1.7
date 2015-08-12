@@ -1,0 +1,16 @@
+tile.grc.appleBlock.name=Alma
+tile.grc.appleSapling.name=Almafa csemete
+tile.grc.appleLeaves.name=Almafa levél
+
+item.grc.appleSeeds.name=Alma csutka
+	
+fluid.grc.appleCider=Almabor
+fluid.grc.appleCider0=Almabor
+fluid.grc.appleCider1=Almabor
+fluid.grc.appleCider2=Almabor
+fluid.grc.appleCider3=Almabor
+
+fluid.grc.appleCider0.modifier=Fiatal
+fluid.grc.appleCider1.modifier=Erjesztett
+fluid.grc.appleCider2.modifier=Erjesztett, Tömény
+fluid.grc.appleCider3.modifier=Erjesztett, Finomított

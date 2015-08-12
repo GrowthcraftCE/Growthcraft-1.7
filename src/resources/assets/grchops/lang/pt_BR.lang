@@ -1,0 +1,18 @@
+
+tile.grc.hopVine.name=Vinha de Lúpulo
+
+item.grc.hops.name=Lúpulo
+item.grc.hopSeeds.name=Sementes de Lúpulo
+
+fluid.grc.hopAle=Cerveja (Tipo Ale)
+fluid.grc.hopAle0=Cerveja (Tipo Ale)
+fluid.grc.hopAle1=Cerveja (Tipo Ale)
+fluid.grc.hopAle2=Cerveja (Tipo Ale)
+fluid.grc.hopAle3=Cerveja (Tipo Ale)
+fluid.grc.hopAle4=Cerveja (Tipo Ale)
+
+fluid.grc.hopAle0.modifier=C/ Lúpulo, Fresca
+fluid.grc.hopAle1.modifier=C/ Lúpulo, Fermentada
+fluid.grc.hopAle2.modifier=C/ Lúpulo, Fermentada, Potente
+fluid.grc.hopAle3.modifier=C/ Lúpulo, Fermentada, Extendida
+fluid.grc.hopAle4.modifier=S/ Lúpulo, Fresca

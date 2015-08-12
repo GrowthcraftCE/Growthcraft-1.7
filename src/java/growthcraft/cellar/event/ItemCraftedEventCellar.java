@@ -1,14 +1,15 @@
 package growthcraft.cellar.event;
 
 import growthcraft.cellar.GrowthCraftCellar;
-import net.minecraft.item.Item;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
+import net.minecraft.item.Item;
 
 public class ItemCraftedEventCellar
 {
 	@SubscribeEvent
-	public void onItemCrafting(ItemCraftedEvent event) 
+	public void onItemCrafting(ItemCraftedEvent event)
 	{
 		if (event.crafting.getItem() == Item.getItemFromBlock(GrowthCraftCellar.fermentBarrel))
 		{

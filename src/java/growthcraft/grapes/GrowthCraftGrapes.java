@@ -1,5 +1,7 @@
 package growthcraft.grapes;
 
+import java.io.File;
+
 import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
@@ -7,9 +9,29 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucket;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.grapes.block.BlockGrapeBlock;
+import growthcraft.grapes.block.BlockGrapeLeaves;
+import growthcraft.grapes.block.BlockGrapeVine0;
+import growthcraft.grapes.block.BlockGrapeVine1;
+import growthcraft.grapes.event.BonemealEventGrapes;
+import growthcraft.grapes.item.ItemGrapeSeeds;
+import growthcraft.grapes.item.ItemGrapes;
+import growthcraft.grapes.village.VillageHandlerGrapes;
+import growthcraft.grapes.village.ComponentVillageGrapeVineyard;
 
-import java.io.File;
-
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -27,23 +49,9 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "Growthcraft|Grapes",name = "Growthcraft Grapes",version = "2.1.0",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
-
-public class GrowthCraftGrapes 
+@Mod(modid = "Growthcraft|Grapes",name = "Growthcraft Grapes",version = "@VERSION@",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
+public class GrowthCraftGrapes
 {
 	@Instance("Growthcraft|Grapes")
 	public static GrowthCraftGrapes instance;
@@ -182,7 +190,7 @@ public class GrowthCraftGrapes
 
 		//====================
 		// ORE DICTIONARY
-		//====================	
+		//====================
 		OreDictionary.registerOre("cropGrapes", grapes);
 		OreDictionary.registerOre("foodGrapes", grapes);
 		OreDictionary.registerOre("seedGrapes", grapeSeeds);
@@ -215,9 +223,9 @@ public class GrowthCraftGrapes
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event) 
+	public void onTextureStitchPost(TextureStitchEvent.Post event)
 	{
-		if (event.map.getTextureType() == 0) 
+		if (event.map.getTextureType() == 0)
 		{
 			for (int i = 0; i < grapeWine_booze.length; ++i)
 			{
@@ -258,11 +266,11 @@ public class GrowthCraftGrapes
 				{
 					BackpackManager.backpackItems[2].add(new ItemStack(grapes));
 					BackpackManager.backpackItems[2].add(new ItemStack(grapeSeeds));
-				}				
+				}
 
 				FMLLog.info("[Growthcraft|Grapes] Successfully integrated with Forestry.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Grapes] Forestry not found. No integration made.", new Object[0]);
 			}
@@ -293,7 +301,7 @@ public class GrowthCraftGrapes
 
 				FMLLog.info("[Growthcraft|Grapes] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Grapes] Thaumcraft not found. No integration made.", new Object[0]);
 			}

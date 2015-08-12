@@ -1,12 +1,14 @@
 package growthcraft.cellar.block;
 
+import java.util.Random;
+
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.render.RenderFruitPress;
+import growthcraft.cellar.renderer.RenderFruitPress;
 import growthcraft.cellar.tileentity.TileEntityFruitPress;
 import growthcraft.core.Utils;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -23,8 +25,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFruitPress extends BlockContainer
 {
@@ -32,7 +32,7 @@ public class BlockFruitPress extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockFruitPress() 
+	public BlockFruitPress()
 	{
 		super(Material.wood);
 		this.isBlockContainer = true;
@@ -218,7 +218,7 @@ public class BlockFruitPress extends BlockContainer
 
 	/************
 	 * CONDITIONS
-	 ************/	
+	 ************/
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
@@ -238,7 +238,7 @@ public class BlockFruitPress extends BlockContainer
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
@@ -266,7 +266,7 @@ public class BlockFruitPress extends BlockContainer
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random random, int par3)
 	{
@@ -281,7 +281,7 @@ public class BlockFruitPress extends BlockContainer
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -301,7 +301,7 @@ public class BlockFruitPress extends BlockContainer
 
 	/************
 	 * RENDERS
-	 ************/	
+	 ************/
 	@Override
 	public int getRenderType()
 	{

@@ -1,5 +1,9 @@
 package growthcraft.cellar;
 
+import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.block.BlockBrewKettle;
 import growthcraft.cellar.block.BlockFermentBarrel;
@@ -18,10 +22,16 @@ import growthcraft.cellar.village.ComponentVillageTavern;
 import growthcraft.cellar.village.VillageHandlerCellar;
 import growthcraft.core.AchievementPageGrowthcraft;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -35,19 +45,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 
-@Mod(modid = "Growthcraft|Cellar",name = "Growthcraft Cellar",version = "2.1.0a",dependencies = "required-after:Growthcraft")
-public class GrowthCraftCellar 
+@Mod(modid = "Growthcraft|Cellar",name = "Growthcraft Cellar",version = "@VERSION@",dependencies = "required-after:Growthcraft")
+public class GrowthCraftCellar
 {
 	@Instance("Growthcraft|Cellar")
 	public static GrowthCraftCellar instance;
@@ -118,7 +118,7 @@ public class GrowthCraftCellar
 		tab = new CreativeTabCellar("tabGrCCellar");
 		fermentBarrel.setCreativeTab(GrowthCraftCellar.tab);
 		fruitPress    = (new BlockFruitPress());
-		fruitPresser  = (new BlockFruitPresser());	
+		fruitPresser  = (new BlockFruitPresser());
 		brewKettle    = (new BlockBrewKettle());
 
 		chievItemDummy = (new ItemChievDummy());
@@ -156,12 +156,12 @@ public class GrowthCraftCellar
 		//====================
 		Potion[] potionTypes = null;
 
-		for (Field f : Potion.class.getDeclaredFields()) 
+		for (Field f : Potion.class.getDeclaredFields())
 		{
 			f.setAccessible(true);
-			try 
+			try
 			{
-				if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) 
+				if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a"))
 				{
 					Field modfield = Field.class.getDeclaredField("modifiers");
 					modfield.setAccessible(true);
@@ -173,7 +173,7 @@ public class GrowthCraftCellar
 					f.set(null, newPotionTypes);
 				}
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				System.err.println("Severe error, please report this to the mod author:");
 				System.err.println(e);
@@ -217,7 +217,7 @@ public class GrowthCraftCellar
 		MinecraftForge.EVENT_BUS.register(new ItemCraftedEventCellar());
 		MinecraftForge.EVENT_BUS.register(new LivingUpdateEventCellar());
 
-		/*String modid; 
+		/*String modid;
 
 		modid = "Thaumcraft";
 		if (Loader.isModLoaded(modid))
@@ -230,7 +230,7 @@ public class GrowthCraftCellar
 
 				FMLLog.info("[Growthcraft|Cellar] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Cellar] Thaumcraft not found. No integration made.", new Object[0]);
 			}

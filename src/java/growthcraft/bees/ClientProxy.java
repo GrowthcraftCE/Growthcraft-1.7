@@ -1,7 +1,10 @@
 package growthcraft.bees;
 
-import net.minecraftforge.common.MinecraftForge;
+import growthcraft.bees.renderer.RenderBeeBox;
+import growthcraft.bees.renderer.RenderBeeHive;
+
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {

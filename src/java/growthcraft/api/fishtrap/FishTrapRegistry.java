@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 
-public class FishTrapRegistry 
+public class FishTrapRegistry
 {
 	private static final FishTrapRegistry instance = new FishTrapRegistry();
 	public static final FishTrapRegistry instance()
@@ -25,17 +25,17 @@ public class FishTrapRegistry
 	 *
 	 * Example:
 	 * FishTrapRegistry.instance().addTrapTreasure(new FishTrapEntry(new ItemStack(Item.bow), 1).setDamage(0.25F).setEnchantable());
-	 * 
+	 *
 	 * new FishTrapEntry(new ItemStack(Item.bow), 1)
 	 * -- ItemStack represents the...ItemStack. k
 	 * -- 1 represents the weight of the ItemStack when randomly picked. Higher number means better chances being randomly picked.
-	 * 
+	 *
 	 * .setDamage(0.25F)
 	 * -- Float param is the damage factor of the ItemStack. It will serve as the base factor for the ItemStack's damage.
-	 * 
+	 *
 	 * .setEnchantable()
 	 * -- Call if the ItemStack can be enchanted.
-	 * 
+	 *
 	 * @param entry   - The entry to be added.
 	 */
 	public void addTrapFish(FishTrapEntry entry)

@@ -1,5 +1,7 @@
 package growthcraft.hops;
 
+import java.io.File;
+
 import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
@@ -7,9 +9,26 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucket;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.hops.block.BlockHops;
+import growthcraft.hops.event.BonemealEventHops;
+import growthcraft.hops.item.ItemHopSeeds;
+import growthcraft.hops.item.ItemHops;
+import growthcraft.hops.village.ComponentVillageHopVineyard;
+import growthcraft.hops.village.VillageHandlerHops;
 
-import java.io.File;
-
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -27,22 +46,9 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "Growthcraft|Hops",name = "Growthcraft Hops",version = "2.1.0",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
-public class GrowthCraftHops 
+@Mod(modid = "Growthcraft|Hops",name = "Growthcraft Hops",version = "@VERSION@",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
+public class GrowthCraftHops
 {
 	@Instance("Growthcraft|Hops")
 	public static GrowthCraftHops instance;
@@ -162,7 +168,7 @@ public class GrowthCraftHops
 
 		//====================
 		// ORE DICTIONARY
-		//====================	
+		//====================
 		OreDictionary.registerOre("cropHops", hops);
 		OreDictionary.registerOre("materialHops", hops);
 		OreDictionary.registerOre("seedHops", hopSeeds);
@@ -191,9 +197,9 @@ public class GrowthCraftHops
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event) 
+	public void onTextureStitchPost(TextureStitchEvent.Post event)
 	{
-		if (event.map.getTextureType() == 0) 
+		if (event.map.getTextureType() == 0)
 		{
 			for (int i = 0; i < hopAle_booze.length; ++i)
 			{
@@ -232,11 +238,11 @@ public class GrowthCraftHops
 				{
 					BackpackManager.backpackItems[2].add(new ItemStack(hopSeeds));
 					BackpackManager.backpackItems[2].add(new ItemStack(hops));
-				}				
+				}
 
 				FMLLog.info("[Growthcraft|Hops] Successfully integrated with Forestry.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Hops] Forestry not found. No integration made.", new Object[0]);
 			}
@@ -267,7 +273,7 @@ public class GrowthCraftHops
 
 				FMLLog.info("[Growthcraft|Hops] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Hops] Thaumcraft not found. No integration made.", new Object[0]);
 			}
@@ -278,7 +284,7 @@ public class GrowthCraftHops
 	{
 		RecipeManagers.fermenterManager.addRecipe(stack, value, 1.0F, FluidRegistry.getFluidStack(fluid, 1), FluidRegistry.getFluidStack("water", 1));
 
-		if (FluidRegistry.isFluidRegistered("juice")) 
+		if (FluidRegistry.isFluidRegistered("juice"))
 		{
 			RecipeManagers.fermenterManager.addRecipe(stack, value, 1.5F, FluidRegistry.getFluidStack(fluid, 1), FluidRegistry.getFluidStack("juice", 1));
 		}

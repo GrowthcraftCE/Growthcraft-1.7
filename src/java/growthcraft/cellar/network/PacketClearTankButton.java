@@ -2,13 +2,14 @@ package growthcraft.cellar.network;
 
 import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.tileentity.TileEntityFruitPress;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class PacketClearTankButton extends AbstractPacket 
+public class PacketClearTankButton extends AbstractPacket
 {
 	int x, y, z;
 
@@ -22,7 +23,7 @@ public class PacketClearTankButton extends AbstractPacket
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer) 
+	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
 	{
 		buffer.writeInt(x);
 		buffer.writeInt(y);
@@ -30,7 +31,7 @@ public class PacketClearTankButton extends AbstractPacket
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer) 
+	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
 	{
 		x = buffer.readInt();
 		y = buffer.readInt();
@@ -39,13 +40,13 @@ public class PacketClearTankButton extends AbstractPacket
 	}
 
 	@Override
-	public void handleClientSide(EntityPlayer player) 
+	public void handleClientSide(EntityPlayer player)
 	{
 
 	}
 
 	@Override
-	public void handleServerSide(EntityPlayer player) 
+	public void handleServerSide(EntityPlayer player)
 	{
 		World world = player.worldObj;
 		TileEntity te = world.getTileEntity(x, y, z);

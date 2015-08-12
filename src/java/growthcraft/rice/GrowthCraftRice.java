@@ -1,14 +1,34 @@
 package growthcraft.rice;
 
+import java.io.File;
+
 import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucket;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.rice.block.BlockPaddy;
+import growthcraft.rice.block.BlockRice;
+import growthcraft.rice.event.BonemealEventRice;
+import growthcraft.rice.event.PlayerInteractEventRice;
+import growthcraft.rice.item.ItemRice;
+import growthcraft.rice.item.ItemRiceBall;
+import growthcraft.rice.village.VillageHandlerRice;
 
-import java.io.File;
-
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,23 +43,9 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = "Growthcraft|Rice",name = "Growthcraft Rice",version = "2.1.0a",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
-
-public class GrowthCraftRice 
+@Mod(modid = "Growthcraft|Rice",name = "Growthcraft Rice",version = "@VERSION@",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
+public class GrowthCraftRice
 {
 	@Instance("Growthcraft|Rice")
 	public static GrowthCraftRice instance;
@@ -49,7 +55,7 @@ public class GrowthCraftRice
 
 	public static Block riceBlock;
 	public static Block paddyField;
-	public static Item rice;	
+	public static Item rice;
 	public static Item riceSake;
 	public static Item riceSake_bucket;
 	public static Item riceBall;
@@ -91,7 +97,7 @@ public class GrowthCraftRice
 			cfgC.comment = "[Higher -> Slower] Default : " + v;
 			this.riceSake_speed = cfgC.getInt(v);
 		}
-		finally 
+		finally
 		{
 			if (config.hasChanged()) { config.save(); }
 
@@ -143,7 +149,7 @@ public class GrowthCraftRice
 
 		//====================
 		// ORE DICTIONARY
-		//====================	
+		//====================
 		OreDictionary.registerOre("cropRice", rice);
 		OreDictionary.registerOre("seedRice", rice);
 		// For Pam's HarvestCraft
@@ -161,7 +167,7 @@ public class GrowthCraftRice
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();	
+		proxy.initRenders();
 
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.villagerBrewer_id, new VillageHandlerRice());
 
@@ -170,9 +176,9 @@ public class GrowthCraftRice
 
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event) 
+	public void onTextureStitchPost(TextureStitchEvent.Post event)
 	{
-		if (event.map.getTextureType() == 0) 
+		if (event.map.getTextureType() == 0)
 		{
 			for (int i = 0; i < riceSake_booze.length; ++i)
 			{
@@ -207,11 +213,11 @@ public class GrowthCraftRice
 				if (BackpackManager.backpackItems[2] != null)
 				{
 					BackpackManager.backpackItems[2].add(new ItemStack(rice));
-				}				
+				}
 
 				FMLLog.info("[Growthcraft|Rice] Successfully integrated with Forestry.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Rice] Forestry not found. No integration made.", new Object[0]);
 			}
@@ -241,7 +247,7 @@ public class GrowthCraftRice
 
 				FMLLog.info("[Growthcraft|Rice] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Rice] Thaumcraft not found. No integration made.", new Object[0]);
 			}

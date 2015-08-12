@@ -1,13 +1,15 @@
 package growthcraft.cellar.block;
 
+import java.util.Random;
+
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.render.RenderFermentBarrel;
+import growthcraft.cellar.renderer.RenderFermentBarrel;
 import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
 import growthcraft.core.Utils;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockPistonBase;
@@ -29,8 +31,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFermentBarrel extends BlockContainer
 {
@@ -38,7 +38,7 @@ public class BlockFermentBarrel extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockFermentBarrel() 
+	public BlockFermentBarrel()
 	{
 		super(Material.wood);
 		this.isBlockContainer = true;
@@ -84,12 +84,12 @@ public class BlockFermentBarrel extends BlockContainer
 			FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
 			FluidStack available = tank.drain(ForgeDirection.UNKNOWN, Integer.MAX_VALUE, false);
 
-			if (available != null) 
+			if (available != null)
 			{
 				ItemStack filled = FluidContainerRegistry.fillFluidContainer(available, held);
 				heldContents = FluidContainerRegistry.getFluidForFilledItem(filled);
 
-				if (heldContents != null) 
+				if (heldContents != null)
 				{
 					if (!player.inventory.addItemStackToInventory(filled))
 					{
@@ -243,7 +243,7 @@ public class BlockFermentBarrel extends BlockContainer
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -259,7 +259,7 @@ public class BlockFermentBarrel extends BlockContainer
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
@@ -274,7 +274,7 @@ public class BlockFermentBarrel extends BlockContainer
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -294,7 +294,7 @@ public class BlockFermentBarrel extends BlockContainer
 		if (meta == 0 || meta == 1)
 		{
 			return side == 0 || side == 1 ? this.tex[1] : this.tex[0];
-		}		
+		}
 		else if (meta == 2 || meta == 3)
 		{
 			return side == 2 || side == 3 ? this.tex[1] : this.tex[0];
@@ -308,7 +308,7 @@ public class BlockFermentBarrel extends BlockContainer
 
 	/************
 	 * RENDERS
-	 ************/	
+	 ************/
 	@Override
 	public int getRenderType()
 	{

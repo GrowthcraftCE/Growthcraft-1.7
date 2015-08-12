@@ -4,6 +4,38 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
+import growthcraft.bamboo.block.BlockBamboo;
+import growthcraft.bamboo.block.BlockBambooDoor;
+import growthcraft.bamboo.block.BlockBambooFence;
+import growthcraft.bamboo.block.BlockBambooFenceGate;
+import growthcraft.bamboo.block.BlockBambooLeaves;
+import growthcraft.bamboo.block.BlockBambooScaffold;
+import growthcraft.bamboo.block.BlockBambooShoot;
+import growthcraft.bamboo.block.BlockBambooSlab;
+import growthcraft.bamboo.block.BlockBambooStairs;
+import growthcraft.bamboo.block.BlockBambooStalk;
+import growthcraft.bamboo.block.BlockBambooWall;
+import growthcraft.bamboo.entity.EntityBambooRaft;
+import growthcraft.bamboo.event.BonemealEventBamboo;
+import growthcraft.bamboo.item.ItemBamboo;
+import growthcraft.bamboo.item.ItemBambooCoal;
+import growthcraft.bamboo.item.ItemBambooDoor;
+import growthcraft.bamboo.item.ItemBambooRaft;
+import growthcraft.bamboo.item.ItemBambooShoot;
+import growthcraft.bamboo.item.ItemBambooSlab;
+import growthcraft.bamboo.world.BiomeGenBamboo;
+import growthcraft.bamboo.world.WorldGenBamboo;
+import growthcraft.bamboo.world.WorldGeneratorBamboo;
+
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.init.Blocks;
@@ -20,19 +52,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "Growthcraft|Bamboo",name = "Growthcraft Bamboo",version = "2.1.1",dependencies = "required-after:Growthcraft")
-
-public class GrowthCraftBamboo 
+@Mod(modid = "Growthcraft|Bamboo",name = "Growthcraft Bamboo",version = "@VERSION@",dependencies = "required-after:Growthcraft")
+public class GrowthCraftBamboo
 {
 	@Instance("Growthcraft|Bamboo")
 	public static GrowthCraftBamboo instance;
@@ -215,7 +237,7 @@ public class GrowthCraftBamboo
 
 		//====================
 		// ORE DICTIONARY
-		//====================	
+		//====================
 		OreDictionary.registerOre("stickWood", bamboo);
 		OreDictionary.registerOre("woodStick", bamboo);
 		OreDictionary.registerOre("plankWood", bambooBlock);
@@ -333,7 +355,7 @@ public class GrowthCraftBamboo
 		if (Loader.isModLoaded(modid))
 		{
 			try
-			{			
+			{
 				if (RecipeManagers.fermenterManager != null)
 				{
 					addFermenterRecipe(new ItemStack(bambooShoot), 250, "biomass");
@@ -351,7 +373,7 @@ public class GrowthCraftBamboo
 
 				FMLLog.info("[Growthcraft|Bamboo] Successfully integrated with Forestry.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Bamboo] Forestry not found. No integration made.", new Object[0]);
 			}
@@ -361,7 +383,7 @@ public class GrowthCraftBamboo
 		if (Loader.isModLoaded(modid))
 		{
 			try
-			{	
+			{
 				ThaumcraftApi.registerObjectTag(bambooBlock.blockID, -1, new AspectList().add(Aspect.TREE, 1));
 				ThaumcraftApi.registerObjectTag(bambooShoot.blockID, -1, new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 1).add(Aspect.SEED, 1));
 				ThaumcraftApi.registerObjectTag(bambooLeaves.blockID, -1, new AspectList().add(Aspect.PLANT, 1));
@@ -377,7 +399,7 @@ public class GrowthCraftBamboo
 
 				FMLLog.info("[Growthcraft|Bamboo] Successfully integrated with Thaumcraft.", new Object[0]);
 			}
-			catch (Exception e) 
+			catch (Exception e)
 			{
 				FMLLog.info("[Growthcraft|Bamboo] Thaumcraft not found. No integration made.", new Object[0]);
 			}
@@ -388,7 +410,7 @@ public class GrowthCraftBamboo
 	{
 		RecipeManagers.fermenterManager.addRecipe(stack, value, 1.0F, FluidRegistry.getFluidStack(fluid, 1), FluidRegistry.getFluidStack("water", 1));
 
-		if (FluidRegistry.isFluidRegistered("juice")) 
+		if (FluidRegistry.isFluidRegistered("juice"))
 		{
 			RecipeManagers.fermenterManager.addRecipe(stack, value, 1.5F, FluidRegistry.getFluidStack(fluid, 1), FluidRegistry.getFluidStack("juice", 1));
 		}

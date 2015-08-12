@@ -1,11 +1,13 @@
 package growthcraft.cellar.block;
 
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.render.RenderFruitPresser;
-import growthcraft.cellar.tileentity.TileEntityFruitPresser;
-
 import java.util.Random;
 
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.renderer.RenderFruitPresser;
+import growthcraft.cellar.tileentity.TileEntityFruitPresser;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,15 +21,13 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFruitPresser extends BlockContainer
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockFruitPresser() 
+	public BlockFruitPresser()
 	{
 		super(Material.piston);
 		this.isBlockContainer = true;
@@ -107,7 +107,7 @@ public class BlockFruitPresser extends BlockContainer
 
 	/************
 	 * CONDITIONS
-	 ************/	
+	 ************/
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
@@ -133,7 +133,7 @@ public class BlockFruitPresser extends BlockContainer
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -149,7 +149,7 @@ public class BlockFruitPresser extends BlockContainer
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random random, int par3)
 	{
@@ -164,7 +164,7 @@ public class BlockFruitPresser extends BlockContainer
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -186,7 +186,7 @@ public class BlockFruitPresser extends BlockContainer
 
 	/************
 	 * RENDERS
-	 ************/	
+	 ************/
 	@Override
 	public int getRenderType()
 	{

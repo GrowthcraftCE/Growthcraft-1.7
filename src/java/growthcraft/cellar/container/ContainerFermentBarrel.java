@@ -1,6 +1,9 @@
 package growthcraft.cellar.container;
 
 import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -8,8 +11,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerFermentBarrel extends Container
 {
@@ -116,7 +117,7 @@ public class ContainerFermentBarrel extends Container
 	{
 		super.detectAndSendChanges();
 
-		for (int i = 0; i < crafters.size(); i++) 
+		for (int i = 0; i < crafters.size(); i++)
 		{
 			te.sendGUINetworkData(this, (ICrafting) crafters.get(i));
 		}

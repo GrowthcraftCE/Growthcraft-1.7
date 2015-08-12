@@ -1,0 +1,21 @@
+
+tile.grc.beeBox.name=Apiário
+tile.grc.beeHive.name=Colméia de Abelhas
+
+item.grc.honeyComb.empty.name=Favo Vazio
+item.grc.honeyComb.full.name=Favo de Mel
+item.grc.honeyJar.name=Mel
+item.grc.bee.name=Abelha
+
+container.grc.beeBox=Apiário
+	
+fluid.grc.honeyMead=Hidromel
+fluid.grc.honeyMead0=Hidromel
+fluid.grc.honeyMead1=Hidromel
+fluid.grc.honeyMead2=Hidromel
+fluid.grc.honeyMead3=Hidromel
+
+fluid.grc.honeyMead0.modifier=Fresco
+fluid.grc.honeyMead1.modifier=Fermentado
+fluid.grc.honeyMead2.modifier=Fermentado, Potente
+fluid.grc.honeyMead3.modifier=Fermentado, Extendido

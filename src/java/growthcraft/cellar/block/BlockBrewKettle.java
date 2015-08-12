@@ -1,13 +1,15 @@
 package growthcraft.cellar.block;
 
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.render.RenderBrewKettle;
-import growthcraft.cellar.tileentity.TileEntityBrewKettle;
-import growthcraft.core.Utils;
-
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.renderer.RenderBrewKettle;
+import growthcraft.cellar.tileentity.TileEntityBrewKettle;
+import growthcraft.core.Utils;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -26,8 +28,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBrewKettle extends BlockContainer
 {
@@ -35,7 +35,7 @@ public class BlockBrewKettle extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
-	public BlockBrewKettle() 
+	public BlockBrewKettle()
 	{
 		super(Material.iron);
 		this.isBlockContainer = true;
@@ -176,7 +176,7 @@ public class BlockBrewKettle extends BlockContainer
 
 	/************
 	 * STUFF
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
@@ -192,7 +192,7 @@ public class BlockBrewKettle extends BlockContainer
 
 	/************
 	 * DROPS
-	 ************/	
+	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random random, int par3)
 	{
@@ -207,7 +207,7 @@ public class BlockBrewKettle extends BlockContainer
 
 	/************
 	 * TEXTURES
-	 ************/	
+	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -229,7 +229,7 @@ public class BlockBrewKettle extends BlockContainer
 
 	/************
 	 * RENDERS
-	 ************/	
+	 ************/
 	@Override
 	public int getRenderType()
 	{

@@ -3,6 +3,7 @@ package growthcraft.cellar.tileentity;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.container.ContainerFruitPress;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
@@ -44,7 +45,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		}
 
 		if (!this.worldObj.isRemote)
-		{			
+		{
 			if (this.canPress())
 			{
 				++this.time;
@@ -148,7 +149,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 
 	/************
 	 * INVENTORY
-	 ************/	
+	 ************/
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
@@ -365,10 +366,10 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 
 	/************
 	 * PACKETS
-	 ************/	
-	public void getGUINetworkData(int id, int v) 
+	 ************/
+	public void getGUINetworkData(int id, int v)
 	{
-		switch (id) 
+		switch (id)
 		{
 		case 0:
 			time = v;
@@ -377,19 +378,19 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 			if (FluidRegistry.getFluid(v) == null) {
 				return;
 			}
-			if (tank.getFluid() == null) 
+			if (tank.getFluid() == null)
 			{
 				tank.setFluid(new FluidStack(v, 0));
-			} else 
+			} else
 			{
 				tank.setFluid(new FluidStack(v, tank.getFluid().amount));
 			}
 			break;
 		case 2:
-			if (tank.getFluid() == null) 
+			if (tank.getFluid() == null)
 			{
 				tank.setFluid(new FluidStack(FluidRegistry.WATER, v));
-			} else 
+			} else
 			{
 				tank.getFluid().amount = v;
 			}
@@ -397,7 +398,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		}
 	}
 
-	public void sendGUINetworkData(ContainerFruitPress container, ICrafting iCrafting) 
+	public void sendGUINetworkData(ContainerFruitPress container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, 0, time);
 		iCrafting.sendProgressBarUpdate(container, 1, tank.getFluid() != null ? tank.getFluid().getFluidID() : 0);
@@ -405,7 +406,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	}
 
 	/*@Override
-	public Packet getDescriptionPacket() 
+	public Packet getDescriptionPacket()
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
 		writeTankToNBT(nbt);
@@ -413,7 +414,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	}
 
 	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) 
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet)
 	{
 		readTankFromNBT(packet.data);
 		//this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
@@ -421,17 +422,17 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 
 	/************
 	 * FLUID
-	 ************/	
+	 ************/
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) 
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
 		return 0;
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) 
+	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
 	{
-		if (resource == null || !resource.isFluidEqual(this.tank.getFluid())) 
+		if (resource == null || !resource.isFluidEqual(this.tank.getFluid()))
 		{
 			return null;
 		}
@@ -440,7 +441,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) 
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
 		FluidStack d = this.tank.drain(maxDrain, doDrain);
 		//this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
@@ -448,19 +449,19 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) 
+	public boolean canFill(ForgeDirection from, Fluid fluid)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) 
+	public boolean canDrain(ForgeDirection from, Fluid fluid)
 	{
 		return true;
 	}
 
 	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) 
+	public FluidTankInfo[] getTankInfo(ForgeDirection from)
 	{
 		return new FluidTankInfo[] { this.tank.getInfo() };
 	}

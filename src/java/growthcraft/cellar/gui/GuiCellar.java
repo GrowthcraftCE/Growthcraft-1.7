@@ -7,13 +7,12 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.inventory.Container;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class GuiCellar extends GuiContainer
 {
-	public GuiCellar(Container container) 
+	public GuiCellar(Container container)
 	{
 		super(container);
 	}

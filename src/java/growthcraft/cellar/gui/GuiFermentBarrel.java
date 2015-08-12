@@ -1,13 +1,13 @@
 package growthcraft.cellar.gui;
 
+import java.util.ArrayList;
+
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.container.ContainerFermentBarrel;
 import growthcraft.cellar.network.PacketClearTankButton;
 import growthcraft.cellar.tileentity.CellarTank;
 import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
-
-import java.util.ArrayList;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -20,7 +20,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-
 import org.lwjgl.opengl.GL11;
 
 public class GuiFermentBarrel extends GuiCellar
@@ -137,7 +136,7 @@ public class GuiFermentBarrel extends GuiCellar
 				{
 					itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, new ItemStack(Items.redstone), w + 114, h + 32);
 				}
-			}  
+			}
 			itemRender.zLevel = 0.0F;
 		}
 	}
@@ -150,7 +149,7 @@ public class GuiFermentBarrel extends GuiCellar
 		IIcon icon = null;
 		Fluid fluid = fluidstack.getFluid();
 		int color = fluid.getColor();
-		if (fluid != null && fluid.getStillIcon() != null) 
+		if (fluid != null && fluid.getStillIcon() != null)
 		{
 			icon = fluid.getStillIcon();
 		}
@@ -164,7 +163,7 @@ public class GuiFermentBarrel extends GuiCellar
 	}
 
 	@Override
-	protected void drawToolTipAtMousePos(int par1, int par2) 
+	protected void drawToolTipAtMousePos(int par1, int par2)
 	{
 		int w = (this.width - this.xSize) / 2;
 		int h = (this.height - this.ySize) / 2;
