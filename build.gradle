@@ -53,11 +53,6 @@ sourceSets {
             srcDir 'src/java/growthcraft/api'
         }
     }
-    cellar {
-        java {
-            srcDir 'src/java/growthcraft/cellar'
-        }
-    }	
 }
 
 processResources {
@@ -81,7 +76,6 @@ dependencies {
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
     from sourceSets.api.allSource
-	from sourceSets.cellar.allSource
     classifier = 'sources'
 }
 
@@ -100,7 +94,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     from sourceSets.api.output
-	from sourceSets.cellar.output
     classifier = 'dev'
 }
 
@@ -109,14 +102,10 @@ task apiJar(type: Jar) {
     classifier = 'api'
 }
 
-task cellarJar(type: Jar) {
-    from sourceSets.cellar.output
-    classifier = 'cellar'
-}
-
 // add api classes to main package
 jar {
   from sourceSets.api.output
+    classifier = 'complete'
 }
 
 // make sure all of these happen when we run build
