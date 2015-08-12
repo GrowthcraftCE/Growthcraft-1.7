@@ -53,6 +53,11 @@ sourceSets {
             srcDir 'src/java/growthcraft/api'
         }
     }
+    cellar {
+        java {
+            srcDir 'src/java/growthcraft/cellar'
+        }
+    }	
 }
 
 processResources {
