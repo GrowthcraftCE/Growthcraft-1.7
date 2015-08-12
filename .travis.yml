@@ -12,10 +12,10 @@ script:
  - ls -la build/libs
  
 # Deploy the artifacts back to GitHub
-#deploy:
-#  provider: releases
-#  api_key: "42c1b36e0833ce72af6b908b54c8259645e36191"
-#  file: "build/libs"
-# skip_cleanup: true
-#  on:
-#    tags: true
+deploy:
+  provider: releases
+  api_key: "42c1b36e0833ce72af6b908b54c8259645e36191"
+  file: "build/libs/growthcraft-2.2.1-complete.jar"
+  skip_cleanup: true
+  on:
+    tags: true
