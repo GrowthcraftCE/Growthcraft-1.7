@@ -9,7 +9,8 @@ install: ./gradlew setupCIWorkspace -S
 
 script: 
  - ./gradlew build
-
+ - ls -la build/libs
+ 
 # Deploy the artifacts back to GitHub
 #deploy:
 #  provider: releases
