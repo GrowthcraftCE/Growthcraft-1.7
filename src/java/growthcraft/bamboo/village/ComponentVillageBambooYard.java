@@ -5,10 +5,11 @@ import java.util.Random;
 import java.util.HashMap;
 import java.lang.Math;
 
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.utils.SchemaToVillage;
-import growthcraft.core.utils.SchemaToVillage.BlockEntry;
 import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.utils.SchemaToVillage.BlockEntry;
+import growthcraft.core.utils.SchemaToVillage.IBlockEntries;
+import growthcraft.core.utils.SchemaToVillage;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -119,7 +120,8 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		}
 
 		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
-		HashMap<Character, BlockEntry> map = new HashMap<Character, BlockEntry>();
+		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
+
 		map.put('b', new BlockEntry(GrowthCraftBamboo.bambooShoot, 1));
 		map.put('D', new BlockEntry(GrowthCraftBamboo.bambooDoor, this.getMetadataWithOffset(GrowthCraftBamboo.bambooDoor, 2))); // okay folks, no BIG D jokes here
 		map.put('d', new BlockEntry(GrowthCraftBamboo.bambooDoor, this.getMetadataWithOffset(GrowthCraftBamboo.bambooDoor, 8 | 1))); // top of the door brought forward

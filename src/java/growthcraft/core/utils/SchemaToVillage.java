@@ -11,13 +11,19 @@ import net.minecraft.world.gen.structure.StructureVillagePieces;
 
 public class SchemaToVillage
 {
-	public static interface IVillage {
+	public static interface IVillage
+	{
 		public void placeBlockAtCurrentPosition(World world, Block block, int meta, int x, int y, int z, StructureBoundingBox box);
 	}
 
-	public static class BlockEntry {
-		public Block block;
-		public int meta;
+	public static interface IBlockEntries
+	{
+		public BlockEntry getBlockEntry(Random random);
+	}
+
+	public static class BlockEntry implements IBlockEntries {
+		private Block block;
+		private int meta;
 
 		public BlockEntry(Block block, int meta)
 		{
@@ -29,9 +35,41 @@ public class SchemaToVillage
 		{
 			this(block, 0);
 		}
+
+		public BlockEntry getBlockEntry(Random random)
+		{
+			return this;
+		}
+
+		public Block getBlock()
+		{
+			return this.block;
+		}
+
+		public int getMetadata()
+		{
+			return this.meta;
+		}
 	}
 
-	public static void drawSchema(IVillage village, World world, Random random, StructureBoundingBox box, String schema[][], Map<Character, BlockEntry> map)
+	public static class MultiBlockEntries implements IBlockEntries {
+		private BlockEntry entries[];
+
+		public MultiBlockEntries(BlockEntry blockEntries[])
+		{
+			this.entries = blockEntries;
+		}
+
+		public BlockEntry getBlockEntry(Random random)
+		{
+			if (this.entries.length == 0) {
+				return null;
+			}
+			return entries[random.nextInt(this.entries.length)];
+		}
+	}
+
+	public static void drawSchema(IVillage village, World world, Random random, StructureBoundingBox box, String schema[][], Map<Character, IBlockEntries> map)
 	{
 		for (int z = 0; z < schema.length; ++z)
 		{
@@ -43,10 +81,15 @@ public class SchemaToVillage
 				{
 					int meta = 0;
 					Block block = null;
-					BlockEntry entry = map.get(row.charAt(x));
-					if (entry != null) {
-						block = entry.block;
-						meta = entry.meta;
+					IBlockEntries entries = map.get(row.charAt(x));
+					if (entries != null)
+					{
+						BlockEntry entry = entries.getBlockEntry(random);
+						if (entry != null)
+						{
+							block = entry.getBlock();
+							meta = entry.getMetadata();
+						}
 					}
 					if (block != null) {
 						village.placeBlockAtCurrentPosition(world, block, meta, x, z, y, box);

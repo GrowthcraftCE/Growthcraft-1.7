@@ -5,10 +5,11 @@ import java.util.Random;
 import java.util.HashMap;
 import java.lang.Math;
 
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.utils.SchemaToVillage;
-import growthcraft.core.utils.SchemaToVillage.BlockEntry;
 import growthcraft.apples.GrowthCraftApples;
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.utils.SchemaToVillage.BlockEntry;
+import growthcraft.core.utils.SchemaToVillage.IBlockEntries;
+import growthcraft.core.utils.SchemaToVillage;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -102,7 +103,7 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 		}
 
 		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
-		HashMap<Character, BlockEntry> map = new HashMap<Character, BlockEntry>();
+		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 		map.put('x', new BlockEntry(Blocks.log, 0));
 		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));
 		map.put('|', new BlockEntry(Blocks.log, vert ? 8 : 4));

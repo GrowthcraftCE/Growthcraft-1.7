@@ -6,8 +6,9 @@ import java.util.HashMap;
 import java.lang.Math;
 
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.utils.SchemaToVillage;
 import growthcraft.core.utils.SchemaToVillage.BlockEntry;
+import growthcraft.core.utils.SchemaToVillage.IBlockEntries;
+import growthcraft.core.utils.SchemaToVillage;
 import growthcraft.rice.GrowthCraftRice;
 
 import net.minecraft.block.Block;
@@ -119,7 +120,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		}
 
 		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
-		HashMap<Character, BlockEntry> map = new HashMap<Character, BlockEntry>();
+		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));
 		map.put('f', new BlockEntry(Blocks.fence, 0));
 		map.put('g', new BlockEntry(Blocks.fence_gate, this.getMetadataWithOffset(Blocks.fence_gate, 0)));
