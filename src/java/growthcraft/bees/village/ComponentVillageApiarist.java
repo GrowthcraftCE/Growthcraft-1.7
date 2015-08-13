@@ -251,6 +251,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 
 		this.generateStructureChestContents(world, box, random, 1, 1, 2, apiaristChestContents, 3 + random.nextInt(6));
 
+		this.spawnVillagers(world, box, 3, 1, 3, 1);
 		return true;
 	}
 
