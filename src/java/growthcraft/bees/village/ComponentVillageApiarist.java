@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 
 public class ComponentVillageApiarist extends StructureVillagePieces.Village implements SchemaToVillage.IVillage
 {
-	// Design by Ar97x
+	// Design by Ar97x, modified by IceDragon (I made the tree levaves a 3x3x3 cube, makes it look neat)
 	static private final String apiaristSchema[][] = {
 		{
 			"         ",
@@ -148,10 +148,9 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		return null;
 	}
 
-	@Override
-	public void placeBlockAtCurrentPosition(World world, Block block, int meta, int x, int y, int z, StructureBoundingBox box)
+	public void placeBlockAtCurrentPositionPub(World world, Block block, int meta, int x, int y, int z, StructureBoundingBox box)
 	{
-		super.placeBlockAtCurrentPosition(world, block, meta, x, y, z, box);
+		placeBlockAtCurrentPosition(world, block, meta, x, y, z, box);
 	}
 
 	public boolean addComponentParts(World world, Random random, StructureBoundingBox box)

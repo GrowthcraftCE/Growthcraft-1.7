@@ -99,10 +99,9 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		return null;
 	}
 
-	@Override
-	public void placeBlockAtCurrentPosition(World world, Block block, int meta, int x, int y, int z, StructureBoundingBox box)
+	public void placeBlockAtCurrentPositionPub(World world, Block block, int meta, int x, int y, int z, StructureBoundingBox box)
 	{
-		super.placeBlockAtCurrentPosition(world, block, meta, x, y, z, box);
+		placeBlockAtCurrentPosition(world, block, meta, x, y, z, box);
 	}
 
 	public boolean addComponentParts(World world, Random random, StructureBoundingBox box)

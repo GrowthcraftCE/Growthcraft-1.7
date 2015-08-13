@@ -13,7 +13,7 @@ public class SchemaToVillage
 {
 	public static interface IVillage
 	{
-		public void placeBlockAtCurrentPosition(World world, Block block, int meta, int x, int y, int z, StructureBoundingBox box);
+		public void placeBlockAtCurrentPositionPub(World world, Block block, int meta, int x, int y, int z, StructureBoundingBox box);
 	}
 
 	public static interface IBlockEntries
@@ -92,7 +92,7 @@ public class SchemaToVillage
 						}
 					}
 					if (block != null) {
-						village.placeBlockAtCurrentPosition(world, block, meta, x, z, y, box);
+						village.placeBlockAtCurrentPositionPub(world, block, meta, x, z, y, box);
 					}
 				}
 			}
