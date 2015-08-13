@@ -115,7 +115,7 @@ public class GrowthCraftApples
 			this.appleCider_speed = cfgF.getInt(v);
 
 			boolean b = false;
-			Property genAppleFarm = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Apple Farms", v);
+			Property genAppleFarm = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Apple Farms", b);
 			genAppleFarm.comment = "Controls apple farms spawning in villages Default : " + b;
 			this.config_genAppleFarm = genAppleFarm.getBoolean(b);
 		}
