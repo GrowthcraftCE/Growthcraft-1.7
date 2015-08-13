@@ -26,6 +26,7 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		{
 			"           ",
 			"           ",
+			"           ",
 			"  p     p  ",
 			"     ~     ",
 			"    ~~~    ",
@@ -34,11 +35,11 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 			"     ~     ",
 			"  p     p  ",
 			"           ",
-			"           ",
 			"           "
 		},
 		{
-			"ppppppppppp",
+			"    pDp    ",
+			"ppppp ppppp",
 			"p         p",
 			"p t     t p",
 			"p   bsb   p",
@@ -48,36 +49,35 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 			"p   bsb   p",
 			"p t     t p",
 			"p         p",
-			"ppppp ppppp",
-			"    pDp    "
+			"ppppppppppp"
 		},
 		{
-			"W         W",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
+			"    WdW    ",
 			"W   W W   W",
-			"    WdW    "
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"W         W"
 		},
 		{
-			"WWWWWWWWWWW",
-			"W         W",
-			"W         W",
-			"W         W",
-			"W         W",
-			"W         W",
-			"W         W",
-			"W         W",
-			"W         W",
-			"W         W",
+			"    WWW    ",
 			"WWWWW WWWWW",
-			"    WWW    "
+			"W         W",
+			"W         W",
+			"W         W",
+			"W         W",
+			"W         W",
+			"W         W",
+			"W         W",
+			"W         W",
+			"W         W",
+			"WWWWWWWWWWW"
 		},
 	};
 

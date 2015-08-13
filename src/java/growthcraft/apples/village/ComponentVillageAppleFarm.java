@@ -24,7 +24,7 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 	// Design by Ar97x
 	static private final String appleFarmSchema[][] = {
 		{
-			"x---------x",
+			"x---x x---x",
 			"|         |",
 			"|         |",
 			"|  s   s  |",
@@ -34,10 +34,10 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 			"|  s   s  |",
 			"|         |",
 			"|         |",
-			"x---x x---x"
+			"x---------x"
 		},
 		{
-			"fffffffffff",
+			"fffffgfffff",
 			"f         f",
 			"f         f",
 			"f         f",
@@ -47,10 +47,10 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 			"f         f",
 			"f         f",
 			"f         f",
-			"fffffgfffff"
+			"fffffffffff"
 		},
 		{
-			"t         t",
+			"t   t t   t",
 			"           ",
 			"           ",
 			"           ",
@@ -60,7 +60,7 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 			"           ",
 			"           ",
 			"           ",
-			"t   t t   t"
+			"t         t"
 		},
 	};
 

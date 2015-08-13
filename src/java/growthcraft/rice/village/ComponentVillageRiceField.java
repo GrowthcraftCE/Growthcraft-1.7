@@ -24,60 +24,60 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 	// Design by Ar97x, with some minor modifications by IceDragon (very minor)
 	static private final String riceFieldSchema[][] = {
 		{
-			"x         x",
-			" x-------x ",
-			" |ppppppp| ",
-			" |p~~~~~p| ",
-			" |p~ppp~p| ",
-			" |p~ppp~p| ",
-			" |p~ppp~p| ",
-			" |p~~~~~p| ",
-			" |ppppppp| ",
-			" x-------x ",
+			"    sss    ",
 			"x   x|x   x",
-			"    sss    "
+			" x-------x ",
+			" |ppppppp| ",
+			" |p~~~~~p| ",
+			" |p~ppp~p| ",
+			" |p~ppp~p| ",
+			" |p~ppp~p| ",
+			" |p~~~~~p| ",
+			" |ppppppp| ",
+			" x-------x ",
+			"x         x"
 		},
 		{
-			"x---------x",
-			"|         |",
-			"| rrrrrrr |",
-			"| r     r |",
-			"| r rrr r |",
-			"| r rrr r |",
-			"| r rrr r |",
-			"| r     r |",
-			"| rrrrrrr |",
-			"|         |",
+			"           ",
 			"x---x x---x",
-			"           "
+			"|         |",
+			"| rrrrrrr |",
+			"| r     r |",
+			"| r rrr r |",
+			"| r rrr r |",
+			"| r rrr r |",
+			"| r     r |",
+			"| rrrrrrr |",
+			"|         |",
+			"x---------x"
 		},
 		{
-			"f         f",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
 			"           ",
 			"f   fgf   f",
-			"           "
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"f         f"
 		},
 		{
-			"t         t",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
-			"           ",
 			"           ",
 			"t   t t   t",
-			"           "
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"           ",
+			"t         t"
 		}
 	};
 
@@ -121,15 +121,15 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
 		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));
-		map.put('f', new BlockEntry(Blocks.fence, 0));
+		map.put('f', new BlockEntry(Blocks.fence));
 		map.put('g', new BlockEntry(Blocks.fence_gate, this.getMetadataWithOffset(Blocks.fence_gate, 0)));
 		map.put('p', new BlockEntry(GrowthCraftRice.paddyField, GrowthCraftRice.paddyFieldMax));
 		map.put('r', new BlockEntry(GrowthCraftRice.riceBlock, 6));
-		map.put('s', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2)));
-		map.put('t', new BlockEntry(Blocks.torch, 0));
-		map.put('x', new BlockEntry(Blocks.log, 0));
+		map.put('s', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3)));
+		map.put('t', new BlockEntry(Blocks.torch));
+		map.put('x', new BlockEntry(Blocks.log));
 		map.put('|', new BlockEntry(Blocks.log, vert ? 8 : 4));
-		map.put('~', new BlockEntry(Blocks.water, 0));
+		map.put('~', new BlockEntry(Blocks.water));
 
 		SchemaToVillage.drawSchema(this, world, random, box, riceFieldSchema, map);
 		return true;

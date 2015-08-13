@@ -26,98 +26,130 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 	// Design by Ar97x, modified by IceDragon (I made the tree levaves a 3x3x3 cube, makes it look neat)
 	static private final String apiaristSchema[][] = {
 		{
-			"         ",
-			"         ",
-			"ddddddd  ",
-			"ddddddd  ",
-			"ddddddd  ",
-			"ddddddd  ",
-			"ddcdddd  ",
-			"ccccccccc",
-			"xpppppppx",
-			"cpppppppc",
-			"cpppppppc",
-			"xpppppppx",
+			"     88  ",
 			"cxccxppcc",
-			"     22  "
-		},
-		{
+			"xpppppppx",
+			"cpppppppc",
+			"cpppppppc",
+			"xpppppppx",
+			"ccccccccc",
+			"ddcdddd  ",
+			"ddddddd  ",
+			"ddddddd  ",
+			"ddddddd  ",
+			"ddddddd  ",
 			"         ",
-			"         ",
-			"ffffxff  ",
-			"f,,,,,f  ",
-			"f,,,,,f  ",
-			"f,,,,,f  ",
-			"f, ,,,f  ",
-			"xx xxxxxx",
-			"x   - - x",
-			"Y   x-x Y",
-			"B       B",
-			"x       x",
-			"xxxxx  xx",
 			"         "
 		},
 		{
 			"         ",
-			"         ",
-			"    x    ",
-			"    H    ",
-			"t     t  ",
-			"         ",
-			"         ",
-			"cx pxggxc",
+			"xxxxx  xx",
 			"x       x",
-			"g    +  g",
-			"g       g",
-			"x       x",
+			"B       B",
+			"Y   x-x Y",
+			"x   - - x",
+			"xx xxxxxx",
+			"f, ,,,f  ",
+			"f,,,,,f  ",
+			"f,,,,,f  ",
+			"f,,,,,f  ",
+			"ffffxff  ",
+			"         ",
+			"         "
+		},
+		{
+			"         ",
 			"cxggx  xc",
+			"x       x",
+			"g       g",
+			"g    +  g",
+			"x       x",
+			"cx pxggxc",
+			"   +     ",
+			"         ",
+			"t     t  ",
+			"    H    ",
+			"    x    ",
+			"         ",
 			"         "
 		},
 		{ // the torches for this level are placed manually
-			"         ",
-			"   lll   ",
-			"   lxl   ",
-			"   lll   ",
-			"         ",
-			"         ",
 			"888888888",
 			"cxppxppxc",
-			"x   ___ x",
-			"Y   ___ Y",
-			"B       B",
 			"x       x",
+			"B       B",
+			"Y   ___ Y",
+			"x   ___ x",
 			"cxppxppxc",
-			"222222222"
+			"222222222",
+			"         ",
+			"  lllll  ",
+			"  lllll  ",
+			"  llxll  ",
+			"  lllll  ",
+			"  lllll  "
 		},
 		{
 			"         ",
-			"   lll   ",
-			"   lll   ",
-			"   lll   ",
-			"         ",
-			"         ",
-			"         ",
 			"888888888",
 			"xpppppppx",
-			"Bp     pB",
 			"Yp     pY",
+			"Bp     pB",
 			"xpppppppx",
 			"222222222",
+			"         ",
+			"         ",
+			"   lll   ",
+			"  lllll  ",
+			"  llxll  ",
+			"  lllll  ",
+			"   lll   "
+		},
+		{
+			"         ",
+			"         ",
+			"788888889",
+			"4YBYBYBY6",
+			"4BYBYBYB6",
+			"122222223",
+			"         ",
+			"         ",
+			"         ",
+			"         ",
+			"    l    ",
+			"   lxl   ",
+			"    l    ",
 			"         "
 		},
 		{
 			"         ",
-			"   lll   ",
-			"   lll   ",
-			"   lll   ",
+			"         ",
+			"		  ",
+			"		  ",
+			"		  ",
+			"		  ",
 			"         ",
 			"         ",
 			"         ",
 			"         ",
-			"788888889",
-			"4BYBYBYB6",
-			"4YBYBYBY6",
-			"122222223",
+			"    l    ",
+			"   lxl   ",
+			"    l    ",
+			"         "
+		},
+		{
+			"         ",
+			"         ",
+			"		  ",
+			"		  ",
+			"		  ",
+			"		  ",
+			"         ",
+			"         ",
+			"         ",
+			"         ",
+			"         ",
+			"    l    ",
 			"         ",
 			"         "
 		}
@@ -139,7 +171,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 
 	public static ComponentVillageApiarist buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 12, 7, 15, coordBaseMode);
+		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 12, 10, 15, coordBaseMode);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
 				return new ComponentVillageApiarist(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -164,7 +196,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 				return true;
 			}
 
-			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 7 - 1, 0);
+			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 10 - 1, 0);
 		}
 
 		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
@@ -208,16 +240,17 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 
 		SchemaToVillage.drawSchema(this, world, random, box, apiaristSchema, map);
 
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, 8, box);
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 3, 8, box);
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, 11, box);
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 3, 11, box);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, 2, box);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 3, 2, box);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, 5, box);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 3, 5, box);
 
-		this.placeDoorAtCurrentPosition(world, box, random, 2, 1, 7, this.getMetadataWithOffset(Blocks.wooden_door, 1));
-		this.placeDoorAtCurrentPosition(world, box, random, 5, 1, 12, this.getMetadataWithOffset(Blocks.wooden_door, 1));
-		this.placeDoorAtCurrentPosition(world, box, random, 6, 1, 12, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		this.placeDoorAtCurrentPosition(world, box, random, 2, 1, 6, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		this.placeDoorAtCurrentPosition(world, box, random, 5, 1, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		this.placeDoorAtCurrentPosition(world, box, random, 6, 1, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
 
-		this.generateStructureChestContents(world, box, random, 1, 1, 11, apiaristChestContents, 3 + random.nextInt(6));
+		this.generateStructureChestContents(world, box, random, 1, 1, 2, apiaristChestContents, 3 + random.nextInt(6));
+
 		return true;
 	}
 
