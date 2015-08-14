@@ -14,8 +14,8 @@ script:
 # Deploy the artifacts back to GitHub
 deploy:
   provider: releases
-  api_key: "ca3a06c1a8879fb27c97a1d36b6d058f33787bf4"
-  file: "build/libs/growthcraft-2.2.1-complete.jar"
+  api_key: $GITHUB_OAUTH
+  file: "build/libs/growthcraft-2.2.2-complete.jar"
   skip_cleanup: true
   on:
     tags: true
