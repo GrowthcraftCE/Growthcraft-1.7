@@ -14,29 +14,31 @@ import growthcraft.rice.event.BonemealEventRice;
 import growthcraft.rice.event.PlayerInteractEventRice;
 import growthcraft.rice.item.ItemRice;
 import growthcraft.rice.item.ItemRiceBall;
+import growthcraft.rice.village.ComponentVillageRiceField;
 import growthcraft.rice.village.VillageHandlerRice;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -62,10 +64,11 @@ public class GrowthCraftRice
 
 	public static Fluid[] riceSake_booze;
 
+	// these properties should be moved to a Config class
 	public static float riceBlock_growth;
 	public static int rice_grassDropChance;
 	public static int riceSake_speed;
-
+	public static boolean config_genRiceField;
 	public static final int color = 15331319;
 
 	// Constants
@@ -96,6 +99,11 @@ public class GrowthCraftRice
 			Property cfgC = config.get(Configuration.CATEGORY_GENERAL, "Rice Sake brew time", v);
 			cfgC.comment = "[Higher -> Slower] Default : " + v;
 			this.riceSake_speed = cfgC.getInt(v);
+
+			boolean b = false;
+			Property cfgD = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Rice Fields", b);
+			cfgD.comment = "Controls rice field spawning in villages Default : " + b;
+			this.config_genRiceField = cfgD.getBoolean(b);
 		}
 		finally
 		{
@@ -147,6 +155,12 @@ public class GrowthCraftRice
 
 		MinecraftForge.addGrassSeed(new ItemStack(rice), this.rice_grassDropChance);
 
+		try
+		{
+			MapGenStructureIO.func_143031_a(ComponentVillageRiceField.class, "grc.ricefield");
+		}
+		catch (Throwable e) {}
+
 		//====================
 		// ORE DICTIONARY
 		//====================
@@ -169,7 +183,9 @@ public class GrowthCraftRice
 	{
 		proxy.initRenders();
 
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.villagerBrewer_id, new VillageHandlerRice());
+		VillageHandlerRice handler = new VillageHandlerRice();
+		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.villagerBrewer_id, handler);
+		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 
 		FMLInterModComms.sendMessage("Thaumcraft", "harvestStandardCrop", new ItemStack(riceBlock, 1, 7));
 	}

@@ -45,11 +45,10 @@ public class ComponentVillageHopVineyard extends StructureVillagePieces.Village
 		}
 
 		this.fillWithBlocks(world, box, 0, 1, 0, 12, 5, 8, Blocks.air, Blocks.air, false);
-		this.fillWithBlocks(world, box, 0, 0, 0, 0, 0, 8, Blocks.planks, Blocks.planks, false);
-		//this.fillWithBlocks(world, box, 6, 0, 0, 6, 0, 8, Blocks.planks, Blocks.planks, false);
-		this.fillWithBlocks(world, box, 12, 0, 0, 12, 0, 8, Blocks.planks, Blocks.planks, false);
-		this.fillWithBlocks(world, box, 1, 0, 0, 11, 0, 0, Blocks.planks, Blocks.planks, false);
-		this.fillWithBlocks(world, box, 1, 0, 8, 11, 0, 8, Blocks.planks, Blocks.planks, false);
+		this.fillWithBlocks(world, box, 0, 0, 0, 0, 0, 8, Blocks.log, Blocks.log, false);
+		this.fillWithBlocks(world, box, 12, 0, 0, 12, 0, 8, Blocks.log, Blocks.log, false);
+		this.fillWithBlocks(world, box, 1, 0, 0, 11, 0, 0, Blocks.log, Blocks.log, false);
+		this.fillWithBlocks(world, box, 1, 0, 8, 11, 0, 8, Blocks.log, Blocks.log, false);
 		this.fillWithBlocks(world, box, 1, 0, 1, 11, 0, 7, Blocks.grass, Blocks.grass, false);
 		int loop, loop2;
 

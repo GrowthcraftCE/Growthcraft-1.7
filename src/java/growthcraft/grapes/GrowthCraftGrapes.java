@@ -76,6 +76,7 @@ public class GrowthCraftGrapes
 	public static int grapeLeaves_growth2;
 	public static int grape_vineDropChance;
 	public static int grapeWine_speed;
+	public static boolean config_genGrapeVineyard;
 
 	public static final int color = 5574180;
 
@@ -119,6 +120,11 @@ public class GrowthCraftGrapes
 			Property cfgF = config.get(Configuration.CATEGORY_GENERAL, "Grape Wine press time", v);
 			cfgF.comment = "[Higher -> Slower] Default : " + v;
 			this.grapeWine_speed = cfgF.getInt(v);
+
+			boolean b = true;
+			Property genGrapeVineyard = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Grape Vineyards", v);
+			genGrapeVineyard.comment = "Controls hop vineyards spawning in villages Default : " + b;
+			this.config_genGrapeVineyard = genGrapeVineyard.getBoolean(b);
 		}
 		finally
 		{
