@@ -105,6 +105,7 @@ task apiJar(type: Jar) {
 // add api classes to main package
 jar {
   from sourceSets.api.output
+    classifier = 'complete'
 }
 
 // make sure all of these happen when we run build
