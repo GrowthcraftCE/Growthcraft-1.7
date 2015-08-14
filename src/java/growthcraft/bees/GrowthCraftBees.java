@@ -12,7 +12,9 @@ import growthcraft.bees.gui.GuiHandlerBees;
 import growthcraft.bees.item.ItemBee;
 import growthcraft.bees.item.ItemHoneyComb;
 import growthcraft.bees.item.ItemHoneyJar;
+import growthcraft.bees.village.ComponentVillageApiarist;
 import growthcraft.bees.village.VillageHandlerBees;
+import growthcraft.bees.village.VillageHandlerBeesApiarist;
 import growthcraft.bees.world.WorldGeneratorBees;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
@@ -38,6 +40,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -58,6 +61,8 @@ public class GrowthCraftBees
 	@SidedProxy(clientSide="growthcraft.bees.ClientProxy", serverSide="growthcraft.bees.CommonProxy")
 	public static CommonProxy proxy;
 
+	public static int villagerApiarist_id;
+
 	public static Block beeBox;
 	public static Block beeHive;
 	public static Item honeyComb;
@@ -73,6 +78,7 @@ public class GrowthCraftBees
 	public static int beeWorldGen_density;
 	public static float beeBox_growth;
 	public static float beeBox_growth2;
+	public static boolean config_genApiarist;
 
 	public static final int color = 10707212;
 
@@ -86,6 +92,8 @@ public class GrowthCraftBees
 		try
 		{
 			config.load();
+
+			villagerApiarist_id = config.get("Villager", "Apiarist ID", 14).getInt();
 
 			Property cfgA = config.get(Configuration.CATEGORY_GENERAL, "Biomes (IDs) That Generate Beehives", "1;4;18;27;28;129;132;155;156");
 			cfgA.comment = "Separate the IDs with ';' (without the quote marks)";
@@ -109,6 +117,11 @@ public class GrowthCraftBees
 			Property cfgE = config.get(Configuration.CATEGORY_GENERAL, "Bee Box Honey and Bee spawn rate", f);
 			cfgE.comment = "[Higher -> Slower] Default : " + f;
 			this.beeBox_growth2 = (float) cfgE.getDouble(f);
+
+			boolean b = false;
+			Property genApiarist = config.get(Configuration.CATEGORY_GENERAL, "Spawn Village Apiarist Structure", b);
+			genApiarist.comment = "Should the apiarist structure be generated in villages? : " + b;
+			this.config_genApiarist = (boolean)genApiarist.getBoolean(b);
 		}
 		finally
 		{
@@ -174,6 +187,12 @@ public class GrowthCraftBees
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);
 
+		try
+		{
+			MapGenStructureIO.func_143031_a(ComponentVillageApiarist.class, "grc.apiarist");
+		}
+		catch (Throwable e) {}
+
 		//====================
 		// ORE DICTIONARY
 		//====================
@@ -204,7 +223,12 @@ public class GrowthCraftBees
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerBees());
 
+		VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
+		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.villagerBrewer_id, new VillageHandlerBees());
+		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftBees.villagerApiarist_id, handler);
+
+		proxy.registerVillagerSkin();
 	}
 
 	@SubscribeEvent

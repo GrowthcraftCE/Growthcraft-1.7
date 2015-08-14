@@ -32,7 +32,11 @@ public class VillageHandlerHops implements IVillageTradeHandler, IVillageCreatio
 	@Override
 	public PieceWeight getVillagePieceWeight(Random random, int i)
 	{
-		return new PieceWeight(ComponentVillageHopVineyard.class, 21, MathHelper.getRandomIntegerInRange(random, 0 + i, 1 + i));
+		int num = MathHelper.getRandomIntegerInRange(random, 0 + i, 1 + i);
+		if (!GrowthCraftHops.config_genHopVineyard)
+			num = 0;
+
+		return new PieceWeight(ComponentVillageHopVineyard.class, 21, num);
 	}
 
 	@Override

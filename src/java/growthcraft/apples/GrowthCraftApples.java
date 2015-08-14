@@ -9,6 +9,7 @@ import growthcraft.apples.block.BlockAppleLeaves;
 import growthcraft.apples.block.BlockAppleSapling;
 import growthcraft.apples.event.BonemealEventApples;
 import growthcraft.apples.item.ItemAppleSeeds;
+import growthcraft.apples.village.ComponentVillageAppleFarm;
 import growthcraft.apples.village.VillageHandlerApples;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
@@ -34,6 +35,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -68,6 +70,7 @@ public class GrowthCraftApples
 	public static int appleLeaves_growth;
 	public static int appleSapling_growth;
 	public static int appleCider_speed;
+	public static boolean config_genAppleFarm;
 
 	public static final int color = 8737829;
 
@@ -110,6 +113,11 @@ public class GrowthCraftApples
 			Property cfgF = config.get(Configuration.CATEGORY_GENERAL, "Apple Cider press time", v);
 			cfgF.comment = "[Higher -> Slower] Default : " + v;
 			this.appleCider_speed = cfgF.getInt(v);
+
+			boolean b = false;
+			Property genAppleFarm = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Apple Farms", b);
+			genAppleFarm.comment = "Controls apple farms spawning in villages Default : " + b;
+			this.config_genAppleFarm = genAppleFarm.getBoolean(b);
 		}
 		finally
 		{
@@ -158,6 +166,12 @@ public class GrowthCraftApples
 
 		CellarRegistry.instance().addPressing(Items.apple, appleCider_booze[0], this.appleCider_speed, 40, 0.3F);
 
+		try
+		{
+			MapGenStructureIO.func_143031_a(ComponentVillageAppleFarm.class, "grc.applefarm");
+		}
+		catch (Throwable e) {}
+
 		//====================
 		// ADDITIONAL PROPS.
 		//====================
@@ -186,9 +200,9 @@ public class GrowthCraftApples
 	public void load(FMLInitializationEvent event)
 	{
 		proxy.initRenders();
-
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.villagerBrewer_id, new VillageHandlerApples());
-
+		VillageHandlerApples handler = new VillageHandlerApples();
+		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.villagerBrewer_id, handler);
+		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 		FMLInterModComms.sendMessage("Thaumcraft", "harvestStandardCrop", new ItemStack(appleBlock, 1, 2));
 	}
 
