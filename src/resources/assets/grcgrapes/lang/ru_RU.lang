@@ -2,10 +2,10 @@
 tile.grc.grapeVine0.name=Виноградный ствол
 tile.grc.grapeVine1.name=Виноградный ствол
 tile.grc.grapeLeaves.name=Виноградная листва
-tile.grc.grapeBlock.name=Виноград
+tile.grc.grapeBlock.name=Обычный виноград
 
-item.grc.grapes.name=Виноград
-item.grc.grapeSeeds.name=Виноградные семена
+item.grc.grapes.name=Обычный виноград
+item.grc.grapeSeeds.name=Семена обычного винограда
 
 fluid.grc.grapeWine=Виноградное вино
 fluid.grc.grapeWine0=Виноградное вино
