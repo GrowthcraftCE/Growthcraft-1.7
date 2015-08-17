@@ -1,8 +1,8 @@
 ﻿
-tile.grc.paddyField.name=Рисовое поле
-tile.grc.riceBlock.name=Рис
+tile.grc.paddyField.name=Заливное поле
+tile.grc.riceBlock.name=Заливной рис
 
-item.grc.rice.name=Рис
+item.grc.rice.name=Зёрна заливного риса
 item.grc.riceBall.name=Онигири
 	
 fluid.grc.riceSake=Сакэ
