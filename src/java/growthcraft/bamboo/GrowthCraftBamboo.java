@@ -243,7 +243,7 @@ public class GrowthCraftBamboo
 		addRecipe(recipes, new ItemStack(bambooFence, 3), "AAA", "AAA", 'A', bamboo);
 		addRecipe(recipes, new ItemStack(bambooFenceGate,1), "ABA", "ABA", 'A', bamboo, 'B', bambooBlock);
 		addRecipe(recipes, new ItemStack(bambooScaffold, 16), "BBB", " A ", "A A", 'A', bamboo, 'B', bambooBlock);
-		GameRegistry.addRecipe(new ItemStack(Blocks.torch, 2), new Object[] {"A", "B", 'A', bambooCoal, 'B', Items.stick});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.torch, 2), new Object[] {"A", "B", 'A', bambooCoal, 'B', "stickWood"}));
 
 		try
 		{
