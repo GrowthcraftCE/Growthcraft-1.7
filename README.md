@@ -20,4 +20,4 @@ For any contributions to this project, please either create a branch or work fro
 
 ## License
 
-TODO
+Until we find the right license model, for now we are allowing for others to modify the code for personal/private use. Do not ditribute your own version of the plugin, instead, submit your changes as this is a community project. If you add this mod or set of mods to your mod-pack, simply post an issue with a list of mods that you have included in your pack. It is that simple. We want the list of your mods so that we can determine where to invest time in cross-mod compatibility.
