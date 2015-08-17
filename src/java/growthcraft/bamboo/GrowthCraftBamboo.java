@@ -56,6 +56,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(modid = "Growthcraft|Bamboo",name = "Growthcraft Bamboo",version = "@VERSION@",dependencies = "required-after:Growthcraft")
 public class GrowthCraftBamboo
