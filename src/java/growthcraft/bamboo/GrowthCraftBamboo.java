@@ -56,6 +56,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(modid = "Growthcraft|Bamboo",name = "Growthcraft Bamboo",version = "@VERSION@",dependencies = "required-after:Growthcraft")
 public class GrowthCraftBamboo
@@ -243,7 +244,7 @@ public class GrowthCraftBamboo
 		addRecipe(recipes, new ItemStack(bambooFence, 3), "AAA", "AAA", 'A', bamboo);
 		addRecipe(recipes, new ItemStack(bambooFenceGate,1), "ABA", "ABA", 'A', bamboo, 'B', bambooBlock);
 		addRecipe(recipes, new ItemStack(bambooScaffold, 16), "BBB", " A ", "A A", 'A', bamboo, 'B', bambooBlock);
-		GameRegistry.addRecipe(new ItemStack(Blocks.torch, 2), new Object[] {"A", "B", 'A', bambooCoal, 'B', Items.stick});
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.torch, 2), new Object[] {"A", "B", 'A', bambooCoal, 'B', "stickWood"}));
 
 		try
 		{

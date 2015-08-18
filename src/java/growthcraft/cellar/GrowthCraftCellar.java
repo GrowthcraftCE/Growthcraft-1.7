@@ -147,9 +147,9 @@ public class GrowthCraftCellar
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fruitPress, 1), "ABA", "CCC", "AAA", 'A', "plankWood", 'B', Blocks.piston,'C', Items.iron_ingot));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fruitPress, 1), "ABA", "CCC", "AAA", 'A', "plankWood", 'B', Blocks.piston,'C', "ingotIron"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(brewKettle, 1), "A", 'A', Items.cauldron));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fermentBarrel, 1), "AAA", "BBB", "AAA", 'B', "plankWood", 'A', Items.iron_ingot));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fermentBarrel, 1), "AAA", "BBB", "AAA", 'B', "plankWood", 'A', "ingotIron"));
 
 		//====================
 		// POTION
