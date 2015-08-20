@@ -1,6 +1,8 @@
 Growthcraft 
 ===========
 
+[![Join the chat at https://gitter.im/alatyami/Growthcraft-1.7](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/alatyami/Growthcraft-1.7?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Minecraft Version](http://img.shields.io/minecraft/1.7.10.png?color=green)](https://minecraft.net/)
 [![Growthcraft Version](http://img.shields.io/growthcraft/2.2.2.png?color=green)](https://github.com/alatyami/Growthcraft-1.7)
 [![Forge Version](http://img.shields.io/forge/10.13.4.1448.png?color=green)](http://files.minecraftforge.net/)
