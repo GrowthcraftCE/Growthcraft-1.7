@@ -147,6 +147,11 @@ public class BlockRice extends Block implements IPaddyCrop
 	/************
 	 * CONDITIONS
 	 ************/
+
+	/**
+	 * @param block - block to place on
+	 * @return can the rice be placed on this block?
+	 */
 	protected boolean canThisPlantGrowOnThisBlockID(Block block)
 	{
 		return block == GrowthCraftRice.paddyField;

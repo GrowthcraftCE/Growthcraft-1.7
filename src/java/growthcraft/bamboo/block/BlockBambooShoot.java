@@ -79,9 +79,14 @@ public class BlockBambooShoot extends BlockBush
 	/************
 	 * CONDITIONS
 	 ************/
-	protected boolean canThisPlantGrowOnThisBlockID(Block par1)
+
+	/**
+	 * @param block - Block to check
+	 * @return can the bamboo shoot grow on the block?
+	 */
+	protected boolean canThisPlantGrowOnThisBlockID(Block block)
 	{
-		return par1 == Blocks.grass || par1 == Blocks.dirt || par1 == Blocks.farmland;
+		return block == Blocks.grass || block == Blocks.dirt || block == Blocks.farmland;
 	}
 
 	@Override
