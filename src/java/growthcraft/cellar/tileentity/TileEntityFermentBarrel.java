@@ -370,6 +370,11 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	/************
 	 * PACKETS
 	 ************/
+
+	/**
+	 * @param id - data id
+	 * @param v - value
+	 */
 	public void getGUINetworkData(int id, int v)
 	{
 		switch (id)

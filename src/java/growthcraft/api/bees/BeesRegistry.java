@@ -56,7 +56,8 @@ public class BeesRegistry
 	}
 
 	/**
-	 * STUFF
+	 * @param itemstack - an itemstack to check
+	 * @return Does the provided itemstack contain any known bees?
 	 */
 	public boolean isItemBee(ItemStack itemstack)
 	{
