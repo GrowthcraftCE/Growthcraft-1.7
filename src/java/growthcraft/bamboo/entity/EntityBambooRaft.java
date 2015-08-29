@@ -570,14 +570,16 @@ public class EntityBambooRaft extends Entity
 
 	/**
 	 * Sets the damage taken from the last hit.
+	 * @param damage - Damage taken
 	 */
-	public void setDamageTaken(float par1)
+	public void setDamageTaken(float damage)
 	{
-		this.dataWatcher.updateObject(19, Float.valueOf(par1));
+		this.dataWatcher.updateObject(19, Float.valueOf(damage));
 	}
 
 	/**
 	 * Gets the damage taken from the last hit.
+	 * @return damage taken
 	 */
 	public float getDamageTaken()
 	{
@@ -586,14 +588,16 @@ public class EntityBambooRaft extends Entity
 
 	/**
 	 * Sets the time to count down from since the last time entity was hit.
+	 * @param time - since last hit
 	 */
-	public void setTimeSinceHit(int par1)
+	public void setTimeSinceHit(int time)
 	{
-		this.dataWatcher.updateObject(17, Integer.valueOf(par1));
+		this.dataWatcher.updateObject(17, Integer.valueOf(time));
 	}
 
 	/**
 	 * Gets the time since the last hit.
+	 * @return time since last hit
 	 */
 	public int getTimeSinceHit()
 	{
@@ -602,14 +606,16 @@ public class EntityBambooRaft extends Entity
 
 	/**
 	 * Sets the forward direction of the entity.
+	 * @param direction - forward direction
 	 */
-	public void setForwardDirection(int par1)
+	public void setForwardDirection(int direction)
 	{
-		this.dataWatcher.updateObject(18, Integer.valueOf(par1));
+		this.dataWatcher.updateObject(18, Integer.valueOf(direction));
 	}
 
 	/**
 	 * Gets the forward direction of the entity.
+	 * @return forward direction
 	 */
 	public int getForwardDirection()
 	{
@@ -618,10 +624,11 @@ public class EntityBambooRaft extends Entity
 
 	/**
 	 * true if no player in boat
+	 * @param state - is boat empty
 	 */
 	@SideOnly(Side.CLIENT)
-	public void setIsBoatEmpty(boolean par1)
+	public void setIsBoatEmpty(boolean state)
 	{
-		this.isBoatEmpty = par1;
+		this.isBoatEmpty = state;
 	}
 }
