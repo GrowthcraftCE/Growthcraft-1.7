@@ -17,6 +17,8 @@ public class BiomeGenBamboo extends BiomeGenBase
 
 	/**
 	 * Gets a WorldGen appropriate for this biome.
+	 * @param random - random generator
+	 * @return world generator - The world generator used for the Bamboo Biome
 	 */
 	public WorldGenerator getRandomWorldGenForTrees(Random random)
 	{

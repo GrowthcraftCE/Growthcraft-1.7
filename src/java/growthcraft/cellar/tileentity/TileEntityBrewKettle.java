@@ -393,6 +393,11 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	/************
 	 * PACKETS
 	 ************/
+
+	/**
+	 * @param id - data id
+	 * @param v - value
+	 */
 	public void getGUINetworkData(int id, int v)
 	{
 		switch (id)
