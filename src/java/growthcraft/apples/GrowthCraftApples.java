@@ -194,6 +194,12 @@ public class GrowthCraftApples
 		GameRegistry.addShapelessRecipe(new ItemStack(appleSeeds, 1), Items.apple);
 
 		MinecraftForge.EVENT_BUS.register(this);
+
+		//====================
+		// SMELTING
+		//====================
+		GameRegistry.registerFuelHandler(new AppleFuelHandler());
+
 	}
 
 	@EventHandler
