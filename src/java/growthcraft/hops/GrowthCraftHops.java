@@ -97,7 +97,7 @@ public class GrowthCraftHops
 
 			int v = 10;
 			Property cfgC = config.get(Configuration.CATEGORY_GENERAL, "Hops vine drop rarity", v);
-			cfgC.comment = "[Higher -> Rarer] Default : " + v;
+			cfgC.comment = "[Lower -> Rarer] Default : " + v;
 			this.hops_vineDropChance = cfgC.getInt(v);
 
 			v = 20;

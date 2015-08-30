@@ -113,7 +113,7 @@ public class GrowthCraftGrapes
 
 			v = 10;
 			Property cfgE = config.get(Configuration.CATEGORY_GENERAL, "Grape vine drop rarity", v);
-			cfgE.comment = "[Higher -> Rarer] Default : " + v;
+			cfgE.comment = "[Lower -> Rarer] Default : " + v;
 			this.grape_vineDropChance = cfgE.getInt(v);
 
 			v = 20;

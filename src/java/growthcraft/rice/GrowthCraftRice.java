@@ -92,7 +92,7 @@ public class GrowthCraftRice
 
 			int v = 3;
 			Property cfgB = config.get(Configuration.CATEGORY_GENERAL, "Rice grass drop rarity", v);
-			cfgB.comment = "[Higher -> Rarer] Default : " + v;
+			cfgB.comment = "[Lower -> Rarer] Default : " + v;
 			this.rice_grassDropChance = cfgB.getInt(v);
 
 			v = 20;
