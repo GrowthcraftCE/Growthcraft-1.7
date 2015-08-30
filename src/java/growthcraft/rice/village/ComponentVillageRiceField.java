@@ -90,7 +90,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 
 	public static ComponentVillageRiceField buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 13, 4, 13, coordBaseMode);
+		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 13, 6, 13, coordBaseMode);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
 				return new ComponentVillageRiceField(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -115,11 +115,17 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 				return true;
 			}
 
-			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 4 - 1, 0);
+			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 4, 0);
 		}
+
+		// clear entire bounding box
+		this.fillWithBlocks(world, box, 0, 0, 0, 13, 4, 13, Blocks.air, Blocks.air, false);
+		// replace the base layer with grass
+		this.fillWithBlocks(world, box, 0, 0, 0, 13, 0, 13, Blocks.grass, Blocks.grass, false);
 
 		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
 		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
+
 		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));
 		map.put('f', new BlockEntry(Blocks.fence));
 		map.put('g', new BlockEntry(Blocks.fence_gate, this.getMetadataWithOffset(Blocks.fence_gate, 0)));
@@ -131,7 +137,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		map.put('|', new BlockEntry(Blocks.log, vert ? 8 : 4));
 		map.put('~', new BlockEntry(Blocks.water));
 
-		SchemaToVillage.drawSchema(this, world, random, box, riceFieldSchema, map);
+		SchemaToVillage.drawSchema(this, world, random, box, riceFieldSchema, map, 0, 1, 0);
 		return true;
 	}
 }

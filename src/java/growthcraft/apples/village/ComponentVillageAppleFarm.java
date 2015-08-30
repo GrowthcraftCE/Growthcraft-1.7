@@ -73,7 +73,7 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 
 	public static ComponentVillageAppleFarm buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 13, 4, 13, coordBaseMode);
+		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 13, 9, 13, coordBaseMode);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
 				return new ComponentVillageAppleFarm(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -98,8 +98,13 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 				return true;
 			}
 
-			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 4 - 1, 0);
+			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 7, 0);
 		}
+
+		// clear entire bounding box
+		this.fillWithBlocks(world, box, 0, 0, 0, 13, 9, 13, Blocks.air, Blocks.air, false);
+		// replace the base layer with grass
+		this.fillWithBlocks(world, box, 0, 0, 0, 13, 0, 13, Blocks.grass, Blocks.grass, false);
 
 		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
 		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
@@ -115,7 +120,7 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 		// this should grow into an apple tree
 		map.put('s', new BlockEntry(GrowthCraftApples.appleSapling, 8));
 
-		SchemaToVillage.drawSchema(this, world, random, box, appleFarmSchema, map);
+		SchemaToVillage.drawSchema(this, world, random, box, appleFarmSchema, map, 0, 1, 0);
 		return true;
 	}
 }
