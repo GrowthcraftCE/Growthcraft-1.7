@@ -26,3 +26,4 @@ Until we find the right license model, for now we are allowing for others to mod
 ## Featured Mod-Packs
 
 [Compitum Magia](http://www.technicpack.net/modpack/compitum-magia.647447)
+[Ultimate HarvestCraft](http://www.technicpack.net/modpack/ultimate-harvestcraft.566785)
