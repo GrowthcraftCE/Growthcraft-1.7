@@ -7,7 +7,7 @@ Growthcraft
 [![Build Status](https://travis-ci.org/alatyami/Growthcraft-1.7.svg?branch=master)](https://travis-ci.org/alatyami/Growthcraft-1.7) [![Join the chat at https://gitter.im/alatyami/Growthcraft-1.7](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/alatyami/Growthcraft-1.7?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This is a community fork of the original GrowthCraft developed by Gwafu. The 
-original forum post can be found on the [Minecraft Forums mod page](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1286298-growthcraft-jul-15-2014-proper-1-7-10-release)
+original forum post can be found on the [Minecraft Forums mod page](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1286298-growthcraft-jul-15-2014-proper-1-7-10-release). We have created a [forum post](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10) for [Growthcraft CE](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10) for general discussions, announcements and feedback. Likewise this repository is on [Gitter](https://gitter.im/alatyami/Growthcraft-1.7) and we have an IRC channel on EsperNet (#growthcraft).
 
 ## Wiki
 
@@ -23,4 +23,5 @@ Until we find the right license model, for now we are allowing for others to mod
 
 ## Featured Mod-Packs
 
-[Compitum Magia](http://www.technicpack.net/modpack/compitum-magia.647447), [Ultimate HarvestCraft](http://www.technicpack.net/modpack/ultimate-harvestcraft.566785)
+- [Compitum Magia](http://www.technicpack.net/modpack/compitum-magia.647447), 
+- [Ultimate HarvestCraft](http://www.technicpack.net/modpack/ultimate-harvestcraft.566785)
