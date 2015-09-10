@@ -91,7 +91,8 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 
 	public static ComponentVillageBambooYard buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 13, 4, 13, coordBaseMode);
+		// the height of the structure is 15 blocks, since the maximum height of bamboo is 12~14 blocks (+1 for the water layer)
+		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 15, 12, coordBaseMode);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
 				return new ComponentVillageBambooYard(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -116,9 +117,13 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 				return true;
 			}
 
-			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 3 - 1, 0);
+			// the structure is 1 block lower due to the water layer
+			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 13, 0);
 		}
 
+		// clear entire bounding box
+		this.fillWithBlocks(world, box, 0, 0, 0, 11, 4, 12, Blocks.air, Blocks.air, false);
+		this.fillWithBlocks(world, box, 0, 0, 0, 11, 0, 12, Blocks.grass, Blocks.grass, false);
 		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
 		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 
@@ -132,6 +137,16 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		map.put('W', new BlockEntry(GrowthCraftBamboo.bambooWall, 0));
 
 		SchemaToVillage.drawSchema(this, world, random, box, bambooYardSchema, map);
+
+		for (int row = 0; row < 12; ++row)
+		{
+			for (int col = 0; col < 11; ++col)
+			{
+				this.clearCurrentPositionBlocksUpwards(world, col, 15, row, box);
+				this.func_151554_b(world, Blocks.dirt, 0, col, -1, row, box);
+			}
+		}
+
 		return true;
 	}
 }

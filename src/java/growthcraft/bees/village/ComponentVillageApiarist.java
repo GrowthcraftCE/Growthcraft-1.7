@@ -172,7 +172,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 
 	public static ComponentVillageApiarist buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 12, 10, 15, coordBaseMode);
+		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 9, 8, 14, coordBaseMode);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
 				return new ComponentVillageApiarist(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -197,13 +197,11 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 				return true;
 			}
 
-			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 8, 0);
+			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 7, 0);
 		}
 
 		// clear entire bounding box
-		this.fillWithBlocks(world, box, 0, 0, 0, 12, 9, 15, Blocks.air, Blocks.air, false);
-		// replace the base layer with grass
-		this.fillWithBlocks(world, box, 0, 0, 0, 12, 0, 15, Blocks.grass, Blocks.grass, false);
+		this.fillWithBlocks(world, box, 0, 0, 0, 9, 8, 14, Blocks.air, Blocks.air, false);
 
 		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
@@ -244,18 +242,27 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		map.put('H', new BlockEntry(GrowthCraftBees.beeHive, 0));
 		map.put('+', new BlockEntry(GrowthCraftBees.beeBox, this.getMetadataWithOffset(GrowthCraftBees.beeBox, 2)));
 
-		SchemaToVillage.drawSchema(this, world, random, box, apiaristSchema, map, 0, 1, 0);
+		SchemaToVillage.drawSchema(this, world, random, box, apiaristSchema, map, 0, 0, 0);
 
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 4, 2, box);
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 4, 2, box);
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 4, 5, box);
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 4, 5, box);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, 2, box);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 3, 2, box);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, 5, box);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 3, 5, box);
 
-		this.placeDoorAtCurrentPosition(world, box, random, 2, 2, 6, this.getMetadataWithOffset(Blocks.wooden_door, 1));
-		this.placeDoorAtCurrentPosition(world, box, random, 5, 2, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
-		this.placeDoorAtCurrentPosition(world, box, random, 6, 2, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		this.placeDoorAtCurrentPosition(world, box, random, 2, 1, 6, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		this.placeDoorAtCurrentPosition(world, box, random, 5, 1, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		this.placeDoorAtCurrentPosition(world, box, random, 6, 1, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
 
-		this.generateStructureChestContents(world, box, random, 1, 2, 2, apiaristChestContents, 3 + random.nextInt(6));
+		this.generateStructureChestContents(world, box, random, 1, 1, 2, apiaristChestContents, 3 + random.nextInt(6));
+
+		for (int row = 0; row < 14; ++row)
+		{
+			for (int col = 0; col < 9; ++col)
+			{
+				this.clearCurrentPositionBlocksUpwards(world, col, 8, row, box);
+				this.func_151554_b(world, Blocks.dirt, 0, col, -1, row, box);
+			}
+		}
 
 		this.spawnVillagers(world, box, 3, 2, 3, 1);
 		return true;
