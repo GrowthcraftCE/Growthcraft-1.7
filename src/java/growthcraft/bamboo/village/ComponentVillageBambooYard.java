@@ -81,6 +81,7 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		},
 	};
 
+	public ComponentVillageBambooYard() {} // DO NOT REMOVE
 	public ComponentVillageBambooYard(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
 	{
 		super(startPiece, par2);

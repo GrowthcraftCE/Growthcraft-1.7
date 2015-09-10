@@ -162,6 +162,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		new WeightedRandomChestContent(Item.getItemFromBlock(GrowthCraftBees.beeBox), 0, 1, 2, 5)
 	};
 
+	public ComponentVillageApiarist() {} // DO NOT REMOVE
 	public ComponentVillageApiarist(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
 	{
 		super(startPiece, par2);

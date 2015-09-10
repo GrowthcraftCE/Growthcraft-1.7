@@ -81,6 +81,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		}
 	};
 
+	public ComponentVillageRiceField() {} // DO NOT REMOVE
 	public ComponentVillageRiceField(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
 	{
 		super(startPiece, par2);

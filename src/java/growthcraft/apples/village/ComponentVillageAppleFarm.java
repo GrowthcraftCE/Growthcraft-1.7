@@ -64,6 +64,7 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 		},
 	};
 
+	public ComponentVillageAppleFarm() {} // DO NOT REMOVE
 	public ComponentVillageAppleFarm(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
 	{
 		super(startPiece, par2);
