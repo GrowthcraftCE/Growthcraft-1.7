@@ -139,7 +139,6 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		this.fillWithBlocks(world, box, 0, 0, 0, 11, 4, 12, Blocks.air, Blocks.air, false);
 		this.fillWithBlocks(world, box, 0, 0, 0, 11, 0, 12, Blocks.grass, Blocks.grass, false);
 
-		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
 		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 
 		map.put('D', new BlockEntry(GrowthCraftBamboo.bambooDoor, this.getMetadataWithOffset(GrowthCraftBamboo.bambooDoor, 2))); // okay folks, no BIG D jokes here
