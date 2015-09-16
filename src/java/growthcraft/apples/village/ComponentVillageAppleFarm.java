@@ -119,7 +119,7 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 		// clear entire bounding box
 		this.fillWithBlocks(world, box, 0, 0, 0, 11, 3, 11, Blocks.air, Blocks.air, false);
 
-		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
+		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 3);
 		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 		map.put('x', new BlockEntry(Blocks.log, 0));
 		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));

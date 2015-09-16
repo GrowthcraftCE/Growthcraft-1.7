@@ -122,7 +122,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		// clear entire bounding box
 		this.fillWithBlocks(world, box, 0, 0, 0, 11, 4, 12, Blocks.air, Blocks.air, false);
 
-		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
+		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 3);
 		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 
 		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));
