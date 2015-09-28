@@ -15,7 +15,7 @@ We are using the [Gamepedia FTB Wiki](http://ftb.gamepedia.com/GrowthCraft) for 
 
 ## Contributing 
 
-For any contributions to this project, please either create a branch or work from the development branch. 
+For any contributions to this project, please refer to our [Contributing to Growthcraft](https://github.com/alatyami/Growthcraft-1.7/wiki/Contributing-to-Growthcraft) wiki page and create a branch from our development branch. All pull requests need to be towards our development. Pull requests directly to the master branch will be closed without review.
 
 ## License
 
