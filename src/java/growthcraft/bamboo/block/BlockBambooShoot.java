@@ -2,6 +2,7 @@ package growthcraft.bamboo.block;
 
 import java.util.Random;
 
+import growthcraft.core.utils.BlockCheck;
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.world.WorldGenBamboo;
 
@@ -19,6 +20,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockBambooShoot extends BlockBush
 {
@@ -80,15 +84,6 @@ public class BlockBambooShoot extends BlockBush
 	 * CONDITIONS
 	 ************/
 
-	/**
-	 * @param block - Block to check
-	 * @return can the bamboo shoot grow on the block?
-	 */
-	protected boolean canThisPlantGrowOnThisBlockID(Block block)
-	{
-		return block == Blocks.grass || block == Blocks.dirt || block == Blocks.farmland;
-	}
-
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
@@ -98,7 +93,9 @@ public class BlockBambooShoot extends BlockBush
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) && this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
+		Block soil = world.getBlock(x, y - 1, z);
+		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) &&
+			BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
 	}
 
 	/************
