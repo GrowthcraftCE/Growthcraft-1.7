@@ -56,7 +56,7 @@ public class GrowthCraftHops
 	@SidedProxy(clientSide="growthcraft.hops.ClientProxy", serverSide="growthcraft.hops.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static Block hopVine;
+	public static BlockHops hopVine;
 
 	public static Item hops;
 	public static Item hopSeeds;

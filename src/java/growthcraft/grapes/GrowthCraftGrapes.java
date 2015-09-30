@@ -59,8 +59,8 @@ public class GrowthCraftGrapes
 	@SidedProxy(clientSide="growthcraft.grapes.ClientProxy", serverSide="growthcraft.grapes.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static Block grapeVine0;
-	public static Block grapeVine1;
+	public static BlockGrapeVine0 grapeVine0;
+	public static BlockGrapeVine1 grapeVine1;
 	public static Block grapeLeaves;
 	public static Block grapeBlock;
 	public static Item grapes;
