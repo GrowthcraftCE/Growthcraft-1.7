@@ -4,6 +4,7 @@ import java.util.Random;
 
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.core.integration.AppleCore;
+import growthcraft.core.utils.BlockCheck;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.Event.Result;
@@ -158,8 +159,7 @@ public class BlockGrapeVine0 extends Block implements IPlantable
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		Block soil = world.getBlock(x, y - 1, z);
-		return soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
+		return BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
 	}
 
 	/************

@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.block.IBlockRope;
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.AppleCore;
+import growthcraft.core.utils.BlockCheck;
 import growthcraft.hops.GrowthCraftHops;
 import growthcraft.hops.renderer.RenderHops;
 
@@ -30,6 +31,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockHops extends Block implements IBlockRope, IPlantable
 {
@@ -109,7 +111,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 
 	private float getGrowthRateLoop(World world, int x, int y, int z)
 	{
-		if (world.getBlock(x, y - 1, z) == Blocks.farmland)
+		if (BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this))
 		{
 			return getGrowthRate(world, x, y, z);
 		}
@@ -154,10 +156,10 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 		{
 			for (int i3 = z - 1; i3 <= z + 1; ++i3)
 			{
-				Block block = world.getBlock(l2, y - 1, i3);
+				Block block = BlockCheck.getFarmableBlock(world, l2, y - 1, i3, ForgeDirection.UP, this);
 				float f1 = 0.0F;
 
-				if (block != null && block == Blocks.farmland)
+				if (block != null)
 				{
 					f1 = 1.0F;
 
@@ -221,7 +223,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		if (world.getBlock(x, y - 1, z) == Blocks.farmland)
+		if (BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this))
 		{
 			return true;
 		}
@@ -249,7 +251,9 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 
 	private boolean isVineRoot(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z) == this && world.getBlock(x, y - 1, z) == Blocks.farmland && (world.getBlockMetadata(x, y, z) == 2 || world.getBlockMetadata(x, y, z) == 3);
+		return world.getBlock(x, y, z) == this &&
+			(BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this)) &&
+			(world.getBlockMetadata(x, y, z) == 2 || world.getBlockMetadata(x, y, z) == 3);
 	}
 
 	/************

@@ -5,6 +5,7 @@ import java.util.Random;
 
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.AppleCore;
+import growthcraft.core.utils.BlockCheck;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.renderer.RenderGrapeVine1;
 
@@ -174,8 +175,7 @@ public class BlockGrapeVine1 extends Block implements IPlantable
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		Block soil = world.getBlock(x, y - 1, z);
-		return (soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this)) || world.getBlock(x, y - 1, z) == this;
+		return (BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this) || (world.getBlock(x, y - 1, z) == this));
 	}
 
 	/************
