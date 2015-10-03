@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.api.bees.BeesRegistry;
-import growthcraft.bees.entity.TileEntityBeeBox;
+import growthcraft.bees.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.renderer.RenderBeeBox;
 import growthcraft.core.GrowthCraftCore;

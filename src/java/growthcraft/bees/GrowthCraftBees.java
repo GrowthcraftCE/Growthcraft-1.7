@@ -7,7 +7,7 @@ import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.bees.block.BlockBeeBox;
 import growthcraft.bees.block.BlockBeeHive;
-import growthcraft.bees.entity.TileEntityBeeBox;
+import growthcraft.bees.tileentity.TileEntityBeeBox;
 import growthcraft.bees.gui.GuiHandlerBees;
 import growthcraft.bees.item.ItemBee;
 import growthcraft.bees.item.ItemHoneyComb;

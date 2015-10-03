@@ -1,6 +1,6 @@
 package growthcraft.bees.block;
 
-import growthcraft.bees.entity.TileEntityBeeBox;
+import growthcraft.bees.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.inventory.SlotBee;
 import growthcraft.bees.inventory.SlotHoneyComb;
