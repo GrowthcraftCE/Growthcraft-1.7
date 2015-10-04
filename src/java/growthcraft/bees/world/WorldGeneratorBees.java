@@ -36,7 +36,7 @@ public class WorldGeneratorBees implements IWorldGenerator
 			int k = chunkZ * 16 + random.nextInt(16) + 8;
 
 			boolean flag = true;
-			if (GrowthCraftBees.instance.beeUseBiomeDict)
+			if (GrowthCraftBees.getConfig().useBiomeDict)
 			{
 				BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
 				flag = (BiomeDictionary.isBiomeOfType(biome, Type.FOREST) ||
@@ -45,7 +45,7 @@ public class WorldGeneratorBees implements IWorldGenerator
 			}
 			else
 			{
-				flag = Utils.isIDInList(world.getBiomeGenForCoords(i, k).biomeID, GrowthCraftBees.instance.beeBiomesList);
+				flag = Utils.isIDInList(world.getBiomeGenForCoords(i, k).biomeID, GrowthCraftBees.getConfig().beeBiomesList);
 			}
 
 			//int i = chunkX * 16 + random.nextInt(16);

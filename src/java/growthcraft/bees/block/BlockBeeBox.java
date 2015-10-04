@@ -36,10 +36,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockBeeBox extends BlockContainer
 {
-	//honeycomb
-	private final float growth = GrowthCraftBees.beeBox_growth;
-	//honey + bee + flower
-	private final float growth2 = GrowthCraftBees.beeBox_growth2;
+	private final float honeyCombSpawnRate = GrowthCraftBees.getConfig().beeBoxHoneyCombSpawnRate;
+	private final float honeySpawnRate = GrowthCraftBees.getConfig().beeBoxHoneySpawnRate;
+	private final float beeSpawnRate = GrowthCraftBees.getConfig().beeBoxBeeSpawnRate;
+	private final float flowerSpawnRate = GrowthCraftBees.getConfig().beeBoxFlowerSpawnRate;
 	// bonus
 	private final float bonus = 2.50F;
 
@@ -58,6 +58,14 @@ public class BlockBeeBox extends BlockContainer
 		this.setCreativeTab(GrowthCraftCore.tab);
 	}
 
+	// for lack of a better name, can this BeeBox do any work?
+	private boolean canDoWork(World world, int x, int y, int z)
+	{
+		if (world.canLightningStrikeAt(x, y + 1, z))
+			return false;
+		return world.getBlockLightValue(x, y + 1, z) >= 9;
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -67,116 +75,115 @@ public class BlockBeeBox extends BlockContainer
 		super.updateTick(world, x, y, z, random);
 		TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 
-		if (te != null)
-		{
-			if (!world.canLightningStrikeAt(x, y + 1, z) && world.getBlockLightValue(x, y + 1, z) >= 9);
-			{
-				if (te.countBees() != 0)
-				{
-					float f = this.getGrowthRate(world, x, y, z);
+		if (te == null)
+			return;
 
-					if (te.countCombs() < 27)
+		if (!canDoWork(world, x, y, z))
+			return;
+
+		if (!te.hasBees())
+			return;
+
+		float f = this.getGrowthRate(world, x, y, z);
+
+		if (te.countCombs() < 27)
+		{
+			if (te.hasMaxBees())
+			{
+				if (random.nextInt((int)(this.honeyCombSpawnRate / f) + 1) == 0)
+				{
+					te.spawnHoneyComb();
+				}
+			}
+			else
+			{
+				if (random.nextInt(5) == 0)
+				{
+					if (random.nextInt((int)(this.beeSpawnRate / f) + 1) == 0)
 					{
-						if (te.countBees() == 64)
-						{
-							if (random.nextInt((int)(this.growth / f) + 1) == 0)
-							{
-								te.spawnHoneyComb();
-							}
-						}
-						else
-						{
-							if (random.nextInt(5) == 0)
-							{
-								if (random.nextInt((int)(this.growth2 / f) + 1) == 0)
-								{
-									te.spawnBee();
-								}
-							}
-							else
-							{
-								if (random.nextInt((int)(this.growth / f) + 1) == 0)
-								{
-									te.spawnHoneyComb();
-								}
-							}
-						}
+						te.spawnBee();
+					}
+				}
+				else
+				{
+					if (random.nextInt((int)(this.honeyCombSpawnRate / f) + 1) == 0)
+					{
+						te.spawnHoneyComb();
+					}
+				}
+			}
+		}
+		else
+		{
+			if (random.nextInt((int)(this.honeySpawnRate / f) + 1) == 0)
+			{
+				if (te.hasMaxBees())
+				{
+					te.fillHoneyComb();
+				}
+				else
+				{
+					if (random.nextInt(5) == 0)
+					{
+						te.spawnBee();
 					}
 					else
 					{
-						if (random.nextInt((int)(this.growth2 / f) + 1) == 0)
-						{
-							if (te.countBees() == 64)
-							{
-								te.fillHoneyComb();
-							}
-							else
-							{
-								if (random.nextInt(5) == 0)
-								{
-									te.spawnBee();
-								}
-								else
-								{
-									te.fillHoneyComb();
-								}
-							}
-						}
+						te.fillHoneyComb();
 					}
+				}
+			}
+		}
 
-					f = 7.48F / (2.0F - (0.015625F * te.countBees()));
-					if (te.hasBonus())
+		f = 7.48F / (2.0F - (0.015625F * te.countBees()));
+		if (te.hasBonus())
+		{
+			f *= this.bonus;
+		}
+
+		if (random.nextInt((int)(this.flowerSpawnRate / f) + 1) == 0)
+		{
+			//System.out.println("spread initiated");
+
+			int checkSize = 5;
+			int i = x - ((checkSize - 1) / 2);
+			int k = z - ((checkSize - 1) / 2);
+			List<List> list = new ArrayList<List>();
+			Block flower;
+			int fm;
+
+			for (int loopx = 0; loopx < checkSize; loopx++)
+			{
+				for (int loopz = 0; loopz < checkSize; loopz++)
+				{
+					flower = world.getBlock(i + loopx, y, k + loopz);
+					fm = world.getBlockMetadata(i + loopx, y, k + loopz);
+					if (isBlockFlower(flower, fm))
 					{
-						f *= this.bonus;
-					}
-
-					if (random.nextInt((int)(this.growth2 / f) + 1) == 0)
-					{
-						//System.out.println("spread initiated");
-
-						int checkSize = 5;
-						int i = x - ((checkSize - 1) / 2);
-						int k = z - ((checkSize - 1) / 2);
-						List<List> list = new ArrayList<List>();
-						Block flower;
-						int fm;
-
-						for (int loopx = 0; loopx < checkSize; loopx++)
-						{
-							for (int loopz = 0; loopz < checkSize; loopz++)
-							{
-								flower = world.getBlock(i + loopx, y, k + loopz);
-								fm = world.getBlockMetadata(i + loopx, y, k + loopz);
-								if (isBlockFlower(flower, fm))
-								{
-									list.add(Arrays.asList(world.getBlock(i + loopx, y, k + loopz), world.getBlockMetadata(i + loopx, y, k + loopz)));
-								}
-							}
-						}
-
-						if (list.size() > 0)
-						{
-							int random_x = i + random.nextInt(checkSize);//MathHelper.getRandomIntegerInRange(random, i, i + (checkSize - 1));
-							int random_z = k + random.nextInt(checkSize);//MathHelper.getRandomIntegerInRange(random, k, k + (checkSize - 1));
-							List random_list = list.get(random.nextInt(list.size()));
-							Block block = (Block) random_list.get(0);
-							if (block != null)
-							{
-								if (block.canPlaceBlockAt(world, random_x, y, random_z))
-								{
-									world.setBlock(random_x, y, random_z, (Block)random_list.get(0), (Integer) random_list.get(1), 3);
-									//System.out.println("SUCCESS!" + " " + random_x + " " + random_z + " " + block);
-								}
-								//else
-								//{
-								//	System.out.println("FAIL!" + " " + random_x + " " + random_z + " " + block);
-								//}
-							}
-						}
+						list.add(Arrays.asList(world.getBlock(i + loopx, y, k + loopz), world.getBlockMetadata(i + loopx, y, k + loopz)));
 					}
 				}
 			}
 
+			if (list.size() > 0)
+			{
+				int random_x = i + random.nextInt(checkSize);//MathHelper.getRandomIntegerInRange(random, i, i + (checkSize - 1));
+				int random_z = k + random.nextInt(checkSize);//MathHelper.getRandomIntegerInRange(random, k, k + (checkSize - 1));
+				List random_list = list.get(random.nextInt(list.size()));
+				Block block = (Block) random_list.get(0);
+				if (block != null)
+				{
+					if (block.canPlaceBlockAt(world, random_x, y, random_z))
+					{
+						world.setBlock(random_x, y, random_z, (Block)random_list.get(0), (Integer) random_list.get(1), 3);
+						//System.out.println("SUCCESS!" + " " + random_x + " " + random_z + " " + block);
+					}
+					//else
+					//{
+					//	System.out.println("FAIL!" + " " + random_x + " " + random_z + " " + block);
+					//}
+				}
+			}
 		}
 	}
 
