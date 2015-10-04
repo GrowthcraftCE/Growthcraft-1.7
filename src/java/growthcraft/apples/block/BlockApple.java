@@ -26,10 +26,9 @@ import net.minecraft.world.World;
 
 public class BlockApple extends Block implements IGrowable, ICropDataProvider
 {
-	//Constants
-	private final int growth = GrowthCraftApples.appleBlock_growth;
-	private final boolean dropFlag = GrowthCraftApples.appleBlock_dropFlag;
-	private final int dropChance = GrowthCraftApples.appleBlock_dropChance;
+	private final int growth = GrowthCraftApples.getConfig().appleGrowthRate;
+	private final boolean dropRipeApples = GrowthCraftApples.getConfig().dropRipeApples;
+	private final int dropChance = GrowthCraftApples.getConfig().appleDropChance;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
@@ -106,7 +105,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 				{
 					incrementGrowth(world, x, y, z, meta);
 				}
-				else if (meta >= 2 && this.dropFlag && world.rand.nextInt(this.dropChance) == 0)
+				else if (meta >= 2 && this.dropRipeApples && world.rand.nextInt(this.dropChance) == 0)
 				{
 					this.dropBlockAsItem(world, x, y, z, new ItemStack(Items.apple));
 					world.setBlockToAir(x, y, z);
