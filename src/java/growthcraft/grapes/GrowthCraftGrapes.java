@@ -70,66 +70,17 @@ public class GrowthCraftGrapes
 
 	public static Fluid[] grapeWine_booze;
 
-	public static float grapeVine0_growth;
-	public static float grapeVine1_growth;
-	public static int grapeLeaves_growth;
-	public static int grapeLeaves_growth2;
-	public static int grape_vineDropChance;
-	public static int grapeWine_speed;
-	public static boolean config_genGrapeVineyard;
+	private growthcraft.grapes.Config config;
 
-	public static final int color = 5574180;
+	public static growthcraft.grapes.Config getConfig()
+	{
+		return instance.config;
+	}
 
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		//====================
-		// CONFIGURATION
-		//====================
-		Configuration config = new Configuration(new File(event.getModConfigurationDirectory(), "growthcraft/grapes.conf"));
-		try
-		{
-			config.load();
-
-			double f = 25.0D;
-			Property cfgA = config.get(Configuration.CATEGORY_GENERAL, "Grape Vine (Seedling) growth rate", f);
-			cfgA.comment = "[Higher -> Slower] Default : " + f;
-			this.grapeVine0_growth = (float) cfgA.getDouble(f);
-
-			f = 25.0D;
-			Property cfgB = config.get(Configuration.CATEGORY_GENERAL, "Grape Vine (Trunk) growth rate", f);
-			cfgB.comment = "[Higher -> Slower] Default : " + f;
-			this.grapeVine1_growth = (float) cfgB.getDouble(f);
-
-			int v = 2;
-			Property cfgC = config.get(Configuration.CATEGORY_GENERAL, "Grape Leaves growth rate", v);
-			cfgC.comment = "[Higher -> Slower] Default : " + v;
-			this.grapeLeaves_growth = cfgC.getInt(v);
-
-			v = 5;
-			Property cfgD = config.get(Configuration.CATEGORY_GENERAL, "Grape spawn rate", v);
-			cfgD.comment = "[Higher -> Slower] Default : " + v;
-			this.grapeLeaves_growth2 = cfgD.getInt(v);
-
-			v = 10;
-			Property cfgE = config.get(Configuration.CATEGORY_GENERAL, "Grape vine drop rarity", v);
-			cfgE.comment = "[Lower -> Rarer] Default : " + v;
-			this.grape_vineDropChance = cfgE.getInt(v);
-
-			v = 20;
-			Property cfgF = config.get(Configuration.CATEGORY_GENERAL, "Grape Wine press time", v);
-			cfgF.comment = "[Higher -> Slower] Default : " + v;
-			this.grapeWine_speed = cfgF.getInt(v);
-
-			boolean b = true;
-			Property genGrapeVineyard = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Grape Vineyards", v);
-			genGrapeVineyard.comment = "Controls hop vineyards spawning in villages Default : " + b;
-			this.config_genGrapeVineyard = genGrapeVineyard.getBoolean(b);
-		}
-		finally
-		{
-			if (config.hasChanged()) { config.save(); }
-		}
+		config = new growthcraft.grapes.Config(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
 
 		//====================
 		// INIT
@@ -148,10 +99,10 @@ public class GrowthCraftGrapes
 			grapeWine_booze[i]  = (new Booze("grc.grapeWine" + i));
 			FluidRegistry.registerFluid(grapeWine_booze[i]);
 		}
-		CellarRegistry.instance().createBooze(grapeWine_booze, this.color, "fluid.grc.grapeWine");
+		CellarRegistry.instance().createBooze(grapeWine_booze, config.grapeWineColor, "fluid.grc.grapeWine");
 
-		grapeWine        = (new ItemBoozeBottle(2, -0.3F, grapeWine_booze)).setColor(this.color).setTipsy(0.60F, 900).setPotionEffects(new int[] {Potion.resistance.id}, new int[] {3600});
-		grapeWine_bucket = (new ItemBoozeBucket(grapeWine_booze)).setColor(this.color);
+		grapeWine        = (new ItemBoozeBottle(2, -0.3F, grapeWine_booze)).setColor(config.grapeWineColor).setTipsy(0.60F, 900).setPotionEffects(new int[] {Potion.resistance.id}, new int[] {3600});
+		grapeWine_bucket = (new ItemBoozeBucket(grapeWine_booze)).setColor(config.grapeWineColor);
 
 		//====================
 		// REGISTRIES
@@ -176,9 +127,9 @@ public class GrowthCraftGrapes
 			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(grapeWine, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
 		}
 
-		CellarRegistry.instance().addPressing(grapes, grapeWine_booze[0], this.grapeWine_speed, 40, 0.3F);
+		CellarRegistry.instance().addPressing(grapes, grapeWine_booze[0], config.grapeWinePressingTime, 40, 0.3F);
 
-		CoreRegistry.instance().addVineDrop(new ItemStack(grapes), this.grape_vineDropChance);
+		CoreRegistry.instance().addVineDrop(new ItemStack(grapes), config.vineGrapeDropRarity);
 
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(new ItemStack(grapes), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(new ItemStack(grapes), 1, 2, 10));
@@ -221,8 +172,9 @@ public class GrowthCraftGrapes
 	{
 		proxy.initRenders();
 
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.villagerBrewer_id, new VillageHandlerGrapes());
-		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerGrapes());
+		VillageHandlerGrapes handler = new VillageHandlerGrapes();
+		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
+		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 
 		FMLInterModComms.sendMessage("Thaumcraft", "harvestStandardCrop", new ItemStack(grapeBlock));
 	}

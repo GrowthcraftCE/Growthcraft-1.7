@@ -32,7 +32,7 @@ public class VillageHandlerGrapes implements IVillageTradeHandler, IVillageCreat
 	public PieceWeight getVillagePieceWeight(Random random, int i)
 	{
 		int num = MathHelper.getRandomIntegerInRange(random, 0 + i, 1 + i);
-		if (!GrowthCraftGrapes.config_genGrapeVineyard)
+		if (!GrowthCraftGrapes.getConfig().generateGrapeVineyardStructure)
 			num = 0;
 
 		return new PieceWeight(ComponentVillageGrapeVineyard.class, 21, num);

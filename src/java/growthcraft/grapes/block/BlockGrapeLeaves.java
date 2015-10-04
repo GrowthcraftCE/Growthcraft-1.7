@@ -22,9 +22,8 @@ import net.minecraft.world.World;
 
 public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 {
-	//Constants
-	private final int growth = GrowthCraftGrapes.grapeLeaves_growth;
-	private final int growth2 = GrowthCraftGrapes.grapeLeaves_growth2;
+	private final int grapeLeavesGrowthRate = GrowthCraftGrapes.getConfig().grapeLeavesGrowthRate;
+	private final int grapeSpawnRate = GrowthCraftGrapes.getConfig().grapeSpawnRate;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
@@ -66,7 +65,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 		if (flag1 && flag2 && flag3 && flag)
 		{
-			if (world.isAirBlock(x, y - 1, z) && (world.rand.nextInt(this.growth2) == 0))
+			if (world.isAirBlock(x, y - 1, z) && (world.rand.nextInt(this.grapeSpawnRate) == 0))
 			{
 				world.setBlock(x, y - 1, z, GrowthCraftGrapes.grapeBlock);
 			}
@@ -77,7 +76,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 		}
 		else
 		{
-			if ((world.rand.nextInt(this.growth) == 0))
+			if ((world.rand.nextInt(this.grapeLeavesGrowthRate) == 0))
 			{
 				int r = random.nextInt(4);
 
