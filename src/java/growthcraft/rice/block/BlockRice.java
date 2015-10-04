@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 {
 	//Constants
-	private final float growth = GrowthCraftRice.riceBlock_growth;
+	private final float growth = GrowthCraftRice.getConfig().riceGrowthRate;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;

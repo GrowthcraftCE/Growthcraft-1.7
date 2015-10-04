@@ -128,7 +128,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));
 		map.put('f', new BlockEntry(Blocks.fence));
 		map.put('g', new BlockEntry(Blocks.fence_gate, this.getMetadataWithOffset(Blocks.fence_gate, 0)));
-		map.put('p', new BlockEntry(GrowthCraftRice.paddyField, GrowthCraftRice.paddyFieldMax));
+		map.put('p', new BlockEntry(GrowthCraftRice.paddyField, GrowthCraftRice.getConfig().paddyFieldMax));
 		map.put('r', new BlockEntry(GrowthCraftRice.riceBlock, 6));
 		map.put('s', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3)));
 		map.put('t', new BlockEntry(Blocks.torch));
