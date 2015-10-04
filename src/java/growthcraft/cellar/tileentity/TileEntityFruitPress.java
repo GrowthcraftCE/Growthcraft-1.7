@@ -1,6 +1,7 @@
 package growthcraft.cellar.tileentity;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.PressingRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.container.ContainerFruitPress;
 
@@ -50,7 +51,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 			{
 				++this.time;
 
-				if (this.time == CellarRegistry.instance().getPressingTime(this.invSlots[0]))
+				if (this.time == CellarRegistry.instance().pressing().getPressingTime(this.invSlots[0]))
 				{
 					this.time = 0;
 					this.pressItem();
@@ -81,22 +82,24 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 
 	private boolean canPress()
 	{
+		final PressingRegistry pressing = CellarRegistry.instance().pressing();
 		int m = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord + 1, this.zCoord);
 
 		if (m == 0 || m == 1) return false;
 		if (this.invSlots[0] == null) return false;
 		if (getFluidAmount() == this.maxCap) return false;
-		if (!CellarRegistry.instance().isPressingRecipe(this.invSlots[0])) return false;
+		if (!pressing.isPressingRecipe(this.invSlots[0])) return false;
 
 		if (isFluidTankEmpty()) return true;
 
-		FluidStack stack = CellarRegistry.instance().getPressingFluidStack(this.invSlots[0]);
+		FluidStack stack = pressing.getPressingFluidStack(this.invSlots[0]);
 		return stack.isFluidEqual(getFluidStack());
 	}
 
 	public void pressItem()
 	{
-		float f = CellarRegistry.instance().getPressingResidue(this.invSlots[0]);
+		final PressingRegistry pressing = CellarRegistry.instance().pressing();
+		float f = pressing.getPressingResidue(this.invSlots[0]);
 		this.pomace = this.pomace + f;
 		if (this.pomace >= 1.0F)
 		{
@@ -115,8 +118,8 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 			}
 		}
 
-		FluidStack fluidstack = CellarRegistry.instance().getPressingFluidStack(this.invSlots[0]);
-		fluidstack.amount  = CellarRegistry.instance().getPressingAmount(this.invSlots[0]);
+		FluidStack fluidstack = pressing.getPressingFluidStack(this.invSlots[0]);
+		fluidstack.amount  = pressing.getPressingAmount(this.invSlots[0]);
 		this.tank.fill(fluidstack, true);
 
 		--this.invSlots[0].stackSize;
@@ -141,7 +144,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	{
 		if (this.canPress())
 		{
-			return this.time * par1 / CellarRegistry.instance().getPressingTime(this.invSlots[0]);
+			return this.time * par1 / CellarRegistry.instance().pressing().getPressingTime(this.invSlots[0]);
 		}
 
 		return 0;

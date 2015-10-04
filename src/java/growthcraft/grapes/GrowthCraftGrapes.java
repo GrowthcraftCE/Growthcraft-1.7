@@ -99,7 +99,7 @@ public class GrowthCraftGrapes
 			grapeWine_booze[i]  = (new Booze("grc.grapeWine" + i));
 			FluidRegistry.registerFluid(grapeWine_booze[i]);
 		}
-		CellarRegistry.instance().createBooze(grapeWine_booze, config.grapeWineColor, "fluid.grc.grapeWine");
+		CellarRegistry.instance().booze().createBooze(grapeWine_booze, config.grapeWineColor, "fluid.grc.grapeWine");
 
 		grapeWine        = (new ItemBoozeBottle(2, -0.3F, grapeWine_booze)).setColor(config.grapeWineColor).setTipsy(0.60F, 900).setPotionEffects(new int[] {Potion.resistance.id}, new int[] {3600});
 		grapeWine_bucket = (new ItemBoozeBucket(grapeWine_booze)).setColor(config.grapeWineColor);
@@ -127,7 +127,7 @@ public class GrowthCraftGrapes
 			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(grapeWine, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
 		}
 
-		CellarRegistry.instance().addPressing(grapes, grapeWine_booze[0], config.grapeWinePressingTime, 40, 0.3F);
+		CellarRegistry.instance().pressing().addPressing(grapes, grapeWine_booze[0], config.grapeWinePressingTime, 40, 0.3F);
 
 		CoreRegistry.instance().addVineDrop(new ItemStack(grapes), config.vineGrapeDropRarity);
 

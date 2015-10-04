@@ -71,7 +71,7 @@ public class ContainerBrewKettle extends Container
 			}
 			else if (index != 0)
 			{
-				if (CellarRegistry.instance().isItemBrewingIngredient(stack))
+				if (CellarRegistry.instance().brew().isItemBrewingIngredient(stack))
 				{
 					if (!this.mergeItemStack(stack, 0, 1, false))
 					{

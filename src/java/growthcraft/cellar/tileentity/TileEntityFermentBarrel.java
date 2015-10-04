@@ -84,10 +84,10 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	{
 		if (this.invSlots[0] == null) return false;
 		if (isFluidTankEmpty()) return false;
-		if (!CellarRegistry.instance().isFluidBooze(getFluid()))return false;
+		if (!CellarRegistry.instance().booze().isFluidBooze(getFluid()))return false;
 
 		Item item = this.invSlots[0].getItem();
-		int meta = CellarRegistry.instance().getBoozeIndex(getFluid());
+		int meta = CellarRegistry.instance().booze().getBoozeIndex(getFluid());
 
 		if (meta == 3)
 		{
@@ -112,8 +112,8 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	public void fermentItem()
 	{
 		Item item = this.invSlots[0].getItem();
-		int meta = CellarRegistry.instance().getBoozeIndex(getFluid());
-		Fluid[] fluidArray = CellarRegistry.instance().getBoozeArray(getFluid());
+		int meta = CellarRegistry.instance().booze().getBoozeIndex(getFluid());
+		Fluid[] fluidArray = CellarRegistry.instance().booze().getBoozeArray(getFluid());
 
 		if (meta == 0 && item == Items.nether_wart)
 		{
@@ -151,7 +151,7 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	public int getTime(){return this.time;}
 	public int getTimeMax(){return this.timemax;}
 
-	public int getBoozeMeta(){ return CellarRegistry.instance().getBoozeIndex(this.getFluid());}
+	public int getBoozeMeta(){ return CellarRegistry.instance().booze().getBoozeIndex(this.getFluid());}
 
 	/************
 	 * INVENTORY

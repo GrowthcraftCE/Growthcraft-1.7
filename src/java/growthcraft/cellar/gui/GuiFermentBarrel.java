@@ -174,17 +174,11 @@ public class GuiFermentBarrel extends GuiCellar
 
 			if (this.te.isFluidTankFilled())
 			{
-				if (CellarRegistry.instance().isFluidBooze(this.te.getFluid()))
+				if (CellarRegistry.instance().booze().isFluidBooze(this.te.getFluid()))
 				{
 					toolTip.add(this.te.getFluid().getLocalizedName());
-					if (CellarRegistry.instance().isAlternateBooze(this.te.getFluid()))
-					{
-						toolTip.add(EnumChatFormatting.GRAY + I18n.format(CellarRegistry.instance().getAlternateBooze(this.te.getFluid()).getUnlocalizedName() + ".modifier"));
-					}
-					else
-					{
-						toolTip.add(EnumChatFormatting.GRAY + I18n.format(this.te.getFluid().getUnlocalizedName() + ".modifier"));
-					}
+					Fluid fluid = CellarRegistry.instance().booze().maybeAlternateBooze(this.te.getFluid());
+					toolTip.add(EnumChatFormatting.GRAY + I18n.format(fluid.getUnlocalizedName() + ".modifier"));
 					if (this.te.getBoozeMeta() > 3)
 					{
 						toolTip.add("");
