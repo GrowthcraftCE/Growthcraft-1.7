@@ -29,7 +29,7 @@ public class BlockBambooStalk extends Block
 	public static IIcon[] tex;
 
 	//constants
-	private final int growth = GrowthCraftBamboo.bambooStalk_growth;
+	private final int growth = GrowthCraftBamboo.getConfig().bambooStalkGrowthRate;
 
 	public BlockBambooStalk()
 	{
