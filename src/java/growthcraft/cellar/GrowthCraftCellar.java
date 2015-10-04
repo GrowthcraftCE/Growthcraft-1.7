@@ -66,12 +66,6 @@ public class GrowthCraftCellar
 
 	public static Potion potionTipsy;
 
-	///////IDS////////
-
-	public static int potionTipsy_id;
-
-	public static int villagerBrewer_id;
-
 	// Constants
 	public static ItemStack residue = new ItemStack(Items.dye, 1, 15);
 	public static final int BOTTLE_VOLUME = 333;
@@ -84,41 +78,25 @@ public class GrowthCraftCellar
 	public static Achievement fermentBooze;
 	public static Achievement getDrunk;
 
-	public static int ferment_speed;
-
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
+
+	private growthcraft.cellar.Config config;
+
+	public static growthcraft.cellar.Config getConfig()
+	{
+		return instance.config;
+	}
 
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		//====================
-		// CONFIGURATION
-		//====================
-		Configuration config = new Configuration(new File(event.getModConfigurationDirectory(), "growthcraft/cellar.conf"));
-		try
-		{
-			config.load();
-
-			potionTipsy_id = config.get("Potions", "Potion Tipsy ID", 50).getInt();
-
-			villagerBrewer_id = config.get("Villager", "Brewer ID", 10).getInt();
-
-			int v = 24000;
-			Property cfgA = config.get(Configuration.CATEGORY_GENERAL, "Ferment Barrel fermenting time", v);
-			cfgA.comment = "[Higher -> Slower] Default : " + v;
-			this.ferment_speed = cfgA.getInt(v);
-		}
-		finally
-		{
-			if (config.hasChanged()) { config.save(); }
-		}
+		config = new growthcraft.cellar.Config(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
 
 		//====================
 		// INIT
 		//====================
-		fermentBarrel = (new BlockFermentBarrel());
 		tab = new CreativeTabCellar("tabGrCCellar");
-		fermentBarrel.setCreativeTab(GrowthCraftCellar.tab);
+		fermentBarrel = (new BlockFermentBarrel());
 		fruitPress    = (new BlockFruitPress());
 		fruitPresser  = (new BlockFruitPresser());
 		brewKettle    = (new BlockBrewKettle());
@@ -182,7 +160,7 @@ public class GrowthCraftCellar
 			}
 		}
 
-		potionTipsy = (new PotionCellar(potionTipsy_id, false, 0)).setIconIndex(0, 0).setPotionName("grc.potion.tipsy");
+		potionTipsy = (new PotionCellar(config.potionTipsyID, false, 0)).setIconIndex(0, 0).setPotionName("grc.potion.tipsy");
 
 		//====================
 		// ACHIEVEMENTS

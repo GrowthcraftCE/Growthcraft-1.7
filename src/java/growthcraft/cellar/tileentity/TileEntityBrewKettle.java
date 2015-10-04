@@ -26,9 +26,10 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class TileEntityBrewKettle extends TileEntity implements ISidedInventory, IFluidHandler
 {
 	// Constants
-	private ItemStack[] invSlots   = new ItemStack[2];
-	private int[]       maxCap     = new int[] {1000, 1000};
-	private CellarTank[]   tank    = new CellarTank[] {new CellarTank(this.maxCap[0], this), new CellarTank(this.maxCap[1], this)};
+	private ItemStack[] invSlots = new ItemStack[2];
+	private int maxCap = GrowthCraftCellar.getConfig().brewKettleMaxCap;
+	private int[] maxCaps = new int[] {maxCap, maxCap};
+	private CellarTank[] tank = new CellarTank[] {new CellarTank(this.maxCaps[0], this), new CellarTank(this.maxCaps[1], this)};
 
 	// Other Vars.
 	private String  name;
@@ -320,7 +321,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	{
 		for (int i = 0; i < this.tank.length; i++)
 		{
-			this.tank[i] = new CellarTank(this.maxCap[i], this);
+			this.tank[i] = new CellarTank(this.maxCaps[i], this);
 			if (nbt.hasKey("Tank" + i))
 			{
 				this.tank[i].readFromNBT(nbt.getCompoundTag("Tank" + i));
@@ -534,7 +535,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	public int getFluidAmountScaled(int par1, int slot)
 	{
-		return this.getFluidAmount(slot) * par1 / this.maxCap[slot];
+		return this.getFluidAmount(slot) * par1 / this.maxCaps[slot];
 	}
 
 	public boolean isFluidTankFilled(int slot)

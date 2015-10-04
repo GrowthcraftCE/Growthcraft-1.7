@@ -45,6 +45,7 @@ public class BlockFermentBarrel extends BlockContainer implements ICellarFluidHa
 		this.setHardness(2.5F);
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("grc.fermentBarrel");
+		this.setCreativeTab(GrowthCraftCellar.tab);
 	}
 
 	/************

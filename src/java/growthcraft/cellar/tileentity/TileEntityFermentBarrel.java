@@ -24,9 +24,9 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 {
 	// Constants
 	private ItemStack[] invSlots   = new ItemStack[1];
-	private int         maxCap     = 3000;
+	private int         maxCap     = GrowthCraftCellar.getConfig().fermentBarrelMaxCap;
 	private CellarTank   tank      = new CellarTank(this.maxCap, this);
-	private int timemax  = GrowthCraftCellar.ferment_speed;
+	private int timemax  = GrowthCraftCellar.getConfig().fermentSpeed;
 
 	// Other Vars.
 	private String  name;

@@ -22,7 +22,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 {
 	// Constants
 	private ItemStack[] invSlots = new ItemStack[2];
-	private int         maxCap   = 1000;
+	private int         maxCap   = GrowthCraftCellar.getConfig().fruitPressMaxCap;
 	private CellarTank  tank     = new CellarTank(this.maxCap, this);
 
 	// Other Vars.
