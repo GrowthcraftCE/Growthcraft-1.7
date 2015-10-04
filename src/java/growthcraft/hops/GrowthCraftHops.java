@@ -65,60 +65,17 @@ public class GrowthCraftHops
 
 	public static Fluid[] hopAle_booze;
 
-	public static float hopVine_growth;
-	public static float hopVine_growth2;
-	public static int hops_vineDropChance;
-	public static int hopAle_speed;
-	public static int hopAle_speed2;
-	public static boolean config_genHopVineyard;
+	private growthcraft.hops.Config config;
 
-	public static final int color = 13290055;
+	public static growthcraft.hops.Config getConfig()
+	{
+		return instance.config;
+	}
 
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		//====================
-		// CONFIGURATION
-		//====================
-		Configuration config = new Configuration(new File(event.getModConfigurationDirectory(), "growthcraft/hops.conf"));
-		try
-		{
-			config.load();
-
-			double f = 25.0D;
-			Property cfgA = config.get(Configuration.CATEGORY_GENERAL, "Hop (Vine) growth rate", f);
-			cfgA.comment = "[Higher -> Slower] Default : " + f;
-			this.hopVine_growth = (float) cfgA.getDouble(f);
-
-			f = 40.0D;
-			Property cfgB = config.get(Configuration.CATEGORY_GENERAL, "Hop (Flower) spawn rate", f);
-			cfgB.comment = "[Higher -> Slower] Default : " + f;
-			this.hopVine_growth2 = (float) cfgB.getDouble(f);
-
-			int v = 10;
-			Property cfgC = config.get(Configuration.CATEGORY_GENERAL, "Hops vine drop rarity", v);
-			cfgC.comment = "[Lower -> Rarer] Default : " + v;
-			this.hops_vineDropChance = cfgC.getInt(v);
-
-			v = 20;
-			Property cfgD = config.get(Configuration.CATEGORY_GENERAL, "Hop Ale (no hops) brew time", v);
-			cfgD.comment = "[Higher -> Slower] Default : " + v;
-			this.hopAle_speed = cfgD.getInt(v);
-
-			v = 20;
-			Property cfgE = config.get(Configuration.CATEGORY_GENERAL, "Hop Ale (hopped) brew time", v);
-			cfgE.comment = "[Higher -> Slower] Default : " + v;
-			this.hopAle_speed2 = cfgE.getInt(v);
-
-			boolean b = true;
-			Property genHopVineyard = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Hop Vineyards", v);
-			genHopVineyard.comment = "Controls hop vineyards spawning in villages Default : " + b;
-			this.config_genHopVineyard = genHopVineyard.getBoolean(b);
-		}
-		finally
-		{
-			if (config.hasChanged()) { config.save(); }
-		}
+		config = new growthcraft.hops.Config(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
 
 		//====================
 		// INIT
@@ -134,10 +91,14 @@ public class GrowthCraftHops
 			hopAle_booze[i]  = (new Booze("grc.hopAle" + i));
 			FluidRegistry.registerFluid(hopAle_booze[i]);
 		}
-		CellarRegistry.instance().createBooze(hopAle_booze, this.color, "fluid.grc.hopAle");
+		CellarRegistry.instance().createBooze(hopAle_booze, config.hopAleColor, "fluid.grc.hopAle");
 
-		hopAle        = (new ItemBoozeBottle(5, -0.6F, hopAle_booze)).setColor(this.color).setTipsy(0.70F, 900).setPotionEffects(new int[] {Potion.digSpeed.id}, new int[] {3600});
-		hopAle_bucket = (new ItemBoozeBucket(hopAle_booze)).setColor(this.color);
+		hopAle        = (new ItemBoozeBottle(5, -0.6F, hopAle_booze))
+			.setColor(config.hopAleColor)
+			.setTipsy(0.70F, 900)
+			.setPotionEffects(new int[] {Potion.digSpeed.id}, new int[] {3600});
+		hopAle_bucket = (new ItemBoozeBucket(hopAle_booze))
+			.setColor(config.hopAleColor);
 
 		//====================
 		// REGISTRIES
@@ -158,10 +119,10 @@ public class GrowthCraftHops
 			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(hopAle, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
 		}
 
-		CellarRegistry.instance().addBrewing(FluidRegistry.WATER, Items.wheat, hopAle_booze[4], this.hopAle_speed, 40, 0.3F);
-		CellarRegistry.instance().addBrewing(hopAle_booze[4], hops, hopAle_booze[0], this.hopAle_speed2, 40, 0.0F);
+		CellarRegistry.instance().addBrewing(FluidRegistry.WATER, Items.wheat, hopAle_booze[4], config.hopAleBrewTime, 40, 0.3F);
+		CellarRegistry.instance().addBrewing(hopAle_booze[4], hops, hopAle_booze[0], config.hopAleHoppedBrewTime, 40, 0.0F);
 
-		CoreRegistry.instance().addVineDrop(new ItemStack(hops, 2), this.hops_vineDropChance);
+		CoreRegistry.instance().addVineDrop(new ItemStack(hops, 2), config.hopsVineDropRarity);
 
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(new ItemStack(hops), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(new ItemStack(hops), 1, 2, 10));
@@ -195,8 +156,9 @@ public class GrowthCraftHops
 	{
 		proxy.initRenders();
 
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.villagerBrewer_id, new VillageHandlerHops());
-		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerHops());
+		VillageHandlerHops handler = new VillageHandlerHops();
+		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
+		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 
 		FMLInterModComms.sendMessage("Thaumcraft", "harvestClickableCrop", new ItemStack(hopVine, 1, 3));
 	}
