@@ -7,6 +7,7 @@ import growthcraft.cellar.GrowthCraftCellar;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,16 +15,19 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 
-public class ItemBoozeBucket extends Item
+public class ItemBucketBooze extends ItemBucket
 {
-	private Fluid[] booze;
+	private String iconName;
+	private Fluid[] boozes;
+	private int index;
 
 	@SideOnly(Side.CLIENT)
 	private IIcon bucket;
@@ -31,54 +35,40 @@ public class ItemBoozeBucket extends Item
 	private IIcon contents;
 
 	private int color = 16777215;
-	public ItemBoozeBucket(Fluid[] booze)
-	{
-		super();
-		this.setMaxStackSize(1);
-		this.setHasSubtypes(true);
-		this.setMaxDamage(0);
-		this.setContainerItem(Items.bucket);
-		this.setUnlocalizedName("grc.boozeBucket");
-		this.setCreativeTab(GrowthCraftCellar.tab);
 
-		this.booze = booze;
+	public ItemBucketBooze(Block block, Fluid[] boozes, int index, CreativeTabs creativeTab)
+	{
+		super(block);
+		setContainerItem(Items.bucket);
+		setUnlocalizedName("grc.boozeBucket");
+		setCreativeTab(creativeTab);
+		this.index = index;
+		this.boozes = boozes;
 	}
 
-	public ItemBoozeBucket setColor(int color)
+	public ItemBucketBooze(Block block, Fluid[] boozes, int index)
+	{
+		this(block, boozes, index, GrowthCraftCellar.tab);
+	}
+
+	public Fluid getBooze(int id)
+	{
+		return boozes[id];
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack stack)
+	{
+		String s = super.getItemStackDisplayName(stack);
+		return s + " " + StatCollector.translateToLocal(CellarRegistry.instance().getBoozeName(boozes));
+	}
+
+	public ItemBucketBooze setColor(int color)
 	{
 		this.color = color;
 		return this;
 	}
 
-	public Fluid[] getBoozeArray()
-	{
-		return this.booze;
-	}
-
-	public Fluid getBooze(int i)
-	{
-		if (i >= this.booze.length)
-		{
-			return this.booze[0];
-		}
-		else
-		{
-			return this.booze[i];
-		}
-	}
-
-	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5)
-	{
-		if (stack.getItemDamage() >= this.booze.length)
-		{
-			stack.setItemDamage(0);
-		}
-	}
-
-	/************
-	 * TOOLTIP
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
@@ -88,16 +78,14 @@ public class ItemBoozeBucket extends Item
 
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		if (CellarRegistry.instance().booze().isFluidBooze(this.getBooze(stack.getItemDamage())))
+		final Fluid booze = getBooze(index);
+		if (CellarRegistry.instance().isFluidBooze(booze))
 		{
-			String s =  I18n.format(this.getBooze(stack.getItemDamage()).getUnlocalizedName() + ".modifier");
+			String s = I18n.format(booze.getUnlocalizedName() + ".modifier");
 			list.add(EnumChatFormatting.GRAY + s);
 		}
 	}
 
-	/************
-	 * STUFF
-	 ************/
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister reg)
@@ -125,22 +113,5 @@ public class ItemBoozeBucket extends Item
 	public boolean requiresMultipleRenderPasses()
 	{
 		return true;
-	}
-
-	@Override
-	public String getItemStackDisplayName(ItemStack stack)
-	{
-		String s = super.getItemStackDisplayName(stack);
-		return s + " " + StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(this.booze));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
-	{
-		for (int i = 0; i < this.booze.length; i++)
-		{
-			list.add(new ItemStack(par1, 1, i));
-		}
 	}
 }

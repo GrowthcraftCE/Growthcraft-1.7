@@ -7,7 +7,7 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucket;
+import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.hops.block.BlockHops;
 import growthcraft.hops.event.BonemealEventHops;
@@ -97,7 +97,7 @@ public class GrowthCraftHops
 			.setColor(config.hopAleColor)
 			.setTipsy(0.70F, 900)
 			.setPotionEffects(new int[] {Potion.digSpeed.id}, new int[] {3600});
-		hopAle_bucket = (new ItemBoozeBucket(hopAle_booze))
+		hopAle_bucket = (new ItemBoozeBucketDEPRECATED(hopAle_booze))
 			.setColor(config.hopAleColor);
 
 		//====================

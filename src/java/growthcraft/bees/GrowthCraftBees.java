@@ -18,7 +18,7 @@ import growthcraft.bees.village.VillageHandlerBeesApiarist;
 import growthcraft.bees.world.WorldGeneratorBees;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucket;
+import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.common.Mod;
@@ -103,7 +103,7 @@ public class GrowthCraftBees
 			.setColor(config.honeyMeadColor)
 			.setTipsy(0.60F, 900)
 			.setPotionEffects(new int[] {Potion.regeneration.id}, new int[] {900});
-		honeyMead_bucket = (new ItemBoozeBucket(honeyMead_booze))
+		honeyMead_bucket = (new ItemBoozeBucketDEPRECATED(honeyMead_booze))
 			.setColor(config.honeyMeadColor);
 
 		//====================

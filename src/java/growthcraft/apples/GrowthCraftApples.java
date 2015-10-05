@@ -11,7 +11,7 @@ import growthcraft.apples.village.ComponentVillageAppleFarm;
 import growthcraft.apples.village.VillageHandlerApples;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucket;
+import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.common.Mod;
@@ -93,7 +93,7 @@ public class GrowthCraftApples
 			.setColor(this.config.appleCiderColor)
 			.setTipsy(0.60F, 900)
 			.setPotionEffects(new int[] {Potion.field_76444_x.id}, new int[] {1800});
-		appleCider_bucket = (new ItemBoozeBucket(appleCiderBooze))
+		appleCider_bucket = (new ItemBoozeBucketDEPRECATED(appleCiderBooze))
 			.setColor(this.config.appleCiderColor);
 
 		//====================

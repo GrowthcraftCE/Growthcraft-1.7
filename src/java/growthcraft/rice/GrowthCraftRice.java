@@ -6,7 +6,7 @@ import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucket;
+import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.rice.block.BlockPaddy;
 import growthcraft.rice.block.BlockRice;
@@ -97,7 +97,7 @@ public class GrowthCraftRice
 			.setColor(config.riceSakeColor)
 			.setTipsy(0.65F, 900)
 			.setPotionEffects(new int[] {Potion.moveSpeed.id, Potion.jump.id}, new int[] {3600, 3600});
-		riceSake_bucket = (new ItemBoozeBucket(riceSake_booze))
+		riceSake_bucket = (new ItemBoozeBucketDEPRECATED(riceSake_booze))
 			.setColor(config.riceSakeColor);
 
 		//====================

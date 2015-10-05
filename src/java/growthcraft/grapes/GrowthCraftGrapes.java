@@ -7,7 +7,7 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucket;
+import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.grapes.block.BlockGrapeBlock;
 import growthcraft.grapes.block.BlockGrapeLeaves;
@@ -101,8 +101,13 @@ public class GrowthCraftGrapes
 		}
 		CellarRegistry.instance().booze().createBooze(grapeWine_booze, config.grapeWineColor, "fluid.grc.grapeWine");
 
-		grapeWine        = (new ItemBoozeBottle(2, -0.3F, grapeWine_booze)).setColor(config.grapeWineColor).setTipsy(0.60F, 900).setPotionEffects(new int[] {Potion.resistance.id}, new int[] {3600});
-		grapeWine_bucket = (new ItemBoozeBucket(grapeWine_booze)).setColor(config.grapeWineColor);
+		grapeWine        = (new ItemBoozeBottle(2, -0.3F, grapeWine_booze))
+			.setColor(config.grapeWineColor)
+			.setTipsy(0.60F, 900)
+			.setPotionEffects(new int[] {Potion.resistance.id}, new int[] {3600});
+		grapeWine_bucket = (new ItemBoozeBucketDEPRECATED(grapeWine_booze))
+			.setColor(config.grapeWineColor);
+
 
 		//====================
 		// REGISTRIES
