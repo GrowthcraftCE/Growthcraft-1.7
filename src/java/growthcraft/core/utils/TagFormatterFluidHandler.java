@@ -37,20 +37,20 @@ public class TagFormatterFluidHandler implements ITagFormatter
 			if (fluidID != ConstID.NO_FLUID)
 			{
 				final int amount = tankTag.getInteger("amount");
-				content = content + EnumChatFormatting.WHITE + amount +
-					EnumChatFormatting.GRAY + " / " +
-					EnumChatFormatting.WHITE + tankTag.getInteger("capacity") +
-					EnumChatFormatting.GRAY + " " + StatCollector.translateToLocal("grc.unit.millibuckets");
-
+				String fluidName;
 				final FluidStack fluidStack = new FluidStack(FluidRegistry.getFluid(fluidID), amount);
 				if (fluidStack != null)
 				{
-					content += " " + EnumChatFormatting.WHITE + fluidStack.getLocalizedName();
+					fluidName = EnumChatFormatting.WHITE + fluidStack.getLocalizedName();
 				}
 				else
 				{
-					content += " " + EnumChatFormatting.RED + StatCollector.translateToLocal("grc.format.invalid_fluid");
+					fluidName = EnumChatFormatting.RED + StatCollector.translateToLocal("grc.format.invalid_fluid");
 				}
+				content = content + EnumChatFormatting.WHITE + amount +
+					EnumChatFormatting.GRAY + " / " +
+					EnumChatFormatting.WHITE + tankTag.getInteger("capacity") +
+					EnumChatFormatting.GRAY + " " + StatCollector.translateToLocalFormatted("grc.format.tank.content_suffix", fluidName);
 			}
 			else
 			{
