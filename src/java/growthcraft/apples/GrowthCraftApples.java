@@ -9,9 +9,12 @@ import growthcraft.apples.event.BonemealEventApples;
 import growthcraft.apples.item.ItemAppleSeeds;
 import growthcraft.apples.village.ComponentVillageAppleFarm;
 import growthcraft.apples.village.VillageHandlerApples;
+import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.handler.BucketHandler;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
+import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.common.Mod;
@@ -54,9 +57,11 @@ public class GrowthCraftApples
 	public static Block appleSapling;
 	public static Block appleLeaves;
 	public static Block appleBlock;
+	public static BlockFluidBooze[] appleCiderFluids;
 	public static Item appleSeeds;
 	public static Item appleCider;
 	public static Item appleCider_bucket;
+	public static ItemBucketBooze[] appleCiderBuckets;
 
 	public static Fluid[] appleCiderBooze;
 
@@ -82,10 +87,16 @@ public class GrowthCraftApples
 		appleSeeds        = (new ItemAppleSeeds());
 
 		appleCiderBooze = new Booze[4];
+		appleCiderFluids = new BlockFluidBooze[appleCiderBooze.length];
+		appleCiderBuckets = new ItemBucketBooze[appleCiderBooze.length];
 		for (int i = 0; i < appleCiderBooze.length; ++i)
 		{
 			appleCiderBooze[i]  = (new Booze("grc.appleCider" + i));
 			FluidRegistry.registerFluid(appleCiderBooze[i]);
+			appleCiderBooze[i] = new Booze("grc.appleCider" + i);
+			FluidRegistry.registerFluid(appleCiderBooze[i]);
+			appleCiderFluids[i] = new BlockFluidBooze(appleCiderBooze[i], this.color);
+			appleCiderBuckets[i] = new ItemBucketBooze(appleCiderFluids[i], appleCiderBooze, i).setColor(this.color);
 		}
 		CellarRegistry.instance().booze().createBooze(appleCiderBooze, this.config.appleCiderColor, "fluid.grc.appleCider");
 
@@ -109,8 +120,16 @@ public class GrowthCraftApples
 
 		for (int i = 0; i < appleCiderBooze.length; ++i)
 		{
+			GameRegistry.registerItem(appleCiderBuckets[i], "grc.appleCiderBucket." + i);
+			GameRegistry.registerBlock(appleCiderFluids[i], "grc.appleCiderFluid." + i);
+			// forward compat recipe
+			GameRegistry.addShapelessRecipe(new ItemStack(appleCiderBuckets[i], 1), new ItemStack(appleCider_bucket, 1, i));
+
+			BucketHandler.instance().register(appleCiderFluids[i], appleCiderBuckets[i]);
+
 			FluidStack stack = new FluidStack(appleCiderBooze[i].getID(), FluidContainerRegistry.BUCKET_VOLUME);
 			FluidContainerRegistry.registerFluidContainer(stack, new ItemStack(appleCider_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
+			FluidContainerRegistry.registerFluidContainer(stack, new ItemStack(appleCiderBuckets[i]), FluidContainerRegistry.EMPTY_BUCKET);
 
 			FluidStack stack2 = new FluidStack(appleCiderBooze[i].getID(), GrowthCraftCellar.BOTTLE_VOLUME);
 			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(appleCider, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
