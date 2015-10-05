@@ -4,6 +4,7 @@ import java.util.Random;
 
 import growthcraft.apples.GrowthCraftApples;
 import growthcraft.apples.renderer.RenderApple;
+import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.integration.AppleCore;
 
 import cpw.mods.fml.common.eventhandler.Event;
@@ -23,7 +24,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockApple extends Block implements IGrowable
+public class BlockApple extends Block implements IGrowable, ICropDataProvider
 {
 	//Constants
 	private final int growth = GrowthCraftApples.appleBlock_growth;
@@ -42,6 +43,11 @@ public class BlockApple extends Block implements IGrowable
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("grc.appleBlock");
 		this.setCreativeTab(null);
+	}
+
+	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
+	{
+		return (float)(meta / 2.0);
 	}
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)

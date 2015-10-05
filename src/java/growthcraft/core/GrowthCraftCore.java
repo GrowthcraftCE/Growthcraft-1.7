@@ -102,6 +102,8 @@ public class GrowthCraftCore
 	{
 		proxy.initRenders();
 		AchievementPageGrowthcraft.init(chievPage);
+
+		new growthcraft.core.integration.Waila();
 	}
 
 	@EventHandler
