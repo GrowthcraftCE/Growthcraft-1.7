@@ -28,7 +28,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BlockPaddy extends Block
+public class BlockPaddy extends Block implements IPaddy
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
@@ -41,6 +41,11 @@ public class BlockPaddy extends Block
 		this.setStepSound(soundTypeGravel);
 		this.setBlockName("grc.paddyField");
 		this.setCreativeTab(null);
+	}
+
+	public boolean isFilledWithWater(IBlockAccess world, int x, int y, int z, int meta)
+	{
+		return meta >= GrowthCraftRice.paddyFieldMax;
 	}
 
 	/************

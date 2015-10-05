@@ -188,6 +188,8 @@ public class GrowthCraftRice
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 
 		FMLInterModComms.sendMessage("Thaumcraft", "harvestStandardCrop", new ItemStack(riceBlock, 1, 7));
+
+		new growthcraft.rice.integration.Waila();
 	}
 
 	@SubscribeEvent

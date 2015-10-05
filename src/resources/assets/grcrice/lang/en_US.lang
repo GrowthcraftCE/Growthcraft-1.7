@@ -1,10 +1,10 @@
-﻿
+
 tile.grc.paddyField.name=Rice Paddy
 tile.grc.riceBlock.name=Paddy Rice
 
 item.grc.rice.name=Paddy Rice Grain
 item.grc.riceBall.name=Onigiri
-	
+
 fluid.grc.riceSake=Sake
 fluid.grc.riceSake0=Sake
 fluid.grc.riceSake1=Sake
@@ -15,3 +15,5 @@ fluid.grc.riceSake0.modifier=Young
 fluid.grc.riceSake1.modifier=Fermented
 fluid.grc.riceSake2.modifier=Fermented, Potent
 fluid.grc.riceSake3.modifier=Fermented, Extended
+
+grc.format.paddy.hasWater=Water :
