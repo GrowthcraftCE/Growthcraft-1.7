@@ -10,3 +10,9 @@ fluid.tile.water=Water
 fluid.tile.lava=Lava
 
 achievementPage.pageGrowthCraft=Growthcraft
+
+// formats and units
+grc.format.invalid_fluid=INVALID FLUID
+grc.format.tank.empty=<Empty>
+grc.format.tank_id=Tank %d:
+grc.unit.millibuckets=mB
