@@ -26,3 +26,9 @@ achievement.fermentBooze=It's The Yeast I Could Do...
 achievement.fermentBooze.desc=Ferment an alcoholic beverage.
 achievement.getDrunk=Is Trouble Brewing?
 achievement.getDrunk.desc=Acquire Tipsy V.
+
+// Displayed in the WAILA hud "State : ON/OFF"
+grc.format.presser.state_prefix=State :
+grc.format.presser.state.invalid=<Invalid>
+grc.format.presser.state.pressed=Pressed
+grc.format.presser.state.unpressed=Unpressed

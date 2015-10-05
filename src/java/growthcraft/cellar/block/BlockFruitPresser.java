@@ -38,6 +38,20 @@ public class BlockFruitPresser extends BlockContainer
 		this.setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 0.9375F, 0.8125F);
 	}
 
+	public String getPressStateName(int meta)
+	{
+		switch(meta)
+		{
+			case 0:
+			case 1:
+				return "unpressed";
+			case 2:
+			case 3:
+				return "pressed";
+		}
+		return "invalid";
+	}
+
 	/************
 	 * TRIGGERS
 	 ************/
