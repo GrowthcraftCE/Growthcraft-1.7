@@ -1,4 +1,3 @@
-﻿
 itemGroup.tabGrCCellar=Growthcraft Cellar
 
 tile.grc.fruitPress.name=Fruit Press
@@ -26,3 +25,21 @@ achievement.fermentBooze=It's The Yeast I Could Do...
 achievement.fermentBooze.desc=Ferment an alcoholic beverage.
 achievement.getDrunk=Is Trouble Brewing?
 achievement.getDrunk.desc=Acquire Tipsy V.
+
+grc.cellar.brewKettle.brewing_prefix=Brewing :
+grc.cellar.brewKettle.itemslot.item=Item :
+grc.cellar.brewKettle.itemslot.residue=Residue :
+grc.cellar.fermentBarrel.progress_prefix=Progress :
+grc.cellar.fermentBarrel.progress_format=%d%%
+grc.cellar.fermentBarrel.itemslot.modifier=Modifier :
+grc.cellar.fruitPress.itemslot.item=Item :
+grc.cellar.fruitPress.itemslot.residue=Residue :
+grc.cellar.fruitPresser.state.invalid=<Invalid>
+grc.cellar.fruitPresser.state.pressed=Pressed
+grc.cellar.fruitPresser.state.unpressed=Unpressed
+grc.cellar.fruitPresser.state_prefix=State :
+
+grc.cellar.waila.option.DisplayFluidContent=Fluid Tanks
+grc.cellar.waila.option.FruitPressExtras=Fruit Press Extras
+grc.cellar.waila.option.BrewKettleExtras=Brew Kettle Extras
+grc.cellar.waila.option.FermentBarrelExtras=Fermentation Barrel Extras

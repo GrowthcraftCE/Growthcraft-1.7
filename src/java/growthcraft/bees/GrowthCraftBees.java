@@ -229,6 +229,7 @@ public class GrowthCraftBees
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftBees.villagerApiarist_id, handler);
 
 		proxy.registerVillagerSkin();
+		new growthcraft.bees.integration.Waila();
 	}
 
 	@SubscribeEvent

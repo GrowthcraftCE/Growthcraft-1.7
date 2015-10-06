@@ -90,7 +90,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 		}
 	}
 
-	private boolean canBrew()
+	public boolean canBrew()
 	{
 		if (!hasFire()) return false;
 		if (this.invSlots[0] == null) return false;

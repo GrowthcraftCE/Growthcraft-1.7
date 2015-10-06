@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.block.IBlockRope;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.AppleCore;
@@ -33,7 +34,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockHops extends Block implements IBlockRope, IPlantable
+public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDataProvider
 {
 	//Constants
 	private final float growth = GrowthCraftHops.hopVine_growth;
@@ -51,6 +52,11 @@ public class BlockHops extends Block implements IBlockRope, IPlantable
 		this.setStepSound(soundTypeGrass);
 		this.setBlockName("grc.hopVine");
 		this.setCreativeTab(null);
+	}
+
+	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
+	{
+		return (float)(meta / 3.0);
 	}
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)

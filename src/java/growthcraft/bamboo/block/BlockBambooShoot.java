@@ -2,6 +2,7 @@ package growthcraft.bamboo.block;
 
 import java.util.Random;
 
+import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.world.WorldGenBamboo;
@@ -17,6 +18,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
@@ -24,7 +26,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockBambooShoot extends BlockBush
+public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
@@ -42,6 +44,11 @@ public class BlockBambooShoot extends BlockBush
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 		this.setCreativeTab(null);
 		this.setBlockName("grc.bambooShoot");
+	}
+
+	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
+	{
+		return (float)(meta / 1.0);
 	}
 
 	/************
