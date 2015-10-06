@@ -52,8 +52,7 @@ public class PaddyDataProvider implements IWailaDataProvider
 			final IPaddy prov = (IPaddy)block;
 			final MovingObjectPosition pos = accessor.getPosition();
 			final boolean filledWithWater = prov.isFilledWithWater(accessor.getWorld(), pos.blockX, pos.blockY, pos.blockZ, accessor.getMetadata());
-			final String content = "" +
-				EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.format.paddy.hasWater") + " " +
+			final String content = EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.format.paddy.hasWater") + " " +
 				EnumChatFormatting.WHITE + StatCollector.translateToLocal("grc.format.value." + filledWithWater);
 			tooltip.add(content);
 		}
