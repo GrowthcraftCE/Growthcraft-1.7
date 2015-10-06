@@ -5,9 +5,12 @@ import java.io.File;
 import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.handler.BucketHandler;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
+import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.hops.block.BlockHops;
 import growthcraft.hops.event.BonemealEventHops;
@@ -57,11 +60,13 @@ public class GrowthCraftHops
 	public static CommonProxy proxy;
 
 	public static BlockHops hopVine;
+	public static BlockFluidBooze[] hopAleFluids;
 
 	public static Item hops;
 	public static Item hopSeeds;
 	public static Item hopAle;
 	public static Item hopAle_bucket;
+	public static ItemBucketBooze[] hopAleBuckets;
 
 	public static Fluid[] hopAle_booze;
 
@@ -86,10 +91,14 @@ public class GrowthCraftHops
 		hopSeeds = (new ItemHopSeeds());
 
 		hopAle_booze = new Booze[5];
+		hopAleFluids = new BlockFluidBooze[hopAle_booze.length];
+		hopAleBuckets = new ItemBucketBooze[hopAle_booze.length];
 		for (int i = 0; i < hopAle_booze.length; ++i)
 		{
 			hopAle_booze[i]  = (new Booze("grc.hopAle" + i));
 			FluidRegistry.registerFluid(hopAle_booze[i]);
+			hopAleFluids[i] = new BlockFluidBooze(hopAle_booze[i], this.color);
+			hopAleBuckets[i] = new ItemBucketBooze(hopAleFluids[i], hopAle_booze, i).setColor(this.color);
 		}
 		CellarRegistry.instance().booze().createBooze(hopAle_booze, config.hopAleColor, "fluid.grc.hopAle");
 
@@ -112,6 +121,13 @@ public class GrowthCraftHops
 
 		for (int i = 0; i < hopAle_booze.length; ++i)
 		{
+			GameRegistry.registerItem(hopAleBuckets[i], "grc.hopAleBucket." + i);
+			GameRegistry.registerBlock(hopAleFluids[i], "grc.hopAleFluid." + i);
+			// forward compat recipe
+			GameRegistry.addShapelessRecipe(new ItemStack(hopAleBuckets[i], 1), new ItemStack(hopAle_bucket, 1, i));
+
+			BucketHandler.instance().register(hopAleFluids[i], hopAleBuckets[i]);
+
 			FluidStack stack = new FluidStack(hopAle_booze[i].getID(), FluidContainerRegistry.BUCKET_VOLUME);
 			FluidContainerRegistry.registerFluidContainer(stack, new ItemStack(hopAle_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
 
