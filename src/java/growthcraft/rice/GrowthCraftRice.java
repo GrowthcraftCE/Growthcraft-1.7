@@ -4,9 +4,12 @@ import java.io.File;
 
 import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.handler.BucketHandler;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
+import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.rice.block.BlockPaddy;
 import growthcraft.rice.block.BlockRice;
@@ -57,10 +60,12 @@ public class GrowthCraftRice
 
 	public static Block riceBlock;
 	public static Block paddyField;
+	public static BlockFluidBooze[] riceSakeFluids;
 	public static Item rice;
 	public static Item riceSake;
 	public static Item riceSake_bucket;
 	public static Item riceBall;
+	public static ItemBucketBooze[] riceSakeBuckets;
 
 	public static Fluid[] riceSake_booze;
 
@@ -86,10 +91,14 @@ public class GrowthCraftRice
 		riceBall = (new ItemRiceBall());
 
 		riceSake_booze = new Booze[4];
+		riceSakeFluids = new BlockFluidBooze[riceSake_booze.length];
+		riceSakeBuckets = new ItemBucketBooze[riceSake_booze.length];
 		for (int i = 0; i < riceSake_booze.length; ++i)
 		{
 			riceSake_booze[i]  = (new Booze("grc.riceSake" + i));
 			FluidRegistry.registerFluid(riceSake_booze[i]);
+			riceSakeFluids[i] = new BlockFluidBooze(riceSake_booze[i], this.color);
+			riceSakeBuckets[i] = new ItemBucketBooze(riceSakeFluids[i], riceSake_booze, i).setColor(this.color);
 		}
 		CellarRegistry.instance().booze().createBooze(riceSake_booze, config.riceSakeColor, "fluid.grc.riceSake");
 
@@ -113,6 +122,13 @@ public class GrowthCraftRice
 
 		for (int i = 0; i < riceSake_booze.length; ++i)
 		{
+			GameRegistry.registerItem(riceSakeBuckets[i], "grc.riceSakeBucket." + i);
+			GameRegistry.registerBlock(riceSakeFluids[i], "grc.riceSakeFluid." + i);
+			// forward compat recipe
+			GameRegistry.addShapelessRecipe(new ItemStack(riceSakeBuckets[i], 1), new ItemStack(riceSake_bucket, 1, i));
+
+			BucketHandler.instance().register(riceSakeFluids[i], riceSakeBuckets[i]);
+
 			FluidStack stack = new FluidStack(riceSake_booze[i].getID(), FluidContainerRegistry.BUCKET_VOLUME);
 			FluidContainerRegistry.registerFluidContainer(stack, new ItemStack(riceSake_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
 
