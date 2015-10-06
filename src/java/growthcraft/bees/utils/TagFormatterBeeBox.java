@@ -16,16 +16,20 @@ public class TagFormatterBeeBox implements ITagFormatter
 
 	public List<String> format(List<String> list, NBTTagCompound tag)
 	{
-		final String seperator = EnumChatFormatting.GRAY + " / ";
 		list.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.bees.bonus_prefix") + " " +
 			EnumChatFormatting.WHITE + UnitFormatter.booleanAsValue(tag.getBoolean("has_bonus")));
+
 		list.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.bees.bees_prefix") + " " +
-			EnumChatFormatting.WHITE + tag.getInteger("bee_count") + seperator +
-			EnumChatFormatting.WHITE + tag.getInteger("bee_max"));
+			UnitFormatter.fractionNum(tag.getInteger("bee_count"), tag.getInteger("bee_max")));
+
 		list.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.bees.honey_prefix") + " " +
-			EnumChatFormatting.WHITE + tag.getInteger("honeycomb_count") + seperator +
-			EnumChatFormatting.YELLOW + tag.getInteger("honey_count") + seperator +
-			EnumChatFormatting.WHITE + tag.getInteger("honeycomb_max"));
+			UnitFormatter.fraction(
+				"" + EnumChatFormatting.WHITE + tag.getInteger("honeycomb_count"),
+				"" + EnumChatFormatting.YELLOW + tag.getInteger("honey_count"),
+				"" + EnumChatFormatting.WHITE + tag.getInteger("honeycomb_max")
+			)
+		);
+
 		return list;
 	}
 }
