@@ -1,5 +1,7 @@
 package growthcraft.core.utils;
 
+import com.google.common.base.Joiner;
+
 import growthcraft.api.cellar.Booze;
 
 import net.minecraft.util.EnumChatFormatting;
@@ -9,9 +11,11 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class UnitFormatter
 {
-	public static String fraction(String a, String b)
+	public static final String fractionSeparator = EnumChatFormatting.GRAY + " / ";
+
+	public static String fraction(String... args)
 	{
-		return a + EnumChatFormatting.GRAY + " / " + b;
+		return Joiner.on(fractionSeparator).join(args);
 	}
 
 	public static String fractionNum(int a, int b)
