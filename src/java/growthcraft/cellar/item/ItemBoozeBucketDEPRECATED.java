@@ -104,7 +104,7 @@ public class ItemBoozeBucketDEPRECATED extends Item
 	@Override
 	public void registerIcons(IIconRegister reg)
 	{
-		this.bucket = reg.registerIcon("bucket_empty");
+		this.bucket = reg.registerIcon("grccellar:bucket_deprecated");
 		this.contents = reg.registerIcon("grccellar:bucket_contents");
 	}
 
