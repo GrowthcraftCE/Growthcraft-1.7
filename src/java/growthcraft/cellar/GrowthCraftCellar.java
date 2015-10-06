@@ -46,10 +46,12 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-@Mod(modid = "Growthcraft|Cellar",name = "Growthcraft Cellar",version = "@VERSION@",dependencies = "required-after:Growthcraft")
+@Mod(modid = GrowthCraftCellar.MOD_ID,name = GrowthCraftCellar.MOD_NAME,version = "@VERSION@",dependencies = "required-after:Growthcraft")
 public class GrowthCraftCellar
 {
-	@Instance("Growthcraft|Cellar")
+	public static final String MOD_ID = "Growthcraft|Cellar";
+	public static final String MOD_NAME = "Growthcraft Cellar";
+	@Instance(MOD_ID)
 	public static GrowthCraftCellar instance;
 
 	@SidedProxy(clientSide="growthcraft.cellar.network.ClientProxy", serverSide="growthcraft.cellar.network.CommonProxy")

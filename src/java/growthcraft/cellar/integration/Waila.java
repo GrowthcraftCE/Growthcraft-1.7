@@ -1,9 +1,10 @@
 package growthcraft.cellar.integration;
 
-import growthcraft.core.integration.WailaIntegrationBase;
-import growthcraft.cellar.block.ICellarFluidHandler;
-import growthcraft.cellar.integration.waila.CellarDataProvider;
 import growthcraft.cellar.block.BlockFruitPresser;
+import growthcraft.cellar.block.ICellarFluidHandler;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.integration.waila.CellarDataProvider;
+import growthcraft.core.integration.WailaIntegrationBase;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.Optional;
@@ -20,5 +21,11 @@ public class Waila extends WailaIntegrationBase
 		reg.registerBodyProvider(provider, BlockFruitPresser.class);
 		reg.registerBodyProvider(provider, ICellarFluidHandler.class);
 		reg.registerNBTProvider(provider, ICellarFluidHandler.class);
+
+		final String option = "grc.cellar.waila.option.";
+		reg.addConfig(GrowthCraftCellar.MOD_NAME, "DisplayFluidContent", option + "DisplayFluidContent", true);
+		reg.addConfig(GrowthCraftCellar.MOD_NAME, "FruitPressExtras", option + "FruitPressExtras", true);
+		reg.addConfig(GrowthCraftCellar.MOD_NAME, "BrewKettleExtras", option + "BrewKettleExtras", true);
+		reg.addConfig(GrowthCraftCellar.MOD_NAME, "FermentBarrelExtras", option + "FermentBarrelExtras", true);
 	}
 }

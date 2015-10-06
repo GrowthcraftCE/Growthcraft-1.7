@@ -17,6 +17,13 @@ grc.format.value.false=NO
 grc.format.state.true=ON
 grc.format.state.false=OFF
 grc.format.invalid_fluid=<Invalid Fluid>
+// Displayed for items
+grc.format.itemslot.empty=<Empty>
+grc.format.itemslot.invalid=<Invalid Item>
+// modifier name
+grc.format.booze.name=%2$s %1$s
+// name (stack_size)
+grc.format.itemslot.item=%s (x%d)
 // Displayed for tile entities with multiple tanks, %d is the tank index + 1
 grc.format.tank_id=Tank %d :
 // When the tank is empty

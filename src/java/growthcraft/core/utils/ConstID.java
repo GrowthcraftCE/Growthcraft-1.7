@@ -4,6 +4,8 @@ package growthcraft.core.utils;
 // guessing game while reading
 public class ConstID
 {
-	// Used for handling no existant fluids
+	// Used for handling non existant fluids
 	public static final int NO_FLUID = -1;
+	// Used for handling non existant items
+	public static final int NO_ITEM = -1;
 }
