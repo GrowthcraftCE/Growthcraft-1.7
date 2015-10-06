@@ -5,19 +5,22 @@ import java.io.File;
 import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.handler.BucketHandler;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
+import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.grapes.block.BlockGrapeBlock;
 import growthcraft.grapes.block.BlockGrapeLeaves;
 import growthcraft.grapes.block.BlockGrapeVine0;
 import growthcraft.grapes.block.BlockGrapeVine1;
 import growthcraft.grapes.event.BonemealEventGrapes;
-import growthcraft.grapes.item.ItemGrapeSeeds;
 import growthcraft.grapes.item.ItemGrapes;
-import growthcraft.grapes.village.VillageHandlerGrapes;
+import growthcraft.grapes.item.ItemGrapeSeeds;
 import growthcraft.grapes.village.ComponentVillageGrapeVineyard;
+import growthcraft.grapes.village.VillageHandlerGrapes;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -63,10 +66,12 @@ public class GrowthCraftGrapes
 	public static BlockGrapeVine1 grapeVine1;
 	public static Block grapeLeaves;
 	public static Block grapeBlock;
+	public static BlockFluidBooze[] grapeWineFluids;
 	public static Item grapes;
 	public static Item grapeSeeds;
 	public static Item grapeWine;
 	public static Item grapeWine_bucket;
+	public static ItemBucketBooze[] grapeWineBuckets;
 
 	public static Fluid[] grapeWine_booze;
 
@@ -94,10 +99,14 @@ public class GrowthCraftGrapes
 		grapeSeeds = (new ItemGrapeSeeds());
 
 		grapeWine_booze = new Booze[4];
+		grapeWineFluids = new BlockFluidBooze[grapeWine_booze.length];
+		grapeWineBuckets = new ItemBucketBooze[grapeWine_booze.length];
 		for (int i = 0; i < grapeWine_booze.length; ++i)
 		{
-			grapeWine_booze[i]  = (new Booze("grc.grapeWine" + i));
+			grapeWine_booze[i] = (new Booze("grc.grapeWine" + i));
 			FluidRegistry.registerFluid(grapeWine_booze[i]);
+			grapeWineFluids[i] = new BlockFluidBooze(grapeWine_booze[i], this.color);
+			grapeWineBuckets[i] = new ItemBucketBooze(grapeWineFluids[i], grapeWine_booze, i).setColor(this.color);
 		}
 		CellarRegistry.instance().booze().createBooze(grapeWine_booze, config.grapeWineColor, "fluid.grc.grapeWine");
 
@@ -125,8 +134,16 @@ public class GrowthCraftGrapes
 
 		for (int i = 0; i < grapeWine_booze.length; ++i)
 		{
+			GameRegistry.registerItem(grapeWineBuckets[i], "grc.grapeWineBucket." + i);
+			GameRegistry.registerBlock(grapeWineFluids[i], "grc.grapeWineFluid." + i);
+			// forward compat recipe
+			GameRegistry.addShapelessRecipe(new ItemStack(grapeWineBuckets[i], 1), new ItemStack(grapeWine_bucket, 1, i));
+
+			BucketHandler.instance().register(grapeWineFluids[i], grapeWineBuckets[i]);
+
 			FluidStack stack = new FluidStack(grapeWine_booze[i].getID(), FluidContainerRegistry.BUCKET_VOLUME);
 			FluidContainerRegistry.registerFluidContainer(stack, new ItemStack(grapeWine_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
+			FluidContainerRegistry.registerFluidContainer(stack, new ItemStack(grapeWineBuckets[i]), FluidContainerRegistry.EMPTY_BUCKET);
 
 			FluidStack stack2 = new FluidStack(grapeWine_booze[i].getID(), GrowthCraftCellar.BOTTLE_VOLUME);
 			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(grapeWine, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
