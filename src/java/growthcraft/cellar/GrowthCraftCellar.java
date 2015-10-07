@@ -22,6 +22,7 @@ import growthcraft.cellar.village.ComponentVillageTavern;
 import growthcraft.cellar.village.VillageHandlerCellar;
 import growthcraft.core.AchievementPageGrowthcraft;
 import growthcraft.core.integration.NEI;
+import growthcraft.core.utils.MapGenHelper;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -41,7 +42,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.stats.Achievement;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
@@ -120,11 +120,7 @@ public class GrowthCraftCellar
 		GameRegistry.registerTileEntity(TileEntityBrewKettle.class, "grc.tileentity.brewKettle");
 		GameRegistry.registerTileEntity(TileEntityFermentBarrel.class, "grc.tileentity.fermentBarrel");
 
-		try
-		{
-			MapGenStructureIO.func_143031_a(ComponentVillageTavern.class, "grc.tavern");
-		}
-		catch (Throwable e) {}
+		MapGenHelper.registerVillageStructure(ComponentVillageTavern.class, "grc.tavern");
 
 		//====================
 		// CRAFTING

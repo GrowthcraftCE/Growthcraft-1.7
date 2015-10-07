@@ -24,6 +24,7 @@ import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
+import growthcraft.core.utils.MapGenHelper;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -44,7 +45,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
@@ -135,11 +135,7 @@ public class GrowthCraftBees
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);
 
-		try
-		{
-			MapGenStructureIO.func_143031_a(ComponentVillageApiarist.class, "grc.apiarist");
-		}
-		catch (Throwable e) {}
+		MapGenHelper.registerVillageStructure(ComponentVillageApiarist.class, "grc.apiarist");
 
 		//====================
 		// ORE DICTIONARY

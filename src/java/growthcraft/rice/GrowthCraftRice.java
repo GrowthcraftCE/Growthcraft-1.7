@@ -12,6 +12,7 @@ import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
+import growthcraft.core.utils.MapGenHelper;
 import growthcraft.rice.block.BlockPaddy;
 import growthcraft.rice.block.BlockRice;
 import growthcraft.rice.event.BonemealEventRice;
@@ -38,7 +39,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
@@ -120,11 +120,7 @@ public class GrowthCraftRice
 
 		MinecraftForge.addGrassSeed(new ItemStack(rice), config.riceSeedDropRarity);
 
-		try
-		{
-			MapGenStructureIO.func_143031_a(ComponentVillageRiceField.class, "grc.ricefield");
-		}
-		catch (Throwable e) {}
+		MapGenHelper.registerVillageStructure(ComponentVillageRiceField.class, "grc.ricefield");
 
 		//====================
 		// ORE DICTIONARY

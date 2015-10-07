@@ -29,6 +29,7 @@ import growthcraft.bamboo.world.BiomeGenBamboo;
 import growthcraft.bamboo.world.WorldGenBamboo;
 import growthcraft.bamboo.world.WorldGeneratorBamboo;
 import growthcraft.core.integration.NEI;
+import growthcraft.core.utils.MapGenHelper;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -194,11 +195,7 @@ public class GrowthCraftBamboo
 		addRecipe(recipes, new ItemStack(bambooScaffold, 16), "BBB", " A ", "A A", 'A', bamboo, 'B', bambooBlock);
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.torch, 2), new Object[] {"A", "B", 'A', bambooCoal, 'B', "stickWood"}));
 
-		try
-		{
-			MapGenStructureIO.func_143031_a(ComponentVillageBambooYard.class, "grc.bambooyard");
-		}
-		catch (Throwable e) {}
+		MapGenHelper.registerVillageStructure(ComponentVillageBambooYard.class, "grc.bambooyard");
 
 		//====================
 		// ORE DICTIONARY

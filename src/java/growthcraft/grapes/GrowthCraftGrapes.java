@@ -13,6 +13,7 @@ import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
+import growthcraft.core.utils.MapGenHelper;
 import growthcraft.grapes.block.BlockGrapeBlock;
 import growthcraft.grapes.block.BlockGrapeLeaves;
 import growthcraft.grapes.block.BlockGrapeVine0;
@@ -42,7 +43,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
@@ -135,11 +135,7 @@ public class GrowthCraftGrapes
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(new ItemStack(grapes), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(new ItemStack(grapes), 1, 2, 10));
 
-		try
-		{
-			MapGenStructureIO.func_143031_a(ComponentVillageGrapeVineyard.class, "grc.grapevineyard");
-		}
-		catch (Throwable e) {}
+		MapGenHelper.registerVillageStructure(ComponentVillageGrapeVineyard.class, "grc.grapevineyard");
 
 		//====================
 		// ADDITIONAL PROPS.
