@@ -2,6 +2,7 @@ package growthcraft.grapes.block;
 
 import java.util.Random;
 
+import growthcraft.core.utils.BlockFlags;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.renderer.RenderGrape;
 
@@ -33,6 +34,19 @@ public class BlockGrapeBlock extends Block
 		this.setBlockBounds(0.1875F, 0.5F, 0.1875F, 0.8125F, 1.0F, 0.8125F);
 	}
 
+	/**
+	 * Drops the block as an item and replaces it with air
+	 * @param world - world to drop in
+	 * @param x - x Coord
+	 * @param y - y Coord
+	 * @param z - z Coord
+	 */
+	public void fellBlockAsItem(World world, int x, int y, int z)
+	{
+		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		world.setBlockToAir(x, y, z);
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -41,8 +55,7 @@ public class BlockGrapeBlock extends Block
 	{
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlock(x, y, z, Blocks.air, 0, 3);
+			fellBlockAsItem(world, x, y, z);
 		}
 	}
 
@@ -50,12 +63,21 @@ public class BlockGrapeBlock extends Block
 	 * TRIGGERS
 	 ************/
 	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7, float par8, float par9)
+	{
+		if (!world.isRemote)
+		{
+			fellBlockAsItem(world, x, y, z);
+		}
+		return true;
+	}
+
+	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block par5)
 	{
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlock(x, y, z, Blocks.air, 0, 3);
+			fellBlockAsItem(world, x, y, z);
 		}
 	}
 
