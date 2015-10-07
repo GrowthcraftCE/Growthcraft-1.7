@@ -60,8 +60,7 @@ public class ItemBucketBooze extends ItemBucket
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
-		String s = super.getItemStackDisplayName(stack);
-		return s + " " + StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(boozes));
+		return UnitFormatter.fluidBucketName(getBooze(index));
 	}
 
 	public ItemBucketBooze setColor(int color)

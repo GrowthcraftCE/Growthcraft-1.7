@@ -88,7 +88,7 @@ public class ItemBoozeBucketDEPRECATED extends Item
 
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		final String s = UnitFormatter.fluidModifier(this.getBooze(stack.getItemDamage()));
+		final String s = UnitFormatter.fluidModifier(getBooze(stack.getItemDamage()));
 		if (s != null) list.add(s);
 		list.add(StatCollector.translateToLocal("grc.cellar.item.booze_bucket.deprecated"));
 	}
@@ -128,8 +128,7 @@ public class ItemBoozeBucketDEPRECATED extends Item
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
-		final String s = super.getItemStackDisplayName(stack);
-		return s + " " + StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(this.booze)) +
+		return UnitFormatter.fluidBucketName(getBooze(stack.getItemDamage())) +
 			StatCollector.translateToLocal("grc.cellar.item.booze_bucket.deprecated_suffix");
 	}
 

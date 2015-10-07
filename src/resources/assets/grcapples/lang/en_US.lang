@@ -11,6 +11,12 @@ fluid.grc.appleCider1=Apple Cider
 fluid.grc.appleCider2=Apple Cider
 fluid.grc.appleCider3=Apple Cider
 
+item.bucket.fluid.grc.appleCider.name=Apple Cider Bucket
+item.bucket.fluid.grc.appleCider0.name=Apple Cider Bucket
+item.bucket.fluid.grc.appleCider1.name=Apple Cider Bucket
+item.bucket.fluid.grc.appleCider2.name=Apple Cider Bucket
+item.bucket.fluid.grc.appleCider3.name=Apple Cider Bucket
+
 tile.fluid.grc.appleCider.name=Apple Cider
 tile.fluid.grc.appleCider0.name=Apple Cider
 tile.fluid.grc.appleCider1.name=Apple Cider

@@ -302,7 +302,7 @@ public class ItemBoozeBottle extends ItemFood
 	{
 		PotionEffect nausea = new PotionEffect(Potion.confusion.id, nauseaTime, 0);
 		String n = "";
-		String p = Math.round(nauseaChance * 100) + "% Chance of Tipsy";
+		String p = StatCollector.translateToLocalFormatted("grc.cellar.format.tipsy_chance", Math.round(nauseaChance * 100));
 
 		if (nausea.getDuration() > 20)
 		{

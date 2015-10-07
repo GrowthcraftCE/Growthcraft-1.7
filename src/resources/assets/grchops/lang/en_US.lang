@@ -11,6 +11,13 @@ fluid.grc.hopAle2=Ale
 fluid.grc.hopAle3=Ale
 fluid.grc.hopAle4=Ale
 
+item.bucket.fluid.grc.hopAle.name=Ale Bucket
+item.bucket.fluid.grc.hopAle0.name=Ale Bucket
+item.bucket.fluid.grc.hopAle1.name=Ale Bucket
+item.bucket.fluid.grc.hopAle2.name=Ale Bucket
+item.bucket.fluid.grc.hopAle3.name=Ale Bucket
+item.bucket.fluid.grc.hopAle4.name=Ale Bucket
+
 tile.fluid.grc.hopAle.name=Ale
 tile.fluid.grc.hopAle0.name=Ale
 tile.fluid.grc.hopAle1.name=Ale

@@ -24,6 +24,11 @@ public class UnitFormatter
 		return fraction("" + EnumChatFormatting.WHITE + a, "" + EnumChatFormatting.WHITE + b);
 	}
 
+	public static String fluidBucketName(Fluid fluid)
+	{
+		return StatCollector.translateToLocal("item.bucket." + fluid.getUnlocalizedName() + ".name");
+	}
+
 	/**
 	 * @param fluid - fluid to get a modifier for
 	 * @return localized format of the boolean

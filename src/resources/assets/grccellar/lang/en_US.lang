@@ -5,7 +5,9 @@ tile.grc.fruitPresser.name=Fruit Press
 tile.grc.brewKettle.name=Brew Kettle
 tile.grc.fermentBarrel.name=Fermentation Barrel
 
-item.grc.boozeBucket.name=Bucket of
+// Please remove this field once all other module translations have been updated,
+// this is no longer used
+item.grc.boozeBucket.name=Bucket
 
 container.grc.fruitPress=Fruit Press
 container.grc.brewKettle=Brew Kettle
@@ -26,6 +28,8 @@ achievement.fermentBooze.desc=Ferment an alcoholic beverage.
 achievement.getDrunk=Is Trouble Brewing?
 achievement.getDrunk.desc=Acquire Tipsy V.
 
+// number is a percentage
+grc.cellar.format.tipsy_chance=%d%% Chance of Tipsy
 grc.cellar.item.booze_bucket.deprecated=DEPRECATED, craft to get updated bucket
 grc.cellar.item.booze_bucket.deprecated_suffix= (DEPRECATED)
 
