@@ -26,6 +26,9 @@ achievement.fermentBooze.desc=Ferment an alcoholic beverage.
 achievement.getDrunk=Is Trouble Brewing?
 achievement.getDrunk.desc=Acquire Tipsy V.
 
+grc.cellar.item.booze_bucket.deprecated=DEPRECATED, craft to get updated bucket
+grc.cellar.item.booze_bucket.deprecated_suffix= (DEPRECATED)
+
 grc.cellar.brewKettle.brewing_prefix=Brewing :
 grc.cellar.brewKettle.itemslot.item=Item :
 grc.cellar.brewKettle.itemslot.residue=Residue :

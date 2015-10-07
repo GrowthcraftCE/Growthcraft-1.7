@@ -90,7 +90,7 @@ public class ItemBoozeBucketDEPRECATED extends Item
 	{
 		final String s = UnitFormatter.fluidModifier(this.getBooze(stack.getItemDamage()));
 		if (s != null) list.add(s);
-		list.add("DEPRECATED, craft to get updated bucket.");
+		list.add(StatCollector.translateToLocal("grc.cellar.item.booze_bucket.deprecated"));
 	}
 
 	/************
@@ -128,8 +128,9 @@ public class ItemBoozeBucketDEPRECATED extends Item
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
-		String s = super.getItemStackDisplayName(stack);
-		return s + " " + StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(this.booze)) + " (DEPRECATED)";
+		final String s = super.getItemStackDisplayName(stack);
+		return s + " " + StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(this.booze)) +
+			StatCollector.translateToLocal("grc.cellar.item.booze_bucket.deprecated_suffix");
 	}
 
 	@Override
