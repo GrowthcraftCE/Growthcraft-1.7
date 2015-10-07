@@ -12,6 +12,7 @@ import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.integration.NEI;
 import growthcraft.hops.block.BlockHops;
 import growthcraft.hops.event.BonemealEventHops;
 import growthcraft.hops.item.ItemHops;
@@ -142,6 +143,8 @@ public class GrowthCraftHops
 		// CRAFTING
 		//====================
 		GameRegistry.addShapelessRecipe(new ItemStack(hopSeeds, 1), hops);
+
+		NEI.hideItem(new ItemStack(hopVine));
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}

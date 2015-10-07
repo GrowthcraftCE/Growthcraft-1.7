@@ -11,6 +11,7 @@ import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.integration.NEI;
 import growthcraft.rice.block.BlockPaddy;
 import growthcraft.rice.block.BlockRice;
 import growthcraft.rice.event.BonemealEventRice;
@@ -137,6 +138,8 @@ public class GrowthCraftRice
 		// CRAFTING
 		//====================
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(riceBall, 1), "###", "###", '#', "cropRice"));
+
+		NEI.hideItem(new ItemStack(riceBlock));
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}

@@ -23,6 +23,7 @@ import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;

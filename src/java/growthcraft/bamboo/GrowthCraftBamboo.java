@@ -28,6 +28,7 @@ import growthcraft.bamboo.village.VillageHandlerBamboo;
 import growthcraft.bamboo.world.BiomeGenBamboo;
 import growthcraft.bamboo.world.WorldGenBamboo;
 import growthcraft.bamboo.world.WorldGeneratorBamboo;
+import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -226,6 +227,8 @@ public class GrowthCraftBamboo
 		//====================
 		GameRegistry.registerFuelHandler(new BambooFuelHandler());
 		GameRegistry.addSmelting(bamboo, new ItemStack(bambooCoal), 0.075f);
+
+		NEI.hideItem(new ItemStack(bambooDoor));
 	}
 
 	public void addRecipe(List recipeList, ItemStack itemstack, Object... objArray)

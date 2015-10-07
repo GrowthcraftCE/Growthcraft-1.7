@@ -9,6 +9,7 @@ import growthcraft.cellar.item.ItemBlockFluidBooze;
 import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.handler.BucketHandler;
+import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -51,6 +52,8 @@ public class BoozeRegistryHelper
 
 			FluidStack stack2 = new FluidStack(boozes[i].getID(), GrowthCraftCellar.BOTTLE_VOLUME);
 			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(bottle, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
+
+			NEI.hideItem(new ItemStack(oldBucket, 1, i));
 		}
 	}
 }

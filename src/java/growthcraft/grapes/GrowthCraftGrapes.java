@@ -12,6 +12,7 @@ import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.integration.NEI;
 import growthcraft.grapes.block.BlockGrapeBlock;
 import growthcraft.grapes.block.BlockGrapeLeaves;
 import growthcraft.grapes.block.BlockGrapeVine0;
@@ -162,6 +163,10 @@ public class GrowthCraftGrapes
 		// CRAFTING
 		//====================
 		GameRegistry.addShapelessRecipe(new ItemStack(grapeSeeds, 1), grapes);
+
+		NEI.hideItem(new ItemStack(grapeVine0));
+		NEI.hideItem(new ItemStack(grapeVine1));
+		NEI.hideItem(new ItemStack(grapeBlock));
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}
