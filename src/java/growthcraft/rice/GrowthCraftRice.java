@@ -10,6 +10,7 @@ import growthcraft.cellar.handler.BucketHandler;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.item.ItemBucketBooze;
+import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.rice.block.BlockPaddy;
 import growthcraft.rice.block.BlockRice;
@@ -63,11 +64,11 @@ public class GrowthCraftRice
 	public static BlockFluidBooze[] riceSakeFluids;
 	public static Item rice;
 	public static Item riceSake;
-	public static Item riceSake_bucket;
+	public static Item riceSakeBucket_deprecated;
 	public static Item riceBall;
 	public static ItemBucketBooze[] riceSakeBuckets;
 
-	public static Fluid[] riceSake_booze;
+	public static Fluid[] riceSakeBooze;
 
 	private growthcraft.rice.Config config;
 
@@ -84,29 +85,22 @@ public class GrowthCraftRice
 		//====================
 		// INIT
 		//====================
-		riceBlock = (new BlockRice());
-		paddyField = (new BlockPaddy());
+		riceBlock = new BlockRice();
+		paddyField = new BlockPaddy();
 
-		rice     = (new ItemRice());
-		riceBall = (new ItemRiceBall());
+		rice     = new ItemRice();
+		riceBall = new ItemRiceBall();
 
-		riceSake_booze = new Booze[4];
-		riceSakeFluids = new BlockFluidBooze[riceSake_booze.length];
-		riceSakeBuckets = new ItemBucketBooze[riceSake_booze.length];
-		for (int i = 0; i < riceSake_booze.length; ++i)
-		{
-			riceSake_booze[i]  = (new Booze("grc.riceSake" + i));
-			FluidRegistry.registerFluid(riceSake_booze[i]);
-			riceSakeFluids[i] = new BlockFluidBooze(riceSake_booze[i], this.color);
-			riceSakeBuckets[i] = new ItemBucketBooze(riceSakeFluids[i], riceSake_booze, i).setColor(this.color);
-		}
-		CellarRegistry.instance().booze().createBooze(riceSake_booze, config.riceSakeColor, "fluid.grc.riceSake");
+		riceSakeBooze = new Booze[4];
+		riceSakeFluids = new BlockFluidBooze[riceSakeBooze.length];
+		riceSakeBuckets = new ItemBucketBooze[riceSakeBooze.length];
+		BoozeRegistryHelper.initializeBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, "grc.riceSake", config.riceSakeColor);
 
-		riceSake        = (new ItemBoozeBottle(5, -0.6F, riceSake_booze))
+		riceSake        = (new ItemBoozeBottle(5, -0.6F, riceSakeBooze))
 			.setColor(config.riceSakeColor)
 			.setTipsy(0.65F, 900)
 			.setPotionEffects(new int[] {Potion.moveSpeed.id, Potion.jump.id}, new int[] {3600, 3600});
-		riceSake_bucket = (new ItemBoozeBucketDEPRECATED(riceSake_booze))
+		riceSakeBucket_deprecated = (new ItemBoozeBucketDEPRECATED(riceSakeBooze))
 			.setColor(config.riceSakeColor);
 
 		//====================
@@ -117,26 +111,11 @@ public class GrowthCraftRice
 
 		GameRegistry.registerItem(rice, "grc.rice");
 		GameRegistry.registerItem(riceSake, "grc.riceSake");
-		GameRegistry.registerItem(riceSake_bucket, "grc.riceSake_bucket");
+		GameRegistry.registerItem(riceSakeBucket_deprecated, "grc.riceSake_bucket");
 		GameRegistry.registerItem(riceBall, "grc.riceBall");
+		BoozeRegistryHelper.registerBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, riceSake, "grc.riceSake", riceSakeBucket_deprecated);
 
-		for (int i = 0; i < riceSake_booze.length; ++i)
-		{
-			GameRegistry.registerItem(riceSakeBuckets[i], "grc.riceSakeBucket." + i);
-			GameRegistry.registerBlock(riceSakeFluids[i], "grc.riceSakeFluid." + i);
-			// forward compat recipe
-			GameRegistry.addShapelessRecipe(new ItemStack(riceSakeBuckets[i], 1), new ItemStack(riceSake_bucket, 1, i));
-
-			BucketHandler.instance().register(riceSakeFluids[i], riceSakeBuckets[i]);
-
-			FluidStack stack = new FluidStack(riceSake_booze[i].getID(), FluidContainerRegistry.BUCKET_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack, new ItemStack(riceSake_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
-
-			FluidStack stack2 = new FluidStack(riceSake_booze[i].getID(), GrowthCraftCellar.BOTTLE_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(riceSake, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
-		}
-
-		CellarRegistry.instance().brew().addBrewing(FluidRegistry.WATER, rice, riceSake_booze[0], config.riceSakeBrewingTime, 25, 0.2F);
+		CellarRegistry.instance().brew().addBrewing(FluidRegistry.WATER, rice, riceSakeBooze[0], config.riceSakeBrewingTime, 25, 0.2F);
 
 		MinecraftForge.addGrassSeed(new ItemStack(rice), config.riceSeedDropRarity);
 
@@ -183,9 +162,9 @@ public class GrowthCraftRice
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < riceSake_booze.length; ++i)
+			for (int i = 0; i < riceSakeBooze.length; ++i)
 			{
-				riceSake_booze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				riceSakeBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}
@@ -233,18 +212,18 @@ public class GrowthCraftRice
 			{
 				ThaumcraftApi.registerObjectTag(rice.itemID, -1, new AspectList().add(Aspect.CROP, 2).add(Aspect.SEED, 1).add(Aspect.HUNGER, 1));
 
-				for (int i = 0; i < riceSake_booze.length; ++i)
+				for (int i = 0; i < riceSakeBooze.length; ++i)
 				{
 					if (i == 0)
 					{
 						ThaumcraftApi.registerObjectTag(riceSake.itemID, i, new AspectList().add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(riceSake_bucket.itemID, i, new AspectList().add(Aspect.WATER, 2));
+						ThaumcraftApi.registerObjectTag(riceSakeBucket_deprecated.itemID, i, new AspectList().add(Aspect.WATER, 2));
 					}
 					else
 					{
 						int m = i == 2 ? 4 : 2;
 						ThaumcraftApi.registerObjectTag(riceSake.itemID, i, new AspectList().add(Aspect.MAGIC, m).add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(riceSake_bucket.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
+						ThaumcraftApi.registerObjectTag(riceSakeBucket_deprecated.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
 					}
 				}
 

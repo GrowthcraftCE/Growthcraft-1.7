@@ -4,12 +4,18 @@ tile.grc.appleSapling.name=Apple Sapling
 tile.grc.appleLeaves.name=Apple Leaves
 
 item.grc.appleSeeds.name=Apple Core
-	
+
 fluid.grc.appleCider=Apple Cider
 fluid.grc.appleCider0=Apple Cider
 fluid.grc.appleCider1=Apple Cider
 fluid.grc.appleCider2=Apple Cider
 fluid.grc.appleCider3=Apple Cider
+
+tile.fluid.grc.appleCider.name=Apple Cider
+tile.fluid.grc.appleCider0.name=Apple Cider
+tile.fluid.grc.appleCider1.name=Apple Cider
+tile.fluid.grc.appleCider2.name=Apple Cider
+tile.fluid.grc.appleCider3.name=Apple Cider
 
 fluid.grc.appleCider0.modifier=Young
 fluid.grc.appleCider1.modifier=Fermented

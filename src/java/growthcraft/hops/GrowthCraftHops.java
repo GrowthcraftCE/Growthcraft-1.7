@@ -11,11 +11,12 @@ import growthcraft.cellar.handler.BucketHandler;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.item.ItemBucketBooze;
+import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.hops.block.BlockHops;
 import growthcraft.hops.event.BonemealEventHops;
-import growthcraft.hops.item.ItemHopSeeds;
 import growthcraft.hops.item.ItemHops;
+import growthcraft.hops.item.ItemHopSeeds;
 import growthcraft.hops.village.ComponentVillageHopVineyard;
 import growthcraft.hops.village.VillageHandlerHops;
 
@@ -65,10 +66,10 @@ public class GrowthCraftHops
 	public static Item hops;
 	public static Item hopSeeds;
 	public static Item hopAle;
-	public static Item hopAle_bucket;
+	public static Item hopAleBucket_deprecated;
 	public static ItemBucketBooze[] hopAleBuckets;
 
-	public static Fluid[] hopAle_booze;
+	public static Fluid[] hopAleBooze;
 
 	private growthcraft.hops.Config config;
 
@@ -85,28 +86,21 @@ public class GrowthCraftHops
 		//====================
 		// INIT
 		//====================
-		hopVine  = (new BlockHops());
+		hopVine  = new BlockHops();
 
-		hops     = (new ItemHops());
-		hopSeeds = (new ItemHopSeeds());
+		hops     = new ItemHops();
+		hopSeeds = new ItemHopSeeds();
 
-		hopAle_booze = new Booze[5];
-		hopAleFluids = new BlockFluidBooze[hopAle_booze.length];
-		hopAleBuckets = new ItemBucketBooze[hopAle_booze.length];
-		for (int i = 0; i < hopAle_booze.length; ++i)
-		{
-			hopAle_booze[i]  = (new Booze("grc.hopAle" + i));
-			FluidRegistry.registerFluid(hopAle_booze[i]);
-			hopAleFluids[i] = new BlockFluidBooze(hopAle_booze[i], this.color);
-			hopAleBuckets[i] = new ItemBucketBooze(hopAleFluids[i], hopAle_booze, i).setColor(this.color);
-		}
-		CellarRegistry.instance().booze().createBooze(hopAle_booze, config.hopAleColor, "fluid.grc.hopAle");
+		hopAleBooze = new Booze[5];
+		hopAleFluids = new BlockFluidBooze[hopAleBooze.length];
+		hopAleBuckets = new ItemBucketBooze[hopAleBooze.length];
+		BoozeRegistryHelper.initializeBooze(hopAleBooze, hopAleFluids, hopAleBuckets, "grc.hopAle", config.hopAleColor);
 
-		hopAle        = (new ItemBoozeBottle(5, -0.6F, hopAle_booze))
+		hopAle        = (new ItemBoozeBottle(5, -0.6F, hopAleBooze))
 			.setColor(config.hopAleColor)
 			.setTipsy(0.70F, 900)
 			.setPotionEffects(new int[] {Potion.digSpeed.id}, new int[] {3600});
-		hopAle_bucket = (new ItemBoozeBucketDEPRECATED(hopAle_booze))
+		hopAleBucket_deprecated = (new ItemBoozeBucketDEPRECATED(hopAleBooze))
 			.setColor(config.hopAleColor);
 
 		//====================
@@ -117,26 +111,12 @@ public class GrowthCraftHops
 		GameRegistry.registerItem(hops, "grc.hops");
 		GameRegistry.registerItem(hopSeeds, "grc.hopSeeds");
 		GameRegistry.registerItem(hopAle, "grc.hopAle");
-		GameRegistry.registerItem(hopAle_bucket, "grc.hopAle_bucket");
+		GameRegistry.registerItem(hopAleBucket_deprecated, "grc.hopAle_bucket");
 
-		for (int i = 0; i < hopAle_booze.length; ++i)
-		{
-			GameRegistry.registerItem(hopAleBuckets[i], "grc.hopAleBucket." + i);
-			GameRegistry.registerBlock(hopAleFluids[i], "grc.hopAleFluid." + i);
-			// forward compat recipe
-			GameRegistry.addShapelessRecipe(new ItemStack(hopAleBuckets[i], 1), new ItemStack(hopAle_bucket, 1, i));
+		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle, "grc.hopAle", hopAleBucket_deprecated);
 
-			BucketHandler.instance().register(hopAleFluids[i], hopAleBuckets[i]);
-
-			FluidStack stack = new FluidStack(hopAle_booze[i].getID(), FluidContainerRegistry.BUCKET_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack, new ItemStack(hopAle_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
-
-			FluidStack stack2 = new FluidStack(hopAle_booze[i].getID(), GrowthCraftCellar.BOTTLE_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(hopAle, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
-		}
-
-		CellarRegistry.instance().brew().addBrewing(FluidRegistry.WATER, Items.wheat, hopAle_booze[4], config.hopAleBrewTime, 40, 0.3F);
-		CellarRegistry.instance().brew().addBrewing(hopAle_booze[4], hops, hopAle_booze[0], config.hopAleHoppedBrewTime, 40, 0.0F);
+		CellarRegistry.instance().brew().addBrewing(FluidRegistry.WATER, Items.wheat, hopAleBooze[4], config.hopAleBrewTime, 40, 0.3F);
+		CellarRegistry.instance().brew().addBrewing(hopAleBooze[4], hops, hopAleBooze[0], config.hopAleHoppedBrewTime, 40, 0.0F);
 
 		CoreRegistry.instance().addVineDrop(new ItemStack(hops, 2), config.hopsVineDropRarity);
 
@@ -185,9 +165,9 @@ public class GrowthCraftHops
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < hopAle_booze.length; ++i)
+			for (int i = 0; i < hopAleBooze.length; ++i)
 			{
-				hopAle_booze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				hopAleBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}
@@ -240,18 +220,18 @@ public class GrowthCraftHops
 				ThaumcraftApi.registerObjectTag(hopSeeds.itemID, -1, new AspectList().add(Aspect.SEED, 1));
 				ThaumcraftApi.registerObjectTag(hops.itemID, -1, new AspectList().add(Aspect.PLANT, 1));
 
-				for (int i = 0; i < hopAle_booze.length; ++i)
+				for (int i = 0; i < hopAleBooze.length; ++i)
 				{
 					if (i == 0 || i == 4)
 					{
 						ThaumcraftApi.registerObjectTag(hopAle.itemID, i, new AspectList().add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(hopAle_bucket.itemID, i, new AspectList().add(Aspect.WATER, 2));
+						ThaumcraftApi.registerObjectTag(hopAleBucket_deprecated.itemID, i, new AspectList().add(Aspect.WATER, 2));
 					}
 					else
 					{
 						int m = i == 2 ? 4 : 2;
 						ThaumcraftApi.registerObjectTag(hopAle.itemID, i, new AspectList().add(Aspect.MAGIC, m).add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(hopAle_bucket.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
+						ThaumcraftApi.registerObjectTag(hopAleBucket_deprecated.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
 					}
 				}
 

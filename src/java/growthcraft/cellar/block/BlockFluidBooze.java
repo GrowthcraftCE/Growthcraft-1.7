@@ -1,6 +1,6 @@
 package growthcraft.cellar.block;
 
-import growthcraft.apples.GrowthCraftApples;
+import growthcraft.cellar.GrowthCraftCellar;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,6 +21,8 @@ public class BlockFluidBooze extends BlockFluidClassic
 	public BlockFluidBooze(Fluid fluid, int kolor)
 	{
 		super(fluid, Material.water);
+		setBlockName(fluid.getUnlocalizedName());
+		setCreativeTab(GrowthCraftCellar.tab);
 		this.color = kolor;
 	}
 
@@ -33,6 +35,11 @@ public class BlockFluidBooze extends BlockFluidClassic
 	{
 		this.color = kolor;
 		return this;
+	}
+
+	public int getColor()
+	{
+		return this.color;
 	}
 
 	@Override

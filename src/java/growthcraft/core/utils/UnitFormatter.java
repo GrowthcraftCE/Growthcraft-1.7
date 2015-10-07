@@ -3,6 +3,7 @@ package growthcraft.core.utils;
 import com.google.common.base.Joiner;
 
 import growthcraft.api.cellar.Booze;
+import growthcraft.api.cellar.CellarRegistry;
 
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -29,7 +30,14 @@ public class UnitFormatter
 	 */
 	public static String fluidModifier(Fluid fluid)
 	{
-		return EnumChatFormatting.GREEN + StatCollector.translateToLocal(fluid.getUnlocalizedName() + ".modifier");
+		if (CellarRegistry.instance().booze().isFluidBooze(fluid))
+		{
+			return EnumChatFormatting.GREEN + StatCollector.translateToLocal(fluid.getUnlocalizedName() + ".modifier");
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -45,9 +53,14 @@ public class UnitFormatter
 			final Fluid fluid = fluidStack.getFluid();
 			if (fluid instanceof Booze)
 			{
-				return StatCollector.translateToLocalFormatted("grc.format.booze.name",
-					EnumChatFormatting.WHITE + fluidStack.getLocalizedName(),
-					fluidModifier(fluid));
+				final String modifier = fluidModifier(fluid);
+				if (modifier != null)
+				{
+					return StatCollector.translateToLocalFormatted("grc.format.booze.name",
+						EnumChatFormatting.WHITE + fluidStack.getLocalizedName(), modifier);
+				}
+				return StatCollector.translateToLocalFormatted("grc.format.fluid.name",
+						EnumChatFormatting.WHITE + fluidStack.getLocalizedName());
 			}
 			else
 			{

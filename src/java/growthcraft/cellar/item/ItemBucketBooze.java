@@ -4,6 +4,7 @@ import java.util.List;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.utils.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -60,7 +61,7 @@ public class ItemBucketBooze extends ItemBucket
 	public String getItemStackDisplayName(ItemStack stack)
 	{
 		String s = super.getItemStackDisplayName(stack);
-		return s + " " + StatCollector.translateToLocal(CellarRegistry.instance().getBoozeName(boozes));
+		return s + " " + StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(boozes));
 	}
 
 	public ItemBucketBooze setColor(int color)
@@ -79,11 +80,8 @@ public class ItemBucketBooze extends ItemBucket
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		final Fluid booze = getBooze(index);
-		if (CellarRegistry.instance().isFluidBooze(booze))
-		{
-			String s = I18n.format(booze.getUnlocalizedName() + ".modifier");
-			list.add(EnumChatFormatting.GRAY + s);
-		}
+		final String s = UnitFormatter.fluidModifier(booze);
+		if (s != null) list.add(s);
 	}
 
 	@SideOnly(Side.CLIENT)

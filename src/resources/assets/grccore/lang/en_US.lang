@@ -22,6 +22,8 @@ grc.format.itemslot.empty=<Empty>
 grc.format.itemslot.invalid=<Invalid Item>
 // modifier name
 grc.format.booze.name=%2$s %1$s
+// when a fluid is not a booze
+grc.format.fluid.name=%1$s
 // name (stack_size)
 grc.format.itemslot.item=%s (x%d)
 // Displayed for tile entities with multiple tanks, %d is the tank index + 1

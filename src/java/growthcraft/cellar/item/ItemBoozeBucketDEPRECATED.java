@@ -4,6 +4,7 @@ import java.util.List;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.utils.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -40,8 +41,6 @@ public class ItemBoozeBucketDEPRECATED extends Item
 		this.setMaxDamage(0);
 		this.setContainerItem(Items.bucket);
 		this.setUnlocalizedName("grc.boozeBucket");
-		this.setCreativeTab(GrowthCraftCellar.tab);
-
 		this.booze = booze;
 	}
 
@@ -89,11 +88,8 @@ public class ItemBoozeBucketDEPRECATED extends Item
 
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		if (CellarRegistry.instance().booze().isFluidBooze(this.getBooze(stack.getItemDamage())))
-		{
-			String s =  I18n.format(this.getBooze(stack.getItemDamage()).getUnlocalizedName() + ".modifier");
-			list.add(EnumChatFormatting.GRAY + s);
-		}
+		final String s = UnitFormatter.fluidModifier(this.getBooze(stack.getItemDamage()));
+		if (s != null) list.add(s);
 		list.add("DEPRECATED, craft to get updated bucket.");
 	}
 

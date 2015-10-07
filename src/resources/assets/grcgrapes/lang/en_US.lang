@@ -13,6 +13,12 @@ fluid.grc.grapeWine1=Grape Wine
 fluid.grc.grapeWine2=Grape Wine
 fluid.grc.grapeWine3=Grape Wine
 
+tile.fluid.grc.grapeWine.name=Grape Wine
+tile.fluid.grc.grapeWine0.name=Grape Wine
+tile.fluid.grc.grapeWine1.name=Grape Wine
+tile.fluid.grc.grapeWine2.name=Grape Wine
+tile.fluid.grc.grapeWine3.name=Grape Wine
+
 fluid.grc.grapeWine0.modifier=Young
 fluid.grc.grapeWine1.modifier=Fermented
 fluid.grc.grapeWine2.modifier=Fermented, Potent

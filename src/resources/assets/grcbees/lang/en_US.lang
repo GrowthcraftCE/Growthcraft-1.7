@@ -15,6 +15,12 @@ fluid.grc.honeyMead1=Mead
 fluid.grc.honeyMead2=Mead
 fluid.grc.honeyMead3=Mead
 
+tile.fluid.grc.honeyMead.name=Mead
+tile.fluid.grc.honeyMead0.name=Mead
+tile.fluid.grc.honeyMead1.name=Mead
+tile.fluid.grc.honeyMead2.name=Mead
+tile.fluid.grc.honeyMead3.name=Mead
+
 fluid.grc.honeyMead0.modifier=Young
 fluid.grc.honeyMead1.modifier=Fermented
 fluid.grc.honeyMead2.modifier=Fermented, Potent
