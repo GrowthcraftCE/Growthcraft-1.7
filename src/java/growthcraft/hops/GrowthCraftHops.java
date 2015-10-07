@@ -91,7 +91,7 @@ public class GrowthCraftHops
 			hopAle_booze[i]  = (new Booze("grc.hopAle" + i));
 			FluidRegistry.registerFluid(hopAle_booze[i]);
 		}
-		CellarRegistry.instance().createBooze(hopAle_booze, config.hopAleColor, "fluid.grc.hopAle");
+		CellarRegistry.instance().booze().createBooze(hopAle_booze, config.hopAleColor, "fluid.grc.hopAle");
 
 		hopAle        = (new ItemBoozeBottle(5, -0.6F, hopAle_booze))
 			.setColor(config.hopAleColor)
@@ -119,8 +119,8 @@ public class GrowthCraftHops
 			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(hopAle, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
 		}
 
-		CellarRegistry.instance().addBrewing(FluidRegistry.WATER, Items.wheat, hopAle_booze[4], config.hopAleBrewTime, 40, 0.3F);
-		CellarRegistry.instance().addBrewing(hopAle_booze[4], hops, hopAle_booze[0], config.hopAleHoppedBrewTime, 40, 0.0F);
+		CellarRegistry.instance().brew().addBrewing(FluidRegistry.WATER, Items.wheat, hopAle_booze[4], config.hopAleBrewTime, 40, 0.3F);
+		CellarRegistry.instance().brew().addBrewing(hopAle_booze[4], hops, hopAle_booze[0], config.hopAleHoppedBrewTime, 40, 0.0F);
 
 		CoreRegistry.instance().addVineDrop(new ItemStack(hops, 2), config.hopsVineDropRarity);
 

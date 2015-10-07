@@ -159,16 +159,10 @@ public class GuiBrewKettle extends GuiCellar
 			{
 				Fluid fluid = this.te.getFluid(0);
 				toolTip.add(fluid.getLocalizedName());
-				if (CellarRegistry.instance().isFluidBooze(fluid))
+				if (CellarRegistry.instance().booze().isFluidBooze(fluid))
 				{
-					if (CellarRegistry.instance().isAlternateBooze(fluid))
-					{
-						toolTip.add(EnumChatFormatting.GRAY + I18n.format(CellarRegistry.instance().getAlternateBooze(fluid).getUnlocalizedName() + ".modifier"));
-					}
-					else
-					{
-						toolTip.add(EnumChatFormatting.GRAY + I18n.format(fluid.getUnlocalizedName() + ".modifier"));
-					}
+					fluid = CellarRegistry.instance().booze().maybeAlternateBooze(fluid);
+					toolTip.add(EnumChatFormatting.GRAY + I18n.format(fluid.getUnlocalizedName() + ".modifier"));
 				}
 			}
 
@@ -182,16 +176,10 @@ public class GuiBrewKettle extends GuiCellar
 			{
 				Fluid fluid = this.te.getFluid(1);
 				toolTip.add(fluid.getLocalizedName());
-				if (CellarRegistry.instance().isFluidBooze(fluid))
+				if (CellarRegistry.instance().booze().isFluidBooze(fluid))
 				{
-					if (CellarRegistry.instance().isAlternateBooze(fluid))
-					{
-						toolTip.add(EnumChatFormatting.GRAY + I18n.format(CellarRegistry.instance().getAlternateBooze(fluid).getUnlocalizedName() + ".modifier"));
-					}
-					else
-					{
-						toolTip.add(EnumChatFormatting.GRAY + I18n.format(fluid.getUnlocalizedName() + ".modifier"));
-					}
+					fluid = CellarRegistry.instance().booze().maybeAlternateBooze(fluid);
+					toolTip.add(EnumChatFormatting.GRAY + I18n.format(fluid.getUnlocalizedName() + ".modifier"));
 				}
 			}
 

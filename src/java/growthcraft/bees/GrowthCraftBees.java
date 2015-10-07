@@ -97,7 +97,7 @@ public class GrowthCraftBees
 			honeyMead_booze[i]  = (new Booze("grc.honeyMead" + i));
 			FluidRegistry.registerFluid(honeyMead_booze[i]);
 		}
-		CellarRegistry.instance().createBooze(honeyMead_booze, config.honeyMeadColor, "fluid.grc.honeyMead");
+		CellarRegistry.instance().booze().createBooze(honeyMead_booze, config.honeyMeadColor, "fluid.grc.honeyMead");
 
 		honeyMead        = (new ItemBoozeBottle(6, -0.45F, honeyMead_booze))
 			.setColor(config.honeyMeadColor)
@@ -131,15 +131,9 @@ public class GrowthCraftBees
 		//CellarRegistry.instance().addBoozeAlternative(FluidRegistry.LAVA, honeyMead_booze[0]);
 
 		BeesRegistry.instance().addBee(bee);
-		BeesRegistry.instance().addFlower(Blocks.red_flower, 0);
-		BeesRegistry.instance().addFlower(Blocks.red_flower, 1);
-		BeesRegistry.instance().addFlower(Blocks.red_flower, 2);
-		BeesRegistry.instance().addFlower(Blocks.red_flower, 3);
-		BeesRegistry.instance().addFlower(Blocks.red_flower, 4);
-		BeesRegistry.instance().addFlower(Blocks.red_flower, 5);
-		BeesRegistry.instance().addFlower(Blocks.red_flower, 6);
-		BeesRegistry.instance().addFlower(Blocks.red_flower, 7);
-		BeesRegistry.instance().addFlower(Blocks.red_flower, 8);
+		for (int i = 0; i < 9; ++i) {
+			BeesRegistry.instance().addFlower(Blocks.red_flower, i);
+		}
 		BeesRegistry.instance().addFlower(Blocks.yellow_flower, 0);
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);

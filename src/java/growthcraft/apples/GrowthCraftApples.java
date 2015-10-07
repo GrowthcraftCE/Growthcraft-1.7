@@ -87,7 +87,7 @@ public class GrowthCraftApples
 			appleCiderBooze[i]  = (new Booze("grc.appleCider" + i));
 			FluidRegistry.registerFluid(appleCiderBooze[i]);
 		}
-		CellarRegistry.instance().createBooze(appleCiderBooze, this.config.appleCiderColor, "fluid.grc.appleCider");
+		CellarRegistry.instance().booze().createBooze(appleCiderBooze, this.config.appleCiderColor, "fluid.grc.appleCider");
 
 		appleCider        = (new ItemBoozeBottle(4, -0.3F, appleCiderBooze))
 			.setColor(this.config.appleCiderColor)
@@ -116,7 +116,7 @@ public class GrowthCraftApples
 			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(appleCider, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
 		}
 
-		CellarRegistry.instance().addPressing(Items.apple, appleCiderBooze[0], this.config.appleCiderPressingTime, 40, 0.3F);
+		CellarRegistry.instance().pressing().addPressing(Items.apple, appleCiderBooze[0], this.config.appleCiderPressingTime, 40, 0.3F);
 
 		try
 		{

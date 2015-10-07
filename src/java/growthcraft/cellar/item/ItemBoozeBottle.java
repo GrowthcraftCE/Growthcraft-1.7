@@ -264,7 +264,7 @@ public class ItemBoozeBottle extends ItemFood
 
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		if (CellarRegistry.instance().isFluidBooze(this.getBooze(stack.getItemDamage())))
+		if (CellarRegistry.instance().booze().isFluidBooze(this.getBooze(stack.getItemDamage())))
 		{
 			String s = I18n.format(this.getBooze(stack.getItemDamage()).getUnlocalizedName() + ".modifier");
 			list.add(EnumChatFormatting.GRAY + s);
@@ -384,7 +384,7 @@ public class ItemBoozeBottle extends ItemFood
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
-		return StatCollector.translateToLocal(CellarRegistry.instance().getBoozeName(this.booze));
+		return StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(this.booze));
 	}
 
 	@Override

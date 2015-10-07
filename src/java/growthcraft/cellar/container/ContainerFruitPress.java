@@ -71,7 +71,7 @@ public class ContainerFruitPress extends Container
 			}
 			else if (index != 0)
 			{
-				if (CellarRegistry.instance().isPressingRecipe(stack))
+				if (CellarRegistry.instance().pressing().isPressingRecipe(stack))
 				{
 					if (!this.mergeItemStack(stack, 0, 1, false))
 					{

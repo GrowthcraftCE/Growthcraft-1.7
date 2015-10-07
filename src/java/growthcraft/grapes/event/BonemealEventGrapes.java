@@ -66,7 +66,7 @@ public class BonemealEventGrapes
 				if (!event.world.isRemote)
 				{
 					vine.incrementGrowth(event.world, event.x, event.y, event.z, meta);
-					event.world.setBlock(event.x, event.y + 1, event.z, GrowthCraftGrapes.grapeLeaves, 0, 3);
+					event.world.setBlock(event.x, event.y + 1, event.z, GrowthCraftGrapes.grapeLeaves, 0, 2);
 				}
 				event.setResult(Result.ALLOW);
 			}
@@ -75,7 +75,7 @@ public class BonemealEventGrapes
 				if (!event.world.isRemote)
 				{
 					vine.incrementGrowth(event.world, event.x, event.y, event.z, meta);
-					event.world.setBlock(event.x, event.y + 1, event.z, GrowthCraftGrapes.grapeVine1, 0, 3);
+					event.world.setBlock(event.x, event.y + 1, event.z, GrowthCraftGrapes.grapeVine1, 0, 2);
 				}
 				event.setResult(Result.ALLOW);
 			}

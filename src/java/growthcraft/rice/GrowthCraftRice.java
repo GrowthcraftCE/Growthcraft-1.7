@@ -91,7 +91,7 @@ public class GrowthCraftRice
 			riceSake_booze[i]  = (new Booze("grc.riceSake" + i));
 			FluidRegistry.registerFluid(riceSake_booze[i]);
 		}
-		CellarRegistry.instance().createBooze(riceSake_booze, config.riceSakeColor, "fluid.grc.riceSake");
+		CellarRegistry.instance().booze().createBooze(riceSake_booze, config.riceSakeColor, "fluid.grc.riceSake");
 
 		riceSake        = (new ItemBoozeBottle(5, -0.6F, riceSake_booze))
 			.setColor(config.riceSakeColor)
@@ -120,7 +120,7 @@ public class GrowthCraftRice
 			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(riceSake, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
 		}
 
-		CellarRegistry.instance().addBrewing(FluidRegistry.WATER, rice, riceSake_booze[0], config.riceSakeBrewingTime, 25, 0.2F);
+		CellarRegistry.instance().brew().addBrewing(FluidRegistry.WATER, rice, riceSake_booze[0], config.riceSakeBrewingTime, 25, 0.2F);
 
 		MinecraftForge.addGrassSeed(new ItemStack(rice), config.riceSeedDropRarity);
 
