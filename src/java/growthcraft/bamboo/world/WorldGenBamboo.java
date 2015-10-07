@@ -15,8 +15,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class WorldGenBamboo extends WorldGenerator
 {
 	//constants
-	private final int density = GrowthCraftBamboo.bambooWorldGen_density;
-	private final int minTreeHeight = 12;
+	private final int density = GrowthCraftBamboo.getConfig().bambooWorldGenDensity;
+	private final int minTreeHeight = GrowthCraftBamboo.getConfig().bambooTreeMinHeight;
+	private final int maxTreeHeight = GrowthCraftBamboo.getConfig().bambooTreeMaxHeight;
 	private final Block leaves = GrowthCraftBamboo.bambooLeaves;
 	private final Block log = GrowthCraftBamboo.bambooStalk;
 
@@ -43,7 +44,7 @@ public class WorldGenBamboo extends WorldGenerator
 		int height = rand.nextInt(3) + this.minTreeHeight;
 		boolean flag = true;
 
-		if (j >= 1 && j + height + 1 <= 256)
+		if (j >= 1 && j + height + 1 <= maxTreeHeight)
 		{
 			int y;
 			byte b0;
@@ -64,7 +65,7 @@ public class WorldGenBamboo extends WorldGenerator
 				{
 					for (z = k - b0; z <= k + b0 && flag; ++z)
 					{
-						if (y >= 0 && y < 256)
+						if (y >= 0 && y < maxTreeHeight)
 						{
 							checkBlock = world.getBlock(x, y, z);
 
@@ -93,7 +94,7 @@ public class WorldGenBamboo extends WorldGenerator
 				int it;
 				Block block;
 
-				if (isSoil && j < 256 - height - 1)
+				if (isSoil && j < maxTreeHeight - height - 1)
 				{
 					soil.onPlantGrow(world, i, j - 1, k, i, j, k);
 

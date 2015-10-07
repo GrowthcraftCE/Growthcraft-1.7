@@ -64,52 +64,17 @@ public class GrowthCraftRice
 
 	public static Fluid[] riceSake_booze;
 
-	// these properties should be moved to a Config class
-	public static float riceBlock_growth;
-	public static int rice_grassDropChance;
-	public static int riceSake_speed;
-	public static boolean config_genRiceField;
-	public static final int color = 15331319;
+	private growthcraft.rice.Config config;
 
-	// Constants
-	public static final int paddyFieldMax = 7;
+	public static growthcraft.rice.Config getConfig()
+	{
+		return instance.config;
+	}
 
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		//====================
-		// CONFIGURATION
-		//====================
-		Configuration config = new Configuration(new File(event.getModConfigurationDirectory(), "growthcraft/rice.conf"));
-		try
-		{
-			config.load();
-
-			double f = 25.0D;
-			Property cfgA = config.get(Configuration.CATEGORY_GENERAL, "Rice growth rate", f);
-			cfgA.comment = "[Higher -> Slower] Default : " + f;
-			this.riceBlock_growth = (float) cfgA.getDouble(f);
-
-			int v = 3;
-			Property cfgB = config.get(Configuration.CATEGORY_GENERAL, "Rice grass drop rarity", v);
-			cfgB.comment = "[Lower -> Rarer] Default : " + v;
-			this.rice_grassDropChance = cfgB.getInt(v);
-
-			v = 20;
-			Property cfgC = config.get(Configuration.CATEGORY_GENERAL, "Rice Sake brew time", v);
-			cfgC.comment = "[Higher -> Slower] Default : " + v;
-			this.riceSake_speed = cfgC.getInt(v);
-
-			boolean b = false;
-			Property cfgD = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Rice Fields", b);
-			cfgD.comment = "Controls rice field spawning in villages Default : " + b;
-			this.config_genRiceField = cfgD.getBoolean(b);
-		}
-		finally
-		{
-			if (config.hasChanged()) { config.save(); }
-
-		}
+		config = new growthcraft.rice.Config(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
 
 		//====================
 		// INIT
@@ -126,10 +91,14 @@ public class GrowthCraftRice
 			riceSake_booze[i]  = (new Booze("grc.riceSake" + i));
 			FluidRegistry.registerFluid(riceSake_booze[i]);
 		}
-		CellarRegistry.instance().createBooze(riceSake_booze, this.color, "fluid.grc.riceSake");
+		CellarRegistry.instance().createBooze(riceSake_booze, config.riceSakeColor, "fluid.grc.riceSake");
 
-		riceSake        = (new ItemBoozeBottle(5, -0.6F, riceSake_booze)).setColor(this.color).setTipsy(0.65F, 900).setPotionEffects(new int[] {Potion.moveSpeed.id, Potion.jump.id}, new int[] {3600, 3600});
-		riceSake_bucket = (new ItemBoozeBucket(riceSake_booze)).setColor(this.color);
+		riceSake        = (new ItemBoozeBottle(5, -0.6F, riceSake_booze))
+			.setColor(config.riceSakeColor)
+			.setTipsy(0.65F, 900)
+			.setPotionEffects(new int[] {Potion.moveSpeed.id, Potion.jump.id}, new int[] {3600, 3600});
+		riceSake_bucket = (new ItemBoozeBucket(riceSake_booze))
+			.setColor(config.riceSakeColor);
 
 		//====================
 		// REGISTRIES
@@ -151,9 +120,9 @@ public class GrowthCraftRice
 			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(riceSake, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
 		}
 
-		CellarRegistry.instance().addBrewing(FluidRegistry.WATER, rice, riceSake_booze[0], this.riceSake_speed, 25, 0.2F);
+		CellarRegistry.instance().addBrewing(FluidRegistry.WATER, rice, riceSake_booze[0], config.riceSakeBrewingTime, 25, 0.2F);
 
-		MinecraftForge.addGrassSeed(new ItemStack(rice), this.rice_grassDropChance);
+		MinecraftForge.addGrassSeed(new ItemStack(rice), config.riceSeedDropRarity);
 
 		try
 		{
@@ -184,7 +153,7 @@ public class GrowthCraftRice
 		proxy.initRenders();
 
 		VillageHandlerRice handler = new VillageHandlerRice();
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.villagerBrewer_id, handler);
+		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 
 		FMLInterModComms.sendMessage("Thaumcraft", "harvestStandardCrop", new ItemStack(riceBlock, 1, 7));

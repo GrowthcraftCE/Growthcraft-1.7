@@ -351,6 +351,6 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 	@Override
 	protected int getVillagerType(int par1)
 	{
-		return GrowthCraftBees.villagerApiarist_id;
+		return GrowthCraftBees.getConfig().villagerApiaristID;
 	}
 }

@@ -31,7 +31,7 @@ public class VillageHandlerBeesApiarist implements IVillageTradeHandler, IVillag
 	public PieceWeight getVillagePieceWeight(Random random, int i)
 	{
 		int num = MathHelper.getRandomIntegerInRange(random, 0 + i, 1 + i);
-		if (!GrowthCraftBees.config_genApiarist)
+		if (!GrowthCraftBees.getConfig().generateApiaristStructure)
 			num = 0;
 
 		return new PieceWeight(ComponentVillageApiarist.class, 21, num);

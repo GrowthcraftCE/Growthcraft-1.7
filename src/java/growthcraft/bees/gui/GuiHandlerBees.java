@@ -1,7 +1,7 @@
 package growthcraft.bees.gui;
 
 import growthcraft.bees.block.ContainerBeeBox;
-import growthcraft.bees.entity.TileEntityBeeBox;
+import growthcraft.bees.tileentity.TileEntityBeeBox;
 import growthcraft.bees.gui.GuiBeeBox;
 
 import cpw.mods.fml.common.network.IGuiHandler;

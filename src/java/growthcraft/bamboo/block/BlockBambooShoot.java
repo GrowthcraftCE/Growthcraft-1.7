@@ -32,7 +32,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 	public static IIcon[] tex;
 
 	//constants
-	private final int growth = GrowthCraftBamboo.bambooShoot_growth;
+	private final int growth = GrowthCraftBamboo.getConfig().bambooShootGrowthRate;
 
 	public BlockBambooShoot()
 	{

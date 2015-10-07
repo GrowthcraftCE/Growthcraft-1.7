@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 public class WorldGenBeeHive extends WorldGenerator
 {
 	//constants
-	private final int density = GrowthCraftBees.beeWorldGen_density;
+	private final int density = GrowthCraftBees.getConfig().beeWorldGenDensity;
 
 	@Override
 	public boolean generate(World world, Random random, int x, int y, int z)

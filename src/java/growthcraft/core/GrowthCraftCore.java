@@ -49,24 +49,19 @@ public class GrowthCraftCore
 
 	public static AchievementPage chievPage;
 
+	private growthcraft.core.Config config;
+
+	public static growthcraft.core.Config getConfig()
+	{
+		return instance.config;
+	}
+
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
+		config = new growthcraft.core.Config(event.getModConfigurationDirectory(), "growthcraft/core.conf");
+
 		tab =  new CreativeTabGrowthcraft("tabGrowthCraft");
-
-
-		//====================
-		// CONFIGURATION
-		//====================
-		/*Configuration config = new Configuration(new File(event.getModConfigurationDirectory(), "growthcraft/core.conf"));
-		try
-		{
-			config.load();
-		}
-		finally
-		{
-			if (config.hasChanged()) { config.save(); }
-		}*/
 
 		//====================
 		// INIT

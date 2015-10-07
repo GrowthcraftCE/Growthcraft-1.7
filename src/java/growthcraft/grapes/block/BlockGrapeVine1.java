@@ -32,7 +32,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockGrapeVine1 extends Block implements IPlantable, ICropDataProvider
 {
-	private final float growth = GrowthCraftGrapes.grapeVine1_growth;
+	private final float growth = GrowthCraftGrapes.getConfig().grapeVineTrunkGrowthRate;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;

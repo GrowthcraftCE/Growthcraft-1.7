@@ -34,7 +34,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 public class BlockFishTrap extends BlockContainer
 {
 	//constants
-	private final float chance = GrowthCraftFishTrap.fishTrap_catchRate;
+	private final float chance = GrowthCraftFishTrap.getConfig().fishTrapCatchRate;
 
 	Random rand = new Random();
 	@SideOnly(Side.CLIENT)
@@ -73,14 +73,14 @@ public class BlockFishTrap extends BlockContainer
 	{
 		float f = this.getCatchRate(world, x, y, z);
 		boolean flag;
-		if (GrowthCraftFishTrap.instance.fishTrap_useBiomeDict)
+		if (GrowthCraftFishTrap.getConfig().useBiomeDict)
 		{
 			BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
 			flag = (BiomeDictionary.isBiomeOfType(biome, Type.WATER));
 		}
 		else
 		{
-			flag = Utils.isIDInList(world.getBiomeGenForCoords(x, z).biomeID, GrowthCraftFishTrap.instance.fishTrap_biomesList);
+			flag = Utils.isIDInList(world.getBiomeGenForCoords(x, z).biomeID, GrowthCraftFishTrap.getConfig().biomesList);
 		}
 
 		if (flag)

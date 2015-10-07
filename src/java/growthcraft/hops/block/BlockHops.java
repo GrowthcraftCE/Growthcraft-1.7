@@ -37,8 +37,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDataProvider
 {
 	//Constants
-	private final float growth = GrowthCraftHops.hopVine_growth;
-	private final float growth2 = GrowthCraftHops.hopVine_growth2;
+	private final float hopVineGrowthRate = GrowthCraftHops.getConfig().hopVineGrowthRate;
+	private final float hopVineFlowerSpawnRate = GrowthCraftHops.getConfig().hopVineFlowerSpawnRate;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
@@ -93,21 +93,21 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 
 			if (meta < 2)
 			{
-				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.growth / f) + 1) == 0))
+				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.hopVineGrowthRate / f) + 1) == 0))
 				{
 					incrementGrowth(world, x, y, z, meta);
 				}
 			}
 			else if ((meta == 2 || meta == 3) && world.getBlock(x, y + 1, z) == GrowthCraftCore.ropeBlock && this.canBlockStay(world, x, y + 1, z))
 			{
-				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.growth / f) + 1) == 0))
+				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.hopVineGrowthRate / f) + 1) == 0))
 				{
 					world.setBlock(x, y + 1, z, this, 2, 3);
 				}
 			}
 			else if (meta == 2)
 			{
-				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.growth2 / f) + 1) == 0))
+				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.hopVineFlowerSpawnRate / f) + 1) == 0))
 				{
 					incrementGrowth(world, x, y, z, meta);
 				}

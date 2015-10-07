@@ -17,7 +17,7 @@ public class VillageHandlerBamboo implements IVillageCreationHandler
 	public PieceWeight getVillagePieceWeight(Random random, int i)
 	{
 		int num = MathHelper.getRandomIntegerInRange(random, 0 + i, 1 + i);
-		if (!GrowthCraftBamboo.config_genBambooYard)
+		if (!GrowthCraftBamboo.getConfig().generateBambooYard)
 			num = 0;
 
 		return new PieceWeight(ComponentVillageBambooYard.class, 21, num);
