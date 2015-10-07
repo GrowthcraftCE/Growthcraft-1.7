@@ -15,6 +15,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -80,6 +81,19 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 		incrementGrowth(world, x, y, z, world.getBlockMetadata(x, y, z));
 	}
 
+	/**
+	 * Drops the block as an item and replaces it with air
+	 * @param world - world to drop in
+	 * @param x - x Coord
+	 * @param y - y Coord
+	 * @param z - z Coord
+	 */
+	public void fellBlockAsItem(World world, int x, int y, int z)
+	{
+		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		world.setBlockToAir(x, y, z);
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -107,8 +121,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 				}
 				else if (meta >= 2 && this.dropRipeApples && world.rand.nextInt(this.dropChance) == 0)
 				{
-					this.dropBlockAsItem(world, x, y, z, new ItemStack(Items.apple));
-					world.setBlockToAir(x, y, z);
+					fellBlockAsItem(world, x, y, z);
 				}
 			}
 		}
@@ -118,12 +131,21 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	 * TRIGGERS
 	 ************/
 	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7, float par8, float par9)
+	{
+		if (!world.isRemote)
+		{
+			fellBlockAsItem(world, x, y, z);
+		}
+		return true;
+	}
+
+	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlock(x, y, z, Blocks.air, 0, 2);
+			fellBlockAsItem(world, x, y, z);
 		}
 	}
 
