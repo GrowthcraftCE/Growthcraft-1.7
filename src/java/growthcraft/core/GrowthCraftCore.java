@@ -4,6 +4,7 @@ import growthcraft.core.block.BlockFenceRope;
 import growthcraft.core.block.BlockRope;
 import growthcraft.core.event.HarvestDropsEventCore;
 import growthcraft.core.event.TextureStitchEventCore;
+import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.item.ItemRope;
 import growthcraft.core.network.CommonProxy;
 
@@ -90,6 +91,7 @@ public class GrowthCraftCore
 		GameRegistry.addRecipe(new ItemStack(rope, 8), new Object[] {"A", 'A', Items.lead});
 
 		MinecraftForge.EVENT_BUS.register(new TextureStitchEventCore());
+		BucketHandler.init();
 	}
 
 	@EventHandler

@@ -1,7 +1,7 @@
 /**
  * Gracefully taken from BuildCraft
  */
-package growthcraft.cellar.handler;
+package growthcraft.core.handler;
 
 import java.util.HashMap;
 import java.util.Map;

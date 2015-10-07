@@ -11,7 +11,6 @@ import growthcraft.apples.village.ComponentVillageAppleFarm;
 import growthcraft.apples.village.VillageHandlerApples;
 import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.handler.BucketHandler;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.item.ItemBucketBooze;

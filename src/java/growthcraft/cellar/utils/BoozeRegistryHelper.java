@@ -8,7 +8,7 @@ import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.cellar.item.ItemBlockFluidBooze;
 import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.handler.BucketHandler;
+import growthcraft.core.handler.BucketHandler;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 

@@ -7,7 +7,6 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.handler.BucketHandler;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.item.ItemBucketBooze;

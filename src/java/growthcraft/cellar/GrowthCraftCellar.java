@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.cellar.handler.BucketHandler;
 import growthcraft.cellar.block.BlockBrewKettle;
 import growthcraft.cellar.block.BlockFermentBarrel;
 import growthcraft.cellar.block.BlockFruitPress;
@@ -178,7 +177,6 @@ public class GrowthCraftCellar
 		CellarRegistry.instance().addHeatSource(Blocks.lava);
 		CellarRegistry.instance().addHeatSource(Blocks.flowing_lava);
 
-		BucketHandler.init();
 	}
 
 	@EventHandler
