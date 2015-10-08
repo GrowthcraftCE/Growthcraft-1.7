@@ -16,10 +16,14 @@ import growthcraft.bees.village.ComponentVillageApiarist;
 import growthcraft.bees.village.VillageHandlerBees;
 import growthcraft.bees.village.VillageHandlerBeesApiarist;
 import growthcraft.bees.world.WorldGeneratorBees;
+import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucket;
+import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
+import growthcraft.cellar.item.ItemBucketBooze;
+import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -61,13 +65,15 @@ public class GrowthCraftBees
 
 	public static Block beeBox;
 	public static Block beeHive;
+	public static BlockFluidBooze[] honeyMeadFluids;
 	public static Item honeyComb;
 	public static Item honeyJar;
 	public static Item bee;
 	public static Item honeyMead;
-	public static Item honeyMead_bucket;
+	public static Item honeyMeadBucket_deprecated;
+	public static ItemBucketBooze[] honeyMeadBuckets;
 
-	public static Fluid[] honeyMead_booze;
+	public static Fluid[] honeyMeadBooze;
 
 	private growthcraft.bees.Config config;
 
@@ -84,26 +90,23 @@ public class GrowthCraftBees
 		//====================
 		// INIT
 		//====================
-		beeBox  = (new BlockBeeBox());
-		beeHive = (new BlockBeeHive());
+		beeBox  = new BlockBeeBox();
+		beeHive = new BlockBeeHive();
 
-		honeyComb = (new ItemHoneyComb());
-		honeyJar  = (new ItemHoneyJar());
-		bee       = (new ItemBee());
+		honeyComb = new ItemHoneyComb();
+		honeyJar  = new ItemHoneyJar();
+		bee       = new ItemBee();
 
-		honeyMead_booze = new Booze[4];
-		for (int i = 0; i < honeyMead_booze.length; ++i)
-		{
-			honeyMead_booze[i]  = (new Booze("grc.honeyMead" + i));
-			FluidRegistry.registerFluid(honeyMead_booze[i]);
-		}
-		CellarRegistry.instance().booze().createBooze(honeyMead_booze, config.honeyMeadColor, "fluid.grc.honeyMead");
+		honeyMeadBooze = new Booze[4];
+		honeyMeadFluids = new BlockFluidBooze[honeyMeadBooze.length];
+		honeyMeadBuckets = new ItemBucketBooze[honeyMeadBooze.length];
+		BoozeRegistryHelper.initializeBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, "grc.honeyMead", config.honeyMeadColor);
 
-		honeyMead        = (new ItemBoozeBottle(6, -0.45F, honeyMead_booze))
+		honeyMead        = (new ItemBoozeBottle(6, -0.45F, honeyMeadBooze))
 			.setColor(config.honeyMeadColor)
 			.setTipsy(0.60F, 900)
 			.setPotionEffects(new int[] {Potion.regeneration.id}, new int[] {900});
-		honeyMead_bucket = (new ItemBoozeBucket(honeyMead_booze))
+		honeyMeadBucket_deprecated = (new ItemBoozeBucketDEPRECATED(honeyMeadBooze))
 			.setColor(config.honeyMeadColor);
 
 		//====================
@@ -116,19 +119,12 @@ public class GrowthCraftBees
 		GameRegistry.registerItem(honeyJar, "grc.honeyJar");
 		GameRegistry.registerItem(bee, "grc.bee");
 		GameRegistry.registerItem(honeyMead, "grc.honeyMead");
-		GameRegistry.registerItem(honeyMead_bucket, "grc.honeyMead_bucket");
+		GameRegistry.registerItem(honeyMeadBucket_deprecated, "grc.honeyMead_bucket");
 
-		for (int i = 0; i < honeyMead_booze.length; ++i)
-		{
-			FluidStack stack = new FluidStack(honeyMead_booze[i].getID(), FluidContainerRegistry.BUCKET_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack, new ItemStack(honeyMead_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
-
-			FluidStack stack2 = new FluidStack(honeyMead_booze[i].getID(), GrowthCraftCellar.BOTTLE_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(honeyMead, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
-		}
+		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMead, "grc.honeyMead", honeyMeadBucket_deprecated);
 
 		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
-		//CellarRegistry.instance().addBoozeAlternative(FluidRegistry.LAVA, honeyMead_booze[0]);
+		//CellarRegistry.instance().addBoozeAlternative(FluidRegistry.LAVA, honeyMeadBooze[0]);
 
 		BeesRegistry.instance().addBee(bee);
 		for (int i = 0; i < 9; ++i) {
@@ -161,7 +157,7 @@ public class GrowthCraftBees
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(beeBox, 1), " A ", "A A", "AAA", 'A', "plankWood"));
 		ItemStack stack = new ItemStack(honeyComb, 1, 1);
 		GameRegistry.addShapelessRecipe(new ItemStack(honeyJar, 1), stack, stack, stack, stack, stack, stack, Items.flower_pot);
-		GameRegistry.addShapelessRecipe(new ItemStack(honeyMead_bucket, 1, 0), Items.water_bucket, honeyJar, Items.bucket);
+		GameRegistry.addShapelessRecipe(new ItemStack(honeyMeadBucket_deprecated, 1, 0), Items.water_bucket, honeyJar, Items.bucket);
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -189,9 +185,9 @@ public class GrowthCraftBees
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < honeyMead_booze.length; ++i)
+			for (int i = 0; i < honeyMeadBooze.length; ++i)
 			{
-				honeyMead_booze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				honeyMeadBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}
@@ -258,18 +254,18 @@ public class GrowthCraftBees
 				ThaumcraftApi.registerObjectTag(beeBox.blockID, -1, new AspectList().add(Aspect.AIR, 2));
 				ThaumcraftApi.registerObjectTag(beeHive.blockID, -1, new AspectList().add(Aspect.AIR, 2));
 
-				for (int i = 0; i < honeyMead_booze.length; ++i)
+				for (int i = 0; i < honeyMeadBooze.length; ++i)
 				{
 					if (i == 0 || i == 4)
 					{
 						ThaumcraftApi.registerObjectTag(honeyMead.itemID, i, new AspectList().add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(honeyMead_bucket.itemID, i, new AspectList().add(Aspect.WATER, 2));
+						ThaumcraftApi.registerObjectTag(honeyMeadBucket_deprecated.itemID, i, new AspectList().add(Aspect.WATER, 2));
 					}
 					else
 					{
 						int m = i == 2 ? 4 : 2;
 						ThaumcraftApi.registerObjectTag(honeyMead.itemID, i, new AspectList().add(Aspect.MAGIC, m).add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(honeyMead_bucket.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
+						ThaumcraftApi.registerObjectTag(honeyMeadBucket_deprecated.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
 					}
 				}
 

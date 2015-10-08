@@ -21,6 +21,7 @@ import growthcraft.cellar.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.village.ComponentVillageTavern;
 import growthcraft.cellar.village.VillageHandlerCellar;
 import growthcraft.core.AchievementPageGrowthcraft;
+import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -176,6 +177,9 @@ public class GrowthCraftCellar
 		CellarRegistry.instance().addHeatSource(Blocks.fire);
 		CellarRegistry.instance().addHeatSource(Blocks.lava);
 		CellarRegistry.instance().addHeatSource(Blocks.flowing_lava);
+
+		NEI.hideItem(new ItemStack(fruitPresser));
+		NEI.hideItem(new ItemStack(chievItemDummy));
 	}
 
 	@EventHandler

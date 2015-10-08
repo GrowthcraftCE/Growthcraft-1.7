@@ -4,6 +4,7 @@ import java.util.List;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.utils.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -13,6 +14,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -21,7 +23,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
-public class ItemBoozeBucket extends Item
+public class ItemBoozeBucketDEPRECATED extends Item
 {
 	private Fluid[] booze;
 
@@ -31,7 +33,7 @@ public class ItemBoozeBucket extends Item
 	private IIcon contents;
 
 	private int color = 16777215;
-	public ItemBoozeBucket(Fluid[] booze)
+	public ItemBoozeBucketDEPRECATED(Fluid[] booze)
 	{
 		super();
 		this.setMaxStackSize(1);
@@ -39,12 +41,10 @@ public class ItemBoozeBucket extends Item
 		this.setMaxDamage(0);
 		this.setContainerItem(Items.bucket);
 		this.setUnlocalizedName("grc.boozeBucket");
-		this.setCreativeTab(GrowthCraftCellar.tab);
-
 		this.booze = booze;
 	}
 
-	public ItemBoozeBucket setColor(int color)
+	public ItemBoozeBucketDEPRECATED setColor(int color)
 	{
 		this.color = color;
 		return this;
@@ -88,11 +88,9 @@ public class ItemBoozeBucket extends Item
 
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		if (CellarRegistry.instance().booze().isFluidBooze(this.getBooze(stack.getItemDamage())))
-		{
-			String s =  I18n.format(this.getBooze(stack.getItemDamage()).getUnlocalizedName() + ".modifier");
-			list.add(EnumChatFormatting.GRAY + s);
-		}
+		final String s = UnitFormatter.fluidModifier(getBooze(stack.getItemDamage()));
+		if (s != null) list.add(s);
+		list.add(StatCollector.translateToLocal("grc.cellar.item.booze_bucket.deprecated"));
 	}
 
 	/************
@@ -102,7 +100,7 @@ public class ItemBoozeBucket extends Item
 	@Override
 	public void registerIcons(IIconRegister reg)
 	{
-		this.bucket = reg.registerIcon("bucket_empty");
+		this.bucket = reg.registerIcon("grccellar:bucket_deprecated");
 		this.contents = reg.registerIcon("grccellar:bucket_contents");
 	}
 
@@ -130,8 +128,8 @@ public class ItemBoozeBucket extends Item
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
-		String s = super.getItemStackDisplayName(stack);
-		return s + " " + StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(this.booze));
+		return UnitFormatter.fluidBucketName(getBooze(stack.getItemDamage())) +
+			StatCollector.translateToLocal("grc.cellar.item.booze_bucket.deprecated_suffix");
 	}
 
 	@Override

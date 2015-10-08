@@ -9,10 +9,14 @@ import growthcraft.apples.event.BonemealEventApples;
 import growthcraft.apples.item.ItemAppleSeeds;
 import growthcraft.apples.village.ComponentVillageAppleFarm;
 import growthcraft.apples.village.VillageHandlerApples;
+import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucket;
+import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
+import growthcraft.cellar.item.ItemBucketBooze;
+import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -54,9 +58,11 @@ public class GrowthCraftApples
 	public static Block appleSapling;
 	public static Block appleLeaves;
 	public static Block appleBlock;
+	public static BlockFluidBooze[] appleCiderFluids;
 	public static Item appleSeeds;
 	public static Item appleCider;
-	public static Item appleCider_bucket;
+	public static Item appleCiderBucket_deprecated;
+	public static ItemBucketBooze[] appleCiderBuckets;
 
 	public static Fluid[] appleCiderBooze;
 
@@ -75,25 +81,22 @@ public class GrowthCraftApples
 		//====================
 		// INIT
 		//====================
-		appleSapling      = (new BlockAppleSapling());
-		appleLeaves       = (new BlockAppleLeaves());
-		appleBlock        = (new BlockApple());
+		appleSapling      = new BlockAppleSapling();
+		appleLeaves       = new BlockAppleLeaves();
+		appleBlock        = new BlockApple();
 
-		appleSeeds        = (new ItemAppleSeeds());
+		appleSeeds        = new ItemAppleSeeds();
 
 		appleCiderBooze = new Booze[4];
-		for (int i = 0; i < appleCiderBooze.length; ++i)
-		{
-			appleCiderBooze[i]  = (new Booze("grc.appleCider" + i));
-			FluidRegistry.registerFluid(appleCiderBooze[i]);
-		}
-		CellarRegistry.instance().booze().createBooze(appleCiderBooze, this.config.appleCiderColor, "fluid.grc.appleCider");
+		appleCiderFluids = new BlockFluidBooze[appleCiderBooze.length];
+		appleCiderBuckets = new ItemBucketBooze[appleCiderBooze.length];
+		BoozeRegistryHelper.initializeBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, "grc.appleCider", config.appleCiderColor);
 
 		appleCider        = (new ItemBoozeBottle(4, -0.3F, appleCiderBooze))
 			.setColor(this.config.appleCiderColor)
 			.setTipsy(0.60F, 900)
 			.setPotionEffects(new int[] {Potion.field_76444_x.id}, new int[] {1800});
-		appleCider_bucket = (new ItemBoozeBucket(appleCiderBooze))
+		appleCiderBucket_deprecated = (new ItemBoozeBucketDEPRECATED(appleCiderBooze))
 			.setColor(this.config.appleCiderColor);
 
 		//====================
@@ -105,16 +108,9 @@ public class GrowthCraftApples
 
 		GameRegistry.registerItem(appleSeeds, "grc.appleSeeds");
 		GameRegistry.registerItem(appleCider, "grc.appleCider");
-		GameRegistry.registerItem(appleCider_bucket, "grc.appleCider_bucket");
+		GameRegistry.registerItem(appleCiderBucket_deprecated, "grc.appleCider_bucket");
 
-		for (int i = 0; i < appleCiderBooze.length; ++i)
-		{
-			FluidStack stack = new FluidStack(appleCiderBooze[i].getID(), FluidContainerRegistry.BUCKET_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack, new ItemStack(appleCider_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
-
-			FluidStack stack2 = new FluidStack(appleCiderBooze[i].getID(), GrowthCraftCellar.BOTTLE_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(appleCider, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
-		}
+		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", appleCiderBucket_deprecated);
 
 		CellarRegistry.instance().pressing().addPressing(Items.apple, appleCiderBooze[0], this.config.appleCiderPressingTime, 40, 0.3F);
 
@@ -152,6 +148,7 @@ public class GrowthCraftApples
 		//====================
 		GameRegistry.registerFuelHandler(new AppleFuelHandler());
 
+		NEI.hideItem(new ItemStack(appleBlock));
 	}
 
 	@EventHandler
@@ -222,13 +219,13 @@ public class GrowthCraftApples
 					if (i == 0 || i == 4)
 					{
 						ThaumcraftApi.registerObjectTag(appleCider.itemID, i, new AspectList().add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(appleCider_bucket.itemID, i, new AspectList().add(Aspect.WATER, 2));
+						ThaumcraftApi.registerObjectTag(appleCiderBucket_deprecated.itemID, i, new AspectList().add(Aspect.WATER, 2));
 					}
 					else
 					{
 						int m = i == 2 ? 4 : 2;
 						ThaumcraftApi.registerObjectTag(appleCider.itemID, i, new AspectList().add(Aspect.MAGIC, m).add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(appleCider_bucket.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
+						ThaumcraftApi.registerObjectTag(appleCiderBucket_deprecated.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
 					}
 				}
 

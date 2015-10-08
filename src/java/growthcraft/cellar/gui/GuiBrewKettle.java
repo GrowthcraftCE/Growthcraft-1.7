@@ -3,12 +3,13 @@ package growthcraft.cellar.gui;
 import java.util.ArrayList;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.container.ContainerBrewKettle;
+import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.network.PacketClearTankButtonWByte;
 import growthcraft.cellar.network.PacketSwitchTankButton;
 import growthcraft.cellar.tileentity.CellarTank;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
+import growthcraft.core.utils.UnitFormatter;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -162,7 +163,7 @@ public class GuiBrewKettle extends GuiCellar
 				if (CellarRegistry.instance().booze().isFluidBooze(fluid))
 				{
 					fluid = CellarRegistry.instance().booze().maybeAlternateBooze(fluid);
-					toolTip.add(EnumChatFormatting.GRAY + I18n.format(fluid.getUnlocalizedName() + ".modifier"));
+					toolTip.add(UnitFormatter.fluidModifier(fluid));
 				}
 			}
 
@@ -179,7 +180,7 @@ public class GuiBrewKettle extends GuiCellar
 				if (CellarRegistry.instance().booze().isFluidBooze(fluid))
 				{
 					fluid = CellarRegistry.instance().booze().maybeAlternateBooze(fluid);
-					toolTip.add(EnumChatFormatting.GRAY + I18n.format(fluid.getUnlocalizedName() + ".modifier"));
+					toolTip.add(UnitFormatter.fluidModifier(fluid));
 				}
 			}
 

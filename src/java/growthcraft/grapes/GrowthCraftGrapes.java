@@ -5,19 +5,23 @@ import java.io.File;
 import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucket;
+import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
+import growthcraft.cellar.item.ItemBucketBooze;
+import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.integration.NEI;
 import growthcraft.grapes.block.BlockGrapeBlock;
 import growthcraft.grapes.block.BlockGrapeLeaves;
 import growthcraft.grapes.block.BlockGrapeVine0;
 import growthcraft.grapes.block.BlockGrapeVine1;
 import growthcraft.grapes.event.BonemealEventGrapes;
-import growthcraft.grapes.item.ItemGrapeSeeds;
 import growthcraft.grapes.item.ItemGrapes;
-import growthcraft.grapes.village.VillageHandlerGrapes;
+import growthcraft.grapes.item.ItemGrapeSeeds;
 import growthcraft.grapes.village.ComponentVillageGrapeVineyard;
+import growthcraft.grapes.village.VillageHandlerGrapes;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -63,12 +67,14 @@ public class GrowthCraftGrapes
 	public static BlockGrapeVine1 grapeVine1;
 	public static Block grapeLeaves;
 	public static Block grapeBlock;
+	public static BlockFluidBooze[] grapeWineFluids;
 	public static Item grapes;
 	public static Item grapeSeeds;
 	public static Item grapeWine;
-	public static Item grapeWine_bucket;
+	public static Item grapeWineBucket_deprecated;
+	public static ItemBucketBooze[] grapeWineBuckets;
 
-	public static Fluid[] grapeWine_booze;
+	public static Fluid[] grapeWineBooze;
 
 	private growthcraft.grapes.Config config;
 
@@ -85,24 +91,25 @@ public class GrowthCraftGrapes
 		//====================
 		// INIT
 		//====================
-		grapeVine0  = (new BlockGrapeVine0());
-		grapeVine1  = (new BlockGrapeVine1());
-		grapeLeaves = (new BlockGrapeLeaves());
-		grapeBlock  = (new BlockGrapeBlock());
+		grapeVine0  = new BlockGrapeVine0();
+		grapeVine1  = new BlockGrapeVine1();
+		grapeLeaves = new BlockGrapeLeaves();
+		grapeBlock  = new BlockGrapeBlock();
 
-		grapes     = (new ItemGrapes());
-		grapeSeeds = (new ItemGrapeSeeds());
+		grapes     = new ItemGrapes();
+		grapeSeeds = new ItemGrapeSeeds();
 
-		grapeWine_booze = new Booze[4];
-		for (int i = 0; i < grapeWine_booze.length; ++i)
-		{
-			grapeWine_booze[i]  = (new Booze("grc.grapeWine" + i));
-			FluidRegistry.registerFluid(grapeWine_booze[i]);
-		}
-		CellarRegistry.instance().booze().createBooze(grapeWine_booze, config.grapeWineColor, "fluid.grc.grapeWine");
+		grapeWineBooze = new Booze[4];
+		grapeWineFluids = new BlockFluidBooze[grapeWineBooze.length];
+		grapeWineBuckets = new ItemBucketBooze[grapeWineBooze.length];
+		BoozeRegistryHelper.initializeBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, "grc.grapeWine", config.grapeWineColor);
 
-		grapeWine        = (new ItemBoozeBottle(2, -0.3F, grapeWine_booze)).setColor(config.grapeWineColor).setTipsy(0.60F, 900).setPotionEffects(new int[] {Potion.resistance.id}, new int[] {3600});
-		grapeWine_bucket = (new ItemBoozeBucket(grapeWine_booze)).setColor(config.grapeWineColor);
+		grapeWine        = (new ItemBoozeBottle(2, -0.3F, grapeWineBooze))
+			.setColor(config.grapeWineColor)
+			.setTipsy(0.60F, 900)
+			.setPotionEffects(new int[] {Potion.resistance.id}, new int[] {3600});
+		grapeWineBucket_deprecated = (new ItemBoozeBucketDEPRECATED(grapeWineBooze))
+			.setColor(config.grapeWineColor);
 
 		//====================
 		// REGISTRIES
@@ -116,18 +123,11 @@ public class GrowthCraftGrapes
 		GameRegistry.registerItem(grapes, "grc.grapes");
 		GameRegistry.registerItem(grapeSeeds, "grc.grapeSeeds");
 		GameRegistry.registerItem(grapeWine, "grc.grapeWine");
-		GameRegistry.registerItem(grapeWine_bucket, "grc.grapeWine_bucket");
+		GameRegistry.registerItem(grapeWineBucket_deprecated, "grc.grapeWine_bucket");
 
-		for (int i = 0; i < grapeWine_booze.length; ++i)
-		{
-			FluidStack stack = new FluidStack(grapeWine_booze[i].getID(), FluidContainerRegistry.BUCKET_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack, new ItemStack(grapeWine_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
+		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, grapeWine, "grc.grapeWine", grapeWineBucket_deprecated);
 
-			FluidStack stack2 = new FluidStack(grapeWine_booze[i].getID(), GrowthCraftCellar.BOTTLE_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack2, new ItemStack(grapeWine, 1, i), GrowthCraftCellar.EMPTY_BOTTLE);
-		}
-
-		CellarRegistry.instance().pressing().addPressing(grapes, grapeWine_booze[0], config.grapeWinePressingTime, 40, 0.3F);
+		CellarRegistry.instance().pressing().addPressing(grapes, grapeWineBooze[0], config.grapeWinePressingTime, 40, 0.3F);
 
 		CoreRegistry.instance().addVineDrop(new ItemStack(grapes), config.vineGrapeDropRarity);
 
@@ -164,6 +164,10 @@ public class GrowthCraftGrapes
 		//====================
 		GameRegistry.addShapelessRecipe(new ItemStack(grapeSeeds, 1), grapes);
 
+		NEI.hideItem(new ItemStack(grapeVine0));
+		NEI.hideItem(new ItemStack(grapeVine1));
+		NEI.hideItem(new ItemStack(grapeBlock));
+
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -185,9 +189,9 @@ public class GrowthCraftGrapes
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < grapeWine_booze.length; ++i)
+			for (int i = 0; i < grapeWineBooze.length; ++i)
 			{
-				grapeWine_booze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				grapeWineBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}
@@ -242,18 +246,18 @@ public class GrowthCraftGrapes
 				ThaumcraftApi.registerObjectTag(grapeSeeds.itemID, -1, new AspectList().add(Aspect.SEED, 1));
 				ThaumcraftApi.registerObjectTag(grapes.itemID, -1, new AspectList().add(Aspect.CROP, 2).add(Aspect.HUNGER, 1));
 
-				for (int i = 0; i < grapeWine_booze.length; ++i)
+				for (int i = 0; i < grapeWineBooze.length; ++i)
 				{
 					if (i == 0 || i == 4)
 					{
 						ThaumcraftApi.registerObjectTag(grapeWine.itemID, i, new AspectList().add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(grapeWine_bucket.itemID, i, new AspectList().add(Aspect.WATER, 2));
+						ThaumcraftApi.registerObjectTag(grapeWineBucket_deprecated.itemID, i, new AspectList().add(Aspect.WATER, 2));
 					}
 					else
 					{
 						int m = i == 2 ? 4 : 2;
 						ThaumcraftApi.registerObjectTag(grapeWine.itemID, i, new AspectList().add(Aspect.MAGIC, m).add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(grapeWine_bucket.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
+						ThaumcraftApi.registerObjectTag(grapeWineBucket_deprecated.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
 					}
 				}
 
