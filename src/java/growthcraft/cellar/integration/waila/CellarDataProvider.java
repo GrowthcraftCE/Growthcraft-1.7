@@ -10,6 +10,7 @@ import growthcraft.cellar.utils.TagFormatterBrewKettle;
 import growthcraft.cellar.utils.TagFormatterFruitPress;
 import growthcraft.cellar.utils.TagFormatterFermentBarrel;
 import growthcraft.core.utils.ConstID;
+import growthcraft.core.utils.NBTHelper;
 import growthcraft.core.utils.TagFormatterFluidHandler;
 
 import cpw.mods.fml.common.Optional;
@@ -101,67 +102,22 @@ public class CellarDataProvider implements IWailaDataProvider
 		return tooltip;
 	}
 
-	private void getIFluidHandlerData(IFluidHandler fluidHandler, NBTTagCompound tag)
-	{
-		final NBTTagList tankTagList = new NBTTagList();
-		int tankId = 0;
-		for (FluidTankInfo tankInfo : fluidHandler.getTankInfo(ForgeDirection.UNKNOWN))
-		{
-			final NBTTagCompound tankTag = new NBTTagCompound();
-			tankTag.setInteger("tank_id", tankId);
-			tankTag.setInteger("capacity", tankInfo.capacity);
-			if (tankInfo.fluid != null)
-			{
-				tankTag.setInteger("fluid_id", tankInfo.fluid.getFluidID());
-				tankTag.setInteger("amount", tankInfo.fluid.amount);
-			}
-			else
-			{
-				// no fluid
-				tankTag.setInteger("fluid_id", ConstID.NO_FLUID);
-				tankTag.setInteger("amount", 0);
-			}
-			tankTagList.appendTag(tankTag);
-			++tankId;
-		}
-		tag.setTag("tanks", tankTagList);
-		tag.setInteger("tank_count", tankId);
-	}
-
-	private NBTTagCompound getItemData(ItemStack itemStack, NBTTagCompound tag)
-	{
-		if (itemStack != null)
-		{
-			final Item item = itemStack.getItem();
-			tag.setInteger("id", (item != null) ? Item.getIdFromItem(item) : ConstID.NO_ITEM);
-			tag.setInteger("damage", itemStack.getItemDamage());
-			tag.setInteger("size", itemStack.stackSize);
-		}
-		else
-		{
-			tag.setInteger("id", ConstID.NO_ITEM);
-			tag.setInteger("damage", 0);
-			tag.setInteger("size", 0);
-		}
-		return tag;
-	}
-
 	private void getBrewKettleData(TileEntityBrewKettle brewKettle, NBTTagCompound tag)
 	{
 		tag.setBoolean("can_brew", brewKettle.canBrew());
-		tag.setTag("item_brew", getItemData(brewKettle.getStackInSlot(0), new NBTTagCompound()));
-		tag.setTag("item_residue", getItemData(brewKettle.getStackInSlot(1), new NBTTagCompound()));
+		tag.setTag("item_brew", NBTHelper.getItemData(brewKettle.getStackInSlot(0), new NBTTagCompound()));
+		tag.setTag("item_residue", NBTHelper.getItemData(brewKettle.getStackInSlot(1), new NBTTagCompound()));
 	}
 
 	private void getFruitPressData(TileEntityFruitPress fruitPress, NBTTagCompound tag)
 	{
-		tag.setTag("item_press", getItemData(fruitPress.getStackInSlot(0), new NBTTagCompound()));
-		tag.setTag("item_residue", getItemData(fruitPress.getStackInSlot(1), new NBTTagCompound()));
+		tag.setTag("item_press", NBTHelper.getItemData(fruitPress.getStackInSlot(0), new NBTTagCompound()));
+		tag.setTag("item_residue", NBTHelper.getItemData(fruitPress.getStackInSlot(1), new NBTTagCompound()));
 	}
 
 	private void getFermentBarrelData(TileEntityFermentBarrel fermentBarrel, NBTTagCompound tag)
 	{
-		tag.setTag("item_modifier", getItemData(fermentBarrel.getStackInSlot(0), new NBTTagCompound()));
+		tag.setTag("item_modifier", NBTHelper.getItemData(fermentBarrel.getStackInSlot(0), new NBTTagCompound()));
 		tag.setInteger("time", fermentBarrel.getTime());
 		tag.setInteger("time_max", fermentBarrel.getTimeMax());
 		final FluidStack fluidStack = fermentBarrel.getFluidStack();
@@ -179,7 +135,7 @@ public class CellarDataProvider implements IWailaDataProvider
 	@Optional.Method(modid = "Waila")
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
 	{
-		if (te instanceof IFluidHandler) getIFluidHandlerData((IFluidHandler)te, tag);
+		if (te instanceof IFluidHandler) NBTHelper.getIFluidHandlerData((IFluidHandler)te, tag);
 		if (te instanceof TileEntityBrewKettle) getBrewKettleData((TileEntityBrewKettle)te, tag);
 		if (te instanceof TileEntityFruitPress) getFruitPressData((TileEntityFruitPress)te, tag);
 		if (te instanceof TileEntityFermentBarrel) getFermentBarrelData((TileEntityFermentBarrel)te, tag);
