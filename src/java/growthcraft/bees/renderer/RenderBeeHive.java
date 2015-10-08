@@ -1,7 +1,7 @@
 package growthcraft.bees.renderer;
 
 import growthcraft.bees.block.BlockBeeHive;
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -25,13 +25,13 @@ public class RenderBeeHive implements ISimpleBlockRenderingHandler
 			double d = 0.0625D;
 
 			renderer.setRenderBounds(4*d, 0.0D, 4*d, 12*d, 14*d, 12*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			renderer.setRenderBounds(3*d, 1*d, 3*d, 13*d, 13*d, 13*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			renderer.setRenderBounds(2*d, 4*d, 2*d, 14*d, 10*d, 14*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			renderer.setRenderBounds(7*d, 14*d, 7*d, 9*d, 1.0D, 9*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 		}
 	}
 

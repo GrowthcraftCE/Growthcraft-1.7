@@ -2,7 +2,8 @@ package growthcraft.cellar.renderer;
 
 import growthcraft.cellar.block.BlockBrewKettle;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils.Faces;
+import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -26,17 +27,17 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 			Tessellator tes = Tessellator.instance;
 			IIcon[] icon  = {BlockBrewKettle.tex[0], BlockBrewKettle.tex[3], BlockBrewKettle.tex[2], BlockBrewKettle.tex[2], BlockBrewKettle.tex[2], BlockBrewKettle.tex[2]};
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			double d = 0.0625D;
 			float f = 0.125F;
 
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-			Utils.drawFace("zneg", block, renderer, tes, BlockBrewKettle.tex[2], 0.0D, 0.0D, (double)((float)0.0F + 1.0F - f));
-			Utils.drawFace("zpos", block, renderer, tes, BlockBrewKettle.tex[2], 0.0D, 0.0D, (double)((float)0.0F - 1.0F + f));
-			Utils.drawFace("xneg", block, renderer, tes, BlockBrewKettle.tex[2], (double)((float)0.0F + 1.0F - f), 0.0D, 0.0D);
-			Utils.drawFace("xpos", block, renderer, tes, BlockBrewKettle.tex[2], (double)((float)0.0F - 1.0F + f), 0.0D, 0.0D);
-			Utils.drawFace("ypos", block, renderer, tes, BlockBrewKettle.tex[1], 0.0D, (double)((float)0.0F - 1.0F + 0.25F), 0.0D);
-			Utils.drawFace("yneg", block, renderer, tes, BlockBrewKettle.tex[1], 0.0D, (double)((float)0.0F + 1.0F - 0.75F), 0.0D);
+			RenderUtils.drawFace(Faces.ZNEG, block, renderer, tes, BlockBrewKettle.tex[2], 0.0D, 0.0D, (double)((float)0.0F + 1.0F - f));
+			RenderUtils.drawFace(Faces.ZPOS, block, renderer, tes, BlockBrewKettle.tex[2], 0.0D, 0.0D, (double)((float)0.0F - 1.0F + f));
+			RenderUtils.drawFace(Faces.XNEG, block, renderer, tes, BlockBrewKettle.tex[2], (double)((float)0.0F + 1.0F - f), 0.0D, 0.0D);
+			RenderUtils.drawFace(Faces.XPOS, block, renderer, tes, BlockBrewKettle.tex[2], (double)((float)0.0F - 1.0F + f), 0.0D, 0.0D);
+			RenderUtils.drawFace(Faces.YPOS, block, renderer, tes, BlockBrewKettle.tex[1], 0.0D, (double)((float)0.0F - 1.0F + 0.25F), 0.0D);
+			RenderUtils.drawFace(Faces.YNEG, block, renderer, tes, BlockBrewKettle.tex[1], 0.0D, (double)((float)0.0F + 1.0F - 0.75F), 0.0D);
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		}

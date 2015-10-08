@@ -1,7 +1,7 @@
 package growthcraft.core.renderer;
 
-import growthcraft.core.Utils;
 import growthcraft.core.block.BlockFenceRope;
+import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -25,7 +25,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 			double d = 0.0625D;
 			float f = 0.0F;
 			renderer.setRenderBounds(6*d, 0.0D, 6*d, 10*d, 1.0D, 10*d);
-			Utils.drawInventoryBlock_icon(block, renderer, BlockFenceRope.tex[0], tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, BlockFenceRope.tex[0], tes);
 			tes.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 			IIcon icon = BlockFenceRope.tex[1];
 
@@ -254,7 +254,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 				minU = (double)icon.getInterpolatedU(11);
 				maxU = (double)icon.getMaxU();
 
-				Utils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+				RenderUtils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 			}
 
 			if (flag1)
@@ -269,7 +269,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 				minU = (double)icon.getMinU();
 				maxU = (double)icon.getInterpolatedU(5);
 
-				Utils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+				RenderUtils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 			}
 
 			if (flag2)
@@ -284,7 +284,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 				minU = (double)icon.getInterpolatedU(11);
 				maxU = (double)icon.getMaxU();
 
-				Utils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+				RenderUtils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 			}
 
 			if (flag3)
@@ -299,7 +299,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 				minU = (double)icon.getMinU();
 				maxU = (double)icon.getInterpolatedU(5);
 
-				Utils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+				RenderUtils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 			}
 		}
 		return true;

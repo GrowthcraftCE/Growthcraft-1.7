@@ -1,6 +1,6 @@
 package growthcraft.grapes.renderer;
 
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
 import growthcraft.grapes.block.BlockGrapeVine1;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -24,7 +24,7 @@ public class RenderGrapeVine1 implements ISimpleBlockRenderingHandler
 			Tessellator tes = Tessellator.instance;
 			double d = 0.0625D;
 			renderer.setRenderBounds(6*d, 0.0D, 6*d, 10*d, 0.75D, 10*d);
-			Utils.drawInventoryBlock_icon(block, renderer, BlockGrapeVine1.tex[0], tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, BlockGrapeVine1.tex[0], tes);
 			if (renderer.useInventoryTint)
 			{
 				int color = ColorizerFoliage.getFoliageColorBasic();
@@ -35,7 +35,7 @@ public class RenderGrapeVine1 implements ISimpleBlockRenderingHandler
 				GL11.glColor4f(f1, f2, f3, 1.0F);
 			}
 			renderer.setRenderBounds(4*d, 0.5D, 4*d, 12*d, 1.0D, 12*d);
-			Utils.drawInventoryBlock_icon(block, renderer, ((BlockGrapeVine1)block).getLeafTexture(), tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, ((BlockGrapeVine1)block).getLeafTexture(), tes);
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		}
 	}

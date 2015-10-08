@@ -1,6 +1,6 @@
 package growthcraft.grapes.renderer;
 
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
 import growthcraft.grapes.block.BlockGrapeBlock;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -47,7 +47,7 @@ public class RenderGrape implements ISimpleBlockRenderingHandler
 			double minV = (double)icon.getMinV();
 			double maxV = (double)icon.getMaxV();
 
-			Utils.drawCrossSquaresAlongY(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+			RenderUtils.drawCrossSquaresAlongY(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 		}
 		return true;
 	}

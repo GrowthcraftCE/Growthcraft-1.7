@@ -1,7 +1,7 @@
 package growthcraft.cellar.renderer;
 
 import growthcraft.cellar.block.BlockFruitPresser;
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -26,7 +26,7 @@ public class RenderFruitPresser implements ISimpleBlockRenderingHandler
 			double d    = 0.0625D;
 			// Render Machine
 			renderer.setRenderBounds( 3*d,  7*d,  3*d, 13*d, 15*d, 13*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		}
 	}

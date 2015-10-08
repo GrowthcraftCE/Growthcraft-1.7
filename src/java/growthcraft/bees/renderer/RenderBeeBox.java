@@ -1,7 +1,7 @@
 package growthcraft.bees.renderer;
 
 import growthcraft.bees.block.BlockBeeBox;
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -25,21 +25,21 @@ public class RenderBeeBox implements ISimpleBlockRenderingHandler
 			double d = 0.0625D;
 			// LEGS
 			renderer.setRenderBounds(3*d, 0.0D, 3*d, 5*d, 3*d, 5*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			renderer.setRenderBounds(11*d, 0.0D, 3*d, 13*d, 3*d, 5*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			renderer.setRenderBounds(3*d, 0.0D, 11*d, 5*d, 3*d, 13*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			renderer.setRenderBounds(11*d, 0.0D, 11*d, 13*d, 3*d, 13*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			// BODY
 			renderer.setRenderBounds(1*d, 3*d, 1*d, 15*d, 10*d, 15*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			// ROOF
 			renderer.setRenderBounds(0.0D, 10*d, 0.0D, 1.0D, 13*d, 1.0D);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			renderer.setRenderBounds(2*d, 13*d, 2*d, 14*d, 1.0D, 14*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 		}
 	}
 

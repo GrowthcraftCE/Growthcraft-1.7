@@ -1,6 +1,6 @@
 package growthcraft.grapes.renderer;
 
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
 import growthcraft.grapes.block.BlockGrapeLeaves;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -33,7 +33,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 				float f3 = (float)(color & 255) / 255.0F;
 				GL11.glColor4f(f1, f2, f3, 1.0F);
 			}
-			Utils.drawInventoryBlock_icon(block, renderer, ((BlockGrapeLeaves)block).getIcon(0, 0), tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, ((BlockGrapeLeaves)block).getIcon(0, 0), tes);
 		}
 	}
 
@@ -144,7 +144,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getMaxU();
 
-					Utils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+					RenderUtils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 				}
 				else
 				{
@@ -160,7 +160,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 						minU = (double)icon.getInterpolatedU(8);
 						maxU = (double)icon.getMaxU();
 
-						Utils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+						RenderUtils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 					}
 
 					if (flag1)
@@ -175,7 +175,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 						minU = (double)icon.getMinU();
 						maxU = (double)icon.getInterpolatedU(8);
 
-						Utils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+						RenderUtils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 					}
 				}
 
@@ -191,7 +191,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getMaxU();
 
-					Utils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+					RenderUtils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 				}
 				else
 				{
@@ -207,7 +207,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 						minU = (double)icon.getInterpolatedU(8);
 						maxU = (double)icon.getMaxU();
 
-						Utils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+						RenderUtils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 					}
 
 					if (flag3)
@@ -222,7 +222,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 						minU = (double)icon.getMinU();
 						maxU = (double)icon.getInterpolatedU(8);
 
-						Utils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+						RenderUtils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 					}
 				}
 
@@ -238,7 +238,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getMaxU();
 
-					Utils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+					RenderUtils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 				}
 				else
 				{
@@ -254,7 +254,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 						minU = (double)icon.getInterpolatedU(8);
 						maxU = (double)icon.getMaxU();
 
-						Utils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+						RenderUtils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 					}
 
 					if (flag5)
@@ -269,7 +269,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 						minU = (double)icon.getMinU();
 						maxU = (double)icon.getInterpolatedU(8);
 
-						Utils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+						RenderUtils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 					}
 				}
 

@@ -1,7 +1,7 @@
 package growthcraft.cellar.renderer;
 
 import growthcraft.cellar.block.BlockFruitPress;
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -27,25 +27,25 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 			double d = 0.0625D;
 
 			renderer.setRenderBounds(1*d, 0.0D, 1*d, 3*d, 3*d, 3*d);
-			Utils.drawInventoryBlock_icon(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
 			renderer.setRenderBounds(13*d, 0.0D, 1*d, 15*d, 3*d, 3*d);
-			Utils.drawInventoryBlock_icon(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
 			renderer.setRenderBounds(1*d, 0.0D, 13*d, 3*d, 3*d, 15*d);
-			Utils.drawInventoryBlock_icon(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
 			renderer.setRenderBounds(13*d, 0.0D, 13*d, 15*d, 3*d, 15*d);
-			Utils.drawInventoryBlock_icon(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
 
 			renderer.setRenderBounds(1*d, 3*d, 1*d, 15*d, 5*d, 15*d);
-			Utils.drawInventoryBlock_icon(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
 
 			renderer.setRenderBounds(0.0D, 3*d, 0.0D, 1.0D, 7*d, 1*d);
-			Utils.drawInventoryBlock_icon(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
 			renderer.setRenderBounds(0.0D, 3*d, 15*d, 1.0D, 7*d, 1.0D);
-			Utils.drawInventoryBlock_icon(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
 			renderer.setRenderBounds(0.0D, 3*d, 1*d, 1*d, 7*d, 15*d);
-			Utils.drawInventoryBlock_icon(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
 			renderer.setRenderBounds(15*d, 3*d, 1*d, 1.0D, 7*d, 15*d);
-			Utils.drawInventoryBlock_icon(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
 
 			renderer.uvRotateEast   = 1;
 			renderer.uvRotateWest   = 1;
@@ -87,20 +87,20 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 	private void renderWoodSlatsInv(RenderBlocks r, Block b, IIcon i, Tessellator t, double x1, double x2, double z1, double z2)
 	{
 		r.setRenderBounds(x1, 0.375D, z1, x2, 1.0D, z2);
-		Utils.drawInventoryBlock_icon(b, r, i, t);
+		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
 	}
 
 	private void renderMetalRingsInv(RenderBlocks r, Block b, IIcon i, Tessellator t, double y1, double y2)
 	{
 		double d = 0.0625D;
 		r.setRenderBounds(1.5*d, y1, 1.5*d, 2.5*d,  y2, 14.5*d);
-		Utils.drawInventoryBlock_icon(b, r, i, t);
+		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
 		r.setRenderBounds(13.5*d, y1, 1.5*d, 14.5*d,  y2, 14.5*d);
-		Utils.drawInventoryBlock_icon(b, r, i, t);
+		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
 		r.setRenderBounds(2.5*d, y1, 1.5*d, 13.5*d,  y2, 2.5*d);
-		Utils.drawInventoryBlock_icon(b, r, i, t);
+		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
 		r.setRenderBounds(2.5*d, y1, 13.5*d, 13.5*d,  y2, 14.5*d);
-		Utils.drawInventoryBlock_icon(b, r, i, t);
+		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
 	}
 
 	@Override

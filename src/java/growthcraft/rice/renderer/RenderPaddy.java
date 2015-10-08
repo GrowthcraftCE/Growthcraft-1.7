@@ -1,6 +1,7 @@
 package growthcraft.rice.renderer;
 
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
+import growthcraft.core.utils.RenderUtils.Faces;
 import growthcraft.rice.ClientProxy;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.block.BlockPaddy;
@@ -26,12 +27,12 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 		Tessellator tes = Tessellator.instance;
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		Utils.drawFace("yneg", block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("ypos", block, renderer, tes, BlockPaddy.tex[1], 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("zneg", block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("zpos", block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("xneg", block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("xpos", block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(Faces.YNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(Faces.YPOS, block, renderer, tes, BlockPaddy.tex[1], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(Faces.ZNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(Faces.ZPOS, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(Faces.XNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(Faces.XPOS, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
 		double i1 = 0.0D;
@@ -49,7 +50,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 		k2 = 1.0D - thick;
 
 		renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
 		i1 = 0.0D;
 		i2 = 0.0D + thick;
@@ -57,7 +58,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 		k2 = 1.0D - thick;
 
 		renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
 		i1 = 0.0D + thick;
 		i2 = 1.0D - thick;
@@ -65,7 +66,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 		k2 = 1.0D;
 
 		renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
 		i1 = 0.0D + thick;
 		i2 = 1.0D - thick;
@@ -73,20 +74,20 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 		k2 = 0.0D + thick;
 
 		renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
 		//corners
 		renderer.setRenderBounds(0.0D, j1, 0.0D, 0.0D + thick, j2, 0.0D + thick);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
 		renderer.setRenderBounds(1.0D - thick, j1, 0.0D, 1.0D, j2, 0.0D + thick);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
 		renderer.setRenderBounds(0.0D, j1, 1.0D - thick, 0.0D + thick, j2, 1.0D);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
 		renderer.setRenderBounds(1.0D - thick, j1, 1.0D - thick, 1.0D, j2, 1.0D);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 	}
 

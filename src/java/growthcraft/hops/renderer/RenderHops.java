@@ -1,6 +1,6 @@
 package growthcraft.hops.renderer;
 
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
 import growthcraft.hops.block.BlockHops;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -236,7 +236,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 				minU = (double)icon.getMinU();
 				maxU = (double)icon.getMaxU();
 
-				Utils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+				RenderUtils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 			}
 			else
 			{
@@ -252,7 +252,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 					minU = (double)icon.getInterpolatedU(8);
 					maxU = (double)icon.getMaxU();
 
-					Utils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+					RenderUtils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 				}
 
 				if (flag1)
@@ -267,7 +267,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getInterpolatedU(8);
 
-					Utils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+					RenderUtils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 				}
 			}
 
@@ -283,7 +283,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 				minU = (double)icon.getMinU();
 				maxU = (double)icon.getMaxU();
 
-				Utils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+				RenderUtils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 			}
 			else
 			{
@@ -299,7 +299,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 					minU = (double)icon.getInterpolatedU(8);
 					maxU = (double)icon.getMaxU();
 
-					Utils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+					RenderUtils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 				}
 
 				if (flag3)
@@ -314,7 +314,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getInterpolatedU(8);
 
-					Utils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+					RenderUtils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 				}
 			}
 
@@ -330,7 +330,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 				minU = (double)icon.getMinU();
 				maxU = (double)icon.getMaxU();
 
-				Utils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+				RenderUtils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 			}
 			else
 			{
@@ -346,7 +346,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 					minU = (double)icon.getInterpolatedU(8);
 					maxU = (double)icon.getMaxU();
 
-					Utils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+					RenderUtils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 				}
 
 				if (flag5)
@@ -361,7 +361,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getInterpolatedU(8);
 
-					Utils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+					RenderUtils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
 				}
 			}
 
