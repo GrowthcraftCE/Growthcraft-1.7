@@ -13,6 +13,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
+/**
+ * Tag Formatter for item NBT data
+ */
 public class TagFormatterItem implements ITagFormatter
 {
 	public final static TagFormatterItem INSTANCE = new TagFormatterItem();

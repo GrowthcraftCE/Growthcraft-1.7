@@ -9,6 +9,9 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 
+/**
+ * Utility class for drawing Schema String Arrays as structures
+ */
 public class SchemaToVillage
 {
 	public static interface IVillage

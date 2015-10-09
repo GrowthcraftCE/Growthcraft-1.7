@@ -12,6 +12,9 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+/**
+ * Tag Formatter for IFluidHandler NBT data
+ */
 public class TagFormatterFluidHandler implements ITagFormatter
 {
 	public final static TagFormatterFluidHandler INSTANCE = new TagFormatterFluidHandler();

@@ -1,7 +1,9 @@
 package growthcraft.core.utils;
 
-// Place any "Magic Numbers" in this class, so we don't have to play the
-// guessing game while reading
+/**
+ * Place any "Magic Numbers" in this class, so we don't have to play the
+ * guessing game while reading
+ */
 public final class ConstID
 {
 	// Used for handling non existant fluids
