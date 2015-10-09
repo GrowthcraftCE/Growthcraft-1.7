@@ -16,7 +16,9 @@ public class Blocks
 	public void preInit()
 	{
 		pipeBase = new BlockPipeBase(PipeType.BASE);
+		pipeBase.setBlockName("grc.pipeBase");
 		pipeVacuum = new BlockPipeBase(PipeType.VACUUM);
+		pipeVacuum.setBlockName("grc.pipeVacuum");
 
 		GameRegistry.registerBlock(pipeBase, "grc.pipeBase");
 		GameRegistry.registerBlock(pipeVacuum, "grc.pipeVacuum");
