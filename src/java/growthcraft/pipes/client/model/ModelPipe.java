@@ -33,7 +33,7 @@ public class ModelPipe extends ModelBase
 		pipeCore.mirror = true;
 		setRotation(pipeCore, 0f, 0f, 0f);
 
-		vacuumCore = new ModelRenderer(this, 0, 16);
+		vacuumCore = new ModelRenderer(this, 16, 0);
 		vacuumCore.addBox(0f, 0f, 0f, 10, 10, 10);
 		vacuumCore.setRotationPoint(-5f, -5f, -5f);
 		vacuumCore.setTextureSize(textureWidth, textureHeight);
@@ -46,15 +46,15 @@ public class ModelPipe extends ModelBase
 			final float absX = MathHelper.abs(dir.offsetX);
 			final float absY = MathHelper.abs(dir.offsetY);
 			final float absZ = MathHelper.abs(dir.offsetZ);
-			innerSides[i] = new ModelRenderer(this, 0, 48);
-			innerSides[i].addBox(4f * dir.offsetX, 4f * dir.offsetY, 4f * dir.offsetZ,
+			innerSides[i] = new ModelRenderer(this, 0, 8 * (i + 1));
+			innerSides[i].addBox(3.5f * dir.offsetX, 3.5f * dir.offsetY, 3.5f * dir.offsetZ,
 				(int)(4f - (1f * absX)), (int)(4f - (1f * absY)), (int)(4f - (1f * absZ)));
 			innerSides[i].setRotationPoint(-(2f - (0.5f * absX)), -(2f - (0.5f * absY)), -(2f - (0.5f * absZ)));
 			innerSides[i].setTextureSize(textureWidth, textureHeight);
 			innerSides[i].mirror = true;
 			setRotation(innerSides[i], 0f, 0f, 0f);
 
-			busSides[i] = new ModelRenderer(this, 64, 16);
+			busSides[i] = new ModelRenderer(this, 16, 32 + (12 * i));
 			busSides[i].addBox(6.5f * dir.offsetX, 6.5f * dir.offsetY, 6.5f * dir.offsetZ,
 				(int)(6f - (3f * absX)), (int)(6f - (3f * absY)), (int)(6f - (3f * absZ)));
 			busSides[i].setRotationPoint(-(3f - (1.5f * absX)), -(3f - (1.5f * absY)), -(3f - (1.5f * absZ)));
@@ -62,7 +62,7 @@ public class ModelPipe extends ModelBase
 			busSides[i].mirror = true;
 			setRotation(busSides[i], 0f, 0f, 0f);
 
-			pipeSides[i] = new ModelRenderer(this, 0, 0);
+			pipeSides[i] = new ModelRenderer(this, 64, 32 + (8 * i));
 			pipeSides[i].addBox(6.5f * dir.offsetX, 6.5f * dir.offsetY, 6.5f * dir.offsetZ,
 				(int)(4f - (1f * absX)), (int)(4f - (1f * absY)), (int)(4f - (1f * absZ)));
 			pipeSides[i].setRotationPoint(-(2f - (0.5f * absX)), -(2f - (0.5f * absY)), -(2f - (0.5f * absZ)));
