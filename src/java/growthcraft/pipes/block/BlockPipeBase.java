@@ -2,6 +2,8 @@ package growthcraft.pipes.block;
 
 import growthcraft.api.core.GrcColour;
 import growthcraft.cellar.block.ICellarFluidHandler;
+import growthcraft.core.block.IWrenchable;
+import growthcraft.core.block.IDroppableBlock;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.pipes.client.render.RenderPipe;
