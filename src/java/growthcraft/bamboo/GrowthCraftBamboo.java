@@ -207,7 +207,7 @@ public class GrowthCraftBamboo
 		GameRegistry.addShapedRecipe(bambooBlock.asStack(), "AA", "AA", 'A', bamboo.getItem());
 		GameRegistry.addShapedRecipe(bambooFence.asStack(3), "AAA", "AAA", 'A', bamboo.getItem());
 		GameRegistry.addShapedRecipe(bambooFenceGate.asStack(), "ABA", "ABA", 'A', bamboo.getItem(), 'B', bambooBlock.getBlock());
-		GameRegistry.addShapedRecipe(bambooScaffold.asStack(16), "BBB", " A ", "A A", 'A', bamboo, 'B', bambooBlock.getBlock());
+		GameRegistry.addShapedRecipe(bambooScaffold.asStack(16), "BBB", " A ", "A A", 'A', bamboo.getItem(), 'B', bambooBlock.getBlock());
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.torch, 2), new Object[] {"A", "B", 'A', bambooCoal.getItem(), 'B', "stickWood"}));
 
 		MapGenHelper.registerVillageStructure(ComponentVillageBambooYard.class, "grc.bambooyard");

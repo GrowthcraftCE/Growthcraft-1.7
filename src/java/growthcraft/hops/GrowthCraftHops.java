@@ -155,7 +155,7 @@ public class GrowthCraftHops
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addShapelessRecipe(hopSeeds.asStack(), hops);
+		GameRegistry.addShapelessRecipe(hopSeeds.asStack(), hops.getItem());
 
 		NEI.hideItem(hopVine.asStack());
 
