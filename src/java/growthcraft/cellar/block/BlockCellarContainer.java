@@ -1,6 +1,7 @@
 package growthcraft.cellar.block;
 
 import growthcraft.core.block.IDroppableBlock;
+import growthcraft.core.block.IRotatableBlock;
 import growthcraft.core.utils.BlockFlags;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.core.Utils;
@@ -15,7 +16,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 /**
  * Base class for Cellar machines and the like
  */
-public abstract class BlockCellarContainer extends BlockContainer implements IDroppableBlock
+public abstract class BlockCellarContainer extends BlockContainer implements IDroppableBlock, IRotatableBlock
 {
 	public BlockCellarContainer(Material material)
 	{
