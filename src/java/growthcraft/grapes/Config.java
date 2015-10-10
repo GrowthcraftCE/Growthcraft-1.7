@@ -15,11 +15,6 @@ public class Config extends ConfigBase
 	public boolean generateGrapeVineyardStructure = true;
 	public final int grapeWineColor = 5574180;
 
-	public Config(File dirname, String filename)
-	{
-		super(dirname, filename);
-	}
-
 	protected void loadConfig()
 	{
 		this.grapeVineSeedlingGrowthRate = (float)config.get(Configuration.CATEGORY_GENERAL, "Grape Vine (Seedling) growth rate", (double)grapeVineSeedlingGrowthRate, "[Higher -> Slower] Default : " + grapeVineSeedlingGrowthRate).getDouble();

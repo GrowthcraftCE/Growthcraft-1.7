@@ -16,11 +16,6 @@ public class Config extends ConfigBase
 	public boolean generateAppleFarms = false;
 	public final int appleCiderColor = 0x855425;
 
-	public Config(File configDir, String filename)
-	{
-		super(configDir, filename);
-	}
-
 	protected void loadConfig()
 	{
 		this.appleGrowthRate = config.get(Configuration.CATEGORY_GENERAL, "Apple growth rate", appleGrowthRate, "[Higher -> Slower] Default : " + appleGrowthRate).getInt();

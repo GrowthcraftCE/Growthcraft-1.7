@@ -81,7 +81,8 @@ public class GrowthCraftHops
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.hops.Config(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
+		config = new growthcraft.hops.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
 
 		//====================
 		// INIT

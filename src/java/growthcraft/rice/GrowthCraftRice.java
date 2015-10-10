@@ -80,7 +80,8 @@ public class GrowthCraftRice
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.rice.Config(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
+		config = new growthcraft.rice.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
 
 		//====================
 		// INIT

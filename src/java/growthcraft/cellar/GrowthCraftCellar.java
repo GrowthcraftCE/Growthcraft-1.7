@@ -91,7 +91,8 @@ public class GrowthCraftCellar
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.cellar.Config(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
+		config = new growthcraft.cellar.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
 
 		//====================
 		// INIT

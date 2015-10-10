@@ -15,11 +15,6 @@ public class Config extends ConfigBase
 
 	public final int hopAleColor = 0xCACA47;
 
-	public Config(File dirname, String filename)
-	{
-		super(dirname, filename);
-	}
-
 	protected void loadConfig()
 	{
 		this.hopVineGrowthRate = (float)config.get(Configuration.CATEGORY_GENERAL, "Hop (Vine) growth rate", (double)hopVineGrowthRate, "[Higher -> Slower] Default : " + hopVineGrowthRate).getDouble();

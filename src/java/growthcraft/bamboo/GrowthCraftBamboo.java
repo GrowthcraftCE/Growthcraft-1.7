@@ -98,7 +98,8 @@ public class GrowthCraftBamboo
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.bamboo.Config(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
+		config = new growthcraft.bamboo.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
 
 		//====================
 		// INIT
