@@ -19,7 +19,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPipeTile
+public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPipeTile, IColourableTile
 {
 	enum UsageState
 	{
@@ -91,7 +91,7 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 
 	public PipeSection[] pipeSections = new PipeSection[7];
 	public PipeBuffer[] pipeBuffers = new PipeBuffer[ForgeDirection.VALID_DIRECTIONS.length];
-	public int color;
+	private int colour = 0;
 	private PipeFluidTank fluidTank = new PipeFluidTank(FluidContainerRegistry.BUCKET_VOLUME / 4);
 	private int pipeRenderState = PipeFlag.PIPE_CORE;
 	private boolean dirty = true;
@@ -110,16 +110,34 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 		}
 	}
 
+	private void markAsDirty()
+	{
+		this.dirty = true;
+	}
+
+	@Override
+	public void setColour(int kolour)
+	{
+		this.colour = kolour;
+		markAsDirty();
+	}
+
+	@Override
+	public int getColour()
+	{
+		return colour;
+	}
+
 	public void onNeighbourChanged()
 	{
-		dirty = true;
+		markAsDirty();
 	}
 
 	@Override
 	public void invalidate()
 	{
 		super.invalidate();
-		dirty = true;
+		markAsDirty();
 	}
 
 	public boolean isVacuumPipe()
@@ -156,15 +174,26 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 			final TileEntity te = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			pipeBuffers[i].te = te;
 			pipeSections[i].usageState = UsageState.UNUSABLE;
-			if (te instanceof IPipeTile)
+			boolean valid = true;
+			// if the other pipe is a ColourableTile
+			if (te instanceof IColourableTile)
 			{
-				pipeRenderState |= 1 << i;
-				pipeSections[i].usageState = UsageState.USABLE;
+				final IColourableTile colouredTile = (IColourableTile)te;
+				valid = colouredTile.getColour() == colour;
 			}
-			else if (te instanceof IFluidHandler)
+
+			if (valid)
 			{
-				pipeRenderState |= 1 << (i + 6);
-				pipeSections[i].usageState = UsageState.USABLE;
+				if (te instanceof IPipeTile)
+				{
+					pipeRenderState |= 1 << i;
+					pipeSections[i].usageState = UsageState.USABLE;
+				}
+				else if (te instanceof IFluidHandler)
+				{
+					pipeRenderState |= 1 << (i + 6);
+					pipeSections[i].usageState = UsageState.USABLE;
+				}
 			}
 		}
 	}
@@ -356,25 +385,37 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 		return pipeRenderState;
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	public void readTankNBT(NBTTagCompound tag)
 	{
-		super.readFromNBT(nbt);
-		this.pipeRenderState = nbt.getInteger("pipe_render_state");
-		if (nbt.hasKey("tank"))
+		if (tag.hasKey("tank"))
 		{
-			fluidTank.readFromNBT(nbt.getCompoundTag("tank"));
+			fluidTank.readFromNBT(tag.getCompoundTag("tank"));
 		}
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	public void readFromNBT(NBTTagCompound tag)
 	{
-		super.writeToNBT(nbt);
-		nbt.setInteger("pipe_render_state", getPipeRenderState());
-		NBTTagCompound tag = new NBTTagCompound();
-		fluidTank.writeToNBT(tag);
-		nbt.setTag("tank", tag);
+		super.readFromNBT(tag);
+		this.colour = tag.getInteger("colour");
+		this.pipeRenderState = tag.getInteger("pipe_render_state");
+		readTankNBT(tag);
+	}
+
+	public void writeTankNBT(NBTTagCompound tag)
+	{
+		NBTTagCompound tankTag = new NBTTagCompound();
+		fluidTank.writeToNBT(tankTag);
+		tag.setTag("tank", tankTag);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound tag)
+	{
+		super.writeToNBT(tag);
+		tag.setInteger("colour", colour);
+		tag.setInteger("pipe_render_state", getPipeRenderState());
+		writeTankNBT(tag);
 	}
 
 	/************

@@ -18,6 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockPipeBase extends Block implements IPipeBlock, ITileEntityProvider, ICellarFluidHandler
 {
@@ -91,6 +92,19 @@ public class BlockPipeBase extends Block implements IPipeBlock, ITileEntityProvi
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
 		return true;
+	}
+
+	@Override
+	public boolean recolourBlock(World world, int x, int y, int z, ForgeDirection side, int colour)
+	{
+		final TileEntityPipeBase te = getTileEntity(world, x, y, z);
+
+		if (te != null)
+		{
+			te.setColour(colour);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
