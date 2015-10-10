@@ -3,12 +3,15 @@ package growthcraft.core;
 import growthcraft.core.block.BlockFenceRope;
 import growthcraft.core.block.BlockRope;
 import growthcraft.core.event.HarvestDropsEventCore;
+import growthcraft.core.event.PlayerInteractEventAmazingStick;
 import growthcraft.core.event.TextureStitchEventCore;
 import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.item.ItemRope;
 import growthcraft.core.network.CommonProxy;
 
+import org.apache.logging.log4j.Level;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -29,10 +32,14 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
 
-@Mod(modid = "Growthcraft",name = "Growthcraft",version = "@VERSION@")
+@Mod(modid = GrowthCraftCore.MOD_ID,name = GrowthCraftCore.MOD_NAME,version = GrowthCraftCore.MOD_VERSION)
 public class GrowthCraftCore
 {
-	@Instance("Growthcraft")
+	public static final String MOD_ID = "Growthcraft";
+	public static final String MOD_NAME = "Growthcraft";
+	public static final String MOD_VERSION = "@VERSION@";
+
+	@Instance(MOD_ID)
 	public static GrowthCraftCore instance;
 
 	@SideOnly(Side.CLIENT)
@@ -112,6 +119,15 @@ public class GrowthCraftCore
 	public void postLoad(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
+		if (config.useAmazingStick)
+		{
+			FMLLog.log(MOD_ID, Level.INFO, "Enabling the amazing stick event");
+			MinecraftForge.EVENT_BUS.register(new PlayerInteractEventAmazingStick());
+		}
+		else
+		{
+			FMLLog.log(MOD_ID, Level.INFO, "No amazing stick event");
+		}
 		//		MinecraftForge.EVENT_BUS.register(new PlayerSleepInBed());
 
 		/*String modid;
