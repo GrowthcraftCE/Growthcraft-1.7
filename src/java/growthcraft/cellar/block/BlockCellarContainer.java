@@ -2,6 +2,7 @@ package growthcraft.cellar.block;
 
 import growthcraft.core.block.IDroppableBlock;
 import growthcraft.core.block.IRotatableBlock;
+import growthcraft.core.block.IWrenchable;
 import growthcraft.core.utils.BlockFlags;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.core.Utils;
@@ -16,7 +17,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 /**
  * Base class for Cellar machines and the like
  */
-public abstract class BlockCellarContainer extends BlockContainer implements IDroppableBlock, IRotatableBlock
+public abstract class BlockCellarContainer extends BlockContainer implements IDroppableBlock, IRotatableBlock, IWrenchable
 {
 	public BlockCellarContainer(Material material)
 	{
@@ -110,21 +111,27 @@ public abstract class BlockCellarContainer extends BlockContainer implements IDr
 		return false;
 	}
 
-	public boolean useWrenchItem(EntityPlayer player, World world, int x, int y, int z)
+	public boolean wrenchBlock(World world, int x, int y, int z, EntityPlayer player, ItemStack wrench)
 	{
 		if (player != null)
 		{
-			final ItemStack is = player.inventory.getCurrentItem();
-			if (ItemUtils.canWrench(is, player, x, y, z))
+			if (ItemUtils.canWrench(wrench, player, x, y, z))
 			{
 				if (player.isSneaking())
 				{
 					fellBlockAsItem(world, x, y, z);
-					ItemUtils.wrenchUsed(is, player, x, y, z);
+					ItemUtils.wrenchUsed(wrench, player, x, y, z);
 					return true;
 				}
 			}
 		}
 		return false;
+	}
+
+	public boolean useWrenchItem(EntityPlayer player, World world, int x, int y, int z)
+	{
+		if (player == null) return false;
+		final ItemStack is = player.inventory.getCurrentItem();
+		return wrenchBlock(world, x, y, z, player, is);
 	}
 }

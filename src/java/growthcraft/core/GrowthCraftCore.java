@@ -9,6 +9,7 @@ import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.item.ItemRope;
 import growthcraft.core.network.CommonProxy;
+import growthcraft.core.utils.ItemUtils;
 
 import org.apache.logging.log4j.Level;
 import cpw.mods.fml.common.FMLLog;
@@ -121,19 +122,13 @@ public class GrowthCraftCore
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
 		if (config.useAmazingStick)
 		{
-			FMLLog.log(MOD_ID, Level.INFO, "Enabling the amazing stick event");
 			MinecraftForge.EVENT_BUS.register(new PlayerInteractEventAmazingStick());
 		}
-		else
-		{
-			FMLLog.log(MOD_ID, Level.INFO, "No amazing stick event");
-		}
+
+
 		//		MinecraftForge.EVENT_BUS.register(new PlayerSleepInBed());
 
-		/*String modid;
-
-		modid = "Thaumcraft";
-		if (Loader.isModLoaded(modid))
+		/*if (Loader.isModLoaded("Thaumcraft"))
 		{
 			try
 			{

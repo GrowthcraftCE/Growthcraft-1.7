@@ -25,7 +25,10 @@ public class ItemUtils
 			return true;
 		}
 
-		public void wrenchUsed(EntityPlayer player, int x, int y, int z) {}
+		public void wrenchUsed(EntityPlayer player, int x, int y, int z)
+		{
+			// we should have an achivement for this.
+		}
 	}
 
 	public static final IToolWrench amazingStickWrench = new AmazingStickWrench();
