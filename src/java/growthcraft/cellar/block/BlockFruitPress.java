@@ -250,6 +250,14 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	/************
 	 * STUFF
 	 ************/
+
+	/**
+	 * @param world - world block is in
+	 * @param x - x coord
+	 * @param y - y coord
+	 * @param z - z coord
+	 * @return true if the BlockFruitPresser is above this block, false otherwise
+	 */
 	public boolean presserIsAbove(World world, int x, int y, int z)
 	{
 		return getPresserBlock() == world.getBlock(x, y + 1, z);
