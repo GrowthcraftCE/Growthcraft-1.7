@@ -5,8 +5,12 @@ import growthcraft.pipes.proxy.CommonProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod;
+
+import cpw.mods.fml.common.FMLLog;
+import org.apache.logging.log4j.Level;
 
 @Mod(
 	modid = GrowthCraftPipes.MOD_ID,
@@ -16,9 +20,9 @@ import cpw.mods.fml.common.Mod;
 )
 public class GrowthCraftPipes
 {
-	static public final String MOD_ID = "Growthcraft|Pipes";
-	static public final String MOD_NAME = "Growthcraft Pipes";
-	static public final String MOD_VERSION = "@VERSION@";
+	public static final String MOD_ID = "Growthcraft|Pipes";
+	public static final String MOD_NAME = "Growthcraft Pipes";
+	public static final String MOD_VERSION = "@VERSION@";
 
 	@Mod.Instance(MOD_ID)
 	public static GrowthCraftPipes INSTANCE;
