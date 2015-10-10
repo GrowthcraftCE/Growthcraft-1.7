@@ -26,7 +26,11 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 	public static ComponentVillageTavern buildComponent(Start startPiece, List list, Random rand, int par3, int par4, int par5, int par6, int par7)
 	{
 		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 9, 8, par6);
-		return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(list, structureboundingbox) == null ? new ComponentVillageTavern(startPiece, par7, rand, structureboundingbox, par6) : null;
+		if (canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(list, structureboundingbox) == null)
+		{
+		   return new ComponentVillageTavern(startPiece, par7, rand, structureboundingbox, par6);
+		}
+		return null;
 	}
 
 	public boolean addComponentParts(World world, Random random, StructureBoundingBox box)
@@ -124,7 +128,7 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 			{
 				this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 9, 1, z, box);
 				this.placeBlockAtCurrentPosition(world, Blocks.wooden_pressure_plate, 0, 9, 2, z, box);
-				this.placeBlockAtCurrentPosition(world, GrowthCraftCellar.fermentBarrel, this.getMetadataWithOffset(Blocks.ladder, 4), 11, 2, z, box);
+				this.placeBlockAtCurrentPosition(world, GrowthCraftCellar.fermentBarrel.getBlock(), this.getMetadataWithOffset(Blocks.ladder, 4), 11, 2, z, box);
 			}
 
 			this.placeBlockAtCurrentPosition(world, Blocks.planks, 0, 11, 1, z, box);

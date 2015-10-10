@@ -24,9 +24,9 @@ public class VillageHandlerHops implements IVillageTradeHandler, IVillageCreatio
 	{
 		//		recipeList.add(new MerchantRecipe(new ItemStack(GrowthCraftHops.hops, 18 + random.nextInt(3)), new ItemStack(Item.emerald, 1)));
 		//		recipeList.add(new MerchantRecipe(new ItemStack(Item.wheat, 18 + random.nextInt(3)), new ItemStack(Item.emerald, 1)));
-		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1 + random.nextInt(2)), new ItemStack(GrowthCraftHops.hopAle, 1, 1)));
-		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2 + random.nextInt(2)), new ItemStack(GrowthCraftHops.hopAle, 1, 2)));
-		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2 + random.nextInt(2)), new ItemStack(GrowthCraftHops.hopAle, 1, 3)));
+		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1 + random.nextInt(2)), GrowthCraftHops.hopAle.asStack(1, 1)));
+		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2 + random.nextInt(2)), GrowthCraftHops.hopAle.asStack(1, 2)));
+		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2 + random.nextInt(2)), GrowthCraftHops.hopAle.asStack(1, 3)));
 	}
 
 	@Override

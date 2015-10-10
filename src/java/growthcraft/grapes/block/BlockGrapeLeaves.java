@@ -3,6 +3,7 @@ package growthcraft.grapes.block;
 import java.util.Random;
 
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.utils.BlockCheck;
 import growthcraft.core.block.IBlockRope;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.renderer.RenderGrapeLeaves;
@@ -48,7 +49,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	{
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock);
+			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock.getBlock());
 		}
 		else
 		{
@@ -67,7 +68,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 		{
 			if (world.isAirBlock(x, y - 1, z) && (world.rand.nextInt(this.grapeSpawnRate) == 0))
 			{
-				world.setBlock(x, y - 1, z, GrowthCraftGrapes.grapeBlock);
+				world.setBlock(x, y - 1, z, GrowthCraftGrapes.grapeBlock.getBlock());
 			}
 			else
 			{
@@ -109,7 +110,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	private boolean checkValidity(World world, int x, int y, int z)
 	{
-		if (world.getBlock(x, y, z) == GrowthCraftCore.ropeBlock)
+		if (BlockCheck.isRope(world.getBlock(x, y, z)))
 		{
 			boolean flag = world.getBlock(x + 1, y, z) == this;
 			boolean flag1 = world.getBlock(x - 1, y, z) == this;
@@ -133,7 +134,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	private boolean isTrunk(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftGrapes.grapeVine1;
+		return world.getBlock(x, y, z) == GrowthCraftGrapes.grapeVine1.getBlock();
 	}
 
 	@Override
@@ -165,7 +166,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 			while (loop < 4)
 			{
-				if (world.getBlock(x, y, z - loop) != GrowthCraftGrapes.grapeLeaves)
+				if (world.getBlock(x, y, z - loop) != this)
 				{
 					break;
 				}
@@ -186,7 +187,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 			while (loop < 4)
 			{
-				if (world.getBlock(x, y, z + loop) != GrowthCraftGrapes.grapeLeaves)
+				if (world.getBlock(x, y, z + loop) != this)
 				{
 					break;
 				}
@@ -207,7 +208,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 			while (loop < 4)
 			{
-				if (world.getBlock(x - loop, y, z) != GrowthCraftGrapes.grapeLeaves)
+				if (world.getBlock(x - loop, y, z) != this)
 				{
 					break;
 				}
@@ -228,7 +229,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 			while (loop < 4)
 			{
-				if (world.getBlock(x + loop, y, z) != GrowthCraftGrapes.grapeLeaves)
+				if (world.getBlock(x + loop, y, z) != this)
 				{
 					break;
 				}
@@ -251,7 +252,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	private boolean isSupportedByTrunk(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y - 1, z) == GrowthCraftGrapes.grapeVine1;
+		return world.getBlock(x, y - 1, z) == GrowthCraftGrapes.grapeVine1.getBlock();
 	}
 
 	/************
@@ -261,7 +262,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapeSeeds;
+		return GrowthCraftGrapes.grapeSeeds.getItem();
 	}
 
 	@Override
@@ -297,7 +298,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return GrowthCraftCore.rope;
+		return GrowthCraftCore.rope.getItem();
 	}
 
 	@Override

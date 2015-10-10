@@ -278,7 +278,7 @@ public class BlockBeeBox extends BlockContainer
 
 				if (itemstack != null && itemstack.getItem() == Items.flower_pot && te.isHoneyEnough())
 				{
-					Utils.addStack(new ItemStack(GrowthCraftBees.honeyJar), player, world, x, y, z, false);
+					Utils.addStack(GrowthCraftBees.honeyJar.asStack(), player, world, x, y, z, false);
 					Utils.decreaseStack(itemstack, player);
 					te.decreaseHoney();
 					te.markDirty();
@@ -393,7 +393,7 @@ public class BlockBeeBox extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return Item.getItemFromBlock(GrowthCraftBees.beeBox);
+		return GrowthCraftBees.beeBox.getItem();
 	}
 
 	@Override
@@ -408,7 +408,7 @@ public class BlockBeeBox extends BlockContainer
 	@Override
 	public Item getItemDropped(int par1, Random rand, int par3)
 	{
-		return Item.getItemFromBlock(GrowthCraftBees.beeBox);
+		return GrowthCraftBees.beeBox.getItem();
 	}
 
 	@Override

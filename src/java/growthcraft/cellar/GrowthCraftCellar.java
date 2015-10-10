@@ -21,12 +21,15 @@ import growthcraft.cellar.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.village.ComponentVillageTavern;
 import growthcraft.cellar.village.VillageHandlerCellar;
 import growthcraft.core.AchievementPageGrowthcraft;
+import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.utils.MapGenHelper;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -42,16 +45,26 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.stats.Achievement;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-@Mod(modid = GrowthCraftCellar.MOD_ID,name = GrowthCraftCellar.MOD_NAME,version = "@VERSION@",dependencies = "required-after:Growthcraft")
+import cpw.mods.fml.common.FMLLog;
+import org.apache.logging.log4j.Level;
+
+@Mod(
+	modid = GrowthCraftCellar.MOD_ID,
+	name = GrowthCraftCellar.MOD_NAME,
+	version = GrowthCraftCellar.MOD_VERSION,
+	dependencies = "required-after:Growthcraft"
+)
 public class GrowthCraftCellar
 {
 	public static final String MOD_ID = "Growthcraft|Cellar";
 	public static final String MOD_NAME = "Growthcraft Cellar";
+	public static final String MOD_VERSION = "@VERSION@";
+
 	@Instance(MOD_ID)
 	public static GrowthCraftCellar instance;
 
@@ -60,10 +73,10 @@ public class GrowthCraftCellar
 
 	public static CreativeTabs tab;
 
-	public static Block fruitPress;
-	public static Block fruitPresser;
-	public static Block brewKettle;
-	public static Block fermentBarrel;
+	public static BlockDefinition fruitPress;
+	public static BlockDefinition fruitPresser;
+	public static BlockDefinition brewKettle;
+	public static BlockDefinition fermentBarrel;
 
 	public static Potion potionTipsy;
 
@@ -73,7 +86,7 @@ public class GrowthCraftCellar
 	public static final ItemStack EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
 
 	// Achievments
-	public static Item chievItemDummy;
+	public static ItemDefinition chievItemDummy;
 
 	public static Achievement craftBarrel;
 	public static Achievement fermentBooze;
@@ -98,22 +111,22 @@ public class GrowthCraftCellar
 		// INIT
 		//====================
 		tab = new CreativeTabCellar("tabGrCCellar");
-		fermentBarrel = (new BlockFermentBarrel());
-		fruitPress    = (new BlockFruitPress());
-		fruitPresser  = (new BlockFruitPresser());
-		brewKettle    = (new BlockBrewKettle());
+		fermentBarrel = new BlockDefinition(new BlockFermentBarrel());
+		fruitPress    = new BlockDefinition(new BlockFruitPress());
+		fruitPresser  = new BlockDefinition(new BlockFruitPresser());
+		brewKettle    = new BlockDefinition(new BlockBrewKettle());
 
-		chievItemDummy = (new ItemChievDummy());
+		chievItemDummy = new ItemDefinition(new ItemChievDummy());
 
 		//====================
 		// REGISTRIES
 		//====================
-		GameRegistry.registerBlock(fruitPress, "grc.fruitPress");
-		GameRegistry.registerBlock(fruitPresser, "grc.fruitPresser");
-		GameRegistry.registerBlock(brewKettle, "grc.brewKettle");
-		GameRegistry.registerBlock(fermentBarrel, "grc.fermentBarrel");
+		GameRegistry.registerBlock(fruitPress.getBlock(), "grc.fruitPress");
+		GameRegistry.registerBlock(fruitPresser.getBlock(), "grc.fruitPresser");
+		GameRegistry.registerBlock(brewKettle.getBlock(), "grc.brewKettle");
+		GameRegistry.registerBlock(fermentBarrel.getBlock(), "grc.fermentBarrel");
 
-		GameRegistry.registerItem(chievItemDummy, "grc.chievItemDummy");
+		GameRegistry.registerItem(chievItemDummy.getItem(), "grc.chievItemDummy");
 
 		GameRegistry.registerTileEntity(TileEntityFruitPress.class, "grc.tileentity.fruitPress");
 		GameRegistry.registerTileEntity(TileEntityFruitPresser.class, "grc.tileentity.fruitPresser");
@@ -125,9 +138,9 @@ public class GrowthCraftCellar
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fruitPress, 1), "ABA", "CCC", "AAA", 'A', "plankWood", 'B', Blocks.piston,'C', "ingotIron"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(brewKettle, 1), "A", 'A', Items.cauldron));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fermentBarrel, 1), "AAA", "BBB", "AAA", 'B', "plankWood", 'A', "ingotIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(fruitPress.asStack(), "ABA", "CCC", "AAA", 'A', "plankWood", 'B', Blocks.piston,'C', "ingotIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(brewKettle.asStack(), "A", 'A', Items.cauldron));
+		GameRegistry.addRecipe(new ShapedOreRecipe(fermentBarrel.asStack(), "AAA", "BBB", "AAA", 'B', "plankWood", 'A', "ingotIron"));
 
 		//====================
 		// POTION
@@ -163,9 +176,9 @@ public class GrowthCraftCellar
 		//====================
 		// ACHIEVEMENTS
 		//====================
-		craftBarrel  = (new Achievement("grc.achievement.craftBarrel", "craftBarrel", -4, -4, fermentBarrel, (Achievement)null)).initIndependentStat().registerStat();
+		craftBarrel  = (new Achievement("grc.achievement.craftBarrel", "craftBarrel", -4, -4, fermentBarrel.getBlock(), (Achievement)null)).initIndependentStat().registerStat();
 		fermentBooze = (new Achievement("grc.achievement.fermentBooze", "fermentBooze", -2, -4, Items.nether_wart, craftBarrel)).registerStat();
-		getDrunk     = (new Achievement("grc.achievement.getDrunk", "getDrunk", 0, -4, new ItemStack(chievItemDummy, 1, 0), fermentBooze)).setSpecial().registerStat();
+		getDrunk     = (new Achievement("grc.achievement.getDrunk", "getDrunk", 0, -4, chievItemDummy.asStack(), fermentBooze)).setSpecial().registerStat();
 
 		AchievementPageGrowthcraft.chievMasterList.add(craftBarrel);
 		AchievementPageGrowthcraft.chievMasterList.add(fermentBooze);
@@ -175,8 +188,8 @@ public class GrowthCraftCellar
 		CellarRegistry.instance().addHeatSource(Blocks.lava);
 		CellarRegistry.instance().addHeatSource(Blocks.flowing_lava);
 
-		NEI.hideItem(new ItemStack(fruitPresser));
-		NEI.hideItem(new ItemStack(chievItemDummy));
+		NEI.hideItem(fruitPresser.asStack());
+		NEI.hideItem(chievItemDummy.asStack());
 	}
 
 	@EventHandler
@@ -200,23 +213,5 @@ public class GrowthCraftCellar
 		MinecraftForge.EVENT_BUS.register(new ItemCraftedEventCellar());
 		MinecraftForge.EVENT_BUS.register(new LivingUpdateEventCellar());
 
-		/*String modid;
-
-		modid = "Thaumcraft";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				ThaumcraftApi.registerObjectTag(fruitPress.blockID, -1, new AspectList().add(Aspect.CRAFT, 2).add(Aspect.MECHANISM, 2));
-				ThaumcraftApi.registerObjectTag(brewKettle.blockID, -1, new AspectList().add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
-				ThaumcraftApi.registerObjectTag(fermentBarrel.blockID, -1, new AspectList().add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
-
-				FMLLog.info("[Growthcraft|Cellar] Successfully integrated with Thaumcraft.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Cellar] Thaumcraft not found. No integration made.", new Object[0]);
-			}
-		}*/
 	}
 }

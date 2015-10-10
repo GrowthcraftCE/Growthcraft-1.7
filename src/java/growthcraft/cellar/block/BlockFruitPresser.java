@@ -126,7 +126,7 @@ public class BlockFruitPresser extends BlockContainer
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y - 1, z) == GrowthCraftCellar.fruitPress;
+		return GrowthCraftCellar.fruitPress.getBlock() == world.getBlock(x, y - 1, z);
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class BlockFruitPresser extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return Item.getItemFromBlock(GrowthCraftCellar.fruitPress);
+		return GrowthCraftCellar.fruitPress.getItem();
 	}
 
 	@Override

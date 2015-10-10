@@ -14,6 +14,17 @@ public class BlockCheck
 	/**
 	 * Determines if block at the specified location is a valid rope block
 	 *
+	 * @param block - the block to check
+	 * @return true if the block is a Rope, false otherwise
+	 */
+	public static boolean isRope(Block block)
+	{
+		return GrowthCraftCore.ropeBlock.equals(block);
+	}
+
+	/**
+	 * Determines if block at the specified location is a valid rope block
+	 *
 	 * @param world - World, duh.
 	 * @param x  - x coord
 	 * @param y  - y coord
@@ -27,7 +38,7 @@ public class BlockCheck
 		// as well as Ropes themselves, we need someway to seperate them,
 		// either, IBlockRope.isRope(world, x, y, z) OR an additional interface
 		// IBlockRopeCrop, IRope
-		return GrowthCraftCore.ropeBlock == block;
+		return isRope(block);
 	}
 
 	/**

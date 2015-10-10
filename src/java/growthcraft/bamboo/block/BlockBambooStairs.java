@@ -12,7 +12,7 @@ public class BlockBambooStairs extends BlockStairs
 
 	public BlockBambooStairs()
 	{
-		super(GrowthCraftBamboo.bambooBlock, 0);
+		super(GrowthCraftBamboo.bambooBlock.getBlock(), 0);
 		this.useNeighborBrightness = true;
 		this.setCreativeTab(GrowthCraftCore.tab);
 		this.setBlockName("grc.bambooStairs");

@@ -106,7 +106,7 @@ public class BlockPaddy extends Block implements IPaddy
 							{
 								for (int lz = z - radius; lz <= z + radius; ++lz)
 								{
-									if (world.getBlock(lx, y, lz) == GrowthCraftRice.paddyField)
+									if (world.getBlock(lx, y, lz) == this)
 									{
 										world.setBlockMetadataWithNotify(lx, y, lz, paddyFieldMax, 3);
 									}

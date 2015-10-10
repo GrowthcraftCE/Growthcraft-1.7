@@ -260,7 +260,7 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return Item.getItemFromBlock(GrowthCraftCellar.fermentBarrel);
+		return GrowthCraftCellar.fermentBarrel.getItem();
 	}
 
 	@Override
@@ -275,7 +275,7 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
-		return Item.getItemFromBlock(GrowthCraftCellar.fermentBarrel);
+		return GrowthCraftCellar.fermentBarrel.getItem();
 	}
 
 	@Override

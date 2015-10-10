@@ -3,13 +3,18 @@ package growthcraft.bamboo.item;
 import growthcraft.bamboo.GrowthCraftBamboo;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 
 public class ItemBambooSlab extends ItemSlab
 {
 	public ItemBambooSlab(Block block)
 	{
-		super(block, GrowthCraftBamboo.bambooSingleSlab, GrowthCraftBamboo.bambooDoubleSlab, block == GrowthCraftBamboo.bambooDoubleSlab);
+		super(block,
+			GrowthCraftBamboo.bambooSingleSlab.getBlock(),
+			GrowthCraftBamboo.bambooDoubleSlab.getBlock(),
+			GrowthCraftBamboo.bambooDoubleSlab.getBlock() == block
+		);
 		this.setUnlocalizedName("grc.bambooSlab");
 	}
 }

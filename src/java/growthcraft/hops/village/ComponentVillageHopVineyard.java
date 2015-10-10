@@ -58,19 +58,19 @@ public class ComponentVillageHopVineyard extends StructureVillagePieces.Village
 			this.fillWithBlocks(world, box, loop, 0, 2, loop, 0, 2, Blocks.farmland, Blocks.farmland, false);
 			this.fillWithBlocks(world, box, loop, 0, 4, loop, 0, 4, Blocks.farmland, Blocks.farmland, false);
 			this.fillWithBlocks(world, box, loop, 0, 6, loop, 0, 6, Blocks.farmland, Blocks.farmland, false);
-			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.fenceRope, 0, loop, 6, 1, box);
-			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.fenceRope, 0, loop, 6, 7, box);
+			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.fenceRope.getBlock(), 0, loop, 6, 1, box);
+			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.fenceRope.getBlock(), 0, loop, 6, 7, box);
 			for (loop2 = 2; loop2 <= 6; ++loop2)
 			{
-				this.placeBlockAtCurrentPosition(world, GrowthCraftCore.ropeBlock, 0, loop, 6, loop2, box);
+				this.placeBlockAtCurrentPosition(world, GrowthCraftCore.ropeBlock.getBlock(), 0, loop, 6, loop2, box);
 			}
 			for (loop2 = 1; loop2 <= 5; ++loop2)
 			{
 				this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, loop2, 1, box);
 				this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, loop2, 7, box);
-				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.hopVine, 3, loop, loop2, 2, box);
-				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.hopVine, 3, loop, loop2, 4, box);
-				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.hopVine, 3, loop, loop2, 6, box);
+				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.hopVine.getBlock(), 3, loop, loop2, 2, box);
+				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.hopVine.getBlock(), 3, loop, loop2, 4, box);
+				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.hopVine.getBlock(), 3, loop, loop2, 6, box);
 			}
 		}
 

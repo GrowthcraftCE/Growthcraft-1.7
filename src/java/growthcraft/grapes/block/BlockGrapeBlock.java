@@ -87,7 +87,7 @@ public class BlockGrapeBlock extends Block
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y + 1, z) == GrowthCraftGrapes.grapeLeaves;
+		return world.getBlock(x, y + 1, z) == GrowthCraftGrapes.grapeLeaves.getBlock();
 	}
 
 	/************
@@ -97,7 +97,7 @@ public class BlockGrapeBlock extends Block
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapes;
+		return GrowthCraftGrapes.grapes.getItem();
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class BlockGrapeBlock extends Block
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
-		return GrowthCraftGrapes.grapes;
+		return GrowthCraftGrapes.grapes.getItem();
 	}
 
 	@Override

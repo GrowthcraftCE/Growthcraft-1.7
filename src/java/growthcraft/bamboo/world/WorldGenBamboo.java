@@ -18,8 +18,8 @@ public class WorldGenBamboo extends WorldGenerator
 	private final int density = GrowthCraftBamboo.getConfig().bambooWorldGenDensity;
 	private final int minTreeHeight = GrowthCraftBamboo.getConfig().bambooTreeMinHeight;
 	private final int maxTreeHeight = GrowthCraftBamboo.getConfig().bambooTreeMaxHeight;
-	private final Block leaves = GrowthCraftBamboo.bambooLeaves;
-	private final Block log = GrowthCraftBamboo.bambooStalk;
+	private final Block leaves = GrowthCraftBamboo.bambooLeaves.getBlock();
+	private final Block log = GrowthCraftBamboo.bambooStalk.getBlock();
 
 	public WorldGenBamboo(boolean par1)
 	{
@@ -186,14 +186,24 @@ public class WorldGenBamboo extends WorldGenerator
 		}
 	}
 
-	protected boolean func_150523_a(Block p_150523_1_)
+	protected boolean func_150523_a(Block block)
 	{
-		return p_150523_1_.getMaterial() == Material.air || p_150523_1_.getMaterial() == Material.leaves || p_150523_1_ == Blocks.grass || p_150523_1_ == Blocks.dirt || p_150523_1_ == Blocks.log || p_150523_1_ == Blocks.log2 || p_150523_1_ == Blocks.sapling || p_150523_1_ == Blocks.vine;
+		return block.getMaterial() == Material.air ||
+			block.getMaterial() == Material.leaves ||
+			block == Blocks.grass ||
+			block == Blocks.dirt ||
+			block == Blocks.log ||
+			block == Blocks.log2 ||
+			block == Blocks.sapling ||
+			block == Blocks.vine;
 	}
 
 	protected boolean isReplaceable(World world, int x, int y, int z)
 	{
 		Block block = world.getBlock(x, y, z);
-		return block.isAir(world, x, y, z) || block.isLeaves(world, x, y, z) || block.isWood(world, x, y, z) || func_150523_a(block);
+		return block.isAir(world, x, y, z) ||
+			block.isLeaves(world, x, y, z) ||
+			block.isWood(world, x, y, z) ||
+			func_150523_a(block);
 	}
 }

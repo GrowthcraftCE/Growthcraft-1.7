@@ -95,14 +95,14 @@ public class ContainerBeeBox extends Container
 			}
 			else
 			{
-				if (stack.getItem() == GrowthCraftBees.bee)
+				if (GrowthCraftBees.bee.equals(stack.getItem()))
 				{
 					if (!this.mergeItemStack(stack, 0, 1, false))
 					{
 						return null;
 					}
 				}
-				else if (stack.getItem() == GrowthCraftBees.honeyComb)
+				else if (GrowthCraftBees.honeyComb.equals(stack.getItem()))
 				{
 					if (!this.mergeHoneyStack(stack, 1, 28, false))
 					{

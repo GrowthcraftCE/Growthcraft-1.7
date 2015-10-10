@@ -39,7 +39,7 @@ public class BlockBambooDoor extends BlockDoor
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, int par2, int par3, int par4)
 	{
-		return GrowthCraftBamboo.bambooDoorItem;
+		return GrowthCraftBamboo.bambooDoorItem.getItem();
 	}
 
 	/************
@@ -48,7 +48,7 @@ public class BlockBambooDoor extends BlockDoor
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
-		return (meta & 8) != 0 ? null : GrowthCraftBamboo.bambooDoorItem;
+		return (meta & 8) != 0 ? null : GrowthCraftBamboo.bambooDoorItem.getItem();
 	}
 
 	/************

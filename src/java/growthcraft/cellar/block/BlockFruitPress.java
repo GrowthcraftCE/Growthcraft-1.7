@@ -43,6 +43,11 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 		this.setCreativeTab(GrowthCraftCellar.tab);
 	}
 
+	private Block getPresserBlock()
+	{
+		return GrowthCraftCellar.fruitPresser.getBlock();
+	}
+
 	public boolean isRotatable()
 	{
 		return true;
@@ -95,7 +100,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	{
 		super.onBlockAdded(world, x, y, z);
 		this.setDefaultDirection(world, x, y, z);
-		world.setBlock(x, y + 1, z, GrowthCraftCellar.fruitPresser, world.getBlockMetadata(x, y, z), 2);
+		world.setBlock(x, y + 1, z, getPresserBlock(), world.getBlockMetadata(x, y, z), 2);
 	}
 
 	private void setDefaultDirection(World world, int x, int y, int z)
@@ -146,7 +151,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 			world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SEND_TO_CLIENT);
 		}
 
-		world.setBlock(x, y + 1, z, GrowthCraftCellar.fruitPresser, world.getBlockMetadata(x, y, z), BlockFlags.SEND_TO_CLIENT);
+		world.setBlock(x, y + 1, z, getPresserBlock(), world.getBlockMetadata(x, y, z), BlockFlags.SEND_TO_CLIENT);
 
 		if (stack.hasDisplayName())
 		{
@@ -157,7 +162,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int m, EntityPlayer player)
 	{
-		if (player.capabilities.isCreativeMode && (m & 8) != 0 && world.getBlock(x, y + 1, z) == GrowthCraftCellar.fruitPresser)
+		if (player.capabilities.isCreativeMode && (m & 8) != 0 && presserIsAbove(world, x, y, z))
 		{
 			world.func_147480_a(x, y + 1, z, true);
 			world.getTileEntity(x, y + 1, z).invalidate();
@@ -245,10 +250,15 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	/************
 	 * STUFF
 	 ************/
+	public boolean presserIsAbove(World world, int x, int y, int z)
+	{
+		return getPresserBlock() == world.getBlock(x, y + 1, z);
+	}
+
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y + 1, z) == GrowthCraftCellar.fruitPresser;
+		return presserIsAbove(world, x, y, z);
 	}
 
 	@Override
@@ -261,7 +271,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return Item.getItemFromBlock(GrowthCraftCellar.fruitPress);
+		return GrowthCraftCellar.fruitPress.getItem();
 	}
 
 	@Override
@@ -276,7 +286,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public Item getItemDropped(int par1, Random random, int par3)
 	{
-		return Item.getItemFromBlock(GrowthCraftCellar.fruitPress);
+		return GrowthCraftCellar.fruitPress.getItem();
 	}
 
 	@Override

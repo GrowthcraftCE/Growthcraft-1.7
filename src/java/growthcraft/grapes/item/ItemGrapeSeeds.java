@@ -3,6 +3,7 @@ package growthcraft.grapes.item;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.grapes.block.BlockGrapeVine0;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,9 +40,10 @@ public class ItemGrapeSeeds extends Item implements IPlantable
 		}
 		else if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack))
 		{
-			if (BlockCheck.canSustainPlant(world, x, y, z, ForgeDirection.UP, GrowthCraftGrapes.grapeVine0) && world.isAirBlock(x, y + 1, z))
+			final BlockGrapeVine0 block = GrowthCraftGrapes.grapeVine0.getBlock();
+			if (BlockCheck.canSustainPlant(world, x, y, z, ForgeDirection.UP, block) && world.isAirBlock(x, y + 1, z))
 			{
-				world.setBlock(x, y + 1, z, GrowthCraftGrapes.grapeVine0);
+				world.setBlock(x, y + 1, z, block);
 				--stack.stackSize;
 				return true;
 			}
@@ -75,7 +77,7 @@ public class ItemGrapeSeeds extends Item implements IPlantable
 	@Override
 	public Block getPlant(IBlockAccess world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapeVine0;
+		return GrowthCraftGrapes.grapeVine0.getBlock();
 	}
 
 	@Override

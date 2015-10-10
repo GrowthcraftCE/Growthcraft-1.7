@@ -20,7 +20,7 @@ public class SlotHoneyComb extends Slot
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
-		return stack != null ? stack.getItem() == GrowthCraftBees.honeyComb : false;
+		return GrowthCraftBees.honeyComb.equals(stack.getItem());
 	}
 
 	@Override

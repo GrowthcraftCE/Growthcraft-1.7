@@ -78,7 +78,7 @@ public class ItemBamboo extends Item
 		}
 		else
 		{
-			Block block = GrowthCraftBamboo.bambooStalk;
+			Block block = GrowthCraftBamboo.bambooStalk.getBlock();
 			if (world.canPlaceEntityOnSide(block, x, y, z, false, dir, (Entity)null, stack))
 			{
 				if (world.setBlock(x, y, z, block, 1, 3))

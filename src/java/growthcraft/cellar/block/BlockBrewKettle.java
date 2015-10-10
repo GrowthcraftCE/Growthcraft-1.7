@@ -180,7 +180,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return Item.getItemFromBlock(GrowthCraftCellar.brewKettle);
+		return GrowthCraftCellar.brewKettle.getItem();
 	}
 
 	@Override
@@ -195,7 +195,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public Item getItemDropped(int par1, Random random, int par3)
 	{
-		return Item.getItemFromBlock(GrowthCraftCellar.brewKettle);
+		return GrowthCraftCellar.brewKettle.getItem();
 	}
 
 	@Override

@@ -45,7 +45,7 @@ public class ItemRope extends Item
 				return false;
 			}
 
-			world.setBlock(x, y, z, GrowthCraftCore.fenceRope);
+			world.setBlock(x, y, z, GrowthCraftCore.fenceRope.getBlock());
 			--stack.stackSize;
 			return true;
 		}
@@ -92,7 +92,7 @@ public class ItemRope extends Item
 		}
 		else
 		{
-			Block block2 = GrowthCraftCore.ropeBlock;
+			Block block2 = GrowthCraftCore.ropeBlock.getBlock();
 			if (world.canPlaceEntityOnSide(block2, x, y, z, false, dir, (Entity)null, stack))
 			{
 				int meta = block2.onBlockPlaced(world, x, y, z, dir, par8, par9, par10, 0);

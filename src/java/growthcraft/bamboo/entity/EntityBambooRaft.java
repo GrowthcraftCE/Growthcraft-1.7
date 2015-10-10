@@ -136,7 +136,7 @@ public class EntityBambooRaft extends Entity
 
 				if (!flag)
 				{
-					this.func_145778_a(GrowthCraftBamboo.bambooRaft, 1, 0.0F);
+					this.func_145778_a(GrowthCraftBamboo.bambooRaft.getItem(), 1, 0.0F);
 				}
 
 				this.setDead();
@@ -415,12 +415,12 @@ public class EntityBambooRaft extends Entity
 
 					for (l = 0; l < 3; ++l)
 					{
-						this.func_145778_a(Item.getItemFromBlock(GrowthCraftBamboo.bambooBlock), 1, 0.0F);
+						this.func_145778_a(Item.getItemFromBlock(GrowthCraftBamboo.bambooBlock.getBlock()), 1, 0.0F);
 					}
 
 					for (l = 0; l < 2; ++l)
 					{
-						this.func_145778_a(GrowthCraftBamboo.bamboo, 1, 0.0F);
+						this.func_145778_a(GrowthCraftBamboo.bamboo.getItem(), 1, 0.0F);
 					}
 				}
 			}
@@ -550,12 +550,12 @@ public class EntityBambooRaft extends Entity
 
 					for (l = 0; l < 3; ++l)
 					{
-						this.func_145778_a(Item.getItemFromBlock(GrowthCraftBamboo.bambooBlock), 1, 0.0F);
+						this.func_145778_a(Item.getItemFromBlock(GrowthCraftBamboo.bambooBlock.getBlock()), 1, 0.0F);
 					}
 
 					for (l = 0; l < 2; ++l)
 					{
-						this.func_145778_a(GrowthCraftBamboo.bamboo, 1, 0.0F);
+						this.func_145778_a(GrowthCraftBamboo.bamboo.getItem(), 1, 0.0F);
 					}
 				}
 

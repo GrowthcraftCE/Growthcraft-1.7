@@ -9,6 +9,8 @@ import cpw.mods.fml.common.Optional;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
 
+import net.minecraft.item.Item;
+
 public class Waila extends WailaIntegrationBase
 {
 	@Optional.Method(modid = "Waila")
@@ -16,5 +18,6 @@ public class Waila extends WailaIntegrationBase
 	{
 		final IWailaDataProvider provider = new CropDataProvider();
 		reg.registerBodyProvider(provider, ICropDataProvider.class);
+		reg.registerBodyProvider(provider, Item.class);
 	}
 }

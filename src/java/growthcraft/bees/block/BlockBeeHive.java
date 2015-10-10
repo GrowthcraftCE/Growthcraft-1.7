@@ -47,7 +47,8 @@ public class BlockBeeHive extends Block
 	{
 		if (random.nextInt(24) == 0)
 		{
-			world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), "grcbees:buzz", 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
+			world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F),
+				"grcbees:buzz", 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
 		}
 	}
 
@@ -163,7 +164,7 @@ public class BlockBeeHive extends Block
 	@Override
 	public Item getItemDropped(int par1, Random rand, int par3)
 	{
-		return GrowthCraftBees.bee;
+		return GrowthCraftBees.bee.getItem();
 	}
 
 	@Override
@@ -188,7 +189,7 @@ public class BlockBeeHive extends Block
 					{
 						m = 1;
 					}
-					this.dropBlockAsItem(world, x, y, z, new ItemStack(GrowthCraftBees.honeyComb, 1, m));
+					this.dropBlockAsItem(world, x, y, z, GrowthCraftBees.honeyComb.asStack(1, m));
 				}
 			}
 		}

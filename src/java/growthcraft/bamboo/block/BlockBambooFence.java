@@ -48,7 +48,7 @@ public class BlockBambooFence extends Block
 	{
 		Block block = world.getBlock(x, y, z);
 
-		if (block != this && block != Blocks.fence_gate && block != GrowthCraftBamboo.bambooFenceGate && block != GrowthCraftBamboo.bambooWall && block != GrowthCraftBamboo.bambooStalk)
+		if (block != this && block != Blocks.fence_gate && block != GrowthCraftBamboo.bambooFenceGate.getBlock() && block != GrowthCraftBamboo.bambooWall.getBlock() && block != GrowthCraftBamboo.bambooStalk.getBlock())
 		{
 			return block != null && block.getMaterial().isOpaque() && block.renderAsNormalBlock() ? block.getMaterial() != Material.gourd : false;
 		}

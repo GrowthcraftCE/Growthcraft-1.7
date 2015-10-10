@@ -49,7 +49,7 @@ public class BlockBambooWall extends Block
 	{
 		Block block = world.getBlock(x, y, z);
 
-		if (block != this && block != Blocks.fence_gate && block != GrowthCraftBamboo.bambooFenceGate && block != GrowthCraftBamboo.bambooFence && block != GrowthCraftBamboo.bambooStalk)
+		if (block != this && block != Blocks.fence_gate && block != GrowthCraftBamboo.bambooFenceGate.getBlock() && block != GrowthCraftBamboo.bambooFence.getBlock() && block != GrowthCraftBamboo.bambooStalk.getBlock())
 		{
 			//Block block = Block.blocksList[id];
 			//return block != null && block.blockMaterial.isOpaque() && block.renderAsNormalBlock() ? block.blockMaterial != Material.pumpkin : false;

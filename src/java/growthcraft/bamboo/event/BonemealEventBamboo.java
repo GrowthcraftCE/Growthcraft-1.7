@@ -16,18 +16,18 @@ public class BonemealEventBamboo
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
 	{
-		if (event.block == GrowthCraftBamboo.bambooShoot)
+		if (GrowthCraftBamboo.bambooShoot.getBlock() == event.block)
 		{
 			if (!event.world.isRemote)
 			{
 				if ((double)event.world.rand.nextFloat() < 0.45D)
 				{
-					((BlockBambooShoot)GrowthCraftBamboo.bambooShoot).markOrGrowMarked(event.world, event.x, event.y, event.z, event.world.rand);
+					((BlockBambooShoot)GrowthCraftBamboo.bambooShoot.getBlock()).markOrGrowMarked(event.world, event.x, event.y, event.z, event.world.rand);
 				}
 			}
 			event.setResult(Result.ALLOW);
 		}
-		else if (event.block == GrowthCraftBamboo.bambooStalk)
+		else if (GrowthCraftBamboo.bambooStalk.getBlock() == event.block)
 		{
 			if (!this.isBambooOnGround(event.world, event.x, event.y, event.z))
 			{
@@ -58,9 +58,9 @@ public class BonemealEventBamboo
 							y = y + rand.nextInt(2) - rand.nextInt(2);
 							z = z + rand.nextInt(size * 2 + 1);
 
-							if (event.world.isAirBlock(x, y, z) && GrowthCraftBamboo.bambooShoot.canBlockStay(event.world, x, y, z))
+							if (event.world.isAirBlock(x, y, z) && GrowthCraftBamboo.bambooShoot.getBlock().canBlockStay(event.world, x, y, z))
 							{
-								event.world.setBlock(x, y, z, GrowthCraftBamboo.bambooShoot, 0, 3);
+								event.world.setBlock(x, y, z, GrowthCraftBamboo.bambooShoot.getBlock(), 0, 3);
 								flag = true;
 							}
 						}
@@ -75,7 +75,7 @@ public class BonemealEventBamboo
 	private boolean isBambooOnGround(World world, int x, int y, int z)
 	{
 		boolean flag = world.getBlock(x, y - 1, z) == Blocks.grass || world.getBlock(x, y - 1, z) == Blocks.dirt;
-		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooStalk && flag;
+		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooStalk.getBlock() && flag;
 	}
 
 	private int countNearbyValidSoil(World world, int x, int y, int z, int b)
@@ -89,7 +89,7 @@ public class BonemealEventBamboo
 			{
 				for (y1 = y - 1; y1 <= y + 1; ++y1)
 				{
-					boolean flag = world.isAirBlock(x1, y1, z1) && GrowthCraftBamboo.bambooShoot.canBlockStay(world, x1, y1, z1);
+					boolean flag = world.isAirBlock(x1, y1, z1) && GrowthCraftBamboo.bambooShoot.getBlock().canBlockStay(world, x1, y1, z1);
 					if (flag)
 					{
 						++count;

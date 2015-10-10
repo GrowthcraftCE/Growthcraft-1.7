@@ -12,18 +12,18 @@ public class BonemealEventApples
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
 	{
-		if (event.block == GrowthCraftApples.appleSapling)
+		if (event.block == GrowthCraftApples.appleSapling.getBlock())
 		{
 			if (!event.world.isRemote)
 			{
 				if ((double)event.world.rand.nextFloat() < 0.45D)
 				{
-					((BlockAppleSapling)GrowthCraftApples.appleSapling).growTree(event.world, event.x, event.y, event.z, event.world.rand);
+					((BlockAppleSapling)GrowthCraftApples.appleSapling.getBlock()).growTree(event.world, event.x, event.y, event.z, event.world.rand);
 				}
 			}
 			event.setResult(Result.ALLOW);
 		}
-		else if (event.block == GrowthCraftApples.appleLeaves)
+		else if (event.block == GrowthCraftApples.appleLeaves.getBlock())
 		{
 			int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
 			if ((meta & 3) != 0)
@@ -38,7 +38,7 @@ public class BonemealEventApples
 			{
 				if (!event.world.isRemote)
 				{
-					event.world.setBlock(event.x, event.y - 1, event.z, GrowthCraftApples.appleBlock);
+					event.world.setBlock(event.x, event.y - 1, event.z, GrowthCraftApples.appleBlock.getBlock());
 				}
 
 				event.setResult(Result.ALLOW);

@@ -59,7 +59,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 				{
 					if (world.isAirBlock(x, y - 1, z))
 					{
-						world.setBlock(x, y - 1, z, GrowthCraftApples.appleBlock);
+						world.setBlock(x, y - 1, z, GrowthCraftApples.appleBlock.getBlock());
 					}
 				}
 			}
@@ -259,7 +259,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
-		return Item.getItemFromBlock(GrowthCraftApples.appleSapling);
+		return GrowthCraftApples.appleSapling.getItem();
 	}
 
 	@Override

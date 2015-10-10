@@ -11,7 +11,7 @@ public class ItemCraftedEventCellar
 	@SubscribeEvent
 	public void onItemCrafting(ItemCraftedEvent event)
 	{
-		if (event.crafting.getItem() == Item.getItemFromBlock(GrowthCraftCellar.fermentBarrel))
+		if (GrowthCraftCellar.fermentBarrel.getItem() == event.crafting.getItem())
 		{
 			event.player.addStat(GrowthCraftCellar.craftBarrel, 1);
 		}

@@ -112,7 +112,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftBamboo.bambooShootFood;
+		return GrowthCraftBamboo.bambooShootFood.getItem();
 	}
 
 	public void markOrGrowMarked(World world, int x, int y, int z, Random random)
@@ -134,13 +134,13 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 		if (!TerrainGen.saplingGrowTree(world, rand, x, y, z)) return;
 
 		int meta = world.getBlockMetadata(x, y, z) & 3;
-		Object object = new WorldGenBamboo(true);
+		WorldGenerator generator = new WorldGenBamboo(true);
 		int i1 = 0;
 		int j1 = 0;
 
 		world.setBlock(x, y, z, Blocks.air, 0, 4);
 
-		if (!((WorldGenerator)object).generate(world, rand, x + i1, y, z + j1))
+		if (!generator.generate(world, rand, x + i1, y, z + j1))
 		{
 			world.setBlock(x, y, z, this, meta, 4);
 		}
@@ -158,7 +158,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
-		return GrowthCraftBamboo.bambooShootFood;
+		return GrowthCraftBamboo.bambooShootFood.getItem();
 	}
 
 	/************

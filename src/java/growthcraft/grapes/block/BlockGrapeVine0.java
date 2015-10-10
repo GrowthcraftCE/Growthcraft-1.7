@@ -86,7 +86,7 @@ public class BlockGrapeVine0 extends Block implements IPlantable, ICropDataProvi
 				}
 				else
 				{
-					world.setBlock(x, y, z, GrowthCraftGrapes.grapeVine1, 0, 3);
+					world.setBlock(x, y, z, GrowthCraftGrapes.grapeVine1.getBlock(), 0, 3);
 				}
 			}
 		}
@@ -94,7 +94,7 @@ public class BlockGrapeVine0 extends Block implements IPlantable, ICropDataProvi
 
 	private boolean isGrapeVine(Block block)
 	{
-		return block == GrowthCraftGrapes.grapeVine0 || block == GrowthCraftGrapes.grapeVine1;
+		return block == GrowthCraftGrapes.grapeVine0.getBlock() || block == GrowthCraftGrapes.grapeVine1.getBlock();
 	}
 
 	private float getGrowthRate(World world, int x, int y, int z)
@@ -175,7 +175,7 @@ public class BlockGrapeVine0 extends Block implements IPlantable, ICropDataProvi
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapeSeeds;
+		return GrowthCraftGrapes.grapeSeeds.getItem();
 	}
 
 	@Override

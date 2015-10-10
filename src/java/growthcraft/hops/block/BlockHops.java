@@ -80,7 +80,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock);
+			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock.getBlock());
 		}
 		else
 		{
@@ -98,7 +98,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 					incrementGrowth(world, x, y, z, meta);
 				}
 			}
-			else if ((meta == 2 || meta == 3) && world.getBlock(x, y + 1, z) == GrowthCraftCore.ropeBlock && this.canBlockStay(world, x, y + 1, z))
+			else if ((meta == 2 || meta == 3) && BlockCheck.isRope(world.getBlock(x, y + 1, z)) && this.canBlockStay(world, x, y + 1, z))
 			{
 				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.hopVineGrowthRate / f) + 1) == 0))
 				{
@@ -203,7 +203,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 			if (!world.isRemote)
 			{
 				world.setBlockMetadataWithNotify(x, y, z, 2, 3);
-				this.dropBlockAsItem(world, x, y, z, new ItemStack(GrowthCraftHops.hops, world.rand.nextInt(8) + 1));
+				this.dropBlockAsItem(world, x, y, z, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
 
 			}
 			return true;
@@ -213,15 +213,6 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 			return false;
 		}
 	}
-
-	/*@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int par5)
-	{
-		if (!this.canBlockStay(world, x, y, z))
-		{
-			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock.blockID, 0, 3);
-		}
-	}*/
 
 	/************
 	 * CONDITIONS
@@ -270,7 +261,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	public Item getItem(World world, int x, int y, int z)
 	{
 		int meta = world.getBlockMetadata(x, y, z);
-		return meta < 3 ? GrowthCraftHops.hopSeeds : GrowthCraftHops.hops;
+		return meta < 3 ? GrowthCraftHops.hopSeeds.getItem() : GrowthCraftHops.hops.getItem();
 	}
 
 	@Override
@@ -308,10 +299,10 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		ret.add(new ItemStack(GrowthCraftCore.rope));
+		ret.add(GrowthCraftCore.rope.asStack());
 		if (world.getBlockMetadata(x, y, z) == 3)
 		{
-			ret.add(new ItemStack(GrowthCraftHops.hops, world.rand.nextInt(8) + 1));
+			ret.add(GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
 		}
 		return ret;
 	}

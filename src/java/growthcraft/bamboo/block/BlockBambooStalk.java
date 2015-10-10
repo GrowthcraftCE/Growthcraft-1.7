@@ -63,6 +63,7 @@ public class BlockBambooStalk extends Block
 				{
 					byte b = 9;
 					int amount = 10;
+					final BlockBambooShoot bambooShoot = (BlockBambooShoot)GrowthCraftBamboo.bambooShoot.getBlock();
 
 					for (x1 = x - b; x1 <= x + b; ++x1)
 					{
@@ -71,7 +72,7 @@ public class BlockBambooStalk extends Block
 							for (y1 = y - 1; y1 <= y + 1; ++y1)
 							{
 								boolean flag1 = world.getBlock(x1, y1, z1) == this && isBambooOnGround(world, x1, y1, z1);
-								boolean flag2 = world.getBlock(x1, y1, z1) == GrowthCraftBamboo.bambooShoot;
+								boolean flag2 = world.getBlock(x1, y1, z1) == bambooShoot;
 								if (flag1 || flag2)
 								{
 									--amount;
@@ -90,7 +91,7 @@ public class BlockBambooStalk extends Block
 
 					for (int loop = 0; loop < 4; ++loop)
 					{
-						if (world.isAirBlock(x1, y1, z1) && GrowthCraftBamboo.bambooShoot.canBlockStay(world, x1, y1, z1))
+						if (world.isAirBlock(x1, y1, z1) && bambooShoot.canBlockStay(world, x1, y1, z1))
 						{
 							x = x1;
 							y = y1;
@@ -102,9 +103,9 @@ public class BlockBambooStalk extends Block
 						z1 = z + rand.nextInt(3) - 1;
 					}
 
-					if (world.isAirBlock(x1, y1, z1) && GrowthCraftBamboo.bambooShoot.canBlockStay(world, x1, y1, z1))
+					if (world.isAirBlock(x1, y1, z1) && bambooShoot.canBlockStay(world, x1, y1, z1))
 					{
-						world.setBlock(x1, y1, z1, GrowthCraftBamboo.bambooShoot);
+						world.setBlock(x1, y1, z1, bambooShoot);
 					}
 				}
 
@@ -173,7 +174,7 @@ public class BlockBambooStalk extends Block
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftBamboo.bamboo;
+		return GrowthCraftBamboo.bamboo.getItem();
 	}
 
 	@Override
@@ -209,12 +210,14 @@ public class BlockBambooStalk extends Block
 
 	private boolean canFence(IBlockAccess world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooFence || world.getBlock(x, y, z) == Blocks.fence_gate || world.getBlock(x, y, z) == GrowthCraftBamboo.bambooFenceGate;
+		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooFence.getBlock() ||
+			world.getBlock(x, y, z) == Blocks.fence_gate ||
+			world.getBlock(x, y, z) == GrowthCraftBamboo.bambooFenceGate.getBlock();
 	}
 
 	private boolean canWall(IBlockAccess world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooWall;
+		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooWall.getBlock();
 	}
 
 	private boolean canDoor(IBlockAccess world, int x, int y, int z)
@@ -228,7 +231,7 @@ public class BlockBambooStalk extends Block
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return GrowthCraftBamboo.bamboo;
+		return GrowthCraftBamboo.bamboo.getItem();
 	}
 
 	@Override

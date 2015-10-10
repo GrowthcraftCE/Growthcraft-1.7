@@ -256,7 +256,7 @@ public class BlockFishTrap extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return Item.getItemFromBlock(GrowthCraftFishTrap.fishTrap);
+		return Item.getItemFromBlock(GrowthCraftFishTrap.fishTrap.getBlock());
 	}
 
 	@Override
@@ -283,7 +283,7 @@ public class BlockFishTrap extends BlockContainer
 	@Override
 	public Item getItemDropped(int par1, Random rand, int par3)
 	{
-		return Item.getItemFromBlock(GrowthCraftFishTrap.fishTrap);
+		return Item.getItemFromBlock(GrowthCraftFishTrap.fishTrap.getBlock());
 	}
 
 	@Override

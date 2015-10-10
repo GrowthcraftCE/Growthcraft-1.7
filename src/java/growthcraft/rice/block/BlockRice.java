@@ -105,7 +105,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 				Block soil = world.getBlock(loop_i, y - 1, loop_k);
 				float f1 = 0.0F;
 
-				if (soil != null && soil == GrowthCraftRice.paddyField)
+				if (soil != null && soil == GrowthCraftRice.paddyField.getBlock())
 				{
 					f1 = 1.0F;
 
@@ -160,13 +160,15 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 	 */
 	protected boolean canThisPlantGrowOnThisBlockID(Block block)
 	{
-		return block == GrowthCraftRice.paddyField;
+		return block == GrowthCraftRice.paddyField.getBlock();
 	}
 
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) && this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
+		return (world.getFullBlockLightValue(x, y, z) >= 8 ||
+			world.canBlockSeeTheSky(x, y, z)) &&
+			this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
 	}
 
 	/************
@@ -176,7 +178,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftRice.rice;
+		return GrowthCraftRice.rice.getItem();
 	}
 
 	/************
@@ -185,7 +187,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
-		return GrowthCraftRice.rice;
+		return GrowthCraftRice.rice.getItem();
 	}
 
 	@Override
@@ -211,7 +213,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 			{
 				if (world.rand.nextInt(15) <= metadata)
 				{
-					ret.add(new ItemStack(GrowthCraftRice.rice, 1, 0));
+					ret.add(GrowthCraftRice.rice.asStack(1));
 				}
 			}
 		}

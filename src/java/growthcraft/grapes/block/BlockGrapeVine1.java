@@ -86,17 +86,17 @@ public class BlockGrapeVine1 extends Block implements IPlantable, ICropDataProvi
 		if (allowGrowthResult == Event.Result.ALLOW || continueGrowth)
 		{
 			/* Is here a rope block above this? */
-			if (meta == 0 && world.getBlock(x, y + 1, z) == GrowthCraftCore.ropeBlock)
+			if (meta == 0 && BlockCheck.isRope(world.getBlock(x, y + 1, z)))
 			{
 				incrementGrowth(world, x, y, z, meta);
-				world.setBlock(x, y + 1, z, GrowthCraftGrapes.grapeLeaves, 0, 3);
+				world.setBlock(x, y + 1, z, GrowthCraftGrapes.grapeLeaves.getBlock(), 0, 3);
 			}
 			if (meta == 0 && world.isAirBlock(x, y + 1, z))
 			{
 				incrementGrowth(world, x, y, z, meta);
 				world.setBlock(x, y + 1, z, this, 0, 3);
 			}
-			else if (meta == 0 && world.getBlock(x, y + 1, z) == GrowthCraftGrapes.grapeLeaves)
+			else if (meta == 0 && world.getBlock(x, y + 1, z) == GrowthCraftGrapes.grapeLeaves.getBlock())
 			{
 				incrementGrowth(world, x, y, z, meta);
 			}
@@ -105,7 +105,7 @@ public class BlockGrapeVine1 extends Block implements IPlantable, ICropDataProvi
 
 	private boolean isGrapeVine(Block block)
 	{
-		return block == GrowthCraftGrapes.grapeVine0 || block == GrowthCraftGrapes.grapeVine1;
+		return block == GrowthCraftGrapes.grapeVine0.getBlock() || block == GrowthCraftGrapes.grapeVine1.getBlock();
 	}
 
 	private float getGrowthRate(World world, int x, int y, int z)
@@ -191,7 +191,7 @@ public class BlockGrapeVine1 extends Block implements IPlantable, ICropDataProvi
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapeSeeds;
+		return GrowthCraftGrapes.grapeSeeds.getItem();
 	}
 
 	@Override
@@ -206,7 +206,7 @@ public class BlockGrapeVine1 extends Block implements IPlantable, ICropDataProvi
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
-		return GrowthCraftGrapes.grapeSeeds;
+		return GrowthCraftGrapes.grapeSeeds.getItem();
 	}
 
 	@Override

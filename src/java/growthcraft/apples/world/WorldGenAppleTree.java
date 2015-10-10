@@ -18,7 +18,7 @@ public class WorldGenAppleTree extends WorldGenerator
 	private final int metaWood      = 0;
 	private final int metaLeaves    = 0;
 	private final Block log         = Blocks.log;
-	private final Block leaves      = GrowthCraftApples.appleLeaves;
+	private final Block leaves      = GrowthCraftApples.appleLeaves.getBlock();
 
 	public WorldGenAppleTree(boolean par1)
 	{
@@ -140,14 +140,24 @@ public class WorldGenAppleTree extends WorldGenerator
 		}
 	}
 
-	protected boolean func_150523_a(Block p_150523_1_)
+	protected boolean func_150523_a(Block block)
 	{
-		return p_150523_1_.getMaterial() == Material.air || p_150523_1_.getMaterial() == Material.leaves || p_150523_1_ == Blocks.grass || p_150523_1_ == Blocks.dirt || p_150523_1_ == Blocks.log || p_150523_1_ == Blocks.log2 || p_150523_1_ == Blocks.sapling || p_150523_1_ == Blocks.vine;
+		return block.getMaterial() == Material.air ||
+			block.getMaterial() == Material.leaves ||
+			block == Blocks.grass ||
+			block == Blocks.dirt ||
+			block == Blocks.log ||
+			block == Blocks.log2 ||
+			block == Blocks.sapling ||
+			block == Blocks.vine;
 	}
 
 	protected boolean isReplaceable(World world, int x, int y, int z)
 	{
-		Block block = world.getBlock(x, y, z);
-		return block.isAir(world, x, y, z) || block.isLeaves(world, x, y, z) || block.isWood(world, x, y, z) || func_150523_a(block);
+		final Block block = world.getBlock(x, y, z);
+		return block.isAir(world, x, y, z) ||
+			block.isLeaves(world, x, y, z) ||
+			block.isWood(world, x, y, z) ||
+			func_150523_a(block);
 	}
 }
