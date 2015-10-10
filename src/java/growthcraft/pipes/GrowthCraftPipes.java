@@ -28,6 +28,7 @@ public class GrowthCraftPipes
 	public static GrowthCraftPipes INSTANCE;
 
 	public Blocks blocks = new Blocks();
+	public Items items = new Items();
 	private Config config;
 
 	public static Config getConfig()
@@ -38,16 +39,24 @@ public class GrowthCraftPipes
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		config = new Config(event.getModConfigurationDirectory(), "growthcraft/pipes.conf");
+		config = new Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/pipes.conf");
 
-		blocks.preInit();
+		if (config.enabled)
+		{
+			blocks.preInit();
+			items.preInit();
+		}
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		CommonProxy.INSTANCE.registerRenderers();
-		new growthcraft.pipes.integration.Waila();
+		if (config.enabled)
+		{
+			CommonProxy.INSTANCE.registerRenderers();
+			new growthcraft.pipes.integration.Waila();
+		}
 	}
 
 	@EventHandler
