@@ -85,7 +85,8 @@ public class GrowthCraftBees
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.bees.Config(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
+		config = new growthcraft.bees.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
 
 		//====================
 		// INIT

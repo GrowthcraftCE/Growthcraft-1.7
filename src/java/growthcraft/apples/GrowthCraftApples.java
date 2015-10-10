@@ -76,7 +76,8 @@ public class GrowthCraftApples
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.apples.Config(event.getModConfigurationDirectory(), "growthcraft/apples.conf");
+		config = new growthcraft.apples.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/apples.conf");
 
 		//====================
 		// INIT

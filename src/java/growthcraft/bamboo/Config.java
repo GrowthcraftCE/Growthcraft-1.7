@@ -19,11 +19,6 @@ public class Config extends ConfigBase
 	public int bambooWorldGenDensity = 64;
 	public int bambooWorldGenRarity = 32;
 
-	public Config(File configDir, String filename)
-	{
-		super(configDir, filename);
-	}
-
 	protected void loadConfig()
 	{
 		this.bambooBiomeID = config.get("Biomes", "Bamboo Forest biome ID", bambooBiomeID).getInt();

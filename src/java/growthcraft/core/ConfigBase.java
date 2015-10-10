@@ -14,15 +14,6 @@ public abstract class ConfigBase
 	protected Configuration config;
 
 	/**
-	 * @param configDir - the minecraft configuration directory
-	 * @param filename - config filename
-	 */
-	public ConfigBase(File configDir, String filename)
-	{
-		load(configDir, filename);
-	}
-
-	/**
 	 * Overwrite this method in your extended class and read the config,
 	 * define variables as needed, in short: "I don't care how you do it, just
 	 * make sure its done in this method."
@@ -36,7 +27,7 @@ public abstract class ConfigBase
 	 * @param configDir - root config directory
 	 * @param filename - config filename
 	 */
-	private void load(File configDir, String filename)
+	public void load(File configDir, String filename)
 	{
 		config = new Configuration(new File(configDir, filename));
 		try

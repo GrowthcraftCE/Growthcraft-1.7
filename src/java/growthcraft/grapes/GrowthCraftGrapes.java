@@ -86,7 +86,8 @@ public class GrowthCraftGrapes
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.grapes.Config(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
+		config = new growthcraft.grapes.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
 
 		//====================
 		// INIT

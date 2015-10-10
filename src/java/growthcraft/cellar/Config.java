@@ -13,11 +13,6 @@ public class Config extends ConfigBase
 	public final int fermentBarrelMaxCap = 3000;
 	public final int brewKettleMaxCap = 1000;
 
-	public Config(File dirname, String filename)
-	{
-		super(dirname, filename);
-	}
-
 	protected void loadConfig()
 	{
 		this.potionTipsyID = config.get("Potions", "Potion Tipsy ID", 50).getInt();

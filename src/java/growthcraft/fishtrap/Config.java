@@ -10,11 +10,6 @@ public class Config extends ConfigBase
 	public boolean useBiomeDict = true;
 	public String biomesList = "0;7;24";
 
-	public Config(File dirname, String filename)
-	{
-		super(dirname, filename);
-	}
-
 	protected void loadConfig()
 	{
 		this.fishTrapCatchRate = (float)config.get(Configuration.CATEGORY_GENERAL, "Fish Trap catching rate", (double)fishTrapCatchRate, "[Higher -> Slower] Default : " + fishTrapCatchRate).getDouble();

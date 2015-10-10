@@ -17,11 +17,6 @@ public class Config extends ConfigBase
 	public boolean generateApiaristStructure = false;
 	public final int honeyMeadColor = 0xA3610C;
 
-	public Config(File configDir, String filename)
-	{
-		super(configDir, filename);
-	}
-
 	protected void loadConfig()
 	{
 		this.villagerApiaristID = config.get("Villager", "Apiarist ID", villagerApiaristID).getInt();

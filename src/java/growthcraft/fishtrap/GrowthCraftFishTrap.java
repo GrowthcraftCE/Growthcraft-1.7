@@ -47,7 +47,8 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.fishtrap.Config(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
+		config = new growthcraft.fishtrap.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
 
 		//====================
 		// INIT

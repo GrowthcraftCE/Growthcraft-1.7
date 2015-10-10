@@ -61,7 +61,8 @@ public class GrowthCraftCore
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.core.Config(event.getModConfigurationDirectory(), "growthcraft/core.conf");
+		config = new growthcraft.core.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
 
 		tab =  new CreativeTabGrowthcraft("tabGrowthCraft");
 

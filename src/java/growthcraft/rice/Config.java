@@ -13,11 +13,6 @@ public class Config extends ConfigBase
 	public final int paddyFieldMax = 7;
 	public final int riceSakeColor = 0xE9EFF7;
 
-	public Config(File dirname, String filename)
-	{
-		super(dirname, filename);
-	}
-
 	protected void loadConfig()
 	{
 		this.riceGrowthRate = (float)config.get(Configuration.CATEGORY_GENERAL, "Rice growth rate", (double)riceGrowthRate, "[Higher -> Slower] Default : " + riceGrowthRate).getDouble();
