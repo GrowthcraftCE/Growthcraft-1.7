@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 public class TileEntityPipeRenderer extends TileEntitySpecialRenderer
 {
-	public static final ResourceLocation res = new ResourceLocation("grcpipes" , "textures/blocks/model_pipe.png");
+	public static final ResourceLocation res = new ResourceLocation("grcpipes" , "textures/blocks/model_pipe_base.png");
 	public static final ResourceLocation resColorMask = new ResourceLocation("grcpipes" , "textures/blocks/model_pipe_color_mask.png");
 	private static final float modelScale = 0.0625F;
 
@@ -27,19 +27,25 @@ public class TileEntityPipeRenderer extends TileEntitySpecialRenderer
 			GL11.glScalef(1.0F, 1.0F, 1.0F);
 
 			bindTexture(res);
-			ModelPipe.INSTANCE.render(renderState, modelScale);
-
 			if (colour != GrcColour.Transparent)
 			{
-				bindTexture(resColorMask);
-				GL11.glScalef(1.01F, 1.01F, 1.01F);
+				final int c = colour.blackVariant;
+				final float r = ((c >> 16) & 0xFF) / 255.0f;
+				final float g = ((c >> 8) & 0xFF) / 255.0f;
+				final float b = (c & 0xFF) / 255.0f;
+				GL11.glColor4f(r, g, b, 1.0f);
+			}
+			ModelPipe.INSTANCE.render(renderState, modelScale);
+			bindTexture(resColorMask);
+			if (colour != GrcColour.Transparent)
+			{
 				final int c = colour.mediumVariant;
 				final float r = ((c >> 16) & 0xFF) / 255.0f;
 				final float g = ((c >> 8) & 0xFF) / 255.0f;
 				final float b = (c & 0xFF) / 255.0f;
 				GL11.glColor4f(r, g, b, 1.0f);
-				ModelPipe.INSTANCE.render(renderState, modelScale);
 			}
+			ModelPipe.INSTANCE.render(renderState, modelScale);
 		}
 		GL11.glPopMatrix();
 	}
