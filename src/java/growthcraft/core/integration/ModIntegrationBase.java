@@ -52,6 +52,7 @@ public abstract class ModIntegrationBase
 	{
 		if (Loader.isModLoaded(modID))
 		{
+			FMLLog.log(parentModID, Level.INFO, "Attemping to integrate with %s.", modID);
 			try
 			{
 				integrate();
