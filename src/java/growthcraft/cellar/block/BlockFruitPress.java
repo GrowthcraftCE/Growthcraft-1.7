@@ -6,6 +6,7 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.renderer.RenderFruitPress;
 import growthcraft.cellar.tileentity.TileEntityFruitPress;
 import growthcraft.core.Utils;
+import growthcraft.core.utils.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -26,7 +27,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockFruitPress extends BlockContainer implements ICellarFluidHandler
+public class BlockFruitPress extends BlockCellarContainer implements ICellarFluidHandler
 {
 	private final Random rand = new Random();
 	@SideOnly(Side.CLIENT)
@@ -42,12 +43,28 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 		this.setCreativeTab(GrowthCraftCellar.tab);
 	}
 
+	public boolean isRotatable()
+	{
+		return true;
+	}
+
+	public void doRotateBlock(World world, int x, int y, int z, ForgeDirection side)
+	{
+		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) ^ 1, BlockFlags.SEND_TO_CLIENT);
+		world.setBlockMetadataWithNotify(x, y + 1, z, world.getBlockMetadata(x, y + 1, z) ^ 1, BlockFlags.SEND_TO_CLIENT);
+	}
+
 	/************
 	 * TRIGGERS
 	 ************/
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
+		if (useWrenchItem(player, world, x, y, z))
+		{
+			return true;
+		}
+
 		if (world.isRemote)
 		{
 			return true;
@@ -111,7 +128,7 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 				meta = 4;
 			}
 
-			world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_CLIENT);
 		}
 	}
 
@@ -120,27 +137,16 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 	{
 		int a = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-		if (a == 0)
+		if (a == 0 || a == 2)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 0, 2);
+			world.setBlockMetadataWithNotify(x, y, z, 0, BlockFlags.SEND_TO_CLIENT);
+		}
+		else if (a == 1 || a == 3)
+		{
+			world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SEND_TO_CLIENT);
 		}
 
-		if (a == 1)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 1, 2);
-		}
-
-		if (a == 2)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 0, 2);
-		}
-
-		if (a == 3)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 1, 2);
-		}
-
-		world.setBlock(x, y + 1, z, GrowthCraftCellar.fruitPresser, world.getBlockMetadata(x, y, z), 2);
+		world.setBlock(x, y + 1, z, GrowthCraftCellar.fruitPresser, world.getBlockMetadata(x, y, z), BlockFlags.SEND_TO_CLIENT);
 
 		if (stack.hasDisplayName())
 		{

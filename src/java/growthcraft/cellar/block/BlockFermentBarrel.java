@@ -7,6 +7,7 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.renderer.RenderFermentBarrel;
 import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
 import growthcraft.core.Utils;
+import growthcraft.core.utils.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -32,7 +33,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class BlockFermentBarrel extends BlockContainer implements ICellarFluidHandler
+public class BlockFermentBarrel extends BlockCellarContainer implements ICellarFluidHandler
 {
 	private final Random rand = new Random();
 	@SideOnly(Side.CLIENT)
@@ -48,12 +49,22 @@ public class BlockFermentBarrel extends BlockContainer implements ICellarFluidHa
 		this.setCreativeTab(GrowthCraftCellar.tab);
 	}
 
+	public boolean isRotatable()
+	{
+		return true;
+	}
+
 	/************
 	 * TRIGGERS
 	 ************/
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
+		if (useWrenchItem(player, world, x, y, z))
+		{
+			return true;
+		}
+
 		if (world.isRemote)
 		{
 			return true;
@@ -177,7 +188,7 @@ public class BlockFermentBarrel extends BlockContainer implements ICellarFluidHa
 				meta = 4;
 			}
 
-			world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_CLIENT);
 		}
 	}
 
@@ -185,7 +196,7 @@ public class BlockFermentBarrel extends BlockContainer implements ICellarFluidHa
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
 		int meta = BlockPistonBase.determineOrientation(world, x, y, z, entity);
-		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_CLIENT);
 
 		if (stack.hasDisplayName())
 		{

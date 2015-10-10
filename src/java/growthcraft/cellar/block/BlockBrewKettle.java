@@ -29,7 +29,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBrewKettle extends BlockContainer implements ICellarFluidHandler
+public class BlockBrewKettle extends BlockCellarContainer implements ICellarFluidHandler
 {
 	private final Random rand = new Random();
 	@SideOnly(Side.CLIENT)
@@ -56,14 +56,13 @@ public class BlockBrewKettle extends BlockContainer implements ICellarFluidHandl
 		}
 		else
 		{
-			TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
-
+			final TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
+			final ItemStack is = player.inventory.getCurrentItem();
 			if (te != null)
 			{
-				ItemStack itemstack = player.inventory.getCurrentItem();
-				if (!Utils.fillTank(world, x, y, z, te, itemstack, player))
+				if (!Utils.fillTank(world, x, y, z, te, is, player))
 				{
-					if (!Utils.drainTank(world, x, y, z, te, itemstack, player, false, 64, 0.35F))
+					if (!Utils.drainTank(world, x, y, z, te, is, player, false, 64, 0.35F))
 					{
 						openGui(player, world, x, y, z);
 					}
