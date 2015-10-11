@@ -2,7 +2,6 @@ package growthcraft.fishtrap.gui;
 
 import growthcraft.fishtrap.block.ContainerFishTrap;
 import growthcraft.fishtrap.entity.TileEntityFishTrap;
-import growthcraft.fishtrap.gui.GuiFishTrap;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,9 +13,9 @@ public class GuiHandlerFishTrap implements IGuiHandler
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
 	{
-		TileEntity te = world.getTileEntity(x, y, z);
+		final TileEntity te = world.getTileEntity(x, y, z);
 
-		if(te instanceof TileEntityFishTrap)
+		if (te instanceof TileEntityFishTrap)
 		{
 			return new ContainerFishTrap(player.inventory, (TileEntityFishTrap)te);
 		}
@@ -27,9 +26,9 @@ public class GuiHandlerFishTrap implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
 	{
-		TileEntity te = world.getTileEntity(x, y, z);
+		final TileEntity te = world.getTileEntity(x, y, z);
 
-		if(te instanceof TileEntityFishTrap)
+		if (te instanceof TileEntityFishTrap)
 		{
 			return new GuiFishTrap(player.inventory, (TileEntityFishTrap)te);
 		}

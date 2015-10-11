@@ -12,16 +12,16 @@ public class ContainerFishTrap extends Container
 {
 	private TileEntityFishTrap te;
 
-	public ContainerFishTrap(InventoryPlayer player, TileEntityFishTrap te)
+	public ContainerFishTrap(InventoryPlayer player, TileEntityFishTrap fishtrap)
 	{
-		this.te = te;
-		te.openInventory();
-		byte b0 = 51;
+		this.te = fishtrap;
+		this.te.openInventory();
+		final byte b0 = 51;
 		int i;
 
 		for (i = 0; i < te.getSizeInventory(); ++i)
 		{
-			this.addSlotToContainer(new Slot(te, i, 44 + i * 18, 20));
+			this.addSlotToContainer(new Slot(this.te, i, 44 + i * 18, 20));
 		}
 
 		for (i = 0; i < 3; ++i)
@@ -48,11 +48,11 @@ public class ContainerFishTrap extends Container
 	public ItemStack transferStackInSlot(EntityPlayer player, int index)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot)this.inventorySlots.get(index);
+		final Slot slot = (Slot)this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack())
 		{
-			ItemStack itemstack1 = slot.getStack();
+			final ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
 			if (index < this.te.getSizeInventory())
