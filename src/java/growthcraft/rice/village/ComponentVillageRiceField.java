@@ -3,9 +3,7 @@ package growthcraft.rice.village;
 import java.util.List;
 import java.util.Random;
 import java.util.HashMap;
-import java.lang.Math;
 
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.utils.SchemaToVillage.BlockEntry;
 import growthcraft.core.utils.SchemaToVillage.IBlockEntries;
 import growthcraft.core.utils.SchemaToVillage;
@@ -22,7 +20,7 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 public class ComponentVillageRiceField extends StructureVillagePieces.Village implements SchemaToVillage.IVillage
 {
 	// Design by Ar97x, with some minor modifications by IceDragon (very minor)
-	static private final String riceFieldSchema[][] = {
+	protected static final String riceFieldSchema[][] = {
 		{
 			"    sss    ",
 			"x   x|x   x",

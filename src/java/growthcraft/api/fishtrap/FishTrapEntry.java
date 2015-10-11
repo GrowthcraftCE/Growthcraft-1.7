@@ -8,22 +8,28 @@ import net.minecraft.util.WeightedRandom;
 
 public class FishTrapEntry extends WeightedRandom.Item
 {
-	public final ItemStack fishable;
+	private final ItemStack fishable;
 	private float damage;
 	private boolean isEnchantable;
+
 	public FishTrapEntry(ItemStack fish, int weight)
 	{
 		super(weight);
 		this.fishable = fish;
 	}
 
+	public ItemStack getItemStack()
+	{
+		return fishable;
+	}
+
 	public ItemStack getFishable(Random random)
 	{
-		ItemStack ret = this.fishable.copy();
+		final ItemStack ret = this.fishable.copy();
 
 		if (this.damage > 0.0F)
 		{
-			int i = (int)(this.damage * this.fishable.getMaxDamage());
+			final int i = (int)(this.damage * this.fishable.getMaxDamage());
 			int j = ret.getMaxDamage() - random.nextInt(random.nextInt(i) + 1);
 			if (j > i) j = i;
 			if (j < 1) j = 1;

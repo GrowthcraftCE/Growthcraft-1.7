@@ -5,11 +5,8 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 
 /**
  * Example Usage: Creating Boozes
@@ -162,7 +159,7 @@ public class BoozeRegistry
 	{
 		if (this.isAlternateBooze(f))
 		{
-			Fluid alt = this.getAlternateBooze(f);
+			final Fluid alt = this.getAlternateBooze(f);
 			return (Fluid[])this.boozeMap.get(alt.getID()).get(0);
 		}
 		return (Fluid[])this.boozeMap.get(f.getID()).get(0);
@@ -183,7 +180,7 @@ public class BoozeRegistry
 		{
 			if (this.isAlternateBooze(f))
 			{
-				Fluid alt = this.getAlternateBooze(f);
+				final Fluid alt = this.getAlternateBooze(f);
 				return (Integer)this.boozeMap.get(alt.getID()).get(2);
 			}
 			return (Integer)this.boozeMap.get(f.getID()).get(2);

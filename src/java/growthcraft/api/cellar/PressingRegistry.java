@@ -14,25 +14,36 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class PressingRegistry
 {
-	// because damage is almost never -1
-	private final int NO_META = -1;
-
-	class PressResults
+	final class PressResults
 	{
-		public final Fluid f; //fluid
-		public final int t;   //time
-		public final int a;   //amount
-		public final float r; //residue
+		public final int time;
+		public final int amount;
+		public final float residue;
+		private final Fluid fluid;
+
 		public PressResults(Fluid f, int t, int a, float r)
 		{
-			this.f = f;
-			this.t = t;
-			this.a = a;
-			this.r = r;
+			this.fluid = f;
+			this.time = t;
+			this.amount = a;
+			this.residue = r;
+		}
+
+		public Fluid getFluid()
+		{
+			return fluid;
+		}
+
+		public FluidStack asFluidStack(int size)
+		{
+			return new FluidStack(fluid, size);
 		}
 	}
 
+	// because damage is almost never -1
+	private final int NO_META = -1;
 	private Map<List, PressResults> pressingList = new HashMap<List, PressResults>();
+
 	public Map<List, PressResults> getPressingList() { return pressingList; }
 
 	/**
@@ -114,7 +125,7 @@ public class PressingRegistry
 		{
 			return null;
 		}
-		PressResults ret = (PressResults)pressingList.get(Arrays.asList(itemstack.getItem(), itemstack.getItemDamage()));
+		final PressResults ret = (PressResults)pressingList.get(Arrays.asList(itemstack.getItem(), itemstack.getItemDamage()));
 		if (ret != null)
 		{
 			return ret;
@@ -124,41 +135,41 @@ public class PressingRegistry
 
 	public FluidStack getPressingFluidStack(ItemStack itemstack)
 	{
-		PressResults pressresults = this.getPressingResults(itemstack);
+		final PressResults pressresults = this.getPressingResults(itemstack);
 		if (itemstack == null || pressresults == null)
 		{
 			return null;
 		}
-		return new FluidStack(pressresults.f, 1);
+		return pressresults.asFluidStack(1);
 	}
 
 	public int getPressingTime(ItemStack itemstack)
 	{
-		PressResults pressresults = this.getPressingResults(itemstack);
+		final PressResults pressresults = this.getPressingResults(itemstack);
 		if (itemstack == null || pressresults == null)
 		{
 			return 0;
 		}
-		return pressresults.t;
+		return pressresults.time;
 	}
 
 	public int getPressingAmount(ItemStack itemstack)
 	{
-		PressResults pressresults = this.getPressingResults(itemstack);
+		final PressResults pressresults = this.getPressingResults(itemstack);
 		if (itemstack == null || pressresults == null)
 		{
 			return 0;
 		}
-		return pressresults.a;
+		return pressresults.amount;
 	}
 
 	public float getPressingResidue(ItemStack itemstack)
 	{
-		PressResults pressresults = this.getPressingResults(itemstack);
+		final PressResults pressresults = this.getPressingResults(itemstack);
 		if (itemstack == null || pressresults == null)
 		{
 			return 0.0F;
 		}
-		return pressresults.r;
+		return pressresults.residue;
 	}
 }
