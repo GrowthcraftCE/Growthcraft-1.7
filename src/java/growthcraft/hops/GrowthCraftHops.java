@@ -1,15 +1,11 @@
 package growthcraft.hops;
 
-import java.io.File;
-
 import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
-import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
-import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
@@ -26,11 +22,9 @@ import growthcraft.hops.village.ComponentVillageHopVineyard;
 import growthcraft.hops.village.VillageHandlerHops;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -39,25 +33,15 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
-
-import cpw.mods.fml.common.FMLLog;
-import org.apache.logging.log4j.Level;
 
 @Mod(
 	modid = GrowthCraftHops.MOD_ID,
@@ -167,7 +151,7 @@ public class GrowthCraftHops
 	{
 		proxy.initRenders();
 
-		VillageHandlerHops handler = new VillageHandlerHops();
+		final VillageHandlerHops handler = new VillageHandlerHops();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 	}

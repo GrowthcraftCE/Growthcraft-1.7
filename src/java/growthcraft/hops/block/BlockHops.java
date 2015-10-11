@@ -13,7 +13,6 @@ import growthcraft.hops.GrowthCraftHops;
 import growthcraft.hops.renderer.RenderHops;
 
 import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -36,13 +35,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDataProvider
 {
-	//Constants
-	private final float hopVineGrowthRate = GrowthCraftHops.getConfig().hopVineGrowthRate;
-	private final float hopVineFlowerSpawnRate = GrowthCraftHops.getConfig().hopVineFlowerSpawnRate;
-
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 	public static Boolean graphicFlag;
+
+	private final float hopVineGrowthRate = GrowthCraftHops.getConfig().hopVineGrowthRate;
+	private final float hopVineFlowerSpawnRate = GrowthCraftHops.getConfig().hopVineFlowerSpawnRate;
 
 	public BlockHops()
 	{
@@ -61,7 +59,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
-		int previousMetadata = meta;
+		final int previousMetadata = meta;
 		++meta;
 		world.setBlockMetadataWithNotify(x, y, z, meta, 3);
 		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
@@ -84,12 +82,12 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 		}
 		else
 		{
-			Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);
+			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);
 			if (allowGrowthResult == Event.Result.DENY)
 				return;
 
-			int meta = world.getBlockMetadata(x, y, z);
-			float f = this.getGrowthRateLoop(world, x, y, z);
+			final int meta = world.getBlockMetadata(x, y, z);
+			final float f = this.getGrowthRateLoop(world, x, y, z);
 
 			if (meta < 2)
 			{
@@ -123,9 +121,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 		}
 		else
 		{
-			int loop = 1;
-
-			while (loop < 5)
+			for (int loop = 1; loop < 5; ++loop)
 			{
 				if (world.getBlock(x, y - loop, z) != this)
 				{
@@ -136,7 +132,6 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 				{
 					return getGrowthRate(world, x, y - loop, z);
 				}
-				loop++;
 			}
 
 			return getGrowthRate(world, x, y, z);
@@ -145,24 +140,24 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 
 	private float getGrowthRate(World world, int x, int y, int z)
 	{
+		final Block l = world.getBlock(x, y, z - 1);
+		final Block i1 = world.getBlock(x, y, z + 1);
+		final Block j1 = world.getBlock(x - 1, y, z);
+		final Block k1 = world.getBlock(x + 1, y, z);
+		final Block l1 = world.getBlock(x - 1, y, z - 1);
+		final Block i2 = world.getBlock(x + 1, y, z - 1);
+		final Block j2 = world.getBlock(x + 1, y, z + 1);
+		final Block k2 = world.getBlock(x - 1, y, z + 1);
+		final boolean flag = j1 == this || k1 == this;
+		final boolean flag1 = l == this || i1 == this;
+		final boolean flag2 = l1 == this || i2 == this || j2 == this || k2 == this;
 		float f = 1.0F;
-		Block l = world.getBlock(x, y, z - 1);
-		Block i1 = world.getBlock(x, y, z + 1);
-		Block j1 = world.getBlock(x - 1, y, z);
-		Block k1 = world.getBlock(x + 1, y, z);
-		Block l1 = world.getBlock(x - 1, y, z - 1);
-		Block i2 = world.getBlock(x + 1, y, z - 1);
-		Block j2 = world.getBlock(x + 1, y, z + 1);
-		Block k2 = world.getBlock(x - 1, y, z + 1);
-		boolean flag = j1 == this || k1 == this;
-		boolean flag1 = l == this || i1 == this;
-		boolean flag2 = l1 == this || i2 == this || j2 == this || k2 == this;
 
 		for (int l2 = x - 1; l2 <= x + 1; ++l2)
 		{
 			for (int i3 = z - 1; i3 <= z + 1; ++i3)
 			{
-				Block block = BlockCheck.getFarmableBlock(world, l2, y - 1, i3, ForgeDirection.UP, this);
+				final Block block = BlockCheck.getFarmableBlock(world, l2, y - 1, i3, ForgeDirection.UP, this);
 				float f1 = 0.0F;
 
 				if (block != null)
@@ -260,7 +255,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
 		return meta < 3 ? GrowthCraftHops.hopSeeds.getItem() : GrowthCraftHops.hops.getItem();
 	}
 
@@ -298,7 +293,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(GrowthCraftCore.rope.asStack());
 		if (world.getBlockMetadata(x, y, z) == 3)
 		{
@@ -375,8 +370,8 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
 	{
-		double d0 = 0.5D;
-		double d1 = 1.0D;
+		final double d0 = 0.5D;
+		final double d1 = 1.0D;
 		return ColorizerFoliage.getFoliageColor(d0, d1);
 	}
 
@@ -391,7 +386,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
 
 		int r = 0;
 		int g = 0;
@@ -401,10 +396,10 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 		{
 			for (int i2 = -1; i2 <= 1; ++i2)
 			{
-				int j2 = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
+				final int j2 = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
 				r += (j2 & 16711680) >> 16;
-			g += (j2 & 65280) >> 8;
-		b += j2 & 255;
+				g += (j2 & 65280) >> 8;
+				b += j2 & 255;
 			}
 		}
 
@@ -417,12 +412,12 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	@Override
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity)
 	{
-		boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
-		boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
-		boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
-		boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
-		boolean flag4 = this.canConnectRopeTo(world, x, y - 1, z);
-		boolean flag5 = this.canConnectRopeTo(world, x, y + 1, z);
+		final boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
+		final boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
+		final boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
+		final boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
+		final boolean flag4 = this.canConnectRopeTo(world, x, y - 1, z);
+		final boolean flag5 = this.canConnectRopeTo(world, x, y + 1, z);
 		float f = 0.4375F;
 		float f1 = 0.5625F;
 		float f2 = 0.4375F;
@@ -490,20 +485,20 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
-		float f = 0.0625F;
+		final int meta = world.getBlockMetadata(x, y, z);
+		final float f = 0.0625F;
 
 		switch (meta)
 		{
-		case 0:
-			this.setBlockBounds(6*f, 0.0F, 6*f, 10*f, 5*f, 10*f);
-			break;
-		case 1:
-			this.setBlockBounds(4*f, 0.0F, 4*f, 12*f, 8*f, 12*f);
-			break;
-		default:
-			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-			break;
+			case 0:
+				this.setBlockBounds(6*f, 0.0F, 6*f, 10*f, 5*f, 10*f);
+				break;
+			case 1:
+				this.setBlockBounds(4*f, 0.0F, 4*f, 12*f, 8*f, 12*f);
+				break;
+			default:
+				this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+				break;
 		}
 	}
 

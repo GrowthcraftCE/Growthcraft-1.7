@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.hops.GrowthCraftHops;
-import growthcraft.hops.village.ComponentVillageHopVineyard;
 
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;

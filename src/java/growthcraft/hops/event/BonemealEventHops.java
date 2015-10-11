@@ -1,6 +1,5 @@
 package growthcraft.hops.event;
 
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.hops.GrowthCraftHops;
 
