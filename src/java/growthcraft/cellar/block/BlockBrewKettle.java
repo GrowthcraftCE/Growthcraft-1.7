@@ -29,7 +29,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBrewKettle extends BlockContainer
+public class BlockBrewKettle extends BlockContainer implements ICellarFluidHandler
 {
 	private final Random rand = new Random();
 	@SideOnly(Side.CLIENT)

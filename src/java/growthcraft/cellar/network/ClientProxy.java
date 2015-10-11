@@ -29,6 +29,6 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerVillagerSkin()
 	{
-		VillagerRegistry.instance().registerVillagerSkin(GrowthCraftCellar.villagerBrewer_id, new ResourceLocation("grccellar" , "textures/entity/brewer.png"));
+		VillagerRegistry.instance().registerVillagerSkin(GrowthCraftCellar.getConfig().villagerBrewerID, new ResourceLocation("grccellar" , "textures/entity/brewer.png"));
 	}
 }

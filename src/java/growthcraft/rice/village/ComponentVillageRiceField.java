@@ -81,6 +81,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		}
 	};
 
+	public ComponentVillageRiceField() {} // DO NOT REMOVE
 	public ComponentVillageRiceField(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
 	{
 		super(startPiece, par2);
@@ -90,7 +91,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 
 	public static ComponentVillageRiceField buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 13, 4, 13, coordBaseMode);
+		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 4, 12, coordBaseMode);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
 				return new ComponentVillageRiceField(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -115,15 +116,19 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 				return true;
 			}
 
-			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 4 - 1, 0);
+			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 3, 0);
 		}
 
-		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
+		// clear entire bounding box
+		this.fillWithBlocks(world, box, 0, 0, 0, 11, 4, 12, Blocks.air, Blocks.air, false);
+
+		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 3);
 		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
+
 		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));
 		map.put('f', new BlockEntry(Blocks.fence));
 		map.put('g', new BlockEntry(Blocks.fence_gate, this.getMetadataWithOffset(Blocks.fence_gate, 0)));
-		map.put('p', new BlockEntry(GrowthCraftRice.paddyField, GrowthCraftRice.paddyFieldMax));
+		map.put('p', new BlockEntry(GrowthCraftRice.paddyField, GrowthCraftRice.getConfig().paddyFieldMax));
 		map.put('r', new BlockEntry(GrowthCraftRice.riceBlock, 6));
 		map.put('s', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3)));
 		map.put('t', new BlockEntry(Blocks.torch));
@@ -131,7 +136,17 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		map.put('|', new BlockEntry(Blocks.log, vert ? 8 : 4));
 		map.put('~', new BlockEntry(Blocks.water));
 
-		SchemaToVillage.drawSchema(this, world, random, box, riceFieldSchema, map);
+		SchemaToVillage.drawSchema(this, world, random, box, riceFieldSchema, map, 0, 0, 0);
+
+		for (int row = 0; row < 12; ++row)
+		{
+			for (int col = 0; col < 11; ++col)
+			{
+				this.clearCurrentPositionBlocksUpwards(world, col, 4, row, box);
+				this.func_151554_b(world, Blocks.dirt, 0, col, -1, row, box);
+			}
+		}
+
 		return true;
 	}
 }

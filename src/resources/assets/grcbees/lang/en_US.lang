@@ -8,14 +8,30 @@ item.grc.honeyJar.name=Honey
 item.grc.bee.name=Bee
 
 container.grc.beeBox=Bee Box
-	
+
 fluid.grc.honeyMead=Mead
 fluid.grc.honeyMead0=Mead
 fluid.grc.honeyMead1=Mead
 fluid.grc.honeyMead2=Mead
 fluid.grc.honeyMead3=Mead
 
+item.bucket.fluid.grc.honeyMead.name=Mead Bucket
+item.bucket.fluid.grc.honeyMead0.name=Mead Bucket
+item.bucket.fluid.grc.honeyMead1.name=Mead Bucket
+item.bucket.fluid.grc.honeyMead2.name=Mead Bucket
+item.bucket.fluid.grc.honeyMead3.name=Mead Bucket
+
+tile.fluid.grc.honeyMead.name=Mead
+tile.fluid.grc.honeyMead0.name=Mead
+tile.fluid.grc.honeyMead1.name=Mead
+tile.fluid.grc.honeyMead2.name=Mead
+tile.fluid.grc.honeyMead3.name=Mead
+
 fluid.grc.honeyMead0.modifier=Young
 fluid.grc.honeyMead1.modifier=Fermented
 fluid.grc.honeyMead2.modifier=Fermented, Potent
 fluid.grc.honeyMead3.modifier=Fermented, Extended
+
+grc.bees.bonus_prefix=Bonus :
+grc.bees.bees_prefix=Bees :
+grc.bees.honey_prefix=Honey :

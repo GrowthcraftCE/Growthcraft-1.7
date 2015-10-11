@@ -1,4 +1,3 @@
-﻿
 itemGroup.tabGrCCellar=Growthcraft Cellar
 
 tile.grc.fruitPress.name=Fruit Press
@@ -6,7 +5,9 @@ tile.grc.fruitPresser.name=Fruit Press
 tile.grc.brewKettle.name=Brew Kettle
 tile.grc.fermentBarrel.name=Fermentation Barrel
 
-item.grc.boozeBucket.name=Bucket of
+// Please remove this field once all other module translations have been updated,
+// this is no longer used
+item.grc.boozeBucket.name=Bucket
 
 container.grc.fruitPress=Fruit Press
 container.grc.brewKettle=Brew Kettle
@@ -26,3 +27,26 @@ achievement.fermentBooze=It's The Yeast I Could Do...
 achievement.fermentBooze.desc=Ferment an alcoholic beverage.
 achievement.getDrunk=Is Trouble Brewing?
 achievement.getDrunk.desc=Acquire Tipsy V.
+
+// number is a percentage
+grc.cellar.format.tipsy_chance=%d%% Chance of Tipsy
+grc.cellar.item.booze_bucket.deprecated=DEPRECATED, craft to get updated bucket
+grc.cellar.item.booze_bucket.deprecated_suffix= (DEPRECATED)
+
+grc.cellar.brewKettle.brewing_prefix=Brewing :
+grc.cellar.brewKettle.itemslot.item=Item :
+grc.cellar.brewKettle.itemslot.residue=Residue :
+grc.cellar.fermentBarrel.progress_prefix=Progress :
+grc.cellar.fermentBarrel.progress_format=%d%%
+grc.cellar.fermentBarrel.itemslot.modifier=Modifier :
+grc.cellar.fruitPress.itemslot.item=Item :
+grc.cellar.fruitPress.itemslot.residue=Residue :
+grc.cellar.fruitPresser.state.invalid=<Invalid>
+grc.cellar.fruitPresser.state.pressed=Pressed
+grc.cellar.fruitPresser.state.unpressed=Unpressed
+grc.cellar.fruitPresser.state_prefix=State :
+
+grc.cellar.waila.option.DisplayFluidContent=Fluid Tanks
+grc.cellar.waila.option.FruitPressExtras=Fruit Press Extras
+grc.cellar.waila.option.BrewKettleExtras=Brew Kettle Extras
+grc.cellar.waila.option.FermentBarrelExtras=Fermentation Barrel Extras

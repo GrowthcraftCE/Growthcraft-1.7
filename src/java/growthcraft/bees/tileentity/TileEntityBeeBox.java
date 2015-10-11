@@ -1,4 +1,4 @@
-package growthcraft.bees.entity;
+package growthcraft.bees.tileentity;
 
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.GrowthCraftBees;
@@ -87,6 +87,17 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 			return 0;
 		}
 		return this.invSlots[0].stackSize;
+	}
+
+	public boolean hasBees()
+	{
+		return countBees() != 0;
+	}
+
+	public boolean hasMaxBees()
+	{
+		// in the case they use a mod that overrides the maximum item stack
+		return countBees() >= 64;
 	}
 
 	public boolean isHoneyEnough()

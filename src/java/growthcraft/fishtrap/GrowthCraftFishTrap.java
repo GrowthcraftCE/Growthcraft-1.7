@@ -37,43 +37,23 @@ public class GrowthCraftFishTrap
 
 	public static Block fishTrap;
 
-	public static float fishTrap_catchRate;
-	public static String fishTrap_biomesList;
-	public static boolean fishTrap_useBiomeDict;
+	private growthcraft.fishtrap.Config config;
+
+	public static growthcraft.fishtrap.Config getConfig()
+	{
+		return instance.config;
+	}
 
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		//====================
-		// CONFIGURATION
-		//====================
-		Configuration config = new Configuration(new File(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf"));
-		try
-		{
-			config.load();
-
-			double f = 55.0D;
-			Property cfgA = config.get(Configuration.CATEGORY_GENERAL, "Fish Trap catching rate", f);
-			cfgA.comment = "[Higher -> Slower] Default : " + f;
-			this.fishTrap_catchRate = (float) cfgA.getDouble(f);
-
-			Property cfgB = config.get(Configuration.CATEGORY_GENERAL, "Biomes (IDs) That Increases Fish Trap Productivity", "0;7;24");
-			cfgB.comment = "Separate the IDs with ';' (without the quote marks)";
-			this.fishTrap_biomesList = cfgB.getString();
-
-			Property cfgC = config.get(Configuration.CATEGORY_GENERAL, "Enable Biome Dictionary compatability?", true);
-			cfgC.comment = "Default : true  || false = Disable";
-			this.fishTrap_useBiomeDict = cfgC.getBoolean(true);
-		}
-		finally
-		{
-			if (config.hasChanged()) { config.save(); }
-		}
+		config = new growthcraft.fishtrap.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
 
 		//====================
 		// INIT
 		//====================
-		fishTrap = (new BlockFishTrap());
+		fishTrap = new BlockFishTrap();
 
 		//====================
 		// REGISTRIES

@@ -18,13 +18,8 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void initSounds()
-	{//MinecraftForge.EVENT_BUS.register(new SoundLoadEventBees());
-	}
-
-	@Override
 	public void registerVillagerSkin()
 	{
-		VillagerRegistry.instance().registerVillagerSkin(GrowthCraftBees.villagerApiarist_id, new ResourceLocation("grcbees" , "textures/entity/apiarist.png"));
+		VillagerRegistry.instance().registerVillagerSkin(GrowthCraftBees.getConfig().villagerApiaristID, new ResourceLocation("grcbees" , "textures/entity/apiarist.png"));
 	}
 }

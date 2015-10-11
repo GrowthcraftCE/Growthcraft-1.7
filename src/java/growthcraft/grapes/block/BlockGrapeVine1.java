@@ -3,8 +3,10 @@ package growthcraft.grapes.block;
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.AppleCore;
+import growthcraft.core.utils.BlockCheck;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.renderer.RenderGrapeVine1;
 
@@ -28,9 +30,9 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockGrapeVine1 extends Block implements IPlantable
+public class BlockGrapeVine1 extends Block implements IPlantable, ICropDataProvider
 {
-	private final float growth = GrowthCraftGrapes.grapeVine1_growth;
+	private final float growth = GrowthCraftGrapes.getConfig().grapeVineTrunkGrowthRate;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
@@ -45,6 +47,11 @@ public class BlockGrapeVine1 extends Block implements IPlantable
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("grc.grapeVine1");
 		this.setCreativeTab(null);
+	}
+
+	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
+	{
+		return (float)(meta / 1.0);
 	}
 
 	public void incrementGrowth(World world, int x, int y, int z, int meta)
@@ -174,8 +181,7 @@ public class BlockGrapeVine1 extends Block implements IPlantable
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		Block soil = world.getBlock(x, y - 1, z);
-		return (soil != null && soil.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this)) || world.getBlock(x, y - 1, z) == this;
+		return (BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this) || (world.getBlock(x, y - 1, z) == this));
 	}
 
 	/************

@@ -2,6 +2,8 @@ package growthcraft.bamboo.block;
 
 import java.util.Random;
 
+import growthcraft.core.block.ICropDataProvider;
+import growthcraft.core.utils.BlockCheck;
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.world.WorldGenBamboo;
 
@@ -16,17 +18,21 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockBambooShoot extends BlockBush
+public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
 	//constants
-	private final int growth = GrowthCraftBamboo.bambooShoot_growth;
+	private final int growth = GrowthCraftBamboo.getConfig().bambooShootGrowthRate;
 
 	public BlockBambooShoot()
 	{
@@ -38,6 +44,11 @@ public class BlockBambooShoot extends BlockBush
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 		this.setCreativeTab(null);
 		this.setBlockName("grc.bambooShoot");
+	}
+
+	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
+	{
+		return (float)(meta / 1.0);
 	}
 
 	/************
@@ -79,10 +90,6 @@ public class BlockBambooShoot extends BlockBush
 	/************
 	 * CONDITIONS
 	 ************/
-	protected boolean canThisPlantGrowOnThisBlockID(Block par1)
-	{
-		return par1 == Blocks.grass || par1 == Blocks.dirt || par1 == Blocks.farmland;
-	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
@@ -93,7 +100,9 @@ public class BlockBambooShoot extends BlockBush
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) && this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
+		Block soil = world.getBlock(x, y - 1, z);
+		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) &&
+			BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
 	}
 
 	/************

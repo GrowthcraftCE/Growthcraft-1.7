@@ -21,17 +21,18 @@ import growthcraft.cellar.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.village.ComponentVillageTavern;
 import growthcraft.cellar.village.VillageHandlerCellar;
 import growthcraft.core.AchievementPageGrowthcraft;
+import growthcraft.core.integration.NEI;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.common.SidedProxy;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -46,10 +47,12 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-@Mod(modid = "Growthcraft|Cellar",name = "Growthcraft Cellar",version = "@VERSION@",dependencies = "required-after:Growthcraft")
+@Mod(modid = GrowthCraftCellar.MOD_ID,name = GrowthCraftCellar.MOD_NAME,version = "@VERSION@",dependencies = "required-after:Growthcraft")
 public class GrowthCraftCellar
 {
-	@Instance("Growthcraft|Cellar")
+	public static final String MOD_ID = "Growthcraft|Cellar";
+	public static final String MOD_NAME = "Growthcraft Cellar";
+	@Instance(MOD_ID)
 	public static GrowthCraftCellar instance;
 
 	@SidedProxy(clientSide="growthcraft.cellar.network.ClientProxy", serverSide="growthcraft.cellar.network.CommonProxy")
@@ -64,12 +67,6 @@ public class GrowthCraftCellar
 
 	public static Potion potionTipsy;
 
-	///////IDS////////
-
-	public static int potionTipsy_id;
-
-	public static int villagerBrewer_id;
-
 	// Constants
 	public static ItemStack residue = new ItemStack(Items.dye, 1, 15);
 	public static final int BOTTLE_VOLUME = 333;
@@ -82,41 +79,26 @@ public class GrowthCraftCellar
 	public static Achievement fermentBooze;
 	public static Achievement getDrunk;
 
-	public static int ferment_speed;
-
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
+
+	private growthcraft.cellar.Config config;
+
+	public static growthcraft.cellar.Config getConfig()
+	{
+		return instance.config;
+	}
 
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		//====================
-		// CONFIGURATION
-		//====================
-		Configuration config = new Configuration(new File(event.getModConfigurationDirectory(), "growthcraft/cellar.conf"));
-		try
-		{
-			config.load();
-
-			potionTipsy_id = config.get("Potions", "Potion Tipsy ID", 50).getInt();
-
-			villagerBrewer_id = config.get("Villager", "Brewer ID", 10).getInt();
-
-			int v = 24000;
-			Property cfgA = config.get(Configuration.CATEGORY_GENERAL, "Ferment Barrel fermenting time", v);
-			cfgA.comment = "[Higher -> Slower] Default : " + v;
-			this.ferment_speed = cfgA.getInt(v);
-		}
-		finally
-		{
-			if (config.hasChanged()) { config.save(); }
-		}
+		config = new growthcraft.cellar.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
 
 		//====================
 		// INIT
 		//====================
-		fermentBarrel = (new BlockFermentBarrel());
 		tab = new CreativeTabCellar("tabGrCCellar");
-		fermentBarrel.setCreativeTab(GrowthCraftCellar.tab);
+		fermentBarrel = (new BlockFermentBarrel());
 		fruitPress    = (new BlockFruitPress());
 		fruitPresser  = (new BlockFruitPresser());
 		brewKettle    = (new BlockBrewKettle());
@@ -180,7 +162,7 @@ public class GrowthCraftCellar
 			}
 		}
 
-		potionTipsy = (new PotionCellar(potionTipsy_id, false, 0)).setIconIndex(0, 0).setPotionName("grc.potion.tipsy");
+		potionTipsy = (new PotionCellar(config.potionTipsyID, false, 0)).setIconIndex(0, 0).setPotionName("grc.potion.tipsy");
 
 		//====================
 		// ACHIEVEMENTS
@@ -196,6 +178,9 @@ public class GrowthCraftCellar
 		CellarRegistry.instance().addHeatSource(Blocks.fire);
 		CellarRegistry.instance().addHeatSource(Blocks.lava);
 		CellarRegistry.instance().addHeatSource(Blocks.flowing_lava);
+
+		NEI.hideItem(new ItemStack(fruitPresser));
+		NEI.hideItem(new ItemStack(chievItemDummy));
 	}
 
 	@EventHandler
@@ -208,6 +193,8 @@ public class GrowthCraftCellar
 
 		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());
 		proxy.registerVillagerSkin();
+
+		new growthcraft.cellar.integration.Waila();
 	}
 
 	@EventHandler

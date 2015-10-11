@@ -4,6 +4,7 @@ import java.util.Random;
 
 import growthcraft.apples.GrowthCraftApples;
 import growthcraft.apples.renderer.RenderApple;
+import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.integration.AppleCore;
 
 import cpw.mods.fml.common.eventhandler.Event;
@@ -14,6 +15,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -23,12 +25,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockApple extends Block implements IGrowable
+public class BlockApple extends Block implements IGrowable, ICropDataProvider
 {
-	//Constants
-	private final int growth = GrowthCraftApples.appleBlock_growth;
-	private final boolean dropFlag = GrowthCraftApples.appleBlock_dropFlag;
-	private final int dropChance = GrowthCraftApples.appleBlock_dropChance;
+	private final int growth = GrowthCraftApples.getConfig().appleGrowthRate;
+	private final boolean dropRipeApples = GrowthCraftApples.getConfig().dropRipeApples;
+	private final int dropChance = GrowthCraftApples.getConfig().appleDropChance;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
@@ -42,6 +43,11 @@ public class BlockApple extends Block implements IGrowable
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("grc.appleBlock");
 		this.setCreativeTab(null);
+	}
+
+	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
+	{
+		return (float)(meta / 2.0);
 	}
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)
@@ -75,6 +81,19 @@ public class BlockApple extends Block implements IGrowable
 		incrementGrowth(world, x, y, z, world.getBlockMetadata(x, y, z));
 	}
 
+	/**
+	 * Drops the block as an item and replaces it with air
+	 * @param world - world to drop in
+	 * @param x - x Coord
+	 * @param y - y Coord
+	 * @param z - z Coord
+	 */
+	public void fellBlockAsItem(World world, int x, int y, int z)
+	{
+		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		world.setBlockToAir(x, y, z);
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -100,10 +119,9 @@ public class BlockApple extends Block implements IGrowable
 				{
 					incrementGrowth(world, x, y, z, meta);
 				}
-				else if (meta >= 2 && this.dropFlag && world.rand.nextInt(this.dropChance) == 0)
+				else if (meta >= 2 && this.dropRipeApples && world.rand.nextInt(this.dropChance) == 0)
 				{
-					this.dropBlockAsItem(world, x, y, z, new ItemStack(Items.apple));
-					world.setBlockToAir(x, y, z);
+					fellBlockAsItem(world, x, y, z);
 				}
 			}
 		}
@@ -113,12 +131,21 @@ public class BlockApple extends Block implements IGrowable
 	 * TRIGGERS
 	 ************/
 	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7, float par8, float par9)
+	{
+		if (!world.isRemote)
+		{
+			fellBlockAsItem(world, x, y, z);
+		}
+		return true;
+	}
+
+	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
 	{
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlock(x, y, z, Blocks.air, 0, 2);
+			fellBlockAsItem(world, x, y, z);
 		}
 	}
 

@@ -3,11 +3,12 @@ package growthcraft.cellar.gui;
 import java.util.ArrayList;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.container.ContainerFruitPress;
+import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.network.PacketClearTankButton;
 import growthcraft.cellar.tileentity.CellarTank;
 import growthcraft.cellar.tileentity.TileEntityFruitPress;
+import growthcraft.core.utils.UnitFormatter;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -123,17 +124,9 @@ public class GuiFruitPress extends GuiCellar
 			if (this.te.isFluidTankFilled())
 			{
 				toolTip.add(this.te.getFluid().getLocalizedName());
-				if (CellarRegistry.instance().isFluidBooze(this.te.getFluid()))
-				{
-					if (CellarRegistry.instance().isAlternateBooze(this.te.getFluid()))
-					{
-						toolTip.add(EnumChatFormatting.GRAY + I18n.format(CellarRegistry.instance().getAlternateBooze(this.te.getFluid()).getUnlocalizedName() + ".modifier"));
-					}
-					else
-					{
-						toolTip.add(EnumChatFormatting.GRAY + I18n.format(this.te.getFluid().getUnlocalizedName() + ".modifier"));
-					}
-				}
+
+				final String s = UnitFormatter.fluidModifier(this.te.getFluid());
+				if (s != null) toolTip.add(s);
 			}
 
 			drawText(toolTip, par1, par2, this.fontRendererObj);

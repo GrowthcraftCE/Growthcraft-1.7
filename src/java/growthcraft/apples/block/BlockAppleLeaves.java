@@ -24,7 +24,7 @@ import net.minecraftforge.common.IShearable;
 public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 {
 	//Constants
-	private final int growth = GrowthCraftApples.appleLeaves_growth;
+	private final int growth = GrowthCraftApples.getConfig().appleLeavesGrowthRate;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;

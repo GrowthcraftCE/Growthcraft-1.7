@@ -18,15 +18,27 @@ buildscript {
 }
 
 repositories {
+    mavenLocal()
+
     maven {
         name = "AppleCore"
         url = "http://www.ryanliptak.com/maven/"
+    }
+
+    maven {
+        name "ChickenBones"
+        url "http://chickenbones.net/maven/"
+    }
+
+    maven {
+        name "Mobius"
+        url "http://mobiusstrip.eu/maven"
     }
 }
 
 apply plugin: 'forge'
 
-version = "2.2.2"
+version = "${minecraft_version}-2.3.0"
 group= "mod.growthcraft"
 archivesBaseName = "growthcraft"
 
@@ -64,8 +76,11 @@ processResources {
 }
 
 dependencies {
-    //compile "applecore:AppleCore:1.7.10-1.2.1+104.62391:api"
-    compile "applecore:AppleCore:1.7.10-1.1.0:api"
+    compile "applecore:AppleCore:${minecraft_version}-${applecore_version}:api"
+    compile "mcp.mobius.waila:Waila:${waila_version}_${minecraft_version}:dev"
+    compile "codechicken:CodeChickenLib:${minecraft_version}-${code_chicken_lib_version}:dev"
+    compile "codechicken:CodeChickenCore:${minecraft_version}-${code_chicken_core_version}:dev"
+    compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
 }
 
 // --------------------

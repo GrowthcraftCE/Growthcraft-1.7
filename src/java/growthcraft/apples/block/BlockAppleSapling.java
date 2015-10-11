@@ -20,7 +20,7 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 public class BlockAppleSapling extends BlockBush
 {
 	//Constants
-	private final int growth = GrowthCraftApples.appleSapling_growth;
+	private final int growth = GrowthCraftApples.getConfig().appleSaplingGrowthRate;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon tex;

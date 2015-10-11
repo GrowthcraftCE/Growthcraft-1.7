@@ -3,6 +3,7 @@ package growthcraft.rice.block;
 import java.util.ArrayList;
 import java.util.Random;
 
+import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.block.IPaddyCrop;
@@ -22,10 +23,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockRice extends Block implements IPaddyCrop
+public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 {
 	//Constants
-	private final float growth = GrowthCraftRice.riceBlock_growth;
+	private final float growth = GrowthCraftRice.getConfig().riceGrowthRate;
 
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
@@ -38,6 +39,11 @@ public class BlockRice extends Block implements IPaddyCrop
 		this.setCreativeTab(null);
 		this.setBlockName("grc.riceBlock");
 		this.setStepSound(soundTypeGrass);
+	}
+
+	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
+	{
+		return (float)(meta / 7.0);
 	}
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)
@@ -147,6 +153,11 @@ public class BlockRice extends Block implements IPaddyCrop
 	/************
 	 * CONDITIONS
 	 ************/
+
+	/**
+	 * @param block - block to place on
+	 * @return can the rice be placed on this block?
+	 */
 	protected boolean canThisPlantGrowOnThisBlockID(Block block)
 	{
 		return block == GrowthCraftRice.paddyField;
