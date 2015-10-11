@@ -42,6 +42,12 @@ repositories {
 }
 
 apply plugin: 'forge'
+apply plugin: 'checkstyle'
+
+checkstyle {
+    toolVersion = "6.11.2"
+    configFile = new File(rootDir, "checkstyle/checkstyle.xml")
+}
 
 version = "${minecraft_version}-${growthcraft_version}"
 group= "mod.growthcraft"
