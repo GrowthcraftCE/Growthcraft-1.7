@@ -3,19 +3,19 @@ jdk:
   - openjdk7
 
 before_install:
- - chmod +x gradlew
- 
+- chmod +x gradlew
+
 install: ./gradlew setupCIWorkspace -S
 
-script: 
- - ./gradlew build
- - ls -la build/libs
- 
+script:
+- ./gradlew build
+- ls -la build/libs
+
 # Deploy the artifacts back to GitHub
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH
-  file: "build/libs/growthcraft-2.2.2-complete.jar"
+  file: "build/libs/growthcraft-2.3.0-complete.jar"
   skip_cleanup: true
   on:
     tags: true
