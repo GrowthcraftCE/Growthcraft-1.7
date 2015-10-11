@@ -1,6 +1,7 @@
 package growthcraft.cellar.container;
 
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.util.CellarUtil;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -19,6 +20,6 @@ public class SlotBrewKettleResidue extends Slot
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
-		return stack != null ? stack.getItem() == GrowthCraftCellar.residue.getItem() && stack.getItemDamage() == GrowthCraftCellar.residue.getItemDamage()  : false;
+		return CellarUtil.itemIsResidue(stack);
 	}
 }

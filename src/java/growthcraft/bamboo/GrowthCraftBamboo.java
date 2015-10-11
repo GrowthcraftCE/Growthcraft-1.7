@@ -28,6 +28,7 @@ import growthcraft.bamboo.village.VillageHandlerBamboo;
 import growthcraft.bamboo.world.BiomeGenBamboo;
 import growthcraft.bamboo.world.WorldGenBamboo;
 import growthcraft.bamboo.world.WorldGeneratorBamboo;
+import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -83,79 +84,22 @@ public class GrowthCraftBamboo
 	public static Item bambooShootFood;
 
 	public static BiomeGenBase bambooBiome;
-	public static int bambooBiome_id;
 
-	public static String bambooBiomesList;
-	public static boolean bambooUseBiomeDict;
-	public static boolean bambooGenerateBiome;
-	public static int bambooWorldGen_rarity;
-	public static int bambooWorldGen_density;
-	public static int bambooStalk_growth;
-	public static int bambooShoot_growth;
-	public static boolean config_genBambooYard;
+	private growthcraft.bamboo.Config config;
 
 	@SidedProxy(clientSide="growthcraft.bamboo.ClientProxy", serverSide="growthcraft.bamboo.CommonProxy")
 	public static CommonProxy proxy;
 
+	public static growthcraft.bamboo.Config getConfig()
+	{
+		return instance.config;
+	}
+
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		//====================
-		// CONFIGURATION
-		//====================
-		Configuration config = new Configuration(new File(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf"));
-		try
-		{
-			//config.addCustomCategoryComment("Biomes", "Biomes");
-			config.load();
-
-			bambooBiome_id = config.get("Biomes", "Bamboo Forest biome ID", 170).getInt();
-
-			Property cfgA = config.get(Configuration.CATEGORY_GENERAL, "Biomes (IDs) That Generate Bamboos", "0;1;4;7;18;21;22;23;149;151");
-			cfgA.comment = "Separate the IDs with ';' (without the quote marks)";
-			this.bambooBiomesList = cfgA.getString();
-
-			//Ocean, Plains, Forest, River, ForestHills
-			//Jungle, JungleHills, JungleEdge
-			//JungleM, JungleEdgeM
-
-			Property cfgB = config.get(Configuration.CATEGORY_GENERAL, "Enable Biome Dictionary compatability?", true);
-			cfgB.comment = "Default : true  || false = Disable";
-			this.bambooUseBiomeDict = cfgB.getBoolean(true);
-
-			Property cfgC = config.get(Configuration.CATEGORY_GENERAL, "Generate Bamboo Forest biome?", true);
-			cfgC.comment = "Default : true  || false = Disable";
-			this.bambooGenerateBiome = cfgC.getBoolean(true);
-
-			int v = 32;
-			Property cfgD = config.get(Configuration.CATEGORY_GENERAL, "Bamboo WorldGen rarity", v);
-			cfgD.comment = "[Higher -> Rarer] Default : " + v;
-			this.bambooWorldGen_rarity = cfgD.getInt(v);
-
-			v = 64;
-			Property cfgG = config.get(Configuration.CATEGORY_GENERAL, "Bamboo WorldGen density", v);
-			cfgG.comment = "[Higher -> Denser] Default : " + v;
-			this.bambooWorldGen_density = cfgG.getInt(v);
-
-			v = 4;
-			Property cfgE = config.get(Configuration.CATEGORY_GENERAL, "Bamboo Spread rate", v);
-			cfgE.comment = "[Higher -> Slower] Default : " + v;
-			this.bambooStalk_growth = cfgE.getInt(v);
-
-			v = 7;
-			Property cfgF = config.get(Configuration.CATEGORY_GENERAL, "Bamboo Shoot growth rate", v);
-			cfgF.comment = "[Higher -> Slower] Default : " + v;
-			this.bambooShoot_growth = cfgF.getInt(v);
-
-			boolean b = false;
-			Property genBambooYard = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Bamboo Yard", b);
-			genBambooYard.comment = "Controls bamboo yard spawning in villages Default : " + b;
-			this.config_genBambooYard = genBambooYard.getBoolean(b);
-		}
-		finally
-		{
-			if (config.hasChanged()) { config.save(); }
-		}
+		config = new growthcraft.bamboo.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
 
 		//====================
 		// INIT
@@ -179,9 +123,13 @@ public class GrowthCraftBamboo
 		bambooCoal = (new ItemBambooCoal());
 		bambooShootFood = (new ItemBambooShoot());
 
-		if (bambooGenerateBiome)
+		if (config.bambooGenerateBiome)
 		{
-			bambooBiome = (new BiomeGenBamboo(bambooBiome_id)).setColor(353825).setBiomeName("BambooForest").func_76733_a(5159473).setTemperatureRainfall(0.7F, 0.8F);
+			bambooBiome = (new BiomeGenBamboo(config.bambooBiomeID))
+				.setColor(353825)
+				.setBiomeName("BambooForest")
+				.func_76733_a(5159473)
+				.setTemperatureRainfall(0.7F, 0.8F);
 		}
 
 		//====================
@@ -206,7 +154,7 @@ public class GrowthCraftBamboo
 		GameRegistry.registerItem(bambooCoal, "grc.bambooCoal");
 		GameRegistry.registerItem(bambooShootFood, "grc.bambooShootFood");
 
-		if (bambooGenerateBiome)
+		if (config.bambooGenerateBiome)
 		{
 			//GameRegistry.addBiome(bambooBiome);
 			BiomeManager.addSpawnBiome(bambooBiome);
@@ -280,6 +228,8 @@ public class GrowthCraftBamboo
 		//====================
 		GameRegistry.registerFuelHandler(new BambooFuelHandler());
 		GameRegistry.addSmelting(bamboo, new ItemStack(bambooCoal), 0.075f);
+
+		NEI.hideItem(new ItemStack(bambooDoor));
 	}
 
 	public void addRecipe(List recipeList, ItemStack itemstack, Object... objArray)

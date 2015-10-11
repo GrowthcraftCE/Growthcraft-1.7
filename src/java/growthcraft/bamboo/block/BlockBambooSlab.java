@@ -59,7 +59,7 @@ public class BlockBambooSlab extends BlockSlab
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, int par2, int par3, int par4)
 	{
-		return isBlockSingleSlab(this) ? Item.getItemFromBlock(this) : (this == GrowthCraftBamboo.bambooDoubleSlab ? Item.getItemFromBlock(GrowthCraftBamboo.bambooSingleSlab) : Item.getItemFromBlock(GrowthCraftBamboo.bambooSingleSlab));
+		return Item.getItemFromBlock(GrowthCraftBamboo.bambooSingleSlab);
 	}
 
 	/************

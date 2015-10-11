@@ -12,6 +12,6 @@ public class Booze extends Fluid
 	@Override
 	public int getColor()
 	{
-		return CellarRegistry.instance().getBoozeColor(this);
+		return CellarRegistry.instance().booze().getBoozeColor(this);
 	}
 }

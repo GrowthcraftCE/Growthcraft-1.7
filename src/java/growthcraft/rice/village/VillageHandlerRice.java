@@ -32,7 +32,7 @@ public class VillageHandlerRice implements IVillageTradeHandler, IVillageCreatio
 	public PieceWeight getVillagePieceWeight(Random random, int i)
 	{
 		int num = MathHelper.getRandomIntegerInRange(random, 0 + i, 1 + i);
-		if (!GrowthCraftRice.config_genRiceField)
+		if (!GrowthCraftRice.getConfig().generateRiceFieldStructure)
 			num = 0;
 
 		return new PieceWeight(ComponentVillageRiceField.class, 21, num);

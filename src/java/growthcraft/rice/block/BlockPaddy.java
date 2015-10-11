@@ -28,8 +28,10 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BlockPaddy extends Block
+public class BlockPaddy extends Block implements IPaddy
 {
+	private final int paddyFieldMax = GrowthCraftRice.getConfig().paddyFieldMax;
+
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
@@ -43,6 +45,11 @@ public class BlockPaddy extends Block
 		this.setCreativeTab(null);
 	}
 
+	public boolean isFilledWithWater(IBlockAccess world, int x, int y, int z, int meta)
+	{
+		return meta >= paddyFieldMax;
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -51,7 +58,7 @@ public class BlockPaddy extends Block
 	{
 		if (isBelowWater(world, x, y, z) && world.canLightningStrikeAt(x, y + 1, z))
 		{
-			world.setBlockMetadataWithNotify(x, y, z, GrowthCraftRice.paddyFieldMax, 2);
+			world.setBlockMetadataWithNotify(x, y, z, paddyFieldMax, 2);
 		}
 		/*else if (!isBelowWater(world, x, y, z) && !world.canLightningStrikeAt(x, y + 1, z))
 		{
@@ -64,11 +71,7 @@ public class BlockPaddy extends Block
 
 	private boolean isBelowWater(World world, int x, int y, int z)
 	{
-		if (world.getBlock(x, y + 1, z).getMaterial() == Material.water)
-		{
-			return true;
-		}
-		return false;
+		return world.getBlock(x, y + 1, z).getMaterial() == Material.water;
 	}
 
 	/************
@@ -105,7 +108,7 @@ public class BlockPaddy extends Block
 								{
 									if (world.getBlock(lx, y, lz) == GrowthCraftRice.paddyField)
 									{
-										world.setBlockMetadataWithNotify(lx, y, lz, GrowthCraftRice.paddyFieldMax, 3);
+										world.setBlockMetadataWithNotify(lx, y, lz, paddyFieldMax, 3);
 									}
 								}
 							}
@@ -157,15 +160,15 @@ public class BlockPaddy extends Block
 
 		if (material == Material.water)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, GrowthCraftRice.paddyFieldMax, 3);
+			world.setBlockMetadataWithNotify(x, y, z, paddyFieldMax, 3);
 		}
 
-		/*	if (world.getBlockMetadata(x, y, z) == GrowthCraftCore.paddyFieldMax)
+		/*	if (world.getBlockMetadata(x, y, z) == paddyFieldMax)
 		{
-			boolean flag = world.getBlockId(x, y, z - 1) == this.blockID && world.getBlockMetadata(x, y,  z - 1) < GrowthCraftCore.paddyFieldMax;
-			boolean flag1 = world.getBlockId(x, y, z + 1) == this.blockID && world.getBlockMetadata(x, y,  z + 1) < GrowthCraftCore.paddyFieldMax;
-			boolean flag2 = world.getBlockId(x - 1, y, z) == this.blockID && world.getBlockMetadata(x - 1, y,  z) < GrowthCraftCore.paddyFieldMax;
-			boolean flag3 = world.getBlockId(x + 1, y, z) == this.blockID && world.getBlockMetadata(x + 1, y,  z) < GrowthCraftCore.paddyFieldMax;
+			boolean flag = world.getBlockId(x, y, z - 1) == this.blockID && world.getBlockMetadata(x, y,  z - 1) < paddyFieldMax;
+			boolean flag1 = world.getBlockId(x, y, z + 1) == this.blockID && world.getBlockMetadata(x, y,  z + 1) < paddyFieldMax;
+			boolean flag2 = world.getBlockId(x - 1, y, z) == this.blockID && world.getBlockMetadata(x - 1, y,  z) < paddyFieldMax;
+			boolean flag3 = world.getBlockId(x + 1, y, z) == this.blockID && world.getBlockMetadata(x + 1, y,  z) < paddyFieldMax;
 			int meta;
 
 			if (flag)

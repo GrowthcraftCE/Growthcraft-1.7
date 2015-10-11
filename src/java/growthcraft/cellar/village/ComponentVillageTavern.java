@@ -176,6 +176,6 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 	@Override
 	protected int getVillagerType(int par1)
 	{
-		return GrowthCraftCellar.villagerBrewer_id;
+		return GrowthCraftCellar.getConfig().villagerBrewerID;
 	}
 }

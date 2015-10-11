@@ -4,6 +4,8 @@ import growthcraft.core.block.BlockFenceRope;
 import growthcraft.core.block.BlockRope;
 import growthcraft.core.event.HarvestDropsEventCore;
 import growthcraft.core.event.TextureStitchEventCore;
+import growthcraft.core.handler.BucketHandler;
+import growthcraft.core.integration.NEI;
 import growthcraft.core.item.ItemRope;
 import growthcraft.core.network.CommonProxy;
 
@@ -49,24 +51,20 @@ public class GrowthCraftCore
 
 	public static AchievementPage chievPage;
 
+	private growthcraft.core.Config config;
+
+	public static growthcraft.core.Config getConfig()
+	{
+		return instance.config;
+	}
+
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
+		config = new growthcraft.core.Config();
+		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
+
 		tab =  new CreativeTabGrowthcraft("tabGrowthCraft");
-
-
-		//====================
-		// CONFIGURATION
-		//====================
-		/*Configuration config = new Configuration(new File(event.getModConfigurationDirectory(), "growthcraft/core.conf"));
-		try
-		{
-			config.load();
-		}
-		finally
-		{
-			if (config.hasChanged()) { config.save(); }
-		}*/
 
 		//====================
 		// INIT
@@ -94,7 +92,11 @@ public class GrowthCraftCore
 		//====================
 		GameRegistry.addRecipe(new ItemStack(rope, 8), new Object[] {"A", 'A', Items.lead});
 
+		NEI.hideItem(new ItemStack(fenceRope));
+		NEI.hideItem(new ItemStack(ropeBlock));
+
 		MinecraftForge.EVENT_BUS.register(new TextureStitchEventCore());
+		BucketHandler.init();
 	}
 
 	@EventHandler
@@ -102,6 +104,8 @@ public class GrowthCraftCore
 	{
 		proxy.initRenders();
 		AchievementPageGrowthcraft.init(chievPage);
+
+		new growthcraft.core.integration.Waila();
 	}
 
 	@EventHandler

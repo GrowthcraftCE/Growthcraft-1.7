@@ -24,16 +24,16 @@ import net.minecraft.world.World;
 public class ComponentVillageApiarist extends StructureVillagePieces.Village implements SchemaToVillage.IVillage
 {
 	// Design by Ar97x, modified by IceDragon (I made the tree levaves a 3x3x3 cube, makes it look neat)
-	static private final String apiaristSchema[][] = {
+	static private final String apiaristExteriorSchema[][] = {
 		{
-			"     88  ",
-			"cxccxppcc",
-			"xpppppppx",
+			"    486  ",
+			"xcccccccx",
 			"cpppppppc",
 			"cpppppppc",
-			"xpppppppx",
-			"ccccccccc",
-			"ddcdddd  ",
+			"cpppppppc",
+			"cpppppppc",
+			"xcccccccx",
+			"ddddddd  ",
 			"ddddddd  ",
 			"ddddddd  ",
 			"ddddddd  ",
@@ -43,115 +43,146 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		},
 		{
 			"         ",
-			"xxxxx  xx",
-			"x       x",
+			"xpppp ppx",
+			"p       p",
 			"B       B",
-			"Y   x-x Y",
-			"x   - - x",
-			"xx xxxxxx",
-			"f, ,,,f  ",
+			"B       B",
+			"p    8  p",
+			"xpp ppppx",
 			"f,,,,,f  ",
 			"f,,,,,f  ",
+			"f,+,+,f  ",
 			"f,,,,,f  ",
-			"ffffxff  ",
+			"ffff ff  ",
 			"         ",
 			"         "
 		},
 		{
 			"         ",
-			"cxggx  xc",
-			"x       x",
-			"g       g",
-			"g    +  g",
-			"x       x",
-			"cx pxggxc",
-			"   +     ",
+			"xpggp ppx",
+			"p       p",
+			"Y       Y",
+			"Y       Y",
+			"p       p",
+			"xpp pgppx",
+			"         ",
 			"         ",
 			"t     t  ",
 			"    H    ",
-			"    x    ",
+			"   t     ",
 			"         ",
 			"         "
 		},
 		{ // the torches for this level are placed manually
 			"888888888",
-			"cxppxppxc",
-			"x       x",
+			"xpppppppx",
+			"p       p",
 			"B       B",
-			"Y   ___ Y",
-			"x   ___ x",
-			"cxppxppxc",
+			"B       B",
+			"p       p",
+			"xpppppppx",
 			"222222222",
 			"         ",
-			"  lllll  ",
-			"  lllll  ",
-			"  llxll  ",
-			"  lllll  ",
-			"  lllll  "
+			"         ",
+			"         ",
+			"         ",
+			"         ",
+			"         "
 		},
 		{
 			"         ",
 			"888888888",
-			"xpppppppx",
+			"ppppppppp",
 			"Yp     pY",
-			"Bp     pB",
-			"xpppppppx",
+			"Yp     pY",
+			"ppppppppp",
 			"222222222",
 			"         ",
 			"         ",
-			"   lll   ",
-			"  lllll  ",
-			"  llxll  ",
-			"  lllll  ",
-			"   lll   "
+			"         ",
+			"         ",
+			"         ",
+			"         ",
+			"         "
 		},
 		{
 			"         ",
 			"         ",
 			"788888889",
-			"4YBYBYBY6",
+			"4BYBYBYB6",
 			"4BYBYBYB6",
 			"122222223",
 			"         ",
 			"         ",
 			"         ",
 			"         ",
-			"    l    ",
-			"   lxl   ",
-			"    l    ",
+			"         ",
+			"         ",
+			"         ",
 			"         "
+		}
+	};
+
+	static private final String apiaristInteriorSchema[][] = {
+		{
+			" 6    4",
+			" 6    K",
+			" 6    K",
+			"p6    4"
 		},
 		{
-			"         ",
-			"         ",
-			"		  ",
-			"		  ",
-			"		  ",
-			"		  ",
-			"         ",
-			"         ",
-			"         ",
-			"         ",
-			"    l    ",
-			"   lxl   ",
-			"    l    ",
-			"         "
+			"      l",
+			"      K",
+			"      K",
+			"      l"
 		},
 		{
-			"         ",
-			"         ",
-			"		  ",
-			"		  ",
-			"		  ",
-			"		  ",
-			"         ",
-			"         ",
-			"         ",
-			"         ",
-			"         ",
-			"    l    ",
-			"         ",
-			"         "
+			" 8    l",
+			" _    K",
+			" _    K",
+			" 2    l"
+		},
+		{
+			"       ",
+			" 2   4 ",
+			" 8   4 ",
+			"       "
+		}
+	};
+
+	// That tree that appears behind the apiary, its a birch tree
+	// Since `x` is already used for Oak in the original schema, I've extracted
+	// here.
+	static private final String apiaristBackyardTreeSchema[][] = {
+		{
+			"   ",
+			" x ",
+			"   ",
+		},
+		{ // bee hive appears on this level
+			"   ",
+			" x ",
+			"   ",
+		},
+		{
+			"lll",
+			"lxl",
+			"lll",
+		},
+		{
+			"lll",
+			"lxl",
+			"lll",
+		},
+		{
+			" l ",
+			"lxl",
+			" l ",
+		},
+		{
+			"   ",
+			" l ",
+			"   ",
 		}
 	};
 
@@ -162,6 +193,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		new WeightedRandomChestContent(Item.getItemFromBlock(GrowthCraftBees.beeBox), 0, 1, 2, 5)
 	};
 
+	public ComponentVillageApiarist() {} // DO NOT REMOVE
 	public ComponentVillageApiarist(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
 	{
 		super(startPiece, par2);
@@ -171,7 +203,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 
 	public static ComponentVillageApiarist buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 12, 10, 15, coordBaseMode);
+		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 9, 8, 14, coordBaseMode);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
 				return new ComponentVillageApiarist(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -196,18 +228,28 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 				return true;
 			}
 
-			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 10 - 1, 0);
+			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 7, 0);
 		}
 
+		// clear entire bounding box
+		this.fillWithBlocks(world, box, 0, 0, 0, 9, 8, 14, Blocks.air, Blocks.air, false);
+
 		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
-		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 0);
+
+		// Plop down the tree first
+		map.put('x', new BlockEntry(Blocks.log, 2));
+		map.put('l', new BlockEntry(Blocks.leaves, 2));
+
+		SchemaToVillage.drawSchema(this, world, random, box, apiaristBackyardTreeSchema, map, 3, 1, 10);
+
+		map.clear();
 
 		map.put('c', new BlockEntry(Blocks.cobblestone));
-		map.put('d', new BlockEntry(Blocks.grass, 0));
+		map.put('d', new BlockEntry(Blocks.grass));
 		map.put('p', new BlockEntry(Blocks.planks));
 		map.put('x', new BlockEntry(Blocks.log));
 		map.put('l', new BlockEntry(Blocks.leaves));
-		map.put('g', new BlockEntry(Blocks.stained_glass, 15));
+		map.put('g', new BlockEntry(Blocks.glass_pane));
 
 		map.put('f', new BlockEntry(Blocks.fence));
 		map.put('-', new BlockEntry(Blocks.wooden_slab, 8)); // high slab
@@ -232,32 +274,83 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 
 		map.put('t', new BlockEntry(Blocks.torch));
 
-		map.put('Y', new BlockEntry(Blocks.wool, 4));
-		map.put('B', new BlockEntry(Blocks.wool, 15));
+		map.put('Y', new BlockEntry(Blocks.planks, 2));
+		map.put('B', new BlockEntry(Blocks.planks, 1));
 
-		map.put('H', new BlockEntry(GrowthCraftBees.beeHive, 0));
+		map.put('H', new BlockEntry(GrowthCraftBees.beeHive, this.getMetadataWithOffset(GrowthCraftBees.beeHive, 3)));
 		map.put('+', new BlockEntry(GrowthCraftBees.beeBox, this.getMetadataWithOffset(GrowthCraftBees.beeBox, 2)));
 
-		SchemaToVillage.drawSchema(this, world, random, box, apiaristSchema, map);
+		SchemaToVillage.drawSchema(this, world, random, box, apiaristExteriorSchema, map, 0, 0, 0);
 
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, 2, box);
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 3, 2, box);
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 1, 3, 5, box);
-		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 7, 3, 5, box);
+		// Get ready to recycle for interior design
+		map.clear();
 
-		this.placeDoorAtCurrentPosition(world, box, random, 2, 1, 6, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		map.put('p', new BlockEntry(Blocks.planks));
+
+		// inverted stairs for decorating interior
+		map.put('1', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2) | 4));
+		map.put('2', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2) | 4));
+		map.put('3', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2) | 4));
+
+		map.put('4', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 0) | 4));
+		map.put('6', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 1) | 4));
+
+		map.put('7', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3) | 4));
+		map.put('8', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3) | 4));
+		map.put('9', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3) | 4));
+
+		map.put('_', new BlockEntry(Blocks.wooden_slab, 0));
+
+		map.put('K', new BlockEntry(Blocks.bookshelf, 0));
+
+		// metadata here is (1(spruce leaves) | 4(no decay))
+		map.put('l', new BlockEntry(Blocks.leaves, 1 | 4));
+
+		SchemaToVillage.drawSchema(this, world, random, box, apiaristInteriorSchema, map, 1, 1, 2);
+
+		// Place torches
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 5, 3, 2, box);
+		this.placeBlockAtCurrentPosition(world, Blocks.torch, 0, 4, 3, 5, box);
+
+		/*
+			TODO:
+				place signs beside stairs to form a chair -
+				If you happen to be a sign rotation expert, PLEASE DO FIX THIS.
+		 */
+		//this.placeBlockAtCurrentPosition(world, Blocks.wall_sign, 2, 4, 1, 5, box);
+		//this.placeBlockAtCurrentPosition(world, Blocks.wall_sign, 2, 6, 1, 5, box);
+
+		// Drop in the front door
 		this.placeDoorAtCurrentPosition(world, box, random, 5, 1, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
-		this.placeDoorAtCurrentPosition(world, box, random, 6, 1, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		// Drop in the back door
+		this.placeDoorAtCurrentPosition(world, box, random, 3, 1, 6, this.getMetadataWithOffset(Blocks.wooden_door, 1));
 
-		this.generateStructureChestContents(world, box, random, 1, 1, 2, apiaristChestContents, 3 + random.nextInt(6));
+		// Slap that nicely placed flower pot on the counter
+		this.placeBlockAtCurrentPosition(world, Blocks.flower_pot, 3, 2, 2, 2, box);
 
-		this.spawnVillagers(world, box, 3, 1, 3, 1);
+		// Shove a chest behind the counter, filled with goodies
+		this.generateStructureChestContents(world, box, random, 1, 2, 5, apiaristChestContents, 3 + random.nextInt(6));
+
+		// Fix some structural madness, like buildings spawning in the air and
+		// floating on a thin layer of dirt/cobblestone
+		for (int row = 0; row < 14; ++row)
+		{
+			for (int col = 0; col < 9; ++col)
+			{
+				this.clearCurrentPositionBlocksUpwards(world, col, 8, row, box);
+				this.func_151554_b(world, Blocks.cobblestone, 0, col, -1, row, box);
+			}
+		}
+
+		// Trap the villager behind the counter, so he shall forever sells us
+		// apiary items... Poor guy.
+		this.spawnVillagers(world, box, 1, 2, 3, 1);
 		return true;
 	}
 
 	@Override
 	protected int getVillagerType(int par1)
 	{
-		return GrowthCraftBees.villagerApiarist_id;
+		return GrowthCraftBees.getConfig().villagerApiaristID;
 	}
 }

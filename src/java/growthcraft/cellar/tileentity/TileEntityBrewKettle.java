@@ -1,6 +1,7 @@
 package growthcraft.cellar.tileentity;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.BrewRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.container.ContainerBrewKettle;
 
@@ -26,9 +27,10 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class TileEntityBrewKettle extends TileEntity implements ISidedInventory, IFluidHandler
 {
 	// Constants
-	private ItemStack[] invSlots   = new ItemStack[2];
-	private int[]       maxCap     = new int[] {1000, 1000};
-	private CellarTank[]   tank    = new CellarTank[] {new CellarTank(this.maxCap[0], this), new CellarTank(this.maxCap[1], this)};
+	private ItemStack[] invSlots = new ItemStack[2];
+	private int maxCap = GrowthCraftCellar.getConfig().brewKettleMaxCap;
+	private int[] maxCaps = new int[] {maxCap, maxCap};
+	private CellarTank[] tank = new CellarTank[] {new CellarTank(this.maxCaps[0], this), new CellarTank(this.maxCaps[1], this)};
 
 	// Other Vars.
 	private String  name;
@@ -54,7 +56,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 			{
 				++this.time;
 
-				if (this.time == CellarRegistry.instance().getBrewingTime(getFluidStack(0), this.invSlots[0]))
+				if (this.time == CellarRegistry.instance().brew().getBrewingTime(getFluidStack(0), this.invSlots[0]))
 				{
 					this.time = 0;
 					this.brewItem();
@@ -90,16 +92,16 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 		}
 	}
 
-	private boolean canBrew()
+	public boolean canBrew()
 	{
 		if (!hasFire()) return false;
 		if (this.invSlots[0] == null) return false;
 		if (this.isFluidTankFull(1)) return false;
-		if (!CellarRegistry.instance().isBrewingRecipe(getFluidStack(0), this.invSlots[0])) return false;
+		if (!CellarRegistry.instance().brew().isBrewingRecipe(getFluidStack(0), this.invSlots[0])) return false;
 
 		if (this.isFluidTankEmpty(1)) return true;
 
-		FluidStack stack = CellarRegistry.instance().getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
+		FluidStack stack = CellarRegistry.instance().brew().getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
 		return stack.isFluidEqual(getFluidStack(1));
 	}
 
@@ -110,8 +112,9 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	public void brewItem()
 	{
+		final BrewRegistry brew = CellarRegistry.instance().brew();
 		// set spent grain
-		float f = CellarRegistry.instance().getBrewingResidue(getFluidStack(0), this.invSlots[0]);
+		float f = brew.getBrewingResidue(getFluidStack(0), this.invSlots[0]);
 		this.residue = this.residue + f;
 		if (this.residue >= 1.0F)
 		{
@@ -130,8 +133,8 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 			}
 		}
 
-		FluidStack fluidstack = CellarRegistry.instance().getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
-		int amount  = CellarRegistry.instance().getBrewingAmount(getFluidStack(0), this.invSlots[0]);
+		FluidStack fluidstack = brew.getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
+		int amount  = brew.getBrewingAmount(getFluidStack(0), this.invSlots[0]);
 		fluidstack.amount = amount;
 		this.tank[1].fill(fluidstack, true);
 		this.tank[0].drain(amount, true);
@@ -160,7 +163,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	{
 		if (this.canBrew())
 		{
-			return this.time * par1 / CellarRegistry.instance().getBrewingTime(getFluidStack(0), this.invSlots[0]);
+			return this.time * par1 / CellarRegistry.instance().brew().getBrewingTime(getFluidStack(0), this.invSlots[0]);
 		}
 
 		return 0;
@@ -320,7 +323,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	{
 		for (int i = 0; i < this.tank.length; i++)
 		{
-			this.tank[i] = new CellarTank(this.maxCap[i], this);
+			this.tank[i] = new CellarTank(this.maxCaps[i], this);
 			if (nbt.hasKey("Tank" + i))
 			{
 				this.tank[i].readFromNBT(nbt.getCompoundTag("Tank" + i));
@@ -393,6 +396,11 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	/************
 	 * PACKETS
 	 ************/
+
+	/**
+	 * @param id - data id
+	 * @param v - value
+	 */
 	public void getGUINetworkData(int id, int v)
 	{
 		switch (id)
@@ -529,7 +537,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	public int getFluidAmountScaled(int par1, int slot)
 	{
-		return this.getFluidAmount(slot) * par1 / this.maxCap[slot];
+		return this.getFluidAmount(slot) * par1 / this.maxCaps[slot];
 	}
 
 	public boolean isFluidTankFilled(int slot)

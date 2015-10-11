@@ -69,33 +69,45 @@ public class SchemaToVillage
 		}
 	}
 
-	public static void drawSchema(IVillage village, World world, Random random, StructureBoundingBox box, String schema[][], Map<Character, IBlockEntries> map)
+	public static void drawSchema(IVillage village, World world, Random random, StructureBoundingBox box, String schema[][], Map<Character, IBlockEntries> map, int offx, int offy, int offz)
 	{
-		for (int z = 0; z < schema.length; ++z)
+		// loop by schema layer
+		for (int y = 0; y < schema.length; ++y)
 		{
-			String layer[] = schema[z];
-			for (int y = 0; y < layer.length; ++y)
+			String layer[] = schema[y];
+			// then loop by schema layer-row
+			for (int z = 0; z < layer.length; ++z)
 			{
-				String row = layer[y];
+				String row = layer[z];
+				// finally loop by schema layer-row-cell
 				for (int x = 0; x < row.length(); ++x)
 				{
 					int meta = 0;
 					Block block = null;
 					IBlockEntries entries = map.get(row.charAt(x));
+					// look out for null entries, though by right we should
+					// warn about these.
 					if (entries != null)
 					{
 						BlockEntry entry = entries.getBlockEntry(random);
+						// a null entry is possible, for "Ignore the this block"
 						if (entry != null)
 						{
 							block = entry.getBlock();
 							meta = entry.getMetadata();
 						}
 					}
+					// null blocks are not placed
 					if (block != null) {
-						village.placeBlockAtCurrentPositionPub(world, block, meta, x, z, y, box);
+						village.placeBlockAtCurrentPositionPub(world, block, meta, offx + x, offy + y, offz + z, box);
 					}
 				}
 			}
 		}
+	}
+
+	public static void drawSchema(IVillage village, World world, Random random, StructureBoundingBox box, String schema[][], Map<Character, IBlockEntries> map)
+	{
+		drawSchema(village, world, random, box, schema, map, 0, 0, 0);
 	}
 }

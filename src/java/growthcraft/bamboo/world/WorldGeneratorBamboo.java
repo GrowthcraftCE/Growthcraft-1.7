@@ -14,8 +14,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class WorldGeneratorBamboo implements IWorldGenerator
 {
-	//constants
-	private final int rarity = GrowthCraftBamboo.bambooWorldGen_rarity;
+	private final int rarity = GrowthCraftBamboo.getConfig().bambooWorldGenRarity;
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
@@ -35,7 +34,7 @@ public class WorldGeneratorBamboo implements IWorldGenerator
 			int k = chunkZ * 16 + random.nextInt(16) + 8;
 
 			boolean flag = true;
-			if (GrowthCraftBamboo.instance.bambooUseBiomeDict)
+			if (GrowthCraftBamboo.getConfig().useBiomeDict)
 			{
 				BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
 				flag = (BiomeDictionary.isBiomeOfType(biome, Type.FOREST) ||
@@ -46,7 +45,7 @@ public class WorldGeneratorBamboo implements IWorldGenerator
 			}
 			else
 			{
-				flag = Utils.isIDInList(world.getBiomeGenForCoords(i, k).biomeID, GrowthCraftBamboo.instance.bambooBiomesList);
+				flag = Utils.isIDInList(world.getBiomeGenForCoords(i, k).biomeID, GrowthCraftBamboo.getConfig().bambooBiomesList);
 			}
 			/*int i = chunkX * 16 + random.nextInt(16);
 			int k = chunkZ * 16 + random.nextInt(16);

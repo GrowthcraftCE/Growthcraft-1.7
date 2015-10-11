@@ -32,7 +32,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class BlockFermentBarrel extends BlockContainer
+public class BlockFermentBarrel extends BlockContainer implements ICellarFluidHandler
 {
 	private final Random rand = new Random();
 	@SideOnly(Side.CLIENT)
@@ -45,6 +45,7 @@ public class BlockFermentBarrel extends BlockContainer
 		this.setHardness(2.5F);
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("grc.fermentBarrel");
+		this.setCreativeTab(GrowthCraftCellar.tab);
 	}
 
 	/************
@@ -123,9 +124,9 @@ public class BlockFermentBarrel extends BlockContainer
 	{
 		if (fluid != null)
 		{
-			if (CellarRegistry.instance().isFluidBooze(fluid))
+			if (CellarRegistry.instance().booze().isFluidBooze(fluid))
 			{
-				int meta = CellarRegistry.instance().getBoozeIndex(fluid);
+				int meta = CellarRegistry.instance().booze().getBoozeIndex(fluid);
 				if (meta > 0 && meta < 4)
 				{
 					player.triggerAchievement(GrowthCraftCellar.fermentBooze);

@@ -1,6 +1,7 @@
 package growthcraft.grapes.item;
 
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.utils.BlockCheck;
 import growthcraft.grapes.GrowthCraftGrapes;
 
 import cpw.mods.fml.relauncher.Side;
@@ -11,9 +12,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class ItemGrapeSeeds extends Item
+public class ItemGrapeSeeds extends Item implements IPlantable
 {
 	public ItemGrapeSeeds()
 	{
@@ -34,9 +39,7 @@ public class ItemGrapeSeeds extends Item
 		}
 		else if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack))
 		{
-			Block soil = world.getBlock(x, y, z);
-
-			if (soil != null && soil == Blocks.farmland && world.isAirBlock(x, y + 1, z))
+			if (BlockCheck.canSustainPlant(world, x, y, z, ForgeDirection.UP, GrowthCraftGrapes.grapeVine0) && world.isAirBlock(x, y + 1, z))
 			{
 				world.setBlock(x, y + 1, z, GrowthCraftGrapes.grapeVine0);
 				--stack.stackSize;
@@ -61,5 +64,23 @@ public class ItemGrapeSeeds extends Item
 	public void registerIcons(IIconRegister reg)
 	{
 		this.itemIcon = reg.registerIcon("grcgrapes:grape_seeds");
+	}
+
+	@Override
+	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
+	{
+		return EnumPlantType.Crop;
+	}
+
+	@Override
+	public Block getPlant(IBlockAccess world, int x, int y, int z)
+	{
+		return GrowthCraftGrapes.grapeVine0;
+	}
+
+	@Override
+	public int getPlantMetadata(IBlockAccess world, int x, int y, int z)
+	{
+		return 0;
 	}
 }
