@@ -2,6 +2,7 @@ package growthcraft.rice.item;
 
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.rice.GrowthCraftRice;
+import growthcraft.rice.utils.RiceBlockCheck;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -35,7 +36,7 @@ public class ItemRice extends Item
 		{
 			final Block soil = world.getBlock(x, y, z);
 
-			if (soil != null && soil == GrowthCraftRice.paddyField.getBlock() && world.isAirBlock(x, y + 1, z) && world.getBlockMetadata(x, y, z) > 0)
+			if (soil != null && RiceBlockCheck.isPaddy(soil) && world.isAirBlock(x, y + 1, z) && world.getBlockMetadata(x, y, z) > 0)
 			{
 				world.setBlock(x, y + 1, z, GrowthCraftRice.riceBlock.getBlock());
 				--stack.stackSize;

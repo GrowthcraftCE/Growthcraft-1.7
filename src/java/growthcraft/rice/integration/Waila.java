@@ -4,7 +4,6 @@ import growthcraft.core.integration.WailaIntegrationBase;
 import growthcraft.rice.block.IPaddy;
 import growthcraft.rice.integration.waila.PaddyDataProvider;
 
-import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.Optional;
 
 import mcp.mobius.waila.api.IWailaDataProvider;

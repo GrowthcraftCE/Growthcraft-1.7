@@ -20,7 +20,7 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 public class ComponentVillageRiceField extends StructureVillagePieces.Village implements SchemaToVillage.IVillage
 {
 	// Design by Ar97x, with some minor modifications by IceDragon (very minor)
-	protected static final String riceFieldSchema[][] = {
+	protected static final String[][] riceFieldSchema = {
 		{
 			"    sss    ",
 			"x   x|x   x",
@@ -79,7 +79,9 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		}
 	};
 
-	public ComponentVillageRiceField() {} // DO NOT REMOVE
+	// DO NOT REMOVE
+	public ComponentVillageRiceField() {}
+
 	public ComponentVillageRiceField(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
 	{
 		super(startPiece, par2);
@@ -89,7 +91,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 
 	public static ComponentVillageRiceField buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 4, 12, coordBaseMode);
+		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 4, 12, coordBaseMode);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
 				return new ComponentVillageRiceField(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -120,8 +122,8 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		// clear entire bounding box
 		this.fillWithBlocks(world, box, 0, 0, 0, 11, 4, 12, Blocks.air, Blocks.air, false);
 
-		boolean vert = (this.coordBaseMode == 2 || this.coordBaseMode == 3);
-		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
+		final boolean vert = this.coordBaseMode == 2 || this.coordBaseMode == 3;
+		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 
 		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));
 		map.put('f', new BlockEntry(Blocks.fence));

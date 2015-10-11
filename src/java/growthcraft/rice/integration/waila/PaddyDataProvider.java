@@ -2,8 +2,6 @@ package growthcraft.rice.integration.waila;
 
 import java.util.List;
 
-import growthcraft.core.utils.TagFormatterFluidHandler;
-import growthcraft.core.utils.ConstID;
 import growthcraft.rice.block.IPaddy;
 
 import cpw.mods.fml.common.Optional;
@@ -16,15 +14,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 
 public class PaddyDataProvider implements IWailaDataProvider
 {

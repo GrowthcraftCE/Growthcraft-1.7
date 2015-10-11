@@ -18,8 +18,8 @@ public class PlayerInteractEventRice
 	{
 		if (event.action == event.action.RIGHT_CLICK_BLOCK)
 		{
-			EntityPlayer player = event.entityPlayer;
-			ItemStack itemstack = player.getCurrentEquippedItem();
+			final EntityPlayer player = event.entityPlayer;
+			final ItemStack itemstack = player.getCurrentEquippedItem();
 			if (itemstack != null && itemstack.getItem() instanceof ItemSpade)
 			{
 				final World world = player.worldObj;

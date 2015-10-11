@@ -146,7 +146,7 @@ public class GrowthCraftRice
 	{
 		proxy.initRenders();
 
-		VillageHandlerRice handler = new VillageHandlerRice();
+		final VillageHandlerRice handler = new VillageHandlerRice();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 
@@ -170,7 +170,6 @@ public class GrowthCraftRice
 	public void postload(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventRice());
-		//MinecraftForge.EVENT_BUS.register(new UseHoeEventCore());
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventRice());
 
 		/*String modid;
