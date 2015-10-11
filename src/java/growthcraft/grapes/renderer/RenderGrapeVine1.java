@@ -21,17 +21,16 @@ public class RenderGrapeVine1 implements ISimpleBlockRenderingHandler
 	{
 		if (modelID == id)
 		{
-			Tessellator tes = Tessellator.instance;
-			double d = 0.0625D;
+			final Tessellator tes = Tessellator.instance;
+			final double d = 0.0625D;
 			renderer.setRenderBounds(6*d, 0.0D, 6*d, 10*d, 0.75D, 10*d);
 			RenderUtils.drawInventoryBlock_icon(block, renderer, BlockGrapeVine1.tex[0], tes);
 			if (renderer.useInventoryTint)
 			{
-				int color = ColorizerFoliage.getFoliageColorBasic();
-
-				float f1 = (float)(color >> 16 & 255) / 255.0F;
-				float f2 = (float)(color >> 8 & 255) / 255.0F;
-				float f3 = (float)(color & 255) / 255.0F;
+				final int color = ColorizerFoliage.getFoliageColorBasic();
+				final float f1 = (float)(color >> 16 & 255) / 255.0F;
+				final float f2 = (float)(color >> 8 & 255) / 255.0F;
+				final float f3 = (float)(color & 255) / 255.0F;
 				GL11.glColor4f(f1, f2, f3, 1.0F);
 			}
 			renderer.setRenderBounds(4*d, 0.5D, 4*d, 12*d, 1.0D, 12*d);
@@ -45,8 +44,8 @@ public class RenderGrapeVine1 implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			int meta = world.getBlockMetadata(x, y, z);
-			double d = 0.0625D;
+			final int meta = world.getBlockMetadata(x, y, z);
+			final double d = 0.0625D;
 
 			//render trunk
 			if (meta == 0)
@@ -62,7 +61,6 @@ public class RenderGrapeVine1 implements ISimpleBlockRenderingHandler
 			//render leaves
 			if (meta == 0)
 			{
-				int color;
 				int r = 0;
 				int g = 0;
 				int b = 0;
@@ -71,17 +69,17 @@ public class RenderGrapeVine1 implements ISimpleBlockRenderingHandler
 				{
 					for (int i2 = -1; i2 <= 1; ++i2)
 					{
-						int j2 = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
+						final int j2 = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
 						r += (j2 & 16711680) >> 16;
-					g += (j2 & 65280) >> 8;
-					b += j2 & 255;
+						g += (j2 & 65280) >> 8;
+						b += j2 & 255;
 					}
 				}
 
-				color = (r / 9 & 255) << 16 | (g / 9 & 255) << 8 | b / 9 & 255;
-				float red = (float)(color >> 16 & 255) / 255.0F;
-				float gre = (float)(color >> 8 & 255) / 255.0F;
-				float blu = (float)(color & 255) / 255.0F;
+				final int color = (r / 9 & 255) << 16 | (g / 9 & 255) << 8 | b / 9 & 255;
+				final float red = (float)(color >> 16 & 255) / 255.0F;
+				final float gre = (float)(color >> 8 & 255) / 255.0F;
+				final float blu = (float)(color & 255) / 255.0F;
 
 				renderer.setOverrideBlockTexture(((BlockGrapeVine1)block).getLeafTexture());
 				renderer.setRenderBounds(4*d, 0.5D, 4*d, 12*d, 1.0D, 12*d);
@@ -93,7 +91,10 @@ public class RenderGrapeVine1 implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelID) { return true; }
+	public boolean shouldRender3DInInventory(int modelID)
+	{
+		return true;
+	}
 
 	@Override
 	public int getRenderId()

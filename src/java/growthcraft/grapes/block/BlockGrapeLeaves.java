@@ -23,12 +23,11 @@ import net.minecraft.world.World;
 
 public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 {
-	private final int grapeLeavesGrowthRate = GrowthCraftGrapes.getConfig().grapeLeavesGrowthRate;
-	private final int grapeSpawnRate = GrowthCraftGrapes.getConfig().grapeSpawnRate;
-
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
-	//public static Boolean graphicFlag;
+
+	private final int grapeLeavesGrowthRate = GrowthCraftGrapes.getConfig().grapeLeavesGrowthRate;
+	private final int grapeSpawnRate = GrowthCraftGrapes.getConfig().grapeSpawnRate;
 
 	public BlockGrapeLeaves()
 	{
@@ -59,10 +58,10 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	private void grow(World world, int x, int y, int z, Random random)
 	{
-		boolean flag = !checkValidity(world, x, y, z - 1);
-		boolean flag1 = !checkValidity(world, x, y, z + 1);
-		boolean flag2 = !checkValidity(world, x - 1, y, z);
-		boolean flag3 = !checkValidity(world, x + 1, y, z);
+		final boolean flag = !checkValidity(world, x, y, z - 1);
+		final boolean flag1 = !checkValidity(world, x, y, z + 1);
+		final boolean flag2 = !checkValidity(world, x - 1, y, z);
+		final boolean flag3 = !checkValidity(world, x + 1, y, z);
 
 		if (flag1 && flag2 && flag3 && flag)
 		{
@@ -77,9 +76,9 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 		}
 		else
 		{
-			if ((world.rand.nextInt(this.grapeLeavesGrowthRate) == 0))
+			if (world.rand.nextInt(this.grapeLeavesGrowthRate) == 0)
 			{
-				int r = random.nextInt(4);
+				final int r = random.nextInt(4);
 
 				if (r == 0 && checkValidity(world, x, y, z - 1))
 				{
@@ -112,10 +111,10 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	{
 		if (BlockCheck.isRope(world.getBlock(x, y, z)))
 		{
-			boolean flag = world.getBlock(x + 1, y, z) == this;
-			boolean flag1 = world.getBlock(x - 1, y, z) == this;
-			boolean flag2 = world.getBlock(x, y, z + 1) == this;
-			boolean flag3 = world.getBlock(x, y, z - 1) == this;
+			final boolean flag = world.getBlock(x + 1, y, z) == this;
+			final boolean flag1 = world.getBlock(x - 1, y, z) == this;
+			final boolean flag2 = world.getBlock(x, y, z + 1) == this;
+			final boolean flag3 = world.getBlock(x, y, z - 1) == this;
 
 			if (!flag && !flag1 && !flag2 && !flag3) return false;
 
@@ -134,7 +133,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	private boolean isTrunk(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftGrapes.grapeVine1.getBlock();
+		return GrowthCraftGrapes.grapeVine1.getBlock() == world.getBlock(x, y, z);
 	}
 
 	@Override
@@ -143,9 +142,9 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	{
 		if (world.canLightningStrikeAt(x, y + 1, z) && !World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && random.nextInt(15) == 1)
 		{
-			double d0 = (double)((float)x + random.nextFloat());
-			double d1 = (double)y - 0.05D;
-			double d2 = (double)((float)z + random.nextFloat());
+			final double d0 = (double)((float)x + random.nextFloat());
+			final double d1 = (double)y - 0.05D;
+			final double d2 = (double)((float)z + random.nextFloat());
 			world.spawnParticle("dripWater", d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
@@ -252,7 +251,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	private boolean isSupportedByTrunk(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y - 1, z) == GrowthCraftGrapes.grapeVine1.getBlock();
+		return GrowthCraftGrapes.grapeVine1.getBlock() == world.getBlock(x, y - 1, z);
 	}
 
 	/************
@@ -286,11 +285,6 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 		}
 		return false;
 	}
-
-	/*public boolean canConnectVineTo(World world, int x, int y, int z)
-	{
-		return world.getBlockId(x, y, z) == this.blockID;
-	}*/
 
 	/************
 	 * DROPS
@@ -326,8 +320,6 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		//this.graphicFlag = ((BlockLeaves)Block.blocksList[Block.leaves.blockID]).graphicsLevel;
-		//return this.graphicFlag ? this.tex[0] : this.tex[1];
 		return this.tex[this.isOpaqueCube() ? 1 : 0];
 	}
 
@@ -343,8 +335,6 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@Override
 	public boolean isOpaqueCube()
 	{
-		//this.graphicFlag = ((BlockLeaves)Block.blocksList[Block.leaves.blockID]).graphicsLevel;
-		//return !this.graphicFlag;
 		return Blocks.leaves.isOpaqueCube();
 	}
 
@@ -358,9 +348,6 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
-		//int id = world.getBlockId(x, y, z);
-		//this.graphicFlag = ((BlockLeaves)Block.blocksList[Block.leaves.blockID]).graphicsLevel;
-		//return !this.graphicFlag && id == this.blockID ? false : super.shouldSideBeRendered(world, x, y, z, side);
 		return true;
 	}
 
@@ -371,8 +358,8 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
 	{
-		double d0 = 0.5D;
-		double d1 = 1.0D;
+		final double d0 = 0.5D;
+		final double d1 = 1.0D;
 		return ColorizerFoliage.getFoliageColor(d0, d1);
 	}
 
@@ -387,7 +374,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
 
 		int r = 0;
 		int g = 0;
@@ -397,10 +384,10 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 		{
 			for (int i2 = -1; i2 <= 1; ++i2)
 			{
-				int j2 = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
+				final int j2 = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
 				r += (j2 & 16711680) >> 16;
-			g += (j2 & 65280) >> 8;
-			b += j2 & 255;
+				g += (j2 & 65280) >> 8;
+				b += j2 & 255;
 			}
 		}
 

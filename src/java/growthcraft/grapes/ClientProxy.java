@@ -1,6 +1,5 @@
 package growthcraft.grapes;
 
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.grapes.renderer.RenderGrape;
 import growthcraft.grapes.renderer.RenderGrapeLeaves;
 import growthcraft.grapes.renderer.RenderGrapeVine1;

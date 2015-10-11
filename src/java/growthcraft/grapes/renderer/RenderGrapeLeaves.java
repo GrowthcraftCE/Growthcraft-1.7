@@ -16,21 +16,20 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		if (modelID == id)
 		{
-			Tessellator tes = Tessellator.instance;
+			final Tessellator tes = Tessellator.instance;
 			if (renderer.useInventoryTint)
 			{
-				int color = block.getRenderColor(0);
-
-				float f1 = (float)(color >> 16 & 255) / 255.0F;
-				float f2 = (float)(color >> 8 & 255) / 255.0F;
-				float f3 = (float)(color & 255) / 255.0F;
+				final int color = block.getRenderColor(0);
+				final float f1 = (float)(color >> 16 & 255) / 255.0F;
+				final float f2 = (float)(color >> 8 & 255) / 255.0F;
+				final float f3 = (float)(color & 255) / 255.0F;
 				GL11.glColor4f(f1, f2, f3, 1.0F);
 			}
 			RenderUtils.drawInventoryBlock_icon(block, renderer, ((BlockGrapeLeaves)block).getIcon(0, 0), tes);
@@ -42,9 +41,18 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			boolean graphicFlag = !((BlockLeaves)Blocks.leaves).isOpaqueCube();
+			final boolean graphicFlag = !((BlockLeaves)Blocks.leaves).isOpaqueCube();
 			renderer.renderStandardBlock(block, x, y, z);
-			double d = 0.0625D;
+			final double d = 0.0625D;
+
+			final Tessellator tessellator = Tessellator.instance;
+			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
+			final int color = ((BlockGrapeLeaves)block).colorMultiplier(world, x, y, z);
+			final float r = (float)(color >> 16 & 255) / 255.0F;
+			final float g = (float)(color >> 8 & 255) / 255.0F;
+			final float b = (float)(color & 255) / 255.0F;
+			tessellator.setColorOpaque_F(r * 1.0F, g * 1.0F, b * 1.0F);
+			IIcon icon = BlockGrapeLeaves.tex[3];
 
 			double minX;
 			double maxX;
@@ -57,15 +65,6 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 			double maxU;
 			double minV;
 			double maxV;
-
-			Tessellator tessellator = Tessellator.instance;
-			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
-			int color = ((BlockGrapeLeaves)block).colorMultiplier(world, x, y, z);
-			float r = (float)(color >> 16 & 255) / 255.0F;
-			float g = (float)(color >> 8 & 255) / 255.0F;
-			float b = (float)(color & 255) / 255.0F;
-			tessellator.setColorOpaque_F(r * 1.0F, g * 1.0F, b * 1.0F);
-			IIcon icon = BlockGrapeLeaves.tex[3];
 
 			minU = (double)icon.getMinU();
 			minV = (double)icon.getMinV();
@@ -122,24 +121,24 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 				tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 				icon = BlockGrapeLeaves.tex[2];
 
-				boolean flag = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x, y, z - 1);
-				boolean flag1 = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x, y, z + 1);
-				boolean flag2 = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x - 1, y, z);
-				boolean flag3 = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x + 1, y, z);
-				boolean flag4 = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x, y - 1, z);
-				boolean flag5 = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x, y + 1, z);
+				final boolean flag = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x, y, z - 1);
+				final boolean flag1 = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x, y, z + 1);
+				final boolean flag2 = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x - 1, y, z);
+				final boolean flag3 = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x + 1, y, z);
+				final boolean flag4 = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x, y - 1, z);
+				final boolean flag5 = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x, y + 1, z);
 
 				minV = (double)icon.getInterpolatedV(14);
 				maxV = (double)icon.getMaxV();
 
 				if (flag && flag1)
 				{
-					minX = ((double)x + 7*d);
-					maxX = ((double)x + 9*d);
-					minY = ((double)y + 7*d);
-					maxY = ((double)y + 9*d);
-					minZ = ((double)z);
-					maxZ = ((double)z + 16*d);
+					minX = (double)x + 7*d;
+					maxX = (double)x + 9*d;
+					minY = (double)y + 7*d;
+					maxY = (double)y + 9*d;
+					minZ = (double)z;
+					maxZ = (double)z + 16*d;
 
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getMaxU();
@@ -150,12 +149,12 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 				{
 					if (flag)
 					{
-						minX = ((double)x + 7*d);
-						maxX = ((double)x + 9*d);
-						minY = ((double)y + 7*d);
-						maxY = ((double)y + 9*d);
-						minZ = ((double)z);
-						maxZ = ((double)z + 8*d);
+						minX = (double)x + 7*d;
+						maxX = (double)x + 9*d;
+						minY = (double)y + 7*d;
+						maxY = (double)y + 9*d;
+						minZ = (double)z;
+						maxZ = (double)z + 8*d;
 
 						minU = (double)icon.getInterpolatedU(8);
 						maxU = (double)icon.getMaxU();
@@ -165,12 +164,12 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 
 					if (flag1)
 					{
-						minX = ((double)x + 7*d);
-						maxX = ((double)x + 9*d);
-						minY = ((double)y + 7*d);
-						maxY = ((double)y + 9*d);
-						minZ = ((double)z + 8*d);
-						maxZ = ((double)z + 16*d);
+						minX = (double)x + 7*d;
+						maxX = (double)x + 9*d;
+						minY = (double)y + 7*d;
+						maxY = (double)y + 9*d;
+						minZ = (double)z + 8*d;
+						maxZ = (double)z + 16*d;
 
 						minU = (double)icon.getMinU();
 						maxU = (double)icon.getInterpolatedU(8);
@@ -181,12 +180,12 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 
 				if (flag2 && flag3)
 				{
-					minX = ((double)x);
-					maxX = ((double)x + 16*d);
-					minY = ((double)y + 7*d);
-					maxY = ((double)y + 9*d);
-					minZ = ((double)z + 7*d);
-					maxZ = ((double)z + 9*d);
+					minX = (double)x;
+					maxX = (double)x + 16*d;
+					minY = (double)y + 7*d;
+					maxY = (double)y + 9*d;
+					minZ = (double)z + 7*d;
+					maxZ = (double)z + 9*d;
 
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getMaxU();
@@ -197,12 +196,12 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 				{
 					if (flag2)
 					{
-						minX = ((double)x);
-						maxX = ((double)x + 8*d);
-						minY = ((double)y + 7*d);
-						maxY = ((double)y + 9*d);
-						minZ = ((double)z + 7*d);
-						maxZ = ((double)z + 9*d);
+						minX = (double)x;
+						maxX = (double)x + 8*d;
+						minY = (double)y + 7*d;
+						maxY = (double)y + 9*d;
+						minZ = (double)z + 7*d;
+						maxZ = (double)z + 9*d;
 
 						minU = (double)icon.getInterpolatedU(8);
 						maxU = (double)icon.getMaxU();
@@ -212,12 +211,12 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 
 					if (flag3)
 					{
-						minX = ((double)x + 8*d);
-						maxX = ((double)x + 16*d);
-						minY = ((double)y + 7*d);
-						maxY = ((double)y + 9*d);
-						minZ = ((double)z + 7*d);
-						maxZ = ((double)z + 9*d);
+						minX = (double)x + 8*d;
+						maxX = (double)x + 16*d;
+						minY = (double)y + 7*d;
+						maxY = (double)y + 9*d;
+						minZ = (double)z + 7*d;
+						maxZ = (double)z + 9*d;
 
 						minU = (double)icon.getMinU();
 						maxU = (double)icon.getInterpolatedU(8);
@@ -228,12 +227,12 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 
 				if (flag4 && flag5)
 				{
-					minX = ((double)x + 7*d);
-					maxX = ((double)x + 9*d);
-					minY = ((double)y);
-					maxY = ((double)y + 16*d);
-					minZ = ((double)z + 7*d);
-					maxZ = ((double)z + 9*d);
+					minX = (double)x + 7*d;
+					maxX = (double)x + 9*d;
+					minY = (double)y;
+					maxY = (double)y + 16*d;
+					minZ = (double)z + 7*d;
+					maxZ = (double)z + 9*d;
 
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getMaxU();
@@ -244,12 +243,12 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 				{
 					if (flag4)
 					{
-						minX = ((double)x + 7*d);
-						maxX = ((double)x + 9*d);
-						minY = ((double)y);
-						maxY = ((double)y + 8*d);
-						minZ = ((double)z + 7*d);
-						maxZ = ((double)z + 9*d);
+						minX = (double)x + 7*d;
+						maxX = (double)x + 9*d;
+						minY = (double)y;
+						maxY = (double)y + 8*d;
+						minZ = (double)z + 7*d;
+						maxZ = (double)z + 9*d;
 
 						minU = (double)icon.getInterpolatedU(8);
 						maxU = (double)icon.getMaxU();
@@ -259,12 +258,12 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 
 					if (flag5)
 					{
-						minX = ((double)x + 7*d);
-						maxX = ((double)x + 9*d);
-						minY = ((double)y + 8*d);
-						maxY = ((double)y + 16*d);
-						minZ = ((double)z + 7*d);
-						maxZ = ((double)z + 9*d);
+						minX = (double)x + 7*d;
+						maxX = (double)x + 9*d;
+						minY = (double)y + 8*d;
+						maxY = (double)y + 16*d;
+						minZ = (double)z + 7*d;
+						maxZ = (double)z + 9*d;
 
 						minU = (double)icon.getMinU();
 						maxU = (double)icon.getInterpolatedU(8);
@@ -281,12 +280,14 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelID) { return true; }
+	public boolean shouldRender3DInInventory(int modelID)
+	{
+		return true;
+	}
 
 	@Override
 	public int getRenderId()
 	{
 		return id;
 	}
-
 }

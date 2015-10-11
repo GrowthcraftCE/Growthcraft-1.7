@@ -1,6 +1,5 @@
 package growthcraft.grapes.event;
 
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.core.utils.BlockFlags;
 import growthcraft.grapes.GrowthCraftGrapes;
@@ -18,12 +17,12 @@ public class BonemealEventGrapes
 {
 	private void bonemealGrapeVine0(BonemealEvent event)
 	{
-		BlockGrapeVine0 vine = (BlockGrapeVine0)event.block;
-		int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
+		final BlockGrapeVine0 vine = (BlockGrapeVine0)event.block;
+		final int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
 
 		if (!event.world.isRemote)
 		{
-			int i = MathHelper.getRandomIntegerInRange(event.world.rand, 1, 2);
+			final int i = MathHelper.getRandomIntegerInRange(event.world.rand, 1, 2);
 			if (meta == 0)
 			{
 				if (i == 1)
@@ -60,8 +59,8 @@ public class BonemealEventGrapes
 
 	private void bonemealGrapeVine1(BonemealEvent event)
 	{
-		BlockGrapeVine1 vine = (BlockGrapeVine1)event.block;
-		int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
+		final BlockGrapeVine1 vine = (BlockGrapeVine1)event.block;
+		final int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
 		if (meta == 0 && BlockCheck.isRope(event.world.getBlock(event.x, event.y + 1, event.z)))
 		{
 			if (!event.world.isRemote)
@@ -96,10 +95,10 @@ public class BonemealEventGrapes
 
 	private void bonemealGrapeLeaves(BonemealEvent event)
 	{
-		boolean flag = !checkValidity(event.world, event.x, event.y, event.z - 1);
-		boolean flag1 = !checkValidity(event.world, event.x, event.y, event.z + 1);
-		boolean flag2 = !checkValidity(event.world, event.x - 1, event.y, event.z);
-		boolean flag3 = !checkValidity(event.world, event.x + 1, event.y, event.z);
+		final boolean flag = !checkValidity(event.world, event.x, event.y, event.z - 1);
+		final boolean flag1 = !checkValidity(event.world, event.x, event.y, event.z + 1);
+		final boolean flag2 = !checkValidity(event.world, event.x - 1, event.y, event.z);
+		final boolean flag3 = !checkValidity(event.world, event.x + 1, event.y, event.z);
 
 		if (flag1 && flag2 && flag3 && flag)
 		{
@@ -120,7 +119,7 @@ public class BonemealEventGrapes
 		{
 			if (!event.world.isRemote)
 			{
-				int r = event.world.rand.nextInt(4);
+				final int r = event.world.rand.nextInt(4);
 
 				if (r == 0 && checkValidity(event.world, event.x, event.y, event.z - 1))
 				{
@@ -153,15 +152,15 @@ public class BonemealEventGrapes
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
 	{
-		if (event.block == GrowthCraftGrapes.grapeVine0.getBlock())
+		if (GrowthCraftGrapes.grapeVine0.getBlock() == event.block)
 		{
 			bonemealGrapeVine0(event);
 		}
-		else if (event.block == GrowthCraftGrapes.grapeVine1.getBlock())
+		else if (GrowthCraftGrapes.grapeVine1.getBlock() == event.block)
 		{
 			bonemealGrapeVine1(event);
 		}
-		else if (event.block == GrowthCraftGrapes.grapeLeaves.getBlock())
+		else if (GrowthCraftGrapes.grapeLeaves.getBlock() == event.block)
 		{
 			bonemealGrapeLeaves(event);
 		}
@@ -172,10 +171,10 @@ public class BonemealEventGrapes
 		if (BlockCheck.isRope(world.getBlock(x, y, z)))
 		{
 			final Block grapeLeaves = GrowthCraftGrapes.grapeLeaves.getBlock();
-			boolean flag = world.getBlock(x + 1, y, z) == grapeLeaves;
-			boolean flag1 = world.getBlock(x - 1, y, z) == grapeLeaves;
-			boolean flag2 = world.getBlock(x, y, z + 1) == grapeLeaves;
-			boolean flag3 = world.getBlock(x, y, z - 1) == grapeLeaves;
+			final boolean flag = world.getBlock(x + 1, y, z) == grapeLeaves;
+			final boolean flag1 = world.getBlock(x - 1, y, z) == grapeLeaves;
+			final boolean flag2 = world.getBlock(x, y, z + 1) == grapeLeaves;
+			final boolean flag3 = world.getBlock(x, y, z - 1) == grapeLeaves;
 
 			if (!flag && !flag1 && !flag2 && !flag3) return false;
 
@@ -194,6 +193,6 @@ public class BonemealEventGrapes
 
 	private boolean isTrunk(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftGrapes.grapeVine1.getBlock();
+		return GrowthCraftGrapes.grapeVine1.getBlock() == world.getBlock(x, y, z);
 	}
 }
