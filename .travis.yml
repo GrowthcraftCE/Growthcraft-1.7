@@ -15,7 +15,7 @@ script:
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH
-  file: "build/libs/growthcraft-2.2.2-complete.jar"
+  file: "build/libs/growthcraft-2.3.0-complete.jar"
   skip_cleanup: true
   on:
     tags: true
