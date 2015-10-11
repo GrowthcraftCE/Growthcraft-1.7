@@ -105,19 +105,19 @@ public class CellarDataProvider implements IWailaDataProvider
 	private void getBrewKettleData(TileEntityBrewKettle brewKettle, NBTTagCompound tag)
 	{
 		tag.setBoolean("can_brew", brewKettle.canBrew());
-		tag.setTag("item_brew", NBTHelper.getItemData(brewKettle.getStackInSlot(0), new NBTTagCompound()));
-		tag.setTag("item_residue", NBTHelper.getItemData(brewKettle.getStackInSlot(1), new NBTTagCompound()));
+		tag.setTag("item_brew", NBTHelper.writeItemStackToNBT(brewKettle.getStackInSlot(0), new NBTTagCompound()));
+		tag.setTag("item_residue", NBTHelper.writeItemStackToNBT(brewKettle.getStackInSlot(1), new NBTTagCompound()));
 	}
 
 	private void getFruitPressData(TileEntityFruitPress fruitPress, NBTTagCompound tag)
 	{
-		tag.setTag("item_press", NBTHelper.getItemData(fruitPress.getStackInSlot(0), new NBTTagCompound()));
-		tag.setTag("item_residue", NBTHelper.getItemData(fruitPress.getStackInSlot(1), new NBTTagCompound()));
+		tag.setTag("item_press", NBTHelper.writeItemStackToNBT(fruitPress.getStackInSlot(0), new NBTTagCompound()));
+		tag.setTag("item_residue", NBTHelper.writeItemStackToNBT(fruitPress.getStackInSlot(1), new NBTTagCompound()));
 	}
 
 	private void getFermentBarrelData(TileEntityFermentBarrel fermentBarrel, NBTTagCompound tag)
 	{
-		tag.setTag("item_modifier", NBTHelper.getItemData(fermentBarrel.getStackInSlot(0), new NBTTagCompound()));
+		tag.setTag("item_modifier", NBTHelper.writeItemStackToNBT(fermentBarrel.getStackInSlot(0), new NBTTagCompound()));
 		tag.setInteger("time", fermentBarrel.getTime());
 		tag.setInteger("time_max", fermentBarrel.getTimeMax());
 		final FluidStack fluidStack = fermentBarrel.getFluidStack();
@@ -135,7 +135,7 @@ public class CellarDataProvider implements IWailaDataProvider
 	@Optional.Method(modid = "Waila")
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
 	{
-		if (te instanceof IFluidHandler) NBTHelper.getIFluidHandlerData((IFluidHandler)te, tag);
+		if (te instanceof IFluidHandler) NBTHelper.writeIFluidHandlerToNBT((IFluidHandler)te, tag);
 		if (te instanceof TileEntityBrewKettle) getBrewKettleData((TileEntityBrewKettle)te, tag);
 		if (te instanceof TileEntityFruitPress) getFruitPressData((TileEntityFruitPress)te, tag);
 		if (te instanceof TileEntityFermentBarrel) getFermentBarrelData((TileEntityFermentBarrel)te, tag);

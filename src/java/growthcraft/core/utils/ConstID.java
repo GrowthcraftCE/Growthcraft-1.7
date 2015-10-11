@@ -7,7 +7,9 @@ package growthcraft.core.utils;
 public final class ConstID
 {
 	// Used for handling non existant fluids
-	public static final int NO_FLUID = -1;
+	public static final int NO_FLUID = 0;
 	// Used for handling non existant items
-	public static final int NO_ITEM = -1;
+	public static final int NO_ITEM = 0;
+
+	private ConstID() {}
 }

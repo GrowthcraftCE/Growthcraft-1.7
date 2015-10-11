@@ -18,6 +18,8 @@ public class UnitFormatter
 {
 	public static final String fractionSeparator = EnumChatFormatting.GRAY + " / ";
 
+	private UnitFormatter() {}
+
 	public static String fraction(String... args)
 	{
 		return Joiner.on(fractionSeparator).join(args);

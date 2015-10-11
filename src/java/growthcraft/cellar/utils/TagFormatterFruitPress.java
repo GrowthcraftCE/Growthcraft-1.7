@@ -3,17 +3,15 @@ package growthcraft.cellar.utils;
 import java.util.List;
 import growthcraft.core.utils.ITagFormatter;
 
-import growthcraft.core.utils.ConstID;
 import growthcraft.core.utils.TagFormatterItem;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
 public class TagFormatterFruitPress implements ITagFormatter
 {
-	public final static TagFormatterFruitPress INSTANCE = new TagFormatterFruitPress();
+	public static final TagFormatterFruitPress INSTANCE = new TagFormatterFruitPress();
 
 	public List<String> format(List<String> list, NBTTagCompound tag)
 	{
