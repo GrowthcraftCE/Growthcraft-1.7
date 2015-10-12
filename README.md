@@ -2,7 +2,7 @@ Growthcraft
 ===========
 
 [![Minecraft Version](http://img.shields.io/minecraft/1.7.10.png?color=green)](https://minecraft.net/)
-[![Growthcraft Version](http://img.shields.io/growthcraft/2.3.0.png?color=green)](https://github.com/alatyami/Growthcraft-1.7)
+[![Growthcraft Version](http://img.shields.io/growthcraft/2.3.1.png?color=green)](https://github.com/alatyami/Growthcraft-1.7)
 [![Forge Version](http://img.shields.io/forge/10.13.4.1448.png?color=green)](http://files.minecraftforge.net/)
 [![Build Status](https://travis-ci.org/alatyami/Growthcraft-1.7.svg?branch=master)](https://travis-ci.org/alatyami/Growthcraft-1.7) [![Join the chat at https://gitter.im/alatyami/Growthcraft-1.7](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/alatyami/Growthcraft-1.7?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -21,7 +21,3 @@ For any contributions to this project, please refer to our [Contributing to Grow
 
 Until we find the right license model, for now we are allowing for others to modify the code for personal/private use. Do not ditribute your own version of the plugin, instead, submit your changes as this is a community project. If you add this mod or set of mods to your mod-pack, simply post an issue with a list of mods that you have included in your pack. It is that simple. We want the list of your mods so that we can determine where to invest time in cross-mod compatibility.
 
-## Featured Mod-Packs
-
-- [Compitum Magia](http://www.technicpack.net/modpack/compitum-magia.647447), 
-- [Ultimate HarvestCraft](http://www.technicpack.net/modpack/ultimate-harvestcraft.566785)
