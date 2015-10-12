@@ -135,7 +135,10 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	{
 		if (!world.isRemote)
 		{
-			fellBlockAsItem(world, x, y, z);
+			if (world.getBlockMetadata(x, y, z) >= 2)
+			{
+				fellBlockAsItem(world, x, y, z);
+			}
 		}
 		return true;
 	}
