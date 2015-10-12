@@ -19,6 +19,7 @@ buildscript {
 
 repositories {
     mavenLocal()
+    mavenCentral()
 
     maven {
         name = "AppleCore"
