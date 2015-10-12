@@ -11,25 +11,32 @@ cache:
     - $HOME/.gradle/wrapper/
 
 before_install:
+# ensure we have ruby
+- ruby --version
 - chmod +x gradlew
 
 install: ./gradlew setupCIWorkspace -S
 
-script:
-- ./gradlew build
-- ls -la build/libs
+script: |
+  ./gradlew build &&
+  ruby tools/split_jars.rb &&
+  ls -la build/libs &&
+  ls -la build/packages
 
 # Deploy the artifacts back to GitHub
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH
   file_glob: true
-  file: 
+  file:
     - "build/libs/growthcraft-*-complete.jar"
     - "build/libs/growthcraft-*-api.jar"
     - "build/libs/growthcraft-*-dev.jar"
     - "build/libs/growthcraft-*-javadoc.jar"
     - "build/libs/growthcraft-*-sources.jar"
+    # separate jars
+    - "build/packages/growthcraft-*-complete-*.jar"
+    - "build/packages/growthcraft-*-dev-*.jar"
   skip_cleanup: true
   on:
     tags: true

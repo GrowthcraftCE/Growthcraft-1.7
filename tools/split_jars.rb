@@ -20,21 +20,21 @@ def verbose(*args)
   puts(*args) if verbose?
 end
 
+def sh(cmd)
+  verbose cmd
+  system(cmd) || fail("Command Failed")
+end
+
 mcmod_info = JSON.parse File.read("src/resources/mcmod.info")
 
-packnames = %w[apples bamboo bees cellar core fishtrap grapes hops rice]
 # First we'll need to extract each pack's mcmod info from the given list
-pack_mcmod = packnames.each_with_object({}) do |packname, result|
-  mcmod = mcmod_info.find do |info|
-    # the only exception to the rule
-    modid = info['modid'].downcase
-    if packname == 'core'
-      modid == 'growthcraft'
-    else
-      modid.include?(packname)
-    end
+pack_mcmod = mcmod_info.each_with_object({}) do |mcmod, result|
+  packname = mcmod.fetch('modid').downcase
+  packname = if packname == 'growthcraft'
+    'core'
+  else
+    packname.gsub('growthcraft|', '')
   end
-  fail "Could not find mcmod object for #{packname}" unless mcmod
   result[packname] = mcmod
 end
 
@@ -52,11 +52,14 @@ Dir.glob("build/libs/growthcraft-*.jar") do |f|
   Dir.mktmpdir 'grctmp_' do |dir|
     # for some reason "jar x" froze on my system
     verbose "\tExtracting #{f} to #{dir}/content"
-    cmd = "7za x \"#{f}\" -o\"#{dir}/content\" -y"
+    dirname = "#{dir}/content"
+    FileUtils.mkdir_p dirname
+    cmd_str = " \"#{f}\" -d\"#{dirname}\""
+    cmd = "unzip -o"
     if verbose?
-      system cmd
+      sh(cmd + cmd_str)
     else
-      system cmd + " > /dev/null"
+      sh(cmd + " -q " + cmd_str) || fail("Extraction failed")
     end
 
     # strip the dirname and extname off the parent jar, this will be
@@ -65,10 +68,10 @@ Dir.glob("build/libs/growthcraft-*.jar") do |f|
 
     # generate each package jar by using the contents from the extracted
     # parent jar and resaved mcmod.info specific to the package
-    packnames.each do |packname|
+    pack_mcmod.each_key do |packname|
       mcmod = pack_mcmod.fetch(packname)
-      pack_version = mcmod.fetch('version')
-      filename = "#{base}-#{packname}-#{pack_version}.jar"
+      #pack_version = mcmod.fetch('version')
+      filename = [base, packname].compact.join('-') + '.jar'
 
       verbose "\tBuilding package #{filename}"
 
@@ -90,7 +93,7 @@ Dir.glob("build/libs/growthcraft-*.jar") do |f|
       # core requires the api as well -.-;
       content << %(-C "#{dir}/content" growthcraft/api) if packname == 'core'
       cmd = %(jar #{vflag}cf build/packages/#{filename} ) + content.join(" ")
-      system cmd
+      sh cmd
     end
   end
 end
