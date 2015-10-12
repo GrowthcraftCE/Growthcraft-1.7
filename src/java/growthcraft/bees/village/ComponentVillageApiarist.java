@@ -12,8 +12,6 @@ import growthcraft.core.utils.SchemaToVillage;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -24,7 +22,7 @@ import net.minecraft.world.World;
 public class ComponentVillageApiarist extends StructureVillagePieces.Village implements SchemaToVillage.IVillage
 {
 	// Design by Ar97x, modified by IceDragon (I made the tree levaves a 3x3x3 cube, makes it look neat)
-	static private final String apiaristExteriorSchema[][] = {
+	private static final String[][] apiaristExteriorSchema = {
 		{
 			"    486  ",
 			"xcccccccx",
@@ -73,7 +71,8 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 			"         ",
 			"         "
 		},
-		{ // the torches for this level are placed manually
+		{
+		// the torches for this level are placed manually
 			"888888888",
 			"xpppppppx",
 			"p       p",
@@ -123,7 +122,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		}
 	};
 
-	static private final String apiaristInteriorSchema[][] = {
+	private static final String[][] apiaristInteriorSchema = {
 		{
 			" 6    4",
 			" 6    K",
@@ -153,13 +152,14 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 	// That tree that appears behind the apiary, its a birch tree
 	// Since `x` is already used for Oak in the original schema, I've extracted
 	// here.
-	static private final String apiaristBackyardTreeSchema[][] = {
+	private static final String[][] apiaristBackyardTreeSchema = {
 		{
 			"   ",
 			" x ",
 			"   ",
 		},
-		{ // bee hive appears on this level
+		{
+		// bee hive appears on this level
 			"   ",
 			" x ",
 			"   ",
@@ -187,13 +187,15 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 	};
 
 	private static final WeightedRandomChestContent[] apiaristChestContents = new WeightedRandomChestContent[] {
-		new WeightedRandomChestContent(GrowthCraftBees.bee, 0, 1, 2, 3),
-		new WeightedRandomChestContent(GrowthCraftBees.honeyComb, 0, 1, 3, 5),
-		new WeightedRandomChestContent(GrowthCraftBees.honeyJar, 0, 1, 1, 10),
-		new WeightedRandomChestContent(Item.getItemFromBlock(GrowthCraftBees.beeBox), 0, 1, 2, 5)
+		new WeightedRandomChestContent(GrowthCraftBees.bee.getItem(), 0, 1, 2, 3),
+		new WeightedRandomChestContent(GrowthCraftBees.honeyComb.getItem(), 0, 1, 3, 5),
+		new WeightedRandomChestContent(GrowthCraftBees.honeyJar.getItem(), 0, 1, 1, 10),
+		new WeightedRandomChestContent(GrowthCraftBees.beeBox.getItem(), 0, 1, 2, 5)
 	};
 
-	public ComponentVillageApiarist() {} // DO NOT REMOVE
+	// DO NOT REMOVE
+	public ComponentVillageApiarist() {}
+
 	public ComponentVillageApiarist(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
 	{
 		super(startPiece, par2);
@@ -203,7 +205,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 
 	public static ComponentVillageApiarist buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 9, 8, 14, coordBaseMode);
+		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 9, 8, 14, coordBaseMode);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
 				return new ComponentVillageApiarist(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -234,7 +236,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		// clear entire bounding box
 		this.fillWithBlocks(world, box, 0, 0, 0, 9, 8, 14, Blocks.air, Blocks.air, false);
 
-		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
+		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 
 		// Plop down the tree first
 		map.put('x', new BlockEntry(Blocks.log, 2));
@@ -252,8 +254,10 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		map.put('g', new BlockEntry(Blocks.glass_pane));
 
 		map.put('f', new BlockEntry(Blocks.fence));
-		map.put('-', new BlockEntry(Blocks.wooden_slab, 8)); // high slab
-		map.put('_', new BlockEntry(Blocks.wooden_slab, 0)); // low slab
+		// high slab
+		map.put('-', new BlockEntry(Blocks.wooden_slab, 8));
+		// low slab
+		map.put('_', new BlockEntry(Blocks.wooden_slab, 0));
 		map.put(',', new MultiBlockEntries(new BlockEntry[]{
 			new BlockEntry(Blocks.red_flower, 4),
 			new BlockEntry(Blocks.red_flower, 5),
@@ -277,8 +281,8 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		map.put('Y', new BlockEntry(Blocks.planks, 2));
 		map.put('B', new BlockEntry(Blocks.planks, 1));
 
-		map.put('H', new BlockEntry(GrowthCraftBees.beeHive, this.getMetadataWithOffset(GrowthCraftBees.beeHive, 3)));
-		map.put('+', new BlockEntry(GrowthCraftBees.beeBox, this.getMetadataWithOffset(GrowthCraftBees.beeBox, 2)));
+		map.put('H', new BlockEntry(GrowthCraftBees.beeHive.getBlock(), this.getMetadataWithOffset(GrowthCraftBees.beeHive.getBlock(), 3)));
+		map.put('+', new BlockEntry(GrowthCraftBees.beeBox.getBlock(), this.getMetadataWithOffset(GrowthCraftBees.beeBox.getBlock(), 2)));
 
 		SchemaToVillage.drawSchema(this, world, random, box, apiaristExteriorSchema, map, 0, 0, 0);
 

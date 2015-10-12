@@ -14,4 +14,6 @@ public final class BlockFlags
 
 	public static final int UPDATE_CLIENT = BLOCK_UPDATE | SEND_TO_CLIENT;
 	public static final int ALL = UPDATE_CLIENT | SUPRESS_RENDER;
+
+	private BlockFlags() {}
 }

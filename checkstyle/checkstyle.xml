@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE module PUBLIC
+	"-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+	"http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+<module name = "Checker">
+	<property name="charset" value="UTF-8"/>
+	<property name="severity" value="warning"/>
+
+	<module name="SuppressionFilter">
+		<property name="file" value="checkstyle/suppressions.xml"/>
+	</module>
+
+	<module name="NewlineAtEndOfFile"/>
+
+	<module name="TreeWalker">
+		<!-- http://stackoverflow.com/questions/28458846/how-to-require-tab-indentation-with-checkstyle -->
+		<module name="RegexpSinglelineJava">
+			<property name="format" value="^\t* "/>
+			<property name="message" value="Indent must use tab characters"/>
+			<property name="ignoreComments" value="true"/>
+		</module>
+		<module name="ArrayTypeStyle">
+			<property name="javaStyle" value="true"/>
+		</module>
+		<module name="DeclarationOrder"/>
+		<module name="DefaultComesLast"/>
+		<module name="ExplicitInitialization"/>
+		<module name="FallThrough"/>
+		<module name="FinalLocalVariable"/>
+		<module name="HideUtilityClassConstructor"/>
+		<module name="InterfaceIsType"/>
+		<module name="MissingSwitchDefault"/>
+		<module name="ModifiedControlVariable"/>
+		<module name="ModifierOrder"/>
+		<module name="ModifierOrder"/>
+		<module name="MultipleVariableDeclarations"/>
+		<module name="NoFinalizer"/>
+		<module name="OneTopLevelClass"/>
+		<module name="OuterTypeFilename"/>
+		<module name="OverloadMethodsDeclarationOrder"/>
+		<module name="SimplifyBooleanExpression"/>
+		<module name="SimplifyBooleanReturn"/>
+		<module name="StringLiteralEquality"/>
+		<module name="TrailingComment"/>
+		<module name="UnnecessaryParentheses"/>
+		<module name="UpperEll"/>
+		<module name="VariableDeclarationUsageDistance">
+			<property name="allowedDistance" value="16"/>
+		</module>
+		<!-- <module name="VisibilityModifier">
+			<property name="protectedAllowed" value="true"/>
+			<property name="allowPublicImmutableFields" value="true"/>
+		</module> -->
+		<!-- Rules that are treated as errors -->
+		<module name="PackageDeclaration">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="EmptyStatement">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="RedundantImport">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="AvoidStarImport">
+			<!-- Rationale: import what you use, and nothing more -->
+			<property name="severity" value="error"/>
+		</module>
+		<module name="UnusedImports">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="HiddenField">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="InnerAssignment">
+			<property name="severity" value="error"/>
+		</module>
+	</module>
+</module>

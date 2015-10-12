@@ -2,15 +2,15 @@ package growthcraft.cellar.tileentity;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.PressingRegistry;
-import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.container.ContainerFruitPress;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.utils.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -21,16 +21,17 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityFruitPress extends TileEntity implements ISidedInventory, IFluidHandler
 {
-	// Constants
-	private ItemStack[] invSlots = new ItemStack[2];
-	private int         maxCap   = GrowthCraftCellar.getConfig().fruitPressMaxCap;
-	private CellarTank  tank     = new CellarTank(this.maxCap, this);
+	private static final int[] rawSlotIDs = new int[] {0, 1};
+	private static final int[] residueSlotIDs = new int[] {0};
 
-	// Other Vars.
-	private String  name;
-	protected float pomace   = 0.0F;
-	protected int   time     = 0;
-	protected boolean update = false;
+	protected float pomace;
+	protected int time;
+	protected boolean update;
+
+	private ItemStack[] invSlots = new ItemStack[2];
+	private int maxCap = GrowthCraftCellar.getConfig().fruitPressMaxCap;
+	private CellarTank tank = new CellarTank(this.maxCap, this);
+	private String name;
 
 	/************
 	 * UPDATE
@@ -83,7 +84,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	private boolean canPress()
 	{
 		final PressingRegistry pressing = CellarRegistry.instance().pressing();
-		int m = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord + 1, this.zCoord);
+		final int m = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord + 1, this.zCoord);
 
 		if (m == 0 || m == 1) return false;
 		if (this.invSlots[0] == null) return false;
@@ -92,14 +93,14 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 
 		if (isFluidTankEmpty()) return true;
 
-		FluidStack stack = pressing.getPressingFluidStack(this.invSlots[0]);
+		final FluidStack stack = pressing.getPressingFluidStack(this.invSlots[0]);
 		return stack.isFluidEqual(getFluidStack());
 	}
 
 	public void pressItem()
 	{
 		final PressingRegistry pressing = CellarRegistry.instance().pressing();
-		float f = pressing.getPressingResidue(this.invSlots[0]);
+		final float f = pressing.getPressingResidue(this.invSlots[0]);
 		this.pomace = this.pomace + f;
 		if (this.pomace >= 1.0F)
 		{
@@ -118,7 +119,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 			}
 		}
 
-		FluidStack fluidstack = pressing.getPressingFluidStack(this.invSlots[0]);
+		final FluidStack fluidstack = pressing.getPressingFluidStack(this.invSlots[0]);
 		fluidstack.amount  = pressing.getPressingAmount(this.invSlots[0]);
 		this.tank.fill(fluidstack, true);
 
@@ -136,8 +137,9 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	{
 		if (this.invSlots[1] == null) return true;
 		if (!this.invSlots[1].isItemEqual(GrowthCraftCellar.residue)) return false;
-		int result = invSlots[1].stackSize + GrowthCraftCellar.residue.stackSize;
-		return (result <= getInventoryStackLimit() && result <= GrowthCraftCellar.residue.getMaxStackSize());
+		final int result = invSlots[1].stackSize + GrowthCraftCellar.residue.stackSize;
+		return result <= getInventoryStackLimit() &&
+			result <= GrowthCraftCellar.residue.getMaxStackSize();
 	}
 
 	public int getPressProgressScaled(int par1)
@@ -195,7 +197,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	{
 		if (this.invSlots[index] != null)
 		{
-			ItemStack itemstack = this.invSlots[index];
+			final ItemStack itemstack = this.invSlots[index];
 			this.invSlots[index] = null;
 			return itemstack;
 		}
@@ -231,7 +233,11 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		if (this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this)
+		{
+			return false;
+		}
+		return player.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
@@ -243,7 +249,12 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
 	{
-		return index == 1 ? itemstack.getItem() == GrowthCraftCellar.residue.getItem() && itemstack.getItemDamage() == GrowthCraftCellar.residue.getItemDamage() : true;
+		if (index == 1)
+		{
+			return itemstack.getItem() == GrowthCraftCellar.residue.getItem() &&
+				itemstack.getItemDamage() == GrowthCraftCellar.residue.getItemDamage();
+		}
+		return true;
 	}
 
 	@Override
@@ -251,7 +262,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	{
 		// 0 = raw
 		// 1 = residue
-		return side == 0 ? new int[] {0, 1} : new int[] {0};
+		return side == 0 ? rawSlotIDs : residueSlotIDs;
 	}
 
 	@Override
@@ -266,40 +277,6 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		return side != 0 || index == 1;
 	}
 
-	/************
-	 * NBT
-	 ************/
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		super.readFromNBT(nbt);
-		//INVENTORY
-		NBTTagList tags = nbt.getTagList("items", 10);
-		this.invSlots = new ItemStack[this.getSizeInventory()];
-		for (int i = 0; i < tags.tagCount(); ++i)
-		{
-			NBTTagCompound nbttagcompound1 = tags.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < this.invSlots.length)
-			{
-				this.invSlots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
-
-		//TANKS
-		readTankFromNBT(nbt);
-
-		//NAME
-		if (nbt.hasKey("name"))
-		{
-			this.name = nbt.getString("name");
-		}
-
-		this.time = nbt.getShort("time");
-		this.pomace = nbt.getFloat("pomace");
-	}
-
 	protected void readTankFromNBT(NBTTagCompound nbt)
 	{
 		this.tank = new CellarTank(this.maxCap, this);
@@ -309,28 +286,48 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		}
 	}
 
+	/************
+	 * NBT
+	 ************/
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		// INVENTORY
+		this.invSlots = new ItemStack[this.getSizeInventory()];
+		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
+
+		// TANKS
+		readTankFromNBT(nbt);
+
+		// NAME
+		if (nbt.hasKey("name"))
+		{
+			this.name = nbt.getString("name");
+		}
+
+		this.time = nbt.getShort("time");
+		this.pomace = nbt.getFloat("pomace");
+	}
+
+	protected void writeTankToNBT(NBTTagCompound nbt)
+	{
+		final NBTTagCompound tag = new NBTTagCompound();
+		this.tank.writeToNBT(tag);
+		nbt.setTag("Tank", tag);
+	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		//INVENTORY
-		NBTTagList nbttaglist = new NBTTagList();
-		for (int i = 0; i < this.invSlots.length; ++i)
-		{
-			if (this.invSlots[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				this.invSlots[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-		nbt.setTag("items", nbttaglist);
+		// INVENTORY
+		nbt.setTag("items", NBTHelper.writeInventorySlotsToNBT(invSlots));
 
-		//TANK
+		// TANK
 		writeTankToNBT(nbt);
 
-		//NAME
+		// NAME
 		if (this.hasCustomInventoryName())
 		{
 			nbt.setString("name", this.name);
@@ -338,13 +335,6 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 
 		nbt.setShort("time", (short)this.time);
 		nbt.setFloat("pomace", this.pomace);
-	}
-
-	protected void writeTankToNBT(NBTTagCompound nbt)
-	{
-		NBTTagCompound tag = new NBTTagCompound();
-		this.tank.writeToNBT(tag);
-		nbt.setTag("Tank", tag);
 	}
 
 	/************
@@ -379,30 +369,35 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	{
 		switch (id)
 		{
-		case 0:
-			time = v;
-			break;
-		case 1:
-			if (FluidRegistry.getFluid(v) == null) {
-				return;
-			}
-			if (tank.getFluid() == null)
-			{
-				tank.setFluid(new FluidStack(v, 0));
-			} else
-			{
-				tank.setFluid(new FluidStack(v, tank.getFluid().amount));
-			}
-			break;
-		case 2:
-			if (tank.getFluid() == null)
-			{
-				tank.setFluid(new FluidStack(FluidRegistry.WATER, v));
-			} else
-			{
-				tank.getFluid().amount = v;
-			}
-			break;
+			case 0:
+				time = v;
+				break;
+			case 1:
+				if (FluidRegistry.getFluid(v) == null)
+				{
+					return;
+				}
+				if (tank.getFluid() == null)
+				{
+					tank.setFluid(new FluidStack(v, 0));
+				}
+				else
+				{
+					tank.setFluid(new FluidStack(v, tank.getFluid().amount));
+				}
+				break;
+			case 2:
+				if (tank.getFluid() == null)
+				{
+					tank.setFluid(new FluidStack(FluidRegistry.WATER, v));
+				}
+				else
+				{
+					tank.getFluid().amount = v;
+				}
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -412,21 +407,6 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		iCrafting.sendProgressBarUpdate(container, 1, tank.getFluid() != null ? tank.getFluid().getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, 2, tank.getFluid() != null ? tank.getFluid().amount : 0);
 	}
-
-	/*@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeTankToNBT(nbt);
-		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbt);
-	}
-
-	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet)
-	{
-		readTankFromNBT(packet.data);
-		//this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
-	}*/
 
 	/************
 	 * FLUID
@@ -451,9 +431,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		FluidStack d = this.tank.drain(maxDrain, doDrain);
-		//this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-		return d;
+		return this.tank.drain(maxDrain, doDrain);
 	}
 
 	@Override
@@ -512,6 +490,5 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	public void clearTank()
 	{
 		this.tank.setFluid(null);
-		//this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 	}
 }

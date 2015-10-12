@@ -29,17 +29,18 @@ public class GuiFermentBarrel extends GuiCellar
 	private TileEntityFermentBarrel te;
 	private GuiButtonDiscard button;
 
-	public GuiFermentBarrel(InventoryPlayer inv, TileEntityFermentBarrel te)
+	public GuiFermentBarrel(InventoryPlayer inv, TileEntityFermentBarrel fermentBarrel)
 	{
-		super(new ContainerFermentBarrel(inv, te));
-		this.te = te;
+		super(new ContainerFermentBarrel(inv, fermentBarrel));
+		this.te = fermentBarrel;
 	}
 
 	@Override
 	public void initGui()
 	{
 		super.initGui();
-		this.buttonList.add(this.button = new GuiButtonDiscard(this.res, 1, this.guiLeft + 116, this.guiTop + 54));
+		this.button = new GuiButtonDiscard(this.res, 1, this.guiLeft + 116, this.guiTop + 54);
+		this.buttonList.add(this.button);
 		this.button.enabled = false;
 	}
 
@@ -50,7 +51,7 @@ public class GuiFermentBarrel extends GuiCellar
 		this.button.enabled = this.te.isFluidTankFilled();
 	}
 
-	protected void actionPerformed(GuiButton button)
+	protected void actionPerformed(GuiButton butn)
 	{
 		GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButton(this.te.xCoord, this.te.yCoord, this.te.zCoord));
 	}
@@ -62,7 +63,7 @@ public class GuiFermentBarrel extends GuiCellar
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 
-		if (this.te.isFluidTankEmpty() == false)
+		if (!this.te.isFluidTankEmpty())
 		{
 			s = String.valueOf(this.te.getFluidAmount());
 			this.fontRendererObj.drawStringWithShadow(s, this.xSize - 62 - this.fontRendererObj.getStringWidth(s), this.ySize - 104, 0xFFFFFF);
@@ -74,8 +75,8 @@ public class GuiFermentBarrel extends GuiCellar
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(res);
-		int w = (this.width - this.xSize) / 2;
-		int h = (this.height - this.ySize) / 2;
+		final int w = (this.width - this.xSize) / 2;
+		final int h = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize);
 		int i;
 
@@ -87,30 +88,34 @@ public class GuiFermentBarrel extends GuiCellar
 				this.drawTexturedModalRect(w + 49, h + 20 + 29 - i, 176, 29 - i, 12, i);
 			}
 
-			int k1 = (this.te.getTime() / 2) % 7;
+			final int k1 = (this.te.getTime() / 2) % 7;
 
 			switch (k1)
 			{
-			case 0:
-				i = 0;
-				break;
-			case 1:
-				i = 6;
-				break;
-			case 2:
-				i = 11;
-				break;
-			case 3:
-				i = 16;
-				break;
-			case 4:
-				i = 20;
-				break;
-			case 5:
-				i = 24;
-				break;
-			case 6:
-				i = 29;
+				case 0:
+					i = 0;
+					break;
+				case 1:
+					i = 6;
+					break;
+				case 2:
+					i = 11;
+					break;
+				case 3:
+					i = 16;
+					break;
+				case 4:
+					i = 20;
+					break;
+				case 5:
+					i = 24;
+					break;
+				case 6:
+					i = 29;
+					break;
+				default:
+					i = 29;
+					break;
 			}
 
 			if (i > 0)
@@ -145,63 +150,68 @@ public class GuiFermentBarrel extends GuiCellar
 	protected void drawTank(int w, int h, int wp, int hp, int width, int amount, FluidStack fluidstack, CellarTank tank)
 	{
 		if (fluidstack == null) { return; }
-		int start = 0;
+
+		final Fluid fluid = fluidstack.getFluid();
+		final int color = fluid.getColor();
 
 		IIcon icon = null;
-		Fluid fluid = fluidstack.getFluid();
-		int color = fluid.getColor();
 		if (fluid != null && fluid.getStillIcon() != null)
 		{
 			icon = fluid.getStillIcon();
 		}
+
 		this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-		float r = (float)(color >> 16 & 255) / 255.0F;
-		float g = (float)(color >> 8 & 255) / 255.0F;
-		float b = (float)(color & 255) / 255.0F;
+
+		final float r = (float)(color >> 16 & 255) / 255.0F;
+		final float g = (float)(color >> 8 & 255) / 255.0F;
+		final float b = (float)(color & 255) / 255.0F;
 		GL11.glColor4f(r, g, b, 1.0f);
+
 		this.drawTexturedModelRectFromIcon(w + wp, h + hp + 52 - amount, icon, width, amount);
+
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	@Override
 	protected void drawToolTipAtMousePos(int par1, int par2)
 	{
-		int w = (this.width - this.xSize) / 2;
-		int h = (this.height - this.ySize) / 2;
+		final int w = (this.width - this.xSize) / 2;
+		final int h = (this.height - this.ySize) / 2;
 
 		if ((par1 > w + 63) && (par2 > h + 17) && (par1 < w + 63 + 50) && (par2 < h + 17 + 52))
 		{
-			ArrayList toolTip = new ArrayList();
+			final ArrayList<String> tooltip = new ArrayList<String>();
 
 			if (this.te.isFluidTankFilled())
 			{
 				if (CellarRegistry.instance().booze().isFluidBooze(this.te.getFluid()))
 				{
-					toolTip.add(this.te.getFluid().getLocalizedName());
-					Fluid fluid = CellarRegistry.instance().booze().maybeAlternateBooze(this.te.getFluid());
+					tooltip.add(this.te.getFluid().getLocalizedName());
+					final Fluid fluid = CellarRegistry.instance().booze().maybeAlternateBooze(this.te.getFluid());
 					final String s = UnitFormatter.fluidModifier(this.te.getFluid());
-					if (s != null) toolTip.add(s);
+					if (s != null) tooltip.add(s);
+
 					if (this.te.getBoozeMeta() > 3)
 					{
-						toolTip.add("");
-						toolTip.add(EnumChatFormatting.RED + I18n.format("gui.grc.cantferment"));
+						tooltip.add("");
+						tooltip.add(EnumChatFormatting.RED + I18n.format("gui.grc.cantferment"));
 					}
 				}
 				else
 				{
-					toolTip.add(this.te.getFluid().getLocalizedName());
-					toolTip.add("");
-					toolTip.add(EnumChatFormatting.RED + I18n.format("gui.grc.cantferment"));
+					tooltip.add(this.te.getFluid().getLocalizedName());
+					tooltip.add("");
+					tooltip.add(EnumChatFormatting.RED + I18n.format("gui.grc.cantferment"));
 				}
 			}
 
-			drawText(toolTip, par1, par2, this.fontRendererObj);
+			drawText(tooltip, par1, par2, this.fontRendererObj);
 		}
 		else if ((par1 > w + 116) && (par2 > h + 54) && (par1 < w + 116 + 16) && (par2 < h + 54 + 16))
 		{
-			ArrayList toolTip = new ArrayList();
-			toolTip.add(I18n.format("gui.grc.discard"));
-			drawText(toolTip, par1, par2, this.fontRendererObj);
+			final ArrayList<String> tooltip = new ArrayList<String>();
+			tooltip.add(I18n.format("gui.grc.discard"));
+			drawText(tooltip, par1, par2, this.fontRendererObj);
 		}
 	}
 }

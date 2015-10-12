@@ -47,7 +47,8 @@ public class BlockBeeHive extends Block
 	{
 		if (random.nextInt(24) == 0)
 		{
-			world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), "grcbees:buzz", 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
+			world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F),
+				"grcbees:buzz", 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
 		}
 	}
 
@@ -65,10 +66,10 @@ public class BlockBeeHive extends Block
 	{
 		if (!world.isRemote)
 		{
-			Block zneg = world.getBlock(x, y, z - 1);
-			Block zpos = world.getBlock(x, y, z + 1);
-			Block xneg = world.getBlock(x - 1, y, z);
-			Block xpos = world.getBlock(x + 1, y, z);
+			final Block zneg = world.getBlock(x, y, z - 1);
+			final Block zpos = world.getBlock(x, y, z + 1);
+			final Block xneg = world.getBlock(x - 1, y, z);
+			final Block xpos = world.getBlock(x + 1, y, z);
 			byte b0 = 3;
 
 			if (zneg.func_149730_j() && !zpos.func_149730_j())
@@ -98,7 +99,7 @@ public class BlockBeeHive extends Block
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
-		int face = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		final int face = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (face == 0)
 		{
@@ -163,7 +164,7 @@ public class BlockBeeHive extends Block
 	@Override
 	public Item getItemDropped(int par1, Random rand, int par3)
 	{
-		return GrowthCraftBees.bee;
+		return GrowthCraftBees.bee.getItem();
 	}
 
 	@Override
@@ -178,7 +179,7 @@ public class BlockBeeHive extends Block
 		super.dropBlockAsItemWithChance(world, x, y, z, par5, par6, 0);
 		if (!world.isRemote)
 		{
-			int max = new Random().nextInt(8);
+			final int max = new Random().nextInt(8);
 			if (max > 0)
 			{
 				for (int loop = 0; loop < max; loop++)
@@ -188,7 +189,7 @@ public class BlockBeeHive extends Block
 					{
 						m = 1;
 					}
-					this.dropBlockAsItem(world, x, y, z, new ItemStack(GrowthCraftBees.honeyComb, 1, m));
+					this.dropBlockAsItem(world, x, y, z, GrowthCraftBees.honeyComb.asStack(1, m));
 				}
 			}
 		}
@@ -248,15 +249,14 @@ public class BlockBeeHive extends Block
 	@Override
 	public void setBlockBoundsForItemRender()
 	{
-		float f = 0.0625F;
+		final float f = 0.0625F;
 		this.setBlockBounds(2*f, 0.0F, 2*f, 14*f, 1.0F, 14*f);
-		//		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	@Override
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
 	{
-		float f = 0.0625F;
+		final float f = 0.0625F;
 		this.setBlockBounds(4*f, 0.0F, 4*f, 12*f, 14*f, 12*f);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 		this.setBlockBounds(3*f, 1*f, 3*f, 13*f, 13*f, 13*f);
@@ -267,11 +267,4 @@ public class BlockBeeHive extends Block
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 		this.setBlockBoundsForItemRender();
 	}
-
-	//	@Override
-	//	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
-	//	{
-	//		float f = 0.0625F;
-	//		this.setBlockBounds(2*f, 0.0F, 2*f, 14*f, 1.0F, 14*f);
-	//	}
 }

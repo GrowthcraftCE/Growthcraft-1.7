@@ -12,7 +12,7 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderFishTrap implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer)
@@ -28,28 +28,28 @@ public class RenderFishTrap implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			int meta = world.getBlockMetadata(x, y, z);
+			final int meta = world.getBlockMetadata(x, y, z);
 			renderer.renderStandardBlock(block, x, y, z);
-			Tessellator tes = Tessellator.instance;
+			final Tessellator tes = Tessellator.instance;
 			tes.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
-			float f = 1.0F;
-			int color = block.colorMultiplier(world, x, y, z);
+			final float f = 1.0F;
+			final int color = block.colorMultiplier(world, x, y, z);
 			float r = (float)(color >> 16 & 255) / 255.0F;
 			float g = (float)(color >> 8 & 255) / 255.0F;
 			float b = (float)(color & 255) / 255.0F;
 
 			if (EntityRenderer.anaglyphEnable)
 			{
-				float f5 = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
-				float f4 = (r * 30.0F + g * 70.0F) / 100.0F;
-				float f6 = (r * 30.0F + b * 70.0F) / 100.0F;
+				final float f5 = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
+				final float f4 = (r * 30.0F + g * 70.0F) / 100.0F;
+				final float f6 = (r * 30.0F + b * 70.0F) / 100.0F;
 				r = f5;
 				g = f4;
 				b = f6;
 			}
 
 			tes.setColorOpaque_F(f * r, f * g, f * b);
-			float f2 = 1.0F - 0.125F;
+			final float f2 = 1.0F - 0.125F;
 			renderer.renderFaceXPos(block, (double)((float)x - f2), (double)y, (double)z, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
 			renderer.renderFaceXNeg(block, (double)((float)x + f2), (double)y, (double)z, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
 			renderer.renderFaceYPos(block, (double)x, (double)((float)y - f2), (double)z, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
@@ -77,5 +77,4 @@ public class RenderFishTrap implements ISimpleBlockRenderingHandler
 	{
 		return id;
 	}
-
 }

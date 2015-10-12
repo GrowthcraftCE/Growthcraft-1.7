@@ -6,7 +6,6 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.integration.waila.CellarDataProvider;
 import growthcraft.core.integration.WailaIntegrationBase;
 
-import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.Optional;
 
 import mcp.mobius.waila.api.IWailaDataProvider;

@@ -2,7 +2,7 @@ package growthcraft.bamboo.renderer;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.block.BlockBambooStalk;
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -23,21 +23,21 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		Tessellator tessellator = Tessellator.instance;
+		final Tessellator tessellator = Tessellator.instance;
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		tessellator.setColorOpaque_F(1.0f, 1.0f, 1.0f);
 		IIcon icon = BlockBambooStalk.tex[0];
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		Utils.drawFace("ypos", block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("yneg", block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.YPOS, block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.YNEG, block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
 
-		float d = 0.75F;
+		final float d = 0.75F;
 		icon = BlockBambooStalk.tex[2];
 		renderer.setRenderBounds(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
-		Utils.drawFace("zneg", block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("zpos", block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("xneg", block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("xpos", block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.ZNEG, block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.ZPOS, block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 	}
@@ -47,11 +47,11 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			Tessellator tessellator = Tessellator.instance;
+			final Tessellator tessellator = Tessellator.instance;
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
-			float f = 1.0F;
-			int meta = world.getBlockMetadata(x, y, z);
-			int color = 16777215;
+			final float f = 1.0F;
+			final int meta = world.getBlockMetadata(x, y, z);
+			int color = 0xFFFFFF;
 			if (meta == 0)
 			{
 				color = block.colorMultiplier(world, x, y, z);
@@ -63,9 +63,9 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 
 			if (EntityRenderer.anaglyphEnable)
 			{
-				float f5 = (f1 * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
+				final float f5 = (f1 * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
 				f4 = (f1 * 30.0F + f2 * 70.0F) / 100.0F;
-				float f6 = (f1 * 30.0F + f3 * 70.0F) / 100.0F;
+				final float f6 = (f1 * 30.0F + f3 * 70.0F) / 100.0F;
 				f1 = f5;
 				f2 = f4;
 				f3 = f6;
@@ -77,7 +77,7 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 			renderer.renderFaceYPos(block, (double)x, (double)((float)y), (double)z, icon);
 			renderer.renderFaceYNeg(block, (double)x, (double)((float)y), (double)z, icon);
 
-			float d = 0.75F;
+			final float d = 0.75F;
 			tessellator.setColorOpaque_F(f * f1 * d, f * f2 * d, f * f3 * d);
 			renderer.setRenderBounds(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
 			icon = BlockBambooStalk.tex[2];
@@ -92,54 +92,54 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 			{
 				if (this.canFence(world, x, y, z - 1))
 				{
-					renderFence(renderer, world, block, x, y, z, "zneg");
+					renderFence(renderer, world, block, x, y, z, RenderUtils.Face.ZNEG);
 				}
 				else if (this.canWall(world, x, y, z - 1))
 				{
-					renderWall(renderer, world, block, x, y, z, "zneg");
+					renderWall(renderer, world, block, x, y, z, RenderUtils.Face.ZNEG);
 				}
 				else if (this.canDoor(world, x, y, z - 1))
 				{
-					renderDoor(renderer, world, block, x, y, z, "zneg");
+					renderDoor(renderer, world, block, x, y, z, RenderUtils.Face.ZNEG);
 				}
 
 				if (this.canFence(world, x, y, z + 1))
 				{
-					renderFence(renderer, world, block, x, y, z, "zpos");
+					renderFence(renderer, world, block, x, y, z, RenderUtils.Face.ZPOS);
 				}
 				else if (this.canWall(world, x, y, z + 1))
 				{
-					renderWall(renderer, world, block, x, y, z, "zpos");
+					renderWall(renderer, world, block, x, y, z, RenderUtils.Face.ZPOS);
 				}
 				else if (this.canDoor(world, x, y, z + 1))
 				{
-					renderDoor(renderer, world, block, x, y, z, "zpos");
+					renderDoor(renderer, world, block, x, y, z, RenderUtils.Face.ZPOS);
 				}
 
 				if (this.canFence(world, x - 1, y, z))
 				{
-					renderFence(renderer, world, block, x, y, z, "xneg");
+					renderFence(renderer, world, block, x, y, z, RenderUtils.Face.XNEG);
 				}
 				else if (this.canWall(world, x - 1, y, z))
 				{
-					renderWall(renderer, world, block, x, y, z, "xneg");
+					renderWall(renderer, world, block, x, y, z, RenderUtils.Face.XNEG);
 				}
 				else if (this.canDoor(world, x - 1, y, z))
 				{
-					renderDoor(renderer, world, block, x, y, z, "xneg");
+					renderDoor(renderer, world, block, x, y, z, RenderUtils.Face.XNEG);
 				}
 
 				if (this.canFence(world, x + 1, y, z))
 				{
-					renderFence(renderer, world, block, x, y, z, "xpos");
+					renderFence(renderer, world, block, x, y, z, RenderUtils.Face.XPOS);
 				}
 				else if (this.canWall(world, x + 1, y, z))
 				{
-					renderWall(renderer, world, block, x, y, z, "xpos");
+					renderWall(renderer, world, block, x, y, z, RenderUtils.Face.XPOS);
 				}
 				else if (this.canDoor(world, x + 1, y, z))
 				{
-					renderDoor(renderer, world, block, x, y, z, "xpos");
+					renderDoor(renderer, world, block, x, y, z, RenderUtils.Face.XPOS);
 				}
 			}
 
@@ -151,12 +151,14 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 
 	private boolean canFence(IBlockAccess world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooFence || world.getBlock(x, y, z) == Blocks.fence_gate || world.getBlock(x, y, z) == GrowthCraftBamboo.bambooFenceGate;
+		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooFence.getBlock() ||
+			world.getBlock(x, y, z) == Blocks.fence_gate ||
+			world.getBlock(x, y, z) == GrowthCraftBamboo.bambooFenceGate.getBlock();
 	}
 
 	private boolean canWall(IBlockAccess world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooWall;
+		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooWall.getBlock();
 	}
 
 	private boolean canDoor(IBlockAccess world, int x, int y, int z)
@@ -164,7 +166,7 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 		return world.getBlock(x, y, z) instanceof BlockDoor;
 	}
 
-	private void renderFence(RenderBlocks renderer, IBlockAccess world, Block block, int x, int y, int z, String m)
+	private void renderFence(RenderBlocks renderer, IBlockAccess world, Block block, int x, int y, int z, RenderUtils.Face m)
 	{
 		renderer.setOverrideBlockTexture(BlockBambooStalk.tex[3]);
 		double x1 = x;
@@ -175,28 +177,28 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 		double y1 = 0.75D;
 		double y2 = 0.9375D;
 
-		if (m == "zneg")
+		if (m == RenderUtils.Face.ZNEG)
 		{
 			x1 = 0.4375D;
 			x2 = 0.5625D;
 			z1 = 0.0D;
 			z2 = 0.25D;
 		}
-		else if (m == "zpos")
+		else if (m == RenderUtils.Face.ZPOS)
 		{
 			x1 = 0.4375D;
 			x2 = 0.5625D;
 			z1 = 0.75D;
 			z2 = 1.0D;
 		}
-		else if (m == "xneg")
+		else if (m == RenderUtils.Face.XNEG)
 		{
 			z1 = 0.4375D;
 			z2 = 0.5625D;
 			x1 = 0.0D;
 			x2 = 0.25D;
 		}
-		else if (m == "xpos")
+		else if (m == RenderUtils.Face.XPOS)
 		{
 			z1 = 0.4375D;
 			z2 = 0.5625D;
@@ -210,28 +212,28 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 		y1 = 0.375D;
 		y2 = 0.5625D;
 
-		if (m == "zneg")
+		if (m == RenderUtils.Face.ZNEG)
 		{
 			x1 = 0.4375D;
 			x2 = 0.5625D;
 			z1 = 0.0D;
 			z2 = 0.25D;
 		}
-		else if (m == "zpos")
+		else if (m == RenderUtils.Face.ZPOS)
 		{
 			x1 = 0.4375D;
 			x2 = 0.5625D;
 			z1 = 0.75D;
 			z2 = 1.0D;
 		}
-		else if (m == "xneg")
+		else if (m == RenderUtils.Face.XNEG)
 		{
 			z1 = 0.4375D;
 			z2 = 0.5625D;
 			x1 = 0.0D;
 			x2 = 0.25D;
 		}
-		else if (m == "xpos")
+		else if (m == RenderUtils.Face.XPOS)
 		{
 			z1 = 0.4375D;
 			z2 = 0.5625D;
@@ -244,7 +246,7 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 		renderer.clearOverrideBlockTexture();
 	}
 
-	private void renderWall(RenderBlocks renderer, IBlockAccess world, Block block, int x, int y, int z, String m)
+	private void renderWall(RenderBlocks renderer, IBlockAccess world, Block block, int x, int y, int z, RenderUtils.Face m)
 	{
 		renderer.setOverrideBlockTexture(BlockBambooStalk.tex[4]);
 		double x1 = x;
@@ -252,31 +254,31 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 		double z1 = z;
 		double z2 = z + 1.0D;
 
-		double y1 = 0.0D;
-		double y2 = 1.0D;
+		final double y1 = 0.0D;
+		final double y2 = 1.0D;
 
-		if (m == "zneg")
+		if (m == RenderUtils.Face.ZNEG)
 		{
 			x1 = 0.375D;
 			x2 = 0.625D;
 			z1 = 0.0D;
 			z2 = 0.25D;
 		}
-		else if (m == "zpos")
+		else if (m == RenderUtils.Face.ZPOS)
 		{
 			x1 = 0.375D;
 			x2 = 0.625D;
 			z1 = 0.75D;
 			z2 = 1.0D;
 		}
-		else if (m == "xneg")
+		else if (m == RenderUtils.Face.XNEG)
 		{
 			z1 = 0.375D;
 			z2 = 0.625D;
 			x1 = 0.0D;
 			x2 = 0.25D;
 		}
-		else if (m == "xpos")
+		else if (m == RenderUtils.Face.XPOS)
 		{
 			z1 = 0.375D;
 			z2 = 0.625D;
@@ -289,7 +291,7 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 		renderer.clearOverrideBlockTexture();
 	}
 
-	private void renderDoor(RenderBlocks renderer, IBlockAccess world, Block block, int x, int y, int z, String m)
+	private void renderDoor(RenderBlocks renderer, IBlockAccess world, Block block, int x, int y, int z, RenderUtils.Face m)
 	{
 		renderer.setOverrideBlockTexture(BlockBambooStalk.tex[4]);
 		double x1 = x;
@@ -297,13 +299,13 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 		double z1 = z;
 		double z2 = z + 1.0D;
 
-		double y1 = 0.0D;
-		double y2 = 1.0D;
+		final double y1 = 0.0D;
+		final double y2 = 1.0D;
 
 		int tm0;
 		int tm;
 
-		if (m == "zneg")
+		if (m == RenderUtils.Face.ZNEG)
 		{
 			tm0 = world.getBlockMetadata(x, y, z - 1);
 			if ((tm0 & 8) > 7)
@@ -333,7 +335,7 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 		}
-		else if (m == "zpos")
+		else if (m == RenderUtils.Face.ZPOS)
 		{
 			tm0 = world.getBlockMetadata(x, y, z + 1);
 			if ((tm0 & 8) > 7)
@@ -364,7 +366,7 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 		}
-		else if (m == "xneg")
+		else if (m == RenderUtils.Face.XNEG)
 		{
 			tm0 = world.getBlockMetadata(x - 1, y, z);
 			if ((tm0 & 8) > 7)
@@ -396,7 +398,7 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 		}
-		else if (m == "xpos")
+		else if (m == RenderUtils.Face.XPOS)
 		{
 			tm0 = world.getBlockMetadata(x + 1, y, z);
 			if ((tm0 & 8) > 7)

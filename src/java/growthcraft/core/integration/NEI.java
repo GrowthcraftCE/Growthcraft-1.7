@@ -11,6 +11,8 @@ public class NEI
 {
 	static final String MOD_ID = "NotEnoughItems";
 
+	private NEI() {}
+
 	/**
 	 * @return true if NEI is available, false otherwise
 	 */

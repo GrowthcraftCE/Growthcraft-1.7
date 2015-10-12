@@ -2,10 +2,11 @@ package growthcraft.bamboo.block;
 
 import java.util.Random;
 
-import growthcraft.core.block.ICropDataProvider;
-import growthcraft.core.utils.BlockCheck;
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.world.WorldGenBamboo;
+import growthcraft.core.block.ICropDataProvider;
+import growthcraft.core.utils.BlockCheck;
+import growthcraft.core.utils.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,8 +23,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import net.minecraftforge.common.EnumPlantType;
-import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockBambooShoot extends BlockBush implements ICropDataProvider
@@ -40,7 +39,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 		this.setStepSound(soundTypeGrass);
 		this.setHardness(0.0F);
 		this.setTickRandomly(true);
-		float f = 0.4F;
+		final float f = 0.4F;
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 		this.setCreativeTab(null);
 		this.setBlockName("grc.bambooShoot");
@@ -100,7 +99,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		Block soil = world.getBlock(x, y - 1, z);
+		final Block soil = world.getBlock(x, y - 1, z);
 		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) &&
 			BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
 	}
@@ -112,12 +111,12 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftBamboo.bambooShootFood;
+		return GrowthCraftBamboo.bambooShootFood.getItem();
 	}
 
 	public void markOrGrowMarked(World world, int x, int y, int z, Random random)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
 
 		if (meta == 0)
 		{
@@ -133,16 +132,14 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 	{
 		if (!TerrainGen.saplingGrowTree(world, rand, x, y, z)) return;
 
-		int meta = world.getBlockMetadata(x, y, z) & 3;
-		Object object = new WorldGenBamboo(true);
-		int i1 = 0;
-		int j1 = 0;
+		final int meta = world.getBlockMetadata(x, y, z) & 3;
+		final WorldGenerator generator = new WorldGenBamboo(true);
 
-		world.setBlock(x, y, z, Blocks.air, 0, 4);
+		world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.ALL);
 
-		if (!((WorldGenerator)object).generate(world, rand, x + i1, y, z + j1))
+		if (!generator.generate(world, rand, x, y, z))
 		{
-			world.setBlock(x, y, z, this, meta, 4);
+			world.setBlock(x, y, z, this, meta, BlockFlags.ALL);
 		}
 	}
 
@@ -158,7 +155,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
-		return GrowthCraftBamboo.bambooShootFood;
+		return GrowthCraftBamboo.bambooShootFood.getItem();
 	}
 
 	/************

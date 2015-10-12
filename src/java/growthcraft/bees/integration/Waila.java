@@ -4,7 +4,6 @@ import growthcraft.core.integration.WailaIntegrationBase;
 import growthcraft.bees.block.BlockBeeBox;
 import growthcraft.bees.integration.waila.BeesDataProvider;
 
-import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.Optional;
 
 import mcp.mobius.waila.api.IWailaDataProvider;

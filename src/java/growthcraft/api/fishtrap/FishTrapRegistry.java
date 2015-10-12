@@ -11,6 +11,10 @@ import net.minecraft.world.World;
 public class FishTrapRegistry
 {
 	private static final FishTrapRegistry instance = new FishTrapRegistry();
+	private final List<FishTrapEntry> fishList = new ArrayList<FishTrapEntry>();
+	private final List<FishTrapEntry> treasureList = new ArrayList<FishTrapEntry>();
+	private final List<FishTrapEntry> junkList = new ArrayList<FishTrapEntry>();
+
 	public static final FishTrapRegistry instance()
 	{
 		return instance;
@@ -75,8 +79,4 @@ public class FishTrapRegistry
 	{
 		return this.getFishableEntry(world.rand, this.junkList);
 	}
-
-	final List<FishTrapEntry> fishList = new ArrayList<FishTrapEntry>();
-	final List<FishTrapEntry> treasureList = new ArrayList<FishTrapEntry>();
-	final List<FishTrapEntry> junkList = new ArrayList<FishTrapEntry>();
 }

@@ -1,15 +1,15 @@
 package growthcraft.core;
 
-import java.io.File;
-import growthcraft.core.ConfigBase;
 import net.minecraftforge.common.config.Configuration;
 
 public class Config extends ConfigBase
 {
+	// In case you don't have a wrench you can enable the amazing stick.
+	public boolean useAmazingStick;
 
+	@Override
 	protected void loadConfig()
 	{
-		// Nobody here but us chickens, quack?
-		// in anticipation for the loglevel variables, this will remain here.
+		this.useAmazingStick = config.get(Configuration.CATEGORY_GENERAL, "Use Amazing Stick", useAmazingStick, "so, I heard you didn't have a wrench, Default : " + useAmazingStick).getBoolean();
 	}
 }

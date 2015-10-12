@@ -1,41 +1,46 @@
 package growthcraft.fishtrap;
 
-import java.io.File;
-
 import growthcraft.api.fishtrap.FishTrapEntry;
 import growthcraft.api.fishtrap.FishTrapRegistry;
+import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.fishtrap.block.BlockFishTrap;
 import growthcraft.fishtrap.entity.TileEntityFishTrap;
 import growthcraft.fishtrap.gui.GuiHandlerFishTrap;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
+import cpw.mods.fml.common.SidedProxy;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-@Mod(modid = "Growthcraft|Fishtrap",name = "Growthcraft Fishtrap",version = "@VERSION@",dependencies = "required-after:Growthcraft")
+@Mod(
+	modid = GrowthCraftFishTrap.MOD_ID,
+	name = GrowthCraftFishTrap.MOD_NAME,
+	version = GrowthCraftFishTrap.MOD_VERSION,
+	dependencies = "required-after:Growthcraft"
+)
 public class GrowthCraftFishTrap
 {
+	public static final String MOD_ID = "Growthcraft|Fishtrap";
+	public static final String MOD_NAME = "Growthcraft Fishtrap";
+	public static final String MOD_VERSION = "@VERSION@";
+
 	@Instance("Growthcraft|Fishtrap")
 	public static GrowthCraftFishTrap instance;
 
 	@SidedProxy(clientSide="growthcraft.fishtrap.ClientProxy", serverSide="growthcraft.fishtrap.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static Block fishTrap;
+	public static BlockDefinition fishTrap;
 
 	private growthcraft.fishtrap.Config config;
 
@@ -53,12 +58,12 @@ public class GrowthCraftFishTrap
 		//====================
 		// INIT
 		//====================
-		fishTrap = new BlockFishTrap();
+		fishTrap = new BlockDefinition(new BlockFishTrap());
 
 		//====================
 		// REGISTRIES
 		//====================
-		GameRegistry.registerBlock(fishTrap, "grc.fishTrap");
+		GameRegistry.registerBlock(fishTrap.getBlock(), "grc.fishTrap");
 
 		GameRegistry.registerTileEntity(TileEntityFishTrap.class, "grc.tileentity.fishTrap");
 
@@ -91,7 +96,7 @@ public class GrowthCraftFishTrap
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fishTrap, 1), "ACA", "CBC", "ACA", 'A', "plankWood", 'B', Items.lead, 'C', Items.string));
+		GameRegistry.addRecipe(new ShapedOreRecipe(fishTrap.asStack(1), "ACA", "CBC", "ACA", 'A', "plankWood", 'B', Items.lead, 'C', Items.string));
 	}
 
 	@EventHandler
@@ -105,21 +110,5 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		/*String modid;
-
-		modid = "Thaumcraft";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				ThaumcraftApi.registerObjectTag(fishTrap.blockID, -1, new AspectList().add(Aspect.WATER, 2));
-
-				FMLLog.info("[Growthcraft|Fishtrap] Successfully integrated with Thaumcraft.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Fishtrap] Thaumcraft not found. No integration made.", new Object[0]);
-			}
-		}*/
 	}
 }

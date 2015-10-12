@@ -2,7 +2,6 @@ package growthcraft.cellar.item;
 
 import java.util.List;
 
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.utils.UnitFormatter;
 
@@ -10,18 +9,12 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 
 public class ItemBucketBooze extends ItemBucket
@@ -35,21 +28,21 @@ public class ItemBucketBooze extends ItemBucket
 	@SideOnly(Side.CLIENT)
 	private IIcon contents;
 
-	private int color = 16777215;
+	private int color = 0xFFFFFF;
 
-	public ItemBucketBooze(Block block, Fluid[] boozes, int index, CreativeTabs creativeTab)
+	public ItemBucketBooze(Block block, Fluid[] boozeAry, int indx, CreativeTabs creativeTab)
 	{
 		super(block);
 		setContainerItem(Items.bucket);
 		setUnlocalizedName("grc.boozeBucket");
 		setCreativeTab(creativeTab);
-		this.index = index;
-		this.boozes = boozes;
+		this.index = indx;
+		this.boozes = boozeAry;
 	}
 
-	public ItemBucketBooze(Block block, Fluid[] boozes, int index)
+	public ItemBucketBooze(Block block, Fluid[] boozeAry, int indx)
 	{
-		this(block, boozes, index, GrowthCraftCellar.tab);
+		this(block, boozeAry, indx, GrowthCraftCellar.tab);
 	}
 
 	public Fluid getBooze(int id)
@@ -63,9 +56,9 @@ public class ItemBucketBooze extends ItemBucket
 		return UnitFormatter.fluidBucketName(getBooze(index));
 	}
 
-	public ItemBucketBooze setColor(int color)
+	public ItemBucketBooze setColor(int kolor)
 	{
-		this.color = color;
+		this.color = kolor;
 		return this;
 	}
 
@@ -102,7 +95,7 @@ public class ItemBucketBooze extends ItemBucket
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int pass)
 	{
-		return pass == 1 ? this.color : 16777215;
+		return pass == 1 ? this.color : 0xFFFFFF;
 	}
 
 	@Override

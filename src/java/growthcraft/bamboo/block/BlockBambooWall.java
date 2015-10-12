@@ -47,18 +47,15 @@ public class BlockBambooWall extends Block
 
 	public boolean canConnectWallTo(IBlockAccess world, int x, int y, int z)
 	{
-		Block block = world.getBlock(x, y, z);
+		final Block block = world.getBlock(x, y, z);
 
-		if (block != this && block != Blocks.fence_gate && block != GrowthCraftBamboo.bambooFenceGate && block != GrowthCraftBamboo.bambooFence && block != GrowthCraftBamboo.bambooStalk)
-		{
-			//Block block = Block.blocksList[id];
-			//return block != null && block.blockMaterial.isOpaque() && block.renderAsNormalBlock() ? block.blockMaterial != Material.pumpkin : false;
-			return false;
-		}
-		else
-		{
-			return true;
-		}
+		if (this == block) return true;
+		if (Blocks.fence_gate == block) return true;
+		if (GrowthCraftBamboo.bambooFenceGate.getBlock() == block) return true;
+		if (GrowthCraftBamboo.bambooFence.getBlock() == block) return true;
+		if (GrowthCraftBamboo.bambooStalk.getBlock() == block) return true;
+
+		return false;
 	}
 
 	/************
@@ -117,20 +114,20 @@ public class BlockBambooWall extends Block
 	{
 		int tm;
 
-		Block idXneg = world.getBlock(x - 1, y, z);
-		Block idXpos = world.getBlock(x + 1, y, z);
-		Block idZneg = world.getBlock(x, y, z - 1);
-		Block idZpos = world.getBlock(x, y, z + 1);
+		final Block idXneg = world.getBlock(x - 1, y, z);
+		final Block idXpos = world.getBlock(x + 1, y, z);
+		final Block idZneg = world.getBlock(x, y, z - 1);
+		final Block idZpos = world.getBlock(x, y, z + 1);
 
 		int metaXneg = world.getBlockMetadata(x - 1, y, z);
 		int metaXpos = world.getBlockMetadata(x + 1, y, z);
 		int metaZneg = world.getBlockMetadata(x, y, z - 1);
 		int metaZpos = world.getBlockMetadata(x, y, z + 1);
 
-		boolean flagXneg = this.canConnectWallTo(world, x - 1, y, z) || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
-		boolean flagXpos = this.canConnectWallTo(world, x + 1, y, z) || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
-		boolean flagZneg = this.canConnectWallTo(world, x, y, z - 1) || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
-		boolean flagZpos = this.canConnectWallTo(world, x, y, z + 1) || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
+		final boolean flagXneg = this.canConnectWallTo(world, x - 1, y, z) || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
+		final boolean flagXpos = this.canConnectWallTo(world, x + 1, y, z) || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
+		final boolean flagZneg = this.canConnectWallTo(world, x, y, z - 1) || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
+		final boolean flagZpos = this.canConnectWallTo(world, x, y, z + 1) || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
 
 		float x1 = 0.375F;
 		float x2 = 0.625F;
@@ -265,20 +262,20 @@ public class BlockBambooWall extends Block
 	{
 		int tm;
 
-		Block idXneg = world.getBlock(x - 1, y, z);
-		Block idXpos = world.getBlock(x + 1, y, z);
-		Block idZneg = world.getBlock(x, y, z - 1);
-		Block idZpos = world.getBlock(x, y, z + 1);
+		final Block idXneg = world.getBlock(x - 1, y, z);
+		final Block idXpos = world.getBlock(x + 1, y, z);
+		final Block idZneg = world.getBlock(x, y, z - 1);
+		final Block idZpos = world.getBlock(x, y, z + 1);
 
 		int metaXneg = world.getBlockMetadata(x - 1, y, z);
 		int metaXpos = world.getBlockMetadata(x + 1, y, z);
 		int metaZneg = world.getBlockMetadata(x, y, z - 1);
 		int metaZpos = world.getBlockMetadata(x, y, z + 1);
 
-		boolean flagXneg = this.canConnectWallTo(world, x - 1, y, z) || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
-		boolean flagXpos = this.canConnectWallTo(world, x + 1, y, z) || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
-		boolean flagZneg = this.canConnectWallTo(world, x, y, z - 1) || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
-		boolean flagZpos = this.canConnectWallTo(world, x, y, z + 1) || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
+		final boolean flagXneg = this.canConnectWallTo(world, x - 1, y, z) || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
+		final boolean flagXpos = this.canConnectWallTo(world, x + 1, y, z) || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
+		final boolean flagZneg = this.canConnectWallTo(world, x, y, z - 1) || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
+		final boolean flagZpos = this.canConnectWallTo(world, x, y, z + 1) || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
 
 		float x1 = 0.375F;
 		float x2 = 0.625F;

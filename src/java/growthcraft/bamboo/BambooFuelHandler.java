@@ -1,7 +1,6 @@
 package growthcraft.bamboo;
 
 import cpw.mods.fml.common.IFuelHandler;
-import growthcraft.bamboo.block.BlockBambooSlab;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -12,21 +11,21 @@ public class BambooFuelHandler implements IFuelHandler
 	{
 		if (fuel != null)
 		{
-			Item item = fuel.getItem();
-			if (item == GrowthCraftBamboo.bambooCoal)
+			final Item item = fuel.getItem();
+			if (GrowthCraftBamboo.bambooCoal.equals(item))
 			{
 				return 800;
 			}
-			else if (item == GrowthCraftBamboo.bambooShootFood)
+			else if (GrowthCraftBamboo.bambooShootFood.equals(item))
 			{
 				return 100;
 			}
-			else if (item == Item.getItemFromBlock(GrowthCraftBamboo.bambooShoot))
+			else if (GrowthCraftBamboo.bambooShoot.getItem() == item)
 			{
 				return 100;
 			}
 			// Alatyami added per GitHub Issue #55
-			else if (item == Item.getItemFromBlock(GrowthCraftBamboo.bambooSingleSlab))
+			else if (GrowthCraftBamboo.bambooSingleSlab.getItem() == item)
 			{
 				return 150;
 			}

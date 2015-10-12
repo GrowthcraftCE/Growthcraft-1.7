@@ -19,6 +19,7 @@ buildscript {
 
 repositories {
     mavenLocal()
+    mavenCentral()
 
     maven {
         name = "AppleCore"
@@ -34,9 +35,20 @@ repositories {
         name "Mobius"
         url "http://mobiusstrip.eu/maven"
     }
+
+    ivy {
+        name "BuildCraft"
+        artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
+    }
 }
 
 apply plugin: 'forge'
+apply plugin: 'checkstyle'
+
+checkstyle {
+    toolVersion = "6.11.2"
+    configFile = new File(rootDir, "checkstyle/checkstyle.xml")
+}
 
 version = "${minecraft_version}-${growthcraft_version}"
 group= "mod.growthcraft"
@@ -81,6 +93,7 @@ dependencies {
     compile "codechicken:CodeChickenLib:${minecraft_version}-${code_chicken_lib_version}:dev"
     compile "codechicken:CodeChickenCore:${minecraft_version}-${code_chicken_core_version}:dev"
     compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
+    compile "com.mod-buildcraft:buildcraft:${bc_version}:dev"
 }
 
 // --------------------

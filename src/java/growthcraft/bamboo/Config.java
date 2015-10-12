@@ -1,6 +1,5 @@
 package growthcraft.bamboo;
 
-import java.io.File;
 import growthcraft.core.ConfigBase;
 import net.minecraftforge.common.config.Configuration;
 
@@ -11,7 +10,7 @@ public class Config extends ConfigBase
 	public int bambooBiomeID = 170;
 	// Ocean, Plains, Forest, River, ForestHills, Jungle, JungleHills, JungleEdge,JungleM, JungleEdgeM
 	public String bambooBiomesList = "0;1;4;7;18;21;22;23;149;151";
-	public boolean generateBambooYard = false;
+	public boolean generateBambooYard;
 	public int bambooShootGrowthRate = 7;
 	public int bambooStalkGrowthRate = 4;
 	public int bambooTreeMaxHeight = 256;

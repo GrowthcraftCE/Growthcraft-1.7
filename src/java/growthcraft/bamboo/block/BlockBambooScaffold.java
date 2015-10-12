@@ -34,7 +34,6 @@ public class BlockBambooScaffold extends Block
 		this.setHardness(0.5F);
 		this.setCreativeTab(GrowthCraftCore.tab);
 		this.setBlockName("grc.bambooScaffold");
-		//setBlockBounds(0.0F, 0.02083333F, 0.0F, 1.0F, 0.9791667F, 1.0F);
 	}
 
 	/************
@@ -51,26 +50,22 @@ public class BlockBambooScaffold extends Block
 	 ************/
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float float7, float float8, float float9)
 	{
-		ItemStack itemstack = player.inventory.getCurrentItem();
+		final ItemStack itemstack = player.inventory.getCurrentItem();
 		if (itemstack != null)
 		{
 			if (itemstack.getItem() == Item.getItemFromBlock(this))
 			{
-				int j = y + 1;
-				for (int loop = world.getActualHeight(); j < loop; j++)
+				final int loop = world.getActualHeight();
+				for (int j = y + 1; j < loop; j++)
 				{
-					Block block = world.getBlock(x, j, z);
+					final Block block = world.getBlock(x, j, z);
 					if ((block == null) || (world.isAirBlock(x, j, z)) || (block.isReplaceable(world, x, j, z)))
 					{
 						if (!world.isRemote)
 						{
-							if ((world.setBlock(x, j, z, this, 0, 3) & !player.capabilities.isCreativeMode))
+							if (world.setBlock(x, j, z, this, 0, 3) && !player.capabilities.isCreativeMode)
 							{
 								itemstack.stackSize -= 1;
-								if (itemstack.stackSize == 0)
-								{
-									itemstack = null;
-								}
 							}
 							return true;
 						}
@@ -88,7 +83,6 @@ public class BlockBambooScaffold extends Block
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block par5)
 	{
-		//world.scheduleBlockUpdate(x, y, z, this.blockID, 1);
 		if (!this.canBlockStay(world, x, y, z))
 		{
 			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
@@ -99,11 +93,6 @@ public class BlockBambooScaffold extends Block
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
-		/*if ((entity instanceof EntityPlayerMP))
-		{
-			((EntityPlayerMP)entity).playerNetServerHandler.floatingTickCount = 0;
-		}*/
-
 		entity.fallDistance = 0.0F;
 		if (entity.isCollidedHorizontally)
 		{
@@ -111,7 +100,7 @@ public class BlockBambooScaffold extends Block
 		}
 		else if (entity.isSneaking())
 		{
-			double d = entity.prevPosY - entity.posY;
+			final double d = entity.prevPosY - entity.posY;
 			entity.boundingBox.minY += d;
 			entity.boundingBox.maxY += d;
 			entity.posY = entity.prevPosY;
@@ -120,17 +109,6 @@ public class BlockBambooScaffold extends Block
 		{
 			entity.motionY = -0.1D;
 		}
-
-
-		/*entity.fallDistance = 0.0F;
-		if (entity.isCollidedHorizontally)
-		{
-			entity.motionY = 0.2D;
-		}
-		else
-		{
-			entity.motionY = 0.0D;
-		}*/
 	}
 
 	/************
@@ -153,10 +131,10 @@ public class BlockBambooScaffold extends Block
 
 	private boolean checkSides(World world, int x, int y, int z)
 	{
-		boolean flag = world.getBlock(x + 1, y, z) == this;
-		boolean flag1 = world.getBlock(x - 1, y, z) == this;
-		boolean flag2 = world.getBlock(x, y, z + 1) == this;
-		boolean flag3 = world.getBlock(x, y, z - 1) == this;
+		final boolean flag = world.getBlock(x + 1, y, z) == this;
+		final boolean flag1 = world.getBlock(x - 1, y, z) == this;
+		final boolean flag2 = world.getBlock(x, y, z + 1) == this;
+		final boolean flag3 = world.getBlock(x, y, z - 1) == this;
 
 		if (!flag && !flag1 && !flag2 && !flag3) return false;
 
@@ -176,16 +154,11 @@ public class BlockBambooScaffold extends Block
 	/************
 	 * STUFF
 	 ************/
-	/*@Override
-	public boolean isLadder(IBlockAccess world, int x, int y, int z, EntityLivingBase entity)
-	{
-		return true;
-	}*/
 
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
-		return side == ForgeDirection.UP;
+		return ForgeDirection.UP == side;
 	}
 
 	/************
@@ -236,45 +209,9 @@ public class BlockBambooScaffold extends Block
 		return true;
 	}
 
-	/************
-	 * BOXES
-	 ************/
-	/*@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_)
-	{
-		//float f = 0.0625F;
-		//float minz = f*5;
-		//float maxz = f*11;
-		//float minx = f*5;
-		//float maxx = f*11;
-
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-	}*/
-
-	/*@Override
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity)
-	{
-		float f = 0.0625F;
-		float minz = f*5;
-		float maxz = f*11;
-		float minx = f*5;
-		float maxx = f*11;
-
-		this.setBlockBounds(minx, 0.0F, minz, maxx, 1.0F, maxz);
-		AxisAlignedBB bb = getCollisionBoundingBoxFromPool(world, x, y, z);
-		if ((bb != null) && (aabb.intersectsWith(bb)))
-		{
-			list.add(bb);
-		}
-
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-	}*/
-
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
-		float f = 0.125F;
+		final float f = 0.125F;
 		return AxisAlignedBB.getBoundingBox(x + this.minX + f, y + this.minY, z + this.minZ + f, x + this.maxX - f, y + this.maxY, z + this.maxZ - f);
-		//float f = 0.1F;
-		//return AxisAlignedBB.getAABBPool().getAABB(x + f, y, z + f, x + 1 - f, y + 1, z + 1 - f);
 	}
 }

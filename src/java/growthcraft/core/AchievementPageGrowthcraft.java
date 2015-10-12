@@ -10,10 +10,13 @@ import net.minecraftforge.common.AchievementPage;
 public class AchievementPageGrowthcraft
 {
 	public static List chievMasterList = new ArrayList();
+	public static AchievementPage chievPage;
 
-	public static void init(AchievementPage chievPage)
+	private AchievementPageGrowthcraft() {}
+
+	public static void init()
 	{
-		Achievement[] chievList = new Achievement[chievMasterList.size()];
+		final Achievement[] chievList = new Achievement[chievMasterList.size()];
 		for(int i = 0; i < chievList.length; i++)
 		{
 			chievList[i] = (Achievement)chievMasterList.get(i);

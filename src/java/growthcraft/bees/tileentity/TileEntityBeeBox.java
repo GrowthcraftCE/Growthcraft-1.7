@@ -2,16 +2,20 @@ package growthcraft.bees.tileentity;
 
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.GrowthCraftBees;
+import growthcraft.core.utils.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 {
+	public static final int ANY_HONEYCOMB_TYPE = -1;
+	private static final int[] beeSlotIds = new int[] {0};
+	private static final int[] honeyCombSlotIds = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9 , 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
+
 	// Constants
 	private ItemStack[] invSlots   = new ItemStack[28];
 
@@ -46,6 +50,23 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		this.time = v;
 	}
 
+
+	public boolean slotHasHoneyComb(int index, int value)
+	{
+		final ItemStack slotItem = this.invSlots[index];
+		if (!GrowthCraftBees.honeyComb.equals(slotItem.getItem())) return false;
+		if (value != ANY_HONEYCOMB_TYPE)
+		{
+			return slotItem.getItemDamage() == value;
+		}
+		return true;
+	}
+
+	public boolean slotHasEmptyComb(int index)
+	{
+		return slotHasHoneyComb(index, 0);
+	}
+
 	//counts filled honeycombs only
 	public int countHoney()
 	{
@@ -54,7 +75,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		{
 			if (this.invSlots[i] != null)
 			{
-				if (this.invSlots[i].getItem() == GrowthCraftBees.honeyComb && this.invSlots[i].getItemDamage() == 1)
+				if (slotHasHoneyComb(i, 1))
 				{
 					count++;
 				}
@@ -71,7 +92,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		{
 			if (this.invSlots[i] != null)
 			{
-				if (this.invSlots[i].getItem() == GrowthCraftBees.honeyComb)
+				if (slotHasHoneyComb(i, ANY_HONEYCOMB_TYPE))
 				{
 					count++;
 				}
@@ -112,7 +133,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		{
 			if (this.invSlots[i] != null)
 			{
-				if (this.invSlots[i].getItem() == GrowthCraftBees.honeyComb && this.invSlots[i].getItemDamage() == 1)
+				if (slotHasHoneyComb(i, 1))
 				{
 					this.invSlots[i].setItemDamage(0);
 					count++;
@@ -130,7 +151,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		//		System.out.println("spawning bee");
 		if (this.invSlots[0] == null)
 		{
-			this.invSlots[0] = new ItemStack(GrowthCraftBees.bee);
+			this.invSlots[0] = GrowthCraftBees.bee.asStack();
 		}
 		else if (this.invSlots[0].stackSize != this.invSlots[0].getMaxStackSize())
 		{
@@ -145,7 +166,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		{
 			if (this.invSlots[i] == null)
 			{
-				this.invSlots[i] = new ItemStack(GrowthCraftBees.honeyComb);
+				this.invSlots[i] = GrowthCraftBees.honeyComb.asStack();
 				break;
 			}
 		}
@@ -156,9 +177,9 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		//		System.out.println("filling honey comb");
 		for (int i = 1; i < this.invSlots.length; ++i)
 		{
-			if (this.invSlots[i] != null && this.invSlots[i].getItem() == GrowthCraftBees.honeyComb && this.invSlots[i].getItemDamage() == 0)
+			if (this.invSlots[i] != null && slotHasEmptyComb(i))
 			{
-				this.invSlots[i] = new ItemStack(GrowthCraftBees.honeyComb, 1, 1);
+				this.invSlots[i] = GrowthCraftBees.honeyComb.asStack(1, 1);
 				break;
 			}
 		}
@@ -209,7 +230,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	{
 		if (this.invSlots[index] != null)
 		{
-			ItemStack itemstack = this.invSlots[index];
+			final ItemStack itemstack = this.invSlots[index];
 			this.invSlots[index] = null;
 			return itemstack;
 		}
@@ -245,7 +266,14 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		if (this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this)
+		{
+			return false;
+		}
+		else
+		{
+			return player.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		}
 	}
 
 	@Override
@@ -257,7 +285,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
 	{
-		return index == 0 ? BeesRegistry.instance().isItemBee(itemstack) : itemstack.getItem() == GrowthCraftBees.honeyComb;
+		return index == 0 ? BeesRegistry.instance().isItemBee(itemstack) : GrowthCraftBees.honeyComb.equals(itemstack.getItem());
 	}
 
 	/************
@@ -267,20 +295,8 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		NBTTagList tags = nbt.getTagList("items", 10);
 		this.invSlots = new ItemStack[this.getSizeInventory()];
-
-		for (int i = 0; i < tags.tagCount(); ++i)
-		{
-			NBTTagCompound nbttagcompound1 = tags.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < this.invSlots.length)
-			{
-				this.invSlots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
-
+		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
 		this.time = nbt.getShort("time");
 		if (nbt.hasKey("name"))
 		{
@@ -292,22 +308,8 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
+		nbt.setTag("items", NBTHelper.writeInventorySlotsToNBT(invSlots));
 		nbt.setShort("time", (short)this.time);
-		NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < this.invSlots.length; ++i)
-		{
-			if (this.invSlots[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				this.invSlots[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-
-		nbt.setTag("items", nbttaglist);
-
 		if (this.hasCustomInventoryName())
 		{
 			nbt.setString("name", this.name);
@@ -359,7 +361,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 	{
-		return side == 1 ?  new int[] {0} : new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9 , 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
+		return side == 1 ? beeSlotIds : honeyCombSlotIds;
 	}
 
 	@Override

@@ -3,11 +3,9 @@ package growthcraft.bamboo.village;
 import java.util.List;
 import java.util.Random;
 import java.util.HashMap;
-import java.lang.Math;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.world.WorldGenBamboo;
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.utils.SchemaToVillage.BlockEntry;
 import growthcraft.core.utils.SchemaToVillage.IBlockEntries;
 import growthcraft.core.utils.SchemaToVillage;
@@ -24,8 +22,9 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 public class ComponentVillageBambooYard extends StructureVillagePieces.Village implements SchemaToVillage.IVillage
 {
 	// Design by Ar97x
-	static private final String bambooYardSchema[][] = {
-		{ // y: -1
+	private static final String[][] bambooYardSchema = {
+		{
+			// y: -1
 			"           ",
 			"           ",
 			"           ",
@@ -39,7 +38,8 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 			"           ",
 			"           "
 		},
-		{ // y: 0
+		{
+			// y: 0
 			"    pDp    ",
 			"ppppp ppppp",
 			"p         p",
@@ -53,7 +53,8 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 			"p         p",
 			"ppppppppppp"
 		},
-		{ // y: 1
+		{
+			// y: 1
 			"    WdW    ",
 			"W   W W   W",
 			"           ",
@@ -67,7 +68,8 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 			"           ",
 			"W         W"
 		},
-		{ // y: 2
+		{
+			// y: 2
 			"    WWW    ",
 			"WWWWW WWWWW",
 			"W         W",
@@ -83,7 +85,9 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		},
 	};
 
-	public ComponentVillageBambooYard() {} // DO NOT REMOVE
+	// DO NOT REMOVE
+	public ComponentVillageBambooYard() {}
+
 	public ComponentVillageBambooYard(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
 	{
 		super(startPiece, par2);
@@ -94,7 +98,7 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 	public static ComponentVillageBambooYard buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
 		// the height of the structure is 15 blocks, since the maximum height of bamboo is 12~14 blocks (+1 for the water layer)
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 16, 12, coordBaseMode);
+		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 16, 12, coordBaseMode);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
 				return new ComponentVillageBambooYard(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -109,16 +113,16 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 	}
 
 	protected void placeWorldGenAt(World world, Random random, int tx, int ty, int tz, StructureBoundingBox bb, WorldGenerator generator)
-    {
-        int x = this.getXWithOffset(tx, tz);
-        int y = this.getYWithOffset(ty);
-        int z = this.getZWithOffset(tx, tz);
+	{
+		final int x = this.getXWithOffset(tx, tz);
+		final int y = this.getYWithOffset(ty);
+		final int z = this.getZWithOffset(tx, tz);
 
-        if (bb.isVecInside(x, y, z))
-        {
-            generator.generate(world, random, x, y, z);
-        }
-    }
+		if (bb.isVecInside(x, y, z))
+		{
+			generator.generate(world, random, x, y, z);
+		}
+	}
 
 	public boolean addComponentParts(World world, Random random, StructureBoundingBox box)
 	{
@@ -139,20 +143,22 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		this.fillWithBlocks(world, box, 0, 0, 0, 11, 4, 12, Blocks.air, Blocks.air, false);
 		this.fillWithBlocks(world, box, 0, 0, 0, 11, 0, 12, Blocks.grass, Blocks.grass, false);
 
-		HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
+		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 
-		map.put('D', new BlockEntry(GrowthCraftBamboo.bambooDoor, this.getMetadataWithOffset(GrowthCraftBamboo.bambooDoor, 2))); // okay folks, no BIG D jokes here
-		map.put('d', new BlockEntry(GrowthCraftBamboo.bambooDoor, this.getMetadataWithOffset(GrowthCraftBamboo.bambooDoor, 8 | 1))); // top of the door brought forward
-		map.put('p', new BlockEntry(GrowthCraftBamboo.bambooBlock, 0));
-		map.put('s', new BlockEntry(GrowthCraftBamboo.bambooSingleSlab, 0));
+		// okay folks, no BIG D jokes here
+		map.put('D', new BlockEntry(GrowthCraftBamboo.bambooDoor.getBlock(), this.getMetadataWithOffset(GrowthCraftBamboo.bambooDoor.getBlock(), 2)));
+		// top of the door brought forward
+		map.put('d', new BlockEntry(GrowthCraftBamboo.bambooDoor.getBlock(), this.getMetadataWithOffset(GrowthCraftBamboo.bambooDoor.getBlock(), 8 | 1)));
+		map.put('p', new BlockEntry(GrowthCraftBamboo.bambooBlock.getBlock(), 0));
+		map.put('s', new BlockEntry(GrowthCraftBamboo.bambooSingleSlab.getBlock(), 0));
 		map.put('t', new BlockEntry(Blocks.torch, 0));
 		map.put('~', new BlockEntry(Blocks.water, 0));
-		map.put('W', new BlockEntry(GrowthCraftBamboo.bambooWall, 0));
+		map.put('W', new BlockEntry(GrowthCraftBamboo.bambooWall.getBlock(), 0));
 
 		SchemaToVillage.drawSchema(this, world, random, box, bambooYardSchema, map);
 
 		// This places the bamboo trees to the best of its ability.
-		WorldGenBamboo genBamboo = new WorldGenBamboo(true);
+		final WorldGenBamboo genBamboo = new WorldGenBamboo(true);
 		placeWorldGenAt(world, random, 4, 1, 4, box, genBamboo);
 		placeWorldGenAt(world, random, 6, 1, 4, box, genBamboo);
 		placeWorldGenAt(world, random, 3, 1, 5, box, genBamboo);

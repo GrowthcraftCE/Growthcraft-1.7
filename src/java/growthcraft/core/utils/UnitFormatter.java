@@ -10,9 +10,15 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
+/**
+ * Utility class for formatting data into strings for descriptions, item names
+ * and othre nicities
+ */
 public class UnitFormatter
 {
 	public static final String fractionSeparator = EnumChatFormatting.GRAY + " / ";
+
+	private UnitFormatter() {}
 
 	public static String fraction(String... args)
 	{

@@ -1,6 +1,5 @@
 package growthcraft.cellar;
 
-import java.io.File;
 import growthcraft.core.ConfigBase;
 import net.minecraftforge.common.config.Configuration;
 

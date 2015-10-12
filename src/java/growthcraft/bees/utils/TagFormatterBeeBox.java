@@ -6,13 +6,12 @@ import growthcraft.core.utils.ITagFormatter;
 import growthcraft.core.utils.UnitFormatter;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
 public class TagFormatterBeeBox implements ITagFormatter
 {
-	public final static TagFormatterBeeBox INSTANCE = new TagFormatterBeeBox();
+	public static final TagFormatterBeeBox INSTANCE = new TagFormatterBeeBox();
 
 	public List<String> format(List<String> list, NBTTagCompound tag)
 	{

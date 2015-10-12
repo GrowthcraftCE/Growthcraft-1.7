@@ -2,9 +2,9 @@ package growthcraft.core.integration.waila;
 
 import java.util.List;
 
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.block.ICropDataProvider;
-import growthcraft.core.utils.TagFormatterFluidHandler;
-import growthcraft.core.utils.ConstID;
+import growthcraft.core.utils.ItemUtils;
 
 import cpw.mods.fml.common.Optional;
 
@@ -16,15 +16,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 
 public class CropDataProvider implements IWailaDataProvider
 {
@@ -47,6 +43,16 @@ public class CropDataProvider implements IWailaDataProvider
 	public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		final Block block = accessor.getBlock();
+		if (itemStack != null)
+		{
+			if (GrowthCraftCore.getConfig().useAmazingStick)
+			{
+				if (ItemUtils.isAmazingStick(itemStack))
+				{
+					tooltip.add("So, I heard you didn't have a wrench");
+				}
+			}
+		}
 		if (block instanceof ICropDataProvider)
 		{
 			final ICropDataProvider	prov = (ICropDataProvider)block;

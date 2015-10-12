@@ -1,6 +1,5 @@
 package growthcraft.rice;
 
-import java.io.File;
 import growthcraft.core.ConfigBase;
 import net.minecraftforge.common.config.Configuration;
 
@@ -9,7 +8,7 @@ public class Config extends ConfigBase
 	public float riceGrowthRate = 25.0f;
 	public int riceSeedDropRarity = 3;
 	public int riceSakeBrewingTime = 20;
-	public boolean generateRiceFieldStructure = false;
+	public boolean generateRiceFieldStructure;
 	public final int paddyFieldMax = 7;
 	public final int riceSakeColor = 0xE9EFF7;
 

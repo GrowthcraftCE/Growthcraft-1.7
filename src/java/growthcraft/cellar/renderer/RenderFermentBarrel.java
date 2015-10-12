@@ -1,7 +1,7 @@
 package growthcraft.cellar.renderer;
 
 import growthcraft.cellar.block.BlockFermentBarrel;
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -21,75 +21,75 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 	{
 		if (modelID == id)
 		{
-			Tessellator tes = Tessellator.instance;
-			IIcon[] icon = {BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[1], BlockFermentBarrel.tex[1]};
-			double d = 0.0625D;
-			float f = 0.125F;
+			final Tessellator tes = Tessellator.instance;
+			final IIcon[] icon = {BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[1], BlockFermentBarrel.tex[1]};
+			final double d = 0.0625D;
+			final float f = 0.125F;
 			renderer.uvRotateEast = 3;
 			//inner wall
 			setRenderBounds(renderer, 0*d, 16*d, 1*d, 2*d, 5*d, 11*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 0*d, 16*d, 2*d, 3*d, 11*d, 13*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 0*d, 16*d, 3*d, 5*d, 13*d, 14*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 0*d, 16*d, 5*d, 11*d, 14*d, 15*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 0*d, 16*d, 11*d, 13*d, 13*d, 14*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 0*d, 16*d, 13*d, 14*d, 11*d, 13*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 0*d, 16*d, 14*d, 15*d, 5*d, 11*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer,  0*d, 16*d, 13*d, 14*d,3*d, 5*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 0*d, 16*d, 11*d, 13*d, 2*d, 3*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 0*d, 16*d, 5*d, 11*d, 1*d, 2*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 0*d, 16*d, 3*d, 5*d, 2*d, 3*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 0*d, 16*d, 2*d, 3*d, 3*d, 5*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			//outer wall
 			setRenderBounds(renderer, 4*d, 12*d, 0*d, 1*d, 5*d, 11*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 1*d, 2*d, 11*d, 13*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 2*d, 3*d, 13*d, 14*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 3*d, 5*d, 14*d, 15*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 5*d, 11*d, 15*d, 16*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 11*d, 13*d, 14*d, 15*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 13*d, 14*d, 13*d, 14*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 14*d, 15*d, 11*d, 13*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 15*d, 16*d, 5*d, 11*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 14*d, 15*d, 3*d, 5*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 13*d, 14*d, 2*d, 3*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 11*d, 13*d, 1*d, 2*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 5*d, 11*d, 0*d, 1*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 3*d, 5*d, 1*d, 2*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 2*d, 3*d, 2*d, 3*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			setRenderBounds(renderer, 4*d, 12*d, 1*d, 2*d, 3*d, 5*d);
-			Utils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
 			renderer.uvRotateEast = 0;
 
 			renderer.setRenderBounds(1*d, 0.0D, 0.0D, 15*d, 1.0D, 1.0D);
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-			Utils.drawFace("xpos", block, renderer, tes, BlockFermentBarrel.tex[2], 0.0D, 0.0D, 0.0D);
-			Utils.drawFace("xneg", block, renderer, tes, BlockFermentBarrel.tex[3], 0.0D, 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tes, BlockFermentBarrel.tex[2], 0.0D, 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tes, BlockFermentBarrel.tex[3], 0.0D, 0.0D, 0.0D);
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -101,9 +101,9 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			IIcon[] icon = {BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[1], BlockFermentBarrel.tex[2], BlockFermentBarrel.tex[3]};
-			int meta = world.getBlockMetadata(x, y, z);
-			double d = 0.0625D;
+			final IIcon[] icon = {BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[1], BlockFermentBarrel.tex[2], BlockFermentBarrel.tex[3]};
+			final int meta = world.getBlockMetadata(x, y, z);
+			final double d = 0.0625D;
 
 			if (meta == 0 || meta == 1)
 			{

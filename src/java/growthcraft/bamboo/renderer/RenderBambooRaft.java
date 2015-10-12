@@ -1,6 +1,5 @@
 package growthcraft.bamboo.renderer;
 
-import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.entity.EntityBambooRaft;
 import growthcraft.bamboo.model.ModelBambooRaft;
 
@@ -33,7 +32,7 @@ public class RenderBambooRaft extends Render
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float)x, (float)y, (float)z);
 		GL11.glRotatef(180.0F - par8, 0.0F, 1.0F, 0.0F);
-		float f2 = (float)entity.getTimeSinceHit() - par9;
+		final float f2 = (float)entity.getTimeSinceHit() - par9;
 		float f3 = entity.getDamageTaken() - par9;
 
 		if (f3 < 0.0F)
@@ -46,7 +45,7 @@ public class RenderBambooRaft extends Render
 			GL11.glRotatef(MathHelper.sin(f2) * f2 * f3 / 10.0F * (float)entity.getForwardDirection(), 1.0F, 0.0F, 0.0F);
 		}
 
-		float f4 = 0.75F;
+		final float f4 = 0.75F;
 		GL11.glScalef(f4, f4, f4);
 		GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
 		this.bindEntityTexture(entity);
@@ -60,5 +59,4 @@ public class RenderBambooRaft extends Render
 	{
 		return res;
 	}
-
 }

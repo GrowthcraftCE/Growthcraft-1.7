@@ -2,11 +2,12 @@ package growthcraft.cellar.util;
 
 import growthcraft.cellar.GrowthCraftCellar;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class CellarUtil
 {
+	private CellarUtil() {}
+
 	/**
 	 * Determines if the given item stack is a residue item
 	 *
@@ -15,9 +16,10 @@ public class CellarUtil
 	 */
 	public static boolean itemIsResidue(ItemStack stack)
 	{
-		if (stack != null){
-			return stack.getItem() == GrowthCraftCellar.residue.getItem() &&
-				stack.getItemDamage() == GrowthCraftCellar.residue.getItemDamage();
+		if (stack != null)
+		{
+			return GrowthCraftCellar.residue.getItem() == stack.getItem() &&
+				GrowthCraftCellar.residue.getItemDamage() == stack.getItemDamage();
 		}
 		return false;
 	}

@@ -1,8 +1,7 @@
 package growthcraft.rice.renderer;
 
-import growthcraft.core.Utils;
+import growthcraft.core.utils.RenderUtils;
 import growthcraft.rice.ClientProxy;
-import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.block.BlockPaddy;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -18,75 +17,74 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderPaddy implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		Tessellator tes = Tessellator.instance;
+		final Tessellator tes = Tessellator.instance;
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		Utils.drawFace("yneg", block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("ypos", block, renderer, tes, BlockPaddy.tex[1], 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("zneg", block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("zpos", block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("xneg", block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		Utils.drawFace("xpos", block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.YNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.YPOS, block, renderer, tes, BlockPaddy.tex[1], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.ZNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.ZPOS, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
+		final double thick = 0.125D;
+		final double y1 = 0.875D;
+		final double y2 = 1.0D;
 		double i1 = 0.0D;
 		double i2 = 1.0D;
-		double j1 = 0.875D;
-		double j2 = 1.0D;
 		double k1 = 0.0D;
 		double k2 = 1.0D;
-
-		double thick = 0.125D;
 
 		i1 = 1.0D - thick;
 		i2 = 1.0D;
 		k1 = 0.0D + thick;
 		k2 = 1.0D - thick;
 
-		renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
 		i1 = 0.0D;
 		i2 = 0.0D + thick;
 		k1 = 0.0D + thick;
 		k2 = 1.0D - thick;
 
-		renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
 		i1 = 0.0D + thick;
 		i2 = 1.0D - thick;
 		k1 = 1.0D - thick;
 		k2 = 1.0D;
 
-		renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
 		i1 = 0.0D + thick;
 		i2 = 1.0D - thick;
 		k1 = 0.0D;
 		k2 = 0.0D + thick;
 
-		renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
 		//corners
-		renderer.setRenderBounds(0.0D, j1, 0.0D, 0.0D + thick, j2, 0.0D + thick);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		renderer.setRenderBounds(0.0D, y1, 0.0D, 0.0D + thick, y2, 0.0D + thick);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
-		renderer.setRenderBounds(1.0D - thick, j1, 0.0D, 1.0D, j2, 0.0D + thick);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		renderer.setRenderBounds(1.0D - thick, y1, 0.0D, 1.0D, y2, 0.0D + thick);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
-		renderer.setRenderBounds(0.0D, j1, 1.0D - thick, 0.0D + thick, j2, 1.0D);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		renderer.setRenderBounds(0.0D, y1, 1.0D - thick, 0.0D + thick, y2, 1.0D);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 
-		renderer.setRenderBounds(1.0D - thick, j1, 1.0D - thick, 1.0D, j2, 1.0D);
-		Utils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+		renderer.setRenderBounds(1.0D - thick, y1, 1.0D - thick, 1.0D, y2, 1.0D);
+		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 	}
 
@@ -95,7 +93,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			int meta = world.getBlockMetadata(x, y, z);
+			final int meta = world.getBlockMetadata(x, y, z);
 			// temporary fix
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
 			renderer.renderStandardBlock(block, x, y, z);
@@ -103,7 +101,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 
 			renderer.renderAllFaces = true;
 
-			if(ClientProxy.renderPass == 0)
+			if (ClientProxy.renderPass == 0)
 			{
 				// main block
 				renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
@@ -114,84 +112,84 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 
 				double i1 = 0.0D;
 				double i2 = 1.0D;
-				double j1 = 0.875D;
-				double j2 = 1.0D;
+				final double y1 = 0.875D;
+				final double y2 = 1.0D;
 				double k1 = 0.0D;
 				double k2 = 1.0D;
 
-				double thick = 0.125D;
+				final double thick = 0.125D;
 
-				boolean boolXPos = ((BlockPaddy)block).canConnectPaddyTo(world, x + 1, y, z, meta);
-				boolean boolXNeg = ((BlockPaddy)block).canConnectPaddyTo(world, x - 1, y, z, meta);
-				boolean boolYPos = ((BlockPaddy)block).canConnectPaddyTo(world, x, y, z + 1, meta);
-				boolean boolYNeg = ((BlockPaddy)block).canConnectPaddyTo(world, x, y, z - 1, meta);
+				final boolean boolXPos = ((BlockPaddy)block).canConnectPaddyTo(world, x + 1, y, z, meta);
+				final boolean boolXNeg = ((BlockPaddy)block).canConnectPaddyTo(world, x - 1, y, z, meta);
+				final boolean boolYPos = ((BlockPaddy)block).canConnectPaddyTo(world, x, y, z + 1, meta);
+				final boolean boolYNeg = ((BlockPaddy)block).canConnectPaddyTo(world, x, y, z - 1, meta);
 
-				if (boolXPos == false)
+				if (!boolXPos)
 				{
 					i1 = 1.0D - thick;
 					i2 = 1.0D;
 					k1 = 0.0D + thick;
 					k2 = 1.0D - thick;
 
-					renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
+					renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
 					renderer.renderStandardBlock(block, x, y, z);
 				}
 
-				if (boolXNeg == false)
+				if (!boolXNeg)
 				{
 					i1 = 0.0D;
 					i2 = 0.0D + thick;
 					k1 = 0.0D + thick;
 					k2 = 1.0D - thick;
 
-					renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
+					renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
 					renderer.renderStandardBlock(block, x, y, z);
 				}
 
-				if (boolYPos == false)
+				if (!boolYPos)
 				{
 					i1 = 0.0D + thick;
 					i2 = 1.0D - thick;
 					k1 = 1.0D - thick;
 					k2 = 1.0D;
 
-					renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
+					renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
 					renderer.renderStandardBlock(block, x, y, z);
 				}
 
-				if (boolYNeg == false)
+				if (!boolYNeg)
 				{
 					i1 = 0.0D + thick;
 					i2 = 1.0D - thick;
 					k1 = 0.0D;
 					k2 = 0.0D + thick;
 
-					renderer.setRenderBounds(i1, j1, k1, i2, j2, k2);
+					renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
 					renderer.renderStandardBlock(block, x, y, z);
 				}
 
 				//corners
-				if ((((BlockPaddy)block).canConnectPaddyTo(world, x - 1, y, z - 1, meta) == false) || (boolXNeg == false) || (boolYNeg == false))
+				if ((!((BlockPaddy)block).canConnectPaddyTo(world, x - 1, y, z - 1, meta)) || (!boolXNeg) || (!boolYNeg))
 				{
-					renderer.setRenderBounds(0.0D, j1, 0.0D, 0.0D + thick, j2, 0.0D + thick);
+					renderer.setRenderBounds(0.0D, y1, 0.0D, 0.0D + thick, y2, 0.0D + thick);
 					renderer.renderStandardBlock(block, x, y, z);
 				}
 
-				if ((((BlockPaddy)block).canConnectPaddyTo(world, x + 1, y, z - 1, meta) == false) || (boolXPos == false) || (boolYNeg == false))
+				if ((!((BlockPaddy)block).canConnectPaddyTo(world, x + 1, y, z - 1, meta)) || (!boolXPos) || (!boolYNeg))
 				{
-					renderer.setRenderBounds(1.0D - thick, j1, 0.0D, 1.0D, j2, 0.0D + thick);
+					renderer.setRenderBounds(1.0D - thick, y1, 0.0D, 1.0D, y2, 0.0D + thick);
 					renderer.renderStandardBlock(block, x, y, z);
 				}
 
-				if ((((BlockPaddy)block).canConnectPaddyTo(world, x - 1, y, z + 1, meta) == false) || (boolXNeg == false) || (boolYPos == false))
+				if ((!((BlockPaddy)block).canConnectPaddyTo(world, x - 1, y, z + 1, meta)) || (!boolXNeg) || (!boolYPos))
 				{
-					renderer.setRenderBounds(0.0D, j1, 1.0D - thick, 0.0D + thick, j2, 1.0D);
+					renderer.setRenderBounds(0.0D, y1, 1.0D - thick, 0.0D + thick, y2, 1.0D);
 					renderer.renderStandardBlock(block, x, y, z);
 				}
 
-				if ((((BlockPaddy)block).canConnectPaddyTo(world, x + 1, y, z + 1, meta) == false) || (boolXPos == false) || (boolYPos == false))
+				if ((!((BlockPaddy)block).canConnectPaddyTo(world, x + 1, y, z + 1, meta)) || (!boolXPos) || (!boolYPos))
 				{
-					renderer.setRenderBounds(1.0D - thick, j1, 1.0D - thick, 1.0D, j2, 1.0D);
+					renderer.setRenderBounds(1.0D - thick, y1, 1.0D - thick, 1.0D, y2, 1.0D);
 					renderer.renderStandardBlock(block, x, y, z);
 				}
 
@@ -202,14 +200,12 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 				// water
 				if (meta > 0)
 				{
-					Tessellator tessellator = Tessellator.instance;
+					final Tessellator tessellator = Tessellator.instance;
 					//tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 					tessellator.setBrightness(this.mixedBrightness(world, x, y, z));
 
-					float f = 1.0F;
-					//int color = block.colorMultiplier(world, x, y, z);
-					int color = this.colorMultiplier(world, x, y, z);
-					//int l = 5461345; //6973773;//16752000;//12345183;//12326936;//16758432;
+					final float f = 1.0F;
+					final int color = this.colorMultiplier(world, x, y, z);
 					float r = (float)(color >> 16 & 255) / 255.0F;
 					float g = (float)(color >> 8 & 255) / 255.0F;
 					float b = (float)(color & 255) / 255.0F;
@@ -217,17 +213,16 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 
 					if (EntityRenderer.anaglyphEnable)
 					{
-						float f5 = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
+						final float f5 = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
 						f4 = (r * 30.0F + g * 70.0F) / 100.0F;
-						float f6 = (r * 30.0F + b * 70.0F) / 100.0F;
+						final float f6 = (r * 30.0F + b * 70.0F) / 100.0F;
 						r = f5;
 						g = f4;
 						b = f6;
 					}
 
 					tessellator.setColorOpaque_F(f * r, f * g, f * b);
-					//Icon icon = GrowthCraftCore.liquidSmoothTexture;
-					IIcon icon = Blocks.water.getBlockTextureFromSide(1);
+					final IIcon icon = Blocks.water.getBlockTextureFromSide(1);
 					renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 					renderer.renderFaceYPos(block, (double)x, (double)((float)y - 0.0625F), (double)z, icon);
 				}
@@ -248,10 +243,10 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 		{
 			for (int l1 = -1; l1 <= 1; ++l1)
 			{
-				int i2 = world.getBiomeGenForCoords(x + l1, z + k1).getWaterColorMultiplier();
+				final int i2 = world.getBiomeGenForCoords(x + l1, z + k1).getWaterColorMultiplier();
 				l += (i2 & 16711680) >> 16;
-			i1 += (i2 & 65280) >> 8;
-			j1 += i2 & 255;
+				i1 += (i2 & 65280) >> 8;
+				j1 += i2 & 255;
 			}
 		}
 
@@ -260,22 +255,24 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 
 	private int mixedBrightness(IBlockAccess world, int x, int y, int z)
 	{
-		int l = world.getLightBrightnessForSkyBlocks(x, y, z, 0);
-		int i1 = world.getLightBrightnessForSkyBlocks(x, y + 1, z, 0);
-		int j1 = l & 255;
-		int k1 = i1 & 255;
-		int l1 = l >> 16 & 255;
-		int i2 = i1 >> 16 & 255;
+		final int l = world.getLightBrightnessForSkyBlocks(x, y, z, 0);
+		final int i1 = world.getLightBrightnessForSkyBlocks(x, y + 1, z, 0);
+		final int j1 = l & 255;
+		final int k1 = i1 & 255;
+		final int l1 = l >> 16 & 255;
+		final int i2 = i1 >> 16 & 255;
 		return (j1 > k1 ? j1 : k1) | (l1 > i2 ? l1 : i2) << 16;
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelID) { return true; }
+	public boolean shouldRender3DInInventory(int modelID)
+	{
+		return true;
+	}
 
 	@Override
 	public int getRenderId()
 	{
 		return id;
 	}
-
 }

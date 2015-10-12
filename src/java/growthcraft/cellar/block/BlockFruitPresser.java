@@ -2,6 +2,7 @@ package growthcraft.cellar.block;
 
 import java.util.Random;
 
+import growthcraft.core.utils.BlockFlags;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.renderer.RenderFruitPresser;
 import growthcraft.cellar.tileentity.TileEntityFruitPresser;
@@ -48,8 +49,9 @@ public class BlockFruitPresser extends BlockContainer
 			case 2:
 			case 3:
 				return "pressed";
+			default:
+				return "invalid";
 		}
-		return "invalid";
 	}
 
 	/************
@@ -65,8 +67,8 @@ public class BlockFruitPresser extends BlockContainer
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
 		super.onBlockAdded(world, x, y, z);
-		int m = world.getBlockMetadata(x,  y - 1, z);
-		world.setBlockMetadataWithNotify(x, y, z, m, 2);
+		final int m = world.getBlockMetadata(x,  y - 1, z);
+		world.setBlockMetadataWithNotify(x, y, z, m, BlockFlags.UPDATE_CLIENT);
 
 		if (!world.isRemote)
 		{
@@ -77,8 +79,8 @@ public class BlockFruitPresser extends BlockContainer
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
-		int m = world.getBlockMetadata(x,  y - 1, z);
-		world.setBlockMetadataWithNotify(x, y, z, m, 2);
+		final int m = world.getBlockMetadata(x,  y - 1, z);
+		world.setBlockMetadataWithNotify(x, y, z, m, BlockFlags.UPDATE_CLIENT);
 
 		if (!world.isRemote)
 		{
@@ -102,17 +104,17 @@ public class BlockFruitPresser extends BlockContainer
 
 	private void updatePressState(World world, int x, int y, int z)
 	{
-		int     meta = world.getBlockMetadata(x, y, z);
-		boolean flag = world.isBlockIndirectlyGettingPowered(x, y, z);
+		final int     meta = world.getBlockMetadata(x, y, z);
+		final boolean flag = world.isBlockIndirectlyGettingPowered(x, y, z);
 
 		if (flag && (meta == 0 || meta == 1))
 		{
-			world.setBlockMetadataWithNotify(x, y, z, meta | 2, 2);
+			world.setBlockMetadataWithNotify(x, y, z, meta | 2, BlockFlags.UPDATE_CLIENT);
 			world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "tile.piston.out", 0.5F, world.rand.nextFloat() * 0.25F + 0.6F);
 		}
 		else if (!flag && (meta == 2 || meta == 3))
 		{
-			world.setBlockMetadataWithNotify(x, y, z, meta & 1, 2);
+			world.setBlockMetadataWithNotify(x, y, z, meta & 1, BlockFlags.UPDATE_CLIENT);
 			world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "tile.piston.in", 0.5F, world.rand.nextFloat() * 0.15F + 0.6F);
 		}
 
@@ -125,21 +127,21 @@ public class BlockFruitPresser extends BlockContainer
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y - 1, z) == GrowthCraftCellar.fruitPress;
+		return GrowthCraftCellar.fruitPress.getBlock() == world.getBlock(x, y - 1, z);
 	}
 
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
 
 		if (meta == 0 || meta == 2)
 		{
-			return (side == side.EAST || side == side.WEST);
+			return side == side.EAST || side == side.WEST;
 		}
 		else if (meta == 1 || meta == 3)
 		{
-			return (side == side.NORTH || side == side.SOUTH);
+			return side == side.NORTH || side == side.SOUTH;
 		}
 
 		return isNormalCube(world, x, y, z);
@@ -152,7 +154,7 @@ public class BlockFruitPresser extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return Item.getItemFromBlock(GrowthCraftCellar.fruitPress);
+		return GrowthCraftCellar.fruitPress.getItem();
 	}
 
 	@Override

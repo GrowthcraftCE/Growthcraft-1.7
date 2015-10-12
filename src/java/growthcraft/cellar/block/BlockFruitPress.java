@@ -6,11 +6,11 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.renderer.RenderFruitPress;
 import growthcraft.cellar.tileentity.TileEntityFruitPress;
 import growthcraft.core.Utils;
+import growthcraft.core.utils.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,11 +26,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockFruitPress extends BlockContainer implements ICellarFluidHandler
+public class BlockFruitPress extends BlockCellarContainer implements ICellarFluidHandler
 {
-	private final Random rand = new Random();
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
+
+	private final Random rand = new Random();
 
 	public BlockFruitPress()
 	{
@@ -42,23 +43,44 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 		this.setCreativeTab(GrowthCraftCellar.tab);
 	}
 
+	private Block getPresserBlock()
+	{
+		return GrowthCraftCellar.fruitPresser.getBlock();
+	}
+
+	public boolean isRotatable()
+	{
+		return true;
+	}
+
+	public void doRotateBlock(World world, int x, int y, int z, ForgeDirection side)
+	{
+		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) ^ 1, BlockFlags.SEND_TO_CLIENT);
+		world.setBlockMetadataWithNotify(x, y + 1, z, world.getBlockMetadata(x, y + 1, z) ^ 1, BlockFlags.SEND_TO_CLIENT);
+	}
+
 	/************
 	 * TRIGGERS
 	 ************/
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
+		if (useWrenchItem(player, world, x, y, z))
+		{
+			return true;
+		}
+
 		if (world.isRemote)
 		{
 			return true;
 		}
 		else
 		{
-			TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
+			final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
 
 			if (te != null)
 			{
-				ItemStack itemstack = player.inventory.getCurrentItem();
+				final ItemStack itemstack = player.inventory.getCurrentItem();
 				if (!Utils.drainTank(world, x, y, z, te, itemstack, player, false, 64, 0.35F))
 				{
 					openGui(player, world, x, y, z);
@@ -78,17 +100,17 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 	{
 		super.onBlockAdded(world, x, y, z);
 		this.setDefaultDirection(world, x, y, z);
-		world.setBlock(x, y + 1, z, GrowthCraftCellar.fruitPresser, world.getBlockMetadata(x, y, z), 2);
+		world.setBlock(x, y + 1, z, getPresserBlock(), world.getBlockMetadata(x, y, z), 2);
 	}
 
 	private void setDefaultDirection(World world, int x, int y, int z)
 	{
 		if (!world.isRemote)
 		{
-			Block block = world.getBlock(x, y, z - 1);
-			Block block1 = world.getBlock(x, y, z + 1);
-			Block block2 = world.getBlock(x - 1, y, z);
-			Block block3 = world.getBlock(x + 1, y, z);
+			final Block block = world.getBlock(x, y, z - 1);
+			final Block block1 = world.getBlock(x, y, z + 1);
+			final Block block2 = world.getBlock(x - 1, y, z);
+			final Block block3 = world.getBlock(x + 1, y, z);
 			byte meta = 3;
 
 			if (block.func_149730_j() && !block1.func_149730_j())
@@ -111,36 +133,25 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 				meta = 4;
 			}
 
-			world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_CLIENT);
 		}
 	}
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
-		int a = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		final int a = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-		if (a == 0)
+		if (a == 0 || a == 2)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 0, 2);
+			world.setBlockMetadataWithNotify(x, y, z, 0, BlockFlags.SEND_TO_CLIENT);
+		}
+		else if (a == 1 || a == 3)
+		{
+			world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SEND_TO_CLIENT);
 		}
 
-		if (a == 1)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 1, 2);
-		}
-
-		if (a == 2)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 0, 2);
-		}
-
-		if (a == 3)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 1, 2);
-		}
-
-		world.setBlock(x, y + 1, z, GrowthCraftCellar.fruitPresser, world.getBlockMetadata(x, y, z), 2);
+		world.setBlock(x, y + 1, z, getPresserBlock(), world.getBlockMetadata(x, y, z), BlockFlags.SEND_TO_CLIENT);
 
 		if (stack.hasDisplayName())
 		{
@@ -151,7 +162,7 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 	@Override
 	public void onBlockHarvested(World world, int x, int y, int z, int m, EntityPlayer player)
 	{
-		if (player.capabilities.isCreativeMode && (m & 8) != 0 && world.getBlock(x, y + 1, z) == GrowthCraftCellar.fruitPresser)
+		if (player.capabilities.isCreativeMode && (m & 8) != 0 && presserIsAbove(world, x, y, z))
 		{
 			world.func_147480_a(x, y + 1, z, true);
 			world.getTileEntity(x, y + 1, z).invalidate();
@@ -170,19 +181,19 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int par6)
 	{
-		TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
+		final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
 
 		if (te != null)
 		{
 			for (int index = 0; index < te.getSizeInventory(); ++index)
 			{
-				ItemStack stack = te.getStackInSlot(index);
+				final ItemStack stack = te.getStackInSlot(index);
 
 				if (stack != null)
 				{
-					float f = this.rand.nextFloat() * 0.8F + 0.1F;
-					float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-					float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
 
 					while (stack.stackSize > 0)
 					{
@@ -194,14 +205,14 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 						}
 
 						stack.stackSize -= k1;
-						EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
+						final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
 
 						if (stack.hasTagCompound())
 						{
 							entityitem.getEntityItem().setTagCompound((NBTTagCompound)stack.getTagCompound().copy());
 						}
 
-						float f3 = 0.05F;
+						final float f3 = 0.05F;
 						entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
 						entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
 						entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
@@ -222,15 +233,15 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
 
 		if (meta == 0)
 		{
-			return (side == side.EAST || side == side.WEST);
+			return side == side.EAST || side == side.WEST;
 		}
 		else if (meta == 1)
 		{
-			return (side == side.NORTH || side == side.SOUTH);
+			return side == side.NORTH || side == side.SOUTH;
 		}
 
 		return isNormalCube(world, x, y, z);
@@ -239,23 +250,40 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 	/************
 	 * STUFF
 	 ************/
+
+	/**
+	 * @param world - world block is in
+	 * @param x - x coord
+	 * @param y - y coord
+	 * @param z - z coord
+	 * @return true if the BlockFruitPresser is above this block, false otherwise
+	 */
+	public boolean presserIsAbove(World world, int x, int y, int z)
+	{
+		return getPresserBlock() == world.getBlock(x, y + 1, z);
+	}
+
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y + 1, z) == GrowthCraftCellar.fruitPresser;
+		return presserIsAbove(world, x, y, z);
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
-		return y >= 255 ? false : World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && super.canPlaceBlockAt(world, x, y, z) && super.canPlaceBlockAt(world, x, y + 1, z);
+		if (y >= 255) return false;
+
+		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) &&
+			super.canPlaceBlockAt(world, x, y, z) &&
+			super.canPlaceBlockAt(world, x, y + 1, z);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return Item.getItemFromBlock(GrowthCraftCellar.fruitPress);
+		return GrowthCraftCellar.fruitPress.getItem();
 	}
 
 	@Override
@@ -270,11 +298,11 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 	@Override
 	public Item getItemDropped(int par1, Random random, int par3)
 	{
-		return Item.getItemFromBlock(GrowthCraftCellar.fruitPress);
+		return GrowthCraftCellar.fruitPress.getItem();
 	}
 
 	@Override
-	public int quantityDropped(Random rand)
+	public int quantityDropped(Random random)
 	{
 		return 1;
 	}
@@ -339,7 +367,11 @@ public class BlockFruitPress extends BlockContainer implements ICellarFluidHandl
 	@Override
 	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
 	{
-		TileEntityFruitPress te = (TileEntityFruitPress) world.getTileEntity(x, y, z);
-		return te.getFluidAmountScaled(15);
+		final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
+		if (te != null)
+		{
+			return te.getFluidAmountScaled(15);
+		}
+		return 0;
 	}
 }

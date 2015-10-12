@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.grapes.GrowthCraftGrapes;
-import growthcraft.grapes.village.ComponentVillageGrapeVineyard;
 
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
@@ -23,9 +22,9 @@ public class VillageHandlerGrapes implements IVillageTradeHandler, IVillageCreat
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
 	{
 		//		recipeList.add(new MerchantRecipe(new ItemStack(GrowthCraftGrapes.grapes, 18 + random.nextInt(3)), new ItemStack(Item.emerald, 1)));
-		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1 + random.nextInt(2)), new ItemStack(GrowthCraftGrapes.grapeWine, 1, 1)));
-		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2 + random.nextInt(2)), new ItemStack(GrowthCraftGrapes.grapeWine, 1, 2)));
-		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2 + random.nextInt(2)), new ItemStack(GrowthCraftGrapes.grapeWine, 1, 3)));
+		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1 + random.nextInt(2)), GrowthCraftGrapes.grapeWine.asStack(1, 1)));
+		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2 + random.nextInt(2)), GrowthCraftGrapes.grapeWine.asStack(1, 2)));
+		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2 + random.nextInt(2)), GrowthCraftGrapes.grapeWine.asStack(1, 3)));
 	}
 
 	@Override

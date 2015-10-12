@@ -1,8 +1,9 @@
 package growthcraft.cellar.tileentity;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.container.ContainerFermentBarrel;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.utils.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -11,7 +12,6 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -23,15 +23,15 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class TileEntityFermentBarrel extends TileEntity implements ISidedInventory, IFluidHandler
 {
 	// Constants
-	private ItemStack[] invSlots   = new ItemStack[1];
-	private int         maxCap     = GrowthCraftCellar.getConfig().fermentBarrelMaxCap;
-	private CellarTank   tank      = new CellarTank(this.maxCap, this);
-	private int timemax  = GrowthCraftCellar.getConfig().fermentSpeed;
 
 	// Other Vars.
-	private String  name;
-	protected int   time     = 0;
-	protected boolean update = false;
+	protected int time;
+	protected boolean update;
+	private ItemStack[] invSlots = new ItemStack[1];
+	private int maxCap = GrowthCraftCellar.getConfig().fermentBarrelMaxCap;
+	private CellarTank tank = new CellarTank(this.maxCap, this);
+	private int timemax = GrowthCraftCellar.getConfig().fermentSpeed;
+	private String name;
 
 	/************
 	 * UPDATE
@@ -86,8 +86,8 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 		if (isFluidTankEmpty()) return false;
 		if (!CellarRegistry.instance().booze().isFluidBooze(getFluid()))return false;
 
-		Item item = this.invSlots[0].getItem();
-		int meta = CellarRegistry.instance().booze().getBoozeIndex(getFluid());
+		final Item item = this.invSlots[0].getItem();
+		final int meta = CellarRegistry.instance().booze().getBoozeIndex(getFluid());
 
 		if (meta == 3)
 		{
@@ -111,9 +111,9 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 
 	public void fermentItem()
 	{
-		Item item = this.invSlots[0].getItem();
-		int meta = CellarRegistry.instance().booze().getBoozeIndex(getFluid());
-		Fluid[] fluidArray = CellarRegistry.instance().booze().getBoozeArray(getFluid());
+		final Item item = this.invSlots[0].getItem();
+		final int meta = CellarRegistry.instance().booze().getBoozeIndex(getFluid());
+		final Fluid[] fluidArray = CellarRegistry.instance().booze().getBoozeArray(getFluid());
 
 		if (meta == 0 && item == Items.nether_wart)
 		{
@@ -198,7 +198,7 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	{
 		if (this.invSlots[index] != null)
 		{
-			ItemStack itemstack = this.invSlots[index];
+			final ItemStack itemstack = this.invSlots[index];
 			this.invSlots[index] = null;
 			return itemstack;
 		}
@@ -246,7 +246,7 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
 	{
-		Item item = itemstack.getItem();
+		final Item item = itemstack.getItem();
 		return index == 0 ? item == Items.nether_wart || item == Items.redstone || item == Items.glowstone_dust : false;
 	}
 
@@ -275,19 +275,9 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		//INVENTORY
-		NBTTagList inv_tags = nbt.getTagList("items", 10);
+		// INVENTORY
 		this.invSlots = new ItemStack[this.getSizeInventory()];
-		for (int i = 0; i < inv_tags.tagCount(); ++i)
-		{
-			NBTTagCompound inv_compound = inv_tags.getCompoundTagAt(i);
-			byte b0 = inv_compound.getByte("Slot");
-
-			if (b0 >= 0 && b0 < this.invSlots.length)
-			{
-				this.invSlots[b0] = ItemStack.loadItemStackFromNBT(inv_compound);
-			}
-		}
+		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
 
 		//TANKS
 		readTankFromNBT(nbt);
@@ -314,19 +304,8 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		//INVENTORY
-		NBTTagList inv_tags = new NBTTagList();
-		for (int i = 0; i < this.invSlots.length; ++i)
-		{
-			if (this.invSlots[i] != null)
-			{
-				NBTTagCompound inv_tagcompound = new NBTTagCompound();
-				inv_tagcompound.setByte("Slot", (byte)i);
-				this.invSlots[i].writeToNBT(inv_tagcompound);
-				inv_tags.appendTag(inv_tagcompound);
-			}
-		}
-		nbt.setTag("items", inv_tags);
+		// INVENTORY
+		nbt.setTag("items", NBTHelper.writeInventorySlotsToNBT(invSlots));
 
 		//TANKS
 		writeTankToNBT(nbt);
@@ -342,7 +321,7 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 
 	protected void writeTankToNBT(NBTTagCompound nbt)
 	{
-		NBTTagCompound tag = new NBTTagCompound();
+		final NBTTagCompound tag = new NBTTagCompound();
 		this.tank.writeToNBT(tag);
 		nbt.setTag("Tank", tag);
 	}
@@ -379,30 +358,35 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	{
 		switch (id)
 		{
-		case 0:
-			time = v;
-			break;
-		case 1:
-			if (FluidRegistry.getFluid(v) == null) {
-				return;
-			}
-			if (tank.getFluid() == null)
-			{
-				tank.setFluid(new FluidStack(v, 0));
-			} else
-			{
-				tank.setFluid(new FluidStack(v, tank.getFluid().amount));
-			}
-			break;
-		case 2:
-			if (tank.getFluid() == null)
-			{
-				tank.setFluid(new FluidStack(FluidRegistry.WATER, v));
-			} else
-			{
-				tank.getFluid().amount = v;
-			}
-			break;
+			case 0:
+				time = v;
+				break;
+			case 1:
+				if (FluidRegistry.getFluid(v) == null)
+				{
+					return;
+				}
+				if (tank.getFluid() == null)
+				{
+					tank.setFluid(new FluidStack(v, 0));
+				}
+				else
+				{
+					tank.setFluid(new FluidStack(v, tank.getFluid().amount));
+				}
+				break;
+			case 2:
+				if (tank.getFluid() == null)
+				{
+					tank.setFluid(new FluidStack(FluidRegistry.WATER, v));
+				}
+				else
+				{
+					tank.getFluid().amount = v;
+				}
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -413,31 +397,13 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 		iCrafting.sendProgressBarUpdate(container, 2, tank.getFluid() != null ? tank.getFluid().amount : 0);
 	}
 
-	/*@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		writeTankToNBT(nbt);
-		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 5, nbt);
-	}
-
-	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet)
-	{
-		readTankFromNBT(packet.data);
-		//this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
-	}*/
-
-
 	/************
 	 * FLUID
 	 ************/
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
-		int f = this.tank.fill(resource, doFill);
-		//this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-		return f;
+		return this.tank.fill(resource, doFill);
 	}
 
 	@Override
@@ -455,8 +421,7 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		FluidStack d = this.tank.drain(maxDrain, doDrain);
-		//this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+		final FluidStack d = this.tank.drain(maxDrain, doDrain);
 		return d;
 	}
 
@@ -516,6 +481,5 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	public void clearTank()
 	{
 		this.tank.setFluid(null);
-		//this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 	}
 }

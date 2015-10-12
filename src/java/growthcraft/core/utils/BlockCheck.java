@@ -1,16 +1,40 @@
 package growthcraft.core.utils;
 
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.block.IBlockRope;
-import growthcraft.core.block.BlockRope;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockCheck
 {
+	private BlockCheck() {}
+
+	/**
+	 * Determines if block is a water block
+	 *
+	 * @param block - the block to check
+	 * @return true if the block is a water, false otherwise
+	 */
+	public static boolean isWater(Block block)
+	{
+		if (block == null) return false;
+		return block.getMaterial() == Material.water;
+	}
+
+	/**
+	 * Determines if block is a rope block
+	 *
+	 * @param block - the block to check
+	 * @return true if the block is a Rope, false otherwise
+	 */
+	public static boolean isRope(Block block)
+	{
+		return GrowthCraftCore.ropeBlock.equals(block);
+	}
+
 	/**
 	 * Determines if block at the specified location is a valid rope block
 	 *
@@ -22,12 +46,12 @@ public class BlockCheck
 	 */
 	public static boolean isRope(IBlockAccess world, int x, int y, int z)
 	{
-		Block block = world.getBlock(x, y, z);
+		final Block block = world.getBlock(x, y, z);
 		// TODO: IBlockRope is used for any block which can grow on Ropes,
 		// as well as Ropes themselves, we need someway to seperate them,
 		// either, IBlockRope.isRope(world, x, y, z) OR an additional interface
 		// IBlockRopeCrop, IRope
-		return GrowthCraftCore.ropeBlock == block;
+		return isRope(block);
 	}
 
 	/**
@@ -45,7 +69,7 @@ public class BlockCheck
 	 */
 	public static boolean canSustainPlantOn(IBlockAccess world, int x, int y, int z, ForgeDirection dir, IPlantable plant, Block soil)
 	{
-		return (soil != null && soil.canSustainPlant(world, x, y, z, dir, plant));
+		return soil != null && soil.canSustainPlant(world, x, y, z, dir, plant);
 	}
 
 	/**
@@ -62,7 +86,7 @@ public class BlockCheck
 	 */
 	public static boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection dir, IPlantable plant)
 	{
-		Block soil = world.getBlock(x, y, z);
+		final Block soil = world.getBlock(x, y, z);
 		return canSustainPlantOn(world, x, y, z, dir, plant, soil);
 	}
 
@@ -79,7 +103,7 @@ public class BlockCheck
 	 */
 	public static Block getFarmableBlock(IBlockAccess world, int x, int y, int z, ForgeDirection dir, IPlantable plant)
 	{
-		Block soil = world.getBlock(x, y, z);
+		final Block soil = world.getBlock(x, y, z);
 		if (canSustainPlantOn(world, x, y, z, dir, plant, soil))
 			return soil;
 		return null;

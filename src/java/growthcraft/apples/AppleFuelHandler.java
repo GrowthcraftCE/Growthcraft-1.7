@@ -10,16 +10,17 @@ import net.minecraft.item.ItemStack;
  */
 public class AppleFuelHandler implements IFuelHandler
 {
-    @Override
-    public int getBurnTime(ItemStack fuel)
-    {
-        if (fuel != null)
-        {
-            Item item = fuel.getItem();
-            if (item == Item.getItemFromBlock(GrowthCraftApples.appleSapling)) {
-                return 100;
-            }
-        }
-        return 0;
-    }
+	@Override
+	public int getBurnTime(ItemStack fuel)
+	{
+		if (fuel != null)
+		{
+			final Item item = fuel.getItem();
+			if (GrowthCraftApples.appleSapling.equals(item))
+			{
+				return 100;
+			}
+		}
+		return 0;
+	}
 }

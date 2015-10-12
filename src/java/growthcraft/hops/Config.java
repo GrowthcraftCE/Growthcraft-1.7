@@ -1,6 +1,5 @@
 package growthcraft.hops;
 
-import java.io.File;
 import growthcraft.core.ConfigBase;
 import net.minecraftforge.common.config.Configuration;
 
@@ -12,7 +11,6 @@ public class Config extends ConfigBase
 	public int hopAleBrewTime = 20;
 	public int hopAleHoppedBrewTime = 20;
 	public boolean generateHopVineyardStructure = true;
-
 	public final int hopAleColor = 0xCACA47;
 
 	protected void loadConfig()

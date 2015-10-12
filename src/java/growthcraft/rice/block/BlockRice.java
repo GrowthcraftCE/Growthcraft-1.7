@@ -6,11 +6,10 @@ import java.util.Random;
 import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.rice.GrowthCraftRice;
-import growthcraft.rice.block.IPaddyCrop;
 import growthcraft.rice.renderer.RenderRice;
+import growthcraft.rice.utils.RiceBlockCheck;
 
 import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -25,11 +24,10 @@ import net.minecraft.world.World;
 
 public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 {
-	//Constants
-	private final float growth = GrowthCraftRice.getConfig().riceGrowthRate;
-
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
+
+	private final float growth = GrowthCraftRice.getConfig().riceGrowthRate;
 
 	public BlockRice()
 	{
@@ -48,7 +46,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
-		int previousMetadata = meta;
+		final int previousMetadata = meta;
 		++meta;
 		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
@@ -64,15 +62,15 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 
 		if (world.getBlockLightValue(x, y + 1, z) >= 9 && world.getBlockMetadata(x, y - 1, z) > 0)
 		{
-			Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);
+			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);
 			if (allowGrowthResult == Event.Result.DENY)
 				return;
 
-			int meta = world.getBlockMetadata(x, y, z);
+			final int meta = world.getBlockMetadata(x, y, z);
 
 			if (meta < 7)
 			{
-				float f = this.getGrowthRate(world, x, y, z);
+				final float f = this.getGrowthRate(world, x, y, z);
 
 				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.growth / f) + 1) == 0))
 				{
@@ -86,26 +84,26 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 	private float getGrowthRate(World world, int x, int y, int z)
 	{
 		float f = 1.0F;
-		Block l = world.getBlock(x, y, z - 1);
-		Block i1 = world.getBlock(x, y, z + 1);
-		Block j1 = world.getBlock(x - 1, y, z);
-		Block k1 = world.getBlock(x + 1, y, z);
-		Block l1 = world.getBlock(x - 1, y, z - 1);
-		Block i2 = world.getBlock(x + 1, y, z - 1);
-		Block j2 = world.getBlock(x + 1, y, z + 1);
-		Block k2 = world.getBlock(x - 1, y, z + 1);
-		boolean flag = j1 == this || k1 == this;
-		boolean flag1 = l == this || i1 == this;
-		boolean flag2 = l1 == this || i2 == this || j2 == this || k2 == this;
+		final Block l = world.getBlock(x, y, z - 1);
+		final Block i1 = world.getBlock(x, y, z + 1);
+		final Block j1 = world.getBlock(x - 1, y, z);
+		final Block k1 = world.getBlock(x + 1, y, z);
+		final Block l1 = world.getBlock(x - 1, y, z - 1);
+		final Block i2 = world.getBlock(x + 1, y, z - 1);
+		final Block j2 = world.getBlock(x + 1, y, z + 1);
+		final Block k2 = world.getBlock(x - 1, y, z + 1);
+		final boolean flag = j1 == this || k1 == this;
+		final boolean flag1 = l == this || i1 == this;
+		final boolean flag2 = l1 == this || i2 == this || j2 == this || k2 == this;
 
 		for (int loop_i = x - 1; loop_i <= x + 1; ++loop_i)
 		{
 			for (int loop_k = z - 1; loop_k <= z + 1; ++loop_k)
 			{
-				Block soil = world.getBlock(loop_i, y - 1, loop_k);
+				final Block soil = world.getBlock(loop_i, y - 1, loop_k);
 				float f1 = 0.0F;
 
-				if (soil != null && soil == GrowthCraftRice.paddyField)
+				if (soil != null && RiceBlockCheck.isPaddy(soil))
 				{
 					f1 = 1.0F;
 
@@ -160,13 +158,15 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 	 */
 	protected boolean canThisPlantGrowOnThisBlockID(Block block)
 	{
-		return block == GrowthCraftRice.paddyField;
+		return RiceBlockCheck.isPaddy(block);
 	}
 
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) && this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
+		return (world.getFullBlockLightValue(x, y, z) >= 8 ||
+			world.canBlockSeeTheSky(x, y, z)) &&
+			this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
 	}
 
 	/************
@@ -176,7 +176,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftRice.rice;
+		return GrowthCraftRice.rice.getItem();
 	}
 
 	/************
@@ -185,7 +185,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
-		return GrowthCraftRice.rice;
+		return GrowthCraftRice.rice.getItem();
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
-		ArrayList<ItemStack> ret = super.getDrops(world, x, y, z, metadata, fortune);
+		final ArrayList<ItemStack> ret = super.getDrops(world, x, y, z, metadata, fortune);
 
 		if (metadata >= 7)
 		{
@@ -211,7 +211,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 			{
 				if (world.rand.nextInt(15) <= metadata)
 				{
-					ret.add(new ItemStack(GrowthCraftRice.rice, 1, 0));
+					ret.add(GrowthCraftRice.rice.asStack(1));
 				}
 			}
 		}
@@ -248,10 +248,11 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 		int i = 0;
 		switch (meta)
 		{
-		case 0: case 1: i = 0; break;
-		case 2: case 3: i = 1; break;
-		case 4: case 5: case 7: i = 2; break;
-		case 6: i = 3; break;
+			case 0: case 1: i = 0; break;
+			case 2: case 3: i = 1; break;
+			case 4: case 5: case 7: i = 2; break;
+			case 6: i = 3; break;
+			default: i = 2;
 		}
 
 		return tex[i];
@@ -284,7 +285,6 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.25F, 1.0F);
 	}
 

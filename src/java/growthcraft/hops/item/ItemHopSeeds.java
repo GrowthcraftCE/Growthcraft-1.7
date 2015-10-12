@@ -9,7 +9,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
@@ -39,9 +38,9 @@ public class ItemHopSeeds extends Item implements IPlantable
 		}
 		else if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack))
 		{
-			if (BlockCheck.canSustainPlant(world, x, y, z, ForgeDirection.UP, GrowthCraftHops.hopVine) && BlockCheck.isRope(world, x, y + 1, z))
+			if (BlockCheck.canSustainPlant(world, x, y, z, ForgeDirection.UP, GrowthCraftHops.hopVine.getBlock()) && BlockCheck.isRope(world, x, y + 1, z))
 			{
-				world.setBlock(x, y + 1, z, GrowthCraftHops.hopVine);
+				world.setBlock(x, y + 1, z, GrowthCraftHops.hopVine.getBlock());
 				--stack.stackSize;
 				return true;
 			}
@@ -75,7 +74,7 @@ public class ItemHopSeeds extends Item implements IPlantable
 	@Override
 	public Block getPlant(IBlockAccess world, int x, int y, int z)
 	{
-		return GrowthCraftHops.hopVine;
+		return GrowthCraftHops.hopVine.getBlock();
 	}
 
 	@Override

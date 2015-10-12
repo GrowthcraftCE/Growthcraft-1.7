@@ -1,6 +1,6 @@
 package growthcraft.hops.event;
 
-import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.utils.BlockCheck;
 import growthcraft.hops.GrowthCraftHops;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
@@ -14,14 +14,14 @@ public class BonemealEventHops
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
 	{
-		if (event.block == GrowthCraftHops.hopVine)
+		if (GrowthCraftHops.hopVine.getBlock() == event.block)
 		{
 			int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
-			if ((meta == 2 || meta == 3) && event.world.getBlock(event.x, event.y + 1, event.z) == GrowthCraftCore.ropeBlock&& this.canBlockStay(event.world, event.x, event.y + 1, event.z))
+			if ((meta == 2 || meta == 3) && BlockCheck.isRope(event.world.getBlock(event.x, event.y + 1, event.z)) && this.canBlockStay(event.world, event.x, event.y + 1, event.z))
 			{
 				if (!event.world.isRemote)
 				{
-					event.world.setBlock(event.x, event.y + 1, event.z, GrowthCraftHops.hopVine, 2, 3);
+					event.world.setBlock(event.x, event.y + 1, event.z, GrowthCraftHops.hopVine.getBlock(), 2, 3);
 				}
 				event.setResult(Result.ALLOW);
 			}
@@ -53,7 +53,7 @@ public class BonemealEventHops
 
 			while (loop < 5)
 			{
-				if (world.getBlock(x, y - loop, z) != GrowthCraftHops.hopVine)
+				if (world.getBlock(x, y - loop, z) != GrowthCraftHops.hopVine.getBlock())
 				{
 					return false;
 				}
@@ -71,6 +71,9 @@ public class BonemealEventHops
 
 	private boolean isVineRoot(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftHops.hopVine && world.getBlock(x, y - 1, z) == Blocks.farmland && (world.getBlockMetadata(x, y, z) == 2 || world.getBlockMetadata(x, y, z) == 3);
+		return world.getBlock(x, y, z) == GrowthCraftHops.hopVine.getBlock() &&
+			world.getBlock(x, y - 1, z) == Blocks.farmland &&
+			(world.getBlockMetadata(x, y, z) == 2 ||
+				world.getBlockMetadata(x, y, z) == 3);
 	}
 }

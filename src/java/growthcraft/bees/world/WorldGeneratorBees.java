@@ -3,7 +3,6 @@ package growthcraft.bees.world;
 import java.util.Random;
 
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.bees.world.WorldGenBeeHive;
 import growthcraft.core.Utils;
 
 import cpw.mods.fml.common.IWorldGenerator;
@@ -31,14 +30,14 @@ public class WorldGeneratorBees implements IWorldGenerator
 	{
 		if (!world.getWorldInfo().getTerrainType().getWorldTypeName().startsWith("flat"))
 		{
-			int i = chunkX * 16 + random.nextInt(16) + 8;
-			int j = random.nextInt(128);
-			int k = chunkZ * 16 + random.nextInt(16) + 8;
+			final int i = chunkX * 16 + random.nextInt(16) + 8;
+			final int j = random.nextInt(128);
+			final int k = chunkZ * 16 + random.nextInt(16) + 8;
 
 			boolean flag = true;
 			if (GrowthCraftBees.getConfig().useBiomeDict)
 			{
-				BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
+				final BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
 				flag = (BiomeDictionary.isBiomeOfType(biome, Type.FOREST) ||
 						BiomeDictionary.isBiomeOfType(biome, Type.PLAINS))
 						&& !BiomeDictionary.isBiomeOfType(biome, Type.FROZEN);
@@ -48,14 +47,10 @@ public class WorldGeneratorBees implements IWorldGenerator
 				flag = Utils.isIDInList(world.getBiomeGenForCoords(i, k).biomeID, GrowthCraftBees.getConfig().beeBiomesList);
 			}
 
-			//int i = chunkX * 16 + random.nextInt(16);
-			//int k = chunkZ * 16 + random.nextInt(16);
-			//int j = world.getHeightValue(i, k);
-			if (flag)//&& random.nextInt(this.rarity) == 0)
+			if (flag)
 			{
 				new WorldGenBeeHive().generate(world, random, i, j, k);
 			}
-			//return false;
 		}
 	}
 }

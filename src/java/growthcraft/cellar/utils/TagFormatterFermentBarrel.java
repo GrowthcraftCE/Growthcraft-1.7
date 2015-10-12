@@ -5,19 +5,16 @@ import java.util.List;
 import growthcraft.core.utils.ConstID;
 import growthcraft.core.utils.ITagFormatter;
 import growthcraft.core.utils.TagFormatterItem;
-import growthcraft.core.utils.UnitFormatter;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 
 public class TagFormatterFermentBarrel implements ITagFormatter
 {
-	public final static TagFormatterFermentBarrel INSTANCE = new TagFormatterFermentBarrel();
+	public static final TagFormatterFermentBarrel INSTANCE = new TagFormatterFermentBarrel();
 
 	private void addFermentProgress(List<String> list, NBTTagCompound tag)
 	{
@@ -41,6 +38,7 @@ public class TagFormatterFermentBarrel implements ITagFormatter
 		final NBTTagCompound modifierItem = tag.getCompoundTag("item_modifier");
 		final boolean hasModifierItem = modifierItem.getInteger("id") != ConstID.NO_ITEM;
 		if (hasModifierItem) addModifierLine(list, tag);
+
 		final int boozeID = tag.getInteger("booze_id");
 		if (boozeID != ConstID.NO_FLUID)
 		{

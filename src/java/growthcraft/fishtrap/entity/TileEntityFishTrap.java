@@ -28,8 +28,8 @@ public class TileEntityFishTrap extends TileEntity implements IInventory
 	{
 		if (this.invSlots[index] == null) return true;
 		if (!this.invSlots[index].isItemEqual(stack)) return false;
-		int result = this.invSlots[index].stackSize + stack.stackSize;
-		return (result <= getInventoryStackLimit() && result <= stack.getMaxStackSize());
+		final int result = this.invSlots[index].stackSize + stack.stackSize;
+		return result <= getInventoryStackLimit() && result <= stack.getMaxStackSize();
 	}
 
 	public void addStack(ItemStack stack)
@@ -96,7 +96,7 @@ public class TileEntityFishTrap extends TileEntity implements IInventory
 	{
 		if (this.invSlots[index] != null)
 		{
-			ItemStack itemstack = this.invSlots[index];
+			final ItemStack itemstack = this.invSlots[index];
 			this.invSlots[index] = null;
 			return itemstack;
 		}
@@ -154,14 +154,13 @@ public class TileEntityFishTrap extends TileEntity implements IInventory
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		NBTTagList tags = nbt.getTagList("items", 10);
+		final NBTTagList tags = nbt.getTagList("items", 10);
 		this.invSlots = new ItemStack[this.getSizeInventory()];
 
 		for (int i = 0; i < tags.tagCount(); ++i)
 		{
-			NBTTagCompound nbttagcompound1 = tags.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
+			final NBTTagCompound nbttagcompound1 = tags.getCompoundTagAt(i);
+			final byte b0 = nbttagcompound1.getByte("Slot");
 			if (b0 >= 0 && b0 < this.invSlots.length)
 			{
 				this.invSlots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
@@ -179,13 +178,13 @@ public class TileEntityFishTrap extends TileEntity implements IInventory
 	{
 		super.writeToNBT(nbt);
 
-		NBTTagList nbttaglist = new NBTTagList();
+		final NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.invSlots.length; ++i)
 		{
 			if (this.invSlots[i] != null)
 			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte)i);
 				this.invSlots[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);

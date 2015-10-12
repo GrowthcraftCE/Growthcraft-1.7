@@ -16,7 +16,7 @@ public class ContainerFruitPress extends Container
 {
 	private TileEntityFruitPress te;
 
-	public ContainerFruitPress(InventoryPlayer player, TileEntityFruitPress te)
+	public ContainerFruitPress(InventoryPlayer player, TileEntityFruitPress fruitPress)
 	{
 		// Slot Indexes:
 		//0            raw
@@ -24,7 +24,7 @@ public class ContainerFruitPress extends Container
 		//2 - 28 (29)  player.inv.backpack
 		//29 - 37 (38) player.inv.hotbar
 
-		this.te = te;
+		this.te = fruitPress;
 		this.addSlotToContainer(new Slot(te, 0, 45, 35));
 		this.addSlotToContainer(new SlotFruitPressResidue(this, te, 1, 116, 17));
 		int i;
@@ -53,11 +53,11 @@ public class ContainerFruitPress extends Container
 	public ItemStack transferStackInSlot(EntityPlayer player, int index)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot)this.inventorySlots.get(index);
+		final Slot slot = (Slot)this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack())
 		{
-			ItemStack stack = slot.getStack();
+			final ItemStack stack = slot.getStack();
 			itemstack = stack.copy();
 
 			if (index == 1)

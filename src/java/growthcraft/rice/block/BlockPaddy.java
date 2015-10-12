@@ -5,7 +5,6 @@ import java.util.Random;
 
 import growthcraft.core.Utils;
 import growthcraft.rice.GrowthCraftRice;
-import growthcraft.rice.block.IPaddyCrop;
 import growthcraft.rice.renderer.RenderPaddy;
 import growthcraft.rice.ClientProxy;
 
@@ -30,10 +29,10 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BlockPaddy extends Block implements IPaddy
 {
-	private final int paddyFieldMax = GrowthCraftRice.getConfig().paddyFieldMax;
-
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
+
+	private final int paddyFieldMax = GrowthCraftRice.getConfig().paddyFieldMax;
 
 	public BlockPaddy()
 	{
@@ -50,9 +49,16 @@ public class BlockPaddy extends Block implements IPaddy
 		return meta >= paddyFieldMax;
 	}
 
+
+	private boolean isBelowWater(World world, int x, int y, int z)
+	{
+		return world.getBlock(x, y + 1, z).getMaterial() == Material.water;
+	}
+
 	/************
 	 * TICK
 	 ************/
+
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
@@ -60,18 +66,6 @@ public class BlockPaddy extends Block implements IPaddy
 		{
 			world.setBlockMetadataWithNotify(x, y, z, paddyFieldMax, 2);
 		}
-		/*else if (!isBelowWater(world, x, y, z) && !world.canLightningStrikeAt(x, y + 1, z))
-		{
-			if (world.getBlockMetadata(x, y, z) == 0)
-			{
-				world.setBlock(x, y, z, Block.dirt.blockID);
-			}
-		}*/
-	}
-
-	private boolean isBelowWater(World world, int x, int y, int z)
-	{
-		return world.getBlock(x, y + 1, z).getMaterial() == Material.water;
 	}
 
 	/************
@@ -86,12 +80,12 @@ public class BlockPaddy extends Block implements IPaddy
 		}
 		else
 		{
-			ItemStack itemstack = player.inventory.getCurrentItem();
+			final ItemStack itemstack = player.inventory.getCurrentItem();
 			if (itemstack != null)
 			{
 				if (FluidContainerRegistry.isFilledContainer(itemstack))
 				{
-					FluidStack addF = FluidContainerRegistry.getFluidForFilledItem(itemstack);
+					final FluidStack addF = FluidContainerRegistry.getFluidForFilledItem(itemstack);
 					if (addF != null)
 					{
 						int radius = addF.amount * 2 / FluidContainerRegistry.BUCKET_VOLUME;
@@ -106,7 +100,7 @@ public class BlockPaddy extends Block implements IPaddy
 							{
 								for (int lz = z - radius; lz <= z + radius; ++lz)
 								{
-									if (world.getBlock(lx, y, lz) == GrowthCraftRice.paddyField)
+									if (world.getBlock(lx, y, lz) == this)
 									{
 										world.setBlockMetadataWithNotify(lx, y, lz, paddyFieldMax, 3);
 									}
@@ -138,7 +132,7 @@ public class BlockPaddy extends Block implements IPaddy
 				return;
 			}
 
-			Block plant = world.getBlock(x, y + 1, z);
+			final Block plant = world.getBlock(x, y + 1, z);
 			if (plant instanceof IPaddyCrop)
 			{
 				plant.dropBlockAsItem(world, x, y + 1, z, world.getBlockMetadata(x, y + 1, z), 0);
@@ -151,50 +145,11 @@ public class BlockPaddy extends Block implements IPaddy
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block par5)
 	{
 		super.onNeighborBlockChange(world, x, y, z, par5);
-		Material material = world.getBlock(x, y + 1, z).getMaterial();
-
-		/*if (material.isSolid())
-		{
-			world.setBlock(x, y, z, Block.dirt.blockID);
-		}*/
-
-		if (material == Material.water)
+		final Material material = world.getBlock(x, y + 1, z).getMaterial();
+		if (Material.water == material)
 		{
 			world.setBlockMetadataWithNotify(x, y, z, paddyFieldMax, 3);
 		}
-
-		/*	if (world.getBlockMetadata(x, y, z) == paddyFieldMax)
-		{
-			boolean flag = world.getBlockId(x, y, z - 1) == this.blockID && world.getBlockMetadata(x, y,  z - 1) < paddyFieldMax;
-			boolean flag1 = world.getBlockId(x, y, z + 1) == this.blockID && world.getBlockMetadata(x, y,  z + 1) < paddyFieldMax;
-			boolean flag2 = world.getBlockId(x - 1, y, z) == this.blockID && world.getBlockMetadata(x - 1, y,  z) < paddyFieldMax;
-			boolean flag3 = world.getBlockId(x + 1, y, z) == this.blockID && world.getBlockMetadata(x + 1, y,  z) < paddyFieldMax;
-			int meta;
-
-			if (flag)
-			{
-				meta = world.getBlockMetadata(x, y, z - 1);
-				world.setBlockMetadataWithNotify(x, y, z - 1, meta++, 3);
-			}
-
-			if (flag1)
-			{
-				meta = world.getBlockMetadata(x, y, z + 1);
-				world.setBlockMetadataWithNotify(x, y, z + 1, meta++, 3);
-			}
-
-			if (flag2)
-			{
-				meta = world.getBlockMetadata(x - 1, y, z);
-				world.setBlockMetadataWithNotify(x - 1, y, z, meta++, 3);
-			}
-
-			if (flag3)
-			{
-				meta = world.getBlockMetadata(x + 1, y, z);
-				world.setBlockMetadataWithNotify(x + 1, y, z, meta++, 3);
-			}
-		}*/
 	}
 
 	/************
@@ -210,7 +165,7 @@ public class BlockPaddy extends Block implements IPaddy
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int i, int j, int k, ForgeDirection side)
 	{
-		return side == ForgeDirection.UP ? false : true;
+		return ForgeDirection.UP == side ? false : true;
 	}
 
 	@Override
@@ -252,7 +207,22 @@ public class BlockPaddy extends Block implements IPaddy
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return side > 1 ? tex[0] : (side == 0 ? tex[0] : (meta == 0 ? tex[1] : tex[2]));
+		if (side > 1)
+		{
+			return tex[0];
+		}
+		else if (side == 0)
+		{
+			return tex[0];
+		}
+		else if (meta == 0)
+		{
+			return tex[1];
+		}
+		else
+		{
+			return tex[2];
+		}
 	}
 
 	/************
@@ -302,26 +272,25 @@ public class BlockPaddy extends Block implements IPaddy
 	@Override
 	public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB axis, List list, Entity entity)
 	{
-		int meta = world.getBlockMetadata(i, j, k);
+		final int meta = world.getBlockMetadata(i, j, k);
 
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.875F, 1.0F);
 		super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
 
+		final float thick = 0.125F;
+		final float j1 = 0.875F;
+		final float j2 = 1.0F;
 		float i1 = 0.0F;
 		float i2 = 1.0F;
-		float j1 = 0.875F;
-		float j2 = 1.0F;
 		float k1 = 0.0F;
 		float k2 = 1.0F;
 
-		float thick = 0.125F;
+		final boolean boolXPos = canConnectPaddyTo(world, i + 1, j, k, meta);
+		final boolean boolXNeg = canConnectPaddyTo(world, i - 1, j, k, meta);
+		final boolean boolYPos = canConnectPaddyTo(world, i, j, k + 1, meta);
+		final boolean boolYNeg = canConnectPaddyTo(world, i, j, k - 1, meta);
 
-		boolean boolXPos = canConnectPaddyTo(world, i + 1, j, k, meta);
-		boolean boolXNeg = canConnectPaddyTo(world, i - 1, j, k, meta);
-		boolean boolYPos = canConnectPaddyTo(world, i, j, k + 1, meta);
-		boolean boolYNeg = canConnectPaddyTo(world, i, j, k - 1, meta);
-
-		if (boolXPos == false)
+		if (!boolXPos)
 		{
 			i1 = 1.0F - thick;
 			i2 = 1.0F;
@@ -332,7 +301,7 @@ public class BlockPaddy extends Block implements IPaddy
 			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
 		}
 
-		if (boolXNeg == false)
+		if (!boolXNeg)
 		{
 			i1 = 0.0F;
 			i2 = 0.0F + thick;
@@ -343,7 +312,7 @@ public class BlockPaddy extends Block implements IPaddy
 			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
 		}
 
-		if (boolYPos == false)
+		if (!boolYPos)
 		{
 			i1 = 0.0F + thick;
 			i2 = 1.0F - thick;
@@ -354,7 +323,7 @@ public class BlockPaddy extends Block implements IPaddy
 			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
 		}
 
-		if (boolYNeg == false)
+		if (!boolYNeg)
 		{
 			i1 = 0.0F + thick;
 			i2 = 1.0F - thick;
@@ -366,25 +335,25 @@ public class BlockPaddy extends Block implements IPaddy
 		}
 
 		//corners
-		if ((canConnectPaddyTo(world, i - 1, j, k - 1, meta) == false) || (boolXNeg == false) || (boolYNeg == false))
+		if ((!canConnectPaddyTo(world, i - 1, j, k - 1, meta)) || (!boolXNeg) || (!boolYNeg))
 		{
 			this.setBlockBounds(0.0F, j1, 0.0F, 0.0F + thick, j2, 0.0F + thick);
 			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
 		}
 
-		if ((canConnectPaddyTo(world, i + 1, j, k - 1, meta) == false) || (boolXPos == false) || (boolYNeg == false))
+		if ((!canConnectPaddyTo(world, i + 1, j, k - 1, meta)) || (!boolXPos) || (!boolYNeg))
 		{
 			this.setBlockBounds(1.0F - thick, j1, 0.0F, 1.0F, j2, 0.0F + thick);
 			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
 		}
 
-		if ((canConnectPaddyTo(world, i - 1, j, k + 1, meta) == false) || (boolXNeg == false) || (boolYPos == false))
+		if ((!canConnectPaddyTo(world, i - 1, j, k + 1, meta)) || (!boolXNeg) || (!boolYPos))
 		{
 			this.setBlockBounds(0.0F, j1, 1.0F - thick, 0.0F + thick, j2, 1.0F);
 			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
 		}
 
-		if ((canConnectPaddyTo(world, i + 1, j, k + 1, meta) == false) || (boolXPos == false) || (boolYPos == false))
+		if ((!canConnectPaddyTo(world, i + 1, j, k + 1, meta)) || (!boolXPos) || (!boolYPos))
 		{
 			this.setBlockBounds(1.0F - thick, j1, 1.0F - thick, 1.0F, j2, 1.0F);
 			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
@@ -407,13 +376,6 @@ public class BlockPaddy extends Block implements IPaddy
 			meta = 1;
 		}
 
-		if (world.getBlock(i, j, k) == this && meta == m)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return this == world.getBlock(i, j, k) && meta == m;
 	}
 }

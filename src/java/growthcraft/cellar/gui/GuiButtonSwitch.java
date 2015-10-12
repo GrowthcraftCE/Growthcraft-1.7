@@ -11,10 +11,10 @@ public class GuiButtonSwitch extends GuiButton
 	private final int iconX;
 	private final int iconY;
 
-	protected GuiButtonSwitch(ResourceLocation res, int id, int xpos, int ypos)
+	protected GuiButtonSwitch(ResourceLocation resl, int id, int xpos, int ypos)
 	{
 		super(id, xpos, ypos, 16, 16, "");
-		this.res = res;
+		this.res = resl;
 		this.iconX = 16;
 		this.iconY = 166;
 	}
@@ -27,7 +27,7 @@ public class GuiButtonSwitch extends GuiButton
 			mc.getTextureManager().bindTexture(this.res);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.field_146123_n = w >= this.xPosition && h >= this.yPosition && w < this.xPosition + this.width && h < this.yPosition + this.height;
-			short y = 182;
+			final short y = 182;
 			int x = 0;
 
 			if (!this.enabled)

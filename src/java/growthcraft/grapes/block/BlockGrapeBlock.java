@@ -2,7 +2,6 @@ package growthcraft.grapes.block;
 
 import java.util.Random;
 
-import growthcraft.core.utils.BlockFlags;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.renderer.RenderGrape;
 
@@ -12,7 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -87,7 +85,7 @@ public class BlockGrapeBlock extends Block
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y + 1, z) == GrowthCraftGrapes.grapeLeaves;
+		return world.getBlock(x, y + 1, z) == GrowthCraftGrapes.grapeLeaves.getBlock();
 	}
 
 	/************
@@ -97,7 +95,7 @@ public class BlockGrapeBlock extends Block
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapes;
+		return GrowthCraftGrapes.grapes.getItem();
 	}
 
 	@Override
@@ -112,7 +110,7 @@ public class BlockGrapeBlock extends Block
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
-		return GrowthCraftGrapes.grapes;
+		return GrowthCraftGrapes.grapes.getItem();
 	}
 
 	@Override

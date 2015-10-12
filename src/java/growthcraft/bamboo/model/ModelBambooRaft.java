@@ -13,14 +13,14 @@ public class ModelBambooRaft extends ModelBase
 
 	public ModelBambooRaft()
 	{
+		final byte b0 = 24;
+		final byte b1 = 6;
+		final byte b2 = 20;
+		final byte b3 = 4;
 		this.box = new ModelRenderer(this, 0, 8);
-		byte b0 = 24;
-		byte b1 = 6;
-		byte b2 = 20;
-		byte b3 = 4;
 		this.box.addBox((float)(-b0 / 2), (float)(-b2 / 2 + 2), -3.0F, b0, b2 - 4, 4, 0.0F);
 		this.box.setRotationPoint(0.0F, (float)b3, 0.0F);
-		this.box.rotateAngleX = ((float)Math.PI / 2F);
+		this.box.rotateAngleX = (float)Math.PI / 2F;
 	}
 
 	@Override

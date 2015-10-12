@@ -28,13 +28,13 @@ public class ItemRope extends Item
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
 	{
-		Block block = world.getBlock(x, y, z);
+		final Block block = world.getBlock(x, y, z);
 
-		if (block == Blocks.snow_layer && (world.getBlockMetadata(x, y, z) & 7) < 1)
+		if (Blocks.snow_layer == block && (world.getBlockMetadata(x, y, z) & 7) < 1)
 		{
 			dir = 1;
 		}
-		else if (block == Blocks.fence)
+		else if (Blocks.fence == block)
 		{
 			if (!player.canPlayerEdit(x, y, z, dir, stack))
 			{
@@ -45,7 +45,7 @@ public class ItemRope extends Item
 				return false;
 			}
 
-			world.setBlock(x, y, z, GrowthCraftCore.fenceRope);
+			world.setBlock(x, y, z, GrowthCraftCore.fenceRope.getBlock());
 			--stack.stackSize;
 			return true;
 		}
@@ -92,10 +92,10 @@ public class ItemRope extends Item
 		}
 		else
 		{
-			Block block2 = GrowthCraftCore.ropeBlock;
+			final Block block2 = GrowthCraftCore.ropeBlock.getBlock();
 			if (world.canPlaceEntityOnSide(block2, x, y, z, false, dir, (Entity)null, stack))
 			{
-				int meta = block2.onBlockPlaced(world, x, y, z, dir, par8, par9, par10, 0);
+				final int meta = block2.onBlockPlaced(world, x, y, z, dir, par8, par9, par10, 0);
 
 				if (world.setBlock(x, y, z, block2, meta, 3))
 				{

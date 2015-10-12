@@ -20,19 +20,19 @@ public class GuiHandlerCellar implements IGuiHandler
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
 	{
-		TileEntity te = world.getTileEntity(x, y, z);
+		final TileEntity te = world.getTileEntity(x, y, z);
 
-		if(te instanceof TileEntityFruitPress)
+		if (te instanceof TileEntityFruitPress)
 		{
 			return new ContainerFruitPress(player.inventory, (TileEntityFruitPress)te);
 		}
 
-		if(te instanceof TileEntityBrewKettle)
+		if (te instanceof TileEntityBrewKettle)
 		{
 			return new ContainerBrewKettle(player.inventory, (TileEntityBrewKettle)te);
 		}
 
-		if(te instanceof TileEntityFermentBarrel)
+		if (te instanceof TileEntityFermentBarrel)
 		{
 			return new ContainerFermentBarrel(player.inventory, (TileEntityFermentBarrel)te);
 		}
@@ -43,19 +43,19 @@ public class GuiHandlerCellar implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
 	{
-		TileEntity te = world.getTileEntity(x, y, z);
+		final TileEntity te = world.getTileEntity(x, y, z);
 
-		if(te instanceof TileEntityFruitPress)
+		if (te instanceof TileEntityFruitPress)
 		{
 			return new GuiFruitPress(player.inventory, (TileEntityFruitPress)te);
 		}
 
-		if(te instanceof TileEntityBrewKettle)
+		if (te instanceof TileEntityBrewKettle)
 		{
 			return new GuiBrewKettle(player.inventory, (TileEntityBrewKettle)te);
 		}
 
-		if(te instanceof TileEntityFermentBarrel)
+		if (te instanceof TileEntityFermentBarrel)
 		{
 			return new GuiFermentBarrel(player.inventory, (TileEntityFermentBarrel)te);
 		}

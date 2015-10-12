@@ -56,13 +56,13 @@ public class BlockRope extends Block implements IBlockRope
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
-		boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
-		boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
-		boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
-		boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
-		boolean flag4 = this.canConnectRopeTo(world, x, y - 1, z);
-		boolean flag5 = this.canConnectRopeTo(world, x, y + 1, z);
-		return flag || flag1 || flag2 || flag3 || flag4 || flag5;
+		if (this.canConnectRopeTo(world, x, y, z - 1)) return true;
+		if (this.canConnectRopeTo(world, x, y, z + 1)) return true;
+		if (this.canConnectRopeTo(world, x - 1, y, z)) return true;
+		if (this.canConnectRopeTo(world, x + 1, y, z)) return true;
+		if (this.canConnectRopeTo(world, x, y - 1, z)) return true;
+		if (this.canConnectRopeTo(world, x, y + 1, z)) return true;
+		return false;
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class BlockRope extends Block implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftCore.rope;
+		return GrowthCraftCore.rope.getItem();
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class BlockRope extends Block implements IBlockRope
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
-		return GrowthCraftCore.rope;
+		return GrowthCraftCore.rope.getItem();
 	}
 
 	@Override
@@ -156,12 +156,12 @@ public class BlockRope extends Block implements IBlockRope
 	@Override
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity)
 	{
-		boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
-		boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
-		boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
-		boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
-		boolean flag4 = this.canConnectRopeTo(world, x, y - 1, z);
-		boolean flag5 = this.canConnectRopeTo(world, x, y + 1, z);
+		final boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
+		final boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
+		final boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
+		final boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
+		final boolean flag4 = this.canConnectRopeTo(world, x, y - 1, z);
+		final boolean flag5 = this.canConnectRopeTo(world, x, y + 1, z);
 		float f = 0.4375F;
 		float f1 = 0.5625F;
 		float f2 = 0.4375F;
@@ -229,12 +229,12 @@ public class BlockRope extends Block implements IBlockRope
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{
-		boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
-		boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
-		boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
-		boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
-		boolean flag4 = this.canConnectRopeTo(world, x, y - 1, z);
-		boolean flag5 = this.canConnectRopeTo(world, x, y + 1, z);
+		final boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
+		final boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
+		final boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
+		final boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
+		final boolean flag4 = this.canConnectRopeTo(world, x, y - 1, z);
+		final boolean flag5 = this.canConnectRopeTo(world, x, y + 1, z);
 		float f = 0.4375F;
 		float f1 = 0.5625F;
 		float f2 = 0.4375F;

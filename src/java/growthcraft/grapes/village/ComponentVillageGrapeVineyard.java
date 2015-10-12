@@ -6,7 +6,6 @@ import java.util.Random;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.grapes.GrowthCraftGrapes;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -28,8 +27,12 @@ public class ComponentVillageGrapeVineyard extends StructureVillagePieces.Villag
 
 	public static ComponentVillageGrapeVineyard buildComponent(Start startPiece, List list, Random random, int par3, int par4, int par5, int par6, int par7)
 	{
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 6, 9, par6);
-		return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(list, structureboundingbox) == null ? new ComponentVillageGrapeVineyard(startPiece, par7, random, structureboundingbox, par6) : null;
+		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 6, 9, par6);
+		if (canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(list, structureboundingbox) == null)
+		{
+			return new ComponentVillageGrapeVineyard(startPiece, par7, random, structureboundingbox, par6);
+		}
+		return null;
 	}
 
 	public boolean addComponentParts(World world, Random random, StructureBoundingBox box)
@@ -52,7 +55,8 @@ public class ComponentVillageGrapeVineyard extends StructureVillagePieces.Villag
 		this.fillWithBlocks(world, box, 1, 0, 0, 11, 0, 0, Blocks.log, Blocks.log, false);
 		this.fillWithBlocks(world, box, 1, 0, 8, 11, 0, 8, Blocks.log, Blocks.log, false);
 		this.fillWithBlocks(world, box, 1, 0, 1, 11, 0, 7, Blocks.grass, Blocks.grass, false);
-		int loop, loop2;
+		int loop;
+		int loop2;
 
 		for (loop = 1; loop < 12; loop = loop + 2)
 		{
@@ -62,16 +66,16 @@ public class ComponentVillageGrapeVineyard extends StructureVillagePieces.Villag
 			this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, 1, 7, box);
 			this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, 2, 1, box);
 			this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, 2, 7, box);
-			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.fenceRope, 0, loop, 3, 1, box);
-			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.fenceRope, 0, loop, 3, 7, box);
-			this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeVine1, 1, loop, 1, 4, box);
-			this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeVine1, 1, loop, 2, 4, box);
+			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.fenceRope.getBlock(), 0, loop, 3, 1, box);
+			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.fenceRope.getBlock(), 0, loop, 3, 7, box);
+			this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeVine1.getBlock(), 1, loop, 1, 4, box);
+			this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeVine1.getBlock(), 1, loop, 2, 4, box);
 			for (loop2 = 2; loop2 <= 6; ++loop2)
 			{
-				this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeLeaves, 0, loop, 3, loop2, box);
+				this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeLeaves.getBlock(), 0, loop, 3, loop2, box);
 				if (MathHelper.getRandomIntegerInRange(random, 0, 2) != 0 && loop2 != 4)
 				{
-					this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeBlock, 0, loop, 2, loop2, box);
+					this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeBlock.getBlock(), 0, loop, 2, loop2, box);
 				}
 			}
 		}

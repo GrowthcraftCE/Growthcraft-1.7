@@ -5,6 +5,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class FluidUtils
 {
+	private FluidUtils() {}
+
 	public static boolean doesFluidExist(String name)
 	{
 		return FluidRegistry.getFluid(name) != null && FluidRegistry.isFluidRegistered(name);

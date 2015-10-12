@@ -17,6 +17,9 @@ public class BeesRegistry
 	 */
 
 	private static final BeesRegistry instance = new BeesRegistry();
+	private final List<Item> beesList = new ArrayList<Item>();
+	private final List<List> flowersList = new ArrayList<List>();
+
 	public static final BeesRegistry instance()
 	{
 		return instance;
@@ -73,7 +76,4 @@ public class BeesRegistry
 	{
 		return this.flowersList.contains(Arrays.asList(block, meta));
 	}
-
-	final List<Item> beesList = new ArrayList<Item>();
-	final List<List> flowersList = new ArrayList<List>();
 }
