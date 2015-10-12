@@ -6,5 +6,5 @@
 
 <suppressions>
   <!-- Ignore 3rd party apis, its the wild west there -->
-  <suppress files="[\\/]src[\\/]api[\\/]" checks="."/>
+  <suppress files="[\\/]api[\\/]" checks="."/>
 </suppressions>
