@@ -1,6 +1,5 @@
 package growthcraft.cellar.container;
 
-import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.CellarUtil;
 
 import net.minecraft.inventory.IInventory;

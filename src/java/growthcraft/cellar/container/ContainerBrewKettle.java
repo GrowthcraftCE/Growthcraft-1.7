@@ -16,7 +16,7 @@ public class ContainerBrewKettle extends Container
 {
 	private TileEntityBrewKettle te;
 
-	public ContainerBrewKettle(InventoryPlayer player, TileEntityBrewKettle te)
+	public ContainerBrewKettle(InventoryPlayer player, TileEntityBrewKettle brewKettle)
 	{
 		// Slot Indexes:
 		//0            raw
@@ -24,7 +24,7 @@ public class ContainerBrewKettle extends Container
 		//2 - 28 (29)  player.inv.backpack
 		//29 - 37 (38) player.inv.hotbar
 
-		this.te = te;
+		this.te = brewKettle;
 		this.addSlotToContainer(new Slot(te, 0, 80, 35));
 		this.addSlotToContainer(new SlotBrewKettleResidue(this, te, 1, 141, 17));
 		int i;
@@ -53,11 +53,11 @@ public class ContainerBrewKettle extends Container
 	public ItemStack transferStackInSlot(EntityPlayer player, int index)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot)this.inventorySlots.get(index);
+		final Slot slot = (Slot)this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack())
 		{
-			ItemStack stack = slot.getStack();
+			final ItemStack stack = slot.getStack();
 			itemstack = stack.copy();
 
 			if (index == 1)

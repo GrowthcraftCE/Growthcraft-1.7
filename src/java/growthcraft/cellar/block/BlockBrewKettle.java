@@ -11,7 +11,6 @@ import growthcraft.core.Utils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -31,9 +30,10 @@ import net.minecraft.world.World;
 
 public class BlockBrewKettle extends BlockCellarContainer implements ICellarFluidHandler
 {
-	private final Random rand = new Random();
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
+
+	private final Random rand = new Random();
 
 	public BlockBrewKettle()
 	{
@@ -127,19 +127,19 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int par6)
 	{
-		TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
+		final TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
 
 		if (te != null)
 		{
 			for (int index = 0; index < te.getSizeInventory(); ++index)
 			{
-				ItemStack stack = te.getStackInSlot(index);
+				final ItemStack stack = te.getStackInSlot(index);
 
 				if (stack != null)
 				{
-					float f = this.rand.nextFloat() * 0.8F + 0.1F;
-					float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-					float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
 
 					while (stack.stackSize > 0)
 					{
@@ -151,14 +151,14 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 						}
 
 						stack.stackSize -= k1;
-						EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
+						final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
 
 						if (stack.hasTagCompound())
 						{
 							entityitem.getEntityItem().setTagCompound((NBTTagCompound)stack.getTagCompound().copy());
 						}
 
-						float f3 = 0.05F;
+						final float f3 = 0.05F;
 						entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
 						entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
 						entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
@@ -199,7 +199,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	}
 
 	@Override
-	public int quantityDropped(Random rand)
+	public int quantityDropped(Random random)
 	{
 		return 1;
 	}
@@ -268,7 +268,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	{
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.3125F, 1.0F);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
-		float f = 0.125F;
+		final float f = 0.125F;
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
@@ -292,7 +292,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
 	{
-		TileEntityBrewKettle te = (TileEntityBrewKettle) world.getTileEntity(x, y, z);
+		final TileEntityBrewKettle te = (TileEntityBrewKettle) world.getTileEntity(x, y, z);
 		return te.getFluidAmountScaled(15, 1);
 	}
 }

@@ -2,22 +2,17 @@ package growthcraft.cellar.item;
 
 import java.util.List;
 
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.utils.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -25,7 +20,7 @@ import net.minecraftforge.fluids.Fluid;
 
 public class ItemBoozeBucketDEPRECATED extends Item
 {
-	private Fluid[] booze;
+	private Fluid[] boozes;
 
 	@SideOnly(Side.CLIENT)
 	private IIcon bucket;
@@ -33,7 +28,7 @@ public class ItemBoozeBucketDEPRECATED extends Item
 	private IIcon contents;
 
 	private int color = 16777215;
-	public ItemBoozeBucketDEPRECATED(Fluid[] booze)
+	public ItemBoozeBucketDEPRECATED(Fluid[] boozeAry)
 	{
 		super();
 		this.setMaxStackSize(1);
@@ -41,36 +36,36 @@ public class ItemBoozeBucketDEPRECATED extends Item
 		this.setMaxDamage(0);
 		this.setContainerItem(Items.bucket);
 		this.setUnlocalizedName("grc.boozeBucket");
-		this.booze = booze;
+		this.boozes = boozeAry;
 	}
 
-	public ItemBoozeBucketDEPRECATED setColor(int color)
+	public ItemBoozeBucketDEPRECATED setColor(int kolor)
 	{
-		this.color = color;
+		this.color = kolor;
 		return this;
 	}
 
 	public Fluid[] getBoozeArray()
 	{
-		return this.booze;
+		return this.boozes;
 	}
 
 	public Fluid getBooze(int i)
 	{
-		if (i >= this.booze.length)
+		if (i >= this.boozes.length)
 		{
-			return this.booze[0];
+			return this.boozes[0];
 		}
 		else
 		{
-			return this.booze[i];
+			return this.boozes[i];
 		}
 	}
 
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5)
 	{
-		if (stack.getItemDamage() >= this.booze.length)
+		if (stack.getItemDamage() >= this.boozes.length)
 		{
 			stack.setItemDamage(0);
 		}
@@ -134,11 +129,11 @@ public class ItemBoozeBucketDEPRECATED extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
+	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
-		for (int i = 0; i < this.booze.length; i++)
+		for (int i = 0; i < this.boozes.length; i++)
 		{
-			list.add(new ItemStack(par1, 1, i));
+			list.add(new ItemStack(item, 1, i));
 		}
 	}
 }

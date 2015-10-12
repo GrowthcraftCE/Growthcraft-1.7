@@ -49,8 +49,9 @@ public class BlockFruitPresser extends BlockContainer
 			case 2:
 			case 3:
 				return "pressed";
+			default:
+				return "invalid";
 		}
-		return "invalid";
 	}
 
 	/************
@@ -103,8 +104,8 @@ public class BlockFruitPresser extends BlockContainer
 
 	private void updatePressState(World world, int x, int y, int z)
 	{
-		int     meta = world.getBlockMetadata(x, y, z);
-		boolean flag = world.isBlockIndirectlyGettingPowered(x, y, z);
+		final int     meta = world.getBlockMetadata(x, y, z);
+		final boolean flag = world.isBlockIndirectlyGettingPowered(x, y, z);
 
 		if (flag && (meta == 0 || meta == 1))
 		{
@@ -132,15 +133,15 @@ public class BlockFruitPresser extends BlockContainer
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
 
 		if (meta == 0 || meta == 2)
 		{
-			return (side == side.EAST || side == side.WEST);
+			return side == side.EAST || side == side.WEST;
 		}
 		else if (meta == 1 || meta == 3)
 		{
-			return (side == side.NORTH || side == side.SOUTH);
+			return side == side.NORTH || side == side.SOUTH;
 		}
 
 		return isNormalCube(world, x, y, z);

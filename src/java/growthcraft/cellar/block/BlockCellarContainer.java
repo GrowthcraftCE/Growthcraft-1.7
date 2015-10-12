@@ -5,7 +5,6 @@ import growthcraft.core.block.IRotatableBlock;
 import growthcraft.core.block.IWrenchable;
 import growthcraft.core.utils.BlockFlags;
 import growthcraft.core.utils.ItemUtils;
-import growthcraft.core.Utils;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -66,6 +65,9 @@ public abstract class BlockCellarContainer extends BlockContainer implements IDr
 				case WEST:
 					newDirection = ForgeDirection.DOWN;
 					break;
+				default:
+					// some invalid state
+					break;
 			}
 		}
 		else
@@ -91,6 +93,7 @@ public abstract class BlockCellarContainer extends BlockContainer implements IDr
 					newDirection = ForgeDirection.EAST;
 					break;
 				default:
+					// yet another invalid state
 					break;
 			}
 		}

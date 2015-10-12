@@ -14,7 +14,7 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 
 public class ComponentVillageTavern extends StructureVillagePieces.Village
 {
-	public ComponentVillageTavern(){}
+	public ComponentVillageTavern() {}
 
 	public ComponentVillageTavern(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int par5)
 	{
@@ -25,10 +25,10 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 
 	public static ComponentVillageTavern buildComponent(Start startPiece, List list, Random rand, int par3, int par4, int par5, int par6, int par7)
 	{
-		StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 9, 8, par6);
+		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 9, 8, par6);
 		if (canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(list, structureboundingbox) == null)
 		{
-		   return new ComponentVillageTavern(startPiece, par7, rand, structureboundingbox, par6);
+			return new ComponentVillageTavern(startPiece, par7, rand, structureboundingbox, par6);
 		}
 		return null;
 	}
@@ -47,7 +47,8 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 9 - 1, 0);
 		}
 
-		int x, y, z;
+		int x;
+		int z;
 
 		this.fillWithBlocks(world, box, 1, 1, 1, 11, 4, 6, Blocks.air, Blocks.air, false);
 		this.fillWithBlocks(world, box, 0, 0, 0, 12, 0, 6, Blocks.cobblestone, Blocks.cobblestone, false);
@@ -59,9 +60,8 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 			this.fillWithBlocks(world, box, 0, 4 - z, 5 + z, 12, 4 - z, 5 + z, Blocks.planks, Blocks.planks, false);
 		}
 
-
-		int m1 = this.getMetadataWithOffset(Blocks.oak_stairs, 3);
-		int m2 = this.getMetadataWithOffset(Blocks.oak_stairs, 2);
+		final int m1 = this.getMetadataWithOffset(Blocks.oak_stairs, 3);
+		final int m2 = this.getMetadataWithOffset(Blocks.oak_stairs, 2);
 
 		for (z = -1; z <= 2; ++z)
 		{
@@ -115,7 +115,6 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 		this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, 3, 1, 2, box);
 		this.placeBlockAtCurrentPosition(world, Blocks.wooden_pressure_plate, 0, 2, 2, 2, box);
 		this.placeBlockAtCurrentPosition(world, Blocks.wooden_pressure_plate, 0, 3, 2, 2, box);
-
 
 		for (z = 1; z <= 5; ++z)
 		{

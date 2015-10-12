@@ -22,10 +22,10 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 	{
 		if (modelID == id)
 		{
-			Tessellator tes = Tessellator.instance;
-			IIcon[] icon = {BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[1], BlockFermentBarrel.tex[1]};
-			double d = 0.0625D;
-			float f = 0.125F;
+			final Tessellator tes = Tessellator.instance;
+			final IIcon[] icon = {BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[1], BlockFermentBarrel.tex[1]};
+			final double d = 0.0625D;
+			final float f = 0.125F;
 			renderer.uvRotateEast = 3;
 			//inner wall
 			setRenderBounds(renderer, 0*d, 16*d, 1*d, 2*d, 5*d, 11*d);
@@ -102,9 +102,9 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			IIcon[] icon = {BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[1], BlockFermentBarrel.tex[2], BlockFermentBarrel.tex[3]};
-			int meta = world.getBlockMetadata(x, y, z);
-			double d = 0.0625D;
+			final IIcon[] icon = {BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[1], BlockFermentBarrel.tex[2], BlockFermentBarrel.tex[3]};
+			final int meta = world.getBlockMetadata(x, y, z);
+			final double d = 0.0625D;
 
 			if (meta == 0 || meta == 1)
 			{

@@ -19,7 +19,7 @@ public class TileEntityFruitPresserRenderer extends TileEntitySpecialRenderer
 	private void renderTileEntityFruitPresserAt(TileEntityFruitPresser te, double x, double y, double z, float f)
 	{
 		GL11.glPushMatrix();
-		float f2 = te.getTranslation();
+		final float f2 = te.getTranslation();
 		GL11.glTranslatef((float)x + 0.5F, (float)y + 1.75F - f2, (float)z + 0.5F);
 		GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
 		GL11.glScalef(0.9F, 1.0F, 0.9F);

@@ -14,16 +14,16 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderFruitPresser implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		if (modelID == id)
 		{
-			Tessellator tes = Tessellator.instance;
-			IIcon[] icon = {BlockFruitPresser.tex[0], BlockFruitPresser.tex[1], BlockFruitPresser.tex[2], BlockFruitPresser.tex[2], BlockFruitPresser.tex[2], BlockFruitPresser.tex[2] };
-			double d    = 0.0625D;
+			final Tessellator tes = Tessellator.instance;
+			final IIcon[] icon = {BlockFruitPresser.tex[0], BlockFruitPresser.tex[1], BlockFruitPresser.tex[2], BlockFruitPresser.tex[2], BlockFruitPresser.tex[2], BlockFruitPresser.tex[2] };
+			final double d    = 0.0625D;
 			// Render Machine
 			renderer.setRenderBounds( 3*d,  7*d,  3*d, 13*d, 15*d, 13*d);
 			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
@@ -36,27 +36,27 @@ public class RenderFruitPresser implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			IIcon[] icon = {BlockFruitPresser.tex[0], BlockFruitPresser.tex[1], BlockFruitPresser.tex[2], BlockFruitPresser.tex[3]};
-			int    m    = world.getBlockMetadata(x, y, z);
-			double d    = 0.0625D;
+			final IIcon[] icon = {BlockFruitPresser.tex[0], BlockFruitPresser.tex[1], BlockFruitPresser.tex[2], BlockFruitPresser.tex[3]};
+			final int    m    = world.getBlockMetadata(x, y, z);
+			final double d    = 0.0625D;
 
 			// Render Machine
 			renderer.setRenderBounds( 3*d,  7*d,  3*d, 13*d, 15*d, 13*d);
 			renderer.renderStandardBlock(block, x, y, z);
 
-			Tessellator tessellator = Tessellator.instance;
+			final Tessellator tessellator = Tessellator.instance;
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
-			float f = 1.0F;
-			int color = block.colorMultiplier(world, x, y, z);
+			final float f = 1.0F;
+			final int color = block.colorMultiplier(world, x, y, z);
 			float r = (float)(color >> 16 & 255) / 255.0F;
 			float g = (float)(color >> 8 & 255) / 255.0F;
 			float b = (float)(color & 255) / 255.0F;
 
 			if (EntityRenderer.anaglyphEnable)
 			{
-				float f5 = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
-				float f4 = (r * 30.0F + g * 70.0F) / 100.0F;
-				float f6 = (r * 30.0F + b * 70.0F) / 100.0F;
+				final float f5 = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
+				final float f4 = (r * 30.0F + g * 70.0F) / 100.0F;
+				final float f6 = (r * 30.0F + b * 70.0F) / 100.0F;
 				r = f5;
 				g = f4;
 				b = f6;

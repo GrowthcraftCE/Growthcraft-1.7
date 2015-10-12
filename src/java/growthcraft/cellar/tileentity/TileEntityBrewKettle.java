@@ -1,9 +1,10 @@
 package growthcraft.cellar.tileentity;
 
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.BrewRegistry;
-import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.container.ContainerBrewKettle;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.utils.NBTHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,7 +13,6 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
@@ -26,17 +26,16 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityBrewKettle extends TileEntity implements ISidedInventory, IFluidHandler
 {
-	// Constants
+	// Other Vars.
+	protected float residue;
+	protected int time;
+	protected boolean update;
+
 	private ItemStack[] invSlots = new ItemStack[2];
 	private int maxCap = GrowthCraftCellar.getConfig().brewKettleMaxCap;
 	private int[] maxCaps = new int[] {maxCap, maxCap};
 	private CellarTank[] tank = new CellarTank[] {new CellarTank(this.maxCaps[0], this), new CellarTank(this.maxCaps[1], this)};
-
-	// Other Vars.
-	private String  name;
-	protected float residue  = 0.0F;
-	protected int   time     = 0;
-	protected boolean update = false;
+	private String name;
 
 	/************
 	 * UPDATE
@@ -69,15 +68,11 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 			update = true;
 		}
-
-		//debugMsg();
 	}
 
 	private void sendUpdate()
 	{
-		//this.markDirty();
 		this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-		//GrowthCraftCellar.packetPipeline.sendToAllAround(new PacketBrewKettleFluid(this.xCoord, this.yCoord, this.zCoord, this.tank[1].getFluid().fluidID, this.tank[1].getFluid().amount), new TargetPoint(this.worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, 256.0D));
 	}
 
 	private void debugMsg()
@@ -98,10 +93,9 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 		if (this.invSlots[0] == null) return false;
 		if (this.isFluidTankFull(1)) return false;
 		if (!CellarRegistry.instance().brew().isBrewingRecipe(getFluidStack(0), this.invSlots[0])) return false;
-
 		if (this.isFluidTankEmpty(1)) return true;
 
-		FluidStack stack = CellarRegistry.instance().brew().getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
+		final FluidStack stack = CellarRegistry.instance().brew().getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
 		return stack.isFluidEqual(getFluidStack(1));
 	}
 
@@ -114,7 +108,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	{
 		final BrewRegistry brew = CellarRegistry.instance().brew();
 		// set spent grain
-		float f = brew.getBrewingResidue(getFluidStack(0), this.invSlots[0]);
+		final float f = brew.getBrewingResidue(getFluidStack(0), this.invSlots[0]);
 		this.residue = this.residue + f;
 		if (this.residue >= 1.0F)
 		{
@@ -133,8 +127,8 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 			}
 		}
 
-		FluidStack fluidstack = brew.getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
-		int amount  = brew.getBrewingAmount(getFluidStack(0), this.invSlots[0]);
+		final FluidStack fluidstack = brew.getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
+		final int amount = brew.getBrewingAmount(getFluidStack(0), this.invSlots[0]);
 		fluidstack.amount = amount;
 		this.tank[1].fill(fluidstack, true);
 		this.tank[0].drain(amount, true);
@@ -154,8 +148,8 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	{
 		if (this.invSlots[1] == null) return true;
 		if (!this.invSlots[1].isItemEqual(GrowthCraftCellar.residue)) return false;
-		int result = invSlots[1].stackSize + GrowthCraftCellar.residue.stackSize;
-		return (result <= getInventoryStackLimit() && result <= GrowthCraftCellar.residue.getMaxStackSize());
+		final int result = invSlots[1].stackSize + GrowthCraftCellar.residue.stackSize;
+		return result <= getInventoryStackLimit() && result <= GrowthCraftCellar.residue.getMaxStackSize();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -214,7 +208,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	{
 		if (this.invSlots[index] != null)
 		{
-			ItemStack itemstack = this.invSlots[index];
+			final ItemStack itemstack = this.invSlots[index];
 			this.invSlots[index] = null;
 			return itemstack;
 		}
@@ -254,10 +248,10 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	}
 
 	@Override
-	public void openInventory(){}
+	public void openInventory() {}
 
 	@Override
-	public void closeInventory(){}
+	public void closeInventory() {}
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
@@ -292,19 +286,9 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		//INVENTORY
-		NBTTagList tags = nbt.getTagList("items", 10);
+		// INVENTORY
 		this.invSlots = new ItemStack[this.getSizeInventory()];
-		for (int i = 0; i < tags.tagCount(); ++i)
-		{
-			NBTTagCompound nbttagcompound1 = tags.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < this.invSlots.length)
-			{
-				this.invSlots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
+		NBTHelper.readInventorySlotsFromNBT(nbt.getTagList("items", NBTHelper.NBTType.COMPOUND), invSlots);
 
 		//TANK
 		readTankFromNBT(nbt);
@@ -336,24 +320,13 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	{
 		super.writeToNBT(nbt);
 
-		//INVENTORY
-		NBTTagList nbttaglist = new NBTTagList();
-		for (int i = 0; i < this.invSlots.length; ++i)
-		{
-			if (this.invSlots[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				this.invSlots[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-		nbt.setTag("items", nbttaglist);
+		// INVENTORY
+		nbt.setTag("items", NBTHelper.writeInventorySlotsToNBT(invSlots));
 
-		//TANKS
+		// TANKS
 		writeTankToNBT(nbt);
 
-		//NAME
+		// NAME
 		if (this.hasCustomInventoryName())
 		{
 			nbt.setString("name", this.name);
@@ -367,7 +340,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	{
 		for (int i = 0; i < this.tank.length; i++)
 		{
-			NBTTagCompound tag = new NBTTagCompound();
+			final NBTTagCompound tag = new NBTTagCompound();
 			this.tank[i].writeToNBT(tag);
 			nbt.setTag("Tank" + i, tag);
 		}
@@ -405,51 +378,59 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	{
 		switch (id)
 		{
-		case 0:
-			time = v;
-			break;
-		case 1:
-			if (FluidRegistry.getFluid(v) == null) {
-				return;
-			}
-			if (tank[0].getFluid() == null)
-			{
-				tank[0].setFluid(new FluidStack(v, 0));
-			} else
-			{
-				tank[0].setFluid(new FluidStack(v, tank[0].getFluid().amount));
-			}
-			break;
-		case 2:
-			if (tank[0].getFluid() == null)
-			{
-				tank[0].setFluid(new FluidStack(FluidRegistry.WATER, v));
-			} else
-			{
-				tank[0].getFluid().amount = v;
-			}
-			break;
-		case 3:
-			if (FluidRegistry.getFluid(v) == null) {
-				return;
-			}
-			if (tank[1].getFluid() == null)
-			{
-				tank[1].setFluid(new FluidStack(v, 0));
-			} else
-			{
-				tank[1].setFluid(new FluidStack(v, tank[1].getFluid().amount));
-			}
-			break;
-		case 4:
-			if (tank[1].getFluid() == null)
-			{
-				tank[1].setFluid(new FluidStack(FluidRegistry.WATER, v));
-			} else
-			{
-				tank[1].getFluid().amount = v;
-			}
-			break;
+			case 0:
+				time = v;
+				break;
+			case 1:
+				if (FluidRegistry.getFluid(v) == null)
+				{
+					return;
+				}
+				if (tank[0].getFluid() == null)
+				{
+					tank[0].setFluid(new FluidStack(v, 0));
+				}
+				else
+				{
+					tank[0].setFluid(new FluidStack(v, tank[0].getFluid().amount));
+				}
+				break;
+			case 2:
+				if (tank[0].getFluid() == null)
+				{
+					tank[0].setFluid(new FluidStack(FluidRegistry.WATER, v));
+				}
+				else
+				{
+					tank[0].getFluid().amount = v;
+				}
+				break;
+			case 3:
+				if (FluidRegistry.getFluid(v) == null)
+				{
+					return;
+				}
+				if (tank[1].getFluid() == null)
+				{
+					tank[1].setFluid(new FluidStack(v, 0));
+				}
+				else
+				{
+					tank[1].setFluid(new FluidStack(v, tank[1].getFluid().amount));
+				}
+				break;
+			case 4:
+				if (tank[1].getFluid() == null)
+				{
+					tank[1].setFluid(new FluidStack(FluidRegistry.WATER, v));
+				}
+				else
+				{
+					tank[1].getFluid().amount = v;
+				}
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -465,7 +446,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		NBTTagCompound nbt = new NBTTagCompound();
+		final NBTTagCompound nbt = new NBTTagCompound();
 		writeTankToNBT(nbt);
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbt);
 	}
@@ -483,13 +464,11 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
-		int f = this.tank[0].fill(resource, doFill);
-
+		final int f = this.tank[0].fill(resource, doFill);
 		if (f > 0)
 		{
 			sendUpdate();
 		}
-
 		return f;
 	}
 
@@ -507,13 +486,11 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		FluidStack d = this.tank[1].drain(maxDrain, doDrain);
-
+		final FluidStack d = this.tank[1].drain(maxDrain, doDrain);
 		if (d != null)
 		{
 			sendUpdate();
 		}
-
 		return d;
 	}
 

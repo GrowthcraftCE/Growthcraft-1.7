@@ -3,40 +3,17 @@ package growthcraft.cellar.network;
 import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.tileentity.TileEntityFruitPress;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class PacketClearTankButton extends AbstractPacket
+public class PacketClearTankButton extends AbstractPacketButton
 {
-	int x, y, z;
-
 	public PacketClearTankButton(){}
 
 	public PacketClearTankButton(int x, int y, int z)
 	{
-		this.x = x;
-		this.y = y;
-		this.z = z;
-	}
-
-	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
-	{
-		buffer.writeInt(x);
-		buffer.writeInt(y);
-		buffer.writeInt(z);
-	}
-
-	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
-	{
-		x = buffer.readInt();
-		y = buffer.readInt();
-		z = buffer.readInt();
-
+		super(x, y, z);
 	}
 
 	@Override
@@ -48,8 +25,8 @@ public class PacketClearTankButton extends AbstractPacket
 	@Override
 	public void handleServerSide(EntityPlayer player)
 	{
-		World world = player.worldObj;
-		TileEntity te = world.getTileEntity(x, y, z);
+		final World world = player.worldObj;
+		final TileEntity te = world.getTileEntity(xCoord, yCoord, zCoord);
 
 		if (te instanceof TileEntityFruitPress)
 		{

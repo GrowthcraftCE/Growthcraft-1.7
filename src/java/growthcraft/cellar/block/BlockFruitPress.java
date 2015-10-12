@@ -11,7 +11,6 @@ import growthcraft.core.utils.BlockFlags;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,9 +28,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockFruitPress extends BlockCellarContainer implements ICellarFluidHandler
 {
-	private final Random rand = new Random();
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
+
+	private final Random rand = new Random();
 
 	public BlockFruitPress()
 	{
@@ -76,11 +76,11 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 		}
 		else
 		{
-			TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
+			final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
 
 			if (te != null)
 			{
-				ItemStack itemstack = player.inventory.getCurrentItem();
+				final ItemStack itemstack = player.inventory.getCurrentItem();
 				if (!Utils.drainTank(world, x, y, z, te, itemstack, player, false, 64, 0.35F))
 				{
 					openGui(player, world, x, y, z);
@@ -107,10 +107,10 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	{
 		if (!world.isRemote)
 		{
-			Block block = world.getBlock(x, y, z - 1);
-			Block block1 = world.getBlock(x, y, z + 1);
-			Block block2 = world.getBlock(x - 1, y, z);
-			Block block3 = world.getBlock(x + 1, y, z);
+			final Block block = world.getBlock(x, y, z - 1);
+			final Block block1 = world.getBlock(x, y, z + 1);
+			final Block block2 = world.getBlock(x - 1, y, z);
+			final Block block3 = world.getBlock(x + 1, y, z);
 			byte meta = 3;
 
 			if (block.func_149730_j() && !block1.func_149730_j())
@@ -140,7 +140,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
-		int a = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		final int a = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (a == 0 || a == 2)
 		{
@@ -181,19 +181,19 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int par6)
 	{
-		TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
+		final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
 
 		if (te != null)
 		{
 			for (int index = 0; index < te.getSizeInventory(); ++index)
 			{
-				ItemStack stack = te.getStackInSlot(index);
+				final ItemStack stack = te.getStackInSlot(index);
 
 				if (stack != null)
 				{
-					float f = this.rand.nextFloat() * 0.8F + 0.1F;
-					float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-					float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
 
 					while (stack.stackSize > 0)
 					{
@@ -205,14 +205,14 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 						}
 
 						stack.stackSize -= k1;
-						EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
+						final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
 
 						if (stack.hasTagCompound())
 						{
 							entityitem.getEntityItem().setTagCompound((NBTTagCompound)stack.getTagCompound().copy());
 						}
 
-						float f3 = 0.05F;
+						final float f3 = 0.05F;
 						entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
 						entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
 						entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
@@ -233,15 +233,15 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
 
 		if (meta == 0)
 		{
-			return (side == side.EAST || side == side.WEST);
+			return side == side.EAST || side == side.WEST;
 		}
 		else if (meta == 1)
 		{
-			return (side == side.NORTH || side == side.SOUTH);
+			return side == side.NORTH || side == side.SOUTH;
 		}
 
 		return isNormalCube(world, x, y, z);
@@ -272,7 +272,11 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
-		return y >= 255 ? false : World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && super.canPlaceBlockAt(world, x, y, z) && super.canPlaceBlockAt(world, x, y + 1, z);
+		if (y >= 255) return false;
+
+		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) &&
+			super.canPlaceBlockAt(world, x, y, z) &&
+			super.canPlaceBlockAt(world, x, y + 1, z);
 	}
 
 	@Override
@@ -298,7 +302,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	}
 
 	@Override
-	public int quantityDropped(Random rand)
+	public int quantityDropped(Random random)
 	{
 		return 1;
 	}
@@ -363,7 +367,11 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
 	{
-		TileEntityFruitPress te = (TileEntityFruitPress) world.getTileEntity(x, y, z);
-		return te.getFluidAmountScaled(15);
+		final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
+		if (te != null)
+		{
+			return te.getFluidAmountScaled(15);
+		}
+		return 0;
 	}
 }

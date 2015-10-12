@@ -2,7 +2,6 @@ package growthcraft.cellar.gui;
 
 import java.util.ArrayList;
 
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.container.ContainerFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.network.PacketClearTankButton;
@@ -14,7 +13,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
@@ -30,17 +28,18 @@ public class GuiFruitPress extends GuiCellar
 	private TileEntityFruitPress te;
 	private GuiButtonDiscard button;
 
-	public GuiFruitPress(InventoryPlayer inv, TileEntityFruitPress te)
+	public GuiFruitPress(InventoryPlayer inv, TileEntityFruitPress fruitPress)
 	{
-		super(new ContainerFruitPress(inv, te));
-		this.te = te;
+		super(new ContainerFruitPress(inv, fruitPress));
+		this.te = fruitPress;
 	}
 
 	@Override
 	public void initGui()
 	{
 		super.initGui();
-		this.buttonList.add(this.button = new GuiButtonDiscard(this.res, 1, this.guiLeft + 108, this.guiTop + 54));
+		this.button = new GuiButtonDiscard(this.res, 1, this.guiLeft + 108, this.guiTop + 54);
+		this.buttonList.add(this.button);
 		this.button.enabled = false;
 	}
 
@@ -51,7 +50,7 @@ public class GuiFruitPress extends GuiCellar
 		this.button.enabled = this.te.isFluidTankFilled();
 	}
 
-	protected void actionPerformed(GuiButton button)
+	protected void actionPerformed(GuiButton butn)
 	{
 		GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButton(this.te.xCoord, this.te.yCoord, this.te.zCoord));
 	}
@@ -63,7 +62,7 @@ public class GuiFruitPress extends GuiCellar
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 
-		if (this.te.isFluidTankEmpty() == false)
+		if (!this.te.isFluidTankEmpty())
 		{
 			s = String.valueOf(this.te.getFluidAmount());
 			this.fontRendererObj.drawStringWithShadow(s, this.xSize - 70 - this.fontRendererObj.getStringWidth(s), this.ySize - 104, 0xFFFFFF);
@@ -75,12 +74,10 @@ public class GuiFruitPress extends GuiCellar
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(res);
-		int w = (this.width - this.xSize) / 2;
-		int h = (this.height - this.ySize) / 2;
+		final int w = (this.width - this.xSize) / 2;
+		final int h = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize);
-		int i;
-
-		i = this.te.getPressProgressScaled(24);
+		final int i = this.te.getPressProgressScaled(24);
 		this.drawTexturedModalRect(w + 63, h + 34, 176, 0, i + 1, 16);
 
 		if (this.te.getFluidAmountScaled(52) > 0)
@@ -93,49 +90,53 @@ public class GuiFruitPress extends GuiCellar
 	protected void drawTank(int w, int h, int wp, int hp, int width, int amount, FluidStack fluidstack, CellarTank tank)
 	{
 		if (fluidstack == null) { return; }
-		int start = 0;
+
+		final Fluid fluid = fluidstack.getFluid();
+		final int color = fluid.getColor();
 
 		IIcon icon = null;
-		Fluid fluid = fluidstack.getFluid();
-		int color = fluid.getColor();
 		if (fluid != null && fluid.getStillIcon() != null)
 		{
 			icon = fluid.getStillIcon();
 		}
+
 		this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-		float r = (float)(color >> 16 & 255) / 255.0F;
-		float g = (float)(color >> 8 & 255) / 255.0F;
-		float b = (float)(color & 255) / 255.0F;
+
+		final float r = (float)(color >> 16 & 255) / 255.0F;
+		final float g = (float)(color >> 8 & 255) / 255.0F;
+		final float b = (float)(color & 255) / 255.0F;
 		GL11.glColor4f(r, g, b, 1.0f);
+
 		this.drawTexturedModelRectFromIcon(w + wp, h + hp + 52 - amount, icon, width, amount);
+
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	@Override
 	protected void drawToolTipAtMousePos(int par1, int par2)
 	{
-		int w = (this.width - this.xSize) / 2;
-		int h = (this.height - this.ySize) / 2;
+		final int w = (this.width - this.xSize) / 2;
+		final int h = (this.height - this.ySize) / 2;
 
 		if ((par1 > w + 89) && (par2 > h + 17) && (par1 < w + 89 + 16) && (par2 < h + 17 + 52))
 		{
-			ArrayList toolTip = new ArrayList();
+			final ArrayList<String> tooltip = new ArrayList<String>();
 
 			if (this.te.isFluidTankFilled())
 			{
-				toolTip.add(this.te.getFluid().getLocalizedName());
+				tooltip.add(this.te.getFluid().getLocalizedName());
 
 				final String s = UnitFormatter.fluidModifier(this.te.getFluid());
-				if (s != null) toolTip.add(s);
+				if (s != null) tooltip.add(s);
 			}
 
-			drawText(toolTip, par1, par2, this.fontRendererObj);
+			drawText(tooltip, par1, par2, this.fontRendererObj);
 		}
 		else if ((par1 > w + 108) && (par2 > h + 54) && (par1 < w + 108 + 16) && (par2 < h + 54 + 16))
 		{
-			ArrayList toolTip = new ArrayList();
-			toolTip.add(I18n.format("gui.grc.discard"));
-			drawText(toolTip, par1, par2, this.fontRendererObj);
+			final ArrayList<String> tooltip = new ArrayList<String>();
+			tooltip.add(I18n.format("gui.grc.discard"));
+			drawText(tooltip, par1, par2, this.fontRendererObj);
 		}
 	}
 }

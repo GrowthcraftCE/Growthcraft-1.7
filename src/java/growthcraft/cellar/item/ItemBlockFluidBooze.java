@@ -2,7 +2,6 @@ package growthcraft.cellar.item;
 
 import java.util.List;
 
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.core.utils.UnitFormatter;
 
@@ -13,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.Fluid;
 
 public class ItemBlockFluidBooze extends ItemBlock
@@ -44,8 +42,7 @@ public class ItemBlockFluidBooze extends ItemBlock
 
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		final Fluid booze = getBooze();
-		final String modifier = UnitFormatter.fluidModifier(booze);
+		final String modifier = UnitFormatter.fluidModifier(getBooze());
 		if (modifier != null) list.add(modifier);
 	}
 

@@ -7,11 +7,7 @@ import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBlockFluidBooze;
-import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.item.ItemBucketBooze;
-import growthcraft.core.common.definition.BlockTypeDefinition;
-import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.integration.NEI;
@@ -25,6 +21,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BoozeRegistryHelper
 {
+	private BoozeRegistryHelper() {}
+
 	public static void initializeBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemBucketBoozeDefinition[] buckets, String basename, int color)
 	{
 		for (int i = 0; i < boozes.length; ++i)
@@ -49,12 +47,12 @@ public class BoozeRegistryHelper
 
 			BucketHandler.instance().register(fluidBlocks[i].getBlock(), buckets[i].getItem());
 
-			FluidStack stack = new FluidStack(boozes[i], FluidContainerRegistry.BUCKET_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack, oldBucket.asStack(1, i), FluidContainerRegistry.EMPTY_BUCKET);
-			FluidContainerRegistry.registerFluidContainer(stack, buckets[i].asStack(), FluidContainerRegistry.EMPTY_BUCKET);
+			final FluidStack boozeStack = new FluidStack(boozes[i], FluidContainerRegistry.BUCKET_VOLUME);
+			FluidContainerRegistry.registerFluidContainer(boozeStack, oldBucket.asStack(1, i), FluidContainerRegistry.EMPTY_BUCKET);
+			FluidContainerRegistry.registerFluidContainer(boozeStack, buckets[i].asStack(), FluidContainerRegistry.EMPTY_BUCKET);
 
-			FluidStack stack2 = new FluidStack(boozes[i], GrowthCraftCellar.BOTTLE_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(stack2, bottle.asStack(1, i), GrowthCraftCellar.EMPTY_BOTTLE);
+			final FluidStack bottleStack = new FluidStack(boozes[i], GrowthCraftCellar.BOTTLE_VOLUME);
+			FluidContainerRegistry.registerFluidContainer(bottleStack, bottle.asStack(1, i), GrowthCraftCellar.EMPTY_BOTTLE);
 
 			NEI.hideItem(oldBucket.asStack(1, i));
 		}

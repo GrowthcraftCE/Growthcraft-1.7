@@ -2,19 +2,17 @@ package growthcraft.cellar.utils;
 
 import java.util.List;
 
-import growthcraft.core.utils.ConstID;
 import growthcraft.core.utils.ITagFormatter;
 import growthcraft.core.utils.TagFormatterItem;
 import growthcraft.core.utils.UnitFormatter;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 
 public class TagFormatterBrewKettle implements ITagFormatter
 {
-	public final static TagFormatterBrewKettle INSTANCE = new TagFormatterBrewKettle();
+	public static final TagFormatterBrewKettle INSTANCE = new TagFormatterBrewKettle();
 
 	public List<String> format(List<String> list, NBTTagCompound tag)
 	{

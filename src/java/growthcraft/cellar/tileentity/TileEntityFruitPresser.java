@@ -14,7 +14,7 @@ public class TileEntityFruitPresser extends TileEntity
 	public float transPrev;
 
 	private float transSpd = 0.21875F;
-	private float transMin = 0.0F;
+	private float transMin;
 	private float transMax = 0.4375F;
 
 	/************
@@ -29,7 +29,7 @@ public class TileEntityFruitPresser extends TileEntity
 			invalidate();
 		}
 
-		int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
+		final int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
 		this.transPrev = this.trans;
 
 		if ((meta == 0 || meta == 1) && this.trans > this.transMin)
@@ -40,11 +40,6 @@ public class TileEntityFruitPresser extends TileEntity
 		{
 			this.trans += this.transSpd;
 		}
-
-		/*if (!this.worldObj.isRemote)
-		{
-			this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-		}*/
 	}
 
 	public float getTranslation()
@@ -77,7 +72,7 @@ public class TileEntityFruitPresser extends TileEntity
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		NBTTagCompound nbtTag = new NBTTagCompound();
+		final NBTTagCompound nbtTag = new NBTTagCompound();
 		this.writeToNBT(nbtTag);
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
 	}

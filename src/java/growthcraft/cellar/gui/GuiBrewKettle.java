@@ -15,7 +15,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
@@ -30,22 +29,28 @@ public class GuiBrewKettle extends GuiCellar
 	private GuiButtonDiscard button1;
 	private GuiButtonSwitch button2;
 
-	public GuiBrewKettle(InventoryPlayer inv, TileEntityBrewKettle te)
+	public GuiBrewKettle(InventoryPlayer inv, TileEntityBrewKettle brewKettle)
 	{
-		super(new ContainerBrewKettle(inv, te));
-		this.te = te;
+		super(new ContainerBrewKettle(inv, brewKettle));
+		this.te = brewKettle;
 	}
 
 	@Override
 	public void initGui()
 	{
 		super.initGui();
-		this.buttonList.add(this.button0 = new GuiButtonDiscard(this.res, 1, this.guiLeft + 27, this.guiTop + 54));
+		this.button0 = new GuiButtonDiscard(this.res, 1, this.guiLeft + 27, this.guiTop + 54);
 		this.button0.enabled = false;
-		this.buttonList.add(this.button1 = new GuiButtonDiscard(this.res, 1, this.guiLeft + 133, this.guiTop + 54));
+
+		this.button1 = new GuiButtonDiscard(this.res, 1, this.guiLeft + 133, this.guiTop + 54);
 		this.button1.enabled = false;
-		this.buttonList.add(this.button2 = new GuiButtonSwitch(this.res, 1, this.guiLeft + 133, this.guiTop + 37));
+
+		this.button2 = new GuiButtonSwitch(this.res, 1, this.guiLeft + 133, this.guiTop + 37);
 		this.button2.enabled = false;
+
+		this.buttonList.add(this.button0);
+		this.buttonList.add(this.button1);
+		this.buttonList.add(this.button2);
 	}
 
 	@Override
@@ -81,13 +86,13 @@ public class GuiBrewKettle extends GuiCellar
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 
-		if (this.te.isFluidTankEmpty(0) == false)
+		if (!this.te.isFluidTankEmpty(0))
 		{
 			s = String.valueOf(this.te.getFluidAmount(0));
 			this.fontRendererObj.drawStringWithShadow(s, this.xSize - 113 - this.fontRendererObj.getStringWidth(s), this.ySize - 104, 0xFFFFFF);
 		}
 
-		if (this.te.isFluidTankEmpty(1) == false)
+		if (!this.te.isFluidTankEmpty(1))
 		{
 			s = String.valueOf(this.te.getFluidAmount(1));
 			this.fontRendererObj.drawStringWithShadow(s, this.xSize - 45 - this.fontRendererObj.getStringWidth(s), this.ySize - 104, 0xFFFFFF);
@@ -99,12 +104,11 @@ public class GuiBrewKettle extends GuiCellar
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(res);
-		int w = (this.width - this.xSize) / 2;
-		int h = (this.height - this.ySize) / 2;
+		final int w = (this.width - this.xSize) / 2;
+		final int h = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize);
-		int i;
 
-		i = this.te.getBrewProgressScaled(28);
+		final int i = this.te.getBrewProgressScaled(28);
 		this.drawTexturedModalRect(w + 98, h + 30, 176, 0, 9, i);
 
 		if (this.te.hasFire())
@@ -128,81 +132,85 @@ public class GuiBrewKettle extends GuiCellar
 	protected void drawTank(int w, int h, int wp, int hp, int width, int amount, FluidStack fluidstack, CellarTank tank)
 	{
 		if (fluidstack == null) { return; }
-		int start = 0;
+
+		final Fluid fluid = fluidstack.getFluid();
+		final int color = fluid.getColor();
 
 		IIcon icon = null;
-		Fluid fluid = fluidstack.getFluid();
-		int color = fluid.getColor();
 		if (fluid != null && fluid.getStillIcon() != null)
 		{
 			icon = fluid.getStillIcon();
 		}
+
 		this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-		float r = (float)(color >> 16 & 255) / 255.0F;
-		float g = (float)(color >> 8 & 255) / 255.0F;
-		float b = (float)(color & 255) / 255.0F;
+
+		final float r = (float)(color >> 16 & 255) / 255.0F;
+		final float g = (float)(color >> 8 & 255) / 255.0F;
+		final float b = (float)(color & 255) / 255.0F;
 		GL11.glColor4f(r, g, b, 1.0f);
+
 		this.drawTexturedModelRectFromIcon(w + wp, h + hp + 52 - amount, icon, width, amount);
+
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	@Override
 	protected void drawToolTipAtMousePos(int par1, int par2)
 	{
-		int w = (this.width - this.xSize) / 2;
-		int h = (this.height - this.ySize) / 2;
+		final int w = (this.width - this.xSize) / 2;
+		final int h = (this.height - this.ySize) / 2;
 
 		if ((par1 > w + 46) && (par2 > h + 17) && (par1 < w + 46 + 16) && (par2 < h + 17 + 52))
 		{
-			ArrayList toolTip = new ArrayList();
+			final ArrayList<String> tooltip = new ArrayList<String>();
 
 			if (this.te.isFluidTankFilled(0))
 			{
 				Fluid fluid = this.te.getFluid(0);
-				toolTip.add(fluid.getLocalizedName());
+				tooltip.add(fluid.getLocalizedName());
 				if (CellarRegistry.instance().booze().isFluidBooze(fluid))
 				{
 					fluid = CellarRegistry.instance().booze().maybeAlternateBooze(fluid);
-					toolTip.add(UnitFormatter.fluidModifier(fluid));
+					tooltip.add(UnitFormatter.fluidModifier(fluid));
 				}
 			}
 
-			drawText(toolTip, par1, par2, this.fontRendererObj);
+			drawText(tooltip, par1, par2, this.fontRendererObj);
 		}
 		else if ((par1 > w + 114) && (par2 > h + 17) && (par1 < w + 114 + 16) && (par2 < h + 17 + 52))
 		{
-			ArrayList toolTip = new ArrayList();
+			final ArrayList<String> tooltip = new ArrayList<String>();
 
 			if (this.te.isFluidTankFilled(1))
 			{
 				Fluid fluid = this.te.getFluid(1);
-				toolTip.add(fluid.getLocalizedName());
+				tooltip.add(fluid.getLocalizedName());
 				if (CellarRegistry.instance().booze().isFluidBooze(fluid))
 				{
 					fluid = CellarRegistry.instance().booze().maybeAlternateBooze(fluid);
-					toolTip.add(UnitFormatter.fluidModifier(fluid));
+					tooltip.add(UnitFormatter.fluidModifier(fluid));
 				}
 			}
 
-			drawText(toolTip, par1, par2, this.fontRendererObj);
+			drawText(tooltip, par1, par2, this.fontRendererObj);
 		}
 		else if ((par1 > w + 27) && (par2 > h + 54) && (par1 < w + 27 + 16) && (par2 < h + 54 + 16))
 		{
-			ArrayList toolTip = new ArrayList();
-			toolTip.add(I18n.format("gui.grc.discard"));
-			drawText(toolTip, par1, par2, this.fontRendererObj);
+			final ArrayList<String> tooltip = new ArrayList<String>();
+			tooltip.add(I18n.format("gui.grc.discard"));
+			drawText(tooltip, par1, par2, this.fontRendererObj);
 		}
 		else if ((par1 > w + 133) && (par2 > h + 54) && (par1 < w + 133 + 16) && (par2 < h + 54 + 16))
 		{
-			ArrayList toolTip = new ArrayList();
-			toolTip.add(I18n.format("gui.grc.discard"));
-			drawText(toolTip, par1, par2, this.fontRendererObj);
+			final ArrayList<String> tooltip = new ArrayList<String>();
+			tooltip.add(I18n.format("gui.grc.discard"));
+			drawText(tooltip, par1, par2, this.fontRendererObj);
 		}
 		else if ((par1 > w + 133) && (par2 > h + 37) && (par1 < w + 133 + 16) && (par2 < h + 37 + 16))
 		{
-			ArrayList toolTip = new ArrayList();
-			toolTip.add(I18n.format("gui.grc.switch"));
-			drawText(toolTip, par1, par2, this.fontRendererObj);
+			final ArrayList<String> tooltip = new ArrayList<String>();
+			tooltip.add(I18n.format("gui.grc.switch"));
+			drawText(tooltip, par1, par2, this.fontRendererObj);
 		}
 	}
 }

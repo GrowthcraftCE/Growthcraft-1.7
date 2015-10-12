@@ -16,14 +16,14 @@ public class ContainerFermentBarrel extends Container
 {
 	private TileEntityFermentBarrel te;
 
-	public ContainerFermentBarrel(InventoryPlayer player, TileEntityFermentBarrel te)
+	public ContainerFermentBarrel(InventoryPlayer player, TileEntityFermentBarrel fermentBarrel)
 	{
 		// Slot Indexes:
 		//0            raw
 		//1 - 27 (28)  player.inv.backpack
 		//28 - 36 (37) player.inv.hotbar
 
-		this.te = te;
+		this.te = fermentBarrel;
 		this.addSlotToContainer(new Slot(te, 0, 43, 53));
 		int i;
 
@@ -51,11 +51,11 @@ public class ContainerFermentBarrel extends Container
 	public ItemStack transferStackInSlot(EntityPlayer player, int index)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot)this.inventorySlots.get(index);
+		final Slot slot = (Slot)this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack())
 		{
-			ItemStack stack = slot.getStack();
+			final ItemStack stack = slot.getStack();
 			itemstack = stack.copy();
 
 			if (index != 0)

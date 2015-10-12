@@ -1,6 +1,5 @@
 package growthcraft.cellar;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
@@ -29,7 +28,6 @@ import growthcraft.core.utils.MapGenHelper;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -37,21 +35,14 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.SidedProxy;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.stats.Achievement;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-
-import cpw.mods.fml.common.FMLLog;
-import org.apache.logging.log4j.Level;
 
 @Mod(
 	modid = GrowthCraftCellar.MOD_ID,
@@ -154,7 +145,7 @@ public class GrowthCraftCellar
 			{
 				if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a"))
 				{
-					Field modfield = Field.class.getDeclaredField("modifiers");
+					final Field modfield = Field.class.getDeclaredField("modifiers");
 					modfield.setAccessible(true);
 					modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
 
@@ -212,6 +203,5 @@ public class GrowthCraftCellar
 		packetPipeline.postInitialise();
 		MinecraftForge.EVENT_BUS.register(new ItemCraftedEventCellar());
 		MinecraftForge.EVENT_BUS.register(new LivingUpdateEventCellar());
-
 	}
 }

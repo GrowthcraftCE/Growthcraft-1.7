@@ -1,5 +1,7 @@
 package growthcraft.cellar.renderer;
 
+import org.lwjgl.opengl.GL11;
+
 import growthcraft.cellar.block.BlockBrewKettle;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
 import growthcraft.core.utils.RenderUtils.Faces;
@@ -13,7 +15,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.fluids.Fluid;
 
 public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 {
@@ -24,12 +26,12 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 	{
 		if (modelID == id)
 		{
-			Tessellator tes = Tessellator.instance;
-			IIcon[] icon  = {BlockBrewKettle.tex[0], BlockBrewKettle.tex[3], BlockBrewKettle.tex[2], BlockBrewKettle.tex[2], BlockBrewKettle.tex[2], BlockBrewKettle.tex[2]};
+			final Tessellator tes = Tessellator.instance;
+			final IIcon[] icon  = {BlockBrewKettle.tex[0], BlockBrewKettle.tex[3], BlockBrewKettle.tex[2], BlockBrewKettle.tex[2], BlockBrewKettle.tex[2], BlockBrewKettle.tex[2]};
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
-			double d = 0.0625D;
-			float f = 0.125F;
+			final double d = 0.0625D;
+			final float f = 0.125F;
 
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 			RenderUtils.drawFace(Faces.ZNEG, block, renderer, tes, BlockBrewKettle.tex[2], 0.0D, 0.0D, (double)((float)0.0F + 1.0F - f));
@@ -48,11 +50,11 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			IIcon[] icon = {BlockBrewKettle.tex[0], BlockBrewKettle.tex[1], BlockBrewKettle.tex[2], BlockBrewKettle.tex[3]};
-			double d = 0.0625D;
+			final IIcon[] icon = {BlockBrewKettle.tex[0], BlockBrewKettle.tex[1], BlockBrewKettle.tex[2], BlockBrewKettle.tex[3]};
+			final double d = 0.0625D;
 			float f = 1.0F;
 			renderer.renderStandardBlock(block, x, y, z);
-			Tessellator tes = Tessellator.instance;
+			final Tessellator tes = Tessellator.instance;
 			tes.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 			int color = block.colorMultiplier(world, x, y, z);
 			float r = (float)(color >> 16 & 255) / 255.0F;
@@ -62,9 +64,9 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 
 			if (EntityRenderer.anaglyphEnable)
 			{
-				float f5 = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
+				final float f5 = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
 				f4 = (r * 30.0F + g * 70.0F) / 100.0F;
-				float f6 = (r * 30.0F + b * 70.0F) / 100.0F;
+				final float f6 = (r * 30.0F + b * 70.0F) / 100.0F;
 				r = f5;
 				g = f4;
 				b = f6;
@@ -80,18 +82,27 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 			renderer.renderFaceYNeg(block, (double)x, (double)((float)y + 1.0F - 0.75F), (double)z, icon[1]);
 
 			// Render Liquid
-			TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
-			if (te != null && te.isFluidTankFilled(1))
+			final TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
+			Fluid fluid;
+			if (te != null)
 			{
-				color = te.getFluid(1).getColor();
-				r = (float)(color >> 16 & 255) / 255.0F;
-				g = (float)(color >> 8 & 255) / 255.0F;
-				b = (float)(color & 255) / 255.0F;
-				f = 1.0F;
-				tes.setColorOpaque_F(f * r, f * g, f * b);
-				f = (float)(te.getFluidAmount(1) * 0.71875F / te.getFluidTank(1).getCapacity());
-				renderer.setRenderBounds(2*d, 0.0D, 2*d, 14*d, (double)((float)0.25F + f), 14*d);
-				renderer.renderFaceYPos(block, (double)x, (double)y, (double)z, te.getFluid(1).getIcon());
+				for (int i = 0; i < 2; ++i)
+				{
+					if (te.isFluidTankFilled(i))
+					{
+						tes.setColorOpaque_F(f * r, f * g, f * b);
+						fluid = te.getFluid(i);
+						color = fluid.getColor();
+						r = (float)(color >> 16 & 255) / 255.0F;
+						g = (float)(color >> 8 & 255) / 255.0F;
+						b = (float)(color & 255) / 255.0F;
+						f = 1.0F;
+						tes.setColorOpaque_F(f * r, f * g, f * b);
+						f = (float)(te.getFluidAmount(i) * 0.71875F / te.getFluidTank(i).getCapacity());
+						renderer.setRenderBounds(2 * d, 0.0D, 2 * d, 14*d, (double)((float)0.25F + f), 14 * d);
+						renderer.renderFaceYPos(block, (double)x, (double)y, (double)z, fluid.getIcon());
+					}
+				}
 			}
 
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);

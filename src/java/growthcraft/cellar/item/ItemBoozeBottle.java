@@ -10,7 +10,6 @@ import growthcraft.core.Utils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,12 +30,12 @@ public class ItemBoozeBottle extends ItemFood
 {
 	private Fluid[] booze;
 
-	private boolean tipsyBool   = false;
-	private float   tipsyChance = 0.0F;
-	private int     tipsyTime   = 0;
+	private boolean tipsyBool;
+	private float   tipsyChance;
+	private int     tipsyTime;
 
-	private boolean potionBool   = false;
-	private int     potionAmount = 0;
+	private boolean potionBool;
+	private int     potionAmount;
 	private int[]   potionID;
 	private int[]   potionTime;
 
@@ -47,9 +46,9 @@ public class ItemBoozeBottle extends ItemFood
 	@SideOnly(Side.CLIENT)
 	private IIcon liquid;
 
-	private int color = 16777215;
+	private int color = 0xFFFFFF;
 
-	public ItemBoozeBottle(int nut, float sat, Fluid[] booze)
+	public ItemBoozeBottle(int nut, float sat, Fluid[] boozeAry)
 	{
 		super(nut, sat, false);
 		this.setAlwaysEdible();
@@ -59,12 +58,12 @@ public class ItemBoozeBottle extends ItemFood
 		this.setContainerItem(Items.glass_bottle);
 		this.setCreativeTab(GrowthCraftCellar.tab);
 
-		this.booze = booze;
+		this.booze = boozeAry;
 	}
 
-	public ItemBoozeBottle setColor(int color)
+	public ItemBoozeBottle setColor(int kolor)
 	{
-		this.color = color;
+		this.color = kolor;
 		return this;
 	}
 
@@ -192,10 +191,12 @@ public class ItemBoozeBottle extends ItemFood
 
 						switch (amplifier)
 						{
-						case 1: time = 3000; break;
-						case 2: time = 6750; break;
-						case 3: time = 12000; break;
-						case 4: time = 24000; break;
+							case 1: time = 3000; break;
+							case 2: time = 6750; break;
+							case 3: time = 12000; break;
+							case 4: time = 24000; break;
+							default:
+								break;
 						}
 
 						player.addPotionEffect(new PotionEffect(GrowthCraftCellar.potionTipsy.id, time, amplifier));
@@ -221,19 +222,19 @@ public class ItemBoozeBottle extends ItemFood
 	}
 
 
-	protected void addPotionEffect(ItemStack stack, EntityPlayer player, int potionID, int potionTime)
+	protected void addPotionEffect(ItemStack stack, EntityPlayer player, int potnID, int potnTime)
 	{
 		if (stack.getItemDamage() == 1)
 		{
-			player.addPotionEffect(new PotionEffect(potionID, potionTime, 0));
+			player.addPotionEffect(new PotionEffect(potnID, potnTime, 0));
 		}
 		else if (stack.getItemDamage() == 2)
 		{
-			player.addPotionEffect(new PotionEffect(potionID, Math.round(potionTime / 2), 1));
+			player.addPotionEffect(new PotionEffect(potnID, Math.round(potnTime / 2), 1));
 		}
 		else if (stack.getItemDamage() == 3)
 		{
-			player.addPotionEffect(new PotionEffect(potionID, Math.round(potionTime * 2.67F), 0));
+			player.addPotionEffect(new PotionEffect(potnID, Math.round(potnTime * 2.67F), 0));
 		}
 	}
 
@@ -269,20 +270,20 @@ public class ItemBoozeBottle extends ItemFood
 		if (s != null) list.add(s);
 	}
 
-	protected void writePotionTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool, int potionID, int potionTime)
+	protected void writePotionTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool, int potnID, int potnTime)
 	{
 		PotionEffect pe;
 		if (stack.getItemDamage() == 1)
 		{
-			pe = new PotionEffect(potionID, potionTime, 0);
+			pe = new PotionEffect(potnID, potnTime, 0);
 		}
 		else if (stack.getItemDamage() == 2)
 		{
-			pe = new PotionEffect(potionID, Math.round(potionTime / 2), 1);
+			pe = new PotionEffect(potnID, Math.round(potnTime / 2), 1);
 		}
 		else
 		{
-			pe = new PotionEffect(potionID, Math.round(potionTime * 2.67F), 0);
+			pe = new PotionEffect(potnID, Math.round(potnTime * 2.67F), 0);
 		}
 
 		String s = StatCollector.translateToLocal(pe.getEffectName()).trim();
@@ -300,9 +301,9 @@ public class ItemBoozeBottle extends ItemFood
 
 	protected void writeNauseaTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool, float nauseaChance, int nauseaTime)
 	{
-		PotionEffect nausea = new PotionEffect(Potion.confusion.id, nauseaTime, 0);
+		final PotionEffect nausea = new PotionEffect(Potion.confusion.id, nauseaTime, 0);
 		String n = "";
-		String p = StatCollector.translateToLocalFormatted("grc.cellar.format.tipsy_chance", Math.round(nauseaChance * 100));
+		final String p = StatCollector.translateToLocalFormatted("grc.cellar.format.tipsy_chance", Math.round(nauseaChance * 100));
 
 		if (nausea.getDuration() > 20)
 		{
@@ -333,7 +334,7 @@ public class ItemBoozeBottle extends ItemFood
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int pass)
 	{
-		return pass == 0 ? this.color : 16777215;
+		return pass == 0 ? this.color : 0xFFFFFF;
 	}
 
 	@Override
@@ -387,11 +388,11 @@ public class ItemBoozeBottle extends ItemFood
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
+	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
 		for (int i = 0; i < this.booze.length; i++)
 		{
-			list.add(new ItemStack(par1, 1, i));
+			list.add(new ItemStack(item, 1, i));
 		}
 	}
 }

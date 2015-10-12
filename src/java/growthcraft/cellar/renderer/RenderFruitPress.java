@@ -14,17 +14,17 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderFruitPress implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		if (modelID == id)
 		{
-			Tessellator tes = Tessellator.instance;
-			IIcon icon = BlockFruitPress.tex[0];
-			IIcon icon2 = BlockFruitPress.tex[1];
-			double d = 0.0625D;
+			final Tessellator tes = Tessellator.instance;
+			final IIcon icon = BlockFruitPress.tex[0];
+			final IIcon icon2 = BlockFruitPress.tex[1];
+			final double d = 0.0625D;
 
 			renderer.setRenderBounds(1*d, 0.0D, 1*d, 3*d, 3*d, 3*d);
 			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
@@ -92,7 +92,7 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 
 	private void renderMetalRingsInv(RenderBlocks r, Block b, IIcon i, Tessellator t, double y1, double y2)
 	{
-		double d = 0.0625D;
+		final double d = 0.0625D;
 		r.setRenderBounds(1.5*d, y1, 1.5*d, 2.5*d,  y2, 14.5*d);
 		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
 		r.setRenderBounds(13.5*d, y1, 1.5*d, 14.5*d,  y2, 14.5*d);
@@ -108,23 +108,23 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			IIcon[] icon = {BlockFruitPress.tex[0], BlockFruitPress.tex[1]};
-			int    m    = world.getBlockMetadata(x, y, z);
-			double d    = 0.0625D;
+			final IIcon[] icon = {BlockFruitPress.tex[0], BlockFruitPress.tex[1]};
+			final int    m    = world.getBlockMetadata(x, y, z);
+			final double d    = 0.0625D;
 
-			Tessellator tessellator = Tessellator.instance;
+			final Tessellator tessellator = Tessellator.instance;
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
-			float f = 1.0F;
-			int color = block.colorMultiplier(world, x, y, z);
+			final float f = 1.0F;
+			final int color = block.colorMultiplier(world, x, y, z);
 			float r = (float)(color >> 16 & 255) / 255.0F;
 			float g = (float)(color >> 8 & 255) / 255.0F;
 			float b = (float)(color & 255) / 255.0F;
 
 			if (EntityRenderer.anaglyphEnable)
 			{
-				float f5 = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
-				float f4 = (r * 30.0F + g * 70.0F) / 100.0F;
-				float f6 = (r * 30.0F + b * 70.0F) / 100.0F;
+				final float f5 = (r * 30.0F + g * 59.0F + b * 11.0F) / 100.0F;
+				final float f4 = (r * 30.0F + g * 70.0F) / 100.0F;
+				final float f6 = (r * 30.0F + b * 70.0F) / 100.0F;
 				r = f5;
 				g = f4;
 				b = f6;
@@ -252,7 +252,7 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 
 	private void renderMetalRings(RenderBlocks r, Block b, int x, int y, int z, double y1, double y2)
 	{
-		double d = 0.0625D;
+		final double d = 0.0625D;
 		r.setRenderBounds(1.5*d, y1, 1.5*d, 2.5*d,  y2, 14.5*d);
 		r.renderStandardBlock(b, x, y, z);
 		r.setRenderBounds(13.5*d, y1, 1.5*d, 14.5*d,  y2, 14.5*d);
