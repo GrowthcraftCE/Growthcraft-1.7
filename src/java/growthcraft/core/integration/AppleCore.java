@@ -5,13 +5,14 @@ import java.util.Random;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.Event.Result;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import squeek.applecore.api.AppleCoreAPI;
 
 public class AppleCore
 {
+	private AppleCore() {}
+
 	// abstract the AppleCoreAPI reference into an Optional.Method so that AppleCore is not a hard dependency
 	@Optional.Method(modid = "AppleCore")
 	private static Event.Result validateGrowthTick_AC(Block block, World world, int x, int y, int z, Random random)

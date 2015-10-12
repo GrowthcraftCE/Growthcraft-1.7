@@ -59,8 +59,27 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T>
 		return new ItemStack(getItem(), size, damage);
 	}
 
+	/**
+	 * Checks if the supplied block is equal to the given, this uses
+	 * Block.isEqualTo to compare the blocks
+	 *
+	 * @param other - block to compare to
+	 * @return true if blocks are equal, false otherwise
+	 */
 	public boolean equals(Block other)
 	{
 		return Block.isEqualTo(getBlock(), other);
+	}
+
+	/**
+	 * Checks if the supplied block is the same as the given, this uses ==
+	 * for comparison
+	 *
+	 * @param other - block to check
+	 * @return true if block is the same, false otherwise
+	 */
+	public boolean isSameAs(Block other)
+	{
+		return getBlock() == other;
 	}
 }

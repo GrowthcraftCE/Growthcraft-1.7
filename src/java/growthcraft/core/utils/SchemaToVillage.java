@@ -6,14 +6,14 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
-import net.minecraft.world.gen.structure.StructureComponent;
-import net.minecraft.world.gen.structure.StructureVillagePieces;
 
 /**
  * Utility class for drawing Schema String Arrays as structures
  */
 public class SchemaToVillage
 {
+	private SchemaToVillage() {}
+
 	public static interface IVillage
 	{
 		public void placeBlockAtCurrentPositionPub(World world, Block block, int meta, int x, int y, int z, StructureBoundingBox box);
@@ -24,19 +24,20 @@ public class SchemaToVillage
 		public BlockEntry getBlockEntry(Random random);
 	}
 
-	public static class BlockEntry implements IBlockEntries {
+	public static class BlockEntry implements IBlockEntries
+	{
 		private Block block;
 		private int meta;
 
-		public BlockEntry(Block block, int meta)
+		public BlockEntry(Block blok, int met)
 		{
-			this.block = block;
-			this.meta = meta;
+			this.block = blok;
+			this.meta = met;
 		}
 
-		public BlockEntry(Block block)
+		public BlockEntry(Block blok)
 		{
-			this(block, 0);
+			this(blok, 0);
 		}
 
 		public BlockEntry getBlockEntry(Random random)
@@ -55,44 +56,46 @@ public class SchemaToVillage
 		}
 	}
 
-	public static class MultiBlockEntries implements IBlockEntries {
-		private BlockEntry entries[];
+	public static class MultiBlockEntries implements IBlockEntries
+	{
+		private BlockEntry[] entries;
 
-		public MultiBlockEntries(BlockEntry blockEntries[])
+		public MultiBlockEntries(BlockEntry[] blockEntries)
 		{
 			this.entries = blockEntries;
 		}
 
 		public BlockEntry getBlockEntry(Random random)
 		{
-			if (this.entries.length == 0) {
+			if (this.entries.length == 0)
+			{
 				return null;
 			}
 			return entries[random.nextInt(this.entries.length)];
 		}
 	}
 
-	public static void drawSchema(IVillage village, World world, Random random, StructureBoundingBox box, String schema[][], Map<Character, IBlockEntries> map, int offx, int offy, int offz)
+	public static void drawSchema(IVillage village, World world, Random random, StructureBoundingBox box, String[][] schema, Map<Character, IBlockEntries> map, int offx, int offy, int offz)
 	{
 		// loop by schema layer
 		for (int y = 0; y < schema.length; ++y)
 		{
-			String layer[] = schema[y];
+			final String[] layer = schema[y];
 			// then loop by schema layer-row
 			for (int z = 0; z < layer.length; ++z)
 			{
-				String row = layer[z];
+				final String row = layer[z];
 				// finally loop by schema layer-row-cell
 				for (int x = 0; x < row.length(); ++x)
 				{
 					int meta = 0;
 					Block block = null;
-					IBlockEntries entries = map.get(row.charAt(x));
+					final IBlockEntries entries = map.get(row.charAt(x));
 					// look out for null entries, though by right we should
 					// warn about these.
 					if (entries != null)
 					{
-						BlockEntry entry = entries.getBlockEntry(random);
+						final BlockEntry entry = entries.getBlockEntry(random);
 						// a null entry is possible, for "Ignore the this block"
 						if (entry != null)
 						{
@@ -109,7 +112,7 @@ public class SchemaToVillage
 		}
 	}
 
-	public static void drawSchema(IVillage village, World world, Random random, StructureBoundingBox box, String schema[][], Map<Character, IBlockEntries> map)
+	public static void drawSchema(IVillage village, World world, Random random, StructureBoundingBox box, String[][] schema, Map<Character, IBlockEntries> map)
 	{
 		drawSchema(village, world, random, box, schema, map, 0, 0, 0);
 	}

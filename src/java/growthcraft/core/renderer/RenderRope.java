@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderRope implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {}
@@ -23,18 +23,18 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			double d = 0.0625D;
-			Tessellator tessellator = Tessellator.instance;
+			final double d = 0.0625D;
+			final Tessellator tessellator = Tessellator.instance;
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-			IIcon icon = BlockRope.tex[0];
+			final IIcon icon = BlockRope.tex[0];
 
-			boolean flag = ((BlockRope)block).canConnectRopeTo(world, x, y, z - 1);
-			boolean flag1 = ((BlockRope)block).canConnectRopeTo(world, x, y, z + 1);
-			boolean flag2 = ((BlockRope)block).canConnectRopeTo(world, x - 1, y, z);
-			boolean flag3 = ((BlockRope)block).canConnectRopeTo(world, x + 1, y, z);
-			boolean flag4 = ((BlockRope)block).canConnectRopeTo(world, x, y - 1, z);
-			boolean flag5 = ((BlockRope)block).canConnectRopeTo(world, x, y + 1, z);
+			final boolean flag = ((BlockRope)block).canConnectRopeTo(world, x, y, z - 1);
+			final boolean flag1 = ((BlockRope)block).canConnectRopeTo(world, x, y, z + 1);
+			final boolean flag2 = ((BlockRope)block).canConnectRopeTo(world, x - 1, y, z);
+			final boolean flag3 = ((BlockRope)block).canConnectRopeTo(world, x + 1, y, z);
+			final boolean flag4 = ((BlockRope)block).canConnectRopeTo(world, x, y - 1, z);
+			final boolean flag5 = ((BlockRope)block).canConnectRopeTo(world, x, y + 1, z);
 
 			double minX;
 			double maxX;
@@ -45,17 +45,17 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 
 			double minU;
 			double maxU;
-			double minV = (double)icon.getInterpolatedV(14);
-			double maxV = (double)icon.getMaxV();
+			final double minV = (double)icon.getInterpolatedV(14);
+			final double maxV = (double)icon.getMaxV();
 
 			if (flag && flag1)
 			{
-				minX = ((double)x + 7*d);
-				maxX = ((double)x + 9*d);
-				minY = ((double)y + 7*d);
-				maxY = ((double)y + 9*d);
-				minZ = ((double)z);
-				maxZ = ((double)z + 16*d);
+				minX = (double)x + 7*d;
+				maxX = (double)x + 9*d;
+				minY = (double)y + 7*d;
+				maxY = (double)y + 9*d;
+				minZ = (double)z;
+				maxZ = (double)z + 16*d;
 
 				minU = (double)icon.getMinU();
 				maxU = (double)icon.getMaxU();
@@ -66,12 +66,12 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 			{
 				if (flag)
 				{
-					minX = ((double)x + 7*d);
-					maxX = ((double)x + 9*d);
-					minY = ((double)y + 7*d);
-					maxY = ((double)y + 9*d);
-					minZ = ((double)z);
-					maxZ = ((double)z + 8*d);
+					minX = (double)x + 7*d;
+					maxX = (double)x + 9*d;
+					minY = (double)y + 7*d;
+					maxY = (double)y + 9*d;
+					minZ = (double)z;
+					maxZ = (double)z + 8*d;
 
 					minU = (double)icon.getInterpolatedU(8);
 					maxU = (double)icon.getMaxU();
@@ -81,12 +81,12 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 
 				if (flag1)
 				{
-					minX = ((double)x + 7*d);
-					maxX = ((double)x + 9*d);
-					minY = ((double)y + 7*d);
-					maxY = ((double)y + 9*d);
-					minZ = ((double)z + 8*d);
-					maxZ = ((double)z + 16*d);
+					minX = (double)x + 7*d;
+					maxX = (double)x + 9*d;
+					minY = (double)y + 7*d;
+					maxY = (double)y + 9*d;
+					minZ = (double)z + 8*d;
+					maxZ = (double)z + 16*d;
 
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getInterpolatedU(8);
@@ -97,12 +97,12 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 
 			if (flag2 && flag3)
 			{
-				minX = ((double)x);
-				maxX = ((double)x + 16*d);
-				minY = ((double)y + 7*d);
-				maxY = ((double)y + 9*d);
-				minZ = ((double)z + 7*d);
-				maxZ = ((double)z + 9*d);
+				minX = (double)x;
+				maxX = (double)x + 16*d;
+				minY = (double)y + 7*d;
+				maxY = (double)y + 9*d;
+				minZ = (double)z + 7*d;
+				maxZ = (double)z + 9*d;
 
 				minU = (double)icon.getMinU();
 				maxU = (double)icon.getMaxU();
@@ -113,12 +113,12 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 			{
 				if (flag2)
 				{
-					minX = ((double)x);
-					maxX = ((double)x + 8*d);
-					minY = ((double)y + 7*d);
-					maxY = ((double)y + 9*d);
-					minZ = ((double)z + 7*d);
-					maxZ = ((double)z + 9*d);
+					minX = (double)x;
+					maxX = (double)x + 8*d;
+					minY = (double)y + 7*d;
+					maxY = (double)y + 9*d;
+					minZ = (double)z + 7*d;
+					maxZ = (double)z + 9*d;
 
 					minU = (double)icon.getInterpolatedU(8);
 					maxU = (double)icon.getMaxU();
@@ -128,12 +128,12 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 
 				if (flag3)
 				{
-					minX = ((double)x + 8*d);
-					maxX = ((double)x + 16*d);
-					minY = ((double)y + 7*d);
-					maxY = ((double)y + 9*d);
-					minZ = ((double)z + 7*d);
-					maxZ = ((double)z + 9*d);
+					minX = (double)x + 8*d;
+					maxX = (double)x + 16*d;
+					minY = (double)y + 7*d;
+					maxY = (double)y + 9*d;
+					minZ = (double)z + 7*d;
+					maxZ = (double)z + 9*d;
 
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getInterpolatedU(8);
@@ -144,12 +144,12 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 
 			if (flag4 && flag5)
 			{
-				minX = ((double)x + 7*d);
-				maxX = ((double)x + 9*d);
-				minY = ((double)y);
-				maxY = ((double)y + 16*d);
-				minZ = ((double)z + 7*d);
-				maxZ = ((double)z + 9*d);
+				minX = (double)x + 7*d;
+				maxX = (double)x + 9*d;
+				minY = (double)y;
+				maxY = (double)y + 16*d;
+				minZ = (double)z + 7*d;
+				maxZ = (double)z + 9*d;
 
 				minU = (double)icon.getMinU();
 				maxU = (double)icon.getMaxU();
@@ -160,12 +160,12 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 			{
 				if (flag4)
 				{
-					minX = ((double)x + 7*d);
-					maxX = ((double)x + 9*d);
-					minY = ((double)y);
-					maxY = ((double)y + 8*d);
-					minZ = ((double)z + 7*d);
-					maxZ = ((double)z + 9*d);
+					minX = (double)x + 7*d;
+					maxX = (double)x + 9*d;
+					minY = (double)y;
+					maxY = (double)y + 8*d;
+					minZ = (double)z + 7*d;
+					maxZ = (double)z + 9*d;
 
 					minU = (double)icon.getInterpolatedU(8);
 					maxU = (double)icon.getMaxU();
@@ -175,12 +175,12 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 
 				if (flag5)
 				{
-					minX = ((double)x + 7*d);
-					maxX = ((double)x + 9*d);
-					minY = ((double)y + 8*d);
-					maxY = ((double)y + 16*d);
-					minZ = ((double)z + 7*d);
-					maxZ = ((double)z + 9*d);
+					minX = (double)x + 7*d;
+					maxX = (double)x + 9*d;
+					minY = (double)y + 8*d;
+					maxY = (double)y + 16*d;
+					minZ = (double)z + 7*d;
+					maxZ = (double)z + 9*d;
 
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getInterpolatedU(8);
@@ -194,7 +194,10 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelID) {return false;}
+	public boolean shouldRender3DInInventory(int modelID)
+	{
+		return false;
+	}
 
 	@Override
 	public int getRenderId()

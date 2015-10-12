@@ -43,7 +43,7 @@ public abstract class ObjectDefinition<T>
 	}
 
 	@Nonnull
-	abstract public ItemStack asStack(int size, int damage);
+	public abstract ItemStack asStack(int size, int damage);
 
 	@Nonnull
 	public ItemStack asStack(int size)

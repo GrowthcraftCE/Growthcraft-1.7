@@ -46,7 +46,7 @@ public abstract class ModIntegrationBase
 	/**
 	 * Implement this method
 	 */
-	abstract protected void integrate();
+	protected abstract void integrate();
 
 	public void init()
 	{

@@ -94,8 +94,7 @@ public class BlockFenceRope extends Block implements IBlockRope
 	@Override
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(new ItemStack(Blocks.fence));
 		ret.add(GrowthCraftCore.rope.asStack());
 		return ret;
@@ -156,10 +155,10 @@ public class BlockFenceRope extends Block implements IBlockRope
 	@Override
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity)
 	{
-		boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
-		boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
-		boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
-		boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
+		final boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
+		final boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
+		final boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
+		final boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
 		float f = 0.375F;
 		float f1 = 0.625F;
 		float f2 = 0.375F;
@@ -216,10 +215,10 @@ public class BlockFenceRope extends Block implements IBlockRope
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{
-		boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
-		boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
-		boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
-		boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
+		final boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
+		final boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
+		final boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
+		final boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
 		float f = 0.375F;
 		float f1 = 0.625F;
 		float f2 = 0.375F;

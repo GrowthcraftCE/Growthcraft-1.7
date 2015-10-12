@@ -6,10 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 
 public class RenderUtils
 {
+	private RenderUtils() {}
+
 	public static enum Faces
 	{
 		XPOS,
@@ -22,7 +23,7 @@ public class RenderUtils
 
 	public static void drawFace(Faces face, Block block, RenderBlocks renderer, Tessellator tes, IIcon icon, double i, double j, double k)
 	{
-		float f = 0.0F;
+		final float f = 0.0F;
 		tes.startDrawingQuads();
 		switch (face)
 		{
@@ -82,7 +83,7 @@ public class RenderUtils
 		tes.draw();
 	}
 
-	public static void drawInventoryBlock(Block block, RenderBlocks renderer, IIcon icon[], Tessellator tes)
+	public static void drawInventoryBlock(Block block, RenderBlocks renderer, IIcon[] icon, Tessellator tes)
 	{
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		drawFace(Faces.YNEG, block, renderer, tes, icon[0], 0.0D, 0.0D, 0.0D);

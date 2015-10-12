@@ -1,6 +1,5 @@
 package growthcraft.core;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,25 +14,25 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class Utils
 {
+	private Utils() {}
+
 	public static void debug(String msg)
 	{
-		boolean flag = true;
-
+		final boolean flag = true;
 		if (flag) { System.out.println(msg); }
 	}
 
 	public static boolean isIDInList(int id, String list)
 	{
-		String[] itemArray = list.split(";");
+		final String[] itemArray = list.split(";");
 		for (int i = 0; i < itemArray.length; i++)
 		{
-			String[] values = itemArray[i].split(",");
-			int tempID = parseInt(values[0], 2147483647);
+			final String[] values = itemArray[i].split(",");
+			final int tempID = parseInt(values[0], 2147483647);
 
 			if (tempID != 2147483647)
 			{
-				if (tempID == id)
-					return true;
+				if (tempID == id) return true;
 			}
 		}
 		return false;
@@ -45,7 +44,8 @@ public class Utils
 		{
 			return Integer.parseInt(string.trim());
 		}
-		catch (NumberFormatException ex) {
+		catch (NumberFormatException ex)
+		{
 		}
 		return defaultValue;
 	}
@@ -65,8 +65,7 @@ public class Utils
 
 	public static void addStack(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, boolean bool)
 	{
-		boolean flag = bool ? !player.capabilities.isCreativeMode : true;
-
+		final boolean flag = bool ? !player.capabilities.isCreativeMode : true;
 		if (flag)
 		{
 			if (!player.inventory.addItemStackToInventory(itemstack))
@@ -113,15 +112,15 @@ public class Utils
 	{
 		if (held != null)
 		{
-			FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
+			final FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
 
 			if (heldContents != null)
 			{
-				int used = tank.fill(ForgeDirection.UNKNOWN, heldContents, true);
+				final int used = tank.fill(ForgeDirection.UNKNOWN, heldContents, true);
 
 				if (used > 0)
 				{
-					ItemStack consumed = held.getItem().getContainerItem(held);
+					final ItemStack consumed = held.getItem().getContainerItem(held);
 					if (!player.inventory.addItemStackToInventory(consumed))
 					{
 						world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, consumed));
@@ -152,11 +151,11 @@ public class Utils
 		if (held != null)
 		{
 			FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
-			FluidStack available = tank.drain(ForgeDirection.UNKNOWN, Integer.MAX_VALUE, false);
+			final FluidStack available = tank.drain(ForgeDirection.UNKNOWN, Integer.MAX_VALUE, false);
 
 			if (available != null)
 			{
-				ItemStack filled = FluidContainerRegistry.fillFluidContainer(available, held);
+				final ItemStack filled = FluidContainerRegistry.fillFluidContainer(available, held);
 				heldContents = FluidContainerRegistry.getFluidForFilledItem(filled);
 
 				if (heldContents != null)

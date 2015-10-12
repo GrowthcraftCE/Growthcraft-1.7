@@ -21,9 +21,9 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 	{
 		if (modelID == id)
 		{
-			Tessellator tes = Tessellator.instance;
-			double d = 0.0625D;
-			float f = 0.0F;
+			final Tessellator tes = Tessellator.instance;
+			final double d = 0.0625D;
+			final float f = 0.0F;
 			renderer.setRenderBounds(6*d, 0.0D, 6*d, 10*d, 1.0D, 10*d);
 			RenderUtils.drawInventoryBlock_icon(block, renderer, BlockFenceRope.tex[0], tes);
 			tes.setColorOpaque_F(1.0F, 1.0F, 1.0F);
@@ -31,12 +31,12 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 			//Coordinates
-			double minX = ((double)5*d);
-			double maxX = ((double)11*d);
-			double minY = ((double)4*d);
-			double maxY = ((double)12*d);
-			double minZ = ((double)5*d);
-			double maxZ = ((double)11*d);
+			final double minX = (double)5*d;
+			final double maxX = (double)11*d;
+			final double minY = (double)4*d;
+			final double maxY = (double)12*d;
+			final double minZ = (double)5*d;
+			final double maxZ = (double)11*d;
 
 			//ZPOS - UV
 			double minU = (double)icon.getMinU();
@@ -140,23 +140,23 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			double d = 0.0625D;
+			final double d = 0.0625D;
 			renderer.setRenderBounds(6*d, 0.0D, 6*d, 10*d, 1.0D, 10*d);
 			renderer.renderStandardBlock(block, x, y, z);
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-			Tessellator tessellator = Tessellator.instance;
+			final Tessellator tessellator = Tessellator.instance;
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 			IIcon icon = BlockFenceRope.tex[1];
 
 			//Coordinates
-			double minX = ((double)x + 5*d);
-			double maxX = ((double)x + 11*d);
-			double minY = ((double)y + 4*d);
-			double maxY = ((double)y + 12*d);
-			double minZ = ((double)z + 5*d);
-			double maxZ = ((double)z + 11*d);
+			double minX = (double)x + 5*d;
+			double maxX = (double)x + 11*d;
+			double minY = (double)y + 4*d;
+			double maxY = (double)y + 12*d;
+			double minZ = (double)z + 5*d;
+			double maxZ = (double)z + 11*d;
 
 			//ZPOS - UV
 			double minU = (double)icon.getMinU();
@@ -234,22 +234,22 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 
 			// Branches
 
-			boolean flag = ((BlockFenceRope)block).canConnectRopeTo(world, x, y, z - 1);
-			boolean flag1 = ((BlockFenceRope)block).canConnectRopeTo(world, x, y, z + 1);
-			boolean flag2 = ((BlockFenceRope)block).canConnectRopeTo(world, x - 1, y, z);
-			boolean flag3 = ((BlockFenceRope)block).canConnectRopeTo(world, x + 1, y, z);
+			final boolean flag = ((BlockFenceRope)block).canConnectRopeTo(world, x, y, z - 1);
+			final boolean flag1 = ((BlockFenceRope)block).canConnectRopeTo(world, x, y, z + 1);
+			final boolean flag2 = ((BlockFenceRope)block).canConnectRopeTo(world, x - 1, y, z);
+			final boolean flag3 = ((BlockFenceRope)block).canConnectRopeTo(world, x + 1, y, z);
 
 			minV = (double)icon.getInterpolatedV(14);
 			maxV = (double)icon.getMaxV();
 
 			if (flag)
 			{
-				minX = ((double)x + 7*d);
-				maxX = ((double)x + 9*d);
-				minY = ((double)y + 7*d);
-				maxY = ((double)y + 9*d);
-				minZ = ((double)z);
-				maxZ = ((double)z + 5*d);
+				minX = (double)x + 7*d;
+				maxX = (double)x + 9*d;
+				minY = (double)y + 7*d;
+				maxY = (double)y + 9*d;
+				minZ = (double)z;
+				maxZ = (double)z + 5*d;
 
 				minU = (double)icon.getInterpolatedU(11);
 				maxU = (double)icon.getMaxU();
@@ -259,12 +259,12 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 
 			if (flag1)
 			{
-				minX = ((double)x + 7*d);
-				maxX = ((double)x + 9*d);
-				minY = ((double)y + 7*d);
-				maxY = ((double)y + 9*d);
-				minZ = ((double)z + 11*d);
-				maxZ = ((double)z + 16*d);
+				minX = (double)x + 7*d;
+				maxX = (double)x + 9*d;
+				minY = (double)y + 7*d;
+				maxY = (double)y + 9*d;
+				minZ = (double)z + 11*d;
+				maxZ = (double)z + 16*d;
 
 				minU = (double)icon.getMinU();
 				maxU = (double)icon.getInterpolatedU(5);
@@ -274,12 +274,12 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 
 			if (flag2)
 			{
-				minX = ((double)x);
-				maxX = ((double)x + 5*d);
-				minY = ((double)y + 7*d);
-				maxY = ((double)y + 9*d);
-				minZ = ((double)z + 7*d);
-				maxZ = ((double)z + 9*d);
+				minX = (double)x;
+				maxX = (double)x + 5*d;
+				minY = (double)y + 7*d;
+				maxY = (double)y + 9*d;
+				minZ = (double)z + 7*d;
+				maxZ = (double)z + 9*d;
 
 				minU = (double)icon.getInterpolatedU(11);
 				maxU = (double)icon.getMaxU();
@@ -289,12 +289,12 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 
 			if (flag3)
 			{
-				minX = ((double)x + 11*d);
-				maxX = ((double)x + 16*d);
-				minY = ((double)y + 7*d);
-				maxY = ((double)y + 9*d);
-				minZ = ((double)z + 7*d);
-				maxZ = ((double)z + 9*d);
+				minX = (double)x + 11*d;
+				maxX = (double)x + 16*d;
+				minY = (double)y + 7*d;
+				maxY = (double)y + 9*d;
+				minZ = (double)z + 7*d;
+				maxZ = (double)z + 9*d;
 
 				minU = (double)icon.getMinU();
 				maxU = (double)icon.getInterpolatedU(5);
@@ -306,12 +306,14 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelID) {return true;}
+	public boolean shouldRender3DInInventory(int modelID)
+	{
+		return true;
+	}
 
 	@Override
 	public int getRenderId()
 	{
 		return id;
 	}
-
 }

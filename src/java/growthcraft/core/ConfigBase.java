@@ -3,7 +3,6 @@ package growthcraft.core;
 import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 /**
  * Extend this class when you need config for another module, see the other
@@ -18,7 +17,7 @@ public abstract class ConfigBase
 	 * define variables as needed, in short: "I don't care how you do it, just
 	 * make sure its done in this method."
 	 */
-	abstract protected void loadConfig();
+	protected abstract void loadConfig();
 
 	/**
 	 * Creates a Configuration instance and loads it, this will then pass
