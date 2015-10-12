@@ -277,7 +277,7 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 		super.readFromNBT(nbt);
 		// INVENTORY
 		this.invSlots = new ItemStack[this.getSizeInventory()];
-		NBTHelper.readInventorySlotsFromNBT(nbt.getTagList("items", NBTHelper.NBTType.COMPOUND), invSlots);
+		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
 
 		//TANKS
 		readTankFromNBT(nbt);

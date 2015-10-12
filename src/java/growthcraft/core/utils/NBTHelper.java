@@ -50,7 +50,7 @@ public class NBTHelper
 		return writeInventorySlotsToNBT(invSlots, new NBTTagList());
 	}
 
-	public static NBTTagList readInventorySlotsFromNBT(NBTTagList tags, ItemStack[] invSlots)
+	public static NBTTagList readInventorySlotsFromNBT(ItemStack[] invSlots, NBTTagList tags)
 	{
 		for (int i = 0; i < tags.tagCount(); ++i)
 		{
