@@ -15,7 +15,8 @@ import net.minecraftforge.fluids.Fluid;
 public class BlockFluidBooze extends BlockFluidClassic
 {
 	@SideOnly(Side.CLIENT)
-	protected final IIcon[] icons = new IIcon[2];
+	protected IIcon[] icons;
+
 	private int color;
 
 	public BlockFluidBooze(Fluid fluid, int kolor)
@@ -43,6 +44,7 @@ public class BlockFluidBooze extends BlockFluidClassic
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
 		return side != 0 && side != 1 ? this.icons[1] : this.icons[0];
@@ -52,6 +54,7 @@ public class BlockFluidBooze extends BlockFluidClassic
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister)
 	{
+		this.icons = new IIcon[2];
 		this.icons[0] = iconRegister.registerIcon("grccellar:booze_still");
 		this.icons[1] = iconRegister.registerIcon("grccellar:booze_flow");
 	}
