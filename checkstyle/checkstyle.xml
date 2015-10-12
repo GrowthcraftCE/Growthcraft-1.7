@@ -9,7 +9,7 @@
 	<property name="severity" value="warning"/>
 
 	<module name="SuppressionFilter">
-		<property name="file" value="config/suppressions.xml" />
+		<property name="file" value="checkstyle/suppressions.xml"/>
 	</module>
 
 	<module name="NewlineAtEndOfFile"/>
@@ -46,11 +46,13 @@
 		<module name="TrailingComment"/>
 		<module name="UnnecessaryParentheses"/>
 		<module name="UpperEll"/>
-		<module name="VariableDeclarationUsageDistance"/>
-		<module name="VisibilityModifier">
+		<module name="VariableDeclarationUsageDistance">
+			<property name="allowedDistance" value="16"/>
+		</module>
+		<!-- <module name="VisibilityModifier">
 			<property name="protectedAllowed" value="true"/>
 			<property name="allowPublicImmutableFields" value="true"/>
-		</module>
+		</module> -->
 		<!-- Rules that are treated as errors -->
 		<module name="PackageDeclaration">
 			<property name="severity" value="error"/>
