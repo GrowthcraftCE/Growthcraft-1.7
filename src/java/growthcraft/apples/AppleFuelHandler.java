@@ -15,7 +15,7 @@ public class AppleFuelHandler implements IFuelHandler
 	{
 		if (fuel != null)
 		{
-			Item item = fuel.getItem();
+			final Item item = fuel.getItem();
 			if (GrowthCraftApples.appleSapling.equals(item))
 			{
 				return 100;

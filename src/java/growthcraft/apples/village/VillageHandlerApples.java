@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.List;
 
 import growthcraft.apples.GrowthCraftApples;
-import growthcraft.apples.village.ComponentVillageAppleFarm;
 
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;

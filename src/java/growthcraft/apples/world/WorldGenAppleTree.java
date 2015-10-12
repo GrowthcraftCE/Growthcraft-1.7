@@ -27,7 +27,7 @@ public class WorldGenAppleTree extends WorldGenerator
 
 	public boolean generate(World world, Random random, int x, int y, int z)
 	{
-		int l = random.nextInt(3) + this.minTreeHeight;
+		final int l = random.nextInt(3) + this.minTreeHeight;
 		boolean flag = true;
 
 		if (y >= 1 && y + l + 1 <= 256)
@@ -77,14 +77,14 @@ public class WorldGenAppleTree extends WorldGenerator
 			}
 			else
 			{
-				Block block2 = world.getBlock(x, y - 1, z);
+				final Block block2 = world.getBlock(x, y - 1, z);
+				final boolean isSoil = block2.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, (BlockSapling)Blocks.sapling);
 
-				boolean isSoil = block2.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, (BlockSapling)Blocks.sapling);
 				if (isSoil && y < 256 - l - 1)
 				{
 					block2.onPlantGrow(world, x, y - 1, z, x, y, z);
 					b0 = 3;
-					byte b1 = 0;
+					final byte b1 = 0;
 					int l1;
 					int i2;
 					int j2;
@@ -101,11 +101,11 @@ public class WorldGenAppleTree extends WorldGenerator
 
 							for (int k2 = z - l1; k2 <= z + l1; ++k2)
 							{
-								int l2 = k2 - z;
+								final int l2 = k2 - z;
 
 								if (Math.abs(j2) != l1 || Math.abs(l2) != l1 || random.nextInt(2) != 0 && i3 != 0)
 								{
-									Block block1 = world.getBlock(i2, k1, k2);
+									final Block block1 = world.getBlock(i2, k1, k2);
 
 									if (block1.isAir(world, i2, k1, k2) || block1.isLeaves(world, i2, k1, k2))
 									{

@@ -23,13 +23,11 @@ import net.minecraftforge.common.IShearable;
 
 public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 {
-	//Constants
-	private final int growth = GrowthCraftApples.getConfig().appleLeavesGrowthRate;
-
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
-	//public static Boolean graphicFlag;
+
 	int[] adjacentTreeBlocks;
+	private final int growth = GrowthCraftApples.getConfig().appleLeavesGrowthRate;
 
 	public BlockAppleLeaves()
 	{
@@ -50,7 +48,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 	{
 		if (!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(x, y, z);
+			final int meta = world.getBlockMetadata(x, y, z);
 
 			if ((meta & 4) == 0)
 			{
@@ -66,11 +64,11 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 
 			if ((meta & 8) != 0 && (meta & 4) == 0)
 			{
-				byte b0 = 4;
-				int i1 = b0 + 1;
-				byte b1 = 32;
-				int j1 = b1 * b1;
-				int k1 = b1 / 2;
+				final byte b0 = 4;
+				final int i1 = b0 + 1;
+				final byte b1 = 32;
+				final int j1 = b1 * b1;
+				final int k1 = b1 / 2;
 
 				if (this.adjacentTreeBlocks == null)
 				{
@@ -90,7 +88,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 						{
 							for (j2 = -b0; j2 <= b0; ++j2)
 							{
-								Block block = world.getBlock(x + l1, y + i2, z + j2);
+								final Block block = world.getBlock(x + l1, y + i2, z + j2);
 
 								if (!block.canSustainLeaves(world, x + l1, y + i2, z + j2))
 								{
@@ -184,9 +182,9 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 		super.randomDisplayTick(world, x, y, z, random);
 		if (world.canLightningStrikeAt(x, y + 1, z) && !World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && random.nextInt(15) == 1)
 		{
-			double d0 = (double)((float)x + random.nextFloat());
-			double d1 = (double)y - 0.05D;
-			double d2 = (double)((float)z + random.nextFloat());
+			final double d0 = (double)((float)x + random.nextFloat());
+			final double d1 = (double)y - 0.05D;
+			final double d2 = (double)((float)z + random.nextFloat());
 			world.spawnParticle("dripWater", d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
@@ -197,8 +195,8 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int par6)
 	{
-		byte b0 = 1;
-		int i1 = b0 + 1;
+		final byte b0 = 1;
+		final int i1 = b0 + 1;
 
 		if (world.checkChunksExist(x - i1, y - i1, z - i1, x + i1, y + i1, z + i1))
 		{
@@ -208,7 +206,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 				{
 					for (int l1 = -b0; l1 <= b0; ++l1)
 					{
-						Block block2 = world.getBlock(x + j1, y + k1, z + l1);
+						final Block block2 = world.getBlock(x + j1, y + k1, z + l1);
 						if (block2.isLeaves(world, x + j1, y + k1, z + l1))
 						{
 							block2.beginLeavesDecay(world, x + j1, y + k1, z + l1);
@@ -342,8 +340,8 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
 	{
-		double d0 = 0.5D;
-		double d1 = 1.0D;
+		final double d0 = 0.5D;
+		final double d1 = 1.0D;
 		return ColorizerFoliage.getFoliageColor(d0, d1);
 	}
 
@@ -358,7 +356,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
 
 		int r = 0;
 		int g = 0;
@@ -368,9 +366,9 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 		{
 			for (int i2 = -1; i2 <= 1; ++i2)
 			{
-				int j2 = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
+				final int j2 = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
 				r += (j2 & 16711680) >> 16;
-			g += (j2 & 65280) >> 8;
+				g += (j2 & 65280) >> 8;
 				b += j2 & 255;
 			}
 		}
@@ -390,7 +388,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(new ItemStack(Blocks.leaves, 1, world.getBlockMetadata(x, y, z) & 3));
 		return ret;
 	}

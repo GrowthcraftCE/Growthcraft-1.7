@@ -19,11 +19,10 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class BlockAppleSapling extends BlockBush
 {
-	//Constants
-	private final int growth = GrowthCraftApples.getConfig().appleSaplingGrowthRate;
-
 	@SideOnly(Side.CLIENT)
 	public static IIcon tex;
+
+	private final int growth = GrowthCraftApples.getConfig().appleSaplingGrowthRate;
 
 	public BlockAppleSapling()
 	{
@@ -33,7 +32,7 @@ public class BlockAppleSapling extends BlockBush
 		this.setBlockName("grc.appleSapling");
 		this.setTickRandomly(true);
 		this.setCreativeTab(GrowthCraftCore.tab);
-		float f = 0.4F;
+		final float f = 0.4F;
 		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 	}
 
@@ -55,7 +54,7 @@ public class BlockAppleSapling extends BlockBush
 
 	public void markOrGrowMarked(World world, int x, int y, int z, Random random)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
 
 		if ((meta & 8) == 0)
 		{
@@ -71,12 +70,12 @@ public class BlockAppleSapling extends BlockBush
 	{
 		if (!TerrainGen.saplingGrowTree(world, random, x, y, z)) return;
 
-		int meta = world.getBlockMetadata(x, y, z) & 3;
-		Object object = new WorldGenAppleTree(true);
+		final int meta = world.getBlockMetadata(x, y, z) & 3;
+		final WorldGenerator generator = new WorldGenAppleTree(true);
 
 		world.setBlock(x, y, z, Blocks.air, 0, 4);
 
-		if (!((WorldGenerator)object).generate(world, random, x, y, z))
+		if (!generator.generate(world, random, x, y, z))
 		{
 			world.setBlock(x, y, z, this, meta, 4);
 		}

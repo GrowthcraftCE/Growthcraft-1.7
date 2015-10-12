@@ -25,7 +25,7 @@ public class BonemealEventApples
 		}
 		else if (event.block == GrowthCraftApples.appleLeaves.getBlock())
 		{
-			int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
+			final int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
 			if ((meta & 3) != 0)
 			{
 				event.setResult(Result.DENY);
@@ -40,7 +40,6 @@ public class BonemealEventApples
 				{
 					event.world.setBlock(event.x, event.y - 1, event.z, GrowthCraftApples.appleBlock.getBlock());
 				}
-
 				event.setResult(Result.ALLOW);
 			}
 		}

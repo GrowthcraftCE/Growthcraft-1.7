@@ -8,7 +8,6 @@ import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.integration.AppleCore;
 
 import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -19,7 +18,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -27,12 +25,12 @@ import net.minecraft.world.World;
 
 public class BlockApple extends Block implements IGrowable, ICropDataProvider
 {
+	@SideOnly(Side.CLIENT)
+	public static IIcon[] tex;
+
 	private final int growth = GrowthCraftApples.getConfig().appleGrowthRate;
 	private final boolean dropRipeApples = GrowthCraftApples.getConfig().dropRipeApples;
 	private final int dropChance = GrowthCraftApples.getConfig().appleDropChance;
-
-	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
 
 	public BlockApple()
 	{
@@ -52,7 +50,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
-		int previousMetadata = meta;
+		final int previousMetadata = meta;
 		++meta;
 		world.setBlockMetadataWithNotify(x, y, z, meta, 3);
 		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
@@ -107,14 +105,14 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 		}
 		else
 		{
-			Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);
+			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);
 			if (allowGrowthResult == Event.Result.DENY)
 				return;
 
-			boolean continueGrowth = world.rand.nextInt(this.growth) == 0;
+			final boolean continueGrowth = world.rand.nextInt(this.growth) == 0;
 			if (allowGrowthResult == Event.Result.ALLOW || continueGrowth)
 			{
-				int meta = world.getBlockMetadata(x, y, z);
+				final int meta = world.getBlockMetadata(x, y, z);
 				if (meta < 2)
 				{
 					incrementGrowth(world, x, y, z, meta);
@@ -256,20 +254,20 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
-		float f = 0.0625F;
+		final int meta = world.getBlockMetadata(x, y, z);
+		final float f = 0.0625F;
 
-		switch (meta)
+		if (meta == 0)
 		{
-		case 0:
 			this.setBlockBounds(6*f, 11*f, 6*f, 10*f, 15*f, 10*f);
-			break;
-		case 1:
+		}
+		else if (meta == 1)
+		{
 			this.setBlockBounds((float)(5.5*f), 10*f, (float)(5.5*f), (float)(10.5*f), 15*f, (float)(10.5*f));
-			break;
-		case 2:
+		}
+		else
+		{
 			this.setBlockBounds(5*f, 9*f, 5*f, 11*f, 15*f, 11*f);
-			break;
 		}
 	}
 }

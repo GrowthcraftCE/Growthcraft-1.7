@@ -1,6 +1,5 @@
 package growthcraft.apples;
 
-import java.io.File;
 import growthcraft.core.ConfigBase;
 import net.minecraftforge.common.config.Configuration;
 
@@ -13,7 +12,7 @@ public class Config extends ConfigBase
 	public int appleLeavesGrowthRate = 25;
 	public int appleSaplingGrowthRate = 7;
 	public int appleCiderPressingTime = 20;
-	public boolean generateAppleFarms = false;
+	public boolean generateAppleFarms;
 	public final int appleCiderColor = 0x855425;
 
 	protected void loadConfig()
