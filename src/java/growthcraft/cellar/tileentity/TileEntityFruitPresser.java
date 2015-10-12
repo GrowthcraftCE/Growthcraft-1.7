@@ -24,7 +24,7 @@ public class TileEntityFruitPresser extends TileEntity
 	{
 		super.updateEntity();
 
-		if (GrowthCraftCellar.fruitPresser.getBlock() == worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord))
+		if (GrowthCraftCellar.fruitPresser.getBlock() != worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord))
 		{
 			invalidate();
 		}
