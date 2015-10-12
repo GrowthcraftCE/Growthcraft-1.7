@@ -15,7 +15,7 @@ public class ContainerBeeBox extends Container
 {
 	private TileEntityBeeBox te;
 
-	public ContainerBeeBox(InventoryPlayer player, TileEntityBeeBox te)
+	public ContainerBeeBox(InventoryPlayer player, TileEntityBeeBox beeBox)
 	{
 		// Slot Indexes:
 		//0            bee
@@ -23,7 +23,7 @@ public class ContainerBeeBox extends Container
 		//28 - 54 (55) player.inv.backpack
 		//55 - 63 (64) player.inv.hotbar
 
-		this.te = te;
+		this.te = beeBox;
 		this.addSlotToContainer(new SlotBee(this, te, 0, 80, 18));
 		int i;
 
@@ -68,11 +68,11 @@ public class ContainerBeeBox extends Container
 	public ItemStack transferStackInSlot(EntityPlayer player, int index)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot)this.inventorySlots.get(index);
+		final Slot slot = (Slot)this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack())
 		{
-			ItemStack stack = slot.getStack();
+			final ItemStack stack = slot.getStack();
 			itemstack = stack.copy();
 
 			if (index == 0)

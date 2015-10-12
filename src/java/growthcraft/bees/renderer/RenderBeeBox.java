@@ -13,16 +13,16 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderBeeBox implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		if (modelID == id)
 		{
-			Tessellator tes = Tessellator.instance;
-			IIcon[] icon  = {BlockBeeBox.tex[0], BlockBeeBox.tex[2], BlockBeeBox.tex[1], BlockBeeBox.tex[1], BlockBeeBox.tex[1], BlockBeeBox.tex[1]};
-			double d = 0.0625D;
+			final Tessellator tes = Tessellator.instance;
+			final IIcon[] icon  = {BlockBeeBox.tex[0], BlockBeeBox.tex[2], BlockBeeBox.tex[1], BlockBeeBox.tex[1], BlockBeeBox.tex[1], BlockBeeBox.tex[1]};
+			final double d = 0.0625D;
 			// LEGS
 			renderer.setRenderBounds(3*d, 0.0D, 3*d, 5*d, 3*d, 5*d);
 			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
@@ -48,7 +48,7 @@ public class RenderBeeBox implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			double d = 0.0625D;
+			final double d = 0.0625D;
 			// LEGS
 			renderer.setRenderBounds(3*d, 0.0D, 3*d, 5*d, 3*d, 5*d);
 			renderer.renderStandardBlock(block, x, y, z);
@@ -71,7 +71,10 @@ public class RenderBeeBox implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean shouldRender3DInInventory(int modelID) {return true;}
+	public boolean shouldRender3DInInventory(int modelID)
+	{
+		return true;
+	}
 
 	@Override
 	public int getRenderId()

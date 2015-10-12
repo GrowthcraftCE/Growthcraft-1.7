@@ -2,12 +2,12 @@ package growthcraft.bees.tileentity;
 
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.GrowthCraftBees;
+import growthcraft.core.utils.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBeeBox extends TileEntity implements ISidedInventory
@@ -230,7 +230,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	{
 		if (this.invSlots[index] != null)
 		{
-			ItemStack itemstack = this.invSlots[index];
+			final ItemStack itemstack = this.invSlots[index];
 			this.invSlots[index] = null;
 			return itemstack;
 		}
@@ -295,20 +295,8 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		NBTTagList tags = nbt.getTagList("items", 10);
 		this.invSlots = new ItemStack[this.getSizeInventory()];
-
-		for (int i = 0; i < tags.tagCount(); ++i)
-		{
-			NBTTagCompound nbttagcompound1 = tags.getCompoundTagAt(i);
-			byte b0 = nbttagcompound1.getByte("Slot");
-
-			if (b0 >= 0 && b0 < this.invSlots.length)
-			{
-				this.invSlots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
-
+		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
 		this.time = nbt.getShort("time");
 		if (nbt.hasKey("name"))
 		{
@@ -320,22 +308,8 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
+		nbt.setTag("items", NBTHelper.writeInventorySlotsToNBT(invSlots));
 		nbt.setShort("time", (short)this.time);
-		NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < this.invSlots.length; ++i)
-		{
-			if (this.invSlots[i] != null)
-			{
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				this.invSlots[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-
-		nbt.setTag("items", nbttaglist);
-
 		if (this.hasCustomInventoryName())
 		{
 			nbt.setString("name", this.name);

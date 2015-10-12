@@ -6,7 +6,6 @@ import growthcraft.bees.renderer.RenderBeeHive;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {

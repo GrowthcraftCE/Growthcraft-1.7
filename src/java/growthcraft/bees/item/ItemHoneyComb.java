@@ -44,8 +44,7 @@ public class ItemHoneyComb extends Item
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int meta)
 	{
-		int i = MathHelper.clamp_int(meta, 0, 1);
-		return this.tex[i];
+		return this.tex[MathHelper.clamp_int(meta, 0, 1)];
 	}
 
 	/************
@@ -53,8 +52,8 @@ public class ItemHoneyComb extends Item
 	 ************/
 	public String getUnlocalizedName(ItemStack par1ItemStack)
 	{
-		int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 1);
-		String s = i == 1 ? "full" : "empty";
+		final int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 1);
+		final String s = i == 1 ? "full" : "empty";
 		return super.getUnlocalizedName() + "." + s;
 	}
 
@@ -63,11 +62,11 @@ public class ItemHoneyComb extends Item
 	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs, List list)
+	public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List list)
 	{
-		for (int loop = 0; loop < 2; loop++)
+		for (int i = 0; i < 2; i++)
 		{
-			list.add(new ItemStack(par1, 1, loop));
+			list.add(new ItemStack(item, 1, i));
 		}
 	}
 }

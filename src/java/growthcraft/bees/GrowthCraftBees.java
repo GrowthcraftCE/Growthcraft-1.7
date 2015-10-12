@@ -1,10 +1,7 @@
 package growthcraft.bees;
 
-import java.io.File;
-
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.cellar.Booze;
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.bees.block.BlockBeeBox;
 import growthcraft.bees.block.BlockBeeHive;
 import growthcraft.bees.gui.GuiHandlerBees;
@@ -16,25 +13,21 @@ import growthcraft.bees.village.ComponentVillageApiarist;
 import growthcraft.bees.village.VillageHandlerBees;
 import growthcraft.bees.village.VillageHandlerBeesApiarist;
 import growthcraft.bees.world.WorldGeneratorBees;
-import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
-import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.integration.NEI;
 import growthcraft.core.utils.MapGenHelper;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -44,23 +37,15 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-
-import cpw.mods.fml.common.FMLLog;
-import org.apache.logging.log4j.Level;
 
 @Mod(
 	modid = GrowthCraftBees.MOD_ID,
@@ -169,7 +154,7 @@ public class GrowthCraftBees
 		// CRAFTING
 		//====================
 		GameRegistry.addRecipe(new ShapedOreRecipe(beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
-		ItemStack honeyStack = honeyComb.asStack(1, 1);
+		final ItemStack honeyStack = honeyComb.asStack(1, 1);
 		GameRegistry.addShapelessRecipe(honeyJar.asStack(), honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);
 		GameRegistry.addShapelessRecipe(honeyMeadBucket_deprecated.asStack(), Items.water_bucket, honeyJar.getItem(), Items.bucket);
 
@@ -184,7 +169,7 @@ public class GrowthCraftBees
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerBees());
 
-		VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
+		final VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, new VillageHandlerBees());
 		VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);

@@ -36,6 +36,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockBeeBox extends BlockContainer
 {
+	@SideOnly(Side.CLIENT)
+	public static IIcon[] tex;
+
 	private final float honeyCombSpawnRate = GrowthCraftBees.getConfig().beeBoxHoneyCombSpawnRate;
 	private final float honeySpawnRate = GrowthCraftBees.getConfig().beeBoxHoneySpawnRate;
 	private final float beeSpawnRate = GrowthCraftBees.getConfig().beeBoxBeeSpawnRate;
@@ -44,8 +47,6 @@ public class BlockBeeBox extends BlockContainer
 	private final float bonus = 2.50F;
 
 	private Random rand = new Random();
-	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
 
 	public BlockBeeBox()
 	{
@@ -73,7 +74,7 @@ public class BlockBeeBox extends BlockContainer
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
 		super.updateTick(world, x, y, z, random);
-		TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
+		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 
 		if (te == null)
 			return;
@@ -145,10 +146,10 @@ public class BlockBeeBox extends BlockContainer
 		{
 			//System.out.println("spread initiated");
 
-			int checkSize = 5;
-			int i = x - ((checkSize - 1) / 2);
-			int k = z - ((checkSize - 1) / 2);
-			List<List> list = new ArrayList<List>();
+			final int checkSize = 5;
+			final int i = x - ((checkSize - 1) / 2);
+			final int k = z - ((checkSize - 1) / 2);
+			final List<List> list = new ArrayList<List>();
 			Block flower;
 			int fm;
 
@@ -167,21 +168,16 @@ public class BlockBeeBox extends BlockContainer
 
 			if (list.size() > 0)
 			{
-				int random_x = i + random.nextInt(checkSize);//MathHelper.getRandomIntegerInRange(random, i, i + (checkSize - 1));
-				int random_z = k + random.nextInt(checkSize);//MathHelper.getRandomIntegerInRange(random, k, k + (checkSize - 1));
-				List random_list = list.get(random.nextInt(list.size()));
-				Block block = (Block) random_list.get(0);
+				final int random_x = i + random.nextInt(checkSize);
+				final int random_z = k + random.nextInt(checkSize);
+				final List random_list = list.get(random.nextInt(list.size()));
+				final Block block = (Block) random_list.get(0);
 				if (block != null)
 				{
 					if (block.canPlaceBlockAt(world, random_x, y, random_z))
 					{
 						world.setBlock(random_x, y, random_z, (Block)random_list.get(0), (Integer) random_list.get(1), 3);
-						//System.out.println("SUCCESS!" + " " + random_x + " " + random_z + " " + block);
 					}
-					//else
-					//{
-					//	System.out.println("FAIL!" + " " + random_x + " " + random_z + " " + block);
-					//}
 				}
 			}
 		}
@@ -194,18 +190,18 @@ public class BlockBeeBox extends BlockContainer
 
 	private float getGrowthRate(World world, int x, int y, int z)
 	{
+		final int checkSize = 5;
+		final int i = x - ((checkSize - 1) / 2);
+		final int k = z - ((checkSize - 1) / 2);
 		float f = 1.0F;
-		int checkSize = 5;
-		int i = x - ((checkSize - 1) / 2);
-		int k = z - ((checkSize - 1) / 2);
 
 		for (int loopx = 0; loopx < checkSize; loopx++)
 		{
 			for (int loopz = 0; loopz < checkSize; loopz++)
 			{
-				Block flower = world.getBlock(i + loopx, y, k + loopz);
-				int fm = world.getBlockMetadata(i + loopx, y, k + loopz);
-				Block soil = world.getBlock(i + loopx, y - 1, k + loopz);
+				final Block flower = world.getBlock(i + loopx, y, k + loopz);
+				final int fm = world.getBlockMetadata(i + loopx, y, k + loopz);
+				final Block soil = world.getBlock(i + loopx, y - 1, k + loopz);
 				float f1 = 0.0F;
 
 				if (soil == Blocks.grass)
@@ -231,12 +227,12 @@ public class BlockBeeBox extends BlockContainer
 			}
 		}
 
-		TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
+		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 
 		if (te != null)
 		{
-			int bees = te.countBees();
-			float div = 2.0F - (0.015625F * bees);
+			final int bees = te.countBees();
+			final float div = 2.0F - (0.015625F * bees);
 
 			f /= div;
 
@@ -271,10 +267,10 @@ public class BlockBeeBox extends BlockContainer
 		}
 		else
 		{
-			TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
+			final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 			if (te != null)
 			{
-				ItemStack itemstack = player.inventory.getCurrentItem();
+				final ItemStack itemstack = player.inventory.getCurrentItem();
 
 				if (itemstack != null && itemstack.getItem() == Items.flower_pot && te.isHoneyEnough())
 				{
@@ -331,19 +327,19 @@ public class BlockBeeBox extends BlockContainer
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block par5, int par6)
 	{
-		TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
+		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 
 		if (te != null)
 		{
 			for (int index = 0; index < te.getSizeInventory(); ++index)
 			{
-				ItemStack stack = te.getStackInSlot(index);
+				final ItemStack stack = te.getStackInSlot(index);
 
 				if (stack != null)
 				{
-					float f = this.rand.nextFloat() * 0.8F + 0.1F;
-					float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-					float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
+					final float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
 
 					while (stack.stackSize > 0)
 					{
@@ -355,14 +351,14 @@ public class BlockBeeBox extends BlockContainer
 						}
 
 						stack.stackSize -= k1;
-						EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
+						final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
 
 						if (stack.hasTagCompound())
 						{
 							entityitem.getEntityItem().setTagCompound((NBTTagCompound)stack.getTagCompound().copy());
 						}
 
-						float f3 = 0.05F;
+						final float f3 = 0.05F;
 						entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
 						entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
 						entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
@@ -406,13 +402,13 @@ public class BlockBeeBox extends BlockContainer
 	 * DROPS
 	 ************/
 	@Override
-	public Item getItemDropped(int par1, Random rand, int par3)
+	public Item getItemDropped(int par1, Random random, int par3)
 	{
 		return GrowthCraftBees.beeBox.getItem();
 	}
 
 	@Override
-	public int quantityDropped(Random rand)
+	public int quantityDropped(Random random)
 	{
 		return 1;
 	}
@@ -489,7 +485,7 @@ public class BlockBeeBox extends BlockContainer
 	@Override
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
 	{
-		float f = 0.0625F;
+		final float f = 0.0625F;
 		// LEGS
 		this.setBlockBounds(3*f, 0.0F, 3*f, 5*f, 3*f, 5*f);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
@@ -522,7 +518,7 @@ public class BlockBeeBox extends BlockContainer
 	@Override
 	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
 	{
-		TileEntityBeeBox te = (TileEntityBeeBox) world.getTileEntity(x, y, z);
+		final TileEntityBeeBox te = (TileEntityBeeBox) world.getTileEntity(x, y, z);
 		return te.countHoney() * 15 / 27;
 	}
 }

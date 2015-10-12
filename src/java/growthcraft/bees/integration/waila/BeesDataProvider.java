@@ -4,7 +4,6 @@ import java.util.List;
 
 import growthcraft.bees.tileentity.TileEntityBeeBox;
 import growthcraft.bees.utils.TagFormatterBeeBox;
-import growthcraft.core.utils.ConstID;
 
 import cpw.mods.fml.common.Optional;
 
@@ -15,15 +14,8 @@ import mcp.mobius.waila.api.IWailaDataProvider;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 
 public class BeesDataProvider implements IWailaDataProvider
 {

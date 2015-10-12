@@ -1,6 +1,5 @@
 package growthcraft.bees;
 
-import java.io.File;
 import growthcraft.core.ConfigBase;
 import net.minecraftforge.common.config.Configuration;
 
@@ -14,7 +13,7 @@ public class Config extends ConfigBase
 	public float beeBoxHoneySpawnRate = 6.25f;
 	public float beeBoxBeeSpawnRate = 6.25f;
 	public float beeBoxFlowerSpawnRate = 6.25f;
-	public boolean generateApiaristStructure = false;
+	public boolean generateApiaristStructure;
 	public final int honeyMeadColor = 0xA3610C;
 
 	protected void loadConfig()
@@ -24,9 +23,9 @@ public class Config extends ConfigBase
 		this.useBiomeDict = config.get(Configuration.CATEGORY_GENERAL, "Enable Biome Dictionary compatability?", useBiomeDict, "Default : true  || false = Disable").getBoolean();
 		this.beeWorldGenDensity = config.get(Configuration.CATEGORY_GENERAL, "Bee Hive WorldGen density", beeWorldGenDensity, "[Higher -> Denser] Default : " + beeWorldGenDensity).getInt();
 		this.beeBoxHoneyCombSpawnRate = (float)config.get(Configuration.CATEGORY_GENERAL, "Bee Box Honeycomb spawn rate", (double)beeBoxHoneyCombSpawnRate, "[Higher -> Slower] Default : " + beeBoxHoneyCombSpawnRate).getDouble();
-		this.beeBoxFlowerSpawnRate =
-			this.beeBoxBeeSpawnRate =
-			this.beeBoxHoneySpawnRate = (float)config.get(Configuration.CATEGORY_GENERAL, "Bee Box Honey and Bee spawn rate", (double)beeBoxHoneySpawnRate, "[Higher -> Slower] Default : " + beeBoxHoneySpawnRate).getDouble();
+		this.beeBoxHoneySpawnRate = (float)config.get(Configuration.CATEGORY_GENERAL, "Bee Box Honey and Bee spawn rate", (double)beeBoxHoneySpawnRate, "[Higher -> Slower] Default : " + beeBoxHoneySpawnRate).getDouble();
+		this.beeBoxFlowerSpawnRate = this.beeBoxHoneySpawnRate;
+		this.beeBoxBeeSpawnRate = this.beeBoxHoneySpawnRate;
 		this.generateApiaristStructure = config.get(Configuration.CATEGORY_GENERAL, "Spawn Village Apiarist Structure", generateApiaristStructure, "Should the apiarist structure be generated in villages? : " + generateApiaristStructure).getBoolean();
 	}
 }
