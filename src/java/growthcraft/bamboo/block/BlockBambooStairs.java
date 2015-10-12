@@ -7,9 +7,6 @@ import net.minecraft.block.BlockStairs;
 
 public class BlockBambooStairs extends BlockStairs
 {
-	private boolean boundsFlag = false;
-	private int boundsInt = 0;
-
 	public BlockBambooStairs()
 	{
 		super(GrowthCraftBamboo.bambooBlock.getBlock(), 0);

@@ -1,7 +1,6 @@
 package growthcraft.bamboo;
 
 import cpw.mods.fml.common.IFuelHandler;
-import growthcraft.bamboo.block.BlockBambooSlab;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -12,7 +11,7 @@ public class BambooFuelHandler implements IFuelHandler
 	{
 		if (fuel != null)
 		{
-			Item item = fuel.getItem();
+			final Item item = fuel.getItem();
 			if (GrowthCraftBamboo.bambooCoal.equals(item))
 			{
 				return 800;

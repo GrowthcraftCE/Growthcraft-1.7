@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.List;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.bamboo.village.ComponentVillageBambooYard;
 
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import net.minecraft.util.MathHelper;

@@ -29,7 +29,7 @@ public class ItemBamboo extends Item
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
 	{
-		Block block1 = world.getBlock(x, y, z);
+		final Block block1 = world.getBlock(x, y, z);
 
 		if (block1 == Blocks.snow && (world.getBlockMetadata(x, y, z) & 7) < 1)
 		{
@@ -78,7 +78,7 @@ public class ItemBamboo extends Item
 		}
 		else
 		{
-			Block block = GrowthCraftBamboo.bambooStalk.getBlock();
+			final Block block = GrowthCraftBamboo.bambooStalk.getBlock();
 			if (world.canPlaceEntityOnSide(block, x, y, z, false, dir, (Entity)null, stack))
 			{
 				if (world.setBlock(x, y, z, block, 1, 3))

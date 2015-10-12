@@ -1,9 +1,5 @@
 package growthcraft.bamboo;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-
 import growthcraft.bamboo.block.BlockBamboo;
 import growthcraft.bamboo.block.BlockBambooDoor;
 import growthcraft.bamboo.block.BlockBambooFence;
@@ -26,7 +22,6 @@ import growthcraft.bamboo.item.ItemBambooSlab;
 import growthcraft.bamboo.village.ComponentVillageBambooYard;
 import growthcraft.bamboo.village.VillageHandlerBamboo;
 import growthcraft.bamboo.world.BiomeGenBamboo;
-import growthcraft.bamboo.world.WorldGenBamboo;
 import growthcraft.bamboo.world.WorldGeneratorBamboo;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
@@ -37,7 +32,6 @@ import growthcraft.core.utils.MapGenHelper;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -45,27 +39,16 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.SidedProxy;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-
-import cpw.mods.fml.common.FMLLog;
-import org.apache.logging.log4j.Level;
 
 @Mod(
 	modid = GrowthCraftBamboo.MOD_ID,
@@ -82,9 +65,12 @@ public class GrowthCraftBamboo
 	@Instance(MOD_ID)
 	public static GrowthCraftBamboo instance;
 
+	@SidedProxy(clientSide="growthcraft.bamboo.ClientProxy", serverSide="growthcraft.bamboo.CommonProxy")
+	public static CommonProxy proxy;
+
 	public static BlockDefinition bambooBlock;
-	public static BlockDefinition bambooShoot;
-	public static BlockDefinition bambooStalk;
+	public static BlockTypeDefinition<BlockBambooShoot> bambooShoot;
+	public static BlockTypeDefinition<BlockBambooStalk> bambooStalk;
 	public static BlockDefinition bambooLeaves;
 	public static BlockDefinition bambooFence;
 	public static BlockDefinition bambooWall;
@@ -102,12 +88,9 @@ public class GrowthCraftBamboo
 
 	public static BiomeGenBase bambooBiome;
 
-	private growthcraft.bamboo.Config config;
+	private Config config;
 
-	@SidedProxy(clientSide="growthcraft.bamboo.ClientProxy", serverSide="growthcraft.bamboo.CommonProxy")
-	public static CommonProxy proxy;
-
-	public static growthcraft.bamboo.Config getConfig()
+	public static Config getConfig()
 	{
 		return instance.config;
 	}
@@ -115,15 +98,15 @@ public class GrowthCraftBamboo
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.bamboo.Config();
+		config = new Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
 
 		//====================
 		// INIT
 		//====================
 		bambooBlock      = new BlockDefinition(new BlockBamboo());
-		bambooShoot      = new BlockDefinition(new BlockBambooShoot());
-		bambooStalk      = new BlockDefinition(new BlockBambooStalk());
+		bambooShoot      = new BlockTypeDefinition<BlockBambooShoot>(new BlockBambooShoot());
+		bambooStalk      = new BlockTypeDefinition<BlockBambooStalk>(new BlockBambooStalk());
 		bambooLeaves     = new BlockDefinition(new BlockBambooLeaves());
 		bambooFence      = new BlockDefinition(new BlockBambooFence());
 		bambooWall       = new BlockDefinition(new BlockBambooWall());
@@ -248,7 +231,7 @@ public class GrowthCraftBamboo
 	public void load(FMLInitializationEvent event)
 	{
 		proxy.initRenders();
-		VillageHandlerBamboo handler = new VillageHandlerBamboo();
+		final VillageHandlerBamboo handler = new VillageHandlerBamboo();
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 	}
 

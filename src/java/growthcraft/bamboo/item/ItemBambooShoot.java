@@ -32,7 +32,7 @@ public class ItemBambooShoot extends ItemFood implements IPlantable
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
 	{
-		Block block1 = world.getBlock(x, y, z);
+		final Block block1 = world.getBlock(x, y, z);
 
 		if (block1 == Blocks.snow && (world.getBlockMetadata(x, y, z) & 7) < 1)
 		{
@@ -83,7 +83,7 @@ public class ItemBambooShoot extends ItemFood implements IPlantable
 		{
 			if (world.canPlaceEntityOnSide(cropBlock, x, y, z, false, dir, (Entity)null, stack))
 			{
-				int meta = cropBlock.onBlockPlaced(world, x, y, z, dir, par8, par9, par10, 0);
+				final int meta = cropBlock.onBlockPlaced(world, x, y, z, dir, par8, par9, par10, 0);
 
 				if (world.setBlock(x, y, z, cropBlock, meta, 3))
 				{

@@ -80,11 +80,11 @@ public class BlockBambooDoor extends BlockDoor
 	{
 		if (side != 1 && side != 0)
 		{
-			int meta = this.func_150012_g(world, x, y, z);
-			int j1 = meta & 3;
-			boolean flag = (meta & 4) != 0;
+			final int meta = this.func_150012_g(world, x, y, z);
+			final int j1 = meta & 3;
+			final boolean flag = (meta & 4) != 0;
+			final boolean flag2 = (meta & 8) != 0;
 			boolean flag1 = false;
-			boolean flag2 = (meta & 8) != 0;
 
 			if (flag)
 			{

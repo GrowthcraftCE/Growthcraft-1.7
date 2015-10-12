@@ -5,6 +5,8 @@ import java.util.Random;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.renderer.RenderBamboo;
+import growthcraft.core.utils.BlockCheck;
+import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,6 +24,7 @@ import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockBambooStalk extends Block
 {
@@ -55,13 +58,15 @@ public class BlockBambooStalk extends Block
 	{
 		if (world.getBlockMetadata(x, y, z) == 0)
 		{
-			int x1 = x, y1 = y, z1 = z;
+			int x1 = x;
+			int y1 = y;
+			int z1 = z;
 
 			if (isBambooOnGround(world, x, y, z))
 			{
 				if (rand.nextInt(this.growth) == 0)
 				{
-					byte b = 9;
+					final byte b = 9;
 					int amount = 10;
 					final BlockBambooShoot bambooShoot = (BlockBambooShoot)GrowthCraftBamboo.bambooShoot.getBlock();
 
@@ -71,8 +76,8 @@ public class BlockBambooStalk extends Block
 						{
 							for (y1 = y - 1; y1 <= y + 1; ++y1)
 							{
-								boolean flag1 = world.getBlock(x1, y1, z1) == this && isBambooOnGround(world, x1, y1, z1);
-								boolean flag2 = world.getBlock(x1, y1, z1) == bambooShoot;
+								final boolean flag1 = world.getBlock(x1, y1, z1) == this && isBambooOnGround(world, x1, y1, z1);
+								final boolean flag2 = world.getBlock(x1, y1, z1) == bambooShoot;
 								if (flag1 || flag2)
 								{
 									--amount;
@@ -143,8 +148,8 @@ public class BlockBambooStalk extends Block
 	{
 		if (world.getBlockMetadata(x, y, z) == 0)
 		{
-			byte b0 = 4;
-			int j1 = b0 + 1;
+			final byte b0 = 4;
+			final int j1 = b0 + 1;
 
 			if (world.checkChunksExist(x - j1, y - j1, z - j1, x + j1, y + j1, z + j1))
 			{
@@ -154,8 +159,7 @@ public class BlockBambooStalk extends Block
 					{
 						for (int z1 = -b0; z1 <= b0; ++z1)
 						{
-							Block block = world.getBlock(x + x1, y + y1, z + z1);
-
+							final Block block = world.getBlock(x + x1, y + y1, z + z1);
 							if (block != null)
 							{
 								block.beginLeavesDecay(world, x + x1, y + y1, z + z1);
@@ -195,11 +199,10 @@ public class BlockBambooStalk extends Block
 		return false;
 	}
 
-
-	protected boolean isBambooOnGround(World world, int x, int y, int z)
+	public boolean isBambooOnGround(World world, int x, int y, int z)
 	{
-		boolean flag = world.getBlock(x, y - 1, z) == Blocks.grass || world.getBlock(x, y - 1, z) == Blocks.dirt;
-		return world.getBlock(x, y, z) == this && flag;
+		if (!BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, GrowthCraftBamboo.bambooShoot.getBlock())) return false;
+		return this == world.getBlock(x, y, z);
 	}
 
 	@Override
@@ -295,8 +298,8 @@ public class BlockBambooStalk extends Block
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
 	{
-		double d0 = 0.5D;
-		double d1 = 1.0D;
+		final double d0 = 0.5D;
+		final double d1 = 1.0D;
 		return ColorizerGrass.getGrassColor(d0, d1);
 	}
 
@@ -304,7 +307,7 @@ public class BlockBambooStalk extends Block
 	@SideOnly(Side.CLIENT)
 	public int getRenderColor(int par1)
 	{
-		return par1 == 0 ? 16777215 : ColorizerFoliage.getFoliageColorBasic();
+		return par1 == 0 ? 0xFFFFFF : ColorizerFoliage.getFoliageColorBasic();
 	}
 
 	@Override
@@ -321,10 +324,10 @@ public class BlockBambooStalk extends Block
 			{
 				for (int i2 = -1; i2 <= 1; ++i2)
 				{
-					int color = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
+					final int color = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
 					r += (color & 16711680) >> 16;
-				g += (color & 65280) >> 8;
-						b += color & 255;
+					g += (color & 65280) >> 8;
+					b += color & 255;
 				}
 			}
 
@@ -332,7 +335,7 @@ public class BlockBambooStalk extends Block
 		}
 		else
 		{
-			return 16777215;
+			return 0xFFFFFF;
 		}
 	}
 
@@ -376,10 +379,10 @@ public class BlockBambooStalk extends Block
 	@Override
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
 	{
-		float x1 = 0.25F;
-		float x2 = 0.75F;
-		float z1 = 0.25F;
-		float z2 = 0.75F;
+		final float x1 = 0.25F;
+		final float x2 = 0.75F;
+		final float z1 = 0.25F;
+		final float z2 = 0.75F;
 
 		this.setBlockBounds(x1, 0.0F, z1, x2, 1.0F, z2);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
@@ -388,61 +391,61 @@ public class BlockBambooStalk extends Block
 		{
 			if (this.canFence(world, x, y, z - 1))
 			{
-				renderFence(world, axis, list, entity, x, y, z, "zneg");
+				renderFence(world, axis, list, entity, x, y, z, RenderUtils.Face.ZNEG);
 			}
 			else if (this.canWall(world, x, y, z - 1))
 			{
-				renderWall(world, axis, list, entity, x, y, z, "zneg");
+				renderWall(world, axis, list, entity, x, y, z, RenderUtils.Face.ZNEG);
 			}
 			else if (this.canDoor(world, x, y, z - 1))
 			{
-				renderDoor(world, axis, list, entity, x, y, z, "zneg");
+				renderDoor(world, axis, list, entity, x, y, z, RenderUtils.Face.ZNEG);
 			}
 
 			if (this.canFence(world, x, y, z + 1))
 			{
-				renderFence(world, axis, list, entity, x, y, z, "zpos");
+				renderFence(world, axis, list, entity, x, y, z, RenderUtils.Face.ZPOS);
 			}
 			else if (this.canWall(world, x, y, z + 1))
 			{
-				renderWall(world, axis, list, entity, x, y, z, "zpos");
+				renderWall(world, axis, list, entity, x, y, z, RenderUtils.Face.ZPOS);
 			}
 			else if (this.canDoor(world, x, y, z + 1))
 			{
-				renderDoor(world, axis, list, entity, x, y, z, "zpos");
+				renderDoor(world, axis, list, entity, x, y, z, RenderUtils.Face.ZPOS);
 			}
 
 			if (this.canFence(world, x - 1, y, z))
 			{
-				renderFence(world, axis, list, entity, x, y, z, "xneg");
+				renderFence(world, axis, list, entity, x, y, z, RenderUtils.Face.XNEG);
 			}
 			else if (this.canWall(world, x - 1, y, z))
 			{
-				renderWall(world, axis, list, entity, x, y, z, "xneg");
+				renderWall(world, axis, list, entity, x, y, z, RenderUtils.Face.XNEG);
 			}
 			else if (this.canDoor(world, x - 1, y, z))
 			{
-				renderDoor(world, axis, list, entity, x, y, z, "xneg");
+				renderDoor(world, axis, list, entity, x, y, z, RenderUtils.Face.XNEG);
 			}
 
 			if (this.canFence(world, x + 1, y, z))
 			{
-				renderFence(world, axis, list, entity, x, y, z, "xpos");
+				renderFence(world, axis, list, entity, x, y, z, RenderUtils.Face.XPOS);
 			}
 			else if (this.canWall(world, x + 1, y, z))
 			{
-				renderWall(world, axis, list, entity, x, y, z, "xpos");
+				renderWall(world, axis, list, entity, x, y, z, RenderUtils.Face.XPOS);
 			}
 			else if (this.canDoor(world, x + 1, y, z))
 			{
-				renderDoor(world, axis, list, entity, x, y, z, "xpos");
+				renderDoor(world, axis, list, entity, x, y, z, RenderUtils.Face.XPOS);
 			}
 		}
 
 		this.setBlockBoundsBasedOnState(world, x, y, z);
 	}
 
-	private void renderFence(World world, AxisAlignedBB axis, List list, Entity entity, int x, int y, int z, String m)
+	private void renderFence(World world, AxisAlignedBB axis, List list, Entity entity, int x, int y, int z, RenderUtils.Face m)
 	{
 		float x1 = x;
 		float x2 = x + 1.0F;
@@ -452,28 +455,28 @@ public class BlockBambooStalk extends Block
 		float y1 = 0.75F;
 		float y2 = 0.9375F;
 
-		if (m == "zneg")
+		if (m == RenderUtils.Face.ZNEG)
 		{
 			x1 = 0.4375F;
 			x2 = 0.5625F;
 			z1 = 0.0F;
 			z2 = 0.25F;
 		}
-		else if (m == "zpos")
+		else if (m == RenderUtils.Face.ZPOS)
 		{
 			x1 = 0.4375F;
 			x2 = 0.5625F;
 			z1 = 0.75F;
 			z2 = 1.0F;
 		}
-		else if (m == "xneg")
+		else if (m == RenderUtils.Face.XNEG)
 		{
 			z1 = 0.4375F;
 			z2 = 0.5625F;
 			x1 = 0.0F;
 			x2 = 0.25F;
 		}
-		else if (m == "xpos")
+		else if (m == RenderUtils.Face.XPOS)
 		{
 			z1 = 0.4375F;
 			z2 = 0.5625F;
@@ -487,28 +490,28 @@ public class BlockBambooStalk extends Block
 		y1 = 0.375F;
 		y2 = 0.5625F;
 
-		if (m == "zneg")
+		if (m == RenderUtils.Face.ZNEG)
 		{
 			x1 = 0.4375F;
 			x2 = 0.5625F;
 			z1 = 0.0F;
 			z2 = 0.25F;
 		}
-		else if (m == "zpos")
+		else if (m == RenderUtils.Face.ZPOS)
 		{
 			x1 = 0.4375F;
 			x2 = 0.5625F;
 			z1 = 0.75F;
 			z2 = 1.0F;
 		}
-		else if (m == "xneg")
+		else if (m == RenderUtils.Face.XNEG)
 		{
 			z1 = 0.4375F;
 			z2 = 0.5625F;
 			x1 = 0.0F;
 			x2 = 0.25F;
 		}
-		else if (m == "xpos")
+		else if (m == RenderUtils.Face.XPOS)
 		{
 			z1 = 0.4375F;
 			z2 = 0.5625F;
@@ -520,38 +523,38 @@ public class BlockBambooStalk extends Block
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 	}
 
-	private void renderWall(World world, AxisAlignedBB axis, List list, Entity entity, int x, int y, int z, String m)
+	private void renderWall(World world, AxisAlignedBB axis, List list, Entity entity, int x, int y, int z, RenderUtils.Face m)
 	{
 		float x1 = x;
 		float x2 = x + 1.0F;
 		float z1 = z;
 		float z2 = z + 1.0F;
 
-		double y1 = 0.0F;
-		double y2 = 1.0F;
+		final double y1 = 0.0F;
+		final double y2 = 1.0F;
 
-		if (m == "zneg")
+		if (m == RenderUtils.Face.ZNEG)
 		{
 			x1 = 0.375F;
 			x2 = 0.625F;
 			z1 = 0.0F;
 			z2 = 0.25F;
 		}
-		else if (m == "zpos")
+		else if (m == RenderUtils.Face.ZPOS)
 		{
 			x1 = 0.375F;
 			x2 = 0.625F;
 			z1 = 0.75F;
 			z2 = 1.0F;
 		}
-		else if (m == "xneg")
+		else if (m == RenderUtils.Face.XNEG)
 		{
 			z1 = 0.375F;
 			z2 = 0.625F;
 			x1 = 0.0F;
 			x2 = 0.25F;
 		}
-		else if (m == "xpos")
+		else if (m == RenderUtils.Face.XPOS)
 		{
 			z1 = 0.375F;
 			z2 = 0.625F;
@@ -563,20 +566,20 @@ public class BlockBambooStalk extends Block
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 	}
 
-	private void renderDoor(World world, AxisAlignedBB axis, List list, Entity entity, int x, int y, int z, String m)
+	private void renderDoor(World world, AxisAlignedBB axis, List list, Entity entity, int x, int y, int z, RenderUtils.Face m)
 	{
 		float x1 = x;
 		float x2 = x + 1.0F;
 		float z1 = z;
 		float z2 = z + 1.0F;
 
-		float y1 = 0.0F;
-		float y2 = 1.0F;
+		final float y1 = 0.0F;
+		final float y2 = 1.0F;
 
 		int tm0;
 		int tm;
 
-		if (m == "zneg")
+		if (m == RenderUtils.Face.ZNEG)
 		{
 			tm0 = world.getBlockMetadata(x, y, z - 1);
 			if ((tm0 & 8) > 7)
@@ -606,7 +609,7 @@ public class BlockBambooStalk extends Block
 				super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 			}
 		}
-		else if (m == "zpos")
+		else if (m == RenderUtils.Face.ZPOS)
 		{
 			tm0 = world.getBlockMetadata(x, y, z + 1);
 			if ((tm0 & 8) > 7)
@@ -637,7 +640,7 @@ public class BlockBambooStalk extends Block
 				super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 			}
 		}
-		else if (m == "xneg")
+		else if (m == RenderUtils.Face.XNEG)
 		{
 			tm0 = world.getBlockMetadata(x - 1, y, z);
 			if ((tm0 & 8) > 7)
@@ -669,7 +672,7 @@ public class BlockBambooStalk extends Block
 				super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 			}
 		}
-		else if (m == "xpos")
+		else if (m == RenderUtils.Face.XPOS)
 		{
 			tm0 = world.getBlockMetadata(x + 1, y, z);
 			if ((tm0 & 8) > 7)

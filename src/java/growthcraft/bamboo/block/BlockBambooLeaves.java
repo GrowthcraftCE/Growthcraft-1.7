@@ -24,8 +24,8 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
-	//public static Boolean graphicFlag;
-	int[] adjacentTreeBlocks;
+
+	protected int[] adjacentTreeBlocks;
 
 	public BlockBambooLeaves()
 	{
@@ -46,15 +46,15 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	{
 		if (!world.isRemote)
 		{
-			int meta = world.getBlockMetadata(x, y, z);
+			final int meta = world.getBlockMetadata(x, y, z);
 
 			if ((meta & 8) != 0 && (meta & 4) == 0)
 			{
-				byte b0 = 4;
-				int i1 = b0 + 1;
-				byte b1 = 32;
-				int j1 = b1 * b1;
-				int k1 = b1 / 2;
+				final byte b0 = 4;
+				final int i1 = b0 + 1;
+				final byte b1 = 32;
+				final int j1 = b1 * b1;
+				final int k1 = b1 / 2;
 
 				if (this.adjacentTreeBlocks == null)
 				{
@@ -75,7 +75,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 						{
 							for (j2 = -b0; j2 <= b0; ++j2)
 							{
-								Block block = world.getBlock(x + l1, y + i2, z + j2);
+								final Block block = world.getBlock(x + l1, y + i2, z + j2);
 
 								if (block != null && block.canSustainLeaves(world, x + l1, y + i2, z + j2))
 								{
@@ -160,9 +160,9 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 		super.randomDisplayTick(world, x, y, z, random);
 		if (world.canLightningStrikeAt(x, y + 1, z) && !World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && random.nextInt(15) == 1)
 		{
-			double d0 = (double)((float)x + random.nextFloat());
-			double d1 = (double)y - 0.05D;
-			double d2 = (double)((float)z + random.nextFloat());
+			final double d0 = (double)((float)x + random.nextFloat());
+			final double d1 = (double)y - 0.05D;
+			final double d2 = (double)((float)z + random.nextFloat());
 			world.spawnParticle("dripWater", d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
@@ -173,8 +173,8 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block par5, int par6)
 	{
-		byte b0 = 1;
-		int j1 = b0 + 1;
+		final byte b0 = 1;
+		final int j1 = b0 + 1;
 
 		if (world.checkChunksExist(x - j1, y - j1, z - j1, x + j1, y + j1, z + j1))
 		{
@@ -184,7 +184,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 				{
 					for (int i2 = -b0; i2 <= b0; ++i2)
 					{
-						Block j2 = world.getBlock(x + k1, y + l1, z + i2);
+						final Block j2 = world.getBlock(x + k1, y + l1, z + i2);
 
 						if (j2 != null)
 						{
@@ -256,8 +256,6 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		//this.graphicFlag = ((BlockLeaves)Block.blocksList[Block.leaves.blockID]).graphicsLevel;
-		//return this.graphicFlag ? this.tex[0] : this.tex[1];
 		return this.tex[this.isOpaqueCube() ? 1 : 0];
 	}
 
@@ -268,8 +266,6 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public boolean isOpaqueCube()
 	{
-		//this.graphicFlag = ((BlockLeaves)Block.blocksList[Block.leaves.blockID]).graphicsLevel;
-		//return !this.graphicFlag;
 		return Blocks.leaves.isOpaqueCube();
 	}
 
@@ -277,9 +273,6 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
-		//int id = world.getBlockId(x, y, z);
-		//this.graphicFlag = ((BlockLeaves)Block.blocksList[Block.leaves.blockID]).graphicsLevel;
-		//return !this.graphicFlag && id == this.blockID ? false : super.shouldSideBeRendered(world, x, y, z, side);
 		return true;
 	}
 
@@ -287,8 +280,8 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
 	{
-		double d0 = 0.5D;
-		double d1 = 1.0D;
+		final double d0 = 0.5D;
+		final double d1 = 1.0D;
 		return ColorizerFoliage.getFoliageColor(d0, d1);
 	}
 
@@ -303,7 +296,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
 		int r = 0;
 		int g = 0;
 		int b = 0;
@@ -312,10 +305,10 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 		{
 			for (int z1 = -1; z1 <= 1; ++z1)
 			{
-				int j2 = world.getBiomeGenForCoords(x + z1, z + x1).getBiomeFoliageColor(x + z1, y, z + x1);
+				final int j2 = world.getBiomeGenForCoords(x + z1, z + x1).getBiomeFoliageColor(x + z1, y, z + x1);
 				r += (j2 & 16711680) >> 16;
-			g += (j2 & 65280) >> 8;
-					b += j2 & 255;
+				g += (j2 & 65280) >> 8;
+				b += j2 & 255;
 			}
 		}
 
@@ -334,7 +327,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
 	{
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(new ItemStack(Blocks.leaves, 1, world.getBlockMetadata(x, y, z) & 3));
 		return ret;
 	}

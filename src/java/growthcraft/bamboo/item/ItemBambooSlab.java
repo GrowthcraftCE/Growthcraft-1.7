@@ -3,7 +3,6 @@ package growthcraft.bamboo.item;
 import growthcraft.bamboo.GrowthCraftBamboo;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 
 public class ItemBambooSlab extends ItemSlab
