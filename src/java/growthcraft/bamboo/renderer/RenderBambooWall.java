@@ -1,6 +1,5 @@
 package growthcraft.bamboo.renderer;
 
-import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.block.BlockBambooWall;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -15,31 +14,25 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderBambooWall implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		if (modelID == id)
 		{
-			Tessellator tessellator = Tessellator.instance;
-			int color;
-			float r;
-			float g;
-			float b;
+			final Tessellator tessellator = Tessellator.instance;
 
 			if (renderer.useInventoryTint)
 			{
-				color = block.getRenderColor(metadata);
-
-				r = (float)(color >> 16 & 255) / 255.0F;
-				g = (float)(color >> 8 & 255) / 255.0F;
-				b = (float)(color & 255) / 255.0F;
+				final int color = block.getRenderColor(metadata);
+				final float r = (float)(color >> 16 & 255) / 255.0F;
+				final float g = (float)(color >> 8 & 255) / 255.0F;
+				final float b = (float)(color & 255) / 255.0F;
 				GL11.glColor4f(r * 1.0F, g * 1.0F, b * 1.0F, 1.0F);
 			}
 
 			renderer.setRenderBoundsFromBlock(block);
-			int loop;
 
 			renderer.setRenderBounds(0.375D, 0.0D, 0.0D, 0.625D, 1.0D, 1.0D);
 
@@ -81,32 +74,31 @@ public class RenderBambooWall implements ISimpleBlockRenderingHandler
 		{
 			double x1 = 0.375D;
 			double x2 = 0.625D;
-			double y1 = 0.0D;
-			double y2 = 1.0D;
+			final double y1 = 0.0D;
+			final double y2 = 1.0D;
 			double z1 = 0.375D;
 			double z2 = 0.625D;
 			renderer.setRenderBounds(x1, y1, z1, x2, y2, z2);
 			renderer.renderStandardBlock(block, x, y, z);
 
-			BlockBambooWall blk = (BlockBambooWall) block;
+			final BlockBambooWall blk = (BlockBambooWall) block;
 
 			int tm;
 
-			Block idXneg = world.getBlock(x - 1, y, z);
-			Block idXpos = world.getBlock(x + 1, y, z);
-			Block idZneg = world.getBlock(x, y, z - 1);
-			Block idZpos = world.getBlock(x, y, z + 1);
+			final Block idXneg = world.getBlock(x - 1, y, z);
+			final Block idXpos = world.getBlock(x + 1, y, z);
+			final Block idZneg = world.getBlock(x, y, z - 1);
+			final Block idZpos = world.getBlock(x, y, z + 1);
 
 			int metaXneg = world.getBlockMetadata(x - 1, y, z);
 			int metaXpos = world.getBlockMetadata(x + 1, y, z);
 			int metaZneg = world.getBlockMetadata(x, y, z - 1);
 			int metaZpos = world.getBlockMetadata(x, y, z + 1);
 
-			boolean flagXneg = blk.canConnectWallTo(world, x - 1, y, z) || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
-			boolean flagXpos = blk.canConnectWallTo(world, x + 1, y, z) || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
-			boolean flagZneg = blk.canConnectWallTo(world, x, y, z - 1) || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
-			boolean flagZpos = blk.canConnectWallTo(world, x, y, z + 1) || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
-
+			final boolean flagXneg = blk.canConnectWallTo(world, x - 1, y, z) || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
+			final boolean flagXpos = blk.canConnectWallTo(world, x + 1, y, z) || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
+			final boolean flagZneg = blk.canConnectWallTo(world, x, y, z - 1) || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
+			final boolean flagZpos = blk.canConnectWallTo(world, x, y, z + 1) || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
 
 			//XNEG
 			if (flagXneg)

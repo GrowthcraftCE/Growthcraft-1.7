@@ -9,9 +9,7 @@ import net.minecraft.util.IIcon;
 
 public class RenderUtils
 {
-	private RenderUtils() {}
-
-	public static enum Faces
+	public static enum Face
 	{
 		XPOS,
 		XNEG,
@@ -21,7 +19,9 @@ public class RenderUtils
 		ZNEG;
 	}
 
-	public static void drawFace(Faces face, Block block, RenderBlocks renderer, Tessellator tes, IIcon icon, double i, double j, double k)
+	private RenderUtils() {}
+
+	public static void drawFace(Face face, Block block, RenderBlocks renderer, Tessellator tes, IIcon icon, double i, double j, double k)
 	{
 		final float f = 0.0F;
 		tes.startDrawingQuads();
@@ -86,24 +86,24 @@ public class RenderUtils
 	public static void drawInventoryBlock(Block block, RenderBlocks renderer, IIcon[] icon, Tessellator tes)
 	{
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		drawFace(Faces.YNEG, block, renderer, tes, icon[0], 0.0D, 0.0D, 0.0D);
-		drawFace(Faces.YPOS, block, renderer, tes, icon[1], 0.0D, 0.0D, 0.0D);
-		drawFace(Faces.ZNEG, block, renderer, tes, icon[2], 0.0D, 0.0D, 0.0D);
-		drawFace(Faces.ZPOS, block, renderer, tes, icon[3], 0.0D, 0.0D, 0.0D);
-		drawFace(Faces.XNEG, block, renderer, tes, icon[4], 0.0D, 0.0D, 0.0D);
-		drawFace(Faces.XPOS, block, renderer, tes, icon[5], 0.0D, 0.0D, 0.0D);
+		drawFace(Face.YNEG, block, renderer, tes, icon[0], 0.0D, 0.0D, 0.0D);
+		drawFace(Face.YPOS, block, renderer, tes, icon[1], 0.0D, 0.0D, 0.0D);
+		drawFace(Face.ZNEG, block, renderer, tes, icon[2], 0.0D, 0.0D, 0.0D);
+		drawFace(Face.ZPOS, block, renderer, tes, icon[3], 0.0D, 0.0D, 0.0D);
+		drawFace(Face.XNEG, block, renderer, tes, icon[4], 0.0D, 0.0D, 0.0D);
+		drawFace(Face.XPOS, block, renderer, tes, icon[5], 0.0D, 0.0D, 0.0D);
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 
 	public static void drawInventoryBlock_icon(Block block, RenderBlocks renderer, IIcon icon, Tessellator tes)
 	{
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		drawFace(Faces.YNEG, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
-		drawFace(Faces.YPOS, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
-		drawFace(Faces.ZNEG, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
-		drawFace(Faces.ZPOS, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
-		drawFace(Faces.XNEG, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
-		drawFace(Faces.XPOS, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
+		drawFace(Face.YNEG, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
+		drawFace(Face.YPOS, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
+		drawFace(Face.ZNEG, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
+		drawFace(Face.ZPOS, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
+		drawFace(Face.XNEG, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
+		drawFace(Face.XPOS, block, renderer, tes, icon, 0.0D, 0.0D, 0.0D);
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 

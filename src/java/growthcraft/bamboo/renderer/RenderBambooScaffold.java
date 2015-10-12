@@ -1,6 +1,5 @@
 package growthcraft.bamboo.renderer;
 
-import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.block.BlockBambooScaffold;
 import growthcraft.core.utils.RenderUtils;
 
@@ -14,17 +13,17 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderBambooScaffold implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer)
 	{
 		if (modelId == id)
 		{
-			Tessellator tes = Tessellator.instance;
-			IIcon icon = BlockBambooScaffold.tex[0];
-			IIcon icon1 = BlockBambooScaffold.tex[1];
-			double d = 0.0625D;
+			final Tessellator tes = Tessellator.instance;
+			final IIcon icon = BlockBambooScaffold.tex[0];
+			final IIcon icon1 = BlockBambooScaffold.tex[1];
+			final double d = 0.0625D;
 			renderer.setRenderBounds(0.0D, 14*d, 0.0D, 1.0D, 1.0D, 1.0D);
 			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
 			// columns
@@ -54,7 +53,7 @@ public class RenderBambooScaffold implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			double d = 0.0625D;
+			final double d = 0.0625D;
 			renderer.setOverrideBlockTexture(BlockBambooScaffold.tex[0]);
 			renderer.setRenderBounds(0.0D, 14*d, 0.0D, 1.0D, 1.0D, 1.0D);
 			renderer.renderStandardBlock(block, x, y, z);

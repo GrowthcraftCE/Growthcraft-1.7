@@ -1,7 +1,6 @@
 package growthcraft.rice.renderer;
 
 import growthcraft.core.utils.RenderUtils;
-import growthcraft.core.utils.RenderUtils.Faces;
 import growthcraft.rice.ClientProxy;
 import growthcraft.rice.block.BlockPaddy;
 
@@ -26,12 +25,12 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 		final Tessellator tes = Tessellator.instance;
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		RenderUtils.drawFace(Faces.YNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		RenderUtils.drawFace(Faces.YPOS, block, renderer, tes, BlockPaddy.tex[1], 0.0D, 0.0D, 0.0D);
-		RenderUtils.drawFace(Faces.ZNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		RenderUtils.drawFace(Faces.ZPOS, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		RenderUtils.drawFace(Faces.XNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		RenderUtils.drawFace(Faces.XPOS, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.YNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.YPOS, block, renderer, tes, BlockPaddy.tex[1], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.ZNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.ZPOS, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
+		RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
 		final double thick = 0.125D;

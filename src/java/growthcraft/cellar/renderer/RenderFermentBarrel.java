@@ -2,7 +2,6 @@ package growthcraft.cellar.renderer;
 
 import growthcraft.cellar.block.BlockFermentBarrel;
 import growthcraft.core.utils.RenderUtils;
-import growthcraft.core.utils.RenderUtils.Faces;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -89,8 +88,8 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 
 			renderer.setRenderBounds(1*d, 0.0D, 0.0D, 15*d, 1.0D, 1.0D);
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-			RenderUtils.drawFace(Faces.XPOS, block, renderer, tes, BlockFermentBarrel.tex[2], 0.0D, 0.0D, 0.0D);
-			RenderUtils.drawFace(Faces.XNEG, block, renderer, tes, BlockFermentBarrel.tex[3], 0.0D, 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tes, BlockFermentBarrel.tex[2], 0.0D, 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tes, BlockFermentBarrel.tex[3], 0.0D, 0.0D, 0.0D);
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);

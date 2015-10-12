@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import growthcraft.cellar.block.BlockBrewKettle;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
-import growthcraft.core.utils.RenderUtils.Faces;
 import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -34,12 +33,12 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 			final float f = 0.125F;
 
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-			RenderUtils.drawFace(Faces.ZNEG, block, renderer, tes, BlockBrewKettle.tex[2], 0.0D, 0.0D, (double)((float)0.0F + 1.0F - f));
-			RenderUtils.drawFace(Faces.ZPOS, block, renderer, tes, BlockBrewKettle.tex[2], 0.0D, 0.0D, (double)((float)0.0F - 1.0F + f));
-			RenderUtils.drawFace(Faces.XNEG, block, renderer, tes, BlockBrewKettle.tex[2], (double)((float)0.0F + 1.0F - f), 0.0D, 0.0D);
-			RenderUtils.drawFace(Faces.XPOS, block, renderer, tes, BlockBrewKettle.tex[2], (double)((float)0.0F - 1.0F + f), 0.0D, 0.0D);
-			RenderUtils.drawFace(Faces.YPOS, block, renderer, tes, BlockBrewKettle.tex[1], 0.0D, (double)((float)0.0F - 1.0F + 0.25F), 0.0D);
-			RenderUtils.drawFace(Faces.YNEG, block, renderer, tes, BlockBrewKettle.tex[1], 0.0D, (double)((float)0.0F + 1.0F - 0.75F), 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.ZNEG, block, renderer, tes, BlockBrewKettle.tex[2], 0.0D, 0.0D, (double)((float)0.0F + 1.0F - f));
+			RenderUtils.drawFace(RenderUtils.Face.ZPOS, block, renderer, tes, BlockBrewKettle.tex[2], 0.0D, 0.0D, (double)((float)0.0F - 1.0F + f));
+			RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tes, BlockBrewKettle.tex[2], (double)((float)0.0F + 1.0F - f), 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tes, BlockBrewKettle.tex[2], (double)((float)0.0F - 1.0F + f), 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.YPOS, block, renderer, tes, BlockBrewKettle.tex[1], 0.0D, (double)((float)0.0F - 1.0F + 0.25F), 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.YNEG, block, renderer, tes, BlockBrewKettle.tex[1], 0.0D, (double)((float)0.0F + 1.0F - 0.75F), 0.0D);
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		}
