@@ -210,7 +210,6 @@ public abstract class BlockGrapeVineBase extends Block implements IPlantable, IC
 	 * @param x - x coord
 	 * @param y - y coord
 	 * @param z - z coord
-	 * @param meta - block metadata
 	 * @return true, it can grow, false otherwise
 	 */
 	protected abstract boolean canUpdateGrowth(World world, int x, int y, int z);
