@@ -1,5 +1,8 @@
 package growthcraft.bees.tileentity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.utils.NBTHelper;
@@ -15,6 +18,9 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	public static final int ANY_HONEYCOMB_TYPE = -1;
 	private static final int[] beeSlotIds = new int[] {0};
 	private static final int[] honeyCombSlotIds = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9 , 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
+
+	// Temp variable used by BlockBeeBox for storing flower lists
+	public ArrayList<List> flowerList = new ArrayList<List>();
 
 	// Constants
 	private ItemStack[] invSlots   = new ItemStack[28];

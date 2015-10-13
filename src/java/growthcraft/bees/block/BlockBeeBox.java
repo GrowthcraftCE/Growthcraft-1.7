@@ -1,6 +1,5 @@
 package growthcraft.bees.block;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -65,6 +64,11 @@ public class BlockBeeBox extends BlockContainer
 		if (world.canLightningStrikeAt(x, y + 1, z))
 			return false;
 		return world.getBlockLightValue(x, y + 1, z) >= 9;
+	}
+
+	private boolean isBlockFlower(Block block, int meta)
+	{
+		return BeesRegistry.instance().isBlockFlower(block, meta);
 	}
 
 	/************
@@ -144,15 +148,14 @@ public class BlockBeeBox extends BlockContainer
 
 		if (random.nextInt((int)(this.flowerSpawnRate / f) + 1) == 0)
 		{
-			//System.out.println("spread initiated");
-
 			final int checkSize = 5;
 			final int i = x - ((checkSize - 1) / 2);
 			final int k = z - ((checkSize - 1) / 2);
-			final List<List> list = new ArrayList<List>();
+			final List<List> list = te.flowerList;
 			Block flower;
 			int fm;
 
+			list.clear();
 			for (int loopx = 0; loopx < checkSize; loopx++)
 			{
 				for (int loopz = 0; loopz < checkSize; loopz++)
@@ -171,21 +174,16 @@ public class BlockBeeBox extends BlockContainer
 				final int random_x = i + random.nextInt(checkSize);
 				final int random_z = k + random.nextInt(checkSize);
 				final List random_list = list.get(random.nextInt(list.size()));
-				final Block block = (Block) random_list.get(0);
+				final Block block = (Block)random_list.get(0);
 				if (block != null)
 				{
 					if (block.canPlaceBlockAt(world, random_x, y, random_z))
 					{
-						world.setBlock(random_x, y, random_z, (Block)random_list.get(0), (Integer) random_list.get(1), 3);
+						world.setBlock(random_x, y, random_z, (Block)random_list.get(0), (Integer)random_list.get(1), 3);
 					}
 				}
 			}
 		}
-	}
-
-	private boolean isBlockFlower(Block block, int meta)
-	{
-		return BeesRegistry.instance().isBlockFlower(block, meta);
 	}
 
 	private float getGrowthRate(World world, int x, int y, int z)
