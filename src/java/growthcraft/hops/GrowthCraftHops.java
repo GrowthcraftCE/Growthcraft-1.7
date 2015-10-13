@@ -173,55 +173,5 @@ public class GrowthCraftHops
 	public void postload(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventHops());
-
-		/*String modid;
-
-		modid = "Forestry";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				if (RecipeManagers.fermenterManager != null)
-				{
-					addFermenterRecipe(new ItemStack(hops), 100, "biomass");
-				}
-
-				if (RecipeManagers.squeezerManager != null && ForestryAPI.activeMode != null)
-				{
-					if (FluidRegistry.isFluidRegistered("seedoil"))
-					{
-						int amount = ForestryAPI.activeMode.getIntegerSetting("squeezer.liquid.seed");
-						RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[] {new ItemStack(hopSeeds)}, FluidRegistry.getFluidStack("seedoil", amount));
-					}
-				}
-
-				if (BackpackManager.backpackItems[2] != null)
-				{
-					BackpackManager.backpackItems[2].add(new ItemStack(hopSeeds));
-					BackpackManager.backpackItems[2].add(new ItemStack(hops));
-				}
-
-				FMLLog.info("[Growthcraft|Hops] Successfully integrated with Forestry.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Hops] Forestry not found. No integration made.", new Object[0]);
-			}
-		}*/
 	}
-
-	/*private void addFermenterRecipe(ItemStack stack, int value, String fluid)
-	{
-		RecipeManagers.fermenterManager.addRecipe(stack, value, 1.0F, FluidRegistry.getFluidStack(fluid, 1), FluidRegistry.getFluidStack("water", 1));
-
-		if (FluidRegistry.isFluidRegistered("juice"))
-		{
-			RecipeManagers.fermenterManager.addRecipe(stack, value, 1.5F, FluidRegistry.getFluidStack(fluid, 1), FluidRegistry.getFluidStack("juice", 1));
-		}
-
-		if (FluidRegistry.isFluidRegistered("honey"))
-		{
-			RecipeManagers.fermenterManager.addRecipe(stack, value, 1.5F, FluidRegistry.getFluidStack(fluid, 1), FluidRegistry.getFluidStack("honey", 1));
-		}
-	}*/
 }

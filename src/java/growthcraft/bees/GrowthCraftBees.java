@@ -194,52 +194,6 @@ public class GrowthCraftBees
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		/*String modid;
-
-		modid = "Forestry";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				Item item = GameRegistry.findItem(modid, "beeQueenGE");
-				if (item != null)
-				{
-					BeesRegistry.instance().addBee(item.itemID);
-				}
-
-				item = GameRegistry.findItem(modid, "beeDroneGE");
-				if (item != null)
-				{
-					BeesRegistry.instance().addBee(item.itemID);
-				}
-
-				item = GameRegistry.findItem(modid, "beePrincessGE");
-				if (item != null)
-				{
-					BeesRegistry.instance().addBee(item.itemID);
-				}
-
-				CellarRegistry.instance().addBoozeAlternative("short.mead", "grc.honeyMead0");
-
-				item = GameRegistry.findItem(modid, "beeswax");
-				if (item != null && RecipeManagers.centrifugeManager != null)
-				{
-					RecipeManagers.centrifugeManager.addRecipe(20, new ItemStack(honeyComb, 1, 0), new ItemStack(item));
-					Item item2 = GameRegistry.findItem(modid, "honeyDrop");
-					Item item3 = GameRegistry.findItem(modid, "honeydew");
-					if (item != null && item2 != null)
-					{
-						RecipeManagers.centrifugeManager.addRecipe(20, new ItemStack(honeyComb, 1, 1), new ItemStack[] { new ItemStack(item3), new ItemStack(item), new ItemStack(item2) }, new int[] { 60, 20, 30 });
-						//RecipeManagers.centrifugeManager.addRecipe(20, new ItemStack(honeyComb, 1, 1), new ItemStack(item), new ItemStack(item2), 90);
-					}
-				}
-
-				FMLLog.info("[Growthcraft|Bees] Successfully integrated with Forestry.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Bees] Forestry not found. No integration made.", new Object[0]);
-			}
-		}*/
+		new growthcraft.bees.integration.ForestryModule().init();
 	}
 }

@@ -171,34 +171,5 @@ public class GrowthCraftRice
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventRice());
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventRice());
-
-		/*String modid;
-
-		modid = "Forestry";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				if (RecipeManagers.squeezerManager != null && ForestryAPI.activeMode != null)
-				{
-					if (FluidRegistry.isFluidRegistered("seedoil"))
-					{
-						int amount = ForestryAPI.activeMode.getIntegerSetting("squeezer.liquid.seed");
-						RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[] {new ItemStack(rice)}, FluidRegistry.getFluidStack("seedoil", amount));
-					}
-				}
-
-				if (BackpackManager.backpackItems[2] != null)
-				{
-					BackpackManager.backpackItems[2].add(new ItemStack(rice));
-				}
-
-				FMLLog.info("[Growthcraft|Rice] Successfully integrated with Forestry.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Rice] Forestry not found. No integration made.", new Object[0]);
-			}
-		}*/
 	}
 }
