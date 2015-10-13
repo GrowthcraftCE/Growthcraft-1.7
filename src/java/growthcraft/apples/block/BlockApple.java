@@ -6,6 +6,7 @@ import growthcraft.apples.GrowthCraftApples;
 import growthcraft.apples.renderer.RenderApple;
 import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.integration.AppleCore;
+import growthcraft.core.utils.BlockFlags;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
@@ -25,6 +26,15 @@ import net.minecraft.world.World;
 
 public class BlockApple extends Block implements IGrowable, ICropDataProvider
 {
+	public static class AppleGrowth
+	{
+		public static final int YOUNG = 0;
+		public static final int MID = 1;
+		public static final int MATURE = 2;
+
+		private AppleGrowth() {}
+	}
+
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
@@ -45,14 +55,14 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
 	{
-		return (float)(meta / 2.0);
+		return (float)(meta / AppleGrowth.MATURE);
 	}
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
 		final int previousMetadata = meta;
 		++meta;
-		world.setBlockMetadataWithNotify(x, y, z, meta, 3);
+		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_CLIENT);
 		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
 	}
 
@@ -64,7 +74,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	/* Can the Apple grow anymore? */
 	public boolean func_149851_a(World world, int x, int y, int z, boolean p_149851_5_)
 	{
-		return world.getBlockMetadata(x, y, z) < 2;
+		return world.getBlockMetadata(x, y, z) < AppleGrowth.MATURE;
 	}
 
 	/* Can the Apple accept bonemeal? */
@@ -101,7 +111,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 		if (!this.canBlockStay(world, x, y, z))
 		{
 			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlock(x, y, z, Blocks.air, 0, 3);
+			world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.UPDATE_CLIENT);
 		}
 		else
 		{
@@ -113,11 +123,11 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 			if (allowGrowthResult == Event.Result.ALLOW || continueGrowth)
 			{
 				final int meta = world.getBlockMetadata(x, y, z);
-				if (meta < 2)
+				if (meta < AppleGrowth.MATURE)
 				{
 					incrementGrowth(world, x, y, z, meta);
 				}
-				else if (meta >= 2 && this.dropRipeApples && world.rand.nextInt(this.dropChance) == 0)
+				else if (dropRipeApples && world.rand.nextInt(this.dropChance) == 0)
 				{
 					fellBlockAsItem(world, x, y, z);
 				}
@@ -131,14 +141,15 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7, float par8, float par9)
 	{
-		if (!world.isRemote)
+		if (world.getBlockMetadata(x, y, z) >= AppleGrowth.MATURE)
 		{
-			if (world.getBlockMetadata(x, y, z) >= 2)
+			if (!world.isRemote)
 			{
 				fellBlockAsItem(world, x, y, z);
 			}
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	@Override
@@ -176,7 +187,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
-		return meta == 2 ? Items.apple : null;
+		return meta >= AppleGrowth.MATURE ? Items.apple : null;
 	}
 
 	@Override
