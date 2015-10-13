@@ -4,6 +4,7 @@ import java.util.List;
 
 import growthcraft.bees.tileentity.TileEntityBeeBox;
 import growthcraft.bees.utils.TagFormatterBeeBox;
+import growthcraft.core.utils.NBTHelper;
 
 import cpw.mods.fml.common.Optional;
 
@@ -63,8 +64,7 @@ public class BeesDataProvider implements IWailaDataProvider
 			tag.setInteger("honeycomb_count", beeBox.countCombs());
 			tag.setInteger("honeycomb_max", beeBox.getSizeInventory());
 			tag.setInteger("honey_count", beeBox.countHoney());
-			tag.setInteger("bee_count", beeBox.countBees());
-			tag.setInteger("bee_max", beeBox.getInventoryStackLimit());
+			tag.setTag("bee", NBTHelper.writeItemStackToNBT(beeBox.getBeeStack()));
 		}
 		return tag;
 	}

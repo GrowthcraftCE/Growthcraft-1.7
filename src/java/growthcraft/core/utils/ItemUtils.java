@@ -9,7 +9,9 @@ import buildcraft.api.tools.IToolWrench;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 
 /**
  * Utility class for item handling.
@@ -29,6 +31,39 @@ public class ItemUtils
 		{
 			hasIToolWrench = true;
 		}
+	}
+
+	public static ItemStack increaseStack(ItemStack itemstack, int amount)
+	{
+		itemstack.stackSize = MathHelper.clamp_int(itemstack.stackSize + amount, 0, itemstack.getMaxStackSize());
+		if (itemstack.stackSize == 0)
+		{
+			final Item item = itemstack.getItem();
+			if (item.hasContainerItem(itemstack))
+			{
+				return item.getContainerItem(itemstack);
+			}
+			else
+			{
+				return null;
+			}
+		}
+		return itemstack;
+	}
+
+	public static ItemStack increaseStack(ItemStack itemstack)
+	{
+		return increaseStack(itemstack, 1);
+	}
+
+	public static ItemStack consumeItem(ItemStack itemstack, int amount)
+	{
+		return increaseStack(itemstack, -amount);
+	}
+
+	public static ItemStack consumeItem(ItemStack itemstack)
+	{
+		return consumeItem(itemstack, 1);
 	}
 
 	/**

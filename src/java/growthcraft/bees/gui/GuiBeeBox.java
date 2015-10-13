@@ -1,6 +1,6 @@
 package growthcraft.bees.gui;
 
-import growthcraft.bees.block.ContainerBeeBox;
+import growthcraft.bees.inventory.ContainerBeeBox;
 import growthcraft.bees.tileentity.TileEntityBeeBox;
 
 import net.minecraft.client.gui.inventory.GuiContainer;

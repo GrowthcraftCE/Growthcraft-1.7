@@ -5,6 +5,8 @@ import java.util.List;
 
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.GrowthCraftBees;
+import growthcraft.bees.inventory.ContainerBeeBox;
+import growthcraft.core.utils.ItemUtils;
 import growthcraft.core.utils.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,7 +57,6 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	{
 		this.time = v;
 	}
-
 
 	public boolean slotHasHoneyComb(int index, int value)
 	{
@@ -152,22 +153,31 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		}
 	}
 
+	public ItemStack getBeeStack()
+	{
+		return invSlots[ContainerBeeBox.SlotId.BEE];
+	}
+
+	private void setBeeStack(ItemStack itemstack)
+	{
+		invSlots[ContainerBeeBox.SlotId.BEE] = itemstack;
+	}
+
 	public void spawnBee()
 	{
-		//		System.out.println("spawning bee");
-		if (this.invSlots[0] == null)
+		final ItemStack beestack = getBeeStack();
+		if (beestack == null)
 		{
-			this.invSlots[0] = GrowthCraftBees.bee.asStack();
+			setBeeStack(GrowthCraftBees.bee.asStack());
 		}
-		else if (this.invSlots[0].stackSize != this.invSlots[0].getMaxStackSize())
+		else
 		{
-			this.invSlots[0].stackSize++;
+			setBeeStack(ItemUtils.increaseStack(beestack));
 		}
 	}
 
 	public void spawnHoneyComb()
 	{
-		//		System.out.println("spawning honey comb" + this.invSlots.length);
 		for (int i = 1; i < this.invSlots.length; ++i)
 		{
 			if (this.invSlots[i] == null)
@@ -180,7 +190,6 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 
 	public void fillHoneyComb()
 	{
-		//		System.out.println("filling honey comb");
 		for (int i = 1; i < this.invSlots.length; ++i)
 		{
 			if (this.invSlots[i] != null && slotHasEmptyComb(i))
@@ -341,25 +350,6 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	{
 		this.name = string;
 	}
-
-	/************
-	 * PACKETS
-	 ************/
-	/*@Override
-	public Packet getDescriptionPacket()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		this.writeToNBT(nbt);
-		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 5, nbt);
-	}
-
-	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet)
-	{
-		NBTTagCompound nbt = packet.data;
-		this.readFromNBT(nbt);
-		this.worldObj.markBlockForRenderUpdate(this.xCoord, this.yCoord, this.zCoord);
-	}*/
 
 	/************
 	 * HOPPER

@@ -2,6 +2,7 @@ package growthcraft.bees.utils;
 
 import java.util.List;
 
+import growthcraft.core.utils.TagFormatterItem;
 import growthcraft.core.utils.ITagFormatter;
 import growthcraft.core.utils.UnitFormatter;
 
@@ -19,7 +20,7 @@ public class TagFormatterBeeBox implements ITagFormatter
 			EnumChatFormatting.WHITE + UnitFormatter.booleanAsValue(tag.getBoolean("has_bonus")));
 
 		list.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.bees.bees_prefix") + " " +
-			UnitFormatter.fractionNum(tag.getInteger("bee_count"), tag.getInteger("bee_max")));
+			TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("bee")));
 
 		list.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.bees.honey_prefix") + " " +
 			UnitFormatter.fraction(

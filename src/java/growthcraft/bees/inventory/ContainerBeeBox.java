@@ -1,5 +1,6 @@
-package growthcraft.bees.block;
+package growthcraft.bees.inventory;
 
+import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.inventory.SlotBee;
@@ -13,6 +14,19 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerBeeBox extends Container
 {
+	public static class SlotId
+	{
+		public static final int BEE = 0;
+		public static final int HONEY_COMB_START = 1;
+		public static final int HONEY_COMB_END = HONEY_COMB_START + 27;
+		public static final int PLAYER_BACKPACK_START = HONEY_COMB_END;
+		public static final int PLAYER_BACKPACK_END = PLAYER_BACKPACK_START + 27;
+		public static final int PLAYER_INVENTORY_START = PLAYER_BACKPACK_END;
+		public static final int PLAYER_INVENTORY_END = PLAYER_INVENTORY_START + 9;
+
+		private SlotId() {}
+	}
+
 	private TileEntityBeeBox te;
 
 	public ContainerBeeBox(InventoryPlayer player, TileEntityBeeBox beeBox)
@@ -24,7 +38,7 @@ public class ContainerBeeBox extends Container
 		//55 - 63 (64) player.inv.hotbar
 
 		this.te = beeBox;
-		this.addSlotToContainer(new SlotBee(this, te, 0, 80, 18));
+		this.addSlotToContainer(new SlotBee(this, te, SlotId.BEE, 80, 18));
 		int i;
 
 		for (i = 0; i < 3; ++i)
@@ -32,7 +46,7 @@ public class ContainerBeeBox extends Container
 			for (int j = 0; j < 9; ++j)
 			{
 				this.addSlotToContainer(new SlotHoneyComb(this, te,
-						j + i * 9 + 1,
+						j + i * 9 + SlotId.HONEY_COMB_START,
 						8 + j * 18,
 						50 + i * 18));
 			}
@@ -75,18 +89,18 @@ public class ContainerBeeBox extends Container
 			final ItemStack stack = slot.getStack();
 			itemstack = stack.copy();
 
-			if (index == 0)
+			if (index == SlotId.BEE)
 			{
-				if (!this.mergeItemStack(stack, 28, 64, false))
+				if (!this.mergeItemStack(stack, SlotId.PLAYER_BACKPACK_START, SlotId.PLAYER_BACKPACK_END, false))
 				{
 					return null;
 				}
 
 				slot.onSlotChange(stack, itemstack);
 			}
-			else if (index >= 1 && index <= 27)
+			else if (index >= SlotId.HONEY_COMB_START && index < SlotId.HONEY_COMB_END)
 			{
-				if (!this.mergeItemStack(stack, 28, 64, true))
+				if (!this.mergeItemStack(stack, SlotId.PLAYER_BACKPACK_START, SlotId.PLAYER_BACKPACK_END, true))
 				{
 					return null;
 				}
@@ -95,30 +109,33 @@ public class ContainerBeeBox extends Container
 			}
 			else
 			{
-				if (GrowthCraftBees.bee.equals(stack.getItem()))
+				if (BeesRegistry.instance().isItemBee(stack))
 				{
-					if (!this.mergeItemStack(stack, 0, 1, false))
+					if (!this.mergeItemStack(stack, SlotId.BEE, SlotId.BEE + 1, false))
 					{
 						return null;
 					}
 				}
 				else if (GrowthCraftBees.honeyComb.equals(stack.getItem()))
 				{
-					if (!this.mergeHoneyStack(stack, 1, 28, false))
+					if (!this.mergeHoneyStack(stack, SlotId.HONEY_COMB_START, SlotId.HONEY_COMB_END, false))
 					{
 						return null;
 					}
 				}
-				else if (index >= 28 && index < 55)
+				else if (index >= SlotId.PLAYER_BACKPACK_START && index < SlotId.PLAYER_BACKPACK_END)
 				{
-					if (!this.mergeItemStack(stack, 55, 64, false))
+					if (!this.mergeItemStack(stack, SlotId.PLAYER_INVENTORY_START, SlotId.PLAYER_INVENTORY_END, false))
 					{
 						return null;
 					}
 				}
-				else if (index >= 55 && index < 64 && !this.mergeItemStack(stack, 28, 55, false))
+				else if (index >= SlotId.PLAYER_INVENTORY_START && index < SlotId.PLAYER_INVENTORY_END)
 				{
-					return null;
+					if (!this.mergeItemStack(stack, SlotId.PLAYER_BACKPACK_START, SlotId.PLAYER_BACKPACK_END, false))
+					{
+						return null;
+					}
 				}
 			}
 

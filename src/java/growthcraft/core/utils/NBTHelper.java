@@ -105,4 +105,9 @@ public class NBTHelper
 		}
 		return tag;
 	}
+
+	public static NBTTagCompound writeItemStackToNBT(ItemStack itemStack)
+	{
+		return writeItemStackToNBT(itemStack, new NBTTagCompound());
+	}
 }
