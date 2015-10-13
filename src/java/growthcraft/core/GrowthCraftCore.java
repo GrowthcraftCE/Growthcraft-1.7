@@ -120,6 +120,5 @@ public class GrowthCraftCore
 		{
 			MinecraftForge.EVENT_BUS.register(new PlayerInteractEventAmazingStick());
 		}
-
 	}
 }

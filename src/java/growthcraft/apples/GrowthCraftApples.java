@@ -178,31 +178,5 @@ public class GrowthCraftApples
 	public void postload(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventApples());
-
-		/*String modid;
-
-		modid = "Forestry";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				if (RecipeManagers.squeezerManager != null && ForestryAPI.activeMode != null && FluidRegistry.isFluidRegistered("seedoil"))
-				{
-					int amount = ForestryAPI.activeMode.getIntegerSetting("squeezer.liquid.seed");
-					RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[] {new ItemStack(appleSeeds)}, FluidRegistry.getFluidStack("seedoil", amount));
-				}
-
-				if (BackpackManager.backpackItems[2] != null)
-				{
-					BackpackManager.backpackItems[2].add(new ItemStack(appleSeeds));
-				}
-
-				FMLLog.info("[Growthcraft|Apples] Successfully integrated with Forestry.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Apples] Forestry not found. No integration made.", new Object[0]);
-			}
-		}*/
 	}
 }

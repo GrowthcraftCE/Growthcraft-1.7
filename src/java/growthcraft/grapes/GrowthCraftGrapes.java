@@ -198,42 +198,5 @@ public class GrowthCraftGrapes
 	public void postload(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventGrapes());
-
-		/*String modid;
-
-		modid = "Forestry";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				if (RecipeManagers.squeezerManager != null && ForestryAPI.activeMode != null)
-				{
-					if (FluidRegistry.isFluidRegistered("seedoil"))
-					{
-						int amount = ForestryAPI.activeMode.getIntegerSetting("squeezer.liquid.seed");
-						RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[] {new ItemStack(grapeSeeds)}, FluidRegistry.getFluidStack("seedoil", amount));
-					}
-
-					Item item = GameRegistry.findItem("Forestry", "mulch");
-					if (FluidRegistry.isFluidRegistered("juice") && item != null);
-					{
-						int amount = ForestryAPI.activeMode.getIntegerSetting("squeezer.liquid.apple");
-						RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[] {new ItemStack(grapes)}, FluidRegistry.getFluidStack("juice", amount), new ItemStack(item), 10);
-					}
-				}
-
-				if (BackpackManager.backpackItems[2] != null)
-				{
-					BackpackManager.backpackItems[2].add(new ItemStack(grapes));
-					BackpackManager.backpackItems[2].add(new ItemStack(grapeSeeds));
-				}
-
-				FMLLog.info("[Growthcraft|Grapes] Successfully integrated with Forestry.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Grapes] Forestry not found. No integration made.", new Object[0]);
-			}
-		}*/
 	}
 }
