@@ -45,22 +45,6 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 		this.setCreativeTab(null);
 	}
 
-	/************
-	 * TICK
-	 ************/
-	@Override
-	public void updateTick(World world, int x, int y, int z, Random random)
-	{
-		if (!this.canBlockStay(world, x, y, z))
-		{
-			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock.getBlock());
-		}
-		else
-		{
-			grow(world, x, y, z, random);
-		}
-	}
-
 	private boolean isTrunk(World world, int x, int y, int z)
 	{
 		return GrapeBlockCheck.isGrapeVineTrunk(world.getBlock(x, y, z));
@@ -146,29 +130,38 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	private void grow(World world, int x, int y, int z, Random random)
 	{
-		if (!canGrowOutwards(world, x, y, z))
+		if (world.isAirBlock(x, y - 1, z) && (random.nextInt(this.grapeSpawnRate) == 0))
 		{
-			if (world.isAirBlock(x, y - 1, z) && (random.nextInt(this.grapeSpawnRate) == 0))
-			{
-				setGrapeBlock(world, x, y - 1, z);
-			}
-			else
-			{
-				return;
-			}
+			setGrapeBlock(world, x, y - 1, z);
 		}
-		else
+
+		if (world.rand.nextInt(this.grapeLeavesGrowthRate) == 0)
 		{
-			if (world.rand.nextInt(this.grapeLeavesGrowthRate) == 0)
+			if (canGrowOutwards(world, x, y, z))
 			{
 				final ForgeDirection dir = BlockCheck.DIR4[random.nextInt(4)];
 
 				if (canGrowHere(world, x + dir.offsetX, y, z + dir.offsetZ))
 				{
 					world.setBlock(x + dir.offsetX, y, z + dir.offsetZ, this, 0, BlockFlags.UPDATE_CLIENT);
-					return;
 				}
 			}
+		}
+	}
+
+	/************
+	 * TICK
+	 ************/
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random random)
+	{
+		if (!this.canBlockStay(world, x, y, z))
+		{
+			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock.getBlock());
+		}
+		else
+		{
+			grow(world, x, y, z, random);
 		}
 	}
 
