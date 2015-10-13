@@ -218,7 +218,7 @@ public abstract class BlockGrapeVineBase extends Block implements IPlantable, IC
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
 		super.updateTick(world, x, y, z, random);
-
+		if (world.isRemote) return;
 		if (canUpdateGrowth(world, x, y, z))
 		{
 			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);

@@ -82,10 +82,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
-		// 0 - Bine
-		// 1 - Small Leaves
-		// 2 - Big
-		// 3 - Ready
+		if (world.isRemote) return;
 
 		if (!this.canBlockStay(world, x, y, z))
 		{

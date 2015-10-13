@@ -51,6 +51,7 @@ public class BlockGrapeBlock extends Block
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
+		if (world.isRemote) return;
 		if (!this.canBlockStay(world, x, y, z))
 		{
 			fellBlockAsItem(world, x, y, z);
@@ -85,7 +86,7 @@ public class BlockGrapeBlock extends Block
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return world.getBlock(x, y + 1, z) == GrowthCraftGrapes.grapeLeaves.getBlock();
+		return GrowthCraftGrapes.grapeLeaves.getBlock() == world.getBlock(x, y + 1, z);
 	}
 
 	/************

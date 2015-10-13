@@ -58,6 +58,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
+		if (world.isRemote) return;
 		this.checkCropChange(world, x, y, z);
 
 		if (world.getBlockLightValue(x, y + 1, z) >= 9 && world.getBlockMetadata(x, y - 1, z) > 0)

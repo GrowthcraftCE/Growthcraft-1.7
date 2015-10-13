@@ -108,6 +108,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
+		if (world.isRemote) return;
 		if (!this.canBlockStay(world, x, y, z))
 		{
 			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
