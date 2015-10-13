@@ -50,27 +50,18 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
-		if (world.isRemote)
+		if (world.isRemote) return true;
+		if (tryWrenchItem(player, world, x, y, z)) return true;
+
+		final TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
+		final ItemStack is = player.inventory.getCurrentItem();
+		if (te != null)
 		{
-			return true;
-		}
-		else
-		{
-			final TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
-			final ItemStack is = player.inventory.getCurrentItem();
-			if (te != null)
+			if (!Utils.fillTank(world, x, y, z, te, is, player))
 			{
-				if (!Utils.fillTank(world, x, y, z, te, is, player))
+				if (!Utils.drainTank(world, x, y, z, te, is, player, false, 64, 0.35F))
 				{
-					if (!Utils.drainTank(world, x, y, z, te, is, player, false, 64, 0.35F))
-					{
-						openGui(player, world, x, y, z);
-					}
-					else
-					{
-						//=====
-						world.markBlockForUpdate(x, y, z);
-					}
+					openGui(player, world, x, y, z);
 				}
 				else
 				{
@@ -78,8 +69,15 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 					world.markBlockForUpdate(x, y, z);
 				}
 			}
+			else
+			{
+				//=====
+				world.markBlockForUpdate(x, y, z);
+			}
 			return true;
 		}
+
+		return false;
 	}
 
 	private void openGui(EntityPlayer player, World world, int x, int y, int z)

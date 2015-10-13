@@ -11,6 +11,7 @@ import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.item.ItemRope;
 import growthcraft.core.network.CommonProxy;
+import growthcraft.core.utils.ItemUtils;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -110,6 +111,7 @@ public class GrowthCraftCore
 		AchievementPageGrowthcraft.init();
 
 		new growthcraft.core.integration.Waila();
+		ItemUtils.init();
 	}
 
 	@EventHandler

@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
@@ -37,7 +38,8 @@ public abstract class BlockCellarContainer extends BlockContainer implements IDr
 		world.setBlockToAir(x, y, z);
 	}
 
-	public boolean isRotatable()
+	/* IRotatableBlock */
+	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		return false;
 	}
@@ -105,7 +107,7 @@ public abstract class BlockCellarContainer extends BlockContainer implements IDr
 
 	public boolean rotateBlock(World world, int x, int y, int z, ForgeDirection side)
 	{
-		if (isRotatable())
+		if (isRotatable(world, x, y, z, side))
 		{
 			doRotateBlock(world, x, y, z, side);
 			world.markBlockForUpdate(x, y, z);
@@ -131,7 +133,7 @@ public abstract class BlockCellarContainer extends BlockContainer implements IDr
 		return false;
 	}
 
-	public boolean useWrenchItem(EntityPlayer player, World world, int x, int y, int z)
+	public boolean tryWrenchItem(EntityPlayer player, World world, int x, int y, int z)
 	{
 		if (player == null) return false;
 		final ItemStack is = player.inventory.getCurrentItem();

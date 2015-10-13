@@ -49,7 +49,7 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 		this.setCreativeTab(GrowthCraftCellar.tab);
 	}
 
-	public boolean isRotatable()
+	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		return true;
 	}
@@ -60,33 +60,24 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
-		if (useWrenchItem(player, world, x, y, z))
-		{
-			return true;
-		}
+		if (world.isRemote) return true;
+		if (tryWrenchItem(player, world, x, y, z)) return true;
 
-		if (world.isRemote)
-		{
-			return true;
-		}
-		else
-		{
-			final TileEntityFermentBarrel te = (TileEntityFermentBarrel)world.getTileEntity(x, y, z);
+		final TileEntityFermentBarrel te = (TileEntityFermentBarrel)world.getTileEntity(x, y, z);
 
-			if (te != null)
+		if (te != null)
+		{
+			final ItemStack itemstack = player.inventory.getCurrentItem();
+			if (!Utils.fillTank(world, x, y, z, te, itemstack, player))
 			{
-				final ItemStack itemstack = player.inventory.getCurrentItem();
-				if (!Utils.fillTank(world, x, y, z, te, itemstack, player))
+				if (!drainTank(world, x, y, z, te, itemstack, player))
 				{
-					if (!drainTank(world, x, y, z, te, itemstack, player))
-					{
-						openGui(player, world, x, y, z);
-					}
+					openGui(player, world, x, y, z);
 				}
 			}
-
 			return true;
 		}
+		return false;
 	}
 
 	private boolean drainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)

@@ -1,6 +1,6 @@
 package growthcraft.cellar.block;
 
-public interface ICellarFluidHandler
-{
-
-}
+/**
+ * Waila data interface for cellar blocks that have a IFluidHandler tile entity
+ */
+public interface ICellarFluidHandler {}

@@ -48,7 +48,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 		return GrowthCraftCellar.fruitPresser.getBlock();
 	}
 
-	public boolean isRotatable()
+	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		return true;
 	}
@@ -65,29 +65,21 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
-		if (useWrenchItem(player, world, x, y, z))
-		{
-			return true;
-		}
+		if (world.isRemote) return true;
+		if (tryWrenchItem(player, world, x, y, z)) return true;
 
-		if (world.isRemote)
-		{
-			return true;
-		}
-		else
-		{
-			final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
+		final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
 
-			if (te != null)
+		if (te != null)
+		{
+			final ItemStack itemstack = player.inventory.getCurrentItem();
+			if (!Utils.drainTank(world, x, y, z, te, itemstack, player, false, 64, 0.35F))
 			{
-				final ItemStack itemstack = player.inventory.getCurrentItem();
-				if (!Utils.drainTank(world, x, y, z, te, itemstack, player, false, 64, 0.35F))
-				{
-					openGui(player, world, x, y, z);
-				}
+				openGui(player, world, x, y, z);
 			}
 			return true;
 		}
+		return false;
 	}
 
 	private void openGui(EntityPlayer player, World world, int x, int y, int z)

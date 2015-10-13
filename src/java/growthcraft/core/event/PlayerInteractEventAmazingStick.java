@@ -22,20 +22,21 @@ public class PlayerInteractEventAmazingStick
 	public void PlayerInteract(PlayerInteractEvent event)
 	{
 		if (event.action != event.action.RIGHT_CLICK_BLOCK) return;
-
 		final EntityPlayer player = event.entityPlayer;
+		final World world = player.worldObj;
+		if (world.isRemote) return;
 		final ItemStack itemstack = player.getCurrentEquippedItem();
 		if (itemstack != null && ItemUtils.isAmazingStick(itemstack))
 		{
-			final World world = player.worldObj;
 			final Block block = world.getBlock(event.x, event.y, event.z);
 			if (!player.isSneaking())
 			{
 				if (block != null && (block instanceof IRotatableBlock))
 				{
-					if (((IRotatableBlock)block).isRotatable())
+					final ForgeDirection side = ForgeDirection.getOrientation(event.face);
+					if (((IRotatableBlock)block).isRotatable(world, event.x, event.y, event.z, side))
 					{
-						if (block.rotateBlock(world, event.x, event.y, event.z, ForgeDirection.getOrientation(event.face)))
+						if (block.rotateBlock(world, event.x, event.y, event.z, side))
 						{
 							event.useBlock = Result.DENY;
 						}

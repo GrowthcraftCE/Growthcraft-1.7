@@ -1,9 +1,12 @@
 package growthcraft.core.utils;
 
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.item.IGrcWrench;
+import growthcraft.core.item.AmazingStickWrench;
 
 import buildcraft.api.tools.IToolWrench;
 
+import cpw.mods.fml.common.Loader;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -13,9 +16,20 @@ import net.minecraft.item.ItemStack;
  */
 public class ItemUtils
 {
-	public static final IToolWrench amazingStickWrench = new AmazingStickWrench();
+	public static final IGrcWrench amazingStickWrench = new AmazingStickWrench();
+
+	private static boolean hasIToolWrench;
 
 	private ItemUtils() {}
+
+	public static void init()
+	{
+		// There should be a better way to check this
+		if (Loader.isModLoaded("BuildCraft|Core"))
+		{
+			hasIToolWrench = true;
+		}
+	}
 
 	/**
 	 * Is this an amazing stick of waaaaaaat
@@ -26,7 +40,33 @@ public class ItemUtils
 	public static boolean isAmazingStick(ItemStack item)
 	{
 		if (item == null) return false;
-		return item.getItem() == Items.stick;
+		if (GrowthCraftCore.getConfig().useAmazingStick)
+		{
+			return item.getItem() == Items.stick;
+		}
+		return false;
+	}
+
+	/**
+	 * Determines if item is an IToolWrench
+	 *
+	 * @param item - an item to check
+	 * @return true if the item is a IToolWrench, false otherwise
+	 */
+	public static boolean isIToolWrench(ItemStack item)
+	{
+		if (item == null) return false;
+		if (hasIToolWrench)
+		{
+			return item.getItem() instanceof IToolWrench;
+		}
+		return false;
+	}
+
+	public static boolean isIGrcWrench(ItemStack item)
+	{
+		if (item == null) return false;
+		return item.getItem() instanceof IGrcWrench;
 	}
 
 	/**
@@ -38,49 +78,55 @@ public class ItemUtils
 	public static boolean isWrench(ItemStack item)
 	{
 		if (item == null) return false;
-		if (GrowthCraftCore.getConfig().useAmazingStick)
-		{
-			if (isAmazingStick(item)) return true;
-		}
-		return item.getItem() instanceof IToolWrench;
+		if (isAmazingStick(item)) return true;
+		return isIGrcWrench(item) || isIToolWrench(item);
 	}
 
 	/**
-	 * Returns the item as a wrench, or null
+	 * Returns the IGrcWrench for the given item, if it is an IGrcWrench
 	 *
-	 * @param itemStack - an item stack
-	 * @return IToolWrench if item was a wrench, null otherwise
+	 * @param item - wrench item
+	 * @return IGrcWrench if item is a wrench, null otherwise
 	 */
-	public static IToolWrench asWrench(ItemStack itemStack)
+	public static IGrcWrench asIGrcWrench(ItemStack item)
 	{
-		if (isWrench(itemStack))
+		if (isAmazingStick(item))
 		{
-			if (isAmazingStick(itemStack))
-			{
-				return amazingStickWrench;
-			}
-			else
-			{
-				return (IToolWrench)itemStack.getItem();
-			}
+			return amazingStickWrench;
 		}
-		else
+		else if (isIGrcWrench(item))
 		{
-			return null;
+			return (IGrcWrench)item.getItem();
 		}
+		return null;
 	}
 
 	public static boolean canWrench(ItemStack item, EntityPlayer player, int x, int y, int z)
 	{
-		final IToolWrench wrench = asWrench(item);
-		if (wrench == null) return false;
-		return wrench.canWrench(player, x, y, z);
+		if (item == null) return false;
+		final IGrcWrench wrench = asIGrcWrench(item);
+		if (wrench != null)
+		{
+			return wrench.canWrench(player, x, y, z);
+		}
+		else if (isIToolWrench(item))
+		{
+			return ((IToolWrench)item.getItem()).canWrench(player, x, y, z);
+		}
+		return false;
 	}
 
 	public static void wrenchUsed(ItemStack item, EntityPlayer player, int x, int y, int z)
 	{
-		final IToolWrench wrench = asWrench(item);
-		if (wrench == null) return;
-		wrench.wrenchUsed(player, x, y, z);
+		if (item == null) return;
+		final IGrcWrench wrench = asIGrcWrench(item);
+		if (wrench != null)
+		{
+			wrench.wrenchUsed(player, x, y, z);
+		}
+		else if (isIToolWrench(item))
+		{
+			((IToolWrench)item.getItem()).wrenchUsed(player, x, y, z);
+		}
 	}
 }

@@ -2,10 +2,12 @@ package growthcraft.cellar.block;
 
 import java.util.Random;
 
-import growthcraft.core.utils.BlockFlags;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.renderer.RenderFruitPresser;
 import growthcraft.cellar.tileentity.TileEntityFruitPresser;
+import growthcraft.core.block.IRotatableBlock;
+import growthcraft.core.block.IWrenchable;
+import growthcraft.core.utils.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,7 +25,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockFruitPresser extends BlockContainer
+public class BlockFruitPresser extends BlockContainer implements IWrenchable, IRotatableBlock
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
@@ -57,9 +59,49 @@ public class BlockFruitPresser extends BlockContainer
 	/************
 	 * TRIGGERS
 	 ************/
+
+	/* IRotatableBLock */
+	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+	{
+		final Block below = world.getBlock(x, y - 1, z);
+		if (below instanceof IRotatableBlock)
+		{
+			return ((IRotatableBlock)below).isRotatable(world, x, y - 1, z, side);
+		}
+		return false;
+	}
+
+	public boolean rotateBlock(World world, int x, int y, int z, ForgeDirection side)
+	{
+		if (isRotatable(world, x, y, z, side))
+		{
+			final Block below = world.getBlock(x, y - 1, z);
+			return below.rotateBlock(world, x, y - 1, z, side);
+		}
+		return false;
+	}
+
+	/* IWrenchable */
+	@Override
+	public boolean wrenchBlock(World world, int x, int y, int z, EntityPlayer player, ItemStack wrench)
+	{
+		final Block below = world.getBlock(x, y - 1, z);
+		if (below instanceof BlockFruitPress)
+		{
+			return ((BlockFruitPress)below).wrenchBlock(world, x, y - 1, z, player, wrench);
+		}
+		return false;
+	}
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
+		if (world.isRemote) return true;
+		final Block below = world.getBlock(x, y - 1, z);
+		if (below instanceof BlockFruitPress)
+		{
+			return ((BlockFruitPress)below).tryWrenchItem(player, world, x, y - 1, z);
+		}
 		return false;
 	}
 
