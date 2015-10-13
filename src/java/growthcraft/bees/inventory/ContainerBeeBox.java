@@ -3,8 +3,6 @@ package growthcraft.bees.inventory;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.bees.inventory.SlotBee;
-import growthcraft.bees.inventory.SlotHoneyComb;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
