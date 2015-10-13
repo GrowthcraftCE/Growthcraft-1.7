@@ -26,10 +26,7 @@ public class TagFormatterItem implements ITagFormatter
 			final ItemStack stack = ItemStack.loadItemStackFromNBT(tag);
 			if (stack != null)
 			{
-				return EnumChatFormatting.WHITE +
-					StatCollector.translateToLocalFormatted("grc.format.itemslot.item",
-						StatCollector.translateToLocal(stack.getUnlocalizedName() + ".name"),
-						stack.stackSize);
+				return EnumChatFormatting.WHITE + StatCollector.translateToLocalFormatted("grc.format.itemslot.item", stack.getDisplayName(), stack.stackSize);
 			}
 			else
 			{
