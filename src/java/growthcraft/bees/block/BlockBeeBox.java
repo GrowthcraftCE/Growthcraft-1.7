@@ -251,7 +251,15 @@ public class BlockBeeBox extends BlockContainer
 	{
 		if (random.nextInt(24) == 0)
 		{
-			world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), "grcbees:buzz", 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
+			final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
+			if (te != null)
+			{
+				if (te.hasBees())
+				{
+					world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F),
+						"grcbees:buzz", 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
+				}
+			}
 		}
 	}
 
