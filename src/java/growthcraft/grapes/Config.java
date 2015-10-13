@@ -12,7 +12,8 @@ public class Config extends ConfigBase
 	public int vineGrapeDropRarity = 10;
 	public int grapeWinePressingTime = 20;
 	public boolean generateGrapeVineyardStructure = true;
-	public final int grapeWineColor = 5574180;
+	public final int grapeWineColor = 0x550E24;
+	public final int grapeSupportedLength = 3;
 
 	protected void loadConfig()
 	{

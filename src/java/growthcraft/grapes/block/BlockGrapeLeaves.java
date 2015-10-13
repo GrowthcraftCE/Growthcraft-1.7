@@ -2,14 +2,17 @@ package growthcraft.grapes.block;
 
 import java.util.Random;
 
+import growthcraft.core.block.IBlockRope;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.utils.BlockCheck;
-import growthcraft.core.block.IBlockRope;
+import growthcraft.core.utils.BlockFlags;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.renderer.RenderGrapeLeaves;
+import growthcraft.grapes.utils.GrapeBlockCheck;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -20,6 +23,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 {
@@ -28,6 +32,8 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	private final int grapeLeavesGrowthRate = GrowthCraftGrapes.getConfig().grapeLeavesGrowthRate;
 	private final int grapeSpawnRate = GrowthCraftGrapes.getConfig().grapeSpawnRate;
+	// how far can a grape leaf grow before it requires support from a trunk
+	private final int grapeSupportedLength = GrowthCraftGrapes.getConfig().grapeSupportedLength;
 
 	public BlockGrapeLeaves()
 	{
@@ -56,18 +62,96 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 		}
 	}
 
+	private boolean isTrunk(World world, int x, int y, int z)
+	{
+		return GrapeBlockCheck.isGrapeVineTrunk(world.getBlock(x, y, z));
+	}
+
+	public boolean isSupportedByTrunk(World world, int x, int y, int z)
+	{
+		return isTrunk(world, x, y - 1, z);
+	}
+
+	/**
+	 * Use this method to check if the block can grow outwards on a rope
+	 *
+	 * @param world - the world
+	 * @param x - x coord
+	 * @param y - y coord
+	 * @param z - z coord
+	 * @return true if the block can grow here, false otherwise
+	 */
+	public boolean canGrowOutwardsOnRope(World world, int x, int y, int z)
+	{
+		if (BlockCheck.isRope(world.getBlock(x + 1, y, z))) return true;
+		if (BlockCheck.isRope(world.getBlock(x - 1, y, z))) return true;
+		if (BlockCheck.isRope(world.getBlock(x, y, z + 1))) return true;
+		if (BlockCheck.isRope(world.getBlock(x, y, z - 1))) return true;
+		return false;
+	}
+
+	public boolean canGrowOutwards(World world, int x, int y, int z)
+	{
+		final boolean leavesTotheSouth = world.getBlock(x + 1, y, z) == this;
+		final boolean leavesToTheNorth = world.getBlock(x - 1, y, z) == this;
+		final boolean leavesToTheEast = world.getBlock(x, y, z + 1) == this;
+		final boolean leavesToTheWest = world.getBlock(x, y, z - 1) == this;
+
+		if (!leavesTotheSouth && !leavesToTheNorth && !leavesToTheEast && !leavesToTheWest) return false;
+
+		for (int i = 1; i <= grapeSupportedLength; ++i)
+		{
+			if (leavesTotheSouth && isTrunk(world, x + i, y - 1, z)) return true;
+			if (leavesToTheNorth && isTrunk(world, x - i, y - 1, z)) return true;
+			if (leavesToTheEast && isTrunk(world, x, y - 1, z + i)) return true;
+			if (leavesToTheWest && isTrunk(world, x, y - 1, z - i)) return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Variation of canGrowOutwards, use this method to check rope blocks
+	 *
+	 * @param world - the world
+	 * @param x - x coord
+	 * @param y - y coord
+	 * @param z - z coord
+	 * @return true if the block can grow here, false otherwise
+	 */
+	public boolean canGrowHere(World world, int x, int y, int z)
+	{
+		if (BlockCheck.isRope(world.getBlock(x, y, z)))
+		{
+			return canGrowOutwards(world, x, y, z);
+		}
+		return false;
+	}
+
+	private void setGrapeBlock(World world, int x, int y, int z)
+	{
+		world.setBlock(x, y, z, GrowthCraftGrapes.grapeBlock.getBlock(), 0, BlockFlags.UPDATE_CLIENT);
+	}
+
+	public boolean growGrapeBlock(World world, int x, int y, int z)
+	{
+		if (world.isAirBlock(x, y - 1, z))
+		{
+			if (!world.isRemote)
+			{
+				setGrapeBlock(world, x, y - 1, z);
+			}
+			return true;
+		}
+		return false;
+	}
+
 	private void grow(World world, int x, int y, int z, Random random)
 	{
-		final boolean flag = !checkValidity(world, x, y, z - 1);
-		final boolean flag1 = !checkValidity(world, x, y, z + 1);
-		final boolean flag2 = !checkValidity(world, x - 1, y, z);
-		final boolean flag3 = !checkValidity(world, x + 1, y, z);
-
-		if (flag1 && flag2 && flag3 && flag)
+		if (!canGrowOutwards(world, x, y, z))
 		{
-			if (world.isAirBlock(x, y - 1, z) && (world.rand.nextInt(this.grapeSpawnRate) == 0))
+			if (world.isAirBlock(x, y - 1, z) && (random.nextInt(this.grapeSpawnRate) == 0))
 			{
-				world.setBlock(x, y - 1, z, GrowthCraftGrapes.grapeBlock.getBlock());
+				setGrapeBlock(world, x, y - 1, z);
 			}
 			else
 			{
@@ -78,62 +162,15 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 		{
 			if (world.rand.nextInt(this.grapeLeavesGrowthRate) == 0)
 			{
-				final int r = random.nextInt(4);
+				final ForgeDirection dir = BlockCheck.DIR4[random.nextInt(4)];
 
-				if (r == 0 && checkValidity(world, x, y, z - 1))
+				if (canGrowHere(world, x + dir.offsetX, y, z + dir.offsetZ))
 				{
-					world.setBlock(x, y, z - 1, this);
-					return;
-				}
-
-				if (r == 1 && checkValidity(world, x, y, z + 1))
-				{
-					world.setBlock(x, y, z + 1, this);
-					return;
-				}
-
-				if (r == 2 && checkValidity(world, x - 1, y, z))
-				{
-					world.setBlock(x - 1, y, z, this);
-					return;
-				}
-
-				if (r == 3 && checkValidity(world, x + 1, y, z))
-				{
-					world.setBlock(x + 1, y, z, this);
+					world.setBlock(x + dir.offsetX, y, z + dir.offsetZ, this, 0, BlockFlags.UPDATE_CLIENT);
 					return;
 				}
 			}
 		}
-	}
-
-	private boolean checkValidity(World world, int x, int y, int z)
-	{
-		if (BlockCheck.isRope(world.getBlock(x, y, z)))
-		{
-			final boolean flag = world.getBlock(x + 1, y, z) == this;
-			final boolean flag1 = world.getBlock(x - 1, y, z) == this;
-			final boolean flag2 = world.getBlock(x, y, z + 1) == this;
-			final boolean flag3 = world.getBlock(x, y, z - 1) == this;
-
-			if (!flag && !flag1 && !flag2 && !flag3) return false;
-
-			if (flag && isTrunk(world, x + 1, y - 1, z)) return true;
-			if (flag1 && isTrunk(world, x - 1, y - 1, z)) return true;
-			if (flag2 && isTrunk(world, x, y - 1, z + 1)) return true;
-			if (flag3 && isTrunk(world, x, y - 1, z - 1)) return true;
-
-			if (flag && isTrunk(world, x + 2, y - 1, z)) return true;
-			if (flag1 && isTrunk(world, x - 2, y - 1, z)) return true;
-			if (flag2 && isTrunk(world, x, y - 1, z + 2)) return true;
-			if (flag3 && isTrunk(world, x, y - 1, z - 2)) return true;
-		}
-		return false;
-	}
-
-	private boolean isTrunk(World world, int x, int y, int z)
-	{
-		return GrowthCraftGrapes.grapeVine1.getBlock() == world.getBlock(x, y, z);
 	}
 
 	@Override
@@ -161,97 +198,24 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 		}
 		else
 		{
-			int loop = 1;
-
-			while (loop < 4)
+			for (ForgeDirection dir : BlockCheck.DIR4)
 			{
-				if (world.getBlock(x, y, z - loop) != this)
+				for (int i = 1; i <= grapeSupportedLength; ++i)
 				{
-					break;
-				}
-				else
-				{
-					if (this.isSupportedByTrunk(world, x, y, z - loop))
+					final int bx = x + dir.offsetX * i;
+					final int bz = z + dir.offsetZ * i;
+					if (world.getBlock(bx, y, bz) != this)
+					{
+						break;
+					}
+					else if (isSupportedByTrunk(world, bx, y, bz))
 					{
 						return true;
 					}
-					else
-					{
-						loop++;
-					}
 				}
 			}
-
-			loop = 1;
-
-			while (loop < 4)
-			{
-				if (world.getBlock(x, y, z + loop) != this)
-				{
-					break;
-				}
-				else
-				{
-					if (this.isSupportedByTrunk(world, x, y, z + loop))
-					{
-						return true;
-					}
-					else
-					{
-						loop++;
-					}
-				}
-			}
-
-			loop = 1;
-
-			while (loop < 4)
-			{
-				if (world.getBlock(x - loop, y, z) != this)
-				{
-					break;
-				}
-				else
-				{
-					if (this.isSupportedByTrunk(world, x - loop, y, z))
-					{
-						return true;
-					}
-					else
-					{
-						loop++;
-					}
-				}
-			}
-
-			loop = 1;
-
-			while (loop < 4)
-			{
-				if (world.getBlock(x + loop, y, z) != this)
-				{
-					break;
-				}
-				else
-				{
-					if (this.isSupportedByTrunk(world, x + loop, y, z))
-					{
-						return true;
-					}
-					else
-					{
-						loop++;
-					}
-				}
-			}
-
-			return false;
 		}
-	}
-
-	private boolean isSupportedByTrunk(World world, int x, int y, int z)
-	{
-		return GrowthCraftGrapes.grapeVine1.getBlock() == world.getBlock(x, y - 1, z);
+		return false;
 	}
 
 	/************

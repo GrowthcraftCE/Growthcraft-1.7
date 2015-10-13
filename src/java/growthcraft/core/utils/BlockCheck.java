@@ -1,5 +1,6 @@
 package growthcraft.core.utils;
 
+import growthcraft.core.block.IBlockRope;
 import growthcraft.core.GrowthCraftCore;
 
 import net.minecraft.block.Block;
@@ -10,6 +11,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockCheck
 {
+	/**
+	 * 2D directions
+	 */
+	public static final ForgeDirection[] DIR4 = new ForgeDirection[] { ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST };
+
 	private BlockCheck() {}
 
 	/**
@@ -26,6 +32,17 @@ public class BlockCheck
 
 	/**
 	 * Determines if block is a rope block
+	 *
+	 * @param block - the block to check
+	 * @return true if the block is a rope block, false otherwise
+	 */
+	public static boolean isRopeBlock(Block block)
+	{
+		return block instanceof IBlockRope;
+	}
+
+	/**
+	 * Determines if block is a "rope"
 	 *
 	 * @param block - the block to check
 	 * @return true if the block is a Rope, false otherwise

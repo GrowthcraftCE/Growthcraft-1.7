@@ -66,7 +66,7 @@ public class GrowthCraftGrapes
 
 	public static BlockTypeDefinition<BlockGrapeVine0> grapeVine0;
 	public static BlockTypeDefinition<BlockGrapeVine1> grapeVine1;
-	public static BlockDefinition grapeLeaves;
+	public static BlockTypeDefinition<BlockGrapeLeaves> grapeLeaves;
 	public static BlockDefinition grapeBlock;
 	public static BlockBoozeDefinition[] grapeWineFluids;
 	public static ItemDefinition grapes;
@@ -95,7 +95,7 @@ public class GrowthCraftGrapes
 		//====================
 		grapeVine0  = new BlockTypeDefinition<BlockGrapeVine0>(new BlockGrapeVine0());
 		grapeVine1  = new BlockTypeDefinition<BlockGrapeVine1>(new BlockGrapeVine1());
-		grapeLeaves = new BlockDefinition(new BlockGrapeLeaves());
+		grapeLeaves = new BlockTypeDefinition<BlockGrapeLeaves>(new BlockGrapeLeaves());
 		grapeBlock  = new BlockDefinition(new BlockGrapeBlock());
 
 		grapes     = new ItemDefinition(new ItemGrapes());

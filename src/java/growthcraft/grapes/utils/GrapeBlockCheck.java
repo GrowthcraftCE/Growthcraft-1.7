@@ -19,4 +19,15 @@ public class GrapeBlockCheck
 		return GrowthCraftGrapes.grapeVine0.getBlock() == block ||
 			GrowthCraftGrapes.grapeVine1.getBlock() == block;
 	}
+
+	/**
+	 * Determines if block is a grape vine trunk.
+	 *
+	 * @param block - block to check
+	 * @return true if block is a grape vine trunk, false otherwise
+	 */
+	public static boolean isGrapeVineTrunk(Block block)
+	{
+		return GrowthCraftGrapes.grapeVine1.getBlock() == block;
+	}
 }
