@@ -88,26 +88,6 @@ public class Utils
 		return true;
 	}
 
-	public static ItemStack consumeItem(ItemStack itemstack)
-	{
-		if (itemstack.stackSize == 1)
-		{
-			if (itemstack.getItem().hasContainerItem(itemstack))
-			{
-				return itemstack.getItem().getContainerItem(itemstack);
-			}
-			else
-			{
-				return null;
-			}
-		}
-		else
-		{
-			itemstack.splitStack(1);
-			return itemstack;
-		}
-	}
-
 	public static boolean fillTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
 	{
 		if (held != null)

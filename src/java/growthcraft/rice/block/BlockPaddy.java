@@ -3,7 +3,7 @@ package growthcraft.rice.block;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.core.Utils;
+import growthcraft.core.utils.ItemUtils;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.renderer.RenderPaddy;
 import growthcraft.rice.ClientProxy;
@@ -109,7 +109,7 @@ public class BlockPaddy extends Block implements IPaddy
 
 							if(!player.capabilities.isCreativeMode)
 							{
-								player.inventory.setInventorySlotContents(player.inventory.currentItem, Utils.consumeItem(itemstack));
+								player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemUtils.consumeItem(itemstack));
 							}
 
 							return true;
