@@ -23,6 +23,13 @@ import net.minecraftforge.common.IShearable;
 
 public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 {
+	public static class LeavesGrowth
+	{
+		public static final int DECAY_MASK = 8;
+
+		private LeavesGrowth() {}
+	}
+
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
 
@@ -62,7 +69,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 				}
 			}
 
-			if ((meta & 8) != 0 && (meta & 4) == 0)
+			if ((meta & LeavesGrowth.DECAY_MASK) != 0 && (meta & 4) == 0)
 			{
 				final byte b0 = 4;
 				final int i1 = b0 + 1;
@@ -236,7 +243,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public void beginLeavesDecay(World world, int x, int y, int z)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | 8, 4);
+		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | LeavesGrowth.DECAY_MASK, 4);
 	}
 
 	@Override
@@ -307,8 +314,6 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		//this.graphicFlag = ((BlockLeaves)Block.blocksList[Block.leaves.blockID]).graphicsLevel;
-		//return this.graphicFlag ? this.tex[0] : this.tex[1];
 		return this.tex[this.isOpaqueCube() ? 1 : 0];
 	}
 
@@ -318,8 +323,6 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public boolean isOpaqueCube()
 	{
-		//this.graphicFlag = ((BlockLeaves)Block.blocksList[Block.leaves.blockID]).graphicsLevel;
-		//return !this.graphicFlag;
 		return Blocks.leaves.isOpaqueCube();
 	}
 
@@ -327,9 +330,6 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
-		//int id = world.getBlockId(x, y, z);
-		//this.graphicFlag = ((BlockLeaves)Block.blocksList[Block.leaves.blockID]).graphicsLevel;
-		//return !this.graphicFlag && id == this.blockID ? false : super.shouldSideBeRendered(world, x, y, z, side);
 		return true;
 	}
 

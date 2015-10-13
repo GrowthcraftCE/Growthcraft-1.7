@@ -1,6 +1,5 @@
 package growthcraft.grapes.event;
 
-import growthcraft.core.Utils;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.core.utils.BlockFlags;
 import growthcraft.grapes.GrowthCraftGrapes;
