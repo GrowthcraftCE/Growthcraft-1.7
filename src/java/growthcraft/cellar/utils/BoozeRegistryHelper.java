@@ -1,5 +1,7 @@
 package growthcraft.cellar.utils;
 
+import javax.annotation.Nullable;
+
 import growthcraft.api.cellar.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.block.BlockFluidBooze;
@@ -36,25 +38,31 @@ public class BoozeRegistryHelper
 		CellarRegistry.instance().booze().createBooze(boozes, color, "fluid." + basename);
 	}
 
-	public static void registerBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemBucketBoozeDefinition[] buckets, ItemDefinition bottle, String basename, ItemDefinition oldBucket)
+	public static void registerBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemBucketBoozeDefinition[] buckets, ItemDefinition bottle, String basename, @Nullable ItemDefinition oldBucket)
 	{
 		for (int i = 0; i < boozes.length; ++i)
 		{
 			GameRegistry.registerItem(buckets[i].getItem(), basename + "Bucket." + i);
 			GameRegistry.registerBlock(fluidBlocks[i].getBlock(), ItemBlockFluidBooze.class, basename + "Fluid." + i);
 			// forward compat recipe
-			GameRegistry.addShapelessRecipe(buckets[i].asStack(), oldBucket.asStack(1, i));
+			if (oldBucket != null)
+			{
+				GameRegistry.addShapelessRecipe(buckets[i].asStack(), oldBucket.asStack(1, i));
+			}
 
 			BucketHandler.instance().register(fluidBlocks[i].getBlock(), buckets[i].getItem());
 
 			final FluidStack boozeStack = new FluidStack(boozes[i], FluidContainerRegistry.BUCKET_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(boozeStack, oldBucket.asStack(1, i), FluidContainerRegistry.EMPTY_BUCKET);
+			if (oldBucket != null)
+			{
+				FluidContainerRegistry.registerFluidContainer(boozeStack, oldBucket.asStack(1, i), FluidContainerRegistry.EMPTY_BUCKET);
+			}
 			FluidContainerRegistry.registerFluidContainer(boozeStack, buckets[i].asStack(), FluidContainerRegistry.EMPTY_BUCKET);
 
 			final FluidStack bottleStack = new FluidStack(boozes[i], GrowthCraftCellar.BOTTLE_VOLUME);
 			FluidContainerRegistry.registerFluidContainer(bottleStack, bottle.asStack(1, i), GrowthCraftCellar.EMPTY_BOTTLE);
 
-			NEI.hideItem(oldBucket.asStack(1, i));
+			if (oldBucket != null) NEI.hideItem(oldBucket.asStack(1, i));
 		}
 	}
 }
