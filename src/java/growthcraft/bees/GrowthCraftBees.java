@@ -6,6 +6,7 @@ import growthcraft.bees.block.BlockBeeBox;
 import growthcraft.bees.block.BlockBeeHive;
 import growthcraft.bees.gui.GuiHandlerBees;
 import growthcraft.bees.item.ItemBee;
+import growthcraft.bees.item.ItemBlockBeeBox;
 import growthcraft.bees.item.ItemHoneyComb;
 import growthcraft.bees.item.ItemHoneyJar;
 import growthcraft.bees.tileentity.TileEntityBeeBox;
@@ -65,6 +66,7 @@ public class GrowthCraftBees
 	@SidedProxy(clientSide="growthcraft.bees.ClientProxy", serverSide="growthcraft.bees.CommonProxy")
 	public static CommonProxy proxy;
 
+
 	public static BlockDefinition beeBox;
 	public static BlockDefinition beeHive;
 	public static BlockBoozeDefinition[] honeyMeadFluids;
@@ -115,7 +117,7 @@ public class GrowthCraftBees
 		//====================
 		// REGISTRIES
 		//====================
-		GameRegistry.registerBlock(beeBox.getBlock(), "grc.beeBox");
+		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
 		GameRegistry.registerBlock(beeHive.getBlock(), "grc.beeHive");
 
 		GameRegistry.registerItem(honeyComb.getItem(), "grc.honeyComb");
@@ -153,6 +155,11 @@ public class GrowthCraftBees
 		//====================
 		// CRAFTING
 		//====================
+		final BlockDefinition planks = new BlockDefinition(Blocks.planks);
+		for (int i = 0; i < 6; ++i)
+		{
+			GameRegistry.addRecipe(beeBox.asStack(1, i), new Object[] { " A ", "A A", "AAA", 'A', planks.asStack(1, i) });
+		}
 		GameRegistry.addRecipe(new ShapedOreRecipe(beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
 		final ItemStack honeyStack = honeyComb.asStack(1, 1);
 		GameRegistry.addShapelessRecipe(honeyJar.asStack(), honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);

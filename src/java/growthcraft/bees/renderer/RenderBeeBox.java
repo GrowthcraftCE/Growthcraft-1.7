@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 
 public class RenderBeeBox implements ISimpleBlockRenderingHandler
@@ -21,7 +22,16 @@ public class RenderBeeBox implements ISimpleBlockRenderingHandler
 		if (modelID == id)
 		{
 			final Tessellator tes = Tessellator.instance;
-			final IIcon[] icon  = {BlockBeeBox.tex[0], BlockBeeBox.tex[2], BlockBeeBox.tex[1], BlockBeeBox.tex[1], BlockBeeBox.tex[1], BlockBeeBox.tex[1]};
+			final int offset = MathHelper.clamp_int(metadata, 0, 5) * 4;
+			final BlockBeeBox beeBox = (BlockBeeBox)block;
+			final IIcon[] icon  = {
+				beeBox.getIcon(0, metadata),
+				beeBox.getIcon(1, metadata),
+				beeBox.getIcon(2, metadata),
+				beeBox.getIcon(3, metadata),
+				beeBox.getIcon(4, metadata),
+				beeBox.getIcon(5, metadata)
+			};
 			final double d = 0.0625D;
 			// LEGS
 			renderer.setRenderBounds(3*d, 0.0D, 3*d, 5*d, 3*d, 5*d);

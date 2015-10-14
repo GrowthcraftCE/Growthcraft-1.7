@@ -1,5 +1,10 @@
 ﻿
-tile.grc.beeBox.name=Пчелиный ящик
+tile.grc.beeBox0.name=Пчелиный ящик
+tile.grc.beeBox1.name=Пчелиный ящик
+tile.grc.beeBox2.name=Пчелиный ящик
+tile.grc.beeBox3.name=Пчелиный ящик
+tile.grc.beeBox4.name=Пчелиный ящик
+tile.grc.beeBox5.name=Пчелиный ящик
 tile.grc.beeHive.name=Пчелиный улей
 
 item.grc.honeyComb.empty.name=Пустые медовые соты
@@ -8,7 +13,7 @@ item.grc.honeyJar.name=Мёд
 item.grc.bee.name=Пчела
 
 container.grc.beeBox=Пчелиный ящик
-	
+
 fluid.grc.honeyMead=Медовуха
 fluid.grc.honeyMead0=Медовуха
 fluid.grc.honeyMead1=Медовуха

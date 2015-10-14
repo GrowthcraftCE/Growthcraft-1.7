@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.api.bees.BeesRegistry;
-import growthcraft.bees.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.renderer.RenderBeeBox;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.bees.tileentity.TileEntityBeeBox;
 import growthcraft.core.Utils;
 
 import cpw.mods.fml.relauncher.Side;
@@ -17,6 +17,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -29,6 +30,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -36,7 +38,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockBeeBox extends BlockContainer
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	protected static IIcon[] tex;
 
 	private final float honeyCombSpawnRate = GrowthCraftBees.getConfig().beeBoxHoneyCombSpawnRate;
 	private final float honeySpawnRate = GrowthCraftBees.getConfig().beeBoxHoneySpawnRate;
@@ -56,6 +58,14 @@ public class BlockBeeBox extends BlockContainer
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("grc.beeBox");
 		this.setCreativeTab(GrowthCraftCore.tab);
+	}
+
+	public void getSubBlocks(Item block, CreativeTabs tab, List list)
+	{
+		for (int i = 0; i < 6; ++i)
+		{
+			list.add(new ItemStack(block, 1, i));
+		}
 	}
 
 	// for lack of a better name, can this BeeBox do any work?
@@ -324,6 +334,13 @@ public class BlockBeeBox extends BlockContainer
 	}
 
 	@Override
+	public int onBlockPlaced(World world, int x, int y, int z, int side, float fx, float fy, float fz, int meta)
+	{
+		Utils.debug("Placed with meta=" + meta);
+		return super.onBlockPlaced(world, x, y, z, side, fx, fy, fz, meta);
+	}
+
+	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
 		if (stack.hasDisplayName())
@@ -393,12 +410,12 @@ public class BlockBeeBox extends BlockContainer
 	/************
 	 * STUFF
 	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z)
-	{
-		return GrowthCraftBees.beeBox.getItem();
-	}
+	//@Override
+	//@SideOnly(Side.CLIENT)
+	//public Item getItem(World world, int x, int y, int z)
+	//{
+	//	return GrowthCraftBees.beeBox.getItem();
+	//}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int par2)
@@ -409,6 +426,12 @@ public class BlockBeeBox extends BlockContainer
 	/************
 	 * DROPS
 	 ************/
+	@Override
+	public int damageDropped(int damage)
+	{
+		return damage;
+	}
+
 	@Override
 	public Item getItemDropped(int par1, Random random, int par3)
 	{
@@ -428,29 +451,56 @@ public class BlockBeeBox extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[3];
+		tex = new IIcon[6 * 4];
 
-		tex[0] = reg.registerIcon("grcbees:beebox_bottom");
-		tex[1] = reg.registerIcon("grcbees:beebox_side");
-		tex[2] = reg.registerIcon("grcbees:beebox_top");
+		for (int i = 0; i < 6; ++i)
+		{
+			tex[i * 4 + 0] = reg.registerIcon("grcbees:beebox_bottom_" + i);
+			tex[i * 4 + 1] = reg.registerIcon("grcbees:beebox_top_" + i);
+			tex[i * 4 + 2] = reg.registerIcon("grcbees:beebox_side_" + i);
+			tex[i * 4 + 3] = reg.registerIcon("grcbees:beebox_side_" + i + "_honey");
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
+	{
+		final int meta = world.getBlockMetadata(x, y, z);
+		final int offset = MathHelper.clamp_int(meta, 0, 5) * 4;
+		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
+		if (side == 0)
+		{
+			return this.tex[offset];
+		}
+		else if (side == 1)
+		{
+			return this.tex[offset + 1];
+		}
+		else
+		{
+			if (te != null && te.isHoneyEnough())
+			{
+				return this.tex[offset + 3];
+			}
+		}
+		return this.tex[offset + 2];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
+		final int offset = MathHelper.clamp_int(meta, 0, 5) * 4;
 		if (side == 0)
 		{
-			return this.tex[0];
+			return this.tex[offset];
 		}
 		else if (side == 1)
 		{
-			return this.tex[2];
+			return this.tex[offset + 1];
 		}
-		else
-		{
-			return this.tex[1];
-		}
+		return this.tex[offset + 2];
 	}
 
 	/************
