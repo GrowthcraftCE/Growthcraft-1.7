@@ -1,0 +1,61 @@
+itemGroup.tabGrowthCraftNether=Growthcraft Nether
+
+// Items
+item.grcnether.ectoplasm.name=Ectoplasm
+item.grcnether.ectoplasm.desc=It's the spooky stuff
+item.grcnether.netherPepper.name=Ghost Pepper
+item.grcnether.netherPepper.desc=Its like an inferno in your mouth, but hotter
+item.grcnether.netherRashSpores.name=Nether Rash Spores
+item.grcnether.netherRashSpores.desc=It burns, it itches, it spreads and well you know the rest
+
+// Tiles
+tile.grcnether.netherPepper.name=Ghost Peppers
+
+// Booze
+/// Fire Brandy
+fluid.grcnether.fireBrandy=Fire Brandy
+fluid.grcnether.fireBrandy0=Fire Brandy
+fluid.grcnether.fireBrandy1=Fire Brandy
+fluid.grcnether.fireBrandy2=Fire Brandy
+fluid.grcnether.fireBrandy3=Fire Brandy
+
+item.bucket.fluid.grcnether.fireBrandy.name=Fire Brandy Bucket
+item.bucket.fluid.grcnether.fireBrandy0.name=Fire Brandy Bucket
+item.bucket.fluid.grcnether.fireBrandy1.name=Fire Brandy Bucket
+item.bucket.fluid.grcnether.fireBrandy2.name=Fire Brandy Bucket
+item.bucket.fluid.grcnether.fireBrandy3.name=Fire Brandy Bucket
+
+tile.fluid.grcnether.fireBrandy.name=Fire Brandy
+tile.fluid.grcnether.fireBrandy0.name=Fire Brandy
+tile.fluid.grcnether.fireBrandy1.name=Fire Brandy
+tile.fluid.grcnether.fireBrandy2.name=Fire Brandy
+tile.fluid.grcnether.fireBrandy3.name=Fire Brandy
+
+fluid.grcnether.fireBrandy0.modifier=Young
+fluid.grcnether.fireBrandy1.modifier=Fermented
+fluid.grcnether.fireBrandy2.modifier=Fermented, Potent
+fluid.grcnether.fireBrandy3.modifier=Fermented, Extended
+
+/// Malice Cider
+fluid.grcnether.maliceCider=Malice Cider
+fluid.grcnether.maliceCider0=Malice Cider
+fluid.grcnether.maliceCider1=Malice Cider
+fluid.grcnether.maliceCider2=Malice Cider
+fluid.grcnether.maliceCider3=Malice Cider
+
+item.bucket.fluid.grcnether.maliceCider.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider0.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider1.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider2.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider3.name=Malice Cider Bucket
+
+tile.fluid.grcnether.maliceCider.name=Malice Cider
+tile.fluid.grcnether.maliceCider0.name=Malice Cider
+tile.fluid.grcnether.maliceCider1.name=Malice Cider
+tile.fluid.grcnether.maliceCider2.name=Malice Cider
+tile.fluid.grcnether.maliceCider3.name=Malice Cider
+
+fluid.grcnether.maliceCider0.modifier=Young
+fluid.grcnether.maliceCider1.modifier=Fermented
+fluid.grcnether.maliceCider2.modifier=Fermented, Potent
+fluid.grcnether.maliceCider3.modifier=Fermented, Extended
