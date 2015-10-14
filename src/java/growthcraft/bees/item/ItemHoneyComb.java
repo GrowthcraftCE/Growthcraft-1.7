@@ -2,7 +2,7 @@ package growthcraft.bees.item;
 
 import java.util.List;
 
-import growthcraft.core.GrowthCraftCore;
+import growthcraft.bees.GrowthCraftBees;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,7 +23,7 @@ public class ItemHoneyComb extends Item
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
 		this.setUnlocalizedName("grc.honeyComb");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftBees.tab);
 		this.setContainerItem(this);
 	}
 

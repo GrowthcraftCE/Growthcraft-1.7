@@ -7,7 +7,6 @@ import java.util.Random;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.renderer.RenderBeeBox;
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.bees.tileentity.TileEntityBeeBox;
 import growthcraft.core.Utils;
 
@@ -57,7 +56,7 @@ public class BlockBeeBox extends BlockContainer
 		this.setHardness(2.5F);
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("grc.beeBox");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftBees.tab);
 	}
 
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)

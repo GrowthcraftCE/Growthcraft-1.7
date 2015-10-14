@@ -4,6 +4,7 @@ import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.cellar.Booze;
 import growthcraft.bees.block.BlockBeeBox;
 import growthcraft.bees.block.BlockBeeHive;
+import growthcraft.bees.creativetab.CreativeTabsGrowthcraftBees;
 import growthcraft.bees.gui.GuiHandlerBees;
 import growthcraft.bees.item.ItemBee;
 import growthcraft.bees.item.ItemBlockBeeBox;
@@ -38,6 +39,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -66,6 +68,7 @@ public class GrowthCraftBees
 	@SidedProxy(clientSide="growthcraft.bees.ClientProxy", serverSide="growthcraft.bees.CommonProxy")
 	public static CommonProxy proxy;
 
+	public static CreativeTabs tab;
 
 	public static BlockDefinition beeBox;
 	public static BlockDefinition beeHive;
@@ -91,6 +94,8 @@ public class GrowthCraftBees
 	{
 		config = new growthcraft.bees.Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
+
+		tab = new CreativeTabsGrowthcraftBees();
 
 		//====================
 		// INIT

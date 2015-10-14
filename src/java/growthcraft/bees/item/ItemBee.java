@@ -1,6 +1,6 @@
 package growthcraft.bees.item;
 
-import growthcraft.core.GrowthCraftCore;
+import growthcraft.bees.GrowthCraftBees;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -13,7 +13,7 @@ public class ItemBee extends Item
 	{
 		super();
 		this.setUnlocalizedName("grc.bee");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftBees.tab);
 	}
 
 	/************

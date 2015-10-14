@@ -3,7 +3,6 @@ package growthcraft.bees.block;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.renderer.RenderBeeHive;
 
@@ -35,7 +34,7 @@ public class BlockBeeHive extends Block
 		this.setHardness(0.6F);
 		this.setStepSound(soundTypeGrass);
 		this.setBlockName("grc.beeHive");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftBees.tab);
 	}
 
 	/************

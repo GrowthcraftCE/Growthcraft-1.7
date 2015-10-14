@@ -1,6 +1,6 @@
 package growthcraft.bees.item;
 
-import growthcraft.core.GrowthCraftCore;
+import growthcraft.bees.GrowthCraftBees;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,7 +17,7 @@ public class ItemHoneyJar extends ItemFood
 	{
 		super(6, false);
 		this.setUnlocalizedName("grc.honeyJar");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftBees.tab);
 		this.setContainerItem(Items.flower_pot);
 		this.setMaxStackSize(1);
 	}
