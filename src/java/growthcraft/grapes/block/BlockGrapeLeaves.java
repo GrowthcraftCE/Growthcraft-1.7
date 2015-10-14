@@ -155,8 +155,6 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
-		if (world.isRemote) return;
-
 		if (!this.canBlockStay(world, x, y, z))
 		{
 			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock.getBlock());

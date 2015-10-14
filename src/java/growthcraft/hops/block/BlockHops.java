@@ -82,8 +82,6 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
-		if (world.isRemote) return;
-
 		if (!this.canBlockStay(world, x, y, z))
 		{
 			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock.getBlock());

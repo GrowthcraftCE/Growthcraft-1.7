@@ -87,7 +87,6 @@ public class BlockBeeBox extends BlockContainer
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
 		super.updateTick(world, x, y, z, random);
-		if (world.isRemote) return;
 
 		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 
