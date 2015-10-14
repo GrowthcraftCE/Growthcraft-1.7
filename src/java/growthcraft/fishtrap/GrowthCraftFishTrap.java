@@ -34,7 +34,7 @@ public class GrowthCraftFishTrap
 	public static final String MOD_NAME = "Growthcraft Fishtrap";
 	public static final String MOD_VERSION = "@VERSION@";
 
-	@Instance("Growthcraft|Fishtrap")
+	@Instance(MOD_ID)
 	public static GrowthCraftFishTrap instance;
 
 	@SidedProxy(clientSide="growthcraft.fishtrap.ClientProxy", serverSide="growthcraft.fishtrap.CommonProxy")

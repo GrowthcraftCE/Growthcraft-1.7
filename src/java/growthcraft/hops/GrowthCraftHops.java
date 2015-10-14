@@ -55,7 +55,7 @@ public class GrowthCraftHops
 	public static final String MOD_NAME = "Growthcraft Hops";
 	public static final String MOD_VERSION = "@VERSION@";
 
-	@Instance("Growthcraft|Hops")
+	@Instance(MOD_ID)
 	public static GrowthCraftHops instance;
 
 	@SidedProxy(clientSide="growthcraft.hops.ClientProxy", serverSide="growthcraft.hops.CommonProxy")

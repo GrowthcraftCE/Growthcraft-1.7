@@ -59,7 +59,7 @@ public class GrowthCraftBees
 	public static final String MOD_NAME = "Growthcraft Bees";
 	public static final String MOD_VERSION = "@VERSION@";
 
-	@Instance("Growthcraft|Bees")
+	@Instance(MOD_ID)
 	public static GrowthCraftBees instance;
 
 	@SidedProxy(clientSide="growthcraft.bees.ClientProxy", serverSide="growthcraft.bees.CommonProxy")

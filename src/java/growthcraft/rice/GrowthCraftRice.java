@@ -54,7 +54,7 @@ public class GrowthCraftRice
 	public static final String MOD_NAME = "Growthcraft Rice";
 	public static final String MOD_VERSION = "@VERSION@";
 
-	@Instance("Growthcraft|Rice")
+	@Instance(MOD_ID)
 	public static GrowthCraftRice instance;
 
 	@SidedProxy(clientSide="growthcraft.rice.ClientProxy", serverSide="growthcraft.rice.CommonProxy")

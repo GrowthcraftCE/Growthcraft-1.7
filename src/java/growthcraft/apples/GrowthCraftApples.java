@@ -53,7 +53,7 @@ public class GrowthCraftApples
 	public static final String MOD_NAME = "Growthcraft Apples";
 	public static final String MOD_VERSION = "@VERSION@";
 
-	@Instance("Growthcraft|Apples")
+	@Instance(MOD_ID)
 	public static GrowthCraftApples instance;
 
 	@SidedProxy(clientSide="growthcraft.apples.ClientProxy", serverSide="growthcraft.apples.CommonProxy")
