@@ -10,17 +10,18 @@ import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.utils.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.utils.MapGenHelper;
 import growthcraft.rice.block.BlockPaddy;
 import growthcraft.rice.block.BlockRice;
 import growthcraft.rice.event.BonemealEventRice;
-import growthcraft.rice.event.PlayerInteractEventRice;
 import growthcraft.rice.item.ItemRice;
 import growthcraft.rice.item.ItemRiceBall;
 import growthcraft.rice.village.ComponentVillageRiceField;
 import growthcraft.rice.village.VillageHandlerRice;
+import growthcraft.rice.common.CommonProxy;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -31,10 +32,10 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.potion.Potion;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
@@ -56,9 +57,6 @@ public class GrowthCraftRice
 
 	@Instance(MOD_ID)
 	public static GrowthCraftRice instance;
-
-	@SidedProxy(clientSide="growthcraft.rice.ClientProxy", serverSide="growthcraft.rice.CommonProxy")
-	public static CommonProxy proxy;
 
 	public static BlockDefinition riceBlock;
 	public static BlockDefinition paddyField;
@@ -144,7 +142,9 @@ public class GrowthCraftRice
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
+		PlayerInteractEventPaddy.paddyBlocks.put(Blocks.farmland, paddyField.getBlock());
+
+		CommonProxy.instance.initRenders();
 
 		final VillageHandlerRice handler = new VillageHandlerRice();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
@@ -168,6 +168,5 @@ public class GrowthCraftRice
 	public void postload(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventRice());
-		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventRice());
 	}
 }

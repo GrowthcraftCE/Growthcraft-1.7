@@ -1,4 +1,4 @@
-package growthcraft.rice;
+package growthcraft.rice.client;
 
 import growthcraft.rice.renderer.RenderRice;
 
