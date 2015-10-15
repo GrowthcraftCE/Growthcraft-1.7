@@ -2,18 +2,18 @@ package growthcraft.nether.common.block;
 
 import java.util.Random;
 
-import growthcraft.core.block.ICropBlock;
 import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.core.utils.BlockFlags;
 import growthcraft.core.utils.RenderType;
 import growthcraft.nether.GrowthCraftNether;
 
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +23,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockNetherPepper extends BlockBush implements ICropDataProvider, ICropBlock
+public class BlockNetherPepper extends BlockBush implements ICropDataProvider, IGrowable
 {
 	public static class PepperStages
 	{
@@ -36,7 +36,9 @@ public class BlockNetherPepper extends BlockBush implements ICropDataProvider, I
 		private PepperStages() {}
 	}
 
+	@SideOnly(Side.CLIENT)
 	protected IIcon[] icons;
+
 	private int minPepperPicked = GrowthCraftNether.getConfig().minPepperPicked;
 	private int maxPepperPicked = GrowthCraftNether.getConfig().maxPepperPicked;
 
@@ -54,19 +56,30 @@ public class BlockNetherPepper extends BlockBush implements ICropDataProvider, I
 		AppleCore.announceGrowthTick(this, world, x, y, z, meta);
 	}
 
-	@Override
 	public boolean isFullyGrown(World world, int x, int y, int z)
 	{
 		return world.getBlockMetadata(x, y, z) >= PepperStages.FRUIT;
 	}
 
-	@Override
 	public boolean canGrow(World world, int x, int y, int z)
 	{
 		return world.getBlockMetadata(x, y, z) < PepperStages.FRUIT;
 	}
 
+	/* IGrowable: can this grow anymore */
 	@Override
+	public boolean func_149851_a(World world, int x, int y, int z, boolean b)
+	{
+		return !isFullyGrown(world, x, y, z);
+	}
+
+	/* IGrowable: does this accept bonemeal */
+	@Override
+	public boolean func_149852_a(World world, Random random, int x, int y, int z)
+	{
+		return canGrow(world, x, y, z);
+	}
+
 	public boolean onUseBonemeal(World world, int x, int y, int z)
 	{
 		if (canGrow(world, x, y, z))
@@ -78,6 +91,12 @@ public class BlockNetherPepper extends BlockBush implements ICropDataProvider, I
 			return true;
 		}
 		return false;
+	}
+
+	/* IGrowable: Apply bonemeal effect */
+	public void func_149853_b(World world, Random random, int x, int y, int z)
+	{
+		onUseBonemeal(world, x, y, z);
 	}
 
 	@Override
@@ -144,7 +163,7 @@ public class BlockNetherPepper extends BlockBush implements ICropDataProvider, I
 
 		for (int stage = 0; stage < icons.length; ++stage)
 		{
-			icons[stage] = reg.registerIcon(this.getTextureName() + "_stage_" + stage);
+			icons[stage] = reg.registerIcon(getTextureName() + "_stage_" + stage);
 		}
 	}
 
