@@ -51,14 +51,17 @@ public class GrowthCraftNether
 		blocks = new GrcNetherBlocks();
 		items = new GrcNetherItems();
 
-		blocks.init();
-		items.init();
-		booze.init();
+		blocks.preInit();
+		items.preInit();
+		booze.preInit();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		blocks.init();
+		items.init();
+		booze.init();
 	}
 
 	@EventHandler

@@ -8,6 +8,7 @@ public class Config extends ConfigBase
 	public int minPepperPicked = 1;
 	public int maxPepperPicked = 8;
 
+	public final int paddyFieldMax = 7;
 	public final int fireBrandyColor = 0xD43427;
 	public final int maliceCiderColor = 0xA99F6E;
 

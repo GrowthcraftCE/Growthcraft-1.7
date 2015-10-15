@@ -15,13 +15,18 @@ public class GrcNetherItems
 
 	public GrcNetherItems() {}
 
-	public void init()
+	public void preInit()
 	{
 		this.ectoplasm = new ItemDefinition(new ItemEctoplasm());
 		this.netherPepper = new ItemDefinition(new ItemNetherPepper());
 		this.netherRashSpores = new ItemDefinition(new ItemNetherRashSpores());
 
 		register();
+	}
+
+	public void init()
+	{
+
 	}
 
 	public void register()

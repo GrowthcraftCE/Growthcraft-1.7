@@ -1,3 +1,4 @@
+// Creative Tab
 itemGroup.tabGrowthCraftNether=Growthcraft Nether
 
 // Items
@@ -9,6 +10,7 @@ item.grcnether.netherRashSpores.name=Nether Rash Spores
 item.grcnether.netherRashSpores.desc=It burns, it itches, it spreads and well you know the rest
 
 // Tiles
+tile.grcnether.netherPaddyField.name=Lava Paddy
 tile.grcnether.netherPepper.name=Ghost Peppers
 
 // Booze

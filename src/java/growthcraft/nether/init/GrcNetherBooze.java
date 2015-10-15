@@ -24,7 +24,7 @@ public class GrcNetherBooze
 
 	public GrcNetherBooze() {}
 
-	public void init()
+	public void preInit()
 	{
 		this.fireBrandyBooze = new Booze[4];
 		this.fireBrandyFluids = new BlockBoozeDefinition[fireBrandyBooze.length];
@@ -49,6 +49,11 @@ public class GrcNetherBooze
 			.setPotionEffects(new int[] {Potion.digSpeed.id}, new int[] {3600}));
 
 		register();
+	}
+
+	public void init()
+	{
+
 	}
 
 	public void register()
