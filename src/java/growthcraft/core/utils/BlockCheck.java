@@ -1,5 +1,7 @@
 package growthcraft.core.utils;
 
+import java.util.Random;
+
 import growthcraft.core.block.IBlockRope;
 import growthcraft.core.GrowthCraftCore;
 
@@ -17,6 +19,17 @@ public class BlockCheck
 	public static final ForgeDirection[] DIR4 = new ForgeDirection[] { ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST };
 
 	private BlockCheck() {}
+
+	/**
+	 * Randomly selects a direction from the DIR4 array and returns it
+	 *
+	 * @param random - random number generator
+	 * @return a random direction
+	 */
+	public static ForgeDirection randomDirection4(Random random)
+	{
+		return DIR4[random.nextInt(DIR4.length)];
+	}
 
 	/**
 	 * Determines if block is a water block
