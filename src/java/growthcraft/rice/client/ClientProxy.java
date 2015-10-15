@@ -1,6 +1,7 @@
 package growthcraft.rice.client;
 
 import growthcraft.rice.renderer.RenderRice;
+import growthcraft.rice.common.CommonProxy;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
