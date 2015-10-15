@@ -1,8 +1,8 @@
-package growthcraft.rice.integration.waila;
+package growthcraft.core.integration.waila;
 
 import java.util.List;
 
-import growthcraft.rice.block.IPaddy;
+import growthcraft.core.block.IPaddy;
 
 import cpw.mods.fml.common.Optional;
 
@@ -45,9 +45,9 @@ public class PaddyDataProvider implements IWailaDataProvider
 		{
 			final IPaddy prov = (IPaddy)block;
 			final MovingObjectPosition pos = accessor.getPosition();
-			final boolean filledWithWater = prov.isFilledWithWater(accessor.getWorld(), pos.blockX, pos.blockY, pos.blockZ, accessor.getMetadata());
-			final String content = EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.format.paddy.hasWater") + " " +
-				EnumChatFormatting.WHITE + StatCollector.translateToLocal("grc.format.value." + filledWithWater);
+			final boolean filledWithFluid = prov.isFilledWithFluid(accessor.getWorld(), pos.blockX, pos.blockY, pos.blockZ, accessor.getMetadata());
+			final String content = EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.format.paddy.hasFluid") + " " +
+				EnumChatFormatting.WHITE + StatCollector.translateToLocal("grc.format.value." + filledWithFluid);
 			tooltip.add(content);
 		}
 		return tooltip;

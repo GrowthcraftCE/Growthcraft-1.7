@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import growthcraft.core.block.ICropDataProvider;
+import growthcraft.core.block.IPaddyCrop;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.renderer.RenderRice;

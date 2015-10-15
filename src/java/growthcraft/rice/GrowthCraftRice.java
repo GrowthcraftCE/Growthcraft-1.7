@@ -149,8 +149,6 @@ public class GrowthCraftRice
 		final VillageHandlerRice handler = new VillageHandlerRice();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-
-		new growthcraft.rice.integration.Waila();
 	}
 
 	@SubscribeEvent

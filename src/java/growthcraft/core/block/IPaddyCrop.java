@@ -1,3 +1,3 @@
-package growthcraft.rice.block;
+package growthcraft.core.block;
 
 public interface IPaddyCrop {}

@@ -2,6 +2,7 @@ package growthcraft.core;
 
 import growthcraft.core.block.BlockFenceRope;
 import growthcraft.core.block.BlockRope;
+import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.event.BonemealEventICrop;
@@ -11,7 +12,6 @@ import growthcraft.core.event.TextureStitchEventCore;
 import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.item.ItemRope;
-import growthcraft.core.network.CommonProxy;
 import growthcraft.core.utils.ItemUtils;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -21,7 +21,6 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
@@ -50,9 +49,6 @@ public class GrowthCraftCore
 	public static IIcon liquidBlobsTexture;
 
 	public static CreativeTabs tab;
-
-	@SidedProxy(clientSide="growthcraft.core.network.ClientProxy", serverSide="growthcraft.core.network.CommonProxy")
-	public static CommonProxy proxy;
 
 	public static BlockDefinition fenceRope;
 	public static BlockDefinition ropeBlock;
@@ -108,7 +104,7 @@ public class GrowthCraftCore
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
+		CommonProxy.instance.initRenders();
 		AchievementPageGrowthcraft.init();
 
 		new growthcraft.core.integration.Waila();

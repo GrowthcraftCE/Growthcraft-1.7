@@ -1,8 +1,8 @@
-package growthcraft.rice.renderer;
+package growthcraft.core.client.renderer;
 
 import growthcraft.core.utils.RenderUtils;
-import growthcraft.rice.ClientProxy;
-import growthcraft.rice.block.BlockPaddy;
+import growthcraft.core.client.ClientProxy;
+import growthcraft.core.block.BlockPaddyBase;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -10,9 +10,9 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderPaddy implements ISimpleBlockRenderingHandler
@@ -22,70 +22,77 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		final Tessellator tes = Tessellator.instance;
-		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		RenderUtils.drawFace(RenderUtils.Face.YNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		RenderUtils.drawFace(RenderUtils.Face.YPOS, block, renderer, tes, BlockPaddy.tex[1], 0.0D, 0.0D, 0.0D);
-		RenderUtils.drawFace(RenderUtils.Face.ZNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		RenderUtils.drawFace(RenderUtils.Face.ZPOS, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tes, BlockPaddy.tex[0], 0.0D, 0.0D, 0.0D);
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+		if (id != modelID) return;
 
-		final double thick = 0.125D;
-		final double y1 = 0.875D;
-		final double y2 = 1.0D;
-		double i1 = 0.0D;
-		double i2 = 1.0D;
-		double k1 = 0.0D;
-		double k2 = 1.0D;
+		if (block instanceof BlockPaddyBase)
+		{
+			final Tessellator tes = Tessellator.instance;
+			final BlockPaddyBase paddyBlock = (BlockPaddyBase)block;
+			final IIcon bottomFaceIcon = paddyBlock.getIcon(0, metadata);
+			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
+			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+			RenderUtils.drawFace(RenderUtils.Face.YNEG, block, renderer, tes, bottomFaceIcon, 0.0D, 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.YPOS, block, renderer, tes, paddyBlock.getIcon(1, metadata), 0.0D, 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.ZNEG, block, renderer, tes, paddyBlock.getIcon(2, metadata), 0.0D, 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.ZPOS, block, renderer, tes, paddyBlock.getIcon(3, metadata), 0.0D, 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tes, paddyBlock.getIcon(4, metadata), 0.0D, 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tes, paddyBlock.getIcon(5, metadata), 0.0D, 0.0D, 0.0D);
+			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
-		i1 = 1.0D - thick;
-		i2 = 1.0D;
-		k1 = 0.0D + thick;
-		k2 = 1.0D - thick;
+			final double thick = 0.125D;
+			final double y1 = 0.875D;
+			final double y2 = 1.0D;
+			double i1 = 0.0D;
+			double i2 = 1.0D;
+			double k1 = 0.0D;
+			double k2 = 1.0D;
 
-		renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
-		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+			i1 = 1.0D - thick;
+			i2 = 1.0D;
+			k1 = 0.0D + thick;
+			k2 = 1.0D - thick;
 
-		i1 = 0.0D;
-		i2 = 0.0D + thick;
-		k1 = 0.0D + thick;
-		k2 = 1.0D - thick;
+			renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, bottomFaceIcon, tes);
 
-		renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
-		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+			i1 = 0.0D;
+			i2 = 0.0D + thick;
+			k1 = 0.0D + thick;
+			k2 = 1.0D - thick;
 
-		i1 = 0.0D + thick;
-		i2 = 1.0D - thick;
-		k1 = 1.0D - thick;
-		k2 = 1.0D;
+			renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, bottomFaceIcon, tes);
 
-		renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
-		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+			i1 = 0.0D + thick;
+			i2 = 1.0D - thick;
+			k1 = 1.0D - thick;
+			k2 = 1.0D;
 
-		i1 = 0.0D + thick;
-		i2 = 1.0D - thick;
-		k1 = 0.0D;
-		k2 = 0.0D + thick;
+			renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, bottomFaceIcon, tes);
 
-		renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
-		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+			i1 = 0.0D + thick;
+			i2 = 1.0D - thick;
+			k1 = 0.0D;
+			k2 = 0.0D + thick;
 
-		//corners
-		renderer.setRenderBounds(0.0D, y1, 0.0D, 0.0D + thick, y2, 0.0D + thick);
-		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+			renderer.setRenderBounds(i1, y1, k1, i2, y2, k2);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, bottomFaceIcon, tes);
 
-		renderer.setRenderBounds(1.0D - thick, y1, 0.0D, 1.0D, y2, 0.0D + thick);
-		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+			//corners
+			renderer.setRenderBounds(0.0D, y1, 0.0D, 0.0D + thick, y2, 0.0D + thick);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, bottomFaceIcon, tes);
 
-		renderer.setRenderBounds(0.0D, y1, 1.0D - thick, 0.0D + thick, y2, 1.0D);
-		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
+			renderer.setRenderBounds(1.0D - thick, y1, 0.0D, 1.0D, y2, 0.0D + thick);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, bottomFaceIcon, tes);
 
-		renderer.setRenderBounds(1.0D - thick, y1, 1.0D - thick, 1.0D, y2, 1.0D);
-		RenderUtils.drawInventoryBlock_icon(block, renderer, BlockPaddy.tex[0], tes);
-		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+			renderer.setRenderBounds(0.0D, y1, 1.0D - thick, 0.0D + thick, y2, 1.0D);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, bottomFaceIcon, tes);
+
+			renderer.setRenderBounds(1.0D - thick, y1, 1.0D - thick, 1.0D, y2, 1.0D);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, bottomFaceIcon, tes);
+			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+		}
 	}
 
 	@Override
@@ -94,6 +101,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 		if (modelId == id)
 		{
 			final int meta = world.getBlockMetadata(x, y, z);
+			final BlockPaddyBase paddyBlock = (BlockPaddyBase)block;
 			// temporary fix
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
 			renderer.renderStandardBlock(block, x, y, z);
@@ -101,14 +109,14 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 
 			renderer.renderAllFaces = true;
 
-			if (ClientProxy.renderPass == 0)
+			if (ClientProxy.paddyRenderPass == 0)
 			{
 				// main block
 				renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				// borders
-				renderer.setOverrideBlockTexture(BlockPaddy.tex[0]);
+				renderer.setOverrideBlockTexture(block.getIcon(0, meta));
 
 				double i1 = 0.0D;
 				double i2 = 1.0D;
@@ -119,10 +127,10 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 
 				final double thick = 0.125D;
 
-				final boolean boolXPos = ((BlockPaddy)block).canConnectPaddyTo(world, x + 1, y, z, meta);
-				final boolean boolXNeg = ((BlockPaddy)block).canConnectPaddyTo(world, x - 1, y, z, meta);
-				final boolean boolYPos = ((BlockPaddy)block).canConnectPaddyTo(world, x, y, z + 1, meta);
-				final boolean boolYNeg = ((BlockPaddy)block).canConnectPaddyTo(world, x, y, z - 1, meta);
+				final boolean boolXPos = paddyBlock.canConnectPaddyTo(world, x + 1, y, z, meta);
+				final boolean boolXNeg = paddyBlock.canConnectPaddyTo(world, x - 1, y, z, meta);
+				final boolean boolYPos = paddyBlock.canConnectPaddyTo(world, x, y, z + 1, meta);
+				final boolean boolYNeg = paddyBlock.canConnectPaddyTo(world, x, y, z - 1, meta);
 
 				if (!boolXPos)
 				{
@@ -169,25 +177,25 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 				}
 
 				//corners
-				if ((!((BlockPaddy)block).canConnectPaddyTo(world, x - 1, y, z - 1, meta)) || (!boolXNeg) || (!boolYNeg))
+				if ((!paddyBlock.canConnectPaddyTo(world, x - 1, y, z - 1, meta)) || (!boolXNeg) || (!boolYNeg))
 				{
 					renderer.setRenderBounds(0.0D, y1, 0.0D, 0.0D + thick, y2, 0.0D + thick);
 					renderer.renderStandardBlock(block, x, y, z);
 				}
 
-				if ((!((BlockPaddy)block).canConnectPaddyTo(world, x + 1, y, z - 1, meta)) || (!boolXPos) || (!boolYNeg))
+				if ((!paddyBlock.canConnectPaddyTo(world, x + 1, y, z - 1, meta)) || (!boolXPos) || (!boolYNeg))
 				{
 					renderer.setRenderBounds(1.0D - thick, y1, 0.0D, 1.0D, y2, 0.0D + thick);
 					renderer.renderStandardBlock(block, x, y, z);
 				}
 
-				if ((!((BlockPaddy)block).canConnectPaddyTo(world, x - 1, y, z + 1, meta)) || (!boolXNeg) || (!boolYPos))
+				if ((!paddyBlock.canConnectPaddyTo(world, x - 1, y, z + 1, meta)) || (!boolXNeg) || (!boolYPos))
 				{
 					renderer.setRenderBounds(0.0D, y1, 1.0D - thick, 0.0D + thick, y2, 1.0D);
 					renderer.renderStandardBlock(block, x, y, z);
 				}
 
-				if ((!((BlockPaddy)block).canConnectPaddyTo(world, x + 1, y, z + 1, meta)) || (!boolXPos) || (!boolYPos))
+				if ((!paddyBlock.canConnectPaddyTo(world, x + 1, y, z + 1, meta)) || (!boolXPos) || (!boolYPos))
 				{
 					renderer.setRenderBounds(1.0D - thick, y1, 1.0D - thick, 1.0D, y2, 1.0D);
 					renderer.renderStandardBlock(block, x, y, z);
@@ -197,7 +205,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 			}
 			else
 			{
-				// water
+				// fluid
 				if (meta > 0)
 				{
 					final Tessellator tessellator = Tessellator.instance;
@@ -222,7 +230,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 					}
 
 					tessellator.setColorOpaque_F(f * r, f * g, f * b);
-					final IIcon icon = Blocks.water.getBlockTextureFromSide(1);
+					final IIcon icon = paddyBlock.getFluidBlock().getBlockTextureFromSide(1);
 					renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 					renderer.renderFaceYPos(block, (double)x, (double)((float)y - 0.0625F), (double)z, icon);
 				}

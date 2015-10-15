@@ -1,4 +1,4 @@
-package growthcraft.core.renderer;
+package growthcraft.core.client.renderer;
 
 import growthcraft.core.utils.RenderUtils;
 import growthcraft.core.block.BlockRope;

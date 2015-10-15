@@ -27,5 +27,3 @@ fluid.grc.riceSake0.modifier=Young
 fluid.grc.riceSake1.modifier=Fermented
 fluid.grc.riceSake2.modifier=Fermented, Potent
 fluid.grc.riceSake3.modifier=Fermented, Extended
-
-grc.format.paddy.hasWater=Water :

@@ -36,3 +36,4 @@ grc.format.tank.content_suffix=mB of %s
 grc.format.crop.growth_prefix=Growth :
 grc.format.crop.progress_format=%d%%
 grc.format.crop.mature=Mature
+grc.format.paddy.hasFluid=Has Fluid :
