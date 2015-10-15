@@ -11,6 +11,7 @@ import growthcraft.core.event.PlayerInteractEventAmazingStick;
 import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.event.TextureStitchEventCore;
 import growthcraft.core.handler.BucketHandler;
+import growthcraft.core.integration.AppleCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.item.ItemRope;
 import growthcraft.core.utils.ItemUtils;
@@ -109,6 +110,7 @@ public class GrowthCraftCore
 		AchievementPageGrowthcraft.init();
 
 		new growthcraft.core.integration.Waila();
+		AppleCore.init();
 		ItemUtils.init();
 	}
 

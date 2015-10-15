@@ -11,7 +11,14 @@ import squeek.applecore.api.AppleCoreAPI;
 
 public class AppleCore
 {
+	private static boolean appleCoreLoaded;
+
 	private AppleCore() {}
+
+	public static void init()
+	{
+		appleCoreLoaded = Loader.isModLoaded("AppleCore");
+	}
 
 	// abstract the AppleCoreAPI reference into an Optional.Method so that AppleCore is not a hard dependency
 	@Optional.Method(modid = "AppleCore")
@@ -22,7 +29,7 @@ public class AppleCore
 
 	public static Event.Result validateGrowthTick(Block block, World world, int x, int y, int z, Random random)
 	{
-		if (Loader.isModLoaded("AppleCore"))
+		if (appleCoreLoaded)
 			return validateGrowthTick_AC(block, world, x, y, z, random);
 
 		return Event.Result.DEFAULT;
@@ -41,7 +48,7 @@ public class AppleCore
 
 	public static void announceGrowthTick(Block block, World world, int x, int y, int z, int previousMetadata)
 	{
-		if (Loader.isModLoaded("AppleCore"))
+		if (appleCoreLoaded)
 			announceGrowthTick_AC(block, world, x, y, z, previousMetadata);
 	}
 }
