@@ -30,10 +30,10 @@ public class BlockNetherPaddy extends BlockPaddyBase
 	public BlockNetherPaddy()
 	{
 		super(Material.sand);
-		this.setHardness(0.5F);
-		this.setStepSound(soundTypeSand);
-		this.setBlockName("grcnether.netherPaddyField");
-		this.setCreativeTab(null);
+		setHardness(0.5F);
+		setStepSound(soundTypeSand);
+		setBlockName("grcnether.netherPaddyField");
+		setCreativeTab(null);
 	}
 
 	/**
