@@ -12,6 +12,7 @@ item.grcnether.netherRashSpores.desc=It burns, it itches, it spreads and well yo
 // Tiles
 tile.grcnether.netherPaddyField.name=Lava Paddy
 tile.grcnether.netherPepper.name=Ghost Peppers
+tile.grcnether.netherSquash.name=Soul Squash
 
 // Booze
 /// Fire Brandy
