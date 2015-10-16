@@ -1,6 +1,7 @@
 package growthcraft.nether.common.item;
 
 import growthcraft.core.utils.BlockCheck;
+import growthcraft.core.utils.ItemUtils;
 import growthcraft.nether.GrowthCraftNether;
 import growthcraft.nether.common.block.BlockNetherPepper;
 
@@ -47,28 +48,20 @@ public class ItemNetherPepper extends Item implements IPlantable
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
 	{
-		if (dir != 1)
-		{
-			return false;
-		}
-		else if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack))
+		if (dir != 1) return false;
+
+		if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack))
 		{
 			final BlockNetherPepper plant = (BlockNetherPepper)getPlant(world, x, y, z);
 			if (BlockCheck.canSustainPlant(world, x, y, z, ForgeDirection.UP, plant))
 			{
 				world.setBlock(x, y + 1, z, plant);
-				--stack.stackSize;
+				ItemUtils.consumeItem(stack);
 				return true;
 			}
-			else
-			{
-				return false;
-			}
 		}
-		else
-		{
-			return false;
-		}
+
+		return false;
 	}
 
 	@Override
