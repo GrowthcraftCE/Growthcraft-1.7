@@ -8,11 +8,14 @@ item.grcnether.netherPepper.name=Ghost Pepper
 item.grcnether.netherPepper.desc=Its like an inferno in your mouth, but hotter
 item.grcnether.netherRashSpores.name=Nether Rash Spores
 item.grcnether.netherRashSpores.desc=It burns, it itches, it spreads and well you know the rest
+item.grcnether.netherSquashSeeds.name=Soul Squash Seeds
+item.grcnether.netherSquashSeeds.desc=Spooky looking seeds
 
 // Tiles
 tile.grcnether.netherPaddyField.name=Lava Paddy
 tile.grcnether.netherPepper.name=Ghost Peppers
 tile.grcnether.netherSquash.name=Soul Squash
+tile.grcnether.netherSquashStem.name=Soul Squash Stem
 
 // Booze
 /// Fire Brandy
