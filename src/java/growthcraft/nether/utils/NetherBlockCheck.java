@@ -16,6 +16,7 @@ public class NetherBlockCheck
 	 */
 	public static boolean isPaddy(Block block)
 	{
-		return GrowthCraftNether.blocks.netherPaddyField.equals(block);
+		return GrowthCraftNether.blocks.netherPaddyField.equals(block) ||
+			GrowthCraftNether.blocks.netherPaddyFieldFilled.equals(block);
 	}
 }
