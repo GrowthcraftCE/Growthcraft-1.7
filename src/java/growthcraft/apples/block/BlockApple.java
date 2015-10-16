@@ -122,7 +122,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 			if (allowGrowthResult == Event.Result.DENY)
 				return;
 
-			final boolean continueGrowth = world.rand.nextInt(this.growth) == 0;
+			final boolean continueGrowth = random.nextInt(this.growth) == 0;
 			if (allowGrowthResult == Event.Result.ALLOW || continueGrowth)
 			{
 				final int meta = world.getBlockMetadata(x, y, z);
