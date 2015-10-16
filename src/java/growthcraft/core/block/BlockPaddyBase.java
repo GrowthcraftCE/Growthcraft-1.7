@@ -36,6 +36,20 @@ public abstract class BlockPaddyBase extends Block implements IPaddy
 		return meta >= getMaxPaddyMeta(world, x, y, z);
 	}
 
+	public void drainPaddy(World world, int x, int y, int z)
+	{
+		final int meta = world.getBlockMetadata(x, y, z);
+		if (meta > 0)
+		{
+			world.setBlockMetadataWithNotify(x, y, z, meta - 1, BlockFlags.UPDATE_CLIENT);
+		}
+	}
+
+	public void fillPaddy(World world, int x, int y, int z)
+	{
+		world.setBlockMetadataWithNotify(x, y, z, getMaxPaddyMeta(world, x, y, z), BlockFlags.UPDATE_CLIENT);
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -45,7 +59,7 @@ public abstract class BlockPaddyBase extends Block implements IPaddy
 	{
 		if (isBelowFillingFluid(world, x, y, z) && world.canLightningStrikeAt(x, y + 1, z))
 		{
-			world.setBlockMetadataWithNotify(x, y, z, getMaxPaddyMeta(world, x, y, z), BlockFlags.SEND_TO_CLIENT);
+			fillPaddy(world, x, y, z);
 		}
 	}
 
@@ -83,7 +97,7 @@ public abstract class BlockPaddyBase extends Block implements IPaddy
 								{
 									if (world.getBlock(lx, y, lz) == this)
 									{
-										world.setBlockMetadataWithNotify(lx, y, lz, getMaxPaddyMeta(world, lx, y, lz), BlockFlags.UPDATE_CLIENT);
+										fillPaddy(world, lx, y, lz);
 									}
 								}
 							}
@@ -128,7 +142,7 @@ public abstract class BlockPaddyBase extends Block implements IPaddy
 		super.onNeighborBlockChange(world, x, y, z, par5);
 		if (isBelowFillingFluid(world, x, y, z))
 		{
-			world.setBlockMetadataWithNotify(x, y, z, getMaxPaddyMeta(world, x, y, z), BlockFlags.UPDATE_CLIENT);
+			fillPaddy(world, x, y, z);
 		}
 	}
 

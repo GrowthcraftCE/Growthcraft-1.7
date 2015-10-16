@@ -54,10 +54,20 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider, I
 		return (float)meta / (float)RiceStage.MATURE;
 	}
 
-	void incrementGrowth(World world, int x, int y, int z, int meta)
+	private void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
 		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.SEND_TO_CLIENT);
 		AppleCore.announceGrowthTick(this, world, x, y, z, meta);
+	}
+
+	private void growRice(World world, int x, int y, int z, int meta)
+	{
+		incrementGrowth(world, x, y, z, meta);
+		final Block paddyBlock = world.getBlock(x, y - 1, z);
+		if (RiceBlockCheck.isPaddy(paddyBlock))
+		{
+			((BlockPaddy)paddyBlock).drainPaddy(world, x, y - 1, z);
+		}
 	}
 
 	/************
@@ -82,8 +92,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider, I
 
 				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.growth / f) + 1) == 0))
 				{
-					incrementGrowth(world, x, y, z, meta);
-					world.setBlockMetadataWithNotify(x, y - 1, z, world.getBlockMetadata(x, y - 1, z) - 1, 2);
+					growRice(world, x, y, z, meta);
 				}
 			}
 		}
@@ -110,7 +119,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider, I
 		final int meta = world.getBlockMetadata(x, y, z);
 		if (meta < RiceStage.MATURE)
 		{
-			incrementGrowth(world, x, y, z, meta);
+			growRice(world, x, y, z, meta);
 		}
 	}
 
