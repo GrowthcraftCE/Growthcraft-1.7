@@ -6,6 +6,7 @@ import java.util.Random;
 import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.block.IPaddyCrop;
 import growthcraft.core.integration.AppleCore;
+import growthcraft.core.utils.BlockFlags;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.renderer.RenderRice;
 import growthcraft.rice.utils.RiceBlockCheck;
@@ -14,6 +15,7 @@ import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
@@ -23,10 +25,17 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
+public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider, IGrowable
 {
+	public static class RiceStage
+	{
+		public static final int MATURE = 7;
+
+		private RiceStage() {}
+	}
+
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	private final float growth = GrowthCraftRice.getConfig().riceGrowthRate;
 
@@ -42,15 +51,13 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
 	{
-		return (float)(meta / 7.0);
+		return (float)meta / (float)RiceStage.MATURE;
 	}
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
-		final int previousMetadata = meta;
-		++meta;
-		world.setBlockMetadataWithNotify(x, y, z, meta, 2);
-		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
+		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.SEND_TO_CLIENT);
+		AppleCore.announceGrowthTick(this, world, x, y, z, meta);
 	}
 
 	/************
@@ -69,7 +76,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 
 			final int meta = world.getBlockMetadata(x, y, z);
 
-			if (meta < 7)
+			if (meta < RiceStage.MATURE)
 			{
 				final float f = this.getGrowthRate(world, x, y, z);
 
@@ -79,6 +86,31 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 					world.setBlockMetadataWithNotify(x, y - 1, z, world.getBlockMetadata(x, y - 1, z) - 1, 2);
 				}
 			}
+		}
+	}
+
+	/* Both side */
+	@Override
+	public boolean func_149851_a(World world, int x, int y, int z, boolean isClient)
+	{
+		return world.getBlockMetadata(x, y, z) < RiceStage.MATURE;
+	}
+
+	/* SideOnly(Side.SERVER) Can this apply bonemeal effect? */
+	@Override
+	public boolean func_149852_a(World world, Random random, int x, int y, int z)
+	{
+		return true;
+	}
+
+	/* Apply bonemeal effect */
+	@Override
+	public void func_149853_b(World world, Random random, int x, int y, int z)
+	{
+		final int meta = world.getBlockMetadata(x, y, z);
+		if (meta < RiceStage.MATURE)
+		{
+			incrementGrowth(world, x, y, z, meta);
 		}
 	}
 
@@ -227,14 +259,12 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[5];
+		icons = new IIcon[5];
 
-		tex[0] = reg.registerIcon("grcrice:rice_0");
-		tex[1] = reg.registerIcon("grcrice:rice_1");
-		tex[2] = reg.registerIcon("grcrice:rice_2");
-		tex[3] = reg.registerIcon("grcrice:rice_3");
-		tex[4] = reg.registerIcon("grcrice:rice_4");
-
+		for (int i = 0; i < icons.length; ++i)
+		{
+			icons[i] = reg.registerIcon("grcrice:rice_" + i);
+		}
 	}
 
 	@Override
@@ -256,7 +286,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider
 			default: i = 2;
 		}
 
-		return tex[i];
+		return icons[i];
 	}
 
 	/************

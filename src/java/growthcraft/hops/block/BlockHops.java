@@ -18,6 +18,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -34,21 +35,22 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDataProvider
+public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDataProvider, IGrowable
 {
-	public static class HopsGrowth
+	public static class HopsStage
 	{
 		public static final int BINE = 0;
 		public static final int SMALL = 1;
 		public static final int BIG = 2;
 		public static final int FRUIT = 3;
 
-		private HopsGrowth() {}
+		private HopsStage() {}
 	}
 
-	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
 	public static Boolean graphicFlag;
+
+	@SideOnly(Side.CLIENT)
+	private IIcon[] icons;
 
 	private final float hopVineGrowthRate = GrowthCraftHops.getConfig().hopVineGrowthRate;
 	private final float hopVineFlowerSpawnRate = GrowthCraftHops.getConfig().hopVineFlowerSpawnRate;
@@ -65,15 +67,25 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
 	{
-		return (float)meta / (float)HopsGrowth.FRUIT;
+		return (float)meta / (float)HopsStage.FRUIT;
 	}
 
-	void incrementGrowth(World world, int x, int y, int z, int meta)
+	protected void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
 		final int previousMetadata = meta;
 		++meta;
 		world.setBlockMetadataWithNotify(x, y, z, meta, 3);
 		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
+	}
+
+	public void spreadLeaves(World world, int x, int y, int z)
+	{
+		world.setBlock(x, y + 1, z, this, HopsStage.SMALL, BlockFlags.UPDATE_CLIENT);
+	}
+
+	public boolean canSpreadLeaves(World world, int x, int y, int z)
+	{
+		return BlockCheck.isRope(world.getBlock(x, y + 1, z)) && this.canBlockStay(world, x, y + 1, z);
 	}
 
 	/************
@@ -95,27 +107,61 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 			final int meta = world.getBlockMetadata(x, y, z);
 			final float f = this.getGrowthRateLoop(world, x, y, z);
 
-			if (meta < HopsGrowth.BIG)
+			if (meta < HopsStage.BIG)
 			{
 				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.hopVineGrowthRate / f) + 1) == 0))
 				{
 					incrementGrowth(world, x, y, z, meta);
 				}
 			}
-			else if ((meta == HopsGrowth.BIG || meta >= HopsGrowth.FRUIT) && BlockCheck.isRope(world.getBlock(x, y + 1, z)) && this.canBlockStay(world, x, y + 1, z))
+			else if ((meta >= HopsStage.BIG) && canSpreadLeaves(world, x, y, z))
 			{
 				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.hopVineGrowthRate / f) + 1) == 0))
 				{
-					world.setBlock(x, y + 1, z, this, 2, 3);
+					spreadLeaves(world, x, y, z);
 				}
 			}
-			else if (meta == HopsGrowth.BIG)
+			else
 			{
 				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.hopVineFlowerSpawnRate / f) + 1) == 0))
 				{
 					incrementGrowth(world, x, y, z, meta);
 				}
 			}
+		}
+	}
+
+	/* Both side */
+	@Override
+	public boolean func_149851_a(World world, int x, int y, int z, boolean isClient)
+	{
+		final int meta = world.getBlockMetadata(x, y, z);
+		return (meta < HopsStage.FRUIT) || canSpreadLeaves(world, x, y, z);
+	}
+
+	/* SideOnly(Side.SERVER) Can this apply bonemeal effect? */
+	@Override
+	public boolean func_149852_a(World world, Random random, int x, int y, int z)
+	{
+		return true;
+	}
+
+	/* Apply bonemeal effect */
+	@Override
+	public void func_149853_b(World world, Random random, int x, int y, int z)
+	{
+		final int meta = world.getBlockMetadata(x, y, z);
+		if (meta < HopsStage.BIG)
+		{
+			incrementGrowth(world, x, y, z, meta);
+		}
+		else if (meta >= HopsStage.BIG && canSpreadLeaves(world, x, y, z))
+		{
+			spreadLeaves(world, x, y, z);
+		}
+		else
+		{
+			incrementGrowth(world, x, y, z, meta);
 		}
 	}
 
@@ -199,11 +245,11 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7, float par8, float par9)
 	{
-		if (world.getBlockMetadata(x, y, z) >= HopsGrowth.FRUIT)
+		if (world.getBlockMetadata(x, y, z) >= HopsStage.FRUIT)
 		{
 			if (!world.isRemote)
 			{
-				world.setBlockMetadataWithNotify(x, y, z, HopsGrowth.BIG, BlockFlags.UPDATE_CLIENT);
+				world.setBlockMetadataWithNotify(x, y, z, HopsStage.BIG, BlockFlags.UPDATE_CLIENT);
 				this.dropBlockAsItem(world, x, y, z, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
 			}
 			return true;
@@ -247,7 +293,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	{
 		return world.getBlock(x, y, z) == this &&
 			BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this) &&
-			world.getBlockMetadata(x, y, z) >= HopsGrowth.BIG;
+			world.getBlockMetadata(x, y, z) >= HopsStage.BIG;
 	}
 
 	/************
@@ -258,7 +304,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	public Item getItem(World world, int x, int y, int z)
 	{
 		final int meta = world.getBlockMetadata(x, y, z);
-		return meta < HopsGrowth.FRUIT ? GrowthCraftHops.hopSeeds.getItem() : GrowthCraftHops.hops.getItem();
+		return meta < HopsStage.FRUIT ? GrowthCraftHops.hopSeeds.getItem() : GrowthCraftHops.hops.getItem();
 	}
 
 	@Override
@@ -297,7 +343,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	{
 		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(GrowthCraftCore.rope.asStack());
-		if (world.getBlockMetadata(x, y, z) >= HopsGrowth.BIG)
+		if (world.getBlockMetadata(x, y, z) >= HopsStage.BIG)
 		{
 			ret.add(GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
 		}
@@ -311,15 +357,21 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[7];
+		icons = new IIcon[7];
 
-		tex[0] = reg.registerIcon("grchops:leaves");
-		tex[1] = reg.registerIcon("grchops:leaves_opaque");
-		tex[2] = reg.registerIcon("grchops:bine");
-		tex[3] = reg.registerIcon("grchops:leaves_hops");
-		tex[4] = reg.registerIcon("grccore:rope_1");
-		tex[5] = reg.registerIcon("grchops:leaves_x");
-		tex[6] = reg.registerIcon("grchops:leaves_opaque_x");
+		icons[0] = reg.registerIcon("grchops:leaves");
+		icons[1] = reg.registerIcon("grchops:leaves_opaque");
+		icons[2] = reg.registerIcon("grchops:bine");
+		icons[3] = reg.registerIcon("grchops:leaves_hops");
+		icons[4] = reg.registerIcon("grccore:rope_1");
+		icons[5] = reg.registerIcon("grchops:leaves_x");
+		icons[6] = reg.registerIcon("grchops:leaves_opaque_x");
+	}
+
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconForRender(int index)
+	{
+		return icons[index];
 	}
 
 	@Override
@@ -329,19 +381,16 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 		if (meta != 0)
 		{
 			this.graphicFlag = !((BlockLeaves)Blocks.leaves).isOpaqueCube();
-			if (meta >= HopsGrowth.FRUIT)
+			if (meta >= HopsStage.FRUIT)
 			{
-				return this.graphicFlag ? this.tex[5] : this.tex[6];
+				return this.graphicFlag ? this.icons[5] : this.icons[6];
 			}
 			else
 			{
-				return this.graphicFlag ? this.tex[0] : this.tex[1];
+				return this.graphicFlag ? this.icons[0] : this.icons[1];
 			}
 		}
-		else
-		{
-			return this.tex[2];
-		}
+		return this.icons[2];
 	}
 
 	/************

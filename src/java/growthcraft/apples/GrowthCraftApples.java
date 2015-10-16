@@ -5,7 +5,6 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.apples.block.BlockApple;
 import growthcraft.apples.block.BlockAppleLeaves;
 import growthcraft.apples.block.BlockAppleSapling;
-import growthcraft.apples.event.BonemealEventApples;
 import growthcraft.apples.item.ItemAppleSeeds;
 import growthcraft.apples.village.ComponentVillageAppleFarm;
 import growthcraft.apples.village.VillageHandlerApples;
@@ -177,6 +176,6 @@ public class GrowthCraftApples
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		MinecraftForge.EVENT_BUS.register(new BonemealEventApples());
+
 	}
 }

@@ -26,13 +26,13 @@ import net.minecraft.world.World;
 
 public class BlockApple extends Block implements IGrowable, ICropDataProvider
 {
-	public static class AppleGrowth
+	public static class AppleStage
 	{
 		public static final int YOUNG = 0;
 		public static final int MID = 1;
 		public static final int MATURE = 2;
 
-		private AppleGrowth() {}
+		private AppleStage() {}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -55,7 +55,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
 	{
-		return (float)(meta / AppleGrowth.MATURE);
+		return (float)(meta / AppleStage.MATURE);
 	}
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)
@@ -71,19 +71,22 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	 *	if you have no idea what this stuff means
 	 */
 
-	/* Can the Apple grow anymore? */
-	public boolean func_149851_a(World world, int x, int y, int z, boolean p_149851_5_)
+	/* Can this accept bonemeal? */
+	@Override
+	public boolean func_149851_a(World world, int x, int y, int z, boolean isClient)
 	{
-		return world.getBlockMetadata(x, y, z) < AppleGrowth.MATURE;
+		return world.getBlockMetadata(x, y, z) < AppleStage.MATURE;
 	}
 
-	/* Can the Apple accept bonemeal? */
+	/* SideOnly(Side.SERVER) Can this apply bonemeal effect? */
+	@Override
 	public boolean func_149852_a(World world, Random random, int x, int y, int z)
 	{
-		return !world.isRemote;
+		return true;
 	}
 
 	/* Apply bonemeal effect */
+	@Override
 	public void func_149853_b(World world, Random random, int x, int y, int z)
 	{
 		incrementGrowth(world, x, y, z, world.getBlockMetadata(x, y, z));
@@ -123,7 +126,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 			if (allowGrowthResult == Event.Result.ALLOW || continueGrowth)
 			{
 				final int meta = world.getBlockMetadata(x, y, z);
-				if (meta < AppleGrowth.MATURE)
+				if (meta < AppleStage.MATURE)
 				{
 					incrementGrowth(world, x, y, z, meta);
 				}
@@ -141,7 +144,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7, float par8, float par9)
 	{
-		if (world.getBlockMetadata(x, y, z) >= AppleGrowth.MATURE)
+		if (world.getBlockMetadata(x, y, z) >= AppleStage.MATURE)
 		{
 			if (!world.isRemote)
 			{
@@ -187,7 +190,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
-		return meta >= AppleGrowth.MATURE ? Items.apple : null;
+		return meta >= AppleStage.MATURE ? Items.apple : null;
 	}
 
 	@Override

@@ -41,11 +41,17 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 			IIcon icon;
 
 			final Tessellator tessellator = Tessellator.instance;
+			final BlockHops hopsBlock = (BlockHops)block;
+
 			if (meta == 0 || meta == 1)
 			{
-				renderer.setOverrideBlockTexture(BlockHops.tex[2]);
-				renderer.renderCrossedSquares(block, x, y, z);
-				renderer.clearOverrideBlockTexture();
+				final Block blockBelow = world.getBlock(x, y - 1, z);
+				if (meta == 0 || hopsBlock != blockBelow)
+				{
+					renderer.setOverrideBlockTexture(hopsBlock.getIconForRender(2));
+					renderer.renderCrossedSquares(block, x, y, z);
+					renderer.clearOverrideBlockTexture();
+				}
 			}
 
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
@@ -54,7 +60,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 			{
 				if (meta == 3)
 				{
-					icon = BlockHops.tex[3];
+					icon = hopsBlock.getIconForRender(3);
 
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getMaxU();
@@ -104,14 +110,14 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 					tessellator.addVertexWithUV(maxX, minY + 1.0D, maxZ, maxU, minV);
 				}
 
-				icon = ((BlockHops)block).getIcon(0, meta);
+				icon = hopsBlock.getIcon(0, meta);
 
 				minU = (double)icon.getMinU();
 				maxU = (double)icon.getMaxU();
 				minV = (double)icon.getMinV();
 				maxV = (double)icon.getMaxV();
 
-				final int color = ((BlockHops)block).colorMultiplier(world, x, y, z);
+				final int color = hopsBlock.colorMultiplier(world, x, y, z);
 				final float r = (float)(color >> 16 & 255) / 255.0F;
 				final float g = (float)(color >> 8 & 255) / 255.0F;
 				final float b = (float)(color & 255) / 255.0F;
@@ -212,14 +218,14 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 
 			//Render Ropes
 			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-			icon = BlockHops.tex[4];
+			icon = hopsBlock.getIconForRender(4);
 
-			final boolean flag = ((BlockHops)block).canConnectRopeTo(world, x, y, z - 1);
-			final boolean flag1 = ((BlockHops)block).canConnectRopeTo(world, x, y, z + 1);
-			final boolean flag2 = ((BlockHops)block).canConnectRopeTo(world, x - 1, y, z);
-			final boolean flag3 = ((BlockHops)block).canConnectRopeTo(world, x + 1, y, z);
-			final boolean flag4 = ((BlockHops)block).canConnectRopeTo(world, x, y - 1, z);
-			final boolean flag5 = ((BlockHops)block).canConnectRopeTo(world, x, y + 1, z);
+			final boolean flag = hopsBlock.canConnectRopeTo(world, x, y, z - 1);
+			final boolean flag1 = hopsBlock.canConnectRopeTo(world, x, y, z + 1);
+			final boolean flag2 = hopsBlock.canConnectRopeTo(world, x - 1, y, z);
+			final boolean flag3 = hopsBlock.canConnectRopeTo(world, x + 1, y, z);
+			final boolean flag4 = hopsBlock.canConnectRopeTo(world, x, y - 1, z);
+			final boolean flag5 = hopsBlock.canConnectRopeTo(world, x, y + 1, z);
 
 			minV = (double)icon.getInterpolatedV(14);
 			maxV = (double)icon.getMaxV();

@@ -15,7 +15,6 @@ import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.utils.MapGenHelper;
 import growthcraft.hops.block.BlockHops;
-import growthcraft.hops.event.BonemealEventHops;
 import growthcraft.hops.item.ItemHops;
 import growthcraft.hops.item.ItemHopSeeds;
 import growthcraft.hops.village.ComponentVillageHopVineyard;
@@ -172,6 +171,6 @@ public class GrowthCraftHops
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		MinecraftForge.EVENT_BUS.register(new BonemealEventHops());
+
 	}
 }

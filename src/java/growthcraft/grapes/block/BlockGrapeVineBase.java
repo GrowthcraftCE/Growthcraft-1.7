@@ -10,6 +10,7 @@ import growthcraft.grapes.utils.GrapeBlockCheck;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -21,7 +22,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public abstract class BlockGrapeVineBase extends Block implements IPlantable, ICropDataProvider
+public abstract class BlockGrapeVineBase extends Block implements IPlantable, ICropDataProvider, IGrowable
 {
 	private ItemStack itemDrop;
 	private float growthRateMultiplier;
@@ -72,7 +73,7 @@ public abstract class BlockGrapeVineBase extends Block implements IPlantable, IC
 
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
 	{
-		return (float)(meta / getGrowthMax());
+		return (float)meta / (float)getGrowthMax();
 	}
 
 	protected boolean isGrapeVine(Block block)
@@ -82,10 +83,8 @@ public abstract class BlockGrapeVineBase extends Block implements IPlantable, IC
 
 	public void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
-		final int previousMetadata = meta;
-		++meta;
-		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_CLIENT);
-		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
+		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.UPDATE_CLIENT);
+		AppleCore.announceGrowthTick(this, world, x, y, z, meta);
 	}
 
 	protected float getGrowthRate(World world, int x, int y, int z)
@@ -232,6 +231,30 @@ public abstract class BlockGrapeVineBase extends Block implements IPlantable, IC
 			{
 				doGrowth(world, x, y, z, meta);
 			}
+		}
+	}
+
+	/* Can this accept bonemeal? */
+	@Override
+	public boolean func_149851_a(World world, int x, int y, int z, boolean isClient)
+	{
+		return canUpdateGrowth(world, x, y, z);
+	}
+
+	/* SideOnly(Side.SERVER) Can this apply bonemeal effect? */
+	@Override
+	public boolean func_149852_a(World world, Random random, int x, int y, int z)
+	{
+		return true;
+	}
+
+	/* Apply bonemeal effect */
+	@Override
+	public void func_149853_b(World world, Random random, int x, int y, int z)
+	{
+		if (random.nextFloat() < 0.5D)
+		{
+			doGrowth(world, x, y, z, world.getBlockMetadata(x, y, z));
 		}
 	}
 }

@@ -9,9 +9,13 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+/**
+ * This is the Grape Vine sapling block
+ */
 public class BlockGrapeVine0 extends BlockGrapeVineBase
 {
 	@SideOnly(Side.CLIENT)
@@ -46,7 +50,7 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase
 		}
 		else
 		{
-			world.setBlock(x, y, z, GrowthCraftGrapes.grapeVine1.getBlock(), 0, BlockFlags.ALL);
+			world.setBlock(x, y, z, GrowthCraftGrapes.grapeVine1.getBlock(), 0, BlockFlags.UPDATE_CLIENT);
 		}
 	}
 
@@ -77,7 +81,7 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return this.tex[meta];
+		return this.tex[MathHelper.clamp_int(meta, 0, 1)];
 	}
 
 	/************

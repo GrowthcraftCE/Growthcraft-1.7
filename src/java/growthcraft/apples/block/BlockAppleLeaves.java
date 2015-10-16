@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,13 +22,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
-public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
+public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGrowable
 {
-	public static class LeavesGrowth
+	public static class LeavesStage
 	{
 		public static final int DECAY_MASK = 8;
 
-		private LeavesGrowth() {}
+		private LeavesStage() {}
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -47,6 +48,35 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 		this.setCreativeTab(null);
 	}
 
+	/* Bonemeal? Client side */
+	@Override
+	public boolean func_149851_a(World world, int x, int y, int z, boolean isClient)
+	{
+		return world.isAirBlock(x, y - 1, z) && (world.getBlockMetadata(x, y, z) & 3) == 0;
+	}
+
+	/* SideOnly(Side.SERVER) Can this apply bonemeal effect? */
+	@Override
+	public boolean func_149852_a(World world, Random random, int x, int y, int z)
+	{
+		return true;
+	}
+
+	/* Apply bonemeal effect */
+	@Override
+	public void func_149853_b(World world, Random random, int x, int y, int z)
+	{
+		growApple(world, random, x, y, z);
+	}
+
+	private void growApple(World world, Random random, int x, int y, int z)
+	{
+		if (world.isAirBlock(x, y - 1, z))
+		{
+			world.setBlock(x, y - 1, z, GrowthCraftApples.appleBlock.getBlock());
+		}
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -62,14 +92,11 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 				// Spawn Apple
 				if (world.rand.nextInt(this.growth) == 0)
 				{
-					if (world.isAirBlock(x, y - 1, z))
-					{
-						world.setBlock(x, y - 1, z, GrowthCraftApples.appleBlock.getBlock());
-					}
+					growApple(world, random, x, y, z);
 				}
 			}
 
-			if ((meta & LeavesGrowth.DECAY_MASK) != 0 && (meta & 4) == 0)
+			if ((meta & LeavesStage.DECAY_MASK) != 0 && (meta & 4) == 0)
 			{
 				final byte b0 = 4;
 				final int i1 = b0 + 1;
@@ -243,7 +270,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public void beginLeavesDecay(World world, int x, int y, int z)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | LeavesGrowth.DECAY_MASK, 4);
+		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | LeavesStage.DECAY_MASK, 4);
 	}
 
 	@Override

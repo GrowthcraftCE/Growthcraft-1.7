@@ -3,7 +3,6 @@ package growthcraft.bamboo.event;
 import java.util.Random;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.bamboo.block.BlockBambooShoot;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -15,18 +14,7 @@ public class BonemealEventBamboo
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
 	{
-		if (GrowthCraftBamboo.bambooShoot.getBlock() == event.block)
-		{
-			if (!event.world.isRemote)
-			{
-				if ((double)event.world.rand.nextFloat() < 0.45D)
-				{
-					((BlockBambooShoot)GrowthCraftBamboo.bambooShoot.getBlock()).markOrGrowMarked(event.world, event.x, event.y, event.z, event.world.rand);
-				}
-			}
-			event.setResult(Result.ALLOW);
-		}
-		else if (GrowthCraftBamboo.bambooStalk.getBlock() == event.block)
+		if (GrowthCraftBamboo.bambooStalk.getBlock() == event.block)
 		{
 			if (!this.isBambooOnGround(event.world, event.x, event.y, event.z))
 			{

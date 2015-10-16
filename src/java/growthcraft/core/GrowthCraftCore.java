@@ -5,7 +5,6 @@ import growthcraft.core.block.BlockRope;
 import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.event.BonemealEventICrop;
 import growthcraft.core.event.HarvestDropsEventCore;
 import growthcraft.core.event.PlayerInteractEventAmazingStick;
 import growthcraft.core.event.PlayerInteractEventPaddy;
@@ -118,7 +117,6 @@ public class GrowthCraftCore
 	public void postLoad(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
-		MinecraftForge.EVENT_BUS.register(new BonemealEventICrop());
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventPaddy());
 		if (config.useAmazingStick)
 		{

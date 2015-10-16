@@ -7,11 +7,13 @@ import growthcraft.bamboo.world.WorldGenBamboo;
 import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.utils.RenderType;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +27,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockBambooShoot extends BlockBush implements ICropDataProvider
+public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IGrowable
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
@@ -114,20 +116,6 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 		return GrowthCraftBamboo.bambooShootFood.getItem();
 	}
 
-	public void markOrGrowMarked(World world, int x, int y, int z, Random random)
-	{
-		final int meta = world.getBlockMetadata(x, y, z);
-
-		if (meta == 0)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 1, 4);
-		}
-		else
-		{
-			this.growBamboo(world, x, y, z, random);
-		}
-	}
-
 	public void growBamboo(World world, int x, int y, int z, Random rand)
 	{
 		if (!TerrainGen.saplingGrowTree(world, rand, x, y, z)) return;
@@ -140,6 +128,44 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 		if (!generator.generate(world, rand, x, y, z))
 		{
 			world.setBlock(x, y, z, this, meta, BlockFlags.ALL);
+		}
+	}
+
+	public void markOrGrowMarked(World world, int x, int y, int z, Random random)
+	{
+		final int meta = world.getBlockMetadata(x, y, z);
+
+		if ((meta & 8) == 0)
+		{
+			world.setBlockMetadataWithNotify(x, y, z, meta | 8, BlockFlags.ALL);
+		}
+		else
+		{
+			this.growBamboo(world, x, y, z, random);
+		}
+	}
+
+	/* Both side */
+	@Override
+	public boolean func_149851_a(World world, int x, int y, int z, boolean isClient)
+	{
+		return true;
+	}
+
+	/* SideOnly(Side.SERVER) Can this apply bonemeal effect? */
+	@Override
+	public boolean func_149852_a(World world, Random random, int x, int y, int z)
+	{
+		return true;
+	}
+
+	/* Apply bonemeal effect */
+	@Override
+	public void func_149853_b(World world, Random random, int x, int y, int z)
+	{
+		if (random.nextFloat() < 0.45D)
+		{
+			markOrGrowMarked(world, x, y, z, random);
 		}
 	}
 
@@ -182,7 +208,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider
 	@Override
 	public int getRenderType()
 	{
-		return 1;
+		return RenderType.BUSH;
 	}
 
 	@Override

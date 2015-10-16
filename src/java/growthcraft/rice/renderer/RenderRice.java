@@ -8,12 +8,11 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 public class RenderRice implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {}
@@ -28,26 +27,11 @@ public class RenderRice implements ISimpleBlockRenderingHandler
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 
-			final IIcon[] tex = new IIcon[5];
-			for (int loop = 0; loop < 5; loop++)
-			{
-				tex[loop] = BlockRice.tex[loop];
-			}
-
-			switch (meta)
-			{
-				case 0: case 1: renderer.overrideBlockTexture = tex[0]; break;
-				case 2: case 3: renderer.overrideBlockTexture = tex[1]; break;
-				case 4: case 5: case 7: renderer.overrideBlockTexture = tex[2]; break;
-				case 6: renderer.overrideBlockTexture = tex[3]; break;
-				default: renderer.overrideBlockTexture = tex[2];
-			}
 			this.renderSquareRice(block, x, y, z, world, renderer);
-			renderer.clearOverrideBlockTexture();
 
-			if (meta == 7)
+			if (meta == BlockRice.RiceStage.MATURE)
 			{
-				renderer.overrideBlockTexture = tex[4];
+				renderer.overrideBlockTexture = block.getIcon(0, meta);
 				this.renderCrossedRice(block, x, y, z, world, renderer);
 				renderer.clearOverrideBlockTexture();
 			}
@@ -99,5 +83,4 @@ public class RenderRice implements ISimpleBlockRenderingHandler
 	{
 		return id;
 	}
-
 }

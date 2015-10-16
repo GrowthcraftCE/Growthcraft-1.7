@@ -9,6 +9,7 @@ import growthcraft.grapes.renderer.RenderGrapeVine1;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -44,24 +45,25 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase
 	@Override
 	protected boolean canUpdateGrowth(World world, int x, int y, int z)
 	{
-		return true;
+		return world.getBlockMetadata(x, y, z) == 0 || world.isAirBlock(x, y + 1, z);
 	}
 
 	@Override
 	protected void doGrowth(World world, int x, int y, int z, int meta)
 	{
+		final Block above = world.getBlock(x, y + 1, z);
 		/* Is there a rope block above this? */
-		if (meta == 0 && BlockCheck.isRope(world.getBlock(x, y + 1, z)))
+		if (BlockCheck.isRope(above))
 		{
 			incrementGrowth(world, x, y, z, meta);
 			world.setBlock(x, y + 1, z, GrowthCraftGrapes.grapeLeaves.getBlock(), 0, BlockFlags.UPDATE_CLIENT);
 		}
-		if (meta == 0 && world.isAirBlock(x, y + 1, z))
+		else if (world.isAirBlock(x, y + 1, z))
 		{
 			incrementGrowth(world, x, y, z, meta);
 			world.setBlock(x, y + 1, z, this, 0, BlockFlags.UPDATE_CLIENT);
 		}
-		else if (meta == 0 && GrowthCraftGrapes.grapeLeaves.getBlock() == world.getBlock(x, y + 1, z))
+		else if (GrowthCraftGrapes.grapeLeaves.getBlock() == above)
 		{
 			incrementGrowth(world, x, y, z, meta);
 		}
