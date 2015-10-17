@@ -52,6 +52,9 @@ public class BlockNetherPaddy extends BlockPaddyBase
 	{
 		entity.motionX *= 0.4D;
 		entity.motionZ *= 0.4D;
+
+		// set fire to the entity if they step into a filled lava paddy
+		if (filledPaddy) entity.setFire(15);
 	}
 
 	@Override
