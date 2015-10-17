@@ -22,6 +22,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
@@ -70,18 +71,7 @@ public class ItemBoozeBottle extends ItemFood
 	public ItemBoozeBottle setTipsy(float chance, int time)
 	{
 		this.tipsyBool = true;
-		if (chance > 1.0F)
-		{
-			this.tipsyChance = 1.0F;
-		}
-		else if (chance < 0.1F)
-		{
-			this.tipsyChance = 0.1F;
-		}
-		else
-		{
-			this.tipsyChance = chance;
-		}
+		this.tipsyChance = MathHelper.clamp_float(chance, 0.1F, 1.0F);
 		this.tipsyTime = time;
 		return this;
 	}
