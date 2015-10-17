@@ -37,7 +37,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockBeeBox extends BlockContainer
 {
 	@SideOnly(Side.CLIENT)
-	protected static IIcon[] tex;
+	protected IIcon[] icons;
 
 	private final float honeyCombSpawnRate = GrowthCraftBees.getConfig().beeBoxHoneyCombSpawnRate;
 	private final float honeySpawnRate = GrowthCraftBees.getConfig().beeBoxHoneySpawnRate;
@@ -48,15 +48,20 @@ public class BlockBeeBox extends BlockContainer
 
 	private Random rand = new Random();
 
-	public BlockBeeBox()
+	public BlockBeeBox(Material material)
 	{
-		super(Material.wood);
+		super(material);
 		this.isBlockContainer = true;
 		this.setTickRandomly(true);
 		this.setHardness(2.5F);
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("grc.beeBox");
 		this.setCreativeTab(GrowthCraftBees.tab);
+	}
+
+	public BlockBeeBox()
+	{
+		this(Material.wood);
 	}
 
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
@@ -449,14 +454,14 @@ public class BlockBeeBox extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[6 * 4];
+		icons = new IIcon[6 * 4];
 
 		for (int i = 0; i < 6; ++i)
 		{
-			tex[i * 4 + 0] = reg.registerIcon("grcbees:beebox_bottom_" + i);
-			tex[i * 4 + 1] = reg.registerIcon("grcbees:beebox_top_" + i);
-			tex[i * 4 + 2] = reg.registerIcon("grcbees:beebox_side_" + i);
-			tex[i * 4 + 3] = reg.registerIcon("grcbees:beebox_side_" + i + "_honey");
+			icons[i * 4 + 0] = reg.registerIcon("grcbees:beebox_bottom_" + i);
+			icons[i * 4 + 1] = reg.registerIcon("grcbees:beebox_top_" + i);
+			icons[i * 4 + 2] = reg.registerIcon("grcbees:beebox_side_" + i);
+			icons[i * 4 + 3] = reg.registerIcon("grcbees:beebox_side_" + i + "_honey");
 		}
 	}
 
@@ -469,20 +474,20 @@ public class BlockBeeBox extends BlockContainer
 		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 		if (side == 0)
 		{
-			return this.tex[offset];
+			return this.icons[offset];
 		}
 		else if (side == 1)
 		{
-			return this.tex[offset + 1];
+			return this.icons[offset + 1];
 		}
 		else
 		{
 			if (te != null && te.isHoneyEnough())
 			{
-				return this.tex[offset + 3];
+				return this.icons[offset + 3];
 			}
 		}
-		return this.tex[offset + 2];
+		return this.icons[offset + 2];
 	}
 
 	@Override
@@ -492,13 +497,13 @@ public class BlockBeeBox extends BlockContainer
 		final int offset = MathHelper.clamp_int(meta, 0, 5) * 4;
 		if (side == 0)
 		{
-			return this.tex[offset];
+			return this.icons[offset];
 		}
 		else if (side == 1)
 		{
-			return this.tex[offset + 1];
+			return this.icons[offset + 1];
 		}
-		return this.tex[offset + 2];
+		return this.icons[offset + 2];
 	}
 
 	/************

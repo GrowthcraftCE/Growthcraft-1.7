@@ -4,6 +4,7 @@ import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.cellar.Booze;
 import growthcraft.bees.block.BlockBeeBox;
 import growthcraft.bees.block.BlockBeeHive;
+import growthcraft.bees.block.BlockMaliceBeeBox;
 import growthcraft.bees.creativetab.CreativeTabsGrowthcraftBees;
 import growthcraft.bees.gui.GuiHandlerBees;
 import growthcraft.bees.item.ItemBee;
@@ -71,6 +72,7 @@ public class GrowthCraftBees
 	public static CreativeTabs tab;
 
 	public static BlockDefinition beeBox;
+	public static BlockDefinition maliceBeeBox;
 	public static BlockDefinition beeHive;
 	public static BlockBoozeDefinition[] honeyMeadFluids;
 	public static ItemDefinition honeyComb;
@@ -101,6 +103,7 @@ public class GrowthCraftBees
 		// INIT
 		//====================
 		beeBox  = new BlockDefinition(new BlockBeeBox());
+		maliceBeeBox  = new BlockDefinition(new BlockMaliceBeeBox());
 		beeHive = new BlockDefinition(new BlockBeeHive());
 
 		honeyComb = new ItemDefinition(new ItemHoneyComb());
@@ -118,11 +121,15 @@ public class GrowthCraftBees
 			.setPotionEffects(new int[] {Potion.regeneration.id}, new int[] {900}));
 		honeyMeadBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(honeyMeadBooze)
 			.setColor(config.honeyMeadColor));
+	}
 
+	private void register()
+	{
 		//====================
 		// REGISTRIES
 		//====================
 		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
+		GameRegistry.registerBlock(maliceBeeBox.getBlock(), "grc.maliceBeeBox");
 		GameRegistry.registerBlock(beeHive.getBlock(), "grc.beeHive");
 
 		GameRegistry.registerItem(honeyComb.getItem(), "grc.honeyComb");
@@ -166,8 +173,12 @@ public class GrowthCraftBees
 			GameRegistry.addRecipe(beeBox.asStack(1, i), new Object[] { " A ", "A A", "AAA", 'A', planks.asStack(1, i) });
 		}
 		GameRegistry.addRecipe(new ShapedOreRecipe(beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
+		// plankMaliceWood is registered by the Growthcraft|Nether module, and is a non-flammable plank
+		GameRegistry.addRecipe(new ShapedOreRecipe(maliceBeeBox.asStack(), " A ", "A A", "AAA", 'A', "plankMaliceWood"));
+
 		final ItemStack honeyStack = honeyComb.asStack(1, 1);
 		GameRegistry.addShapelessRecipe(honeyJar.asStack(), honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);
+
 		GameRegistry.addShapelessRecipe(honeyMeadBucket_deprecated.asStack(), Items.water_bucket, honeyJar.getItem(), Items.bucket);
 		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(), Items.water_bucket, honeyJar.getItem(), Items.bucket);
 
@@ -177,6 +188,7 @@ public class GrowthCraftBees
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
+		register();
 		proxy.initRenders();
 		proxy.initSounds();
 

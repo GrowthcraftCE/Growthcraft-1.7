@@ -4,6 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
+/*
+ * This ItemBlock is used for the vanilla wood variations of the BeeBox
+ */
 public class ItemBlockBeeBox extends ItemBlock
 {
 	public ItemBlockBeeBox(Block block)
