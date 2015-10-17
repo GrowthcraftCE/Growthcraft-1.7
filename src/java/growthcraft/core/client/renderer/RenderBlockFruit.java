@@ -1,6 +1,4 @@
-package growthcraft.apples.renderer;
-
-import growthcraft.apples.block.BlockApple;
+package growthcraft.core.client.renderer;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -12,18 +10,22 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-public class RenderApple implements ISimpleBlockRenderingHandler
+/**
+ * Renderer for block like fruits (Apples, Malice Fruits, etc..)
+ */
+public class RenderBlockFruit implements ISimpleBlockRenderingHandler
 {
 	public static int id = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
+		if (modelID != id) return;
+
 		final Tessellator tessellator = Tessellator.instance;
 		tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 		renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-		final int meta = 0;
-		final IIcon icon = BlockApple.tex[meta];
+		final IIcon icon = block.getIcon(0, metadata);
 		final double d = 0.0625D;
 		final double x = 0.0D;
 		final double y = 0.0D;
@@ -32,7 +34,7 @@ public class RenderApple implements ISimpleBlockRenderingHandler
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
 		// Size // 0, 1, 2
-		final int i0 = 1 * meta;
+		final int i0 = 1 * metadata;
 		// 4, 5, 6
 		final double d0 = 4.0D + (double)i0;
 		final double d1 = d0*d;
@@ -174,7 +176,7 @@ public class RenderApple implements ISimpleBlockRenderingHandler
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
 			final int meta = MathHelper.clamp_int(world.getBlockMetadata(x, y, z), 0, 2);
-			final IIcon icon = BlockApple.tex[meta];
+			final IIcon icon = block.getIcon(0, meta);
 			final double d = 0.0625D;
 
 			//Size
@@ -289,5 +291,4 @@ public class RenderApple implements ISimpleBlockRenderingHandler
 	{
 		return id;
 	}
-
 }

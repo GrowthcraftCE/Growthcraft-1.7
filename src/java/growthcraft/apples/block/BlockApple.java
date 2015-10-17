@@ -3,8 +3,8 @@ package growthcraft.apples.block;
 import java.util.Random;
 
 import growthcraft.apples.GrowthCraftApples;
-import growthcraft.apples.renderer.RenderApple;
 import growthcraft.core.block.ICropDataProvider;
+import growthcraft.core.client.renderer.RenderBlockFruit;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.core.utils.BlockFlags;
 
@@ -31,6 +31,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 		public static final int YOUNG = 0;
 		public static final int MID = 1;
 		public static final int MATURE = 2;
+		public static final int COUNT = 3;
 
 		private AppleStage() {}
 	}
@@ -55,15 +56,13 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
 	{
-		return (float)(meta / AppleStage.MATURE);
+		return (float)meta / (float)AppleStage.MATURE;
 	}
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
-		final int previousMetadata = meta;
-		++meta;
-		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_CLIENT);
-		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
+		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.UPDATE_CLIENT);
+		AppleCore.announceGrowthTick(this, world, x, y, z, meta);
 	}
 
 	/* IGrowable interface
@@ -232,7 +231,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	@Override
 	public int getRenderType()
 	{
-		return RenderApple.id;
+		return RenderBlockFruit.id;
 	}
 
 	@Override
@@ -271,11 +270,11 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 		final int meta = world.getBlockMetadata(x, y, z);
 		final float f = 0.0625F;
 
-		if (meta == 0)
+		if (meta == AppleStage.YOUNG)
 		{
 			this.setBlockBounds(6*f, 11*f, 6*f, 10*f, 15*f, 10*f);
 		}
-		else if (meta == 1)
+		else if (meta == AppleStage.MID)
 		{
 			this.setBlockBounds((float)(5.5*f), 10*f, (float)(5.5*f), (float)(10.5*f), 15*f, (float)(10.5*f));
 		}
