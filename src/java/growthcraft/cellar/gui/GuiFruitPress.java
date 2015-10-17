@@ -107,7 +107,7 @@ public class GuiFruitPress extends GuiCellar
 		final float b = (float)(color & 255) / 255.0F;
 		GL11.glColor4f(r, g, b, 1.0f);
 
-		this.drawTexturedModelRectFromIcon(w + wp, h + hp + 52 - amount, icon, width, amount);
+		if (icon != null) drawTexturedModelRectFromIcon(w + wp, h + hp + 52 - amount, icon, width, amount);
 
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	}
