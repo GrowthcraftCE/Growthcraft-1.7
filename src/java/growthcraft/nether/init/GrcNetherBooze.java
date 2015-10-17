@@ -39,9 +39,8 @@ public class GrcNetherBooze
 
 		this.fireBrandy = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, fireBrandyBooze)
 			.setColor(GrowthCraftNether.getConfig().fireBrandyColor)
-			// place holder --
 			.setTipsy(0.70F, 900)
-			.setPotionEffects(new int[] {Potion.digSpeed.id}, new int[] {3600}));
+			.setPotionEffects(new int[] {Potion.fireResistance.id}, new int[] {3600}));
 
 		this.maliceCider = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, maliceCiderBooze)
 			.setColor(GrowthCraftNether.getConfig().maliceCiderColor)
@@ -51,19 +50,26 @@ public class GrcNetherBooze
 
 	public void init()
 	{
-
+		register();
 	}
 
 	public void register()
 	{
 		BoozeRegistryHelper.registerBooze(fireBrandyBooze, fireBrandyFluids, fireBrandyBuckets, fireBrandy, "grcnether.fireBrandy", null);
 		BoozeRegistryHelper.registerBooze(maliceCiderBooze, maliceCiderFluids, maliceCiderBuckets, maliceCider, "grcnether.maliceCider", null);
+
+		CellarRegistry.instance().pressing().addPressing(GrowthCraftNether.blocks.netherCinderrot.getItem(), fireBrandyBooze[0], GrowthCraftNether.getConfig().fireBrandyPressingTime, 40, 0.3F);
 		CellarRegistry.instance().pressing().addPressing(GrowthCraftNether.items.netherMaliceFruit.getItem(), maliceCiderBooze[0], GrowthCraftNether.getConfig().maliceCiderPressingTime, 40, 0.3F);
 	}
 
 	public void setBoozeIcons(IIcon icon)
 	{
 		for (Booze booze : fireBrandyBooze)
+		{
+			booze.setIcons(icon);
+		}
+
+		for (Booze booze : maliceCiderBooze)
 		{
 			booze.setIcons(icon);
 		}
