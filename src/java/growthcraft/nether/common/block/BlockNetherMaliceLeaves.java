@@ -32,9 +32,9 @@ public class BlockNetherMaliceLeaves extends BlockLeavesBase implements IShearab
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
-	int[] adjacentTreeBlocks;
+	private int[] adjacentTreeBlocks;
 	private final int growth = GrowthCraftNether.getConfig().maliceLeavesGrowthRate;
 
 	public BlockNetherMaliceLeaves()
@@ -50,7 +50,10 @@ public class BlockNetherMaliceLeaves extends BlockLeavesBase implements IShearab
 
 	public void growFruit(World world, Random random, int x, int y, int z)
 	{
-
+		if (world.isAirBlock(x, y - 1, z))
+		{
+			world.setBlock(x, y - 1, z, GrowthCraftNether.blocks.netherMaliceFruit.getBlock());
+		}
 	}
 
 	/* Bonemeal? Client side */
@@ -312,17 +315,17 @@ public class BlockNetherMaliceLeaves extends BlockLeavesBase implements IShearab
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[2];
+		icons = new IIcon[2];
 
-		tex[0] = reg.registerIcon("leaves_oak");
-		tex[1] = reg.registerIcon("leaves_oak_opaque");
+		icons[0] = reg.registerIcon("leaves_oak");
+		icons[1] = reg.registerIcon("leaves_oak_opaque");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return this.tex[this.isOpaqueCube() ? 1 : 0];
+		return this.icons[this.isOpaqueCube() ? 1 : 0];
 	}
 
 	/************

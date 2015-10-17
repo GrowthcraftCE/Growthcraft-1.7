@@ -12,14 +12,14 @@ item.grcnether.netherSquashSeeds.name=Soul Squash Seeds
 item.grcnether.netherSquashSeeds.desc=Spooky looking seeds
 
 // Tiles
+tile.grcnether.netherMaliceLeaves.name=Malice Leaves
+tile.grcnether.netherMaliceLog.name=Malice Log
+tile.grcnether.netherMalicePlanks.name=Malice Planks
+tile.grcnether.netherMaliceSapling.name=Malice Sapling
 tile.grcnether.netherPaddyField.name=Lava Paddy
 tile.grcnether.netherPepper.name=Ghost Peppers
 tile.grcnether.netherSquash.name=Soul Squash
 tile.grcnether.netherSquashStem.name=Soul Squash Stem
-tile.grcnether.netherMaliceSapling.name=Malice Sapling
-tile.grcnether.netherMaliceLog.name=Malice Log
-tile.grcnether.netherMalicePlanks.name=Malice Planks
-tile.grcnether.netherMaliceLeaves.name=Malice Leaves
 
 // Booze
 /// Fire Brandy

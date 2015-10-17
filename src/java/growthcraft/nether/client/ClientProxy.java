@@ -4,5 +4,6 @@ import growthcraft.nether.common.CommonProxy;
 
 public class ClientProxy extends CommonProxy
 {
-	public ClientProxy() { super(); }
+	@Override
+	public void initRenders() {}
 }
