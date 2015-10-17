@@ -3,11 +3,14 @@ package growthcraft.nether.init;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.integration.NEI;
+import growthcraft.nether.common.block.BlockNetherBaalsRot;
+import growthcraft.nether.common.block.BlockNetherCinderrot;
 import growthcraft.nether.common.block.BlockNetherMaliceFruit;
 import growthcraft.nether.common.block.BlockNetherMaliceLeaves;
 import growthcraft.nether.common.block.BlockNetherMaliceLog;
 import growthcraft.nether.common.block.BlockNetherMalicePlanks;
 import growthcraft.nether.common.block.BlockNetherMaliceSapling;
+import growthcraft.nether.common.block.BlockNetherMuertecap;
 import growthcraft.nether.common.block.BlockNetherPaddy;
 import growthcraft.nether.common.block.BlockNetherPepper;
 import growthcraft.nether.common.block.BlockNetherSquash;
@@ -19,11 +22,14 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcNetherBlocks
 {
+	public BlockDefinition netherBaalsRot;
+	public BlockDefinition netherCinderrot;
 	public BlockDefinition netherMaliceFruit;
 	public BlockDefinition netherMaliceLeaves;
 	public BlockDefinition netherMaliceLog;
 	public BlockDefinition netherMalicePlanks;
 	public BlockDefinition netherMaliceSapling;
+	public BlockDefinition netherMuertecap;
 	public BlockDefinition netherPaddyField;
 	public BlockDefinition netherPaddyFieldFilled;
 	public BlockDefinition netherPepper;
@@ -34,11 +40,14 @@ public class GrcNetherBlocks
 
 	public void preInit()
 	{
+		this.netherBaalsRot = new BlockDefinition(new BlockNetherBaalsRot());
+		this.netherCinderrot = new BlockDefinition(new BlockNetherCinderrot());
 		this.netherMaliceFruit = new BlockDefinition(new BlockNetherMaliceFruit());
 		this.netherMaliceLeaves = new BlockDefinition(new BlockNetherMaliceLeaves());
 		this.netherMaliceLog = new BlockDefinition(new BlockNetherMaliceLog());
 		this.netherMalicePlanks = new BlockDefinition(new BlockNetherMalicePlanks());
 		this.netherMaliceSapling = new BlockDefinition(new BlockNetherMaliceSapling());
+		this.netherMuertecap = new BlockDefinition(new BlockNetherMuertecap());
 		this.netherPaddyField = new BlockDefinition(new BlockNetherPaddy(false));
 		this.netherPaddyFieldFilled = new BlockDefinition(new BlockNetherPaddy(true));
 		this.netherPepper = new BlockDefinition(new BlockNetherPepper());
@@ -54,20 +63,23 @@ public class GrcNetherBlocks
 
 	public void register()
 	{
+		GameRegistry.registerBlock(netherBaalsRot.getBlock(), "grcnether.netherBaalsRot");
 		GameRegistry.registerBlock(netherMaliceFruit.getBlock(), "grcnether.netherMaliceFruit");
 		GameRegistry.registerBlock(netherMaliceLeaves.getBlock(), "grcnether.netherMaliceLeaves");
 		GameRegistry.registerBlock(netherMaliceLog.getBlock(), "grcnether.netherMaliceLog");
 		GameRegistry.registerBlock(netherMalicePlanks.getBlock(), "grcnether.netherMalicePlanks");
 		GameRegistry.registerBlock(netherMaliceSapling.getBlock(), "grcnether.netherMaliceSapling");
+		GameRegistry.registerBlock(netherMuertecap.getBlock(), "grcnether.netherMuertecap");
 		GameRegistry.registerBlock(netherPaddyField.getBlock(), "grcnether.netherPaddyField");
 		GameRegistry.registerBlock(netherPaddyFieldFilled.getBlock(), "grcnether.netherPaddyFieldFilled");
 		GameRegistry.registerBlock(netherPepper.getBlock(), "grcnether.netherPepperBlock");
 		GameRegistry.registerBlock(netherSquash.getBlock(), "grcnether.netherSquash");
 		GameRegistry.registerBlock(netherSquashStem.getBlock(), "grcnether.netherSquashStem");
+		GameRegistry.registerBlock(netherCinderrot.getBlock(), "grcnether.netherCinderrot");
 
 		OreDictionary.registerOre("plankMaliceWood", netherMalicePlanks.getBlock());
 
-		NEI.hideItem(netherPepper.asStack());
+		NEI.hideItem(netherMuertecap.asStack());
 		NEI.hideItem(netherMaliceFruit.asStack());
 		NEI.hideItem(netherPaddyField.asStack());
 		NEI.hideItem(netherPaddyFieldFilled.asStack());

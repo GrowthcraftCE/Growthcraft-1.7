@@ -2,20 +2,23 @@
 itemGroup.tabGrowthCraftNether=Growthcraft Nether
 
 // Items
-item.grcnether.ectoplasm.name=Ectoplasm
 item.grcnether.ectoplasm.desc=It's the spooky stuff
-item.grcnether.netherPepper.name=Ghost Pepper
+item.grcnether.ectoplasm.name=Ectoplasm
+item.grcnether.netherMuertercap.name=Muertercap
 item.grcnether.netherPepper.desc=Its like an inferno in your mouth, but hotter
-item.grcnether.netherRashSpores.name=Nether Rash Spores
+item.grcnether.netherPepper.name=Ghost Pepper
 item.grcnether.netherRashSpores.desc=It burns, it itches, it spreads and well you know the rest
-item.grcnether.netherSquashSeeds.name=Soul Squash Seeds
+item.grcnether.netherRashSpores.name=Nether Rash Spores
 item.grcnether.netherSquashSeeds.desc=Spooky looking seeds
+item.grcnether.netherSquashSeeds.name=Soul Squash Seeds
 
 // Tiles
+tile.grcnether.netherBaalsRot.name=Baal's Rot
 tile.grcnether.netherMaliceLeaves.name=Malice Leaves
 tile.grcnether.netherMaliceLog.name=Malice Log
 tile.grcnether.netherMalicePlanks.name=Malice Planks
 tile.grcnether.netherMaliceSapling.name=Malice Sapling
+tile.grcnether.netherMuertercap.name=Muertercap
 tile.grcnether.netherPaddyField.name=Lava Paddy
 tile.grcnether.netherPepper.name=Ghost Peppers
 tile.grcnether.netherSquash.name=Soul Squash
@@ -69,3 +72,6 @@ fluid.grcnether.maliceCider0.modifier=Young
 fluid.grcnether.maliceCider1.modifier=Fermented
 fluid.grcnether.maliceCider2.modifier=Fermented, Potent
 fluid.grcnether.maliceCider3.modifier=Fermented, Extended
+
+// Death
+death.attack.muetercapFood=%s injested a Muertercap
