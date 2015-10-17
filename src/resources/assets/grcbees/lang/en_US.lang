@@ -1,13 +1,17 @@
-﻿itemGroup.tabGrowthCraftBees=Growthcraft Bees
+﻿// Creative Tab
+itemGroup.tabGrowthCraftBees=Growthcraft Bees
 
+// Tiles
 tile.grc.beeBox0.name=Oak Bee Box
 tile.grc.beeBox1.name=Spruce Bee Box
 tile.grc.beeBox2.name=Birch Bee Box
 tile.grc.beeBox3.name=Jungle Bee Box
 tile.grc.beeBox4.name=Acacia Bee Box
 tile.grc.beeBox5.name=Dark Oak Bee Box
+tile.grc.maliceBeeBox.name=Malice Bee Box
 tile.grc.beeHive.name=Bee Hive
 
+// Items
 item.grc.honeyComb.empty.name=Empty Honeycomb
 item.grc.honeyComb.full.name=Honeycomb
 item.grc.honeyJar.name=Honey
