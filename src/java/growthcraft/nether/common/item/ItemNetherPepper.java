@@ -5,9 +5,6 @@ import growthcraft.core.utils.ItemUtils;
 import growthcraft.nether.GrowthCraftNether;
 import growthcraft.nether.common.block.BlockNetherPepper;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -23,8 +20,9 @@ public class ItemNetherPepper extends Item implements IPlantable
 	public ItemNetherPepper()
 	{
 		super();
-		this.setUnlocalizedName("grcnether.netherPepper");
-		this.setCreativeTab(GrowthCraftNether.tab);
+		setUnlocalizedName("grcnether.netherPepper");
+		setTextureName("grcnether:pepper");
+		setCreativeTab(GrowthCraftNether.tab);
 	}
 
 	@Override
@@ -62,12 +60,5 @@ public class ItemNetherPepper extends Item implements IPlantable
 		}
 
 		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
-	{
-		this.itemIcon = reg.registerIcon("grcnether:pepper");
 	}
 }

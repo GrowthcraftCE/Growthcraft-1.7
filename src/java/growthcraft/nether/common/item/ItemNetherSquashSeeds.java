@@ -5,11 +5,8 @@ import growthcraft.core.utils.ItemUtils;
 import growthcraft.nether.GrowthCraftNether;
 import growthcraft.nether.common.block.BlockNetherSquashStem;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
@@ -23,8 +20,9 @@ public class ItemNetherSquashSeeds extends Item implements IPlantable
 	public ItemNetherSquashSeeds()
 	{
 		super();
-		this.setUnlocalizedName("grcnether.netherSquashSeeds");
-		this.setCreativeTab(GrowthCraftNether.tab);
+		setUnlocalizedName("grcnether.netherSquashSeeds");
+		setCreativeTab(GrowthCraftNether.tab);
+		setTextureName("grcnether:seeds_soulsquash");
 	}
 
 	@Override
@@ -62,12 +60,5 @@ public class ItemNetherSquashSeeds extends Item implements IPlantable
 		}
 
 		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
-	{
-		this.itemIcon = reg.registerIcon("grcnether:soulsquash_seeds");
 	}
 }
