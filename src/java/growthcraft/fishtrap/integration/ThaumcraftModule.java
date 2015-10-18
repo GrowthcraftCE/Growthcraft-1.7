@@ -40,6 +40,6 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Override
 	protected void integrate()
 	{
-		ThaumcraftApi.registerObjectTag(GrowthCraftFishTrap.fishTrap.asStack(), new AspectList().add(Aspect.WATER, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftFishTrap.fishTrap.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.WATER, 2).add(Aspect.VOID, 1).add(Aspect.TRAP, 2));
 	}
 }

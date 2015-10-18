@@ -44,23 +44,17 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	{
 		FMLInterModComms.sendMessage("Thaumcraft", "harvestStandardCrop", GrowthCraftRice.riceBlock.asStack(1, 7));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.rice.asStack(), new AspectList().add(Aspect.CROP, 2).add(Aspect.PLANT, 1).add(Aspect.HUNGER, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.rice.asStack(), new AspectList().add(Aspect.CROP, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceBall.asStack(), new AspectList().add(Aspect.ENTROPY, 11).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1));
 
-		for (int i = 0; i < GrowthCraftRice.riceSakeBooze.length; ++i)
-		{
-			if (i == 0)
-			{
-				ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSake.asStack(1, i), new AspectList().add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-				ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSakeBucket_deprecated.asStack(1, i), new AspectList().add(Aspect.WATER, 2));
-				ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSakeBuckets[i].asStack(), new AspectList().add(Aspect.WATER, 2));
-			}
-			else
-			{
-				final int m = i == 2 ? 4 : 2;
-				ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSake.asStack(1, i), new AspectList().add(Aspect.MAGIC, m).add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-				ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSakeBucket_deprecated.asStack(1, i), new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
-				ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSakeBuckets[i].asStack(), new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
-			}
-		}
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSake.asStack(1, 0), new AspectList().add(Aspect.WATER, 11));
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSake.asStack(1, 1), new AspectList().add(Aspect.FLIGHT, 3).add(Aspect.WATER, 11).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSake.asStack(1, 2), new AspectList().add(Aspect.FLIGHT, 6).add(Aspect.WATER, 11).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSake.asStack(1, 3), new AspectList().add(Aspect.FLIGHT, 3).add(Aspect.WATER, 11).add(Aspect.POISON, 2));
+
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSakeBuckets[0].asStack(1), new AspectList().add(Aspect.WATER, 11).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSakeBuckets[1].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 21).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSakeBuckets[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 21).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceSakeBuckets[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 21).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
 	}
 }
