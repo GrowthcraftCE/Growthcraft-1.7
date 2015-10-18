@@ -96,6 +96,21 @@ dependencies {
     compile "com.mod-buildcraft:buildcraft:${bc_version}:dev"
 }
 
+runClient {
+    if( project.hasProperty('mcUsername') && project.hasProperty('mcPassword') ) {
+        args "--username=${project.mcUsername}"
+        args "--password=${project.mcPassword}"
+    }
+
+}
+
+debugClient {
+    if( project.hasProperty('mcUsername') && project.hasProperty('mcPassword') ) {
+        args "--username=${project.mcUsername}"
+        args "--password=${project.mcPassword}"
+    }
+}
+
 // --------------------
 // extra jar section
 // -------------------
