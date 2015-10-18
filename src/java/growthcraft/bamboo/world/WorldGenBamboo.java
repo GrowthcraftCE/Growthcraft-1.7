@@ -20,9 +20,9 @@ public class WorldGenBamboo extends WorldGenerator
 	private final Block leaves = GrowthCraftBamboo.bambooLeaves.getBlock();
 	private final Block log = GrowthCraftBamboo.bambooStalk.getBlock();
 
-	public WorldGenBamboo(boolean par1)
+	public WorldGenBamboo(boolean doblocknotify)
 	{
-		super(par1);
+		super(doblocknotify);
 	}
 
 	public boolean generateClumps(World world, Random rand, int i, int j, int k)

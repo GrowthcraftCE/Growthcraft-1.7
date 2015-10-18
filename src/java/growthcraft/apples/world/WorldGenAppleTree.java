@@ -20,9 +20,9 @@ public class WorldGenAppleTree extends WorldGenerator
 	private final Block log         = Blocks.log;
 	private final Block leaves      = GrowthCraftApples.appleLeaves.getBlock();
 
-	public WorldGenAppleTree(boolean par1)
+	public WorldGenAppleTree(boolean doblocknotify)
 	{
-		super(par1);
+		super(doblocknotify);
 	}
 
 	public boolean generate(World world, Random random, int x, int y, int z)
