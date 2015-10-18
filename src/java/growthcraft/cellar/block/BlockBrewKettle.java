@@ -34,6 +34,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	public static IIcon[] tex;
 
 	private final Random rand = new Random();
+	private final boolean dropItemsInBrewKettle = GrowthCraftCellar.getConfig().dropItemsInBrewKettle;
 
 	public BlockBrewKettle()
 	{
@@ -47,13 +48,18 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
-		if (world.isRemote) return;
-		final TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
-		if (te != null)
+		if (dropItemsInBrewKettle)
 		{
-			if (entity instanceof EntityItem)
+			if (!world.isRemote)
 			{
-				te.tryMergeItemIntoMainSlot(((EntityItem)entity).getEntityItem());
+				final TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
+				if (te != null)
+				{
+					if (entity instanceof EntityItem)
+					{
+						te.tryMergeItemIntoMainSlot(((EntityItem)entity).getEntityItem());
+					}
+				}
 			}
 		}
 	}
