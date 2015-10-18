@@ -13,10 +13,74 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockCheck
 {
+	/* An extension of ForgeDirection, supports 26 directions */
+	public static enum BlockDirection
+	{
+		DOWN(0, -1, 0),
+		UP(0, 1, 0),
+		NORTH(0, 0, -1),
+		SOUTH(0, 0, 1),
+		WEST(-1, 0, 0),
+		EAST(1, 0, 0),
+		UNKNOWN(0, 0, 0),
+
+		NORTH_WEST(-1, 0, -1),
+		NORTH_EAST(1, 0, -1),
+		SOUTH_WEST(-1, 0, 1),
+		SOUTH_EAST(1, 0, 1),
+
+		DOWN_NORTH(0, -1, -1),
+		DOWN_SOUTH(0, -1, 1),
+		DOWN_WEST(-1, -1, 0),
+		DOWN_EAST(1, -1, 0),
+		DOWN_NORTH_WEST(-1, -1, -1),
+		DOWN_NORTH_EAST(1, -1, -1),
+		DOWN_SOUTH_WEST(-1, -1, 1),
+		DOWN_SOUTH_EAST(1, -1, 1),
+
+		UP_NORTH(0, 1, -1),
+		UP_SOUTH(0, 1, 1),
+		UP_WEST(-1, 1, 0),
+		UP_EAST(1, 1, 0),
+		UP_NORTH_WEST(-1, 1, -1),
+		UP_NORTH_EAST(1, 1, -1),
+		UP_SOUTH_WEST(-1, 1, 1),
+		UP_SOUTH_EAST(1, 1, 1);
+
+
+		public final int offsetX;
+		public final int offsetY;
+		public final int offsetZ;
+		public final int flag;
+
+		private BlockDirection(int x, int y, int z)
+		{
+			offsetX = x;
+			offsetY = y;
+			offsetZ = z;
+			flag = 1 << ordinal();
+		}
+	}
+
 	/**
 	 * 2D directions
 	 */
-	public static final ForgeDirection[] DIR4 = new ForgeDirection[] { ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST };
+	public static final ForgeDirection[] DIR4 = new ForgeDirection[] {
+		ForgeDirection.NORTH,
+		ForgeDirection.SOUTH,
+		ForgeDirection.WEST,
+		ForgeDirection.EAST
+	};
+	public static final BlockDirection[] DIR8 = new BlockDirection[] {
+		BlockDirection.NORTH,
+		BlockDirection.SOUTH,
+		BlockDirection.WEST,
+		BlockDirection.EAST,
+		BlockDirection.NORTH_WEST,
+		BlockDirection.NORTH_EAST,
+		BlockDirection.SOUTH_WEST,
+		BlockDirection.SOUTH_EAST
+	};
 
 	private BlockCheck() {}
 
@@ -29,6 +93,17 @@ public class BlockCheck
 	public static ForgeDirection randomDirection4(Random random)
 	{
 		return DIR4[random.nextInt(DIR4.length)];
+	}
+
+	/**
+	 * Randomly selects a direction from the DIR8 array and returns it
+	 *
+	 * @param random - random number generator
+	 * @return a random direction
+	 */
+	public static BlockDirection randomDirection8(Random random)
+	{
+		return DIR8[random.nextInt(DIR8.length)];
 	}
 
 	/**
