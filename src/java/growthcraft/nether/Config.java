@@ -18,7 +18,7 @@ public class Config extends ConfigBase
 	public float cinderrotSpreadRate = 0.2F;
 
 	public final int paddyFieldMax = 7;
-	public final int fireBrandyColor = 0xD43427;
+	public final int fireBrandyColor = 0xB22222;
 	public final int maliceCiderColor = 0xA99F6E;
 
 	protected void loadConfig()
