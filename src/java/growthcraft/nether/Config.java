@@ -15,7 +15,9 @@ public class Config extends ConfigBase
 	public int maliceCiderPressingTime = 20;
 	public int fireBrandyBrewTime = 20;
 
-	public float cinderrotSpreadRate = 0.2F;
+	public float cinderrotSpreadRate = 0.1F;
+	public float baalsRotSpreadRate = 0.1F;
+	public float muertecapSpreadRate = 0.1F;
 
 	public final int paddyFieldMax = 7;
 	public final int fireBrandyColor = 0xB22222;

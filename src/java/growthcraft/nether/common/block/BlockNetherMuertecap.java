@@ -6,24 +6,26 @@ import growthcraft.nether.GrowthCraftNether;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-public class BlockNetherMuertecap extends BlockBush
+public class BlockNetherMuertecap extends BlockNetherFungusBase
 {
+	private final float muertecapSpreadRate = GrowthCraftNether.getConfig().muertecapSpreadRate;
+
 	public BlockNetherMuertecap()
 	{
 		super();
 		setBlockName("grcnether.netherMuertecap");
 		setBlockTextureName("grcnether:muertecap");
+		setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 0.375F, 0.625F);
+		setCreativeTab(null);
 	}
 
-	protected boolean func_149854_a(Block block)
+	@Override
+	protected float getSpreadRate(World world, int x, int y, int z)
 	{
-		return Blocks.netherrack == block;
+		return muertecapSpreadRate;
 	}
 
 	@Override
@@ -43,11 +45,5 @@ public class BlockNetherMuertecap extends BlockBush
 	public int quantityDropped(Random random)
 	{
 		return 1;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
 	}
 }
