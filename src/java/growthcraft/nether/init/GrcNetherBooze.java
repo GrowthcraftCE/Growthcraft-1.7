@@ -11,6 +11,7 @@ import growthcraft.nether.GrowthCraftNether;
 
 import net.minecraft.potion.Potion;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class GrcNetherBooze
 {
@@ -58,7 +59,7 @@ public class GrcNetherBooze
 		BoozeRegistryHelper.registerBooze(fireBrandyBooze, fireBrandyFluids, fireBrandyBuckets, fireBrandy, "grcnether.fireBrandy", null);
 		BoozeRegistryHelper.registerBooze(maliceCiderBooze, maliceCiderFluids, maliceCiderBuckets, maliceCider, "grcnether.maliceCider", null);
 
-		CellarRegistry.instance().pressing().addPressing(GrowthCraftNether.blocks.netherCinderrot.getItem(), fireBrandyBooze[0], GrowthCraftNether.getConfig().fireBrandyPressingTime, 20, 0.3F);
+		CellarRegistry.instance().brew().addBrewing(FluidRegistry.WATER, GrowthCraftNether.blocks.netherCinderrot.getItem(), fireBrandyBooze[0], GrowthCraftNether.getConfig().fireBrandyBrewTime, 20, 0.5F);
 		CellarRegistry.instance().pressing().addPressing(GrowthCraftNether.items.netherMaliceFruit.getItem(), maliceCiderBooze[0], GrowthCraftNether.getConfig().maliceCiderPressingTime, 40, 0.3F);
 	}
 

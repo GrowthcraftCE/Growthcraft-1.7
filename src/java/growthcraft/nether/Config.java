@@ -13,7 +13,7 @@ public class Config extends ConfigBase
 	public int maliceLeavesGrowthRate = 25;
 	public int maliceSaplingGrowthRate = 7;
 	public int maliceCiderPressingTime = 20;
-	public int fireBrandyPressingTime = 20;
+	public int fireBrandyBrewTime = 20;
 
 	public float cinderrotSpreadRate = 0.2F;
 
