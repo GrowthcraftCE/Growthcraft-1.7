@@ -1,22 +1,21 @@
 package growthcraft.nether.common.block;
 
 import growthcraft.nether.GrowthCraftNether;
+import growthcraft.nether.utils.DamageSources;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 
-public class BlockNetherBaalsRot extends BlockBush
+public class BlockNetherKnifeBush extends BlockBush
 {
-	public BlockNetherBaalsRot()
+	public BlockNetherKnifeBush()
 	{
 		super();
-		setBlockName("grcnether.netherBaalsRot");
+		setBlockName("grcnether.netherKnifeBush");
 		setCreativeTab(GrowthCraftNether.tab);
-		setBlockTextureName("grcnether:baals_rot");
+		setBlockTextureName("grcnether:knife_bush");
 	}
 
 	@Override
@@ -25,7 +24,7 @@ public class BlockNetherBaalsRot extends BlockBush
 		if (world.isRemote) return;
 		if (entity instanceof EntityLivingBase)
 		{
-			((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.wither.id, 5));
+			((EntityLivingBase)entity).attackEntityFrom(DamageSources.knifeBush, 1.0F);
 		}
 	}
 

@@ -58,7 +58,7 @@ public class GrcNetherBooze
 		BoozeRegistryHelper.registerBooze(fireBrandyBooze, fireBrandyFluids, fireBrandyBuckets, fireBrandy, "grcnether.fireBrandy", null);
 		BoozeRegistryHelper.registerBooze(maliceCiderBooze, maliceCiderFluids, maliceCiderBuckets, maliceCider, "grcnether.maliceCider", null);
 
-		CellarRegistry.instance().pressing().addPressing(GrowthCraftNether.blocks.netherCinderrot.getItem(), fireBrandyBooze[0], GrowthCraftNether.getConfig().fireBrandyPressingTime, 40, 0.3F);
+		CellarRegistry.instance().pressing().addPressing(GrowthCraftNether.blocks.netherCinderrot.getItem(), fireBrandyBooze[0], GrowthCraftNether.getConfig().fireBrandyPressingTime, 20, 0.3F);
 		CellarRegistry.instance().pressing().addPressing(GrowthCraftNether.items.netherMaliceFruit.getItem(), maliceCiderBooze[0], GrowthCraftNether.getConfig().maliceCiderPressingTime, 40, 0.3F);
 	}
 

@@ -4,15 +4,16 @@ import net.minecraft.util.DamageSource;
 
 public class DamageSources
 {
-	static class DamageSourceMuertecap extends DamageSource
+	static class GrcDamageSource extends DamageSource
 	{
-		public DamageSourceMuertecap()
+		public GrcDamageSource(String str)
 		{
-			super("muertecapFood");
+			super(str);
 		}
 	}
 
-	public static final DamageSource muertecapFood = new DamageSourceMuertecap();
+	public static final DamageSource muertecapFood = new GrcDamageSource("muertecapFood");
+	public static final DamageSource knifeBush = new GrcDamageSource("knifeBush");
 
 	private DamageSources() {}
 }

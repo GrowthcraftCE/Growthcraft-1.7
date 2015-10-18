@@ -2,7 +2,6 @@ package growthcraft.nether.common.block;
 
 import java.util.Random;
 
-import growthcraft.core.utils.RenderType;
 import growthcraft.nether.GrowthCraftNether;
 
 import cpw.mods.fml.relauncher.Side;
@@ -44,12 +43,6 @@ public class BlockNetherMuertecap extends BlockBush
 	public int quantityDropped(Random random)
 	{
 		return 1;
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return RenderType.CROPS;
 	}
 
 	@Override

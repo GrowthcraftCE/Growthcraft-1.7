@@ -17,7 +17,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -86,6 +85,15 @@ public class BlockNetherMaliceLeaves extends BlockLeavesBase implements IShearab
 		if (!world.isRemote)
 		{
 			final int meta = world.getBlockMetadata(x, y, z);
+
+			if ((meta & 4) == 0)
+			{
+				// Spawn Fruit
+				if (world.rand.nextInt(this.growth) == 0)
+				{
+					growFruit(world, random, x, y, z);
+				}
+			}
 
 			if ((meta & LeavesStage.DECAY_MASK) != 0 && (meta & 4) == 0)
 			{
@@ -351,40 +359,21 @@ public class BlockNetherMaliceLeaves extends BlockLeavesBase implements IShearab
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
 	{
-		final double d0 = 1.0D;
-		final double d1 = 0.5D;
-		return ColorizerFoliage.getFoliageColor(d0, d1);
+		return 0xA99F6E;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderColor(int meta)
 	{
-		return ColorizerFoliage.getFoliageColorBasic();
+		return 0xA99F6E;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
-
-		int r = 0;
-		int g = 0;
-		int b = 0;
-
-		for (int l1 = -1; l1 <= 1; ++l1)
-		{
-			for (int i2 = -1; i2 <= 1; ++i2)
-			{
-				final int j2 = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
-				r += (j2 & 16711680) >> 16;
-				g += (j2 & 65280) >> 8;
-				b += j2 & 255;
-			}
-		}
-
-		return (r / 9 & 255) << 16 | (g / 9 & 255) << 8 | b / 9 & 255;
+		return 0xA99F6E;
 	}
 
 	/************

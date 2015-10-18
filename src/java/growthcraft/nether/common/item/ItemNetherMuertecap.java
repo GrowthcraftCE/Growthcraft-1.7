@@ -18,7 +18,7 @@ public class ItemNetherMuertecap extends ItemFood implements IPlantable
 	{
 		super(0, false);
 		setAlwaysEdible();
-		setUnlocalizedName("grcnether.muertecap");
+		setUnlocalizedName("grcnether.netherMuertecapFood");
 		setTextureName("grcnether:muertecap");
 		setCreativeTab(GrowthCraftNether.tab);
 	}

@@ -2,17 +2,24 @@ package growthcraft.nether.common.block;
 
 import java.util.Random;
 
+import growthcraft.core.utils.BlockCheck;
 import growthcraft.core.utils.BlockFlags;
-import growthcraft.core.utils.RenderType;
 import growthcraft.nether.GrowthCraftNether;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockNetherCinderrot extends BlockBush
+public class BlockNetherCinderrot extends BlockBush implements IPlantable
 {
+	private final float cinderrotSpreadRate = GrowthCraftNether.getConfig().cinderrotSpreadRate;
+
 	public BlockNetherCinderrot()
 	{
 		super();
@@ -28,6 +35,21 @@ public class BlockNetherCinderrot extends BlockBush
 	}
 
 	@Override
+	public boolean canBlockStay(World world, int x, int y, int z)
+	{
+		final Block soil = world.getBlock(x, y - 1, z);
+		return BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
+	}
+
+	public void growSelf(World world, int x, int y, int z)
+	{
+		if (world.isAirBlock(x, y, z) && canBlockStay(world, x, y, z))
+		{
+			world.setBlock(x, y, z, this, 0, BlockFlags.UPDATE_CLIENT);
+		}
+	}
+
+	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
 		if (!this.canBlockStay(world, x, y, z))
@@ -35,7 +57,7 @@ public class BlockNetherCinderrot extends BlockBush
 			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 			world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.UPDATE_CLIENT);
 		}
-		else if (random.nextInt(25) == 0)
+		else if (random.nextFloat() <= cinderrotSpreadRate)
 		{
 			int xo = random.nextInt(2);
 			int zo = random.nextInt(2);
@@ -45,23 +67,36 @@ public class BlockNetherCinderrot extends BlockBush
 
 			if (xo != 0 || zo != 0)
 			{
-				if (world.isAirBlock(x + xo, y, z + zo))
-				{
-					world.setBlock(x + xo, y, z + zo, this, 0, BlockFlags.UPDATE_CLIENT);
-				}
+				growSelf(world, x + xo, y, z + zo);
 			}
 		}
 	}
 
 	@Override
-	public int getRenderType()
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
-		return RenderType.CROPS;
+		if (world.isRemote) return;
+		entity.setFire(15);
 	}
 
 	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
+	}
+
+	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
+	{
+		return EnumPlantType.Nether;
+	}
+
+	public Block getPlant(IBlockAccess world, int x, int y, int z)
+	{
+		return this;
+	}
+
+	public int getPlantMetadata(IBlockAccess world, int x, int y, int z)
+	{
+		return 0;
 	}
 }
