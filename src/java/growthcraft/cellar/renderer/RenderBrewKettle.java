@@ -19,6 +19,8 @@ import net.minecraftforge.fluids.Fluid;
 public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 {
 	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	// original 0.71875F
+	private static final float FLUID_HEIGHT = 0.6875F;
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
@@ -97,7 +99,7 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 						b = (float)(color & 255) / 255.0F;
 						f = 1.0F;
 						tes.setColorOpaque_F(f * r, f * g, f * b);
-						f = (float)(te.getFluidAmount(i) * 0.71875F / te.getFluidTank(i).getCapacity());
+						f = (float)(te.getFluidAmount(i) * FLUID_HEIGHT / te.getFluidTank(i).getCapacity());
 						renderer.setRenderBounds(2 * d, 0.0D, 2 * d, 14*d, (double)((float)0.25F + f), 14 * d);
 						renderer.renderFaceYPos(block, (double)x, (double)y, (double)z, fluid.getIcon());
 					}
