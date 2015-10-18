@@ -19,6 +19,17 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 {
 	public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
+	private int mixedBrightness(IBlockAccess world, int x, int y, int z)
+	{
+		final int l = world.getLightBrightnessForSkyBlocks(x, y, z, 0);
+		final int i1 = world.getLightBrightnessForSkyBlocks(x, y + 1, z, 0);
+		final int j1 = l & 255;
+		final int k1 = i1 & 255;
+		final int l1 = l >> 16 & 255;
+		final int i2 = i1 >> 16 & 255;
+		return (j1 > k1 ? j1 : k1) | (l1 > i2 ? l1 : i2) << 16;
+	}
+
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
@@ -209,8 +220,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 				if (meta > 0)
 				{
 					final Tessellator tessellator = Tessellator.instance;
-					//tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
-					tessellator.setBrightness(this.mixedBrightness(world, x, y, z));
+					tessellator.setBrightness(mixedBrightness(world, x, y, z));
 
 					final float f = 1.0F;
 					final int color = this.colorMultiplier(world, x, y, z);
@@ -259,17 +269,6 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 		}
 
 		return (l / 9 & 255) << 16 | (i1 / 9 & 255) << 8 | j1 / 9 & 255;
-	}
-
-	private int mixedBrightness(IBlockAccess world, int x, int y, int z)
-	{
-		final int l = world.getLightBrightnessForSkyBlocks(x, y, z, 0);
-		final int i1 = world.getLightBrightnessForSkyBlocks(x, y + 1, z, 0);
-		final int j1 = l & 255;
-		final int k1 = i1 & 255;
-		final int l1 = l >> 16 & 255;
-		final int i2 = i1 >> 16 & 255;
-		return (j1 > k1 ? j1 : k1) | (l1 > i2 ? l1 : i2) << 16;
 	}
 
 	@Override
