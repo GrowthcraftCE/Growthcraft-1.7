@@ -33,6 +33,24 @@ public class ItemUtils
 		}
 	}
 
+	public static ItemStack[] clearInventorySlots(ItemStack[] invSlots, int expectedSize)
+	{
+		// avoid reallocating an existing ItemStack array
+		if (invSlots == null || invSlots.length != expectedSize)
+		{
+			return new ItemStack[expectedSize];
+		}
+		else
+		{
+			// clear it instead
+			for (int i = 0; i < invSlots.length; ++i)
+			{
+				invSlots[i] = null;
+			}
+		}
+		return invSlots;
+	}
+
 	public static ItemStack increaseStack(ItemStack itemstack, int amount)
 	{
 		itemstack.stackSize = MathHelper.clamp_int(itemstack.stackSize + amount, 0, itemstack.getMaxStackSize());
@@ -80,17 +98,16 @@ public class ItemUtils
 		}
 		else if (a != null && b == null)
 		{
-			return a.copy();
+			return a;
 		}
 		else
 		{
 			if (a.isItemEqual(b))
 			{
 				final int newSize = MathHelper.clamp_int(a.stackSize + b.stackSize, 0, a.getMaxStackSize());
-				final ItemStack result = a.copy();
 				b.stackSize -= newSize - a.stackSize;
-				result.stackSize = newSize;
-				return result;
+				a.stackSize = newSize;
+				return a;
 			}
 		}
 		return null;

@@ -4,6 +4,7 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.container.ContainerFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.utils.NBTHelper;
+import growthcraft.core.utils.ItemUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -23,6 +24,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class TileEntityFermentBarrel extends TileEntity implements ISidedInventory, IFluidHandler
 {
 	// Constants
+	private static final int[] accessableSlotIds = new int[] {0};
 
 	// Other Vars.
 	protected int time;
@@ -253,7 +255,7 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 	{
-		return new int[] {0};
+		return accessableSlotIds;
 	}
 
 	@Override
@@ -271,13 +273,22 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	/************
 	 * NBT
 	 ************/
+
+	/**
+	 * @param nbt - nbt data to load
+	 */
+	protected void readInventorySlotsFromNBT(NBTTagCompound nbt)
+	{
+		this.invSlots = ItemUtils.clearInventorySlots(invSlots, getSizeInventory());
+		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 		// INVENTORY
-		this.invSlots = new ItemStack[this.getSizeInventory()];
-		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
+		readInventorySlotsFromNBT(nbt);
 
 		//TANKS
 		readTankFromNBT(nbt);

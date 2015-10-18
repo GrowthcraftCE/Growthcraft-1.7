@@ -27,6 +27,9 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityBrewKettle extends TileEntity implements ISidedInventory, IFluidHandler
 {
+	private static final int[] rawSlotIDs = new int[] {0, 1};
+	private static final int[] residueSlotIDs = new int[] {0};
+
 	// Other Vars.
 	protected float residue;
 	protected int time;
@@ -224,10 +227,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 			this.invSlots[index] = null;
 			return itemstack;
 		}
-		else
-		{
-			return null;
-		}
+		return null;
 	}
 
 	@Override
@@ -276,7 +276,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	{
 		// 0 = raw
 		// 1 = residue
-		return side == 0 ? new int[] {0, 1} : new int[] {0};
+		return side == 0 ? rawSlotIDs : residueSlotIDs;
 	}
 
 	@Override
@@ -291,16 +291,26 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 		return side != 0 || index == 1;
 	}
 
+
 	/************
 	 * NBT
 	 ************/
+
+	/**
+	 * @param nbt - nbt data to load
+	 */
+	protected void readInventorySlotsFromNBT(NBTTagCompound nbt)
+	{
+		this.invSlots = ItemUtils.clearInventorySlots(invSlots, getSizeInventory());
+		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 		// INVENTORY
-		this.invSlots = new ItemStack[this.getSizeInventory()];
-		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
+		readInventorySlotsFromNBT(nbt);
 
 		//TANK
 		readTankFromNBT(nbt);

@@ -306,12 +306,21 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	/************
 	 * NBT
 	 ************/
+
+	/**
+	 * @param nbt - nbt data to load
+	 */
+	protected void readInventorySlotsFromNBT(NBTTagCompound nbt)
+	{
+		this.invSlots = ItemUtils.clearInventorySlots(invSlots, getSizeInventory());
+		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		this.invSlots = new ItemStack[this.getSizeInventory()];
-		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
+		readInventorySlotsFromNBT(nbt);
 		this.time = nbt.getShort("time");
 		if (nbt.hasKey("name"))
 		{

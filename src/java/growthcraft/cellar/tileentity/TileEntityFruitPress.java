@@ -4,6 +4,7 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.PressingRegistry;
 import growthcraft.cellar.container.ContainerFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.utils.ItemUtils;
 import growthcraft.core.utils.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -276,6 +277,13 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		return side != 0 || index == 1;
 	}
 
+	/************
+	 * NBT
+	 ************/
+
+	/**
+	 * @param nbt - nbt data to load
+	 */
 	protected void readTankFromNBT(NBTTagCompound nbt)
 	{
 		this.tank = new CellarTank(this.maxCap, this);
@@ -285,17 +293,22 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		}
 	}
 
-	/************
-	 * NBT
-	 ************/
+	/**
+	 * @param nbt - nbt data to load
+	 */
+	protected void readInventorySlotsFromNBT(NBTTagCompound nbt)
+	{
+		this.invSlots = ItemUtils.clearInventorySlots(invSlots, getSizeInventory());
+		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		// INVENTORY
-		this.invSlots = new ItemStack[this.getSizeInventory()];
-		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
 
+		// INVENTORY
+		readInventorySlotsFromNBT(nbt);
 		// TANKS
 		readTankFromNBT(nbt);
 
