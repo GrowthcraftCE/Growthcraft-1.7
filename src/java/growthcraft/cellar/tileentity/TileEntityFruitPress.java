@@ -251,8 +251,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	{
 		if (index == 1)
 		{
-			return itemstack.getItem() == GrowthCraftCellar.residue.getItem() &&
-				itemstack.getItemDamage() == GrowthCraftCellar.residue.getItemDamage();
+			return GrowthCraftCellar.residue.isItemEqual(itemstack);
 		}
 		return true;
 	}

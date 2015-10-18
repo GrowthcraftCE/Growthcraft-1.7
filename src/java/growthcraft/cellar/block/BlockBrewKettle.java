@@ -44,6 +44,20 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 		this.setCreativeTab(GrowthCraftCellar.tab);
 	}
 
+	@Override
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+	{
+		if (world.isRemote) return;
+		final TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
+		if (te != null)
+		{
+			if (entity instanceof EntityItem)
+			{
+				te.tryMergeItemIntoMainSlot(((EntityItem)entity).getEntityItem());
+			}
+		}
+	}
+
 	/************
 	 * TRIGGERS
 	 ************/

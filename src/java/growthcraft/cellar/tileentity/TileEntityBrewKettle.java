@@ -5,6 +5,7 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.container.ContainerBrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.utils.NBTHelper;
+import growthcraft.core.utils.ItemUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -203,6 +204,17 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 		}
 	}
 
+	// Attempts to merge the given itemstack into the main slot
+	public ItemStack tryMergeItemIntoMainSlot(ItemStack itemstack)
+	{
+		final ItemStack result = ItemUtils.mergeStacks(getStackInSlot(0), itemstack);
+		if (result != null)
+		{
+			invSlots[0] = result;
+		}
+		return result;
+	}
+
 	@Override
 	public ItemStack getStackInSlotOnClosing(int index)
 	{
@@ -256,7 +268,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
 	{
-		return index == 1 ? itemstack.getItem() == GrowthCraftCellar.residue.getItem() && itemstack.getItemDamage() == GrowthCraftCellar.residue.getItemDamage() : true;
+		return index == 1 ? GrowthCraftCellar.residue.isItemEqual(itemstack) : true;
 	}
 
 	@Override

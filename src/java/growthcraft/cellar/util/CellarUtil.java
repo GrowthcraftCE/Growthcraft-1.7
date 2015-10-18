@@ -18,8 +18,7 @@ public class CellarUtil
 	{
 		if (stack != null)
 		{
-			return GrowthCraftCellar.residue.getItem() == stack.getItem() &&
-				GrowthCraftCellar.residue.getItemDamage() == stack.getItemDamage();
+			return GrowthCraftCellar.residue.isItemEqual(stack);
 		}
 		return false;
 	}
