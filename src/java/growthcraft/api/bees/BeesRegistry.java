@@ -15,8 +15,8 @@ public class BeesRegistry
 	 *
 	 * Yes, it's the same functons/methods as Forge's tall grass hook.
 	 */
-
 	private static final BeesRegistry instance = new BeesRegistry();
+	private static final int NO_META = -1;
 	private final List<Item> beesList = new ArrayList<Item>();
 	private final List<List> flowersList = new ArrayList<List>();
 
@@ -59,6 +59,16 @@ public class BeesRegistry
 	}
 
 	/**
+	 * Flower wildcard
+	 *
+	 * @param flower - Block to be registered.
+	 */
+	public void addFlower(Block flower)
+	{
+		addFlower(flower, NO_META);
+	}
+
+	/**
 	 * @param itemstack - an itemstack to check
 	 * @return Does the provided itemstack contain any known bees?
 	 */
@@ -74,6 +84,6 @@ public class BeesRegistry
 
 	public boolean isBlockFlower(Block block, int meta)
 	{
-		return this.flowersList.contains(Arrays.asList(block, meta));
+		return this.flowersList.contains(Arrays.asList(block, meta)) || this.flowersList.contains(Arrays.asList(block, NO_META));
 	}
 }

@@ -144,10 +144,8 @@ public class GrowthCraftBees
 		//CellarRegistry.instance().addBoozeAlternative(FluidRegistry.LAVA, honeyMeadBooze[0]);
 
 		BeesRegistry.instance().addBee(bee.getItem());
-		for (int i = 0; i < 9; ++i) {
-			BeesRegistry.instance().addFlower(Blocks.red_flower, i);
-		}
-		BeesRegistry.instance().addFlower(Blocks.yellow_flower, 0);
+		BeesRegistry.instance().addFlower(Blocks.red_flower);
+		BeesRegistry.instance().addFlower(Blocks.yellow_flower);
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);
 
