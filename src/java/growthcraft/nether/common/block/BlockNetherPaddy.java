@@ -48,11 +48,11 @@ public class BlockNetherPaddy extends BlockPaddyBase
 		}
 	}
 
-    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
-    {
-        entity.motionX *= 0.4D;
-        entity.motionZ *= 0.4D;
-    }
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+	{
+		entity.motionX *= 0.4D;
+		entity.motionZ *= 0.4D;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
