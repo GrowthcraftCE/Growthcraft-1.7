@@ -66,6 +66,36 @@ public class ItemUtils
 		return consumeItem(itemstack, 1);
 	}
 
+	public static ItemStack mergeStacks(ItemStack a, ItemStack b)
+	{
+		if (a == null && b == null)
+		{
+			return null;
+		}
+		else if (a == null && b != null)
+		{
+			final ItemStack result = b.copy();
+			b.stackSize = 0;
+			return result;
+		}
+		else if (a != null && b == null)
+		{
+			return a.copy();
+		}
+		else
+		{
+			if (a.isItemEqual(b))
+			{
+				final int newSize = MathHelper.clamp_int(a.stackSize + b.stackSize, 0, a.getMaxStackSize());
+				final ItemStack result = a.copy();
+				b.stackSize -= newSize - a.stackSize;
+				result.stackSize = newSize;
+				return result;
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * Is this an amazing stick of waaaaaaat
 	 *
