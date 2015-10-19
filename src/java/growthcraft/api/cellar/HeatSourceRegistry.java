@@ -9,12 +9,12 @@ import net.minecraft.block.Block;
 
 public class HeatSourceRegistry implements IHeatSourceRegistry
 {
-	class HeatMap extends HashMap<Integer, Float>
+	static class HeatMap extends HashMap<Integer, Float>
 	{
 		public static final long serialVersionUID = 1L;
 	}
 
-	class HeatSourceTree extends HashMap<Block, HeatMap>
+	static class HeatSourceTree extends HashMap<Block, HeatMap>
 	{
 		public static final long serialVersionUID = 1L;
 	}
