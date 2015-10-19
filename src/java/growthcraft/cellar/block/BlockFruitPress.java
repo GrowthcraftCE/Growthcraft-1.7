@@ -262,6 +262,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 		icons[5] = reg.registerIcon("grccellar:fruit_press_metal_side");
 	}
 
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconByIndex(int index)
 	{
 		return icons[index];

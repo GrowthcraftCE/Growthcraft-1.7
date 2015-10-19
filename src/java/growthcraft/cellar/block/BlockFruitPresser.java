@@ -235,6 +235,7 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 		icons[3] = reg.registerIcon("planks_oak");
 	}
 
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconByIndex(int index)
 	{
 		return icons[index];

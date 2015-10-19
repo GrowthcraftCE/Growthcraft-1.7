@@ -211,6 +211,7 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 		icons[3] = reg.registerIcon("grccellar:fermentbarrel_3");
 	}
 
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconByIndex(int index)
 	{
 		return icons[index];

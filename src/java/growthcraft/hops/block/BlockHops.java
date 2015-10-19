@@ -368,7 +368,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	}
 
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconForRender(int index)
+	public IIcon getIconByIndex(int index)
 	{
 		return icons[index];
 	}

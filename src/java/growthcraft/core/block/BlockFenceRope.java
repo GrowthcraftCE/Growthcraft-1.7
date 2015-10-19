@@ -114,6 +114,7 @@ public class BlockFenceRope extends Block implements IBlockRope
 		icons[2] = reg.registerIcon("grccore:rope_1");
 	}
 
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconByIndex(int index)
 	{
 		return icons[index];

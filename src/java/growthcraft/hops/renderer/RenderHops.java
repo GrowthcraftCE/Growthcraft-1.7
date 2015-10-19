@@ -48,7 +48,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 				final Block blockBelow = world.getBlock(x, y - 1, z);
 				if (meta == 0 || hopsBlock != blockBelow)
 				{
-					renderer.setOverrideBlockTexture(hopsBlock.getIconForRender(2));
+					renderer.setOverrideBlockTexture(hopsBlock.getIconByIndex(2));
 					renderer.renderCrossedSquares(block, x, y, z);
 					renderer.clearOverrideBlockTexture();
 				}
@@ -60,7 +60,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 			{
 				if (meta == 3)
 				{
-					icon = hopsBlock.getIconForRender(3);
+					icon = hopsBlock.getIconByIndex(3);
 
 					minU = (double)icon.getMinU();
 					maxU = (double)icon.getMaxU();
@@ -218,7 +218,7 @@ public class RenderHops implements ISimpleBlockRenderingHandler
 
 			//Render Ropes
 			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-			icon = hopsBlock.getIconForRender(4);
+			icon = hopsBlock.getIconByIndex(4);
 
 			final boolean flag = hopsBlock.canConnectRopeTo(world, x, y, z - 1);
 			final boolean flag1 = hopsBlock.canConnectRopeTo(world, x, y, z + 1);

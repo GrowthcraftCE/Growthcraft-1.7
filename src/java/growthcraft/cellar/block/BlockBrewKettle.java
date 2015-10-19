@@ -184,6 +184,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 		icons[3] = reg.registerIcon("grccellar:brewkettle_3");
 	}
 
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconByIndex(int index)
 	{
 		return icons[index];

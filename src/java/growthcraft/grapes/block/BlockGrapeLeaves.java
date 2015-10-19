@@ -272,6 +272,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 		icons[3] = reg.registerIcon("grcgrapes:leaves_half");
 	}
 
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconByIndex(int index)
 	{
 		return icons[index];
