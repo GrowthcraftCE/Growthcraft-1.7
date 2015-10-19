@@ -122,6 +122,12 @@ debugClient {
 // extra jar section
 // -------------------
 
+tasks.withType(JavaCompile) {
+    options.compilerArgs += ['-Xlint:all', '-Xlint:-rawtypes', '-Xlint:deprecation', '-Xlint:-unchecked']
+    options.deprecation = true
+    options.encoding = 'utf8'
+}
+
 // add a source jar
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
