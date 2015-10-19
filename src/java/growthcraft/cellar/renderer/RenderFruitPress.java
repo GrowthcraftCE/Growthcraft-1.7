@@ -184,12 +184,12 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 
-			renderer.uvRotateEast   = 1;
-			renderer.uvRotateWest   = 1;
-			renderer.uvRotateSouth  = 1;
-			renderer.uvRotateNorth  = 1;
-			renderer.uvRotateTop    = 1;
-			renderer.uvRotateBottom = 1;
+			//renderer.uvRotateEast   = 1;
+			//renderer.uvRotateWest   = 1;
+			//renderer.uvRotateSouth  = 1;
+			//renderer.uvRotateNorth  = 1;
+			//renderer.uvRotateTop    = 1;
+			//renderer.uvRotateBottom = 1;
 
 			// Render Piston Supports
 			if (m == 0)
@@ -232,7 +232,7 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 			renderer.uvRotateTop    = 0;
 			renderer.uvRotateBottom = 0;
 
-			renderer.setOverrideBlockTexture(fruitPress.getIconByIndex(1));
+			renderer.setOverrideBlockTexture(fruitPress.getIconByIndex(3));
 
 			// Render Bin - Metal Rings
 			renderMetalRings(renderer, block, x, y, z,  7.5*d,  9.5*d);

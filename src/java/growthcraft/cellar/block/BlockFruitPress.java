@@ -306,10 +306,14 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		this.icons = new IIcon[2];
+		this.icons = new IIcon[6];
 
-		icons[0] = reg.registerIcon("planks_oak");
-		icons[1] = reg.registerIcon("anvil_base");
+		icons[0] = reg.registerIcon("grccellar:fruit_press_wood_bottom");
+		icons[1] = reg.registerIcon("grccellar:fruit_press_wood_top");
+		icons[2] = reg.registerIcon("grccellar:fruit_press_wood_side");
+		icons[3] = reg.registerIcon("grccellar:fruit_press_metal_bottom");
+		icons[4] = reg.registerIcon("grccellar:fruit_press_metal_top");
+		icons[5] = reg.registerIcon("grccellar:fruit_press_metal_side");
 	}
 
 	public IIcon getIconByIndex(int index)
@@ -321,7 +325,15 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return icons[0];
+		if (side == 0)
+		{
+			return icons[0];
+		}
+		else if (side == 1)
+		{
+			return icons[1];
+		}
+		return icons[2];
 	}
 
 	/************
