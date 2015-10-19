@@ -21,6 +21,7 @@ public class RenderBambooFence implements ISimpleBlockRenderingHandler
 	{
 		if (modelID == id)
 		{
+			final BlockBambooFence bambooFence = (BlockBambooFence)block;
 			final Tessellator tessellator = Tessellator.instance;
 			final IIcon[] icon = new IIcon[6];
 			float f2;
@@ -67,12 +68,12 @@ public class RenderBambooFence implements ISimpleBlockRenderingHandler
 				{
 					renderer.uvRotateTop = 1;
 					renderer.uvRotateBottom = 1;
-					icon[0] = BlockBambooFence.tex[0];
-					icon[1] = BlockBambooFence.tex[0];
-					icon[2] = BlockBambooFence.tex[1];
-					icon[3] = BlockBambooFence.tex[1];
-					icon[4] = BlockBambooFence.tex[1];
-					icon[5] = BlockBambooFence.tex[1];
+					icon[0] = bambooFence.getIconByIndex(0);
+					icon[1] = bambooFence.getIconByIndex(0);
+					icon[2] = bambooFence.getIconByIndex(1);
+					icon[3] = bambooFence.getIconByIndex(1);
+					icon[4] = bambooFence.getIconByIndex(1);
+					icon[5] = bambooFence.getIconByIndex(1);
 				}
 
 				if (loop == 2 || loop == 3)
@@ -81,7 +82,7 @@ public class RenderBambooFence implements ISimpleBlockRenderingHandler
 					renderer.uvRotateBottom = 0;
 					for (int l = 0; l < 6; ++l)
 					{
-						icon[l] = BlockBambooFence.tex[2];
+						icon[l] = bambooFence.getIconByIndex(2);
 					}
 				}
 
@@ -126,12 +127,12 @@ public class RenderBambooFence implements ISimpleBlockRenderingHandler
 		{
 			float f = 0.375F;
 			float f1 = 0.625F;
+			final BlockBambooFence blk = (BlockBambooFence)block;
 			renderer.setRenderBounds((double)f, 0.0D, (double)f, (double)f1, 1.0D, (double)f1);
 			renderer.renderStandardBlock(block, x, y, z);
-			renderer.setOverrideBlockTexture(BlockBambooFence.tex[2]);
+			renderer.setOverrideBlockTexture(blk.getIconByIndex(2));
 			boolean flag1 = false;
 			boolean flag2 = false;
-			final BlockBambooFence blk = (BlockBambooFence) block;
 
 			final Block idXneg = world.getBlock(x - 1, y, z);
 			final Block idXpos = world.getBlock(x + 1, y, z);

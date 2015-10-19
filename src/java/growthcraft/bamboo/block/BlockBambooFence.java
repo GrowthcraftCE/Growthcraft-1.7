@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 public class BlockBambooFence extends Block
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	public BlockBambooFence()
 	{
@@ -48,14 +48,23 @@ public class BlockBambooFence extends Block
 	{
 		final Block block = world.getBlock(x, y, z);
 
-		if (block != this && block != Blocks.fence_gate && block != GrowthCraftBamboo.bambooFenceGate.getBlock() && block != GrowthCraftBamboo.bambooWall.getBlock() && block != GrowthCraftBamboo.bambooStalk.getBlock())
-		{
-			return block != null && block.getMaterial().isOpaque() && block.renderAsNormalBlock() ? block.getMaterial() != Material.gourd : false;
-		}
-		else
+		if (this == block ||
+			Blocks.fence_gate == block ||
+			Blocks.nether_brick_fence == block ||
+			GrowthCraftBamboo.bambooFenceGate.isSameAs(block) ||
+			GrowthCraftBamboo.bambooWall.isSameAs(block) ||
+			GrowthCraftBamboo.bambooStalk.isSameAs(block))
 		{
 			return true;
 		}
+		else
+		{
+			if (block != null && block.getMaterial().isOpaque() && block.renderAsNormalBlock())
+			{
+				return block.getMaterial() != Material.gourd;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -71,18 +80,24 @@ public class BlockBambooFence extends Block
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[3];
+		this.icons = new IIcon[3];
 
-		tex[0] = reg.registerIcon("grcbamboo:fence_top");
-		tex[1] = reg.registerIcon("grcbamboo:fence");
-		tex[2] = reg.registerIcon("grcbamboo:block");
+		icons[0] = reg.registerIcon("grcbamboo:fence_top");
+		icons[1] = reg.registerIcon("grcbamboo:fence");
+		icons[2] = reg.registerIcon("grcbamboo:block");
+	}
+
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconByIndex(int index)
+	{
+		return icons[index];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return side == 1 ? tex[0] : ( side == 0 ? tex[0] : tex[1]);
+		return side == 1 ? icons[0] : ( side == 0 ? icons[0] : icons[1]);
 	}
 
 	/************
