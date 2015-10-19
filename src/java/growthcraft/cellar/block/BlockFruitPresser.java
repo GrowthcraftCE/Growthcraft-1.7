@@ -7,7 +7,7 @@ import growthcraft.cellar.renderer.RenderFruitPresser;
 import growthcraft.cellar.tileentity.TileEntityFruitPresser;
 import growthcraft.core.block.IRotatableBlock;
 import growthcraft.core.block.IWrenchable;
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -6,9 +6,9 @@ import java.util.HashMap;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.world.WorldGenBamboo;
-import growthcraft.core.utils.SchemaToVillage.BlockEntry;
-import growthcraft.core.utils.SchemaToVillage.IBlockEntries;
-import growthcraft.core.utils.SchemaToVillage;
+import growthcraft.core.util.SchemaToVillage.BlockEntry;
+import growthcraft.core.util.SchemaToVillage.IBlockEntries;
+import growthcraft.core.util.SchemaToVillage;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

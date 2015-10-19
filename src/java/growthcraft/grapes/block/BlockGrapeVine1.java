@@ -2,8 +2,8 @@ package growthcraft.grapes.block;
 
 import java.util.List;
 
-import growthcraft.core.utils.BlockCheck;
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.core.util.BlockFlags;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.renderer.RenderGrapeVine1;
 

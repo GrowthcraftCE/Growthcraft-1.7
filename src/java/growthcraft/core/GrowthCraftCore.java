@@ -13,7 +13,7 @@ import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.item.ItemRope;
-import growthcraft.core.utils.ItemUtils;
+import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;

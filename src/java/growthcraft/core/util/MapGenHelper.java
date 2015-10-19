@@ -1,4 +1,4 @@
-package growthcraft.core.utils;
+package growthcraft.core.util;
 
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureVillagePieces;

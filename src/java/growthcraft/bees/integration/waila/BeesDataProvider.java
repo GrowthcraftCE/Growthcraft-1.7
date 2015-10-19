@@ -3,8 +3,8 @@ package growthcraft.bees.integration.waila;
 import java.util.List;
 
 import growthcraft.bees.tileentity.TileEntityBeeBox;
-import growthcraft.bees.utils.TagFormatterBeeBox;
-import growthcraft.core.utils.NBTHelper;
+import growthcraft.bees.util.TagFormatterBeeBox;
+import growthcraft.core.util.NBTHelper;
 
 import cpw.mods.fml.common.Optional;
 

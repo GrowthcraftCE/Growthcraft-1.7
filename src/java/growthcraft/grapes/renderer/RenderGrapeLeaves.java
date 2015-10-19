@@ -1,6 +1,6 @@
 package growthcraft.grapes.renderer;
 
-import growthcraft.core.utils.RenderUtils;
+import growthcraft.core.util.RenderUtils;
 import growthcraft.grapes.block.BlockGrapeLeaves;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;

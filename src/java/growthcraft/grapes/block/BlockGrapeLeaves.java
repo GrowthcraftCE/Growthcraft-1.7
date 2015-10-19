@@ -4,11 +4,11 @@ import java.util.Random;
 
 import growthcraft.core.block.IBlockRope;
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.utils.BlockCheck;
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.core.util.BlockFlags;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.renderer.RenderGrapeLeaves;
-import growthcraft.grapes.utils.GrapeBlockCheck;
+import growthcraft.grapes.util.GrapeBlockCheck;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

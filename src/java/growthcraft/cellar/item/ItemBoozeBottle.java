@@ -4,7 +4,7 @@ import java.util.List;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.utils.UnitFormatter;
+import growthcraft.core.util.UnitFormatter;
 import growthcraft.core.Utils;
 
 import cpw.mods.fml.relauncher.Side;

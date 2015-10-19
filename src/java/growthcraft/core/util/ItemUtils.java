@@ -1,4 +1,4 @@
-package growthcraft.core.utils;
+package growthcraft.core.util;
 
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.item.IGrcWrench;

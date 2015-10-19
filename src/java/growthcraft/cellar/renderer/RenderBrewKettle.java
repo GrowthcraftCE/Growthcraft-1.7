@@ -4,7 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import growthcraft.cellar.block.BlockBrewKettle;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
-import growthcraft.core.utils.RenderUtils;
+import growthcraft.core.util.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;

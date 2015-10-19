@@ -13,12 +13,12 @@ import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
 import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
-import growthcraft.cellar.utils.BoozeRegistryHelper;
+import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
-import growthcraft.core.utils.MapGenHelper;
+import growthcraft.core.util.MapGenHelper;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;

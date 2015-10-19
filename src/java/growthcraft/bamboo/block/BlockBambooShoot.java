@@ -5,9 +5,9 @@ import java.util.Random;
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.world.WorldGenBamboo;
 import growthcraft.core.block.ICropDataProvider;
-import growthcraft.core.utils.BlockCheck;
-import growthcraft.core.utils.BlockFlags;
-import growthcraft.core.utils.RenderType;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.core.util.BlockFlags;
+import growthcraft.core.util.RenderType;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

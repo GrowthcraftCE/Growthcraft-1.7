@@ -1,7 +1,7 @@
 package growthcraft.grapes.event;
 
-import growthcraft.core.utils.BlockCheck;
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.core.util.BlockFlags;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.block.BlockGrapeVine0;
 import growthcraft.grapes.block.BlockGrapeVine1;

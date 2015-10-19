@@ -6,12 +6,12 @@ import growthcraft.cellar.block.BlockFruitPresser;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.utils.TagFormatterBrewKettle;
-import growthcraft.cellar.utils.TagFormatterFruitPress;
-import growthcraft.cellar.utils.TagFormatterFermentBarrel;
-import growthcraft.core.utils.ConstID;
-import growthcraft.core.utils.NBTHelper;
-import growthcraft.core.utils.TagFormatterFluidHandler;
+import growthcraft.cellar.util.TagFormatterBrewKettle;
+import growthcraft.cellar.util.TagFormatterFruitPress;
+import growthcraft.cellar.util.TagFormatterFermentBarrel;
+import growthcraft.core.util.ConstID;
+import growthcraft.core.util.NBTHelper;
+import growthcraft.core.util.TagFormatterFluidHandler;
 
 import cpw.mods.fml.common.Optional;
 

@@ -1,7 +1,7 @@
 package growthcraft.core.client.renderer;
 
 import growthcraft.core.block.BlockFenceRope;
-import growthcraft.core.utils.RenderUtils;
+import growthcraft.core.util.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;

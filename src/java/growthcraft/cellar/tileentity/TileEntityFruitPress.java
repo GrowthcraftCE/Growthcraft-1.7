@@ -1,12 +1,13 @@
 package growthcraft.cellar.tileentity;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.PressingRegistry;
+import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.cellar.pressing.PressingRegistry;
+import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.container.ContainerFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.utils.ItemUtils;
-import growthcraft.api.cellar.util.FluidUtils;
-import growthcraft.core.utils.NBTHelper;
+import growthcraft.core.util.ItemUtils;
+import growthcraft.core.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
@@ -43,42 +44,6 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	private CellarTank tank = new CellarTank(this.maxCap, this);
 	private String name;
 
-	/************
-	 * UPDATE
-	 ************/
-	@Override
-	public void updateEntity()
-	{
-		super.updateEntity();
-		if (update)
-		{
-			update = false;
-			this.markDirty();
-		}
-
-		if (!this.worldObj.isRemote)
-		{
-			if (this.canPress())
-			{
-				++this.time;
-
-				if (this.time == CellarRegistry.instance().pressing().getPressingTime(this.invSlots[0]))
-				{
-					this.time = 0;
-					this.pressItem();
-				}
-			}
-			else
-			{
-				this.time = 0;
-			}
-
-			update = true;
-		}
-
-		//debugMsg();
-	}
-
 	private void debugMsg()
 	{
 		if (this.worldObj.isRemote)
@@ -107,26 +72,27 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		return stack.isFluidEqual(getFluidStack());
 	}
 
+	private boolean pomaceBool()
+	{
+		if (this.invSlots[1] == null) return true;
+		if (!this.invSlots[1].isItemEqual(GrowthCraftCellar.residue)) return false;
+		final int result = invSlots[1].stackSize + GrowthCraftCellar.residue.stackSize;
+		return result <= getInventoryStackLimit() &&
+			result <= GrowthCraftCellar.residue.getMaxStackSize();
+	}
+
 	public void pressItem()
 	{
 		final PressingRegistry pressing = CellarRegistry.instance().pressing();
-		final float f = pressing.getPressingResidue(this.invSlots[0]);
-		this.pomace = this.pomace + f;
+		final Residue residue = pressing.getPressingResidue(this.invSlots[0]);
+		this.pomace = this.pomace + residue.pomaceRate;
 		if (this.pomace >= 1.0F)
 		{
 			this.pomace = this.pomace - 1.0F;
 
-			if (this.pomaceBool())
-			{
-				if (this.invSlots[1] == null)
-				{
-					this.invSlots[1] = GrowthCraftCellar.residue.copy();
-				}
-				else if (this.invSlots[1].isItemEqual(GrowthCraftCellar.residue))
-				{
-					this.invSlots[1].stackSize += GrowthCraftCellar.residue.stackSize;
-				}
-			}
+			final ItemStack residueResult = ItemUtils.mergeStacks(this.invSlots[1], residue.residueItem);
+
+			if (residueResult != null) invSlots[1] = residueResult;
 		}
 
 		final FluidStack fluidstack = pressing.getPressingFluidStack(this.invSlots[0]);
@@ -143,23 +109,55 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		//this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 	}
 
-	private boolean pomaceBool()
+	public int getPressingTime()
 	{
-		if (this.invSlots[1] == null) return true;
-		if (!this.invSlots[1].isItemEqual(GrowthCraftCellar.residue)) return false;
-		final int result = invSlots[1].stackSize + GrowthCraftCellar.residue.stackSize;
-		return result <= getInventoryStackLimit() &&
-			result <= GrowthCraftCellar.residue.getMaxStackSize();
+		return CellarRegistry.instance().pressing().getPressingTime(this.invSlots[0]);
 	}
 
 	public int getPressProgressScaled(int par1)
 	{
 		if (this.canPress())
 		{
-			return this.time * par1 / CellarRegistry.instance().pressing().getPressingTime(this.invSlots[0]);
+			return this.time * par1 / getPressingTime();
 		}
 
 		return 0;
+	}
+
+	/************
+	 * UPDATE
+	 ************/
+	@Override
+	public void updateEntity()
+	{
+		super.updateEntity();
+		if (update)
+		{
+			update = false;
+			this.markDirty();
+		}
+
+		if (!this.worldObj.isRemote)
+		{
+			if (this.canPress())
+			{
+				++this.time;
+
+				if (this.time >= getPressingTime())
+				{
+					this.time = 0;
+					this.pressItem();
+				}
+			}
+			else
+			{
+				this.time = 0;
+			}
+
+			update = true;
+		}
+
+		//debugMsg();
 	}
 
 	/************

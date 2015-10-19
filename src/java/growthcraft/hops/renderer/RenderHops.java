@@ -1,6 +1,6 @@
 package growthcraft.hops.renderer;
 
-import growthcraft.core.utils.RenderUtils;
+import growthcraft.core.util.RenderUtils;
 import growthcraft.hops.block.BlockHops;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;

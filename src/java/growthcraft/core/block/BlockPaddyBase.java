@@ -3,8 +3,8 @@ package growthcraft.core.block;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.core.utils.ItemUtils;
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.ItemUtils;
+import growthcraft.core.util.BlockFlags;
 import growthcraft.core.client.ClientProxy;
 import growthcraft.core.client.renderer.RenderPaddy;
 

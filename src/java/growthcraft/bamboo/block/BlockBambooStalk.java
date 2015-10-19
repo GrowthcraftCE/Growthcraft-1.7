@@ -5,8 +5,8 @@ import java.util.Random;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.renderer.RenderBamboo;
-import growthcraft.core.utils.BlockCheck;
-import growthcraft.core.utils.RenderUtils;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.core.util.RenderUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

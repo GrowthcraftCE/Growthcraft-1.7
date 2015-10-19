@@ -5,7 +5,7 @@ import java.util.Random;
 import growthcraft.apples.GrowthCraftApples;
 import growthcraft.apples.world.WorldGenAppleTree;
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.BlockFlags;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;

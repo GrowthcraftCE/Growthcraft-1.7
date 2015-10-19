@@ -4,7 +4,7 @@ import java.util.Random;
 
 import growthcraft.api.fishtrap.FishTrapRegistry;
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.utils.BlockCheck;
+import growthcraft.core.util.BlockCheck;
 import growthcraft.core.Utils;
 import growthcraft.fishtrap.entity.TileEntityFishTrap;
 import growthcraft.fishtrap.GrowthCraftFishTrap;

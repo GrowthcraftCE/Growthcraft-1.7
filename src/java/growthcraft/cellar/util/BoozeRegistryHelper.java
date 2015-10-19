@@ -1,4 +1,4 @@
-package growthcraft.cellar.utils;
+package growthcraft.cellar.util;
 
 import javax.annotation.Nullable;
 

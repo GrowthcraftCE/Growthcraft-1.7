@@ -8,8 +8,8 @@ import growthcraft.core.block.IBlockRope;
 import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.AppleCore;
-import growthcraft.core.utils.BlockCheck;
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.core.util.BlockFlags;
 import growthcraft.hops.GrowthCraftHops;
 import growthcraft.hops.renderer.RenderHops;
 

@@ -1,4 +1,4 @@
-package growthcraft.grapes.utils;
+package growthcraft.grapes.util;
 
 import growthcraft.grapes.GrowthCraftGrapes;
 

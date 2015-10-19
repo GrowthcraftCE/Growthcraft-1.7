@@ -1,10 +1,10 @@
-package growthcraft.cellar.utils;
+package growthcraft.cellar.util;
 
 import java.util.List;
 
-import growthcraft.core.utils.ITagFormatter;
-import growthcraft.core.utils.TagFormatterItem;
-import growthcraft.core.utils.UnitFormatter;
+import growthcraft.core.util.ITagFormatter;
+import growthcraft.core.util.TagFormatterItem;
+import growthcraft.core.util.UnitFormatter;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;

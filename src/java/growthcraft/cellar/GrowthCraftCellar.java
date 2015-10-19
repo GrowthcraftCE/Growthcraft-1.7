@@ -23,7 +23,7 @@ import growthcraft.core.AchievementPageGrowthcraft;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.integration.NEI;
-import growthcraft.core.utils.MapGenHelper;
+import growthcraft.core.util.MapGenHelper;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;

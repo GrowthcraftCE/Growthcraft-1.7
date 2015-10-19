@@ -2,7 +2,7 @@ package growthcraft.core.event;
 
 import growthcraft.core.block.IRotatableBlock;
 import growthcraft.core.block.IWrenchable;
-import growthcraft.core.utils.ItemUtils;
+import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;

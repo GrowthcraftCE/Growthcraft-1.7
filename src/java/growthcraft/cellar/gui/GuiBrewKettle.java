@@ -9,7 +9,7 @@ import growthcraft.cellar.network.PacketClearTankButtonWByte;
 import growthcraft.cellar.network.PacketSwitchTankButton;
 import growthcraft.cellar.tileentity.CellarTank;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
-import growthcraft.core.utils.UnitFormatter;
+import growthcraft.core.util.UnitFormatter;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;

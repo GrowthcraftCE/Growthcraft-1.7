@@ -1,4 +1,4 @@
-package growthcraft.rice.utils;
+package growthcraft.rice.util;
 
 import growthcraft.rice.GrowthCraftRice;
 

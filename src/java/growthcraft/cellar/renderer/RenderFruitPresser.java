@@ -1,7 +1,7 @@
 package growthcraft.cellar.renderer;
 
 import growthcraft.cellar.block.BlockFruitPresser;
-import growthcraft.core.utils.RenderUtils;
+import growthcraft.core.util.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;

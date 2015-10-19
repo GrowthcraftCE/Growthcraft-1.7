@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.HashMap;
 
-import growthcraft.core.utils.SchemaToVillage.BlockEntry;
-import growthcraft.core.utils.SchemaToVillage.IBlockEntries;
-import growthcraft.core.utils.SchemaToVillage;
+import growthcraft.core.util.SchemaToVillage.BlockEntry;
+import growthcraft.core.util.SchemaToVillage.IBlockEntries;
+import growthcraft.core.util.SchemaToVillage;
 import growthcraft.rice.GrowthCraftRice;
 
 import net.minecraft.block.Block;

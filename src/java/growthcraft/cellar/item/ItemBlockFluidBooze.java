@@ -3,7 +3,7 @@ package growthcraft.cellar.item;
 import java.util.List;
 
 import growthcraft.cellar.block.BlockFluidBooze;
-import growthcraft.core.utils.UnitFormatter;
+import growthcraft.core.util.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -1,4 +1,4 @@
-package growthcraft.core.utils;
+package growthcraft.core.util;
 
 import java.util.Map;
 import java.util.Random;

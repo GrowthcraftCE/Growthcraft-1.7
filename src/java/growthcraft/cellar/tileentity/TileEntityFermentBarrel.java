@@ -3,8 +3,8 @@ package growthcraft.cellar.tileentity;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.container.ContainerFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.utils.NBTHelper;
-import growthcraft.core.utils.ItemUtils;
+import growthcraft.core.util.NBTHelper;
+import growthcraft.core.util.ItemUtils;
 import growthcraft.api.cellar.util.FluidUtils;
 
 import net.minecraft.entity.player.EntityPlayer;

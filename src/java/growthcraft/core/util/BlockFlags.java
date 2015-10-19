@@ -1,4 +1,4 @@
-package growthcraft.core.utils;
+package growthcraft.core.util;
 
 /**
  * Constant space for block flags, use these instead of magic numbers

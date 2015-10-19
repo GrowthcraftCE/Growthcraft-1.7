@@ -3,7 +3,7 @@ package growthcraft.core.event;
 import java.util.HashMap;
 import java.util.Map;
 
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.BlockFlags;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;

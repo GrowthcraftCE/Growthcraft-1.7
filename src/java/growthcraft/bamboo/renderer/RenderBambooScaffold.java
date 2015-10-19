@@ -1,6 +1,6 @@
 package growthcraft.bamboo.renderer;
 
-import growthcraft.core.utils.RenderUtils;
+import growthcraft.core.util.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;

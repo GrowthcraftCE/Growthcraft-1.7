@@ -1,4 +1,4 @@
-package growthcraft.core.utils;
+package growthcraft.core.util;
 
 /**
  * Place any "Magic Numbers" in this class, so we don't have to play the

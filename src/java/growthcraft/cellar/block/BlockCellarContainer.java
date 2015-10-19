@@ -3,8 +3,8 @@ package growthcraft.cellar.block;
 import growthcraft.core.block.IDroppableBlock;
 import growthcraft.core.block.IRotatableBlock;
 import growthcraft.core.block.IWrenchable;
-import growthcraft.core.utils.BlockFlags;
-import growthcraft.core.utils.ItemUtils;
+import growthcraft.core.util.BlockFlags;
+import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

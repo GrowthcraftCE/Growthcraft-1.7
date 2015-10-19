@@ -6,8 +6,8 @@ import java.util.List;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.inventory.ContainerBeeBox;
-import growthcraft.core.utils.ItemUtils;
-import growthcraft.core.utils.NBTHelper;
+import growthcraft.core.util.ItemUtils;
+import growthcraft.core.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;

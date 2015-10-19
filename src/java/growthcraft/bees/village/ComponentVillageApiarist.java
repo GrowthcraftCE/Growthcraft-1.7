@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.core.utils.SchemaToVillage.BlockEntry;
-import growthcraft.core.utils.SchemaToVillage.IBlockEntries;
-import growthcraft.core.utils.SchemaToVillage.MultiBlockEntries;
-import growthcraft.core.utils.SchemaToVillage;
+import growthcraft.core.util.SchemaToVillage.BlockEntry;
+import growthcraft.core.util.SchemaToVillage.IBlockEntries;
+import growthcraft.core.util.SchemaToVillage.MultiBlockEntries;
+import growthcraft.core.util.SchemaToVillage;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

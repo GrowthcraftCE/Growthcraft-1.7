@@ -2,7 +2,7 @@ package growthcraft.rice.item;
 
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.rice.GrowthCraftRice;
-import growthcraft.rice.utils.RiceBlockCheck;
+import growthcraft.rice.util.RiceBlockCheck;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

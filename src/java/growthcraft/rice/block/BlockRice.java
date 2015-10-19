@@ -6,10 +6,10 @@ import java.util.Random;
 import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.block.IPaddyCrop;
 import growthcraft.core.integration.AppleCore;
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.BlockFlags;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.renderer.RenderRice;
-import growthcraft.rice.utils.RiceBlockCheck;
+import growthcraft.rice.util.RiceBlockCheck;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;

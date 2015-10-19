@@ -1,7 +1,7 @@
 package growthcraft.hops.item;
 
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.utils.BlockCheck;
+import growthcraft.core.util.BlockCheck;
 import growthcraft.hops.GrowthCraftHops;
 
 import cpw.mods.fml.relauncher.Side;
