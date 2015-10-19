@@ -15,12 +15,6 @@
 	<module name="NewlineAtEndOfFile"/>
 
 	<module name="TreeWalker">
-		<!-- http://stackoverflow.com/questions/28458846/how-to-require-tab-indentation-with-checkstyle -->
-		<module name="RegexpSinglelineJava">
-			<property name="format" value="^\t* "/>
-			<property name="message" value="Indent must use tab characters"/>
-			<property name="ignoreComments" value="true"/>
-		</module>
 		<module name="ArrayTypeStyle">
 			<property name="javaStyle" value="true"/>
 		</module>
@@ -54,6 +48,13 @@
 			<property name="allowPublicImmutableFields" value="true"/>
 		</module> -->
 		<!-- Rules that are treated as errors -->
+		<!-- http://stackoverflow.com/questions/28458846/how-to-require-tab-indentation-with-checkstyle -->
+		<module name="RegexpSinglelineJava">
+			<property name="format" value="^\t* "/>
+			<property name="message" value="Indent must use tab characters"/>
+			<property name="ignoreComments" value="true"/>
+			<property name="severity" value="error"/>
+		</module>
 		<module name="PackageDeclaration">
 			<property name="severity" value="error"/>
 		</module>
