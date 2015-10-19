@@ -61,7 +61,7 @@ ext.thaumcraftApi = "api/thaumcraft/api"
 ext.thaumcraftApiExclusionPattern = "**/thaumcraft/api/**"
 
 minecraft {
-    version = "1.7.10-10.13.4.1448-1.7.10"
+    version = minecraft_forge_version
     runDir = "run"
     replace '@VERSION@', project.version
     replace '@MC_VERSION@', version
