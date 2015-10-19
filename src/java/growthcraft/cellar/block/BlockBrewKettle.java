@@ -10,7 +10,6 @@ import growthcraft.core.Utils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -20,7 +19,6 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -33,7 +31,6 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
-	private final Random rand = new Random();
 	private final boolean dropItemsInBrewKettle = GrowthCraftCellar.getConfig().dropItemsInBrewKettle;
 
 	public BlockBrewKettle()
@@ -140,55 +137,6 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 		{
 			((TileEntityBrewKettle)world.getTileEntity(x, y, z)).setGuiDisplayName(stack.getDisplayName());
 		}
-	}
-
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int par6)
-	{
-		final TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
-
-		if (te != null)
-		{
-			for (int index = 0; index < te.getSizeInventory(); ++index)
-			{
-				final ItemStack stack = te.getStackInSlot(index);
-
-				if (stack != null)
-				{
-					final float f = this.rand.nextFloat() * 0.8F + 0.1F;
-					final float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-					final float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-
-					while (stack.stackSize > 0)
-					{
-						int k1 = this.rand.nextInt(21) + 10;
-
-						if (k1 > stack.stackSize)
-						{
-							k1 = stack.stackSize;
-						}
-
-						stack.stackSize -= k1;
-						final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
-
-						if (stack.hasTagCompound())
-						{
-							entityitem.getEntityItem().setTagCompound((NBTTagCompound)stack.getTagCompound().copy());
-						}
-
-						final float f3 = 0.05F;
-						entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
-						entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
-						entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
-						world.spawnEntityInWorld(entityitem);
-					}
-				}
-			}
-
-			world.func_147453_f(x, y, z, block);
-		}
-
-		super.breakBlock(world, x, y, z, block, par6);
 	}
 
 	/************

@@ -14,11 +14,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -30,8 +28,6 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
-
-	private final Random rand = new Random();
 
 	public BlockFruitPress()
 	{
@@ -168,55 +164,6 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 		{
 			world.func_147480_a(x, y, z, true);
 		}
-	}
-
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int par6)
-	{
-		final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
-
-		if (te != null)
-		{
-			for (int index = 0; index < te.getSizeInventory(); ++index)
-			{
-				final ItemStack stack = te.getStackInSlot(index);
-
-				if (stack != null)
-				{
-					final float f = this.rand.nextFloat() * 0.8F + 0.1F;
-					final float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-					final float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-
-					while (stack.stackSize > 0)
-					{
-						int k1 = this.rand.nextInt(21) + 10;
-
-						if (k1 > stack.stackSize)
-						{
-							k1 = stack.stackSize;
-						}
-
-						stack.stackSize -= k1;
-						final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
-
-						if (stack.hasTagCompound())
-						{
-							entityitem.getEntityItem().setTagCompound((NBTTagCompound)stack.getTagCompound().copy());
-						}
-
-						final float f3 = 0.05F;
-						entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
-						entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
-						entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
-						world.spawnEntityInWorld(entityitem);
-					}
-				}
-			}
-
-			world.func_147453_f(x, y, z, block);
-		}
-
-		super.breakBlock(world, x, y, z, block, par6);
 	}
 
 	/************
