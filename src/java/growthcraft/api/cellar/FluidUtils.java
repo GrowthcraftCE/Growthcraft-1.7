@@ -2,6 +2,7 @@ package growthcraft.api.cellar;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class FluidUtils
 {
@@ -27,5 +28,31 @@ public class FluidUtils
 			}
 		}
 		return true;
+	}
+
+	public static FluidStack replaceFluidStack(int fluidId, FluidStack srcStack)
+	{
+		final Fluid fluid = FluidRegistry.getFluid(fluidId);
+		if (fluid == null)
+		{
+			// An invalid fluid
+			return null;
+		}
+
+		if (srcStack == null)
+		{
+			return new FluidStack(fluid, 0);
+		}
+		return new FluidStack(fluid, srcStack.amount);
+	}
+
+	public static FluidStack updateFluidStackAmount(FluidStack srcStack, int amount)
+	{
+		if (srcStack == null)
+		{
+			return new FluidStack(FluidRegistry.WATER, amount);
+		}
+		srcStack.amount = amount;
+		return srcStack;
 	}
 }

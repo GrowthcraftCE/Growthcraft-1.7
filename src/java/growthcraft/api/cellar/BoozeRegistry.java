@@ -7,6 +7,7 @@ import java.util.Map;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 /**
  * Example Usage: Creating Boozes
@@ -139,8 +140,14 @@ public class BoozeRegistry
 	// BOOZE /////////////////////////////////////////////////////////
 	public boolean isFluidBooze(Fluid f)
 	{
-		//return this.boozeMap.get(f.getID()) != null;
+		if (f == null) return false;
 		return this.boozeMap.get(f.getID()) != null || this.isAlternateBooze(f);
+	}
+
+	public boolean isFluidBooze(FluidStack fluidStack)
+	{
+		if (fluidStack == null) return false;
+		return isFluidBooze(fluidStack.getFluid());
 	}
 
 	public boolean areFluidsBooze(Fluid[] fluid)
@@ -192,7 +199,7 @@ public class BoozeRegistry
 	{
 		if (this.areFluidsBooze(f))
 		{
-			return (String)this.boozeNames.get(f);
+			return this.boozeNames.get(f);
 		}
 		return "";
 	}
@@ -226,5 +233,10 @@ public class BoozeRegistry
 			return FluidRegistry.getFluid(this.altBoozeMap.get(f.getID()));
 		}
 		return f;
+	}
+
+	public FluidStack maybeAlternateBoozeStack(FluidStack stack)
+	{
+		return new FluidStack(maybeAlternateBooze(stack.getFluid()), stack.amount);
 	}
 }

@@ -125,12 +125,12 @@ public class PressingRegistry
 		{
 			return null;
 		}
-		final PressResults ret = (PressResults)pressingList.get(Arrays.asList(itemstack.getItem(), itemstack.getItemDamage()));
+		final PressResults ret = pressingList.get(Arrays.asList(itemstack.getItem(), itemstack.getItemDamage()));
 		if (ret != null)
 		{
 			return ret;
 		}
-		return (PressResults)pressingList.get(Arrays.asList(itemstack.getItem(), NO_META));
+		return pressingList.get(Arrays.asList(itemstack.getItem(), NO_META));
 	}
 
 	public FluidStack getPressingFluidStack(ItemStack itemstack)
