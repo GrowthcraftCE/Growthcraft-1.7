@@ -13,6 +13,8 @@ cache:
 before_install:
 # ensure we have ruby
 - ruby --version
+# fetch 3rd party apis and such
+- git submodule update --init
 - chmod +x gradlew
 
 install: ./gradlew setupCIWorkspace -S

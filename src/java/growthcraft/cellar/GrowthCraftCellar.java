@@ -203,5 +203,6 @@ public class GrowthCraftCellar
 		packetPipeline.postInitialise();
 		MinecraftForge.EVENT_BUS.register(new ItemCraftedEventCellar());
 		MinecraftForge.EVENT_BUS.register(new LivingUpdateEventCellar());
+		new growthcraft.cellar.integration.ThaumcraftModule().init();
 	}
 }

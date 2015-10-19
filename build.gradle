@@ -54,6 +54,12 @@ version = "${minecraft_version}-${growthcraft_version}"
 group= "mod.growthcraft"
 archivesBaseName = "growthcraft"
 
+ext.growthcraftApi = 'src/java/growthcraft/api'
+
+// 3rd party APIs
+ext.thaumcraftApi = "api/thaumcraft/api"
+ext.thaumcraftApiExclusionPattern = "**/thaumcraft/api/**"
+
 minecraft {
     version = "1.7.10-10.13.4.1448-1.7.10"
     runDir = "run"
@@ -74,7 +80,8 @@ sourceSets {
     }
     api {
         java {
-            srcDir 'src/java/growthcraft/api'
+            srcDir project.growthcraftApi
+            srcDir project.thaumcraftApi
         }
     }
 }
@@ -118,13 +125,19 @@ debugClient {
 // add a source jar
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
-    from sourceSets.api.allSource
+    from(sourceSets.api.allSource) {
+        exclude project.thaumcraftApiExclusionPattern
+    }
     classifier = 'sources'
 }
 
-// add api classes to javadoc
 javadoc {
+    // add api classes to javadoc
     source += sourceSets.api.allSource
+    // exclude 3rd party apis from the javadoc
+    exclude project.thaumcraftApiExclusionPattern
+
+    failOnError = false
 }
 
 // add a javadoc jar
@@ -136,19 +149,31 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 // because the normal output has been made to be obfuscated
 task deobfJar(type: Jar) {
     from sourceSets.main.output
-    from sourceSets.api.output
+    from(sourceSets.api.output) {
+        exclude project.thaumcraftApiExclusionPattern
+    }
     classifier = 'dev'
 }
 
 task apiJar(type: Jar) {
-    from sourceSets.api.output
+    from(sourceSets.api.output) {
+        exclude project.thaumcraftApiExclusionPattern
+    }
     classifier = 'api'
 }
 
-// add api classes to main package
 jar {
-  from sourceSets.api.output
     classifier = 'complete'
+
+    // add api classes to main package
+    from(sourceSets.api.output) {
+        exclude project.thaumcraftApiExclusionPattern
+    }
+
+    // Only include the thaumcraft LICENSE
+    into('thaumcraft/api') {
+        from project.thaumcraftApi + "/LICENSE"
+    }
 }
 
 // make sure all of these happen when we run build

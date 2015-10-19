@@ -168,5 +168,7 @@ public class GrowthCraftRice
 	public void postload(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventRice());
+
+		new growthcraft.rice.integration.ThaumcraftModule().init();
 	}
 }

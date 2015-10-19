@@ -198,5 +198,7 @@ public class GrowthCraftGrapes
 	public void postload(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventGrapes());
+
+		new growthcraft.grapes.integration.ThaumcraftModule().init();
 	}
 }

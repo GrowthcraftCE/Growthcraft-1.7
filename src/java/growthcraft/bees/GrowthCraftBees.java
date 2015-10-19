@@ -218,5 +218,6 @@ public class GrowthCraftBees
 	public void postload(FMLPostInitializationEvent event)
 	{
 		new growthcraft.bees.integration.ForestryModule().init();
+		new growthcraft.bees.integration.ThaumcraftModule().init();
 	}
 }

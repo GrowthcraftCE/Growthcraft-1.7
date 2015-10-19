@@ -239,5 +239,7 @@ public class GrowthCraftBamboo
 	public void postload(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventBamboo());
+
+		new growthcraft.bamboo.integration.ThaumcraftModule().init();
 	}
 }
