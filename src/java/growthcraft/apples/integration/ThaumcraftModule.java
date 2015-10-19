@@ -44,18 +44,18 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	{
 		FMLInterModComms.sendMessage("Thaumcraft", "harvestStandardCrop", GrowthCraftApples.appleBlock.asStack(1, 2));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleSapling.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleSapling.asStack(), new AspectList().add(Aspect.PLANT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleLeaves.asStack(), new AspectList().add(Aspect.PLANT, 1));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 0), new AspectList().add(Aspect.WATER, 11));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 1), new AspectList().add(Aspect.HEAL, 3).add(Aspect.WATER, 11).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 2), new AspectList().add(Aspect.HEAL, 6).add(Aspect.WATER, 11).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 3), new AspectList().add(Aspect.HEAL, 3).add(Aspect.WATER, 11).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 0), new AspectList().add(Aspect.WATER, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 1), new AspectList().add(Aspect.HEAL, 3).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 2), new AspectList().add(Aspect.HEAL, 6).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 3), new AspectList().add(Aspect.HEAL, 3).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[0].asStack(1), new AspectList().add(Aspect.WATER, 11).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[1].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 21).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 21).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 21).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[0].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[1].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
 	}
 }

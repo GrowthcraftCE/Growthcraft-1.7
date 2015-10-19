@@ -40,8 +40,8 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Override
 	protected void integrate()
 	{
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.fruitPress.asStack(), new AspectList().add(Aspect.CRAFT, 2).add(Aspect.MECHANISM, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.brewKettle.asStack(), new AspectList().add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.fermentBarrel.asStack(), new AspectList().add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.brewKettle.asStack(), new AspectList().add(Aspect.METAL, 12).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.fermentBarrel.asStack(), new AspectList().add(Aspect.METAL, 5).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.fruitPress.asStack(), new AspectList().add(Aspect.METAL, 3).add(Aspect.CRAFT, 2).add(Aspect.MECHANISM, 2));
 	}
 }
