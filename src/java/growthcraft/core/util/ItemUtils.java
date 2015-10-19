@@ -1,8 +1,8 @@
 package growthcraft.core.util;
 
+import growthcraft.core.common.item.AmazingStickWrench;
+import growthcraft.core.common.item.IGrcWrench;
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.item.IGrcWrench;
-import growthcraft.core.item.AmazingStickWrench;
 
 import buildcraft.api.tools.IToolWrench;
 

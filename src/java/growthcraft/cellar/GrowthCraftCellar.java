@@ -4,23 +4,25 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.cellar.block.BlockBrewKettle;
-import growthcraft.cellar.block.BlockFermentBarrel;
-import growthcraft.cellar.block.BlockFruitPress;
-import growthcraft.cellar.block.BlockFruitPresser;
+import growthcraft.cellar.common.block.BlockBrewKettle;
+import growthcraft.cellar.common.block.BlockFermentBarrel;
+import growthcraft.cellar.common.block.BlockFruitPress;
+import growthcraft.cellar.common.block.BlockFruitPresser;
+import growthcraft.cellar.common.CommonProxy;
+import growthcraft.cellar.common.item.ItemChievDummy;
+import growthcraft.cellar.common.potion.PotionCellar;
+import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
+import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
+import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
+import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
+import growthcraft.cellar.common.village.ComponentVillageTavern;
+import growthcraft.cellar.common.village.VillageHandlerCellar;
+import growthcraft.cellar.creativetab.CreativeTabsCellar;
 import growthcraft.cellar.event.ItemCraftedEventCellar;
 import growthcraft.cellar.event.LivingUpdateEventCellar;
-import growthcraft.cellar.item.ItemChievDummy;
-import growthcraft.cellar.network.CommonProxy;
+import growthcraft.cellar.handler.GuiHandlerCellar;
 import growthcraft.cellar.network.PacketPipeline;
-import growthcraft.cellar.potion.PotionCellar;
-import growthcraft.cellar.tileentity.TileEntityBrewKettle;
-import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.tileentity.TileEntityFruitPress;
-import growthcraft.cellar.tileentity.TileEntityFruitPresser;
-import growthcraft.cellar.village.ComponentVillageTavern;
-import growthcraft.cellar.village.VillageHandlerCellar;
-import growthcraft.core.AchievementPageGrowthcraft;
+import growthcraft.core.common.AchievementPageGrowthcraft;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.integration.NEI;
@@ -35,7 +37,6 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.common.SidedProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -59,9 +60,6 @@ public class GrowthCraftCellar
 
 	@Instance(MOD_ID)
 	public static GrowthCraftCellar instance;
-
-	@SidedProxy(clientSide="growthcraft.cellar.network.ClientProxy", serverSide="growthcraft.cellar.network.CommonProxy")
-	public static CommonProxy proxy;
 
 	public static CreativeTabs tab;
 
@@ -101,7 +99,7 @@ public class GrowthCraftCellar
 		//====================
 		// INIT
 		//====================
-		tab = new CreativeTabCellar("tabGrCCellar");
+		tab = new CreativeTabsCellar("tabGrCCellar");
 		fermentBarrel = new BlockDefinition(new BlockFermentBarrel());
 		fruitPress    = new BlockDefinition(new BlockFruitPress());
 		fruitPresser  = new BlockDefinition(new BlockFruitPresser());
@@ -191,13 +189,13 @@ public class GrowthCraftCellar
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
+		CommonProxy.instance.initRenders();
 
 		packetPipeline.initialise();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerCellar());
 
 		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());
-		proxy.registerVillagerSkin();
+		CommonProxy.instance.registerVillagerSkin();
 
 		new growthcraft.cellar.integration.Waila();
 	}

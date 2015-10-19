@@ -1,7 +1,7 @@
 package growthcraft.cellar.network;
 
-import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.tileentity.TileEntityFruitPress;
+import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
+import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

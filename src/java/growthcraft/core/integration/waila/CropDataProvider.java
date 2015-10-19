@@ -2,8 +2,8 @@ package growthcraft.core.integration.waila;
 
 import java.util.List;
 
+import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.block.ICropDataProvider;
 import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.common.Optional;

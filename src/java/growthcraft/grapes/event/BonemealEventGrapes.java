@@ -2,9 +2,9 @@ package growthcraft.grapes.event;
 
 import growthcraft.core.util.BlockCheck;
 import growthcraft.core.util.BlockFlags;
+import growthcraft.grapes.common.block.BlockGrapeVine0;
+import growthcraft.grapes.common.block.BlockGrapeVine1;
 import growthcraft.grapes.GrowthCraftGrapes;
-import growthcraft.grapes.block.BlockGrapeVine0;
-import growthcraft.grapes.block.BlockGrapeVine1;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

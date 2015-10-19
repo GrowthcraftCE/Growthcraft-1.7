@@ -2,7 +2,7 @@ package growthcraft.core.util;
 
 import java.util.Random;
 
-import growthcraft.core.block.IBlockRope;
+import growthcraft.core.common.block.IBlockRope;
 import growthcraft.core.GrowthCraftCore;
 
 import net.minecraft.block.Block;

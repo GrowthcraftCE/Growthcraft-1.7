@@ -2,25 +2,26 @@ package growthcraft.bees;
 
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.cellar.booze.Booze;
-import growthcraft.bees.block.BlockBeeBox;
-import growthcraft.bees.block.BlockBeeHive;
-import growthcraft.bees.block.BlockMaliceBeeBox;
+import growthcraft.bees.client.gui.GuiHandlerBees;
+import growthcraft.bees.common.block.BlockBeeBox;
+import growthcraft.bees.common.block.BlockBeeHive;
+import growthcraft.bees.common.block.BlockMaliceBeeBox;
+import growthcraft.bees.common.CommonProxy;
+import growthcraft.bees.common.item.ItemBee;
+import growthcraft.bees.common.item.ItemBlockBeeBox;
+import growthcraft.bees.common.item.ItemHoneyComb;
+import growthcraft.bees.common.item.ItemHoneyJar;
+import growthcraft.bees.common.tileentity.TileEntityBeeBox;
+import growthcraft.bees.common.village.ComponentVillageApiarist;
+import growthcraft.bees.common.village.VillageHandlerBees;
+import growthcraft.bees.common.village.VillageHandlerBeesApiarist;
+import growthcraft.bees.common.world.WorldGeneratorBees;
 import growthcraft.bees.creativetab.CreativeTabsGrowthcraftBees;
-import growthcraft.bees.gui.GuiHandlerBees;
-import growthcraft.bees.item.ItemBee;
-import growthcraft.bees.item.ItemBlockBeeBox;
-import growthcraft.bees.item.ItemHoneyComb;
-import growthcraft.bees.item.ItemHoneyJar;
-import growthcraft.bees.tileentity.TileEntityBeeBox;
-import growthcraft.bees.village.ComponentVillageApiarist;
-import growthcraft.bees.village.VillageHandlerBees;
-import growthcraft.bees.village.VillageHandlerBeesApiarist;
-import growthcraft.bees.world.WorldGeneratorBees;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
+import growthcraft.cellar.common.item.ItemBoozeBottle;
+import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
@@ -37,7 +38,6 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
@@ -65,9 +65,6 @@ public class GrowthCraftBees
 
 	@Instance(MOD_ID)
 	public static GrowthCraftBees instance;
-
-	@SidedProxy(clientSide="growthcraft.bees.ClientProxy", serverSide="growthcraft.bees.CommonProxy")
-	public static CommonProxy proxy;
 
 	public static CreativeTabs tab;
 
@@ -187,8 +184,8 @@ public class GrowthCraftBees
 	public void load(FMLInitializationEvent event)
 	{
 		register();
-		proxy.initRenders();
-		proxy.initSounds();
+		CommonProxy.instance.initRenders();
+		CommonProxy.instance.initSounds();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerBees());
 
@@ -197,7 +194,7 @@ public class GrowthCraftBees
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, new VillageHandlerBees());
 		VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);
 
-		proxy.registerVillagerSkin();
+		CommonProxy.instance.registerVillagerSkin();
 		new growthcraft.bees.integration.Waila();
 	}
 

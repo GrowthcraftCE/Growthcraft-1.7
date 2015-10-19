@@ -1,7 +1,7 @@
 package growthcraft.core.integration;
 
-import growthcraft.core.block.ICropDataProvider;
-import growthcraft.core.block.IPaddy;
+import growthcraft.core.common.block.ICropDataProvider;
+import growthcraft.core.common.block.IPaddy;
 import growthcraft.core.integration.waila.CropDataProvider;
 import growthcraft.core.integration.waila.PaddyDataProvider;
 

@@ -1,6 +1,6 @@
 package growthcraft.cellar.network;
 
-import growthcraft.cellar.tileentity.TileEntityBrewKettle;
+import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

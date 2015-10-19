@@ -3,9 +3,10 @@ package growthcraft.fishtrap;
 import growthcraft.api.fishtrap.FishTrapEntry;
 import growthcraft.api.fishtrap.FishTrapRegistry;
 import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.fishtrap.block.BlockFishTrap;
-import growthcraft.fishtrap.entity.TileEntityFishTrap;
-import growthcraft.fishtrap.gui.GuiHandlerFishTrap;
+import growthcraft.fishtrap.client.gui.GuiHandlerFishTrap;
+import growthcraft.fishtrap.common.block.BlockFishTrap;
+import growthcraft.fishtrap.common.CommonProxy;
+import growthcraft.fishtrap.common.tileentity.TileEntityFishTrap;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -15,7 +16,6 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.SidedProxy;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemFishFood;
@@ -37,14 +37,11 @@ public class GrowthCraftFishTrap
 	@Instance(MOD_ID)
 	public static GrowthCraftFishTrap instance;
 
-	@SidedProxy(clientSide="growthcraft.fishtrap.ClientProxy", serverSide="growthcraft.fishtrap.CommonProxy")
-	public static CommonProxy proxy;
-
 	public static BlockDefinition fishTrap;
 
-	private growthcraft.fishtrap.Config config;
+	private Config config;
 
-	public static growthcraft.fishtrap.Config getConfig()
+	public static Config getConfig()
 	{
 		return instance.config;
 	}
@@ -52,7 +49,7 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.fishtrap.Config();
+		config = new Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
 
 		//====================
@@ -102,7 +99,7 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
+		CommonProxy.instance.initRenders();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerFishTrap());
 	}

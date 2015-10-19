@@ -6,25 +6,26 @@ import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
+import growthcraft.cellar.common.item.ItemBoozeBottle;
+import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.util.BoozeRegistryHelper;
-import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
+import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
-import growthcraft.grapes.block.BlockGrapeBlock;
-import growthcraft.grapes.block.BlockGrapeLeaves;
-import growthcraft.grapes.block.BlockGrapeVine0;
-import growthcraft.grapes.block.BlockGrapeVine1;
+import growthcraft.grapes.common.block.BlockGrapeBlock;
+import growthcraft.grapes.common.block.BlockGrapeLeaves;
+import growthcraft.grapes.common.block.BlockGrapeVine0;
+import growthcraft.grapes.common.block.BlockGrapeVine1;
+import growthcraft.grapes.common.CommonProxy;
+import growthcraft.grapes.common.item.ItemGrapes;
+import growthcraft.grapes.common.item.ItemGrapeSeeds;
+import growthcraft.grapes.common.village.ComponentVillageGrapeVineyard;
+import growthcraft.grapes.common.village.VillageHandlerGrapes;
 import growthcraft.grapes.event.BonemealEventGrapes;
-import growthcraft.grapes.item.ItemGrapes;
-import growthcraft.grapes.item.ItemGrapeSeeds;
-import growthcraft.grapes.village.ComponentVillageGrapeVineyard;
-import growthcraft.grapes.village.VillageHandlerGrapes;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -35,7 +36,6 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
@@ -61,9 +61,6 @@ public class GrowthCraftGrapes
 
 	@Instance(MOD_ID)
 	public static GrowthCraftGrapes instance;
-
-	@SidedProxy(clientSide="growthcraft.grapes.ClientProxy", serverSide="growthcraft.grapes.CommonProxy")
-	public static CommonProxy proxy;
 
 	public static BlockTypeDefinition<BlockGrapeVine0> grapeVine0;
 	public static BlockTypeDefinition<BlockGrapeVine1> grapeVine1;
@@ -175,7 +172,7 @@ public class GrowthCraftGrapes
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
+		CommonProxy.instance.initRenders();
 
 		final VillageHandlerGrapes handler = new VillageHandlerGrapes();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);

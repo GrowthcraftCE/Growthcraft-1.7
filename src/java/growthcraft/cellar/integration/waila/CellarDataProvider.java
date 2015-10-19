@@ -2,13 +2,13 @@ package growthcraft.cellar.integration.waila;
 
 import java.util.List;
 
-import growthcraft.cellar.block.BlockFruitPresser;
-import growthcraft.cellar.tileentity.TileEntityBrewKettle;
-import growthcraft.cellar.tileentity.TileEntityFruitPress;
-import growthcraft.cellar.tileentity.TileEntityFermentBarrel;
+import growthcraft.cellar.common.block.BlockFruitPresser;
+import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
+import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
+import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.util.TagFormatterBrewKettle;
-import growthcraft.cellar.util.TagFormatterFruitPress;
 import growthcraft.cellar.util.TagFormatterFermentBarrel;
+import growthcraft.cellar.util.TagFormatterFruitPress;
 import growthcraft.core.util.ConstID;
 import growthcraft.core.util.NBTHelper;
 import growthcraft.core.util.TagFormatterFluidHandler;

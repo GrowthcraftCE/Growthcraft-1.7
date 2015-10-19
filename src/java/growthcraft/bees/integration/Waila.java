@@ -1,7 +1,7 @@
 package growthcraft.bees.integration;
 
 import growthcraft.core.integration.WailaIntegrationBase;
-import growthcraft.bees.block.BlockBeeBox;
+import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.integration.waila.BeesDataProvider;
 
 import cpw.mods.fml.common.Optional;

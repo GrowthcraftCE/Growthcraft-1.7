@@ -1,10 +1,13 @@
 package growthcraft.core;
 
-import growthcraft.core.block.BlockFenceRope;
-import growthcraft.core.block.BlockRope;
+import growthcraft.core.common.AchievementPageGrowthcraft;
+import growthcraft.core.common.block.BlockFenceRope;
+import growthcraft.core.common.block.BlockRope;
 import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.item.ItemRope;
+import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
 import growthcraft.core.event.HarvestDropsEventCore;
 import growthcraft.core.event.PlayerInteractEventAmazingStick;
 import growthcraft.core.event.PlayerInteractEventPaddy;
@@ -12,7 +15,6 @@ import growthcraft.core.event.TextureStitchEventCore;
 import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.core.integration.NEI;
-import growthcraft.core.item.ItemRope;
 import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -55,9 +57,9 @@ public class GrowthCraftCore
 	public static BlockDefinition ropeBlock;
 	public static ItemDefinition rope;
 
-	private growthcraft.core.Config config;
+	private Config config;
 
-	public static growthcraft.core.Config getConfig()
+	public static Config getConfig()
 	{
 		return instance.config;
 	}
@@ -65,10 +67,10 @@ public class GrowthCraftCore
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.core.Config();
+		config = new Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
 
-		tab =  new CreativeTabGrowthcraft("tabGrowthCraft");
+		tab =  new CreativeTabsGrowthcraft("tabGrowthCraft");
 
 		//====================
 		// INIT

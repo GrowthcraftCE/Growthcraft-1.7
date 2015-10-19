@@ -2,7 +2,7 @@ package growthcraft.core.integration.waila;
 
 import java.util.List;
 
-import growthcraft.core.block.IPaddy;
+import growthcraft.core.common.block.IPaddy;
 
 import cpw.mods.fml.common.Optional;
 

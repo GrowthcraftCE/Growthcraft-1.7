@@ -4,18 +4,17 @@ import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.cellar.block.BlockFluidBooze;
+import growthcraft.cellar.common.block.BlockFluidBooze;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
+import growthcraft.cellar.common.item.ItemBlockFluidBooze;
+import growthcraft.cellar.common.item.ItemBucketBooze;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.item.ItemBlockFluidBooze;
-import growthcraft.cellar.item.ItemBucketBooze;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;

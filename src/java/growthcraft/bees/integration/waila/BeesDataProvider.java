@@ -2,7 +2,7 @@ package growthcraft.bees.integration.waila;
 
 import java.util.List;
 
-import growthcraft.bees.tileentity.TileEntityBeeBox;
+import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.util.TagFormatterBeeBox;
 import growthcraft.core.util.NBTHelper;
 

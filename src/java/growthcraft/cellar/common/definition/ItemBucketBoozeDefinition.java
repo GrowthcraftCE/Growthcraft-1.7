@@ -25,7 +25,7 @@ package growthcraft.cellar.common.definition;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.cellar.item.ItemBucketBooze;
+import growthcraft.cellar.common.item.ItemBucketBooze;
 import growthcraft.core.common.definition.ItemTypeDefinition;
 
 public class ItemBucketBoozeDefinition extends ItemTypeDefinition<ItemBucketBooze>

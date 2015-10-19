@@ -1,8 +1,8 @@
 package growthcraft.core.client.renderer;
 
-import growthcraft.core.util.RenderUtils;
 import growthcraft.core.client.ClientProxy;
-import growthcraft.core.block.BlockPaddyBase;
+import growthcraft.core.common.block.BlockPaddyBase;
+import growthcraft.core.util.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;

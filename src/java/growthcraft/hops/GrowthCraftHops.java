@@ -4,22 +4,23 @@ import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.CoreRegistry;
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
-import growthcraft.cellar.util.BoozeRegistryHelper;
-import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
+import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
+import growthcraft.cellar.common.item.ItemBoozeBottle;
+import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
-import growthcraft.hops.block.BlockHops;
-import growthcraft.hops.item.ItemHops;
-import growthcraft.hops.item.ItemHopSeeds;
-import growthcraft.hops.village.ComponentVillageHopVineyard;
-import growthcraft.hops.village.VillageHandlerHops;
+import growthcraft.hops.common.block.BlockHops;
+import growthcraft.hops.common.CommonProxy;
+import growthcraft.hops.common.item.ItemHops;
+import growthcraft.hops.common.item.ItemHopSeeds;
+import growthcraft.hops.common.village.ComponentVillageHopVineyard;
+import growthcraft.hops.common.village.VillageHandlerHops;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -30,7 +31,6 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Items;
@@ -57,9 +57,6 @@ public class GrowthCraftHops
 
 	@Instance(MOD_ID)
 	public static GrowthCraftHops instance;
-
-	@SidedProxy(clientSide="growthcraft.hops.ClientProxy", serverSide="growthcraft.hops.CommonProxy")
-	public static CommonProxy proxy;
 
 	public static BlockTypeDefinition<BlockHops> hopVine;
 	public static BlockBoozeDefinition[] hopAleFluids;
@@ -149,7 +146,7 @@ public class GrowthCraftHops
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
+		CommonProxy.instance.initRenders();
 
 		final VillageHandlerHops handler = new VillageHandlerHops();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);

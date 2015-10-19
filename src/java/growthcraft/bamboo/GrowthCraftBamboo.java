@@ -1,28 +1,30 @@
 package growthcraft.bamboo;
 
-import growthcraft.bamboo.block.BlockBamboo;
-import growthcraft.bamboo.block.BlockBambooDoor;
-import growthcraft.bamboo.block.BlockBambooFence;
-import growthcraft.bamboo.block.BlockBambooFenceGate;
-import growthcraft.bamboo.block.BlockBambooLeaves;
-import growthcraft.bamboo.block.BlockBambooScaffold;
-import growthcraft.bamboo.block.BlockBambooShoot;
-import growthcraft.bamboo.block.BlockBambooSlab;
-import growthcraft.bamboo.block.BlockBambooStairs;
-import growthcraft.bamboo.block.BlockBambooStalk;
-import growthcraft.bamboo.block.BlockBambooWall;
-import growthcraft.bamboo.entity.EntityBambooRaft;
+import growthcraft.bamboo.common.block.BlockBamboo;
+import growthcraft.bamboo.common.block.BlockBambooDoor;
+import growthcraft.bamboo.common.block.BlockBambooFence;
+import growthcraft.bamboo.common.block.BlockBambooFenceGate;
+import growthcraft.bamboo.common.block.BlockBambooLeaves;
+import growthcraft.bamboo.common.block.BlockBambooScaffold;
+import growthcraft.bamboo.common.block.BlockBambooShoot;
+import growthcraft.bamboo.common.block.BlockBambooSlab;
+import growthcraft.bamboo.common.block.BlockBambooStairs;
+import growthcraft.bamboo.common.block.BlockBambooStalk;
+import growthcraft.bamboo.common.block.BlockBambooWall;
+import growthcraft.bamboo.common.CommonProxy;
+import growthcraft.bamboo.common.entity.EntityBambooRaft;
+import growthcraft.bamboo.common.item.ItemBamboo;
+import growthcraft.bamboo.common.item.ItemBambooCoal;
+import growthcraft.bamboo.common.item.ItemBambooDoor;
+import growthcraft.bamboo.common.item.ItemBambooRaft;
+import growthcraft.bamboo.common.item.ItemBambooShoot;
+import growthcraft.bamboo.common.item.ItemBambooSlab;
+import growthcraft.bamboo.common.village.ComponentVillageBambooYard;
+import growthcraft.bamboo.common.village.VillageHandlerBamboo;
+import growthcraft.bamboo.common.world.BiomeGenBamboo;
+import growthcraft.bamboo.common.world.WorldGeneratorBamboo;
 import growthcraft.bamboo.event.BonemealEventBamboo;
-import growthcraft.bamboo.item.ItemBamboo;
-import growthcraft.bamboo.item.ItemBambooCoal;
-import growthcraft.bamboo.item.ItemBambooDoor;
-import growthcraft.bamboo.item.ItemBambooRaft;
-import growthcraft.bamboo.item.ItemBambooShoot;
-import growthcraft.bamboo.item.ItemBambooSlab;
-import growthcraft.bamboo.village.ComponentVillageBambooYard;
-import growthcraft.bamboo.village.VillageHandlerBamboo;
-import growthcraft.bamboo.world.BiomeGenBamboo;
-import growthcraft.bamboo.world.WorldGeneratorBamboo;
+import growthcraft.bamboo.handler.BambooFuelHandler;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
@@ -38,7 +40,6 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.common.SidedProxy;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -64,9 +65,6 @@ public class GrowthCraftBamboo
 
 	@Instance(MOD_ID)
 	public static GrowthCraftBamboo instance;
-
-	@SidedProxy(clientSide="growthcraft.bamboo.ClientProxy", serverSide="growthcraft.bamboo.CommonProxy")
-	public static CommonProxy proxy;
 
 	public static BlockDefinition bambooBlock;
 	public static BlockTypeDefinition<BlockBambooShoot> bambooShoot;
@@ -230,7 +228,7 @@ public class GrowthCraftBamboo
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
+		CommonProxy.instance.initRenders();
 		final VillageHandlerBamboo handler = new VillageHandlerBamboo();
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 	}

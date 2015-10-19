@@ -3,17 +3,19 @@ package growthcraft.apples;
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
-import growthcraft.apples.block.BlockApple;
-import growthcraft.apples.block.BlockAppleLeaves;
-import growthcraft.apples.block.BlockAppleSapling;
-import growthcraft.apples.item.ItemAppleSeeds;
-import growthcraft.apples.village.ComponentVillageAppleFarm;
-import growthcraft.apples.village.VillageHandlerApples;
+import growthcraft.apples.common.block.BlockApple;
+import growthcraft.apples.common.block.BlockAppleLeaves;
+import growthcraft.apples.common.block.BlockAppleSapling;
+import growthcraft.apples.common.CommonProxy;
+import growthcraft.apples.common.item.ItemAppleSeeds;
+import growthcraft.apples.common.village.ComponentVillageAppleFarm;
+import growthcraft.apples.common.village.VillageHandlerApples;
+import growthcraft.apples.handler.AppleFuelHandler;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
+import growthcraft.cellar.common.item.ItemBoozeBottle;
+import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
@@ -30,7 +32,6 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
@@ -55,9 +56,6 @@ public class GrowthCraftApples
 
 	@Instance(MOD_ID)
 	public static GrowthCraftApples instance;
-
-	@SidedProxy(clientSide="growthcraft.apples.ClientProxy", serverSide="growthcraft.apples.CommonProxy")
-	public static CommonProxy proxy;
 
 	public static BlockDefinition appleSapling;
 	public static BlockDefinition appleLeaves;
@@ -155,7 +153,7 @@ public class GrowthCraftApples
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
+		CommonProxy.instance.initRenders();
 		final VillageHandlerApples handler = new VillageHandlerApples();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);

@@ -1,6 +1,6 @@
 package growthcraft.cellar.network;
 
-import growthcraft.cellar.tileentity.TileEntityBrewKettle;
+import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

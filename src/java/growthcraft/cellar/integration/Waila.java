@@ -1,7 +1,7 @@
 package growthcraft.cellar.integration;
 
-import growthcraft.cellar.block.BlockFruitPresser;
-import growthcraft.cellar.block.ICellarFluidHandler;
+import growthcraft.cellar.common.block.BlockFruitPresser;
+import growthcraft.cellar.common.block.ICellarFluidHandler;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.integration.waila.CellarDataProvider;
 import growthcraft.core.integration.WailaIntegrationBase;

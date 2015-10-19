@@ -5,9 +5,9 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
+import growthcraft.cellar.common.item.ItemBoozeBottle;
+import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
@@ -15,14 +15,14 @@ import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
-import growthcraft.rice.block.BlockPaddy;
-import growthcraft.rice.block.BlockRice;
-import growthcraft.rice.event.BonemealEventRice;
-import growthcraft.rice.item.ItemRice;
-import growthcraft.rice.item.ItemRiceBall;
-import growthcraft.rice.village.ComponentVillageRiceField;
-import growthcraft.rice.village.VillageHandlerRice;
+import growthcraft.rice.common.block.BlockPaddy;
+import growthcraft.rice.common.block.BlockRice;
 import growthcraft.rice.common.CommonProxy;
+import growthcraft.rice.common.item.ItemRice;
+import growthcraft.rice.common.item.ItemRiceBall;
+import growthcraft.rice.common.village.ComponentVillageRiceField;
+import growthcraft.rice.common.village.VillageHandlerRice;
+import growthcraft.rice.event.BonemealEventRice;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -70,9 +70,9 @@ public class GrowthCraftRice
 
 	public static Fluid[] riceSakeBooze;
 
-	private growthcraft.rice.Config config;
+	private Config config;
 
-	public static growthcraft.rice.Config getConfig()
+	public static Config getConfig()
 	{
 		return instance.config;
 	}
@@ -80,7 +80,7 @@ public class GrowthCraftRice
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.rice.Config();
+		config = new Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
 
 		//====================
