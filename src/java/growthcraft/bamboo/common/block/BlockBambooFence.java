@@ -1,7 +1,5 @@
 package growthcraft.bamboo.common.block;
 
-import java.util.List;
-
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.client.renderer.RenderBambooFence;
 import growthcraft.core.GrowthCraftCore;
@@ -9,30 +7,29 @@ import growthcraft.core.GrowthCraftCore;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockBambooFence extends Block
+public class BlockBambooFence extends BlockFence
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
 	public BlockBambooFence()
 	{
-		super(Material.wood);
-		this.useNeighborBrightness = true;
-		this.setStepSound(soundTypeWood);
-		this.setResistance(5.0F);
-		this.setHardness(2.0F);
-		this.setCreativeTab(GrowthCraftCore.tab);
-		this.setBlockName("grc.bambooFence");
+		super(null, Material.wood);
+		useNeighborBrightness = true;
+		setStepSound(soundTypeWood);
+		setResistance(5.0F);
+		setHardness(2.0F);
+		setCreativeTab(GrowthCraftCore.tab);
+		setBlockName("grc.bambooFence");
 	}
 
 	/************
@@ -44,14 +41,26 @@ public class BlockBambooFence extends Block
 		return false;
 	}
 
+	@Override
+	public boolean canPlaceTorchOnTop(World world, int x, int y, int z)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+	{
+		return side == ForgeDirection.UP;
+	}
+
+	@Override
 	public boolean canConnectFenceTo(IBlockAccess world, int x, int y, int z)
 	{
 		final Block block = world.getBlock(x, y, z);
 
 		if (this == block ||
-			Blocks.fence_gate == block ||
-			Blocks.nether_brick_fence == block ||
-			GrowthCraftBamboo.bambooFenceGate.isSameAs(block) ||
+			(block instanceof BlockFence) ||
+			(block instanceof BlockFenceGate) ||
 			GrowthCraftBamboo.bambooWall.isSameAs(block) ||
 			GrowthCraftBamboo.bambooStalk.isSameAs(block))
 		{
@@ -65,12 +74,6 @@ public class BlockBambooFence extends Block
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean canPlaceTorchOnTop(World world, int x, int y, int z)
-	{
-		return true;
 	}
 
 	/************
@@ -107,144 +110,5 @@ public class BlockBambooFence extends Block
 	public int getRenderType()
 	{
 		return RenderBambooFence.id;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-	{
-		return true;
-	}
-
-	/************
-	 * BOXES
-	 ************/
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
-	{
-		final Block idXneg = world.getBlock(x - 1, y, z);
-		final Block idXpos = world.getBlock(x + 1, y, z);
-		final Block idZneg = world.getBlock(x, y, z - 1);
-		final Block idZpos = world.getBlock(x, y, z + 1);
-
-		final int metaXneg = world.getBlockMetadata(x - 1, y, z);
-		final int metaXpos = world.getBlockMetadata(x + 1, y, z);
-		final int metaZneg = world.getBlockMetadata(x, y, z - 1);
-		final int metaZpos = world.getBlockMetadata(x, y, z + 1);
-
-		final boolean flagXneg = this.canConnectFenceTo(world, x - 1, y, z) || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
-		final boolean flagXpos = this.canConnectFenceTo(world, x + 1, y, z) || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
-		final boolean flagZneg = this.canConnectFenceTo(world, x, y, z - 1) || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
-		final boolean flagZpos = this.canConnectFenceTo(world, x, y, z + 1) || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
-
-		float f = 0.375F;
-		float f1 = 0.625F;
-		float f2 = 0.375F;
-		float f3 = 0.625F;
-
-		if (flagZneg)
-		{
-			f2 = 0.0F;
-		}
-
-		if (flagZpos)
-		{
-			f3 = 1.0F;
-		}
-
-		if (flagXneg)
-		{
-			f = 0.0F;
-		}
-
-		if (flagXpos)
-		{
-			f1 = 1.0F;
-		}
-
-		this.setBlockBounds(f, 0.0F, f2, f1, 1.0F, f3);
-	}
-
-	@Override
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
-	{
-		final Block idXneg = world.getBlock(x - 1, y, z);
-		final Block idXpos = world.getBlock(x + 1, y, z);
-		final Block idZneg = world.getBlock(x, y, z - 1);
-		final Block idZpos = world.getBlock(x, y, z + 1);
-
-		final int metaXneg = world.getBlockMetadata(x - 1, y, z);
-		final int metaXpos = world.getBlockMetadata(x + 1, y, z);
-		final int metaZneg = world.getBlockMetadata(x, y, z - 1);
-		final int metaZpos = world.getBlockMetadata(x, y, z + 1);
-
-		final boolean flagXneg = this.canConnectFenceTo(world, x - 1, y, z) || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
-		final boolean flagXpos = this.canConnectFenceTo(world, x + 1, y, z) || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
-		final boolean flagZneg = this.canConnectFenceTo(world, x, y, z - 1) || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
-		final boolean flagZpos = this.canConnectFenceTo(world, x, y, z + 1) || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
-
-		float f = 0.375F;
-		float f1 = 0.625F;
-		float f2 = 0.375F;
-		float f3 = 0.625F;
-
-		if (flagZneg)
-		{
-			f2 = 0.0F;
-		}
-
-		if (flagZpos)
-		{
-			f3 = 1.0F;
-		}
-
-		if (flagZneg || flagZpos)
-		{
-			this.setBlockBounds(f, 0.0F, f2, f1, 1.5F, f3);
-			super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
-		}
-
-		f2 = 0.375F;
-		f3 = 0.625F;
-
-		if (flagXneg)
-		{
-			f = 0.0F;
-		}
-
-		if (flagXpos)
-		{
-			f1 = 1.0F;
-		}
-
-		if (flagXneg || flagXpos || !flagZneg && !flagZpos)
-		{
-			this.setBlockBounds(f, 0.0F, f2, f1, 1.5F, f3);
-			super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
-		}
-
-		if (flagZneg)
-		{
-			f2 = 0.0F;
-		}
-
-		if (flagZpos)
-		{
-			f3 = 1.0F;
-		}
-
-		this.setBlockBounds(f, 0.0F, f2, f1, 1.0F, f3);
 	}
 }
