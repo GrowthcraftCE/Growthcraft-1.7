@@ -112,8 +112,9 @@ public class GuiBrewKettle extends GuiCellar
 
 		if (this.te.hasFire())
 		{
-			final int h = this.te.getHeatScaled(14);
-			this.drawTexturedModalRect(w + 67, h + 53, 176, 28 + 14 - h, 14, h);
+			final int iconHeight = this.te.getHeatScaled(14);
+			final int offY = 14 - iconHeight;
+			this.drawTexturedModalRect(w + 67, h + 53 + offY, 176, 28 + offY, 14, iconHeight);
 		}
 
 		if (this.te.getFluidAmountScaled(52, 0) > 0)
