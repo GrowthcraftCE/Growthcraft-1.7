@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
+import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.util.FluidUtils;
 
 import net.minecraft.block.Block;
@@ -20,7 +21,10 @@ public class PressingRegistry
 	private final int NO_META = -1;
 	private Map<List, PressingResult> pressingList = new HashMap<List, PressingResult>();
 
-	public Map<List, PressingResult> getPressingList() { return pressingList; }
+	public Map<List, PressingResult> getPressingList()
+	{
+		return pressingList;
+	}
 
 	/**
 	 * addPressing()
@@ -35,22 +39,22 @@ public class PressingRegistry
 	 * @param amount  - The amount of booze the item/block produces.
 	 * @param residue - The amount of residue this will produce.
 	 */
-	public void addPressing(Item raw, int meta, Fluid fluid, int time, int amount, float residue)
+	public void addPressing(Item raw, int meta, Fluid fluid, int time, int amount, Residue residue)
 	{
 		this.pressingList.put(Arrays.asList(raw, meta), new PressingResult(fluid, time, amount, residue));
 	}
 
-	public void addPressing(Block raw, int meta, Fluid fluid, int time, int amount, float residue)
+	public void addPressing(Block raw, int meta, Fluid fluid, int time, int amount, Residue residue)
 	{
 		this.addPressing(Item.getItemFromBlock(raw), meta, fluid, time, amount, residue);
 	}
 
-	public void addPressing(Block raw, int meta, String fluid, int time, int amount, float residue)
+	public void addPressing(Block raw, int meta, String fluid, int time, int amount, Residue residue)
 	{
 		this.addPressing(Item.getItemFromBlock(raw), meta, fluid, time, amount, residue);
 	}
 
-	public void addPressing(Item raw, int meta, String fluid, int time, int amount, float residue)
+	public void addPressing(Item raw, int meta, String fluid, int time, int amount, Residue residue)
 	{
 		if (FluidUtils.doesFluidExist(fluid))
 		{
@@ -70,22 +74,22 @@ public class PressingRegistry
 	 * @param amount  - The amount of booze the item/block produces.
 	 * @param residue - The amount of residue this will produce.
 	 */
-	public void addPressing(Item raw, Fluid fluid, int time, int amount, float residue)
+	public void addPressing(Item raw, Fluid fluid, int time, int amount, Residue residue)
 	{
 		addPressing(raw, NO_META, fluid, time, amount, residue);
 	}
 
-	public void addPressing(Item raw, String fluid, int time, int amount, float residue)
+	public void addPressing(Item raw, String fluid, int time, int amount, Residue residue)
 	{
 		addPressing(raw, NO_META, fluid, time, amount, residue);
 	}
 
-	public void addPressing(Block raw, Fluid fluid, int time, int amount, float residue)
+	public void addPressing(Block raw, Fluid fluid, int time, int amount, Residue residue)
 	{
 		addPressing(Item.getItemFromBlock(raw), NO_META, fluid, time, amount, residue);
 	}
 
-	public void addPressing(Block raw, String fluid, int time, int amount, float residue)
+	public void addPressing(Block raw, String fluid, int time, int amount, Residue residue)
 	{
 		addPressing(Item.getItemFromBlock(raw), NO_META, fluid, time, amount, residue);
 	}
@@ -129,10 +133,10 @@ public class PressingRegistry
 		return pressresults.amount;
 	}
 
-	public float getPressingResidue(ItemStack itemstack)
+	public Residue getPressingResidue(ItemStack itemstack)
 	{
 		final PressingResult pressresults = this.getPressingResults(itemstack);
-		if (pressresults == null) return 0.0F;
+		if (pressresults == null) return null;
 
 		return pressresults.residue;
 	}

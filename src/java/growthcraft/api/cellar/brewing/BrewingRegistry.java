@@ -1,10 +1,14 @@
-package growthcraft.api.cellar;
+package growthcraft.api.cellar.brewing;
 
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+
+import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.cellar.util.FluidUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -44,18 +48,18 @@ public class BrewingRegistry
 	 * @param amount      - The amount of booze the item/block produces.
 	 * @param residue     - The amount of residue this will produce.
 	 */
-	public void addBrewing(Fluid sourceFluid, Item raw, int meta, Fluid resultFluid, int time, int amount, float residue)
+	public void addBrewing(Fluid sourceFluid, Item raw, int meta, Fluid resultFluid, int time, int amount, Residue residue)
 	{
 		this.brewingList.put(Arrays.asList(sourceFluid, raw, meta), new BrewingResult(resultFluid, time, amount, residue));
 		this.brewingIngredients.add(Arrays.asList(raw, meta));
 	}
 
-	public void addBrewing(Fluid sourceFluid, Block raw, int meta, Fluid resultFluid, int time, int amount, float residue)
+	public void addBrewing(Fluid sourceFluid, Block raw, int meta, Fluid resultFluid, int time, int amount, Residue residue)
 	{
 		addBrewing(sourceFluid, Item.getItemFromBlock(raw), meta, resultFluid, time, amount, residue);
 	}
 
-	public void addBrewing(String sourceFluid, Item raw, int meta, String resultFluid, int time, int amount, float residue)
+	public void addBrewing(String sourceFluid, Item raw, int meta, String resultFluid, int time, int amount, Residue residue)
 	{
 		if (FluidUtils.doesFluidExist(sourceFluid) && FluidUtils.doesFluidExist(resultFluid))
 		{
@@ -63,27 +67,27 @@ public class BrewingRegistry
 		}
 	}
 
-	public void addBrewing(String sourceFluid, Block raw, int meta, String resultFluid, int time, int amount, float residue)
+	public void addBrewing(String sourceFluid, Block raw, int meta, String resultFluid, int time, int amount, Residue residue)
 	{
 		addBrewing(sourceFluid, Item.getItemFromBlock(raw), meta, resultFluid, time, amount, residue);
 	}
 
-	public void addBrewing(Fluid sourceFluid, Item raw, Fluid resultFluid, int time, int amount, float residue)
+	public void addBrewing(Fluid sourceFluid, Item raw, Fluid resultFluid, int time, int amount, Residue residue)
 	{
 		addBrewing(sourceFluid, raw, NO_META, resultFluid, time, amount, residue);
 	}
 
-	public void addBrewing(Fluid sourceFluid, Block raw, Fluid resultFluid, int time, int amount, float residue)
+	public void addBrewing(Fluid sourceFluid, Block raw, Fluid resultFluid, int time, int amount, Residue residue)
 	{
 		addBrewing(sourceFluid, raw, NO_META, resultFluid, time, amount, residue);
 	}
 
-	public void addBrewing(String sourceFluid, Item raw, String resultFluid, int time, int amount, float residue)
+	public void addBrewing(String sourceFluid, Item raw, String resultFluid, int time, int amount, Residue residue)
 	{
 		addBrewing(sourceFluid, raw, NO_META, resultFluid, time, amount, residue);
 	}
 
-	public void addBrewing(String sourceFluid, Block raw, String resultFluid, int time, int amount, float residue)
+	public void addBrewing(String sourceFluid, Block raw, String resultFluid, int time, int amount, Residue residue)
 	{
 		addBrewing(sourceFluid, raw, NO_META, resultFluid, time, amount, residue);
 	}
@@ -139,7 +143,7 @@ public class BrewingRegistry
 	public Residue getBrewingResidue(FluidStack fluidstack, ItemStack itemstack)
 	{
 		final BrewingResult brewresults = this.getBrewingResult(fluidstack, itemstack);
-		if (brewresults == null) return 0.0F;
+		if (brewresults == null) return null;
 
 		return brewresults.residue;
 	}

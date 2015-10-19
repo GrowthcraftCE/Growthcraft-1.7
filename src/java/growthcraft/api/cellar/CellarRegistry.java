@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import growthcraft.api.cellar.booze.BoozeRegistry;
-import growthcraft.api.cellar.booze.BrewingRegistry;
-import growthcraft.api.cellar.booze.PressingRegistry;
-import growthcraft.api.cellar.booze.HeatSourceRegistry;
-import growthcraft.api.cellar.booze.IHeatSourceRegistry;
+import growthcraft.api.cellar.brewing.BrewingRegistry;
+import growthcraft.api.cellar.pressing.PressingRegistry;
+import growthcraft.api.cellar.heatsource.HeatSourceRegistry;
+import growthcraft.api.cellar.heatsource.IHeatSourceRegistry;
 
 import net.minecraft.block.Block;
 
@@ -22,7 +22,7 @@ public class CellarRegistry
 	private static final CellarRegistry INSTANCE = new CellarRegistry();
 
 	private final BoozeRegistry boozeRegistry = new BoozeRegistry();
-	private final BrewingRegistry brewRegistry = new BrewingRegistry();
+	private final BrewingRegistry brewingRegistry = new BrewingRegistry();
 	private final PressingRegistry pressingRegistry = new PressingRegistry();
 	private final IHeatSourceRegistry heatSourceRegistry = new HeatSourceRegistry();
 
@@ -36,9 +36,9 @@ public class CellarRegistry
 		return boozeRegistry;
 	}
 
-	public BrewingRegistry brew()
+	public BrewingRegistry brewing()
 	{
-		return brewRegistry;
+		return brewingRegistry;
 	}
 
 	public PressingRegistry pressing()

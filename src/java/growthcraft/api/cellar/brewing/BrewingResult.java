@@ -1,7 +1,9 @@
 package growthcraft.api.cellar.brewing;
 
-import growthcraft.api.cellar.common.PressingResult;
+import growthcraft.api.cellar.common.ProcessingResult;
 import growthcraft.api.cellar.common.Residue;
+
+import net.minecraftforge.fluids.Fluid;
 
 public class BrewingResult extends ProcessingResult
 {

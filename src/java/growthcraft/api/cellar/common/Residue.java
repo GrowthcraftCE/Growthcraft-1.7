@@ -1,19 +1,25 @@
 package growthcraft.api.cellar.common;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.init.Items;
 
 public class Residue
 {
 	public final ItemStack residueItem;
 	/**
-	 * How frequent is this residual item created when processing?
-	 * The lower this value, the less frequent, 1 is the maximum (all the time)
+	 * How much does this residue need to build up before it creates an item?
+	 * The lower this value, the more it requires, the higher the less.
 	 */
-	public final float spawnRate;
+	public final float pomaceRate;
 
 	public Residue(ItemStack item, float rate)
 	{
 		this.residueItem = item;
-		this.spawnRate = rate;
+		this.pomaceRate = rate;
+	}
+
+	public static Residue newDefault(float pomace)
+	{
+		return new Residue(new ItemStack(Items.dye, 1, 15), pomace);
 	}
 }

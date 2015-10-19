@@ -1,5 +1,7 @@
 package growthcraft.api.cellar.booze;
 
+import growthcraft.api.cellar.CellarRegistry;
+
 import net.minecraftforge.fluids.Fluid;
 
 public class Booze extends Fluid
