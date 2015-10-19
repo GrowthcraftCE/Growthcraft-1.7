@@ -45,12 +45,8 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyJar.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.EARTH, 1).add(Aspect.FIRE, 1).add(Aspect.VOID, 1).add(Aspect.GREED, 3).add(Aspect.HUNGER, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.bee.asStack(), new AspectList().add(Aspect.BEAST, 1).add(Aspect.AIR, 1).add(Aspect.FLIGHT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeHive.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.BEAST, 1).add(Aspect.ORDER, 1).add(Aspect.VOID, 1));
-		final AspectList beeBoxAspects = new AspectList().add(Aspect.TREE, 4).add(Aspect.ORDER, 1).add(Aspect.GREED, 1).add(Aspect.VOID, 1);
-		for (int i = 0; i < 6; ++i)
-		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBox.asStack(1, i), beeBoxAspects);
-		}
-		ThaumcraftApi.registerObjectTag(GrowthCraftBees.maliceBeeBox.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.ENTROPY, 1).add(Aspect.GREED, 1).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBox.asStack(), new int[]{0,1,2,3,4,5}, new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.maliceBeeBox.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.ENTROPY, 1).add(Aspect.VOID, 1));
 
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMead.asStack(1, 0), new AspectList().add(Aspect.WATER, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMead.asStack(1, 1), new AspectList().add(Aspect.HEAL, 3).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
@@ -61,6 +57,11 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMeadBuckets[1].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMeadBuckets[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMeadBuckets[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMeadFluids[0].asStack(1), new AspectList().add(Aspect.WATER, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMeadFluids[1].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMeadFluids[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMeadFluids[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2));
 	}
 }
 

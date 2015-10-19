@@ -58,5 +58,11 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopAleBuckets[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopAleBuckets[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopAleBuckets[4].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+
+		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopAleFluids[0].asStack(1), new AspectList().add(Aspect.WATER, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopAleFluids[1].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopAleFluids[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopAleFluids[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopAleFluids[4].asStack(1), new AspectList().add(Aspect.WATER, 1));
 	}
 }

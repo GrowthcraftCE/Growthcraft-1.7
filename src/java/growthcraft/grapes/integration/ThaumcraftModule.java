@@ -56,5 +56,10 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapeWineBuckets[1].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapeWineBuckets[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapeWineBuckets[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+
+		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapeWineFluids[0].asStack(1), new AspectList().add(Aspect.WATER, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapeWineFluids[1].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapeWineFluids[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapeWineFluids[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2));
 	}
 }
