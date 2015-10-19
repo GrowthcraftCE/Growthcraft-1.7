@@ -1,4 +1,4 @@
-package growthcraft.cellar;
+package growthcraft.cellar.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

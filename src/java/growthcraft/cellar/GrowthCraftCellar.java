@@ -10,6 +10,7 @@ import growthcraft.cellar.block.BlockFruitPress;
 import growthcraft.cellar.block.BlockFruitPresser;
 import growthcraft.cellar.event.ItemCraftedEventCellar;
 import growthcraft.cellar.event.LivingUpdateEventCellar;
+import growthcraft.cellar.item.ItemChievDummy;
 import growthcraft.cellar.network.CommonProxy;
 import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.potion.PotionCellar;
