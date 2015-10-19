@@ -108,12 +108,12 @@ public class GuiBrewKettle extends GuiCellar
 		final int h = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize);
 
-		final int i = this.te.getBrewProgressScaled(28);
-		this.drawTexturedModalRect(w + 98, h + 30, 176, 0, 9, i);
+		this.drawTexturedModalRect(w + 98, h + 30, 176, 0, 9, this.te.getBrewProgressScaled(28));
 
 		if (this.te.hasFire())
 		{
-			this.drawTexturedModalRect(w + 67, h + 53, 176, 28, 14, 14);
+			final int h = this.te.getHeatScaled(14);
+			this.drawTexturedModalRect(w + 67, h + 53, 176, 28 + 14 - h, 14, h);
 		}
 
 		if (this.te.getFluidAmountScaled(52, 0) > 0)

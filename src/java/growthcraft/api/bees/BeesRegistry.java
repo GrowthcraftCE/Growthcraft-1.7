@@ -15,14 +15,14 @@ public class BeesRegistry
 	 *
 	 * Yes, it's the same functons/methods as Forge's tall grass hook.
 	 */
-	private static final BeesRegistry instance = new BeesRegistry();
+	private static final BeesRegistry INSTANCE = new BeesRegistry();
 	private static final int NO_META = -1;
 	private final List<Item> beesList = new ArrayList<Item>();
 	private final List<List> flowersList = new ArrayList<List>();
 
 	public static final BeesRegistry instance()
 	{
-		return instance;
+		return INSTANCE;
 	}
 
 	///////////////////////////////////////////////////////////////////////

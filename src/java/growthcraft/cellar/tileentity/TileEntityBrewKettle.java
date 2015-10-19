@@ -10,6 +10,7 @@ import growthcraft.api.cellar.FluidUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.ISidedInventory;
@@ -19,6 +20,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -43,7 +45,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	// Other Vars.
 	protected float residue;
-	protected int time;
+	protected double time;
 	protected boolean update;
 
 	private ItemStack[] invSlots = new ItemStack[2];
@@ -51,6 +53,11 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	private int[] maxCaps = new int[] {maxCap, maxCap};
 	private CellarTank[] tank = new CellarTank[] {new CellarTank(this.maxCaps[0], this), new CellarTank(this.maxCaps[1], this)};
 	private String name;
+
+	private void resetTime()
+	{
+		this.time = 0.0;
+	}
 
 	/************
 	 * UPDATE
@@ -68,17 +75,18 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 		{
 			if (this.canBrew())
 			{
-				++this.time;
+				final float multiplier = getHeatMultiplier();
+				this.time += multiplier * 1;
 
-				if (this.time == CellarRegistry.instance().brew().getBrewingTime(getFluidStack(0), this.invSlots[0]))
+				if ((int)time >= CellarRegistry.instance().brew().getBrewingTime(getFluidStack(0), this.invSlots[0]))
 				{
-					this.time = 0;
+					resetTime();
 					this.brewItem();
 				}
 			}
 			else
 			{
-				this.time = 0;
+				resetTime();
 			}
 
 			update = true;
@@ -116,14 +124,23 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	public boolean hasFire()
 	{
-		return CellarRegistry.instance().isBlockHeatSource(this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord));
+		final Block block = this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord);
+		final int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord - 1, this.zCoord);
+		return CellarRegistry.instance().heatSource().isBlockHeatSource(block, meta);
+	}
+
+	public float getHeatMultiplier()
+	{
+		final Block block = this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord);
+		final int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord - 1, this.zCoord);
+		return CellarRegistry.instance().heatSource().getHeatMultiplier(block, meta);
 	}
 
 	public void brewItem()
 	{
 		final BrewRegistry brew = CellarRegistry.instance().brew();
 		// set spent grain
-		final float f = brew.getBrewingResidue(getFluidStack(0), this.invSlots[0]);
+		final float f = brew.getBrewingResidueRate(getFluidStack(0), this.invSlots[0]);
 		this.residue = this.residue + f;
 		if (this.residue >= 1.0F)
 		{
@@ -168,14 +185,19 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	}
 
 	@SideOnly(Side.CLIENT)
-	public int getBrewProgressScaled(int par1)
+	public int getBrewProgressScaled(int range)
 	{
 		if (this.canBrew())
 		{
-			return this.time * par1 / CellarRegistry.instance().brew().getBrewingTime(getFluidStack(0), this.invSlots[0]);
+			return (int)time * range / CellarRegistry.instance().brew().getBrewingTime(getFluidStack(0), this.invSlots[0]);
 		}
-
 		return 0;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int getHeatScaled(int range)
+	{
+		return (int)(MathHelper.clamp_float(getHeatMultiplier(), 0.0f, 1.0f) * range);
 	}
 
 	/************
@@ -437,7 +459,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	public void sendGUINetworkData(ContainerBrewKettle container, ICrafting iCrafting)
 	{
-		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME, time);
+		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME, (int)time);
 		FluidStack fluid = tank[0].getFluid();
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK1_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK1_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);

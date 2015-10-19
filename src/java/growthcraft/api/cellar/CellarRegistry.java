@@ -50,17 +50,11 @@ public class CellarRegistry
 	 **/
 
 	private static final CellarRegistry INSTANCE = new CellarRegistry();
+
 	private final BoozeRegistry boozeRegistry = new BoozeRegistry();
 	private final BrewRegistry brewRegistry = new BrewRegistry();
 	private final PressingRegistry pressingRegistry = new PressingRegistry();
-
-	////////////////////////////////////////////////////////////////////////
-	// LISTS AND MAPS ////YOU ARE NOT SUPPOSED TO TOUCH THIS D:<////////////
-	////////////////////////////////////////////////////////////////////////
-
-	// HEAT SOURCE ///////////////////////////////////////////////////
-	private List<Block> heatSourceList = new ArrayList<Block>();
-	public List<Block> getHeatSourceList() { return heatSourceList; }
+	private final IHeatSourceRegistry heatSourceRegistry = new HeatSourceRegistry();
 
 	public static final CellarRegistry instance()
 	{
@@ -82,24 +76,8 @@ public class CellarRegistry
 		return pressingRegistry;
 	}
 
-	//////////////////////////////////////////////////////////////////
-	// HEAT SOURCE ///////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////
-	/**
-	 * addHeatSource()
-	 *
-	 * Adds a valid heat source (like fire, lava, etc.)
-	 * Currently only used by Brew Kettle.
-	 *
-	 * @param block - The block. (This is not metadata sensitive, and will never be).
-	 **/
-	public void addHeatSource(Block block)
+	public IHeatSourceRegistry heatSource()
 	{
-		this.heatSourceList.add(block);
-	}
-
-	public boolean isBlockHeatSource(Block block)
-	{
-		return this.heatSourceList.contains(block);
+		return heatSourceRegistry;
 	}
 }

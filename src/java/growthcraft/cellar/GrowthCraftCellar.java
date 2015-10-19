@@ -175,12 +175,17 @@ public class GrowthCraftCellar
 		AchievementPageGrowthcraft.chievMasterList.add(fermentBooze);
 		AchievementPageGrowthcraft.chievMasterList.add(getDrunk);
 
-		CellarRegistry.instance().addHeatSource(Blocks.fire);
-		CellarRegistry.instance().addHeatSource(Blocks.lava);
-		CellarRegistry.instance().addHeatSource(Blocks.flowing_lava);
+		registerHeatSources();
 
 		NEI.hideItem(fruitPresser.asStack());
 		NEI.hideItem(chievItemDummy.asStack());
+	}
+
+	private void registerHeatSources()
+	{
+		CellarRegistry.instance().heatSource().addHeatSource(Blocks.fire, -1, 1.0f);
+		CellarRegistry.instance().heatSource().addHeatSource(Blocks.lava, -1, 0.5f);
+		CellarRegistry.instance().heatSource().addHeatSource(Blocks.flowing_lava, -1, 0.5f);
 	}
 
 	@EventHandler
