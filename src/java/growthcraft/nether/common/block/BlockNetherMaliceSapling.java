@@ -2,7 +2,7 @@ package growthcraft.nether.common.block;
 
 import java.util.Random;
 
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.BlockFlags;
 import growthcraft.nether.common.world.WorldGeneratorMaliceTree;
 import growthcraft.nether.GrowthCraftNether;
 
@@ -21,7 +21,7 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 public class BlockNetherMaliceSapling extends BlockBush implements IGrowable
 {
 	@SideOnly(Side.CLIENT)
-	private static IIcon icon;
+	private IIcon icon;
 
 	private final int growth = 8;
 

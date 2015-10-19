@@ -2,10 +2,10 @@ package growthcraft.nether.common.block;
 
 import java.util.Random;
 
-import growthcraft.core.block.ICropDataProvider;
+import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.integration.AppleCore;
-import growthcraft.core.utils.BlockFlags;
-import growthcraft.core.utils.RenderType;
+import growthcraft.core.util.BlockFlags;
+import growthcraft.core.util.RenderType;
 import growthcraft.nether.GrowthCraftNether;
 
 import cpw.mods.fml.common.eventhandler.Event;

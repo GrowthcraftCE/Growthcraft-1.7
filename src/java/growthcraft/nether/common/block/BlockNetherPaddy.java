@@ -4,10 +4,10 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.core.block.BlockPaddyBase;
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.common.block.BlockPaddyBase;
+import growthcraft.core.util.BlockFlags;
 import growthcraft.nether.GrowthCraftNether;
-import growthcraft.nether.utils.NetherBlockCheck;
+import growthcraft.nether.util.NetherBlockCheck;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

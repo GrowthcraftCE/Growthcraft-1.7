@@ -1,7 +1,7 @@
 package growthcraft.nether.common.block;
 
 import growthcraft.nether.GrowthCraftNether;
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

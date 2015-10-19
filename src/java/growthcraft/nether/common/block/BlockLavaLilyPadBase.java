@@ -2,7 +2,7 @@ package growthcraft.nether.common.block;
 
 import java.util.List;
 
-import growthcraft.core.utils.RenderType;
+import growthcraft.core.util.RenderType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;

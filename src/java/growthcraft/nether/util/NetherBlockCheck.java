@@ -1,4 +1,4 @@
-package growthcraft.nether.utils;
+package growthcraft.nether.util;
 
 import growthcraft.nether.GrowthCraftNether;
 

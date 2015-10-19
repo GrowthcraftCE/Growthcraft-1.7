@@ -1,4 +1,4 @@
-package growthcraft.nether.utils;
+package growthcraft.nether.util;
 
 import net.minecraft.util.DamageSource;
 

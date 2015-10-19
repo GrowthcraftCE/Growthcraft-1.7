@@ -1,11 +1,12 @@
 package growthcraft.nether.init;
 
-import growthcraft.api.cellar.Booze;
+import growthcraft.api.cellar.booze.Booze;
+import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
-import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.utils.BoozeRegistryHelper;
+import growthcraft.cellar.common.item.ItemBoozeBottle;
+import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.nether.GrowthCraftNether;
 
@@ -59,8 +60,8 @@ public class GrcNetherBooze
 		BoozeRegistryHelper.registerBooze(fireBrandyBooze, fireBrandyFluids, fireBrandyBuckets, fireBrandy, "grcnether.fireBrandy", null);
 		BoozeRegistryHelper.registerBooze(maliceCiderBooze, maliceCiderFluids, maliceCiderBuckets, maliceCider, "grcnether.maliceCider", null);
 
-		CellarRegistry.instance().brew().addBrewing(FluidRegistry.WATER, GrowthCraftNether.blocks.netherCinderrot.getItem(), fireBrandyBooze[0], GrowthCraftNether.getConfig().fireBrandyBrewTime, 20, 0.5F);
-		CellarRegistry.instance().pressing().addPressing(GrowthCraftNether.items.netherMaliceFruit.getItem(), maliceCiderBooze[0], GrowthCraftNether.getConfig().maliceCiderPressingTime, 40, 0.3F);
+		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, GrowthCraftNether.blocks.netherCinderrot.getItem(), fireBrandyBooze[0], GrowthCraftNether.getConfig().fireBrandyBrewTime, 20, Residue.newDefault(0.5F));
+		CellarRegistry.instance().pressing().addPressing(GrowthCraftNether.items.netherMaliceFruit.getItem(), maliceCiderBooze[0], GrowthCraftNether.getConfig().maliceCiderPressingTime, 40, Residue.newDefault(0.3F));
 	}
 
 	public void setBoozeIcons(IIcon icon)

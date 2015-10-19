@@ -1,7 +1,7 @@
 package growthcraft.nether.common.item;
 
-import growthcraft.core.utils.BlockCheck;
-import growthcraft.core.utils.ItemUtils;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.core.util.ItemUtils;
 import growthcraft.nether.GrowthCraftNether;
 import growthcraft.nether.common.block.BlockNetherSquashStem;
 
@@ -54,7 +54,7 @@ public class ItemNetherSquashSeeds extends Item implements IPlantable
 			if (BlockCheck.canSustainPlant(world, x, y, z, ForgeDirection.DOWN, plant))
 			{
 				world.setBlock(x, y - 1, z, plant);
-				ItemUtils.consumeItem(stack);
+				ItemUtils.consumeStack(stack);
 				return true;
 			}
 		}

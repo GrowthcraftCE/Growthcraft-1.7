@@ -1,7 +1,7 @@
 package growthcraft.nether.common.block;
 
 import growthcraft.nether.GrowthCraftNether;
-import growthcraft.core.block.Materials;
+import growthcraft.core.common.block.Materials;
 
 import net.minecraft.block.Block;
 

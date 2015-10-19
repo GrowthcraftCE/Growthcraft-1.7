@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import growthcraft.nether.GrowthCraftNether;
-import growthcraft.core.block.Materials;
+import growthcraft.core.common.block.Materials;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

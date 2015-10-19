@@ -48,11 +48,11 @@ public class GrowthCraftNether
 		this.config = new Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/nether.conf");
 
-		this.tab = new CreativeTabsGrowthcraftNether();
+		tab = new CreativeTabsGrowthcraftNether();
 
-		this.booze = new GrcNetherBooze();
-		this.blocks = new GrcNetherBlocks();
-		this.items = new GrcNetherItems();
+		booze = new GrcNetherBooze();
+		blocks = new GrcNetherBlocks();
+		items = new GrcNetherItems();
 
 		blocks.preInit();
 		items.preInit();

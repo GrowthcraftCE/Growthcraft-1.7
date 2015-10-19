@@ -2,8 +2,8 @@ package growthcraft.nether.common.block;
 
 import java.util.Random;
 
-import growthcraft.core.utils.BlockCheck;
-import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.core.util.BlockFlags;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;

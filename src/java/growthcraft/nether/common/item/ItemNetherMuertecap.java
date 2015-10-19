@@ -1,7 +1,7 @@
 package growthcraft.nether.common.item;
 
 import growthcraft.nether.GrowthCraftNether;
-import growthcraft.nether.utils.DamageSources;
+import growthcraft.nether.util.DamageSources;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

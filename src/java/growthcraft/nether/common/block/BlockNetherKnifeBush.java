@@ -1,7 +1,7 @@
 package growthcraft.nether.common.block;
 
 import growthcraft.nether.GrowthCraftNether;
-import growthcraft.nether.utils.DamageSources;
+import growthcraft.nether.util.DamageSources;
 
 import net.minecraft.block.BlockBush;
 import net.minecraft.entity.Entity;
