@@ -36,7 +36,6 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	public BlockBrewKettle()
 	{
 		super(Material.iron);
-		this.isBlockContainer = true;
 		this.setHardness(2.0F);
 		this.setBlockName("grc.brewKettle");
 		this.setCreativeTab(GrowthCraftCellar.tab);
@@ -76,7 +75,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 		{
 			if (!Utils.fillTank(world, x, y, z, te, is, player))
 			{
-				if (!Utils.drainTank(world, x, y, z, te, is, player, false, 64, 0.35F))
+				if (Utils.drainTank(world, x, y, z, te, is, player, false, 64, 0.35F) == null)
 				{
 					openGui(player, world, x, y, z);
 				}

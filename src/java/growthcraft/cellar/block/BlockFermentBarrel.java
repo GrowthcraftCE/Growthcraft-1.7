@@ -16,9 +16,7 @@ import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -27,7 +25,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
@@ -39,7 +36,6 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 	public BlockFermentBarrel()
 	{
 		super(Material.wood);
-		this.isBlockContainer = true;
 		this.setHardness(2.5F);
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("grc.fermentBarrel");
@@ -54,6 +50,32 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 	/************
 	 * TRIGGERS
 	 ************/
+	private void setAchievements(EntityPlayer player, Fluid fluid)
+	{
+		if (fluid != null)
+		{
+			if (CellarRegistry.instance().booze().isFluidBooze(fluid))
+			{
+				final int meta = CellarRegistry.instance().booze().getBoozeIndex(fluid);
+				if (meta > 0 && meta < 4)
+				{
+					player.triggerAchievement(GrowthCraftCellar.fermentBooze);
+				}
+			}
+		}
+	}
+
+	private boolean drainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
+	{
+		final FluidStack available = Utils.drainTank(world, x, y, z, tank, held, player);
+		if (available != null)
+		{
+			setAchievements(player, available.getFluid());
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
@@ -71,67 +93,18 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 				{
 					openGui(player, world, x, y, z);
 				}
+				else
+				{
+					world.markBlockForUpdate(x, y, z);
+				}
+			}
+			else
+			{
+				world.markBlockForUpdate(x, y, z);
 			}
 			return true;
 		}
 		return false;
-	}
-
-	private boolean drainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
-	{
-		if (held != null)
-		{
-			final FluidStack available = tank.drain(ForgeDirection.UNKNOWN, Integer.MAX_VALUE, false);
-			FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
-
-			if (available != null)
-			{
-				final ItemStack filled = FluidContainerRegistry.fillFluidContainer(available, held);
-				heldContents = FluidContainerRegistry.getFluidForFilledItem(filled);
-
-				if (heldContents != null)
-				{
-					if (!player.inventory.addItemStackToInventory(filled))
-					{
-						world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, filled));
-					}
-					else if (player instanceof EntityPlayerMP)
-					{
-						((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
-					}
-
-					if (!player.capabilities.isCreativeMode)
-					{
-						if (--held.stackSize <= 0)
-						{
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
-						}
-					}
-
-					tank.drain(ForgeDirection.UNKNOWN, heldContents.amount, true);
-					setAchievements(player, available.getFluid());
-
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	private void setAchievements(EntityPlayer player, Fluid fluid)
-	{
-		if (fluid != null)
-		{
-			if (CellarRegistry.instance().booze().isFluidBooze(fluid))
-			{
-				final int meta = CellarRegistry.instance().booze().getBoozeIndex(fluid);
-				if (meta > 0 && meta < 4)
-				{
-					player.triggerAchievement(GrowthCraftCellar.fermentBooze);
-				}
-			}
-		}
 	}
 
 	private void openGui(EntityPlayer player, World world, int x, int y, int z)

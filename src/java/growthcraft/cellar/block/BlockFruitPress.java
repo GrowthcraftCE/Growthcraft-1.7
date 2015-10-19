@@ -32,7 +32,6 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	public BlockFruitPress()
 	{
 		super(Material.wood);
-		this.isBlockContainer = true;
 		this.setHardness(2.0F);
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("grc.fruitPress");
@@ -69,7 +68,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 		if (te != null)
 		{
 			final ItemStack itemstack = player.inventory.getCurrentItem();
-			if (!Utils.drainTank(world, x, y, z, te, itemstack, player, false, 64, 0.35F))
+			if (Utils.drainTank(world, x, y, z, te, itemstack, player, false, 64, 0.35F) == null)
 			{
 				openGui(player, world, x, y, z);
 			}

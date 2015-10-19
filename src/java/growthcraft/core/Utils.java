@@ -126,7 +126,7 @@ public class Utils
 		return false;
 	}
 
-	public static boolean drainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player, boolean expbool, int amount, float exp)
+	public static FluidStack drainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player, boolean expbool, int amount, float exp)
 	{
 		if (held != null)
 		{
@@ -163,12 +163,17 @@ public class Utils
 					}
 					tank.drain(ForgeDirection.UNKNOWN, heldContents.amount, true);
 
-					return true;
+					return available;
 				}
 			}
 		}
 
-		return false;
+		return null;
+	}
+
+	public static FluidStack drainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
+	{
+		return drainTank(world, x, y, z, tank, held, player, false, 0, 0);
 	}
 
 	public static void spawnExp(int amount, float exp, EntityPlayer player)

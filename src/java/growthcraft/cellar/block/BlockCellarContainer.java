@@ -27,6 +27,7 @@ public abstract class BlockCellarContainer extends BlockContainer implements IDr
 	public BlockCellarContainer(Material material)
 	{
 		super(material);
+		this.isBlockContainer = true;
 	}
 
 	/**
