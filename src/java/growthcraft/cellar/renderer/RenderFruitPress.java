@@ -21,9 +21,10 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 	{
 		if (modelID == id)
 		{
+			final BlockFruitPress fruitPress = (BlockFruitPress)block;
 			final Tessellator tes = Tessellator.instance;
-			final IIcon icon = BlockFruitPress.tex[0];
-			final IIcon icon2 = BlockFruitPress.tex[1];
+			final IIcon icon = fruitPress.getIconByIndex(0);
+			final IIcon icon2 = fruitPress.getIconByIndex(1);
 			final double d = 0.0625D;
 
 			renderer.setRenderBounds(1*d, 0.0D, 1*d, 3*d, 3*d, 3*d);
@@ -108,7 +109,7 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			final IIcon[] icon = {BlockFruitPress.tex[0], BlockFruitPress.tex[1]};
+			final BlockFruitPress fruitPress = (BlockFruitPress)block;
 			final int    m    = world.getBlockMetadata(x, y, z);
 			final double d    = 0.0625D;
 
@@ -231,7 +232,7 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 			renderer.uvRotateTop    = 0;
 			renderer.uvRotateBottom = 0;
 
-			renderer.setOverrideBlockTexture(icon[1]);
+			renderer.setOverrideBlockTexture(fruitPress.getIconByIndex(1));
 
 			// Render Bin - Metal Rings
 			renderMetalRings(renderer, block, x, y, z,  7.5*d,  9.5*d);

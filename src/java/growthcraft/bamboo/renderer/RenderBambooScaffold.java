@@ -1,6 +1,5 @@
 package growthcraft.bamboo.renderer;
 
-import growthcraft.bamboo.block.BlockBambooScaffold;
 import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -21,29 +20,29 @@ public class RenderBambooScaffold implements ISimpleBlockRenderingHandler
 		if (modelId == id)
 		{
 			final Tessellator tes = Tessellator.instance;
-			final IIcon icon = BlockBambooScaffold.tex[0];
-			final IIcon icon1 = BlockBambooScaffold.tex[1];
+			final IIcon topIcon = block.getIcon(1, 0);
+			final IIcon sideIcon = block.getIcon(2, 0);
 			final double d = 0.0625D;
 			renderer.setRenderBounds(0.0D, 14*d, 0.0D, 1.0D, 1.0D, 1.0D);
-			RenderUtils.drawInventoryBlock_icon(block, renderer, icon, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, topIcon, tes);
 			// columns
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 2*d, 14*d, 2*d);
-			RenderUtils.drawInventoryBlock_icon(block, renderer, icon1, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, sideIcon, tes);
 			renderer.setRenderBounds(14*d, 0.0D, 0.0D, 1.0D, 14*d, 2*d);
-			RenderUtils.drawInventoryBlock_icon(block, renderer, icon1, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, sideIcon, tes);
 			renderer.setRenderBounds(14*d, 0.0D, 14*d, 1.0D, 14*d, 1.0D);
-			RenderUtils.drawInventoryBlock_icon(block, renderer, icon1, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, sideIcon, tes);
 			renderer.setRenderBounds(0.0D, 0.0D, 14*d, 2*d, 14*d, 1.0D);
-			RenderUtils.drawInventoryBlock_icon(block, renderer, icon1, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, sideIcon, tes);
 			// beams
 			renderer.setRenderBounds(2*d, 6*d, 0.0D, 14*d, 8*d, 2*d);
-			RenderUtils.drawInventoryBlock_icon(block, renderer, icon1, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, sideIcon, tes);
 			renderer.setRenderBounds(2*d, 6*d, 14*d, 14*d, 8*d, 1.0D);
-			RenderUtils.drawInventoryBlock_icon(block, renderer, icon1, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, sideIcon, tes);
 			renderer.setRenderBounds(0.0D, 6*d, 2*d, 2*d, 8*d, 14*d);
-			RenderUtils.drawInventoryBlock_icon(block, renderer, icon1, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, sideIcon, tes);
 			renderer.setRenderBounds(14*d, 6*d, 2*d, 1.0D, 8*d, 14*d);
-			RenderUtils.drawInventoryBlock_icon(block, renderer, icon1, tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, sideIcon, tes);
 			renderer.clearOverrideBlockTexture();
 		}
 	}
@@ -54,10 +53,10 @@ public class RenderBambooScaffold implements ISimpleBlockRenderingHandler
 		if (modelId == id)
 		{
 			final double d = 0.0625D;
-			renderer.setOverrideBlockTexture(BlockBambooScaffold.tex[0]);
+			renderer.setOverrideBlockTexture(block.getIcon(1, 0));
 			renderer.setRenderBounds(0.0D, 14*d, 0.0D, 1.0D, 1.0D, 1.0D);
 			renderer.renderStandardBlock(block, x, y, z);
-			renderer.setOverrideBlockTexture(BlockBambooScaffold.tex[1]);
+			renderer.setOverrideBlockTexture(block.getIcon(2, 0));
 			// columns
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 2*d, 14*d, 2*d);
 			renderer.renderStandardBlock(block, x, y, z);

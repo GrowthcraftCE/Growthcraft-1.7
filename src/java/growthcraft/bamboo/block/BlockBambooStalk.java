@@ -68,7 +68,7 @@ public class BlockBambooStalk extends Block
 				{
 					final byte b = 9;
 					int amount = 10;
-					final BlockBambooShoot bambooShoot = (BlockBambooShoot)GrowthCraftBamboo.bambooShoot.getBlock();
+					final BlockBambooShoot bambooShoot = GrowthCraftBamboo.bambooShoot.getBlock();
 
 					for (x1 = x - b; x1 <= x + b; ++x1)
 					{

@@ -31,7 +31,7 @@ import net.minecraft.world.World;
 public class BlockBrewKettle extends BlockCellarContainer implements ICellarFluidHandler
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	private final Random rand = new Random();
 	private final boolean dropItemsInBrewKettle = GrowthCraftCellar.getConfig().dropItemsInBrewKettle;
@@ -229,19 +229,32 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[4];
+		this.icons = new IIcon[4];
 
-		tex[0] = reg.registerIcon("grccellar:brewkettle_0");
-		tex[1] = reg.registerIcon("grccellar:brewkettle_1");
-		tex[2] = reg.registerIcon("grccellar:brewkettle_2");
-		tex[3] = reg.registerIcon("grccellar:brewkettle_3");
+		icons[0] = reg.registerIcon("grccellar:brewkettle_0");
+		icons[1] = reg.registerIcon("grccellar:brewkettle_1");
+		icons[2] = reg.registerIcon("grccellar:brewkettle_2");
+		icons[3] = reg.registerIcon("grccellar:brewkettle_3");
+	}
+
+	public IIcon getIconByIndex(int index)
+	{
+		return icons[index];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return side == 1 ? this.tex[3] : (side == 0 ? this.tex[0] : this.tex[2]);
+		if (side == 1)
+		{
+			return icons[3];
+		}
+		else if (side == 0)
+		{
+			return icons[0];
+		}
+		return icons[2];
 	}
 
 	/************

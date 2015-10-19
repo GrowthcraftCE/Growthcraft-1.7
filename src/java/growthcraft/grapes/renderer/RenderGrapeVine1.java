@@ -24,7 +24,7 @@ public class RenderGrapeVine1 implements ISimpleBlockRenderingHandler
 			final Tessellator tes = Tessellator.instance;
 			final double d = 0.0625D;
 			renderer.setRenderBounds(6*d, 0.0D, 6*d, 10*d, 0.75D, 10*d);
-			RenderUtils.drawInventoryBlock_icon(block, renderer, BlockGrapeVine1.tex[0], tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, block.getIcon(0, 0), tes);
 			if (renderer.useInventoryTint)
 			{
 				final int color = ColorizerFoliage.getFoliageColorBasic();

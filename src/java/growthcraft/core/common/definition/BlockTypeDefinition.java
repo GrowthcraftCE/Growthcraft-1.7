@@ -39,7 +39,7 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T>
 	@Nonnull
 	public T getBlock()
 	{
-		return (T)getObject();
+		return getObject();
 	}
 
 	public Item getItem()

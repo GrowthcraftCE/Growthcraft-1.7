@@ -1,6 +1,5 @@
 package growthcraft.bees.renderer;
 
-import growthcraft.bees.block.BlockBeeHive;
 import growthcraft.core.utils.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -21,7 +20,7 @@ public class RenderBeeHive implements ISimpleBlockRenderingHandler
 		if (modelID == id)
 		{
 			final Tessellator tes = Tessellator.instance;
-			final IIcon[] icon  = {BlockBeeHive.tex[1], BlockBeeHive.tex[1], BlockBeeHive.tex[1], BlockBeeHive.tex[1], BlockBeeHive.tex[1], BlockBeeHive.tex[0] };
+			final IIcon[] icon  = {block.getIcon(1, 0), block.getIcon(1, 0), block.getIcon(1, 0), block.getIcon(1, 0), block.getIcon(1, 0), block.getIcon(0, 0) };
 			final double d = 0.0625D;
 
 			renderer.setRenderBounds(4*d, 0.0D, 4*d, 12*d, 14*d, 12*d);

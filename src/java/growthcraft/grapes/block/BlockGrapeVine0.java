@@ -1,6 +1,7 @@
 package growthcraft.grapes.block;
 
 import growthcraft.core.utils.BlockFlags;
+import growthcraft.core.utils.RenderType;
 import growthcraft.grapes.GrowthCraftGrapes;
 
 import cpw.mods.fml.relauncher.Side;
@@ -19,7 +20,7 @@ import net.minecraft.world.World;
 public class BlockGrapeVine0 extends BlockGrapeVineBase
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	public BlockGrapeVine0()
 	{
@@ -71,17 +72,17 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[2];
+		this.icons = new IIcon[2];
 
-		tex[0] = reg.registerIcon("grcgrapes:vine_0");
-		tex[1] = reg.registerIcon("grcgrapes:vine_1");
+		icons[0] = reg.registerIcon("grcgrapes:vine_0");
+		icons[1] = reg.registerIcon("grcgrapes:vine_1");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return this.tex[MathHelper.clamp_int(meta, 0, 1)];
+		return this.icons[MathHelper.clamp_int(meta, 0, 1)];
 	}
 
 	/************
@@ -90,7 +91,7 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase
 	@Override
 	public int getRenderType()
 	{
-		return 1;
+		return RenderType.BUSH;
 	}
 
 	/************

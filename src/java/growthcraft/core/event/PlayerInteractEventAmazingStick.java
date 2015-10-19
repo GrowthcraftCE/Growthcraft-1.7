@@ -21,10 +21,13 @@ public class PlayerInteractEventAmazingStick
 	@SubscribeEvent
 	public void PlayerInteract(PlayerInteractEvent event)
 	{
-		if (event.action != event.action.RIGHT_CLICK_BLOCK) return;
+		if (event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) return;
+
 		final EntityPlayer player = event.entityPlayer;
 		final World world = player.worldObj;
+
 		if (world.isRemote) return;
+
 		final ItemStack itemstack = player.getCurrentEquippedItem();
 		if (itemstack != null && ItemUtils.isAmazingStick(itemstack))
 		{

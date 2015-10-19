@@ -62,8 +62,8 @@ public class TileEntityFruitPresser extends TileEntity
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setFloat("trans", (float)this.trans);
-		nbt.setFloat("transprev", (float)this.transPrev);
+		nbt.setFloat("trans", trans);
+		nbt.setFloat("transprev", transPrev);
 	}
 
 	/************
@@ -73,14 +73,14 @@ public class TileEntityFruitPresser extends TileEntity
 	public Packet getDescriptionPacket()
 	{
 		final NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag);
+		writeToNBT(nbtTag);
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
-		this.readFromNBT(packet.func_148857_g());
+		readFromNBT(packet.func_148857_g());
 		this.worldObj.func_147479_m(this.xCoord, this.yCoord, this.zCoord);
 	}
 }

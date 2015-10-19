@@ -1,7 +1,6 @@
 package growthcraft.grapes.renderer;
 
 import growthcraft.core.utils.RenderUtils;
-import growthcraft.grapes.block.BlockGrapeBlock;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -26,7 +25,7 @@ public class RenderGrape implements ISimpleBlockRenderingHandler
 			final Tessellator tessellator = Tessellator.instance;
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-			final IIcon icon = BlockGrapeBlock.tex[0];
+			final IIcon icon = block.getIcon(0, 0);
 			final double d = 0.0625D;
 
 			long random = (long)(x * 3129871) ^ (long)y * 116129781L ^ (long)z;

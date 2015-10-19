@@ -23,11 +23,12 @@ public class RenderRope implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
+			final BlockRope blockRope = (BlockRope)block;
 			final double d = 0.0625D;
 			final Tessellator tessellator = Tessellator.instance;
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-			final IIcon icon = BlockRope.tex[0];
+			final IIcon icon = blockRope.getIconByIndex(0);
 
 			final boolean flag = ((BlockRope)block).canConnectRopeTo(world, x, y, z - 1);
 			final boolean flag1 = ((BlockRope)block).canConnectRopeTo(world, x, y, z + 1);

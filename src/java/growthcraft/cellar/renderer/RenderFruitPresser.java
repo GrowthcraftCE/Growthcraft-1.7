@@ -21,8 +21,9 @@ public class RenderFruitPresser implements ISimpleBlockRenderingHandler
 	{
 		if (modelID == id)
 		{
+			final BlockFruitPresser fruitPresser = (BlockFruitPresser)block;
 			final Tessellator tes = Tessellator.instance;
-			final IIcon[] icon = {BlockFruitPresser.tex[0], BlockFruitPresser.tex[1], BlockFruitPresser.tex[2], BlockFruitPresser.tex[2], BlockFruitPresser.tex[2], BlockFruitPresser.tex[2] };
+			final IIcon[] icon = { fruitPresser.getIconByIndex(0), fruitPresser.getIconByIndex(1), fruitPresser.getIconByIndex(2), fruitPresser.getIconByIndex(2), fruitPresser.getIconByIndex(2), fruitPresser.getIconByIndex(2) };
 			final double d    = 0.0625D;
 			// Render Machine
 			renderer.setRenderBounds( 3*d,  7*d,  3*d, 13*d, 15*d, 13*d);
@@ -36,7 +37,8 @@ public class RenderFruitPresser implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			final IIcon[] icon = {BlockFruitPresser.tex[0], BlockFruitPresser.tex[1], BlockFruitPresser.tex[2], BlockFruitPresser.tex[3]};
+			final BlockFruitPresser fruitPresser = (BlockFruitPresser)block;
+			final IIcon[] icon = {fruitPresser.getIconByIndex(0), fruitPresser.getIconByIndex(1), fruitPresser.getIconByIndex(2), fruitPresser.getIconByIndex(3)};
 			final int    m    = world.getBlockMetadata(x, y, z);
 			final double d    = 0.0625D;
 

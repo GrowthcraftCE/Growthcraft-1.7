@@ -24,7 +24,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockBambooScaffold extends Block
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	public BlockBambooScaffold()
 	{
@@ -168,17 +168,21 @@ public class BlockBambooScaffold extends Block
 	@Override
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[2];
+		this.icons = new IIcon[2];
 
-		tex[0] = reg.registerIcon("grcbamboo:block");
-		tex[1] = reg.registerIcon("grcbamboo:scaffold");
+		icons[0] = reg.registerIcon("grcbamboo:block");
+		icons[1] = reg.registerIcon("grcbamboo:scaffold");
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public IIcon getIcon(int side, int meta)
 	{
-		return this.tex[0];
+		if (side == 1)
+		{
+			return icons[0];
+		}
+		return icons[1];
 	}
 
 	/************

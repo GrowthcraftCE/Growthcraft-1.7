@@ -21,13 +21,14 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 	{
 		if (modelID == id)
 		{
+			final BlockFenceRope fenceRope = (BlockFenceRope)block;
 			final Tessellator tes = Tessellator.instance;
 			final double d = 0.0625D;
 			final float f = 0.0F;
 			renderer.setRenderBounds(6*d, 0.0D, 6*d, 10*d, 1.0D, 10*d);
-			RenderUtils.drawInventoryBlock_icon(block, renderer, BlockFenceRope.tex[0], tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, fenceRope.getIconByIndex(0), tes);
 			tes.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-			IIcon icon = BlockFenceRope.tex[1];
+			IIcon icon = fenceRope.getIconByIndex(1);
 
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 			//Coordinates
@@ -102,7 +103,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 			tes.addVertexWithUV(minX, minY, minZ, minU, maxV);
 			tes.draw();
 
-			icon = BlockFenceRope.tex[2];
+			icon = fenceRope.getIconByIndex(2);
 
 			//Top/Bottom - UV
 			minU = (double)icon.getMinU();
@@ -145,10 +146,11 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 			renderer.renderStandardBlock(block, x, y, z);
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 
+			final BlockFenceRope fenceRope = (BlockFenceRope)block;
 			final Tessellator tessellator = Tessellator.instance;
 			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-			IIcon icon = BlockFenceRope.tex[1];
+			IIcon icon = fenceRope.getIconByIndex(1);
 
 			//Coordinates
 			double minX = (double)x + 5*d;
@@ -210,7 +212,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 			tessellator.addVertexWithUV(minX, maxY, minZ, minU, minV);
 			tessellator.addVertexWithUV(minX, minY, minZ, minU, maxV);
 
-			icon = BlockFenceRope.tex[2];
+			icon = fenceRope.getIconByIndex(2);
 
 			//Top/Bottom - UV
 			minU = (double)icon.getMinU();

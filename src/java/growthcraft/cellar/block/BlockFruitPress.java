@@ -29,7 +29,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockFruitPress extends BlockCellarContainer implements ICellarFluidHandler
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	private final Random rand = new Random();
 
@@ -229,11 +229,11 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 
 		if (meta == 0)
 		{
-			return side == side.EAST || side == side.WEST;
+			return side == ForgeDirection.EAST || side == ForgeDirection.WEST;
 		}
 		else if (meta == 1)
 		{
-			return side == side.NORTH || side == side.SOUTH;
+			return side == ForgeDirection.NORTH || side == ForgeDirection.SOUTH;
 		}
 
 		return isNormalCube(world, x, y, z);
@@ -306,17 +306,22 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[2];
+		this.icons = new IIcon[2];
 
-		tex[0] = reg.registerIcon("planks_oak");
-		tex[1] = reg.registerIcon("anvil_base");
+		icons[0] = reg.registerIcon("planks_oak");
+		icons[1] = reg.registerIcon("anvil_base");
+	}
+
+	public IIcon getIconByIndex(int index)
+	{
+		return icons[index];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return this.tex[0];
+		return icons[0];
 	}
 
 	/************

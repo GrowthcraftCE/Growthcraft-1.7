@@ -1,7 +1,5 @@
 package growthcraft.fishtrap.renderer;
 
-import growthcraft.fishtrap.block.BlockFishTrap;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
@@ -57,7 +55,7 @@ public class RenderFishTrap implements ISimpleBlockRenderingHandler
 			renderer.renderFaceZPos(block, (double)x, (double)y, (double)((float)z - f2), renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
 			renderer.renderFaceZNeg(block, (double)x, (double)y, (double)((float)z + f2), renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
 
-			renderer.setOverrideBlockTexture(BlockFishTrap.tex[5]);
+			renderer.setOverrideBlockTexture(block.getIcon(0, 0));
 			renderer.renderCrossedSquares(block, x, y, z);
 			renderer.clearOverrideBlockTexture();
 

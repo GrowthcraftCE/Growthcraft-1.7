@@ -407,7 +407,7 @@ public class BlockBeeBox extends BlockContainer
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
-		return side == side.UP;
+		return ForgeDirection.UP == side;
 	}
 
 	/************

@@ -25,7 +25,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiFermentBarrel extends GuiCellar
 {
-	private static final ResourceLocation res = new ResourceLocation("grccellar" , "textures/guis/fermentbarrel_gui.png");
+	private final ResourceLocation res = new ResourceLocation("grccellar" , "textures/guis/fermentbarrel_gui.png");
 	private TileEntityFermentBarrel te;
 	private GuiButtonDiscard button;
 
@@ -184,11 +184,11 @@ public class GuiFermentBarrel extends GuiCellar
 
 			if (this.te.isFluidTankFilled())
 			{
-				if (CellarRegistry.instance().booze().isFluidBooze(this.te.getFluid()))
+				if (CellarRegistry.instance().booze().isFluidBooze(this.te.getFluidStack()))
 				{
-					tooltip.add(this.te.getFluid().getLocalizedName());
-					final Fluid fluid = CellarRegistry.instance().booze().maybeAlternateBooze(this.te.getFluid());
-					final String s = UnitFormatter.fluidModifier(this.te.getFluid());
+					final FluidStack fluid = CellarRegistry.instance().booze().maybeAlternateBoozeStack(this.te.getFluidStack());
+					tooltip.add(fluid.getLocalizedName());
+					final String s = UnitFormatter.fluidModifier(fluid);
 					if (s != null) tooltip.add(s);
 
 					if (this.te.getBoozeMeta() > 3)
@@ -199,7 +199,7 @@ public class GuiFermentBarrel extends GuiCellar
 				}
 				else
 				{
-					tooltip.add(this.te.getFluid().getLocalizedName());
+					tooltip.add(this.te.getFluidStack().getLocalizedName());
 					tooltip.add("");
 					tooltip.add(EnumChatFormatting.RED + I18n.format("gui.grc.cantferment"));
 				}

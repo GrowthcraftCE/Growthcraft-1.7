@@ -40,11 +40,11 @@ public class RenderBlockFruit implements ISimpleBlockRenderingHandler
 		final double d1 = d0*d;
 
 		// Coordinates
-		double minX = ((double)x + 8*d) - d1/2;
+		double minX = (x + 8 * d) - d1 / 2;
 		double maxX = minX + d1;
-		double maxY = (double)y + 15*d;
+		double maxY = y + 15 * d;
 		double minY = maxY - d1;
-		double minZ = ((double)z + 8*d) - d1/2;
+		double minZ = (z + 8 * d) - d1 / 2;
 		double maxZ = minZ + d1;
 
 		// Sides - UV
@@ -117,12 +117,12 @@ public class RenderBlockFruit implements ISimpleBlockRenderingHandler
 		tessellator.draw();
 
 		// Stem - Coordinates
-		minX = (double)x + 7.5*d;
-		maxX = (double)x + 8.5*d;
-		minY = (double)y + 15*d;
-		maxY = (double)y + 17*d;
-		minZ = (double)z + 7.5*d;
-		maxZ = (double)z + 8.5*d;
+		minX = x + 7.5 * d;
+		maxX = x + 8.5 * d;
+		minY = y + 15 * d;
+		maxY = y + 17 * d;
+		minZ = z + 7.5 * d;
+		maxZ = z + 8.5 * d;
 
 		// Stem - UV
 		minU = (double)icon.getInterpolatedU(13);
@@ -246,12 +246,12 @@ public class RenderBlockFruit implements ISimpleBlockRenderingHandler
 			tessellator.addVertexWithUV(maxX, minY, minZ, minU, maxV);
 
 			//Stem - Coordinates
-			minX = (double)x + 7.5*d;
-			maxX = (double)x + 8.5*d;
-			minY = (double)y + 15*d;
-			maxY = (double)y + 17*d;
-			minZ = (double)z + 7.5*d;
-			maxZ = (double)z + 8.5*d;
+			minX = x + 7.5 * d;
+			maxX = x + 8.5 * d;
+			minY = y + 15 * d;
+			maxY = y + 17 * d;
+			minZ = z + 7.5 * d;
+			maxZ = z + 8.5 * d;
 
 			//Stem - UV
 			minU = (double)icon.getInterpolatedU(13);

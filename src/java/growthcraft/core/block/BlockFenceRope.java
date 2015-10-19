@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 public class BlockFenceRope extends Block implements IBlockRope
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	public BlockFenceRope()
 	{
@@ -107,18 +107,23 @@ public class BlockFenceRope extends Block implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[3];
+		this.icons = new IIcon[3];
 
-		tex[0] = reg.registerIcon("planks_oak");
-		tex[1] = reg.registerIcon("grccore:rope_0");
-		tex[2] = reg.registerIcon("grccore:rope_1");
+		icons[0] = reg.registerIcon("planks_oak");
+		icons[1] = reg.registerIcon("grccore:rope_0");
+		icons[2] = reg.registerIcon("grccore:rope_1");
+	}
+
+	public IIcon getIconByIndex(int index)
+	{
+		return icons[index];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return this.tex[0];
+		return icons[0];
 	}
 
 	/************

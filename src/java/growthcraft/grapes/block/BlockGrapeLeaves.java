@@ -27,7 +27,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	private final int grapeLeavesGrowthRate = GrowthCraftGrapes.getConfig().grapeLeavesGrowthRate;
 	private final int grapeSpawnRate = GrowthCraftGrapes.getConfig().grapeSpawnRate;
@@ -264,19 +264,24 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[4];
+		this.icons = new IIcon[4];
 
-		tex[0] = reg.registerIcon("grcgrapes:leaves");
-		tex[1] = reg.registerIcon("grcgrapes:leaves_opaque");
-		tex[2] = reg.registerIcon("grccore:rope_1");
-		tex[3] = reg.registerIcon("grcgrapes:leaves_half");
+		icons[0] = reg.registerIcon("grcgrapes:leaves");
+		icons[1] = reg.registerIcon("grcgrapes:leaves_opaque");
+		icons[2] = reg.registerIcon("grccore:rope_1");
+		icons[3] = reg.registerIcon("grcgrapes:leaves_half");
+	}
+
+	public IIcon getIconByIndex(int index)
+	{
+		return icons[index];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return this.tex[this.isOpaqueCube() ? 1 : 0];
+		return icons[isOpaqueCube() ? 1 : 0];
 	}
 
 	/************

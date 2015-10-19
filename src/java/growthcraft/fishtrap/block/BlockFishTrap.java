@@ -33,7 +33,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 public class BlockFishTrap extends BlockContainer
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	private final float chance = GrowthCraftFishTrap.getConfig().fishTrapCatchRate;
 	private Random rand = new Random();
@@ -275,16 +275,16 @@ public class BlockFishTrap extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[1];
+		this.icons = new IIcon[1];
 
-		tex[0] = reg.registerIcon("grcfishtrap:fishtrap");
+		icons[0] = reg.registerIcon("grcfishtrap:fishtrap");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return this.tex[0];
+		return icons[0];
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import growthcraft.grapes.block.BlockGrapeLeaves;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
@@ -32,7 +31,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 				final float f3 = (float)(color & 255) / 255.0F;
 				GL11.glColor4f(f1, f2, f3, 1.0F);
 			}
-			RenderUtils.drawInventoryBlock_icon(block, renderer, ((BlockGrapeLeaves)block).getIcon(0, 0), tes);
+			RenderUtils.drawInventoryBlock_icon(block, renderer, block.getIcon(0, 0), tes);
 		}
 	}
 
@@ -41,7 +40,8 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			final boolean graphicFlag = !((BlockLeaves)Blocks.leaves).isOpaqueCube();
+			final BlockGrapeLeaves grapeLeaves = (BlockGrapeLeaves)block;
+			final boolean graphicFlag = !Blocks.leaves.isOpaqueCube();
 			renderer.renderStandardBlock(block, x, y, z);
 			final double d = 0.0625D;
 
@@ -52,7 +52,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 			final float g = (float)(color >> 8 & 255) / 255.0F;
 			final float b = (float)(color & 255) / 255.0F;
 			tessellator.setColorOpaque_F(r * 1.0F, g * 1.0F, b * 1.0F);
-			IIcon icon = BlockGrapeLeaves.tex[3];
+			IIcon icon = grapeLeaves.getIconByIndex(3);
 
 			double minX;
 			double maxX;
@@ -119,7 +119,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler
 
 				//Render Ropes
 				tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-				icon = BlockGrapeLeaves.tex[2];
+				icon = grapeLeaves.getIconByIndex(2);
 
 				final boolean flag = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x, y, z - 1);
 				final boolean flag1 = ((BlockGrapeLeaves)block).canConnectRopeTo(world, x, y, z + 1);

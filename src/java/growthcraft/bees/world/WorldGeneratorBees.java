@@ -40,7 +40,7 @@ public class WorldGeneratorBees implements IWorldGenerator
 				final BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
 				flag = (BiomeDictionary.isBiomeOfType(biome, Type.FOREST) ||
 						BiomeDictionary.isBiomeOfType(biome, Type.PLAINS))
-						&& !BiomeDictionary.isBiomeOfType(biome, Type.FROZEN);
+						&& !BiomeDictionary.isBiomeOfType(biome, Type.SNOWY);
 			}
 			else
 			{

@@ -32,10 +32,10 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
-	int[] adjacentTreeBlocks;
 	private final int growth = GrowthCraftApples.getConfig().appleLeavesGrowthRate;
+	private int[] adjacentTreeBlocks;
 
 	public BlockAppleLeaves()
 	{
@@ -331,17 +331,17 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[2];
+		this.icons = new IIcon[2];
 
-		tex[0] = reg.registerIcon("leaves_oak");
-		tex[1] = reg.registerIcon("leaves_oak_opaque");
+		icons[0] = reg.registerIcon("leaves_oak");
+		icons[1] = reg.registerIcon("leaves_oak_opaque");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return this.tex[this.isOpaqueCube() ? 1 : 0];
+		return icons[isOpaqueCube() ? 1 : 0];
 	}
 
 	/************

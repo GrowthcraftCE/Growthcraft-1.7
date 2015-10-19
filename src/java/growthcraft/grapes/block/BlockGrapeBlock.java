@@ -18,18 +18,15 @@ import net.minecraft.world.World;
 
 public class BlockGrapeBlock extends Block
 {
-	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
-
 	public BlockGrapeBlock()
 	{
 		super(Material.plants);
-		//this.setTickRandomly(true);
-		this.setHardness(0.0F);
-		this.setStepSound(soundTypeGrass);
-		this.setBlockName("grc.grapeBlock");
-		this.setCreativeTab(null);
-		this.setBlockBounds(0.1875F, 0.5F, 0.1875F, 0.8125F, 1.0F, 0.8125F);
+		setBlockTextureName("grcgrapes:grape")
+		setHardness(0.0F);
+		setStepSound(soundTypeGrass);
+		setBlockName("grc.grapeBlock");
+		setCreativeTab(null);
+		setBlockBounds(0.1875F, 0.5F, 0.1875F, 0.8125F, 1.0F, 0.8125F);
 	}
 
 	/**
@@ -117,25 +114,6 @@ public class BlockGrapeBlock extends Block
 	public int quantityDropped(Random random)
 	{
 		return random.nextInt(3) == 0 ? 2 : 1;
-	}
-
-	/************
-	 * TEXTURES
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		tex = new IIcon[1];
-
-		tex[0] = reg.registerIcon("grcgrapes:grape");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		return this.tex[0];
 	}
 
 	/************

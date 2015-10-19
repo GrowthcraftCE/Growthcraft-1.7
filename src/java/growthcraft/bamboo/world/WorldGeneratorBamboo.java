@@ -41,7 +41,7 @@ public class WorldGeneratorBamboo implements IWorldGenerator
 						BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE) ||
 						BiomeDictionary.isBiomeOfType(biome, Type.WATER) ||
 						BiomeDictionary.isBiomeOfType(biome, Type.PLAINS))
-						&& !BiomeDictionary.isBiomeOfType(biome, Type.FROZEN);
+						&& !BiomeDictionary.isBiomeOfType(biome, Type.SNOWY);
 			}
 			else
 			{

@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class TileEntityFruitPresserRenderer extends TileEntitySpecialRenderer
 {
-	private static final ResourceLocation res = new ResourceLocation("grccellar" , "textures/blocks/modelfruitpresser.png");
+	private final ResourceLocation res = new ResourceLocation("grccellar" , "textures/blocks/modelfruitpresser.png");
 	private ModelFruitPresser model = new ModelFruitPresser();
 
 	private void renderTileEntityFruitPresserAt(TileEntityFruitPresser te, double x, double y, double z, float f)

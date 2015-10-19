@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 public class BlockBeeHive extends Block
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	public BlockBeeHive()
 	{
@@ -201,17 +201,17 @@ public class BlockBeeHive extends Block
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[2];
+		this.icons = new IIcon[2];
 
-		tex[0] = reg.registerIcon("grcbees:beehive_front");
-		tex[1] = reg.registerIcon("grcbees:beehive_sides");
+		icons[0] = reg.registerIcon("grcbees:beehive_front");
+		icons[1] = reg.registerIcon("grcbees:beehive_sides");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return side != meta ? this.tex[1] : this.tex[0];
+		return side != meta ? this.icons[1] : this.icons[0];
 	}
 
 	/************

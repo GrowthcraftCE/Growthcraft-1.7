@@ -23,9 +23,9 @@ import net.minecraftforge.common.IShearable;
 public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
-	protected int[] adjacentTreeBlocks;
+	private int[] adjacentTreeBlocks;
 
 	public BlockBambooLeaves()
 	{
@@ -246,19 +246,18 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[2];
+		this.icons = new IIcon[2];
 
-		tex[0] = reg.registerIcon("grcbamboo:leaves");
-		tex[1] = reg.registerIcon("grcbamboo:leaves_opaque");
+		icons[0] = reg.registerIcon("grcbamboo:leaves");
+		icons[1] = reg.registerIcon("grcbamboo:leaves_opaque");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return this.tex[this.isOpaqueCube() ? 1 : 0];
+		return icons[isOpaqueCube() ? 1 : 0];
 	}
-
 
 	/************
 	 * RENDERS

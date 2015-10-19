@@ -23,7 +23,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiBrewKettle extends GuiCellar
 {
-	private static final ResourceLocation res = new ResourceLocation("grccellar" , "textures/guis/brewkettle_gui.png");
+	private final ResourceLocation res = new ResourceLocation("grccellar" , "textures/guis/brewkettle_gui.png");
 	private TileEntityBrewKettle te;
 	private GuiButtonDiscard button0;
 	private GuiButtonDiscard button1;
@@ -166,11 +166,11 @@ public class GuiBrewKettle extends GuiCellar
 
 			if (this.te.isFluidTankFilled(0))
 			{
-				Fluid fluid = this.te.getFluid(0);
+				FluidStack fluid = this.te.getFluidStack(0);
 				tooltip.add(fluid.getLocalizedName());
 				if (CellarRegistry.instance().booze().isFluidBooze(fluid))
 				{
-					fluid = CellarRegistry.instance().booze().maybeAlternateBooze(fluid);
+					fluid = CellarRegistry.instance().booze().maybeAlternateBoozeStack(fluid);
 					tooltip.add(UnitFormatter.fluidModifier(fluid));
 				}
 			}
@@ -183,11 +183,11 @@ public class GuiBrewKettle extends GuiCellar
 
 			if (this.te.isFluidTankFilled(1))
 			{
-				Fluid fluid = this.te.getFluid(1);
+				FluidStack fluid = this.te.getFluidStack(1);
 				tooltip.add(fluid.getLocalizedName());
 				if (CellarRegistry.instance().booze().isFluidBooze(fluid))
 				{
-					fluid = CellarRegistry.instance().booze().maybeAlternateBooze(fluid);
+					fluid = CellarRegistry.instance().booze().maybeAlternateBoozeStack(fluid);
 					tooltip.add(UnitFormatter.fluidModifier(fluid));
 				}
 			}

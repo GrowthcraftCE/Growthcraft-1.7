@@ -35,7 +35,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class BlockFermentBarrel extends BlockCellarContainer implements ICellarFluidHandler
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	private final Random rand = new Random();
 
@@ -282,12 +282,17 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[4];
+		this.icons = new IIcon[4];
 
-		tex[0] = reg.registerIcon("grccellar:fermentbarrel_0");
-		tex[1] = reg.registerIcon("grccellar:fermentbarrel_1");
-		tex[2] = reg.registerIcon("grccellar:fermentbarrel_2");
-		tex[3] = reg.registerIcon("grccellar:fermentbarrel_3");
+		icons[0] = reg.registerIcon("grccellar:fermentbarrel_0");
+		icons[1] = reg.registerIcon("grccellar:fermentbarrel_1");
+		icons[2] = reg.registerIcon("grccellar:fermentbarrel_2");
+		icons[3] = reg.registerIcon("grccellar:fermentbarrel_3");
+	}
+
+	public IIcon getIconByIndex(int index)
+	{
+		return icons[index];
 	}
 
 	@Override
@@ -296,17 +301,17 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 	{
 		if (meta == 0 || meta == 1)
 		{
-			return side == 0 || side == 1 ? this.tex[1] : this.tex[0];
+			return side == 0 || side == 1 ? icons[1] : icons[0];
 		}
 		else if (meta == 2 || meta == 3)
 		{
-			return side == 2 || side == 3 ? this.tex[1] : this.tex[0];
+			return side == 2 || side == 3 ? icons[1] : icons[0];
 		}
 		else if (meta == 4 || meta == 5)
 		{
-			return side == 4 || side == 5 ? this.tex[1] : this.tex[0];
+			return side == 4 || side == 5 ? icons[1] : icons[0];
 		}
-		return this.tex[0];
+		return icons[0];
 	}
 
 	/************

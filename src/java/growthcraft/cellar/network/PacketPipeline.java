@@ -27,7 +27,10 @@ import net.minecraft.network.NetHandlerPlayServer;
 @ChannelHandler.Sharable
 public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, AbstractPacket>
 {
-	class PacketList extends LinkedList<Class<? extends AbstractPacket>> {}
+	class PacketList extends LinkedList<Class<? extends AbstractPacket>>
+	{
+		public static final long serialVersionUID = 0x47433031L;
+	}
 
 	private EnumMap<Side, FMLEmbeddedChannel> channels;
 	private PacketList packets = new PacketList();

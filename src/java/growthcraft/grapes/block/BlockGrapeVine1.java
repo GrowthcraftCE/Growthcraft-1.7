@@ -10,7 +10,6 @@ import growthcraft.grapes.renderer.RenderGrapeVine1;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -23,9 +22,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockGrapeVine1 extends BlockGrapeVineBase
 {
-	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
 	public boolean graphicFlag;
+
+	@SideOnly(Side.CLIENT)
+	private IIcon[] icons;
 
 	public BlockGrapeVine1()
 	{
@@ -107,24 +107,24 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[3];
+		this.icons = new IIcon[3];
 
-		tex[0] = reg.registerIcon("grcgrapes:trunk");
-		tex[1] = reg.registerIcon("grcgrapes:leaves");
-		tex[2] = reg.registerIcon("grcgrapes:leaves_opaque");
+		icons[0] = reg.registerIcon("grcgrapes:trunk");
+		icons[1] = reg.registerIcon("grcgrapes:leaves");
+		icons[2] = reg.registerIcon("grcgrapes:leaves_opaque");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return this.tex[0];
+		return icons[0];
 	}
 
 	public IIcon getLeafTexture()
 	{
-		this.graphicFlag = ((BlockLeaves)Blocks.leaves).isOpaqueCube();
-		return !this.graphicFlag ? this.tex[1] : this.tex[2];
+		graphicFlag = Blocks.leaves.isOpaqueCube();
+		return !this.graphicFlag ? icons[1] : icons[2];
 	}
 
 	/************

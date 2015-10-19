@@ -28,7 +28,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockFruitPresser extends BlockContainer implements IWrenchable, IRotatableBlock
 {
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] icons;
 
 	public BlockFruitPresser()
 	{
@@ -179,11 +179,11 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 
 		if (meta == 0 || meta == 2)
 		{
-			return side == side.EAST || side == side.WEST;
+			return side == ForgeDirection.EAST || side == ForgeDirection.WEST;
 		}
 		else if (meta == 1 || meta == 3)
 		{
-			return side == side.NORTH || side == side.SOUTH;
+			return side == ForgeDirection.NORTH || side == ForgeDirection.SOUTH;
 		}
 
 		return isNormalCube(world, x, y, z);
@@ -227,19 +227,24 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		tex = new IIcon[4];
+		icons = new IIcon[4];
 
-		tex[0] = reg.registerIcon("grccellar:fruitpresser_0");
-		tex[1] = reg.registerIcon("grccellar:fruitpresser_1");
-		tex[2] = reg.registerIcon("grccellar:fruitpresser_2");
-		tex[3] = reg.registerIcon("planks_oak");
+		icons[0] = reg.registerIcon("grccellar:fruitpresser_0");
+		icons[1] = reg.registerIcon("grccellar:fruitpresser_1");
+		icons[2] = reg.registerIcon("grccellar:fruitpresser_2");
+		icons[3] = reg.registerIcon("planks_oak");
+	}
+
+	public IIcon getIconByIndex(int index)
+	{
+		return icons[index];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return side == 0 ? tex[0] : (side == 1 ? tex[1] : tex[2]);
+		return side == 0 ? icons[0] : (side == 1 ? icons[1] : icons[2]);
 	}
 
 	/************

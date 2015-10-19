@@ -20,7 +20,7 @@ public class PlayerInteractEventPaddy
 	@SubscribeEvent
 	public void PlayerInteract(PlayerInteractEvent event)
 	{
-		if (event.action == event.action.RIGHT_CLICK_BLOCK)
+		if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
 		{
 			if (event.face != 1) return;
 

@@ -24,7 +24,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiFruitPress extends GuiCellar
 {
 	private static final Logger logger = LogManager.getLogger();
-	private static final ResourceLocation res = new ResourceLocation("grccellar" , "textures/guis/fruitpress_gui.png");
+	private final ResourceLocation res = new ResourceLocation("grccellar" , "textures/guis/fruitpress_gui.png");
 	private TileEntityFruitPress te;
 	private GuiButtonDiscard button;
 
@@ -124,7 +124,7 @@ public class GuiFruitPress extends GuiCellar
 
 			if (this.te.isFluidTankFilled())
 			{
-				tooltip.add(this.te.getFluid().getLocalizedName());
+				tooltip.add(this.te.getFluidStack().getLocalizedName());
 
 				final String s = UnitFormatter.fluidModifier(this.te.getFluid());
 				if (s != null) tooltip.add(s);

@@ -129,7 +129,7 @@ public class ContainerBrewKettle extends Container
 		super.detectAndSendChanges();
 		for (int i = 0; i < crafters.size(); i++)
 		{
-			te.sendGUINetworkData(this, (ICrafting) crafters.get(i));
+			te.sendGUINetworkData(this, (ICrafting)crafters.get(i));
 		}
 	}
 

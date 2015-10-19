@@ -38,7 +38,7 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T>
 	@Nonnull
 	public T getItem()
 	{
-		return (T)getObject();
+		return getObject();
 	}
 
 	@Nonnull

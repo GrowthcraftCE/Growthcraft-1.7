@@ -17,7 +17,6 @@ import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -380,14 +379,14 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	{
 		if (meta != 0)
 		{
-			this.graphicFlag = !((BlockLeaves)Blocks.leaves).isOpaqueCube();
+			graphicFlag = !Blocks.leaves.isOpaqueCube();
 			if (meta >= HopsStage.FRUIT)
 			{
-				return this.graphicFlag ? this.icons[5] : this.icons[6];
+				return graphicFlag ? icons[5] : icons[6];
 			}
 			else
 			{
-				return this.graphicFlag ? this.icons[0] : this.icons[1];
+				return graphicFlag ? icons[0] : icons[1];
 			}
 		}
 		return this.icons[2];

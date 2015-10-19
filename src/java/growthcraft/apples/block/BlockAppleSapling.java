@@ -7,35 +7,29 @@ import growthcraft.apples.world.WorldGenAppleTree;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.utils.BlockFlags;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class BlockAppleSapling extends BlockBush implements IGrowable
 {
-	@SideOnly(Side.CLIENT)
-	public static IIcon tex;
-
 	private final int growth = GrowthCraftApples.getConfig().appleSaplingGrowthRate;
 
 	public BlockAppleSapling()
 	{
 		super(Material.plants);
-		this.setHardness(0.0F);
-		this.setStepSound(soundTypeGrass);
-		this.setBlockName("grc.appleSapling");
-		this.setTickRandomly(true);
-		this.setCreativeTab(GrowthCraftCore.tab);
+		setHardness(0.0F);
+		setStepSound(soundTypeGrass);
+		setBlockName("grc.appleSapling");
+		setTickRandomly(true);
+		setCreativeTab(GrowthCraftCore.tab);
+		setBlockTextureName("grcapples:apple_sapling");
 		final float f = 0.4F;
-		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
+		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 	}
 
 	/************
@@ -105,22 +99,5 @@ public class BlockAppleSapling extends BlockBush implements IGrowable
 		{
 			growTree(world, x, y, z, random);
 		}
-	}
-
-	/************
-	 * TEXTURES
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		tex = reg.registerIcon("grcapples:apple_sapling");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		return this.tex;
 	}
 }

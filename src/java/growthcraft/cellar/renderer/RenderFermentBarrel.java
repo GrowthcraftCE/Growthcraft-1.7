@@ -21,8 +21,9 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 	{
 		if (modelID == id)
 		{
+			final BlockFermentBarrel fermentBarrel = (BlockFermentBarrel)block;
 			final Tessellator tes = Tessellator.instance;
-			final IIcon[] icon = {BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[1], BlockFermentBarrel.tex[1]};
+			final IIcon[] icon = {fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(1), fermentBarrel.getIconByIndex(1)};
 			final double d = 0.0625D;
 			final float f = 0.125F;
 			renderer.uvRotateEast = 3;
@@ -88,8 +89,8 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 
 			renderer.setRenderBounds(1*d, 0.0D, 0.0D, 15*d, 1.0D, 1.0D);
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-			RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tes, BlockFermentBarrel.tex[2], 0.0D, 0.0D, 0.0D);
-			RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tes, BlockFermentBarrel.tex[3], 0.0D, 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tes, fermentBarrel.getIconByIndex(2), 0.0D, 0.0D, 0.0D);
+			RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tes, fermentBarrel.getIconByIndex(3), 0.0D, 0.0D, 0.0D);
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -101,7 +102,8 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 	{
 		if (modelId == id)
 		{
-			final IIcon[] icon = {BlockFermentBarrel.tex[0], BlockFermentBarrel.tex[1], BlockFermentBarrel.tex[2], BlockFermentBarrel.tex[3]};
+			final BlockFermentBarrel fermentBarrel = (BlockFermentBarrel)block;
+			final IIcon[] icon = {fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(1), fermentBarrel.getIconByIndex(2), fermentBarrel.getIconByIndex(3)};
 			final int meta = world.getBlockMetadata(x, y, z);
 			final double d = 0.0625D;
 

@@ -336,7 +336,7 @@ public class ItemBoozeBottle extends ItemFood
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack)
+	public boolean hasEffect(ItemStack stack, int pass)
 	{
 		if (Utils.isIntegerInRange(stack.getItemDamage(), 1, 3))
 		{

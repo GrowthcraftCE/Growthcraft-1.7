@@ -51,6 +51,11 @@ public class UnitFormatter
 		}
 	}
 
+	public static String fluidModifier(FluidStack fluid)
+	{
+		return fluidModifier(fluid.getFluid());
+	}
+
 	/**
 	 * Formats a fluid name, handling booze and their modifiers specially
 	 *

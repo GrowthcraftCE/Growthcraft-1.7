@@ -37,7 +37,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
+	private IIcon[] tex;
 
 	private final int growth = GrowthCraftApples.getConfig().appleGrowthRate;
 	private final boolean dropRipeApples = GrowthCraftApples.getConfig().dropRipeApples;

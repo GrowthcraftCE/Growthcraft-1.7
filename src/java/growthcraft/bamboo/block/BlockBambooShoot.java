@@ -15,12 +15,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -29,22 +27,20 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IGrowable
 {
-	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
-
 	//constants
 	private final int growth = GrowthCraftBamboo.getConfig().bambooShootGrowthRate;
 
 	public BlockBambooShoot()
 	{
 		super(Material.plants);
-		this.setStepSound(soundTypeGrass);
-		this.setHardness(0.0F);
-		this.setTickRandomly(true);
+		setStepSound(soundTypeGrass);
+		setHardness(0.0F);
+		setTickRandomly(true);
+		setBlockTextureName("grcbamboo:shoot");
 		final float f = 0.4F;
-		this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-		this.setCreativeTab(null);
-		this.setBlockName("grc.bambooShoot");
+		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
+		setCreativeTab(null);
+		setBlockName("grc.bambooShoot");
 	}
 
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
@@ -181,24 +177,6 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
 		return GrowthCraftBamboo.bambooShootFood.getItem();
-	}
-
-	/************
-	 * TEXTURES
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		tex = new IIcon[1];
-		this.tex[0] = reg.registerIcon("grcbamboo:shoot");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		return this.tex[0];
 	}
 
 	/************
