@@ -1,9 +1,11 @@
-package growthcraft.api.cellar;
+package growthcraft.api.cellar.pressing;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+
+import growthcraft.api.cellar.util.FluidUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -14,43 +16,17 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class PressingRegistry
 {
-	final class PressResults
-	{
-		public final int time;
-		public final int amount;
-		public final float residue;
-		private final Fluid fluid;
-
-		public PressResults(Fluid f, int t, int a, float r)
-		{
-			this.fluid = f;
-			this.time = t;
-			this.amount = a;
-			this.residue = r;
-		}
-
-		public Fluid getFluid()
-		{
-			return fluid;
-		}
-
-		public FluidStack asFluidStack(int size)
-		{
-			return new FluidStack(fluid, size);
-		}
-	}
-
 	// because damage is almost never -1
 	private final int NO_META = -1;
-	private Map<List, PressResults> pressingList = new HashMap<List, PressResults>();
+	private Map<List, PressingResult> pressingList = new HashMap<List, PressingResult>();
 
-	public Map<List, PressResults> getPressingList() { return pressingList; }
+	public Map<List, PressingResult> getPressingList() { return pressingList; }
 
 	/**
 	 * addPressing()
 	 *
 	 * Example Usage:
-	 * CellarRegistry.instance().addPressing(Item.appleRed, appleCider_booze[0], 20, 37, 0.3F);
+	 * CellarRegistry.instance().pressing().addPressing(Item.appleRed, appleCider_booze[0], 20, 37, 0.3F);
 	 *
 	 * @param raw     - The source/input Block/Item/ID
 	 * @param meta    - The metadata of @param raw
@@ -61,7 +37,7 @@ public class PressingRegistry
 	 */
 	public void addPressing(Item raw, int meta, Fluid fluid, int time, int amount, float residue)
 	{
-		this.pressingList.put(Arrays.asList(raw, meta), new PressResults(fluid, time, amount, residue));
+		this.pressingList.put(Arrays.asList(raw, meta), new PressingResult(fluid, time, amount, residue));
 	}
 
 	public void addPressing(Block raw, int meta, Fluid fluid, int time, int amount, float residue)
@@ -86,7 +62,7 @@ public class PressingRegistry
 	 * addPressing()
 	 *
 	 * Example Usage:
-	 * CellarRegistry.instance().addPressing(Item.appleRed, appleCider_booze[0], 20, 37, 0.3F);
+	 * CellarRegistry.instance().pressing().addPressing(Item.appleRed, appleCider_booze[0], 20, 37, 0.3F);
 	 *
 	 * @param raw     - The source/input Block/Item/ID
 	 * @param fluid   - The resulting fluid.
@@ -119,57 +95,45 @@ public class PressingRegistry
 		return this.getPressingResults(itemstack)!= null;
 	}
 
-	public PressResults getPressingResults(ItemStack itemstack)
+	public PressingResult getPressingResults(ItemStack itemstack)
 	{
-		if (itemstack == null)
-		{
-			return null;
-		}
-		final PressResults ret = pressingList.get(Arrays.asList(itemstack.getItem(), itemstack.getItemDamage()));
-		if (ret != null)
-		{
-			return ret;
-		}
+		if (itemstack == null) return null;
+
+		final PressingResult ret = pressingList.get(Arrays.asList(itemstack.getItem(), itemstack.getItemDamage()));
+		if (ret != null) return ret;
+
 		return pressingList.get(Arrays.asList(itemstack.getItem(), NO_META));
 	}
 
 	public FluidStack getPressingFluidStack(ItemStack itemstack)
 	{
-		final PressResults pressresults = this.getPressingResults(itemstack);
-		if (itemstack == null || pressresults == null)
-		{
-			return null;
-		}
+		final PressingResult pressresults = this.getPressingResults(itemstack);
+		if (pressresults == null) return null;
+
 		return pressresults.asFluidStack(1);
 	}
 
 	public int getPressingTime(ItemStack itemstack)
 	{
-		final PressResults pressresults = this.getPressingResults(itemstack);
-		if (itemstack == null || pressresults == null)
-		{
-			return 0;
-		}
+		final PressingResult pressresults = this.getPressingResults(itemstack);
+		if (pressresults == null) return 0;
+
 		return pressresults.time;
 	}
 
 	public int getPressingAmount(ItemStack itemstack)
 	{
-		final PressResults pressresults = this.getPressingResults(itemstack);
-		if (itemstack == null || pressresults == null)
-		{
-			return 0;
-		}
+		final PressingResult pressresults = this.getPressingResults(itemstack);
+		if (pressresults == null) return 0;
+
 		return pressresults.amount;
 	}
 
 	public float getPressingResidue(ItemStack itemstack)
 	{
-		final PressResults pressresults = this.getPressingResults(itemstack);
-		if (itemstack == null || pressresults == null)
-		{
-			return 0.0F;
-		}
+		final PressingResult pressresults = this.getPressingResults(itemstack);
+		if (pressresults == null) return 0.0F;
+
 		return pressresults.residue;
 	}
 }

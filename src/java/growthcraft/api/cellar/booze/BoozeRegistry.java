@@ -1,13 +1,50 @@
-package growthcraft.api.cellar;
+package growthcraft.api.cellar.booze;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
+import growthcraft.api.cellar.util.FluidUtils;
+
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+
+/**
+ * Fluid strings (for use with the 'String' versions of the methods.
+ *
+ * Apple Cider
+ * - "grc.appleCider0' - young
+ * - "grc.appleCider1' - fermented
+ * - "grc.appleCider2' - fermented, potent
+ * - "grc.appleCider3' - fermented, extended
+ *
+ * Grape Wine
+ * - "grc.grapeWine0' - young
+ * - "grc.grapeWine1' - fermented
+ * - "grc.grapeWine2' - fermented, potent
+ * - "grc.grapeWine3' - fermented, extended
+ *
+ * Ale
+ * - "grc.hopAle0' - hopped, young
+ * - "grc.hopAle1' - hopped, fermented
+ * - "grc.hopAle2' - hopped, fermented, potent
+ * - "grc.hopAle3' - hopped, fermented, extended
+ * - "grc.hopAle4' - no hops, young
+ *
+ * Sake
+ * - "grc.riceSake0' - young
+ * - "grc.riceSake1' - fermented
+ * - "grc.riceSake2' - fermented, potent
+ * - "grc.riceSake3' - fermented, extended
+ *
+ * Mead
+ * - "grc.honeyMead0' - young
+ * - "grc.honeyMead1' - fermented
+ * - "grc.honeyMead2' - fermented, potent
+ * - "grc.honeyMead3' - fermented, extended
+ **/
 
 /**
  * Example Usage: Creating Boozes

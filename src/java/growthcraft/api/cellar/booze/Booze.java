@@ -1,4 +1,4 @@
-package growthcraft.api.cellar;
+package growthcraft.api.cellar.booze;
 
 import net.minecraftforge.fluids.Fluid;
 

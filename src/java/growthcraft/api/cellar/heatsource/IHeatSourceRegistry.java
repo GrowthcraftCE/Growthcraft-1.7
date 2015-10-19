@@ -1,4 +1,4 @@
-package growthcraft.api.cellar;
+package growthcraft.api.cellar.heatsource;
 
 import net.minecraft.block.Block;
 

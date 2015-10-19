@@ -1,4 +1,4 @@
-package growthcraft.api.cellar;
+package growthcraft.api.cellar.util;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;

@@ -1,16 +1,16 @@
-package growthcraft.api.cellar;
+package growthcraft.api.cellar.common;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BrewResult
+public class ProcessingResult
 {
 	public final int time;
 	public final int amount;
-	public final float residue;
+	public final Residue residue;
 	private final Fluid fluid;
 
-	public BrewResult(Fluid f, int t, int a, float r)
+	public ProcessingResult(Fluid f, int t, int a, Residue r)
 	{
 		this.fluid = f;
 		this.time = t;

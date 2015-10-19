@@ -6,7 +6,7 @@ import growthcraft.cellar.container.ContainerBrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.utils.NBTHelper;
 import growthcraft.core.utils.ItemUtils;
-import growthcraft.api.cellar.FluidUtils;
+import growthcraft.api.cellar.util.FluidUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

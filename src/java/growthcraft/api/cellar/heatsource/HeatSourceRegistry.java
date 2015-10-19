@@ -1,4 +1,4 @@
-package growthcraft.api.cellar;
+package growthcraft.api.cellar.heatsource;
 
 import java.util.ArrayList;
 import java.util.List;

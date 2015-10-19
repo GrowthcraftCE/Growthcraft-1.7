@@ -5,7 +5,7 @@ import growthcraft.api.cellar.PressingRegistry;
 import growthcraft.cellar.container.ContainerFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.utils.ItemUtils;
-import growthcraft.api.cellar.FluidUtils;
+import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.core.utils.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;

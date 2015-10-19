@@ -13,14 +13,14 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BrewRegistry
+public class BrewingRegistry
 {
 	// because damage is almost never -1
 	private final int NO_META = -1;
-	private HashMap<List, BrewResult> brewingList = new HashMap<List, BrewResult>();
+	private HashMap<List, BrewingResult> brewingList = new HashMap<List, BrewingResult>();
 	private List<List> brewingIngredients = new ArrayList<List>();
 
-	public Map<List, BrewResult> getBrewingList()
+	public Map<List, BrewingResult> getBrewingList()
 	{
 		return brewingList;
 	}
@@ -46,7 +46,7 @@ public class BrewRegistry
 	 */
 	public void addBrewing(Fluid sourceFluid, Item raw, int meta, Fluid resultFluid, int time, int amount, float residue)
 	{
-		this.brewingList.put(Arrays.asList(sourceFluid, raw, meta), new BrewResult(resultFluid, time, amount, residue));
+		this.brewingList.put(Arrays.asList(sourceFluid, raw, meta), new BrewingResult(resultFluid, time, amount, residue));
 		this.brewingIngredients.add(Arrays.asList(raw, meta));
 	}
 
@@ -88,20 +88,20 @@ public class BrewRegistry
 		addBrewing(sourceFluid, raw, NO_META, resultFluid, time, amount, residue);
 	}
 
-	public boolean isBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
-	{
-		return this.getBrewingResults(fluidstack, itemstack) != null;
-	}
-
-	public BrewResult getBrewingResults(FluidStack fluidstack, ItemStack itemstack)
+	public BrewingResult getBrewingResult(FluidStack fluidstack, ItemStack itemstack)
 	{
 		if (itemstack == null || fluidstack == null) return null;
 
 		final Fluid f = CellarRegistry.instance().booze().maybeAlternateBooze(fluidstack.getFluid());
-		final BrewResult ret = brewingList.get(Arrays.asList(f, itemstack.getItem(), itemstack.getItemDamage()));
+		final BrewingResult ret = brewingList.get(Arrays.asList(f, itemstack.getItem(), itemstack.getItemDamage()));
 		if (ret != null) return ret;
 
 		return brewingList.get(Arrays.asList(f, itemstack.getItem(), NO_META));
+	}
+
+	public boolean isBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
+	{
+		return this.getBrewingResult(fluidstack, itemstack) != null;
 	}
 
 	public boolean isItemBrewingIngredient(ItemStack itemstack)
@@ -114,7 +114,7 @@ public class BrewRegistry
 
 	public FluidStack getBrewingFluidStack(FluidStack fluidstack, ItemStack itemstack)
 	{
-		final BrewResult brewresults = this.getBrewingResults(fluidstack, itemstack);
+		final BrewingResult brewresults = this.getBrewingResult(fluidstack, itemstack);
 		if (brewresults == null) return null;
 
 		return brewresults.asFluidStack(1);
@@ -122,7 +122,7 @@ public class BrewRegistry
 
 	public int getBrewingTime(FluidStack fluidstack, ItemStack itemstack)
 	{
-		final BrewResult brewresults = this.getBrewingResults(fluidstack, itemstack);
+		final BrewingResult brewresults = this.getBrewingResult(fluidstack, itemstack);
 		if (brewresults == null) return 0;
 
 		return brewresults.time;
@@ -130,15 +130,15 @@ public class BrewRegistry
 
 	public int getBrewingAmount(FluidStack fluidstack, ItemStack itemstack)
 	{
-		final BrewResult brewresults = this.getBrewingResults(fluidstack, itemstack);
+		final BrewingResult brewresults = this.getBrewingResult(fluidstack, itemstack);
 		if (brewresults == null) return 0;
 
 		return brewresults.amount;
 	}
 
-	public float getBrewingResidueRate(FluidStack fluidstack, ItemStack itemstack)
+	public Residue getBrewingResidue(FluidStack fluidstack, ItemStack itemstack)
 	{
-		final BrewResult brewresults = this.getBrewingResults(fluidstack, itemstack);
+		final BrewingResult brewresults = this.getBrewingResult(fluidstack, itemstack);
 		if (brewresults == null) return 0.0F;
 
 		return brewresults.residue;

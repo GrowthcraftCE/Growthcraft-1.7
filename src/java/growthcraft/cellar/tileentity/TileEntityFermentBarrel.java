@@ -5,7 +5,7 @@ import growthcraft.cellar.container.ContainerFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.utils.NBTHelper;
 import growthcraft.core.utils.ItemUtils;
-import growthcraft.api.cellar.FluidUtils;
+import growthcraft.api.cellar.util.FluidUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
