@@ -171,6 +171,6 @@ public class GrowthCraftHops
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		new growthcraft.hops.integration.ThaumcraftModule().init();
+		if (config.enableThaumcraftIntegration) new growthcraft.hops.integration.ThaumcraftModule().init();
 	}
 }

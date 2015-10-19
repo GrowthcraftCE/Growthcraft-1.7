@@ -12,6 +12,7 @@ public class Config extends ConfigBase
 	public final int fruitPressMaxCap = 1000;
 	public final int fermentBarrelMaxCap = 3000;
 	public final int brewKettleMaxCap = 1000;
+	public boolean enableThaumcraftIntegration = true;
 
 	protected void loadConfig()
 	{
@@ -19,5 +20,6 @@ public class Config extends ConfigBase
 		this.villagerBrewerID = config.get("Villager", "Brewer ID", 10).getInt();
 		this.fermentSpeed = config.get(Configuration.CATEGORY_GENERAL, "Ferment Barrel fermenting time", fermentSpeed, "[Higher -> Slower] Default : " + fermentSpeed).getInt();
 		this.dropItemsInBrewKettle = config.get(Configuration.CATEGORY_GENERAL, "Drop items in Brew Kettle", dropItemsInBrewKettle, "Enable to have brew kettles pick up dropped items Default :  " + dropItemsInBrewKettle).getBoolean();
+		this.enableThaumcraftIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Thaumcraft Integration", enableThaumcraftIntegration, "Should we integrate with Thaumcraft (if available); Default: " + enableThaumcraftIntegration).getBoolean();
 	}
 }

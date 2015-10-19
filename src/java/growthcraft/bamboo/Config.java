@@ -17,6 +17,7 @@ public class Config extends ConfigBase
 	public int bambooTreeMinHeight = 12;
 	public int bambooWorldGenDensity = 64;
 	public int bambooWorldGenRarity = 32;
+	public boolean enableThaumcraftIntegration = true;
 
 	protected void loadConfig()
 	{
@@ -29,5 +30,6 @@ public class Config extends ConfigBase
 		this.bambooStalkGrowthRate = config.get(Configuration.CATEGORY_GENERAL, "Bamboo Spread rate", bambooStalkGrowthRate, "[Higher -> Slower] Default : " + bambooStalkGrowthRate).getInt();
 		this.bambooShootGrowthRate = config.get(Configuration.CATEGORY_GENERAL, "Bamboo Shoot growth rate", bambooShootGrowthRate, "[Higher -> Slower] Default : " + bambooShootGrowthRate).getInt();
 		this.generateBambooYard = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Bamboo Yard", generateBambooYard, "Controls bamboo yard spawning in villages Default : " + generateBambooYard).getBoolean();
+		this.enableThaumcraftIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Thaumcraft Integration", enableThaumcraftIntegration, "Should we integrate with Thaumcraft (if available); Default: " + enableThaumcraftIntegration).getBoolean();
 	}
 }

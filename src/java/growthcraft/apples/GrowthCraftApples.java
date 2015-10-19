@@ -176,6 +176,6 @@ public class GrowthCraftApples
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		new growthcraft.apples.integration.ThaumcraftModule().init();
+		if (config.enableThaumcraftIntegration) new growthcraft.apples.integration.ThaumcraftModule().init();
 	}
 }

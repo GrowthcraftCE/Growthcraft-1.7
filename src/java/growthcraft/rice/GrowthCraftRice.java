@@ -169,6 +169,6 @@ public class GrowthCraftRice
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventRice());
 
-		new growthcraft.rice.integration.ThaumcraftModule().init();
+		if (config.enableThaumcraftIntegration) new growthcraft.rice.integration.ThaumcraftModule().init();
 	}
 }

@@ -217,7 +217,7 @@ public class GrowthCraftBees
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		new growthcraft.bees.integration.ForestryModule().init();
-		new growthcraft.bees.integration.ThaumcraftModule().init();
+		if (config.enableForestryIntegration) new growthcraft.bees.integration.ForestryModule().init();
+		if (config.enableThaumcraftIntegration) new growthcraft.bees.integration.ThaumcraftModule().init();
 	}
 }

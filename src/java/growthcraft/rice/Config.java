@@ -9,6 +9,7 @@ public class Config extends ConfigBase
 	public int riceSeedDropRarity = 3;
 	public int riceSakeBrewingTime = 20;
 	public boolean generateRiceFieldStructure;
+	public boolean enableThaumcraftIntegration = true;
 	public final int paddyFieldMax = 7;
 	public final int riceSakeColor = 0xE9EFF7;
 
@@ -18,5 +19,6 @@ public class Config extends ConfigBase
 		this.riceSeedDropRarity = config.get(Configuration.CATEGORY_GENERAL, "Rice grass drop rarity", riceSeedDropRarity, "[Lower -> Rarer] Default : " + riceSeedDropRarity).getInt();
 		this.riceSakeBrewingTime = config.get(Configuration.CATEGORY_GENERAL, "Rice Sake brew time", riceSakeBrewingTime, "[Higher -> Slower] Default : " + riceSakeBrewingTime).getInt();
 		this.generateRiceFieldStructure = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Rice Fields", generateRiceFieldStructure, "Controls rice field spawning in villages Default : " + generateRiceFieldStructure).getBoolean();
+		this.enableThaumcraftIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Thaumcraft Integration", enableThaumcraftIntegration, "Should we integrate with Thaumcraft (if available); Default: " + enableThaumcraftIntegration).getBoolean();
 	}
 }

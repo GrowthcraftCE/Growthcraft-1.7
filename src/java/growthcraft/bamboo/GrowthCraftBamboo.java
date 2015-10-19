@@ -240,6 +240,6 @@ public class GrowthCraftBamboo
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventBamboo());
 
-		new growthcraft.bamboo.integration.ThaumcraftModule().init();
+		if (config.enableThaumcraftIntegration) new growthcraft.bamboo.integration.ThaumcraftModule().init();
 	}
 }

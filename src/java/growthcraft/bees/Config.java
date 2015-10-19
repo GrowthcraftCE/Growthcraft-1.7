@@ -14,6 +14,8 @@ public class Config extends ConfigBase
 	public float beeBoxBeeSpawnRate = 6.25f;
 	public float beeBoxFlowerSpawnRate = 6.25f;
 	public boolean generateApiaristStructure;
+	public boolean enableForestryIntegration = true;
+	public boolean enableThaumcraftIntegration = true;
 	public final int honeyMeadColor = 0xA3610C;
 
 	protected void loadConfig()
@@ -27,5 +29,7 @@ public class Config extends ConfigBase
 		this.beeBoxFlowerSpawnRate = this.beeBoxHoneySpawnRate;
 		this.beeBoxBeeSpawnRate = this.beeBoxHoneySpawnRate;
 		this.generateApiaristStructure = config.get(Configuration.CATEGORY_GENERAL, "Spawn Village Apiarist Structure", generateApiaristStructure, "Should the apiarist structure be generated in villages? : " + generateApiaristStructure).getBoolean();
+		this.enableForestryIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Forestry Integration", enableForestryIntegration, "Should we integrate with Forestry (if available); Default: " + enableThaumcraftIntegration).getBoolean();
+		this.enableThaumcraftIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Thaumcraft Integration", enableThaumcraftIntegration, "Should we integrate with Thaumcraft (if available); Default: " + enableThaumcraftIntegration).getBoolean();
 	}
 }

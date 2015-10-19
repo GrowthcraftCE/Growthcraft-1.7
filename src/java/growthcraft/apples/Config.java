@@ -13,6 +13,7 @@ public class Config extends ConfigBase
 	public int appleSaplingGrowthRate = 7;
 	public int appleCiderPressingTime = 20;
 	public boolean generateAppleFarms;
+	public boolean enableThaumcraftIntegration = true;
 	public final int appleCiderColor = 0x855425;
 
 	protected void loadConfig()
@@ -24,5 +25,6 @@ public class Config extends ConfigBase
 		this.appleSaplingGrowthRate = config.get(Configuration.CATEGORY_GENERAL, "Apple Sapling growth rate", appleSaplingGrowthRate, "[Higher -> Slower] Default : " + appleSaplingGrowthRate).getInt();
 		this.appleCiderPressingTime = config.get(Configuration.CATEGORY_GENERAL, "Apple Cider press time", appleCiderPressingTime, "[Higher -> Slower] Default : " + appleCiderPressingTime).getInt();
 		this.generateAppleFarms = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Apple Farms", generateAppleFarms, "Controls apple farms spawning in villages Default : " + generateAppleFarms).getBoolean();
+		this.enableThaumcraftIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Thaumcraft Integration", enableThaumcraftIntegration, "Should we integrate with Thaumcraft (if available); Default: " + enableThaumcraftIntegration).getBoolean();
 	}
 }

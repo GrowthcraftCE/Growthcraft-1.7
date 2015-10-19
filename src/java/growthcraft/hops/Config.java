@@ -11,6 +11,7 @@ public class Config extends ConfigBase
 	public int hopAleBrewTime = 20;
 	public int hopAleHoppedBrewTime = 20;
 	public boolean generateHopVineyardStructure = true;
+	public boolean enableThaumcraftIntegration = true;
 	public final int hopAleColor = 0xCACA47;
 
 	protected void loadConfig()
@@ -21,5 +22,6 @@ public class Config extends ConfigBase
 		this.hopAleBrewTime = config.get(Configuration.CATEGORY_GENERAL, "Hop Ale (no hops) brew time", hopAleBrewTime, "[Higher -> Slower] Default : " + hopAleBrewTime).getInt();
 		this.hopAleHoppedBrewTime = config.get(Configuration.CATEGORY_GENERAL, "Hop Ale (hopped) brew time", hopAleHoppedBrewTime, "[Higher -> Slower] Default : " + hopAleHoppedBrewTime).getInt();
 		this.generateHopVineyardStructure = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Hop Vineyards", generateHopVineyardStructure, "Controls hop vineyards spawning in villages Default : " + generateHopVineyardStructure).getBoolean();
+		this.enableThaumcraftIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Thaumcraft Integration", enableThaumcraftIntegration, "Should we integrate with Thaumcraft (if available); Default: " + enableThaumcraftIntegration).getBoolean();
 	}
 }

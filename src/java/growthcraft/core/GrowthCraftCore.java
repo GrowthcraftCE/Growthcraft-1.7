@@ -123,6 +123,6 @@ public class GrowthCraftCore
 			MinecraftForge.EVENT_BUS.register(new PlayerInteractEventAmazingStick());
 		}
 
-		new growthcraft.core.integration.ThaumcraftModule().init();
+		if (config.enableThaumcraftIntegration) new growthcraft.core.integration.ThaumcraftModule().init();
 	}
 }

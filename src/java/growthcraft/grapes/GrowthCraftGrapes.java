@@ -199,6 +199,6 @@ public class GrowthCraftGrapes
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventGrapes());
 
-		new growthcraft.grapes.integration.ThaumcraftModule().init();
+		if (config.enableThaumcraftIntegration) new growthcraft.grapes.integration.ThaumcraftModule().init();
 	}
 }

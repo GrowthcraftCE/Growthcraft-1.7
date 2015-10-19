@@ -110,6 +110,6 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		new growthcraft.fishtrap.integration.ThaumcraftModule().init();
+		if (config.enableThaumcraftIntegration) new growthcraft.fishtrap.integration.ThaumcraftModule().init();
 	}
 }
