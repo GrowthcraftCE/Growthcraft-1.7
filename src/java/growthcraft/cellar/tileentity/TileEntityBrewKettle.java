@@ -6,6 +6,7 @@ import growthcraft.cellar.container.ContainerBrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.utils.NBTHelper;
 import growthcraft.core.utils.ItemUtils;
+import growthcraft.api.cellar.FluidUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,13 +21,23 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityBrewKettle extends TileEntity implements ISidedInventory, IFluidHandler
 {
+	public static class BrewKettleDataID
+	{
+		public static final int TIME = 0;
+		public static final int TANK1_FLUID_ID = 1;
+		public static final int TANK1_FLUID_AMOUNT = 2;
+		public static final int TANK2_FLUID_ID = 3;
+		public static final int TANK2_FLUID_AMOUNT = 4;
+
+		private BrewKettleDataID() {}
+	}
+
 	private static final int[] rawSlotIDs = new int[] {0, 1};
 	private static final int[] residueSlotIDs = new int[] {0};
 
@@ -400,56 +411,24 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	{
 		switch (id)
 		{
-			case 0:
+			case BrewKettleDataID.TIME:
 				time = v;
 				break;
-			case 1:
-				if (FluidRegistry.getFluid(v) == null)
-				{
-					return;
-				}
-				if (tank[0].getFluid() == null)
-				{
-					tank[0].setFluid(new FluidStack(v, 0));
-				}
-				else
-				{
-					tank[0].setFluid(new FluidStack(v, tank[0].getFluid().amount));
-				}
+			case BrewKettleDataID.TANK1_FLUID_ID:
+			{
+				final FluidStack result = FluidUtils.replaceFluidStack(v, tank[0].getFluid());
+				if (result != null) tank[0].setFluid(result);
+			}	break;
+			case BrewKettleDataID.TANK1_FLUID_AMOUNT:
+				tank[0].setFluid(FluidUtils.updateFluidStackAmount(tank[0].getFluid(), v));
 				break;
-			case 2:
-				if (tank[0].getFluid() == null)
-				{
-					tank[0].setFluid(new FluidStack(FluidRegistry.WATER, v));
-				}
-				else
-				{
-					tank[0].getFluid().amount = v;
-				}
-				break;
-			case 3:
-				if (FluidRegistry.getFluid(v) == null)
-				{
-					return;
-				}
-				if (tank[1].getFluid() == null)
-				{
-					tank[1].setFluid(new FluidStack(v, 0));
-				}
-				else
-				{
-					tank[1].setFluid(new FluidStack(v, tank[1].getFluid().amount));
-				}
-				break;
-			case 4:
-				if (tank[1].getFluid() == null)
-				{
-					tank[1].setFluid(new FluidStack(FluidRegistry.WATER, v));
-				}
-				else
-				{
-					tank[1].getFluid().amount = v;
-				}
+			case BrewKettleDataID.TANK2_FLUID_ID:
+			{
+				final FluidStack result = FluidUtils.replaceFluidStack(v, tank[1].getFluid());
+				if (result != null) tank[1].setFluid(result);
+			}	break;
+			case BrewKettleDataID.TANK2_FLUID_AMOUNT:
+				tank[1].setFluid(FluidUtils.updateFluidStackAmount(tank[1].getFluid(), v));
 				break;
 			default:
 				break;
@@ -458,11 +437,13 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 
 	public void sendGUINetworkData(ContainerBrewKettle container, ICrafting iCrafting)
 	{
-		iCrafting.sendProgressBarUpdate(container, 0, time);
-		iCrafting.sendProgressBarUpdate(container, 1, tank[0].getFluid() != null ? tank[0].getFluid().getFluidID() : 0);
-		iCrafting.sendProgressBarUpdate(container, 2, tank[0].getFluid() != null ? tank[0].getFluid().amount : 0);
-		iCrafting.sendProgressBarUpdate(container, 3, tank[1].getFluid() != null ? tank[1].getFluid().getFluidID() : 0);
-		iCrafting.sendProgressBarUpdate(container, 4, tank[1].getFluid() != null ? tank[1].getFluid().amount : 0);
+		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME, time);
+		FluidStack fluid = tank[0].getFluid();
+		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK1_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
+		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK1_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
+		fluid = tank[1].getFluid();
+		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK2_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
+		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK2_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
 	}
 
 	@Override

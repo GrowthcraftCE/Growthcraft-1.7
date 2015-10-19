@@ -5,6 +5,7 @@ import growthcraft.cellar.container.ContainerFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.utils.NBTHelper;
 import growthcraft.core.utils.ItemUtils;
+import growthcraft.api.cellar.FluidUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -16,13 +17,21 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityFermentBarrel extends TileEntity implements ISidedInventory, IFluidHandler
 {
+	public static class FermentBarrelDataID
+	{
+		public static final int TIME = 0;
+		public static final int TANK_FLUID_ID = 1;
+		public static final int TANK_FLUID_AMOUNT = 2;
+
+		private FermentBarrelDataID() {}
+	}
+
 	// Constants
 	private static final int[] accessableSlotIds = new int[] {0};
 
@@ -119,15 +128,15 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 
 		if (meta == 0 && item == Items.nether_wart)
 		{
-			this.tank.setFluid(new FluidStack(fluidArray[1].getID(), getFluidStack().amount, getFluidStack().tag));
+			this.tank.setFluid(new FluidStack(fluidArray[1], getFluidStack().amount, getFluidStack().tag));
 		}
 		else if ((meta == 1 || meta == 3) && item == Items.glowstone_dust)
 		{
-			this.tank.setFluid(new FluidStack(fluidArray[2].getID(), getFluidStack().amount, getFluidStack().tag));
+			this.tank.setFluid(new FluidStack(fluidArray[2], getFluidStack().amount, getFluidStack().tag));
 		}
 		else if ((meta == 1 || meta == 2) && item == Items.redstone)
 		{
-			this.tank.setFluid(new FluidStack(fluidArray[3].getID(), getFluidStack().amount, getFluidStack().tag));
+			this.tank.setFluid(new FluidStack(fluidArray[3], getFluidStack().amount, getFluidStack().tag));
 		}
 
 		--this.invSlots[0].stackSize;
@@ -369,43 +378,28 @@ public class TileEntityFermentBarrel extends TileEntity implements ISidedInvento
 	{
 		switch (id)
 		{
-			case 0:
+			case FermentBarrelDataID.TIME:
 				time = v;
 				break;
-			case 1:
-				if (FluidRegistry.getFluid(v) == null)
-				{
-					return;
-				}
-				if (tank.getFluid() == null)
-				{
-					tank.setFluid(new FluidStack(v, 0));
-				}
-				else
-				{
-					tank.setFluid(new FluidStack(v, tank.getFluid().amount));
-				}
+			case FermentBarrelDataID.TANK_FLUID_ID:
+				final FluidStack result = FluidUtils.replaceFluidStack(v, tank.getFluid());
+				if (result != null) tank.setFluid(result);
 				break;
-			case 2:
-				if (tank.getFluid() == null)
-				{
-					tank.setFluid(new FluidStack(FluidRegistry.WATER, v));
-				}
-				else
-				{
-					tank.getFluid().amount = v;
-				}
+			case FermentBarrelDataID.TANK_FLUID_AMOUNT:
+				tank.setFluid(FluidUtils.updateFluidStackAmount(tank.getFluid(), v));
 				break;
 			default:
+				// should warn about invalid Data ID
 				break;
 		}
 	}
 
 	public void sendGUINetworkData(ContainerFermentBarrel container, ICrafting iCrafting)
 	{
-		iCrafting.sendProgressBarUpdate(container, 0, time);
-		iCrafting.sendProgressBarUpdate(container, 1, tank.getFluid() != null ? tank.getFluid().getFluidID() : 0);
-		iCrafting.sendProgressBarUpdate(container, 2, tank.getFluid() != null ? tank.getFluid().amount : 0);
+		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TIME, time);
+		final FluidStack fluid = tank.getFluid();
+		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TANK_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
+		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TANK_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
 	}
 
 	/************

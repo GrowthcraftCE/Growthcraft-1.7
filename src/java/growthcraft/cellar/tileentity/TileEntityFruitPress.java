@@ -5,6 +5,7 @@ import growthcraft.api.cellar.PressingRegistry;
 import growthcraft.cellar.container.ContainerFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.utils.ItemUtils;
+import growthcraft.api.cellar.FluidUtils;
 import growthcraft.core.utils.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,13 +16,21 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityFruitPress extends TileEntity implements ISidedInventory, IFluidHandler
 {
+	public static class FruitPressDataID
+	{
+		public static final int TIME = 0;
+		public static final int TANK_FLUID_ID = 1;
+		public static final int TANK_FLUID_AMOUNT = 2;
+
+		private FruitPressDataID() {}
+	}
+
 	private static final int[] rawSlotIDs = new int[] {0, 1};
 	private static final int[] residueSlotIDs = new int[] {0};
 
@@ -381,43 +390,28 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	{
 		switch (id)
 		{
-			case 0:
+			case FruitPressDataID.TIME:
 				time = v;
 				break;
-			case 1:
-				if (FluidRegistry.getFluid(v) == null)
-				{
-					return;
-				}
-				if (tank.getFluid() == null)
-				{
-					tank.setFluid(new FluidStack(v, 0));
-				}
-				else
-				{
-					tank.setFluid(new FluidStack(v, tank.getFluid().amount));
-				}
+			case FruitPressDataID.TANK_FLUID_ID:
+				final FluidStack result = FluidUtils.replaceFluidStack(v, tank.getFluid());
+				if (result != null) tank.setFluid(result);
 				break;
-			case 2:
-				if (tank.getFluid() == null)
-				{
-					tank.setFluid(new FluidStack(FluidRegistry.WATER, v));
-				}
-				else
-				{
-					tank.getFluid().amount = v;
-				}
+			case FruitPressDataID.TANK_FLUID_AMOUNT:
+				tank.setFluid(FluidUtils.updateFluidStackAmount(tank.getFluid(), v));
 				break;
 			default:
+				// should warn about invalid Data ID
 				break;
 		}
 	}
 
 	public void sendGUINetworkData(ContainerFruitPress container, ICrafting iCrafting)
 	{
-		iCrafting.sendProgressBarUpdate(container, 0, time);
-		iCrafting.sendProgressBarUpdate(container, 1, tank.getFluid() != null ? tank.getFluid().getFluidID() : 0);
-		iCrafting.sendProgressBarUpdate(container, 2, tank.getFluid() != null ? tank.getFluid().amount : 0);
+		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME, time);
+		final FluidStack fluid = tank.getFluid();
+		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
+		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
 	}
 
 	/************
