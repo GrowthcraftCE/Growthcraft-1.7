@@ -1,12 +1,13 @@
 package growthcraft.cellar.tileentity;
 
-import growthcraft.api.cellar.BrewRegistry;
+import growthcraft.api.cellar.brewing.BrewingRegistry;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.container.ContainerBrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.util.NBTHelper;
 import growthcraft.core.util.ItemUtils;
-import growthcraft.api.cellar.util.FluidUtils;
+import growthcraft.core.util.NBTHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -59,6 +60,72 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 		this.time = 0.0;
 	}
 
+	private void sendUpdate()
+	{
+		this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+	}
+
+	public boolean hasFire()
+	{
+		final Block block = this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord);
+		final int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord - 1, this.zCoord);
+		return CellarRegistry.instance().heatSource().isBlockHeatSource(block, meta);
+	}
+
+	public boolean canBrew()
+	{
+		if (!hasFire()) return false;
+		if (this.invSlots[0] == null) return false;
+		if (this.isFluidTankFull(1)) return false;
+		if (!CellarRegistry.instance().brewing().isBrewingRecipe(getFluidStack(0), this.invSlots[0])) return false;
+		if (this.isFluidTankEmpty(1)) return true;
+
+		final FluidStack stack = CellarRegistry.instance().brewing().getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
+		return stack.isFluidEqual(getFluidStack(1));
+	}
+
+	public float getHeatMultiplier()
+	{
+		final Block block = this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord);
+		final int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord - 1, this.zCoord);
+		return CellarRegistry.instance().heatSource().getHeatMultiplier(block, meta);
+	}
+
+	private void produceGrain()
+	{
+		final Residue res = CellarRegistry.instance().brewing().getBrewingResidue(getFluidStack(0), this.invSlots[0]);
+		this.residue = this.residue + res.pomaceRate;
+		if (this.residue >= 1.0F)
+		{
+			this.residue = this.residue - 1.0F;
+
+			final ItemStack residueResult = ItemUtils.mergeStacks(this.invSlots[1], res.residueItem);
+			if (residueResult != null) invSlots[1] = residueResult;
+		}
+	}
+
+	public void brewItem()
+	{
+		final BrewingRegistry brewing = CellarRegistry.instance().brewing();
+		// set spent grain
+		produceGrain();
+
+		final FluidStack fluidstack = brewing.getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
+		final int amount = brewing.getBrewingAmount(getFluidStack(0), this.invSlots[0]);
+		fluidstack.amount = amount;
+		this.tank[1].fill(fluidstack, true);
+		this.tank[0].drain(amount, true);
+
+		this.invSlots[0] = ItemUtils.consumeStack(this.invSlots[0]);
+
+		sendUpdate();
+	}
+
+	public int getBrewingTime()
+	{
+		return CellarRegistry.instance().brewing().getBrewingTime(getFluidStack(0), this.invSlots[0]);
+	}
+
 	/************
 	 * UPDATE
 	 ************/
@@ -78,7 +145,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 				final float multiplier = getHeatMultiplier();
 				this.time += multiplier * 1;
 
-				if ((int)time >= CellarRegistry.instance().brew().getBrewingTime(getFluidStack(0), this.invSlots[0]))
+				if ((int)time >= getBrewingTime())
 				{
 					resetTime();
 					this.brewItem();
@@ -93,11 +160,6 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 		}
 	}
 
-	private void sendUpdate()
-	{
-		this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
-	}
-
 	private void debugMsg()
 	{
 		if (this.worldObj.isRemote)
@@ -110,86 +172,12 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 		}
 	}
 
-	public boolean canBrew()
-	{
-		if (!hasFire()) return false;
-		if (this.invSlots[0] == null) return false;
-		if (this.isFluidTankFull(1)) return false;
-		if (!CellarRegistry.instance().brew().isBrewingRecipe(getFluidStack(0), this.invSlots[0])) return false;
-		if (this.isFluidTankEmpty(1)) return true;
-
-		final FluidStack stack = CellarRegistry.instance().brew().getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
-		return stack.isFluidEqual(getFluidStack(1));
-	}
-
-	public boolean hasFire()
-	{
-		final Block block = this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord);
-		final int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord - 1, this.zCoord);
-		return CellarRegistry.instance().heatSource().isBlockHeatSource(block, meta);
-	}
-
-	public float getHeatMultiplier()
-	{
-		final Block block = this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord);
-		final int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord - 1, this.zCoord);
-		return CellarRegistry.instance().heatSource().getHeatMultiplier(block, meta);
-	}
-
-	public void brewItem()
-	{
-		final BrewRegistry brew = CellarRegistry.instance().brew();
-		// set spent grain
-		final float f = brew.getBrewingResidueRate(getFluidStack(0), this.invSlots[0]);
-		this.residue = this.residue + f;
-		if (this.residue >= 1.0F)
-		{
-			this.residue = this.residue - 1.0F;
-
-			if (this.grainBool())
-			{
-				if (this.invSlots[1] == null)
-				{
-					this.invSlots[1] = GrowthCraftCellar.residue.copy();
-				}
-				else if (this.invSlots[1].isItemEqual(GrowthCraftCellar.residue))
-				{
-					this.invSlots[1].stackSize += GrowthCraftCellar.residue.stackSize;
-				}
-			}
-		}
-
-		final FluidStack fluidstack = brew.getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
-		final int amount = brew.getBrewingAmount(getFluidStack(0), this.invSlots[0]);
-		fluidstack.amount = amount;
-		this.tank[1].fill(fluidstack, true);
-		this.tank[0].drain(amount, true);
-
-		// subtract from the itemstack
-		--this.invSlots[0].stackSize;
-
-		if (this.invSlots[0].stackSize <= 0)
-		{
-			this.invSlots[0] = null;
-		}
-
-		sendUpdate();
-	}
-
-	private boolean grainBool()
-	{
-		if (this.invSlots[1] == null) return true;
-		if (!this.invSlots[1].isItemEqual(GrowthCraftCellar.residue)) return false;
-		final int result = invSlots[1].stackSize + GrowthCraftCellar.residue.stackSize;
-		return result <= getInventoryStackLimit() && result <= GrowthCraftCellar.residue.getMaxStackSize();
-	}
-
 	@SideOnly(Side.CLIENT)
 	public int getBrewProgressScaled(int range)
 	{
 		if (this.canBrew())
 		{
-			return (int)time * range / CellarRegistry.instance().brew().getBrewingTime(getFluidStack(0), this.invSlots[0]);
+			return (int)time * range / getBrewingTime();
 		}
 		return 0;
 	}
@@ -243,7 +231,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	// Attempts to merge the given itemstack into the main slot
 	public ItemStack tryMergeItemIntoMainSlot(ItemStack itemstack)
 	{
-		final ItemStack result = ItemUtils.mergeStacks(getStackInSlot(0), itemstack);
+		final ItemStack result = ItemUtils.mergeStacksBang(getStackInSlot(0), itemstack);
 		if (result != null)
 		{
 			invSlots[0] = result;
@@ -301,7 +289,7 @@ public class TileEntityBrewKettle extends TileEntity implements ISidedInventory,
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
 	{
-		return index == 1 ? GrowthCraftCellar.residue.isItemEqual(itemstack) : true;
+		return true;
 	}
 
 	@Override

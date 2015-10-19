@@ -72,41 +72,27 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		return stack.isFluidEqual(getFluidStack());
 	}
 
-	private boolean pomaceBool()
+	private void producePomace()
 	{
-		if (this.invSlots[1] == null) return true;
-		if (!this.invSlots[1].isItemEqual(GrowthCraftCellar.residue)) return false;
-		final int result = invSlots[1].stackSize + GrowthCraftCellar.residue.stackSize;
-		return result <= getInventoryStackLimit() &&
-			result <= GrowthCraftCellar.residue.getMaxStackSize();
+		final Residue residue = CellarRegistry.instance().pressing().getPressingResidue(this.invSlots[0]);
+		this.pomace = this.pomace + residue.pomaceRate;
+		if (this.pomace >= 1.0F)
+		{
+			this.pomace = this.pomace - 1.0F;
+			final ItemStack residueResult = ItemUtils.mergeStacks(this.invSlots[1], residue.residueItem);
+			if (residueResult != null) invSlots[1] = residueResult;
+		}
 	}
 
 	public void pressItem()
 	{
 		final PressingRegistry pressing = CellarRegistry.instance().pressing();
-		final Residue residue = pressing.getPressingResidue(this.invSlots[0]);
-		this.pomace = this.pomace + residue.pomaceRate;
-		if (this.pomace >= 1.0F)
-		{
-			this.pomace = this.pomace - 1.0F;
-
-			final ItemStack residueResult = ItemUtils.mergeStacks(this.invSlots[1], residue.residueItem);
-
-			if (residueResult != null) invSlots[1] = residueResult;
-		}
-
+		producePomace();
 		final FluidStack fluidstack = pressing.getPressingFluidStack(this.invSlots[0]);
 		fluidstack.amount  = pressing.getPressingAmount(this.invSlots[0]);
 		this.tank.fill(fluidstack, true);
 
-		--this.invSlots[0].stackSize;
-
-		if (this.invSlots[0].stackSize <= 0)
-		{
-			this.invSlots[0] = null;
-		}
-
-		//this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+		this.invSlots[0] = ItemUtils.consumeStack(this.invSlots[0]);
 	}
 
 	public int getPressingTime()
@@ -257,10 +243,6 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
 	{
-		if (index == 1)
-		{
-			return GrowthCraftCellar.residue.isItemEqual(itemstack);
-		}
 		return true;
 	}
 

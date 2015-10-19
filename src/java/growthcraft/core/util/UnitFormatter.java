@@ -2,7 +2,7 @@ package growthcraft.core.util;
 
 import com.google.common.base.Joiner;
 
-import growthcraft.api.cellar.Booze;
+import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 
 import net.minecraft.util.EnumChatFormatting;

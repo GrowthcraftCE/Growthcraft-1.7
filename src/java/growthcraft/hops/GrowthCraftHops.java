@@ -1,7 +1,8 @@
 package growthcraft.hops;
 
-import growthcraft.api.cellar.Booze;
+import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.item.ItemBoozeBottle;
@@ -115,8 +116,8 @@ public class GrowthCraftHops
 
 		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle, "grc.hopAle", hopAleBucket_deprecated);
 
-		CellarRegistry.instance().brew().addBrewing(FluidRegistry.WATER, Items.wheat, hopAleBooze[4], config.hopAleBrewTime, 40, 0.3F);
-		CellarRegistry.instance().brew().addBrewing(hopAleBooze[4], hops.getItem(), hopAleBooze[0], config.hopAleHoppedBrewTime, 40, 0.0F);
+		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, Items.wheat, hopAleBooze[4], config.hopAleBrewTime, 40, Residue.newDefault(0.3F));
+		CellarRegistry.instance().brewing().addBrewing(hopAleBooze[4], hops.getItem(), hopAleBooze[0], config.hopAleHoppedBrewTime, 40, Residue.newDefault(0.0F));
 
 		CoreRegistry.instance().addVineDrop(hops.asStack(2), config.hopsVineDropRarity);
 

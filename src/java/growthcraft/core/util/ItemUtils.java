@@ -74,17 +74,27 @@ public class ItemUtils
 		return increaseStack(itemstack, 1);
 	}
 
-	public static ItemStack consumeItem(ItemStack itemstack, int amount)
+	public static ItemStack consumeStack(ItemStack itemstack, int amount)
 	{
 		return increaseStack(itemstack, -amount);
 	}
 
-	public static ItemStack consumeItem(ItemStack itemstack)
+	public static ItemStack consumeStack(ItemStack itemstack)
 	{
-		return consumeItem(itemstack, 1);
+		return consumeStack(itemstack, 1);
 	}
 
-	public static ItemStack mergeStacks(ItemStack a, ItemStack b)
+	/**
+	 * Destructive version of mergeStacks, may mutate both item stacks
+	 *
+	 * @param a - primary stack to merge to
+	 *   If the secondary stack is null, then this stack is returned as is
+	 * @param b - secondary stack to merge from
+	 *   If the primary stack is null, then a copy of this stack is returned and
+	 *   the original's stackSize reduced to 0
+	 * @return new ItemStack - the resulting ItemStack of null
+	 */
+	public static ItemStack mergeStacksBang(ItemStack a, ItemStack b)
 	{
 		if (a == null && b == null)
 		{
@@ -111,6 +121,18 @@ public class ItemUtils
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * Less-destructive version of mergeStacksBang
+	 *
+	 * @param a - destination stack, may be modified
+	 * @param b - source stack, will not be modified
+	 * @return new ItemStack
+	 */
+	public static ItemStack mergeStacks(ItemStack a, ItemStack b)
+	{
+		return mergeStacksBang(a, b != null ? b.copy() : b);
 	}
 
 	/**

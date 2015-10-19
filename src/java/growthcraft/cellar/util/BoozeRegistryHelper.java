@@ -2,7 +2,7 @@ package growthcraft.cellar.util;
 
 import javax.annotation.Nullable;
 
-import growthcraft.api.cellar.Booze;
+import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.block.BlockFluidBooze;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;

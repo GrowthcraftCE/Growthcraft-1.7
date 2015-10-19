@@ -1,7 +1,8 @@
 package growthcraft.grapes;
 
-import growthcraft.api.cellar.Booze;
+import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
@@ -131,7 +132,7 @@ public class GrowthCraftGrapes
 
 		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, grapeWine, "grc.grapeWine", grapeWineBucket_deprecated);
 
-		CellarRegistry.instance().pressing().addPressing(grapes.getItem(), grapeWineBooze[0], config.grapeWinePressingTime, 40, 0.3F);
+		CellarRegistry.instance().pressing().addPressing(grapes.getItem(), grapeWineBooze[0], config.grapeWinePressingTime, 40, Residue.newDefault(0.3F));
 
 		CoreRegistry.instance().addVineDrop(grapes.asStack(), config.vineGrapeDropRarity);
 

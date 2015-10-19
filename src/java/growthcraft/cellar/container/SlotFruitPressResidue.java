@@ -1,7 +1,5 @@
 package growthcraft.cellar.container;
 
-import growthcraft.cellar.util.CellarUtil;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -19,6 +17,6 @@ public class SlotFruitPressResidue extends Slot
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
-		return CellarUtil.itemIsResidue(stack);
+		return true;
 	}
 }

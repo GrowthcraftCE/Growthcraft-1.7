@@ -1,7 +1,8 @@
 package growthcraft.rice;
 
-import growthcraft.api.cellar.Booze;
+import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.common.Residue;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -114,7 +115,7 @@ public class GrowthCraftRice
 		GameRegistry.registerItem(riceBall.getItem(), "grc.riceBall");
 		BoozeRegistryHelper.registerBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, riceSake, "grc.riceSake", riceSakeBucket_deprecated);
 
-		CellarRegistry.instance().brew().addBrewing(FluidRegistry.WATER, rice.getItem(), riceSakeBooze[0], config.riceSakeBrewingTime, 25, 0.2F);
+		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, rice.getItem(), riceSakeBooze[0], config.riceSakeBrewingTime, 25, Residue.newDefault(0.2F));
 
 		MinecraftForge.addGrassSeed(rice.asStack(), config.riceSeedDropRarity);
 

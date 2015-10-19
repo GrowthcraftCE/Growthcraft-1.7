@@ -104,7 +104,7 @@ public abstract class BlockPaddyBase extends Block implements IPaddy
 
 							if(!player.capabilities.isCreativeMode)
 							{
-								player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemUtils.consumeItem(itemstack));
+								player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemUtils.consumeStack(itemstack));
 							}
 
 							return true;

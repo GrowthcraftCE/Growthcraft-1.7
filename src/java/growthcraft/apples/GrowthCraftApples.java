@@ -1,7 +1,8 @@
 package growthcraft.apples;
 
-import growthcraft.api.cellar.Booze;
+import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.common.Residue;
 import growthcraft.apples.block.BlockApple;
 import growthcraft.apples.block.BlockAppleLeaves;
 import growthcraft.apples.block.BlockAppleSapling;
@@ -116,7 +117,7 @@ public class GrowthCraftApples
 
 		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", appleCiderBucket_deprecated);
 
-		CellarRegistry.instance().pressing().addPressing(Items.apple, appleCiderBooze[0], this.config.appleCiderPressingTime, 40, 0.3F);
+		CellarRegistry.instance().pressing().addPressing(Items.apple, appleCiderBooze[0], this.config.appleCiderPressingTime, 40, Residue.newDefault(0.3F));
 
 		MapGenHelper.registerVillageStructure(ComponentVillageAppleFarm.class, "grc.applefarm");
 

@@ -1,7 +1,7 @@
 package growthcraft.bees;
 
 import growthcraft.api.bees.BeesRegistry;
-import growthcraft.api.cellar.Booze;
+import growthcraft.api.cellar.booze.Booze;
 import growthcraft.bees.block.BlockBeeBox;
 import growthcraft.bees.block.BlockBeeHive;
 import growthcraft.bees.block.BlockMaliceBeeBox;

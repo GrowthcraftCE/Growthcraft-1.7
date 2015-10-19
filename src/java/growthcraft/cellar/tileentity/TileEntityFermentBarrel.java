@@ -1,11 +1,11 @@
 package growthcraft.cellar.tileentity;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.container.ContainerFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.util.NBTHelper;
 import growthcraft.core.util.ItemUtils;
-import growthcraft.api.cellar.util.FluidUtils;
+import growthcraft.core.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
