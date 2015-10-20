@@ -8,7 +8,7 @@ import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.client.renderer.RenderBeeBox;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.core.Utils;
+import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -295,8 +295,8 @@ public class BlockBeeBox extends BlockContainer
 
 				if (itemstack != null && itemstack.getItem() == Items.flower_pot && te.isHoneyEnough())
 				{
-					Utils.addStack(GrowthCraftBees.honeyJar.asStack(), player, world, x, y, z, false);
-					Utils.decreaseStack(itemstack, player);
+					ItemUtils.addStackToPlayer(GrowthCraftBees.honeyJar.asStack(), player, world, x, y, z, false);
+					ItemUtils.decreaseStackOnPlayer(itemstack, player);
 					te.decreaseHoney();
 					te.markDirty();
 					world.markBlockForUpdate(x, y, z);
@@ -339,7 +339,6 @@ public class BlockBeeBox extends BlockContainer
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float fx, float fy, float fz, int meta)
 	{
-		Utils.debug("Placed with meta=" + meta);
 		return super.onBlockPlaced(world, x, y, z, side, fx, fy, fz, meta);
 	}
 

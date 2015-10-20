@@ -50,35 +50,6 @@ public class Utils
 		return defaultValue;
 	}
 
-	public static void decreaseStack(ItemStack itemstack, EntityPlayer player)
-	{
-		if (!player.capabilities.isCreativeMode)
-		{
-			--itemstack.stackSize;
-
-			if (itemstack.stackSize <= 0)
-			{
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
-			}
-		}
-	}
-
-	public static void addStack(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, boolean bool)
-	{
-		final boolean flag = bool ? !player.capabilities.isCreativeMode : true;
-		if (flag)
-		{
-			if (!player.inventory.addItemStackToInventory(itemstack))
-			{
-				world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, itemstack));
-			}
-			else if (player instanceof EntityPlayerMP)
-			{
-				((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
-			}
-		}
-	}
-
 	public static final boolean isIntegerInRange(int i, int floor, int ceiling)
 	{
 		if (i < floor || i > ceiling)

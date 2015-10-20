@@ -7,11 +7,14 @@ import growthcraft.core.GrowthCraftCore;
 import buildcraft.api.tools.IToolWrench;
 
 import cpw.mods.fml.common.Loader;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 
 /**
  * Utility class for item handling.
@@ -133,6 +136,35 @@ public class ItemUtils
 	public static ItemStack mergeStacks(ItemStack a, ItemStack b)
 	{
 		return mergeStacksBang(a, b != null ? b.copy() : b);
+	}
+
+	public static void decreaseStackOnPlayer(ItemStack itemstack, EntityPlayer player)
+	{
+		if (!player.capabilities.isCreativeMode)
+		{
+			--itemstack.stackSize;
+
+			if (itemstack.stackSize <= 0)
+			{
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+			}
+		}
+	}
+
+	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, boolean bool)
+	{
+		final boolean flag = bool ? !player.capabilities.isCreativeMode : true;
+		if (flag)
+		{
+			if (!player.inventory.addItemStackToInventory(itemstack))
+			{
+				world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, itemstack));
+			}
+			else if (player instanceof EntityPlayerMP)
+			{
+				((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
+			}
+		}
 	}
 
 	/**
