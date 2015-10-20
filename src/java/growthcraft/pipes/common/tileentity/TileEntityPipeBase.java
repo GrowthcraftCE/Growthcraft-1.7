@@ -34,6 +34,13 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 		OUTPUT;
 	}
 
+	public static enum EndType
+	{
+		NONE,
+		PIPE,
+		BUS;
+	}
+
 	public static class PipeFluidTank extends FluidTank
 	{
 		public PipeFluidTank(int capacity)
@@ -76,6 +83,7 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 	{
 		public TransferState transferState = TransferState.IDLE;
 		public UsageState usageState = UsageState.UNUSABLE;
+		public EndType endType = EndType.NONE;
 		public int feedFlag;
 	}
 
@@ -174,6 +182,7 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 			final TileEntity te = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			pipeBuffers[i].te = te;
 			pipeSections[i].usageState = UsageState.UNUSABLE;
+			pipeSections[i].endType = EndType.NONE;
 			boolean valid = true;
 			// if the other pipe is a ColourableTile
 			if (te instanceof IColourableTile)
@@ -188,11 +197,13 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 				{
 					pipeRenderState |= 1 << i;
 					pipeSections[i].usageState = UsageState.USABLE;
+					pipeSections[i].endType = EndType.PIPE;
 				}
 				else if (te instanceof IFluidHandler)
 				{
-					pipeRenderState |= 1 << (i + 6);
+					pipeRenderState |= 1 << (6 + i);
 					pipeSections[i].usageState = UsageState.USABLE;
+					pipeSections[i].endType = EndType.BUS;
 				}
 			}
 		}

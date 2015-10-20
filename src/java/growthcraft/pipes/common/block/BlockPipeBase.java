@@ -217,8 +217,16 @@ public class BlockPipeBase extends Block implements IPipeBlock, ITileEntityProvi
 							PipeConsts.INNER_SIDES[i][3], PipeConsts.INNER_SIDES[i][4], PipeConsts.INNER_SIDES[i][5]);
 						super.addCollisionBoxesToList(world, x, y, z, bb, list, entity);
 					}
-					setBlockBounds(PipeConsts.BUS_SIDES[i][0], PipeConsts.BUS_SIDES[i][1], PipeConsts.BUS_SIDES[i][2],
-						PipeConsts.BUS_SIDES[i][3], PipeConsts.BUS_SIDES[i][4], PipeConsts.BUS_SIDES[i][5]);
+					if (TileEntityPipeBase.EndType.BUS == te.pipeSections[i].endType)
+					{
+						setBlockBounds(PipeConsts.BUS_SIDES[i][0], PipeConsts.BUS_SIDES[i][1], PipeConsts.BUS_SIDES[i][2],
+							PipeConsts.BUS_SIDES[i][3], PipeConsts.BUS_SIDES[i][4], PipeConsts.BUS_SIDES[i][5]);
+					}
+					else
+					{
+						setBlockBounds(PipeConsts.PIPE_SIDES[i][0], PipeConsts.PIPE_SIDES[i][1], PipeConsts.PIPE_SIDES[i][2],
+							PipeConsts.PIPE_SIDES[i][3], PipeConsts.PIPE_SIDES[i][4], PipeConsts.PIPE_SIDES[i][5]);
+					}
 					super.addCollisionBoxesToList(world, x, y, z, bb, list, entity);
 				}
 			}

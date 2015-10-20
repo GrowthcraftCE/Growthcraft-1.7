@@ -17,6 +17,6 @@ public class ItemBlockPipeBase extends ItemBlock
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
-		return GrcColour.toColour(stack.getItemDamage()).toString() + " " + super.getItemStackDisplayName(stack);
+		return super.getItemStackDisplayName(stack) + "(" + GrcColour.toColour(stack.getItemDamage()).toString() + ")";
 	}
 }
