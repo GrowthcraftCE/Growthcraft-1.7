@@ -1,8 +1,8 @@
 package growthcraft.pipes.integration;
 
 import growthcraft.core.integration.WailaIntegrationBase;
+import growthcraft.pipes.common.block.BlockPipeBase;
 import growthcraft.pipes.integration.waila.PipeDataProvider;
-import growthcraft.pipes.block.BlockPipeBase;
 
 import cpw.mods.fml.common.Optional;
 

@@ -1,8 +1,8 @@
-package growthcraft.pipes.client.render;
+package growthcraft.pipes.client.renderer;
 
 import growthcraft.api.core.GrcColour;
 import growthcraft.pipes.client.model.ModelPipe;
-import growthcraft.pipes.tileentity.TileEntityPipeBase;
+import growthcraft.pipes.common.tileentity.TileEntityPipeBase;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

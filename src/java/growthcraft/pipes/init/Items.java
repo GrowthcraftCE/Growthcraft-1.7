@@ -1,4 +1,4 @@
-package growthcraft.pipes;
+package growthcraft.pipes.init;
 
 /*import cpw.mods.fml.common.registry.GameRegistry;
 

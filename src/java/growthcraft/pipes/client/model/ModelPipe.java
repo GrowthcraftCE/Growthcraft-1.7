@@ -1,11 +1,10 @@
 package growthcraft.pipes.client.model;
 
-import growthcraft.pipes.utils.PipeFlag;
+import growthcraft.pipes.util.PipeFlag;
+import growthcraft.pipes.util.PipeConsts;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.util.MathHelper;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class ModelPipe extends ModelBase
 {
@@ -23,8 +22,10 @@ public class ModelPipe extends ModelBase
 
 	public ModelPipe()
 	{
-		textureWidth  = 128;
-		textureHeight = 128;
+		this.textureWidth  = 128;
+		this.textureHeight = 128;
+
+		final float scale = 16.0f;
 
 		pipeCore = new ModelRenderer(this, 0, 0);
 		pipeCore.addBox(0f, 0f, 0f, 4, 4, 4);
@@ -42,34 +43,37 @@ public class ModelPipe extends ModelBase
 
 		for (int i = 0; i < 6; ++i)
 		{
-			final ForgeDirection dir = ForgeDirection.getOrientation(i);
-			final float absX = MathHelper.abs(dir.offsetX);
-			final float absY = MathHelper.abs(dir.offsetY);
-			final float absZ = MathHelper.abs(dir.offsetZ);
 			innerSides[i] = new ModelRenderer(this, 0, 8 * (i + 1));
-			innerSides[i].addBox(3.5f * dir.offsetX, 3.5f * dir.offsetY, 3.5f * dir.offsetZ,
-				(int)(4f - (1f * absX)), (int)(4f - (1f * absY)), (int)(4f - (1f * absZ)));
-			innerSides[i].setRotationPoint(-(2f - (0.5f * absX)), -(2f - (0.5f * absY)), -(2f - (0.5f * absZ)));
+			generatePipeModel(innerSides[i], PipeConsts.INNER_SIDES_CENT[i], PipeConsts.INNER_SIDES_DIM[i], scale);
 			innerSides[i].setTextureSize(textureWidth, textureHeight);
 			innerSides[i].mirror = true;
 			setRotation(innerSides[i], 0f, 0f, 0f);
 
 			busSides[i] = new ModelRenderer(this, 16, 32 + (12 * i));
-			busSides[i].addBox(6.5f * dir.offsetX, 6.5f * dir.offsetY, 6.5f * dir.offsetZ,
-				(int)(6f - (3f * absX)), (int)(6f - (3f * absY)), (int)(6f - (3f * absZ)));
-			busSides[i].setRotationPoint(-(3f - (1.5f * absX)), -(3f - (1.5f * absY)), -(3f - (1.5f * absZ)));
+			generatePipeModel(busSides[i], PipeConsts.BUS_SIDES_CENT[i], PipeConsts.BUS_SIDES_DIM[i], scale);
 			busSides[i].setTextureSize(textureWidth, textureHeight);
 			busSides[i].mirror = true;
 			setRotation(busSides[i], 0f, 0f, 0f);
 
 			pipeSides[i] = new ModelRenderer(this, 64, 32 + (8 * i));
-			pipeSides[i].addBox(6.5f * dir.offsetX, 6.5f * dir.offsetY, 6.5f * dir.offsetZ,
-				(int)(4f - (1f * absX)), (int)(4f - (1f * absY)), (int)(4f - (1f * absZ)));
-			pipeSides[i].setRotationPoint(-(2f - (0.5f * absX)), -(2f - (0.5f * absY)), -(2f - (0.5f * absZ)));
+			generatePipeModel(pipeSides[i], PipeConsts.PIPE_SIDES_CENT[i], PipeConsts.PIPE_SIDES_DIM[i], scale);
 			pipeSides[i].setTextureSize(textureWidth, textureHeight);
 			pipeSides[i].mirror = true;
 			setRotation(pipeSides[i], 0f, 0f, 0f);
 		}
+	}
+
+	private void generatePipeModel(ModelRenderer model, float[] pos, float[] dim, float scale)
+	{
+		final float x = pos[0] * scale;
+		final float y = pos[1] * scale;
+		final float z = pos[2] * scale;
+		final int w = (int)(dim[0] * scale);
+		final int h = (int)(dim[1] * scale);
+		final int l = (int)(dim[2] * scale);
+
+		model.addBox(x, y, z, w, h, l);
+		model.setRotationPoint(-w / 2.0f, -h / 2.0f, -l / 2.0f);
 	}
 
 	public void render(int flags, float scale)

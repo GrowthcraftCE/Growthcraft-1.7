@@ -1,4 +1,4 @@
-package growthcraft.pipes.utils;
+package growthcraft.pipes.util;
 
 public final class PipeFlag
 {

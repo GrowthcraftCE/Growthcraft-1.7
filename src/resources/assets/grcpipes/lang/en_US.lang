@@ -1,2 +1,2 @@
-tile.grc.pipeBase.name=Pipe
-tile.grc.pipeVacuum.name=Vacuum Pipe
+tile.grc.pipeBase.name=Fluid Tube
+tile.grc.pipeVacuum.name=Vacuum Tube

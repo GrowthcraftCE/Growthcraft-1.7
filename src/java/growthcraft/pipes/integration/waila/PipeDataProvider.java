@@ -3,7 +3,7 @@ package growthcraft.pipes.integration.waila;
 import java.util.List;
 
 import growthcraft.api.core.GrcColour;
-import growthcraft.pipes.tileentity.TileEntityPipeBase;
+import growthcraft.pipes.common.tileentity.TileEntityPipeBase;
 
 import cpw.mods.fml.common.Optional;
 

@@ -1,9 +1,9 @@
-package growthcraft.pipes.tileentity;
+package growthcraft.pipes.common.tileentity;
 
 import growthcraft.api.core.GrcColour;
-import growthcraft.pipes.utils.PipeType;
-import growthcraft.pipes.utils.PipeFlag;
-import growthcraft.pipes.block.IPipeBlock;
+import growthcraft.pipes.common.block.IPipeBlock;
+import growthcraft.pipes.util.PipeFlag;
+import growthcraft.pipes.util.PipeType;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,20 +21,20 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPipeTile, IColourableTile
 {
-	enum UsageState
+	public static enum UsageState
 	{
 		UNUSABLE,
 		USABLE;
 	}
 
-	enum TransferState
+	public static enum TransferState
 	{
 		IDLE,
 		INPUT,
 		OUTPUT;
 	}
 
-	class PipeFluidTank extends FluidTank
+	public static class PipeFluidTank extends FluidTank
 	{
 		public PipeFluidTank(int capacity)
 		{
@@ -72,14 +72,14 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 		}
 	}
 
-	class PipeSection
+	public static class PipeSection
 	{
 		public TransferState transferState = TransferState.IDLE;
 		public UsageState usageState = UsageState.UNUSABLE;
 		public int feedFlag;
 	}
 
-	class PipeBuffer
+	public static class PipeBuffer
 	{
 		public TileEntity te;
 
@@ -235,6 +235,7 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 			{
 				dirty = false;
 				refreshCache();
+				worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord));
 			}
 		}
 

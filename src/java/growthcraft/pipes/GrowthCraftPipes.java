@@ -1,6 +1,8 @@
 package growthcraft.pipes;
 
-import growthcraft.pipes.proxy.CommonProxy;
+import growthcraft.pipes.common.CommonProxy;
+import growthcraft.pipes.init.Blocks;
+import growthcraft.pipes.init.Items;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -21,7 +23,7 @@ public class GrowthCraftPipes
 	public static final String MOD_VERSION = "@VERSION@";
 
 	@Mod.Instance(MOD_ID)
-	public static GrowthCraftPipes INSTANCE;
+	public static GrowthCraftPipes instance;
 
 	public Blocks blocks = new Blocks();
 	public Items items = new Items();
@@ -29,7 +31,7 @@ public class GrowthCraftPipes
 
 	public static Config getConfig()
 	{
-		return INSTANCE.config;
+		return instance.config;
 	}
 
 	@EventHandler
@@ -50,7 +52,7 @@ public class GrowthCraftPipes
 	{
 		if (config.enabled)
 		{
-			CommonProxy.INSTANCE.registerRenderers();
+			CommonProxy.instance.registerRenderers();
 			new growthcraft.pipes.integration.Waila();
 		}
 	}

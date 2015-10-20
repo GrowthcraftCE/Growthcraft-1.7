@@ -1,4 +1,4 @@
-package growthcraft.pipes.tileentity;
+package growthcraft.pipes.common.tileentity;
 
 public interface IPipeTile
 {
