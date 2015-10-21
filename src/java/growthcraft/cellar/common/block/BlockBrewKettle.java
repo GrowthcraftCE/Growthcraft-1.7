@@ -73,9 +73,9 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 		final ItemStack is = player.inventory.getCurrentItem();
 		if (te != null)
 		{
-			if (!Utils.fillTank(world, x, y, z, te, is, player))
+			if (!Utils.playerFillTank(world, x, y, z, te, is, player))
 			{
-				if (Utils.drainTank(world, x, y, z, te, is, player, false, 64, 0.35F) == null)
+				if (Utils.playerDrainTank(world, x, y, z, te, is, player, false, 64, 0.35F) == null)
 				{
 					openGui(player, world, x, y, z);
 				}

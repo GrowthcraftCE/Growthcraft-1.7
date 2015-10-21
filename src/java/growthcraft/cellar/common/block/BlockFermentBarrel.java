@@ -65,9 +65,9 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 		}
 	}
 
-	private boolean drainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
+	private boolean playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
 	{
-		final FluidStack available = Utils.drainTank(world, x, y, z, tank, held, player);
+		final FluidStack available = Utils.playerDrainTank(world, x, y, z, tank, held, player);
 		if (available != null)
 		{
 			setAchievements(player, available.getFluid());
@@ -87,9 +87,9 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 		if (te != null)
 		{
 			final ItemStack itemstack = player.inventory.getCurrentItem();
-			if (!Utils.fillTank(world, x, y, z, te, itemstack, player))
+			if (!Utils.playerFillTank(world, x, y, z, te, itemstack, player))
 			{
-				if (!drainTank(world, x, y, z, te, itemstack, player))
+				if (!playerDrainTank(world, x, y, z, te, itemstack, player))
 				{
 					openGui(player, world, x, y, z);
 				}

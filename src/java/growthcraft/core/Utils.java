@@ -59,7 +59,7 @@ public class Utils
 		return true;
 	}
 
-	public static boolean fillTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
+	public static boolean playerFillTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
 	{
 		if (held != null)
 		{
@@ -67,25 +67,29 @@ public class Utils
 
 			if (heldContents != null)
 			{
-				final int used = tank.fill(ForgeDirection.UNKNOWN, heldContents, true);
+				final int used = tank.fill(ForgeDirection.UNKNOWN, heldContents, false);
 
 				if (used > 0)
 				{
-					final ItemStack consumed = held.getItem().getContainerItem(held);
-					if (!player.inventory.addItemStackToInventory(consumed))
+					if (!world.isRemote)
 					{
-						world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, consumed));
-					}
-					else if (player instanceof EntityPlayerMP)
-					{
-						((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
-					}
-
-					if (!player.capabilities.isCreativeMode)
-					{
-						if (--held.stackSize <= 0)
+						tank.fill(ForgeDirection.UNKNOWN, heldContents, true);
+						final ItemStack consumed = held.getItem().getContainerItem(held);
+						if (!player.inventory.addItemStackToInventory(consumed))
 						{
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+							world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, consumed));
+						}
+						else if (player instanceof EntityPlayerMP)
+						{
+							((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
+						}
+
+						if (!player.capabilities.isCreativeMode)
+						{
+							if (--held.stackSize <= 0)
+							{
+								player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+							}
 						}
 					}
 
@@ -97,7 +101,7 @@ public class Utils
 		return false;
 	}
 
-	public static FluidStack drainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player, boolean expbool, int amount, float exp)
+	public static FluidStack playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player, boolean expbool, int amount, float exp)
 	{
 		if (held != null)
 		{
@@ -142,9 +146,9 @@ public class Utils
 		return null;
 	}
 
-	public static FluidStack drainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
+	public static FluidStack playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
 	{
-		return drainTank(world, x, y, z, tank, held, player, false, 0, 0);
+		return playerDrainTank(world, x, y, z, tank, held, player, false, 0, 0);
 	}
 
 	public static void spawnExp(int amount, float exp, EntityPlayer player)
