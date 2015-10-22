@@ -2,7 +2,9 @@ package growthcraft.api.bees;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -18,6 +20,9 @@ public class BeesRegistry
 	private static final BeesRegistry INSTANCE = new BeesRegistry();
 	private static final int NO_META = -1;
 	private final List<Item> beesList = new ArrayList<Item>();
+	private final List<List> emptyHoneyCombList = new ArrayList<List>();
+	private final List<List> filledHoneyCombList = new ArrayList<List>();
+	private final Map<List, ItemStack> honeyCombMap = new HashMap<List, ItemStack>();
 	private final List<List> flowersList = new ArrayList<List>();
 
 	public static final BeesRegistry instance()
@@ -43,6 +48,54 @@ public class BeesRegistry
 	public void addBee(Item bee)
 	{
 		this.beesList.add(bee);
+	}
+
+	private List stackToKey(ItemStack itemstack)
+	{
+		return Arrays.asList(itemstack.getItem(), itemstack.getItemDamage());
+	}
+
+	public void addEmptyHoneyComb(ItemStack itemstack)
+	{
+		emptyHoneyCombList.add(stackToKey(itemstack));
+	}
+
+	public void addFilledHoneyComb(ItemStack itemstack)
+	{
+		filledHoneyCombList.add(stackToKey(itemstack));
+	}
+
+	public void addHoneyCombMapping(ItemStack empty, ItemStack full)
+	{
+		honeyCombMap.put(stackToKey(empty), full);
+	}
+
+	public void addHoneyComb(ItemStack empty, ItemStack full)
+	{
+		addEmptyHoneyComb(empty);
+		addFilledHoneyComb(full);
+		addHoneyCombMapping(empty, full);
+	}
+
+	public ItemStack getFilledHoneyComb(ItemStack itemstack)
+	{
+		return honeyCombMap.get(stackToKey(itemstack));
+	}
+
+	public boolean isItemFilledHoneyComb(ItemStack itemstack)
+	{
+		return filledHoneyCombList.contains(stackToKey(itemstack));
+	}
+
+	public boolean isItemEmptyHoneyComb(ItemStack itemstack)
+	{
+		return emptyHoneyCombList.contains(stackToKey(itemstack));
+	}
+
+	public boolean isItemHoneyComb(ItemStack itemstack)
+	{
+		final List key = stackToKey(itemstack);
+		return emptyHoneyCombList.contains(key) || filledHoneyCombList.contains(key);
 	}
 
 	/**
@@ -84,6 +137,7 @@ public class BeesRegistry
 
 	public boolean isBlockFlower(Block block, int meta)
 	{
-		return this.flowersList.contains(Arrays.asList(block, meta)) || this.flowersList.contains(Arrays.asList(block, NO_META));
+		return this.flowersList.contains(Arrays.asList(block, meta)) ||
+			this.flowersList.contains(Arrays.asList(block, NO_META));
 	}
 }
