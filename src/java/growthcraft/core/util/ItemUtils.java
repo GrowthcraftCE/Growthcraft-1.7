@@ -151,9 +151,9 @@ public class ItemUtils
 		}
 	}
 
-	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, boolean bool)
+	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, boolean checkCreative)
 	{
-		final boolean flag = bool ? !player.capabilities.isCreativeMode : true;
+		final boolean flag = checkCreative ? !player.capabilities.isCreativeMode : true;
 		if (flag)
 		{
 			if (!player.inventory.addItemStackToInventory(itemstack))
@@ -165,6 +165,11 @@ public class ItemUtils
 				((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
 			}
 		}
+	}
+
+	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, World world, boolean checkCreative)
+	{
+		addStackToPlayer(itemstack, player, world, (int)player.posX, (int)player.posY, (int)player.posZ, checkCreative);
 	}
 
 	/**

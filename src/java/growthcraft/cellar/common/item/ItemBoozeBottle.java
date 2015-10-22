@@ -4,6 +4,7 @@ import java.util.List;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.util.ItemUtils;
 import growthcraft.core.util.UnitFormatter;
 import growthcraft.core.Utils;
 
@@ -31,11 +32,11 @@ public class ItemBoozeBottle extends ItemFood
 {
 	private Fluid[] booze;
 
-	private boolean tipsyBool;
+	private boolean canCauseTipsy;
 	private float   tipsyChance;
 	private int     tipsyTime;
 
-	private boolean potionBool;
+	private boolean hasPotionEffect;
 	private int     potionAmount;
 	private int[]   potionID;
 	private int[]   potionTime;
@@ -70,7 +71,7 @@ public class ItemBoozeBottle extends ItemFood
 
 	public ItemBoozeBottle setTipsy(float chance, int time)
 	{
-		this.tipsyBool = true;
+		this.canCauseTipsy = true;
 		this.tipsyChance = MathHelper.clamp_float(chance, 0.1F, 1.0F);
 		this.tipsyTime = time;
 		return this;
@@ -80,7 +81,7 @@ public class ItemBoozeBottle extends ItemFood
 	{
 		if (ids.length == times.length)
 		{
-			this.potionBool   = true;
+			this.hasPotionEffect   = true;
 			this.potionID     = ids;
 			this.potionTime   = times;
 			this.potionAmount = ids.length;
@@ -121,12 +122,94 @@ public class ItemBoozeBottle extends ItemFood
 	/************
 	 * ON USE
 	 ************/
+
+	// for lack of a better name, this method is called by the server side
+	// when the item is eaten
+	public void onEaten_server(ItemStack stack, World world, EntityPlayer player)
+	{
+		if (Utils.isIntegerInRange(stack.getItemDamage(), 1, 3))
+		{
+			/*int amplifier = 0;
+
+			if (player.isPotionActive(Potion.confusion))
+			{
+				amplifier = player.getActivePotionEffect(Potion.confusion).getAmplifier();
+				amplifier += 1;
+
+				if (amplifier >= 6)
+				{
+					amplifier = 6;
+				}
+			}
+
+			float chance = this.nauseaChance + (((this.nauseaChance / 4.0F) * (float)amplifier));
+			int time = this.nauseaTime + (((this.nauseaTime / 4) * amplifier));
+
+			if (world.rand.nextFloat() < chance && this.nauseaBool)
+			{
+				player.addPotionEffect(new PotionEffect(Potion.confusion.id, time, amplifier));
+
+				if (amplifier >= 3)
+				{
+					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, time, amplifier - 3));
+					player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, time, amplifier - 3));
+				}
+			}*/
+
+			if (this.canCauseTipsy)
+			{
+				if (world.rand.nextFloat() < this.tipsyChance)
+				{
+					int amplifier = 0;
+					int time = 1200;
+					if (player.isPotionActive(GrowthCraftCellar.potionTipsy))
+					{
+						amplifier = player.getActivePotionEffect(GrowthCraftCellar.potionTipsy).getAmplifier() + 1;
+						if (amplifier > 4)
+						{
+							amplifier = 4;
+						}
+					}
+
+					switch (amplifier)
+					{
+						case 1: time = 3000; break;
+						case 2: time = 6750; break;
+						case 3: time = 12000; break;
+						case 4: time = 24000; break;
+						default:
+							break;
+					}
+
+					player.addPotionEffect(new PotionEffect(GrowthCraftCellar.potionTipsy.id, time, amplifier));
+
+					if (amplifier >= 4)
+					{
+						player.addStat(GrowthCraftCellar.getDrunk, 1);
+					}
+				}
+			}
+
+			if (this.hasPotionEffect)
+			{
+				for (int loop = 0; loop < this.potionAmount; ++loop)
+				{
+					this.addPotionEffect(stack, player, this.potionID[loop], this.potionTime[loop]);
+				}
+			}
+		}
+	}
+
 	@Override
 	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
 	{
 		if (!player.capabilities.isCreativeMode)
 		{
-			--stack.stackSize;
+			if (!world.isRemote)
+			{
+				final ItemStack result = ItemUtils.consumeStack(stack.splitStack(1));
+				ItemUtils.addStackToPlayer(result, player, world, false);
+			}
 		}
 
 		player.getFoodStats().func_151686_a(this, stack);
@@ -135,82 +218,11 @@ public class ItemBoozeBottle extends ItemFood
 
 		if (!world.isRemote)
 		{
-			if (Utils.isIntegerInRange(stack.getItemDamage(), 1, 3))
-			{
-				/*int amplifier = 0;
-
-				if (player.isPotionActive(Potion.confusion))
-				{
-					amplifier = player.getActivePotionEffect(Potion.confusion).getAmplifier();
-					amplifier += 1;
-
-					if (amplifier >= 6)
-					{
-						amplifier = 6;
-					}
-				}
-
-				float chance = this.nauseaChance + (((this.nauseaChance / 4.0F) * (float)amplifier));
-				int time = this.nauseaTime + (((this.nauseaTime / 4) * amplifier));
-
-				if (world.rand.nextFloat() < chance && this.nauseaBool)
-				{
-					player.addPotionEffect(new PotionEffect(Potion.confusion.id, time, amplifier));
-
-					if (amplifier >= 3)
-					{
-						player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, time, amplifier - 3));
-						player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, time, amplifier - 3));
-					}
-				}*/
-
-				if (this.tipsyBool)
-				{
-					if (world.rand.nextFloat() < this.tipsyChance)
-					{
-						int amplifier = 0;
-						int time = 1200;
-						if (player.isPotionActive(GrowthCraftCellar.potionTipsy))
-						{
-							amplifier = player.getActivePotionEffect(GrowthCraftCellar.potionTipsy).getAmplifier() + 1;
-							if (amplifier > 4)
-							{
-								amplifier = 4;
-							}
-						}
-
-						switch (amplifier)
-						{
-							case 1: time = 3000; break;
-							case 2: time = 6750; break;
-							case 3: time = 12000; break;
-							case 4: time = 24000; break;
-							default:
-								break;
-						}
-
-						player.addPotionEffect(new PotionEffect(GrowthCraftCellar.potionTipsy.id, time, amplifier));
-
-						if (amplifier >= 4)
-						{
-							player.addStat(GrowthCraftCellar.getDrunk, 1);
-						}
-					}
-				}
-
-				if (this.potionBool)
-				{
-					for (int loop = 0; loop < this.potionAmount; ++loop)
-					{
-						this.addPotionEffect(stack, player, this.potionID[loop], this.potionTime[loop]);
-					}
-				}
-			}
+			onEaten_server(stack, world, player);
 		}
 
-		return stack.stackSize <= 0 ? new ItemStack(Items.glass_bottle) : stack;
+		return stack.stackSize <= 0 ? null : stack;
 	}
-
 
 	protected void addPotionEffect(ItemStack stack, EntityPlayer player, int potnID, int potnTime)
 	{
@@ -239,12 +251,12 @@ public class ItemBoozeBottle extends ItemFood
 
 		if (Utils.isIntegerInRange(stack.getItemDamage(), 1, 3))
 		{
-			if (this.tipsyBool)
+			if (this.canCauseTipsy)
 			{
 				writeNauseaTooltip(stack, player, list, bool, this.tipsyChance, this.tipsyTime);
 			}
 
-			if (this.potionBool)
+			if (this.hasPotionEffect)
 			{
 				for (int loop = 0; loop < this.potionAmount; ++loop)
 				{
