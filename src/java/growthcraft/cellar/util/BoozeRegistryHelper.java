@@ -15,6 +15,7 @@ import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Items;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -43,11 +44,6 @@ public class BoozeRegistryHelper
 		{
 			GameRegistry.registerItem(buckets[i].getItem(), basename + "Bucket." + i);
 			GameRegistry.registerBlock(fluidBlocks[i].getBlock(), ItemBlockFluidBooze.class, basename + "Fluid." + i);
-			// forward compat recipe
-			if (oldBucket != null)
-			{
-				GameRegistry.addShapelessRecipe(buckets[i].asStack(), oldBucket.asStack(1, i));
-			}
 
 			BucketHandler.instance().register(fluidBlocks[i].getBlock(), buckets[i].getItem());
 
@@ -58,8 +54,16 @@ public class BoozeRegistryHelper
 			}
 			FluidContainerRegistry.registerFluidContainer(boozeStack, buckets[i].asStack(), FluidContainerRegistry.EMPTY_BUCKET);
 
-			final FluidStack bottleStack = new FluidStack(boozes[i], GrowthCraftCellar.BOTTLE_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(bottleStack, bottle.asStack(1, i), GrowthCraftCellar.EMPTY_BOTTLE);
+			final FluidStack fluidStack = new FluidStack(boozes[i], GrowthCraftCellar.BOTTLE_VOLUME);
+			FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1, i), GrowthCraftCellar.EMPTY_BOTTLE);
+
+
+			GameRegistry.addShapelessRecipe(bottle.asStack(3, i), buckets[i].getItem(), Items.glass_bottle, Items.glass_bottle, Items.glass_bottle);
+			// forward compat recipe
+			if (oldBucket != null)
+			{
+				GameRegistry.addShapelessRecipe(buckets[i].asStack(), oldBucket.asStack(1, i));
+			}
 
 			if (oldBucket != null) NEI.hideItem(oldBucket.asStack(1, i));
 		}
