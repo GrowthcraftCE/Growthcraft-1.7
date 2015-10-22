@@ -8,11 +8,16 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 
+/**
+ * Remove this in version 2.5.x
+ */
 public class ItemHoneyComb extends Item
 {
 	private IIcon[] tex;
@@ -24,7 +29,19 @@ public class ItemHoneyComb extends Item
 		this.setMaxDamage(0);
 		this.setUnlocalizedName("grc.honeyComb");
 		this.setCreativeTab(GrowthCraftBees.tab);
-		this.setContainerItem(this);
+		//this.setContainerItem(this);
+	}
+
+	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
+	{
+		list.add(StatCollector.translateToLocal("grc.bees.item.honeyComb.deprecated"));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
+	{
+		writeModifierTooltip(stack, player, list, bool);
 	}
 
 	/************
@@ -36,8 +53,8 @@ public class ItemHoneyComb extends Item
 	{
 		this.tex = new IIcon[2];
 
-		this.tex[0] = reg.registerIcon("grcbees:honeycomb_0");
-		this.tex[1] = reg.registerIcon("grcbees:honeycomb_1");
+		this.tex[0] = reg.registerIcon("grcbees:honeycomb.deprecated_0");
+		this.tex[1] = reg.registerIcon("grcbees:honeycomb.deprecated_1");
 	}
 
 	@Override

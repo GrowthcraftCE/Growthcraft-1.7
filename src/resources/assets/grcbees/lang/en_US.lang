@@ -17,6 +17,8 @@ item.grc.honeyComb.full.name=Honeycomb
 item.grc.honeyJar.name=Honey
 item.grc.bee.name=Bee
 
+grc.bees.item.honeyComb.deprecated=This item has been deprecated, craft to get the updated item.
+
 container.grc.beeBox=Bee Box
 
 fluid.grc.honeyMead=Mead

@@ -17,7 +17,13 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 {
-	public static final int ANY_HONEYCOMB_TYPE = -1;
+	public static enum HoneyCombExpect
+	{
+		ANY,
+		EMPTY,
+		FILLED;
+	}
+
 	private static final int[] beeSlotIds = new int[] {0};
 	private static final int[] honeyCombSlotIds = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9 , 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
 
@@ -58,20 +64,23 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		this.time = v;
 	}
 
-	public boolean slotHasHoneyComb(int index, int value)
+	public boolean slotHasHoneyComb(int index, HoneyCombExpect expects)
 	{
 		final ItemStack slotItem = this.invSlots[index];
-		if (!GrowthCraftBees.honeyComb.equals(slotItem.getItem())) return false;
-		if (value != ANY_HONEYCOMB_TYPE)
+		switch (expects)
 		{
-			return slotItem.getItemDamage() == value;
+			case EMPTY:
+				return BeesRegistry.instance().isItemEmptyHoneyComb(slotItem);
+			case FILLED:
+				return BeesRegistry.instance().isItemFilledHoneyComb(slotItem);
+			default:
+				return BeesRegistry.instance().isItemHoneyComb(slotItem);
 		}
-		return true;
 	}
 
 	public boolean slotHasEmptyComb(int index)
 	{
-		return slotHasHoneyComb(index, 0);
+		return slotHasHoneyComb(index, HoneyCombExpect.EMPTY);
 	}
 
 	//counts filled honeycombs only
@@ -82,7 +91,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		{
 			if (this.invSlots[i] != null)
 			{
-				if (slotHasHoneyComb(i, 1))
+				if (slotHasHoneyComb(i, HoneyCombExpect.FILLED))
 				{
 					count++;
 				}
@@ -99,7 +108,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		{
 			if (this.invSlots[i] != null)
 			{
-				if (slotHasHoneyComb(i, ANY_HONEYCOMB_TYPE))
+				if (slotHasHoneyComb(i, HoneyCombExpect.ANY))
 				{
 					count++;
 				}
@@ -140,7 +149,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		{
 			if (this.invSlots[i] != null)
 			{
-				if (slotHasHoneyComb(i, 1))
+				if (slotHasHoneyComb(i, HoneyCombExpect.FILLED))
 				{
 					this.invSlots[i].setItemDamage(0);
 					count++;
@@ -182,7 +191,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		{
 			if (this.invSlots[i] == null)
 			{
-				this.invSlots[i] = GrowthCraftBees.honeyComb.asStack();
+				this.invSlots[i] = GrowthCraftBees.honeyCombEmpty.asStack();
 				break;
 			}
 		}
@@ -194,7 +203,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		{
 			if (this.invSlots[i] != null && slotHasEmptyComb(i))
 			{
-				this.invSlots[i] = GrowthCraftBees.honeyComb.asStack(1, 1);
+				this.invSlots[i] = BeesRegistry.instance().getFilledHoneyComb(invSlots[i]).copy();
 				break;
 			}
 		}
@@ -300,7 +309,14 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
 	{
-		return index == 0 ? BeesRegistry.instance().isItemBee(itemstack) : GrowthCraftBees.honeyComb.equals(itemstack.getItem());
+		if (index == 0)
+		{
+			return BeesRegistry.instance().isItemBee(itemstack);
+		}
+		else
+		{
+			return BeesRegistry.instance().isItemHoneyComb(itemstack);
+		}
 	}
 
 	/************

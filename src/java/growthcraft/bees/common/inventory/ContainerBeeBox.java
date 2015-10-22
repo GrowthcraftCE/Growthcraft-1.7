@@ -2,7 +2,6 @@ package growthcraft.bees.common.inventory;
 
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
-import growthcraft.bees.GrowthCraftBees;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -114,7 +113,7 @@ public class ContainerBeeBox extends Container
 						return null;
 					}
 				}
-				else if (GrowthCraftBees.honeyComb.equals(stack.getItem()))
+				else if (BeesRegistry.instance().isItemHoneyComb(stack))
 				{
 					if (!this.mergeHoneyStack(stack, SlotId.HONEY_COMB_START, SlotId.HONEY_COMB_END, false))
 					{

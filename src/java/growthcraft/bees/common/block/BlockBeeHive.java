@@ -178,17 +178,22 @@ public class BlockBeeHive extends Block
 		super.dropBlockAsItemWithChance(world, x, y, z, par5, par6, 0);
 		if (!world.isRemote)
 		{
-			final int max = new Random().nextInt(8);
+			final int max = world.rand.nextInt(8);
 			if (max > 0)
 			{
-				for (int loop = 0; loop < max; loop++)
+				for (int i = 0; i < max; i++)
 				{
-					int m = 0;
-					if (new Random().nextInt(2) == 0)
+					switch (world.rand.nextInt(2))
 					{
-						m = 1;
+						case 0:
+							this.dropBlockAsItem(world, x, y, z, GrowthCraftBees.honeyCombEmpty.asStack());
+							break;
+						case 1:
+							this.dropBlockAsItem(world, x, y, z, GrowthCraftBees.honeyCombFilled.asStack());
+							break;
+						default:
+							break;
 					}
-					this.dropBlockAsItem(world, x, y, z, GrowthCraftBees.honeyComb.asStack(1, m));
 				}
 			}
 		}

@@ -1,6 +1,6 @@
 package growthcraft.bees.common.inventory;
 
-import growthcraft.bees.GrowthCraftBees;
+import growthcraft.api.bees.BeesRegistry;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -19,7 +19,7 @@ public class SlotHoneyComb extends Slot
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
-		return GrowthCraftBees.honeyComb.equals(stack.getItem());
+		return BeesRegistry.instance().isItemHoneyComb(stack);
 	}
 
 	@Override
