@@ -74,10 +74,18 @@ public class Utils
 					if (!world.isRemote)
 					{
 						tank.fill(ForgeDirection.UNKNOWN, heldContents, true);
-						final ItemStack consumed = held.getItem().getContainerItem(held);
-						if (!player.inventory.addItemStackToInventory(consumed))
+						final ItemStack containerItem = held.getItem().getContainerItem(held);
+
+						if (!player.inventory.addItemStackToInventory(containerItem))
 						{
-							world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, consumed));
+							if (containerItem == null)
+							{
+								// WARN about invalid container item
+							}
+							else
+							{
+								world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, containerItem));
+							}
 						}
 						else if (player instanceof EntityPlayerMP)
 						{
