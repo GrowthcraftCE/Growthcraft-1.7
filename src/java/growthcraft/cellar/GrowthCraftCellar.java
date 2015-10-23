@@ -138,6 +138,28 @@ public class GrowthCraftCellar
 		//====================
 		// POTION
 		//====================
+		registerPotions();
+		potionTipsy = (new PotionCellar(config.potionTipsyID, false, 0)).setIconIndex(0, 0).setPotionName("grc.potion.tipsy");
+
+		//====================
+		// ACHIEVEMENTS
+		//====================
+		craftBarrel  = (new Achievement("grc.achievement.craftBarrel", "craftBarrel", -4, -4, fermentBarrel.getBlock(), (Achievement)null)).initIndependentStat().registerStat();
+		fermentBooze = (new Achievement("grc.achievement.fermentBooze", "fermentBooze", -2, -4, Items.nether_wart, craftBarrel)).registerStat();
+		getDrunk     = (new Achievement("grc.achievement.getDrunk", "getDrunk", 0, -4, chievItemDummy.asStack(), fermentBooze)).setSpecial().registerStat();
+
+		AchievementPageGrowthcraft.chievMasterList.add(craftBarrel);
+		AchievementPageGrowthcraft.chievMasterList.add(fermentBooze);
+		AchievementPageGrowthcraft.chievMasterList.add(getDrunk);
+
+		registerHeatSources();
+
+		NEI.hideItem(fruitPresser.asStack());
+		NEI.hideItem(chievItemDummy.asStack());
+	}
+
+	private void registerPotions()
+	{
 		Potion[] potionTypes = null;
 
 		for (Field f : Potion.class.getDeclaredFields())
@@ -163,24 +185,6 @@ public class GrowthCraftCellar
 				System.err.println(e);
 			}
 		}
-
-		potionTipsy = (new PotionCellar(config.potionTipsyID, false, 0)).setIconIndex(0, 0).setPotionName("grc.potion.tipsy");
-
-		//====================
-		// ACHIEVEMENTS
-		//====================
-		craftBarrel  = (new Achievement("grc.achievement.craftBarrel", "craftBarrel", -4, -4, fermentBarrel.getBlock(), (Achievement)null)).initIndependentStat().registerStat();
-		fermentBooze = (new Achievement("grc.achievement.fermentBooze", "fermentBooze", -2, -4, Items.nether_wart, craftBarrel)).registerStat();
-		getDrunk     = (new Achievement("grc.achievement.getDrunk", "getDrunk", 0, -4, chievItemDummy.asStack(), fermentBooze)).setSpecial().registerStat();
-
-		AchievementPageGrowthcraft.chievMasterList.add(craftBarrel);
-		AchievementPageGrowthcraft.chievMasterList.add(fermentBooze);
-		AchievementPageGrowthcraft.chievMasterList.add(getDrunk);
-
-		registerHeatSources();
-
-		NEI.hideItem(fruitPresser.asStack());
-		NEI.hideItem(chievItemDummy.asStack());
 	}
 
 	private void registerHeatSources()
