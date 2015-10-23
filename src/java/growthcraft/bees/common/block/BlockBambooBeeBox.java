@@ -10,12 +10,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class BlockMaliceBeeBox extends BlockBeeBox
+public class BlockBambooBeeBox extends BlockBeeBox
 {
-	public BlockMaliceBeeBox()
+	public BlockBambooBeeBox()
 	{
 		super();
-		this.setBlockName("grc.maliceBeeBox");
+		this.setBlockName("grc.bambooBeeBox");
 	}
 
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
@@ -28,6 +28,6 @@ public class BlockMaliceBeeBox extends BlockBeeBox
 	public void registerBlockIcons(IIconRegister reg)
 	{
 		icons = new IIcon[4];
-		registerBeeBoxIcons(reg, "malice", 0);
+		registerBeeBoxIcons(reg, "bamboo", 0);
 	}
 }

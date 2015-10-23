@@ -47,6 +47,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeHive.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.BEAST, 1).add(Aspect.ORDER, 1).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBox.asStack(), new int[]{0,1,2,3,4,5}, new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.maliceBeeBox.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.ENTROPY, 1).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.bambooBeeBox.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
 
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMead.asStack(1, 0), new AspectList().add(Aspect.WATER, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMead.asStack(1, 1), new AspectList().add(Aspect.HEAL, 3).add(Aspect.WATER, 1).add(Aspect.POISON, 2));

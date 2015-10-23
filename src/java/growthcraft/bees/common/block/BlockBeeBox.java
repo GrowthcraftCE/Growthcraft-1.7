@@ -52,11 +52,12 @@ public class BlockBeeBox extends BlockContainer
 	{
 		super(material);
 		this.isBlockContainer = true;
-		this.setTickRandomly(true);
-		this.setHardness(2.5F);
-		this.setStepSound(soundTypeWood);
-		this.setBlockName("grc.beeBox");
-		this.setCreativeTab(GrowthCraftBees.tab);
+		setBlockTextureName("grcbees:beebox");
+		setTickRandomly(true);
+		setHardness(2.5F);
+		setStepSound(soundTypeWood);
+		setBlockName("grc.beeBox");
+		setCreativeTab(GrowthCraftBees.tab);
 	}
 
 	public BlockBeeBox()
@@ -449,6 +450,15 @@ public class BlockBeeBox extends BlockContainer
 	/************
 	 * TEXTURES
 	 ************/
+	@SideOnly(Side.CLIENT)
+	protected void registerBeeBoxIcons(IIconRegister reg, String basename, int offset)
+	{
+		icons[offset * 4] = reg.registerIcon(getTextureName() + "_bottom_" + basename);
+		icons[offset * 4 + 1] = reg.registerIcon(getTextureName() + "_top_" + basename);
+		icons[offset * 4 + 2] = reg.registerIcon(getTextureName() + "_side_" + basename);
+		icons[offset * 4 + 3] = reg.registerIcon(getTextureName() + "_side_" + basename + "_honey");
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -457,11 +467,14 @@ public class BlockBeeBox extends BlockContainer
 
 		for (int i = 0; i < 6; ++i)
 		{
-			icons[i * 4 + 0] = reg.registerIcon("grcbees:beebox_bottom_" + i);
-			icons[i * 4 + 1] = reg.registerIcon("grcbees:beebox_top_" + i);
-			icons[i * 4 + 2] = reg.registerIcon("grcbees:beebox_side_" + i);
-			icons[i * 4 + 3] = reg.registerIcon("grcbees:beebox_side_" + i + "_honey");
+			registerBeeBoxIcons(reg, "" + i, i);
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	protected int calculateIconOffset(int meta)
+	{
+		return MathHelper.clamp_int(meta, 0, icons.length / 4 - 1) * 4;
 	}
 
 	@Override
@@ -469,40 +482,40 @@ public class BlockBeeBox extends BlockContainer
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
 	{
 		final int meta = world.getBlockMetadata(x, y, z);
-		final int offset = MathHelper.clamp_int(meta, 0, 5) * 4;
+		final int offset = calculateIconOffset(meta);
 		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 		if (side == 0)
 		{
-			return this.icons[offset];
+			return icons[offset];
 		}
 		else if (side == 1)
 		{
-			return this.icons[offset + 1];
+			return icons[offset + 1];
 		}
 		else
 		{
 			if (te != null && te.isHoneyEnough())
 			{
-				return this.icons[offset + 3];
+				return icons[offset + 3];
 			}
 		}
-		return this.icons[offset + 2];
+		return icons[offset + 2];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		final int offset = MathHelper.clamp_int(meta, 0, 5) * 4;
+		final int offset = calculateIconOffset(meta);
 		if (side == 0)
 		{
-			return this.icons[offset];
+			return icons[offset];
 		}
 		else if (side == 1)
 		{
-			return this.icons[offset + 1];
+			return icons[offset + 1];
 		}
-		return this.icons[offset + 2];
+		return icons[offset + 2];
 	}
 
 	/************
