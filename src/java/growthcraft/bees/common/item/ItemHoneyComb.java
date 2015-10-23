@@ -2,8 +2,6 @@ package growthcraft.bees.common.item;
 
 import java.util.List;
 
-import growthcraft.bees.GrowthCraftBees;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,6 +14,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 
 /**
+ * Deprecated in version 2.4.0
  * Remove this in version 2.5.x
  */
 public class ItemHoneyComb extends Item
@@ -28,8 +27,6 @@ public class ItemHoneyComb extends Item
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
 		this.setUnlocalizedName("grc.honeyComb");
-		this.setCreativeTab(GrowthCraftBees.tab);
-		//this.setContainerItem(this);
 	}
 
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
