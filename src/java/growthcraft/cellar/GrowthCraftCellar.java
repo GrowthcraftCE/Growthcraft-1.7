@@ -10,6 +10,7 @@ import growthcraft.cellar.common.block.BlockFruitPress;
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.common.item.ItemChievDummy;
+import growthcraft.cellar.common.item.ItemYeast;
 import growthcraft.cellar.common.potion.PotionCellar;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
@@ -68,6 +69,8 @@ public class GrowthCraftCellar
 	public static BlockDefinition brewKettle;
 	public static BlockDefinition fermentBarrel;
 
+	public static ItemDefinition yeast;
+
 	public static Potion potionTipsy;
 
 	// Constants
@@ -105,6 +108,7 @@ public class GrowthCraftCellar
 		fruitPresser  = new BlockDefinition(new BlockFruitPresser());
 		brewKettle    = new BlockDefinition(new BlockBrewKettle());
 
+		yeast = new ItemDefinition(new ItemYeast());
 		chievItemDummy = new ItemDefinition(new ItemChievDummy());
 
 		//====================
