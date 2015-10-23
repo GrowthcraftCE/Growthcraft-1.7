@@ -24,11 +24,18 @@
 package growthcraft.bees.integration;
 
 import growthcraft.bees.GrowthCraftBees;
+import growthcraft.bees.common.block.BlockThaumcraftBeeBox;
+import growthcraft.bees.common.block.BlockThaumcraftBeeBox.ThaumcraftBeeBoxType;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ThaumcraftModule extends ThaumcraftModuleBase
 {
@@ -40,6 +47,13 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Override
 	protected void integrate()
 	{
+		final Block blockWoodenDevice = GameRegistry.findBlock(modID, "blockWoodenDevice");
+		if (blockWoodenDevice != null)
+		{
+			GameRegistry.addRecipe(new ShapedOreRecipe(GrowthCraftBees.thaumcraftBeeBox.asStack(1, ThaumcraftBeeBoxType.GREATWOOD), " A ", "A A", "AAA", 'A', new ItemStack(blockWoodenDevice, 1, 6)));
+			GameRegistry.addRecipe(new ShapedOreRecipe(GrowthCraftBees.thaumcraftBeeBox.asStack(1, ThaumcraftBeeBoxType.SILVERWOOD), " A ", "A A", "AAA", 'A', new ItemStack(blockWoodenDevice, 1, 7)));
+		}
+
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyCombEmpty.asStack(), new AspectList().add(Aspect.ORDER, 1).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyCombFilled.asStack(), new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 1).add(Aspect.GREED, 1).add(Aspect.HUNGER, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyJar.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.EARTH, 1).add(Aspect.FIRE, 1).add(Aspect.VOID, 1).add(Aspect.GREED, 3).add(Aspect.HUNGER, 1));

@@ -8,8 +8,10 @@ tile.grc.beeBox2.name=Birch Bee Box
 tile.grc.beeBox3.name=Jungle Bee Box
 tile.grc.beeBox4.name=Acacia Bee Box
 tile.grc.beeBox5.name=Dark Oak Bee Box
-tile.grc.maliceBeeBox.name=Malice Bee Box
-tile.grc.bambooBeeBox.name=Bamboo Bee Box
+tile.grc.maliceBeeBox0.name=Malice Bee Box
+tile.grc.bambooBeeBox0.name=Bamboo Bee Box
+tile.grc.thaumcraftBeeBox0.name=Greatwood Bee Box
+tile.grc.thaumcraftBeeBox1.name=Silverwood Bee Box
 tile.grc.beeHive.name=Bee Hive
 
 // Items

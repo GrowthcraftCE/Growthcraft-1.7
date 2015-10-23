@@ -29,8 +29,6 @@ package growthcraft.core.integration;
  */
 public abstract class ThaumcraftModuleBase extends ModIntegrationBase
 {
-	private String modID;
-
 	public ThaumcraftModuleBase(String modid)
 	{
 		super(modid, "Thaumcraft");

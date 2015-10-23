@@ -7,6 +7,7 @@ import growthcraft.bees.common.block.BlockBambooBeeBox;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeHive;
 import growthcraft.bees.common.block.BlockMaliceBeeBox;
+import growthcraft.bees.common.block.BlockThaumcraftBeeBox;
 import growthcraft.bees.common.CommonProxy;
 import growthcraft.bees.common.item.ItemBee;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
@@ -72,9 +73,10 @@ public class GrowthCraftBees
 
 	public static CreativeTabs tab;
 
-	public static BlockDefinition bambooBeeBox;
 	public static BlockDefinition beeBox;
+	public static BlockDefinition bambooBeeBox;
 	public static BlockDefinition maliceBeeBox;
+	public static BlockDefinition thaumcraftBeeBox;
 	public static BlockDefinition beeHive;
 	public static BlockBoozeDefinition[] honeyMeadFluids;
 	public static ItemDefinition honeyComb;
@@ -109,8 +111,9 @@ public class GrowthCraftBees
 	private void initBlocksAndItems()
 	{
 		beeBox  = new BlockDefinition(new BlockBeeBox());
-		maliceBeeBox  = new BlockDefinition(new BlockMaliceBeeBox());
 		bambooBeeBox  = new BlockDefinition(new BlockBambooBeeBox());
+		maliceBeeBox  = new BlockDefinition(new BlockMaliceBeeBox());
+		thaumcraftBeeBox = new BlockDefinition(new BlockThaumcraftBeeBox());
 		beeHive = new BlockDefinition(new BlockBeeHive());
 
 		honeyComb = new ItemDefinition(new ItemHoneyComb());
@@ -134,14 +137,16 @@ public class GrowthCraftBees
 
 	private void register()
 	{
-		//====================
-		// REGISTRIES
-		//====================
+		// Bee Boxes
 		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
-		GameRegistry.registerBlock(maliceBeeBox.getBlock(), "grc.maliceBeeBox");
-		GameRegistry.registerBlock(bambooBeeBox.getBlock(), "grc.bambooBeeBox");
+		GameRegistry.registerBlock(bambooBeeBox.getBlock(), ItemBlockBeeBox.class, "grc.bambooBeeBox");
+		GameRegistry.registerBlock(maliceBeeBox.getBlock(), ItemBlockBeeBox.class, "grc.maliceBeeBox");
+		GameRegistry.registerBlock(thaumcraftBeeBox.getBlock(), ItemBlockBeeBox.class, "grc.thaumcraftBeeBox");
+
+		// Bee Hive(s)
 		GameRegistry.registerBlock(beeHive.getBlock(), "grc.beeHive");
 
+		// Items
 		GameRegistry.registerItem(honeyComb.getItem(), "grc.honeyComb");
 		GameRegistry.registerItem(honeyCombEmpty.getItem(), "grc.honeyCombEmpty");
 		GameRegistry.registerItem(honeyCombFilled.getItem(), "grc.honeyCombFilled");
@@ -150,14 +155,16 @@ public class GrowthCraftBees
 		GameRegistry.registerItem(honeyMead.getItem(), "grc.honeyMead");
 		GameRegistry.registerItem(honeyMeadBucket_deprecated.getItem(), "grc.honeyMead_bucket");
 
+		// Booze
 		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMead, "grc.honeyMead", honeyMeadBucket_deprecated);
 
+		// TileEntities
 		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
-		//CellarRegistry.instance().addBoozeAlternative(FluidRegistry.LAVA, honeyMeadBooze[0]);
 
 		BeesRegistry.instance().addBee(bee.getItem());
 		// this will be removed in the future, so please use the new honey combs
 		BeesRegistry.instance().addHoneyComb(honeyComb.asStack(1, 0), honeyComb.asStack(1, 1));
+
 		BeesRegistry.instance().addHoneyComb(honeyCombEmpty.asStack(), honeyCombFilled.asStack());
 		BeesRegistry.instance().addFlower(Blocks.red_flower);
 		BeesRegistry.instance().addFlower(Blocks.yellow_flower);
