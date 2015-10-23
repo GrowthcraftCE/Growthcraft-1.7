@@ -24,7 +24,6 @@
 package growthcraft.bees.integration;
 
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.bees.common.block.BlockThaumcraftBeeBox;
 import growthcraft.bees.common.block.BlockThaumcraftBeeBox.ThaumcraftBeeBoxType;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 
