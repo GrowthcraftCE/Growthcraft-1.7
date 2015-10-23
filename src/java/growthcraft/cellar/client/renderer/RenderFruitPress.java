@@ -78,8 +78,12 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 			renderer.uvRotateTop    = 0;
 			renderer.uvRotateBottom = 0;
 
+			renderer.setOverrideBlockTexture(fruitPress.getIconByIndex(3));
+
 			renderMetalRingsInv(renderer, block, icon2, tes,  7.5*d,  9.5*d);
 			renderMetalRingsInv(renderer, block, icon2, tes, 12.5*d, 14.5*d);
+
+			renderer.clearOverrideBlockTexture();
 
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		}
