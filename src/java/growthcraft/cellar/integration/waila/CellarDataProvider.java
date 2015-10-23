@@ -115,7 +115,7 @@ public class CellarDataProvider implements IWailaDataProvider
 		tag.setTag("item_modifier", NBTHelper.writeItemStackToNBT(fermentBarrel.getStackInSlot(0), new NBTTagCompound()));
 		tag.setInteger("time", fermentBarrel.getTime());
 		tag.setInteger("time_max", fermentBarrel.getTimeMax());
-		final FluidStack fluidStack = fermentBarrel.getFluidStack();
+		final FluidStack fluidStack = fermentBarrel.getFluidStack(0);
 		if (fluidStack != null)
 		{
 			tag.setInteger("booze_id", fluidStack.getFluidID());

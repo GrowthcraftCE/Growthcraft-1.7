@@ -47,7 +47,7 @@ public class GuiFruitPress extends GuiCellar
 	public void updateScreen()
 	{
 		super.updateScreen();
-		this.button.enabled = this.te.isFluidTankFilled();
+		this.button.enabled = this.te.isFluidTankFilled(0);
 	}
 
 	protected void actionPerformed(GuiButton butn)
@@ -62,9 +62,9 @@ public class GuiFruitPress extends GuiCellar
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 
-		if (!this.te.isFluidTankEmpty())
+		if (!this.te.isFluidTankEmpty(0))
 		{
-			s = String.valueOf(this.te.getFluidAmount());
+			s = String.valueOf(this.te.getFluidAmount(0));
 			this.fontRendererObj.drawStringWithShadow(s, this.xSize - 70 - this.fontRendererObj.getStringWidth(s), this.ySize - 104, 0xFFFFFF);
 		}
 	}
@@ -80,9 +80,9 @@ public class GuiFruitPress extends GuiCellar
 		final int i = this.te.getPressProgressScaled(24);
 		this.drawTexturedModalRect(w + 63, h + 34, 176, 0, i + 1, 16);
 
-		if (this.te.getFluidAmountScaled(52) > 0)
+		if (this.te.getFluidAmountScaled(52, 0) > 0)
 		{
-			drawTank(w, h, 89, 17, 16, this.te.getFluidAmountScaled(52), this.te.getFluidStack(), this.te.getFluidTank());
+			drawTank(w, h, 89, 17, 16, this.te.getFluidAmountScaled(52, 0), this.te.getFluidStack(0), this.te.getFluidTank(0));
 			this.mc.getTextureManager().bindTexture(res);
 		}
 	}
@@ -122,11 +122,11 @@ public class GuiFruitPress extends GuiCellar
 		{
 			final ArrayList<String> tooltip = new ArrayList<String>();
 
-			if (this.te.isFluidTankFilled())
+			if (this.te.isFluidTankFilled(0))
 			{
-				tooltip.add(this.te.getFluidStack().getLocalizedName());
+				tooltip.add(this.te.getFluidStack(0).getLocalizedName());
 
-				final String s = UnitFormatter.fluidModifier(this.te.getFluid());
+				final String s = UnitFormatter.fluidModifier(this.te.getFluid(0));
 				if (s != null) tooltip.add(s);
 			}
 

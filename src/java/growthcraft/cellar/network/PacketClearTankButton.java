@@ -30,12 +30,12 @@ public class PacketClearTankButton extends AbstractPacketButton
 
 		if (te instanceof TileEntityFruitPress)
 		{
-			((TileEntityFruitPress) te).clearTank();
+			((TileEntityFruitPress)te).clearTank(0);
 		}
 
 		if (te instanceof TileEntityFermentBarrel)
 		{
-			((TileEntityFermentBarrel) te).clearTank();
+			((TileEntityFermentBarrel)te).clearTank(0);
 		}
 	}
 }

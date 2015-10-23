@@ -7,21 +7,15 @@ import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.util.ItemUtils;
-import growthcraft.core.util.NBTHelper;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 
-public class TileEntityFruitPress extends TileEntity implements ISidedInventory, IFluidHandler
+public class TileEntityFruitPress extends TileEntityCellarMachine
 {
 	public static class FruitPressDataID
 	{
@@ -37,22 +31,32 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 
 	protected float pomace;
 	protected int time;
-	protected boolean update;
 
-	private ItemStack[] invSlots = new ItemStack[2];
 	private final int maxCap = GrowthCraftCellar.getConfig().fruitPressMaxCap;
-	private CellarTank tank = new CellarTank(this.maxCap, this);
-	private String name;
+
+	public TileEntityFruitPress()
+	{
+		super();
+		this.tankCaps = new int[] {maxCap};
+		this.invSlots = new ItemStack[2];
+		this.tanks = new CellarTank[] { new CellarTank(tankCaps[0], this) };
+	}
+
+	@Override
+	public String getDefaultInventoryName()
+	{
+		return "container.grc.fruitPress";
+	}
 
 	private void debugMsg()
 	{
 		if (this.worldObj.isRemote)
 		{
-			System.out.println("CLIENT: " + getFluidAmount());
+			System.out.println("CLIENT: " + getFluidAmount(0));
 		}
 		if (!this.worldObj.isRemote)
 		{
-			System.out.println("SERVER: " + getFluidAmount());
+			System.out.println("SERVER: " + getFluidAmount(0));
 		}
 	}
 
@@ -62,14 +66,14 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		final int m = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord + 1, this.zCoord);
 
 		if (m == 0 || m == 1) return false;
-		if (this.invSlots[0] == null) return false;
-		if (getFluidAmount() == this.maxCap) return false;
+		if (invSlots[0] == null) return false;
+		if (getFluidAmount(0) == this.maxCap) return false;
 		if (!pressing.isPressingRecipe(this.invSlots[0])) return false;
 
-		if (isFluidTankEmpty()) return true;
+		if (isFluidTankEmpty(0)) return true;
 
 		final FluidStack stack = pressing.getPressingFluidStack(this.invSlots[0]);
-		return stack.isFluidEqual(getFluidStack());
+		return stack.isFluidEqual(getFluidStack(0));
 	}
 
 	private void producePomace()
@@ -90,9 +94,9 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		producePomace();
 		final FluidStack fluidstack = pressing.getPressingFluidStack(this.invSlots[0]);
 		fluidstack.amount  = pressing.getPressingAmount(this.invSlots[0]);
-		this.tank.fill(fluidstack, true);
+		tanks[0].fill(fluidstack, true);
 
-		this.invSlots[0] = ItemUtils.consumeStack(this.invSlots[0]);
+		invSlots[0] = ItemUtils.consumeStack(this.invSlots[0]);
 	}
 
 	public int getPressingTime()
@@ -114,136 +118,24 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	 * UPDATE
 	 ************/
 	@Override
-	public void updateEntity()
+	public void updateMachine()
 	{
-		super.updateEntity();
-		if (update)
+		if (this.canPress())
 		{
-			update = false;
-			this.markDirty();
-		}
+			++this.time;
 
-		if (!this.worldObj.isRemote)
-		{
-			if (this.canPress())
-			{
-				++this.time;
-
-				if (this.time >= getPressingTime())
-				{
-					this.time = 0;
-					this.pressItem();
-				}
-			}
-			else
+			if (this.time >= getPressingTime())
 			{
 				this.time = 0;
-			}
-
-			update = true;
-		}
-
-		//debugMsg();
-	}
-
-	/************
-	 * INVENTORY
-	 ************/
-	@Override
-	public ItemStack getStackInSlot(int index)
-	{
-		return this.invSlots[index];
-	}
-
-	@Override
-	public ItemStack decrStackSize(int index, int par2)
-	{
-		if (this.invSlots[index] != null)
-		{
-			ItemStack itemstack;
-
-			if (this.invSlots[index].stackSize <= par2)
-			{
-				itemstack = this.invSlots[index];
-				this.invSlots[index] = null;
-				return itemstack;
-			}
-			else
-			{
-				itemstack = this.invSlots[index].splitStack(par2);
-
-				if (this.invSlots[index].stackSize == 0)
-				{
-					this.invSlots[index] = null;
-				}
-
-				return itemstack;
+				this.pressItem();
 			}
 		}
 		else
 		{
-			return null;
+			this.time = 0;
 		}
-	}
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int index)
-	{
-		if (this.invSlots[index] != null)
-		{
-			final ItemStack itemstack = this.invSlots[index];
-			this.invSlots[index] = null;
-			return itemstack;
-		}
-		else
-		{
-			return null;
-		}
-	}
-
-	@Override
-	public void setInventorySlotContents(int index, ItemStack itemstack)
-	{
-		this.invSlots[index] = itemstack;
-
-		if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
-		{
-			itemstack.stackSize = this.getInventoryStackLimit();
-		}
-	}
-
-	@Override
-	public int getInventoryStackLimit()
-	{
-		return 64;
-	}
-
-	@Override
-	public int getSizeInventory()
-	{
-		return this.invSlots.length;
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
-	{
-		if (this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this)
-		{
-			return false;
-		}
-		return player.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
-	}
-
-	@Override
-	public void openInventory(){}
-
-	@Override
-	public void closeInventory(){}
-
-	@Override
-	public boolean isItemValidForSlot(int index, ItemStack itemstack)
-	{
-		return true;
+		update = true;
 	}
 
 	@Override
@@ -252,12 +144,6 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 		// 0 = raw
 		// 1 = residue
 		return side == 0 ? rawSlotIDs : residueSlotIDs;
-	}
-
-	@Override
-	public boolean canInsertItem(int index, ItemStack stack, int side)
-	{
-		return this.isItemValidForSlot(index, stack);
 	}
 
 	@Override
@@ -273,89 +159,34 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	/**
 	 * @param nbt - nbt data to load
 	 */
-	protected void readTankFromNBT(NBTTagCompound nbt)
+	@Override
+	protected void readTanksFromNBT(NBTTagCompound nbt)
 	{
-		this.tank = new CellarTank(this.maxCap, this);
 		if (nbt.hasKey("Tank"))
 		{
-			this.tank.readFromNBT(nbt.getCompoundTag("Tank"));
+			this.tanks[0] = new CellarTank(this.maxCap, this);
+			this.tanks[0].readFromNBT(nbt.getCompoundTag("Tank"));
 		}
-	}
-
-	/**
-	 * @param nbt - nbt data to load
-	 */
-	protected void readInventorySlotsFromNBT(NBTTagCompound nbt)
-	{
-		this.invSlots = ItemUtils.clearInventorySlots(invSlots, getSizeInventory());
-		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
+		else
+		{
+			super.readTanksFromNBT(nbt);
+		}
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-
-		// INVENTORY
-		readInventorySlotsFromNBT(nbt);
-		// TANKS
-		readTankFromNBT(nbt);
-
-		// NAME
-		if (nbt.hasKey("name"))
-		{
-			this.name = nbt.getString("name");
-		}
-
 		this.time = nbt.getShort("time");
 		this.pomace = nbt.getFloat("pomace");
-	}
-
-	protected void writeTankToNBT(NBTTagCompound nbt)
-	{
-		final NBTTagCompound tag = new NBTTagCompound();
-		this.tank.writeToNBT(tag);
-		nbt.setTag("Tank", tag);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		// INVENTORY
-		nbt.setTag("items", NBTHelper.writeInventorySlotsToNBT(invSlots));
-
-		// TANK
-		writeTankToNBT(nbt);
-
-		// NAME
-		if (this.hasCustomInventoryName())
-		{
-			nbt.setString("name", this.name);
-		}
-
 		nbt.setShort("time", (short)this.time);
 		nbt.setFloat("pomace", this.pomace);
-	}
-
-	/************
-	 * NAMES
-	 ************/
-	@Override
-	public String getInventoryName()
-	{
-		return this.hasCustomInventoryName() ? this.name : "container.grc.fruitPress";
-	}
-
-	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return this.name != null && this.name.length() > 0;
-	}
-
-	public void setGuiDisplayName(String string)
-	{
-		this.name = string;
 	}
 
 	/************
@@ -374,11 +205,11 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 				time = v;
 				break;
 			case FruitPressDataID.TANK_FLUID_ID:
-				final FluidStack result = FluidUtils.replaceFluidStack(v, tank.getFluid());
-				if (result != null) tank.setFluid(result);
+				final FluidStack result = FluidUtils.replaceFluidStack(v, tanks[0].getFluid());
+				if (result != null) tanks[0].setFluid(result);
 				break;
 			case FruitPressDataID.TANK_FLUID_AMOUNT:
-				tank.setFluid(FluidUtils.updateFluidStackAmount(tank.getFluid(), v));
+				tanks[0].setFluid(FluidUtils.updateFluidStackAmount(tanks[0].getFluid(), v));
 				break;
 			default:
 				// should warn about invalid Data ID
@@ -389,7 +220,7 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	public void sendGUINetworkData(ContainerFruitPress container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME, time);
-		final FluidStack fluid = tank.getFluid();
+		final FluidStack fluid = tanks[0].getFluid();
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
 	}
@@ -398,83 +229,31 @@ public class TileEntityFruitPress extends TileEntity implements ISidedInventory,
 	 * FLUID
 	 ************/
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
-	{
-		return 0;
-	}
-
-	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
-	{
-		if (resource == null || !resource.isFluidEqual(this.tank.getFluid()))
-		{
-			return null;
-		}
-
-		return drain(from, resource.amount, doDrain);
-	}
-
-	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
-	{
-		return this.tank.drain(maxDrain, doDrain);
-	}
-
-	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid)
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
-		return true;
+		return 0;
 	}
 
 	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from)
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		return new FluidTankInfo[] { this.tank.getInfo() };
+		return tanks[0].drain(maxDrain, doDrain);
 	}
 
-	public int getFluidAmountScaled(int scale)
+	@Override
+	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
 	{
-		return this.getFluidAmount() * scale / this.maxCap;
-	}
+		if (resource == null || !resource.isFluidEqual(tanks[0].getFluid()))
+		{
+			return null;
+		}
 
-	public boolean isFluidTankFilled()
-	{
-		return getFluidAmount() > 0;
-	}
-
-	public boolean isFluidTankEmpty()
-	{
-		return getFluidAmount() == 0;
-	}
-
-	public int getFluidAmount()
-	{
-		return this.tank.getFluidAmount();
-	}
-
-	public CellarTank getFluidTank()
-	{
-		return this.tank;
-	}
-
-	public FluidStack getFluidStack()
-	{
-		return this.tank.getFluid();
-	}
-
-	public Fluid getFluid()
-	{
-		return getFluidStack().getFluid();
-	}
-
-	public void clearTank()
-	{
-		this.tank.setFluid(null);
+		return drain(from, resource.amount, doDrain);
 	}
 }

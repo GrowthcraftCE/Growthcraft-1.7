@@ -326,7 +326,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 		final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
 		if (te != null)
 		{
-			return te.getFluidAmountScaled(15);
+			return te.getFluidAmountScaled(15, 0);
 		}
 		return 0;
 	}

@@ -48,7 +48,7 @@ public class GuiFermentBarrel extends GuiCellar
 	public void updateScreen()
 	{
 		super.updateScreen();
-		this.button.enabled = this.te.isFluidTankFilled();
+		this.button.enabled = this.te.isFluidTankFilled(0);
 	}
 
 	protected void actionPerformed(GuiButton butn)
@@ -63,9 +63,9 @@ public class GuiFermentBarrel extends GuiCellar
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 
-		if (!this.te.isFluidTankEmpty())
+		if (!this.te.isFluidTankEmpty(0))
 		{
-			s = String.valueOf(this.te.getFluidAmount());
+			s = String.valueOf(this.te.getFluidAmount(0));
 			this.fontRendererObj.drawStringWithShadow(s, this.xSize - 62 - this.fontRendererObj.getStringWidth(s), this.ySize - 104, 0xFFFFFF);
 		}
 	}
@@ -124,9 +124,9 @@ public class GuiFermentBarrel extends GuiCellar
 			}
 		}
 
-		if (this.te.getFluidAmountScaled(52) > 0)
+		if (this.te.getFluidAmountScaled(52, 0) > 0)
 		{
-			drawTank(w, h, 63, 17, 50, this.te.getFluidAmountScaled(52), this.te.getFluidStack(), this.te.getFluidTank());
+			drawTank(w, h, 63, 17, 50, this.te.getFluidAmountScaled(52, 0), this.te.getFluidStack(0), this.te.getFluidTank(0));
 			this.mc.getTextureManager().bindTexture(res);
 
 			i = this.te.getBoozeMeta();
@@ -182,11 +182,11 @@ public class GuiFermentBarrel extends GuiCellar
 		{
 			final ArrayList<String> tooltip = new ArrayList<String>();
 
-			if (this.te.isFluidTankFilled())
+			if (this.te.isFluidTankFilled(0))
 			{
-				if (CellarRegistry.instance().booze().isFluidBooze(this.te.getFluidStack()))
+				if (CellarRegistry.instance().booze().isFluidBooze(this.te.getFluidStack(0)))
 				{
-					final FluidStack fluid = CellarRegistry.instance().booze().maybeAlternateBoozeStack(this.te.getFluidStack());
+					final FluidStack fluid = CellarRegistry.instance().booze().maybeAlternateBoozeStack(this.te.getFluidStack(0));
 					tooltip.add(fluid.getLocalizedName());
 					final String s = UnitFormatter.fluidModifier(fluid);
 					if (s != null) tooltip.add(s);
@@ -199,7 +199,7 @@ public class GuiFermentBarrel extends GuiCellar
 				}
 				else
 				{
-					tooltip.add(this.te.getFluidStack().getLocalizedName());
+					tooltip.add(this.te.getFluidStack(0).getLocalizedName());
 					tooltip.add("");
 					tooltip.add(EnumChatFormatting.RED + I18n.format("gui.grc.cantferment"));
 				}
