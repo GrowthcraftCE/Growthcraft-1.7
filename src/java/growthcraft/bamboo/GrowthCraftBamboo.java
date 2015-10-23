@@ -193,9 +193,24 @@ public class GrowthCraftBamboo
 
 		MapGenHelper.registerVillageStructure(ComponentVillageBambooYard.class, "grc.bambooyard");
 
+		registerOres();
+
 		//====================
-		// ORE DICTIONARY
+		// SMELTING
 		//====================
+		GameRegistry.registerFuelHandler(new BambooFuelHandler());
+		GameRegistry.addSmelting(bamboo.getItem(), bambooCoal.asStack(), 0.075f);
+
+		NEI.hideItem(bambooDoor.asStack());
+	}
+
+	public void registerOres()
+	{
+		/*
+		 * ORE DICTIONARY
+		 */
+
+		// General ore dictionary names
 		OreDictionary.registerOre("stickWood", bamboo.getItem());
 		OreDictionary.registerOre("woodStick", bamboo.getItem());
 		OreDictionary.registerOre("plankWood", bambooBlock.getBlock());
@@ -206,23 +221,28 @@ public class GrowthCraftBamboo
 		OreDictionary.registerOre("woodStair", bambooStairs.getBlock());
 		OreDictionary.registerOre("leavesTree", bambooLeaves.getBlock());
 		OreDictionary.registerOre("treeLeaves", bambooLeaves.getBlock());
-		//OreDictionary.registerOre("cropBamboo", bamboo);
-		//OreDictionary.registerOre("materialBamboo", bamboo);
+
+
+		// Bamboo specific
+		OreDictionary.registerOre("cropBamboo", bamboo.getItem());
+		OreDictionary.registerOre("materialBamboo", bamboo.getItem());
 		OreDictionary.registerOre("bamboo", bamboo.getItem());
-		// For Pam's HarvestCraft
-		// Uses the same OreDict. names as HarvestCraft
+		OreDictionary.registerOre("plankBamboo", bambooBlock.getBlock());
+		OreDictionary.registerOre("slabBamboo", bambooSingleSlab.getBlock());
+		OreDictionary.registerOre("stairBamboo", bambooStairs.getBlock());
+		OreDictionary.registerOre("treeBambooLeaves", bambooLeaves.getBlock());
+
+		OreDictionary.registerOre("foodBambooshoot", bambooShoot.getBlock());
+		OreDictionary.registerOre("foodBambooshoot", bambooShootFood.getItem());
+
+		/*
+		 * For Pam's HarvestCraft
+		 *   Uses the same OreDict. names as HarvestCraft
+		 */
 		OreDictionary.registerOre("cropBambooshoot", bambooShoot.getBlock());
 		OreDictionary.registerOre("listAllveggie", bambooShoot.getBlock());
 		OreDictionary.registerOre("cropBambooshoot", bambooShootFood.getItem());
 		OreDictionary.registerOre("listAllveggie", bambooShootFood.getItem());
-
-		//====================
-		// SMELTING
-		//====================
-		GameRegistry.registerFuelHandler(new BambooFuelHandler());
-		GameRegistry.addSmelting(bamboo.getItem(), bambooCoal.asStack(), 0.075f);
-
-		NEI.hideItem(bambooDoor.asStack());
 	}
 
 	@EventHandler
