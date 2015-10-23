@@ -9,6 +9,7 @@ import java.util.Map;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.util.FluidUtils;
+import growthcraft.api.core.util.ItemKey;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -22,14 +23,14 @@ public class BrewingRegistry
 	// because damage is almost never -1
 	private final int NO_META = -1;
 	private HashMap<List, BrewingResult> brewingList = new HashMap<List, BrewingResult>();
-	private List<List> brewingIngredients = new ArrayList<List>();
+	private List<ItemKey> brewingIngredients = new ArrayList<ItemKey>();
 
 	public Map<List, BrewingResult> getBrewingList()
 	{
 		return brewingList;
 	}
 
-	public List<List> getBrewingIngredients()
+	public List<ItemKey> getBrewingIngredients()
 	{
 		return brewingIngredients;
 	}
@@ -51,7 +52,7 @@ public class BrewingRegistry
 	public void addBrewing(Fluid sourceFluid, Item raw, int meta, Fluid resultFluid, int time, int amount, Residue residue)
 	{
 		this.brewingList.put(Arrays.asList(sourceFluid, raw, meta), new BrewingResult(resultFluid, time, amount, residue));
-		this.brewingIngredients.add(Arrays.asList(raw, meta));
+		this.brewingIngredients.add(new ItemKey(raw, meta));
 	}
 
 	public void addBrewing(Fluid sourceFluid, Block raw, int meta, Fluid resultFluid, int time, int amount, Residue residue)
@@ -112,8 +113,8 @@ public class BrewingRegistry
 	{
 		if (itemstack == null) return false;
 
-		return brewingIngredients.contains(Arrays.asList(itemstack.getItem(), itemstack.getItemDamage())) ||
-			brewingIngredients.contains(Arrays.asList(itemstack.getItem(), NO_META));
+		return brewingIngredients.contains(new ItemKey(itemstack)) ||
+			brewingIngredients.contains(new ItemKey(itemstack.getItem(), NO_META));
 	}
 
 	public FluidStack getBrewingFluidStack(FluidStack fluidstack, ItemStack itemstack)

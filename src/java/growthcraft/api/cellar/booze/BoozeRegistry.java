@@ -71,18 +71,45 @@ import net.minecraftforge.fluids.FluidStack;
  * For fluid containers, just google how to make them.
  * Anyway, here's an example.
  * {@code
- * 		FluidStack fluidstack = new FluidStack(appleCider_booze[i].getID(), FluidContainerRegistry.BUCKET_VOLUME);
+ * 		FluidStack fluidstack = new FluidStack(appleCider_booze[i], FluidContainerRegistry.BUCKET_VOLUME);
  * 		FluidContainerRegistry.registerFluidContainer(fluidstack, new ItemStack(appleCider_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
  * }
  */
 public class BoozeRegistry
 {
+	static class BoozeEntry
+	{
+		final Fluid[] fluids;
+		final int color;
+		final int index;
+
+		public BoozeEntry(Fluid[] flus, int kolor, int ind)
+		{
+			this.fluids = flus;
+			this.color = kolor;
+			this.index = ind;
+		}
+	}
+
 	// because damage is almost never -1
 	private final int NO_META = -1;
 
-	private Map<Integer, List> boozeMap = new HashMap<Integer, List>();
+	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
 	private Map<Fluid[], String> boozeNames = new HashMap<Fluid[], String>();
-	private Map<Integer, Integer> altBoozeMap = new HashMap<Integer, Integer>();
+	private Map<Fluid, Fluid> altBoozeMap = new HashMap<Fluid, Fluid>();
+
+	private void ensureFluidsAreValid(Fluid[] fluids)
+	{
+		if (fluids.length < 4)
+		{
+			throw new IllegalArgumentException("[Growthcraft|Cellar] One of the fluids being created as Booze has an array length of " + fluids.length + ". The array lengths should be 4 or more.");
+		}
+
+		if (!FluidUtils.doesFluidsExist(fluids))
+		{
+			throw new IllegalArgumentException("[Growthcraft|Cellar] One of the fluids being created as Booze is not registered to the FluidRegistry.");
+		}
+	}
 
 	/**
 	 * createBooze()
@@ -96,33 +123,21 @@ public class BoozeRegistry
 	 * @param color           - The color of the fluids.
 	 * @param unlocalizedName - The unlocalized name to be used as the 'main name' of the fluids/boozes.
 	 **/
-	public void createBooze(Fluid[] fluid, int color, String unlocalizedName)
+	public void createBooze(Fluid[] fluids, int color, String unlocalizedName)
 	{
-		if (fluid.length >= 4)
+		ensureFluidsAreValid(fluids);
+
+		if (!areFluidsBooze(fluids))
 		{
-			if (FluidUtils.doesFluidsExist(fluid))
+			for (int i = 0; i < fluids.length; ++i)
 			{
-				if (!this.areFluidsBooze(fluid))
-				{
-					for (int i = 0; i < fluid.length; ++i)
-					{
-						this.boozeMap.put(fluid[i].getID(), Arrays.asList(fluid, color, i));
-					}
-					this.boozeNames.put(fluid, unlocalizedName);
-				}
-				else
-				{
-					throw new IllegalArgumentException("[Growthcraft|Cellar] One of the fluids being created as Booze is already registered to the CellarRegistry.");
-				}
+				boozeMap.put(fluids[i], new BoozeEntry(fluids, color, i));
 			}
-			else
-			{
-				throw new IllegalArgumentException("[Growthcraft|Cellar] One of the fluids being created as Booze is not registered to the FluidRegistry.");
-			}
+			boozeNames.put(fluids, unlocalizedName);
 		}
 		else
 		{
-			throw new IllegalArgumentException("[Growthcraft|Cellar] One of the fluids being created as Booze has an array length of " + fluid.length + ". The array lengths should be 4 or more.");
+			throw new IllegalArgumentException("[Growthcraft|Cellar] One of the fluids being created as Booze is already registered to the CellarRegistry.");
 		}
 	}
 
@@ -142,9 +157,9 @@ public class BoozeRegistry
 	{
 		if (FluidUtils.doesFluidExist(altfluid))
 		{
-			if (this.isFluidBooze(fluid))
+			if (isFluidBooze(fluid))
 			{
-				this.altBoozeMap.put(altfluid.getID(), fluid.getID());
+				altBoozeMap.put(altfluid, fluid);
 			}
 			else
 			{
@@ -162,7 +177,7 @@ public class BoozeRegistry
 	{
 		if (FluidUtils.doesFluidExist(fluid))
 		{
-			this.addBoozeAlternative(altfluid, FluidRegistry.getFluid(fluid));
+			addBoozeAlternative(altfluid, FluidRegistry.getFluid(fluid));
 		}
 	}
 
@@ -170,7 +185,7 @@ public class BoozeRegistry
 	{
 		if (FluidUtils.doesFluidExist(altfluid) && FluidUtils.doesFluidExist(fluid))
 		{
-			this.addBoozeAlternative(FluidRegistry.getFluid(altfluid), FluidRegistry.getFluid(fluid));
+			addBoozeAlternative(FluidRegistry.getFluid(altfluid), FluidRegistry.getFluid(fluid));
 		}
 	}
 
@@ -178,7 +193,7 @@ public class BoozeRegistry
 	public boolean isFluidBooze(Fluid f)
 	{
 		if (f == null) return false;
-		return this.boozeMap.get(f.getID()) != null || this.isAlternateBooze(f);
+		return boozeMap.get(f) != null || isAlternateBooze(f);
 	}
 
 	public boolean isFluidBooze(FluidStack fluidStack)
@@ -191,7 +206,7 @@ public class BoozeRegistry
 	{
 		for (int i = 0; i < fluid.length; ++i)
 		{
-			if (!this.isFluidBooze(fluid[i]))
+			if (!isFluidBooze(fluid[i]))
 			{
 				return false;
 			}
@@ -201,42 +216,42 @@ public class BoozeRegistry
 
 	public Fluid[] getBoozeArray(Fluid f)
 	{
-		if (this.isAlternateBooze(f))
+		if (isAlternateBooze(f))
 		{
-			final Fluid alt = this.getAlternateBooze(f);
-			return (Fluid[])this.boozeMap.get(alt.getID()).get(0);
+			final Fluid alt = getAlternateBooze(f);
+			return boozeMap.get(alt).fluids;
 		}
-		return (Fluid[])this.boozeMap.get(f.getID()).get(0);
+		return boozeMap.get(f).fluids;
 	}
 
 	public int getBoozeColor(Fluid f)
 	{
-		if (this.isFluidBooze(f))
+		if (isFluidBooze(f))
 		{
-			return (Integer)this.boozeMap.get(f.getID()).get(1);
+			return boozeMap.get(f).color;
 		}
 		return 16777215;
 	}
 
 	public int getBoozeIndex(Fluid f)
 	{
-		if (this.isFluidBooze(f))
+		if (isFluidBooze(f))
 		{
-			if (this.isAlternateBooze(f))
+			if (isAlternateBooze(f))
 			{
-				final Fluid alt = this.getAlternateBooze(f);
-				return (Integer)this.boozeMap.get(alt.getID()).get(2);
+				final Fluid alt = getAlternateBooze(f);
+				return boozeMap.get(alt).index;
 			}
-			return (Integer)this.boozeMap.get(f.getID()).get(2);
+			return boozeMap.get(f).index;
 		}
 		return 0;
 	}
 
 	public String getBoozeName(Fluid[] f)
 	{
-		if (this.areFluidsBooze(f))
+		if (areFluidsBooze(f))
 		{
-			return this.boozeNames.get(f);
+			return boozeNames.get(f);
 		}
 		return "";
 	}
@@ -247,14 +262,14 @@ public class BoozeRegistry
 		{
 			return false;
 		}
-		return this.altBoozeMap.get(f.getID()) != null;
+		return altBoozeMap.get(f) != null;
 	}
 
 	public Fluid getAlternateBooze(Fluid f)
 	{
-		if (this.isAlternateBooze(f))
+		if (isAlternateBooze(f))
 		{
-			return FluidRegistry.getFluid(this.altBoozeMap.get(f.getID()));
+			return altBoozeMap.get(f);
 		}
 		return null;
 	}
@@ -265,9 +280,9 @@ public class BoozeRegistry
 	 */
 	public Fluid maybeAlternateBooze(Fluid f)
 	{
-		if (this.isAlternateBooze(f))
+		if (isAlternateBooze(f))
 		{
-			return FluidRegistry.getFluid(this.altBoozeMap.get(f.getID()));
+			return this.altBoozeMap.get(f);
 		}
 		return f;
 	}
