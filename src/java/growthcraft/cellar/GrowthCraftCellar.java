@@ -45,6 +45,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(
@@ -195,9 +196,15 @@ public class GrowthCraftCellar
 		CellarRegistry.instance().heatSource().addHeatSource(Blocks.flowing_lava, -1, 0.5f);
 	}
 
+	private void registerOres()
+	{
+		OreDictionary.registerOre("materialYeast", yeast.getItem());
+	}
+
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
+		registerOres();
 		CommonProxy.instance.initRenders();
 
 		packetPipeline.initialise();
