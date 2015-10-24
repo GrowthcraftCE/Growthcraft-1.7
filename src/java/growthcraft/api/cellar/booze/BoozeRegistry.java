@@ -1,9 +1,12 @@
 package growthcraft.api.cellar.booze;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.util.FluidUtils;
 
@@ -92,6 +95,7 @@ public class BoozeRegistry
 	// because damage is almost never -1
 	private final int NO_META = -1;
 
+	private Map<Fluid, Set<String>> fluidTags = new HashMap<Fluid, Set<String>>();
 	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
 	private Map<Fluid[], String> boozeNames = new HashMap<Fluid[], String>();
 	private Map<Fluid, Fluid> altBoozeMap = new HashMap<Fluid, Fluid>();
@@ -121,7 +125,7 @@ public class BoozeRegistry
 	 * @param color           - The color of the fluids.
 	 * @param unlocalizedName - The unlocalized name to be used as the 'main name' of the fluids/boozes.
 	 **/
-	public void createBooze(Fluid[] fluids, String unlocalizedName)
+	public void createBooze(@Nonnull Fluid[] fluids, String unlocalizedName)
 	{
 		ensureFluidsAreValid(fluids);
 
@@ -151,7 +155,7 @@ public class BoozeRegistry
 	 * @param altfluid - The alternate fluid.
 	 * @param fluid    - The main fluid/booze.
 	 **/
-	public void addBoozeAlternative(Fluid altfluid, Fluid fluid)
+	public void addBoozeAlternative(@Nonnull Fluid altfluid, @Nonnull Fluid fluid)
 	{
 		if (FluidUtils.doesFluidExist(altfluid))
 		{
@@ -279,5 +283,50 @@ public class BoozeRegistry
 	public FluidStack maybeAlternateBoozeStack(FluidStack stack)
 	{
 		return new FluidStack(maybeAlternateBooze(stack.getFluid()), stack.amount);
+	}
+
+	public void addTags(@Nonnull Fluid fluid, String... tags)
+	{
+		if (!fluidTags.containsKey(fluid))
+		{
+			fluidTags.put(fluid, new HashSet<String>());
+		}
+		Set<String> setTags = fluidTags.get(fluid);
+		for (String tag : tags)
+		{
+			setTags.add(tag);
+		}
+	}
+
+	public Set<String> getTags(Fluid fluid)
+	{
+		if (fluid == null) return null;
+		return fluidTags.get(fluid);
+	}
+
+	public Set<String> getTags(FluidStack stack)
+	{
+		if (stack == null) return null;
+		return getTags(stack.getFluid());
+	}
+
+	public boolean hasTags(Fluid fluid, String... tags)
+	{
+		Set<String> setTags = getTags(fluid);
+		if (setTags != null)
+		{
+			for (String tag : tags)
+			{
+				if (!setTags.contains(tag)) return false;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public boolean hasTags(FluidStack stack, String... tags)
+	{
+		if (stack == null) return false;
+		return hasTags(stack.getFluid(), tags);
 	}
 }

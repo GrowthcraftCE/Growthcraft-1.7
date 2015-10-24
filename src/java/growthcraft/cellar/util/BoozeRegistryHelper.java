@@ -3,7 +3,9 @@ package growthcraft.cellar.util;
 import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.booze.Booze;
+import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.cellar.common.block.BlockFluidBooze;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
@@ -41,12 +43,20 @@ public class BoozeRegistryHelper
 
 	public static void registerDefaultFermentation(Fluid[] boozes)
 	{
-		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[1], 1), new FluidStack(boozes[0], 1), new ItemStack(Items.nether_wart), GrowthCraftCellar.getConfig().fermentSpeed);
-		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[1], 1), new FluidStack(boozes[0], 1), YeastType.BREWERS.asStack(), GrowthCraftCellar.getConfig().fermentSpeed);
-		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[2], 1), new FluidStack(boozes[1], 1), new ItemStack(Items.glowstone_dust), GrowthCraftCellar.getConfig().fermentSpeed);
-		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[2], 1), new FluidStack(boozes[3], 1), new ItemStack(Items.glowstone_dust), GrowthCraftCellar.getConfig().fermentSpeed);
-		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[3], 1), new FluidStack(boozes[1], 1), new ItemStack(Items.redstone), GrowthCraftCellar.getConfig().fermentSpeed);
-		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[3], 1), new FluidStack(boozes[2], 1), new ItemStack(Items.redstone), GrowthCraftCellar.getConfig().fermentSpeed);
+		final BoozeRegistry boozeReg = CellarRegistry.instance().booze();
+		final FermentingRegistry fermentReg = CellarRegistry.instance().fermenting();
+
+		boozeReg.addTags(boozes[0], "young");
+		boozeReg.addTags(boozes[1], "fermented");
+		boozeReg.addTags(boozes[2], "fermented", "potent");
+		boozeReg.addTags(boozes[3], "fermented", "extended");
+
+		fermentReg.addFermentation(new FluidStack(boozes[1], 1), new FluidStack(boozes[0], 1), YeastType.BREWERS.asStack(), GrowthCraftCellar.getConfig().fermentSpeed);
+		fermentReg.addFermentation(new FluidStack(boozes[1], 1), new FluidStack(boozes[0], 1), new ItemStack(Items.nether_wart), (int)(GrowthCraftCellar.getConfig().fermentSpeed * 0.66));
+		fermentReg.addFermentation(new FluidStack(boozes[2], 1), new FluidStack(boozes[1], 1), new ItemStack(Items.glowstone_dust), GrowthCraftCellar.getConfig().fermentSpeed);
+		fermentReg.addFermentation(new FluidStack(boozes[2], 1), new FluidStack(boozes[3], 1), new ItemStack(Items.glowstone_dust), GrowthCraftCellar.getConfig().fermentSpeed);
+		fermentReg.addFermentation(new FluidStack(boozes[3], 1), new FluidStack(boozes[1], 1), new ItemStack(Items.redstone), GrowthCraftCellar.getConfig().fermentSpeed);
+		fermentReg.addFermentation(new FluidStack(boozes[3], 1), new FluidStack(boozes[2], 1), new ItemStack(Items.redstone), GrowthCraftCellar.getConfig().fermentSpeed);
 	}
 
 	public static void registerBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemBucketBoozeDefinition[] buckets, ItemDefinition bottle, String basename, @Nullable ItemDefinition oldBucket)

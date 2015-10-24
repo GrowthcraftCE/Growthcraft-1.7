@@ -1,6 +1,7 @@
 package growthcraft.cellar.client.gui;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
@@ -124,23 +125,30 @@ public class GuiFermentBarrel extends GuiCellar
 			}
 		}
 
-		if (this.te.getFluidAmountScaled(52, 0) > 0)
+		i = this.te.getFluidAmountScaled(52, 0);
+		if (i > 0)
 		{
-			drawTank(w, h, 63, 17, 50, this.te.getFluidAmountScaled(52, 0), this.te.getFluidStack(0), this.te.getFluidTank(0));
+			final FluidStack fluid = this.te.getFluidStack(0);
+			drawTank(w, h, 63, 17, 50, i, fluid, this.te.getFluidTank(0));
 			this.mc.getTextureManager().bindTexture(res);
 
-			i = this.te.getBoozeMeta();
 			itemRender.zLevel = 100.0F;
-			if ( i > 0 && i < 4)
+
+			// render active modifiers
+			final Set<String> tags = CellarRegistry.instance().booze().getTags(fluid);
+			if (tags != null)
 			{
-				itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, new ItemStack(Items.nether_wart), w + 114, h + 16);
-				if (i == 2)
+				if (tags.contains("fermented"))
 				{
-					itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, new ItemStack(Items.glowstone_dust), w + 114, h + 32);
+					itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, new ItemStack(Items.nether_wart), w + 114, h + 16);
 				}
-				else if (i == 3)
+				if (tags.contains("extended"))
 				{
 					itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, new ItemStack(Items.redstone), w + 114, h + 32);
+				}
+				if (tags.contains("potent"))
+				{
+					itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, new ItemStack(Items.glowstone_dust), w + 130, h + 32);
 				}
 			}
 			itemRender.zLevel = 0.0F;

@@ -37,7 +37,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 	{
 		super();
 		this.tankCaps = new int[] {maxCap};
-		this.invSlots = new ItemStack[1];
+		this.invSlots = new ItemStack[2];
 		this.tanks = new CellarTank[] { new CellarTank(tankCaps[0], this) };
 	}
 

@@ -1,6 +1,7 @@
 package growthcraft.cellar.common.item;
 
 import java.util.List;
+import java.util.Set;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -30,7 +31,7 @@ import net.minecraftforge.fluids.Fluid;
 
 public class ItemBoozeBottle extends ItemFood
 {
-	private Fluid[] booze;
+	private Fluid[] boozes;
 
 	private boolean canCauseTipsy;
 	private float   tipsyChance;
@@ -60,7 +61,7 @@ public class ItemBoozeBottle extends ItemFood
 		this.setContainerItem(Items.glass_bottle);
 		this.setCreativeTab(GrowthCraftCellar.tab);
 
-		this.booze = boozeAry;
+		this.boozes = boozeAry;
 	}
 
 	public ItemBoozeBottle setColor(int kolor)
@@ -95,25 +96,25 @@ public class ItemBoozeBottle extends ItemFood
 
 	public Fluid[] getBoozeArray()
 	{
-		return this.booze;
+		return this.boozes;
 	}
 
 	public Fluid getBooze(int i)
 	{
-		if (i >= this.booze.length)
+		if (i >= boozes.length)
 		{
-			return this.booze[0];
+			return boozes[0];
 		}
 		else
 		{
-			return this.booze[i];
+			return boozes[i];
 		}
 	}
 
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5)
 	{
-		if (stack.getItemDamage() >= this.booze.length)
+		if (stack.getItemDamage() >= getBoozeArray().length)
 		{
 			stack.setItemDamage(0);
 		}
@@ -224,19 +225,40 @@ public class ItemBoozeBottle extends ItemFood
 		return stack.stackSize <= 0 ? null : stack;
 	}
 
+	protected PotionEffect makePotionEffect(ItemStack stack, int potnID, int potnTime)
+	{
+		final Fluid booze = getBooze(stack.getItemDamage());
+		final Set<String> tags = CellarRegistry.instance().booze().getTags(booze);
+
+		if (tags != null)
+		{
+			if (tags.contains("fermented"))
+			{
+				int time = potnTime;
+				int lvl = 0;
+				if (tags.contains("extended"))
+				{
+					time *= 2.67F;
+				}
+
+				if (tags.contains("potent"))
+				{
+					time /= 2;
+					lvl += 1;
+				}
+
+				return new PotionEffect(potnID, time, lvl);
+			}
+		}
+		return null;
+	}
+
 	protected void addPotionEffect(ItemStack stack, EntityPlayer player, int potnID, int potnTime)
 	{
-		if (stack.getItemDamage() == 1)
+		final PotionEffect potFx = makePotionEffect(stack, potnID, potnTime);
+		if (potFx != null)
 		{
-			player.addPotionEffect(new PotionEffect(potnID, potnTime, 0));
-		}
-		else if (stack.getItemDamage() == 2)
-		{
-			player.addPotionEffect(new PotionEffect(potnID, Math.round(potnTime / 2), 1));
-		}
-		else if (stack.getItemDamage() == 3)
-		{
-			player.addPotionEffect(new PotionEffect(potnID, Math.round(potnTime * 2.67F), 0));
+			player.addPotionEffect(potFx);
 		}
 	}
 
@@ -274,19 +296,7 @@ public class ItemBoozeBottle extends ItemFood
 
 	protected void writePotionTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool, int potnID, int potnTime)
 	{
-		PotionEffect pe;
-		if (stack.getItemDamage() == 1)
-		{
-			pe = new PotionEffect(potnID, potnTime, 0);
-		}
-		else if (stack.getItemDamage() == 2)
-		{
-			pe = new PotionEffect(potnID, Math.round(potnTime / 2), 1);
-		}
-		else
-		{
-			pe = new PotionEffect(potnID, Math.round(potnTime * 2.67F), 0);
-		}
+		final PotionEffect pe = makePotionEffect(stack, potnID, potnTime);
 
 		String s = StatCollector.translateToLocal(pe.getEffectName()).trim();
 		if (pe.getAmplifier() > 0)
@@ -385,14 +395,14 @@ public class ItemBoozeBottle extends ItemFood
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
-		return StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(this.booze));
+		return StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(getBoozeArray()));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
-		for (int i = 0; i < this.booze.length; i++)
+		for (int i = 0; i < getBoozeArray().length; i++)
 		{
 			list.add(new ItemStack(item, 1, i));
 		}

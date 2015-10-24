@@ -6,7 +6,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
@@ -25,13 +24,17 @@ public class ContainerFermentBarrel extends Container
 
 		this.te = fermentBarrel;
 		this.addSlotToContainer(new Slot(te, 0, 43, 53));
+		this.addSlotToContainer(new Slot(te, 1, 153, 35));
 		int i;
 
 		for (i = 0; i < 3; ++i)
 		{
 			for (int j = 0; j < 9; ++j)
 			{
-				this.addSlotToContainer(new Slot(player, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				final int slotIndex = j + i * 9 + 9;
+				final int x = 8 + j * 18;
+				final int y = 84 + i * 18;
+				this.addSlotToContainer(new Slot(player, slotIndex, x, y));
 			}
 		}
 
@@ -60,12 +63,9 @@ public class ContainerFermentBarrel extends Container
 
 			if (index != 0)
 			{
-				if (stack.getItem() == Items.nether_wart || stack.getItem() == Items.redstone || stack.getItem() == Items.glowstone_dust)
+				if (!this.mergeItemStack(stack, 0, 1, false))
 				{
-					if (!this.mergeItemStack(stack, 0, 1, false))
-					{
-						return null;
-					}
+					return null;
 				}
 				else if (index >= 1 && index < 28)
 				{
