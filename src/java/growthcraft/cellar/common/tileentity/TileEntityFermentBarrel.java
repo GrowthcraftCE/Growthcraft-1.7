@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.api.cellar.fermenting.FermentationResult;
 import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.util.ItemUtils;
-import growthcraft.cellar.util.YeastType;
 
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.Item;
@@ -136,18 +136,26 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 
 	public boolean canProduceYeast()
 	{
+		if (!canFormYeast) return false;
 		if (isFluidTankEmpty(0)) return false;
 
 		return CellarRegistry.instance().booze().hasTags(getFluid(0), "young");
 	}
 
+	/**
+	 * This is called to initialize the yeast slot, a random yeast type is
+	 * chosen from the various biome types and set in the slot,
+	 * any further yeast production will be of the same type.
+	 */
 	protected void initProduceYeast()
 	{
 		tempItemList.clear();
 		final BiomeGenBase biome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
-		if (BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL)) tempItemList.add(YeastType.ETHEREAL.asStack());
-		if (BiomeDictionary.isBiomeOfType(biome, Type.COLD)) tempItemList.add(YeastType.LAGER.asStack());
-		if (BiomeDictionary.isBiomeOfType(biome, Type.MUSHROOM)) tempItemList.add(YeastType.ORIGIN.asStack());
+		final FermentingRegistry reg = CellarRegistry.instance().fermenting();
+		for (Type t : BiomeDictionary.getTypesForBiome(biome))
+		{
+			tempItemList.addAll(reg.getYeastListForBiomeType(t));
+		}
 
 		if (tempItemList.size() > 0)
 		{
@@ -164,32 +172,10 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 		else
 		{
 			final BiomeGenBase biome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
-			if (invSlots[1].isItemEqual(YeastType.ETHEREAL.asStack()))
+			if (CellarRegistry.instance().fermenting().canYeastFormInBiome(invSlots[1], biome))
 			{
-				if (!BiomeDictionary.isBiomeOfType(biome, Type.MAGICAL))
-				{
-					return;
-				}
+				invSlots[1] = ItemUtils.increaseStack(invSlots[1]);
 			}
-			else if (invSlots[1].isItemEqual(YeastType.LAGER.asStack()))
-			{
-				if (!BiomeDictionary.isBiomeOfType(biome, Type.COLD))
-				{
-					return;
-				}
-			}
-			else if (invSlots[1].isItemEqual(YeastType.ORIGIN.asStack()))
-			{
-				if (!BiomeDictionary.isBiomeOfType(biome, Type.MUSHROOM))
-				{
-					return;
-				}
-			}
-			else
-			{
-				return;
-			}
-			invSlots[1] = ItemUtils.increaseStack(invSlots[1]);
 		}
 	}
 
