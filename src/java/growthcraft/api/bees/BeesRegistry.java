@@ -1,5 +1,7 @@
 package growthcraft.api.bees;
 
+import growthcraft.api.core.util.ItemKey;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,11 +21,12 @@ public class BeesRegistry
 	 */
 	private static final BeesRegistry INSTANCE = new BeesRegistry();
 	private static final int NO_META = -1;
+
 	private final List<Item> beesList = new ArrayList<Item>();
-	private final List<List> emptyHoneyCombList = new ArrayList<List>();
-	private final List<List> filledHoneyCombList = new ArrayList<List>();
-	private final Map<List, ItemStack> honeyCombMap = new HashMap<List, ItemStack>();
-	private final List<List> flowersList = new ArrayList<List>();
+	private final List<ItemKey> emptyHoneyCombList = new ArrayList<ItemKey>();
+	private final List<ItemKey> filledHoneyCombList = new ArrayList<ItemKey>();
+	private final Map<ItemKey, ItemStack> honeyCombMap = new HashMap<ItemKey, ItemStack>();
+	private final List<ItemKey> flowersList = new ArrayList<ItemKey>();
 
 	public static final BeesRegistry instance()
 	{
@@ -50,9 +53,9 @@ public class BeesRegistry
 		this.beesList.add(bee);
 	}
 
-	private List stackToKey(ItemStack itemstack)
+	private ItemKey stackToKey(ItemStack itemstack)
 	{
-		return Arrays.asList(itemstack.getItem(), itemstack.getItemDamage());
+		return new ItemKey(itemstack);
 	}
 
 	public void addEmptyHoneyComb(ItemStack itemstack)
@@ -94,7 +97,7 @@ public class BeesRegistry
 
 	public boolean isItemHoneyComb(ItemStack itemstack)
 	{
-		final List key = stackToKey(itemstack);
+		final ItemKey key = stackToKey(itemstack);
 		return emptyHoneyCombList.contains(key) || filledHoneyCombList.contains(key);
 	}
 
@@ -108,7 +111,7 @@ public class BeesRegistry
 	 */
 	public void addFlower(Block flower, int meta)
 	{
-		this.flowersList.add(Arrays.asList(flower, meta));
+		this.flowersList.add(new ItemKey(flower, meta));
 	}
 
 	/**
@@ -137,7 +140,7 @@ public class BeesRegistry
 
 	public boolean isBlockFlower(Block block, int meta)
 	{
-		return this.flowersList.contains(Arrays.asList(block, meta)) ||
-			this.flowersList.contains(Arrays.asList(block, NO_META));
+		return this.flowersList.contains(new ItemKey(block, meta)) ||
+			this.flowersList.contains(new ItemKey(block, NO_META));
 	}
 }

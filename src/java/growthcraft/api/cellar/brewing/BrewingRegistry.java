@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.util.HashKey;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -20,12 +23,35 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BrewingRegistry
 {
+	public static class BrewingKey extends HashKey
+	{
+		public Fluid fluid;
+		public Item item;
+		public int meta;
+
+		public BrewingKey(@Nonnull Fluid flu, @Nonnull Item ite, int met)
+		{
+			super();
+			this.fluid = flu;
+			this.item = ite;
+			this.meta = met;
+			generateHashCode();
+		}
+
+		public void generateHashCode()
+		{
+			this.hash = fluid.hashCode();
+			this.hash = 31 * hash + item.hashCode();
+			this.hash = 31 * hash + meta;
+		}
+	}
+
 	// because damage is almost never -1
 	private final int NO_META = -1;
-	private HashMap<List, BrewingResult> brewingList = new HashMap<List, BrewingResult>();
+	private HashMap<BrewingKey, BrewingResult> brewingList = new HashMap<BrewingKey, BrewingResult>();
 	private List<ItemKey> brewingIngredients = new ArrayList<ItemKey>();
 
-	public Map<List, BrewingResult> getBrewingList()
+	public Map<BrewingKey, BrewingResult> getBrewingList()
 	{
 		return brewingList;
 	}
@@ -49,9 +75,9 @@ public class BrewingRegistry
 	 * @param amount      - The amount of booze the item/block produces.
 	 * @param residue     - The amount of residue this will produce.
 	 */
-	public void addBrewing(Fluid sourceFluid, Item raw, int meta, Fluid resultFluid, int time, int amount, Residue residue)
+	public void addBrewing(@Nonnull Fluid sourceFluid, @Nonnull Item raw, int meta, @Nonnull Fluid resultFluid, int time, int amount, Residue residue)
 	{
-		this.brewingList.put(Arrays.asList(sourceFluid, raw, meta), new BrewingResult(new FluidStack(resultFluid, amount), time, residue));
+		this.brewingList.put(new BrewingKey(sourceFluid, raw, meta), new BrewingResult(new FluidStack(resultFluid, amount), time, residue));
 		this.brewingIngredients.add(new ItemKey(raw, meta));
 	}
 
@@ -98,10 +124,10 @@ public class BrewingRegistry
 		if (itemstack == null || fluidstack == null) return null;
 
 		final Fluid f = CellarRegistry.instance().booze().maybeAlternateBooze(fluidstack.getFluid());
-		final BrewingResult ret = brewingList.get(Arrays.asList(f, itemstack.getItem(), itemstack.getItemDamage()));
+		final BrewingResult ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), itemstack.getItemDamage()));
 		if (ret != null) return ret;
 
-		return brewingList.get(Arrays.asList(f, itemstack.getItem(), NO_META));
+		return brewingList.get(new BrewingKey(f, itemstack.getItem(), NO_META));
 	}
 
 	public boolean isBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)

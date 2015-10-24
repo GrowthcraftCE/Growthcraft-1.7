@@ -1,25 +1,33 @@
 package growthcraft.api.core.util;
 
+import javax.annotation.Nonnull;
+
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
  * As the name implies, this class is used in place of a List for Item keys
  */
-public class ItemKey
+public class ItemKey extends HashKey
 {
 	public final Item item;
 	public final int meta;
-	private int hash;
 
-	public ItemKey(Item iitem, int imeta)
+	public ItemKey(@Nonnull Item iitem, int imeta)
 	{
+		super();
 		this.item = iitem;
 		this.meta = imeta;
 		generateHashCode();
 	}
 
-	public ItemKey(ItemStack stack)
+	public ItemKey(@Nonnull Block block, int imeta)
+	{
+		this(Item.getItemFromBlock(block), imeta);
+	}
+
+	public ItemKey(@Nonnull ItemStack stack)
 	{
 		this(stack.getItem(), stack.getItemDamage());
 	}
@@ -28,18 +36,5 @@ public class ItemKey
 	{
 		this.hash = item.hashCode();
 		this.hash = 31 * hash + meta;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return hash;
-	}
-
-	@Override
-	public boolean equals(Object other)
-	{
-		if (!(other instanceof ItemKey)) return false;
-		return hashCode() == other.hashCode();
 	}
 }

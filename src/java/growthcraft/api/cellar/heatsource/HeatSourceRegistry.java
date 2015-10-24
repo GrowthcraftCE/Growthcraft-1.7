@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import javax.annotation.Nonnull;
 
 import net.minecraft.block.Block;
 
@@ -25,7 +26,7 @@ public class HeatSourceRegistry implements IHeatSourceRegistry
 
 	private HeatSourceTree heatSources = new HeatSourceTree();
 
-	public void addHeatSource(Block block, int meta, float heat)
+	public void addHeatSource(@Nonnull Block block, int meta, float heat)
 	{
 		if (!heatSources.containsKey(block))
 		{
@@ -35,12 +36,12 @@ public class HeatSourceRegistry implements IHeatSourceRegistry
 		map.put(meta, heat);
 	}
 
-	public void addHeatSource(Block block, int meta)
+	public void addHeatSource(@Nonnull Block block, int meta)
 	{
 		addHeatSource(block, meta, DEFAULT_HEAT);
 	}
 
-	public void addHeatSource(Block block)
+	public void addHeatSource(@Nonnull Block block)
 	{
 		addHeatSource(block, NO_META);
 	}
