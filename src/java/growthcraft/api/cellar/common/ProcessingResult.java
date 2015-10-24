@@ -37,4 +37,9 @@ public class ProcessingResult
 		result.amount = size;
 		return result;
 	}
+
+	public FluidStack asFluidStack()
+	{
+		return fluid.copy();
+	}
 }

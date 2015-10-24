@@ -35,4 +35,11 @@ public class ItemKey
 	{
 		return hash;
 	}
+
+	@Override
+	public boolean equals(Object other)
+	{
+		if (!(other instanceof ItemKey)) return false;
+		return hashCode() == other.hashCode();
+	}
 }

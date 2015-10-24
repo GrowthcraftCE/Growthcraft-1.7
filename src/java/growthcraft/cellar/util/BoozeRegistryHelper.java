@@ -42,7 +42,7 @@ public class BoozeRegistryHelper
 	public static void registerDefaultFermentation(Fluid[] boozes)
 	{
 		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[1], 1), new FluidStack(boozes[0], 1), new ItemStack(Items.nether_wart), GrowthCraftCellar.getConfig().fermentSpeed);
-		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[1], 1), new FluidStack(boozes[0], 1), YeastType.BREWERS.asStack(1), GrowthCraftCellar.getConfig().fermentSpeed);
+		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[1], 1), new FluidStack(boozes[0], 1), YeastType.BREWERS.asStack(), GrowthCraftCellar.getConfig().fermentSpeed);
 		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[2], 1), new FluidStack(boozes[1], 1), new ItemStack(Items.glowstone_dust), GrowthCraftCellar.getConfig().fermentSpeed);
 		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[2], 1), new FluidStack(boozes[3], 1), new ItemStack(Items.glowstone_dust), GrowthCraftCellar.getConfig().fermentSpeed);
 		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(boozes[3], 1), new FluidStack(boozes[1], 1), new ItemStack(Items.redstone), GrowthCraftCellar.getConfig().fermentSpeed);
