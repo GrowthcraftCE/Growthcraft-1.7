@@ -1,5 +1,7 @@
 package growthcraft.cellar.common.block;
 
+import java.util.Random;
+
 import growthcraft.core.common.block.IDroppableBlock;
 import growthcraft.core.common.block.IRotatableBlock;
 import growthcraft.core.common.block.IWrenchable;
@@ -9,11 +11,9 @@ import growthcraft.core.util.ItemUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -24,6 +24,8 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public abstract class BlockCellarContainer extends BlockContainer implements IDroppableBlock, IRotatableBlock, IWrenchable
 {
+	protected Random rand = new Random();
+
 	public BlockCellarContainer(Material material)
 	{
 		super(material);
@@ -160,36 +162,7 @@ public abstract class BlockCellarContainer extends BlockContainer implements IDr
 				{
 					final ItemStack stack = inventory.getStackInSlot(index);
 
-					if (stack != null)
-					{
-						final float f = world.rand.nextFloat() * 0.8F + 0.1F;
-						final float f1 = world.rand.nextFloat() * 0.8F + 0.1F;
-						final float f2 = world.rand.nextFloat() * 0.8F + 0.1F;
-
-						while (stack.stackSize > 0)
-						{
-							int k1 = world.rand.nextInt(21) + 10;
-
-							if (k1 > stack.stackSize)
-							{
-								k1 = stack.stackSize;
-							}
-
-							stack.stackSize -= k1;
-							final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
-
-							if (stack.hasTagCompound())
-							{
-								entityitem.getEntityItem().setTagCompound((NBTTagCompound)stack.getTagCompound().copy());
-							}
-
-							final float f3 = 0.05F;
-							entityitem.motionX = world.rand.nextGaussian() * (double)f3;
-							entityitem.motionY = world.rand.nextGaussian() * (double)(f3 + 0.2F);
-							entityitem.motionZ = world.rand.nextGaussian() * (double)f3;
-							world.spawnEntityInWorld(entityitem);
-						}
-					}
+					ItemUtils.spawnItemFromStack(world, x, y, z, stack, rand);
 				}
 
 				world.func_147453_f(x, y, z, block);

@@ -1,5 +1,7 @@
 package growthcraft.core.util;
 
+import java.util.Random;
+
 import growthcraft.core.common.item.AmazingStickWrench;
 import growthcraft.core.common.item.IGrcWrench;
 import growthcraft.core.GrowthCraftCore;
@@ -170,6 +172,37 @@ public class ItemUtils
 	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, World world, boolean checkCreative)
 	{
 		addStackToPlayer(itemstack, player, world, (int)player.posX, (int)player.posY, (int)player.posZ, checkCreative);
+	}
+
+	public static void spawnItemFromStack(World world, int x, int y, int z, ItemStack stack, Random random)
+	{
+		if (stack != null)
+		{
+			final float f = random.nextFloat() * 0.8F + 0.1F;
+			final float f1 = random.nextFloat() * 0.8F + 0.1F;
+			final float f2 = random.nextFloat() * 0.8F + 0.1F;
+
+			while (stack.stackSize > 0)
+			{
+				int k1 = random.nextInt(21) + 10;
+
+				if (k1 > stack.stackSize)
+				{
+					k1 = stack.stackSize;
+				}
+
+				final ItemStack entStack = stack.splitStack(k1);
+				if (entStack != null)
+				{
+					final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), entStack);
+					final float f3 = 0.05F;
+					entityitem.motionX = (double)((float)random.nextGaussian() * f3);
+					entityitem.motionY = (double)((float)random.nextGaussian() * f3 + 0.2F);
+					entityitem.motionZ = (double)((float)random.nextGaussian() * f3);
+					world.spawnEntityInWorld(entityitem);
+				}
+			}
+		}
 	}
 
 	/**
