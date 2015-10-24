@@ -39,7 +39,6 @@ public abstract class ConfigBase
 			if (opt != null)
 			{
 				final Class typeClass = field.getType();
-				System.out.println("Loading config option: " + opt.name());
 				try
 				{
 					if (Integer.TYPE.equals(typeClass))
@@ -69,12 +68,12 @@ public abstract class ConfigBase
 					}
 					else
 					{
-						System.err.println("Unhandled config option type : " + typeClass);
+						FMLLog.log("Growthcraft", Level.ERROR, "Unhandled config option: type=" + typeClass + " option=" + opt.name());
 					}
 				}
 				catch (IllegalAccessException ex)
 				{
-					System.err.println(ex);
+					FMLLog.log("Growthcraft", Level.ERROR, ex.toString());
 				}
 			}
 		}
