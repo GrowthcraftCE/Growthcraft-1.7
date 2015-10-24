@@ -23,6 +23,7 @@ import growthcraft.cellar.event.ItemCraftedEventCellar;
 import growthcraft.cellar.event.LivingUpdateEventCellar;
 import growthcraft.cellar.handler.GuiHandlerCellar;
 import growthcraft.cellar.network.PacketPipeline;
+import growthcraft.cellar.util.YeastType;
 import growthcraft.core.common.AchievementPageGrowthcraft;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
@@ -44,6 +45,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.stats.Achievement;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -155,6 +157,7 @@ public class GrowthCraftCellar
 		AchievementPageGrowthcraft.chievMasterList.add(getDrunk);
 
 		registerHeatSources();
+		registerYeast();
 
 		NEI.hideItem(fruitPresser.asStack());
 		NEI.hideItem(chievItemDummy.asStack());
@@ -199,6 +202,13 @@ public class GrowthCraftCellar
 	private void registerOres()
 	{
 		OreDictionary.registerOre("materialYeast", yeast.getItem());
+	}
+
+	private void registerYeast()
+	{
+		CellarRegistry.instance().fermenting().addYeastToBiomeType(YeastType.LAGER.asStack(1), BiomeDictionary.Type.COLD);
+		CellarRegistry.instance().fermenting().addYeastToBiomeType(YeastType.ETHEREAL.asStack(1), BiomeDictionary.Type.MAGICAL);
+		CellarRegistry.instance().fermenting().addYeastToBiomeType(YeastType.ORIGIN.asStack(1), BiomeDictionary.Type.MUSHROOM);
 	}
 
 	@EventHandler
