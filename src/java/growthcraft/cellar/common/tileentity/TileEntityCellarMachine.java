@@ -28,6 +28,11 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 	public abstract String getDefaultInventoryName();
 	public abstract void updateMachine();
 
+	protected void markForUpdate()
+	{
+		update = true;
+	}
+
 	@Override
 	public void updateEntity()
 	{
@@ -42,8 +47,6 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 		{
 			updateMachine();
 		}
-
-		//debugMsg();
 	}
 
 	protected void sendUpdate()

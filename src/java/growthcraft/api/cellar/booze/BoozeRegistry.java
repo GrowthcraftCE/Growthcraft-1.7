@@ -95,6 +95,7 @@ public class BoozeRegistry
 	// because damage is almost never -1
 	private final int NO_META = -1;
 
+	// May consider using an enum instead of a String once the features settle a bit
 	private Map<Fluid, Set<String>> fluidTags = new HashMap<Fluid, Set<String>>();
 	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
 	private Map<Fluid[], String> boozeNames = new HashMap<Fluid[], String>();

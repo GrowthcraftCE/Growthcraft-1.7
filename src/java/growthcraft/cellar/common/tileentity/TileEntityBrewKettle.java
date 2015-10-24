@@ -151,7 +151,7 @@ public class TileEntityBrewKettle extends TileEntityCellarMachine
 			resetTime();
 		}
 
-		update = true;
+		markForUpdate();
 	}
 
 	private void debugMsg()

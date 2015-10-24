@@ -9,10 +9,11 @@ public class Config extends ConfigBase
 	public int villagerBrewerID = 10;
 	public int fermentSpeed = 24000;
 	public boolean dropItemsInBrewKettle;
+	public boolean formYeastInBarrels = true;
+	public boolean enableThaumcraftIntegration = true;
 	public final int fruitPressMaxCap = 1000;
 	public final int fermentBarrelMaxCap = 3000;
 	public final int brewKettleMaxCap = 1000;
-	public boolean enableThaumcraftIntegration = true;
 
 	protected void loadConfig()
 	{
@@ -21,5 +22,6 @@ public class Config extends ConfigBase
 		this.fermentSpeed = config.get(Configuration.CATEGORY_GENERAL, "Ferment Barrel fermenting time", fermentSpeed, "[Higher -> Slower] Default : " + fermentSpeed).getInt();
 		this.dropItemsInBrewKettle = config.get(Configuration.CATEGORY_GENERAL, "Drop items in Brew Kettle", dropItemsInBrewKettle, "Enable to have brew kettles pick up dropped items Default :  " + dropItemsInBrewKettle).getBoolean();
 		this.enableThaumcraftIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Thaumcraft Integration", enableThaumcraftIntegration, "Should we integrate with Thaumcraft (if available); Default: " + enableThaumcraftIntegration).getBoolean();
+		this.formYeastInBarrels = config.get(Configuration.CATEGORY_GENERAL, "Ferment Barrels form yeast", formYeastInBarrels, "Should ferment barrels create yeast (with a young booze present)? Default : " + formYeastInBarrels).getBoolean();
 	}
 }

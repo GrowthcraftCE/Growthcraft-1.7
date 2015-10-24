@@ -61,7 +61,7 @@ public class ContainerFermentBarrel extends Container
 			final ItemStack stack = slot.getStack();
 			itemstack = stack.copy();
 
-			if (index != 0)
+			if (index > 1)
 			{
 				if (!this.mergeItemStack(stack, 0, 1, false))
 				{

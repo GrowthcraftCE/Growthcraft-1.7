@@ -135,7 +135,7 @@ public class TileEntityFruitPress extends TileEntityCellarMachine
 			this.time = 0;
 		}
 
-		update = true;
+		markForUpdate();
 	}
 
 	@Override
