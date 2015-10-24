@@ -40,14 +40,16 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Override
 	protected void integrate()
 	{
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooBlock.asStack(), new AspectList().add(Aspect.TREE, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooFence.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.MECHANISM, 1).add(Aspect.TRAVEL, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooBlock.asStack(), new AspectList().add(Aspect.TREE, 4));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooFence.asStack(), new AspectList().add(Aspect.TREE, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooFenceGate.asStack(), new AspectList().add(Aspect.TREE, 2).add(Aspect.MECHANISM, 1).add(Aspect.MOTION, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooLeaves.asStack(), new AspectList().add(Aspect.PLANT, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooShoot.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 1).add(Aspect.CROP, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooShoot.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 2).add(Aspect.CROP, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooSingleSlab.asStack(), new AspectList().add(Aspect.TREE, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooStairs.asStack(), new AspectList().add(Aspect.TREE, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooWall.asStack(), new AspectList().add(Aspect.TREE, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooScaffold.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.MIND, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooScaffold.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.MECHANISM, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooDoor.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.MECHANISM, 1).add(Aspect.MOTION, 1));
 
 		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bamboo.asStack(), new AspectList().add(Aspect.TREE, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooDoorItem.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.MOTION, 1).add(Aspect.MECHANISM, 1));
