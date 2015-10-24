@@ -154,7 +154,11 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 		final FermentingRegistry reg = CellarRegistry.instance().fermenting();
 		for (Type t : BiomeDictionary.getTypesForBiome(biome))
 		{
-			tempItemList.addAll(reg.getYeastListForBiomeType(t));
+			final List<ItemStack> yeastList = reg.getYeastListForBiomeType(t);
+			if (yeastList != null)
+			{
+				tempItemList.addAll(yeastList);
+			}
 		}
 
 		if (tempItemList.size() > 0)
