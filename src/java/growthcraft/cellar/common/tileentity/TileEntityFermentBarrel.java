@@ -1,18 +1,17 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.fermenting.FermentationResult;
 import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.util.ItemUtils;
 
-import net.minecraft.init.Items;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityFermentBarrel extends TileEntityCellarMachine
@@ -60,65 +59,9 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 		}
 	}
 
-	private boolean canFerment()
+	private FermentationResult getFermentation()
 	{
-		if (invSlots[0] == null) return false;
-		if (isFluidTankEmpty(0)) return false;
-		if (!CellarRegistry.instance().booze().isFluidBooze(getFluid(0)))return false;
-
-		final Item item = this.invSlots[0].getItem();
-		final int meta = CellarRegistry.instance().booze().getBoozeIndex(getFluid(0));
-
-		if (meta == 3)
-		{
-			return  item == Items.glowstone_dust;
-		}
-		else if (meta == 2)
-		{
-			return item == Items.redstone;
-		}
-		else if (meta == 1)
-		{
-			return item == Items.redstone || item == Items.glowstone_dust;
-		}
-		else if (meta == 0)
-		{
-			return item == Items.nether_wart;
-		}
-
-		return false;
-	}
-
-	public void fermentItem()
-	{
-		final Item item = this.invSlots[0].getItem();
-		final int meta = CellarRegistry.instance().booze().getBoozeIndex(getFluid(0));
-		final Fluid[] fluidArray = CellarRegistry.instance().booze().getBoozeArray(getFluid(0));
-
-		if (meta == 0 && item == Items.nether_wart)
-		{
-			tanks[0].setFluid(new FluidStack(fluidArray[1], getFluidStack(0).amount, getFluidStack(0).tag));
-		}
-		else if ((meta == 1 || meta == 3) && item == Items.glowstone_dust)
-		{
-			tanks[0].setFluid(new FluidStack(fluidArray[2], getFluidStack(0).amount, getFluidStack(0).tag));
-		}
-		else if ((meta == 1 || meta == 2) && item == Items.redstone)
-		{
-			tanks[0].setFluid(new FluidStack(fluidArray[3], getFluidStack(0).amount, getFluidStack(0).tag));
-		}
-
-		invSlots[0] = ItemUtils.consumeStack(this.invSlots[0]);
-	}
-
-	public int getFermentProgressScaled(int par1)
-	{
-		if (this.canFerment())
-		{
-			return this.time * par1 / this.timemax;
-		}
-
-		return 0;
+		return CellarRegistry.instance().fermenting().getFermentation(getFluidStack(0), invSlots[0]);
 	}
 
 	public int getTime()
@@ -128,12 +71,48 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 
 	public int getTimeMax()
 	{
+		final FermentationResult result = getFermentation();
+		if (result != null)
+		{
+			return result.time;
+		}
 		return this.timemax;
 	}
 
 	public int getBoozeMeta()
 	{
-		return CellarRegistry.instance().booze().getBoozeIndex(this.getFluid(0));
+		return CellarRegistry.instance().booze().getBoozeIndex(getFluid(0));
+	}
+
+	private boolean canFerment()
+	{
+		if (invSlots[0] == null) return false;
+		if (isFluidTankEmpty(0)) return false;
+		return getFermentation() != null;
+	}
+
+	public void fermentItem()
+	{
+		final Item item = this.invSlots[0].getItem();
+		final FluidStack fluidStack = getFluidStack(0);
+
+		final FermentationResult result = getFermentation();
+		if (result != null)
+		{
+			tanks[0].setFluid(result.asFluidStack(getFluidStack(0).amount));
+		}
+
+		invSlots[0] = ItemUtils.consumeStack(this.invSlots[0]);
+	}
+
+	public int getFermentProgressScaled(int scale)
+	{
+		if (this.canFerment())
+		{
+			return this.time * scale / getTimeMax();
+		}
+
+		return 0;
 	}
 
 	@Override
@@ -143,7 +122,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 		{
 			++this.time;
 
-			if (this.time == this.timemax)
+			if (this.time >= getTimeMax())
 			{
 				this.time = 0;
 				this.fermentItem();
@@ -163,8 +142,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
 	{
-		final Item item = itemstack.getItem();
-		return index == 0 ? item == Items.nether_wart || item == Items.redstone || item == Items.glowstone_dust : false;
+		return true;
 	}
 
 	@Override

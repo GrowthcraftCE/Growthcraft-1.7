@@ -128,6 +128,7 @@ public class GrowthCraftGrapes
 		GameRegistry.registerItem(grapeWineBucket_deprecated.getItem(), "grc.grapeWine_bucket");
 
 		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, grapeWine, "grc.grapeWine", grapeWineBucket_deprecated);
+		BoozeRegistryHelper.registerDefaultFermentation(grapeWineBooze);
 
 		CellarRegistry.instance().pressing().addPressing(grapes.getItem(), grapeWineBooze[0], config.grapeWinePressingTime, 40, Residue.newDefault(0.3F));
 

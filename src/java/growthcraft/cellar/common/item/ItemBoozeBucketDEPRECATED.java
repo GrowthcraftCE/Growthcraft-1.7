@@ -45,11 +45,6 @@ public class ItemBoozeBucketDEPRECATED extends Item
 		return this;
 	}
 
-	public Fluid[] getBoozeArray()
-	{
-		return this.boozes;
-	}
-
 	public Fluid getBooze(int i)
 	{
 		if (i >= this.boozes.length)

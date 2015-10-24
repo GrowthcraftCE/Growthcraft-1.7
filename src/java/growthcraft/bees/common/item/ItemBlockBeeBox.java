@@ -15,11 +15,13 @@ public class ItemBlockBeeBox extends ItemBlock
 		this.setHasSubtypes(true);
 	}
 
+	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
 		return super.getUnlocalizedName(stack) + stack.getItemDamage();
 	}
 
+	@Override
 	public int getMetadata(int meta)
 	{
 		return meta;

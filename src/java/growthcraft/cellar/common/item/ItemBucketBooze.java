@@ -17,10 +17,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
 
-public class ItemBucketBooze extends ItemBucket
+public class ItemBucketBooze extends ItemBucket implements IBoozeContainer
 {
 	private String iconName;
-	private Fluid[] boozes;
+	private Fluid booze;
 	private int index;
 
 	@SideOnly(Side.CLIENT)
@@ -28,38 +28,29 @@ public class ItemBucketBooze extends ItemBucket
 	@SideOnly(Side.CLIENT)
 	private IIcon contents;
 
-	private int color = 0xFFFFFF;
-
-	public ItemBucketBooze(Block block, Fluid[] boozeAry, int indx, CreativeTabs creativeTab)
+	public ItemBucketBooze(Block block, Fluid buze, CreativeTabs creativeTab)
 	{
 		super(block);
 		setContainerItem(Items.bucket);
 		setUnlocalizedName("grc.boozeBucket");
 		setCreativeTab(creativeTab);
-		this.index = indx;
-		this.boozes = boozeAry;
+		this.booze = buze;
 	}
 
-	public ItemBucketBooze(Block block, Fluid[] boozeAry, int indx)
+	public ItemBucketBooze(Block block, Fluid buze)
 	{
-		this(block, boozeAry, indx, GrowthCraftCellar.tab);
+		this(block, buze, GrowthCraftCellar.tab);
 	}
 
-	public Fluid getBooze(int id)
+	public Fluid getBooze()
 	{
-		return boozes[id];
+		return booze;
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
-		return UnitFormatter.fluidBucketName(getBooze(index));
-	}
-
-	public ItemBucketBooze setColor(int kolor)
-	{
-		this.color = kolor;
-		return this;
+		return UnitFormatter.fluidBucketName(getBooze());
 	}
 
 	@Override
@@ -71,8 +62,7 @@ public class ItemBucketBooze extends ItemBucket
 
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		final Fluid booze = getBooze(index);
-		final String s = UnitFormatter.fluidModifier(booze);
+		final String s = UnitFormatter.fluidModifier(getBooze());
 		if (s != null) list.add(s);
 	}
 
@@ -95,7 +85,7 @@ public class ItemBucketBooze extends ItemBucket
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int pass)
 	{
-		return pass == 1 ? this.color : 0xFFFFFF;
+		return pass == 1 ? booze.getColor() : 0xFFFFFF;
 	}
 
 	@Override

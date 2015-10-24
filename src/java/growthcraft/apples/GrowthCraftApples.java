@@ -114,6 +114,7 @@ public class GrowthCraftApples
 		GameRegistry.registerItem(appleCiderBucket_deprecated.getItem(), "grc.appleCider_bucket");
 
 		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", appleCiderBucket_deprecated);
+		BoozeRegistryHelper.registerDefaultFermentation(appleCiderBooze);
 
 		CellarRegistry.instance().pressing().addPressing(Items.apple, appleCiderBooze[0], this.config.appleCiderPressingTime, 40, Residue.newDefault(0.3F));
 

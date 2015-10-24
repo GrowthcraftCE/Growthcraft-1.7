@@ -80,13 +80,11 @@ public class BoozeRegistry
 	static class BoozeEntry
 	{
 		final Fluid[] fluids;
-		final int color;
 		final int index;
 
-		public BoozeEntry(Fluid[] flus, int kolor, int ind)
+		public BoozeEntry(Fluid[] flus, int ind)
 		{
 			this.fluids = flus;
-			this.color = kolor;
 			this.index = ind;
 		}
 	}
@@ -123,7 +121,7 @@ public class BoozeRegistry
 	 * @param color           - The color of the fluids.
 	 * @param unlocalizedName - The unlocalized name to be used as the 'main name' of the fluids/boozes.
 	 **/
-	public void createBooze(Fluid[] fluids, int color, String unlocalizedName)
+	public void createBooze(Fluid[] fluids, String unlocalizedName)
 	{
 		ensureFluidsAreValid(fluids);
 
@@ -131,7 +129,7 @@ public class BoozeRegistry
 		{
 			for (int i = 0; i < fluids.length; ++i)
 			{
-				boozeMap.put(fluids[i], new BoozeEntry(fluids, color, i));
+				boozeMap.put(fluids[i], new BoozeEntry(fluids, i));
 			}
 			boozeNames.put(fluids, unlocalizedName);
 		}
@@ -222,15 +220,6 @@ public class BoozeRegistry
 			return boozeMap.get(alt).fluids;
 		}
 		return boozeMap.get(f).fluids;
-	}
-
-	public int getBoozeColor(Fluid f)
-	{
-		if (isFluidBooze(f))
-		{
-			return boozeMap.get(f).color;
-		}
-		return 16777215;
 	}
 
 	public int getBoozeIndex(Fluid f)

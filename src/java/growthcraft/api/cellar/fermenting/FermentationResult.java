@@ -1,13 +1,13 @@
-package growthcraft.api.cellar.pressing;
+package growthcraft.api.cellar.fermenting;
 
 import growthcraft.api.cellar.common.ProcessingResult;
 import growthcraft.api.cellar.common.Residue;
 
 import net.minecraftforge.fluids.FluidStack;
 
-public class PressingResult extends ProcessingResult
+public class FermentationResult extends ProcessingResult
 {
-	public PressingResult(FluidStack f, int t, Residue r)
+	public FermentationResult(FluidStack f, int t, Residue r)
 	{
 		super(f, t, r);
 	}

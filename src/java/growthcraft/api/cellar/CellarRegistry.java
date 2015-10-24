@@ -5,9 +5,10 @@ import java.util.List;
 
 import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.brewing.BrewingRegistry;
-import growthcraft.api.cellar.pressing.PressingRegistry;
+import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.api.cellar.heatsource.HeatSourceRegistry;
 import growthcraft.api.cellar.heatsource.IHeatSourceRegistry;
+import growthcraft.api.cellar.pressing.PressingRegistry;
 
 import net.minecraft.block.Block;
 
@@ -24,6 +25,7 @@ public class CellarRegistry
 	private final BoozeRegistry boozeRegistry = new BoozeRegistry();
 	private final BrewingRegistry brewingRegistry = new BrewingRegistry();
 	private final PressingRegistry pressingRegistry = new PressingRegistry();
+	private final FermentingRegistry fermentingRegistry = new FermentingRegistry();
 	private final IHeatSourceRegistry heatSourceRegistry = new HeatSourceRegistry();
 
 	public static final CellarRegistry instance()
@@ -44,6 +46,11 @@ public class CellarRegistry
 	public PressingRegistry pressing()
 	{
 		return pressingRegistry;
+	}
+
+	public FermentingRegistry fermenting()
+	{
+		return fermentingRegistry;
 	}
 
 	public IHeatSourceRegistry heatSource()

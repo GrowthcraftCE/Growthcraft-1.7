@@ -41,7 +41,7 @@ public class PressingRegistry
 	 */
 	public void addPressing(Item raw, int meta, Fluid fluid, int time, int amount, Residue residue)
 	{
-		this.pressingList.put(Arrays.asList(raw, meta), new PressingResult(fluid, time, amount, residue));
+		this.pressingList.put(Arrays.asList(raw, meta), new PressingResult(new FluidStack(fluid, amount), time, residue));
 	}
 
 	public void addPressing(Block raw, int meta, Fluid fluid, int time, int amount, Residue residue)
@@ -130,7 +130,7 @@ public class PressingRegistry
 		final PressingResult pressresults = this.getPressingResults(itemstack);
 		if (pressresults == null) return 0;
 
-		return pressresults.amount;
+		return pressresults.getAmount();
 	}
 
 	public Residue getPressingResidue(ItemStack itemstack)

@@ -9,6 +9,12 @@ tile.grc.fermentBarrel.name=Fermentation Barrel
 // this is no longer used
 item.grc.boozeBucket.name=Bucket
 
+item.grc.yeast0.name=Brewers Yeast
+item.grc.yeast1.name=Lager Yeast
+item.grc.yeast2.name=Bayanus Yeast
+item.grc.yeast3.name=Ethereal Yeast
+item.grc.yeast4.name=Origin Yeast
+
 container.grc.fruitPress=Fruit Press
 container.grc.brewKettle=Brew Kettle
 container.grc.fermentBarrel=Fermentation Barrel

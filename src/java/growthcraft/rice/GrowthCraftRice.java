@@ -114,6 +114,7 @@ public class GrowthCraftRice
 		GameRegistry.registerItem(riceSakeBucket_deprecated.getItem(), "grc.riceSake_bucket");
 		GameRegistry.registerItem(riceBall.getItem(), "grc.riceBall");
 		BoozeRegistryHelper.registerBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, riceSake, "grc.riceSake", riceSakeBucket_deprecated);
+		BoozeRegistryHelper.registerDefaultFermentation(riceSakeBooze);
 
 		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, rice.getItem(), riceSakeBooze[0], config.riceSakeBrewingTime, 25, Residue.newDefault(0.2F));
 

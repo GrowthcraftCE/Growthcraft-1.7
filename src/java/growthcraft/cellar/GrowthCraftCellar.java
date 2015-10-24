@@ -119,6 +119,7 @@ public class GrowthCraftCellar
 		GameRegistry.registerBlock(brewKettle.getBlock(), "grc.brewKettle");
 		GameRegistry.registerBlock(fermentBarrel.getBlock(), "grc.fermentBarrel");
 
+		GameRegistry.registerItem(yeast.getItem(), "grc.yeast");
 		GameRegistry.registerItem(chievItemDummy.getItem(), "grc.chievItemDummy");
 
 		GameRegistry.registerTileEntity(TileEntityFruitPress.class, "grc.tileentity.fruitPress");

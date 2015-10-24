@@ -3,12 +3,12 @@ package growthcraft.api.cellar.brewing;
 import growthcraft.api.cellar.common.ProcessingResult;
 import growthcraft.api.cellar.common.Residue;
 
-import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
 public class BrewingResult extends ProcessingResult
 {
-	public BrewingResult(Fluid f, int t, int a, Residue r)
+	public BrewingResult(FluidStack f, int t, Residue r)
 	{
-		super(f, t, a, r);
+		super(f, t, r);
 	}
 }

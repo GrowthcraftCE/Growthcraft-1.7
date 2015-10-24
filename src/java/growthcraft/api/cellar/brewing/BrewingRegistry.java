@@ -51,7 +51,7 @@ public class BrewingRegistry
 	 */
 	public void addBrewing(Fluid sourceFluid, Item raw, int meta, Fluid resultFluid, int time, int amount, Residue residue)
 	{
-		this.brewingList.put(Arrays.asList(sourceFluid, raw, meta), new BrewingResult(resultFluid, time, amount, residue));
+		this.brewingList.put(Arrays.asList(sourceFluid, raw, meta), new BrewingResult(new FluidStack(resultFluid, amount), time, residue));
 		this.brewingIngredients.add(new ItemKey(raw, meta));
 	}
 
@@ -138,7 +138,7 @@ public class BrewingRegistry
 		final BrewingResult brewresults = this.getBrewingResult(fluidstack, itemstack);
 		if (brewresults == null) return 0;
 
-		return brewresults.amount;
+		return brewresults.getAmount();
 	}
 
 	public Residue getBrewingResidue(FluidStack fluidstack, ItemStack itemstack)

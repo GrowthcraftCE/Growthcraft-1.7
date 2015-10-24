@@ -157,6 +157,7 @@ public class GrowthCraftBees
 
 		// Booze
 		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMead, "grc.honeyMead", honeyMeadBucket_deprecated);
+		BoozeRegistryHelper.registerDefaultFermentation(honeyMeadBooze);
 
 		// TileEntities
 		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
