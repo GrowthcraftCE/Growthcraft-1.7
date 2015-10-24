@@ -1,30 +1,37 @@
 package growthcraft.apples;
 
 import growthcraft.core.ConfigBase;
-import net.minecraftforge.common.config.Configuration;
 
 public class Config extends ConfigBase
 {
 	// Should a ripe apple fall as an item?
+	@ConfigOption(catergory="Apple Tree", name="Allow natural apple falling?", desc="Should ripe apples fall from the tree?")
 	public boolean dropRipeApples = true;
-	public int appleDropChance = 8;
-	public int appleGrowthRate = 8;
-	public int appleLeavesGrowthRate = 25;
-	public int appleSaplingGrowthRate = 7;
-	public int appleCiderPressingTime = 20;
-	public boolean generateAppleFarms;
-	public boolean enableThaumcraftIntegration = true;
-	public final int appleCiderColor = 0x855425;
 
-	protected void loadConfig()
-	{
-		this.appleGrowthRate = config.get(Configuration.CATEGORY_GENERAL, "Apple growth rate", appleGrowthRate, "[Higher -> Slower] Default : " + appleGrowthRate).getInt();
-		this.dropRipeApples = config.get(Configuration.CATEGORY_GENERAL, "Allow natural apple falling?", dropRipeApples, "Default : " + dropRipeApples).getBoolean();
-		this.appleDropChance = config.get(Configuration.CATEGORY_GENERAL, "Apple natural falling rate", appleDropChance, "[Higher -> Slower] Default : " + appleDropChance).getInt();
-		this.appleLeavesGrowthRate = config.get(Configuration.CATEGORY_GENERAL, "Apple Leaves apple spawn rate", appleLeavesGrowthRate, "[Higher -> Slower] Default : " + appleLeavesGrowthRate).getInt();
-		this.appleSaplingGrowthRate = config.get(Configuration.CATEGORY_GENERAL, "Apple Sapling growth rate", appleSaplingGrowthRate, "[Higher -> Slower] Default : " + appleSaplingGrowthRate).getInt();
-		this.appleCiderPressingTime = config.get(Configuration.CATEGORY_GENERAL, "Apple Cider press time", appleCiderPressingTime, "[Higher -> Slower] Default : " + appleCiderPressingTime).getInt();
-		this.generateAppleFarms = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Apple Farms", generateAppleFarms, "Controls apple farms spawning in villages Default : " + generateAppleFarms).getBoolean();
-		this.enableThaumcraftIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Thaumcraft Integration", enableThaumcraftIntegration, "Should we integrate with Thaumcraft (if available); Default: " + enableThaumcraftIntegration).getBoolean();
-	}
+	@ConfigOption(catergory="Apple Tree", name="Apple natural falling rate", desc="[Higher -> Less Likely to Fall]")
+	public int appleDropChance = 8;
+
+	@ConfigOption(catergory="Apple Tree", name="Apple Leaves apple spawn rate", desc="[Higher -> Slower]")
+	public int appleLeavesGrowthRate = 25;
+
+	@ConfigOption(catergory="Apple Tree", name="Apple growth rate", desc="[Higher -> Slower]")
+	public int appleGrowthRate = 8;
+
+	@ConfigOption(catergory="Apple Tree", name="Apple Sapling growth rate", desc="[Higher -> Slower]")
+	public int appleSaplingGrowthRate = 7;
+
+
+	@ConfigOption(catergory="Fruit Press", name="Apple Cider press time", desc="[Higher -> Slower]")
+	public int appleCiderPressingTime = 20;
+
+
+	@ConfigOption(catergory="Booze", name="Apple Cider Color", desc="What color should apple cider be?")
+	public int appleCiderColor = 0x855425;
+
+
+	@ConfigOption(catergory="Village", name="Generate Village Apple Farms", desc="Should we spawn Apple Farms in Villages?")
+	public boolean generateAppleFarms;
+
+	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
+	public boolean enableThaumcraftIntegration = true;
 }

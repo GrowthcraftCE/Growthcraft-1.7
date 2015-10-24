@@ -32,7 +32,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	private final int grapeLeavesGrowthRate = GrowthCraftGrapes.getConfig().grapeLeavesGrowthRate;
 	private final int grapeSpawnRate = GrowthCraftGrapes.getConfig().grapeSpawnRate;
 	// how far can a grape leaf grow before it requires support from a trunk
-	private final int grapeSupportedLength = GrowthCraftGrapes.getConfig().grapeSupportedLength;
+	private final int grapeVineSupportedLength = GrowthCraftGrapes.getConfig().grapeVineSupportedLength;
 
 	public BlockGrapeLeaves()
 	{
@@ -82,7 +82,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 		if (!leavesTotheSouth && !leavesToTheNorth && !leavesToTheEast && !leavesToTheWest) return false;
 
-		for (int i = 1; i <= grapeSupportedLength; ++i)
+		for (int i = 1; i <= grapeVineSupportedLength; ++i)
 		{
 			if (leavesTotheSouth && isTrunk(world, x + i, y - 1, z)) return true;
 			if (leavesToTheNorth && isTrunk(world, x - i, y - 1, z)) return true;
@@ -192,7 +192,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 		{
 			for (ForgeDirection dir : BlockCheck.DIR4)
 			{
-				for (int i = 1; i <= grapeSupportedLength; ++i)
+				for (int i = 1; i <= grapeVineSupportedLength; ++i)
 				{
 					final int bx = x + dir.offsetX * i;
 					final int bz = z + dir.offsetZ * i;

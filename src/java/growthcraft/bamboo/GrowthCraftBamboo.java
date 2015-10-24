@@ -121,7 +121,7 @@ public class GrowthCraftBamboo
 		bambooCoal = new ItemDefinition(new ItemBambooCoal());
 		bambooShootFood = new ItemDefinition(new ItemBambooShoot());
 
-		if (config.bambooGenerateBiome)
+		if (config.generateBambooBiome)
 		{
 			bambooBiome = (new BiomeGenBamboo(config.bambooBiomeID))
 				.setColor(353825)
@@ -152,7 +152,7 @@ public class GrowthCraftBamboo
 		GameRegistry.registerItem(bambooCoal.getItem(), "grc.bambooCoal");
 		GameRegistry.registerItem(bambooShootFood.getItem(), "grc.bambooShootFood");
 
-		if (config.bambooGenerateBiome)
+		if (config.generateBambooBiome)
 		{
 			//GameRegistry.addBiome(bambooBiome);
 			BiomeManager.addSpawnBiome(bambooBiome);

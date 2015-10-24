@@ -1,27 +1,37 @@
 package growthcraft.cellar;
 
 import growthcraft.core.ConfigBase;
-import net.minecraftforge.common.config.Configuration;
 
 public class Config extends ConfigBase
 {
+	@ConfigOption(catergory="Potions", name="Potion Tipsy ID")
 	public int potionTipsyID = 50;
-	public int villagerBrewerID = 10;
-	public int fermentSpeed = 24000;
-	public boolean dropItemsInBrewKettle;
-	public boolean formYeastInBarrels = true;
-	public boolean enableThaumcraftIntegration = true;
-	public final int fruitPressMaxCap = 1000;
-	public final int fermentBarrelMaxCap = 3000;
-	public final int brewKettleMaxCap = 1000;
 
-	protected void loadConfig()
-	{
-		this.potionTipsyID = config.get("Potions", "Potion Tipsy ID", 50).getInt();
-		this.villagerBrewerID = config.get("Villager", "Brewer ID", 10).getInt();
-		this.fermentSpeed = config.get(Configuration.CATEGORY_GENERAL, "Ferment Barrel fermenting time", fermentSpeed, "[Higher -> Slower] Default : " + fermentSpeed).getInt();
-		this.dropItemsInBrewKettle = config.get(Configuration.CATEGORY_GENERAL, "Drop items in Brew Kettle", dropItemsInBrewKettle, "Enable to have brew kettles pick up dropped items Default :  " + dropItemsInBrewKettle).getBoolean();
-		this.enableThaumcraftIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Thaumcraft Integration", enableThaumcraftIntegration, "Should we integrate with Thaumcraft (if available); Default: " + enableThaumcraftIntegration).getBoolean();
-		this.formYeastInBarrels = config.get(Configuration.CATEGORY_GENERAL, "Ferment Barrels form yeast", formYeastInBarrels, "Should ferment barrels create yeast (with a young booze present)? Default : " + formYeastInBarrels).getBoolean();
-	}
+	@ConfigOption(catergory="Villager", name="Brewer ID")
+	public int villagerBrewerID = 10;
+
+
+	@ConfigOption(catergory="Fermenting Barrel", name="Ferment Barrel fermenting time", desc="[Higher -> Slower]")
+	public int fermentSpeed = 24000;
+
+	@ConfigOption(catergory="Fermenting Barrel", name="Ferment Barrels form yeast", desc="Should ferment barrels create yeast (with a young booze present)?")
+	public boolean formYeastInBarrels = true;
+
+	@ConfigOption(catergory="Fermenting Barrel", name="Fluid Capacity", desc="How much fluid can a Fermenting Barrel hold? (in mB (milli buckets))")
+	public int fermentBarrelMaxCap = 3000;
+
+
+	@ConfigOption(catergory="Brew Kettle", name="Drop items in Brew Kettle", desc="Enable to have brew kettles pick up dropped items")
+	public boolean dropItemsInBrewKettle;
+
+	@ConfigOption(catergory="Brew Kettle", name="Fluid Capacity", desc="How much fluid can a Brew Kettle hold? (in mB (milli buckets))")
+	public int brewKettleMaxCap = 1000;
+
+
+	@ConfigOption(catergory="Fruit Press", name="Fluid Capacity", desc="How much fluid can a Fruit Press hold? (in mB (milli buckets))")
+	public int fruitPressMaxCap = 1000;
+
+
+	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
+	public boolean enableThaumcraftIntegration = true;
 }

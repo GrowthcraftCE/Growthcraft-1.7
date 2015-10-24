@@ -1,35 +1,40 @@
 package growthcraft.bamboo;
 
 import growthcraft.core.ConfigBase;
-import net.minecraftforge.common.config.Configuration;
 
 public class Config extends ConfigBase
 {
-	public boolean bambooGenerateBiome = true;
+	@ConfigOption(catergory="World Gen", name="Generate Bamboo Forest biome?")
+	public boolean generateBambooBiome = true;
+
+	@ConfigOption(catergory="World Gen", name="Enable Biome Dictionary compatability?")
 	public boolean useBiomeDict = true;
+
+	@ConfigOption(catergory="World Gen", name="Bamboo Forest biome ID")
 	public int bambooBiomeID = 170;
+
 	// Ocean, Plains, Forest, River, ForestHills, Jungle, JungleHills, JungleEdge,JungleM, JungleEdgeM
+	@ConfigOption(catergory="World Gen", name="Biomes (IDs) That Generate Bamboos", desc="Separate the IDs with ';' (without the quote marks)")
 	public String bambooBiomesList = "0;1;4;7;18;21;22;23;149;151";
+
+	@ConfigOption(catergory="World Gen", name="Bamboo WorldGen density", desc="How clustered should bamboo generate? [Higher -> Denser]")
+	public int bambooWorldGenDensity = 64;
+
+	@ConfigOption(catergory="World Gen", name="Bamboo WorldGen rarity", desc="How rare is it for bamboo to spawn? [Higher -> Rarer]")
+	public int bambooWorldGenRarity = 32;
+
+	@ConfigOption(catergory="Village", name="Generate Village Bamboo Yard", desc="Should we spawn Bamboo Yards in villages?")
 	public boolean generateBambooYard;
+
+	@ConfigOption(catergory="Bamboo/Growth", name="Bamboo Shoot growth rate", desc="[Higher -> Slower]")
 	public int bambooShootGrowthRate = 7;
+
+	@ConfigOption(catergory="Bamboo/Growth", name="Bamboo Spread rate", desc="[Higher -> Slower]")
 	public int bambooStalkGrowthRate = 4;
+
 	public int bambooTreeMaxHeight = 256;
 	public int bambooTreeMinHeight = 12;
-	public int bambooWorldGenDensity = 64;
-	public int bambooWorldGenRarity = 32;
-	public boolean enableThaumcraftIntegration = true;
 
-	protected void loadConfig()
-	{
-		this.bambooBiomeID = config.get("Biomes", "Bamboo Forest biome ID", bambooBiomeID).getInt();
-		this.bambooBiomesList = config.get(Configuration.CATEGORY_GENERAL, "Biomes (IDs) That Generate Bamboos", bambooBiomesList, "Separate the IDs with ';' (without the quote marks)").getString();
-		this.useBiomeDict = config.get(Configuration.CATEGORY_GENERAL, "Enable Biome Dictionary compatability?", useBiomeDict, "Default : true  || false = Disable").getBoolean();
-		this.bambooGenerateBiome = config.get(Configuration.CATEGORY_GENERAL, "Generate Bamboo Forest biome?", bambooGenerateBiome, "Default : true  || false = Disable").getBoolean();
-		this.bambooWorldGenRarity = config.get(Configuration.CATEGORY_GENERAL, "Bamboo WorldGen rarity", bambooWorldGenRarity, "[Higher -> Rarer] Default : " + bambooWorldGenRarity).getInt();
-		this.bambooWorldGenDensity = config.get(Configuration.CATEGORY_GENERAL, "Bamboo WorldGen density", bambooWorldGenDensity, "[Higher -> Denser] Default : " + bambooWorldGenDensity).getInt();
-		this.bambooStalkGrowthRate = config.get(Configuration.CATEGORY_GENERAL, "Bamboo Spread rate", bambooStalkGrowthRate, "[Higher -> Slower] Default : " + bambooStalkGrowthRate).getInt();
-		this.bambooShootGrowthRate = config.get(Configuration.CATEGORY_GENERAL, "Bamboo Shoot growth rate", bambooShootGrowthRate, "[Higher -> Slower] Default : " + bambooShootGrowthRate).getInt();
-		this.generateBambooYard = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Bamboo Yard", generateBambooYard, "Controls bamboo yard spawning in villages Default : " + generateBambooYard).getBoolean();
-		this.enableThaumcraftIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Thaumcraft Integration", enableThaumcraftIntegration, "Should we integrate with Thaumcraft (if available); Default: " + enableThaumcraftIntegration).getBoolean();
-	}
+	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
+	public boolean enableThaumcraftIntegration = true;
 }

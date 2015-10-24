@@ -1,24 +1,32 @@
 package growthcraft.rice;
 
 import growthcraft.core.ConfigBase;
-import net.minecraftforge.common.config.Configuration;
 
 public class Config extends ConfigBase
 {
+	@ConfigOption(catergory="Growth Rates", name="Rice growth rate", desc="[Higher -> Slower]")
 	public float riceGrowthRate = 25.0f;
-	public int riceSeedDropRarity = 3;
-	public int riceSakeBrewingTime = 20;
-	public boolean generateRiceFieldStructure;
-	public boolean enableThaumcraftIntegration = true;
-	public final int paddyFieldMax = 7;
-	public final int riceSakeColor = 0xE9EFF7;
 
-	protected void loadConfig()
-	{
-		this.riceGrowthRate = (float)config.get(Configuration.CATEGORY_GENERAL, "Rice growth rate", (double)riceGrowthRate, "[Higher -> Slower] Default : " + riceGrowthRate).getDouble();
-		this.riceSeedDropRarity = config.get(Configuration.CATEGORY_GENERAL, "Rice grass drop rarity", riceSeedDropRarity, "[Lower -> Rarer] Default : " + riceSeedDropRarity).getInt();
-		this.riceSakeBrewingTime = config.get(Configuration.CATEGORY_GENERAL, "Rice Sake brew time", riceSakeBrewingTime, "[Higher -> Slower] Default : " + riceSakeBrewingTime).getInt();
-		this.generateRiceFieldStructure = config.get(Configuration.CATEGORY_GENERAL, "Generate Village Rice Fields", generateRiceFieldStructure, "Controls rice field spawning in villages Default : " + generateRiceFieldStructure).getBoolean();
-		this.enableThaumcraftIntegration = config.get(Configuration.CATEGORY_GENERAL, "Enable Thaumcraft Integration", enableThaumcraftIntegration, "Should we integrate with Thaumcraft (if available); Default: " + enableThaumcraftIntegration).getBoolean();
-	}
+
+	@ConfigOption(catergory="Drops", name="Rice grass drop rarity", desc="[Higher -> Rarer]")
+	public int riceSeedDropRarity = 3;
+
+
+	@ConfigOption(catergory="Brewing", name="Rice Sake brew time", desc="[Higher -> Slower]")
+	public int riceSakeBrewingTime = 20;
+
+
+	@ConfigOption(catergory="Booze", name="Rice Sake Color", desc="What color should sake be?")
+	public int riceSakeColor = 0xE9EFF7;
+
+
+	@ConfigOption(catergory="Village", name="Generate Village Rice Fields", desc="Should we spawn rice fields in villages?")
+	public boolean generateRiceFieldStructure;
+
+
+	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
+	public boolean enableThaumcraftIntegration = true;
+
+
+	public final int paddyFieldMax = 7;
 }
