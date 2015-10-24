@@ -2,6 +2,8 @@ package growthcraft.grapes.common.block;
 
 import java.util.Random;
 
+import growthcraft.cellar.util.YeastType;
+import growthcraft.core.util.ItemUtils;
 import growthcraft.grapes.client.renderer.RenderGrape;
 import growthcraft.grapes.GrowthCraftGrapes;
 
@@ -16,6 +18,11 @@ import net.minecraft.world.World;
 
 public class BlockGrapeBlock extends Block
 {
+	protected Random rand = new Random();
+	protected int bayanusDropRarity = GrowthCraftGrapes.getConfig().bayanusDropRarity;
+	protected int grapesDropMin = GrowthCraftGrapes.getConfig().grapesDropMin;
+	protected int grapesDropMax = GrowthCraftGrapes.getConfig().grapesDropMax;
+
 	public BlockGrapeBlock()
 	{
 		super(Material.plants);
@@ -103,7 +110,17 @@ public class BlockGrapeBlock extends Block
 	 * DROPS
 	 ************/
 	@Override
-	public Item getItemDropped(int meta, Random par2Random, int par3)
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+	{
+		if (world.rand.nextInt(bayanusDropRarity) == 0)
+		{
+			ItemUtils.spawnItemFromStack(world, x, y, z, YeastType.BAYANUS.asStack(1), rand);
+		}
+		super.breakBlock(world, x, y, z, block, meta);
+	}
+
+	@Override
+	public Item getItemDropped(int meta, Random random, int par3)
 	{
 		return GrowthCraftGrapes.grapes.getItem();
 	}
@@ -111,7 +128,7 @@ public class BlockGrapeBlock extends Block
 	@Override
 	public int quantityDropped(Random random)
 	{
-		return random.nextInt(3) == 0 ? 2 : 1;
+		return grapesDropMin + random.nextInt(grapesDropMax - grapesDropMin);
 	}
 
 	/************
