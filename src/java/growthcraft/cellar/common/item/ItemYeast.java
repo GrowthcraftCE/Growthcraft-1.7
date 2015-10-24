@@ -32,6 +32,7 @@ public class ItemYeast extends Item
 		return super.getUnlocalizedName(stack) + stack.getItemDamage();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{

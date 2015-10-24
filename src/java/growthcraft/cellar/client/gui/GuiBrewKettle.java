@@ -35,6 +35,7 @@ public class GuiBrewKettle extends GuiCellar
 		this.te = brewKettle;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void initGui()
 	{

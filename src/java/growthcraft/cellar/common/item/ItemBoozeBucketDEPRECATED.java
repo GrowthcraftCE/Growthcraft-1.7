@@ -69,6 +69,7 @@ public class ItemBoozeBucketDEPRECATED extends Item
 	/************
 	 * TOOLTIP
 	 ************/
+	@SuppressWarnings("rawtypes")
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
@@ -76,6 +77,7 @@ public class ItemBoozeBucketDEPRECATED extends Item
 		writeModifierTooltip(stack, player, list, bool);
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		final String s = UnitFormatter.fluidModifier(getBooze(stack.getItemDamage()));
@@ -122,6 +124,7 @@ public class ItemBoozeBucketDEPRECATED extends Item
 			StatCollector.translateToLocal("grc.cellar.item.booze_bucket.deprecated_suffix");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list)

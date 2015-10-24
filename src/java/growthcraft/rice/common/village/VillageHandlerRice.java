@@ -18,6 +18,7 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 
 public class VillageHandlerRice implements IVillageTradeHandler, IVillageCreationHandler
 {
+	@SuppressWarnings("unchecked")
 	@Override
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
 	{

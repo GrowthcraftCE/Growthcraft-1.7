@@ -34,6 +34,7 @@ public class GuiFruitPress extends GuiCellar
 		this.te = fruitPress;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void initGui()
 	{

@@ -294,6 +294,7 @@ public class ItemBoozeBottle extends ItemFood
 		if (s != null) list.add(s);
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected void writePotionTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool, int potnID, int potnTime)
 	{
 		final PotionEffect pe = makePotionEffect(stack, potnID, potnTime);
@@ -311,6 +312,7 @@ public class ItemBoozeBottle extends ItemFood
 		list.add(EnumChatFormatting.GRAY + s);
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected void writeNauseaTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool, float nauseaChance, int nauseaTime)
 	{
 		final PotionEffect nausea = new PotionEffect(Potion.confusion.id, nauseaTime, 0);
@@ -398,6 +400,7 @@ public class ItemBoozeBottle extends ItemFood
 		return StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(getBoozeArray()));
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list)
