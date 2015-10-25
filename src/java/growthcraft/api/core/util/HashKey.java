@@ -13,7 +13,7 @@ public abstract class HashKey
 	@Override
 	public boolean equals(Object other)
 	{
-		if (!(other instanceof ItemKey)) return false;
+		if (!(other instanceof HashKey)) return false;
 		return hashCode() == other.hashCode();
 	}
 }
