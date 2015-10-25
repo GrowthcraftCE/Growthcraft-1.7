@@ -11,7 +11,7 @@ public class Config extends ConfigBase
 	public float hopVineFlowerSpawnRate = 40.0f;
 
 
-	@ConfigOption(catergory="Drops", name="Hops vine drop rarity", desc="[Higher -> Rarer]")
+	@ConfigOption(catergory="Drops", name="Hops vine drop rarity", desc="[Higher -> Common]")
 	public int hopsVineDropRarity = 10;
 
 

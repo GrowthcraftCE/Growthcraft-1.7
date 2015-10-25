@@ -8,7 +8,7 @@ public class Config extends ConfigBase
 	public float riceGrowthRate = 25.0f;
 
 
-	@ConfigOption(catergory="Drops", name="Rice grass drop rarity", desc="[Higher -> Rarer]")
+	@ConfigOption(catergory="Drops", name="Rice grass drop rarity", desc="[Higher -> Common]")
 	public int riceSeedDropRarity = 3;
 
 

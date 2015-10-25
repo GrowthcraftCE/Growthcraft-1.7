@@ -31,7 +31,7 @@ public class Config extends ConfigBase
 	@ConfigOption(catergory="Drops", name="Bayanus Yeast rarity", desc="[Higher -> Rarer]")
 	public int bayanusDropRarity = 20;
 
-	@ConfigOption(catergory="Drops", name="Grape vine drop rarity", desc="[Higher -> Rarer]")
+	@ConfigOption(catergory="Drops", name="Grape vine drop rarity", desc="[Higher -> Common]")
 	public int vineGrapeDropRarity = 10;
 
 
