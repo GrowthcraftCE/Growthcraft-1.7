@@ -11,6 +11,8 @@ import growthcraft.cellar.network.PacketClearTankButtonWByte;
 import growthcraft.cellar.network.PacketSwitchTankButton;
 import growthcraft.core.util.UnitFormatter;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
@@ -21,9 +23,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 
+@SideOnly(Side.CLIENT)
 public class GuiBrewKettle extends GuiCellar
 {
-	private final ResourceLocation res = new ResourceLocation("grccellar" , "textures/guis/brewkettle_gui.png");
+	protected static final ResourceLocation brewKettleResource = new ResourceLocation("grccellar" , "textures/guis/brewkettle_gui.png");
 	private TileEntityBrewKettle te;
 	private GuiButtonDiscard button0;
 	private GuiButtonDiscard button1;
@@ -40,13 +43,13 @@ public class GuiBrewKettle extends GuiCellar
 	public void initGui()
 	{
 		super.initGui();
-		this.button0 = new GuiButtonDiscard(this.res, 1, this.guiLeft + 27, this.guiTop + 54);
+		this.button0 = new GuiButtonDiscard(brewKettleResource, 1, this.guiLeft + 27, this.guiTop + 54);
 		this.button0.enabled = false;
 
-		this.button1 = new GuiButtonDiscard(this.res, 1, this.guiLeft + 133, this.guiTop + 54);
+		this.button1 = new GuiButtonDiscard(brewKettleResource, 1, this.guiLeft + 133, this.guiTop + 54);
 		this.button1.enabled = false;
 
-		this.button2 = new GuiButtonSwitch(this.res, 1, this.guiLeft + 133, this.guiTop + 37);
+		this.button2 = new GuiButtonSwitch(brewKettleResource, 1, this.guiLeft + 133, this.guiTop + 37);
 		this.button2.enabled = false;
 
 		this.buttonList.add(this.button0);
@@ -104,7 +107,7 @@ public class GuiBrewKettle extends GuiCellar
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(res);
+		this.mc.getTextureManager().bindTexture(brewKettleResource);
 		final int w = (this.width - this.xSize) / 2;
 		final int h = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize);
@@ -121,13 +124,13 @@ public class GuiBrewKettle extends GuiCellar
 		if (this.te.getFluidAmountScaled(52, 0) > 0)
 		{
 			drawTank(w, h, 46, 17, 16, this.te.getFluidAmountScaled(52, 0), this.te.getFluidStack(0), this.te.getFluidTank(0));
-			this.mc.getTextureManager().bindTexture(res);
+			this.mc.getTextureManager().bindTexture(brewKettleResource);
 		}
 
 		if (this.te.getFluidAmountScaled(52, 1) > 0)
 		{
 			drawTank(w, h, 114, 17, 16, this.te.getFluidAmountScaled(52, 1), this.te.getFluidStack(1), this.te.getFluidTank(1));
-			this.mc.getTextureManager().bindTexture(res);
+			this.mc.getTextureManager().bindTexture(brewKettleResource);
 		}
 	}
 

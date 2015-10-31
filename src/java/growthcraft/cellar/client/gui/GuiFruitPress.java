@@ -9,6 +9,8 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.network.PacketClearTankButton;
 import growthcraft.core.util.UnitFormatter;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
@@ -21,10 +23,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 
+@SideOnly(Side.CLIENT)
 public class GuiFruitPress extends GuiCellar
 {
+	protected static final ResourceLocation fruitPressResource = new ResourceLocation("grccellar" , "textures/guis/fruitpress_gui.png");
 	private static final Logger logger = LogManager.getLogger();
-	private final ResourceLocation res = new ResourceLocation("grccellar" , "textures/guis/fruitpress_gui.png");
 	private TileEntityFruitPress te;
 	private GuiButtonDiscard button;
 
@@ -39,7 +42,7 @@ public class GuiFruitPress extends GuiCellar
 	public void initGui()
 	{
 		super.initGui();
-		this.button = new GuiButtonDiscard(this.res, 1, this.guiLeft + 108, this.guiTop + 54);
+		this.button = new GuiButtonDiscard(fruitPressResource, 1, this.guiLeft + 108, this.guiTop + 54);
 		this.buttonList.add(this.button);
 		this.button.enabled = false;
 	}
@@ -74,7 +77,7 @@ public class GuiFruitPress extends GuiCellar
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(res);
+		this.mc.getTextureManager().bindTexture(fruitPressResource);
 		final int w = (this.width - this.xSize) / 2;
 		final int h = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize);
@@ -84,7 +87,7 @@ public class GuiFruitPress extends GuiCellar
 		if (this.te.getFluidAmountScaled(52, 0) > 0)
 		{
 			drawTank(w, h, 89, 17, 16, this.te.getFluidAmountScaled(52, 0), this.te.getFluidStack(0), this.te.getFluidTank(0));
-			this.mc.getTextureManager().bindTexture(res);
+			this.mc.getTextureManager().bindTexture(fruitPressResource);
 		}
 	}
 

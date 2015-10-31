@@ -3,6 +3,8 @@ package growthcraft.cellar.client.gui;
 import java.util.Iterator;
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
@@ -10,6 +12,7 @@ import net.minecraft.inventory.Container;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+@SideOnly(Side.CLIENT)
 public class GuiCellar extends GuiContainer
 {
 	public GuiCellar(Container container)
@@ -29,7 +32,7 @@ public class GuiCellar extends GuiContainer
 
 	protected void drawToolTipAtMousePos(int par1, int par2) {}
 
-	protected void drawText(List list, int par2, int par3, FontRenderer font)
+	protected void drawText(List<String> list, int par2, int par3, FontRenderer font)
 	{
 		if (!list.isEmpty())
 		{
@@ -87,7 +90,7 @@ public class GuiCellar extends GuiContainer
 
 			for (int k2 = 0; k2 < list.size(); ++k2)
 			{
-				final String s1 = (String)list.get(k2);
+				final String s1 = list.get(k2);
 				font.drawStringWithShadow(s1, i1, j1, -1);
 
 				if (k2 == 0)

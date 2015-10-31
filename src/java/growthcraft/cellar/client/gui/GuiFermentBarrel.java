@@ -11,6 +11,8 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.network.PacketClearTankButton;
 import growthcraft.core.util.UnitFormatter;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
@@ -24,9 +26,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 
+@SideOnly(Side.CLIENT)
 public class GuiFermentBarrel extends GuiCellar
 {
-	private final ResourceLocation res = new ResourceLocation("grccellar" , "textures/guis/fermentbarrel_gui.png");
+	protected static final ResourceLocation fermentBarrelResource = new ResourceLocation("grccellar" , "textures/guis/fermentbarrel_gui.png");
 	private TileEntityFermentBarrel te;
 	private GuiButtonDiscard button;
 
@@ -41,7 +44,7 @@ public class GuiFermentBarrel extends GuiCellar
 	public void initGui()
 	{
 		super.initGui();
-		this.button = new GuiButtonDiscard(this.res, 1, this.guiLeft + 116, this.guiTop + 54);
+		this.button = new GuiButtonDiscard(fermentBarrelResource, 1, this.guiLeft + 116, this.guiTop + 54);
 		this.buttonList.add(this.button);
 		this.button.enabled = false;
 	}
@@ -76,7 +79,7 @@ public class GuiFermentBarrel extends GuiCellar
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(res);
+		this.mc.getTextureManager().bindTexture(fermentBarrelResource);
 		final int w = (this.width - this.xSize) / 2;
 		final int h = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize);
@@ -131,7 +134,7 @@ public class GuiFermentBarrel extends GuiCellar
 		{
 			final FluidStack fluid = this.te.getFluidStack(0);
 			drawTank(w, h, 63, 17, 50, i, fluid, this.te.getFluidTank(0));
-			this.mc.getTextureManager().bindTexture(res);
+			this.mc.getTextureManager().bindTexture(fermentBarrelResource);
 
 			itemRender.zLevel = 100.0F;
 
