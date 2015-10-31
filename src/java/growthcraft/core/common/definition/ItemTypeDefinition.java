@@ -28,7 +28,7 @@ import javax.annotation.Nonnull;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T>
+public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> implements ISubItemStackFactory
 {
 	public ItemTypeDefinition(@Nonnull T item)
 	{
