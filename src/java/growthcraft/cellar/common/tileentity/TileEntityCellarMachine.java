@@ -257,7 +257,7 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 	{
 		final NBTTagCompound nbt = new NBTTagCompound();
 		writeTanksToNBT(nbt);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbt);
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 64, nbt);
 	}
 
 	@Override
