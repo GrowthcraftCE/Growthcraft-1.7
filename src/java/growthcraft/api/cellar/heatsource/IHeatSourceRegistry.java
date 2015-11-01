@@ -12,12 +12,14 @@ public interface IHeatSourceRegistry
 	 * @param meta - possible block meta, if this is -1 treats it as a wild card
 	 * @param heat - how effective is this heat source, fire is 1.0f by default, higher the hotter, lower the cooler
 	 **/
+	public void addHeatSource(Block block, int meta, IHeatSourceBlock heat);
 	public void addHeatSource(Block block, int meta, float heat);
 	public void addHeatSource(Block block, int meta);
+	public void addHeatSource(Block block, IHeatSourceBlock heat);
 	public void addHeatSource(Block block);
 
-	public float getHeatMultiplier(Block block, int meta);
-	public float getHeatMultiplier(Block block);
+	public IHeatSourceBlock getHeatSource(Block block, int meta);
+	public IHeatSourceBlock getHeatSource(Block block);
 
 	public boolean isBlockHeatSource(Block block, int meta);
 	public boolean isBlockHeatSource(Block block);

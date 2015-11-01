@@ -10,7 +10,7 @@ import net.minecraft.block.Block;
 
 public class HeatSourceRegistry implements IHeatSourceRegistry
 {
-	static class HeatMap extends HashMap<Integer, Float>
+	static class HeatMap extends HashMap<Integer, IHeatSourceBlock>
 	{
 		public static final long serialVersionUID = 1L;
 	}
@@ -26,7 +26,7 @@ public class HeatSourceRegistry implements IHeatSourceRegistry
 
 	private HeatSourceTree heatSources = new HeatSourceTree();
 
-	public void addHeatSource(@Nonnull Block block, int meta, float heat)
+	public void addHeatSource(@Nonnull Block block, int meta, IHeatSourceBlock heat)
 	{
 		if (!heatSources.containsKey(block))
 		{
@@ -36,9 +36,19 @@ public class HeatSourceRegistry implements IHeatSourceRegistry
 		map.put(meta, heat);
 	}
 
+	public void addHeatSource(@Nonnull Block block, int meta, float heat)
+	{
+		addHeatSource(block, meta, new GenericHeatSourceBlock(block, heat));
+	}
+
 	public void addHeatSource(@Nonnull Block block, int meta)
 	{
 		addHeatSource(block, meta, DEFAULT_HEAT);
+	}
+
+	public void addHeatSource(@Nonnull Block block, IHeatSourceBlock heat)
+	{
+		addHeatSource(block, NO_META, heat);
 	}
 
 	public void addHeatSource(@Nonnull Block block)
@@ -46,20 +56,20 @@ public class HeatSourceRegistry implements IHeatSourceRegistry
 		addHeatSource(block, NO_META);
 	}
 
-	public float getHeatMultiplier(Block block, int meta)
+	public IHeatSourceBlock getHeatSource(Block block, int meta)
 	{
 		final HeatMap map = heatSources.get(block);
-		if (map == null) return NO_HEAT;
+		if (map == null) return null;
 
-		Float f = map.get(meta);
+		IHeatSourceBlock f = map.get(meta);
 		if (f == null) f = map.get(NO_META);
-		if (f == null) return NO_HEAT;
+		if (f == null) return null;
 		return f;
 	}
 
-	public float getHeatMultiplier(Block block)
+	public IHeatSourceBlock getHeatSource(Block block)
 	{
-		return getHeatMultiplier(block, NO_META);
+		return getHeatSource(block, NO_META);
 	}
 
 	public boolean isBlockHeatSource(Block block, int meta)

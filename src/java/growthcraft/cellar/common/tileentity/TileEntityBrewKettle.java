@@ -3,6 +3,7 @@ package growthcraft.cellar.common.tileentity;
 import growthcraft.api.cellar.brewing.BrewingRegistry;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.cellar.heatsource.IHeatSourceBlock;
 import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -84,14 +85,23 @@ public class TileEntityBrewKettle extends TileEntityCellarMachine
 		if (this.isFluidTankEmpty(1)) return true;
 
 		final FluidStack stack = CellarRegistry.instance().brewing().getBrewingFluidStack(getFluidStack(0), this.invSlots[0]);
-		return stack.isFluidEqual(getFluidStack(1));
+		if (stack != null)
+		{
+			return stack.isFluidEqual(getFluidStack(1));
+		}
+		return false;
 	}
 
 	public float getHeatMultiplier()
 	{
-		final Block block = this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord);
-		final int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord - 1, this.zCoord);
-		return CellarRegistry.instance().heatSource().getHeatMultiplier(block, meta);
+		final Block block = worldObj.getBlock(xCoord, yCoord - 1, zCoord);
+		final int meta = worldObj.getBlockMetadata(xCoord, yCoord - 1, zCoord);
+		final IHeatSourceBlock heatSource = CellarRegistry.instance().heatSource().getHeatSource(block, meta);
+		if (heatSource != null)
+		{
+			return heatSource.getHeat(worldObj, xCoord, yCoord - 1, zCoord);
+		}
+		return 0.0f;
 	}
 
 	private void produceGrain()
