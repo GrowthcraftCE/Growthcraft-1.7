@@ -11,6 +11,10 @@ public class Config extends ConfigBase
 	public int villagerBrewerID = 10;
 
 
+	@ConfigOption(catergory="Booze Fluid", name="Booze blocks use water material", desc="Should Booze blocks behave like water (introduces water bottle bug, but fluids behave like fluids.)?")
+	public boolean boozeIsWater = true;
+
+
 	@ConfigOption(catergory="Fermenting Barrel", name="Ferment Barrel fermenting time", desc="[Higher -> Slower]")
 	public int fermentSpeed = 24000;
 

@@ -26,6 +26,12 @@ public class Materials
 		public MaterialBooze(MapColor color)
 		{
 			super(color);
+			setNoPushMobility();
+		}
+
+		public boolean isLiquid()
+		{
+			return true;
 		}
 	}
 

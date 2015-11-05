@@ -1,12 +1,19 @@
 package growthcraft.cellar.common.block;
 
+import java.util.Random;
+
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.block.Materials;
+import growthcraft.core.client.particle.EntityFXDropParticle;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
@@ -21,10 +28,10 @@ public class BlockFluidBooze extends BlockFluidClassic
 
 	public BlockFluidBooze(Fluid fluid, int kolor)
 	{
-		super(fluid, Materials.booze);
+		super(fluid, GrowthCraftCellar.getConfig().boozeIsWater ? Material.water : Materials.booze);
+		setColor(kolor);
 		setBlockName(fluid.getUnlocalizedName());
 		setCreativeTab(GrowthCraftCellar.tab);
-		this.color = kolor;
 	}
 
 	public BlockFluidBooze(Fluid fluid)
@@ -35,6 +42,11 @@ public class BlockFluidBooze extends BlockFluidClassic
 	public BlockFluidBooze setColor(int kolor)
 	{
 		this.color = kolor;
+		// http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
+		final float lum = 0.2126f * (((color >> 16) & 0xFF) / 255.0f) +
+			0.7152f * (((color >> 8) & 0xFF) / 255.0f) +
+			0.0722f * ((color & 0xFF) / 255.0f);
+		setLightOpacity((int)((1f - lum) * 15));
 		return this;
 	}
 
@@ -77,5 +89,32 @@ public class BlockFluidBooze extends BlockFluidClassic
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
 	{
 		return color;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World world, int x, int y, int z, Random rand)
+	{
+		super.randomDisplayTick(world, x, y, z, rand);
+
+		if (rand.nextInt(10) == 0 &&
+			World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) &&
+			!world.getBlock(x, y - 2, z).getMaterial().blocksMovement())
+		{
+			final double px = x + rand.nextFloat();
+			final double py = y - 1.05D;
+			final double pz = z + rand.nextFloat();
+			final float particleRed = ((color >> 16) & 0xFF) / 255.0f;
+			final float particleGreen = ((color >> 8) & 0xFF) / 255.0f;
+			final float particleBlue = (color & 0xFF) / 255.0f;
+			final EntityFX fx = new EntityFXDropParticle(world, px, py, pz, particleRed, particleGreen, particleBlue);
+			FMLClientHandler.instance().getClient().effectRenderer.addEffect(fx);
+		}
+	}
+
+	@Override
+	public boolean canDropFromExplosion(Explosion explosion)
+	{
+		return false;
 	}
 }
