@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import growthcraft.apples.GrowthCraftApples;
+import growthcraft.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -193,7 +194,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 
 				if (l1 >= 0)
 				{
-					world.setBlockMetadataWithNotify(x, y, z, meta & -9, 4);
+					world.setBlockMetadataWithNotify(x, y, z, meta & -9, BlockFlags.SUPRESS_RENDER);
 				}
 				else
 				{
@@ -270,7 +271,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 	@Override
 	public void beginLeavesDecay(World world, int x, int y, int z)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | LeavesStage.DECAY_MASK, 4);
+		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | LeavesStage.DECAY_MASK, BlockFlags.SUPRESS_RENDER);
 	}
 
 	@Override

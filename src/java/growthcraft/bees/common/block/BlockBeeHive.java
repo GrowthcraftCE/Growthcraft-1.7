@@ -5,6 +5,7 @@ import java.util.Random;
 
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.client.renderer.RenderBeeHive;
+import growthcraft.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -91,7 +92,7 @@ public class BlockBeeHive extends Block
 				b0 = 4;
 			}
 
-			world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+			world.setBlockMetadataWithNotify(x, y, z, b0, BlockFlags.SEND_TO_CLIENT);
 		}
 	}
 
@@ -102,22 +103,22 @@ public class BlockBeeHive extends Block
 
 		if (face == 0)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+			world.setBlockMetadataWithNotify(x, y, z, 2, BlockFlags.SEND_TO_CLIENT);
 		}
 
 		if (face == 1)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+			world.setBlockMetadataWithNotify(x, y, z, 5, BlockFlags.SEND_TO_CLIENT);
 		}
 
 		if (face == 2)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+			world.setBlockMetadataWithNotify(x, y, z, 3, BlockFlags.SEND_TO_CLIENT);
 		}
 
 		if (face == 3)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
+			world.setBlockMetadataWithNotify(x, y, z, 4, BlockFlags.SEND_TO_CLIENT);
 		}
 	}
 

@@ -54,7 +54,7 @@ public class BlockAppleSapling extends BlockBush implements IGrowable
 
 		if ((meta & 8) == 0)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, meta | 8, 4);
+			world.setBlockMetadataWithNotify(x, y, z, meta | 8, BlockFlags.SUPRESS_RENDER);
 		}
 		else
 		{

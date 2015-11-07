@@ -132,7 +132,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 
 		if ((meta & 8) == 0)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, meta | 8, BlockFlags.ALL);
+			world.setBlockMetadataWithNotify(x, y, z, meta | 8, BlockFlags.SUPRESS_RENDER);
 		}
 		else
 		{

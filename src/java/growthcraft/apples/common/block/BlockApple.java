@@ -61,7 +61,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.UPDATE_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.SEND_TO_CLIENT);
 		AppleCore.announceGrowthTick(this, world, x, y, z, meta);
 	}
 

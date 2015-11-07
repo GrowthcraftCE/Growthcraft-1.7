@@ -52,21 +52,27 @@ public class TileEntityBrewKettle extends TileEntityCellarMachine
 		};
 	}
 
+	protected void markForFluidUpdate()
+	{
+		// Brew Kettles need to update their rendering state when a fluid
+		// changes, most of the other cellar blocks are unaffected by this
+		markForBlockUpdate();
+	}
+
 	@Override
 	public String getDefaultInventoryName()
 	{
 		return "container.grc.brewKettle";
 	}
 
-	private void resetTime()
+	protected boolean resetTime()
 	{
-		this.time = 0.0;
-	}
-
-	@Override
-	protected void sendUpdate()
-	{
-		this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+		if (this.time != 0)
+		{
+			this.time = 0.0;
+			return true;
+		}
+		return false;
 	}
 
 	public boolean hasFire()
@@ -131,7 +137,7 @@ public class TileEntityBrewKettle extends TileEntityCellarMachine
 
 		this.invSlots[0] = ItemUtils.consumeStack(this.invSlots[0]);
 
-		sendUpdate();
+		markForBlockUpdate();
 	}
 
 	public int getBrewingTime()
@@ -158,10 +164,11 @@ public class TileEntityBrewKettle extends TileEntityCellarMachine
 		}
 		else
 		{
-			resetTime();
+			if (resetTime())
+			{
+				markForInventoryUpdate();
+			}
 		}
-
-		markForUpdate();
 	}
 
 	private void debugMsg()
@@ -283,7 +290,7 @@ public class TileEntityBrewKettle extends TileEntityCellarMachine
 		final int f = tanks[0].fill(resource, doFill);
 		if (f > 0)
 		{
-			sendUpdate();
+			markForBlockUpdate();
 		}
 		return f;
 	}
@@ -305,7 +312,7 @@ public class TileEntityBrewKettle extends TileEntityCellarMachine
 		final FluidStack d = tanks[1].drain(maxDrain, doDrain);
 		if (d != null)
 		{
-			sendUpdate();
+			markForBlockUpdate();
 		}
 		return d;
 	}
@@ -327,6 +334,6 @@ public class TileEntityBrewKettle extends TileEntityCellarMachine
 		this.getFluidTank(0).fill(f1, true);
 		this.getFluidTank(1).fill(f0, true);
 
-		sendUpdate();
+		markForBlockUpdate();
 	}
 }

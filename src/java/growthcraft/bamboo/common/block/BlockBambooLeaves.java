@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -208,7 +209,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public void beginLeavesDecay(World world, int x, int y, int z)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | 8, 4);
+		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | 8, BlockFlags.SUPRESS_RENDER);
 	}
 
 	@Override

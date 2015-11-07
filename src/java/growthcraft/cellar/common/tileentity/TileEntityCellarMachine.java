@@ -23,35 +23,56 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 	protected ItemStack[] invSlots;
 	protected CellarTank[] tanks;
 	protected int[] tankCaps;
-	protected boolean update;
+	protected boolean needInventoryUpdate;
+	protected boolean needBlockUpdate;
 
 	public abstract String getDefaultInventoryName();
 	public abstract void updateMachine();
 
-	protected void markForUpdate()
+	// Call this when you modified the inventory, or your not sure what
+	// kind of update you require
+	protected void markForInventoryUpdate()
 	{
-		update = true;
+		needInventoryUpdate = true;
+	}
+
+	// Call this ONLY when you absolutely need to update the block's state
+	// @eg rendering
+	protected void markForBlockUpdate()
+	{
+		needBlockUpdate = true;
+	}
+
+	// Call this when you modify a fluid tank outside of its usual methods
+	protected void markForFluidUpdate()
+	{
+		//
+	}
+
+	protected void checkUpdateFlags()
+	{
+		if (needInventoryUpdate)
+		{
+			needInventoryUpdate = false;
+			this.markDirty();
+		}
+		if (needBlockUpdate)
+		{
+			needBlockUpdate = false;
+			this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+		}
 	}
 
 	@Override
 	public void updateEntity()
 	{
 		super.updateEntity();
-		if (update)
-		{
-			update = false;
-			this.markDirty();
-		}
+		checkUpdateFlags();
 
 		if (!this.worldObj.isRemote)
 		{
 			updateMachine();
 		}
-	}
-
-	protected void sendUpdate()
-	{
-
 	}
 
 	@Override
@@ -334,6 +355,6 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 	{
 		tanks[slot].setFluid(null);
 
-		sendUpdate();
+		markForFluidUpdate();
 	}
 }

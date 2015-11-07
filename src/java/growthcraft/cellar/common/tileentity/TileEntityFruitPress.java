@@ -42,6 +42,16 @@ public class TileEntityFruitPress extends TileEntityCellarMachine
 		this.tanks = new CellarTank[] { new CellarTank(tankCaps[0], this) };
 	}
 
+	protected boolean resetTime()
+	{
+		if (this.time != 0)
+		{
+			this.time = 0;
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public String getDefaultInventoryName()
 	{
@@ -132,10 +142,12 @@ public class TileEntityFruitPress extends TileEntityCellarMachine
 		}
 		else
 		{
-			this.time = 0;
+			if (resetTime())
+			{
+				markForInventoryUpdate();
+			}
 		}
 
-		markForUpdate();
 	}
 
 	@Override

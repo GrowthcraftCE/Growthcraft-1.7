@@ -194,15 +194,15 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 			{
 				this.time = 0;
 				fermentItem();
+				markForInventoryUpdate();
 			}
-			markForUpdate();
 		}
 		else
 		{
 			if (time != 0)
 			{
 				this.time = 0;
-				markForUpdate();
+				markForInventoryUpdate();
 			}
 			if (canProduceYeast())
 			{
@@ -211,7 +211,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 				{
 					this.yeastTime = 0;
 					produceYeast();
-					markForUpdate();
+					markForInventoryUpdate();
 				}
 			}
 		}

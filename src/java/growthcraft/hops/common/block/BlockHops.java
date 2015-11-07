@@ -73,7 +73,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	{
 		final int previousMetadata = meta;
 		++meta;
-		world.setBlockMetadataWithNotify(x, y, z, meta, 3);
+		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.SEND_TO_CLIENT);
 		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
 	}
 
