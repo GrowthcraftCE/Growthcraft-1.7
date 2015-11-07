@@ -10,6 +10,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -47,13 +49,16 @@ public class BlockBambooWall extends Block
 
 	public boolean canConnectWallTo(IBlockAccess world, int x, int y, int z)
 	{
+		if (world.isAirBlock(x, y, z)) return false;
+
 		final Block block = world.getBlock(x, y, z);
 
-		if (this == block) return true;
-		if (Blocks.fence_gate == block) return true;
-		if (GrowthCraftBamboo.bambooFenceGate.getBlock() == block) return true;
-		if (GrowthCraftBamboo.bambooFence.getBlock() == block) return true;
-		if (GrowthCraftBamboo.bambooStalk.getBlock() == block) return true;
+		if (this == block ||
+			GrowthCraftBamboo.bambooStalk.getBlock() == block ||
+			Blocks.glass_pane == block ||
+			block instanceof BlockFenceGate ||
+			block instanceof BlockFence ||
+			block.renderAsNormalBlock()) return true;
 
 		return false;
 	}
