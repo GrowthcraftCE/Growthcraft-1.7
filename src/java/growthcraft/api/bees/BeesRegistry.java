@@ -130,16 +130,13 @@ public class BeesRegistry
 	 */
 	public boolean isItemBee(ItemStack itemstack)
 	{
-		if (itemstack == null)
-		{
-			return false;
-		}
-
+		if (itemstack == null) return false;
 		return this.beesList.contains(itemstack.getItem());
 	}
 
 	public boolean isBlockFlower(Block block, int meta)
 	{
+		if (block == null) return false;
 		return this.flowersList.contains(new ItemKey(block, meta)) ||
 			this.flowersList.contains(new ItemKey(block, NO_META));
 	}
