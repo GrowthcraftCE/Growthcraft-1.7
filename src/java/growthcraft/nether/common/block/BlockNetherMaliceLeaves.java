@@ -325,8 +325,8 @@ public class BlockNetherMaliceLeaves extends BlockLeavesBase implements IShearab
 	{
 		icons = new IIcon[2];
 
-		icons[0] = reg.registerIcon("leaves_oak");
-		icons[1] = reg.registerIcon("leaves_oak_opaque");
+		icons[0] = reg.registerIcon("grcnether:leaves_malice");
+		icons[1] = reg.registerIcon("grcnether:leaves_malice_opaque");
 	}
 
 	@Override
@@ -359,21 +359,21 @@ public class BlockNetherMaliceLeaves extends BlockLeavesBase implements IShearab
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
 	{
-		return 0xA99F6E;
+		return 0xFFFFFF;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderColor(int meta)
 	{
-		return 0xA99F6E;
+		return 0xFFFFFF;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
 	{
-		return 0xA99F6E;
+		return 0xFFFFFF;
 	}
 
 	/************
