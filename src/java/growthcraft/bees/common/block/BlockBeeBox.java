@@ -176,9 +176,12 @@ public class BlockBeeBox extends BlockContainer
 				{
 					flower = world.getBlock(i + loopx, y, k + loopz);
 					fm = world.getBlockMetadata(i + loopx, y, k + loopz);
-					if (isBlockFlower(flower, fm))
+					if (flower != null)
 					{
-						list.add(Arrays.asList(world.getBlock(i + loopx, y, k + loopz), world.getBlockMetadata(i + loopx, y, k + loopz)));
+						if (isBlockFlower(flower, fm))
+						{
+							list.add(Arrays.asList(world.getBlock(i + loopx, y, k + loopz), world.getBlockMetadata(i + loopx, y, k + loopz)));
+						}
 					}
 				}
 			}
