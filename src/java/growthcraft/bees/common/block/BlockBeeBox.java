@@ -84,6 +84,34 @@ public class BlockBeeBox extends BlockContainer
 		return BeesRegistry.instance().isBlockFlower(block, meta);
 	}
 
+	private void gatherFlowersInRadius(World world, int x, int y, int z, int checkSize, List<List> list)
+	{
+		final int i = x - ((checkSize - 1) / 2);
+		final int k = z - ((checkSize - 1) / 2);
+
+		for (int loopx = 0; loopx < checkSize; loopx++)
+		{
+			for (int loopz = 0; loopz < checkSize; loopz++)
+			{
+				final int fx = i + loopx;
+				final int fy = y;
+				final int fz = k + loopz;
+				if (!world.isAirBlock(fx, fy, fz))
+				{
+					final Block flower = world.getBlock(fx, y, fz);
+					final int fm = world.getBlockMetadata(fx, y, fz);
+					if (flower != null)
+					{
+						if (isBlockFlower(flower, fm))
+						{
+							list.add(Arrays.asList(flower, fm));
+						}
+					}
+				}
+			}
+		}
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -163,31 +191,15 @@ public class BlockBeeBox extends BlockContainer
 		if (random.nextInt((int)(this.flowerSpawnRate / f) + 1) == 0)
 		{
 			final int checkSize = 5;
-			final int i = x - ((checkSize - 1) / 2);
-			final int k = z - ((checkSize - 1) / 2);
 			final List<List> list = te.flowerList;
-			Block flower;
-			int fm;
 
 			list.clear();
-			for (int loopx = 0; loopx < checkSize; loopx++)
-			{
-				for (int loopz = 0; loopz < checkSize; loopz++)
-				{
-					flower = world.getBlock(i + loopx, y, k + loopz);
-					fm = world.getBlockMetadata(i + loopx, y, k + loopz);
-					if (flower != null)
-					{
-						if (isBlockFlower(flower, fm))
-						{
-							list.add(Arrays.asList(world.getBlock(i + loopx, y, k + loopz), world.getBlockMetadata(i + loopx, y, k + loopz)));
-						}
-					}
-				}
-			}
+			gatherFlowersInRadius(world, x, y, z, checkSize, list);
 
 			if (list.size() > 0)
 			{
+				final int i = x - ((checkSize - 1) / 2);
+				final int k = z - ((checkSize - 1) / 2);
 				final int random_x = i + random.nextInt(checkSize);
 				final int random_z = k + random.nextInt(checkSize);
 				final List random_list = list.get(random.nextInt(list.size()));
