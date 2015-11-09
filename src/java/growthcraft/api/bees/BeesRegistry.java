@@ -1,6 +1,7 @@
 package growthcraft.api.bees;
 
 import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.util.BlockKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +27,7 @@ public class BeesRegistry
 	private final List<ItemKey> emptyHoneyCombList = new ArrayList<ItemKey>();
 	private final List<ItemKey> filledHoneyCombList = new ArrayList<ItemKey>();
 	private final Map<ItemKey, ItemStack> honeyCombMap = new HashMap<ItemKey, ItemStack>();
-	private final List<ItemKey> flowersList = new ArrayList<ItemKey>();
+	private final List<BlockKey> flowersList = new ArrayList<BlockKey>();
 
 	public static final BeesRegistry instance()
 	{
@@ -111,7 +112,7 @@ public class BeesRegistry
 	 */
 	public void addFlower(Block flower, int meta)
 	{
-		this.flowersList.add(new ItemKey(flower, meta));
+		this.flowersList.add(new BlockKey(flower, meta));
 	}
 
 	/**
@@ -137,7 +138,7 @@ public class BeesRegistry
 	public boolean isBlockFlower(Block block, int meta)
 	{
 		if (block == null) return false;
-		return this.flowersList.contains(new ItemKey(block, meta)) ||
-			this.flowersList.contains(new ItemKey(block, NO_META));
+		return this.flowersList.contains(new BlockKey(block, meta)) ||
+			this.flowersList.contains(new BlockKey(block, NO_META));
 	}
 }
