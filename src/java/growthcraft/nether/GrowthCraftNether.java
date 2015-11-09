@@ -13,7 +13,9 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraftforge.common.MinecraftForge;
 
 @Mod(
@@ -61,6 +63,11 @@ public class GrowthCraftNether
 		MinecraftForge.EVENT_BUS.register(new TextureStitchEventHandler());
 	}
 
+	private void registerRecipes()
+	{
+		GameRegistry.addShapelessRecipe(items.netherGhastPowder.asStack(3), Items.ghast_tear, Items.blaze_powder);
+	}
+
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
@@ -68,6 +75,7 @@ public class GrowthCraftNether
 		items.init();
 		booze.init();
 
+		registerRecipes();
 		CommonProxy.instance.initRenders();
 	}
 

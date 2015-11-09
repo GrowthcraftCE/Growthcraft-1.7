@@ -2,6 +2,7 @@ package growthcraft.nether.init;
 
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.nether.common.item.ItemEctoplasm;
+import growthcraft.nether.common.item.ItemNetherGhastPowder;
 import growthcraft.nether.common.item.ItemNetherMaliceFruit;
 import growthcraft.nether.common.item.ItemNetherMuertecap;
 import growthcraft.nether.common.item.ItemNetherPepper;
@@ -18,6 +19,7 @@ public class GrcNetherItems
 	public ItemDefinition netherPepper;
 	public ItemDefinition netherRashSpores;
 	public ItemDefinition netherSquashSeeds;
+	public ItemDefinition netherGhastPowder;
 
 	public GrcNetherItems() {}
 
@@ -29,6 +31,7 @@ public class GrcNetherItems
 		this.netherRashSpores = new ItemDefinition(new ItemNetherRashSpores());
 		this.netherSquashSeeds = new ItemDefinition(new ItemNetherSquashSeeds());
 		this.netherMaliceFruit = new ItemDefinition(new ItemNetherMaliceFruit());
+		this.netherGhastPowder = new ItemDefinition(new ItemNetherGhastPowder());
 	}
 
 	public void init()
@@ -44,5 +47,6 @@ public class GrcNetherItems
 		GameRegistry.registerItem(netherRashSpores.getItem(), "grcnether.netherRashSpores");
 		GameRegistry.registerItem(netherSquashSeeds.getItem(), "grcnether.netherSquashSeeds");
 		GameRegistry.registerItem(netherMaliceFruit.getItem(), "grcnether.netherMaliceFruitItem");
+		GameRegistry.registerItem(netherGhastPowder.getItem(), "grcnether.netherGhastPowder");
 	}
 }

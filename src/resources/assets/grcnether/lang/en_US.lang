@@ -12,6 +12,7 @@ item.grcnether.netherRashSpores.desc=It burns, it itches, it spreads and well yo
 item.grcnether.netherRashSpores.name=Nether Rash Spores
 item.grcnether.netherSquashSeeds.desc=Spooky looking seeds
 item.grcnether.netherSquashSeeds.name=Soul Squash Seeds
+item.grcnether.netherGhastPowder.name=Ghast Powder
 
 // Tiles
 tile.grcnether.netherBaalsRot.name=Baal's Rot
