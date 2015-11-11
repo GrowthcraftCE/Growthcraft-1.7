@@ -2,7 +2,7 @@ package growthcraft.bees;
 
 import growthcraft.core.ConfigBase;
 
-public class Config extends ConfigBase
+public class GrcBeesConfig extends ConfigBase
 {
 	@ConfigOption(catergory="World Gen", name="Biomes (IDs) That Generate Beehives", desc="Separate the IDs with ';' (without the quote marks)")
 	public String beeBiomesList = "1;4;18;27;28;129;132;155;156";
@@ -37,6 +37,15 @@ public class Config extends ConfigBase
 	@ConfigOption(catergory="Village", name="Spawn Village Apiarist Structure", desc="Should the apiarist structure be generated in villages?")
 	public boolean generateApiaristStructure;
 
+
+	@ConfigOption(catergory="Integration", name="Enable Growthcraft Bamboo Integration", desc="Should we integrate with Growthcraft Bamboo (if available)?")
+	public boolean enableGrcBambooIntegration = true;
+
+	@ConfigOption(catergory="Integration", name="Enable Growthcraft Nether Integration", desc="Should we integrate with Growthcraft Nether (if available)?")
+	public boolean enableGrcNetherIntegration = true;
+
+	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
+	public boolean enableWailaIntegration = true;
 
 	@ConfigOption(catergory="Integration", name="Enable Forestry Integration", desc="Should we integrate with Forestry (if available)?")
 	public boolean enableForestryIntegration = true;

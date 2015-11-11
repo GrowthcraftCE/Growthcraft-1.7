@@ -2,7 +2,7 @@ package growthcraft.apples;
 
 import growthcraft.core.ConfigBase;
 
-public class Config extends ConfigBase
+public class GrcApplesConfig extends ConfigBase
 {
 	// Should a ripe apple fall as an item?
 	@ConfigOption(catergory="Apple Tree", name="Allow natural apple falling?", desc="Should ripe apples fall from the tree?")
@@ -23,6 +23,9 @@ public class Config extends ConfigBase
 
 	@ConfigOption(catergory="Fruit Press", name="Apple Cider press time", desc="[Higher -> Slower]")
 	public int appleCiderPressingTime = 20;
+
+	@ConfigOption(catergory="Fruit Press", name="Apple Cider press yield", desc="How many milli-buckets are created per apple?")
+	public int appleCiderPressYield = 40;
 
 
 	@ConfigOption(catergory="Booze", name="Apple Cider Color", desc="What color should apple cider be?")

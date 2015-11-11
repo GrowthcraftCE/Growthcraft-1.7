@@ -2,7 +2,7 @@ package growthcraft.hops;
 
 import growthcraft.core.ConfigBase;
 
-public class Config extends ConfigBase
+public class GrcHopsConfig extends ConfigBase
 {
 	@ConfigOption(catergory="Hop Vine", name="Hop (Vine) growth rate", desc="[Higher -> Slower]")
 	public float hopVineGrowthRate = 25.0f;
@@ -20,6 +20,12 @@ public class Config extends ConfigBase
 
 	@ConfigOption(catergory="Brewing", name="Hop Ale (hopped) brew time", desc="[Higher -> Slower]")
 	public int hopAleHoppedBrewTime = 20;
+
+	@ConfigOption(catergory="Brewing", name="Hop Ale (no hops) brew yield", desc="How many milli-buckets are created per grain?")
+	public int hopAleBrewYield = 40;
+
+	@ConfigOption(catergory="Brewing", name="Hop Ale (hopped) brew yield", desc="How many milli-buckets are created per hop?")
+	public int hopAleHoppedBrewYield = 40;
 
 
 	@ConfigOption(catergory="Booze", name="Hop Ale Color", desc="What color should ale be?")

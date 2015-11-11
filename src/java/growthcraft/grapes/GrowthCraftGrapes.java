@@ -13,6 +13,7 @@ import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.ModuleContainer;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -75,9 +76,10 @@ public class GrowthCraftGrapes
 
 	public static Fluid[] grapeWineBooze;
 
-	private Config config;
+	private GrcGrapesConfig config = new GrcGrapesConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	public static Config getConfig()
+	public static GrcGrapesConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -85,8 +87,9 @@ public class GrowthCraftGrapes
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
+
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.grapes.integration.ThaumcraftModule());
 
 		//====================
 		// INIT
@@ -113,10 +116,12 @@ public class GrowthCraftGrapes
 		grapeWineBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(grapeWineBooze)
 			.setColor(config.grapeWineColor));
 
-		//====================
-		// REGISTRIES
-		//====================
+		modules.preInit();
+		register();
+	}
 
+	private void register()
+	{
 		GameRegistry.registerBlock(grapeVine0.getBlock(), "grc.grapeVine0");
 		GameRegistry.registerBlock(grapeVine1.getBlock(), "grc.grapeVine1");
 		GameRegistry.registerBlock(grapeLeaves.getBlock(), "grc.grapeLeaves");
@@ -130,7 +135,7 @@ public class GrowthCraftGrapes
 		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, grapeWine, "grc.grapeWine", grapeWineBucket_deprecated);
 		BoozeRegistryHelper.registerDefaultFermentation(grapeWineBooze);
 
-		CellarRegistry.instance().pressing().addPressing(grapes.getItem(), grapeWineBooze[0], config.grapeWinePressingTime, 40, Residue.newDefault(0.3F));
+		CellarRegistry.instance().pressing().addPressing(grapes.getItem(), grapeWineBooze[0], config.grapeWinePressingTime, config.grapeWinePressingYield, Residue.newDefault(0.3F));
 
 		CoreRegistry.instance().addVineDrop(grapes.asStack(), config.vineGrapeDropRarity);
 
@@ -168,6 +173,7 @@ public class GrowthCraftGrapes
 		NEI.hideItem(grapeBlock.asStack());
 
 		MinecraftForge.EVENT_BUS.register(this);
+		modules.register();
 	}
 
 	@EventHandler
@@ -178,6 +184,8 @@ public class GrowthCraftGrapes
 		final VillageHandlerGrapes handler = new VillageHandlerGrapes();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
+
+		modules.init();
 	}
 
 	@SubscribeEvent
@@ -198,6 +206,6 @@ public class GrowthCraftGrapes
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventGrapes());
 
-		if (config.enableThaumcraftIntegration) new growthcraft.grapes.integration.ThaumcraftModule().init();
+		modules.postInit();
 	}
 }

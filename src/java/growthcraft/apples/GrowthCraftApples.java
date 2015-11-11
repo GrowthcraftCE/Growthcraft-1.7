@@ -19,6 +19,7 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.ModuleContainer;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -68,9 +69,10 @@ public class GrowthCraftApples
 
 	public static Fluid[] appleCiderBooze;
 
-	private growthcraft.apples.Config config;
+	private GrcApplesConfig config = new GrcApplesConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	public static growthcraft.apples.Config getConfig()
+	public static GrcApplesConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -78,17 +80,15 @@ public class GrowthCraftApples
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.apples.Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/apples.conf");
 
-		//====================
-		// INIT
-		//====================
-		appleSapling      = new BlockDefinition(new BlockAppleSapling());
-		appleLeaves       = new BlockDefinition(new BlockAppleLeaves());
-		appleBlock        = new BlockDefinition(new BlockApple());
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.apples.integration.ThaumcraftModule());
 
-		appleSeeds        = new ItemDefinition(new ItemAppleSeeds());
+		appleSapling = new BlockDefinition(new BlockAppleSapling());
+		appleLeaves = new BlockDefinition(new BlockAppleLeaves());
+		appleBlock = new BlockDefinition(new BlockApple());
+
+		appleSeeds = new ItemDefinition(new ItemAppleSeeds());
 
 		appleCiderBooze = new Booze[4];
 		appleCiderFluids = new BlockBoozeDefinition[appleCiderBooze.length];
@@ -96,15 +96,18 @@ public class GrowthCraftApples
 		BoozeRegistryHelper.initializeBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, "grc.appleCider", config.appleCiderColor);
 
 		appleCider        = new ItemDefinition(new ItemBoozeBottle(4, -0.3F, appleCiderBooze)
-			.setColor(this.config.appleCiderColor)
+			.setColor(config.appleCiderColor)
 			.setTipsy(0.60F, 900)
 			.setPotionEffects(new int[] {Potion.field_76444_x.id}, new int[] {1800}));
 		appleCiderBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(appleCiderBooze)
-			.setColor(this.config.appleCiderColor));
+			.setColor(config.appleCiderColor));
 
-		//====================
-		// REGISTRIES
-		//====================
+		modules.preInit();
+		register();
+	}
+
+	public void register()
+	{
 		GameRegistry.registerBlock(appleSapling.getBlock(), "grc.appleSapling");
 		GameRegistry.registerBlock(appleLeaves.getBlock(), "grc.appleLeaves");
 		GameRegistry.registerBlock(appleBlock.getBlock(), "grc.appleBlock");
@@ -116,7 +119,7 @@ public class GrowthCraftApples
 		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", appleCiderBucket_deprecated);
 		BoozeRegistryHelper.registerDefaultFermentation(appleCiderBooze);
 
-		CellarRegistry.instance().pressing().addPressing(Items.apple, appleCiderBooze[0], this.config.appleCiderPressingTime, 40, Residue.newDefault(0.3F));
+		CellarRegistry.instance().pressing().addPressing(Items.apple, appleCiderBooze[0], config.appleCiderPressingTime, config.appleCiderPressYield, Residue.newDefault(0.3F));
 
 		MapGenHelper.registerVillageStructure(ComponentVillageAppleFarm.class, "grc.applefarm");
 
@@ -149,6 +152,8 @@ public class GrowthCraftApples
 		GameRegistry.registerFuelHandler(new AppleFuelHandler());
 
 		NEI.hideItem(appleBlock.asStack());
+
+		modules.register();
 	}
 
 	@EventHandler
@@ -158,6 +163,8 @@ public class GrowthCraftApples
 		final VillageHandlerApples handler = new VillageHandlerApples();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
+
+		modules.init();
 	}
 
 	@SubscribeEvent
@@ -176,6 +183,6 @@ public class GrowthCraftApples
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		if (config.enableThaumcraftIntegration) new growthcraft.apples.integration.ThaumcraftModule().init();
+		modules.postInit();
 	}
 }

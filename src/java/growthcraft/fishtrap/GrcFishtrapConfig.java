@@ -2,7 +2,7 @@ package growthcraft.fishtrap;
 
 import growthcraft.core.ConfigBase;
 
-public class Config extends ConfigBase
+public class GrcFishtrapConfig extends ConfigBase
 {
 	@ConfigOption(catergory="Fish Trap", name="Fish Trap catching rate", desc="[Higher -> Slower]")
 	public float fishTrapCatchRate = 55.0f;

@@ -2,7 +2,7 @@ package growthcraft.cellar;
 
 import growthcraft.core.ConfigBase;
 
-public class Config extends ConfigBase
+public class GrcCellarConfig extends ConfigBase
 {
 	@ConfigOption(catergory="Potions", name="Potion Tipsy ID")
 	public int potionTipsyID = 50;

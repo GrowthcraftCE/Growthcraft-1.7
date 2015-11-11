@@ -2,6 +2,7 @@ package growthcraft.core.integration;
 
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.common.block.IPaddy;
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.waila.CropDataProvider;
 import growthcraft.core.integration.waila.PaddyDataProvider;
 
@@ -14,6 +15,11 @@ import net.minecraft.item.Item;
 
 public class Waila extends WailaIntegrationBase
 {
+	public Waila()
+	{
+		super(GrowthCraftCore.MOD_ID);
+	}
+
 	@Optional.Method(modid = "Waila")
 	public static void register(IWailaRegistrar reg)
 	{

@@ -12,6 +12,7 @@ import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.event.PlayerInteractEventPaddy;
+import growthcraft.core.common.ModuleContainer;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -70,9 +71,10 @@ public class GrowthCraftRice
 
 	public static Fluid[] riceSakeBooze;
 
-	private Config config;
+	private GrcRiceConfig config = new GrcRiceConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	public static Config getConfig()
+	public static GrcRiceConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -80,8 +82,9 @@ public class GrowthCraftRice
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
+
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
 
 		//====================
 		// INIT
@@ -103,6 +106,12 @@ public class GrowthCraftRice
 			.setPotionEffects(new int[] {Potion.moveSpeed.id, Potion.jump.id}, new int[] {3600, 3600}));
 		riceSakeBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(riceSakeBooze).setColor(config.riceSakeColor));
 
+		modules.preInit();
+		register();
+	}
+
+	private void register()
+	{
 		//====================
 		// REGISTRIES
 		//====================
@@ -116,7 +125,7 @@ public class GrowthCraftRice
 		BoozeRegistryHelper.registerBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, riceSake, "grc.riceSake", riceSakeBucket_deprecated);
 		BoozeRegistryHelper.registerDefaultFermentation(riceSakeBooze);
 
-		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, rice.getItem(), riceSakeBooze[0], config.riceSakeBrewingTime, 25, Residue.newDefault(0.2F));
+		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, rice.getItem(), riceSakeBooze[0], config.riceSakeBrewingTime, config.riceSakeBrewingYield, Residue.newDefault(0.2F));
 
 		MinecraftForge.addGrassSeed(rice.asStack(), config.riceSeedDropRarity);
 
@@ -139,6 +148,8 @@ public class GrowthCraftRice
 		NEI.hideItem(riceBlock.asStack());
 
 		MinecraftForge.EVENT_BUS.register(this);
+
+		modules.postInit();
 	}
 
 	@EventHandler
@@ -151,6 +162,8 @@ public class GrowthCraftRice
 		final VillageHandlerRice handler = new VillageHandlerRice();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
+
+		modules.init();
 	}
 
 	@SubscribeEvent
@@ -171,6 +184,6 @@ public class GrowthCraftRice
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventRice());
 
-		if (config.enableThaumcraftIntegration) new growthcraft.rice.integration.ThaumcraftModule().init();
+		modules.postInit();
 	}
 }

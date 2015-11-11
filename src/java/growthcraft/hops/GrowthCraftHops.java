@@ -12,6 +12,7 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.ModuleContainer;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -69,9 +70,10 @@ public class GrowthCraftHops
 
 	public static Fluid[] hopAleBooze;
 
-	private growthcraft.hops.Config config;
+	private GrcHopsConfig config = new GrcHopsConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	public static growthcraft.hops.Config getConfig()
+	public static GrcHopsConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -79,8 +81,9 @@ public class GrowthCraftHops
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.hops.Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
+
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.hops.integration.ThaumcraftModule());
 
 		//====================
 		// INIT
@@ -101,6 +104,12 @@ public class GrowthCraftHops
 			.setPotionEffects(new int[] {Potion.digSpeed.id}, new int[] {3600}));
 		hopAleBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(hopAleBooze).setColor(config.hopAleColor));
 
+		modules.preInit();
+		register();
+	}
+
+	private void register()
+	{
 		//====================
 		// REGISTRIES
 		//====================
@@ -114,8 +123,8 @@ public class GrowthCraftHops
 		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle, "grc.hopAle", hopAleBucket_deprecated);
 		BoozeRegistryHelper.registerDefaultFermentation(hopAleBooze);
 
-		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, Items.wheat, hopAleBooze[4], config.hopAleBrewTime, 40, Residue.newDefault(0.3F));
-		CellarRegistry.instance().brewing().addBrewing(hopAleBooze[4], hops.getItem(), hopAleBooze[0], config.hopAleHoppedBrewTime, 40, Residue.newDefault(0.0F));
+		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, Items.wheat, hopAleBooze[4], config.hopAleBrewTime, config.hopAleBrewYield, Residue.newDefault(0.3F));
+		CellarRegistry.instance().brewing().addBrewing(hopAleBooze[4], hops.getItem(), hopAleBooze[0], config.hopAleHoppedBrewTime, config.hopAleHoppedBrewYield, Residue.newDefault(0.0F));
 
 		CoreRegistry.instance().addVineDrop(hops.asStack(2), config.hopsVineDropRarity);
 
@@ -142,6 +151,8 @@ public class GrowthCraftHops
 		NEI.hideItem(hopVine.asStack());
 
 		MinecraftForge.EVENT_BUS.register(this);
+
+		modules.register();
 	}
 
 	@EventHandler
@@ -152,6 +163,8 @@ public class GrowthCraftHops
 		final VillageHandlerHops handler = new VillageHandlerHops();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
+
+		modules.init();
 	}
 
 	@SubscribeEvent
@@ -170,6 +183,6 @@ public class GrowthCraftHops
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		if (config.enableThaumcraftIntegration) new growthcraft.hops.integration.ThaumcraftModule().init();
+		modules.postInit();
 	}
 }

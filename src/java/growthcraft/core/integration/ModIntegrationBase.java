@@ -23,6 +23,8 @@
  */
 package growthcraft.core.integration;
 
+import growthcraft.core.common.IModule;
+
 import cpw.mods.fml.common.Loader;
 
 import cpw.mods.fml.common.FMLLog;
@@ -32,10 +34,11 @@ import org.apache.logging.log4j.Level;
  * Base class for integrating other mods with Growthcraft, this idea was
  * taken from AE2.
  */
-public abstract class ModIntegrationBase
+public abstract class ModIntegrationBase implements IModule
 {
 	public final String parentModID;
 	public final String modID;
+	private boolean modLoaded;
 
 	public ModIntegrationBase(String parentMod, String integratingMod)
 	{
@@ -43,14 +46,79 @@ public abstract class ModIntegrationBase
 		this.modID = integratingMod;
 	}
 
+	public boolean modIsLoaded()
+	{
+		return modLoaded;
+	}
+
+	protected void doPreInit()
+	{
+
+	}
+
+	public final void preInit()
+	{
+		this.modLoaded = Loader.isModLoaded(modID);
+		if (modIsLoaded())
+		{
+			doPreInit();
+		}
+	}
+
+	protected void doInit()
+	{
+
+	}
+
+	public final void init()
+	{
+		if (modIsLoaded())
+		{
+			doInit();
+		}
+	}
+
+	protected void doRegister()
+	{
+
+	}
+
+	public final void register()
+	{
+		if (modIsLoaded())
+		{
+			doRegister();
+		}
+	}
+
+	protected void doPostInit()
+	{
+
+	}
+
+	public final void postInit()
+	{
+		if (modIsLoaded())
+		{
+			doPostInit();
+		}
+
+		// This method is kept around for reasons, you should use the
+		// IModule "do" methods instead
+		tryToIntegrate();
+	}
+
 	/**
 	 * Implement this method
 	 */
-	protected abstract void integrate();
-
-	public void init()
+	protected void integrate()
 	{
-		if (Loader.isModLoaded(modID))
+
+	}
+
+	public void tryToIntegrate()
+	{
+		if (modIsLoaded())
 		{
 			FMLLog.log(parentModID, Level.INFO, "Attemping to integrate with %s.", modID);
 			try

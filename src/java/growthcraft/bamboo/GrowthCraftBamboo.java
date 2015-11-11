@@ -28,6 +28,7 @@ import growthcraft.bamboo.handler.BambooFuelHandler;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.ModuleContainer;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
 
@@ -86,9 +87,10 @@ public class GrowthCraftBamboo
 
 	public static BiomeGenBase bambooBiome;
 
-	private Config config;
+	private GrcBambooConfig config = new GrcBambooConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	public static Config getConfig()
+	public static GrcBambooConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -96,8 +98,9 @@ public class GrowthCraftBamboo
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
+
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bamboo.integration.ThaumcraftModule());
 
 		//====================
 		// INIT
@@ -130,6 +133,12 @@ public class GrowthCraftBamboo
 				.setTemperatureRainfall(0.7F, 0.8F);
 		}
 
+		modules.preInit();
+		register();
+	}
+
+	private void register()
+	{
 		//====================
 		// REGISTRIES
 		//====================
@@ -202,6 +211,8 @@ public class GrowthCraftBamboo
 		GameRegistry.addSmelting(bamboo.getItem(), bambooCoal.asStack(), 0.075f);
 
 		NEI.hideItem(bambooDoor.asStack());
+
+		modules.register();
 	}
 
 	public void registerOres()
@@ -251,6 +262,8 @@ public class GrowthCraftBamboo
 		CommonProxy.instance.initRenders();
 		final VillageHandlerBamboo handler = new VillageHandlerBamboo();
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
+
+		modules.init();
 	}
 
 	@EventHandler
@@ -258,6 +271,6 @@ public class GrowthCraftBamboo
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventBamboo());
 
-		if (config.enableThaumcraftIntegration) new growthcraft.bamboo.integration.ThaumcraftModule().init();
+		modules.postInit();
 	}
 }

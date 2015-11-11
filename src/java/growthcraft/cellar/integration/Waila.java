@@ -13,6 +13,11 @@ import mcp.mobius.waila.api.IWailaRegistrar;
 
 public class Waila extends WailaIntegrationBase
 {
+	public Waila()
+	{
+		super(GrowthCraftCellar.MOD_ID);
+	}
+
 	@Optional.Method(modid = "Waila")
 	public static void register(IWailaRegistrar reg)
 	{

@@ -27,6 +27,7 @@ import growthcraft.cellar.util.YeastType;
 import growthcraft.core.common.AchievementPageGrowthcraft;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.ModuleContainer;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
 
@@ -89,9 +90,10 @@ public class GrowthCraftCellar
 
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
-	private growthcraft.cellar.Config config;
+	private GrcCellarConfig config = new GrcCellarConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	public static growthcraft.cellar.Config getConfig()
+	public static GrcCellarConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -99,7 +101,6 @@ public class GrowthCraftCellar
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.cellar.Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
 
 		//====================
@@ -114,6 +115,11 @@ public class GrowthCraftCellar
 		yeast = new ItemDefinition(new ItemYeast());
 		chievItemDummy = new ItemDefinition(new ItemChievDummy());
 
+		register();
+	}
+
+	private void register()
+	{
 		//====================
 		// REGISTRIES
 		//====================

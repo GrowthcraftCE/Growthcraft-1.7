@@ -2,26 +2,33 @@ package growthcraft.core.integration;
 
 import java.util.Random;
 
+import growthcraft.core.GrowthCraftCore;
+import squeek.applecore.api.AppleCoreAPI;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
-import squeek.applecore.api.AppleCoreAPI;
 
-public class AppleCore
+public class AppleCore extends ModIntegrationBase
 {
+	public static final String MOD_ID = "AppleCore";
 	private static boolean appleCoreLoaded;
 
-	private AppleCore() {}
-
-	public static void init()
+	public AppleCore()
 	{
-		appleCoreLoaded = Loader.isModLoaded("AppleCore");
+		super(GrowthCraftCore.MOD_ID, MOD_ID);
+	}
+
+	@Override
+	public void doInit()
+	{
+		appleCoreLoaded = Loader.isModLoaded(modID);
 	}
 
 	// abstract the AppleCoreAPI reference into an Optional.Method so that AppleCore is not a hard dependency
-	@Optional.Method(modid = "AppleCore")
+	@Optional.Method(modid = MOD_ID)
 	private static Event.Result validateGrowthTick_AC(Block block, World world, int x, int y, int z, Random random)
 	{
 		return AppleCoreAPI.dispatcher.validatePlantGrowth(block, world, x, y, z, random);
@@ -36,7 +43,7 @@ public class AppleCore
 	}
 
 	// abstract the AppleCoreAPI reference into an Optional.Method so that AppleCore is not a hard dependency
-	@Optional.Method(modid = "AppleCore")
+	@Optional.Method(modid = MOD_ID)
 	private static void announceGrowthTick_AC(Block block, World world, int x, int y, int z, int previousMetadata)
 	{
 		// 1.2.x - until there is an official 1.2.x release of AppleCore

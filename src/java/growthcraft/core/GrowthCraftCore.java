@@ -7,13 +7,13 @@ import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.item.ItemRope;
+import growthcraft.core.common.ModuleContainer;
 import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
 import growthcraft.core.event.HarvestDropsEventCore;
 import growthcraft.core.event.PlayerInteractEventAmazingStick;
 import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.event.TextureStitchEventCore;
 import growthcraft.core.handler.BucketHandler;
-import growthcraft.core.integration.AppleCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.ItemUtils;
 
@@ -57,9 +57,10 @@ public class GrowthCraftCore
 	public static BlockDefinition ropeBlock;
 	public static ItemDefinition rope;
 
-	private Config config;
+	private GrcCoreConfig config = new GrcCoreConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	public static Config getConfig()
+	public static GrcCoreConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -67,8 +68,11 @@ public class GrowthCraftCore
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
+
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.core.integration.ThaumcraftModule());
+		if (config.enableWailaIntegration) modules.add(new growthcraft.core.integration.Waila());
+		if (config.enableAppleCoreIntegration) modules.add(new growthcraft.core.integration.AppleCore());
 
 		tab =  new CreativeTabsGrowthcraft("tabGrowthCraft");
 
@@ -79,6 +83,12 @@ public class GrowthCraftCore
 		ropeBlock = new BlockDefinition(new BlockRope());
 		rope = new ItemDefinition(new ItemRope());
 
+		register();
+		modules.preInit();
+	}
+
+	private void register()
+	{
 		//====================
 		// REGISTRIES
 		//====================
@@ -102,6 +112,8 @@ public class GrowthCraftCore
 
 		MinecraftForge.EVENT_BUS.register(new TextureStitchEventCore());
 		BucketHandler.init();
+
+		modules.register();
 	}
 
 	@EventHandler
@@ -110,9 +122,9 @@ public class GrowthCraftCore
 		CommonProxy.instance.initRenders();
 		AchievementPageGrowthcraft.init();
 
-		new growthcraft.core.integration.Waila();
-		AppleCore.init();
 		ItemUtils.init();
+
+		modules.init();
 	}
 
 	@EventHandler
@@ -125,6 +137,6 @@ public class GrowthCraftCore
 			MinecraftForge.EVENT_BUS.register(new PlayerInteractEventAmazingStick());
 		}
 
-		if (config.enableThaumcraftIntegration) new growthcraft.core.integration.ThaumcraftModule().init();
+		modules.postInit();
 	}
 }

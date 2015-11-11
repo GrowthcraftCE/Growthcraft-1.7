@@ -27,7 +27,7 @@ public class BlockMaliceBeeBox extends BlockBeeBox
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		icons = new IIcon[4];
+		this.icons = new IIcon[4];
 		registerBeeBoxIcons(reg, "malice", 0);
 	}
 }

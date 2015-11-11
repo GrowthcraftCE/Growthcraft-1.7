@@ -3,11 +3,8 @@ package growthcraft.bees;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.bees.client.gui.GuiHandlerBees;
-import growthcraft.bees.common.block.BlockBambooBeeBox;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeHive;
-import growthcraft.bees.common.block.BlockMaliceBeeBox;
-import growthcraft.bees.common.block.BlockThaumcraftBeeBox;
 import growthcraft.bees.common.CommonProxy;
 import growthcraft.bees.common.item.ItemBee;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
@@ -29,6 +26,7 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.ModuleContainer;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -77,6 +75,7 @@ public class GrowthCraftBees
 	public static BlockDefinition bambooBeeBox;
 	public static BlockDefinition maliceBeeBox;
 	public static BlockDefinition thaumcraftBeeBox;
+	public static BlockDefinition forestryBeeBox;
 	public static BlockDefinition beeHive;
 	public static BlockBoozeDefinition[] honeyMeadFluids;
 	public static ItemDefinition honeyComb;
@@ -90,9 +89,10 @@ public class GrowthCraftBees
 
 	public static Fluid[] honeyMeadBooze;
 
-	private growthcraft.bees.Config config;
+	private GrcBeesConfig config = new GrcBeesConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	public static growthcraft.bees.Config getConfig()
+	public static GrcBeesConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -100,8 +100,13 @@ public class GrowthCraftBees
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.bees.Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
+
+		if (config.enableGrcBambooIntegration) modules.add(new growthcraft.bees.integration.GrcBambooModule());
+		if (config.enableGrcNetherIntegration) modules.add(new growthcraft.bees.integration.GrcNetherModule());
+		if (config.enableWailaIntegration) modules.add(new growthcraft.bees.integration.Waila());
+		if (config.enableForestryIntegration) modules.add(new growthcraft.bees.integration.ForestryModule());
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bees.integration.ThaumcraftModule());
 
 		tab = new CreativeTabsGrowthcraftBees();
 
@@ -111,9 +116,7 @@ public class GrowthCraftBees
 	private void initBlocksAndItems()
 	{
 		beeBox  = new BlockDefinition(new BlockBeeBox());
-		bambooBeeBox  = new BlockDefinition(new BlockBambooBeeBox());
-		maliceBeeBox  = new BlockDefinition(new BlockMaliceBeeBox());
-		thaumcraftBeeBox = new BlockDefinition(new BlockThaumcraftBeeBox());
+
 		beeHive = new BlockDefinition(new BlockBeeHive());
 
 		honeyComb = new ItemDefinition(new ItemHoneyComb());
@@ -133,15 +136,15 @@ public class GrowthCraftBees
 			.setPotionEffects(new int[] {Potion.regeneration.id}, new int[] {900}));
 		honeyMeadBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(honeyMeadBooze)
 			.setColor(config.honeyMeadColor));
+
+		modules.preInit();
+		register();
 	}
 
 	private void register()
 	{
 		// Bee Boxes
 		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
-		GameRegistry.registerBlock(bambooBeeBox.getBlock(), ItemBlockBeeBox.class, "grc.bambooBeeBox");
-		GameRegistry.registerBlock(maliceBeeBox.getBlock(), ItemBlockBeeBox.class, "grc.maliceBeeBox");
-		GameRegistry.registerBlock(thaumcraftBeeBox.getBlock(), ItemBlockBeeBox.class, "grc.thaumcraftBeeBox");
 
 		// Bee Hive(s)
 		GameRegistry.registerBlock(beeHive.getBlock(), "grc.beeHive");
@@ -181,6 +184,8 @@ public class GrowthCraftBees
 
 		NEI.hideItem(honeyComb.asStack(1, 0));
 		NEI.hideItem(honeyComb.asStack(1, 1));
+
+		modules.register();
 	}
 
 	private void registerOres()
@@ -227,7 +232,6 @@ public class GrowthCraftBees
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		register();
 		CommonProxy.instance.initRenders();
 		CommonProxy.instance.initSounds();
 
@@ -239,7 +243,8 @@ public class GrowthCraftBees
 		VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);
 
 		CommonProxy.instance.registerVillagerSkin();
-		new growthcraft.bees.integration.Waila();
+
+		modules.init();
 	}
 
 	@SubscribeEvent
@@ -258,7 +263,6 @@ public class GrowthCraftBees
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		if (config.enableForestryIntegration) new growthcraft.bees.integration.ForestryModule().init();
-		if (config.enableThaumcraftIntegration) new growthcraft.bees.integration.ThaumcraftModule().init();
+		modules.postInit();
 	}
 }

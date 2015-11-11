@@ -3,10 +3,16 @@ package growthcraft.core.integration;
 import cpw.mods.fml.common.event.FMLInterModComms;
 
 // Because sometimes you don't want to do stupid stuff over and over again
-public class WailaIntegrationBase
+public class WailaIntegrationBase extends ModIntegrationBase
 {
-	public WailaIntegrationBase()
+	public WailaIntegrationBase(String parentMod)
 	{
-		FMLInterModComms.sendMessage("Waila", "register", getClass().getName() + ".register");
+		super(parentMod, "Waila");
+	}
+
+	@Override
+	public void doInit()
+	{
+		FMLInterModComms.sendMessage(modID, "register", getClass().getName() + ".register");
 	}
 }

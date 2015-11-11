@@ -2,7 +2,7 @@ package growthcraft.rice;
 
 import growthcraft.core.ConfigBase;
 
-public class Config extends ConfigBase
+public class GrcRiceConfig extends ConfigBase
 {
 	@ConfigOption(catergory="Growth Rates", name="Rice growth rate", desc="[Higher -> Slower]")
 	public float riceGrowthRate = 25.0f;
@@ -14,6 +14,9 @@ public class Config extends ConfigBase
 
 	@ConfigOption(catergory="Brewing", name="Rice Sake brew time", desc="[Higher -> Slower]")
 	public int riceSakeBrewingTime = 20;
+
+	@ConfigOption(catergory="Brewing", name="Rice Sake brew yield", desc="How many milli-buckets are created per rice?")
+	public int riceSakeBrewingYield = 25;
 
 
 	@ConfigOption(catergory="Booze", name="Rice Sake Color", desc="What color should sake be?")

@@ -3,6 +3,7 @@ package growthcraft.fishtrap;
 import growthcraft.api.fishtrap.FishTrapEntry;
 import growthcraft.api.fishtrap.FishTrapRegistry;
 import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.ModuleContainer;
 import growthcraft.fishtrap.client.gui.GuiHandlerFishTrap;
 import growthcraft.fishtrap.common.block.BlockFishTrap;
 import growthcraft.fishtrap.common.CommonProxy;
@@ -39,9 +40,10 @@ public class GrowthCraftFishTrap
 
 	public static BlockDefinition fishTrap;
 
-	private Config config;
+	private GrcFishtrapConfig config = new GrcFishtrapConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	public static Config getConfig()
+	public static GrcFishtrapConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -49,14 +51,21 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
+
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.fishtrap.integration.ThaumcraftModule());
 
 		//====================
 		// INIT
 		//====================
 		fishTrap = new BlockDefinition(new BlockFishTrap());
 
+		modules.preInit();
+		register();
+	}
+
+	private void register()
+	{
 		//====================
 		// REGISTRIES
 		//====================
@@ -94,6 +103,8 @@ public class GrowthCraftFishTrap
 		// CRAFTING
 		//====================
 		GameRegistry.addRecipe(new ShapedOreRecipe(fishTrap.asStack(1), "ACA", "CBC", "ACA", 'A', "plankWood", 'B', Items.lead, 'C', Items.string));
+
+		modules.register();
 	}
 
 	@EventHandler
@@ -102,11 +113,13 @@ public class GrowthCraftFishTrap
 		CommonProxy.instance.initRenders();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerFishTrap());
+
+		modules.init();
 	}
 
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		if (config.enableThaumcraftIntegration) new growthcraft.fishtrap.integration.ThaumcraftModule().init();
+		modules.postInit();
 	}
 }

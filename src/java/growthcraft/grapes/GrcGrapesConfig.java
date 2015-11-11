@@ -4,7 +4,7 @@ import growthcraft.core.ConfigBase;
 
 import net.minecraft.util.MathHelper;
 
-public class Config extends ConfigBase
+public class GrcGrapesConfig extends ConfigBase
 {
 	@ConfigOption(catergory="Grape Vine", name="Grape Vine (Seedling) growth rate", desc="[Higher -> Slower]")
 	public float grapeVineSeedlingGrowthRate = 25.0f;
@@ -37,6 +37,9 @@ public class Config extends ConfigBase
 
 	@ConfigOption(catergory="Pressing", name="Grape Wine press time", desc="[Higher -> Slower]")
 	public int grapeWinePressingTime = 20;
+
+	@ConfigOption(catergory="Pressing", name="Grape Wine press yield", desc="How many milli-buckets are created per grape?")
+	public int grapeWinePressingYield = 40;
 
 
 	@ConfigOption(catergory="Booze", name="Grape Wine Color", desc="What color should grape wine be?")

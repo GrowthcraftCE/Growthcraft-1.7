@@ -447,7 +447,7 @@ public class BlockBeeBox extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
-		icons = new IIcon[6 * 4];
+		this.icons = new IIcon[6 * 4];
 
 		for (int i = 0; i < 6; ++i)
 		{

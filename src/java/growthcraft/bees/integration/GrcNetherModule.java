@@ -23,53 +23,30 @@
  */
 package growthcraft.bees.integration;
 
-import growthcraft.api.bees.BeesRegistry;
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.bees.common.block.BlockForestryBeeBox;
-import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.integration.ModIntegrationBase;
+import growthcraft.bees.common.block.BlockMaliceBeeBox;
+import growthcraft.bees.common.item.ItemBlockBeeBox;
+import growthcraft.core.common.definition.BlockDefinition;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import net.minecraft.item.Item;
-
-public class ForestryModule extends ModIntegrationBase
+public class GrcNetherModule extends ModIntegrationBase
 {
-	public ForestryModule()
+	public GrcNetherModule()
 	{
-		super(GrowthCraftBees.MOD_ID, "Forestry");
-	}
-
-	private void maybeAddBee(Item item)
-	{
-		if (item != null)
-		{
-			BeesRegistry.instance().addBee(item);
-		}
+		super(GrowthCraftBees.MOD_ID, "Growthcraft|Nether");
 	}
 
 	@Override
 	protected void doPreInit()
 	{
-		GrowthCraftBees.forestryBeeBox = new BlockDefinition(new BlockForestryBeeBox());
+		GrowthCraftBees.maliceBeeBox  = new BlockDefinition(new BlockMaliceBeeBox());
 	}
 
 	@Override
 	protected void doRegister()
 	{
-		GameRegistry.registerBlock(GrowthCraftBees.forestryBeeBox.getBlock(), ItemBlockBeeBox.class, "grc.forestryBeeBox");
-	}
-
-	@Override
-	protected void integrate()
-	{
-		maybeAddBee(GameRegistry.findItem(modID, "beeQueenGE"));
-		maybeAddBee(GameRegistry.findItem(modID, "beeDroneGE"));
-		maybeAddBee(GameRegistry.findItem(modID, "beePrincessGE"));
-
-		CellarRegistry.instance().booze().addBoozeAlternative("short.mead", "grc.honeyMead0");
+		GameRegistry.registerBlock(GrowthCraftBees.maliceBeeBox.getBlock(), ItemBlockBeeBox.class, "grc.maliceBeeBox");
 	}
 }
-
