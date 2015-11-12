@@ -16,67 +16,6 @@ tile.grc.BeeBox.Bamboo0.name=Bamboo Bee Box
 /// Thaumcraft Bee Boxes
 tile.grc.BeeBox.Thaumcraft0.name=Greatwood Bee Box
 tile.grc.BeeBox.Thaumcraft1.name=Silverwood Bee Box
-/// Forestry Bee Boxes - this is just insane...
-//// Regular
-tile.grc.BeeBox.Forestry.larch0.name=Larch Bee Box
-tile.grc.BeeBox.Forestry.teak0.name=Teak Bee Box
-tile.grc.BeeBox.Forestry.acacia0.name=Acacia Bee Box
-tile.grc.BeeBox.Forestry.lime0.name=Lime Bee Box
-tile.grc.BeeBox.Forestry.chestnut0.name=Chestnut Bee Box
-tile.grc.BeeBox.Forestry.wenge0.name=Wenge Bee Box
-tile.grc.BeeBox.Forestry.baobab0.name=Baobab Bee Box
-tile.grc.BeeBox.Forestry.sequoia0.name=Sequoia Bee Box
-tile.grc.BeeBox.Forestry.kapok0.name=Kapok Bee Box
-tile.grc.BeeBox.Forestry.ebony0.name=Ebony Bee Box
-tile.grc.BeeBox.Forestry.mahogany0.name=Mahogany Bee Box
-tile.grc.BeeBox.Forestry.balsa0.name=Balsa Bee Box
-tile.grc.BeeBox.Forestry.willow0.name=Willow Bee Box
-tile.grc.BeeBox.Forestry.walnut0.name=Walnut Bee Box
-tile.grc.BeeBox.Forestry.greenheart0.name=Greenheart Bee Box
-tile.grc.BeeBox.Forestry.cherry0.name=Cherry Bee Box
-tile.grc.BeeBox.Forestry.mahoe0.name=Mahoe Bee Box
-tile.grc.BeeBox.Forestry.poplar0.name=Poplar Bee Box
-tile.grc.BeeBox.Forestry.palm0.name=Palm Bee Box
-tile.grc.BeeBox.Forestry.papaya0.name=Papaya Bee Box
-tile.grc.BeeBox.Forestry.pine0.name=Pine Bee Box
-tile.grc.BeeBox.Forestry.plum0.name=Plum Bee Box
-tile.grc.BeeBox.Forestry.maple0.name=Maple Bee Box
-tile.grc.BeeBox.Forestry.citrus0.name=Citrus Bee Box
-tile.grc.BeeBox.Forestry.giganteum0.name=Giganteum Bee Box
-tile.grc.BeeBox.Forestry.ipe0.name=Ipe Bee Box
-tile.grc.BeeBox.Forestry.padauk0.name=Padauk Bee Box
-tile.grc.BeeBox.Forestry.cocobolo0.name=Cocobolo Bee Box
-tile.grc.BeeBox.Forestry.zebrawood0.name=Zebrawood Bee Box
-//// Fire Proof
-tile.grc.BeeBox.Forestry.larchFireproof0.name=Larch Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.teakFireproof0.name=Teak Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.acaciaFireproof0.name=Acacia Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.limeFireproof0.name=Lime Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.chestnutFireproof0.name=Chestnut Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.wengeFireproof0.name=Wenge Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.baobabFireproof0.name=Baobab Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.sequoiaFireproof0.name=Sequoia Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.kapokFireproof0.name=Kapok Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.ebonyFireproof0.name=Ebony Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.mahoganyFireproof0.name=Mahogany Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.balsaFireproof0.name=Balsa Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.willowFireproof0.name=Willow Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.walnutFireproof0.name=Walnut Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.greenheartFireproof0.name=Greenheart Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.cherryFireproof0.name=Cherry Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.mahoeFireproof0.name=Mahoe Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.poplarFireproof0.name=Poplar Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.palmFireproof0.name=Palm Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.papayaFireproof0.name=Papaya Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.pineFireproof0.name=Pine Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.plumFireproof0.name=Plum Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.mapleFireproof0.name=Maple Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.citrusFireproof0.name=Citrus Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.giganteumFireproof0.name=Giganteum Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.ipeFireproof0.name=Ipe Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.padaukFireproof0.name=Padauk Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.cocoboloFireproof0.name=Cocobolo Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.zebrawoodFireproof0.name=Zebrawood Bee Box (Fireproof)
 
 tile.grc.beeHive.name=Bee Hive
 
