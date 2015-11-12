@@ -25,10 +25,7 @@ package growthcraft.bees.integration;
 
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.bees.common.block.BlockForestryBeeBox;
-import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.integration.ModIntegrationBase;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -48,18 +45,6 @@ public class ForestryModule extends ModIntegrationBase
 		{
 			BeesRegistry.instance().addBee(item);
 		}
-	}
-
-	@Override
-	protected void doPreInit()
-	{
-		GrowthCraftBees.forestryBeeBox = new BlockDefinition(new BlockForestryBeeBox());
-	}
-
-	@Override
-	protected void doRegister()
-	{
-		GameRegistry.registerBlock(GrowthCraftBees.forestryBeeBox.getBlock(), ItemBlockBeeBox.class, "grc.forestryBeeBox");
 	}
 
 	@Override

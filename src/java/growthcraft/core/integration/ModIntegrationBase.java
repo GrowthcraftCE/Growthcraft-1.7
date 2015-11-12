@@ -46,6 +46,16 @@ public abstract class ModIntegrationBase implements IModule
 		this.modID = integratingMod;
 	}
 
+	protected void debug(String str, Object... objs)
+	{
+		FMLLog.log(parentModID, Level.INFO, str, objs);
+	}
+
+	protected void warn(String str, Object... objs)
+	{
+		FMLLog.log(parentModID, Level.WARN, str, objs);
+	}
+
 	public boolean modIsLoaded()
 	{
 		return modLoaded;
@@ -56,11 +66,13 @@ public abstract class ModIntegrationBase implements IModule
 
 	}
 
+	@Override
 	public final void preInit()
 	{
 		this.modLoaded = Loader.isModLoaded(modID);
 		if (modIsLoaded())
 		{
+			debug("preInit " + modID);
 			doPreInit();
 		}
 	}
@@ -70,23 +82,30 @@ public abstract class ModIntegrationBase implements IModule
 
 	}
 
+	@Override
 	public final void init()
 	{
 		if (modIsLoaded())
 		{
+			debug("init " + modID);
 			doInit();
 		}
 	}
 
+	// Normally called directly after a preInit, use this method to register
+	// blocks and items, DO NOT REGISTER RECIPES HERE, use doLateRegister
+	// instead for recipes.
 	protected void doRegister()
 	{
 
 	}
 
+	@Override
 	public final void register()
 	{
 		if (modIsLoaded())
 		{
+			debug("register " + modID);
 			doRegister();
 		}
 	}
@@ -96,11 +115,21 @@ public abstract class ModIntegrationBase implements IModule
 
 	}
 
+	// Called directly after doPostInit(), use this step for registering recipes
+	// or other things that use items OUTSIDE the current mod
+	protected void doLateRegister()
+	{
+
+	}
+
+	@Override
 	public final void postInit()
 	{
 		if (modIsLoaded())
 		{
+			debug("postInit " + modID);
 			doPostInit();
+			doLateRegister();
 		}
 
 		// This method is kept around for reasons, you should use the
@@ -120,20 +149,20 @@ public abstract class ModIntegrationBase implements IModule
 	{
 		if (modIsLoaded())
 		{
-			FMLLog.log(parentModID, Level.INFO, "Attemping to integrate with %s.", modID);
+			debug("Attemping to integrate with %s.", modID);
 			try
 			{
 				integrate();
-				FMLLog.log(parentModID, Level.INFO, "Successfully integrated with %s.", modID);
+				debug("Successfully integrated with %s.", modID);
 			}
 			catch (Exception e)
 			{
-				FMLLog.log(parentModID, Level.WARN, "%s integration failed.", modID);
+				warn("%s integration failed.", modID);
 			}
 		}
 		else
 		{
-			FMLLog.log(parentModID, Level.INFO, "%s not found; No integration made.", modID);
+			debug("%s not found; No integration made.", modID);
 		}
 	}
 }

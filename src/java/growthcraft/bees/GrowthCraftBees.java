@@ -25,6 +25,7 @@ import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.ModuleContainer;
 import growthcraft.core.GrowthCraftCore;
@@ -58,7 +59,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 	modid = GrowthCraftBees.MOD_ID,
 	name = GrowthCraftBees.MOD_NAME,
 	version = GrowthCraftBees.MOD_VERSION,
-	dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar"
+	dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar;after:Forestry"
 )
 public class GrowthCraftBees
 {
@@ -71,11 +72,10 @@ public class GrowthCraftBees
 
 	public static CreativeTabs tab;
 
-	public static BlockDefinition beeBox;
-	public static BlockDefinition bambooBeeBox;
-	public static BlockDefinition maliceBeeBox;
-	public static BlockDefinition thaumcraftBeeBox;
-	public static BlockDefinition forestryBeeBox;
+	public static BlockTypeDefinition<BlockBeeBox> beeBox;
+	public static BlockTypeDefinition<BlockBeeBox> beeBoxBamboo;
+	public static BlockTypeDefinition<BlockBeeBox> beeBoxNether;
+	public static BlockTypeDefinition<BlockBeeBox> beeBoxThaumcraft;
 	public static BlockDefinition beeHive;
 	public static BlockBoozeDefinition[] honeyMeadFluids;
 	public static ItemDefinition honeyComb;
@@ -115,7 +115,8 @@ public class GrowthCraftBees
 
 	private void initBlocksAndItems()
 	{
-		beeBox  = new BlockDefinition(new BlockBeeBox());
+		beeBox  = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBox());
+		beeBox.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
 
 		beeHive = new BlockDefinition(new BlockBeeHive());
 
@@ -143,6 +144,7 @@ public class GrowthCraftBees
 
 	private void register()
 	{
+
 		// Bee Boxes
 		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
 
@@ -202,7 +204,7 @@ public class GrowthCraftBees
 		OreDictionary.registerOre("dropHoney", honeyJar.getItem());
 	}
 
-	public void registerRecipes()
+	private void registerRecipes()
 	{
 		//====================
 		// CRAFTING
@@ -212,13 +214,6 @@ public class GrowthCraftBees
 		{
 			GameRegistry.addRecipe(beeBox.asStack(1, i), new Object[] { " A ", "A A", "AAA", 'A', planks.asStack(1, i) });
 		}
-		GameRegistry.addRecipe(new ShapedOreRecipe(beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
-
-		// plankMaliceWood is registered by the Growthcraft|Nether module, and is a non-flammable plank
-		GameRegistry.addRecipe(new ShapedOreRecipe(maliceBeeBox.asStack(), " A ", "A A", "AAA", 'A', "plankMaliceWood"));
-
-		// Bamboo
-		GameRegistry.addRecipe(new ShapedOreRecipe(bambooBeeBox.asStack(), " A ", "A A", "AAA", 'A', "plankBamboo"));
 
 		GameRegistry.addShapelessRecipe(honeyCombEmpty.asStack(), honeyComb.asStack(1, 0));
 		GameRegistry.addShapelessRecipe(honeyCombFilled.asStack(), honeyComb.asStack(1, 1));
@@ -227,6 +222,11 @@ public class GrowthCraftBees
 		GameRegistry.addShapelessRecipe(honeyJar.asStack(), honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);
 
 		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(), Items.water_bucket, honeyJar.getItem(), Items.bucket);
+	}
+
+	private void postRegisterRecipes()
+	{
+		GameRegistry.addRecipe(new ShapedOreRecipe(beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
 	}
 
 	@EventHandler
@@ -263,6 +263,8 @@ public class GrowthCraftBees
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
+		postRegisterRecipes();
+
 		modules.postInit();
 	}
 }

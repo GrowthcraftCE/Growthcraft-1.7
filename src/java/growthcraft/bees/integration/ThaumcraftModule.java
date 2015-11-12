@@ -23,11 +23,12 @@
  */
 package growthcraft.bees.integration;
 
-import growthcraft.bees.common.block.BlockThaumcraftBeeBox.ThaumcraftBeeBoxType;
-import growthcraft.bees.common.block.BlockThaumcraftBeeBox;
+import growthcraft.bees.common.block.BlockBeeBox;
+import growthcraft.bees.common.block.BlockBeeBoxThaumcraft;
+import growthcraft.bees.common.block.EnumBeeBoxThaumcraft;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 
 import thaumcraft.api.ThaumcraftApi;
@@ -37,7 +38,6 @@ import thaumcraft.api.aspects.Aspect;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ThaumcraftModule extends ThaumcraftModuleBase
 {
@@ -49,19 +49,30 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Override
 	protected void doPreInit()
 	{
-		GrowthCraftBees.thaumcraftBeeBox = new BlockDefinition(new BlockThaumcraftBeeBox());
+		GrowthCraftBees.beeBoxThaumcraft = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxThaumcraft());
+		GrowthCraftBees.beeBoxThaumcraft.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
 	}
 
 	@Override
 	protected void doRegister()
 	{
-		GameRegistry.registerBlock(GrowthCraftBees.thaumcraftBeeBox.getBlock(), ItemBlockBeeBox.class, "grc.thaumcraftBeeBox");
-
-		final Block blockWoodenDevice = GameRegistry.findBlock(modID, "blockWoodenDevice");
-		if (blockWoodenDevice != null)
+		if (GrowthCraftBees.beeBoxThaumcraft != null)
 		{
-			GameRegistry.addRecipe(new ShapedOreRecipe(GrowthCraftBees.thaumcraftBeeBox.asStack(1, ThaumcraftBeeBoxType.GREATWOOD), " A ", "A A", "AAA", 'A', new ItemStack(blockWoodenDevice, 1, 6)));
-			GameRegistry.addRecipe(new ShapedOreRecipe(GrowthCraftBees.thaumcraftBeeBox.asStack(1, ThaumcraftBeeBoxType.SILVERWOOD), " A ", "A A", "AAA", 'A', new ItemStack(blockWoodenDevice, 1, 7)));
+			GameRegistry.registerBlock(GrowthCraftBees.beeBoxThaumcraft.getBlock(), ItemBlockBeeBox.class, "grc.BeeBox.Thaumcraft");
+		}
+	}
+
+	@Override
+	protected void doLateRegister()
+	{
+		if (GrowthCraftBees.beeBoxThaumcraft != null)
+		{
+			final Block blockWoodenDevice = GameRegistry.findBlock(modID, "blockWoodenDevice");
+			if (blockWoodenDevice != null)
+			{
+				GameRegistry.addShapedRecipe(EnumBeeBoxThaumcraft.GREATWOOD.asStack(), " A ", "A A", "AAA", 'A', new ItemStack(blockWoodenDevice, 1, 6));
+				GameRegistry.addShapedRecipe(EnumBeeBoxThaumcraft.SILVERWOOD.asStack(), " A ", "A A", "AAA", 'A', new ItemStack(blockWoodenDevice, 1, 7));
+			}
 		}
 	}
 
@@ -74,12 +85,19 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.bee.asStack(), new AspectList().add(Aspect.BEAST, 1).add(Aspect.AIR, 1).add(Aspect.FLIGHT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeHive.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.BEAST, 1).add(Aspect.ORDER, 1).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBox.asStack(), new int[]{0,1,2,3,4,5}, new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
-		if (GrowthCraftBees.maliceBeeBox != null)
+
+		if (GrowthCraftBees.beeBoxNether != null)
 		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.maliceBeeBox.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.ENTROPY, 1).add(Aspect.VOID, 1));
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxNether.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.ENTROPY, 1).add(Aspect.VOID, 1));
 		}
-		ThaumcraftApi.registerObjectTag(GrowthCraftBees.bambooBeeBox.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBees.thaumcraftBeeBox.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
+		if (GrowthCraftBees.beeBoxBamboo != null)
+		{
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBamboo.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+		}
+		if (GrowthCraftBees.beeBoxThaumcraft != null)
+		{
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxThaumcraft.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
+		}
 
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMead.asStack(1, 0), new AspectList().add(Aspect.WATER, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyMead.asStack(1, 1), new AspectList().add(Aspect.HEAL, 3).add(Aspect.WATER, 1).add(Aspect.POISON, 2));

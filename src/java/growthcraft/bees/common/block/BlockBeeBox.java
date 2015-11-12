@@ -43,8 +43,9 @@ public class BlockBeeBox extends BlockContainer
 	private final float flowerSpawnRate = GrowthCraftBees.getConfig().beeBoxFlowerSpawnRate;
 	// bonus
 	private final float bonus = 2.50F;
-
 	private Random rand = new Random();
+	private int flammability;
+	private int fireSpreadSpeed;
 
 	public BlockBeeBox(Material material)
 	{
@@ -54,13 +55,37 @@ public class BlockBeeBox extends BlockContainer
 		setTickRandomly(true);
 		setHardness(2.5F);
 		setStepSound(soundTypeWood);
-		setBlockName("grc.beeBox");
+		setBlockName("grc.BeeBox.Minecraft");
 		setCreativeTab(GrowthCraftBees.tab);
 	}
 
 	public BlockBeeBox()
 	{
 		this(Material.wood);
+	}
+
+	public BlockBeeBox setFlammability(int flam)
+	{
+		this.flammability = flam;
+		return this;
+	}
+
+	public BlockBeeBox setFireSpreadSpeed(int speed)
+	{
+		this.fireSpreadSpeed = speed;
+		return this;
+	}
+
+	@Override
+	public int getFlammability(IBlockAccess world, int x, int y, int z, ForgeDirection face)
+	{
+		return flammability;
+	}
+
+	@Override
+	public int getFireSpreadSpeed(IBlockAccess world, int x, int y, int z, ForgeDirection face)
+	{
+		return fireSpreadSpeed;
 	}
 
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
@@ -437,10 +462,10 @@ public class BlockBeeBox extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	protected void registerBeeBoxIcons(IIconRegister reg, String basename, int offset)
 	{
-		icons[offset * 4] = reg.registerIcon(getTextureName() + "_bottom_" + basename);
-		icons[offset * 4 + 1] = reg.registerIcon(getTextureName() + "_top_" + basename);
-		icons[offset * 4 + 2] = reg.registerIcon(getTextureName() + "_side_" + basename);
-		icons[offset * 4 + 3] = reg.registerIcon(getTextureName() + "_side_" + basename + "_honey");
+		icons[offset * 4] = reg.registerIcon(getTextureName() + basename + "bottom");
+		icons[offset * 4 + 1] = reg.registerIcon(getTextureName() + basename + "top");
+		icons[offset * 4 + 2] = reg.registerIcon(getTextureName() + basename + "side");
+		icons[offset * 4 + 3] = reg.registerIcon(getTextureName() + basename + "side_honey");
 	}
 
 	@Override
@@ -449,10 +474,12 @@ public class BlockBeeBox extends BlockContainer
 	{
 		this.icons = new IIcon[6 * 4];
 
-		for (int i = 0; i < 6; ++i)
-		{
-			registerBeeBoxIcons(reg, "" + i, i);
-		}
+		registerBeeBoxIcons(reg, "/minecraft/oak/", 0);
+		registerBeeBoxIcons(reg, "/minecraft/spruce/", 1);
+		registerBeeBoxIcons(reg, "/minecraft/birch/", 2);
+		registerBeeBoxIcons(reg, "/minecraft/jungle/", 3);
+		registerBeeBoxIcons(reg, "/minecraft/acacia/", 4);
+		registerBeeBoxIcons(reg, "/minecraft/darkoak/", 5);
 	}
 
 	@SideOnly(Side.CLIENT)

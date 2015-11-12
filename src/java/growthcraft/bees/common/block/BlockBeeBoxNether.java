@@ -10,14 +10,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class BlockMaliceBeeBox extends BlockBeeBox
+public class BlockBeeBoxNether extends BlockBeeBox
 {
-	public BlockMaliceBeeBox()
+	public BlockBeeBoxNether()
 	{
 		super();
-		this.setBlockName("grc.maliceBeeBox");
+		this.setBlockName("grc.BeeBox.Nether");
 	}
 
+	@Override
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
 	{
 		list.add(new ItemStack(block, 1, 0));
@@ -28,6 +29,6 @@ public class BlockMaliceBeeBox extends BlockBeeBox
 	public void registerBlockIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[4];
-		registerBeeBoxIcons(reg, "malice", 0);
+		registerBeeBoxIcons(reg, "/grcnether/malice/", 0);
 	}
 }

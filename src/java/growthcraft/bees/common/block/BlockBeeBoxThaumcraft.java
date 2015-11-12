@@ -10,26 +10,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class BlockForestryBeeBox extends BlockBeeBox
+public class BlockBeeBoxThaumcraft extends BlockBeeBox
 {
-	public static class ForestryBeeBoxType
-	{
-		public static final int GREATWOOD = 0;
-		public static final int SILVERWOOD = 1;
-
-		private ForestryBeeBoxType() {}
-	}
-
-	public BlockForestryBeeBox()
+	public BlockBeeBoxThaumcraft()
 	{
 		super();
-		this.setBlockName("grc.thaumcraftBeeBox");
+		this.setBlockName("grc.BeeBox.Thaumcraft");
 	}
 
+	@Override
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
 	{
-		list.add(new ItemStack(block, 1, ForestryBeeBoxType.GREATWOOD));
-		list.add(new ItemStack(block, 1, ForestryBeeBoxType.SILVERWOOD));
+		list.add(new ItemStack(block, 1, EnumBeeBoxThaumcraft.GREATWOOD.meta));
+		list.add(new ItemStack(block, 1, EnumBeeBoxThaumcraft.SILVERWOOD.meta));
 	}
 
 	@Override
@@ -37,7 +30,7 @@ public class BlockForestryBeeBox extends BlockBeeBox
 	public void registerBlockIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[2 * 4];
-		registerBeeBoxIcons(reg, "greatwood", ForestryBeeBoxType.GREATWOOD);
-		registerBeeBoxIcons(reg, "silverwood", ForestryBeeBoxType.SILVERWOOD);
+		registerBeeBoxIcons(reg, "/thaumcraft/greatwood/", EnumBeeBoxThaumcraft.GREATWOOD.meta);
+		registerBeeBoxIcons(reg, "/thaumcraft/silverwood/", EnumBeeBoxThaumcraft.SILVERWOOD.meta);
 	}
 }
