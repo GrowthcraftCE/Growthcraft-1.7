@@ -82,14 +82,19 @@ public class BoozeRegistry
 {
 	static class BoozeEntry
 	{
-		final Fluid[] fluids;
+		final Fluid fluid;
 		final int index;
 
-		public BoozeEntry(Fluid[] flus, int ind)
+		public BoozeEntry(Fluid flus, int ind)
 		{
-			this.fluids = flus;
+			this.fluid = flus;
 			this.index = ind;
 		}
+	}
+
+	static class BoozeEffectEntry
+	{
+
 	}
 
 	// because damage is almost never -1
@@ -98,20 +103,45 @@ public class BoozeRegistry
 	// May consider using an enum instead of a String once the features settle a bit
 	private Map<Fluid, Set<String>> fluidTags = new HashMap<Fluid, Set<String>>();
 	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
-	private Map<Fluid[], String> boozeNames = new HashMap<Fluid[], String>();
 	private Map<Fluid, Fluid> altBoozeMap = new HashMap<Fluid, Fluid>();
+
+	// Instead I believe we should provide an iterator instead of exposing the
+	// map
+	public Map<Fluid, BoozeEntry> getBoozeMap()
+	{
+		return boozeMap;
+	}
 
 	private void ensureFluidsAreValid(Fluid[] fluids)
 	{
-		if (fluids.length < 4)
-		{
-			throw new IllegalArgumentException("[Growthcraft|Cellar] One of the fluids being created as Booze has an array length of " + fluids.length + ". The array lengths should be 4 or more.");
-		}
-
 		if (!FluidUtils.doesFluidsExist(fluids))
 		{
 			throw new IllegalArgumentException("[Growthcraft|Cellar] One of the fluids being created as Booze is not registered to the FluidRegistry.");
 		}
+	}
+
+	public boolean isFluidBooze(Fluid f)
+	{
+		if (f == null) return false;
+		return boozeMap.get(f) != null || isAlternateBooze(f);
+	}
+
+	public boolean isFluidBooze(FluidStack fluidStack)
+	{
+		if (fluidStack == null) return false;
+		return isFluidBooze(fluidStack.getFluid());
+	}
+
+	public boolean areFluidsBooze(Fluid[] fluid)
+	{
+		for (int i = 0; i < fluid.length; ++i)
+		{
+			if (!isFluidBooze(fluid[i]))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -134,9 +164,10 @@ public class BoozeRegistry
 		{
 			for (int i = 0; i < fluids.length; ++i)
 			{
-				boozeMap.put(fluids[i], new BoozeEntry(fluids, i));
+				final Fluid fluid = fluids[i];
+				fluid.setUnlocalizedName(unlocalizedName);
+				boozeMap.put(fluid, new BoozeEntry(fluid, i));
 			}
-			boozeNames.put(fluids, unlocalizedName);
 		}
 		else
 		{
@@ -193,40 +224,6 @@ public class BoozeRegistry
 	}
 
 	// BOOZE /////////////////////////////////////////////////////////
-	public boolean isFluidBooze(Fluid f)
-	{
-		if (f == null) return false;
-		return boozeMap.get(f) != null || isAlternateBooze(f);
-	}
-
-	public boolean isFluidBooze(FluidStack fluidStack)
-	{
-		if (fluidStack == null) return false;
-		return isFluidBooze(fluidStack.getFluid());
-	}
-
-	public boolean areFluidsBooze(Fluid[] fluid)
-	{
-		for (int i = 0; i < fluid.length; ++i)
-		{
-			if (!isFluidBooze(fluid[i]))
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public Fluid[] getBoozeArray(Fluid f)
-	{
-		if (isAlternateBooze(f))
-		{
-			final Fluid alt = getAlternateBooze(f);
-			return boozeMap.get(alt).fluids;
-		}
-		return boozeMap.get(f).fluids;
-	}
-
 	public int getBoozeIndex(Fluid f)
 	{
 		if (isFluidBooze(f))
@@ -239,15 +236,6 @@ public class BoozeRegistry
 			return boozeMap.get(f).index;
 		}
 		return 0;
-	}
-
-	public String getBoozeName(Fluid[] f)
-	{
-		if (areFluidsBooze(f))
-		{
-			return boozeNames.get(f);
-		}
-		return "";
 	}
 
 	public boolean isAlternateBooze(Fluid f)

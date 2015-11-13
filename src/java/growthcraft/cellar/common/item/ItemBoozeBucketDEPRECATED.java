@@ -27,7 +27,8 @@ public class ItemBoozeBucketDEPRECATED extends Item
 	@SideOnly(Side.CLIENT)
 	private IIcon contents;
 
-	private int color = 16777215;
+	private int color = 0xFFFFFF;
+
 	public ItemBoozeBucketDEPRECATED(Fluid[] boozeAry)
 	{
 		super();
@@ -69,15 +70,16 @@ public class ItemBoozeBucketDEPRECATED extends Item
 	/************
 	 * TOOLTIP
 	 ************/
-	@SuppressWarnings("rawtypes")
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		writeModifierTooltip(stack, player, list, bool);
+		super.addInformation(stack, player, list, bool);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		final String s = UnitFormatter.fluidModifier(getBooze(stack.getItemDamage()));
@@ -103,15 +105,15 @@ public class ItemBoozeBucketDEPRECATED extends Item
 		return pass == 1 ? this.contents : this.bucket;
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public int getColorFromItemStack(ItemStack stack, int pass)
 	{
 		return pass == 1 ? this.color : 16777215;
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public boolean requiresMultipleRenderPasses()
 	{
 		return true;
@@ -124,9 +126,8 @@ public class ItemBoozeBucketDEPRECATED extends Item
 			StatCollector.translateToLocal("grc.cellar.item.booze_bucket.deprecated_suffix");
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
 		for (int i = 0; i < this.boozes.length; i++)

@@ -46,8 +46,6 @@ public class ItemBoozeBottle extends ItemFood
 	private IIcon bottle;
 	@SideOnly(Side.CLIENT)
 	private IIcon contents;
-	@SideOnly(Side.CLIENT)
-	private IIcon liquid;
 
 	private int color = 0xFFFFFF;
 
@@ -101,7 +99,7 @@ public class ItemBoozeBottle extends ItemFood
 
 	public Fluid getBooze(int i)
 	{
-		if (i >= boozes.length)
+		if (i < 0 || i >= boozes.length)
 		{
 			return boozes[0];
 		}
@@ -109,6 +107,15 @@ public class ItemBoozeBottle extends ItemFood
 		{
 			return boozes[i];
 		}
+	}
+
+	public Fluid getBoozeForStack(ItemStack stack)
+	{
+		if (stack == null)
+		{
+			return null;
+		}
+		return getBooze(stack.getItemDamage());
 	}
 
 	@Override
@@ -227,7 +234,7 @@ public class ItemBoozeBottle extends ItemFood
 
 	protected PotionEffect makePotionEffect(ItemStack stack, int potnID, int potnTime)
 	{
-		final Fluid booze = getBooze(stack.getItemDamage());
+		final Fluid booze = getBoozeForStack(stack);
 		final Set<String> tags = CellarRegistry.instance().booze().getTags(booze);
 
 		if (tags != null)
@@ -265,8 +272,8 @@ public class ItemBoozeBottle extends ItemFood
 	/************
 	 * TOOLTIP
 	 ************/
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		writeModifierTooltip(stack, player, list, bool);
@@ -290,7 +297,7 @@ public class ItemBoozeBottle extends ItemFood
 
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		final String s = UnitFormatter.fluidModifier(this.getBooze(stack.getItemDamage()));
+		final String s = UnitFormatter.fluidModifier(getBoozeForStack(stack));
 		if (s != null) list.add(s);
 	}
 
@@ -397,7 +404,12 @@ public class ItemBoozeBottle extends ItemFood
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
-		return StatCollector.translateToLocal(CellarRegistry.instance().booze().getBoozeName(getBoozeArray()));
+		final Fluid booze = getBoozeForStack(stack);
+		if (booze != null)
+		{
+			return StatCollector.translateToLocal(booze.getUnlocalizedName());
+		}
+		return super.getItemStackDisplayName(stack);
 	}
 
 	@SuppressWarnings("rawtypes")
