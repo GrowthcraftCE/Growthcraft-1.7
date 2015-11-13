@@ -105,6 +105,9 @@ public class GrowthCraftCellar
 	{
 		config.load(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
 
+		if (config.enableWailaIntegration) modules.add(new growthcraft.cellar.integration.Waila());
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
+
 		//====================
 		// INIT
 		//====================
@@ -118,6 +121,7 @@ public class GrowthCraftCellar
 		waterBag = new ItemDefinition(new ItemWaterBag());
 		chievItemDummy = new ItemDefinition(new ItemChievDummy());
 
+		modules.preInit();
 		register();
 	}
 
@@ -189,6 +193,8 @@ public class GrowthCraftCellar
 
 		NEI.hideItem(fruitPresser.asStack());
 		NEI.hideItem(chievItemDummy.asStack());
+
+		modules.register();
 	}
 
 	private void registerPotions()
@@ -251,7 +257,7 @@ public class GrowthCraftCellar
 		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());
 		CommonProxy.instance.registerVillagerSkin();
 
-		new growthcraft.cellar.integration.Waila();
+		modules.init();
 	}
 
 	@EventHandler
@@ -260,6 +266,7 @@ public class GrowthCraftCellar
 		packetPipeline.postInitialise();
 		MinecraftForge.EVENT_BUS.register(new ItemCraftedEventCellar());
 		MinecraftForge.EVENT_BUS.register(new LivingUpdateEventCellar());
-		if (config.enableThaumcraftIntegration) new growthcraft.cellar.integration.ThaumcraftModule().init();
+
+		modules.postInit();
 	}
 }

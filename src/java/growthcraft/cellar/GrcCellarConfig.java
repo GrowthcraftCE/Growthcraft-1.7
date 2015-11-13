@@ -36,6 +36,9 @@ public class GrcCellarConfig extends ConfigBase
 	public int fruitPressMaxCap = 1000;
 
 
+	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
+	public boolean enableWailaIntegration = true;
+
 	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
 	public boolean enableThaumcraftIntegration = true;
 }
