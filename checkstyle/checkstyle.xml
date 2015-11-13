@@ -55,6 +55,9 @@
 			<property name="ignoreComments" value="true"/>
 			<property name="severity" value="error"/>
 		</module>
+		<module name="MissingOverride">
+			<property name="severity" value="error"/>
+		</module>
 		<module name="PackageDeclaration">
 			<property name="severity" value="error"/>
 		</module>
