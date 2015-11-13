@@ -95,7 +95,6 @@ public class GrowthCraftRice
 		riceBall = new ItemDefinition(new ItemRiceBall());
 
 		booze.preInit();
-
 		modules.preInit();
 		register();
 	}
@@ -135,7 +134,7 @@ public class GrowthCraftRice
 
 		MinecraftForge.EVENT_BUS.register(this);
 
-		modules.postInit();
+		modules.register();
 	}
 
 	@EventHandler
