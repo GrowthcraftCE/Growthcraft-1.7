@@ -1,8 +1,9 @@
 package growthcraft.core.util;
 
+import javax.annotation.Nullable;
+
 import com.google.common.base.Joiner;
 
-import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.CellarRegistry;
 
 import net.minecraft.util.EnumChatFormatting;
@@ -39,6 +40,7 @@ public class UnitFormatter
 	 * @param fluid - fluid to get a modifier for
 	 * @return localized format of the boolean
 	 */
+	@Nullable
 	public static String fluidModifier(Fluid fluid)
 	{
 		if (CellarRegistry.instance().booze().isFluidBooze(fluid))
@@ -51,38 +53,45 @@ public class UnitFormatter
 		}
 	}
 
+	@Nullable
 	public static String fluidModifier(FluidStack fluid)
 	{
 		return fluidModifier(fluid.getFluid());
+	}
+
+	@Nullable
+	public static String fluidName(FluidStack fluidStack)
+	{
+		if (fluidStack != null)
+		{
+			final Fluid fluid = fluidStack.getFluid();
+			final String modifier = fluidModifier(fluid);
+
+			if (modifier != null)
+			{
+				return StatCollector.translateToLocalFormatted("grc.format.booze.name",
+					EnumChatFormatting.WHITE + fluidStack.getLocalizedName(), modifier);
+			}
+			else
+			{
+				return StatCollector.translateToLocalFormatted("grc.format.fluid.name",
+						EnumChatFormatting.WHITE + fluidStack.getLocalizedName());
+			}
+		}
+		return null;
 	}
 
 	/**
 	 * Formats a fluid name, handling booze and their modifiers specially
 	 *
 	 * @param fluidStack - fluid source
-	 * @return localized format of the boolean
+	 * @return localized format of the fluid name + its modifiers if any
 	 */
-	public static String fluidName(FluidStack fluidStack)
+	@Nullable
+	public static String fluidNameForContainer(FluidStack fluidStack)
 	{
-		if (fluidStack != null)
-		{
-			final Fluid fluid = fluidStack.getFluid();
-			if (fluid instanceof Booze)
-			{
-				final String modifier = fluidModifier(fluid);
-				if (modifier != null)
-				{
-					return StatCollector.translateToLocalFormatted("grc.format.booze.name",
-						EnumChatFormatting.WHITE + fluidStack.getLocalizedName(), modifier);
-				}
-				return StatCollector.translateToLocalFormatted("grc.format.fluid.name",
-						EnumChatFormatting.WHITE + fluidStack.getLocalizedName());
-			}
-			else
-			{
-				return EnumChatFormatting.WHITE + fluidStack.getLocalizedName();
-			}
-		}
+		final String name = fluidName(fluidStack);
+		if (name != null) return name;
 		return invalidFluid();
 	}
 

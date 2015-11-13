@@ -36,7 +36,7 @@ public class TagFormatterFluidHandler implements ITagFormatter
 			if (fluidID != ConstID.NO_FLUID)
 			{
 				final FluidStack fluidStack = FluidStack.loadFluidStackFromNBT(tankTag.getCompoundTag("fluid"));
-				final String fluidName = UnitFormatter.fluidName(fluidStack);
+				final String fluidName = UnitFormatter.fluidNameForContainer(fluidStack);
 				content = content +
 					UnitFormatter.fractionNum(fluidStack.amount, tankTag.getInteger("capacity")) +
 					EnumChatFormatting.GRAY + " " + StatCollector.translateToLocalFormatted("grc.format.tank.content_suffix", fluidName);
