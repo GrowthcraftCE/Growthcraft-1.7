@@ -15,6 +15,24 @@ item.grc.yeast2.name=Bayanus Yeast
 item.grc.yeast3.name=Ethereal Yeast
 item.grc.yeast4.name=Origin Yeast
 
+item.grc.waterBag0.name=Water Bag (White)
+item.grc.waterBag1.name=Water Bag (Orange)
+item.grc.waterBag2.name=Water Bag (Magenta)
+item.grc.waterBag3.name=Water Bag (Light Blue)
+item.grc.waterBag4.name=Water Bag (Yellow)
+item.grc.waterBag5.name=Water Bag (Lime)
+item.grc.waterBag6.name=Water Bag (Pink)
+item.grc.waterBag7.name=Water Bag (Gray)
+item.grc.waterBag8.name=Water Bag (Light Gray)
+item.grc.waterBag9.name=Water Bag (Cyan)
+item.grc.waterBag10.name=Water Bag (Purple)
+item.grc.waterBag11.name=Water Bag (Blue)
+item.grc.waterBag12.name=Water Bag (Brown)
+item.grc.waterBag13.name=Water Bag (Green)
+item.grc.waterBag14.name=Water Bag (Red)
+item.grc.waterBag15.name=Water Bag (Black)
+item.grc.waterBag16.name=Water Bag
+
 container.grc.fruitPress=Fruit Press
 container.grc.brewKettle=Brew Kettle
 container.grc.fermentBarrel=Fermentation Barrel
@@ -35,6 +53,8 @@ achievement.getDrunk=Is Trouble Brewing?
 achievement.getDrunk.desc=Acquire Tipsy V.
 
 // number is a percentage
+grc.cellar.format.waterBag.name=%s (%s)
+grc.cellar.format.waterBag.contents=Contains: %2$dmB/%3$dmB of %1$s
 grc.cellar.format.tipsy_chance=%d%% Chance of Tipsy
 grc.cellar.item.booze_bucket.deprecated=DEPRECATED, craft to get updated bucket
 grc.cellar.item.booze_bucket.deprecated_suffix= (DEPRECATED)

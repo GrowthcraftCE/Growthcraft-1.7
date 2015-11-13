@@ -10,6 +10,7 @@ import growthcraft.cellar.common.block.BlockFruitPress;
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.common.item.ItemChievDummy;
+import growthcraft.cellar.common.item.ItemWaterBag;
 import growthcraft.cellar.common.item.ItemYeast;
 import growthcraft.cellar.common.potion.PotionCellar;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
@@ -74,6 +75,7 @@ public class GrowthCraftCellar
 	public static BlockDefinition fermentBarrel;
 
 	public static ItemDefinition yeast;
+	public static ItemDefinition waterBag;
 
 	public static Potion potionTipsy;
 
@@ -113,6 +115,7 @@ public class GrowthCraftCellar
 		brewKettle    = new BlockDefinition(new BlockBrewKettle());
 
 		yeast = new ItemDefinition(new ItemYeast());
+		waterBag = new ItemDefinition(new ItemWaterBag());
 		chievItemDummy = new ItemDefinition(new ItemChievDummy());
 
 		register();
@@ -129,6 +132,7 @@ public class GrowthCraftCellar
 		GameRegistry.registerBlock(fermentBarrel.getBlock(), "grc.fermentBarrel");
 
 		GameRegistry.registerItem(yeast.getItem(), "grc.yeast");
+		GameRegistry.registerItem(waterBag.getItem(), "grc.waterBag");
 		GameRegistry.registerItem(chievItemDummy.getItem(), "grc.chievItemDummy");
 
 		GameRegistry.registerTileEntity(TileEntityFruitPress.class, "grc.tileentity.fruitPress");
@@ -144,6 +148,24 @@ public class GrowthCraftCellar
 		GameRegistry.addRecipe(new ShapedOreRecipe(fruitPress.asStack(), "ABA", "CCC", "AAA", 'A', "plankWood", 'B', Blocks.piston,'C', "ingotIron"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(brewKettle.asStack(), "A", 'A', Items.cauldron));
 		GameRegistry.addRecipe(new ShapedOreRecipe(fermentBarrel.asStack(), "AAA", "BBB", "AAA", 'B', "plankWood", 'A', "ingotIron"));
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(waterBag.asStack(1, 16), "AAA", "ABA", "AAA", 'A', Items.leather, 'B', "materialRope"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 0), "dyeWhite", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 1), "dyeOrange", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 2), "dyeMagenta", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 3), "dyeLightBlue", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 4), "dyeYellow", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 5), "dyeLime", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 6), "dyePink", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 7), "dyeGray", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 8), "dyeLightGray", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 9), "dyeCyan", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 10), "dyePurple", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 11), "dyeBlue", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 12), "dyeBrown", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 13), "dyeGreen", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 14), "dyeRed", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 15), "dyeBlack", waterBag.getItem()));
 
 		//====================
 		// POTION
