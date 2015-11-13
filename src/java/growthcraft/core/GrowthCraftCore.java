@@ -31,6 +31,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(
 	modid = GrowthCraftCore.MOD_ID,
@@ -106,6 +107,9 @@ public class GrowthCraftCore
 		// CRAFTING
 		//====================
 		GameRegistry.addRecipe(rope.asStack(8), new Object[] {"A", 'A', Items.lead});
+
+
+		OreDictionary.registerOre("materialRope", rope.getItem());
 
 		NEI.hideItem(fenceRope.asStack());
 		NEI.hideItem(ropeBlock.asStack());
