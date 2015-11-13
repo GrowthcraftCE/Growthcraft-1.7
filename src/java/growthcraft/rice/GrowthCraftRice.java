@@ -24,6 +24,7 @@ import growthcraft.rice.common.item.ItemRiceBall;
 import growthcraft.rice.common.village.ComponentVillageRiceField;
 import growthcraft.rice.common.village.VillageHandlerRice;
 import growthcraft.rice.event.BonemealEventRice;
+import growthcraft.rice.init.GrcRiceBooze;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -62,14 +63,10 @@ public class GrowthCraftRice
 
 	public static BlockDefinition riceBlock;
 	public static BlockDefinition paddyField;
-	public static BlockBoozeDefinition[] riceSakeFluids;
 	public static ItemDefinition rice;
-	public static ItemDefinition riceSake;
-	public static ItemDefinition riceSakeBucket_deprecated;
 	public static ItemDefinition riceBall;
-	public static ItemBucketBoozeDefinition[] riceSakeBuckets;
 
-	public static Fluid[] riceSakeBooze;
+	public static GrcRiceBooze booze;
 
 	private GrcRiceConfig config = new GrcRiceConfig();
 	private ModuleContainer modules = new ModuleContainer();
@@ -86,6 +83,8 @@ public class GrowthCraftRice
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
 
+		booze = new GrcRiceBooze();
+
 		//====================
 		// INIT
 		//====================
@@ -95,16 +94,7 @@ public class GrowthCraftRice
 		rice     = new ItemDefinition(new ItemRice());
 		riceBall = new ItemDefinition(new ItemRiceBall());
 
-		riceSakeBooze = new Booze[4];
-		riceSakeFluids = new BlockBoozeDefinition[riceSakeBooze.length];
-		riceSakeBuckets = new ItemBucketBoozeDefinition[riceSakeBooze.length];
-		BoozeRegistryHelper.initializeBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, "grc.riceSake", config.riceSakeColor);
-
-		riceSake = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, riceSakeBooze)
-			.setColor(config.riceSakeColor)
-			.setTipsy(0.65F, 900)
-			.setPotionEffects(new int[] {Potion.moveSpeed.id, Potion.jump.id}, new int[] {3600, 3600}));
-		riceSakeBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(riceSakeBooze).setColor(config.riceSakeColor));
+		booze.preInit();
 
 		modules.preInit();
 		register();
@@ -119,13 +109,9 @@ public class GrowthCraftRice
 		GameRegistry.registerBlock(paddyField.getBlock(), "grc.paddyField");
 
 		GameRegistry.registerItem(rice.getItem(), "grc.rice");
-		GameRegistry.registerItem(riceSake.getItem(), "grc.riceSake");
-		GameRegistry.registerItem(riceSakeBucket_deprecated.getItem(), "grc.riceSake_bucket");
 		GameRegistry.registerItem(riceBall.getItem(), "grc.riceBall");
-		BoozeRegistryHelper.registerBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, riceSake, "grc.riceSake", riceSakeBucket_deprecated);
-		BoozeRegistryHelper.registerDefaultFermentation(riceSakeBooze);
 
-		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, rice.getItem(), riceSakeBooze[0], config.riceSakeBrewingTime, config.riceSakeBrewingYield, Residue.newDefault(0.2F));
+		booze.register();
 
 		MinecraftForge.addGrassSeed(rice.asStack(), config.riceSeedDropRarity);
 
@@ -172,9 +158,9 @@ public class GrowthCraftRice
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < riceSakeBooze.length; ++i)
+			for (int i = 0; i < booze.riceSakeBooze.length; ++i)
 			{
-				riceSakeBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				booze.riceSakeBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}
