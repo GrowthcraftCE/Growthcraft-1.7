@@ -1,0 +1,21 @@
+﻿
+tile.grc.bambooStalk.name=Bambou
+tile.grc.bambooBlock.name=Bambou
+tile.grc.bambooLeaves.name=Feuilles de bambou
+tile.grc.bambooFence.name=Barrière en bambou
+tile.grc.bambooShoot.name=Pousse de bambou
+tile.grc.bambooSlab.name=Dalle en bambou
+tile.grc.bambooStairs.name=Escaliers en bambou
+tile.grc.bambooWall.name=Mur de bambou
+tile.grc.bambooFenceGate.name=Portail en bambou
+tile.grc.bambooScaffold.name=Échafaudage en bambou
+tile.grc.bambooDoor.name=Porte en bambou
+
+item.grc.bamboo.name=Bambou
+item.grc.bambooDoor.name=Porte en bambou
+item.grc.bambooSlab.name=Dalle en bambou
+item.grc.bambooRaft.name=Radeau de bambou
+item.grc.bambooCoal.name=Charbon de bambou
+item.grc.bambooShootFood.name=Pousse de bambou
+
+entity.Growthcraft|Bamboo.bambooRaft.name=Radeau de bambou
