@@ -1,0 +1,58 @@
+itemGroup.tabGrCCellar=Cave Growthcraft
+
+tile.grc.fruitPress.name=Pressoir à fruit
+tile.grc.fruitPresser.name=Pressoir à fruit
+tile.grc.brewKettle.name=Bouilloire de brassage
+tile.grc.fermentBarrel.name=Tonneau de fermentation
+
+// Please remove this field once all other module translations have been updated,
+// this is no longer used
+item.grc.boozeBucket.name=Seau
+
+item.grc.yeast0.name=Levure de brasseurs
+item.grc.yeast1.name=Levure de Lager
+item.grc.yeast2.name=Levure de Bayanus
+item.grc.yeast3.name=Levure éthérée
+item.grc.yeast4.name=Levure d'origine
+
+container.grc.fruitPress=Pressoir à fruit
+container.grc.brewKettle=Bouilloire de brassage
+container.grc.fermentBarrel=Tonneau de fermentation
+
+grc.potion.tipsy=Pompette
+
+grc.booze=Picoler
+gui.grc.empty=Vide
+gui.grc.discard=Rebut
+gui.grc.switch=Basculer
+gui.grc.cantferment=Ne peut Fermenter
+
+achievement.craftBarrel=Extraction de tonnelier
+achievement.craftBarrel.desc=Fabriquez un tonneau de fermentation avec trois planches de bois et six lingots de fer.
+achievement.fermentBooze=C'est la levure je peux faire...
+achievement.fermentBooze.desc=Fermentez une boisson alcolisée.
+achievement.getDrunk=Es-ce menace de désordre ?
+achievement.getDrunk.desc=Acquérez Pompette V.
+
+// number is a percentage
+grc.cellar.format.tipsy_chance=%d%% Chance d'ivresse
+grc.cellar.item.booze_bucket.deprecated=OBSOLETE, fabriquez une amèlioration de seau
+grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETE)
+
+grc.cellar.brewKettle.brewing_prefix=Brassage :
+grc.cellar.brewKettle.itemslot.item=Élément :
+grc.cellar.brewKettle.itemslot.residue=Résidu :
+grc.cellar.fermentBarrel.progress_prefix=Progrès :
+grc.cellar.fermentBarrel.progress_format=%d%%
+grc.cellar.fermentBarrel.itemslot.modifier=Modificateur :
+grc.cellar.fruitPress.itemslot.item=Élément :
+grc.cellar.fruitPress.itemslot.residue=Residu :
+grc.cellar.fruitPresser.state.invalid=<Non-valide>
+grc.cellar.fruitPresser.state.pressed=Pressé
+grc.cellar.fruitPresser.state.unpressed=Non-pressé
+grc.cellar.fruitPresser.state_prefix=État :
+
+grc.cellar.waila.option.DisplayFluidContent=Réservoirs de fluide
+grc.cellar.waila.option.FruitPressExtras=Supplément de pressage
+grc.cellar.waila.option.BrewKettleExtras=Supplément de brassage
+grc.cellar.waila.option.FermentBarrelExtras=Supplément de fermentation
