@@ -35,7 +35,7 @@ public class BoozeRegistryHelper
 			boozes[i] = new Booze(basename + i).setColor(color);
 			FluidRegistry.registerFluid(boozes[i]);
 			CellarRegistry.instance().booze().registerBooze(boozes[i]);
-			final BlockFluidBooze boozeBlock = new BlockFluidBooze(boozes[i], color);
+			final BlockFluidBooze boozeBlock = new BlockFluidBooze(boozes[i]);
 			fluidBlocks[i] = new BlockBoozeDefinition(boozeBlock);
 			buckets[i] = new ItemBucketBoozeDefinition(new ItemBucketBooze(boozeBlock, boozes[i]));
 		}
