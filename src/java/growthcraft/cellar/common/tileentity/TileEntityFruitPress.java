@@ -4,10 +4,11 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.pressing.PressingRegistry;
 import growthcraft.api.cellar.util.FluidUtils;
-import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.util.ItemUtils;
+import growthcraft.core.common.inventory.GrcInternalInventory;
 
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,7 +16,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-public class TileEntityFruitPress extends TileEntityCellarMachine
+public class TileEntityFruitPress extends TileEntityCellarDevice
 {
 	public static class FruitPressDataID
 	{
@@ -34,12 +35,17 @@ public class TileEntityFruitPress extends TileEntityCellarMachine
 
 	private final int maxCap = GrowthCraftCellar.getConfig().fruitPressMaxCap;
 
-	public TileEntityFruitPress()
+	@Override
+	protected CellarTank[] createTanks()
 	{
-		super();
 		this.tankCaps = new int[] {maxCap};
-		this.invSlots = new ItemStack[2];
-		this.tanks = new CellarTank[] { new CellarTank(tankCaps[0], this) };
+		return new CellarTank[] { new CellarTank(tankCaps[0], this) };
+	}
+
+	@Override
+	protected GrcInternalInventory createInventory()
+	{
+		return new GrcInternalInventory(this, 2);
 	}
 
 	protected boolean resetTime()
@@ -72,46 +78,51 @@ public class TileEntityFruitPress extends TileEntityCellarMachine
 
 	private boolean canPress()
 	{
-		final PressingRegistry pressing = CellarRegistry.instance().pressing();
-		final int m = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord + 1, this.zCoord);
+		final ItemStack primarySlotItem = getStackInSlot(0);
 
+		if (primarySlotItem == null) return false;
+
+		final int m = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord + 1, this.zCoord);
 		if (m == 0 || m == 1) return false;
-		if (invSlots[0] == null) return false;
+
 		if (getFluidAmount(0) == this.maxCap) return false;
-		if (!pressing.isPressingRecipe(this.invSlots[0])) return false;
+
+		final PressingRegistry pressing = CellarRegistry.instance().pressing();
+		if (!pressing.isPressingRecipe(primarySlotItem)) return false;
 
 		if (isFluidTankEmpty(0)) return true;
 
-		final FluidStack stack = pressing.getPressingFluidStack(this.invSlots[0]);
+		final FluidStack stack = pressing.getPressingFluidStack(primarySlotItem);
 		return stack.isFluidEqual(getFluidStack(0));
 	}
 
 	private void producePomace()
 	{
-		final Residue residue = CellarRegistry.instance().pressing().getPressingResidue(this.invSlots[0]);
+		final Residue residue = CellarRegistry.instance().pressing().getPressingResidue(getStackInSlot(0));
 		this.pomace = this.pomace + residue.pomaceRate;
 		if (this.pomace >= 1.0F)
 		{
 			this.pomace = this.pomace - 1.0F;
-			final ItemStack residueResult = ItemUtils.mergeStacks(this.invSlots[1], residue.residueItem);
-			if (residueResult != null) invSlots[1] = residueResult;
+			final ItemStack residueResult = ItemUtils.mergeStacks(getStackInSlot(1), residue.residueItem);
+			if (residueResult != null) setInventorySlotContents(1, residueResult);
 		}
 	}
 
 	public void pressItem()
 	{
 		final PressingRegistry pressing = CellarRegistry.instance().pressing();
+		final ItemStack pressingItem = getStackInSlot(0);
 		producePomace();
-		final FluidStack fluidstack = pressing.getPressingFluidStack(this.invSlots[0]);
-		fluidstack.amount  = pressing.getPressingAmount(this.invSlots[0]);
+		final FluidStack fluidstack = pressing.getPressingFluidStack(pressingItem);
+		fluidstack.amount  = pressing.getPressingAmount(pressingItem);
 		tanks[0].fill(fluidstack, true);
 
-		invSlots[0] = ItemUtils.consumeStack(this.invSlots[0]);
+		decrStackSize(0, 1);
 	}
 
 	public int getPressingTime()
 	{
-		return CellarRegistry.instance().pressing().getPressingTime(this.invSlots[0]);
+		return CellarRegistry.instance().pressing().getPressingTime(getStackInSlot(0));
 	}
 
 	public int getPressProgressScaled(int par1)
@@ -128,7 +139,7 @@ public class TileEntityFruitPress extends TileEntityCellarMachine
 	 * UPDATE
 	 ************/
 	@Override
-	public void updateMachine()
+	public void updateCellarDevice()
 	{
 		if (this.canPress())
 		{
@@ -209,7 +220,8 @@ public class TileEntityFruitPress extends TileEntityCellarMachine
 	 * @param id - data id
 	 * @param v - value
 	 */
-	public void getGUINetworkData(int id, int v)
+	@Override
+	public void receiveGUINetworkData(int id, int v)
 	{
 		switch (id)
 		{
@@ -229,7 +241,8 @@ public class TileEntityFruitPress extends TileEntityCellarMachine
 		}
 	}
 
-	public void sendGUINetworkData(ContainerFruitPress container, ICrafting iCrafting)
+	@Override
+	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME, time);
 		final FluidStack fluid = tanks[0].getFluid();

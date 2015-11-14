@@ -4,6 +4,7 @@ tile.grc.fruitPress.name=Fruit Press
 tile.grc.fruitPresser.name=Fruit Press
 tile.grc.brewKettle.name=Brew Kettle
 tile.grc.fermentBarrel.name=Fermentation Barrel
+tile.grc.fermentJar.name=Fermentation Jar
 
 // Please remove this field once all other module translations have been updated,
 // this is no longer used
@@ -36,6 +37,7 @@ item.grc.waterBag16.name=Water Bag
 container.grc.fruitPress=Fruit Press
 container.grc.brewKettle=Brew Kettle
 container.grc.fermentBarrel=Fermentation Barrel
+container.grc.fermentJar=Fermentation Jar
 
 grc.potion.tipsy=Tipsy
 

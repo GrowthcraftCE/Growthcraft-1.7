@@ -5,6 +5,7 @@ import java.util.Set;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.stats.CellarAchievement;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.core.util.UnitFormatter;
 import growthcraft.core.Utils;
@@ -193,7 +194,7 @@ public class ItemBoozeBottle extends ItemFood
 
 					if (amplifier >= 4)
 					{
-						player.addStat(GrowthCraftCellar.getDrunk, 1);
+						CellarAchievement.GET_DRUNK.addStat(player, 1);
 					}
 				}
 			}

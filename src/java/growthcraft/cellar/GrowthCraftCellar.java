@@ -6,6 +6,7 @@ import java.lang.reflect.Modifier;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.common.block.BlockBrewKettle;
 import growthcraft.cellar.common.block.BlockFermentBarrel;
+import growthcraft.cellar.common.block.BlockFermentJar;
 import growthcraft.cellar.common.block.BlockFruitPress;
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.CommonProxy;
@@ -15,6 +16,7 @@ import growthcraft.cellar.common.item.ItemYeast;
 import growthcraft.cellar.common.potion.PotionCellar;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
+import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.common.village.ComponentVillageTavern;
@@ -24,8 +26,8 @@ import growthcraft.cellar.event.ItemCraftedEventCellar;
 import growthcraft.cellar.event.LivingUpdateEventCellar;
 import growthcraft.cellar.handler.GuiHandlerCellar;
 import growthcraft.cellar.network.PacketPipeline;
+import growthcraft.cellar.stats.GrcCellarAchievements;
 import growthcraft.cellar.util.YeastType;
-import growthcraft.core.common.AchievementPageGrowthcraft;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.ModuleContainer;
@@ -46,7 +48,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -74,6 +75,7 @@ public class GrowthCraftCellar
 	public static BlockDefinition fruitPresser;
 	public static BlockDefinition brewKettle;
 	public static BlockDefinition fermentBarrel;
+	public static BlockDefinition fermentJar;
 
 	public static ItemDefinition yeast;
 	public static ItemDefinition waterBag;
@@ -86,9 +88,7 @@ public class GrowthCraftCellar
 	// Achievments
 	public static ItemDefinition chievItemDummy;
 
-	public static Achievement craftBarrel;
-	public static Achievement fermentBooze;
-	public static Achievement getDrunk;
+	public static GrcCellarAchievements achievements;
 
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
@@ -114,6 +114,7 @@ public class GrowthCraftCellar
 		EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
 		tab = new CreativeTabsCellar("tabGrCCellar");
 		fermentBarrel = new BlockDefinition(new BlockFermentBarrel());
+		fermentJar    = new BlockDefinition(new BlockFermentJar());
 		fruitPress    = new BlockDefinition(new BlockFruitPress());
 		fruitPresser  = new BlockDefinition(new BlockFruitPresser());
 		brewKettle    = new BlockDefinition(new BlockBrewKettle());
@@ -135,6 +136,7 @@ public class GrowthCraftCellar
 		GameRegistry.registerBlock(fruitPresser.getBlock(), "grc.fruitPresser");
 		GameRegistry.registerBlock(brewKettle.getBlock(), "grc.brewKettle");
 		GameRegistry.registerBlock(fermentBarrel.getBlock(), "grc.fermentBarrel");
+		GameRegistry.registerBlock(fermentJar.getBlock(), "grc.fermentJar");
 
 		GameRegistry.registerItem(yeast.getItem(), "grc.yeast");
 		GameRegistry.registerItem(waterBag.getItem(), "grc.waterBag");
@@ -144,6 +146,7 @@ public class GrowthCraftCellar
 		GameRegistry.registerTileEntity(TileEntityFruitPresser.class, "grc.tileentity.fruitPresser");
 		GameRegistry.registerTileEntity(TileEntityBrewKettle.class, "grc.tileentity.brewKettle");
 		GameRegistry.registerTileEntity(TileEntityFermentBarrel.class, "grc.tileentity.fermentBarrel");
+		GameRegistry.registerTileEntity(TileEntityFermentJar.class, "grc.tileentity.fermentJar");
 
 		MapGenHelper.registerVillageStructure(ComponentVillageTavern.class, "grc.tavern");
 
@@ -181,13 +184,7 @@ public class GrowthCraftCellar
 		//====================
 		// ACHIEVEMENTS
 		//====================
-		craftBarrel  = (new Achievement("grc.achievement.craftBarrel", "craftBarrel", -4, -4, fermentBarrel.getBlock(), (Achievement)null)).initIndependentStat().registerStat();
-		fermentBooze = (new Achievement("grc.achievement.fermentBooze", "fermentBooze", -2, -4, Items.nether_wart, craftBarrel)).registerStat();
-		getDrunk     = (new Achievement("grc.achievement.getDrunk", "getDrunk", 0, -4, chievItemDummy.asStack(), fermentBooze)).setSpecial().registerStat();
-
-		AchievementPageGrowthcraft.chievMasterList.add(craftBarrel);
-		AchievementPageGrowthcraft.chievMasterList.add(fermentBooze);
-		AchievementPageGrowthcraft.chievMasterList.add(getDrunk);
+		achievements = new GrcCellarAchievements();
 
 		registerHeatSources();
 		registerYeast();
@@ -250,13 +247,13 @@ public class GrowthCraftCellar
 	public void load(FMLInitializationEvent event)
 	{
 		registerOres();
-		CommonProxy.instance.initRenders();
 
 		packetPipeline.initialise();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerCellar());
 
 		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());
-		CommonProxy.instance.registerVillagerSkin();
+
+		CommonProxy.instance.init();
 
 		modules.init();
 	}

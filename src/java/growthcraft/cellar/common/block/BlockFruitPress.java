@@ -2,7 +2,7 @@ package growthcraft.cellar.common.block;
 
 import java.util.Random;
 
-import growthcraft.cellar.client.renderer.RenderFruitPress;
+import growthcraft.cellar.client.render.RenderFruitPress;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.util.BlockFlags;
@@ -52,34 +52,6 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	{
 		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) ^ 1, BlockFlags.SEND_TO_CLIENT);
 		world.setBlockMetadataWithNotify(x, y + 1, z, world.getBlockMetadata(x, y + 1, z) ^ 1, BlockFlags.SEND_TO_CLIENT);
-	}
-
-	/************
-	 * TRIGGERS
-	 ************/
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
-	{
-		if (world.isRemote) return true;
-		if (tryWrenchItem(player, world, x, y, z)) return true;
-
-		final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
-
-		if (te != null)
-		{
-			final ItemStack itemstack = player.inventory.getCurrentItem();
-			if (Utils.playerDrainTank(world, x, y, z, te, itemstack, player, false, 64, 0.35F) == null)
-			{
-				openGui(player, world, x, y, z);
-			}
-			return true;
-		}
-		return false;
-	}
-
-	private void openGui(EntityPlayer player, World world, int x, int y, int z)
-	{
-		player.openGui(GrowthCraftCellar.instance, 0, world, x, y, z);
 	}
 
 	@Override
@@ -142,7 +114,8 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 
 		if (stack.hasDisplayName())
 		{
-			((TileEntityFruitPress)world.getTileEntity(x, y, z)).setGuiDisplayName(stack.getDisplayName());
+			final TileEntityFruitPress te = getTileEntity(world, x, y, z);
+			te.setGuiDisplayName(stack.getDisplayName());
 		}
 	}
 
@@ -289,7 +262,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public int getRenderType()
 	{
-		return RenderFruitPress.id;
+		return RenderFruitPress.RENDER_ID;
 	}
 
 	@Override
@@ -323,7 +296,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
 	{
-		final TileEntityFruitPress te = (TileEntityFruitPress)world.getTileEntity(x, y, z);
+		final TileEntityFruitPress te = getTileEntity(world, x, y, z);
 		if (te != null)
 		{
 			return te.getFluidAmountScaled(15, 0);

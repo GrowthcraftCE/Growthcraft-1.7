@@ -1,4 +1,4 @@
-package growthcraft.cellar.client.renderer;
+package growthcraft.cellar.client.render;
 
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.core.util.RenderUtils;
@@ -14,12 +14,24 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderFruitPresser implements ISimpleBlockRenderingHandler
 {
-	public static final int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+
+	@Override
+	public int getRenderId()
+	{
+		return RENDER_ID;
+	}
+
+	@Override
+	public boolean shouldRender3DInInventory(int modelID)
+	{
+		return true;
+	}
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		if (modelID == id)
+		if (modelID == RENDER_ID)
 		{
 			final BlockFruitPresser fruitPresser = (BlockFruitPresser)block;
 			final Tessellator tes = Tessellator.instance;
@@ -35,7 +47,7 @@ public class RenderFruitPresser implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		if (modelId == id)
+		if (modelId == RENDER_ID)
 		{
 			final BlockFruitPresser fruitPresser = (BlockFruitPresser)block;
 			final IIcon[] icon = {fruitPresser.getIconByIndex(0), fruitPresser.getIconByIndex(1), fruitPresser.getIconByIndex(2), fruitPresser.getIconByIndex(3)};
@@ -124,21 +136,8 @@ public class RenderFruitPresser implements ISimpleBlockRenderingHandler
 			renderer.clearOverrideBlockTexture();
 
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+			return true;
 		}
-
-		return true;
+		return false;
 	}
-
-	@Override
-	public boolean shouldRender3DInInventory(int modelID)
-	{
-		return true;
-	}
-
-	@Override
-	public int getRenderId()
-	{
-		return id;
-	}
-
 }

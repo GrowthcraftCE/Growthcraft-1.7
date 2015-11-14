@@ -3,9 +3,10 @@ package growthcraft.cellar.common.block;
 import java.util.Random;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.cellar.client.renderer.RenderFermentBarrel;
+import growthcraft.cellar.client.render.RenderFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.stats.CellarAchievement;
 import growthcraft.core.util.BlockFlags;
 import growthcraft.core.Utils;
 
@@ -58,51 +59,22 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 			{
 				if (CellarRegistry.instance().booze().hasTags(fluid, "fermented"))
 				{
-					player.triggerAchievement(GrowthCraftCellar.fermentBooze);
+					CellarAchievement.FERMENT_BOOZE.unlock(player);
 				}
 			}
 		}
 	}
 
-	private boolean playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
+	@Override
+	protected boolean playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
 	{
-		final FluidStack available = Utils.playerDrainTank(world, x, y, z, tank, held, player);
-		if (available != null)
+		final FluidStack available = Utils.playerDrainTank(world, x, y, z, tank, held, player, true, 64, 0.35f);
+		if (available != null && available.amount > 0)
 		{
 			setAchievements(player, available.getFluid());
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
-	{
-		if (world.isRemote) return true;
-		if (tryWrenchItem(player, world, x, y, z)) return true;
-
-		final TileEntityFermentBarrel te = (TileEntityFermentBarrel)world.getTileEntity(x, y, z);
-
-		if (te != null)
-		{
-			final ItemStack itemstack = player.inventory.getCurrentItem();
-			if (Utils.playerFillTank(world, x, y, z, te, itemstack, player) ||
-				playerDrainTank(world, x, y, z, te, itemstack, player))
-			{
-				world.markBlockForUpdate(x, y, z);
-			}
-			else
-			{
-				openGui(player, world, x, y, z);
-			}
-			return true;
-		}
-		return false;
-	}
-
-	private void openGui(EntityPlayer player, World world, int x, int y, int z)
-	{
-		player.openGui(GrowthCraftCellar.instance, 0, world, x, y, z);
 	}
 
 	@Override
@@ -154,7 +126,8 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 
 		if (stack.hasDisplayName())
 		{
-			((TileEntityFermentBarrel)world.getTileEntity(x, y, z)).setGuiDisplayName(stack.getDisplayName());
+			final TileEntityFermentBarrel te = getTileEntity(world, x, y, z);
+			te.setGuiDisplayName(stack.getDisplayName());
 		}
 	}
 
@@ -235,7 +208,7 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 	@Override
 	public int getRenderType()
 	{
-		return RenderFermentBarrel.id;
+		return RenderFermentBarrel.RENDER_ID;
 	}
 
 	@Override
@@ -269,7 +242,11 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 	@Override
 	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
 	{
-		final TileEntityFermentBarrel te = (TileEntityFermentBarrel) world.getTileEntity(x, y, z);
-		return te.getFermentProgressScaled(15);
+		final TileEntityFermentBarrel te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			return te.getFermentProgressScaled(15);
+		}
+		return 0;
 	}
 }

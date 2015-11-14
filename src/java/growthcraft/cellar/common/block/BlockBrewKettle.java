@@ -3,7 +3,7 @@ package growthcraft.cellar.common.block;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.cellar.client.renderer.RenderBrewKettle;
+import growthcraft.cellar.client.render.RenderBrewKettle;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.Utils;
@@ -25,6 +25,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.FluidStack;
 
 public class BlockBrewKettle extends BlockCellarContainer implements ICellarFluidHandler
 {
@@ -48,7 +50,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 		{
 			if (!world.isRemote)
 			{
-				final TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
+				final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
 				if (te != null)
 				{
 					if (entity instanceof EntityItem)
@@ -60,74 +62,21 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 		}
 	}
 
-	/************
-	 * TRIGGERS
-	 ************/
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
-	{
-		if (world.isRemote) return true;
-		if (tryWrenchItem(player, world, x, y, z)) return true;
-
-		final TileEntityBrewKettle te = (TileEntityBrewKettle)world.getTileEntity(x, y, z);
-		final ItemStack is = player.inventory.getCurrentItem();
-		if (te != null)
-		{
-			if (Utils.playerFillTank(world, x, y, z, te, is, player) ||
-				Utils.playerDrainTank(world, x, y, z, te, is, player, false, 64, 0.35F) != null)
-			{
-				world.markBlockForUpdate(x, y, z);
-			}
-			else
-			{
-				openGui(player, world, x, y, z);
-			}
-			return true;
-		}
-
-		return false;
-	}
-
-	private void openGui(EntityPlayer player, World world, int x, int y, int z)
-	{
-		player.openGui(GrowthCraftCellar.instance, 0, world, x, y, z);
-	}
-
-	private void spawnExp(int amount, float exp, EntityPlayer player)
-	{
-		int j;
-
-		if (exp == 0.0F)
-		{
-			amount = 0;
-		}
-		else if (exp < 1.0F)
-		{
-			j = MathHelper.floor_float((float)amount * exp);
-
-			if (j < MathHelper.ceiling_float_int((float)amount * exp) && (float)Math.random() < (float)amount * exp - (float)j)
-			{
-				++j;
-			}
-
-			amount = j;
-		}
-
-		while (amount > 0)
-		{
-			j = EntityXPOrb.getXPSplit(amount);
-			amount -= j;
-			player.worldObj.spawnEntityInWorld(new EntityXPOrb(player.worldObj, player.posX, player.posY + 0.5D, player.posZ + 0.5D, j));
-		}
-	}
-
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
 		if (stack.hasDisplayName())
 		{
-			((TileEntityBrewKettle)world.getTileEntity(x, y, z)).setGuiDisplayName(stack.getDisplayName());
+			final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
+			te.setGuiDisplayName(stack.getDisplayName());
 		}
+	}
+
+	@Override
+	protected boolean playerDrainTank(World world, int x, int y, int z, IFluidHandler fh, ItemStack is, EntityPlayer player)
+	{
+		final FluidStack fs = Utils.playerDrainTank(world, x, y, z, fh, is, player, true, 64, 0.35F);
+		return fs != null && fs.amount > 0;
 	}
 
 	/************
@@ -203,7 +152,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public int getRenderType()
 	{
-		return RenderBrewKettle.id;
+		return RenderBrewKettle.RENDER_ID;
 	}
 
 	@Override
@@ -264,7 +213,11 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	@Override
 	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
 	{
-		final TileEntityBrewKettle te = (TileEntityBrewKettle) world.getTileEntity(x, y, z);
-		return te.getFluidAmountScaled(15, 1);
+		final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			return te.getFluidAmountScaled(15, 1);
+		}
+		return 0;
 	}
 }

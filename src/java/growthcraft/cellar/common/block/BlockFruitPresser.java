@@ -2,7 +2,7 @@ package growthcraft.cellar.common.block;
 
 import java.util.Random;
 
-import growthcraft.cellar.client.renderer.RenderFruitPresser;
+import growthcraft.cellar.client.render.RenderFruitPresser;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.block.IRotatableBlock;
@@ -254,7 +254,7 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	@Override
 	public int getRenderType()
 	{
-		return RenderFruitPresser.id;
+		return RenderFruitPresser.RENDER_ID;
 	}
 
 	@Override

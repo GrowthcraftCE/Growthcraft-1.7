@@ -8,21 +8,19 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.api.cellar.fermenting.FermentationResult;
 import growthcraft.api.cellar.util.FluidUtils;
-import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.util.ItemUtils;
+import growthcraft.core.common.inventory.GrcInternalInventory;
 
 import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
-public class TileEntityFermentBarrel extends TileEntityCellarMachine
+public class TileEntityFermentBarrel extends TileEntityCellarDevice
 {
 	public static enum FermentBarrelDataID
 	{
@@ -46,18 +44,27 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 	// Other Vars.
 	public final boolean canFormYeast = GrowthCraftCellar.getConfig().formYeastInBarrels;
 	protected int time;
-	protected int yeastTime;
-	protected List<ItemStack> tempItemList = new ArrayList<ItemStack>();
-	protected Random random = new Random();
+	protected YeastGenerator yeastGen;
 	private int maxCap = GrowthCraftCellar.getConfig().fermentBarrelMaxCap;
 	private int timemax = GrowthCraftCellar.getConfig().fermentSpeed;
 
 	public TileEntityFermentBarrel()
 	{
 		super();
+		yeastGen = new YeastGenerator(this);
+	}
+
+	@Override
+	protected CellarTank[] createTanks()
+	{
 		this.tankCaps = new int[] {maxCap};
-		this.invSlots = new ItemStack[2];
-		this.tanks = new CellarTank[] { new CellarTank(tankCaps[0], this) };
+		return new CellarTank[] { new CellarTank(tankCaps[0], this) };
+	}
+
+	@Override
+	protected GrcInternalInventory createInventory()
+	{
+		return new GrcInternalInventory(this, 2);
 	}
 
 	@Override
@@ -80,7 +87,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 
 	private FermentationResult getFermentation()
 	{
-		return CellarRegistry.instance().fermenting().getFermentation(getFluidStack(0), invSlots[0]);
+		return CellarRegistry.instance().fermenting().getFermentation(getFluidStack(0), getStackInSlot(0));
 	}
 
 	public int getTime()
@@ -100,23 +107,27 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 
 	private boolean canFerment()
 	{
-		if (invSlots[0] == null) return false;
+		if (getStackInSlot(0) == null) return false;
 		if (isFluidTankEmpty(0)) return false;
 		return getFermentation() != null;
 	}
 
 	public void fermentItem()
 	{
-		final Item item = this.invSlots[0].getItem();
-		final FluidStack fluidStack = getFluidStack(0);
-
-		final FermentationResult result = getFermentation();
-		if (result != null)
+		final ItemStack fermentItem = getStackInSlot(0);
+		if (fermentItem != null)
 		{
-			tanks[0].setFluid(result.asFluidStack(getFluidStack(0).amount));
-		}
+			final Item item = fermentItem.getItem();
+			final FluidStack fluidStack = getFluidStack(0);
 
-		invSlots[0] = ItemUtils.consumeStack(this.invSlots[0]);
+			final FermentationResult result = getFermentation();
+			if (result != null)
+			{
+				getFluidTank(0).setFluid(result.asFluidStack(getFluidStack(0).amount));
+			}
+
+			decrStackSize(0, 1);
+		}
 	}
 
 	public int getFermentProgressScaled(int scale)
@@ -129,57 +140,8 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 		return 0;
 	}
 
-	public boolean canProduceYeast()
-	{
-		if (!canFormYeast) return false;
-		if (isFluidTankEmpty(0)) return false;
-
-		return CellarRegistry.instance().booze().hasTags(getFluid(0), "young");
-	}
-
-	/**
-	 * This is called to initialize the yeast slot, a random yeast type is
-	 * chosen from the various biome types and set in the slot,
-	 * any further yeast production will be of the same type.
-	 */
-	protected void initProduceYeast()
-	{
-		tempItemList.clear();
-		final BiomeGenBase biome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
-		final FermentingRegistry reg = CellarRegistry.instance().fermenting();
-		for (Type t : BiomeDictionary.getTypesForBiome(biome))
-		{
-			final List<ItemStack> yeastList = reg.getYeastListForBiomeType(t);
-			if (yeastList != null)
-			{
-				tempItemList.addAll(yeastList);
-			}
-		}
-
-		if (tempItemList.size() > 0)
-		{
-			invSlots[1] = tempItemList.get(random.nextInt(tempItemList.size())).copy();
-		}
-	}
-
-	public void produceYeast()
-	{
-		if (invSlots[1] == null)
-		{
-			initProduceYeast();
-		}
-		else
-		{
-			final BiomeGenBase biome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
-			if (CellarRegistry.instance().fermenting().canYeastFormInBiome(invSlots[1], biome))
-			{
-				invSlots[1] = ItemUtils.increaseStack(invSlots[1]);
-			}
-		}
-	}
-
 	@Override
-	public void updateMachine()
+	public void updateCellarDevice()
 	{
 		if (canFerment())
 		{
@@ -199,16 +161,8 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 				this.time = 0;
 				markForInventoryUpdate();
 			}
-			if (canProduceYeast())
-			{
-				this.yeastTime++;
-				if (yeastTime >= 1200)
-				{
-					this.yeastTime = 0;
-					produceYeast();
-					markForInventoryUpdate();
-				}
-			}
+
+			yeastGen.update();
 		}
 	}
 
@@ -254,6 +208,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
+		yeastGen.readFromNBT(nbt, "yeastgen");
 		this.time = nbt.getShort("time");
 	}
 
@@ -261,6 +216,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
+		yeastGen.writeToNBT(nbt, "yeastgen");
 		nbt.setShort("time", (short)this.time);
 	}
 
@@ -272,7 +228,8 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 	 * @param id - data id
 	 * @param v - value
 	 */
-	public void getGUINetworkData(int id, int v)
+	@Override
+	public void receiveGUINetworkData(int id, int v)
 	{
 		switch (FermentBarrelDataID.fromInt(id))
 		{
@@ -292,7 +249,8 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 		}
 	}
 
-	public void sendGUINetworkData(ContainerFermentBarrel container, ICrafting iCrafting)
+	@Override
+	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TIME.ordinal(), time);
 		final FluidStack fluid = tanks[0].getFluid();
@@ -306,13 +264,13 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
-		return tanks[0].fill(resource, doFill);
+		return getFluidTank(0).fill(resource, doFill);
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
 	{
-		if (resource == null || !resource.isFluidEqual(tanks[0].getFluid()))
+		if (resource == null || !resource.isFluidEqual(getFluidTank(0).getFluid()))
 		{
 			return null;
 		}
@@ -322,7 +280,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		final FluidStack d = tanks[0].drain(maxDrain, doDrain);
+		final FluidStack d = getFluidTank(0).drain(maxDrain, doDrain);
 		return d;
 	}
 }

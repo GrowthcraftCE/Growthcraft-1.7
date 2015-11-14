@@ -1,8 +1,6 @@
 package growthcraft.cellar.common.inventory;
 
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
-import growthcraft.cellar.common.inventory.slot.SlotBrewKettleResidue;
+import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,19 +10,17 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerBrewKettle extends CellarContainer
+public class ContainerFermentJar extends CellarContainer
 {
-	public ContainerBrewKettle(InventoryPlayer player, TileEntityBrewKettle brewKettle)
+	public ContainerFermentJar(InventoryPlayer player, TileEntityFermentJar fermentJar)
 	{
-		super(brewKettle);
+		super(fermentJar);
 		// Slot Indexes:
 		//0            raw
-		//1            residue
-		//2 - 28 (29)  player.inv.backpack
-		//29 - 37 (38) player.inv.hotbar
+		//1 - 27 (28)  player.inv.backpack
+		//28 - 36 (37) player.inv.hotbar
 
-		addSlotToContainer(new Slot(brewKettle, 0, 80, 35));
-		addSlotToContainer(new SlotBrewKettleResidue(this, brewKettle, 1, 141, 17));
+		addSlotToContainer(new Slot(fermentJar, 0, 43, 53));
 
 		bindPlayerInventory(player, 8, 84);
 	}
@@ -40,37 +36,25 @@ public class ContainerBrewKettle extends CellarContainer
 			final ItemStack stack = slot.getStack();
 			itemstack = stack.copy();
 
-			if (index == 1)
+			if (index > 1)
 			{
-				if (!this.mergeItemStack(stack, 2, 38, true))
+				if (!this.mergeItemStack(stack, 0, 1, false))
 				{
 					return null;
 				}
-
-				slot.onSlotChange(stack, itemstack);
-			}
-			else if (index != 0)
-			{
-				if (CellarRegistry.instance().brewing().isItemBrewingIngredient(stack))
+				else if (index >= 1 && index < 28)
 				{
-					if (!this.mergeItemStack(stack, 0, 1, false))
+					if (!this.mergeItemStack(stack, 28, 37, false))
 					{
 						return null;
 					}
 				}
-				else if (index >= 2 && index < 29)
-				{
-					if (!this.mergeItemStack(stack, 29, 38, false))
-					{
-						return null;
-					}
-				}
-				else if (index >= 29 && index < 38 && !this.mergeItemStack(stack, 2, 29, false))
+				else if (index >= 28 && index < 37 && !this.mergeItemStack(stack, 1, 28, false))
 				{
 					return null;
 				}
 			}
-			else if (!this.mergeItemStack(stack, 2, 38, false))
+			else if (!this.mergeItemStack(stack, 1, 37, false))
 			{
 				return null;
 			}

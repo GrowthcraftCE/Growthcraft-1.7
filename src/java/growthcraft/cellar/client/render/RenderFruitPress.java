@@ -1,4 +1,4 @@
-package growthcraft.cellar.client.renderer;
+package growthcraft.cellar.client.render;
 
 import growthcraft.cellar.common.block.BlockFruitPress;
 import growthcraft.core.util.RenderUtils;
@@ -14,12 +14,43 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderFruitPress implements ISimpleBlockRenderingHandler
 {
-	public static final int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+
+	@Override
+	public int getRenderId()
+	{
+		return RENDER_ID;
+	}
+
+	@Override
+	public boolean shouldRender3DInInventory(int modelID)
+	{
+		return true;
+	}
+
+	private void renderWoodSlatsInv(RenderBlocks r, Block b, IIcon i, Tessellator t, double x1, double x2, double z1, double z2)
+	{
+		r.setRenderBounds(x1, 0.375D, z1, x2, 1.0D, z2);
+		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
+	}
+
+	private void renderMetalRingsInv(RenderBlocks r, Block b, IIcon i, Tessellator t, double y1, double y2)
+	{
+		final double d = 0.0625D;
+		r.setRenderBounds(1.5*d, y1, 1.5*d, 2.5*d,  y2, 14.5*d);
+		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
+		r.setRenderBounds(13.5*d, y1, 1.5*d, 14.5*d,  y2, 14.5*d);
+		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
+		r.setRenderBounds(2.5*d, y1, 1.5*d, 13.5*d,  y2, 2.5*d);
+		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
+		r.setRenderBounds(2.5*d, y1, 13.5*d, 13.5*d,  y2, 14.5*d);
+		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
+	}
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		if (modelID == id)
+		if (modelID == RENDER_ID)
 		{
 			final BlockFruitPress fruitPress = (BlockFruitPress)block;
 			final Tessellator tes = Tessellator.instance;
@@ -89,29 +120,29 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 		}
 	}
 
-	private void renderWoodSlatsInv(RenderBlocks r, Block b, IIcon i, Tessellator t, double x1, double x2, double z1, double z2)
+	private void renderWoodSlats(RenderBlocks r, Block b, int x, int y, int z, double x1, double x2, double z1, double z2)
 	{
 		r.setRenderBounds(x1, 0.375D, z1, x2, 1.0D, z2);
-		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
+		r.renderStandardBlock(b, x, y, z);
 	}
 
-	private void renderMetalRingsInv(RenderBlocks r, Block b, IIcon i, Tessellator t, double y1, double y2)
+	private void renderMetalRings(RenderBlocks r, Block b, int x, int y, int z, double y1, double y2)
 	{
 		final double d = 0.0625D;
 		r.setRenderBounds(1.5*d, y1, 1.5*d, 2.5*d,  y2, 14.5*d);
-		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
+		r.renderStandardBlock(b, x, y, z);
 		r.setRenderBounds(13.5*d, y1, 1.5*d, 14.5*d,  y2, 14.5*d);
-		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
+		r.renderStandardBlock(b, x, y, z);
 		r.setRenderBounds(2.5*d, y1, 1.5*d, 13.5*d,  y2, 2.5*d);
-		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
+		r.renderStandardBlock(b, x, y, z);
 		r.setRenderBounds(2.5*d, y1, 13.5*d, 13.5*d,  y2, 14.5*d);
-		RenderUtils.drawInventoryBlock_icon(b, r, i, t);
+		r.renderStandardBlock(b, x, y, z);
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		if (modelId == id)
+		if (modelId == RENDER_ID)
 		{
 			final BlockFruitPress fruitPress = (BlockFruitPress)block;
 			final int    m    = world.getBlockMetadata(x, y, z);
@@ -247,36 +278,5 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		}
 		return true;
-	}
-
-	private void renderWoodSlats(RenderBlocks r, Block b, int x, int y, int z, double x1, double x2, double z1, double z2)
-	{
-		r.setRenderBounds(x1, 0.375D, z1, x2, 1.0D, z2);
-		r.renderStandardBlock(b, x, y, z);
-	}
-
-	private void renderMetalRings(RenderBlocks r, Block b, int x, int y, int z, double y1, double y2)
-	{
-		final double d = 0.0625D;
-		r.setRenderBounds(1.5*d, y1, 1.5*d, 2.5*d,  y2, 14.5*d);
-		r.renderStandardBlock(b, x, y, z);
-		r.setRenderBounds(13.5*d, y1, 1.5*d, 14.5*d,  y2, 14.5*d);
-		r.renderStandardBlock(b, x, y, z);
-		r.setRenderBounds(2.5*d, y1, 1.5*d, 13.5*d,  y2, 2.5*d);
-		r.renderStandardBlock(b, x, y, z);
-		r.setRenderBounds(2.5*d, y1, 13.5*d, 13.5*d,  y2, 14.5*d);
-		r.renderStandardBlock(b, x, y, z);
-	}
-
-	@Override
-	public boolean shouldRender3DInInventory(int modelID)
-	{
-		return true;
-	}
-
-	@Override
-	public int getRenderId()
-	{
-		return id;
 	}
 }

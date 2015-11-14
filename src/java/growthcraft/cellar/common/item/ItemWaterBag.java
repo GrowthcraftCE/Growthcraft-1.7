@@ -5,22 +5,23 @@ import java.util.List;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.util.UnitFormatter;
 
-//import net.minecraftforge.fluids.Fluid;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
+import net.minecraftforge.fluids.ItemFluidContainer;
 
-public class ItemWaterBag extends ItemFood implements IFluidContainerItem
+public class ItemWaterBag extends Item implements IFluidContainerItem
 {
 	protected int capacity;
 	protected int dosage;
@@ -30,12 +31,12 @@ public class ItemWaterBag extends ItemFood implements IFluidContainerItem
 
 	public ItemWaterBag()
 	{
-		super(0, 0, false);
-		capacity = GrowthCraftCellar.getConfig().waterBagCapacity;
-		dosage = GrowthCraftCellar.getConfig().waterBagDosage;
+		super();
 		setUnlocalizedName("grc.waterBag");
 		setTextureName("grccellar:water_bag");
 		setCreativeTab(GrowthCraftCellar.tab);
+		this.capacity = GrowthCraftCellar.getConfig().waterBagCapacity;
+		this.dosage = GrowthCraftCellar.getConfig().waterBagDosage;
 	}
 
 	public NBTTagCompound getFluidTagFromStack(ItemStack stack)
@@ -245,6 +246,26 @@ public class ItemWaterBag extends ItemFood implements IFluidContainerItem
 			final NBTTagCompound fluidTag = container.stackTagCompound.getCompoundTag("Fluid");
 			fluidTag.setInteger("Amount", currentAmount - stack.amount);
 			container.stackTagCompound.setTag("Fluid", fluidTag);
+		}
+		return stack;
+	}
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack)
+	{
+		return EnumAction.drink;
+	}
+
+	@Override
+	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
+	{
+		final FluidStack drained = drain(stack, dosage, false);
+		if (drained != null)
+		{
+			if (drained.amount == dosage)
+			{
+				drain(stack, dosage, true);
+			}
 		}
 		return stack;
 	}

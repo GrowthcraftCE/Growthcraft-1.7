@@ -1,10 +1,19 @@
 package growthcraft.cellar.common.tileentity;
 
+import java.util.Random;
+
+import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.inventory.IInventoryWatcher;
+import growthcraft.core.common.tileentity.ICustomDisplayName;
+import growthcraft.core.common.tileentity.IGuiNetworkSync;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.core.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -17,17 +26,39 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public abstract class TileEntityCellarMachine extends TileEntity implements ISidedInventory, IFluidHandler
+public abstract class TileEntityCellarDevice extends TileEntity implements ISidedInventory, IFluidHandler, ICustomDisplayName, IInventoryWatcher, IGuiNetworkSync
 {
 	protected String name;
-	protected ItemStack[] invSlots;
+	protected GrcInternalInventory inventory;
 	protected CellarTank[] tanks;
 	protected int[] tankCaps;
 	protected boolean needInventoryUpdate;
 	protected boolean needBlockUpdate;
+	protected Random random = new Random();
 
+	public TileEntityCellarDevice()
+	{
+		super();
+		this.inventory = createInventory();
+		this.tanks = createTanks();
+	}
+
+	public void onInventoryChanged(IInventory inv, int index)
+	{
+		markDirty();
+	}
+
+	public void onItemDiscarded(IInventory inv, ItemStack stack, int index)
+	{
+		ItemUtils.spawnItemStack(worldObj, xCoord, yCoord, zCoord, stack, random);
+	}
+
+	protected abstract GrcInternalInventory createInventory();
+	protected abstract CellarTank[] createTanks();
 	public abstract String getDefaultInventoryName();
-	public abstract void updateMachine();
+	public abstract void updateCellarDevice();
+	public abstract void sendGUINetworkData(Container container, ICrafting icrafting);
+	public abstract void receiveGUINetworkData(int id, int value);
 
 	// Call this when you modified the inventory, or your not sure what
 	// kind of update you require
@@ -71,7 +102,7 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 
 		if (!this.worldObj.isRemote)
 		{
-			updateMachine();
+			updateCellarDevice();
 		}
 	}
 
@@ -95,7 +126,7 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
-		return this.invSlots[index];
+		return inventory.getStackInSlot(index);
 	}
 
 	public ItemStack tryMergeItemIntoSlot(ItemStack itemstack, int index)
@@ -103,7 +134,7 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 		final ItemStack result = ItemUtils.mergeStacksBang(getStackInSlot(index), itemstack);
 		if (result != null)
 		{
-			invSlots[index] = result;
+			inventory.setInventorySlotContents(index, result);
 		}
 		return result;
 	}
@@ -117,63 +148,31 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 	@Override
 	public ItemStack decrStackSize(int index, int par2)
 	{
-		if (this.invSlots[index] != null)
-		{
-			ItemStack itemstack;
-
-			if (this.invSlots[index].stackSize <= par2)
-			{
-				itemstack = this.invSlots[index];
-				this.invSlots[index] = null;
-				return itemstack;
-			}
-			else
-			{
-				itemstack = this.invSlots[index].splitStack(par2);
-
-				if (this.invSlots[index].stackSize == 0)
-				{
-					this.invSlots[index] = null;
-				}
-
-				return itemstack;
-			}
-		}
-		else
-		{
-			return null;
-		}
+		return inventory.decrStackSize(index, par2);
 	}
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int index)
 	{
-		final ItemStack itemstack = invSlots[index];
-		invSlots[index] = null;
-		return itemstack;
+		return inventory.getStackInSlotOnClosing(index);
 	}
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack itemstack)
 	{
-		this.invSlots[index] = itemstack;
-
-		if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
-		{
-			itemstack.stackSize = this.getInventoryStackLimit();
-		}
+		inventory.setInventorySlotContents(index, itemstack);
 	}
 
 	@Override
 	public int getInventoryStackLimit()
 	{
-		return 64;
+		return inventory.getInventoryStackLimit();
 	}
 
 	@Override
 	public int getSizeInventory()
 	{
-		return this.invSlots.length;
+		return inventory.getSizeInventory();
 	}
 
 	@Override
@@ -195,7 +194,7 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
 	{
-		return true;
+		return inventory.isItemValidForSlot(index, itemstack);
 	}
 
 	@Override
@@ -215,8 +214,7 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 	 */
 	protected void readInventorySlotsFromNBT(NBTTagCompound nbt)
 	{
-		this.invSlots = ItemUtils.clearInventorySlots(invSlots, getSizeInventory());
-		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
+		inventory.readFromNBT(nbt, "items");
 	}
 
 	protected void readTanksFromNBT(NBTTagCompound nbt)
@@ -260,8 +258,7 @@ public abstract class TileEntityCellarMachine extends TileEntity implements ISid
 	{
 		super.writeToNBT(nbt);
 
-		// INVENTORY
-		nbt.setTag("items", NBTHelper.writeInventorySlotsToNBT(invSlots));
+		inventory.writeToNBT(nbt, "items");
 
 		// TANKS
 		writeTanksToNBT(nbt);

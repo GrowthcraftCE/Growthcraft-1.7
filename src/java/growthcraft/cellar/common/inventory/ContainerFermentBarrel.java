@@ -6,48 +6,24 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerFermentBarrel extends Container
+public class ContainerFermentBarrel extends CellarContainer
 {
-	private TileEntityFermentBarrel te;
-
 	public ContainerFermentBarrel(InventoryPlayer player, TileEntityFermentBarrel fermentBarrel)
 	{
+		super(fermentBarrel);
 		// Slot Indexes:
 		//0            raw
 		//1 - 27 (28)  player.inv.backpack
 		//28 - 36 (37) player.inv.hotbar
 
-		this.te = fermentBarrel;
-		this.addSlotToContainer(new Slot(te, 0, 43, 53));
-		this.addSlotToContainer(new Slot(te, 1, 153, 35));
-		int i;
+		addSlotToContainer(new Slot(fermentBarrel, 0, 43, 53));
+		addSlotToContainer(new Slot(fermentBarrel, 1, 153, 35));
 
-		for (i = 0; i < 3; ++i)
-		{
-			for (int j = 0; j < 9; ++j)
-			{
-				final int slotIndex = j + i * 9 + 9;
-				final int x = 8 + j * 18;
-				final int y = 84 + i * 18;
-				this.addSlotToContainer(new Slot(player, slotIndex, x, y));
-			}
-		}
-
-		for (i = 0; i < 9; ++i)
-		{
-			this.addSlotToContainer(new Slot(player, i, 8 + i * 18, 142));
-		}
-	}
-
-	@Override
-	public boolean canInteractWith(EntityPlayer player)
-	{
-		return this.te.isUseableByPlayer(player);
+		bindPlayerInventory(player, 8, 84);
 	}
 
 	@Override
@@ -102,30 +78,5 @@ public class ContainerFermentBarrel extends Container
 		}
 
 		return itemstack;
-	}
-
-	// crafters
-	@Override
-	public void addCraftingToCrafters(ICrafting iCrafting)
-	{
-		super.addCraftingToCrafters(iCrafting);
-		te.sendGUINetworkData(this, iCrafting);
-	}
-
-	@Override
-	public void detectAndSendChanges()
-	{
-		super.detectAndSendChanges();
-
-		for (int i = 0; i < crafters.size(); i++)
-		{
-			te.sendGUINetworkData(this, (ICrafting) crafters.get(i));
-		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int id, int v)
-	{
-		te.getGUINetworkData(id, v);
 	}
 }

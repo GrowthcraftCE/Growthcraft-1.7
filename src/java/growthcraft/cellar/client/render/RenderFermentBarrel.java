@@ -1,4 +1,4 @@
-package growthcraft.cellar.client.renderer;
+package growthcraft.cellar.client.render;
 
 import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.core.util.RenderUtils;
@@ -14,12 +14,29 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+
+	@Override
+	public int getRenderId()
+	{
+		return RENDER_ID;
+	}
+
+	@Override
+	public boolean shouldRender3DInInventory(int modelID)
+	{
+		return true;
+	}
+
+	private void setRenderBounds(RenderBlocks r, double x1, double x2, double y1, double y2, double z1, double z2)
+	{
+		r.setRenderBounds(x1, y1, z1, x2, y2, z2);
+	}
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		if (modelID == id)
+		if (modelID == RENDER_ID)
 		{
 			final BlockFermentBarrel fermentBarrel = (BlockFermentBarrel)block;
 			final Tessellator tes = Tessellator.instance;
@@ -100,7 +117,7 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		if (modelId == id)
+		if (modelId == RENDER_ID)
 		{
 			final BlockFermentBarrel fermentBarrel = (BlockFermentBarrel)block;
 			final IIcon[] icon = {fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(1), fermentBarrel.getIconByIndex(2), fermentBarrel.getIconByIndex(3)};
@@ -384,22 +401,4 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 		}
 		return true;
 	}
-
-	private void setRenderBounds(RenderBlocks r, double x1, double x2, double y1, double y2, double z1, double z2)
-	{
-		r.setRenderBounds(x1, y1, z1, x2, y2, z2);
-	}
-
-	@Override
-	public boolean shouldRender3DInInventory(int modelID)
-	{
-		return true;
-	}
-
-	@Override
-	public int getRenderId()
-	{
-		return id;
-	}
-
 }

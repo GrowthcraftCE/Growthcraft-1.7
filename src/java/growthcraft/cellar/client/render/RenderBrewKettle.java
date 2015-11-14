@@ -1,4 +1,4 @@
-package growthcraft.cellar.client.renderer;
+package growthcraft.cellar.client.render;
 
 import org.lwjgl.opengl.GL11;
 
@@ -18,14 +18,27 @@ import net.minecraftforge.fluids.Fluid;
 
 public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+
 	// original 0.71875F
 	private static final float FLUID_HEIGHT = 0.6875F;
 
 	@Override
+	public int getRenderId()
+	{
+		return RENDER_ID;
+	}
+
+	@Override
+	public boolean shouldRender3DInInventory(int modelID)
+	{
+		return true;
+	}
+
+	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		if (modelID == id)
+		if (modelID == RENDER_ID)
 		{
 			final BlockBrewKettle brewKettle = (BlockBrewKettle)block;
 			final Tessellator tes = Tessellator.instance;
@@ -53,7 +66,7 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		if (modelId == id)
+		if (modelId == RENDER_ID)
 		{
 			final BlockBrewKettle brewKettle = (BlockBrewKettle)block;
 			final double d = 0.0625D;
@@ -111,17 +124,5 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		}
 		return true;
-	}
-
-	@Override
-	public boolean shouldRender3DInInventory(int modelID)
-	{
-		return true;
-	}
-
-	@Override
-	public int getRenderId()
-	{
-		return id;
 	}
 }
