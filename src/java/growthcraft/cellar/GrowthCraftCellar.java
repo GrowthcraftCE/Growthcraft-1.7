@@ -81,7 +81,7 @@ public class GrowthCraftCellar
 	public static Potion potionTipsy;
 
 	// Constants
-	public static final ItemStack EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
+	public static ItemStack EMPTY_BOTTLE;
 
 	// Achievments
 	public static ItemDefinition chievItemDummy;
@@ -111,6 +111,7 @@ public class GrowthCraftCellar
 		//====================
 		// INIT
 		//====================
+		EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
 		tab = new CreativeTabsCellar("tabGrCCellar");
 		fermentBarrel = new BlockDefinition(new BlockFermentBarrel());
 		fruitPress    = new BlockDefinition(new BlockFruitPress());
