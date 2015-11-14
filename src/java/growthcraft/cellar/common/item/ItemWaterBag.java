@@ -71,7 +71,7 @@ public class ItemWaterBag extends ItemFood implements IFluidContainerItem
 	public String getItemStackDisplayName(ItemStack stack)
 	{
 		final String basename = super.getItemStackDisplayName(stack);
-		final String fluidName = UnitFormatter.fluidNameForContainer(getFluid(stack));
+		final String fluidName = UnitFormatter.fluidName(getFluid(stack));
 		if (fluidName != null)
 		{
 			return StatCollector.translateToLocalFormatted("grc.cellar.format.waterBag.name", basename, fluidName);
