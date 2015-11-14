@@ -203,11 +203,11 @@ public class GuiFermentBarrel extends GuiCellar
 					final String s = UnitFormatter.fluidModifier(fluid);
 					if (s != null) tooltip.add(s);
 
-					if (this.te.getBoozeMeta() > 3)
-					{
-						tooltip.add("");
-						tooltip.add(EnumChatFormatting.RED + I18n.format("gui.grc.cantferment"));
-					}
+					//if (this.te.getBoozeMeta() > 3)
+					//{
+					//	tooltip.add("");
+					//	tooltip.add(EnumChatFormatting.RED + I18n.format("gui.grc.cantferment"));
+					//}
 				}
 				else
 				{

@@ -98,11 +98,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarMachine
 		return this.timemax;
 	}
 
-	public int getBoozeMeta()
-	{
-		return CellarRegistry.instance().booze().getBoozeIndex(getFluid(0));
-	}
-
 	private boolean canFerment()
 	{
 		if (invSlots[0] == null) return false;

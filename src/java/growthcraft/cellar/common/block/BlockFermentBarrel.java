@@ -56,8 +56,7 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 		{
 			if (CellarRegistry.instance().booze().isFluidBooze(fluid))
 			{
-				final int meta = CellarRegistry.instance().booze().getBoozeIndex(fluid);
-				if (meta > 0 && meta < 4)
+				if (CellarRegistry.instance().booze().hasTags(fluid, "fermented"))
 				{
 					player.triggerAchievement(GrowthCraftCellar.fermentBooze);
 				}
