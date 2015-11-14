@@ -86,20 +86,14 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 		if (te != null)
 		{
 			final ItemStack itemstack = player.inventory.getCurrentItem();
-			if (!Utils.playerFillTank(world, x, y, z, te, itemstack, player))
+			if (Utils.playerFillTank(world, x, y, z, te, itemstack, player) ||
+				playerDrainTank(world, x, y, z, te, itemstack, player))
 			{
-				if (!playerDrainTank(world, x, y, z, te, itemstack, player))
-				{
-					openGui(player, world, x, y, z);
-				}
-				else
-				{
-					world.markBlockForUpdate(x, y, z);
-				}
+				world.markBlockForUpdate(x, y, z);
 			}
 			else
 			{
-				world.markBlockForUpdate(x, y, z);
+				openGui(player, world, x, y, z);
 			}
 			return true;
 		}
