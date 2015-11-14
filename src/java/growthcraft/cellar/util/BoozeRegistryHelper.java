@@ -75,7 +75,7 @@ public class BoozeRegistryHelper
 			}
 			FluidContainerRegistry.registerFluidContainer(boozeStack, buckets[i].asStack(), FluidContainerRegistry.EMPTY_BUCKET);
 
-			final FluidStack fluidStack = new FluidStack(boozes[i], GrowthCraftCellar.BOTTLE_VOLUME);
+			final FluidStack fluidStack = new FluidStack(boozes[i], GrowthCraftCellar.getConfig().bottleCapacity);
 			FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1, i), GrowthCraftCellar.EMPTY_BOTTLE);
 
 
@@ -85,7 +85,6 @@ public class BoozeRegistryHelper
 			{
 				GameRegistry.addShapelessRecipe(buckets[i].asStack(), oldBucket.asStack(1, i));
 			}
-
 			if (oldBucket != null) NEI.hideItem(oldBucket.asStack(1, i));
 		}
 	}

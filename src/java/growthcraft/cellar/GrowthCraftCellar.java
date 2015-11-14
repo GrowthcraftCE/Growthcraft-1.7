@@ -81,7 +81,6 @@ public class GrowthCraftCellar
 	public static Potion potionTipsy;
 
 	// Constants
-	public static final int BOTTLE_VOLUME = 333;
 	public static final ItemStack EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
 
 	// Achievments

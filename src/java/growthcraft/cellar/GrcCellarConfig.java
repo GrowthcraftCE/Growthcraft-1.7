@@ -15,6 +15,16 @@ public class GrcCellarConfig extends ConfigBase
 	public boolean boozeIsWater = true;
 
 
+	@ConfigOption(catergory="Booze", name="Bottle Capacity", desc="How much booze does a bottle hold?")
+	public int bottleCapacity = 333;
+
+	@ConfigOption(catergory="Booze", name="Water Bag Capacity", desc="How much booze does a water bag hold (normally 5x a bottle)?")
+	public int waterBagCapacity = 333 * 5;
+
+	@ConfigOption(catergory="Booze", name="Water Bag Dosage", desc="How much booze is used when you drink from water bag (normally 1 bottle)?")
+	public int waterBagDosage = 333;
+
+
 	@ConfigOption(catergory="Fermenting Barrel", name="Ferment Barrel fermenting time", desc="[Higher -> Slower]")
 	public int fermentSpeed = 24000;
 

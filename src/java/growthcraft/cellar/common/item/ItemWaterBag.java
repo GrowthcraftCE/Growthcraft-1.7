@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.IFluidContainerItem;
 public class ItemWaterBag extends ItemFood implements IFluidContainerItem
 {
 	protected int capacity;
+	protected int dosage;
 
 	@SideOnly(Side.CLIENT)
 	protected IIcon[] icons;
@@ -30,7 +31,8 @@ public class ItemWaterBag extends ItemFood implements IFluidContainerItem
 	public ItemWaterBag()
 	{
 		super(0, 0, false);
-		capacity = 5 * 333;
+		capacity = GrowthCraftCellar.getConfig().waterBagCapacity;
+		dosage = GrowthCraftCellar.getConfig().waterBagDosage;
 		setUnlocalizedName("grc.waterBag");
 		setTextureName("grccellar:water_bag");
 		setCreativeTab(GrowthCraftCellar.tab);
