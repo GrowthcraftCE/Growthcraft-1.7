@@ -1,13 +1,13 @@
 package growthcraft.api.bees;
 
-import growthcraft.api.core.util.ItemKey;
-import growthcraft.api.core.util.BlockKey;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.util.BlockKey;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -15,15 +15,9 @@ import net.minecraft.item.ItemStack;
 
 public class BeesRegistry
 {
-	/**
-	 * Gwafu:
-	 *
-	 * Yes, it's the same functons/methods as Forge's tall grass hook.
-	 */
 	private static final BeesRegistry INSTANCE = new BeesRegistry();
-	private static final int NO_META = -1;
 
-	private final List<Item> beesList = new ArrayList<Item>();
+	private final List<ItemKey> beesList = new ArrayList<ItemKey>();
 	private final List<ItemKey> emptyHoneyCombList = new ArrayList<ItemKey>();
 	private final List<ItemKey> filledHoneyCombList = new ArrayList<ItemKey>();
 	private final Map<ItemKey, ItemStack> honeyCombMap = new HashMap<ItemKey, ItemStack>();
@@ -32,6 +26,11 @@ public class BeesRegistry
 	public static final BeesRegistry instance()
 	{
 		return INSTANCE;
+	}
+
+	private ItemKey stackToKey(ItemStack itemstack)
+	{
+		return new ItemKey(itemstack);
 	}
 
 	///////////////////////////////////////////////////////////////////////
@@ -44,19 +43,29 @@ public class BeesRegistry
 	 *
 	 * @param bee - The Item/Block to be registered.
 	 */
-	public void addBee(Block bee)
+	public void addBee(Item bee, int meta)
 	{
-		this.beesList.add(Item.getItemFromBlock(bee));
+		beesList.add(new ItemKey(bee, meta));
+	}
+
+	public void addBee(Block bee, int meta)
+	{
+		addBee(Item.getItemFromBlock(bee), meta);
+	}
+
+	public void addBee(ItemStack stack)
+	{
+		beesList.add(stackToKey(stack));
 	}
 
 	public void addBee(Item bee)
 	{
-		this.beesList.add(bee);
+		addBee(bee, ItemKey.WILDCARD_VALUE);
 	}
 
-	private ItemKey stackToKey(ItemStack itemstack)
+	public void addBee(Block bee)
 	{
-		return new ItemKey(itemstack);
+		addBee(Item.getItemFromBlock(bee), ItemKey.WILDCARD_VALUE);
 	}
 
 	public void addEmptyHoneyComb(ItemStack itemstack)
@@ -122,7 +131,7 @@ public class BeesRegistry
 	 */
 	public void addFlower(Block flower)
 	{
-		addFlower(flower, NO_META);
+		addFlower(flower, ItemKey.WILDCARD_VALUE);
 	}
 
 	/**
@@ -132,13 +141,13 @@ public class BeesRegistry
 	public boolean isItemBee(ItemStack itemstack)
 	{
 		if (itemstack == null) return false;
-		return this.beesList.contains(itemstack.getItem());
+		return this.beesList.contains(new ItemKey(itemstack));
 	}
 
 	public boolean isBlockFlower(Block block, int meta)
 	{
 		if (block == null) return false;
 		return this.flowersList.contains(new BlockKey(block, meta)) ||
-			this.flowersList.contains(new BlockKey(block, NO_META));
+			this.flowersList.contains(new BlockKey(block, ItemKey.WILDCARD_VALUE));
 	}
 }

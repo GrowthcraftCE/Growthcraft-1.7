@@ -60,7 +60,7 @@ public class FishTrapRegistry
 	/**
 	 * STUFF
 	 */
-	private ItemStack getFishableEntry(Random random, List list)
+	private ItemStack getFishableEntry(Random random, List<FishTrapEntry> list)
 	{
 		return ((FishTrapEntry)WeightedRandom.getRandomItem(random, list)).getFishable(random);
 	}

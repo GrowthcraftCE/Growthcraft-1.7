@@ -1,12 +1,14 @@
 package growthcraft.api.cellar.booze;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.util.FluidUtils;
 
@@ -82,48 +84,76 @@ public class BoozeRegistry
 {
 	static class BoozeEntry
 	{
-		final Fluid fluid;
-		final int index;
+		private final Fluid fluid;
+		// May consider using an enum instead of a String once the features settle a bit
+		private final Set<String> tags;
 
-		public BoozeEntry(Fluid flus, int ind)
+		public BoozeEntry(Fluid flus)
 		{
 			this.fluid = flus;
-			this.index = ind;
+			this.tags = new HashSet<String>();
+		}
+
+		public Fluid getFluid()
+		{
+			return fluid;
+		}
+
+		public Set<String> getTags()
+		{
+			return tags;
+		}
+
+		public void addTags(String... newtags)
+		{
+			for (String tag : newtags) tags.add(tag);
+		}
+
+		public boolean hasTags(String... checktags)
+		{
+			for (String tag : checktags) if (!tags.contains(tag)) return false;
+			return true;
 		}
 	}
 
-	static class BoozeEffectEntry
-	{
-
-	}
-
-	// because damage is almost never -1
-	private final int NO_META = -1;
-
-	// May consider using an enum instead of a String once the features settle a bit
-	private Map<Fluid, Set<String>> fluidTags = new HashMap<Fluid, Set<String>>();
 	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
 	private Map<Fluid, Fluid> altBoozeMap = new HashMap<Fluid, Fluid>();
 
-	// Instead I believe we should provide an iterator instead of exposing the
-	// map
-	public Map<Fluid, BoozeEntry> getBoozeMap()
+	public Collection<BoozeEntry> getBoozeEntries()
 	{
-		return boozeMap;
+		return boozeMap.values();
 	}
 
-	private void ensureFluidsAreValid(Fluid[] fluids)
+	private void ensureFluidIsValid(Fluid fluid)
 	{
-		if (!FluidUtils.doesFluidsExist(fluids))
+		if (!FluidUtils.doesFluidExist(fluid))
 		{
-			throw new IllegalArgumentException("[Growthcraft|Cellar] One of the fluids being created as Booze is not registered to the FluidRegistry.");
+			throw new IllegalArgumentException("[Growthcraft|Cellar] The fluid being registered as a Booze is not registered to the FluidRegistry.");
 		}
+	}
+
+	@Nullable
+	public BoozeEntry getBoozeEntry(Fluid fluid)
+	{
+		if (fluid == null) return null;
+		return boozeMap.get(fluid);
+	}
+
+	@Nonnull
+	public BoozeEntry fetchBoozeEntry(Fluid fluid)
+	{
+		final BoozeEntry entry = getBoozeEntry(fluid);
+		if (entry == null)
+		{
+			throw new IllegalArgumentException("[Growthcraft|Cellar] The fluid being tagged does not have a valid booze entry.");
+		}
+		return entry;
 	}
 
 	public boolean isFluidBooze(Fluid f)
 	{
 		if (f == null) return false;
-		return boozeMap.get(f) != null || isAlternateBooze(f);
+		return getBoozeEntry(f) != null || isAlternateBooze(f);
 	}
 
 	public boolean isFluidBooze(FluidStack fluidStack)
@@ -132,46 +162,26 @@ public class BoozeRegistry
 		return isFluidBooze(fluidStack.getFluid());
 	}
 
-	public boolean areFluidsBooze(Fluid[] fluid)
-	{
-		for (int i = 0; i < fluid.length; ++i)
-		{
-			if (!isFluidBooze(fluid[i]))
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
 	/**
-	 * createBooze()
-	 *
-	 * Creates a Booze to the CellarRegistry.
+	 * Registers a Booze to the CellarRegistry.
 	 *
 	 * Example Usage:
-	 * CellarRegistry.instance().createBooze(appleCider_booze, 8737829, "fluid.grc.appleCider");
+	 * CellarRegistry.instance().registerBooze(new Booze().setColor(0xFFAABB));
 	 *
-	 * @param fluid           - The fluid array to be registered.
-	 * @param color           - The color of the fluids.
-	 * @param unlocalizedName - The unlocalized name to be used as the 'main name' of the fluids/boozes.
+	 * @param fluid           - The fluid to be registered.
+	 * @param color           - The color of the fluid.
 	 **/
-	public void createBooze(@Nonnull Fluid[] fluids, String unlocalizedName)
+	public void registerBooze(@Nonnull Fluid fluid)
 	{
-		ensureFluidsAreValid(fluids);
+		ensureFluidIsValid(fluid);
 
-		if (!areFluidsBooze(fluids))
+		if (!isFluidBooze(fluid))
 		{
-			for (int i = 0; i < fluids.length; ++i)
-			{
-				final Fluid fluid = fluids[i];
-				fluid.setUnlocalizedName(unlocalizedName);
-				boozeMap.put(fluid, new BoozeEntry(fluid, i));
-			}
+			boozeMap.put(fluid, new BoozeEntry(fluid));
 		}
 		else
 		{
-			throw new IllegalArgumentException("[Growthcraft|Cellar] One of the fluids being created as Booze is already registered to the CellarRegistry.");
+			throw new IllegalArgumentException("[Growthcraft|Cellar] The fluid being registered as a Booze is already registered to the CellarRegistry.");
 		}
 	}
 
@@ -224,20 +234,6 @@ public class BoozeRegistry
 	}
 
 	// BOOZE /////////////////////////////////////////////////////////
-	public int getBoozeIndex(Fluid f)
-	{
-		if (isFluidBooze(f))
-		{
-			if (isAlternateBooze(f))
-			{
-				final Fluid alt = getAlternateBooze(f);
-				return boozeMap.get(alt).index;
-			}
-			return boozeMap.get(f).index;
-		}
-		return 0;
-	}
-
 	public boolean isAlternateBooze(Fluid f)
 	{
 		if (f == null)
@@ -262,11 +258,8 @@ public class BoozeRegistry
 	 */
 	public Fluid maybeAlternateBooze(Fluid f)
 	{
-		if (isAlternateBooze(f))
-		{
-			return this.altBoozeMap.get(f);
-		}
-		return f;
+		final Fluid alt = getAlternateBooze(f);
+		return alt != null ? alt : f;
 	}
 
 	public FluidStack maybeAlternateBoozeStack(FluidStack stack)
@@ -276,23 +269,17 @@ public class BoozeRegistry
 
 	public void addTags(@Nonnull Fluid fluid, String... tags)
 	{
-		if (!fluidTags.containsKey(fluid))
-		{
-			fluidTags.put(fluid, new HashSet<String>());
-		}
-		Set<String> setTags = fluidTags.get(fluid);
-		for (String tag : tags)
-		{
-			setTags.add(tag);
-		}
+		fetchBoozeEntry(fluid).addTags(tags);
 	}
 
+	@Nullable
 	public Set<String> getTags(Fluid fluid)
 	{
-		if (fluid == null) return null;
-		return fluidTags.get(fluid);
+		final BoozeEntry entry = getBoozeEntry(fluid);
+		return entry != null ? entry.getTags() : null;
 	}
 
+	@Nullable
 	public Set<String> getTags(FluidStack stack)
 	{
 		if (stack == null) return null;
@@ -301,14 +288,10 @@ public class BoozeRegistry
 
 	public boolean hasTags(Fluid fluid, String... tags)
 	{
-		Set<String> setTags = getTags(fluid);
-		if (setTags != null)
+		final BoozeEntry entry = getBoozeEntry(fluid);
+		if (entry != null)
 		{
-			for (String tag : tags)
-			{
-				if (!setTags.contains(tag)) return false;
-			}
-			return true;
+			return entry.hasTags(tags);
 		}
 		return false;
 	}

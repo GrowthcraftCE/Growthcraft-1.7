@@ -7,6 +7,7 @@ import java.util.List;
 
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.util.FluidUtils;
+import growthcraft.api.core.util.ItemKey;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -17,11 +18,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class PressingRegistry
 {
-	// because damage is almost never -1
-	private final int NO_META = -1;
-	private Map<List, PressingResult> pressingList = new HashMap<List, PressingResult>();
+	private Map<ItemKey, PressingResult> pressingList = new HashMap<ItemKey, PressingResult>();
 
-	public Map<List, PressingResult> getPressingList()
+	public Map<ItemKey, PressingResult> getPressingList()
 	{
 		return pressingList;
 	}
@@ -41,24 +40,24 @@ public class PressingRegistry
 	 */
 	public void addPressing(Item raw, int meta, Fluid fluid, int time, int amount, Residue residue)
 	{
-		this.pressingList.put(Arrays.asList(raw, meta), new PressingResult(new FluidStack(fluid, amount), time, residue));
+		pressingList.put(new ItemKey(raw, meta), new PressingResult(new FluidStack(fluid, amount), time, residue));
 	}
 
 	public void addPressing(Block raw, int meta, Fluid fluid, int time, int amount, Residue residue)
 	{
-		this.addPressing(Item.getItemFromBlock(raw), meta, fluid, time, amount, residue);
+		addPressing(Item.getItemFromBlock(raw), meta, fluid, time, amount, residue);
 	}
 
 	public void addPressing(Block raw, int meta, String fluid, int time, int amount, Residue residue)
 	{
-		this.addPressing(Item.getItemFromBlock(raw), meta, fluid, time, amount, residue);
+		addPressing(Item.getItemFromBlock(raw), meta, fluid, time, amount, residue);
 	}
 
 	public void addPressing(Item raw, int meta, String fluid, int time, int amount, Residue residue)
 	{
 		if (FluidUtils.doesFluidExist(fluid))
 		{
-			this.addPressing(raw, meta, FluidRegistry.getFluid(fluid), time, amount, residue);
+			addPressing(raw, meta, FluidRegistry.getFluid(fluid), time, amount, residue);
 		}
 	}
 
@@ -76,22 +75,22 @@ public class PressingRegistry
 	 */
 	public void addPressing(Item raw, Fluid fluid, int time, int amount, Residue residue)
 	{
-		addPressing(raw, NO_META, fluid, time, amount, residue);
+		addPressing(raw, ItemKey.WILDCARD_VALUE, fluid, time, amount, residue);
 	}
 
 	public void addPressing(Item raw, String fluid, int time, int amount, Residue residue)
 	{
-		addPressing(raw, NO_META, fluid, time, amount, residue);
+		addPressing(raw, ItemKey.WILDCARD_VALUE, fluid, time, amount, residue);
 	}
 
 	public void addPressing(Block raw, Fluid fluid, int time, int amount, Residue residue)
 	{
-		addPressing(Item.getItemFromBlock(raw), NO_META, fluid, time, amount, residue);
+		addPressing(Item.getItemFromBlock(raw), ItemKey.WILDCARD_VALUE, fluid, time, amount, residue);
 	}
 
 	public void addPressing(Block raw, String fluid, int time, int amount, Residue residue)
 	{
-		addPressing(Item.getItemFromBlock(raw), NO_META, fluid, time, amount, residue);
+		addPressing(Item.getItemFromBlock(raw), ItemKey.WILDCARD_VALUE, fluid, time, amount, residue);
 	}
 
 	public boolean isPressingRecipe(ItemStack itemstack)
@@ -103,10 +102,10 @@ public class PressingRegistry
 	{
 		if (itemstack == null) return null;
 
-		final PressingResult ret = pressingList.get(Arrays.asList(itemstack.getItem(), itemstack.getItemDamage()));
+		final PressingResult ret = pressingList.get(new ItemKey(itemstack));
 		if (ret != null) return ret;
 
-		return pressingList.get(Arrays.asList(itemstack.getItem(), NO_META));
+		return pressingList.get(new ItemKey(itemstack.getItem(), ItemKey.WILDCARD_VALUE));
 	}
 
 	public FluidStack getPressingFluidStack(ItemStack itemstack)

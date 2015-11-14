@@ -6,11 +6,16 @@ import javax.annotation.Nonnull;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import net.minecraftforge.oredict.OreDictionary;
+
 /**
  * As the name implies, this class is used in place of a List for Item keys
  */
 public class ItemKey extends HashKey
 {
+	public static final int WILDCARD_VALUE = OreDictionary.WILDCARD_VALUE;
+
 	public final Item item;
 	public final int meta;
 

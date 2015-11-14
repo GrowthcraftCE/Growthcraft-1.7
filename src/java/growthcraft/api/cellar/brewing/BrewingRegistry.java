@@ -46,8 +46,6 @@ public class BrewingRegistry
 		}
 	}
 
-	// because damage is almost never -1
-	private final int NO_META = -1;
 	private HashMap<BrewingKey, BrewingResult> brewingList = new HashMap<BrewingKey, BrewingResult>();
 	private List<ItemKey> brewingIngredients = new ArrayList<ItemKey>();
 
@@ -101,22 +99,22 @@ public class BrewingRegistry
 
 	public void addBrewing(Fluid sourceFluid, Item raw, Fluid resultFluid, int time, int amount, Residue residue)
 	{
-		addBrewing(sourceFluid, raw, NO_META, resultFluid, time, amount, residue);
+		addBrewing(sourceFluid, raw, ItemKey.WILDCARD_VALUE, resultFluid, time, amount, residue);
 	}
 
 	public void addBrewing(Fluid sourceFluid, Block raw, Fluid resultFluid, int time, int amount, Residue residue)
 	{
-		addBrewing(sourceFluid, raw, NO_META, resultFluid, time, amount, residue);
+		addBrewing(sourceFluid, raw, ItemKey.WILDCARD_VALUE, resultFluid, time, amount, residue);
 	}
 
 	public void addBrewing(String sourceFluid, Item raw, String resultFluid, int time, int amount, Residue residue)
 	{
-		addBrewing(sourceFluid, raw, NO_META, resultFluid, time, amount, residue);
+		addBrewing(sourceFluid, raw, ItemKey.WILDCARD_VALUE, resultFluid, time, amount, residue);
 	}
 
 	public void addBrewing(String sourceFluid, Block raw, String resultFluid, int time, int amount, Residue residue)
 	{
-		addBrewing(sourceFluid, raw, NO_META, resultFluid, time, amount, residue);
+		addBrewing(sourceFluid, raw, ItemKey.WILDCARD_VALUE, resultFluid, time, amount, residue);
 	}
 
 	public BrewingResult getBrewingResult(FluidStack fluidstack, ItemStack itemstack)
@@ -127,7 +125,7 @@ public class BrewingRegistry
 		final BrewingResult ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), itemstack.getItemDamage()));
 		if (ret != null) return ret;
 
-		return brewingList.get(new BrewingKey(f, itemstack.getItem(), NO_META));
+		return brewingList.get(new BrewingKey(f, itemstack.getItem(), ItemKey.WILDCARD_VALUE));
 	}
 
 	public boolean isBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
@@ -140,7 +138,7 @@ public class BrewingRegistry
 		if (itemstack == null) return false;
 
 		return brewingIngredients.contains(new ItemKey(itemstack)) ||
-			brewingIngredients.contains(new ItemKey(itemstack.getItem(), NO_META));
+			brewingIngredients.contains(new ItemKey(itemstack.getItem(), ItemKey.WILDCARD_VALUE));
 	}
 
 	public FluidStack getBrewingFluidStack(FluidStack fluidstack, ItemStack itemstack)

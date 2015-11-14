@@ -9,7 +9,7 @@ public interface IHeatSourceRegistry
 	 * Currently only used by Brew Kettle.
 	 *
 	 * @param block - The block
-	 * @param meta - possible block meta, if this is -1 treats it as a wild card
+	 * @param meta - possible block meta
 	 * @param heat - how effective is this heat source, fire is 1.0f by default, higher the hotter, lower the cooler
 	 **/
 	public void addHeatSource(Block block, int meta, IHeatSourceBlock heat);
