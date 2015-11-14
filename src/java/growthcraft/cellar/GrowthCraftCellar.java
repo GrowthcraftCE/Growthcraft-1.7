@@ -154,22 +154,22 @@ public class GrowthCraftCellar
 		GameRegistry.addRecipe(new ShapedOreRecipe(fermentBarrel.asStack(), "AAA", "BBB", "AAA", 'B', "plankWood", 'A', "ingotIron"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(waterBag.asStack(1, 16), "AAA", "ABA", "AAA", 'A', Items.leather, 'B', "materialRope"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 0), "dyeWhite", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 1), "dyeOrange", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 2), "dyeMagenta", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 3), "dyeLightBlue", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 4), "dyeYellow", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 5), "dyeLime", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 6), "dyePink", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 7), "dyeGray", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 8), "dyeLightGray", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 9), "dyeCyan", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 10), "dyePurple", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 11), "dyeBlue", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 12), "dyeBrown", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 13), "dyeGreen", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 14), "dyeRed", waterBag.getItem()));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 15), "dyeBlack", waterBag.getItem()));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 0), "dyeWhite", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 1), "dyeOrange", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 2), "dyeMagenta", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 3), "dyeLightBlue", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 4), "dyeYellow", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 5), "dyeLime", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 6), "dyePink", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 7), "dyeGray", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 8), "dyeLightGray", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 9), "dyeCyan", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 10), "dyePurple", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 11), "dyeBlue", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 12), "dyeBrown", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 13), "dyeGreen", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 14), "dyeRed", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 15), "dyeBlack", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
 
 		//====================
 		// POTION
