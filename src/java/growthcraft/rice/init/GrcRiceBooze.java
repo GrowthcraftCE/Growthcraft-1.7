@@ -85,7 +85,7 @@ public class GrcRiceBooze extends GrcModuleBase
 			GrowthCraftRice.rice.getItem(),
 			riceSakeBooze[0],
 			GrowthCraftRice.getConfig().riceSakeBrewingTime,
-			GrowthCraftRice.getConfig().config.riceSakeBrewingYield,
+			GrowthCraftRice.getConfig().riceSakeBrewingYield,
 			Residue.newDefault(0.2F)
 		);
 	}

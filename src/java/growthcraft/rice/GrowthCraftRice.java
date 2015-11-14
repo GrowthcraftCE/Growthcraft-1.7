@@ -1,14 +1,6 @@
 package growthcraft.rice;
 
-import growthcraft.api.cellar.booze.Booze;
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.common.Residue;
-import growthcraft.cellar.common.definition.BlockBoozeDefinition;
-import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
-import growthcraft.cellar.common.item.ItemBoozeBottle;
-import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.event.PlayerInteractEventPaddy;
@@ -37,12 +29,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.potion.Potion;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -82,8 +71,8 @@ public class GrowthCraftRice
 		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
-
 		booze = new GrcRiceBooze();
+		modules.add(booze);
 
 		//====================
 		// INIT
@@ -94,7 +83,6 @@ public class GrowthCraftRice
 		rice     = new ItemDefinition(new ItemRice());
 		riceBall = new ItemDefinition(new ItemRiceBall());
 
-		booze.preInit();
 		modules.preInit();
 		register();
 	}
@@ -109,8 +97,6 @@ public class GrowthCraftRice
 
 		GameRegistry.registerItem(rice.getItem(), "grc.rice");
 		GameRegistry.registerItem(riceBall.getItem(), "grc.riceBall");
-
-		booze.register();
 
 		MinecraftForge.addGrassSeed(rice.asStack(), config.riceSeedDropRarity);
 
