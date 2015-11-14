@@ -114,7 +114,7 @@ public class BlockGrapeBlock extends Block
 	{
 		if (world.rand.nextInt(bayanusDropRarity) == 0)
 		{
-			ItemUtils.spawnItemFromStack(world, x, y, z, YeastType.BAYANUS.asStack(1), rand);
+			ItemUtils.spawnBrokenItemStack(world, x, y, z, YeastType.BAYANUS.asStack(1), rand);
 		}
 		super.breakBlock(world, x, y, z, block, meta);
 	}

@@ -174,7 +174,7 @@ public class ItemUtils
 		addStackToPlayer(itemstack, player, world, (int)player.posX, (int)player.posY, (int)player.posZ, checkCreative);
 	}
 
-	public static void spawnItemFromStack(World world, int x, int y, int z, ItemStack stack, Random random)
+	public static void spawnItemStack(World world, int x, int y, int z, ItemStack stack, Random random)
 	{
 		if (stack != null)
 		{
@@ -182,6 +182,19 @@ public class ItemUtils
 			final float f1 = random.nextFloat() * 0.8F + 0.1F;
 			final float f2 = random.nextFloat() * 0.8F + 0.1F;
 
+			final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), stack);
+			final float f3 = 0.05F;
+			entityitem.motionX = (double)((float)random.nextGaussian() * f3);
+			entityitem.motionY = (double)((float)random.nextGaussian() * f3 + 0.2F);
+			entityitem.motionZ = (double)((float)random.nextGaussian() * f3);
+			world.spawnEntityInWorld(entityitem);
+		}
+	}
+
+	public static void spawnBrokenItemStack(World world, int x, int y, int z, ItemStack stack, Random random)
+	{
+		if (stack != null)
+		{
 			while (stack.stackSize > 0)
 			{
 				int k1 = random.nextInt(21) + 10;
@@ -191,16 +204,9 @@ public class ItemUtils
 					k1 = stack.stackSize;
 				}
 
-				final ItemStack entStack = stack.splitStack(k1);
-				if (entStack != null)
-				{
-					final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), entStack);
-					final float f3 = 0.05F;
-					entityitem.motionX = (double)((float)random.nextGaussian() * f3);
-					entityitem.motionY = (double)((float)random.nextGaussian() * f3 + 0.2F);
-					entityitem.motionZ = (double)((float)random.nextGaussian() * f3);
-					world.spawnEntityInWorld(entityitem);
-				}
+				final ItemStack entityStack = stack.splitStack(k1);
+
+				spawnItemStack(world, x, y, z, entityStack, random);
 			}
 		}
 	}

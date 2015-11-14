@@ -405,7 +405,7 @@ public class BlockBeeBox extends BlockContainer
 			{
 				final ItemStack stack = te.getStackInSlot(index);
 
-				ItemUtils.spawnItemFromStack(world, x, y, z, stack, rand);
+				ItemUtils.spawnBrokenItemStack(world, x, y, z, stack, rand);
 			}
 
 			world.func_147453_f(x, y, z, par5);
