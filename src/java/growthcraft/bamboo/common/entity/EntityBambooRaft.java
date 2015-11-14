@@ -221,6 +221,7 @@ public class EntityBambooRaft extends Entity
 	/**
 	 * Called to update the entity's position/logic.
 	 */
+	@SuppressWarnings("rawtypes")
 	public void onUpdate()
 	{
 		super.onUpdate();

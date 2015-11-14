@@ -53,17 +53,19 @@ public class ItemBucketBooze extends ItemBucket implements IBoozeContainer
 		return UnitFormatter.fluidBucketName(getBooze());
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
-	{
-		writeModifierTooltip(stack, player, list, bool);
-	}
-
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		final String s = UnitFormatter.fluidModifier(getBooze());
 		if (s != null) list.add(s);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
+	{
+		writeModifierTooltip(stack, player, list, bool);
 	}
 
 	@SideOnly(Side.CLIENT)

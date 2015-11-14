@@ -243,6 +243,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
 	{
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.3125F, 1.0F);

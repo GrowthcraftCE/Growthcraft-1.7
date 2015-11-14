@@ -18,13 +18,15 @@ public class BlockBeeBoxBamboo extends BlockBeeBox
 		this.setBlockName("grc.BeeBox.Bamboo");
 	}
 
+	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
 	{
 		list.add(new ItemStack(block, 1, 0));
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void registerBlockIcons(IIconRegister reg)
 	{
 		icons = new IIcon[4];

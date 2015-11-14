@@ -19,6 +19,7 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 public class VillageHandlerGrapes implements IVillageTradeHandler, IVillageCreationHandler
 {
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
 	{
 		//		recipeList.add(new MerchantRecipe(new ItemStack(GrowthCraftGrapes.grapes, 18 + random.nextInt(3)), new ItemStack(Item.emerald, 1)));
@@ -44,6 +45,7 @@ public class VillageHandlerGrapes implements IVillageTradeHandler, IVillageCreat
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
 	{
 		return ComponentVillageGrapeVineyard.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);

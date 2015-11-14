@@ -40,21 +40,24 @@ public class ItemBlockFluidBooze extends ItemBlock
 		return this.color;
 	}
 
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		final String modifier = UnitFormatter.fluidModifier(getBooze());
 		if (modifier != null) list.add(modifier);
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		writeModifierTooltip(stack, player, list, bool);
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public int getColorFromItemStack(ItemStack stack, int pass)
 	{
 		return getBoozeColor();

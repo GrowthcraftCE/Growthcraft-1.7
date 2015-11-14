@@ -33,6 +33,7 @@ public class ItemBambooRaft extends ItemBoat
 	 * MAIN
 	 ************/
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
 		final float f = 1.0F;

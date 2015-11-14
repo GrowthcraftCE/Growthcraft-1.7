@@ -95,6 +95,7 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		this.boundingBox = boundingBox;
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static ComponentVillageBambooYard buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
 		// the height of the structure is 15 blocks, since the maximum height of bamboo is 12~14 blocks (+1 for the water layer)

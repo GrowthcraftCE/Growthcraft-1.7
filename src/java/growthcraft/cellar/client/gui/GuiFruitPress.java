@@ -37,8 +37,8 @@ public class GuiFruitPress extends GuiCellar
 		this.te = fruitPress;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void initGui()
 	{
 		super.initGui();

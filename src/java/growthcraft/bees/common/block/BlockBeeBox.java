@@ -88,6 +88,8 @@ public class BlockBeeBox extends BlockContainer
 		return fireSpreadSpeed;
 	}
 
+	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
 	{
 		for (int i = 0; i < 6; ++i)
@@ -109,6 +111,7 @@ public class BlockBeeBox extends BlockContainer
 		return BeesRegistry.instance().isBlockFlower(block, meta);
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void gatherFlowersInRadius(World world, int x, int y, int z, int checkSize, List<List> list)
 	{
 		final int i = x - ((checkSize - 1) / 2);
@@ -141,6 +144,7 @@ public class BlockBeeBox extends BlockContainer
 	 * TICK
 	 ************/
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
 		super.updateTick(world, x, y, z, random);
@@ -488,8 +492,8 @@ public class BlockBeeBox extends BlockContainer
 		return MathHelper.clamp_int(meta, 0, icons.length / 4 - 1) * 4;
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
 	{
 		final int meta = world.getBlockMetadata(x, y, z);
@@ -513,8 +517,8 @@ public class BlockBeeBox extends BlockContainer
 		return icons[offset + 2];
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public IIcon getIcon(int side, int meta)
 	{
 		final int offset = calculateIconOffset(meta);
@@ -567,6 +571,7 @@ public class BlockBeeBox extends BlockContainer
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
 	{
 		final float f = 0.0625F;

@@ -39,8 +39,8 @@ public class GuiFermentBarrel extends GuiCellar
 		this.te = fermentBarrel;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void initGui()
 	{
 		super.initGui();

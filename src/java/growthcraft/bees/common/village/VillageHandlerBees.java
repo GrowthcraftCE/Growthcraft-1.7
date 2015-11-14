@@ -14,6 +14,7 @@ import net.minecraft.village.MerchantRecipeList;
 public class VillageHandlerBees implements IVillageTradeHandler
 {
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
 	{
 		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1 + random.nextInt(2)), GrowthCraftBees.honeyMead.asStack(1, 1)));

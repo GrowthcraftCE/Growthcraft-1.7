@@ -274,6 +274,7 @@ public class ItemBoozeBottle extends ItemFood
 	 ************/
 	@SideOnly(Side.CLIENT)
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		writeModifierTooltip(stack, player, list, bool);
@@ -295,13 +296,14 @@ public class ItemBoozeBottle extends ItemFood
 		}
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		final String s = UnitFormatter.fluidModifier(getBoozeForStack(stack));
 		if (s != null) list.add(s);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	protected void writePotionTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool, int potnID, int potnTime)
 	{
 		final PotionEffect pe = makePotionEffect(stack, potnID, potnTime);
@@ -319,7 +321,7 @@ public class ItemBoozeBottle extends ItemFood
 		list.add(EnumChatFormatting.GRAY + s);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	protected void writeNauseaTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool, float nauseaChance, int nauseaTime)
 	{
 		final PotionEffect nausea = new PotionEffect(Potion.confusion.id, nauseaTime, 0);
@@ -412,9 +414,9 @@ public class ItemBoozeBottle extends ItemFood
 		return super.getItemStackDisplayName(stack);
 	}
 
-	@SuppressWarnings("rawtypes")
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
 		for (int i = 0; i < getBoozeArray().length; i++)

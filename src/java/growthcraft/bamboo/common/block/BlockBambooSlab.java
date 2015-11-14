@@ -33,9 +33,9 @@ public class BlockBambooSlab extends BlockSlab
 	/************
 	 * STUFF
 	 ************/
-	@SuppressWarnings("rawtypes")
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item item, CreativeTabs tab, List list)
 	{
 		if (item != Item.getItemFromBlock(GrowthCraftBamboo.bambooDoubleSlab.getBlock()))

@@ -25,6 +25,7 @@ public class ComponentVillageGrapeVineyard extends StructureVillagePieces.Villag
 		this.boundingBox = boundingBox;
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static ComponentVillageGrapeVineyard buildComponent(Start startPiece, List list, Random random, int par3, int par4, int par5, int par6, int par7)
 	{
 		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 6, 9, par6);

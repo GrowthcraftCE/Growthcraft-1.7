@@ -41,11 +41,11 @@ public class GuiCellar extends GuiContainer
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glDisable(GL11.GL_DEPTH_TEST);
 			int k = 0;
-			final Iterator iterator = list.iterator();
+			final Iterator<String> iterator = list.iterator();
 
 			while (iterator.hasNext())
 			{
-				final String s = (String)iterator.next();
+				final String s = iterator.next();
 				final int l = font.getStringWidth(s);
 
 				if (l > k)

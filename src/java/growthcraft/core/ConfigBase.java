@@ -31,6 +31,7 @@ public abstract class ConfigBase
 
 	protected Configuration config;
 
+	@SuppressWarnings("rawtypes")
 	protected void autoloadConfig()
 	{
 		for (Field field : getClass().getDeclaredFields())

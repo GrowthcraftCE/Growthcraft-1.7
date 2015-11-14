@@ -19,10 +19,9 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 public class VillageHandlerHops implements IVillageTradeHandler, IVillageCreationHandler
 {
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
 	{
-		//		recipeList.add(new MerchantRecipe(new ItemStack(GrowthCraftHops.hops, 18 + random.nextInt(3)), new ItemStack(Item.emerald, 1)));
-		//		recipeList.add(new MerchantRecipe(new ItemStack(Item.wheat, 18 + random.nextInt(3)), new ItemStack(Item.emerald, 1)));
 		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1 + random.nextInt(2)), GrowthCraftHops.hopAle.asStack(1, 1)));
 		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2 + random.nextInt(2)), GrowthCraftHops.hopAle.asStack(1, 2)));
 		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 2 + random.nextInt(2)), GrowthCraftHops.hopAle.asStack(1, 3)));
@@ -45,6 +44,7 @@ public class VillageHandlerHops implements IVillageTradeHandler, IVillageCreatio
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
 	{
 		return ComponentVillageHopVineyard.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);

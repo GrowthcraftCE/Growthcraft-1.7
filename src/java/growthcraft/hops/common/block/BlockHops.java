@@ -460,6 +460,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	 * BOXES
 	 ************/
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity)
 	{
 		final boolean flag = this.canConnectRopeTo(world, x, y, z - 1);

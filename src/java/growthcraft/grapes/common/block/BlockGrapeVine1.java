@@ -140,6 +140,7 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase
 	 * BOXES
 	 ************/
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity)
 	{
 		final int meta = world.getBlockMetadata(x, y, z);

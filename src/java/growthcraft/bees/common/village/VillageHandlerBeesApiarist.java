@@ -19,6 +19,7 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 public class VillageHandlerBeesApiarist implements IVillageTradeHandler, IVillageCreationHandler
 {
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
 	{
 		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1 + random.nextInt(2)), GrowthCraftBees.honeyJar.asStack(1, 2)));
@@ -43,6 +44,7 @@ public class VillageHandlerBeesApiarist implements IVillageTradeHandler, IVillag
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
 	{
 		return ComponentVillageApiarist.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);

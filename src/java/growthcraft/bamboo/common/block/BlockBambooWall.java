@@ -263,6 +263,7 @@ public class BlockBambooWall extends Block
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
 	{
 		int tm;

@@ -204,6 +204,7 @@ public abstract class BlockPaddyBase extends Block implements IPaddy
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB axis, List list, Entity entity)
 	{
 		final int meta = world.getBlockMetadata(i, j, k);

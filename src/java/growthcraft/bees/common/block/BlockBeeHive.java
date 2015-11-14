@@ -41,8 +41,8 @@ public class BlockBeeHive extends Block
 	/************
 	 * TICK
 	 ************/
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random random)
 	{
 		if (random.nextInt(24) == 0)
@@ -241,8 +241,8 @@ public class BlockBeeHive extends Block
 		return false;
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
 		return true;
@@ -259,6 +259,7 @@ public class BlockBeeHive extends Block
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
 	{
 		final float f = 0.0625F;

@@ -19,13 +19,14 @@ public class BlockBeeBoxNether extends BlockBeeBox
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
 	{
 		list.add(new ItemStack(block, 1, 0));
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void registerBlockIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[4];

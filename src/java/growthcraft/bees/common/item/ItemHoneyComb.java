@@ -29,13 +29,15 @@ public class ItemHoneyComb extends Item
 		this.setUnlocalizedName("grc.honeyComb");
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		list.add(StatCollector.translateToLocal("grc.bees.item.honeyComb.deprecated"));
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		writeModifierTooltip(stack, player, list, bool);
@@ -74,8 +76,9 @@ public class ItemHoneyComb extends Item
 	/************
 	 * STUFF
 	 ************/
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List list)
 	{
 		for (int i = 0; i < 2; i++)

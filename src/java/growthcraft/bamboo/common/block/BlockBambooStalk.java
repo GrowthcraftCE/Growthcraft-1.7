@@ -377,6 +377,7 @@ public class BlockBambooStalk extends Block
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
 	{
 		final float x1 = 0.25F;
@@ -445,6 +446,7 @@ public class BlockBambooStalk extends Block
 		this.setBlockBoundsBasedOnState(world, x, y, z);
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void renderFence(World world, AxisAlignedBB axis, List list, Entity entity, int x, int y, int z, RenderUtils.Face m)
 	{
 		float x1 = x;
@@ -523,6 +525,7 @@ public class BlockBambooStalk extends Block
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void renderWall(World world, AxisAlignedBB axis, List list, Entity entity, int x, int y, int z, RenderUtils.Face m)
 	{
 		float x1 = x;
@@ -566,6 +569,7 @@ public class BlockBambooStalk extends Block
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void renderDoor(World world, AxisAlignedBB axis, List list, Entity entity, int x, int y, int z, RenderUtils.Face m)
 	{
 		float x1 = x;

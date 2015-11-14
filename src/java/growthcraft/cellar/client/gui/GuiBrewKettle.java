@@ -38,8 +38,8 @@ public class GuiBrewKettle extends GuiCellar
 		this.te = brewKettle;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void initGui()
 	{
 		super.initGui();

@@ -32,8 +32,8 @@ public class ItemYeast extends Item
 		return super.getUnlocalizedName(stack) + stack.getItemDamage();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
 		for (YeastType ytype : YeastType.values())
@@ -42,8 +42,8 @@ public class ItemYeast extends Item
 		}
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public void registerIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[YeastType.length];
@@ -54,8 +54,8 @@ public class ItemYeast extends Item
 		icons[YeastType.ORIGIN.ordinal()] = reg.registerIcon(getIconString() + "_origin");
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
+	@Override
 	public IIcon getIconFromDamage(int meta)
 	{
 		return icons[MathHelper.clamp_int(meta, 0, icons.length - 1)];

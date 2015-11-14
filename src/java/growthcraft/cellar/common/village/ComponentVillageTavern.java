@@ -23,6 +23,7 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 		this.boundingBox = boundingBox;
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static ComponentVillageTavern buildComponent(Start startPiece, List list, Random rand, int par3, int par4, int par5, int par6, int par7)
 	{
 		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 9, 8, par6);

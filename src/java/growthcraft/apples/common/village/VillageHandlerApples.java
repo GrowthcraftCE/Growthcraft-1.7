@@ -21,6 +21,7 @@ public class VillageHandlerApples implements IVillageTradeHandler, IVillageCreat
 	private boolean generateAppleFarms = GrowthCraftApples.getConfig().generateAppleFarms;
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
 	{
 		recipeList.add(new MerchantRecipe(new ItemStack(Items.emerald, 1 + random.nextInt(2)), GrowthCraftApples.appleCider.asStack(1, 1)));
@@ -45,6 +46,7 @@ public class VillageHandlerApples implements IVillageTradeHandler, IVillageCreat
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
 	{
 		return ComponentVillageAppleFarm.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);

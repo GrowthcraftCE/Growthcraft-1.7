@@ -73,6 +73,7 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 		this.boundingBox = boundingBox;
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static ComponentVillageAppleFarm buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
 		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 7, 11, coordBaseMode);
