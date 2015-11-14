@@ -32,10 +32,11 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	public BlockFruitPress()
 	{
 		super(Material.wood);
-		this.setHardness(2.0F);
-		this.setStepSound(soundTypeWood);
-		this.setBlockName("grc.fruitPress");
-		this.setCreativeTab(GrowthCraftCellar.tab);
+		setTileEntityType(TileEntityFruitPress.class);
+		setHardness(2.0F);
+		setStepSound(soundTypeWood);
+		setBlockName("grc.fruitPress");
+		setCreativeTab(GrowthCraftCellar.tab);
 	}
 
 	private Block getPresserBlock()
@@ -195,12 +196,6 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 	public Item getItem(World world, int x, int y, int z)
 	{
 		return GrowthCraftCellar.fruitPress.getItem();
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world, int par2)
-	{
-		return new TileEntityFruitPress();
 	}
 
 	/************

@@ -38,9 +38,10 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	public BlockBrewKettle()
 	{
 		super(Material.iron);
-		this.setHardness(2.0F);
-		this.setBlockName("grc.brewKettle");
-		this.setCreativeTab(GrowthCraftCellar.tab);
+		setTileEntityType(TileEntityBrewKettle.class);
+		setHardness(2.0F);
+		setBlockName("grc.brewKettle");
+		setCreativeTab(GrowthCraftCellar.tab);
 	}
 
 	@Override
@@ -87,12 +88,6 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	public Item getItem(World world, int x, int y, int z)
 	{
 		return GrowthCraftCellar.brewKettle.getItem();
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world, int par2)
-	{
-		return new TileEntityBrewKettle();
 	}
 
 	/************

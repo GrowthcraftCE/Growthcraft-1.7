@@ -37,10 +37,11 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 	public BlockFermentBarrel()
 	{
 		super(Material.wood);
-		this.setHardness(2.5F);
-		this.setStepSound(soundTypeWood);
-		this.setBlockName("grc.fermentBarrel");
-		this.setCreativeTab(GrowthCraftCellar.tab);
+		setTileEntityType(TileEntityFermentBarrel.class);
+		setHardness(2.5F);
+		setStepSound(soundTypeWood);
+		setBlockName("grc.fermentBarrel");
+		setCreativeTab(GrowthCraftCellar.tab);
 	}
 
 	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
