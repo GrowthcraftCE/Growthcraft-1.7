@@ -10,10 +10,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.IFluidHandler;
 
 public class Utils
 {
+	// How much fluid is drained from a container or tank with any given
+	// action
+	public static final int DRAIN_CAP = 1000;
+
 	private Utils() {}
 
 	public static void debug(String msg)
@@ -59,106 +64,6 @@ public class Utils
 		return true;
 	}
 
-	public static boolean playerFillTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
-	{
-		if (held != null)
-		{
-			final FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
-
-			if (heldContents != null)
-			{
-				final int used = tank.fill(ForgeDirection.UNKNOWN, heldContents, false);
-
-				if (used > 0)
-				{
-					if (!world.isRemote)
-					{
-						tank.fill(ForgeDirection.UNKNOWN, heldContents, true);
-						final ItemStack containerItem = held.getItem().getContainerItem(held);
-
-						if (!player.inventory.addItemStackToInventory(containerItem))
-						{
-							if (containerItem == null)
-							{
-								// WARN about invalid container item
-							}
-							else
-							{
-								world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, containerItem));
-							}
-						}
-						else if (player instanceof EntityPlayerMP)
-						{
-							((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
-						}
-
-						if (!player.capabilities.isCreativeMode)
-						{
-							if (--held.stackSize <= 0)
-							{
-								player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
-							}
-						}
-					}
-
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	public static FluidStack playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player, boolean expbool, int amount, float exp)
-	{
-		if (held != null)
-		{
-			FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
-			final FluidStack available = tank.drain(ForgeDirection.UNKNOWN, Integer.MAX_VALUE, false);
-
-			if (available != null)
-			{
-				final ItemStack filled = FluidContainerRegistry.fillFluidContainer(available, held);
-				heldContents = FluidContainerRegistry.getFluidForFilledItem(filled);
-
-				if (heldContents != null)
-				{
-					if (!player.inventory.addItemStackToInventory(filled))
-					{
-						world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, filled));
-					}
-					else if (player instanceof EntityPlayerMP)
-					{
-						((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
-					}
-
-					if (!player.capabilities.isCreativeMode)
-					{
-						if (--held.stackSize <= 0)
-						{
-							player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
-						}
-					}
-
-					if (expbool)
-					{
-						spawnExp(amount * heldContents.amount / tank.getTankInfo(ForgeDirection.UNKNOWN)[0].capacity, exp, player);
-					}
-					tank.drain(ForgeDirection.UNKNOWN, heldContents.amount, true);
-
-					return available;
-				}
-			}
-		}
-
-		return null;
-	}
-
-	public static FluidStack playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
-	{
-		return playerDrainTank(world, x, y, z, tank, held, player, false, 0, 0);
-	}
-
 	public static void spawnExp(int amount, float exp, EntityPlayer player)
 	{
 		int j;
@@ -185,5 +90,125 @@ public class Utils
 			amount -= j;
 			player.worldObj.spawnEntityInWorld(new EntityXPOrb(player.worldObj, player.posX, player.posY + 0.5D, player.posZ + 0.5D, j));
 		}
+	}
+
+	public static boolean playerFillTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
+	{
+		if (held == null) return false;
+
+		final ForgeDirection direction = ForgeDirection.UNKNOWN;
+
+		if (held.getItem() instanceof IFluidContainerItem)
+		{
+			final IFluidContainerItem container = (IFluidContainerItem)held.getItem();
+
+			final FluidStack willDrain = container.drain(held, DRAIN_CAP, false);
+			if (willDrain == null || willDrain.amount <= 0) return false;
+
+			final int used = tank.fill(direction, willDrain, false);
+			if (used <= 0) return false;
+
+			if (!world.isRemote)
+			{
+				tank.fill(direction, willDrain, true);
+				container.drain(held, used, true);
+			}
+		}
+		else
+		{
+			final FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
+			if (heldContents == null) return false;
+
+			final int used = tank.fill(direction, heldContents, false);
+			if (used <= 0) return false;
+
+			if (!world.isRemote)
+			{
+				tank.fill(direction, heldContents, true);
+				final ItemStack containerItem = held.getItem().getContainerItem(held);
+
+				if (!player.inventory.addItemStackToInventory(containerItem))
+				{
+					if (containerItem == null)
+					{
+						// WARN about invalid container item
+					}
+					else
+					{
+						world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, containerItem));
+					}
+				}
+				else if (player instanceof EntityPlayerMP)
+				{
+					((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
+				}
+
+				if (!player.capabilities.isCreativeMode)
+				{
+					if (--held.stackSize <= 0)
+					{
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	public static FluidStack playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player, boolean expbool, int amount, float exp)
+	{
+		if (held == null) return null;
+
+		final ForgeDirection direction = ForgeDirection.UNKNOWN;
+		final FluidStack available = tank.drain(direction, DRAIN_CAP, false);
+		if (available == null) return null;
+
+		if (held.getItem() instanceof IFluidContainerItem)
+		{
+			final IFluidContainerItem container = (IFluidContainerItem)held.getItem();
+
+			final int filled = container.fill(held, available, false);
+			if (filled <= 0) return null;
+
+			tank.drain(direction, filled, true);
+			container.fill(held, available, true);
+		}
+		else
+		{
+			FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
+			final ItemStack filled = FluidContainerRegistry.fillFluidContainer(available, held);
+			heldContents = FluidContainerRegistry.getFluidForFilledItem(filled);
+
+			if (heldContents == null) return null;
+
+			if (!player.inventory.addItemStackToInventory(filled))
+			{
+				world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, filled));
+			}
+			else if (player instanceof EntityPlayerMP)
+			{
+				((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
+			}
+
+			if (!player.capabilities.isCreativeMode)
+			{
+				if (--held.stackSize <= 0)
+				{
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+				}
+			}
+
+			if (expbool)
+			{
+				spawnExp(amount * heldContents.amount / tank.getTankInfo(direction)[0].capacity, exp, player);
+			}
+			tank.drain(direction, heldContents.amount, true);
+		}
+		return available;
+	}
+
+	public static FluidStack playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
+	{
+		return playerDrainTank(world, x, y, z, tank, held, player, false, 0, 0);
 	}
 }
