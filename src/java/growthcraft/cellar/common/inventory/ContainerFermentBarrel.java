@@ -52,7 +52,7 @@ public class ContainerFermentBarrel extends CellarContainer
 					return null;
 				}
 			}
-			else if (!this.mergeItemStack(stack, 1, 37, false))
+			else if (!this.mergeItemStack(stack, 2, 37, false))
 			{
 				return null;
 			}

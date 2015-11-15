@@ -250,7 +250,7 @@ public abstract class BlockCellarContainer extends BlockContainer implements IDr
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T extends TileEntity> T getTileEntity(World world, int x, int y, int z)
+	public <T extends TileEntity> T getTileEntity(IBlockAccess world, int x, int y, int z)
 	{
 		final TileEntity te = world.getTileEntity(x, y, z);
 		if (te != null)

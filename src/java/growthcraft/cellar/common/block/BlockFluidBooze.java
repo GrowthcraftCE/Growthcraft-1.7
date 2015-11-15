@@ -3,8 +3,8 @@ package growthcraft.cellar.common.block;
 import java.util.Random;
 
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.common.block.Materials;
 import growthcraft.core.client.particle.EntityFXDropParticle;
+import growthcraft.core.common.block.Materials;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;

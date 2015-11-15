@@ -14,7 +14,7 @@ public class GuiButtonSwitch extends GuiButton
 	private final int iconX;
 	private final int iconY;
 
-	protected GuiButtonSwitch(ResourceLocation resl, int id, int xpos, int ypos)
+	public GuiButtonSwitch(ResourceLocation resl, int id, int xpos, int ypos)
 	{
 		super(id, xpos, ypos, 16, 16, "");
 		this.res = resl;

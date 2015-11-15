@@ -13,11 +13,11 @@ public class ContainerFermentJar extends CellarContainer
 	{
 		super(fermentJar);
 		// Slot Indexes:
-		//0            raw
+		//0            output
 		//1 - 27 (28)  player.inv.backpack
 		//28 - 36 (37) player.inv.hotbar
 
-		addSlotToContainer(new Slot(fermentJar, 0, 43, 53));
+		addSlotToContainer(new Slot(fermentJar, 0, 80, 35));
 
 		bindPlayerInventory(player, 8, 84);
 	}
@@ -33,7 +33,7 @@ public class ContainerFermentJar extends CellarContainer
 			final ItemStack stack = slot.getStack();
 			itemstack = stack.copy();
 
-			if (index > 1)
+			if (index > 0)
 			{
 				if (!this.mergeItemStack(stack, 0, 1, false))
 				{

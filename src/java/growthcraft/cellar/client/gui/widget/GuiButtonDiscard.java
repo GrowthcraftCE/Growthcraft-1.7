@@ -14,7 +14,7 @@ public class GuiButtonDiscard extends GuiButton
 	private final int iconX;
 	private final int iconY;
 
-	protected GuiButtonDiscard(ResourceLocation resl, int id, int xpos, int ypos)
+	public GuiButtonDiscard(ResourceLocation resl, int id, int xpos, int ypos)
 	{
 		super(id, xpos, ypos, 16, 16, "");
 		this.res = resl;

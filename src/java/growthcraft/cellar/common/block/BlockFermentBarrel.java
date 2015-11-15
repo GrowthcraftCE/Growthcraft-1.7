@@ -7,6 +7,7 @@ import growthcraft.cellar.client.render.RenderFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.stats.CellarAchievement;
+import growthcraft.cellar.util.CellarGuiType;
 import growthcraft.core.util.BlockFlags;
 import growthcraft.core.Utils;
 
@@ -42,6 +43,7 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 		setStepSound(soundTypeWood);
 		setBlockName("grc.fermentBarrel");
 		setCreativeTab(GrowthCraftCellar.tab);
+		setGuiType(CellarGuiType.FERMENT_BARREL);
 	}
 
 	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)

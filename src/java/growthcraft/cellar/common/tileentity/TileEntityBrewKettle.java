@@ -40,15 +40,13 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 	protected float residue;
 	protected double time;
 
-	private int maxCap = GrowthCraftCellar.getConfig().brewKettleMaxCap;
-
 	@Override
 	protected CellarTank[] createTanks()
 	{
-		this.tankCaps = new int[] {maxCap, maxCap};
+		final int maxCap = GrowthCraftCellar.getConfig().brewKettleMaxCap;
 		return new CellarTank[] {
-			new CellarTank(tankCaps[0], this),
-			new CellarTank(tankCaps[1], this)
+			new CellarTank(maxCap, this),
+			new CellarTank(maxCap, this)
 		};
 	}
 
@@ -140,8 +138,8 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 		final FluidStack fluidstack = brewing.getBrewingFluidStack(getFluidStack(0), brewingItem);
 		final int amount = brewing.getBrewingAmount(getFluidStack(0), brewingItem);
 		fluidstack.amount = amount;
-		tanks[1].fill(fluidstack, true);
-		tanks[0].drain(amount, true);
+		getFluidTank(1).fill(fluidstack, true);
+		getFluidTank(0).drain(amount, true);
 
 		decrStackSize(0, 1);
 
@@ -260,19 +258,19 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 				break;
 			case BrewKettleDataID.TANK1_FLUID_ID:
 			{
-				final FluidStack result = FluidUtils.replaceFluidStack(v, tanks[0].getFluid());
-				if (result != null) tanks[0].setFluid(result);
+				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
+				if (result != null) getFluidTank(0).setFluid(result);
 			}	break;
 			case BrewKettleDataID.TANK1_FLUID_AMOUNT:
-				tanks[0].setFluid(FluidUtils.updateFluidStackAmount(tanks[0].getFluid(), v));
+				getFluidTank(0).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(0), v));
 				break;
 			case BrewKettleDataID.TANK2_FLUID_ID:
 			{
-				final FluidStack result = FluidUtils.replaceFluidStack(v, tanks[1].getFluid());
-				if (result != null) tanks[1].setFluid(result);
+				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(1));
+				if (result != null) getFluidTank(1).setFluid(result);
 			}	break;
 			case BrewKettleDataID.TANK2_FLUID_AMOUNT:
-				tanks[1].setFluid(FluidUtils.updateFluidStackAmount(tanks[1].getFluid(), v));
+				getFluidTank(1).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(1), v));
 				break;
 			default:
 				break;
@@ -283,10 +281,10 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME, (int)time);
-		FluidStack fluid = tanks[0].getFluid();
+		FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK1_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK1_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
-		fluid = tanks[1].getFluid();
+		fluid = getFluidStack(1);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK2_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK2_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
 	}
@@ -297,7 +295,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
-		final int f = tanks[0].fill(resource, doFill);
+		final int f = getFluidTank(0).fill(resource, doFill);
 		if (f > 0)
 		{
 			markForBlockUpdate();
@@ -308,7 +306,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
 	{
-		if (resource == null || !resource.isFluidEqual(tanks[1].getFluid()))
+		if (resource == null || !resource.isFluidEqual(getFluidStack(1)))
 		{
 			return null;
 		}
@@ -319,7 +317,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		final FluidStack d = tanks[1].drain(maxDrain, doDrain);
+		final FluidStack d = getFluidTank(1).drain(maxDrain, doDrain);
 		if (d != null)
 		{
 			markForBlockUpdate();

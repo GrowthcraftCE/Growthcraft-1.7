@@ -29,27 +29,16 @@ public abstract class TileEntityCellarDevice extends TileEntity implements ISide
 {
 	protected String name;
 	protected GrcInternalInventory inventory;
-	protected CellarTank[] tanks;
-	protected int[] tankCaps;
 	protected boolean needInventoryUpdate;
 	protected boolean needBlockUpdate;
 	protected Random random = new Random();
+	private CellarTank[] tanks;
 
 	public TileEntityCellarDevice()
 	{
 		super();
 		this.inventory = createInventory();
 		this.tanks = createTanks();
-	}
-
-	public void onInventoryChanged(IInventory inv, int index)
-	{
-		markDirty();
-	}
-
-	public void onItemDiscarded(IInventory inv, ItemStack stack, int index)
-	{
-		ItemUtils.spawnItemStack(worldObj, xCoord, yCoord, zCoord, stack, random);
 	}
 
 	protected abstract GrcInternalInventory createInventory();
@@ -64,6 +53,18 @@ public abstract class TileEntityCellarDevice extends TileEntity implements ISide
 	protected void markForInventoryUpdate()
 	{
 		needInventoryUpdate = true;
+	}
+
+	@Override
+	public void onInventoryChanged(IInventory inv, int index)
+	{
+		markForInventoryUpdate();
+	}
+
+	@Override
+	public void onItemDiscarded(IInventory inv, ItemStack stack, int index)
+	{
+		ItemUtils.spawnItemStack(worldObj, xCoord, yCoord, zCoord, stack, random);
 	}
 
 	// Call this ONLY when you absolutely need to update the block's state
@@ -97,6 +98,7 @@ public abstract class TileEntityCellarDevice extends TileEntity implements ISide
 	public void updateEntity()
 	{
 		super.updateEntity();
+
 		checkUpdateFlags();
 
 		if (!this.worldObj.isRemote)
@@ -220,7 +222,7 @@ public abstract class TileEntityCellarDevice extends TileEntity implements ISide
 	{
 		for (int i = 0; i < tanks.length; i++)
 		{
-			tanks[i] = new CellarTank(tankCaps[i], this);
+			tanks[i].setFluid(null);
 			if (nbt.hasKey("Tank" + i))
 			{
 				tanks[i].readFromNBT(nbt.getCompoundTag("Tank" + i));
@@ -309,7 +311,16 @@ public abstract class TileEntityCellarDevice extends TileEntity implements ISide
 
 	public int getFluidAmountScaled(int scalar, int slot)
 	{
-		return this.getFluidAmount(slot) * scalar / tanks[slot].getCapacity();
+		final int cap = tanks[slot].getCapacity();
+		if (cap <= 0) return 0;
+		return this.getFluidAmount(slot) * scalar / cap;
+	}
+
+	public float getFluidAmountRate(int slot)
+	{
+		final int cap = tanks[slot].getCapacity();
+		if (cap <= 0) return 0;
+		return (float)this.getFluidAmount(slot) / (float)cap;
 	}
 
 	public boolean isFluidTankFilled(int slot)
@@ -344,7 +355,9 @@ public abstract class TileEntityCellarDevice extends TileEntity implements ISide
 
 	public Fluid getFluid(int slot)
 	{
-		return getFluidStack(slot).getFluid();
+		final FluidStack stack = getFluidStack(slot);
+		if (stack == null) return null;
+		return stack.getFluid();
 	}
 
 	public void clearTank(int slot)

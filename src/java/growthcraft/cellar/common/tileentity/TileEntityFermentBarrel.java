@@ -39,20 +39,18 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	public final boolean canFormYeast = GrowthCraftCellar.getConfig().formYeastInBarrels;
 	protected int time;
 	protected YeastGenerator yeastGen;
-	private int maxCap = GrowthCraftCellar.getConfig().fermentBarrelMaxCap;
 	private int timemax = GrowthCraftCellar.getConfig().fermentSpeed;
 
 	public TileEntityFermentBarrel()
 	{
 		super();
-		yeastGen = new YeastGenerator(this, 0, 1);
+		this.yeastGen = new YeastGenerator(this, 0, 1);
 	}
 
 	@Override
 	protected CellarTank[] createTanks()
 	{
-		this.tankCaps = new int[] {maxCap};
-		return new CellarTank[] { new CellarTank(tankCaps[0], this) };
+		return new CellarTank[] { new CellarTank(GrowthCraftCellar.getConfig().fermentBarrelMaxCap, this) };
 	}
 
 	@Override
@@ -156,7 +154,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 				markForInventoryUpdate();
 			}
 
-			yeastGen.update();
+			if (canFormYeast) yeastGen.update();
 		}
 	}
 
@@ -189,8 +187,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	{
 		if (nbt.hasKey("Tank"))
 		{
-			this.tanks[0] = new CellarTank(this.maxCap, this);
-			this.tanks[0].readFromNBT(nbt.getCompoundTag("Tank"));
+			getFluidTank(0).readFromNBT(nbt.getCompoundTag("Tank"));
 		}
 		else
 		{
@@ -231,11 +228,11 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 				time = v;
 				break;
 			case TANK_FLUID_ID:
-				final FluidStack result = FluidUtils.replaceFluidStack(v, tanks[0].getFluid());
-				if (result != null) tanks[0].setFluid(result);
+				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
+				if (result != null) getFluidTank(0).setFluid(result);
 				break;
 			case TANK_FLUID_AMOUNT:
-				tanks[0].setFluid(FluidUtils.updateFluidStackAmount(tanks[0].getFluid(), v));
+				getFluidTank(0).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(0), v));
 				break;
 			default:
 				// should warn about invalid Data ID
@@ -247,7 +244,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TIME.ordinal(), time);
-		final FluidStack fluid = tanks[0].getFluid();
+		final FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
 	}

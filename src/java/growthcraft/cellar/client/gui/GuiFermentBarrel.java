@@ -1,31 +1,26 @@
 package growthcraft.cellar.client.gui;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+
+import org.lwjgl.opengl.GL11;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.client.gui.widget.GuiButtonDiscard;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
-import growthcraft.cellar.common.tileentity.CellarTank;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.network.PacketClearTankButton;
-import growthcraft.core.util.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiFermentBarrel extends GuiCellar
@@ -36,7 +31,7 @@ public class GuiFermentBarrel extends GuiCellar
 
 	public GuiFermentBarrel(InventoryPlayer inv, TileEntityFermentBarrel fermentBarrel)
 	{
-		super(new ContainerFermentBarrel(inv, fermentBarrel));
+		super(new ContainerFermentBarrel(inv, fermentBarrel), fermentBarrel);
 		this.te = fermentBarrel;
 	}
 
@@ -48,6 +43,9 @@ public class GuiFermentBarrel extends GuiCellar
 		this.button = new GuiButtonDiscard(fermentBarrelResource, 1, this.guiLeft + 116, this.guiTop + 54);
 		this.buttonList.add(this.button);
 		this.button.enabled = false;
+
+		addTooltipIndex("fluidtank0", 63, 17, 50, 52);
+		addTooltipIndex("discardtank0", 116, 54, 16, 16);
 	}
 
 	@Override
@@ -66,13 +64,11 @@ public class GuiFermentBarrel extends GuiCellar
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		String s = this.te.hasCustomInventoryName() ? this.te.getInventoryName() : I18n.format(this.te.getInventoryName());
-		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+		super.drawGuiContainerForegroundLayer(par1, par2);
 
 		if (!this.te.isFluidTankEmpty(0))
 		{
-			s = String.valueOf(this.te.getFluidAmount(0));
+			final String s = String.valueOf(this.te.getFluidAmount(0));
 			this.fontRendererObj.drawStringWithShadow(s, this.xSize - 62 - this.fontRendererObj.getStringWidth(s), this.ySize - 104, 0xFFFFFF);
 		}
 	}
@@ -162,45 +158,21 @@ public class GuiFermentBarrel extends GuiCellar
 	}
 
 	@Override
-	protected void drawToolTipAtMousePos(int par1, int par2)
+	protected void addTooltips(String handle, List<String> tooltip)
 	{
-		final int w = (this.width - this.xSize) / 2;
-		final int h = (this.height - this.ySize) / 2;
-
-		if ((par1 > w + 63) && (par2 > h + 17) && (par1 < w + 63 + 50) && (par2 < h + 17 + 52))
+		switch (handle)
 		{
-			final ArrayList<String> tooltip = new ArrayList<String>();
-
-			if (this.te.isFluidTankFilled(0))
-			{
-				if (CellarRegistry.instance().booze().isFluidBooze(this.te.getFluidStack(0)))
+			case "fluidtank0":
+				if (this.te.isFluidTankFilled(0))
 				{
-					final FluidStack fluid = CellarRegistry.instance().booze().maybeAlternateBoozeStack(this.te.getFluidStack(0));
-					tooltip.add(fluid.getLocalizedName());
-					final String s = UnitFormatter.fluidModifier(fluid);
-					if (s != null) tooltip.add(s);
-
-					//if (this.te.getBoozeMeta() > 3)
-					//{
-					//	tooltip.add("");
-					//	tooltip.add(EnumChatFormatting.RED + I18n.format("gui.grc.cantferment"));
-					//}
+					addFermentTooltips(this.te.getFluidStack(0), tooltip);
 				}
-				else
-				{
-					tooltip.add(this.te.getFluidStack(0).getLocalizedName());
-					tooltip.add("");
-					tooltip.add(EnumChatFormatting.RED + I18n.format("gui.grc.cantferment"));
-				}
-			}
-
-			drawText(tooltip, par1, par2, this.fontRendererObj);
-		}
-		else if ((par1 > w + 116) && (par2 > h + 54) && (par1 < w + 116 + 16) && (par2 < h + 54 + 16))
-		{
-			final ArrayList<String> tooltip = new ArrayList<String>();
-			tooltip.add(I18n.format("gui.grc.discard"));
-			drawText(tooltip, par1, par2, this.fontRendererObj);
+				break;
+			case "discardtank0":
+				tooltip.add(I18n.format("gui.grc.discard"));
+				break;
+			default:
+				break;
 		}
 	}
 }

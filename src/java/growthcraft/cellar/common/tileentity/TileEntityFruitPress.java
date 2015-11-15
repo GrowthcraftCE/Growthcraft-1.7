@@ -33,13 +33,12 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	protected float pomace;
 	protected int time;
 
-	private final int maxCap = GrowthCraftCellar.getConfig().fruitPressMaxCap;
 
 	@Override
 	protected CellarTank[] createTanks()
 	{
-		this.tankCaps = new int[] {maxCap};
-		return new CellarTank[] { new CellarTank(tankCaps[0], this) };
+		final int maxCap = GrowthCraftCellar.getConfig().fruitPressMaxCap;
+		return new CellarTank[] { new CellarTank(maxCap, this) };
 	}
 
 	@Override
@@ -85,7 +84,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 		final int m = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord + 1, this.zCoord);
 		if (m == 0 || m == 1) return false;
 
-		if (getFluidAmount(0) == this.maxCap) return false;
+		if (isFluidTankFull(0)) return false;
 
 		final PressingRegistry pressing = CellarRegistry.instance().pressing();
 		if (!pressing.isPressingRecipe(primarySlotItem)) return false;
@@ -115,7 +114,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 		producePomace();
 		final FluidStack fluidstack = pressing.getPressingFluidStack(pressingItem);
 		fluidstack.amount  = pressing.getPressingAmount(pressingItem);
-		tanks[0].fill(fluidstack, true);
+		getFluidTank(0).fill(fluidstack, true);
 
 		decrStackSize(0, 1);
 	}
@@ -187,8 +186,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	{
 		if (nbt.hasKey("Tank"))
 		{
-			this.tanks[0] = new CellarTank(this.maxCap, this);
-			this.tanks[0].readFromNBT(nbt.getCompoundTag("Tank"));
+			getFluidTank(0).readFromNBT(nbt.getCompoundTag("Tank"));
 		}
 		else
 		{
@@ -229,11 +227,11 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 				time = v;
 				break;
 			case FruitPressDataID.TANK_FLUID_ID:
-				final FluidStack result = FluidUtils.replaceFluidStack(v, tanks[0].getFluid());
-				if (result != null) tanks[0].setFluid(result);
+				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
+				if (result != null) getFluidTank(0).setFluid(result);
 				break;
 			case FruitPressDataID.TANK_FLUID_AMOUNT:
-				tanks[0].setFluid(FluidUtils.updateFluidStackAmount(tanks[0].getFluid(), v));
+				getFluidTank(0).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(0), v));
 				break;
 			default:
 				// should warn about invalid Data ID
@@ -245,7 +243,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME, time);
-		final FluidStack fluid = tanks[0].getFluid();
+		final FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
 	}
@@ -268,13 +266,13 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		return tanks[0].drain(maxDrain, doDrain);
+		return getFluidTank(0).drain(maxDrain, doDrain);
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
 	{
-		if (resource == null || !resource.isFluidEqual(tanks[0].getFluid()))
+		if (resource == null || !resource.isFluidEqual(getFluidStack(0)))
 		{
 			return null;
 		}

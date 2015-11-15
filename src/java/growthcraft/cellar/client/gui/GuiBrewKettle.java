@@ -1,28 +1,21 @@
 package growthcraft.cellar.client.gui;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.client.gui.widget.GuiButtonDiscard;
 import growthcraft.cellar.client.gui.widget.GuiButtonSwitch;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
-import growthcraft.cellar.common.tileentity.CellarTank;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.network.PacketClearTankButtonWByte;
 import growthcraft.cellar.network.PacketSwitchTankButton;
-import growthcraft.core.util.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -36,7 +29,7 @@ public class GuiBrewKettle extends GuiCellar
 
 	public GuiBrewKettle(InventoryPlayer inv, TileEntityBrewKettle brewKettle)
 	{
-		super(new ContainerBrewKettle(inv, brewKettle));
+		super(new ContainerBrewKettle(inv, brewKettle), brewKettle);
 		this.te = brewKettle;
 	}
 
@@ -57,6 +50,12 @@ public class GuiBrewKettle extends GuiCellar
 		this.buttonList.add(this.button0);
 		this.buttonList.add(this.button1);
 		this.buttonList.add(this.button2);
+
+		addTooltipIndex("fluidtank0", 46, 17, 16, 52);
+		addTooltipIndex("fluidtank1", 114, 17, 16, 52);
+		addTooltipIndex("discardtank0", 27, 54, 16, 16);
+		addTooltipIndex("discardtank1", 133, 54, 16, 16);
+		addTooltipIndex("switchtank", 133, 37, 16, 16);
 	}
 
 	@Override
@@ -88,19 +87,17 @@ public class GuiBrewKettle extends GuiCellar
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		String s = this.te.hasCustomInventoryName() ? this.te.getInventoryName() : I18n.format(this.te.getInventoryName());
-		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+		super.drawGuiContainerForegroundLayer(par1, par2);
 
 		if (!this.te.isFluidTankEmpty(0))
 		{
-			s = String.valueOf(this.te.getFluidAmount(0));
+			final String s = String.valueOf(this.te.getFluidAmount(0));
 			this.fontRendererObj.drawStringWithShadow(s, this.xSize - 113 - this.fontRendererObj.getStringWidth(s), this.ySize - 104, 0xFFFFFF);
 		}
 
 		if (!this.te.isFluidTankEmpty(1))
 		{
-			s = String.valueOf(this.te.getFluidAmount(1));
+			final String s = String.valueOf(this.te.getFluidAmount(1));
 			this.fontRendererObj.drawStringWithShadow(s, this.xSize - 45 - this.fontRendererObj.getStringWidth(s), this.ySize - 104, 0xFFFFFF);
 		}
 	}
@@ -137,62 +134,27 @@ public class GuiBrewKettle extends GuiCellar
 	}
 
 	@Override
-	protected void drawToolTipAtMousePos(int par1, int par2)
+	protected void addTooltips(String handle, List<String> tooltip)
 	{
-		final int w = (this.width - this.xSize) / 2;
-		final int h = (this.height - this.ySize) / 2;
-
-		if ((par1 > w + 46) && (par2 > h + 17) && (par1 < w + 46 + 16) && (par2 < h + 17 + 52))
+		switch (handle)
 		{
-			final ArrayList<String> tooltip = new ArrayList<String>();
-
-			if (this.te.isFluidTankFilled(0))
-			{
-				FluidStack fluid = this.te.getFluidStack(0);
-				tooltip.add(fluid.getLocalizedName());
-				if (CellarRegistry.instance().booze().isFluidBooze(fluid))
-				{
-					fluid = CellarRegistry.instance().booze().maybeAlternateBoozeStack(fluid);
-					tooltip.add(UnitFormatter.fluidModifier(fluid));
-				}
-			}
-
-			drawText(tooltip, par1, par2, this.fontRendererObj);
-		}
-		else if ((par1 > w + 114) && (par2 > h + 17) && (par1 < w + 114 + 16) && (par2 < h + 17 + 52))
-		{
-			final ArrayList<String> tooltip = new ArrayList<String>();
-
-			if (this.te.isFluidTankFilled(1))
-			{
-				FluidStack fluid = this.te.getFluidStack(1);
-				tooltip.add(fluid.getLocalizedName());
-				if (CellarRegistry.instance().booze().isFluidBooze(fluid))
-				{
-					fluid = CellarRegistry.instance().booze().maybeAlternateBoozeStack(fluid);
-					tooltip.add(UnitFormatter.fluidModifier(fluid));
-				}
-			}
-
-			drawText(tooltip, par1, par2, this.fontRendererObj);
-		}
-		else if ((par1 > w + 27) && (par2 > h + 54) && (par1 < w + 27 + 16) && (par2 < h + 54 + 16))
-		{
-			final ArrayList<String> tooltip = new ArrayList<String>();
-			tooltip.add(I18n.format("gui.grc.discard"));
-			drawText(tooltip, par1, par2, this.fontRendererObj);
-		}
-		else if ((par1 > w + 133) && (par2 > h + 54) && (par1 < w + 133 + 16) && (par2 < h + 54 + 16))
-		{
-			final ArrayList<String> tooltip = new ArrayList<String>();
-			tooltip.add(I18n.format("gui.grc.discard"));
-			drawText(tooltip, par1, par2, this.fontRendererObj);
-		}
-		else if ((par1 > w + 133) && (par2 > h + 37) && (par1 < w + 133 + 16) && (par2 < h + 37 + 16))
-		{
-			final ArrayList<String> tooltip = new ArrayList<String>();
-			tooltip.add(I18n.format("gui.grc.switch"));
-			drawText(tooltip, par1, par2, this.fontRendererObj);
+			case "fluidtank0":
+				addFluidTooltips(this.te.getFluidStack(0), tooltip);
+				break;
+			case "fluidtank1":
+				addFluidTooltips(this.te.getFluidStack(1), tooltip);
+				break;
+			case "discardtank0":
+				tooltip.add(I18n.format("gui.grc.discard"));
+				break;
+			case "discardtank1":
+				tooltip.add(I18n.format("gui.grc.discard"));
+				break;
+			case "switchtank":
+				tooltip.add(I18n.format("gui.grc.switch"));
+				break;
+			default:
+				break;
 		}
 	}
 }
