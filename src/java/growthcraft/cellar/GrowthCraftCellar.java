@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.cellar.common.block.BlockBrewKettle;
 import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.cellar.common.block.BlockFermentJar;
@@ -238,9 +239,25 @@ public class GrowthCraftCellar
 
 	private void registerYeast()
 	{
-		CellarRegistry.instance().fermenting().addYeastToBiomeType(YeastType.LAGER.asStack(1), BiomeDictionary.Type.COLD);
-		CellarRegistry.instance().fermenting().addYeastToBiomeType(YeastType.ETHEREAL.asStack(1), BiomeDictionary.Type.MAGICAL);
-		CellarRegistry.instance().fermenting().addYeastToBiomeType(YeastType.ORIGIN.asStack(1), BiomeDictionary.Type.MUSHROOM);
+		final FermentingRegistry reg = CellarRegistry.instance().fermenting();
+		for (BiomeDictionary.Type biomeType : BiomeDictionary.Type.values())
+		{
+			switch (biomeType)
+			{
+				case COLD:
+					reg.addYeastToBiomeType(YeastType.LAGER.asStack(1), biomeType);
+					break;
+				case MAGICAL:
+					reg.addYeastToBiomeType(YeastType.ETHEREAL.asStack(1), biomeType);
+					break;
+				case MUSHROOM:
+					reg.addYeastToBiomeType(YeastType.ETHEREAL.asStack(1), biomeType);
+					break;
+				default:
+					reg.addYeastToBiomeType(YeastType.BREWERS.asStack(1), biomeType);
+
+			}
+		}
 	}
 
 	@EventHandler

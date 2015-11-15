@@ -6,31 +6,33 @@ import net.minecraft.entity.Entity;
 
 public class ModelFermentJar extends ModelBase
 {
+	public static final float SCALE = 1f / 32f;
+
 	ModelRenderer outerJar;
 	ModelRenderer innerJar;
 	ModelRenderer lid;
 
 	public ModelFermentJar()
 	{
-		this.textureWidth  = 64;
-		this.textureHeight = 64;
+		this.textureWidth  = 256;
+		this.textureHeight = 256;
 
 		this.outerJar = new ModelRenderer(this, 0, 0);
-		outerJar.addBox(-4F, 0, -4F, 8, 12, 8);
+		outerJar.addBox(-12F, 0, -12F, 24, 24, 24);
 		outerJar.setRotationPoint(0F, 0F, 0F);
 		outerJar.setTextureSize(textureWidth, textureHeight);
 		outerJar.mirror = true;
 		setRotation(outerJar, 0F, 0F, 0F);
 
-		this.innerJar = new ModelRenderer(this, 0, 0);
-		innerJar.addBox(4F, 11, 4F, -8, -10, -8);
+		this.innerJar = new ModelRenderer(this, 128, 0);
+		innerJar.addBox(11F, 23, 11F, -22, -22, -22);
 		innerJar.setRotationPoint(0F, 0F, 0F);
 		innerJar.setTextureSize(textureWidth, textureHeight);
 		innerJar.mirror = true;
 		setRotation(innerJar, 0F, 0F, 0F);
 
-		this.lid = new ModelRenderer(this, 0, 0);
-		lid.addBox(-4F, 12, -4F, 8, 4, 8);
+		this.lid = new ModelRenderer(this, 0, 128);
+		lid.addBox(-8F, 24, -8F, 16, 8, 16);
 		lid.setRotationPoint(0F, 0F, 0F);
 		lid.setTextureSize(textureWidth, textureHeight);
 		lid.mirror = true;

@@ -1,11 +1,13 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.api.cellar.util.FluidUtils;
+import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -28,20 +30,21 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	}
 
 	private static final int[] accessibleSlots = new int[] { 0 };
-	private static final int maxTankCap = 1000;
 	private YeastGenerator yeastGen;
 
 	public TileEntityFermentJar()
 	{
 		super();
 		this.yeastGen = new YeastGenerator(this, 0, 0);
+		this.yeastGen.setTimeMax(GrowthCraftCellar.getConfig().fermentJarTimeMax);
+		this.yeastGen.setConsumption(GrowthCraftCellar.getConfig().fermentJarConsumption);
 	}
 
 	@Override
 	protected CellarTank[] createTanks()
 	{
-		this.tankCaps = new int[] { maxTankCap };
-		return new CellarTank[] { new CellarTank(tankCaps[0], this) };
+		final int maxTankCap = GrowthCraftCellar.getConfig().fermentJarMaxCap;
+		return new CellarTank[] { new CellarTank(maxTankCap, this) };
 	}
 
 	@Override
@@ -77,8 +80,8 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
-		final int f = tanks[0].fill(resource, doFill);
-		if (f > 0)
+		final int f = getFluidTank(0).fill(resource, doFill);
+		if (f > 0 && doFill)
 		{
 			markForBlockUpdate();
 		}
@@ -86,25 +89,25 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	}
 
 	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
+	{
+		final FluidStack d = getFluidTank(0).drain(maxDrain, doDrain);
+		if (d != null && doDrain)
+		{
+			markForBlockUpdate();
+		}
+		return d;
+	}
+
+	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
 	{
-		if (resource == null || !resource.isFluidEqual(tanks[0].getFluid()))
+		if (resource == null || !resource.isFluidEqual(getFluidTank(0).getFluid()))
 		{
 			return null;
 		}
 
 		return drain(from, resource.amount, doDrain);
-	}
-
-	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
-	{
-		final FluidStack d = tanks[0].drain(maxDrain, doDrain);
-		if (d != null)
-		{
-			markForBlockUpdate();
-		}
-		return d;
 	}
 
 	@Override
@@ -141,5 +144,24 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 		final FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		yeastGen.readFromNBT(nbt, "yeastgen");
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt)
+	{
+		super.writeToNBT(nbt);
+		yeastGen.writeToNBT(nbt, "yeastgen");
+	}
+
+	public int getFermentProgressScaled(int scale)
+	{
+		return yeastGen.getProgressScaled(scale);
 	}
 }

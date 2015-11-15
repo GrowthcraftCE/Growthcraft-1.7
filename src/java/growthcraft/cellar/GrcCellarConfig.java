@@ -35,6 +35,16 @@ public class GrcCellarConfig extends ConfigBase
 	public int fermentBarrelMaxCap = 3000;
 
 
+	@ConfigOption(catergory="Fermenting Jar", name="Generation Time", desc="How long does it take for a ferment jar to produce 1 yeast? (number of ticks)")
+	public int fermentJarTimeMax = 1200;
+
+	@ConfigOption(catergory="Fermenting Jar", name="Fluid per Yeast", desc="How much fluid is used per yeast? (normally 16 yeast per bucket)")
+	public int fermentJarConsumption = 1000 / 16;
+
+	@ConfigOption(catergory="Fermenting Jar", name="Fluid Capacity", desc="How much fluid can a Fermenting Jar hold? (in mB (milli buckets))")
+	public int fermentJarMaxCap = 1000;
+
+
 	@ConfigOption(catergory="Brew Kettle", name="Drop items in Brew Kettle", desc="Enable to have brew kettles pick up dropped items")
 	public boolean dropItemsInBrewKettle;
 

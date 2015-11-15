@@ -19,6 +19,8 @@ import net.minecraftforge.common.BiomeDictionary;
 public class YeastGenerator
 {
 	protected int time;
+	protected int timeMax = 1200;
+	protected int consumption;
 	protected int fluidSlot;
 	protected int invSlot;
 	protected List<ItemStack> tempItemList = new ArrayList<ItemStack>();
@@ -41,14 +43,34 @@ public class YeastGenerator
 		this.invSlot = is;
 	}
 
+	public int getProgressScaled(int scale)
+	{
+		return this.time * scale / timeMax;
+	}
+
 	public int getTime()
 	{
 		return time;
 	}
 
+	public int getTimeMax()
+	{
+		return timeMax;
+	}
+
 	public void setTime(int t)
 	{
 		this.time = t;
+	}
+
+	public void setConsumption(int t)
+	{
+		this.consumption = t;
+	}
+
+	public void setTimeMax(int t)
+	{
+		this.timeMax = t;
 	}
 
 	protected void readFromNBT(NBTTagCompound data)
@@ -103,7 +125,7 @@ public class YeastGenerator
 
 	public boolean canProduceYeast()
 	{
-		if (parent.isFluidTankEmpty(0)) return false;
+		if (parent.getFluidAmount(0) < consumption) return false;
 
 		return CellarRegistry.instance().booze().hasTags(parent.getFluid(fluidSlot), "young");
 	}
@@ -131,6 +153,8 @@ public class YeastGenerator
 		{
 			final ItemStack result = tempItemList.get(random.nextInt(tempItemList.size())).copy();
 			getInventory().setInventorySlotContents(invSlot, result);
+			parent.getFluidTank(fluidSlot).drain(consumption, true);
+			parent.markForBlockUpdate();
 		}
 	}
 
@@ -155,7 +179,7 @@ public class YeastGenerator
 		if (canProduceYeast())
 		{
 			this.time++;
-			if (time >= 1200)
+			if (time >= timeMax)
 			{
 				this.time = 0;
 				produceYeast();
