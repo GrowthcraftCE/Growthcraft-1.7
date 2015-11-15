@@ -79,7 +79,6 @@ public class BoozeRegistryHelper
 			// forward compat recipe
 			if (oldBucket != null)
 			{
-				FluidContainerRegistry.registerFluidContainer(boozeStack, oldBucket.asStack(1, i), FluidContainerRegistry.EMPTY_BUCKET);
 				GameRegistry.addShapelessRecipe(buckets[i].asStack(), oldBucket.asStack(1, i));
 				NEI.hideItem(oldBucket.asStack(1, i));
 			}
