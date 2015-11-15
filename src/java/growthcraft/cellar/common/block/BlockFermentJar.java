@@ -18,9 +18,11 @@ public class BlockFermentJar extends BlockCellarContainer implements ICellarFlui
 		super(Material.glass);
 		setStepSound(soundTypeGlass);
 		setBlockName("grc.fermentJar");
+		setBlockTextureName("grccellar:ferment_jar_glass");
 		setCreativeTab(GrowthCraftCellar.tab);
 		setTileEntityType(TileEntityFermentJar.class);
 		setGuiType(CellarGuiType.FERMENT_JAR);
+
 		final float[] bounds = BoundUtils.newCubeToBounds(2f, 0f, 2f, 12f, 16f, 12f);
 		BoundUtils.scaleBounds(bounds, 1 / 16.0f, bounds);
 		setBlockBounds(bounds[0], bounds[1], bounds[2], bounds[3], bounds[4], bounds[5]);

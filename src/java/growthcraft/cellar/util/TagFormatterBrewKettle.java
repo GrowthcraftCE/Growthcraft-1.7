@@ -19,12 +19,20 @@ public class TagFormatterBrewKettle implements ITagFormatter
 		list.add(EnumChatFormatting.GRAY +
 			StatCollector.translateToLocal("grc.cellar.brewKettle.brewing_prefix") + " " +
 			EnumChatFormatting.WHITE + UnitFormatter.booleanAsValue(tag.getBoolean("can_brew")));
+
 		list.add(EnumChatFormatting.GRAY +
-			StatCollector.translateToLocal("grc.cellar.brewKettle.itemslot.item") + " " +
-			TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_brew")));
+			StatCollector.translateToLocalFormatted(
+				"grc.cellar.brewKettle.itemslot.item",
+				TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_brew"))
+			)
+		);
+
 		list.add(EnumChatFormatting.GRAY +
-			StatCollector.translateToLocal("grc.cellar.brewKettle.itemslot.residue") + " " +
-			TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_residue")));
+			StatCollector.translateToLocalFormatted(
+				"grc.cellar.brewKettle.itemslot.residue",
+				TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_residue"))
+			)
+		);
 		return list;
 	}
 }

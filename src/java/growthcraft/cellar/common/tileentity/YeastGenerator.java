@@ -20,7 +20,7 @@ public class YeastGenerator
 {
 	protected int time;
 	protected int timeMax = 1200;
-	protected int consumption;
+	protected int consumption = 1200 / 16;
 	protected int fluidSlot;
 	protected int invSlot;
 	protected List<ItemStack> tempItemList = new ArrayList<ItemStack>();
@@ -58,19 +58,22 @@ public class YeastGenerator
 		return timeMax;
 	}
 
-	public void setTime(int t)
+	public YeastGenerator setTime(int t)
 	{
 		this.time = t;
+		return this;
 	}
 
-	public void setConsumption(int t)
+	public YeastGenerator setConsumption(int t)
 	{
 		this.consumption = t;
+		return this;
 	}
 
-	public void setTimeMax(int t)
+	public YeastGenerator setTimeMax(int t)
 	{
 		this.timeMax = t;
+		return this;
 	}
 
 	protected void readFromNBT(NBTTagCompound data)
@@ -130,6 +133,12 @@ public class YeastGenerator
 		return CellarRegistry.instance().booze().hasTags(parent.getFluid(fluidSlot), "young");
 	}
 
+	public void consumeFluid()
+	{
+		parent.getFluidTank(fluidSlot).drain(consumption, true);
+		parent.markForBlockUpdate();
+	}
+
 	/**
 	 * This is called to initialize the yeast slot, a random yeast type is
 	 * chosen from the various biome types and set in the slot,
@@ -153,8 +162,7 @@ public class YeastGenerator
 		{
 			final ItemStack result = tempItemList.get(random.nextInt(tempItemList.size())).copy();
 			getInventory().setInventorySlotContents(invSlot, result);
-			parent.getFluidTank(fluidSlot).drain(consumption, true);
-			parent.markForBlockUpdate();
+			consumeFluid();
 		}
 	}
 
@@ -170,6 +178,7 @@ public class YeastGenerator
 			if (CellarRegistry.instance().fermenting().canYeastFormInBiome(contents, getCurrentBiome()))
 			{
 				getInventory().setInventorySlotContents(invSlot, ItemUtils.increaseStack(contents));
+				consumeFluid();
 			}
 		}
 	}

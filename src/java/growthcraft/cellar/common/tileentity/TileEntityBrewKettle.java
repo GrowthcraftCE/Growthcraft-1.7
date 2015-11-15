@@ -81,8 +81,8 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 
 	public boolean hasFire()
 	{
-		final Block block = this.worldObj.getBlock(this.xCoord, this.yCoord - 1, this.zCoord);
-		final int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord - 1, this.zCoord);
+		final Block block = this.worldObj.getBlock(xCoord, yCoord - 1, zCoord);
+		final int meta = worldObj.getBlockMetadata(xCoord, yCoord - 1, zCoord);
 		return CellarRegistry.instance().heatSource().isBlockHeatSource(block, meta);
 	}
 

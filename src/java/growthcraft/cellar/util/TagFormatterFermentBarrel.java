@@ -29,8 +29,11 @@ public class TagFormatterFermentBarrel implements ITagFormatter
 	{
 		final NBTTagCompound modifierItem = tag.getCompoundTag("item_modifier");
 		list.add(EnumChatFormatting.GRAY +
-			StatCollector.translateToLocal("grc.cellar.fermentBarrel.itemslot.modifier") + " " +
-			TagFormatterItem.INSTANCE.formatItem(modifierItem));
+			StatCollector.translateToLocalFormatted(
+				"grc.cellar.fermentBarrel.itemslot.modifier",
+				TagFormatterItem.INSTANCE.formatItem(modifierItem)
+			)
+		);
 	}
 
 	public List<String> format(List<String> list, NBTTagCompound tag)

@@ -26,6 +26,9 @@ public enum YeastType
 		return GrowthCraftCellar.yeast.asStack(size, ordinal());
 	}
 
+	/**
+	 * @return yeast stack, size: 1
+	 */
 	public ItemStack asStack()
 	{
 		return asStack(1);

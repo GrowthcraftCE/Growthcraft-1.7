@@ -28,9 +28,6 @@ public class GrcCellarConfig extends ConfigBase
 	@ConfigOption(catergory="Fermenting Barrel", name="Ferment Barrel fermenting time", desc="[Higher -> Slower]")
 	public int fermentSpeed = 24000;
 
-	@ConfigOption(catergory="Fermenting Barrel", name="Ferment Barrels form yeast", desc="Should ferment barrels create yeast (with a young booze present)?")
-	public boolean formYeastInBarrels;
-
 	@ConfigOption(catergory="Fermenting Barrel", name="Fluid Capacity", desc="How much fluid can a Fermenting Barrel hold? (in mB (milli buckets))")
 	public int fermentBarrelMaxCap = 3000;
 

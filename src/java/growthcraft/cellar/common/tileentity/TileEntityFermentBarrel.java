@@ -36,16 +36,8 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	private static final int[] accessableSlotIds = new int[] {0};
 
 	// Other Vars.
-	public final boolean canFormYeast = GrowthCraftCellar.getConfig().formYeastInBarrels;
 	protected int time;
-	protected YeastGenerator yeastGen;
 	private int timemax = GrowthCraftCellar.getConfig().fermentSpeed;
-
-	public TileEntityFermentBarrel()
-	{
-		super();
-		this.yeastGen = new YeastGenerator(this, 0, 1);
-	}
 
 	@Override
 	protected CellarTank[] createTanks()
@@ -153,8 +145,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 				this.time = 0;
 				markForInventoryUpdate();
 			}
-
-			if (canFormYeast) yeastGen.update();
 		}
 	}
 
@@ -199,7 +189,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		yeastGen.readFromNBT(nbt, "yeastgen");
 		this.time = nbt.getShort("time");
 	}
 
@@ -207,7 +196,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		yeastGen.writeToNBT(nbt, "yeastgen");
 		nbt.setShort("time", (short)this.time);
 	}
 
@@ -259,6 +247,12 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	}
 
 	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
+	{
+		return getFluidTank(0).drain(maxDrain, doDrain);
+	}
+
+	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
 	{
 		if (resource == null || !resource.isFluidEqual(getFluidTank(0).getFluid()))
@@ -266,12 +260,5 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 			return null;
 		}
 		return drain(from, resource.amount, doDrain);
-	}
-
-	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
-	{
-		final FluidStack d = getFluidTank(0).drain(maxDrain, doDrain);
-		return d;
 	}
 }

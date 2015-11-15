@@ -5,6 +5,7 @@ import java.lang.reflect.Modifier;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
+import growthcraft.api.core.util.ItemKey;
 import growthcraft.cellar.common.block.BlockBrewKettle;
 import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.cellar.common.block.BlockFermentJar;
@@ -157,6 +158,7 @@ public class GrowthCraftCellar
 		GameRegistry.addRecipe(new ShapedOreRecipe(fruitPress.asStack(), "ABA", "CCC", "AAA", 'A', "plankWood", 'B', Blocks.piston,'C', "ingotIron"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(brewKettle.asStack(), "A", 'A', Items.cauldron));
 		GameRegistry.addRecipe(new ShapedOreRecipe(fermentBarrel.asStack(), "AAA", "BBB", "AAA", 'B', "plankWood", 'A', "ingotIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(fermentJar.asStack(), " A ", "GGG", "GGG", 'A', "plankWood", 'G', "blockGlass"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(waterBag.asStack(1, 16), "AAA", "ABA", "AAA", 'A', Items.leather, 'B', "materialRope"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 0), "dyeWhite", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
@@ -227,9 +229,9 @@ public class GrowthCraftCellar
 
 	private void registerHeatSources()
 	{
-		CellarRegistry.instance().heatSource().addHeatSource(Blocks.fire, -1, 1.0f);
-		CellarRegistry.instance().heatSource().addHeatSource(Blocks.lava, -1, 0.5f);
-		CellarRegistry.instance().heatSource().addHeatSource(Blocks.flowing_lava, -1, 0.5f);
+		CellarRegistry.instance().heatSource().addHeatSource(Blocks.fire, ItemKey.WILDCARD_VALUE, 1.0f);
+		CellarRegistry.instance().heatSource().addHeatSource(Blocks.lava, ItemKey.WILDCARD_VALUE, 0.5f);
+		CellarRegistry.instance().heatSource().addHeatSource(Blocks.flowing_lava, ItemKey.WILDCARD_VALUE, 0.5f);
 	}
 
 	private void registerOres()

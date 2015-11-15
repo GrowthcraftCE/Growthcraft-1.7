@@ -112,4 +112,16 @@ public class BlockFluidBooze extends BlockFluidClassic
 	{
 		return false;
 	}
+
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
 }

@@ -16,11 +16,17 @@ public class TagFormatterFruitPress implements ITagFormatter
 	public List<String> format(List<String> list, NBTTagCompound tag)
 	{
 		list.add(EnumChatFormatting.GRAY +
-			StatCollector.translateToLocal("grc.cellar.fruitPress.itemslot.item") + " " +
-			TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_press")));
+			StatCollector.translateToLocalFormatted(
+				"grc.cellar.fruitPress.itemslot.item",
+				TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_press"))
+			)
+		);
 		list.add(EnumChatFormatting.GRAY +
-			StatCollector.translateToLocal("grc.cellar.fruitPress.itemslot.residue") + " " +
-			TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_residue")));
+			StatCollector.translateToLocalFormatted(
+				"grc.cellar.fruitPress.itemslot.residue",
+				TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_residue"))
+			)
+		);
 		return list;
 	}
 }
