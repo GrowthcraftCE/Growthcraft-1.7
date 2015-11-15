@@ -1,4 +1,4 @@
-package growthcraft.cellar.client.gui;
+package growthcraft.cellar.client.gui.widget;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

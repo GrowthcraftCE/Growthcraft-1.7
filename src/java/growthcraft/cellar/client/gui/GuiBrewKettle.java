@@ -3,6 +3,8 @@ package growthcraft.cellar.client.gui;
 import java.util.ArrayList;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.cellar.client.gui.widget.GuiButtonDiscard;
+import growthcraft.cellar.client.gui.widget.GuiButtonSwitch;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.CellarTank;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
@@ -132,31 +134,6 @@ public class GuiBrewKettle extends GuiCellar
 			drawTank(w, h, 114, 17, 16, this.te.getFluidAmountScaled(52, 1), this.te.getFluidStack(1), this.te.getFluidTank(1));
 			this.mc.getTextureManager().bindTexture(brewKettleResource);
 		}
-	}
-
-	protected void drawTank(int w, int h, int wp, int hp, int width, int amount, FluidStack fluidstack, CellarTank tank)
-	{
-		if (fluidstack == null) { return; }
-
-		final Fluid fluid = fluidstack.getFluid();
-		final int color = fluid.getColor();
-
-		IIcon icon = null;
-		if (fluid != null && fluid.getStillIcon() != null)
-		{
-			icon = fluid.getStillIcon();
-		}
-
-		this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-
-		final float r = (float)(color >> 16 & 255) / 255.0F;
-		final float g = (float)(color >> 8 & 255) / 255.0F;
-		final float b = (float)(color & 255) / 255.0F;
-		GL11.glColor4f(r, g, b, 1.0f);
-
-		this.drawTexturedModelRectFromIcon(w + wp, h + hp + 52 - amount, icon, width, amount);
-
-		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	@Override
