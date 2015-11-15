@@ -29,8 +29,13 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 
 	private static final int[] accessibleSlots = new int[] { 0 };
 	private static final int maxTankCap = 1000;
+	private YeastGenerator yeastGen;
 
-	protected int time;
+	public TileEntityFermentJar()
+	{
+		super();
+		this.yeastGen = new YeastGenerator(this, 0, 0);
+	}
 
 	@Override
 	protected CellarTank[] createTanks()
@@ -105,11 +110,7 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	@Override
 	public void updateCellarDevice()
 	{
-		final FluidStack stack = getFluidStack(0);
-		if (stack != null)
-		{
-
-		}
+		yeastGen.update();
 	}
 
 	@Override
@@ -118,7 +119,7 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 		switch (FermentJarDataId.fromInt(id))
 		{
 			case TIME:
-				this.time = v;
+				yeastGen.setTime(v);
 				break;
 			case TANK_FLUID_ID:
 				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
@@ -136,7 +137,7 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	@Override
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
-		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TIME.ordinal(), time);
+		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TIME.ordinal(), yeastGen.getTime());
 		final FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);

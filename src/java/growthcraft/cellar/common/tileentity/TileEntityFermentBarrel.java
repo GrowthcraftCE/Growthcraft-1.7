@@ -45,7 +45,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	public TileEntityFermentBarrel()
 	{
 		super();
-		yeastGen = new YeastGenerator(this);
+		yeastGen = new YeastGenerator(this, 0, 1);
 	}
 
 	@Override

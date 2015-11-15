@@ -19,15 +19,36 @@ import net.minecraftforge.common.BiomeDictionary;
 public class YeastGenerator
 {
 	protected int time;
+	protected int fluidSlot;
+	protected int invSlot;
 	protected List<ItemStack> tempItemList = new ArrayList<ItemStack>();
 	protected Random random = new Random();
 	protected IInventory inventory;
 	protected World world;
 	protected TileEntityCellarDevice parent;
 
-	public YeastGenerator(TileEntityCellarDevice te)
+	/**
+	 * @param te - parent tile entity
+	 * @param fs - fluid slot id to use in parent
+	 *             Fluid will be used from this slot
+	 * @param is - inventory slot id to use in parent
+	 *             Yeast will be generated into this slot
+	 */
+	public YeastGenerator(TileEntityCellarDevice te, int fs, int is)
 	{
 		this.parent = te;
+		this.fluidSlot = fs;
+		this.invSlot = is;
+	}
+
+	public int getTime()
+	{
+		return time;
+	}
+
+	public void setTime(int t)
+	{
+		this.time = t;
 	}
 
 	protected void readFromNBT(NBTTagCompound data)
@@ -84,7 +105,7 @@ public class YeastGenerator
 	{
 		if (parent.isFluidTankEmpty(0)) return false;
 
-		return CellarRegistry.instance().booze().hasTags(parent.getFluid(0), "young");
+		return CellarRegistry.instance().booze().hasTags(parent.getFluid(fluidSlot), "young");
 	}
 
 	/**
@@ -109,22 +130,22 @@ public class YeastGenerator
 		if (tempItemList.size() > 0)
 		{
 			final ItemStack result = tempItemList.get(random.nextInt(tempItemList.size())).copy();
-			getInventory().setInventorySlotContents(1, result);
+			getInventory().setInventorySlotContents(invSlot, result);
 		}
 	}
 
 	public void produceYeast()
 	{
-		if (getInventory().getStackInSlot(1) == null)
+		if (getInventory().getStackInSlot(invSlot) == null)
 		{
 			initProduceYeast();
 		}
 		else
 		{
-			final ItemStack contents = getInventory().getStackInSlot(1);
+			final ItemStack contents = getInventory().getStackInSlot(invSlot);
 			if (CellarRegistry.instance().fermenting().canYeastFormInBiome(contents, getCurrentBiome()))
 			{
-				getInventory().setInventorySlotContents(1, ItemUtils.increaseStack(contents));
+				getInventory().setInventorySlotContents(invSlot, ItemUtils.increaseStack(contents));
 			}
 		}
 	}
