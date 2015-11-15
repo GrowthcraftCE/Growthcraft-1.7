@@ -6,7 +6,6 @@ import growthcraft.cellar.client.render.RenderFruitPress;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.util.BlockFlags;
-import growthcraft.core.Utils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,7 +16,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;

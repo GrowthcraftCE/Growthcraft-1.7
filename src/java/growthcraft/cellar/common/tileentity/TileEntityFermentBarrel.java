@@ -1,15 +1,9 @@
 package growthcraft.cellar.common.tileentity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.api.cellar.fermenting.FermentationResult;
 import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.util.ItemUtils;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 
 import net.minecraft.inventory.ICrafting;

@@ -7,7 +7,6 @@ import growthcraft.core.common.inventory.IInventoryWatcher;
 import growthcraft.core.common.tileentity.ICustomDisplayName;
 import growthcraft.core.common.tileentity.IGuiNetworkSync;
 import growthcraft.core.util.ItemUtils;
-import growthcraft.core.util.NBTHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

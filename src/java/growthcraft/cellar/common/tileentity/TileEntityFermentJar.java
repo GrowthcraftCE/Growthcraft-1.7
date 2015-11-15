@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.tileentity;
 
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 

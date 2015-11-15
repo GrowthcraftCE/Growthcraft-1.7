@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.fermenting.FermentationResult;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.core.util.ItemUtils;
 
