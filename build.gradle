@@ -3,17 +3,19 @@
 buildscript {
     repositories {
         mavenCentral()
+
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+
         maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath "net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT"
     }
 }
 
@@ -42,19 +44,23 @@ repositories {
     }
 }
 
-apply plugin: 'forge'
-apply plugin: 'checkstyle'
+apply plugin: "forge"
+apply plugin: "checkstyle"
 
 checkstyle {
     toolVersion = "6.11.2"
     configFile = new File(rootDir, "checkstyle/checkstyle.xml")
 }
 
+// No more Java 1.6, we'll be using 1.7 for `switch (String)`
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
+
 version = "${minecraft_version}-${growthcraft_version}"
-group= "mod.growthcraft"
+group = "mod.growthcraft"
 archivesBaseName = "growthcraft"
 
-ext.growthcraftApi = 'src/java/growthcraft/api'
+ext.growthcraftApi = "src/java/growthcraft/api"
 
 // 3rd party APIs
 ext.thaumcraftApi = "api/thaumcraft/api"
@@ -63,8 +69,8 @@ ext.thaumcraftApiExclusionPattern = "**/thaumcraft/api/**"
 minecraft {
     version = minecraft_forge_version
     runDir = "run"
-    replace '@VERSION@', project.version
-    replace '@MC_VERSION@', version
+    replace "@VERSION@", project.version
+    replace "@MC_VERSION@", version
 }
 
 // configure  the source folders
@@ -72,10 +78,10 @@ sourceSets {
     // this builds everything into the main package
     main {
         java {
-            srcDir 'src/java'
+            srcDir "src/java"
         }
         resources {
-            srcDir 'src/resources'
+            srcDir "src/resources"
         }
     }
     api {
@@ -89,8 +95,8 @@ sourceSets {
 processResources {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        include "mcmod.info"
+        expand "version":project.version, "mcversion":project.minecraft.version
     }
 }
 
@@ -104,7 +110,7 @@ dependencies {
 }
 
 runClient {
-    if( project.hasProperty('mcUsername') && project.hasProperty('mcPassword') ) {
+    if( project.hasProperty("mcUsername") && project.hasProperty("mcPassword") ) {
         args "--username=${project.mcUsername}"
         args "--password=${project.mcPassword}"
     }
@@ -112,7 +118,7 @@ runClient {
 }
 
 debugClient {
-    if( project.hasProperty('mcUsername') && project.hasProperty('mcPassword') ) {
+    if( project.hasProperty("mcUsername") && project.hasProperty("mcPassword") ) {
         args "--username=${project.mcUsername}"
         args "--password=${project.mcPassword}"
     }
@@ -123,9 +129,9 @@ debugClient {
 // -------------------
 
 tasks.withType(JavaCompile) {
-    options.compilerArgs += ['-Xlint:all', '-Xlint:-rawtypes', '-Xlint:deprecation', '-Xlint:-unchecked']
+    options.compilerArgs += ["-Xlint:all", "-Xlint:-rawtypes", "-Xlint:deprecation", "-Xlint:-unchecked"]
     options.deprecation = true
-    options.encoding = 'utf8'
+    options.encoding = "utf8"
 }
 
 // add a source jar
@@ -134,7 +140,7 @@ task sourceJar(type: Jar) {
     from(sourceSets.api.allSource) {
         exclude project.thaumcraftApiExclusionPattern
     }
-    classifier = 'sources'
+    classifier = "sources"
 }
 
 javadoc {
@@ -148,8 +154,8 @@ javadoc {
 
 // add a javadoc jar
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from 'build/docs/javadoc'
+    classifier = "javadoc"
+    from "build/docs/javadoc"
 }
 
 // because the normal output has been made to be obfuscated
@@ -158,18 +164,18 @@ task deobfJar(type: Jar) {
     from(sourceSets.api.output) {
         exclude project.thaumcraftApiExclusionPattern
     }
-    classifier = 'dev'
+    classifier = "dev"
 }
 
 task apiJar(type: Jar) {
     from(sourceSets.api.output) {
         exclude project.thaumcraftApiExclusionPattern
     }
-    classifier = 'api'
+    classifier = "api"
 }
 
 jar {
-    classifier = 'complete'
+    classifier = "complete"
 
     // add api classes to main package
     from(sourceSets.api.output) {
@@ -177,7 +183,7 @@ jar {
     }
 
     // Only include the thaumcraft LICENSE
-    into('thaumcraft/api') {
+    into("thaumcraft/api") {
         from project.thaumcraftApi + "/LICENSE"
     }
 }
