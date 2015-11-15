@@ -25,9 +25,8 @@ public class RenderFermentJar implements ISimpleBlockRenderingHandler
 	public static float[] innerBounds;
 	static
 	{
-		innerBounds = BoundUtils.newCenteredCubeBounds(22f, 22f, 22f);
+		innerBounds = BoundUtils.newCubeToBounds(5f, 1f, 5f, 22f, 22f, 22f);
 		BoundUtils.scaleBounds(innerBounds, 1f / 32f, innerBounds);
-		BoundUtils.translateBounds(innerBounds, 0.5f, 0.5f, 0.5f, innerBounds);
 	}
 
 	private float[] tempFloatColor = new float[3];
