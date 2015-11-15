@@ -27,11 +27,11 @@ public class GrcGuiContainer extends GuiContainer
 	public static class TooltipIndex
 	{
 		// use this to identify the tooltip index
-		public final int handle;
+		public final String handle;
 		// The rectangle where this tooltip will be displayed
 		public final Rectangle rect;
 
-		public TooltipIndex(int h, Rectangle r)
+		public TooltipIndex(String h, Rectangle r)
 		{
 			this.handle = h;
 			this.rect = r;
@@ -39,34 +39,49 @@ public class GrcGuiContainer extends GuiContainer
 	}
 
 	protected List<TooltipIndex> tooltipIndices = new ArrayList<TooltipIndex>();
+	protected ArrayList<String> tooltip = new ArrayList<String>();
 
 	public GrcGuiContainer(Container container)
 	{
 		super(container);
 	}
 
-	protected void addTooltipIndex(int i, Rectangle h)
+	protected void addTooltipIndex(String handle, Rectangle r)
 	{
-		tooltipIndices.add(new TooltipIndex(i, h));
+		tooltipIndices.add(new TooltipIndex(handle, r));
 	}
 
-	protected void addTooltipIndex(int i, int x, int y, int w, int h)
+	protected void addTooltipIndex(String handle, int x, int y, int w, int h)
 	{
-		addTooltipIndex(i, new Rectangle(x, y, w, h));
+		addTooltipIndex(handle, new Rectangle(x, y, w, h));
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {}
 
+
+	protected void addTooltips(String handle, List<String> tips) {}
+
 	// Overwrite this method to draw tooltips, use the ti to identify which
 	// rectangle you're working with.
-	protected void drawTooltipIndex(TooltipIndex ti, int x, int y) {}
+	protected void drawTooltipIndex(TooltipIndex ti, int x, int y)
+	{
+		tooltip.clear();
+		addTooltips(ti.handle, tooltip);
+		if (tooltip.size() > 0)
+		{
+			drawText(tooltip, x, y, fontRendererObj);
+		}
+	}
 
 	protected void drawTooltip(int x, int y)
 	{
+		final int gx = x - ((this.width - this.xSize) / 2);
+		final int gy = y - ((this.height - this.ySize) / 2);
+
 		for (TooltipIndex ti : tooltipIndices)
 		{
-			if (ti.rect.contains(x, y))
+			if (ti.rect.contains(gx, gy))
 			{
 				drawTooltipIndex(ti, x, y);
 				break;
