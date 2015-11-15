@@ -25,6 +25,8 @@ package growthcraft.core.util;
 
 public class ColorUtils
 {
+	private ColorUtils() {}
+
 	public static float[] rgb24FloatArray(float[] array, int rgb24)
 	{
 		assert array.length == 3;

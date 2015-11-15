@@ -24,7 +24,7 @@ public class RenderBeeBox implements ISimpleBlockRenderingHandler
 			final Tessellator tes = Tessellator.instance;
 			final int offset = MathHelper.clamp_int(metadata, 0, 5) * 4;
 			final BlockBeeBox beeBox = (BlockBeeBox)block;
-			final IIcon[] icon  = {
+			final IIcon[] icons  = {
 				beeBox.getIcon(0, metadata),
 				beeBox.getIcon(1, metadata),
 				beeBox.getIcon(2, metadata),
@@ -35,21 +35,21 @@ public class RenderBeeBox implements ISimpleBlockRenderingHandler
 			final double d = 0.0625D;
 			// LEGS
 			renderer.setRenderBounds(3*d, 0.0D, 3*d, 5*d, 3*d, 5*d);
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
 			renderer.setRenderBounds(11*d, 0.0D, 3*d, 13*d, 3*d, 5*d);
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
 			renderer.setRenderBounds(3*d, 0.0D, 11*d, 5*d, 3*d, 13*d);
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
 			renderer.setRenderBounds(11*d, 0.0D, 11*d, 13*d, 3*d, 13*d);
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
 			// BODY
 			renderer.setRenderBounds(1*d, 3*d, 1*d, 15*d, 10*d, 15*d);
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
 			// ROOF
 			renderer.setRenderBounds(0.0D, 10*d, 0.0D, 1.0D, 13*d, 1.0D);
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
 			renderer.setRenderBounds(2*d, 13*d, 2*d, 14*d, 1.0D, 14*d);
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
 		}
 	}
 

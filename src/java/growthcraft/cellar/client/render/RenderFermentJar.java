@@ -8,6 +8,7 @@ import growthcraft.cellar.common.block.BlockFermentJar;
 import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
 import growthcraft.core.util.BoundUtils;
 import growthcraft.core.util.ColorUtils;
+import growthcraft.core.util.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -41,27 +42,20 @@ public class RenderFermentJar implements ISimpleBlockRenderingHandler
 		return true;
 	}
 
-	private void renderFermentJarModel()
-	{
-		GrcCellarResources.INSTANCE.modelFermentJar.render(ModelFermentJar.SCALE);
-	}
-
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer)
 	{
 		if (RENDER_ID != modelId) return;
 		if (block instanceof BlockFermentJar)
 		{
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glPushMatrix();
+			renderer.setRenderBounds(0D, 0D, 0D, 1D, 1D, 1D);
+			RenderUtils.startInventoryRender();
 			{
 				GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 				Minecraft.getMinecraft().renderEngine.bindTexture(GrcCellarResources.INSTANCE.textureFermentJar);
-				renderFermentJarModel();
+				GrcCellarResources.INSTANCE.modelFermentJar.renderForInventory(ModelFermentJar.SCALE);
 				GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 			}
-			GL11.glPopMatrix();
-			GL11.glDisable(GL11.GL_BLEND);
+			RenderUtils.endInventoryRender();
 		}
 	}
 

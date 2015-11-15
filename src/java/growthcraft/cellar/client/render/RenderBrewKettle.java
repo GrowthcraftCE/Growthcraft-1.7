@@ -45,9 +45,8 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 			final IIcon[] icon  = {brewKettle.getIconByIndex(0), brewKettle.getIconByIndex(3), brewKettle.getIconByIndex(2), brewKettle.getIconByIndex(2), brewKettle.getIconByIndex(2), brewKettle.getIconByIndex(2)};
 			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 			// Outer Kettle
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icon, tes);
 
-			final double d = 0.0625D;
 			final float f = 0.125F;
 
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);

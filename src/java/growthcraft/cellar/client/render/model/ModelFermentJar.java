@@ -2,7 +2,6 @@ package growthcraft.cellar.client.render.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 public class ModelFermentJar extends ModelBase
 {
@@ -19,21 +18,21 @@ public class ModelFermentJar extends ModelBase
 
 		this.outerJar = new ModelRenderer(this, 0, 0);
 		outerJar.addBox(-12F, 0, -12F, 24, 24, 24);
-		outerJar.setRotationPoint(0F, 0F, 0F);
+		outerJar.setRotationPoint(0F, 16F, 0F);
 		outerJar.setTextureSize(textureWidth, textureHeight);
 		outerJar.mirror = true;
 		setRotation(outerJar, 0F, 0F, 0F);
 
 		this.innerJar = new ModelRenderer(this, 128, 0);
 		innerJar.addBox(11F, 23, 11F, -22, -22, -22);
-		innerJar.setRotationPoint(0F, 0F, 0F);
+		innerJar.setRotationPoint(0F, 16F, 0F);
 		innerJar.setTextureSize(textureWidth, textureHeight);
 		innerJar.mirror = true;
 		setRotation(innerJar, 0F, 0F, 0F);
 
 		this.lid = new ModelRenderer(this, 0, 128);
 		lid.addBox(-8F, 24, -8F, 16, 8, 16);
-		lid.setRotationPoint(0F, 0F, 0F);
+		lid.setRotationPoint(0F, 16F, 0F);
 		lid.setTextureSize(textureWidth, textureHeight);
 		lid.mirror = true;
 		setRotation(lid, 0F, 0F, 0F);
@@ -46,10 +45,8 @@ public class ModelFermentJar extends ModelBase
 		lid.render(scale);
 	}
 
-	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float scale)
+	public void renderForInventory(float scale)
 	{
-		super.render(entity, f, f1, f2, f3, f4, scale);
 		render(scale);
 	}
 

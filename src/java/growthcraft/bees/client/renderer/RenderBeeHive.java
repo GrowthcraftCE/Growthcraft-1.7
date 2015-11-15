@@ -24,13 +24,13 @@ public class RenderBeeHive implements ISimpleBlockRenderingHandler
 			final double d = 0.0625D;
 
 			renderer.setRenderBounds(4*d, 0.0D, 4*d, 12*d, 14*d, 12*d);
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icon, tes);
 			renderer.setRenderBounds(3*d, 1*d, 3*d, 13*d, 13*d, 13*d);
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icon, tes);
 			renderer.setRenderBounds(2*d, 4*d, 2*d, 14*d, 10*d, 14*d);
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icon, tes);
 			renderer.setRenderBounds(7*d, 14*d, 7*d, 9*d, 1.0D, 9*d);
-			RenderUtils.drawInventoryBlock(block, renderer, icon, tes);
+			RenderUtils.renderInventoryBlockOverride(block, renderer, icon, tes);
 		}
 	}
 
