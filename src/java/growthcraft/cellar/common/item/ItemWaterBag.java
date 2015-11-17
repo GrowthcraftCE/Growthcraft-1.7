@@ -152,7 +152,9 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 
 		if (!container.stackTagCompound.hasKey("Fluid"))
 		{
-			final NBTTagCompound fluidTag = resource.writeToNBT(new NBTTagCompound());
+			final FluidStack res = resource.copy();
+			res.amount = amount;
+			final NBTTagCompound fluidTag = res.writeToNBT(new NBTTagCompound());
 
 			if (capacity < amount)
 			{
