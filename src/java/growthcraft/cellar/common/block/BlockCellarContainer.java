@@ -240,10 +240,9 @@ public abstract class BlockCellarContainer extends BlockContainer implements IDr
 
 			boolean needUpdate = false;
 
-			// While a player is sneaking, the fill-drain order is reversed
-			if (player.isSneaking())
+			if (!player.isSneaking())
 			{
-				// While sneaking, draining is given priority
+				// While not sneaking, draining is given priority
 				if (playerDrainTank(world, x, y, z, fh, is, player) ||
 					playerFillTank(world, x, y, z, fh, is, player)) needUpdate = true;
 			}
