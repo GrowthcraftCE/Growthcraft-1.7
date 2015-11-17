@@ -1,12 +1,18 @@
 package growthcraft.cellar.common.tileentity;
 
 import java.util.Random;
+import java.io.IOException;
 
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.IInventoryWatcher;
+import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.ICustomDisplayName;
 import growthcraft.core.common.tileentity.IGuiNetworkSync;
+import growthcraft.core.common.tileentity.GrcBaseTile;
 import growthcraft.core.util.ItemUtils;
+import growthcraft.core.util.StreamUtils;
+
+import io.netty.buffer.ByteBuf;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -15,22 +21,17 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public abstract class TileEntityCellarDevice extends TileEntity implements ISidedInventory, IFluidHandler, ICustomDisplayName, IInventoryWatcher, IGuiNetworkSync
+public abstract class TileEntityCellarDevice extends GrcBaseTile implements ISidedInventory, IFluidHandler, ICustomDisplayName, IInventoryWatcher, IGuiNetworkSync
 {
 	protected String name;
 	protected GrcInternalInventory inventory;
 	protected boolean needInventoryUpdate;
-	protected boolean needBlockUpdate;
 	protected Random random = new Random();
 	private CellarTank[] tanks;
 
@@ -67,13 +68,6 @@ public abstract class TileEntityCellarDevice extends TileEntity implements ISide
 		ItemUtils.spawnItemStack(worldObj, xCoord, yCoord, zCoord, stack, random);
 	}
 
-	// Call this ONLY when you absolutely need to update the block's state
-	// @eg rendering
-	protected void markForBlockUpdate()
-	{
-		needBlockUpdate = true;
-	}
-
 	// Call this when you modify a fluid tank outside of its usual methods
 	protected void markForFluidUpdate()
 	{
@@ -86,11 +80,6 @@ public abstract class TileEntityCellarDevice extends TileEntity implements ISide
 		{
 			needInventoryUpdate = false;
 			this.markDirty();
-		}
-		if (needBlockUpdate)
-		{
-			needBlockUpdate = false;
-			this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 		}
 	}
 
@@ -271,19 +260,33 @@ public abstract class TileEntityCellarDevice extends TileEntity implements ISide
 		}
 	}
 
-	@Override
-	public Packet getDescriptionPacket()
+	protected void writeTanksToStream(ByteBuf stream)
 	{
-		final NBTTagCompound nbt = new NBTTagCompound();
-		writeTanksToNBT(nbt);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 64, nbt);
+		for (int i = 0; i < tanks.length; i++)
+		{
+			StreamUtils.writeFluidTank(stream, tanks[i]);
+		}
 	}
 
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	public boolean writeToStream_FluidTanks(ByteBuf stream) throws IOException
 	{
-		readTanksFromNBT(packet.func_148857_g());
-		this.worldObj.func_147479_m(this.xCoord, this.yCoord, this.zCoord);
+		writeTanksToStream(stream);
+		return true;
+	}
+
+	protected void readTanksFromStream(ByteBuf stream)
+	{
+		for (int i = 0; i < tanks.length; i++)
+		{
+			StreamUtils.readFluidTank(stream, tanks[i]);
+		}
+	}
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	public void readFromStream_FluidTanks(ByteBuf stream) throws IOException
+	{
+		readTanksFromStream(stream);
 	}
 
 	@Override

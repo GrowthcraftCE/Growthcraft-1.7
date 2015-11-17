@@ -8,6 +8,8 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.core.util.ItemUtils;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -74,36 +76,6 @@ public class YeastGenerator
 	{
 		this.timeMax = t;
 		return this;
-	}
-
-	protected void readFromNBT(NBTTagCompound data)
-	{
-		data.setInteger("time", time);
-	}
-
-	public void readFromNBT(NBTTagCompound data, String name)
-	{
-		final NBTTagCompound list = data.getCompoundTag(name);
-		if (list != null)
-		{
-			readFromNBT(list);
-		}
-		else
-		{
-			// LOG error
-		}
-	}
-
-	protected void writeToNBT(NBTTagCompound data)
-	{
-		this.time = data.getInteger("time");
-	}
-
-	public void writeToNBT(NBTTagCompound data, String name)
-	{
-		final NBTTagCompound target = new NBTTagCompound();
-		writeToNBT(target);
-		data.setTag(name, target);
 	}
 
 	public World getWorld()
@@ -195,5 +167,73 @@ public class YeastGenerator
 				markForInventoryUpdate();
 			}
 		}
+	}
+
+	/**
+	 * Serialization
+	 */
+
+	/**
+	 * @param data - nbt data to read from
+	 */
+	protected void readFromNBT(NBTTagCompound data)
+	{
+		time = data.getInteger("time");
+		timeMax = data.getInteger("timeMax");
+	}
+
+	/**
+	 * @param data - parent nbt data to read from
+	 * @param name - sub tag to read
+	 */
+	public void readFromNBT(NBTTagCompound data, String name)
+	{
+		final NBTTagCompound list = data.getCompoundTag(name);
+		if (list != null)
+		{
+			readFromNBT(list);
+		}
+		else
+		{
+			// LOG error
+		}
+	}
+
+	/**
+	 * @param buf - buffer to read from
+	 */
+	public void readFromStream(ByteBuf buf)
+	{
+		this.time = buf.readInt();
+		this.timeMax = buf.readInt();
+	}
+
+	/**
+	 * @param data - nbt to write to
+	 */
+	protected void writeToNBT(NBTTagCompound data)
+	{
+		data.setInteger("time", time);
+		data.setInteger("timeMax", timeMax);
+	}
+
+	/**
+	 * @param data - nbt to write to
+	 * @param name - sub tag nbt to write to
+	 */
+	public void writeToNBT(NBTTagCompound data, String name)
+	{
+		final NBTTagCompound target = new NBTTagCompound();
+		writeToNBT(target);
+		data.setTag(name, target);
+	}
+
+	/**
+	 * @param buf - buffer to write to
+	 */
+	public void writeToStream(ByteBuf buf)
+	{
+		buf.writeInt(time);
+		buf.writeInt(timeMax);
 	}
 }

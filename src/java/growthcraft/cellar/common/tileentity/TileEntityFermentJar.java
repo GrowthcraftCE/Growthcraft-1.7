@@ -1,8 +1,13 @@
 package growthcraft.cellar.common.tileentity;
 
+import java.io.IOException;
+
 import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.event.EventHandler;
+
+import io.netty.buffer.ByteBuf;
 
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -158,6 +163,20 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	{
 		super.writeToNBT(nbt);
 		yeastGen.writeToNBT(nbt, "yeastgen");
+	}
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	public boolean readFromStream_YeastGen(ByteBuf stream) throws IOException
+	{
+		yeastGen.readFromStream(stream);
+		return false;
+	}
+
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	public void writeToStream_YeastGen(ByteBuf stream) throws IOException
+	{
+		yeastGen.writeToStream(stream);
 	}
 
 	public int getFermentProgressScaled(int scale)
