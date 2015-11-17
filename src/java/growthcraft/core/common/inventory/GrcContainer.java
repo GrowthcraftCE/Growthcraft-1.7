@@ -23,9 +23,12 @@
  */
 package growthcraft.core.common.inventory;
 
-import growthcraft.core.common.tileentity.IGuiNetworkSync;
-import growthcraft.core.common.inventory.slot.SlotPlayerHotbar;
+import growthcraft.core.common.inventory.slot.SlotInput;
+import growthcraft.core.common.inventory.slot.SlotPlayer;
 import growthcraft.core.common.inventory.slot.SlotPlayerBackpack;
+import growthcraft.core.common.inventory.slot.SlotPlayerHotbar;
+import growthcraft.core.common.tileentity.IGuiNetworkSync;
+import growthcraft.core.util.Platform;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -33,7 +36,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
-//import net.minecraft.item.ItemStack;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public class GrcContainer extends Container
@@ -47,6 +51,113 @@ public class GrcContainer extends Container
 	{
 		super();
 		this.tileEntity = te;
+	}
+
+	public boolean mergeWithSlot(Slot slot, ItemStack stack)
+	{
+		if (stack == null) return false;
+		if (stack.stackSize <= 0) return false;
+
+		if (slot.isItemValid(stack))
+		{
+			if (mergeItemStack(stack, slot.slotNumber, slot.slotNumber + 1, false))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean mergeWithPlayer(ItemStack stack)
+	{
+		int start = -1;
+		int end = -1;
+
+		for (Object sub : inventorySlots)
+		{
+			if (sub instanceof SlotPlayer)
+			{
+				final SlotPlayer subSlot = (SlotPlayer)sub;
+				if (start < 0)
+				{
+					start = subSlot.slotNumber;
+				}
+				end = subSlot.slotNumber;
+			}
+		}
+		if (start <= -1 || end <= -1) return false;
+
+		return mergeItemStack(stack, start, end + 1, false);
+	}
+
+	public boolean mergeWithInput(ItemStack stack)
+	{
+		boolean wasMerged = false;
+		for (Object sub : inventorySlots)
+		{
+			if (stack.stackSize <= 0) break;
+			if (sub instanceof SlotInput)
+			{
+				final SlotInput subSlot = (SlotInput)sub;
+				wasMerged |= mergeWithSlot(subSlot, stack);
+			}
+		}
+		return wasMerged;
+	}
+
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int index)
+	{
+		if (Platform.isClient())
+		{
+			return null;
+		}
+
+		final Slot s = getSlot(index);
+		ItemStack itemstack = null;
+
+		if (s != null && s.getHasStack())
+		{
+			final ItemStack stack = s.getStack();
+			itemstack = stack.copy();
+
+			boolean wasMerged = false;
+
+			if (s instanceof SlotPlayer)
+			{
+				wasMerged |= mergeWithInput(stack);
+			}
+			else
+			{
+				wasMerged |= mergeWithPlayer(stack);
+			}
+
+			if (wasMerged)
+			{
+				s.onSlotChange(stack, itemstack);
+			}
+			else
+			{
+				return null;
+			}
+
+			if (stack.stackSize <= 0)
+			{
+				s.putStack((ItemStack)null);
+			}
+			else
+			{
+				s.onSlotChanged();
+			}
+
+			if (stack.stackSize == itemstack.stackSize)
+			{
+				return null;
+			}
+
+			s.onPickupFromSlot(player, stack);
+		}
+		return itemstack;
 	}
 
 	public void bindPlayerHotbar(IInventory playerInventory, int x, int y)
