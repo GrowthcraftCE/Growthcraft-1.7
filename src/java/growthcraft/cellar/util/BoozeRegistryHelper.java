@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeRegistry;
+import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.cellar.common.block.BlockFluidBooze;
@@ -27,6 +28,16 @@ import net.minecraftforge.fluids.FluidStack;
 public class BoozeRegistryHelper
 {
 	private BoozeRegistryHelper() {}
+
+	public static BoozeEffect[] getBoozeEffects(Fluid[] boozes)
+	{
+		final BoozeEffect[] effects = new BoozeEffect[boozes.length];
+		for (int i = 0; i < boozes.length; ++i)
+		{
+			effects[i] = CellarRegistry.instance().booze().getEffect(boozes[i]);
+		}
+		return effects;
+	}
 
 	public static void initializeBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemBucketBoozeDefinition[] buckets, String basename, int color)
 	{

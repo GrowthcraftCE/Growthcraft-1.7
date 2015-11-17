@@ -82,42 +82,19 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public class BoozeRegistry
 {
-	static class BoozeEntry
-	{
-		private final Fluid fluid;
-		// May consider using an enum instead of a String once the features settle a bit
-		private final Set<String> tags;
-
-		public BoozeEntry(Fluid flus)
-		{
-			this.fluid = flus;
-			this.tags = new HashSet<String>();
-		}
-
-		public Fluid getFluid()
-		{
-			return fluid;
-		}
-
-		public Set<String> getTags()
-		{
-			return tags;
-		}
-
-		public void addTags(String... newtags)
-		{
-			for (String tag : newtags) tags.add(tag);
-		}
-
-		public boolean hasTags(String... checktags)
-		{
-			for (String tag : checktags) if (!tags.contains(tag)) return false;
-			return true;
-		}
-	}
-
+	private Map<String, IModifierFunction> modifiers = new HashMap<String, IModifierFunction>();
 	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
 	private Map<Fluid, Fluid> altBoozeMap = new HashMap<Fluid, Fluid>();
+
+	public void setModifierFunction(String name, IModifierFunction func)
+	{
+		modifiers.put(name, func);
+	}
+
+	public IModifierFunction getModifierFunction(String name)
+	{
+		return modifiers.get(name);
+	}
 
 	public Collection<BoozeEntry> getBoozeEntries()
 	{
@@ -148,6 +125,13 @@ public class BoozeRegistry
 			throw new IllegalArgumentException("[Growthcraft|Cellar] The fluid being tagged does not have a valid booze entry.");
 		}
 		return entry;
+	}
+
+	@Nullable
+	public BoozeEffect getEffect(Fluid fluid)
+	{
+		final BoozeEntry entry = getBoozeEntry(fluid);
+		return entry != null ? entry.getEffect() : null;
 	}
 
 	public boolean isFluidBooze(Fluid f)
@@ -273,14 +257,14 @@ public class BoozeRegistry
 	}
 
 	@Nullable
-	public Set<String> getTags(Fluid fluid)
+	public Collection<String> getTags(Fluid fluid)
 	{
 		final BoozeEntry entry = getBoozeEntry(fluid);
 		return entry != null ? entry.getTags() : null;
 	}
 
 	@Nullable
-	public Set<String> getTags(FluidStack stack)
+	public Collection<String> getTags(FluidStack stack)
 	{
 		if (stack == null) return null;
 		return getTags(stack.getFluid());

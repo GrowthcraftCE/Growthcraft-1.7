@@ -2,6 +2,7 @@ package growthcraft.bees;
 
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.cellar.booze.Booze;
+import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.bees.client.gui.GuiHandlerBees;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeHive;
@@ -131,10 +132,7 @@ public class GrowthCraftBees
 		honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
 		BoozeRegistryHelper.initializeBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, "grc.honeyMead", config.honeyMeadColor);
 
-		honeyMead        = new ItemDefinition(new ItemBoozeBottle(6, -0.45F, honeyMeadBooze)
-			.setColor(config.honeyMeadColor)
-			.setTipsy(0.60F, 900)
-			.setPotionEffects(new int[] {Potion.regeneration.id}, new int[] {900}));
+		honeyMead        = new ItemDefinition(new ItemBoozeBottle(6, -0.45F, honeyMeadBooze));
 		honeyMeadBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(honeyMeadBooze)
 			.setColor(config.honeyMeadColor));
 
@@ -162,6 +160,11 @@ public class GrowthCraftBees
 
 		// Booze
 		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMead, "grc.honeyMead", honeyMeadBucket_deprecated);
+		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(honeyMeadBooze))
+		{
+			effect.setTipsy(0.60F, 900);
+			effect.addPotionEntry(Potion.regeneration.id, 900);
+		}
 		BoozeRegistryHelper.registerDefaultFermentation(honeyMeadBooze);
 
 		// TileEntities

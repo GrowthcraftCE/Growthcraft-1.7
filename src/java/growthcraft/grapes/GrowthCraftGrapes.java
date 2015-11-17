@@ -1,6 +1,7 @@
 package growthcraft.grapes;
 
 import growthcraft.api.cellar.booze.Booze;
+import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.CoreRegistry;
@@ -109,10 +110,7 @@ public class GrowthCraftGrapes
 		grapeWineBuckets = new ItemBucketBoozeDefinition[grapeWineBooze.length];
 		BoozeRegistryHelper.initializeBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, "grc.grapeWine", config.grapeWineColor);
 
-		grapeWine        = new ItemDefinition(new ItemBoozeBottle(2, -0.3F, grapeWineBooze)
-			.setColor(config.grapeWineColor)
-			.setTipsy(0.60F, 900)
-			.setPotionEffects(new int[] {Potion.resistance.id}, new int[] {3600}));
+		grapeWine        = new ItemDefinition(new ItemBoozeBottle(2, -0.3F, grapeWineBooze));
 		grapeWineBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(grapeWineBooze)
 			.setColor(config.grapeWineColor));
 
@@ -133,6 +131,11 @@ public class GrowthCraftGrapes
 		GameRegistry.registerItem(grapeWineBucket_deprecated.getItem(), "grc.grapeWine_bucket");
 
 		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, grapeWine, "grc.grapeWine", grapeWineBucket_deprecated);
+		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(grapeWineBooze))
+		{
+			effect.setTipsy(0.60F, 900);
+			effect.addPotionEntry(Potion.resistance.id, 3600);
+		}
 		BoozeRegistryHelper.registerDefaultFermentation(grapeWineBooze);
 
 		CellarRegistry.instance().pressing().addPressing(grapes.getItem(), grapeWineBooze[0], config.grapeWinePressingTime, config.grapeWinePressingYield, Residue.newDefault(0.3F));

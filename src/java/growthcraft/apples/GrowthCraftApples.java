@@ -1,6 +1,7 @@
 package growthcraft.apples;
 
 import growthcraft.api.cellar.booze.Booze;
+import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.apples.common.block.BlockApple;
@@ -95,12 +96,8 @@ public class GrowthCraftApples
 		appleCiderBuckets = new ItemBucketBoozeDefinition[appleCiderBooze.length];
 		BoozeRegistryHelper.initializeBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, "grc.appleCider", config.appleCiderColor);
 
-		appleCider        = new ItemDefinition(new ItemBoozeBottle(4, -0.3F, appleCiderBooze)
-			.setColor(config.appleCiderColor)
-			.setTipsy(0.60F, 900)
-			.setPotionEffects(new int[] {Potion.field_76444_x.id}, new int[] {1800}));
-		appleCiderBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(appleCiderBooze)
-			.setColor(config.appleCiderColor));
+		appleCider        = new ItemDefinition(new ItemBoozeBottle(4, -0.3F, appleCiderBooze));
+		appleCiderBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(appleCiderBooze).setColor(config.appleCiderColor));
 
 		modules.preInit();
 		register();
@@ -117,6 +114,11 @@ public class GrowthCraftApples
 		GameRegistry.registerItem(appleCiderBucket_deprecated.getItem(), "grc.appleCider_bucket");
 
 		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", appleCiderBucket_deprecated);
+		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(appleCiderBooze))
+		{
+			effect.setTipsy(0.60F, 900);
+			effect.addPotionEntry(Potion.field_76444_x.id, 1800);
+		}
 		BoozeRegistryHelper.registerDefaultFermentation(appleCiderBooze);
 
 		CellarRegistry.instance().pressing().addPressing(Items.apple, appleCiderBooze[0], config.appleCiderPressingTime, config.appleCiderPressYield, Residue.newDefault(0.3F));

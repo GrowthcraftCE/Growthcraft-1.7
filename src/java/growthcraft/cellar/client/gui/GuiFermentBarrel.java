@@ -1,7 +1,7 @@
 package growthcraft.cellar.client.gui;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Collection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -137,7 +137,7 @@ public class GuiFermentBarrel extends GuiCellar
 			itemRender.zLevel = 100.0F;
 
 			// render active modifiers
-			final Set<String> tags = CellarRegistry.instance().booze().getTags(fluid);
+			final Collection<String> tags = CellarRegistry.instance().booze().getTags(fluid);
 			if (tags != null)
 			{
 				if (tags.contains("fermented"))

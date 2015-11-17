@@ -4,8 +4,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.api.core.util.ItemKey;
+import growthcraft.cellar.common.booze.ModifierFunctionExtended;
+import growthcraft.cellar.common.booze.ModifierFunctionHyperExtended;
+import growthcraft.cellar.common.booze.ModifierFunctionPotent;
 import growthcraft.cellar.common.block.BlockBrewKettle;
 import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.cellar.common.block.BlockFermentJar;
@@ -110,6 +114,8 @@ public class GrowthCraftCellar
 		if (config.enableWailaIntegration) modules.add(new growthcraft.cellar.integration.Waila());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
 
+		registerBoozeModifierFunctions();
+
 		//====================
 		// INIT
 		//====================
@@ -127,6 +133,14 @@ public class GrowthCraftCellar
 
 		modules.preInit();
 		register();
+	}
+
+	private void registerBoozeModifierFunctions()
+	{
+		final BoozeRegistry reg = CellarRegistry.instance().booze();
+		reg.setModifierFunction("potent", new ModifierFunctionPotent());
+		reg.setModifierFunction("extended", new ModifierFunctionExtended());
+		reg.setModifierFunction("hyper-extended", new ModifierFunctionHyperExtended());
 	}
 
 	private void register()

@@ -71,6 +71,9 @@ public abstract class ConfigBase
 					{
 						FMLLog.log("Growthcraft", Level.ERROR, "Unhandled config option: type=" + typeClass + " option=" + opt.name());
 					}
+
+					// Comment out this line when not debugging
+					System.out.println("ConfigBase<" + this + "> key=" + field.getName() + " value=" + field.get(this));
 				}
 				catch (IllegalAccessException ex)
 				{

@@ -2,6 +2,7 @@ package growthcraft.rice.init;
 
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeRegistry;
+import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
@@ -40,14 +41,8 @@ public class GrcRiceBooze extends GrcModuleBase
 		riceSakeFluids = new BlockBoozeDefinition[riceSakeBooze.length];
 		riceSakeBuckets = new ItemBucketBoozeDefinition[riceSakeBooze.length];
 		BoozeRegistryHelper.initializeBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, "grc.riceSake", GrowthCraftRice.getConfig().riceSakeColor);
-
-		riceSake = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, riceSakeBooze)
-			.setColor(GrowthCraftRice.getConfig().riceSakeColor)
-			.setTipsy(0.65F, 900)
-			.setPotionEffects(new int[] {Potion.moveSpeed.id, Potion.jump.id}, new int[] {3600, 3600}));
-
+		riceSake = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, riceSakeBooze));
 		riceSakeBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(riceSakeBooze).setColor(GrowthCraftRice.getConfig().riceSakeColor));
-
 		riceSakeBoozeDefs = FluidDefinition.convertArray(riceSakeBooze);
 	}
 
@@ -77,7 +72,12 @@ public class GrcRiceBooze extends GrcModuleBase
 		GameRegistry.registerItem(riceSake.getItem(), "grc.riceSake");
 		GameRegistry.registerItem(riceSakeBucket_deprecated.getItem(), "grc.riceSake_bucket");
 		BoozeRegistryHelper.registerBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, riceSake, "grc.riceSake", riceSakeBucket_deprecated);
-
+		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(riceSakeBooze))
+		{
+			effect.setTipsy(0.65F, 900);
+			effect.addPotionEntry(Potion.moveSpeed.id, 3600);
+			effect.addPotionEntry(Potion.jump.id, 3600);
+		}
 		registerFermentations();
 
 		CellarRegistry.instance().brewing().addBrewing(

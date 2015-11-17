@@ -3,6 +3,7 @@ package growthcraft.cellar.common.item;
 import java.util.List;
 
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.util.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
@@ -17,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
@@ -31,9 +33,12 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 	public ItemWaterBag()
 	{
 		super();
+		setHasSubtypes(true);
+		setMaxDamage(0);
 		setUnlocalizedName("grc.waterBag");
 		setTextureName("grccellar:water_bag");
 		setCreativeTab(GrowthCraftCellar.tab);
+		this.maxStackSize = 1;
 		this.capacity = GrowthCraftCellar.getConfig().waterBagCapacity;
 		this.dosage = GrowthCraftCellar.getConfig().waterBagDosage;
 	}
@@ -59,38 +64,6 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 	{
 		final NBTTagCompound tag = getFluidTagFromStack(container);
 		return tag != null ? FluidStack.loadFluidStackFromNBT(tag) : null;
-	}
-
-	@Override
-	public String getUnlocalizedName(ItemStack stack)
-	{
-		return super.getUnlocalizedName(stack) + stack.getItemDamage();
-	}
-
-	@Override
-	public String getItemStackDisplayName(ItemStack stack)
-	{
-		final String basename = super.getItemStackDisplayName(stack);
-		final String fluidName = UnitFormatter.fluidName(getFluid(stack));
-		if (fluidName != null)
-		{
-			return StatCollector.translateToLocalFormatted("grc.cellar.format.waterBag.name", basename, fluidName);
-		}
-		return basename;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
-	{
-		final FluidStack fluidstack = getFluid(stack);
-		if (fluidstack != null)
-		{
-			final String fluidname = UnitFormatter.fluidNameForContainer(fluidstack);
-			list.add(StatCollector.translateToLocalFormatted("grc.cellar.format.waterBag.contents", fluidname, fluidstack.amount, getCapacity(stack)));
-		}
-		super.addInformation(stack, player, list, bool);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -148,18 +121,20 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 			return 0;
 		}
 
+		final int amount = Math.min(resource.amount, dosage);
+
 		if (!doFill)
 		{
 			if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("Fluid"))
 			{
-				return Math.min(capacity, resource.amount);
+				return Math.min(capacity, amount);
 			}
 
 			final FluidStack stack = FluidStack.loadFluidStackFromNBT(container.stackTagCompound.getCompoundTag("Fluid"));
 
 			if (stack == null)
 			{
-				return Math.min(capacity, resource.amount);
+				return Math.min(capacity, amount);
 			}
 
 			if (!stack.isFluidEqual(resource))
@@ -167,7 +142,7 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 				return 0;
 			}
 
-			return Math.min(capacity - stack.amount, resource.amount);
+			return Math.min(capacity - stack.amount, amount);
 		}
 
 		if (container.stackTagCompound == null)
@@ -179,7 +154,7 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		{
 			final NBTTagCompound fluidTag = resource.writeToNBT(new NBTTagCompound());
 
-			if (capacity < resource.amount)
+			if (capacity < amount)
 			{
 				fluidTag.setInteger("Amount", capacity);
 				container.stackTagCompound.setTag("Fluid", fluidTag);
@@ -187,7 +162,7 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 			}
 
 			container.stackTagCompound.setTag("Fluid", fluidTag);
-			return resource.amount;
+			return amount;
 		}
 
 		final NBTTagCompound fluidTag = container.stackTagCompound.getCompoundTag("Fluid");
@@ -199,10 +174,10 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		}
 
 		int filled = capacity - stack.amount;
-		if (resource.amount < filled)
+		if (amount < filled)
 		{
-			stack.amount += resource.amount;
-			filled = resource.amount;
+			stack.amount += amount;
+			filled = amount;
 		}
 		else
 		{
@@ -216,6 +191,8 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 	@Override
 	public FluidStack drain(ItemStack container, int maxDrain, boolean doDrain)
 	{
+		final int expectedDrain = Math.min(maxDrain, dosage);
+
 		if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("Fluid"))
 		{
 			return null;
@@ -228,7 +205,7 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		}
 
 		final int currentAmount = stack.amount;
-		stack.amount = Math.min(stack.amount, maxDrain);
+		stack.amount = Math.min(stack.amount, expectedDrain);
 		if (doDrain)
 		{
 			if (currentAmount == stack.amount)
@@ -256,16 +233,99 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
+	public int getMaxItemUseDuration(ItemStack stack)
+	{
+		return 32;
+	}
+
+	public boolean hasEnoughToDrink(ItemStack stack)
 	{
 		final FluidStack drained = drain(stack, dosage, false);
 		if (drained != null)
 		{
-			if (drained.amount == dosage)
+			if (drained.amount >= dosage)
 			{
-				drain(stack, dosage, true);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected void applyEffects(ItemStack stack, World world, EntityPlayer player)
+	{
+		final FluidStack fluidstack = getFluid(stack);
+		if (fluidstack != null)
+		{
+			BoozeUtils.addEffects(fluidstack.getFluid(), stack, world, player);
+		}
+	}
+
+	@Override
+	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
+	{
+		if (hasEnoughToDrink(stack))
+		{
+			// This is not an ItemFood, and therefore, NOT FOOD. ;_;
+			//player.getFoodStats().func_151686_a(this, stack);
+
+			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+			if (!world.isRemote)
+			{
+				applyEffects(stack, world, player);
+				if (!player.capabilities.isCreativeMode) drain(stack, dosage, true);
 			}
 		}
 		return stack;
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack _stack, EntityPlayer _p, World _w, int _x, int _y, int _z, int _d, float _fx, float _fy, float _fz)
+	{
+		return false;
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
+	{
+		if (hasEnoughToDrink(stack))
+		{
+			player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+		}
+
+		return stack;
+	}
+
+	@Override
+	public String getUnlocalizedName(ItemStack stack)
+	{
+		return super.getUnlocalizedName(stack) + stack.getItemDamage();
+	}
+
+	@Override
+	public String getItemStackDisplayName(ItemStack stack)
+	{
+		final String basename = super.getItemStackDisplayName(stack);
+		final String fluidName = UnitFormatter.fluidName(getFluid(stack));
+		if (fluidName != null)
+		{
+			return StatCollector.translateToLocalFormatted("grc.cellar.format.waterBag.name", basename, fluidName);
+		}
+		return basename;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
+	{
+		final FluidStack fluidstack = getFluid(stack);
+		if (fluidstack != null)
+		{
+			final String fluidname = UnitFormatter.fluidNameForContainer(fluidstack);
+			list.add(StatCollector.translateToLocalFormatted("grc.cellar.format.waterBag.contents", fluidname, fluidstack.amount, getCapacity(stack)));
+			final Fluid booze = fluidstack.getFluid();
+			BoozeUtils.addInformation(booze, stack, player, list, bool);
+		}
+		super.addInformation(stack, player, list, bool);
 	}
 }

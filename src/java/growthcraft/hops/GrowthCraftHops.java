@@ -1,6 +1,7 @@
 package growthcraft.hops;
 
 import growthcraft.api.cellar.booze.Booze;
+import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.CoreRegistry;
@@ -98,10 +99,7 @@ public class GrowthCraftHops
 		hopAleBuckets = new ItemBucketBoozeDefinition[hopAleBooze.length];
 		BoozeRegistryHelper.initializeBooze(hopAleBooze, hopAleFluids, hopAleBuckets, "grc.hopAle", config.hopAleColor);
 
-		hopAle        = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, hopAleBooze)
-			.setColor(config.hopAleColor)
-			.setTipsy(0.70F, 900)
-			.setPotionEffects(new int[] {Potion.digSpeed.id}, new int[] {3600}));
+		hopAle        = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, hopAleBooze));
 		hopAleBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(hopAleBooze).setColor(config.hopAleColor));
 
 		modules.preInit();
@@ -121,6 +119,11 @@ public class GrowthCraftHops
 		GameRegistry.registerItem(hopAleBucket_deprecated.getItem(), "grc.hopAle_bucket");
 
 		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle, "grc.hopAle", hopAleBucket_deprecated);
+		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(hopAleBooze))
+		{
+			effect.setTipsy(0.70F, 900);
+			effect.addPotionEntry(Potion.digSpeed.id, 3600);
+		}
 		BoozeRegistryHelper.registerDefaultFermentation(hopAleBooze);
 
 		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, Items.wheat, hopAleBooze[4], config.hopAleBrewTime, config.hopAleBrewYield, Residue.newDefault(0.3F));
