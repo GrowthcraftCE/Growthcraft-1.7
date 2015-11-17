@@ -5,6 +5,7 @@ import growthcraft.cellar.client.render.RenderFermentBarrel;
 import growthcraft.cellar.client.render.RenderFermentJar;
 import growthcraft.cellar.client.render.RenderFruitPress;
 import growthcraft.cellar.client.render.RenderFruitPresser;
+import growthcraft.cellar.client.render.item.ItemRenderFermentJar;
 import growthcraft.cellar.client.renderer.TileEntityFermentJarRenderer;
 import growthcraft.cellar.client.renderer.TileEntityFruitPresserRenderer;
 import growthcraft.cellar.client.resource.GrcCellarResources;
@@ -17,11 +18,13 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy
 {
 	public void initRenders()
 	{
+		MinecraftForgeClient.registerItemRenderer(GrowthCraftCellar.fermentJar.getItem(), new ItemRenderFermentJar());
 		RenderingRegistry.registerBlockHandler(new RenderFruitPress());
 		RenderingRegistry.registerBlockHandler(new RenderFruitPresser());
 		RenderingRegistry.registerBlockHandler(new RenderBrewKettle());

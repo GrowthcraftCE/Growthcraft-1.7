@@ -1,19 +1,13 @@
 package growthcraft.cellar.client.render;
 
-import org.lwjgl.opengl.GL11;
-
-import growthcraft.cellar.client.render.model.ModelFermentJar;
-import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.cellar.common.block.BlockFermentJar;
 import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
 import growthcraft.core.util.BoundUtils;
 import growthcraft.core.util.ColorUtils;
-import growthcraft.core.util.RenderUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
@@ -39,24 +33,12 @@ public class RenderFermentJar implements ISimpleBlockRenderingHandler
 
 	public boolean shouldRender3DInInventory(int modelId)
 	{
-		return true;
+		return false;
 	}
 
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer)
 	{
-		if (RENDER_ID != modelId) return;
-		if (block instanceof BlockFermentJar)
-		{
-			renderer.setRenderBounds(0D, 0D, 0D, 1D, 1D, 1D);
-			RenderUtils.startInventoryRender();
-			{
-				GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-				Minecraft.getMinecraft().renderEngine.bindTexture(GrcCellarResources.INSTANCE.textureFermentJar);
-				GrcCellarResources.INSTANCE.modelFermentJar.renderForInventory(ModelFermentJar.SCALE);
-				GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-			}
-			RenderUtils.endInventoryRender();
-		}
+		// pfft wrong neck of the neighbourhood mate.
 	}
 
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)

@@ -19,7 +19,7 @@ public class TileEntityFermentJarRenderer extends TileEntitySpecialRenderer
 		{
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glTranslatef((float)x + 0.5F, (float)y - 0.5f, (float)z + 0.5F);
+			GL11.glTranslatef((float)x + 0.5F, (float)y, (float)z + 0.5F);
 			this.bindTexture(GrcCellarResources.INSTANCE.textureFermentJar);
 			GrcCellarResources.INSTANCE.modelFermentJar.render(ModelFermentJar.SCALE);
 			GL11.glDisable(GL11.GL_BLEND);
