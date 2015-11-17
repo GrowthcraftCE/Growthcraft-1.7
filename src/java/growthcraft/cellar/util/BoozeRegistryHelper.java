@@ -1,5 +1,7 @@
 package growthcraft.cellar.util;
 
+import java.util.List;
+import java.util.ArrayList;
 import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.booze.Booze;
@@ -28,16 +30,6 @@ import net.minecraftforge.fluids.FluidStack;
 public class BoozeRegistryHelper
 {
 	private BoozeRegistryHelper() {}
-
-	public static BoozeEffect[] getBoozeEffects(Fluid[] boozes)
-	{
-		final BoozeEffect[] effects = new BoozeEffect[boozes.length];
-		for (int i = 0; i < boozes.length; ++i)
-		{
-			effects[i] = CellarRegistry.instance().booze().getEffect(boozes[i]);
-		}
-		return effects;
-	}
 
 	public static void initializeBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemBucketBoozeDefinition[] buckets, String basename, int color)
 	{
@@ -94,5 +86,18 @@ public class BoozeRegistryHelper
 				NEI.hideItem(oldBucket.asStack(1, i));
 			}
 		}
+	}
+
+	public static List<BoozeEffect> getBoozeEffects(Fluid[] boozes)
+	{
+		final List<BoozeEffect> effects = new ArrayList<BoozeEffect>();
+		for (int i = 0; i < boozes.length; ++i)
+		{
+			if (CellarRegistry.instance().booze().hasTags(boozes[i], "fermented"))
+			{
+				effects.add(CellarRegistry.instance().booze().getEffect(boozes[i]));
+			}
+		}
+		return effects;
 	}
 }
