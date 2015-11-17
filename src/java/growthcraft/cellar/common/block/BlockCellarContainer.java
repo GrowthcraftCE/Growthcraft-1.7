@@ -238,15 +238,29 @@ public abstract class BlockCellarContainer extends BlockContainer implements IDr
 			final IFluidHandler fh = (IFluidHandler)te;
 			final ItemStack is = player.inventory.getCurrentItem();
 
-			if (playerFillTank(world, x, y, z, fh, is, player) ||
-				playerDrainTank(world, x, y, z, fh, is, player))
+			boolean needUpdate = false;
+
+			// While a player is sneaking, the fill-drain order is reversed
+			if (player.isSneaking())
+			{
+				// While sneaking, draining is given priority
+				if (playerDrainTank(world, x, y, z, fh, is, player) ||
+					playerFillTank(world, x, y, z, fh, is, player)) needUpdate = true;
+			}
+			else
+			{
+				// Otherwise filling is given priority
+				if (playerFillTank(world, x, y, z, fh, is, player) ||
+					playerDrainTank(world, x, y, z, fh, is, player)) needUpdate = true;
+			}
+			if (needUpdate)
 			{
 				world.markBlockForUpdate(x, y, z);
 				return true;
 			}
 		}
 
-		return openGui(player, world, x, y, z);
+		return !player.isSneaking() && openGui(player, world, x, y, z);
 	}
 
 	@SuppressWarnings("unchecked")
