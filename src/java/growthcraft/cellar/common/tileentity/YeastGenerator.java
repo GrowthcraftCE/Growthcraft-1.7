@@ -47,6 +47,7 @@ public class YeastGenerator
 
 	public int getProgressScaled(int scale)
 	{
+		if (timeMax <= 0) return 0;
 		return this.time * scale / timeMax;
 	}
 
@@ -178,8 +179,8 @@ public class YeastGenerator
 	 */
 	protected void readFromNBT(NBTTagCompound data)
 	{
-		time = data.getInteger("time");
-		timeMax = data.getInteger("timeMax");
+		this.time = data.getInteger("time");
+		//this.timeMax = data.getInteger("timeMax");
 	}
 
 	/**
@@ -205,7 +206,7 @@ public class YeastGenerator
 	public void readFromStream(ByteBuf buf)
 	{
 		this.time = buf.readInt();
-		this.timeMax = buf.readInt();
+		//this.timeMax = buf.readInt();
 	}
 
 	/**
@@ -214,7 +215,7 @@ public class YeastGenerator
 	protected void writeToNBT(NBTTagCompound data)
 	{
 		data.setInteger("time", time);
-		data.setInteger("timeMax", timeMax);
+		//data.setInteger("timeMax", timeMax);
 	}
 
 	/**
@@ -234,6 +235,6 @@ public class YeastGenerator
 	public void writeToStream(ByteBuf buf)
 	{
 		buf.writeInt(time);
-		buf.writeInt(timeMax);
+		//buf.writeInt(timeMax);
 	}
 }

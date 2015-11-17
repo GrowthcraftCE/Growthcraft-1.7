@@ -260,21 +260,6 @@ public abstract class TileEntityCellarDevice extends GrcBaseTile implements ISid
 		}
 	}
 
-	protected void writeTanksToStream(ByteBuf stream)
-	{
-		for (int i = 0; i < tanks.length; i++)
-		{
-			StreamUtils.writeFluidTank(stream, tanks[i]);
-		}
-	}
-
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
-	public boolean writeToStream_FluidTanks(ByteBuf stream) throws IOException
-	{
-		writeTanksToStream(stream);
-		return true;
-	}
-
 	protected void readTanksFromStream(ByteBuf stream)
 	{
 		for (int i = 0; i < tanks.length; i++)
@@ -283,10 +268,25 @@ public abstract class TileEntityCellarDevice extends GrcBaseTile implements ISid
 		}
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public void readFromStream_FluidTanks(ByteBuf stream) throws IOException
+	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	public boolean readFromStream_FluidTanks(ByteBuf stream) throws IOException
 	{
 		readTanksFromStream(stream);
+		return true;
+	}
+
+	protected void writeTanksToStream(ByteBuf stream)
+	{
+		for (int i = 0; i < tanks.length; i++)
+		{
+			StreamUtils.writeFluidTank(stream, tanks[i]);
+		}
+	}
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	public void writeToStream_FluidTanks(ByteBuf stream) throws IOException
+	{
+		writeTanksToStream(stream);
 	}
 
 	@Override

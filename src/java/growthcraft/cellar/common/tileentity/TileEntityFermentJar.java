@@ -172,7 +172,6 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 		return false;
 	}
 
-
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
 	public void writeToStream_YeastGen(ByteBuf stream) throws IOException
 	{
