@@ -36,7 +36,7 @@ public class GrcRiceBooze extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		riceSakeBooze = new Booze[6];
+		riceSakeBooze = new Booze[7];
 		riceSakeFluids = new BlockBoozeDefinition[riceSakeBooze.length];
 		riceSakeBuckets = new ItemBucketBoozeDefinition[riceSakeBooze.length];
 		BoozeRegistryHelper.initializeBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, "grc.riceSake", GrowthCraftRice.getConfig().riceSakeColor);
@@ -58,9 +58,10 @@ public class GrcRiceBooze extends GrcModuleBase
 		boozeReg.addTags(riceSakeBooze[3], "fermented", "extended");
 		// Divine Sake
 		boozeReg.addTags(riceSakeBooze[4], "fermented", "hyper-extended");
+		boozeReg.addTags(riceSakeBooze[5], "fermented", "intoxicated");
 		// Poisoned Sake - created from netherrash,
 		// the booze looses all its benefits and effectively becomes poisoned
-		boozeReg.addTags(riceSakeBooze[5], "fermented", "poisoned");
+		boozeReg.addTags(riceSakeBooze[6], "fermented", "poisoned");
 
 		final int fermentTime = GrowthCraftCellar.getConfig().fermentTime;
 		fermentReg.addFermentation(riceSakeBoozeDefs[1].asStack(), riceSakeBoozeDefs[0].asStack(), YeastType.BREWERS.asStack(), fermentTime);
@@ -95,8 +96,13 @@ public class GrcRiceBooze extends GrcModuleBase
 			effect.addPotionEntry(Potion.moveSpeed.id, 3600, 0);
 			effect.addPotionEntry(Potion.jump.id, 3600, 0);
 		}
+		// Intoxicated
+		CellarRegistry.instance().booze().getEffect(riceSakeBooze[6])
+			.clearPotionEntries()
+			.addPotionEntry(Potion.jump.id, 3600, 0);
+
 		// poisoned
-		CellarRegistry.instance().booze().getEffect(riceSakeBooze[5])
+		CellarRegistry.instance().booze().getEffect(riceSakeBooze[6])
 			.clearPotionEntries()
 			.addPotionEntry(Potion.poison.id, 3600, 0);
 
