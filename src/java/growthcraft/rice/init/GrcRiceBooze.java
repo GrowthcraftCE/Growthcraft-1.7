@@ -62,23 +62,23 @@ public class GrcRiceBooze extends GrcModuleBase
 		// the booze looses all its benefits and effectively becomes poisoned
 		boozeReg.addTags(riceSakeBooze[5], "fermented", "poisoned");
 
-		final int fermentSpeed = GrowthCraftCellar.getConfig().fermentSpeed;
-		fermentReg.addFermentation(riceSakeBoozeDefs[1].asStack(), riceSakeBoozeDefs[0].asStack(), YeastType.BREWERS.asStack(), fermentSpeed);
-		fermentReg.addFermentation(riceSakeBoozeDefs[1].asStack(), riceSakeBoozeDefs[0].asStack(), new ItemStack(Items.nether_wart), (int)(fermentSpeed * 0.66));
-		fermentReg.addFermentation(riceSakeBoozeDefs[2].asStack(), riceSakeBoozeDefs[1].asStack(), new ItemStack(Items.glowstone_dust), fermentSpeed);
-		fermentReg.addFermentation(riceSakeBoozeDefs[2].asStack(), riceSakeBoozeDefs[3].asStack(), new ItemStack(Items.glowstone_dust), fermentSpeed);
-		fermentReg.addFermentation(riceSakeBoozeDefs[3].asStack(), riceSakeBoozeDefs[1].asStack(), new ItemStack(Items.redstone), fermentSpeed);
-		fermentReg.addFermentation(riceSakeBoozeDefs[3].asStack(), riceSakeBoozeDefs[2].asStack(), new ItemStack(Items.redstone), fermentSpeed);
+		final int fermentTime = GrowthCraftCellar.getConfig().fermentTime;
+		fermentReg.addFermentation(riceSakeBoozeDefs[1].asStack(), riceSakeBoozeDefs[0].asStack(), YeastType.BREWERS.asStack(), fermentTime);
+		fermentReg.addFermentation(riceSakeBoozeDefs[1].asStack(), riceSakeBoozeDefs[0].asStack(), new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66));
+		fermentReg.addFermentation(riceSakeBoozeDefs[2].asStack(), riceSakeBoozeDefs[1].asStack(), new ItemStack(Items.glowstone_dust), fermentTime);
+		fermentReg.addFermentation(riceSakeBoozeDefs[2].asStack(), riceSakeBoozeDefs[3].asStack(), new ItemStack(Items.glowstone_dust), fermentTime);
+		fermentReg.addFermentation(riceSakeBoozeDefs[3].asStack(), riceSakeBoozeDefs[1].asStack(), new ItemStack(Items.redstone), fermentTime);
+		fermentReg.addFermentation(riceSakeBoozeDefs[3].asStack(), riceSakeBoozeDefs[2].asStack(), new ItemStack(Items.redstone), fermentTime);
 
 		for (int i = 2; i < 4; ++i)
 		{
-			fermentReg.addFermentation(riceSakeBoozeDefs[4].asStack(), riceSakeBoozeDefs[i].asStack(), YeastType.ETHEREAL.asStack(), fermentSpeed);
+			fermentReg.addFermentation(riceSakeBoozeDefs[4].asStack(), riceSakeBoozeDefs[i].asStack(), YeastType.ETHEREAL.asStack(), fermentTime);
 		}
 
 		// Reserved for netherrash
 		//for (int i = 0; i < 5; ++i)
 		//{
-		//	fermentReg.addFermentation(riceSakeBoozeDefs[5].asStack(), riceSakeBoozeDefs[i].asStack(), NETHERRASH, fermentSpeed);
+		//	fermentReg.addFermentation(riceSakeBoozeDefs[6].asStack(), riceSakeBoozeDefs[i].asStack(), NETHERRASH, fermentTime);
 		//}
 	}
 

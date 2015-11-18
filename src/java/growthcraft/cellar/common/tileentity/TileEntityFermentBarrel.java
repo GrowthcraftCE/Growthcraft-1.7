@@ -37,7 +37,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 
 	// Other Vars.
 	protected int time;
-	private int timemax = GrowthCraftCellar.getConfig().fermentSpeed;
+	private int timemax = GrowthCraftCellar.getConfig().fermentTime;
 
 	@Override
 	protected CellarTank[] createTanks()
