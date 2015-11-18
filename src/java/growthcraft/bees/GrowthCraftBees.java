@@ -160,12 +160,12 @@ public class GrowthCraftBees
 
 		// Booze
 		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMead, "grc.honeyMead", honeyMeadBucket_deprecated);
+		BoozeRegistryHelper.registerDefaultFermentation(honeyMeadBooze);
 		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(honeyMeadBooze))
 		{
 			effect.setTipsy(0.60F, 900);
-			effect.addPotionEntry(Potion.regeneration.id, 900);
+			effect.addPotionEntry(Potion.regeneration.id, 900, 0);
 		}
-		BoozeRegistryHelper.registerDefaultFermentation(honeyMeadBooze);
 
 		// TileEntities
 		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");

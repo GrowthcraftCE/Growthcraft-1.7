@@ -90,12 +90,13 @@ public class BoozeRegistryHelper
 
 	public static List<BoozeEffect> getBoozeEffects(Fluid[] boozes)
 	{
+		final BoozeRegistry reg = CellarRegistry.instance().booze();
 		final List<BoozeEffect> effects = new ArrayList<BoozeEffect>();
 		for (int i = 0; i < boozes.length; ++i)
 		{
-			if (CellarRegistry.instance().booze().hasTags(boozes[i], "fermented"))
+			if (reg.hasTags(boozes[i], "fermented"))
 			{
-				effects.add(CellarRegistry.instance().booze().getEffect(boozes[i]));
+				effects.add(reg.getEffect(boozes[i]));
 			}
 		}
 		return effects;

@@ -29,7 +29,7 @@ public class BoozeUtils
 		return CellarRegistry.instance().booze().hasTags(booze, "fermented");
 	}
 
-	public static PotionEffect makePotionEffect(Fluid booze, ItemStack stack, int potionID, int potionTime)
+	public static PotionEffect makePotionEffect(Fluid booze, ItemStack stack, int potionID, int potionTime, int potionLevel)
 	{
 		final BoozeRegistry reg = CellarRegistry.instance().booze();
 		final Collection<String> tags = reg.getTags(booze);
@@ -37,7 +37,7 @@ public class BoozeUtils
 		if (tags != null)
 		{
 			int time = potionTime;
-			int level = 0;
+			int level = potionLevel;
 			for (String tag : tags)
 			{
 				final IModifierFunction func = reg.getModifierFunction(tag);
@@ -52,9 +52,9 @@ public class BoozeUtils
 		return null;
 	}
 
-	public static void addPotionEffect(Fluid booze, ItemStack stack, EntityPlayer player, int potionID, int potionTime)
+	public static void addPotionEffect(Fluid booze, ItemStack stack, EntityPlayer player, int potionID, int potionTime, int potionLevel)
 	{
-		final PotionEffect potFx = makePotionEffect(booze, stack, potionID, potionTime);
+		final PotionEffect potFx = makePotionEffect(booze, stack, potionID, potionTime, potionLevel);
 		if (potFx != null)
 		{
 			player.addPotionEffect(potFx);
@@ -108,15 +108,15 @@ public class BoozeUtils
 			addTipsyEffect(effect, stack, world, player);
 			for (PotionEntry entry : effect.getPotionEntries())
 			{
-				addPotionEffect(booze, stack, player, entry.getID(), entry.getTime());
+				addPotionEffect(booze, stack, player, entry.getID(), entry.getTime(), entry.getLevel());
 			}
 		}
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static void writePotionTooltip(Fluid booze, ItemStack stack, EntityPlayer player, List list, boolean bool, int potnID, int potnTime)
+	public static void writePotionTooltip(Fluid booze, ItemStack stack, EntityPlayer player, List list, boolean bool, int potnID, int potnTime, int potionLevel)
 	{
-		final PotionEffect pe = BoozeUtils.makePotionEffect(booze, stack, potnID, potnTime);
+		final PotionEffect pe = BoozeUtils.makePotionEffect(booze, stack, potnID, potnTime, potionLevel);
 
 		String s = StatCollector.translateToLocal(pe.getEffectName()).trim();
 		if (pe.getAmplifier() > 0)
@@ -159,7 +159,7 @@ public class BoozeUtils
 
 			for (PotionEntry entry : effect.getPotionEntries())
 			{
-				writePotionTooltip(booze, stack, player, list, bool, entry.getID(), entry.getTime());
+				writePotionTooltip(booze, stack, player, list, bool, entry.getID(), entry.getTime(), entry.getLevel());
 			}
 		}
 	}

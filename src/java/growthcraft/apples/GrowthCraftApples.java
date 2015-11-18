@@ -114,12 +114,12 @@ public class GrowthCraftApples
 		GameRegistry.registerItem(appleCiderBucket_deprecated.getItem(), "grc.appleCider_bucket");
 
 		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", appleCiderBucket_deprecated);
+		BoozeRegistryHelper.registerDefaultFermentation(appleCiderBooze);
 		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(appleCiderBooze))
 		{
 			effect.setTipsy(0.60F, 900);
-			effect.addPotionEntry(Potion.field_76444_x.id, 1800);
+			effect.addPotionEntry(Potion.field_76444_x.id, 1800, 0);
 		}
-		BoozeRegistryHelper.registerDefaultFermentation(appleCiderBooze);
 
 		CellarRegistry.instance().pressing().addPressing(Items.apple, appleCiderBooze[0], config.appleCiderPressingTime, config.appleCiderPressYield, Residue.newDefault(0.3F));
 

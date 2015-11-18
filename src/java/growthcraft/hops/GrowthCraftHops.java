@@ -119,12 +119,12 @@ public class GrowthCraftHops
 		GameRegistry.registerItem(hopAleBucket_deprecated.getItem(), "grc.hopAle_bucket");
 
 		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle, "grc.hopAle", hopAleBucket_deprecated);
+		BoozeRegistryHelper.registerDefaultFermentation(hopAleBooze);
 		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(hopAleBooze))
 		{
 			effect.setTipsy(0.70F, 900);
-			effect.addPotionEntry(Potion.digSpeed.id, 3600);
+			effect.addPotionEntry(Potion.digSpeed.id, 3600, 0);
 		}
-		BoozeRegistryHelper.registerDefaultFermentation(hopAleBooze);
 
 		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, Items.wheat, hopAleBooze[4], config.hopAleBrewTime, config.hopAleBrewYield, Residue.newDefault(0.3F));
 		CellarRegistry.instance().brewing().addBrewing(hopAleBooze[4], hops.getItem(), hopAleBooze[0], config.hopAleHoppedBrewTime, config.hopAleHoppedBrewYield, Residue.newDefault(0.0F));

@@ -35,9 +35,9 @@ public class BoozeEffect
 		return this;
 	}
 
-	public BoozeEffect addPotionEntry(int id, int time)
+	public BoozeEffect addPotionEntry(int id, int time, int level)
 	{
-		potionEntries.add(new PotionEntry(id, time));
+		potionEntries.add(new PotionEntry(id, time, level));
 		return this;
 	}
 

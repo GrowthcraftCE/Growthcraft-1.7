@@ -72,13 +72,13 @@ public class GrcRiceBooze extends GrcModuleBase
 		GameRegistry.registerItem(riceSake.getItem(), "grc.riceSake");
 		GameRegistry.registerItem(riceSakeBucket_deprecated.getItem(), "grc.riceSake_bucket");
 		BoozeRegistryHelper.registerBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, riceSake, "grc.riceSake", riceSakeBucket_deprecated);
+		registerFermentations();
 		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(riceSakeBooze))
 		{
 			effect.setTipsy(0.65F, 900);
-			effect.addPotionEntry(Potion.moveSpeed.id, 3600);
-			effect.addPotionEntry(Potion.jump.id, 3600);
+			effect.addPotionEntry(Potion.moveSpeed.id, 3600, 0);
+			effect.addPotionEntry(Potion.jump.id, 3600, 0);
 		}
-		registerFermentations();
 
 		CellarRegistry.instance().brewing().addBrewing(
 			FluidRegistry.WATER,
