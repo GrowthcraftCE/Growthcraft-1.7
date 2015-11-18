@@ -6,11 +6,11 @@ public class PotionEntry
 	private int time;
 	private int level;
 
-	public PotionEntry(int i, int t, int l)
+	public PotionEntry(int i, int tm, int lvl)
 	{
 		this.id = i;
-		this.time = t;
-		this.level = l;
+		this.time = tm;
+		this.level = lvl;
 	}
 
 	public int getID()
@@ -25,6 +25,6 @@ public class PotionEntry
 
 	public int getLevel()
 	{
-		return time;
+		return level;
 	}
 }

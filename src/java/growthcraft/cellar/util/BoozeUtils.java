@@ -44,7 +44,7 @@ public class BoozeUtils
 				if (func != null)
 				{
 					time = func.applyTime(time);
-					level = func.applyLevel(time);
+					level = func.applyLevel(level);
 				}
 			}
 			return new PotionEffect(potionID, time, level);
