@@ -19,8 +19,11 @@ public class GrcRiceConfig extends ConfigBase
 	public int riceSakeBrewingYield = 25;
 
 
-	@ConfigOption(catergory="Booze", name="Rice Sake Color", desc="What color should sake be?")
+	@ConfigOption(catergory="Booze", name="Rice Sake Color", desc="What color should Sake be?")
 	public int riceSakeColor = 0xE9EFF7;
+
+	@ConfigOption(catergory="Booze", name="Divine Rice Sake Color", desc="What color should Divine Sake be?")
+	public int riceSakeDivineColor = 0xFFFACD;
 
 
 	@ConfigOption(catergory="Village", name="Generate Village Rice Fields", desc="Should we spawn rice fields in villages?")

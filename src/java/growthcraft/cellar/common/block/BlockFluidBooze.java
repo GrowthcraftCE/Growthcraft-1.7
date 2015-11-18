@@ -29,9 +29,14 @@ public class BlockFluidBooze extends BlockFluidClassic
 	public BlockFluidBooze(Fluid fluid)
 	{
 		super(fluid, GrowthCraftCellar.getConfig().boozeIsWater ? Material.water : Materials.booze);
-		setColor(fluid.getColor());
 		setBlockName(fluid.getUnlocalizedName());
 		setCreativeTab(GrowthCraftCellar.tab);
+		refreshColor();
+	}
+
+	public void refreshColor()
+	{
+		setColor(getFluid().getColor());
 	}
 
 	public BlockFluidBooze setColor(int kolor)
