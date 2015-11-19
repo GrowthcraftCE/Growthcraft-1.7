@@ -129,7 +129,7 @@ debugClient {
 // -------------------
 
 tasks.withType(JavaCompile) {
-    options.compilerArgs += ["-Xlint:all", "-Xlint:-rawtypes", "-Xlint:deprecation", "-Xlint:-unchecked"]
+    options.compilerArgs += ["-Xlint:all", "-Xlint:deprecation", "-Xlint:-rawtypes", "-Xlint:-unchecked"]
     options.deprecation = true
     options.encoding = "utf8"
 }
