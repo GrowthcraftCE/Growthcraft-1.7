@@ -106,7 +106,6 @@ public class GrcRiceBooze extends GrcModuleBase
 			.clearPotionEntries()
 			.addPotionEntry(Potion.poison.id, 3600, 0);
 
-
 		CellarRegistry.instance().brewing().addBrewing(
 			FluidRegistry.WATER,
 			GrowthCraftRice.rice.getItem(),
