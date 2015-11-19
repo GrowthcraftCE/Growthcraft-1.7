@@ -1,11 +1,12 @@
 package growthcraft.nether;
 
+import growthcraft.core.common.ModuleContainer;
+import growthcraft.nether.client.event.TextureStitchEventHandler;
 import growthcraft.nether.common.CommonProxy;
 import growthcraft.nether.creativetab.CreativeTabsGrowthcraftNether;
 import growthcraft.nether.init.GrcNetherBlocks;
 import growthcraft.nether.init.GrcNetherBooze;
 import growthcraft.nether.init.GrcNetherItems;
-import growthcraft.nether.client.event.TextureStitchEventHandler;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -22,24 +23,27 @@ import net.minecraftforge.common.MinecraftForge;
 	modid = GrowthCraftNether.MOD_ID,
 	name = GrowthCraftNether.MOD_NAME,
 	version = GrowthCraftNether.MOD_VERSION,
-	dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar"
+	dependencies = GrowthCraftNether.MOD_DEPENDENCIES
 )
 public class GrowthCraftNether
 {
 	public static final String MOD_ID = "Growthcraft|Nether";
 	public static final String MOD_NAME = "Growthcraft Nether";
 	public static final String MOD_VERSION = "@VERSION@";
+	public static final String MOD_DEPENDENCIES = "required-after:Growthcraft;required-after:Growthcraft|Cellar";
 
 	@Instance(MOD_ID)
 	public static GrowthCraftNether instance;
 
 	public static CreativeTabs tab;
-	public static GrcNetherBooze booze;
-	public static GrcNetherBlocks blocks;
-	public static GrcNetherItems items;
-	private Config config;
+	public static GrcNetherBlocks blocks = new GrcNetherBlocks();
+	public static GrcNetherItems items = new GrcNetherItems();
+	public static GrcNetherBooze booze = new GrcNetherBooze();
 
-	public static Config getConfig()
+	private GrcNetherConfig config = new GrcNetherConfig();
+	private ModuleContainer modules = new ModuleContainer();
+
+	public static GrcNetherConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -47,18 +51,17 @@ public class GrowthCraftNether
 	@EventHandler
 	public void preinit(FMLPreInitializationEvent event)
 	{
-		this.config = new Config();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/nether.conf");
 
 		tab = new CreativeTabsGrowthcraftNether();
 
-		booze = new GrcNetherBooze();
-		blocks = new GrcNetherBlocks();
-		items = new GrcNetherItems();
+		modules.add(blocks);
+		modules.add(items);
+		modules.add(booze);
 
-		blocks.preInit();
-		items.preInit();
-		booze.preInit();
+		modules.preInit();
+		modules.register();
+		registerRecipes();
 
 		MinecraftForge.EVENT_BUS.register(new TextureStitchEventHandler());
 	}
@@ -71,17 +74,14 @@ public class GrowthCraftNether
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		blocks.init();
-		items.init();
-		booze.init();
-
-		registerRecipes();
 		CommonProxy.instance.initRenders();
+
+		modules.init();
 	}
 
 	@EventHandler
 	public void postinit(FMLPostInitializationEvent event)
 	{
-
+		modules.postInit();
 	}
 }

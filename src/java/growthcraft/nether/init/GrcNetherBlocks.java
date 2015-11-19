@@ -1,6 +1,7 @@
 package growthcraft.nether.init;
 
 import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.integration.NEI;
 import growthcraft.nether.common.block.BlockNetherBaalsRot;
@@ -24,7 +25,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class GrcNetherBlocks
+public class GrcNetherBlocks extends GrcModuleBase
 {
 	public BlockDefinition netherBaalsRot;
 	public BlockDefinition netherCinderrot;
@@ -45,6 +46,7 @@ public class GrcNetherBlocks
 
 	public GrcNetherBlocks() {}
 
+	@Override
 	public void preInit()
 	{
 		this.netherBaalsRot = new BlockDefinition(new BlockNetherBaalsRot());
@@ -65,16 +67,18 @@ public class GrcNetherBlocks
 		this.netherSquashStem = new BlockDefinition(new BlockNetherSquashStem(netherSquash.getBlock()));
 	}
 
-	public void init()
+	private void hideItems()
 	{
-		register();
-
-		PlayerInteractEventPaddy.paddyBlocks.put(Blocks.soul_sand, netherPaddyField.getBlock());
-
-		hideItems();
+		NEI.hideItem(netherMuertecap.asStack());
+		NEI.hideItem(netherMaliceFruit.asStack());
+		NEI.hideItem(netherPaddyField.asStack());
+		NEI.hideItem(netherPaddyFieldFilled.asStack());
+		NEI.hideItem(netherPepper.asStack());
+		NEI.hideItem(netherSquashStem.asStack());
 	}
 
-	private void register()
+	@Override
+	public void register()
 	{
 		GameRegistry.registerBlock(netherBaalsRot.getBlock(), "grcnether.netherBaalsRot");
 		GameRegistry.registerBlock(netherCinderrot.getBlock(), "grcnether.netherCinderrot");
@@ -94,15 +98,10 @@ public class GrcNetherBlocks
 		GameRegistry.registerBlock(netherSquashStem.getBlock(), "grcnether.netherSquashStem");
 
 		OreDictionary.registerOre("plankMaliceWood", netherMalicePlanks.getBlock());
+
+		PlayerInteractEventPaddy.paddyBlocks.put(Blocks.soul_sand, netherPaddyField.getBlock());
+
+		hideItems();
 	}
 
-	private void hideItems()
-	{
-		NEI.hideItem(netherMuertecap.asStack());
-		NEI.hideItem(netherMaliceFruit.asStack());
-		NEI.hideItem(netherPaddyField.asStack());
-		NEI.hideItem(netherPaddyFieldFilled.asStack());
-		NEI.hideItem(netherPepper.asStack());
-		NEI.hideItem(netherSquashStem.asStack());
-	}
 }

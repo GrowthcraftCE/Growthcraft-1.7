@@ -1,6 +1,7 @@
 package growthcraft.nether.init;
 
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.GrcModuleBase;
 import growthcraft.nether.common.item.ItemEctoplasm;
 import growthcraft.nether.common.item.ItemNetherGhastPowder;
 import growthcraft.nether.common.item.ItemNetherMaliceFruit;
@@ -11,7 +12,7 @@ import growthcraft.nether.common.item.ItemNetherSquashSeeds;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class GrcNetherItems
+public class GrcNetherItems extends GrcModuleBase
 {
 	public ItemDefinition ectoplasm;
 	public ItemDefinition netherMaliceFruit;
@@ -21,8 +22,7 @@ public class GrcNetherItems
 	public ItemDefinition netherSquashSeeds;
 	public ItemDefinition netherGhastPowder;
 
-	public GrcNetherItems() {}
-
+	@Override
 	public void preInit()
 	{
 		this.ectoplasm = new ItemDefinition(new ItemEctoplasm());
@@ -34,11 +34,7 @@ public class GrcNetherItems
 		this.netherGhastPowder = new ItemDefinition(new ItemNetherGhastPowder());
 	}
 
-	public void init()
-	{
-		register();
-	}
-
+	@Override
 	public void register()
 	{
 		GameRegistry.registerItem(ectoplasm.getItem(), "grcnether.ectoplasm");
