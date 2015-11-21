@@ -1,5 +1,7 @@
 package growthcraft.dairy;
 
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.core.common.ModuleContainer;
 import growthcraft.dairy.common.CommonProxy;
 import growthcraft.dairy.init.GrcDairyBlocks;
@@ -32,6 +34,8 @@ public class GrowthCraftDairy
 	public static GrcDairyBlocks blocks = new GrcDairyBlocks();
 	public static GrcDairyItems items = new GrcDairyItems();
 	public static GrcDairyBooze booze = new GrcDairyBooze();
+
+	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcDairyConfig config = new GrcDairyConfig();
 	private ModuleContainer modules = new ModuleContainer();
 
@@ -49,6 +53,8 @@ public class GrowthCraftDairy
 		modules.add(items);
 		modules.add(booze);
 		//if (config.enableThaumcraftIntegration) modules.add(new growthcraft.dairy.integration.ThaumcraftModule());
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		modules.preInit();
 		register();
