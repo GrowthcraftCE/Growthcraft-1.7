@@ -85,6 +85,7 @@ public class GrowthCraftHops
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
+		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.hops.integration.ThaumcraftModule());

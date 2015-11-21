@@ -116,6 +116,7 @@ public class GrowthCraftCellar
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
+		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
 
 		if (config.debugEnabled)

@@ -101,6 +101,7 @@ public class GrowthCraftBamboo
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
+		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bamboo.integration.ThaumcraftModule());

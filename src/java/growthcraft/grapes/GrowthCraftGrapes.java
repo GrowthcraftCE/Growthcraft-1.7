@@ -91,6 +91,7 @@ public class GrowthCraftGrapes
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
+		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.grapes.integration.ThaumcraftModule());

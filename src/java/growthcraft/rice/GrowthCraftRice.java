@@ -71,6 +71,7 @@ public class GrowthCraftRice
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
+		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());

@@ -83,7 +83,8 @@ public abstract class ConfigBase implements ILoggable
 						logger.error("Unhandled config option: type=" + typeClass + " option=" + opt.name());
 					}
 
-					logger.debug("ConfigBase<%s> key=%s value=%s", this.toString(), field.getName(), field.get(this).toString());
+					// Only use this when you need to debug config options
+					// logger.debug("ConfigBase<%s> key=%s value=%s", this.toString(), field.getName(), field.get(this).toString());
 				}
 				catch (IllegalAccessException ex)
 				{

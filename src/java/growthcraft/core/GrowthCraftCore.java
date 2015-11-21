@@ -72,6 +72,7 @@ public class GrowthCraftCore
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
+		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
 		if (config.debugEnabled) logger.info("Pre-Initializing %s", MOD_ID);
 
