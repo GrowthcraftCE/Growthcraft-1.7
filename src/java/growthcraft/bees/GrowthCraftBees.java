@@ -132,9 +132,8 @@ public class GrowthCraftBees
 		honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
 		BoozeRegistryHelper.initializeBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, "grc.honeyMead", config.honeyMeadColor);
 
-		honeyMead        = new ItemDefinition(new ItemBoozeBottle(6, -0.45F, honeyMeadBooze));
-		honeyMeadBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(honeyMeadBooze)
-			.setColor(config.honeyMeadColor));
+		honeyMead = new ItemDefinition(new ItemBoozeBottle(6, -0.45F, honeyMeadBooze));
+		honeyMeadBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(honeyMeadBooze).setColor(config.honeyMeadColor));
 
 		modules.preInit();
 		register();
