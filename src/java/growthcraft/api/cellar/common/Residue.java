@@ -12,10 +12,10 @@ public class Residue
 	 */
 	public final float pomaceRate;
 
-	public Residue(ItemStack item, float rate)
+	public Residue(ItemStack item, float pomace)
 	{
 		this.residueItem = item;
-		this.pomaceRate = rate;
+		this.pomaceRate = pomace;
 	}
 
 	public static Residue newDefault(float pomace)

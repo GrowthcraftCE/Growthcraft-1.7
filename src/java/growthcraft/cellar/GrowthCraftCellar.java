@@ -7,6 +7,7 @@ import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.api.cellar.heatsource.UserHeatSources;
+import growthcraft.api.cellar.pressing.UserPressingRecipes;
 import growthcraft.cellar.common.booze.ModifierFunctionExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionHyperExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionPotent;
@@ -100,6 +101,7 @@ public class GrowthCraftCellar
 
 	private GrcCellarConfig config = new GrcCellarConfig();
 	private UserHeatSources userHeatSources = new UserHeatSources();
+	private UserPressingRecipes userPressingRecipes = new UserPressingRecipes();
 	private ModuleContainer modules = new ModuleContainer();
 
 	public static GrcCellarConfig getConfig()
@@ -112,6 +114,7 @@ public class GrowthCraftCellar
 	{
 		config.load(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
 		userHeatSources.load(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
+		userPressingRecipes.load(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
 
 		if (config.enableWailaIntegration) modules.add(new growthcraft.cellar.integration.Waila());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
@@ -295,5 +298,6 @@ public class GrowthCraftCellar
 		modules.postInit();
 
 		userHeatSources.register();
+		userPressingRecipes.register();
 	}
 }
