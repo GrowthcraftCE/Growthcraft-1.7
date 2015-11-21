@@ -37,7 +37,7 @@ import net.minecraft.block.Block;
 /**
  * Allows you to load Custom heat source defintions from a JSON file
  */
-public class CustomHeatSources extends JsonConfigDef
+public class UserHeatSources extends JsonConfigDef
 {
 	public static class HeatSourceEntry
 	{
