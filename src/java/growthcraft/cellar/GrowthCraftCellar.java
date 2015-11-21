@@ -3,10 +3,10 @@ package growthcraft.cellar;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.booze.BoozeRegistry;
+import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
-import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.cellar.heatsource.CustomHeatSources;
 import growthcraft.cellar.common.booze.ModifierFunctionExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionHyperExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionPotent;
@@ -99,6 +99,7 @@ public class GrowthCraftCellar
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
 	private GrcCellarConfig config = new GrcCellarConfig();
+	private CustomHeatSources customHeatSources = new CustomHeatSources(MOD_ID);
 	private ModuleContainer modules = new ModuleContainer();
 
 	public static GrcCellarConfig getConfig()
@@ -110,6 +111,7 @@ public class GrowthCraftCellar
 	public void preload(FMLPreInitializationEvent event)
 	{
 		config.load(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
+		customHeatSources.load(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
 
 		if (config.enableWailaIntegration) modules.add(new growthcraft.cellar.integration.Waila());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
@@ -203,7 +205,6 @@ public class GrowthCraftCellar
 		//====================
 		achievements = new GrcCellarAchievements();
 
-		registerHeatSources();
 		registerYeast();
 
 		NEI.hideItem(fruitPresser.asStack());
@@ -239,13 +240,6 @@ public class GrowthCraftCellar
 				System.err.println(e);
 			}
 		}
-	}
-
-	private void registerHeatSources()
-	{
-		CellarRegistry.instance().heatSource().addHeatSource(Blocks.fire, ItemKey.WILDCARD_VALUE, config.fireHeatValue);
-		CellarRegistry.instance().heatSource().addHeatSource(Blocks.lava, ItemKey.WILDCARD_VALUE, config.lavaHeatValue);
-		CellarRegistry.instance().heatSource().addHeatSource(Blocks.flowing_lava, ItemKey.WILDCARD_VALUE, config.lavaHeatValue);
 	}
 
 	private void registerOres()
@@ -299,5 +293,7 @@ public class GrowthCraftCellar
 		MinecraftForge.EVENT_BUS.register(new LivingUpdateEventCellar());
 
 		modules.postInit();
+
+		customHeatSources.register();
 	}
 }
