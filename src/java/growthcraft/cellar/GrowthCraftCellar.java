@@ -8,6 +8,7 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.UserYeastEntries;
 import growthcraft.api.cellar.heatsource.UserHeatSources;
 import growthcraft.api.cellar.pressing.UserPressingRecipes;
+import growthcraft.api.cellar.brewing.UserBrewingRecipes;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.cellar.common.booze.ModifierFunctionExtended;
@@ -104,6 +105,7 @@ public class GrowthCraftCellar
 	private UserYeastEntries userYeastEntries = new UserYeastEntries();
 	private UserHeatSources userHeatSources = new UserHeatSources();
 	private UserPressingRecipes userPressingRecipes = new UserPressingRecipes();
+	private UserBrewingRecipes userBrewingRecipes = new UserBrewingRecipes();
 	private ModuleContainer modules = new ModuleContainer();
 
 	public static GrcCellarConfig getConfig()
@@ -115,13 +117,16 @@ public class GrowthCraftCellar
 	public void preload(FMLPreInitializationEvent event)
 	{
 		config.load(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
+
 		if (config.debugEnabled)
 		{
 			logger.info("Pre-Initializing %s", MOD_ID);
+			userBrewingRecipes.setLogger(logger);
 			userHeatSources.setLogger(logger);
 			userPressingRecipes.setLogger(logger);
 			userYeastEntries.setLogger(logger);
 		}
+		userBrewingRecipes.load(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
 		userHeatSources.load(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
 		userPressingRecipes.load(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
 		userYeastEntries.load(event.getModConfigurationDirectory(), "growthcraft/cellar/yeast.json");
@@ -287,5 +292,6 @@ public class GrowthCraftCellar
 		userYeastEntries.register();
 		userHeatSources.register();
 		userPressingRecipes.register();
+		userBrewingRecipes.register();
 	}
 }
