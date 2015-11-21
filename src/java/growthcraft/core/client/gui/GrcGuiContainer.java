@@ -15,11 +15,14 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
 public class GrcGuiContainer extends GuiContainer
@@ -39,11 +42,32 @@ public class GrcGuiContainer extends GuiContainer
 	}
 
 	protected List<TooltipIndex> tooltipIndices = new ArrayList<TooltipIndex>();
-	protected ArrayList<String> tooltip = new ArrayList<String>();
+	protected List<String> tooltip = new ArrayList<String>();
+	protected TileEntity tileEntity;
 
-	public GrcGuiContainer(Container container)
+	public GrcGuiContainer(Container container, TileEntity te)
 	{
 		super(container);
+		this.tileEntity = te;
+	}
+
+	protected void drawInventoryName(int x, int y)
+	{
+		if (tileEntity instanceof IInventory)
+		{
+			final IInventory inv = (IInventory)tileEntity;
+			final String invName = inv.getInventoryName();
+			final String s = inv.hasCustomInventoryName() ? invName : I18n.format(invName);
+			fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
+			fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
+		}
+	}
+
+	@Override
+	protected void drawGuiContainerForegroundLayer(int x, int y)
+	{
+		super.drawGuiContainerForegroundLayer(x, y);
+		drawInventoryName(x, y);
 	}
 
 	protected void addTooltipIndex(String handle, Rectangle r)

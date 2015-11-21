@@ -22,22 +22,8 @@ public class GuiCellar extends GrcGuiContainer
 
 	public GuiCellar(Container container, TileEntityCellarDevice cd)
 	{
-		super(container);
+		super(container, cd);
 		this.cellarDevice = cd;
-	}
-
-	protected void drawInventoryName(int x, int y)
-	{
-		final String s = cellarDevice.hasCustomInventoryName() ? cellarDevice.getInventoryName() : I18n.format(cellarDevice.getInventoryName());
-		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
-	}
-
-	@Override
-	protected void drawGuiContainerForegroundLayer(int x, int y)
-	{
-		super.drawGuiContainerForegroundLayer(x, y);
-		drawInventoryName(x, y);
 	}
 
 	protected void drawTank(int w, int h, int wp, int hp, int width, int amount, FluidStack fluidstack, CellarTank _tank)
