@@ -1,7 +1,7 @@
 package growthcraft.bees.common.block;
 
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.core.common.definition.IItemStackFactory;
+import growthcraft.api.core.definition.IItemStackFactory;
 
 import net.minecraft.item.ItemStack;
 

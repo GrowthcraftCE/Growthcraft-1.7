@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.definition;
+package growthcraft.api.core.definition;
 
 import net.minecraftforge.fluids.FluidStack;
 
 public interface IFluidStackFactory
 {
-	FluidStack asStack(int size);
-	FluidStack asStack();
+	FluidStack asFluidStack(int size);
+	FluidStack asFluidStack();
 }

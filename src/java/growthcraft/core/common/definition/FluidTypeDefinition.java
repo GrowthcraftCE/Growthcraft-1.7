@@ -25,6 +25,8 @@ package growthcraft.core.common.definition;
 
 import javax.annotation.Nonnull;
 
+import growthcraft.api.core.definition.IFluidStackFactory;
+
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -44,15 +46,15 @@ public class FluidTypeDefinition<T extends Fluid> implements IFluidStackFactory
 	}
 
 	@Nonnull
-	public FluidStack asStack(int size)
+	public FluidStack asFluidStack(int size)
 	{
 		return new FluidStack(getFluid(), size);
 	}
 
 	@Nonnull
-	public FluidStack asStack()
+	public FluidStack asFluidStack()
 	{
-		return asStack(1);
+		return asFluidStack(1);
 	}
 
 	public boolean equals(Fluid other)

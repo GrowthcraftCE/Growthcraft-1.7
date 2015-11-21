@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.definition;
+package growthcraft.api.core.definition;
 
 import net.minecraft.item.ItemStack;
 

@@ -25,6 +25,9 @@ package growthcraft.core.common.definition;
 
 import javax.annotation.Nonnull;
 
+import growthcraft.api.core.definition.IItemStackFactory;
+import growthcraft.api.core.definition.ISubItemStackFactory;
+
 import net.minecraft.item.ItemStack;
 
 public class ItemSubtypeDefinition implements IItemStackFactory

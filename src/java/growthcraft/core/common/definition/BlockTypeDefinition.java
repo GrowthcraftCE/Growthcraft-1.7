@@ -25,6 +25,8 @@ package growthcraft.core.common.definition;
 
 import javax.annotation.Nonnull;
 
+import growthcraft.api.core.definition.ISubItemStackFactory;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
