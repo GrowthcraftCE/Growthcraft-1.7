@@ -42,10 +42,9 @@ public abstract class ConfigBase implements ILoggable
 		this.logger = l;
 	}
 
-	@SuppressWarnings("rawtypes")
-	protected void autoloadConfig()
+	private void loadConfigForClass(Class klass)
 	{
-		for (Field field : getClass().getDeclaredFields())
+		for (Field field : klass.getDeclaredFields())
 		{
 			final ConfigOption opt = field.getAnnotation(ConfigOption.class);
 			if (opt != null)
@@ -80,17 +79,28 @@ public abstract class ConfigBase implements ILoggable
 					}
 					else
 					{
-						logger.error("Unhandled config option: type=" + typeClass + " option=" + opt.name());
+						logger.error("Unhandled config option: type=%s option=%s", typeClass, opt.name());
 					}
 
 					// Only use this when you need to debug config options
-					// logger.debug("ConfigBase<%s> key=%s value=%s", this.toString(), field.getName(), field.get(this).toString());
+					logger.debug("ConfigBase<%s> key=%s value=%s", this.toString(), field.getName(), field.get(this).toString());
 				}
 				catch (IllegalAccessException ex)
 				{
 					logger.error(ex.toString());
 				}
 			}
+		}
+	}
+
+	@SuppressWarnings("rawtypes")
+	protected void autoloadConfig()
+	{
+		Class currentClass = getClass();
+		while (currentClass != null)
+		{
+			loadConfigForClass(currentClass);
+			currentClass = currentClass.getSuperclass();
 		}
 	}
 
