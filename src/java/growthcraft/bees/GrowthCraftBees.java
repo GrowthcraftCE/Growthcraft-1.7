@@ -3,6 +3,8 @@ package growthcraft.bees;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeEffect;
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.bees.client.gui.GuiHandlerBees;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeHive;
@@ -90,6 +92,7 @@ public class GrowthCraftBees
 
 	public static Fluid[] honeyMeadBooze;
 
+	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcBeesConfig config = new GrcBeesConfig();
 	private ModuleContainer modules = new ModuleContainer();
 
@@ -108,6 +111,8 @@ public class GrowthCraftBees
 		if (config.enableWailaIntegration) modules.add(new growthcraft.bees.integration.Waila());
 		if (config.enableForestryIntegration) modules.add(new growthcraft.bees.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bees.integration.ThaumcraftModule());
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		tab = new CreativeTabsGrowthcraftBees();
 

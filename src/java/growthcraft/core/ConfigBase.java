@@ -30,6 +30,10 @@ public abstract class ConfigBase implements ILoggable
 
 	private static final String DEFAULT_STR = "; Default : ";
 
+	// All configs will include a Debug option.
+	@ConfigOption(catergory="Debug", name="Enable Debugging", desc="Should Growthcraft log all its activity for debugging purposes?")
+	public boolean debugEnabled;
+
 	protected ILogger logger = NullLogger.INSTANCE;
 	protected Configuration config;
 

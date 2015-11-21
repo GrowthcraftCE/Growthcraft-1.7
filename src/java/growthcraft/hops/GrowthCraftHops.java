@@ -5,6 +5,8 @@ import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
@@ -71,6 +73,7 @@ public class GrowthCraftHops
 
 	public static Fluid[] hopAleBooze;
 
+	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcHopsConfig config = new GrcHopsConfig();
 	private ModuleContainer modules = new ModuleContainer();
 
@@ -85,6 +88,8 @@ public class GrowthCraftHops
 		config.load(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.hops.integration.ThaumcraftModule());
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================
 		// INIT

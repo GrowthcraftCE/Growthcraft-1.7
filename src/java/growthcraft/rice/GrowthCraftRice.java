@@ -1,10 +1,12 @@
 package growthcraft.rice;
 
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.common.ModuleContainer;
+import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -55,8 +57,9 @@ public class GrowthCraftRice
 	public static ItemDefinition rice;
 	public static ItemDefinition riceBall;
 
-	public static GrcRiceBooze booze;
+	public static GrcRiceBooze booze = new GrcRiceBooze();
 
+	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcRiceConfig config = new GrcRiceConfig();
 	private ModuleContainer modules = new ModuleContainer();
 
@@ -71,8 +74,9 @@ public class GrowthCraftRice
 		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
-		booze = new GrcRiceBooze();
 		modules.add(booze);
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================
 		// INIT

@@ -5,6 +5,8 @@ import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
@@ -77,6 +79,7 @@ public class GrowthCraftGrapes
 
 	public static Fluid[] grapeWineBooze;
 
+	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcGrapesConfig config = new GrcGrapesConfig();
 	private ModuleContainer modules = new ModuleContainer();
 
@@ -91,6 +94,8 @@ public class GrowthCraftGrapes
 		config.load(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.grapes.integration.ThaumcraftModule());
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================
 		// INIT

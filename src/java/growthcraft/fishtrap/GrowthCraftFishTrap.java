@@ -2,6 +2,8 @@ package growthcraft.fishtrap;
 
 import growthcraft.api.fishtrap.FishTrapEntry;
 import growthcraft.api.fishtrap.FishTrapRegistry;
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.ModuleContainer;
 import growthcraft.fishtrap.client.gui.GuiHandlerFishTrap;
@@ -40,6 +42,7 @@ public class GrowthCraftFishTrap
 
 	public static BlockDefinition fishTrap;
 
+	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcFishtrapConfig config = new GrcFishtrapConfig();
 	private ModuleContainer modules = new ModuleContainer();
 
@@ -54,6 +57,8 @@ public class GrowthCraftFishTrap
 		config.load(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.fishtrap.integration.ThaumcraftModule());
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================
 		// INIT

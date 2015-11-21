@@ -1,5 +1,7 @@
 package growthcraft.bamboo;
 
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.bamboo.common.block.BlockBamboo;
 import growthcraft.bamboo.common.block.BlockBambooDoor;
 import growthcraft.bamboo.common.block.BlockBambooFence;
@@ -87,6 +89,7 @@ public class GrowthCraftBamboo
 
 	public static BiomeGenBase bambooBiome;
 
+	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcBambooConfig config = new GrcBambooConfig();
 	private ModuleContainer modules = new ModuleContainer();
 
@@ -101,6 +104,8 @@ public class GrowthCraftBamboo
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bamboo.integration.ThaumcraftModule());
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================
 		// INIT

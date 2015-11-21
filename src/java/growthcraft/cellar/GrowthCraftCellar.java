@@ -8,6 +8,8 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.UserYeastEntries;
 import growthcraft.api.cellar.heatsource.UserHeatSources;
 import growthcraft.api.cellar.pressing.UserPressingRecipes;
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.cellar.common.booze.ModifierFunctionExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionHyperExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionPotent;
@@ -92,11 +94,12 @@ public class GrowthCraftCellar
 
 	// Achievments
 	public static ItemDefinition chievItemDummy;
-
 	public static GrcCellarAchievements achievements;
 
+	// Network
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
+	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcCellarConfig config = new GrcCellarConfig();
 	private UserYeastEntries userYeastEntries = new UserYeastEntries();
 	private UserHeatSources userHeatSources = new UserHeatSources();
@@ -112,12 +115,21 @@ public class GrowthCraftCellar
 	public void preload(FMLPreInitializationEvent event)
 	{
 		config.load(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
+		if (config.debugEnabled)
+		{
+			logger.info("Pre-Initializing %s", MOD_ID);
+			userHeatSources.setLogger(logger);
+			userPressingRecipes.setLogger(logger);
+			userYeastEntries.setLogger(logger);
+		}
 		userHeatSources.load(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
 		userPressingRecipes.load(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
 		userYeastEntries.load(event.getModConfigurationDirectory(), "growthcraft/cellar/yeast.json");
 
 		if (config.enableWailaIntegration) modules.add(new growthcraft.cellar.integration.Waila());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		registerBoozeModifierFunctions();
 

@@ -4,6 +4,8 @@ import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.apples.common.block.BlockApple;
 import growthcraft.apples.common.block.BlockAppleLeaves;
 import growthcraft.apples.common.block.BlockAppleSapling;
@@ -70,6 +72,7 @@ public class GrowthCraftApples
 
 	public static Fluid[] appleCiderBooze;
 
+	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcApplesConfig config = new GrcApplesConfig();
 	private ModuleContainer modules = new ModuleContainer();
 
@@ -84,6 +87,8 @@ public class GrowthCraftApples
 		config.load(event.getModConfigurationDirectory(), "growthcraft/apples.conf");
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.apples.integration.ThaumcraftModule());
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		appleSapling = new BlockDefinition(new BlockAppleSapling());
 		appleLeaves = new BlockDefinition(new BlockAppleLeaves());

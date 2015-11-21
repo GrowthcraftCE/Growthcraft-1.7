@@ -1,5 +1,7 @@
 package growthcraft.core;
 
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.core.common.AchievementPageGrowthcraft;
 import growthcraft.core.common.block.BlockFenceRope;
 import growthcraft.core.common.block.BlockRope;
@@ -70,10 +72,13 @@ public class GrowthCraftCore
 	public void preload(FMLPreInitializationEvent event)
 	{
 		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
+		if (config.debugEnabled) logger.info("Pre-Initializing %s", MOD_ID);
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.core.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.core.integration.Waila());
 		if (config.enableAppleCoreIntegration) modules.add(new growthcraft.core.integration.AppleCore());
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		tab =  new CreativeTabsGrowthcraft("tabGrowthCraft");
 
