@@ -120,7 +120,7 @@ public class BeesRegistry
 	 */
 	public void addFlower(Block flower, int meta)
 	{
-		this.flowersList.add(new BlockKey(flower, meta));
+		flowersList.add(new BlockKey(flower, meta));
 	}
 
 	/**
@@ -140,13 +140,14 @@ public class BeesRegistry
 	public boolean isItemBee(ItemStack itemstack)
 	{
 		if (itemstack == null) return false;
-		return this.beesList.contains(new ItemKey(itemstack));
+		return beesList.contains(new ItemKey(itemstack)) ||
+			beesList.contains(new ItemKey(itemstack.getItem(), ItemKey.WILDCARD_VALUE));
 	}
 
 	public boolean isBlockFlower(Block block, int meta)
 	{
 		if (block == null) return false;
-		return this.flowersList.contains(new BlockKey(block, meta)) ||
-			this.flowersList.contains(new BlockKey(block, ItemKey.WILDCARD_VALUE));
+		return flowersList.contains(new BlockKey(block, meta)) ||
+			flowersList.contains(new BlockKey(block, ItemKey.WILDCARD_VALUE));
 	}
 }
