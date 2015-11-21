@@ -1,8 +1,6 @@
 package growthcraft.cellar.network;
 
-import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
-import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
+import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -29,19 +27,9 @@ public class PacketClearTankButton extends AbstractPacketButton
 		final World world = player.worldObj;
 		final TileEntity te = world.getTileEntity(xCoord, yCoord, zCoord);
 
-		if (te instanceof TileEntityFruitPress)
+		if (te instanceof TileEntityCellarDevice)
 		{
-			((TileEntityFruitPress)te).clearTank(0);
-		}
-
-		if (te instanceof TileEntityFermentBarrel)
-		{
-			((TileEntityFermentBarrel)te).clearTank(0);
-		}
-
-		if (te instanceof TileEntityFermentJar)
-		{
-			((TileEntityFermentJar)te).clearTank(0);
+			((TileEntityCellarDevice)te).clearTank(0);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 package growthcraft.cellar.network;
 
-import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
+import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -46,15 +46,15 @@ public class PacketClearTankButtonWByte extends AbstractPacketButton
 		final World world = player.worldObj;
 		final TileEntity te = world.getTileEntity(xCoord, yCoord, zCoord);
 
-		if (te instanceof TileEntityBrewKettle)
+		if (te instanceof TileEntityCellarDevice)
 		{
 			if (b == 0)
 			{
-				((TileEntityBrewKettle)te).clearTank(0);
+				((TileEntityCellarDevice)te).clearTank(0);
 			}
 			else if (b == 1)
 			{
-				((TileEntityBrewKettle)te).clearTank(1);
+				((TileEntityCellarDevice)te).clearTank(1);
 			}
 		}
 	}
