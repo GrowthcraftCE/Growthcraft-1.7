@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import growthcraft.api.bees.BeesRegistry;
-import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.common.inventory.ContainerBeeBox;
+import growthcraft.bees.GrowthCraftBees;
+import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.GrcBaseInventoryTile;
 import growthcraft.core.util.ItemUtils;
-import growthcraft.core.util.NBTHelper;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityBeeBox extends TileEntity implements ISidedInventory
+public class TileEntityBeeBox extends GrcBaseInventoryTile
 {
 	public static enum HoneyCombExpect
 	{
@@ -24,19 +22,27 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		FILLED;
 	}
 
+	private static final int beeBoxVersion = 2;
 	private static final int[] beeSlotIds = new int[] {0};
-	private static final int[] honeyCombSlotIds = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9 , 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
+	private static final int[] honeyCombSlotIds = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
 
 	// Temp variable used by BlockBeeBox for storing flower lists
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public ArrayList<List> flowerList = new ArrayList<List>();
 
-	// Constants
-	private ItemStack[] invSlots   = new ItemStack[28];
-
-	// Other Vars.
-	private String   name;
 	private int time;
+
+	@Override
+	public String getDefaultInventoryName()
+	{
+		return "container.grc.beeBox";
+	}
+
+	@Override
+	protected GrcInternalInventory createInventory()
+	{
+		return new GrcInternalInventory(this, 28);
+	}
 
 	/************
 	 * UPDATE
@@ -67,7 +73,7 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 
 	public boolean slotHasHoneyComb(int index, HoneyCombExpect expects)
 	{
-		final ItemStack slotItem = this.invSlots[index];
+		final ItemStack slotItem = getStackInSlot(index);
 		switch (expects)
 		{
 			case EMPTY:
@@ -84,47 +90,44 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		return slotHasHoneyComb(index, HoneyCombExpect.EMPTY);
 	}
 
-	//counts filled honeycombs only
-	public int countHoney()
+	public int countCombsOfType(HoneyCombExpect type)
 	{
 		int count = 0;
-		for (int i = 1; i < this.invSlots.length; ++i)
+		for (int i = 1; i < getSizeInventory(); ++i)
 		{
-			if (this.invSlots[i] != null)
+			if (getStackInSlot(i) != null)
 			{
-				if (slotHasHoneyComb(i, HoneyCombExpect.FILLED))
+				if (slotHasHoneyComb(i, type))
 				{
 					count++;
 				}
 			}
 		}
 		return count;
+	}
+
+	//counts filled honeycombs only
+	public int countHoney()
+	{
+		return countCombsOfType(HoneyCombExpect.FILLED);
+	}
+
+	public int countEmptyCombs()
+	{
+		return countCombsOfType(HoneyCombExpect.ANY);
 	}
 
 	//counts both empty and filled honeycombs
 	public int countCombs()
 	{
-		int count = 0;
-		for (int i = 1; i < this.invSlots.length; ++i)
-		{
-			if (this.invSlots[i] != null)
-			{
-				if (slotHasHoneyComb(i, HoneyCombExpect.ANY))
-				{
-					count++;
-				}
-			}
-		}
-		return count;
+		return countCombsOfType(HoneyCombExpect.ANY);
 	}
 
 	public int countBees()
 	{
-		if (this.invSlots[0] == null)
-		{
-			return 0;
-		}
-		return this.invSlots[0].stackSize;
+		final ItemStack stack = getStackInSlot(ContainerBeeBox.SlotId.BEE);
+		if (stack == null) return 0;
+		return stack.stackSize;
 	}
 
 	public boolean hasBees()
@@ -146,13 +149,14 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 	public void decreaseHoney()
 	{
 		int count = 0;
-		for (int i = 1; i < this.invSlots.length; ++i)
+		for (int i = 1; i < getSizeInventory(); ++i)
 		{
-			if (this.invSlots[i] != null)
+			final ItemStack stack = getStackInSlot(i);
+			if (stack != null)
 			{
 				if (slotHasHoneyComb(i, HoneyCombExpect.FILLED))
 				{
-					this.invSlots[i].setItemDamage(0);
+					stack.setItemDamage(0);
 					count++;
 					if (count >= 6)
 					{
@@ -165,12 +169,12 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 
 	public ItemStack getBeeStack()
 	{
-		return invSlots[ContainerBeeBox.SlotId.BEE];
+		return getStackInSlot(ContainerBeeBox.SlotId.BEE);
 	}
 
 	private void setBeeStack(ItemStack itemstack)
 	{
-		invSlots[ContainerBeeBox.SlotId.BEE] = itemstack;
+		setInventorySlotContents(ContainerBeeBox.SlotId.BEE, itemstack);
 	}
 
 	public void spawnBee()
@@ -186,131 +190,70 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		}
 	}
 
+	public void spawnHoneyCombs(int n)
+	{
+		for (int i = 1; i < getSizeInventory(); ++i)
+		{
+			if (n <= 0) break;
+			final ItemStack stack = getStackInSlot(i);
+			if (stack == null)
+			{
+				setInventorySlotContents(i, GrowthCraftBees.honeyCombEmpty.asStack());
+				n--;
+			}
+		}
+	}
+
 	public void spawnHoneyComb()
 	{
-		for (int i = 1; i < this.invSlots.length; ++i)
+		spawnHoneyCombs(1);
+	}
+
+	public void fillHoneyCombs(int n)
+	{
+		for (int i = 1; i < getSizeInventory(); ++i)
 		{
-			if (this.invSlots[i] == null)
+			if (n <= 0) break;
+			final ItemStack stack = getStackInSlot(i);
+			if (stack != null && slotHasEmptyComb(i))
 			{
-				this.invSlots[i] = GrowthCraftBees.honeyCombEmpty.asStack();
-				break;
+				final ItemStack resultStack = BeesRegistry.instance().getFilledHoneyComb(stack).copy();
+				setInventorySlotContents(i, resultStack);
+				n--;
 			}
 		}
 	}
 
 	public void fillHoneyComb()
 	{
-		for (int i = 1; i < this.invSlots.length; ++i)
-		{
-			if (this.invSlots[i] != null && slotHasEmptyComb(i))
-			{
-				this.invSlots[i] = BeesRegistry.instance().getFilledHoneyComb(invSlots[i]).copy();
-				break;
-			}
-		}
+		fillHoneyCombs(1);
 	}
 
 	/************
-	 * INVENTORY
+	 * NBT
 	 ************/
 	@Override
-	public ItemStack getStackInSlot(int index)
+	public void readFromNBT(NBTTagCompound nbt)
 	{
-		return this.invSlots[index];
+		super.readFromNBT(nbt);
+		this.time = nbt.getShort("time");
 	}
 
 	@Override
-	public ItemStack decrStackSize(int index, int par2)
+	public void writeToNBT(NBTTagCompound nbt)
 	{
-		if (this.invSlots[index] != null)
-		{
-			ItemStack itemstack;
-
-			if (this.invSlots[index].stackSize <= par2)
-			{
-				itemstack = this.invSlots[index];
-				this.invSlots[index] = null;
-				return itemstack;
-			}
-			else
-			{
-				itemstack = this.invSlots[index].splitStack(par2);
-
-				if (this.invSlots[index].stackSize == 0)
-				{
-					this.invSlots[index] = null;
-				}
-
-				return itemstack;
-			}
-		}
-		else
-		{
-			return null;
-		}
+		super.writeToNBT(nbt);
+		nbt.setShort("time", (short)this.time);
+		nbt.setInteger("BeeBox.version", beeBoxVersion);
 	}
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int index)
-	{
-		if (this.invSlots[index] != null)
-		{
-			final ItemStack itemstack = this.invSlots[index];
-			this.invSlots[index] = null;
-			return itemstack;
-		}
-		else
-		{
-			return null;
-		}
-	}
-
-	@Override
-	public void setInventorySlotContents(int index, ItemStack itemstack)
-	{
-		this.invSlots[index] = itemstack;
-
-		if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
-		{
-			itemstack.stackSize = this.getInventoryStackLimit();
-		}
-	}
-
-	@Override
-	public int getInventoryStackLimit()
-	{
-		return 64;
-	}
-
-	@Override
-	public int getSizeInventory()
-	{
-		return this.invSlots.length;
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
-	{
-		if (this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this)
-		{
-			return false;
-		}
-		else
-		{
-			return player.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
-		}
-	}
-
-	@Override
-	public void openInventory(){}
-
-	@Override
-	public void closeInventory(){}
-
+	/************
+	 * HOPPER
+	 ************/
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
 	{
-		if (index == 0)
+		if (index == ContainerBeeBox.SlotId.BEE)
 		{
 			return BeesRegistry.instance().isItemBee(itemstack);
 		}
@@ -320,66 +263,6 @@ public class TileEntityBeeBox extends TileEntity implements ISidedInventory
 		}
 	}
 
-	/************
-	 * NBT
-	 ************/
-
-	/**
-	 * @param nbt - nbt data to load
-	 */
-	protected void readInventorySlotsFromNBT(NBTTagCompound nbt)
-	{
-		this.invSlots = ItemUtils.clearInventorySlots(invSlots, getSizeInventory());
-		NBTHelper.readInventorySlotsFromNBT(invSlots, nbt.getTagList("items", NBTHelper.NBTType.COMPOUND));
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		super.readFromNBT(nbt);
-		readInventorySlotsFromNBT(nbt);
-		this.time = nbt.getShort("time");
-		if (nbt.hasKey("name"))
-		{
-			this.name = nbt.getString("name");
-		}
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
-		super.writeToNBT(nbt);
-		nbt.setTag("items", NBTHelper.writeInventorySlotsToNBT(invSlots));
-		nbt.setShort("time", (short)this.time);
-		if (this.hasCustomInventoryName())
-		{
-			nbt.setString("name", this.name);
-		}
-	}
-
-	/************
-	 * NAMES
-	 ************/
-	@Override
-	public String getInventoryName()
-	{
-		return this.hasCustomInventoryName() ? this.name : "container.grc.beeBox";
-	}
-
-	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return this.name != null && this.name.length() > 0;
-	}
-
-	public void setGuiDisplayName(String string)
-	{
-		this.name = string;
-	}
-
-	/************
-	 * HOPPER
-	 ************/
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 	{
