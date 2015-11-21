@@ -75,7 +75,7 @@ public class BlockBrewKettle extends BlockCellarContainer implements ICellarFlui
 	@Override
 	protected boolean playerDrainTank(World world, int x, int y, int z, IFluidHandler fh, ItemStack is, EntityPlayer player)
 	{
-		final FluidStack fs = Utils.playerDrainTank(world, x, y, z, fh, is, player, true, 64, 0.35F);
+		final FluidStack fs = Utils.playerDrainTank(world, x, y, z, fh, is, player);
 		return fs != null && fs.amount > 0;
 	}
 

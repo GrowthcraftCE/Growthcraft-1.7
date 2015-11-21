@@ -71,7 +71,7 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 	@Override
 	protected boolean playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
 	{
-		final FluidStack available = Utils.playerDrainTank(world, x, y, z, tank, held, player, true, 64, 0.35f);
+		final FluidStack available = Utils.playerDrainTank(world, x, y, z, tank, held, player);
 		if (available != null && available.amount > 0)
 		{
 			setAchievements(player, available.getFluid());
