@@ -17,9 +17,8 @@ public class BeesRegistry
 	private static final BeesRegistry INSTANCE = new BeesRegistry();
 
 	private final List<ItemKey> beesList = new ArrayList<ItemKey>();
-	private final List<ItemKey> emptyHoneyCombList = new ArrayList<ItemKey>();
-	private final List<ItemKey> filledHoneyCombList = new ArrayList<ItemKey>();
-	private final Map<ItemKey, ItemStack> honeyCombMap = new HashMap<ItemKey, ItemStack>();
+	private final Map<ItemKey, ItemStack> emptyToFullHoneyComb = new HashMap<ItemKey, ItemStack>();
+	private final Map<ItemKey, ItemStack> fullToEmptyHoneyComb = new HashMap<ItemKey, ItemStack>();
 	private final List<BlockKey> flowersList = new ArrayList<BlockKey>();
 
 	public static final BeesRegistry instance()
@@ -67,47 +66,51 @@ public class BeesRegistry
 		addBee(Item.getItemFromBlock(bee), ItemKey.WILDCARD_VALUE);
 	}
 
-	public void addEmptyHoneyComb(ItemStack itemstack)
+	protected void addHoneyCombMapping(ItemStack empty, ItemStack full)
 	{
-		emptyHoneyCombList.add(stackToKey(itemstack));
-	}
-
-	public void addFilledHoneyComb(ItemStack itemstack)
-	{
-		filledHoneyCombList.add(stackToKey(itemstack));
-	}
-
-	public void addHoneyCombMapping(ItemStack empty, ItemStack full)
-	{
-		honeyCombMap.put(stackToKey(empty), full);
+		emptyToFullHoneyComb.put(stackToKey(empty), full);
+		fullToEmptyHoneyComb.put(stackToKey(full), empty);
 	}
 
 	public void addHoneyComb(ItemStack empty, ItemStack full)
 	{
-		addEmptyHoneyComb(empty);
-		addFilledHoneyComb(full);
 		addHoneyCombMapping(empty, full);
 	}
 
 	public ItemStack getFilledHoneyComb(ItemStack itemstack)
 	{
-		return honeyCombMap.get(stackToKey(itemstack));
+		return emptyToFullHoneyComb.get(stackToKey(itemstack));
+	}
+
+	public ItemStack getEmptyHoneyComb(ItemStack itemstack)
+	{
+		return emptyToFullHoneyComb.get(stackToKey(itemstack));
+	}
+
+	protected boolean isItemFilledHoneyComb(ItemKey key)
+	{
+		return fullToEmptyHoneyComb.containsKey(key);
 	}
 
 	public boolean isItemFilledHoneyComb(ItemStack itemstack)
 	{
-		return filledHoneyCombList.contains(stackToKey(itemstack));
+		return isItemFilledHoneyComb(stackToKey(itemstack));
+	}
+
+	protected boolean isItemEmptyHoneyComb(ItemKey key)
+	{
+		return emptyToFullHoneyComb.containsKey(key);
 	}
 
 	public boolean isItemEmptyHoneyComb(ItemStack itemstack)
 	{
-		return emptyHoneyCombList.contains(stackToKey(itemstack));
+		return isItemEmptyHoneyComb(stackToKey(itemstack));
 	}
 
 	public boolean isItemHoneyComb(ItemStack itemstack)
 	{
 		final ItemKey key = stackToKey(itemstack);
-		return emptyHoneyCombList.contains(key) || filledHoneyCombList.contains(key);
+		return isItemFilledHoneyComb(key) || isItemEmptyHoneyComb(key);
 	}
 
 	/**

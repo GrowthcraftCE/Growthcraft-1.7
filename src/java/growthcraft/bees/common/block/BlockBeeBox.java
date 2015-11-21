@@ -9,6 +9,7 @@ import growthcraft.bees.client.renderer.RenderBeeBox;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.util.ItemUtils;
+import growthcraft.core.util.AuxFX;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -336,43 +337,43 @@ public class BlockBeeBox extends BlockContainer
 			{
 				final ItemStack itemstack = player.inventory.getCurrentItem();
 
-				if (itemstack != null && itemstack.getItem() == Items.flower_pot && te.isHoneyEnough())
+				if (itemstack != null)
 				{
-					ItemUtils.addStackToPlayer(GrowthCraftBees.honeyJar.asStack(), player, world, x, y, z, false);
-					ItemUtils.decreaseStackOnPlayer(itemstack, player);
-					te.decreaseHoney();
-					te.markDirty();
-					world.markBlockForUpdate(x, y, z);
-					return true;
-				}
-				else if (itemstack != null && itemstack.getItem() == Items.dye && itemstack.getItemDamage() == 9)
-				{
-					te.setTime(9600);
-					world.playAuxSFX(2005, x, y, z, 0);
-					if (!player.capabilities.isCreativeMode)
+					if (itemstack.getItem() == Items.flower_pot && te.isHoneyEnough())
 					{
-						--itemstack.stackSize;
+						ItemUtils.addStackToPlayer(GrowthCraftBees.honeyJar.asStack(), player, world, x, y, z, false);
+						ItemUtils.decreaseStackOnPlayer(itemstack, player);
+						te.decreaseHoney(6);
+						te.markDirty();
+						world.markBlockForUpdate(x, y, z);
+						return true;
 					}
-					te.markDirty();
-					world.markBlockForUpdate(x, y, z);
-					return true;
-				}
-				else if (itemstack != null && itemstack.getItem() == Items.dye && itemstack.getItemDamage() == 13)
-				{
-					te.setTime(4800);
-					world.playAuxSFX(2005, x, y, z, 0);
-					if (!player.capabilities.isCreativeMode)
+					else if (itemstack.getItem() == Items.dye)
 					{
-						--itemstack.stackSize;
+						int time = 0;
+						if (itemstack.getItemDamage() == 9)
+						{
+							time = 9600;
+						}
+						else if (itemstack.getItemDamage() == 13)
+						{
+							time = 4800;
+						}
+						if (time > 0)
+						{
+							te.setTime(time);
+							world.playAuxSFX(AuxFX.BONEMEAL, x, y, z, 0);
+							if (!player.capabilities.isCreativeMode)
+							{
+								player.inventory.setCurrentItem(ItemUtils.consumeStack(itemstack));
+							}
+							te.markDirty();
+							world.markBlockForUpdate(x, y, z);
+						}
+						return true;
 					}
-					te.markDirty();
-					world.markBlockForUpdate(x, y, z);
-					return true;
 				}
-				else
-				{
-					player.openGui(GrowthCraftBees.instance, 0, world, x, y, z);
-				}
+				player.openGui(GrowthCraftBees.instance, 0, world, x, y, z);
 			}
 
 			return true;
@@ -498,7 +499,6 @@ public class BlockBeeBox extends BlockContainer
 	{
 		final int meta = world.getBlockMetadata(x, y, z);
 		final int offset = calculateIconOffset(meta);
-		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 		if (side == 0)
 		{
 			return icons[offset];
@@ -509,6 +509,7 @@ public class BlockBeeBox extends BlockContainer
 		}
 		else
 		{
+			final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 			if (te != null && te.isHoneyEnough())
 			{
 				return icons[offset + 3];

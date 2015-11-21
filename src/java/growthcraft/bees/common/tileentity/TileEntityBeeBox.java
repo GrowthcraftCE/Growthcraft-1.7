@@ -151,22 +151,19 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 		return countHoney() >= 6;
 	}
 
-	public void decreaseHoney()
+	public void decreaseHoney(int count)
 	{
-		int count = 0;
 		for (int i = 1; i < getSizeInventory(); ++i)
 		{
+			if (count >= 6) break;
 			final ItemStack stack = getStackInSlot(i);
 			if (stack != null)
 			{
 				if (slotHasHoneyComb(i, HoneyCombExpect.FILLED))
 				{
-					stack.setItemDamage(0);
-					count++;
-					if (count >= 6)
-					{
-						break;
-					}
+					final ItemStack result = BeesRegistry.instance().getEmptyHoneyComb(stack);
+					setInventorySlotContents(i, result.copy());
+					count--;
 				}
 			}
 		}
