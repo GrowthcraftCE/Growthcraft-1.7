@@ -59,6 +59,7 @@ public abstract class JsonConfigDef implements ILoggable
 	{
 		try
 		{
+			logger.info("Creating default json-config %s", file);
 			if (file.getParentFile() != null)
 			{
 				file.getParentFile().mkdirs();
@@ -90,6 +91,7 @@ public abstract class JsonConfigDef implements ILoggable
 		UnicodeInputStreamReader input = null;
 		try
 		{
+			logger.info("Loading json-config %s", file);
 			if (!file.exists()) saveDefault(file);
 
 			if (file.canRead())

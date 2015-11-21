@@ -5,7 +5,7 @@ import java.lang.reflect.Modifier;
 
 import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.fermenting.FermentingRegistry;
+import growthcraft.api.cellar.fermenting.UserYeastEntries;
 import growthcraft.api.cellar.heatsource.UserHeatSources;
 import growthcraft.api.cellar.pressing.UserPressingRecipes;
 import growthcraft.cellar.common.booze.ModifierFunctionExtended;
@@ -34,7 +34,6 @@ import growthcraft.cellar.event.LivingUpdateEventCellar;
 import growthcraft.cellar.handler.GuiHandlerCellar;
 import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.stats.GrcCellarAchievements;
-import growthcraft.cellar.util.YeastType;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.ModuleContainer;
@@ -55,7 +54,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -100,6 +98,7 @@ public class GrowthCraftCellar
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
 	private GrcCellarConfig config = new GrcCellarConfig();
+	private UserYeastEntries userYeastEntries = new UserYeastEntries();
 	private UserHeatSources userHeatSources = new UserHeatSources();
 	private UserPressingRecipes userPressingRecipes = new UserPressingRecipes();
 	private ModuleContainer modules = new ModuleContainer();
@@ -115,6 +114,7 @@ public class GrowthCraftCellar
 		config.load(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
 		userHeatSources.load(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
 		userPressingRecipes.load(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
+		userYeastEntries.load(event.getModConfigurationDirectory(), "growthcraft/cellar/yeast.json");
 
 		if (config.enableWailaIntegration) modules.add(new growthcraft.cellar.integration.Waila());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
@@ -208,8 +208,6 @@ public class GrowthCraftCellar
 		//====================
 		achievements = new GrcCellarAchievements();
 
-		registerYeast();
-
 		NEI.hideItem(fruitPresser.asStack());
 		NEI.hideItem(chievItemDummy.asStack());
 
@@ -250,29 +248,6 @@ public class GrowthCraftCellar
 		OreDictionary.registerOre("materialYeast", yeast.getItem());
 	}
 
-	private void registerYeast()
-	{
-		final FermentingRegistry reg = CellarRegistry.instance().fermenting();
-		for (BiomeDictionary.Type biomeType : BiomeDictionary.Type.values())
-		{
-			switch (biomeType)
-			{
-				case COLD:
-					reg.addYeastToBiomeType(YeastType.LAGER.asStack(1), biomeType);
-					break;
-				case MAGICAL:
-					reg.addYeastToBiomeType(YeastType.ETHEREAL.asStack(1), biomeType);
-					break;
-				case MUSHROOM:
-					reg.addYeastToBiomeType(YeastType.ETHEREAL.asStack(1), biomeType);
-					break;
-				default:
-					reg.addYeastToBiomeType(YeastType.BREWERS.asStack(1), biomeType);
-
-			}
-		}
-	}
-
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
@@ -297,6 +272,7 @@ public class GrowthCraftCellar
 
 		modules.postInit();
 
+		userYeastEntries.register();
 		userHeatSources.register();
 		userPressingRecipes.register();
 	}

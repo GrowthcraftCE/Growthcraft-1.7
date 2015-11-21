@@ -21,53 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.schema;
+package growthcraft.api.core.util;
 
-import javax.annotation.Nonnull;
+import net.minecraftforge.common.BiomeDictionary;
 
-import growthcraft.api.core.util.ItemKey;
-import growthcraft.api.core.definition.IItemStackFactory;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
-public class ItemKeySchema implements IItemStackFactory
+public class BiomeUtils
 {
-	public String mod_id;
-	public String name;
-	public int amount = 1;
-	public int meta = ItemKey.WILDCARD_VALUE;
-
-	public ItemKeySchema(@Nonnull String mid, @Nonnull String nm, int amt, int mt)
+	public static class BiomeTypeNotFound extends Exception
 	{
-		this.mod_id = mid;
-		this.name = nm;
-		this.amount = amt;
-		this.meta = mt;
+		public static final long serialVersionUID = 1L;
+
+		public BiomeTypeNotFound(String msg)
+		{
+			super(msg);
+		}
+
+		public BiomeTypeNotFound() {}
 	}
 
-	public ItemKeySchema() {}
+	private BiomeUtils() {}
 
-	public Item getItem()
+	/**
+	 * The default implementation of the BiomeDictionary.Type doesn't have
+	 * a non-mutative version of the getType method.
+	 * Growthcraft will NOT attempt to add any new biomes, if you f*ck up,
+	 * this method will slap you in the face for it.
+	 *
+	 * @param name - name of the biome to look for, this will be upcased
+	 * @return type - found biome type
+	 */
+	public static BiomeDictionary.Type fetchBiomeType(String name) throws BiomeTypeNotFound
 	{
-		return GameRegistry.findItem(mod_id, name);
-	}
+		final String upcasedName = name.toUpperCase();
 
-	public ItemStack asStack(int a)
-	{
-		final Item item = getItem();
-		if (item == null) return null;
-		return new ItemStack(item, a, meta < 0 ? ItemKey.WILDCARD_VALUE : meta);
-	}
-
-	public ItemStack asStack()
-	{
-		return asStack(amount);
-	}
-
-	public String toString()
-	{
-		return "" + mod_id + ":" + name + ":" + meta;
+		// I really shouldn't be doing this, but what choice do you have :(
+		for (BiomeDictionary.Type type : BiomeDictionary.Type.values())
+		{
+			if (type.name().equals(upcasedName)) return type;
+		}
+		throw new BiomeTypeNotFound("Biome type '" + name + "' not found.");
 	}
 }
