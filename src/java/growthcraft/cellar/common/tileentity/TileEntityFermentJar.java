@@ -64,6 +64,13 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 		return "container.grc.fermentJar";
 	}
 
+	protected void markForFluidUpdate()
+	{
+		// Ferment Jars need to update their rendering state when a fluid
+		// changes, most of the other cellar blocks are unaffected by this
+		markForBlockUpdate();
+	}
+
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 	{

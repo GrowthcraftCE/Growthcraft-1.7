@@ -56,31 +56,34 @@ public class RenderFermentJar implements ISimpleBlockRenderingHandler
 			if (fluid != null)
 			{
 				final double fluidRate = (double)te.getFluidAmountRate(0);
-				final double bx1 = (double)innerBounds[0];
-				final double by1 = (double)innerBounds[1];
-				final double bz1 = (double)innerBounds[2];
-				final double bx2 = (double)innerBounds[3];
-				final double by2 = (double)innerBounds[4];
-				final double bz2 = (double)innerBounds[5];
-				final IIcon icon = fluid.getIcon();
-
-				if (icon != null)
+				if (fluidRate > 0)
 				{
-					final int color = fluid.getColor();
-					ColorUtils.rgb24FloatArray(tempFloatColor, color);
-					tes.setColorOpaque_F(tempFloatColor[0], tempFloatColor[1], tempFloatColor[2]);
+					final double bx1 = (double)innerBounds[0];
+					final double by1 = (double)innerBounds[1];
+					final double bz1 = (double)innerBounds[2];
+					final double bx2 = (double)innerBounds[3];
+					final double by2 = (double)innerBounds[4];
+					final double bz2 = (double)innerBounds[5];
+					final IIcon icon = fluid.getIcon();
 
-					renderer.setRenderBounds(bx1, by1, bz1, bx2, by1 + (by2 - by1) * fluidRate, bz2);
+					if (icon != null)
 					{
-						renderer.renderFaceXNeg(block, (double)x, (double)y, (double)z, icon);
-						renderer.renderFaceXPos(block, (double)x, (double)y, (double)z, icon);
-						renderer.renderFaceYNeg(block, (double)x, (double)y, (double)z, icon);
-						renderer.renderFaceYPos(block, (double)x, (double)y, (double)z, icon);
-						renderer.renderFaceZNeg(block, (double)x, (double)y, (double)z, icon);
-						renderer.renderFaceZPos(block, (double)x, (double)y, (double)z, icon);
+						final int color = fluid.getColor();
+						ColorUtils.rgb24FloatArray(tempFloatColor, color);
+						tes.setColorOpaque_F(tempFloatColor[0], tempFloatColor[1], tempFloatColor[2]);
+
+						renderer.setRenderBounds(bx1, by1, bz1, bx2, by1 + (by2 - by1) * fluidRate, bz2);
+						{
+							renderer.renderFaceXNeg(block, (double)x, (double)y, (double)z, icon);
+							renderer.renderFaceXPos(block, (double)x, (double)y, (double)z, icon);
+							renderer.renderFaceYNeg(block, (double)x, (double)y, (double)z, icon);
+							renderer.renderFaceYPos(block, (double)x, (double)y, (double)z, icon);
+							renderer.renderFaceZNeg(block, (double)x, (double)y, (double)z, icon);
+							renderer.renderFaceZPos(block, (double)x, (double)y, (double)z, icon);
+						}
+						renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+						tes.setColorOpaque_F(1f, 1f, 1f);
 					}
-					renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-					tes.setColorOpaque_F(1f, 1f, 1f);
 				}
 			}
 		}
