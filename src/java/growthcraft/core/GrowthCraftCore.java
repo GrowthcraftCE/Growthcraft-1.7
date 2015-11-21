@@ -60,6 +60,7 @@ public class GrowthCraftCore
 	public static BlockDefinition ropeBlock;
 	public static ItemDefinition rope;
 
+	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcCoreConfig config = new GrcCoreConfig();
 	private ModuleContainer modules = new ModuleContainer();
 
