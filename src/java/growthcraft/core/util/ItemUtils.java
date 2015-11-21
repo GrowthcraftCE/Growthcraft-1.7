@@ -144,12 +144,8 @@ public class ItemUtils
 	{
 		if (!player.capabilities.isCreativeMode)
 		{
-			--itemstack.stackSize;
-
-			if (itemstack.stackSize <= 0)
-			{
-				player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
-			}
+			final ItemStack result = consumeStack(itemstack);
+			player.inventory.setInventorySlotContents(player.inventory.currentItem, result);
 		}
 	}
 

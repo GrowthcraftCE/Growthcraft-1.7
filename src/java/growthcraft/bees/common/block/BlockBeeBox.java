@@ -363,10 +363,7 @@ public class BlockBeeBox extends BlockContainer
 						{
 							te.setTime(time);
 							world.playAuxSFX(AuxFX.BONEMEAL, x, y, z, 0);
-							if (!player.capabilities.isCreativeMode)
-							{
-								player.inventory.setCurrentItem(ItemUtils.consumeStack(itemstack));
-							}
+							ItemUtils.decreaseStackOnPlayer(itemstack, player);
 							te.markDirty();
 							world.markBlockForUpdate(x, y, z);
 						}
