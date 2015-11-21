@@ -53,6 +53,13 @@ public class GrcCellarConfig extends ConfigBase
 	public int fruitPressMaxCap = 1000;
 
 
+	@ConfigOption(catergory="Heat Sources", name="Fire Heat", desc="How much heat does fire provide? (this is normally 0.0..1.0)")
+	public float fireHeatValue = 1.0f;
+
+	@ConfigOption(catergory="Heat Sources", name="Lava Heat", desc="How much heat does lava provide? (this is normally 0.0..1.0)")
+	public float lavaHeatValue = 0.7f;
+
+
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
 	public boolean enableWailaIntegration = true;
 

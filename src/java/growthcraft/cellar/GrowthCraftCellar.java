@@ -243,9 +243,9 @@ public class GrowthCraftCellar
 
 	private void registerHeatSources()
 	{
-		CellarRegistry.instance().heatSource().addHeatSource(Blocks.fire, ItemKey.WILDCARD_VALUE, 1.0f);
-		CellarRegistry.instance().heatSource().addHeatSource(Blocks.lava, ItemKey.WILDCARD_VALUE, 0.5f);
-		CellarRegistry.instance().heatSource().addHeatSource(Blocks.flowing_lava, ItemKey.WILDCARD_VALUE, 0.5f);
+		CellarRegistry.instance().heatSource().addHeatSource(Blocks.fire, ItemKey.WILDCARD_VALUE, config.fireHeatValue);
+		CellarRegistry.instance().heatSource().addHeatSource(Blocks.lava, ItemKey.WILDCARD_VALUE, config.lavaHeatValue);
+		CellarRegistry.instance().heatSource().addHeatSource(Blocks.flowing_lava, ItemKey.WILDCARD_VALUE, config.lavaHeatValue);
 	}
 
 	private void registerOres()
