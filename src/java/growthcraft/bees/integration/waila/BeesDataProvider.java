@@ -62,7 +62,7 @@ public class BeesDataProvider implements IWailaDataProvider
 			final TileEntityBeeBox beeBox = (TileEntityBeeBox)te;
 			tag.setBoolean("has_bonus", beeBox.hasBonus());
 			tag.setInteger("honeycomb_count", beeBox.countCombs());
-			tag.setInteger("honeycomb_max", beeBox.getSizeInventory());
+			tag.setInteger("honeycomb_max", beeBox.getHoneyCombMax());
 			tag.setInteger("honey_count", beeBox.countHoney());
 			tag.setTag("bee", NBTHelper.writeItemStackToNBT(beeBox.getBeeStack()));
 		}

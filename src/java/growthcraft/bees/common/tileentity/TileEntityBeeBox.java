@@ -123,6 +123,11 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 		return countCombsOfType(HoneyCombExpect.ANY);
 	}
 
+	public int getHoneyCombMax()
+	{
+		return honeyCombSlotIds.length;
+	}
+
 	public int countBees()
 	{
 		final ItemStack stack = getStackInSlot(ContainerBeeBox.SlotId.BEE);
