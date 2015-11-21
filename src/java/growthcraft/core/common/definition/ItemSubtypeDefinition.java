@@ -25,9 +25,6 @@ package growthcraft.core.common.definition;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.core.common.definition.IItemStackFactory;
-import growthcraft.core.common.definition.ISubItemStackFactory;
-
 import net.minecraft.item.ItemStack;
 
 public class ItemSubtypeDefinition implements IItemStackFactory
@@ -41,11 +38,15 @@ public class ItemSubtypeDefinition implements IItemStackFactory
 		this.meta = met;
 	}
 
+	@Override
+	@Nonnull
 	public ItemStack asStack(int size)
 	{
 		return itemFactory.asStack(size, meta);
 	}
 
+	@Override
+	@Nonnull
 	public ItemStack asStack()
 	{
 		return asStack(1);
