@@ -39,15 +39,15 @@ import net.minecraft.block.Block;
  */
 public class UserHeatSources extends JsonConfigDef
 {
-	public static class HeatSourceEntry
+	public static class UserHeatSourceEntry
 	{
 		public String mod_id;
 		public String block_name;
 		public Map<Integer, Float> states;
 
-		public HeatSourceEntry() {}
+		public UserHeatSourceEntry() {}
 
-		public HeatSourceEntry(String m, String b, Map<Integer, Float> s)
+		public UserHeatSourceEntry(String m, String b, Map<Integer, Float> s)
 		{
 			this.mod_id = m;
 			this.block_name = b;
@@ -62,27 +62,27 @@ public class UserHeatSources extends JsonConfigDef
 		}
 	}
 
-	private static final HeatSourceEntry[] DEFAULT_ENTRIES = {
-		new HeatSourceEntry("minecraft", "fire", HeatSourceEntry.wildcardHeat(1.0f)),
-		new HeatSourceEntry("minecraft", "flowing_lava", HeatSourceEntry.wildcardHeat(0.7f)),
-		new HeatSourceEntry("minecraft", "lava", HeatSourceEntry.wildcardHeat(0.7f))
+	private static final UserHeatSourceEntry[] DEFAULT_ENTRIES = {
+		new UserHeatSourceEntry("minecraft", "fire", UserHeatSourceEntry.wildcardHeat(1.0f)),
+		new UserHeatSourceEntry("minecraft", "flowing_lava", UserHeatSourceEntry.wildcardHeat(0.7f)),
+		new UserHeatSourceEntry("minecraft", "lava", UserHeatSourceEntry.wildcardHeat(0.7f))
 	};
 
-	private HeatSourceEntry[] entries;
+	private UserHeatSourceEntry[] entries;
 
 	@Override
 	protected String getDefault()
 	{
-		return gson.toJson(DEFAULT_ENTRIES, HeatSourceEntry[].class);
+		return gson.toJson(DEFAULT_ENTRIES, UserHeatSourceEntry[].class);
 	}
 
 	@Override
 	protected void loadFromBuffer(BufferedReader buff)
 	{
-		entries = gson.fromJson(buff, HeatSourceEntry[].class);
+		entries = gson.fromJson(buff, UserHeatSourceEntry[].class);
 	}
 
-	private void addHeatSource(HeatSourceEntry heatsource)
+	private void addHeatSource(UserHeatSourceEntry heatsource)
 	{
 		final Block block = GameRegistry.findBlock(heatsource.mod_id, heatsource.block_name);
 		if (block != null)
@@ -113,7 +113,7 @@ public class UserHeatSources extends JsonConfigDef
 		if (entries != null)
 		{
 			logger.info("Registering %d heat sources.", entries.length);
-			for (HeatSourceEntry heatsource : entries) addHeatSource(heatsource);
+			for (UserHeatSourceEntry heatsource : entries) addHeatSource(heatsource);
 		}
 	}
 }
