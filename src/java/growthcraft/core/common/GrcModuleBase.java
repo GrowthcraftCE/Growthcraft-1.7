@@ -1,28 +1,29 @@
 package growthcraft.core.common;
 
-public class GrcModuleBase implements IModule
+import javax.annotation.Nonnull;
+
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.NullLogger;
+
+public class GrcModuleBase implements IModule, ILoggable
 {
-	@Override
-	public void preInit()
-	{
+	protected ILogger logger = NullLogger.INSTANCE;
 
+	public void setLogger(@Nonnull ILogger l)
+	{
+		this.logger = l;
 	}
 
 	@Override
-	public void init()
-	{
-
-	}
+	public void preInit() {}
 
 	@Override
-	public void register()
-	{
-
-	}
+	public void init() {}
 
 	@Override
-	public void postInit()
-	{
+	public void register() {}
 
-	}
+	@Override
+	public void postInit() {}
 }

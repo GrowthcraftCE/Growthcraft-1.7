@@ -99,7 +99,7 @@ public class GrowthCraftCellar
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
 	private GrcCellarConfig config = new GrcCellarConfig();
-	private CustomHeatSources customHeatSources = new CustomHeatSources(MOD_ID);
+	private CustomHeatSources customHeatSources = new CustomHeatSources();
 	private ModuleContainer modules = new ModuleContainer();
 
 	public static GrcCellarConfig getConfig()

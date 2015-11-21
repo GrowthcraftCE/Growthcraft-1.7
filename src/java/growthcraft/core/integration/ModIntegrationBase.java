@@ -23,18 +23,15 @@
  */
 package growthcraft.core.integration;
 
-import growthcraft.core.common.IModule;
+import growthcraft.core.common.GrcModuleBase;
 
 import cpw.mods.fml.common.Loader;
-
-import cpw.mods.fml.common.FMLLog;
-import org.apache.logging.log4j.Level;
 
 /**
  * Base class for integrating other mods with Growthcraft, this idea was
  * taken from AE2.
  */
-public abstract class ModIntegrationBase implements IModule
+public abstract class ModIntegrationBase extends GrcModuleBase
 {
 	public final String parentModID;
 	public final String modID;
@@ -44,16 +41,6 @@ public abstract class ModIntegrationBase implements IModule
 	{
 		this.parentModID = parentMod;
 		this.modID = integratingMod;
-	}
-
-	protected void debug(String str, Object... objs)
-	{
-		FMLLog.log(parentModID, Level.INFO, str, objs);
-	}
-
-	protected void warn(String str, Object... objs)
-	{
-		FMLLog.log(parentModID, Level.WARN, str, objs);
 	}
 
 	public boolean modIsLoaded()
@@ -72,7 +59,7 @@ public abstract class ModIntegrationBase implements IModule
 		this.modLoaded = Loader.isModLoaded(modID);
 		if (modIsLoaded())
 		{
-			debug("preInit " + modID);
+			logger.debug("preInit " + modID);
 			doPreInit();
 		}
 	}
@@ -87,7 +74,7 @@ public abstract class ModIntegrationBase implements IModule
 	{
 		if (modIsLoaded())
 		{
-			debug("init " + modID);
+			logger.debug("init " + modID);
 			doInit();
 		}
 	}
@@ -105,7 +92,7 @@ public abstract class ModIntegrationBase implements IModule
 	{
 		if (modIsLoaded())
 		{
-			debug("register " + modID);
+			logger.debug("register " + modID);
 			doRegister();
 		}
 	}
@@ -127,7 +114,7 @@ public abstract class ModIntegrationBase implements IModule
 	{
 		if (modIsLoaded())
 		{
-			debug("postInit " + modID);
+			logger.debug("postInit " + modID);
 			doPostInit();
 			doLateRegister();
 		}
@@ -149,20 +136,20 @@ public abstract class ModIntegrationBase implements IModule
 	{
 		if (modIsLoaded())
 		{
-			debug("Attemping to integrate with %s.", modID);
+			logger.debug("Attemping to integrate with %s.", modID);
 			try
 			{
 				integrate();
-				debug("Successfully integrated with %s.", modID);
+				logger.debug("Successfully integrated with %s.", modID);
 			}
 			catch (Exception e)
 			{
-				warn("%s integration failed.", modID);
+				logger.warn("%s integration failed.", modID);
 			}
 		}
 		else
 		{
-			debug("%s not found; No integration made.", modID);
+			logger.debug("%s not found; No integration made.", modID);
 		}
 	}
 }

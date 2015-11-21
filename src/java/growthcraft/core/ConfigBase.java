@@ -7,8 +7,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 
-import cpw.mods.fml.common.FMLLog;
-import org.apache.logging.log4j.Level;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.NullLogger;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -16,7 +17,7 @@ import net.minecraftforge.common.config.Configuration;
  * Extend this class when you need config for another module, see the other
  * modules for usage.
  */
-public abstract class ConfigBase
+public abstract class ConfigBase implements ILoggable
 {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
@@ -29,7 +30,13 @@ public abstract class ConfigBase
 
 	private static final String DEFAULT_STR = "; Default : ";
 
+	protected ILogger logger = NullLogger.INSTANCE;
 	protected Configuration config;
+
+	public void setLogger(ILogger l)
+	{
+		this.logger = l;
+	}
 
 	@SuppressWarnings("rawtypes")
 	protected void autoloadConfig()
@@ -69,15 +76,14 @@ public abstract class ConfigBase
 					}
 					else
 					{
-						FMLLog.log("Growthcraft", Level.ERROR, "Unhandled config option: type=" + typeClass + " option=" + opt.name());
+						logger.error("Unhandled config option: type=" + typeClass + " option=" + opt.name());
 					}
 
-					// Comment out this line when not debugging
-					System.out.println("ConfigBase<" + this + "> key=" + field.getName() + " value=" + field.get(this));
+					logger.debug("ConfigBase<%s> key=%s value=%s", this.toString(), field.getName(), field.get(this).toString());
 				}
 				catch (IllegalAccessException ex)
 				{
-					FMLLog.log("Growthcraft", Level.ERROR, ex.toString());
+					logger.error(ex.toString());
 				}
 			}
 		}
@@ -102,7 +108,7 @@ public abstract class ConfigBase
 	 */
 	public void load(File configDir, String filename)
 	{
-		config = new Configuration(new File(configDir, filename));
+		this.config = new Configuration(new File(configDir, filename));
 		try
 		{
 			config.load();
@@ -114,7 +120,7 @@ public abstract class ConfigBase
 			if (config.hasChanged())
 			{
 				config.save();
-				FMLLog.log("Growthcraft", Level.WARN, "Config file " + filename + " has changed, be sure to check it.");
+				logger.warn("Config file %s has changed, be sure for check for updates.", filename);
 			}
 		}
 	}

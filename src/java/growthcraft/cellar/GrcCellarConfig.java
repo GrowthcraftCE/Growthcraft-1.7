@@ -42,7 +42,7 @@ public class GrcCellarConfig extends ConfigBase
 	public int fermentJarMaxCap = 1000;
 
 
-	@ConfigOption(catergory="Brew Kettle", name="Drop items in Brew Kettle", desc="Enable to have brew kettles pick up dropped items")
+	@ConfigOption(catergory="Brew Kettle", name="Drop items in Brew Kettle", desc="Enable to drop items in brew kettles.")
 	public boolean dropItemsInBrewKettle;
 
 	@ConfigOption(catergory="Brew Kettle", name="Fluid Capacity", desc="How much fluid can a Brew Kettle hold? (in mB (milli buckets))")

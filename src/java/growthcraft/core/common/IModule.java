@@ -3,11 +3,11 @@ package growthcraft.core.common;
 public interface IModule
 {
 	// Pre-Initialization, create blocks and items here
-	public void preInit();
+	void preInit();
 	// Called right after Pre-Initialization for basic registrations
-	public void register();
+	void register();
 	// Initialization, use this step to setup extra internal stuff
-	public void init();
+	void init();
 	// Post-Initialization, use this step to integrate with other mods
-	public void postInit();
+	void postInit();
 }

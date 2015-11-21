@@ -1,9 +1,7 @@
 package growthcraft.api.cellar.pressing;
 
-import java.util.Arrays;
-import java.util.Map;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.util.FluidUtils;

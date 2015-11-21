@@ -3,7 +3,6 @@ package growthcraft.api.cellar.fermenting;
 import growthcraft.api.core.util.ItemKey;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +74,7 @@ public class FermentingRegistry
 	{
 		if (yeast == null || biome == null) return false;
 
-		List<BiomeDictionary.Type> yeastBiomeList = getBiomeTypesForYeast(yeast);
+		final List<BiomeDictionary.Type> yeastBiomeList = getBiomeTypesForYeast(yeast);
 		if (yeastBiomeList == null) return false;
 
 		for (BiomeDictionary.Type t : BiomeDictionary.getTypesForBiome(biome))

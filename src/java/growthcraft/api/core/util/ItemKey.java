@@ -1,6 +1,5 @@
 package growthcraft.api.core.util;
 
-import java.lang.IllegalArgumentException;
 import javax.annotation.Nonnull;
 
 import net.minecraft.block.Block;

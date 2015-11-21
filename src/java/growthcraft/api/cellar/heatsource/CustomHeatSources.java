@@ -1,30 +1,43 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.api.cellar.heatsource;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gson.Gson;
-
-import org.apache.logging.log4j.Level;
-
 import growthcraft.api.core.util.ItemKey;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.util.JsonConfigDef;
 
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraftforge.common.config.Configuration.UnicodeInputStreamReader;
 
 /**
  * Allows you to load Custom heat source defintions from a JSON file
  */
-public class CustomHeatSources
+public class CustomHeatSources extends JsonConfigDef
 {
 	public static class HeatSourceEntry
 	{
@@ -55,14 +68,18 @@ public class CustomHeatSources
 		new HeatSourceEntry("minecraft", "lava", HeatSourceEntry.wildcardHeat(0.7f))
 	};
 
-	private final String DEFAULT_ENCODING = "UTF-8";
-	private final Gson gson = new Gson();
-	private final String parentModID;
 	private HeatSourceEntry[] entries;
 
-	public CustomHeatSources(String parentMod)
+	@Override
+	protected String getDefault()
 	{
-		this.parentModID = parentMod;
+		return gson.toJson(DEFAULT_ENTRIES, HeatSourceEntry[].class);
+	}
+
+	@Override
+	protected void loadFromBuffer(BufferedReader buff)
+	{
+		entries = gson.fromJson(buff, HeatSourceEntry[].class);
 	}
 
 	private void addHeatSource(HeatSourceEntry heatsource)
@@ -72,11 +89,7 @@ public class CustomHeatSources
 		{
 			if (heatsource.states == null || heatsource.states.size() == 0)
 			{
-				FMLLog.log(
-					parentModID,
-					Level.WARN,
-					"Block contains invalid states, we will assume a wildcard, but you should probably set this. mod_id=%s block=%s", heatsource.mod_id, heatsource.block_name
-				);
+				logger.warn("Block contains invalid states, we will assume a wildcard, but you should probably set this. mod_id=%s block=%s", heatsource.mod_id, heatsource.block_name);
 				CellarRegistry.instance().heatSource().addHeatSource(block, ItemKey.WILDCARD_VALUE);
 			}
 			else
@@ -91,82 +104,7 @@ public class CustomHeatSources
 		}
 		else
 		{
-			FMLLog.log(
-				parentModID,
-				Level.ERROR,
-				"Block could not be found, and will not be added as heat source. mod_id=%s block=%s", heatsource.mod_id, heatsource.block_name
-			);
-		}
-	}
-
-	private void loadFromBuffer(BufferedReader buff)
-	{
-		entries = gson.fromJson(buff, HeatSourceEntry[].class);
-	}
-
-	public void saveDefault(File file)
-	{
-		try
-		{
-			if (file.getParentFile() != null)
-			{
-				file.getParentFile().mkdirs();
-			}
-
-			if (!file.createNewFile())
-				return;
-
-			if (file.canWrite())
-			{
-				try (FileWriter writer = new FileWriter(file))
-				{
-					final String result = gson.toJson(DEFAULT_ENTRIES, HeatSourceEntry[].class);
-					writer.write(result);
-				}
-			}
-		}
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-	}
-
-	public void load(File dir, String filename)
-	{
-		final File file = new File(dir, filename);
-		BufferedReader buffer = null;
-		UnicodeInputStreamReader input = null;
-		try
-		{
-			if (!file.exists()) saveDefault(file);
-
-			if (file.canRead())
-			{
-				input = new UnicodeInputStreamReader(new FileInputStream(file), DEFAULT_ENCODING);
-				buffer = new BufferedReader(input);
-				loadFromBuffer(buffer);
-			}
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			if (buffer != null)
-			{
-				try
-				{
-					buffer.close();
-				} catch (IOException e){}
-			}
-			if (input != null)
-			{
-				try
-				{
-					input.close();
-				} catch (IOException e){}
-			}
+			logger.error("Block could not be found, and will not be added as heat source. mod_id=%s block=%s", heatsource.mod_id, heatsource.block_name);
 		}
 	}
 
@@ -174,7 +112,7 @@ public class CustomHeatSources
 	{
 		if (entries != null)
 		{
-			FMLLog.log(parentModID, Level.INFO, "Registering %d heat sources.", entries.length);
+			logger.info("Registering %d heat sources.", entries.length);
 			for (HeatSourceEntry heatsource : entries) addHeatSource(heatsource);
 		}
 	}
