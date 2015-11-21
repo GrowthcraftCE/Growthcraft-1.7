@@ -11,6 +11,7 @@ fluid.grc.riceSake2=Sake
 fluid.grc.riceSake3=Sake
 fluid.grc.riceSake4=Divine Sake
 fluid.grc.riceSake5=Sake
+fluid.grc.riceSake6=Sake
 
 item.bucket.fluid.grc.riceSake.name=Sake Bucket
 item.bucket.fluid.grc.riceSake0.name=Sake Bucket
@@ -19,6 +20,7 @@ item.bucket.fluid.grc.riceSake2.name=Sake Bucket
 item.bucket.fluid.grc.riceSake3.name=Sake Bucket
 item.bucket.fluid.grc.riceSake4.name=Divine Sake Bucket
 item.bucket.fluid.grc.riceSake5.name=Sake Bucket
+item.bucket.fluid.grc.riceSake6.name=Sake Bucket
 
 tile.fluid.grc.riceSake.name=Sake
 tile.fluid.grc.riceSake0.name=Sake
@@ -27,10 +29,12 @@ tile.fluid.grc.riceSake2.name=Sake
 tile.fluid.grc.riceSake3.name=Sake
 tile.fluid.grc.riceSake4.name=Divine Sake
 tile.fluid.grc.riceSake5.name=Sake
+tile.fluid.grc.riceSake6.name=Sake
 
 fluid.grc.riceSake0.modifier=Young
 fluid.grc.riceSake1.modifier=Fermented
 fluid.grc.riceSake2.modifier=Fermented, Potent
 fluid.grc.riceSake3.modifier=Fermented, Extended
-fluid.grc.riceSake4.modifier=Divine
-fluid.grc.riceSake5.modifier=Poisoned
+fluid.grc.riceSake4.modifier=Fermented, Hyper-Extended
+fluid.grc.riceSake5.modifier=Fermented, Intoxicated
+fluid.grc.riceSake6.modifier=Poisoned
