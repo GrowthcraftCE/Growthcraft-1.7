@@ -68,16 +68,19 @@ public class GrcContainer extends Container
 		return false;
 	}
 
-	public boolean mergeWithPlayer(ItemStack stack)
+	public boolean mergeWithSlotsOfKind(ItemStack stack, Class<? extends Slot> slot)
 	{
+		if (stack == null) return false;
+		if (stack.stackSize <= 0) return false;
+
 		int start = -1;
 		int end = -1;
 
 		for (Object sub : inventorySlots)
 		{
-			if (sub instanceof SlotPlayer)
+			if (slot.isInstance(sub))
 			{
-				final SlotPlayer subSlot = (SlotPlayer)sub;
+				final Slot subSlot = (Slot)sub;
 				if (start < 0)
 				{
 					start = subSlot.slotNumber;
@@ -90,19 +93,24 @@ public class GrcContainer extends Container
 		return mergeItemStack(stack, start, end + 1, false);
 	}
 
+	public boolean mergeWithPlayer(ItemStack stack)
+	{
+		return mergeWithSlotsOfKind(stack, SlotPlayer.class);
+	}
+
+	public boolean mergeWithPlayerHotbar(ItemStack stack)
+	{
+		return mergeWithSlotsOfKind(stack, SlotPlayerHotbar.class);
+	}
+
+	public boolean mergeWithPlayerBackpack(ItemStack stack)
+	{
+		return mergeWithSlotsOfKind(stack, SlotPlayerBackpack.class);
+	}
+
 	public boolean mergeWithInput(ItemStack stack)
 	{
-		boolean wasMerged = false;
-		for (Object sub : inventorySlots)
-		{
-			if (stack.stackSize <= 0) break;
-			if (sub instanceof SlotInput)
-			{
-				final SlotInput subSlot = (SlotInput)sub;
-				wasMerged |= mergeWithSlot(subSlot, stack);
-			}
-		}
-		return wasMerged;
+		return mergeWithSlotsOfKind(stack, SlotInput.class);
 	}
 
 	@Override
@@ -126,6 +134,17 @@ public class GrcContainer extends Container
 			if (s instanceof SlotPlayer)
 			{
 				wasMerged |= mergeWithInput(stack);
+				if (!wasMerged)
+				{
+					if (s instanceof SlotPlayerHotbar)
+					{
+						wasMerged |= mergeWithPlayerBackpack(stack);
+					}
+					else if (s instanceof SlotPlayerBackpack)
+					{
+						wasMerged |= mergeWithPlayerHotbar(stack);
+					}
+				}
 			}
 			else
 			{
