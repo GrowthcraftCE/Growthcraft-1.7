@@ -6,6 +6,9 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.cellar.util.FluidUtils;
 
 import net.minecraftforge.fluids.Fluid;
@@ -76,11 +79,17 @@ import net.minecraftforge.fluids.FluidStack;
  * 		FluidContainerRegistry.registerFluidContainer(fluidstack, new ItemStack(appleCider_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
  * }
  */
-public class BoozeRegistry
+public class BoozeRegistry implements ILoggable
 {
+	private ILogger logger = NullLogger.INSTANCE;
 	private Map<String, IModifierFunction> modifiers = new HashMap<String, IModifierFunction>();
 	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
 	private Map<Fluid, Fluid> altBoozeMap = new HashMap<Fluid, Fluid>();
+
+	public void setLogger(ILogger l)
+	{
+		this.logger = l;
+	}
 
 	public void setModifierFunction(String name, IModifierFunction func)
 	{
@@ -157,6 +166,7 @@ public class BoozeRegistry
 
 		if (!isFluidBooze(fluid))
 		{
+			logger.info("Registering booze %s", fluid.getName());
 			boozeMap.put(fluid, new BoozeEntry(fluid));
 		}
 		else
@@ -183,6 +193,7 @@ public class BoozeRegistry
 		{
 			if (isFluidBooze(fluid))
 			{
+				logger.info("Registering alt-booze %s as %s", altfluid, fluid);
 				altBoozeMap.put(altfluid, fluid);
 			}
 			else
@@ -203,14 +214,27 @@ public class BoozeRegistry
 		{
 			addBoozeAlternative(altfluid, FluidRegistry.getFluid(fluid));
 		}
+		else
+		{
+			logger.error("Fluid %s does not exist, cannot add alternative booze!", fluid);
+		}
 	}
 
 	public void addBoozeAlternative(String altfluid, String fluid)
 	{
-		if (FluidUtils.doesFluidExist(altfluid) && FluidUtils.doesFluidExist(fluid))
+		if (!FluidUtils.doesFluidExist(altfluid))
 		{
-			addBoozeAlternative(FluidRegistry.getFluid(altfluid), FluidRegistry.getFluid(fluid));
+			logger.error("Fluid %s does not exist, cannot add alternative booze!", altfluid);
+			return;
 		}
+
+		if (!FluidUtils.doesFluidExist(fluid))
+		{
+			logger.error("Fluid %s does not exist, cannot add alternative booze!", fluid);
+			return;
+		}
+
+		addBoozeAlternative(FluidRegistry.getFluid(altfluid), FluidRegistry.getFluid(fluid));
 	}
 
 	// BOOZE /////////////////////////////////////////////////////////
