@@ -1,18 +1,10 @@
 package growthcraft.hops;
 
 import growthcraft.api.cellar.booze.Booze;
-import growthcraft.api.cellar.booze.BoozeEffect;
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
-import growthcraft.cellar.common.definition.BlockBoozeDefinition;
-import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
-import growthcraft.cellar.common.item.ItemBoozeBottle;
-import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.ModuleContainer;
@@ -25,6 +17,7 @@ import growthcraft.hops.common.item.ItemHops;
 import growthcraft.hops.common.item.ItemHopSeeds;
 import growthcraft.hops.common.village.ComponentVillageHopVineyard;
 import growthcraft.hops.common.village.VillageHandlerHops;
+import growthcraft.hops.init.GrcHopsBooze;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -37,14 +30,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.init.Items;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(
@@ -63,15 +52,10 @@ public class GrowthCraftHops
 	public static GrowthCraftHops instance;
 
 	public static BlockTypeDefinition<BlockHops> hopVine;
-	public static BlockBoozeDefinition[] hopAleFluids;
 
 	public static ItemDefinition hops;
 	public static ItemDefinition hopSeeds;
-	public static ItemDefinition hopAle;
-	public static ItemDefinition hopAleBucket_deprecated;
-	public static ItemBucketBoozeDefinition[] hopAleBuckets;
-
-	public static Fluid[] hopAleBooze;
+	public static GrcHopsBooze booze = new GrcHopsBooze();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcHopsConfig config = new GrcHopsConfig();
@@ -88,8 +72,8 @@ public class GrowthCraftHops
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
 
+		modules.add(booze);
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.hops.integration.ThaumcraftModule());
-
 		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================
@@ -99,14 +83,6 @@ public class GrowthCraftHops
 
 		hops     = new ItemDefinition(new ItemHops());
 		hopSeeds = new ItemDefinition(new ItemHopSeeds());
-
-		hopAleBooze = new Booze[5];
-		hopAleFluids = new BlockBoozeDefinition[hopAleBooze.length];
-		hopAleBuckets = new ItemBucketBoozeDefinition[hopAleBooze.length];
-		BoozeRegistryHelper.initializeBooze(hopAleBooze, hopAleFluids, hopAleBuckets, "grc.hopAle", config.hopAleColor);
-
-		hopAle        = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, hopAleBooze));
-		hopAleBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(hopAleBooze).setColor(config.hopAleColor));
 
 		modules.preInit();
 		register();
@@ -121,19 +97,6 @@ public class GrowthCraftHops
 
 		GameRegistry.registerItem(hops.getItem(), "grc.hops");
 		GameRegistry.registerItem(hopSeeds.getItem(), "grc.hopSeeds");
-		GameRegistry.registerItem(hopAle.getItem(), "grc.hopAle");
-		GameRegistry.registerItem(hopAleBucket_deprecated.getItem(), "grc.hopAle_bucket");
-
-		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle, "grc.hopAle", hopAleBucket_deprecated);
-		BoozeRegistryHelper.registerDefaultFermentation(hopAleBooze);
-		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(hopAleBooze))
-		{
-			effect.setTipsy(0.70F, 900);
-			effect.addPotionEntry(Potion.digSpeed.id, 3600, 0);
-		}
-
-		CellarRegistry.instance().brewing().addBrewing(FluidRegistry.WATER, Items.wheat, hopAleBooze[4], config.hopAleBrewTime, config.hopAleBrewYield, Residue.newDefault(0.3F));
-		CellarRegistry.instance().brewing().addBrewing(hopAleBooze[4], hops.getItem(), hopAleBooze[0], config.hopAleHoppedBrewTime, config.hopAleHoppedBrewYield, Residue.newDefault(0.0F));
 
 		CoreRegistry.instance().addVineDrop(hops.asStack(2), config.hopsVineDropRarity);
 
@@ -182,9 +145,9 @@ public class GrowthCraftHops
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < hopAleBooze.length; ++i)
+			for (Booze bz : booze.hopAleBooze)
 			{
-				hopAleBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				bz.setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}
