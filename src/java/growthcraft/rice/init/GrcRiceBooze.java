@@ -22,6 +22,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class GrcRiceBooze extends GrcModuleBase
@@ -107,12 +108,12 @@ public class GrcRiceBooze extends GrcModuleBase
 			.clearPotionEntries()
 			.addPotionEntry(Potion.poison.id, 3600, 0);
 
+		final int yieldAmount = GrowthCraftRice.getConfig().riceSakeBrewingYield;
 		CellarRegistry.instance().brewing().addBrewing(
-			FluidRegistry.WATER,
-			GrowthCraftRice.rice.getItem(),
-			riceSakeBooze[0],
+			new FluidStack(FluidRegistry.WATER, yieldAmount),
+			GrowthCraftRice.rice.asStack(),
+			new FluidStack(riceSakeBooze[0], yieldAmount),
 			GrowthCraftRice.getConfig().riceSakeBrewingTime,
-			GrowthCraftRice.getConfig().riceSakeBrewingYield,
 			Residue.newDefault(0.2F)
 		);
 	}
