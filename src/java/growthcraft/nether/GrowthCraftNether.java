@@ -60,6 +60,8 @@ public class GrowthCraftNether
 		modules.add(items);
 		modules.add(booze);
 
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.nether.integration.ThaumcraftModule());
+
 		if (config.debugEnabled) modules.setLogger(logger);
 
 		modules.freeze();
