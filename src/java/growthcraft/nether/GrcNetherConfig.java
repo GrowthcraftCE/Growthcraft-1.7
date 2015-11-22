@@ -36,6 +36,15 @@ public class GrcNetherConfig extends ConfigBase
 	@ConfigOption(catergory="Booze/Malice Cider", name="Color", desc="What color is Malice Cider? (use a RGB24 integer (that is 8 bits per channel, 3 channels))")
 	public int maliceCiderColor = 0xA99F6E;
 
+	@ConfigOption(catergory="Booze/Amrita", name="Color", desc="What color is Amrita? (use a RGB24 integer (that is 8 bits per channel, 3 channels))")
+	public int amritaColor = 0xFF4800;
+
+	@ConfigOption(catergory="Booze/Gelid Booze", name="Color", desc="What color is Gelid Booze? (use a RGB24 integer (that is 8 bits per channel, 3 channels))")
+	public int gelidBoozeColor = 0x89E9F0;
+
+	@ConfigOption(catergory="Booze/Vile Slop", name="Color", desc="What color is Vile Slop? (use a RGB24 integer (that is 8 bits per channel, 3 channels))")
+	public int vileSlopColor = 0x3F2A14;
+
 	@ConfigOption(catergory="Booze/Fire Brandy", name="Brewing Time", desc="How long does it take to brew a Cinderrot?")
 	public int fireBrandyBrewTime = 20;
 

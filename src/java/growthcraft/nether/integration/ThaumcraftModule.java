@@ -66,12 +66,34 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftNether.blocks.netherSquash.asStack(), new AspectList().add(Aspect.SOUL, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftNether.blocks.netherSquashStem.asStack(), new AspectList().add(Aspect.SOUL, 1));
 
-		ThaumcraftBoozeHelper.registerAspectsForBottle(new AspectList().add(Aspect.FIRE, 1), GrowthCraftNether.booze.fireBrandy);
-		ThaumcraftBoozeHelper.registerAspectsForBuckets(new AspectList().add(Aspect.FIRE, 1), GrowthCraftNether.booze.fireBrandyBuckets);
-		ThaumcraftBoozeHelper.registerAspectsForFluidBlocks(new AspectList().add(Aspect.FIRE, 1), GrowthCraftNether.booze.fireBrandyFluids);
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftNether.booze.fireBrandy.asStack(1, 0), new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftNether.booze.fireBrandy.asStack(1, 1), new AspectList().add(Aspect.FIRE, 1));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftNether.booze.fireBrandy.asStack(1, 2), new AspectList().add(Aspect.FIRE, 2));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftNether.booze.fireBrandy.asStack(1, 3), new AspectList().add(Aspect.FIRE, 1));
 
-		ThaumcraftBoozeHelper.registerAspectsForBottle(new AspectList().add(Aspect.SOUL, 1), GrowthCraftNether.booze.maliceCider);
-		ThaumcraftBoozeHelper.registerAspectsForBuckets(new AspectList().add(Aspect.SOUL, 1), GrowthCraftNether.booze.maliceCiderBuckets);
-		ThaumcraftBoozeHelper.registerAspectsForFluidBlocks(new AspectList().add(Aspect.SOUL, 1), GrowthCraftNether.booze.maliceCiderFluids);
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftNether.booze.fireBrandyBuckets[0], new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftNether.booze.fireBrandyBuckets[1], new AspectList().add(Aspect.FIRE, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftNether.booze.fireBrandyBuckets[2], new AspectList().add(Aspect.FIRE, 6));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftNether.booze.fireBrandyBuckets[3], new AspectList().add(Aspect.FIRE, 3));
+
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftNether.booze.fireBrandyFluids[0], new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftNether.booze.fireBrandyFluids[1], new AspectList().add(Aspect.FIRE, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftNether.booze.fireBrandyFluids[2], new AspectList().add(Aspect.FIRE, 6));
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftNether.booze.fireBrandyFluids[3], new AspectList().add(Aspect.FIRE, 3));
+
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftNether.booze.maliceCider.asStack(1, 0), new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftNether.booze.maliceCider.asStack(1, 1), new AspectList().add(Aspect.SOUL, 1));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftNether.booze.maliceCider.asStack(1, 2), new AspectList().add(Aspect.SOUL, 2));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftNether.booze.maliceCider.asStack(1, 3), new AspectList().add(Aspect.SOUL, 1));
+
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftNether.booze.maliceCiderBuckets[0], new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftNether.booze.maliceCiderBuckets[1], new AspectList().add(Aspect.SOUL, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftNether.booze.maliceCiderBuckets[2], new AspectList().add(Aspect.SOUL, 6));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftNether.booze.maliceCiderBuckets[3], new AspectList().add(Aspect.SOUL, 3));
+
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftNether.booze.maliceCiderFluids[0], new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftNether.booze.maliceCiderFluids[1], new AspectList().add(Aspect.SOUL, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftNether.booze.maliceCiderFluids[2], new AspectList().add(Aspect.SOUL, 6));
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftNether.booze.maliceCiderFluids[3], new AspectList().add(Aspect.SOUL, 3));
 	}
 }
