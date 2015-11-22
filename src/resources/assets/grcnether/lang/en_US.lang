@@ -53,34 +53,38 @@ tile.fluid.grcnether.fireBrandy1.name=Fire Brandy
 tile.fluid.grcnether.fireBrandy2.name=Fire Brandy
 tile.fluid.grcnether.fireBrandy3.name=Fire Brandy
 
-fluid.grcnether.fireBrandy0.modifier=Young
-fluid.grcnether.fireBrandy1.modifier=Fermented
-fluid.grcnether.fireBrandy2.modifier=Fermented, Potent
-fluid.grcnether.fireBrandy3.modifier=Fermented, Extended
-
 /// Malice Cider
 fluid.grcnether.maliceCider=Malice Cider
 fluid.grcnether.maliceCider0=Malice Cider
 fluid.grcnether.maliceCider1=Malice Cider
 fluid.grcnether.maliceCider2=Malice Cider
 fluid.grcnether.maliceCider3=Malice Cider
+fluid.grcnether.maliceCider4=Amrita
+fluid.grcnether.maliceCider5=Malice Cider
+fluid.grcnether.maliceCider6=Gelid Booze
+fluid.grcnether.maliceCider7=Vile Slop
 
 item.bucket.fluid.grcnether.maliceCider.name=Malice Cider Bucket
 item.bucket.fluid.grcnether.maliceCider0.name=Malice Cider Bucket
 item.bucket.fluid.grcnether.maliceCider1.name=Malice Cider Bucket
 item.bucket.fluid.grcnether.maliceCider2.name=Malice Cider Bucket
 item.bucket.fluid.grcnether.maliceCider3.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider4.name=Amrita Bucket
+item.bucket.fluid.grcnether.maliceCider5.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider6.name=Gelid Booze Bucket
+item.bucket.fluid.grcnether.maliceCider7.name=Vile Slop Bucket
 
 tile.fluid.grcnether.maliceCider.name=Malice Cider
 tile.fluid.grcnether.maliceCider0.name=Malice Cider
 tile.fluid.grcnether.maliceCider1.name=Malice Cider
 tile.fluid.grcnether.maliceCider2.name=Malice Cider
 tile.fluid.grcnether.maliceCider3.name=Malice Cider
+tile.fluid.grcnether.maliceCider4.name=Amrita
+tile.fluid.grcnether.maliceCider5.name=Malice Cider
+tile.fluid.grcnether.maliceCider6.name=Gelid Booze
+tile.fluid.grcnether.maliceCider7.name=Vile Slop
 
-fluid.grcnether.maliceCider0.modifier=Young
-fluid.grcnether.maliceCider1.modifier=Fermented
-fluid.grcnether.maliceCider2.modifier=Fermented, Potent
-fluid.grcnether.maliceCider3.modifier=Fermented, Extended
+fluid.grcnether.maliceCider7.modifier=Vile
 
 // Death
 death.attack.muetercapFood=%s injested a Muertecap
