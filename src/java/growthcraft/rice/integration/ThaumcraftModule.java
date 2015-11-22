@@ -24,6 +24,7 @@
 package growthcraft.rice.integration;
 
 import growthcraft.rice.GrowthCraftRice;
+import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 
 import thaumcraft.api.ThaumcraftApi;
@@ -47,19 +48,19 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftRice.rice.asStack(), new AspectList().add(Aspect.CROP, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceBall.asStack(), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1).add(Aspect.HUNGER, 1));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSake.asStack(1, 0), new AspectList().add(Aspect.WATER, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSake.asStack(1, 1), new AspectList().add(Aspect.FLIGHT, 3).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSake.asStack(1, 2), new AspectList().add(Aspect.FLIGHT, 6).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSake.asStack(1, 3), new AspectList().add(Aspect.FLIGHT, 3).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftRice.booze.riceSake.asStack(1, 0), new AspectList());
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftRice.booze.riceSake.asStack(1, 1), new AspectList().add(Aspect.FLIGHT, 1));
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftRice.booze.riceSake.asStack(1, 2), new AspectList().add(Aspect.FLIGHT, 2));
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftRice.booze.riceSake.asStack(1, 3), new AspectList().add(Aspect.FLIGHT, 1));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSakeBuckets[0].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSakeBuckets[1].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSakeBuckets[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSakeBuckets[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftRice.booze.riceSakeBuckets[0], new AspectList());
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftRice.booze.riceSakeBuckets[1], new AspectList().add(Aspect.FLIGHT, 3));
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftRice.booze.riceSakeBuckets[2], new AspectList().add(Aspect.FLIGHT, 6));
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftRice.booze.riceSakeBuckets[3], new AspectList().add(Aspect.FLIGHT, 3));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSakeFluids[0].asStack(1), new AspectList().add(Aspect.WATER, 4));
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSakeFluids[1].asStack(1), new AspectList().add(Aspect.WATER, 2).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSakeFluids[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 3));
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.booze.riceSakeFluids[3].asStack(1), new AspectList().add(Aspect.WATER, 2).add(Aspect.POISON, 2));
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftRice.booze.riceSakeFluids[0], new AspectList());
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftRice.booze.riceSakeFluids[1], new AspectList().add(Aspect.FLIGHT, 3));
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftRice.booze.riceSakeFluids[2], new AspectList().add(Aspect.FLIGHT, 6));
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftRice.booze.riceSakeFluids[3], new AspectList().add(Aspect.FLIGHT, 3));
 	}
 }

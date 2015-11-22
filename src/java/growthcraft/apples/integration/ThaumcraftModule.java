@@ -24,6 +24,7 @@
 package growthcraft.apples.integration;
 
 import growthcraft.apples.GrowthCraftApples;
+import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 
 import thaumcraft.api.ThaumcraftApi;
@@ -48,19 +49,19 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleLeaves.asStack(), new AspectList().add(Aspect.PLANT, 1));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 0), new AspectList().add(Aspect.WATER, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 1), new AspectList().add(Aspect.HEAL, 3).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 2), new AspectList().add(Aspect.HEAL, 6).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCider.asStack(1, 3), new AspectList().add(Aspect.HEAL, 3).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 0), new AspectList());
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 1), new AspectList().add(Aspect.HEAL, 1));
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 2), new AspectList().add(Aspect.HEAL, 2));
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 3), new AspectList().add(Aspect.HEAL, 1));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[0].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[1].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderBuckets[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[0], new AspectList());
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[1], new AspectList().add(Aspect.HEAL, 3));
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[2], new AspectList().add(Aspect.HEAL, 6));
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[3], new AspectList().add(Aspect.HEAL, 3));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderFluids[0].asStack(1), new AspectList().add(Aspect.WATER, 4));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderFluids[1].asStack(1), new AspectList().add(Aspect.WATER, 2).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderFluids[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 3));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleCiderFluids[3].asStack(1), new AspectList().add(Aspect.WATER, 2).add(Aspect.POISON, 2));
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[0], new AspectList());
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[1], new AspectList().add(Aspect.HEAL, 3));
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[2], new AspectList().add(Aspect.HEAL, 6));
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[3], new AspectList().add(Aspect.HEAL, 3));
 	}
 }

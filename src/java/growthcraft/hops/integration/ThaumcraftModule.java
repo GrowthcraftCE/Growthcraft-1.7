@@ -24,6 +24,7 @@
 package growthcraft.hops.integration;
 
 import growthcraft.hops.GrowthCraftHops;
+import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 
 import thaumcraft.api.ThaumcraftApi;
@@ -47,22 +48,22 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hops.asStack(), new AspectList().add(Aspect.CROP, 1));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAle.asStack(1, 0), new AspectList().add(Aspect.WATER, 1).add(Aspect.PLANT, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAle.asStack(1, 1), new AspectList().add(Aspect.MOTION, 3).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAle.asStack(1, 2), new AspectList().add(Aspect.MOTION, 6).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAle.asStack(1, 3), new AspectList().add(Aspect.MOTION, 3).add(Aspect.WATER, 1).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAle.asStack(1, 4), new AspectList().add(Aspect.WATER, 1));
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 0), new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 1), new AspectList().add(Aspect.MOTION, 1));
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 2), new AspectList().add(Aspect.MOTION, 2));
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 3), new AspectList().add(Aspect.MOTION, 1));
+		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 4), new AspectList());
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAleBuckets[0].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.METAL, 8).add(Aspect.VOID, 1).add(Aspect.PLANT, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAleBuckets[1].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAleBuckets[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAleBuckets[3].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAleBuckets[4].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.METAL, 8).add(Aspect.VOID, 1));
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[0], new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[1], new AspectList().add(Aspect.MOTION, 3));
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[2], new AspectList().add(Aspect.MOTION, 6));
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[3], new AspectList().add(Aspect.MOTION, 3));
+		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[4], new AspectList());
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAleFluids[0].asStack(1), new AspectList().add(Aspect.WATER, 4));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAleFluids[1].asStack(1), new AspectList().add(Aspect.WATER, 2).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAleFluids[2].asStack(1), new AspectList().add(Aspect.WATER, 1).add(Aspect.POISON, 3));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAleFluids[3].asStack(1), new AspectList().add(Aspect.WATER, 2).add(Aspect.POISON, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.booze.hopAleFluids[4].asStack(1), new AspectList().add(Aspect.WATER, 4));
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[0], new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[1], new AspectList().add(Aspect.MOTION, 3));
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[2], new AspectList().add(Aspect.MOTION, 6));
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[3], new AspectList().add(Aspect.MOTION, 3));
+		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[4], new AspectList());
 	}
 }
