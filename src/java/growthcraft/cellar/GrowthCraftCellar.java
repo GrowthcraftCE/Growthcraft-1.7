@@ -39,7 +39,7 @@ import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.stats.GrcCellarAchievements;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.common.ModuleContainer;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
 

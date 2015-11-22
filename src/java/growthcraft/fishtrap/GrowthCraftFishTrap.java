@@ -5,7 +5,7 @@ import growthcraft.api.fishtrap.FishTrapRegistry;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.ModuleContainer;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.fishtrap.client.gui.GuiHandlerFishTrap;
 import growthcraft.fishtrap.common.block.BlockFishTrap;
 import growthcraft.fishtrap.common.CommonProxy;

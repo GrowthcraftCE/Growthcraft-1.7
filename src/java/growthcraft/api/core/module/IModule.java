@@ -1,4 +1,4 @@
-package growthcraft.core.common;
+package growthcraft.api.core.module;
 
 public interface IModule
 {

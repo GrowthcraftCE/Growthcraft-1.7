@@ -5,7 +5,7 @@ import growthcraft.api.core.log.ILogger;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.common.ModuleContainer;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;

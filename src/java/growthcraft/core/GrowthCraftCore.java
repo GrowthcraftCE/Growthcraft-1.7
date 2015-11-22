@@ -9,7 +9,7 @@ import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.item.ItemRope;
-import growthcraft.core.common.ModuleContainer;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
 import growthcraft.core.event.HarvestDropsEventCore;
 import growthcraft.core.event.PlayerInteractEventAmazingStick;
