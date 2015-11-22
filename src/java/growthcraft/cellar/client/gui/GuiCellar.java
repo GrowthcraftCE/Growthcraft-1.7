@@ -38,9 +38,7 @@ public class GuiCellar extends GrcGuiContainer
 
 		tooltip.add(fluid.getLocalizedName());
 
-		final FluidStack altFluid = CellarRegistry.instance().booze().maybeAlternateBoozeStack(fluid);
-
-		final String s = UnitFormatter.fluidModifier(altFluid.getFluid());
+		final String s = UnitFormatter.fluidModifier(fluid.getFluid());
 		if (s != null) tooltip.add(s);
 	}
 
@@ -49,10 +47,9 @@ public class GuiCellar extends GrcGuiContainer
 		if (fluid == null) return;
 		if (fluid.amount <= 0) return;
 
-		final FluidStack altFluid = CellarRegistry.instance().booze().maybeAlternateBoozeStack(fluid);
-		if (CellarRegistry.instance().fermenting().canFerment(altFluid))
+		if (CellarRegistry.instance().fermenting().canFerment(fluid))
 		{
-			addFluidTooltips(altFluid, tooltip);
+			addFluidTooltips(fluid, tooltip);
 		}
 		else
 		{

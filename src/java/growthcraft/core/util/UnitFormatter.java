@@ -66,9 +66,10 @@ public class UnitFormatter
 	@Nullable
 	public static String fluidModifier(Fluid fluid)
 	{
-		if (CellarRegistry.instance().booze().isFluidBooze(fluid))
+		final Fluid alt = CellarRegistry.instance().booze().maybeAlternateBooze(fluid);
+		if (CellarRegistry.instance().booze().isFluidBooze(alt))
 		{
-			return EnumChatFormatting.GREEN + StatCollector.translateToLocal(fluid.getUnlocalizedName() + ".modifier");
+			return EnumChatFormatting.GREEN + StatCollector.translateToLocal(alt.getUnlocalizedName() + ".modifier");
 		}
 		else
 		{
@@ -87,18 +88,19 @@ public class UnitFormatter
 	{
 		if (fluidStack != null)
 		{
-			final Fluid fluid = fluidStack.getFluid();
+			final FluidStack altStack = CellarRegistry.instance().booze().maybeAlternateBoozeStack(fluidStack);
+			final Fluid fluid = altStack.getFluid();
 			final String modifier = fluidModifier(fluid);
 
 			if (modifier != null)
 			{
 				return StatCollector.translateToLocalFormatted("grc.format.booze.name",
-					EnumChatFormatting.WHITE + fluidStack.getLocalizedName(), modifier);
+					EnumChatFormatting.WHITE + altStack.getLocalizedName(), modifier);
 			}
 			else
 			{
 				return StatCollector.translateToLocalFormatted("grc.format.fluid.name",
-						EnumChatFormatting.WHITE + fluidStack.getLocalizedName());
+						EnumChatFormatting.WHITE + altStack.getLocalizedName());
 			}
 		}
 		return null;

@@ -122,7 +122,7 @@ public class GrowthCraftCellar
 		if (config.debugEnabled)
 		{
 			logger.info("Pre-Initializing %s", MOD_ID);
-			CellarRegistry.instance().booze().setLogger(logger);
+			CellarRegistry.instance().setLogger(logger);
 			userBrewingRecipes.setLogger(logger);
 			userHeatSources.setLogger(logger);
 			userPressingRecipes.setLogger(logger);
