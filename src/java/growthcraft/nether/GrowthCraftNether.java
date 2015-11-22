@@ -1,6 +1,8 @@
 package growthcraft.nether;
 
-import growthcraft.core.common.ModuleContainer;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.nether.client.event.TextureStitchEventHandler;
 import growthcraft.nether.common.CommonProxy;
 import growthcraft.nether.creativetab.CreativeTabsGrowthcraftNether;
@@ -14,9 +16,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraftforge.common.MinecraftForge;
 
 @Mod(
@@ -40,6 +40,7 @@ public class GrowthCraftNether
 	public static GrcNetherItems items = new GrcNetherItems();
 	public static GrcNetherBooze booze = new GrcNetherBooze();
 
+	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcNetherConfig config = new GrcNetherConfig();
 	private ModuleContainer modules = new ModuleContainer();
 
@@ -58,6 +59,10 @@ public class GrowthCraftNether
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(booze);
+
+		if (config.debugEnabled) modules.setLogger(logger);
+
+		modules.freeze();
 
 		modules.preInit();
 		modules.register();
