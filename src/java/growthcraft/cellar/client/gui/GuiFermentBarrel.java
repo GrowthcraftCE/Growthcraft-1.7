@@ -80,59 +80,30 @@ public class GuiFermentBarrel extends GuiCellar
 		this.mc.getTextureManager().bindTexture(fermentBarrelResource);
 		final int w = (this.width - this.xSize) / 2;
 		final int h = (this.height - this.ySize) / 2;
-		this.drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize);
-		int i;
+		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
 
-		if (this.te.getTime() > 0)
+		if (te.getTime() > 0)
 		{
-			i = this.te.getFermentProgressScaled(29);
+			int i = te.getFermentProgressScaled(29);
 			if (i > 0)
 			{
-				this.drawTexturedModalRect(w + 49, h + 20 + 29 - i, 176, 29 - i, 12, i);
+				drawTexturedModalRect(w + 39, h + 21 + 29 - i, 188, 29 - i, 9, i);
 			}
 
-			final int k1 = (this.te.getTime() / 2) % 7;
-
-			switch (k1)
-			{
-				case 0:
-					i = 0;
-					break;
-				case 1:
-					i = 6;
-					break;
-				case 2:
-					i = 11;
-					break;
-				case 3:
-					i = 16;
-					break;
-				case 4:
-					i = 20;
-					break;
-				case 5:
-					i = 24;
-					break;
-				case 6:
-					i = 29;
-					break;
-				default:
-					i = 29;
-					break;
-			}
-
+			final int k1 = (te.getTime() / 2) % 60;
+			i = k1 * 29 / 60;
 			if (i > 0)
 			{
-				this.drawTexturedModalRect(w + 39, h + 21 + 29 - i, 188, 29 - i, 9, i);
+				drawTexturedModalRect(w + 49, h + 20 + 29 - i, 176, 29 - i, 12, i);
 			}
 		}
 
-		i = this.te.getFluidAmountScaled(52, 0);
+		final int i = te.getFluidAmountScaled(52, 0);
 		if (i > 0)
 		{
-			final FluidStack fluid = this.te.getFluidStack(0);
-			drawTank(w, h, 63, 17, 50, i, fluid, this.te.getFluidTank(0));
-			this.mc.getTextureManager().bindTexture(fermentBarrelResource);
+			final FluidStack fluid = te.getFluidStack(0);
+			drawTank(w, h, 63, 17, 50, i, fluid, te.getFluidTank(0));
+			mc.getTextureManager().bindTexture(fermentBarrelResource);
 
 			itemRender.zLevel = 100.0F;
 
@@ -142,15 +113,15 @@ public class GuiFermentBarrel extends GuiCellar
 			{
 				if (tags.contains("fermented"))
 				{
-					itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, new ItemStack(Items.nether_wart), w + 114, h + 16);
+					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.nether_wart), w + 114, h + 16);
 				}
 				if (tags.contains("extended"))
 				{
-					itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, new ItemStack(Items.redstone), w + 114, h + 32);
+					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.redstone), w + 114, h + 32);
 				}
 				if (tags.contains("potent"))
 				{
-					itemRender.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, new ItemStack(Items.glowstone_dust), w + 130, h + 32);
+					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.glowstone_dust), w + 130, h + 32);
 				}
 			}
 			itemRender.zLevel = 0.0F;
