@@ -142,13 +142,18 @@ public class BoozeRegistry implements ILoggable
 	public boolean isFluidBooze(Fluid f)
 	{
 		if (f == null) return false;
-		return getBoozeEntry(f) != null || isAlternateBooze(f);
+		return getBoozeEntry(f) != null;
 	}
 
 	public boolean isFluidBooze(FluidStack fluidStack)
 	{
 		if (fluidStack == null) return false;
 		return isFluidBooze(fluidStack.getFluid());
+	}
+
+	protected void registerBooze(@Nonnull Fluid fluid, @Nonnull BoozeEntry entry)
+	{
+		boozeMap.put(fluid, entry);
 	}
 
 	/**
@@ -167,7 +172,7 @@ public class BoozeRegistry implements ILoggable
 		if (!isFluidBooze(fluid))
 		{
 			logger.info("Registering booze %s", fluid.getName());
-			boozeMap.put(fluid, new BoozeEntry(fluid));
+			registerBooze(fluid, new BoozeEntry(fluid));
 		}
 		else
 		{
@@ -193,8 +198,9 @@ public class BoozeRegistry implements ILoggable
 		{
 			if (isFluidBooze(fluid))
 			{
-				logger.info("Registering alt-booze %s as %s", altfluid, fluid);
+				logger.info("Aliasing booze %s as %s", fluid.getName(), altfluid.getName());
 				altBoozeMap.put(altfluid, fluid);
+				registerBooze(altfluid, getBoozeEntry(fluid));
 			}
 			else
 			{

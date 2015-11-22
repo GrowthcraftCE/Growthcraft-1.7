@@ -1,12 +1,14 @@
 package growthcraft.api.cellar.fermenting;
 
-import growthcraft.api.core.util.ItemKey;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nonnull;
+
+import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.cellar.CellarRegistry;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -37,7 +39,7 @@ public class FermentingRegistry
 	@Nonnull
 	private Fluid boozeToKey(@Nonnull FluidStack booze)
 	{
-		return booze.getFluid();
+		return CellarRegistry.instance().booze().maybeAlternateBooze(booze.getFluid());
 	}
 
 	private ItemKey stackToKey(@Nonnull ItemStack stack)
@@ -109,6 +111,7 @@ public class FermentingRegistry
 
 	public boolean canFerment(FluidStack booze)
 	{
+		if (booze == null) return false;
 		return fermentTree.containsKey(boozeToKey(booze));
 	}
 }

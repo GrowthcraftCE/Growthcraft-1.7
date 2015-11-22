@@ -7,8 +7,16 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BrewingResult extends ProcessingResult
 {
-	public BrewingResult(FluidStack f, int t, Residue r)
+	private FluidStack inputFluid;
+
+	public BrewingResult(FluidStack i, FluidStack f, int t, Residue r)
 	{
 		super(f, t, r);
+		this.inputFluid = i;
+	}
+
+	public FluidStack getInputFluidStack()
+	{
+		return inputFluid;
 	}
 }

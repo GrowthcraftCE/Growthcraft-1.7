@@ -128,12 +128,7 @@ public class UserBrewingRecipes extends JsonConfigDef
 		}
 
 		logger.info("Adding brewing recipe %s", recipe);
-		CellarRegistry.instance().brewing().addBrewing(
-			inputFluidStack.getFluid(),
-			item.getItem(), item.getItemDamage(),
-			outputFluidStack.getFluid(), recipe.time, outputFluidStack.amount,
-			residue
-		);
+		CellarRegistry.instance().brewing().addBrewing(inputFluidStack, item, outputFluidStack, recipe.time, residue);
 	}
 
 	public void register()

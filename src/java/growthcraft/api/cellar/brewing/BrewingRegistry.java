@@ -9,15 +9,12 @@ import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
-import growthcraft.api.cellar.util.FluidUtils;
-import growthcraft.api.core.util.ItemKey;
 import growthcraft.api.core.util.HashKey;
+import growthcraft.api.core.util.ItemKey;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BrewingRegistry
@@ -35,6 +32,11 @@ public class BrewingRegistry
 			this.item = ite;
 			this.meta = met;
 			generateHashCode();
+		}
+
+		public BrewingKey(@Nonnull Fluid flu, @Nonnull ItemStack stack)
+		{
+			this(flu, stack.getItem(), stack.getItemDamage());
 		}
 
 		public void generateHashCode()
@@ -58,6 +60,11 @@ public class BrewingRegistry
 		return brewingIngredients;
 	}
 
+	public Fluid boozeToKey(Fluid f)
+	{
+		return CellarRegistry.instance().booze().maybeAlternateBooze(f);
+	}
+
 	/**
 	 * addBrewing()
 	 *
@@ -65,62 +72,22 @@ public class BrewingRegistry
 	 * CellarRegistry.instance().addBrewing(FluidRegistry.WATER, Item.wheat, hopAle_booze, 20, 37, 0.3F);
 	 *
 	 * @param sourceFluid - The source Fluid.
-	 * @param raw         - The source/input Item/BlockItemStack.
-	 * @param meta        - The metadata
+	 * @param raw         - The source/input ItemStack.
 	 * @param resultFluid - The resulting Fluid.
 	 * @param time        - The time needed for the item/block to be brewed.
-	 * @param amount      - The amount of booze the item/block produces.
 	 * @param residue     - The amount of residue this will produce.
 	 */
-	public void addBrewing(@Nonnull Fluid sourceFluid, @Nonnull Item raw, int meta, @Nonnull Fluid resultFluid, int time, int amount, Residue residue)
+	public void addBrewing(@Nonnull FluidStack sourceFluid, @Nonnull ItemStack raw, @Nonnull FluidStack resultFluid, int time, Residue residue)
 	{
-		this.brewingList.put(new BrewingKey(sourceFluid, raw, meta), new BrewingResult(new FluidStack(resultFluid, amount), time, residue));
-		this.brewingIngredients.add(new ItemKey(raw, meta));
-	}
-
-	public void addBrewing(Fluid sourceFluid, Block raw, int meta, Fluid resultFluid, int time, int amount, Residue residue)
-	{
-		addBrewing(sourceFluid, Item.getItemFromBlock(raw), meta, resultFluid, time, amount, residue);
-	}
-
-	public void addBrewing(String sourceFluid, Item raw, int meta, String resultFluid, int time, int amount, Residue residue)
-	{
-		if (FluidUtils.doesFluidExist(sourceFluid) && FluidUtils.doesFluidExist(resultFluid))
-		{
-			addBrewing(FluidRegistry.getFluid(sourceFluid), raw, meta, FluidRegistry.getFluid(resultFluid), time, amount, residue);
-		}
-	}
-
-	public void addBrewing(String sourceFluid, Block raw, int meta, String resultFluid, int time, int amount, Residue residue)
-	{
-		addBrewing(sourceFluid, Item.getItemFromBlock(raw), meta, resultFluid, time, amount, residue);
-	}
-
-	public void addBrewing(Fluid sourceFluid, Item raw, Fluid resultFluid, int time, int amount, Residue residue)
-	{
-		addBrewing(sourceFluid, raw, ItemKey.WILDCARD_VALUE, resultFluid, time, amount, residue);
-	}
-
-	public void addBrewing(Fluid sourceFluid, Block raw, Fluid resultFluid, int time, int amount, Residue residue)
-	{
-		addBrewing(sourceFluid, raw, ItemKey.WILDCARD_VALUE, resultFluid, time, amount, residue);
-	}
-
-	public void addBrewing(String sourceFluid, Item raw, String resultFluid, int time, int amount, Residue residue)
-	{
-		addBrewing(sourceFluid, raw, ItemKey.WILDCARD_VALUE, resultFluid, time, amount, residue);
-	}
-
-	public void addBrewing(String sourceFluid, Block raw, String resultFluid, int time, int amount, Residue residue)
-	{
-		addBrewing(sourceFluid, raw, ItemKey.WILDCARD_VALUE, resultFluid, time, amount, residue);
+		this.brewingList.put(new BrewingKey(sourceFluid.getFluid(), raw), new BrewingResult(sourceFluid, resultFluid, time, residue));
+		this.brewingIngredients.add(new ItemKey(raw));
 	}
 
 	public BrewingResult getBrewingResult(FluidStack fluidstack, ItemStack itemstack)
 	{
 		if (itemstack == null || fluidstack == null) return null;
 
-		final Fluid f = CellarRegistry.instance().booze().maybeAlternateBooze(fluidstack.getFluid());
+		final Fluid f = boozeToKey(fluidstack.getFluid());
 		final BrewingResult ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), itemstack.getItemDamage()));
 		if (ret != null) return ret;
 
@@ -129,7 +96,7 @@ public class BrewingRegistry
 
 	public boolean isBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
 	{
-		return this.getBrewingResult(fluidstack, itemstack) != null;
+		return getBrewingResult(fluidstack, itemstack) != null;
 	}
 
 	public boolean isItemBrewingIngredient(ItemStack itemstack)
@@ -142,7 +109,7 @@ public class BrewingRegistry
 
 	public FluidStack getBrewingFluidStack(FluidStack fluidstack, ItemStack itemstack)
 	{
-		final BrewingResult brewresults = this.getBrewingResult(fluidstack, itemstack);
+		final BrewingResult brewresults = getBrewingResult(fluidstack, itemstack);
 		if (brewresults == null) return null;
 
 		return brewresults.asFluidStack(1);
@@ -150,7 +117,7 @@ public class BrewingRegistry
 
 	public int getBrewingTime(FluidStack fluidstack, ItemStack itemstack)
 	{
-		final BrewingResult brewresults = this.getBrewingResult(fluidstack, itemstack);
+		final BrewingResult brewresults = getBrewingResult(fluidstack, itemstack);
 		if (brewresults == null) return 0;
 
 		return brewresults.time;
@@ -158,7 +125,7 @@ public class BrewingRegistry
 
 	public int getBrewingAmount(FluidStack fluidstack, ItemStack itemstack)
 	{
-		final BrewingResult brewresults = this.getBrewingResult(fluidstack, itemstack);
+		final BrewingResult brewresults = getBrewingResult(fluidstack, itemstack);
 		if (brewresults == null) return 0;
 
 		return brewresults.getAmount();
@@ -166,7 +133,7 @@ public class BrewingRegistry
 
 	public Residue getBrewingResidue(FluidStack fluidstack, ItemStack itemstack)
 	{
-		final BrewingResult brewresults = this.getBrewingResult(fluidstack, itemstack);
+		final BrewingResult brewresults = getBrewingResult(fluidstack, itemstack);
 		if (brewresults == null) return null;
 
 		return brewresults.residue;
