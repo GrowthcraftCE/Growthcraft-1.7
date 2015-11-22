@@ -3,7 +3,7 @@ package growthcraft.cellar;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import growthcraft.api.cellar.booze.BoozeRegistry;
+import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.UserYeastEntries;
 import growthcraft.api.cellar.heatsource.UserHeatSources;
@@ -178,10 +178,9 @@ public class GrowthCraftCellar
 
 	private void registerBoozeModifierFunctions()
 	{
-		final BoozeRegistry reg = CellarRegistry.instance().booze();
-		reg.setModifierFunction("potent", new ModifierFunctionPotent());
-		reg.setModifierFunction("extended", new ModifierFunctionExtended());
-		reg.setModifierFunction("hyper-extended", new ModifierFunctionHyperExtended());
+		BoozeTag.POTENT.setModifierFunction(new ModifierFunctionPotent());
+		BoozeTag.EXTENDED.setModifierFunction(new ModifierFunctionExtended());
+		BoozeTag.HYPER_EXTENDED.setModifierFunction(new ModifierFunctionHyperExtended());
 	}
 
 	private void register()

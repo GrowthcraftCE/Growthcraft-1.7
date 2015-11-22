@@ -49,19 +49,19 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleLeaves.asStack(), new AspectList().add(Aspect.PLANT, 1));
 
-		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 0), new AspectList());
-		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 1), new AspectList().add(Aspect.HEAL, 1));
-		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 2), new AspectList().add(Aspect.HEAL, 2));
-		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 3), new AspectList().add(Aspect.HEAL, 1));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 0), new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 1), new AspectList().add(Aspect.HEAL, 1));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 2), new AspectList().add(Aspect.HEAL, 2));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftApples.appleCider.asStack(1, 3), new AspectList().add(Aspect.HEAL, 1));
 
-		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[0], new AspectList());
-		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[1], new AspectList().add(Aspect.HEAL, 3));
-		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[2], new AspectList().add(Aspect.HEAL, 6));
-		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[3], new AspectList().add(Aspect.HEAL, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[0], new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[1], new AspectList().add(Aspect.HEAL, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[2], new AspectList().add(Aspect.HEAL, 6));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftApples.appleCiderBuckets[3], new AspectList().add(Aspect.HEAL, 3));
 
-		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[0], new AspectList());
-		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[1], new AspectList().add(Aspect.HEAL, 3));
-		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[2], new AspectList().add(Aspect.HEAL, 6));
-		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[3], new AspectList().add(Aspect.HEAL, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[0], new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[1], new AspectList().add(Aspect.HEAL, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[2], new AspectList().add(Aspect.HEAL, 6));
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftApples.appleCiderFluids[3], new AspectList().add(Aspect.HEAL, 3));
 	}
 }

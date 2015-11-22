@@ -7,6 +7,7 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.booze.PotionEntry;
+import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.booze.IModifierFunction;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.stats.CellarAchievement;
@@ -26,21 +27,21 @@ public class BoozeUtils
 
 	public static boolean isFermentedBooze(Fluid booze)
 	{
-		return CellarRegistry.instance().booze().hasTags(booze, "fermented");
+		return CellarRegistry.instance().booze().hasTags(booze, BoozeTag.FERMENTED);
 	}
 
 	public static PotionEffect makePotionEffect(Fluid booze, ItemStack stack, int potionID, int potionTime, int potionLevel)
 	{
 		final BoozeRegistry reg = CellarRegistry.instance().booze();
-		final Collection<String> tags = reg.getTags(booze);
+		final Collection<BoozeTag> tags = reg.getTags(booze);
 
 		if (tags != null)
 		{
 			int time = potionTime;
 			int level = potionLevel;
-			for (String tag : tags)
+			for (BoozeTag tag : tags)
 			{
-				final IModifierFunction func = reg.getModifierFunction(tag);
+				final IModifierFunction func = tag.getModifierFunction();
 				if (func != null)
 				{
 					time = func.applyTime(time);

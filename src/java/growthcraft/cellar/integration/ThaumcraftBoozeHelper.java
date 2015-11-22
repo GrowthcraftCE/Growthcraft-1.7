@@ -26,8 +26,15 @@ package growthcraft.cellar.integration;
 import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
 
+import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
 import growthcraft.cellar.common.block.BlockFluidBooze;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
@@ -42,145 +49,122 @@ import thaumcraft.api.aspects.Aspect;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
-public class ThaumcraftBoozeHelper
+public class ThaumcraftBoozeHelper implements ILoggable
 {
-	private ThaumcraftBoozeHelper() {}
-
-	public static AspectList setAspectsForBoozeBucketContent(Fluid booze, AspectList aspects)
+	// An AspectModifier is similar to a AspectList, however, it accepts and
+	// retains negative Aspect counts
+	public static class AspectModifier implements Iterable<Map.Entry<Aspect, Integer>>
 	{
-		final Collection<String> tags = CellarRegistry.instance().booze().getTags(booze);
-		if (tags != null)
+		private Map<Aspect, Integer> aspects = new HashMap<Aspect, Integer>();
+
+		public AspectModifier() {}
+
+		public AspectModifier set(Aspect aspect, int i)
 		{
-			// Fermented booze always contains poison
-			if (tags.contains("fermented"))
+			aspects.put(aspect, i);
+			return this;
+		}
+
+		public Iterator<Map.Entry<Aspect, Integer>> iterator()
+		{
+			return aspects.entrySet().iterator();
+		}
+	}
+
+	private static ThaumcraftBoozeHelper INSTANCE;
+	private ILogger logger = NullLogger.INSTANCE;
+	private final Map<BoozeTag, AspectModifier> tagToAspects;
+
+	public ThaumcraftBoozeHelper()
+	{
+		this.tagToAspects = new HashMap<BoozeTag, AspectModifier>();
+		tagToAspects.put(BoozeTag.FERMENTED, new AspectModifier().set(Aspect.POISON, 1).set(Aspect.WATER, -1));
+		tagToAspects.put(BoozeTag.EXTENDED, new AspectModifier().set(Aspect.ENERGY, 1).set(Aspect.WATER, -1));
+		tagToAspects.put(BoozeTag.POTENT, new AspectModifier().set(Aspect.POISON, 1).set(Aspect.WATER, -1));
+		tagToAspects.put(BoozeTag.HYPER_EXTENDED, new AspectModifier().set(Aspect.POISON, 1).set(Aspect.ENERGY, 1).set(Aspect.WATER, -2));
+		tagToAspects.put(BoozeTag.DEADLY, new AspectModifier().set(Aspect.DEATH, 1));
+		tagToAspects.put(BoozeTag.POISONED, new AspectModifier().set(Aspect.POISON, 3).set(Aspect.WATER, -3));
+		tagToAspects.put(BoozeTag.CHILLED, new AspectModifier().set(Aspect.COLD, 1).set(Aspect.WATER, -1));
+		tagToAspects.put(BoozeTag.INTOXICATED, new AspectModifier().set(Aspect.POISON, 2).set(Aspect.WATER, -3));
+	}
+
+	public void setLogger(ILogger l)
+	{
+		this.logger = l;
+	}
+
+	public AspectList setAspectsForBooze(Fluid booze, AspectList aspects)
+	{
+		final Collection<BoozeTag> tags = CellarRegistry.instance().booze().getTags(booze);
+		for (BoozeTag tag : tags)
+		{
+			final AspectModifier mod = tagToAspects.get(tag);
+			if (mod != null)
 			{
-				// Potent has a balance of water and poison
-				if (tags.contains("potent"))
+				for (Map.Entry<Aspect, Integer> asp : mod)
 				{
-					aspects.add(Aspect.WATER, 2).add(Aspect.POISON, 2);
-				}
-				// extended has less poison, and an energy
-				else if (tags.contains("extended"))
-				{
-					aspects.add(Aspect.WATER, 2).add(Aspect.POISON, 1).add(Aspect.ENERGY, 1);
-				}
-				// hyper extended is pretty much potented + extended
-				else if (tags.contains("hyper-extended"))
-				{
-					aspects.add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.ENERGY, 1);
-				}
-				// intoxicated is heavily poisoned
-				else if (tags.contains("intoxicated"))
-				{
-					aspects.add(Aspect.WATER, 1).add(Aspect.POISON, 3);
-				}
-				// poisoned, is well, POISONED.
-				else if (tags.contains("poisoned"))
-				{
-					aspects.add(Aspect.POISON, 4);
-				}
-				// otherwise it has just a bit of poison
-				else
-				{
-					aspects.add(Aspect.WATER, 3).add(Aspect.POISON, 1);
+					aspects.add(asp.getKey(), asp.getValue());
 				}
 			}
 			else
 			{
-				aspects.add(Aspect.WATER, 4);
+				logger.error("AspectModifier %s not found!", tag);
 			}
 		}
 		return aspects;
 	}
 
-	public static AspectList setAspectsForBoozeBottleContent(Fluid booze, AspectList aspects)
+	public AspectList setAspectsForBoozeBucketContent(Fluid booze, AspectList aspects)
 	{
-		final Collection<String> tags = CellarRegistry.instance().booze().getTags(booze);
-		if (tags != null)
-		{
-			// Fermented booze always contains poison
-			if (tags.contains("fermented"))
-			{
-				// Potent has a balance of water and poison
-				if (tags.contains("potent"))
-				{
-					aspects.add(Aspect.WATER, 1).add(Aspect.POISON, 2);
-				}
-				// extended has less poison, and an energy
-				else if (tags.contains("extended"))
-				{
-					aspects.add(Aspect.WATER, 1).add(Aspect.POISON, 1).add(Aspect.ENERGY, 1);
-				}
-				// hyper extended is pretty much potented + extended
-				else if (tags.contains("hyper-extended"))
-				{
-					aspects.add(Aspect.WATER, 1).add(Aspect.POISON, 2).add(Aspect.ENERGY, 1);
-				}
-				// intoxicated is heavily poisoned
-				else if (tags.contains("intoxicated"))
-				{
-					aspects.add(Aspect.WATER, 1).add(Aspect.POISON, 3);
-				}
-				// poisoned, is well, POISONED.
-				else if (tags.contains("poisoned"))
-				{
-					aspects.add(Aspect.POISON, 4);
-				}
-				// otherwise it has just a bit of poison
-				else
-				{
-					aspects.add(Aspect.WATER, 1).add(Aspect.POISON, 1);
-				}
-			}
-			else
-			{
-				aspects.add(Aspect.WATER, 1);
-			}
-		}
-		return aspects;
+		return setAspectsForBooze(booze, aspects.add(Aspect.WATER, 4));
 	}
 
-	public static AspectList setAspectsForBoozeBucket(Fluid booze, AspectList list)
+	public AspectList setAspectsForBoozeBottleContent(Fluid booze, AspectList aspects)
+	{
+		return setAspectsForBooze(booze, aspects.add(Aspect.WATER, 2));
+	}
+
+	public AspectList setAspectsForBoozeBucket(Fluid booze, AspectList list)
 	{
 		list.add(Aspect.METAL, 3);
 		return setAspectsForBoozeBucketContent(booze, list);
 	}
 
-	public static AspectList setAspectsForBoozeBottle(Fluid booze, AspectList list)
+	public AspectList setAspectsForBoozeBottle(Fluid booze, AspectList list)
 	{
 		list.add(Aspect.CRYSTAL, 1);
 		return setAspectsForBoozeBottleContent(booze, list);
 	}
 
-	public static void registerAspectsForBucket(ItemBucketBoozeDefinition def, AspectList base)
+	public void registerAspectsForBucket(ItemBucketBoozeDefinition def, AspectList base)
 	{
 		final ItemBucketBooze bucket = def.getItem();
 		ThaumcraftApi.registerObjectTag(def.asStack(), setAspectsForBoozeBucket(bucket.getBooze(), base.copy()));
 	}
 
-	public static void registerAspectsForBuckets(ItemBucketBoozeDefinition[] buckets, AspectList base)
+	public void registerAspectsForBuckets(ItemBucketBoozeDefinition[] buckets, AspectList base)
 	{
 		for (ItemBucketBoozeDefinition bucket : buckets) registerAspectsForBucket(bucket, base);
 	}
 
-	public static void registerAspectsForFluidBlock(BlockBoozeDefinition def, AspectList base)
+	public void registerAspectsForFluidBlock(BlockBoozeDefinition def, AspectList base)
 	{
 		final BlockFluidBooze block = def.getBlock();
 		ThaumcraftApi.registerObjectTag(def.asStack(), setAspectsForBoozeBucket(block.getFluid(), base.copy()));
 	}
 
-	public static void registerAspectsForFluidBlocks(BlockBoozeDefinition[] blocks, AspectList base)
+	public void registerAspectsForFluidBlocks(BlockBoozeDefinition[] blocks, AspectList base)
 	{
 		for (BlockBoozeDefinition block : blocks) registerAspectsForFluidBlock(block, base);
 	}
 
-	public static void registerAspectsForBottleStack(ItemStack stack, AspectList base)
+	public void registerAspectsForBottleStack(ItemStack stack, AspectList base)
 	{
 		final ItemBoozeBottle bottle = (ItemBoozeBottle)stack.getItem();
 		ThaumcraftApi.registerObjectTag(stack, setAspectsForBoozeBottle(bottle.getBoozeForStack(stack), base.copy()));
 	}
 
-	public static void registerAspectsForBottle(ItemDefinition def, AspectList base)
+	public void registerAspectsForBottle(ItemDefinition def, AspectList base)
 	{
 		if (def.getItem() instanceof ItemBoozeBottle)
 		{
@@ -192,5 +176,14 @@ public class ThaumcraftBoozeHelper
 				ThaumcraftApi.registerObjectTag(stack, setAspectsForBoozeBottle(bottle.getBoozeForStack(stack), base.copy()));
 			}
 		}
+	}
+
+	public static ThaumcraftBoozeHelper instance()
+	{
+		if (INSTANCE == null)
+		{
+			INSTANCE = new ThaumcraftBoozeHelper();
+		}
+		return INSTANCE;
 	}
 }

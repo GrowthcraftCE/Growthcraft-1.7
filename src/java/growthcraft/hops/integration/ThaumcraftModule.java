@@ -48,22 +48,22 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hops.asStack(), new AspectList().add(Aspect.CROP, 1));
 
-		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 0), new AspectList().add(Aspect.PLANT, 1));
-		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 1), new AspectList().add(Aspect.MOTION, 1));
-		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 2), new AspectList().add(Aspect.MOTION, 2));
-		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 3), new AspectList().add(Aspect.MOTION, 1));
-		ThaumcraftBoozeHelper.registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 4), new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 0), new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 1), new AspectList().add(Aspect.MOTION, 1));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 2), new AspectList().add(Aspect.MOTION, 2));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 3), new AspectList().add(Aspect.MOTION, 1));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, 4), new AspectList());
 
-		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[0], new AspectList().add(Aspect.PLANT, 1));
-		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[1], new AspectList().add(Aspect.MOTION, 3));
-		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[2], new AspectList().add(Aspect.MOTION, 6));
-		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[3], new AspectList().add(Aspect.MOTION, 3));
-		ThaumcraftBoozeHelper.registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[4], new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[0], new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[1], new AspectList().add(Aspect.MOTION, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[2], new AspectList().add(Aspect.MOTION, 6));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[3], new AspectList().add(Aspect.MOTION, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[4], new AspectList());
 
-		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[0], new AspectList().add(Aspect.PLANT, 1));
-		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[1], new AspectList().add(Aspect.MOTION, 3));
-		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[2], new AspectList().add(Aspect.MOTION, 6));
-		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[3], new AspectList().add(Aspect.MOTION, 3));
-		ThaumcraftBoozeHelper.registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[4], new AspectList());
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[0], new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[1], new AspectList().add(Aspect.MOTION, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[2], new AspectList().add(Aspect.MOTION, 6));
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[3], new AspectList().add(Aspect.MOTION, 3));
+		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[4], new AspectList());
 	}
 }

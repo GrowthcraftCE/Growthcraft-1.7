@@ -23,10 +23,13 @@
  */
 package growthcraft.core.util;
 
+import java.util.Collection;
+
 import javax.annotation.Nullable;
 
 import com.google.common.base.Joiner;
 
+import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 
 import net.minecraft.util.EnumChatFormatting;
@@ -69,7 +72,23 @@ public class UnitFormatter
 		final Fluid alt = CellarRegistry.instance().booze().maybeAlternateBooze(fluid);
 		if (CellarRegistry.instance().booze().isFluidBooze(alt))
 		{
-			return EnumChatFormatting.GREEN + StatCollector.translateToLocal(alt.getUnlocalizedName() + ".modifier");
+			final String modifierSrc = alt.getUnlocalizedName() + ".modifier";
+			String modifierString = StatCollector.translateToLocal(modifierSrc);
+
+			// if there is not a modifier defined, create one by joining the tag names
+			if (modifierSrc.equals(modifierString))
+			{
+				final Collection<BoozeTag> tags = CellarRegistry.instance().booze().getTags(alt);
+				if (tags == null || tags.size() == 0) return null;
+				String str = "";
+				for (BoozeTag tag : tags)
+				{
+					str += ((str.length() == 0) ? "" : ", ") + tag.getLocalizedName();
+				}
+				modifierString = str;
+			}
+
+			return EnumChatFormatting.GREEN + modifierString;
 		}
 		else
 		{

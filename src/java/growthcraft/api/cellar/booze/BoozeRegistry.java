@@ -91,16 +91,6 @@ public class BoozeRegistry implements ILoggable
 		this.logger = l;
 	}
 
-	public void setModifierFunction(String name, IModifierFunction func)
-	{
-		modifiers.put(name, func);
-	}
-
-	public IModifierFunction getModifierFunction(String name)
-	{
-		return modifiers.get(name);
-	}
-
 	public Collection<BoozeEntry> getBoozeEntries()
 	{
 		return boozeMap.values();
@@ -277,26 +267,26 @@ public class BoozeRegistry implements ILoggable
 		return new FluidStack(maybeAlternateBooze(stack.getFluid()), stack.amount);
 	}
 
-	public void addTags(@Nonnull Fluid fluid, String... tags)
+	public void addTags(@Nonnull Fluid fluid, BoozeTag... tags)
 	{
 		fetchBoozeEntry(fluid).addTags(tags);
 	}
 
 	@Nullable
-	public Collection<String> getTags(Fluid fluid)
+	public Collection<BoozeTag> getTags(Fluid fluid)
 	{
 		final BoozeEntry entry = getBoozeEntry(fluid);
 		return entry != null ? entry.getTags() : null;
 	}
 
 	@Nullable
-	public Collection<String> getTags(FluidStack stack)
+	public Collection<BoozeTag> getTags(FluidStack stack)
 	{
 		if (stack == null) return null;
 		return getTags(stack.getFluid());
 	}
 
-	public boolean hasTags(Fluid fluid, String... tags)
+	public boolean hasTags(Fluid fluid, BoozeTag... tags)
 	{
 		final BoozeEntry entry = getBoozeEntry(fluid);
 		if (entry != null)
@@ -306,7 +296,7 @@ public class BoozeRegistry implements ILoggable
 		return false;
 	}
 
-	public boolean hasTags(FluidStack stack, String... tags)
+	public boolean hasTags(FluidStack stack, BoozeTag... tags)
 	{
 		if (stack == null) return false;
 		return hasTags(stack.getFluid(), tags);

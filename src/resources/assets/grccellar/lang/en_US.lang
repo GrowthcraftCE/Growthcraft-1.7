@@ -42,6 +42,16 @@ container.grc.fermentJar=Fermentation Jar
 grc.potion.tipsy=Tipsy
 
 grc.booze=Booze
+grc.booze.modifier.young=Young
+grc.booze.modifier.fermented=Fermented
+grc.booze.modifier.extended=Extended
+grc.booze.modifier.potent=Potent
+grc.booze.modifier.hyper_extended=Hyper Extended
+grc.booze.modifier.deadly=Deadly
+grc.booze.modifier.poisoned=Poisoned
+grc.booze.modifier.chilled=Chilled
+grc.booze.modifier.intoxicated=Intoxicated
+
 gui.grc.empty=Empty
 gui.grc.discard=Discard
 gui.grc.switch=Switch

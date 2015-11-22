@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.core.util.ItemUtils;
@@ -103,7 +104,7 @@ public class YeastGenerator
 	{
 		if (parent.getFluidAmount(0) < consumption) return false;
 
-		return CellarRegistry.instance().booze().hasTags(parent.getFluid(fluidSlot), "young");
+		return CellarRegistry.instance().booze().hasTags(parent.getFluid(fluidSlot), BoozeTag.YOUNG);
 	}
 
 	public void consumeFluid()

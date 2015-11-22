@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.booze.BoozeEffect;
+import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.cellar.common.block.BlockFluidBooze;
@@ -49,10 +50,10 @@ public class BoozeRegistryHelper
 		final BoozeRegistry boozeReg = CellarRegistry.instance().booze();
 		final FermentingRegistry fermentReg = CellarRegistry.instance().fermenting();
 
-		boozeReg.addTags(boozes[0], "young");
-		boozeReg.addTags(boozes[1], "fermented");
-		boozeReg.addTags(boozes[2], "fermented", "potent");
-		boozeReg.addTags(boozes[3], "fermented", "extended");
+		boozeReg.addTags(boozes[0], BoozeTag.YOUNG);
+		boozeReg.addTags(boozes[1], BoozeTag.FERMENTED);
+		boozeReg.addTags(boozes[2], BoozeTag.FERMENTED, BoozeTag.POTENT);
+		boozeReg.addTags(boozes[3], BoozeTag.FERMENTED, BoozeTag.EXTENDED);
 
 		fermentReg.addFermentation(new FluidStack(boozes[1], 1), new FluidStack(boozes[0], 1), YeastType.BREWERS.asStack(), GrowthCraftCellar.getConfig().fermentTime);
 		fermentReg.addFermentation(new FluidStack(boozes[1], 1), new FluidStack(boozes[0], 1), new ItemStack(Items.nether_wart), (int)(GrowthCraftCellar.getConfig().fermentTime * 0.66));
@@ -94,7 +95,7 @@ public class BoozeRegistryHelper
 		final List<BoozeEffect> effects = new ArrayList<BoozeEffect>();
 		for (int i = 0; i < boozes.length; ++i)
 		{
-			if (reg.hasTags(boozes[i], "fermented"))
+			if (reg.hasTags(boozes[i], BoozeTag.FERMENTED))
 			{
 				effects.add(reg.getEffect(boozes[i]));
 			}

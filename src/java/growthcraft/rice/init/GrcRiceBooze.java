@@ -3,6 +3,7 @@ package growthcraft.rice.init;
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.booze.BoozeEffect;
+import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
@@ -53,16 +54,16 @@ public class GrcRiceBooze extends GrcModuleBase
 		final BoozeRegistry boozeReg = CellarRegistry.instance().booze();
 		final FermentingRegistry fermentReg = CellarRegistry.instance().fermenting();
 
-		boozeReg.addTags(riceSakeBooze[0], "young");
-		boozeReg.addTags(riceSakeBooze[1], "fermented");
-		boozeReg.addTags(riceSakeBooze[2], "fermented", "potent");
-		boozeReg.addTags(riceSakeBooze[3], "fermented", "extended");
+		boozeReg.addTags(riceSakeBooze[0], BoozeTag.YOUNG);
+		boozeReg.addTags(riceSakeBooze[1], BoozeTag.FERMENTED);
+		boozeReg.addTags(riceSakeBooze[2], BoozeTag.FERMENTED, BoozeTag.POTENT);
+		boozeReg.addTags(riceSakeBooze[3], BoozeTag.FERMENTED, BoozeTag.EXTENDED);
 		// Divine Sake
-		boozeReg.addTags(riceSakeBooze[4], "fermented", "hyper-extended");
-		boozeReg.addTags(riceSakeBooze[5], "fermented", "intoxicated");
+		boozeReg.addTags(riceSakeBooze[4], BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED);
+		boozeReg.addTags(riceSakeBooze[5], BoozeTag.FERMENTED, BoozeTag.INTOXICATED);
 		// Poisoned Sake - created from netherrash,
 		// the booze looses all its benefits and effectively becomes poisoned
-		boozeReg.addTags(riceSakeBooze[6], "fermented", "poisoned");
+		boozeReg.addTags(riceSakeBooze[6], BoozeTag.FERMENTED, BoozeTag.POISONED);
 
 		final int fermentTime = GrowthCraftCellar.getConfig().fermentTime;
 		fermentReg.addFermentation(riceSakeBoozeDefs[1].asFluidStack(), riceSakeBoozeDefs[0].asFluidStack(), YeastType.BREWERS.asStack(), fermentTime);

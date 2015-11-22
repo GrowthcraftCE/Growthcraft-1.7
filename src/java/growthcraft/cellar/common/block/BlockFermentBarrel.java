@@ -2,6 +2,7 @@ package growthcraft.cellar.common.block;
 
 import java.util.Random;
 
+import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.client.render.RenderFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
@@ -60,7 +61,7 @@ public class BlockFermentBarrel extends BlockCellarContainer implements ICellarF
 		{
 			if (CellarRegistry.instance().booze().isFluidBooze(fluid))
 			{
-				if (CellarRegistry.instance().booze().hasTags(fluid, "fermented"))
+				if (CellarRegistry.instance().booze().hasTags(fluid, BoozeTag.FERMENTED))
 				{
 					CellarAchievement.FERMENT_BOOZE.unlock(player);
 				}
