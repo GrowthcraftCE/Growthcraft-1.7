@@ -61,14 +61,8 @@ public class GrowthCraftNether
 
 		modules.preInit();
 		modules.register();
-		registerRecipes();
 
 		MinecraftForge.EVENT_BUS.register(new TextureStitchEventHandler());
-	}
-
-	private void registerRecipes()
-	{
-		GameRegistry.addShapelessRecipe(items.netherGhastPowder.asStack(3), Items.ghast_tear, Items.blaze_powder);
 	}
 
 	@EventHandler

@@ -11,6 +11,7 @@ import growthcraft.nether.common.item.ItemNetherRashSpores;
 import growthcraft.nether.common.item.ItemNetherSquashSeeds;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Items;
 
 public class GrcNetherItems extends GrcModuleBase
 {
@@ -44,5 +45,7 @@ public class GrcNetherItems extends GrcModuleBase
 		GameRegistry.registerItem(netherSquashSeeds.getItem(), "grcnether.netherSquashSeeds");
 		GameRegistry.registerItem(netherMaliceFruit.getItem(), "grcnether.netherMaliceFruitItem");
 		GameRegistry.registerItem(netherGhastPowder.getItem(), "grcnether.netherGhastPowder");
+
+		GameRegistry.addShapelessRecipe(netherGhastPowder.asStack(3), Items.ghast_tear, Items.blaze_powder);
 	}
 }
