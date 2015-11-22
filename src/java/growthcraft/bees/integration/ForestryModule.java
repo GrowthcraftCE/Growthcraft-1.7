@@ -54,7 +54,7 @@ public class ForestryModule extends ModIntegrationBase
 		maybeAddBee(GameRegistry.findItem(modID, "beeDroneGE"));
 		maybeAddBee(GameRegistry.findItem(modID, "beePrincessGE"));
 
-		CellarRegistry.instance().booze().addBoozeAlternative("short.mead", "grc.honeyMead0");
+		CellarRegistry.instance().booze().addBoozeAlternative("short.mead", "grc.honeymead0");
 	}
 }
 
