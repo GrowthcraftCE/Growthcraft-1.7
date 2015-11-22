@@ -43,6 +43,7 @@ import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
+import growthcraft.core.util.GameRegistryDumper;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -307,5 +308,6 @@ public class GrowthCraftCellar
 
 		modules.postInit();
 
+		GameRegistryDumper.run();
 	}
 }

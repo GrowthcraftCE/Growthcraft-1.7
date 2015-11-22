@@ -28,8 +28,11 @@ public class GrcApplesConfig extends ConfigBase
 	public int appleCiderPressYield = 40;
 
 
-	@ConfigOption(catergory="Booze", name="Apple Cider Color", desc="What color should apple cider be?")
+	@ConfigOption(catergory="Booze/Apple Cider", name="Color", desc="What color should Apple Cider be?")
 	public int appleCiderColor = 0x855425;
+
+	@ConfigOption(catergory="Booze/Silken Nectar", name="Color", desc="What color should Silken Nectar be?")
+	public int silkenNectarColor = 0xff9500;
 
 
 	@ConfigOption(catergory="Village", name="Generate Village Apple Farms", desc="Should we spawn Apple Farms in Villages?")

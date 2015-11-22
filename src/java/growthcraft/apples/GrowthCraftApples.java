@@ -1,11 +1,8 @@
 package growthcraft.apples;
 
-import growthcraft.api.cellar.booze.Booze;
-import growthcraft.api.cellar.booze.BoozeEffect;
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.apples.common.block.BlockApple;
 import growthcraft.apples.common.block.BlockAppleLeaves;
 import growthcraft.apples.common.block.BlockAppleSapling;
@@ -14,15 +11,10 @@ import growthcraft.apples.common.item.ItemAppleSeeds;
 import growthcraft.apples.common.village.ComponentVillageAppleFarm;
 import growthcraft.apples.common.village.VillageHandlerApples;
 import growthcraft.apples.handler.AppleFuelHandler;
-import growthcraft.cellar.common.definition.BlockBoozeDefinition;
-import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
-import growthcraft.cellar.common.item.ItemBoozeBottle;
-import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
+import growthcraft.apples.init.GrcApplesBooze;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -40,10 +32,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.potion.Potion;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(
@@ -64,13 +54,8 @@ public class GrowthCraftApples
 	public static BlockDefinition appleSapling;
 	public static BlockDefinition appleLeaves;
 	public static BlockDefinition appleBlock;
-	public static BlockBoozeDefinition[] appleCiderFluids;
 	public static ItemDefinition appleSeeds;
-	public static ItemDefinition appleCider;
-	public static ItemDefinition appleCiderBucket_deprecated;
-	public static ItemBucketBoozeDefinition[] appleCiderBuckets;
-
-	public static Fluid[] appleCiderBooze;
+	public static GrcApplesBooze booze = new GrcApplesBooze();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcApplesConfig config = new GrcApplesConfig();
@@ -89,6 +74,7 @@ public class GrowthCraftApples
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.apples.integration.ThaumcraftModule());
 
+		modules.add(booze);
 		if (config.debugEnabled) modules.setLogger(logger);
 
 		appleSapling = new BlockDefinition(new BlockAppleSapling());
@@ -96,14 +82,6 @@ public class GrowthCraftApples
 		appleBlock = new BlockDefinition(new BlockApple());
 
 		appleSeeds = new ItemDefinition(new ItemAppleSeeds());
-
-		appleCiderBooze = new Booze[4];
-		appleCiderFluids = new BlockBoozeDefinition[appleCiderBooze.length];
-		appleCiderBuckets = new ItemBucketBoozeDefinition[appleCiderBooze.length];
-		BoozeRegistryHelper.initializeBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, "grc.appleCider", config.appleCiderColor);
-
-		appleCider        = new ItemDefinition(new ItemBoozeBottle(4, -0.3F, appleCiderBooze));
-		appleCiderBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(appleCiderBooze).setColor(config.appleCiderColor));
 
 		modules.preInit();
 		register();
@@ -114,20 +92,7 @@ public class GrowthCraftApples
 		GameRegistry.registerBlock(appleSapling.getBlock(), "grc.appleSapling");
 		GameRegistry.registerBlock(appleLeaves.getBlock(), "grc.appleLeaves");
 		GameRegistry.registerBlock(appleBlock.getBlock(), "grc.appleBlock");
-
 		GameRegistry.registerItem(appleSeeds.getItem(), "grc.appleSeeds");
-		GameRegistry.registerItem(appleCider.getItem(), "grc.appleCider");
-		GameRegistry.registerItem(appleCiderBucket_deprecated.getItem(), "grc.appleCider_bucket");
-
-		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", appleCiderBucket_deprecated);
-		BoozeRegistryHelper.registerDefaultFermentation(appleCiderBooze);
-		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(appleCiderBooze))
-		{
-			effect.setTipsy(0.60F, 900);
-			effect.addPotionEntry(Potion.field_76444_x.id, 1800, 0);
-		}
-
-		CellarRegistry.instance().pressing().addPressing(Items.apple, appleCiderBooze[0], config.appleCiderPressingTime, config.appleCiderPressYield, Residue.newDefault(0.3F));
 
 		MapGenHelper.registerVillageStructure(ComponentVillageAppleFarm.class, "grc.applefarm");
 
@@ -145,7 +110,7 @@ public class GrowthCraftApples
 		// For Pam's HarvestCraft
 		// Uses the same OreDict. names as HarvestCraft
 		OreDictionary.registerOre("listAllseed", appleSeeds.getItem());
-		OreDictionary.registerOre("foodApplejuice", appleCider.asStack());
+		OreDictionary.registerOre("foodApplejuice", booze.appleCider.asStack());
 
 		//====================
 		// CRAFTING
@@ -181,9 +146,9 @@ public class GrowthCraftApples
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < appleCiderBooze.length; ++i)
+			for (int i = 0; i < booze.appleCiderBooze.length; ++i)
 			{
-				appleCiderBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				booze.appleCiderBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}

@@ -22,6 +22,11 @@ container.grc.fermentBarrel=Tonneau de fermentation
 grc.potion.tipsy=Pompette
 
 grc.booze=Picoler
+grc.booze.modifier.young=Nouveau
+grc.booze.modifier.fermented=Fermenté
+grc.booze.modifier.extended=Prolongé
+grc.booze.modifier.potent=Puissant
+
 gui.grc.empty=Vide
 gui.grc.discard=Rebut
 gui.grc.switch=Basculer
