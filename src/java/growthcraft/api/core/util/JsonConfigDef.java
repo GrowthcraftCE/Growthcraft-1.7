@@ -34,6 +34,7 @@ import com.google.gson.Gson;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.module.IModule;
 
 import net.minecraftforge.common.config.Configuration.UnicodeInputStreamReader;
 
@@ -41,12 +42,13 @@ import net.minecraftforge.common.config.Configuration.UnicodeInputStreamReader;
  * This is a base class for defining JSON config definitions, its purpose
  * is mostly to hide the dreaded File handling
  */
-public abstract class JsonConfigDef implements ILoggable
+public abstract class JsonConfigDef implements ILoggable, IModule
 {
 	public static final String DEFAULT_ENCODING = "UTF-8";
 
 	protected ILogger logger = NullLogger.INSTANCE;
 	protected final Gson gson = new Gson();
+	private File srcFile;
 
 	public void setLogger(ILogger l)
 	{
@@ -84,19 +86,25 @@ public abstract class JsonConfigDef implements ILoggable
 
 	protected abstract void loadFromBuffer(BufferedReader buff);
 
-	public void load(File dir, String filename)
+	public void setConfigFile(File dir, String filename)
 	{
-		final File file = new File(dir, filename);
+		srcFile = new File(dir, filename);
+		logger.debug("Config file %s was set for %s", srcFile, this);
+	}
+
+	@Override
+	public void preInit()
+	{
 		BufferedReader buffer = null;
 		UnicodeInputStreamReader input = null;
 		try
 		{
-			logger.info("Loading json-config %s", file);
-			if (!file.exists()) saveDefault(file);
+			logger.debug("Loading json-config %s", srcFile);
+			if (!srcFile.exists()) saveDefault(srcFile);
 
-			if (file.canRead())
+			if (srcFile.canRead())
 			{
-				input = new UnicodeInputStreamReader(new FileInputStream(file), DEFAULT_ENCODING);
+				input = new UnicodeInputStreamReader(new FileInputStream(srcFile), DEFAULT_ENCODING);
 				buffer = new BufferedReader(input);
 				loadFromBuffer(buffer);
 			}
@@ -125,4 +133,13 @@ public abstract class JsonConfigDef implements ILoggable
 			}
 		}
 	}
+
+	@Override
+	public void init() {}
+
+	@Override
+	public void register() {}
+
+	@Override
+	public void postInit() {}
 }

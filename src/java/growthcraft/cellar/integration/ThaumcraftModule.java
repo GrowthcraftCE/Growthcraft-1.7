@@ -23,6 +23,7 @@
  */
 package growthcraft.cellar.integration;
 
+import growthcraft.api.cellar.heatsource.UserHeatSources.UserHeatSourceEntry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.YeastType;
 import growthcraft.core.integration.ThaumcraftModuleBase;
@@ -36,6 +37,12 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	public ThaumcraftModule()
 	{
 		super(GrowthCraftCellar.MOD_ID);
+	}
+
+	@Override
+	protected void doPreInit()
+	{
+		GrowthCraftCellar.getUserHeatSources().addDefault(modID, "blockAiry", UserHeatSourceEntry.newHeatPair(1, 1.0f));
 	}
 
 	@Override

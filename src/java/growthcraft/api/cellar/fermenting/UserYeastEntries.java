@@ -137,7 +137,8 @@ public class UserYeastEntries extends JsonConfigDef
 		}
 	}
 
-	public void register()
+	@Override
+	public void postInit()
 	{
 		if (entries != null)
 		{

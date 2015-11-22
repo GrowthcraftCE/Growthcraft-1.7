@@ -24,7 +24,9 @@
 package growthcraft.api.cellar.heatsource;
 
 import java.io.BufferedReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import growthcraft.api.core.util.ItemKey;
@@ -54,26 +56,32 @@ public class UserHeatSources extends JsonConfigDef
 			this.states = s;
 		}
 
-		public static Map<Integer, Float> wildcardHeat(float h)
+		public static Map<Integer, Float> newHeatPair(int i, float h)
 		{
 			final Map<Integer, Float> map = new HashMap<Integer, Float>();
-			map.put(ItemKey.WILDCARD_VALUE, h);
+			map.put(i, h);
 			return map;
+		}
+
+		public static Map<Integer, Float> newWildcardHeat(float h)
+		{
+			return newHeatPair(ItemKey.WILDCARD_VALUE, h);
 		}
 	}
 
-	private static final UserHeatSourceEntry[] DEFAULT_ENTRIES = {
-		new UserHeatSourceEntry("minecraft", "fire", UserHeatSourceEntry.wildcardHeat(1.0f)),
-		new UserHeatSourceEntry("minecraft", "flowing_lava", UserHeatSourceEntry.wildcardHeat(0.7f)),
-		new UserHeatSourceEntry("minecraft", "lava", UserHeatSourceEntry.wildcardHeat(0.7f))
-	};
-
+	private final List<UserHeatSourceEntry> defaultEntries = new ArrayList<UserHeatSourceEntry>();
 	private UserHeatSourceEntry[] entries;
+
+	public void addDefault(String m, String b, Map<Integer, Float> s)
+	{
+		defaultEntries.add(new UserHeatSourceEntry(m, b, s));
+	}
 
 	@Override
 	protected String getDefault()
 	{
-		return gson.toJson(DEFAULT_ENTRIES, UserHeatSourceEntry[].class);
+		final UserHeatSourceEntry[] ary = defaultEntries.toArray(new UserHeatSourceEntry[defaultEntries.size()]);
+		return gson.toJson(ary, UserHeatSourceEntry[].class);
 	}
 
 	@Override
@@ -108,7 +116,8 @@ public class UserHeatSources extends JsonConfigDef
 		}
 	}
 
-	public void register()
+	@Override
+	public void postInit()
 	{
 		if (entries != null)
 		{

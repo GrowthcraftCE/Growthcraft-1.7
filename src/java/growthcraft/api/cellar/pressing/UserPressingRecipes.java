@@ -129,7 +129,8 @@ public class UserPressingRecipes extends JsonConfigDef
 		);
 	}
 
-	public void register()
+	@Override
+	public void postInit()
 	{
 		if (recipes != null)
 		{

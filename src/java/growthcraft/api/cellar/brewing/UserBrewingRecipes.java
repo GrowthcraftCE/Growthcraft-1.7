@@ -131,7 +131,8 @@ public class UserBrewingRecipes extends JsonConfigDef
 		CellarRegistry.instance().brewing().addBrewing(inputFluidStack, item, outputFluidStack, recipe.time, residue);
 	}
 
-	public void register()
+	@Override
+	public void postInit()
 	{
 		if (recipes != null)
 		{
