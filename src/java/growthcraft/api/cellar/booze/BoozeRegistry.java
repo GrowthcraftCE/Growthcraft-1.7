@@ -82,7 +82,6 @@ import net.minecraftforge.fluids.FluidStack;
 public class BoozeRegistry implements ILoggable
 {
 	private ILogger logger = NullLogger.INSTANCE;
-	private Map<String, IModifierFunction> modifiers = new HashMap<String, IModifierFunction>();
 	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
 	private Map<Fluid, Fluid> altBoozeMap = new HashMap<Fluid, Fluid>();
 
