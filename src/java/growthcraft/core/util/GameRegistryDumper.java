@@ -19,6 +19,7 @@ public class GameRegistryDumper
 {
 	private GameRegistryDumper() {}
 
+	@SuppressWarnings("rawtypes")
 	public static void dumpBlocks()
 	{
 		final Iterator it = GameRegistry.Type.BLOCK.getRegistry().iterator();
@@ -53,6 +54,7 @@ public class GameRegistryDumper
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static void dumpItems()
 	{
 		final Iterator it = GameRegistry.Type.ITEM.getRegistry().iterator();

@@ -51,7 +51,7 @@ public class GrcHopsBooze extends GrcModuleBase
 		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(hopAleBooze))
 		{
 			effect.setTipsy(0.70F, 900);
-			effect.addPotionEntry(Potion.digSpeed.id, 3600, 0);
+			effect.addPotionEntry(Potion.digSpeed, 3600, 0);
 		}
 
 		CellarRegistry.instance().brewing().addBrewing(

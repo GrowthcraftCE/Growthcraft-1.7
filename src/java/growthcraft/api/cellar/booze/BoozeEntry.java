@@ -26,19 +26,20 @@ package growthcraft.api.cellar.booze;
 import java.util.Collection;
 import java.util.Set;
 import java.util.HashSet;
+import javax.annotation.Nonnull;
 
 import net.minecraftforge.fluids.Fluid;
 
 public class BoozeEntry
 {
 	private final Fluid fluid;
-
+	private final BoozeEffect effect;
 	private final Set<BoozeTag> tags = new HashSet<BoozeTag>();
-	private final BoozeEffect effect = new BoozeEffect();
 
-	public BoozeEntry(Fluid flus)
+	public BoozeEntry(@Nonnull Fluid flus)
 	{
 		this.fluid = flus;
+		this.effect = new BoozeEffect(fluid);
 	}
 
 	public BoozeEffect getEffect()

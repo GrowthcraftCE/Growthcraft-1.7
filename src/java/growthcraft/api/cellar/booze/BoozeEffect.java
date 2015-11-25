@@ -23,21 +23,43 @@
  */
 package growthcraft.api.cellar.booze;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.annotation.Nonnull;
 
 import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.effect.EffectList;
+import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.cellar.booze.effect.EffectTipsy;
 
 import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
+import net.minecraft.potion.Potion;
+import net.minecraftforge.fluids.Fluid;
 
 public class BoozeEffect implements IEffect
 {
 	private EffectTipsy tipsyEffect;
 	private EffectList effects = new EffectList();
+	private Fluid booze;
+
+	public BoozeEffect(@Nonnull Fluid flu)
+	{
+		this.booze = flu;
+	}
+
+	public BoozeEffect clearEffects()
+	{
+		effects.clear();
+		return this;
+	}
+
+	public BoozeEffect addPotionEntry(@Nonnull Potion p, int tm, int lvl)
+	{
+		final BoozePotionEffectFactory effect = new BoozePotionEffectFactory(booze, p.id, tm, lvl);
+		effects.add(new EffectAddPotionEffect(effect));
+		return this;
+	}
 
 	public EffectTipsy getTipsyEffect()
 	{

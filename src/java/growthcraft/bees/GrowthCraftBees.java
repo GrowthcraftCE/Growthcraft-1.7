@@ -169,7 +169,7 @@ public class GrowthCraftBees
 		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(honeyMeadBooze))
 		{
 			effect.setTipsy(0.60F, 900);
-			effect.addPotionEntry(Potion.regeneration.id, 900, 0);
+			effect.addPotionEntry(Potion.regeneration, 900, 0);
 		}
 
 		// TileEntities

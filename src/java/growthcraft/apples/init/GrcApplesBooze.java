@@ -63,21 +63,21 @@ public class GrcApplesBooze extends GrcModuleBase
 		br.addTags(appleCiderBooze[1], BoozeTag.FERMENTED);
 		br.getEffect(appleCiderBooze[1])
 			.setTipsy(0.60F, 900)
-			.addPotionEntry(Potion.field_76444_x.id, 1800, 0);
+			.addPotionEntry(Potion.field_76444_x, 1800, 0);
 		fr.addFermentation(fs[1], fs[0], YeastType.BREWERS.asStack(), fermentTime);
 		fr.addFermentation(fs[1], fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66));
 
 		br.addTags(appleCiderBooze[2], BoozeTag.FERMENTED, BoozeTag.POTENT);
 		br.getEffect(appleCiderBooze[2])
 			.setTipsy(0.60F, 900)
-			.addPotionEntry(Potion.field_76444_x.id, 1800, 0);
+			.addPotionEntry(Potion.field_76444_x, 1800, 0);
 		fr.addFermentation(fs[2], fs[1], new ItemStack(Items.glowstone_dust), fermentTime);
 		fr.addFermentation(fs[2], fs[3], new ItemStack(Items.glowstone_dust), fermentTime);
 
 		br.addTags(appleCiderBooze[3], BoozeTag.FERMENTED, BoozeTag.EXTENDED);
 		br.getEffect(appleCiderBooze[3])
 			.setTipsy(0.60F, 900)
-			.addPotionEntry(Potion.field_76444_x.id, 1800, 0);
+			.addPotionEntry(Potion.field_76444_x, 1800, 0);
 		fr.addFermentation(fs[3], fs[1], new ItemStack(Items.redstone), fermentTime);
 		fr.addFermentation(fs[3], fs[2], new ItemStack(Items.redstone), fermentTime);
 
@@ -85,7 +85,7 @@ public class GrcApplesBooze extends GrcModuleBase
 		br.addTags(appleCiderBooze[4], BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED);
 		br.getEffect(appleCiderBooze[4])
 			.setTipsy(0.60F, 900)
-			.addPotionEntry(Potion.field_76444_x.id, 1800, 0);
+			.addPotionEntry(Potion.field_76444_x, 1800, 0);
 		fr.addFermentation(fs[4], fs[2], YeastType.ETHEREAL.asStack(), fermentTime);
 		fr.addFermentation(fs[4], fs[3], YeastType.ETHEREAL.asStack(), fermentTime);
 
@@ -93,7 +93,7 @@ public class GrcApplesBooze extends GrcModuleBase
 		br.addTags(appleCiderBooze[5], BoozeTag.FERMENTED, BoozeTag.INTOXICATED);
 		br.getEffect(appleCiderBooze[5])
 			.setTipsy(0.80F, 900)
-			.addPotionEntry(Potion.field_76444_x.id, 1800, 0);
+			.addPotionEntry(Potion.field_76444_x, 1800, 0);
 		fr.addFermentation(fs[5], fs[2], YeastType.ORIGIN.asStack(), fermentTime);
 		fr.addFermentation(fs[5], fs[3], YeastType.ORIGIN.asStack(), fermentTime);
 
@@ -102,7 +102,7 @@ public class GrcApplesBooze extends GrcModuleBase
 		br.addTags(appleCiderBooze[6], BoozeTag.FERMENTED, BoozeTag.POISONED);
 		br.getEffect(appleCiderBooze[6])
 			.setTipsy(0.60F, 900)
-			.addPotionEntry(Potion.poison.id, 1800, 0);
+			.addPotionEntry(Potion.poison, 1800, 0);
 		//fr.addFermentation(fs[6], fs[0], YeastType.NETHERRASH.asStack(), fermentTime);
 		//fr.addFermentation(fs[6], fs[1], YeastType.NETHERRASH.asStack(), fermentTime);
 		//fr.addFermentation(fs[6], fs[2], YeastType.NETHERRASH.asStack(), fermentTime);

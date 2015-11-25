@@ -141,7 +141,7 @@ public class GrowthCraftGrapes
 		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(grapeWineBooze))
 		{
 			effect.setTipsy(0.60F, 900);
-			effect.addPotionEntry(Potion.resistance.id, 3600, 0);
+			effect.addPotionEntry(Potion.resistance, 3600, 0);
 		}
 
 		CellarRegistry.instance().pressing().addPressing(grapes.getItem(), grapeWineBooze[0], config.grapeWinePressingTime, config.grapeWinePressingYield, Residue.newDefault(0.3F));

@@ -42,6 +42,7 @@ public abstract class ConfigBase implements ILoggable
 		this.logger = l;
 	}
 
+	@SuppressWarnings("rawtypes")
 	private void loadConfigForClass(Class klass)
 	{
 		for (Field field : klass.getDeclaredFields())

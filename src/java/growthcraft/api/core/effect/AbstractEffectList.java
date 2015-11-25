@@ -38,6 +38,7 @@ public abstract class AbstractEffectList implements IEffect
 	 *
 	 * @return this
 	 */
+	@SuppressWarnings("unchecked")
 	public <T extends AbstractEffectList> T clear()
 	{
 		effects.clear();
@@ -49,6 +50,7 @@ public abstract class AbstractEffectList implements IEffect
 	 *
 	 * @return this
 	 */
+	@SuppressWarnings("unchecked")
 	public <T extends AbstractEffectList> T concat(List<IEffect> otherEffects)
 	{
 		effects.addAll(otherEffects);
@@ -60,6 +62,7 @@ public abstract class AbstractEffectList implements IEffect
 	 *
 	 * @return this
 	 */
+	@SuppressWarnings("unchecked")
 	public <T extends AbstractEffectList> T concat(AbstractEffectList list)
 	{
 		effects.addAll(list.effects);
@@ -69,6 +72,7 @@ public abstract class AbstractEffectList implements IEffect
 	/**
 	 * @return this
 	 */
+	@SuppressWarnings("unchecked")
 	public <T extends AbstractEffectList> T add(IEffect effect)
 	{
 		effects.add(effect);
@@ -93,6 +97,7 @@ public abstract class AbstractEffectList implements IEffect
 	 * @param effect - effect to set
 	 * @return this
 	 */
+	@SuppressWarnings("unchecked")
 	public <T extends AbstractEffectList> T set(int index, IEffect effect)
 	{
 		effects.set(index, effect);

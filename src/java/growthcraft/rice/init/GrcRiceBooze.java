@@ -95,19 +95,19 @@ public class GrcRiceBooze extends GrcModuleBase
 		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(riceSakeBooze))
 		{
 			effect.setTipsy(0.65F, 900);
-			effect.addPotionEntry(Potion.moveSpeed.id, 3600, 0);
-			effect.addPotionEntry(Potion.jump.id, 3600, 0);
+			effect.addPotionEntry(Potion.moveSpeed, 3600, 0);
+			effect.addPotionEntry(Potion.jump, 3600, 0);
 		}
 		// Intoxicated
 		CellarRegistry.instance().booze().getEffect(riceSakeBooze[6])
-			.clearPotionEntries()
-			//.addOptionalPotionEntry((int[]){ Potion.moveSlowdown.id, Potion.moveSpeed.id }, 3600, 0)
-			.addPotionEntry(Potion.jump.id, 3600, 0);
+			.clearEffects()
+			//.addOptionalPotionEntry((int[]){ Potion.moveSlowdown, Potion.moveSpeed }, 3600, 0)
+			.addPotionEntry(Potion.jump, 3600, 0);
 
 		// poisoned
 		CellarRegistry.instance().booze().getEffect(riceSakeBooze[6])
-			.clearPotionEntries()
-			.addPotionEntry(Potion.poison.id, 3600, 0);
+			.clearEffects()
+			.addPotionEntry(Potion.poison, 3600, 0);
 
 		final int yieldAmount = GrowthCraftRice.getConfig().riceSakeBrewingYield;
 		CellarRegistry.instance().brewing().addBrewing(
