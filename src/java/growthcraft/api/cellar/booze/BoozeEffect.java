@@ -23,79 +23,74 @@
  */
 package growthcraft.api.cellar.booze;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-import net.minecraft.util.MathHelper;
+import growthcraft.api.core.effect.IEffect;
+import growthcraft.api.core.effect.EffectList;
+import growthcraft.api.cellar.booze.effect.EffectTipsy;
 
-public class BoozeEffect
+import net.minecraft.world.World;
+import net.minecraft.entity.Entity;
+
+public class BoozeEffect implements IEffect
 {
-	private boolean hasTipsyEffect;
-	private float tipsyChance;
-	private int tipsyTime;
-	private List<PotionEntry> potionEntries = new ArrayList<PotionEntry>();
+	private EffectTipsy tipsyEffect;
+	private EffectList effects = new EffectList();
 
-	public BoozeEffect clearTipsy()
+	public EffectTipsy getTipsyEffect()
 	{
-		this.hasTipsyEffect = false;
-		this.tipsyChance = 0.0f;
-		this.tipsyTime = 0;
+		return tipsyEffect;
+	}
+
+	public BoozeEffect setTipsyEffect(EffectTipsy tipsy)
+	{
+		this.tipsyEffect = tipsy;
 		return this;
 	}
 
 	public BoozeEffect setTipsy(float chance, int time)
 	{
-		this.hasTipsyEffect = true;
-		this.tipsyChance = MathHelper.clamp_float(chance, 0.1F, 1.0F);
-		this.tipsyTime = time;
+		setTipsyEffect(new EffectTipsy().setTipsy(chance, time));
 		return this;
 	}
 
-	public BoozeEffect clearPotionEntries()
+	public BoozeEffect clearTipsy()
 	{
-		potionEntries.clear();
+		this.tipsyEffect = null;
 		return this;
 	}
 
-	public BoozeEffect addPotionEntry(int id, int time, int level)
+	public EffectList getEffects()
 	{
-		potionEntries.add(new PotionEntry(id, time, level));
-		return this;
-	}
-
-	public BoozeEffect addPotionEntries(List<PotionEntry> list)
-	{
-		potionEntries.addAll(list);
-		return this;
-	}
-
-	public List<PotionEntry> getPotionEntries()
-	{
-		return potionEntries;
-	}
-
-	public boolean hasPotionEntries()
-	{
-		return getPotionEntries().size() > 0;
+		return effects;
 	}
 
 	public boolean canCauseTipsy()
 	{
-		return hasTipsyEffect;
+		return tipsyEffect != null && tipsyEffect.canCauseTipsy();
 	}
 
-	public float getTipsyChance()
+	public boolean hasEffects()
 	{
-		return tipsyChance;
-	}
-
-	public int getTipsyTime()
-	{
-		return tipsyTime;
+		return effects.size() > 0;
 	}
 
 	public boolean isValid()
 	{
-		return canCauseTipsy() || hasPotionEntries();
+		return canCauseTipsy() || hasEffects();
+	}
+
+	public void apply(World world, Entity entity, Random random, Object data)
+	{
+		if (tipsyEffect != null) tipsyEffect.apply(world, entity, random, data);
+		effects.apply(world, entity, random, data);
+	}
+
+	public void getDescription(List<String> list)
+	{
+		if (tipsyEffect != null) tipsyEffect.getDescription(list);
+		effects.getDescription(list);
 	}
 }

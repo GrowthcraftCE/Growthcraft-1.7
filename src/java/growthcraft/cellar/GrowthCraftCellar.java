@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import growthcraft.api.cellar.booze.BoozeTag;
+import growthcraft.api.cellar.booze.effect.EffectTipsy;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.UserYeastEntries;
 import growthcraft.api.cellar.heatsource.UserHeatSources;
@@ -38,6 +39,7 @@ import growthcraft.cellar.event.LivingUpdateEventCellar;
 import growthcraft.cellar.handler.GuiHandlerCellar;
 import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.stats.GrcCellarAchievements;
+import growthcraft.cellar.stats.CellarAchievement;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.api.core.module.ModuleContainer;
@@ -238,6 +240,8 @@ public class GrowthCraftCellar
 		//====================
 		registerPotions();
 		potionTipsy = (new PotionCellar(config.potionTipsyID, false, 0)).setIconIndex(0, 0).setPotionName("grc.potion.tipsy");
+		EffectTipsy.potionTipsy = potionTipsy;
+		EffectTipsy.achievement = CellarAchievement.GET_DRUNK;
 
 		//====================
 		// ACHIEVEMENTS
