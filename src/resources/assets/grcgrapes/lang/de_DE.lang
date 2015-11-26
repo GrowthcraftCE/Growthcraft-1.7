@@ -1,18 +1,28 @@
-﻿
+﻿# Blocks
 tile.grc.grapeVine0.name=Weinrebe Stamm
 tile.grc.grapeVine1.name=Weinrebe Stamm
 tile.grc.grapeLeaves.name=Weinblätter
 tile.grc.grapeBlock.name=Weintraube
 
+# Items
 item.grc.grapes.name=Weintraube
 item.grc.grapeSeeds.name=Traubensamen
 
+# Fluids
 fluid.grc.grapeWine=Wein
 fluid.grc.grapeWine0=Wein
 fluid.grc.grapeWine1=Wein
 fluid.grc.grapeWine2=Wein
 fluid.grc.grapeWine3=Wein
 
+# Fluid Blocks
+tile.fluid.grc.grapeWine.name=Wein
+tile.fluid.grc.grapeWine0.name=Wein
+tile.fluid.grc.grapeWine1.name=Wein
+tile.fluid.grc.grapeWine2.name=Wein
+tile.fluid.grc.grapeWine3.name=Wein
+
+# Fluid Tooltips
 fluid.grc.grapeWine0.modifier=Jung
 fluid.grc.grapeWine1.modifier=Gegoren
 fluid.grc.grapeWine2.modifier=Gegoren, Stark

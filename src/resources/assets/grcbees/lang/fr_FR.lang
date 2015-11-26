@@ -1,57 +1,68 @@
-﻿// Creative Tab
+﻿# Creative Tabs
 itemGroup.tabGrowthCraftBees=Abeilles Growthcraft
 
-// Tiles
-/// Vanilla Bee Boxes
+## Blocks
+# Vanilla Bee Boxes
 tile.grc.BeeBox.Minecraft0.name=Boîte d'abeille en chêne
 tile.grc.BeeBox.Minecraft1.name=Boîte d'abeille en sapin
 tile.grc.BeeBox.Minecraft2.name=Boîte d'abeille en bouleau
 tile.grc.BeeBox.Minecraft3.name=Boîte d'abeille en acajou
 tile.grc.BeeBox.Minecraft4.name=Boîte d'abeille en acacia
 tile.grc.BeeBox.Minecraft5.name=Boîte d'abeille en chêne noir
-/// Growthcraft|Nether Bee Boxes
+
+# Growthcraft|Nether Bee Boxes
 tile.grc.BeeBox.Nether0.name=Boîte d'abeille de malice
-/// Growthcraft|Bamboo Bee Boxes
+
+# Growthcraft|Bamboo Bee Boxes
 tile.grc.BeeBox.Bamboo0.name=Boîte d'abeille en bambou
-/// Thaumcraft Bee Boxes
+
+# Thaumcraft Bee Boxes
 tile.grc.BeeBox.Thaumcraft0.name=Boîte d'abeille en bois arcanique
 tile.grc.BeeBox.Thaumcraft1.name=Boîte d'abeille en bois d'argent
 
+# Other Blocks
 tile.grc.beeHive.name=Ruche d'abeille
 
-// Items
+# Items
 item.grc.honeyComb.empty.name=Rayon de miel vide
 item.grc.honeyComb.full.name=Rayon de miel
 item.grc.honeyJar.name=Miel
 item.grc.bee.name=Abeille
 
+# Tooltips
 grc.bees.item.honeyComb.deprecated=This item has been deprecated, craft to get the updated item.
 
+# Containers
 container.grc.beeBox=Boîte d'abeille
 
+# Fluids
 fluid.grc.honeyMead=Hydromel
 fluid.grc.honeyMead0=Hydromel
 fluid.grc.honeyMead1=Hydromel
 fluid.grc.honeyMead2=Hydromel
 fluid.grc.honeyMead3=Hydromel
 
+# Fluid Buckets
 item.bucket.fluid.grc.honeyMead.name=Seau d'hydromel
 item.bucket.fluid.grc.honeyMead0.name=Seau d'hydromel
 item.bucket.fluid.grc.honeyMead1.name=Seau d'hydromel
 item.bucket.fluid.grc.honeyMead2.name=Seau d'hydromel
 item.bucket.fluid.grc.honeyMead3.name=Seau d'hydromel
 
+# Fluid Blocks
 tile.fluid.grc.honeyMead.name=Hydromel
 tile.fluid.grc.honeyMead0.name=Hydromel
 tile.fluid.grc.honeyMead1.name=Hydromel
 tile.fluid.grc.honeyMead2.name=Hydromel
 tile.fluid.grc.honeyMead3.name=Hydromel
 
+# Fluid Tooltips
 fluid.grc.honeyMead0.modifier=Nouveau
 fluid.grc.honeyMead1.modifier=Fermenté
 fluid.grc.honeyMead2.modifier=Fermenté, Puissant
 fluid.grc.honeyMead3.modifier=Fermenté, Prolongé
 
+# Other
 grc.bees.bonus_prefix=Bonus :
 grc.bees.bees_prefix=Abeilles :
 grc.bees.honey_prefix=Miel :

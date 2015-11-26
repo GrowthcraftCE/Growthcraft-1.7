@@ -1,4 +1,5 @@
-﻿
+﻿# Blocks
 tile.grc.fishTrap.name=Filet de poisson
 
+# Containers
 container.grc.fishTrap=Filet de poisson

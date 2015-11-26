@@ -1,4 +1,4 @@
-﻿
+﻿# Blocks
 tile.grc.bambooStalk.name=Бамбук
 tile.grc.bambooBlock.name=Бамбук
 tile.grc.bambooLeaves.name=Бамбуковая листва
@@ -11,6 +11,7 @@ tile.grc.bambooFenceGate.name=Бамбуковая калитка
 tile.grc.bambooScaffold.name=Бамбуковые леса
 tile.grc.bambooDoor.name=Бамбуковая дверь
 
+# Items
 item.grc.bamboo.name=Бамбук
 item.grc.bambooDoor.name=Бамбуковая дверь
 item.grc.bambooSlab.name=Бамбуковая плита
@@ -18,4 +19,5 @@ item.grc.bambooRaft.name=Бамбуковый плот
 item.grc.bambooCoal.name=Бамбуковый древесный уголь
 item.grc.bambooShootFood.name=Бамбуковый побег
 
+# Entities
 entity.Growthcraft|Bamboo.bambooRaft.name=Бамбуковый плот

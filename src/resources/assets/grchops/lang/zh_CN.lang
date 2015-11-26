@@ -1,9 +1,11 @@
-﻿
+﻿# Blocks
 tile.grc.hopVine.name=啤酒花
 
+# Items
 item.grc.hops.name=啤酒花
 item.grc.hopSeeds.name=啤酒花种子
-	
+
+# Fluids
 fluid.grc.hopAle=麦芽酒
 fluid.grc.hopAle0=麦芽酒
 fluid.grc.hopAle1=麦芽酒
@@ -11,6 +13,7 @@ fluid.grc.hopAle2=麦芽酒
 fluid.grc.hopAle3=麦芽酒
 fluid.grc.hopAle4=麦芽酒
 
+# Fluid Tooltips
 fluid.grc.hopAle0.modifier=啤酒花, 轻度
 fluid.grc.hopAle1.modifier=啤酒花, 发酵
 fluid.grc.hopAle2.modifier=啤酒花, 发酵, 高度

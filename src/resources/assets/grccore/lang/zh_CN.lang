@@ -1,12 +1,16 @@
-﻿
+﻿# Creative Tabs
 itemGroup.tabGrowthCraft=Growthcraft
 
+# Blocks
 tile.grc.fenceRope.name=围栏绳
 tile.grc.ropeBlock.name=绳子
 
+# Items
 item.grc.rope.name=绳子
 
+# Fluids
 fluid.tile.water=水
 fluid.tile.lava=岩浆
 
+# Other
 achievementPage.pageGrowthCraft=Growthcraft

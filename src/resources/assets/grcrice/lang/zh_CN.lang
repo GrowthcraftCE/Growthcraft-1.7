@@ -1,16 +1,26 @@
-
+# Blocks
 tile.grc.paddyField.name=稻田
 tile.grc.riceBlock.name=稻米
 
+# Items
 item.grc.rice.name=稻米
 item.grc.riceBall.name=饭团
 
+# Fluids
 fluid.grc.riceSake=Sake
 fluid.grc.riceSake0=Sake
 fluid.grc.riceSake1=Sake
 fluid.grc.riceSake2=Sake
 fluid.grc.riceSake3=Sake
 
+# Fluid Blocks
+tile.fluid.grc.riceSake.name=Sake
+tile.fluid.grc.riceSake0.name=Sake
+tile.fluid.grc.riceSake1.name=Sake
+tile.fluid.grc.riceSake2.name=Sake
+tile.fluid.grc.riceSake3.name=Sake
+
+# Fluid Tooltips
 fluid.grc.riceSake0.modifier=米酒
 fluid.grc.riceSake1.modifier=轻度
 fluid.grc.riceSake2.modifier=发酵, 高度

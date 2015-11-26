@@ -1,16 +1,26 @@
-﻿
+﻿# Blocks
 tile.grc.appleBlock.name=Apfel
 tile.grc.appleSapling.name=Apfelbaum Setzling
 tile.grc.appleLeaves.name=Apfelbaum Blätter
 
+# Items
 item.grc.appleSeeds.name=Apfelkern
 
+# Fluids
 fluid.grc.appleCider=Apfelwein
 fluid.grc.appleCider0=Apfelwein
 fluid.grc.appleCider1=Apfelwein
 fluid.grc.appleCider2=Apfelwein
 fluid.grc.appleCider3=Apfelwein
 
+# Fluid Blocks
+tile.fluid.grc.appleCider.name=Apfelwein
+tile.fluid.grc.appleCider0.name=Apfelwein
+tile.fluid.grc.appleCider1.name=Apfelwein
+tile.fluid.grc.appleCider2.name=Apfelwein
+tile.fluid.grc.appleCider3.name=Apfelwein
+
+# Fluid Tooltips
 fluid.grc.appleCider0.modifier=Jung
 fluid.grc.appleCider1.modifier=Gegoren
 fluid.grc.appleCider2.modifier=Gegoren, Stark

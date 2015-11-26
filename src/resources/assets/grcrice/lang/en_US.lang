@@ -1,9 +1,12 @@
+# Blocks
 tile.grc.paddyField.name=Rice Paddy
 tile.grc.riceBlock.name=Paddy Rice
 
+# Items
 item.grc.rice.name=Paddy Rice Grain
 item.grc.riceBall.name=Onigiri
 
+# Fluids
 fluid.grc.riceSake=Sake
 fluid.grc.riceSake0=Sake
 fluid.grc.riceSake1=Sake
@@ -13,6 +16,7 @@ fluid.grc.riceSake4=Divine Sake
 fluid.grc.riceSake5=Sake
 fluid.grc.riceSake6=Sake
 
+# Fluid Buckets
 item.bucket.fluid.grc.riceSake.name=Sake Bucket
 item.bucket.fluid.grc.riceSake0.name=Sake Bucket
 item.bucket.fluid.grc.riceSake1.name=Sake Bucket
@@ -22,6 +26,7 @@ item.bucket.fluid.grc.riceSake4.name=Divine Sake Bucket
 item.bucket.fluid.grc.riceSake5.name=Sake Bucket
 item.bucket.fluid.grc.riceSake6.name=Sake Bucket
 
+# Fluid Blocks
 tile.fluid.grc.riceSake.name=Sake
 tile.fluid.grc.riceSake0.name=Sake
 tile.fluid.grc.riceSake1.name=Sake
@@ -31,6 +36,7 @@ tile.fluid.grc.riceSake4.name=Divine Sake
 tile.fluid.grc.riceSake5.name=Sake
 tile.fluid.grc.riceSake6.name=Sake
 
+# Fluid Tooltips
 fluid.grc.riceSake0.modifier=Young
 fluid.grc.riceSake1.modifier=Fermented
 fluid.grc.riceSake2.modifier=Fermented, Potent

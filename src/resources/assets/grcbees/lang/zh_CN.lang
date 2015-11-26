@@ -1,4 +1,4 @@
-﻿
+﻿# Blocks
 tile.grc.beeBox0.name=蜂箱
 tile.grc.beeBox1.name=蜂箱
 tile.grc.beeBox2.name=蜂箱
@@ -7,19 +7,30 @@ tile.grc.beeBox4.name=蜂箱
 tile.grc.beeBox5.name=蜂箱
 tile.grc.beeHive.name=蜂巢
 
+# Items
 item.grc.honeyComb.empty.name=蜜巢
 item.grc.honeyComb.full.name=蜜巢
 item.grc.honeyJar.name=蜂蜜
 item.grc.bee.name=蜜蜂
 
+# Containers
 container.grc.beeBox=蜂箱
 
+# Fluids
 fluid.grc.honeyMead=蜜酒
 fluid.grc.honeyMead0=蜜酒
 fluid.grc.honeyMead1=蜜酒
 fluid.grc.honeyMead2=蜜酒
 fluid.grc.honeyMead3=蜜酒
 
+# Fluid Blocks
+tile.fluid.grc.honeyMead.name=蜜酒
+tile.fluid.grc.honeyMead0.name=蜜酒
+tile.fluid.grc.honeyMead1.name=蜜酒
+tile.fluid.grc.honeyMead2.name=蜜酒
+tile.fluid.grc.honeyMead3.name=蜜酒
+
+# Fluid Tooltips
 fluid.grc.honeyMead0.modifier=蜜酒
 fluid.grc.honeyMead1.modifier=轻度
 fluid.grc.honeyMead2.modifier=发酵, 高度

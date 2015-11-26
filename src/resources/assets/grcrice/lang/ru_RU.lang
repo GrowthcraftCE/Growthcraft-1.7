@@ -1,17 +1,46 @@
-﻿
+﻿# Blocks
 tile.grc.paddyField.name=Заливное поле
 tile.grc.riceBlock.name=Заливной рис
 
+# Items
 item.grc.rice.name=Зёрна заливного риса
 item.grc.riceBall.name=Онигири
-	
+
+# Fluids	
 fluid.grc.riceSake=Сакэ
 fluid.grc.riceSake0=Сакэ
 fluid.grc.riceSake1=Сакэ
 fluid.grc.riceSake2=Сакэ
 fluid.grc.riceSake3=Сакэ
+fluid.grc.riceSake4=Божественное сакэ
+fluid.grc.riceSake5=Сакэ
+fluid.grc.riceSake6=Сакэ
 
+# Fluid Buckets
+item.bucket.fluid.grc.riceSake.name=Ведро сакэ
+item.bucket.fluid.grc.riceSake0.name=Ведро сакэ
+item.bucket.fluid.grc.riceSake1.name=Ведро сакэ
+item.bucket.fluid.grc.riceSake2.name=Ведро сакэ
+item.bucket.fluid.grc.riceSake3.name=Ведро сакэ
+item.bucket.fluid.grc.riceSake4.name=Ведро божественного сакэ
+item.bucket.fluid.grc.riceSake5.name=Ведро сакэ
+item.bucket.fluid.grc.riceSake6.name=Ведро сакэ
+
+# Fluid Blocks
+tile.fluid.grc.riceSake.name=Сакэ
+tile.fluid.grc.riceSake0.name=Сакэ
+tile.fluid.grc.riceSake1.name=Сакэ
+tile.fluid.grc.riceSake2.name=Сакэ
+tile.fluid.grc.riceSake3.name=Сакэ
+tile.fluid.grc.riceSake4.name=Божественное сакэ
+tile.fluid.grc.riceSake5.name=Сакэ
+tile.fluid.grc.riceSake6.name=Сакэ
+
+# Fluid Tooltips
 fluid.grc.riceSake0.modifier=Молодое
 fluid.grc.riceSake1.modifier=Сброженное
 fluid.grc.riceSake2.modifier=Сброженное, крепкое
 fluid.grc.riceSake3.modifier=Сброженное, расширенное
+fluid.grc.riceSake4.modifier=Сброженное, сильно расширенное
+fluid.grc.riceSake5.modifier=Сброженное, хмельное
+fluid.grc.riceSake6.modifier=Отравленное
