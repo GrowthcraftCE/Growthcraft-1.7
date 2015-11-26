@@ -30,6 +30,7 @@ public class BlockFluidBooze extends BlockFluidClassic
 	{
 		super(fluid, GrowthCraftCellar.getConfig().boozeIsWater ? Material.water : Materials.booze);
 		setBlockName(fluid.getUnlocalizedName());
+		setBlockTextureName("grccellar:booze");
 		setCreativeTab(GrowthCraftCellar.tab);
 		refreshColor();
 	}
@@ -67,8 +68,8 @@ public class BlockFluidBooze extends BlockFluidClassic
 	public void registerBlockIcons(IIconRegister iconRegister)
 	{
 		this.icons = new IIcon[2];
-		this.icons[0] = iconRegister.registerIcon("grccellar:booze_still");
-		this.icons[1] = iconRegister.registerIcon("grccellar:booze_flow");
+		this.icons[0] = iconRegister.registerIcon(getTextureName() + "_still");
+		this.icons[1] = iconRegister.registerIcon(getTextureName() + "_flow");
 	}
 
 	@Override
