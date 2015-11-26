@@ -26,6 +26,7 @@ package growthcraft.dairy;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.dairy.client.event.TextureStitchEventDairy;
 import growthcraft.dairy.common.CommonProxy;
 import growthcraft.dairy.init.GrcDairyBlocks;
 import growthcraft.dairy.init.GrcDairyBooze;
@@ -37,6 +38,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(
 	modid = GrowthCraftDairy.MOD_ID,
@@ -81,6 +83,8 @@ public class GrowthCraftDairy
 		modules.freeze();
 
 		modules.preInit();
+
+		MinecraftForge.EVENT_BUS.register(new TextureStitchEventDairy());
 		register();
 	}
 
