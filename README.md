@@ -2,10 +2,10 @@ Growthcraft
 ===========
 
 [![Minecraft Version](http://img.shields.io/minecraft/1.7.10.png?color=green)](https://minecraft.net/)
-[![Growthcraft Version](http://img.shields.io/growthcraft/2.3.1.png?color=green)](https://github.com/Alatyami/Growthcraft-1.7)
+[![Growthcraft Version](http://img.shields.io/growthcraft/2.3.1.png?color=green)](https://github.com/GrowthcraftCE/Growthcraft-1.7)
 [![Forge Version](http://img.shields.io/forge/10.13.4.1448.png?color=green)](http://files.minecraftforge.net/)
 [![Java Version](http://img.shields.io/java/7.png?color=green)](https://www.java.com/en/)
-[![Build Status](https://travis-ci.org/Alatyami/Growthcraft-1.7.svg?branch=master)](https://travis-ci.org/Alatyami/Growthcraft-1.7) [![Join the chat at https://gitter.im/Alatyami/Growthcraft-1.7](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/alatyami/Growthcraft-1.7?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.7.svg?branch=master)](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.7) [![Join the chat at https://gitter.im/GrowthcraftCE/Growthcraft-1.7](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/GrowthcraftCE/Growthcraft-1.7?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This is a community fork of the original GrowthCraft developed by Gwafu. The 
 original forum post can be found on the [Minecraft Forums mod page](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1286298-growthcraft-jul-15-2014-proper-1-7-10-release). We have created a [forum post](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10) for [Growthcraft CE](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10) for general discussions, announcements and feedback. Likewise this repository is on [Gitter](https://gitter.im/alatyami/Growthcraft-1.7) and we have an IRC channel on EsperNet (#growthcraft).
@@ -16,7 +16,7 @@ We are using the [Gamepedia FTB Wiki](http://ftb.gamepedia.com/GrowthCraft) for 
 
 ## Contributing 
 
-For any contributions to this project, please refer to our [Contributing to Growthcraft](https://github.com/alatyami/Growthcraft-1.7/wiki/Contributing-to-Growthcraft) wiki page and create a branch from our development branch. All pull requests need to be towards our development. Pull requests directly to the master branch will be closed without review.
+For any contributions to this project, please refer to our [Contributing to Growthcraft](https://github.com/GrowthcraftCE/Growthcraft-1.7/wiki/Contributing-to-Growthcraft) wiki page and create a branch from our development branch. All pull requests need to be towards our development. Pull requests directly to the master branch will be closed without review.
 
 ## License
 
