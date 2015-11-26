@@ -54,10 +54,16 @@ public class BoozeEffect implements IEffect
 		return this;
 	}
 
+	public BoozeEffect addEffect(IEffect effect)
+	{
+		effects.add(effect);
+		return this;
+	}
+
 	public BoozeEffect addPotionEntry(@Nonnull Potion p, int tm, int lvl)
 	{
 		final BoozePotionEffectFactory effect = new BoozePotionEffectFactory(booze, p.id, tm, lvl);
-		effects.add(new EffectAddPotionEffect(effect));
+		addEffect(new EffectAddPotionEffect(effect));
 		return this;
 	}
 
