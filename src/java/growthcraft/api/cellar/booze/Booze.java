@@ -23,9 +23,14 @@
  */
 package growthcraft.api.cellar.booze;
 
+import java.util.List;
+
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.description.IDescribable;
+
 import net.minecraftforge.fluids.Fluid;
 
-public class Booze extends Fluid
+public class Booze extends Fluid implements IDescribable
 {
 	protected int color;
 
@@ -45,5 +50,16 @@ public class Booze extends Fluid
 	{
 		this.color = col;
 		return this;
+	}
+
+	@Override
+	public void getDescription(List<String> list)
+	{
+		final String unloc = getUnlocalizedName() + ".desc";
+		final String result = GrcI18n.translate(unloc);
+		if (!unloc.equals(result))
+		{
+			list.add(result);
+		}
 	}
 }
