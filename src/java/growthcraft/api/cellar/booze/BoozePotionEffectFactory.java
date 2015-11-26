@@ -30,13 +30,11 @@ import java.util.Collection;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.description.Describer;
 import growthcraft.api.core.effect.IPotionEffectFactory;
-import growthcraft.api.core.i18n.GrcI18n;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
@@ -96,17 +94,6 @@ public class BoozePotionEffectFactory implements IPotionEffectFactory
 	public void getDescription(List<String> list)
 	{
 		final PotionEffect pe = createPotionEffect(null, null, null, null);
-
-		String s = GrcI18n.translate(pe.getEffectName()).trim();
-		if (pe.getAmplifier() > 0)
-		{
-			s = s + " " + GrcI18n.translate("potion.potency." + pe.getAmplifier()).trim();
-		}
-
-		if (pe.getDuration() > 20)
-		{
-			s = s + " (" + Potion.getDurationString(pe) + ")";
-		}
-		list.add(EnumChatFormatting.GRAY + s);
+		Describer.getPotionEffectDescription(list, pe);
 	}
 }

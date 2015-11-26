@@ -21,55 +21,52 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.effect;
+package growthcraft.api.core.description;
 
-import java.util.Random;
 import java.util.List;
 
-import growthcraft.api.core.description.Describer;
+import growthcraft.api.core.i18n.GrcI18n;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.world.World;
+import net.minecraft.util.EnumChatFormatting;
 
-public class SimplePotionEffectFactory implements IPotionEffectFactory
+/**
+ * A nice way to add descriptions to a list if the Object is an IDescribable
+ */
+public class Describer
 {
-	private int id;
-	private int time;
-	private int level;
+	private Describer() {}
 
-	public SimplePotionEffectFactory(int i, int tm, int lvl)
+	public static void getDescription(List<String> list, Object obj)
 	{
-		this.id = i;
-		this.time = tm;
-		this.level = lvl;
+		if (obj instanceof IDescribable)
+		{
+			((IDescribable)obj).getDescription(list);
+		}
 	}
 
-	public int getID()
+	public static void getPotionEffectDescription(List<String> list, PotionEffect pe)
 	{
-		return id;
-	}
+		if (pe == null) return;
 
-	public int getTime()
-	{
-		return time;
-	}
+		String s = GrcI18n.translate(pe.getEffectName()).trim();
+		final Potion potion = Potion.potionTypes[pe.getPotionID()];
+		if (potion != null)
+		{
+			if (potion.isBadEffect())
+				s = EnumChatFormatting.RED + s;
+		}
 
-	public int getLevel()
-	{
-		return level;
-	}
+		if (pe.getAmplifier() > 0)
+		{
+			s += " " + GrcI18n.translate("potion.potency." + pe.getAmplifier()).trim();
+		}
 
-	@Override
-	public PotionEffect createPotionEffect(World world, Entity entity, Random random, Object data)
-	{
-		return new PotionEffect(getID(), getTime(), getLevel());
-	}
-
-	@Override
-	public void getDescription(List<String> list)
-	{
-		final PotionEffect pe = createPotionEffect(null, null, null, null);
-		Describer.getPotionEffectDescription(list, pe);
+		if (pe.getDuration() > 20)
+		{
+			s += "" + EnumChatFormatting.GRAY + " (" + Potion.getDurationString(pe) + ")";
+		}
+		list.add(s);
 	}
 }
