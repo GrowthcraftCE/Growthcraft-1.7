@@ -107,6 +107,8 @@ dependencies {
     compile "codechicken:CodeChickenCore:${minecraft_version}-${code_chicken_core_version}:dev"
     compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
     compile "com.mod-buildcraft:buildcraft:${bc_version}:dev"
+
+    testCompile "junit:junit:4.11"
 }
 
 runClient {
