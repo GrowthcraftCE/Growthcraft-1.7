@@ -25,6 +25,8 @@ package growthcraft.api.core.effect;
 
 import java.util.Random;
 
+import growthcraft.api.core.description.IDescribable;
+
 import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
 

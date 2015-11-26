@@ -70,6 +70,7 @@ public class EffectChance implements IEffect
 		return this;
 	}
 
+	@Override
 	public void apply(World world, Entity entity, Random random, Object data)
 	{
 		if (effect != null)
@@ -81,6 +82,7 @@ public class EffectChance implements IEffect
 		}
 	}
 
+	@Override
 	public void getDescription(List<String> list)
 	{
 		tempList.clear();

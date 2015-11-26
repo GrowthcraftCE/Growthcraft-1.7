@@ -52,6 +52,7 @@ public class EffectRandomList extends AbstractEffectList
 	 * @param entity - entity to apply the effect to
 	 * @param data - any extra data you want to pass along
 	 */
+	@Override
 	public void apply(World world, Entity entity, Random random, Object data)
 	{
 		final int index = random.nextInt(effects.size());
@@ -64,6 +65,7 @@ public class EffectRandomList extends AbstractEffectList
 	 *
 	 * @param list - list to add description lines to
 	 */
+	@Override
 	public void getDescription(List<String> list)
 	{
 		// TODO, prepend the descriptions with

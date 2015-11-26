@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.api.core.i18n.GrcI18n;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
@@ -35,11 +36,13 @@ import net.minecraft.world.World;
  */
 public class EffectNull implements IEffect
 {
+	@Override
 	public void apply(World world, Entity entity, Random random, Object data) {}
 
+	@Override
 	public void getDescription(List<String> list)
 	{
 		// Set the description as "Does Nothing."
-		list.add(GrcI18n.translate("grc.effect.null"));
+		list.add(GrcI18n.translate("grc.effect.null.desc"));
 	}
 }

@@ -64,6 +64,7 @@ public class EffectAddPotionEffect implements IEffect
 	 * @param entity - entity to apply the effect to
 	 * @param data - any extra data you want to pass along
 	 */
+	@Override
 	public void apply(World world, Entity entity, Random random, Object data)
 	{
 		if (entity instanceof EntityLivingBase)
@@ -74,6 +75,7 @@ public class EffectAddPotionEffect implements IEffect
 		}
 	}
 
+	@Override
 	public void getDescription(List<String> list)
 	{
 		potionFactory.getDescription(list);
