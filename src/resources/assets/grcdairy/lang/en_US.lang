@@ -1,0 +1,49 @@
+# Creative Tabs
+itemGroup.tabGrcDairy=Growthcraft Dairy
+
+# Items
+item.grcdairy.ItemCheese0=Cheese
+
+# Blocks
+tile.grcdairy.BlockCheeseVat0=Cheese Vat
+tile.grcdairy.BlockButterChurn0=Butter Churn
+
+# Butter
+item.grcdairy.butter0=Butter
+
+# Cheese
+item.grcdairy.cheese0=Cheese
+
+# Booze
+fluid.grcdairy.milk=Milk
+fluid.grcdairy.milk0=Milk
+fluid.grcdairy.milk1=Kumis
+fluid.grcdairy.milk2=Kumis
+fluid.grcdairy.milk3=Kumis
+fluid.grcdairy.milk4=Kumis
+fluid.grcdairy.milk5=Kumis
+fluid.grcdairy.milk6=Vile Milk
+fluid.grcdairy.milk6.desc=Even the sweetest of things can become corrupt.
+
+## Booze Blocks
+tile.fluid.grcdairy.milk.name=Milk
+tile.fluid.grcdairy.milk0.name=Milk
+tile.fluid.grcdairy.milk1.name=Kumis
+tile.fluid.grcdairy.milk2.name=Kumis
+tile.fluid.grcdairy.milk3.name=Kumis
+tile.fluid.grcdairy.milk4.name=Kumis
+tile.fluid.grcdairy.milk5.name=Kumis
+tile.fluid.grcdairy.milk6.name=Vile Milk
+
+## Booze Bucket
+item.bucket.fluid.grcdairy.milk.name=Milk Bucket
+item.bucket.fluid.grcdairy.milk0.name=Milk Bucket
+item.bucket.fluid.grcdairy.milk1.name=Kumis Bucket
+item.bucket.fluid.grcdairy.milk2.name=Kumis Bucket
+item.bucket.fluid.grcdairy.milk3.name=Kumis Bucket
+item.bucket.fluid.grcdairy.milk4.name=Kumis Bucket
+item.bucket.fluid.grcdairy.milk5.name=Kumis Bucket
+item.bucket.fluid.grcdairy.milk6.name=Vile Milk Bucket
+
+# Effects
+grc.effect.booze_milk=Removes all effects (Except Tipsy)

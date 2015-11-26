@@ -48,5 +48,5 @@ grc.format.paddy.hasFluid=Has Fluid :
 
 # Effects
 grc.effect.null.desc=Does Nothing
-grc.effect.chance.format=%d%% chance of:
+grc.effect.chance.format=%d%% Chance of
 grc.effect.remove_potion_effect.format=Removes %s
