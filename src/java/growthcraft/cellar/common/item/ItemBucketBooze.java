@@ -4,6 +4,7 @@ import java.util.List;
 
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.util.UnitFormatter;
+import growthcraft.cellar.util.BoozeUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -53,19 +54,13 @@ public class ItemBucketBooze extends ItemBucket implements IBoozeContainer
 		return UnitFormatter.fluidBucketName(getBooze());
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
-	{
-		final String s = UnitFormatter.fluidModifier(getBooze());
-		if (s != null) list.add(s);
-	}
-
 	@SideOnly(Side.CLIENT)
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		writeModifierTooltip(stack, player, list, bool);
+		super.addInformation(stack, player, list, bool);
+		BoozeUtils.addInformation(getBooze(), stack, player, list, bool);
 	}
 
 	@SideOnly(Side.CLIENT)

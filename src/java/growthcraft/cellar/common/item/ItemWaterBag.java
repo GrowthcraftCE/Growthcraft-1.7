@@ -326,7 +326,7 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 			final String fluidname = UnitFormatter.fluidNameForContainer(fluidstack);
 			list.add(GrcI18n.translate("grc.cellar.format.waterBag.contents", fluidname, fluidstack.amount, getCapacity(stack)));
 			final Fluid booze = fluidstack.getFluid();
-			BoozeUtils.addInformation(booze, stack, player, list, bool);
+			BoozeUtils.addBottleInformation(booze, stack, player, list, bool);
 		}
 		super.addInformation(stack, player, list, bool);
 	}

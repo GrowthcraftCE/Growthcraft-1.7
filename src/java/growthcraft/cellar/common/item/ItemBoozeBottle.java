@@ -6,7 +6,6 @@ import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.util.ItemUtils;
-import growthcraft.core.util.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -107,22 +106,14 @@ public class ItemBoozeBottle extends ItemFood
 	/************
 	 * TOOLTIP
 	 ************/
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
-	{
-		final String s = UnitFormatter.fluidModifier(getBoozeForStack(stack));
-		if (s != null) list.add(s);
-	}
-
 	@SideOnly(Side.CLIENT)
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
+		super.addInformation(stack, player, list, bool);
 		final Fluid booze = getBoozeForStack(stack);
-		writeModifierTooltip(stack, player, list, bool);
-
-		BoozeUtils.addInformation(booze, stack, player, list, bool);
+		BoozeUtils.addBottleInformation(booze, stack, player, list, bool);
 	}
 
 	/************

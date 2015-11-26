@@ -75,8 +75,8 @@ public class ItemBoozeBucketDEPRECATED extends Item
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		writeModifierTooltip(stack, player, list, bool);
 		super.addInformation(stack, player, list, bool);
+		writeModifierTooltip(stack, player, list, bool);
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
