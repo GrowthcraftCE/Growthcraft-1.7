@@ -1,9 +1,11 @@
-
+# Blocks
 tile.grc.hopVine.name=Vinha de Lúpulo
 
+# Items
 item.grc.hops.name=Lúpulo
 item.grc.hopSeeds.name=Sementes de Lúpulo
 
+# Fluids
 fluid.grc.hopAle=Cerveja (Tipo Ale)
 fluid.grc.hopAle0=Cerveja (Tipo Ale)
 fluid.grc.hopAle1=Cerveja (Tipo Ale)
@@ -11,6 +13,15 @@ fluid.grc.hopAle2=Cerveja (Tipo Ale)
 fluid.grc.hopAle3=Cerveja (Tipo Ale)
 fluid.grc.hopAle4=Cerveja (Tipo Ale)
 
+# Fluid Blocks
+tile.fluid.grc.hopAle.name=Cerveja (Tipo Ale)
+tile.fluid.grc.hopAle0.name=Cerveja (Tipo Ale)
+tile.fluid.grc.hopAle1.name=Cerveja (Tipo Ale)
+tile.fluid.grc.hopAle2.name=Cerveja (Tipo Ale)
+tile.fluid.grc.hopAle3.name=Cerveja (Tipo Ale)
+tile.fluid.grc.hopAle4.name=Cerveja (Tipo Ale)
+
+# Fluid Tooltips
 fluid.grc.hopAle0.modifier=C/ Lúpulo, Fresca
 fluid.grc.hopAle1.modifier=C/ Lúpulo, Fermentada
 fluid.grc.hopAle2.modifier=C/ Lúpulo, Fermentada, Potente

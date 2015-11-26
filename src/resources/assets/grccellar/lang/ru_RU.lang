@@ -1,28 +1,101 @@
-﻿
+﻿# Creative Tabs
 itemGroup.tabGrCCellar=Growthcraft: Погреб
 
+# Blocks
 tile.grc.fruitPress.name=Плодовый пресс
 tile.grc.fruitPresser.name=Плодовый пресс
 tile.grc.brewKettle.name=Сусловарочный котёл
 tile.grc.fermentBarrel.name=Бочка для брожения
+tile.grc.fermentJar.name=Банка для брожения
 
+// Please remove this field once all other module translations have been updated,
+// this is no longer used
+# Items
 item.grc.boozeBucket.name=Ведро
 
+item.grc.yeast0.name=Пивные дрожжи
+item.grc.yeast1.name=Лагерные дрожжи
+item.grc.yeast2.name=Винные дрожжи
+item.grc.yeast3.name=Эфирные дрожжи
+item.grc.yeast4.name=Обыкновенные дрожжи
+
+# Water Bags
+item.grc.waterBag0.name=Water Bag (White)
+item.grc.waterBag1.name=Water Bag (Orange)
+item.grc.waterBag2.name=Water Bag (Magenta)
+item.grc.waterBag3.name=Water Bag (Light Blue)
+item.grc.waterBag4.name=Water Bag (Yellow)
+item.grc.waterBag5.name=Water Bag (Lime)
+item.grc.waterBag6.name=Water Bag (Pink)
+item.grc.waterBag7.name=Water Bag (Gray)
+item.grc.waterBag8.name=Water Bag (Light Gray)
+item.grc.waterBag9.name=Water Bag (Cyan)
+item.grc.waterBag10.name=Water Bag (Purple)
+item.grc.waterBag11.name=Water Bag (Blue)
+item.grc.waterBag12.name=Water Bag (Brown)
+item.grc.waterBag13.name=Water Bag (Green)
+item.grc.waterBag14.name=Water Bag (Red)
+item.grc.waterBag15.name=Water Bag (Black)
+item.grc.waterBag16.name=Water Bag
+
+# Containers
 container.grc.fruitPress=Плодовый пресс
 container.grc.brewKettle=Сусловарочный котёл
 container.grc.fermentBarrel=Бочка для брожения
+container.grc.fermentJar=Банка для брожения
 
+# Other
 grc.potion.tipsy=Опьянение
-
 grc.booze=Booze
+
+# Modifiers
+grc.booze.modifier.young=Young
+grc.booze.modifier.fermented=Fermented
+grc.booze.modifier.extended=Extended
+grc.booze.modifier.potent=Potent
+grc.booze.modifier.hyper_extended=Hyper Extended
+grc.booze.modifier.deadly=Deadly
+grc.booze.modifier.poisoned=Poisoned
+grc.booze.modifier.chilled=Chilled
+grc.booze.modifier.intoxicated=Intoxicated
+
+# GUI
 gui.grc.empty=Пусто
 gui.grc.discard=Discard
 gui.grc.switch=Переключить
 gui.grc.cantferment=Нельзя начать брожение.
 
+# Achievements
 achievement.craftBarrel=Добыча алкоголя
 achievement.craftBarrel.desc=Сделайте бочку для брожения из трёх деревянных досок и шести железных слитков.
 achievement.fermentBooze=Я мог сделать дрожжи.
 achievement.fermentBooze.desc=Сбродите алкогольный напиток.
 achievement.getDrunk=Пивоварение - это проблема?
 achievement.getDrunk.desc=Получите опьянение V.
+
+# Tooltips (Number is a percentage)
+grc.cellar.format.waterBag.name=%s (%s)
+grc.cellar.format.waterBag.contents=Содержит: %1$s (%2$dмВ/%3$dМв)
+grc.cellar.format.tipsy_chance=Шанс опьянения: %d%%
+grc.cellar.item.booze_bucket.deprecated=УСТАРЕЛО, положите в сетку создания, чтобы обновить
+grc.cellar.item.booze_bucket.deprecated_suffix= (УСТАРЕЛО)
+
+grc.cellar.brewKettle.brewing_prefix=Варка :
+grc.cellar.brewKettle.itemslot.item=Предмет : %s
+grc.cellar.brewKettle.itemslot.residue=Остаток : %s
+grc.cellar.fermentBarrel.progress_prefix=Прогресс :
+grc.cellar.fermentBarrel.progress_format=%d%%
+grc.cellar.fermentBarrel.itemslot.modifier=Модификатор : %s
+grc.cellar.fermentJar.itemslot.yeast=%s
+grc.cellar.fruitPress.itemslot.item=Предмет : %s
+grc.cellar.fruitPress.itemslot.residue=Остаток : %s
+grc.cellar.fruitPresser.state.invalid=<Invalid>
+grc.cellar.fruitPresser.state.pressed=Pressed
+grc.cellar.fruitPresser.state.unpressed=Unpressed
+grc.cellar.fruitPresser.state_prefix=State :
+
+# Waila Tooltips
+grc.cellar.waila.option.DisplayFluidContent=Жидкостные резервуары
+grc.cellar.waila.option.FruitPressExtras=Fruit Press Extras
+grc.cellar.waila.option.BrewKettleExtras=Brew Kettle Extras
+grc.cellar.waila.option.FermentBarrelExtras=Fermentation Barrel Extras

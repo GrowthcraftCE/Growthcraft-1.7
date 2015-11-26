@@ -1,25 +1,31 @@
-﻿
+﻿# Creative Tabs
 itemGroup.tabGrCCellar=Growthcraft 地窖
 
+# Blocks
 tile.grc.fruitPress.name=榨汁机
 tile.grc.fruitPresser.name=榨汁机
 tile.grc.brewKettle.name=酿造锅
 tile.grc.fermentBarrel.name=发酵桶
 
+# Items
 item.grc.boozeBucket.name=一桶
 
+# Containers
 container.grc.fruitPress=榨汁机
 container.grc.brewKettle=酿造锅
 container.grc.fermentBarrel=发酵桶
 
+# Other
 grc.potion.tipsy=微醺
-
 grc.booze=豪饮
+
+# GUI
 gui.grc.empty=清空
 gui.grc.discard=丢弃
 gui.grc.switch=切换
 gui.grc.cantferment=无法发酵.
 
+# Achievements
 achievement.craftBarrel=萃取桶
 achievement.craftBarrel.desc=achievement.craftBarrel.desc=使用三块木板和6个铁锭合成发酵桶。
 achievement.fermentBooze=酵母制作我在行。

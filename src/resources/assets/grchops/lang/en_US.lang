@@ -1,9 +1,11 @@
-﻿
+﻿# Blocks
 tile.grc.hopVine.name=Common Hops
 
+# Items
 item.grc.hops.name=Common Hops
 item.grc.hopSeeds.name=Common Hop Seeds
 
+# Fluids
 fluid.grc.hopAle=Ale
 fluid.grc.hopAle0=Ale
 fluid.grc.hopAle1=Ale
@@ -11,6 +13,7 @@ fluid.grc.hopAle2=Ale
 fluid.grc.hopAle3=Ale
 fluid.grc.hopAle4=Ale
 
+# Fluid Buckets
 item.bucket.fluid.grc.hopAle.name=Ale Bucket
 item.bucket.fluid.grc.hopAle0.name=Ale Bucket
 item.bucket.fluid.grc.hopAle1.name=Ale Bucket
@@ -18,6 +21,7 @@ item.bucket.fluid.grc.hopAle2.name=Ale Bucket
 item.bucket.fluid.grc.hopAle3.name=Ale Bucket
 item.bucket.fluid.grc.hopAle4.name=Ale Bucket
 
+# Fluid Blocks
 tile.fluid.grc.hopAle.name=Ale
 tile.fluid.grc.hopAle0.name=Ale
 tile.fluid.grc.hopAle1.name=Ale
@@ -25,6 +29,7 @@ tile.fluid.grc.hopAle2.name=Ale
 tile.fluid.grc.hopAle3.name=Ale
 tile.fluid.grc.hopAle4.name=Ale
 
+# Fluid Tooltips
 fluid.grc.hopAle0.modifier=Hopped, Young
 fluid.grc.hopAle1.modifier=Hopped, Fermented
 fluid.grc.hopAle2.modifier=Hopped, Fermented, Potent

@@ -1,5 +1,7 @@
+# Creative Tabs
 itemGroup.tabGrCCellar=Cave Growthcraft
 
+# Blocks
 tile.grc.fruitPress.name=Pressoir à fruit
 tile.grc.fruitPresser.name=Pressoir à fruit
 tile.grc.brewKettle.name=Bouilloire de brassage
@@ -7,6 +9,7 @@ tile.grc.fermentBarrel.name=Tonneau de fermentation
 
 // Please remove this field once all other module translations have been updated,
 // this is no longer used
+# Items
 item.grc.boozeBucket.name=Seau
 
 item.grc.yeast0.name=Levure de brasseurs
@@ -15,23 +18,28 @@ item.grc.yeast2.name=Levure de Bayanus
 item.grc.yeast3.name=Levure éthérée
 item.grc.yeast4.name=Levure d'origine
 
+# Containers
 container.grc.fruitPress=Pressoir à fruit
 container.grc.brewKettle=Bouilloire de brassage
 container.grc.fermentBarrel=Tonneau de fermentation
 
+# Other
 grc.potion.tipsy=Pompette
-
 grc.booze=Picoler
+
+# Modifiers
 grc.booze.modifier.young=Nouveau
 grc.booze.modifier.fermented=Fermenté
 grc.booze.modifier.extended=Prolongé
 grc.booze.modifier.potent=Puissant
 
+# GUI
 gui.grc.empty=Vide
 gui.grc.discard=Rebut
 gui.grc.switch=Basculer
 gui.grc.cantferment=Ne peut Fermenter
 
+# Achievements
 achievement.craftBarrel=Extraction de tonnelier
 achievement.craftBarrel.desc=Fabriquez un tonneau de fermentation avec trois planches de bois et six lingots de fer.
 achievement.fermentBooze=C'est la levure je peux faire...
@@ -39,7 +47,7 @@ achievement.fermentBooze.desc=Fermentez une boisson alcolisée.
 achievement.getDrunk=Es-ce menace de désordre ?
 achievement.getDrunk.desc=Acquérez Pompette V.
 
-// number is a percentage
+# Tooltips (Number is a percentage)
 grc.cellar.format.tipsy_chance=%d%% Chance d'ivresse
 grc.cellar.item.booze_bucket.deprecated=OBSOLETE, fabriquez une amèlioration de seau
 grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETE)
@@ -57,6 +65,7 @@ grc.cellar.fruitPresser.state.pressed=Pressé
 grc.cellar.fruitPresser.state.unpressed=Non-pressé
 grc.cellar.fruitPresser.state_prefix=État :
 
+# Waila Tooltips
 grc.cellar.waila.option.DisplayFluidContent=Réservoirs de fluide
 grc.cellar.waila.option.FruitPressExtras=Supplément de pressage
 grc.cellar.waila.option.BrewKettleExtras=Supplément de brassage

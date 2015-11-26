@@ -1,16 +1,26 @@
-
+# Blocks
 tile.grc.paddyField.name=Arrozal
 tile.grc.riceBlock.name=Arroz
 
+# Items
 item.grc.rice.name=Grãos de Arroz
 item.grc.riceBall.name=Onigiri
-	
+
+# Fluids
 fluid.grc.riceSake=Sakê
 fluid.grc.riceSake0=Sakê
 fluid.grc.riceSake1=Sakê
 fluid.grc.riceSake2=Sakê
 fluid.grc.riceSake3=Sakê
 
+# Fluid Blocks
+tile.fluid.grc.riceSake.name=Sakê
+tile.fluid.grc.riceSake0.name=Sakê
+tile.fluid.grc.riceSake1.name=Sakê
+tile.fluid.grc.riceSake2.name=Sakê
+tile.fluid.grc.riceSake3.name=Sakê
+
+# Fluid Tooltips
 fluid.grc.riceSake0.modifier=Fresco
 fluid.grc.riceSake1.modifier=Fermentado
 fluid.grc.riceSake2.modifier=Fermentado, Potente

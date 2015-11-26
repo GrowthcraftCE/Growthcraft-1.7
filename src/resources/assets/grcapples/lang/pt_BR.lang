@@ -1,14 +1,26 @@
+# Blocks
 tile.grc.appleBlock.name=Maçã
 tile.grc.appleSapling.name=Muda de Macieira
 tile.grc.appleLeaves.name=Folhas de Macieira
 
+# Items
 item.grc.appleSeeds.name=Sementes de Maçã
+
+# Fluids
 fluid.grc.appleCider=Cidra de Maçã
 fluid.grc.appleCider0=Cidra de Maçã
 fluid.grc.appleCider1=Cidra de Maçã
 fluid.grc.appleCider2=Cidra de Maçã
 fluid.grc.appleCider3=Cidra de Maçã
 
+# Fluid Blocks
+tile.fluid.grc.appleCider.name=Cidra de Maçã
+tile.fluid.grc.appleCider0.name=Cidra de Maçã
+tile.fluid.grc.appleCider1.name=Cidra de Maçã
+tile.fluid.grc.appleCider2.name=Cidra de Maçã
+tile.fluid.grc.appleCider3.name=Cidra de Maçã
+
+# Fluid Tooltips
 fluid.grc.appleCider0.modifier=Fresca
 fluid.grc.appleCider1.modifier=Fermentada
 fluid.grc.appleCider2.modifier=Fermentada, Potente

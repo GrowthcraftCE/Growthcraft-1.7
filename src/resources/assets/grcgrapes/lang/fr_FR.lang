@@ -1,30 +1,35 @@
-﻿
+﻿# Blocks
 tile.grc.grapeVine0.name=Pied de vigne
 tile.grc.grapeVine1.name=Charpente de vigne
 tile.grc.grapeLeaves.name=Feuilles de vigne
 tile.grc.grapeBlock.name=Raisin commun
 
+# Items
 item.grc.grapes.name=Raisin commun
 item.grc.grapeSeeds.name=Pépins de raisin commun
 
+# Fluids
 fluid.grc.grapeWine=Vin
 fluid.grc.grapeWine0=Vin
 fluid.grc.grapeWine1=Vin
 fluid.grc.grapeWine2=Vin
 fluid.grc.grapeWine3=Vin
 
+# Fluid Buckets
 item.bucket.fluid.grc.grapeWine.name=Seau de vin
 item.bucket.fluid.grc.grapeWine0.name=Seau de vin
 item.bucket.fluid.grc.grapeWine1.name=Seau de vin
 item.bucket.fluid.grc.grapeWine2.name=Seau de vin
 item.bucket.fluid.grc.grapeWine3.name=Seau de vin
 
+# Fluid Blocks
 tile.fluid.grc.grapeWine.name=Vin
 tile.fluid.grc.grapeWine0.name=Vin
 tile.fluid.grc.grapeWine1.name=Vin
 tile.fluid.grc.grapeWine2.name=Vin
 tile.fluid.grc.grapeWine3.name=Vin
 
+# Fluid Tooltips
 fluid.grc.grapeWine0.modifier=Nouveau
 fluid.grc.grapeWine1.modifier=Fermenté
 fluid.grc.grapeWine2.modifier=Fermenté, Puissant

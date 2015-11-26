@@ -1,26 +1,68 @@
-﻿
-tile.grc.beeBox0.name=Пчелиный ящик
-tile.grc.beeBox1.name=Пчелиный ящик
-tile.grc.beeBox2.name=Пчелиный ящик
-tile.grc.beeBox3.name=Пчелиный ящик
-tile.grc.beeBox4.name=Пчелиный ящик
-tile.grc.beeBox5.name=Пчелиный ящик
+﻿# Creative Tabs
+itemGroup.tabGrowthCraftBees=Growthcraft: Пчёлы
+
+## Blocks
+# Vanilla Bee Boxes
+tile.grc.BeeBox.Minecraft0.name=Пчелиный ящик из дуба
+tile.grc.BeeBox.Minecraft1.name=Пчелиный ящик из ели
+tile.grc.BeeBox.Minecraft2.name=Пчелиный ящик из берёзы
+tile.grc.BeeBox.Minecraft3.name=Пчелиный ящик из тропического дерева
+tile.grc.BeeBox.Minecraft4.name=Пчелиный ящик из акации
+tile.grc.BeeBox.Minecraft5.name=Пчелиный ящик из тёмного дуба
+
+# Growthcraft|Nether Bee Boxes
+tile.grc.BeeBox.Nether0.name=Пчелиный ящик из дерева злобы
+
+# Growthcraft|Bamboo Bee Boxes
+tile.grc.BeeBox.Bamboo0.name=Пчелиный ящик из бамбука
+
+# Thaumcraft Bee Boxes
+tile.grc.BeeBox.Thaumcraft0.name=Пчелиный ящик из великого дерева
+tile.grc.BeeBox.Thaumcraft1.name=Пчелиный ящик из серебряного дерева
+
+# Other Blocks
 tile.grc.beeHive.name=Пчелиный улей
 
+# Items
 item.grc.honeyComb.empty.name=Пустые медовые соты
 item.grc.honeyComb.full.name=Медовые соты
 item.grc.honeyJar.name=Мёд
 item.grc.bee.name=Пчела
 
+# Tooltips
+grc.bees.item.honeyComb.deprecated=Этот предмет устарел, положите его в сетку создания, чтобы получить новый.
+
+# Containers
 container.grc.beeBox=Пчелиный ящик
 
+# Fluids
 fluid.grc.honeyMead=Медовуха
 fluid.grc.honeyMead0=Медовуха
 fluid.grc.honeyMead1=Медовуха
 fluid.grc.honeyMead2=Медовуха
 fluid.grc.honeyMead3=Медовуха
 
+# Fluid Buckets
+item.bucket.fluid.grc.honeyMead.name=Ведро медовухи
+item.bucket.fluid.grc.honeyMead0.name=Ведро медовухи
+item.bucket.fluid.grc.honeyMead1.name=Ведро медовухи
+item.bucket.fluid.grc.honeyMead2.name=Ведро медовухи
+item.bucket.fluid.grc.honeyMead3.name=Ведро медовухи
+
+# Fluid Blocks
+tile.fluid.grc.honeyMead.name=Медовуха
+tile.fluid.grc.honeyMead0.name=Медовуха
+tile.fluid.grc.honeyMead1.name=Медовуха
+tile.fluid.grc.honeyMead2.name=Медовуха
+tile.fluid.grc.honeyMead3.name=Медовуха
+
+# Fluid Tooltips
 fluid.grc.honeyMead0.modifier=Молодая
 fluid.grc.honeyMead1.modifier=Сброженная
 fluid.grc.honeyMead2.modifier=Сброженная, крепкая
 fluid.grc.honeyMead3.modifier=Сброженная, расширенная
+
+# Other
+grc.bees.bonus_prefix=Бонус :
+grc.bees.bees_prefix=Пчёлы :
+grc.bees.honey_prefix=Мёд :

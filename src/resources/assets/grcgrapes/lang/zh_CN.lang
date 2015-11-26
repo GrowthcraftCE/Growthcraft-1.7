@@ -1,18 +1,28 @@
-﻿
+﻿# Blocks
 tile.grc.grapeVine0.name=葡萄树干
 tile.grc.grapeVine1.name=葡萄树干
 tile.grc.grapeLeaves.name=葡萄叶
 tile.grc.grapeBlock.name=葡萄
 
+# Items
 item.grc.grapes.name=葡萄
 item.grc.grapeSeeds.name=葡萄籽
 
+# Fluids
 fluid.grc.grapeWine=葡萄酒
 fluid.grc.grapeWine0=葡萄酒
 fluid.grc.grapeWine1=葡萄酒
 fluid.grc.grapeWine2=葡萄酒
 fluid.grc.grapeWine3=葡萄酒
 
+# Fluid Blocks
+tile.fluid.grc.grapeWine.name=葡萄酒
+tile.fluid.grc.grapeWine0.name=葡萄酒
+tile.fluid.grc.grapeWine1.name=葡萄酒
+tile.fluid.grc.grapeWine2.name=葡萄酒
+tile.fluid.grc.grapeWine3.name=葡萄酒
+
+# Fluid Tooltips
 fluid.grc.grapeWine0.modifier=轻度
 fluid.grc.grapeWine1.modifier=发酵
 fluid.grc.grapeWine2.modifier=发酵, 高度

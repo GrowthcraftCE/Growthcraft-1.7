@@ -1,4 +1,5 @@
-﻿
+﻿# Blocks
 tile.grc.fishTrap.name=Ловушка для рыб
 
+# Containers
 container.grc.fishTrap=Ловушка для рыб

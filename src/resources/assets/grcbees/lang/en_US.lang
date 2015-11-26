@@ -1,57 +1,68 @@
-﻿// Creative Tab
+﻿# Creative Tabs
 itemGroup.tabGrowthCraftBees=Growthcraft Bees
 
-// Tiles
-/// Vanilla Bee Boxes
+# Blocks
+# Vanilla Bee Boxes
 tile.grc.BeeBox.Minecraft0.name=Oak Bee Box
 tile.grc.BeeBox.Minecraft1.name=Spruce Bee Box
 tile.grc.BeeBox.Minecraft2.name=Birch Bee Box
 tile.grc.BeeBox.Minecraft3.name=Jungle Bee Box
 tile.grc.BeeBox.Minecraft4.name=Acacia Bee Box
 tile.grc.BeeBox.Minecraft5.name=Dark Oak Bee Box
-/// Growthcraft|Nether Bee Boxes
+
+# Growthcraft|Nether Bee Boxes
 tile.grc.BeeBox.Nether0.name=Malice Bee Box
-/// Growthcraft|Bamboo Bee Boxes
+
+# Growthcraft|Bamboo Bee Boxes
 tile.grc.BeeBox.Bamboo0.name=Bamboo Bee Box
-/// Thaumcraft Bee Boxes
+
+# Thaumcraft Bee Boxes
 tile.grc.BeeBox.Thaumcraft0.name=Greatwood Bee Box
 tile.grc.BeeBox.Thaumcraft1.name=Silverwood Bee Box
 
+# Other Blocks
 tile.grc.beeHive.name=Bee Hive
 
-// Items
+# Items
 item.grc.honeyComb.empty.name=Empty Honeycomb
 item.grc.honeyComb.full.name=Honeycomb
 item.grc.honeyJar.name=Honey
 item.grc.bee.name=Bee
 
+# Tooltips
 grc.bees.item.honeyComb.deprecated=This item has been deprecated, craft to get the updated item.
 
+# Containers
 container.grc.beeBox=Bee Box
 
+# Fluids
 fluid.grc.honeyMead=Mead
 fluid.grc.honeyMead0=Mead
 fluid.grc.honeyMead1=Mead
 fluid.grc.honeyMead2=Mead
 fluid.grc.honeyMead3=Mead
 
+# Fluid Buckets
 item.bucket.fluid.grc.honeyMead.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead0.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead1.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead2.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead3.name=Mead Bucket
 
+# Fluid Blocks
 tile.fluid.grc.honeyMead.name=Mead
 tile.fluid.grc.honeyMead0.name=Mead
 tile.fluid.grc.honeyMead1.name=Mead
 tile.fluid.grc.honeyMead2.name=Mead
 tile.fluid.grc.honeyMead3.name=Mead
 
+# Fluid Tooltips
 fluid.grc.honeyMead0.modifier=Young
 fluid.grc.honeyMead1.modifier=Fermented
 fluid.grc.honeyMead2.modifier=Fermented, Potent
 fluid.grc.honeyMead3.modifier=Fermented, Extended
 
+# Other
 grc.bees.bonus_prefix=Bonus :
 grc.bees.bees_prefix=Bees :
 grc.bees.honey_prefix=Honey :

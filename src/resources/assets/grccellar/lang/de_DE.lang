@@ -1,25 +1,31 @@
-﻿
+﻿# Creative Tabs
 itemGroup.tabGrCCellar=Growthcraft Keller
 
+# Blocks
 tile.grc.fruitPress.name=Fruchtpresse
 tile.grc.fruitPresser.name=Fruchtpresse
 tile.grc.brewKettle.name=Braukessel
 tile.grc.fermentBarrel.name=Reifefass
 
+# Items
 item.grc.boozeBucket.name=Eimer mit
 
+# Containers
 container.grc.fruitPress=Fruchtpresse
 container.grc.brewKettle=Braukessel
 container.grc.fermentBarrel=Reifefass
 
+# Other
 grc.potion.tipsy=Angetrunken
-
 grc.booze=Alkohol
+
+# GUI
 gui.grc.empty=Leer
 gui.grc.discard=Leeren
 gui.grc.switch=Tauschen
 gui.grc.cantferment=Kann nicht gären
 
+# Achievements
 achievement.craftBarrel=Ein Fass aufmachen
 achievement.craftBarrel.desc=achievement.craftBarrel.desc=Craft a fermenting barrel with three wooden planks and six iron ingots.
 achievement.fermentBooze=Was soll sich klären, muss erst gären

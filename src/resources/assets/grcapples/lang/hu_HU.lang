@@ -1,15 +1,26 @@
+# Blocks
 tile.grc.appleBlock.name=Alma
 tile.grc.appleSapling.name=Almafa csemete
 tile.grc.appleLeaves.name=Almafa levél
 
+# Items
 item.grc.appleSeeds.name=Alma csutka
-	
+
+# Fluids
 fluid.grc.appleCider=Almabor
 fluid.grc.appleCider0=Almabor
 fluid.grc.appleCider1=Almabor
 fluid.grc.appleCider2=Almabor
 fluid.grc.appleCider3=Almabor
 
+# Fluid Blocks
+tile.fluid.grc.appleCider.name=Almabor
+tile.fluid.grc.appleCider0.name=Almabor
+tile.fluid.grc.appleCider1.name=Almabor
+tile.fluid.grc.appleCider2.name=Almabor
+tile.fluid.grc.appleCider3.name=Almabor
+
+# Fluid Tooltips
 fluid.grc.appleCider0.modifier=Fiatal
 fluid.grc.appleCider1.modifier=Erjesztett
 fluid.grc.appleCider2.modifier=Erjesztett, Tömény

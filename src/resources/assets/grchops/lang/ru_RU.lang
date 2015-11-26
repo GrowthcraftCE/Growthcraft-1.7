@@ -1,9 +1,11 @@
-﻿
+﻿# Blocks
 tile.grc.hopVine.name=Обычный хмель
 
+# Items
 item.grc.hops.name=Обычный хмель
 item.grc.hopSeeds.name=Семена обычного хмеля
 
+# Fluids
 fluid.grc.hopAle=Эль
 fluid.grc.hopAle0=Эль
 fluid.grc.hopAle1=Эль
@@ -11,6 +13,23 @@ fluid.grc.hopAle2=Эль
 fluid.grc.hopAle3=Эль
 fluid.grc.hopAle4=Эль
 
+# Fluid Buckets
+item.bucket.fluid.grc.hopAle.name=Ведро эля
+item.bucket.fluid.grc.hopAle0.name=Ведро эля
+item.bucket.fluid.grc.hopAle1.name=Ведро эля
+item.bucket.fluid.grc.hopAle2.name=Ведро эля
+item.bucket.fluid.grc.hopAle3.name=Ведро эля
+item.bucket.fluid.grc.hopAle4.name=Ведро эля
+
+# Fluid Blocks
+tile.fluid.grc.hopAle.name=Эль
+tile.fluid.grc.hopAle0.name=Эль
+tile.fluid.grc.hopAle1.name=Эль
+tile.fluid.grc.hopAle2.name=Эль
+tile.fluid.grc.hopAle3.name=Эль
+tile.fluid.grc.hopAle4.name=Эль
+
+# Fluid Tooltips
 fluid.grc.hopAle0.modifier=Хмельной, молодой
 fluid.grc.hopAle1.modifier=Хмельной, сброженный
 fluid.grc.hopAle2.modifier=Хмельной, сброженный, крепкий
