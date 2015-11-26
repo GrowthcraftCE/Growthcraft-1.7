@@ -23,6 +23,7 @@
  */
 package growthcraft.api.core.effect;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -36,6 +37,7 @@ import net.minecraft.world.World;
  */
 public class EffectChance implements IEffect
 {
+	private List<String> tempList = new ArrayList<String>();
 	private float chance;
 	private IEffect effect;
 
@@ -81,7 +83,26 @@ public class EffectChance implements IEffect
 
 	public void getDescription(List<String> list)
 	{
-		list.add(GrcI18n.translate("grc.effect.chance", chance));
-		if (effect != null) effect.getDescription(list);
+		tempList.clear();
+		if (effect != null)
+		{
+			effect.getDescription(tempList);
+		}
+		if (tempList.size() > 0)
+		{
+			final String str = GrcI18n.translate("grc.effect.chance.format", (int)(chance * 100));
+			if (tempList.size() == 1)
+			{
+				list.add(str + " " + tempList.get(0));
+			}
+			else
+			{
+				list.add(str);
+				for (String line : tempList)
+				{
+					list.add("  " + line);
+				}
+			}
+		}
 	}
 }
