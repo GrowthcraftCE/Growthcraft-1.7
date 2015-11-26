@@ -3,8 +3,9 @@ package growthcraft.core.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import growthcraft.api.core.i18n.GrcI18n;
+
 import net.minecraft.stats.Achievement;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.AchievementPage;
 
 public class AchievementPageGrowthcraft
@@ -22,7 +23,7 @@ public class AchievementPageGrowthcraft
 			chievList[i] = chievMasterList.get(i);
 		}
 
-		chievPage = new AchievementPage(StatCollector.translateToLocal("achievementPage.pageGrowthCraft"), chievList);
+		chievPage = new AchievementPage(GrcI18n.translate("achievementPage.pageGrowthCraft"), chievList);
 		AchievementPage.registerAchievementPage(chievPage);
 	}
 }

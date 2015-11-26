@@ -1,12 +1,12 @@
 package growthcraft.fishtrap.client.gui;
 
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.fishtrap.common.inventory.ContainerFishTrap;
 import growthcraft.fishtrap.common.tileentity.TileEntityFishTrap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -27,9 +27,9 @@ public class GuiFishTrap extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		final String s = this.te.hasCustomInventoryName() ? this.te.getInventoryName() : I18n.format(this.te.getInventoryName());
+		final String s = this.te.hasCustomInventoryName() ? this.te.getInventoryName() : GrcI18n.translate(this.te.getInventoryName());
 		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-		this.fontRendererObj.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRendererObj.drawString(GrcI18n.translate("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 	}
 
 	@Override

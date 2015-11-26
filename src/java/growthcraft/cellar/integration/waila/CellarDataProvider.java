@@ -2,6 +2,7 @@ package growthcraft.cellar.integration.waila;
 
 import java.util.List;
 
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
@@ -27,7 +28,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -56,8 +56,8 @@ public class CellarDataProvider implements IWailaDataProvider
 		final TileEntity te = accessor.getTileEntity();
 		if (block instanceof BlockFruitPresser)
 		{
-			tooltip.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.cellar.fruitPresser.state_prefix") + " " +
-				EnumChatFormatting.WHITE + StatCollector.translateToLocal("grc.cellar.fruitPresser.state." +
+			tooltip.add(EnumChatFormatting.GRAY + GrcI18n.translate("grc.cellar.fruitPresser.state_prefix") + " " +
+				EnumChatFormatting.WHITE + GrcI18n.translate("grc.cellar.fruitPresser.state." +
 					((BlockFruitPresser)block).getPressStateName(accessor.getMetadata())));
 		}
 		final NBTTagCompound tag = accessor.getNBTData();

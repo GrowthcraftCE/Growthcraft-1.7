@@ -26,8 +26,10 @@ package growthcraft.api.core.effect;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.world.World;
+import growthcraft.api.core.i18n.GrcI18n;
+
 import net.minecraft.entity.Entity;
+import net.minecraft.world.World;
 
 /**
  * Has a random chance of applying its sub effect to the target
@@ -79,8 +81,7 @@ public class EffectChance implements IEffect
 
 	public void getDescription(List<String> list)
 	{
-		// TODO: say that the following effect has a x% chance of being applied
+		list.add(GrcI18n.translate("grc.effect.chance", chance));
 		if (effect != null) effect.getDescription(list);
-		//list.add(I18n.format("grc.effect.null"));
 	}
 }

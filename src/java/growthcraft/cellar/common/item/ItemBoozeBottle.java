@@ -2,6 +2,7 @@ package growthcraft.cellar.common.item;
 
 import java.util.List;
 
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.util.ItemUtils;
@@ -19,7 +20,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
@@ -195,7 +195,7 @@ public class ItemBoozeBottle extends ItemFood
 		final Fluid booze = getBoozeForStack(stack);
 		if (booze != null)
 		{
-			return StatCollector.translateToLocal(booze.getUnlocalizedName());
+			return GrcI18n.translate(booze.getUnlocalizedName());
 		}
 		return super.getItemStackDisplayName(stack);
 	}

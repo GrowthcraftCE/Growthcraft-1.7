@@ -21,25 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.effect;
+package growthcraft.api.core.i18n;
 
-import java.util.List;
-import java.util.Random;
+import net.minecraft.util.StatCollector;
 
-import growthcraft.api.core.i18n.GrcI18n;
-import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
-
-/**
- * Because sometimes you want an Effect that does ABSOLUTELY NOTHING.
- */
-public class EffectNull implements IEffect
+public class StatCollectorTranslator implements ITranslator
 {
-	public void apply(World world, Entity entity, Random random, Object data) {}
+	public static final ITranslator INSTANCE = new StatCollectorTranslator();
 
-	public void getDescription(List<String> list)
+	public String translate(String str, Object... objs)
 	{
-		// Set the description as "Does Nothing."
-		list.add(GrcI18n.translate("grc.effect.null"));
+		return StatCollector.translateToLocalFormatted(str, objs);
+	}
+
+	public String translate(String str)
+	{
+		return StatCollector.translateToLocal(str);
 	}
 }

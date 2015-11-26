@@ -2,6 +2,7 @@ package growthcraft.cellar.client.gui;
 
 import java.util.List;
 
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.client.gui.widget.GuiButtonDiscard;
 import growthcraft.cellar.client.gui.widget.GuiButtonSwitch;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
@@ -13,7 +14,6 @@ import growthcraft.cellar.network.PacketSwitchTankButton;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -145,13 +145,13 @@ public class GuiBrewKettle extends GuiCellar
 				addFluidTooltips(this.te.getFluidStack(1), tooltip);
 				break;
 			case "discardtank0":
-				tooltip.add(I18n.format("gui.grc.discard"));
+				tooltip.add(GrcI18n.translate("gui.grc.discard"));
 				break;
 			case "discardtank1":
-				tooltip.add(I18n.format("gui.grc.discard"));
+				tooltip.add(GrcI18n.translate("gui.grc.discard"));
 				break;
 			case "switchtank":
-				tooltip.add(I18n.format("gui.grc.switch"));
+				tooltip.add(GrcI18n.translate("gui.grc.switch"));
 				break;
 			default:
 				break;

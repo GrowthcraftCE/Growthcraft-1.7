@@ -2,6 +2,7 @@ package growthcraft.cellar.common.item;
 
 import java.util.List;
 
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.core.util.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
@@ -14,7 +15,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
@@ -84,7 +84,7 @@ public class ItemBoozeBucketDEPRECATED extends Item
 	{
 		final String s = UnitFormatter.fluidModifier(getBooze(stack.getItemDamage()));
 		if (s != null) list.add(s);
-		list.add(StatCollector.translateToLocal("grc.cellar.item.booze_bucket.deprecated"));
+		list.add(GrcI18n.translate("grc.cellar.item.booze_bucket.deprecated"));
 	}
 
 	/************
@@ -123,7 +123,7 @@ public class ItemBoozeBucketDEPRECATED extends Item
 	public String getItemStackDisplayName(ItemStack stack)
 	{
 		return UnitFormatter.fluidBucketName(getBooze(stack.getItemDamage())) +
-			StatCollector.translateToLocal("grc.cellar.item.booze_bucket.deprecated_suffix");
+			GrcI18n.translate("grc.cellar.item.booze_bucket.deprecated_suffix");
 	}
 
 	@Override

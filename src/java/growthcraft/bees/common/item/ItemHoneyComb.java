@@ -2,6 +2,8 @@ package growthcraft.bees.common.item;
 
 import java.util.List;
 
+import growthcraft.api.core.i18n.GrcI18n;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,7 +13,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
 
 /**
  * Deprecated in version 2.4.0
@@ -32,7 +33,7 @@ public class ItemHoneyComb extends Item
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		list.add(StatCollector.translateToLocal("grc.bees.item.honeyComb.deprecated"));
+		list.add(GrcI18n.translate("grc.bees.item.honeyComb.deprecated"));
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -23,7 +23,7 @@
  */
 package growthcraft.api.cellar.booze;
 
-import net.minecraft.client.resources.I18n;
+import growthcraft.api.core.i18n.GrcI18n;
 
 public class BoozeTag
 {
@@ -66,7 +66,7 @@ public class BoozeTag
 
 	public String getLocalizedName()
 	{
-		return I18n.format(getUnlocalizedName());
+		return GrcI18n.translate(getUnlocalizedName());
 	}
 
 	public String toString()

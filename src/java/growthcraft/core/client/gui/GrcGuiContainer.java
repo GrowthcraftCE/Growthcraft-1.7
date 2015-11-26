@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.core.util.Rectangle;
 
 import cpw.mods.fml.relauncher.Side;
@@ -15,7 +16,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
@@ -57,9 +57,9 @@ public class GrcGuiContainer extends GuiContainer
 		{
 			final IInventory inv = (IInventory)tileEntity;
 			final String invName = inv.getInventoryName();
-			final String s = inv.hasCustomInventoryName() ? invName : I18n.format(invName);
+			final String s = inv.hasCustomInventoryName() ? invName : GrcI18n.translate(invName);
 			fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-			fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752);
+			fontRendererObj.drawString(GrcI18n.translate("container.inventory"), 8, ySize - 96 + 2, 4210752);
 		}
 	}
 

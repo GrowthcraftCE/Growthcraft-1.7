@@ -25,10 +25,11 @@ package growthcraft.core.util;
 
 import java.util.List;
 
+import growthcraft.api.core.i18n.GrcI18n;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 
 /**
  * Tag Formatter for item NBT data
@@ -49,7 +50,7 @@ public class TagFormatterItem implements ITagFormatter
 			final ItemStack stack = ItemStack.loadItemStackFromNBT(tag);
 			if (stack != null)
 			{
-				return EnumChatFormatting.WHITE + StatCollector.translateToLocalFormatted("grc.format.itemslot.item", stack.getDisplayName(), stack.stackSize);
+				return EnumChatFormatting.WHITE + GrcI18n.translate("grc.format.itemslot.item", stack.getDisplayName(), stack.stackSize);
 			}
 			else
 			{

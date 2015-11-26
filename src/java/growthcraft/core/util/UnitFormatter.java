@@ -31,9 +31,9 @@ import com.google.common.base.Joiner;
 
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.i18n.GrcI18n;
 
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -59,7 +59,7 @@ public class UnitFormatter
 
 	public static String fluidBucketName(Fluid fluid)
 	{
-		return StatCollector.translateToLocal("item.bucket." + fluid.getUnlocalizedName() + ".name");
+		return GrcI18n.translate("item.bucket." + fluid.getUnlocalizedName() + ".name");
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class UnitFormatter
 		if (CellarRegistry.instance().booze().isFluidBooze(alt))
 		{
 			final String modifierSrc = alt.getUnlocalizedName() + ".modifier";
-			String modifierString = StatCollector.translateToLocal(modifierSrc);
+			String modifierString = GrcI18n.translate(modifierSrc);
 
 			// if there is not a modifier defined, create one by joining the tag names
 			if (modifierSrc.equals(modifierString))
@@ -113,12 +113,12 @@ public class UnitFormatter
 
 			if (modifier != null)
 			{
-				return StatCollector.translateToLocalFormatted("grc.format.booze.name",
+				return GrcI18n.translate("grc.format.booze.name",
 					EnumChatFormatting.WHITE + altStack.getLocalizedName(), modifier);
 			}
 			else
 			{
-				return StatCollector.translateToLocalFormatted("grc.format.fluid.name",
+				return GrcI18n.translate("grc.format.fluid.name",
 						EnumChatFormatting.WHITE + altStack.getLocalizedName());
 			}
 		}
@@ -144,7 +144,7 @@ public class UnitFormatter
 	 */
 	public static String noItem()
 	{
-		return EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.format.itemslot.empty");
+		return EnumChatFormatting.GRAY + GrcI18n.translate("grc.format.itemslot.empty");
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class UnitFormatter
 	 */
 	public static String invalidItem()
 	{
-		return EnumChatFormatting.RED + StatCollector.translateToLocal("grc.format.itemslot.invalid");
+		return EnumChatFormatting.RED + GrcI18n.translate("grc.format.itemslot.invalid");
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class UnitFormatter
 	 */
 	public static String noFluid()
 	{
-		return EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.format.tank.empty");
+		return EnumChatFormatting.GRAY + GrcI18n.translate("grc.format.tank.empty");
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class UnitFormatter
 	 */
 	public static String invalidFluid()
 	{
-		return EnumChatFormatting.RED + StatCollector.translateToLocal("grc.format.invalid_fluid");
+		return EnumChatFormatting.RED + GrcI18n.translate("grc.format.invalid_fluid");
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class UnitFormatter
 	 */
 	public static String booleanAsState(boolean b)
 	{
-		return StatCollector.translateToLocal("grc.format.state." + b);
+		return GrcI18n.translate("grc.format.state." + b);
 	}
 
 	/**
@@ -186,6 +186,6 @@ public class UnitFormatter
 	 */
 	public static String booleanAsValue(boolean b)
 	{
-		return StatCollector.translateToLocal("grc.format.value." + b);
+		return GrcI18n.translate("grc.format.value." + b);
 	}
 }

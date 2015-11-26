@@ -21,25 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.effect;
-
-import java.util.List;
-import java.util.Random;
-
-import growthcraft.api.core.i18n.GrcI18n;
-import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
+package growthcraft.api.core.i18n;
 
 /**
- * Because sometimes you want an Effect that does ABSOLUTELY NOTHING.
+ * An interface for translating Strings, this exists to alleviate troubles
+ * with testing translated strings where resources will not be available.
+ * aka. testing
  */
-public class EffectNull implements IEffect
+public interface ITranslator
 {
-	public void apply(World world, Entity entity, Random random, Object data) {}
-
-	public void getDescription(List<String> list)
-	{
-		// Set the description as "Does Nothing."
-		list.add(GrcI18n.translate("grc.effect.null"));
-	}
+	String translate(String str, Object... objects);
+	String translate(String str);
 }

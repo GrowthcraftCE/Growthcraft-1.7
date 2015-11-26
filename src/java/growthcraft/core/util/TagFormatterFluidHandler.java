@@ -25,10 +25,11 @@ package growthcraft.core.util;
 
 import java.util.List;
 
+import growthcraft.api.core.i18n.GrcI18n;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
 
 /**
@@ -52,7 +53,7 @@ public class TagFormatterFluidHandler implements ITagFormatter
 				// otherwise, display their content like normal
 				content = content +
 					EnumChatFormatting.GRAY +
-					StatCollector.translateToLocalFormatted("grc.format.tank_id", tankTag.getInteger("tank_id") + 1) + " " +
+					GrcI18n.translate("grc.format.tank_id", tankTag.getInteger("tank_id") + 1) + " " +
 					content;
 			}
 			final int fluidID = tankTag.getInteger("fluid_id");
@@ -62,7 +63,7 @@ public class TagFormatterFluidHandler implements ITagFormatter
 				final String fluidName = UnitFormatter.fluidNameForContainer(fluidStack);
 				content = content +
 					UnitFormatter.fractionNum(fluidStack.amount, tankTag.getInteger("capacity")) +
-					EnumChatFormatting.GRAY + " " + StatCollector.translateToLocalFormatted("grc.format.tank.content_suffix", fluidName);
+					EnumChatFormatting.GRAY + " " + GrcI18n.translate("grc.format.tank.content_suffix", fluidName);
 			}
 			else
 			{

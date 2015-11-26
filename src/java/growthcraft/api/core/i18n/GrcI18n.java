@@ -21,25 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.effect;
-
-import java.util.List;
-import java.util.Random;
-
-import growthcraft.api.core.i18n.GrcI18n;
-import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
+package growthcraft.api.core.i18n;
 
 /**
- * Because sometimes you want an Effect that does ABSOLUTELY NOTHING.
+ * An abstraction for translating, use this instead of Minecraft's I18n or
+ * Forge's StatCollector and a fallback NullTranslator,
+ * this will hide the difference between them.
  */
-public class EffectNull implements IEffect
+public class GrcI18n
 {
-	public void apply(World world, Entity entity, Random random, Object data) {}
+	private static ITranslator translator;
 
-	public void getDescription(List<String> list)
+	private GrcI18n() {}
+
+	public static void setTranslator(ITranslator tr)
 	{
-		// Set the description as "Does Nothing."
-		list.add(GrcI18n.translate("grc.effect.null"));
+		translator = tr;
+	}
+
+	public static ITranslator getTranslator()
+	{
+		if (translator == null)
+		{
+			// Defaults to the StatCollector version
+			setTranslator(StatCollectorTranslator.INSTANCE);
+		}
+		return translator;
+	}
+
+	public static String translate(String str, Object... objs)
+	{
+		return getTranslator().translate(str, objs);
+	}
+
+	public static String translate(String str)
+	{
+		return getTranslator().translate(str);
 	}
 }

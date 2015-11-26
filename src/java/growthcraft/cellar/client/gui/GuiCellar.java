@@ -3,14 +3,14 @@ package growthcraft.cellar.client.gui;
 import java.util.List;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.common.tileentity.CellarTank;
+import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.client.gui.GrcGuiContainer;
 import growthcraft.core.util.UnitFormatter;
-import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.FluidStack;
@@ -55,7 +55,7 @@ public class GuiCellar extends GrcGuiContainer
 		{
 			tooltip.add(fluid.getLocalizedName());
 			tooltip.add("");
-			tooltip.add(EnumChatFormatting.RED + I18n.format("gui.grc.cantferment"));
+			tooltip.add(EnumChatFormatting.RED + GrcI18n.translate("gui.grc.cantferment"));
 		}
 	}
 }

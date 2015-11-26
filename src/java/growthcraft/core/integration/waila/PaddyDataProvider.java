@@ -2,6 +2,7 @@ package growthcraft.core.integration.waila;
 
 import java.util.List;
 
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.core.common.block.IPaddy;
 
 import cpw.mods.fml.common.Optional;
@@ -16,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -46,8 +46,8 @@ public class PaddyDataProvider implements IWailaDataProvider
 			final IPaddy prov = (IPaddy)block;
 			final MovingObjectPosition pos = accessor.getPosition();
 			final boolean filledWithFluid = prov.isFilledWithFluid(accessor.getWorld(), pos.blockX, pos.blockY, pos.blockZ, accessor.getMetadata());
-			final String content = EnumChatFormatting.GRAY + StatCollector.translateToLocal("grc.format.paddy.hasFluid") + " " +
-				EnumChatFormatting.WHITE + StatCollector.translateToLocal("grc.format.value." + filledWithFluid);
+			final String content = EnumChatFormatting.GRAY + GrcI18n.translate("grc.format.paddy.hasFluid") + " " +
+				EnumChatFormatting.WHITE + GrcI18n.translate("grc.format.value." + filledWithFluid);
 			tooltip.add(content);
 		}
 		return tooltip;

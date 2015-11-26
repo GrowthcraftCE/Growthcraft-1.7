@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.client.gui.widget.GuiButtonDiscard;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
@@ -16,7 +17,6 @@ import growthcraft.cellar.network.PacketClearTankButton;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -141,7 +141,7 @@ public class GuiFermentBarrel extends GuiCellar
 				}
 				break;
 			case "discardtank0":
-				tooltip.add(I18n.format("gui.grc.discard"));
+				tooltip.add(GrcI18n.translate("gui.grc.discard"));
 				break;
 			default:
 				break;

@@ -27,6 +27,7 @@ import java.util.Random;
 import java.util.List;
 
 import growthcraft.api.core.effect.IEffect;
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.stats.IAchievement;
 
 import net.minecraft.entity.Entity;
@@ -36,7 +37,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class EffectTipsy implements IEffect
@@ -120,7 +120,7 @@ public class EffectTipsy implements IEffect
 	public void getDescription(List<String> list)
 	{
 		final PotionEffect nausea = new PotionEffect(Potion.confusion.id, getTipsyTime(), 0);
-		final String p = StatCollector.translateToLocalFormatted("grc.cellar.format.tipsy_chance", Math.round(getTipsyChance() * 100));
+		final String p = GrcI18n.translate("grc.cellar.format.tipsy_chance", Math.round(getTipsyChance() * 100));
 
 		String n = "";
 		if (nausea.getDuration() > 20)

@@ -2,6 +2,7 @@ package growthcraft.cellar.common.item;
 
 import java.util.List;
 
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.util.UnitFormatter;
@@ -16,7 +17,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -310,7 +310,7 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		final String fluidName = UnitFormatter.fluidName(getFluid(stack));
 		if (fluidName != null)
 		{
-			return StatCollector.translateToLocalFormatted("grc.cellar.format.waterBag.name", basename, fluidName);
+			return GrcI18n.translate("grc.cellar.format.waterBag.name", basename, fluidName);
 		}
 		return basename;
 	}
@@ -324,7 +324,7 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		if (fluidstack != null)
 		{
 			final String fluidname = UnitFormatter.fluidNameForContainer(fluidstack);
-			list.add(StatCollector.translateToLocalFormatted("grc.cellar.format.waterBag.contents", fluidname, fluidstack.amount, getCapacity(stack)));
+			list.add(GrcI18n.translate("grc.cellar.format.waterBag.contents", fluidname, fluidstack.amount, getCapacity(stack)));
 			final Fluid booze = fluidstack.getFluid();
 			BoozeUtils.addInformation(booze, stack, player, list, bool);
 		}
