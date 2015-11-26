@@ -5,6 +5,9 @@ import java.util.Map;
 
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.util.FluidUtils;
+import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.util.ItemKey;
 
 import net.minecraft.block.Block;
@@ -14,9 +17,15 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class PressingRegistry
+public class PressingRegistry implements ILoggable
 {
+	private ILogger logger = NullLogger.INSTANCE;
 	private Map<ItemKey, PressingResult> pressingList = new HashMap<ItemKey, PressingResult>();
+
+	public void setLogger(ILogger l)
+	{
+		this.logger = l;
+	}
 
 	public Map<ItemKey, PressingResult> getPressingList()
 	{
@@ -38,7 +47,10 @@ public class PressingRegistry
 	 */
 	public void addPressing(Item raw, int meta, Fluid fluid, int time, int amount, Residue residue)
 	{
-		pressingList.put(new ItemKey(raw, meta), new PressingResult(new FluidStack(fluid, amount), time, residue));
+		final ItemKey key = new ItemKey(raw, meta);
+		final PressingResult result = new PressingResult(new FluidStack(fluid, amount), time, residue);
+		pressingList.put(key, result);
+		logger.debug("Added new Pressing Recipe key=%s result=%s", key, result);
 	}
 
 	public void addPressing(Block raw, int meta, Fluid fluid, int time, int amount, Residue residue)

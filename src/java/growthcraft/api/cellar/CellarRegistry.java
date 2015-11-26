@@ -36,6 +36,7 @@ public class CellarRegistry implements ILoggable
 	{
 		this.logger = l;
 		boozeRegistry.setLogger(logger);
+		pressingRegistry.setLogger(logger);
 	}
 
 	public BoozeRegistry booze()
