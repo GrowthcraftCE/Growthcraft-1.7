@@ -24,10 +24,13 @@ grc.format.invalid_fluid=<Fluide non valide>
 # Displayed for items
 grc.format.itemslot.empty=<Vide>
 grc.format.itemslot.invalid=<elément non valide>
+
 # Modifier name
 grc.format.booze.name=%2$s %1$s
+
 # When a fluid is not a booze
 grc.format.fluid.name=%1$s
+
 # Name (stack_size)
 grc.format.itemslot.item=%s (x%d)
 # Displayed for tile entities with multiple tanks, %d is the tank index + 1

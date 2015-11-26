@@ -8,9 +8,9 @@ tile.grc.brewKettle.name=Brew Kettle
 tile.grc.fermentBarrel.name=Fermentation Barrel
 tile.grc.fermentJar.name=Fermentation Jar
 
-// Please remove this field once all other module translations have been updated,
-// this is no longer used
 # Items
+# Please remove this field once all other module translations have been updated,
+# this is no longer used
 item.grc.boozeBucket.name=Bucket
 
 item.grc.yeast0.name=Brewers Yeast
@@ -74,6 +74,7 @@ achievement.getDrunk=Is Trouble Brewing?
 achievement.getDrunk.desc=Acquire Tipsy V.
 
 # Tooltips (Number is a percentage)
+# number is a percentage
 grc.cellar.format.waterBag.name=%s (%s)
 grc.cellar.format.waterBag.contents=Contains: %2$dmB/%3$dmB of %1$s
 grc.cellar.format.tipsy_chance=%d%% Chance of Tipsy

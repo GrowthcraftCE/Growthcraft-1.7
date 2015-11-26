@@ -1,8 +1,8 @@
-﻿# Creative Tabs
+# Creative Tabs
 itemGroup.tabGrowthCraftBees=Growthcraft Bees
 
 # Blocks
-# Vanilla Bee Boxes
+## Vanilla Bee Boxes
 tile.grc.BeeBox.Minecraft0.name=Oak Bee Box
 tile.grc.BeeBox.Minecraft1.name=Spruce Bee Box
 tile.grc.BeeBox.Minecraft2.name=Birch Bee Box
@@ -10,13 +10,13 @@ tile.grc.BeeBox.Minecraft3.name=Jungle Bee Box
 tile.grc.BeeBox.Minecraft4.name=Acacia Bee Box
 tile.grc.BeeBox.Minecraft5.name=Dark Oak Bee Box
 
-# Growthcraft|Nether Bee Boxes
+## Growthcraft|Nether Bee Boxes
 tile.grc.BeeBox.Nether0.name=Malice Bee Box
 
-# Growthcraft|Bamboo Bee Boxes
+## Growthcraft|Bamboo Bee Boxes
 tile.grc.BeeBox.Bamboo0.name=Bamboo Bee Box
 
-# Thaumcraft Bee Boxes
+## Thaumcraft Bee Boxes
 tile.grc.BeeBox.Thaumcraft0.name=Greatwood Bee Box
 tile.grc.BeeBox.Thaumcraft1.name=Silverwood Bee Box
 

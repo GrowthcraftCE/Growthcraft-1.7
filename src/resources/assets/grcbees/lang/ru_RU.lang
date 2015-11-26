@@ -1,8 +1,8 @@
 ﻿# Creative Tabs
 itemGroup.tabGrowthCraftBees=Growthcraft: Пчёлы
 
-## Blocks
-# Vanilla Bee Boxes
+# Blocks
+## Vanilla Bee Boxes
 tile.grc.BeeBox.Minecraft0.name=Пчелиный ящик из дуба
 tile.grc.BeeBox.Minecraft1.name=Пчелиный ящик из ели
 tile.grc.BeeBox.Minecraft2.name=Пчелиный ящик из берёзы
@@ -10,17 +10,16 @@ tile.grc.BeeBox.Minecraft3.name=Пчелиный ящик из тропичес�
 tile.grc.BeeBox.Minecraft4.name=Пчелиный ящик из акации
 tile.grc.BeeBox.Minecraft5.name=Пчелиный ящик из тёмного дуба
 
-# Growthcraft|Nether Bee Boxes
+## Growthcraft|Nether Bee Boxes
 tile.grc.BeeBox.Nether0.name=Пчелиный ящик из дерева злобы
 
-# Growthcraft|Bamboo Bee Boxes
+## Growthcraft|Bamboo Bee Boxes
 tile.grc.BeeBox.Bamboo0.name=Пчелиный ящик из бамбука
 
-# Thaumcraft Bee Boxes
+## Thaumcraft Bee Boxes
 tile.grc.BeeBox.Thaumcraft0.name=Пчелиный ящик из великого дерева
 tile.grc.BeeBox.Thaumcraft1.name=Пчелиный ящик из серебряного дерева
 
-# Other Blocks
 tile.grc.beeHive.name=Пчелиный улей
 
 # Items

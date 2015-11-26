@@ -1,8 +1,8 @@
-﻿# Creative Tabs
+# Creative Tabs
 itemGroup.tabGrowthCraftBees=Abeilles Growthcraft
 
-## Blocks
-# Vanilla Bee Boxes
+# Blocks
+## Vanilla Bee Boxes
 tile.grc.BeeBox.Minecraft0.name=Boîte d'abeille en chêne
 tile.grc.BeeBox.Minecraft1.name=Boîte d'abeille en sapin
 tile.grc.BeeBox.Minecraft2.name=Boîte d'abeille en bouleau
@@ -10,13 +10,13 @@ tile.grc.BeeBox.Minecraft3.name=Boîte d'abeille en acajou
 tile.grc.BeeBox.Minecraft4.name=Boîte d'abeille en acacia
 tile.grc.BeeBox.Minecraft5.name=Boîte d'abeille en chêne noir
 
-# Growthcraft|Nether Bee Boxes
+## Growthcraft|Nether Bee Boxes
 tile.grc.BeeBox.Nether0.name=Boîte d'abeille de malice
 
-# Growthcraft|Bamboo Bee Boxes
+## Growthcraft|Bamboo Bee Boxes
 tile.grc.BeeBox.Bamboo0.name=Boîte d'abeille en bambou
 
-# Thaumcraft Bee Boxes
+## Thaumcraft Bee Boxes
 tile.grc.BeeBox.Thaumcraft0.name=Boîte d'abeille en bois arcanique
 tile.grc.BeeBox.Thaumcraft1.name=Boîte d'abeille en bois d'argent
 

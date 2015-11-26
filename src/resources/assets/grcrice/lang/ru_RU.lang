@@ -6,7 +6,7 @@ tile.grc.riceBlock.name=Заливной рис
 item.grc.rice.name=Зёрна заливного риса
 item.grc.riceBall.name=Онигири
 
-# Fluids	
+# Fluids
 fluid.grc.riceSake=Сакэ
 fluid.grc.riceSake0=Сакэ
 fluid.grc.riceSake1=Сакэ
