@@ -39,8 +39,25 @@ import net.minecraftforge.fluids.Fluid;
 
 public class BoozeEffect implements IEffect
 {
+	static class BoozeEffectList extends EffectList
+	{
+		/**
+		 * Adds the description of all the internal effects
+		 *
+		 * @param list - list to add description lines to
+		 */
+		@Override
+		public void getDescription(List<String> list)
+		{
+			for (IEffect effect : effects)
+			{
+				effect.getDescription(list);
+			}
+		}
+	}
+
 	private EffectTipsy tipsyEffect;
-	private EffectList effects = new EffectList();
+	private EffectList effects = new BoozeEffectList();
 	private Fluid booze;
 
 	public BoozeEffect(@Nonnull Fluid flu)
