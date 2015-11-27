@@ -47,6 +47,8 @@ public class BoozeTag
 	public static final BoozeTag INTOXICATED = new BoozeTag("intoxicated");
 	// the booze has a base in magic
 	public static final BoozeTag MAGICAL = new BoozeTag("magical");
+	// the booze has been reinforced, (a stronger version of potent)
+	public static final BoozeTag FORTIFIED = new BoozeTag("fortified");
 
 	private final String name;
 	private IModifierFunction modifierFunction;
