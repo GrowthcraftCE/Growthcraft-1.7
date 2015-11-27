@@ -49,16 +49,17 @@ grc.potion.tipsy=Tipsy
 grc.booze=Booze
 
 # Modifiers
-grc.booze.modifier.young=Young
-grc.booze.modifier.fermented=Fermented
-grc.booze.modifier.extended=Extended
-grc.booze.modifier.potent=Potent
-grc.booze.modifier.hyper_extended=Hyper Extended
-grc.booze.modifier.deadly=Deadly
-grc.booze.modifier.poisoned=Poisoned
 grc.booze.modifier.chilled=Chilled
+grc.booze.modifier.deadly=Deadly
+grc.booze.modifier.extended=Extended
+grc.booze.modifier.fermented=Fermented
+grc.booze.modifier.fortified=Fortified
+grc.booze.modifier.hyper_extended=Hyper Extended
 grc.booze.modifier.intoxicated=Intoxicated
 grc.booze.modifier.magical=Magical
+grc.booze.modifier.poisoned=Poisoned
+grc.booze.modifier.potent=Potent
+grc.booze.modifier.young=Young
 
 # GUI
 gui.grc.empty=Empty
