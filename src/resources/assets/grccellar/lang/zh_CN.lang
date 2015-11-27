@@ -1,34 +1,103 @@
 # Creative Tabs
-itemGroup.tabGrCCellar=Growthcraft 地窖
+itemGroup.tabGrCCellar=Growthcraft|地窖
 
 # Blocks
 tile.grc.fruitPress.name=榨汁机
 tile.grc.fruitPresser.name=榨汁机
 tile.grc.brewKettle.name=酿造锅
 tile.grc.fermentBarrel.name=发酵桶
+tile.grc.fermentJar.name=发酵罐
 
 # Items
+# Please remove this field once all other module translations have been updated,
+# this is no longer used
 item.grc.boozeBucket.name=一桶
+
+item.grc.yeast0.name=酿酒酵母
+item.grc.yeast1.name=窖藏啤酒酵母
+item.grc.yeast2.name=贝酵母
+item.grc.yeast3.name=乙醇酵母
+item.grc.yeast4.name=原酵母
+
+# Water Bags
+item.grc.waterBag0.name=水袋(白)
+item.grc.waterBag1.name=水袋(橙)
+item.grc.waterBag2.name=水袋(品红)
+item.grc.waterBag3.name=水袋(浅蓝)
+item.grc.waterBag4.name=水袋(黄)
+item.grc.waterBag5.name=水袋(黄绿)
+item.grc.waterBag6.name=水袋(粉)
+item.grc.waterBag7.name=水袋(灰)
+item.grc.waterBag8.name=水袋(淡灰)
+item.grc.waterBag9.name=水袋(青)
+item.grc.waterBag10.name=水袋(紫)
+item.grc.waterBag11.name=水袋(蓝)
+item.grc.waterBag12.name=水袋(棕)
+item.grc.waterBag13.name=水袋(绿)
+item.grc.waterBag14.name=水袋(红)
+item.grc.waterBag15.name=水袋(黑)
+item.grc.waterBag16.name=水袋
 
 # Containers
 container.grc.fruitPress=榨汁机
 container.grc.brewKettle=酿造锅
 container.grc.fermentBarrel=发酵桶
+container.grc.fermentJar=发酵罐
 
 # Other
 grc.potion.tipsy=微醺
 grc.booze=豪饮
 
+# Modifiers
+grc.booze.modifier.young=低度
+grc.booze.modifier.fermented=发酵
+grc.booze.modifier.extended=后劲
+grc.booze.modifier.potent=高度
+grc.booze.modifier.hyper_extended=较大后劲
+grc.booze.modifier.deadly=致死
+grc.booze.modifier.poisoned=毒性
+grc.booze.modifier.chilled=冷藏
+grc.booze.modifier.intoxicated=剧毒
+
 # GUI
 gui.grc.empty=清空
 gui.grc.discard=丢弃
 gui.grc.switch=切换
-gui.grc.cantferment=无法发酵.
+gui.grc.cantferment=无法发酵。
 
 # Achievements
-achievement.craftBarrel=萃取桶
-achievement.craftBarrel.desc=achievement.craftBarrel.desc=使用三块木板和6个铁锭合成发酵桶。
+achievement.craftBarrel=萃取桶制造工匠
+achievement.craftBarrel.desc=使用三块木板和6个铁锭合成发酵桶。
 achievement.fermentBooze=酵母制作我在行。
 achievement.fermentBooze.desc=酿造酒精饮料。
-achievement.getDrunk=很难酿造嘛?
+achievement.getDrunk=很难酿造嘛？
 achievement.getDrunk.desc=获得效果：微醺 V。
+
+# Tooltips (Number is a percentage)
+# number is a percentage
+grc.cellar.format.waterBag.name=%s(%s)
+grc.cellar.format.waterBag.contents=内含%2$dmB/%3$dmB的%1$s
+grc.cellar.format.tipsy_chance=有%d%%概率醉酒
+grc.cellar.item.booze_bucket.deprecated=已废弃，请手动在工作台中合成升级物品。
+grc.cellar.item.booze_bucket.deprecated_suffix=(已废弃)
+
+grc.cellar.brewKettle.brewing_prefix=正在酿造？
+grc.cellar.brewKettle.itemslot.item=物品：%s
+grc.cellar.brewKettle.itemslot.residue=残余：%s
+grc.cellar.fermentBarrel.progress_prefix=进度：
+grc.cellar.fermentBarrel.progress_format=%d%%
+grc.cellar.fermentBarrel.itemslot.modifier=酵子：%s
+grc.cellar.fermentJar.itemslot.yeast=%s
+grc.cellar.fruitPress.itemslot.item=物品：%s
+grc.cellar.fruitPress.itemslot.residue=残余：%s
+grc.cellar.fruitPresser.state.invalid=<无效>
+grc.cellar.fruitPresser.state.pressed=压榨中
+grc.cellar.fruitPresser.state.unpressed=未压榨
+grc.cellar.fruitPresser.state_prefix=状态：
+
+# Waila Tooltips
+grc.cellar.waila.option.DisplayFluidContent=液体储存：
+grc.cellar.waila.option.FruitPressExtras=榨汁机附加信息：
+grc.cellar.waila.option.BrewKettleExtras=酿造锅附加信息：
+grc.cellar.waila.option.FermentBarrelExtras=发酵桶附加信息：
+
