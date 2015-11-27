@@ -43,25 +43,28 @@ public class BoozeUtils
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static void addBottleInformation(Fluid booze, ItemStack stack, EntityPlayer player, List list, boolean bool)
+	public static void addEffectInformation(Fluid booze, ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		if (booze == null) return;
-		addInformation(booze, stack, player, list, bool);
 		final BoozeEffect effect = CellarRegistry.instance().booze().getEffect(booze);
-
 		if (effect != null)
 		{
 			effect.getDescription((List<String>)list);
 		}
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public static void addBottleInformation(Fluid booze, ItemStack stack, EntityPlayer player, List list, boolean bool)
+	{
+		if (booze == null) return;
+		addInformation(booze, stack, player, list, bool);
+		addEffectInformation(booze, stack, player, list, bool);
+	}
+
 	public static boolean hasEffect(Fluid booze)
 	{
 		final BoozeEffect effect = CellarRegistry.instance().booze().getEffect(booze);
-		if (effect != null)
-		{
-			return effect.isValid();
-		}
+		if (effect != null) return effect.isValid();
 		return false;
 	}
 }
