@@ -25,6 +25,7 @@ package growthcraft.api.core.effect;
 
 import java.util.List;
 import java.util.Random;
+import javax.annotation.Nonnull;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,14 +39,14 @@ public class EffectAddPotionEffect implements IEffect
 {
 	private IPotionEffectFactory potionFactory;
 
-	public EffectAddPotionEffect(IPotionEffectFactory factory)
+	public EffectAddPotionEffect(@Nonnull IPotionEffectFactory factory)
 	{
 		this.potionFactory = factory;
 	}
 
 	public EffectAddPotionEffect() {}
 
-	public EffectAddPotionEffect setPotionFactory(IPotionEffectFactory factory)
+	public EffectAddPotionEffect setPotionFactory(@Nonnull IPotionEffectFactory factory)
 	{
 		this.potionFactory = factory;
 		return this;

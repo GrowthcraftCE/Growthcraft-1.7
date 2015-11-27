@@ -25,6 +25,7 @@ package growthcraft.api.core.effect;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nonnull;
 
 /**
  * Base class for defining Effect lists
@@ -51,7 +52,7 @@ public abstract class AbstractEffectList implements IEffect
 	 * @return this
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends AbstractEffectList> T concat(List<IEffect> otherEffects)
+	public <T extends AbstractEffectList> T concat(@Nonnull List<IEffect> otherEffects)
 	{
 		effects.addAll(otherEffects);
 		return (T)this;
@@ -63,7 +64,7 @@ public abstract class AbstractEffectList implements IEffect
 	 * @return this
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends AbstractEffectList> T concat(AbstractEffectList list)
+	public <T extends AbstractEffectList> T concat(@Nonnull AbstractEffectList list)
 	{
 		effects.addAll(list.effects);
 		return (T)this;
@@ -73,7 +74,7 @@ public abstract class AbstractEffectList implements IEffect
 	 * @return this
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends AbstractEffectList> T add(IEffect effect)
+	public <T extends AbstractEffectList> T add(@Nonnull IEffect effect)
 	{
 		effects.add(effect);
 		return (T)this;
@@ -98,7 +99,7 @@ public abstract class AbstractEffectList implements IEffect
 	 * @return this
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends AbstractEffectList> T set(int index, IEffect effect)
+	public <T extends AbstractEffectList> T set(int index, @Nonnull IEffect effect)
 	{
 		effects.set(index, effect);
 		return (T)this;
