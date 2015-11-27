@@ -169,6 +169,14 @@ public class YeastGenerator
 				markForInventoryUpdate();
 			}
 		}
+		else
+		{
+			if (this.time != 0)
+			{
+				this.time = 0;
+				markForInventoryUpdate();
+			}
+		}
 	}
 
 	/**
