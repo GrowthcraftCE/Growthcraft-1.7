@@ -8,6 +8,7 @@ import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectRandomList;
+import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
@@ -112,9 +113,11 @@ public class GrcApplesBooze extends GrcModuleBase
 		br.addTags(appleCiderBooze[5], BoozeTag.FERMENTED, BoozeTag.INTOXICATED);
 		br.getEffect(appleCiderBooze[5])
 			.setTipsy(0.80F, 900)
-			.addPotionEntry(Potion.field_76444_x, 1800, 0);
-		fr.addFermentation(fs[5], fs[2], YeastType.ORIGIN.asStack(), fermentTime);
-		fr.addFermentation(fs[5], fs[3], YeastType.ORIGIN.asStack(), fermentTime);
+			.addEffect(new EffectWeightedRandomList()
+				.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76444_x.id, 1800, 0)))
+				.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.wither.id, 1800, 0)))
+			);
+		fr.addFermentation(fs[5], fs[1], YeastType.ORIGIN.asStack(), fermentTime);
 
 		// Poisoned - created from netherrash,
 		// the booze looses all its benefits and effectively becomes poisoned
