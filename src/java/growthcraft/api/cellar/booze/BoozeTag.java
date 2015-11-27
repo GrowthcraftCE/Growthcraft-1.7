@@ -49,6 +49,8 @@ public class BoozeTag
 	public static final BoozeTag MAGICAL = new BoozeTag("magical");
 	// the booze has been reinforced, (a stronger version of potent)
 	public static final BoozeTag FORTIFIED = new BoozeTag("fortified");
+	// the booze has been brewed with hops
+	public static final BoozeTag HOPPED = new BoozeTag("hopped");
 
 	private final String name;
 	private IModifierFunction modifierFunction;

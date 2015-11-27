@@ -12,6 +12,10 @@ fluid.grc.hopAle1=Ale
 fluid.grc.hopAle2=Ale
 fluid.grc.hopAle3=Ale
 fluid.grc.hopAle4=Ale
+fluid.grc.hopAle5=Ale
+fluid.grc.hopAle6=Lager
+fluid.grc.hopAle7=Ale
+fluid.grc.hopAle8=Ale
 
 # Fluid Buckets
 item.bucket.fluid.grc.hopAle.name=Ale Bucket
@@ -20,6 +24,10 @@ item.bucket.fluid.grc.hopAle1.name=Ale Bucket
 item.bucket.fluid.grc.hopAle2.name=Ale Bucket
 item.bucket.fluid.grc.hopAle3.name=Ale Bucket
 item.bucket.fluid.grc.hopAle4.name=Ale Bucket
+item.bucket.fluid.grc.hopAle5.name=Ale Bucket
+item.bucket.fluid.grc.hopAle6.name=Lager Bucket
+item.bucket.fluid.grc.hopAle7.name=Ale Bucket
+item.bucket.fluid.grc.hopAle8.name=Ale Bucket
 
 # Fluid Blocks
 tile.fluid.grc.hopAle.name=Ale
@@ -28,10 +36,10 @@ tile.fluid.grc.hopAle1.name=Ale
 tile.fluid.grc.hopAle2.name=Ale
 tile.fluid.grc.hopAle3.name=Ale
 tile.fluid.grc.hopAle4.name=Ale
+tile.fluid.grc.hopAle5.name=Ale
+tile.fluid.grc.hopAle6.name=Lager
+tile.fluid.grc.hopAle7.name=Ale
+tile.fluid.grc.hopAle8.name=Ale
 
 # Fluid Tooltips
-fluid.grc.hopAle0.modifier=Hopped, Young
-fluid.grc.hopAle1.modifier=Hopped, Fermented
-fluid.grc.hopAle2.modifier=Hopped, Fermented, Potent
-fluid.grc.hopAle3.modifier=Hopped, Fermented, Extended
 fluid.grc.hopAle4.modifier=No Hops, Young

@@ -18,18 +18,27 @@ public class GrcHopsConfig extends ConfigBase
 	@ConfigOption(catergory="Brewing", name="Hop Ale (no hops) brew time", desc="[Higher -> Slower]")
 	public int hopAleBrewTime = 20;
 
-	@ConfigOption(catergory="Brewing", name="Hop Ale (hopped) brew time", desc="[Higher -> Slower]")
-	public int hopAleHoppedBrewTime = 20;
-
 	@ConfigOption(catergory="Brewing", name="Hop Ale (no hops) brew yield", desc="How many milli-buckets are created per grain?")
 	public int hopAleBrewYield = 40;
+
+	@ConfigOption(catergory="Brewing", name="Hop Ale (hopped) brew time", desc="[Higher -> Slower]")
+	public int hopAleHoppedBrewTime = 20;
 
 	@ConfigOption(catergory="Brewing", name="Hop Ale (hopped) brew yield", desc="How many milli-buckets are created per hop?")
 	public int hopAleHoppedBrewYield = 40;
 
+	@ConfigOption(catergory="Brewing/Lager", name="Brew time", desc="[Higher -> Slower]")
+	public int lagerBrewTime = 20;
 
-	@ConfigOption(catergory="Booze", name="Hop Ale Color", desc="What color should ale be?")
+	@ConfigOption(catergory="Brewing/Lager", name="Brew yield", desc="How many milli-buckets are created per hop?")
+	public int lagerBrewYield = 40;
+
+
+	@ConfigOption(catergory="Booze/Hop Ale", name="Color", desc="What color should Hop Ale be?")
 	public int hopAleColor = 0xCACA47;
+
+	@ConfigOption(catergory="Booze/Lager", name="Color", desc="What color should Lager be?")
+	public int lagerColor = 0x9F7851;
 
 
 	@ConfigOption(catergory="Village", name="Generate Village Hop Vineyards", desc="Should we spawn Hop Vineyards in villages?")
