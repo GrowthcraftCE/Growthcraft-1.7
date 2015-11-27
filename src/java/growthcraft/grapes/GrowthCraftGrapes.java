@@ -62,7 +62,7 @@ public class GrowthCraftGrapes
 	public static BlockDefinition grapeBlock;
 	public static ItemDefinition grapes;
 	public static ItemDefinition grapeSeeds;
-	public static GrcGrapesBooze booze;
+	public static GrcGrapesBooze booze = new GrcGrapesBooze();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcGrapesConfig config = new GrcGrapesConfig();

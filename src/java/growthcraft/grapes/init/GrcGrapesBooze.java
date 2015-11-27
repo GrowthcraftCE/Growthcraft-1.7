@@ -2,13 +2,8 @@ package growthcraft.grapes.init;
 
 import growthcraft.api.cellar.util.CellarBoozeBuilder;
 import growthcraft.api.cellar.booze.Booze;
-import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.brewing.BrewingRegistry;
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
-import growthcraft.api.cellar.fermenting.FermentingRegistry;
-import growthcraft.api.cellar.pressing.PressingRegistry;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
@@ -108,7 +103,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 			.getEffect()
 				.setTipsy(defaultTipsy, TickUtils.seconds(45))
 				.addPotionEntry(Potion.field_76434_w, TickUtils.minutes(3), 0)
-				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 1);
+				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 0);
 
 		// Port Wine - Bayanus Yeast
 		CellarBoozeBuilder.create(grapeWineBooze[5])
