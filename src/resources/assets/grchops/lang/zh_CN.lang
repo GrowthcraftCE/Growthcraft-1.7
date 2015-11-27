@@ -13,9 +13,25 @@ fluid.grc.hopAle2=麦芽酒
 fluid.grc.hopAle3=麦芽酒
 fluid.grc.hopAle4=麦芽酒
 
+# Fluid Buckets
+item.bucket.fluid.grc.hopAle.name=麦芽酒桶
+item.bucket.fluid.grc.hopAle0.name=麦芽酒桶
+item.bucket.fluid.grc.hopAle1.name=麦芽酒桶
+item.bucket.fluid.grc.hopAle2.name=麦芽酒桶
+item.bucket.fluid.grc.hopAle3.name=麦芽酒桶
+item.bucket.fluid.grc.hopAle4.name=麦芽酒桶
+
+# Fluid Blocks
+tile.fluid.grc.hopAle.name=Ale
+tile.fluid.grc.hopAle0.name=Ale
+tile.fluid.grc.hopAle1.name=Ale
+tile.fluid.grc.hopAle2.name=Ale
+tile.fluid.grc.hopAle3.name=Ale
+tile.fluid.grc.hopAle4.name=Ale
+
 # Fluid Tooltips
-fluid.grc.hopAle0.modifier=啤酒花, 轻度
-fluid.grc.hopAle1.modifier=啤酒花, 发酵
-fluid.grc.hopAle2.modifier=啤酒花, 发酵, 高度
-fluid.grc.hopAle3.modifier=啤酒花, 发酵, 烈度
-fluid.grc.hopAle4.modifier=无啤酒花, 轻度
+fluid.grc.hopAle0.modifier=啤酒花，轻度
+fluid.grc.hopAle1.modifier=啤酒花，发酵
+fluid.grc.hopAle2.modifier=啤酒花，发酵，高度
+fluid.grc.hopAle3.modifier=啤酒花，发酵，烈度
+fluid.grc.hopAle4.modifier=无啤酒花，轻度
