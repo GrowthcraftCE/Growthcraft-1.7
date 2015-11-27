@@ -58,6 +58,7 @@ grc.booze.modifier.deadly=Deadly
 grc.booze.modifier.poisoned=Poisoned
 grc.booze.modifier.chilled=Chilled
 grc.booze.modifier.intoxicated=Intoxicated
+grc.booze.modifier.magical=Magical
 
 # GUI
 gui.grc.empty=Empty

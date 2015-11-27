@@ -45,6 +45,8 @@ public class BoozeTag
 	public static final BoozeTag CHILLED = new BoozeTag("chilled");
 	// the booze is heavily intoxicating
 	public static final BoozeTag INTOXICATED = new BoozeTag("intoxicated");
+	// the booze has a base in magic
+	public static final BoozeTag MAGICAL = new BoozeTag("magical");
 
 	private final String name;
 	private IModifierFunction modifierFunction;
