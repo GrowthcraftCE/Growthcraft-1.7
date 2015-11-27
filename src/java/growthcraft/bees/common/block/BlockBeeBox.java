@@ -371,9 +371,10 @@ public class BlockBeeBox extends BlockContainer
 					}
 				}
 				player.openGui(GrowthCraftBees.instance, 0, world, x, y, z);
+				return true;
 			}
 
-			return true;
+			return false;
 		}
 	}
 

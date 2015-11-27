@@ -74,6 +74,7 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 	public boolean slotHasHoneyComb(int index, HoneyCombExpect expects)
 	{
 		final ItemStack slotItem = getStackInSlot(index);
+		if (slotItem == null) return false;
 		switch (expects)
 		{
 			case EMPTY:
@@ -155,16 +156,13 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 	{
 		for (int i = 1; i < getSizeInventory(); ++i)
 		{
-			if (count >= 6) break;
-			final ItemStack stack = getStackInSlot(i);
-			if (stack != null)
+			if (count <= 0) break;
+			if (slotHasHoneyComb(i, HoneyCombExpect.FILLED))
 			{
-				if (slotHasHoneyComb(i, HoneyCombExpect.FILLED))
-				{
-					final ItemStack result = BeesRegistry.instance().getEmptyHoneyComb(stack);
-					setInventorySlotContents(i, result.copy());
-					count--;
-				}
+				final ItemStack stack = getStackInSlot(i);
+				final ItemStack result = BeesRegistry.instance().getEmptyHoneyComb(stack);
+				setInventorySlotContents(i, result != null ? result.copy() : null);
+				count--;
 			}
 		}
 	}

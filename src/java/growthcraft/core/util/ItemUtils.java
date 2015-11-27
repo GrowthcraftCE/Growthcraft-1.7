@@ -142,11 +142,10 @@ public class ItemUtils
 
 	public static void decreaseStackOnPlayer(ItemStack itemstack, EntityPlayer player)
 	{
-		if (!player.capabilities.isCreativeMode)
-		{
-			final ItemStack result = consumeStack(itemstack);
-			player.inventory.setInventorySlotContents(player.inventory.currentItem, result);
-		}
+		if (player.capabilities.isCreativeMode) return;
+
+		final ItemStack result = consumeStack(itemstack);
+		player.inventory.setInventorySlotContents(player.inventory.currentItem, result);
 	}
 
 	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, boolean checkCreative)

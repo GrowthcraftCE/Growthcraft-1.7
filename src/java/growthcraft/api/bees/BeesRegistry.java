@@ -84,7 +84,7 @@ public class BeesRegistry
 
 	public ItemStack getEmptyHoneyComb(ItemStack itemstack)
 	{
-		return emptyToFullHoneyComb.get(stackToKey(itemstack));
+		return fullToEmptyHoneyComb.get(stackToKey(itemstack));
 	}
 
 	protected boolean isItemFilledHoneyComb(ItemKey key)
