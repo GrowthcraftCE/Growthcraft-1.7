@@ -23,9 +23,10 @@
  */
 package growthcraft.grapes.integration;
 
-import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
+import growthcraft.core.integration.thaumcraft.AspectsHelper;
 import growthcraft.core.integration.ThaumcraftModuleBase;
+import growthcraft.grapes.GrowthCraftGrapes;
 
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
@@ -48,19 +49,32 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapeSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapes.asStack(), new AspectList().add(Aspect.CROP, 1).add(Aspect.HUNGER, 1));
 
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftGrapes.grapeWine.asStack(1, 0), new AspectList());
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftGrapes.grapeWine.asStack(1, 1), new AspectList().add(Aspect.ARMOR, 1));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftGrapes.grapeWine.asStack(1, 2), new AspectList().add(Aspect.ARMOR, 2));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftGrapes.grapeWine.asStack(1, 3), new AspectList().add(Aspect.ARMOR, 1));
+		final AspectList[] common = new AspectList[]
+		{
+			// 0
+			new AspectList(),
+			// 1
+			new AspectList().add(Aspect.ARMOR, 1),
+			// 2
+			new AspectList().add(Aspect.ARMOR, 2),
+			// 3
+			new AspectList().add(Aspect.ARMOR, 1),
+			// 4
+			new AspectList().add(Aspect.ARMOR, 2).add(Aspect.HEAL, 1),
+			// 5
+			new AspectList().add(Aspect.ARMOR, 3),
+			// 6
+			new AspectList().add(Aspect.ARMOR, 1).add(Aspect.POISON, 1),
+			// 7
+			new AspectList().add(Aspect.POISON, 2),
+		};
 
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftGrapes.grapeWineBuckets[0], new AspectList());
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftGrapes.grapeWineBuckets[1], new AspectList().add(Aspect.ARMOR, 3));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftGrapes.grapeWineBuckets[2], new AspectList().add(Aspect.ARMOR, 6));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftGrapes.grapeWineBuckets[3], new AspectList().add(Aspect.ARMOR, 3));
-
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftGrapes.grapeWineFluids[0], new AspectList());
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftGrapes.grapeWineFluids[1], new AspectList().add(Aspect.ARMOR, 3));
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftGrapes.grapeWineFluids[2], new AspectList().add(Aspect.ARMOR, 6));
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftGrapes.grapeWineFluids[3], new AspectList().add(Aspect.ARMOR, 3));
+		for (int i = 0; i < common.length; ++i)
+		{
+			final AspectList list = common[i];
+			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftGrapes.booze.grapeWine.asStack(1, i), list.copy());
+			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftGrapes.booze.grapeWineBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.ARMOR, Aspect.HEAL));
+			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftGrapes.booze.grapeWineFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.ARMOR, Aspect.HEAL));
+		}
 	}
 }

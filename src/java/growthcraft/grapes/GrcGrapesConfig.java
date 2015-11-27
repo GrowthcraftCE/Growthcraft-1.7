@@ -42,8 +42,21 @@ public class GrcGrapesConfig extends ConfigBase
 	public int grapeWinePressingYield = 40;
 
 
-	@ConfigOption(catergory="Booze", name="Grape Wine Color", desc="What color should grape wine be?")
+	@ConfigOption(catergory="Booze/Grape Wine", name="Grape Wine Color", desc="What color should Grape wine be?")
 	public int grapeWineColor = 0x550E24;
+
+	@ConfigOption(catergory="Booze/Ambrosia", name="Grape Wine Color", desc="What color should Ambrosia be?")
+	public int ambrosiaColor = 0x43302E;
+
+	@ConfigOption(catergory="Booze/Port Wine", name="Grape Wine Color", desc="What color should Port Wine be?")
+	public int portWineColor = 0x4E2026;
+
+
+	@ConfigOption(catergory="Brewing/Port Wine", name="Time", desc="[Higher -> Slower]")
+	public int portWineBrewingTime = 20;
+
+	@ConfigOption(catergory="Brewing/Port Wine", name="Yield", desc="How much port wine is produced per brew?")
+	public int portWineBrewingYield = 40;
 
 
 	@ConfigOption(catergory="Village", name="Generate Village Grape Vineyards", desc="Controls hop vineyards spawning in villages")
