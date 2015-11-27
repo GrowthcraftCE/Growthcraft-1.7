@@ -125,8 +125,8 @@ public class EffectTipsy implements IEffect
 		String n = "";
 		if (nausea.getDuration() > 20)
 		{
-			n = n + "(" + Potion.getDurationString(nausea) + ")";
+			n = "(" + Potion.getDurationString(nausea) + ")";
 		}
-		list.add(EnumChatFormatting.GRAY + p + " " + n);
+		list.add(EnumChatFormatting.GRAY + p + EnumChatFormatting.GRAY + " " + n);
 	}
 }

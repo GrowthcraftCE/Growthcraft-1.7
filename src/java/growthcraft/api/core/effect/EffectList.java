@@ -23,8 +23,12 @@
  */
 package growthcraft.api.core.effect;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.description.Describer;
 
 import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
@@ -36,6 +40,8 @@ import net.minecraft.entity.Entity;
  */
 public class EffectList extends AbstractEffectList
 {
+	private List<String> tempList = new ArrayList<String>();
+
 	/**
 	 * Performs a shallow copy of the EffectList
 	 *
@@ -62,6 +68,11 @@ public class EffectList extends AbstractEffectList
 		}
 	}
 
+	protected void addDescriptionHead(List<String> list)
+	{
+		list.add(GrcI18n.translate("grc.effect.list.head"));
+	}
+
 	/**
 	 * Adds the description of all the internal effects
 	 *
@@ -70,9 +81,12 @@ public class EffectList extends AbstractEffectList
 	@Override
 	public void getDescription(List<String> list)
 	{
+		addDescriptionHead(list);
 		for (IEffect effect : effects)
 		{
-			effect.getDescription(list);
+			tempList.clear();
+			effect.getDescription(tempList);
+			Describer.addAllIndented(list, tempList);
 		}
 	}
 }

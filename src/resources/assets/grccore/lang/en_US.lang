@@ -47,6 +47,9 @@ grc.format.crop.mature=Mature
 grc.format.paddy.hasFluid=Has Fluid :
 
 # Effects
+grc.effect.chance.format=%d%% Chance of
 grc.effect.null.desc=Does Nothing
-grc.effect.chance.format=%d%% chance of:
+grc.effect.list.head=Applies the following:
+grc.effect.random_list.head=Applies one of the following:
 grc.effect.remove_potion_effect.format=Removes %s
+grc.effect.weighted_random_list.format=%d%% Chance of

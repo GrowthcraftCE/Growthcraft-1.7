@@ -23,8 +23,12 @@
  */
 package growthcraft.api.core.effect;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.description.Describer;
 
 import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
@@ -35,6 +39,11 @@ import net.minecraft.entity.Entity;
  */
 public class EffectRandomList extends AbstractEffectList
 {
+	/**
+	 * A temporary String list used for descriptions
+	 */
+	private List<String> tempList = new ArrayList<String>();
+
 	/**
 	 * Performs a shallow copy of the EffectList
 	 *
@@ -68,11 +77,15 @@ public class EffectRandomList extends AbstractEffectList
 	@Override
 	public void getDescription(List<String> list)
 	{
-		// TODO, prepend the descriptions with
-		// "Randomly selects of the following effects"
-		for (IEffect effect : effects)
+		if (effects.size() > 0)
 		{
-			effect.getDescription(list);
+			list.add(GrcI18n.translate("grc.effect.random_list.head"));
+			for (IEffect effect : effects)
+			{
+				tempList.clear();
+				effect.getDescription(tempList);
+				Describer.addAllIndented(list, tempList);
+			}
 		}
 	}
 }

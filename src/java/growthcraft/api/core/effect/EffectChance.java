@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.description.Describer;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
@@ -85,25 +86,14 @@ public class EffectChance implements IEffect
 	@Override
 	public void getDescription(List<String> list)
 	{
-		tempList.clear();
 		if (effect != null)
 		{
+			tempList.clear();
 			effect.getDescription(tempList);
-		}
-		if (tempList.size() > 0)
-		{
-			final String str = GrcI18n.translate("grc.effect.chance.format", (int)(chance * 100));
-			if (tempList.size() == 1)
+			if (tempList.size() > 0)
 			{
-				list.add(str + " " + tempList.get(0));
-			}
-			else
-			{
-				list.add(str);
-				for (String line : tempList)
-				{
-					list.add("  " + line);
-				}
+				final String str = GrcI18n.translate("grc.effect.chance.format", (int)(chance * 100));
+				Describer.compactDescription(str, list, tempList);
 			}
 		}
 	}

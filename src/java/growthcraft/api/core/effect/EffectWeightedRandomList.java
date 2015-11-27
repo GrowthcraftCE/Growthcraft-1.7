@@ -28,6 +28,9 @@ import java.util.List;
 import java.util.Random;
 import javax.annotation.Nonnull;
 
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.description.Describer;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import net.minecraft.util.WeightedRandom;
@@ -71,6 +74,7 @@ public class EffectWeightedRandomList implements IEffect
 		}
 	}
 
+	private List<String> tempList = new ArrayList<String>();
 	private List<WeightedEffect> effects = new ArrayList<WeightedEffect>();
 
 	/**
@@ -201,11 +205,17 @@ public class EffectWeightedRandomList implements IEffect
 	@Override
 	public void getDescription(List<String> list)
 	{
-		// TODO, prepend the descriptions with
-		// "Weighted @"
-		for (IEffect effect : effects)
+		final int totalWeight = WeightedRandom.getTotalWeight(effects);
+		for (WeightedEffect effect : effects)
 		{
-			effect.getDescription(list);
+			tempList.clear();
+			effect.getDescription(tempList);
+			if (tempList.size() > 0)
+			{
+				final float chance = totalWeight > 0 ? (float)effect.itemWeight / (float)totalWeight : 0f;
+				final String head = GrcI18n.translate("grc.effect.weighted_random_list.format", (int)(chance * 100f));
+				Describer.compactDescription(head, list, tempList);
+			}
 		}
 	}
 }

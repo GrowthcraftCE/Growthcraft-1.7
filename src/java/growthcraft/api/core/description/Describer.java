@@ -69,4 +69,43 @@ public class Describer
 		}
 		list.add(s);
 	}
+
+	public static void addAllPrefixed(String prefix, List<String> dest, List<String> src)
+	{
+		for (String str : src)
+		{
+			dest.add(prefix + str);
+		}
+	}
+
+	public static void addAllIndented(List<String> dest, List<String> src)
+	{
+		addAllPrefixed("  ", dest, src);
+	}
+
+	/**
+	 * Attempts to compact the src list into the dest list.
+	 * If the src list only has 1 entry, then it will inline with the head
+	 * else it is treated as an indented list
+	 *
+	 * @param head - str to inline with or use as header
+	 * @param dest - destination list
+	 * @param src - source list
+	 */
+	public static void compactDescription(String head, List<String> dest, List<String> src)
+	{
+		if (src.size() > 0)
+		{
+			if (src.size() == 1)
+			{
+				final String line = src.get(0);
+				dest.add(head + " " + line);
+			}
+			else
+			{
+				dest.add(head);
+				addAllIndented(dest, src);
+			}
+		}
+	}
 }
