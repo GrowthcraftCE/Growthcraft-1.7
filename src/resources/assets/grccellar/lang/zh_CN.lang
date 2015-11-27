@@ -14,9 +14,9 @@ tile.grc.fermentJar.name=发酵罐
 item.grc.boozeBucket.name=一桶
 
 item.grc.yeast0.name=酿酒酵母
-item.grc.yeast1.name=Lager酵母
-item.grc.yeast2.name=Bayanus酵母
-item.grc.yeast3.name=Ethereal酵母
+item.grc.yeast1.name=窖藏啤酒酵母
+item.grc.yeast2.name=贝酵母
+item.grc.yeast3.name=乙醇酵母
 item.grc.yeast4.name=原酵母
 
 # Water Bags
@@ -51,12 +51,12 @@ grc.booze=豪饮
 # Modifiers
 grc.booze.modifier.young=低度
 grc.booze.modifier.fermented=发酵
-grc.booze.modifier.extended=烈性
+grc.booze.modifier.extended=后劲
 grc.booze.modifier.potent=高度
-grc.booze.modifier.hyper_extended=高烈性
+grc.booze.modifier.hyper_extended=较大后劲
 grc.booze.modifier.deadly=致死
 grc.booze.modifier.poisoned=毒性
-grc.booze.modifier.chilled=Chilled
+grc.booze.modifier.chilled=冷藏
 grc.booze.modifier.intoxicated=剧毒
 
 # GUI
