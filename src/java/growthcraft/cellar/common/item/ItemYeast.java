@@ -21,6 +21,8 @@ public class ItemYeast extends Item
 	public ItemYeast()
 	{
 		super();
+		setHasSubtypes(true);
+		setMaxDamage(0);
 		setTextureName("grccellar:yeast");
 		setUnlocalizedName("grc.yeast");
 		setCreativeTab(GrowthCraftCellar.tab);
