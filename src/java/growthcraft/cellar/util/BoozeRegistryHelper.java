@@ -16,7 +16,7 @@ import growthcraft.cellar.common.item.ItemBlockFluidBooze;
 import growthcraft.cellar.common.item.ItemBucketBooze;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.handler.BucketHandler;
+import growthcraft.core.event.EventHandlerBucketFill;
 import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -50,7 +50,7 @@ public class BoozeRegistryHelper
 			GameRegistry.registerItem(buckets[i].getItem(), basename + "Bucket." + i);
 			GameRegistry.registerBlock(fluidBlocks[i].getBlock(), ItemBlockFluidBooze.class, basename + "Fluid." + i);
 
-			BucketHandler.instance().register(fluidBlocks[i].getBlock(), buckets[i].getItem());
+			EventHandlerBucketFill.instance().register(fluidBlocks[i].getBlock(), buckets[i].getItem());
 
 			final FluidStack boozeStack = new FluidStack(boozes[i], FluidContainerRegistry.BUCKET_VOLUME);
 			FluidContainerRegistry.registerFluidContainer(boozeStack, buckets[i].asStack(), FluidContainerRegistry.EMPTY_BUCKET);

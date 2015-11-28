@@ -2,6 +2,7 @@ package growthcraft.core;
 
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.core.common.AchievementPageGrowthcraft;
 import growthcraft.core.common.block.BlockFenceRope;
 import growthcraft.core.common.block.BlockRope;
@@ -9,13 +10,12 @@ import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.item.ItemRope;
-import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
+import growthcraft.core.event.EventHandlerBucketFill;
 import growthcraft.core.event.HarvestDropsEventCore;
 import growthcraft.core.event.PlayerInteractEventAmazingStick;
 import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.event.TextureStitchEventCore;
-import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.ItemUtils;
 
@@ -126,7 +126,6 @@ public class GrowthCraftCore
 		NEI.hideItem(ropeBlock.asStack());
 
 		MinecraftForge.EVENT_BUS.register(new TextureStitchEventCore());
-		BucketHandler.init();
 
 		modules.register();
 	}
@@ -145,6 +144,7 @@ public class GrowthCraftCore
 	@EventHandler
 	public void postLoad(FMLPostInitializationEvent event)
 	{
+		MinecraftForge.EVENT_BUS.register(EventHandlerBucketFill.instance());
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventPaddy());
 		if (config.useAmazingStick)

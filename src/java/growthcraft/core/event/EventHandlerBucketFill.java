@@ -1,7 +1,7 @@
 /**
  * Gracefully taken from BuildCraft
  */
-package growthcraft.core.handler;
+package growthcraft.core.event;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,24 +13,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 
-public final class BucketHandler
+public class EventHandlerBucketFill
 {
-	private static BucketHandler INSTANCE = new BucketHandler();
+	private static EventHandlerBucketFill INSTANCE = new EventHandlerBucketFill();
 	private Map<Block, Item> buckets = new HashMap<Block, Item>();
 
-	private BucketHandler() {}
-
-	public static BucketHandler instance()
+	public static EventHandlerBucketFill instance()
 	{
 		return INSTANCE;
-	}
-
-	public static void init()
-	{
-		MinecraftForge.EVENT_BUS.register(INSTANCE);
 	}
 
 	public void register(Block block, Item item)
