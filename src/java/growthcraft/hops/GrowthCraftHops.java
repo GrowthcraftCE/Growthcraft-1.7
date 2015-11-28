@@ -149,6 +149,10 @@ public class GrowthCraftHops
 			{
 				bz.setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
+			for (Booze bz : booze.lagerBooze)
+			{
+				bz.setIcons(GrowthCraftCore.liquidSmoothTexture);
+			}
 		}
 	}
 
