@@ -18,8 +18,9 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	public static class FruitPressDataID
 	{
 		public static final int TIME = 0;
-		public static final int TANK_FLUID_ID = 1;
-		public static final int TANK_FLUID_AMOUNT = 2;
+		public static final int TIME_MAX = 1;
+		public static final int TANK_FLUID_ID = 2;
+		public static final int TANK_FLUID_AMOUNT = 3;
 
 		private FruitPressDataID() {}
 	}
@@ -133,6 +134,9 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 			case FruitPressDataID.TIME:
 				fruitPress.setTime(v);
 				break;
+			case FruitPressDataID.TIME_MAX:
+				fruitPress.setTimeMax(v);
+				break;
 			case FruitPressDataID.TANK_FLUID_ID:
 				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
 				if (result != null) getFluidTank(0).setFluid(result);
@@ -150,6 +154,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME, fruitPress.getTime());
+		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME_MAX, fruitPress.getTimeMax());
 		final FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
