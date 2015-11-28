@@ -32,7 +32,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public class DeviceProgressive extends DeviceBase
 {
 	protected int time;
-	protected int timeMax = 1200;
+	protected int timeMax;
 
 	public DeviceProgressive(TileEntityCellarDevice te)
 	{

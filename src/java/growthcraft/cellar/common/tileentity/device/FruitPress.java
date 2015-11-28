@@ -116,7 +116,9 @@ public class FruitPress extends DeviceProgressive
 			increaseTime();
 			if (getTime() >= getTimeMax())
 			{
+				resetTime();
 				pressItem();
+				markForInventoryUpdate();
 			}
 		}
 		else

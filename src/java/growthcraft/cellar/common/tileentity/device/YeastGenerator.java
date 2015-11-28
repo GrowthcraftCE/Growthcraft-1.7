@@ -33,6 +33,7 @@ public class YeastGenerator extends DeviceProgressive
 		super(te);
 		this.fluidSlot = fs;
 		this.invSlot = is;
+		setTimeMax(1200);
 	}
 
 	public YeastGenerator setConsumption(int t)
@@ -110,7 +111,7 @@ public class YeastGenerator extends DeviceProgressive
 			increaseTime();
 			if (time >= timeMax)
 			{
-				this.time = 0;
+				resetTime();
 				produceYeast();
 				markForInventoryUpdate();
 			}
