@@ -142,11 +142,10 @@ public class GrcApplesBooze extends GrcModuleBase
 		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", appleCiderBucket_deprecated);
 		registerFermentations();
 
-		CellarRegistry.instance().pressing().addPressing(
-			Items.apple,
-			appleCiderBooze[0],
+		CellarRegistry.instance().pressing().addPressingRecipe(
+			new ItemStack(Items.apple),
+			new FluidStack(appleCiderBooze[0], GrowthCraftApples.getConfig().appleCiderPressYield),
 			GrowthCraftApples.getConfig().appleCiderPressingTime,
-			GrowthCraftApples.getConfig().appleCiderPressYield,
 			Residue.newDefault(0.3F)
 		);
 	}
