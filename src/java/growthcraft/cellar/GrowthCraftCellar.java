@@ -14,14 +14,15 @@ import growthcraft.api.cellar.pressing.UserPressingRecipes;
 import growthcraft.api.cellar.yeast.UserYeastEntries;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
-import growthcraft.cellar.common.booze.ModifierFunctionExtended;
-import growthcraft.cellar.common.booze.ModifierFunctionHyperExtended;
-import growthcraft.cellar.common.booze.ModifierFunctionPotent;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.cellar.common.block.BlockBrewKettle;
 import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.cellar.common.block.BlockFermentJar;
 import growthcraft.cellar.common.block.BlockFruitPress;
 import growthcraft.cellar.common.block.BlockFruitPresser;
+import growthcraft.cellar.common.booze.ModifierFunctionExtended;
+import growthcraft.cellar.common.booze.ModifierFunctionHyperExtended;
+import growthcraft.cellar.common.booze.ModifierFunctionPotent;
 import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.common.item.ItemChievDummy;
 import growthcraft.cellar.common.item.ItemWaterBag;
@@ -35,15 +36,15 @@ import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.common.village.ComponentVillageTavern;
 import growthcraft.cellar.common.village.VillageHandlerCellar;
 import growthcraft.cellar.creativetab.CreativeTabsCellar;
+import growthcraft.cellar.event.EventHandlerCauldronUseItem;
 import growthcraft.cellar.event.ItemCraftedEventCellar;
 import growthcraft.cellar.event.LivingUpdateEventCellar;
 import growthcraft.cellar.handler.GuiHandlerCellar;
 import growthcraft.cellar.network.PacketPipeline;
-import growthcraft.cellar.stats.GrcCellarAchievements;
 import growthcraft.cellar.stats.CellarAchievement;
+import growthcraft.cellar.stats.GrcCellarAchievements;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
 
@@ -312,6 +313,7 @@ public class GrowthCraftCellar
 		packetPipeline.postInitialise();
 		MinecraftForge.EVENT_BUS.register(new ItemCraftedEventCellar());
 		MinecraftForge.EVENT_BUS.register(new LivingUpdateEventCellar());
+		MinecraftForge.EVENT_BUS.register(new EventHandlerCauldronUseItem());
 
 		modules.postInit();
 	}

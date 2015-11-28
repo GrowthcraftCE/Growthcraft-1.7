@@ -1,6 +1,7 @@
 package growthcraft.core.util;
 
 import java.util.Random;
+import javax.annotation.Nonnull;
 
 import growthcraft.core.common.item.AmazingStickWrench;
 import growthcraft.core.common.item.IGrcWrench;
@@ -140,15 +141,20 @@ public class ItemUtils
 		return mergeStacksBang(a, b != null ? b.copy() : b);
 	}
 
-	public static void decreaseStackOnPlayer(ItemStack itemstack, EntityPlayer player)
+	public static void replacePlayerCurrentItem(@Nonnull EntityPlayer player, ItemStack stack)
+	{
+		player.inventory.setInventorySlotContents(player.inventory.currentItem, stack);
+	}
+
+	public static void decreaseStackOnPlayer(ItemStack itemstack, @Nonnull EntityPlayer player)
 	{
 		if (player.capabilities.isCreativeMode) return;
 
 		final ItemStack result = consumeStack(itemstack);
-		player.inventory.setInventorySlotContents(player.inventory.currentItem, result);
+		replacePlayerCurrentItem(player, result);
 	}
 
-	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, boolean checkCreative)
+	public static void addStackToPlayer(ItemStack itemstack, @Nonnull EntityPlayer player, World world, int x, int y, int z, boolean checkCreative)
 	{
 		final boolean flag = checkCreative ? !player.capabilities.isCreativeMode : true;
 		if (flag)
