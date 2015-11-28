@@ -158,7 +158,7 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TIME.ordinal(), yeastGen.getTime());
-		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TIME_MAX.ordinal(), yeastGen.getTime());
+		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TIME_MAX.ordinal(), yeastGen.getTimeMax());
 		final FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
