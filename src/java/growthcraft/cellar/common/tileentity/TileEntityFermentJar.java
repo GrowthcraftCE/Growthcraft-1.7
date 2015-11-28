@@ -6,6 +6,7 @@ import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.cellar.common.tileentity.device.YeastGenerator;
 
 import io.netty.buffer.ByteBuf;
 

@@ -184,6 +184,22 @@ public abstract class TileEntityCellarDevice extends GrcBaseInventoryTile implem
 		return tanks[slot].getFluid();
 	}
 
+	public void drainFluidTank(int slot, int amount, boolean doDrain)
+	{
+		tanks[slot].drain(amount, doDrain);
+	}
+
+	public void fillFluidTank(int slot, FluidStack fluid, boolean doFill)
+	{
+		tanks[slot].fill(fluid, doFill);
+	}
+
+	public void setFluidStack(int slot, FluidStack stack)
+	{
+		tanks[slot].setFluid(stack);
+		markForFluidUpdate();
+	}
+
 	public Fluid getFluid(int slot)
 	{
 		final FluidStack stack = getFluidStack(slot);

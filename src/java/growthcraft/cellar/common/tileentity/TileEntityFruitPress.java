@@ -1,11 +1,8 @@
 package growthcraft.cellar.common.tileentity;
 
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.common.Residue;
-import growthcraft.api.cellar.pressing.PressingRegistry;
 import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.util.ItemUtils;
+import growthcraft.cellar.common.tileentity.device.FruitPress;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 
 import net.minecraft.inventory.Container;
@@ -29,10 +26,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 
 	private static final int[] rawSlotIDs = new int[] {0, 1};
 	private static final int[] residueSlotIDs = new int[] {0};
-
-	protected float pomace;
-	protected int time;
-
+	private FruitPress fruitPress = new FruitPress(this, 0, 0, 1);
 
 	@Override
 	protected CellarTank[] createTanks()
@@ -47,91 +41,15 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 		return new GrcInternalInventory(this, 2);
 	}
 
-	protected boolean resetTime()
-	{
-		if (this.time != 0)
-		{
-			this.time = 0;
-			return true;
-		}
-		return false;
-	}
-
 	@Override
 	public String getDefaultInventoryName()
 	{
 		return "container.grc.fruitPress";
 	}
 
-	private void debugMsg()
-	{
-		if (this.worldObj.isRemote)
-		{
-			System.out.println("CLIENT: " + getFluidAmount(0));
-		}
-		if (!this.worldObj.isRemote)
-		{
-			System.out.println("SERVER: " + getFluidAmount(0));
-		}
-	}
-
-	private boolean canPress()
-	{
-		final ItemStack primarySlotItem = getStackInSlot(0);
-
-		if (primarySlotItem == null) return false;
-
-		final int m = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord + 1, this.zCoord);
-		if (m == 0 || m == 1) return false;
-
-		if (isFluidTankFull(0)) return false;
-
-		final PressingRegistry pressing = CellarRegistry.instance().pressing();
-		if (!pressing.isPressingRecipe(primarySlotItem)) return false;
-
-		if (isFluidTankEmpty(0)) return true;
-
-		final FluidStack stack = pressing.getPressingFluidStack(primarySlotItem);
-		return stack.isFluidEqual(getFluidStack(0));
-	}
-
-	private void producePomace()
-	{
-		final Residue residue = CellarRegistry.instance().pressing().getPressingResidue(getStackInSlot(0));
-		this.pomace = this.pomace + residue.pomaceRate;
-		if (this.pomace >= 1.0F)
-		{
-			this.pomace = this.pomace - 1.0F;
-			final ItemStack residueResult = ItemUtils.mergeStacks(getStackInSlot(1), residue.residueItem);
-			if (residueResult != null) setInventorySlotContents(1, residueResult);
-		}
-	}
-
-	public void pressItem()
-	{
-		final PressingRegistry pressing = CellarRegistry.instance().pressing();
-		final ItemStack pressingItem = getStackInSlot(0);
-		producePomace();
-		final FluidStack fluidstack = pressing.getPressingFluidStack(pressingItem);
-		fluidstack.amount  = pressing.getPressingAmount(pressingItem);
-		getFluidTank(0).fill(fluidstack, true);
-
-		decrStackSize(0, 1);
-	}
-
-	public int getPressingTime()
-	{
-		return CellarRegistry.instance().pressing().getPressingTime(getStackInSlot(0));
-	}
-
 	public int getPressProgressScaled(int par1)
 	{
-		if (this.canPress())
-		{
-			return this.time * par1 / getPressingTime();
-		}
-
-		return 0;
+		return fruitPress.getProgressScaled(par1);
 	}
 
 	/************
@@ -140,24 +58,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	@Override
 	public void updateCellarDevice()
 	{
-		if (this.canPress())
-		{
-			++this.time;
-
-			if (this.time >= getPressingTime())
-			{
-				this.time = 0;
-				this.pressItem();
-			}
-		}
-		else
-		{
-			if (resetTime())
-			{
-				markForInventoryUpdate();
-			}
-		}
-
+		fruitPress.update();
 	}
 
 	@Override
@@ -198,16 +99,22 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		this.time = nbt.getShort("time");
-		this.pomace = nbt.getFloat("pomace");
+		if (nbt.getInteger("FruitPress_version") > 0)
+		{
+			fruitPress.readFromNBT(nbt, "fruit_press");
+		}
+		else
+		{
+			fruitPress.readFromNBT(nbt);
+		}
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setShort("time", (short)this.time);
-		nbt.setFloat("pomace", this.pomace);
+		fruitPress.writeToNBT(nbt, "fruit_press");
+		nbt.setInteger("FruitPress_version", 2);
 	}
 
 	/************
@@ -224,7 +131,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 		switch (id)
 		{
 			case FruitPressDataID.TIME:
-				time = v;
+				fruitPress.setTime(v);
 				break;
 			case FruitPressDataID.TANK_FLUID_ID:
 				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
@@ -242,7 +149,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	@Override
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
-		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME, time);
+		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME, fruitPress.getTime());
 		final FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
