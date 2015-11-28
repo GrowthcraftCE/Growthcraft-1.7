@@ -6,7 +6,7 @@ tile.grc.fruitPress.name=Fruit Press
 tile.grc.fruitPresser.name=Fruit Press
 tile.grc.brewKettle.name=Brew Kettle
 tile.grc.fermentBarrel.name=Fermentation Barrel
-tile.grc.fermentJar.name=Fermentation Jar
+tile.grc.fermentJar.name=Yeast Jar
 
 # Items
 # Please remove this field once all other module translations have been updated,
