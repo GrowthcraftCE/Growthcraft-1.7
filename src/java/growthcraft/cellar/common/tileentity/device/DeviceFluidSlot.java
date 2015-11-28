@@ -63,6 +63,11 @@ public class DeviceFluidSlot
 		return tanks.isFluidTankFilled(index);
 	}
 
+	public boolean isFull()
+	{
+		return tanks.isFluidTankFull(index);
+	}
+
 	public boolean isEmpty()
 	{
 		return tanks.isFluidTankEmpty(index);
