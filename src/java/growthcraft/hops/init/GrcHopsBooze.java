@@ -110,9 +110,9 @@ public class GrcHopsBooze extends GrcModuleBase
 				.setTipsy(defaultTipsy, TickUtils.seconds(45))
 				.addPotionEntry(Potion.digSpeed, TickUtils.minutes(3), 0);
 
-		// Lager - Lager Yeast
+		//  Lager - Lager Yeast
 		CellarBoozeBuilder.create(hopAleBooze[6])
-			.tags(BoozeTag.HOPPED, BoozeTag.FERMENTED, BoozeTag.CHILLED)
+			.tags(BoozeTag.FERMENTED, BoozeTag.CHILLED)
 			.brewsFrom(
 				new FluidStack(hopAleBooze[4], GrowthCraftHops.getConfig().lagerBrewYield),
 				YeastType.LAGER.asStack(),
