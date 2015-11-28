@@ -122,11 +122,7 @@ public class UserPressingRecipes extends JsonConfigDef
 		}
 
 		logger.info("Adding pressing recipe %s", recipe);
-		CellarRegistry.instance().pressing().addPressing(
-			item.getItem(), item.getItemDamage(),
-			fluidStack.getFluid(), recipe.time, fluidStack.amount,
-			residue
-		);
+		CellarRegistry.instance().pressing().addPressingRecipe(item, fluidStack, recipe.time, residue);
 	}
 
 	@Override

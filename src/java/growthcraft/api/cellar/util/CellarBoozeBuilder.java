@@ -79,7 +79,7 @@ public class CellarBoozeBuilder
 
 	public CellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nonnull Residue residue)
 	{
-		CellarRegistry.instance().pressing().addPressing(stack.getItem(), stack.getItemDamage(), fluid, time, amount, residue);
+		CellarRegistry.instance().pressing().addPressingRecipe(stack, new FluidStack(fluid, amount), time, residue);
 		return this;
 	}
 
