@@ -49,34 +49,46 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hops.asStack(), new AspectList().add(Aspect.CROP, 1));
 
-		final AspectList[] common = new AspectList[]
+		// hopAle
+		AspectList[] common = new AspectList[]
 		{
-			// 0
 			new AspectList().add(Aspect.PLANT, 1),
-			// 1
 			new AspectList().add(Aspect.PLANT, 1).add(Aspect.MOTION, 1),
-			// 2
 			new AspectList().add(Aspect.PLANT, 1).add(Aspect.MOTION, 2),
-			// 3
 			new AspectList().add(Aspect.PLANT, 1).add(Aspect.MOTION, 1),
-			// 4
 			new AspectList(),
-			// 5
 			new AspectList().add(Aspect.PLANT, 1).add(Aspect.MOTION, 2),
-			// 6
 			new AspectList().add(Aspect.PLANT, 1).add(Aspect.MOTION, 3),
-			// 7
 			new AspectList().add(Aspect.PLANT, 1).add(Aspect.MOTION, 1).add(Aspect.POISON, 1),
-			// 8
-			new AspectList().add(Aspect.POISON, 2),
+			new AspectList().add(Aspect.POISON, 2)
 		};
 
 		for (int i = 0; i < common.length; ++i)
 		{
 			final AspectList list = common[i];
 			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, i), list.copy());
-			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.PLANT, Aspect.MOTION, Aspect.POISON));
-			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.PLANT, Aspect.MOTION, Aspect.POISON));
+			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.PLANT, Aspect.MOTION));
+			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.PLANT, Aspect.MOTION));
+		}
+
+		// Lager
+		common = new AspectList[]
+		{
+			new AspectList().add(Aspect.COLD, 1),
+			new AspectList().add(Aspect.COLD, 1).add(Aspect.FLIGHT, 1).add(Aspect.MOTION, 1),
+			new AspectList().add(Aspect.COLD, 1).add(Aspect.FLIGHT, 2).add(Aspect.MOTION, 2),
+			new AspectList().add(Aspect.COLD, 1).add(Aspect.FLIGHT, 1).add(Aspect.MOTION, 1),
+			new AspectList().add(Aspect.COLD, 1).add(Aspect.FLIGHT, 2).add(Aspect.MOTION, 2),
+			new AspectList().add(Aspect.COLD, 1).add(Aspect.FLIGHT, 3).add(Aspect.MOTION, 3).add(Aspect.POISON, 1),
+			new AspectList().add(Aspect.COLD, 1).add(Aspect.POISON, 2)
+		};
+
+		for (int i = 0; i < common.length; ++i)
+		{
+			final AspectList list = common[i];
+			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftHops.booze.lager.asStack(1, i), list.copy());
+			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.booze.lagerBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.COLD, Aspect.FLIGHT, Aspect.MOTION));
+			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.booze.lagerFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.COLD, Aspect.FLIGHT, Aspect.MOTION));
 		}
 	}
 }

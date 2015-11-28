@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.booze.Booze;
-import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.booze.BoozeTag;
+import growthcraft.api.cellar.booze.IBoozeRegistry;
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.cellar.common.block.BlockFluidBooze;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
@@ -22,7 +21,6 @@ import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -43,24 +41,6 @@ public class BoozeRegistryHelper
 			fluidBlocks[i] = new BlockBoozeDefinition(boozeBlock);
 			buckets[i] = new ItemBucketBoozeDefinition(new ItemBucketBooze(boozeBlock, boozes[i]));
 		}
-	}
-
-	public static void registerDefaultFermentation(Fluid[] boozes)
-	{
-		final BoozeRegistry boozeReg = CellarRegistry.instance().booze();
-		final FermentingRegistry fermentReg = CellarRegistry.instance().fermenting();
-
-		boozeReg.addTags(boozes[0], BoozeTag.YOUNG);
-		boozeReg.addTags(boozes[1], BoozeTag.FERMENTED);
-		boozeReg.addTags(boozes[2], BoozeTag.FERMENTED, BoozeTag.POTENT);
-		boozeReg.addTags(boozes[3], BoozeTag.FERMENTED, BoozeTag.EXTENDED);
-
-		fermentReg.addFermentation(new FluidStack(boozes[1], 1), new FluidStack(boozes[0], 1), YeastType.BREWERS.asStack(), GrowthCraftCellar.getConfig().fermentTime);
-		fermentReg.addFermentation(new FluidStack(boozes[1], 1), new FluidStack(boozes[0], 1), new ItemStack(Items.nether_wart), (int)(GrowthCraftCellar.getConfig().fermentTime * 0.66));
-		fermentReg.addFermentation(new FluidStack(boozes[2], 1), new FluidStack(boozes[1], 1), new ItemStack(Items.glowstone_dust), GrowthCraftCellar.getConfig().fermentTime);
-		fermentReg.addFermentation(new FluidStack(boozes[2], 1), new FluidStack(boozes[3], 1), new ItemStack(Items.glowstone_dust), GrowthCraftCellar.getConfig().fermentTime);
-		fermentReg.addFermentation(new FluidStack(boozes[3], 1), new FluidStack(boozes[1], 1), new ItemStack(Items.redstone), GrowthCraftCellar.getConfig().fermentTime);
-		fermentReg.addFermentation(new FluidStack(boozes[3], 1), new FluidStack(boozes[2], 1), new ItemStack(Items.redstone), GrowthCraftCellar.getConfig().fermentTime);
 	}
 
 	public static void registerBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemBucketBoozeDefinition[] buckets, ItemDefinition bottle, String basename, @Nullable ItemDefinition oldBucket)
@@ -91,7 +71,7 @@ public class BoozeRegistryHelper
 
 	public static List<BoozeEffect> getBoozeEffects(Fluid[] boozes)
 	{
-		final BoozeRegistry reg = CellarRegistry.instance().booze();
+		final IBoozeRegistry reg = CellarRegistry.instance().booze();
 		final List<BoozeEffect> effects = new ArrayList<BoozeEffect>();
 		for (int i = 0; i < boozes.length; ++i)
 		{

@@ -28,8 +28,9 @@ import growthcraft.bees.common.block.BlockBeeBoxThaumcraft;
 import growthcraft.bees.common.block.EnumBeeBoxThaumcraft;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
+import growthcraft.core.common.definition.BlockTypeDefinition;
+import growthcraft.core.integration.thaumcraft.AspectsHelper;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 
 import thaumcraft.api.ThaumcraftApi;
@@ -100,20 +101,24 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxThaumcraft.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
 		}
 
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftBees.honeyMead.asStack(1, 0), new AspectList());
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftBees.honeyMead.asStack(1, 1), new AspectList().add(Aspect.HEAL, 1));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftBees.honeyMead.asStack(1, 2), new AspectList().add(Aspect.HEAL, 2));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftBees.honeyMead.asStack(1, 3), new AspectList().add(Aspect.HEAL, 1));
+		final AspectList[] common = new AspectList[]
+		{
+			new AspectList(),
+			new AspectList().add(Aspect.HEAL, 1),
+			new AspectList().add(Aspect.HEAL, 2),
+			new AspectList().add(Aspect.HEAL, 1),
+			new AspectList().add(Aspect.HEAL, 2),
+			new AspectList().add(Aspect.HEAL, 1).add(Aspect.POISON, 1),
+			new AspectList().add(Aspect.POISON, 1)
+		};
 
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftBees.honeyMeadBuckets[0], new AspectList());
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftBees.honeyMeadBuckets[1], new AspectList().add(Aspect.HEAL, 3));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftBees.honeyMeadBuckets[2], new AspectList().add(Aspect.HEAL, 6));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftBees.honeyMeadBuckets[3], new AspectList().add(Aspect.HEAL, 3));
-
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftBees.honeyMeadFluids[0], new AspectList());
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftBees.honeyMeadFluids[1], new AspectList().add(Aspect.HEAL, 3));
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftBees.honeyMeadFluids[2], new AspectList().add(Aspect.HEAL, 6));
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftBees.honeyMeadFluids[3], new AspectList().add(Aspect.HEAL, 3));
+		for (int i = 0; i < common.length; ++i)
+		{
+			final AspectList list = common[i];
+			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftBees.booze.honeyMead.asStack(1, i), list.copy());
+			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftBees.booze.honeyMeadBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
+			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftBees.booze.honeyMeadFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
+		}
 	}
 }
 

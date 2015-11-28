@@ -57,21 +57,9 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		return "container.grc.fermentBarrel";
 	}
 
-	private void debugMsg()
-	{
-		if (this.worldObj.isRemote)
-		{
-			System.out.println("CLIENT: " + getFluidAmount(0));
-		}
-		if (!this.worldObj.isRemote)
-		{
-			System.out.println("SERVER: " + getFluidAmount(0));
-		}
-	}
-
 	private FermentationResult getFermentation()
 	{
-		return CellarRegistry.instance().fermenting().getFermentation(getFluidStack(0), getStackInSlot(0));
+		return CellarRegistry.instance().fermenting().getFermentationResult(getFluidStack(0), getStackInSlot(0));
 	}
 
 	public int getTime()
@@ -84,7 +72,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		final FermentationResult result = getFermentation();
 		if (result != null)
 		{
-			return result.time;
+			return result.getTime();
 		}
 		return this.timemax;
 	}

@@ -78,7 +78,7 @@ public class FruitPress extends DeviceProgressive
 		if (result == null) return false;
 		if (!inputSlot.hasEnough(result.getInput())) return false;
 		this.currentResult = result;
-		setTimeMax(currentResult.time);
+		setTimeMax(currentResult.getTime());
 
 		if (fluidSlot.isEmpty()) return true;
 
@@ -89,7 +89,7 @@ public class FruitPress extends DeviceProgressive
 	public void producePomace()
 	{
 		if (currentResult == null) return;
-		final Residue residue = currentResult.residue;
+		final Residue residue = currentResult.getResidue();
 		this.pomace = this.pomace + residue.pomaceRate;
 		if (this.pomace >= 1.0F)
 		{

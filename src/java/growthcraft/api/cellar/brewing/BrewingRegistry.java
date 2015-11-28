@@ -3,7 +3,6 @@ package growthcraft.api.cellar.brewing;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.annotation.Nonnull;
 
@@ -67,7 +66,7 @@ public class BrewingRegistry implements IBrewingRegistry
 	@Override
 	public void addBrewing(@Nonnull FluidStack sourceFluid, @Nonnull ItemStack raw, @Nonnull FluidStack resultFluid, int time, @Nonnull Residue residue)
 	{
-		this.brewingList.put(new BrewingKey(sourceFluid.getFluid(), raw), new BrewingResult(sourceFluid, resultFluid, time, residue));
+		this.brewingList.put(new BrewingKey(sourceFluid.getFluid(), raw), new BrewingResult(sourceFluid, raw, resultFluid, time, residue));
 		this.brewingIngredients.add(new ItemKey(raw));
 	}
 

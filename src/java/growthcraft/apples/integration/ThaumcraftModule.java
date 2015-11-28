@@ -58,7 +58,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 			new AspectList().add(Aspect.HEAL, 1),
 			new AspectList().add(Aspect.EXCHANGE, 1),
 			new AspectList().add(Aspect.HEAL, 1).add(Aspect.POISON, 1),
-			new AspectList().add(Aspect.HEAL, 1).add(Aspect.POISON, 1)
+			new AspectList().add(Aspect.POISON, 1)
 		};
 
 		for (int i = 0; i < common.length; ++i)

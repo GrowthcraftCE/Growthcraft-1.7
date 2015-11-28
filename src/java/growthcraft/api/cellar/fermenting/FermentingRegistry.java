@@ -1,9 +1,6 @@
 package growthcraft.api.cellar.fermenting;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.CellarRegistry;
@@ -14,8 +11,6 @@ import growthcraft.api.core.util.ItemKey;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeDictionary;
 
 public class FermentingRegistry implements IFermentingRegistry
 {

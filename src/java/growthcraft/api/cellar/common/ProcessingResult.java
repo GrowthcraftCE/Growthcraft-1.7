@@ -28,8 +28,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class ProcessingResult
 {
-	public final int time;
-	public final Residue residue;
+	private final int time;
+	private final Residue residue;
 	private final FluidStack fluid;
 
 	public ProcessingResult(FluidStack f, int t, Residue r)
@@ -37,6 +37,16 @@ public class ProcessingResult
 		this.fluid = f;
 		this.time = t;
 		this.residue = r;
+	}
+
+	public Residue getResidue()
+	{
+		return residue;
+	}
+
+	public int getTime()
+	{
+		return time;
 	}
 
 	public Fluid getFluid()

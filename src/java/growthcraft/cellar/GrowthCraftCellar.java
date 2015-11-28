@@ -5,12 +5,13 @@ import java.lang.reflect.Modifier;
 
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.booze.effect.EffectTipsy;
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.fermenting.UserYeastEntries;
-import growthcraft.api.cellar.heatsource.UserHeatSources;
-import growthcraft.api.cellar.heatsource.UserHeatSources.UserHeatSourceEntry;
-import growthcraft.api.cellar.pressing.UserPressingRecipes;
 import growthcraft.api.cellar.brewing.UserBrewingRecipes;
+import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.fermenting.UserFermentingRecipes;
+import growthcraft.api.cellar.heatsource.UserHeatSources.UserHeatSourceEntry;
+import growthcraft.api.cellar.heatsource.UserHeatSources;
+import growthcraft.api.cellar.pressing.UserPressingRecipes;
+import growthcraft.api.cellar.yeast.UserYeastEntries;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.cellar.common.booze.ModifierFunctionExtended;
@@ -109,6 +110,7 @@ public class GrowthCraftCellar
 	private UserHeatSources userHeatSources = new UserHeatSources();
 	private UserPressingRecipes userPressingRecipes = new UserPressingRecipes();
 	private UserBrewingRecipes userBrewingRecipes = new UserBrewingRecipes();
+	private UserFermentingRecipes userFermentingRecipes = new UserFermentingRecipes();
 	private ModuleContainer modules = new ModuleContainer();
 
 	public static UserHeatSources getUserHeatSources()
@@ -139,12 +141,14 @@ public class GrowthCraftCellar
 		modules.add(userBrewingRecipes);
 		modules.add(userHeatSources);
 		modules.add(userPressingRecipes);
+		modules.add(userFermentingRecipes);
 		modules.add(userYeastEntries);
 
 		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 
 		userBrewingRecipes.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
+		userFermentingRecipes.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/fermenting.json");
 		userHeatSources.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
 		userPressingRecipes.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
 		userYeastEntries.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/yeast.json");

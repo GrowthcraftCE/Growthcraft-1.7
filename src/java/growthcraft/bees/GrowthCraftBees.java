@@ -1,10 +1,9 @@
 package growthcraft.bees;
 
 import growthcraft.api.bees.BeesRegistry;
-import growthcraft.api.cellar.booze.Booze;
-import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.bees.client.gui.GuiHandlerBees;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeHive;
@@ -21,16 +20,11 @@ import growthcraft.bees.common.village.VillageHandlerBees;
 import growthcraft.bees.common.village.VillageHandlerBeesApiarist;
 import growthcraft.bees.common.world.WorldGeneratorBees;
 import growthcraft.bees.creativetab.CreativeTabsGrowthcraftBees;
-import growthcraft.cellar.common.definition.BlockBoozeDefinition;
-import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
-import growthcraft.cellar.common.item.ItemBoozeBottle;
-import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
+import growthcraft.bees.init.GrcBeesBooze;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -51,10 +45,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -80,17 +72,12 @@ public class GrowthCraftBees
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxNether;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxThaumcraft;
 	public static BlockDefinition beeHive;
-	public static BlockBoozeDefinition[] honeyMeadFluids;
 	public static ItemDefinition honeyComb;
 	public static ItemDefinition honeyCombEmpty;
 	public static ItemDefinition honeyCombFilled;
 	public static ItemDefinition honeyJar;
 	public static ItemDefinition bee;
-	public static ItemDefinition honeyMead;
-	public static ItemDefinition honeyMeadBucket_deprecated;
-	public static ItemBucketBoozeDefinition[] honeyMeadBuckets;
-
-	public static Fluid[] honeyMeadBooze;
+	public static GrcBeesBooze booze = new GrcBeesBooze();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcBeesConfig config = new GrcBeesConfig();
@@ -107,6 +94,7 @@ public class GrowthCraftBees
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
 
+		modules.add(booze);
 		if (config.enableGrcBambooIntegration) modules.add(new growthcraft.bees.integration.GrcBambooModule());
 		if (config.enableGrcNetherIntegration) modules.add(new growthcraft.bees.integration.GrcNetherModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.bees.integration.Waila());
@@ -133,21 +121,12 @@ public class GrowthCraftBees
 		honeyJar  = new ItemDefinition(new ItemHoneyJar());
 		bee       = new ItemDefinition(new ItemBee());
 
-		honeyMeadBooze = new Booze[4];
-		honeyMeadFluids = new BlockBoozeDefinition[honeyMeadBooze.length];
-		honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
-		BoozeRegistryHelper.initializeBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, "grc.honeyMead", config.honeyMeadColor);
-
-		honeyMead = new ItemDefinition(new ItemBoozeBottle(6, -0.45F, honeyMeadBooze));
-		honeyMeadBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(honeyMeadBooze).setColor(config.honeyMeadColor));
-
 		modules.preInit();
 		register();
 	}
 
 	private void register()
 	{
-
 		// Bee Boxes
 		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
 
@@ -160,17 +139,6 @@ public class GrowthCraftBees
 		GameRegistry.registerItem(honeyCombFilled.getItem(), "grc.honeyCombFilled");
 		GameRegistry.registerItem(honeyJar.getItem(), "grc.honeyJar");
 		GameRegistry.registerItem(bee.getItem(), "grc.bee");
-		GameRegistry.registerItem(honeyMead.getItem(), "grc.honeyMead");
-		GameRegistry.registerItem(honeyMeadBucket_deprecated.getItem(), "grc.honeyMead_bucket");
-
-		// Booze
-		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMead, "grc.honeyMead", honeyMeadBucket_deprecated);
-		BoozeRegistryHelper.registerDefaultFermentation(honeyMeadBooze);
-		for (BoozeEffect effect : BoozeRegistryHelper.getBoozeEffects(honeyMeadBooze))
-		{
-			effect.setTipsy(0.60F, 900);
-			effect.addPotionEntry(Potion.regeneration, 900, 0);
-		}
 
 		// TileEntities
 		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
@@ -228,8 +196,6 @@ public class GrowthCraftBees
 
 		final ItemStack honeyStack = honeyCombFilled.asStack();
 		GameRegistry.addShapelessRecipe(honeyJar.asStack(), honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);
-
-		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(), Items.water_bucket, honeyJar.getItem(), Items.bucket);
 	}
 
 	private void postRegisterRecipes()
@@ -261,9 +227,9 @@ public class GrowthCraftBees
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < honeyMeadBooze.length; ++i)
+			for (int i = 0; i < booze.honeyMeadBooze.length; ++i)
 			{
-				honeyMeadBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				booze.honeyMeadBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}

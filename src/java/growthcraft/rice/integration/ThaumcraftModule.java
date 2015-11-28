@@ -23,9 +23,10 @@
  */
 package growthcraft.rice.integration;
 
-import growthcraft.rice.GrowthCraftRice;
 import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
+import growthcraft.core.integration.thaumcraft.AspectsHelper;
 import growthcraft.core.integration.ThaumcraftModuleBase;
+import growthcraft.rice.GrowthCraftRice;
 
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
@@ -48,19 +49,23 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftRice.rice.asStack(), new AspectList().add(Aspect.CROP, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceBall.asStack(), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1).add(Aspect.HUNGER, 1));
 
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftRice.booze.riceSake.asStack(1, 0), new AspectList());
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftRice.booze.riceSake.asStack(1, 1), new AspectList().add(Aspect.FLIGHT, 1));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftRice.booze.riceSake.asStack(1, 2), new AspectList().add(Aspect.FLIGHT, 2));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftRice.booze.riceSake.asStack(1, 3), new AspectList().add(Aspect.FLIGHT, 1));
+		final AspectList[] common = new AspectList[]
+		{
+			new AspectList(),
+			new AspectList().add(Aspect.FLIGHT, 1),
+			new AspectList().add(Aspect.FLIGHT, 2),
+			new AspectList().add(Aspect.FLIGHT, 1),
+			new AspectList().add(Aspect.MOTION, 2).add(Aspect.FLIGHT, 2),
+			new AspectList().add(Aspect.FLIGHT, 3).add(Aspect.POISON, 1),
+			new AspectList().add(Aspect.POISON, 2),
+		};
 
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftRice.booze.riceSakeBuckets[0], new AspectList());
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftRice.booze.riceSakeBuckets[1], new AspectList().add(Aspect.FLIGHT, 3));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftRice.booze.riceSakeBuckets[2], new AspectList().add(Aspect.FLIGHT, 6));
-		ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftRice.booze.riceSakeBuckets[3], new AspectList().add(Aspect.FLIGHT, 3));
-
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftRice.booze.riceSakeFluids[0], new AspectList());
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftRice.booze.riceSakeFluids[1], new AspectList().add(Aspect.FLIGHT, 3));
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftRice.booze.riceSakeFluids[2], new AspectList().add(Aspect.FLIGHT, 6));
-		ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftRice.booze.riceSakeFluids[3], new AspectList().add(Aspect.FLIGHT, 3));
+		for (int i = 0; i < common.length; ++i)
+		{
+			final AspectList list = common[i];
+			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftRice.booze.riceSake.asStack(1, i), list.copy());
+			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftRice.booze.riceSakeBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.FLIGHT, Aspect.MOTION));
+			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftRice.booze.riceSakeFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.FLIGHT, Aspect.MOTION));
+		}
 	}
 }

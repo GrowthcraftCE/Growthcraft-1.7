@@ -5,7 +5,7 @@ import java.util.List;
 
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.fermenting.FermentingRegistry;
+import growthcraft.api.cellar.yeast.IYeastRegistry;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.util.ItemUtils;
 
@@ -69,7 +69,7 @@ public class YeastGenerator extends DeviceProgressive
 	{
 		tempItemList.clear();
 		final BiomeGenBase biome = getCurrentBiome();
-		final FermentingRegistry reg = CellarRegistry.instance().fermenting();
+		final IYeastRegistry reg = CellarRegistry.instance().yeast();
 		for (Type t : BiomeDictionary.getTypesForBiome(biome))
 		{
 			final List<ItemStack> yeastList = reg.getYeastListForBiomeType(t);
@@ -96,7 +96,7 @@ public class YeastGenerator extends DeviceProgressive
 		else
 		{
 			final ItemStack contents = getInventory().getStackInSlot(invSlot);
-			if (CellarRegistry.instance().fermenting().canYeastFormInBiome(contents, getCurrentBiome()))
+			if (CellarRegistry.instance().yeast().canYeastFormInBiome(contents, getCurrentBiome()))
 			{
 				getInventory().setInventorySlotContents(invSlot, ItemUtils.increaseStack(contents));
 				consumeFluid();
