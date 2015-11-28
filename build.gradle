@@ -70,7 +70,8 @@ minecraft {
     version = minecraft_forge_version
     runDir = "run"
     replace "@VERSION@", project.version
-    replace "@MC_VERSION@", version
+    replace "@GRC_MC_VERSION@", minecraft_version
+    replace "@GRC_VERSION@", growthcraft_version
 }
 
 // configure  the source folders

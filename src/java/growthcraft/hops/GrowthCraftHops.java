@@ -40,7 +40,7 @@ import net.minecraftforge.oredict.OreDictionary;
 	modid = GrowthCraftHops.MOD_ID,
 	name = GrowthCraftHops.MOD_NAME,
 	version = GrowthCraftHops.MOD_VERSION,
-	dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar"
+	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@"
 )
 public class GrowthCraftHops
 {

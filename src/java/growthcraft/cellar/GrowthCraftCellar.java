@@ -69,7 +69,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 	modid = GrowthCraftCellar.MOD_ID,
 	name = GrowthCraftCellar.MOD_NAME,
 	version = GrowthCraftCellar.MOD_VERSION,
-	dependencies = "required-after:Growthcraft"
+	dependencies = "required-after:Growthcraft@@VERSION@"
 )
 public class GrowthCraftCellar
 {

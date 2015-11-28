@@ -29,7 +29,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 	modid = GrowthCraftFishTrap.MOD_ID,
 	name = GrowthCraftFishTrap.MOD_NAME,
 	version = GrowthCraftFishTrap.MOD_VERSION,
-	dependencies = "required-after:Growthcraft"
+	dependencies = "required-after:Growthcraft@@VERSION@"
 )
 public class GrowthCraftFishTrap
 {

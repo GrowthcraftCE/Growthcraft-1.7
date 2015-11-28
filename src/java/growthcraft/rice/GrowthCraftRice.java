@@ -41,7 +41,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 	modid = GrowthCraftRice.MOD_ID,
 	name = GrowthCraftRice.MOD_NAME,
 	version = GrowthCraftRice.MOD_VERSION,
-	dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar"
+	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@"
 )
 public class GrowthCraftRice
 {

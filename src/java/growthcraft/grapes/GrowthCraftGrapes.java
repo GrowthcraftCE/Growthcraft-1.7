@@ -45,7 +45,7 @@ import net.minecraftforge.oredict.OreDictionary;
 	modid = GrowthCraftGrapes.MOD_ID,
 	name = GrowthCraftGrapes.MOD_NAME,
 	version = GrowthCraftGrapes.MOD_VERSION,
-	dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar"
+	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@"
 )
 public class GrowthCraftGrapes
 {
