@@ -24,6 +24,7 @@
 package growthcraft.api.cellar.booze;
 
 import java.util.List;
+import javax.annotation.Nonnull;
 
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.description.IDescribable;
@@ -40,20 +41,35 @@ public class Booze extends Fluid implements IDescribable
 		this.color = 0xFFFFFF;
 	}
 
+	/**
+	 * Returns the color of the booze
+	 *
+	 * @return color - a RGB24 value
+	 */
 	@Override
 	public int getColor()
 	{
 		return color;
 	}
 
+	/**
+	 * Sets the color of the booze
+	 *
+	 * @param col - a RGB24 color
+	 */
 	public Booze setColor(int col)
 	{
 		this.color = col;
 		return this;
 	}
 
+	/**
+	 * Adds the booze's description to the list
+	 *
+	 * @param list - list to add description to
+	 */
 	@Override
-	public void getDescription(List<String> list)
+	public void getDescription(@Nonnull List<String> list)
 	{
 		final String unloc = getUnlocalizedName() + ".desc";
 		final String result = GrcI18n.translate(unloc);
