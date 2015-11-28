@@ -2,6 +2,8 @@ package growthcraft.api.cellar;
 
 import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.brewing.BrewingRegistry;
+import growthcraft.api.cellar.distilling.DistilleryRegistry;
+import growthcraft.api.cellar.distilling.IDistilleryRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.api.cellar.heatsource.HeatSourceRegistry;
 import growthcraft.api.cellar.heatsource.IHeatSourceRegistry;
@@ -20,6 +22,7 @@ public class CellarRegistry implements ILoggable
 	private final IPressingRegistry pressingRegistry = new PressingRegistry();
 	private final FermentingRegistry fermentingRegistry = new FermentingRegistry();
 	private final IHeatSourceRegistry heatSourceRegistry = new HeatSourceRegistry();
+	private final IDistilleryRegistry distilleryRegistry = new DistilleryRegistry();
 	private ILogger logger = NullLogger.INSTANCE;
 
 	/**
@@ -39,6 +42,7 @@ public class CellarRegistry implements ILoggable
 		this.logger = l;
 		boozeRegistry.setLogger(logger);
 		pressingRegistry.setLogger(logger);
+		distilleryRegistry.setLogger(logger);
 	}
 
 	/**
@@ -79,5 +83,13 @@ public class CellarRegistry implements ILoggable
 	public IHeatSourceRegistry heatSource()
 	{
 		return heatSourceRegistry;
+	}
+
+	/**
+	 * @return instance of the DistilleryRegistry
+	 */
+	public IDistilleryRegistry distilling()
+	{
+		return distilleryRegistry;
 	}
 }
