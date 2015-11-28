@@ -77,8 +77,8 @@ public class GuiFermentJar extends GuiCellar
 		final int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
-		final int progressWidth = te.getFermentProgressScaled(24);
-		drawTexturedModalRect(x + 54, y + 35, 176, 0, progressWidth, 17);
+		final int progressWidth = te.getFermentProgressScaled(22);
+		drawTexturedModalRect(x + 55, y + 35, 176, 0, progressWidth, 17);
 
 		final int fluidScaled = te.getFluidAmountScaled(52, 0);
 		if (fluidScaled > 0)
