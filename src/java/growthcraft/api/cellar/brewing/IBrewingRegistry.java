@@ -21,25 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.heatsource;
+package growthcraft.api.cellar.brewing;
 
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
+import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.log.ILoggable;
 
-public class GenericHeatSourceBlock implements IHeatSourceBlock
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+public interface IBrewingRegistry extends ILoggable
 {
-	private Block block;
-	private float heat;
+	/**
+	 * addBrewing()
+	 *
+	 * Example Usage:
+	 * 	addBrewing(new FluidStack(FluidRegistry.WATER, 20), new ItemStack(Item.wheat), new FluidStack(hopAle_booze, 20), 37, Residue.newDefault(0.3f));
+	 *
+	 * @param sourceFluid - The source Fluid.
+	 * @param raw         - The source/input ItemStack.
+	 * @param resultFluid - The resulting Fluid.
+	 * @param time        - The time needed for the item/block to be brewed.
+	 * @param residue     - The residue that will be produced
+	 */
+	void addBrewing(FluidStack sourceFluid, ItemStack raw, FluidStack resultFluid, int time, Residue residue);
 
-	public GenericHeatSourceBlock(Block blk, float ht)
-	{
-		this.block = blk;
-		this.heat = ht;
-	}
-
-	@Override
-	public float getHeat(World world, int x, int y, int z)
-	{
-		return heat;
-	}
+	BrewingResult getBrewingResult(FluidStack fluidstack, ItemStack itemstack);
+	boolean isBrewingRecipe(FluidStack fluidstack, ItemStack itemstack);
+	boolean isItemBrewingIngredient(ItemStack itemstack);
 }

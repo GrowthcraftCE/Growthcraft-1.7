@@ -7,7 +7,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.cellar.util.FluidUtils;
 
@@ -15,71 +14,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-/**
- * Fluid strings (for use with the 'String' versions of the methods.
- *
- * Apple Cider
- * - "grc.appleCider0' - young
- * - "grc.appleCider1' - fermented
- * - "grc.appleCider2' - fermented, potent
- * - "grc.appleCider3' - fermented, extended
- *
- * Grape Wine
- * - "grc.grapeWine0' - young
- * - "grc.grapeWine1' - fermented
- * - "grc.grapeWine2' - fermented, potent
- * - "grc.grapeWine3' - fermented, extended
- *
- * Ale
- * - "grc.hopAle0' - hopped, young
- * - "grc.hopAle1' - hopped, fermented
- * - "grc.hopAle2' - hopped, fermented, potent
- * - "grc.hopAle3' - hopped, fermented, extended
- * - "grc.hopAle4' - no hops, young
- *
- * Sake
- * - "grc.riceSake0' - young
- * - "grc.riceSake1' - fermented
- * - "grc.riceSake2' - fermented, potent
- * - "grc.riceSake3' - fermented, extended
- *
- * Mead
- * - "grc.honeyMead0' - young
- * - "grc.honeyMead1' - fermented
- * - "grc.honeyMead2' - fermented, potent
- * - "grc.honeyMead3' - fermented, extended
- **/
-
-/**
- * Example Usage: Creating Boozes
- *
- * Create a fluid array with a length of 4 (minimum, you can go over bu not under).
- * Don't forget to register it to the FluidRegistry!
- *
- * {@code
- *		appleCider_booze = new Booze[4];
- *		for (int i = 0; i < appleCider_booze.length; ++i)
- *		{
- *			appleCider_booze[i]  = (new Booze("grc.appleCider" + i));
- *			FluidRegistry.registerFluid(appleCider_booze[i]);
- *		}
- * }
- *
- * Use the function createBooze() to register the fluid you just created into Cellar.
- *
- * {@code
- *		CellarRegistry.instance().createBooze(appleCider_booze, this.color, "fluid.grc.appleCider");
- * }
- *
- * Thats it!
- * For fluid containers, just google how to make them.
- * Anyway, here's an example.
- * {@code
- * 		FluidStack fluidstack = new FluidStack(appleCider_booze[i], FluidContainerRegistry.BUCKET_VOLUME);
- * 		FluidContainerRegistry.registerFluidContainer(fluidstack, new ItemStack(appleCider_bucket, 1, i), FluidContainerRegistry.EMPTY_BUCKET);
- * }
- */
-public class BoozeRegistry implements ILoggable
+public class BoozeRegistry implements IBoozeRegistry
 {
 	private ILogger logger = NullLogger.INSTANCE;
 	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
@@ -103,6 +38,7 @@ public class BoozeRegistry implements ILoggable
 		}
 	}
 
+	@Override
 	@Nullable
 	public BoozeEntry getBoozeEntry(Fluid fluid)
 	{
@@ -110,6 +46,7 @@ public class BoozeRegistry implements ILoggable
 		return boozeMap.get(fluid);
 	}
 
+	@Override
 	@Nonnull
 	public BoozeEntry fetchBoozeEntry(Fluid fluid)
 	{
@@ -121,6 +58,7 @@ public class BoozeRegistry implements ILoggable
 		return entry;
 	}
 
+	@Override
 	@Nullable
 	public BoozeEffect getEffect(Fluid fluid)
 	{
@@ -128,12 +66,14 @@ public class BoozeRegistry implements ILoggable
 		return entry != null ? entry.getEffect() : null;
 	}
 
+	@Override
 	public boolean isFluidBooze(Fluid f)
 	{
 		if (f == null) return false;
 		return getBoozeEntry(f) != null;
 	}
 
+	@Override
 	public boolean isFluidBooze(FluidStack fluidStack)
 	{
 		if (fluidStack == null) return false;
@@ -154,6 +94,7 @@ public class BoozeRegistry implements ILoggable
 	 * @param fluid           - The fluid to be registered.
 	 * @param color           - The color of the fluid.
 	 **/
+	@Override
 	public void registerBooze(@Nonnull Fluid fluid)
 	{
 		ensureFluidIsValid(fluid);
@@ -169,18 +110,7 @@ public class BoozeRegistry implements ILoggable
 		}
 	}
 
-	/**
-	 * addBoozeAlternative()
-	 *
-	 * Adds an alternative fluid to the mod that will act as an alternative for the booze.
-	 * You will almost always want to use this if you dont want to go into the trouble of creating boozes.
-	 *
-	 * Example Usage:
-	 * CellarRegistry.instance().addBoozeAlternative(appleCider_booze_alt, appleCider_booze);
-	 *
-	 * @param altfluid - The alternate fluid.
-	 * @param fluid    - The main fluid/booze.
-	 **/
+	@Override
 	public void addBoozeAlternative(@Nonnull Fluid altfluid, @Nonnull Fluid fluid)
 	{
 		if (FluidUtils.doesFluidExist(altfluid))
@@ -202,7 +132,7 @@ public class BoozeRegistry implements ILoggable
 		}
 	}
 
-	// String
+	@Override
 	public void addBoozeAlternative(Fluid altfluid, String fluid)
 	{
 		if (FluidUtils.doesFluidExist(fluid))
@@ -215,6 +145,7 @@ public class BoozeRegistry implements ILoggable
 		}
 	}
 
+	@Override
 	public void addBoozeAlternative(String altfluid, String fluid)
 	{
 		if (!FluidUtils.doesFluidExist(altfluid))
@@ -232,7 +163,7 @@ public class BoozeRegistry implements ILoggable
 		addBoozeAlternative(FluidRegistry.getFluid(altfluid), FluidRegistry.getFluid(fluid));
 	}
 
-	// BOOZE /////////////////////////////////////////////////////////
+	@Override
 	public boolean isAlternateBooze(Fluid f)
 	{
 		if (f == null)
@@ -242,6 +173,7 @@ public class BoozeRegistry implements ILoggable
 		return altBoozeMap.get(f) != null;
 	}
 
+	@Override
 	public Fluid getAlternateBooze(Fluid f)
 	{
 		if (isAlternateBooze(f))
@@ -251,26 +183,26 @@ public class BoozeRegistry implements ILoggable
 		return null;
 	}
 
-	/**
-	 * @param f - source fluid
-	 * @return if an alternate booze exists, that will be returned, else returns the fluid passed in
-	 */
+	@Override
 	public Fluid maybeAlternateBooze(Fluid f)
 	{
 		final Fluid alt = getAlternateBooze(f);
 		return alt != null ? alt : f;
 	}
 
+	@Override
 	public FluidStack maybeAlternateBoozeStack(FluidStack stack)
 	{
 		return new FluidStack(maybeAlternateBooze(stack.getFluid()), stack.amount);
 	}
 
+	@Override
 	public void addTags(@Nonnull Fluid fluid, BoozeTag... tags)
 	{
 		fetchBoozeEntry(fluid).addTags(tags);
 	}
 
+	@Override
 	@Nullable
 	public Collection<BoozeTag> getTags(Fluid fluid)
 	{
@@ -278,6 +210,7 @@ public class BoozeRegistry implements ILoggable
 		return entry != null ? entry.getTags() : null;
 	}
 
+	@Override
 	@Nullable
 	public Collection<BoozeTag> getTags(FluidStack stack)
 	{
@@ -285,6 +218,7 @@ public class BoozeRegistry implements ILoggable
 		return getTags(stack.getFluid());
 	}
 
+	@Override
 	public boolean hasTags(Fluid fluid, BoozeTag... tags)
 	{
 		final BoozeEntry entry = getBoozeEntry(fluid);
@@ -295,6 +229,7 @@ public class BoozeRegistry implements ILoggable
 		return false;
 	}
 
+	@Override
 	public boolean hasTags(FluidStack stack, BoozeTag... tags)
 	{
 		if (stack == null) return false;

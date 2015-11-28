@@ -70,4 +70,9 @@ public class ItemKeySchema implements IItemStackFactory
 	{
 		return "" + mod_id + ":" + name + ":" + meta;
 	}
+
+	public boolean isValid()
+	{
+		return asStack() != null;
+	}
 }

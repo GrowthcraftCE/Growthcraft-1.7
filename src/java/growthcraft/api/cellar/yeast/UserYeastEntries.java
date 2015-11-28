@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.fermenting;
+package growthcraft.api.cellar.yeast;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -120,14 +120,12 @@ public class UserYeastEntries extends JsonConfigDef
 		}
 
 		final ItemStack itemstack = entry.item.asStack();
-
-		final FermentingRegistry reg = CellarRegistry.instance().fermenting();
 		for (String biome : entry.biomes)
 		{
 			try
 			{
 				final BiomeDictionary.Type biomeType = BiomeUtils.fetchBiomeType(biome);
-				reg.addYeastToBiomeType(itemstack, biomeType);
+				CellarRegistry.instance().yeast().addYeastToBiomeType(itemstack, biomeType);
 				logger.info("Added yeast %s to biome %s", itemstack, biome);
 			}
 			catch (BiomeUtils.BiomeTypeNotFound ex)

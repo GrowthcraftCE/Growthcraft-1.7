@@ -55,4 +55,9 @@ public class FluidStackSchema implements IFluidStackFactory
 	{
 		return "" + name + "*" + amount;
 	}
+
+	public boolean isValid()
+	{
+		return asFluidStack() != null;
+	}
 }

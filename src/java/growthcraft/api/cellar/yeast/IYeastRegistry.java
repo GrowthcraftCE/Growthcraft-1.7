@@ -21,25 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.heatsource;
+package growthcraft.api.cellar.yeast;
 
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
+import java.util.List;
 
-public class GenericHeatSourceBlock implements IHeatSourceBlock
+import growthcraft.api.core.log.ILoggable;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
+
+public interface IYeastRegistry extends ILoggable
 {
-	private Block block;
-	private float heat;
-
-	public GenericHeatSourceBlock(Block blk, float ht)
-	{
-		this.block = blk;
-		this.heat = ht;
-	}
-
-	@Override
-	public float getHeat(World world, int x, int y, int z)
-	{
-		return heat;
-	}
+	void addYeastToBiomeType(ItemStack yeast, BiomeDictionary.Type type);
+	List<ItemStack> getYeastListForBiomeType(BiomeDictionary.Type type);
+	List<BiomeDictionary.Type> getBiomeTypesForYeast(ItemStack yeast);
+	boolean canYeastFormInBiome(ItemStack yeast, BiomeGenBase biome);
 }

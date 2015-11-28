@@ -67,13 +67,13 @@ public class CellarBoozeBuilder
 
 	public CellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time)
 	{
-		CellarRegistry.instance().fermenting().addFermentation(result, new FluidStack(fluid, result.amount), stack, time);
+		CellarRegistry.instance().fermenting().addFermentingRecipe(result, new FluidStack(fluid, result.amount), stack, time);
 		return this;
 	}
 
 	public CellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time)
 	{
-		CellarRegistry.instance().fermenting().addFermentation(new FluidStack(fluid, src.amount), src, stack, time);
+		CellarRegistry.instance().fermenting().addFermentingRecipe(new FluidStack(fluid, src.amount), src, stack, time);
 		return this;
 	}
 

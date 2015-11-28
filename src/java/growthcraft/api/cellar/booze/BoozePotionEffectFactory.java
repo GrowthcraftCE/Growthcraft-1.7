@@ -70,8 +70,7 @@ public class BoozePotionEffectFactory implements IPotionEffectFactory
 
 	public PotionEffect createPotionEffect(World world, Entity entity, Random random, Object data)
 	{
-		final BoozeRegistry reg = CellarRegistry.instance().booze();
-		final Collection<BoozeTag> tags = reg.getTags(booze);
+		final Collection<BoozeTag> tags = CellarRegistry.instance().booze().getTags(booze);
 
 		if (tags != null)
 		{

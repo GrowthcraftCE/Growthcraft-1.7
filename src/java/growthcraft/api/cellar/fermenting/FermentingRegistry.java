@@ -1,14 +1,15 @@
 package growthcraft.api.cellar.fermenting;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.util.ItemKey;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.util.ItemKey;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -16,7 +17,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 
-public class FermentingRegistry
+public class FermentingRegistry implements IFermentingRegistry
 {
 	static class FluidModifierMap extends HashMap<ItemKey, FermentationResult>
 	{
@@ -33,8 +34,13 @@ public class FermentingRegistry
 	// look at its modifiers and return its resultant FluidStack
 	// Why didn't I use a List? The linear lookup and the lack of type safety
 	private FluidModifierTree fermentTree = new FluidModifierTree();
-	private Map<BiomeDictionary.Type, List<ItemStack>> biomeToYeast = new HashMap<BiomeDictionary.Type, List<ItemStack>>();
-	private Map<ItemKey, List<BiomeDictionary.Type>> yeastToBiome = new HashMap<ItemKey, List<BiomeDictionary.Type>>();
+	private ILogger logger = NullLogger.INSTANCE;
+
+	@Override
+	public void setLogger(ILogger l)
+	{
+		this.logger = l;
+	}
 
 	@Nonnull
 	private Fluid boozeToKey(@Nonnull FluidStack booze)
@@ -42,52 +48,14 @@ public class FermentingRegistry
 		return CellarRegistry.instance().booze().maybeAlternateBooze(booze.getFluid());
 	}
 
+	@Nonnull
 	private ItemKey stackToKey(@Nonnull ItemStack stack)
 	{
 		return new ItemKey(stack);
 	}
 
-	public void addYeastToBiomeType(@Nonnull ItemStack yeast, BiomeDictionary.Type type)
-	{
-		if (!biomeToYeast.containsKey(type))
-		{
-			biomeToYeast.put(type, new ArrayList<ItemStack>());
-		}
-		final ItemKey yeastKey = stackToKey(yeast);
-		if (!yeastToBiome.containsKey(yeastKey))
-		{
-			yeastToBiome.put(yeastKey, new ArrayList<BiomeDictionary.Type>());
-		}
-		biomeToYeast.get(type).add(yeast);
-		yeastToBiome.get(yeastKey).add(type);
-	}
-
-	public List<ItemStack> getYeastListForBiomeType(BiomeDictionary.Type type)
-	{
-		return biomeToYeast.get(type);
-	}
-
-	public List<BiomeDictionary.Type> getBiomeTypesForYeast(ItemStack yeast)
-	{
-		return yeastToBiome.get(stackToKey(yeast));
-	}
-
-	public boolean canYeastFormInBiome(ItemStack yeast, BiomeGenBase biome)
-	{
-		if (yeast == null || biome == null) return false;
-
-		final List<BiomeDictionary.Type> yeastBiomeList = getBiomeTypesForYeast(yeast);
-		if (yeastBiomeList == null) return false;
-
-		for (BiomeDictionary.Type t : BiomeDictionary.getTypesForBiome(biome))
-		{
-			if (yeastBiomeList.contains(t)) return true;
-		}
-
-		return false;
-	}
-
-	public void addFermentation(@Nonnull FluidStack result, @Nonnull FluidStack booze, @Nonnull ItemStack fermenter, int time)
+	@Override
+	public void addFermentingRecipe(@Nonnull FluidStack result, @Nonnull FluidStack booze, @Nonnull ItemStack fermenter, int time)
 	{
 		final Fluid key = boozeToKey(booze);
 		if (!fermentTree.containsKey(key))
@@ -97,7 +65,8 @@ public class FermentingRegistry
 		fermentTree.get(key).put(stackToKey(fermenter), new FermentationResult(result, time, null));
 	}
 
-	public FermentationResult getFermentation(FluidStack booze, ItemStack fermenter)
+	@Override
+	public FermentationResult getFermentationResult(FluidStack booze, ItemStack fermenter)
 	{
 		if (booze == null || fermenter == null) return null;
 
@@ -109,6 +78,7 @@ public class FermentingRegistry
 		return null;
 	}
 
+	@Override
 	public boolean canFerment(FluidStack booze)
 	{
 		if (booze == null) return false;
