@@ -317,11 +317,22 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
 		final int f = getFluidTank(0).fill(resource, doFill);
-		if (f > 0)
+		if (doFill && f > 0)
 		{
 			markForBlockUpdate();
 		}
 		return f;
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
+	{
+		final FluidStack d = getFluidTank(1).drain(maxDrain, doDrain);
+		if (doDrain && d != null && d.amount > 0)
+		{
+			markForBlockUpdate();
+		}
+		return d;
 	}
 
 	@Override
@@ -333,17 +344,6 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 		}
 
 		return drain(from, resource.amount, doDrain);
-	}
-
-	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
-	{
-		final FluidStack d = getFluidTank(1).drain(maxDrain, doDrain);
-		if (d != null)
-		{
-			markForBlockUpdate();
-		}
-		return d;
 	}
 
 	public void switchTanks()
