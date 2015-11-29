@@ -28,6 +28,7 @@ import org.lwjgl.opengl.GL11;
 import growthcraft.api.core.GrcColour;
 import growthcraft.pipes.client.resource.GrcPipesResources;
 import growthcraft.pipes.common.block.IPipeBlock;
+import growthcraft.pipes.util.PipeConsts;
 import growthcraft.pipes.util.PipeFlag;
 import growthcraft.pipes.util.PipeType;
 
@@ -47,11 +48,11 @@ public class RenderPipe implements ISimpleBlockRenderingHandler
 	{
 		if (type == PipeType.VACUUM)
 		{
-			GrcPipesResources.INSTANCE.modelPipe.render(PipeFlag.PIPE_VACUUM_CORE | PipeFlag.PIPE_BUSES, 0.0625f);
+			GrcPipesResources.INSTANCE.modelPipe.render(PipeFlag.PIPE_VACUUM_CORE | PipeFlag.PIPE_BUSES, PipeConsts.RENDER_SCALE);
 		}
 		else
 		{
-			GrcPipesResources.INSTANCE.modelPipe.render(PipeFlag.PIPE_CORE | PipeFlag.PIPES, 0.0625f);
+			GrcPipesResources.INSTANCE.modelPipe.render(PipeFlag.PIPE_CORE | PipeFlag.PIPES, PipeConsts.RENDER_SCALE);
 		}
 	}
 

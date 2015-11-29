@@ -26,6 +26,7 @@ package growthcraft.pipes.client.renderer;
 import growthcraft.api.core.GrcColour;
 import growthcraft.pipes.client.resource.GrcPipesResources;
 import growthcraft.pipes.common.tileentity.TileEntityPipeBase;
+import growthcraft.pipes.util.PipeConsts;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -33,8 +34,6 @@ import org.lwjgl.opengl.GL11;
 
 public class TileEntityPipeRenderer extends TileEntitySpecialRenderer
 {
-	private static final float modelScale = 0.0625F;
-
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTick)
 	{
 		final TileEntityPipeBase pipeBase = (TileEntityPipeBase)te;
@@ -54,7 +53,7 @@ public class TileEntityPipeRenderer extends TileEntitySpecialRenderer
 				final float b = (c & 0xFF) / 255.0f;
 				GL11.glColor4f(r, g, b, 1.0f);
 			}
-			GrcPipesResources.INSTANCE.modelPipe.render(renderState, modelScale);
+			GrcPipesResources.INSTANCE.modelPipe.render(renderState, PipeConsts.RENDER_SCALE);
 			bindTexture(GrcPipesResources.INSTANCE.texturePipeMask);
 			if (colour != GrcColour.Transparent)
 			{
@@ -64,7 +63,7 @@ public class TileEntityPipeRenderer extends TileEntitySpecialRenderer
 				final float b = (c & 0xFF) / 255.0f;
 				GL11.glColor4f(r, g, b, 1.0f);
 			}
-			GrcPipesResources.INSTANCE.modelPipe.render(renderState, modelScale);
+			GrcPipesResources.INSTANCE.modelPipe.render(renderState, PipeConsts.RENDER_SCALE);
 		}
 		GL11.glPopMatrix();
 	}

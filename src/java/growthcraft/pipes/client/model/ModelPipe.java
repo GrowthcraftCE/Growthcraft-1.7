@@ -48,20 +48,20 @@ public class ModelPipe extends ModelBase
 		this.textureWidth  = 128;
 		this.textureHeight = 128;
 
-		final float scale = 16.0f;
+		final float scale = PipeConsts.SCALE;
 
 		pipeCore = new ModelRenderer(this, 0, 0);
-		pipeCore.addBox(0f, 0f, 0f, 4, 4, 4);
-		pipeCore.setRotationPoint(-2f, -2f, -2f);
+		createScaledModel(pipeCore, PipeConsts.PIPE_BASE_CORE_CENT, PipeConsts.PIPE_BASE_CORE_DIM, scale);
 		pipeCore.setTextureSize(textureWidth, textureHeight);
 		pipeCore.mirror = true;
+		pipeCore.setRotationPoint(-scale / 2.0f, -scale / 2.0f, -scale / 2.0f);
 		setRotation(pipeCore, 0f, 0f, 0f);
 
 		vacuumCore = new ModelRenderer(this, 16, 0);
-		vacuumCore.addBox(0f, 0f, 0f, 10, 10, 10);
-		vacuumCore.setRotationPoint(-5f, -5f, -5f);
+		createScaledModel(vacuumCore, PipeConsts.PIPE_VACUUM_CORE_CENT, PipeConsts.PIPE_VACUUM_CORE_DIM, scale);
 		vacuumCore.setTextureSize(textureWidth, textureHeight);
 		vacuumCore.mirror = true;
+		vacuumCore.setRotationPoint(-scale / 2.0f, -scale / 2.0f, -scale / 2.0f);
 		setRotation(pipeCore, 0f, 0f, 0f);
 
 		for (int i = 0; i < 6; ++i)
@@ -86,7 +86,7 @@ public class ModelPipe extends ModelBase
 		}
 	}
 
-	private void generatePipeModel(ModelRenderer model, float[] pos, float[] dim, float scale)
+	private void createScaledModel(ModelRenderer model, float[] pos, float[] dim, float scale)
 	{
 		final float x = pos[0] * scale;
 		final float y = pos[1] * scale;
@@ -96,6 +96,14 @@ public class ModelPipe extends ModelBase
 		final int l = (int)(dim[2] * scale);
 
 		model.addBox(x, y, z, w, h, l);
+	}
+
+	private void generatePipeModel(ModelRenderer model, float[] pos, float[] dim, float scale)
+	{
+		createScaledModel(model, pos, dim, scale);
+		final int w = (int)(dim[0] * scale);
+		final int h = (int)(dim[1] * scale);
+		final int l = (int)(dim[2] * scale);
 		model.setRotationPoint(-w / 2.0f, -h / 2.0f, -l / 2.0f);
 	}
 
