@@ -9,6 +9,7 @@ import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.client.gui.widget.GuiButtonDiscard;
+import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -26,7 +27,7 @@ import net.minecraftforge.fluids.FluidStack;
 @SideOnly(Side.CLIENT)
 public class GuiFermentBarrel extends GuiCellar
 {
-	protected static final ResourceLocation fermentBarrelResource = new ResourceLocation("grccellar" , "textures/guis/fermentbarrel_gui.png");
+	private final ResourceLocation fermentBarrelResource = GrcCellarResources.INSTANCE.textureGuiFermentBarrel;
 	private TileEntityFermentBarrel te;
 	private GuiButtonDiscard button;
 

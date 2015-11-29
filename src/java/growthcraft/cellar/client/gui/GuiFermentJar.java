@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.client.gui.widget.GuiButtonDiscard;
+import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.cellar.common.inventory.ContainerFermentJar;
 import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -20,7 +21,7 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class GuiFermentJar extends GuiCellar
 {
-	protected static final ResourceLocation fermentJarResource = new ResourceLocation("grccellar" , "textures/guis/gui_ferment_jar.png");
+	private ResourceLocation fermentJarResource = GrcCellarResources.INSTANCE.textureGuiFermentJar;
 	private TileEntityFermentJar te;
 	private GuiButtonDiscard discardButton;
 

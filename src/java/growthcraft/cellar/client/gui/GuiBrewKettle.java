@@ -5,6 +5,7 @@ import java.util.List;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.client.gui.widget.GuiButtonDiscard;
 import growthcraft.cellar.client.gui.widget.GuiButtonSwitch;
+import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -21,7 +22,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class GuiBrewKettle extends GuiCellar
 {
-	protected static final ResourceLocation brewKettleResource = new ResourceLocation("grccellar" , "textures/guis/brewkettle_gui.png");
+	private final ResourceLocation brewKettleResource = GrcCellarResources.INSTANCE.textureGuiBrewKettle;
 	private TileEntityBrewKettle te;
 	private GuiButtonDiscard button0;
 	private GuiButtonDiscard button1;

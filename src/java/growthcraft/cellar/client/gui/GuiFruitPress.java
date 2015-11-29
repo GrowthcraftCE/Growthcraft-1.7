@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.client.gui.widget.GuiButtonDiscard;
+import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -20,7 +21,7 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class GuiFruitPress extends GuiCellar
 {
-	protected static final ResourceLocation fruitPressResource = new ResourceLocation("grccellar" , "textures/guis/fruitpress_gui.png");
+	private ResourceLocation fruitPressResource = GrcCellarResources.INSTANCE.textureGuiFruitPress;
 	private TileEntityFruitPress te;
 	private GuiButtonDiscard button;
 
