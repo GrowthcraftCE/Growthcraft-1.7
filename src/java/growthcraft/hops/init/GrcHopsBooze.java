@@ -130,8 +130,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.fermentsFrom(fs[3], YeastType.ETHEREAL.asStack(), fermentTime)
 			.getEffect()
 				.setTipsy(defaultTipsy, TickUtils.seconds(45))
-				.addPotionEntry(Potion.moveSpeed, TickUtils.seconds(90), 0)
-				.addPotionEntry(Potion.digSpeed, TickUtils.seconds(90), 0);
+				.addPotionEntry(Potion.poison, TickUtils.seconds(90), 0);
 	}
 
 	private void registerHopAle()
