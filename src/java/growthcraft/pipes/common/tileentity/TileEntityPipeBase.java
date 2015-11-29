@@ -130,6 +130,7 @@ public class TileEntityPipeBase extends GrcBaseTile implements IFluidHandler, IP
 	private int pipeRenderState = PipeFlag.PIPE_CORE;
 	private boolean dirty = true;
 	private boolean needsUpdate = true;
+	private boolean neighbourChanged = true;
 	private PipeType pipeType = PipeType.UNKNOWN;
 
 	public TileEntityPipeBase()
@@ -164,15 +165,15 @@ public class TileEntityPipeBase extends GrcBaseTile implements IFluidHandler, IP
 
 	public void onNeighbourChanged()
 	{
-		markAsDirty();
+		this.neighbourChanged = true;
 	}
 
-	@Override
-	public void invalidate()
-	{
-		super.invalidate();
-		markAsDirty();
-	}
+	//@Override
+	//public void invalidate()
+	//{
+	//	super.invalidate();
+	//	//markAsDirty();
+	//}
 
 	public boolean isVacuumPipe()
 	{
@@ -190,7 +191,6 @@ public class TileEntityPipeBase extends GrcBaseTile implements IFluidHandler, IP
 
 	public void refreshCache()
 	{
-		needsUpdate = true;
 		final Block block = worldObj.getBlock(xCoord, yCoord, zCoord);
 		if (block instanceof IPipeBlock)
 		{
@@ -201,7 +201,8 @@ public class TileEntityPipeBase extends GrcBaseTile implements IFluidHandler, IP
 			invalidate();
 			return;
 		}
-		pipeRenderState = getPipeCoreState();
+		final int oldRenderState = getPipeRenderState();
+		this.pipeRenderState = getPipeCoreState();
 		for (int i = 0; i < pipeBuffers.length; ++i)
 		{
 			final ForgeDirection dir = ForgeDirection.getOrientation(i);
@@ -233,12 +234,13 @@ public class TileEntityPipeBase extends GrcBaseTile implements IFluidHandler, IP
 				}
 			}
 		}
+		if (pipeRenderState != oldRenderState) needsUpdate = true;
 	}
 
 	private void transferFluid(IFluidHandler dest, PipeFluidTank src, ForgeDirection dir)
 	{
 		final FluidStack drained = fluidTank.drain(fluidTank.getDrainAmount(), true);
-		if (drained != null)
+		if (drained != null && drained.amount > 0)
 		{
 			final int filled = dest.fill(dir, drained, true);
 			final int diff = drained.amount - filled;
@@ -252,7 +254,7 @@ public class TileEntityPipeBase extends GrcBaseTile implements IFluidHandler, IP
 	private void transferFluid(PipeFluidTank dest, IFluidHandler src, ForgeDirection dir)
 	{
 		final FluidStack drained = src.drain(dir, dest.getFillAmount(), true);
-		if (drained != null)
+		if (drained != null && drained.amount > 0)
 		{
 			final int filled = dest.fill(drained, true);
 			final int diff = drained.amount - filled;
@@ -268,11 +270,22 @@ public class TileEntityPipeBase extends GrcBaseTile implements IFluidHandler, IP
 	{
 		if (!worldObj.isRemote)
 		{
+			if (needsUpdate)
+			{
+				needsUpdate = false;
+				this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+				System.out.println("Updating block of pipe change: xCoord=" + xCoord + " yCoord=" + yCoord + " zCoord=" + zCoord);
+			}
+			if (neighbourChanged)
+			{
+				neighbourChanged = false;
+				refreshCache();
+			}
 			if (dirty)
 			{
 				dirty = false;
-				refreshCache();
 				worldObj.notifyBlockChange(this.xCoord, this.yCoord, this.zCoord, worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord));
+				System.out.println("Notifying block of pipe change: xCoord=" + xCoord + " yCoord=" + yCoord + " zCoord=" + zCoord);
 			}
 		}
 
@@ -359,12 +372,6 @@ public class TileEntityPipeBase extends GrcBaseTile implements IFluidHandler, IP
 					}
 				}
 			}
-		}
-
-		if (needsUpdate)
-		{
-			needsUpdate = false;
-			this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 		}
 	}
 
