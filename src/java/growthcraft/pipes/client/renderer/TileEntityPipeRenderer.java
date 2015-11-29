@@ -43,16 +43,17 @@ public class TileEntityPipeRenderer extends TileEntitySpecialRenderer
 		{
 			GL11.glTranslatef((float)x + 0.5F, (float)y + 0.5F, (float)z + 0.5F);
 			GL11.glScalef(1.0F, 1.0F, 1.0F);
+			GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
 			bindTexture(GrcPipesResources.INSTANCE.texturePipeBase);
-			if (colour != GrcColour.Transparent)
-			{
-				final int c = colour.blackVariant;
-				final float r = ((c >> 16) & 0xFF) / 255.0f;
-				final float g = ((c >> 8) & 0xFF) / 255.0f;
-				final float b = (c & 0xFF) / 255.0f;
-				GL11.glColor4f(r, g, b, 1.0f);
-			}
+			//if (colour != GrcColour.Transparent)
+			//{
+			//	final int c = colour.blackVariant;
+			//	final float r = ((c >> 16) & 0xFF) / 255.0f;
+			//	final float g = ((c >> 8) & 0xFF) / 255.0f;
+			//	final float b = (c & 0xFF) / 255.0f;
+			//	GL11.glColor4f(r, g, b, 1.0f);
+			//}
 			GrcPipesResources.INSTANCE.modelPipe.render(renderState, PipeConsts.RENDER_SCALE);
 			bindTexture(GrcPipesResources.INSTANCE.texturePipeMask);
 			if (colour != GrcColour.Transparent)

@@ -67,14 +67,15 @@ public class RenderPipe implements ISimpleBlockRenderingHandler
 				final GrcColour colour = GrcColour.toColour(metadata);
 				final Tessellator tessellator = Tessellator.instance;
 				Minecraft.getMinecraft().renderEngine.bindTexture(GrcPipesResources.INSTANCE.texturePipeBase);
-				if (colour != GrcColour.Transparent)
-				{
-					final int c = colour.blackVariant;
-					final float r = ((c >> 16) & 0xFF) / 255.0f;
-					final float g = ((c >> 8) & 0xFF) / 255.0f;
-					final float b = (c & 0xFF) / 255.0f;
-					GL11.glColor4f(r, g, b, 1.0f);
-				}
+				GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+				//if (colour != GrcColour.Transparent)
+				//{
+				//	final int c = colour.blackVariant;
+				//	final float r = ((c >> 16) & 0xFF) / 255.0f;
+				//	final float g = ((c >> 8) & 0xFF) / 255.0f;
+				//	final float b = (c & 0xFF) / 255.0f;
+				//	GL11.glColor4f(r, g, b, 1.0f);
+				//}
 				renderPipeModel(pipeBlock.getPipeType());
 				Minecraft.getMinecraft().renderEngine.bindTexture(GrcPipesResources.INSTANCE.texturePipeMask);
 				if (colour != GrcColour.Transparent)

@@ -25,6 +25,7 @@ package growthcraft.pipes.client.model;
 
 import growthcraft.pipes.util.PipeFlag;
 import growthcraft.pipes.util.PipeConsts;
+import growthcraft.core.util.ModelCuboid;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -57,7 +58,7 @@ public class ModelPipe extends ModelBase
 		pipeCore.setRotationPoint(-scale / 2.0f, -scale / 2.0f, -scale / 2.0f);
 		setRotation(pipeCore, 0f, 0f, 0f);
 
-		vacuumCore = new ModelRenderer(this, 16, 0);
+		vacuumCore = new ModelRenderer(this, 24, 0);
 		createScaledModel(vacuumCore, PipeConsts.PIPE_VACUUM_CORE_CENT, PipeConsts.PIPE_VACUUM_CORE_DIM, scale);
 		vacuumCore.setTextureSize(textureWidth, textureHeight);
 		vacuumCore.mirror = true;
@@ -66,19 +67,19 @@ public class ModelPipe extends ModelBase
 
 		for (int i = 0; i < 6; ++i)
 		{
-			innerSides[i] = new ModelRenderer(this, 0, 8 * (i + 1));
+			innerSides[i] = new ModelRenderer(this, 0, 24 + 20 * i);
 			generatePipeModel(innerSides[i], PipeConsts.INNER_SIDES_CENT[i], PipeConsts.INNER_SIDES_DIM[i], scale);
 			innerSides[i].setTextureSize(textureWidth, textureHeight);
 			innerSides[i].mirror = true;
 			setRotation(innerSides[i], 0f, 0f, 0f);
 
-			busSides[i] = new ModelRenderer(this, 16, 32 + (12 * i));
+			busSides[i] = new ModelRenderer(this, 40, 24 + (16 * i));
 			generatePipeModel(busSides[i], PipeConsts.BUS_SIDES_CENT[i], PipeConsts.BUS_SIDES_DIM[i], scale);
 			busSides[i].setTextureSize(textureWidth, textureHeight);
 			busSides[i].mirror = true;
 			setRotation(busSides[i], 0f, 0f, 0f);
 
-			pipeSides[i] = new ModelRenderer(this, 64, 32 + (8 * i));
+			pipeSides[i] = new ModelRenderer(this, 72, 24 + (8 * i));
 			generatePipeModel(pipeSides[i], PipeConsts.PIPE_SIDES_CENT[i], PipeConsts.PIPE_SIDES_DIM[i], scale);
 			pipeSides[i].setTextureSize(textureWidth, textureHeight);
 			pipeSides[i].mirror = true;
@@ -126,7 +127,8 @@ public class ModelPipe extends ModelBase
 			final int testFlagBus = 1 << (i + 6);
 			final boolean pipe = (flags & testFlag) == testFlag;
 			final boolean bus = (flags & testFlagBus) == testFlagBus;
-			if (!vacuum && (pipe || bus))
+			//if (!vacuum && (pipe || bus))
+			if (pipe || bus)
 			{
 				innerSides[i].render(scale);
 			}

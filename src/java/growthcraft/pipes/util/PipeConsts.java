@@ -30,14 +30,14 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public final class PipeConsts
 {
-	public static final float SCALE = 16.0f;
+	public static final float SCALE = 32.0f;
 	public static final float RENDER_SCALE = 1.0f / SCALE;
 	// core is (4 / 16) ^ 3
 	public static final float[] PIPE_BASE_CORE = new float[6];
 	public static final float[] PIPE_VACUUM_CORE = new float[6];
-	public static final float BASE_CORE_WIDTH = 4.0f / SCALE;
-	public static final float BASE_CORE_HEIGHT = 4.0f / SCALE;
-	public static final float BASE_CORE_LENGTH = 4.0f / SCALE;
+	public static final float BASE_CORE_WIDTH = 6.0f / SCALE;
+	public static final float BASE_CORE_HEIGHT = 6.0f / SCALE;
+	public static final float BASE_CORE_LENGTH = 6.0f / SCALE;
 	public static float BASE_CORE_MIN_X;
 	public static float BASE_CORE_MIN_Y;
 	public static float BASE_CORE_MIN_Z;
@@ -45,9 +45,9 @@ public final class PipeConsts
 	public static float BASE_CORE_MAX_Y;
 	public static float BASE_CORE_MAX_Z;
 
-	public static final float VACUUM_CORE_WIDTH = 10.0f / SCALE;
-	public static final float VACUUM_CORE_HEIGHT = 10.0f / SCALE;
-	public static final float VACUUM_CORE_LENGTH = 10.0f / SCALE;
+	public static final float VACUUM_CORE_WIDTH = 8.0f / SCALE;
+	public static final float VACUUM_CORE_HEIGHT = 8.0f / SCALE;
+	public static final float VACUUM_CORE_LENGTH = 8.0f / SCALE;
 	public static float VACUUM_CORE_MIN_X;
 	public static float VACUUM_CORE_MIN_Y;
 	public static float VACUUM_CORE_MIN_Z;
@@ -101,23 +101,23 @@ public final class PipeConsts
 			final float absY = MathHelper.abs(dir.offsetY);
 			final float absZ = MathHelper.abs(dir.offsetZ);
 
-			INNER_SIDES_CENT[i][0] = 3.5f * dir.offsetX;
-			INNER_SIDES_CENT[i][1] = 3.5f * dir.offsetY;
-			INNER_SIDES_CENT[i][2] = 3.5f * dir.offsetZ;
-			INNER_SIDES_CENT[i][3] = INNER_SIDES_CENT[i][0] + 4f - 1f * absX;
-			INNER_SIDES_CENT[i][4] = INNER_SIDES_CENT[i][1] + 4f - 1f * absY;
-			INNER_SIDES_CENT[i][5] = INNER_SIDES_CENT[i][2] + 4f - 1f * absZ;
+			INNER_SIDES_CENT[i][0] = 8.0f * dir.offsetX;
+			INNER_SIDES_CENT[i][1] = 8.0f * dir.offsetY;
+			INNER_SIDES_CENT[i][2] = 8.0f * dir.offsetZ;
+			INNER_SIDES_CENT[i][3] = INNER_SIDES_CENT[i][0] + 4f + 6f * absX;
+			INNER_SIDES_CENT[i][4] = INNER_SIDES_CENT[i][1] + 4f + 6f * absY;
+			INNER_SIDES_CENT[i][5] = INNER_SIDES_CENT[i][2] + 4f + 6f * absZ;
 
-			BUS_SIDES_CENT[i][0] = 6.5f * dir.offsetX;
-			BUS_SIDES_CENT[i][1] = 6.5f * dir.offsetY;
-			BUS_SIDES_CENT[i][2] = 6.5f * dir.offsetZ;
-			BUS_SIDES_CENT[i][3] = BUS_SIDES_CENT[i][0] + 6f - 3f * absX;
-			BUS_SIDES_CENT[i][4] = BUS_SIDES_CENT[i][1] + 6f - 3f * absY;
-			BUS_SIDES_CENT[i][5] = BUS_SIDES_CENT[i][2] + 6f - 3f * absZ;
+			BUS_SIDES_CENT[i][0] = 13f * dir.offsetX;
+			BUS_SIDES_CENT[i][1] = 13f * dir.offsetY;
+			BUS_SIDES_CENT[i][2] = 13f * dir.offsetZ;
+			BUS_SIDES_CENT[i][3] = BUS_SIDES_CENT[i][0] + 8f - 2f * absX;
+			BUS_SIDES_CENT[i][4] = BUS_SIDES_CENT[i][1] + 8f - 2f * absY;
+			BUS_SIDES_CENT[i][5] = BUS_SIDES_CENT[i][2] + 8f - 2f * absZ;
 
-			PIPE_SIDES_CENT[i][0] = 6.5f * dir.offsetX;
-			PIPE_SIDES_CENT[i][1] = 6.5f * dir.offsetY;
-			PIPE_SIDES_CENT[i][2] = 6.5f * dir.offsetZ;
+			PIPE_SIDES_CENT[i][0] = 14.5f * dir.offsetX;
+			PIPE_SIDES_CENT[i][1] = 14.5f * dir.offsetY;
+			PIPE_SIDES_CENT[i][2] = 14.5f * dir.offsetZ;
 			PIPE_SIDES_CENT[i][3] = PIPE_SIDES_CENT[i][0] + 4f - 1f * absX;
 			PIPE_SIDES_CENT[i][4] = PIPE_SIDES_CENT[i][1] + 4f - 1f * absY;
 			PIPE_SIDES_CENT[i][5] = PIPE_SIDES_CENT[i][2] + 4f - 1f * absZ;
