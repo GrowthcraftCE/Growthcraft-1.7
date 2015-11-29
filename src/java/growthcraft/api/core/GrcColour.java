@@ -77,9 +77,9 @@ public enum GrcColour
 	 */
 	public final int whiteVariant;
 
-	GrcColour(String unlocalizedName, int blackHex, int medHex, int whiteHex)
+	GrcColour(String unLocname, int blackHex, int medHex, int whiteHex)
 	{
-		this.unlocalizedName = unlocalizedName;
+		this.unlocalizedName = unLocname;
 		this.blackVariant = blackHex;
 		this.mediumVariant = medHex;
 		this.whiteVariant = whiteHex;
