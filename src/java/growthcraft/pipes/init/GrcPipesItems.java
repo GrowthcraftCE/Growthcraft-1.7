@@ -21,12 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.pipes.common.tileentity;
+package growthcraft.pipes.init;
 
-import growthcraft.api.core.GrcColour;
+import growthcraft.core.common.GrcModuleBase;
 
-public interface IColourableTile
+/*import cpw.mods.fml.common.registry.GameRegistry;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;*/
+
+public class GrcPipesItems extends GrcModuleBase
 {
-	GrcColour getColour();
-	void setColour(GrcColour kolour);
+	@Override
+	public void preInit()
+	{
+
+	}
 }

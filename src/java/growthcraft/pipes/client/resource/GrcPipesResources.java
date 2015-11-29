@@ -21,12 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.pipes.common.tileentity;
+package growthcraft.pipes.client.resource;
 
-import growthcraft.api.core.GrcColour;
+import growthcraft.pipes.client.model.ModelPipe;
 
-public interface IColourableTile
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.ResourceLocation;
+
+@SideOnly(Side.CLIENT)
+public class GrcPipesResources
 {
-	GrcColour getColour();
-	void setColour(GrcColour kolour);
+	public static GrcPipesResources INSTANCE;
+
+	static final String DOMAIN = "grcpipes";
+
+	public final ResourceLocation texturePipeBase = new ResourceLocation(DOMAIN, "textures/blocks/model_pipe_base.png");
+	public final ResourceLocation texturePipeMask = new ResourceLocation(DOMAIN, "textures/blocks/model_pipe_color_mask.png");
+
+	public ModelPipe modelPipe = new ModelPipe();
+
+	public GrcPipesResources()
+	{
+		INSTANCE = this;
+	}
 }

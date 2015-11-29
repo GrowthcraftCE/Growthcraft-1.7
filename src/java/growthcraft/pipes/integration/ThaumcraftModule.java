@@ -21,12 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.pipes.common.tileentity;
+package growthcraft.pipes.integration;
 
-import growthcraft.api.core.GrcColour;
+import growthcraft.pipes.GrowthCraftPipes;
+import growthcraft.core.integration.ThaumcraftModuleBase;
 
-public interface IColourableTile
+import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.aspects.Aspect;
+
+public class ThaumcraftModule extends ThaumcraftModuleBase
 {
-	GrcColour getColour();
-	void setColour(GrcColour kolour);
+	public ThaumcraftModule()
+	{
+		super(GrowthCraftPipes.MOD_ID);
+	}
 }

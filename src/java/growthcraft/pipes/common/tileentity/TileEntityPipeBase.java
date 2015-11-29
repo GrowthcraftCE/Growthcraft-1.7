@@ -1,15 +1,41 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.pipes.common.tileentity;
 
+import java.io.IOException;
+
 import growthcraft.api.core.GrcColour;
+import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.GrcBaseTile;
 import growthcraft.pipes.common.block.IPipeBlock;
 import growthcraft.pipes.util.PipeFlag;
 import growthcraft.pipes.util.PipeType;
 
+import io.netty.buffer.ByteBuf;
+
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -19,7 +45,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPipeTile, IColourableTile
+public class TileEntityPipeBase extends GrcBaseTile implements IFluidHandler, IPipeTile, IColourableTile
 {
 	public static enum UsageState
 	{
@@ -430,21 +456,18 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 		writeTankNBT(tag);
 	}
 
-	/************
-	 * PACKETS
-	 ************/
-	@Override
-	public Packet getDescriptionPacket()
+	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	public boolean readFromStream_PipeState(ByteBuf stream) throws IOException
 	{
-		final NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+		colour = GrcColour.toColour(stream.readInt());
+		this.pipeRenderState = stream.readInt();
+		return true;
 	}
 
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	public void writeToStream_PipeState(ByteBuf stream) throws IOException
 	{
-		this.readFromNBT(packet.func_148857_g());
-		this.worldObj.func_147479_m(this.xCoord, this.yCoord, this.zCoord);
+		stream.writeInt(colour.ordinal());
+		stream.writeInt(getPipeRenderState());
 	}
 }

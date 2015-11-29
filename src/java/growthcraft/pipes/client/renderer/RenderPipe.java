@@ -1,16 +1,38 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.pipes.client.renderer;
-
-import growthcraft.api.core.GrcColour;
-import growthcraft.pipes.client.model.ModelPipe;
-import growthcraft.pipes.util.PipeFlag;
-import growthcraft.pipes.util.PipeType;
-import growthcraft.pipes.common.block.IPipeBlock;
 
 import org.lwjgl.opengl.GL11;
 
+import growthcraft.api.core.GrcColour;
+import growthcraft.pipes.client.resource.GrcPipesResources;
+import growthcraft.pipes.common.block.IPipeBlock;
+import growthcraft.pipes.util.PipeFlag;
+import growthcraft.pipes.util.PipeType;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -25,11 +47,11 @@ public class RenderPipe implements ISimpleBlockRenderingHandler
 	{
 		if (type == PipeType.VACUUM)
 		{
-			ModelPipe.INSTANCE.render(PipeFlag.PIPE_VACUUM_CORE | PipeFlag.PIPE_BUSES, 0.0625f);
+			GrcPipesResources.INSTANCE.modelPipe.render(PipeFlag.PIPE_VACUUM_CORE | PipeFlag.PIPE_BUSES, 0.0625f);
 		}
 		else
 		{
-			ModelPipe.INSTANCE.render(PipeFlag.PIPE_CORE | PipeFlag.PIPES, 0.0625f);
+			GrcPipesResources.INSTANCE.modelPipe.render(PipeFlag.PIPE_CORE | PipeFlag.PIPES, 0.0625f);
 		}
 	}
 
@@ -43,7 +65,7 @@ public class RenderPipe implements ISimpleBlockRenderingHandler
 			{
 				final GrcColour colour = GrcColour.toColour(metadata);
 				final Tessellator tessellator = Tessellator.instance;
-				Minecraft.getMinecraft().renderEngine.bindTexture(TileEntityPipeRenderer.res);
+				Minecraft.getMinecraft().renderEngine.bindTexture(GrcPipesResources.INSTANCE.texturePipeBase);
 				if (colour != GrcColour.Transparent)
 				{
 					final int c = colour.blackVariant;
@@ -53,7 +75,7 @@ public class RenderPipe implements ISimpleBlockRenderingHandler
 					GL11.glColor4f(r, g, b, 1.0f);
 				}
 				renderPipeModel(pipeBlock.getPipeType());
-				Minecraft.getMinecraft().renderEngine.bindTexture(TileEntityPipeRenderer.resColorMask);
+				Minecraft.getMinecraft().renderEngine.bindTexture(GrcPipesResources.INSTANCE.texturePipeMask);
 				if (colour != GrcColour.Transparent)
 				{
 					final int c = colour.mediumVariant;

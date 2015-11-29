@@ -21,12 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.pipes.common.tileentity;
+package growthcraft.pipes;
 
-import growthcraft.api.core.GrcColour;
+import growthcraft.core.ConfigBase;
 
-public interface IColourableTile
+public class GrcPipesConfig extends ConfigBase
 {
-	GrcColour getColour();
-	void setColour(GrcColour kolour);
+	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
+	public boolean enableWailaIntegration = true;
+
+	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
+	public boolean enableThaumcraftIntegration = true;
 }
