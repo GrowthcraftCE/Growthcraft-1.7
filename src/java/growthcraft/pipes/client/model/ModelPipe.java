@@ -67,19 +67,19 @@ public class ModelPipe extends ModelBase
 
 		for (int i = 0; i < 6; ++i)
 		{
-			innerSides[i] = new ModelRenderer(this, 0, 24 + 20 * i);
+			innerSides[i] = new ModelRenderer(this, 0, 32 + 20 * i);
 			generatePipeModel(innerSides[i], PipeConsts.INNER_SIDES_CENT[i], PipeConsts.INNER_SIDES_DIM[i], scale);
 			innerSides[i].setTextureSize(textureWidth, textureHeight);
 			innerSides[i].mirror = true;
 			setRotation(innerSides[i], 0f, 0f, 0f);
 
-			busSides[i] = new ModelRenderer(this, 40, 24 + (16 * i));
+			busSides[i] = new ModelRenderer(this, 40, 32 + 16 * i);
 			generatePipeModel(busSides[i], PipeConsts.BUS_SIDES_CENT[i], PipeConsts.BUS_SIDES_DIM[i], scale);
 			busSides[i].setTextureSize(textureWidth, textureHeight);
 			busSides[i].mirror = true;
 			setRotation(busSides[i], 0f, 0f, 0f);
 
-			pipeSides[i] = new ModelRenderer(this, 72, 24 + (8 * i));
+			pipeSides[i] = new ModelRenderer(this, 72, 32 + 8 * i);
 			generatePipeModel(pipeSides[i], PipeConsts.PIPE_SIDES_CENT[i], PipeConsts.PIPE_SIDES_DIM[i], scale);
 			pipeSides[i].setTextureSize(textureWidth, textureHeight);
 			pipeSides[i].mirror = true;
