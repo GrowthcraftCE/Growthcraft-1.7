@@ -40,9 +40,47 @@ public class Rectangle
 		this.h = ih;
 	}
 
+	public Rectangle(Rectangle rect)
+	{
+		this(rect.x, rect.y, rect.w, rect.h);
+	}
+
 	public Rectangle()
 	{
 		this(0, 0, 0, 0);
+	}
+
+	public Rectangle copy()
+	{
+		return new Rectangle(this);
+	}
+
+	public Rectangle translate(int tx, int ty)
+	{
+		this.x += tx;
+		this.y += ty;
+		return this;
+	}
+
+	public Rectangle scale(float tx, float ty)
+	{
+		this.w *= tx;
+		this.h *= ty;
+		return this;
+	}
+
+	public Rectangle moveto(int tx, int ty)
+	{
+		this.x = tx;
+		this.y = ty;
+		return this;
+	}
+
+	public Rectangle resize(int tw, int th)
+	{
+		this.w = tw;
+		this.h = th;
+		return this;
 	}
 
 	public boolean contains(int ix, int iy)
