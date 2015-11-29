@@ -71,31 +71,31 @@ public class GrcApplesBooze extends GrcModuleBase
 			.fermentsFrom(fs[0], YeastType.BREWERS.asStack(), fermentTime)
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
 			.getEffect()
-				.setTipsy(0.60F, 900)
-				.addPotionEntry(Potion.field_76444_x, 1800, 0);
+				.setTipsy(0.60F, TickUtils.seconds(45))
+				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
 
 		CellarBoozeBuilder.create(appleCiderBooze[2])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT)
 			.fermentsFrom(fs[1], new ItemStack(Items.glowstone_dust), fermentTime)
 			.fermentsFrom(fs[3], new ItemStack(Items.glowstone_dust), fermentTime)
 			.getEffect()
-				.setTipsy(0.60F, 900)
-				.addPotionEntry(Potion.field_76444_x, 1800, 0);
+				.setTipsy(0.60F, TickUtils.seconds(45))
+				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
 
 		CellarBoozeBuilder.create(appleCiderBooze[3])
 			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED)
 			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
 			.fermentsFrom(fs[2], new ItemStack(Items.redstone), fermentTime)
 			.getEffect()
-				.setTipsy(0.60F, 900)
-				.addPotionEntry(Potion.field_76444_x, 1800, 0);
+				.setTipsy(0.60F, TickUtils.seconds(45))
+				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
 
 		// Silken Nectar - ETHEREAL
 		CellarBoozeBuilder.create(appleCiderBooze[4])
 			.tags(BoozeTag.FERMENTED, BoozeTag.MAGICAL)
 			.fermentsFrom(fs[1], YeastType.ETHEREAL.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(0.60F, 900)
+				.setTipsy(0.60F, TickUtils.seconds(45))
 				.addEffect(new EffectRandomList()
 					// This is terrifying, thank heavens for a decent text editor...
 					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.moveSpeed.id, TickUtils.minutes(10), 0)))
@@ -120,10 +120,10 @@ public class GrcApplesBooze extends GrcModuleBase
 			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ORIGIN.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(0.80F, 900)
+				.setTipsy(0.80F, TickUtils.seconds(45))
 				.addEffect(new EffectWeightedRandomList()
-					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76444_x.id, 1800, 2)))
-					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.wither.id, 1800, 2)))
+					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76444_x.id, TickUtils.seconds(90), 2)))
+					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.wither.id, TickUtils.seconds(90), 2)))
 				);
 
 		// Poisoned - created from netherrash,
@@ -137,8 +137,8 @@ public class GrcApplesBooze extends GrcModuleBase
 			//.fermentsFrom(fs[4], YeastType.NETHERRASH.asStack(), fermentTime)
 			//.fermentsFrom(fs[5], YeastType.NETHERRASH.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(0.60F, 900)
-				.addPotionEntry(Potion.poison, 1800, 0);
+				.setTipsy(0.60F, TickUtils.seconds(45))
+				.addPotionEntry(Potion.poison, TickUtils.seconds(90), 0);
 	}
 
 	@Override
