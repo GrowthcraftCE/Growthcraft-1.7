@@ -15,6 +15,25 @@ fluid.tile.lava=Lava
 # Other
 achievementPage.pageGrowthCraft=Growthcraft
 
+# Colors
+grc.colour.White=White
+grc.colour.Orange=Orange
+grc.colour.Magenta=Magenta
+grc.colour.LightBlue=Light Blue
+grc.colour.Yellow=Yellow
+grc.colour.Lime=Lime
+grc.colour.Pink=Pink
+grc.colour.Gray=Gray
+grc.colour.LightGray=Light Gray
+grc.colour.Cyan=Cyan
+grc.colour.Purple=Purple
+grc.colour.Blue=Blue
+grc.colour.Brown=Brown
+grc.colour.Green=Green
+grc.colour.Red=Red
+grc.colour.Black=Black
+grc.colour.Transparent=Transparent
+
 # Formats and Units
 grc.format.value.true=YES
 grc.format.value.false=NO
