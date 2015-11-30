@@ -2,6 +2,7 @@ package growthcraft.pipes.integration.waila;
 
 import java.util.List;
 
+import growthcraft.api.core.GrcColour;
 import growthcraft.core.utils.TagFormatterFluidHandler;
 import growthcraft.core.utils.ConstID;
 import growthcraft.pipes.block.BlockPipeBase;
@@ -55,6 +56,7 @@ public class PipeDataProvider implements IWailaDataProvider
 		if (accessor.getTileEntity() instanceof TileEntityPipeBase)
 		{
 			tooltip.add("PipeState : " + tag.getInteger("pipe_state"));
+			tooltip.add("Colour : " + GrcColour.toColour(tag.getInteger("colour")));
 		}
 		return tooltip;
 	}
@@ -74,6 +76,7 @@ public class PipeDataProvider implements IWailaDataProvider
 		{
 			final TileEntityPipeBase pipeBase = (TileEntityPipeBase)te;
 			tag.setInteger("pipe_state", pipeBase.getPipeRenderState());
+			tag.setInteger("colour", pipeBase.getColour().ordinal());
 		}
 		return tag;
 	}

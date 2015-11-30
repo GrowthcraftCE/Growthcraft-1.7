@@ -1,7 +1,9 @@
 package growthcraft.pipes.tileentity;
 
+import growthcraft.api.core.GrcColour;
+
 public interface IColourableTile
 {
-	int getColour();
-	void setColour(int kolour);
+	GrcColour getColour();
+	void setColour(GrcColour kolour);
 }

@@ -1,11 +1,14 @@
 package growthcraft.pipes.block;
 
+import growthcraft.api.core.GrcColour;
 import growthcraft.cellar.block.ICellarFluidHandler;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.pipes.client.render.RenderPipe;
 import growthcraft.pipes.tileentity.TileEntityPipeBase;
 import growthcraft.pipes.utils.PipeType;
+
+import buildcraft.api.blocks.IColorRemovable;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,7 +23,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockPipeBase extends Block implements IPipeBlock, ITileEntityProvider, ICellarFluidHandler
+public class BlockPipeBase extends Block implements IPipeBlock, ITileEntityProvider, ICellarFluidHandler, IDroppableBlock, IWrenchable, IColorRemovable
 {
 	private PipeType pipeType;
 
@@ -94,21 +97,32 @@ public class BlockPipeBase extends Block implements IPipeBlock, ITileEntityProvi
 		return true;
 	}
 
-	@Override
-	public boolean recolourBlock(World world, int x, int y, int z, ForgeDirection side, int colour)
+	public boolean setBlockColour(World world, int x, int y, int z, ForgeDirection side, GrcColour colour)
 	{
 		final TileEntityPipeBase te = getTileEntity(world, x, y, z);
 
 		if (te != null)
 		{
 			te.setColour(colour);
+			world.notifyBlockChange(x, y, z, this);
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public final boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
+	public boolean removeColorFromBlock(World world, int x, int y, int z, ForgeDirection side)
+	{
+		return setBlockColour(world, x, y, z, side, GrcColour.Transparent);
+	}
+
+	@Override
+	public boolean recolourBlock(World world, int x, int y, int z, ForgeDirection side, int colour)
+	{
+		return setBlockColour(world, x, y, z, side, GrcColour.VALID_COLORS.get(colour));
+	}
+
+	public boolean wrenchBlock(World world, int x, int y, int z, EntityPlayer player, ItemStack wrench)
 	{
 		if (player != null)
 		{

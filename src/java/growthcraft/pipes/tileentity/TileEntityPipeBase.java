@@ -1,5 +1,6 @@
 package growthcraft.pipes.tileentity;
 
+import growthcraft.api.core.GrcColour;
 import growthcraft.pipes.utils.PipeType;
 import growthcraft.pipes.utils.PipeFlag;
 import growthcraft.pipes.block.IPipeBlock;
@@ -91,7 +92,7 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 
 	public PipeSection[] pipeSections = new PipeSection[7];
 	public PipeBuffer[] pipeBuffers = new PipeBuffer[ForgeDirection.VALID_DIRECTIONS.length];
-	private int colour = 0;
+	private GrcColour colour = GrcColour.Transparent;
 	private PipeFluidTank fluidTank = new PipeFluidTank(FluidContainerRegistry.BUCKET_VOLUME / 4);
 	private int pipeRenderState = PipeFlag.PIPE_CORE;
 	private boolean dirty = true;
@@ -116,14 +117,14 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 	}
 
 	@Override
-	public void setColour(int kolour)
+	public void setColour(GrcColour kolour)
 	{
 		this.colour = kolour;
 		markAsDirty();
 	}
 
 	@Override
-	public int getColour()
+	public GrcColour getColour()
 	{
 		return colour;
 	}
@@ -179,7 +180,7 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 			if (te instanceof IColourableTile)
 			{
 				final IColourableTile colouredTile = (IColourableTile)te;
-				valid = colouredTile.getColour() == colour;
+				valid = colour.matches(colouredTile.getColour());
 			}
 
 			if (valid)
@@ -397,7 +398,7 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 	public void readFromNBT(NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
-		this.colour = tag.getInteger("colour");
+		this.colour = GrcColour.toColour(tag.getInteger("colour"));
 		this.pipeRenderState = tag.getInteger("pipe_render_state");
 		readTankNBT(tag);
 	}
@@ -413,7 +414,7 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 	public void writeToNBT(NBTTagCompound tag)
 	{
 		super.writeToNBT(tag);
-		tag.setInteger("colour", colour);
+		tag.setInteger("colour", colour.ordinal());
 		tag.setInteger("pipe_render_state", getPipeRenderState());
 		writeTankNBT(tag);
 	}

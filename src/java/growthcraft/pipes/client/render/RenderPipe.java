@@ -28,21 +28,19 @@ public class RenderPipe implements ISimpleBlockRenderingHandler
 		if (RENDER_ID != modelId) return;
 		if (block instanceof IPipeBlock)
 		{
-			IPipeBlock pipeBlock = (IPipeBlock)block;
+			final IPipeBlock pipeBlock = (IPipeBlock)block;
 			GL11.glPushMatrix();
-			//GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-			//GL11.glRotatef(90F, 0.0F, -1.0F, 0.0F);
-			//GL11.glTranslated(0.0F, -1.0F, 0.0F);
-			Minecraft.getMinecraft().renderEngine.bindTexture(TileEntityPipeRenderer.res);
-			if (pipeBlock.getPipeType() == PipeType.VACUUM)
 			{
-				ModelPipe.INSTANCE.render(PipeFlag.PIPE_VACUUM_CORE | PipeFlag.PIPE_BUSES, 0.0625f);
+				Minecraft.getMinecraft().renderEngine.bindTexture(TileEntityPipeRenderer.res);
+				if (pipeBlock.getPipeType() == PipeType.VACUUM)
+				{
+					ModelPipe.INSTANCE.render(PipeFlag.PIPE_VACUUM_CORE | PipeFlag.PIPE_BUSES, 0.0625f);
+				}
+				else
+				{
+					ModelPipe.INSTANCE.render(PipeFlag.PIPE_CORE | PipeFlag.PIPES, 0.0625f);
+				}
 			}
-			else
-			{
-				ModelPipe.INSTANCE.render(PipeFlag.PIPE_CORE | PipeFlag.PIPES, 0.0625f);
-			}
-
 			GL11.glPopMatrix();
 		}
 	}
