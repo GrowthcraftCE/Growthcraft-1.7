@@ -73,7 +73,7 @@ public enum GrcColour
 	public final int mediumVariant;
 
 	/**
-	 * Lightest Variant of the color, nearly white; as a RGB HEX Integer
+	 * Lightest Variant of the colour, nearly white; as a RGB HEX Integer
 	 */
 	public final int whiteVariant;
 
@@ -86,11 +86,13 @@ public enum GrcColour
 	}
 
 	/**
-	 * Logic to see which colors match each other.. special handle for Transparent
+	 * Logic to see which colours match each other.. special handle for Transparent
+	 * @param colour - colour to check
+	 * @return true if either colour is transparent, or if the colours are equal
 	 */
-	public boolean matches(GrcColour color)
+	public boolean matches(GrcColour colour)
 	{
-		return this == Transparent || color == Transparent || this == color;
+		return this == Transparent || colour == Transparent || this == colour;
 	}
 
 	@Override
