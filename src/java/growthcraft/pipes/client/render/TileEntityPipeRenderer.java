@@ -1,7 +1,6 @@
 package growthcraft.pipes.client.render;
 
 import growthcraft.api.core.GrcColour;
-import growthcraft.core.utils.RenderUtils;
 import growthcraft.pipes.client.model.ModelPipe;
 import growthcraft.pipes.tileentity.TileEntityPipeBase;
 

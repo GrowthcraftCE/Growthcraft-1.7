@@ -4,7 +4,6 @@ import growthcraft.core.integration.WailaIntegrationBase;
 import growthcraft.pipes.integration.waila.PipeDataProvider;
 import growthcraft.pipes.block.BlockPipeBase;
 
-import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.Optional;
 
 import mcp.mobius.waila.api.IWailaDataProvider;

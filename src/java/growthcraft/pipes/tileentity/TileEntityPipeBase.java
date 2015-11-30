@@ -11,7 +11,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -77,12 +76,12 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 	{
 		public TransferState transferState = TransferState.IDLE;
 		public UsageState usageState = UsageState.UNUSABLE;
-		public int feedFlag = 0;
+		public int feedFlag;
 	}
 
 	class PipeBuffer
 	{
-		public TileEntity te = null;
+		public TileEntity te;
 
 		public void clear()
 		{
@@ -201,11 +200,11 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 
 	private void transferFluid(IFluidHandler dest, PipeFluidTank src, ForgeDirection dir)
 	{
-		FluidStack drained = fluidTank.drain(fluidTank.getDrainAmount(), true);
+		final FluidStack drained = fluidTank.drain(fluidTank.getDrainAmount(), true);
 		if (drained != null)
 		{
-			int filled = dest.fill(dir, drained, true);
-			int diff = drained.amount - filled;
+			final int filled = dest.fill(dir, drained, true);
+			final int diff = drained.amount - filled;
 			if (diff > 0)
 			{
 				src.fill(new FluidStack(drained.getFluid(), diff), true);
@@ -215,11 +214,11 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 
 	private void transferFluid(PipeFluidTank dest, IFluidHandler src, ForgeDirection dir)
 	{
-		FluidStack drained = src.drain(dir, dest.getFillAmount(), true);
+		final FluidStack drained = src.drain(dir, dest.getFillAmount(), true);
 		if (drained != null)
 		{
-			int filled = dest.fill(drained, true);
-			int diff = drained.amount - filled;
+			final int filled = dest.fill(drained, true);
+			final int diff = drained.amount - filled;
 			if (diff > 0)
 			{
 				src.fill(dir, new FluidStack(drained.getFluid(), diff), true);
@@ -405,7 +404,7 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 
 	public void writeTankNBT(NBTTagCompound tag)
 	{
-		NBTTagCompound tankTag = new NBTTagCompound();
+		final NBTTagCompound tankTag = new NBTTagCompound();
 		fluidTank.writeToNBT(tankTag);
 		tag.setTag("tank", tankTag);
 	}
@@ -425,7 +424,7 @@ public class TileEntityPipeBase extends TileEntity implements IFluidHandler, IPi
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		NBTTagCompound nbtTag = new NBTTagCompound();
+		final NBTTagCompound nbtTag = new NBTTagCompound();
 		this.writeToNBT(nbtTag);
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
 	}

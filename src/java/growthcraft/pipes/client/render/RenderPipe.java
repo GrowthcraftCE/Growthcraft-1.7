@@ -4,7 +4,6 @@ import growthcraft.pipes.client.model.ModelPipe;
 import growthcraft.pipes.utils.PipeFlag;
 import growthcraft.pipes.utils.PipeType;
 import growthcraft.pipes.block.IPipeBlock;
-import growthcraft.core.utils.RenderUtils;
 
 import org.lwjgl.opengl.GL11;
 
@@ -13,10 +12,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 public class RenderPipe implements ISimpleBlockRenderingHandler

@@ -5,12 +5,12 @@ import growthcraft.pipes.utils.PipeFlag;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.util.MathHelper;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class ModelPipe extends ModelBase
 {
 	public static ModelPipe INSTANCE = new ModelPipe();
+
 	ModelRenderer pipeCore;
 	ModelRenderer vacuumCore;
 	// small inner cubes when using the pipeCore, these are not rendered if
@@ -89,8 +89,8 @@ public class ModelPipe extends ModelBase
 		{
 			final int testFlag = 1 << i;
 			final int testFlagBus = 1 << (i + 6);
-			final boolean pipe = ((flags & testFlag) == testFlag);
-			final boolean bus = ((flags & testFlagBus) == testFlagBus);
+			final boolean pipe = (flags & testFlag) == testFlag;
+			final boolean bus = (flags & testFlagBus) == testFlagBus;
 			if (!vacuum && (pipe || bus))
 			{
 				innerSides[i].render(scale);

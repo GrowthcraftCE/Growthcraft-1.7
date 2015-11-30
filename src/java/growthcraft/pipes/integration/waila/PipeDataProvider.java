@@ -3,12 +3,7 @@ package growthcraft.pipes.integration.waila;
 import java.util.List;
 
 import growthcraft.api.core.GrcColour;
-import growthcraft.core.utils.TagFormatterFluidHandler;
-import growthcraft.core.utils.ConstID;
-import growthcraft.pipes.block.BlockPipeBase;
 import growthcraft.pipes.tileentity.TileEntityPipeBase;
-import growthcraft.core.utils.ConstID;
-import growthcraft.core.utils.NBTHelper;
 
 import cpw.mods.fml.common.Optional;
 
@@ -17,20 +12,10 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 
 public class PipeDataProvider implements IWailaDataProvider
 {
