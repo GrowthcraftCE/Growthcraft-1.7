@@ -23,93 +23,76 @@
  */
 package growthcraft.api.core.schema;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nonnull;
 
+import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.api.core.definition.IItemStackListFactory;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemKeySchema extends ItemStackSchema implements IItemStackListFactory, IValidatable
+public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory, IValidatable
 {
-	public String ore;
+	public String mod_id;
+	public String name;
+	public int amount = 1;
+	public int meta = ItemKey.WILDCARD_VALUE;
 
-	public ItemKeySchema(String mid, String name, int amt, int mt)
+	public ItemStackSchema(@Nonnull String mid, @Nonnull String nm, int amt, int mt)
 	{
-		super(mid, name, amt, mt);
-	}
-
-	public ItemKeySchema(String o, int amt)
-	{
-		this.ore = o;
+		this.mod_id = mid;
+		this.name = nm;
 		this.amount = amt;
+		this.meta = mt;
 	}
 
-	public ItemKeySchema() {}
+	public ItemStackSchema() {}
 
-	/**
-	 * @return list of ores or null if the name was invalid
-	 */
-	public List<ItemStack> getOres()
+	public Item getItem()
 	{
-		if (ore != null) return OreDictionary.getOres(ore);
-		return null;
+		if (mod_id == null || name == null) return null;
+		return GameRegistry.findItem(mod_id, name);
 	}
 
-	/**
-	 * @return list of itemstacks, the list may be empty if it is invalid
-	 */
+	@Override
+	public ItemStack asStack(int a)
+	{
+		final Item item = getItem();
+		if (item == null) return null;
+		return new ItemStack(item, a, meta < 0 ? ItemKey.WILDCARD_VALUE : meta);
+	}
+
+	@Override
+	public ItemStack asStack()
+	{
+		return asStack(amount);
+	}
+
 	@Override
 	public List<ItemStack> getItemStacks()
 	{
-		final List<ItemStack> result = super.getItemStacks();
-		final List<ItemStack> ores = getOres();
-		if (ores != null)
-		{
-			for (ItemStack item : ores)
-			{
-				final ItemStack stack = item.copy();
-				stack.stackSize = amount;
-				result.add(stack);
-			}
-		}
+		final List<ItemStack> result = new ArrayList<ItemStack>();
+		final ItemStack stack = asStack();
+		if (stack != null) result.add(stack);
 		return result;
 	}
 
-	/**
-	 * @return string representing the ItemKeySchema
-	 */
 	@Override
 	public String toString()
 	{
-		String result = "";
-		if (mod_id != null && name != null)
-		{
-			result += "(" + mod_id + ":" + name + ":" + meta + ")";
-		}
-		if (ore != null)
-		{
-			if (result.length() > 0) result += ", ";
-			result += "(" + "ore=" + ore + ")";
-		}
-		result += " x" + amount;
-		return result;
+		return "" + mod_id + ":" + name + ":" + meta + " x" + amount;
 	}
 
-	/**
-	 * Does this schema have ANY valid items?
-	 *
-	 * @return true if there are any items, false otherwise
-	 */
 	@Override
 	public boolean isValid()
 	{
-		return getItemStacks().size() > 0;
+		return asStack() != null;
 	}
 
-	/**
-	 * @return true if there are no items, false otherwise
-	 */
 	@Override
 	public boolean isInvalid()
 	{

@@ -32,6 +32,8 @@ import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.util.JsonConfigDef;
 
+import net.minecraft.item.ItemStack;
+
 public class UserFermentingRecipes extends JsonConfigDef
 {
 	public static class UserFermentingRecipe
@@ -110,12 +112,15 @@ public class UserFermentingRecipes extends JsonConfigDef
 		}
 
 		logger.info("Adding Fermenting Recipe %s", recipe);
-		CellarRegistry.instance().fermenting().addFermentingRecipe(
-			recipe.output_fluid.asFluidStack(),
-			recipe.input_fluid.asFluidStack(),
-			recipe.item.asStack(),
-			recipe.time
-		);
+		for (ItemStack item : recipe.item.getItemStacks())
+		{
+			CellarRegistry.instance().fermenting().addFermentingRecipe(
+				recipe.output_fluid.asFluidStack(),
+				recipe.input_fluid.asFluidStack(),
+				item,
+				recipe.time
+			);
+		}
 	}
 
 	@Override

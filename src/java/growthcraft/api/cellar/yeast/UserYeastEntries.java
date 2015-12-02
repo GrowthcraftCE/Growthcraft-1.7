@@ -107,7 +107,7 @@ public class UserYeastEntries extends JsonConfigDef
 			return;
 		}
 
-		if (entry.item == null)
+		if (entry.item == null || entry.item.isInvalid())
 		{
 			logger.error("Yeast item was invalid %s", entry);
 			return;
@@ -119,18 +119,20 @@ public class UserYeastEntries extends JsonConfigDef
 			return;
 		}
 
-		final ItemStack itemstack = entry.item.asStack();
-		for (String biome : entry.biomes)
+		for (ItemStack itemstack : entry.item.getItemStacks())
 		{
-			try
+			for (String biome : entry.biomes)
 			{
-				final BiomeDictionary.Type biomeType = BiomeUtils.fetchBiomeType(biome);
-				CellarRegistry.instance().yeast().addYeastToBiomeType(itemstack, biomeType);
-				logger.info("Added yeast %s to biome %s", itemstack, biome);
-			}
-			catch (BiomeUtils.BiomeTypeNotFound ex)
-			{
-				logger.error("A biome type %s for entry %s could not be found.", biome, entry);
+				try
+				{
+					final BiomeDictionary.Type biomeType = BiomeUtils.fetchBiomeType(biome);
+					CellarRegistry.instance().yeast().addYeastToBiomeType(itemstack, biomeType);
+					logger.info("Added yeast %s to biome %s", itemstack, biome);
+				}
+				catch (BiomeUtils.BiomeTypeNotFound ex)
+				{
+					logger.error("A biome type %s for entry %s could not be found.", biome, entry);
+				}
 			}
 		}
 	}

@@ -23,51 +23,8 @@
  */
 package growthcraft.api.core.schema;
 
-import growthcraft.api.core.definition.IFluidStackFactory;
-
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidRegistry;
-
-public class FluidStackSchema implements IFluidStackFactory, IValidatable
+public interface IValidatable
 {
-	public String name;
-	public int amount = 1;
-
-	public Fluid getFluid()
-	{
-		return FluidRegistry.getFluid(name);
-	}
-
-	@Override
-	public FluidStack asFluidStack(int a)
-	{
-		final Fluid fluid = getFluid();
-		if (fluid == null) return null;
-		return new FluidStack(fluid, a);
-	}
-
-	@Override
-	public FluidStack asFluidStack()
-	{
-		return asFluidStack(amount);
-	}
-
-	@Override
-	public String toString()
-	{
-		return "" + name + " x" + amount;
-	}
-
-	@Override
-	public boolean isValid()
-	{
-		return asFluidStack() != null;
-	}
-
-	@Override
-	public boolean isInvalid()
-	{
-		return !isValid();
-	}
+	boolean isValid();
+	boolean isInvalid();
 }

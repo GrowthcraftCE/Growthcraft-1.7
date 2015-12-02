@@ -77,36 +77,21 @@ public class UserBrewingRecipes extends JsonConfigDef
 			return;
 		}
 
-		final ItemStack item = recipe.item.asStack();
-		if (item == null)
+		if (recipe.item == null || recipe.item.isInvalid())
 		{
 			logger.error("Invalid item for recipe %s", recipe);
 			return;
 		}
 
-		if (recipe.input_fluid == null)
+		if (recipe.input_fluid == null || recipe.input_fluid.isInvalid())
 		{
 			logger.error("Invalid input_fluid %s", recipe);
 			return;
 		}
 
-		final FluidStack inputFluidStack = recipe.input_fluid.asFluidStack();
-		if (inputFluidStack == null)
-		{
-			logger.error("Invalid input_fluid for recipe %s", recipe);
-			return;
-		}
-
-		if (recipe.output_fluid == null)
+		if (recipe.output_fluid == null || recipe.output_fluid.isInvalid())
 		{
 			logger.error("Invalid output_fluid %s", recipe);
-			return;
-		}
-
-		final FluidStack outputFluidStack = recipe.output_fluid.asFluidStack();
-		if (outputFluidStack == null)
-		{
-			logger.error("Invalid output_fluid for recipe %s", recipe);
 			return;
 		}
 
@@ -127,8 +112,14 @@ public class UserBrewingRecipes extends JsonConfigDef
 			return;
 		}
 
+		final FluidStack inputFluidStack = recipe.input_fluid.asFluidStack();
+		final FluidStack outputFluidStack = recipe.output_fluid.asFluidStack();
+
 		logger.info("Adding brewing recipe %s", recipe);
-		CellarRegistry.instance().brewing().addBrewing(inputFluidStack, item, outputFluidStack, recipe.time, residue);
+		for (ItemStack item : recipe.item.getItemStacks())
+		{
+			CellarRegistry.instance().brewing().addBrewing(inputFluidStack, item, outputFluidStack, recipe.time, residue);
+		}
 	}
 
 	@Override

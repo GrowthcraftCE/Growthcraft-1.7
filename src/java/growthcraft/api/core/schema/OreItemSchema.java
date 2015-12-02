@@ -23,6 +23,7 @@
  */
 package growthcraft.api.core.schema;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import growthcraft.api.core.definition.IItemStackListFactory;
@@ -30,86 +31,64 @@ import growthcraft.api.core.definition.IItemStackListFactory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemKeySchema extends ItemStackSchema implements IItemStackListFactory, IValidatable
+public class OreItemSchema implements IItemStackListFactory, IValidatable
 {
-	public String ore;
+	public String name;
+	public int amount;
 
-	public ItemKeySchema(String mid, String name, int amt, int mt)
+	/**
+	 * @param n - ore name
+	 * @param a - amount
+	 */
+	public OreItemSchema(String n, int a)
 	{
-		super(mid, name, amt, mt);
+		this.name = n;
+		this.amount = a;
 	}
 
-	public ItemKeySchema(String o, int amt)
-	{
-		this.ore = o;
-		this.amount = amt;
-	}
-
-	public ItemKeySchema() {}
+	public OreItemSchema() {}
 
 	/**
 	 * @return list of ores or null if the name was invalid
 	 */
 	public List<ItemStack> getOres()
 	{
-		if (ore != null) return OreDictionary.getOres(ore);
+		if (name != null) return OreDictionary.getOres(name);
 		return null;
 	}
 
 	/**
-	 * @return list of itemstacks, the list may be empty if it is invalid
+	 * @return list with ores, this list may be empty if the ores were invalid
 	 */
 	@Override
 	public List<ItemStack> getItemStacks()
 	{
-		final List<ItemStack> result = super.getItemStacks();
+		final List<ItemStack> result = new ArrayList<ItemStack>();
 		final List<ItemStack> ores = getOres();
 		if (ores != null)
 		{
-			for (ItemStack item : ores)
+			for (ItemStack stack : ores)
 			{
-				final ItemStack stack = item.copy();
-				stack.stackSize = amount;
-				result.add(stack);
+				final ItemStack newStack = stack.copy();
+				newStack.stackSize = amount;
+				result.add(newStack);
 			}
 		}
 		return result;
 	}
 
-	/**
-	 * @return string representing the ItemKeySchema
-	 */
 	@Override
 	public String toString()
 	{
-		String result = "";
-		if (mod_id != null && name != null)
-		{
-			result += "(" + mod_id + ":" + name + ":" + meta + ")";
-		}
-		if (ore != null)
-		{
-			if (result.length() > 0) result += ", ";
-			result += "(" + "ore=" + ore + ")";
-		}
-		result += " x" + amount;
-		return result;
+		return "ore=" + name + " x" + amount;
 	}
 
-	/**
-	 * Does this schema have ANY valid items?
-	 *
-	 * @return true if there are any items, false otherwise
-	 */
 	@Override
 	public boolean isValid()
 	{
-		return getItemStacks().size() > 0;
+		return getOres() != null;
 	}
 
-	/**
-	 * @return true if there are no items, false otherwise
-	 */
 	@Override
 	public boolean isInvalid()
 	{

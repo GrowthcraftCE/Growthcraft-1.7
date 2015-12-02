@@ -78,16 +78,9 @@ public class UserPressingRecipes extends JsonConfigDef
 			return;
 		}
 
-		if (recipe.item == null)
+		if (recipe.item == null || recipe.item.isInvalid())
 		{
-			logger.error("No pressing item for recipe %s", recipe);
-			return;
-		}
-
-		final ItemStack item = recipe.item.asStack();
-		if (item == null)
-		{
-			logger.error("Invalid item for recipe %s", recipe);
+			logger.error("Item is invalid for recipe %s", recipe);
 			return;
 		}
 
@@ -122,7 +115,10 @@ public class UserPressingRecipes extends JsonConfigDef
 		}
 
 		logger.info("Adding pressing recipe %s", recipe);
-		CellarRegistry.instance().pressing().addPressingRecipe(item, fluidStack, recipe.time, residue);
+		for (ItemStack item : recipe.item.getItemStacks())
+		{
+			CellarRegistry.instance().pressing().addPressingRecipe(item, fluidStack, recipe.time, residue);
+		}
 	}
 
 	@Override
