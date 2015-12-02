@@ -31,8 +31,9 @@ import growthcraft.api.core.definition.IItemStackListFactory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class OreItemSchema implements IItemStackListFactory, IValidatable
+public class OreItemSchema implements IItemStackListFactory, IValidatable, ICommentable
 {
+	public String comment = "";
 	public String name;
 	public int amount;
 
@@ -47,6 +48,18 @@ public class OreItemSchema implements IItemStackListFactory, IValidatable
 	}
 
 	public OreItemSchema() {}
+
+	@Override
+	public void setComment(String comm)
+	{
+		this.comment = comm;
+	}
+
+	@Override
+	public String getComment()
+	{
+		return comment;
+	}
 
 	/**
 	 * @return list of ores or null if the name was invalid

@@ -35,8 +35,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory, IValidatable
+public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory, IValidatable, ICommentable
 {
+	public String comment = "";
 	public String mod_id;
 	public String name;
 	public int amount = 1;
@@ -51,6 +52,18 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory
 	}
 
 	public ItemStackSchema() {}
+
+	@Override
+	public void setComment(String comm)
+	{
+		this.comment = comm;
+	}
+
+	@Override
+	public String getComment()
+	{
+		return comment;
+	}
 
 	public Item getItem()
 	{

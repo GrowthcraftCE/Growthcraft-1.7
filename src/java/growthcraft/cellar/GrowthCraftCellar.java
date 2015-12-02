@@ -178,9 +178,12 @@ public class GrowthCraftCellar
 
 	private void addDefaultHeatSources()
 	{
-		userHeatSources.addDefault("minecraft", "fire", UserHeatSourceEntry.newWildcardHeat(1.0f));
-		userHeatSources.addDefault("minecraft", "flowing_lava", UserHeatSourceEntry.newWildcardHeat(0.7f));
-		userHeatSources.addDefault("minecraft", "lava", UserHeatSourceEntry.newWildcardHeat(0.7f));
+		userHeatSources.addDefault("minecraft", "fire", UserHeatSourceEntry.newWildcardHeat(1.0f))
+			.setComment("Fire!");
+		userHeatSources.addDefault("minecraft", "flowing_lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
+			.setComment("We need to register both states of lava, this when its flowing");
+		userHeatSources.addDefault("minecraft", "lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
+			.setComment("And when its a still pool.");
 	}
 
 	private void registerBoozeModifierFunctions()

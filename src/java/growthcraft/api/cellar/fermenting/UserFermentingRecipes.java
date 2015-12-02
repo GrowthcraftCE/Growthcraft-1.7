@@ -28,16 +28,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.FluidStackSchema;
+import growthcraft.api.core.schema.ICommentable;
+import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.util.JsonConfigDef;
 
 import net.minecraft.item.ItemStack;
 
 public class UserFermentingRecipes extends JsonConfigDef
 {
-	public static class UserFermentingRecipe
+	public static class UserFermentingRecipe implements ICommentable
 	{
+		public String comment = "";
 		public ItemKeySchema item;
 		public FluidStackSchema input_fluid;
 		public FluidStackSchema output_fluid;
@@ -53,9 +55,22 @@ public class UserFermentingRecipes extends JsonConfigDef
 
 		public UserFermentingRecipe() {}
 
+		@Override
 		public String toString()
 		{
 			return "" + item + " + " + input_fluid + " / " + time + " = " + output_fluid;
+		}
+
+		@Override
+		public void setComment(String comm)
+		{
+			this.comment = comm;
+		}
+
+		@Override
+		public String getComment()
+		{
+			return comment;
 		}
 	}
 

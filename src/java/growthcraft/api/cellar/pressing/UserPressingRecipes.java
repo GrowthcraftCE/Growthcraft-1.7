@@ -28,6 +28,7 @@ import java.io.BufferedReader;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.schema.FluidStackSchema;
+import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.ResidueSchema;
 import growthcraft.api.core.util.JsonConfigDef;
@@ -42,16 +43,30 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public class UserPressingRecipes extends JsonConfigDef
 {
-	public static class UserPressingRecipeEntry
+	public static class UserPressingRecipeEntry implements ICommentable
 	{
+		public String comment = "";
 		public ItemKeySchema item;
 		public FluidStackSchema fluid;
 		public int time;
 		public ResidueSchema residue;
 
+		@Override
 		public String toString()
 		{
 			return "" + item + " + " + time + " = "  + fluid + " + " + residue;
+		}
+
+		@Override
+		public void setComment(String comm)
+		{
+			this.comment = comm;
+		}
+
+		@Override
+		public String getComment()
+		{
+			return comment;
 		}
 	}
 

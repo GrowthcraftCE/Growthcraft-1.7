@@ -30,6 +30,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.util.BiomeUtils;
 import growthcraft.api.core.util.JsonConfigDef;
@@ -43,8 +44,9 @@ import net.minecraftforge.common.BiomeDictionary;
  */
 public class UserYeastEntries extends JsonConfigDef
 {
-	public static class UserYeastEntry
+	public static class UserYeastEntry implements ICommentable
 	{
+		public String comment = "";
 		public ItemKeySchema item;
 		public List<String> biomes;
 
@@ -56,9 +58,22 @@ public class UserYeastEntries extends JsonConfigDef
 
 		public UserYeastEntry() {}
 
+		@Override
 		public String toString()
 		{
 			return "" + item + " [" + biomes + "]";
+		}
+
+		@Override
+		public void setComment(String comm)
+		{
+			this.comment = comm;
+		}
+
+		@Override
+		public String getComment()
+		{
+			return comment;
 		}
 	}
 
@@ -68,9 +83,25 @@ public class UserYeastEntries extends JsonConfigDef
 	protected String getDefault()
 	{
 		final List<UserYeastEntry> defaultEntries = new ArrayList<UserYeastEntry>();
-		final UserYeastEntry brewers = new UserYeastEntry(new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 0), new ArrayList<String>());
-		final UserYeastEntry lager = new UserYeastEntry(new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 1), new ArrayList<String>());
-		final UserYeastEntry ethereal = new UserYeastEntry(new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 3), new ArrayList<String>());
+
+		final ItemKeySchema brewersYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 0);
+		brewersYeast.setComment("Brewers Yeast");
+
+		final ItemKeySchema lagerYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 1);
+		lagerYeast.setComment("Lager Yeast");
+
+		final ItemKeySchema etherealYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 3);
+		etherealYeast.setComment("Ethereal Yeast");
+
+		final UserYeastEntry brewers = new UserYeastEntry(brewersYeast, new ArrayList<String>());
+		brewers.setComment("Brewers yeast is the default yeast, which appears in all other biomes that are filled by the Lager or Ethereal");
+
+		final UserYeastEntry lager = new UserYeastEntry(lagerYeast, new ArrayList<String>());
+		lager.setComment("Lager yeast is found in COLD biomes, think snow places!");
+
+		final UserYeastEntry ethereal = new UserYeastEntry(etherealYeast, new ArrayList<String>());
+		ethereal.setComment("Ethereal yeast is found in MAGICAL or MUSHROOM biomes, because its special");
+
 		for (BiomeDictionary.Type biomeType : BiomeDictionary.Type.values())
 		{
 			switch (biomeType)

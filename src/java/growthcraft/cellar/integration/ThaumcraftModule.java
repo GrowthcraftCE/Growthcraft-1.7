@@ -42,7 +42,8 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Override
 	protected void doPreInit()
 	{
-		GrowthCraftCellar.getUserHeatSources().addDefault(modID, "blockAiry", UserHeatSourceEntry.newHeatPair(1, 1.0f));
+		GrowthCraftCellar.getUserHeatSources().addDefault(modID, "blockAiry", UserHeatSourceEntry.newHeatPair(1, 1.0f))
+			.setComment("This is Nitor.");
 	}
 
 	@Override

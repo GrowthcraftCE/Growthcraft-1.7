@@ -32,6 +32,7 @@ import java.util.Map;
 import growthcraft.api.core.util.ItemKey;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.util.JsonConfigDef;
+import growthcraft.api.core.schema.ICommentable;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -41,8 +42,9 @@ import net.minecraft.block.Block;
  */
 public class UserHeatSources extends JsonConfigDef
 {
-	public static class UserHeatSourceEntry
+	public static class UserHeatSourceEntry implements ICommentable
 	{
+		public String comment = "";
 		public String mod_id;
 		public String block_name;
 		public Map<Integer, Float> states;
@@ -54,6 +56,32 @@ public class UserHeatSources extends JsonConfigDef
 			this.mod_id = m;
 			this.block_name = b;
 			this.states = s;
+		}
+
+		@Override
+		public String toString()
+		{
+			String result = "" + mod_id + ":" + block_name;
+			if (states != null)
+			{
+				for (Map.Entry<Integer, Float> pair : states.entrySet())
+				{
+					result += "," + pair.getKey() + "=>" + pair.getValue();
+				}
+			}
+			return result;
+		}
+
+		@Override
+		public void setComment(String comm)
+		{
+			this.comment = comm;
+		}
+
+		@Override
+		public String getComment()
+		{
+			return comment;
 		}
 
 		public static Map<Integer, Float> newHeatPair(int i, float h)
@@ -72,9 +100,11 @@ public class UserHeatSources extends JsonConfigDef
 	private final List<UserHeatSourceEntry> defaultEntries = new ArrayList<UserHeatSourceEntry>();
 	private UserHeatSourceEntry[] entries;
 
-	public void addDefault(String m, String b, Map<Integer, Float> s)
+	public UserHeatSourceEntry addDefault(String m, String b, Map<Integer, Float> s)
 	{
-		defaultEntries.add(new UserHeatSourceEntry(m, b, s));
+		final UserHeatSourceEntry entry = new UserHeatSourceEntry(m, b, s);
+		defaultEntries.add(entry);
+		return entry;
 	}
 
 	@Override

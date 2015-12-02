@@ -23,72 +23,8 @@
  */
 package growthcraft.api.core.schema;
 
-import growthcraft.api.core.definition.IFluidStackFactory;
-
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidRegistry;
-
-public class FluidStackSchema implements IFluidStackFactory, IValidatable, ICommentable
+public interface ICommentable
 {
-	public String comment = "";
-	public String name;
-	public int amount = 1;
-
-	public FluidStackSchema(String nm, int amt)
-	{
-		this.name = nm;
-		this.amount = amt;
-	}
-
-	public FluidStackSchema() {}
-
-	@Override
-	public void setComment(String comm)
-	{
-		this.comment = comm;
-	}
-
-	@Override
-	public String getComment()
-	{
-		return comment;
-	}
-
-	public Fluid getFluid()
-	{
-		return FluidRegistry.getFluid(name);
-	}
-
-	@Override
-	public FluidStack asFluidStack(int a)
-	{
-		final Fluid fluid = getFluid();
-		if (fluid == null) return null;
-		return new FluidStack(fluid, a);
-	}
-
-	@Override
-	public FluidStack asFluidStack()
-	{
-		return asFluidStack(amount);
-	}
-
-	@Override
-	public String toString()
-	{
-		return "" + name + " x" + amount;
-	}
-
-	@Override
-	public boolean isValid()
-	{
-		return asFluidStack() != null;
-	}
-
-	@Override
-	public boolean isInvalid()
-	{
-		return !isValid();
-	}
+	void setComment(String com);
+	String getComment();
 }
