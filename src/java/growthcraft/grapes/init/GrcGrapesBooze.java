@@ -74,7 +74,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 			.fermentsFrom(fs[0], YeastType.BREWERS.asStack(), fermentTime)
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(defaultTipsy, TickUtils.seconds(90))
 				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 0);
 
 		// Glowstone Dust
@@ -83,7 +83,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 			.fermentsFrom(fs[1], new ItemStack(Items.glowstone_dust), fermentTime)
 			.fermentsFrom(fs[3], new ItemStack(Items.glowstone_dust), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(defaultTipsy, TickUtils.seconds(90))
 				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 0);
 
 		// Redstone Dust
@@ -92,7 +92,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
 			.fermentsFrom(fs[2], new ItemStack(Items.redstone), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(defaultTipsy, TickUtils.seconds(90))
 				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 0);
 
 		// Ambrosia - Ethereal Yeast
@@ -101,7 +101,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 			.fermentsFrom(fs[2], YeastType.ETHEREAL.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ETHEREAL.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(defaultTipsy, TickUtils.seconds(90))
 				.addPotionEntry(Potion.field_76434_w, TickUtils.minutes(3), 0)
 				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 0);
 
@@ -114,7 +114,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 				GrowthCraftGrapes.getConfig().portWineBrewingTime,
 				Residue.newDefault(0.3F))
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(defaultTipsy, TickUtils.seconds(90))
 				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 2);
 
 		// Intoxicated Wine
@@ -123,7 +123,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ORIGIN.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(0.80F, TickUtils.seconds(45))
+				.setTipsy(0.80F, TickUtils.seconds(90))
 				.addEffect(new EffectWeightedRandomList()
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.resistance.id, TickUtils.minutes(3), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.weakness.id, TickUtils.minutes(3), 2))));
@@ -137,7 +137,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 			//.fermentsTo(fs[5], YeastType.NETHERRASH.asStack(), fermentTime)
 			//.fermentsTo(fs[6], YeastType.NETHERRASH.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(defaultTipsy, TickUtils.seconds(90))
 				.addPotionEntry(Potion.poison, TickUtils.seconds(90), 0);
 	}
 

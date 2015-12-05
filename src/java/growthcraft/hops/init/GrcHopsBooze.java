@@ -126,8 +126,8 @@ public class GrcHopsBooze extends GrcModuleBase
 
 		CellarBoozeBuilder.create(lagerBooze[6])
 			.tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.POISONED)
-			.fermentsFrom(fs[2], YeastType.ETHEREAL.asStack(), fermentTime)
-			.fermentsFrom(fs[3], YeastType.ETHEREAL.asStack(), fermentTime)
+			//.fermentsFrom(fs[2], YeastType.NETHERRASH.asStack(), fermentTime)
+			//.fermentsFrom(fs[3], YeastType.NETHERRASH.asStack(), fermentTime)
 			.getEffect()
 				.setTipsy(defaultTipsy, TickUtils.seconds(45))
 				.addPotionEntry(Potion.poison, TickUtils.seconds(90), 0);
@@ -206,7 +206,6 @@ public class GrcHopsBooze extends GrcModuleBase
 		// Intoxicated - Origin
 		CellarBoozeBuilder.create(hopAleBooze[7])
 			.tags(BoozeTag.HOPPED, BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
-			.fermentsFrom(fs[1], YeastType.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ORIGIN.asStack(), fermentTime)
 			.getEffect()

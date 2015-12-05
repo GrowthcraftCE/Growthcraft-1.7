@@ -102,7 +102,8 @@ public class GrcRiceBooze extends GrcModuleBase
 		// Origin Yeast
 		CellarBoozeBuilder.create(riceSakeBooze[5])
 			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
-			.fermentsFrom(fs[1], YeastType.ORIGIN.asStack(), fermentTime)
+			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
+			.fermentsFrom(fs[3], YeastType.ORIGIN.asStack(), fermentTime)
 			.getEffect()
 				.setTipsy(defaultTipsy, TickUtils.seconds(45))
 				.addEffect(new EffectWeightedRandomList()
