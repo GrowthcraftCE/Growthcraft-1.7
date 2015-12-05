@@ -47,13 +47,9 @@ public class GuiCellar extends GrcGuiContainer
 		if (fluid == null) return;
 		if (fluid.amount <= 0) return;
 
-		if (CellarRegistry.instance().fermenting().canFerment(fluid))
+		addFluidTooltips(fluid, tooltip);
+		if (!CellarRegistry.instance().fermenting().canFerment(fluid))
 		{
-			addFluidTooltips(fluid, tooltip);
-		}
-		else
-		{
-			tooltip.add(fluid.getLocalizedName());
 			tooltip.add("");
 			tooltip.add(EnumChatFormatting.RED + GrcI18n.translate("gui.grc.cantferment"));
 		}
