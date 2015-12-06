@@ -92,9 +92,11 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static ComponentVillageRiceField buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
-		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 4, 12, coordBaseMode);
-		if (canVillageGoDeeper(structureboundingbox)) {
-			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
+		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 5, 12, coordBaseMode);
+		if (canVillageGoDeeper(structureboundingbox))
+		{
+			if (StructureComponent.findIntersecting(list, structureboundingbox) == null)
+			{
 				return new ComponentVillageRiceField(startPiece, par7, random, structureboundingbox, coordBaseMode);
 			}
 		}
@@ -121,9 +123,10 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		}
 
 		// clear entire bounding box
-		this.fillWithBlocks(world, box, 0, 0, 0, 11, 4, 12, Blocks.air, Blocks.air, false);
+		fillWithBlocks(world, box, 0, 0, 0, 11, 5, 12, Blocks.air, Blocks.air, false);
+		fillWithBlocks(world, box, 0, 0, 0, 11, 0, 12, Blocks.grass, Blocks.grass, false);
 
-		final boolean vert = this.coordBaseMode == 2 || this.coordBaseMode == 3;
+		final boolean vert = coordBaseMode == 0 || coordBaseMode == 2;
 		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 
 		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));
@@ -137,7 +140,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		map.put('|', new BlockEntry(Blocks.log, vert ? 8 : 4));
 		map.put('~', new BlockEntry(Blocks.water));
 
-		SchemaToVillage.drawSchema(this, world, random, box, riceFieldSchema, map, 0, 0, 0);
+		SchemaToVillage.drawSchema(this, world, random, box, riceFieldSchema, map, 0, 1, 0);
 
 		for (int row = 0; row < 12; ++row)
 		{

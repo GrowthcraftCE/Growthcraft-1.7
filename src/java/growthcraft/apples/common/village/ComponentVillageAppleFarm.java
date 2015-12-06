@@ -76,9 +76,11 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static ComponentVillageAppleFarm buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
 	{
-		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 7, 11, coordBaseMode);
-		if (canVillageGoDeeper(structureboundingbox)) {
-			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
+		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 11, 11, coordBaseMode);
+		if (canVillageGoDeeper(structureboundingbox))
+		{
+			if (StructureComponent.findIntersecting(list, structureboundingbox) == null)
+			{
 				return new ComponentVillageAppleFarm(startPiece, par7, random, structureboundingbox, coordBaseMode);
 			}
 		}
@@ -104,22 +106,24 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 
 	public boolean addComponentParts(World world, Random random, StructureBoundingBox box)
 	{
-		if (this.field_143015_k < 0)
+		if (field_143015_k < 0)
 		{
 			this.field_143015_k = this.getAverageGroundLevel(world, box);
 
-			if (this.field_143015_k < 0)
+			if (field_143015_k < 0)
 			{
 				return true;
 			}
 
-			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 6, 0);
+			boundingBox.offset(0, field_143015_k - boundingBox.maxY + 9, 0);
 		}
 
 		// clear entire bounding box
-		this.fillWithBlocks(world, box, 0, 0, 0, 11, 3, 11, Blocks.air, Blocks.air, false);
+		fillWithBlocks(world, box, 0, 0, 0, 11, 4, 11, Blocks.air, Blocks.air, false);
+		// Fill floor with grass blocks
+		fillWithBlocks(world, box, 0, 0, 0, 11, 0, 11, Blocks.grass, Blocks.grass, false);
 
-		final boolean vert = this.coordBaseMode == 2 || this.coordBaseMode == 3;
+		final boolean vert = coordBaseMode == 0 || coordBaseMode == 2;
 		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 		map.put('x', new BlockEntry(Blocks.log, 0));
 		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));
@@ -129,20 +133,20 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 		map.put('g', new BlockEntry(Blocks.fence_gate, this.getMetadataWithOffset(Blocks.fence_gate, 0)));
 		map.put('t', new BlockEntry(Blocks.torch, 0));
 
-		SchemaToVillage.drawSchema(this, world, random, box, appleFarmSchema, map, 0, 0, 0);
+		SchemaToVillage.drawSchema(this, world, random, box, appleFarmSchema, map, 0, 1, 0);
 
 		final WorldGenAppleTree genAppleTree = new WorldGenAppleTree(true);
-		placeWorldGenAt(world, random, 3, 0, 3, box, genAppleTree);
-		placeWorldGenAt(world, random, 7, 0, 3, box, genAppleTree);
-		placeWorldGenAt(world, random, 3, 0, 7, box, genAppleTree);
-		placeWorldGenAt(world, random, 7, 0, 7, box, genAppleTree);
+		placeWorldGenAt(world, random, 3, 1, 3, box, genAppleTree);
+		placeWorldGenAt(world, random, 7, 1, 3, box, genAppleTree);
+		placeWorldGenAt(world, random, 3, 1, 7, box, genAppleTree);
+		placeWorldGenAt(world, random, 7, 1, 7, box, genAppleTree);
 
 		for (int row = 0; row < 11; ++row)
 		{
 			for (int col = 0; col < 11; ++col)
 			{
-				this.clearCurrentPositionBlocksUpwards(world, col, 7, row, box);
-				this.func_151554_b(world, Blocks.dirt, 0, col, -1, row, box);
+				clearCurrentPositionBlocksUpwards(world, col, 7, row, box);
+				func_151554_b(world, Blocks.dirt, 0, col, -1, row, box);
 			}
 		}
 		return true;
