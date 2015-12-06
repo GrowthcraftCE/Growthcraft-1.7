@@ -35,12 +35,3 @@ tile.fluid.grc.riceSake3.name=Sake
 tile.fluid.grc.riceSake4.name=Divine Sake
 tile.fluid.grc.riceSake5.name=Sake
 tile.fluid.grc.riceSake6.name=Sake
-
-# Fluid Tooltips
-fluid.grc.riceSake0.modifier=Young
-fluid.grc.riceSake1.modifier=Fermented
-fluid.grc.riceSake2.modifier=Fermented, Potent
-fluid.grc.riceSake3.modifier=Fermented, Extended
-fluid.grc.riceSake4.modifier=Fermented, Hyper-Extended
-fluid.grc.riceSake5.modifier=Fermented, Intoxicated
-fluid.grc.riceSake6.modifier=Poisoned
