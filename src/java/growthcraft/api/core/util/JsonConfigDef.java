@@ -30,6 +30,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.ILoggable;
@@ -47,7 +48,7 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 	public static final String DEFAULT_ENCODING = "UTF-8";
 
 	protected ILogger logger = NullLogger.INSTANCE;
-	protected final Gson gson = new Gson();
+	protected final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	private File srcFile;
 
 	public void setLogger(ILogger l)
