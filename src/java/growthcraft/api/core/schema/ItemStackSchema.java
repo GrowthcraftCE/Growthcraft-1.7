@@ -32,6 +32,7 @@ import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.api.core.definition.IItemStackListFactory;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -40,8 +41,8 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory
 	public String comment = "";
 	public String mod_id;
 	public String name;
-	public int amount = 1;
-	public int meta = ItemKey.WILDCARD_VALUE;
+	public int amount;
+	public int meta;
 
 	public ItemStackSchema(@Nonnull String mid, @Nonnull String nm, int amt, int mt)
 	{
@@ -51,7 +52,20 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory
 		this.meta = mt;
 	}
 
-	public ItemStackSchema() {}
+	public ItemStackSchema(@Nonnull ItemStack stack)
+	{
+		final UniqueIdentifier uuid = GameRegistry.findUniqueIdentifierFor(stack.getItem());
+		this.mod_id = uuid.modId;
+		this.name = uuid.name;
+		this.amount = stack.stackSize;
+		this.meta = stack.getItemDamage();
+	}
+
+	public ItemStackSchema()
+	{
+		this.amount = 1;
+		this.meta = ItemKey.WILDCARD_VALUE;
+	}
 
 	@Override
 	public void setComment(String comm)

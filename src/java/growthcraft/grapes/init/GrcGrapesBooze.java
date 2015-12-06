@@ -3,7 +3,6 @@ package growthcraft.grapes.init;
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.common.Residue;
-import growthcraft.api.cellar.util.CellarBoozeBuilder;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
@@ -60,7 +59,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 			fs[i] = new FluidStack(grapeWineBooze[i], 1);
 		}
 
-		CellarBoozeBuilder.create(grapeWineBooze[0])
+		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[0])
 			.tags(BoozeTag.YOUNG)
 			.pressesFrom(
 				GrowthCraftGrapes.grapes.asStack(),
@@ -69,7 +68,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 				Residue.newDefault(0.3F));
 
 		// Brewers Yeast, Nether Wart
-		CellarBoozeBuilder.create(grapeWineBooze[1])
+		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[1])
 			.tags(BoozeTag.FERMENTED)
 			.fermentsFrom(fs[0], YeastType.BREWERS.asStack(), fermentTime)
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
@@ -78,7 +77,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 0);
 
 		// Glowstone Dust
-		CellarBoozeBuilder.create(grapeWineBooze[2])
+		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[2])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT)
 			.fermentsFrom(fs[1], new ItemStack(Items.glowstone_dust), fermentTime)
 			.fermentsFrom(fs[3], new ItemStack(Items.glowstone_dust), fermentTime)
@@ -87,7 +86,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 0);
 
 		// Redstone Dust
-		CellarBoozeBuilder.create(grapeWineBooze[3])
+		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[3])
 			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED)
 			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
 			.fermentsFrom(fs[2], new ItemStack(Items.redstone), fermentTime)
@@ -96,7 +95,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 0);
 
 		// Ambrosia - Ethereal Yeast
-		CellarBoozeBuilder.create(grapeWineBooze[4])
+		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[4])
 			.tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
 			.fermentsFrom(fs[2], YeastType.ETHEREAL.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ETHEREAL.asStack(), fermentTime)
@@ -106,7 +105,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 0);
 
 		// Port Wine - Bayanus Yeast
-		CellarBoozeBuilder.create(grapeWineBooze[5])
+		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[5])
 			.tags(BoozeTag.FERMENTED, BoozeTag.FORTIFIED)
 			.brewsFrom(
 				new FluidStack(grapeWineBooze[1], GrowthCraftGrapes.getConfig().portWineBrewingYield),
@@ -118,7 +117,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 2);
 
 		// Intoxicated Wine
-		CellarBoozeBuilder.create(grapeWineBooze[6])
+		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[6])
 			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
 			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ORIGIN.asStack(), fermentTime)
@@ -128,7 +127,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.resistance.id, TickUtils.minutes(3), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.weakness.id, TickUtils.minutes(3), 2))));
 
-		CellarBoozeBuilder.create(grapeWineBooze[7])
+		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[7])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
 			//.fermentsTo(fs[1], YeastType.NETHERRASH.asStack(), fermentTime)
 			//.fermentsTo(fs[2], YeastType.NETHERRASH.asStack(), fermentTime)

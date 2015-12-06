@@ -5,13 +5,9 @@ import java.lang.reflect.Modifier;
 
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.booze.effect.EffectTipsy;
-import growthcraft.api.cellar.brewing.UserBrewingRecipes;
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.fermenting.UserFermentingRecipes;
 import growthcraft.api.cellar.heatsource.UserHeatSources.UserHeatSourceEntry;
 import growthcraft.api.cellar.heatsource.UserHeatSources;
-import growthcraft.api.cellar.pressing.UserPressingRecipes;
-import growthcraft.api.cellar.yeast.UserYeastEntries;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
@@ -43,6 +39,8 @@ import growthcraft.cellar.handler.GuiHandlerCellar;
 import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.stats.CellarAchievement;
 import growthcraft.cellar.stats.GrcCellarAchievements;
+import growthcraft.cellar.util.CellarBoozeBuilderFactory;
+import growthcraft.cellar.util.GrcCellarUserApis;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.integration.NEI;
@@ -104,19 +102,16 @@ public class GrowthCraftCellar
 
 	// Network
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
+	public static CellarBoozeBuilderFactory boozeBuilderFactory;
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcCellarConfig config = new GrcCellarConfig();
-	private UserYeastEntries userYeastEntries = new UserYeastEntries();
-	private UserHeatSources userHeatSources = new UserHeatSources();
-	private UserPressingRecipes userPressingRecipes = new UserPressingRecipes();
-	private UserBrewingRecipes userBrewingRecipes = new UserBrewingRecipes();
-	private UserFermentingRecipes userFermentingRecipes = new UserFermentingRecipes();
+	private GrcCellarUserApis userApis = new GrcCellarUserApis();
 	private ModuleContainer modules = new ModuleContainer();
 
 	public static UserHeatSources getUserHeatSources()
 	{
-		return instance.userHeatSources;
+		return instance.userApis.getUserHeatSources();
 	}
 
 	public static GrcCellarConfig getConfig()
@@ -139,22 +134,19 @@ public class GrowthCraftCellar
 		if (config.enableWailaIntegration) modules.add(new growthcraft.cellar.integration.Waila());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
 		// ALWAYS set the user modules as last, this ensures that other modules are given a chance to setup defaults and such.
-		modules.add(userBrewingRecipes);
-		modules.add(userHeatSources);
-		modules.add(userPressingRecipes);
-		modules.add(userFermentingRecipes);
-		modules.add(userYeastEntries);
+		modules.add(userApis);
 
 		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 
-		userBrewingRecipes.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
-		userFermentingRecipes.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/fermenting.json");
-		userHeatSources.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
-		userPressingRecipes.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
-		userYeastEntries.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/yeast.json");
+		userApis.getUserBrewingRecipes().setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
+		userApis.getUserFermentingRecipes().setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/fermenting.json");
+		userApis.getUserHeatSources().setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
+		userApis.getUserPressingRecipes().setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
+		userApis.getUserYeastEntries().setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/yeast.json");
 
 		registerBoozeModifierFunctions();
+		boozeBuilderFactory = new CellarBoozeBuilderFactory(userApis);
 
 		//====================
 		// INIT
@@ -178,11 +170,11 @@ public class GrowthCraftCellar
 
 	private void addDefaultHeatSources()
 	{
-		userHeatSources.addDefault("minecraft", "fire", UserHeatSourceEntry.newWildcardHeat(1.0f))
+		userApis.getUserHeatSources().addDefault("minecraft", "fire", UserHeatSourceEntry.newWildcardHeat(1.0f))
 			.setComment("Fire!");
-		userHeatSources.addDefault("minecraft", "flowing_lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
+		userApis.getUserHeatSources().addDefault("minecraft", "flowing_lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
 			.setComment("We need to register both states of lava, this when its flowing");
-		userHeatSources.addDefault("minecraft", "lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
+		userApis.getUserHeatSources().addDefault("minecraft", "lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
 			.setComment("And when its a still pool.");
 	}
 

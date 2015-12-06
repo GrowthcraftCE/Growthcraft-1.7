@@ -24,6 +24,7 @@
 package growthcraft.api.core.schema;
 
 import java.util.List;
+import javax.annotation.Nonnull;
 
 import growthcraft.api.core.definition.IItemStackListFactory;
 
@@ -34,18 +35,26 @@ public class ItemKeySchema extends ItemStackSchema implements IItemStackListFact
 {
 	public String ore;
 
-	public ItemKeySchema(String mid, String name, int amt, int mt)
+	public ItemKeySchema(@Nonnull String mid, @Nonnull String name, int amt, int mt)
 	{
 		super(mid, name, amt, mt);
 	}
 
-	public ItemKeySchema(String o, int amt)
+	public ItemKeySchema(@Nonnull String o, int amt)
 	{
 		this.ore = o;
 		this.amount = amt;
 	}
 
-	public ItemKeySchema() {}
+	public ItemKeySchema(@Nonnull ItemStack stack)
+	{
+		super(stack);
+	}
+
+	public ItemKeySchema()
+	{
+		super();
+	}
 
 	/**
 	 * @return list of ores or null if the name was invalid

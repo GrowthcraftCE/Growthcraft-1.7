@@ -21,40 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.schema;
+package growthcraft.api.cellar.util;
 
 import javax.annotation.Nonnull;
 
+import growthcraft.api.cellar.booze.BoozeEffect;
+import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.common.Residue;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
-public class ResidueSchema extends ItemStackSchema
+/**
+ * Now you can make the same awesome we use internally
+ */
+public interface ICellarBoozeBuilder
 {
-	public float pomace;
-
-	public ResidueSchema(@Nonnull Residue res)
-	{
-		super(res.residueItem);
-		this.pomace = res.pomaceRate;
-	}
-
-	public ResidueSchema()
-	{
-		super();
-		this.pomace = 1.0f;
-	}
-
-	public Residue asResidue()
-	{
-		final ItemStack itemStack = asStack();
-		if (itemStack == null) return null;
-		return new Residue(itemStack, pomace);
-	}
-
-	@Override
-	public String toString()
-	{
-		return super.toString() + " @" + pomace;
-	}
+	public ICellarBoozeBuilder tags(BoozeTag... tags);
+	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time, @Nonnull Residue residue);
+	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time, @Nonnull Residue residue);
+	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time);
+	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time);
+	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nonnull Residue residue);
+	public BoozeEffect getEffect();
 }

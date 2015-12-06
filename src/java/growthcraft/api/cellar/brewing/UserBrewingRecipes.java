@@ -23,6 +23,8 @@
  */
 package growthcraft.api.cellar.brewing;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.io.BufferedReader;
 
 import growthcraft.api.cellar.CellarRegistry;
@@ -41,7 +43,7 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public class UserBrewingRecipes extends JsonConfigDef
 {
-	public static class UserBrewingRecipeEntry implements ICommentable
+	public static class UserBrewingRecipe implements ICommentable
 	{
 		public String comment = "";
 		public ItemKeySchema item;
@@ -49,6 +51,17 @@ public class UserBrewingRecipes extends JsonConfigDef
 		public FluidStackSchema output_fluid;
 		public ResidueSchema residue;
 		public int time;
+
+		public UserBrewingRecipe(ItemKeySchema itm, FluidStackSchema inp, FluidStackSchema out, ResidueSchema res, int tm)
+		{
+			this.item = itm;
+			this.input_fluid = inp;
+			this.output_fluid = out;
+			this.residue = res;
+			this.time = tm;
+		}
+
+		public UserBrewingRecipe() {}
 
 		@Override
 		public String toString()
@@ -69,22 +82,41 @@ public class UserBrewingRecipes extends JsonConfigDef
 		}
 	}
 
-	private static final UserBrewingRecipeEntry[] DEFAULT_ENTRIES = {};
-	private UserBrewingRecipeEntry[] recipes;
+	private final List<UserBrewingRecipe> defaultEntries = new ArrayList<UserBrewingRecipe>();
+	private UserBrewingRecipe[] recipes;
+
+	public void addDefault(UserBrewingRecipe recipe)
+	{
+		defaultEntries.add(recipe);
+	}
+
+	public void addDefault(ItemStack stack, FluidStack inp, FluidStack out, Residue residue, int time)
+	{
+		addDefault(
+			new UserBrewingRecipe(
+				new ItemKeySchema(stack),
+				new FluidStackSchema(inp),
+				new FluidStackSchema(out),
+				new ResidueSchema(residue),
+				time
+			)
+		);
+	}
 
 	@Override
 	protected String getDefault()
 	{
-		return gson.toJson(DEFAULT_ENTRIES, UserBrewingRecipeEntry[].class);
+		final UserBrewingRecipe[] ary = defaultEntries.toArray(new UserBrewingRecipe[defaultEntries.size()]);
+		return gson.toJson(ary, UserBrewingRecipe[].class);
 	}
 
 	@Override
 	protected void loadFromBuffer(BufferedReader reader)
 	{
-		this.recipes = gson.fromJson(reader, UserBrewingRecipeEntry[].class);
+		this.recipes = gson.fromJson(reader, UserBrewingRecipe[].class);
 	}
 
-	private void addBrewingRecipe(UserBrewingRecipeEntry recipe)
+	private void addBrewingRecipe(UserBrewingRecipe recipe)
 	{
 		if (recipe == null)
 		{
@@ -143,7 +175,7 @@ public class UserBrewingRecipes extends JsonConfigDef
 		if (recipes != null)
 		{
 			logger.info("Adding %d brewing recipes.", recipes.length);
-			for (UserBrewingRecipeEntry recipe : recipes) addBrewingRecipe(recipe);
+			for (UserBrewingRecipe recipe : recipes) addBrewingRecipe(recipe);
 		}
 	}
 }

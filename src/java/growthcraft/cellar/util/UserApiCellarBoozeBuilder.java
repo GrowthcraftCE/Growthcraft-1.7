@@ -21,87 +21,65 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.util;
+package growthcraft.cellar.util;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.api.cellar.booze.BoozeEffect;
-import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.cellar.util.CellarBoozeBuilder;
+import growthcraft.api.cellar.util.ICellarBoozeBuilder;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 /**
- * If you find yourself making some seriously gnarly spaghetti code, this may
- * save you.
+ * This is a variant to the CellarBoozeBuilder provided in the API
+ * This version will route all its registrations to the User API instead
+ * of the internal registries.
  */
-public class CellarBoozeBuilder implements ICellarBoozeBuilder
+public class UserApiCellarBoozeBuilder extends CellarBoozeBuilder
 {
-	protected Fluid fluid;
+	private GrcCellarUserApis userApis;
 
-	public CellarBoozeBuilder(@Nonnull Fluid f)
+	public UserApiCellarBoozeBuilder(@Nonnull GrcCellarUserApis apis, @Nonnull Fluid fluid)
 	{
-		this.fluid = f;
-	}
-
-	public Fluid getFluid()
-	{
-		return fluid;
-	}
-
-	@Override
-	public ICellarBoozeBuilder tags(BoozeTag... tags)
-	{
-		CellarRegistry.instance().booze().addTags(fluid, tags);
-		return this;
+		super(fluid);
+		this.userApis = apis;
 	}
 
 	@Override
 	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time, @Nonnull Residue residue)
 	{
-		CellarRegistry.instance().brewing().addBrewing(new FluidStack(fluid, result.amount), stack, result, time, residue);
+		this.userApis.getUserBrewingRecipes().addDefault(stack, new FluidStack(fluid, result.amount), result, residue, time);
 		return this;
 	}
 
 	@Override
 	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time, @Nonnull Residue residue)
 	{
-		CellarRegistry.instance().brewing().addBrewing(src, stack, new FluidStack(fluid, src.amount), time, residue);
+		this.userApis.getUserBrewingRecipes().addDefault(stack, src, new FluidStack(fluid, src.amount), residue, time);
 		return this;
 	}
 
 	@Override
 	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time)
 	{
-		CellarRegistry.instance().fermenting().addFermentingRecipe(result, new FluidStack(fluid, result.amount), stack, time);
+		this.userApis.getUserFermentingRecipes().addDefault(stack, new FluidStack(fluid, result.amount), result, time);
 		return this;
 	}
 
 	@Override
 	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time)
 	{
-		CellarRegistry.instance().fermenting().addFermentingRecipe(new FluidStack(fluid, src.amount), src, stack, time);
+		this.userApis.getUserFermentingRecipes().addDefault(stack, src, new FluidStack(fluid, src.amount), time);
 		return this;
 	}
 
 	@Override
 	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nonnull Residue residue)
 	{
-		CellarRegistry.instance().pressing().addPressingRecipe(stack, new FluidStack(fluid, amount), time, residue);
+		this.userApis.getUserPressingRecipes().addDefault(stack, new FluidStack(fluid, amount), time, residue);
 		return this;
-	}
-
-	@Override
-	public BoozeEffect getEffect()
-	{
-		return CellarRegistry.instance().booze().getEffect(fluid);
-	}
-
-	public static CellarBoozeBuilder create(Fluid f)
-	{
-		return new CellarBoozeBuilder(f);
 	}
 }

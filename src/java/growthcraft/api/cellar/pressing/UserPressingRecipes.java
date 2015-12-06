@@ -23,6 +23,8 @@
  */
 package growthcraft.api.cellar.pressing;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.io.BufferedReader;
 
 import growthcraft.api.cellar.CellarRegistry;
@@ -43,13 +45,23 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public class UserPressingRecipes extends JsonConfigDef
 {
-	public static class UserPressingRecipeEntry implements ICommentable
+	public static class UserPressingRecipe implements ICommentable
 	{
 		public String comment = "";
 		public ItemKeySchema item;
 		public FluidStackSchema fluid;
-		public int time;
 		public ResidueSchema residue;
+		public int time;
+
+		public UserPressingRecipe(ItemKeySchema itm, FluidStackSchema fl, int tm, ResidueSchema res)
+		{
+			this.item = itm;
+			this.fluid = fl;
+			this.time = tm;
+			this.residue = res;
+		}
+
+		public UserPressingRecipe() {}
 
 		@Override
 		public String toString()
@@ -70,22 +82,43 @@ public class UserPressingRecipes extends JsonConfigDef
 		}
 	}
 
-	private static final UserPressingRecipeEntry[] DEFAULT_ENTRIES = {};
-	private UserPressingRecipeEntry[] recipes;
+	private final List<UserPressingRecipe> defaultEntries = new ArrayList<UserPressingRecipe>();
+	private UserPressingRecipe[] recipes;
+
+	public void addDefault(UserPressingRecipe recipe)
+	{
+		defaultEntries.add(recipe);
+	}
+
+	public void addDefault(ItemKeySchema itm, FluidStackSchema fl, int tm, ResidueSchema res)
+	{
+		addDefault(new UserPressingRecipe(itm, fl, tm, res));
+	}
+
+	public void addDefault(ItemStack stack, FluidStack fluid, int time, Residue res)
+	{
+		addDefault(
+			new ItemKeySchema(stack),
+			new FluidStackSchema(fluid),
+			time,
+			new ResidueSchema(res)
+		);
+	}
 
 	@Override
 	protected String getDefault()
 	{
-		return gson.toJson(DEFAULT_ENTRIES, UserPressingRecipeEntry[].class);
+		final UserPressingRecipe[] ary = defaultEntries.toArray(new UserPressingRecipe[defaultEntries.size()]);
+		return gson.toJson(ary, UserPressingRecipe[].class);
 	}
 
 	@Override
 	protected void loadFromBuffer(BufferedReader reader)
 	{
-		this.recipes = gson.fromJson(reader, UserPressingRecipeEntry[].class);
+		this.recipes = gson.fromJson(reader, UserPressingRecipe[].class);
 	}
 
-	protected void addPressingRecipe(UserPressingRecipeEntry recipe)
+	protected void addPressingRecipe(UserPressingRecipe recipe)
 	{
 		if (recipe == null)
 		{
@@ -142,7 +175,7 @@ public class UserPressingRecipes extends JsonConfigDef
 		if (recipes != null)
 		{
 			logger.info("Adding %d pressing recipes.", recipes.length);
-			for (UserPressingRecipeEntry recipe : recipes) addPressingRecipe(recipe);
+			for (UserPressingRecipe recipe : recipes) addPressingRecipe(recipe);
 		}
 	}
 }

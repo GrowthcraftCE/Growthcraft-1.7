@@ -92,8 +92,7 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 		logger.debug("Config file %s was set for %s", srcFile, this);
 	}
 
-	@Override
-	public void preInit()
+	public void loadConfig()
 	{
 		BufferedReader buffer = null;
 		UnicodeInputStreamReader input = null;
@@ -135,10 +134,16 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 	}
 
 	@Override
-	public void init() {}
+	public void preInit() {}
 
 	@Override
 	public void register() {}
+
+	@Override
+	public void init()
+	{
+		loadConfig();
+	}
 
 	@Override
 	public void postInit() {}

@@ -3,7 +3,6 @@ package growthcraft.hops.init;
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.common.Residue;
-import growthcraft.api.cellar.util.CellarBoozeBuilder;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
@@ -67,7 +66,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			fs[i] = new FluidStack(lagerBooze[i], 1);
 		}
 
-		CellarBoozeBuilder.create(lagerBooze[0])
+		GrowthCraftCellar.boozeBuilderFactory.create(lagerBooze[0])
 			.tags(BoozeTag.YOUNG, BoozeTag.CHILLED)
 			.brewsFrom(
 				new FluidStack(hopAleBooze[4], GrowthCraftHops.getConfig().lagerBrewYield),
@@ -75,7 +74,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				GrowthCraftHops.getConfig().lagerBrewTime,
 				Residue.newDefault(0.0F));
 
-		CellarBoozeBuilder.create(lagerBooze[1])
+		GrowthCraftCellar.boozeBuilderFactory.create(lagerBooze[1])
 			.tags(BoozeTag.FERMENTED, BoozeTag.CHILLED)
 			.fermentsFrom(fs[0], YeastType.BREWERS.asStack(), fermentTime)
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
@@ -84,7 +83,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				.addPotionEntry(Potion.moveSpeed, TickUtils.seconds(90), 0)
 				.addPotionEntry(Potion.digSpeed, TickUtils.seconds(90), 0);
 
-		CellarBoozeBuilder.create(lagerBooze[2])
+		GrowthCraftCellar.boozeBuilderFactory.create(lagerBooze[2])
 			.tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.POTENT)
 			.fermentsFrom(fs[1], new ItemStack(Items.glowstone_dust), fermentTime)
 			.fermentsFrom(fs[3], new ItemStack(Items.glowstone_dust), fermentTime)
@@ -93,7 +92,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				.addPotionEntry(Potion.moveSpeed, TickUtils.seconds(90), 0)
 				.addPotionEntry(Potion.digSpeed, TickUtils.seconds(90), 0);
 
-		CellarBoozeBuilder.create(lagerBooze[3])
+		GrowthCraftCellar.boozeBuilderFactory.create(lagerBooze[3])
 			.tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.EXTENDED)
 			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
 			.fermentsFrom(fs[2], new ItemStack(Items.redstone), fermentTime)
@@ -102,7 +101,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				.addPotionEntry(Potion.moveSpeed, TickUtils.seconds(90), 0)
 				.addPotionEntry(Potion.digSpeed, TickUtils.seconds(90), 0);
 
-		CellarBoozeBuilder.create(lagerBooze[4])
+		GrowthCraftCellar.boozeBuilderFactory.create(lagerBooze[4])
 			.tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.HYPER_EXTENDED)
 			.fermentsFrom(fs[2], YeastType.ETHEREAL.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ETHEREAL.asStack(), fermentTime)
@@ -111,7 +110,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				.addPotionEntry(Potion.moveSpeed, TickUtils.seconds(90), 0)
 				.addPotionEntry(Potion.digSpeed, TickUtils.seconds(90), 0);
 
-		CellarBoozeBuilder.create(lagerBooze[5])
+		GrowthCraftCellar.boozeBuilderFactory.create(lagerBooze[5])
 			.tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.INTOXICATED)
 			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ORIGIN.asStack(), fermentTime)
@@ -124,7 +123,7 @@ public class GrcHopsBooze extends GrcModuleBase
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.moveSpeed.id, TickUtils.minutes(3), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.moveSlowdown.id, TickUtils.minutes(3), 2))));
 
-		CellarBoozeBuilder.create(lagerBooze[6])
+		GrowthCraftCellar.boozeBuilderFactory.create(lagerBooze[6])
 			.tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.POISONED)
 			//.fermentsFrom(fs[2], YeastType.NETHERRASH.asStack(), fermentTime)
 			//.fermentsFrom(fs[3], YeastType.NETHERRASH.asStack(), fermentTime)
@@ -144,7 +143,7 @@ public class GrcHopsBooze extends GrcModuleBase
 		}
 
 		// Unhopped
-		CellarBoozeBuilder.create(hopAleBooze[4])
+		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[4])
 			.tags(BoozeTag.YOUNG)
 			.brewsFrom(
 				new FluidStack(FluidRegistry.WATER, GrowthCraftHops.getConfig().hopAleBrewYield),
@@ -152,7 +151,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				GrowthCraftHops.getConfig().hopAleBrewTime,
 				Residue.newDefault(0.3F));
 
-		CellarBoozeBuilder.create(hopAleBooze[0])
+		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[0])
 			.tags(BoozeTag.YOUNG, BoozeTag.HOPPED)
 			.brewsFrom(
 				new FluidStack(hopAleBooze[4], GrowthCraftHops.getConfig().hopAleHoppedBrewYield),
@@ -160,7 +159,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				GrowthCraftHops.getConfig().hopAleHoppedBrewTime,
 				Residue.newDefault(0.0F));
 
-		CellarBoozeBuilder.create(hopAleBooze[1])
+		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[1])
 			.tags(BoozeTag.FERMENTED)
 			.fermentsFrom(fs[0], YeastType.BREWERS.asStack(), fermentTime)
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
@@ -169,7 +168,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				.addPotionEntry(Potion.digSpeed, TickUtils.minutes(3), 0);
 
 		// Glowstone
-		CellarBoozeBuilder.create(hopAleBooze[2])
+		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[2])
 			.tags(BoozeTag.HOPPED, BoozeTag.FERMENTED, BoozeTag.POTENT)
 			.fermentsFrom(fs[1], new ItemStack(Items.glowstone_dust), fermentTime)
 			.fermentsFrom(fs[3], new ItemStack(Items.glowstone_dust), fermentTime)
@@ -178,7 +177,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				.addPotionEntry(Potion.digSpeed, TickUtils.minutes(3), 0);
 
 		// Redstone
-		CellarBoozeBuilder.create(hopAleBooze[3])
+		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[3])
 			.tags(BoozeTag.HOPPED, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
 			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
 			.fermentsFrom(fs[2], new ItemStack(Items.redstone), fermentTime)
@@ -187,7 +186,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				.addPotionEntry(Potion.digSpeed, TickUtils.minutes(3), 0);
 
 		// Ethereal Yeast
-		CellarBoozeBuilder.create(hopAleBooze[5])
+		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[5])
 			.tags(BoozeTag.HOPPED, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
 			.fermentsFrom(fs[2], YeastType.ETHEREAL.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ETHEREAL.asStack(), fermentTime)
@@ -196,7 +195,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				.addPotionEntry(Potion.digSpeed, TickUtils.minutes(3), 0);
 
 		// Lager Yeast
-		CellarBoozeBuilder.create(hopAleBooze[6])
+		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[6])
 			.tags(BoozeTag.HOPPED, BoozeTag.FERMENTED, BoozeTag.CHILLED)
 			.fermentsFrom(fs[5], YeastType.LAGER.asStack(), fermentTime)
 			.getEffect()
@@ -204,7 +203,7 @@ public class GrcHopsBooze extends GrcModuleBase
 				.addPotionEntry(Potion.digSpeed, TickUtils.minutes(10), 2);
 
 		// Intoxicated - Origin
-		CellarBoozeBuilder.create(hopAleBooze[7])
+		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[7])
 			.tags(BoozeTag.HOPPED, BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
 			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ORIGIN.asStack(), fermentTime)
@@ -217,7 +216,7 @@ public class GrcHopsBooze extends GrcModuleBase
 		// Poisoned - Netherrash
 		// Regardless of what you brewed it with, it will kill the hops in the
 		// booze and poison it.
-		CellarBoozeBuilder.create(hopAleBooze[8])
+		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[8])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
 			//.fermentsFrom(fs[1], YeastType.NETHERRASH.asStack(), fermentTime)
 			//.fermentsFrom(fs[2], YeastType.NETHERRASH.asStack(), fermentTime)

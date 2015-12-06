@@ -21,40 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.schema;
+package growthcraft.cellar.util;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.cellar.util.ICellarBoozeBuilder;
 
-import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 
-public class ResidueSchema extends ItemStackSchema
+public class CellarBoozeBuilderFactory
 {
-	public float pomace;
+	private GrcCellarUserApis userApis;
 
-	public ResidueSchema(@Nonnull Residue res)
+	public CellarBoozeBuilderFactory(@Nonnull GrcCellarUserApis apis)
 	{
-		super(res.residueItem);
-		this.pomace = res.pomaceRate;
+		this.userApis = apis;
 	}
 
-	public ResidueSchema()
+	public ICellarBoozeBuilder create(@Nonnull Fluid fluid)
 	{
-		super();
-		this.pomace = 1.0f;
-	}
-
-	public Residue asResidue()
-	{
-		final ItemStack itemStack = asStack();
-		if (itemStack == null) return null;
-		return new Residue(itemStack, pomace);
-	}
-
-	@Override
-	public String toString()
-	{
-		return super.toString() + " @" + pomace;
+		return new UserApiCellarBoozeBuilder(userApis, fluid);
 	}
 }

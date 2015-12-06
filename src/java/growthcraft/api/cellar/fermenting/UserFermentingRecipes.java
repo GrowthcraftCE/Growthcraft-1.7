@@ -34,6 +34,7 @@ import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.util.JsonConfigDef;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 public class UserFermentingRecipes extends JsonConfigDef
 {
@@ -85,6 +86,16 @@ public class UserFermentingRecipes extends JsonConfigDef
 	public void addDefault(ItemKeySchema item, FluidStackSchema inputFluid, FluidStackSchema outputFluid, int time)
 	{
 		addDefault(new UserFermentingRecipe(item, inputFluid, outputFluid, time));
+	}
+
+	public void addDefault(ItemStack stack, FluidStack inputFluid, FluidStack outputFluid, int time)
+	{
+		addDefault(
+			new ItemKeySchema(stack),
+			new FluidStackSchema(inputFluid),
+			new FluidStackSchema(outputFluid),
+			time
+		);
 	}
 
 	@Override

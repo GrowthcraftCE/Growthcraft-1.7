@@ -23,6 +23,8 @@
  */
 package growthcraft.api.core.schema;
 
+import javax.annotation.Nonnull;
+
 import growthcraft.api.core.definition.IFluidStackFactory;
 
 import net.minecraftforge.fluids.Fluid;
@@ -35,16 +37,22 @@ public class FluidStackSchema implements IFluidStackFactory, IValidatable, IComm
 	public String name;
 	public int amount = 1;
 
-	public FluidStackSchema(String nm, int amt)
+	public FluidStackSchema(@Nonnull String nm, int amt)
 	{
 		this.name = nm;
 		this.amount = amt;
 	}
 
+	public FluidStackSchema(@Nonnull FluidStack stack)
+	{
+		this.name = stack.getFluid().getName();
+		this.amount = stack.amount;
+	}
+
 	public FluidStackSchema() {}
 
 	@Override
-	public void setComment(String comm)
+	public void setComment(@Nonnull String comm)
 	{
 		this.comment = comm;
 	}

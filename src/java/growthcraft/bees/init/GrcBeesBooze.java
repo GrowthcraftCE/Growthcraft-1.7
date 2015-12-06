@@ -2,7 +2,6 @@ package growthcraft.bees.init;
 
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.util.CellarBoozeBuilder;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
@@ -53,10 +52,10 @@ public class GrcBeesBooze extends GrcModuleBase
 			fs[i] = new FluidStack(honeyMeadBooze[i], 1);
 		}
 
-		CellarBoozeBuilder.create(honeyMeadBooze[0])
+		GrowthCraftCellar.boozeBuilderFactory.create(honeyMeadBooze[0])
 			.tags(BoozeTag.YOUNG);
 
-		CellarBoozeBuilder.create(honeyMeadBooze[1])
+		GrowthCraftCellar.boozeBuilderFactory.create(honeyMeadBooze[1])
 			.tags(BoozeTag.FERMENTED)
 			.fermentsFrom(fs[0], YeastType.BREWERS.asStack(), fermentTime)
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
@@ -64,7 +63,7 @@ public class GrcBeesBooze extends GrcModuleBase
 				.setTipsy(0.60F, TickUtils.seconds(90))
 				.addPotionEntry(Potion.regeneration, TickUtils.seconds(90), 0);
 
-		CellarBoozeBuilder.create(honeyMeadBooze[2])
+		GrowthCraftCellar.boozeBuilderFactory.create(honeyMeadBooze[2])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT)
 			.fermentsFrom(fs[1], new ItemStack(Items.glowstone_dust), fermentTime)
 			.fermentsFrom(fs[3], new ItemStack(Items.glowstone_dust), fermentTime)
@@ -72,7 +71,7 @@ public class GrcBeesBooze extends GrcModuleBase
 				.setTipsy(0.60F, TickUtils.seconds(90))
 				.addPotionEntry(Potion.regeneration, TickUtils.seconds(90), 0);
 
-		CellarBoozeBuilder.create(honeyMeadBooze[3])
+		GrowthCraftCellar.boozeBuilderFactory.create(honeyMeadBooze[3])
 			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED)
 			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
 			.fermentsFrom(fs[2], new ItemStack(Items.redstone), fermentTime)
@@ -80,7 +79,7 @@ public class GrcBeesBooze extends GrcModuleBase
 				.setTipsy(0.60F, TickUtils.seconds(90))
 				.addPotionEntry(Potion.regeneration, TickUtils.seconds(90), 0);
 
-		CellarBoozeBuilder.create(honeyMeadBooze[4])
+		GrowthCraftCellar.boozeBuilderFactory.create(honeyMeadBooze[4])
 			.tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
 			.fermentsFrom(fs[2], YeastType.ETHEREAL.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ETHEREAL.asStack(), fermentTime)
@@ -88,7 +87,7 @@ public class GrcBeesBooze extends GrcModuleBase
 				.setTipsy(0.60F, TickUtils.seconds(90))
 				.addPotionEntry(Potion.regeneration, TickUtils.seconds(90), 0);
 
-		CellarBoozeBuilder.create(honeyMeadBooze[5])
+		GrowthCraftCellar.boozeBuilderFactory.create(honeyMeadBooze[5])
 			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
 			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ORIGIN.asStack(), fermentTime)
@@ -99,7 +98,7 @@ public class GrcBeesBooze extends GrcModuleBase
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.poison.id, TickUtils.seconds(90), 2)))
 				);
 
-		CellarBoozeBuilder.create(honeyMeadBooze[6])
+		GrowthCraftCellar.boozeBuilderFactory.create(honeyMeadBooze[6])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
 			//.fermentsFrom(fs[0], YeastType.NETHERRASH.asStack(), fermentTime)
 			//.fermentsFrom(fs[1], YeastType.NETHERRASH.asStack(), fermentTime)
