@@ -33,7 +33,26 @@ import net.minecraftforge.common.BiomeDictionary;
 
 public interface IYeastRegistry extends ILoggable
 {
+	/**
+	 * Adds the given ItemStack as a possible yeast item
+	 *
+	 * @param yeast - an item
+	 */
+	void addYeast(ItemStack yeast);
+
+	boolean isYeast(ItemStack yeast);
+
+	/**
+	 * Maps the given yeast item to the given biome type, when a Yeast Jar
+	 * is placed into a biome of that type, it MAY produce the yeast item.
+	 * NOTE. This method SHOULD use addYeast to add the given yeast item to the
+	 *       known list.
+	 *
+	 * @param yeast - an item
+	 * @param type - the biome type to add
+	 */
 	void addYeastToBiomeType(ItemStack yeast, BiomeDictionary.Type type);
+
 	List<ItemStack> getYeastListForBiomeType(BiomeDictionary.Type type);
 	List<BiomeDictionary.Type> getBiomeTypesForYeast(ItemStack yeast);
 	boolean canYeastFormInBiome(ItemStack yeast, BiomeGenBase biome);

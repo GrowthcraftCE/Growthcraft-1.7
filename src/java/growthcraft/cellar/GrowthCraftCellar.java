@@ -41,6 +41,7 @@ import growthcraft.cellar.stats.CellarAchievement;
 import growthcraft.cellar.stats.GrcCellarAchievements;
 import growthcraft.cellar.util.CellarBoozeBuilderFactory;
 import growthcraft.cellar.util.GrcCellarUserApis;
+import growthcraft.cellar.util.YeastType;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.integration.NEI;
@@ -287,10 +288,20 @@ public class GrowthCraftCellar
 		OreDictionary.registerOre("materialYeast", yeast.getItem());
 	}
 
+	private void registerYeast()
+	{
+		CellarRegistry.instance().yeast().addYeast(YeastType.BREWERS.asStack());
+		CellarRegistry.instance().yeast().addYeast(YeastType.LAGER.asStack());
+		CellarRegistry.instance().yeast().addYeast(YeastType.BAYANUS.asStack());
+		CellarRegistry.instance().yeast().addYeast(YeastType.ETHEREAL.asStack());
+		CellarRegistry.instance().yeast().addYeast(YeastType.ORIGIN.asStack());
+	}
+
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
 		registerOres();
+		registerYeast();
 
 		packetPipeline.initialise();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerCellar());

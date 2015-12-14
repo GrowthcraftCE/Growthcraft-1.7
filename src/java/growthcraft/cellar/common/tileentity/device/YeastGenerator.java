@@ -96,7 +96,7 @@ public class YeastGenerator extends DeviceProgressive
 		else
 		{
 			final ItemStack contents = getInventory().getStackInSlot(invSlot);
-			if (CellarRegistry.instance().yeast().canYeastFormInBiome(contents, getCurrentBiome()))
+			if (CellarRegistry.instance().yeast().isYeast(contents))
 			{
 				getInventory().setInventorySlotContents(invSlot, ItemUtils.increaseStack(contents));
 				consumeFluid();

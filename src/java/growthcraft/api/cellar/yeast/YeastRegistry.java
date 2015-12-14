@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.core.log.ILogger;
@@ -39,6 +41,7 @@ import net.minecraftforge.common.BiomeDictionary;
 
 public class YeastRegistry implements IYeastRegistry
 {
+	private Set<ItemKey> yeastList = new HashSet<ItemKey>();
 	private Map<BiomeDictionary.Type, List<ItemStack>> biomeToYeast = new HashMap<BiomeDictionary.Type, List<ItemStack>>();
 	private Map<ItemKey, List<BiomeDictionary.Type>> yeastToBiome = new HashMap<ItemKey, List<BiomeDictionary.Type>>();
 	private ILogger logger = NullLogger.INSTANCE;
@@ -55,8 +58,23 @@ public class YeastRegistry implements IYeastRegistry
 	}
 
 	@Override
+	public void addYeast(@Nonnull ItemStack yeast)
+	{
+		yeastList.add(stackToKey(yeast));
+	}
+
+	@Override
+	public boolean isYeast(ItemStack yeast)
+	{
+		if (yeast == null) return false;
+		if (yeast.getItem() == null) return false;
+		return yeastList.contains(stackToKey(yeast));
+	}
+
+	@Override
 	public void addYeastToBiomeType(@Nonnull ItemStack yeast, BiomeDictionary.Type type)
 	{
+		addYeast(yeast);
 		if (!biomeToYeast.containsKey(type))
 		{
 			biomeToYeast.put(type, new ArrayList<ItemStack>());
