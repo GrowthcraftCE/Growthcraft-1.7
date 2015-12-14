@@ -78,6 +78,12 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 		}
 	}
 
+	private void removeLeaves(World world, int x, int y, int z)
+	{
+		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		world.setBlockToAir(x, y, z);
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -202,12 +208,6 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 				}
 			}
 		}
-	}
-
-	private void removeLeaves(World world, int x, int y, int z)
-	{
-		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		world.setBlockToAir(x, y, z);
 	}
 
 	@Override

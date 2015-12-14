@@ -39,6 +39,12 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 		this.setBlockName("grc.bambooLeaves");
 	}
 
+	private void removeLeaves(World world, int x, int y, int z)
+	{
+		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		world.setBlockToAir(x, y, z);
+	}
+
 	/************
 	 * TICK
 	 ************/
@@ -144,7 +150,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 
 				if (l1 >= 0)
 				{
-					world.setBlockMetadataWithNotify(x, y, z, meta & -9, 4);
+					world.setBlockMetadataWithNotify(x, y, z, meta & -9, BlockFlags.SUPRESS_RENDER);
 				}
 				else
 				{
@@ -195,12 +201,6 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 				}
 			}
 		}
-	}
-
-	private void removeLeaves(World world, int x, int y, int z)
-	{
-		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		world.setBlockToAir(x, y, z);
 	}
 
 	/************
