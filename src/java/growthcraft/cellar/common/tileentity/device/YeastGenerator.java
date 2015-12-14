@@ -36,21 +36,56 @@ public class YeastGenerator extends DeviceProgressive
 		setTimeMax(1200);
 	}
 
-	public YeastGenerator setConsumption(int t)
+	/**
+	 * How many fluid units are consumed per yeast gen?
+	 *
+	 * @param c - fluid consumption in milli-buckets
+	 */
+	public YeastGenerator setConsumption(int c)
 	{
-		this.consumption = t;
+		this.consumption = c;
 		return this;
 	}
 
+	/**
+	 * Returns the current biome of the Yeast Generator's parent TileEntity.
+	 *
+	 * @return biome
+	 */
 	public BiomeGenBase getCurrentBiome()
 	{
 		return getWorld().getBiomeGenForCoords(parent.xCoord, parent.zCoord);
 	}
 
+	/**
+	 * Determines if the given item stack can be replicated as a yeast item
+	 *
+	 * @param stack - item stack to test
+	 * @return true, it can be replicated, false otherwise
+	 */
+	public boolean canReplicateYeast(ItemStack stack)
+	{
+		// prevent production if the stack size is currently maxed
+		if (stack.stackSize >= stack.getMaxStackSize()) return false;
+		// prevent item pointless ticking with invalid items
+		if (!CellarRegistry.instance().yeast().isYeast(stack)) return false;
+		return true;
+	}
+
+	/**
+	 * Determines if the jar can produce any yeast
+	 *
+	 * @return true, the generator can produce yeast, false otherwise
+	 */
 	public boolean canProduceYeast()
 	{
 		if (parent.getFluidAmount(0) < consumption) return false;
-
+		final ItemStack yeastItem = getInventory().getStackInSlot(invSlot);
+		// we can ignore null items, this will fallback to the initProduceYeast
+		if (yeastItem != null)
+		{
+			if (!canReplicateYeast(yeastItem)) return false;
+		}
 		return CellarRegistry.instance().booze().hasTags(parent.getFluid(fluidSlot), BoozeTag.YOUNG);
 	}
 
@@ -96,7 +131,12 @@ public class YeastGenerator extends DeviceProgressive
 		else
 		{
 			final ItemStack contents = getInventory().getStackInSlot(invSlot);
-			if (CellarRegistry.instance().yeast().isYeast(contents))
+			// ensure that the item is indeed some form of yeast, prevents item duplication
+			// while canProduceYeast will prevent invalid items from popping up
+			// produceYeast is public, and can be called outside the update
+			// logic to force yeast generation, as such, this must ensure
+			// item correctness
+			if (canReplicateYeast(contents))
 			{
 				getInventory().setInventorySlotContents(invSlot, ItemUtils.increaseStack(contents));
 				consumeFluid();
