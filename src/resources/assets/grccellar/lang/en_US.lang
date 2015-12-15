@@ -6,7 +6,7 @@ tile.grc.fruitPress.name=Fruit Press
 tile.grc.fruitPresser.name=Fruit Press
 tile.grc.brewKettle.name=Brew Kettle
 tile.grc.fermentBarrel.name=Fermentation Barrel
-tile.grc.fermentJar.name=Yeast Jar
+tile.grc.fermentJar.name=Culture Jar
 
 # Items
 # Please remove this field once all other module translations have been updated,
@@ -55,7 +55,7 @@ grc.booze.modifier.extended=Extended
 grc.booze.modifier.fermented=Fermented
 grc.booze.modifier.fortified=Fortified
 grc.booze.modifier.hopped=Hopped
-grc.booze.modifier.hyper_extended=Hyperextended
+grc.booze.modifier.hyper_extended=Hyper-extended
 grc.booze.modifier.intoxicated=Intoxicated
 grc.booze.modifier.magical=Magical
 grc.booze.modifier.poisoned=Poisoned
