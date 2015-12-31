@@ -3,41 +3,50 @@ package growthcraft.api.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.NullLogger;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 
-import org.apache.logging.log4j.Level;
-import cpw.mods.fml.common.FMLLog;
-
-public class CoreRegistry
+public class CoreRegistry implements ILoggable
 {
-	class VineEntry extends WeightedRandom.Item
+	public static class VineEntry extends WeightedRandom.Item
 	{
-		public final ItemStack vine;
-		public VineEntry(ItemStack vine, int weight)
+		private final ItemStack item;
+
+		public VineEntry(ItemStack v, int weight)
 		{
 			super(weight);
-			this.vine = vine;
+			this.item = v;
+		}
+
+		public ItemStack getItemStack()
+		{
+			return item;
 		}
 	}
-	/**
-	 * Gwafu:
-	 *
-	 * Yes, it's the same functons/methods as Forge's tall grass hook.
-	 */
+
+	private static final CoreRegistry instance = new CoreRegistry();
+
+	protected ILogger logger = NullLogger.INSTANCE;
+	private final List<VineEntry> vineList = new ArrayList<VineEntry>();
 
 	/**
 	 * @return vine drop list
 	 */
-	public List<VineEntry> getList(){ return vineList; }
+	public List<VineEntry> getList() { return vineList; }
 
-	private final List<VineEntry> vineList = new ArrayList<VineEntry>();
-
-	private static final CoreRegistry instance = new CoreRegistry();
 	public static final CoreRegistry instance()
 	{
 		return instance;
+	}
+
+	public void setLogger(ILogger l)
+	{
+		this.logger = l;
 	}
 
 	///////////////////////////////////////////////////////////////////////
@@ -54,10 +63,7 @@ public class CoreRegistry
 	{
 		if (weight <= 0)
 		{
-			FMLLog.log("Growthcraft", Level.WARN,
-			 	"RARITY/WEIGHT WAS SET TO 0 FOR ITEM: " +
-			 	item.getUnlocalizedName() +
-			 	", THE WORLD IS CRUMBLING, WHAT HAVE YOU DONE ~ IceDragon. Go set it to 1 or something.");
+			logger.warn("RARITY/WEIGHT WAS SET TO 0 FOR ITEM: %s, THE WORLD IS CRUMBLING, WHAT HAVE YOU DONE ~ IceDragon. Go set it to 1 or something.", item.getUnlocalizedName());
 			weight = 1;
 		}
 		this.vineList.add(new VineEntry(item, weight));
@@ -80,9 +86,9 @@ public class CoreRegistry
 		final List<VineEntry> vineEntries = getList();
 		if (vineEntries.isEmpty()) return null;
 
-		VineEntry entry = (VineEntry)WeightedRandom.getRandomItem(world.rand, vineEntries);
-		if (entry == null || entry.vine == null) return null;
+		final VineEntry entry = (VineEntry)WeightedRandom.getRandomItem(world.rand, vineEntries);
+		if (entry == null || entry.getItemStack() == null) return null;
 
-		return entry.vine.copy();
+		return entry.getItemStack().copy();
 	}
 }

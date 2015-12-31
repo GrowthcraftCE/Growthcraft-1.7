@@ -1,84 +1,74 @@
 package growthcraft.grapes;
 
-import java.io.File;
-
-import growthcraft.api.cellar.Booze;
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
-import growthcraft.cellar.block.BlockFluidBooze;
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
-import growthcraft.cellar.item.ItemBucketBooze;
-import growthcraft.cellar.utils.BoozeRegistryHelper;
+import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
+import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
-import growthcraft.grapes.block.BlockGrapeBlock;
-import growthcraft.grapes.block.BlockGrapeLeaves;
-import growthcraft.grapes.block.BlockGrapeVine0;
-import growthcraft.grapes.block.BlockGrapeVine1;
+import growthcraft.core.util.MapGenHelper;
+import growthcraft.grapes.common.block.BlockGrapeBlock;
+import growthcraft.grapes.common.block.BlockGrapeLeaves;
+import growthcraft.grapes.common.block.BlockGrapeVine0;
+import growthcraft.grapes.common.block.BlockGrapeVine1;
+import growthcraft.grapes.common.CommonProxy;
+import growthcraft.grapes.common.item.ItemGrapes;
+import growthcraft.grapes.common.item.ItemGrapeSeeds;
+import growthcraft.grapes.common.village.ComponentVillageGrapeVineyard;
+import growthcraft.grapes.common.village.VillageHandlerGrapes;
 import growthcraft.grapes.event.BonemealEventGrapes;
-import growthcraft.grapes.item.ItemGrapes;
-import growthcraft.grapes.item.ItemGrapeSeeds;
-import growthcraft.grapes.village.ComponentVillageGrapeVineyard;
-import growthcraft.grapes.village.VillageHandlerGrapes;
+import growthcraft.grapes.init.GrcGrapesBooze;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-@Mod(modid = "Growthcraft|Grapes",name = "Growthcraft Grapes",version = "@VERSION@",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
+@Mod(
+	modid = GrowthCraftGrapes.MOD_ID,
+	name = GrowthCraftGrapes.MOD_NAME,
+	version = GrowthCraftGrapes.MOD_VERSION,
+	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@"
+)
 public class GrowthCraftGrapes
 {
-	@Instance("Growthcraft|Grapes")
+	public static final String MOD_ID = "Growthcraft|Grapes";
+	public static final String MOD_NAME = "Growthcraft Grapes";
+	public static final String MOD_VERSION = "@VERSION@";
+
+	@Instance(MOD_ID)
 	public static GrowthCraftGrapes instance;
 
-	@SidedProxy(clientSide="growthcraft.grapes.ClientProxy", serverSide="growthcraft.grapes.CommonProxy")
-	public static CommonProxy proxy;
+	public static BlockTypeDefinition<BlockGrapeVine0> grapeVine0;
+	public static BlockTypeDefinition<BlockGrapeVine1> grapeVine1;
+	public static BlockTypeDefinition<BlockGrapeLeaves> grapeLeaves;
+	public static BlockDefinition grapeBlock;
+	public static ItemDefinition grapes;
+	public static ItemDefinition grapeSeeds;
+	public static GrcGrapesBooze booze = new GrcGrapesBooze();
 
-	public static BlockGrapeVine0 grapeVine0;
-	public static BlockGrapeVine1 grapeVine1;
-	public static Block grapeLeaves;
-	public static Block grapeBlock;
-	public static BlockFluidBooze[] grapeWineFluids;
-	public static Item grapes;
-	public static Item grapeSeeds;
-	public static Item grapeWine;
-	public static Item grapeWineBucket_deprecated;
-	public static ItemBucketBooze[] grapeWineBuckets;
+	private ILogger logger = new GrcLogger(MOD_ID);
+	private GrcGrapesConfig config = new GrcGrapesConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	public static Fluid[] grapeWineBooze;
-
-	private growthcraft.grapes.Config config;
-
-	public static growthcraft.grapes.Config getConfig()
+	public static GrcGrapesConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -86,102 +76,89 @@ public class GrowthCraftGrapes
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.grapes.Config();
+		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
+
+		modules.add(booze);
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.grapes.integration.ThaumcraftModule());
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================
 		// INIT
 		//====================
-		grapeVine0  = new BlockGrapeVine0();
-		grapeVine1  = new BlockGrapeVine1();
-		grapeLeaves = new BlockGrapeLeaves();
-		grapeBlock  = new BlockGrapeBlock();
+		grapeVine0  = new BlockTypeDefinition<BlockGrapeVine0>(new BlockGrapeVine0());
+		grapeVine1  = new BlockTypeDefinition<BlockGrapeVine1>(new BlockGrapeVine1());
+		grapeLeaves = new BlockTypeDefinition<BlockGrapeLeaves>(new BlockGrapeLeaves());
+		grapeBlock  = new BlockDefinition(new BlockGrapeBlock());
 
-		grapes     = new ItemGrapes();
-		grapeSeeds = new ItemGrapeSeeds();
+		grapes     = new ItemDefinition(new ItemGrapes());
+		grapeSeeds = new ItemDefinition(new ItemGrapeSeeds());
 
-		grapeWineBooze = new Booze[4];
-		grapeWineFluids = new BlockFluidBooze[grapeWineBooze.length];
-		grapeWineBuckets = new ItemBucketBooze[grapeWineBooze.length];
-		BoozeRegistryHelper.initializeBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, "grc.grapeWine", config.grapeWineColor);
+		grapeVine1.getBlock().setItemDrop(grapeSeeds.asStack(1));
 
-		grapeWine        = (new ItemBoozeBottle(2, -0.3F, grapeWineBooze))
-			.setColor(config.grapeWineColor)
-			.setTipsy(0.60F, 900)
-			.setPotionEffects(new int[] {Potion.resistance.id}, new int[] {3600});
-		grapeWineBucket_deprecated = (new ItemBoozeBucketDEPRECATED(grapeWineBooze))
-			.setColor(config.grapeWineColor);
+		modules.preInit();
+		register();
+	}
 
-		//====================
-		// REGISTRIES
-		//====================
+	private void register()
+	{
+		GameRegistry.registerBlock(grapeVine0.getBlock(), "grc.grapeVine0");
+		GameRegistry.registerBlock(grapeVine1.getBlock(), "grc.grapeVine1");
+		GameRegistry.registerBlock(grapeLeaves.getBlock(), "grc.grapeLeaves");
+		GameRegistry.registerBlock(grapeBlock.getBlock(), "grc.grapeBlock");
 
-		GameRegistry.registerBlock(grapeVine0, "grc.grapeVine0");
-		GameRegistry.registerBlock(grapeVine1, "grc.grapeVine1");
-		GameRegistry.registerBlock(grapeLeaves, "grc.grapeLeaves");
-		GameRegistry.registerBlock(grapeBlock, "grc.grapeBlock");
+		GameRegistry.registerItem(grapes.getItem(), "grc.grapes");
+		GameRegistry.registerItem(grapeSeeds.getItem(), "grc.grapeSeeds");
 
-		GameRegistry.registerItem(grapes, "grc.grapes");
-		GameRegistry.registerItem(grapeSeeds, "grc.grapeSeeds");
-		GameRegistry.registerItem(grapeWine, "grc.grapeWine");
-		GameRegistry.registerItem(grapeWineBucket_deprecated, "grc.grapeWine_bucket");
+		CoreRegistry.instance().addVineDrop(grapes.asStack(), config.vineGrapeDropRarity);
 
-		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, grapeWine, "grc.grapeWine", grapeWineBucket_deprecated);
+		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(grapes.asStack(), 1, 2, 10));
+		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(grapes.asStack(), 1, 2, 10));
 
-		CellarRegistry.instance().pressing().addPressing(grapes, grapeWineBooze[0], config.grapeWinePressingTime, 40, 0.3F);
-
-		CoreRegistry.instance().addVineDrop(new ItemStack(grapes), config.vineGrapeDropRarity);
-
-		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(new ItemStack(grapes), 1, 2, 10));
-		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(new ItemStack(grapes), 1, 2, 10));
-
-		try
-		{
-			MapGenStructureIO.func_143031_a(ComponentVillageGrapeVineyard.class, "grc.grapevineyard");
-		}
-		catch (Throwable e) {}
+		MapGenHelper.registerVillageStructure(ComponentVillageGrapeVineyard.class, "grc.grapevineyard");
 
 		//====================
 		// ADDITIONAL PROPS.
 		//====================
-		Blocks.fire.setFireInfo(grapeLeaves, 30, 60);
+		Blocks.fire.setFireInfo(grapeLeaves.getBlock(), 30, 60);
 
 		//====================
 		// ORE DICTIONARY
 		//====================
-		OreDictionary.registerOre("cropGrapes", grapes);
-		OreDictionary.registerOre("foodGrapes", grapes);
-		OreDictionary.registerOre("seedGrapes", grapeSeeds);
+		OreDictionary.registerOre("cropGrapes", grapes.getItem());
+		OreDictionary.registerOre("foodGrapes", grapes.getItem());
+		OreDictionary.registerOre("seedGrapes", grapeSeeds.getItem());
 		// For Pam's HarvestCraft
 		// Uses the same OreDict. names as HarvestCraft
-		OreDictionary.registerOre("cropGrape", grapes);
-		OreDictionary.registerOre("seedGrape", grapeSeeds);
-		OreDictionary.registerOre("foodGrapejuice", new ItemStack(grapeWine, 1, 0));
-		OreDictionary.registerOre("listAllseed", grapeSeeds);
-		OreDictionary.registerOre("listAllfruit", grapes);
+		OreDictionary.registerOre("cropGrape", grapes.getItem());
+		OreDictionary.registerOre("seedGrape", grapeSeeds.getItem());
+		OreDictionary.registerOre("listAllseed", grapeSeeds.getItem());
+		OreDictionary.registerOre("listAllfruit", grapes.getItem());
 
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addShapelessRecipe(new ItemStack(grapeSeeds, 1), grapes);
+		GameRegistry.addShapelessRecipe(grapeSeeds.asStack(), grapes.getItem());
 
-		NEI.hideItem(new ItemStack(grapeVine0));
-		NEI.hideItem(new ItemStack(grapeVine1));
-		NEI.hideItem(new ItemStack(grapeBlock));
+		NEI.hideItem(grapeVine0.asStack());
+		NEI.hideItem(grapeVine1.asStack());
+		NEI.hideItem(grapeBlock.asStack());
 
 		MinecraftForge.EVENT_BUS.register(this);
+		modules.register();
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
+		CommonProxy.instance.initRenders();
 
-		VillageHandlerGrapes handler = new VillageHandlerGrapes();
+		final VillageHandlerGrapes handler = new VillageHandlerGrapes();
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 
-		FMLInterModComms.sendMessage("Thaumcraft", "harvestStandardCrop", new ItemStack(grapeBlock));
+		modules.init();
 	}
 
 	@SubscribeEvent
@@ -190,9 +167,9 @@ public class GrowthCraftGrapes
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < grapeWineBooze.length; ++i)
+			for (int i = 0; i < booze.grapeWineBooze.length; ++i)
 			{
-				grapeWineBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				booze.grapeWineBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}
@@ -202,72 +179,6 @@ public class GrowthCraftGrapes
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventGrapes());
 
-		/*String modid;
-
-		modid = "Forestry";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				if (RecipeManagers.squeezerManager != null && ForestryAPI.activeMode != null)
-				{
-					if (FluidRegistry.isFluidRegistered("seedoil"))
-					{
-						int amount = ForestryAPI.activeMode.getIntegerSetting("squeezer.liquid.seed");
-						RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[] {new ItemStack(grapeSeeds)}, FluidRegistry.getFluidStack("seedoil", amount));
-					}
-
-					Item item = GameRegistry.findItem("Forestry", "mulch");
-					if (FluidRegistry.isFluidRegistered("juice") && item != null);
-					{
-						int amount = ForestryAPI.activeMode.getIntegerSetting("squeezer.liquid.apple");
-						RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[] {new ItemStack(grapes)}, FluidRegistry.getFluidStack("juice", amount), new ItemStack(item), 10);
-					}
-				}
-
-				if (BackpackManager.backpackItems[2] != null)
-				{
-					BackpackManager.backpackItems[2].add(new ItemStack(grapes));
-					BackpackManager.backpackItems[2].add(new ItemStack(grapeSeeds));
-				}
-
-				FMLLog.info("[Growthcraft|Grapes] Successfully integrated with Forestry.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Grapes] Forestry not found. No integration made.", new Object[0]);
-			}
-		}
-
-		modid = "Thaumcraft";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				ThaumcraftApi.registerObjectTag(grapeSeeds.itemID, -1, new AspectList().add(Aspect.SEED, 1));
-				ThaumcraftApi.registerObjectTag(grapes.itemID, -1, new AspectList().add(Aspect.CROP, 2).add(Aspect.HUNGER, 1));
-
-				for (int i = 0; i < grapeWineBooze.length; ++i)
-				{
-					if (i == 0 || i == 4)
-					{
-						ThaumcraftApi.registerObjectTag(grapeWine.itemID, i, new AspectList().add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(grapeWineBucket_deprecated.itemID, i, new AspectList().add(Aspect.WATER, 2));
-					}
-					else
-					{
-						int m = i == 2 ? 4 : 2;
-						ThaumcraftApi.registerObjectTag(grapeWine.itemID, i, new AspectList().add(Aspect.MAGIC, m).add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(grapeWineBucket_deprecated.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
-					}
-				}
-
-				FMLLog.info("[Growthcraft|Grapes] Successfully integrated with Thaumcraft.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Grapes] Thaumcraft not found. No integration made.", new Object[0]);
-			}
-		}*/
+		modules.postInit();
 	}
 }

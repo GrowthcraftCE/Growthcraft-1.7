@@ -1,20 +1,36 @@
-
-tile.grc.beeBox.name=Apiário
+# Blocks
+tile.grc.beeBox0.name=Apiário
+tile.grc.beeBox1.name=Apiário
+tile.grc.beeBox2.name=Apiário
+tile.grc.beeBox3.name=Apiário
+tile.grc.beeBox4.name=Apiário
+tile.grc.beeBox5.name=Apiário
 tile.grc.beeHive.name=Colméia de Abelhas
 
+# Items
 item.grc.honeyComb.empty.name=Favo Vazio
 item.grc.honeyComb.full.name=Favo de Mel
 item.grc.honeyJar.name=Mel
 item.grc.bee.name=Abelha
 
+# Containers
 container.grc.beeBox=Apiário
-	
+
+# Fluids
 fluid.grc.honeyMead=Hidromel
 fluid.grc.honeyMead0=Hidromel
 fluid.grc.honeyMead1=Hidromel
 fluid.grc.honeyMead2=Hidromel
 fluid.grc.honeyMead3=Hidromel
 
+# Fluid Blocks
+tile.fluid.grc.honeyMead.name=Hidromel
+tile.fluid.grc.honeyMead0.name=Hidromel
+tile.fluid.grc.honeyMead1.name=Hidromel
+tile.fluid.grc.honeyMead2.name=Hidromel
+tile.fluid.grc.honeyMead3.name=Hidromel
+
+# Fluid Tooltips
 fluid.grc.honeyMead0.modifier=Fresco
 fluid.grc.honeyMead1.modifier=Fermentado
 fluid.grc.honeyMead2.modifier=Fermentado, Potente

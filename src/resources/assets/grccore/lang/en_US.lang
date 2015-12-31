@@ -1,38 +1,74 @@
-
+# Creative Tabs
 itemGroup.tabGrowthCraft=Growthcraft
 
+# Blocks
 tile.grc.fenceRope.name=Fence with Rope
 tile.grc.ropeBlock.name=Rope
 
+# Items
 item.grc.rope.name=Rope
 
+# Fluids
 fluid.tile.water=Water
 fluid.tile.lava=Lava
 
+# Other
 achievementPage.pageGrowthCraft=Growthcraft
 
-// formats and units //
+# Colors
+grc.colour.White=White
+grc.colour.Orange=Orange
+grc.colour.Magenta=Magenta
+grc.colour.LightBlue=Light Blue
+grc.colour.Yellow=Yellow
+grc.colour.Lime=Lime
+grc.colour.Pink=Pink
+grc.colour.Gray=Gray
+grc.colour.LightGray=Light Gray
+grc.colour.Cyan=Cyan
+grc.colour.Purple=Purple
+grc.colour.Blue=Blue
+grc.colour.Brown=Brown
+grc.colour.Green=Green
+grc.colour.Red=Red
+grc.colour.Black=Black
+grc.colour.Transparent=Transparent
+
+# Formats and Units
 grc.format.value.true=YES
 grc.format.value.false=NO
 grc.format.state.true=ON
 grc.format.state.false=OFF
 grc.format.invalid_fluid=<Invalid Fluid>
-// Displayed for items
+# Displayed for items
 grc.format.itemslot.empty=<Empty>
 grc.format.itemslot.invalid=<Invalid Item>
-// modifier name
+
+# Modifier name
 grc.format.booze.name=%2$s %1$s
-// when a fluid is not a booze
+
+# When a fluid is not a booze
 grc.format.fluid.name=%1$s
-// name (stack_size)
+
+# Name (stack_size)
 grc.format.itemslot.item=%s (x%d)
-// Displayed for tile entities with multiple tanks, %d is the tank index + 1
+# Displayed for tile entities with multiple tanks, %d is the tank index + 1
 grc.format.tank_id=Tank %d :
-// When the tank is empty
+# When the tank is empty
 grc.format.tank.empty=<Empty>
-// %s is the fluid name
+# %s is the fluid name
 grc.format.tank.content_suffix=mB of %s
 
+# Waila Tooltips
 grc.format.crop.growth_prefix=Growth :
 grc.format.crop.progress_format=%d%%
 grc.format.crop.mature=Mature
+grc.format.paddy.hasFluid=Has Fluid :
+
+# Effects
+grc.effect.chance.format=%d%% Chance of
+grc.effect.null.desc=Does Nothing
+grc.effect.list.head=Applies the following:
+grc.effect.random_list.head=Applies one of the following:
+grc.effect.remove_potion_effect.format=Removes %s
+grc.effect.weighted_random_list.format=%d%% Chance of

@@ -1,4 +1,5 @@
-﻿
+# Blocks
 tile.grc.fishTrap.name=渔栅
 
+# Containers
 container.grc.fishTrap=渔栅

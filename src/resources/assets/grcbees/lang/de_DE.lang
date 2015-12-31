@@ -1,20 +1,36 @@
-﻿
-tile.grc.beeBox.name=Bienenhaus
+# Blocks
+tile.grc.beeBox0.name=Bienenhaus
+tile.grc.beeBox1.name=Bienenhaus
+tile.grc.beeBox2.name=Bienenhaus
+tile.grc.beeBox3.name=Bienenhaus
+tile.grc.beeBox4.name=Bienenhaus
+tile.grc.beeBox5.name=Bienenhaus
 tile.grc.beeHive.name=Bienenstock
 
+# Items
 item.grc.honeyComb.empty.name=Honigwabe
 item.grc.honeyComb.full.name=Honigwabe
 item.grc.honeyJar.name=Honig
 item.grc.bee.name=Biene
 
+# Containers
 container.grc.beeBox=Bienenhaus
-	
+
+# Fluids
 fluid.grc.honeyMead=Met
 fluid.grc.honeyMead0=Met
 fluid.grc.honeyMead1=Met
 fluid.grc.honeyMead2=Met
 fluid.grc.honeyMead3=Met
 
+# Fluid Blocks
+tile.fluid.grc.honeyMead.name=Met
+tile.fluid.grc.honeyMead0.name=Met
+tile.fluid.grc.honeyMead1.name=Met
+tile.fluid.grc.honeyMead2.name=Met
+tile.fluid.grc.honeyMead3.name=Met
+
+# Fluid Tooltips
 fluid.grc.honeyMead0.modifier=Jung
 fluid.grc.honeyMead1.modifier=Gegoren
 fluid.grc.honeyMead2.modifier=Gegoren, Stark

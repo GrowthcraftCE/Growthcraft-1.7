@@ -1,0 +1,34 @@
+# Blocks
+tile.grc.paddyField.name=Rizière
+tile.grc.riceBlock.name=Rizière
+
+# Items
+item.grc.rice.name=Grain de riz
+item.grc.riceBall.name=Onigiri
+
+# Fluids
+fluid.grc.riceSake=Sake
+fluid.grc.riceSake0=Sake
+fluid.grc.riceSake1=Sake
+fluid.grc.riceSake2=Sake
+fluid.grc.riceSake3=Sake
+
+# Fluid Buckets
+item.bucket.fluid.grc.riceSake.name=Seau de sake
+item.bucket.fluid.grc.riceSake0.name=Seau de sake
+item.bucket.fluid.grc.riceSake1.name=Seau de sake
+item.bucket.fluid.grc.riceSake2.name=Seau de sake
+item.bucket.fluid.grc.riceSake3.name=Seau de sake
+
+# Fluid Blocks
+tile.fluid.grc.riceSake.name=Sake
+tile.fluid.grc.riceSake0.name=Sake
+tile.fluid.grc.riceSake1.name=Sake
+tile.fluid.grc.riceSake2.name=Sake
+tile.fluid.grc.riceSake3.name=Sake
+
+# Fluid Tooltips
+fluid.grc.riceSake0.modifier=Nouveau
+fluid.grc.riceSake1.modifier=Fermenté
+fluid.grc.riceSake2.modifier=Fermenté, Puissant
+fluid.grc.riceSake3.modifier=Fermenté, Prolongé

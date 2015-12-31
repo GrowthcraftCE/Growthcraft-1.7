@@ -1,83 +1,89 @@
 package growthcraft.bees;
 
-import java.io.File;
-
 import growthcraft.api.bees.BeesRegistry;
-import growthcraft.api.cellar.Booze;
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.bees.block.BlockBeeBox;
-import growthcraft.bees.block.BlockBeeHive;
-import growthcraft.bees.tileentity.TileEntityBeeBox;
-import growthcraft.bees.gui.GuiHandlerBees;
-import growthcraft.bees.item.ItemBee;
-import growthcraft.bees.item.ItemHoneyComb;
-import growthcraft.bees.item.ItemHoneyJar;
-import growthcraft.bees.village.ComponentVillageApiarist;
-import growthcraft.bees.village.VillageHandlerBees;
-import growthcraft.bees.village.VillageHandlerBeesApiarist;
-import growthcraft.bees.world.WorldGeneratorBees;
-import growthcraft.cellar.block.BlockFluidBooze;
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.bees.client.gui.GuiHandlerBees;
+import growthcraft.bees.common.block.BlockBeeBox;
+import growthcraft.bees.common.block.BlockBeeHive;
+import growthcraft.bees.common.CommonProxy;
+import growthcraft.bees.common.item.ItemBee;
+import growthcraft.bees.common.item.ItemBlockBeeBox;
+import growthcraft.bees.common.item.ItemHoneyComb;
+import growthcraft.bees.common.item.ItemHoneyCombEmpty;
+import growthcraft.bees.common.item.ItemHoneyCombFilled;
+import growthcraft.bees.common.item.ItemHoneyJar;
+import growthcraft.bees.common.tileentity.TileEntityBeeBox;
+import growthcraft.bees.common.village.ComponentVillageApiarist;
+import growthcraft.bees.common.village.VillageHandlerBees;
+import growthcraft.bees.common.village.VillageHandlerBeesApiarist;
+import growthcraft.bees.common.world.WorldGeneratorBees;
+import growthcraft.bees.creativetab.CreativeTabsGrowthcraftBees;
+import growthcraft.bees.init.GrcBeesBooze;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.item.ItemBoozeBottle;
-import growthcraft.cellar.item.ItemBoozeBucketDEPRECATED;
-import growthcraft.cellar.item.ItemBucketBooze;
-import growthcraft.cellar.utils.BoozeRegistryHelper;
+import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
+import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
+import growthcraft.core.util.MapGenHelper;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-@Mod(modid = "Growthcraft|Bees",name = "GrowthCraft Bees",version = "@VERSION@",dependencies = "required-after:Growthcraft;required-after:Growthcraft|Cellar")
+@Mod(
+	modid = GrowthCraftBees.MOD_ID,
+	name = GrowthCraftBees.MOD_NAME,
+	version = GrowthCraftBees.MOD_VERSION,
+	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@;after:Forestry"
+)
 public class GrowthCraftBees
 {
-	@Instance("Growthcraft|Bees")
+	public static final String MOD_ID = "Growthcraft|Bees";
+	public static final String MOD_NAME = "Growthcraft Bees";
+	public static final String MOD_VERSION = "@VERSION@";
+
+	@Instance(MOD_ID)
 	public static GrowthCraftBees instance;
 
-	@SidedProxy(clientSide="growthcraft.bees.ClientProxy", serverSide="growthcraft.bees.CommonProxy")
-	public static CommonProxy proxy;
+	public static CreativeTabs tab;
 
-	public static Block beeBox;
-	public static Block beeHive;
-	public static BlockFluidBooze[] honeyMeadFluids;
-	public static Item honeyComb;
-	public static Item honeyJar;
-	public static Item bee;
-	public static Item honeyMead;
-	public static Item honeyMeadBucket_deprecated;
-	public static ItemBucketBooze[] honeyMeadBuckets;
+	public static BlockTypeDefinition<BlockBeeBox> beeBox;
+	public static BlockTypeDefinition<BlockBeeBox> beeBoxBamboo;
+	public static BlockTypeDefinition<BlockBeeBox> beeBoxNether;
+	public static BlockTypeDefinition<BlockBeeBox> beeBoxThaumcraft;
+	public static BlockDefinition beeHive;
+	public static ItemDefinition honeyComb;
+	public static ItemDefinition honeyCombEmpty;
+	public static ItemDefinition honeyCombFilled;
+	public static ItemDefinition honeyJar;
+	public static ItemDefinition bee;
+	public static GrcBeesBooze booze = new GrcBeesBooze();
 
-	public static Fluid[] honeyMeadBooze;
+	private ILogger logger = new GrcLogger(MOD_ID);
+	private GrcBeesConfig config = new GrcBeesConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	private growthcraft.bees.Config config;
-
-	public static growthcraft.bees.Config getConfig()
+	public static GrcBeesConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -85,99 +91,134 @@ public class GrowthCraftBees
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.bees.Config();
+		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
 
-		//====================
-		// INIT
-		//====================
-		beeBox  = new BlockBeeBox();
-		beeHive = new BlockBeeHive();
+		modules.add(booze);
+		if (config.enableGrcBambooIntegration) modules.add(new growthcraft.bees.integration.GrcBambooModule());
+		if (config.enableGrcNetherIntegration) modules.add(new growthcraft.bees.integration.GrcNetherModule());
+		if (config.enableWailaIntegration) modules.add(new growthcraft.bees.integration.Waila());
+		if (config.enableForestryIntegration) modules.add(new growthcraft.bees.integration.ForestryModule());
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bees.integration.ThaumcraftModule());
 
-		honeyComb = new ItemHoneyComb();
-		honeyJar  = new ItemHoneyJar();
-		bee       = new ItemBee();
+		if (config.debugEnabled) modules.setLogger(logger);
 
-		honeyMeadBooze = new Booze[4];
-		honeyMeadFluids = new BlockFluidBooze[honeyMeadBooze.length];
-		honeyMeadBuckets = new ItemBucketBooze[honeyMeadBooze.length];
-		BoozeRegistryHelper.initializeBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, "grc.honeyMead", config.honeyMeadColor);
+		tab = new CreativeTabsGrowthcraftBees();
 
-		honeyMead        = (new ItemBoozeBottle(6, -0.45F, honeyMeadBooze))
-			.setColor(config.honeyMeadColor)
-			.setTipsy(0.60F, 900)
-			.setPotionEffects(new int[] {Potion.regeneration.id}, new int[] {900});
-		honeyMeadBucket_deprecated = (new ItemBoozeBucketDEPRECATED(honeyMeadBooze))
-			.setColor(config.honeyMeadColor);
+		initBlocksAndItems();
+	}
 
-		//====================
-		// REGISTRIES
-		//====================
-		GameRegistry.registerBlock(beeBox, "grc.beeBox");
-		GameRegistry.registerBlock(beeHive, "grc.beeHive");
+	private void initBlocksAndItems()
+	{
+		beeBox  = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBox());
+		beeBox.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
 
-		GameRegistry.registerItem(honeyComb, "grc.honeyComb");
-		GameRegistry.registerItem(honeyJar, "grc.honeyJar");
-		GameRegistry.registerItem(bee, "grc.bee");
-		GameRegistry.registerItem(honeyMead, "grc.honeyMead");
-		GameRegistry.registerItem(honeyMeadBucket_deprecated, "grc.honeyMead_bucket");
+		beeHive = new BlockDefinition(new BlockBeeHive());
 
-		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMead, "grc.honeyMead", honeyMeadBucket_deprecated);
+		honeyComb = new ItemDefinition(new ItemHoneyComb());
+		honeyCombEmpty = new ItemDefinition(new ItemHoneyCombEmpty());
+		honeyCombFilled = new ItemDefinition(new ItemHoneyCombFilled());
+		honeyJar  = new ItemDefinition(new ItemHoneyJar());
+		bee       = new ItemDefinition(new ItemBee());
 
+		modules.preInit();
+		register();
+	}
+
+	private void register()
+	{
+		// Bee Boxes
+		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
+
+		// Bee Hive(s)
+		GameRegistry.registerBlock(beeHive.getBlock(), "grc.beeHive");
+
+		// Items
+		GameRegistry.registerItem(honeyComb.getItem(), "grc.honeyComb");
+		GameRegistry.registerItem(honeyCombEmpty.getItem(), "grc.honeyCombEmpty");
+		GameRegistry.registerItem(honeyCombFilled.getItem(), "grc.honeyCombFilled");
+		GameRegistry.registerItem(honeyJar.getItem(), "grc.honeyJar");
+		GameRegistry.registerItem(bee.getItem(), "grc.bee");
+
+		// TileEntities
 		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
-		//CellarRegistry.instance().addBoozeAlternative(FluidRegistry.LAVA, honeyMeadBooze[0]);
 
-		BeesRegistry.instance().addBee(bee);
-		for (int i = 0; i < 9; ++i) {
-			BeesRegistry.instance().addFlower(Blocks.red_flower, i);
-		}
-		BeesRegistry.instance().addFlower(Blocks.yellow_flower, 0);
+		BeesRegistry.instance().addBee(bee.getItem());
+		// this will be removed in the future, so please use the new honey combs
+		BeesRegistry.instance().addHoneyComb(honeyComb.asStack(1, 0), honeyComb.asStack(1, 1));
+
+		BeesRegistry.instance().addHoneyComb(honeyCombEmpty.asStack(), honeyCombFilled.asStack());
+		BeesRegistry.instance().addFlower(Blocks.red_flower);
+		BeesRegistry.instance().addFlower(Blocks.yellow_flower);
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);
 
-		try
-		{
-			MapGenStructureIO.func_143031_a(ComponentVillageApiarist.class, "grc.apiarist");
-		}
-		catch (Throwable e) {}
+		MapGenHelper.registerVillageStructure(ComponentVillageApiarist.class, "grc.apiarist");
 
+		registerOres();
+		registerRecipes();
+
+		MinecraftForge.EVENT_BUS.register(this);
+
+		NEI.hideItem(honeyComb.asStack(1, 0));
+		NEI.hideItem(honeyComb.asStack(1, 1));
+
+		modules.register();
+	}
+
+	private void registerOres()
+	{
 		//====================
 		// ORE DICTIONARY
 		//====================
 		// For Pam's HarvestCraft
 		// Uses the same OreDict. names as HarvestCraft
-		OreDictionary.registerOre("beeQueen", bee);
-		OreDictionary.registerOre("materialWaxcomb", new ItemStack(honeyComb, 1, 0));
-		OreDictionary.registerOre("materialHoneycomb", new ItemStack(honeyComb, 1, 1));
-		OreDictionary.registerOre("honeyDrop", honeyJar);
-		OreDictionary.registerOre("dropHoney", honeyJar);
+		OreDictionary.registerOre("beeQueen", bee.getItem());
+		OreDictionary.registerOre("materialWaxcomb", honeyCombEmpty.asStack());
+		OreDictionary.registerOre("materialHoneycomb", honeyCombFilled.asStack());
+		OreDictionary.registerOre("honeyDrop", honeyJar.getItem());
+		OreDictionary.registerOre("dropHoney", honeyJar.getItem());
+	}
 
+	private void registerRecipes()
+	{
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(beeBox, 1), " A ", "A A", "AAA", 'A', "plankWood"));
-		ItemStack stack = new ItemStack(honeyComb, 1, 1);
-		GameRegistry.addShapelessRecipe(new ItemStack(honeyJar, 1), stack, stack, stack, stack, stack, stack, Items.flower_pot);
-		GameRegistry.addShapelessRecipe(new ItemStack(honeyMeadBucket_deprecated, 1, 0), Items.water_bucket, honeyJar, Items.bucket);
+		final BlockDefinition planks = new BlockDefinition(Blocks.planks);
+		for (int i = 0; i < 6; ++i)
+		{
+			GameRegistry.addRecipe(beeBox.asStack(1, i), new Object[] { " A ", "A A", "AAA", 'A', planks.asStack(1, i) });
+		}
 
-		MinecraftForge.EVENT_BUS.register(this);
+		GameRegistry.addShapelessRecipe(honeyCombEmpty.asStack(), honeyComb.asStack(1, 0));
+		GameRegistry.addShapelessRecipe(honeyCombFilled.asStack(), honeyComb.asStack(1, 1));
+
+		final ItemStack honeyStack = honeyCombFilled.asStack();
+		GameRegistry.addShapelessRecipe(honeyJar.asStack(), honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);
+	}
+
+	private void postRegisterRecipes()
+	{
+		GameRegistry.addRecipe(new ShapedOreRecipe(beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
-		proxy.initSounds();
+		CommonProxy.instance.initRenders();
+		CommonProxy.instance.initSounds();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerBees());
 
-		VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
+		final VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, new VillageHandlerBees());
 		VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);
 
-		proxy.registerVillagerSkin();
-		new growthcraft.bees.integration.Waila();
+		CommonProxy.instance.registerVillagerSkin();
+
+		modules.init();
 	}
 
 	@SubscribeEvent
@@ -186,9 +227,9 @@ public class GrowthCraftBees
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < honeyMeadBooze.length; ++i)
+			for (int i = 0; i < booze.honeyMeadBooze.length; ++i)
 			{
-				honeyMeadBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				booze.honeyMeadBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}
@@ -196,86 +237,8 @@ public class GrowthCraftBees
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		/*String modid;
+		postRegisterRecipes();
 
-		modid = "Forestry";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				Item item = GameRegistry.findItem(modid, "beeQueenGE");
-				if (item != null)
-				{
-					BeesRegistry.instance().addBee(item.itemID);
-				}
-
-				item = GameRegistry.findItem(modid, "beeDroneGE");
-				if (item != null)
-				{
-					BeesRegistry.instance().addBee(item.itemID);
-				}
-
-				item = GameRegistry.findItem(modid, "beePrincessGE");
-				if (item != null)
-				{
-					BeesRegistry.instance().addBee(item.itemID);
-				}
-
-				CellarRegistry.instance().addBoozeAlternative("short.mead", "grc.honeyMead0");
-
-				item = GameRegistry.findItem(modid, "beeswax");
-				if (item != null && RecipeManagers.centrifugeManager != null)
-				{
-					RecipeManagers.centrifugeManager.addRecipe(20, new ItemStack(honeyComb, 1, 0), new ItemStack(item));
-					Item item2 = GameRegistry.findItem(modid, "honeyDrop");
-					Item item3 = GameRegistry.findItem(modid, "honeydew");
-					if (item != null && item2 != null)
-					{
-						RecipeManagers.centrifugeManager.addRecipe(20, new ItemStack(honeyComb, 1, 1), new ItemStack[] { new ItemStack(item3), new ItemStack(item), new ItemStack(item2) }, new int[] { 60, 20, 30 });
-						//RecipeManagers.centrifugeManager.addRecipe(20, new ItemStack(honeyComb, 1, 1), new ItemStack(item), new ItemStack(item2), 90);
-					}
-				}
-
-				FMLLog.info("[Growthcraft|Bees] Successfully integrated with Forestry.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Bees] Forestry not found. No integration made.", new Object[0]);
-			}
-		}
-
-		modid = "Thaumcraft";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				ThaumcraftApi.registerObjectTag(honeyComb.itemID, -1, new AspectList().add(Aspect.SLIME, 2));
-				ThaumcraftApi.registerObjectTag(honeyJar.itemID, -1, new AspectList().add(Aspect.HUNGER, 2).add(Aspect.WATER, 2));
-				ThaumcraftApi.registerObjectTag(bee.itemID, -1, new AspectList().add(Aspect.BEAST, 1).add(Aspect.AIR, 1));
-				ThaumcraftApi.registerObjectTag(beeBox.blockID, -1, new AspectList().add(Aspect.AIR, 2));
-				ThaumcraftApi.registerObjectTag(beeHive.blockID, -1, new AspectList().add(Aspect.AIR, 2));
-
-				for (int i = 0; i < honeyMeadBooze.length; ++i)
-				{
-					if (i == 0 || i == 4)
-					{
-						ThaumcraftApi.registerObjectTag(honeyMead.itemID, i, new AspectList().add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(honeyMeadBucket_deprecated.itemID, i, new AspectList().add(Aspect.WATER, 2));
-					}
-					else
-					{
-						int m = i == 2 ? 4 : 2;
-						ThaumcraftApi.registerObjectTag(honeyMead.itemID, i, new AspectList().add(Aspect.MAGIC, m).add(Aspect.HUNGER, 2).add(Aspect.WATER, 1).add(Aspect.CRYSTAL, 1));
-						ThaumcraftApi.registerObjectTag(honeyMeadBucket_deprecated.itemID, i, new AspectList().add(Aspect.MAGIC, m * 2).add(Aspect.WATER, 2));
-					}
-				}
-
-				FMLLog.info("[Growthcraft|Bees] Successfully integrated with Thaumcraft.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Bees] Thaumcraft not found. No integration made.", new Object[0]);
-			}
-		}*/
+		modules.postInit();
 	}
 }

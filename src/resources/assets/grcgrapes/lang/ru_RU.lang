@@ -1,18 +1,35 @@
-﻿
+# Blocks
 tile.grc.grapeVine0.name=Виноградный ствол
 tile.grc.grapeVine1.name=Виноградный ствол
 tile.grc.grapeLeaves.name=Виноградная листва
-tile.grc.grapeBlock.name=Обычный виноград
+tile.grc.grapeBlock.name=Обыкновенный виноград
 
-item.grc.grapes.name=Обычный виноград
-item.grc.grapeSeeds.name=Семена обычного винограда
+# Items
+item.grc.grapes.name=Обыкновенный виноград
+item.grc.grapeSeeds.name=Семена обыкновенного винограда
 
+# Fluids
 fluid.grc.grapeWine=Виноградное вино
 fluid.grc.grapeWine0=Виноградное вино
 fluid.grc.grapeWine1=Виноградное вино
 fluid.grc.grapeWine2=Виноградное вино
 fluid.grc.grapeWine3=Виноградное вино
 
+# Fluid Buckets
+item.bucket.fluid.grc.grapeWine.name=Ведро виноградного вина
+item.bucket.fluid.grc.grapeWine0.name=Ведро виноградного вина
+item.bucket.fluid.grc.grapeWine1.name=Ведро виноградного вина
+item.bucket.fluid.grc.grapeWine2.name=Ведро виноградного вина
+item.bucket.fluid.grc.grapeWine3.name=Ведро виноградного вина
+
+# Fluid Blocks
+tile.fluid.grc.grapeWine.name=Виноградное вино
+tile.fluid.grc.grapeWine0.name=Виноградное вино
+tile.fluid.grc.grapeWine1.name=Виноградное вино
+tile.fluid.grc.grapeWine2.name=Виноградное вино
+tile.fluid.grc.grapeWine3.name=Виноградное вино
+
+# Fluid Tooltips
 fluid.grc.grapeWine0.modifier=Молодое
 fluid.grc.grapeWine1.modifier=Сброженное
 fluid.grc.grapeWine2.modifier=Сброженное, крепкое

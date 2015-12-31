@@ -2,9 +2,9 @@ package growthcraft.bees.integration.waila;
 
 import java.util.List;
 
-import growthcraft.bees.tileentity.TileEntityBeeBox;
-import growthcraft.bees.utils.TagFormatterBeeBox;
-import growthcraft.core.utils.ConstID;
+import growthcraft.bees.common.tileentity.TileEntityBeeBox;
+import growthcraft.bees.util.TagFormatterBeeBox;
+import growthcraft.core.util.NBTHelper;
 
 import cpw.mods.fml.common.Optional;
 
@@ -15,15 +15,8 @@ import mcp.mobius.waila.api.IWailaDataProvider;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 
 public class BeesDataProvider implements IWailaDataProvider
 {
@@ -69,10 +62,9 @@ public class BeesDataProvider implements IWailaDataProvider
 			final TileEntityBeeBox beeBox = (TileEntityBeeBox)te;
 			tag.setBoolean("has_bonus", beeBox.hasBonus());
 			tag.setInteger("honeycomb_count", beeBox.countCombs());
-			tag.setInteger("honeycomb_max", beeBox.getSizeInventory());
+			tag.setInteger("honeycomb_max", beeBox.getHoneyCombMax());
 			tag.setInteger("honey_count", beeBox.countHoney());
-			tag.setInteger("bee_count", beeBox.countBees());
-			tag.setInteger("bee_max", beeBox.getInventoryStackLimit());
+			tag.setTag("bee", NBTHelper.writeItemStackToNBT(beeBox.getBeeStack()));
 		}
 		return tag;
 	}

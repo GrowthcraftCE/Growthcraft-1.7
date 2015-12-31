@@ -1,4 +1,4 @@
-﻿
+# Blocks
 tile.grc.bambooStalk.name=Bamboo
 tile.grc.bambooBlock.name=Bamboo
 tile.grc.bambooLeaves.name=Bamboo Leaves
@@ -11,6 +11,7 @@ tile.grc.bambooFenceGate.name=Bamboo Fence Gate
 tile.grc.bambooScaffold.name=Bamboo Scaffold
 tile.grc.bambooDoor.name=Bamboo Door
 
+# Items
 item.grc.bamboo.name=Bamboo
 item.grc.bambooDoor.name=Bamboo Door
 item.grc.bambooSlab.name=Bamboo Slab
@@ -18,4 +19,5 @@ item.grc.bambooRaft.name=Bamboo Raft
 item.grc.bambooCoal.name=Bamboo Charcoal
 item.grc.bambooShootFood.name=Bamboo Shoot
 
+# Entities
 entity.Growthcraft|Bamboo.bambooRaft.name=Bamboo Raft

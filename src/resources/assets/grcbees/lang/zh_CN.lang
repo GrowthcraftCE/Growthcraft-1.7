@@ -1,21 +1,69 @@
-﻿
-tile.grc.beeBox.name=蜂箱
+# Creative Tabs
+itemGroup.tabGrowthCraftBees=Growthcraft|蜜蜂
+
+# Blocks
+## Vanilla Bee Boxes
+tile.grc.BeeBox.Minecraft0.name=橡木蜂箱
+tile.grc.BeeBox.Minecraft1.name=云杉蜂箱
+tile.grc.BeeBox.Minecraft2.name=白桦蜂箱
+tile.grc.BeeBox.Minecraft3.name=从林木蜂箱
+tile.grc.BeeBox.Minecraft4.name=金合欢蜂箱
+tile.grc.BeeBox.Minecraft5.name=深色橡木蜂箱
+
+## Growthcraft|Nether Bee Boxes
+tile.grc.BeeBox.Nether0.name=Malice蜂箱
+
+## Growthcraft|Bamboo Bee Boxes
+tile.grc.BeeBox.Bamboo0.name=竹蜂箱
+
+## Thaumcraft Bee Boxes
+tile.grc.BeeBox.Thaumcraft0.name=宏伟之木蜂箱
+tile.grc.BeeBox.Thaumcraft1.name=银木蜂箱
+
+# Other Blocks
 tile.grc.beeHive.name=蜂巢
 
-item.grc.honeyComb.empty.name=蜜巢
-item.grc.honeyComb.full.name=蜜巢
+# Items
+item.grc.honeyComb.empty.name=蜂窝
+item.grc.honeyComb.full.name=蜂窝
 item.grc.honeyJar.name=蜂蜜
 item.grc.bee.name=蜜蜂
 
+# Tooltips
+grc.bees.item.honeyComb.deprecated=本物品已经废弃，请通过工作台合成进行升级。
+
+# Containers
 container.grc.beeBox=蜂箱
 
+# Fluids
 fluid.grc.honeyMead=蜜酒
 fluid.grc.honeyMead0=蜜酒
 fluid.grc.honeyMead1=蜜酒
 fluid.grc.honeyMead2=蜜酒
 fluid.grc.honeyMead3=蜜酒
 
+# Fluid Buckets
+item.bucket.fluid.grc.honeyMead.name=蜜酒桶
+item.bucket.fluid.grc.honeyMead0.name=蜜酒桶
+item.bucket.fluid.grc.honeyMead1.name=蜜酒桶
+item.bucket.fluid.grc.honeyMead2.name=蜜酒桶
+item.bucket.fluid.grc.honeyMead3.name=蜜酒桶
+
+# Fluid Blocks
+tile.fluid.grc.honeyMead.name=蜜酒
+tile.fluid.grc.honeyMead0.name=蜜酒
+tile.fluid.grc.honeyMead1.name=蜜酒
+tile.fluid.grc.honeyMead2.name=蜜酒
+tile.fluid.grc.honeyMead3.name=蜜酒
+
+# Fluid Tooltips
 fluid.grc.honeyMead0.modifier=蜜酒
 fluid.grc.honeyMead1.modifier=轻度
-fluid.grc.honeyMead2.modifier=发酵, 高度
-fluid.grc.honeyMead3.modifier=发酵, 烈度
+fluid.grc.honeyMead2.modifier=发酵，高度
+fluid.grc.honeyMead3.modifier=发酵，后劲
+
+# Other
+grc.bees.bonus_prefix=加成：
+grc.bees.bees_prefix=蜜蜂：
+grc.bees.honey_prefix=蜂蜜数量：
+

@@ -1,12 +1,53 @@
-﻿
-itemGroup.tabGrowthCraft=Growthcraft
+# Creative Tabs
+itemGroup.tabGrowthCraft=Growthcraft|核心
 
+# Blocks
 tile.grc.fenceRope.name=围栏绳
 tile.grc.ropeBlock.name=绳子
 
+# Items
 item.grc.rope.name=绳子
 
+# Fluids
 fluid.tile.water=水
 fluid.tile.lava=岩浆
 
+# Other
 achievementPage.pageGrowthCraft=Growthcraft
+
+# Formats and Units
+grc.format.value.true=是
+grc.format.value.false=否
+grc.format.state.true=开
+grc.format.state.false=关
+grc.format.invalid_fluid=<无效液体>
+# Displayed for items
+grc.format.itemslot.empty=<空>
+grc.format.itemslot.invalid=<无效物品>
+
+# Modifier name
+grc.format.booze.name=%2$s%1$s
+
+# When a fluid is not a booze
+grc.format.fluid.name=%1$s
+
+# Name (stack_size)
+grc.format.itemslot.item=%s(x%d)
+# Displayed for tile entities with multiple tanks, %d is the tank index + 1
+grc.format.tank_id=储罐%d：
+# When the tank is empty
+grc.format.tank.empty=<空>
+# %s is the fluid name
+grc.format.tank.content_suffix=mB的%s
+
+# Waila Tooltips
+grc.format.crop.growth_prefix=生长进度：
+grc.format.crop.progress_format=%d%%
+grc.format.crop.mature=成熟
+grc.format.paddy.hasFluid=内有液体：
+
+# Effects
+grc.effect.null.desc=无效果
+grc.effect.chance.format=有%d%%概率：
+grc.effect.remove_potion_effect.format=移除%s
+

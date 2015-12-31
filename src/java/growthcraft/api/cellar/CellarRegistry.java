@@ -1,105 +1,136 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.api.cellar;
 
-import java.util.ArrayList;
-import java.util.List;
+import growthcraft.api.cellar.booze.BoozeRegistry;
+import growthcraft.api.cellar.booze.IBoozeRegistry;
+import growthcraft.api.cellar.brewing.BrewingRegistry;
+import growthcraft.api.cellar.brewing.IBrewingRegistry;
+import growthcraft.api.cellar.distilling.DistilleryRegistry;
+import growthcraft.api.cellar.distilling.IDistilleryRegistry;
+import growthcraft.api.cellar.fermenting.FermentingRegistry;
+import growthcraft.api.cellar.fermenting.IFermentingRegistry;
+import growthcraft.api.cellar.heatsource.HeatSourceRegistry;
+import growthcraft.api.cellar.heatsource.IHeatSourceRegistry;
+import growthcraft.api.cellar.pressing.IPressingRegistry;
+import growthcraft.api.cellar.pressing.PressingRegistry;
+import growthcraft.api.cellar.yeast.IYeastRegistry;
+import growthcraft.api.cellar.yeast.YeastRegistry;
+import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
 
-import net.minecraft.block.Block;
-
-/**
- * Gwafu:
- *
- * Main API. Consult the javadocs of each functions for more information.
- *
- **/
-public class CellarRegistry
+public class CellarRegistry implements ILoggable
 {
+	private static final CellarRegistry INSTANCE = new CellarRegistry();
+
+	private final IBoozeRegistry boozeRegistry = new BoozeRegistry();
+	private final IBrewingRegistry brewingRegistry = new BrewingRegistry();
+	private final IDistilleryRegistry distilleryRegistry = new DistilleryRegistry();
+	private final IFermentingRegistry fermentingRegistry = new FermentingRegistry();
+	private final IHeatSourceRegistry heatSourceRegistry = new HeatSourceRegistry();
+	private final IPressingRegistry pressingRegistry = new PressingRegistry();
+	private final IYeastRegistry yeastRegistry = new YeastRegistry();
+	private ILogger logger = NullLogger.INSTANCE;
 
 	/**
-	 * Fluid strings (for use with the 'String' versions of the methods.
-	 *
-	 * Apple Cider
-	 * - "grc.appleCider0' - young
-	 * - "grc.appleCider1' - fermented
-	 * - "grc.appleCider2' - fermented, potent
-	 * - "grc.appleCider3' - fermented, extended
-	 *
-	 * Grape Wine
-	 * - "grc.grapeWine0' - young
-	 * - "grc.grapeWine1' - fermented
-	 * - "grc.grapeWine2' - fermented, potent
-	 * - "grc.grapeWine3' - fermented, extended
-	 *
-	 * Ale
-	 * - "grc.hopAle0' - hopped, young
-	 * - "grc.hopAle1' - hopped, fermented
-	 * - "grc.hopAle2' - hopped, fermented, potent
-	 * - "grc.hopAle3' - hopped, fermented, extended
-	 * - "grc.hopAle4' - no hops, young
-	 *
-	 * Sake
-	 * - "grc.riceSake0' - young
-	 * - "grc.riceSake1' - fermented
-	 * - "grc.riceSake2' - fermented, potent
-	 * - "grc.riceSake3' - fermented, extended
-	 *
-	 * Mead
-	 * - "grc.honeyMead0' - young
-	 * - "grc.honeyMead1' - fermented
-	 * - "grc.honeyMead2' - fermented, potent
-	 * - "grc.honeyMead3' - fermented, extended
-	 **/
-
-	private static final CellarRegistry INSTANCE = new CellarRegistry();
-	private final BoozeRegistry boozeRegistry = new BoozeRegistry();
-	private final BrewRegistry brewRegistry = new BrewRegistry();
-	private final PressingRegistry pressingRegistry = new PressingRegistry();
-
-	////////////////////////////////////////////////////////////////////////
-	// LISTS AND MAPS ////YOU ARE NOT SUPPOSED TO TOUCH THIS D:<////////////
-	////////////////////////////////////////////////////////////////////////
-
-	// HEAT SOURCE ///////////////////////////////////////////////////
-	private List<Block> heatSourceList = new ArrayList<Block>();
-	public List<Block> getHeatSourceList() { return heatSourceList; }
-
+	 * @return current instrance of the CellarRegistry
+	 */
 	public static final CellarRegistry instance()
 	{
 		return INSTANCE;
 	}
 
-	public BoozeRegistry booze()
+	/**
+	 * @param l - logger to set
+	 */
+	@Override
+	public void setLogger(ILogger l)
+	{
+		this.logger = l;
+		boozeRegistry.setLogger(logger);
+		brewingRegistry.setLogger(logger);
+		distilleryRegistry.setLogger(logger);
+		fermentingRegistry.setLogger(logger);
+		heatSourceRegistry.setLogger(logger);
+		pressingRegistry.setLogger(logger);
+		yeastRegistry.setLogger(logger);
+	}
+
+	/**
+	 * @return instance of the BoozeRegistry
+	 */
+	public IBoozeRegistry booze()
 	{
 		return boozeRegistry;
 	}
 
-	public BrewRegistry brew()
+	/**
+	 * @return instance of the BrewingRegistry
+	 */
+	public IBrewingRegistry brewing()
 	{
-		return brewRegistry;
+		return brewingRegistry;
 	}
 
-	public PressingRegistry pressing()
+	/**
+	 * @return instance of the PressingRegistry
+	 */
+	public IPressingRegistry pressing()
 	{
 		return pressingRegistry;
 	}
 
-	//////////////////////////////////////////////////////////////////
-	// HEAT SOURCE ///////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////
 	/**
-	 * addHeatSource()
-	 *
-	 * Adds a valid heat source (like fire, lava, etc.)
-	 * Currently only used by Brew Kettle.
-	 *
-	 * @param block - The block. (This is not metadata sensitive, and will never be).
-	 **/
-	public void addHeatSource(Block block)
+	 * @return instance of the FermentingRegistry
+	 */
+	public IFermentingRegistry fermenting()
 	{
-		this.heatSourceList.add(block);
+		return fermentingRegistry;
 	}
 
-	public boolean isBlockHeatSource(Block block)
+	/**
+	 * @return instance of the HeatSourceRegistry
+	 */
+	public IHeatSourceRegistry heatSource()
 	{
-		return this.heatSourceList.contains(block);
+		return heatSourceRegistry;
+	}
+
+	/**
+	 * @return instance of the DistilleryRegistry
+	 */
+	public IDistilleryRegistry distilling()
+	{
+		return distilleryRegistry;
+	}
+
+	/**
+	 * @return instance of the YeastRegistry
+	 */
+	public IYeastRegistry yeast()
+	{
+		return yeastRegistry;
 	}
 }

@@ -1,26 +1,74 @@
+# Creative Tabs
 itemGroup.tabGrCCellar=Growthcraft Cellar
 
+# Blocks
 tile.grc.fruitPress.name=Fruit Press
 tile.grc.fruitPresser.name=Fruit Press
 tile.grc.brewKettle.name=Brew Kettle
 tile.grc.fermentBarrel.name=Fermentation Barrel
+tile.grc.fermentJar.name=Culture Jar
 
-// Please remove this field once all other module translations have been updated,
-// this is no longer used
+# Items
+# Please remove this field once all other module translations have been updated,
+# this is no longer used
 item.grc.boozeBucket.name=Bucket
 
+item.grc.yeast0.name=Brewers Yeast
+item.grc.yeast1.name=Lager Yeast
+item.grc.yeast2.name=Bayanus Yeast
+item.grc.yeast3.name=Ethereal Yeast
+item.grc.yeast4.name=Origin Yeast
+
+# Water Bags
+item.grc.waterBag0.name=Water Bag (White)
+item.grc.waterBag1.name=Water Bag (Orange)
+item.grc.waterBag2.name=Water Bag (Magenta)
+item.grc.waterBag3.name=Water Bag (Light Blue)
+item.grc.waterBag4.name=Water Bag (Yellow)
+item.grc.waterBag5.name=Water Bag (Lime)
+item.grc.waterBag6.name=Water Bag (Pink)
+item.grc.waterBag7.name=Water Bag (Gray)
+item.grc.waterBag8.name=Water Bag (Light Gray)
+item.grc.waterBag9.name=Water Bag (Cyan)
+item.grc.waterBag10.name=Water Bag (Purple)
+item.grc.waterBag11.name=Water Bag (Blue)
+item.grc.waterBag12.name=Water Bag (Brown)
+item.grc.waterBag13.name=Water Bag (Green)
+item.grc.waterBag14.name=Water Bag (Red)
+item.grc.waterBag15.name=Water Bag (Black)
+item.grc.waterBag16.name=Water Bag
+
+# Containers
 container.grc.fruitPress=Fruit Press
 container.grc.brewKettle=Brew Kettle
 container.grc.fermentBarrel=Fermentation Barrel
+container.grc.fermentJar=Fermentation Jar
 
+# Other
 grc.potion.tipsy=Tipsy
-
 grc.booze=Booze
+
+# Modifiers
+grc.booze.modifier.chilled=Chilled
+grc.booze.modifier.deadly=Deadly
+grc.booze.modifier.extended=Extended
+grc.booze.modifier.fermented=Fermented
+grc.booze.modifier.fortified=Fortified
+grc.booze.modifier.hopped=Hopped
+grc.booze.modifier.hyper_extended=Hyper-extended
+grc.booze.modifier.intoxicated=Intoxicated
+grc.booze.modifier.magical=Magical
+grc.booze.modifier.poisoned=Poisoned
+grc.booze.modifier.potent=Potent
+grc.booze.modifier.young=Young
+
+# GUI
 gui.grc.empty=Empty
 gui.grc.discard=Discard
 gui.grc.switch=Switch
 gui.grc.cantferment=Cannot Ferment.
 
+# Achievements
 achievement.craftBarrel=Cooper Extraction
 achievement.craftBarrel.desc=Craft a fermentation barrel with three wooden planks and six iron ingots.
 achievement.fermentBooze=It's The Yeast I Could Do...
@@ -28,24 +76,29 @@ achievement.fermentBooze.desc=Ferment an alcoholic beverage.
 achievement.getDrunk=Is Trouble Brewing?
 achievement.getDrunk.desc=Acquire Tipsy V.
 
-// number is a percentage
+# Tooltips (Number is a percentage)
+# number is a percentage
+grc.cellar.format.waterBag.name=%s (%s)
+grc.cellar.format.waterBag.contents=Contains: %2$dmB/%3$dmB of %1$s
 grc.cellar.format.tipsy_chance=%d%% Chance of Tipsy
 grc.cellar.item.booze_bucket.deprecated=DEPRECATED, craft to get updated bucket
 grc.cellar.item.booze_bucket.deprecated_suffix= (DEPRECATED)
 
 grc.cellar.brewKettle.brewing_prefix=Brewing :
-grc.cellar.brewKettle.itemslot.item=Item :
-grc.cellar.brewKettle.itemslot.residue=Residue :
+grc.cellar.brewKettle.itemslot.item=Item : %s
+grc.cellar.brewKettle.itemslot.residue=Residue : %s
 grc.cellar.fermentBarrel.progress_prefix=Progress :
 grc.cellar.fermentBarrel.progress_format=%d%%
-grc.cellar.fermentBarrel.itemslot.modifier=Modifier :
-grc.cellar.fruitPress.itemslot.item=Item :
-grc.cellar.fruitPress.itemslot.residue=Residue :
+grc.cellar.fermentBarrel.itemslot.modifier=Modifier : %s
+grc.cellar.fermentJar.itemslot.yeast=%s
+grc.cellar.fruitPress.itemslot.item=Item : %s
+grc.cellar.fruitPress.itemslot.residue=Residue : %s
 grc.cellar.fruitPresser.state.invalid=<Invalid>
 grc.cellar.fruitPresser.state.pressed=Pressed
 grc.cellar.fruitPresser.state.unpressed=Unpressed
 grc.cellar.fruitPresser.state_prefix=State :
 
+# Waila Tooltips
 grc.cellar.waila.option.DisplayFluidContent=Fluid Tanks
 grc.cellar.waila.option.FruitPressExtras=Fruit Press Extras
 grc.cellar.waila.option.BrewKettleExtras=Brew Kettle Extras

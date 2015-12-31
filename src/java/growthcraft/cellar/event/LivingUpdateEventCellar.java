@@ -13,7 +13,7 @@ public class LivingUpdateEventCellar
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event)
 	{
-		EntityLivingBase ent = event.entityLiving;
+		final EntityLivingBase ent = event.entityLiving;
 
 		if (ent.isPotionActive(GrowthCraftCellar.potionTipsy))
 		{
@@ -23,7 +23,7 @@ public class LivingUpdateEventCellar
 				return;
 			}
 
-			int lvl = ent.getActivePotionEffect(GrowthCraftCellar.potionTipsy).getAmplifier();
+			final int lvl = ent.getActivePotionEffect(GrowthCraftCellar.potionTipsy).getAmplifier();
 
 			if (lvl >= 3)
 			{

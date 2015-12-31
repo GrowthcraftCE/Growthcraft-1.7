@@ -1,9 +1,11 @@
-﻿
+# Blocks
 tile.grc.hopVine.name=Hopfen
 
+# Items
 item.grc.hops.name=Hopfen
 item.grc.hopSeeds.name=Hopfensamen
 
+# Fluids
 fluid.grc.hopAle=Bier
 fluid.grc.hopAle0=Bier
 fluid.grc.hopAle1=Bier
@@ -11,6 +13,15 @@ fluid.grc.hopAle2=Bier
 fluid.grc.hopAle3=Bier
 fluid.grc.hopAle4=Bier
 
+# Fluid Blocks
+tile.fluid.grc.hopAle.name=Bier
+tile.fluid.grc.hopAle0.name=Bier
+tile.fluid.grc.hopAle1.name=Bier
+tile.fluid.grc.hopAle2.name=Bier
+tile.fluid.grc.hopAle3.name=Bier
+tile.fluid.grc.hopAle4.name=Bier
+
+# Fluid Tooltips
 fluid.grc.hopAle0.modifier=Gehopft, Jung
 fluid.grc.hopAle1.modifier=Gehopft, Gegoren
 fluid.grc.hopAle2.modifier=Gehopft, Gegoren, Stark

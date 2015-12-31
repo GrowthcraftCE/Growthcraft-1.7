@@ -1,45 +1,52 @@
 package growthcraft.fishtrap;
 
-import java.io.File;
-
 import growthcraft.api.fishtrap.FishTrapEntry;
 import growthcraft.api.fishtrap.FishTrapRegistry;
-import growthcraft.fishtrap.block.BlockFishTrap;
-import growthcraft.fishtrap.entity.TileEntityFishTrap;
-import growthcraft.fishtrap.gui.GuiHandlerFishTrap;
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.fishtrap.client.gui.GuiHandlerFishTrap;
+import growthcraft.fishtrap.common.block.BlockFishTrap;
+import growthcraft.fishtrap.common.CommonProxy;
+import growthcraft.fishtrap.common.tileentity.TileEntityFishTrap;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-@Mod(modid = "Growthcraft|Fishtrap",name = "Growthcraft Fishtrap",version = "@VERSION@",dependencies = "required-after:Growthcraft")
+@Mod(
+	modid = GrowthCraftFishTrap.MOD_ID,
+	name = GrowthCraftFishTrap.MOD_NAME,
+	version = GrowthCraftFishTrap.MOD_VERSION,
+	dependencies = "required-after:Growthcraft@@VERSION@"
+)
 public class GrowthCraftFishTrap
 {
-	@Instance("Growthcraft|Fishtrap")
+	public static final String MOD_ID = "Growthcraft|Fishtrap";
+	public static final String MOD_NAME = "Growthcraft Fishtrap";
+	public static final String MOD_VERSION = "@VERSION@";
+
+	@Instance(MOD_ID)
 	public static GrowthCraftFishTrap instance;
 
-	@SidedProxy(clientSide="growthcraft.fishtrap.ClientProxy", serverSide="growthcraft.fishtrap.CommonProxy")
-	public static CommonProxy proxy;
+	public static BlockDefinition fishTrap;
 
-	public static Block fishTrap;
+	private ILogger logger = new GrcLogger(MOD_ID);
+	private GrcFishtrapConfig config = new GrcFishtrapConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	private growthcraft.fishtrap.Config config;
-
-	public static growthcraft.fishtrap.Config getConfig()
+	public static GrcFishtrapConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -47,18 +54,28 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.fishtrap.Config();
+		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
+
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.fishtrap.integration.ThaumcraftModule());
+
+		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================
 		// INIT
 		//====================
-		fishTrap = new BlockFishTrap();
+		fishTrap = new BlockDefinition(new BlockFishTrap());
 
+		modules.preInit();
+		register();
+	}
+
+	private void register()
+	{
 		//====================
 		// REGISTRIES
 		//====================
-		GameRegistry.registerBlock(fishTrap, "grc.fishTrap");
+		GameRegistry.registerBlock(fishTrap.getBlock(), "grc.fishTrap");
 
 		GameRegistry.registerTileEntity(TileEntityFishTrap.class, "grc.tileentity.fishTrap");
 
@@ -91,35 +108,24 @@ public class GrowthCraftFishTrap
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(fishTrap, 1), "ACA", "CBC", "ACA", 'A', "plankWood", 'B', Items.lead, 'C', Items.string));
+		GameRegistry.addRecipe(new ShapedOreRecipe(fishTrap.asStack(1), "ACA", "CBC", "ACA", 'A', "plankWood", 'B', Items.lead, 'C', Items.string));
+
+		modules.register();
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
+		CommonProxy.instance.initRenders();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerFishTrap());
+
+		modules.init();
 	}
 
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
-		/*String modid;
-
-		modid = "Thaumcraft";
-		if (Loader.isModLoaded(modid))
-		{
-			try
-			{
-				ThaumcraftApi.registerObjectTag(fishTrap.blockID, -1, new AspectList().add(Aspect.WATER, 2));
-
-				FMLLog.info("[Growthcraft|Fishtrap] Successfully integrated with Thaumcraft.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Fishtrap] Thaumcraft not found. No integration made.", new Object[0]);
-			}
-		}*/
+		modules.postInit();
 	}
 }

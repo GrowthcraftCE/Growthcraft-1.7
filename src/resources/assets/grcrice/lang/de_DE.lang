@@ -1,16 +1,26 @@
-
+# Blocks
 tile.grc.paddyField.name=Reisfeld
 tile.grc.riceBlock.name=Reis
 
+# Items
 item.grc.rice.name=Reis
 item.grc.riceBall.name=Onigiri
 
+# Fluids
 fluid.grc.riceSake=Sake
 fluid.grc.riceSake0=Sake
 fluid.grc.riceSake1=Sake
 fluid.grc.riceSake2=Sake
 fluid.grc.riceSake3=Sake
 
+# Fluid Blocks
+tile.fluid.grc.riceSake.name=Sake
+tile.fluid.grc.riceSake0.name=Sake
+tile.fluid.grc.riceSake1.name=Sake
+tile.fluid.grc.riceSake2.name=Sake
+tile.fluid.grc.riceSake3.name=Sake
+
+# Fluid Tooltips
 fluid.grc.riceSake0.modifier=Jung
 fluid.grc.riceSake1.modifier=Gegoren
 fluid.grc.riceSake2.modifier=Gegoren, Stark

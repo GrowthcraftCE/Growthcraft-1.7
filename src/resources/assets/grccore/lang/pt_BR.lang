@@ -1,11 +1,16 @@
-
+# Creative Tabs
 itemGroup.tabGrowthCraft=Growthcraft
 
+# Blocks
 tile.grc.fenceRope.name=Cerca Amarrada
 tile.grc.ropeBlock.name=Corda
+
+# Items
 item.grc.rope.name=Corda
 
+# Fluids
 fluid.tile.water=Água
 fluid.tile.lava=Lava
 
+# Other
 achievementPage.pageGrowthCraft=Growthcraft

@@ -1,38 +1,56 @@
 package growthcraft.core;
 
-import growthcraft.core.block.BlockFenceRope;
-import growthcraft.core.block.BlockRope;
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.core.common.AchievementPageGrowthcraft;
+import growthcraft.core.common.block.BlockFenceRope;
+import growthcraft.core.common.block.BlockRope;
+import growthcraft.core.common.CommonProxy;
+import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.item.ItemRope;
+import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
+import growthcraft.core.event.EventHandlerBucketFill;
 import growthcraft.core.event.HarvestDropsEventCore;
+import growthcraft.core.event.PlayerInteractEventAmazingStick;
+import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.event.TextureStitchEventCore;
-import growthcraft.core.handler.BucketHandler;
 import growthcraft.core.integration.NEI;
-import growthcraft.core.item.ItemRope;
-import growthcraft.core.network.CommonProxy;
+import growthcraft.core.util.ItemUtils;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 
-@Mod(modid = "Growthcraft",name = "Growthcraft",version = "@VERSION@")
+@Mod(
+	modid = GrowthCraftCore.MOD_ID,
+	name = GrowthCraftCore.MOD_NAME,
+	version = GrowthCraftCore.MOD_VERSION,
+	acceptedMinecraftVersions = GrowthCraftCore.MOD_ACC_MINECRAFT,
+	dependencies = GrowthCraftCore.MOD_DEPENDENCIES
+)
 public class GrowthCraftCore
 {
-	@Instance("Growthcraft")
+	public static final String MOD_ID = "Growthcraft";
+	public static final String MOD_NAME = "Growthcraft";
+	public static final String MOD_VERSION = "@VERSION@";
+	public static final String MOD_ACC_MINECRAFT = "[@GRC_MC_VERSION@]";
+	public static final String MOD_DEPENDENCIES = "required-after:Forge@[10.13.4.1566,)";
+
+	@Instance(MOD_ID)
 	public static GrowthCraftCore instance;
 
 	@SideOnly(Side.CLIENT)
@@ -42,18 +60,15 @@ public class GrowthCraftCore
 
 	public static CreativeTabs tab;
 
-	@SidedProxy(clientSide="growthcraft.core.network.ClientProxy", serverSide="growthcraft.core.network.CommonProxy")
-	public static CommonProxy proxy;
+	public static BlockDefinition fenceRope;
+	public static BlockDefinition ropeBlock;
+	public static ItemDefinition rope;
 
-	public static Block fenceRope;
-	public static Block ropeBlock;
-	public static Item rope;
+	private ILogger logger = new GrcLogger(MOD_ID);
+	private GrcCoreConfig config = new GrcCoreConfig();
+	private ModuleContainer modules = new ModuleContainer();
 
-	public static AchievementPage chievPage;
-
-	private growthcraft.core.Config config;
-
-	public static growthcraft.core.Config getConfig()
+	public static GrcCoreConfig getConfig()
 	{
 		return instance.config;
 	}
@@ -61,74 +76,82 @@ public class GrowthCraftCore
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		config = new growthcraft.core.Config();
+		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
+		if (config.debugEnabled) logger.info("Pre-Initializing %s", MOD_ID);
 
-		tab =  new CreativeTabGrowthcraft("tabGrowthCraft");
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.core.integration.ThaumcraftModule());
+		if (config.enableWailaIntegration) modules.add(new growthcraft.core.integration.Waila());
+		if (config.enableAppleCoreIntegration) modules.add(new growthcraft.core.integration.AppleCore());
+
+		if (config.debugEnabled) modules.setLogger(logger);
+
+		tab =  new CreativeTabsGrowthcraft("tabGrowthCraft");
 
 		//====================
 		// INIT
 		//====================
-		fenceRope = (new BlockFenceRope());
-		ropeBlock = (new BlockRope());
+		fenceRope = new BlockDefinition(new BlockFenceRope());
+		ropeBlock = new BlockDefinition(new BlockRope());
+		rope = new ItemDefinition(new ItemRope());
 
-		rope = (new ItemRope());
+		register();
+		modules.preInit();
+	}
 
+	private void register()
+	{
 		//====================
 		// REGISTRIES
 		//====================
-		GameRegistry.registerBlock(fenceRope, "grc.fenceRope");
-		GameRegistry.registerBlock(ropeBlock, "grc.ropeBlock");
+		GameRegistry.registerBlock(fenceRope.getBlock(), "grc.fenceRope");
+		GameRegistry.registerBlock(ropeBlock.getBlock(), "grc.ropeBlock");
 
-		GameRegistry.registerItem(rope, "grc.rope");
+		GameRegistry.registerItem(rope.getItem(), "grc.rope");
 
 		//====================
 		// ADDITIONAL PROPS.
 		//====================
-		Blocks.fire.setFireInfo(fenceRope, 5, 20);
+		Blocks.fire.setFireInfo(fenceRope.getBlock(), 5, 20);
 
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addRecipe(new ItemStack(rope, 8), new Object[] {"A", 'A', Items.lead});
+		GameRegistry.addRecipe(rope.asStack(8), new Object[] {"A", 'A', Items.lead});
 
-		NEI.hideItem(new ItemStack(fenceRope));
-		NEI.hideItem(new ItemStack(ropeBlock));
+
+		OreDictionary.registerOre("materialRope", rope.getItem());
+
+		NEI.hideItem(fenceRope.asStack());
+		NEI.hideItem(ropeBlock.asStack());
 
 		MinecraftForge.EVENT_BUS.register(new TextureStitchEventCore());
-		BucketHandler.init();
+
+		modules.register();
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		proxy.initRenders();
-		AchievementPageGrowthcraft.init(chievPage);
+		CommonProxy.instance.initRenders();
+		AchievementPageGrowthcraft.init();
 
-		new growthcraft.core.integration.Waila();
+		ItemUtils.init();
+
+		modules.init();
 	}
 
 	@EventHandler
 	public void postLoad(FMLPostInitializationEvent event)
 	{
+		MinecraftForge.EVENT_BUS.register(EventHandlerBucketFill.instance());
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
-		//		MinecraftForge.EVENT_BUS.register(new PlayerSleepInBed());
-
-		/*String modid;
-
-		modid = "Thaumcraft";
-		if (Loader.isModLoaded(modid))
+		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventPaddy());
+		if (config.useAmazingStick)
 		{
-			try
-			{
-				ThaumcraftApi.registerObjectTag(rope.itemID, -1, new AspectList().add(Aspect.BEAST, 1).add(Aspect.CLOTH, 1));
+			MinecraftForge.EVENT_BUS.register(new PlayerInteractEventAmazingStick());
+		}
 
-				FMLLog.info("[Growthcraft|Core] Successfully integrated with Thaumcraft.", new Object[0]);
-			}
-			catch (Exception e)
-			{
-				FMLLog.info("[Growthcraft|Core] Thaumcraft not found. No integration made.", new Object[0]);
-			}
-		}*/
+		modules.postInit();
 	}
 }

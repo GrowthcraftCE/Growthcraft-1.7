@@ -1,12 +1,44 @@
-﻿
+# Creative Tabs
 itemGroup.tabGrowthCraft=Growthcraft
 
+# Blocks
 tile.grc.fenceRope.name=Забор с верёвкой
 tile.grc.ropeBlock.name=Верёвка
 
+# Items
 item.grc.rope.name=Верёвка
 
+# Fluids
 fluid.tile.water=Вода
 fluid.tile.lava=Лава
 
+# Other
 achievementPage.pageGrowthCraft=Growthcraft
+
+# Formats and Units
+grc.format.value.true=ДА
+grc.format.value.false=НЕТ
+grc.format.state.true=ВКЛ.
+grc.format.state.false=ВЫКЛ.
+grc.format.invalid_fluid=<Недействительная жидкость>
+# Displayed for items
+grc.format.itemslot.empty=<Пусто>
+grc.format.itemslot.invalid=<Недействительный предмет>
+# Modifier name
+grc.format.booze.name=%2$s %1$s
+# When a fluid is not a booze
+grc.format.fluid.name=%1$s
+# Name (stack_size)
+grc.format.itemslot.item=%s (x%d)
+# Displayed for tile entities with multiple tanks, %d is the tank index + 1
+grc.format.tank_id=Резервуар %d :
+# When the tank is empty
+grc.format.tank.empty=<Пусто>
+# %s is the fluid name
+grc.format.tank.content_suffix=мВ %s
+
+# Waila Tooltips
+grc.format.crop.growth_prefix=Рост :
+grc.format.crop.progress_format=%d%%
+grc.format.crop.mature=Выросло
+grc.format.paddy.hasFluid=Есть жидкость :
