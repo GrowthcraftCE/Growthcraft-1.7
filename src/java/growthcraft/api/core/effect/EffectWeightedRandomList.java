@@ -74,7 +74,6 @@ public class EffectWeightedRandomList implements IEffect
 		}
 	}
 
-	private List<String> tempList = new ArrayList<String>();
 	private List<WeightedEffect> effects = new ArrayList<WeightedEffect>();
 
 	/**
@@ -206,6 +205,7 @@ public class EffectWeightedRandomList implements IEffect
 	public void getDescription(List<String> list)
 	{
 		final int totalWeight = WeightedRandom.getTotalWeight(effects);
+		final List<String> tempList = new ArrayList<String>();
 		for (WeightedEffect effect : effects)
 		{
 			tempList.clear();

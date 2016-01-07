@@ -40,11 +40,6 @@ import net.minecraft.entity.Entity;
 public class EffectRandomList extends AbstractEffectList
 {
 	/**
-	 * A temporary String list used for descriptions
-	 */
-	private List<String> tempList = new ArrayList<String>();
-
-	/**
 	 * Performs a shallow copy of the EffectList
 	 *
 	 * @return new effect list
@@ -79,6 +74,7 @@ public class EffectRandomList extends AbstractEffectList
 	{
 		if (effects.size() > 0)
 		{
+			final List<String> tempList = new ArrayList<String>();
 			list.add(GrcI18n.translate("grc.effect.random_list.head"));
 			for (IEffect effect : effects)
 			{

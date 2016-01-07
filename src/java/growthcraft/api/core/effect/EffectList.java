@@ -40,8 +40,6 @@ import net.minecraft.entity.Entity;
  */
 public class EffectList extends AbstractEffectList
 {
-	private List<String> tempList = new ArrayList<String>();
-
 	/**
 	 * Performs a shallow copy of the EffectList
 	 *
@@ -84,7 +82,7 @@ public class EffectList extends AbstractEffectList
 		addDescriptionHead(list);
 		for (IEffect effect : effects)
 		{
-			tempList.clear();
+			final List<String> tempList = new ArrayList<String>();
 			effect.getDescription(tempList);
 			Describer.addAllIndented(list, tempList);
 		}

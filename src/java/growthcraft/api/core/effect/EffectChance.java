@@ -38,7 +38,6 @@ import net.minecraft.world.World;
  */
 public class EffectChance implements IEffect
 {
-	private List<String> tempList = new ArrayList<String>();
 	private float chance;
 	private IEffect effect;
 
@@ -88,7 +87,7 @@ public class EffectChance implements IEffect
 	{
 		if (effect != null)
 		{
-			tempList.clear();
+			final List<String> tempList = new ArrayList<String>();
 			effect.getDescription(tempList);
 			if (tempList.size() > 0)
 			{
