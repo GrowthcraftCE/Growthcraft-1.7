@@ -29,7 +29,7 @@ import growthcraft.api.cellar.common.Residue;
 
 import net.minecraft.item.ItemStack;
 
-public class ResidueSchema extends ItemStackSchema
+public class ResidueSchema extends ItemKeySchema
 {
 	public float pomace;
 
