@@ -3,7 +3,7 @@ package growthcraft.cellar.util;
 import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.core.util.ConstID;
+import growthcraft.api.core.util.ConstID;
 import growthcraft.core.util.ITagFormatter;
 import growthcraft.core.util.TagFormatterItem;
 

@@ -27,17 +27,21 @@ import java.util.List;
 import java.util.Random;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.effect.IEffect;
-import growthcraft.api.core.effect.EffectList;
-import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.cellar.booze.effect.EffectTipsy;
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.effect.AbstractEffect;
+import growthcraft.api.core.effect.EffectAddPotionEffect;
+import growthcraft.api.core.effect.EffectList;
+import growthcraft.api.core.effect.IEffect;
 
-import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 
-public class BoozeEffect implements IEffect
+public class BoozeEffect extends AbstractEffect
 {
 	static class BoozeEffectList extends EffectList
 	{
@@ -64,6 +68,8 @@ public class BoozeEffect implements IEffect
 	{
 		this.booze = flu;
 	}
+
+	public BoozeEffect() {}
 
 	public BoozeEffect clearEffects()
 	{
@@ -127,15 +133,47 @@ public class BoozeEffect implements IEffect
 		return canCauseTipsy() || hasEffects();
 	}
 
+	@Override
 	public void apply(World world, Entity entity, Random random, Object data)
 	{
 		if (tipsyEffect != null) tipsyEffect.apply(world, entity, random, data);
 		effects.apply(world, entity, random, data);
 	}
 
+	@Override
 	public void getDescription(List<String> list)
 	{
 		if (tipsyEffect != null) tipsyEffect.getDescription(list);
 		effects.getDescription(list);
+	}
+
+	@Override
+	protected void readFromNBT(NBTTagCompound data)
+	{
+		this.booze = null;
+		this.tipsyEffect = null;
+		if (data.hasKey("tipsy_effect"))
+		{
+			this.tipsyEffect = (EffectTipsy)CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(data, "tipsy_effect");
+		}
+		this.effects = (BoozeEffectList)CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(data, "effects");
+		if (data.hasKey("fluid.name"))
+		{
+			this.booze = FluidRegistry.getFluid(data.getString("fluid.name"));
+		}
+	}
+
+	@Override
+	protected void writeToNBT(NBTTagCompound data)
+	{
+		if (tipsyEffect != null)
+		{
+			tipsyEffect.writeToNBT(data, "tipsy_effect");
+		}
+		effects.writeToNBT(data, "effects");
+		if (booze != null)
+		{
+			data.setString("fluid.name", booze.getName());
+		}
 	}
 }

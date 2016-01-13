@@ -27,24 +27,14 @@ import javax.annotation.Nonnull;
 
 import growthcraft.api.core.effect.IEffect;
 
-public interface IEffectRegistry
+import net.minecraft.nbt.NBTTagCompound;
+
+public interface IEffectRegistry extends IClassRegistry<IEffect>
 {
 	/**
-	 * @param name - Name to register it under
-	 * @param effectClass - An IEffect class
-	 * @return effect registry
-	 */
-	IEffectRegistry register(@Nonnull String name, @Nonnull Class<IEffect> effectClass);
-
-	/**
-	 * @param name - name of effect class to fetch
-	 * @return effect class
-	 */
-	Class<IEffect> getClass(@Nonnull String name);
-
-	/**
-	 * @param effectClass - effect class to fetch name for
+	 * @param data  - nbt data to load
+	 * @param name  - tag to load
 	 * @return name
 	 */
-	String getName(@Nonnull Class<IEffect> effectClass);
+	IEffect loadEffectFromNBT(@Nonnull NBTTagCompound data, @Nonnull String name);
 }

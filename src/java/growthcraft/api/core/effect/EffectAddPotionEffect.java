@@ -27,8 +27,11 @@ import java.util.List;
 import java.util.Random;
 import javax.annotation.Nonnull;
 
+import growthcraft.api.core.CoreRegistry;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
@@ -71,6 +74,8 @@ public class EffectAddPotionEffect extends AbstractEffect
 	@Override
 	public void apply(World world, Entity entity, Random random, Object data)
 	{
+		if (potionFactory == null) return;
+
 		if (entity instanceof EntityLivingBase)
 		{
 			final PotionEffect effect = potionFactory.createPotionEffect(world, entity, random, data);
@@ -82,6 +87,25 @@ public class EffectAddPotionEffect extends AbstractEffect
 	@Override
 	public void getDescription(List<String> list)
 	{
+		if (potionFactory == null) return;
 		potionFactory.getDescription(list);
+	}
+
+	@Override
+	protected void readFromNBT(NBTTagCompound data)
+	{
+		if (data.hasKey("potion_factory"))
+		{
+			this.potionFactory = CoreRegistry.instance().getPotionEffectFactoryRegistry().loadPotionEffectFactoryFromNBT(data, "potion_factory");
+		}
+	}
+
+	@Override
+	protected void writeToNBT(NBTTagCompound data)
+	{
+		if (potionFactory != null)
+		{
+			potionFactory.writeToNBT(data, "potion_factory");
+		}
 	}
 }

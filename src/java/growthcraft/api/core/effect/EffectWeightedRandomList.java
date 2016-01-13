@@ -28,12 +28,15 @@ import java.util.List;
 import java.util.Random;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.description.Describer;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.nbt.NBTHelper;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.WeightedRandom;
+import net.minecraft.world.World;
 
 /**
  * A variation of the EffectRandomList, this version uses weights instead
@@ -49,6 +52,11 @@ public class EffectWeightedRandomList extends AbstractEffect
 		{
 			super(weight);
 			this.effect = eff;
+		}
+
+		public WeightedEffect()
+		{
+			super(1);
 		}
 
 		/**
@@ -71,6 +79,50 @@ public class EffectWeightedRandomList extends AbstractEffect
 		public void getDescription(List<String> list)
 		{
 			effect.getDescription(list);
+		}
+
+		protected void readFromNBT(NBTTagCompound data)
+		{
+			this.itemWeight = data.getInteger("item_weight");
+			if (data.hasKey("effect"))
+			{
+				this.effect = CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(data, "effect");
+			}
+		}
+
+		@Override
+		public void readFromNBT(NBTTagCompound data, String name)
+		{
+			if (data.hasKey(name))
+			{
+				final NBTTagCompound effectData = data.getCompoundTag(name);
+				readFromNBT(effectData);
+			}
+			else
+			{
+				// LOG error
+			}
+		}
+
+		protected void writeToNBT(NBTTagCompound data)
+		{
+			data.setInteger("item_weight", itemWeight);
+			if (effect != null)
+			{
+				effect.writeToNBT(data, "effect");
+			}
+		}
+
+		@Override
+		public void writeToNBT(NBTTagCompound data, String name)
+		{
+			final NBTTagCompound target = new NBTTagCompound();
+			final String effectName = CoreRegistry.instance().getEffectsRegistry().getName(this.getClass());
+			// This is a VERY important field, this is how the effects will reload their correct class.
+			target.setString("__name__", effectName);
+			writeToNBT(target);
+
+			data.setTag(name, target);
 		}
 	}
 
@@ -217,5 +269,31 @@ public class EffectWeightedRandomList extends AbstractEffect
 				Describer.compactDescription(head, list, tempList);
 			}
 		}
+	}
+
+	@Override
+	protected void readFromNBT(NBTTagCompound data)
+	{
+		effects.clear();
+		final List<IEffect> list = new ArrayList<IEffect>();
+		NBTHelper.loadEffectsList(list, data);
+		for (IEffect effect : list)
+		{
+			if (effect instanceof WeightedEffect)
+			{
+				effects.add((WeightedEffect)effect);
+			}
+		}
+	}
+
+	@Override
+	protected void writeToNBT(NBTTagCompound data)
+	{
+		final List<IEffect> list = new ArrayList<IEffect>();
+		for (IEffect effect : effects)
+		{
+			list.add(effect);
+		}
+		NBTHelper.writeEffectsList(data, list);
 	}
 }

@@ -27,6 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 
+import growthcraft.api.core.nbt.NBTHelper;
+
+import net.minecraft.nbt.NBTTagCompound;
+
 /**
  * Base class for defining Effect lists
  */
@@ -113,5 +117,18 @@ public abstract class AbstractEffectList extends AbstractEffect
 	public int size()
 	{
 		return effects.size();
+	}
+
+	@Override
+	protected void readFromNBT(NBTTagCompound data)
+	{
+		effects.clear();
+		NBTHelper.loadEffectsList(effects, data);
+	}
+
+	@Override
+	protected void writeToNBT(NBTTagCompound data)
+	{
+		NBTHelper.writeEffectsList(data, effects);
 	}
 }

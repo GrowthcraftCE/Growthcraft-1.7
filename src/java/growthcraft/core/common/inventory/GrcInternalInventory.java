@@ -23,7 +23,7 @@
  */
 package growthcraft.core.common.inventory;
 
-import growthcraft.nbt.core.nbt.NBTHelper;
+import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.api.core.nbt.INBTSerializable;
 

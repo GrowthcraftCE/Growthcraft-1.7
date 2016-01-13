@@ -34,6 +34,7 @@ public class CoreRegistry implements ILoggable
 	protected ILogger logger = NullLogger.INSTANCE;
 	private final List<VineEntry> vineList = new ArrayList<VineEntry>();
 	private final IEffectRegistry effectRegistry = new EffectRegistry();
+	private final IPotionEffectFactoryRegistry potionEffectFactoryRegistry = new PotionEffectFactoryRegistry();
 
 	/**
 	 * @return vine drop list
@@ -45,14 +46,24 @@ public class CoreRegistry implements ILoggable
 		return instance;
 	}
 
-	public IEffectRegistry getEffectRegistry()
+	public IEffectRegistry getEffectsRegistry()
 	{
 		return effectRegistry;
+	}
+
+	public IPotionEffectFactoryRegistry getPotionEffectFactoryRegistry()
+	{
+		return potionEffectFactoryRegistry;
 	}
 
 	public void setLogger(ILogger l)
 	{
 		this.logger = l;
+	}
+
+	public ILogger getLogger()
+	{
+		return logger;
 	}
 
 	///////////////////////////////////////////////////////////////////////

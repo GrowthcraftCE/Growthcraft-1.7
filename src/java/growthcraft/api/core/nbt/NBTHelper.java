@@ -23,6 +23,10 @@
  */
 package growthcraft.api.core.nbt;
 
+import java.util.List;
+
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.util.ConstID;
 
 import net.minecraft.item.ItemStack;
@@ -134,5 +138,31 @@ public class NBTHelper
 	public static NBTTagCompound writeItemStackToNBT(ItemStack itemStack)
 	{
 		return writeItemStackToNBT(itemStack, new NBTTagCompound());
+	}
+
+	public static NBTTagCompound writeEffectsList(NBTTagCompound data, List<IEffect> list)
+	{
+		data.setInteger("size", list.size());
+		final NBTTagList effectsList = new NBTTagList();
+		for (IEffect effect : list)
+		{
+			final NBTTagCompound item = new NBTTagCompound();
+			effect.writeToNBT(item, "value");
+			effectsList.appendTag(item);
+		}
+		data.setTag("effects", effectsList);
+		return data;
+	}
+
+	public static void loadEffectsList(List<IEffect> list, NBTTagCompound data)
+	{
+		final int size = data.getInteger("size");
+		final NBTTagList effectsList = (NBTTagList)data.getTag("effects");
+		for (int i = 0; i < size; ++i)
+		{
+			final NBTTagCompound effectData = effectsList.getCompoundTagAt(i);
+			final IEffect effect = CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(effectData, "value");
+			list.add(effect);
+		}
 	}
 }

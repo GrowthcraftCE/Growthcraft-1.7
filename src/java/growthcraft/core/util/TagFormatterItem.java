@@ -26,6 +26,7 @@ package growthcraft.core.util;
 import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.util.ConstID;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

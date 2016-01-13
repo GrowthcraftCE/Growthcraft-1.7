@@ -26,9 +26,11 @@ package growthcraft.api.core.effect;
 import java.util.Random;
 import java.util.List;
 
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.description.Describer;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
@@ -71,5 +73,45 @@ public class SimplePotionEffectFactory implements IPotionEffectFactory
 	{
 		final PotionEffect pe = createPotionEffect(null, null, null, null);
 		Describer.getPotionEffectDescription(list, pe);
+	}
+
+	private void readFromNBT(NBTTagCompound data)
+	{
+		this.id = data.getInteger("id");
+		this.time = data.getInteger("time");
+		this.level = data.getInteger("level");
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound data, String name)
+	{
+		if (data.hasKey(name))
+		{
+			final NBTTagCompound subData = data.getCompoundTag(name);
+			readFromNBT(subData);
+		}
+		else
+		{
+			// LOG error
+		}
+	}
+
+	private void writeToNBT(NBTTagCompound data)
+	{
+		data.setInteger("id", getID());
+		data.setInteger("time", getTime());
+		data.setInteger("level", getLevel());
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound data, String name)
+	{
+		final NBTTagCompound target = new NBTTagCompound();
+		final String factoryName = CoreRegistry.instance().getPotionEffectFactoryRegistry().getName(this.getClass());
+
+		target.setString("__name__", factoryName);
+		writeToNBT(target);
+
+		data.setTag(name, target);
 	}
 }

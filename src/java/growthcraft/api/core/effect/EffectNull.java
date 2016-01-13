@@ -29,6 +29,7 @@ import java.util.Random;
 import growthcraft.api.core.i18n.GrcI18n;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 /**
@@ -44,5 +45,15 @@ public class EffectNull extends AbstractEffect
 	{
 		// Set the description as "Does Nothing."
 		list.add(GrcI18n.translate("grc.effect.null.desc"));
+	}
+
+	@Override
+	protected void readFromNBT(NBTTagCompound data)
+	{
+	}
+
+	@Override
+	protected void writeToNBT(NBTTagCompound data)
+	{
 	}
 }

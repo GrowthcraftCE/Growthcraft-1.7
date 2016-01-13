@@ -33,7 +33,6 @@ import net.minecraft.nbt.NBTTagCompound;
 public abstract class AbstractEffect implements IEffect
 {
 	protected abstract void readFromNBT(NBTTagCompound data);
-	protected abstract void writeToNBT(NBTTagCompound data);
 
 	@Override
 	public void readFromNBT(NBTTagCompound data, String name)
@@ -49,14 +48,17 @@ public abstract class AbstractEffect implements IEffect
 		}
 	}
 
+	protected abstract void writeToNBT(NBTTagCompound data);
+
 	@Override
 	public void writeToNBT(NBTTagCompound data, String name)
 	{
 		final NBTTagCompound target = new NBTTagCompound();
-		final String effectName = CoreRegistry.instance().getEffectRegistry().getName(this.getClass());
+		final String effectName = CoreRegistry.instance().getEffectsRegistry().getName(this.getClass());
 		// This is a VERY important field, this is how the effects will reload their correct class.
 		target.setString("__name__", effectName);
 		writeToNBT(target);
+
 		data.setTag(name, target);
 	}
 }

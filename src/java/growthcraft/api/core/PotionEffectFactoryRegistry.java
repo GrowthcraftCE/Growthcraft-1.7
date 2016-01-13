@@ -25,13 +25,13 @@ package growthcraft.api.core;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.effect.IEffect;
+import growthcraft.api.core.effect.IPotionEffectFactory;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public class EffectRegistry extends AbstractClassRegistry<IEffect> implements IEffectRegistry
+public class PotionEffectFactoryRegistry extends AbstractClassRegistry<IPotionEffectFactory> implements IPotionEffectFactoryRegistry
 {
-	public IEffect loadEffectFromNBT(@Nonnull NBTTagCompound data, @Nonnull String name)
+	public IPotionEffectFactory loadPotionEffectFactoryFromNBT(@Nonnull NBTTagCompound data, @Nonnull String name)
 	{
 		return loadObjectFromNBT(data, name);
 	}
