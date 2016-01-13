@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ import net.minecraft.potion.PotionEffect;
 /**
  * As its name implies, this Effect will REMOVE a Potion Effect from the target.
  */
-public class EffectRemovePotionEffect implements IEffect
+public class EffectRemovePotionEffect extends AbstractEffect
 {
 	private int potionId;
 

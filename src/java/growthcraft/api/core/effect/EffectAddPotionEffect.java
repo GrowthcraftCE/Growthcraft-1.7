@@ -35,7 +35,7 @@ import net.minecraft.world.World;
 /**
  * As its name implies, this Effect, will ADD a Potion Effect to the target.
  */
-public class EffectAddPotionEffect implements IEffect
+public class EffectAddPotionEffect extends AbstractEffect
 {
 	private IPotionEffectFactory potionFactory;
 
@@ -52,6 +52,9 @@ public class EffectAddPotionEffect implements IEffect
 		return this;
 	}
 
+	/**
+	 * @return potion factory
+	 */
 	public IPotionEffectFactory getPotionFactory()
 	{
 		return potionFactory;

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ import net.minecraft.util.WeightedRandom;
  * A variation of the EffectRandomList, this version uses weights instead
  * linear distribution.
  */
-public class EffectWeightedRandomList implements IEffect
+public class EffectWeightedRandomList extends AbstractEffect
 {
 	public static class WeightedEffect extends WeightedRandom.Item implements IEffect
 	{

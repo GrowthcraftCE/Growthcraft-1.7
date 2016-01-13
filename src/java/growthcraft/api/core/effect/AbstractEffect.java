@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,26 +23,40 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.List;
-import java.util.Random;
+import growthcraft.api.core.CoreRegistry;
 
-import growthcraft.api.core.i18n.GrcI18n;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Because sometimes you want an Effect that does ABSOLUTELY NOTHING.
  */
-public class EffectNull extends AbstractEffect
+public abstract class AbstractEffect implements IEffect
 {
-	@Override
-	public void apply(World world, Entity entity, Random random, Object data) {}
+	protected abstract void readFromNBT(NBTTagCompound data);
+	protected abstract void writeToNBT(NBTTagCompound data);
 
 	@Override
-	public void getDescription(List<String> list)
+	public void readFromNBT(NBTTagCompound data, String name)
 	{
-		// Set the description as "Does Nothing."
-		list.add(GrcI18n.translate("grc.effect.null.desc"));
+		if (data.hasKey(name))
+		{
+			final NBTTagCompound effectData = data.getCompoundTag(name);
+			readFromNBT(effectData);
+		}
+		else
+		{
+			// LOG error
+		}
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound data, String name)
+	{
+		final NBTTagCompound target = new NBTTagCompound();
+		final String effectName = CoreRegistry.instance().getEffectRegistry().getName(this.getClass());
+		// This is a VERY important field, this is how the effects will reload their correct class.
+		target.setString("__name__", effectName);
+		writeToNBT(target);
+		data.setTag(name, target);
 	}
 }

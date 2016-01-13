@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ import javax.annotation.Nonnull;
 /**
  * Base class for defining Effect lists
  */
-public abstract class AbstractEffectList implements IEffect
+public abstract class AbstractEffectList extends AbstractEffect
 {
 	protected List<IEffect> effects = new ArrayList<IEffect>();
 
