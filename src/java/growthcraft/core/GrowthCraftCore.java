@@ -8,14 +8,13 @@ import growthcraft.core.common.block.BlockFenceRope;
 import growthcraft.core.common.block.BlockRope;
 import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.common.item.ItemRope;
 import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
 import growthcraft.core.event.EventHandlerBucketFill;
 import growthcraft.core.event.HarvestDropsEventCore;
 import growthcraft.core.event.PlayerInteractEventAmazingStick;
 import growthcraft.core.event.PlayerInteractEventPaddy;
 import growthcraft.core.event.TextureStitchEventCore;
+import growthcraft.core.init.GrcCoreItems;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.ItemUtils;
 
@@ -62,7 +61,7 @@ public class GrowthCraftCore
 
 	public static BlockDefinition fenceRope;
 	public static BlockDefinition ropeBlock;
-	public static ItemDefinition rope;
+	public static GrcCoreItems items = new GrcCoreItems();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcCoreConfig config = new GrcCoreConfig();
@@ -93,10 +92,9 @@ public class GrowthCraftCore
 		//====================
 		fenceRope = new BlockDefinition(new BlockFenceRope());
 		ropeBlock = new BlockDefinition(new BlockRope());
-		rope = new ItemDefinition(new ItemRope());
 
-		register();
 		modules.preInit();
+		register();
 	}
 
 	private void register()
@@ -107,20 +105,10 @@ public class GrowthCraftCore
 		GameRegistry.registerBlock(fenceRope.getBlock(), "grc.fenceRope");
 		GameRegistry.registerBlock(ropeBlock.getBlock(), "grc.ropeBlock");
 
-		GameRegistry.registerItem(rope.getItem(), "grc.rope");
-
 		//====================
 		// ADDITIONAL PROPS.
 		//====================
 		Blocks.fire.setFireInfo(fenceRope.getBlock(), 5, 20);
-
-		//====================
-		// CRAFTING
-		//====================
-		GameRegistry.addRecipe(rope.asStack(8), new Object[] {"A", 'A', Items.lead});
-
-
-		OreDictionary.registerOre("materialRope", rope.getItem());
 
 		NEI.hideItem(fenceRope.asStack());
 		NEI.hideItem(ropeBlock.asStack());

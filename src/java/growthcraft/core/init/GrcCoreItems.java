@@ -21,24 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.integration;
+package growthcraft.core.init;
 
-import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.item.ItemRope;
+import growthcraft.core.common.item.ItemSalt;
 
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.aspects.Aspect;
+import cpw.mods.fml.common.registry.GameRegistry;
 
-public class ThaumcraftModule extends ThaumcraftModuleBase
+import net.minecraft.init.Items;
+import net.minecraftforge.oredict.OreDictionary;
+
+public class GrcCoreItems extends GrcModuleBase
 {
-	public ThaumcraftModule()
+	public ItemDefinition rope;
+	public ItemDefinition salt;
+
+	@Override
+	public void preInit()
 	{
-		super(GrowthCraftCore.MOD_ID);
+		this.rope = new ItemDefinition(new ItemRope());
+		this.salt = new ItemDefinition(new ItemSalt());
 	}
 
 	@Override
-	protected void integrate()
+	public void register()
 	{
-		ThaumcraftApi.registerObjectTag(GrowthCraftCore.items.rope.asStack(), new AspectList().add(Aspect.CRAFT, 1).add(Aspect.CLOTH, 1));
+		GameRegistry.registerItem(rope.getItem(), "grc.rope");
+		GameRegistry.registerItem(salt.getItem(), "grccore.salt");
+	}
+
+	@Override
+	public void init()
+	{
+		GameRegistry.addRecipe(rope.asStack(8), new Object[] {"A", 'A', Items.lead});
+
+		OreDictionary.registerOre("materialRope", rope.getItem());
+		OreDictionary.registerOre("materialSalt", salt.getItem());
+		OreDictionary.registerOre("foodSalt", salt.getItem());
 	}
 }

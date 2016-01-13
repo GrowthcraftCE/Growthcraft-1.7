@@ -248,7 +248,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return GrowthCraftCore.rope.getItem();
+		return GrowthCraftCore.items.rope.getItem();
 	}
 
 	@Override

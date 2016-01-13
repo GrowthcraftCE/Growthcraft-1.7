@@ -78,7 +78,7 @@ public class BlockRope extends Block implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftCore.rope.getItem();
+		return GrowthCraftCore.items.rope.getItem();
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class BlockRope extends Block implements IBlockRope
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
-		return GrowthCraftCore.rope.getItem();
+		return GrowthCraftCore.items.rope.getItem();
 	}
 
 	@Override

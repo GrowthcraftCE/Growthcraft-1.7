@@ -341,7 +341,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		ret.add(GrowthCraftCore.rope.asStack());
+		ret.add(GrowthCraftCore.items.rope.asStack());
 		if (world.getBlockMetadata(x, y, z) >= HopsStage.BIG)
 		{
 			ret.add(GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));

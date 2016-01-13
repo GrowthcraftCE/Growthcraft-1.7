@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,24 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.integration;
+package growthcraft.core.common.item;
 
-import growthcraft.core.GrowthCraftCore;
+import net.minecraft.item.Item;
 
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.aspects.Aspect;
-
-public class ThaumcraftModule extends ThaumcraftModuleBase
+public class ItemSalt extends Item
 {
-	public ThaumcraftModule()
+	public ItemSalt()
 	{
-		super(GrowthCraftCore.MOD_ID);
-	}
-
-	@Override
-	protected void integrate()
-	{
-		ThaumcraftApi.registerObjectTag(GrowthCraftCore.items.rope.asStack(), new AspectList().add(Aspect.CRAFT, 1).add(Aspect.CLOTH, 1));
+		super();
+		setTextureName("grccore:salt");
 	}
 }

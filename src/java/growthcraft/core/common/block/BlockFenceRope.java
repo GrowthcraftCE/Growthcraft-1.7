@@ -49,11 +49,11 @@ public class BlockFenceRope extends Block implements IBlockRope
 		}
 		else
 		{
-			if (player.inventory.getCurrentItem() != null && GrowthCraftCore.rope.equals(player.inventory.getCurrentItem().getItem())) { return false; }
+			if (player.inventory.getCurrentItem() != null && GrowthCraftCore.items.rope.equals(player.inventory.getCurrentItem().getItem())) { return false; }
 			else
 			{
 				world.setBlock(x, y, z, Blocks.fence);
-				this.dropBlockAsItem(world, x, y, z, GrowthCraftCore.rope.asStack());
+				this.dropBlockAsItem(world, x, y, z, GrowthCraftCore.items.rope.asStack());
 			}
 
 			return true;
@@ -96,7 +96,7 @@ public class BlockFenceRope extends Block implements IBlockRope
 	{
 		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(new ItemStack(Blocks.fence));
-		ret.add(GrowthCraftCore.rope.asStack());
+		ret.add(GrowthCraftCore.items.rope.asStack());
 		return ret;
 	}
 
