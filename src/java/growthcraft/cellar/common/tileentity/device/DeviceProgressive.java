@@ -25,11 +25,12 @@ package growthcraft.cellar.common.tileentity.device;
 
 import io.netty.buffer.ByteBuf;
 
+import growthcraft.api.core.nbt.INBTSerializable;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public class DeviceProgressive extends DeviceBase
+public class DeviceProgressive extends DeviceBase implements INBTSerializable
 {
 	protected int time;
 	protected int timeMax;
@@ -100,9 +101,9 @@ public class DeviceProgressive extends DeviceBase
 	 */
 	public void readFromNBT(NBTTagCompound data, String name)
 	{
-		final NBTTagCompound list = data.getCompoundTag(name);
-		if (list != null)
+		if (data.hasKey(name))
 		{
+			final NBTTagCompound list = data.getCompoundTag(name);
 			readFromNBT(list);
 		}
 		else

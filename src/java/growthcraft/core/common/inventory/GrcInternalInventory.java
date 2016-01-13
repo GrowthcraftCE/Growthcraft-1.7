@@ -23,9 +23,9 @@
  */
 package growthcraft.core.common.inventory;
 
-import growthcraft.core.util.NBTHelper;
+import growthcraft.nbt.core.nbt.NBTHelper;
 import growthcraft.core.util.ItemUtils;
-import growthcraft.core.common.nbt.INbtSerializable;
+import growthcraft.api.core.nbt.INBTSerializable;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -33,7 +33,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class GrcInternalInventory implements IInventory, INbtSerializable
+public class GrcInternalInventory implements IInventory, INBTSerializable
 {
 	public static final int WILDCARD_SLOT = -1;
 
