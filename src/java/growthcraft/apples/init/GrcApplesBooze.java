@@ -24,6 +24,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcApplesBooze extends GrcModuleBase
 {
@@ -147,6 +148,10 @@ public class GrcApplesBooze extends GrcModuleBase
 		GameRegistry.registerItem(appleCiderBucket_deprecated.getItem(), "grc.appleCider_bucket");
 
 		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", appleCiderBucket_deprecated);
+
+		// Ore Dictionary
+		OreDictionary.registerOre("foodApplejuice", appleCider.asStack());
+
 		registerRecipes();
 	}
 }
