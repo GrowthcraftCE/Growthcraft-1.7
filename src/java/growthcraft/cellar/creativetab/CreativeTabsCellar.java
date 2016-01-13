@@ -10,8 +10,6 @@ import net.minecraft.item.ItemStack;
 
 public class CreativeTabsCellar extends CreativeTabs
 {
-	private ItemStack icon;
-
 	public CreativeTabsCellar(String index)
 	{
 		super(index);
