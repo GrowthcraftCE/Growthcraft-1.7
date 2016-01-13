@@ -33,6 +33,7 @@ public class CoreRegistry implements ILoggable
 
 	protected ILogger logger = NullLogger.INSTANCE;
 	private final List<VineEntry> vineList = new ArrayList<VineEntry>();
+	private final IEffectRegistry effectRegistry = new EffectRegistry();
 
 	/**
 	 * @return vine drop list
@@ -42,6 +43,11 @@ public class CoreRegistry implements ILoggable
 	public static final CoreRegistry instance()
 	{
 		return instance;
+	}
+
+	public IEffectRegistry getEffectRegistry()
+	{
+		return effectRegistry;
 	}
 
 	public void setLogger(ILogger l)
