@@ -23,6 +23,8 @@
  */
 package growthcraft.core.common.item;
 
+import growthcraft.core.GrowthCraftCore;
+
 import net.minecraft.item.Item;
 
 public class ItemSalt extends Item
@@ -31,5 +33,7 @@ public class ItemSalt extends Item
 	{
 		super();
 		setTextureName("grccore:salt");
+		setUnlocalizedName("grccore.salt");
+		setCreativeTab(GrowthCraftCore.tab);
 	}
 }

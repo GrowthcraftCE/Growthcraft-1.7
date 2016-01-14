@@ -29,10 +29,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(
 	modid = GrowthCraftCore.MOD_ID,
@@ -78,6 +76,8 @@ public class GrowthCraftCore
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
 		if (config.debugEnabled) logger.info("Pre-Initializing %s", MOD_ID);
+
+		modules.add(items);
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.core.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.core.integration.Waila());
