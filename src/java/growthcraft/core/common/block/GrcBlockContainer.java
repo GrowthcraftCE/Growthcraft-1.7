@@ -53,7 +53,7 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 	protected Random rand = new Random();
 	protected Class<? extends TileEntity> tileEntityType;
 
-	public GrcBlockContainer(Material material)
+	public GrcBlockContainer(@Nonnull Material material)
 	{
 		super(material);
 		this.isBlockContainer = true;
