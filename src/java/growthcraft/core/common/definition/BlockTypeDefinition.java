@@ -27,8 +27,10 @@ import javax.annotation.Nonnull;
 
 import growthcraft.api.core.definition.ISubItemStackFactory;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> implements ISubItemStackFactory
@@ -50,6 +52,7 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	}
 
 	@Nonnull
+	@Override
 	public ItemStack asStack(int size, int damage)
 	{
 		return new ItemStack(getBlock(), size, damage);
@@ -83,5 +86,22 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	public boolean isSameAs(Block other)
 	{
 		return getBlock() == other;
+	}
+
+	/**
+	 * @param name - block name
+	 * @param itemClass - item class to register to
+	 */
+	public void register(String name, Class<? extends ItemBlock> itemClass)
+	{
+		GameRegistry.registerBlock(getBlock(), itemClass, name);
+	}
+
+	/**
+	 * @param name - block name
+	 */
+	public void register(String name)
+	{
+		GameRegistry.registerBlock(getBlock(), name);
 	}
 }

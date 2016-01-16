@@ -26,6 +26,7 @@ package growthcraft.core.common.definition;
 import javax.annotation.Nonnull;
 
 import growthcraft.core.common.block.GrcBlockFluid;
+import growthcraft.core.common.item.ItemGrcBlockFluid;
 
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.Fluid;
@@ -35,6 +36,12 @@ public class GrcBlockFluidDefinition extends BlockTypeDefinition<GrcBlockFluid>
 	public GrcBlockFluidDefinition(@Nonnull GrcBlockFluid fluid)
 	{
 		super(fluid);
+	}
+
+	@Override
+	public void register(String name)
+	{
+		super.register(name, ItemGrcBlockFluid.class);
 	}
 
 	public static GrcBlockFluidDefinition create(Fluid fluid, Material mat)
