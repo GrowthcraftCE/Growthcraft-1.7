@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,28 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.cellar.common.block;
+package growthcraft.core.common.definition;
 
-import growthcraft.cellar.GrowthCraftCellar;
+import javax.annotation.Nonnull;
+
 import growthcraft.core.common.block.GrcBlockFluid;
-import growthcraft.core.common.block.Materials;
 
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.Fluid;
 
-public class BlockFluidBooze extends GrcBlockFluid
+public class GrcBlockFluidDefinition extends BlockTypeDefinition<GrcBlockFluid>
 {
-	public BlockFluidBooze(Fluid fluid)
+	public GrcBlockFluidDefinition(@Nonnull GrcBlockFluid fluid)
 	{
-		super(fluid, GrowthCraftCellar.getConfig().boozeIsWater ? Material.water : Materials.booze);
-		setBlockTextureName("grccellar:booze");
-		setCreativeTab(GrowthCraftCellar.tab);
-		refreshColor();
+		super(fluid);
 	}
 
-	public void refreshColor()
+	public static GrcBlockFluidDefinition create(Fluid fluid, Material mat)
 	{
-		setColor(getFluid().getColor());
-		refreshLight();
+		return new GrcBlockFluidDefinition(new GrcBlockFluid(fluid, mat));
+	}
+
+	public static GrcBlockFluidDefinition create(Fluid fluid)
+	{
+		return create(fluid, Material.water);
 	}
 }
