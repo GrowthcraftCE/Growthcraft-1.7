@@ -45,7 +45,7 @@ public class GrcBlockFluid extends BlockFluidClassic
 	@SideOnly(Side.CLIENT)
 	protected IIcon[] icons;
 
-	private int color;
+	private int color = 0xFFFFFF;
 
 	public GrcBlockFluid(Fluid fluid, Material material)
 	{
