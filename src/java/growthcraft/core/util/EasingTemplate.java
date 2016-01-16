@@ -426,9 +426,9 @@ public class EasingTemplate
 	public final QuarticIn quartIn = new QuarticIn();
 	public final QuarticInOut quartInOut = new QuarticInOut();
 	public final QuarticOut quartOut = new QuarticOut();
-	public final QuinticIn quinIn = new QuinticIn();
-	public final QuinticInOut quinInOut = new QuinticInOut();
-	public final QuinticOut quinOut = new QuinticOut();
+	public final QuinticIn quintIn = new QuinticIn();
+	public final QuinticInOut quintInOut = new QuinticInOut();
+	public final QuinticOut quintOut = new QuinticOut();
 	public final SinusoidalIn sineIn = new SinusoidalIn();
 	public final SinusoidalInOut sineInOut = new SinusoidalInOut();
 	public final SinusoidalOut sineOut = new SinusoidalOut();
