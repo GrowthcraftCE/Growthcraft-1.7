@@ -240,12 +240,13 @@ public class EasingTemplate
 
 	public static class ElasticIn implements EasingFunction
 	{
+		private final double p = 0.4D;
+
 		@SuppressWarnings("checkstyle:innerassignment")
 		public double call(double k)
 		{
 			double s = 0.0D;
 			double a = 0.1D;
-			final double p = 0.4D;
 
 			if (k == 0D)
 				return 0;
@@ -268,11 +269,12 @@ public class EasingTemplate
 
 	public static class ElasticOut implements EasingFunction
 	{
+		private final double p = 0.4;
+
 		public double call(double k)
 		{
 			double s = 0.0;
 			double a = 0.1;
-			final double p = 0.4;
 
 			if (k == 0D)
 				return 0;
@@ -295,12 +297,13 @@ public class EasingTemplate
 
 	public static class ElasticInOut implements EasingFunction
 	{
+		private final double p = 0.4;
+
 		@SuppressWarnings("checkstyle:innerassignment")
 		public double call(double k)
 		{
 			double s = 0.0;
 			double a = 0.1;
-			final double p = 0.4;
 
 			if (k == 0D)
 				return 0;
@@ -326,29 +329,31 @@ public class EasingTemplate
 
 	public static class BackIn implements EasingFunction
 	{
+		private final double s = 1.70158;
 		public double call(double k)
 		{
-			final double s = 1.70158;
 			return k * k * ((s + 1) * k - s);
 		}
 	}
 
 	public static class BackOut implements EasingFunction
 	{
+		private final double s = 1.70158;
+
 		@SuppressWarnings("checkstyle:innerassignment")
 		public double call(double k)
 		{
-			final double s = 1.70158;
 			return (k-=1) * k * ((s + 1) * k + s) + 1;
 		}
 	}
 
 	public static class BackInOut implements EasingFunction
 	{
+		private final double s = 1.70158 * 1.525;
+
 		@SuppressWarnings("checkstyle:innerassignment")
 		public double call(double k)
 		{
-			final double s = 1.70158 * 1.525;
 			if ((k *= 2D) < 1D)
 				return 0.5 * (k * k * ((s + 1) * k - s));
 			else
