@@ -21,16 +21,65 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.booze;
+package growthcraft.api.core;
 
+import java.util.List;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.GrcFluid;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.description.IDescribable;
 
-public class Booze extends GrcFluid
+import net.minecraftforge.fluids.Fluid;
+
+/**
+ * An extension of the default Forge Fluid class, adding descriptions and color
+ * setting
+ */
+public class GrcFluid extends Fluid implements IDescribable
 {
-	public Booze(@Nonnull String fluidName)
+	protected int color;
+
+	public GrcFluid(@Nonnull String fluidName)
 	{
 		super(fluidName);
+		this.color = 0xFFFFFF;
+	}
+
+	/**
+	 * Returns the color of the fluid
+	 *
+	 * @return color - a RGB24 value
+	 */
+	@Override
+	public int getColor()
+	{
+		return color;
+	}
+
+	/**
+	 * Sets the color of the fluid
+	 *
+	 * @param col - a RGB24 color
+	 */
+	public GrcFluid setColor(int col)
+	{
+		this.color = col;
+		return this;
+	}
+
+	/**
+	 * Adds the fluids's description to the list
+	 *
+	 * @param list - list to add description to
+	 */
+	@Override
+	public void getDescription(@Nonnull List<String> list)
+	{
+		final String unloc = getUnlocalizedName() + ".desc";
+		final String result = GrcI18n.translate(unloc);
+		if (!unloc.equals(result))
+		{
+			list.add(result);
+		}
 	}
 }
