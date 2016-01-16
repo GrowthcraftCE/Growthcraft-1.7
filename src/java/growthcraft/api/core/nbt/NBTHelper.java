@@ -59,6 +59,17 @@ public class NBTHelper
 
 	private NBTHelper() {}
 
+	public static NBTTagCompound openItemStackTag(ItemStack stack)
+	{
+		NBTTagCompound tag = stack.getTagCompound();
+		if (tag == null)
+		{
+			tag = new NBTTagCompound();
+			stack.setTagCompound(tag);
+		}
+		return tag;
+	}
+
 	public static NBTTagList writeInventorySlotsToNBT(ItemStack[] invSlots, NBTTagList invTags)
 	{
 		for (int i = 0; i < invSlots.length; ++i)
