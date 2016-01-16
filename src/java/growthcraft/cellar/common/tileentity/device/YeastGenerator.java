@@ -17,22 +17,22 @@ import net.minecraftforge.common.BiomeDictionary;
 public class YeastGenerator extends DeviceProgressive
 {
 	protected int consumption = 1200 / 16;
-	protected int fluidSlot;
-	protected int invSlot;
+	protected DeviceFluidSlot fluidSlot;
+	protected DeviceInventorySlot invSlot;
 	protected List<ItemStack> tempItemList = new ArrayList<ItemStack>();
 
 	/**
 	 * @param te - parent tile entity
-	 * @param fs - fluid slot id to use in parent
+	 * @param fluidSlotIndex - fluid slot id to use in parent
 	 *             Fluid will be used from this slot
-	 * @param is - inventory slot id to use in parent
+	 * @param invSlotIndex - inventory slot id to use in parent
 	 *             Yeast will be generated into this slot
 	 */
-	public YeastGenerator(TileEntityCellarDevice te, int fs, int is)
+	public YeastGenerator(TileEntityCellarDevice te, int fluidSlotIndex, int invSlotIndex)
 	{
 		super(te);
-		this.fluidSlot = fs;
-		this.invSlot = is;
+		this.fluidSlot = new DeviceFluidSlot(te, fluidSlotIndex);
+		this.invSlot = new DeviceInventorySlot(te, invSlotIndex);
 		setTimeMax(1200);
 	}
 
@@ -80,18 +80,18 @@ public class YeastGenerator extends DeviceProgressive
 	public boolean canProduceYeast()
 	{
 		if (parent.getFluidAmount(0) < consumption) return false;
-		final ItemStack yeastItem = getInventory().getStackInSlot(invSlot);
+		final ItemStack yeastItem = invSlot.get();
 		// we can ignore null items, this will fallback to the initProduceYeast
 		if (yeastItem != null)
 		{
 			if (!canReplicateYeast(yeastItem)) return false;
 		}
-		return CellarRegistry.instance().booze().hasTags(parent.getFluid(fluidSlot), BoozeTag.YOUNG);
+		return CellarRegistry.instance().booze().hasTags(fluidSlot.getFluid(), BoozeTag.YOUNG);
 	}
 
 	public void consumeFluid()
 	{
-		parent.getFluidTank(fluidSlot).drain(consumption, true);
+		fluidSlot.consume(consumption, true);
 		parent.markForBlockUpdate();
 	}
 
@@ -117,20 +117,20 @@ public class YeastGenerator extends DeviceProgressive
 		if (tempItemList.size() > 0)
 		{
 			final ItemStack result = tempItemList.get(random.nextInt(tempItemList.size())).copy();
-			getInventory().setInventorySlotContents(invSlot, result);
+			invSlot.set(result);
 			consumeFluid();
 		}
 	}
 
 	public void produceYeast()
 	{
-		if (getInventory().getStackInSlot(invSlot) == null)
+		if (invSlot.isEmpty())
 		{
 			initProduceYeast();
 		}
 		else
 		{
-			final ItemStack contents = getInventory().getStackInSlot(invSlot);
+			final ItemStack contents = invSlot.get();
 			// ensure that the item is indeed some form of yeast, prevents item duplication
 			// while canProduceYeast will prevent invalid items from popping up
 			// produceYeast is public, and can be called outside the update
@@ -138,7 +138,7 @@ public class YeastGenerator extends DeviceProgressive
 			// item correctness
 			if (canReplicateYeast(contents))
 			{
-				getInventory().setInventorySlotContents(invSlot, ItemUtils.increaseStack(contents));
+				invSlot.set(ItemUtils.increaseStack(contents));
 				consumeFluid();
 			}
 		}
