@@ -25,6 +25,7 @@ package growthcraft.cellar.common.tileentity.device;
 
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class DeviceFluidSlot
@@ -41,6 +42,13 @@ public class DeviceFluidSlot
 	public FluidStack get()
 	{
 		return tanks.getFluidStack(index);
+	}
+
+	public Fluid getFluid()
+	{
+		final FluidStack stack = get();
+		if (stack == null) return null;
+		return stack.getFluid();
 	}
 
 	public void set(FluidStack newStack)
