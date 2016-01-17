@@ -139,7 +139,7 @@ public class ThaumcraftBoozeHelper implements ILoggable
 	public void registerAspectsForBucket(ItemBucketBoozeDefinition def, AspectList base)
 	{
 		final ItemBucketBooze bucket = def.getItem();
-		ThaumcraftApi.registerObjectTag(def.asStack(), setAspectsForBoozeBucket(bucket.getBooze(), base.copy()));
+		ThaumcraftApi.registerObjectTag(def.asStack(), setAspectsForBoozeBucket(bucket.getBooze(null), base.copy()));
 	}
 
 	public void registerAspectsForBuckets(ItemBucketBoozeDefinition[] buckets, AspectList base)

@@ -15,9 +15,6 @@ public class GrcCellarConfig extends ConfigBase
 	public boolean boozeIsWater = true;
 
 
-	@ConfigOption(catergory="Booze", name="Bottle Capacity", desc="How much booze does a bottle hold?")
-	public int bottleCapacity = 333;
-
 	@ConfigOption(catergory="Booze", name="Water Bag Capacity", desc="How much booze does a water bag hold (normally 5x a bottle)?")
 	public int waterBagCapacity = 333 * 5;
 

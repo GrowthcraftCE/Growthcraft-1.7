@@ -29,6 +29,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -61,6 +63,9 @@ public class GrowthCraftCore
 	public static BlockDefinition ropeBlock;
 	public static GrcCoreItems items = new GrcCoreItems();
 
+	// Constants
+	public static ItemStack EMPTY_BOTTLE;
+
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcCoreConfig config = new GrcCoreConfig();
 	private ModuleContainer modules = new ModuleContainer();
@@ -92,6 +97,8 @@ public class GrowthCraftCore
 		//====================
 		fenceRope = new BlockDefinition(new BlockFenceRope());
 		ropeBlock = new BlockDefinition(new BlockRope());
+
+		EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
 
 		modules.preInit();
 		register();
@@ -141,5 +148,6 @@ public class GrowthCraftCore
 		}
 
 		modules.postInit();
+		//growthcraft.core.util.GameRegistryDumper.run();
 	}
 }

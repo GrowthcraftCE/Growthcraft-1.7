@@ -37,9 +37,9 @@ import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBlockFluidBooze;
 import growthcraft.cellar.common.item.ItemBucketBooze;
-import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.event.EventHandlerBucketFill;
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -78,8 +78,8 @@ public class BoozeRegistryHelper
 			final FluidStack boozeStack = new FluidStack(boozes[i], FluidContainerRegistry.BUCKET_VOLUME);
 			FluidContainerRegistry.registerFluidContainer(boozeStack, buckets[i].asStack(), FluidContainerRegistry.EMPTY_BUCKET);
 
-			final FluidStack fluidStack = new FluidStack(boozes[i], GrowthCraftCellar.getConfig().bottleCapacity);
-			FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1, i), GrowthCraftCellar.EMPTY_BOTTLE);
+			final FluidStack fluidStack = new FluidStack(boozes[i], GrowthCraftCore.getConfig().bottleCapacity);
+			FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1, i), GrowthCraftCore.EMPTY_BOTTLE);
 
 
 			GameRegistry.addShapelessRecipe(bottle.asStack(3, i), buckets[i].getItem(), Items.glass_bottle, Items.glass_bottle, Items.glass_bottle);

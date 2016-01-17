@@ -59,7 +59,6 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -93,9 +92,6 @@ public class GrowthCraftCellar
 	public static ItemDefinition waterBag;
 
 	public static Potion potionTipsy;
-
-	// Constants
-	public static ItemStack EMPTY_BOTTLE;
 
 	// Achievments
 	public static ItemDefinition chievItemDummy;
@@ -152,7 +148,6 @@ public class GrowthCraftCellar
 		//====================
 		// INIT
 		//====================
-		EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
 		tab = new CreativeTabsCellar("tabGrCCellar");
 		fermentBarrel = new BlockDefinition(new BlockFermentBarrel());
 		fermentJar    = new BlockDefinition(new BlockFermentJar());
