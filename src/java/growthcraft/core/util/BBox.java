@@ -45,15 +45,15 @@ public class BBox
 		this.boundsData[5] = bounds[5];
 	}
 
-	public BBox(float px1, float py1, float pz1, float px2, float py2, float pz2)
+	public BBox(float px0, float py0, float pz0, float px1, float py1, float pz1)
 	{
 		this();
-		this.boundsData[0] = px1;
-		this.boundsData[1] = py1;
-		this.boundsData[2] = pz1;
-		this.boundsData[3] = px2;
-		this.boundsData[4] = py2;
-		this.boundsData[5] = pz2;
+		this.boundsData[0] = px0;
+		this.boundsData[1] = py0;
+		this.boundsData[2] = pz0;
+		this.boundsData[3] = px1;
+		this.boundsData[4] = py1;
+		this.boundsData[5] = pz1;
 	}
 
 	/**
@@ -68,14 +68,14 @@ public class BBox
 		return this;
 	}
 
-	public BBox scale(float px1, float py1, float pz1, float px2, float py2, float pz2)
+	public BBox scale(float px0, float py0, float pz0, float px1, float py1, float pz1)
 	{
-		boundsData[0] *= px1;
-		boundsData[1] *= py1;
-		boundsData[2] *= pz1;
-		boundsData[3] *= px2;
-		boundsData[4] *= py2;
-		boundsData[5] *= pz2;
+		boundsData[0] *= px0;
+		boundsData[1] *= py0;
+		boundsData[2] *= pz0;
+		boundsData[3] *= px1;
+		boundsData[4] *= py1;
+		boundsData[5] *= pz1;
 		return this;
 	}
 
@@ -89,16 +89,16 @@ public class BBox
 		return scale(ps, ps, ps);
 	}
 
-	public float x1() { return boundsData[0]; }
-	public float y1() { return boundsData[1]; }
-	public float z1() { return boundsData[2]; }
-	public float x2() { return boundsData[3]; }
-	public float y2() { return boundsData[4]; }
-	public float z2() { return boundsData[5]; }
+	public float x0() { return boundsData[0]; }
+	public float y0() { return boundsData[1]; }
+	public float z0() { return boundsData[2]; }
+	public float x1() { return boundsData[3]; }
+	public float y1() { return boundsData[4]; }
+	public float z1() { return boundsData[5]; }
 
-	public float w() { return x2() - x1(); }
-	public float h() { return y2() - y1(); }
-	public float l() { return z2() - z1(); }
+	public float w() { return x1() - x0(); }
+	public float h() { return y1() - y0(); }
+	public float l() { return z1() - z0(); }
 
 	public static BBox newCube(float x, float y, float z, float w, float h, float l)
 	{
