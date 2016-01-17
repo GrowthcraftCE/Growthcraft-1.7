@@ -31,6 +31,10 @@ public class DeviceFluidSlot
 	private IFluidTanks tanks;
 	private int index;
 
+	/**
+	 * @param src - source fluid tanks
+	 * @param idx - fluid tank index
+	 */
 	public DeviceFluidSlot(IFluidTanks src, int idx)
 	{
 		this.tanks = src;
@@ -56,6 +60,16 @@ public class DeviceFluidSlot
 		return stack.amount;
 	}
 
+	public int getCapacity()
+	{
+		return tanks.getFluidTank(index).getCapacity();
+	}
+
+	public int getAvailableCapacity()
+	{
+		return getCapacity() - getAmount();
+	}
+
 	public void set(FluidStack newStack)
 	{
 		tanks.setFluidStack(index, newStack);
@@ -71,33 +85,74 @@ public class DeviceFluidSlot
 		tanks.fillFluidTank(index, fluid, doFill);
 	}
 
+	/**
+	 * Does the slot have ANY fluid content?
+	 *
+	 * @return true, the slot contains a fluid, false otherwise.
+	 */
 	public boolean hasContent()
 	{
 		return tanks.isFluidTankFilled(index);
 	}
 
+	/**
+	 * Is the slot full?
+	 *
+	 * @return true, the slot has reached its maximum capacity, false otherwise.
+	 */
 	public boolean isFull()
 	{
 		return tanks.isFluidTankFull(index);
 	}
 
+	/**
+	 * Is the slot empty?
+	 *
+	 * @return true, the slot has no valid fluid, false otherwise.
+	 */
 	public boolean isEmpty()
 	{
 		return tanks.isFluidTankEmpty(index);
 	}
 
-	public boolean hasEnough(FluidStack stack)
+	/**
+	 * Does the provided fluid match the one in the slot?
+	 *
+	 * @param stack - fluid stack to test
+	 * @return true, it has the same fluid, false otherwise
+	 */
+	public boolean hasMatching(FluidStack stack)
 	{
 		final FluidStack s = get();
-		if (s != null)
+		if (s != null) return stack.isFluidEqual(s);
+		return true;
+	}
+
+	/**
+	 * Does the slot have the same fluid, and the capacity to hold the stack?
+	 *
+	 * @param stack - fluid stack to test
+	 * @return true, it has the same fluid and has capacity, false otherwise
+	 */
+	public boolean hasMatchingWithCapacity(FluidStack stack)
+	{
+		if (!hasMatching(stack)) return false;
+		return getAvailableCapacity() >= stack.amount;
+	}
+
+	/**
+	 * Does the slot contain the same fluid, and its amount is greater or equal to the given?
+	 *
+	 * @param stack - fluid stack to test
+	 * @return true, it has the same fluid and has greater than or equal to the stack size;
+	 */
+	public boolean hasEnough(FluidStack stack)
+	{
+		if (!hasMatching(stack)) return false;
+		final FluidStack s = get();
+		if (s.amount >= stack.amount)
 		{
-			if (stack.isFluidEqual(s))
-			{
-				if (s.amount >= stack.amount)
-				{
-					return true;
-				}
-			}
+			return true;
 		}
 		return false;
 	}
