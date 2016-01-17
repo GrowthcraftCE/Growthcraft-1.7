@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,21 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.cellar.common.tileentity.device;
+package growthcraft.core.common.tileentity.device;
 
 import io.netty.buffer.ByteBuf;
 
 import growthcraft.api.core.nbt.INBTSerializable;
-import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 public class DeviceProgressive extends DeviceBase implements INBTSerializable
 {
 	protected int time;
 	protected int timeMax;
 
-	public DeviceProgressive(TileEntityCellarDevice te)
+	public DeviceProgressive(TileEntity te)
 	{
 		super(te);
 	}

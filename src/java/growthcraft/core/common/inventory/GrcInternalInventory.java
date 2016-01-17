@@ -92,7 +92,7 @@ public class GrcInternalInventory implements IInventory, INBTSerializable
 	@Override
 	public void readFromNBT(NBTTagCompound data, String name)
 	{
-		final NBTTagList list = data.getTagList(name, NBTHelper.NBTType.COMPOUND);
+		final NBTTagList list = data.getTagList(name, NBTHelper.NBTType.COMPOUND.id);
 		if (list != null)
 		{
 			readFromNBT(list);

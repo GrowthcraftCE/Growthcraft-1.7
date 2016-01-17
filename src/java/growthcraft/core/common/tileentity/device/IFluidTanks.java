@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,42 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.cellar.common.tileentity.device;
+package growthcraft.core.common.tileentity.device;
 
-import java.util.Random;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
-import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
-
-import net.minecraft.inventory.IInventory;
-import net.minecraft.world.World;
-
-public class DeviceBase
+public interface IFluidTanks
 {
-	protected Random random = new Random();
-	protected TileEntityCellarDevice parent;
-
-	public DeviceBase(TileEntityCellarDevice te)
-	{
-		this.parent = te;
-	}
-
-	public World getWorld()
-	{
-		return parent.getWorldObj();
-	}
-
-	public int getMetadata()
-	{
-		return getWorld().getBlockMetadata(parent.xCoord, parent.yCoord, parent.zCoord);
-	}
-
-	public IInventory getInventory()
-	{
-		return parent;
-	}
-
-	protected void markForInventoryUpdate()
-	{
-		parent.markForInventoryUpdate();
-	}
+	FluidTank[] getFluidTanks();
+	FluidTank getFluidTank(int slot);
+	FluidStack getFluidStack(int slot);
+	int getFluidAmountScaled(int scalar, int slot);
+	float getFluidAmountRate(int slot);
+	boolean isFluidTankFilled(int slot);
+	boolean isFluidTankFull(int slot);
+	boolean isFluidTankEmpty(int slot);
+	int getFluidAmount(int slot);
+	FluidStack drainFluidTank(int slot, int amount, boolean doDrain);
+	int fillFluidTank(int slot, FluidStack fluid, boolean doFill);
+	void setFluidStack(int slot, FluidStack stack);
+	Fluid getFluid(int slot);
+	void clearTank(int slot);
+	int getTankCount();
 }

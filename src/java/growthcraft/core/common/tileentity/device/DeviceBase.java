@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,50 +21,59 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.cellar.common.tileentity.device;
+package growthcraft.core.common.tileentity.device;
+
+import java.util.Random;
+
+import growthcraft.core.common.inventory.IInventoryFlagging;
+import growthcraft.core.common.tileentity.IBlockUpdateFlagging;
 
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraft.tileentity.TileEntity;
 
-public class DeviceInventorySlot
+public class DeviceBase
 {
-	private IInventory inventory;
-	private int index;
+	protected Random random = new Random();
+	protected TileEntity parent;
 
-	public DeviceInventorySlot(IInventory inv, int idx)
+	public DeviceBase(TileEntity te)
 	{
-		this.inventory = inv;
-		this.index = idx;
+		this.parent = te;
 	}
 
-	public ItemStack get()
+	public World getWorld()
 	{
-		return inventory.getStackInSlot(index);
+		return parent.getWorldObj();
 	}
 
-	public void set(ItemStack newStack)
+	public int getMetadata()
 	{
-		inventory.setInventorySlotContents(index, newStack);
+		return getWorld().getBlockMetadata(parent.xCoord, parent.yCoord, parent.zCoord);
 	}
 
-	public void consume(int count)
+	public IInventory getInventory()
 	{
-		inventory.decrStackSize(index, count);
-	}
-
-	public boolean hasEnough(ItemStack stack)
-	{
-		final ItemStack s = get();
-		if (s != null)
+		if (parent instanceof IInventory)
 		{
-			if (stack.isItemEqual(s))
-			{
-				if (s.stackSize >= stack.stackSize)
-				{
-					return true;
-				}
-			}
+			return (IInventory)parent;
 		}
-		return false;
+		return null;
+	}
+
+	protected void markForBlockUpdate()
+	{
+		if (parent instanceof IBlockUpdateFlagging)
+		{
+			((IBlockUpdateFlagging)parent).markForBlockUpdate();
+		}
+	}
+
+	protected void markForInventoryUpdate()
+	{
+		if (parent instanceof IInventoryFlagging)
+		{
+			((IInventoryFlagging)parent).markForInventoryUpdate();
+		}
 	}
 }

@@ -22,6 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 public class TileEntityBrewKettle extends TileEntityCellarDevice
 {
@@ -45,10 +46,10 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 	protected double time;
 
 	@Override
-	protected CellarTank[] createTanks()
+	protected FluidTank[] createTanks()
 	{
 		final int maxCap = GrowthCraftCellar.getConfig().brewKettleMaxCap;
-		return new CellarTank[] {
+		return new FluidTank[] {
 			new CellarTank(maxCap, this),
 			new CellarTank(maxCap, this)
 		};
@@ -183,7 +184,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 	 * UPDATE
 	 ************/
 	@Override
-	public void updateCellarDevice()
+	protected void updateDevice()
 	{
 		if (this.canBrew())
 		{

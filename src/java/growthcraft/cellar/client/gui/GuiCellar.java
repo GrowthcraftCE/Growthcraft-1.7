@@ -4,7 +4,6 @@ import java.util.List;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.cellar.common.tileentity.CellarTank;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.client.gui.GrcGuiContainer;
 import growthcraft.core.util.UnitFormatter;
@@ -14,6 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 @SideOnly(Side.CLIENT)
 public class GuiCellar extends GrcGuiContainer
@@ -26,7 +26,7 @@ public class GuiCellar extends GrcGuiContainer
 		this.cellarDevice = cd;
 	}
 
-	protected void drawTank(int w, int h, int wp, int hp, int width, int amount, FluidStack fluidstack, CellarTank _tank)
+	protected void drawTank(int w, int h, int wp, int hp, int width, int amount, FluidStack fluidstack, FluidTank _tank)
 	{
 		drawFluidStack(w, h, wp, hp, width, amount, fluidstack);
 	}

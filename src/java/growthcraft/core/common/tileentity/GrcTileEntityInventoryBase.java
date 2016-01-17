@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,7 @@ import java.util.Random;
 
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.IInventoryWatcher;
+import growthcraft.core.common.inventory.IInventoryFlagging;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,14 +36,17 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public abstract class GrcBaseInventoryTile extends GrcBaseTile implements ISidedInventory, ICustomDisplayName, IInventoryWatcher
+/**
+ * Extend this base class if you want a Tile with an `Inventory`
+ */
+public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase implements ISidedInventory, ICustomDisplayName, IInventoryWatcher, IInventoryFlagging
 {
 	protected String name;
 	protected GrcInternalInventory inventory;
 	protected boolean needInventoryUpdate;
 	protected Random random = new Random();
 
-	public GrcBaseInventoryTile()
+	public GrcTileEntityInventoryBase()
 	{
 		super();
 
@@ -54,6 +58,7 @@ public abstract class GrcBaseInventoryTile extends GrcBaseTile implements ISided
 
 	// Call this when you modified the inventory, or your not sure what
 	// kind of update you require
+	@Override
 	public void markForInventoryUpdate()
 	{
 		needInventoryUpdate = true;

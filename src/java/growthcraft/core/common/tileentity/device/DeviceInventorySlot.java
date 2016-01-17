@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,74 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.cellar.common.tileentity.device;
+package growthcraft.core.common.tileentity.device;
 
-import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-
-public class DeviceFluidSlot
+public class DeviceInventorySlot
 {
-	private TileEntityCellarDevice tanks;
+	private IInventory inventory;
 	private int index;
 
-	public DeviceFluidSlot(TileEntityCellarDevice src, int idx)
+	public DeviceInventorySlot(IInventory inv, int idx)
 	{
-		this.tanks = src;
+		this.inventory = inv;
 		this.index = idx;
 	}
 
-	public FluidStack get()
+	public ItemStack get()
 	{
-		return tanks.getFluidStack(index);
+		return inventory.getStackInSlot(index);
 	}
 
-	public Fluid getFluid()
+	public void set(ItemStack newStack)
 	{
-		final FluidStack stack = get();
-		if (stack == null) return null;
-		return stack.getFluid();
+		inventory.setInventorySlotContents(index, newStack);
 	}
 
-	public void set(FluidStack newStack)
+	public void consume(int count)
 	{
-		tanks.setFluidStack(index, newStack);
+		inventory.decrStackSize(index, count);
 	}
 
-	public void consume(int amount, boolean doDrain)
+	public boolean hasEnough(ItemStack stack)
 	{
-		tanks.drainFluidTank(index, amount, doDrain);
-	}
-
-	public void fill(FluidStack fluid, boolean doFill)
-	{
-		tanks.fillFluidTank(index, fluid, doFill);
-	}
-
-	public boolean hasContent()
-	{
-		return tanks.isFluidTankFilled(index);
-	}
-
-	public boolean isFull()
-	{
-		return tanks.isFluidTankFull(index);
-	}
-
-	public boolean isEmpty()
-	{
-		return tanks.isFluidTankEmpty(index);
-	}
-
-	public boolean hasEnough(FluidStack stack)
-	{
-		final FluidStack s = get();
+		final ItemStack s = get();
 		if (s != null)
 		{
-			if (stack.isFluidEqual(s))
+			if (stack.isItemEqual(s))
 			{
-				if (s.amount >= stack.amount)
+				if (s.stackSize >= stack.stackSize)
 				{
 					return true;
 				}

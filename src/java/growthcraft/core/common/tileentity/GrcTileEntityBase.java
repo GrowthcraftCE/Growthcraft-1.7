@@ -43,12 +43,14 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 
-/*
+/**
+ * Extend this base class if you just need a Base tile with the event system.
+ *
  * Event handling system is a stripped version of the one seen in AE2, I've
  * copied the code for use in YATM, but I've ported it over to Growthcraft as
  * well.
  */
-public abstract class GrcBaseTile extends TileEntity
+public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpdateFlagging
 {
 	protected static class HandlerMap extends EnumMap<EventHandler.EventType, List<EventFunction>>
 	{
@@ -60,7 +62,7 @@ public abstract class GrcBaseTile extends TileEntity
 		}
 	}
 
-	protected static Map<Class<? extends GrcBaseTile>, HandlerMap> HANDLERS = new HashMap<Class<? extends GrcBaseTile>, HandlerMap>();
+	protected static Map<Class<? extends GrcTileEntityBase>, HandlerMap> HANDLERS = new HashMap<Class<? extends GrcTileEntityBase>, HandlerMap>();
 
 	protected boolean needBlockUpdate = true;
 
@@ -69,7 +71,7 @@ public abstract class GrcBaseTile extends TileEntity
 		needBlockUpdate = true;
 	}
 
-	public void markForUpdate()
+	public void doMarkForUpdate()
 	{
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
@@ -86,7 +88,7 @@ public abstract class GrcBaseTile extends TileEntity
 		{
 			needBlockUpdate = false;
 			preMarkForUpdate();
-			markForUpdate();
+			doMarkForUpdate();
 		}
 
 		super.updateEntity();
@@ -191,7 +193,7 @@ public abstract class GrcBaseTile extends TileEntity
 				final ByteBuf stream = Unpooled.copiedBuffer(tag.getByteArray("P"));
 				if (readFromStream(stream))
 				{
-					markForUpdate();
+					doMarkForUpdate();
 				}
 			}
 		}

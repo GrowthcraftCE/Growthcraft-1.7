@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
 
 import io.netty.buffer.ByteBuf;
 
-import growthcraft.core.common.tileentity.GrcBaseTile;
+import growthcraft.core.common.tileentity.GrcTileEntityBase;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,7 +43,7 @@ public class EventFunction
 		this.method = m;
 	}
 
-	public void writeToStream(GrcBaseTile tile, ByteBuf data)
+	public void writeToStream(GrcTileEntityBase tile, ByteBuf data)
 	{
 		try
 		{
@@ -64,7 +64,7 @@ public class EventFunction
 	}
 
 	@SideOnly (Side.CLIENT)
-	public boolean readFromStream(GrcBaseTile tile, ByteBuf data)
+	public boolean readFromStream(GrcTileEntityBase tile, ByteBuf data)
 	{
 		try
 		{

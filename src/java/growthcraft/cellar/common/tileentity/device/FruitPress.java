@@ -27,6 +27,9 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.pressing.PressingResult;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
+import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
+import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
+import growthcraft.core.common.tileentity.device.DeviceProgressive;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.item.ItemStack;

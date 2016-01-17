@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 public class TileEntityFruitPress extends TileEntityCellarDevice
 {
@@ -30,10 +31,10 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	private FruitPress fruitPress = new FruitPress(this, 0, 0, 1);
 
 	@Override
-	protected CellarTank[] createTanks()
+	protected FluidTank[] createTanks()
 	{
 		final int maxCap = GrowthCraftCellar.getConfig().fruitPressMaxCap;
-		return new CellarTank[] { new CellarTank(maxCap, this) };
+		return new FluidTank[] { new CellarTank(maxCap, this) };
 	}
 
 	@Override
@@ -57,7 +58,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	 * UPDATE
 	 ************/
 	@Override
-	public void updateCellarDevice()
+	protected void updateDevice()
 	{
 		fruitPress.update();
 	}

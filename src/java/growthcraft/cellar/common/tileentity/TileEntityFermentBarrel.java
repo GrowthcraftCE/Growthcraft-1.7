@@ -6,13 +6,14 @@ import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 public class TileEntityFermentBarrel extends TileEntityCellarDevice
 {
@@ -40,9 +41,9 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	private int timemax = GrowthCraftCellar.getConfig().fermentTime;
 
 	@Override
-	protected CellarTank[] createTanks()
+	protected FluidTank[] createTanks()
 	{
-		return new CellarTank[] { new CellarTank(GrowthCraftCellar.getConfig().fermentBarrelMaxCap, this) };
+		return new FluidTank[] { new CellarTank(GrowthCraftCellar.getConfig().fermentBarrelMaxCap, this) };
 	}
 
 	@Override
@@ -113,7 +114,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	}
 
 	@Override
-	public void updateCellarDevice()
+	protected void updateDevice()
 	{
 		if (canFerment())
 		{

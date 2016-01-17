@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 public class TileEntityFermentJar extends TileEntityCellarDevice
 {
@@ -48,10 +49,10 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	}
 
 	@Override
-	protected CellarTank[] createTanks()
+	protected FluidTank[] createTanks()
 	{
 		final int maxTankCap = GrowthCraftCellar.getConfig().fermentJarMaxCap;
-		return new CellarTank[] { new CellarTank(maxTankCap, this) };
+		return new FluidTank[] { new CellarTank(maxTankCap, this) };
 	}
 
 	@Override
@@ -125,7 +126,7 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	}
 
 	@Override
-	public void updateCellarDevice()
+	protected void updateDevice()
 	{
 		yeastGen.update();
 	}

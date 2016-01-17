@@ -7,13 +7,13 @@ import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.common.inventory.ContainerBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.tileentity.GrcBaseInventoryTile;
+import growthcraft.core.common.tileentity.GrcTileEntityInventoryBase;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityBeeBox extends GrcBaseInventoryTile
+public class TileEntityBeeBox extends GrcTileEntityInventoryBase
 {
 	public static enum HoneyCombExpect
 	{
