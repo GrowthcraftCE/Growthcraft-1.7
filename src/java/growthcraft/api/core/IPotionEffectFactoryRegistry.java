@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,48 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.util;
+package growthcraft.api.core;
 
-import java.util.List;
+import javax.annotation.Nonnull;
 
-import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.api.core.util.ConstID;
+import growthcraft.api.core.effect.IPotionEffectFactory;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 
-/**
- * Tag Formatter for item NBT data
- */
-public class TagFormatterItem implements ITagFormatter
+public interface IPotionEffectFactoryRegistry extends IClassRegistry<IPotionEffectFactory>
 {
-	public static final TagFormatterItem INSTANCE = new TagFormatterItem();
-
-	public String formatItem(NBTTagCompound tag)
-	{
-		final int id = tag.getInteger("id");
-		if (id == ConstID.NO_ITEM)
-		{
-			return UnitFormatter.noItem();
-		}
-		else
-		{
-			final ItemStack stack = ItemStack.loadItemStackFromNBT(tag);
-			if (stack != null)
-			{
-				return EnumChatFormatting.WHITE + GrcI18n.translate("grc.format.itemslot.item", stack.getDisplayName(), stack.stackSize);
-			}
-			else
-			{
-				return UnitFormatter.invalidItem();
-			}
-		}
-	}
-
-	public List<String> format(List<String> list, NBTTagCompound tag)
-	{
-		list.add(formatItem(tag));
-		return list;
-	}
+	/**
+	 * @param data  - nbt data to load
+	 * @param name  - tag to load
+	 * @return name
+	 */
+	IPotionEffectFactory loadPotionEffectFactoryFromNBT(@Nonnull NBTTagCompound data, @Nonnull String name);
 }

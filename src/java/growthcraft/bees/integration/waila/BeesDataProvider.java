@@ -4,7 +4,7 @@ import java.util.List;
 
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.util.TagFormatterBeeBox;
-import growthcraft.core.util.NBTHelper;
+import growthcraft.api.core.nbt.NBTHelper;
 
 import cpw.mods.fml.common.Optional;
 

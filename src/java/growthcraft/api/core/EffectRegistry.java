@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.nbt;
+package growthcraft.api.core;
+
+import javax.annotation.Nonnull;
+
+import growthcraft.api.core.effect.IEffect;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public interface INbtSerializable
+public class EffectRegistry extends AbstractClassRegistry<IEffect> implements IEffectRegistry
 {
-	void writeToNBT(NBTTagCompound data, String name);
-	void readFromNBT(NBTTagCompound data, String name);
+	public IEffect loadEffectFromNBT(@Nonnull NBTTagCompound data, @Nonnull String name)
+	{
+		return loadObjectFromNBT(data, name);
+	}
 }

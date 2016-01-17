@@ -26,6 +26,7 @@ package growthcraft.api.core.effect;
 import java.util.Random;
 
 import growthcraft.api.core.description.IDescribable;
+import growthcraft.api.core.nbt.INBTSerializable;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.potion.PotionEffect;
@@ -35,7 +36,7 @@ import net.minecraft.world.World;
  * Objects that implement this interface are expected to create PotionEffects
  * given certain parameters
  */
-public interface IPotionEffectFactory extends IDescribable
+public interface IPotionEffectFactory extends IDescribable, INBTSerializable
 {
 	PotionEffect createPotionEffect(World world, Entity entity, Random random, Object data);
 }

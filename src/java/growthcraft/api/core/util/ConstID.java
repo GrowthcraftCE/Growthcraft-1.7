@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,48 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.util;
-
-import java.util.List;
-
-import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.api.core.util.ConstID;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
+package growthcraft.api.core.util;
 
 /**
- * Tag Formatter for item NBT data
+ * Place any "Magic Numbers" in this class, so we don't have to play the
+ * guessing game while reading
  */
-public class TagFormatterItem implements ITagFormatter
+public final class ConstID
 {
-	public static final TagFormatterItem INSTANCE = new TagFormatterItem();
+	// Used for handling non existant fluids
+	public static final int NO_FLUID = 0;
+	// Used for handling non existant items
+	public static final int NO_ITEM = 0;
 
-	public String formatItem(NBTTagCompound tag)
-	{
-		final int id = tag.getInteger("id");
-		if (id == ConstID.NO_ITEM)
-		{
-			return UnitFormatter.noItem();
-		}
-		else
-		{
-			final ItemStack stack = ItemStack.loadItemStackFromNBT(tag);
-			if (stack != null)
-			{
-				return EnumChatFormatting.WHITE + GrcI18n.translate("grc.format.itemslot.item", stack.getDisplayName(), stack.stackSize);
-			}
-			else
-			{
-				return UnitFormatter.invalidItem();
-			}
-		}
-	}
-
-	public List<String> format(List<String> list, NBTTagCompound tag)
-	{
-		list.add(formatItem(tag));
-		return list;
-	}
+	private ConstID() {}
 }

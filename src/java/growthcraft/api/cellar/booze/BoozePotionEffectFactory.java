@@ -30,13 +30,16 @@ import java.util.Collection;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.description.Describer;
 import growthcraft.api.core.effect.IPotionEffectFactory;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class BoozePotionEffectFactory implements IPotionEffectFactory
 {
@@ -94,5 +97,54 @@ public class BoozePotionEffectFactory implements IPotionEffectFactory
 	{
 		final PotionEffect pe = createPotionEffect(null, null, null, null);
 		Describer.getPotionEffectDescription(list, pe);
+	}
+
+	private void readFromNBT(NBTTagCompound data)
+	{
+		this.booze = null;
+		this.id = data.getInteger("id");
+		this.time = data.getInteger("time");
+		this.level = data.getInteger("level");
+		if (data.hasKey("fluid.name"))
+		{
+			this.booze = FluidRegistry.getFluid(data.getString("fluid.name"));
+		}
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound data, String name)
+	{
+		if (data.hasKey(name))
+		{
+			final NBTTagCompound subData = data.getCompoundTag(name);
+			readFromNBT(subData);
+		}
+		else
+		{
+			// LOG error
+		}
+	}
+
+	private void writeToNBT(NBTTagCompound data)
+	{
+		data.setInteger("id", getID());
+		data.setInteger("time", getTime());
+		data.setInteger("level", getLevel());
+		if (booze != null)
+		{
+			data.setString("fluid.name", booze.getName());
+		}
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound data, String name)
+	{
+		final NBTTagCompound target = new NBTTagCompound();
+		final String factoryName = CoreRegistry.instance().getPotionEffectFactoryRegistry().getName(this.getClass());
+
+		target.setString("__name__", factoryName);
+		writeToNBT(target);
+
+		data.setTag(name, target);
 	}
 }

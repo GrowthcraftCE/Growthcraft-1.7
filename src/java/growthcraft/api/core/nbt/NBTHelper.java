@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.util;
+package growthcraft.api.core.nbt;
+
+import java.util.List;
+
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.effect.IEffect;
+import growthcraft.api.core.util.ConstID;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -132,5 +138,31 @@ public class NBTHelper
 	public static NBTTagCompound writeItemStackToNBT(ItemStack itemStack)
 	{
 		return writeItemStackToNBT(itemStack, new NBTTagCompound());
+	}
+
+	public static NBTTagCompound writeEffectsList(NBTTagCompound data, List<IEffect> list)
+	{
+		data.setInteger("size", list.size());
+		final NBTTagList effectsList = new NBTTagList();
+		for (IEffect effect : list)
+		{
+			final NBTTagCompound item = new NBTTagCompound();
+			effect.writeToNBT(item, "value");
+			effectsList.appendTag(item);
+		}
+		data.setTag("effects", effectsList);
+		return data;
+	}
+
+	public static void loadEffectsList(List<IEffect> list, NBTTagCompound data)
+	{
+		final int size = data.getInteger("size");
+		final NBTTagList effectsList = (NBTTagList)data.getTag("effects");
+		for (int i = 0; i < size; ++i)
+		{
+			final NBTTagCompound effectData = effectsList.getCompoundTagAt(i);
+			final IEffect effect = CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(effectData, "value");
+			list.add(effect);
+		}
 	}
 }

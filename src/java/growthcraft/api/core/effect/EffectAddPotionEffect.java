@@ -27,15 +27,18 @@ import java.util.List;
 import java.util.Random;
 import javax.annotation.Nonnull;
 
+import growthcraft.api.core.CoreRegistry;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 /**
  * As its name implies, this Effect, will ADD a Potion Effect to the target.
  */
-public class EffectAddPotionEffect implements IEffect
+public class EffectAddPotionEffect extends AbstractEffect
 {
 	private IPotionEffectFactory potionFactory;
 
@@ -52,6 +55,9 @@ public class EffectAddPotionEffect implements IEffect
 		return this;
 	}
 
+	/**
+	 * @return potion factory
+	 */
 	public IPotionEffectFactory getPotionFactory()
 	{
 		return potionFactory;
@@ -68,6 +74,8 @@ public class EffectAddPotionEffect implements IEffect
 	@Override
 	public void apply(World world, Entity entity, Random random, Object data)
 	{
+		if (potionFactory == null) return;
+
 		if (entity instanceof EntityLivingBase)
 		{
 			final PotionEffect effect = potionFactory.createPotionEffect(world, entity, random, data);
@@ -79,6 +87,25 @@ public class EffectAddPotionEffect implements IEffect
 	@Override
 	public void getDescription(List<String> list)
 	{
+		if (potionFactory == null) return;
 		potionFactory.getDescription(list);
+	}
+
+	@Override
+	protected void readFromNBT(NBTTagCompound data)
+	{
+		if (data.hasKey("potion_factory"))
+		{
+			this.potionFactory = CoreRegistry.instance().getPotionEffectFactoryRegistry().loadPotionEffectFactoryFromNBT(data, "potion_factory");
+		}
+	}
+
+	@Override
+	protected void writeToNBT(NBTTagCompound data)
+	{
+		if (potionFactory != null)
+		{
+			potionFactory.writeToNBT(data, "potion_factory");
+		}
 	}
 }

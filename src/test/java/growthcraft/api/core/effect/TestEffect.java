@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Test Effect, use this as apart of larger effects, and check if it was touched.
@@ -22,4 +23,7 @@ public class TestEffect implements IEffect
 	{
 		list.add("TestEffect");
 	}
+
+	public void readFromNBT(NBTTagCompound data, String name) {}
+	public void writeToNBT(NBTTagCompound data, String name) {}
 }

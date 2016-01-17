@@ -26,20 +26,21 @@ package growthcraft.api.cellar.booze.effect;
 import java.util.Random;
 import java.util.List;
 
-import growthcraft.api.core.effect.IEffect;
+import growthcraft.api.core.effect.AbstractEffect;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.stats.IAchievement;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EffectTipsy implements IEffect
+public class EffectTipsy extends AbstractEffect
 {
 	public static Potion potionTipsy;
 	public static IAchievement achievement;
@@ -78,6 +79,7 @@ public class EffectTipsy implements IEffect
 		return tipsyTime;
 	}
 
+	@Override
 	public void apply(World world, Entity entity, Random random, Object data)
 	{
 		if (entity instanceof EntityLivingBase)
@@ -117,6 +119,7 @@ public class EffectTipsy implements IEffect
 		}
 	}
 
+	@Override
 	public void getDescription(List<String> list)
 	{
 		final PotionEffect nausea = new PotionEffect(Potion.confusion.id, getTipsyTime(), 0);
@@ -128,5 +131,21 @@ public class EffectTipsy implements IEffect
 			n = "(" + Potion.getDurationString(nausea) + ")";
 		}
 		list.add(EnumChatFormatting.GRAY + p + EnumChatFormatting.GRAY + " " + n);
+	}
+
+	@Override
+	protected void readFromNBT(NBTTagCompound data)
+	{
+		this.hasTipsyEffect = data.getBoolean("has_tipsy_effect");
+		this.tipsyChance = data.getFloat("tipsy_chance");
+		this.tipsyTime = data.getInteger("tipsy_time");
+	}
+
+	@Override
+	protected void writeToNBT(NBTTagCompound data)
+	{
+		data.setBoolean("has_tipsy_effect", hasTipsyEffect);
+		data.setFloat("tipsy_chance", tipsyChance);
+		data.setInteger("tipsy_time", tipsyTime);
 	}
 }

@@ -12,8 +12,8 @@ import growthcraft.cellar.util.TagFormatterBrewKettle;
 import growthcraft.cellar.util.TagFormatterFermentBarrel;
 import growthcraft.cellar.util.TagFormatterFermentJar;
 import growthcraft.cellar.util.TagFormatterFruitPress;
-import growthcraft.core.util.ConstID;
-import growthcraft.core.util.NBTHelper;
+import growthcraft.api.core.util.ConstID;
+import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.core.util.TagFormatterFluidHandler;
 
 import cpw.mods.fml.common.Optional;

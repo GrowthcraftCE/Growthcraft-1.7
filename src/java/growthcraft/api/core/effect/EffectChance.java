@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,20 +27,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.description.Describer;
+import growthcraft.api.core.i18n.GrcI18n;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 /**
  * Has a random chance of applying its sub effect to the target
  */
-public class EffectChance implements IEffect
+public class EffectChance extends AbstractEffect
 {
 	private float chance;
 	private IEffect effect;
 
+	/**
+	 * @param effekt - the effect to apply when the conditions are met
+	 */
 	public EffectChance(IEffect effekt)
 	{
 		this.effect = effekt;
@@ -94,6 +99,26 @@ public class EffectChance implements IEffect
 				final String str = GrcI18n.translate("grc.effect.chance.format", (int)(chance * 100));
 				Describer.compactDescription(str, list, tempList);
 			}
+		}
+	}
+
+	@Override
+	protected void readFromNBT(NBTTagCompound data)
+	{
+		this.chance = data.getFloat("chance");
+		if (data.hasKey("effect"))
+		{
+			this.effect = CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(data, "effect");
+		}
+	}
+
+	@Override
+	protected void writeToNBT(NBTTagCompound data)
+	{
+		data.setFloat("chance", chance);
+		if (effect != null)
+		{
+			effect.writeToNBT(data, "effect");
 		}
 	}
 }

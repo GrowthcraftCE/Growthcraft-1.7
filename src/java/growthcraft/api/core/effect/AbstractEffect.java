@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,48 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.util;
+package growthcraft.api.core.effect;
 
-import java.util.List;
+import growthcraft.api.core.CoreRegistry;
 
-import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.api.core.util.ConstID;
-
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 
 /**
- * Tag Formatter for item NBT data
+ * Because sometimes you want an Effect that does ABSOLUTELY NOTHING.
  */
-public class TagFormatterItem implements ITagFormatter
+public abstract class AbstractEffect implements IEffect
 {
-	public static final TagFormatterItem INSTANCE = new TagFormatterItem();
+	protected abstract void readFromNBT(NBTTagCompound data);
 
-	public String formatItem(NBTTagCompound tag)
+	@Override
+	public void readFromNBT(NBTTagCompound data, String name)
 	{
-		final int id = tag.getInteger("id");
-		if (id == ConstID.NO_ITEM)
+		if (data.hasKey(name))
 		{
-			return UnitFormatter.noItem();
+			final NBTTagCompound effectData = data.getCompoundTag(name);
+			readFromNBT(effectData);
 		}
 		else
 		{
-			final ItemStack stack = ItemStack.loadItemStackFromNBT(tag);
-			if (stack != null)
-			{
-				return EnumChatFormatting.WHITE + GrcI18n.translate("grc.format.itemslot.item", stack.getDisplayName(), stack.stackSize);
-			}
-			else
-			{
-				return UnitFormatter.invalidItem();
-			}
+			// LOG error
 		}
 	}
 
-	public List<String> format(List<String> list, NBTTagCompound tag)
+	protected abstract void writeToNBT(NBTTagCompound data);
+
+	@Override
+	public void writeToNBT(NBTTagCompound data, String name)
 	{
-		list.add(formatItem(tag));
-		return list;
+		final NBTTagCompound target = new NBTTagCompound();
+		final String effectName = CoreRegistry.instance().getEffectsRegistry().getName(this.getClass());
+		// This is a VERY important field, this is how the effects will reload their correct class.
+		target.setString("__name__", effectName);
+		writeToNBT(target);
+
+		data.setTag(name, target);
 	}
 }
