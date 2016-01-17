@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BlockBrewKettle extends BlockCellarContainer implements ICellarFluidHandler
+public class BlockBrewKettle extends BlockCellarContainer
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;

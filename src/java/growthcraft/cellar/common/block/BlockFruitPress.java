@@ -23,7 +23,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockFruitPress extends BlockCellarContainer implements ICellarFluidHandler
+public class BlockFruitPress extends BlockCellarContainer
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;

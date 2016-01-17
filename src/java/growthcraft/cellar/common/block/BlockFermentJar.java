@@ -11,7 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockFermentJar extends BlockCellarContainer implements ICellarFluidHandler
+public class BlockFermentJar extends BlockCellarContainer
 {
 	public BlockFermentJar()
 	{

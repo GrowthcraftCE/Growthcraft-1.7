@@ -31,7 +31,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class BlockFermentBarrel extends BlockCellarContainer implements ICellarFluidHandler
+public class BlockFermentBarrel extends BlockCellarContainer
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
