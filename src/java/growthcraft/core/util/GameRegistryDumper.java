@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
 
 /**
  * If you really, REALLY need to dump the block registry, then this is your thing.
@@ -89,9 +91,27 @@ public class GameRegistryDumper
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
+	public static void dumpFluids()
+	{
+		final Set<String> fluidKeys = FluidRegistry.getRegisteredFluids().keySet();
+		try (FileWriter writer = new FileWriter("dumps/FluidRegistry_Fluids.txt"))
+		{
+			for (String key : fluidKeys)
+			{
+				writer.write(key + "\n");
+			}
+		}
+		catch (IOException ex)
+		{
+			System.err.println(ex);
+		}
+	}
+
 	public static void run()
 	{
 		dumpBlocks();
 		dumpItems();
+		dumpFluids();
 	}
 }
