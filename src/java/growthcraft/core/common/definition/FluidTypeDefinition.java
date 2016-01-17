@@ -29,6 +29,7 @@ import growthcraft.api.core.definition.IFluidStackFactory;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class FluidTypeDefinition<T extends Fluid> implements IFluidStackFactory
 {
@@ -61,5 +62,10 @@ public class FluidTypeDefinition<T extends Fluid> implements IFluidStackFactory
 	{
 		if (other == null) return false;
 		return getFluid() == other;
+	}
+
+	public void register()
+	{
+		FluidRegistry.registerFluid(fluid);
 	}
 }
