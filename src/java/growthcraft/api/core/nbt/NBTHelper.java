@@ -23,14 +23,19 @@
  */
 package growthcraft.api.core.nbt;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.util.ConstID;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
@@ -39,22 +44,54 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class NBTHelper
 {
-	public static class NBTType
+	public static enum NBTType
 	{
-		public static final int END = 0;
-		public static final int BYTE = 1;
-		public static final int SHORT = 2;
-		public static final int INT = 3;
-		public static final int LONG = 4;
-		public static final int FLOAT = 5;
-		public static final int DOUBLE = 6;
-		public static final int BYTE_ARRAY = 7;
-		public static final int STRING = 8;
-		public static final int LIST = 9;
-		public static final int COMPOUND = 10;
-		public static final int INT_ARRAY = 11;
+		END(0),
+		BYTE(1),
+		SHORT(2),
+		INT(3),
+		LONG(4),
+		FLOAT(5),
+		DOUBLE(6),
+		BYTE_ARRAY(7),
+		STRING(8),
+		LIST(9),
+		COMPOUND(10),
+		INT_ARRAY(11);
 
-		private NBTType() {}
+		public static final Map<Integer, NBTType> MAPPING = new HashMap<Integer, NBTType>();
+		static
+		{
+			END.register();
+			BYTE.register();
+			SHORT.register();
+			INT.register();
+			LONG.register();
+			FLOAT.register();
+			DOUBLE.register();
+			BYTE_ARRAY.register();
+			STRING.register();
+			LIST.register();
+			COMPOUND.register();
+			INT_ARRAY.register();
+		}
+
+		public final int id;
+
+		private NBTType(int i)
+		{
+			this.id = i;
+		}
+
+		private void register()
+		{
+			MAPPING.put(this.id, this);
+		}
+
+		public static NBTType byId(int id)
+		{
+			return MAPPING.get(id);
+		}
 	}
 
 	private NBTHelper() {}
@@ -174,6 +211,51 @@ public class NBTHelper
 			final NBTTagCompound effectData = effectsList.getCompoundTagAt(i);
 			final IEffect effect = CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(effectData, "value");
 			list.add(effect);
+		}
+	}
+
+	/**
+	 * Writes the given collection to the NBTTagCompound as an IntArray
+	 *
+	 * @param data - target NBTTagCompound
+	 *   Will add `size: int` and `data: NBTTagIntArray` fields
+	 * @param coll - the collection to write
+	 */
+	public static void writeIntegerCollection(NBTTagCompound data, Collection<Integer> coll)
+	{
+		data.setInteger("size", coll.size());
+		final int[] ary = new int[coll.size()];
+		int i = 0;
+		for (Integer num : coll)
+		{
+			ary[i] = num;
+			i++;
+		}
+		data.setTag("data", new NBTTagIntArray(ary));
+	}
+
+	/**
+	 * Reads an IntegerCollection from the given NBTTagCompound
+	 *
+	 * @param coll - collection to write to
+	 * @param data - tag to read from
+	 *   Expects a `data: NBTTagIntArray` field, `size: int` will be ignored.
+	 */
+	public static void readIntegerCollection(Collection<Integer> coll, NBTTagCompound data)
+	{
+		final NBTBase base = data.getTag("data");
+		if (base instanceof NBTTagIntArray)
+		{
+			final NBTTagIntArray ary = (NBTTagIntArray)base;
+			for (int i : ary.func_150302_c())
+			{
+				coll.add(i);
+			}
+		}
+		else
+		{
+			final NBTType actual = NBTType.byId(base.getId());
+			throw UnexpectedNBTTagType.createFor(NBTType.INT_ARRAY, actual);
 		}
 	}
 }
