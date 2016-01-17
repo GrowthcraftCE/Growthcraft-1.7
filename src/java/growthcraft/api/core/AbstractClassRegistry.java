@@ -52,12 +52,11 @@ public abstract class AbstractClassRegistry<T extends INBTSerializable> implemen
 		public ClassRegisteredException() {}
 	}
 
-	private BiMap<String, Class<?>> effects = HashBiMap.create();
+	private BiMap<String, Class<T>> effects = HashBiMap.create();
 
 	public Class<T> getClass(@Nonnull String name)
 	{
-		final Class<?> klass = effects.get(name);
-		return (Class<T>)klass;
+		return effects.get(name);
 	}
 
 	public String getName(@Nonnull Class<?> klass)
