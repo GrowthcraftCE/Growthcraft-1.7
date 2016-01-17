@@ -85,7 +85,7 @@ public class FluidStackSchema implements IFluidStackFactory, IValidatable, IComm
 	@Override
 	public String toString()
 	{
-		return "" + name + " x" + amount;
+		return String.format("Schema<FluidStack>(name: '%s', amount: %d)", name, amount);
 	}
 
 	@Override

@@ -66,7 +66,7 @@ public class UserPressingRecipes extends JsonConfigDef
 		@Override
 		public String toString()
 		{
-			return "" + item + " + " + time + " = "  + fluid + " + " + residue;
+			return String.format("UserPressingRecipe(`%s` / %d = `%s` & `%s`)", item, time, fluid, residue);
 		}
 
 		@Override
@@ -128,27 +128,27 @@ public class UserPressingRecipes extends JsonConfigDef
 
 		if (recipe.item == null || recipe.item.isInvalid())
 		{
-			logger.error("Item is invalid for recipe %s", recipe);
+			logger.error("Item is invalid for recipe {%s}", recipe);
 			return;
 		}
 
 		if (recipe.fluid == null)
 		{
-			logger.error("No result fluid for recipe %s", recipe);
+			logger.error("No result fluid for recipe {%s}", recipe);
 			return;
 		}
 
 		final FluidStack fluidStack = recipe.fluid.asFluidStack();
 		if (fluidStack == null)
 		{
-			logger.error("Invalid fluid for recipe %s", recipe);
+			logger.error("Invalid fluid for recipe {%s}", recipe);
 			return;
 		}
 
 		Residue residue = null;
 		if (recipe.residue == null)
 		{
-			logger.warn("No residue specified for %s", recipe);
+			logger.warn("No residue specified for {%s}", recipe);
 			residue = Residue.newDefault(1.0f);
 		}
 		else
@@ -158,11 +158,11 @@ public class UserPressingRecipes extends JsonConfigDef
 
 		if (residue == null)
 		{
-			logger.error("Not a valid residue found for %s", recipe);
+			logger.error("Not a valid residue found for {%s}", recipe);
 			return;
 		}
 
-		logger.info("Adding pressing recipe %s", recipe);
+		logger.info("Adding pressing recipe {%s}", recipe);
 		for (ItemStack item : recipe.item.getItemStacks())
 		{
 			CellarRegistry.instance().pressing().addPressingRecipe(item, fluidStack, recipe.time, residue);
@@ -174,7 +174,7 @@ public class UserPressingRecipes extends JsonConfigDef
 	{
 		if (recipes != null)
 		{
-			logger.info("Adding %d pressing recipes.", recipes.length);
+			logger.info("Adding %d user pressing recipes.", recipes.length);
 			for (UserPressingRecipe recipe : recipes) addPressingRecipe(recipe);
 		}
 	}

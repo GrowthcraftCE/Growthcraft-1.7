@@ -61,7 +61,7 @@ public class UserYeastEntries extends JsonConfigDef
 		@Override
 		public String toString()
 		{
-			return "" + item + " [" + biomes + "]";
+			return String.format("UserYeastEntry(item: `%s`, biomes: [%s])", item, biomes);
 		}
 
 		@Override
@@ -140,13 +140,13 @@ public class UserYeastEntries extends JsonConfigDef
 
 		if (entry.item == null || entry.item.isInvalid())
 		{
-			logger.error("Yeast item was invalid %s", entry);
+			logger.error("Yeast item was invalid {%s}", entry);
 			return;
 		}
 
 		if (entry.biomes == null)
 		{
-			logger.error("Yeast biomes was invalid %s", entry);
+			logger.error("Yeast biomes was invalid {%s}", entry);
 			return;
 		}
 
@@ -158,11 +158,11 @@ public class UserYeastEntries extends JsonConfigDef
 				{
 					final BiomeDictionary.Type biomeType = BiomeUtils.fetchBiomeType(biome);
 					CellarRegistry.instance().yeast().addYeastToBiomeType(itemstack, biomeType);
-					logger.info("Added yeast %s to biome %s", itemstack, biome);
+					logger.info("Added user yeast {%s} to biome '%s'", itemstack, biome);
 				}
 				catch (BiomeUtils.BiomeTypeNotFound ex)
 				{
-					logger.error("A biome type %s for entry %s could not be found.", biome, entry);
+					logger.error("A biome type '%s' for entry {%s} could not be found.", biome, entry);
 				}
 			}
 		}

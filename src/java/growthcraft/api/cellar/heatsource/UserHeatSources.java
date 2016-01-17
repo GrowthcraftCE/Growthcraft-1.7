@@ -61,13 +61,15 @@ public class UserHeatSources extends JsonConfigDef
 		@Override
 		public String toString()
 		{
-			String result = "" + mod_id + ":" + block_name;
+			String result = String.format("UserHeatSourceEntry(mod_id: '%s', block_name: '%s')", mod_id, block_name);
 			if (states != null)
 			{
+				result += "~(";
 				for (Map.Entry<Integer, Float> pair : states.entrySet())
 				{
-					result += "," + pair.getKey() + "=>" + pair.getValue();
+					result += pair.getKey() + "=>" + pair.getValue() + ", ";
 				}
+				result += ")";
 			}
 			return result;
 		}
@@ -127,7 +129,7 @@ public class UserHeatSources extends JsonConfigDef
 		{
 			if (heatsource.states == null || heatsource.states.size() == 0)
 			{
-				logger.warn("Block contains invalid states, we will assume a wildcard, but you should probably set this. mod_id=%s block=%s", heatsource.mod_id, heatsource.block_name);
+				logger.warn("Block contains invalid states, we will assume a wildcard, but you should probably set this. mod_id='%s' block='%s'", heatsource.mod_id, heatsource.block_name);
 				CellarRegistry.instance().heatSource().addHeatSource(block, ItemKey.WILDCARD_VALUE);
 			}
 			else
@@ -142,7 +144,7 @@ public class UserHeatSources extends JsonConfigDef
 		}
 		else
 		{
-			logger.error("Block could not be found, and will not be added as heat source. mod_id=%s block=%s", heatsource.mod_id, heatsource.block_name);
+			logger.error("Block could not be found, and will not be added as heat source. mod_id='%s' block='%s'", heatsource.mod_id, heatsource.block_name);
 		}
 	}
 

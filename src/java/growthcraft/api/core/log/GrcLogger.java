@@ -41,6 +41,6 @@ public class GrcLogger extends AbstractLogger
 	@Override
 	public void log(Level lv, String str, Object... objs)
 	{
-		if (enabled) FMLLog.log(prefix, lv, str, objs);
+		if (enabled) FMLLog.log(prefix, lv, prefix + " " + str, objs);
 	}
 }

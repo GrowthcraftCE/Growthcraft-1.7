@@ -66,7 +66,7 @@ public class UserBrewingRecipes extends JsonConfigDef
 		@Override
 		public String toString()
 		{
-			return "" + item + " + " + input_fluid + " @" + time + " = " + output_fluid + " + " + residue;
+			return String.format("UserBrewingRecipe(`%s` + `%s` / %d = `%s` & `%s`)", item, input_fluid, time, output_fluid, residue);
 		}
 
 		@Override
@@ -126,26 +126,26 @@ public class UserBrewingRecipes extends JsonConfigDef
 
 		if (recipe.item == null || recipe.item.isInvalid())
 		{
-			logger.error("Invalid item for recipe %s", recipe);
+			logger.error("Invalid item for recipe {%s}", recipe);
 			return;
 		}
 
 		if (recipe.input_fluid == null || recipe.input_fluid.isInvalid())
 		{
-			logger.error("Invalid input_fluid %s", recipe);
+			logger.error("Invalid input_fluid {%s}", recipe);
 			return;
 		}
 
 		if (recipe.output_fluid == null || recipe.output_fluid.isInvalid())
 		{
-			logger.error("Invalid output_fluid %s", recipe);
+			logger.error("Invalid output_fluid {%s}", recipe);
 			return;
 		}
 
 		Residue residue = null;
 		if (recipe.residue == null)
 		{
-			logger.warn("No residue specified for %s", recipe);
+			logger.warn("No residue specified for {%s}", recipe);
 			residue = Residue.newDefault(1.0f);
 		}
 		else
@@ -155,14 +155,14 @@ public class UserBrewingRecipes extends JsonConfigDef
 
 		if (residue == null)
 		{
-			logger.error("Not a valid residue found for %s", recipe);
+			logger.error("Not a valid residue found for {%s}", recipe);
 			return;
 		}
 
 		final FluidStack inputFluidStack = recipe.input_fluid.asFluidStack();
 		final FluidStack outputFluidStack = recipe.output_fluid.asFluidStack();
 
-		logger.info("Adding brewing recipe %s", recipe);
+		logger.info("Adding user brewing recipe {%s}", recipe);
 		for (ItemStack item : recipe.item.getItemStacks())
 		{
 			CellarRegistry.instance().brewing().addBrewing(inputFluidStack, item, outputFluidStack, recipe.time, residue);
@@ -174,7 +174,7 @@ public class UserBrewingRecipes extends JsonConfigDef
 	{
 		if (recipes != null)
 		{
-			logger.info("Adding %d brewing recipes.", recipes.length);
+			logger.info("Adding %d user brewing recipes.", recipes.length);
 			for (UserBrewingRecipe recipe : recipes) addBrewingRecipe(recipe);
 		}
 	}

@@ -93,7 +93,7 @@ public class OreItemSchema implements IItemStackListFactory, IValidatable, IComm
 	@Override
 	public String toString()
 	{
-		return "ore=" + name + " x" + amount;
+		return String.format("Schema<OreItem>(name: '%s', amount: %s)", name, amount);
 	}
 
 	@Override

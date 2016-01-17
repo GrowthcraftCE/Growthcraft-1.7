@@ -59,7 +59,7 @@ public class UserFermentingRecipes extends JsonConfigDef
 		@Override
 		public String toString()
 		{
-			return "" + item + " + " + input_fluid + " / " + time + " = " + output_fluid;
+			return String.format("UserFermentingRecipe(`%s` + `%s` / %d = `%s`)", item, input_fluid, time, output_fluid);
 		}
 
 		@Override
@@ -121,23 +121,23 @@ public class UserFermentingRecipes extends JsonConfigDef
 
 		if (recipe.item == null || !recipe.item.isValid())
 		{
-			logger.error("Recipe item is invalid! %s", recipe);
+			logger.error("Recipe item is invalid! {%s}", recipe);
 			return;
 		}
 
 		if (recipe.input_fluid == null || !recipe.input_fluid.isValid())
 		{
-			logger.error("Recipe input_fluid is invalid! %s", recipe);
+			logger.error("Recipe input_fluid is invalid! {%s}", recipe);
 			return;
 		}
 
 		if (recipe.output_fluid == null || !recipe.output_fluid.isValid())
 		{
-			logger.error("Recipe output_fluid is invalid! %s", recipe);
+			logger.error("Recipe output_fluid is invalid! {%s}", recipe);
 			return;
 		}
 
-		logger.info("Adding Fermenting Recipe %s", recipe);
+		logger.info("Adding Fermenting Recipe {%s}", recipe);
 		for (ItemStack item : recipe.item.getItemStacks())
 		{
 			CellarRegistry.instance().fermenting().addFermentingRecipe(
@@ -154,7 +154,7 @@ public class UserFermentingRecipes extends JsonConfigDef
 	{
 		if (recipes != null)
 		{
-			logger.info("Registering %d heat sources.", recipes.length);
+			logger.info("Registering %d user heat sources.", recipes.length);
 			for (UserFermentingRecipe recipe : recipes) addFermentingRecipe(recipe);
 		}
 	}

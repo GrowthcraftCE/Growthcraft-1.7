@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,40 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.schema;
+package growthcraft.api.core.util;
 
-import javax.annotation.Nonnull;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.cellar.common.Residue;
-
-import net.minecraft.item.ItemStack;
-
-public class ResidueSchema extends ItemKeySchema
+public class FluidFormatString
 {
-	public float pomace;
+	private FluidFormatString() {}
 
-	public ResidueSchema(@Nonnull Residue res)
+	public static String format(FluidStack stack)
 	{
-		super(res.residueItem);
-		this.pomace = res.pomaceRate;
-	}
-
-	public ResidueSchema()
-	{
-		super();
-		this.pomace = 1.0f;
-	}
-
-	public Residue asResidue()
-	{
-		final ItemStack itemStack = asStack();
-		if (itemStack == null) return null;
-		return new Residue(itemStack, pomace);
-	}
-
-	@Override
-	public String toString()
-	{
-		return String.format("%s~(pomace: %.4f)", super.toString(), pomace);
+		if (stack != null)
+		{
+			final Fluid fluid = stack.getFluid();
+			String fluidName = "NULL";
+			if (fluid != null) fluidName = fluid.getName();
+			return String.format("FluidStack(fluid: %s, amount: %d)", fluidName, stack.amount);
+		}
+		return "FluidStack(NULL)";
 	}
 }

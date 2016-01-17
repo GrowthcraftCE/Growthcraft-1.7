@@ -29,7 +29,7 @@ public class PressingRegistry implements IPressingRegistry
 		final ItemKey key = new ItemKey(stack);
 		final PressingResult result = new PressingResult(stack, resultFluid, time, residue);
 		pressingList.put(key, result);
-		logger.debug("Added new Pressing Recipe key=%s result=%s", key, result);
+		logger.debug("Added new Pressing Recipe key={%s} result={%s}", key, result);
 	}
 
 	@Override

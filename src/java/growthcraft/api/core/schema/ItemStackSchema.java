@@ -111,7 +111,7 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory
 	@Override
 	public String toString()
 	{
-		return "" + mod_id + ":" + name + ":" + meta + " x" + amount;
+		return String.format("Schema<ItemStack>(mod_id: '%s', name: '%s', meta: %d, amount: %d)", mod_id, name, meta, amount);
 	}
 
 	@Override
