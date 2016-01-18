@@ -12,6 +12,8 @@ import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.util.HashKey;
 import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.util.ItemTest;
+import growthcraft.api.core.util.FluidTest;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -76,10 +78,15 @@ public class BrewingRegistry implements IBrewingRegistry
 		if (itemstack == null || fluidstack == null) return null;
 
 		final Fluid f = boozeToKey(fluidstack.getFluid());
-		final BrewingRecipe ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), itemstack.getItemDamage()));
-		if (ret != null) return ret;
+		BrewingRecipe ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), itemstack.getItemDamage()));
+		if (ret == null) ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), ItemKey.WILDCARD_VALUE));
 
-		return brewingList.get(new BrewingKey(f, itemstack.getItem(), ItemKey.WILDCARD_VALUE));
+		if (ret != null)
+		{
+			if (!ItemTest.hasEnough(ret.getInputItemStack(), itemstack)) return null;
+			if (!FluidTest.hasEnough(ret.getInputFluidStack(), fluidstack)) return null;
+		}
+		return ret;
 	}
 
 	@Override
