@@ -26,12 +26,28 @@ package growthcraft.api.cellar.fermenting;
 import growthcraft.api.cellar.common.ProcessingRecipe;
 import growthcraft.api.cellar.common.Residue;
 
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public class FermentationRecipe extends ProcessingRecipe
 {
-	public FermentationRecipe(FluidStack f, int t, Residue r)
+	private FluidStack inputFluid;
+	private ItemStack fermentingItem;
+
+	public FermentationRecipe(FluidStack src, ItemStack ferm, FluidStack res, int t, Residue r)
 	{
-		super(f, t, r);
+		super(res, t, r);
+		this.inputFluid = src;
+		this.fermentingItem = ferm;
+	}
+
+	public FluidStack getInputFluidStack()
+	{
+		return inputFluid;
+	}
+
+	public ItemStack getFermentingItemStack()
+	{
+		return fermentingItem;
 	}
 }

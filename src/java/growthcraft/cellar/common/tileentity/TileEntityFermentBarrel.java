@@ -93,14 +93,14 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 			final Item item = fermentItem.getItem();
 			final FluidStack fluidStack = getFluidStack(0);
 
-			final FermentationRecipe result = getFermentation();
-			if (result != null)
+			final FermentationRecipe recipe = getFermentation();
+			if (recipe != null)
 			{
-				getFluidTank(0).setFluid(result.asFluidStack(getFluidStack(0).amount));
-				final ItemStack consumption = result.getInput();
-				if (consumption != null)
+				getFluidTank(0).setFluid(recipe.asFluidStack(getFluidStack(0).amount));
+				final ItemStack fermenter = recipe.getFermentingItemStack();
+				if (fermenter != null)
 				{
-					decrStackSize(0, consumption.stackSize);
+					decrStackSize(0, fermenter.stackSize);
 				}
 			}
 		}

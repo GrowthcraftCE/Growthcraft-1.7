@@ -72,15 +72,20 @@ public class BrewingRegistry implements IBrewingRegistry
 		this.brewingIngredients.add(new ItemKey(raw));
 	}
 
-	@Override
-	public BrewingRecipe getBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
+	private BrewingRecipe getAbsoluteBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
 	{
 		if (itemstack == null || fluidstack == null) return null;
 
 		final Fluid f = boozeToKey(fluidstack.getFluid());
 		BrewingRecipe ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), itemstack.getItemDamage()));
 		if (ret == null) ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), ItemKey.WILDCARD_VALUE));
+		return ret;
+	}
 
+	@Override
+	public BrewingRecipe getBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
+	{
+		final BrewingRecipe ret = getAbsoluteBrewingRecipe(fluidstack, itemstack);
 		if (ret != null)
 		{
 			if (!ItemTest.hasEnough(ret.getInputItemStack(), itemstack)) return null;

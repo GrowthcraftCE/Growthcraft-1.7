@@ -66,7 +66,7 @@ public class FruitPress extends DeviceProgressive
 		return getWorld().getBlockMetadata(parent.xCoord, parent.yCoord + 1, parent.zCoord);
 	}
 
-	public boolean preparePressing()
+	private boolean preparePressing()
 	{
 		this.currentResult = null;
 		final ItemStack primarySlotItem = inputSlot.get();

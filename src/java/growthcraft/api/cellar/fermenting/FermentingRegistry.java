@@ -57,7 +57,7 @@ public class FermentingRegistry implements IFermentingRegistry
 		{
 			fermentTree.put(key, new FluidModifierMap());
 		}
-		fermentTree.get(key).put(stackToKey(fermenter), new FermentationRecipe(result, time, null));
+		fermentTree.get(key).put(stackToKey(fermenter), new FermentationRecipe(booze, fermenter, result, time, null));
 	}
 
 	@Override
