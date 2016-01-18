@@ -42,19 +42,25 @@ public class GuiFermentBarrel extends GuiCellar
 	public void initGui()
 	{
 		super.initGui();
-		this.button = new GuiButtonDiscard(fermentBarrelResource, 1, this.guiLeft + 116, this.guiTop + 54);
-		this.buttonList.add(this.button);
-		this.button.enabled = false;
+		if (GrowthCraftCellar.getConfig().enableDiscardButton)
+		{
+			this.button = new GuiButtonDiscard(fermentBarrelResource, 1, this.guiLeft + 116, this.guiTop + 54);
+			this.buttonList.add(this.button);
+			this.button.enabled = false;
+		}
 
 		addTooltipIndex("fluidtank0", 63, 17, 50, 52);
-		addTooltipIndex("discardtank0", 116, 54, 16, 16);
+		if (button != null) addTooltipIndex("discardtank0", 116, 54, 16, 16);
 	}
 
 	@Override
 	public void updateScreen()
 	{
 		super.updateScreen();
-		this.button.enabled = this.te.isFluidTankFilled(0);
+		if (button != null)
+		{
+			this.button.enabled = this.te.isFluidTankFilled(0);
+		}
 	}
 
 	@Override

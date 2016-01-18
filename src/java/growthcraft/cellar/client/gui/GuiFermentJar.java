@@ -36,12 +36,15 @@ public class GuiFermentJar extends GuiCellar
 	public void initGui()
 	{
 		super.initGui();
-		this.discardButton = new GuiButtonDiscard(fermentJarResource, 1, guiLeft + 116, guiTop + 54);
-		discardButton.enabled = false;
-		buttonList.add(discardButton);
+		if (GrowthCraftCellar.getConfig().enableDiscardButton)
+		{
+			this.discardButton = new GuiButtonDiscard(fermentJarResource, 1, guiLeft + 116, guiTop + 54);
+			discardButton.enabled = false;
+			buttonList.add(discardButton);
+		}
 
 		addTooltipIndex("fluidtank0", 36, 17, 16, 52);
-		addTooltipIndex("discardtank0", 16, 52, 16, 16);
+		if (discardButton != null) addTooltipIndex("discardtank0", 16, 52, 16, 16);
 	}
 
 	@Override
@@ -54,7 +57,7 @@ public class GuiFermentJar extends GuiCellar
 	public void updateScreen()
 	{
 		super.updateScreen();
-		discardButton.enabled = te.isFluidTankFilled(0);
+		if (discardButton != null) discardButton.enabled = te.isFluidTankFilled(0);
 	}
 
 	@Override

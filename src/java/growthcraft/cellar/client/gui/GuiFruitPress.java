@@ -23,7 +23,7 @@ public class GuiFruitPress extends GuiCellar
 {
 	private ResourceLocation fruitPressResource = GrcCellarResources.INSTANCE.textureGuiFruitPress;
 	private TileEntityFruitPress te;
-	private GuiButtonDiscard button;
+	private GuiButtonDiscard discardButton;
 
 	public GuiFruitPress(InventoryPlayer inv, TileEntityFruitPress fruitPress)
 	{
@@ -36,19 +36,22 @@ public class GuiFruitPress extends GuiCellar
 	public void initGui()
 	{
 		super.initGui();
-		this.button = new GuiButtonDiscard(fruitPressResource, 1, this.guiLeft + 108, this.guiTop + 54);
-		this.buttonList.add(this.button);
-		this.button.enabled = false;
+		if (GrowthCraftCellar.getConfig().enableDiscardButton)
+		{
+			this.discardButton = new GuiButtonDiscard(fruitPressResource, 1, guiLeft + 108, guiTop + 54);
+			buttonList.add(discardButton);
+			discardButton.enabled = false;
+		}
 
 		addTooltipIndex("fluidtank0", 89, 17, 16, 52);
-		addTooltipIndex("discardtank0", 108, 54, 16, 16);
+		if (discardButton != null) addTooltipIndex("discardtank0", 108, 54, 16, 16);
 	}
 
 	@Override
 	public void updateScreen()
 	{
 		super.updateScreen();
-		this.button.enabled = this.te.isFluidTankFilled(0);
+		if (discardButton != null) discardButton.enabled = this.te.isFluidTankFilled(0);
 	}
 
 	protected void actionPerformed(GuiButton butn)

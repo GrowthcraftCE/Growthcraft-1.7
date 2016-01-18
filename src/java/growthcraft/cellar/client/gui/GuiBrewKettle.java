@@ -39,23 +39,26 @@ public class GuiBrewKettle extends GuiCellar
 	public void initGui()
 	{
 		super.initGui();
-		this.button0 = new GuiButtonDiscard(brewKettleResource, 1, this.guiLeft + 27, this.guiTop + 54);
-		this.button0.enabled = false;
+		if (GrowthCraftCellar.getConfig().enableDiscardButton)
+		{
+			this.button0 = new GuiButtonDiscard(brewKettleResource, 1, this.guiLeft + 27, this.guiTop + 54);
+			this.button0.enabled = false;
 
-		this.button1 = new GuiButtonDiscard(brewKettleResource, 1, this.guiLeft + 133, this.guiTop + 54);
-		this.button1.enabled = false;
+			this.button1 = new GuiButtonDiscard(brewKettleResource, 1, this.guiLeft + 133, this.guiTop + 54);
+			this.button1.enabled = false;
+		}
 
 		this.button2 = new GuiButtonSwitch(brewKettleResource, 1, this.guiLeft + 133, this.guiTop + 37);
 		this.button2.enabled = false;
 
-		this.buttonList.add(this.button0);
-		this.buttonList.add(this.button1);
+		if (button0 != null) this.buttonList.add(this.button0);
+		if (button1 != null) this.buttonList.add(this.button1);
 		this.buttonList.add(this.button2);
 
 		addTooltipIndex("fluidtank0", 46, 17, 16, 52);
 		addTooltipIndex("fluidtank1", 114, 17, 16, 52);
-		addTooltipIndex("discardtank0", 27, 54, 16, 16);
-		addTooltipIndex("discardtank1", 133, 54, 16, 16);
+		if (button0 != null) addTooltipIndex("discardtank0", 27, 54, 16, 16);
+		if (button1 != null) addTooltipIndex("discardtank1", 133, 54, 16, 16);
 		addTooltipIndex("switchtank", 133, 37, 16, 16);
 	}
 
@@ -63,25 +66,33 @@ public class GuiBrewKettle extends GuiCellar
 	public void updateScreen()
 	{
 		super.updateScreen();
-		this.button0.enabled = this.te.isFluidTankFilled(0);
-		this.button1.enabled = this.te.isFluidTankFilled(1);
+		if (button0 != null)
+		{
+			this.button0.enabled = this.te.isFluidTankFilled(0);
+		}
+
+		if (button1 != null)
+		{
+			this.button1.enabled = this.te.isFluidTankFilled(1);
+		}
+
 		//this.button2.enabled = this.te.isFluidTankFilled(1) && this.te.isFluidTankEmpty(0);
 		this.button2.enabled = this.te.isFluidTankFilled(0) || this.te.isFluidTankFilled(1);
 	}
 
 	protected void actionPerformed(GuiButton button)
 	{
-		if (button == this.button0)
+		if (button0 != null && button == button0)
 		{
-			GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButtonWByte(this.te.xCoord, this.te.yCoord, this.te.zCoord, (byte)0));
+			GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButtonWByte(te.xCoord, te.yCoord, te.zCoord, (byte)0));
 		}
-		else if (button == this.button1)
+		else if (button1 != null && button == button1)
 		{
-			GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButtonWByte(this.te.xCoord, this.te.yCoord, this.te.zCoord, (byte)1));
+			GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButtonWByte(te.xCoord, te.yCoord, te.zCoord, (byte)1));
 		}
-		else if (button == this.button2)
+		else if (button == button2)
 		{
-			GrowthCraftCellar.packetPipeline.sendToServer(new PacketSwitchTankButton(this.te.xCoord, this.te.yCoord, this.te.zCoord));
+			GrowthCraftCellar.packetPipeline.sendToServer(new PacketSwitchTankButton(te.xCoord, te.yCoord, te.zCoord));
 		}
 	}
 
