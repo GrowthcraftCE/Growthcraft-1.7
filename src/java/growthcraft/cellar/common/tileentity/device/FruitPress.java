@@ -25,7 +25,7 @@ package growthcraft.cellar.common.tileentity.device;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
-import growthcraft.api.cellar.pressing.PressingResult;
+import growthcraft.api.cellar.pressing.PressingRecipe;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
@@ -42,7 +42,7 @@ public class FruitPress extends DeviceProgressive
 	private DeviceFluidSlot fluidSlot;
 	private DeviceInventorySlot inputSlot;
 	private DeviceInventorySlot residueSlot;
-	private PressingResult currentResult;
+	private PressingRecipe currentResult;
 
 	/**
 	 * @param te - parent tile
@@ -77,7 +77,7 @@ public class FruitPress extends DeviceProgressive
 
 		if (fluidSlot.isFull()) return false;
 
-		final PressingResult result = CellarRegistry.instance().pressing().getPressingResult(primarySlotItem);
+		final PressingRecipe result = CellarRegistry.instance().pressing().getPressingRecipe(primarySlotItem);
 		if (result == null) return false;
 		if (!inputSlot.hasEnough(result.getInput())) return false;
 		this.currentResult = result;
@@ -109,7 +109,7 @@ public class FruitPress extends DeviceProgressive
 		producePomace();
 		final FluidStack fluidstack = currentResult.getFluidStack();
 		fluidSlot.fill(fluidstack, true);
-		inputSlot.consume(1);
+		inputSlot.consume(currentResult.getInput());
 	}
 
 	public void update()
@@ -130,12 +130,14 @@ public class FruitPress extends DeviceProgressive
 		}
 	}
 
+	@Override
 	public void readFromNBT(NBTTagCompound data)
 	{
 		super.readFromNBT(data);
 		this.pomace = data.getFloat("pomace");
 	}
 
+	@Override
 	public void writeToNBT(NBTTagCompound data)
 	{
 		super.writeToNBT(data);

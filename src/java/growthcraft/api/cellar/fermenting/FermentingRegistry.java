@@ -14,7 +14,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class FermentingRegistry implements IFermentingRegistry
 {
-	static class FluidModifierMap extends HashMap<ItemKey, FermentationResult>
+	static class FluidModifierMap extends HashMap<ItemKey, FermentationRecipe>
 	{
 		public static final long serialVersionUID = 1L;
 	}
@@ -57,11 +57,11 @@ public class FermentingRegistry implements IFermentingRegistry
 		{
 			fermentTree.put(key, new FluidModifierMap());
 		}
-		fermentTree.get(key).put(stackToKey(fermenter), new FermentationResult(result, time, null));
+		fermentTree.get(key).put(stackToKey(fermenter), new FermentationRecipe(result, time, null));
 	}
 
 	@Override
-	public FermentationResult getFermentationResult(FluidStack booze, ItemStack fermenter)
+	public FermentationRecipe getFermentationRecipe(FluidStack booze, ItemStack fermenter)
 	{
 		if (booze == null || fermenter == null) return null;
 

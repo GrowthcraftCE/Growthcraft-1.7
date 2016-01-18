@@ -15,7 +15,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class PressingRegistry implements IPressingRegistry
 {
 	private ILogger logger = NullLogger.INSTANCE;
-	private Map<ItemKey, PressingResult> pressingList = new HashMap<ItemKey, PressingResult>();
+	private Map<ItemKey, PressingRecipe> pressingList = new HashMap<ItemKey, PressingRecipe>();
 
 	@Override
 	public void setLogger(ILogger l)
@@ -27,17 +27,17 @@ public class PressingRegistry implements IPressingRegistry
 	public void addPressingRecipe(@Nonnull ItemStack stack, @Nonnull FluidStack resultFluid, int time, @Nonnull Residue residue)
 	{
 		final ItemKey key = new ItemKey(stack);
-		final PressingResult result = new PressingResult(stack, resultFluid, time, residue);
+		final PressingRecipe result = new PressingRecipe(stack, resultFluid, time, residue);
 		pressingList.put(key, result);
 		logger.debug("Added new Pressing Recipe key={%s} result={%s}", key, result);
 	}
 
 	@Override
-	public PressingResult getPressingResult(ItemStack itemstack)
+	public PressingRecipe getPressingRecipe(ItemStack itemstack)
 	{
 		if (itemstack == null) return null;
 
-		final PressingResult ret = pressingList.get(new ItemKey(itemstack));
+		final PressingRecipe ret = pressingList.get(new ItemKey(itemstack));
 		if (ret != null) return ret;
 
 		return pressingList.get(new ItemKey(itemstack.getItem(), ItemKey.WILDCARD_VALUE));
@@ -46,6 +46,6 @@ public class PressingRegistry implements IPressingRegistry
 	@Override
 	public boolean hasPressingRecipe(ItemStack itemstack)
 	{
-		return this.getPressingResult(itemstack) != null;
+		return this.getPressingRecipe(itemstack) != null;
 	}
 }

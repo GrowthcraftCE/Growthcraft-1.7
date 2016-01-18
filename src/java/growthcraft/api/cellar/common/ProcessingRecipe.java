@@ -21,28 +21,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.pressing;
+package growthcraft.api.cellar.common;
 
-import javax.annotation.Nonnull;
-
-import growthcraft.api.cellar.common.ProcessingResult;
-import growthcraft.api.cellar.common.Residue;
-
-import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-public class PressingResult extends ProcessingResult
+public class ProcessingRecipe
 {
-	private ItemStack input;
+	private final int time;
+	private final Residue residue;
+	private final FluidStack fluid;
 
-	public PressingResult(@Nonnull ItemStack src, @Nonnull FluidStack f, int t, @Nonnull Residue r)
+	public ProcessingRecipe(FluidStack f, int t, Residue r)
 	{
-		super(f, t, r);
-		this.input = src;
+		this.fluid = f;
+		this.time = t;
+		this.residue = r;
 	}
 
-	public ItemStack getInput()
+	public Residue getResidue()
 	{
-		return input;
+		return residue;
+	}
+
+	public int getTime()
+	{
+		return time;
+	}
+
+	public Fluid getFluid()
+	{
+		return fluid.getFluid();
+	}
+
+	public FluidStack getFluidStack()
+	{
+		return fluid;
+	}
+
+	public int getAmount()
+	{
+		return fluid.amount;
+	}
+
+	public FluidStack asFluidStack(int size)
+	{
+		final FluidStack result = fluid.copy();
+		result.amount = size;
+		return result;
+	}
+
+	public FluidStack asFluidStack()
+	{
+		return fluid.copy();
 	}
 }

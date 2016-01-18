@@ -31,6 +31,6 @@ import net.minecraftforge.fluids.FluidStack;
 public interface IFermentingRegistry extends ILoggable
 {
 	void addFermentingRecipe(FluidStack result, FluidStack booze, ItemStack fermenter, int time);
-	FermentationResult getFermentationResult(FluidStack booze, ItemStack fermenter);
+	FermentationRecipe getFermentationRecipe(FluidStack booze, ItemStack fermenter);
 	boolean canFerment(FluidStack booze);
 }

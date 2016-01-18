@@ -23,18 +23,18 @@
  */
 package growthcraft.api.cellar.brewing;
 
-import growthcraft.api.cellar.common.ProcessingResult;
+import growthcraft.api.cellar.common.ProcessingRecipe;
 import growthcraft.api.cellar.common.Residue;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BrewingResult extends ProcessingResult
+public class BrewingRecipe extends ProcessingRecipe
 {
 	private ItemStack inputItem;
 	private FluidStack inputFluid;
 
-	public BrewingResult(FluidStack inpFluid, ItemStack inpItem, FluidStack f, int t, Residue r)
+	public BrewingRecipe(FluidStack inpFluid, ItemStack inpItem, FluidStack f, int t, Residue r)
 	{
 		super(f, t, r);
 		this.inputItem = inpItem;

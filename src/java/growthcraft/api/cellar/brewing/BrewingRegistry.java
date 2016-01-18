@@ -48,7 +48,7 @@ public class BrewingRegistry implements IBrewingRegistry
 		}
 	}
 
-	private HashMap<BrewingKey, BrewingResult> brewingList = new HashMap<BrewingKey, BrewingResult>();
+	private HashMap<BrewingKey, BrewingRecipe> brewingList = new HashMap<BrewingKey, BrewingRecipe>();
 	private List<ItemKey> brewingIngredients = new ArrayList<ItemKey>();
 	private ILogger logger = NullLogger.INSTANCE;
 
@@ -66,17 +66,17 @@ public class BrewingRegistry implements IBrewingRegistry
 	@Override
 	public void addBrewing(@Nonnull FluidStack sourceFluid, @Nonnull ItemStack raw, @Nonnull FluidStack resultFluid, int time, @Nonnull Residue residue)
 	{
-		this.brewingList.put(new BrewingKey(sourceFluid.getFluid(), raw), new BrewingResult(sourceFluid, raw, resultFluid, time, residue));
+		this.brewingList.put(new BrewingKey(sourceFluid.getFluid(), raw), new BrewingRecipe(sourceFluid, raw, resultFluid, time, residue));
 		this.brewingIngredients.add(new ItemKey(raw));
 	}
 
 	@Override
-	public BrewingResult getBrewingResult(FluidStack fluidstack, ItemStack itemstack)
+	public BrewingRecipe getBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
 	{
 		if (itemstack == null || fluidstack == null) return null;
 
 		final Fluid f = boozeToKey(fluidstack.getFluid());
-		final BrewingResult ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), itemstack.getItemDamage()));
+		final BrewingRecipe ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), itemstack.getItemDamage()));
 		if (ret != null) return ret;
 
 		return brewingList.get(new BrewingKey(f, itemstack.getItem(), ItemKey.WILDCARD_VALUE));
@@ -85,7 +85,7 @@ public class BrewingRegistry implements IBrewingRegistry
 	@Override
 	public boolean isBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
 	{
-		return getBrewingResult(fluidstack, itemstack) != null;
+		return getBrewingRecipe(fluidstack, itemstack) != null;
 	}
 
 	@Override

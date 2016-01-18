@@ -45,7 +45,7 @@ public interface IBrewingRegistry extends ILoggable
 	 */
 	void addBrewing(FluidStack sourceFluid, ItemStack raw, FluidStack resultFluid, int time, Residue residue);
 
-	BrewingResult getBrewingResult(FluidStack fluidstack, ItemStack itemstack);
+	BrewingRecipe getBrewingRecipe(FluidStack fluidstack, ItemStack itemstack);
 	boolean isBrewingRecipe(FluidStack fluidstack, ItemStack itemstack);
 	boolean isItemBrewingIngredient(ItemStack itemstack);
 }

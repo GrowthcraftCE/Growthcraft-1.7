@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.fermenting.FermentationResult;
+import growthcraft.api.cellar.fermenting.FermentationRecipe;
 import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
@@ -58,9 +58,9 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		return "container.grc.fermentBarrel";
 	}
 
-	private FermentationResult getFermentation()
+	private FermentationRecipe getFermentation()
 	{
-		return CellarRegistry.instance().fermenting().getFermentationResult(getFluidStack(0), getStackInSlot(0));
+		return CellarRegistry.instance().fermenting().getFermentationRecipe(getFluidStack(0), getStackInSlot(0));
 	}
 
 	public int getTime()
@@ -70,7 +70,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 
 	public int getTimeMax()
 	{
-		final FermentationResult result = getFermentation();
+		final FermentationRecipe result = getFermentation();
 		if (result != null)
 		{
 			return result.getTime();
@@ -93,13 +93,16 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 			final Item item = fermentItem.getItem();
 			final FluidStack fluidStack = getFluidStack(0);
 
-			final FermentationResult result = getFermentation();
+			final FermentationRecipe result = getFermentation();
 			if (result != null)
 			{
 				getFluidTank(0).setFluid(result.asFluidStack(getFluidStack(0).amount));
+				final ItemStack consumption = result.getInput();
+				if (consumption != null)
+				{
+					decrStackSize(0, consumption.stackSize);
+				}
 			}
-
-			decrStackSize(0, 1);
 		}
 	}
 
