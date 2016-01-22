@@ -12,7 +12,7 @@ public class GrcCellarConfig extends ConfigBase
 
 
 	@ConfigOption(catergory="Events", name="Enable Discard Button", desc="Enable and show the Discard button from certain cellar blocks.")
-	public boolean enableDiscardButton = false;
+	public boolean enableDiscardButton = true;
 
 
 	@ConfigOption(catergory="Booze Fluid", name="Booze blocks use water material", desc="Should Booze blocks behave like water (introduces water bottle bug, but fluids behave like fluids.)?")
