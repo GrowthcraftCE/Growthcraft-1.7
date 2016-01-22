@@ -33,23 +33,29 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class FluidStackSchema implements IFluidStackFactory, IValidatable, ICommentable
 {
-	public String comment = "";
+	public String comment;
 	public String name;
-	public int amount = 1;
+	public int amount;
 
 	public FluidStackSchema(@Nonnull String nm, int amt)
 	{
 		this.name = nm;
 		this.amount = amt;
+		this.comment = "";
 	}
 
 	public FluidStackSchema(@Nonnull FluidStack stack)
 	{
 		this.name = stack.getFluid().getName();
 		this.amount = stack.amount;
+		this.comment = stack.getLocalizedName();
 	}
 
-	public FluidStackSchema() {}
+	public FluidStackSchema()
+	{
+		this.comment = "";
+		this.amount = 1;
+	}
 
 	@Override
 	public void setComment(@Nonnull String comm)

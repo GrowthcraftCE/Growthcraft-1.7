@@ -38,7 +38,7 @@ import net.minecraft.item.ItemStack;
 
 public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory, IValidatable, ICommentable
 {
-	public String comment = "";
+	public String comment;
 	public String mod_id;
 	public String name;
 	public int amount;
@@ -50,6 +50,7 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory
 		this.name = nm;
 		this.amount = amt;
 		this.meta = mt;
+		this.comment = "";
 	}
 
 	public ItemStackSchema(@Nonnull ItemStack stack)
@@ -59,12 +60,14 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory
 		this.name = uuid.name;
 		this.amount = stack.stackSize;
 		this.meta = stack.getItemDamage();
+		this.comment = stack.getDisplayName();
 	}
 
 	public ItemStackSchema()
 	{
 		this.amount = 1;
 		this.meta = ItemKey.WILDCARD_VALUE;
+		this.comment = "";
 	}
 
 	@Override
