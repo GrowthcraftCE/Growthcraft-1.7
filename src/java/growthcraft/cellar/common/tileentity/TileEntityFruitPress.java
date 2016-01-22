@@ -27,8 +27,8 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 		private FruitPressDataID() {}
 	}
 
-	private static final int[] rawSlotIDs = new int[] {0, 1};
-	private static final int[] residueSlotIDs = new int[] {0};
+	private static final int[] allSlotIds = new int[] {0, 1};
+	private static final int[] residueSlotIds = new int[] {0};
 	private FruitPress fruitPress = new FruitPress(this, 0, 0, 1);
 
 	@Override
@@ -55,9 +55,6 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 		return fruitPress.getProgressScaled(par1);
 	}
 
-	/************
-	 * UPDATE
-	 ************/
 	@Override
 	protected void updateDevice()
 	{
@@ -67,15 +64,35 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 	{
-		// 0 = raw
+		// 0 = raw item
 		// 1 = residue
-		return side == 0 ? rawSlotIDs : residueSlotIDs;
+		return allSlotIds;
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack stack, int side)
+	{
+		// allow the insertion of a raw item from ANY side
+		if (index == 0) return true;
+		return false;
 	}
 
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, int side)
 	{
-		return side != 0 || index == 1;
+		// if this is the raw item slow
+		if (index == 0)
+		{
+			// only allow extraction from the top or bottom
+			if (side == 0 || side == 1) return true;
+		}
+		// else this is the residue slot
+		else
+		{
+			// if its the side, the item can be safely extracted
+			if (side > 1) return true;
+		}
+		return false;
 	}
 
 	/************
