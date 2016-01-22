@@ -31,6 +31,7 @@ import java.io.IOException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.common.io.Files;
 
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.ILoggable;
@@ -49,7 +50,8 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 
 	protected ILogger logger = NullLogger.INSTANCE;
 	protected final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	private File srcFile;
+	private File targetConfigFile;
+	private File targetDefaultConfigFile;
 
 	public void setLogger(ILogger l)
 	{
@@ -58,18 +60,22 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 
 	protected abstract String getDefault();
 
-	public void saveDefault(File file)
+	private void writeDefaultConfigTo(File file)
 	{
 		try
 		{
 			logger.info("Creating default json-config %s", file);
 			if (file.getParentFile() != null)
-			{
 				file.getParentFile().mkdirs();
-			}
 
-			if (!file.createNewFile())
-				return;
+			if (!file.exists())
+			{
+				if (!file.createNewFile())
+				{
+					logger.error("Could not create default config %s", file);
+					return;
+				}
+			}
 
 			if (file.canWrite())
 			{
@@ -89,24 +95,57 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 
 	public void setConfigFile(File dir, String filename)
 	{
-		srcFile = new File(dir, filename);
-		logger.debug("Config file %s was set for %s", srcFile, this);
+		this.targetConfigFile = new File(dir, filename);
+		this.targetDefaultConfigFile = new File(dir, filename + ".default");
+		logger.debug("Config file `%s` was set for `%s`", targetConfigFile, this);
+		logger.debug("DEFAULT Config file `%s` was set for `%s`", targetDefaultConfigFile, this);
 	}
 
-	public void loadConfig()
+	private void prepareUserConfig() throws IOException
+	{
+		if (!targetConfigFile.exists())
+		{
+			if (targetConfigFile.getParentFile() != null)
+				targetConfigFile.getParentFile().mkdirs();
+
+			if (!targetConfigFile.createNewFile())
+			{
+				logger.error("Could not create config file `%s`", targetConfigFile);
+				return;
+			}
+
+			if (targetDefaultConfigFile.exists())
+			{
+				Files.copy(targetDefaultConfigFile, targetConfigFile);
+			}
+			else
+			{
+				logger.error("Could not copy default config file `%s` to `%s`", targetDefaultConfigFile, targetConfigFile);
+			}
+		}
+	}
+
+	private void loadUserConfig()
 	{
 		BufferedReader buffer = null;
 		UnicodeInputStreamReader input = null;
+
+		writeDefaultConfigTo(targetDefaultConfigFile);
+
 		try
 		{
-			logger.debug("Loading json-config %s", srcFile);
-			if (!srcFile.exists()) saveDefault(srcFile);
+			logger.debug("Loading json-config %s", targetConfigFile);
 
-			if (srcFile.canRead())
+			prepareUserConfig();
+			if (targetConfigFile.canRead())
 			{
-				input = new UnicodeInputStreamReader(new FileInputStream(srcFile), DEFAULT_ENCODING);
+				input = new UnicodeInputStreamReader(new FileInputStream(targetConfigFile), DEFAULT_ENCODING);
 				buffer = new BufferedReader(input);
 				loadFromBuffer(buffer);
+			}
+			else
+			{
+				logger.error("Could not read config file %s", targetConfigFile);
 			}
 		}
 		catch (IOException e)
@@ -143,7 +182,7 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 	@Override
 	public void init()
 	{
-		loadConfig();
+		loadUserConfig();
 	}
 
 	@Override
