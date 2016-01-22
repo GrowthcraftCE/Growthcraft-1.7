@@ -7,6 +7,7 @@ import java.io.IOException;
 import io.netty.buffer.ByteBuf;
 
 import growthcraft.api.cellar.util.FluidUtils;
+import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;

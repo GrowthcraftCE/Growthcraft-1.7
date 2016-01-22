@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.tileentity;
+package growthcraft.cellar.common.fluids;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidTank;

@@ -3,10 +3,11 @@ package growthcraft.cellar.common.tileentity;
 import java.io.IOException;
 
 import growthcraft.api.cellar.util.FluidUtils;
+import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.tileentity.device.YeastGenerator;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.cellar.common.tileentity.device.YeastGenerator;
 
 import io.netty.buffer.ByteBuf;
 
