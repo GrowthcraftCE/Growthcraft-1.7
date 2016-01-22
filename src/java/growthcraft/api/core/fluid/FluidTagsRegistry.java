@@ -54,10 +54,8 @@ public class FluidTagsRegistry implements IFluidTagsRegistry
 			tagMap.put(fluid, new HashSet<FluidTag>());
 		}
 
-		for (FluidTag tag : tags)
-		{
-			tagMap.get(fluid).add(tag);
-		}
+		final Set<FluidTag> tagSet = tagMap.get(fluid);
+		for (FluidTag tag : tags) tagSet.add(tag);
 	}
 
 	@Override
