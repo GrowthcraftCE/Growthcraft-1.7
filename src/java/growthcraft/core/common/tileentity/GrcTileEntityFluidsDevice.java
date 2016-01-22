@@ -25,6 +25,7 @@ package growthcraft.core.common.tileentity;
 
 import java.io.IOException;
 
+import growthcraft.api.core.util.FluidTest;
 import growthcraft.core.common.tileentity.device.FluidTanks;
 import growthcraft.core.common.tileentity.device.IFluidTanks;
 import growthcraft.core.common.tileentity.event.EventHandler;
@@ -115,6 +116,36 @@ public abstract class GrcTileEntityFluidsDevice extends GrcTileEntityBase implem
 	public boolean canDrain(ForgeDirection from, Fluid fluid)
 	{
 		return true;
+	}
+
+	protected abstract FluidStack doDrain(ForgeDirection dir, int amount, boolean doDrain);
+	protected abstract FluidStack doDrain(ForgeDirection dir, FluidStack stack, boolean doDrain);
+
+	@Override
+	public FluidStack drain(ForgeDirection dir, int amount, boolean doDrain)
+	{
+		final FluidStack result = doDrain(dir, amount, doDrain);
+		if (doDrain && FluidTest.isValid(result)) markForFluidUpdate();
+		return result;
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection dir, FluidStack stack, boolean doDrain)
+	{
+		if (!FluidTest.isValid(stack)) return null;
+		final FluidStack result = doDrain(dir, stack, doDrain);
+		if (doDrain && FluidTest.isValid(result)) markForFluidUpdate();
+		return result;
+	}
+
+	protected abstract int doFill(ForgeDirection dir, FluidStack stack, boolean doFill);
+
+	@Override
+	public int fill(ForgeDirection dir, FluidStack stack, boolean doFill)
+	{
+		final int result = doFill(dir, stack, doFill);
+		if (doFill && result != 0) markForFluidUpdate();
+		return result;
 	}
 
 	@Override

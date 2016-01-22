@@ -94,36 +94,25 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	}
 
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
+	protected int doFill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
-		final int f = getFluidTank(0).fill(resource, doFill);
-		if (doFill && f > 0)
-		{
-			markForBlockUpdate();
-		}
-		return f;
+		return fillFluidTank(0, resource, doFill);
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		final FluidStack d = getFluidTank(0).drain(maxDrain, doDrain);
-		if (doDrain && d != null)
-		{
-			markForBlockUpdate();
-		}
-		return d;
+		return drainFluidTank(0, maxDrain, doDrain);
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, FluidStack resource, boolean doDrain)
 	{
 		if (resource == null || !resource.isFluidEqual(getFluidTank(0).getFluid()))
 		{
 			return null;
 		}
-
-		return drain(from, resource.amount, doDrain);
+		return doDrain(from, resource.amount, doDrain);
 	}
 
 	@Override

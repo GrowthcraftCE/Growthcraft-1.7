@@ -212,40 +212,26 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK2_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
 	}
 
-	/************
-	 * FLUID
-	 ************/
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
+	protected int doFill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
-		final int f = getFluidTank(0).fill(resource, doFill);
-		if (doFill && f > 0)
-		{
-			markForBlockUpdate();
-		}
-		return f;
+		return fillFluidTank(0, resource, doFill);
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		final FluidStack d = getFluidTank(1).drain(maxDrain, doDrain);
-		if (doDrain && d != null && d.amount > 0)
-		{
-			markForBlockUpdate();
-		}
-		return d;
+		return drainFluidTank(1, maxDrain, doDrain);
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, FluidStack stack, boolean doDrain)
 	{
-		if (resource == null || !resource.isFluidEqual(getFluidStack(1)))
+		if (stack == null || !stack.isFluidEqual(getFluidStack(1)))
 		{
 			return null;
 		}
-
-		return drain(from, resource.amount, doDrain);
+		return doDrain(from, stack.amount, doDrain);
 	}
 
 	public void switchTanks()

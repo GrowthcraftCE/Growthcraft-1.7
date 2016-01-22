@@ -179,9 +179,6 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
 	}
 
-	/************
-	 * FLUID
-	 ************/
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid)
 	{
@@ -189,25 +186,24 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	}
 
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
+	protected int doFill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
 		return 0;
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		return getFluidTank(0).drain(maxDrain, doDrain);
+		return drainFluidTank(0, maxDrain, doDrain);
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, FluidStack stack, boolean doDrain)
 	{
-		if (resource == null || !resource.isFluidEqual(getFluidStack(0)))
+		if (stack == null || !stack.isFluidEqual(getFluidStack(0)))
 		{
 			return null;
 		}
-
-		return drain(from, resource.amount, doDrain);
+		return doDrain(from, stack.amount, doDrain);
 	}
 }

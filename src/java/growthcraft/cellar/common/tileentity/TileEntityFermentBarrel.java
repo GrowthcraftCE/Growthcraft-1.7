@@ -230,28 +230,25 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
 	}
 
-	/************
-	 * FLUID
-	 ************/
 	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
+	protected int doFill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
-		return getFluidTank(0).fill(resource, doFill);
+		return fillFluidTank(0, resource, doFill);
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		return getFluidTank(0).drain(maxDrain, doDrain);
+		return drainFluidTank(0, maxDrain, doDrain);
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, FluidStack resource, boolean doDrain)
 	{
-		if (resource == null || !resource.isFluidEqual(getFluidTank(0).getFluid()))
+		if (resource == null || !resource.isFluidEqual(getFluidStack(0)))
 		{
 			return null;
 		}
-		return drain(from, resource.amount, doDrain);
+		return doDrain(from, resource.amount, doDrain);
 	}
 }
