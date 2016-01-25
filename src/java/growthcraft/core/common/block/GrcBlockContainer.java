@@ -27,6 +27,7 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 
 import growthcraft.core.common.tileentity.ICustomDisplayName;
+import growthcraft.core.common.tileentity.IItemHandler;
 import growthcraft.core.util.BlockFlags;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.core.Utils;
@@ -227,12 +228,8 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 		return fs != null && fs.amount > 0;
 	}
 
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
+	private boolean handleIFluidHandler(World world, int x, int y, int z, EntityPlayer player, int meta)
 	{
-		if (world.isRemote) return true;
-		if (tryWrenchItem(player, world, x, y, z)) return true;
-
 		final TileEntity te = world.getTileEntity(x, y, z);
 		if (te instanceof IFluidHandler)
 		{
@@ -260,6 +257,34 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 			}
 		}
 		return false;
+	}
+
+	private boolean handleOnUseItem(World world, int x, int y, int z, EntityPlayer player, int meta)
+	{
+		final TileEntity te = world.getTileEntity(x, y, z);
+		if (te instanceof IItemHandler)
+		{
+			final IItemHandler ih = (IItemHandler)te;
+			final ItemStack is = player.inventory.getCurrentItem();
+
+			final boolean needUpdate = false;
+			if (needUpdate)
+			{
+				world.markBlockForUpdate(x, y, z);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
+	{
+		if (world.isRemote) return true;
+		if (tryWrenchItem(player, world, x, y, z)) return true;
+		if (handleOnUseItem(world, x, y, z, player, meta)) return true;
+		return handleIFluidHandler(world, x, y, z, player, meta);
 	}
 
 	@SuppressWarnings("unchecked")
