@@ -24,17 +24,25 @@
 package growthcraft.cellar.client.render.item;
 
 import growthcraft.core.client.render.item.GrcItemRenderer;
-import growthcraft.cellar.client.render.model.ModelFermentJar;
+import growthcraft.cellar.client.model.ModelCultureJar;
 import growthcraft.cellar.client.resource.GrcCellarResources;
 
 import net.minecraft.item.ItemStack;
+import org.lwjgl.opengl.GL11;
 
-public class ItemRenderFermentJar extends GrcItemRenderer
+public class ItemRenderCultureJar extends GrcItemRenderer
 {
 	@Override
 	protected void render(ItemRenderType type, ItemStack item, Object... data)
 	{
-		bindTexture(GrcCellarResources.INSTANCE.textureFermentJar);
-		GrcCellarResources.INSTANCE.modelFermentJar.renderForInventory(ModelFermentJar.SCALE);
+		GL11.glPushMatrix();
+		{
+			bindTexture(GrcCellarResources.INSTANCE.textureCultureJar);
+			GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+			GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
+			GL11.glTranslatef(0.0f, -1.5f, 0.0f);
+			GrcCellarResources.INSTANCE.modelCultureJar.render(null, 0f, 0f, 0f, 0f, 0f, ModelCultureJar.SCALE);
+		}
+		GL11.glPopMatrix();
 	}
 }

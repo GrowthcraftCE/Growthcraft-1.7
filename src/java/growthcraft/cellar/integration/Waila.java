@@ -50,6 +50,6 @@ public class Waila extends WailaIntegrationBase
 		reg.addConfig(GrowthCraftCellar.MOD_NAME, "FruitPressExtras", option + "FruitPressExtras", true);
 		reg.addConfig(GrowthCraftCellar.MOD_NAME, "BrewKettleExtras", option + "BrewKettleExtras", true);
 		reg.addConfig(GrowthCraftCellar.MOD_NAME, "FermentBarrelExtras", option + "FermentBarrelExtras", true);
-		reg.addConfig(GrowthCraftCellar.MOD_NAME, "FermentJarExtras", option + "FermentJarExtras", true);
+		reg.addConfig(GrowthCraftCellar.MOD_NAME, "CultureJarExtras", option + "CultureJarExtras", true);
 	}
 }

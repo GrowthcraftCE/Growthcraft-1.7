@@ -1,37 +1,36 @@
 package growthcraft.cellar.common.block;
 
-import growthcraft.cellar.client.render.RenderFermentJar;
-import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
+import growthcraft.cellar.client.render.RenderCultureJar;
+import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.CellarGuiType;
-import growthcraft.core.util.BoundUtils;
+import growthcraft.core.util.BBox;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockFermentJar extends BlockCellarContainer
+public class BlockCultureJar extends BlockCellarContainer
 {
-	public BlockFermentJar()
+	public BlockCultureJar()
 	{
 		super(Material.glass);
 		setStepSound(soundTypeGlass);
 		setBlockName("grc.fermentJar");
 		setBlockTextureName("grccellar:ferment_jar_glass");
 		setCreativeTab(GrowthCraftCellar.tab);
-		setTileEntityType(TileEntityFermentJar.class);
+		setTileEntityType(TileEntityCultureJar.class);
 		setGuiType(CellarGuiType.FERMENT_JAR);
 
-		final float[] bounds = BoundUtils.newCubeToBounds(2f, 0f, 2f, 12f, 16f, 12f);
-		BoundUtils.scaleBounds(bounds, 1 / 16.0f, bounds);
-		setBlockBounds(bounds[0], bounds[1], bounds[2], bounds[3], bounds[4], bounds[5]);
+		final BBox bbox = BBox.newCube(6, 0, 6, 4, 6, 4).scale(1 / 16.0f);
+		setBlockBounds(bbox.x0(), bbox.y0(), bbox.z0(), bbox.x1(), bbox.y1(), bbox.z1());
 	}
 
 	@Override
 	public int getRenderType()
 	{
-		return RenderFermentJar.RENDER_ID;
+		return RenderCultureJar.RENDER_ID;
 	}
 
 	@Override

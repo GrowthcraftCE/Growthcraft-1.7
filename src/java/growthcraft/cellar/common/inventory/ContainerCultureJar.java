@@ -1,13 +1,13 @@
 package growthcraft.cellar.common.inventory;
 
-import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
+import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.cellar.common.inventory.slot.SlotInputYeast;
 
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class ContainerFermentJar extends CellarContainer
+public class ContainerCultureJar extends CellarContainer
 {
-	public ContainerFermentJar(InventoryPlayer player, TileEntityFermentJar fermentJar)
+	public ContainerCultureJar(InventoryPlayer player, TileEntityCultureJar fermentJar)
 	{
 		super(fermentJar);
 		// Slot Indexes:

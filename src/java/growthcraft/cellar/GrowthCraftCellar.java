@@ -13,7 +13,7 @@ import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.cellar.common.block.BlockBrewKettle;
 import growthcraft.cellar.common.block.BlockFermentBarrel;
-import growthcraft.cellar.common.block.BlockFermentJar;
+import growthcraft.cellar.common.block.BlockCultureJar;
 import growthcraft.cellar.common.block.BlockFruitPress;
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.booze.ModifierFunctionExtended;
@@ -26,7 +26,7 @@ import growthcraft.cellar.common.item.ItemYeast;
 import growthcraft.cellar.common.potion.PotionCellar;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
+import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.common.village.ComponentVillageTavern;
@@ -150,7 +150,7 @@ public class GrowthCraftCellar
 		//====================
 		tab = new CreativeTabsCellar("tabGrCCellar");
 		fermentBarrel = new BlockDefinition(new BlockFermentBarrel());
-		fermentJar    = new BlockDefinition(new BlockFermentJar());
+		fermentJar    = new BlockDefinition(new BlockCultureJar());
 		fruitPress    = new BlockDefinition(new BlockFruitPress());
 		fruitPresser  = new BlockDefinition(new BlockFruitPresser());
 		brewKettle    = new BlockDefinition(new BlockBrewKettle());
@@ -200,7 +200,7 @@ public class GrowthCraftCellar
 		GameRegistry.registerTileEntity(TileEntityFruitPresser.class, "grc.tileentity.fruitPresser");
 		GameRegistry.registerTileEntity(TileEntityBrewKettle.class, "grc.tileentity.brewKettle");
 		GameRegistry.registerTileEntity(TileEntityFermentBarrel.class, "grc.tileentity.fermentBarrel");
-		GameRegistry.registerTileEntity(TileEntityFermentJar.class, "grc.tileentity.fermentJar");
+		GameRegistry.registerTileEntity(TileEntityCultureJar.class, "grc.tileentity.fermentJar");
 
 		MapGenHelper.registerVillageStructure(ComponentVillageTavern.class, "grc.tavern");
 

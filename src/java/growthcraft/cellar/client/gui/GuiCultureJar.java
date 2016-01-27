@@ -7,8 +7,8 @@ import org.lwjgl.opengl.GL11;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.client.gui.widget.GuiButtonDiscard;
 import growthcraft.cellar.client.resource.GrcCellarResources;
-import growthcraft.cellar.common.inventory.ContainerFermentJar;
-import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
+import growthcraft.cellar.common.inventory.ContainerCultureJar;
+import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.network.PacketClearTankButton;
 
@@ -19,15 +19,15 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class GuiFermentJar extends GuiCellar
+public class GuiCultureJar extends GuiCellar
 {
-	private ResourceLocation fermentJarResource = GrcCellarResources.INSTANCE.textureGuiFermentJar;
-	private TileEntityFermentJar te;
+	private ResourceLocation fermentJarResource = GrcCellarResources.INSTANCE.textureGuiCultureJar;
+	private TileEntityCultureJar te;
 	private GuiButtonDiscard discardButton;
 
-	public GuiFermentJar(InventoryPlayer inv, TileEntityFermentJar fermentJar)
+	public GuiCultureJar(InventoryPlayer inv, TileEntityCultureJar fermentJar)
 	{
-		super(new ContainerFermentJar(inv, fermentJar), fermentJar);
+		super(new ContainerCultureJar(inv, fermentJar), fermentJar);
 		this.te = fermentJar;
 	}
 

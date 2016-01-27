@@ -1,7 +1,9 @@
 package growthcraft.cellar.client.render;
 
-import growthcraft.cellar.common.block.BlockFermentJar;
-import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
+import growthcraft.cellar.client.model.ModelCultureJar;
+import growthcraft.cellar.common.block.BlockCultureJar;
+import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
+import growthcraft.core.util.BBox;
 import growthcraft.core.util.BoundUtils;
 import growthcraft.core.util.ColorUtils;
 
@@ -14,17 +16,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.Fluid;
 
-public class RenderFermentJar implements ISimpleBlockRenderingHandler
+public class RenderCultureJar implements ISimpleBlockRenderingHandler
 {
 	public static int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-	public static float[] innerBounds;
-	static
-	{
-		innerBounds = BoundUtils.newCubeToBounds(5f, 1f, 5f, 22f, 22f, 22f);
-		BoundUtils.scaleBounds(innerBounds, 1f / 32f, innerBounds);
-	}
-
-	private float[] tempFloatColor = new float[3];
+	private static final BBox fluidBBox = BBox.newCube(7, 1, 7, 2, 4, 2).scale(ModelCultureJar.SCALE);
 
 	public int getRenderId()
 	{
@@ -46,11 +41,11 @@ public class RenderFermentJar implements ISimpleBlockRenderingHandler
 		if (RENDER_ID != modelId) return false;
 
 		// This only draws in the fluid inside the Jar, the jar itself is a model
-		if (block instanceof BlockFermentJar)
+		if (block instanceof BlockCultureJar)
 		{
 			final Tessellator tes = Tessellator.instance;
-			final BlockFermentJar fermentJar = (BlockFermentJar)block;
-			final TileEntityFermentJar te = fermentJar.getTileEntity(world, x, y, z);
+			final BlockCultureJar fermentJar = (BlockCultureJar)block;
+			final TileEntityCultureJar te = fermentJar.getTileEntity(world, x, y, z);
 			final Fluid fluid = te.getFluid(0);
 
 			if (fluid != null)
@@ -58,21 +53,16 @@ public class RenderFermentJar implements ISimpleBlockRenderingHandler
 				final double fluidRate = (double)te.getFluidAmountRate(0);
 				if (fluidRate > 0)
 				{
-					final double bx1 = (double)innerBounds[0];
-					final double by1 = (double)innerBounds[1];
-					final double bz1 = (double)innerBounds[2];
-					final double bx2 = (double)innerBounds[3];
-					final double by2 = (double)innerBounds[4];
-					final double bz2 = (double)innerBounds[5];
 					final IIcon icon = fluid.getIcon();
 
 					if (icon != null)
 					{
 						final int color = fluid.getColor();
+						final float[] tempFloatColor = new float[3];
 						ColorUtils.rgb24FloatArray(tempFloatColor, color);
 						tes.setColorOpaque_F(tempFloatColor[0], tempFloatColor[1], tempFloatColor[2]);
 
-						renderer.setRenderBounds(bx1, by1, bz1, bx2, by1 + (by2 - by1) * fluidRate, bz2);
+						renderer.setRenderBounds(fluidBBox.x0(), fluidBBox.y0(), fluidBBox.z0(), fluidBBox.x1(), fluidBBox.y0() + (fluidBBox.y1() - fluidBBox.y0()) * fluidRate, fluidBBox.z1());
 						{
 							renderer.renderFaceXNeg(block, (double)x, (double)y, (double)z, icon);
 							renderer.renderFaceXPos(block, (double)x, (double)y, (double)z, icon);

@@ -29,11 +29,11 @@ import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
+import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.util.TagFormatterBrewKettle;
 import growthcraft.cellar.util.TagFormatterFermentBarrel;
-import growthcraft.cellar.util.TagFormatterFermentJar;
+import growthcraft.cellar.util.TagFormatterCultureJar;
 import growthcraft.cellar.util.TagFormatterFruitPress;
 import growthcraft.api.core.util.ConstID;
 import growthcraft.api.core.nbt.NBTHelper;
@@ -89,11 +89,11 @@ public class CellarDataProvider implements IWailaDataProvider
 				tooltip = TagFormatterFermentBarrel.INSTANCE.format(tooltip, tag);
 			}
 		}
-		if (config.getConfig("FermentJarExtras"))
+		if (config.getConfig("CultureJarExtras"))
 		{
-			if (te instanceof TileEntityFermentJar)
+			if (te instanceof TileEntityCultureJar)
 			{
-				tooltip = TagFormatterFermentJar.INSTANCE.format(tooltip, tag);
+				tooltip = TagFormatterCultureJar.INSTANCE.format(tooltip, tag);
 			}
 		}
 		if (config.getConfig("BrewKettleExtras"))
@@ -134,7 +134,7 @@ public class CellarDataProvider implements IWailaDataProvider
 		tag.setTag("item_residue", NBTHelper.writeItemStackToNBT(fruitPress.getStackInSlot(1), new NBTTagCompound()));
 	}
 
-	private void getFermentJarData(TileEntityFermentJar fermentJar, NBTTagCompound tag)
+	private void getCultureJarData(TileEntityCultureJar fermentJar, NBTTagCompound tag)
 	{
 		tag.setTag("item_yeast", NBTHelper.writeItemStackToNBT(fermentJar.getStackInSlot(0), new NBTTagCompound()));
 	}
@@ -162,7 +162,7 @@ public class CellarDataProvider implements IWailaDataProvider
 		if (te instanceof TileEntityBrewKettle) getBrewKettleData((TileEntityBrewKettle)te, tag);
 		if (te instanceof TileEntityFruitPress) getFruitPressData((TileEntityFruitPress)te, tag);
 		if (te instanceof TileEntityFermentBarrel) getFermentBarrelData((TileEntityFermentBarrel)te, tag);
-		if (te instanceof TileEntityFermentJar) getFermentJarData((TileEntityFermentJar)te, tag);
+		if (te instanceof TileEntityCultureJar) getCultureJarData((TileEntityCultureJar)te, tag);
 		return tag;
 	}
 }

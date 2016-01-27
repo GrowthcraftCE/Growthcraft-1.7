@@ -19,9 +19,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityFermentJar extends TileEntityCellarDevice
+public class TileEntityCultureJar extends TileEntityCellarDevice
 {
-	public static enum FermentJarDataId
+	public static enum CultureJarDataId
 	{
 		TIME,
 		TIME_MAX,
@@ -29,9 +29,9 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 		TANK_FLUID_AMOUNT,
 		UNKNOWN;
 
-		public static final FermentJarDataId[] VALID = new FermentJarDataId[] { TIME, TIME_MAX, TANK_FLUID_ID, TANK_FLUID_AMOUNT };
+		public static final CultureJarDataId[] VALID = new CultureJarDataId[] { TIME, TIME_MAX, TANK_FLUID_ID, TANK_FLUID_AMOUNT };
 
-		public static FermentJarDataId fromInt(int i)
+		public static CultureJarDataId fromInt(int i)
 		{
 			if (i >= 0 && i <= VALID.length) return VALID[i];
 			return UNKNOWN;
@@ -41,7 +41,7 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	private static final int[] accessibleSlots = new int[] { 0 };
 	private YeastGenerator yeastGen;
 
-	public TileEntityFermentJar()
+	public TileEntityCultureJar()
 	{
 		super();
 		this.yeastGen = new YeastGenerator(this, 0, 0);
@@ -124,7 +124,7 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	@Override
 	public void receiveGUINetworkData(int id, int v)
 	{
-		switch (FermentJarDataId.fromInt(id))
+		switch (CultureJarDataId.fromInt(id))
 		{
 			case TIME:
 				yeastGen.setTime(v);
@@ -148,11 +148,11 @@ public class TileEntityFermentJar extends TileEntityCellarDevice
 	@Override
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
-		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TIME.ordinal(), yeastGen.getTime());
-		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TIME_MAX.ordinal(), yeastGen.getTimeMax());
+		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TIME.ordinal(), yeastGen.getTime());
+		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TIME_MAX.ordinal(), yeastGen.getTimeMax());
 		final FluidStack fluid = getFluidStack(0);
-		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
-		iCrafting.sendProgressBarUpdate(container, FermentJarDataId.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
+		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
+		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
 	}
 
 	@Override
