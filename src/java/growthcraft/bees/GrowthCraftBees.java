@@ -2,6 +2,7 @@ package growthcraft.bees;
 
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.user.UserBeesConfig;
+import growthcraft.api.bees.user.UserFlowersConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
@@ -84,6 +85,7 @@ public class GrowthCraftBees
 	private GrcBeesConfig config = new GrcBeesConfig();
 	private ModuleContainer modules = new ModuleContainer();
 	private UserBeesConfig userBeesConfig = new UserBeesConfig();
+	private UserFlowersConfig userFlowersConfig = new UserFlowersConfig();
 
 	public static UserBeesConfig getUserBeesConfig()
 	{
@@ -105,6 +107,10 @@ public class GrowthCraftBees
 
 		userBeesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/bees.json");
 		modules.add(userBeesConfig);
+
+		userFlowersConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/flowers.json");
+		modules.add(userFlowersConfig);
+
 		if (config.enableGrcBambooIntegration) modules.add(new growthcraft.bees.integration.GrcBambooModule());
 		if (config.enableGrcNetherIntegration) modules.add(new growthcraft.bees.integration.GrcNetherModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.bees.integration.Waila());
@@ -158,8 +164,8 @@ public class GrowthCraftBees
 		BeesRegistry.instance().addHoneyComb(honeyComb.asStack(1, 0), honeyComb.asStack(1, 1));
 
 		BeesRegistry.instance().addHoneyComb(honeyCombEmpty.asStack(), honeyCombFilled.asStack());
-		BeesRegistry.instance().addFlower(Blocks.red_flower);
-		BeesRegistry.instance().addFlower(Blocks.yellow_flower);
+		userFlowersConfig.addDefault(Blocks.red_flower);
+		userFlowersConfig.addDefault(Blocks.yellow_flower);
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);
 
