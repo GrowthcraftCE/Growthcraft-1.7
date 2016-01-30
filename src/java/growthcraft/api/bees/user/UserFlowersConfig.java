@@ -84,7 +84,7 @@ public class UserFlowersConfig extends JsonConfigDef
 		{
 			if (entries.data != null)
 			{
-				logger.info("Adding %d user bee entries.", entries.data.size());
+				logger.info("Adding %d user floweer entries.", entries.data.size());
 				for (UserFlowerEntry entry : entries.data) addFlowerEntry(entry);
 			}
 			else
