@@ -58,6 +58,9 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 		this.logger = l;
 	}
 
+	/**
+	 * @return a default json configuration string
+	 */
 	protected abstract String getDefault();
 
 	private void writeDefaultConfigTo(File file)
@@ -91,6 +94,11 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 		}
 	}
 
+	/**
+	 * Read the config file contents from the buffer
+	 *
+	 * @param buff - the buffer to read from
+	 */
 	protected abstract void loadFromBuffer(BufferedReader buff);
 
 	public void setConfigFile(File dir, String filename)
