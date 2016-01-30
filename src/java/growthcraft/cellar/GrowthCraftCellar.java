@@ -6,14 +6,14 @@ import java.lang.reflect.Modifier;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.booze.effect.EffectTipsy;
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.heatsource.UserHeatSources.UserHeatSourceEntry;
-import growthcraft.api.cellar.heatsource.UserHeatSources;
+import growthcraft.api.cellar.heatsource.user.UserHeatSourceEntry;
+import growthcraft.api.cellar.heatsource.user.UserHeatSourcesConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.cellar.common.block.BlockBrewKettle;
-import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.cellar.common.block.BlockCultureJar;
+import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.cellar.common.block.BlockFruitPress;
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.booze.ModifierFunctionExtended;
@@ -25,8 +25,8 @@ import growthcraft.cellar.common.item.ItemWaterBag;
 import growthcraft.cellar.common.item.ItemYeast;
 import growthcraft.cellar.common.potion.PotionCellar;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
-import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
+import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.common.village.ComponentVillageTavern;
@@ -110,7 +110,7 @@ public class GrowthCraftCellar
 	private GrcCellarUserApis userApis = new GrcCellarUserApis();
 	private ModuleContainer modules = new ModuleContainer();
 
-	public static UserHeatSources getUserHeatSources()
+	public static UserHeatSourcesConfig getUserHeatSources()
 	{
 		return instance.userApis.getUserHeatSources();
 	}

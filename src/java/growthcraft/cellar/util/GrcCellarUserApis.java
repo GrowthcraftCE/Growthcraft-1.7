@@ -25,7 +25,7 @@ package growthcraft.cellar.util;
 
 import growthcraft.api.cellar.brewing.UserBrewingRecipes;
 import growthcraft.api.cellar.fermenting.UserFermentingRecipes;
-import growthcraft.api.cellar.heatsource.UserHeatSources;
+import growthcraft.api.cellar.heatsource.user.UserHeatSourcesConfig;
 import growthcraft.api.cellar.pressing.UserPressingRecipes;
 import growthcraft.api.cellar.yeast.UserYeastEntries;
 import growthcraft.api.core.log.ILogger;
@@ -36,7 +36,7 @@ public class GrcCellarUserApis extends GrcModuleBase
 {
 	private UserBrewingRecipes userBrewingRecipes;
 	private UserFermentingRecipes userFermentingRecipes;
-	private UserHeatSources userHeatSources;
+	private UserHeatSourcesConfig userHeatSources;
 	private UserPressingRecipes userPressingRecipes;
 	private UserYeastEntries userYeastEntries;
 	private ModuleContainer modules;
@@ -46,7 +46,7 @@ public class GrcCellarUserApis extends GrcModuleBase
 		this.modules = new ModuleContainer();
 		this.userBrewingRecipes = new UserBrewingRecipes();
 		this.userFermentingRecipes = new UserFermentingRecipes();
-		this.userHeatSources = new UserHeatSources();
+		this.userHeatSources = new UserHeatSourcesConfig();
 		this.userPressingRecipes = new UserPressingRecipes();
 		this.userYeastEntries = new UserYeastEntries();
 		modules.add(userBrewingRecipes);
@@ -63,42 +63,12 @@ public class GrcCellarUserApis extends GrcModuleBase
 		modules.setLogger(log);
 	}
 
-	public GrcCellarUserApis setUserYeastEntries(UserYeastEntries usr)
-	{
-		this.userYeastEntries = usr;
-		return this;
-	}
-
-	public GrcCellarUserApis setUserHeatSources(UserHeatSources usr)
-	{
-		this.userHeatSources = usr;
-		return this;
-	}
-
-	public GrcCellarUserApis setUserPressingRecipes(UserPressingRecipes usr)
-	{
-		this.userPressingRecipes = usr;
-		return this;
-	}
-
-	public GrcCellarUserApis setUserBrewingRecipes(UserBrewingRecipes usr)
-	{
-		this.userBrewingRecipes = usr;
-		return this;
-	}
-
-	public GrcCellarUserApis setUserFermentingRecipes(UserFermentingRecipes usr)
-	{
-		this.userFermentingRecipes = usr;
-		return this;
-	}
-
 	public UserYeastEntries getUserYeastEntries()
 	{
 		return this.userYeastEntries;
 	}
 
-	public UserHeatSources getUserHeatSources()
+	public UserHeatSourcesConfig getUserHeatSources()
 	{
 		return this.userHeatSources;
 	}

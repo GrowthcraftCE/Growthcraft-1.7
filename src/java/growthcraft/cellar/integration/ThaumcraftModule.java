@@ -23,7 +23,7 @@
  */
 package growthcraft.cellar.integration;
 
-import growthcraft.api.cellar.heatsource.UserHeatSources.UserHeatSourceEntry;
+import growthcraft.api.cellar.heatsource.user.UserHeatSourceEntry;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.YeastType;
 import growthcraft.core.integration.ThaumcraftModuleBase;
