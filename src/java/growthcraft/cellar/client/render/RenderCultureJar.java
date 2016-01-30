@@ -4,7 +4,6 @@ import growthcraft.cellar.client.model.ModelCultureJar;
 import growthcraft.cellar.common.block.BlockCultureJar;
 import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.core.util.BBox;
-import growthcraft.core.util.BoundUtils;
 import growthcraft.core.util.ColorUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;

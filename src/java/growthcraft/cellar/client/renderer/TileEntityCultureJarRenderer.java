@@ -1,6 +1,5 @@
 package growthcraft.cellar.client.renderer;
 
-import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.cellar.client.model.ModelCultureJar;
 
