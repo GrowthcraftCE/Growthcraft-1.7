@@ -23,7 +23,11 @@
  */
 package growthcraft.core.common.tileentity;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+
 public interface IItemHandler
 {
-
+	boolean tryPlaceItem(EntityPlayer player, ItemStack stack);
+	boolean tryTakeItem(EntityPlayer player, ItemStack stack);
 }
