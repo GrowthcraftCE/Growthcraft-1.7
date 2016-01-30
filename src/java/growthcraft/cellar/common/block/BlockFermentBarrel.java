@@ -2,12 +2,10 @@ package growthcraft.cellar.common.block;
 
 import java.util.Random;
 
-import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.cellar.client.render.RenderFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
+import growthcraft.cellar.event.BarrelDrainedEvent;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.stats.CellarAchievement;
 import growthcraft.cellar.util.CellarGuiType;
 import growthcraft.core.util.BlockFlags;
 import growthcraft.core.Utils;
@@ -27,7 +25,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
@@ -47,26 +44,10 @@ public class BlockFermentBarrel extends BlockCellarContainer
 		setGuiType(CellarGuiType.FERMENT_BARREL);
 	}
 
+	@Override
 	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		return true;
-	}
-
-	/************
-	 * TRIGGERS
-	 ************/
-	private void setAchievements(EntityPlayer player, Fluid fluid)
-	{
-		if (fluid != null)
-		{
-			if (CellarRegistry.instance().booze().isFluidBooze(fluid))
-			{
-				if (CellarRegistry.instance().booze().hasTags(fluid, BoozeTag.FERMENTED))
-				{
-					CellarAchievement.FERMENT_BOOZE.unlock(player);
-				}
-			}
-		}
 	}
 
 	@Override
@@ -75,7 +56,7 @@ public class BlockFermentBarrel extends BlockCellarContainer
 		final FluidStack available = Utils.playerDrainTank(world, x, y, z, tank, held, player);
 		if (available != null && available.amount > 0)
 		{
-			setAchievements(player, available.getFluid());
+			GrowthCraftCellar.CELLAR_BUS.post(new BarrelDrainedEvent(player, world, x, y, z, available));
 			return true;
 		}
 		return false;

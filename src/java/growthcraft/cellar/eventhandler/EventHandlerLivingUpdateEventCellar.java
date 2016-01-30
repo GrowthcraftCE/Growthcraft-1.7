@@ -1,4 +1,4 @@
-package growthcraft.cellar.event;
+package growthcraft.cellar.eventhandler;
 
 import growthcraft.cellar.GrowthCraftCellar;
 
@@ -8,7 +8,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
-public class LivingUpdateEventCellar
+public class EventHandlerLivingUpdateEventCellar
 {
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event)

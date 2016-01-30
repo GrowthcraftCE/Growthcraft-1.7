@@ -1,4 +1,4 @@
-package growthcraft.cellar.event;
+package growthcraft.cellar.eventhandler;
 
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.stats.CellarAchievement;
@@ -6,7 +6,7 @@ import growthcraft.cellar.stats.CellarAchievement;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 
-public class ItemCraftedEventCellar
+public class EventHandlerItemCraftedEventCellar
 {
 	@SubscribeEvent
 	public void onItemCrafting(ItemCraftedEvent event)

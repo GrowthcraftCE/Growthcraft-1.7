@@ -32,9 +32,9 @@ import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.common.village.ComponentVillageTavern;
 import growthcraft.cellar.common.village.VillageHandlerCellar;
 import growthcraft.cellar.creativetab.CreativeTabsCellar;
-import growthcraft.cellar.event.EventHandlerCauldronUseItem;
-import growthcraft.cellar.event.ItemCraftedEventCellar;
-import growthcraft.cellar.event.LivingUpdateEventCellar;
+import growthcraft.cellar.eventhandler.EventHandlerCauldronUseItem;
+import growthcraft.cellar.eventhandler.EventHandlerItemCraftedEventCellar;
+import growthcraft.cellar.eventhandler.EventHandlerLivingUpdateEventCellar;
 import growthcraft.cellar.handler.GuiHandlerCellar;
 import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.stats.CellarAchievement;
@@ -56,6 +56,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.common.eventhandler.EventBus;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -100,6 +101,9 @@ public class GrowthCraftCellar
 	// Network
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 	public static CellarBoozeBuilderFactory boozeBuilderFactory;
+
+	// Events
+	public static final EventBus CELLAR_BUS = new EventBus();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcCellarConfig config = new GrcCellarConfig();
@@ -312,8 +316,8 @@ public class GrowthCraftCellar
 	public void postload(FMLPostInitializationEvent event)
 	{
 		packetPipeline.postInitialise();
-		MinecraftForge.EVENT_BUS.register(new ItemCraftedEventCellar());
-		MinecraftForge.EVENT_BUS.register(new LivingUpdateEventCellar());
+		MinecraftForge.EVENT_BUS.register(new EventHandlerItemCraftedEventCellar());
+		MinecraftForge.EVENT_BUS.register(new EventHandlerLivingUpdateEventCellar());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerCauldronUseItem());
 
 		modules.postInit();
