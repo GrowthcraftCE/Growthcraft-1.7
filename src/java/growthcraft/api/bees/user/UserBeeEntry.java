@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,39 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.bees.integration;
+package growthcraft.api.bees.user;
 
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.bees.GrowthCraftBees;
-import growthcraft.core.integration.ModIntegrationBase;
+import growthcraft.api.core.schema.ICommentable;
+import growthcraft.api.core.schema.ItemKeySchema;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.ItemStack;
 
-import net.minecraft.item.Item;
-
-public class ForestryModule extends ModIntegrationBase
+public class UserBeeEntry implements ICommentable
 {
-	public ForestryModule()
+	public String comment = "";
+	public ItemKeySchema item;
+
+	public UserBeeEntry(ItemStack stack)
 	{
-		super(GrowthCraftBees.MOD_ID, "Forestry");
+		this.item = new ItemKeySchema(stack);
 	}
 
-	private void maybeAddBee(Item item)
+	public UserBeeEntry() {}
+
+	@Override
+	public String getComment()
 	{
-		if (item != null)
-		{
-			GrowthCraftBees.getUserBeesConfig().addDefault(item).setComment("From Forestry");
-		}
+		return comment;
 	}
 
 	@Override
-	protected void integrate()
+	public void setComment(String com)
 	{
-		maybeAddBee(GameRegistry.findItem(modID, "beeQueenGE"));
-		maybeAddBee(GameRegistry.findItem(modID, "beeDroneGE"));
-		maybeAddBee(GameRegistry.findItem(modID, "beePrincessGE"));
+		this.comment = com;
+	}
 
-		CellarRegistry.instance().booze().addBoozeAlternative("short.mead", "grc.honeymead0");
+	@Override
+	public String toString()
+	{
+		return String.format("UserBeeEntry(block: `%s`)", item);
 	}
 }
-

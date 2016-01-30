@@ -1,6 +1,7 @@
 package growthcraft.bees;
 
 import growthcraft.api.bees.BeesRegistry;
+import growthcraft.api.bees.user.UserBeesConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
@@ -82,6 +83,12 @@ public class GrowthCraftBees
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcBeesConfig config = new GrcBeesConfig();
 	private ModuleContainer modules = new ModuleContainer();
+	private UserBeesConfig userBeesConfig = new UserBeesConfig();
+
+	public static UserBeesConfig getUserBeesConfig()
+	{
+		return instance.userBeesConfig;
+	}
 
 	public static GrcBeesConfig getConfig()
 	{
@@ -95,6 +102,9 @@ public class GrowthCraftBees
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
 
 		modules.add(booze);
+
+		userBeesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/bees.json");
+		modules.add(userBeesConfig);
 		if (config.enableGrcBambooIntegration) modules.add(new growthcraft.bees.integration.GrcBambooModule());
 		if (config.enableGrcNetherIntegration) modules.add(new growthcraft.bees.integration.GrcNetherModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.bees.integration.Waila());
@@ -143,7 +153,7 @@ public class GrowthCraftBees
 		// TileEntities
 		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
 
-		BeesRegistry.instance().addBee(bee.getItem());
+		userBeesConfig.addDefault(bee.asStack()).setComment("Growthcraft's default bee");
 		// this will be removed in the future, so please use the new honey combs
 		BeesRegistry.instance().addHoneyComb(honeyComb.asStack(1, 0), honeyComb.asStack(1, 1));
 
