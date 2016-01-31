@@ -55,7 +55,7 @@ public class UserBrewingRecipesConfig extends JsonConfigDef
 				new ItemKeySchema(stack),
 				new FluidStackSchema(inp),
 				new FluidStackSchema(out),
-				new ResidueSchema(residue),
+				residue == null ? null : new ResidueSchema(residue),
 				time
 			)
 		);

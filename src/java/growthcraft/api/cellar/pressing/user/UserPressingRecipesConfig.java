@@ -61,7 +61,7 @@ public class UserPressingRecipesConfig extends JsonConfigDef
 			new ItemKeySchema(stack),
 			new FluidStackSchema(fluid),
 			time,
-			new ResidueSchema(res)
+			res == null ? null : new ResidueSchema(res)
 		);
 	}
 
