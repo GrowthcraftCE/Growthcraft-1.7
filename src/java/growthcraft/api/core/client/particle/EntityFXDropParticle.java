@@ -1,5 +1,5 @@
 // Copied from Buildcraft core and edited for Growthcraft
-package growthcraft.core.client.particle;
+package growthcraft.api.core.client.particle;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

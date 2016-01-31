@@ -25,13 +25,11 @@ package growthcraft.core.common.block;
 
 import java.util.Random;
 
-import growthcraft.core.client.particle.EntityFXDropParticle;
+import growthcraft.api.core.util.FXHelper;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
@@ -123,11 +121,7 @@ public class GrcBlockFluid extends BlockFluidClassic
 			final double px = x + rand.nextFloat();
 			final double py = y - 1.05D;
 			final double pz = z + rand.nextFloat();
-			final float particleRed = ((color >> 16) & 0xFF) / 255.0f;
-			final float particleGreen = ((color >> 8) & 0xFF) / 255.0f;
-			final float particleBlue = (color & 0xFF) / 255.0f;
-			final EntityFX fx = new EntityFXDropParticle(world, px, py, pz, particleRed, particleGreen, particleBlue);
-			FMLClientHandler.instance().getClient().effectRenderer.addEffect(fx);
+			FXHelper.dropParticle(world, px, py, pz, color);
 		}
 	}
 
