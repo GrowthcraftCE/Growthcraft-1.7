@@ -30,6 +30,7 @@ import growthcraft.core.GrowthCraftCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.world.World;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -235,5 +236,25 @@ public class BlockCheck
 		if (canSustainPlantOn(world, x, y, z, dir, plant, soil))
 			return soil;
 		return null;
+	}
+
+	/**
+	 * Determines if a block can be placed on the given side of the coords
+	 *
+	 * @param world - World
+	 * @param x  - x coord
+	 * @param y  - y coord
+	 * @param z  - z coord
+	 * @param dir  - direction the block will be placed against
+	 */
+	public static boolean isBlockPlacableOnSide(World world, int x, int y, int z, ForgeDirection dir)
+	{
+		if (world.isAirBlock(x, y, z)) return false;
+		final Block b = world.getBlock(x, y, z);
+		if (b != null)
+		{
+			return b.isBlockSolid(world, x, y, z, dir.ordinal());
+		}
+		return false;
 	}
 }
