@@ -290,8 +290,8 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider, I
 		{
 			case 0: case 1: i = 0; break;
 			case 2: case 3: i = 1; break;
-			case 4: case 5: case 7: i = 2; break;
-			case 6: i = 3; break;
+			case 4: case 5: i = 2; break;
+			case 6: case 7: i = 3; break;
 			default: i = 2;
 		}
 
