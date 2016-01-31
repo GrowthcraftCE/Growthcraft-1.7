@@ -33,6 +33,8 @@ import net.minecraft.world.World;
 
 public class FXHelper
 {
+	private FXHelper() {}
+
 	@SideOnly(Side.CLIENT)
 	public static void dropParticle(World world, double px, double py, double pz, int color)
 	{
@@ -42,6 +44,4 @@ public class FXHelper
 		final EntityFX fx = new EntityFXDropParticle(world, px, py, pz, particleRed, particleGreen, particleBlue);
 		FMLClientHandler.instance().getClient().effectRenderer.addEffect(fx);
 	}
-
-	private FXHelper() {}
 }
