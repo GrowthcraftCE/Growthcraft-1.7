@@ -10,6 +10,7 @@ import growthcraft.core.GrowthCraftCore;
 import buildcraft.api.tools.IToolWrench;
 
 import cpw.mods.fml.common.Loader;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -175,19 +176,19 @@ public class ItemUtils
 		addStackToPlayer(itemstack, player, world, (int)player.posX, (int)player.posY, (int)player.posZ, checkCreative);
 	}
 
-	public static void spawnItemStack(World world, int x, int y, int z, ItemStack stack, Random random)
+	public static void spawnItemStack(World world, double x, double y, double z, ItemStack stack, Random random)
 	{
 		if (stack != null)
 		{
-			final float f = random.nextFloat() * 0.8F + 0.1F;
-			final float f1 = random.nextFloat() * 0.8F + 0.1F;
-			final float f2 = random.nextFloat() * 0.8F + 0.1F;
+			final double f = random.nextDouble() * 0.8D + 0.1D;
+			final double f1 = random.nextDouble() * 0.8D + 0.1D;
+			final double f2 = random.nextDouble() * 0.8D + 0.1D;
 
-			final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), stack);
+			final EntityItem entityitem = new EntityItem(world, x + f, y + f1, z + f2, stack);
 			final float f3 = 0.05F;
-			entityitem.motionX = (double)((float)random.nextGaussian() * f3);
-			entityitem.motionY = (double)((float)random.nextGaussian() * f3 + 0.2F);
-			entityitem.motionZ = (double)((float)random.nextGaussian() * f3);
+			entityitem.motionX = random.nextGaussian() * f3;
+			entityitem.motionY = random.nextGaussian() * f3 + 0.2F;
+			entityitem.motionZ = random.nextGaussian() * f3;
 			world.spawnEntityInWorld(entityitem);
 		}
 	}
@@ -210,6 +211,11 @@ public class ItemUtils
 				spawnItemStack(world, x, y, z, entityStack, random);
 			}
 		}
+	}
+
+	public static void spawnItemStackAtEntity(ItemStack stack, Entity entity, Random random)
+	{
+		spawnItemStack(entity.worldObj, entity.posX, entity.posY, entity.posZ, stack, random);
 	}
 
 	/**
