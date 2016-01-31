@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,16 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.yeast;
+package growthcraft.api.cellar.yeast.user;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.util.BiomeUtils;
 import growthcraft.api.core.util.JsonConfigDef;
@@ -42,48 +38,14 @@ import net.minecraftforge.common.BiomeDictionary;
  * This allows users to define new yeast entries and map them to a biome
  * for generation in the Ferment Jar.
  */
-public class UserYeastEntries extends JsonConfigDef
+public class UserYeastEntriesConfig extends JsonConfigDef
 {
-	public static class UserYeastEntry implements ICommentable
-	{
-		public String comment = "";
-		public ItemKeySchema item;
-		public List<String> biomes;
-
-		public UserYeastEntry(@Nonnull ItemKeySchema i, @Nonnull List<String> b)
-		{
-			this.item = i;
-			this.biomes = b;
-		}
-
-		public UserYeastEntry() {}
-
-		@Override
-		public String toString()
-		{
-			return String.format("UserYeastEntry(item: `%s`, biomes: [%s])", item, biomes);
-		}
-
-		@Override
-		public void setComment(String comm)
-		{
-			this.comment = comm;
-		}
-
-		@Override
-		public String getComment()
-		{
-			return comment;
-		}
-	}
-
-	private UserYeastEntry[] entries;
+	private final UserYeastEntries defaultEntries = new UserYeastEntries();
+	private UserYeastEntries entries;
 
 	@Override
 	protected String getDefault()
 	{
-		final List<UserYeastEntry> defaultEntries = new ArrayList<UserYeastEntry>();
-
 		final ItemKeySchema brewersYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 0);
 		brewersYeast.setComment("Brewers Yeast");
 
@@ -107,27 +69,27 @@ public class UserYeastEntries extends JsonConfigDef
 			switch (biomeType)
 			{
 				case COLD:
-					lager.biomes.add(biomeType.name());
+					lager.biome_types.add(biomeType.name());
 					break;
 				case MAGICAL:
 				case MUSHROOM:
-					ethereal.biomes.add(biomeType.name());
+					ethereal.biome_types.add(biomeType.name());
 					break;
 				default:
-					brewers.biomes.add(biomeType.name());
+					brewers.biome_types.add(biomeType.name());
 			}
 		}
-		defaultEntries.add(brewers);
-		defaultEntries.add(lager);
-		defaultEntries.add(ethereal);
-		final UserYeastEntry[] ary = defaultEntries.toArray(new UserYeastEntry[defaultEntries.size()]);
-		return gson.toJson(ary, UserYeastEntry[].class);
+		defaultEntries.data.add(brewers);
+		defaultEntries.data.add(lager);
+		defaultEntries.data.add(ethereal);
+		defaultEntries.setComment("Default Yeast Config");
+		return gson.toJson(defaultEntries);
 	}
 
 	@Override
 	protected void loadFromBuffer(BufferedReader reader)
 	{
-		this.entries = gson.fromJson(reader, UserYeastEntry[].class);
+		this.entries = gson.fromJson(reader, UserYeastEntries.class);
 	}
 
 	private void addYeastEntry(UserYeastEntry entry)
@@ -144,25 +106,31 @@ public class UserYeastEntries extends JsonConfigDef
 			return;
 		}
 
-		if (entry.biomes == null)
-		{
-			logger.error("Yeast biomes was invalid {%s}", entry);
-			return;
-		}
-
 		for (ItemStack itemstack : entry.item.getItemStacks())
 		{
-			for (String biome : entry.biomes)
+			if (entry.biome_types != null)
 			{
-				try
+				for (String biome : entry.biome_types)
 				{
-					final BiomeDictionary.Type biomeType = BiomeUtils.fetchBiomeType(biome);
-					CellarRegistry.instance().yeast().addYeastToBiomeType(itemstack, biomeType);
-					logger.info("Added user yeast {%s} to biome '%s'", itemstack, biome);
+					try
+					{
+						final BiomeDictionary.Type biomeType = BiomeUtils.fetchBiomeType(biome);
+						CellarRegistry.instance().yeast().addYeastToBiomeType(itemstack, biomeType);
+						logger.info("Added user yeast {%s} to biome type '%s'", itemstack, biome);
+					}
+					catch (BiomeUtils.BiomeTypeNotFound ex)
+					{
+						logger.error("A biome type '%s' for entry {%s} could not be found.", biome, entry);
+					}
 				}
-				catch (BiomeUtils.BiomeTypeNotFound ex)
+			}
+
+			if (entry.biome_names != null)
+			{
+				for (String biomeName : entry.biome_names)
 				{
-					logger.error("A biome type '%s' for entry {%s} could not be found.", biome, entry);
+					CellarRegistry.instance().yeast().addYeastToBiomeByName(itemstack, biomeName);
+					logger.info("Added user yeast {%s} to biome '%s'", itemstack, biomeName);
 				}
 			}
 		}
@@ -173,8 +141,15 @@ public class UserYeastEntries extends JsonConfigDef
 	{
 		if (entries != null)
 		{
-			logger.info("Adding %d yeast entries.", entries.length);
-			for (UserYeastEntry entry : entries) addYeastEntry(entry);
+			if (entries.data != null)
+			{
+				logger.info("Adding %d yeast entries.", entries.data.size());
+				for (UserYeastEntry entry : entries.data) addYeastEntry(entry);
+			}
+			else
+			{
+				logger.error("Invalid yeast entries data");
+			}
 		}
 	}
 }

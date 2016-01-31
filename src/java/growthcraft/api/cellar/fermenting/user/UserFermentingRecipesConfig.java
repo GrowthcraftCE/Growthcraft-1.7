@@ -21,66 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.fermenting;
+package growthcraft.api.cellar.fermenting.user;
 
 import java.io.BufferedReader;
-import java.util.ArrayList;
-import java.util.List;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.schema.FluidStackSchema;
-import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.util.JsonConfigDef;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class UserFermentingRecipes extends JsonConfigDef
+public class UserFermentingRecipesConfig extends JsonConfigDef
 {
-	public static class UserFermentingRecipe implements ICommentable
-	{
-		public String comment = "";
-		public ItemKeySchema item;
-		public FluidStackSchema input_fluid;
-		public FluidStackSchema output_fluid;
-		public int time;
-
-		public UserFermentingRecipe(ItemKeySchema i, FluidStackSchema inp_fluid, FluidStackSchema out_fluid, int t)
-		{
-			this.item = i;
-			this.input_fluid = inp_fluid;
-			this.output_fluid = out_fluid;
-			this.time = t;
-		}
-
-		public UserFermentingRecipe() {}
-
-		@Override
-		public String toString()
-		{
-			return String.format("UserFermentingRecipe(`%s` + `%s` / %d = `%s`)", item, input_fluid, time, output_fluid);
-		}
-
-		@Override
-		public void setComment(String comm)
-		{
-			this.comment = comm;
-		}
-
-		@Override
-		public String getComment()
-		{
-			return comment;
-		}
-	}
-
-	protected List<UserFermentingRecipe> defaults = new ArrayList<UserFermentingRecipe>();
-	protected UserFermentingRecipe[] recipes;
+	protected UserFermentingRecipes defaultRecipes = new UserFermentingRecipes();
+	protected UserFermentingRecipes recipes;
 
 	public void addDefault(UserFermentingRecipe recipe)
 	{
-		defaults.add(recipe);
+		defaultRecipes.data.add(recipe);
 	}
 
 	public void addDefault(ItemKeySchema item, FluidStackSchema inputFluid, FluidStackSchema outputFluid, int time)
@@ -101,14 +61,13 @@ public class UserFermentingRecipes extends JsonConfigDef
 	@Override
 	protected String getDefault()
 	{
-		final UserFermentingRecipe[] ary = defaults.toArray(new UserFermentingRecipe[defaults.size()]);
-		return gson.toJson(ary, UserFermentingRecipe[].class);
+		return gson.toJson(defaultRecipes);
 	}
 
 	@Override
 	protected void loadFromBuffer(BufferedReader reader)
 	{
-		this.recipes = gson.fromJson(reader, UserFermentingRecipe[].class);
+		this.recipes = gson.fromJson(reader, UserFermentingRecipes.class);
 	}
 
 	private void addFermentingRecipe(UserFermentingRecipe recipe)
@@ -154,8 +113,15 @@ public class UserFermentingRecipes extends JsonConfigDef
 	{
 		if (recipes != null)
 		{
-			logger.info("Registering %d user heat sources.", recipes.length);
-			for (UserFermentingRecipe recipe : recipes) addFermentingRecipe(recipe);
+			if (recipes.data != null)
+			{
+				logger.info("Registering %d user heat sources.", recipes.data.size());
+				for (UserFermentingRecipe recipe : recipes.data) addFermentingRecipe(recipe);
+			}
+			else
+			{
+				logger.error("Fermenting Recipes data is invalid!");
+			}
 		}
 	}
 }

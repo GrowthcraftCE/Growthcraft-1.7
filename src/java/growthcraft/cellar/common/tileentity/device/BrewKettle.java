@@ -144,11 +144,14 @@ public class BrewKettle extends DeviceBase
 	private void produceGrain(BrewingRecipe recipe)
 	{
 		final Residue res = recipe.getResidue();
-		this.grain = this.grain + res.pomaceRate;
-		while (this.grain >= 1.0F)
+		if (res != null)
 		{
-			this.grain -= 1.0F;
-			residueSlot.increaseStack(res.residueItem);
+			this.grain = this.grain + res.pomaceRate;
+			while (this.grain >= 1.0F)
+			{
+				this.grain -= 1.0F;
+				residueSlot.increaseStack(res.residueItem);
+			}
 		}
 	}
 

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,16 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.pressing;
+package growthcraft.api.cellar.pressing.user;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.io.BufferedReader;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.schema.FluidStackSchema;
-import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.ResidueSchema;
 import growthcraft.api.core.util.JsonConfigDef;
@@ -43,51 +40,14 @@ import net.minecraftforge.fluids.FluidStack;
  * and fluids. Growthcraft WILL NOT create new fluids or items for you, THEY
  * MUST EXIST, or we will not register your recipe.
  */
-public class UserPressingRecipes extends JsonConfigDef
+public class UserPressingRecipesConfig extends JsonConfigDef
 {
-	public static class UserPressingRecipe implements ICommentable
-	{
-		public String comment = "";
-		public ItemKeySchema item;
-		public FluidStackSchema fluid;
-		public ResidueSchema residue;
-		public int time;
-
-		public UserPressingRecipe(ItemKeySchema itm, FluidStackSchema fl, int tm, ResidueSchema res)
-		{
-			this.item = itm;
-			this.fluid = fl;
-			this.time = tm;
-			this.residue = res;
-		}
-
-		public UserPressingRecipe() {}
-
-		@Override
-		public String toString()
-		{
-			return String.format("UserPressingRecipe(`%s` / %d = `%s` & `%s`)", item, time, fluid, residue);
-		}
-
-		@Override
-		public void setComment(String comm)
-		{
-			this.comment = comm;
-		}
-
-		@Override
-		public String getComment()
-		{
-			return comment;
-		}
-	}
-
-	private final List<UserPressingRecipe> defaultEntries = new ArrayList<UserPressingRecipe>();
-	private UserPressingRecipe[] recipes;
+	private final UserPressingRecipes defaultRecipes = new UserPressingRecipes();
+	private UserPressingRecipes recipes;
 
 	public void addDefault(UserPressingRecipe recipe)
 	{
-		defaultEntries.add(recipe);
+		defaultRecipes.data.add(recipe);
 	}
 
 	public void addDefault(ItemKeySchema itm, FluidStackSchema fl, int tm, ResidueSchema res)
@@ -108,14 +68,13 @@ public class UserPressingRecipes extends JsonConfigDef
 	@Override
 	protected String getDefault()
 	{
-		final UserPressingRecipe[] ary = defaultEntries.toArray(new UserPressingRecipe[defaultEntries.size()]);
-		return gson.toJson(ary, UserPressingRecipe[].class);
+		return gson.toJson(defaultRecipes);
 	}
 
 	@Override
 	protected void loadFromBuffer(BufferedReader reader)
 	{
-		this.recipes = gson.fromJson(reader, UserPressingRecipe[].class);
+		this.recipes = gson.fromJson(reader, UserPressingRecipes.class);
 	}
 
 	protected void addPressingRecipe(UserPressingRecipe recipe)
@@ -146,20 +105,14 @@ public class UserPressingRecipes extends JsonConfigDef
 		}
 
 		Residue residue = null;
-		if (recipe.residue == null)
-		{
-			logger.warn("No residue specified for {%s}", recipe);
-			residue = Residue.newDefault(1.0f);
-		}
-		else
+		if (recipe.residue != null)
 		{
 			residue = recipe.residue.asResidue();
-		}
-
-		if (residue == null)
-		{
-			logger.error("Not a valid residue found for {%s}", recipe);
-			return;
+			if (residue == null)
+			{
+				logger.error("Not a valid residue found for {%s}", recipe);
+				return;
+			}
 		}
 
 		logger.info("Adding pressing recipe {%s}", recipe);
@@ -174,8 +127,15 @@ public class UserPressingRecipes extends JsonConfigDef
 	{
 		if (recipes != null)
 		{
-			logger.info("Adding %d user pressing recipes.", recipes.length);
-			for (UserPressingRecipe recipe : recipes) addPressingRecipe(recipe);
+			if (recipes.data != null)
+			{
+				logger.info("Adding %d user pressing recipes.", recipes.data.size());
+				for (UserPressingRecipe recipe : recipes.data) addPressingRecipe(recipe);
+			}
+			else
+			{
+				logger.error("Recipe data is invalid!");
+			}
 		}
 	}
 }

@@ -21,16 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.brewing;
+package growthcraft.api.cellar.brewing.user;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.io.BufferedReader;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.schema.FluidStackSchema;
-import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.ResidueSchema;
 import growthcraft.api.core.util.JsonConfigDef;
@@ -41,53 +38,14 @@ import net.minecraftforge.fluids.FluidStack;
 /**
  * This allows users to define new brewing recipes.
  */
-public class UserBrewingRecipes extends JsonConfigDef
+public class UserBrewingRecipesConfig extends JsonConfigDef
 {
-	public static class UserBrewingRecipe implements ICommentable
-	{
-		public String comment = "";
-		public ItemKeySchema item;
-		public FluidStackSchema input_fluid;
-		public FluidStackSchema output_fluid;
-		public ResidueSchema residue;
-		public int time;
-
-		public UserBrewingRecipe(ItemKeySchema itm, FluidStackSchema inp, FluidStackSchema out, ResidueSchema res, int tm)
-		{
-			this.item = itm;
-			this.input_fluid = inp;
-			this.output_fluid = out;
-			this.residue = res;
-			this.time = tm;
-		}
-
-		public UserBrewingRecipe() {}
-
-		@Override
-		public String toString()
-		{
-			return String.format("UserBrewingRecipe(`%s` + `%s` / %d = `%s` & `%s`)", item, input_fluid, time, output_fluid, residue);
-		}
-
-		@Override
-		public void setComment(String comm)
-		{
-			this.comment = comm;
-		}
-
-		@Override
-		public String getComment()
-		{
-			return comment;
-		}
-	}
-
-	private final List<UserBrewingRecipe> defaultEntries = new ArrayList<UserBrewingRecipe>();
-	private UserBrewingRecipe[] recipes;
+	private final UserBrewingRecipes defaultRecipes = new UserBrewingRecipes();
+	private UserBrewingRecipes recipes;
 
 	public void addDefault(UserBrewingRecipe recipe)
 	{
-		defaultEntries.add(recipe);
+		defaultRecipes.data.add(recipe);
 	}
 
 	public void addDefault(ItemStack stack, FluidStack inp, FluidStack out, Residue residue, int time)
@@ -106,14 +64,13 @@ public class UserBrewingRecipes extends JsonConfigDef
 	@Override
 	protected String getDefault()
 	{
-		final UserBrewingRecipe[] ary = defaultEntries.toArray(new UserBrewingRecipe[defaultEntries.size()]);
-		return gson.toJson(ary, UserBrewingRecipe[].class);
+		return gson.toJson(defaultRecipes);
 	}
 
 	@Override
 	protected void loadFromBuffer(BufferedReader reader)
 	{
-		this.recipes = gson.fromJson(reader, UserBrewingRecipe[].class);
+		this.recipes = gson.fromJson(reader, UserBrewingRecipes.class);
 	}
 
 	private void addBrewingRecipe(UserBrewingRecipe recipe)
@@ -143,21 +100,16 @@ public class UserBrewingRecipes extends JsonConfigDef
 		}
 
 		Residue residue = null;
-		if (recipe.residue == null)
-		{
-			logger.warn("No residue specified for {%s}", recipe);
-			residue = Residue.newDefault(1.0f);
-		}
-		else
+		if (recipe.residue != null)
 		{
 			residue = recipe.residue.asResidue();
+			if (residue == null)
+			{
+				logger.error("Not a valid residue found for {%s}", recipe);
+				return;
+			}
 		}
 
-		if (residue == null)
-		{
-			logger.error("Not a valid residue found for {%s}", recipe);
-			return;
-		}
 
 		final FluidStack inputFluidStack = recipe.input_fluid.asFluidStack();
 		final FluidStack outputFluidStack = recipe.output_fluid.asFluidStack();
@@ -174,8 +126,15 @@ public class UserBrewingRecipes extends JsonConfigDef
 	{
 		if (recipes != null)
 		{
-			logger.info("Adding %d user brewing recipes.", recipes.length);
-			for (UserBrewingRecipe recipe : recipes) addBrewingRecipe(recipe);
+			if (recipes.data != null)
+			{
+				logger.info("Adding %d user brewing recipes.", recipes.data.size());
+				for (UserBrewingRecipe recipe : recipes.data) addBrewingRecipe(recipe);
+			}
+			else
+			{
+				logger.error("Recipes data is invalid!");
+			}
 		}
 	}
 }

@@ -24,6 +24,7 @@
 package growthcraft.cellar.common.tileentity.device;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import growthcraft.api.cellar.booze.BoozeTag;
@@ -130,21 +131,33 @@ public class YeastGenerator extends DeviceProgressive
 	{
 		tempItemList.clear();
 		final BiomeGenBase biome = getCurrentBiome();
-		final IYeastRegistry reg = CellarRegistry.instance().yeast();
-		for (Type t : BiomeDictionary.getTypesForBiome(biome))
+		if (biome != null)
 		{
-			final List<ItemStack> yeastList = reg.getYeastListForBiomeType(t);
-			if (yeastList != null)
-			{
-				tempItemList.addAll(yeastList);
-			}
-		}
+			final IYeastRegistry reg = CellarRegistry.instance().yeast();
 
-		if (tempItemList.size() > 0)
-		{
-			final ItemStack result = tempItemList.get(random.nextInt(tempItemList.size())).copy();
-			invSlot.set(result);
-			consumeFluid();
+			{
+				final Collection<ItemStack> yl = reg.getYeastListForBiomeName(biome.biomeName);
+				if (yl != null)
+				{
+					tempItemList.addAll(yl);
+				}
+			}
+
+			for (Type t : BiomeDictionary.getTypesForBiome(biome))
+			{
+				final Collection<ItemStack> yeastList = reg.getYeastListForBiomeType(t);
+				if (yeastList != null)
+				{
+					tempItemList.addAll(yeastList);
+				}
+			}
+
+			if (tempItemList.size() > 0)
+			{
+				final ItemStack result = tempItemList.get(random.nextInt(tempItemList.size())).copy();
+				invSlot.set(result);
+				consumeFluid();
+			}
 		}
 	}
 

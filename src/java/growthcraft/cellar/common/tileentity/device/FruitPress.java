@@ -93,12 +93,15 @@ public class FruitPress extends DeviceProgressive
 	{
 		if (currentResult == null) return;
 		final Residue residue = currentResult.getResidue();
-		this.pomace = this.pomace + residue.pomaceRate;
-		if (this.pomace >= 1.0F)
+		if (residue != null)
 		{
-			this.pomace = this.pomace - 1.0F;
-			final ItemStack residueResult = ItemUtils.mergeStacks(residueSlot.get(), residue.residueItem);
-			if (residueResult != null) residueSlot.set(residueResult);
+			this.pomace = this.pomace + residue.pomaceRate;
+			if (this.pomace >= 1.0F)
+			{
+				this.pomace = this.pomace - 1.0F;
+				final ItemStack residueResult = ItemUtils.mergeStacks(residueSlot.get(), residue.residueItem);
+				if (residueResult != null) residueSlot.set(residueResult);
+			}
 		}
 	}
 

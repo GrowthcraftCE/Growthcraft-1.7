@@ -21,28 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.util;
+package growthcraft.api.cellar.yeast.user;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-import growthcraft.api.cellar.booze.BoozeEffect;
-import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.schema.ICommentable;
+import growthcraft.api.core.schema.ItemKeySchema;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
-/**
- * Now you can make the same awesome we use internally
- */
-public interface ICellarBoozeBuilder
+public class UserYeastEntry implements ICommentable
 {
-	public ICellarBoozeBuilder tags(BoozeTag... tags);
-	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time, @Nullable Residue residue);
-	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time, @Nullable Residue residue);
-	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time);
-	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time);
-	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nullable Residue residue);
-	public BoozeEffect getEffect();
+	public String comment = "";
+	public ItemKeySchema item;
+	public List<String> biome_types;
+	public List<String> biome_names;
+
+	public UserYeastEntry(@Nonnull ItemKeySchema i, @Nonnull List<String> biomeTypes, @Nonnull List<String> biomeNames)
+	{
+		this.item = i;
+		this.biome_types = biomeTypes;
+		this.biome_names = biomeNames;
+	}
+
+	public UserYeastEntry(@Nonnull ItemKeySchema i, @Nonnull List<String> biomeTypes)
+	{
+		this(i, biomeTypes, new ArrayList<String>());
+	}
+
+	public UserYeastEntry() {}
+
+	@Override
+	public String toString()
+	{
+		return String.format("UserYeastEntry(item: `%s`, biome_types: [%s], biome_names: [%s])", item, biome_types, biome_names);
+	}
+
+	@Override
+	public void setComment(String comm)
+	{
+		this.comment = comm;
+	}
+
+	@Override
+	public String getComment()
+	{
+		return comment;
+	}
 }

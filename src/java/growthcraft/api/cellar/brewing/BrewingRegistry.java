@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.HashMap;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
@@ -66,7 +67,7 @@ public class BrewingRegistry implements IBrewingRegistry
 	}
 
 	@Override
-	public void addBrewing(@Nonnull FluidStack sourceFluid, @Nonnull ItemStack raw, @Nonnull FluidStack resultFluid, int time, @Nonnull Residue residue)
+	public void addBrewing(@Nonnull FluidStack sourceFluid, @Nonnull ItemStack raw, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue)
 	{
 		this.brewingList.put(new BrewingKey(sourceFluid.getFluid(), raw), new BrewingRecipe(sourceFluid, raw, resultFluid, time, residue));
 		this.brewingIngredients.add(new ItemKey(raw));

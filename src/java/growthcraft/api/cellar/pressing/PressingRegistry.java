@@ -3,6 +3,7 @@ package growthcraft.api.cellar.pressing;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.log.ILogger;
@@ -24,7 +25,7 @@ public class PressingRegistry implements IPressingRegistry
 	}
 
 	@Override
-	public void addPressingRecipe(@Nonnull ItemStack stack, @Nonnull FluidStack resultFluid, int time, @Nonnull Residue residue)
+	public void addPressingRecipe(@Nonnull ItemStack stack, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue)
 	{
 		final ItemKey key = new ItemKey(stack);
 		final PressingRecipe result = new PressingRecipe(stack, resultFluid, time, residue);

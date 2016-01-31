@@ -21,28 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.util;
+package growthcraft.api.cellar.brewing.user;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import growthcraft.api.core.schema.FluidStackSchema;
+import growthcraft.api.core.schema.ICommentable;
+import growthcraft.api.core.schema.ItemKeySchema;
+import growthcraft.api.core.schema.ResidueSchema;
 
-import growthcraft.api.cellar.booze.BoozeEffect;
-import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.common.Residue;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
-/**
- * Now you can make the same awesome we use internally
- */
-public interface ICellarBoozeBuilder
+public class UserBrewingRecipe implements ICommentable
 {
-	public ICellarBoozeBuilder tags(BoozeTag... tags);
-	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time, @Nullable Residue residue);
-	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time, @Nullable Residue residue);
-	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time);
-	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time);
-	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nullable Residue residue);
-	public BoozeEffect getEffect();
+	public String comment = "";
+	public ItemKeySchema item;
+	public FluidStackSchema input_fluid;
+	public FluidStackSchema output_fluid;
+	public ResidueSchema residue;
+	public int time;
+
+	public UserBrewingRecipe(ItemKeySchema itm, FluidStackSchema inp, FluidStackSchema out, ResidueSchema res, int tm)
+	{
+		this.item = itm;
+		this.input_fluid = inp;
+		this.output_fluid = out;
+		this.residue = res;
+		this.time = tm;
+	}
+
+	public UserBrewingRecipe() {}
+
+	@Override
+	public String toString()
+	{
+		return String.format("UserBrewingRecipe(`%s` + `%s` / %d = `%s` & `%s`)", item, input_fluid, time, output_fluid, residue);
+	}
+
+	@Override
+	public void setComment(String comm)
+	{
+		this.comment = comm;
+	}
+
+	@Override
+	public String getComment()
+	{
+		return comment;
+	}
 }

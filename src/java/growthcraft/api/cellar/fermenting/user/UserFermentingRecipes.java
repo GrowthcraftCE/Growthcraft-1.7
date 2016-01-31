@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,29 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.pressing;
+package growthcraft.api.cellar.fermenting.user;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
-import growthcraft.api.cellar.common.ProcessingRecipe;
-import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.schema.ICommentable;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
-public class PressingRecipe extends ProcessingRecipe
+public class UserFermentingRecipes implements ICommentable
 {
-	private ItemStack input;
+	public String comment = "";
+	public List<UserFermentingRecipe> data = new ArrayList<UserFermentingRecipe>();
 
-	public PressingRecipe(@Nonnull ItemStack src, @Nonnull FluidStack f, int t, @Nullable Residue r)
+	@Override
+	public String getComment()
 	{
-		super(f, t, r);
-		this.input = src;
+		return comment;
 	}
 
-	public ItemStack getInput()
+	@Override
+	public void setComment(String com)
 	{
-		return input;
+		this.comment = com;
 	}
 }

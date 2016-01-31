@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,29 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.pressing;
+package growthcraft.api.cellar.pressing.user;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import growthcraft.api.core.schema.FluidStackSchema;
+import growthcraft.api.core.schema.ICommentable;
+import growthcraft.api.core.schema.ItemKeySchema;
+import growthcraft.api.core.schema.ResidueSchema;
 
-import growthcraft.api.cellar.common.ProcessingRecipe;
-import growthcraft.api.cellar.common.Residue;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
-public class PressingRecipe extends ProcessingRecipe
+public class UserPressingRecipe implements ICommentable
 {
-	private ItemStack input;
+	public String comment = "";
+	public ItemKeySchema item;
+	public FluidStackSchema fluid;
+	public ResidueSchema residue;
+	public int time;
 
-	public PressingRecipe(@Nonnull ItemStack src, @Nonnull FluidStack f, int t, @Nullable Residue r)
+	public UserPressingRecipe(ItemKeySchema itm, FluidStackSchema fl, int tm, ResidueSchema res)
 	{
-		super(f, t, r);
-		this.input = src;
+		this.item = itm;
+		this.fluid = fl;
+		this.time = tm;
+		this.residue = res;
 	}
 
-	public ItemStack getInput()
+	public UserPressingRecipe() {}
+
+	@Override
+	public String toString()
 	{
-		return input;
+		return String.format("UserPressingRecipe(`%s` / %d = `%s` & `%s`)", item, time, fluid, residue);
+	}
+
+	@Override
+	public void setComment(String comm)
+	{
+		this.comment = comm;
+	}
+
+	@Override
+	public String getComment()
+	{
+		return comment;
 	}
 }

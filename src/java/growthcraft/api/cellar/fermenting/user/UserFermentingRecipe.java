@@ -21,28 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.util;
+package growthcraft.api.cellar.fermenting.user;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import growthcraft.api.core.schema.FluidStackSchema;
+import growthcraft.api.core.schema.ICommentable;
+import growthcraft.api.core.schema.ItemKeySchema;
 
-import growthcraft.api.cellar.booze.BoozeEffect;
-import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.common.Residue;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
-/**
- * Now you can make the same awesome we use internally
- */
-public interface ICellarBoozeBuilder
+public class UserFermentingRecipe implements ICommentable
 {
-	public ICellarBoozeBuilder tags(BoozeTag... tags);
-	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time, @Nullable Residue residue);
-	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time, @Nullable Residue residue);
-	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time);
-	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time);
-	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nullable Residue residue);
-	public BoozeEffect getEffect();
+	public String comment = "";
+	public ItemKeySchema item;
+	public FluidStackSchema input_fluid;
+	public FluidStackSchema output_fluid;
+	public int time;
+
+	public UserFermentingRecipe(ItemKeySchema i, FluidStackSchema inp_fluid, FluidStackSchema out_fluid, int t)
+	{
+		this.item = i;
+		this.input_fluid = inp_fluid;
+		this.output_fluid = out_fluid;
+		this.time = t;
+	}
+
+	public UserFermentingRecipe() {}
+
+	@Override
+	public String toString()
+	{
+		return String.format("UserFermentingRecipe(`%s` + `%s` / %d = `%s`)", item, input_fluid, time, output_fluid);
+	}
+
+	@Override
+	public void setComment(String comm)
+	{
+		this.comment = comm;
+	}
+
+	@Override
+	public String getComment()
+	{
+		return comment;
+	}
 }

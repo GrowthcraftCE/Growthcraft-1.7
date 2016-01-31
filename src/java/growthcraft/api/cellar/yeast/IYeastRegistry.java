@@ -23,7 +23,9 @@
  */
 package growthcraft.api.cellar.yeast;
 
-import java.util.List;
+import java.util.Set;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import growthcraft.api.core.log.ILoggable;
 
@@ -38,12 +40,16 @@ public interface IYeastRegistry extends ILoggable
 	 *
 	 * @param yeast - an item
 	 */
-	void addYeast(ItemStack yeast);
-
-	boolean isYeast(ItemStack yeast);
+	void addYeast(@Nonnull ItemStack yeast);
 
 	/**
-	 * Maps the given yeast item to the given biome type, when a Yeast Jar
+	 * @param yeast - an item
+	 * @return true, if the item is a known yeast item, false otherwise.
+	 */
+	boolean isYeast(@Nullable ItemStack yeast);
+
+	/**
+	 * Maps the given biome type to the yeast item, when a Culture Jar
 	 * is placed into a biome of that type, it MAY produce the yeast item.
 	 * NOTE. This method SHOULD use addYeast to add the given yeast item to the
 	 *       known list.
@@ -51,9 +57,28 @@ public interface IYeastRegistry extends ILoggable
 	 * @param yeast - an item
 	 * @param type - the biome type to add
 	 */
-	void addYeastToBiomeType(ItemStack yeast, BiomeDictionary.Type type);
+	void addYeastToBiomeType(@Nonnull ItemStack yeast, @Nonnull BiomeDictionary.Type type);
 
-	List<ItemStack> getYeastListForBiomeType(BiomeDictionary.Type type);
-	List<BiomeDictionary.Type> getBiomeTypesForYeast(ItemStack yeast);
-	boolean canYeastFormInBiome(ItemStack yeast, BiomeGenBase biome);
+	/**
+	 * Maps the given biome name to the yeast item.
+	 * When a Culture Jar is placed in the Biome with the SAME name, it
+	 * MAY produce the yeast item.
+	 *
+	 * @param yeast - an item
+	 * @param name - biome name
+	 */
+	void addYeastToBiomeByName(@Nonnull ItemStack yeast, @Nonnull String name);
+
+	/**
+	 * Returns a Set of Items that may appear in this biome type
+	 *
+	 * @param type - the biome type
+	 * @return yeast for the biome type,
+	 */
+	Set<ItemStack> getYeastListForBiomeType(@Nonnull BiomeDictionary.Type type);
+	Set<ItemStack> getYeastListForBiomeName(@Nonnull String name);
+
+	Set<String> getBiomeNamesForYeast(@Nullable ItemStack yeast);
+	Set<BiomeDictionary.Type> getBiomeTypesForYeast(@Nullable ItemStack yeast);
+	boolean canYeastFormInBiome(@Nullable ItemStack yeast, @Nullable BiomeGenBase biome);
 }
