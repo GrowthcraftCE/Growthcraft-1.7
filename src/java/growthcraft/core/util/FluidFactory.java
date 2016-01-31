@@ -47,6 +47,7 @@ public class FluidFactory
 		public GrcBlockFluidDefinition block;
 		public ItemTypeDefinition<ItemBottleFluid> bottle;
 		public ItemTypeDefinition<ItemBucketFluid> bucket;
+		private int itemColor = 0xFFFFFF;
 
 		public Fluid getFluid()
 		{
@@ -83,9 +84,15 @@ public class FluidFactory
 
 		public FluidDetails setItemColor(int color)
 		{
+			this.itemColor = color;
 			bottle.getItem().setColor(color);
 			bucket.getItem().setColor(color);
 			return this;
+		}
+
+		public int getItemColor()
+		{
+			return itemColor;
 		}
 	}
 
