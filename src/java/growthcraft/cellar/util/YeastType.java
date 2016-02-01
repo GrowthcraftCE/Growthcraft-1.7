@@ -1,10 +1,11 @@
 package growthcraft.cellar.util;
 
+import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.cellar.GrowthCraftCellar;
 
 import net.minecraft.item.ItemStack;
 
-public enum YeastType
+public enum YeastType implements IItemStackFactory
 {
 	BREWERS,
 	LAGER,
