@@ -23,6 +23,7 @@
  */
 package growthcraft.core.common.tileentity.device;
 
+import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.inventory.IInventory;
@@ -30,8 +31,8 @@ import net.minecraft.item.ItemStack;
 
 public class DeviceInventorySlot
 {
+	public final int index;
 	private IInventory inventory;
-	private int index;
 
 	public DeviceInventorySlot(IInventory inv, int idx)
 	{
@@ -145,19 +146,35 @@ public class DeviceInventorySlot
 		return false;
 	}
 
-	public void consume(int count)
+	public ItemStack consume(int count)
 	{
-		inventory.decrStackSize(index, count);
+		return inventory.decrStackSize(index, count);
 	}
 
-	public void consume(ItemStack stack)
+	public ItemStack consume(ItemStack stack)
 	{
-		if (hasEnough(stack)) consume(stack.stackSize);
+		if (hasEnough(stack)) return consume(stack.stackSize);
+		return null;
 	}
 
-	public void increaseStack(ItemStack stack)
+	public ItemStack increaseStack(ItemStack stack)
 	{
 		final ItemStack result = ItemUtils.mergeStacks(get(), stack);
-		if (result != null) set(result);
+		if (result != null)
+		{
+			set(result);
+			return result;
+		}
+		return null;
+	}
+
+	/**
+	 * Removes and returns the item in the slot
+	 *
+	 * @return stack if any
+	 */
+	public ItemStack yank()
+	{
+		return InventoryProcessor.instance().yankSlot(inventory, index);
 	}
 }

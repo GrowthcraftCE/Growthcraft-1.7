@@ -10,6 +10,7 @@ import growthcraft.core.GrowthCraftCore;
 import buildcraft.api.tools.IToolWrench;
 
 import cpw.mods.fml.common.Loader;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -176,6 +178,11 @@ public class ItemUtils
 		addStackToPlayer(itemstack, player, world, (int)player.posX, (int)player.posY, (int)player.posZ, checkCreative);
 	}
 
+	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, boolean checkCreative)
+	{
+		addStackToPlayer(itemstack, player, player.worldObj, checkCreative);
+	}
+
 	public static void spawnItemStack(World world, double x, double y, double z, ItemStack stack, Random random)
 	{
 		if (stack != null)
@@ -216,6 +223,47 @@ public class ItemUtils
 	public static void spawnItemStackAtEntity(ItemStack stack, Entity entity, Random random)
 	{
 		spawnItemStack(entity.worldObj, entity.posX, entity.posY, entity.posZ, stack, random);
+	}
+
+	/**
+	 * NOTICE: This method was copied from ForestryMC ItemStackUtil
+	 *
+	 * @param stack - item stack to retrieve block from
+	 * @return block
+	 */
+	public static Block getBlock(ItemStack stack)
+	{
+		if (stack == null) return null;
+		final Item item = stack.getItem();
+		if (item instanceof ItemBlock) return ((ItemBlock)item).field_150939_a;
+		return null;
+	}
+
+	/**
+	 * NOTICE: This method was copied from ForestryMC ItemStackUtil, and modified.
+	 *
+	 * @param block - block to check
+	 * @param stack - item stack to check
+	 * @return true the block matches the provided item stack
+	 */
+	public static boolean equals(Block block, ItemStack stack)
+	{
+		if (stack == null) return false;
+		return block == getBlock(stack);
+	}
+
+	/**
+	 * NOTICE: This method was copied from ForestryMC ItemStackUtil
+	 *
+	 * @param block - block to check
+	 * @param meta - block's metadata
+	 * @param stack - item stack to check
+	 * @return true the block matches the provided item stack
+	 */
+	public static boolean equals(Block block, int meta, ItemStack stack)
+	{
+		if (stack == null) return false;
+		return block == getBlock(stack) && meta == stack.getItemDamage();
 	}
 
 	/**

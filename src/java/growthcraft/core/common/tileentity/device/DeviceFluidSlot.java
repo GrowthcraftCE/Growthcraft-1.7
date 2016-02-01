@@ -163,21 +163,22 @@ public class DeviceFluidSlot
 		return false;
 	}
 
-	public void consume(int amount, boolean doDrain)
+	public FluidStack consume(int amount, boolean doDrain)
 	{
-		tanks.drainFluidTank(index, amount, doDrain);
+		return tanks.drainFluidTank(index, amount, doDrain);
 	}
 
-	public void consume(FluidStack stack, boolean doDrain)
+	public FluidStack consume(FluidStack stack, boolean doDrain)
 	{
 		if (hasMatching(stack))
 		{
-			consume(stack.amount, doDrain);
+			return consume(stack.amount, doDrain);
 		}
+		return null;
 	}
 
-	public void fill(FluidStack fluid, boolean doFill)
+	public int fill(FluidStack fluid, boolean doFill)
 	{
-		tanks.fillFluidTank(index, fluid, doFill);
+		return tanks.fillFluidTank(index, fluid, doFill);
 	}
 }
