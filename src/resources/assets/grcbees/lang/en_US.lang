@@ -28,6 +28,9 @@ item.grc.honeyComb.empty.name=Empty Honeycomb
 item.grc.honeyComb.full.name=Honeycomb
 item.grc.honeyJar.name=Honey
 item.grc.bee.name=Bee
+item.grc.BeesWax.normal.name=Bees Wax
+item.grc.BeesWax.red.name=Red Bees Wax
+item.grc.BeesWax.black.name=Black Bees Wax
 
 # Tooltips
 grc.bees.item.honeyComb.deprecated=This item has been deprecated, craft to get the updated item.

@@ -187,10 +187,10 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 	};
 
 	private static final WeightedRandomChestContent[] apiaristChestContents = new WeightedRandomChestContent[] {
-		new WeightedRandomChestContent(GrowthCraftBees.bee.asStack(), 1, 2, 3),
-		new WeightedRandomChestContent(GrowthCraftBees.honeyCombEmpty.asStack(), 1, 3, 5),
-		new WeightedRandomChestContent(GrowthCraftBees.honeyCombFilled.asStack(), 1, 3, 5),
-		new WeightedRandomChestContent(GrowthCraftBees.honeyJar.asStack(), 1, 1, 10),
+		new WeightedRandomChestContent(GrowthCraftBees.items.bee.asStack(), 1, 2, 3),
+		new WeightedRandomChestContent(GrowthCraftBees.items.honeyCombEmpty.asStack(), 1, 3, 5),
+		new WeightedRandomChestContent(GrowthCraftBees.items.honeyCombFilled.asStack(), 1, 3, 5),
+		new WeightedRandomChestContent(GrowthCraftBees.items.honeyJar.asStack(), 1, 1, 10),
 		new WeightedRandomChestContent(GrowthCraftBees.beeBox.asStack(), 1, 2, 5)
 	};
 

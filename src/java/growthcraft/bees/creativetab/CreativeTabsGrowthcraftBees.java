@@ -18,6 +18,6 @@ public class CreativeTabsGrowthcraftBees extends CreativeTabs
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem()
 	{
-		return GrowthCraftBees.bee.getItem();
+		return GrowthCraftBees.items.bee.getItem();
 	}
 }

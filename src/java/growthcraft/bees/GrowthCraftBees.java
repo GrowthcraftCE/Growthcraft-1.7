@@ -3,7 +3,6 @@ package growthcraft.bees;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.user.UserBeesConfig;
 import growthcraft.api.bees.user.UserFlowersConfig;
-//import growthcraft.api.bees.user.UserHoneyConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
@@ -11,12 +10,7 @@ import growthcraft.bees.client.gui.GuiHandlerBees;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeHive;
 import growthcraft.bees.common.CommonProxy;
-import growthcraft.bees.common.item.ItemBee;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
-import growthcraft.bees.common.item.ItemHoneyComb;
-import growthcraft.bees.common.item.ItemHoneyCombEmpty;
-import growthcraft.bees.common.item.ItemHoneyCombFilled;
-import growthcraft.bees.common.item.ItemHoneyJar;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.common.village.ComponentVillageApiarist;
 import growthcraft.bees.common.village.VillageHandlerBees;
@@ -24,12 +18,11 @@ import growthcraft.bees.common.village.VillageHandlerBeesApiarist;
 import growthcraft.bees.common.world.WorldGeneratorBees;
 import growthcraft.bees.creativetab.CreativeTabsGrowthcraftBees;
 import growthcraft.bees.init.GrcBeesBooze;
+import growthcraft.bees.init.GrcBeesItems;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
-import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -50,7 +43,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(
@@ -75,11 +67,7 @@ public class GrowthCraftBees
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxNether;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxThaumcraft;
 	public static BlockDefinition beeHive;
-	public static ItemDefinition honeyComb;
-	public static ItemDefinition honeyCombEmpty;
-	public static ItemDefinition honeyCombFilled;
-	public static ItemDefinition honeyJar;
-	public static ItemDefinition bee;
+	public static GrcBeesItems items = new GrcBeesItems();
 	public static GrcBeesBooze booze = new GrcBeesBooze();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
@@ -105,6 +93,7 @@ public class GrowthCraftBees
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
 
+		modules.add(items);
 		modules.add(booze);
 
 		userBeesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/bees.json");
@@ -133,14 +122,7 @@ public class GrowthCraftBees
 	{
 		beeBox  = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBox());
 		beeBox.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
-
 		beeHive = new BlockDefinition(new BlockBeeHive());
-
-		honeyComb = new ItemDefinition(new ItemHoneyComb());
-		honeyCombEmpty = new ItemDefinition(new ItemHoneyCombEmpty());
-		honeyCombFilled = new ItemDefinition(new ItemHoneyCombFilled());
-		honeyJar  = new ItemDefinition(new ItemHoneyJar());
-		bee       = new ItemDefinition(new ItemBee());
 
 		modules.preInit();
 		register();
@@ -148,57 +130,21 @@ public class GrowthCraftBees
 
 	private void register()
 	{
+		MinecraftForge.EVENT_BUS.register(this);
 		// Bee Boxes
 		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
-
 		// Bee Hive(s)
 		GameRegistry.registerBlock(beeHive.getBlock(), "grc.beeHive");
-
-		// Items
-		GameRegistry.registerItem(honeyComb.getItem(), "grc.honeyComb");
-		GameRegistry.registerItem(honeyCombEmpty.getItem(), "grc.honeyCombEmpty");
-		GameRegistry.registerItem(honeyCombFilled.getItem(), "grc.honeyCombFilled");
-		GameRegistry.registerItem(honeyJar.getItem(), "grc.honeyJar");
-		GameRegistry.registerItem(bee.getItem(), "grc.bee");
-
 		// TileEntities
 		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
-
-		userBeesConfig.addDefault(bee.asStack()).setComment("Growthcraft's default bee");
-		// this will be removed in the future, so please use the new honey combs
-		BeesRegistry.instance().addHoneyComb(honeyComb.asStack(1, 0), honeyComb.asStack(1, 1));
-
-		BeesRegistry.instance().addHoneyComb(honeyCombEmpty.asStack(), honeyCombFilled.asStack());
+		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);
+		MapGenHelper.registerVillageStructure(ComponentVillageApiarist.class, "grc.apiarist");
+		modules.register();
+		registerRecipes();
+		userBeesConfig.addDefault(items.bee.asStack()).setComment("Growthcraft's default bee");
+		BeesRegistry.instance().addHoneyComb(items.honeyCombEmpty.asStack(), items.honeyCombFilled.asStack());
 		userFlowersConfig.addDefault(Blocks.red_flower);
 		userFlowersConfig.addDefault(Blocks.yellow_flower);
-
-		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);
-
-		MapGenHelper.registerVillageStructure(ComponentVillageApiarist.class, "grc.apiarist");
-
-		registerOres();
-		registerRecipes();
-
-		MinecraftForge.EVENT_BUS.register(this);
-
-		NEI.hideItem(honeyComb.asStack(1, 0));
-		NEI.hideItem(honeyComb.asStack(1, 1));
-
-		modules.register();
-	}
-
-	private void registerOres()
-	{
-		//====================
-		// ORE DICTIONARY
-		//====================
-		// For Pam's HarvestCraft
-		// Uses the same OreDict. names as HarvestCraft
-		OreDictionary.registerOre("beeQueen", bee.getItem());
-		OreDictionary.registerOre("materialWaxcomb", honeyCombEmpty.asStack());
-		OreDictionary.registerOre("materialHoneycomb", honeyCombFilled.asStack());
-		OreDictionary.registerOre("honeyDrop", honeyJar.getItem());
-		OreDictionary.registerOre("dropHoney", honeyJar.getItem());
 	}
 
 	private void registerRecipes()
@@ -212,11 +158,9 @@ public class GrowthCraftBees
 			GameRegistry.addRecipe(beeBox.asStack(1, i), new Object[] { " A ", "A A", "AAA", 'A', planks.asStack(1, i) });
 		}
 
-		GameRegistry.addShapelessRecipe(honeyCombEmpty.asStack(), honeyComb.asStack(1, 0));
-		GameRegistry.addShapelessRecipe(honeyCombFilled.asStack(), honeyComb.asStack(1, 1));
-
-		final ItemStack honeyStack = honeyCombFilled.asStack();
-		GameRegistry.addShapelessRecipe(honeyJar.asStack(), honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);
+		final ItemStack honeyStack = items.honeyCombFilled.asStack();
+		GameRegistry.addShapelessRecipe(items.honeyJar.asStack(),
+			honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);
 	}
 
 	private void postRegisterRecipes()

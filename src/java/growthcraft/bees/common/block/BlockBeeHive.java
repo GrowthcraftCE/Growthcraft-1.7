@@ -164,7 +164,7 @@ public class BlockBeeHive extends Block
 	@Override
 	public Item getItemDropped(int par1, Random rand, int par3)
 	{
-		return GrowthCraftBees.bee.getItem();
+		return GrowthCraftBees.items.bee.getItem();
 	}
 
 	@Override
@@ -184,16 +184,13 @@ public class BlockBeeHive extends Block
 			{
 				for (int i = 0; i < max; i++)
 				{
-					switch (world.rand.nextInt(2))
+					if (world.rand.nextInt(2) == 0)
 					{
-						case 0:
-							this.dropBlockAsItem(world, x, y, z, GrowthCraftBees.honeyCombEmpty.asStack());
-							break;
-						case 1:
-							this.dropBlockAsItem(world, x, y, z, GrowthCraftBees.honeyCombFilled.asStack());
-							break;
-						default:
-							break;
+						dropBlockAsItem(world, x, y, z, GrowthCraftBees.items.honeyCombEmpty.asStack());
+					}
+					else
+					{
+						dropBlockAsItem(world, x, y, z, GrowthCraftBees.items.honeyCombFilled.asStack());
 					}
 				}
 			}

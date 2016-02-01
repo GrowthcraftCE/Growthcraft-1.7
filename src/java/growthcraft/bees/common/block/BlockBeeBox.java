@@ -341,7 +341,7 @@ public class BlockBeeBox extends BlockContainer
 				{
 					if (itemstack.getItem() == Items.flower_pot && te.isHoneyEnough())
 					{
-						ItemUtils.addStackToPlayer(GrowthCraftBees.honeyJar.asStack(), player, world, x, y, z, false);
+						ItemUtils.addStackToPlayer(GrowthCraftBees.items.honeyJar.asStack(), player, world, x, y, z, false);
 						ItemUtils.decreaseStackOnPlayer(itemstack, player);
 						te.decreaseHoney(6);
 						te.markDirty();

@@ -182,7 +182,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase
 		final ItemStack beestack = getBeeStack();
 		if (beestack == null)
 		{
-			setBeeStack(GrowthCraftBees.bee.asStack());
+			setBeeStack(GrowthCraftBees.items.bee.asStack());
 		}
 		else
 		{
@@ -198,7 +198,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase
 			final ItemStack stack = getStackInSlot(i);
 			if (stack == null)
 			{
-				setInventorySlotContents(i, GrowthCraftBees.honeyCombEmpty.asStack());
+				setInventorySlotContents(i, GrowthCraftBees.items.honeyCombEmpty.asStack());
 				n--;
 			}
 		}

@@ -117,7 +117,8 @@ public class GrcBeesBooze extends GrcModuleBase
 		GameRegistry.registerItem(honeyMead.getItem(), "grc.honeyMead");
 		GameRegistry.registerItem(honeyMeadBucket_deprecated.getItem(), "grc.honeyMead_bucket");
 
-		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(), Items.water_bucket, GrowthCraftBees.honeyJar.getItem(), Items.bucket);
+		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
+			Items.water_bucket, GrowthCraftBees.items.honeyJar.getItem(), Items.bucket);
 
 		// Booze
 		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMead, "grc.honeyMead", honeyMeadBucket_deprecated);
