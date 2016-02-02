@@ -83,10 +83,17 @@ public class BoozeEffect extends AbstractEffect
 		return this;
 	}
 
-	public BoozeEffect addPotionEntry(@Nonnull Potion p, int tm, int lvl)
+	public EffectAddPotionEffect createPotionEntry(@Nonnull Potion p, int time, int level)
 	{
-		final BoozePotionEffectFactory effect = new BoozePotionEffectFactory(booze, p.id, tm, lvl);
-		addEffect(new EffectAddPotionEffect(effect));
+		final BoozePotionEffectFactory factory = new BoozePotionEffectFactory(booze, p.id, time, level);
+		final EffectAddPotionEffect effect = new EffectAddPotionEffect(factory);
+		addEffect(effect);
+		return effect;
+	}
+
+	public BoozeEffect addPotionEntry(@Nonnull Potion p, int time, int level)
+	{
+		createPotionEntry(p, time, level);
 		return this;
 	}
 

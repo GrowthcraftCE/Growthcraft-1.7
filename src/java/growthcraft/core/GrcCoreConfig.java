@@ -11,6 +11,10 @@ public class GrcCoreConfig extends ConfigBase
 	public int bottleCapacity = 333;
 
 
+	@ConfigOption(catergory="Booze/Effects", name="Hide Poisoned", desc="Should purposely poisoned booze have its effect hidden?")
+	public boolean hidePoisonedBooze = true;
+
+
 	@ConfigOption(catergory="Integration", name="Enable Apple Core Integration", desc="Should we integrate with Apple Core (if available)?")
 	public boolean enableAppleCoreIntegration = true;
 

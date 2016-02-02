@@ -16,6 +16,7 @@ import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.YeastType;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.hops.GrowthCraftHops;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -129,7 +130,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			//.fermentsFrom(fs[3], YeastType.NETHERRASH.asStack(), fermentTime)
 			.getEffect()
 				.setTipsy(defaultTipsy, TickUtils.seconds(45))
-				.addPotionEntry(Potion.poison, TickUtils.seconds(90), 0);
+				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);
 	}
 
 	private void registerHopAle()
@@ -226,7 +227,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			//.fermentsFrom(fs[7], YeastType.NETHERRASH.asStack(), fermentTime)
 			.getEffect()
 				.setTipsy(defaultTipsy, TickUtils.seconds(45))
-				.addPotionEntry(Potion.poison, TickUtils.minutes(3), 0);
+				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);
 	}
 
 	private void registerFermentations()

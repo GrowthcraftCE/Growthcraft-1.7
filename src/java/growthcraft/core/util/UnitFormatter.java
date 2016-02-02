@@ -32,6 +32,7 @@ import com.google.common.base.Joiner;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.core.GrowthCraftCore;
 
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.Fluid;
@@ -83,6 +84,7 @@ public class UnitFormatter
 				String str = "";
 				for (BoozeTag tag : tags)
 				{
+					if (GrowthCraftCore.getConfig().hidePoisonedBooze && tag == BoozeTag.POISONED) continue;
 					str += ((str.length() == 0) ? "" : ", ") + tag.getLocalizedName();
 				}
 				modifierString = str;

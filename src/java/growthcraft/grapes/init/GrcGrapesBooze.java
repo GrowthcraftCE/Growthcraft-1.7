@@ -16,6 +16,7 @@ import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.YeastType;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.grapes.GrowthCraftGrapes;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -137,7 +138,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 			//.fermentsTo(fs[6], YeastType.NETHERRASH.asStack(), fermentTime)
 			.getEffect()
 				.setTipsy(defaultTipsy, TickUtils.seconds(90))
-				.addPotionEntry(Potion.poison, TickUtils.seconds(90), 0);
+				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);
 	}
 
 	@Override
