@@ -23,6 +23,8 @@
  */
 package growthcraft.api.core.effect;
 
+import java.util.List;
+
 import growthcraft.api.core.CoreRegistry;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,6 +34,15 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public abstract class AbstractEffect implements IEffect
 {
+	protected boolean descriptionEnabled = true;
+
+	@SuppressWarnings("unchecked")
+	public <T extends AbstractEffect> T toggleDescription(boolean bool)
+	{
+		this.descriptionEnabled = bool;
+		return (T)this;
+	}
+
 	protected abstract void readFromNBT(NBTTagCompound data);
 
 	@Override
@@ -60,5 +71,16 @@ public abstract class AbstractEffect implements IEffect
 		writeToNBT(target);
 
 		data.setTag(name, target);
+	}
+
+	protected abstract void getActualDescription(List<String> list);
+
+	@Override
+	public void getDescription(List<String> list)
+	{
+		if (descriptionEnabled)
+		{
+			getActualDescription(list);
+		}
 	}
 }

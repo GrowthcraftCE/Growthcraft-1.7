@@ -88,7 +88,7 @@ public class EffectChance extends AbstractEffect
 	}
 
 	@Override
-	public void getDescription(List<String> list)
+	protected void getActualDescription(List<String> list)
 	{
 		if (effect != null)
 		{

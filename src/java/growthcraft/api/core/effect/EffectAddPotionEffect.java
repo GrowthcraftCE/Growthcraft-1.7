@@ -85,7 +85,7 @@ public class EffectAddPotionEffect extends AbstractEffect
 	}
 
 	@Override
-	public void getDescription(List<String> list)
+	protected void getActualDescription(List<String> list)
 	{
 		if (potionFactory == null) return;
 		potionFactory.getDescription(list);

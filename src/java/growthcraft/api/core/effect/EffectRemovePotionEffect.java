@@ -79,7 +79,7 @@ public class EffectRemovePotionEffect extends AbstractEffect
 	}
 
 	@Override
-	public void getDescription(List<String> list)
+	protected void getActualDescription(List<String> list)
 	{
 		final PotionEffect pe = new PotionEffect(getPotionID(), 1000, 0);
 		final String potionName = GrcI18n.translate(pe.getEffectName()).trim();

@@ -254,7 +254,7 @@ public class EffectWeightedRandomList extends AbstractEffect
 	 * @param list - list to add description lines to
 	 */
 	@Override
-	public void getDescription(List<String> list)
+	protected void getActualDescription(List<String> list)
 	{
 		final int totalWeight = WeightedRandom.getTotalWeight(effects);
 		final List<String> tempList = new ArrayList<String>();

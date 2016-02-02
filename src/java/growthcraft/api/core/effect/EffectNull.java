@@ -41,7 +41,7 @@ public class EffectNull extends AbstractEffect
 	public void apply(World world, Entity entity, Random random, Object data) {}
 
 	@Override
-	public void getDescription(List<String> list)
+	protected void getActualDescription(List<String> list)
 	{
 		// Set the description as "Does Nothing."
 		list.add(GrcI18n.translate("grc.effect.null.desc"));

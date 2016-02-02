@@ -141,7 +141,7 @@ public class BoozeEffect extends AbstractEffect
 	}
 
 	@Override
-	public void getDescription(List<String> list)
+	protected void getActualDescription(List<String> list)
 	{
 		if (tipsyEffect != null) tipsyEffect.getDescription(list);
 		effects.getDescription(list);

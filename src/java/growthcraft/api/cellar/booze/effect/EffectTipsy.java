@@ -120,7 +120,7 @@ public class EffectTipsy extends AbstractEffect
 	}
 
 	@Override
-	public void getDescription(List<String> list)
+	protected void getActualDescription(List<String> list)
 	{
 		final PotionEffect nausea = new PotionEffect(Potion.confusion.id, getTipsyTime(), 0);
 		final String p = GrcI18n.translate("grc.cellar.format.tipsy_chance", Math.round(getTipsyChance() * 100));

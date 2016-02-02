@@ -70,7 +70,7 @@ public class EffectRandomList extends AbstractEffectList
 	 * @param list - list to add description lines to
 	 */
 	@Override
-	public void getDescription(List<String> list)
+	protected void getActualDescription(List<String> list)
 	{
 		if (effects.size() > 0)
 		{
