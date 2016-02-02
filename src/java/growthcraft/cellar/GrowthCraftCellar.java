@@ -3,6 +3,7 @@ package growthcraft.cellar;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+import growthcraft.api.cellar.booze.BoozeEntry;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.booze.effect.EffectTipsy;
 import growthcraft.api.cellar.CellarRegistry;
@@ -321,5 +322,13 @@ public class GrowthCraftCellar
 		MinecraftForge.EVENT_BUS.register(new EventHandlerCauldronUseItem());
 
 		modules.postInit();
+		if (!config.boozeEffectsEnabled)
+		{
+			logger.debug("Stripping ALL booze effects except tipsy");
+			for (BoozeEntry entry : CellarRegistry.instance().booze().getBoozeEntries())
+			{
+				entry.getEffect().clearEffects();
+			}
+		}
 	}
 }

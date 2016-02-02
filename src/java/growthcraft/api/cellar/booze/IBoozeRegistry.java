@@ -32,6 +32,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface IBoozeRegistry extends ILoggable
 {
+	Collection<BoozeEntry> getBoozeEntries();
 	BoozeEntry getBoozeEntry(Fluid fluid);
 	BoozeEntry fetchBoozeEntry(Fluid fluid);
 	BoozeEffect getEffect(Fluid fluid);

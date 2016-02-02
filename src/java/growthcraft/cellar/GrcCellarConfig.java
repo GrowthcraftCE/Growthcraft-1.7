@@ -26,6 +26,10 @@ public class GrcCellarConfig extends ConfigBase
 	public int waterBagDosage = 333;
 
 
+	@ConfigOption(catergory="Booze/Effects", name="Enabled", desc="Should extra booze effects be enabled (does not affect tipsy)?")
+	public boolean boozeEffectsEnabled = true;
+
+
 	@ConfigOption(catergory="Fermenting Barrel", name="Ferment Barrel fermenting time", desc="[Higher -> Slower]")
 	public int fermentTime = 24000;
 
