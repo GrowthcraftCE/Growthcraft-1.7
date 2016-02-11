@@ -24,7 +24,8 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
+import growthcraft.core.common.tileentity.IGuiNetworkSync;
 
-public abstract class TileEntityCellarDevice extends GrcTileEntityDeviceBase
+public abstract class TileEntityCellarDevice extends GrcTileEntityDeviceBase implements IGuiNetworkSync
 {
 }
