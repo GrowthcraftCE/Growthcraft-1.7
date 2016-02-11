@@ -33,7 +33,7 @@ public class PlayerInteractEventPaddy
 				final Block paddyBlock = paddyBlocks.get(targetBlock);
 				if (paddyBlock != null)
 				{
-					world.setBlock(event.x, event.y, event.z, paddyBlock, world.getBlockMetadata(event.x, event.y, event.z), BlockFlags.UPDATE_CLIENT);
+					world.setBlock(event.x, event.y, event.z, paddyBlock, world.getBlockMetadata(event.x, event.y, event.z), BlockFlags.UPDATE_AND_SYNC);
 					world.playSoundEffect((double)((float)event.x + 0.5F),
 						(double)((float)event.y + 0.5F),
 						(double)((float)event.z + 0.5F),

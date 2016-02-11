@@ -111,7 +111,7 @@ public class BonemealEventGrapes
 
 				if (GrowthCraftGrapes.grapeLeaves.getBlock().canGrowHere(event.world, x, event.y, z))
 				{
-					event.world.setBlock(x, event.y, z, GrowthCraftGrapes.grapeLeaves.getBlock(), 0, BlockFlags.UPDATE_CLIENT);
+					event.world.setBlock(x, event.y, z, GrowthCraftGrapes.grapeLeaves.getBlock(), 0, BlockFlags.UPDATE_AND_SYNC);
 					grewOutwards = true;
 					allowedGrowthCount--;
 				}

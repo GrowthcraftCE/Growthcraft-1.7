@@ -142,7 +142,7 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 		}
 		if (newDirection != current)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, newDirection.ordinal(), BlockFlags.UPDATE_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, newDirection.ordinal(), BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 

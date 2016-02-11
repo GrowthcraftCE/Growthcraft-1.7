@@ -73,13 +73,13 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	{
 		final int previousMetadata = meta;
 		++meta;
-		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.SEND_TO_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.SYNC);
 		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
 	}
 
 	public void spreadLeaves(World world, int x, int y, int z)
 	{
-		world.setBlock(x, y + 1, z, this, HopsStage.SMALL, BlockFlags.UPDATE_CLIENT);
+		world.setBlock(x, y + 1, z, this, HopsStage.SMALL, BlockFlags.UPDATE_AND_SYNC);
 	}
 
 	public boolean canSpreadLeaves(World world, int x, int y, int z)
@@ -248,7 +248,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 		{
 			if (!world.isRemote)
 			{
-				world.setBlockMetadataWithNotify(x, y, z, HopsStage.BIG, BlockFlags.UPDATE_CLIENT);
+				world.setBlockMetadataWithNotify(x, y, z, HopsStage.BIG, BlockFlags.UPDATE_AND_SYNC);
 				this.dropBlockAsItem(world, x, y, z, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
 			}
 			return true;

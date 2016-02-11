@@ -92,7 +92,7 @@ public class BlockBeeHive extends Block
 				b0 = 4;
 			}
 
-			world.setBlockMetadataWithNotify(x, y, z, b0, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, b0, BlockFlags.SYNC);
 		}
 	}
 
@@ -103,22 +103,22 @@ public class BlockBeeHive extends Block
 
 		if (face == 0)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 2, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 2, BlockFlags.SYNC);
 		}
 
 		if (face == 1)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 5, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 5, BlockFlags.SYNC);
 		}
 
 		if (face == 2)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 3, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 3, BlockFlags.SYNC);
 		}
 
 		if (face == 3)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 4, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 4, BlockFlags.SYNC);
 		}
 	}
 

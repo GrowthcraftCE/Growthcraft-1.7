@@ -43,8 +43,8 @@ public class BonemealEventRice
 					{
 						mminus = 0;
 					}
-					world.setBlockMetadataWithNotify(i, y, k, mplus, BlockFlags.SEND_TO_CLIENT);
-					world.setBlockMetadataWithNotify(i, y - 1, k, mminus, BlockFlags.SEND_TO_CLIENT);
+					world.setBlockMetadataWithNotify(i, y, k, mplus, BlockFlags.SYNC);
+					world.setBlockMetadataWithNotify(i, y - 1, k, mminus, BlockFlags.SYNC);
 					world.playAuxSFX(AuxFX.BONEMEAL, i, y, k, 0);
 					world.notifyBlockChange(i, y, k, Blocks.air);
 					world.notifyBlockChange(i, y - 1, k, Blocks.air);

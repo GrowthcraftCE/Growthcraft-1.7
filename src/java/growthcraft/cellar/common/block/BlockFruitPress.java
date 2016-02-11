@@ -51,8 +51,8 @@ public class BlockFruitPress extends BlockCellarContainer
 
 	public void doRotateBlock(World world, int x, int y, int z, ForgeDirection side)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) ^ 1, BlockFlags.SEND_TO_CLIENT);
-		world.setBlockMetadataWithNotify(x, y + 1, z, world.getBlockMetadata(x, y + 1, z) ^ 1, BlockFlags.SEND_TO_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) ^ 1, BlockFlags.SYNC);
+		world.setBlockMetadataWithNotify(x, y + 1, z, world.getBlockMetadata(x, y + 1, z) ^ 1, BlockFlags.SYNC);
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class BlockFruitPress extends BlockCellarContainer
 				meta = 4;
 			}
 
-			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
@@ -104,14 +104,14 @@ public class BlockFruitPress extends BlockCellarContainer
 
 		if (a == 0 || a == 2)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 0, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 0, BlockFlags.SYNC);
 		}
 		else if (a == 1 || a == 3)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SYNC);
 		}
 
-		world.setBlock(x, y + 1, z, getPresserBlock(), world.getBlockMetadata(x, y, z), BlockFlags.SEND_TO_CLIENT);
+		world.setBlock(x, y + 1, z, getPresserBlock(), world.getBlockMetadata(x, y, z), BlockFlags.SYNC);
 
 		if (stack.hasDisplayName())
 		{

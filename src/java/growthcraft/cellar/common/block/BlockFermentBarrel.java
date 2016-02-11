@@ -99,7 +99,7 @@ public class BlockFermentBarrel extends BlockCellarContainer
 				meta = 4;
 			}
 
-			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
@@ -107,7 +107,7 @@ public class BlockFermentBarrel extends BlockCellarContainer
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
 		final int meta = BlockPistonBase.determineOrientation(world, x, y, z, entity);
-		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_AND_SYNC);
 
 		if (stack.hasDisplayName())
 		{

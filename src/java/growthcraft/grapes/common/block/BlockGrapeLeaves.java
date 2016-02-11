@@ -112,7 +112,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	private void setGrapeBlock(World world, int x, int y, int z)
 	{
-		world.setBlock(x, y, z, GrowthCraftGrapes.grapeBlock.getBlock(), 0, BlockFlags.UPDATE_CLIENT);
+		world.setBlock(x, y, z, GrowthCraftGrapes.grapeBlock.getBlock(), 0, BlockFlags.UPDATE_AND_SYNC);
 	}
 
 	public boolean growGrapeBlock(World world, int x, int y, int z)
@@ -143,7 +143,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 				if (canGrowHere(world, x + dir.offsetX, y, z + dir.offsetZ))
 				{
-					world.setBlock(x + dir.offsetX, y, z + dir.offsetZ, this, 0, BlockFlags.UPDATE_CLIENT);
+					world.setBlock(x + dir.offsetX, y, z + dir.offsetZ, this, 0, BlockFlags.UPDATE_AND_SYNC);
 				}
 			}
 		}

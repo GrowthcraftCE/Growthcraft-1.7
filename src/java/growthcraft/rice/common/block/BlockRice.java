@@ -56,7 +56,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider, I
 
 	private void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.SEND_TO_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.SYNC);
 		AppleCore.announceGrowthTick(this, world, x, y, z, meta);
 	}
 

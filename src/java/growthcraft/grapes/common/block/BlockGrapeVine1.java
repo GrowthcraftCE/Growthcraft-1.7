@@ -56,12 +56,12 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase
 		if (BlockCheck.isRope(above))
 		{
 			incrementGrowth(world, x, y, z, meta);
-			world.setBlock(x, y + 1, z, GrowthCraftGrapes.grapeLeaves.getBlock(), 0, BlockFlags.UPDATE_CLIENT);
+			world.setBlock(x, y + 1, z, GrowthCraftGrapes.grapeLeaves.getBlock(), 0, BlockFlags.UPDATE_AND_SYNC);
 		}
 		else if (world.isAirBlock(x, y + 1, z))
 		{
 			incrementGrowth(world, x, y, z, meta);
-			world.setBlock(x, y + 1, z, this, 0, BlockFlags.UPDATE_CLIENT);
+			world.setBlock(x, y + 1, z, this, 0, BlockFlags.UPDATE_AND_SYNC);
 		}
 		else if (GrowthCraftGrapes.grapeLeaves.getBlock() == above)
 		{
