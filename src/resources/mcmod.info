@@ -90,6 +90,24 @@
     "useDependencyInformation": "true"
 },
 {
+    "modid": "Growthcraft|Milk",
+    "name": "Growthcraft Milk",
+    "description": "Growthcraft Milk is a mod which adds new dairy-based products, such as cheese.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10",
+    "updateUrl": "",
+    "authors": [ "IceDragon200" ],
+    "credits": "",
+    "logoFile": "/grc_milk_logo.png",
+    "screenshots": [],
+    "parent": "Growthcraft",
+    "requiredMods": [ "Forge", "Growthcraft", "Growthcraft|Cellar" ],
+    "dependencies": [ "Growthcraft", "Growthcraft|Cellar" ],
+    "dependants": [],
+    "useDependencyInformation": "true"
+},
+{
     "modid": "Growthcraft|Fishtrap",
     "name": "Growthcraft Fishtrap",
     "description": "Growthcraft Fishtrap is a mod which adds a block; Fishtrap, that automatically catches fish (and other stuff) for you! ",
