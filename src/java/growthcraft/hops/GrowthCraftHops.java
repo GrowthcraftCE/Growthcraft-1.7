@@ -73,6 +73,7 @@ public class GrowthCraftHops
 		config.load(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
 
 		modules.add(booze);
+		if (config.enableForestryIntegration) modules.add(new growthcraft.hops.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.hops.integration.ThaumcraftModule());
 		if (config.debugEnabled) modules.setLogger(logger);
 

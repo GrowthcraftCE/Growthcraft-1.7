@@ -74,6 +74,7 @@ public class GrowthCraftRice
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
 
+		if (config.enableForestryIntegration) modules.add(new growthcraft.rice.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
 		modules.add(booze);
 

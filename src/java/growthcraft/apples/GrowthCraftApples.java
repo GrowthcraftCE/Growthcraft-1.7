@@ -72,6 +72,7 @@ public class GrowthCraftApples
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/apples.conf");
 
+		if (config.enableForestryIntegration) modules.add(new growthcraft.apples.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.apples.integration.ThaumcraftModule());
 
 		modules.add(booze);

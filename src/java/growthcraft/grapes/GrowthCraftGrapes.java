@@ -80,6 +80,7 @@ public class GrowthCraftGrapes
 		config.load(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
 
 		modules.add(booze);
+		if (config.enableForestryIntegration) modules.add(new growthcraft.grapes.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.grapes.integration.ThaumcraftModule());
 
 		if (config.debugEnabled) modules.setLogger(logger);
