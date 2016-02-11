@@ -7,6 +7,7 @@ tile.grc.ropeBlock.name=Rope
 
 # Items
 item.grc.rope.name=Rope
+item.grccore.salt.name=Salt
 
 # Fluids
 fluid.tile.water=Water
@@ -70,8 +71,8 @@ grccore.waila.option.DisplayFluidContent=Fluid Tanks
 
 # Effects
 grc.effect.chance.format=%d%% Chance of
-grc.effect.null.desc=Does Nothing
 grc.effect.list.head=Applies the following:
+grc.effect.null.desc=Does Nothing
 grc.effect.random_list.head=Applies one of the following:
 grc.effect.remove_potion_effect.format=Removes %s
 grc.effect.weighted_random_list.format=%d%% Chance of
