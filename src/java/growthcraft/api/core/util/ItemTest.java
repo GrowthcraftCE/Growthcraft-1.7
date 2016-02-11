@@ -32,6 +32,14 @@ public class ItemTest
 {
 	private ItemTest() {}
 
+	public static boolean isValid(@Nonnull ItemStack stack)
+	{
+		if (stack == null) return false;
+		if (stack.getItem() == null) return false;
+		if (stack.stackSize <= 0) return false;
+		return true;
+	}
+
 	public static boolean hasEnough(@Nonnull ItemStack expected, @Nullable ItemStack actual)
 	{
 		if (actual == null) return false;
