@@ -26,11 +26,25 @@ package growthcraft.api.core.util;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class FluidTest
 {
 	private FluidTest() {}
+
+	public static boolean areStacksEqual(@Nullable FluidStack expected, @Nullable FluidStack other)
+	{
+		if (expected != null)
+		{
+			if (expected.isFluidEqual(other)) return true;
+		}
+		else
+		{
+			if (other != null) return true;
+		}
+		return false;
+	}
 
 	public static boolean hasEnough(@Nonnull FluidStack expected, @Nullable FluidStack actual)
 	{
@@ -38,5 +52,31 @@ public class FluidTest
 		if (!expected.isFluidEqual(actual)) return false;
 		if (actual.amount < expected.amount) return false;
 		return true;
+	}
+
+	public static boolean isValid(@Nullable FluidStack stack)
+	{
+		if (stack == null) return false;
+		if (stack.getFluid() == null) return false;
+		if (stack.amount <= 0) return false;
+		return true;
+	}
+
+	public static boolean isValidAndExpected(@Nonnull FluidStack expected, @Nullable FluidStack stack)
+	{
+		if (isValid(stack))
+		{
+			if (expected.isFluidEqual(stack)) return true;
+		}
+		return false;
+	}
+
+	public static boolean isValidAndExpected(@Nonnull Fluid expected, @Nullable FluidStack stack)
+	{
+		if (isValid(stack))
+		{
+			if (stack.getFluid() == expected) return true;
+		}
+		return false;
 	}
 }
