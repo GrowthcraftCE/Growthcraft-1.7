@@ -3,8 +3,8 @@ package growthcraft.rice.event;
 import java.util.Random;
 
 import growthcraft.rice.GrowthCraftRice;
-import growthcraft.core.util.BlockFlags;
-import growthcraft.core.util.AuxFX;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.AuxFX;
 import growthcraft.rice.util.RiceBlockCheck;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;

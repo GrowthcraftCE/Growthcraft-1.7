@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.core.util.Rectangle;
+import growthcraft.api.core.util.Rectangle;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

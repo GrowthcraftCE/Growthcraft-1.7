@@ -6,7 +6,7 @@ import growthcraft.apples.GrowthCraftApples;
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.client.renderer.RenderBlockFruit;
 import growthcraft.core.integration.AppleCore;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;

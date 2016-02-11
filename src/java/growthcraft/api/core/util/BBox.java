@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.util;
+package growthcraft.api.core.util;
 
 // Same as the minecraft AxisAlignedBB, except it has #scale and works with BoundUtils
 public class BBox

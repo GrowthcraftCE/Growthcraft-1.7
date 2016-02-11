@@ -1,4 +1,4 @@
-package growthcraft.core.util;
+package growthcraft.api.core.util;
 
 import org.junit.Test;
 

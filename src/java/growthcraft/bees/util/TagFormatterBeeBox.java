@@ -3,7 +3,7 @@ package growthcraft.bees.util;
 import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.core.util.ITagFormatter;
+import growthcraft.api.core.util.ITagFormatter;
 import growthcraft.core.util.TagFormatterItem;
 import growthcraft.core.util.UnitFormatter;
 

@@ -3,6 +3,7 @@ package growthcraft.bees;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.user.UserBeesConfig;
 import growthcraft.api.bees.user.UserFlowersConfig;
+//import growthcraft.api.bees.user.UserHoneyConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
@@ -86,6 +87,7 @@ public class GrowthCraftBees
 	private ModuleContainer modules = new ModuleContainer();
 	private UserBeesConfig userBeesConfig = new UserBeesConfig();
 	private UserFlowersConfig userFlowersConfig = new UserFlowersConfig();
+	//private UserHoneyConfig userHoneyConfig = new UserHoneyConfig();
 
 	public static UserBeesConfig getUserBeesConfig()
 	{
@@ -110,6 +112,9 @@ public class GrowthCraftBees
 
 		userFlowersConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/flowers.json");
 		modules.add(userFlowersConfig);
+
+		//userHoneyConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/honey.json");
+		//modules.add(userHoneyConfig);
 
 		if (config.enableGrcBambooIntegration) modules.add(new growthcraft.bees.integration.GrcBambooModule());
 		if (config.enableGrcNetherIntegration) modules.add(new growthcraft.bees.integration.GrcNetherModule());

@@ -6,8 +6,8 @@ import growthcraft.bamboo.common.world.WorldGenBamboo;
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.core.util.BlockFlags;
-import growthcraft.core.util.RenderType;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.RenderType;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

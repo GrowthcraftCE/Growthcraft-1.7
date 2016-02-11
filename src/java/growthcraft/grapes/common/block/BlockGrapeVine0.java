@@ -1,7 +1,7 @@
 package growthcraft.grapes.common.block;
 
-import growthcraft.core.util.BlockFlags;
-import growthcraft.core.util.RenderType;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.RenderType;
 import growthcraft.grapes.GrowthCraftGrapes;
 
 import cpw.mods.fml.relauncher.Side;

@@ -5,7 +5,7 @@ import java.util.Random;
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.grapes.util.GrapeBlockCheck;
 
 import cpw.mods.fml.common.eventhandler.Event;

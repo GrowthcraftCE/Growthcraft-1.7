@@ -9,7 +9,7 @@ import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.hops.client.renderer.RenderHops;
 import growthcraft.hops.GrowthCraftHops;
 

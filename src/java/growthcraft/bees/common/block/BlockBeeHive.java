@@ -5,7 +5,7 @@ import java.util.Random;
 
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.client.renderer.RenderBeeHive;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -7,7 +7,7 @@ import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.event.BarrelDrainedEvent;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.CellarGuiType;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.Utils;
 
 import cpw.mods.fml.relauncher.Side;

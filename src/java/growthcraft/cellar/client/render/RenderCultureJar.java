@@ -3,8 +3,8 @@ package growthcraft.cellar.client.render;
 import growthcraft.cellar.client.model.ModelCultureJar;
 import growthcraft.cellar.common.block.BlockCultureJar;
 import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
-import growthcraft.core.util.BBox;
-import growthcraft.core.util.ColorUtils;
+import growthcraft.api.core.util.BBox;
+import growthcraft.api.core.util.ColorUtils;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;

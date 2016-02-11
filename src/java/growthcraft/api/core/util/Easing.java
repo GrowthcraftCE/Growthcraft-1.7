@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,22 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.util;
+package growthcraft.api.core.util;
 
-/**
- * Constant space for block flags, use these instead of magic numbers
- */
-public final class BlockFlags
+public class Easing
 {
-	// Cause the block to update
-	public static final int BLOCK_UPDATE = 1;
-	// Send change to clients
-	public static final int SEND_TO_CLIENT = 2;
-	// Stop the block from re-rendering
-	public static final int SUPRESS_RENDER = 4;
+	// The original idea was to have one for floats and another for doubles
+	// EasingTemplate<float> and EasingTemplate<double> respectively
+	// Unfortunately, java's type system sucks, so we'll have to settle for
+	// doubles, or I duplicate code...
+	public static EasingTemplate d = new EasingTemplate();
 
-	public static final int UPDATE_CLIENT = BLOCK_UPDATE | SEND_TO_CLIENT;
-	public static final int ALL = UPDATE_CLIENT | SUPRESS_RENDER;
-
-	private BlockFlags() {}
+	private Easing() {}
 }

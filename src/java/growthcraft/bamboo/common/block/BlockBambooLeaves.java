@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

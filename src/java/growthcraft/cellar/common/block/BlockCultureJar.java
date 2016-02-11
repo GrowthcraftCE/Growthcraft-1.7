@@ -4,7 +4,7 @@ import growthcraft.cellar.client.render.RenderCultureJar;
 import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.CellarGuiType;
-import growthcraft.core.util.BBox;
+import growthcraft.api.core.util.BBox;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

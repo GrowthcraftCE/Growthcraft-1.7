@@ -6,7 +6,7 @@ import java.util.Random;
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.common.block.IPaddyCrop;
 import growthcraft.core.integration.AppleCore;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.rice.client.renderer.RenderRice;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.util.RiceBlockCheck;

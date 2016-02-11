@@ -21,18 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.util;
+package growthcraft.api.core.util;
 
-public class ColorUtils
+/**
+ * Constant space for block flags, use these instead of magic numbers
+ */
+public final class BlockFlags
 {
-	private ColorUtils() {}
+	// Cause the block to update
+	public static final int BLOCK_UPDATE = 1;
+	// Send change to clients
+	public static final int SEND_TO_CLIENT = 2;
+	// Stop the block from re-rendering
+	public static final int SUPRESS_RENDER = 4;
 
-	public static float[] rgb24FloatArray(float[] array, int rgb24)
-	{
-		assert array.length == 3;
-		array[0] = (float)(rgb24 >> 16 & 255) / 255.0F;
-		array[1] = (float)(rgb24 >> 8 & 255) / 255.0F;
-		array[2] = (float)(rgb24 & 255) / 255.0F;
-		return array;
-	}
+	public static final int UPDATE_CLIENT = BLOCK_UPDATE | SEND_TO_CLIENT;
+	public static final int ALL = UPDATE_CLIENT | SUPRESS_RENDER;
+
+	private BlockFlags() {}
 }

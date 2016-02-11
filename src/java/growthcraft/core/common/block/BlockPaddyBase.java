@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.core.util.ItemUtils;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.client.ClientProxy;
 import growthcraft.core.client.renderer.RenderPaddy;
 

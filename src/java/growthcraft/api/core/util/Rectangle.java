@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.util;
+package growthcraft.api.core.util;
 
 // I'm surprised minecraft doesn't have a Rectangle class, these things are
 // darn handy!

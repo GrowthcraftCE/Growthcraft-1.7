@@ -3,7 +3,7 @@ package growthcraft.grapes.common.block;
 import java.util.List;
 
 import growthcraft.core.util.BlockCheck;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.grapes.client.renderer.RenderGrapeVine1;
 import growthcraft.grapes.GrowthCraftGrapes;
 

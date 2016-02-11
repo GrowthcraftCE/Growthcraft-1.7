@@ -28,7 +28,7 @@ import javax.annotation.Nonnull;
 
 import growthcraft.core.common.tileentity.ICustomDisplayName;
 import growthcraft.core.common.tileentity.IItemHandler;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.core.Utils;
 

@@ -9,7 +9,7 @@ import growthcraft.bees.client.renderer.RenderBeeBox;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.util.ItemUtils;
-import growthcraft.core.util.AuxFX;
+import growthcraft.api.core.util.AuxFX;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

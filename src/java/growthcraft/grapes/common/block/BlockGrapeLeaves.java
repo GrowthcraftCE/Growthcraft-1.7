@@ -5,7 +5,7 @@ import java.util.Random;
 import growthcraft.core.common.block.IBlockRope;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.grapes.client.renderer.RenderGrapeLeaves;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.util.GrapeBlockCheck;
