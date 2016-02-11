@@ -3,6 +3,7 @@ package growthcraft.bees;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.user.UserBeesConfig;
 import growthcraft.api.bees.user.UserFlowersConfig;
+//import growthcraft.api.bees.user.UserHoneyConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
