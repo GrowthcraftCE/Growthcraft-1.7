@@ -42,7 +42,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 /**
  * Extend this base class if you want a base class with an `Inventory` and `Fluid Tanks`
  */
-public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase implements IFluidHandler, IFluidTanks, IGuiNetworkSync
+public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase implements IFluidHandler, IFluidTanks
 {
 	private FluidTanks tanks;
 

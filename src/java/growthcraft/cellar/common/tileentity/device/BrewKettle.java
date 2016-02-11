@@ -33,7 +33,6 @@ import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.common.tileentity.device.DeviceBase;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
-import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -208,6 +207,7 @@ public class BrewKettle extends DeviceBase
 	{
 		super.readFromStream(buf);
 		this.time = buf.readDouble();
+		this.timeMax = buf.readDouble();
 		this.grain = buf.readFloat();
 	}
 
@@ -219,6 +219,7 @@ public class BrewKettle extends DeviceBase
 	{
 		super.writeToStream(buf);
 		buf.writeDouble(time);
+		buf.writeDouble(timeMax);
 		buf.writeFloat(grain);
 	}
 }

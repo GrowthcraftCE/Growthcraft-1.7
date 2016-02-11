@@ -6,20 +6,14 @@ import java.io.IOException;
 
 import io.netty.buffer.ByteBuf;
 
-import growthcraft.api.cellar.brewing.BrewingRecipe;
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.common.Residue;
-import growthcraft.api.cellar.heatsource.IHeatSourceBlock;
 import growthcraft.api.cellar.util.FluidUtils;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -89,7 +83,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 	@SideOnly(Side.CLIENT)
 	public int getBrewProgressScaled(int range)
 	{
-		return (int)brewKettle.getProgress() * range;
+		return (int)(brewKettle.getProgress() * range);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -181,6 +175,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 				brewKettle.setTime(v);
 				break;
 			case TIME_MAX:
+				brewKettle.setTimeMax(v);
 				break;
 			case TANK1_FLUID_ID:
 			{
@@ -207,7 +202,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME.ordinal(), (int)brewKettle.getTime());
-		//iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME_MAX.ordinal(), (int)time);
+		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME_MAX.ordinal(), (int)brewKettle.getTimeMax());
 		FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK1_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK1_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);

@@ -25,7 +25,9 @@ package growthcraft.core.integration.waila;
 
 import java.util.List;
 
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.nbt.NBTHelper;
+import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 import growthcraft.core.util.TagFormatterFluidHandler;
 
 import cpw.mods.fml.common.Optional;
@@ -39,6 +41,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidHandler;
 
@@ -72,6 +75,18 @@ public class CoreDataProvider implements IWailaDataProvider
 				tooltip = TagFormatterFluidHandler.INSTANCE.format(tooltip, tag);
 			}
 		}
+
+		if (te instanceof ITileProgressiveDevice)
+		{
+			final NBTTagCompound nbt = accessor.getNBTData();
+			final float prog = nbt.getFloat("device_progress");
+			if (prog > 0)
+			{
+				final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grccore.device.progress.prefix") +
+					EnumChatFormatting.WHITE + GrcI18n.translate("grccore.device.progress.format", (int)(prog * 100));
+				tooltip.add(result);
+			}
+		}
 		return tooltip;
 	}
 
@@ -87,6 +102,11 @@ public class CoreDataProvider implements IWailaDataProvider
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
 	{
 		if (te instanceof IFluidHandler) NBTHelper.writeIFluidHandlerToNBT((IFluidHandler)te, tag);
+		if (te instanceof ITileProgressiveDevice)
+		{
+			final ITileProgressiveDevice device = (ITileProgressiveDevice)te;
+			tag.setFloat("device_progress", device.getDeviceProgress());
+		}
 		return tag;
 	}
 }

@@ -58,5 +58,8 @@ public class Waila extends WailaIntegrationBase
 
 		final IWailaDataProvider paddyProvider = new PaddyDataProvider();
 		reg.registerBodyProvider(paddyProvider, IPaddy.class);
+
+		final String option = "grccore.waila.option.";
+		reg.addConfig(GrowthCraftCore.MOD_NAME, "DisplayFluidContent", option + "DisplayFluidContent", true);
 	}
 }

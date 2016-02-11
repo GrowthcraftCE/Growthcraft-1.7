@@ -46,8 +46,7 @@ public class Waila extends WailaIntegrationBase
 		final IWailaDataProvider provider = new CellarDataProvider();
 		reg.registerBodyProvider(provider, BlockFruitPresser.class);
 
-		final String option = "grc.cellar.waila.option.";
-		reg.addConfig(GrowthCraftCellar.MOD_NAME, "DisplayFluidContent", option + "DisplayFluidContent", true);
+		final String option = "grccellar.waila.option.";
 		reg.addConfig(GrowthCraftCellar.MOD_NAME, "FruitPressExtras", option + "FruitPressExtras", true);
 		reg.addConfig(GrowthCraftCellar.MOD_NAME, "BrewKettleExtras", option + "BrewKettleExtras", true);
 		reg.addConfig(GrowthCraftCellar.MOD_NAME, "FermentBarrelExtras", option + "FermentBarrelExtras", true);

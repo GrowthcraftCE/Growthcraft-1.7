@@ -25,14 +25,19 @@ package growthcraft.core.common.tileentity.device;
 
 import java.util.Random;
 
+import io.netty.buffer.ByteBuf;
+
+import growthcraft.api.core.nbt.INBTSerializable;
+import growthcraft.api.core.stream.IStreamable;
 import growthcraft.core.common.inventory.IInventoryFlagging;
 import growthcraft.core.common.tileentity.IBlockUpdateFlagging;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.world.World;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.nbt.NBTTagCompound;
 
-public class DeviceBase
+public class DeviceBase implements INBTSerializable, IStreamable
 {
 	protected Random random = new Random();
 	protected TileEntity parent;
@@ -40,6 +45,11 @@ public class DeviceBase
 	public DeviceBase(TileEntity te)
 	{
 		this.parent = te;
+	}
+
+	public TileEntity getTileEntity()
+	{
+		return parent;
 	}
 
 	public World getWorld()
@@ -75,5 +85,65 @@ public class DeviceBase
 		{
 			((IInventoryFlagging)parent).markForInventoryUpdate();
 		}
+	}
+
+	/**
+	 * @param data - nbt data to read from
+	 */
+	public void readFromNBT(NBTTagCompound data)
+	{
+	}
+
+	/**
+	 * @param data - parent nbt data to read from
+	 * @param name - sub tag to read
+	 */
+	@Override
+	public void readFromNBT(NBTTagCompound data, String name)
+	{
+		if (data.hasKey(name))
+		{
+			final NBTTagCompound tag = data.getCompoundTag(name);
+			readFromNBT(tag);
+		}
+		else
+		{
+			// LOG error
+		}
+	}
+
+	/**
+	 * @param data - nbt to write to
+	 */
+	public void writeToNBT(NBTTagCompound data)
+	{
+	}
+
+	/**
+	 * @param data - nbt to write to
+	 * @param name - sub tag nbt to write to
+	 */
+	@Override
+	public void writeToNBT(NBTTagCompound data, String name)
+	{
+		final NBTTagCompound target = new NBTTagCompound();
+		writeToNBT(target);
+		data.setTag(name, target);
+	}
+
+	/**
+	 * @param buf - buffer to read from
+	 */
+	@Override
+	public void readFromStream(ByteBuf buf)
+	{
+	}
+
+	/**
+	 * @param buf - buffer to write to
+	 */
+	@Override
+	public void writeToStream(ByteBuf buf)
+	{
 	}
 }

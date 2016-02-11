@@ -64,6 +64,9 @@ grc.format.crop.growth_prefix=Growth :
 grc.format.crop.progress_format=%d%%
 grc.format.crop.mature=Mature
 grc.format.paddy.hasFluid=Has Fluid :
+grccore.device.progress.prefix=Progress :
+grccore.device.progress.format= %d%%
+grccore.waila.option.DisplayFluidContent=Fluid Tanks
 
 # Effects
 grc.effect.chance.format=%d%% Chance of

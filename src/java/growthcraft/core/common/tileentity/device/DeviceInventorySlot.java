@@ -23,6 +23,8 @@
  */
 package growthcraft.core.common.tileentity.device;
 
+import growthcraft.core.util.ItemUtils;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
@@ -42,9 +44,105 @@ public class DeviceInventorySlot
 		return inventory.getStackInSlot(index);
 	}
 
+	public int getSize()
+	{
+		final ItemStack stack = get();
+		if (stack == null) return 0;
+		return stack.stackSize;
+	}
+
+	public int getCapacity()
+	{
+		return inventory.getInventoryStackLimit();
+	}
+
+	public int getAvailableCapacity()
+	{
+		return getCapacity() - getSize();
+	}
+
 	public void set(ItemStack newStack)
 	{
 		inventory.setInventorySlotContents(index, newStack);
+	}
+
+	public boolean hasContent()
+	{
+		return getSize() > 0;
+	}
+
+	/**
+	 * Does the slot not have an item?
+	 *
+	 * @return true, there is no item, or no valid item in the slot
+	 */
+	public boolean isEmpty()
+	{
+		return !hasContent();
+	}
+
+	/**
+	 * Does the provided stack match the one in the slot?
+	 *
+	 * @param stack - item stack to test
+	 * @return true, it has the same item, false otherwise
+	 */
+	public boolean hasMatching(ItemStack stack)
+	{
+		final ItemStack s = get();
+		if (s != null)
+		{
+			if (stack.isItemEqual(s))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Does the slot have the same item, and the capacity to hold the stack?
+	 *
+	 * @param stack - item stack to test
+	 * @return true, it has the same item and has capacity, false otherwise
+	 */
+	public boolean hasMatchingWithCapacity(ItemStack stack)
+	{
+		if (!hasMatching(stack)) return false;
+		return getAvailableCapacity() >= stack.stackSize;
+	}
+
+	/**
+	 * This is a variation of hasMatchingWithCapacity, this version will accept
+	 * the stack if the internal stack is null unlike the former.
+	 *
+	 * @param stack - item stack to test
+	 * @return true, the slot has capacity for the provided stack
+	 */
+	public boolean hasCapacityFor(ItemStack stack)
+	{
+		if (hasContent())
+		{
+			if (!hasMatching(stack)) return false;
+		}
+		return getAvailableCapacity() >= stack.stackSize;
+	}
+
+	/**
+	 * @param stack - item stack to test
+	 * @return true, the item matches and has enough in slot
+	 */
+	public boolean hasEnough(ItemStack stack)
+	{
+		if (hasMatching(stack))
+		{
+			final ItemStack s = get();
+			if (s.stackSize >= stack.stackSize)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void consume(int count)
@@ -52,19 +150,14 @@ public class DeviceInventorySlot
 		inventory.decrStackSize(index, count);
 	}
 
-	public boolean hasEnough(ItemStack stack)
+	public void consume(ItemStack stack)
 	{
-		final ItemStack s = get();
-		if (s != null)
-		{
-			if (stack.isItemEqual(s))
-			{
-				if (s.stackSize >= stack.stackSize)
-				{
-					return true;
-				}
-			}
-		}
-		return false;
+		if (hasEnough(stack)) consume(stack.stackSize);
+	}
+
+	public void increaseStack(ItemStack stack)
+	{
+		final ItemStack result = ItemUtils.mergeStacks(get(), stack);
+		if (result != null) set(result);
 	}
 }

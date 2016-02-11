@@ -67,7 +67,6 @@ grc.cellar.fruitPresser.state.unpressed=Non-pressé
 grc.cellar.fruitPresser.state_prefix=État :
 
 # Waila Tooltips
-grc.cellar.waila.option.DisplayFluidContent=Réservoirs de fluide
-grc.cellar.waila.option.FruitPressExtras=Supplément de pressage
-grc.cellar.waila.option.BrewKettleExtras=Supplément de brassage
-grc.cellar.waila.option.FermentBarrelExtras=Supplément de fermentation
+grccellar.waila.option.FruitPressExtras=Supplément de pressage
+grccellar.waila.option.BrewKettleExtras=Supplément de brassage
+grccellar.waila.option.FermentBarrelExtras=Supplément de fermentation

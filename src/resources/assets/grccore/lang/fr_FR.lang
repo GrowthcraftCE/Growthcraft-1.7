@@ -45,3 +45,4 @@ grc.format.crop.growth_prefix=Croissance :
 grc.format.crop.progress_format=%d%%
 grc.format.crop.mature=Mature
 grc.format.paddy.hasFluid=A du fluide :
+grccore.waila.option.DisplayFluidContent=Réservoirs de fluide

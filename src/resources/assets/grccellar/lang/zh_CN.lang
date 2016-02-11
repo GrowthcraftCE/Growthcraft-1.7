@@ -96,8 +96,7 @@ grc.cellar.fruitPresser.state.unpressed=未压榨
 grc.cellar.fruitPresser.state_prefix=状态：
 
 # Waila Tooltips
-grc.cellar.waila.option.DisplayFluidContent=液体储存：
-grc.cellar.waila.option.FruitPressExtras=榨汁机附加信息：
-grc.cellar.waila.option.BrewKettleExtras=酿造锅附加信息：
-grc.cellar.waila.option.FermentBarrelExtras=发酵桶附加信息：
+grccellar.waila.option.FruitPressExtras=榨汁机附加信息：
+grccellar.waila.option.BrewKettleExtras=酿造锅附加信息：
+grccellar.waila.option.FermentBarrelExtras=发酵桶附加信息：
 

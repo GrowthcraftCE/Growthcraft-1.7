@@ -45,6 +45,7 @@ grc.format.crop.growth_prefix=生长进度：
 grc.format.crop.progress_format=%d%%
 grc.format.crop.mature=成熟
 grc.format.paddy.hasFluid=内有液体：
+grccore.waila.option.DisplayFluidContent=液体储存：
 
 # Effects
 grc.effect.null.desc=无效果

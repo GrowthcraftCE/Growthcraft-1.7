@@ -42,3 +42,4 @@ grc.format.crop.growth_prefix=Рост :
 grc.format.crop.progress_format=%d%%
 grc.format.crop.mature=Выросло
 grc.format.paddy.hasFluid=Есть жидкость :
+grccore.waila.option.DisplayFluidContent=Жидкостные резервуары

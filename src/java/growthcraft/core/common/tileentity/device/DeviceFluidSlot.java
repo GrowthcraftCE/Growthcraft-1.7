@@ -75,16 +75,6 @@ public class DeviceFluidSlot
 		tanks.setFluidStack(index, newStack);
 	}
 
-	public void consume(int amount, boolean doDrain)
-	{
-		tanks.drainFluidTank(index, amount, doDrain);
-	}
-
-	public void fill(FluidStack fluid, boolean doFill)
-	{
-		tanks.fillFluidTank(index, fluid, doFill);
-	}
-
 	/**
 	 * Does the slot have ANY fluid content?
 	 *
@@ -141,6 +131,22 @@ public class DeviceFluidSlot
 	}
 
 	/**
+	 * This is a variation of hasMatchingWithCapacity, this version will accept
+	 * the stack if the internal stack is null unlike the former.
+	 *
+	 * @param stack - fluid stack to test
+	 * @return true, the slot has capacity for the provided stack
+	 */
+	public boolean hasCapacityFor(FluidStack stack)
+	{
+		if (hasContent())
+		{
+			if (!hasMatching(stack)) return false;
+		}
+		return getAvailableCapacity() >= stack.amount;
+	}
+
+	/**
 	 * Does the slot contain the same fluid, and its amount is greater or equal to the given?
 	 *
 	 * @param stack - fluid stack to test
@@ -155,5 +161,23 @@ public class DeviceFluidSlot
 			return true;
 		}
 		return false;
+	}
+
+	public void consume(int amount, boolean doDrain)
+	{
+		tanks.drainFluidTank(index, amount, doDrain);
+	}
+
+	public void consume(FluidStack stack, boolean doDrain)
+	{
+		if (hasMatching(stack))
+		{
+			consume(stack.amount, doDrain);
+		}
+	}
+
+	public void fill(FluidStack fluid, boolean doFill)
+	{
+		tanks.fillFluidTank(index, fluid, doFill);
 	}
 }
