@@ -25,6 +25,8 @@ package growthcraft.api.core.util;
 
 public class ObjectUtils
 {
+	private ObjectUtils() {}
+
 	public static <T> T maybe(T ...objects)
 	{
 		for (T object : objects)
