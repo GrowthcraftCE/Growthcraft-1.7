@@ -23,6 +23,7 @@
  */
 package growthcraft.milk.init;
 
+import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.milk.common.block.BlockButterChurn;
@@ -33,10 +34,11 @@ import growthcraft.milk.common.block.BlockHangingCurds;
 import growthcraft.milk.common.block.BlockPancheon;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 
-import net.minecraft.init.Items;
-import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class GrcMilkBlocks extends GrcModuleBase
 {
@@ -67,6 +69,10 @@ public class GrcMilkBlocks extends GrcModuleBase
 		cheeseVat.register("grcmilk.CheeseVat");
 		hangingCurds.register("grcmilk.HangingCurds");
 		pancheon.register("grcmilk.Pancheon");
+
+		GameRegistry.addRecipe(new ShapelessOreRecipe(cheeseVat.asStack(),
+			GrowthCraftCellar.brewKettle.asStack()
+		));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(butterChurn.asStack(),
 			" S ",
