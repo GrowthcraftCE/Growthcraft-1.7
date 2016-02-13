@@ -91,6 +91,16 @@ public enum EnumCheeseType implements IItemStackFactory
 		return asStack(1);
 	}
 
+	public ItemStack asBlockItemStack(int size)
+	{
+		return GrowthCraftMilk.blocks.cheeseBlock.asStack(size, meta);
+	}
+
+	public ItemStack asBlockItemStack()
+	{
+		return asBlockItemStack(1);
+	}
+
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
 	{
 		tag.setInteger("cheese_id", meta);
