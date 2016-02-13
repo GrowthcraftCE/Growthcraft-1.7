@@ -28,18 +28,21 @@ import growthcraft.api.core.fluid.IFluidTagsRegistry;
 import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.milk.cheesevat.CheeseVatRegistry;
+import growthcraft.api.milk.cheesevat.ICheeseVatRegistry;
+import growthcraft.api.milk.churn.ChurnRegistry;
+import growthcraft.api.milk.churn.IChurnRegistry;
 import growthcraft.api.milk.pancheon.IPancheonRegistry;
 import growthcraft.api.milk.pancheon.PancheonRegistry;
-import growthcraft.api.milk.churn.IChurnRegistry;
-import growthcraft.api.milk.churn.ChurnRegistry;
 
 public class MilkRegistry implements ILoggable
 {
 	private static final MilkRegistry INSTANCE = new MilkRegistry();
 
-	private final IPancheonRegistry pancheonRegistry = new PancheonRegistry();
+	private final ICheeseVatRegistry cheeseVatRegistry = new CheeseVatRegistry();
 	private final IChurnRegistry churnRegistry = new ChurnRegistry();
 	private final IFluidTagsRegistry fluidTagsRegistry = new FluidTagsRegistry();
+	private final IPancheonRegistry pancheonRegistry = new PancheonRegistry();
 	private ILogger logger = NullLogger.INSTANCE;
 
 	@Override
@@ -57,6 +60,14 @@ public class MilkRegistry implements ILoggable
 	public static final MilkRegistry instance()
 	{
 		return INSTANCE;
+	}
+
+	/**
+	 * @return instance of the CheeseVatRegistry
+	 */
+	public ICheeseVatRegistry cheeseVat()
+	{
+		return cheeseVatRegistry;
 	}
 
 	/**
