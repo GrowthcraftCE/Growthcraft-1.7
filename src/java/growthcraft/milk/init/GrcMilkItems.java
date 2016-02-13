@@ -25,7 +25,9 @@ package growthcraft.milk.init;
 
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.milk.common.item.EnumButter;
 import growthcraft.milk.common.item.EnumCheeseType;
+import growthcraft.milk.common.item.EnumIceCream;
 import growthcraft.milk.common.item.ItemButter;
 import growthcraft.milk.common.item.ItemCheese;
 import growthcraft.milk.common.item.ItemCheeseCloth;
@@ -33,9 +35,13 @@ import growthcraft.milk.common.item.ItemIceCream;
 import growthcraft.milk.common.item.ItemStarterCulture;
 import growthcraft.milk.common.item.ItemStomach;
 import growthcraft.milk.common.item.ItemYogurt;
+import growthcraft.milk.GrowthCraftMilk;
 
-//import net.minecraft.init.Items;
+import net.minecraft.init.Items;
+import net.minecraft.init.Blocks;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class GrcMilkItems extends GrcModuleBase
 {
@@ -69,12 +75,51 @@ public class GrcMilkItems extends GrcModuleBase
 		yogurt.register("grcmilk.Yogurt");
 		stomach.register("grcmilk.Stomach");
 		starterCulture.register("grcmilk.StarterCulture");
+
 	}
 
 	@Override
 	public void init()
 	{
-		OreDictionary.registerOre("foodButter", butter.asStack());
+		// Salted Butter
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumButter.SALTED.asStack(), EnumButter.UNSALTED.asStack(), "foodSalt"));
+
+		// Yogurt
+		GameRegistry.addRecipe(new ShapelessOreRecipe(yogurt.asStack(),
+			Items.milk_bucket,
+			starterCulture.asStack(),
+			Items.bowl
+		));
+
+		// Ice Cream - Plain
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumIceCream.PLAIN.asStack(),
+			GrowthCraftMilk.fluids.cream.bucket.asStack(),
+			Items.milk_bucket,
+			Items.bowl,
+			Items.sugar
+		));
+
+		// Ice Cream - Chocolate
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumIceCream.CHOCOLATE.asStack(),
+			GrowthCraftMilk.fluids.cream.bucket.asStack(),
+			Items.milk_bucket,
+			Items.bowl,
+			Items.sugar,
+			Blocks.cocoa
+		));
+
+		// Cheese Cloth
+		GameRegistry.addRecipe(new ShapelessOreRecipe(cheeseCloth.asStack(),
+			Items.string, Items.string, Items.string,
+			Items.string, Items.string, Items.string,
+			Items.string, Items.string, Items.string
+		));
+
+		for (EnumButter e : EnumButter.VALUES)
+		{
+			OreDictionary.registerOre("foodButter", e.asStack());
+		}
+
 		for (EnumCheeseType e : EnumCheeseType.VALUES)
 		{
 			OreDictionary.registerOre("foodCheese", e.asStack());

@@ -33,6 +33,11 @@ import growthcraft.milk.common.block.BlockHangingCurds;
 import growthcraft.milk.common.block.BlockPancheon;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 
+import net.minecraft.init.Items;
+import net.minecraft.init.Blocks;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+
 public class GrcMilkBlocks extends GrcModuleBase
 {
 	public BlockDefinition butterChurn;
@@ -62,5 +67,28 @@ public class GrcMilkBlocks extends GrcModuleBase
 		cheeseVat.register("grcmilk.CheeseVat");
 		hangingCurds.register("grcmilk.HangingCurds");
 		pancheon.register("grcmilk.Pancheon");
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(butterChurn.asStack(),
+			" S ",
+			"P P",
+			"PPP",
+			'S', "stickWood",
+			'P', "plankWood"
+		));
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(cheesePress.asStack(),
+			"iii",
+			"iCi",
+			"ppp",
+			'i', "ingotIron",
+			'C', Blocks.chest,
+			'p', "slabWood"
+		));
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(pancheon.asStack(),
+			"c c",
+			"ccc",
+			'c', Items.clay_ball
+		));
 	}
 }
