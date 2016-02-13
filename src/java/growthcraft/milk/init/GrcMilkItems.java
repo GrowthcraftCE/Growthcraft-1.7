@@ -42,6 +42,7 @@ import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class GrcMilkItems extends GrcModuleBase
 {
@@ -109,10 +110,11 @@ public class GrcMilkItems extends GrcModuleBase
 		));
 
 		// Cheese Cloth
-		GameRegistry.addRecipe(new ShapelessOreRecipe(cheeseCloth.asStack(),
-			Items.string, Items.string, Items.string,
-			Items.string, Items.string, Items.string,
-			Items.string, Items.string, Items.string
+		GameRegistry.addRecipe(new ShapedOreRecipe(cheeseCloth.asStack(),
+			"sss",
+			"s s",
+			"sss",
+			's', Items.string
 		));
 
 		for (EnumButter e : EnumButter.VALUES)
