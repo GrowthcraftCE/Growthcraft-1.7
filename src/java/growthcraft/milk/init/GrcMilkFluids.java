@@ -171,12 +171,10 @@ public class GrcMilkFluids extends GrcModuleBase
 			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.items.stomach.asStack(), TickUtils.minutes(1), null);
 	}
 
-	@Override
-	public void init()
+	public List<Fluid> getMilkFluids()
 	{
 		final List<Fluid> milks = new ArrayList<Fluid>();
 		milks.add(milk.getFluid());
-
 		// Forestry Milk
 		{
 			final Fluid f =  FluidRegistry.getFluid("milk");
@@ -185,8 +183,13 @@ public class GrcMilkFluids extends GrcModuleBase
 				milks.add(f);
 			}
 		}
+		return milks;
+	}
 
-
+	@Override
+	public void init()
+	{
+		final List<Fluid> milks = getMilkFluids();
 		for (Fluid f : milks)
 		{
 			MilkRegistry.instance().fluidTags().addFluidTags(f, MilkFluidTags.MILK);
