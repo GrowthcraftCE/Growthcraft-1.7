@@ -29,7 +29,9 @@ import growthcraft.api.core.CoreRegistry;
 public class MilkFluidTags
 {
 	public static final FluidTag MILK = CoreRegistry.instance().fluidTags().createTag("milk");
+	public static final FluidTag MILK_CURDS = CoreRegistry.instance().fluidTags().createTag("milk_curds");
 	public static final FluidTag CREAM = CoreRegistry.instance().fluidTags().createTag("cream");
+	public static final FluidTag RENNET = CoreRegistry.instance().fluidTags().createTag("rennet");
 
 	private MilkFluidTags() {}
 }
