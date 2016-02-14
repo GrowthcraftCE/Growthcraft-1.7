@@ -96,6 +96,7 @@ public class GrcMilkHandleTextureStitch
 			GrowthCraftMilk.fluids.butterMilk.getFluid().setIcons(iconFluidButterMilkStill, iconFluidButterMilkFlow);
 			GrowthCraftMilk.fluids.cream.getFluid().setIcons(iconFluidCreamStill, iconFluidCreamFlow);
 			GrowthCraftMilk.fluids.milk.getFluid().setIcons(iconFluidMilkStill, iconFluidMilkFlow);
+			GrowthCraftMilk.fluids.curds.getFluid().setIcons(iconFluidMilkStill, iconFluidMilkFlow);
 			GrowthCraftMilk.fluids.rennet.getFluid().setIcons(iconFluidRennetStill, iconFluidRennetFlow);
 			GrowthCraftMilk.fluids.skimMilk.getFluid().setIcons(iconFluidSkimMilkStill, iconFluidSkimMilkFlow);
 			GrowthCraftMilk.fluids.whey.getFluid().setIcons(iconFluidWheyStill, iconFluidWheyFlow);

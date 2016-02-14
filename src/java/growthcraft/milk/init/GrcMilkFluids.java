@@ -58,6 +58,7 @@ public class GrcMilkFluids extends GrcModuleBase
 	public FluidFactory.FluidDetails butterMilk;
 	public FluidFactory.FluidDetails cream;
 	public FluidFactory.FluidDetails milk;
+	public FluidFactory.FluidDetails curds;
 	public FluidFactory.FluidDetails rennet;
 	public FluidFactory.FluidDetails saltWater;
 	public FluidFactory.FluidDetails skimMilk;
@@ -74,6 +75,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		this.butterMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.ButterMilk"));
 		this.cream = FluidFactory.instance().create(new GrcFluid("grcmilk.Cream"));
 		this.milk = FluidFactory.instance().create(new GrcFluid("grcmilk.Milk"));
+		this.curds = FluidFactory.instance().create(new GrcFluid("grcmilk.Curds"));
 		this.rennet = FluidFactory.instance().create(new GrcFluid("grcmilk.Rennet"));
 		this.saltWater = FluidFactory.instance().create(new GrcFluid("grcmilk.SaltWater"));
 		this.skimMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.SkimMilk"));
@@ -82,6 +84,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		butterMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFEE7);
 		cream.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFDD0);
 		milk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFF6);
+		curds.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFF6);
 		rennet.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x877243);
 		saltWater.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x2C41F6);
 		skimMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFA);
@@ -90,6 +93,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		butterMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/buttermilk");
 		cream.block.getBlock().setBlockTextureName("grcmilk:fluids/cream");
 		milk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
+		curds.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 		rennet.block.getBlock().setBlockTextureName("grcmilk:fluids/rennet");
 		skimMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/skimmilk");
 		whey.block.getBlock().setBlockTextureName("grcmilk:fluids/whey");
@@ -161,6 +165,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		butterMilk.registerObjects("grcmilk", "ButterMilk");
 		cream.registerObjects("grcmilk", "Cream");
 		milk.registerObjects("grcmilk", "Milk");
+		curds.registerObjects("grcmilk", "Curds");
 		rennet.registerObjects("grcmilk", "Rennet");
 		skimMilk.registerObjects("grcmilk", "SkimMilk");
 		whey.registerObjects("grcmilk", "Whey");
@@ -203,6 +208,9 @@ public class GrcMilkFluids extends GrcModuleBase
 		}
 
 		CoreRegistry.instance().fluidDictionary().addFluidTags(cream.getFluid(), MilkFluidTags.CREAM);
+		CoreRegistry.instance().fluidDictionary().addFluidTags(curds.getFluid(), MilkFluidTags.MILK_CURDS);
+		CoreRegistry.instance().fluidDictionary().addFluidTags(rennet.getFluid(), MilkFluidTags.RENNET);
+
 		MilkRegistry.instance().churn().addRecipe(
 			cream.fluid.asFluidStack(1000),
 			butterMilk.fluid.asFluidStack(500),
