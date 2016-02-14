@@ -25,10 +25,9 @@ package growthcraft.api.milk.util;
 
 import javax.annotation.Nullable;
 
-import growthcraft.api.core.fluid.FluidTag;
+import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.util.FluidTest;
 import growthcraft.api.milk.MilkFluidTags;
-import growthcraft.api.milk.MilkRegistry;
 
 import net.minecraftforge.fluids.FluidStack;
 
@@ -41,11 +40,7 @@ public class MilkTest
 
 	public static boolean hasTags(@Nullable FluidStack stack, FluidTag... tags)
 	{
-		if (FluidTest.isValid(stack))
-		{
-			return MilkRegistry.instance().fluidTags().hasFluidTags(stack.getFluid(), tags);
-		}
-		return false;
+		return FluidTest.hasTags(stack, tags);
 	}
 
 	public static boolean isMilk(@Nullable FluidStack stack)

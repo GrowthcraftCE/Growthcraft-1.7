@@ -40,6 +40,7 @@ import growthcraft.milk.creativetab.GrcMilkCreativeTabs;
 import growthcraft.milk.init.GrcMilkBlocks;
 import growthcraft.milk.init.GrcMilkFluids;
 import growthcraft.milk.init.GrcMilkItems;
+//import growthcraft.milk.common.item.EnumCheeseType;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -50,6 +51,8 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
+//import net.minecraftforge.fluids.Fluid;
+//import net.minecraftforge.fluids.FluidStack;
 
 @Mod(
 	modid = GrowthCraftMilk.MOD_ID,
@@ -132,6 +135,49 @@ public class GrowthCraftMilk
 		CommonProxy.instance.initRenders();
 
 		modules.init();
+
+		/*for (Fluid f : fluids.getMilkFluids())
+		{
+			CheeseVatRecipeBuilder.buildRecipe()
+				.output(EnumCheeseType.CHEDDAR.asBlockItemStack())
+				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
+				.items(new OreItemStack("foodSalt", 1), new OreItemStack("dyeOrange", 1));
+
+			CheeseVatRecipeBuilder.buildRecipe()
+				.output(EnumCheeseType.GORGONZOLA.asBlockItemStack())
+				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
+				.items(new OreItemStack("foodSalt", 1), new OreItemStack("foodFruit", 1));
+
+			CheeseVatRecipeBuilder.buildRecipe()
+				.output(EnumCheeseType.EMMENTALER.asBlockItemStack())
+				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
+				.items(new OreItemStack("foodSalt", 1), new OreItemStack("foodWheat", 1));
+
+			CheeseVatRecipeBuilder.buildRecipe()
+				.output(EnumCheeseType.APPENZELLER.asBlockItemStack())
+				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000), new TaggedFluidStack("wine", 1000))
+				.items(new OreItemStack("foodSalt", 1), new OreItemStack("foodFruit", 1));
+
+			CheeseVatRecipeBuilder.buildRecipe()
+				.output(EnumCheeseType.APPENZELLER.asBlockItemStack())
+				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000), new TaggedFluidStack("cider", 1000))
+				.items(new OreItemStack("foodSalt", 1), new OreItemStack("foodFruit", 1));
+
+			CheeseVatRecipeBuilder.buildRecipe()
+				.output(EnumCheeseType.ASIAGO.asBlockItemStack())
+				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
+				.items(new OreItemStack("foodSalt", 1), new OreItemStack("foodSalt", 1), new OreItemStack("dyeYellow", 1));
+
+			CheeseVatRecipeBuilder.buildRecipe()
+				.output(EnumCheeseType.PARMESAN.asBlockItemStack())
+				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
+				.items(new OreItemStack("foodSalt", 1), new OreItemStack("dyeWhite", 1));
+
+			CheeseVatRecipeBuilder.buildRecipe()
+				.output(EnumCheeseType.MONTEREY.asBlockItemStack())
+				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
+				.items(new OreItemStack("foodSalt", 1), new OreItemStack("dyeRed", 1));
+		}*/
 	}
 
 	@EventHandler

@@ -28,14 +28,12 @@ import java.util.List;
 
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.booze.IBoozeRegistry;
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.fermenting.IFermentingRegistry;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.GrcFluid;
 import growthcraft.api.core.util.TickUtils;
-import growthcraft.api.milk.MilkRegistry;
 import growthcraft.api.milk.MilkFluidTags;
+import growthcraft.api.milk.MilkRegistry;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
@@ -109,8 +107,6 @@ public class GrcMilkFluids extends GrcModuleBase
 
 	private void registerFermentations()
 	{
-		final IBoozeRegistry br = CellarRegistry.instance().booze();
-		final IFermentingRegistry fr = CellarRegistry.instance().fermenting();
 		final IEffect milkEffect = EffectBoozeMilk.create(GrowthCraftCellar.potionTipsy);
 		final IEffect evilMilkEffect = new EffectEvilBoozeMilk();
 
@@ -120,35 +116,41 @@ public class GrcMilkFluids extends GrcModuleBase
 			fs[i] = new FluidStack(boozeMilk[i], 1);
 		}
 
-		br.addTags(boozeMilk[0], BoozeTag.FERMENTED);
-		br.getEffect(boozeMilk[0])
-			.setTipsy(0.10f, 900)
-			.addEffect(milkEffect);
+		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[0])
+			.tags(BoozeTag.FERMENTED)
+			.getEffect()
+				.setTipsy(0.10f, 900)
+				.addEffect(milkEffect);
 
-		br.addTags(boozeMilk[1], BoozeTag.FERMENTED, BoozeTag.POTENT);
-		br.getEffect(boozeMilk[1])
-			.setTipsy(0.10f, 900)
-			.addEffect(milkEffect);
+		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[1])
+			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT)
+			.getEffect()
+				.setTipsy(0.10f, 900)
+				.addEffect(milkEffect);
 
-		br.addTags(boozeMilk[2], BoozeTag.FERMENTED, BoozeTag.EXTENDED);
-		br.getEffect(boozeMilk[2])
-			.setTipsy(0.10f, 900)
-			.addEffect(milkEffect);
+		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[2])
+			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED)
+			.getEffect()
+				.setTipsy(0.10f, 900)
+				.addEffect(milkEffect);
 
-		br.addTags(boozeMilk[3], BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED);
-		br.getEffect(boozeMilk[3])
-			.setTipsy(0.10f, 900)
-			.addEffect(milkEffect);
+		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[3])
+			.tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
+			.getEffect()
+				.setTipsy(0.10f, 900)
+				.addEffect(milkEffect);
 
-		br.addTags(boozeMilk[4], BoozeTag.FERMENTED, BoozeTag.INTOXICATED);
-		br.getEffect(boozeMilk[4])
-			.setTipsy(0.50f, 900)
-			.addEffect(milkEffect);
+		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[4])
+			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
+			.getEffect()
+				.setTipsy(0.50f, 900)
+				.addEffect(milkEffect);
 
-		br.addTags(boozeMilk[5], BoozeTag.FERMENTED, BoozeTag.POISONED);
-		br.getEffect(boozeMilk[5])
-			.setTipsy(0.10f, 900)
-			.addEffect(evilMilkEffect);
+		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[5])
+			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
+			.getEffect()
+				.setTipsy(0.10f, 900)
+				.addEffect(evilMilkEffect);
 	}
 
 	@Override
@@ -192,7 +194,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		final List<Fluid> milks = getMilkFluids();
 		for (Fluid f : milks)
 		{
-			MilkRegistry.instance().fluidTags().addFluidTags(f, MilkFluidTags.MILK);
+			CoreRegistry.instance().fluidDictionary().addFluidTags(f, MilkFluidTags.MILK);
 
 			MilkRegistry.instance().pancheon().addRecipe(
 				new FluidStack(f, 1000),
@@ -200,7 +202,7 @@ public class GrcMilkFluids extends GrcModuleBase
 				TickUtils.minutes(1));
 		}
 
-		MilkRegistry.instance().fluidTags().addFluidTags(cream.getFluid(), MilkFluidTags.CREAM);
+		CoreRegistry.instance().fluidDictionary().addFluidTags(cream.getFluid(), MilkFluidTags.CREAM);
 		MilkRegistry.instance().churn().addRecipe(
 			cream.fluid.asFluidStack(1000),
 			butterMilk.fluid.asFluidStack(500),

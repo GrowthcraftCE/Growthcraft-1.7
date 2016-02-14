@@ -23,12 +23,13 @@
  */
 package growthcraft.api.milk;
 
-import growthcraft.api.core.fluid.FluidTag;
+import growthcraft.api.core.fluids.FluidTag;
+import growthcraft.api.core.CoreRegistry;
 
 public class MilkFluidTags
 {
-	public static final FluidTag MILK = new FluidTag("milk");
-	public static final FluidTag CREAM = new FluidTag("cream");
+	public static final FluidTag MILK = CoreRegistry.instance().fluidTags().createTag("milk");
+	public static final FluidTag CREAM = CoreRegistry.instance().fluidTags().createTag("cream");
 
 	private MilkFluidTags() {}
 }

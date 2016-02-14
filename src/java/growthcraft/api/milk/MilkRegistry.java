@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,8 +23,8 @@
  */
 package growthcraft.api.milk;
 
-import growthcraft.api.core.fluid.FluidTagsRegistry;
-import growthcraft.api.core.fluid.IFluidTagsRegistry;
+import javax.annotation.Nonnull;
+
 import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
@@ -41,17 +41,15 @@ public class MilkRegistry implements ILoggable
 
 	private final ICheeseVatRegistry cheeseVatRegistry = new CheeseVatRegistry();
 	private final IChurnRegistry churnRegistry = new ChurnRegistry();
-	private final IFluidTagsRegistry fluidTagsRegistry = new FluidTagsRegistry();
 	private final IPancheonRegistry pancheonRegistry = new PancheonRegistry();
 	private ILogger logger = NullLogger.INSTANCE;
 
 	@Override
-	public void setLogger(ILogger l)
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
 		pancheonRegistry.setLogger(logger);
 		churnRegistry.setLogger(logger);
-		fluidTagsRegistry.setLogger(logger);
 	}
 
 	/**
@@ -84,13 +82,5 @@ public class MilkRegistry implements ILoggable
 	public IPancheonRegistry pancheon()
 	{
 		return pancheonRegistry;
-	}
-
-	/**
-	 * @return instance of the FluidTagsRegistry
-	 */
-	public IFluidTagsRegistry fluidTags()
-	{
-		return fluidTagsRegistry;
 	}
 }
