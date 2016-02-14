@@ -23,43 +23,51 @@
  */
 package growthcraft.api.milk.cheesevat;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.util.FluidTest;
+import growthcraft.api.core.util.ItemTest;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class CheeseVatRegistry implements ICheeseVatRegistry
+public class CheeseVatRecipe implements ICheeseVatRecipe
 {
-	private ILogger logger = NullLogger.INSTANCE;
-	private List<ICheeseVatRecipe> recipes = new ArrayList<ICheeseVatRecipe>();
+	private List<ItemStack> outputItems;
+	private List<FluidStack> inputFluids;
+	private List<ItemStack> inputItems;
 
-	@Override
-	public void setLogger(@Nonnull ILogger l)
+	public CheeseVatRecipe(List<ItemStack> oi, List<FluidStack> iflu, List<ItemStack> ii)
 	{
-		this.logger = l;
+		this.outputItems = oi;
+		this.inputItems = ii;
+		this.inputFluids = iflu;
 	}
 
 	@Override
-	public void addRecipe(@Nonnull List<ItemStack> outputItems, @Nonnull List<FluidStack> inputFluids, @Nonnull List<ItemStack> inputItems)
+	public List<ItemStack> getOutputItemStacks()
 	{
-		recipes.add(new CheeseVatRecipe(outputItems, inputFluids, inputItems));
+		return outputItems;
 	}
 
 	@Override
-	public ICheeseVatRecipe findRecipe(@Nonnull List<FluidStack> fluids, @Nonnull List<ItemStack> stacks)
+	public List<FluidStack> getInputFluidStacks()
 	{
-		for (ICheeseVatRecipe recipe : recipes)
-		{
-			if (recipe.isMatchingRecipe(fluids, stacks))
-			{
-				return recipe;
-			}
-		}
-		return null;
+		return inputFluids;
+	}
+
+	@Override
+	public List<ItemStack> getInputItemStacks()
+	{
+		return inputItems;
+	}
+
+	@Override
+	public boolean isMatchingRecipe(@Nonnull List<FluidStack> fluids, @Nonnull List<ItemStack> items)
+	{
+		if (!FluidTest.isValidAndExpected(inputFluids, fluids)) return false;
+		if (!ItemTest.isValidAndExpected(inputItems, items)) return false;
+		return true;
 	}
 }

@@ -23,43 +23,17 @@
  */
 package growthcraft.api.milk.cheesevat;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
-
-import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.NullLogger;
+//import javax.annotation.Nullable;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class CheeseVatRegistry implements ICheeseVatRegistry
+public interface ICheeseVatRecipe
 {
-	private ILogger logger = NullLogger.INSTANCE;
-	private List<ICheeseVatRecipe> recipes = new ArrayList<ICheeseVatRecipe>();
-
-	@Override
-	public void setLogger(@Nonnull ILogger l)
-	{
-		this.logger = l;
-	}
-
-	@Override
-	public void addRecipe(@Nonnull List<ItemStack> outputItems, @Nonnull List<FluidStack> inputFluids, @Nonnull List<ItemStack> inputItems)
-	{
-		recipes.add(new CheeseVatRecipe(outputItems, inputFluids, inputItems));
-	}
-
-	@Override
-	public ICheeseVatRecipe findRecipe(@Nonnull List<FluidStack> fluids, @Nonnull List<ItemStack> stacks)
-	{
-		for (ICheeseVatRecipe recipe : recipes)
-		{
-			if (recipe.isMatchingRecipe(fluids, stacks))
-			{
-				return recipe;
-			}
-		}
-		return null;
-	}
+	List<ItemStack> getOutputItemStacks();
+	List<FluidStack> getInputFluidStacks();
+	List<ItemStack> getInputItemStacks();
+	boolean isMatchingRecipe(@Nonnull List<FluidStack> fluids, @Nonnull List<ItemStack> items);
 }

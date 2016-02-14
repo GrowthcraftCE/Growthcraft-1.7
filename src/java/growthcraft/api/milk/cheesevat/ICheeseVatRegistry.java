@@ -23,15 +23,17 @@
  */
 package growthcraft.api.milk.cheesevat;
 
-//import javax.annotation.Nonnull;
+import java.util.List;
+import javax.annotation.Nonnull;
 //import javax.annotation.Nullable;
 
 import growthcraft.api.core.log.ILoggable;
 
-//import net.minecraft.item.ItemStack;
-//import net.minecraftforge.fluids.FluidStack;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 public interface ICheeseVatRegistry extends ILoggable
 {
-
+	public void addRecipe(@Nonnull List<ItemStack> outputItems, @Nonnull List<FluidStack> inputFluids, @Nonnull List<ItemStack> inputItems);
+	public ICheeseVatRecipe findRecipe(@Nonnull List<FluidStack> inputFluids, @Nonnull List<ItemStack> inputItems);
 }
