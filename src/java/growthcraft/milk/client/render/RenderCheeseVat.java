@@ -37,6 +37,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
@@ -78,13 +79,15 @@ public class RenderCheeseVat implements ISimpleBlockRenderingHandler
 	private void renderFluidLayer(Block block, RenderBlocks renderer, Fluid fluid, double y0, double y1, int x, int y, int z)
 	{
 		if (fluid == null) return;
+		final IIcon icon = fluid.getIcon();
+		if (icon == null) return;
 		final float[] colorAry = new float[3];
 		final int color = fluid.getColor();
 		ColorUtils.rgb24FloatArray(colorAry, color);
 		Tessellator.instance.setColorOpaque_F(colorAry[0], colorAry[1], colorAry[2]);
 
 		renderer.setRenderBounds(fluidBBox.x0(), y0, fluidBBox.z0(), fluidBBox.x1(), y1, fluidBBox.z1());
-		renderer.renderFaceYPos(block, (double)x, (double)y, (double)z, fluid.getIcon());
+		renderer.renderFaceYPos(block, (double)x, (double)y, (double)z, icon);
 	}
 
 	@Override
