@@ -110,6 +110,8 @@ public class GrowthCraftApples
 		// For Pam's HarvestCraft
 		// Uses the same OreDict. names as HarvestCraft
 		OreDictionary.registerOre("listAllseed", appleSeeds.getItem());
+		// Common
+		OreDictionary.registerOre("foodFruit", Items.apple);
 
 		//====================
 		// CRAFTING

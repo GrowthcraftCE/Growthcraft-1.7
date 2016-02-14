@@ -135,6 +135,8 @@ public class GrowthCraftGrapes
 		OreDictionary.registerOre("seedGrape", grapeSeeds.getItem());
 		OreDictionary.registerOre("listAllseed", grapeSeeds.getItem());
 		OreDictionary.registerOre("listAllfruit", grapes.getItem());
+		//
+		OreDictionary.registerOre("foodFruit", grapes.getItem());
 
 		//====================
 		// CRAFTING
