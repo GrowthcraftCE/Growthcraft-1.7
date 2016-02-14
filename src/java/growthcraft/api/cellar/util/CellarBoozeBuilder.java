@@ -27,8 +27,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.booze.BoozeEffect;
-import growthcraft.api.cellar.booze.BoozeTag;
+import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.cellar.common.Residue;
 
 import net.minecraft.item.ItemStack;
@@ -54,9 +55,9 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder tags(BoozeTag... tags)
+	public ICellarBoozeBuilder tags(FluidTag... tags)
 	{
-		CellarRegistry.instance().booze().addTags(fluid, tags);
+		CoreRegistry.instance().fluidDictionary().addFluidTags(fluid, tags);
 		return this;
 	}
 

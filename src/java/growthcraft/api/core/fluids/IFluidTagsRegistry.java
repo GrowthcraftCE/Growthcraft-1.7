@@ -21,20 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.fluid;
+package growthcraft.api.core.fluids;
 
+import java.util.Collection;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.core.log.ILoggable;
 
-import net.minecraftforge.fluids.Fluid;
-
-/**
- * Growthcraft uses so many fluids, the only thing we can do is tag them to
- * identify them -.-;
- */
 public interface IFluidTagsRegistry extends ILoggable
 {
-	void addFluidTags(@Nonnull Fluid fluid, @Nonnull FluidTag... tags);
-	boolean hasFluidTags(@Nonnull Fluid fluid, @Nonnull FluidTag... tags);
+	void registerTag(@Nonnull FluidTag tag);
+	FluidTag createTag(@Nonnull String name);
+	Collection<String> getNames();
+	Collection<FluidTag> getTags();
+	FluidTag findTag(String name);
 }

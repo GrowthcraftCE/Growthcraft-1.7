@@ -61,7 +61,7 @@ public class BrewingRegistry implements IBrewingRegistry
 	}
 
 	@Override
-	public void setLogger(ILogger l)
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
 	}

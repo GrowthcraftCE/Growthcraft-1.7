@@ -21,52 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.fluid;
+package growthcraft.api.core.fluids;
 
+import java.util.Collection;
+import java.util.List;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
-
-import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.log.ILoggable;
 
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
-public class FluidTagsRegistry implements IFluidTagsRegistry
+/**
+ * Growthcraft uses so many fluids, the only thing we can do is tag them to
+ * identify them -.-;
+ */
+public interface IFluidDictionary extends ILoggable
 {
-	private Map<Fluid, Set<FluidTag>> tagMap = new HashMap<Fluid, Set<FluidTag>>();
-	private ILogger logger = NullLogger.INSTANCE;
-
-	@Override
-	public void setLogger(ILogger l)
-	{
-		this.logger = l;
-	}
-
-	@Override
-	public void addFluidTags(@Nonnull Fluid fluid, @Nonnull FluidTag... tags)
-	{
-		if (!tagMap.containsKey(fluid))
-		{
-			tagMap.put(fluid, new HashSet<FluidTag>());
-		}
-
-		final Set<FluidTag> tagSet = tagMap.get(fluid);
-		for (FluidTag tag : tags) tagSet.add(tag);
-	}
-
-	@Override
-	public boolean hasFluidTags(@Nonnull Fluid fluid, @Nonnull FluidTag... tags)
-	{
-		final Set<FluidTag> fluidTags = tagMap.get(fluid);
-		if (fluidTags == null) return false;
-		for (FluidTag tag : tags)
-		{
-			if (!fluidTags.contains(tag)) return false;
-		}
-		return true;
-	}
+	void addFluidTags(@Nonnull Fluid fluid, @Nonnull FluidTag... tags);
+	Collection<FluidTag> getFluidTags(@Nullable Fluid fluid);
+	Collection<FluidTag> getFluidTags(@Nullable FluidStack fluid);
+	boolean hasFluidTags(@Nonnull Fluid fluid, @Nonnull FluidTag... tags);
+	Collection<Fluid> getFluidsByTags(@Nonnull FluidTag... tags);
+	Collection<Fluid> getFluidsByTags(@Nonnull List<FluidTag> tags);
 }

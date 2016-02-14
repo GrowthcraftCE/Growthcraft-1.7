@@ -2,7 +2,7 @@ package growthcraft.cellar.common.tileentity;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.FermentationRecipe;
-import growthcraft.api.cellar.util.FluidUtils;
+import growthcraft.api.core.util.FluidUtils;
 import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;

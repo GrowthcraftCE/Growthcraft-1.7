@@ -1,4 +1,7 @@
-package growthcraft.api.cellar.util;
+package growthcraft.api.core.util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -7,6 +10,16 @@ import net.minecraftforge.fluids.FluidStack;
 public class FluidUtils
 {
 	private FluidUtils() {}
+
+	public static List<Fluid> getFluidsByNames(List<String> names)
+	{
+		final List<Fluid> fluids = new ArrayList<Fluid>();
+		for (String name : names)
+		{
+			fluids.add(FluidRegistry.getFluid(name));
+		}
+		return fluids;
+	}
 
 	public static boolean doesFluidExist(String name)
 	{

@@ -3,6 +3,7 @@ package growthcraft.core;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.api.core.fluids.user.UserFluidDictionaryConfig;
 import growthcraft.core.common.AchievementPageGrowthcraft;
 import growthcraft.core.common.block.BlockFenceRope;
 import growthcraft.core.common.block.BlockRope;
@@ -69,6 +70,7 @@ public class GrowthCraftCore
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcCoreConfig config = new GrcCoreConfig();
 	private ModuleContainer modules = new ModuleContainer();
+	private UserFluidDictionaryConfig userFluidDictionary = new UserFluidDictionaryConfig();
 
 	public static GrcCoreConfig getConfig()
 	{
@@ -83,6 +85,9 @@ public class GrowthCraftCore
 		if (config.debugEnabled) logger.info("Pre-Initializing %s", MOD_ID);
 
 		modules.add(items);
+
+		userFluidDictionary.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/fluid_dictionary.json");
+		modules.add(userFluidDictionary);
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.core.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.core.integration.Waila());

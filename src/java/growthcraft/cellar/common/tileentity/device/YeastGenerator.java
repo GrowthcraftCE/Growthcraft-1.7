@@ -30,6 +30,7 @@ import java.util.List;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.yeast.IYeastRegistry;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
@@ -113,7 +114,7 @@ public class YeastGenerator extends DeviceProgressive
 		{
 			if (!canReplicateYeast(yeastItem)) return false;
 		}
-		return CellarRegistry.instance().booze().hasTags(fluidSlot.getFluid(), BoozeTag.YOUNG);
+		return CoreRegistry.instance().fluidDictionary().hasFluidTags(fluidSlot.getFluid(), BoozeTag.YOUNG);
 	}
 
 	public void consumeFluid()

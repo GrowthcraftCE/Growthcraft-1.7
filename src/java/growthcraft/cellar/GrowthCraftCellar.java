@@ -181,9 +181,9 @@ public class GrowthCraftCellar
 
 	private void registerBoozeModifierFunctions()
 	{
-		BoozeTag.POTENT.setModifierFunction(new ModifierFunctionPotent());
-		BoozeTag.EXTENDED.setModifierFunction(new ModifierFunctionExtended());
-		BoozeTag.HYPER_EXTENDED.setModifierFunction(new ModifierFunctionHyperExtended());
+		CellarRegistry.instance().booze().setModifierFunction(BoozeTag.POTENT, new ModifierFunctionPotent());
+		CellarRegistry.instance().booze().setModifierFunction(BoozeTag.EXTENDED, new ModifierFunctionExtended());
+		CellarRegistry.instance().booze().setModifierFunction(BoozeTag.HYPER_EXTENDED, new ModifierFunctionHyperExtended());
 	}
 
 	private void register()

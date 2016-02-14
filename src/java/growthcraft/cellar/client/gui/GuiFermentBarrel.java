@@ -6,7 +6,8 @@ import java.util.Collection;
 import org.lwjgl.opengl.GL11;
 
 import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.client.gui.widget.GuiButtonDiscard;
 import growthcraft.cellar.client.resource.GrcCellarResources;
@@ -116,7 +117,7 @@ public class GuiFermentBarrel extends GuiCellar
 			itemRender.zLevel = 100.0F;
 
 			// render active modifiers
-			final Collection<BoozeTag> tags = CellarRegistry.instance().booze().getTags(fluid);
+			final Collection<FluidTag> tags = CoreRegistry.instance().fluidDictionary().getFluidTags(fluid);
 			if (tags != null)
 			{
 				if (tags.contains(BoozeTag.FERMENTED))

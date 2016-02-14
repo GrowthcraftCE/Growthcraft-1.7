@@ -98,7 +98,7 @@ public class GrowthCraftHops
 		GameRegistry.registerItem(hops.getItem(), "grc.hops");
 		GameRegistry.registerItem(hopSeeds.getItem(), "grc.hopSeeds");
 
-		CoreRegistry.instance().addVineDrop(hops.asStack(2), config.hopsVineDropRarity);
+		CoreRegistry.instance().vineDrops().addEntry(hops.asStack(2), config.hopsVineDropRarity);
 
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(hops.asStack(), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(hops.asStack(), 1, 2, 10));

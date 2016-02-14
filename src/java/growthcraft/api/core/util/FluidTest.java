@@ -26,12 +26,24 @@ package growthcraft.api.core.util;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.fluids.FluidTag;
+
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class FluidTest
 {
 	private FluidTest() {}
+
+	public static boolean hasTags(@Nullable FluidStack stack, FluidTag... tags)
+	{
+		if (FluidTest.isValid(stack))
+		{
+			return CoreRegistry.instance().fluidDictionary().hasFluidTags(stack.getFluid(), tags);
+		}
+		return false;
+	}
 
 	public static boolean areStacksEqual(@Nullable FluidStack expected, @Nullable FluidStack other)
 	{

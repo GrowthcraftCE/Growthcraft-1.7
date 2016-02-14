@@ -31,6 +31,7 @@ import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.description.Describer;
 import growthcraft.api.core.effect.IPotionEffectFactory;
 
@@ -73,15 +74,15 @@ public class BoozePotionEffectFactory implements IPotionEffectFactory
 
 	public PotionEffect createPotionEffect(World world, Entity entity, Random random, Object data)
 	{
-		final Collection<BoozeTag> tags = CellarRegistry.instance().booze().getTags(booze);
+		final Collection<FluidTag> tags = CoreRegistry.instance().fluidDictionary().getFluidTags(booze);
 
 		if (tags != null)
 		{
 			int tm = getTime();
 			int lv = getLevel();
-			for (BoozeTag tag : tags)
+			for (FluidTag tag : tags)
 			{
-				final IModifierFunction func = tag.getModifierFunction();
+				final IModifierFunction func = CellarRegistry.instance().booze().getModifierFunction(tag);
 				if (func != null)
 				{
 					tm = func.applyTime(tm);

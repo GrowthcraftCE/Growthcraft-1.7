@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.log;
+package growthcraft.api.core.fluids.user;
 
-import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
-public interface ILoggable
+import growthcraft.api.core.schema.ICommentable;
+
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+
+public class UserFluidDictionaryEntry implements ICommentable
 {
-	void setLogger(@Nonnull ILogger l);
+	public String comment = "";
+	public String fluid_name;
+	public List<String> tags;
+
+	public UserFluidDictionaryEntry(String name, List<String> t)
+	{
+		this.fluid_name = name;
+		this.tags = t;
+	}
+
+	public UserFluidDictionaryEntry()
+	{
+		this("", new ArrayList<String>());
+	}
+
+	public Fluid getFluid()
+	{
+		return FluidRegistry.getFluid(fluid_name);
+	}
+
+	@Override
+	public String getComment()
+	{
+		return comment;
+	}
+
+	@Override
+	public void setComment(String com)
+	{
+		this.comment = com;
+	}
 }

@@ -51,7 +51,7 @@ public class HeatSourceRegistry implements IHeatSourceRegistry
 	private HeatSourceTree heatSources = new HeatSourceTree();
 
 	@Override
-	public void setLogger(ILogger l)
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
 	}

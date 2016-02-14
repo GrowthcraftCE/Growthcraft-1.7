@@ -11,6 +11,7 @@ public class GrcModuleBase implements IModule, ILoggable
 {
 	protected ILogger logger = NullLogger.INSTANCE;
 
+	@Override
 	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;

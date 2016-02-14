@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.annotation.Nonnull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,7 +54,8 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 	private File targetConfigFile;
 	private File targetDefaultConfigFile;
 
-	public void setLogger(ILogger l)
+	@Override
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
 	}

@@ -19,7 +19,7 @@ public class PressingRegistry implements IPressingRegistry
 	private Map<ItemKey, PressingRecipe> pressingList = new HashMap<ItemKey, PressingRecipe>();
 
 	@Override
-	public void setLogger(ILogger l)
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
 	}

@@ -8,7 +8,8 @@ import javax.annotation.Nullable;
 
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.cellar.util.FluidUtils;
+import growthcraft.api.core.fluids.FluidTag;
+import growthcraft.api.core.util.FluidUtils;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -19,10 +20,22 @@ public class BoozeRegistry implements IBoozeRegistry
 	private ILogger logger = NullLogger.INSTANCE;
 	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
 	private Map<Fluid, Fluid> altBoozeMap = new HashMap<Fluid, Fluid>();
+	private Map<FluidTag, IModifierFunction> tagModifierFunctions = new HashMap<FluidTag, IModifierFunction>();
 
-	public void setLogger(ILogger l)
+	@Override
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
+	}
+
+	public IModifierFunction getModifierFunction(@Nullable FluidTag tag)
+	{
+		return tagModifierFunctions.get(tag);
+	}
+
+	public void setModifierFunction(@Nonnull FluidTag tag, IModifierFunction func)
+	{
+		tagModifierFunctions.put(tag, func);
 	}
 
 	public Collection<BoozeEntry> getBoozeEntries()
@@ -194,45 +207,5 @@ public class BoozeRegistry implements IBoozeRegistry
 	public FluidStack maybeAlternateBoozeStack(FluidStack stack)
 	{
 		return new FluidStack(maybeAlternateBooze(stack.getFluid()), stack.amount);
-	}
-
-	@Override
-	public void addTags(@Nonnull Fluid fluid, BoozeTag... tags)
-	{
-		fetchBoozeEntry(fluid).addTags(tags);
-	}
-
-	@Override
-	@Nullable
-	public Collection<BoozeTag> getTags(Fluid fluid)
-	{
-		final BoozeEntry entry = getBoozeEntry(fluid);
-		return entry != null ? entry.getTags() : null;
-	}
-
-	@Override
-	@Nullable
-	public Collection<BoozeTag> getTags(FluidStack stack)
-	{
-		if (stack == null) return null;
-		return getTags(stack.getFluid());
-	}
-
-	@Override
-	public boolean hasTags(Fluid fluid, BoozeTag... tags)
-	{
-		final BoozeEntry entry = getBoozeEntry(fluid);
-		if (entry != null)
-		{
-			return entry.hasTags(tags);
-		}
-		return false;
-	}
-
-	@Override
-	public boolean hasTags(FluidStack stack, BoozeTag... tags)
-	{
-		if (stack == null) return false;
-		return hasTags(stack.getFluid(), tags);
 	}
 }

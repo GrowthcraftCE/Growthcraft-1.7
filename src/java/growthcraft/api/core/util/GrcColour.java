@@ -20,11 +20,16 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/* The above is the original license, and to continue with the open source
- * spirit, the license will remain as such
+/**
+ * NOTICE:
+ *   This will file was copied from Applied Energistics 2 and modified for use
+ *   in Growthcraft CE.
+ *
+ *   The above is the original license, and to continue with the open source
+ *   spirit, the license will remain as such
  */
 
-package growthcraft.api.core;
+package growthcraft.api.core.util;
 
 import java.util.Arrays;
 import java.util.List;

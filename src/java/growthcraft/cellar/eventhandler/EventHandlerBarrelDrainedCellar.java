@@ -25,6 +25,7 @@ package growthcraft.cellar.eventhandler;
 
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.cellar.event.BarrelDrainedEvent;
 import growthcraft.cellar.stats.CellarAchievement;
 
@@ -39,7 +40,7 @@ public class EventHandlerBarrelDrainedCellar
 		{
 			if (CellarRegistry.instance().booze().isFluidBooze(event.fluid))
 			{
-				if (CellarRegistry.instance().booze().hasTags(event.fluid.getFluid(), BoozeTag.FERMENTED))
+				if (CoreRegistry.instance().fluidDictionary().hasFluidTags(event.fluid.getFluid(), BoozeTag.FERMENTED))
 				{
 					CellarAchievement.FERMENT_BOOZE.unlock(event.player);
 				}

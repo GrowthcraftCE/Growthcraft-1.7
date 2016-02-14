@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.log;
+package growthcraft.api.core.common;
 
-import javax.annotation.Nonnull;
-
-public interface ILoggable
+/**
+ * This exception thrown when something was registered more than once
+ */
+public class DuplicateRegistrationError extends RuntimeException
 {
-	void setLogger(@Nonnull ILogger l);
+	public static final long serialVersionUID = 1L;
+
+	public DuplicateRegistrationError(String msg)
+	{
+		super(msg);
+	}
+
+	public DuplicateRegistrationError() {}
+
+	/**
+	 * Helper method for creating frozen errors for a specified object
+	 *
+	 * @param obj - object to generate frozen error for
+	 * @return new frozen error
+	 */
+	public static DuplicateRegistrationError newFor(Object obj)
+	{
+		return new DuplicateRegistrationError("Cannot re-register object! " + obj);
+	}
 }

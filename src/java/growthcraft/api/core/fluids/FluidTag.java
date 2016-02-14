@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.log;
+package growthcraft.api.core.fluids;
 
 import javax.annotation.Nonnull;
 
-public interface ILoggable
+import growthcraft.api.core.i18n.GrcI18n;
+
+public class FluidTag
 {
-	void setLogger(@Nonnull ILogger l);
+	private final String name;
+
+	public FluidTag(@Nonnull String n)
+	{
+		this.name = n;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public String getUnlocalizedName()
+	{
+		return "grc.fluids.tag." + getName();
+	}
+
+	public String getLocalizedName()
+	{
+		return GrcI18n.translate(getUnlocalizedName());
+	}
+
+	public String toString()
+	{
+		return getName();
+	}
 }

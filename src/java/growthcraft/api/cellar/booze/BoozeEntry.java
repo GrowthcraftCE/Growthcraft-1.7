@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,9 +24,10 @@
 package growthcraft.api.cellar.booze;
 
 import java.util.Collection;
-import java.util.Set;
-import java.util.HashSet;
 import javax.annotation.Nonnull;
+
+import growthcraft.api.core.fluids.FluidTag;
+import growthcraft.api.core.CoreRegistry;
 
 import net.minecraftforge.fluids.Fluid;
 
@@ -34,7 +35,6 @@ public class BoozeEntry
 {
 	private final Fluid fluid;
 	private final BoozeEffect effect;
-	private final Set<BoozeTag> tags = new HashSet<BoozeTag>();
 
 	public BoozeEntry(@Nonnull Fluid flus)
 	{
@@ -52,19 +52,18 @@ public class BoozeEntry
 		return fluid;
 	}
 
-	public Collection<BoozeTag> getTags()
+	public Collection<FluidTag> getTags()
 	{
-		return tags;
+		return CoreRegistry.instance().fluidDictionary().getFluidTags(fluid);
 	}
 
-	public void addTags(BoozeTag... newtags)
+	public void addTags(FluidTag... newtags)
 	{
-		for (BoozeTag tag : newtags) tags.add(tag);
+		CoreRegistry.instance().fluidDictionary().addFluidTags(fluid, newtags);
 	}
 
-	public boolean hasTags(BoozeTag... checktags)
+	public boolean hasTags(FluidTag... checktags)
 	{
-		for (BoozeTag tag : checktags) if (!tags.contains(tag)) return false;
-		return true;
+		return CoreRegistry.instance().fluidDictionary().hasFluidTags(fluid, checktags);
 	}
 }

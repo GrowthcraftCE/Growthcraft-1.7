@@ -23,15 +23,17 @@
  */
 package growthcraft.cellar.integration;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Nonnull;
 
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
@@ -73,11 +75,11 @@ public class ThaumcraftBoozeHelper implements ILoggable
 
 	private static ThaumcraftBoozeHelper INSTANCE;
 	private ILogger logger = NullLogger.INSTANCE;
-	private final Map<BoozeTag, AspectModifier> tagToAspects;
+	private final Map<FluidTag, AspectModifier> tagToAspects;
 
 	public ThaumcraftBoozeHelper()
 	{
-		this.tagToAspects = new HashMap<BoozeTag, AspectModifier>();
+		this.tagToAspects = new HashMap<FluidTag, AspectModifier>();
 		tagToAspects.put(BoozeTag.FERMENTED, new AspectModifier().set(Aspect.POISON, 1).set(Aspect.WATER, -1));
 		tagToAspects.put(BoozeTag.EXTENDED, new AspectModifier().set(Aspect.ENERGY, 1).set(Aspect.WATER, -1));
 		tagToAspects.put(BoozeTag.POTENT, new AspectModifier().set(Aspect.POISON, 1).set(Aspect.WATER, -1));
@@ -88,15 +90,16 @@ public class ThaumcraftBoozeHelper implements ILoggable
 		tagToAspects.put(BoozeTag.INTOXICATED, new AspectModifier().set(Aspect.POISON, 2).set(Aspect.WATER, -3));
 	}
 
-	public void setLogger(ILogger l)
+	@Override
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
 	}
 
-	public AspectList setAspectsForBooze(Fluid booze, AspectList aspects)
+	public AspectList setAspectsForBooze(Fluid fluid, AspectList aspects)
 	{
-		final Collection<BoozeTag> tags = CellarRegistry.instance().booze().getTags(booze);
-		for (BoozeTag tag : tags)
+		final Collection<FluidTag> tags = CoreRegistry.instance().fluidDictionary().getFluidTags(fluid);
+		for (FluidTag tag : tags)
 		{
 			final AspectModifier mod = tagToAspects.get(tag);
 			if (mod != null)
@@ -114,26 +117,26 @@ public class ThaumcraftBoozeHelper implements ILoggable
 		return aspects;
 	}
 
-	public AspectList setAspectsForBoozeBucketContent(Fluid booze, AspectList aspects)
+	public AspectList setAspectsForBoozeBucketContent(Fluid fluid, AspectList aspects)
 	{
-		return setAspectsForBooze(booze, aspects.add(Aspect.WATER, 4));
+		return setAspectsForBooze(fluid, aspects.add(Aspect.WATER, 4));
 	}
 
-	public AspectList setAspectsForBoozeBottleContent(Fluid booze, AspectList aspects)
+	public AspectList setAspectsForBoozeBottleContent(Fluid fluid, AspectList aspects)
 	{
-		return setAspectsForBooze(booze, aspects.add(Aspect.WATER, 2));
+		return setAspectsForBooze(fluid, aspects.add(Aspect.WATER, 2));
 	}
 
-	public AspectList setAspectsForBoozeBucket(Fluid booze, AspectList list)
+	public AspectList setAspectsForBoozeBucket(Fluid fluid, AspectList list)
 	{
 		list.add(Aspect.METAL, 3);
-		return setAspectsForBoozeBucketContent(booze, list);
+		return setAspectsForBoozeBucketContent(fluid, list);
 	}
 
-	public AspectList setAspectsForBoozeBottle(Fluid booze, AspectList list)
+	public AspectList setAspectsForBoozeBottle(Fluid fluid, AspectList list)
 	{
 		list.add(Aspect.CRYSTAL, 1);
-		return setAspectsForBoozeBottleContent(booze, list);
+		return setAspectsForBoozeBottleContent(fluid, list);
 	}
 
 	public void registerAspectsForBucket(ItemBucketBoozeDefinition def, AspectList base)

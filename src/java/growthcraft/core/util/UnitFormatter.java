@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,8 @@ import com.google.common.base.Joiner;
 
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.core.GrowthCraftCore;
 
@@ -79,10 +81,10 @@ public class UnitFormatter
 			// if there is not a modifier defined, create one by joining the tag names
 			if (modifierSrc.equals(modifierString))
 			{
-				final Collection<BoozeTag> tags = CellarRegistry.instance().booze().getTags(alt);
+				final Collection<FluidTag> tags = CoreRegistry.instance().fluidDictionary().getFluidTags(alt);
 				if (tags == null || tags.size() == 0) return null;
 				String str = "";
-				for (BoozeTag tag : tags)
+				for (FluidTag tag : tags)
 				{
 					if (GrowthCraftCore.getConfig().hidePoisonedBooze && tag == BoozeTag.POISONED) continue;
 					str += ((str.length() == 0) ? "" : ", ") + tag.getLocalizedName();

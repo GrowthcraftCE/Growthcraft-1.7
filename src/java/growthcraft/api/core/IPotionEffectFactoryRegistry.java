@@ -26,10 +26,11 @@ package growthcraft.api.core;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.core.effect.IPotionEffectFactory;
+import growthcraft.api.core.log.ILoggable;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public interface IPotionEffectFactoryRegistry extends IClassRegistry<IPotionEffectFactory>
+public interface IPotionEffectFactoryRegistry extends IClassRegistry<IPotionEffectFactory>, ILoggable
 {
 	/**
 	 * @param data  - nbt data to load

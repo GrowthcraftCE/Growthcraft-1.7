@@ -5,6 +5,7 @@ import java.util.List;
 import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.description.Describer;
 import growthcraft.core.util.UnitFormatter;
 
@@ -19,7 +20,7 @@ public class BoozeUtils
 
 	public static boolean isFermentedBooze(Fluid booze)
 	{
-		return CellarRegistry.instance().booze().hasTags(booze, BoozeTag.FERMENTED);
+		return CoreRegistry.instance().fluidDictionary().hasFluidTags(booze, BoozeTag.FERMENTED);
 	}
 
 	public static void addEffects(Fluid booze, ItemStack stack, World world, EntityPlayer player)

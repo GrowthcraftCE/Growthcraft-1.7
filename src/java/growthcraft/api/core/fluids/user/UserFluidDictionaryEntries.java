@@ -21,38 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.fluid;
+package growthcraft.api.core.fluids.user;
 
-import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
-import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.schema.ICommentable;
 
-public class FluidTag
+public class UserFluidDictionaryEntries implements ICommentable
 {
-	private final String name;
+	public String comment = "";
+	public List<UserFluidDictionaryEntry> data = new ArrayList<UserFluidDictionaryEntry>();
 
-	public FluidTag(@Nonnull String n)
+	@Override
+	public String getComment()
 	{
-		this.name = n;
+		return comment;
 	}
 
-	public String getName()
+	@Override
+	public void setComment(String com)
 	{
-		return name;
-	}
-
-	public String getUnlocalizedName()
-	{
-		return "grc.fluid_tag." + getName();
-	}
-
-	public String getLocalizedName()
-	{
-		return GrcI18n.translate(getUnlocalizedName());
-	}
-
-	public String toString()
-	{
-		return getName();
+		this.comment = com;
 	}
 }

@@ -32,13 +32,13 @@ public class HarvestDropsEventCore
 
 	private void doDrops(HarvestDropsEvent event)
 	{
-		if (CoreRegistry.instance().hasVineDrops())
+		if (CoreRegistry.instance().vineDrops().hasVineDrops())
 		{
 			if (new Random().nextInt(r) == 0)
 			{
 				event.drops.clear();
 				event.dropChance = 1.0F;
-				final ItemStack stack = CoreRegistry.instance().getVineDropItem(event.world);
+				final ItemStack stack = CoreRegistry.instance().vineDrops().getVineDropItem(event.world);
 				if (stack != null)
 				{
 					event.drops.add(new ItemStack(stack.getItem(), event.world.rand.nextInt(stack.stackSize) + 1));

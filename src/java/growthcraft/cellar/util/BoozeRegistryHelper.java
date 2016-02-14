@@ -32,6 +32,8 @@ import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.booze.IBoozeRegistry;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.fluids.IFluidDictionary;
 import growthcraft.cellar.common.block.BlockFluidBooze;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
@@ -95,10 +97,11 @@ public class BoozeRegistryHelper
 	public static List<BoozeEffect> getBoozeEffects(Fluid[] boozes)
 	{
 		final IBoozeRegistry reg = CellarRegistry.instance().booze();
+		final IFluidDictionary dict = CoreRegistry.instance().fluidDictionary();
 		final List<BoozeEffect> effects = new ArrayList<BoozeEffect>();
 		for (int i = 0; i < boozes.length; ++i)
 		{
-			if (reg.hasTags(boozes[i], BoozeTag.FERMENTED))
+			if (dict.hasFluidTags(boozes[i], BoozeTag.FERMENTED))
 			{
 				effects.add(reg.getEffect(boozes[i]));
 			}

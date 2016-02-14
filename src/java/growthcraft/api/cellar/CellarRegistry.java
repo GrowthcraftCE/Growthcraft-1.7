@@ -23,6 +23,8 @@
  */
 package growthcraft.api.cellar;
 
+import javax.annotation.Nonnull;
+
 import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.booze.IBoozeRegistry;
 import growthcraft.api.cellar.brewing.BrewingRegistry;
@@ -66,7 +68,7 @@ public class CellarRegistry implements ILoggable
 	 * @param l - logger to set
 	 */
 	@Override
-	public void setLogger(ILogger l)
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
 		boozeRegistry.setLogger(logger);
