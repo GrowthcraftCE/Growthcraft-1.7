@@ -24,13 +24,16 @@
 package growthcraft.milk.init;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.GrcFluid;
+import growthcraft.api.core.util.StringUtils;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.api.milk.MilkFluidTags;
 import growthcraft.api.milk.MilkRegistry;
@@ -44,6 +47,7 @@ import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.util.FluidFactory;
 import growthcraft.milk.common.effect.EffectBoozeMilk;
 import growthcraft.milk.common.effect.EffectEvilBoozeMilk;
+import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.GrowthCraftMilk;
 
 import net.minecraftforge.fluids.Fluid;
@@ -63,6 +67,7 @@ public class GrcMilkFluids extends GrcModuleBase
 	public FluidFactory.FluidDetails saltWater;
 	public FluidFactory.FluidDetails skimMilk;
 	public FluidFactory.FluidDetails whey;
+	public Map<EnumCheeseType, FluidFactory.FluidDetails> cheeses = new HashMap<EnumCheeseType, FluidFactory.FluidDetails>();
 	public Booze[] boozeMilk = new Booze[6];
 	//public BlockBoozeDefinition
 	public BlockBoozeDefinition[] boozeMilkBlocks = new BlockBoozeDefinition[boozeMilk.length];
@@ -98,6 +103,13 @@ public class GrcMilkFluids extends GrcModuleBase
 		skimMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/skimmilk");
 		whey.block.getBlock().setBlockTextureName("grcmilk:fluids/whey");
 		saltWater.block.getBlock().setBlockTextureName("minecraft:water");
+
+		for (EnumCheeseType cheese : EnumCheeseType.VALUES)
+		{
+			final String fluidName = "grcmilk.Cheese" + StringUtils.capitalize(cheese.name);
+			final Fluid fluid = new GrcFluid(fluidName);
+			cheeses.put(cheese, FluidFactory.instance().create(fluid));
+		}
 
 		this.milkBottle = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, boozeMilk));
 		BoozeRegistryHelper.initializeBooze(boozeMilk, boozeMilkBlocks, boozeMilkBuckets, milkBasename, GrowthCraftMilk.getConfig().milkColor);
@@ -170,6 +182,11 @@ public class GrcMilkFluids extends GrcModuleBase
 		skimMilk.registerObjects("grcmilk", "SkimMilk");
 		whey.registerObjects("grcmilk", "Whey");
 		saltWater.registerObjects("grcmilk", "SaltWater");
+
+		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
+		{
+			pair.getValue().registerObjects("grcmilk", "Cheese" + StringUtils.capitalize(pair.getKey().name));
+		}
 
 		BoozeRegistryHelper.registerBooze(boozeMilk, boozeMilkBlocks, boozeMilkBuckets, milkBottle, milkBasename, null);
 		registerFermentations();

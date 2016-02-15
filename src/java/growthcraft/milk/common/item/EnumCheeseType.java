@@ -27,14 +27,16 @@ import java.util.List;
 import java.util.Arrays;
 
 import growthcraft.api.core.definition.IItemStackFactory;
+import growthcraft.api.core.definition.IFluidStackFactory;
 import growthcraft.milk.GrowthCraftMilk;
 
 import io.netty.buffer.ByteBuf;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.FluidStack;
 
-public enum EnumCheeseType implements IItemStackFactory
+public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 {
 	CHEDDAR("cheddar",
 		new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
@@ -99,6 +101,16 @@ public enum EnumCheeseType implements IItemStackFactory
 	public ItemStack asBlockItemStack()
 	{
 		return asBlockItemStack(1);
+	}
+
+	public FluidStack asFluidStack(int amount)
+	{
+		return GrowthCraftMilk.fluids.cheeses.get(this).fluid.asFluidStack(amount);
+	}
+
+	public FluidStack asFluidStack()
+	{
+		return asFluidStack(1);
 	}
 
 	public NBTTagCompound writeToNBT(NBTTagCompound tag)
