@@ -35,6 +35,6 @@ public interface IFluidTagsRegistry extends ILoggable
 	FluidTag createTag(@Nonnull String name);
 	Collection<String> getNames();
 	Collection<FluidTag> getTags();
-	FluidTag findTag(String name);
+	FluidTag findTag(@Nonnull String name);
 	List<FluidTag> expandTagNames(@Nonnull List<String> tagNames);
 }
