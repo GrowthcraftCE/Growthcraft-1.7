@@ -25,19 +25,22 @@ package growthcraft.milk.common.tileentity;
 
 import java.io.IOException;
 
+import growthcraft.api.core.util.FXHelper;
+import growthcraft.api.core.util.Pair;
 import growthcraft.api.core.util.PulseStepper;
 import growthcraft.api.core.util.SpatialRandom;
-import growthcraft.api.core.util.Pair;
 import growthcraft.api.core.util.TickUtils;
-import growthcraft.api.core.util.FXHelper;
-import growthcraft.core.common.tileentity.GrcTileEntityBase;
-import growthcraft.milk.GrowthCraftMilk;
 import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.GrcTileEntityBase;
+import growthcraft.milk.common.item.ItemBlockHangingCurds;
+import growthcraft.milk.common.struct.CheeseCurd;
+import growthcraft.milk.GrowthCraftMilk;
 
 import io.netty.buffer.ByteBuf;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
@@ -48,19 +51,21 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 	// SpatialRandom instance
 	private SpatialRandom sprand = new SpatialRandom();
 	// Pulsar instance
-	private PulseStepper pulsar = new PulseStepper(TickUtils.seconds(15), 10);
+	private PulseStepper wheyPulsar = new PulseStepper(TickUtils.seconds(15), 10);
 
 	// the following variables are responsible for step tracking
+	/// This pulse stepper is used to control the 'drip' animation
 	@SideOnly(Side.CLIENT)
-	// This pulse stepper is used to control the 'drip' animation
 	private PulseStepper animPulsar = new PulseStepper(10, 4);
 
-	// The server will increment this value whenever it does a drip step
+	/// The server will increment this value whenever it does a drip step
 	private int serverStep;
 
+	/// Clients will set this value to the serverStep value and proceed with the drip animation
 	@SideOnly(Side.CLIENT)
-	// Clients will set this value to the serverStep value and proceed with the drip animation
 	private int clientStep;
+
+	private CheeseCurd cheeseCurd = new CheeseCurd();
 
 	private IPancheonTile getPancheonTile()
 	{
@@ -72,6 +77,11 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 		return null;
 	}
 
+	public int getRenderColor()
+	{
+		return cheeseCurd.getRenderColor();
+	}
+
 	@Override
 	public void updateEntity()
 	{
@@ -79,10 +89,16 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 
 		if (!worldObj.isRemote)
 		{
-			if (pulsar.update() == PulseStepper.State.PULSE)
+			if (cheeseCurd.needClientUpdate)
+			{
+				cheeseCurd.needClientUpdate = false;
+				markForBlockUpdate();
+			}
+			cheeseCurd.update();
+			if (wheyPulsar.update() == PulseStepper.State.PULSE)
 			{
 				final IPancheonTile pancheonTile = getPancheonTile();
-				// I a pancheon is present, try filling it with Whey
+				// When a pancheon is present, try filling it with Whey
 				if (pancheonTile != null)
 				{
 					final FluidStack stack = GrowthCraftMilk.fluids.whey.fluid.asFluidStack(100);
@@ -117,8 +133,8 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 
 	public void readFromNBTForItem(NBTTagCompound nbt)
 	{
-		cheese.readFromNBT(nbt);
-		pulsar.readFromNBT(nbt, "pulsar");
+		cheeseCurd.readFromNBT(nbt);
+		wheyPulsar.readFromNBT(nbt, "whey_pulsar");
 	}
 
 	@Override
@@ -130,8 +146,8 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 
 	public void writeToNBTForItem(NBTTagCompound nbt)
 	{
-		cheese.writeToNBT(nbt);
-		pulsar.writeToNBT(nbt, "pulsar");
+		cheeseCurd.writeToNBT(nbt);
+		wheyPulsar.writeToNBT(nbt, "whey_pulsar");
 	}
 
 	@Override
@@ -144,7 +160,7 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_HangingCurds(ByteBuf stream) throws IOException
 	{
-		pulsar.readFromStream(stream);
+		wheyPulsar.readFromStream(stream);
 		this.serverStep = stream.readInt();
 		return true;
 	}
@@ -152,7 +168,15 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
 	public void writeToStream_HangingCurds(ByteBuf stream) throws IOException
 	{
-		pulsar.writeToStream(stream);
+		wheyPulsar.writeToStream(stream);
 		stream.writeInt(serverStep);
+	}
+
+	public ItemStack asItemStack()
+	{
+		final ItemStack stack = GrowthCraftMilk.blocks.hangingCurds.asStack();
+		final NBTTagCompound tag = ItemBlockHangingCurds.openNBT(stack);
+		writeToNBTForItem(tag);
+		return stack;
 	}
 }

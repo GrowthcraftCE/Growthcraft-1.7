@@ -38,44 +38,51 @@ import net.minecraftforge.fluids.FluidStack;
 
 public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 {
-	CHEDDAR("cheddar",
+	CHEDDAR("cheddar", 0xf99e03,
 		new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
 		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT, EnumCheeseStage.UNWAXED}),
-	GORGONZOLA("gorgonzola",
+	GORGONZOLA("gorgonzola", 0xf6f3ea,
 		new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
 		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
-	EMMENTALER("emmentaler",
+	EMMENTALER("emmentaler", 0xf4f4d3,
 		new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
 		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
-	APPENZELLER("appenzeller",
+	APPENZELLER("appenzeller", 0xfbeaaf,
 		new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
 		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
-	ASIAGO("asiago",
+	ASIAGO("asiago", 0xc7be95,
 		new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
 		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
-	PARMESAN("parmesan",
+	PARMESAN("parmesan", 0xe0ddce,
 		new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
 		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
-	MONTEREY("monterey",
+	MONTEREY("monterey", 0xf5f5da,
 		new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
 		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT, EnumCheeseStage.UNWAXED}),
-	RICOTTA("ricotta",
+	RICOTTA("ricotta", 0xc8c8c5,
 		new EnumCheeseFeature[]{},
 		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT});
 
 	public static final EnumCheeseType[] VALUES = values();
 
 	public final String name;
+	public final int color;
 	public final int meta;
 	public final List<EnumCheeseFeature> features;
 	public final List<EnumCheeseStage> stages;
 
-	private EnumCheeseType(String n, EnumCheeseFeature[] fets, EnumCheeseStage[] stgs)
+	private EnumCheeseType(String n, int c, EnumCheeseFeature[] fets, EnumCheeseStage[] stgs)
 	{
 		this.name = n;
+		this.color = c;
 		this.meta = ordinal();
 		this.features = Arrays.asList(fets);
 		this.stages = Arrays.asList(stgs);
+	}
+
+	public int getColor()
+	{
+		return color;
 	}
 
 	public boolean hasBlock()

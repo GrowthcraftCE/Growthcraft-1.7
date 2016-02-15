@@ -25,6 +25,7 @@ package growthcraft.milk.client.render;
 
 import growthcraft.milk.client.model.ModelHangingCurds;
 import growthcraft.milk.client.resource.GrcMilkResources;
+import growthcraft.milk.common.item.EnumCheeseType;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -56,13 +57,16 @@ public class RenderHangingCurds implements ISimpleBlockRenderingHandler
 	{
 		if (modelID == RENDER_ID)
 		{
+			final int color = EnumCheeseType.getSafeById(metadata).getColor();
 			GL11.glPushMatrix();
 			{
 				Minecraft.getMinecraft().renderEngine.bindTexture(GrcMilkResources.INSTANCE.textureHangingCurds);
 				GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 				GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
 				GL11.glTranslatef(0.0f, -1.0f, 0.0f);
-				GrcMilkResources.INSTANCE.modelHangingCurds.render(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ModelHangingCurds.SCALE);
+				GrcMilkResources.INSTANCE.modelHangingCurds
+					.setCurdColor(color)
+					.render(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ModelHangingCurds.SCALE);
 			}
 			GL11.glPopMatrix();
 		}

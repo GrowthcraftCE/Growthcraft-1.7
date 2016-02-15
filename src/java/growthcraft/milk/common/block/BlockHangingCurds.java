@@ -31,6 +31,7 @@ import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.core.util.BlockCheck;
 import growthcraft.milk.client.render.RenderHangingCurds;
+import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
 import growthcraft.milk.GrowthCraftMilk;
@@ -69,8 +70,8 @@ public class BlockHangingCurds extends GrcBlockContainer
 		final Item item = stack.getItem();
 		if (item instanceof ItemBlockHangingCurds)
 		{
-			final ItemBlockHangingCurds cheeseBlock = item;
-			final TileEntityCheeseBlock teHangingCurds = getTileEntity(world, x, y, z);
+			final ItemBlockHangingCurds cheeseBlock = (ItemBlockHangingCurds)item;
+			final TileEntityHangingCurds teHangingCurds = getTileEntity(world, x, y, z);
 			if (teHangingCurds != null)
 			{
 				teHangingCurds.readFromNBTForItem(cheeseBlock.getTileData(stack));
@@ -84,7 +85,7 @@ public class BlockHangingCurds extends GrcBlockContainer
 	{
 		if (item instanceof ItemBlockHangingCurds)
 		{
-			final ItemBlockHangingCurds ib = item;
+			final ItemBlockHangingCurds ib = (ItemBlockHangingCurds)item;
 			for (EnumCheeseType cheese : EnumCheeseType.VALUES)
 			{
 				if (cheese.hasBlock())
@@ -100,7 +101,7 @@ public class BlockHangingCurds extends GrcBlockContainer
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player)
 	{
-		final TileEntityCheeseBlock teHangingCurds = getTileEntity(world, x, y, z);
+		final TileEntityHangingCurds teHangingCurds = getTileEntity(world, x, y, z);
 		if (teHangingCurds != null)
 		{
 			return teHangingCurds.asItemStack();

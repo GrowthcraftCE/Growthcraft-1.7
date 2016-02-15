@@ -102,7 +102,7 @@ public class RenderCheeseVat implements ISimpleBlockRenderingHandler
 				if (cheeseVatTile != null)
 				{
 					double y0 = ModelCheeseVat.SCALE;
-					for (int i = 0; i < 3; ++i)
+					for (int i = 0; i < cheeseVatTile.getTankCount(); ++i)
 					{
 						final FluidStack fluid = cheeseVatTile.getFluidStack(i);
 						if (fluid != null)

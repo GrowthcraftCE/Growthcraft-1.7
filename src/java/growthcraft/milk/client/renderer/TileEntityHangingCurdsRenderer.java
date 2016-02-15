@@ -48,7 +48,9 @@ public class TileEntityHangingCurdsRenderer extends TileEntitySpecialRenderer
 				GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5f, (float)z + 0.5F);
 				GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
 				this.bindTexture(GrcMilkResources.INSTANCE.textureHangingCurds);
-				GrcMilkResources.INSTANCE.modelHangingCurds.render((Entity)null, 0.0f, 0.0f, 0.0f, f, 0.0f, ModelHangingCurds.SCALE);
+				GrcMilkResources.INSTANCE.modelHangingCurds
+					.setCurdColor(hangingCurds.getRenderColor())
+					.render((Entity)null, 0.0f, 0.0f, 0.0f, f, 0.0f, ModelHangingCurds.SCALE);
 			}
 			GL11.glPopMatrix();
 		}

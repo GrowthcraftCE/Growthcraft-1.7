@@ -27,6 +27,7 @@ import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
+import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
 
 import cpw.mods.fml.common.Optional;
 
@@ -51,6 +52,10 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 		if (te instanceof TileEntityCheeseBlock)
 		{
 			return ((TileEntityCheeseBlock)te).asItemStack();
+		}
+		if (te instanceof TileEntityHangingCurds)
+		{
+			return ((TileEntityHangingCurds)te).asItemStack();
 		}
 		return accessor.getStack();
 	}
