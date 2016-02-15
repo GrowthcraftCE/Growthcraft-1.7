@@ -76,7 +76,6 @@ public class GrcMilkItems extends GrcModuleBase
 		yogurt.register("grcmilk.Yogurt");
 		stomach.register("grcmilk.Stomach");
 		starterCulture.register("grcmilk.StarterCulture");
-
 	}
 
 	@Override
@@ -117,6 +116,11 @@ public class GrcMilkItems extends GrcModuleBase
 			's', Items.string
 		));
 
+		for (EnumIceCream e : EnumIceCream.VALUES)
+		{
+			OreDictionary.registerOre("foodIceCream", e.asStack());
+		}
+
 		for (EnumButter e : EnumButter.VALUES)
 		{
 			OreDictionary.registerOre("foodButter", e.asStack());
@@ -126,5 +130,10 @@ public class GrcMilkItems extends GrcModuleBase
 		{
 			OreDictionary.registerOre("foodCheese", e.asStack());
 		}
+
+		OreDictionary.registerOre("foodYogurt", yogurt.asStack());
+		OreDictionary.registerOre("materialStomach", stomach.asStack());
+		OreDictionary.registerOre("materialStarterCulture", starterCulture.asStack());
+		OreDictionary.registerOre("materialCheeseCloth", cheeseCloth.asStack());
 	}
 }
