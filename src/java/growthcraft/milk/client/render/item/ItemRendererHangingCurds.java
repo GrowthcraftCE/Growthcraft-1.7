@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,63 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.milk.client.render;
+package growthcraft.milk.client.render.item;
 
+import growthcraft.core.client.render.item.GrcItemRenderer;
 import growthcraft.milk.client.model.ModelHangingCurds;
 import growthcraft.milk.client.resource.GrcMilkResources;
 import growthcraft.milk.common.item.EnumCheeseType;
+import growthcraft.milk.common.item.ItemBlockHangingCurds;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderBlocks;
-//import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-public class RenderHangingCurds implements ISimpleBlockRenderingHandler
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+public class ItemRendererHangingCurds extends GrcItemRenderer
 {
-	public static int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-
 	@Override
-	public int getRenderId()
+	protected void render(ItemRenderType type, ItemStack stack, Object... data)
 	{
-		return RENDER_ID;
-	}
-
-	@Override
-	public boolean shouldRender3DInInventory(int modelID)
-	{
-		return true;
-	}
-
-	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-	{
-		if (modelID == RENDER_ID)
+		final Item item = stack.getItem();
+		if (item instanceof ItemBlockHangingCurds)
 		{
-			final int color = EnumCheeseType.getSafeById(metadata).getColor();
+			final ItemBlockHangingCurds hangingCurds = (ItemBlockHangingCurds)item;
+			final EnumCheeseType cheese = hangingCurds.getCheeseType(stack);
 			GL11.glPushMatrix();
 			{
-				Minecraft.getMinecraft().renderEngine.bindTexture(GrcMilkResources.INSTANCE.textureHangingCurds);
+				bindTexture(GrcMilkResources.INSTANCE.textureHangingCurds);
 				GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 				GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
-				GL11.glTranslatef(0.0f, -1.0f, 0.0f);
+				GL11.glTranslatef(0.0f, -1.5f, 0.0f);
 				GrcMilkResources.INSTANCE.modelHangingCurds
-					.setCurdColor(color)
+					.setCurdColor(cheese.getColor())
 					.render(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ModelHangingCurds.SCALE);
 			}
 			GL11.glPopMatrix();
 		}
-	}
-
-	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-	{
-		if (modelId == RENDER_ID)
-		{
-		}
-		return true;
 	}
 }

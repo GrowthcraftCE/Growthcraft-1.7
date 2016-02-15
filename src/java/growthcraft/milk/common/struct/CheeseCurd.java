@@ -94,21 +94,30 @@ public class CheeseCurd implements INBTSerializableContext
 	public void readFromStream(ByteBuf stream)
 	{
 		this.cheese = EnumCheeseType.loadFromStream(stream);
+		this.dried = stream.readBoolean();
+		this.age = stream.readInt();
 	}
 
 	public void writeToStream(ByteBuf stream)
 	{
 		cheese.writeToStream(stream);
+		stream.writeBoolean(dried);
+		stream.writeInt(age);
 	}
 
 	public void update()
 	{
 		if (dried)
 		{
+			if (age != ageMax)
+			{
+				this.age = ageMax;
+				this.needClientUpdate = true;
+			}
 		}
 		else
 		{
-			if (this.age < this.ageMax)
+			if (this.age < ageMax)
 			{
 				this.age += 1;
 			}

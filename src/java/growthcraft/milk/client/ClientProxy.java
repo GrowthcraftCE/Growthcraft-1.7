@@ -24,10 +24,10 @@
 package growthcraft.milk.client;
 
 import growthcraft.milk.client.render.item.ItemRendererCheeseBlock;
+import growthcraft.milk.client.render.item.ItemRendererHangingCurds;
 import growthcraft.milk.client.render.RenderButterChurn;
 import growthcraft.milk.client.render.RenderCheesePress;
 import growthcraft.milk.client.render.RenderCheeseVat;
-import growthcraft.milk.client.render.RenderHangingCurds;
 import growthcraft.milk.client.render.RenderPancheon;
 import growthcraft.milk.client.renderer.TileEntityButterChurnRenderer;
 import growthcraft.milk.client.renderer.TileEntityCheeseBlockRenderer;
@@ -56,11 +56,11 @@ public class ClientProxy extends CommonProxy
 		new GrcMilkResources();
 
 		MinecraftForgeClient.registerItemRenderer(GrowthCraftMilk.blocks.cheeseBlock.getItem(), new ItemRendererCheeseBlock());
+		MinecraftForgeClient.registerItemRenderer(GrowthCraftMilk.blocks.hangingCurds.getItem(), new ItemRendererHangingCurds());
 
 		RenderingRegistry.registerBlockHandler(new RenderButterChurn());
 		RenderingRegistry.registerBlockHandler(new RenderCheesePress());
 		RenderingRegistry.registerBlockHandler(new RenderCheeseVat());
-		RenderingRegistry.registerBlockHandler(new RenderHangingCurds());
 		RenderingRegistry.registerBlockHandler(new RenderPancheon());
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityButterChurn.class, new TileEntityButterChurnRenderer());

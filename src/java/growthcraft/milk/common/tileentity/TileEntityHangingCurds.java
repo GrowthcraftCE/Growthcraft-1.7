@@ -160,6 +160,7 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_HangingCurds(ByteBuf stream) throws IOException
 	{
+		cheeseCurd.readFromStream(stream);
 		wheyPulsar.readFromStream(stream);
 		this.serverStep = stream.readInt();
 		return true;
@@ -168,6 +169,7 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
 	public void writeToStream_HangingCurds(ByteBuf stream) throws IOException
 	{
+		cheeseCurd.writeToStream(stream);
 		wheyPulsar.writeToStream(stream);
 		stream.writeInt(serverStep);
 	}

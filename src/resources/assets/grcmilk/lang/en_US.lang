@@ -47,15 +47,15 @@ tile.grcmilk.CheeseBlock.name=Cheese Block
 tile.grcmilk.CheesePress.name=Cheese Press
 tile.grcmilk.CheeseVat.name=Cheese Vat
 tile.grcmilk.HangingCurds.name=Hanging Curds
-tile.grcmilk.HangingCurds.cheddar=Cheddar Curds
-tile.grcmilk.HangingCurds.gorgonzola=Gorgonzola Curds
-tile.grcmilk.HangingCurds.emmentaler=Emmentaler Curds
-tile.grcmilk.HangingCurds.appenzeller=Appeneller Curds
-tile.grcmilk.HangingCurds.asiago=Asiago Curds
-tile.grcmilk.HangingCurds.parmesan=Parmesan Curds
-tile.grcmilk.HangingCurds.monterey=Monterey Curds
+tile.grcmilk.HangingCurds.cheddar.name=Cheddar Curds
+tile.grcmilk.HangingCurds.gorgonzola.name=Gorgonzola Curds
+tile.grcmilk.HangingCurds.emmentaler.name=Emmentaler Curds
+tile.grcmilk.HangingCurds.appenzeller.name=Appeneller Curds
+tile.grcmilk.HangingCurds.asiago.name=Asiago Curds
+tile.grcmilk.HangingCurds.parmesan.name=Parmesan Curds
+tile.grcmilk.HangingCurds.monterey.name=Monterey Curds
 ### I'll admit, Ricotta shouldn't have curds...
-tile.grcmilk.HangingCurds.ricotta=Ricotta Curds
+tile.grcmilk.HangingCurds.ricotta.name=Ricotta Curds
 
 tile.grcmilk.Pancheon.name=Pancheon
 

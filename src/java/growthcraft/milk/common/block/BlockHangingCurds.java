@@ -28,9 +28,9 @@ import java.util.Random;
 
 import growthcraft.api.core.util.BBox;
 import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.RenderType;
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.milk.client.render.RenderHangingCurds;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
@@ -138,7 +138,7 @@ public class BlockHangingCurds extends GrcBlockContainer
 	@Override
 	public int getRenderType()
 	{
-		return RenderHangingCurds.RENDER_ID;
+		return RenderType.NONE;
 	}
 
 	@Override

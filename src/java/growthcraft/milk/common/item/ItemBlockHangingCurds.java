@@ -38,7 +38,7 @@ public class ItemBlockHangingCurds extends ItemBlock
 		super(block);
 	}
 
-	public NBTTagCompound getTileData(ItemStack stack)
+	private NBTTagCompound getTileDataABS(ItemStack stack)
 	{
 		final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
 		if (!tag.hasKey("te_curd_block"))
@@ -51,9 +51,20 @@ public class ItemBlockHangingCurds extends ItemBlock
 		return tag.getCompoundTag("te_curd_block");
 	}
 
+	public NBTTagCompound getTileData(ItemStack stack)
+	{
+		final NBTTagCompound tag = getTileDataABS(stack);
+		final EnumCheeseType type = getCheeseType(stack);
+		if (stack.getItemDamage() != type.meta)
+		{
+			stack.setItemDamage(type.meta);
+		}
+		return tag;
+	}
+
 	public EnumCheeseType getCheeseType(ItemStack stack)
 	{
-		final NBTTagCompound tag = getTileData(stack);
+		final NBTTagCompound tag = getTileDataABS(stack);
 		return EnumCheeseType.loadFromNBT(tag);
 	}
 
