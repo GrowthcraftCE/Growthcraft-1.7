@@ -29,5 +29,5 @@ import net.minecraft.inventory.IInventory;
 public interface IInventoryWatcher
 {
 	void onInventoryChanged(IInventory inv, int index);
-	void onItemDiscarded(IInventory inv, ItemStack stack, int index);
+	void onItemDiscarded(IInventory inv, ItemStack stack, int index, int discardedAmount);
 }

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -40,14 +40,19 @@ public class GrcInternalInventory implements IInventory, INBTSerializable
 	protected ItemStack[] items;
 	protected int maxSize;
 	protected int maxStackSize;
-	protected IInventory parent;
+	protected Object parent;
 
-	public GrcInternalInventory(IInventory par, int size)
+	public GrcInternalInventory(Object par, int size, int maxStack)
 	{
 		this.parent = par;
-		this.maxStackSize = 64;
 		this.maxSize = size;
+		this.maxStackSize = maxStack;
 		this.items = new ItemStack[maxSize];
+	}
+
+	public GrcInternalInventory(Object par, int size)
+	{
+		this(par, size, 64);
 	}
 
 	public int getMaxSize()
@@ -61,9 +66,9 @@ public class GrcInternalInventory implements IInventory, INBTSerializable
 		{
 			((IInventoryWatcher)parent).onInventoryChanged(this, index);
 		}
-		else
+		else if (parent instanceof IInventory)
 		{
-			parent.markDirty();
+			((IInventory)parent).markDirty();
 		}
 	}
 
@@ -183,7 +188,7 @@ public class GrcInternalInventory implements IInventory, INBTSerializable
 				{
 					if (parent instanceof IInventoryWatcher)
 					{
-						((IInventoryWatcher)parent).onItemDiscarded(this, stack, index);
+						((IInventoryWatcher)parent).onItemDiscarded(this, stack, index, discarded);
 					}
 				}
 			}

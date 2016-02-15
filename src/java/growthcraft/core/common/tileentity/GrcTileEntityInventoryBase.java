@@ -71,9 +71,11 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase imple
 	}
 
 	@Override
-	public void onItemDiscarded(IInventory inv, ItemStack stack, int index)
+	public void onItemDiscarded(IInventory inv, ItemStack stack, int index, int discardedAmount)
 	{
-		ItemUtils.spawnItemStack(worldObj, xCoord, yCoord, zCoord, stack, random);
+		final ItemStack discarded = stack.copy();
+		discarded.stackSize = discardedAmount;
+		ItemUtils.spawnItemStack(worldObj, xCoord, yCoord, zCoord, discarded, random);
 	}
 
 	protected void checkUpdateFlags()
