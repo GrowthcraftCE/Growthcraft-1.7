@@ -56,37 +56,46 @@ public class FluidFactory
 
 		public FluidDetails registerObjects(String prefix, String basename)
 		{
-			block.getBlock().setBlockName(prefix + ".BlockFluid" + basename);
-			bottle.getItem().setUnlocalizedName(prefix + ".BottleFluid" + basename);
-			bucket.getItem().setUnlocalizedName(prefix + ".BucketFluid" + basename);
+			if (block != null) block.getBlock().setBlockName(prefix + ".BlockFluid" + basename);
+			if (bottle != null) bottle.getItem().setUnlocalizedName(prefix + ".BottleFluid" + basename);
+			if (bucket != null) bucket.getItem().setUnlocalizedName(prefix + ".BucketFluid" + basename);
 
-			block.register(prefix + ".BlockFluid" + basename);
-			bottle.register(prefix + ".BottleFluid" + basename);
-			bucket.register(prefix + ".BucketFluid" + basename);
+			if (block != null) block.register(prefix + ".BlockFluid" + basename);
+			if (bottle != null) bottle.register(prefix + ".BottleFluid" + basename);
+			if (bucket != null) bucket.register(prefix + ".BucketFluid" + basename);
 
-			EventHandlerBucketFill.instance().register(block.getBlock(), bucket.getItem());
+			if (block != null && bucket != null)
+			{
+				EventHandlerBucketFill.instance().register(block.getBlock(), bucket.getItem());
+			}
 
-			final FluidStack boozeStack = fluid.asFluidStack(FluidContainerRegistry.BUCKET_VOLUME);
-			FluidContainerRegistry.registerFluidContainer(boozeStack, bucket.asStack(), FluidContainerRegistry.EMPTY_BUCKET);
+			if (bucket != null)
+			{
+				final FluidStack boozeStack = fluid.asFluidStack(FluidContainerRegistry.BUCKET_VOLUME);
+				FluidContainerRegistry.registerFluidContainer(boozeStack, bucket.asStack(), FluidContainerRegistry.EMPTY_BUCKET);
+			}
 
-			final FluidStack fluidStack = fluid.asFluidStack(GrowthCraftCore.getConfig().bottleCapacity);
-			FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1), GrowthCraftCore.EMPTY_BOTTLE);
+			if (bottle != null)
+			{
+				final FluidStack fluidStack = fluid.asFluidStack(GrowthCraftCore.getConfig().bottleCapacity);
+				FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1), GrowthCraftCore.EMPTY_BOTTLE);
+			}
 			return this;
 		}
 
 		public FluidDetails setCreativeTab(CreativeTabs tab)
 		{
-			block.getBlock().setCreativeTab(tab);
-			bottle.getItem().setCreativeTab(tab);
-			bucket.getItem().setCreativeTab(tab);
+			if (block != null) block.getBlock().setCreativeTab(tab);
+			if (bottle != null) bottle.getItem().setCreativeTab(tab);
+			if (bucket != null) bucket.getItem().setCreativeTab(tab);
 			return this;
 		}
 
 		public FluidDetails setItemColor(int color)
 		{
 			this.itemColor = color;
-			bottle.getItem().setColor(color);
-			bucket.getItem().setColor(color);
+			if (bottle != null) bottle.getItem().setColor(color);
+			if (bucket != null) bucket.getItem().setColor(color);
 			return this;
 		}
 
