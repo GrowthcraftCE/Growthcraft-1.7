@@ -50,6 +50,21 @@ import net.minecraftforge.fluids.FluidTank;
 
 public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IItemHandler
 {
+	public static enum FluidTankType
+	{
+		PRIMARY,
+		RENNET,
+		WHEY,
+		RECIPE;
+
+		public final int id;
+
+		private FluidTankType()
+		{
+			this.id = ordinal();
+		}
+	}
+
 	private static int[][] accessibleSlots = {
 		{ 0 },
 		{ 0 },
@@ -82,13 +97,17 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 			// rennet
 			new FluidTank(333),
 			// whey
+			new FluidTank(1000),
+			// recipe fluid
 			new FluidTank(1000)
 		};
 	}
 
 	public int getVatFluidCapacity()
 	{
-		return getFluidTank(0).getCapacity() + getFluidTank(2).getCapacity();
+		return getFluidTank(FluidTankType.PRIMARY.id).getCapacity() +
+			getFluidTank(FluidTankType.WHEY.id).getCapacity() +
+			getFluidTank(FluidTankType.RECIPE.id).getCapacity();
 	}
 
 	@Override
@@ -198,13 +217,13 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	@Override
 	protected FluidStack doDrain(ForgeDirection dir, int amount, boolean doDrain)
 	{
-		return drainFluidTank(2, amount, doDrain);
+		return drainFluidTank(FluidTankType.WHEY.id, amount, doDrain);
 	}
 
 	@Override
 	protected FluidStack doDrain(ForgeDirection dir, FluidStack stack, boolean doDrain)
 	{
-		if (!FluidTest.areStacksEqual(getFluidStack(2), stack)) return null;
+		if (!FluidTest.areStacksEqual(getFluidStack(FluidTankType.WHEY.id), stack)) return null;
 		return doDrain(dir, stack.amount, doDrain);
 	}
 
@@ -215,13 +234,16 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 
 		if (MilkTest.isMilk(stack))
 		{
-			result = fillFluidTank(0, stack, doFill);
+			result = fillFluidTank(FluidTankType.PRIMARY.id, stack, doFill);
 		}
 		else if (FluidTest.isValidAndExpected(GrowthCraftMilk.fluids.rennet.getFluid(), stack))
 		{
-			result = fillFluidTank(1, stack, doFill);
+			result = fillFluidTank(FluidTankType.RENNET.id, stack, doFill);
 		}
-
+		else if (MilkRegistry.instance().cheeseVat().isFluidIngredient(stack))
+		{
+			result = fillFluidTank(FluidTankType.RECIPE.id, stack, doFill);
+		}
 		return result;
 	}
 
@@ -235,9 +257,9 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		if (!FluidTest.hasTags(rennetStack, MilkFluidTags.RENNET)) return false;
 		if (rennetStack.amount < 333) return false;
 
-		setFluidStack(0, FluidUtils.exchangeFluid(milkStack, GrowthCraftMilk.fluids.curds.getFluid()));
-		clearTank(1);
-		fillFluidTank(2, GrowthCraftMilk.fluids.whey.fluid.asFluidStack(1000), true);
+		setFluidStack(FluidTankType.PRIMARY.id, FluidUtils.exchangeFluid(milkStack, GrowthCraftMilk.fluids.curds.getFluid()));
+		clearTank(FluidTankType.RENNET.id);
+		fillFluidTank(FluidTankType.WHEY.id, GrowthCraftMilk.fluids.whey.fluid.asFluidStack(1000), true);
 		return true;
 	}
 
