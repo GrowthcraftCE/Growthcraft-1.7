@@ -23,6 +23,7 @@
  */
 package growthcraft.api.core.util;
 
+import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -45,6 +46,26 @@ public class ItemTest
 		if (actual == null) return false;
 		if (!expected.isItemEqual(actual)) return false;
 		if (actual.stackSize < expected.stackSize) return false;
+		return true;
+	}
+
+	public static boolean isValidAndExpected(@Nonnull List<ItemStack> expectedItems, @Nonnull List<ItemStack> givenItems)
+	{
+		if (expectedItems.size() != givenItems.size()) return false;
+		for (int i = 0; i < expectedItems.size(); ++i)
+		{
+			final ItemStack expected = expectedItems.get(i);
+			final ItemStack actual = givenItems.get(i);
+			if (expected != null)
+			{
+				if (!isValid(actual)) return false;
+				if (!expected.isItemEqual(actual)) return false;
+			}
+			else
+			{
+				if (actual != null) return false;
+			}
+		}
 		return true;
 	}
 }
