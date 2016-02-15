@@ -53,6 +53,15 @@ public class MilkRegistry implements ILoggable
 	}
 
 	/**
+	 * If you'd like to log something related to the Milk API, use this logger
+	 * Otherwise, MAKE YOUR OWN.
+	 */
+	public ILogger getLogger()
+	{
+		return logger;
+	}
+
+	/**
 	 * @return current instrance of the MilkRegistry
 	 */
 	public static final MilkRegistry instance()
