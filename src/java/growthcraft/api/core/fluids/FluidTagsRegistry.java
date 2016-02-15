@@ -23,6 +23,8 @@
  */
 package growthcraft.api.core.fluids;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Nonnull;
 
 import java.util.Collection;
@@ -73,5 +75,13 @@ public class FluidTagsRegistry implements IFluidTagsRegistry
 	public FluidTag findTag(@Nonnull String name)
 	{
 		return nameToTag.get(name);
+	}
+
+	@Override
+	public List<FluidTag> expandTagNames(@Nonnull List<String> tagNames)
+	{
+		final List<FluidTag> tags = new ArrayList<FluidTag>();
+		for (String name : tagNames) tags.add(findTag(name));
+		return tags;
 	}
 }

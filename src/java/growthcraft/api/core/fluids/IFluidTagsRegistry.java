@@ -23,6 +23,7 @@
  */
 package growthcraft.api.core.fluids;
 
+import java.util.List;
 import java.util.Collection;
 import javax.annotation.Nonnull;
 
@@ -35,4 +36,5 @@ public interface IFluidTagsRegistry extends ILoggable
 	Collection<String> getNames();
 	Collection<FluidTag> getTags();
 	FluidTag findTag(String name);
+	List<FluidTag> expandTagNames(@Nonnull List<String> tagNames);
 }
