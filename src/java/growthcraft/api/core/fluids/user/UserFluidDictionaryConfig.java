@@ -87,8 +87,9 @@ public class UserFluidDictionaryConfig extends JsonConfigDef
 	}
 
 	@Override
-	public void postInit()
+	public void init()
 	{
+		super.init();
 		if (entries != null)
 		{
 			if (entries.data != null)
