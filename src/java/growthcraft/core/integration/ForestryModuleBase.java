@@ -41,15 +41,21 @@ import forestry.api.core.IGameMode;
 import forestry.api.farming.Farmables;
 import forestry.api.farming.IFarmable;
 import forestry.api.recipes.ICarpenterManager;
+import forestry.api.recipes.ICarpenterRecipe;
 import forestry.api.recipes.ICentrifugeManager;
 import forestry.api.recipes.ICentrifugeRecipe;
 import forestry.api.recipes.ICraftingProvider;
 import forestry.api.recipes.IFabricatorManager;
 import forestry.api.recipes.IFabricatorRecipe;
 import forestry.api.recipes.IFermenterManager;
+import forestry.api.recipes.IFermenterRecipe;
+import forestry.api.recipes.IForestryRecipe;
 import forestry.api.recipes.IMoistenerManager;
+import forestry.api.recipes.IMoistenerRecipe;
 import forestry.api.recipes.ISqueezerManager;
+import forestry.api.recipes.ISqueezerRecipe;
 import forestry.api.recipes.IStillManager;
+import forestry.api.recipes.IStillRecipe;
 import forestry.api.recipes.RecipeManagers;
 import forestry.api.storage.BackpackManager;
 
@@ -190,17 +196,38 @@ public abstract class ForestryModuleBase extends ModIntegrationBase
 
 	// Forestry API shims, so we don't have to do null checks all over the place.
 
-	public abstract static class AbstractManagerShim implements ICraftingProvider
+	public abstract static class AbstractManagerShim<T extends IForestryRecipe> implements ICraftingProvider<T>
 	{
 		private static Map<Object[], Object[]> map = new HashMap<Object[], Object[]>();
+		private Collection<T> coll = new ArrayList<T>();
 
+		@Override
+		public boolean addRecipe(T recipe)
+		{
+			return false;
+		}
+
+		@Override
+		public  boolean removeRecipe(T recipe)
+		{
+			return false;
+		}
+
+		@Override
+		public Collection<T> recipes()
+		{
+			return coll;
+		}
+
+		@Override
+		@Deprecated
 		public Map<Object[], Object[]> getRecipes()
 		{
 			return map;
 		}
 	}
 
-	public static class CarpenterManagerShim extends AbstractManagerShim implements ICarpenterManager
+	public static class CarpenterManagerShim extends AbstractManagerShim<ICarpenterRecipe> implements ICarpenterManager
 	{
 		@Override
 		public void addRecipe(ItemStack box, ItemStack product, Object... materials) {}
@@ -212,28 +239,23 @@ public abstract class ForestryModuleBase extends ModIntegrationBase
 		public void addRecipe(int packagingTime, FluidStack liquid, ItemStack box, ItemStack product, Object... materials) {}
 	}
 
-	public static class CentrifugeManagerShim extends AbstractManagerShim implements ICentrifugeManager
+	public static class CentrifugeManagerShim extends AbstractManagerShim<ICentrifugeRecipe> implements ICentrifugeManager
 	{
-		@Override
-		public void addRecipe(ICentrifugeRecipe recipe) {}
-
 		@Override
 		public void addRecipe(int timePerItem, ItemStack input, Map<ItemStack, Float> products) {}
 	}
 
-	public static class FabricatorManagerShim extends AbstractManagerShim implements IFabricatorManager
+	public static class FabricatorManagerShim extends AbstractManagerShim<IFabricatorRecipe> implements IFabricatorManager
 	{
-		@Override
-		public void addRecipe(IFabricatorRecipe recipe) {}
-
 		@Override
 		public void addRecipe(ItemStack plan, FluidStack molten, ItemStack result, Object[] pattern) {}
 
 		@Override
+		@Deprecated
 		public void addSmelting(ItemStack resource, FluidStack molten, int meltingPoint) {}
 	}
 
-	public static class FermenterManagerShim extends AbstractManagerShim implements IFermenterManager
+	public static class FermenterManagerShim extends AbstractManagerShim<IFermenterRecipe> implements IFermenterManager
 	{
 		@Override
 		public void addRecipe(ItemStack resource, int fermentationValue, float modifier, FluidStack output, FluidStack liquid) {}
@@ -242,13 +264,13 @@ public abstract class ForestryModuleBase extends ModIntegrationBase
 		public void addRecipe(ItemStack resource, int fermentationValue, float modifier, FluidStack output) {}
 	}
 
-	public static class MoistenerManagerShim extends AbstractManagerShim implements IMoistenerManager
+	public static class MoistenerManagerShim extends AbstractManagerShim<IMoistenerRecipe> implements IMoistenerManager
 	{
 		@Override
 		public void addRecipe(ItemStack resource, ItemStack product, int timePerItem) {}
 	}
 
-	public static class SqueezerManagerShim extends AbstractManagerShim implements ISqueezerManager
+	public static class SqueezerManagerShim extends AbstractManagerShim<ISqueezerRecipe> implements ISqueezerManager
 	{
 		@Override
 		public void addRecipe(int timePerItem, ItemStack[] resources, FluidStack liquid, ItemStack remnants, int chance) {}
@@ -260,7 +282,7 @@ public abstract class ForestryModuleBase extends ModIntegrationBase
 		public void addContainerRecipe(int timePerItem, ItemStack emptyContainer, @Nullable ItemStack remnants, float chance) {}
 	}
 
-	public static class StillManagerShim extends AbstractManagerShim implements IStillManager
+	public static class StillManagerShim extends AbstractManagerShim<IStillRecipe> implements IStillManager
 	{
 		@Override
 		public void addRecipe(int cyclesPerUnit, FluidStack input, FluidStack output) {}
@@ -269,7 +291,6 @@ public abstract class ForestryModuleBase extends ModIntegrationBase
 	public static class RecipeManagersShims
 	{
 		private static RecipeManagersShims INSTANCE;
-		public Collection<ICraftingProvider> craftingProviders = ObjectUtils.<Collection<ICraftingProvider>>maybe(RecipeManagers.craftingProviders, new ArrayList<ICraftingProvider>());
 		public ICarpenterManager carpenterManager = ObjectUtils.<ICarpenterManager>maybe(RecipeManagers.carpenterManager, new CarpenterManagerShim());
 		public ICentrifugeManager centrifugeManager = ObjectUtils.<ICentrifugeManager>maybe(RecipeManagers.centrifugeManager, new CentrifugeManagerShim());
 		public IFabricatorManager fabricatorManager = ObjectUtils.<IFabricatorManager>maybe(RecipeManagers.fabricatorManager, new FabricatorManagerShim());
