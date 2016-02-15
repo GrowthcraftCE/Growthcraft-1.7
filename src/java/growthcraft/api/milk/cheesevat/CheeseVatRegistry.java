@@ -24,11 +24,18 @@
 package growthcraft.api.milk.cheesevat;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.util.FluidKey;
+import growthcraft.api.core.util.FluidTest;
+import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.util.ItemTest;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -36,6 +43,8 @@ import net.minecraftforge.fluids.FluidStack;
 public class CheeseVatRegistry implements ICheeseVatRegistry
 {
 	private ILogger logger = NullLogger.INSTANCE;
+	private Set<FluidKey> fluidIngredients = new HashSet<FluidKey>();
+	private Set<ItemKey> itemIngredients = new HashSet<ItemKey>();
 	private List<ICheeseVatRecipe> recipes = new ArrayList<ICheeseVatRecipe>();
 
 	@Override
@@ -45,9 +54,33 @@ public class CheeseVatRegistry implements ICheeseVatRegistry
 	}
 
 	@Override
-	public void addRecipe(@Nonnull List<ItemStack> outputItems, @Nonnull List<FluidStack> inputFluids, @Nonnull List<ItemStack> inputItems)
+	public void addRecipe(@Nonnull List<FluidStack> outputFluids, @Nonnull List<ItemStack> outputItems, @Nonnull List<FluidStack> inputFluids, @Nonnull List<ItemStack> inputItems)
 	{
-		recipes.add(new CheeseVatRecipe(outputItems, inputFluids, inputItems));
+		final ICheeseVatRecipe recipe = new CheeseVatRecipe(outputFluids, outputItems, inputFluids, inputItems);
+		recipes.add(recipe);
+		logger.info("Adding Cheese Vat recipe {%s}", recipe);
+		for (FluidStack stack : inputFluids)
+		{
+			fluidIngredients.add(new FluidKey(stack));
+		}
+		for (ItemStack stack : inputItems)
+		{
+			itemIngredients.add(new ItemKey(stack));
+		}
+	}
+
+	@Override
+	public boolean isFluidIngredient(@Nullable FluidStack fluid)
+	{
+		if (!FluidTest.isValid(fluid)) return false;
+		return fluidIngredients.contains(new FluidKey(fluid));
+	}
+
+	@Override
+	public boolean isItemIngredient(@Nullable ItemStack item)
+	{
+		if (!ItemTest.isValid(item)) return false;
+		return itemIngredients.contains(new ItemKey(item));
 	}
 
 	@Override

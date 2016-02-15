@@ -32,6 +32,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface ICheeseVatRecipe
 {
+	List<FluidStack> getOutputFluidStacks();
 	List<ItemStack> getOutputItemStacks();
 	List<FluidStack> getInputFluidStacks();
 	List<ItemStack> getInputItemStacks();

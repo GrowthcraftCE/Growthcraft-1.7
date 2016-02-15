@@ -34,15 +34,23 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class CheeseVatRecipe implements ICheeseVatRecipe
 {
+	private List<FluidStack> outputFluids;
 	private List<ItemStack> outputItems;
 	private List<FluidStack> inputFluids;
 	private List<ItemStack> inputItems;
 
-	public CheeseVatRecipe(List<ItemStack> oi, List<FluidStack> iflu, List<ItemStack> ii)
+	public CheeseVatRecipe(List<FluidStack> pOutputFluids, List<ItemStack> pOutputItems, List<FluidStack> pInputFluids, List<ItemStack> pInputItems)
 	{
-		this.outputItems = oi;
-		this.inputItems = ii;
-		this.inputFluids = iflu;
+		this.outputFluids = pOutputFluids;
+		this.outputItems = pOutputItems;
+		this.inputFluids = pInputFluids;
+		this.inputItems = pInputItems;
+	}
+
+	@Override
+	public List<FluidStack> getOutputFluidStacks()
+	{
+		return outputFluids;
 	}
 
 	@Override
@@ -69,5 +77,11 @@ public class CheeseVatRecipe implements ICheeseVatRecipe
 		if (!FluidTest.isValidAndExpected(inputFluids, fluids)) return false;
 		if (!ItemTest.isValidAndExpected(inputItems, items)) return false;
 		return true;
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("CheeseVatRecipe(output_fluids: [%s], output_items: [%s], input_fluids: [%s], input_items: [%s])", outputFluids, outputItems, inputFluids, inputItems);
 	}
 }
