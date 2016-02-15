@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,6 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public interface INBTSerializable
 {
-	void readFromNBT(NBTTagCompound data, String name);
-	void writeToNBT(NBTTagCompound data, String name);
+	void readFromNBT(NBTTagCompound data);
+	void writeToNBT(NBTTagCompound data);
 }

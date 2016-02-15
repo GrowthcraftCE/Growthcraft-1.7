@@ -25,7 +25,7 @@ package growthcraft.api.core;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.nbt.INBTSerializable;
+import growthcraft.api.core.nbt.INBTSerializableContext;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -35,7 +35,7 @@ import net.minecraft.nbt.NBTTagCompound;
 /**
  * Don't even try to understand this, save yourself the trouble.
  */
-public abstract class AbstractClassRegistry<T extends INBTSerializable> implements IClassRegistry<T>
+public abstract class AbstractClassRegistry<T extends INBTSerializableContext> implements IClassRegistry<T>
 {
 	/**
 	 * Error raised when an attempt is made to register an effect under an existing name

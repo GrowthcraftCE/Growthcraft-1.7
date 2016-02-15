@@ -27,7 +27,7 @@ import java.util.Random;
 
 import io.netty.buffer.ByteBuf;
 
-import growthcraft.api.core.nbt.INBTSerializable;
+import growthcraft.api.core.nbt.INBTSerializableContext;
 import growthcraft.api.core.stream.IStreamable;
 import growthcraft.core.common.inventory.IInventoryFlagging;
 import growthcraft.core.common.tileentity.IBlockUpdateFlagging;
@@ -37,7 +37,7 @@ import net.minecraft.world.World;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class DeviceBase implements INBTSerializable, IStreamable
+public class DeviceBase implements INBTSerializableContext, IStreamable
 {
 	protected Random random = new Random();
 	protected TileEntity parent;

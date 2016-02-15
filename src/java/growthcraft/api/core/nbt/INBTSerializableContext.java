@@ -21,30 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.effect;
+package growthcraft.api.core.nbt;
 
-import java.util.Random;
+import net.minecraft.nbt.NBTTagCompound;
 
-import growthcraft.api.core.description.IDescribable;
-import growthcraft.api.core.nbt.INBTSerializableContext;
-
-import net.minecraft.world.World;
-import net.minecraft.entity.Entity;
-
-/**
- * This is the main interface for Growthcraft's Effect system.
- * Its meant to solve the problem with constructing complex item effects,
- * where data along just won't cut it.
- */
-public interface IEffect extends IDescribable, INBTSerializableContext
+public interface INBTSerializableContext
 {
-	/**
-	 * This method is called when the effect needs to be applied to the
-	 * given world and entity.
-	 *
-	 * @param world - world that the entity is currently present ing
-	 * @param entity - entity to apply the effect to
-	 * @param data - any extra data you want to pass along
-	 */
-	void apply(World world, Entity entity, Random random, Object data);
+	void readFromNBT(NBTTagCompound data, String name);
+	void writeToNBT(NBTTagCompound data, String name);
 }

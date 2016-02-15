@@ -25,7 +25,7 @@ package growthcraft.api.core.util;
 
 import io.netty.buffer.ByteBuf;
 
-import growthcraft.api.core.nbt.INBTSerializable;
+import growthcraft.api.core.nbt.INBTSerializableContext;
 import growthcraft.api.core.stream.IStreamable;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,7 +33,7 @@ import net.minecraft.nbt.NBTTagCompound;
 /**
  * A simple tick keeping class for loop counting
  */
-public class PulseStepper implements INBTSerializable, IStreamable
+public class PulseStepper implements INBTSerializableContext, IStreamable
 {
 	public static enum State
 	{

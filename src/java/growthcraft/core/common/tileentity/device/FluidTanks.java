@@ -25,7 +25,7 @@ package growthcraft.core.common.tileentity.device;
 
 import io.netty.buffer.ByteBuf;
 
-import growthcraft.api.core.nbt.INBTSerializable;
+import growthcraft.api.core.nbt.INBTSerializableContext;
 import growthcraft.api.core.stream.IStreamable;
 import growthcraft.api.core.stream.StreamUtils;
 
@@ -36,7 +36,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 
-public class FluidTanks implements IFluidTanks, INBTSerializable, IStreamable
+public class FluidTanks implements IFluidTanks, INBTSerializableContext, IStreamable
 {
 	private FluidTank[] tanks;
 
