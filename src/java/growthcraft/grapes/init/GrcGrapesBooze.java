@@ -61,7 +61,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 		}
 
 		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[0])
-			.tags(BoozeTag.YOUNG)
+			.tags(BoozeTag.WINE, BoozeTag.YOUNG)
 			.pressesFrom(
 				GrowthCraftGrapes.grapes.asStack(),
 				GrowthCraftGrapes.getConfig().grapeWinePressingTime,
@@ -70,7 +70,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 
 		// Brewers Yeast, Nether Wart
 		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[1])
-			.tags(BoozeTag.FERMENTED)
+			.tags(BoozeTag.WINE, BoozeTag.FERMENTED)
 			.fermentsFrom(fs[0], YeastType.BREWERS.asStack(), fermentTime)
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
 			.getEffect()
@@ -79,7 +79,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 
 		// Glowstone Dust
 		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[2])
-			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT)
+			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POTENT)
 			.fermentsFrom(fs[1], new ItemStack(Items.glowstone_dust), fermentTime)
 			.fermentsFrom(fs[3], new ItemStack(Items.glowstone_dust), fermentTime)
 			.getEffect()
@@ -88,7 +88,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 
 		// Redstone Dust
 		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[3])
-			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED)
+			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
 			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
 			.fermentsFrom(fs[2], new ItemStack(Items.redstone), fermentTime)
 			.getEffect()
@@ -97,7 +97,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 
 		// Ambrosia - Ethereal Yeast
 		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[4])
-			.tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
+			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
 			.fermentsFrom(fs[2], YeastType.ETHEREAL.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ETHEREAL.asStack(), fermentTime)
 			.getEffect()
@@ -107,7 +107,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 
 		// Port Wine - Bayanus Yeast
 		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[5])
-			.tags(BoozeTag.FERMENTED, BoozeTag.FORTIFIED)
+			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.FORTIFIED)
 			.brewsFrom(
 				new FluidStack(grapeWineBooze[1], GrowthCraftGrapes.getConfig().portWineBrewingYield),
 				YeastType.BAYANUS.asStack(),
@@ -119,7 +119,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 
 		// Intoxicated Wine
 		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[6])
-			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
+			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
 			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ORIGIN.asStack(), fermentTime)
 			.getEffect()
@@ -129,7 +129,7 @@ public class GrcGrapesBooze extends GrcModuleBase
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.weakness.id, TickUtils.minutes(3), 2))));
 
 		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[7])
-			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
+			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POISONED)
 			//.fermentsTo(fs[1], YeastType.NETHERRASH.asStack(), fermentTime)
 			//.fermentsTo(fs[2], YeastType.NETHERRASH.asStack(), fermentTime)
 			//.fermentsTo(fs[3], YeastType.NETHERRASH.asStack(), fermentTime)
