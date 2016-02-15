@@ -298,8 +298,9 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 	{
 		if (world.isRemote) return true;
 		if (tryWrenchItem(player, world, x, y, z)) return true;
+		if (handleIFluidHandler(world, x, y, z, player, meta)) return true;
 		if (handleOnUseItem(world, x, y, z, player, meta)) return true;
-		return handleIFluidHandler(world, x, y, z, player, meta);
+		return false;
 	}
 
 	@SuppressWarnings("unchecked")
