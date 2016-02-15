@@ -23,6 +23,7 @@
  */
 package growthcraft.core.common.inventory;
 
+import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -31,12 +32,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
+/**
+ * Utility class for handling some `painful` inventory operations
+ */
 public class InventoryProcessor
 {
 	private static final InventoryProcessor	inst = new InventoryProcessor();
 
 	private InventoryProcessor() {}
 
+	/**
+	 * Are the provided slots empty?
+	 *
+	 * @param inv - inventory to check
+	 * @param slots - slots to check
+	 * @return true, the slots are empty, false otherwise
+	 */
 	public boolean slotsAreEmpty(@Nonnull IInventory inv, @Nonnull int[] slots)
 	{
 		for (int slot : slots)
@@ -46,6 +57,14 @@ public class InventoryProcessor
 		return true;
 	}
 
+	/**
+	 * Merges the provided item into the inventory slot
+	 *
+	 * @param inv - inventory to merge in
+	 * @param item - item stack to merge
+	 * @param slot - slot to merge in
+	 * @return true, the item was merged, false otherwise
+	 */
 	public boolean mergeWithSlot(@Nonnull IInventory inv, @Nullable ItemStack item, int slot)
 	{
 		if (item == null) return false;
@@ -195,6 +214,25 @@ public class InventoryProcessor
 	}
 
 	/**
+	 * Checks a slice of slots for the given items
+	 *
+	 * @param inv - inventory to check
+	 * @param filter - itemstacks to look for
+	 * @param from - a slice of slots to look in
+	 * @return true, all the items in the filter are present in the inv, false otherwise
+	 */
+	public boolean checkSlots(@Nonnull IInventory inv, @Nonnull List<ItemStack> filter, int[] from)
+	{
+		assert filter.size() == from.length;
+
+		for (int i = 0; i < filter.size(); ++i)
+		{
+			if (!checkSlot(inv, filter.get(i), from[i])) return false;
+		}
+		return true;
+	}
+
+	/**
 	 * @return true if moved, false otherwise
 	 */
 	public boolean moveToSlots(@Nonnull IInventory inv, @Nonnull ItemStack[] filter, int[] from, int[] to)
@@ -267,6 +305,134 @@ public class InventoryProcessor
 			if (query.isItemEqual(stack)) return i;
 		}
 		return -1;
+	}
+
+	/**
+	 * Search the inventory for all the items given, this method will skip
+	 * slots that have been used before.
+	 *
+	 * @param inv - inventory to search
+	 * @param stacks - item stacks to search for
+	 * @return slot ids
+	 */
+	public int[] findItemSlots(@Nonnull IInventory inv, @Nonnull List<ItemStack> expected)
+	{
+		final boolean[] usedSlots = new boolean[inv.getSizeInventory()];
+		final int[] slots = new int[expected.size()];
+		int i = 0;
+		for (ItemStack expectedStack : expected)
+		{
+			slots[i] = -1;
+			for (int slotIndex = 0; slotIndex < inv.getSizeInventory(); ++slotIndex)
+			{
+				final ItemStack stack = inv.getStackInSlot(slotIndex);
+				if (checkSlot(inv, expectedStack, slotIndex))
+				{
+					if (usedSlots[slotIndex]) continue;
+					usedSlots[slotIndex] = true;
+					slots[i] = findItemSlot(inv, stack);
+					break;
+				}
+			}
+			i++;
+		}
+		return slots;
+	}
+
+	/**
+	 * Finds the next empty slot starting from the beginning
+	 *
+	 * @param inv - source inventory to search
+	 * @return -1 no slot was found, slot index otherwise
+	 */
+	public int findNextEmpty(@Nonnull IInventory inv)
+	{
+		for (int i = 0; i < inv.getSizeInventory(); ++i)
+		{
+			if (inv.getStackInSlot(i) == null) return i;
+		}
+		return -1;
+	}
+
+	/**
+	 * Finds the next empty slot starting from the end of the inventory
+	 *
+	 * @param inv - source inventory to search
+	 * @return -1 no slot was found, slot index otherwise
+	 */
+	public int findNextEmptyFromEnd(@Nonnull IInventory inv)
+	{
+		for (int i = inv.getSizeInventory() - 1; i >= 0; --i)
+		{
+			if (inv.getStackInSlot(i) == null) return i;
+		}
+		return -1;
+	}
+
+	/**
+	 * Finds the next slot with an item present, starting from the beginning
+	 *
+	 * @param inv - source inventory to search
+	 * @return -1 no slot was found, slot index otherwise
+	 */
+	public int findNextPresent(@Nonnull IInventory inv)
+	{
+		for (int i = 0; i < inv.getSizeInventory(); ++i)
+		{
+			if (inv.getStackInSlot(i) != null) return i;
+		}
+		return -1;
+	}
+
+	/**
+	 * Finds the next slot with an item present starting from the end of the inventory
+	 *
+	 * @param inv - source inventory to search
+	 * @return -1 no slot was found, slot index otherwise
+	 */
+	public int findNextPresentFromEnd(@Nonnull IInventory inv)
+	{
+		for (int i = inv.getSizeInventory() - 1; i >= 0; --i)
+		{
+			if (inv.getStackInSlot(i) != null) return i;
+		}
+		return -1;
+	}
+
+	/**
+	 * Consume items in the inventory.
+	 *
+	 * @param inv - source inventory to consume items from
+	 * @param expected - items to consume in inventory
+	 * @param slots - slots to consume from
+	 * @return true, items where consumed, false otherwise
+	 */
+	public boolean consumeItemsInSlots(@Nonnull IInventory inv, @Nonnull List<ItemStack> expected, @Nonnull int[] slots)
+	{
+		for (int i = 0; i < slots.length; ++i)
+		{
+			final int slot = slots[i];
+			final ItemStack expectedStack = expected.get(i);
+			if (expectedStack != null)
+			{
+				inv.decrStackSize(slot, expectedStack.stackSize);
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Consume items in the inventory, this method will search for the slots.
+	 *
+	 * @param inv - source inventory to consume items from
+	 * @param expected - items to consume in inventory
+	 * @return true, items where consumed, false otherwise
+	 */
+	public boolean consumeItems(@Nonnull IInventory inv, @Nonnull List<ItemStack> expected)
+	{
+		final int[] slots = findItemSlots(inv, expected);
+		if (!checkSlots(inv, expected, slots)) return false;
+		return consumeItemsInSlots(inv, expected, slots);
 	}
 
 	public static InventoryProcessor instance()
