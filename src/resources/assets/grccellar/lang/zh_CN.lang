@@ -49,15 +49,15 @@ grc.potion.tipsy=微醺
 grc.booze=豪饮
 
 # Modifiers
-grc.booze.modifier.young=低度
-grc.booze.modifier.fermented=发酵
-grc.booze.modifier.extended=后劲
-grc.booze.modifier.potent=高度
-grc.booze.modifier.hyper_extended=较大后劲
-grc.booze.modifier.deadly=致死
-grc.booze.modifier.poisoned=毒性
-grc.booze.modifier.chilled=冷藏
-grc.booze.modifier.intoxicated=剧毒
+grc.fluids.tag.young=低度
+grc.fluids.tag.fermented=发酵
+grc.fluids.tag.extended=后劲
+grc.fluids.tag.potent=高度
+grc.fluids.tag.hyper_extended=较大后劲
+grc.fluids.tag.deadly=致死
+grc.fluids.tag.poisoned=毒性
+grc.fluids.tag.chilled=冷藏
+grc.fluids.tag.intoxicated=剧毒
 
 # GUI
 gui.grc.empty=清空

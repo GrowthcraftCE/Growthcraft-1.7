@@ -49,18 +49,20 @@ grc.potion.tipsy=Tipsy
 grc.booze=Booze
 
 # Modifiers
-grc.booze.modifier.chilled=Chilled
-grc.booze.modifier.deadly=Deadly
-grc.booze.modifier.extended=Extended
-grc.booze.modifier.fermented=Fermented
-grc.booze.modifier.fortified=Fortified
-grc.booze.modifier.hopped=Hopped
-grc.booze.modifier.hyper_extended=Hyper-extended
-grc.booze.modifier.intoxicated=Intoxicated
-grc.booze.modifier.magical=Magical
-grc.booze.modifier.poisoned=Poisoned
-grc.booze.modifier.potent=Potent
-grc.booze.modifier.young=Young
+grc.fluids.tag.chilled=Chilled
+grc.fluids.tag.cider=Cider
+grc.fluids.tag.deadly=Deadly
+grc.fluids.tag.extended=Extended
+grc.fluids.tag.fermented=Fermented
+grc.fluids.tag.fortified=Fortified
+grc.fluids.tag.hopped=Hopped
+grc.fluids.tag.hyper_extended=Hyper-extended
+grc.fluids.tag.intoxicated=Intoxicated
+grc.fluids.tag.magical=Magical
+grc.fluids.tag.poisoned=Poisoned
+grc.fluids.tag.potent=Potent
+grc.fluids.tag.wine=Wine
+grc.fluids.tag.young=Young
 
 # GUI
 gui.grc.empty=Empty

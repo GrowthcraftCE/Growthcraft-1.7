@@ -28,10 +28,10 @@ grc.potion.tipsy=Pompette
 grc.booze=Picoler
 
 # Modifiers
-grc.booze.modifier.young=Nouveau
-grc.booze.modifier.fermented=Fermenté
-grc.booze.modifier.extended=Prolongé
-grc.booze.modifier.potent=Puissant
+grc.fluids.tag.young=Nouveau
+grc.fluids.tag.fermented=Fermenté
+grc.fluids.tag.extended=Prolongé
+grc.fluids.tag.potent=Puissant
 
 # GUI
 gui.grc.empty=Vide

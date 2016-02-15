@@ -49,15 +49,15 @@ grc.potion.tipsy=Опьянение
 grc.booze=Booze
 
 # Modifiers
-grc.booze.modifier.young=Young
-grc.booze.modifier.fermented=Fermented
-grc.booze.modifier.extended=Extended
-grc.booze.modifier.potent=Potent
-grc.booze.modifier.hyper_extended=Hyper Extended
-grc.booze.modifier.deadly=Deadly
-grc.booze.modifier.poisoned=Poisoned
-grc.booze.modifier.chilled=Chilled
-grc.booze.modifier.intoxicated=Intoxicated
+grc.fluids.tag.young=Young
+grc.fluids.tag.fermented=Fermented
+grc.fluids.tag.extended=Extended
+grc.fluids.tag.potent=Potent
+grc.fluids.tag.hyper_extended=Hyper Extended
+grc.fluids.tag.deadly=Deadly
+grc.fluids.tag.poisoned=Poisoned
+grc.fluids.tag.chilled=Chilled
+grc.fluids.tag.intoxicated=Intoxicated
 
 # GUI
 gui.grc.empty=Пусто
