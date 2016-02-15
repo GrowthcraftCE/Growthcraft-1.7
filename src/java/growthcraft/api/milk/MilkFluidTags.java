@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,9 +28,10 @@ import growthcraft.api.core.CoreRegistry;
 
 public class MilkFluidTags
 {
+	public static final FluidTag CHEESE = CoreRegistry.instance().fluidTags().createTag("cheese");
+	public static final FluidTag CREAM = CoreRegistry.instance().fluidTags().createTag("cream");
 	public static final FluidTag MILK = CoreRegistry.instance().fluidTags().createTag("milk");
 	public static final FluidTag MILK_CURDS = CoreRegistry.instance().fluidTags().createTag("milk_curds");
-	public static final FluidTag CREAM = CoreRegistry.instance().fluidTags().createTag("cream");
 	public static final FluidTag RENNET = CoreRegistry.instance().fluidTags().createTag("rennet");
 
 	private MilkFluidTags() {}
