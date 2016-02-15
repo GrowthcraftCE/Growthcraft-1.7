@@ -26,7 +26,10 @@ package growthcraft.milk;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.api.core.util.OreItemStacks;
+import growthcraft.api.core.util.TaggedFluidStacks;
 import growthcraft.api.milk.MilkRegistry;
+import growthcraft.api.milk.util.CheeseVatRecipeBuilder;
 import growthcraft.milk.client.handler.GrcMilkHandleTextureStitch;
 import growthcraft.milk.eventhandler.EventHandlerOnBabyCowDeath;
 import growthcraft.milk.common.CommonProxy;
@@ -40,7 +43,7 @@ import growthcraft.milk.creativetab.GrcMilkCreativeTabs;
 import growthcraft.milk.init.GrcMilkBlocks;
 import growthcraft.milk.init.GrcMilkFluids;
 import growthcraft.milk.init.GrcMilkItems;
-//import growthcraft.milk.common.item.EnumCheeseType;
+import growthcraft.milk.common.item.EnumCheeseType;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -51,8 +54,6 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
-//import net.minecraftforge.fluids.Fluid;
-//import net.minecraftforge.fluids.FluidStack;
 
 @Mod(
 	modid = GrowthCraftMilk.MOD_ID,
@@ -136,48 +137,53 @@ public class GrowthCraftMilk
 
 		modules.init();
 
-		/*for (Fluid f : fluids.getMilkFluids())
-		{
-			CheeseVatRecipeBuilder.buildRecipe()
-				.output(EnumCheeseType.CHEDDAR.asBlockItemStack())
-				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
-				.items(new OreItemStack("foodSalt", 1), new OreItemStack("dyeOrange", 1));
+		CheeseVatRecipeBuilder.buildRecipe("CHEDDAR Recipe")
+			.outputFluids(EnumCheeseType.CHEDDAR.asFluidStack(5000))
+			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+			.inputItems(new OreItemStacks("foodSalt", 1), new OreItemStacks("dyeOrange", 1))
+			.register();
 
-			CheeseVatRecipeBuilder.buildRecipe()
-				.output(EnumCheeseType.GORGONZOLA.asBlockItemStack())
-				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
-				.items(new OreItemStack("foodSalt", 1), new OreItemStack("foodFruit", 1));
+		CheeseVatRecipeBuilder.buildRecipe("GORGONZOLA Recipe")
+			.outputFluids(EnumCheeseType.GORGONZOLA.asFluidStack(5000))
+			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+			.inputItems(new OreItemStacks("foodSalt", 1), new OreItemStacks("foodFruit", 1))
+			.register();
 
-			CheeseVatRecipeBuilder.buildRecipe()
-				.output(EnumCheeseType.EMMENTALER.asBlockItemStack())
-				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
-				.items(new OreItemStack("foodSalt", 1), new OreItemStack("foodWheat", 1));
+		CheeseVatRecipeBuilder.buildRecipe("EMMENTALER Recipe")
+			.outputFluids(EnumCheeseType.EMMENTALER.asFluidStack(5000))
+			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+			.inputItems(new OreItemStacks("foodSalt", 1), new OreItemStacks("cropWheat", 1))
+			.register();
 
-			CheeseVatRecipeBuilder.buildRecipe()
-				.output(EnumCheeseType.APPENZELLER.asBlockItemStack())
-				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000), new TaggedFluidStack("wine", 1000))
-				.items(new OreItemStack("foodSalt", 1), new OreItemStack("foodFruit", 1));
+		CheeseVatRecipeBuilder.buildRecipe("APPENZELLER Recipe")
+			.outputFluids(EnumCheeseType.APPENZELLER.asFluidStack(5000))
+			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"), new TaggedFluidStacks(1000, "wine"))
+			.inputItems(new OreItemStacks("foodSalt", 1))
+			.register();
 
-			CheeseVatRecipeBuilder.buildRecipe()
-				.output(EnumCheeseType.APPENZELLER.asBlockItemStack())
-				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000), new TaggedFluidStack("cider", 1000))
-				.items(new OreItemStack("foodSalt", 1), new OreItemStack("foodFruit", 1));
+		CheeseVatRecipeBuilder.buildRecipe("APPENZELLER Recipe")
+			.outputFluids(EnumCheeseType.APPENZELLER.asFluidStack(5000))
+			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"), new TaggedFluidStacks(1000, "cider"))
+			.inputItems(new OreItemStacks("foodSalt", 1))
+			.register();
 
-			CheeseVatRecipeBuilder.buildRecipe()
-				.output(EnumCheeseType.ASIAGO.asBlockItemStack())
-				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
-				.items(new OreItemStack("foodSalt", 1), new OreItemStack("foodSalt", 1), new OreItemStack("dyeYellow", 1));
+		CheeseVatRecipeBuilder.buildRecipe("ASIAGO Recipe")
+			.outputFluids(EnumCheeseType.ASIAGO.asFluidStack(5000))
+			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+			.inputItems(new OreItemStacks("foodSalt", 1), new OreItemStacks("foodSalt", 1), new OreItemStacks("dyeYellow", 1))
+			.register();
 
-			CheeseVatRecipeBuilder.buildRecipe()
-				.output(EnumCheeseType.PARMESAN.asBlockItemStack())
-				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
-				.items(new OreItemStack("foodSalt", 1), new OreItemStack("dyeWhite", 1));
+		CheeseVatRecipeBuilder.buildRecipe("PARMESAN Recipe")
+			.outputFluids(EnumCheeseType.PARMESAN.asFluidStack(5000))
+			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+			.inputItems(new OreItemStacks("foodSalt", 1), new OreItemStacks("dyeWhite", 1))
+			.register();
 
-			CheeseVatRecipeBuilder.buildRecipe()
-				.output(EnumCheeseType.MONTEREY.asBlockItemStack())
-				.fluids(new TaggedFluidStack("milk", 5000), new FluidStack(fluids.rennet, 333), new FluidStack(fluids.whey, 1000))
-				.items(new OreItemStack("foodSalt", 1), new OreItemStack("dyeRed", 1));
-		}*/
+		CheeseVatRecipeBuilder.buildRecipe("MONTEREY Recipe")
+			.outputFluids(EnumCheeseType.MONTEREY.asFluidStack(5000))
+			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+			.inputItems(new OreItemStacks("foodSalt", 1), new OreItemStacks("dyeRed", 1))
+			.register();
 	}
 
 	@EventHandler
