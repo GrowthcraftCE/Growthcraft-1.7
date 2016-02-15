@@ -3,6 +3,7 @@ package growthcraft.cellar.common.item;
 import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.util.FluidTest;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.util.UnitFormatter;
@@ -105,6 +106,13 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 	public IIcon getIconFromDamage(int meta)
 	{
 		return this.icons[meta];
+	}
+
+	public int getFluidAmount(ItemStack container)
+	{
+		final FluidStack stack = getFluid(container);
+		if (FluidTest.isValid(stack)) return stack.amount;
+		return 0;
 	}
 
 	@Override
@@ -329,5 +337,17 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 			BoozeUtils.addEffectInformation(booze, stack, player, list, bool);
 		}
 		super.addInformation(stack, player, list, bool);
+	}
+
+	@Override
+	public boolean showDurabilityBar(ItemStack stack)
+	{
+		return FluidTest.isValid(getFluid(stack));
+	}
+
+	@Override
+	public double getDurabilityForDisplay(ItemStack stack)
+	{
+		return 1D - ((double)getFluidAmount(stack) / (double)getCapacity(stack));
 	}
 }
