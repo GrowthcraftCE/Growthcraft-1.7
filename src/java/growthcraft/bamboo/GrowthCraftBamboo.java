@@ -104,6 +104,7 @@ public class GrowthCraftBamboo
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
 
+		if (config.enableForestryIntegration) modules.add(new growthcraft.bamboo.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bamboo.integration.ThaumcraftModule());
 
 		if (config.debugEnabled) modules.setLogger(logger);
