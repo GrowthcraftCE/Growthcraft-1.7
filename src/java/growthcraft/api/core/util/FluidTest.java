@@ -112,4 +112,24 @@ public class FluidTest
 		}
 		return true;
 	}
+
+	public static boolean hasEnoughAndExpected(@Nonnull List<FluidStack> expectedFluids, @Nonnull List<FluidStack> givenFluids)
+	{
+		if (expectedFluids.size() != givenFluids.size()) return false;
+		for (int i = 0; i < expectedFluids.size(); ++i)
+		{
+			final FluidStack expected = expectedFluids.get(i);
+			final FluidStack actual = givenFluids.get(i);
+			if (expected != null)
+			{
+				if (!isValid(actual)) return false;
+				if (!hasEnough(expected, actual)) return false;
+			}
+			else
+			{
+				if (actual != null) return false;
+			}
+		}
+		return true;
+	}
 }
