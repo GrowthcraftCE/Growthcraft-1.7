@@ -29,14 +29,14 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.fluids.IFluidTagsRegistry;
+import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.fluids.FluidTag;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class MultiFluidStackSchema implements ICommentable, IValidatable
+public class MultiFluidStackSchema implements ICommentable, IValidatable, IMultiFluidStacks
 {
 	public List<String> names = new ArrayList<String>();
 	public List<String> inclusion_tags = new ArrayList<String>();
@@ -58,21 +58,7 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable
 
 	private List<FluidTag> expandTagNames(@Nonnull List<String> tagNames)
 	{
-		final IFluidTagsRegistry fluidTags = CoreRegistry.instance().fluidTags();
-		final List<FluidTag> tags = new ArrayList<FluidTag>();
-		for (String name : tagNames)
-		{
-			final FluidTag tag = fluidTags.findTag(name);
-			if (tag != null)
-			{
-				tags.add(tag);
-			}
-			else
-			{
-				// WARN user
-			}
-		}
-		return tags;
+		return CoreRegistry.instance().fluidTags().expandTagNames(tagNames);
 	}
 
 	public List<FluidTag> expandInclusionTags()
@@ -103,6 +89,7 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable
 		return result;
 	}
 
+	@Override
 	public List<FluidStack> getFluidStacks()
 	{
 		final List<FluidStack> stacks = new ArrayList<FluidStack>();
