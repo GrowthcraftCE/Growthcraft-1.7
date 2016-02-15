@@ -72,7 +72,7 @@ public abstract class ForestryModuleBase extends ModIntegrationBase
 		WATER("water"),
 		HONEY("honey"),
 		BIOMASS("biomass"),
-		JUICE("biomass"),
+		JUICE("juice"),
 		SEEDOIL("seedoil");
 
 		public final String name;
