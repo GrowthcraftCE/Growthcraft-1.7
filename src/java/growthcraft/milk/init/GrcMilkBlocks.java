@@ -33,6 +33,7 @@ import growthcraft.milk.common.block.BlockCheeseVat;
 import growthcraft.milk.common.block.BlockHangingCurds;
 import growthcraft.milk.common.block.BlockPancheon;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
+import growthcraft.milk.common.item.ItemBlockHangingCurds;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
@@ -67,7 +68,7 @@ public class GrcMilkBlocks extends GrcModuleBase
 		cheeseBlock.register("grcmilk.CheeseBlock", ItemBlockCheeseBlock.class);
 		cheesePress.register("grcmilk.CheesePress");
 		cheeseVat.register("grcmilk.CheeseVat");
-		hangingCurds.register("grcmilk.HangingCurds");
+		hangingCurds.register("grcmilk.HangingCurds", ItemBlockHangingCurds.class);
 		pancheon.register("grcmilk.Pancheon");
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(cheeseVat.asStack(),

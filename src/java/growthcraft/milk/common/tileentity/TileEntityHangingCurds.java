@@ -45,7 +45,9 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityHangingCurds extends GrcTileEntityBase
 {
+	// SpatialRandom instance
 	private SpatialRandom sprand = new SpatialRandom();
+	// Pulsar instance
 	private PulseStepper pulsar = new PulseStepper(TickUtils.seconds(15), 10);
 
 	// the following variables are responsible for step tracking
@@ -113,18 +115,30 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 		}
 	}
 
+	public void readFromNBTForItem(NBTTagCompound nbt)
+	{
+		cheese.readFromNBT(nbt);
+		pulsar.readFromNBT(nbt, "pulsar");
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		pulsar.readFromNBT(nbt, "pulsar");
+		readFromNBTForItem(nbt);
+	}
+
+	public void writeToNBTForItem(NBTTagCompound nbt)
+	{
+		cheese.writeToNBT(nbt);
+		pulsar.writeToNBT(nbt, "pulsar");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		pulsar.writeToNBT(nbt, "pulsar");
+		writeToNBTForItem(nbt);
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_READ)

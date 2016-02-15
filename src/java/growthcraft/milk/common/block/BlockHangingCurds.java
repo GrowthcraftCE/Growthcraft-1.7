@@ -23,18 +23,30 @@
  */
 package growthcraft.milk.common.block;
 
+import java.util.List;
+import java.util.Random;
+
+import growthcraft.api.core.util.BBox;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.api.core.util.BBox;
 import growthcraft.milk.client.render.RenderHangingCurds;
+import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
 import growthcraft.milk.GrowthCraftMilk;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
-import net.minecraft.world.World;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockHangingCurds extends GrcBlockContainer
@@ -43,11 +55,57 @@ public class BlockHangingCurds extends GrcBlockContainer
 	{
 		// placeholder
 		super(Material.wood);
+		setTickRandomly(true);
 		setBlockName("grcmilk.HangingCurds");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityHangingCurds.class);
 		final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 16f, 8f).scale(1f / 16f);
 		setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
+	{
+		final Item item = stack.getItem();
+		if (item instanceof ItemBlockHangingCurds)
+		{
+			final ItemBlockHangingCurds cheeseBlock = item;
+			final TileEntityCheeseBlock teHangingCurds = getTileEntity(world, x, y, z);
+			if (teHangingCurds != null)
+			{
+				teHangingCurds.readFromNBTForItem(cheeseBlock.getTileData(stack));
+			}
+		}
+	}
+
+	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public void getSubBlocks(Item item, CreativeTabs tab, List list)
+	{
+		if (item instanceof ItemBlockHangingCurds)
+		{
+			final ItemBlockHangingCurds ib = item;
+			for (EnumCheeseType cheese : EnumCheeseType.VALUES)
+			{
+				if (cheese.hasBlock())
+				{
+					final ItemStack stack = new ItemStack(item, 1, cheese.meta);
+					ib.getTileData(stack);
+					list.add(stack);
+				}
+			}
+		}
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player)
+	{
+		final TileEntityCheeseBlock teHangingCurds = getTileEntity(world, x, y, z);
+		if (teHangingCurds != null)
+		{
+			return teHangingCurds.asItemStack();
+		}
+		return super.getPickBlock(target, world, x, y, z, player);
 	}
 
 	@Override
@@ -60,6 +118,20 @@ public class BlockHangingCurds extends GrcBlockContainer
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
 		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
+	}
+
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random random)
+	{
+		super.updateTick(world, x, y, z, random);
+		if (!world.isRemote)
+		{
+			if (!canBlockStay(world, x, y, z))
+			{
+				dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+				world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.UPDATE_AND_SYNC);
+			}
+		}
 	}
 
 	@Override
