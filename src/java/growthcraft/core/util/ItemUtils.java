@@ -19,6 +19,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -236,6 +237,11 @@ public class ItemUtils
 	public static void spawnItemStackAtEntity(ItemStack stack, Entity entity, Random random)
 	{
 		spawnItemStack(entity.worldObj, entity.posX, entity.posY, entity.posZ, stack, random);
+	}
+
+	public static void spawnItemStackAtTile(ItemStack stack, TileEntity tile, Random random)
+	{
+		spawnItemStack(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord, stack, random);
 	}
 
 	/**
