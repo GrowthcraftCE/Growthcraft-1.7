@@ -96,6 +96,13 @@ public class NBTHelper
 
 	private NBTHelper() {}
 
+	@SuppressWarnings({"unchecked"})
+	public static NBTTagCompound copyCompoundTag(NBTTagCompound tag)
+	{
+		final NBTBase newTag = tag.copy();
+		return (NBTTagCompound)newTag;
+	}
+
 	public static NBTTagCompound openItemStackTag(ItemStack stack)
 	{
 		NBTTagCompound tag = stack.getTagCompound();
