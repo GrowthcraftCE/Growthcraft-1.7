@@ -21,6 +21,11 @@ public class FluidUtils
 		return fluids;
 	}
 
+	public static FluidStack exchangeFluid(FluidStack stack, Fluid newFluid)
+	{
+		return new FluidStack(newFluid, stack.amount);
+	}
+
 	public static boolean doesFluidExist(String name)
 	{
 		return FluidRegistry.getFluid(name) != null && FluidRegistry.isFluidRegistered(name);
