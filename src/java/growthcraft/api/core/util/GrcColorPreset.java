@@ -39,7 +39,7 @@ import net.minecraft.util.StatCollector;
 /**
  * Pretty much stolen from Applied Energistics 2, thanks AlgorithmX2.
  */
-public enum GrcColour
+public enum GrcColorPreset
 {
 	White("grc.colour.White", 0xBEBEBE, 0xDBDBDB, 0xFAFAFA),
 	Orange("grc.colour.Orange", 0xF99739, 0xFAAE44, 0xF4DEC3),
@@ -59,8 +59,8 @@ public enum GrcColour
 	Black("grc.colour.Black", 0x2B2B2B, 0x565656, 0x848484),
 	Transparent("grc.colour.Transparent", 0x1B2344, 0x895CA8, 0xD7BBEC);
 
-	public static final List<GrcColour> ALL_COLORS = Arrays.asList(White, Orange, Magenta, LightBlue, Yellow, Lime, Pink, Gray, LightGray, Cyan, Purple, Blue, Brown, Green, Red, Black, Transparent);
-	public static final List<GrcColour> VALID_COLORS = Arrays.asList(White, Orange, Magenta, LightBlue, Yellow, Lime, Pink, Gray, LightGray, Cyan, Purple, Blue, Brown, Green, Red, Black);
+	public static final List<GrcColorPreset> ALL_COLORS = Arrays.asList(White, Orange, Magenta, LightBlue, Yellow, Lime, Pink, Gray, LightGray, Cyan, Purple, Blue, Brown, Green, Red, Black, Transparent);
+	public static final List<GrcColorPreset> VALID_COLORS = Arrays.asList(White, Orange, Magenta, LightBlue, Yellow, Lime, Pink, Gray, LightGray, Cyan, Purple, Blue, Brown, Green, Red, Black);
 
 	/**
 	 * Unlocalized name for color.
@@ -82,7 +82,7 @@ public enum GrcColour
 	 */
 	public final int whiteVariant;
 
-	GrcColour(String unLocname, int blackHex, int medHex, int whiteHex)
+	GrcColorPreset(String unLocname, int blackHex, int medHex, int whiteHex)
 	{
 		this.unlocalizedName = unLocname;
 		this.blackVariant = blackHex;
@@ -95,7 +95,7 @@ public enum GrcColour
 	 * @param colour - colour to check
 	 * @return true if either colour is transparent, or if the colours are equal
 	 */
-	public boolean matches(GrcColour colour)
+	public boolean matches(GrcColorPreset colour)
 	{
 		return this == Transparent || colour == Transparent || this == colour;
 	}
@@ -110,7 +110,7 @@ public enum GrcColour
 	 * @param id - the ordinal value of the colour
 	 * @return colour
 	 */
-	public static GrcColour toColour(int id)
+	public static GrcColorPreset toColour(int id)
 	{
 		return ALL_COLORS.get(id);
 	}
