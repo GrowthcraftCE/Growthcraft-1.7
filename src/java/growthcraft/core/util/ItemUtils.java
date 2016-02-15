@@ -17,8 +17,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -149,12 +149,25 @@ public class ItemUtils
 		player.inventory.setInventorySlotContents(player.inventory.currentItem, stack);
 	}
 
-	public static void decreaseStackOnPlayer(ItemStack itemstack, @Nonnull EntityPlayer player)
+	/**
+	 * Uses one item on the
+	 */
+	public static ItemStack consumeStackOnPlayer(ItemStack itemstack, @Nonnull EntityPlayer player)
 	{
-		if (player.capabilities.isCreativeMode) return;
-
+		if (player.capabilities.isCreativeMode) return itemstack;
 		final ItemStack result = consumeStack(itemstack);
 		replacePlayerCurrentItem(player, result);
+		return result;
+	}
+
+	public static ItemStack decrPlayerInventorySlot(@Nonnull EntityPlayer player, int slot, int amount)
+	{
+		return player.inventory.decrStackSize(slot, amount);
+	}
+
+	public static ItemStack decrPlayerCurrentInventorySlot(@Nonnull EntityPlayer player, int amount)
+	{
+		return player.inventory.decrStackSize(player.inventory.currentItem, amount);
 	}
 
 	public static void addStackToPlayer(ItemStack itemstack, @Nonnull EntityPlayer player, World world, int x, int y, int z, boolean checkCreative)

@@ -342,7 +342,7 @@ public class BlockBeeBox extends BlockContainer
 					if (itemstack.getItem() == Items.flower_pot && te.isHoneyEnough())
 					{
 						ItemUtils.addStackToPlayer(GrowthCraftBees.items.honeyJar.asStack(), player, world, x, y, z, false);
-						ItemUtils.decreaseStackOnPlayer(itemstack, player);
+						ItemUtils.consumeStackOnPlayer(itemstack, player);
 						te.decreaseHoney(6);
 						te.markDirty();
 						world.markBlockForUpdate(x, y, z);
@@ -363,7 +363,7 @@ public class BlockBeeBox extends BlockContainer
 						{
 							te.setTime(time);
 							world.playAuxSFX(AuxFX.BONEMEAL, x, y, z, 0);
-							ItemUtils.decreaseStackOnPlayer(itemstack, player);
+							ItemUtils.consumeStackOnPlayer(itemstack, player);
 							te.markDirty();
 							world.markBlockForUpdate(x, y, z);
 						}
