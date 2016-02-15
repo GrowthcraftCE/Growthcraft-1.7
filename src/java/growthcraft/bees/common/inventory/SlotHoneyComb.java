@@ -1,12 +1,12 @@
 package growthcraft.bees.common.inventory;
 
 import growthcraft.api.bees.BeesRegistry;
+import growthcraft.core.common.inventory.slot.GrcSlot;
 
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotHoneyComb extends Slot
+public class SlotHoneyComb extends GrcSlot
 {
 	final ContainerBeeBox con;
 
