@@ -144,6 +144,7 @@ public class BeesRegistry
 	{
 		if (itemstack == null) return false;
 		return beesList.contains(new ItemKey(itemstack)) ||
+			beesList.contains(ItemKey.newWoNBT(itemstack)) ||
 			beesList.contains(new ItemKey(itemstack.getItem(), ItemKey.WILDCARD_VALUE));
 	}
 
