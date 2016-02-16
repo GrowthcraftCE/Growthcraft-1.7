@@ -104,4 +104,9 @@ public class ItemKey extends HashKey implements IItemStackFactory
 	{
 		return asStack(1);
 	}
+
+	public static ItemKey newWoNBT(@Nonnull ItemStack stack)
+	{
+		return new ItemKey(stack.getItem(), stack.getItemDamage());
+	}
 }

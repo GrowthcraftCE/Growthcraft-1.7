@@ -24,6 +24,7 @@
 package growthcraft.api.core.definition;
 
 import java.util.List;
+import javax.annotation.Nullable;
 
 import net.minecraft.item.ItemStack;
 
@@ -34,5 +35,12 @@ public interface IMultiItemStacks
 	 *
 	 * @return the list of item stacks
 	 */
-	public List<ItemStack> getItemStacks();
+	List<ItemStack> getItemStacks();
+
+	/**
+	 * Determines if the mulit stack contains the specified item stack.
+	 *
+	 * @return true, the multi stack contains this stack
+	 */
+	boolean containsItemStack(@Nullable ItemStack stack);
 }

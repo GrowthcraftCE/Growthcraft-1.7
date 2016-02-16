@@ -23,64 +23,37 @@
  */
 package growthcraft.api.core.util;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.definition.IMultiFluidStacks;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.fluids.FluidStack;
 
-public class OreItemStacks implements IMultiItemStacks
+public class MultiFluidStacks implements IMultiFluidStacks
 {
-	public int stackSize;
-	private String oreName;
+	private List<FluidStack> fluidStacks;
 
-	public OreItemStacks(@Nonnull String name, int amount)
+	public MultiFluidStacks(@Nonnull FluidStack... stacks)
 	{
-		this.oreName = name;
-		this.stackSize = amount;
-	}
-
-	public OreItemStacks(@Nonnull String name)
-	{
-		this(name, 1);
-	}
-
-	public String getName()
-	{
-		return oreName;
-	}
-
-	public List<ItemStack> getRawItemStacks()
-	{
-		return OreDictionary.getOres(oreName);
+		this.fluidStacks = Arrays.asList(stacks);
 	}
 
 	@Override
-	public List<ItemStack> getItemStacks()
+	public List<FluidStack> getFluidStacks()
 	{
-		final List<ItemStack> items = getRawItemStacks();
-		final List<ItemStack> result = new ArrayList<ItemStack>();
-		for (ItemStack stack : items)
-		{
-			final ItemStack newStack = stack.copy();
-			if (newStack.stackSize <= 0) newStack.stackSize = 1;
-			newStack.stackSize *= stackSize;
-			result.add(newStack);
-		}
-		return result;
+		return fluidStacks;
 	}
 
 	@Override
-	public boolean containsItemStack(@Nullable ItemStack stack)
+	public boolean containsFluidStack(@Nullable FluidStack stack)
 	{
-		if (!ItemTest.isValid(stack)) return false;
-		for (ItemStack content : getRawItemStacks())
+		if (!FluidTest.isValid(stack)) return false;
+		for (FluidStack content : getFluidStacks())
 		{
-			if (content.isItemEqual(stack)) return true;
+			if (content.isFluidEqual(stack)) return true;
 		}
 		return false;
 	}

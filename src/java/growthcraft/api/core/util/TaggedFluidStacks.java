@@ -27,6 +27,8 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.definition.IMultiFluidStacks;
@@ -39,11 +41,13 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 {
 	public int amount;
 	private List<String> tags;
+	private List<FluidTag> fluidTags;
 
-	public TaggedFluidStacks(int amt, String... ptags)
+	public TaggedFluidStacks(int amt, @Nonnull String... ptags)
 	{
 		this.amount = amt;
 		this.tags = Arrays.asList(ptags);
+		this.fluidTags = CoreRegistry.instance().fluidTags().expandTagNames(tags);
 	}
 
 	public List<String> getTags()
@@ -53,10 +57,10 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 
 	public Collection<Fluid> getFluids()
 	{
-		final List<FluidTag> fluidTags = CoreRegistry.instance().fluidTags().expandTagNames(tags);
 		return CoreRegistry.instance().fluidDictionary().getFluidsByTags(fluidTags);
 	}
 
+	@Override
 	public List<FluidStack> getFluidStacks()
 	{
 		final Collection<Fluid> fluids = getFluids();
@@ -66,5 +70,17 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 			result.add(new FluidStack(fluid, amount));
 		}
 		return result;
+	}
+
+	@Override
+	public boolean containsFluidStack(@Nullable FluidStack stack)
+	{
+		if (!FluidTest.isValid(stack)) return false;
+		final Fluid expected = stack.getFluid();
+		for (Fluid content : getFluids())
+		{
+			if (expected == content) return true;
+		}
+		return false;
 	}
 }

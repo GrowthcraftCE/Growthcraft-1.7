@@ -24,6 +24,7 @@
 package growthcraft.api.core.definition;
 
 import java.util.List;
+import javax.annotation.Nullable;
 
 import net.minecraftforge.fluids.FluidStack;
 
@@ -34,5 +35,12 @@ public interface IMultiFluidStacks
 	 *
 	 * @return the list of fluid stacks
 	 */
-	public List<FluidStack> getFluidStacks();
+	List<FluidStack> getFluidStacks();
+
+	/**
+	 * Determines if the mulit stack contains the specified fluid stack.
+	 *
+	 * @return true, the multi stack contains this stack
+	 */
+	boolean containsFluidStack(@Nullable FluidStack stack);
 }

@@ -31,6 +31,7 @@ import javax.annotation.Nonnull;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.fluids.FluidTag;
+import growthcraft.api.core.util.FluidTest;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -100,6 +101,20 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 		return stacks;
 	}
 
+	@Override
+	public boolean containsFluidStack(FluidStack stack)
+	{
+		if (FluidTest.isValid(stack))
+		{
+			final Fluid expected = stack.getFluid();
+			for (Fluid fluid : getFluids())
+			{
+				if (expected == fluid) return true;
+			}
+		}
+		return false;
+	}
+
 	public static MultiFluidStackSchema newWithTags(int amount, String... tags)
 	{
 		final MultiFluidStackSchema schema = new MultiFluidStackSchema();
@@ -126,6 +141,6 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 	@Override
 	public String toString()
 	{
-		return String.format("Schema<MultiFluidStack>(names: [%s], inclusion_tags: [%s], exclusion_tags: [%s], amount: %d)", names, inclusion_tags, exclusion_tags, amount);
+		return String.format("Schema<MultiFluidStack>(names: %s, inclusion_tags: %s, exclusion_tags: %s, amount: %d)", names, inclusion_tags, exclusion_tags, amount);
 	}
 }
