@@ -110,6 +110,16 @@ public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 		return asBlockItemStack(1);
 	}
 
+	public ItemStack asCurdItemStack(int size)
+	{
+		return GrowthCraftMilk.blocks.hangingCurds.asStack(size, meta);
+	}
+
+	public ItemStack asCurdItemStack()
+	{
+		return asCurdItemStack(1);
+	}
+
 	public FluidStack asFluidStack(int amount)
 	{
 		return GrowthCraftMilk.fluids.cheeses.get(this).fluid.asFluidStack(amount);

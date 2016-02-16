@@ -69,10 +69,19 @@ grc.fluids.tag.cream=Cream
 ### Fluids
 fluid.grcmilk.ButterMilk=Butter Milk
 fluid.grcmilk.Cream=Cream
+fluid.grcmilk.Curds=Curds
 fluid.grcmilk.Milk=Milk
 fluid.grcmilk.Rennet=Rennet
 fluid.grcmilk.SkimMilk=Skim Milk
 fluid.grcmilk.Whey=Whey
+fluid.grcmilk.CheeseCheddar=Cheddar Cheese
+fluid.grcmilk.CheeseGorgonzola=Gorgonzola Cheese
+fluid.grcmilk.CheeseEmmentaler=Emmentaler Cheese
+fluid.grcmilk.CheeseAppenzeller=Appenzeller Cheese
+fluid.grcmilk.CheeseAsiago=Asiago Cheese
+fluid.grcmilk.CheeseParmesan=Parmesan Cheese
+fluid.grcmilk.CheeseMonterey=Monterey Cheese
+fluid.grcmilk.CheeseRicotta=Ricotta Cheese
 ### Blocks
 tile.grcmilk.BlockFluidButterMilk.name=Butter Milk
 tile.grcmilk.BlockFluidCream.name=Cream
@@ -139,3 +148,5 @@ grc.effect.booze_milk=Removes all effects (Except Tipsy)
 # WAILA
 grcmilk.cheese.aging.prefix=Aging :
 grcmilk.cheese.aging.progress.format= %d%%
+grcmilk.hanging_curds.drying.prefix=Drying :
+grcmilk.hanging_curds.drying.progress.format= %d%%

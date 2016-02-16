@@ -34,7 +34,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -47,22 +46,6 @@ public class BlockCheeseVat extends GrcBlockContainer
 		setBlockName("grcmilk.CheeseVat");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityCheeseVat.class);
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
-	{
-		if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
-		if (!player.isSneaking())
-		{
-			final TileEntityCheeseVat cheeseVat = getTileEntity(world, x, y, z);
-			if (cheeseVat != null)
-			{
-				//cheeseVat.doWork();
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override

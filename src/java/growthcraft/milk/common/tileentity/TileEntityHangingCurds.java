@@ -69,10 +69,17 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 
 	private IPancheonTile getPancheonTile()
 	{
-		final TileEntity te = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
-		if (te instanceof IPancheonTile)
+		for (int i = 1; i < 3; ++i)
 		{
-			return (IPancheonTile)te;
+			final TileEntity te = worldObj.getTileEntity(xCoord, yCoord - i, zCoord);
+			if (te instanceof IPancheonTile)
+			{
+				return (IPancheonTile)te;
+			}
+			else
+			{
+				if (!worldObj.isAirBlock(xCoord, yCoord - i, zCoord)) break;
+			}
 		}
 		return null;
 	}
@@ -80,6 +87,16 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 	public int getRenderColor()
 	{
 		return cheeseCurd.getRenderColor();
+	}
+
+	public float getProgress()
+	{
+		return cheeseCurd.getAgeProgress();
+	}
+
+	public boolean isDried()
+	{
+		return cheeseCurd.isDried();
 	}
 
 	@Override

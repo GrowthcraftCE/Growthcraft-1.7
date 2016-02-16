@@ -68,6 +68,7 @@ public class GrcMilkFluids extends GrcModuleBase
 	public FluidFactory.FluidDetails skimMilk;
 	public FluidFactory.FluidDetails whey;
 	public Map<EnumCheeseType, FluidFactory.FluidDetails> cheeses = new HashMap<EnumCheeseType, FluidFactory.FluidDetails>();
+	public Map<Fluid, EnumCheeseType> fluidToCheeseType = new HashMap<Fluid, EnumCheeseType>();
 	public Booze[] boozeMilk = new Booze[6];
 	//public BlockBoozeDefinition
 	public BlockBoozeDefinition[] boozeMilkBlocks = new BlockBoozeDefinition[boozeMilk.length];
@@ -108,7 +109,11 @@ public class GrcMilkFluids extends GrcModuleBase
 		{
 			final String fluidName = "grcmilk.Cheese" + StringUtils.capitalize(cheese.name);
 			final Fluid fluid = new GrcFluid(fluidName);
-			cheeses.put(cheese, FluidFactory.instance().create(fluid));
+			final FluidFactory.FluidDetails details = FluidFactory.instance().create(fluid);
+			cheeses.put(cheese, details);
+			details.block.getBlock().setColor(cheese.getColor()).setBlockTextureName("grcmilk:fluids/milk");
+			details.setItemColor(cheese.getColor());
+			fluidToCheeseType.put(fluid, cheese);
 		}
 
 		this.milkBottle = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, boozeMilk));
@@ -227,6 +232,11 @@ public class GrcMilkFluids extends GrcModuleBase
 		CoreRegistry.instance().fluidDictionary().addFluidTags(cream.getFluid(), MilkFluidTags.CREAM);
 		CoreRegistry.instance().fluidDictionary().addFluidTags(curds.getFluid(), MilkFluidTags.MILK_CURDS);
 		CoreRegistry.instance().fluidDictionary().addFluidTags(rennet.getFluid(), MilkFluidTags.RENNET);
+
+		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
+		{
+			CoreRegistry.instance().fluidDictionary().addFluidTags(pair.getValue().getFluid(), MilkFluidTags.CHEESE);
+		}
 
 		MilkRegistry.instance().churn().addRecipe(
 			cream.fluid.asFluidStack(1000),

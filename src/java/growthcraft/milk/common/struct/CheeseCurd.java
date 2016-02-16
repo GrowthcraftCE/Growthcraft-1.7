@@ -58,6 +58,11 @@ public class CheeseCurd implements INBTSerializableContext
 		return cheese.getColor();
 	}
 
+	public boolean isDried()
+	{
+		return dried;
+	}
+
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		cheese.writeToNBT(nbt);

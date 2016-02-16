@@ -24,6 +24,7 @@
 package growthcraft.milk.client.handler;
 
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.util.FluidFactory;
 import growthcraft.milk.GrowthCraftMilk;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -100,6 +101,12 @@ public class GrcMilkHandleTextureStitch
 			GrowthCraftMilk.fluids.rennet.getFluid().setIcons(iconFluidRennetStill, iconFluidRennetFlow);
 			GrowthCraftMilk.fluids.skimMilk.getFluid().setIcons(iconFluidSkimMilkStill, iconFluidSkimMilkFlow);
 			GrowthCraftMilk.fluids.whey.getFluid().setIcons(iconFluidWheyStill, iconFluidWheyFlow);
+
+			for (FluidFactory.FluidDetails detail : GrowthCraftMilk.fluids.cheeses.values())
+			{
+				// this is not a typo, too lazy to make more textures.
+				detail.getFluid().setIcons(iconFluidMilkStill, iconFluidMilkFlow);
+			}
 		}
 	}
 }

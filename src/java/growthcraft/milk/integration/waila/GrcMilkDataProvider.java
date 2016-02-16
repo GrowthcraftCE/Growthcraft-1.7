@@ -80,6 +80,14 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 				EnumChatFormatting.WHITE + GrcI18n.translate("grcmilk.cheese.aging.progress.format", (int)(ageProgress * 100));
 			tooltip.add(result);
 		}
+		if (te instanceof TileEntityHangingCurds)
+		{
+			final NBTTagCompound nbt = accessor.getNBTData();
+			final float progress = nbt.getFloat("progress");
+			final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.hanging_curds.drying.prefix") +
+				EnumChatFormatting.WHITE + GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", (int)(progress * 100));
+			tooltip.add(result);
+		}
 		return tooltip;
 	}
 
@@ -98,6 +106,11 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 		{
 			final TileEntityCheeseBlock cheeseBlock = (TileEntityCheeseBlock)te;
 			tag.setFloat("age_progress", cheeseBlock.getCheese().getAgeProgress());
+		}
+		if (te instanceof TileEntityHangingCurds)
+		{
+			final TileEntityHangingCurds hangingCurds = (TileEntityHangingCurds)te;
+			tag.setFloat("progress", hangingCurds.getProgress());
 		}
 		return tag;
 	}

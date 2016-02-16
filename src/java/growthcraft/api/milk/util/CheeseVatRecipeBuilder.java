@@ -23,12 +23,14 @@
  */
 package growthcraft.api.milk.util;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.util.OreItemStacks;
-import growthcraft.api.core.util.TaggedFluidStacks;
+import growthcraft.api.core.definition.IMultiFluidStacks;
+import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.util.MultiStacksUtil;
 import growthcraft.api.milk.MilkRegistry;
 
 import net.minecraft.item.ItemStack;
@@ -39,79 +41,39 @@ public class CheeseVatRecipeBuilder
 	private String label;
 	private List<FluidStack> outputFluids = new ArrayList<FluidStack>();
 	private List<ItemStack> outputStacks = new ArrayList<ItemStack>();
-	private List<FluidStack> inputFluids = new ArrayList<FluidStack>();
-	private List<ItemStack> inputStacks = new ArrayList<ItemStack>();
+	private List<IMultiFluidStacks> inputFluids = new ArrayList<IMultiFluidStacks>();
+	private List<IMultiItemStacks> inputStacks = new ArrayList<IMultiItemStacks>();
 
 	public CheeseVatRecipeBuilder(String l)
 	{
 		this.label = l;
 	}
 
-	private void addItemStacksToList(@Nonnull List<ItemStack> list, @Nonnull Object... objs)
+	private void addFluidStacksToList(@Nonnull List<IMultiFluidStacks> list, @Nonnull Object... objs)
 	{
 		for (Object obj : objs)
 		{
-			if (obj instanceof ItemStack)
-			{
-				list.add((ItemStack)obj);
-			}
-			else if (obj instanceof OreItemStacks)
-			{
-				final OreItemStacks oreItemStack = (OreItemStacks)obj;
-				final List<ItemStack> stacks = oreItemStack.getItemStacks();
-				if (stacks.isEmpty())
-				{
-					MilkRegistry.instance().getLogger().warn("'%s': Ore stack '%s' was empty!", label, oreItemStack.getName());
-				}
-				else
-				{
-					list.addAll(stacks);
-				}
-			}
-			else
-			{
-				throw new IllegalArgumentException("Wrong type, expected a FluidStack or TaggedFluidStacks");
-			}
+			list.add(MultiStacksUtil.toMultiFluidStacks(obj));
 		}
 	}
 
-	private void addFluidStacksToList(@Nonnull List<FluidStack> list, @Nonnull Object... objs)
+	private void addItemStacksToList(@Nonnull List<IMultiItemStacks> list, @Nonnull Object... objs)
 	{
 		for (Object obj : objs)
 		{
-			if (obj instanceof FluidStack)
-			{
-				list.add((FluidStack)obj);
-			}
-			else if (obj instanceof TaggedFluidStacks)
-			{
-				final TaggedFluidStacks taggedFluidStack = (TaggedFluidStacks)obj;
-				final List<FluidStack> stacks = taggedFluidStack.getFluidStacks();
-				if (stacks.isEmpty())
-				{
-					MilkRegistry.instance().getLogger().warn("'%s': Tagged Fluid stack (tags: [%s]) was empty!", label, taggedFluidStack.getTags());
-				}
-				else
-				{
-					list.addAll(stacks);
-				}
-			}
-			else
-			{
-				throw new IllegalArgumentException("Wrong type, expected a FluidStack or TaggedFluidStacks");
-			}
+			list.add(MultiStacksUtil.toMultiItemStacks(obj));
 		}
 	}
 
-	public CheeseVatRecipeBuilder outputFluids(@Nonnull Object... objs)
+	public CheeseVatRecipeBuilder outputFluids(@Nonnull FluidStack... objs)
 	{
-		addFluidStacksToList(outputFluids, objs);
+		outputFluids.addAll(Arrays.asList(objs));
 		return this;
 	}
 
-	public CheeseVatRecipeBuilder outputItems(@Nonnull Object... objs)
+	public CheeseVatRecipeBuilder outputItems(@Nonnull ItemStack... objs)
 	{
-		addItemStacksToList(outputStacks, objs);
+		outputStacks.addAll(Arrays.asList(objs));
 		return this;
 	}
 
@@ -129,7 +91,13 @@ public class CheeseVatRecipeBuilder
 
 	public CheeseVatRecipeBuilder register()
 	{
-		MilkRegistry.instance().cheeseVat().addRecipe(outputFluids, outputStacks, inputFluids, inputStacks);
+		for (List<FluidStack> fluids : MultiStacksUtil.expandedFluidStackCombinations(inputFluids))
+		{
+			for (List<ItemStack> items : MultiStacksUtil.expandedItemStackCombinations(inputStacks))
+			{
+				MilkRegistry.instance().cheeseVat().addRecipe(outputFluids, outputStacks, fluids, items);
+			}
+		}
 		return this;
 	}
 

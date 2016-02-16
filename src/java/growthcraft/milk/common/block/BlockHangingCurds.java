@@ -64,6 +64,31 @@ public class BlockHangingCurds extends GrcBlockContainer
 		setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
 	}
 
+	public void fellBlockAsItem(World world, int x, int y, int z)
+	{
+		dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		world.setBlockToAir(x, y, z);
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
+	{
+		if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
+		if (!player.isSneaking())
+		{
+			final TileEntityHangingCurds hangingCurd = getTileEntity(world, x, y, z);
+			if (hangingCurd != null)
+			{
+				if (hangingCurd.isDried())
+				{
+					fellBlockAsItem(world, x, y, z);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
 	{
