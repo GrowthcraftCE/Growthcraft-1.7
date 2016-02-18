@@ -3,6 +3,7 @@ package growthcraft.bees;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.user.UserBeesConfig;
 import growthcraft.api.bees.user.UserFlowersConfig;
+import growthcraft.api.bees.user.UserFlowerEntry;
 //import growthcraft.api.bees.user.UserHoneyConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
@@ -30,6 +31,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -45,6 +47,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(
 	modid = GrowthCraftBees.MOD_ID,
@@ -83,6 +86,14 @@ public class GrowthCraftBees
 		return instance.userBeesConfig;
 	}
 
+	/**
+	 * Only use this logger for logging GrowthCraftBees related items
+	 */
+	public static ILogger getLogger()
+	{
+		return instance.logger;
+	}
+
 	public static GrcBeesConfig getConfig()
 	{
 		return instance.config;
@@ -112,7 +123,11 @@ public class GrowthCraftBees
 		if (config.enableForestryIntegration) modules.add(new growthcraft.bees.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bees.integration.ThaumcraftModule());
 
-		if (config.debugEnabled) modules.setLogger(logger);
+		if (config.debugEnabled)
+		{
+			BeesRegistry.instance().setLogger(logger);
+			modules.setLogger(logger);
+		}
 
 		tab = new CreativeTabsGrowthcraftBees();
 
@@ -146,6 +161,17 @@ public class GrowthCraftBees
 		BeesRegistry.instance().addHoneyComb(items.honeyCombEmpty.asStack(), items.honeyCombFilled.asStack());
 		userFlowersConfig.addDefault(Blocks.red_flower);
 		userFlowersConfig.addDefault(Blocks.yellow_flower);
+		if (Loader.isModLoaded("BiomesOPlenty"))
+		{
+			userFlowersConfig.addDefault(
+				new UserFlowerEntry("BiomesOPlenty", "flowers", OreDictionary.WILDCARD_VALUE)
+					.setEntryType("forced"))
+				.setComment("BiomesOPlenty flowers require a forced entry, in order for it to be placed by the bee box spawning.");
+			userFlowersConfig.addDefault(
+				new UserFlowerEntry("BiomesOPlenty", "flowers2", OreDictionary.WILDCARD_VALUE)
+					.setEntryType("forced"))
+				.setComment("BiomesOPlenty flowers require a forced entry, in order for it to be placed by the bee box spawning.");
+		}
 	}
 
 	private void registerRecipes()

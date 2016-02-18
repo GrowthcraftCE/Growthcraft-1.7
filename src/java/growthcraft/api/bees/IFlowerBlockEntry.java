@@ -21,57 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.bees.user;
-
-import growthcraft.api.core.schema.ICommentable;
-import growthcraft.api.core.schema.BlockKeySchema;
+package growthcraft.api.bees;
 
 import net.minecraft.block.Block;
+import net.minecraft.world.World;
 
-public class UserFlowerEntry implements ICommentable
+public interface IFlowerBlockEntry
 {
-	public String comment = "";
-	public String entry_type = "generic";
-	public BlockKeySchema block;
-
-	public UserFlowerEntry(String modId, String name, int meta)
-	{
-		this.block = new BlockKeySchema(modId, name, meta);
-	}
-
-	public UserFlowerEntry(Block pBlock, int meta)
-	{
-		this.block = new BlockKeySchema(pBlock, meta);
-	}
-
-	public UserFlowerEntry() {}
-
-	@Override
-	public String getComment()
-	{
-		return comment;
-	}
-
-	@Override
-	public void setComment(String com)
-	{
-		this.comment = com;
-	}
-
-	public String getEntryType()
-	{
-		return entry_type;
-	}
-
-	public UserFlowerEntry setEntryType(String type)
-	{
-		this.entry_type = type;
-		return this;
-	}
-
-	@Override
-	public String toString()
-	{
-		return String.format("UserFlowerEntry(block: `%s`)", block);
-	}
+	Block getBlock();
+	int getMetadata();
+	boolean canPlaceAt(World world, int x, int y, int z);
 }

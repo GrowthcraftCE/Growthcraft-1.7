@@ -25,9 +25,10 @@ package growthcraft.api.bees.user;
 
 import java.io.BufferedReader;
 
+import growthcraft.api.bees.BeesRegistry;
+import growthcraft.api.bees.ForcedFlowerBlockEntry;
 import growthcraft.api.core.util.ItemKey;
 import growthcraft.api.core.util.JsonConfigDef;
-import growthcraft.api.bees.BeesRegistry;
 
 import net.minecraft.block.Block;
 
@@ -36,11 +37,15 @@ public class UserFlowersConfig extends JsonConfigDef
 	private final UserFlowersEntries defaultEntries = new UserFlowersEntries();
 	private UserFlowersEntries entries;
 
-	public UserFlowerEntry addDefault(Block flower, int meta)
+	public UserFlowerEntry addDefault(UserFlowerEntry entry)
 	{
-		final UserFlowerEntry entry = new UserFlowerEntry(flower, meta);
 		defaultEntries.data.add(entry);
 		return entry;
+	}
+
+	public UserFlowerEntry addDefault(Block flower, int meta)
+	{
+		return addDefault(new UserFlowerEntry(flower, meta));
 	}
 
 	public UserFlowerEntry addDefault(Block flower)
@@ -74,7 +79,18 @@ public class UserFlowersConfig extends JsonConfigDef
 			return;
 		}
 
-		BeesRegistry.instance().addFlower(entry.block.getBlock(), entry.block.meta);
+		switch (entry.entry_type)
+		{
+			case "generic":
+				BeesRegistry.instance().addFlower(entry.block.getBlock(), entry.block.meta);
+				break;
+			case "forced":
+				BeesRegistry.instance().addFlower(new ForcedFlowerBlockEntry(entry.block.getBlock(), entry.block.meta));
+				break;
+			default:
+				logger.error("Invalid entry_type '%s' for entry {%s}", entry.entry_type, entry);
+		}
+
 	}
 
 	@Override
@@ -84,7 +100,7 @@ public class UserFlowersConfig extends JsonConfigDef
 		{
 			if (entries.data != null)
 			{
-				logger.info("Adding %d user floweer entries.", entries.data.size());
+				logger.info("Adding %d user flower entries.", entries.data.size());
 				for (UserFlowerEntry entry : entries.data) addFlowerEntry(entry);
 			}
 			else

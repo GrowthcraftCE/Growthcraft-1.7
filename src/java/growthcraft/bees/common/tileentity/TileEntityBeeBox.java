@@ -1,10 +1,8 @@
 package growthcraft.bees.common.tileentity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.common.inventory.ContainerBeeBox;
+import growthcraft.bees.common.tileentity.device.DeviceBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.GrcTileEntityInventoryBase;
@@ -22,15 +20,10 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase
 		FILLED;
 	}
 
-	private static final int beeBoxVersion = 2;
+	private static final int beeBoxVersion = 3;
 	private static final int[] beeSlotIds = new int[] {0};
 	private static final int[] honeyCombSlotIds = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
-
-	// Temp variable used by BlockBeeBox for storing flower lists
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public ArrayList<List> flowerList = new ArrayList<List>();
-
-	private int time;
+	private DeviceBeeBox beeBox = new DeviceBeeBox(this);
 
 	@Override
 	public String getDefaultInventoryName()
@@ -44,31 +37,38 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase
 		return new GrcInternalInventory(this, 28);
 	}
 
-	/************
-	 * UPDATE
-	 ************/
+	@Override
 	public void updateEntity()
 	{
 		super.updateEntity();
+		if (!worldObj.isRemote) beeBox.update();
+	}
 
-		if (!this.worldObj.isRemote)
+	public void updateBlockTick()
+	{
+		if (worldObj.isRemote)
 		{
-			--this.time;
-			if (this.time <= 0)
-			{
-				this.time = 0;
-			}
+			beeBox.updateClientTick();
+		}
+		else
+		{
+			beeBox.updateTick();
 		}
 	}
 
 	public boolean hasBonus()
 	{
-		return this.time > 0;
+		return beeBox.hasBonus();
+	}
+
+	public float getGrowthRate()
+	{
+		return beeBox.getGrowthRate();
 	}
 
 	public void setTime(int v)
 	{
-		this.time = v;
+		beeBox.setBonusTime(v);
 	}
 
 	public boolean slotHasHoneyComb(int index, HoneyCombExpect expects)
@@ -236,30 +236,34 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		this.time = nbt.getShort("time");
+		beeBox.readFromNBT(nbt, "bee_box");
+		if (nbt.hasKey("time"))
+		{
+			beeBox.setBonusTime(nbt.getShort("time"));
+		}
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setShort("time", (short)this.time);
 		nbt.setInteger("BeeBox.version", beeBoxVersion);
+		beeBox.writeToNBT(nbt, "bee_box");
 	}
 
 	/************
 	 * HOPPER
 	 ************/
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack itemstack)
+	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
 		if (index == ContainerBeeBox.SlotId.BEE)
 		{
-			return BeesRegistry.instance().isItemBee(itemstack);
+			return BeesRegistry.instance().isItemBee(stack);
 		}
 		else
 		{
-			return BeesRegistry.instance().isItemHoneyComb(itemstack);
+			return BeesRegistry.instance().isItemHoneyComb(stack);
 		}
 	}
 

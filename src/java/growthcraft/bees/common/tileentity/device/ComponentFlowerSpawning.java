@@ -21,57 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.bees.user;
+package growthcraft.bees.common.tileentity.device;
 
-import growthcraft.api.core.schema.ICommentable;
-import growthcraft.api.core.schema.BlockKeySchema;
-
-import net.minecraft.block.Block;
-
-public class UserFlowerEntry implements ICommentable
+public class ComponentFlowerSpawning
 {
-	public String comment = "";
-	public String entry_type = "generic";
-	public BlockKeySchema block;
 
-	public UserFlowerEntry(String modId, String name, int meta)
-	{
-		this.block = new BlockKeySchema(modId, name, meta);
-	}
-
-	public UserFlowerEntry(Block pBlock, int meta)
-	{
-		this.block = new BlockKeySchema(pBlock, meta);
-	}
-
-	public UserFlowerEntry() {}
-
-	@Override
-	public String getComment()
-	{
-		return comment;
-	}
-
-	@Override
-	public void setComment(String com)
-	{
-		this.comment = com;
-	}
-
-	public String getEntryType()
-	{
-		return entry_type;
-	}
-
-	public UserFlowerEntry setEntryType(String type)
-	{
-		this.entry_type = type;
-		return this;
-	}
-
-	@Override
-	public String toString()
-	{
-		return String.format("UserFlowerEntry(block: `%s`)", block);
-	}
 }

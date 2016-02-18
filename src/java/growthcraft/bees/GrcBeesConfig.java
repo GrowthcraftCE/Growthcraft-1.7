@@ -26,6 +26,12 @@ public class GrcBeesConfig extends ConfigBase
 	@ConfigOption(catergory="Bee Box", name="Flower spawn rate", desc="[Higher -> Slower]")
 	public float beeBoxFlowerSpawnRate = 6.25f;
 
+	@ConfigOption(catergory="Bee Box", name="Bonus Multiplier", desc="When the bee box has a 'bonus', what is the multiplier?")
+	public float beeBoxBonusMultiplier = 2.5f;
+
+	@ConfigOption(catergory="Bee Box", name="Flower spawn radius", desc="[Higher -> Larger]")
+	public int beeBoxFlowerRadius = 5;
+
 
 	@ConfigOption(catergory="Booze", name="Honey Mead Color", desc="What color should honey mead be?")
 	public int honeyMeadColor = 0xA3610C;
