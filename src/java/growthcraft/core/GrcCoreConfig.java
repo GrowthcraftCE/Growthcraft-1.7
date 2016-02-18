@@ -2,6 +2,9 @@ package growthcraft.core;
 
 public class GrcCoreConfig extends ConfigBase
 {
+	@ConfigOption(catergory="Debug", name="Enable Game Registry Dump", desc="Should Growthcraft dump the GameRegistry and FluidRegistry to text files?")
+	public boolean dumpGameRegistry;
+
 	// In case you don't have a wrench you can enable the amazing stick.
 	@ConfigOption(name="Use Amazing Stick", desc="So, I heard you didn't have a wrench, we got you covered")
 	public boolean useAmazingStick;

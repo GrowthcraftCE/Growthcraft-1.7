@@ -153,6 +153,6 @@ public class GrowthCraftCore
 		}
 
 		modules.postInit();
-		//growthcraft.core.util.GameRegistryDumper.run();
+		if (config.dumpGameRegistry) growthcraft.core.util.GameRegistryDumper.run();
 	}
 }
