@@ -23,6 +23,7 @@
  */
 package growthcraft.api.core.util;
 
+import java.util.List;
 import java.util.Random;
 
 public class RandomUtils
@@ -37,5 +38,10 @@ public class RandomUtils
 	public static int range(Random random, int min, int max)
 	{
 		return min + random.nextInt(max - min);
+	}
+
+	public static <T> T sample(Random random, List<T> list)
+	{
+		return list.get(random.nextInt(list.size()));
 	}
 }
