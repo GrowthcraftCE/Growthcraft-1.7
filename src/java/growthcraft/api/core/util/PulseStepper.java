@@ -51,6 +51,11 @@ public class PulseStepper implements INBTSerializableContext, IStreamable
 	/* The current step */
 	public int steps;
 
+	/**
+	 * @param mxSteps - number of steps per loop
+	 * @param mxLoops - maximum number of loops to do before the pulsar stops
+	 *                  Setting this to 0 will cause it to loop forever
+	 */
 	public PulseStepper(int mxSteps, int mxLoops)
 	{
 		this.maxSteps = mxSteps;
