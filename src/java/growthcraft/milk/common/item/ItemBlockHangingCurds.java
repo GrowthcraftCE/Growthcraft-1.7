@@ -68,11 +68,18 @@ public class ItemBlockHangingCurds extends ItemBlock
 		return EnumCheeseType.loadFromNBT(tag);
 	}
 
+	public boolean isDried(ItemStack stack)
+	{
+		return getTileData(stack).getBoolean("dried");
+	}
+
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return super.getUnlocalizedName(stack) +
-			"." + getCheeseType(stack).name;
+		String str = super.getUnlocalizedName(stack);
+		str += "." + getCheeseType(stack).name;
+		if (isDried(stack)) str += ".dried";
+		return str;
 	}
 
 	public static NBTTagCompound openNBT(ItemStack stack)

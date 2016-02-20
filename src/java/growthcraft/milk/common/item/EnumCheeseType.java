@@ -90,6 +90,11 @@ public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 		return features.contains(EnumCheeseFeature.HAS_BLOCK);
 	}
 
+	public boolean hasCurdBlock()
+	{
+		return true;
+	}
+
 	public ItemStack asStack(int size)
 	{
 		return GrowthCraftMilk.items.cheese.asStack(size, meta);

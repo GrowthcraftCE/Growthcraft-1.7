@@ -84,9 +84,17 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 		{
 			final NBTTagCompound nbt = accessor.getNBTData();
 			final float progress = nbt.getFloat("progress");
-			final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.hanging_curds.drying.prefix") +
-				EnumChatFormatting.WHITE + GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", (int)(progress * 100));
-			tooltip.add(result);
+			if (progress < 1f)
+			{
+				final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.hanging_curds.drying.prefix") +
+					EnumChatFormatting.WHITE + GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", (int)(progress * 100));
+				tooltip.add(result);
+			}
+			if (nbt.hasKey("dried"))
+			{
+				final boolean dried = nbt.getBoolean("dried");
+				tooltip.add(GrcI18n.translate("grcmilk.hanging_curds.dried"));
+			}
 		}
 		return tooltip;
 	}
@@ -111,6 +119,7 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 		{
 			final TileEntityHangingCurds hangingCurds = (TileEntityHangingCurds)te;
 			tag.setFloat("progress", hangingCurds.getProgress());
+			tag.setBoolean("dried", hangingCurds.isDried());
 		}
 		return tag;
 	}

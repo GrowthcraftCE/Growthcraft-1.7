@@ -54,9 +54,15 @@ tile.grcmilk.HangingCurds.appenzeller.name=Appenzeller Curds
 tile.grcmilk.HangingCurds.asiago.name=Asiago Curds
 tile.grcmilk.HangingCurds.parmesan.name=Parmesan Curds
 tile.grcmilk.HangingCurds.monterey.name=Monterey Curds
-### I'll admit, Ricotta shouldn't have curds...
 tile.grcmilk.HangingCurds.ricotta.name=Ricotta Curds
-
+tile.grcmilk.HangingCurds.cheddar.dried.name=Dried Cheddar Curds
+tile.grcmilk.HangingCurds.gorgonzola.dried.name=Dried Gorgonzola Curds
+tile.grcmilk.HangingCurds.emmentaler.dried.name=Dried Emmentaler Curds
+tile.grcmilk.HangingCurds.appenzeller.dried.name=Dried Appenzeller Curds
+tile.grcmilk.HangingCurds.asiago.dried.name=Dried Asiago Curds
+tile.grcmilk.HangingCurds.parmesan.dried.name=Dried Parmesan Curds
+tile.grcmilk.HangingCurds.monterey.dried.name=Dried Monterey Curds
+tile.grcmilk.HangingCurds.ricotta.dried.name=Dried Ricotta Curds
 tile.grcmilk.Pancheon.name=Pancheon
 
 # Fluids
@@ -150,3 +156,4 @@ grcmilk.cheese.aging.prefix=Aging :
 grcmilk.cheese.aging.progress.format= %d%%
 grcmilk.hanging_curds.drying.prefix=Drying :
 grcmilk.hanging_curds.drying.progress.format= %d%%
+grcmilk.hanging_curds.dried=Dried
