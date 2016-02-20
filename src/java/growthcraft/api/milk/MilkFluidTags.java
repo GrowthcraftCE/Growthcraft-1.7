@@ -33,6 +33,7 @@ public class MilkFluidTags
 	public static final FluidTag MILK = CoreRegistry.instance().fluidTags().createTag("milk");
 	public static final FluidTag MILK_CURDS = CoreRegistry.instance().fluidTags().createTag("milk_curds");
 	public static final FluidTag RENNET = CoreRegistry.instance().fluidTags().createTag("rennet");
+	public static final FluidTag WHEY = CoreRegistry.instance().fluidTags().createTag("whey");
 
 	private MilkFluidTags() {}
 }
