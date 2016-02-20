@@ -25,20 +25,29 @@ item.grcmilk.Stomach.name=Stomach
 
 # Blocks
 ## Cheese
+tile.grcmilk.CheeseBlock.cheddar.unwaxed.name=Cheddar Cheese (Unwaxed)
 tile.grcmilk.CheeseBlock.cheddar.unaged.name=Cheddar Cheese (Unaged)
 tile.grcmilk.CheeseBlock.cheddar.aged.name=Cheddar Cheese (Aged)
+tile.grcmilk.CheeseBlock.cheddar.cut.name=Cheddar Cheese
 tile.grcmilk.CheeseBlock.gorgonzola.unaged.name=Gorgonzola Cheese (Unaged)
 tile.grcmilk.CheeseBlock.gorgonzola.aged.name=Gorgonzola Cheese (Aged)
+tile.grcmilk.CheeseBlock.gorgonzola.cut.name=Gorgonzola Cheese
 tile.grcmilk.CheeseBlock.emmentaler.unaged.name=Emmentaler Cheese (Unaged)
 tile.grcmilk.CheeseBlock.emmentaler.aged.name=Emmentaler Cheese (Aged)
+tile.grcmilk.CheeseBlock.emmentaler.cut.name=Emmentaler Cheese
 tile.grcmilk.CheeseBlock.appenzeller.unaged.name=Appenzeller Cheese (Unaged)
 tile.grcmilk.CheeseBlock.appenzeller.aged.name=Appenzeller Cheese (Aged)
+tile.grcmilk.CheeseBlock.appenzeller.cut.name=Appenzeller Cheese
 tile.grcmilk.CheeseBlock.asiago.unaged.name=Asiago Cheese (Unaged)
 tile.grcmilk.CheeseBlock.asiago.aged.name=Asiago Cheese (Aged)
+tile.grcmilk.CheeseBlock.asiago.cut.name=Asiago Cheese
 tile.grcmilk.CheeseBlock.parmesan.unaged.name=Paemesan Cheese (Unaged)
 tile.grcmilk.CheeseBlock.parmesan.aged.name=Paemesan Cheese (Aged)
+tile.grcmilk.CheeseBlock.parmesan.cut.name=Paemesan Cheese
+tile.grcmilk.CheeseBlock.monterey.unwaxed.name=Monterey Cheese (Unwaxed)
 tile.grcmilk.CheeseBlock.monterey.unaged.name=Monterey Cheese (Unaged)
 tile.grcmilk.CheeseBlock.monterey.aged.name=Monterey Cheese (Aged)
+tile.grcmilk.CheeseBlock.monterey.cut.name=Monterey Cheese
 tile.grcmilk.CheeseBlock.ricotta.unaged.name=Ricotta Cheese (Unaged)
 tile.grcmilk.CheeseBlock.ricotta.aged.name=Ricotta Cheese (Aged)
 ## Other
@@ -64,6 +73,12 @@ tile.grcmilk.HangingCurds.parmesan.dried.name=Dried Parmesan Curds
 tile.grcmilk.HangingCurds.monterey.dried.name=Dried Monterey Curds
 tile.grcmilk.HangingCurds.ricotta.dried.name=Dried Ricotta Curds
 tile.grcmilk.Pancheon.name=Pancheon
+
+### Cheese Vat Fluid Tanks
+grcmilk.cheese_vat.fluid_tank.primary=Primary
+grcmilk.cheese_vat.fluid_tank.rennet=Rennet
+grcmilk.cheese_vat.fluid_tank.waste=Waste
+grcmilk.cheese_vat.fluid_tank.recipe=Secondary
 
 # Fluids
 ## Tags
@@ -154,6 +169,12 @@ grc.effect.booze_milk=Removes all effects (Except Tipsy)
 # WAILA
 grcmilk.cheese.aging.prefix=Aging :
 grcmilk.cheese.aging.progress.format= %d%%
+grcmilk.cheese.slices.prefix=Slices :
+grcmilk.cheese.slices.value.format= %d / %d
+grcmilk.cheese_press.itemslot.item=%s
+grcmilk.cheese_press.pressing.state.false=Unpressed
+grcmilk.cheese_press.pressing.state.prefix=State :
+grcmilk.cheese_press.pressing.state.true=Pressed
+grcmilk.hanging_curds.dried=Dried
 grcmilk.hanging_curds.drying.prefix=Drying :
 grcmilk.hanging_curds.drying.progress.format= %d%%
-grcmilk.hanging_curds.dried=Dried

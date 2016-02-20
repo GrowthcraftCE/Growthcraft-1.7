@@ -24,12 +24,15 @@
 package growthcraft.milk.common.block;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.api.core.util.BBox;
-import growthcraft.api.core.util.RenderType;
+import growthcraft.core.common.block.GrcBlockContainer;
+import growthcraft.milk.client.render.RenderCheeseBlock;
 import growthcraft.milk.common.item.EnumCheeseType;
+import growthcraft.milk.common.item.EnumCheeseStage;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import growthcraft.milk.GrowthCraftMilk;
@@ -37,17 +40,22 @@ import growthcraft.milk.GrowthCraftMilk;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockCheeseBlock extends GrcBlockContainer
 {
+	@SideOnly(Side.CLIENT)
+	private Map<EnumCheeseType, Map<EnumCheeseStage, IIcon[]>> iconMap;
+
 	public BlockCheeseBlock()
 	{
 		// placeholder
@@ -120,7 +128,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	@Override
 	public int getRenderType()
 	{
-		return RenderType.NONE;
+		return RenderCheeseBlock.RENDER_ID;
 	}
 
 	@Override
@@ -139,6 +147,68 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
-		return false;
+		return true;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister reg)
+	{
+		this.iconMap = new HashMap<EnumCheeseType, Map<EnumCheeseStage, IIcon[]>>();
+		for (EnumCheeseType type : EnumCheeseType.VALUES)
+		{
+			if (!type.hasBlock()) continue;
+			iconMap.put(type, new HashMap<EnumCheeseStage, IIcon[]>());
+			final String prefix = "grcmilk:cheese/" + type.name;
+			for (EnumCheeseStage stage : type.stages)
+			{
+				final IIcon[] icons = new IIcon[3];
+				icons[0] = reg.registerIcon(String.format("%s_%s/bottom", prefix, stage.name));
+				icons[1] = reg.registerIcon(String.format("%s_%s/top", prefix, stage.name));
+				icons[2] = reg.registerIcon(String.format("%s_%s/side", prefix, stage.name));
+				iconMap.get(type).put(stage, icons);
+			}
+		}
+	}
+
+	private IIcon getIconByTypeAndStage(int side, EnumCheeseType type, EnumCheeseStage stage)
+	{
+		final IIcon[] icons = iconMap.get(type).get(stage);
+		if (side == 0)
+		{
+			return icons[0];
+		}
+		else if (side == 1)
+		{
+			return icons[1];
+		}
+		else
+		{
+			return icons[2];
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
+	{
+		final TileEntityCheeseBlock te = getTileEntity(world, x, y, z);
+		final int meta = world.getBlockMetadata(x, y, z);
+		EnumCheeseType type = EnumCheeseType.getSafeById(meta);
+		EnumCheeseStage stage = type.stages.get(0);
+		if (te != null)
+		{
+			type = te.getCheese().getType();
+			stage = te.getCheese().getStage();
+		}
+		return getIconByTypeAndStage(side, type, stage);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		final EnumCheeseType type = EnumCheeseType.getSafeById(meta);
+		return getIconByTypeAndStage(side, type, type.stages.get(0));
 	}
 }

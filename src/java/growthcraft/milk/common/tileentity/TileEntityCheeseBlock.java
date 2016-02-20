@@ -28,16 +28,19 @@ import java.io.IOException;
 
 import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.GrcTileEntityBase;
+import growthcraft.core.common.tileentity.IItemHandler;
+import growthcraft.core.util.ItemUtils;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.struct.Cheese;
 import growthcraft.milk.GrowthCraftMilk;
 
 import io.netty.buffer.ByteBuf;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityCheeseBlock extends GrcTileEntityBase
+public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHandler
 {
 	private Cheese cheese = new Cheese();
 
@@ -107,7 +110,7 @@ public class TileEntityCheeseBlock extends GrcTileEntityBase
 	public boolean readFromStream_CheeseBlock(ByteBuf stream) throws IOException
 	{
 		cheese.readFromStream(stream);
-		return false;
+		return true;
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
@@ -127,8 +130,37 @@ public class TileEntityCheeseBlock extends GrcTileEntityBase
 			if (cheese.needClientUpdate)
 			{
 				cheese.needClientUpdate = false;
-				markForBlockUpdate();
+				if (cheese.hasSlices())
+				{
+					markForBlockUpdate();
+				}
+				else
+				{
+					worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+				}
 			}
 		}
+	}
+
+	@Override
+	public boolean tryPlaceItem(EntityPlayer player, ItemStack onHand)
+	{
+		return cheese.tryWaxing(onHand);
+	}
+
+	@Override
+	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	{
+		if (cheese.isAged())
+		{
+			final ItemStack stack = cheese.yankSlices(1, true);
+			if (stack != null)
+			{
+				ItemUtils.addStackToPlayer(stack, player, false);
+			}
+			cheese.needClientUpdate |= true;
+			return true;
+		}
+		return false;
 	}
 }

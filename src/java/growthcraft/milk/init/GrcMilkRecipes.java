@@ -155,10 +155,17 @@ public class GrcMilkRecipes extends GrcModuleBase
 		}
 	}
 
+	private void registerCheeseWaxes()
+	{
+		EnumCheeseType.CHEDDAR.waxes.addAll(new OreItemStacks("materialBeesWaxRed", 1).getItemStacks());
+		EnumCheeseType.MONTEREY.waxes.addAll(new OreItemStacks("materialBeesWaxBlack", 1).getItemStacks());
+	}
+
 	@Override
 	public void init()
 	{
 		registerCheeseVatRecipes();
 		registerCheesePressRecipes();
+		registerCheeseWaxes();
 	}
 }

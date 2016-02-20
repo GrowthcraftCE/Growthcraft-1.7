@@ -75,11 +75,18 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 		final TileEntity te = accessor.getTileEntity();
 		if (te instanceof TileEntityCheeseBlock)
 		{
-			final NBTTagCompound nbt = accessor.getNBTData();
-			final float ageProgress = nbt.getFloat("age_progress");
-			final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese.aging.prefix") +
-				EnumChatFormatting.WHITE + GrcI18n.translate("grcmilk.cheese.aging.progress.format", (int)(ageProgress * 100));
-			tooltip.add(result);
+			if (nbt.getBoolean("is_aged"))
+			{
+				tooltip.add(EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese.slices.prefix") +
+					EnumChatFormatting.WHITE + GrcI18n.translate("grcmilk.cheese.slices.value.format", nbt.getInteger("slices"), nbt.getInteger("slices_max")));
+			}
+			else
+			{
+				final float ageProgress = nbt.getFloat("age_progress");
+				final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese.aging.prefix") +
+					EnumChatFormatting.WHITE + GrcI18n.translate("grcmilk.cheese.aging.progress.format", (int)(ageProgress * 100));
+				tooltip.add(result);
+			}
 		}
 		if (te instanceof TileEntityHangingCurds)
 		{
@@ -120,7 +127,10 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 		if (te instanceof TileEntityCheeseBlock)
 		{
 			final TileEntityCheeseBlock cheeseBlock = (TileEntityCheeseBlock)te;
+			tag.setBoolean("is_aged", cheeseBlock.getCheese().isAged());
 			tag.setFloat("age_progress", cheeseBlock.getCheese().getAgeProgress());
+			tag.setInteger("slices", cheeseBlock.getCheese().getSlices());
+			tag.setInteger("slices_max", cheeseBlock.getCheese().getSlicesMax());
 		}
 		if (te instanceof TileEntityHangingCurds)
 		{

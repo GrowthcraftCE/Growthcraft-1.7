@@ -23,11 +23,13 @@
  */
 package growthcraft.milk.common.item;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.api.core.definition.IFluidStackFactory;
+import growthcraft.api.core.definition.IItemStackFactory;
+import growthcraft.api.core.util.ItemTest;
 import growthcraft.milk.GrowthCraftMilk;
 
 import io.netty.buffer.ByteBuf;
@@ -40,7 +42,7 @@ public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 {
 	CHEDDAR("cheddar", 0xf99e03,
 		new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
-		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT, EnumCheeseStage.UNWAXED}),
+		new EnumCheeseStage[]{EnumCheeseStage.UNWAXED, EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
 	GORGONZOLA("gorgonzola", 0xf6f3ea,
 		new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
 		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
@@ -58,7 +60,7 @@ public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
 	MONTEREY("monterey", 0xf5f5da,
 		new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
-		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT, EnumCheeseStage.UNWAXED}),
+		new EnumCheeseStage[]{EnumCheeseStage.UNWAXED, EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
 	RICOTTA("ricotta", 0xc8c8c5,
 		new EnumCheeseFeature[]{},
 		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT});
@@ -70,6 +72,7 @@ public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 	public final int meta;
 	public final List<EnumCheeseFeature> features;
 	public final List<EnumCheeseStage> stages;
+	public final List<ItemStack> waxes = new ArrayList<ItemStack>();
 
 	private EnumCheeseType(String n, int c, EnumCheeseFeature[] fets, EnumCheeseStage[] stgs)
 	{
@@ -78,6 +81,21 @@ public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 		this.meta = ordinal();
 		this.features = Arrays.asList(fets);
 		this.stages = Arrays.asList(stgs);
+	}
+
+	public boolean canWax(ItemStack stack)
+	{
+		if (ItemTest.isValid(stack))
+		{
+			for (ItemStack wax : waxes)
+			{
+				if (wax.isItemEqual(stack))
+				{
+					return stack.stackSize >= wax.stackSize;
+				}
+			}
+		}
+		return false;
 	}
 
 	public int getColor()

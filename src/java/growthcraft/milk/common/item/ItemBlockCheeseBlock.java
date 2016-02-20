@@ -36,6 +36,7 @@ public class ItemBlockCheeseBlock extends ItemBlock
 	public ItemBlockCheeseBlock(Block block)
 	{
 		super(block);
+		this.maxStackSize = 1;
 	}
 
 	private NBTTagCompound getTileDataABS(ItemStack stack)
@@ -81,6 +82,16 @@ public class ItemBlockCheeseBlock extends ItemBlock
 		return super.getUnlocalizedName(stack) +
 			"." + getCheeseType(stack).name +
 			"." + getCheeseStage(stack).name;
+	}
+
+	public int getSlices(ItemStack stack)
+	{
+		return getTileData(stack).getInteger("slices");
+	}
+
+	public int getSlicesMax(ItemStack stack)
+	{
+		return getTileData(stack).getInteger("slices_max");
 	}
 
 	public static NBTTagCompound openNBT(ItemStack stack)

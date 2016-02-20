@@ -31,14 +31,16 @@ import io.netty.buffer.ByteBuf;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 
 public class Cheese
 {
-	public boolean needClientUpdate;
+	public boolean needClientUpdate = true;
 
 	private int age;
 	private int ageMax = TickUtils.minutes(1);
 	private int slices = 8;
+	private int slicesMax = 8;
 	private EnumCheeseType cheese = EnumCheeseType.CHEDDAR;
 	private EnumCheeseStage cheeseStage = EnumCheeseType.CHEDDAR.stages.get(0);
 
@@ -50,6 +52,13 @@ public class Cheese
 	public EnumCheeseStage getStage()
 	{
 		return cheeseStage;
+	}
+
+	public Cheese setStage(EnumCheeseStage stage)
+	{
+		this.cheeseStage = stage;
+		this.needClientUpdate = true;
+		return this;
 	}
 
 	public int getId()
@@ -67,24 +76,61 @@ public class Cheese
 		return slices;
 	}
 
+	public int getSlicesMax()
+	{
+		return slicesMax;
+	}
+
+	public boolean hasSlices()
+	{
+		return getSlices() > 0;
+	}
+
 	public float getAgeProgress()
 	{
-		return (float)age / ageMax;
+		return (float)age / (float)ageMax;
+	}
+
+	public boolean canAge()
+	{
+		return cheeseStage == EnumCheeseStage.UNAGED;
 	}
 
 	public boolean isAged()
 	{
-		return cheeseStage == EnumCheeseStage.AGED;
+		return cheeseStage == EnumCheeseStage.AGED ||
+			cheeseStage == EnumCheeseStage.CUT;
+	}
+
+	public ItemStack yankSlices(int count, boolean doYank)
+	{
+		final int yankedCount = MathHelper.clamp_int(count, 0, getSlices());
+		final int quantity = yankedCount * 9;
+		if (quantity > 0)
+		{
+			if (doYank)
+			{
+				this.slices -= yankedCount;
+				setStage(EnumCheeseStage.CUT);
+			}
+			return cheese.asStack(quantity);
+		}
+		return null;
 	}
 
 	public ItemStack asFullStack()
 	{
-		final int quantity = getSlices() * 9;
-		if (quantity > 0)
+		return yankSlices(getSlices(), false);
+	}
+
+	public boolean tryWaxing(ItemStack stack)
+	{
+		if (getType().canWax(stack))
 		{
-			return cheese.asStack(quantity);
+			setStage(EnumCheeseStage.UNAGED);
+			return true;
 		}
-		return null;
+		return false;
 	}
 
 	public void writeToNBT(NBTTagCompound nbt)
@@ -93,6 +139,7 @@ public class Cheese
 		cheeseStage.writeToNBT(nbt);
 		nbt.setInteger("age", age);
 		nbt.setInteger("slices", slices);
+		nbt.setInteger("slices_max", slicesMax);
 	}
 
 	/**
@@ -104,8 +151,18 @@ public class Cheese
 	{
 		this.cheese = EnumCheeseType.loadFromNBT(nbt);
 		this.cheeseStage = EnumCheeseStage.loadFromNBT(nbt);
-		this.age = nbt.getInteger("age");
-		this.slices = nbt.getInteger("slices");
+		if (nbt.hasKey("age"))
+		{
+			this.age = nbt.getInteger("age");
+		}
+		if (nbt.hasKey("slices"))
+		{
+			this.slices = nbt.getInteger("slices");
+		}
+		if (nbt.hasKey("slices_max"))
+		{
+			this.slicesMax = nbt.getInteger("slices_max");
+		}
 	}
 
 	public void readFromStream(ByteBuf stream)
@@ -114,6 +171,7 @@ public class Cheese
 		this.cheeseStage = EnumCheeseStage.loadFromStream(stream);
 		this.age = stream.readInt();
 		this.slices = stream.readInt();
+		this.slicesMax = stream.readInt();
 	}
 
 	public void writeToStream(ByteBuf stream)
@@ -122,23 +180,23 @@ public class Cheese
 		cheeseStage.writeToStream(stream);
 		stream.writeInt(age);
 		stream.writeInt(slices);
+		stream.writeInt(slicesMax);
 	}
 
 	public void update()
 	{
-		if (isAged())
+		if (!isAged())
 		{
-		}
-		else
-		{
-			if (this.age < this.ageMax)
+			if (canAge())
 			{
-				this.age += 1;
-			}
-			else
-			{
-				this.cheeseStage = EnumCheeseStage.AGED;
-				this.needClientUpdate = true;
+				if (this.age < this.ageMax)
+				{
+					this.age += 1;
+				}
+				else
+				{
+					setStage(EnumCheeseStage.AGED);
+				}
 			}
 		}
 	}
