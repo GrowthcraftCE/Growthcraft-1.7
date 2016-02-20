@@ -28,6 +28,8 @@ import javax.annotation.Nonnull;
 import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.milk.cheesepress.CheesePressRegistry;
+import growthcraft.api.milk.cheesepress.ICheesePressRegistry;
 import growthcraft.api.milk.cheesevat.CheeseVatRegistry;
 import growthcraft.api.milk.cheesevat.ICheeseVatRegistry;
 import growthcraft.api.milk.churn.ChurnRegistry;
@@ -39,6 +41,7 @@ public class MilkRegistry implements ILoggable
 {
 	private static final MilkRegistry INSTANCE = new MilkRegistry();
 
+	private final ICheesePressRegistry cheesePressRegistry = new CheesePressRegistry();
 	private final ICheeseVatRegistry cheeseVatRegistry = new CheeseVatRegistry();
 	private final IChurnRegistry churnRegistry = new ChurnRegistry();
 	private final IPancheonRegistry pancheonRegistry = new PancheonRegistry();
@@ -49,6 +52,7 @@ public class MilkRegistry implements ILoggable
 	{
 		this.logger = l;
 		cheeseVatRegistry.setLogger(logger);
+		cheesePressRegistry.setLogger(logger);
 		churnRegistry.setLogger(logger);
 		pancheonRegistry.setLogger(logger);
 	}
@@ -68,6 +72,14 @@ public class MilkRegistry implements ILoggable
 	public static final MilkRegistry instance()
 	{
 		return INSTANCE;
+	}
+
+	/**
+	 * @return instance of the CheesePressRegistry
+	 */
+	public ICheesePressRegistry cheesePress()
+	{
+		return cheesePressRegistry;
 	}
 
 	/**
