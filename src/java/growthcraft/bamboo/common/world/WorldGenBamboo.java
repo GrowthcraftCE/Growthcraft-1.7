@@ -9,10 +9,10 @@ import net.minecraft.block.BlockSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class WorldGenBamboo extends WorldGenerator
+public class WorldGenBamboo extends WorldGenAbstractTree
 {
 	private final int density = GrowthCraftBamboo.getConfig().bambooWorldGenDensity;
 	private final int minTreeHeight = GrowthCraftBamboo.getConfig().bambooTreeMinHeight;
@@ -38,6 +38,7 @@ public class WorldGenBamboo extends WorldGenerator
 		return true;
 	}
 
+	@Override
 	public boolean generate(World world, Random rand, int i, int j, int k)
 	{
 		final int height = rand.nextInt(3) + this.minTreeHeight;
@@ -187,6 +188,7 @@ public class WorldGenBamboo extends WorldGenerator
 		}
 	}
 
+	@Override
 	protected boolean func_150523_a(Block block)
 	{
 		return block.getMaterial() == Material.air ||
@@ -199,6 +201,7 @@ public class WorldGenBamboo extends WorldGenerator
 			block == Blocks.vine;
 	}
 
+	@Override
 	protected boolean isReplaceable(World world, int x, int y, int z)
 	{
 		final Block block = world.getBlock(x, y, z);
