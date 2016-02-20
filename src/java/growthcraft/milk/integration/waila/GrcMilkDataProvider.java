@@ -27,6 +27,7 @@ import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
+import growthcraft.milk.common.tileentity.TileEntityCheesePress;
 import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
 
 import cpw.mods.fml.common.Optional;
@@ -106,10 +107,16 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 		return tooltip;
 	}
 
+	private void getCheesePressData(TileEntityCheesePress te, NBTTagCompound nbt)
+	{
+
+	}
+
 	@Override
 	@Optional.Method(modid = "Waila")
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
 	{
+		if (te instanceof TileEntityCheesePress) getCheesePressData((TileEntityCheesePress)te, tag);
 		if (te instanceof TileEntityCheeseBlock)
 		{
 			final TileEntityCheeseBlock cheeseBlock = (TileEntityCheeseBlock)te;

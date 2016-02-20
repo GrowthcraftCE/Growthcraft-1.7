@@ -25,17 +25,29 @@ package growthcraft.milk.common.tileentity;
 
 import java.io.IOException;
 
+import growthcraft.api.core.util.ItemTest;
+import growthcraft.api.milk.cheesepress.ICheesePressRecipe;
+import growthcraft.api.milk.MilkRegistry;
+import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.GrcTileEntityInventoryBase;
-import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.IItemHandler;
+import growthcraft.core.common.tileentity.ITileProgressiveDevice;
+import growthcraft.core.util.ItemUtils;
+import growthcraft.milk.common.item.ItemBlockHangingCurds;
+import growthcraft.milk.GrowthCraftMilk;
 
 import io.netty.buffer.ByteBuf;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 
-public class TileEntityCheesePress extends GrcTileEntityInventoryBase
+public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements IItemHandler, ITileProgressiveDevice
 {
 	private static int[][] accessibleSlots = {
 		{ 0 },
@@ -46,14 +58,41 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase
 		{ 0 }
 	};
 
+	@SideOnly(Side.CLIENT)
 	public float animProgress;
+	@SideOnly(Side.CLIENT)
 	public int animDir;
+
 	private int screwState;
+	private DeviceInventorySlot invSlot = new DeviceInventorySlot(this, 0);
+	private int time;
+	private boolean needRecipeRecheck = true;
+	private ICheesePressRecipe workingRecipe;
+
+	@Override
+	public float getDeviceProgress()
+	{
+		if (workingRecipe != null)
+		{
+			return (float)time / (float)workingRecipe.getTimeMax();
+		}
+		return 0.0f;
+	}
+
+	public boolean isPressed()
+	{
+		return screwState == 1;
+	}
+
+	public boolean isUnpressed()
+	{
+		return screwState == 0;
+	}
 
 	@Override
 	protected GrcInternalInventory createInventory()
 	{
-		return new GrcInternalInventory(this, 2);
+		return new GrcInternalInventory(this, 1, 1);
 	}
 
 	@Override
@@ -80,6 +119,86 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase
 		return true;
 	}
 
+	@SideOnly(Side.CLIENT)
+	private void updateEntityClient()
+	{
+		final float step = 1.0f / 20.0f;
+		if (isUnpressed())
+		{
+			this.animDir = -1;
+		}
+		else
+		{
+			this.animDir = 1;
+		}
+
+		if (animDir > 0 && animProgress < 1.0f || animDir < 0 && animProgress > 0)
+		{
+			this.animProgress = MathHelper.clamp_float(this.animProgress + step * animDir, 0.0f, 1.0f);
+		}
+	}
+
+	private void setupWorkingRecipe()
+	{
+		final ICheesePressRecipe recipe = MilkRegistry.instance().cheesePress().findRecipe(invSlot.get());
+		if (recipe != workingRecipe)
+		{
+			if (workingRecipe != null)
+			{
+				this.time = 0;
+			}
+			workingRecipe = recipe;
+		}
+	}
+
+	private void commitRecipe()
+	{
+		if (workingRecipe != null)
+		{
+			invSlot.set(workingRecipe.getOutputItemStack());
+			this.workingRecipe = null;
+		}
+	}
+
+	@SideOnly(Side.SERVER)
+	private void updateEntityServer()
+	{
+		if (needRecipeRecheck)
+		{
+			needRecipeRecheck = false;
+			setupWorkingRecipe();
+		}
+
+		if (workingRecipe != null)
+		{
+			// work can only progress if the cheese press is active.
+			if (isPressed())
+			{
+				if (time < workingRecipe.getTimeMax())
+				{
+					time++;
+				}
+				else
+				{
+					commitRecipe();
+				}
+			}
+			// otherwise the cheese press will lose its progress?
+			else
+			{
+				if (time > 0) time--;
+			}
+		}
+		else
+		{
+			if (time != 0)
+			{
+				this.time = 0;
+				markForBlockUpdate();
+			}
+		}
+	}
+
 	@Override
 	public void updateEntity()
 	{
@@ -87,20 +206,11 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase
 
 		if (worldObj.isRemote)
 		{
-			final float step = 1.0f / 20.0f;
-			if (screwState == 0)
-			{
-				this.animDir = -1;
-			}
-			else
-			{
-				this.animDir = 1;
-			}
-
-			if (animDir > 0 && animProgress < 1.0f || animDir < 0 && animProgress > 0)
-			{
-				this.animProgress = MathHelper.clamp_float(this.animProgress + step * animDir, 0.0f, 1.0f);
-			}
+			updateEntityClient();
+		}
+		else
+		{
+			updateEntityServer();
 		}
 	}
 
@@ -118,10 +228,54 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase
 	}
 
 	@Override
+	public boolean tryPlaceItem(EntityPlayer player, ItemStack stack)
+	{
+		if (ItemTest.isValid(stack))
+		{
+			// Items cannot be added if the slot already has an item AND
+			// the press is active
+			if (invSlot.isEmpty() && isUnpressed())
+			{
+				if (GrowthCraftMilk.blocks.hangingCurds.getItem() == stack.getItem())
+				{
+					final ItemBlockHangingCurds item = (ItemBlockHangingCurds)stack.getItem();
+					if (item.isDried(stack))
+					{
+						final ItemStack result = ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
+						invSlot.set(result);
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	{
+		if (!ItemTest.isValid(onHand))
+		{
+			// Items cannot be removed if the cheese press is active
+			if (isUnpressed())
+			{
+				final ItemStack result = invSlot.yank();
+				if (result != null)
+				{
+					ItemUtils.spawnItemStackAtTile(result, this, worldObj.rand);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 		this.screwState = nbt.getInteger("screw_state");
+		this.time = nbt.getInteger("time");
 	}
 
 	@Override
@@ -129,6 +283,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase
 	{
 		super.writeToNBT(nbt);
 		nbt.setInteger("screw_state", screwState);
+		nbt.setInteger("time", time);
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
