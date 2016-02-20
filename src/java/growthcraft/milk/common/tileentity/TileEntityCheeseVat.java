@@ -25,10 +25,12 @@ package growthcraft.milk.common.tileentity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import growthcraft.api.core.util.FluidTest;
 import growthcraft.api.core.util.FluidUtils;
 import growthcraft.api.core.util.ItemTest;
+import growthcraft.api.core.nbt.NBTStringTagList;
 import growthcraft.api.milk.cheesevat.ICheeseVatRecipe;
 import growthcraft.api.milk.MilkFluidTags;
 import growthcraft.api.milk.MilkRegistry;
@@ -39,6 +41,8 @@ import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
 import growthcraft.core.common.tileentity.IItemHandler;
+import growthcraft.core.common.tileentity.ITileHeatedDevice;
+import growthcraft.core.common.tileentity.ITileNamedFluidTanks;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.GrowthCraftMilk;
@@ -47,12 +51,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IItemHandler
+public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IItemHandler, ITileHeatedDevice, ITileNamedFluidTanks
 {
 	public static enum FluidTankType
 	{
@@ -61,11 +66,19 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		WASTE,
 		RECIPE;
 
+		public static final FluidTankType[] VALUES = new FluidTankType[] { PRIMARY, RENNET, WASTE, RECIPE };
 		public final int id;
+		public final String name;
 
 		private FluidTankType()
 		{
 			this.id = ordinal();
+			this.name = name().toLowerCase(Locale.ENGLISH);
+		}
+
+		public String getUnlocalizedName()
+		{
+			return "grcmilk.cheese_vat.fluid_tank." + name;
 		}
 	}
 
@@ -84,9 +97,16 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	private DeviceFluidSlot primaryFluidSlot = new DeviceFluidSlot(this, FluidTankType.PRIMARY.id);
 	private DeviceFluidSlot wasteFluidSlot = new DeviceFluidSlot(this, FluidTankType.WASTE.id);
 
-	public boolean hasHeat()
+	@Override
+	public boolean isHeated()
 	{
 		return heatComponent.getHeatMultiplier() > 0;
+	}
+
+	@Override
+	public float getHeatMultiplier()
+	{
+		return heatComponent.getHeatMultiplier();
 	}
 
 	public void markForRecipeCheck()
@@ -254,7 +274,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		if (recheckRecipe)
 		{
 			this.recheckRecipe = false;
-			if (hasHeat()) commitRecipe();
+			if (isHeated()) commitRecipe();
 		}
 	}
 
@@ -309,7 +329,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 
 	private boolean doSwordActivation(EntityPlayer player, ItemStack stack)
 	{
-		if (!hasHeat()) return false;
+		if (!isHeated()) return false;
 		final FluidStack milkStack = primaryFluidSlot.get();
 		if (!FluidTest.hasTags(milkStack, MilkFluidTags.MILK)) return false;
 		if (!primaryFluidSlot.isFull()) return false;
@@ -392,5 +412,16 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	{
 		markForBlockUpdate();
 		markForRecipeCheck();
+	}
+
+	@Override
+	public void writeFluidTankNamesToTag(NBTTagCompound tag)
+	{
+		final NBTStringTagList tagList = new NBTStringTagList();
+		for (FluidTankType type : FluidTankType.VALUES)
+		{
+			tagList.add(type.getUnlocalizedName());
+		}
+		tag.setTag("tank_names", tagList.getTag());
 	}
 }

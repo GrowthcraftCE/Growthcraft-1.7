@@ -51,8 +51,8 @@ public class MilkRegistry implements ILoggable
 	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
-		cheeseVatRegistry.setLogger(logger);
 		cheesePressRegistry.setLogger(logger);
+		cheeseVatRegistry.setLogger(logger);
 		churnRegistry.setLogger(logger);
 		pancheonRegistry.setLogger(logger);
 	}

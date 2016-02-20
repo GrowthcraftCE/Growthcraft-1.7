@@ -46,6 +46,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
+import net.minecraft.inventory.IInventory;
 
 public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements IItemHandler, ITileProgressiveDevice
 {
@@ -69,6 +70,11 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	private boolean needRecipeRecheck = true;
 	private ICheesePressRecipe workingRecipe;
 
+	public void markForRecipeCheck()
+	{
+		this.needRecipeRecheck = true;
+	}
+
 	@Override
 	public float getDeviceProgress()
 	{
@@ -87,6 +93,12 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	public boolean isUnpressed()
 	{
 		return screwState == 0;
+	}
+
+	@Override
+	public void onInventoryChanged(IInventory inv, int index)
+	{
+		markForRecipeCheck();
 	}
 
 	@Override
@@ -160,7 +172,6 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 		}
 	}
 
-	@SideOnly(Side.SERVER)
 	private void updateEntityServer()
 	{
 		if (needRecipeRecheck)
@@ -180,6 +191,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 				}
 				else
 				{
+					this.time = 0;
 					commitRecipe();
 				}
 			}

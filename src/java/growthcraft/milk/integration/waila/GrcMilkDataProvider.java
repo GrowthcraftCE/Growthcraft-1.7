@@ -26,9 +26,11 @@ package growthcraft.milk.integration.waila;
 import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import growthcraft.milk.common.tileentity.TileEntityCheesePress;
 import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
+import growthcraft.milk.util.TagFormatterCheesePress;
 
 import cpw.mods.fml.common.Optional;
 
@@ -73,6 +75,11 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 	public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		final TileEntity te = accessor.getTileEntity();
+		final NBTTagCompound nbt = accessor.getNBTData();
+		if (te instanceof TileEntityCheesePress)
+		{
+			TagFormatterCheesePress.INSTANCE.format(tooltip, nbt);
+		}
 		if (te instanceof TileEntityCheeseBlock)
 		{
 			if (nbt.getBoolean("is_aged"))
@@ -90,7 +97,6 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 		}
 		if (te instanceof TileEntityHangingCurds)
 		{
-			final NBTTagCompound nbt = accessor.getNBTData();
 			final float progress = nbt.getFloat("progress");
 			if (progress < 1f)
 			{
@@ -101,7 +107,10 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 			if (nbt.hasKey("dried"))
 			{
 				final boolean dried = nbt.getBoolean("dried");
-				tooltip.add(GrcI18n.translate("grcmilk.hanging_curds.dried"));
+				if (dried)
+				{
+					tooltip.add(GrcI18n.translate("grcmilk.hanging_curds.dried"));
+				}
 			}
 		}
 		return tooltip;
@@ -116,7 +125,8 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 
 	private void getCheesePressData(TileEntityCheesePress te, NBTTagCompound nbt)
 	{
-
+		nbt.setBoolean("pressed", te.isPressed());
+		nbt.setTag("item", NBTHelper.writeItemStackToNBT(te.getStackInSlot(0), new NBTTagCompound()));
 	}
 
 	@Override
