@@ -23,6 +23,7 @@
  */
 package growthcraft.milk.common.block;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -38,6 +39,7 @@ import growthcraft.milk.GrowthCraftMilk;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -113,7 +115,7 @@ public class BlockHangingCurds extends GrcBlockContainer
 			final ItemBlockHangingCurds ib = (ItemBlockHangingCurds)item;
 			for (EnumCheeseType cheese : EnumCheeseType.VALUES)
 			{
-				if (cheese.hasBlock())
+				if (cheese.hasCurdBlock())
 				{
 					final ItemStack stack = new ItemStack(item, 1, cheese.meta);
 					ib.getTileData(stack);
@@ -135,6 +137,18 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		final TileEntityHangingCurds teHangingCurds = getTileEntity(world, x, y, z);
+		if (teHangingCurds != null)
+		{
+			teHangingCurds.populateDrops(ret);
+		}
+		return ret;
+	}
+
+	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
 		return BlockCheck.isBlockPlacableOnSide(world, x, y + 1, z, ForgeDirection.DOWN);
@@ -144,6 +158,16 @@ public class BlockHangingCurds extends GrcBlockContainer
 	public boolean canPlaceBlockAt(World world, int x, int y, int z)
 	{
 		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
+	}
+
+
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+	{
+		if (!this.canBlockStay(world, x, y, z))
+		{
+			fellBlockAsItem(world, x, y, z);
+		}
 	}
 
 	@Override

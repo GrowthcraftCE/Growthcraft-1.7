@@ -24,6 +24,7 @@
 package growthcraft.milk.common.tileentity;
 
 import java.io.IOException;
+import java.util.List;
 
 import growthcraft.api.core.util.FXHelper;
 import growthcraft.api.core.util.Pair;
@@ -197,5 +198,11 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 		final NBTTagCompound tag = ItemBlockHangingCurds.openNBT(stack);
 		writeToNBTForItem(tag);
 		return stack;
+	}
+
+	public List<ItemStack> populateDrops(List<ItemStack> list)
+	{
+		list.add(asItemStack());
+		return list;
 	}
 }
