@@ -23,6 +23,12 @@
  */
 package growthcraft.milk.init;
 
+import java.util.Arrays;
+
+import growthcraft.api.core.item.IItemStackComparator;
+import growthcraft.api.core.item.CommonItemStackComparator;
+import growthcraft.milk.common.item.crafting.ShapelessItemComparableRecipe;
+
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.GrcModuleBase;
@@ -32,17 +38,45 @@ import growthcraft.milk.common.block.BlockCheesePress;
 import growthcraft.milk.common.block.BlockCheeseVat;
 import growthcraft.milk.common.block.BlockHangingCurds;
 import growthcraft.milk.common.block.BlockPancheon;
+import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class GrcMilkBlocks extends GrcModuleBase
 {
+	public static class DriedCurdComparator implements IItemStackComparator
+	{
+		private CommonItemStackComparator common = new CommonItemStackComparator();
+
+		public boolean equals(ItemStack expected, ItemStack actual)
+		{
+			if (expected.getItem() instanceof ItemBlockHangingCurds)
+			{
+				if (actual.getItem() instanceof ItemBlockHangingCurds)
+				{
+					final ItemBlockHangingCurds actualCurd = (ItemBlockHangingCurds)actual.getItem();
+					final ItemBlockHangingCurds expectedCurd = (ItemBlockHangingCurds)expected.getItem();
+					if (expectedCurd.getCheeseType(expected) == actualCurd.getCheeseType(actual))
+					{
+						if (actualCurd.isDried(actual)) return true;
+					}
+				}
+				return false;
+			}
+			else
+			{
+				return common.equals(expected, actual);
+			}
+		}
+	}
+
 	public BlockDefinition butterChurn;
 	public BlockDefinition cheeseBlock;
 	public BlockDefinition cheesePress;
@@ -70,6 +104,11 @@ public class GrcMilkBlocks extends GrcModuleBase
 		cheeseVat.register("grcmilk.CheeseVat");
 		hangingCurds.register("grcmilk.HangingCurds", ItemBlockHangingCurds.class);
 		pancheon.register("grcmilk.Pancheon");
+
+		GameRegistry.addRecipe(new ShapelessItemComparableRecipe(new DriedCurdComparator(),
+			EnumCheeseType.RICOTTA.asStack(),
+			Arrays.asList(new ItemStack(Items.bowl), EnumCheeseType.RICOTTA.asCurdItemStack())
+		));
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(cheeseVat.asStack(),
 			GrowthCraftCellar.brewKettle.asStack()
