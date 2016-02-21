@@ -268,19 +268,13 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 			final ItemStack is = player.inventory.getCurrentItem();
 
 			boolean needUpdate = false;
-			if (is != null)
+			if (ih.tryPlaceItem(player, is))
 			{
-				if (ih.tryPlaceItem(player, is))
-				{
-					needUpdate = true;
-				}
+				needUpdate = true;
 			}
-			else
+			else if (ih.tryTakeItem(player, is))
 			{
-				if (ih.tryTakeItem(player, is))
-				{
-					needUpdate = true;
-				}
+				needUpdate = true;
 			}
 
 			if (needUpdate)
