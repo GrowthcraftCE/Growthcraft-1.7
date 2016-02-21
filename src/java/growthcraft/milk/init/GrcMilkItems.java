@@ -23,6 +23,7 @@
  */
 package growthcraft.milk.init;
 
+import growthcraft.api.core.item.EnumDye;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.milk.common.item.EnumButter;
@@ -38,7 +39,6 @@ import growthcraft.milk.common.item.ItemYogurt;
 import growthcraft.milk.GrowthCraftMilk;
 
 import net.minecraft.init.Items;
-import net.minecraft.init.Blocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -105,7 +105,7 @@ public class GrcMilkItems extends GrcModuleBase
 			Items.milk_bucket,
 			Items.bowl,
 			Items.sugar,
-			Blocks.cocoa
+			EnumDye.COCOA_BEANS.asStack()
 		));
 
 		// Cheese Cloth
