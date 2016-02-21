@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,14 @@
  */
 package growthcraft.core.common.tileentity;
 
-public interface ITileProgressiveDevice
+import net.minecraft.nbt.NBTTagCompound;
+
+public interface ITileNamedFluidTanks
 {
-	float getDeviceProgress();
+	/**
+	 * This should write a NBTTagList to the provided tag under the key "tank_names"
+	 *
+	 * @param tag - tag to write to
+	 */
+	void writeFluidTankNamesToTag(NBTTagCompound tag);
 }

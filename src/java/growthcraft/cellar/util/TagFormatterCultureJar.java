@@ -17,7 +17,7 @@ public class TagFormatterCultureJar implements ITagFormatter
 	{
 		list.add(EnumChatFormatting.GRAY +
 			GrcI18n.translate(
-				"grc.cellar.fermentJar.itemslot.yeast",
+				"grc.cellar.ferment_jar.itemslot.yeast",
 				TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_yeast"))
 			)
 		);

@@ -83,7 +83,7 @@ public class GrcGuiContainer extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {}
 
-
+	// Overwrite this method to add tooltips based on the handle
 	protected void addTooltips(String handle, List<String> tips) {}
 
 	// Overwrite this method to draw tooltips, use the ti to identify which

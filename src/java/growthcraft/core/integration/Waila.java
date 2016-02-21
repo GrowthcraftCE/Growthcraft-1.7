@@ -61,5 +61,6 @@ public class Waila extends WailaIntegrationBase
 
 		final String option = "grccore.waila.option.";
 		reg.addConfig(GrowthCraftCore.MOD_NAME, "DisplayFluidContent", option + "DisplayFluidContent", true);
+		reg.addConfig(GrowthCraftCore.MOD_NAME, "DisplayHeated", option + "DisplayHeated", true);
 	}
 }

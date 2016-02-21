@@ -30,6 +30,12 @@ public class TagFormatterBeeBox implements ITagFormatter
 			)
 		);
 
+		if (tag.hasKey("growth_rate"))
+		{
+			list.add(EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.growth_rate_prefix") + " " +
+				EnumChatFormatting.WHITE + GrcI18n.translate("grc.bees.growth_rate_value", (int)(tag.getFloat("growth_rate") * 100)));
+		}
+
 		return list;
 	}
 }

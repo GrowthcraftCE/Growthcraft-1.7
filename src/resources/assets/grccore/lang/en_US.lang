@@ -62,12 +62,16 @@ grc.format.tank.content_suffix=mB of %s
 
 # Waila Tooltips
 grc.format.crop.growth_prefix=Growth :
-grc.format.crop.progress_format=%d%%
 grc.format.crop.mature=Mature
+grc.format.crop.progress_format=%d%%
 grc.format.paddy.hasFluid=Has Fluid :
-grccore.device.progress.prefix=Progress :
+grccore.device.heated.multiplier.format= %d%%
+grccore.device.heated.prefix=Heat :
+grccore.device.heated.state.false=<Cold>
 grccore.device.progress.format= %d%%
+grccore.device.progress.prefix=Progress :
 grccore.waila.option.DisplayFluidContent=Fluid Tanks
+grccore.waila.option.DisplayHeated=Heated Devices
 
 # Effects
 grc.effect.chance.format=%d%% Chance of

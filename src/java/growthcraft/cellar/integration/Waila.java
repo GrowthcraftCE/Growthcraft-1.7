@@ -23,6 +23,7 @@
  */
 package growthcraft.cellar.integration;
 
+import growthcraft.cellar.common.block.BlockCellarContainer;
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.integration.waila.CellarDataProvider;
@@ -45,6 +46,9 @@ public class Waila extends WailaIntegrationBase
 	{
 		final IWailaDataProvider provider = new CellarDataProvider();
 		reg.registerBodyProvider(provider, BlockFruitPresser.class);
+		reg.registerNBTProvider(provider, BlockFruitPresser.class);
+		reg.registerBodyProvider(provider, BlockCellarContainer.class);
+		reg.registerNBTProvider(provider, BlockCellarContainer.class);
 
 		final String option = "grccellar.waila.option.";
 		reg.addConfig(GrowthCraftCellar.MOD_NAME, "FruitPressExtras", option + "FruitPressExtras", true);

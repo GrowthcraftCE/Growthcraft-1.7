@@ -64,6 +64,7 @@ public class BeesDataProvider implements IWailaDataProvider
 			tag.setInteger("honeycomb_count", beeBox.countCombs());
 			tag.setInteger("honeycomb_max", beeBox.getHoneyCombMax());
 			tag.setInteger("honey_count", beeBox.countHoney());
+			tag.setFloat("growth_rate", beeBox.getGrowthRate());
 			tag.setTag("bee", NBTHelper.writeItemStackToNBT(beeBox.getBeeStack()));
 		}
 		return tag;

@@ -23,7 +23,8 @@
  */
 package growthcraft.core.common.tileentity;
 
-public interface ITileProgressiveDevice
+public interface ITileHeatedDevice
 {
-	float getDeviceProgress();
+	boolean isHeated();
+	float getHeatMultiplier();
 }

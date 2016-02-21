@@ -125,7 +125,7 @@ public class GuiBrewKettle extends GuiCellar
 
 		this.drawTexturedModalRect(w + 98, h + 30, 176, 0, 9, this.te.getBrewProgressScaled(28));
 
-		if (this.te.hasHeat())
+		if (this.te.isHeated())
 		{
 			final int iconHeight = this.te.getHeatScaled(14);
 			final int offY = 14 - iconHeight;

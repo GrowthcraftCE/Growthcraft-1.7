@@ -86,19 +86,19 @@ grc.cellar.format.tipsy_chance=%d%% Chance of Tipsy
 grc.cellar.item.booze_bucket.deprecated=DEPRECATED, craft to get updated bucket
 grc.cellar.item.booze_bucket.deprecated_suffix= (DEPRECATED)
 
-grc.cellar.brewKettle.brewing_prefix=Brewing :
-grc.cellar.brewKettle.itemslot.item=Item : %s
-grc.cellar.brewKettle.itemslot.residue=Residue : %s
-grc.cellar.fermentBarrel.progress_prefix=Progress :
-grc.cellar.fermentBarrel.progress_format=%d%%
-grc.cellar.fermentBarrel.itemslot.modifier=Modifier : %s
-grc.cellar.fermentJar.itemslot.yeast=%s
-grc.cellar.fruitPress.itemslot.item=Item : %s
-grc.cellar.fruitPress.itemslot.residue=Residue : %s
-grc.cellar.fruitPresser.state.invalid=<Invalid>
-grc.cellar.fruitPresser.state.pressed=Pressed
-grc.cellar.fruitPresser.state.unpressed=Unpressed
-grc.cellar.fruitPresser.state_prefix=State :
+grc.cellar.brew_kettle.brewing_prefix=Brewing :
+grc.cellar.brew_kettle.itemslot.item=Item : %s
+grc.cellar.brew_kettle.itemslot.residue=Residue : %s
+grc.cellar.ferment_barrel.progress.prefix=Progress :
+grc.cellar.ferment_barrel.progress.format=%d%%
+grc.cellar.ferment_barrel.itemslot.modifier=Modifier : %s
+grc.cellar.ferment_jar.itemslot.yeast=%s
+grc.cellar.fruit_press.itemslot.item=Item : %s
+grc.cellar.fruit_press.itemslot.residue=Residue : %s
+grc.cellar.fruit_presser.state.invalid=<Invalid>
+grc.cellar.fruit_presser.state.pressed=Pressed
+grc.cellar.fruit_presser.state.unpressed=Unpressed
+grc.cellar.fruit_presser.state_prefix=State :
 
 # Waila Tooltips
 grccellar.waila.option.FruitPressExtras=Fruit Press Extras

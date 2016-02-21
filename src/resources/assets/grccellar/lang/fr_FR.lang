@@ -53,18 +53,18 @@ grc.cellar.format.tipsy_chance=%d%% Chance d'ivresse
 grc.cellar.item.booze_bucket.deprecated=OBSOLETE, fabriquez une amèlioration de seau
 grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETE)
 
-grc.cellar.brewKettle.brewing_prefix=Brassage :
-grc.cellar.brewKettle.itemslot.item=Élément :
-grc.cellar.brewKettle.itemslot.residue=Résidu :
-grc.cellar.fermentBarrel.progress_prefix=Progrès :
-grc.cellar.fermentBarrel.progress_format=%d%%
-grc.cellar.fermentBarrel.itemslot.modifier=Modificateur :
-grc.cellar.fruitPress.itemslot.item=Élément :
-grc.cellar.fruitPress.itemslot.residue=Residu :
-grc.cellar.fruitPresser.state.invalid=<Non-valide>
-grc.cellar.fruitPresser.state.pressed=Pressé
-grc.cellar.fruitPresser.state.unpressed=Non-pressé
-grc.cellar.fruitPresser.state_prefix=État :
+grc.cellar.brew_kettle.brewing_prefix=Brassage :
+grc.cellar.brew_kettle.itemslot.item=Élément :
+grc.cellar.brew_kettle.itemslot.residue=Résidu :
+grc.cellar.ferment_barrel.progress.prefix=Progrès :
+grc.cellar.ferment_barrel.progress.format=%d%%
+grc.cellar.ferment_barrel.itemslot.modifier=Modificateur :
+grc.cellar.fruit_press.itemslot.item=Élément :
+grc.cellar.fruit_press.itemslot.residue=Residu :
+grc.cellar.fruit_presser.state.invalid=<Non-valide>
+grc.cellar.fruit_presser.state.pressed=Pressé
+grc.cellar.fruit_presser.state.unpressed=Non-pressé
+grc.cellar.fruit_presser.state_prefix=État :
 
 # Waila Tooltips
 grccellar.waila.option.FruitPressExtras=Supplément de pressage

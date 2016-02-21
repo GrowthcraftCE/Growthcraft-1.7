@@ -21,8 +21,8 @@ public class TagFormatterFermentBarrel implements ITagFormatter
 		final int time = tag.getInteger("time");
 		final int timeMax = tag.getInteger("time_max");
 		final float prog = (float)time / (timeMax == 0 ? 1 : timeMax);
-		list.add(EnumChatFormatting.GRAY + GrcI18n.translate("grc.cellar.fermentBarrel.progress_prefix") + " " +
-			EnumChatFormatting.WHITE + GrcI18n.translate("grc.cellar.fermentBarrel.progress_format", (int)(prog * 100)));
+		list.add(EnumChatFormatting.GRAY + GrcI18n.translate("grc.cellar.ferment_barrel.progress.prefix") + " " +
+			EnumChatFormatting.WHITE + GrcI18n.translate("grc.cellar.ferment_barrel.progress.format", (int)(prog * 100)));
 	}
 
 	private void addModifierLine(List<String> list, NBTTagCompound tag)
@@ -30,7 +30,7 @@ public class TagFormatterFermentBarrel implements ITagFormatter
 		final NBTTagCompound modifierItem = tag.getCompoundTag("item_modifier");
 		list.add(EnumChatFormatting.GRAY +
 			GrcI18n.translate(
-				"grc.cellar.fermentBarrel.itemslot.modifier",
+				"grc.cellar.ferment_barrel.itemslot.modifier",
 				TagFormatterItem.INSTANCE.formatItem(modifierItem)
 			)
 		);

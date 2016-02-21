@@ -28,6 +28,8 @@ import java.util.List;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.core.common.tileentity.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.ITileHeatedDevice;
+import growthcraft.core.common.tileentity.ITileNamedFluidTanks;
 import growthcraft.core.util.TagFormatterFluidHandler;
 
 import cpw.mods.fml.common.Optional;
@@ -76,10 +78,25 @@ public class CoreDataProvider implements IWailaDataProvider
 			}
 		}
 
+		if (te instanceof ITileHeatedDevice)
+		{
+			final boolean isHeated = tag.getBoolean("is_heated");
+			final float heat = tag.getFloat("heat_multiplier");
+			String result = EnumChatFormatting.GRAY + GrcI18n.translate("grccore.device.heated.prefix");
+			if (isHeated)
+			{
+				result += EnumChatFormatting.WHITE + GrcI18n.translate("grccore.device.heated.multiplier.format", (int)(heat * 100));
+			}
+			else
+			{
+				result += EnumChatFormatting.WHITE + GrcI18n.translate("grccore.device.heated.state.false");
+			}
+			tooltip.add(result);
+		}
+
 		if (te instanceof ITileProgressiveDevice)
 		{
-			final NBTTagCompound nbt = accessor.getNBTData();
-			final float prog = nbt.getFloat("device_progress");
+			final float prog = tag.getFloat("device_progress");
 			if (prog > 0)
 			{
 				final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grccore.device.progress.prefix") +
@@ -102,10 +119,17 @@ public class CoreDataProvider implements IWailaDataProvider
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
 	{
 		if (te instanceof IFluidHandler) NBTHelper.writeIFluidHandlerToNBT((IFluidHandler)te, tag);
+		if (te instanceof ITileNamedFluidTanks) ((ITileNamedFluidTanks)te).writeFluidTankNamesToTag(tag);
 		if (te instanceof ITileProgressiveDevice)
 		{
 			final ITileProgressiveDevice device = (ITileProgressiveDevice)te;
 			tag.setFloat("device_progress", device.getDeviceProgress());
+		}
+		if (te instanceof ITileHeatedDevice)
+		{
+			final ITileHeatedDevice device = (ITileHeatedDevice)te;
+			tag.setBoolean("is_heated", device.isHeated());
+			tag.setFloat("heat_multiplier", device.getHeatMultiplier());
 		}
 		return tag;
 	}

@@ -105,7 +105,7 @@ public class BrewKettle extends DeviceBase
 		return heatComponent.getHeatMultiplier();
 	}
 
-	public boolean hasHeat()
+	public boolean isHeated()
 	{
 		return getHeatMultiplier() > 0;
 	}
@@ -117,7 +117,7 @@ public class BrewKettle extends DeviceBase
 
 	public BrewingRecipe getWorkingRecipe()
 	{
-		if (!hasHeat()) return null;
+		if (!isHeated()) return null;
 
 		final BrewingRecipe recipe = getBrewingRecipe();
 		if (recipe == null) return null;

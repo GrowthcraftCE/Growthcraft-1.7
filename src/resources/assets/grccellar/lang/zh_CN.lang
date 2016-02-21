@@ -81,19 +81,19 @@ grc.cellar.format.tipsy_chance=有%d%%概率醉酒
 grc.cellar.item.booze_bucket.deprecated=已废弃，请手动在工作台中合成升级物品。
 grc.cellar.item.booze_bucket.deprecated_suffix=(已废弃)
 
-grc.cellar.brewKettle.brewing_prefix=正在酿造？
-grc.cellar.brewKettle.itemslot.item=物品：%s
-grc.cellar.brewKettle.itemslot.residue=残余：%s
-grc.cellar.fermentBarrel.progress_prefix=进度：
-grc.cellar.fermentBarrel.progress_format=%d%%
-grc.cellar.fermentBarrel.itemslot.modifier=酵子：%s
-grc.cellar.fermentJar.itemslot.yeast=%s
-grc.cellar.fruitPress.itemslot.item=物品：%s
-grc.cellar.fruitPress.itemslot.residue=残余：%s
-grc.cellar.fruitPresser.state.invalid=<无效>
-grc.cellar.fruitPresser.state.pressed=压榨中
-grc.cellar.fruitPresser.state.unpressed=未压榨
-grc.cellar.fruitPresser.state_prefix=状态：
+grc.cellar.brew_kettle.brewing_prefix=正在酿造？
+grc.cellar.brew_kettle.itemslot.item=物品：%s
+grc.cellar.brew_kettle.itemslot.residue=残余：%s
+grc.cellar.ferment_barrel.progress.prefix=进度：
+grc.cellar.ferment_barrel.progress.format=%d%%
+grc.cellar.ferment_barrel.itemslot.modifier=酵子：%s
+grc.cellar.ferment_jar.itemslot.yeast=%s
+grc.cellar.fruit_press.itemslot.item=物品：%s
+grc.cellar.fruit_press.itemslot.residue=残余：%s
+grc.cellar.fruit_presser.state.invalid=<无效>
+grc.cellar.fruit_presser.state.pressed=压榨中
+grc.cellar.fruit_presser.state.unpressed=未压榨
+grc.cellar.fruit_presser.state_prefix=状态：
 
 # Waila Tooltips
 grccellar.waila.option.FruitPressExtras=榨汁机附加信息：

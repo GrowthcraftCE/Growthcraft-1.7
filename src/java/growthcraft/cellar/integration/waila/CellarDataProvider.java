@@ -77,8 +77,8 @@ public class CellarDataProvider implements IWailaDataProvider
 		final TileEntity te = accessor.getTileEntity();
 		if (block instanceof BlockFruitPresser)
 		{
-			tooltip.add(EnumChatFormatting.GRAY + GrcI18n.translate("grc.cellar.fruitPresser.state_prefix") + " " +
-				EnumChatFormatting.WHITE + GrcI18n.translate("grc.cellar.fruitPresser.state." +
+			tooltip.add(EnumChatFormatting.GRAY + GrcI18n.translate("grc.cellar.fruit_presser.state_prefix") + " " +
+				EnumChatFormatting.WHITE + GrcI18n.translate("grc.cellar.fruit_presser.state." +
 					((BlockFruitPresser)block).getPressStateName(accessor.getMetadata())));
 		}
 		final NBTTagCompound tag = accessor.getNBTData();

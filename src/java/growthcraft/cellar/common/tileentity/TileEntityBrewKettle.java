@@ -12,6 +12,7 @@ import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.ITileHeatedDevice;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -24,7 +25,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityBrewKettle extends TileEntityCellarDevice
+public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITileHeatedDevice
 {
 	public static enum BrewKettleDataID
 	{
@@ -93,9 +94,16 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice
 		return (int)(MathHelper.clamp_float(brewKettle.getHeatMultiplier(), 0.0f, 1.0f) * range);
 	}
 
-	public boolean hasHeat()
+	@Override
+	public boolean isHeated()
 	{
-		return brewKettle.hasHeat();
+		return brewKettle.isHeated();
+	}
+
+	@Override
+	public float getHeatMultiplier()
+	{
+		return brewKettle.getHeatMultiplier();
 	}
 
 	public boolean canBrew()

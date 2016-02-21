@@ -70,9 +70,20 @@ public class DeviceFluidSlot
 		return getCapacity() - getAmount();
 	}
 
+	/**
+	 * Sets the fluid slot's fluid stack
+	 */
 	public void set(FluidStack newStack)
 	{
 		tanks.setFluidStack(index, newStack);
+	}
+
+	/**
+	 * Clears the fluid slot
+	 */
+	public void clear()
+	{
+		tanks.clearTank(index);
 	}
 
 	/**
@@ -161,6 +172,11 @@ public class DeviceFluidSlot
 			return true;
 		}
 		return false;
+	}
+
+	public boolean hasEnough(int amount)
+	{
+		return getAmount() >= amount;
 	}
 
 	public FluidStack consume(int amount, boolean doDrain)
