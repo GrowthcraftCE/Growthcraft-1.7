@@ -71,7 +71,12 @@ public class ItemBlockHangingCurds extends ItemBlock
 
 	public boolean isDried(ItemStack stack)
 	{
-		return getTileData(stack).getBoolean("dried");
+		final NBTTagCompound nbt = getTileData(stack);
+		if (nbt.hasKey("dried"))
+		{
+			return nbt.getBoolean("dried");
+		}
+		return false;
 	}
 
 	@Override

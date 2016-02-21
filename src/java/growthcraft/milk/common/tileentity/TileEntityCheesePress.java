@@ -167,7 +167,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	{
 		if (workingRecipe != null)
 		{
-			invSlot.set(workingRecipe.getOutputItemStack());
+			invSlot.set(workingRecipe.getOutputItemStack().copy());
 			this.workingRecipe = null;
 		}
 	}

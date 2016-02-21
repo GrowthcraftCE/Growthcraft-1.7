@@ -243,16 +243,6 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		}
 	}
 
-	private void commitWheyRecipe()
-	{
-		if (primaryFluidSlot.isFull())
-		{
-			final Fluid fluid = GrowthCraftMilk.fluids.cheeses.get(EnumCheeseType.RICOTTA).getFluid();
-			primaryFluidSlot.set(FluidUtils.exchangeFluid(primaryFluidSlot.get(), fluid));
-			wasteFluidSlot.fill(GrowthCraftMilk.fluids.whey.fluid.asFluidStack(1000), true);
-		}
-	}
-
 	private void commitRecipe()
 	{
 		GrowthCraftMilk.getLogger().info("Commiting Recipe");
@@ -261,10 +251,6 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		if (FluidTest.hasTags(stack, MilkFluidTags.MILK_CURDS))
 		{
 			commitMilkCurdRecipe();
-		}
-		else if (FluidTest.hasTags(stack, MilkFluidTags.WHEY))
-		{
-			commitWheyRecipe();
 		}
 	}
 
@@ -331,17 +317,30 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	{
 		if (!isHeated()) return false;
 		final FluidStack milkStack = primaryFluidSlot.get();
-		if (!FluidTest.hasTags(milkStack, MilkFluidTags.MILK)) return false;
-		if (!primaryFluidSlot.isFull()) return false;
+		if (FluidTest.hasTags(milkStack, MilkFluidTags.MILK))
+		{
+			if (!FluidTest.hasTags(milkStack, MilkFluidTags.MILK)) return false;
+			if (!primaryFluidSlot.isFull()) return false;
 
-		final FluidStack rennetStack = getFluidStack(FluidTankType.RENNET.id);
-		if (!FluidTest.hasTags(rennetStack, MilkFluidTags.RENNET)) return false;
-		if (rennetStack.amount < 333) return false;
+			final FluidStack rennetStack = getFluidStack(FluidTankType.RENNET.id);
+			if (!FluidTest.hasTags(rennetStack, MilkFluidTags.RENNET)) return false;
+			if (rennetStack.amount < 333) return false;
 
-		primaryFluidSlot.set(FluidUtils.exchangeFluid(milkStack, GrowthCraftMilk.fluids.curds.getFluid()));
-		clearTank(FluidTankType.RENNET.id);
-		wasteFluidSlot.fill(GrowthCraftMilk.fluids.whey.fluid.asFluidStack(1000), true);
-		return true;
+			primaryFluidSlot.set(FluidUtils.exchangeFluid(milkStack, GrowthCraftMilk.fluids.curds.getFluid()));
+			clearTank(FluidTankType.RENNET.id);
+			wasteFluidSlot.fill(GrowthCraftMilk.fluids.whey.fluid.asFluidStack(1000), true);
+			return true;
+		}
+		else if (FluidTest.hasTags(milkStack, MilkFluidTags.WHEY))
+		{
+			if (primaryFluidSlot.isFull())
+			{
+				final Fluid fluid = GrowthCraftMilk.fluids.cheeses.get(EnumCheeseType.RICOTTA).getFluid();
+				primaryFluidSlot.set(FluidUtils.exchangeFluid(primaryFluidSlot.get(), fluid));
+				wasteFluidSlot.fill(GrowthCraftMilk.fluids.whey.fluid.asFluidStack(1000), true);
+			}
+		}
+		return false;
 	}
 
 	private boolean collectCurdInCheeseCloth(EntityPlayer player, ItemStack stack)
