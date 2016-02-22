@@ -26,7 +26,7 @@ package growthcraft.api.milk.util;
 import javax.annotation.Nullable;
 
 import growthcraft.api.core.fluids.FluidTag;
-import growthcraft.api.core.util.FluidTest;
+import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.milk.MilkFluidTags;
 
 import net.minecraftforge.fluids.FluidStack;

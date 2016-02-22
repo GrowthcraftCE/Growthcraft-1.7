@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,51 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.util;
+package growthcraft.api.core.fluids;
 
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.item.ItemStack;
+import growthcraft.api.core.definition.IMultiFluidStacks;
 
-public class ItemTest
+import net.minecraftforge.fluids.FluidStack;
+
+public class MultiFluidStacks implements IMultiFluidStacks
 {
-	private ItemTest() {}
+	private List<FluidStack> fluidStacks;
 
-	public static boolean isValid(@Nonnull ItemStack stack)
+	public MultiFluidStacks(@Nonnull FluidStack... stacks)
 	{
-		if (stack == null) return false;
-		if (stack.getItem() == null) return false;
-		if (stack.stackSize <= 0) return false;
-		return true;
+		this.fluidStacks = Arrays.asList(stacks);
 	}
 
-	public static boolean hasEnough(@Nonnull ItemStack expected, @Nullable ItemStack actual)
+	@Override
+	public List<FluidStack> getFluidStacks()
 	{
-		if (actual == null) return false;
-		if (!expected.isItemEqual(actual)) return false;
-		if (actual.stackSize < expected.stackSize) return false;
-		return true;
+		return fluidStacks;
 	}
 
-	public static boolean isValidAndExpected(@Nonnull List<ItemStack> expectedItems, @Nonnull List<ItemStack> givenItems)
+	@Override
+	public boolean containsFluidStack(@Nullable FluidStack stack)
 	{
-		if (expectedItems.size() != givenItems.size()) return false;
-		for (int i = 0; i < expectedItems.size(); ++i)
+		if (!FluidTest.isValid(stack)) return false;
+		for (FluidStack content : getFluidStacks())
 		{
-			final ItemStack expected = expectedItems.get(i);
-			final ItemStack actual = givenItems.get(i);
-			if (expected != null)
-			{
-				if (!isValid(actual)) return false;
-				if (!expected.isItemEqual(actual)) return false;
-			}
-			else
-			{
-				if (actual != null) return false;
-			}
+			if (content.isFluidEqual(stack)) return true;
 		}
-		return true;
+		return false;
 	}
 }

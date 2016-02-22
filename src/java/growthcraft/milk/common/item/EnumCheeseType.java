@@ -29,7 +29,7 @@ import java.util.List;
 
 import growthcraft.api.core.definition.IFluidStackFactory;
 import growthcraft.api.core.definition.IItemStackFactory;
-import growthcraft.api.core.util.ItemTest;
+import growthcraft.api.core.item.ItemTest;
 import growthcraft.milk.GrowthCraftMilk;
 
 import io.netty.buffer.ByteBuf;

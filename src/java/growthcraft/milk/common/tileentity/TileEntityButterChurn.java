@@ -25,7 +25,7 @@ package growthcraft.milk.common.tileentity;
 
 import java.io.IOException;
 
-import growthcraft.api.core.util.FluidTest;
+import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.milk.churn.ChurnRecipe;
 import growthcraft.api.milk.MilkRegistry;
 import growthcraft.api.milk.util.MilkTest;

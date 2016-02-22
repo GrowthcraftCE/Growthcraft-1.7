@@ -23,7 +23,7 @@
  */
 package growthcraft.api.milk.churn;
 
-import growthcraft.api.core.util.FluidFormatString;
+import growthcraft.api.core.fluids.FluidFormatString;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;

@@ -28,8 +28,8 @@ import java.util.List;
 
 import growthcraft.api.core.definition.IFluidStackFactory;
 import growthcraft.api.core.definition.IItemStackFactory;
-import growthcraft.api.core.util.FluidTest;
-import growthcraft.api.core.util.ItemTest;
+import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.item.ItemTest;
 import growthcraft.core.integration.forestry.recipes.RecipeManagersShims;
 
 import forestry.api.core.ForestryAPI;

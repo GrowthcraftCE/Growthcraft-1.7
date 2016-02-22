@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import growthcraft.api.core.schema.ICommentable;
-import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.item.ItemKey;
 
 public class UserHeatSourceEntry implements ICommentable
 {

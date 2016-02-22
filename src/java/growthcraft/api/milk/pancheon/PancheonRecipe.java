@@ -23,7 +23,7 @@
  */
 package growthcraft.api.milk.pancheon;
 
-import growthcraft.api.core.util.FluidFormatString;
+import growthcraft.api.core.fluids.FluidFormatString;
 
 import net.minecraftforge.fluids.FluidStack;
 

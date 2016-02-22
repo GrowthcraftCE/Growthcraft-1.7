@@ -26,7 +26,7 @@ package growthcraft.api.cellar.heatsource.user;
 import java.io.BufferedReader;
 import java.util.Map;
 
-import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
 

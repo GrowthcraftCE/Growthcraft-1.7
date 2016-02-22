@@ -21,24 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.util;
+package growthcraft.api.core.fluids;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import growthcraft.api.core.definition.IFluidStackFactory;
+import growthcraft.api.core.nbt.NBTHelper;
+import growthcraft.api.core.util.HashKey;
+
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-public class FluidFormatString
+/**
+ * As the name implies, this class is used in place of a List for Fluid keys
+ */
+public class FluidKey extends HashKey implements IFluidStackFactory
 {
-	private FluidFormatString() {}
+	public final Fluid fluid;
+	public final NBTTagCompound compoundTag;
 
-	public static String format(FluidStack stack)
+	public FluidKey(@Nonnull Fluid pfluid, @Nullable NBTTagCompound tag)
 	{
-		if (stack != null)
-		{
-			final Fluid fluid = stack.getFluid();
-			String fluidName = "NULL";
-			if (fluid != null) fluidName = fluid.getName();
-			return String.format("FluidStack(fluid: %s, amount: %d)", fluidName, stack.amount);
-		}
-		return "FluidStack(NULL)";
+		super();
+		this.fluid = pfluid;
+		this.compoundTag = tag;
+		generateHashCode();
+	}
+
+	public FluidKey(@Nonnull Fluid pfluid)
+	{
+		this(pfluid, null);
+	}
+
+	public FluidKey(@Nonnull FluidStack pfluidStack)
+	{
+		this(pfluidStack.getFluid(), pfluidStack.tag);
+	}
+
+	public void generateHashCode()
+	{
+		this.hash = fluid.hashCode();
+		this.hash = 31 * hash + (compoundTag != null ? compoundTag.hashCode() : 0);
+	}
+
+	@Override
+	public FluidStack asFluidStack(int size)
+	{
+		return new FluidStack(fluid, size, NBTHelper.copyCompoundTag(compoundTag));
+	}
+
+	@Override
+	public FluidStack asFluidStack()
+	{
+		return asFluidStack(1);
 	}
 }

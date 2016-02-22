@@ -25,7 +25,7 @@ package growthcraft.milk.common.tileentity;
 
 import java.io.IOException;
 
-import growthcraft.api.core.util.ItemTest;
+import growthcraft.api.core.item.ItemTest;
 import growthcraft.api.milk.cheesepress.ICheesePressRecipe;
 import growthcraft.api.milk.MilkRegistry;
 import growthcraft.core.common.inventory.GrcInternalInventory;

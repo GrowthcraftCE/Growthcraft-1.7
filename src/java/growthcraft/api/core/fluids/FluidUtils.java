@@ -1,4 +1,4 @@
-package growthcraft.api.core.util;
+package growthcraft.api.core.fluids;
 
 import java.util.ArrayList;
 import java.util.List;

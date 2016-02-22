@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.util;
+package growthcraft.api.core.item;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.api.core.nbt.NBTHelper;
+import growthcraft.api.core.util.HashKey;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

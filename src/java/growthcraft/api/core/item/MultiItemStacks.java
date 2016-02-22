@@ -21,65 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.util;
+package growthcraft.api.core.item;
 
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.definition.IMultiFluidStacks;
-import growthcraft.api.core.fluids.FluidTag;
+import growthcraft.api.core.definition.IMultiItemStacks;
 
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraft.item.ItemStack;
 
-public class TaggedFluidStacks implements IMultiFluidStacks
+public class MultiItemStacks implements IMultiItemStacks
 {
-	public int amount;
-	private List<String> tags;
-	private List<FluidTag> fluidTags;
+	private List<ItemStack> itemStacks;
 
-	public TaggedFluidStacks(int amt, @Nonnull String... ptags)
+	public MultiItemStacks(@Nonnull ItemStack... stacks)
 	{
-		this.amount = amt;
-		this.tags = Arrays.asList(ptags);
-		this.fluidTags = CoreRegistry.instance().fluidTags().expandTagNames(tags);
-	}
-
-	public List<String> getTags()
-	{
-		return tags;
-	}
-
-	public Collection<Fluid> getFluids()
-	{
-		return CoreRegistry.instance().fluidDictionary().getFluidsByTags(fluidTags);
+		this.itemStacks = Arrays.asList(stacks);
 	}
 
 	@Override
-	public List<FluidStack> getFluidStacks()
+	public List<ItemStack> getItemStacks()
 	{
-		final Collection<Fluid> fluids = getFluids();
-		final List<FluidStack> result = new ArrayList<FluidStack>();
-		for (Fluid fluid : fluids)
-		{
-			result.add(new FluidStack(fluid, amount));
-		}
-		return result;
+		return itemStacks;
 	}
 
 	@Override
-	public boolean containsFluidStack(@Nullable FluidStack stack)
+	public boolean containsItemStack(@Nullable ItemStack stack)
 	{
-		if (!FluidTest.isValid(stack)) return false;
-		final Fluid expected = stack.getFluid();
-		for (Fluid content : getFluids())
+		if (!ItemTest.isValid(stack)) return false;
+		for (ItemStack content : getItemStacks())
 		{
-			if (expected == content) return true;
+			if (content.isItemEqual(stack)) return true;
 		}
 		return false;
 	}

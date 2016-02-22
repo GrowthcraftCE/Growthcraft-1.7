@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.fluids.FluidTag;
-import growthcraft.api.core.util.FluidUtils;
+import growthcraft.api.core.fluids.FluidUtils;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;

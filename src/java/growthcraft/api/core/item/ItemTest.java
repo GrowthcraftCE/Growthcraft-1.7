@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,67 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.util;
+package growthcraft.api.core.item;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.api.core.definition.IMultiItemStacks;
-
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
-public class OreItemStacks implements IMultiItemStacks
+public class ItemTest
 {
-	public int stackSize;
-	private String oreName;
+	private ItemTest() {}
 
-	public OreItemStacks(@Nonnull String name, int amount)
+	public static boolean isValid(@Nonnull ItemStack stack)
 	{
-		this.oreName = name;
-		this.stackSize = amount;
+		if (stack == null) return false;
+		if (stack.getItem() == null) return false;
+		if (stack.stackSize <= 0) return false;
+		return true;
 	}
 
-	public OreItemStacks(@Nonnull String name)
+	public static boolean hasEnough(@Nonnull ItemStack expected, @Nullable ItemStack actual)
 	{
-		this(name, 1);
+		if (actual == null) return false;
+		if (!expected.isItemEqual(actual)) return false;
+		if (actual.stackSize < expected.stackSize) return false;
+		return true;
 	}
 
-	public String getName()
+	public static boolean isValidAndExpected(@Nonnull List<ItemStack> expectedItems, @Nonnull List<ItemStack> givenItems)
 	{
-		return oreName;
-	}
-
-	public List<ItemStack> getRawItemStacks()
-	{
-		return OreDictionary.getOres(oreName);
-	}
-
-	@Override
-	public List<ItemStack> getItemStacks()
-	{
-		final List<ItemStack> items = getRawItemStacks();
-		final List<ItemStack> result = new ArrayList<ItemStack>();
-		for (ItemStack stack : items)
+		if (expectedItems.size() != givenItems.size()) return false;
+		for (int i = 0; i < expectedItems.size(); ++i)
 		{
-			final ItemStack newStack = stack.copy();
-			if (newStack.stackSize <= 0) newStack.stackSize = 1;
-			newStack.stackSize *= stackSize;
-			result.add(newStack);
+			final ItemStack expected = expectedItems.get(i);
+			final ItemStack actual = givenItems.get(i);
+			if (expected != null)
+			{
+				if (!isValid(actual)) return false;
+				if (!expected.isItemEqual(actual)) return false;
+			}
+			else
+			{
+				if (actual != null) return false;
+			}
 		}
-		return result;
-	}
-
-	@Override
-	public boolean containsItemStack(@Nullable ItemStack stack)
-	{
-		if (!ItemTest.isValid(stack)) return false;
-		for (ItemStack content : getRawItemStacks())
-		{
-			if (content.isItemEqual(stack)) return true;
-		}
-		return false;
+		return true;
 	}
 }

@@ -29,6 +29,10 @@ import javax.annotation.Nonnull;
 
 import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.fluids.MultiFluidStacks;
+import growthcraft.api.core.fluids.TaggedFluidStacks;
+import growthcraft.api.core.item.MultiItemStacks;
+import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 

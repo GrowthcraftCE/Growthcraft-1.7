@@ -25,7 +25,7 @@ package growthcraft.core.common.tileentity;
 
 import java.io.IOException;
 
-import growthcraft.api.core.util.FluidTest;
+import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.core.common.tileentity.device.FluidTanks;
 import growthcraft.core.common.tileentity.device.IFluidTanks;
 import growthcraft.core.common.tileentity.event.EventHandler;

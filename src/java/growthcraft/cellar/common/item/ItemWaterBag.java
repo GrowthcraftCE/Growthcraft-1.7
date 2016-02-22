@@ -3,7 +3,7 @@ package growthcraft.cellar.common.item;
 import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.api.core.util.FluidTest;
+import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.util.UnitFormatter;

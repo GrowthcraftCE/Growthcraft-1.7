@@ -31,7 +31,7 @@ import javax.annotation.Nonnull;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.fluids.FluidTag;
-import growthcraft.api.core.util.FluidTest;
+import growthcraft.api.core.fluids.FluidTest;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;

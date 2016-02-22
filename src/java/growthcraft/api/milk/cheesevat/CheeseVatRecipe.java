@@ -26,8 +26,8 @@ package growthcraft.api.milk.cheesevat;
 import java.util.List;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.util.FluidTest;
-import growthcraft.api.core.util.ItemTest;
+import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.item.ItemTest;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;

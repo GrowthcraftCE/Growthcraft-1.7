@@ -26,7 +26,7 @@ package growthcraft.api.bees.user;
 import java.io.BufferedReader;
 
 import growthcraft.api.bees.BeesRegistry;
-import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
 
 import net.minecraft.item.Item;

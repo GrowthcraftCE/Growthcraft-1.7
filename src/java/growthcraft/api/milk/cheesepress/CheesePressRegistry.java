@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.core.util.ItemTest;
+import growthcraft.api.core.item.ItemTest;
 
 import net.minecraft.item.ItemStack;
 

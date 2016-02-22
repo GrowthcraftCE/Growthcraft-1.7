@@ -27,9 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import growthcraft.api.core.util.FluidTest;
-import growthcraft.api.core.util.FluidUtils;
-import growthcraft.api.core.util.ItemTest;
+import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.fluids.FluidUtils;
+import growthcraft.api.core.item.ItemTest;
 import growthcraft.api.core.nbt.NBTStringTagList;
 import growthcraft.api.milk.cheesevat.ICheeseVatRecipe;
 import growthcraft.api.milk.MilkFluidTags;

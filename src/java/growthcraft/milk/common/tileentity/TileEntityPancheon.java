@@ -23,7 +23,7 @@
  */
 package growthcraft.milk.common.tileentity;
 
-import growthcraft.api.core.util.FluidTest;
+import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.core.common.tileentity.GrcTileEntityFluidsDevice;
 import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 import growthcraft.milk.common.tileentity.device.Pancheon;

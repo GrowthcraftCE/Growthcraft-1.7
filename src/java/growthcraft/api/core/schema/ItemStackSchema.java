@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.api.core.definition.IItemStackListFactory;
 

@@ -2,7 +2,7 @@ package growthcraft.cellar.common.tileentity;
 
 import java.io.IOException;
 
-import growthcraft.api.core.util.FluidUtils;
+import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.common.tileentity.device.YeastGenerator;
 import growthcraft.cellar.GrowthCraftCellar;

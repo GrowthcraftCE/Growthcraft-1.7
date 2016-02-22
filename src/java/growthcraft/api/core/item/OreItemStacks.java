@@ -21,39 +21,66 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.util;
+package growthcraft.api.core.item;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.api.core.definition.IMultiFluidStacks;
+import growthcraft.api.core.definition.IMultiItemStacks;
 
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
-public class MultiFluidStacks implements IMultiFluidStacks
+public class OreItemStacks implements IMultiItemStacks
 {
-	private List<FluidStack> fluidStacks;
+	public int stackSize;
+	private String oreName;
 
-	public MultiFluidStacks(@Nonnull FluidStack... stacks)
+	public OreItemStacks(@Nonnull String name, int amount)
 	{
-		this.fluidStacks = Arrays.asList(stacks);
+		this.oreName = name;
+		this.stackSize = amount;
+	}
+
+	public OreItemStacks(@Nonnull String name)
+	{
+		this(name, 1);
+	}
+
+	public String getName()
+	{
+		return oreName;
+	}
+
+	public List<ItemStack> getRawItemStacks()
+	{
+		return OreDictionary.getOres(oreName);
 	}
 
 	@Override
-	public List<FluidStack> getFluidStacks()
+	public List<ItemStack> getItemStacks()
 	{
-		return fluidStacks;
-	}
-
-	@Override
-	public boolean containsFluidStack(@Nullable FluidStack stack)
-	{
-		if (!FluidTest.isValid(stack)) return false;
-		for (FluidStack content : getFluidStacks())
+		final List<ItemStack> items = getRawItemStacks();
+		final List<ItemStack> result = new ArrayList<ItemStack>();
+		for (ItemStack stack : items)
 		{
-			if (content.isFluidEqual(stack)) return true;
+			final ItemStack newStack = stack.copy();
+			if (newStack.stackSize <= 0) newStack.stackSize = 1;
+			newStack.stackSize *= stackSize;
+			result.add(newStack);
+		}
+		return result;
+	}
+
+	@Override
+	public boolean containsItemStack(@Nullable ItemStack stack)
+	{
+		if (!ItemTest.isValid(stack)) return false;
+		for (ItemStack content : getRawItemStacks())
+		{
+			if (content.isItemEqual(stack)) return true;
 		}
 		return false;
 	}

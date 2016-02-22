@@ -12,9 +12,9 @@ import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.util.HashKey;
-import growthcraft.api.core.util.ItemKey;
-import growthcraft.api.core.util.ItemTest;
-import growthcraft.api.core.util.FluidTest;
+import growthcraft.api.core.item.ItemKey;
+import growthcraft.api.core.item.ItemTest;
+import growthcraft.api.core.fluids.FluidTest;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

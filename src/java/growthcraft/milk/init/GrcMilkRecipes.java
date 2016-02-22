@@ -25,8 +25,8 @@ package growthcraft.milk.init;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.util.OreItemStacks;
-import growthcraft.api.core.util.TaggedFluidStacks;
+import growthcraft.api.core.fluids.TaggedFluidStacks;
+import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.milk.cheesepress.ICheesePressRecipe;
 import growthcraft.api.milk.util.CheeseVatRecipeBuilder;
 import growthcraft.api.milk.MilkRegistry;

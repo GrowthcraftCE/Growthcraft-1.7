@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.item.ItemKey;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
