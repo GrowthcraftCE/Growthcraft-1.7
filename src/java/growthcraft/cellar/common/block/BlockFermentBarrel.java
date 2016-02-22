@@ -38,6 +38,7 @@ public class BlockFermentBarrel extends BlockCellarContainer
 		setHardness(2.5F);
 		setStepSound(soundTypeWood);
 		setBlockName("grc.fermentBarrel");
+		setBlockTextureName("grccellar:ferment_barrel");
 		setCreativeTab(GrowthCraftCellar.tab);
 		setGuiType(CellarGuiType.FERMENT_BARREL);
 	}
@@ -60,45 +61,45 @@ public class BlockFermentBarrel extends BlockCellarContainer
 		return false;
 	}
 
-	@Override
-	public void onBlockAdded(World world, int x, int y, int z)
-	{
-		super.onBlockAdded(world, x, y, z);
-		this.setDefaultDirection(world, x, y, z);
-	}
-
 	private void setDefaultDirection(World world, int x, int y, int z)
 	{
 		if (!world.isRemote)
 		{
-			final Block block = world.getBlock(x, y, z - 1);
-			final Block block1 = world.getBlock(x, y, z + 1);
-			final Block block2 = world.getBlock(x - 1, y, z);
-			final Block block3 = world.getBlock(x + 1, y, z);
+			final Block southBlock = world.getBlock(x, y, z - 1);
+			final Block northBlock = world.getBlock(x, y, z + 1);
+			final Block westBlock = world.getBlock(x - 1, y, z);
+			final Block eastBlock = world.getBlock(x + 1, y, z);
 			byte meta = 3;
 
-			if (block.func_149730_j() && !block1.func_149730_j())
+			if (southBlock.func_149730_j() && !northBlock.func_149730_j())
 			{
 				meta = 3;
 			}
 
-			if (block1.func_149730_j() && !block.func_149730_j())
+			if (northBlock.func_149730_j() && !southBlock.func_149730_j())
 			{
 				meta = 2;
 			}
 
-			if (block2.func_149730_j() && !block3.func_149730_j())
+			if (westBlock.func_149730_j() && !eastBlock.func_149730_j())
 			{
 				meta = 5;
 			}
 
-			if (block3.func_149730_j() && !block2.func_149730_j())
+			if (eastBlock.func_149730_j() && !westBlock.func_149730_j())
 			{
 				meta = 4;
 			}
 
 			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_AND_SYNC);
 		}
+	}
+
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z)
+	{
+		super.onBlockAdded(world, x, y, z);
+		setDefaultDirection(world, x, y, z);
 	}
 
 	@Override
@@ -115,21 +116,15 @@ public class BlockFermentBarrel extends BlockCellarContainer
 	}
 
 	@Override
-	public int quantityDropped(Random random)
-	{
-		return 1;
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[4];
-
-		icons[0] = reg.registerIcon("grccellar:fermentbarrel_0");
-		icons[1] = reg.registerIcon("grccellar:fermentbarrel_1");
-		icons[2] = reg.registerIcon("grccellar:fermentbarrel_2");
-		icons[3] = reg.registerIcon("grccellar:fermentbarrel_3");
+		final String basename = getTextureName();
+		icons[0] = reg.registerIcon(String.format("%s/minecraft/oak/side", basename));
+		icons[1] = reg.registerIcon(String.format("%s/minecraft/oak/1", basename));
+		icons[2] = reg.registerIcon(String.format("%s/minecraft/oak/2", basename));
+		icons[3] = reg.registerIcon(String.format("%s/minecraft/oak/3", basename));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -157,9 +152,6 @@ public class BlockFermentBarrel extends BlockCellarContainer
 		return icons[0];
 	}
 
-	/************
-	 * RENDERS
-	 ************/
 	@Override
 	public int getRenderType()
 	{
