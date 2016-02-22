@@ -28,7 +28,7 @@ import java.util.Map;
 
 import growthcraft.api.core.util.ItemKey;
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.core.util.JsonConfigDef;
+import growthcraft.api.core.user.AbstractUserJSONConfig;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -37,7 +37,7 @@ import net.minecraft.block.Block;
  * Provides users with the ability to set blocks as heat sources for Growthcraft
  * blocks
  */
-public class UserHeatSourcesConfig extends JsonConfigDef
+public class UserHeatSourcesConfig extends AbstractUserJSONConfig
 {
 	private final UserHeatSourceEntries defaultEntries = new UserHeatSourceEntries();
 	private UserHeatSourceEntries entries;
@@ -56,7 +56,7 @@ public class UserHeatSourcesConfig extends JsonConfigDef
 	}
 
 	@Override
-	protected void loadFromBuffer(BufferedReader buff)
+	protected void loadFromBuffer(BufferedReader buff) throws IllegalStateException
 	{
 		this.entries = gson.fromJson(buff, UserHeatSourceEntries.class);
 	}

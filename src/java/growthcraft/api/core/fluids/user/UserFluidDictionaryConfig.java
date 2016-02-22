@@ -29,11 +29,11 @@ import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.fluids.IFluidTagsRegistry;
 import growthcraft.api.core.fluids.IFluidDictionary;
-import growthcraft.api.core.util.JsonConfigDef;
+import growthcraft.api.core.user.AbstractUserJSONConfig;
 
 import net.minecraftforge.fluids.Fluid;
 
-public class UserFluidDictionaryConfig extends JsonConfigDef
+public class UserFluidDictionaryConfig extends AbstractUserJSONConfig
 {
 	private final UserFluidDictionaryEntries defaultEntries = new UserFluidDictionaryEntries();
 	private UserFluidDictionaryEntries entries;
@@ -45,7 +45,7 @@ public class UserFluidDictionaryConfig extends JsonConfigDef
 	}
 
 	@Override
-	protected void loadFromBuffer(BufferedReader reader)
+	protected void loadFromBuffer(BufferedReader reader) throws IllegalStateException
 	{
 		this.entries = gson.fromJson(reader, UserFluidDictionaryEntries.class);
 	}

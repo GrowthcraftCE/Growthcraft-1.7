@@ -25,11 +25,11 @@ package growthcraft.api.fishtrap.user;
 
 import java.io.BufferedReader;
 
-import growthcraft.api.core.util.JsonConfigDef;
+import growthcraft.api.core.user.AbstractUserJSONConfig;
 import growthcraft.api.fishtrap.FishTrapEntry;
 import growthcraft.api.fishtrap.FishTrapRegistry;
 
-public class UserFishTrapConfig extends JsonConfigDef
+public class UserFishTrapConfig extends AbstractUserJSONConfig
 {
 	private final UserFishTrapEntries defaultEntries = new UserFishTrapEntries();
 	private UserFishTrapEntries entries;
@@ -46,7 +46,7 @@ public class UserFishTrapConfig extends JsonConfigDef
 	}
 
 	@Override
-	protected void loadFromBuffer(BufferedReader buff)
+	protected void loadFromBuffer(BufferedReader buff) throws IllegalStateException
 	{
 		this.entries = gson.fromJson(buff, UserFishTrapEntries.class);
 	}

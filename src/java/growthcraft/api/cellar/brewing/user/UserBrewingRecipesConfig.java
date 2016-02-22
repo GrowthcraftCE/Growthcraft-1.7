@@ -30,7 +30,7 @@ import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.ResidueSchema;
-import growthcraft.api.core.util.JsonConfigDef;
+import growthcraft.api.core.user.AbstractUserJSONConfig;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -38,7 +38,7 @@ import net.minecraftforge.fluids.FluidStack;
 /**
  * This allows users to define new brewing recipes.
  */
-public class UserBrewingRecipesConfig extends JsonConfigDef
+public class UserBrewingRecipesConfig extends AbstractUserJSONConfig
 {
 	private final UserBrewingRecipes defaultRecipes = new UserBrewingRecipes();
 	private UserBrewingRecipes recipes;
@@ -68,7 +68,7 @@ public class UserBrewingRecipesConfig extends JsonConfigDef
 	}
 
 	@Override
-	protected void loadFromBuffer(BufferedReader reader)
+	protected void loadFromBuffer(BufferedReader reader) throws IllegalStateException
 	{
 		this.recipes = gson.fromJson(reader, UserBrewingRecipes.class);
 	}

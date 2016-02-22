@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.util;
+package growthcraft.api.core.user;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -45,7 +45,7 @@ import net.minecraftforge.common.config.Configuration.UnicodeInputStreamReader;
  * This is a base class for defining JSON config definitions, its purpose
  * is mostly to hide the dreaded File handling
  */
-public abstract class JsonConfigDef implements ILoggable, IModule
+public abstract class AbstractUserJSONConfig implements ILoggable, IModule
 {
 	public static final String DEFAULT_ENCODING = "UTF-8";
 
@@ -101,7 +101,7 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 	 *
 	 * @param buff - the buffer to read from
 	 */
-	protected abstract void loadFromBuffer(BufferedReader buff);
+	protected abstract void loadFromBuffer(BufferedReader buff) throws IllegalStateException;
 
 	public void setConfigFile(File dir, String filename)
 	{
@@ -135,27 +135,25 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 		}
 	}
 
-	private void loadUserConfig()
+	private void readUserConfigFile(File file)
 	{
 		BufferedReader buffer = null;
 		UnicodeInputStreamReader input = null;
 
-		writeDefaultConfigTo(targetDefaultConfigFile);
-
 		try
 		{
-			logger.debug("Loading json-config %s", targetConfigFile);
+			logger.debug("Loading json-config %s", file);
 
 			prepareUserConfig();
-			if (targetConfigFile.canRead())
+			if (file.canRead())
 			{
-				input = new UnicodeInputStreamReader(new FileInputStream(targetConfigFile), DEFAULT_ENCODING);
+				input = new UnicodeInputStreamReader(new FileInputStream(file), DEFAULT_ENCODING);
 				buffer = new BufferedReader(input);
 				loadFromBuffer(buffer);
 			}
 			else
 			{
-				logger.error("Could not read config file %s", targetConfigFile);
+				logger.error("Could not read config file %s", file);
 			}
 		}
 		catch (IOException e)
@@ -181,6 +179,23 @@ public abstract class JsonConfigDef implements ILoggable, IModule
 				catch (IOException e) {}
 			}
 		}
+	}
+
+	private void loadUserConfig()
+	{
+		writeDefaultConfigTo(targetDefaultConfigFile);
+		try
+		{
+			readUserConfigFile(targetConfigFile);
+			return;
+		}
+		catch (IllegalStateException e)
+		{
+			logger.error("JSON Config '%s' contains errors", targetConfigFile);
+			e.printStackTrace();
+		}
+		logger.warn("Falling back to default config file");
+		readUserConfigFile(targetDefaultConfigFile);
 	}
 
 	@Override

@@ -30,7 +30,7 @@ import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.ResidueSchema;
-import growthcraft.api.core.util.JsonConfigDef;
+import growthcraft.api.core.user.AbstractUserJSONConfig;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -40,7 +40,7 @@ import net.minecraftforge.fluids.FluidStack;
  * and fluids. Growthcraft WILL NOT create new fluids or items for you, THEY
  * MUST EXIST, or we will not register your recipe.
  */
-public class UserPressingRecipesConfig extends JsonConfigDef
+public class UserPressingRecipesConfig extends AbstractUserJSONConfig
 {
 	private final UserPressingRecipes defaultRecipes = new UserPressingRecipes();
 	private UserPressingRecipes recipes;
@@ -72,7 +72,7 @@ public class UserPressingRecipesConfig extends JsonConfigDef
 	}
 
 	@Override
-	protected void loadFromBuffer(BufferedReader reader)
+	protected void loadFromBuffer(BufferedReader reader) throws IllegalStateException
 	{
 		this.recipes = gson.fromJson(reader, UserPressingRecipes.class);
 	}

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.util.BiomeUtils;
-import growthcraft.api.core.util.JsonConfigDef;
+import growthcraft.api.core.user.AbstractUserJSONConfig;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
@@ -38,7 +38,7 @@ import net.minecraftforge.common.BiomeDictionary;
  * This allows users to define new yeast entries and map them to a biome
  * for generation in the Ferment Jar.
  */
-public class UserYeastEntriesConfig extends JsonConfigDef
+public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 {
 	private final UserYeastEntries defaultEntries = new UserYeastEntries();
 	private UserYeastEntries entries;
@@ -87,7 +87,7 @@ public class UserYeastEntriesConfig extends JsonConfigDef
 	}
 
 	@Override
-	protected void loadFromBuffer(BufferedReader reader)
+	protected void loadFromBuffer(BufferedReader reader) throws IllegalStateException
 	{
 		this.entries = gson.fromJson(reader, UserYeastEntries.class);
 	}

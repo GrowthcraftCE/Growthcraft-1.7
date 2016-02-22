@@ -28,12 +28,12 @@ import java.io.BufferedReader;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ItemKeySchema;
-import growthcraft.api.core.util.JsonConfigDef;
+import growthcraft.api.core.user.AbstractUserJSONConfig;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class UserFermentingRecipesConfig extends JsonConfigDef
+public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 {
 	protected UserFermentingRecipes defaultRecipes = new UserFermentingRecipes();
 	protected UserFermentingRecipes recipes;
@@ -65,7 +65,7 @@ public class UserFermentingRecipesConfig extends JsonConfigDef
 	}
 
 	@Override
-	protected void loadFromBuffer(BufferedReader reader)
+	protected void loadFromBuffer(BufferedReader reader) throws IllegalStateException
 	{
 		this.recipes = gson.fromJson(reader, UserFermentingRecipes.class);
 	}

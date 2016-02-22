@@ -28,11 +28,11 @@ import java.io.BufferedReader;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.ForcedFlowerBlockEntry;
 import growthcraft.api.core.util.ItemKey;
-import growthcraft.api.core.util.JsonConfigDef;
+import growthcraft.api.core.user.AbstractUserJSONConfig;
 
 import net.minecraft.block.Block;
 
-public class UserFlowersConfig extends JsonConfigDef
+public class UserFlowersConfig extends AbstractUserJSONConfig
 {
 	private final UserFlowersEntries defaultEntries = new UserFlowersEntries();
 	private UserFlowersEntries entries;
@@ -60,7 +60,7 @@ public class UserFlowersConfig extends JsonConfigDef
 	}
 
 	@Override
-	protected void loadFromBuffer(BufferedReader buff)
+	protected void loadFromBuffer(BufferedReader buff) throws IllegalStateException
 	{
 		this.entries = gson.fromJson(buff, UserFlowersEntries.class);
 	}
