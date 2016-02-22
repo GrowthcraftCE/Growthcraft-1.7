@@ -28,7 +28,7 @@ import growthcraft.core.common.definition.GrcBlockFluidDefinition;
 import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.core.common.item.ItemBucketFluid;
 import growthcraft.core.common.item.ItemBottleFluid;
-import growthcraft.core.event.EventHandlerBucketFill;
+import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.GrowthCraftCore;
 
 import net.minecraft.creativetab.CreativeTabs;

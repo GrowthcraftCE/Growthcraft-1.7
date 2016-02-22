@@ -26,7 +26,7 @@ public class BlockBambooSlab extends BlockSlab
 		this.setStepSound(soundTypeWood);
 		this.setResistance(5.0F);
 		this.setHardness(2.0F);
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 		this.setBlockName("grc.bambooSlab");
 	}
 

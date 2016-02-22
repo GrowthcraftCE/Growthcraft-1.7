@@ -1,4 +1,4 @@
-package growthcraft.core.event;
+package growthcraft.core.eventhandler;
 
 import java.util.HashMap;
 import java.util.Map;

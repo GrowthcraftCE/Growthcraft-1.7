@@ -21,19 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.item;
+package growthcraft.core.bucket;
 
+import javax.annotation.Nonnull;
+
+import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill.IBucketEntry;
 import growthcraft.core.GrowthCraftCore;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 
-public class ItemSalt extends Item
+public class SaltBucketEntry implements IBucketEntry
 {
-	public ItemSalt()
+	@Override
+	public ItemStack getItemStack()
 	{
-		super();
-		setTextureName("grccore:salt");
-		setUnlocalizedName("grccore.salt");
-		setCreativeTab(GrowthCraftCore.creativeTab);
+		return GrowthCraftCore.fluids.saltWater.bucket.asStack();
+	}
+
+	@Override
+	public boolean matches(@Nonnull World world, @Nonnull MovingObjectPosition pos)
+	{
+		if (world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
+		{
+			final BiomeGenBase biome = world.getBiomeGenForCoords(pos.blockX, pos.blockZ);
+			if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.OCEAN))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void commit(@Nonnull World world, @Nonnull MovingObjectPosition pos)
+	{
+		world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
 	}
 }

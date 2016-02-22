@@ -20,7 +20,7 @@ public class ItemBamboo extends Item
 	{
 		super();
 		this.setUnlocalizedName("grc.bamboo");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
 	/************

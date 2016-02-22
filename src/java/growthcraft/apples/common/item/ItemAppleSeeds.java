@@ -26,7 +26,7 @@ public class ItemAppleSeeds extends Item implements IPlantable
 		super();
 		this.cropBlock = GrowthCraftApples.appleSapling.getBlock();
 		this.setUnlocalizedName("grc.appleSeeds");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
 	/************

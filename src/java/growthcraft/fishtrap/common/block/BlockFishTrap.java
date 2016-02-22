@@ -46,7 +46,7 @@ public class BlockFishTrap extends BlockContainer
 		this.setHardness(0.4F);
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("grc.fishTrap");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
 	/************

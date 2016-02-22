@@ -13,7 +13,7 @@ public class ItemGrapes extends ItemFood
 	{
 		super(2, 0.3F, false);
 		this.setUnlocalizedName("grc.grapes");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
 	/************

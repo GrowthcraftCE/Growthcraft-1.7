@@ -1,4 +1,4 @@
-package growthcraft.core.event;
+package growthcraft.core.eventhandler;
 
 import growthcraft.core.common.block.IRotatableBlock;
 import growthcraft.core.common.block.IWrenchable;

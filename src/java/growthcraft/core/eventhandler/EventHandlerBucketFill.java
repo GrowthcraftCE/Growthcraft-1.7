@@ -1,7 +1,7 @@
 /**
  * Gracefully taken from BuildCraft
  */
-package growthcraft.core.event;
+package growthcraft.core.eventhandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,17 +30,6 @@ public class EventHandlerBucketFill
 		buckets.put(block, item);
 	}
 
-	@SubscribeEvent
-	public void onBucketFill(FillBucketEvent event)
-	{
-		final ItemStack result = fillCustomBucket(event.world, event.target);
-
-		if (result == null) return;
-
-		event.result = result;
-		event.setResult(Result.ALLOW);
-	}
-
 	private ItemStack fillCustomBucket(World world, MovingObjectPosition pos)
 	{
 		final Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
@@ -55,5 +44,16 @@ public class EventHandlerBucketFill
 		{
 			return null;
 		}
+	}
+
+	@SubscribeEvent
+	public void onBucketFill(FillBucketEvent event)
+	{
+		final ItemStack result = fillCustomBucket(event.world, event.target);
+
+		if (result == null) return;
+
+		event.result = result;
+		event.setResult(Result.ALLOW);
 	}
 }

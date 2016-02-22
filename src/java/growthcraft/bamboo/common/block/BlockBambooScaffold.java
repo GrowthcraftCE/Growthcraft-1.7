@@ -32,7 +32,7 @@ public class BlockBambooScaffold extends Block
 		this.setStepSound(soundTypeWood);
 		this.setResistance(0.2F);
 		this.setHardness(0.5F);
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 		this.setBlockName("grc.bambooScaffold");
 	}
 

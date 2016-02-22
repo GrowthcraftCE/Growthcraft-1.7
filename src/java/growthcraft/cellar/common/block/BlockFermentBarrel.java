@@ -1,7 +1,5 @@
 package growthcraft.cellar.common.block;
 
-import java.util.Random;
-
 import growthcraft.cellar.client.render.RenderFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.event.BarrelDrainedEvent;

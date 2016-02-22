@@ -64,7 +64,6 @@ public class GrcMilkFluids extends GrcModuleBase
 	public FluidFactory.FluidDetails milk;
 	public FluidFactory.FluidDetails curds;
 	public FluidFactory.FluidDetails rennet;
-	public FluidFactory.FluidDetails saltWater;
 	public FluidFactory.FluidDetails skimMilk;
 	public FluidFactory.FluidDetails whey;
 	public Map<EnumCheeseType, FluidFactory.FluidDetails> cheeses = new HashMap<EnumCheeseType, FluidFactory.FluidDetails>();
@@ -83,7 +82,6 @@ public class GrcMilkFluids extends GrcModuleBase
 		this.milk = FluidFactory.instance().create(new GrcFluid("grcmilk.Milk"));
 		this.curds = FluidFactory.instance().create(new GrcFluid("grcmilk.Curds"));
 		this.rennet = FluidFactory.instance().create(new GrcFluid("grcmilk.Rennet"));
-		this.saltWater = FluidFactory.instance().create(new GrcFluid("grcmilk.SaltWater"));
 		this.skimMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.SkimMilk"));
 		this.whey = FluidFactory.instance().create(new GrcFluid("grcmilk.Whey"));
 
@@ -92,7 +90,6 @@ public class GrcMilkFluids extends GrcModuleBase
 		milk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFF6);
 		curds.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFF6);
 		rennet.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x877243);
-		saltWater.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x2C41F6);
 		skimMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFA);
 		whey.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x94a860);
 
@@ -103,7 +100,6 @@ public class GrcMilkFluids extends GrcModuleBase
 		rennet.block.getBlock().setBlockTextureName("grcmilk:fluids/rennet");
 		skimMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/skimmilk");
 		whey.block.getBlock().setBlockTextureName("grcmilk:fluids/whey");
-		saltWater.block.getBlock().setBlockTextureName("minecraft:water");
 
 		for (EnumCheeseType cheese : EnumCheeseType.VALUES)
 		{
@@ -186,7 +182,6 @@ public class GrcMilkFluids extends GrcModuleBase
 		rennet.registerObjects("grcmilk", "Rennet");
 		skimMilk.registerObjects("grcmilk", "SkimMilk");
 		whey.registerObjects("grcmilk", "Whey");
-		saltWater.registerObjects("grcmilk", "SaltWater");
 
 		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
 		{

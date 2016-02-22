@@ -19,7 +19,7 @@ public class ItemBambooDoor extends Item
 	{
 		super();
 		this.maxStackSize = 1;
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 		this.setUnlocalizedName("grc.bambooDoor");
 	}
 

@@ -18,7 +18,7 @@ public class BlockBambooFenceGate extends BlockFenceGate
 		this.setHardness(2.0F);
 		this.setResistance(5.0F);
 		this.setBlockName("grc.bambooFenceGate");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
 	/************

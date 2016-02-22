@@ -13,7 +13,7 @@ public class ItemHops extends Item
 	{
 		super();
 		this.setUnlocalizedName("grc.hops");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
 	/************

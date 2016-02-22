@@ -28,7 +28,7 @@ public class BlockBambooFence extends BlockFence
 		setStepSound(soundTypeWood);
 		setResistance(5.0F);
 		setHardness(2.0F);
-		setCreativeTab(GrowthCraftCore.tab);
+		setCreativeTab(GrowthCraftCore.creativeTab);
 		setBlockName("grc.bambooFence");
 	}
 

@@ -40,7 +40,7 @@ import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBlockFluidBooze;
 import growthcraft.cellar.common.item.ItemBucketBooze;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.event.EventHandlerBucketFill;
+import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 

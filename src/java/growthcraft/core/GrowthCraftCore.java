@@ -1,20 +1,22 @@
 package growthcraft.core;
 
+import growthcraft.api.core.fluids.user.UserFluidDictionaryConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
-import growthcraft.api.core.fluids.user.UserFluidDictionaryConfig;
 import growthcraft.core.common.AchievementPageGrowthcraft;
 import growthcraft.core.common.block.BlockFenceRope;
 import growthcraft.core.common.block.BlockRope;
 import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
-import growthcraft.core.event.EventHandlerBucketFill;
-import growthcraft.core.event.HarvestDropsEventCore;
-import growthcraft.core.event.PlayerInteractEventAmazingStick;
-import growthcraft.core.event.PlayerInteractEventPaddy;
-import growthcraft.core.event.TextureStitchEventCore;
+import growthcraft.core.eventhandler.EventHandlerBucketFill;
+import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill;
+import growthcraft.core.eventhandler.HarvestDropsEventCore;
+import growthcraft.core.eventhandler.PlayerInteractEventAmazingStick;
+import growthcraft.core.eventhandler.PlayerInteractEventPaddy;
+import growthcraft.core.eventhandler.TextureStitchEventCore;
+import growthcraft.core.init.GrcCoreFluids;
 import growthcraft.core.init.GrcCoreItems;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.ItemUtils;
@@ -58,11 +60,12 @@ public class GrowthCraftCore
 	@SideOnly(Side.CLIENT)
 	public static IIcon liquidBlobsTexture;
 
-	public static CreativeTabs tab;
+	public static CreativeTabs creativeTab;
 
 	public static BlockDefinition fenceRope;
 	public static BlockDefinition ropeBlock;
 	public static GrcCoreItems items = new GrcCoreItems();
+	public static GrcCoreFluids fluids = new GrcCoreFluids();
 
 	// Constants
 	public static ItemStack EMPTY_BOTTLE;
@@ -90,6 +93,7 @@ public class GrowthCraftCore
 		if (config.debugEnabled) logger.info("Pre-Initializing %s", MOD_ID);
 
 		modules.add(items);
+		modules.add(fluids);
 
 		userFluidDictionary.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/fluid_dictionary.json");
 		modules.add(userFluidDictionary);
@@ -100,7 +104,7 @@ public class GrowthCraftCore
 
 		if (config.debugEnabled) modules.setLogger(logger);
 
-		tab =  new CreativeTabsGrowthcraft("tabGrowthCraft");
+		creativeTab = new CreativeTabsGrowthcraft("tabGrowthCraft");
 
 		//====================
 		// INIT
@@ -150,6 +154,7 @@ public class GrowthCraftCore
 	public void postLoad(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(EventHandlerBucketFill.instance());
+		MinecraftForge.EVENT_BUS.register(EventHandlerSpecialBucketFill.instance());
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventPaddy());
 		if (config.useAmazingStick)

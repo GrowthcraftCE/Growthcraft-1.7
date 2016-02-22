@@ -26,7 +26,7 @@ public class ItemBambooRaft extends ItemBoat
 		super();
 		this.maxStackSize = 1;
 		this.setUnlocalizedName("grc.bambooRaft");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
 	/************

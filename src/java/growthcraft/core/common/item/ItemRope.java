@@ -16,7 +16,7 @@ public class ItemRope extends Item
 	{
 		super();
 		setUnlocalizedName("grc.rope");
-		setCreativeTab(GrowthCraftCore.tab);
+		setCreativeTab(GrowthCraftCore.creativeTab);
 		setTextureName("grccore:rope");
 	}
 

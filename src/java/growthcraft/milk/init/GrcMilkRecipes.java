@@ -34,6 +34,7 @@ import growthcraft.core.common.GrcModuleBase;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 public class GrcMilkRecipes extends GrcModuleBase
@@ -95,10 +96,16 @@ public class GrcMilkRecipes extends GrcModuleBase
 
 	private void registerCheeseVatRecipes()
 	{
-		CheeseVatRecipeBuilder.buildRecipe("CHEDDAR Recipe")
+		CheeseVatRecipeBuilder.buildRecipe("CHEDDAR Orange Dye Recipe")
 			.outputFluids(EnumCheeseType.CHEDDAR.asFluidStack(5000))
 			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
 			.inputItems(new OreItemStacks("foodSalt", 1), new OreItemStacks("dyeOrange", 1))
+			.register();
+
+		CheeseVatRecipeBuilder.buildRecipe("CHEDDAR Pumpkin Recipe")
+			.outputFluids(EnumCheeseType.CHEDDAR.asFluidStack(5000))
+			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+			.inputItems(new OreItemStacks("foodSalt", 1), new ItemStack(Blocks.pumpkin))
 			.register();
 
 		CheeseVatRecipeBuilder.buildRecipe("GORGONZOLA Recipe")
@@ -113,13 +120,13 @@ public class GrcMilkRecipes extends GrcModuleBase
 			.inputItems(new OreItemStacks("foodSalt", 1), new OreItemStacks("cropWheat", 1))
 			.register();
 
-		CheeseVatRecipeBuilder.buildRecipe("APPENZELLER Recipe")
+		CheeseVatRecipeBuilder.buildRecipe("APPENZELLER Wine Recipe")
 			.outputFluids(EnumCheeseType.APPENZELLER.asFluidStack(5000))
 			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"), new TaggedFluidStacks(1000, "wine"))
 			.inputItems(new OreItemStacks("foodSalt", 1))
 			.register();
 
-		CheeseVatRecipeBuilder.buildRecipe("APPENZELLER Recipe")
+		CheeseVatRecipeBuilder.buildRecipe("APPENZELLER Cider Recipe")
 			.outputFluids(EnumCheeseType.APPENZELLER.asFluidStack(5000))
 			.inputFluids(new TaggedFluidStacks(5000, "milk_curds"), new TaggedFluidStacks(1000, "cider"))
 			.inputItems(new OreItemStacks("foodSalt", 1))

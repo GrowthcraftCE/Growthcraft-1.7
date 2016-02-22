@@ -24,7 +24,7 @@ public class ItemGrapeSeeds extends Item implements IPlantable
 	{
 		super();
 		this.setUnlocalizedName("grc.grapeSeeds");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
 	/************

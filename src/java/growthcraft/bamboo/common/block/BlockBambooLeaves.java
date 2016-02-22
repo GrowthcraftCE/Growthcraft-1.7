@@ -35,7 +35,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 		this.setStepSound(soundTypeGrass);
 		this.setHardness(0.2F);
 		this.setTickRandomly(true);
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 		this.setBlockName("grc.bambooLeaves");
 	}
 

@@ -21,19 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.item;
+package growthcraft.core.init;
 
+import growthcraft.api.core.GrcFluid;
+import growthcraft.core.bucket.SaltBucketEntry;
+import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.util.FluidFactory;
 
-import net.minecraft.item.Item;
-
-public class ItemSalt extends Item
+public class GrcCoreFluids extends GrcModuleBase
 {
-	public ItemSalt()
+	public FluidFactory.FluidDetails saltWater;
+
+	@Override
+	public void preInit()
 	{
-		super();
-		setTextureName("grccore:salt");
-		setUnlocalizedName("grccore.salt");
-		setCreativeTab(GrowthCraftCore.creativeTab);
+		this.saltWater = FluidFactory.instance().create(new GrcFluid("grccore.salt_water"));
+		saltWater.setCreativeTab(GrowthCraftCore.creativeTab).setItemColor(0x2C41F6);
+		saltWater.block.getBlock().setBlockTextureName("minecraft:water");
+	}
+
+	@Override
+	public void register()
+	{
+		saltWater.registerObjects("grccore", "salt_water");
+	}
+
+	@Override
+	public void init()
+	{
+		EventHandlerSpecialBucketFill.instance().addEntry(new SaltBucketEntry());
 	}
 }

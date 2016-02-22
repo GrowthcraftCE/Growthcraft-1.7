@@ -26,7 +26,7 @@ public class ItemBambooShoot extends ItemFood implements IPlantable
 		super(4, 0.6F, false);
 		this.cropBlock = GrowthCraftBamboo.bambooShoot.getBlock();
 		this.setUnlocalizedName("grc.bambooShootFood");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
 	@Override
