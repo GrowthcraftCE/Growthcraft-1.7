@@ -21,33 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.rice.integration;
+package growthcraft.core.integration.forestry.recipes;
 
-import growthcraft.rice.GrowthCraftRice;
-import growthcraft.core.integration.ForestryModuleBase;
-import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import forestry.api.recipes.IForestryRecipe;
+import forestry.api.recipes.ICraftingProvider;
 
 import cpw.mods.fml.common.Optional;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 
-public class ForestryModule extends ForestryModuleBase
+// Forestry API shims, so we don't have to do null checks all over the place.
+@Optional.Interface(iface="forestry.api.recipes.ICraftingProvider", modid="ForestryAPI|recipes")
+public abstract class AbstractManagerShim<T extends IForestryRecipe> implements ICraftingProvider<T>
 {
-	public ForestryModule()
+	private static Map<Object[], Object[]> map = new HashMap<Object[], Object[]>();
+	private Collection<T> coll = new ArrayList<T>();
+
+	@Override
+	public boolean addRecipe(T recipe)
 	{
-		super(GrowthCraftRice.MOD_ID);
+		return false;
 	}
 
 	@Override
-	@Optional.Method(modid="Forestry")
-	protected void integrate()
+	public  boolean removeRecipe(T recipe)
 	{
-		final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
+		return false;
+	}
 
-		final ItemStack riceSeed = GrowthCraftRice.rice.asStack();
-		final Block riceBlock = GrowthCraftRice.riceBlock.getBlock();
-		if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager.addRecipe(10, new ItemStack[]{riceSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
-		Backpack.FORESTERS.add(riceSeed);
-		addFarmable("farmOrchard", new FarmableBasicGrowthCraft(riceBlock, GrowthCraftRice.getConfig().paddyFieldMax, true, false));
+	@Override
+	public Collection<T> recipes()
+	{
+		return coll;
+	}
+
+	@Override
+	@Deprecated
+	public Map<Object[], Object[]> getRecipes()
+	{
+		return map;
 	}
 }

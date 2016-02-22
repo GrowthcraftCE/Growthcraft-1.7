@@ -32,6 +32,7 @@ import growthcraft.milk.GrowthCraftMilk;
 //import thaumcraft.api.aspects.AspectList;
 //import thaumcraft.api.aspects.Aspect;
 
+import cpw.mods.fml.common.Optional;
 //import cpw.mods.fml.common.event.FMLInterModComms;
 
 public class ThaumcraftModule extends ThaumcraftModuleBase
@@ -42,6 +43,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	}
 
 	@Override
+	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
 		//ThaumcraftApi.registerObjectTag(GrowthCraftMilk.fluids.milkBlock, new AspectList());

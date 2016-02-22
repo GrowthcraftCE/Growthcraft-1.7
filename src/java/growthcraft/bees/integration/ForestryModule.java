@@ -31,6 +31,7 @@ import growthcraft.core.integration.ForestryModuleBase;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
+import cpw.mods.fml.common.Optional;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -50,6 +51,7 @@ public class ForestryModule extends ForestryModuleBase
 	}
 
 	@Override
+	@Optional.Method(modid="Forestry")
 	protected void integrate()
 	{
 		maybeAddBee(GameRegistry.findItem(modID, "beeQueenGE"));

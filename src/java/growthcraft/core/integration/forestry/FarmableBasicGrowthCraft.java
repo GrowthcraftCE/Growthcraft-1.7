@@ -22,6 +22,7 @@ import growthcraft.core.util.ItemUtils;
 import forestry.api.farming.ICrop;
 import forestry.api.farming.IFarmable;
 
+import cpw.mods.fml.common.Optional;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -30,6 +31,7 @@ import net.minecraft.world.World;
 /**
  * This was taken from Forestry
  */
+@Optional.Interface(iface="forestry.api.farming.IFarmable", modid="ForestryAPI|farming")
 public class FarmableBasicGrowthCraft implements IFarmable
 {
 	private final Block block;
@@ -46,12 +48,14 @@ public class FarmableBasicGrowthCraft implements IFarmable
 	}
 
 	@Override
+	@Optional.Method(modid="ForestryAPI|farming")
 	public boolean isSaplingAt(World world, int x, int y, int z)
 	{
 		return world.getBlock(x, y, z) == block;
 	}
 
 	@Override
+	@Optional.Method(modid="ForestryAPI|farming")
 	public ICrop getCropAt(World world, int x, int y, int z)
 	{
 		if (world.getBlock(x, y, z) != block) return null;
@@ -60,18 +64,21 @@ public class FarmableBasicGrowthCraft implements IFarmable
 	}
 
 	@Override
+	@Optional.Method(modid="ForestryAPI|farming")
 	public boolean isGermling(ItemStack stack)
 	{
 		return ItemUtils.equals(block, stack);
 	}
 
 	@Override
+	@Optional.Method(modid="ForestryAPI|farming")
 	public boolean plantSaplingAt(EntityPlayer player, ItemStack germling, World world, int x, int y, int z)
 	{
 		return world.setBlock(x, y, z, block, 0, BlockFlags.SYNC);
 	}
 
 	@Override
+	@Optional.Method(modid="ForestryAPI|farming")
 	public boolean isWindfall(ItemStack stack)
 	{
 		return false;

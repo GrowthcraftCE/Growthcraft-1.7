@@ -29,6 +29,8 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
 
+import cpw.mods.fml.common.Optional;
+
 public class ThaumcraftModule extends ThaumcraftModuleBase
 {
 	public ThaumcraftModule()
@@ -37,6 +39,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	}
 
 	@Override
+	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
 		ThaumcraftApi.registerObjectTag(GrowthCraftCore.items.rope.asStack(), new AspectList().add(Aspect.CRAFT, 1).add(Aspect.CLOTH, 1));

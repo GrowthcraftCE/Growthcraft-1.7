@@ -27,6 +27,7 @@ import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.core.integration.ForestryModuleBase;
 import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
 
+import cpw.mods.fml.common.Optional;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
@@ -38,6 +39,7 @@ public class ForestryModule extends ForestryModuleBase
 	}
 
 	@Override
+	@Optional.Method(modid="Forestry")
 	protected void integrate()
 	{
 		final int juiceAmount = getActiveMode().getIntegerSetting("squeezer.liquid.apple");

@@ -22,6 +22,7 @@ import growthcraft.api.core.util.BlockFlags;
 
 import forestry.api.farming.ICrop;
 
+import cpw.mods.fml.common.Optional;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.item.ItemStack;
@@ -29,6 +30,7 @@ import net.minecraft.item.ItemStack;
 /**
  * This is a copy of Forestry's Crop implementation, modified for Growthcraft
  */
+@Optional.Interface(iface="forestry.api.farming.ICrop", modid="ForestryAPI|farming")
 public abstract class AbstractForestryCrop implements ICrop
 {
 	protected final World world;

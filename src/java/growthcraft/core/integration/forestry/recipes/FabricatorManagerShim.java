@@ -21,33 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.rice.integration;
+package growthcraft.core.integration.forestry.recipes;
 
-import growthcraft.rice.GrowthCraftRice;
-import growthcraft.core.integration.ForestryModuleBase;
-import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
+import forestry.api.recipes.IFabricatorManager;
+import forestry.api.recipes.IFabricatorRecipe;
+
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 import cpw.mods.fml.common.Optional;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 
-public class ForestryModule extends ForestryModuleBase
+@Optional.Interface(iface="forestry.api.recipes.IFabricatorManager", modid="ForestryAPI|recipes")
+public class FabricatorManagerShim extends AbstractManagerShim<IFabricatorRecipe> implements IFabricatorManager
 {
-	public ForestryModule()
-	{
-		super(GrowthCraftRice.MOD_ID);
-	}
+	@Override
+	public void addRecipe(ItemStack plan, FluidStack molten, ItemStack result, Object[] pattern) {}
 
 	@Override
-	@Optional.Method(modid="Forestry")
-	protected void integrate()
-	{
-		final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
-
-		final ItemStack riceSeed = GrowthCraftRice.rice.asStack();
-		final Block riceBlock = GrowthCraftRice.riceBlock.getBlock();
-		if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager.addRecipe(10, new ItemStack[]{riceSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
-		Backpack.FORESTERS.add(riceSeed);
-		addFarmable("farmOrchard", new FarmableBasicGrowthCraft(riceBlock, GrowthCraftRice.getConfig().paddyFieldMax, true, false));
-	}
+	@Deprecated
+	public void addSmelting(ItemStack resource, FluidStack molten, int meltingPoint) {}
 }

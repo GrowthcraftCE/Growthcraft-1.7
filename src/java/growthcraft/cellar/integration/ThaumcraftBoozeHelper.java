@@ -48,6 +48,7 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
 
+import cpw.mods.fml.common.Optional;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
@@ -61,12 +62,14 @@ public class ThaumcraftBoozeHelper implements ILoggable
 
 		public AspectModifier() {}
 
+		@Optional.Method(modid="Thaumcraft")
 		public AspectModifier set(Aspect aspect, int i)
 		{
 			aspects.put(aspect, i);
 			return this;
 		}
 
+		@Optional.Method(modid="Thaumcraft")
 		public Iterator<Map.Entry<Aspect, Integer>> iterator()
 		{
 			return aspects.entrySet().iterator();
@@ -96,6 +99,7 @@ public class ThaumcraftBoozeHelper implements ILoggable
 		this.logger = l;
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public AspectList setAspectsForBooze(Fluid fluid, AspectList aspects)
 	{
 		final Collection<FluidTag> tags = CoreRegistry.instance().fluidDictionary().getFluidTags(fluid);
@@ -117,56 +121,66 @@ public class ThaumcraftBoozeHelper implements ILoggable
 		return aspects;
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public AspectList setAspectsForBoozeBucketContent(Fluid fluid, AspectList aspects)
 	{
 		return setAspectsForBooze(fluid, aspects.add(Aspect.WATER, 4));
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public AspectList setAspectsForBoozeBottleContent(Fluid fluid, AspectList aspects)
 	{
 		return setAspectsForBooze(fluid, aspects.add(Aspect.WATER, 2));
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public AspectList setAspectsForBoozeBucket(Fluid fluid, AspectList list)
 	{
 		list.add(Aspect.METAL, 3);
 		return setAspectsForBoozeBucketContent(fluid, list);
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public AspectList setAspectsForBoozeBottle(Fluid fluid, AspectList list)
 	{
 		list.add(Aspect.CRYSTAL, 1);
 		return setAspectsForBoozeBottleContent(fluid, list);
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public void registerAspectsForBucket(ItemBucketBoozeDefinition def, AspectList base)
 	{
 		final ItemBucketBooze bucket = def.getItem();
 		ThaumcraftApi.registerObjectTag(def.asStack(), setAspectsForBoozeBucket(bucket.getBooze(null), base.copy()));
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public void registerAspectsForBuckets(ItemBucketBoozeDefinition[] buckets, AspectList base)
 	{
 		for (ItemBucketBoozeDefinition bucket : buckets) registerAspectsForBucket(bucket, base);
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public void registerAspectsForFluidBlock(BlockBoozeDefinition def, AspectList base)
 	{
 		final BlockFluidBooze block = def.getBlock();
 		ThaumcraftApi.registerObjectTag(def.asStack(), setAspectsForBoozeBucket(block.getFluid(), base.copy()));
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public void registerAspectsForFluidBlocks(BlockBoozeDefinition[] blocks, AspectList base)
 	{
 		for (BlockBoozeDefinition block : blocks) registerAspectsForFluidBlock(block, base);
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public void registerAspectsForBottleStack(ItemStack stack, AspectList base)
 	{
 		final ItemBoozeBottle bottle = (ItemBoozeBottle)stack.getItem();
 		ThaumcraftApi.registerObjectTag(stack, setAspectsForBoozeBottle(bottle.getBoozeForStack(stack), base.copy()));
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public void registerAspectsForBottle(ItemDefinition def, AspectList base)
 	{
 		if (def.getItem() instanceof ItemBoozeBottle)
@@ -181,6 +195,7 @@ public class ThaumcraftBoozeHelper implements ILoggable
 		}
 	}
 
+	@Optional.Method(modid="Thaumcraft")
 	public static ThaumcraftBoozeHelper instance()
 	{
 		if (INSTANCE == null)

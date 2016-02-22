@@ -33,6 +33,7 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
 
 import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.Optional;
 
 public class ThaumcraftModule extends ThaumcraftModuleBase
 {
@@ -42,6 +43,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	}
 
 	@Override
+	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
 		FMLInterModComms.sendMessage("Thaumcraft", "harvestStandardCrop", GrowthCraftApples.appleBlock.asStack(1, 2));

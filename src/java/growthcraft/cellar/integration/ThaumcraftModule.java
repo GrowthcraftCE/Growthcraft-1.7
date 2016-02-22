@@ -32,6 +32,8 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
 
+import cpw.mods.fml.common.Optional;
+
 public class ThaumcraftModule extends ThaumcraftModuleBase
 {
 	public ThaumcraftModule()
@@ -47,6 +49,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	}
 
 	@Override
+	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
 		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.brewKettle.asStack(), new AspectList().add(Aspect.METAL, 12).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));

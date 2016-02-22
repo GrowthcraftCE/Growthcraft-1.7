@@ -37,6 +37,7 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
 
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -75,10 +76,15 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 				GameRegistry.addShapedRecipe(EnumBeeBoxThaumcraft.GREATWOOD.asStack(), " A ", "A A", "AAA", 'A', new ItemStack(blockWoodenDevice, 1, 6));
 				GameRegistry.addShapedRecipe(EnumBeeBoxThaumcraft.SILVERWOOD.asStack(), " A ", "A A", "AAA", 'A', new ItemStack(blockWoodenDevice, 1, 7));
 			}
+			else
+			{
+				logger.warn("Could not find blockWoodenDevice from Thaumcraft, skipping recipes for Thaumcraft Bee Boxes");
+			}
 		}
 	}
 
 	@Override
+	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.items.honeyCombEmpty.asStack(), new AspectList().add(Aspect.ORDER, 1).add(Aspect.VOID, 1));

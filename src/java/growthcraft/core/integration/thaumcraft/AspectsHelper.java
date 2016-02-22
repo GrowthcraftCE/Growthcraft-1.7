@@ -26,6 +26,8 @@ package growthcraft.core.integration.thaumcraft;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
 
+import cpw.mods.fml.common.Optional;
+
 /**
  * Utility class for handling Thaumcraft Aspects and AspectLists
  */
@@ -39,6 +41,7 @@ public class AspectsHelper
 	 * @param aspects - the aspects to target
 	 * @return list, the list that was provided for method chaining
 	 */
+	@Optional.Method(modid="Thaumcraft")
 	public static AspectList scaleAspects(AspectList list, int scale, Aspect... aspects)
 	{
 		for (Aspect aspect : aspects)
