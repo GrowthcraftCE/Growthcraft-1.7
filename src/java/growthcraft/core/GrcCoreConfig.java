@@ -10,6 +10,10 @@ public class GrcCoreConfig extends ConfigBase
 	public boolean useAmazingStick;
 
 
+	@ConfigOption(catergory="Salt", name="Bucket Ocean Salt Water", desc="Should we enable the bucket of salt water event handler?")
+	public boolean bucketOfOceanSaltWater;
+
+
 	@ConfigOption(catergory="Fluid Container", name="Bottle Capacity", desc="How much booze does a bottle hold?")
 	public int bottleCapacity = 333;
 

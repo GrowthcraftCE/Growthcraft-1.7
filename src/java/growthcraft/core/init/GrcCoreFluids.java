@@ -51,6 +51,9 @@ public class GrcCoreFluids extends GrcModuleBase
 	@Override
 	public void init()
 	{
-		EventHandlerSpecialBucketFill.instance().addEntry(new SaltBucketEntry());
+		if (GrowthCraftCore.getConfig().bucketOfOceanSaltWater)
+		{
+			EventHandlerSpecialBucketFill.instance().addEntry(new SaltBucketEntry());
+		}
 	}
 }
