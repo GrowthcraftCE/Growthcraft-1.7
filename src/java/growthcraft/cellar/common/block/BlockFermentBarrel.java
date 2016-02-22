@@ -18,9 +18,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -116,40 +114,12 @@ public class BlockFermentBarrel extends BlockCellarContainer
 		}
 	}
 
-	/************
-	 * STUFF
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z)
-	{
-		return GrowthCraftCellar.fermentBarrel.getItem();
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world, int par2)
-	{
-		return new TileEntityFermentBarrel();
-	}
-
-	/************
-	 * DROPS
-	 ************/
-	@Override
-	public Item getItemDropped(int meta, Random random, int par3)
-	{
-		return GrowthCraftCellar.fermentBarrel.getItem();
-	}
-
 	@Override
 	public int quantityDropped(Random random)
 	{
 		return 1;
 	}
 
-	/************
-	 * TEXTURES
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
