@@ -28,6 +28,11 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 		return true;
 	}
 
+	private void setRenderBounds(RenderBlocks r, double x1, double x2, double y1, double y2, double z1, double z2)
+	{
+		r.setRenderBounds(x1, y1, z1, x2, y2, z2);
+	}
+
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
@@ -47,72 +52,72 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 			final float f = 0.125F;
 			renderer.uvRotateEast = 3;
 			//inner wall
-			renderer.setRenderBounds(0*d, 16*d, 1*d, 2*d, 5*d, 11*d);
+			setRenderBounds(renderer, 0*d, 16*d, 1*d, 2*d, 5*d, 11*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(0*d, 16*d, 2*d, 3*d, 11*d, 13*d);
+			setRenderBounds(renderer, 0*d, 16*d, 2*d, 3*d, 11*d, 13*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(0*d, 16*d, 3*d, 5*d, 13*d, 14*d);
+			setRenderBounds(renderer, 0*d, 16*d, 3*d, 5*d, 13*d, 14*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(0*d, 16*d, 5*d, 11*d, 14*d, 15*d);
+			setRenderBounds(renderer, 0*d, 16*d, 5*d, 11*d, 14*d, 15*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(0*d, 16*d, 11*d, 13*d, 13*d, 14*d);
+			setRenderBounds(renderer, 0*d, 16*d, 11*d, 13*d, 13*d, 14*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(0*d, 16*d, 13*d, 14*d, 11*d, 13*d);
+			setRenderBounds(renderer, 0*d, 16*d, 13*d, 14*d, 11*d, 13*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(0*d, 16*d, 14*d, 15*d, 5*d, 11*d);
+			setRenderBounds(renderer, 0*d, 16*d, 14*d, 15*d, 5*d, 11*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds( 0*d, 16*d, 13*d, 14*d,3*d, 5*d);
+			setRenderBounds(renderer,  0*d, 16*d, 13*d, 14*d,3*d, 5*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(0*d, 16*d, 11*d, 13*d, 2*d, 3*d);
+			setRenderBounds(renderer, 0*d, 16*d, 11*d, 13*d, 2*d, 3*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(0*d, 16*d, 5*d, 11*d, 1*d, 2*d);
+			setRenderBounds(renderer, 0*d, 16*d, 5*d, 11*d, 1*d, 2*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(0*d, 16*d, 3*d, 5*d, 2*d, 3*d);
+			setRenderBounds(renderer, 0*d, 16*d, 3*d, 5*d, 2*d, 3*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(0*d, 16*d, 2*d, 3*d, 3*d, 5*d);
+			setRenderBounds(renderer, 0*d, 16*d, 2*d, 3*d, 3*d, 5*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
 			//outer wall
-			renderer.setRenderBounds(4*d, 12*d, 0*d, 1*d, 5*d, 11*d);
+			setRenderBounds(renderer, 4*d, 12*d, 0*d, 1*d, 5*d, 11*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 1*d, 2*d, 11*d, 13*d);
+			setRenderBounds(renderer, 4*d, 12*d, 1*d, 2*d, 11*d, 13*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 2*d, 3*d, 13*d, 14*d);
+			setRenderBounds(renderer, 4*d, 12*d, 2*d, 3*d, 13*d, 14*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 3*d, 5*d, 14*d, 15*d);
+			setRenderBounds(renderer, 4*d, 12*d, 3*d, 5*d, 14*d, 15*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 5*d, 11*d, 15*d, 16*d);
+			setRenderBounds(renderer, 4*d, 12*d, 5*d, 11*d, 15*d, 16*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 11*d, 13*d, 14*d, 15*d);
+			setRenderBounds(renderer, 4*d, 12*d, 11*d, 13*d, 14*d, 15*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 13*d, 14*d, 13*d, 14*d);
+			setRenderBounds(renderer, 4*d, 12*d, 13*d, 14*d, 13*d, 14*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 14*d, 15*d, 11*d, 13*d);
+			setRenderBounds(renderer, 4*d, 12*d, 14*d, 15*d, 11*d, 13*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 15*d, 16*d, 5*d, 11*d);
+			setRenderBounds(renderer, 4*d, 12*d, 15*d, 16*d, 5*d, 11*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 14*d, 15*d, 3*d, 5*d);
+			setRenderBounds(renderer, 4*d, 12*d, 14*d, 15*d, 3*d, 5*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 13*d, 14*d, 2*d, 3*d);
+			setRenderBounds(renderer, 4*d, 12*d, 13*d, 14*d, 2*d, 3*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 11*d, 13*d, 1*d, 2*d);
+			setRenderBounds(renderer, 4*d, 12*d, 11*d, 13*d, 1*d, 2*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 5*d, 11*d, 0*d, 1*d);
+			setRenderBounds(renderer, 4*d, 12*d, 5*d, 11*d, 0*d, 1*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 3*d, 5*d, 1*d, 2*d);
+			setRenderBounds(renderer, 4*d, 12*d, 3*d, 5*d, 1*d, 2*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 2*d, 3*d, 2*d, 3*d);
+			setRenderBounds(renderer, 4*d, 12*d, 2*d, 3*d, 2*d, 3*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
-			renderer.setRenderBounds(4*d, 12*d, 1*d, 2*d, 3*d, 5*d);
+			setRenderBounds(renderer, 4*d, 12*d, 1*d, 2*d, 3*d, 5*d);
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
 			renderer.uvRotateEast = 0;
 
-			renderer.setRenderBounds(1*d, 0.0D, 0.0D, 15*d, 1.0D, 1.0D);
+			setRenderBounds(renderer, 1*d, 0.0D, 0.0D, 15*d, 1.0D, 1.0D);
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 			RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tes, fermentBarrel.getIconByIndex(2), 0.0D, 0.0D, 0.0D);
 			RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tes, fermentBarrel.getIconByIndex(3), 0.0D, 0.0D, 0.0D);
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
-			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+			setRenderBounds(renderer, 0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		}
 	}
 
@@ -148,62 +153,62 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 					renderer.uvRotateNorth = 2;
 				}
 				//inner wall
-				renderer.setRenderBounds(1*d, 2*d, 0*d, 16*d, 5*d, 11*d);
+				setRenderBounds(renderer, 1*d, 2*d, 0*d, 16*d, 5*d, 11*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(2*d, 3*d, 0*d, 16*d, 11*d, 13*d);
+				setRenderBounds(renderer, 2*d, 3*d, 0*d, 16*d, 11*d, 13*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(3*d, 5*d, 0*d, 16*d, 13*d, 14*d);
+				setRenderBounds(renderer, 3*d, 5*d, 0*d, 16*d, 13*d, 14*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(5*d, 11*d, 0*d, 16*d, 14*d, 15*d);
+				setRenderBounds(renderer, 5*d, 11*d, 0*d, 16*d, 14*d, 15*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(11*d, 13*d, 0*d, 16*d, 13*d, 14*d);
+				setRenderBounds(renderer, 11*d, 13*d, 0*d, 16*d, 13*d, 14*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(13*d, 14*d, 0*d, 16*d, 11*d, 13*d);
+				setRenderBounds(renderer, 13*d, 14*d, 0*d, 16*d, 11*d, 13*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(14*d, 15*d, 0*d, 16*d, 5*d, 11*d);
+				setRenderBounds(renderer, 14*d, 15*d, 0*d, 16*d, 5*d, 11*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(13*d, 14*d, 0*d, 16*d, 3*d, 5*d);
+				setRenderBounds(renderer, 13*d, 14*d, 0*d, 16*d, 3*d, 5*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(11*d, 13*d, 0*d, 16*d, 2*d, 3*d);
+				setRenderBounds(renderer, 11*d, 13*d, 0*d, 16*d, 2*d, 3*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(5*d, 11*d, 0*d, 16*d, 1*d, 2*d);
+				setRenderBounds(renderer, 5*d, 11*d, 0*d, 16*d, 1*d, 2*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(3*d, 5*d, 0*d, 16*d, 2*d, 3*d);
+				setRenderBounds(renderer, 3*d, 5*d, 0*d, 16*d, 2*d, 3*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(2*d, 3*d, 0*d, 16*d, 3*d, 5*d);
+				setRenderBounds(renderer, 2*d, 3*d, 0*d, 16*d, 3*d, 5*d);
 				renderer.renderStandardBlock(block, x, y, z);
 				//outer wall
-				renderer.setRenderBounds(0*d, 1*d, 4*d, 12*d, 5*d, 11*d);
+				setRenderBounds(renderer, 0*d, 1*d, 4*d, 12*d, 5*d, 11*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(1*d, 2*d, 4*d, 12*d, 11*d, 13*d);
+				setRenderBounds(renderer, 1*d, 2*d, 4*d, 12*d, 11*d, 13*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(2*d, 3*d, 4*d, 12*d, 13*d, 14*d);
+				setRenderBounds(renderer, 2*d, 3*d, 4*d, 12*d, 13*d, 14*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(3*d, 5*d, 4*d, 12*d, 14*d, 15*d);
+				setRenderBounds(renderer, 3*d, 5*d, 4*d, 12*d, 14*d, 15*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(5*d, 11*d, 4*d, 12*d, 15*d, 16*d);
+				setRenderBounds(renderer, 5*d, 11*d, 4*d, 12*d, 15*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(11*d, 13*d, 4*d, 12*d, 14*d, 15*d);
+				setRenderBounds(renderer, 11*d, 13*d, 4*d, 12*d, 14*d, 15*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(13*d, 14*d, 4*d, 12*d, 13*d, 14*d);
+				setRenderBounds(renderer, 13*d, 14*d, 4*d, 12*d, 13*d, 14*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(14*d, 15*d, 4*d, 12*d, 11*d, 13*d);
+				setRenderBounds(renderer, 14*d, 15*d, 4*d, 12*d, 11*d, 13*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(15*d, 16*d, 4*d, 12*d, 5*d, 11*d);
+				setRenderBounds(renderer, 15*d, 16*d, 4*d, 12*d, 5*d, 11*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(14*d, 15*d, 4*d, 12*d, 3*d, 5*d);
+				setRenderBounds(renderer, 14*d, 15*d, 4*d, 12*d, 3*d, 5*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(13*d, 14*d, 4*d, 12*d, 2*d, 3*d);
+				setRenderBounds(renderer, 13*d, 14*d, 4*d, 12*d, 2*d, 3*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(11*d, 13*d, 4*d, 12*d, 1*d, 2*d);
+				setRenderBounds(renderer, 11*d, 13*d, 4*d, 12*d, 1*d, 2*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(5*d, 11*d, 4*d, 12*d, 0*d, 1*d);
+				setRenderBounds(renderer, 5*d, 11*d, 4*d, 12*d, 0*d, 1*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(3*d, 5*d, 4*d, 12*d, 1*d, 2*d);
+				setRenderBounds(renderer, 3*d, 5*d, 4*d, 12*d, 1*d, 2*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(2*d, 3*d, 4*d, 12*d, 2*d, 3*d);
+				setRenderBounds(renderer, 2*d, 3*d, 4*d, 12*d, 2*d, 3*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(1*d, 2*d, 4*d, 12*d, 3*d, 5*d);
+				setRenderBounds(renderer, 1*d, 2*d, 4*d, 12*d, 3*d, 5*d);
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 			else if (meta == 2 || meta == 3)
@@ -221,62 +226,62 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 					renderer.uvRotateBottom = 2;
 				}
 				//inner wall
-				renderer.setRenderBounds(1*d, 2*d, 5*d, 11*d, 0*d, 16*d);
+				setRenderBounds(renderer, 1*d, 2*d, 5*d, 11*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(2*d, 3*d, 11*d, 13*d, 0*d, 16*d);
+				setRenderBounds(renderer, 2*d, 3*d, 11*d, 13*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(3*d, 5*d, 13*d, 14*d, 0*d, 16*d);
+				setRenderBounds(renderer, 3*d, 5*d, 13*d, 14*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(5*d, 11*d, 14*d, 15*d, 0*d, 16*d);
+				setRenderBounds(renderer, 5*d, 11*d, 14*d, 15*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(11*d, 13*d, 13*d, 14*d, 0*d, 16*d);
+				setRenderBounds(renderer, 11*d, 13*d, 13*d, 14*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(13*d, 14*d, 11*d, 13*d, 0*d, 16*d);
+				setRenderBounds(renderer, 13*d, 14*d, 11*d, 13*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(14*d, 15*d, 5*d, 11*d, 0*d, 16*d);
+				setRenderBounds(renderer, 14*d, 15*d, 5*d, 11*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(13*d, 14*d, 3*d, 5*d, 0*d, 16*d);
+				setRenderBounds(renderer, 13*d, 14*d, 3*d, 5*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(11*d, 13*d, 2*d, 3*d, 0*d, 16*d);
+				setRenderBounds(renderer, 11*d, 13*d, 2*d, 3*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(5*d, 11*d, 1*d, 2*d, 0*d, 16*d);
+				setRenderBounds(renderer, 5*d, 11*d, 1*d, 2*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(3*d, 5*d, 2*d, 3*d, 0*d, 16*d);
+				setRenderBounds(renderer, 3*d, 5*d, 2*d, 3*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(2*d, 3*d, 3*d, 5*d, 0*d, 16*d);
+				setRenderBounds(renderer, 2*d, 3*d, 3*d, 5*d, 0*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
 				//outer wall
-				renderer.setRenderBounds(0*d, 1*d, 5*d, 11*d, 4*d, 12*d);
+				setRenderBounds(renderer, 0*d, 1*d, 5*d, 11*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(1*d, 2*d, 11*d, 13*d, 4*d, 12*d);
+				setRenderBounds(renderer, 1*d, 2*d, 11*d, 13*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(2*d, 3*d, 13*d, 14*d, 4*d, 12*d);
+				setRenderBounds(renderer, 2*d, 3*d, 13*d, 14*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(3*d, 5*d, 14*d, 15*d, 4*d, 12*d);
+				setRenderBounds(renderer, 3*d, 5*d, 14*d, 15*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(5*d, 11*d, 15*d, 16*d, 4*d, 12*d);
+				setRenderBounds(renderer, 5*d, 11*d, 15*d, 16*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(11*d, 13*d, 14*d, 15*d, 4*d, 12*d);
+				setRenderBounds(renderer, 11*d, 13*d, 14*d, 15*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(13*d, 14*d, 13*d, 14*d, 4*d, 12*d);
+				setRenderBounds(renderer, 13*d, 14*d, 13*d, 14*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(14*d, 15*d, 11*d, 13*d, 4*d, 12*d);
+				setRenderBounds(renderer, 14*d, 15*d, 11*d, 13*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(15*d, 16*d, 5*d, 11*d, 4*d, 12*d);
+				setRenderBounds(renderer, 15*d, 16*d, 5*d, 11*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(14*d, 15*d, 3*d, 5*d, 4*d, 12*d);
+				setRenderBounds(renderer, 14*d, 15*d, 3*d, 5*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(13*d, 14*d, 2*d, 3*d, 4*d, 12*d);
+				setRenderBounds(renderer, 13*d, 14*d, 2*d, 3*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(11*d, 13*d, 1*d, 2*d, 4*d, 12*d);
+				setRenderBounds(renderer, 11*d, 13*d, 1*d, 2*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(5*d, 11*d, 0*d, 1*d, 4*d, 12*d);
+				setRenderBounds(renderer, 5*d, 11*d, 0*d, 1*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(3*d, 5*d, 1*d, 2*d, 4*d, 12*d);
+				setRenderBounds(renderer, 3*d, 5*d, 1*d, 2*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(2*d, 3*d, 2*d, 3*d, 4*d, 12*d);
+				setRenderBounds(renderer, 2*d, 3*d, 2*d, 3*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(1*d, 2*d, 3*d, 5*d, 4*d, 12*d);
+				setRenderBounds(renderer, 1*d, 2*d, 3*d, 5*d, 4*d, 12*d);
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 			else if (meta == 4 || meta == 5)
@@ -292,62 +297,62 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 					renderer.uvRotateEast = 3;
 				}
 				//inner wall
-				renderer.setRenderBounds(0*d, 16*d, 1*d, 2*d, 5*d, 11*d);
+				setRenderBounds(renderer, 0*d, 16*d, 1*d, 2*d, 5*d, 11*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(0*d, 16*d, 2*d, 3*d, 11*d, 13*d);
+				setRenderBounds(renderer, 0*d, 16*d, 2*d, 3*d, 11*d, 13*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(0*d, 16*d, 3*d, 5*d, 13*d, 14*d);
+				setRenderBounds(renderer, 0*d, 16*d, 3*d, 5*d, 13*d, 14*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(0*d, 16*d, 5*d, 11*d, 14*d, 15*d);
+				setRenderBounds(renderer, 0*d, 16*d, 5*d, 11*d, 14*d, 15*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(0*d, 16*d, 11*d, 13*d, 13*d, 14*d);
+				setRenderBounds(renderer, 0*d, 16*d, 11*d, 13*d, 13*d, 14*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(0*d, 16*d, 13*d, 14*d, 11*d, 13*d);
+				setRenderBounds(renderer, 0*d, 16*d, 13*d, 14*d, 11*d, 13*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(0*d, 16*d, 14*d, 15*d, 5*d, 11*d);
+				setRenderBounds(renderer, 0*d, 16*d, 14*d, 15*d, 5*d, 11*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds( 0*d, 16*d, 13*d, 14*d,3*d, 5*d);
+				setRenderBounds(renderer,  0*d, 16*d, 13*d, 14*d,3*d, 5*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(0*d, 16*d, 11*d, 13*d, 2*d, 3*d);
+				setRenderBounds(renderer, 0*d, 16*d, 11*d, 13*d, 2*d, 3*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(0*d, 16*d, 5*d, 11*d, 1*d, 2*d);
+				setRenderBounds(renderer, 0*d, 16*d, 5*d, 11*d, 1*d, 2*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(0*d, 16*d, 3*d, 5*d, 2*d, 3*d);
+				setRenderBounds(renderer, 0*d, 16*d, 3*d, 5*d, 2*d, 3*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(0*d, 16*d, 2*d, 3*d, 3*d, 5*d);
+				setRenderBounds(renderer, 0*d, 16*d, 2*d, 3*d, 3*d, 5*d);
 				renderer.renderStandardBlock(block, x, y, z);
 				//outer wall
-				renderer.setRenderBounds(4*d, 12*d, 0*d, 1*d, 5*d, 11*d);
+				setRenderBounds(renderer, 4*d, 12*d, 0*d, 1*d, 5*d, 11*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 1*d, 2*d, 11*d, 13*d);
+				setRenderBounds(renderer, 4*d, 12*d, 1*d, 2*d, 11*d, 13*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 2*d, 3*d, 13*d, 14*d);
+				setRenderBounds(renderer, 4*d, 12*d, 2*d, 3*d, 13*d, 14*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 3*d, 5*d, 14*d, 15*d);
+				setRenderBounds(renderer, 4*d, 12*d, 3*d, 5*d, 14*d, 15*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 5*d, 11*d, 15*d, 16*d);
+				setRenderBounds(renderer, 4*d, 12*d, 5*d, 11*d, 15*d, 16*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 11*d, 13*d, 14*d, 15*d);
+				setRenderBounds(renderer, 4*d, 12*d, 11*d, 13*d, 14*d, 15*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 13*d, 14*d, 13*d, 14*d);
+				setRenderBounds(renderer, 4*d, 12*d, 13*d, 14*d, 13*d, 14*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 14*d, 15*d, 11*d, 13*d);
+				setRenderBounds(renderer, 4*d, 12*d, 14*d, 15*d, 11*d, 13*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 15*d, 16*d, 5*d, 11*d);
+				setRenderBounds(renderer, 4*d, 12*d, 15*d, 16*d, 5*d, 11*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 14*d, 15*d, 3*d, 5*d);
+				setRenderBounds(renderer, 4*d, 12*d, 14*d, 15*d, 3*d, 5*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 13*d, 14*d, 2*d, 3*d);
+				setRenderBounds(renderer, 4*d, 12*d, 13*d, 14*d, 2*d, 3*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 11*d, 13*d, 1*d, 2*d);
+				setRenderBounds(renderer, 4*d, 12*d, 11*d, 13*d, 1*d, 2*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 5*d, 11*d, 0*d, 1*d);
+				setRenderBounds(renderer, 4*d, 12*d, 5*d, 11*d, 0*d, 1*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 3*d, 5*d, 1*d, 2*d);
+				setRenderBounds(renderer, 4*d, 12*d, 3*d, 5*d, 1*d, 2*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 2*d, 3*d, 2*d, 3*d);
+				setRenderBounds(renderer, 4*d, 12*d, 2*d, 3*d, 2*d, 3*d);
 				renderer.renderStandardBlock(block, x, y, z);
-				renderer.setRenderBounds(4*d, 12*d, 1*d, 2*d, 3*d, 5*d);
+				setRenderBounds(renderer, 4*d, 12*d, 1*d, 2*d, 3*d, 5*d);
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 
@@ -361,7 +366,7 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 			//inner wall
 			if (meta == 0 || meta == 1)
 			{
-				renderer.setRenderBounds(0.0D, 1*d, 0.0D, 1.0D, 15*d, 1.0D);
+				setRenderBounds(renderer, 0.0D, 1*d, 0.0D, 1.0D, 15*d, 1.0D);
 				if (meta == 0)
 				{
 					renderer.renderFaceYNeg(block, x, y, z, icon[2]);
@@ -375,7 +380,7 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 			}
 			else if (meta == 2 || meta == 3)
 			{
-				renderer.setRenderBounds(0.0D, 0.0D, 1*d, 1.0D, 1.0D, 15*d);
+				setRenderBounds(renderer, 0.0D, 0.0D, 1*d, 1.0D, 1.0D, 15*d);
 				if (meta == 2)
 				{
 					renderer.renderFaceZNeg(block, x, y, z, icon[2]);
@@ -389,7 +394,7 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 			}
 			else if (meta == 4 || meta == 5)
 			{
-				renderer.setRenderBounds(1*d, 0.0D, 0.0D, 15*d, 1.0D, 1.0D);
+				setRenderBounds(renderer, 1*d, 0.0D, 0.0D, 15*d, 1.0D, 1.0D);
 				if (meta == 4)
 				{
 					renderer.renderFaceXNeg(block, x, y, z, icon[2]);
@@ -403,7 +408,7 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 			}
 
 
-			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+			setRenderBounds(renderer, 0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 			renderer.clearOverrideBlockTexture();
 		}
 		return true;
