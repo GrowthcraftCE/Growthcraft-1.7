@@ -41,6 +41,7 @@ public class Cheese
 	private int ageMax = TickUtils.minutes(1);
 	private int slices = 8;
 	private int slicesMax = 8;
+	private final int cheesePerSlice = 8;
 	private EnumCheeseType cheese = EnumCheeseType.CHEDDAR;
 	private EnumCheeseStage cheeseStage = EnumCheeseType.CHEDDAR.stages.get(0);
 
@@ -105,7 +106,7 @@ public class Cheese
 	public ItemStack yankSlices(int count, boolean doYank)
 	{
 		final int yankedCount = MathHelper.clamp_int(count, 0, getSlices());
-		final int quantity = yankedCount * 9;
+		final int quantity = yankedCount * cheesePerSlice;
 		if (quantity > 0)
 		{
 			if (doYank)
