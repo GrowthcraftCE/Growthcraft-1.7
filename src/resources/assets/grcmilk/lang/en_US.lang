@@ -125,12 +125,6 @@ item.bucket.fluid.grcmilk.Rennet.name=Rennet Bucket
 item.bucket.fluid.grcmilk.SkimMilk.name=Skim Milk Bucket
 item.bucket.fluid.grcmilk.Whey.name=Whey Bucket
 
-## Salt Water
-fluid.grcmilk.SaltWater=Salt Water
-tile.grcmilk.BlockFluidSaltWater.name=Salt Water
-item.grcmilk.BottleFluidSaltWater.name=Salt Water Bottle
-item.bucket.fluid.grcmilk.SaltWater.name=Salt Water Bucket
-
 ## Booze
 fluid.grcmilk.milk=Milk
 fluid.grcmilk.milk0=Milk

@@ -13,6 +13,12 @@ item.grccore.salt.name=Salt
 fluid.tile.water=Water
 fluid.tile.lava=Lava
 
+## Salt Water
+fluid.grccore.SaltWater=Salt Water
+tile.grccore.BlockFluidSaltWater.name=Salt Water
+item.grccore.BottleFluidSaltWater.name=Salt Water Bottle
+item.bucket.fluid.grccore.SaltWater.name=Salt Water Bucket
+
 # Other
 achievementPage.pageGrowthCraft=Growthcraft
 
