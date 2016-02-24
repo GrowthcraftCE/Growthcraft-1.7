@@ -111,13 +111,13 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 			RenderUtils.renderInventoryBlockOverride(block, renderer, icons, tes);
 			renderer.uvRotateEast = 0;
 
-			setRenderBounds(renderer, 1*d, 0.0D, 0.0D, 15*d, 1.0D, 1.0D);
+			renderer.setRenderBounds(1*d, 0.0D, 0.0D, 15*d, 1.0D, 1.0D);
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 			RenderUtils.drawFace(RenderUtils.Face.XPOS, block, renderer, tes, fermentBarrel.getIconByIndex(2), 0.0D, 0.0D, 0.0D);
 			RenderUtils.drawFace(RenderUtils.Face.XNEG, block, renderer, tes, fermentBarrel.getIconByIndex(3), 0.0D, 0.0D, 0.0D);
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
-			setRenderBounds(renderer, 0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 		}
 	}
 
@@ -366,7 +366,7 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 			//inner wall
 			if (meta == 0 || meta == 1)
 			{
-				setRenderBounds(renderer, 0.0D, 1*d, 0.0D, 1.0D, 15*d, 1.0D);
+				renderer.setRenderBounds(0.0D, 1*d, 0.0D, 1.0D, 15*d, 1.0D);
 				if (meta == 0)
 				{
 					renderer.renderFaceYNeg(block, x, y, z, icon[2]);
@@ -380,7 +380,7 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 			}
 			else if (meta == 2 || meta == 3)
 			{
-				setRenderBounds(renderer, 0.0D, 0.0D, 1*d, 1.0D, 1.0D, 15*d);
+				renderer.setRenderBounds(0.0D, 0.0D, 1*d, 1.0D, 1.0D, 15*d);
 				if (meta == 2)
 				{
 					renderer.renderFaceZNeg(block, x, y, z, icon[2]);
@@ -394,7 +394,7 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 			}
 			else if (meta == 4 || meta == 5)
 			{
-				setRenderBounds(renderer, 1*d, 0.0D, 0.0D, 15*d, 1.0D, 1.0D);
+				renderer.setRenderBounds(1*d, 0.0D, 0.0D, 15*d, 1.0D, 1.0D);
 				if (meta == 4)
 				{
 					renderer.renderFaceXNeg(block, x, y, z, icon[2]);
@@ -408,7 +408,7 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 			}
 
 
-			setRenderBounds(renderer, 0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
+			renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
 			renderer.clearOverrideBlockTexture();
 		}
 		return true;

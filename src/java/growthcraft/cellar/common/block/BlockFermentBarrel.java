@@ -120,9 +120,9 @@ public class BlockFermentBarrel extends BlockCellarContainer
 		this.icons = new IIcon[4];
 		final String basename = getTextureName();
 		icons[0] = reg.registerIcon(String.format("%s/minecraft/oak/side", basename));
-		icons[1] = reg.registerIcon(String.format("%s/minecraft/oak/1", basename));
-		icons[2] = reg.registerIcon(String.format("%s/minecraft/oak/2", basename));
-		icons[3] = reg.registerIcon(String.format("%s/minecraft/oak/3", basename));
+		icons[1] = reg.registerIcon(String.format("%s/minecraft/oak/side_alt", basename));
+		icons[2] = reg.registerIcon(String.format("%s/minecraft/oak/top", basename));
+		icons[3] = reg.registerIcon(String.format("%s/minecraft/oak/bottom", basename));
 	}
 
 	@SideOnly(Side.CLIENT)
