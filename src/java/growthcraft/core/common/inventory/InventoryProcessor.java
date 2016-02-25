@@ -302,7 +302,14 @@ public class InventoryProcessor
 		for (int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			final ItemStack stack = inv.getStackInSlot(i);
-			if (query.isItemEqual(stack)) return i;
+			if (query == null && stack == null)
+			{
+				return i;
+			}
+			else if (query != null && stack != null)
+			{
+				if (query.isItemEqual(stack)) return i;
+			}
 		}
 		return -1;
 	}
