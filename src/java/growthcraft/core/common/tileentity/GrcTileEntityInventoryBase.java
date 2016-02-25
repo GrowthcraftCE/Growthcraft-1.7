@@ -197,7 +197,10 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase imple
 	public abstract int[] getAccessibleSlotsFromSide(int side);
 
 	@Override
-	public abstract boolean canExtractItem(int index, ItemStack stack, int side);
+	public boolean canExtractItem(int index, ItemStack stack, int side)
+	{
+		return true;
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
