@@ -125,7 +125,7 @@ public class Utils
 			if (!world.isRemote)
 			{
 				tank.fill(direction, heldContents, true);
-				final ItemStack containerItem = held.getItem().getContainerItem(held);
+				final ItemStack containerItem = FluidContainerRegistry.drainFluidContainer(held);
 
 				if (!player.inventory.addItemStackToInventory(containerItem))
 				{
