@@ -23,6 +23,8 @@
  */
 package growthcraft.api.core.stream;
 
+import java.io.UnsupportedEncodingException;
+
 import io.netty.buffer.ByteBuf;
 
 import net.minecraftforge.fluids.Fluid;
@@ -36,6 +38,31 @@ import net.minecraftforge.fluids.FluidTank;
 public class StreamUtils
 {
 	private StreamUtils() {}
+
+	/**
+	 * Reads an ASCII string from the stream, the first int should be the length
+	 * of the string.
+	 *
+	 * @param stream - stream to read from
+	 * @return string
+	 */
+	public static String readStringASCII(ByteBuf stream) throws UnsupportedEncodingException
+	{
+		final int len = stream.readInt();
+		final byte[] bytes = stream.readBytes(len).array();
+		return new String(bytes, "US-ASCII");
+	}
+
+	/**
+	 * @param stream - stream to write to
+	 * @param str - string to write
+	 */
+	public static void writeStringASCII(ByteBuf stream, String str) throws UnsupportedEncodingException
+	{
+		final byte[] bytes = str.getBytes("US-ASCII");
+		stream.writeInt(str.length());
+		stream.writeBytes(bytes);
+	}
 
 	public static void readFluidTank(ByteBuf stream, FluidTank tank)
 	{
