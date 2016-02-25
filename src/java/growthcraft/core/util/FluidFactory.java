@@ -23,6 +23,7 @@
  */
 package growthcraft.core.util;
 
+import growthcraft.api.core.util.NumUtils;
 import growthcraft.core.common.definition.FluidDefinition;
 import growthcraft.core.common.definition.GrcBlockFluidDefinition;
 import growthcraft.core.common.definition.ItemTypeDefinition;
@@ -31,10 +32,12 @@ import growthcraft.core.common.item.ItemBottleFluid;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.GrowthCraftCore;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 /**
  * A simple factory for creating generic fluid bottles, blocks etc..
@@ -52,6 +55,25 @@ public class FluidFactory
 		public Fluid getFluid()
 		{
 			return fluid.getFluid();
+		}
+
+		public Block getFluidBlock()
+		{
+			if (block != null)
+				return block.getBlock();
+			return null;
+		}
+
+		public ItemStack getBucketItemStack(int size)
+		{
+			if (bucket != null)
+				return bucket.asStack(size);
+			return null;
+		}
+
+		public ItemStack getBucketItemStack()
+		{
+			return getBucketItemStack(1);
 		}
 
 		public FluidDetails registerObjects(String prefix, String basename)
@@ -105,19 +127,34 @@ public class FluidFactory
 		}
 	}
 
+	public static final int FEATURE_BLOCK = 1;
+	public static final int FEATURE_BOTTLE = 2;
+	public static final int FEATURE_BUCKET = 4;
+	public static final int FEATURE_ALL = FEATURE_BLOCK | FEATURE_BOTTLE | FEATURE_BUCKET;
 	private static FluidFactory INSTANCE = new FluidFactory();
 
 	public FluidFactory() {}
 
-	public FluidDetails create(Fluid fluid)
+	public FluidDetails create(Fluid fluid, int features)
 	{
 		final FluidDetails details = new FluidDetails();
 		details.fluid = new FluidDefinition(fluid);
 		details.fluid.register();
-		details.block = GrcBlockFluidDefinition.create(details.fluid);
-		details.bottle = new ItemTypeDefinition<ItemBottleFluid>(new ItemBottleFluid(fluid));
-		details.bucket = new ItemTypeDefinition<ItemBucketFluid>(new ItemBucketFluid(details.block.getBlock(), fluid, null));
+		if (NumUtils.isFlagged(features, FEATURE_BLOCK))
+			details.block = GrcBlockFluidDefinition.create(details.fluid);
+
+		if (NumUtils.isFlagged(features, FEATURE_BOTTLE))
+			details.bottle = new ItemTypeDefinition<ItemBottleFluid>(new ItemBottleFluid(fluid));
+
+		if (NumUtils.isFlagged(features, FEATURE_BUCKET))
+			details.bucket = new ItemTypeDefinition<ItemBucketFluid>(new ItemBucketFluid(details.block != null ? details.block.getBlock() : null, fluid, null));
+
 		return details;
+	}
+
+	public FluidDetails create(Fluid fluid)
+	{
+		return create(fluid, FEATURE_ALL);
 	}
 
 	public static FluidFactory instance()
