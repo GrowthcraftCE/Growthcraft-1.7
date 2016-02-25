@@ -28,7 +28,7 @@ import io.netty.buffer.ByteBuf;
 import growthcraft.api.cellar.brewing.BrewingRecipe;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
-import growthcraft.cellar.common.tileentity.component.HeatBlockComponent;
+import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.common.tileentity.device.DeviceBase;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
@@ -47,7 +47,7 @@ public class BrewKettle extends DeviceBase
 	private DeviceInventorySlot residueSlot;
 	private DeviceFluidSlot inputFluidSlot;
 	private DeviceFluidSlot outputFluidSlot;
-	private HeatBlockComponent heatComponent;
+	private TileHeatingComponent heatComponent;
 
 	public BrewKettle(TileEntityCellarDevice te, int brewSlotId, int residueSlotId, int inputFluidSlotId, int outputFluidSlotId)
 	{
@@ -56,7 +56,7 @@ public class BrewKettle extends DeviceBase
 		this.residueSlot = new DeviceInventorySlot(te, residueSlotId);
 		this.inputFluidSlot = new DeviceFluidSlot(te, inputFluidSlotId);
 		this.outputFluidSlot = new DeviceFluidSlot(te, outputFluidSlotId);
-		this.heatComponent = new HeatBlockComponent(te);
+		this.heatComponent = new TileHeatingComponent(te);
 	}
 
 	public void setGrain(float g)
@@ -166,6 +166,7 @@ public class BrewKettle extends DeviceBase
 
 	public void update()
 	{
+		heatComponent.update();
 		final BrewingRecipe recipe = getWorkingRecipe();
 		if (recipe != null)
 		{
@@ -192,6 +193,7 @@ public class BrewKettle extends DeviceBase
 		super.readFromNBT(data);
 		this.time = data.getDouble("time");
 		this.grain = data.getFloat("grain");
+		heatComponent.readFromNBT(data, "heat_component");
 	}
 
 	@Override
@@ -200,6 +202,7 @@ public class BrewKettle extends DeviceBase
 		super.writeToNBT(data);
 		data.setDouble("time", time);
 		data.setFloat("grain", grain);
+		heatComponent.writeToNBT(data, "heat_component");
 	}
 
 	/**
@@ -212,6 +215,7 @@ public class BrewKettle extends DeviceBase
 		this.time = buf.readDouble();
 		this.timeMax = buf.readDouble();
 		this.grain = buf.readFloat();
+		heatComponent.readFromStream(buf);
 	}
 
 	/**
@@ -224,5 +228,6 @@ public class BrewKettle extends DeviceBase
 		buf.writeDouble(time);
 		buf.writeDouble(timeMax);
 		buf.writeFloat(grain);
+		heatComponent.writeToStream(buf);
 	}
 }
