@@ -18,27 +18,33 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 public class EventHandlerBucketFill
 {
 	private static EventHandlerBucketFill INSTANCE = new EventHandlerBucketFill();
-	private Map<Block, Item> buckets = new HashMap<Block, Item>();
+	private Map<Block, ItemStack> buckets = new HashMap<Block, ItemStack>();
 
 	public static EventHandlerBucketFill instance()
 	{
 		return INSTANCE;
 	}
 
-	public void register(Block block, Item item)
+	public EventHandlerBucketFill register(Block block, ItemStack stack)
 	{
-		buckets.put(block, item);
+		buckets.put(block, stack);
+		return this;
+	}
+
+	public EventHandlerBucketFill register(Block block, Item item)
+	{
+		return register(block, item);
 	}
 
 	private ItemStack fillCustomBucket(World world, MovingObjectPosition pos)
 	{
 		final Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
-		final Item bucket = buckets.get(block);
+		final ItemStack bucket = buckets.get(block);
 
 		if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
 		{
 			world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
-			return new ItemStack(bucket);
+			return bucket.copy();
 		}
 		else
 		{
