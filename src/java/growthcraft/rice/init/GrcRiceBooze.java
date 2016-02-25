@@ -60,9 +60,9 @@ public class GrcRiceBooze extends GrcModuleBase
 		GrowthCraftCellar.boozeBuilderFactory.create(riceSakeBooze[0])
 			.tags(BoozeTag.YOUNG)
 			.brewsFrom(
-				new FluidStack(FluidRegistry.WATER, GrowthCraftRice.getConfig().riceSakeBrewingYield),
+				new FluidStack(FluidRegistry.WATER, 40),
 				GrowthCraftRice.rice.asStack(),
-				GrowthCraftRice.getConfig().riceSakeBrewingTime,
+				TickUtils.minutes(1),
 				Residue.newDefault(0.2F));
 
 		GrowthCraftCellar.boozeBuilderFactory.create(riceSakeBooze[1])

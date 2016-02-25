@@ -35,13 +35,6 @@ public class GrcGrapesConfig extends ConfigBase
 	public int vineGrapeDropRarity = 10;
 
 
-	@ConfigOption(catergory="Pressing", name="Grape Wine press time", desc="[Higher -> Slower]")
-	public int grapeWinePressingTime = 20;
-
-	@ConfigOption(catergory="Pressing", name="Grape Wine press yield", desc="How many milli-buckets are created per grape?")
-	public int grapeWinePressingYield = 40;
-
-
 	@ConfigOption(catergory="Booze/Grape Wine", name="Grape Wine Color", desc="What color should Grape wine be?")
 	public int grapeWineColor = 0x550E24;
 

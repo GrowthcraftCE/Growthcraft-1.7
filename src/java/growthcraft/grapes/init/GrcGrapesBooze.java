@@ -64,8 +64,8 @@ public class GrcGrapesBooze extends GrcModuleBase
 			.tags(BoozeTag.WINE, BoozeTag.YOUNG)
 			.pressesFrom(
 				GrowthCraftGrapes.grapes.asStack(),
-				GrowthCraftGrapes.getConfig().grapeWinePressingTime,
-				GrowthCraftGrapes.getConfig().grapeWinePressingYield,
+				TickUtils.seconds(2),
+				40,
 				Residue.newDefault(0.3F));
 
 		// Brewers Yeast, Nether Wart

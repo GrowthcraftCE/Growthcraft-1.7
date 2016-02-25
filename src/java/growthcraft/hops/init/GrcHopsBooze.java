@@ -70,9 +70,9 @@ public class GrcHopsBooze extends GrcModuleBase
 		GrowthCraftCellar.boozeBuilderFactory.create(lagerBooze[0])
 			.tags(BoozeTag.YOUNG, BoozeTag.CHILLED)
 			.brewsFrom(
-				new FluidStack(hopAleBooze[4], GrowthCraftHops.getConfig().lagerBrewYield),
+				new FluidStack(hopAleBooze[4], 40),
 				YeastType.LAGER.asStack(),
-				GrowthCraftHops.getConfig().lagerBrewTime,
+				TickUtils.minutes(1),
 				Residue.newDefault(0.0F));
 
 		GrowthCraftCellar.boozeBuilderFactory.create(lagerBooze[1])
@@ -147,17 +147,17 @@ public class GrcHopsBooze extends GrcModuleBase
 		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[4])
 			.tags(BoozeTag.YOUNG)
 			.brewsFrom(
-				new FluidStack(FluidRegistry.WATER, GrowthCraftHops.getConfig().hopAleBrewYield),
+				new FluidStack(FluidRegistry.WATER, 40),
 				new ItemStack(Items.wheat),
-				GrowthCraftHops.getConfig().hopAleBrewTime,
+				TickUtils.minutes(1),
 				Residue.newDefault(0.3F));
 
 		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[0])
 			.tags(BoozeTag.YOUNG, BoozeTag.HOPPED)
 			.brewsFrom(
-				new FluidStack(hopAleBooze[4], GrowthCraftHops.getConfig().hopAleHoppedBrewYield),
+				new FluidStack(hopAleBooze[4], 40),
 				GrowthCraftHops.hops.asStack(),
-				GrowthCraftHops.getConfig().hopAleHoppedBrewTime,
+				TickUtils.minutes(1),
 				Residue.newDefault(0.0F));
 
 		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[1])

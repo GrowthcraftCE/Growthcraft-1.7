@@ -62,8 +62,8 @@ public class GrcApplesBooze extends GrcModuleBase
 			.tags(BoozeTag.CIDER, BoozeTag.YOUNG)
 			.pressesFrom(
 				new ItemStack(Items.apple),
-				GrowthCraftApples.getConfig().appleCiderPressYield,
-				GrowthCraftApples.getConfig().appleCiderPressingTime,
+				TickUtils.seconds(2),
+				40,
 				Residue.newDefault(0.3F)
 			);
 
