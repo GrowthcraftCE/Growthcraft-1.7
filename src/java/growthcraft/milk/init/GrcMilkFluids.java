@@ -56,7 +56,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class GrcMilkFluids extends GrcModuleBase
 {
-	private static final String milkBasename = "grcmilk.Milk";
+	private static final String kumisBasename = "grcmilk.Milk";
 
 	// not an actual Booze, but we use the class since it has the ability to set color
 	public FluidFactory.FluidDetails butterMilk;
@@ -68,11 +68,10 @@ public class GrcMilkFluids extends GrcModuleBase
 	public FluidFactory.FluidDetails whey;
 	public Map<EnumCheeseType, FluidFactory.FluidDetails> cheeses = new HashMap<EnumCheeseType, FluidFactory.FluidDetails>();
 	public Map<Fluid, EnumCheeseType> fluidToCheeseType = new HashMap<Fluid, EnumCheeseType>();
-	public Booze[] boozeMilk = new Booze[6];
-	//public BlockBoozeDefinition
-	public BlockBoozeDefinition[] boozeMilkBlocks = new BlockBoozeDefinition[boozeMilk.length];
-	public ItemBucketBoozeDefinition[] boozeMilkBuckets = new ItemBucketBoozeDefinition[boozeMilk.length];
-	public ItemDefinition milkBottle;
+	public Booze[] kumisFluids = new Booze[6];
+	public BlockBoozeDefinition[] kumisFluidBlocks = new BlockBoozeDefinition[kumisFluids.length];
+	public ItemBucketBoozeDefinition[] kumisFluidBuckets = new ItemBucketBoozeDefinition[kumisFluids.length];
+	public ItemDefinition kumisBottle;
 
 	@Override
 	public void preInit()
@@ -112,11 +111,11 @@ public class GrcMilkFluids extends GrcModuleBase
 			fluidToCheeseType.put(fluid, cheese);
 		}
 
-		this.milkBottle = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, boozeMilk));
-		BoozeRegistryHelper.initializeBooze(boozeMilk, boozeMilkBlocks, boozeMilkBuckets, milkBasename, GrowthCraftMilk.getConfig().milkColor);
-		boozeMilk[5].setColor(GrowthCraftMilk.getConfig().evilMilkColor);
-		boozeMilkBlocks[5].getBlock().refreshColor();
-		for (BlockBoozeDefinition def : boozeMilkBlocks)
+		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, kumisFluids));
+		BoozeRegistryHelper.initializeBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets, kumisBasename, GrowthCraftMilk.getConfig().milkColor);
+		kumisFluids[5].setColor(GrowthCraftMilk.getConfig().evilMilkColor);
+		kumisFluidBlocks[5].getBlock().refreshColor();
+		for (BlockBoozeDefinition def : kumisFluidBlocks)
 		{
 			def.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 		}
@@ -127,43 +126,43 @@ public class GrcMilkFluids extends GrcModuleBase
 		final IEffect milkEffect = EffectBoozeMilk.create(GrowthCraftCellar.potionTipsy);
 		final IEffect evilMilkEffect = new EffectEvilBoozeMilk();
 
-		final FluidStack[] fs = new FluidStack[boozeMilk.length];
-		for (int i = 0; i < boozeMilk.length; ++i)
+		final FluidStack[] fs = new FluidStack[kumisFluids.length];
+		for (int i = 0; i < kumisFluids.length; ++i)
 		{
-			fs[i] = new FluidStack(boozeMilk[i], 1);
+			fs[i] = new FluidStack(kumisFluids[i], 1);
 		}
 
-		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[0])
+		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[0])
 			.tags(BoozeTag.FERMENTED)
 			.getEffect()
 				.setTipsy(0.10f, 900)
 				.addEffect(milkEffect);
 
-		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[1])
+		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[1])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT)
 			.getEffect()
 				.setTipsy(0.10f, 900)
 				.addEffect(milkEffect);
 
-		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[2])
+		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[2])
 			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED)
 			.getEffect()
 				.setTipsy(0.10f, 900)
 				.addEffect(milkEffect);
 
-		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[3])
+		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[3])
 			.tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
 			.getEffect()
 				.setTipsy(0.10f, 900)
 				.addEffect(milkEffect);
 
-		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[4])
+		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[4])
 			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
 			.getEffect()
 				.setTipsy(0.50f, 900)
 				.addEffect(milkEffect);
 
-		GrowthCraftCellar.boozeBuilderFactory.create(boozeMilk[5])
+		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[5])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
 			.getEffect()
 				.setTipsy(0.10f, 900)
@@ -173,7 +172,7 @@ public class GrcMilkFluids extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		milkBottle.register("grcmilk.MilkBottle");
+		kumisBottle.register("grcmilk.KumisBottle");
 
 		butterMilk.registerObjects("grcmilk", "ButterMilk");
 		cream.registerObjects("grcmilk", "Cream");
@@ -188,7 +187,7 @@ public class GrcMilkFluids extends GrcModuleBase
 			pair.getValue().registerObjects("grcmilk", "Cheese" + StringUtils.capitalize(pair.getKey().name));
 		}
 
-		BoozeRegistryHelper.registerBooze(boozeMilk, boozeMilkBlocks, boozeMilkBuckets, milkBottle, milkBasename, null);
+		BoozeRegistryHelper.registerBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets, kumisBottle, kumisBasename, null);
 		registerFermentations();
 
 		GrowthCraftCellar.boozeBuilderFactory.create(rennet.fluid.getFluid())
