@@ -33,7 +33,7 @@ public class EventHandlerBucketFill
 
 	public EventHandlerBucketFill register(Block block, Item item)
 	{
-		return register(block, item);
+		return register(block, new ItemStack(item, 1));
 	}
 
 	private ItemStack fillCustomBucket(World world, MovingObjectPosition pos)
