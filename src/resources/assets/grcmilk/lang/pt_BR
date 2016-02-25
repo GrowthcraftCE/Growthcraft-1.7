@@ -1,0 +1,180 @@
+# Creative Tabs
+itemGroup.grcmilk.CreativeTab=Growthcraft Laticínios
+
+# Items
+## Cheese
+item.grcmilk.Cheese.cheddar.name=Cheddar
+item.grcmilk.Cheese.gorgonzola.name=Gorgonzola
+item.grcmilk.Cheese.emmentaler.name=Queijo Suíço
+item.grcmilk.Cheese.appenzeller.name=Queijo Appenzeller
+item.grcmilk.Cheese.asiago.name=Queijo Asiago
+item.grcmilk.Cheese.parmesan.name=Queijo Parmesão
+item.grcmilk.Cheese.monterey.name=Queijo Monterey
+item.grcmilk.Cheese.ricotta.name=Ricotta
+item.grcmilk.CheeseCloth.name=Morim
+## Butter
+item.grcmilk.Butter.salted.name=Manteiga (Salgada)
+item.grcmilk.Butter.unsalted.name=Manteiga (Sem sal)
+## Ice Cream
+item.grcmilk.IceCream.plain.name=Sorvete (Sem sabor)
+item.grcmilk.IceCream.chocolate.name=Sorvete (Chocolate)
+item.grcmilk.StarterCulture.name=Starter Culture**
+item.grcmilk.Yogurt.name=Yogurt
+## Other
+item.grcmilk.Stomach.name=Estômago
+
+# Blocks
+## Cheese
+tile.grcmilk.CheeseBlock.cheddar.unwaxed.name=Cheddar (Não-Encerado)
+tile.grcmilk.CheeseBlock.cheddar.unaged.name=Cheddar (Não Curado)
+tile.grcmilk.CheeseBlock.cheddar.aged.name=Cheddar (Curado)
+tile.grcmilk.CheeseBlock.cheddar.cut.name=Cheddar
+tile.grcmilk.CheeseBlock.gorgonzola.unaged.name=Gorgonzola (Não Curado)
+tile.grcmilk.CheeseBlock.gorgonzola.aged.name=Gorgonzola (Curado)
+tile.grcmilk.CheeseBlock.gorgonzola.cut.name=Gorgonzola
+tile.grcmilk.CheeseBlock.emmentaler.unaged.name=Queijo Suíço (Não Curado)
+tile.grcmilk.CheeseBlock.emmentaler.aged.name=Queijo Suíço  (Curado)
+tile.grcmilk.CheeseBlock.emmentaler.cut.name=Queijo Suíço
+tile.grcmilk.CheeseBlock.appenzeller.unaged.name=Queijo Appenzeller (Não Curado)
+tile.grcmilk.CheeseBlock.appenzeller.aged.name=Queijo Appenzeller (Curado)
+tile.grcmilk.CheeseBlock.appenzeller.cut.name=Queijo Appenzeller
+tile.grcmilk.CheeseBlock.asiago.unaged.name=Queijo Asiago (Não Curado)
+tile.grcmilk.CheeseBlock.asiago.aged.name=Queijo Asiago (Curado)
+tile.grcmilk.CheeseBlock.asiago.cut.name=Queijo Asiago
+tile.grcmilk.CheeseBlock.parmesan.unaged.name=Queijo Parmesão (Não Curado)
+tile.grcmilk.CheeseBlock.parmesan.aged.name=Queijo Parmesão (Curado)
+tile.grcmilk.CheeseBlock.parmesan.cut.name=Queijo Parmesão
+tile.grcmilk.CheeseBlock.monterey.unwaxed.name=Queijo Monterey (Não-Encerado)
+tile.grcmilk.CheeseBlock.monterey.unaged.name=Queijo Monterey (Não Curado)
+tile.grcmilk.CheeseBlock.monterey.aged.name=Queijo Monterey (Curado)
+tile.grcmilk.CheeseBlock.monterey.cut.name=Queijo Monterey
+tile.grcmilk.CheeseBlock.ricotta.unaged.name=Ricotta (Não Curado)
+tile.grcmilk.CheeseBlock.ricotta.aged.name=Ricotta (Curado)
+## Other
+tile.grcmilk.ButterChurn.name=Batedeira de Manteiga
+tile.grcmilk.CheeseBlock.name=Bloco de Queijo
+tile.grcmilk.CheesePress.name=Prensa de Queijo
+tile.grcmilk.CheeseVat.name=Tanque de Queijo
+tile.grcmilk.HangingCurds.name=Coalhada Pendurada
+tile.grcmilk.HangingCurds.cheddar.name=Coalhada de Cheddar
+tile.grcmilk.HangingCurds.gorgonzola.name=Coalhada de Gorgonzola
+tile.grcmilk.HangingCurds.emmentaler.name=Coalhada de Queijo Suíço
+tile.grcmilk.HangingCurds.appenzeller.name=Coalhada de Queijo Appenzeller
+tile.grcmilk.HangingCurds.asiago.name=Coalhada de Queijo Asiago 
+tile.grcmilk.HangingCurds.parmesan.name=Coalhada de Queijo Parmesão
+tile.grcmilk.HangingCurds.monterey.name=Coalhada de Queijo Monterey 
+tile.grcmilk.HangingCurds.ricotta.name=Coalhada de Ricotta 
+tile.grcmilk.HangingCurds.cheddar.dried.name=Coalhada Seca de Cheddar 
+tile.grcmilk.HangingCurds.gorgonzola.dried.name=Coalhada Seca de Gorgonzola 
+tile.grcmilk.HangingCurds.emmentaler.dried.name=Coalhada Seca de Queijo Suiço 
+tile.grcmilk.HangingCurds.appenzeller.dried.name=Coalhada Seca de Queijo Appenzeller
+tile.grcmilk.HangingCurds.asiago.dried.name=Coalhada Seca de Queijo Asiago 
+tile.grcmilk.HangingCurds.parmesan.dried.name=Coalhada Seca de Queijo Parmesãon 
+tile.grcmilk.HangingCurds.monterey.dried.name=Coalhada Seca de Queijo Monterey 
+tile.grcmilk.HangingCurds.ricotta.dried.name=Coalhada Seca de Ricotta 
+tile.grcmilk.Pancheon.name=Pancheon
+
+### Cheese Vat Fluid Tanks
+grcmilk.cheese_vat.fluid_tank.primary=Primary
+grcmilk.cheese_vat.fluid_tank.rennet=Rennet
+grcmilk.cheese_vat.fluid_tank.waste=Waste
+grcmilk.cheese_vat.fluid_tank.recipe=Secondary
+
+# Fluids
+## Tags
+grc.fluids.tag.milk=Milk
+grc.fluids.tag.milk_curds=Milk Curds
+grc.fluids.tag.rennet=Rennet
+grc.fluids.tag.cream=Cream
+## Standard
+### Fluids
+fluid.grcmilk.ButterMilk=Butter Milk
+fluid.grcmilk.Cream=Cream
+fluid.grcmilk.Curds=Curds
+fluid.grcmilk.Milk=Milk
+fluid.grcmilk.Rennet=Rennet
+fluid.grcmilk.SkimMilk=Skim Milk
+fluid.grcmilk.Whey=Whey
+fluid.grcmilk.CheeseCheddar=Cheddar Cheese
+fluid.grcmilk.CheeseGorgonzola=Gorgonzola Cheese
+fluid.grcmilk.CheeseEmmentaler=Swiss Cheese
+fluid.grcmilk.CheeseAppenzeller=Appenzeller Cheese
+fluid.grcmilk.CheeseAsiago=Asiago Cheese
+fluid.grcmilk.CheeseParmesan=Parmesan Cheese
+fluid.grcmilk.CheeseMonterey=Monterey Cheese
+fluid.grcmilk.CheeseRicotta=Ricotta Cheese
+### Blocks
+tile.grcmilk.BlockFluidButterMilk.name=Butter Milk
+tile.grcmilk.BlockFluidCream.name=Cream
+tile.grcmilk.BlockFluidMilk.name=Milk
+tile.grcmilk.BlockFluidRennet.name=Rennet
+tile.grcmilk.BlockFluidSkimMilk.name=Skim Milk
+tile.grcmilk.BlockFluidWhey.name=Whey
+### Bottles
+item.grcmilk.BottleFluidButterMilk.name=Butter Milk Bottle
+item.grcmilk.BottleFluidCream.name=Cream Bottle
+item.grcmilk.BottleFluidMilk.name=Milk Bottle
+item.grcmilk.BottleFluidRennet.name=Rennet Bottle
+item.grcmilk.BottleFluidSkimMilk.name=Skim Milk Bottle
+item.grcmilk.BottleFluidWhey.name=Whey Bottle
+### Buckets
+item.bucket.fluid.grcmilk.ButterMilk.name=Butter Milk Bucket
+item.bucket.fluid.grcmilk.Cream.name=Cream Bucket
+item.bucket.fluid.grcmilk.Milk.name=Milk Bucket
+item.bucket.fluid.grcmilk.Rennet.name=Rennet Bucket
+item.bucket.fluid.grcmilk.SkimMilk.name=Skim Milk Bucket
+item.bucket.fluid.grcmilk.Whey.name=Whey Bucket
+
+## Salt Water
+fluid.grcmilk.SaltWater=Salt Water
+tile.grcmilk.BlockFluidSaltWater.name=Salt Water
+item.grcmilk.BottleFluidSaltWater.name=Salt Water Bottle
+item.bucket.fluid.grcmilk.SaltWater.name=Salt Water Bucket
+
+## Booze
+fluid.grcmilk.milk=Milk
+fluid.grcmilk.milk0=Milk
+fluid.grcmilk.milk1=Kumis
+fluid.grcmilk.milk2=Kumis
+fluid.grcmilk.milk3=Kumis
+fluid.grcmilk.milk4=Kumis
+fluid.grcmilk.milk5=Kumis
+fluid.grcmilk.milk6=Vile Milk
+fluid.grcmilk.milk6.desc=Even the sweetest of things can become corrupt.
+
+## Booze Blocks
+tile.fluid.grcmilk.milk.name=Milk
+tile.fluid.grcmilk.milk0.name=Milk
+tile.fluid.grcmilk.milk1.name=Kumis
+tile.fluid.grcmilk.milk2.name=Kumis
+tile.fluid.grcmilk.milk3.name=Kumis
+tile.fluid.grcmilk.milk4.name=Kumis
+tile.fluid.grcmilk.milk5.name=Kumis
+tile.fluid.grcmilk.milk6.name=Vile Milk
+
+## Booze Bucket
+item.bucket.fluid.grcmilk.milk.name=Milk Bucket
+item.bucket.fluid.grcmilk.milk0.name=Milk Bucket
+item.bucket.fluid.grcmilk.milk1.name=Kumis Bucket
+item.bucket.fluid.grcmilk.milk2.name=Kumis Bucket
+item.bucket.fluid.grcmilk.milk3.name=Kumis Bucket
+item.bucket.fluid.grcmilk.milk4.name=Kumis Bucket
+item.bucket.fluid.grcmilk.milk5.name=Kumis Bucket
+item.bucket.fluid.grcmilk.milk6.name=Vile Milk Bucket
+
+# Effects
+grc.effect.booze_milk=Removes all effects (Except Tipsy)
+
+
+# WAILA
+grcmilk.cheese.aging.prefix=Aging :
+grcmilk.cheese.aging.progress.format= %d%%
+grcmilk.cheese.slices.prefix=Slices :
+grcmilk.cheese.slices.value.format= %d / %d
+grcmilk.cheese_press.itemslot.item=%s
+grcmilk.cheese_press.pressing.state.false=Unpressed
+grcmilk.cheese_press.pressing.state.prefix=State :
+grcmilk.cheese_press.pressing.state.true=Pressed
+grcmilk.hanging_curds.dried=Drained
+grcmilk.hanging_curds.drying.prefix=Draining :
+grcmilk.hanging_curds.drying.progress.format= %d%%
