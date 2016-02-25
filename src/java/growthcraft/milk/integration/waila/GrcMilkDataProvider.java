@@ -27,9 +27,11 @@ import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.nbt.NBTHelper;
+import growthcraft.milk.common.tileentity.TileEntityButterChurn;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import growthcraft.milk.common.tileentity.TileEntityCheesePress;
 import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
+import growthcraft.milk.util.TagFormatterButterChurn;
 import growthcraft.milk.util.TagFormatterCheesePress;
 
 import cpw.mods.fml.common.Optional;
@@ -76,6 +78,10 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 	{
 		final TileEntity te = accessor.getTileEntity();
 		final NBTTagCompound nbt = accessor.getNBTData();
+		if (te instanceof TileEntityButterChurn)
+		{
+			TagFormatterButterChurn.INSTANCE.format(tooltip, nbt);
+		}
 		if (te instanceof TileEntityCheesePress)
 		{
 			TagFormatterCheesePress.INSTANCE.format(tooltip, nbt);
@@ -123,6 +129,11 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 		return tooltip;
 	}
 
+	private void getButterChurnData(TileEntityButterChurn te, NBTTagCompound nbt)
+	{
+		nbt.setTag("item", NBTHelper.writeItemStackToNBT(te.getStackInSlot(0), new NBTTagCompound()));
+	}
+
 	private void getCheesePressData(TileEntityCheesePress te, NBTTagCompound nbt)
 	{
 		nbt.setBoolean("pressed", te.isPressed());
@@ -133,6 +144,7 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 	@Optional.Method(modid = "Waila")
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
 	{
+		if (te instanceof TileEntityButterChurn) getButterChurnData((TileEntityButterChurn)te, tag);
 		if (te instanceof TileEntityCheesePress) getCheesePressData((TileEntityCheesePress)te, tag);
 		if (te instanceof TileEntityCheeseBlock)
 		{

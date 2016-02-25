@@ -38,6 +38,7 @@ import growthcraft.milk.common.block.BlockCheesePress;
 import growthcraft.milk.common.block.BlockCheeseVat;
 import growthcraft.milk.common.block.BlockHangingCurds;
 import growthcraft.milk.common.block.BlockPancheon;
+import growthcraft.milk.common.block.BlockThistle;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
@@ -83,6 +84,7 @@ public class GrcMilkBlocks extends GrcModuleBase
 	public BlockDefinition cheeseVat;
 	public BlockDefinition hangingCurds;
 	public BlockDefinition pancheon;
+	public BlockDefinition thistle;
 
 	@Override
 	public void preInit()
@@ -93,6 +95,7 @@ public class GrcMilkBlocks extends GrcModuleBase
 		this.cheeseVat = new BlockDefinition(new BlockCheeseVat());
 		this.hangingCurds = new BlockDefinition(new BlockHangingCurds());
 		this.pancheon = new BlockDefinition(new BlockPancheon());
+		this.thistle = new BlockDefinition(new BlockThistle());
 	}
 
 	@Override
@@ -104,6 +107,7 @@ public class GrcMilkBlocks extends GrcModuleBase
 		cheeseVat.register("grcmilk.CheeseVat");
 		hangingCurds.register("grcmilk.HangingCurds", ItemBlockHangingCurds.class);
 		pancheon.register("grcmilk.Pancheon");
+		thistle.register("grcmilk.Thistle");
 
 		GameRegistry.addRecipe(new ShapelessItemComparableRecipe(new DriedCurdComparator(),
 			EnumCheeseType.RICOTTA.asStack(),

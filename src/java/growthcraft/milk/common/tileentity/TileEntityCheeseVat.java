@@ -23,32 +23,42 @@
  */
 package growthcraft.milk.common.tileentity;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import io.netty.buffer.ByteBuf;
 
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.item.ItemTest;
 import growthcraft.api.core.nbt.NBTStringTagList;
+import growthcraft.api.core.stream.StreamUtils;
 import growthcraft.api.milk.cheesevat.ICheeseVatRecipe;
 import growthcraft.api.milk.MilkFluidTags;
 import growthcraft.api.milk.MilkRegistry;
 import growthcraft.api.milk.util.MilkTest;
-import growthcraft.cellar.common.tileentity.component.HeatBlockComponent;
+import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
+import growthcraft.core.common.inventory.AccesibleSlots;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
+import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
 import growthcraft.core.common.tileentity.IItemHandler;
 import growthcraft.core.common.tileentity.ITileHeatedDevice;
 import growthcraft.core.common.tileentity.ITileNamedFluidTanks;
+import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.milk.common.item.EnumCheeseType;
+import growthcraft.milk.common.tileentity.cheesevat.CheeseVatState;
 import growthcraft.milk.GrowthCraftMilk;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -57,7 +67,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IItemHandler, ITileHeatedDevice, ITileNamedFluidTanks
+public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IItemHandler, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice
 {
 	public static enum FluidTankType
 	{
@@ -83,19 +93,65 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	private static FluidTankType[] recipeTanks = { FluidTankType.PRIMARY, FluidTankType.RECIPE };
-	private static int[][] accessibleSlots = {
-		{ 0 },
-		{ 0 },
-		{ 0 },
-		{ 0 },
-		{ 0 },
-		{ 0 }
-	};
+	private static AccesibleSlots accessibleSlots = new AccesibleSlots(new int[][]{
+		{ 0, 1, 2 },
+		{ 0, 1, 2 },
+		{ 0, 1, 2 },
+		{ 0, 1, 2 },
+		{ 0, 1, 2 },
+		{ 0, 1, 2 }
+	});
 
-	private boolean recheckRecipe;
-	private HeatBlockComponent heatComponent = new HeatBlockComponent(this);
 	private DeviceFluidSlot primaryFluidSlot = new DeviceFluidSlot(this, FluidTankType.PRIMARY.id);
+	private DeviceFluidSlot rennetFluidSlot = new DeviceFluidSlot(this, FluidTankType.RENNET.id);
 	private DeviceFluidSlot wasteFluidSlot = new DeviceFluidSlot(this, FluidTankType.WASTE.id);
+	private boolean recheckRecipe;
+	private TileHeatingComponent heatComponent = new TileHeatingComponent(this);
+	private CheeseVatState vatState = CheeseVatState.IDLE;
+	private float progress;
+	private int progressMax;
+
+	public boolean isIdle()
+	{
+		return vatState == CheeseVatState.IDLE;
+	}
+
+	public boolean isWorking()
+	{
+		return !isIdle();
+	}
+
+	private void setVatState(CheeseVatState state)
+	{
+		this.vatState = state;
+		markForBlockUpdate();
+	}
+
+	private void goIdle()
+	{
+		setVatState(CheeseVatState.IDLE);
+	}
+
+	private void setupProgress(int value)
+	{
+		this.progress = 0;
+		this.progressMax = value;
+	}
+
+	private void resetProgress()
+	{
+		setupProgress(0);
+	}
+
+	@Override
+	public float getDeviceProgress()
+	{
+		if (progressMax > 0)
+		{
+			return progress / (float)progressMax;
+		}
+		return 0.0f;
+	}
 
 	@Override
 	public boolean isHeated()
@@ -126,13 +182,13 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	{
 		return new FluidTank[] {
 			// milk
-			new FluidTank(5000),
+			new FluidTank(GrowthCraftMilk.getConfig().cheeseVatPrimaryTankCapacity),
 			// rennet
-			new FluidTank(333),
-			// whey
-			new FluidTank(1000),
+			new FluidTank(GrowthCraftMilk.getConfig().cheeseVatRennetTankCapacity),
+			// waste
+			new FluidTank(GrowthCraftMilk.getConfig().cheeseVatWasteTankCapacity),
 			// recipe fluid
-			new FluidTank(1000)
+			new FluidTank(GrowthCraftMilk.getConfig().cheeseVatRecipeTankCapacity)
 		};
 	}
 
@@ -164,18 +220,58 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 	{
-		return accessibleSlots[side];
+		return accessibleSlots.slotsAt(side);
 	}
 
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack, int side)
 	{
+		return accessibleSlots.sideContains(side, index);
+	}
+
+	private boolean activateCurdTransition(boolean checkOnly)
+	{
+		final ItemStack starterCultureStack = GrowthCraftMilk.items.starterCulture.asStack();
+		final int slot = InventoryProcessor.instance().findItemSlot(this, starterCultureStack);
+		if (slot < 0) return false;
+
+		final FluidStack milkStack = primaryFluidSlot.get();
+
+		if (!FluidTest.hasTags(milkStack, MilkFluidTags.MILK)) return false;
+		if (!primaryFluidSlot.isFull()) return false;
+
+		final FluidStack rennetStack = rennetFluidSlot.get();
+		if (!FluidTest.hasTags(rennetStack, MilkFluidTags.RENNET)) return false;
+		if (rennetFluidSlot.isFull()) return false;
+
+		if (!checkOnly)
+		{
+			decrStackSize(slot, 1);
+			primaryFluidSlot.set(FluidUtils.exchangeFluid(milkStack, GrowthCraftMilk.fluids.curds.getFluid()));
+			rennetFluidSlot.clear();
+			wasteFluidSlot.fill(GrowthCraftMilk.fluids.whey.fluid.asFluidStack(GrowthCraftMilk.getConfig().cheeseVatMilkToCurdsWheyAmount), true);
+		}
 		return true;
 	}
 
-	private void commitMilkCurdRecipe()
+	private boolean activateWheyTransition(boolean checkOnly)
 	{
-		GrowthCraftMilk.getLogger().info("Fluid appears to be curds");
+		final FluidStack milkStack = primaryFluidSlot.get();
+		if (FluidTest.hasTags(milkStack, MilkFluidTags.WHEY) && primaryFluidSlot.isFull())
+		{
+			if (!checkOnly)
+			{
+				final Fluid fluid = GrowthCraftMilk.fluids.cheeses.get(EnumCheeseType.RICOTTA).getFluid();
+				primaryFluidSlot.set(FluidUtils.exchangeFluid(primaryFluidSlot.get(), fluid));
+				wasteFluidSlot.fill(GrowthCraftMilk.fluids.whey.fluid.asFluidStack(GrowthCraftMilk.getConfig().cheeseVatWheyToRicottaWheyAmount), true);
+			}
+			return true;
+		}
+		return false;
+	}
+
+	private boolean commitMilkCurdRecipe(boolean checkOnly)
+	{
 		final List<FluidStack> fluids = new ArrayList<FluidStack>();
 		final List<ItemStack> items = new ArrayList<ItemStack>();
 		for (FluidTankType t : recipeTanks)
@@ -194,79 +290,127 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		final ICheeseVatRecipe recipe = MilkRegistry.instance().cheeseVat().findRecipe(fluids, items);
 		if (recipe != null)
 		{
-			GrowthCraftMilk.getLogger().info("Recipe %s was found", recipe);
 			final List<ItemStack> inputItems = recipe.getInputItemStacks();
 			final List<FluidStack> inputFluids = recipe.getInputFluidStacks();
 			final int[] invSlots = InventoryProcessor.instance().findItemSlots(this, inputItems);
 			if (InventoryProcessor.instance().checkSlots(this, inputItems, invSlots))
 			{
-				GrowthCraftMilk.getLogger().info("Inventory Slots are valid");
 				if (FluidTest.hasEnoughAndExpected(inputFluids, fluids))
 				{
-					GrowthCraftMilk.getLogger().info("Fluids are valid");
-					InventoryProcessor.instance().consumeItemsInSlots(this, inputItems, invSlots);
-					for (int fluidIndex = 0; fluidIndex < fluids.size(); ++fluidIndex)
+					if (!checkOnly)
 					{
-						final FluidStack fluidStack = fluids.get(fluidIndex);
-						final FluidTankType t = recipeTanks[fluidIndex];
-						if (fluidStack != null)
+						InventoryProcessor.instance().consumeItemsInSlots(this, inputItems, invSlots);
+						for (int fluidIndex = 0; fluidIndex < fluids.size(); ++fluidIndex)
 						{
-							drainFluidTank(t.id, fluidStack.amount, true);
+							final FluidStack fluidStack = fluids.get(fluidIndex);
+							final FluidTankType t = recipeTanks[fluidIndex];
+							if (fluidStack != null)
+							{
+								drainFluidTank(t.id, fluidStack.amount, true);
+							}
 						}
-					}
-					GrowthCraftMilk.getLogger().info("Spawning items on tile");
-					for (ItemStack stack : recipe.getOutputItemStacks())
-					{
-						if (stack != null)
+						for (ItemStack stack : recipe.getOutputItemStacks())
 						{
-							ItemUtils.spawnItemStackAtTile(stack.copy(), this, worldObj.rand);
+							if (stack != null)
+							{
+								ItemUtils.spawnItemStackAtTile(stack.copy(), this, worldObj.rand);
+							}
 						}
-					}
-					int tankIndex = 0;
-					for (FluidStack stack : recipe.getOutputFluidStacks())
-					{
-						if (stack != null)
+						int tankIndex = 0;
+						for (FluidStack stack : recipe.getOutputFluidStacks())
 						{
-							fillFluidTank(tankIndex, stack.copy(), true);
+							if (stack != null)
+							{
+								fillFluidTank(tankIndex, stack.copy(), true);
+							}
+							// Currently the cheese vat does not support more than 1 fluid output.
+							tankIndex++;
+							break;
 						}
-						// Currently the cheese vat does not support more than 1 fluid output.
-						tankIndex++;
-						break;
+						markForBlockUpdate();
 					}
-					markForBlockUpdate();
+					return true;
 				}
 			}
 		}
-		else
-		{
-			GrowthCraftMilk.getLogger().info("No recipe found.");
-		}
+		return false;
 	}
 
 	private void commitRecipe()
 	{
-		GrowthCraftMilk.getLogger().info("Commiting Recipe");
-
 		final FluidStack stack = primaryFluidSlot.get();
 		if (FluidTest.hasTags(stack, MilkFluidTags.MILK_CURDS))
 		{
-			commitMilkCurdRecipe();
+			if (commitMilkCurdRecipe(true))
+			{
+				setupProgress(GrowthCraftMilk.getConfig().cheeseVatCheeseTime);
+				setVatState(CheeseVatState.PREPARING_CHEESE);
+			}
 		}
+	}
+
+	private void onFinishedProgress()
+	{
+		switch (vatState)
+		{
+			case PREPARING_RICOTTA:
+				activateWheyTransition(false);
+				break;
+			case PREPARING_CURDS:
+				activateCurdTransition(false);
+				break;
+			case PREPARING_CHEESE:
+				commitMilkCurdRecipe(false);
+				break;
+			default:
+		}
+		resetProgress();
 	}
 
 	@Override
 	protected void updateDevice()
 	{
-		if (recheckRecipe)
+		heatComponent.update();
+		if (!isIdle())
 		{
-			this.recheckRecipe = false;
-			if (isHeated()) commitRecipe();
+			if (isHeated())
+			{
+				if (progress < progressMax)
+				{
+					progress += 1 * getHeatMultiplier();
+				}
+				else
+				{
+					onFinishedProgress();
+					goIdle();
+				}
+			}
+			else
+			{
+				if (progress > 0)
+				{
+					progress -= 1;
+				}
+				else
+				{
+					goIdle();
+				}
+			}
+		}
+		else
+		{
+			if (recheckRecipe)
+			{
+				this.recheckRecipe = false;
+				if (isHeated()) commitRecipe();
+			}
 		}
 	}
 
 	@Override
 	protected FluidStack doDrain(ForgeDirection dir, int amount, boolean doDrain)
 	{
+		if (!isIdle()) return null;
 		return wasteFluidSlot.consume(amount, doDrain);
 	}
 
@@ -290,6 +434,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	@Override
 	protected int doFill(ForgeDirection dir, FluidStack stack, boolean doFill)
 	{
+		if (!isIdle()) return 0;
 		int result = 0;
 
 		if (MilkTest.isMilk(stack) || FluidTest.hasTags(stack, MilkFluidTags.WHEY))
@@ -300,7 +445,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		{
 			if (primaryTankHasMilk())
 			{
-				result = fillFluidTank(FluidTankType.RENNET.id, stack, doFill);
+				result = rennetFluidSlot.fill(stack, doFill);
 			}
 		}
 		else if (MilkRegistry.instance().cheeseVat().isFluidIngredient(stack))
@@ -313,31 +458,25 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		return result;
 	}
 
-	private boolean doSwordActivation(EntityPlayer player, ItemStack stack)
+	private boolean doSwordActivation(EntityPlayer _player, ItemStack _stack)
 	{
 		if (!isHeated()) return false;
 		final FluidStack milkStack = primaryFluidSlot.get();
 		if (FluidTest.hasTags(milkStack, MilkFluidTags.MILK))
 		{
-			if (!FluidTest.hasTags(milkStack, MilkFluidTags.MILK)) return false;
-			if (!primaryFluidSlot.isFull()) return false;
-
-			final FluidStack rennetStack = getFluidStack(FluidTankType.RENNET.id);
-			if (!FluidTest.hasTags(rennetStack, MilkFluidTags.RENNET)) return false;
-			if (rennetStack.amount < 333) return false;
-
-			primaryFluidSlot.set(FluidUtils.exchangeFluid(milkStack, GrowthCraftMilk.fluids.curds.getFluid()));
-			clearTank(FluidTankType.RENNET.id);
-			wasteFluidSlot.fill(GrowthCraftMilk.fluids.whey.fluid.asFluidStack(1000), true);
-			return true;
+			if (activateCurdTransition(true))
+			{
+				setupProgress(GrowthCraftMilk.getConfig().cheeseVatCurdTime);
+				setVatState(CheeseVatState.PREPARING_CURDS);
+				return true;
+			}
 		}
 		else if (FluidTest.hasTags(milkStack, MilkFluidTags.WHEY))
 		{
-			if (primaryFluidSlot.isFull())
+			if (activateWheyTransition(true))
 			{
-				final Fluid fluid = GrowthCraftMilk.fluids.cheeses.get(EnumCheeseType.RICOTTA).getFluid();
-				primaryFluidSlot.set(FluidUtils.exchangeFluid(primaryFluidSlot.get(), fluid));
-				wasteFluidSlot.fill(GrowthCraftMilk.fluids.whey.fluid.asFluidStack(1000), true);
+				setupProgress(GrowthCraftMilk.getConfig().cheeseVatWheyTime);
+				setVatState(CheeseVatState.PREPARING_RICOTTA);
 			}
 		}
 		return false;
@@ -375,12 +514,18 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	@Override
 	public boolean tryPlaceItem(EntityPlayer player, ItemStack stack)
 	{
+		if (!isIdle()) return false;
 		if (!ItemTest.isValid(stack)) return false;
-		if (stack.getItem() instanceof ItemSword)
+		final Item item = stack.getItem();
+		if (item instanceof ItemSword)
 		{
 			return doSwordActivation(player, stack);
 		}
-		else if (GrowthCraftMilk.items.cheeseCloth.equals(stack.getItem()))
+		else if (GrowthCraftMilk.items.starterCulture.equals(item))
+		{
+			return addItemIngredient(player, stack);
+		}
+		else if (GrowthCraftMilk.items.cheeseCloth.equals(item))
 		{
 			return collectCurdInCheeseCloth(player, stack);
 		}
@@ -394,6 +539,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	@Override
 	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
 	{
+		if (!isIdle()) return false;
 		if (onHand == null)
 		{
 			final int slot = InventoryProcessor.instance().findNextPresentFromEnd(this);
@@ -422,5 +568,66 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 			tagList.add(type.getUnlocalizedName());
 		}
 		tag.setTag("tank_names", tagList.getTag());
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		if (nbt.hasKey("progress_max"))
+		{
+			this.progressMax = nbt.getInteger("progress_max");
+		}
+		if (nbt.hasKey("progress"))
+		{
+			this.progress = nbt.getFloat("progress");
+		}
+		heatComponent.readFromNBT(nbt, "heat_component");
+		this.vatState = CheeseVatState.getStateSafe(nbt.getString("vat_state"));
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt)
+	{
+		super.writeToNBT(nbt);
+		nbt.setInteger("progress_max", progressMax);
+		nbt.setFloat("progress", progress);
+		heatComponent.writeToNBT(nbt, "heat_component");
+		nbt.setString("vat_state", vatState.name);
+	}
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	public boolean readFromStream_CheeseVat(ByteBuf stream) throws IOException
+	{
+		this.progressMax = stream.readInt();
+		this.progress = stream.readFloat();
+		heatComponent.readFromStream(stream);
+		String name = "idle";
+		try
+		{
+			name = StreamUtils.readStringASCII(stream);
+		}
+		catch (UnsupportedEncodingException ex)
+		{
+			ex.printStackTrace();
+		}
+		this.vatState = CheeseVatState.getStateSafe(name);
+		return false;
+	}
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	public void writeToStream_CheeseVat(ByteBuf stream) throws IOException
+	{
+		stream.writeInt(progressMax);
+		stream.writeFloat(progress);
+		heatComponent.writeToStream(stream);
+		try
+		{
+			StreamUtils.writeStringASCII(stream, vatState.name);
+		}
+		catch (UnsupportedEncodingException ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 }

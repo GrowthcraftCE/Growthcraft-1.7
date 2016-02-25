@@ -27,11 +27,18 @@ import growthcraft.core.ConfigBase;
 
 public class GrcMilkConfig extends ConfigBase
 {
-	@ConfigOption(catergory="Booze/Milk", name="Color", desc="What color is milk?")
+	@ConfigOption(catergory="Milk", name="Enabled", desc="Should we enable a fluid for Milk? (you may bork the mod if you don't have an alternative, eg. Forestry's Milk)")
+	public boolean milkEnabled = true;
+
+	@ConfigOption(catergory="Milk", name="Color", desc="What color is milk?")
 	public int milkColor = 0xFFFFFF;
 
-	@ConfigOption(catergory="Booze/Evil Milk", name="Color", desc="What color is evil milk?")
-	public int evilMilkColor = 0x7F9A65;
+
+	@ConfigOption(catergory="Booze/Kumis", name="Color", desc="What color is kumis?")
+	public int kumisColor = 0xFFFFFF;
+
+	@ConfigOption(catergory="Booze/Poisoned Kumis", name="Color", desc="What color is poisoned kumis?")
+	public int poisonedKumisColor = 0x7F9A65;
 
 
 	@ConfigOption(catergory="Item/Stomach", name="Drop Rate", desc="How often do baby calves drop their stomachs?")
@@ -42,6 +49,34 @@ public class GrcMilkConfig extends ConfigBase
 
 	@ConfigOption(catergory="Item/Stomach", name="Max Dropped", desc="What is the maximum number of stomachs dropped?")
 	public int stomachMaxDropped = 4;
+
+
+	@ConfigOption(catergory="Device/Cheese Vat", name="Primary Tank Capacity", desc="How much fluid does the primary tank hold? (the tank with Milk)")
+	public int cheeseVatPrimaryTankCapacity = 5000;
+
+	@ConfigOption(catergory="Device/Cheese Vat", name="Rennet Tank Capacity", desc="How much fluid does the rennet tank hold? (the tank with Rennet obviously)")
+	public int cheeseVatRennetTankCapacity = 333;
+
+	@ConfigOption(catergory="Device/Cheese Vat", name="Waste Tank Capacity", desc="How much fluid does the waste tank hold? (the tank with whey)")
+	public int cheeseVatWasteTankCapacity = 1000;
+
+	@ConfigOption(catergory="Device/Cheese Vat", name="Recipe Tank Capacity", desc="How much fluid does the recipe tank hold? (the tank with any recipe related fluid)")
+	public int cheeseVatRecipeTankCapacity = 1000;
+
+	@ConfigOption(catergory="Device/Cheese Vat", name="Whey Transition Time", desc="How long does it take to change whey to ricotta?")
+	public int cheeseVatWheyTime = 2400;
+
+	@ConfigOption(catergory="Device/Cheese Vat", name="Curd Transition Time", desc="How long does it take to change milk to curds?")
+	public int cheeseVatCurdTime = 2400;
+
+	@ConfigOption(catergory="Device/Cheese Vat", name="Cheese Transition Time", desc="How long does it take to change curds to cheese?")
+	public int cheeseVatCheeseTime = 2400;
+
+	@ConfigOption(catergory="Device/Cheese Vat", name="Milk To Curds Whey Amount", desc="How much Whey is produced when transitioning from Milk to Curds?")
+	public int cheeseVatMilkToCurdsWheyAmount = 1000;
+
+	@ConfigOption(catergory="Device/Cheese Vat", name="Whey To Ricotta Whey Amount", desc="How much Whey is produced when transitioning from Whey to Ricotta?")
+	public int cheeseVatWheyToRicottaWheyAmount = 1000;
 
 
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")

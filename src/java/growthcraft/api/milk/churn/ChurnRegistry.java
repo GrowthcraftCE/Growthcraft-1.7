@@ -23,13 +23,17 @@
  */
 package growthcraft.api.milk.churn;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.fluids.FluidKey;
+import growthcraft.api.core.fluids.FluidTest;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -38,12 +42,30 @@ import net.minecraftforge.fluids.FluidStack;
 public class ChurnRegistry implements IChurnRegistry
 {
 	protected ILogger logger = NullLogger.INSTANCE;
-	private Map<Fluid, ChurnRecipe> recipes = new HashMap<Fluid, ChurnRecipe>();
+	private Map<Fluid, IChurnRecipe> recipes = new HashMap<Fluid, IChurnRecipe>();
+	private Set<FluidKey> fluidIngredients = new HashSet<FluidKey>();
 
 	@Override
 	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
+	}
+
+	@Override
+	public void addRecipe(@Nonnull IChurnRecipe recipe)
+	{
+		final FluidStack fluidStack = recipe.getInputFluidStack();
+		final Fluid fluid = fluidStack.getFluid();
+		if (recipes.containsKey(fluid))
+		{
+			logger.warn("Overwriting existing churn recipe for {%s} with {%s}", fluidStack, recipe);
+		}
+		else
+		{
+			logger.info("Adding new churn recipe {%s}", recipe);
+		}
+		fluidIngredients.add(new FluidKey(fluidStack));
+		recipes.put(fluid, recipe);
 	}
 
 	@Override
@@ -55,27 +77,38 @@ public class ChurnRegistry implements IChurnRegistry
 			throw new IllegalArgumentException("The provided input fluid is invalid.");
 		}
 
-		final ChurnRecipe recipe = new ChurnRecipe(inputFluid, outputFluid, outputItem, churns);
-		if (recipes.containsKey(fluid))
-		{
-			logger.warn("Overwriting existing churn recipe for {%s} with {%s}", inputFluid, recipe);
-		}
-		else
-		{
-			logger.info("Adding new churn recipe {%s}", recipe);
-		}
+		final IChurnRecipe recipe = new ChurnRecipe(inputFluid, outputFluid, outputItem, churns);
+		addRecipe(recipe);
+	}
 
-		recipes.put(fluid, recipe);
+	@Override
+	public boolean isFluidIngredient(@Nullable Fluid fluid)
+	{
+		if (fluid != null)
+		{
+			return fluidIngredients.contains(new FluidKey(fluid));
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isFluidIngredient(@Nullable FluidStack stack)
+	{
+		if (FluidTest.isValid(stack))
+		{
+			return fluidIngredients.contains(new FluidKey(stack));
+		}
+		return false;
 	}
 
 	@Override
 	@Nullable
-	public ChurnRecipe getRecipe(FluidStack stack)
+	public IChurnRecipe getRecipe(FluidStack stack)
 	{
 		if (stack == null) return null;
 		final Fluid fluid = stack.getFluid();
 		if (fluid == null) return null;
-		final ChurnRecipe recipe = recipes.get(fluid);
+		final IChurnRecipe recipe = recipes.get(fluid);
 		if (recipe != null)
 		{
 			if (recipe.isValidForRecipe(stack)) return recipe;

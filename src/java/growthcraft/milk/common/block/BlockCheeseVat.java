@@ -24,6 +24,7 @@
 package growthcraft.milk.common.block;
 
 import java.util.List;
+import java.util.Random;
 
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.milk.client.render.RenderCheeseVat;
@@ -46,6 +47,29 @@ public class BlockCheeseVat extends GrcBlockContainer
 		setBlockName("grcmilk.CheeseVat");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityCheeseVat.class);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World world, int x, int y, int z, Random random)
+	{
+		if (random.nextInt(12) == 0)
+		{
+			final TileEntityCheeseVat te = getTileEntity(world, x, y, z);
+			if (te != null)
+			{
+				if (te.isWorking())
+				{
+					for (int i = 0; i < 3; ++i)
+					{
+						final double px = x + 0.5d + (random.nextFloat() - 0.5d);
+						final double py = y + (1d / 16d);
+						final double pz = z + 0.5d + (random.nextFloat() - 0.5d);
+						world.spawnParticle("smoke", px, py, pz, 0.0D, 1d / 32d, 0.0D);
+					}
+				}
+			}
+		}
 	}
 
 	@Override

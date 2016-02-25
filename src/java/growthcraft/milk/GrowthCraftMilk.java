@@ -28,7 +28,6 @@ import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.api.milk.MilkRegistry;
 import growthcraft.milk.client.handler.GrcMilkHandleTextureStitch;
-import growthcraft.milk.eventhandler.EventHandlerOnBabyCowDeath;
 import growthcraft.milk.common.CommonProxy;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
@@ -37,10 +36,13 @@ import growthcraft.milk.common.tileentity.TileEntityCheeseVat;
 import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
 import growthcraft.milk.common.tileentity.TileEntityPancheon;
 import growthcraft.milk.creativetab.GrcMilkCreativeTabs;
+import growthcraft.milk.eventhandler.EventHandlerOnBabyCowDeath;
 import growthcraft.milk.init.GrcMilkBlocks;
+import growthcraft.milk.init.GrcMilkEffects;
 import growthcraft.milk.init.GrcMilkFluids;
 import growthcraft.milk.init.GrcMilkItems;
 import growthcraft.milk.init.GrcMilkRecipes;
+import growthcraft.milk.init.GrcMilkUserApis;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -71,9 +73,10 @@ public class GrowthCraftMilk
 	public static CreativeTabs creativeTab;
 
 	public static final GrcMilkBlocks blocks = new GrcMilkBlocks();
-	public static final GrcMilkItems items = new GrcMilkItems();
 	public static final GrcMilkFluids fluids = new GrcMilkFluids();
+	public static final GrcMilkItems items = new GrcMilkItems();
 	public static final GrcMilkRecipes recipes = new GrcMilkRecipes();
+	public static final GrcMilkUserApis userApis = new GrcMilkUserApis();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcMilkConfig config = new GrcMilkConfig();
@@ -92,6 +95,7 @@ public class GrowthCraftMilk
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
+		GrcMilkEffects.init();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/milk.conf");
 
 		modules.add(blocks);
@@ -100,12 +104,15 @@ public class GrowthCraftMilk
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.milk.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.milk.integration.Waila());
 		modules.add(recipes);
+		modules.add(userApis);
 		if (config.debugEnabled)
 		{
 			modules.setLogger(logger);
 			MilkRegistry.instance().setLogger(logger);
 		}
 		modules.freeze();
+
+		userApis.setConfigDirectory(event.getModConfigurationDirectory());
 
 		GrowthCraftMilk.creativeTab = new GrcMilkCreativeTabs("grcmilk.CreativeTab");
 

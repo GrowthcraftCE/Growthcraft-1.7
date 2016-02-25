@@ -28,7 +28,7 @@ import growthcraft.api.core.fluids.FluidFormatString;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class ChurnRecipe
+public class ChurnRecipe implements IChurnRecipe
 {
 	private FluidStack inputFluid;
 	private FluidStack outputFluid;
@@ -43,6 +43,7 @@ public class ChurnRecipe
 		this.churns = ch;
 	}
 
+	@Override
 	public boolean isValidForRecipe(FluidStack stack)
 	{
 		if (stack == null) return false;
@@ -51,21 +52,25 @@ public class ChurnRecipe
 		return true;
 	}
 
-	public FluidStack getInputFluid()
+	@Override
+	public FluidStack getInputFluidStack()
 	{
 		return inputFluid;
 	}
 
-	public FluidStack getOutputFluid()
+	@Override
+	public FluidStack getOutputFluidStack()
 	{
 		return outputFluid;
 	}
 
-	public ItemStack getOutputItem()
+	@Override
+	public ItemStack getOutputItemStack()
 	{
 		return outputItem;
 	}
 
+	@Override
 	public int getChurns()
 	{
 		return churns;

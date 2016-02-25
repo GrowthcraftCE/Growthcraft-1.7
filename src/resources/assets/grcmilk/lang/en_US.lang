@@ -158,6 +158,7 @@ grc.effect.booze_milk=Removes all effects (Except Tipsy)
 
 
 # WAILA
+grcmilk.butter_churn.itemslot.item=%s
 grcmilk.cheese.aging.prefix=Aging :
 grcmilk.cheese.aging.progress.format= %d%%
 grcmilk.cheese.slices.prefix=Slices :

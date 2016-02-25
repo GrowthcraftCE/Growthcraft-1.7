@@ -24,6 +24,7 @@
 package growthcraft.milk.integration;
 
 import growthcraft.core.integration.WailaIntegrationBase;
+import growthcraft.milk.common.block.BlockButterChurn;
 import growthcraft.milk.common.block.BlockCheeseBlock;
 import growthcraft.milk.common.block.BlockCheesePress;
 import growthcraft.milk.common.block.BlockCheeseVat;
@@ -50,6 +51,9 @@ public class Waila extends WailaIntegrationBase
 
 		reg.registerBodyProvider(provider, BlockCheesePress.class);
 		reg.registerNBTProvider(provider, BlockCheesePress.class);
+
+		reg.registerBodyProvider(provider, BlockButterChurn.class);
+		reg.registerNBTProvider(provider, BlockButterChurn.class);
 
 		reg.registerBodyProvider(provider, BlockCheeseVat.class);
 		reg.registerNBTProvider(provider, BlockCheeseVat.class);

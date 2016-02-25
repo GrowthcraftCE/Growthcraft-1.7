@@ -88,11 +88,11 @@ public class GrcMilkHandleTextureStitch
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < GrowthCraftMilk.fluids.boozeMilk.length; ++i)
+			for (int i = 0; i < GrowthCraftMilk.fluids.kumisFluids.length; ++i)
 			{
-				GrowthCraftMilk.fluids.boozeMilk[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				GrowthCraftMilk.fluids.kumisFluids[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
-			GrowthCraftMilk.fluids.boozeMilk[5].setIcons(GrowthCraftCore.liquidBlobsTexture);
+			GrowthCraftMilk.fluids.kumisFluids[5].setIcons(GrowthCraftCore.liquidBlobsTexture);
 
 			GrowthCraftMilk.fluids.butterMilk.getFluid().setIcons(iconFluidButterMilkStill, iconFluidButterMilkFlow);
 			GrowthCraftMilk.fluids.cream.getFluid().setIcons(iconFluidCreamStill, iconFluidCreamFlow);

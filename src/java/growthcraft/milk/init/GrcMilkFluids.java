@@ -258,17 +258,18 @@ public class GrcMilkFluids extends GrcModuleBase
 				TickUtils.minutes(1));
 		}
 
-		registerFermentations();
-
-		GrowthCraftCellar.boozeBuilderFactory.create(rennet.fluid.getFluid())
-			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.items.stomach.asStack(), TickUtils.minutes(1), null);
-
 		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
 		{
 			CoreRegistry.instance().fluidDictionary().addFluidTags(pair.getValue().getFluid(), MilkFluidTags.CHEESE);
 		}
 
-		MilkRegistry.instance().churn().addRecipe(
+		registerFermentations();
+
+		GrowthCraftCellar.boozeBuilderFactory.create(rennet.fluid.getFluid())
+			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.blocks.thistle.asStack(), TickUtils.minutes(1), null)
+			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.items.stomach.asStack(), TickUtils.minutes(1), null);
+
+		GrowthCraftMilk.userApis.churnRecipes.addDefault(
 			cream.fluid.asFluidStack(1000),
 			butterMilk.fluid.asFluidStack(500),
 			GrowthCraftMilk.items.butter.asStack(2),

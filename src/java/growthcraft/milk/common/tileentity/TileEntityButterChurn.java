@@ -26,9 +26,8 @@ package growthcraft.milk.common.tileentity;
 import java.io.IOException;
 
 import growthcraft.api.core.fluids.FluidTest;
-import growthcraft.api.milk.churn.ChurnRecipe;
+import growthcraft.api.milk.churn.IChurnRecipe;
 import growthcraft.api.milk.MilkRegistry;
-import growthcraft.api.milk.util.MilkTest;
 import growthcraft.core.common.inventory.AccesibleSlots;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
@@ -146,12 +145,12 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 		}
 	}
 
-	private ChurnRecipe getWorkingRecipe()
+	private IChurnRecipe getWorkingRecipe()
 	{
 		final FluidStack stack = inputFluidSlot.get();
 		if (stack != null)
 		{
-			final ChurnRecipe recipe = MilkRegistry.instance().churn().getRecipe(stack);
+			final IChurnRecipe recipe = MilkRegistry.instance().churn().getRecipe(stack);
 			return recipe;
 		}
 		return null;
@@ -160,7 +159,7 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	public WorkState doWork()
 	{
 		WorkState state = WorkState.NONE;
-		final ChurnRecipe recipe = getWorkingRecipe();
+		final IChurnRecipe recipe = getWorkingRecipe();
 		if (recipe != null)
 		{
 			state = WorkState.CHURN;
@@ -168,9 +167,9 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 			if (churns >= recipe.getChurns())
 			{
 				this.churns = 0;
-				inputFluidSlot.consume(recipe.getInputFluid(), true);
-				outputFluidSlot.fill(recipe.getOutputFluid(), true);
-				outputInventorySlot.increaseStack(recipe.getOutputItem());
+				inputFluidSlot.consume(recipe.getInputFluidStack(), true);
+				outputFluidSlot.fill(recipe.getOutputFluidStack(), true);
+				outputInventorySlot.increaseStack(recipe.getOutputItemStack());
 				state = WorkState.PRODUCE;
 			}
 
@@ -196,6 +195,12 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 		return state;
 	}
 
+	private DeviceFluidSlot getActiveFluidSlot()
+	{
+		if (outputFluidSlot.hasContent()) return outputFluidSlot;
+		return inputFluidSlot;
+	}
+
 	/**
 	 * @param dir - direction to drain from
 	 * @param amount - amount of fluid to drain
@@ -205,7 +210,8 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	@Override
 	protected FluidStack doDrain(ForgeDirection dir, int amount, boolean doDrain)
 	{
-		return outputFluidSlot.consume(amount, doDrain);
+		if (dir == ForgeDirection.UP) return null;
+		return getActiveFluidSlot().consume(amount, doDrain);
 	}
 
 	/**
@@ -217,8 +223,13 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	@Override
 	protected FluidStack doDrain(ForgeDirection dir, FluidStack stack, boolean doDrain)
 	{
-		if (!FluidTest.areStacksEqual(outputFluidSlot.get(), stack)) return null;
-		return doDrain(dir, stack.amount, doDrain);
+		if (dir == ForgeDirection.UP) return null;
+		final DeviceFluidSlot fluidSlot = getActiveFluidSlot();
+		if (FluidTest.areStacksEqual(fluidSlot.get(), stack))
+		{
+			return fluidSlot.consume(stack, doDrain);
+		}
+		return null;
 	}
 
 	/**
@@ -232,9 +243,10 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	@Override
 	protected int doFill(ForgeDirection dir, FluidStack stack, boolean doFill)
 	{
+		if (dir == ForgeDirection.UP) return 0;
 		int result = 0;
 
-		if (MilkTest.isCream(stack))
+		if (MilkRegistry.instance().churn().isFluidIngredient(stack))
 		{
 			result = inputFluidSlot.fill(stack, doFill);
 		}
