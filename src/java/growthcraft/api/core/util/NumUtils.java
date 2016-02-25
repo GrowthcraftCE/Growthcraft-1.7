@@ -27,6 +27,11 @@ public class NumUtils
 {
 	private NumUtils() {}
 
+	public static boolean isFlagged(int src, int flag)
+	{
+		return (src & flag) == flag;
+	}
+
 	public static int roundedBlocks(int num, int blocksize)
 	{
 		int n = num / blocksize;
