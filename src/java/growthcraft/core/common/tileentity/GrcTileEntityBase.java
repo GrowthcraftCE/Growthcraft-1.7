@@ -71,7 +71,7 @@ public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpda
 		needBlockUpdate = true;
 	}
 
-	public void doMarkForUpdate()
+	private void doMarkForUpdate()
 	{
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
