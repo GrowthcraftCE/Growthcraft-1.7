@@ -17,7 +17,7 @@ public class CoreRegistry implements ILoggable
 	protected ILogger logger = NullLogger.INSTANCE;
 	private final IFluidDictionary fluidDictionary = new FluidDictionary();
 	private final IFluidTagsRegistry fluidTagsRegistry = new FluidTagsRegistry();
-	private final IEffectRegistry effectRegistry = new EffectRegistry();
+	private final IEffectRegistry effectRegistry = new EffectRegistry().initialize();
 	private final IPotionEffectFactoryRegistry potionEffectFactoryRegistry = new PotionEffectFactoryRegistry();
 	private final VineDropRegistry vineDropRegistry = new VineDropRegistry();
 

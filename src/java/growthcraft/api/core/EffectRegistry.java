@@ -25,6 +25,13 @@ package growthcraft.api.core;
 
 import javax.annotation.Nonnull;
 
+import growthcraft.api.core.effect.EffectAddPotionEffect;
+import growthcraft.api.core.effect.EffectChance;
+import growthcraft.api.core.effect.EffectList;
+import growthcraft.api.core.effect.EffectNull;
+import growthcraft.api.core.effect.EffectRandomList;
+import growthcraft.api.core.effect.EffectRemovePotionEffect;
+import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
@@ -34,6 +41,18 @@ import net.minecraft.nbt.NBTTagCompound;
 public class EffectRegistry extends AbstractClassRegistry<IEffect> implements IEffectRegistry
 {
 	private ILogger logger = NullLogger.INSTANCE;
+
+	public EffectRegistry initialize()
+	{
+		register("add_potion_effect", EffectAddPotionEffect.class);
+		register("chance", EffectChance.class);
+		register("list", EffectList.class);
+		register("null", EffectNull.class);
+		register("random_list", EffectRandomList.class);
+		register("remove_potion_effect", EffectRemovePotionEffect.class);
+		register("weighted_random_list", EffectWeightedRandomList.class);
+		return this;
+	}
 
 	@Override
 	public void setLogger(@Nonnull ILogger l)

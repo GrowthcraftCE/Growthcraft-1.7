@@ -21,28 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core;
+package growthcraft.api.cellar.init;
 
-import javax.annotation.Nonnull;
+import growthcraft.api.cellar.booze.BoozeEffect;
+import growthcraft.api.cellar.booze.effect.EffectTipsy;
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.IEffectRegistry;
 
-public interface IClassRegistry<T>
+public class CellarEffects
 {
-	/**
-	 * @param name - Name to register it under
-	 * @param klass - A class
-	 * @return factory registry
-	 */
-	void register(@Nonnull String name, @Nonnull Class<? extends T> klass);
+	private CellarEffects() {}
 
-	/**
-	 * @param name - name of factory class to fetch
-	 * @return factory class
-	 */
-	Class<? extends T> getClass(@Nonnull String name);
-
-	/**
-	 * @param klass - factory class to fetch name for
-	 * @return name
-	 */
-	String getName(@Nonnull Class<?> klass);
+	public static void init()
+	{
+		final IEffectRegistry reg = CoreRegistry.instance().getEffectsRegistry();
+		reg.register("booze_effect", BoozeEffect.class);
+		reg.register("booze_effect_list", BoozeEffect.BoozeEffectList.class);
+		reg.register("tipsy", EffectTipsy.class);
+	}
 }

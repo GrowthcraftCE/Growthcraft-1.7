@@ -52,9 +52,9 @@ public abstract class AbstractClassRegistry<T extends INBTSerializableContext> i
 		public ClassRegisteredException() {}
 	}
 
-	private BiMap<String, Class<T>> effects = HashBiMap.create();
+	private BiMap<String, Class<? extends T>> effects = HashBiMap.create();
 
-	public Class<T> getClass(@Nonnull String name)
+	public Class<? extends T> getClass(@Nonnull String name)
 	{
 		return effects.get(name);
 	}
@@ -64,11 +64,11 @@ public abstract class AbstractClassRegistry<T extends INBTSerializableContext> i
 		return effects.inverse().get(klass);
 	}
 
-	public void register(@Nonnull String name, @Nonnull Class<T> klass)
+	public void register(@Nonnull String name, @Nonnull Class<? extends T> klass)
 	{
 		if (effects.containsKey(name))
 		{
-			final Class<T> effect = getClass(name);
+			final Class<? extends T> effect = getClass(name);
 			throw new ClassRegisteredException("Cannot register " + klass + ", Effect " + effect + " is already registered to " + name);
 		}
 		else
@@ -88,7 +88,7 @@ public abstract class AbstractClassRegistry<T extends INBTSerializableContext> i
 	{
 		final NBTTagCompound effectData = data.getCompoundTag(name);
 		final String factoryName = data.getString("__name__");
-		final Class<T> klass = getClass(factoryName);
+		final Class<? extends T> klass = getClass(factoryName);
 
 		T instance = null;
 

@@ -35,6 +35,7 @@ import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.api.cellar.fermenting.IFermentingRegistry;
 import growthcraft.api.cellar.heatsource.HeatSourceRegistry;
 import growthcraft.api.cellar.heatsource.IHeatSourceRegistry;
+import growthcraft.api.cellar.init.CellarEffects;
 import growthcraft.api.cellar.pressing.IPressingRegistry;
 import growthcraft.api.cellar.pressing.PressingRegistry;
 import growthcraft.api.cellar.yeast.IYeastRegistry;
@@ -45,7 +46,7 @@ import growthcraft.api.core.log.NullLogger;
 
 public class CellarRegistry implements ILoggable
 {
-	private static final CellarRegistry INSTANCE = new CellarRegistry();
+	private static final CellarRegistry INSTANCE = new CellarRegistry().initialize();
 
 	private final IBoozeRegistry boozeRegistry = new BoozeRegistry();
 	private final IBrewingRegistry brewingRegistry = new BrewingRegistry();
@@ -62,6 +63,12 @@ public class CellarRegistry implements ILoggable
 	public static final CellarRegistry instance()
 	{
 		return INSTANCE;
+	}
+
+	private CellarRegistry initialize()
+	{
+		CellarEffects.init();
+		return this;
 	}
 
 	/**

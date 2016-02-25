@@ -43,7 +43,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class BoozeEffect extends AbstractEffect
 {
-	static class BoozeEffectList extends EffectList
+	public static class BoozeEffectList extends EffectList
 	{
 		/**
 		 * Adds the description of all the internal effects
