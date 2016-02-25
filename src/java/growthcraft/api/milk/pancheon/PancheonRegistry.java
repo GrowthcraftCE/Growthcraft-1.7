@@ -37,12 +37,27 @@ import net.minecraftforge.fluids.FluidStack;
 public class PancheonRegistry implements IPancheonRegistry
 {
 	protected ILogger logger = NullLogger.INSTANCE;
-	private Map<Fluid, PancheonRecipe> recipes = new HashMap<Fluid, PancheonRecipe>();
+	private Map<Fluid, IPancheonRecipe> recipes = new HashMap<Fluid, IPancheonRecipe>();
 
 	@Override
 	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
+	}
+
+	@Override
+	public void addRecipe(@Nonnull IPancheonRecipe recipe)
+	{
+		final Fluid fluid = recipe.getInputFluid().getFluid();
+		if (recipes.containsKey(fluid))
+		{
+			logger.warn("Overwriting existing pancheon recipe for {%s} with {%s}", recipe.getInputFluid(), recipe);
+		}
+		else
+		{
+			logger.info("Adding new pancheon recipe {%s}", recipe);
+		}
+		recipes.put(fluid, recipe);
 	}
 
 	@Override
@@ -54,27 +69,18 @@ public class PancheonRegistry implements IPancheonRegistry
 			throw new IllegalArgumentException("The provided input fluid is invalid.");
 		}
 
-		final PancheonRecipe recipe = new PancheonRecipe(inputStack, topOutput, bottomOutput, time);
-		if (recipes.containsKey(fluid))
-		{
-			logger.warn("Overwriting existing pancheon recipe for {%s} with {%s}", inputStack, recipe);
-		}
-		else
-		{
-			logger.info("Adding new pancheon recipe {%s}", recipe);
-		}
-
-		recipes.put(fluid, recipe);
+		final IPancheonRecipe recipe = new PancheonRecipe(inputStack, topOutput, bottomOutput, time);
+		addRecipe(recipe);
 	}
 
 	@Override
 	@Nullable
-	public PancheonRecipe getRecipe(FluidStack stack)
+	public IPancheonRecipe getRecipe(FluidStack stack)
 	{
 		if (stack == null) return null;
 		final Fluid fluid = stack.getFluid();
 		if (fluid == null) return null;
-		final PancheonRecipe recipe = recipes.get(fluid);
+		final IPancheonRecipe recipe = recipes.get(fluid);
 		if (recipe != null)
 		{
 			if (recipe.isValidForRecipe(stack)) return recipe;

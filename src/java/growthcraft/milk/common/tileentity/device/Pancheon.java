@@ -24,7 +24,7 @@
 package growthcraft.milk.common.tileentity.device;
 
 import growthcraft.api.milk.MilkRegistry;
-import growthcraft.api.milk.pancheon.PancheonRecipe;
+import growthcraft.api.milk.pancheon.IPancheonRecipe;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceProgressive;
 import growthcraft.core.common.tileentity.device.IFluidTanks;
@@ -65,7 +65,7 @@ public class Pancheon extends DeviceProgressive
 	 *
 	 * @return recipe
 	 */
-	private PancheonRecipe getRecipe()
+	private IPancheonRecipe getRecipe()
 	{
 		return MilkRegistry.instance().pancheon().getRecipe(inputSlot.get());
 	}
@@ -75,9 +75,9 @@ public class Pancheon extends DeviceProgressive
 	 *
 	 * @return recipe
 	 */
-	public PancheonRecipe getWorkingRecipe()
+	public IPancheonRecipe getWorkingRecipe()
 	{
-		final PancheonRecipe recipe = getRecipe();
+		final IPancheonRecipe recipe = getRecipe();
 		if (recipe == null) return null;
 		if (!this.topSlot.hasMatchingWithCapacity(recipe.getTopOutputFluid())) return null;
 		if (!this.bottomSlot.hasMatchingWithCapacity(recipe.getBottomOutputFluid())) return null;
@@ -89,7 +89,7 @@ public class Pancheon extends DeviceProgressive
 	 */
 	private void commitRecipe()
 	{
-		final PancheonRecipe recipe = getRecipe();
+		final IPancheonRecipe recipe = getRecipe();
 		if (recipe != null)
 		{
 			this.inputSlot.consume(recipe.getInputFluid().amount, true);
@@ -107,7 +107,7 @@ public class Pancheon extends DeviceProgressive
 	 */
 	public void update()
 	{
-		final PancheonRecipe recipe = getWorkingRecipe();
+		final IPancheonRecipe recipe = getWorkingRecipe();
 		if (recipe != null)
 		{
 			setTimeMax(recipe.getTime());

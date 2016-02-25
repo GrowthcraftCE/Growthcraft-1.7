@@ -23,23 +23,15 @@
  */
 package growthcraft.api.milk.pancheon;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import growthcraft.api.core.log.ILoggable;
 
 import net.minecraftforge.fluids.FluidStack;
 
-public interface IPancheonRegistry extends ILoggable
+public interface IPancheonRecipe
 {
-	void addRecipe(@Nonnull IPancheonRecipe recipe);
-
-	/**
-	 * @param inputStack - input fluid
-	 * @param topOutput - fluid output at the top of the pancheon
-	 * @param bottomOutput - fluid output at the bottom of the pancheon
-	 * @param time - how long does the recipe take to produce its output (in ticks)
-	 */
-	void addRecipe(@Nonnull FluidStack inputStack, @Nonnull FluidStack topOutput, @Nullable FluidStack bottomOutput, int time);
-	@Nullable IPancheonRecipe getRecipe(@Nullable FluidStack fstack);
+	boolean isValidForRecipe(@Nullable FluidStack stack);
+	FluidStack getInputFluid();
+	FluidStack getTopOutputFluid();
+	FluidStack getBottomOutputFluid();
+	int getTime();
 }
