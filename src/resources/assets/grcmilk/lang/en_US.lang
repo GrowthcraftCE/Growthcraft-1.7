@@ -90,7 +90,7 @@ grc.fluids.tag.cream=Cream
 ### Fluids
 fluid.grcmilk.ButterMilk=Butter Milk
 fluid.grcmilk.Cream=Cream
-fluid.grcmilk.Curds=Curds
+fluid.grcmilk.Curds=Milk Curds
 fluid.grcmilk.Milk=Milk
 fluid.grcmilk.Rennet=Rennet
 fluid.grcmilk.SkimMilk=Skim Milk
@@ -106,6 +106,7 @@ fluid.grcmilk.CheeseRicotta=Ricotta Cheese
 ### Blocks
 tile.grcmilk.BlockFluidButterMilk.name=Butter Milk
 tile.grcmilk.BlockFluidCream.name=Cream
+tile.grcmilk.BlockFluidCurds.name=Milk Curds
 tile.grcmilk.BlockFluidMilk.name=Milk
 tile.grcmilk.BlockFluidRennet.name=Rennet
 tile.grcmilk.BlockFluidSkimMilk.name=Skim Milk
@@ -113,6 +114,7 @@ tile.grcmilk.BlockFluidWhey.name=Whey
 ### Bottles
 item.grcmilk.BottleFluidButterMilk.name=Butter Milk Bottle
 item.grcmilk.BottleFluidCream.name=Cream Bottle
+item.grcmilk.BottleFluidCurds.name=Milk Curds Bottle
 item.grcmilk.BottleFluidMilk.name=Milk Bottle
 item.grcmilk.BottleFluidRennet.name=Rennet Bottle
 item.grcmilk.BottleFluidSkimMilk.name=Skim Milk Bottle
@@ -120,41 +122,36 @@ item.grcmilk.BottleFluidWhey.name=Whey Bottle
 ### Buckets
 item.bucket.fluid.grcmilk.ButterMilk.name=Butter Milk Bucket
 item.bucket.fluid.grcmilk.Cream.name=Cream Bucket
+item.bucket.fluid.grcmilk.Curds.name=Milk Curds Bucket
 item.bucket.fluid.grcmilk.Milk.name=Milk Bucket
 item.bucket.fluid.grcmilk.Rennet.name=Rennet Bucket
 item.bucket.fluid.grcmilk.SkimMilk.name=Skim Milk Bucket
 item.bucket.fluid.grcmilk.Whey.name=Whey Bucket
 
 ## Booze
-fluid.grcmilk.milk=Milk
-fluid.grcmilk.milk0=Milk
-fluid.grcmilk.milk1=Kumis
-fluid.grcmilk.milk2=Kumis
-fluid.grcmilk.milk3=Kumis
-fluid.grcmilk.milk4=Kumis
-fluid.grcmilk.milk5=Kumis
-fluid.grcmilk.milk6=Vile Milk
-fluid.grcmilk.milk6.desc=Even the sweetest of things can become corrupt.
+fluid.grcmilk.Kumis0=Kumis
+fluid.grcmilk.Kumis1=Kumis
+fluid.grcmilk.Kumis2=Kumis
+fluid.grcmilk.Kumis3=Kumis
+fluid.grcmilk.Kumis4=Kumis
+fluid.grcmilk.Kumis5=Vile Milk
+fluid.grcmilk.Kumis5.desc=Even the sweetest of things can become corrupt.
 
 ## Booze Blocks
-tile.fluid.grcmilk.milk.name=Milk
-tile.fluid.grcmilk.milk0.name=Milk
-tile.fluid.grcmilk.milk1.name=Kumis
-tile.fluid.grcmilk.milk2.name=Kumis
-tile.fluid.grcmilk.milk3.name=Kumis
-tile.fluid.grcmilk.milk4.name=Kumis
-tile.fluid.grcmilk.milk5.name=Kumis
-tile.fluid.grcmilk.milk6.name=Vile Milk
+tile.fluid.grcmilk.Kumis0.name=Milk
+tile.fluid.grcmilk.Kumis1.name=Kumis
+tile.fluid.grcmilk.Kumis2.name=Kumis
+tile.fluid.grcmilk.Kumis3.name=Kumis
+tile.fluid.grcmilk.Kumis4.name=Kumis
+tile.fluid.grcmilk.Kumis5.name=Vile Milk
 
 ## Booze Bucket
-item.bucket.fluid.grcmilk.milk.name=Milk Bucket
-item.bucket.fluid.grcmilk.milk0.name=Milk Bucket
-item.bucket.fluid.grcmilk.milk1.name=Kumis Bucket
-item.bucket.fluid.grcmilk.milk2.name=Kumis Bucket
-item.bucket.fluid.grcmilk.milk3.name=Kumis Bucket
-item.bucket.fluid.grcmilk.milk4.name=Kumis Bucket
-item.bucket.fluid.grcmilk.milk5.name=Kumis Bucket
-item.bucket.fluid.grcmilk.milk6.name=Vile Milk Bucket
+item.bucket.fluid.grcmilk.Kumis0.name=Kumis Bucket
+item.bucket.fluid.grcmilk.Kumis1.name=Kumis Bucket
+item.bucket.fluid.grcmilk.Kumis2.name=Kumis Bucket
+item.bucket.fluid.grcmilk.Kumis3.name=Kumis Bucket
+item.bucket.fluid.grcmilk.Kumis4.name=Kumis Bucket
+item.bucket.fluid.grcmilk.Kumis5.name=Vile Milk Bucket
 
 # Effects
 grc.effect.booze_milk=Removes all effects (Except Tipsy)
