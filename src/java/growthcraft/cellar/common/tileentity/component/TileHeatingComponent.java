@@ -37,8 +37,8 @@ public class TileHeatingComponent implements INBTSerializableContext, IStreamabl
 	private TileEntity tileEntity;
 	private HeatBlockComponent heatBlockComponent;
 	private float heat;
-	private float heatLoss = 0.0125f;
-	private float heatGain = 0.0125f;
+	private float heatLoss = 0.01f;
+	private float heatGain = 0.01f;
 
 	public TileHeatingComponent(@Nonnull TileEntity te)
 	{
