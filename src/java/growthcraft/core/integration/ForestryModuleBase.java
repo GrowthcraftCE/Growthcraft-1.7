@@ -26,7 +26,6 @@ package growthcraft.core.integration;
 import java.util.Collection;
 import java.util.List;
 
-import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.item.ItemTest;
 import growthcraft.core.integration.forestry.ForestryFluids;
@@ -40,8 +39,6 @@ import forestry.api.farming.IFarmable;
 import forestry.api.storage.BackpackManager;
 
 import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 

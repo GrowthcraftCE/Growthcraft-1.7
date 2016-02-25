@@ -24,7 +24,6 @@
 package growthcraft.core.integration.forestry;
 
 import growthcraft.api.core.definition.IFluidStackFactory;
-import growthcraft.api.core.fluids.FluidTest;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
