@@ -21,34 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.rice.integration;
+package growthcraft.core.integration.forestry;
 
-import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
-import growthcraft.core.integration.forestry.ForestryFluids;
-import growthcraft.core.integration.ForestryModuleBase;
-import growthcraft.rice.GrowthCraftRice;
+import growthcraft.api.core.definition.IItemStackFactory;
 
-import cpw.mods.fml.common.Optional;
-import net.minecraft.block.Block;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ForestryModule extends ForestryModuleBase
+public enum ForestryItems implements IItemStackFactory
 {
-	public ForestryModule()
+	BEESWAX("beeswax"),
+	HONEY_DROP("honeyDrop"),
+	HONEYDEW("honeydew");
+
+	public final String name;
+	public final int meta;
+
+	private ForestryItems(String n)
 	{
-		super(GrowthCraftRice.MOD_ID);
+		this.name = n;
+		this.meta = 0;
+	}
+
+	public Item getItem()
+	{
+		return GameRegistry.findItem("Forestry", name);
 	}
 
 	@Override
-	@Optional.Method(modid="Forestry")
-	protected void integrate()
+	public ItemStack asStack(int size)
 	{
-		final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
+		final Item item = getItem();
+		if (item == null) return null;
+		return new ItemStack(item, size, meta);
+	}
 
-		final ItemStack riceSeed = GrowthCraftRice.rice.asStack();
-		final Block riceBlock = GrowthCraftRice.riceBlock.getBlock();
-		if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager.addRecipe(10, new ItemStack[]{riceSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
-		Backpack.FORESTERS.add(riceSeed);
-		addFarmable("farmOrchard", new FarmableBasicGrowthCraft(riceBlock, GrowthCraftRice.getConfig().paddyFieldMax, true, false));
+	@Override
+	public ItemStack asStack()
+	{
+		return asStack(1);
+	}
+
+	public boolean exists()
+	{
+		return getItem() != null;
 	}
 }

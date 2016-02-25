@@ -23,10 +23,11 @@
  */
 package growthcraft.hops.integration;
 
-import growthcraft.hops.GrowthCraftHops;
-import growthcraft.core.integration.ForestryModuleBase;
 import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
+import growthcraft.core.integration.forestry.ForestryFluids;
+import growthcraft.core.integration.ForestryModuleBase;
 import growthcraft.hops.common.block.BlockHops;
+import growthcraft.hops.GrowthCraftHops;
 
 import cpw.mods.fml.common.Optional;
 import net.minecraft.block.Block;

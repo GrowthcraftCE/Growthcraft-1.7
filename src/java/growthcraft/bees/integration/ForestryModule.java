@@ -27,6 +27,7 @@ import com.google.common.collect.ImmutableMap;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.bees.GrowthCraftBees;
+import growthcraft.core.integration.forestry.ForestryItems;
 import growthcraft.core.integration.ForestryModuleBase;
 
 import cpw.mods.fml.common.registry.GameRegistry;

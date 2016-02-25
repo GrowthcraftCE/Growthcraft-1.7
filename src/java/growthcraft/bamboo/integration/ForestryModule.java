@@ -24,6 +24,7 @@
 package growthcraft.bamboo.integration;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.core.integration.forestry.ForestryFluids;
 import growthcraft.core.integration.ForestryModuleBase;
 
 import cpw.mods.fml.common.Optional;

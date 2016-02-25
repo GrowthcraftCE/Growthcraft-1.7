@@ -23,9 +23,10 @@
  */
 package growthcraft.grapes.integration;
 
-import growthcraft.grapes.GrowthCraftGrapes;
-import growthcraft.core.integration.ForestryModuleBase;
 import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
+import growthcraft.core.integration.forestry.ForestryFluids;
+import growthcraft.core.integration.ForestryModuleBase;
+import growthcraft.grapes.GrowthCraftGrapes;
 
 import cpw.mods.fml.common.Optional;
 import net.minecraft.block.Block;

@@ -21,34 +21,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.rice.integration;
+package growthcraft.core.integration.forestry;
 
-import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
-import growthcraft.core.integration.forestry.ForestryFluids;
-import growthcraft.core.integration.ForestryModuleBase;
-import growthcraft.rice.GrowthCraftRice;
+import growthcraft.api.core.definition.IFluidStackFactory;
+import growthcraft.api.core.fluids.FluidTest;
 
-import cpw.mods.fml.common.Optional;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
-public class ForestryModule extends ForestryModuleBase
+public enum ForestryFluids implements IFluidStackFactory
 {
-	public ForestryModule()
+	// This is really just vanilla water though ;O
+	MILK("milk"),
+	WATER("water"),
+	HONEY("honey"),
+	BIOMASS("biomass"),
+	JUICE("juice"),
+	SEEDOIL("seedoil");
+
+	public final String name;
+
+	private ForestryFluids(String nm)
 	{
-		super(GrowthCraftRice.MOD_ID);
+		this.name = nm;
+	}
+
+	public Fluid getFluid()
+	{
+		return FluidRegistry.getFluid(name);
 	}
 
 	@Override
-	@Optional.Method(modid="Forestry")
-	protected void integrate()
+	public FluidStack asFluidStack(int amount)
 	{
-		final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
+		final Fluid fluid = getFluid();
+		if (fluid == null) return null;
+		return new FluidStack(fluid, amount);
+	}
 
-		final ItemStack riceSeed = GrowthCraftRice.rice.asStack();
-		final Block riceBlock = GrowthCraftRice.riceBlock.getBlock();
-		if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager.addRecipe(10, new ItemStack[]{riceSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
-		Backpack.FORESTERS.add(riceSeed);
-		addFarmable("farmOrchard", new FarmableBasicGrowthCraft(riceBlock, GrowthCraftRice.getConfig().paddyFieldMax, true, false));
+	@Override
+	public FluidStack asFluidStack()
+	{
+		return asFluidStack(1);
+	}
+
+	/**
+	 * Does the underlying fluid exist?
+	 *
+	 * @return true if it exists, false otherwise
+	 */
+	public boolean exists()
+	{
+		return getFluid() != null;
 	}
 }
