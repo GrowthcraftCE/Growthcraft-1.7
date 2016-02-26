@@ -7,10 +7,82 @@ tile.grc.ropeBlock.name=Corda
 
 # Items
 item.grc.rope.name=Corda
+item.grccore.salt.name=Sal
+
 
 # Fluids
 fluid.tile.water=Água
 fluid.tile.lava=Lava
 
+## Salt Water
+fluid.grccore.SaltWater=Água Salgada
+tile.grccore.BlockFluidSaltWater.name=Água Salgada
+item.grccore.BottleFluidSaltWater.name=Garrafa de Água Salgada
+item.bucket.fluid.grccore.SaltWater.name=Balde de Água Salgada
+
 # Other
 achievementPage.pageGrowthCraft=Growthcraft
+# Colors
+grc.colour.White=Branco
+grc.colour.Orange=Laranja
+grc.colour.Magenta=Magenta
+grc.colour.LightBlue=Azul Claro
+grc.colour.Yellow=Amarelo
+grc.colour.Lime=Lima
+grc.colour.Pink=Rosa
+grc.colour.Gray=Cinza
+grc.colour.LightGray=Cinza Claro
+grc.colour.Cyan=Ciano
+grc.colour.Purple=Roxo
+grc.colour.Blue=Azul
+grc.colour.Brown=Marrom
+grc.colour.Green=Verde
+grc.colour.Red=Vermelho
+grc.colour.Black=Preto
+grc.colour.Transparent=Transparente
+
+# Formats and Units
+grc.format.value.true=YES
+grc.format.value.false=NO
+grc.format.state.true=ON
+grc.format.state.false=OFF
+grc.format.invalid_fluid=<Fluido Inválido>
+# Displayed for items
+grc.format.itemslot.empty=<Vazio>
+grc.format.itemslot.invalid=<Item Inválido>
+
+# Modifier name
+grc.format.booze.name=%2$s %1$s
+
+# When a fluid is not a booze
+grc.format.fluid.name=%1$s
+
+# Name (stack_size)
+grc.format.itemslot.item=%s (x%d)
+# Displayed for tile entities with multiple tanks, %d is the tank index + 1
+grc.format.tank_id=Tank %d :
+# When the tank is empty
+grc.format.tank.empty=<Vazio>
+# %s is the fluid name
+grc.format.tank.content_suffix=mB de %s
+
+# Waila Tooltips
+grc.format.crop.growth_prefix=Growth :
+grc.format.crop.mature=Maduro
+grc.format.crop.progress_format=%d%%
+grc.format.paddy.hasFluid=Has Fluid :
+grccore.device.heated.multiplier.format= %d%%
+grccore.device.heated.prefix=Heat :
+grccore.device.heated.state.false=<Frio>
+grccore.device.progress.format= %d%%
+grccore.device.progress.prefix=Progress :
+grccore.waila.option.DisplayFluidContent=Fluid Tanks
+grccore.waila.option.DisplayHeated=Heated Devices
+
+# Effects
+grc.effect.chance.format=%d%% Chance de
+grc.effect.list.head=Acontecer os seguintes efeitos:
+grc.effect.null.desc=Nada
+grc.effect.random_list.head=Acontecer um dos seguintes efeitos:
+grc.effect.remove_potion_effect.format=Remove %s
+grc.effect.weighted_random_list.format=%d%% Chance de
