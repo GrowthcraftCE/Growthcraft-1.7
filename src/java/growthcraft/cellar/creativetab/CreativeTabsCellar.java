@@ -18,6 +18,6 @@ public class CreativeTabsCellar extends CreativeTabs
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem()
 	{
-		return GrowthCraftCellar.fermentBarrel.getItem();
+		return GrowthCraftCellar.blocks.fermentBarrel.getItem();
 	}
 }

@@ -17,7 +17,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
@@ -77,25 +76,6 @@ public class BlockBrewKettle extends BlockCellarContainer
 	{
 		final FluidStack fs = Utils.playerDrainTank(world, x, y, z, fh, is, player);
 		return fs != null && fs.amount > 0;
-	}
-
-	/************
-	 * STUFF
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z)
-	{
-		return GrowthCraftCellar.brewKettle.getItem();
-	}
-
-	/************
-	 * DROPS
-	 ************/
-	@Override
-	public Item getItemDropped(int par1, Random random, int par3)
-	{
-		return GrowthCraftCellar.brewKettle.getItem();
 	}
 
 	@Override

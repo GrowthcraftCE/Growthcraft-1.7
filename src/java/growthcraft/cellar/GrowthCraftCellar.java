@@ -12,11 +12,6 @@ import growthcraft.api.cellar.heatsource.user.UserHeatSourcesConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
-import growthcraft.cellar.common.block.BlockBrewKettle;
-import growthcraft.cellar.common.block.BlockCultureJar;
-import growthcraft.cellar.common.block.BlockFermentBarrel;
-import growthcraft.cellar.common.block.BlockFruitPress;
-import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.booze.ModifierFunctionExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionHyperExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionPotent;
@@ -37,13 +32,13 @@ import growthcraft.cellar.eventhandler.EventHandlerCauldronUseItem;
 import growthcraft.cellar.eventhandler.EventHandlerItemCraftedEventCellar;
 import growthcraft.cellar.eventhandler.EventHandlerLivingUpdateEventCellar;
 import growthcraft.cellar.handler.GuiHandlerCellar;
+import growthcraft.cellar.init.GrcCellarBlocks;
 import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.stats.CellarAchievement;
 import growthcraft.cellar.stats.GrcCellarAchievements;
 import growthcraft.cellar.util.CellarBoozeBuilderFactory;
 import growthcraft.cellar.util.GrcCellarUserApis;
 import growthcraft.cellar.util.YeastType;
-import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -51,13 +46,14 @@ import growthcraft.core.util.MapGenHelper;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.EventBus;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.common.eventhandler.EventBus;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -81,14 +77,9 @@ public class GrowthCraftCellar
 
 	@Instance(MOD_ID)
 	public static GrowthCraftCellar instance;
+	public static GrcCellarBlocks blocks = new GrcCellarBlocks();
 
 	public static CreativeTabs tab;
-
-	public static BlockDefinition fruitPress;
-	public static BlockDefinition fruitPresser;
-	public static BlockDefinition brewKettle;
-	public static BlockDefinition fermentBarrel;
-	public static BlockDefinition fermentJar;
 
 	public static ItemDefinition yeast;
 	public static ItemDefinition waterBag;
@@ -121,6 +112,11 @@ public class GrowthCraftCellar
 		return instance.config;
 	}
 
+	public static ILogger getLogger()
+	{
+		return instance.logger;
+	}
+
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
@@ -132,6 +128,8 @@ public class GrowthCraftCellar
 			logger.info("Pre-Initializing %s", MOD_ID);
 			CellarRegistry.instance().setLogger(logger);
 		}
+
+		modules.add(blocks);
 
 		if (config.enableWailaIntegration) modules.add(new growthcraft.cellar.integration.Waila());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
@@ -154,17 +152,11 @@ public class GrowthCraftCellar
 		// INIT
 		//====================
 		tab = new CreativeTabsCellar("tabGrCCellar");
-		fermentBarrel = new BlockDefinition(new BlockFermentBarrel());
-		fermentJar    = new BlockDefinition(new BlockCultureJar());
-		fruitPress    = new BlockDefinition(new BlockFruitPress());
-		fruitPresser  = new BlockDefinition(new BlockFruitPresser());
-		brewKettle    = new BlockDefinition(new BlockBrewKettle());
 
 		yeast = new ItemDefinition(new ItemYeast());
 		waterBag = new ItemDefinition(new ItemWaterBag());
 		chievItemDummy = new ItemDefinition(new ItemChievDummy());
 
-		addDefaultHeatSources();
 		modules.preInit();
 		register();
 	}
@@ -188,14 +180,11 @@ public class GrowthCraftCellar
 
 	private void register()
 	{
+		addDefaultHeatSources();
 		//====================
 		// REGISTRIES
 		//====================
-		GameRegistry.registerBlock(fruitPress.getBlock(), "grc.fruitPress");
-		GameRegistry.registerBlock(fruitPresser.getBlock(), "grc.fruitPresser");
-		GameRegistry.registerBlock(brewKettle.getBlock(), "grc.brewKettle");
-		GameRegistry.registerBlock(fermentBarrel.getBlock(), "grc.fermentBarrel");
-		GameRegistry.registerBlock(fermentJar.getBlock(), "grc.fermentJar");
+		modules.register();
 
 		GameRegistry.registerItem(yeast.getItem(), "grc.yeast");
 		GameRegistry.registerItem(waterBag.getItem(), "grc.waterBag");
@@ -212,10 +201,10 @@ public class GrowthCraftCellar
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addRecipe(new ShapedOreRecipe(fruitPress.asStack(), "ABA", "CCC", "AAA", 'A', "plankWood", 'B', Blocks.piston,'C', "ingotIron"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(brewKettle.asStack(), "A", 'A', Items.cauldron));
-		GameRegistry.addRecipe(new ShapedOreRecipe(fermentBarrel.asStack(), "AAA", "BBB", "AAA", 'B', "plankWood", 'A', "ingotIron"));
-		GameRegistry.addRecipe(new ShapedOreRecipe(fermentJar.asStack(), "GAG", "G G", "GGG", 'A', "plankWood", 'G', "paneGlass"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(blocks.fruitPress.asStack(), "ABA", "CCC", "AAA", 'A', "plankWood", 'B', Blocks.piston,'C', "ingotIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(blocks.brewKettle.asStack(), "A", 'A', Items.cauldron));
+		GameRegistry.addRecipe(new ShapedOreRecipe(blocks.fermentBarrel.asStack(), "AAA", "BBB", "AAA", 'B', "plankWood", 'A', "ingotIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(blocks.cultureJar.asStack(), "GAG", "G G", "GGG", 'A', "plankWood", 'G', "paneGlass"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(waterBag.asStack(1, 16), "AAA", "ABA", "AAA", 'A', Items.leather, 'B', "materialRope"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 0), "dyeWhite", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
@@ -248,10 +237,7 @@ public class GrowthCraftCellar
 		//====================
 		achievements = new GrcCellarAchievements();
 
-		NEI.hideItem(fruitPresser.asStack());
 		NEI.hideItem(chievItemDummy.asStack());
-
-		modules.register();
 	}
 
 	private void registerPotions()
@@ -317,7 +303,7 @@ public class GrowthCraftCellar
 	public void postload(FMLPostInitializationEvent event)
 	{
 		packetPipeline.postInitialise();
-		MinecraftForge.EVENT_BUS.register(new EventHandlerItemCraftedEventCellar());
+		FMLCommonHandler.instance().bus().register(new EventHandlerItemCraftedEventCellar());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerLivingUpdateEventCellar());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerCauldronUseItem());
 

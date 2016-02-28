@@ -34,11 +34,11 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	{
 		super(Material.piston);
 		this.isBlockContainer = true;
-		this.setHardness(0.5F);
-		this.setStepSound(soundTypePiston);
-		this.setBlockName("grc.fruitPresser");
-		this.setCreativeTab(null);
-		this.setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 0.9375F, 0.8125F);
+		setHardness(0.5F);
+		setStepSound(soundTypePiston);
+		setBlockName("grc.fruitPresser");
+		setCreativeTab(null);
+		setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 0.9375F, 0.8125F);
 	}
 
 	public String getPressStateName(int meta)
@@ -169,7 +169,7 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return GrowthCraftCellar.fruitPress.getBlock() == world.getBlock(x, y - 1, z);
+		return GrowthCraftCellar.blocks.fruitPress.getBlock() == world.getBlock(x, y - 1, z);
 	}
 
 	@Override
@@ -196,7 +196,7 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftCellar.fruitPress.getItem();
+		return GrowthCraftCellar.blocks.fruitPress.getItem();
 	}
 
 	@Override

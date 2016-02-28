@@ -77,6 +77,8 @@ achievement.fermentBooze=It's The Yeast I Could Do...
 achievement.fermentBooze.desc=Ferment an alcoholic beverage.
 achievement.getDrunk=Is Trouble Brewing?
 achievement.getDrunk.desc=Acquire Tipsy V.
+achievement.onTheGo=On The Go
+achievement.onTheGo.desc=Craft a Water Bag
 
 # Tooltips (Number is a percentage)
 # number is a percentage

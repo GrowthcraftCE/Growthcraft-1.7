@@ -121,7 +121,7 @@ public class GrcMilkBlocks extends GrcModuleBase
 		));
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(cheeseVat.asStack(),
-			GrowthCraftCellar.brewKettle.asStack()
+			GrowthCraftCellar.blocks.brewKettle.asStack()
 		));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(butterChurn.asStack(),

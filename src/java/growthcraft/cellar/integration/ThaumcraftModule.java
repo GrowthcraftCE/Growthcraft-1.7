@@ -52,10 +52,10 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.brewKettle.asStack(), new AspectList().add(Aspect.METAL, 12).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.fermentBarrel.asStack(), new AspectList().add(Aspect.METAL, 6).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.fermentJar.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.VOID, 2).add(Aspect.WATER, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.fruitPress.asStack(), new AspectList().add(Aspect.METAL, 3).add(Aspect.CRAFT, 2).add(Aspect.MECHANISM, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.blocks.brewKettle.asStack(), new AspectList().add(Aspect.METAL, 12).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.blocks.cultureJar.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.VOID, 2).add(Aspect.WATER, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.blocks.fermentBarrel.asStack(), new AspectList().add(Aspect.METAL, 6).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.blocks.fruitPress.asStack(), new AspectList().add(Aspect.METAL, 3).add(Aspect.CRAFT, 2).add(Aspect.MECHANISM, 2));
 
 		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.waterBag.asStack(), new AspectList().add(Aspect.BEAST, 1).add(Aspect.VOID, 2).add(Aspect.WATER, 2));
 

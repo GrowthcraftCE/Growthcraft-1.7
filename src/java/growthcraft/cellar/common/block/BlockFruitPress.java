@@ -15,7 +15,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -41,7 +40,7 @@ public class BlockFruitPress extends BlockCellarContainer
 
 	private Block getPresserBlock()
 	{
-		return GrowthCraftCellar.fruitPresser.getBlock();
+		return GrowthCraftCellar.blocks.fruitPresser.getBlock();
 	}
 
 	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
@@ -189,22 +188,6 @@ public class BlockFruitPress extends BlockCellarContainer
 		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) &&
 			super.canPlaceBlockAt(world, x, y, z) &&
 			super.canPlaceBlockAt(world, x, y + 1, z);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z)
-	{
-		return GrowthCraftCellar.fruitPress.getItem();
-	}
-
-	/************
-	 * DROPS
-	 ************/
-	@Override
-	public Item getItemDropped(int par1, Random random, int par3)
-	{
-		return GrowthCraftCellar.fruitPress.getItem();
 	}
 
 	@Override
