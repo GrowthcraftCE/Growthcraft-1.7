@@ -67,8 +67,8 @@ public class ComponentVillageGrapeVineyard extends StructureVillagePieces.Villag
 			this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, 1, 7, box);
 			this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, 2, 1, box);
 			this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, 2, 7, box);
-			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.fenceRope.getBlock(), 0, loop, 3, 1, box);
-			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.fenceRope.getBlock(), 0, loop, 3, 7, box);
+			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.blocks.fenceRope.getBlock(), 0, loop, 3, 1, box);
+			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.blocks.fenceRope.getBlock(), 0, loop, 3, 7, box);
 			this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeVine1.getBlock(), 1, loop, 1, 4, box);
 			this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeVine1.getBlock(), 1, loop, 2, 4, box);
 			for (loop2 = 2; loop2 <= 6; ++loop2)
