@@ -54,7 +54,7 @@ public class BlockBambooWall extends Block
 		final Block block = world.getBlock(x, y, z);
 
 		if (this == block ||
-			GrowthCraftBamboo.bambooStalk.getBlock() == block ||
+			GrowthCraftBamboo.blocks.bambooStalk.getBlock() == block ||
 			Blocks.glass_pane == block ||
 			block instanceof BlockFenceGate ||
 			block instanceof BlockFence ||

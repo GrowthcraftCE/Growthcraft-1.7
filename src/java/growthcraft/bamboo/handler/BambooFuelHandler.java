@@ -22,12 +22,12 @@ public class BambooFuelHandler implements IFuelHandler
 			{
 				return 100;
 			}
-			else if (GrowthCraftBamboo.bambooShoot.getItem() == item)
+			else if (GrowthCraftBamboo.blocks.bambooShoot.getItem() == item)
 			{
 				return 100;
 			}
 			// Alatyami added per GitHub Issue #55
-			else if (GrowthCraftBamboo.bambooSingleSlab.getItem() == item)
+			else if (GrowthCraftBamboo.blocks.bambooSingleSlab.getItem() == item)
 			{
 				return 150;
 			}

@@ -17,8 +17,8 @@ public class WorldGenBamboo extends WorldGenAbstractTree
 	private final int density = GrowthCraftBamboo.getConfig().bambooWorldGenDensity;
 	private final int minTreeHeight = GrowthCraftBamboo.getConfig().bambooTreeMinHeight;
 	private final int maxTreeHeight = GrowthCraftBamboo.getConfig().bambooTreeMaxHeight;
-	private final Block leaves = GrowthCraftBamboo.bambooLeaves.getBlock();
-	private final Block log = GrowthCraftBamboo.bambooStalk.getBlock();
+	private final Block leaves = GrowthCraftBamboo.blocks.bambooLeaves.getBlock();
+	private final Block log = GrowthCraftBamboo.blocks.bambooStalk.getBlock();
 
 	public WorldGenBamboo(boolean doblocknotify)
 	{

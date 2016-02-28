@@ -61,8 +61,8 @@ public class BlockBambooFence extends BlockFence
 		if (this == block ||
 			(block instanceof BlockFence) ||
 			(block instanceof BlockFenceGate) ||
-			GrowthCraftBamboo.bambooWall.isSameAs(block) ||
-			GrowthCraftBamboo.bambooStalk.isSameAs(block))
+			GrowthCraftBamboo.blocks.bambooWall.isSameAs(block) ||
+			GrowthCraftBamboo.blocks.bambooStalk.isSameAs(block))
 		{
 			return true;
 		}

@@ -14,7 +14,7 @@ public class BonemealEventBamboo
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
 	{
-		if (GrowthCraftBamboo.bambooStalk.getBlock() == event.block)
+		if (GrowthCraftBamboo.blocks.bambooStalk.getBlock() == event.block)
 		{
 			if (!this.isBambooOnGround(event.world, event.x, event.y, event.z))
 			{
@@ -47,9 +47,9 @@ public class BonemealEventBamboo
 							y = y + rand.nextInt(2) - rand.nextInt(2);
 							z = z + rand.nextInt(size * 2 + 1);
 
-							if (event.world.isAirBlock(x, y, z) && GrowthCraftBamboo.bambooShoot.getBlock().canBlockStay(event.world, x, y, z))
+							if (event.world.isAirBlock(x, y, z) && GrowthCraftBamboo.blocks.bambooShoot.getBlock().canBlockStay(event.world, x, y, z))
 							{
-								event.world.setBlock(x, y, z, GrowthCraftBamboo.bambooShoot.getBlock(), 0, 3);
+								event.world.setBlock(x, y, z, GrowthCraftBamboo.blocks.bambooShoot.getBlock(), 0, 3);
 								flag = true;
 							}
 						}
@@ -63,7 +63,7 @@ public class BonemealEventBamboo
 
 	private boolean isBambooOnGround(World world, int x, int y, int z)
 	{
-		return GrowthCraftBamboo.bambooStalk.getBlock().isBambooOnGround(world, x, y, z);
+		return GrowthCraftBamboo.blocks.bambooStalk.getBlock().isBambooOnGround(world, x, y, z);
 	}
 
 	private int countNearbyValidSoil(World world, int x, int y, int z, int b)
@@ -80,7 +80,7 @@ public class BonemealEventBamboo
 				for (y1 = y - 1; y1 <= y + 1; ++y1)
 				{
 					final boolean flag = world.isAirBlock(x1, y1, z1) &&
-						GrowthCraftBamboo.bambooShoot.getBlock().canBlockStay(world, x1, y1, z1);
+						GrowthCraftBamboo.blocks.bambooShoot.getBlock().canBlockStay(world, x1, y1, z1);
 					if (flag)
 					{
 						++count;

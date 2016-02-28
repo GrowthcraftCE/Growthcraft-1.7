@@ -26,12 +26,14 @@ public class BlockBambooFenceGate extends BlockFenceGate
 	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2)
+	public IIcon getIcon(int side, int _meta)
 	{
-		return GrowthCraftBamboo.bambooBlock.getBlock().getBlockTextureFromSide(par1);
+		return GrowthCraftBamboo.blocks.bambooBlock.getBlock().getBlockTextureFromSide(side);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg){}
+	public void registerBlockIcons(IIconRegister reg)
+	{
+	}
 }

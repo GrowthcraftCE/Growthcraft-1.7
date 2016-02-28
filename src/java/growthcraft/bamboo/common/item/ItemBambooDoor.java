@@ -35,7 +35,7 @@ public class ItemBambooDoor extends Item
 		else
 		{
 			++y;
-			final Block block = GrowthCraftBamboo.bambooDoor.getBlock();
+			final Block block = GrowthCraftBamboo.blocks.bambooDoor.getBlock();
 
 			if (player.canPlayerEdit(x, y, z, side, stack) && player.canPlayerEdit(x, y + 1, z, side, stack))
 			{
