@@ -95,7 +95,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	{
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock.getBlock());
+			world.setBlock(x, y, z, GrowthCraftCore.blocks.ropeBlock.getBlock());
 		}
 		else
 		{
