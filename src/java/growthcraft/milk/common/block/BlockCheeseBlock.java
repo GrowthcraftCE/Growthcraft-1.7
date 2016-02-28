@@ -58,7 +58,6 @@ public class BlockCheeseBlock extends GrcBlockContainer
 
 	public BlockCheeseBlock()
 	{
-		// placeholder
 		super(Material.cake);
 		setBlockName("grcmilk.CheeseBlock");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
