@@ -3,7 +3,7 @@ itemGroup.tabGrowthCraft=Growthcraft
 
 # Blocks
 tile.grc.fenceRope.name=Fence with Rope
-tile.grc.netherBrickFenceRope=Nether Brick Fence with Rope
+tile.grc.netherBrickFenceRope.name=Nether Brick Fence with Rope
 tile.grc.ropeBlock.name=Rope
 
 # Items
@@ -74,7 +74,7 @@ grc.format.crop.progress_format=%d%%
 grc.format.paddy.hasFluid=Has Fluid :
 grccore.device.heated.multiplier.format= %d%%
 grccore.device.heated.prefix=Heat :
-grccore.device.heated.state.false=<Cold>
+grccore.device.heated.state.false= <Cold>
 grccore.device.progress.format= %d%%
 grccore.device.progress.prefix=Progress :
 grccore.waila.option.DisplayFluidContent=Fluid Tanks
