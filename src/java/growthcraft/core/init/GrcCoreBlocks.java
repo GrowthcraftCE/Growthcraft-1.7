@@ -43,7 +43,7 @@ public class GrcCoreBlocks extends GrcModuleBase
 	{
 		ropeBlock = new BlockDefinition(new BlockRope());
 		fenceRope = new BlockDefinition(new BlockFenceRope(Blocks.fence, "grc.fenceRope"));
-		netherBrickFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.nether_brick_fence, "grccore.NetherBrickFenceRope"));
+		netherBrickFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.nether_brick_fence, "grc.netherBrickFenceRope"));
 
 		FenceRopeRegistry.instance().addEntry(Blocks.fence, fenceRope.getBlock());
 		FenceRopeRegistry.instance().addEntry(Blocks.nether_brick_fence, netherBrickFenceRope.getBlock());
@@ -57,7 +57,7 @@ public class GrcCoreBlocks extends GrcModuleBase
 		//====================
 		fenceRope.register("grc.fenceRope");
 		ropeBlock.register("grc.ropeBlock");
-		netherBrickFenceRope.register("grccore.NetherBrickFenceRope");
+		netherBrickFenceRope.register("grc.netherBrickFenceRope");
 
 		//====================
 		// ADDITIONAL PROPS.

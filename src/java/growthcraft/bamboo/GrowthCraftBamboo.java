@@ -86,6 +86,8 @@ public class GrowthCraftBamboo
 
 		if (config.debugEnabled) modules.setLogger(logger);
 
+		modules.preInit();
+
 		bamboo = new ItemDefinition(new ItemBamboo());
 		bambooDoorItem = new ItemDefinition(new ItemBambooDoor());
 		bambooRaft = new ItemDefinition(new ItemBambooRaft());
@@ -101,7 +103,6 @@ public class GrowthCraftBamboo
 				.setTemperatureRainfall(0.7F, 0.8F);
 		}
 
-		modules.preInit();
 		register();
 	}
 

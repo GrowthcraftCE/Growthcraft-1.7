@@ -76,7 +76,7 @@ public class GrcBambooBlocks extends GrcModuleBase
 		bambooDoor       = new BlockDefinition(new BlockBambooDoor());
 		bambooFenceGate  = new BlockDefinition(new BlockBambooFenceGate());
 		bambooScaffold   = new BlockDefinition(new BlockBambooScaffold());
-		bambooFenceRope = new BlockDefinition(new BlockFenceRope(bambooFence.getBlock(), "grcbamboo.BlockBambooFenceRope"));
+		bambooFenceRope = new BlockDefinition(new BlockFenceRope(bambooFence.getBlock(), "grc.bambooFenceRope"));
 		FenceRopeRegistry.instance().addEntry(bambooFence.getBlock(), bambooFenceRope.getBlock());
 	}
 
@@ -88,7 +88,7 @@ public class GrcBambooBlocks extends GrcModuleBase
 		bambooStalk.register("grc.bambooStalk");
 		bambooLeaves.register("grc.bambooLeaves");
 		bambooFence.register("grc.bambooFence");
-		bambooFenceRope.register("grc.BlockBambooFenceRope");
+		bambooFenceRope.register("grc.bambooFenceRope");
 		bambooWall.register("grc.bambooWall");
 		bambooStairs.register("grc.bambooStairs");
 		bambooSingleSlab.register("grc.bambooSingleSlab", ItemBambooSlab.class);
