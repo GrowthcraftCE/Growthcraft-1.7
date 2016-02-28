@@ -35,12 +35,27 @@ public class BlockKey extends HashKey
 	public final Block block;
 	public final int meta;
 
-	public BlockKey(@Nonnull Block bblock, int imeta)
+	public BlockKey(@Nonnull Block pBlock, int pMeta)
 	{
 		super();
-		this.block = bblock;
-		this.meta = imeta;
+		this.block = pBlock;
+		this.meta = pMeta;
 		generateHashCode();
+	}
+
+	public BlockKey(@Nonnull Block pBlock)
+	{
+		this(pBlock, 0);
+	}
+
+	public Block getBlock()
+	{
+		return block;
+	}
+
+	public int getMetadata()
+	{
+		return meta;
 	}
 
 	public void generateHashCode()
