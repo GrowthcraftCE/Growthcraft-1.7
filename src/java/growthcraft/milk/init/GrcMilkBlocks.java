@@ -47,6 +47,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -108,6 +109,11 @@ public class GrcMilkBlocks extends GrcModuleBase
 		hangingCurds.register("grcmilk.HangingCurds", ItemBlockHangingCurds.class);
 		pancheon.register("grcmilk.Pancheon");
 		thistle.register("grcmilk.Thistle");
+
+		for (EnumCheeseType type : EnumCheeseType.VALUES)
+		{
+			OreDictionary.registerOre("blockCheese", type.asBlockItemStack());
+		}
 
 		GameRegistry.addRecipe(new ShapelessItemComparableRecipe(new DriedCurdComparator(),
 			EnumCheeseType.RICOTTA.asStack(),
