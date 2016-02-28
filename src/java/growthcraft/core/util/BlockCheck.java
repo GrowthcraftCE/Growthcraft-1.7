@@ -161,7 +161,7 @@ public class BlockCheck
 	 */
 	public static boolean isRope(Block block)
 	{
-		return GrowthCraftCore.ropeBlock.equals(block);
+		return GrowthCraftCore.blocks.ropeBlock.equals(block);
 	}
 
 	/**

@@ -5,10 +5,7 @@ import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.core.common.AchievementPageGrowthcraft;
-import growthcraft.core.common.block.BlockFenceRope;
-import growthcraft.core.common.block.BlockRope;
 import growthcraft.core.common.CommonProxy;
-import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill;
@@ -16,9 +13,9 @@ import growthcraft.core.eventhandler.HarvestDropsEventCore;
 import growthcraft.core.eventhandler.PlayerInteractEventAmazingStick;
 import growthcraft.core.eventhandler.PlayerInteractEventPaddy;
 import growthcraft.core.eventhandler.TextureStitchEventCore;
+import growthcraft.core.init.GrcCoreBlocks;
 import growthcraft.core.init.GrcCoreFluids;
 import growthcraft.core.init.GrcCoreItems;
-import growthcraft.core.integration.NEI;
 import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -27,11 +24,9 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -62,8 +57,7 @@ public class GrowthCraftCore
 
 	public static CreativeTabs creativeTab;
 
-	public static BlockDefinition fenceRope;
-	public static BlockDefinition ropeBlock;
+	public static GrcCoreBlocks blocks = new GrcCoreBlocks();
 	public static GrcCoreItems items = new GrcCoreItems();
 	public static GrcCoreFluids fluids = new GrcCoreFluids();
 
@@ -92,6 +86,7 @@ public class GrowthCraftCore
 		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
 		if (config.debugEnabled) logger.info("Pre-Initializing %s", MOD_ID);
 
+		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
 
@@ -106,12 +101,6 @@ public class GrowthCraftCore
 
 		creativeTab = new CreativeTabsGrowthcraft("tabGrowthCraft");
 
-		//====================
-		// INIT
-		//====================
-		fenceRope = new BlockDefinition(new BlockFenceRope());
-		ropeBlock = new BlockDefinition(new BlockRope());
-
 		EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
 
 		modules.preInit();
@@ -120,20 +109,6 @@ public class GrowthCraftCore
 
 	private void register()
 	{
-		//====================
-		// REGISTRIES
-		//====================
-		GameRegistry.registerBlock(fenceRope.getBlock(), "grc.fenceRope");
-		GameRegistry.registerBlock(ropeBlock.getBlock(), "grc.ropeBlock");
-
-		//====================
-		// ADDITIONAL PROPS.
-		//====================
-		Blocks.fire.setFireInfo(fenceRope.getBlock(), 5, 20);
-
-		NEI.hideItem(fenceRope.asStack());
-		NEI.hideItem(ropeBlock.asStack());
-
 		MinecraftForge.EVENT_BUS.register(new TextureStitchEventCore());
 
 		modules.register();
