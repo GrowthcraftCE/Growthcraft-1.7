@@ -4,6 +4,7 @@ itemGroup.tabGrowthCraft=Growthcraft
 # Blocks
 tile.grc.fenceRope.name=Fence with Rope
 tile.grc.ropeBlock.name=Rope
+tile.grccore.NetherBrickFenceRope=Nether Brick Fence with Rope
 
 # Items
 item.grc.rope.name=Rope
