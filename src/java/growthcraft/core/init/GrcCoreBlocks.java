@@ -65,6 +65,7 @@ public class GrcCoreBlocks extends GrcModuleBase
 		Blocks.fire.setFireInfo(fenceRope.getBlock(), 5, 20);
 
 		NEI.hideItem(fenceRope.asStack());
+		NEI.hideItem(netherBrickFenceRope.asStack());
 		NEI.hideItem(ropeBlock.asStack());
 	}
 }

@@ -111,5 +111,6 @@ public class GrcBambooBlocks extends GrcModuleBase
 		Blocks.fire.setFireInfo(bambooScaffold.getBlock(), 5, 20);
 
 		NEI.hideItem(bambooDoor.asStack());
+		NEI.hideItem(bambooFenceRope.asStack());
 	}
 }
