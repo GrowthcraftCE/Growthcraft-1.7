@@ -33,7 +33,6 @@ import growthcraft.api.core.util.TickUtils;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
-import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.BoozeUtils;
@@ -58,7 +57,6 @@ public class GrcHopsBooze extends GrcModuleBase
 	public BlockBoozeDefinition[] lagerFluids;
 	public ItemDefinition hopAle;
 	public ItemDefinition lager;
-	public ItemDefinition hopAleBucket_deprecated;
 	public ItemBucketBoozeDefinition[] hopAleBuckets;
 	public ItemBucketBoozeDefinition[] lagerBuckets;
 
@@ -68,25 +66,26 @@ public class GrcHopsBooze extends GrcModuleBase
 		this.lagerBooze = new Booze[7];
 		this.lagerFluids = new BlockBoozeDefinition[lagerBooze.length];
 		this.lagerBuckets = new ItemBucketBoozeDefinition[lagerBooze.length];
-		BoozeRegistryHelper.initializeBooze(lagerBooze, lagerFluids, lagerBuckets, "grc.lager", GrowthCraftHops.getConfig().lagerColor);
+		BoozeRegistryHelper.initializeBoozeFluids("grc.lager", lagerBooze);
 		for (Booze booze : lagerBooze)
 		{
-			booze.setDensity(1080);
+			booze.setColor(GrowthCraftHops.getConfig().lagerColor).setDensity(1080);
 		}
+		BoozeRegistryHelper.initializeBooze(lagerBooze, lagerFluids, lagerBuckets);
 
 		this.lager = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, lagerBooze));
 
 		this.hopAleBooze = new Booze[9];
 		this.hopAleFluids = new BlockBoozeDefinition[hopAleBooze.length];
 		this.hopAleBuckets = new ItemBucketBoozeDefinition[hopAleBooze.length];
-		BoozeRegistryHelper.initializeBooze(hopAleBooze, hopAleFluids, hopAleBuckets, "grc.hopAle", GrowthCraftHops.getConfig().hopAleColor);
+		BoozeRegistryHelper.initializeBoozeFluids("grc.hopAle", hopAleBooze);
 		for (Booze booze : hopAleBooze)
 		{
-			booze.setDensity(1080);
+			booze.setColor(GrowthCraftHops.getConfig().hopAleColor).setDensity(1080);
 		}
+		BoozeRegistryHelper.initializeBooze(hopAleBooze, hopAleFluids, hopAleBuckets);
 
 		this.hopAle = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, hopAleBooze));
-		this.hopAleBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(hopAleBooze).setColor(GrowthCraftHops.getConfig().hopAleColor));
 	}
 
 	private void registerLager()
@@ -271,9 +270,8 @@ public class GrcHopsBooze extends GrcModuleBase
 	{
 		GameRegistry.registerItem(hopAle.getItem(), "grc.hopAle");
 		GameRegistry.registerItem(lager.getItem(), "grc.lager");
-		GameRegistry.registerItem(hopAleBucket_deprecated.getItem(), "grc.hopAle_bucket");
 
-		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle, "grc.hopAle", hopAleBucket_deprecated);
+		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle, "grc.hopAle", null);
 		BoozeRegistryHelper.registerBooze(lagerBooze, lagerFluids, lagerBuckets, lager, "grc.lager", null);
 		registerFermentations();
 	}

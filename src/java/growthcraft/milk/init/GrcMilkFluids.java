@@ -86,10 +86,9 @@ public class GrcMilkFluids extends GrcModuleBase
 	{
 		if (GrowthCraftMilk.getConfig().milkEnabled)
 		{
-			this.milk = FluidFactory.instance().create(new GrcFluid("grcmilk.Milk"), FluidFactory.FEATURE_BOTTLE | FluidFactory.FEATURE_BLOCK);
+			this.milk = FluidFactory.instance().create(new GrcFluid("grcmilk.Milk").setDensity(1030).setViscosity(3000), FluidFactory.FEATURE_BOTTLE | FluidFactory.FEATURE_BLOCK);
 			milk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFF);
 			milk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
-			milk.getFluid().setDensity(1030).setViscosity(3000);
 		}
 
 		this.butterMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.ButterMilk"));
@@ -128,7 +127,12 @@ public class GrcMilkFluids extends GrcModuleBase
 		}
 
 		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, kumisFluids));
-		BoozeRegistryHelper.initializeBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets, kumisBasename, GrowthCraftMilk.getConfig().kumisColor);
+		BoozeRegistryHelper.initializeBoozeFluids(kumisBasename, kumisFluids);
+		for (Booze booze : kumisFluids)
+		{
+			booze.setColor(GrowthCraftMilk.getConfig().kumisColor).setDensity(1030).setViscosity(3000);
+		}
+		BoozeRegistryHelper.initializeBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets);
 		kumisFluids[5].setColor(GrowthCraftMilk.getConfig().poisonedKumisColor);
 		kumisFluidBlocks[5].getBlock().refreshColor();
 		for (BlockBoozeDefinition def : kumisFluidBlocks)

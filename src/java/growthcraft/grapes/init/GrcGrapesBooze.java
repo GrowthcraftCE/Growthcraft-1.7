@@ -33,7 +33,6 @@ import growthcraft.api.core.util.TickUtils;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
-import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.BoozeUtils;
@@ -55,7 +54,6 @@ public class GrcGrapesBooze extends GrcModuleBase
 	public Booze[] grapeWineBooze;
 	public BlockBoozeDefinition[] grapeWineFluids;
 	public ItemDefinition grapeWine;
-	public ItemDefinition grapeWineBucket_deprecated;
 	public ItemBucketBoozeDefinition[] grapeWineBuckets;
 
 	@Override
@@ -64,18 +62,18 @@ public class GrcGrapesBooze extends GrcModuleBase
 		grapeWineBooze = new Booze[8];
 		grapeWineFluids = new BlockBoozeDefinition[grapeWineBooze.length];
 		grapeWineBuckets = new ItemBucketBoozeDefinition[grapeWineBooze.length];
-		BoozeRegistryHelper.initializeBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, "grc.grapeWine", GrowthCraftGrapes.getConfig().grapeWineColor);
+		BoozeRegistryHelper.initializeBoozeFluids("grc.grapeWine", grapeWineBooze);
 		for (Booze booze : grapeWineBooze)
 		{
-			booze.setDensity(1120);
+			booze.setColor(GrowthCraftGrapes.getConfig().grapeWineColor).setDensity(1120);
 		}
+		BoozeRegistryHelper.initializeBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets);
 		grapeWineBooze[4].setColor(GrowthCraftGrapes.getConfig().ambrosiaColor);
 		grapeWineFluids[4].getBlock().refreshColor();
 		grapeWineBooze[5].setColor(GrowthCraftGrapes.getConfig().portWineColor);
 		grapeWineFluids[5].getBlock().refreshColor();
 
 		grapeWine        = new ItemDefinition(new ItemBoozeBottle(2, -0.3F, grapeWineBooze));
-		grapeWineBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(grapeWineBooze).setColor(GrowthCraftGrapes.getConfig().grapeWineColor));
 	}
 
 	private void registerFermentations()
@@ -172,9 +170,8 @@ public class GrcGrapesBooze extends GrcModuleBase
 	public void register()
 	{
 		GameRegistry.registerItem(grapeWine.getItem(), "grc.grapeWine");
-		GameRegistry.registerItem(grapeWineBucket_deprecated.getItem(), "grc.grapeWine_bucket");
 
-		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, grapeWine, "grc.grapeWine", grapeWineBucket_deprecated);
+		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, grapeWine, "grc.grapeWine", null);
 		registerFermentations();
 
 		OreDictionary.registerOre("foodGrapejuice", grapeWine.asStack(1, 0));

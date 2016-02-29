@@ -51,6 +51,12 @@ public class GrcBlockFluid extends BlockFluidClassic
 		setBlockName(fluid.getUnlocalizedName());
 	}
 
+	public GrcBlockFluid refreshSettings()
+	{
+		setDensity(definedFluid.getDensity());
+		return this;
+	}
+
 	public GrcBlockFluid refreshLight()
 	{
 		// http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color

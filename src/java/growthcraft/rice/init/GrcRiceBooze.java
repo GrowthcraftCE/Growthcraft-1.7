@@ -33,7 +33,6 @@ import growthcraft.api.core.util.TickUtils;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
-import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.BoozeUtils;
@@ -55,7 +54,6 @@ public class GrcRiceBooze extends GrcModuleBase
 	public Booze[] riceSakeBooze;
 	public BlockBoozeDefinition[] riceSakeFluids;
 	public ItemDefinition riceSake;
-	public ItemDefinition riceSakeBucket_deprecated;
 	public ItemBucketBoozeDefinition[] riceSakeBuckets;
 
 	@Override
@@ -64,11 +62,15 @@ public class GrcRiceBooze extends GrcModuleBase
 		riceSakeBooze = new Booze[7];
 		riceSakeFluids = new BlockBoozeDefinition[riceSakeBooze.length];
 		riceSakeBuckets = new ItemBucketBoozeDefinition[riceSakeBooze.length];
-		BoozeRegistryHelper.initializeBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, "grc.riceSake", GrowthCraftRice.getConfig().riceSakeColor);
+		BoozeRegistryHelper.initializeBoozeFluids("grc.riceSake", riceSakeBooze);
+		for (Booze booze : riceSakeBooze)
+		{
+			booze.setColor(GrowthCraftRice.getConfig().riceSakeColor).setDensity(980);
+		}
+		BoozeRegistryHelper.initializeBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets);
 		riceSakeBooze[4].setColor(GrowthCraftRice.getConfig().riceSakeDivineColor);
 		riceSakeFluids[4].getBlock().refreshColor();
 		riceSake = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, riceSakeBooze));
-		riceSakeBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(riceSakeBooze).setColor(GrowthCraftRice.getConfig().riceSakeColor));
 	}
 
 	private void registerRecipes()
@@ -147,9 +149,8 @@ public class GrcRiceBooze extends GrcModuleBase
 	public void register()
 	{
 		GameRegistry.registerItem(riceSake.getItem(), "grc.riceSake");
-		GameRegistry.registerItem(riceSakeBucket_deprecated.getItem(), "grc.riceSake_bucket");
 
-		BoozeRegistryHelper.registerBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, riceSake, "grc.riceSake", riceSakeBucket_deprecated);
+		BoozeRegistryHelper.registerBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, riceSake, "grc.riceSake", null);
 		registerRecipes();
 	}
 }

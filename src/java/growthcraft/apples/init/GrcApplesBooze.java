@@ -35,7 +35,6 @@ import growthcraft.apples.GrowthCraftApples;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
-import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.BoozeUtils;
@@ -56,7 +55,6 @@ public class GrcApplesBooze extends GrcModuleBase
 	public Booze[] appleCiderBooze;
 	public BlockBoozeDefinition[] appleCiderFluids;
 	public ItemDefinition appleCider;
-	public ItemDefinition appleCiderBucket_deprecated;
 	public ItemBucketBoozeDefinition[] appleCiderBuckets;
 
 	@Override
@@ -65,17 +63,17 @@ public class GrcApplesBooze extends GrcModuleBase
 		appleCiderBooze = new Booze[7];
 		appleCiderFluids = new BlockBoozeDefinition[appleCiderBooze.length];
 		appleCiderBuckets = new ItemBucketBoozeDefinition[appleCiderBooze.length];
-		BoozeRegistryHelper.initializeBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, "grc.appleCider", GrowthCraftApples.getConfig().appleCiderColor);
+		BoozeRegistryHelper.initializeBoozeFluids("grc.appleCider", appleCiderBooze);
 		for (Booze booze : appleCiderBooze)
 		{
-			booze.setDensity(1010);
+			booze.setColor(GrowthCraftApples.getConfig().appleCiderColor).setDensity(1010);
 		}
+		BoozeRegistryHelper.initializeBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets);
 
 		appleCiderBooze[4].setColor(GrowthCraftApples.getConfig().silkenNectarColor);
 		appleCiderFluids[4].getBlock().refreshColor();
 
 		appleCider = new ItemDefinition(new ItemBoozeBottle(4, -0.3F, appleCiderBooze));
-		appleCiderBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(appleCiderBooze).setColor(GrowthCraftApples.getConfig().appleCiderColor));
 	}
 
 	private void registerRecipes()
@@ -175,9 +173,8 @@ public class GrcApplesBooze extends GrcModuleBase
 	public void register()
 	{
 		GameRegistry.registerItem(appleCider.getItem(), "grc.appleCider");
-		GameRegistry.registerItem(appleCiderBucket_deprecated.getItem(), "grc.appleCider_bucket");
 
-		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", appleCiderBucket_deprecated);
+		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", null);
 
 		// Ore Dictionary
 		OreDictionary.registerOre("foodApplejuice", appleCider.asStack());

@@ -55,13 +55,20 @@ public class BoozeRegistryHelper
 {
 	private BoozeRegistryHelper() {}
 
-	public static void initializeBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemBucketBoozeDefinition[] buckets, String basename, int color)
+	public static void initializeBoozeFluids(String basename, Booze[] boozes)
 	{
 		for (int i = 0; i < boozes.length; ++i)
 		{
-			boozes[i] = new Booze(basename + i).setColor(color);
+			boozes[i] = new Booze(basename + i);
 			FluidRegistry.registerFluid(boozes[i]);
 			CellarRegistry.instance().booze().registerBooze(boozes[i]);
+		}
+	}
+
+	public static void initializeBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemBucketBoozeDefinition[] buckets)
+	{
+		for (int i = 0; i < boozes.length; ++i)
+		{
 			final BlockFluidBooze boozeBlock = new BlockFluidBooze(boozes[i]);
 			fluidBlocks[i] = new BlockBoozeDefinition(boozeBlock);
 			buckets[i] = new ItemBucketBoozeDefinition(new ItemBucketBooze(boozeBlock, boozes[i]));
