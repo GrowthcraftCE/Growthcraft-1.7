@@ -127,6 +127,22 @@ public class FluidFactory
 			return this;
 		}
 
+		public FluidDetails setBlockColor(int color)
+		{
+			if (block != null) block.getBlock().setColor(color);
+			return this;
+		}
+
+		public FluidDetails refreshItemColor()
+		{
+			return setItemColor(fluid.getFluid().getColor());
+		}
+
+		public FluidDetails refreshBlockColor()
+		{
+			return setBlockColor(fluid.getFluid().getColor());
+		}
+
 		public int getItemColor()
 		{
 			return itemColor;
@@ -156,6 +172,8 @@ public class FluidFactory
 		if (NumUtils.isFlagged(features, FEATURE_BUCKET))
 			details.bucket = new ItemTypeDefinition<ItemBucketFluid>(new ItemBucketFluid(details.block != null ? details.block.getBlock() : null, fluid, null));
 
+		details.refreshItemColor();
+		details.refreshBlockColor();
 		return details;
 	}
 
