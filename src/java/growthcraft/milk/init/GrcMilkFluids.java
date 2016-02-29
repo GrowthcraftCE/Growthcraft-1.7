@@ -117,9 +117,9 @@ public class GrcMilkFluids extends GrcModuleBase
 		{
 			final String fluidName = "grcmilk.Cheese" + StringUtils.capitalize(cheese.name);
 			final Fluid fluid = new GrcFluid(fluidName).setColor(cheese.getColor());
-			final FluidFactory.FluidDetails details = FluidFactory.instance().create(fluid);
+			final FluidFactory.FluidDetails details = FluidFactory.instance().create(fluid, FluidFactory.FEATURE_NONE);
 			cheeses.put(cheese, details);
-			details.block.getBlock().setColor(cheese.getColor()).setBlockTextureName("grcmilk:fluids/milk");
+			if (details.block != null) details.block.getBlock().setColor(cheese.getColor()).setBlockTextureName("grcmilk:fluids/milk");
 			details.setItemColor(cheese.getColor());
 			fluidToCheeseType.put(fluid, cheese);
 		}

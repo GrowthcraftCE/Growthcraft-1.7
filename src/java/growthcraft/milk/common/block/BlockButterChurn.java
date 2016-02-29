@@ -46,6 +46,7 @@ public class BlockButterChurn extends GrcBlockContainer
 		setTileEntityType(TileEntityButterChurn.class);
 		final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 16f, 8f).scale(1f / 16f);
 		setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
+		setBlockTextureName("grcmilk:butter_churn");
 	}
 
 	private boolean tryChurning(World world, int x, int y, int z, EntityPlayer player)
