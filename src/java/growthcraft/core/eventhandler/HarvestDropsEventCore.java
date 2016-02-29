@@ -5,7 +5,6 @@ import java.util.Random;
 import growthcraft.api.core.CoreRegistry;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
@@ -17,7 +16,7 @@ public class HarvestDropsEventCore
 	@SubscribeEvent
 	public void onHarvestDrops(HarvestDropsEvent event)
 	{
-		if (event.block == Blocks.vine && !event.isSilkTouching && event.harvester != null)
+		if (CoreRegistry.instance().vineDrops().isVine(event.block, event.blockMetadata) && !event.isSilkTouching && event.harvester != null)
 		{
 			if (event.harvester.getHeldItem() == null)
 			{
@@ -41,7 +40,9 @@ public class HarvestDropsEventCore
 				final ItemStack stack = CoreRegistry.instance().vineDrops().getVineDropItem(event.world);
 				if (stack != null)
 				{
-					event.drops.add(new ItemStack(stack.getItem(), event.world.rand.nextInt(stack.stackSize) + 1));
+					final ItemStack result = stack.copy();
+					result.stackSize = event.world.rand.nextInt(stack.stackSize) + 1;
+					event.drops.add(result);
 				}
 			}
 		}

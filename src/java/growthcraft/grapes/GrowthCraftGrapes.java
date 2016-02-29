@@ -112,7 +112,7 @@ public class GrowthCraftGrapes
 		GameRegistry.registerItem(grapes.getItem(), "grc.grapes");
 		GameRegistry.registerItem(grapeSeeds.getItem(), "grc.grapeSeeds");
 
-		CoreRegistry.instance().vineDrops().addEntry(grapes.asStack(), config.vineGrapeDropRarity);
+		CoreRegistry.instance().vineDrops().addDropEntry(grapes.asStack(), config.vineGrapeDropRarity);
 
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(grapes.asStack(), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(grapes.asStack(), 1, 2, 10));

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,55 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.util;
+package growthcraft.api.core.vines.user;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
-import growthcraft.api.core.item.ItemKey;
+import growthcraft.api.core.schema.ICommentable;
 
-import net.minecraft.block.Block;
-
-/**
- * As the name implies, this class is used in place of a List for Block keys
- */
-public class BlockKey extends HashKey
+public class UserVineEntries implements ICommentable
 {
-	public final Block block;
-	public final int meta;
+	public String comment = "";
+	public List<UserVineEntry> data = new ArrayList<UserVineEntry>();
 
-	public BlockKey(@Nonnull Block pBlock, int pMeta)
+	@Override
+	public String getComment()
 	{
-		super();
-		this.block = pBlock;
-		this.meta = pMeta;
-		generateHashCode();
+		return comment;
 	}
 
-	public BlockKey(@Nonnull Block pBlock)
+	@Override
+	public void setComment(String com)
 	{
-		this(pBlock, 0);
-	}
-
-	public Block getBlock()
-	{
-		return block;
-	}
-
-	public int getMetadata()
-	{
-		return meta;
-	}
-
-	public boolean matches(@Nullable Block pBlock, int pMeta)
-	{
-		if (pBlock == null) return false;
-		return pBlock == block && (meta == ItemKey.WILDCARD_VALUE || pMeta == meta);
-	}
-
-	public void generateHashCode()
-	{
-		this.hash = block.hashCode();
-		this.hash = 31 * hash + meta;
+		this.comment = com;
 	}
 }

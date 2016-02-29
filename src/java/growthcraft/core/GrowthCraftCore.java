@@ -1,9 +1,12 @@
 package growthcraft.core;
 
 import growthcraft.api.core.fluids.user.UserFluidDictionaryConfig;
+import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.api.core.schema.BlockKeySchema;
+import growthcraft.api.core.vines.user.UserVinesConfig;
 import growthcraft.core.common.AchievementPageGrowthcraft;
 import growthcraft.core.common.CommonProxy;
 import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
@@ -16,6 +19,7 @@ import growthcraft.core.eventhandler.TextureStitchEventCore;
 import growthcraft.core.init.GrcCoreBlocks;
 import growthcraft.core.init.GrcCoreFluids;
 import growthcraft.core.init.GrcCoreItems;
+import growthcraft.core.integration.bop.BopPlatform;
 import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -27,6 +31,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -68,6 +73,7 @@ public class GrowthCraftCore
 	private GrcCoreConfig config = new GrcCoreConfig();
 	private ModuleContainer modules = new ModuleContainer();
 	private UserFluidDictionaryConfig userFluidDictionary = new UserFluidDictionaryConfig();
+	private UserVinesConfig userVinesConfig = new UserVinesConfig();
 
 	public static GrcCoreConfig getConfig()
 	{
@@ -90,7 +96,9 @@ public class GrowthCraftCore
 		modules.add(items);
 		modules.add(fluids);
 
+		userVinesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/vines.json");
 		userFluidDictionary.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/fluid_dictionary.json");
+		modules.add(userVinesConfig);
 		modules.add(userFluidDictionary);
 
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.core.integration.ThaumcraftModule());
@@ -122,6 +130,12 @@ public class GrowthCraftCore
 
 		ItemUtils.init();
 
+		userVinesConfig.addDefault(Blocks.vine);
+		if (BopPlatform.isLoaded())
+		{
+			userVinesConfig.addDefault(new BlockKeySchema(BopPlatform.MOD_ID, "willow", ItemKey.WILDCARD_VALUE));
+			userVinesConfig.addDefault(new BlockKeySchema(BopPlatform.MOD_ID, "ivy", ItemKey.WILDCARD_VALUE));
+		}
 		modules.init();
 	}
 

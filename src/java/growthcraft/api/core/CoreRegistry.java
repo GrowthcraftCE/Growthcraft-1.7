@@ -2,13 +2,15 @@ package growthcraft.api.core;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.ILoggable;
-import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.fluids.FluidDictionary;
 import growthcraft.api.core.fluids.FluidTagsRegistry;
 import growthcraft.api.core.fluids.IFluidDictionary;
 import growthcraft.api.core.fluids.IFluidTagsRegistry;
+import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.vines.IVineDropRegistry;
+import growthcraft.api.core.vines.VineDropRegistry;
 
 public class CoreRegistry implements ILoggable
 {
@@ -19,7 +21,7 @@ public class CoreRegistry implements ILoggable
 	private final IFluidTagsRegistry fluidTagsRegistry = new FluidTagsRegistry();
 	private final IEffectRegistry effectRegistry = new EffectRegistry().initialize();
 	private final IPotionEffectFactoryRegistry potionEffectFactoryRegistry = new PotionEffectFactoryRegistry();
-	private final VineDropRegistry vineDropRegistry = new VineDropRegistry();
+	private final IVineDropRegistry vineDropRegistry = new VineDropRegistry();
 
 	public static final CoreRegistry instance()
 	{
@@ -65,7 +67,7 @@ public class CoreRegistry implements ILoggable
 		return fluidDictionary;
 	}
 
-	public VineDropRegistry vineDrops()
+	public IVineDropRegistry vineDrops()
 	{
 		return vineDropRegistry;
 	}
