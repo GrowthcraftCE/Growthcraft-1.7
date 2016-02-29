@@ -2,9 +2,8 @@ package growthcraft.bees;
 
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.user.UserBeesConfig;
-import growthcraft.api.bees.user.UserFlowersConfig;
 import growthcraft.api.bees.user.UserFlowerEntry;
-//import growthcraft.api.bees.user.UserHoneyConfig;
+import growthcraft.api.bees.user.UserFlowersConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
@@ -19,19 +18,19 @@ import growthcraft.bees.common.village.VillageHandlerBees;
 import growthcraft.bees.common.village.VillageHandlerBeesApiarist;
 import growthcraft.bees.common.world.WorldGeneratorBees;
 import growthcraft.bees.creativetab.CreativeTabsGrowthcraftBees;
-import growthcraft.bees.init.GrcBeesBooze;
+import growthcraft.bees.init.GrcBeesFluids;
 import growthcraft.bees.init.GrcBeesItems;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.integration.bop.BopPlatform;
 import growthcraft.core.util.MapGenHelper;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -72,7 +71,7 @@ public class GrowthCraftBees
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxThaumcraft;
 	public static BlockDefinition beeHive;
 	public static GrcBeesItems items = new GrcBeesItems();
-	public static GrcBeesBooze booze = new GrcBeesBooze();
+	public static GrcBeesFluids fluids = new GrcBeesFluids();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcBeesConfig config = new GrcBeesConfig();
@@ -106,7 +105,7 @@ public class GrowthCraftBees
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
 
 		modules.add(items);
-		modules.add(booze);
+		modules.add(fluids);
 
 		userBeesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/bees.json");
 		modules.add(userBeesConfig);
@@ -161,7 +160,7 @@ public class GrowthCraftBees
 		BeesRegistry.instance().addHoneyComb(items.honeyCombEmpty.asStack(), items.honeyCombFilled.asStack());
 		userFlowersConfig.addDefault(Blocks.red_flower);
 		userFlowersConfig.addDefault(Blocks.yellow_flower);
-		if (Loader.isModLoaded("BiomesOPlenty"))
+		if (BopPlatform.isLoaded())
 		{
 			userFlowersConfig.addDefault(
 				new UserFlowerEntry("BiomesOPlenty", "flowers", OreDictionary.WILDCARD_VALUE)
@@ -219,9 +218,9 @@ public class GrowthCraftBees
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < booze.honeyMeadBooze.length; ++i)
+			for (int i = 0; i < fluids.honeyMeadBooze.length; ++i)
 			{
-				booze.honeyMeadBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				fluids.honeyMeadBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}

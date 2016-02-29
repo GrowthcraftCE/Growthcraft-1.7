@@ -24,10 +24,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.FluidStack;
 
-public class GrcBeesBooze extends GrcModuleBase
+public class GrcBeesFluids extends GrcModuleBase
 {
 	public Booze[] honeyMeadBooze;
-	public ItemDefinition honeyMead;
+	public ItemDefinition honeyMeadBottle;
 	public ItemDefinition honeyMeadBucket_deprecated;
 	public ItemBucketBoozeDefinition[] honeyMeadBuckets;
 	public BlockBoozeDefinition[] honeyMeadFluids;
@@ -40,7 +40,7 @@ public class GrcBeesBooze extends GrcModuleBase
 		honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
 		BoozeRegistryHelper.initializeBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, "grc.honeyMead", GrowthCraftBees.getConfig().honeyMeadColor);
 
-		honeyMead = new ItemDefinition(new ItemBoozeBottle(6, -0.45F, honeyMeadBooze));
+		honeyMeadBottle = new ItemDefinition(new ItemBoozeBottle(6, -0.45F, honeyMeadBooze));
 		honeyMeadBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(honeyMeadBooze).setColor(GrowthCraftBees.getConfig().honeyMeadColor));
 	}
 
@@ -115,14 +115,14 @@ public class GrcBeesBooze extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		GameRegistry.registerItem(honeyMead.getItem(), "grc.honeyMead");
+		GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honeyMead");
 		GameRegistry.registerItem(honeyMeadBucket_deprecated.getItem(), "grc.honeyMead_bucket");
 
 		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
 			Items.water_bucket, GrowthCraftBees.items.honeyJar.getItem(), Items.bucket);
 
 		// Booze
-		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMead, "grc.honeyMead", honeyMeadBucket_deprecated);
+		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle, "grc.honeyMead", honeyMeadBucket_deprecated);
 		registerRecipes();
 	}
 }
