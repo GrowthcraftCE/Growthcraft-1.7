@@ -43,6 +43,7 @@ import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
+import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.cellar.util.YeastType;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
@@ -84,10 +85,12 @@ public class GrcMilkFluids extends GrcModuleBase
 	public void preInit()
 	{
 		if (GrowthCraftMilk.getConfig().milkEnabled)
+		{
 			this.milk = FluidFactory.instance().create(new GrcFluid("grcmilk.Milk"), FluidFactory.FEATURE_BOTTLE | FluidFactory.FEATURE_BLOCK);
-
-		if (milk != null) milk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFF);
-		if (milk != null) milk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
+			milk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFF);
+			milk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
+			milk.getFluid().setDensity(1030).setViscosity(3000);
+		}
 
 		this.butterMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.ButterMilk"));
 		butterMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFEE7);
@@ -210,7 +213,7 @@ public class GrcMilkFluids extends GrcModuleBase
 			.fermentsFrom(fs[0], new ItemStack(Items.glowstone_dust), fermentTime)
 			.fermentsFrom(fs[2], new ItemStack(Items.glowstone_dust), fermentTime)
 			.getEffect()
-				.setTipsy(0.10f, 900)
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), 900)
 				.addEffect(milkEffect);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[2])
@@ -218,7 +221,7 @@ public class GrcMilkFluids extends GrcModuleBase
 			.fermentsFrom(fs[0], new ItemStack(Items.redstone), fermentTime)
 			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
 			.getEffect()
-				.setTipsy(0.10f, 900)
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.02f), 900)
 				.addEffect(milkEffect);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[3])
@@ -226,7 +229,7 @@ public class GrcMilkFluids extends GrcModuleBase
 			.fermentsFrom(fs[1], YeastType.ETHEREAL.asStack(), fermentTime)
 			.fermentsFrom(fs[2], YeastType.ETHEREAL.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(0.10f, 900)
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.02f), 900)
 				.addEffect(milkEffect);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[4])
@@ -240,7 +243,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[5])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
 			.getEffect()
-				.setTipsy(0.10f, 900)
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.02f), 900)
 				.addEffect(evilMilkEffect);
 	}
 

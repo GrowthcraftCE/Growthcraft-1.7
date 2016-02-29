@@ -1,3 +1,26 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015, 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.hops.init;
 
 import growthcraft.api.cellar.booze.Booze;
@@ -13,6 +36,7 @@ import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.cellar.common.item.ItemBoozeBucketDEPRECATED;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
+import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.cellar.util.YeastType;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
@@ -41,25 +65,32 @@ public class GrcHopsBooze extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		lagerBooze = new Booze[7];
-		lagerFluids = new BlockBoozeDefinition[lagerBooze.length];
-		lagerBuckets = new ItemBucketBoozeDefinition[lagerBooze.length];
+		this.lagerBooze = new Booze[7];
+		this.lagerFluids = new BlockBoozeDefinition[lagerBooze.length];
+		this.lagerBuckets = new ItemBucketBoozeDefinition[lagerBooze.length];
 		BoozeRegistryHelper.initializeBooze(lagerBooze, lagerFluids, lagerBuckets, "grc.lager", GrowthCraftHops.getConfig().lagerColor);
+		for (Booze booze : lagerBooze)
+		{
+			booze.setDensity(1080);
+		}
 
-		lager = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, lagerBooze));
+		this.lager = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, lagerBooze));
 
-		hopAleBooze = new Booze[9];
-		hopAleFluids = new BlockBoozeDefinition[hopAleBooze.length];
-		hopAleBuckets = new ItemBucketBoozeDefinition[hopAleBooze.length];
+		this.hopAleBooze = new Booze[9];
+		this.hopAleFluids = new BlockBoozeDefinition[hopAleBooze.length];
+		this.hopAleBuckets = new ItemBucketBoozeDefinition[hopAleBooze.length];
 		BoozeRegistryHelper.initializeBooze(hopAleBooze, hopAleFluids, hopAleBuckets, "grc.hopAle", GrowthCraftHops.getConfig().hopAleColor);
+		for (Booze booze : hopAleBooze)
+		{
+			booze.setDensity(1080);
+		}
 
-		hopAle = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, hopAleBooze));
-		hopAleBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(hopAleBooze).setColor(GrowthCraftHops.getConfig().hopAleColor));
+		this.hopAle = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, hopAleBooze));
+		this.hopAleBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(hopAleBooze).setColor(GrowthCraftHops.getConfig().hopAleColor));
 	}
 
 	private void registerLager()
 	{
-		final float defaultTipsy = 0.80f;
 		final int fermentTime = GrowthCraftCellar.getConfig().fermentTime;
 		final FluidStack[] fs = new FluidStack[lagerBooze.length];
 		for (int i = 0; i < fs.length; ++i)
@@ -80,7 +111,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.fermentsFrom(fs[0], YeastType.BREWERS.asStack(), fermentTime)
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.moveSpeed, TickUtils.seconds(90), 0)
 				.addPotionEntry(Potion.digSpeed, TickUtils.seconds(90), 0);
 
@@ -89,7 +120,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.fermentsFrom(fs[1], new ItemStack(Items.glowstone_dust), fermentTime)
 			.fermentsFrom(fs[3], new ItemStack(Items.glowstone_dust), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.moveSpeed, TickUtils.seconds(90), 0)
 				.addPotionEntry(Potion.digSpeed, TickUtils.seconds(90), 0);
 
@@ -98,7 +129,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
 			.fermentsFrom(fs[2], new ItemStack(Items.redstone), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.moveSpeed, TickUtils.seconds(90), 0)
 				.addPotionEntry(Potion.digSpeed, TickUtils.seconds(90), 0);
 
@@ -107,7 +138,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.fermentsFrom(fs[2], YeastType.ETHEREAL.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ETHEREAL.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.moveSpeed, TickUtils.seconds(90), 0)
 				.addPotionEntry(Potion.digSpeed, TickUtils.seconds(90), 0);
 
@@ -116,7 +147,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ORIGIN.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(0.90F, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.091f), TickUtils.seconds(45))
 				.addEffect(new EffectWeightedRandomList()
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.digSpeed.id, TickUtils.minutes(3), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.digSlowdown.id, TickUtils.minutes(3), 2))))
@@ -129,13 +160,12 @@ public class GrcHopsBooze extends GrcModuleBase
 			//.fermentsFrom(fs[2], YeastType.NETHERRASH.asStack(), fermentTime)
 			//.fermentsFrom(fs[3], YeastType.NETHERRASH.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
 				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);
 	}
 
 	private void registerHopAle()
 	{
-		final float defaultTipsy = 0.70f;
 		final int fermentTime = GrowthCraftCellar.getConfig().fermentTime;
 		final FluidStack[] fs = new FluidStack[hopAleBooze.length];
 		for (int i = 0; i < fs.length; ++i)
@@ -165,7 +195,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.fermentsFrom(fs[0], YeastType.BREWERS.asStack(), fermentTime)
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.digSpeed, TickUtils.minutes(3), 0);
 
 		// Glowstone
@@ -174,7 +204,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.fermentsFrom(fs[1], new ItemStack(Items.glowstone_dust), fermentTime)
 			.fermentsFrom(fs[3], new ItemStack(Items.glowstone_dust), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.12f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.digSpeed, TickUtils.minutes(3), 0);
 
 		// Redstone
@@ -183,7 +213,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
 			.fermentsFrom(fs[2], new ItemStack(Items.redstone), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.digSpeed, TickUtils.minutes(3), 0);
 
 		// Ethereal Yeast
@@ -192,7 +222,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.fermentsFrom(fs[2], YeastType.ETHEREAL.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ETHEREAL.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.digSpeed, TickUtils.minutes(3), 0);
 
 		// Lager Yeast
@@ -200,7 +230,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.tags(BoozeTag.HOPPED, BoozeTag.FERMENTED, BoozeTag.CHILLED)
 			.fermentsFrom(fs[5], YeastType.LAGER.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(0.80F, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.071f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.digSpeed, TickUtils.minutes(10), 2);
 
 		// Intoxicated - Origin
@@ -209,7 +239,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[3], YeastType.ORIGIN.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(0.90F, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.20f), TickUtils.seconds(45))
 				.addEffect(new EffectWeightedRandomList()
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.digSpeed.id, TickUtils.minutes(3), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.digSlowdown.id, TickUtils.minutes(3), 2))));
@@ -226,7 +256,7 @@ public class GrcHopsBooze extends GrcModuleBase
 			//.fermentsFrom(fs[6], YeastType.NETHERRASH.asStack(), fermentTime)
 			//.fermentsFrom(fs[7], YeastType.NETHERRASH.asStack(), fermentTime)
 			.getEffect()
-				.setTipsy(defaultTipsy, TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(45))
 				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);
 	}
 
