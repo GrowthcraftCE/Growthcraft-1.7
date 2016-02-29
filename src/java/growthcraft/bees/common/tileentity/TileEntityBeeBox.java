@@ -1,17 +1,23 @@
 package growthcraft.bees.common.tileentity;
 
 import growthcraft.api.bees.BeesRegistry;
+import growthcraft.api.core.util.AuxFX;
+import growthcraft.api.core.item.EnumDye;
 import growthcraft.bees.common.inventory.ContainerBeeBox;
 import growthcraft.bees.common.tileentity.device.DeviceBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.GrcTileEntityInventoryBase;
+import growthcraft.core.common.tileentity.IItemHandler;
 import growthcraft.core.util.ItemUtils;
 
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityBeeBox extends GrcTileEntityInventoryBase
+public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IItemHandler
 {
 	public static enum HoneyCombExpect
 	{
@@ -147,9 +153,9 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase
 		return countBees() >= 64;
 	}
 
-	public boolean isHoneyEnough()
+	public boolean isHoneyEnough(int size)
 	{
-		return countHoney() >= 6;
+		return countHoney() >= size;
 	}
 
 	public void decreaseHoney(int count)
@@ -283,5 +289,74 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase
 	public boolean canExtractItem(int index, ItemStack stack, int side)
 	{
 		return true;
+	}
+
+	@Override
+	public boolean tryPlaceItem(EntityPlayer player, ItemStack stack)
+	{
+		if (stack != null)
+		{
+			final Item item = stack.getItem();
+			if (item == Items.flower_pot)
+			{
+				if (isHoneyEnough(6))
+				{
+					ItemUtils.addStackToPlayer(GrowthCraftBees.items.honeyJar.asStack(), player, worldObj, xCoord, yCoord, zCoord, false);
+					ItemUtils.consumeStackOnPlayer(stack, player);
+					decreaseHoney(6);
+					markForBlockUpdate();
+					return true;
+				}
+			}
+			else if (item == Items.dye)
+			{
+				int time = 0;
+				if (stack.getItemDamage() == EnumDye.PINK.meta)
+				{
+					time = 9600;
+				}
+				else if (stack.getItemDamage() == EnumDye.MAGENTA.meta)
+				{
+					time = 4800;
+				}
+				if (time > 0)
+				{
+					setTime(time);
+					worldObj.playAuxSFX(AuxFX.BONEMEAL, xCoord, yCoord, zCoord, 0);
+					ItemUtils.consumeStackOnPlayer(stack, player);
+					markForBlockUpdate();
+				}
+				return true;
+			}
+			else if (item == Items.glass_bottle)
+			{
+				if (isHoneyEnough(2))
+				{
+					ItemUtils.addStackToPlayer(GrowthCraftBees.fluids.honey.asBottleItemStack(), player, worldObj, xCoord, yCoord, zCoord, false);
+					ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
+					decreaseHoney(2);
+					markForBlockUpdate();
+					return true;
+				}
+			}
+			else if (item == Items.bucket)
+			{
+				if (isHoneyEnough(6))
+				{
+					ItemUtils.addStackToPlayer(GrowthCraftBees.fluids.honey.asBucketItemStack(), player, worldObj, xCoord, yCoord, zCoord, false);
+					ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
+					decreaseHoney(6);
+					markForBlockUpdate();
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	{
+		return false;
 	}
 }

@@ -23,28 +23,22 @@ import growthcraft.bees.init.GrcBeesItems;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.bop.BopPlatform;
 import growthcraft.core.util.MapGenHelper;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -145,7 +139,6 @@ public class GrowthCraftBees
 
 	private void register()
 	{
-		MinecraftForge.EVENT_BUS.register(this);
 		// Bee Boxes
 		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
 		// Bee Hive(s)
@@ -187,6 +180,11 @@ public class GrowthCraftBees
 		final ItemStack honeyStack = items.honeyCombFilled.asStack();
 		GameRegistry.addShapelessRecipe(items.honeyJar.asStack(),
 			honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);
+		GameRegistry.addShapelessRecipe(items.honeyJar.asStack(),
+			fluids.honey.asBucketItemStack(), Items.flower_pot);
+		final ItemStack honeyBottleStack = fluids.honey.asBottleItemStack();
+		GameRegistry.addShapelessRecipe(items.honeyJar.asStack(),
+			honeyBottleStack, honeyBottleStack, honeyBottleStack, Items.flower_pot);
 	}
 
 	private void postRegisterRecipes()
@@ -210,19 +208,6 @@ public class GrowthCraftBees
 		CommonProxy.instance.registerVillagerSkin();
 
 		modules.init();
-	}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event)
-	{
-		if (event.map.getTextureType() == 0)
-		{
-			for (int i = 0; i < fluids.honeyMeadBooze.length; ++i)
-			{
-				fluids.honeyMeadBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
-			}
-		}
 	}
 
 	@EventHandler

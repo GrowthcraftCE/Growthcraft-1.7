@@ -39,6 +39,7 @@ grc.bees.item.honeyComb.deprecated=This item has been deprecated, craft to get t
 container.grc.beeBox=Bee Box
 
 # Fluids
+fluid.grc.honey=Honey
 fluid.grc.honeyMead=Mead
 fluid.grc.honeyMead0=Mead
 fluid.grc.honeyMead1=Mead
@@ -49,6 +50,7 @@ fluid.grc.honeyMead5=Mead
 fluid.grc.honeyMead6=Mead
 
 # Fluid Buckets
+item.bucket.fluid.grc.honey.name=Honey Bucket
 item.bucket.fluid.grc.honeyMead.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead0.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead1.name=Mead Bucket
@@ -59,6 +61,7 @@ item.bucket.fluid.grc.honeyMead5.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead6.name=Mead Bucket
 
 # Fluid Blocks
+tile.fluid.grc.honey.name=Honey
 tile.fluid.grc.honeyMead.name=Mead
 tile.fluid.grc.honeyMead0.name=Mead
 tile.fluid.grc.honeyMead1.name=Mead

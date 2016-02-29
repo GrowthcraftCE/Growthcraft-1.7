@@ -1,10 +1,13 @@
 package growthcraft.bees.init;
 
+import growthcraft.api.bees.BeesFluidTag;
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
+import growthcraft.api.core.GrcFluid;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
@@ -17,6 +20,8 @@ import growthcraft.cellar.util.YeastType;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.integration.forestry.ForestryFluids;
+import growthcraft.core.util.FluidFactory;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
@@ -26,6 +31,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class GrcBeesFluids extends GrcModuleBase
 {
+	public FluidFactory.FluidDetails honey;
 	public Booze[] honeyMeadBooze;
 	public ItemDefinition honeyMeadBottle;
 	public ItemDefinition honeyMeadBucket_deprecated;
@@ -35,6 +41,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
+		honey = FluidFactory.instance().create(new GrcFluid("grc.honey").setColor(0xffac01));
 		honeyMeadBooze = new Booze[7];
 		honeyMeadFluids = new BlockBoozeDefinition[honeyMeadBooze.length];
 		honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
@@ -42,6 +49,8 @@ public class GrcBeesFluids extends GrcModuleBase
 
 		honeyMeadBottle = new ItemDefinition(new ItemBoozeBottle(6, -0.45F, honeyMeadBooze));
 		honeyMeadBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(honeyMeadBooze).setColor(GrowthCraftBees.getConfig().honeyMeadColor));
+
+		honey.setCreativeTab(GrowthCraftBees.tab);
 	}
 
 	private void registerRecipes()
@@ -115,14 +124,45 @@ public class GrcBeesFluids extends GrcModuleBase
 	@Override
 	public void register()
 	{
+		honey.registerObjects("grc", "Honey");
 		GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honeyMead");
 		GameRegistry.registerItem(honeyMeadBucket_deprecated.getItem(), "grc.honeyMead_bucket");
 
+		final ItemStack waterBottle = new ItemStack(Items.potionitem, 1, 0);
+		final ItemStack honeyBottleStack = honey.asBottleItemStack();
+
+		// Bucket of mead recipes
+		/// Single bucket
 		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
-			Items.water_bucket, GrowthCraftBees.items.honeyJar.getItem(), Items.bucket);
+			Items.water_bucket,
+			GrowthCraftBees.items.honeyJar.getItem(),
+			Items.bucket);
+		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
+			Items.water_bucket,
+			honey.asBucketItemStack(),
+			Items.bucket);
+		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
+			Items.water_bucket,
+			honeyBottleStack, honeyBottleStack, honeyBottleStack,
+			Items.bucket);
+		/// Water bottles
+		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
+			waterBottle, waterBottle, waterBottle,
+			GrowthCraftBees.items.honeyJar.getItem(),
+			Items.bucket);
+		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
+			waterBottle, waterBottle, waterBottle,
+			honey.asBucketItemStack(),
+			Items.bucket);
+		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
+			waterBottle, waterBottle, waterBottle,
+			honeyBottleStack, honeyBottleStack, honeyBottleStack,
+			Items.bucket);
 
 		// Booze
 		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle, "grc.honeyMead", honeyMeadBucket_deprecated);
+		CoreRegistry.instance().fluidDictionary().addFluidTags(honey.getFluid(), BeesFluidTag.HONEY);
+		if (ForestryFluids.HONEY.exists()) CoreRegistry.instance().fluidDictionary().addFluidTags(ForestryFluids.HONEY.getFluid(), BeesFluidTag.HONEY);
 		registerRecipes();
 	}
 }

@@ -3,7 +3,6 @@ package growthcraft.bees.common.block;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.api.core.util.AuxFX;
 import growthcraft.bees.client.renderer.RenderBeeBox;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
@@ -19,7 +18,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -122,6 +120,7 @@ public class BlockBeeBox extends GrcBlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
+		if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
 		if (world.isRemote)
 		{
 			return true;
@@ -131,45 +130,9 @@ public class BlockBeeBox extends GrcBlockContainer
 			final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 			if (te != null)
 			{
-				final ItemStack itemstack = player.inventory.getCurrentItem();
-
-				if (itemstack != null)
-				{
-					if (itemstack.getItem() == Items.flower_pot && te.isHoneyEnough())
-					{
-						ItemUtils.addStackToPlayer(GrowthCraftBees.items.honeyJar.asStack(), player, world, x, y, z, false);
-						ItemUtils.consumeStackOnPlayer(itemstack, player);
-						te.decreaseHoney(6);
-						te.markDirty();
-						world.markBlockForUpdate(x, y, z);
-						return true;
-					}
-					else if (itemstack.getItem() == Items.dye)
-					{
-						int time = 0;
-						if (itemstack.getItemDamage() == 9)
-						{
-							time = 9600;
-						}
-						else if (itemstack.getItemDamage() == 13)
-						{
-							time = 4800;
-						}
-						if (time > 0)
-						{
-							te.setTime(time);
-							world.playAuxSFX(AuxFX.BONEMEAL, x, y, z, 0);
-							ItemUtils.consumeStackOnPlayer(itemstack, player);
-							te.markDirty();
-							world.markBlockForUpdate(x, y, z);
-						}
-						return true;
-					}
-				}
 				player.openGui(GrowthCraftBees.instance, 0, world, x, y, z);
 				return true;
 			}
-
 			return false;
 		}
 	}
@@ -294,7 +257,7 @@ public class BlockBeeBox extends GrcBlockContainer
 		else
 		{
 			final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
-			if (te != null && te.isHoneyEnough())
+			if (te != null && te.isHoneyEnough(6))
 			{
 				return icons[offset + 3];
 			}

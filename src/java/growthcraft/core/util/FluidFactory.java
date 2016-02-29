@@ -59,21 +59,27 @@ public class FluidFactory
 
 		public Block getFluidBlock()
 		{
-			if (block != null)
-				return block.getBlock();
-			return null;
+			return block != null ? block.getBlock() : null;
 		}
 
-		public ItemStack getBucketItemStack(int size)
+		public ItemStack asBucketItemStack(int size)
 		{
-			if (bucket != null)
-				return bucket.asStack(size);
-			return null;
+			return bucket != null ? bucket.asStack(size) : null;
 		}
 
-		public ItemStack getBucketItemStack()
+		public ItemStack asBucketItemStack()
 		{
-			return getBucketItemStack(1);
+			return asBucketItemStack(1);
+		}
+
+		public ItemStack asBottleItemStack(int size)
+		{
+			return bottle != null ? bottle.asStack(size) : null;
+		}
+
+		public ItemStack asBottleItemStack()
+		{
+			return asBottleItemStack(1);
 		}
 
 		public FluidDetails registerObjects(String prefix, String basename)
@@ -130,6 +136,7 @@ public class FluidFactory
 	public static final int FEATURE_BLOCK = 1;
 	public static final int FEATURE_BOTTLE = 2;
 	public static final int FEATURE_BUCKET = 4;
+	public static final int FEATURE_NONE = 0;
 	public static final int FEATURE_ALL = FEATURE_BLOCK | FEATURE_BOTTLE | FEATURE_BUCKET;
 	private static FluidFactory INSTANCE = new FluidFactory();
 
