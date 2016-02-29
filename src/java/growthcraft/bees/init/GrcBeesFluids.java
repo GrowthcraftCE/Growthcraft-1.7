@@ -41,12 +41,14 @@ public class GrcBeesFluids extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		final Fluid honeyFluid = new GrcFluid("grc.honey")
-			.setColor(0xffac01)
-			.setDensity(1420)
-			.setViscosity(73600);
-
-		honey = FluidFactory.instance().create(honeyFluid);
+		if (GrowthCraftBees.getConfig().honeyEnabled)
+		{
+			final Fluid honeyFluid = new GrcFluid("grc.honey")
+				.setColor(0xffac01)
+				.setDensity(1420)
+				.setViscosity(73600);
+			honey = FluidFactory.instance().create(honeyFluid);
+		}
 		honeyMeadBooze = new Booze[7];
 		honeyMeadFluids = new BlockBoozeDefinition[honeyMeadBooze.length];
 		honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
@@ -58,9 +60,12 @@ public class GrcBeesFluids extends GrcModuleBase
 		BoozeRegistryHelper.initializeBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets);
 		honeyMeadBottle = new ItemDefinition(new ItemBoozeBottle(6, -0.45F, honeyMeadBooze));
 
-		honey.setCreativeTab(GrowthCraftBees.tab);
-		honey.block.getBlock().setBlockTextureName("grcbees:fluids/honey");
-		honey.refreshItemColor();
+		if (honey != null)
+		{
+			honey.setCreativeTab(GrowthCraftBees.tab);
+			honey.block.getBlock().setBlockTextureName("grcbees:fluids/honey");
+			honey.refreshItemColor();
+		}
 	}
 
 	private void registerRecipes()
@@ -138,7 +143,6 @@ public class GrcBeesFluids extends GrcModuleBase
 		GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honeyMead");
 
 		final ItemStack waterBottle = new ItemStack(Items.potionitem, 1, 0);
-		final ItemStack honeyBottleStack = honey.asBottleItemStack();
 
 		// Bucket of mead recipes
 		/// Single bucket
@@ -147,30 +151,35 @@ public class GrcBeesFluids extends GrcModuleBase
 			GrowthCraftBees.items.honeyJar.getItem(),
 			Items.bucket);
 		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
-			Items.water_bucket,
-			honey.asBucketItemStack(),
-			Items.bucket);
-		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
-			Items.water_bucket,
-			honeyBottleStack, honeyBottleStack, honeyBottleStack,
-			Items.bucket);
-		/// Water bottles
-		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
 			waterBottle, waterBottle, waterBottle,
 			GrowthCraftBees.items.honeyJar.getItem(),
 			Items.bucket);
-		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
-			waterBottle, waterBottle, waterBottle,
-			honey.asBucketItemStack(),
-			Items.bucket);
-		GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
-			waterBottle, waterBottle, waterBottle,
-			honeyBottleStack, honeyBottleStack, honeyBottleStack,
-			Items.bucket);
+
+		if (honey != null)
+		{
+			final ItemStack honeyBottleStack = honey.asBottleItemStack();
+			GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
+				Items.water_bucket,
+				honey.asBucketItemStack(),
+				Items.bucket);
+			GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
+				Items.water_bucket,
+				honeyBottleStack, honeyBottleStack, honeyBottleStack,
+				Items.bucket);
+			/// Water bottles
+			GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
+				waterBottle, waterBottle, waterBottle,
+				honey.asBucketItemStack(),
+				Items.bucket);
+			GameRegistry.addShapelessRecipe(honeyMeadBuckets[0].asStack(),
+				waterBottle, waterBottle, waterBottle,
+				honeyBottleStack, honeyBottleStack, honeyBottleStack,
+				Items.bucket);
+		}
 
 		// Booze
 		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle, "grc.honeyMead", null);
-		CoreRegistry.instance().fluidDictionary().addFluidTags(honey.getFluid(), BeesFluidTag.HONEY);
+		if (honey != null) CoreRegistry.instance().fluidDictionary().addFluidTags(honey.getFluid(), BeesFluidTag.HONEY);
 		if (ForestryFluids.HONEY.exists()) CoreRegistry.instance().fluidDictionary().addFluidTags(ForestryFluids.HONEY.getFluid(), BeesFluidTag.HONEY);
 		registerRecipes();
 	}

@@ -62,6 +62,16 @@ public class FluidFactory
 			return block != null ? block.getBlock() : null;
 		}
 
+		public ItemStack asFluidBlockItemStack(int size)
+		{
+			return block != null ? block.asStack(size) : null;
+		}
+
+		public ItemStack asFluidBlockItemStack()
+		{
+			return asFluidBlockItemStack(1);
+		}
+
 		public ItemStack asBucketItemStack(int size)
 		{
 			return bucket != null ? bucket.asStack(size) : null;

@@ -107,23 +107,52 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxThaumcraft.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
 		}
 
-		final AspectList[] common = new AspectList[]
 		{
-			new AspectList(),
-			new AspectList().add(Aspect.HEAL, 1),
-			new AspectList().add(Aspect.HEAL, 2),
-			new AspectList().add(Aspect.HEAL, 1),
-			new AspectList().add(Aspect.HEAL, 2),
-			new AspectList().add(Aspect.HEAL, 1).add(Aspect.POISON, 1),
-			new AspectList().add(Aspect.POISON, 1)
-		};
+			final AspectList[] common = new AspectList[]
+			{
+				new AspectList(),
+				new AspectList().add(Aspect.HEAL, 1),
+				new AspectList().add(Aspect.HEAL, 2),
+				new AspectList().add(Aspect.HEAL, 1),
+				new AspectList().add(Aspect.HEAL, 2),
+				new AspectList().add(Aspect.HEAL, 1).add(Aspect.POISON, 1),
+				new AspectList().add(Aspect.POISON, 1)
+			};
 
-		for (int i = 0; i < common.length; ++i)
+			for (int i = 0; i < common.length; ++i)
+			{
+				final AspectList list = common[i];
+				ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftBees.fluids.honeyMeadBottle.asStack(1, i), list.copy());
+				ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftBees.fluids.honeyMeadBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
+				ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftBees.fluids.honeyMeadFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
+			}
+		}
+
+		if (GrowthCraftBees.fluids.honey != null)
 		{
-			final AspectList list = common[i];
-			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftBees.fluids.honeyMeadBottle.asStack(1, i), list.copy());
-			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftBees.fluids.honeyMeadBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
-			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftBees.fluids.honeyMeadFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
+			{
+				final ItemStack bottleStack = GrowthCraftBees.fluids.honey.asBottleItemStack();
+				if (bottleStack != null)
+				{
+					ThaumcraftApi.registerObjectTag(bottleStack, new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 2).add(Aspect.GREED, 1).add(Aspect.HUNGER, 1));
+				}
+			}
+
+			{
+				final ItemStack bucketStack = GrowthCraftBees.fluids.honey.asBottleItemStack();
+				if (bucketStack != null)
+				{
+					ThaumcraftApi.registerObjectTag(bucketStack, new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 6).add(Aspect.GREED, 2).add(Aspect.HUNGER, 2));
+				}
+			}
+
+			{
+				final ItemStack fluidBlock = GrowthCraftBees.fluids.honey.asFluidBlockItemStack();
+				if (fluidBlock != null)
+				{
+					ThaumcraftApi.registerObjectTag(fluidBlock, new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 2).add(Aspect.GREED, 1).add(Aspect.HUNGER, 1));
+				}
+			}
 		}
 	}
 }

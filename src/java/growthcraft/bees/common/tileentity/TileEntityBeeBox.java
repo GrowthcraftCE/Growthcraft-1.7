@@ -330,24 +330,32 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 			}
 			else if (item == Items.glass_bottle)
 			{
-				if (isHoneyEnough(2))
+				if (GrowthCraftBees.fluids.honey != null && isHoneyEnough(2))
 				{
-					ItemUtils.addStackToPlayer(GrowthCraftBees.fluids.honey.asBottleItemStack(), player, worldObj, xCoord, yCoord, zCoord, false);
-					ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
-					decreaseHoney(2);
-					markForBlockUpdate();
-					return true;
+					final ItemStack result = GrowthCraftBees.fluids.honey.asBottleItemStack();
+					if (result != null)
+					{
+						ItemUtils.addStackToPlayer(result, player, worldObj, xCoord, yCoord, zCoord, false);
+						ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
+						decreaseHoney(2);
+						markForBlockUpdate();
+						return true;
+					}
 				}
 			}
 			else if (item == Items.bucket)
 			{
-				if (isHoneyEnough(6))
+				if (GrowthCraftBees.fluids.honey != null && isHoneyEnough(6))
 				{
-					ItemUtils.addStackToPlayer(GrowthCraftBees.fluids.honey.asBucketItemStack(), player, worldObj, xCoord, yCoord, zCoord, false);
-					ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
-					decreaseHoney(6);
-					markForBlockUpdate();
-					return true;
+					final ItemStack result = GrowthCraftBees.fluids.honey.asBucketItemStack();
+					if (result != null)
+					{
+						ItemUtils.addStackToPlayer(result, player, worldObj, xCoord, yCoord, zCoord, false);
+						ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
+						decreaseHoney(6);
+						markForBlockUpdate();
+						return true;
+					}
 				}
 			}
 		}

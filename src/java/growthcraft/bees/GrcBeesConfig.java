@@ -33,6 +33,10 @@ public class GrcBeesConfig extends ConfigBase
 	public int beeBoxFlowerRadius = 5;
 
 
+	@ConfigOption(catergory="Fluid/Honey", name="Enabled", desc="Should we enable honey fluid and its corresponding items?")
+	public boolean honeyEnabled = true;
+
+
 	@ConfigOption(catergory="Booze", name="Honey Mead Color", desc="What color should honey mead be?")
 	public int honeyMeadColor = 0xA3610C;
 

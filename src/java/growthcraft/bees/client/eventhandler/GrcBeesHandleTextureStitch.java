@@ -57,7 +57,7 @@ public class GrcBeesHandleTextureStitch
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			GrowthCraftBees.fluids.honey.getFluid().setIcons(iconFluidHoneyStill, iconFluidHoneyFlow);
+			if (GrowthCraftBees.fluids.honey != null) GrowthCraftBees.fluids.honey.getFluid().setIcons(iconFluidHoneyStill, iconFluidHoneyFlow);
 			for (int i = 0; i < GrowthCraftBees.fluids.honeyMeadBooze.length; ++i)
 			{
 				GrowthCraftBees.fluids.honeyMeadBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
