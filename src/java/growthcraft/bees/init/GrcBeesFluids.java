@@ -51,6 +51,8 @@ public class GrcBeesFluids extends GrcModuleBase
 		honeyMeadBucket_deprecated = new ItemDefinition(new ItemBoozeBucketDEPRECATED(honeyMeadBooze).setColor(GrowthCraftBees.getConfig().honeyMeadColor));
 
 		honey.setCreativeTab(GrowthCraftBees.tab);
+		honey.block.getBlock().setBlockTextureName("grcbees:fluids/honey");
+		honey.refreshItemColor();
 	}
 
 	private void registerRecipes()

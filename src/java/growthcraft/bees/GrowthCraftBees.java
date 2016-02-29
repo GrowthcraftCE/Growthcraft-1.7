@@ -7,6 +7,7 @@ import growthcraft.api.bees.user.UserFlowersConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.bees.client.eventhandler.GrcBeesHandleTextureStitch;
 import growthcraft.bees.client.gui.GuiHandlerBees;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeHive;
@@ -39,8 +40,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(
 	modid = GrowthCraftBees.MOD_ID,
@@ -123,6 +125,8 @@ public class GrowthCraftBees
 		}
 
 		tab = new CreativeTabsGrowthcraftBees();
+
+		MinecraftForge.EVENT_BUS.register(new GrcBeesHandleTextureStitch());
 
 		initBlocksAndItems();
 	}

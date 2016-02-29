@@ -49,6 +49,9 @@ fluid.grc.honeyMead4=Mead
 fluid.grc.honeyMead5=Mead
 fluid.grc.honeyMead6=Mead
 
+# Fluid Bottles
+item.grc.BottleFluidHoney.name=Honey
+
 # Fluid Buckets
 item.bucket.fluid.grc.honey.name=Honey Bucket
 item.bucket.fluid.grc.honeyMead.name=Mead Bucket
@@ -61,7 +64,7 @@ item.bucket.fluid.grc.honeyMead5.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead6.name=Mead Bucket
 
 # Fluid Blocks
-tile.fluid.grc.honey.name=Honey
+tile.grc.BlockFluidHoney.name=Honey
 tile.fluid.grc.honeyMead.name=Mead
 tile.fluid.grc.honeyMead0.name=Mead
 tile.fluid.grc.honeyMead1.name=Mead

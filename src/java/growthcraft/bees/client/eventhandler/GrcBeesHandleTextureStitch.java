@@ -46,8 +46,8 @@ public class GrcBeesHandleTextureStitch
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			iconFluidHoneyStill = event.map.registerIcon("grcbees:fluids/honey_still");
-			iconFluidHoneyFlow = event.map.registerIcon("grcbees:fluids/honey_flow");
+			this.iconFluidHoneyStill = event.map.registerIcon("grcbees:fluids/honey_still");
+			this.iconFluidHoneyFlow = event.map.registerIcon("grcbees:fluids/honey_flow");
 		}
 	}
 
