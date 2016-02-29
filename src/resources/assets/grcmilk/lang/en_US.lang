@@ -138,7 +138,7 @@ fluid.grcmilk.Kumis5=Vile Milk
 fluid.grcmilk.Kumis5.desc=Even the sweetest of things can become corrupt.
 
 ## Booze Blocks
-tile.fluid.grcmilk.Kumis0.name=Milk
+tile.fluid.grcmilk.Kumis0.name=Kumis
 tile.fluid.grcmilk.Kumis1.name=Kumis
 tile.fluid.grcmilk.Kumis2.name=Kumis
 tile.fluid.grcmilk.Kumis3.name=Kumis
