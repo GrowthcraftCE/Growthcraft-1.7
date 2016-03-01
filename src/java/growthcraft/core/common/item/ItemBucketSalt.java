@@ -25,6 +25,7 @@ package growthcraft.core.common.item;
 
 import growthcraft.core.GrowthCraftCore;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class ItemBucketSalt extends Item
@@ -35,5 +36,6 @@ public class ItemBucketSalt extends Item
 		setTextureName("grccore:bucket_salt");
 		setUnlocalizedName("grccore.bucketSalt");
 		setCreativeTab(GrowthCraftCore.creativeTab);
+		setContainerItem(Items.bucket);
 	}
 }
