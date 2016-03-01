@@ -17,7 +17,7 @@ import growthcraft.hops.common.item.ItemHops;
 import growthcraft.hops.common.item.ItemHopSeeds;
 import growthcraft.hops.common.village.ComponentVillageHopVineyard;
 import growthcraft.hops.common.village.VillageHandlerHops;
-import growthcraft.hops.init.GrcHopsBooze;
+import growthcraft.hops.init.GrcHopsFluids;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -55,7 +55,7 @@ public class GrowthCraftHops
 
 	public static ItemDefinition hops;
 	public static ItemDefinition hopSeeds;
-	public static GrcHopsBooze booze = new GrcHopsBooze();
+	public static GrcHopsFluids fluids = new GrcHopsFluids();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcHopsConfig config = new GrcHopsConfig();
@@ -72,7 +72,7 @@ public class GrowthCraftHops
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
 
-		modules.add(booze);
+		modules.add(fluids);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.hops.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.hops.integration.ThaumcraftModule());
 		if (config.debugEnabled) modules.setLogger(logger);
@@ -146,11 +146,11 @@ public class GrowthCraftHops
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (Booze bz : booze.hopAleBooze)
+			for (Booze bz : fluids.hopAleBooze)
 			{
 				bz.setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
-			for (Booze bz : booze.lagerBooze)
+			for (Booze bz : fluids.lagerBooze)
 			{
 				bz.setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}

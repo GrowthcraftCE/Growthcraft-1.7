@@ -23,7 +23,6 @@
  */
 package growthcraft.apples.init;
 
-import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
@@ -32,60 +31,29 @@ import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.apples.GrowthCraftApples;
-import growthcraft.cellar.common.definition.BlockBoozeDefinition;
-import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
-import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.cellar.common.item.EnumYeast;
-import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
 
-public class GrcApplesBooze extends GrcModuleBase
+public class GrcApplesRecipes extends GrcModuleBase
 {
-	public Booze[] appleCiderBooze;
-	public BlockBoozeDefinition[] appleCiderFluids;
-	public ItemDefinition appleCider;
-	public ItemBucketBoozeDefinition[] appleCiderBuckets;
-
-	@Override
-	public void preInit()
-	{
-		appleCiderBooze = new Booze[7];
-		appleCiderFluids = new BlockBoozeDefinition[appleCiderBooze.length];
-		appleCiderBuckets = new ItemBucketBoozeDefinition[appleCiderBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.appleCider", appleCiderBooze);
-		for (Booze booze : appleCiderBooze)
-		{
-			booze.setColor(GrowthCraftApples.getConfig().appleCiderColor).setDensity(1010);
-		}
-		BoozeRegistryHelper.initializeBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets);
-
-		appleCiderBooze[4].setColor(GrowthCraftApples.getConfig().silkenNectarColor);
-		appleCiderFluids[4].getBlock().refreshColor();
-
-		appleCider = new ItemDefinition(new ItemBoozeBottle(4, -0.3F, appleCiderBooze));
-	}
-
 	private void registerRecipes()
 	{
 		final int fermentTime = GrowthCraftCellar.getConfig().fermentTime;
-		final FluidStack[] fs = new FluidStack[appleCiderBooze.length];
-		for (int i = 0; i < appleCiderBooze.length; ++i)
+		final FluidStack[] fs = new FluidStack[GrowthCraftApples.fluids.appleCiderBooze.length];
+		for (int i = 0; i < GrowthCraftApples.fluids.appleCiderBooze.length; ++i)
 		{
-			fs[i] = new FluidStack(appleCiderBooze[i], 1);
+			fs[i] = new FluidStack(GrowthCraftApples.fluids.appleCiderBooze[i], 1);
 		}
 
-		GrowthCraftCellar.boozeBuilderFactory.create(appleCiderBooze[0])
+		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[0])
 			.tags(BoozeTag.CIDER, BoozeTag.YOUNG)
 			.pressesFrom(
 				new ItemStack(Items.apple),
@@ -94,7 +62,7 @@ public class GrcApplesBooze extends GrcModuleBase
 				Residue.newDefault(0.3F)
 			);
 
-		GrowthCraftCellar.boozeBuilderFactory.create(appleCiderBooze[1])
+		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[1])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED)
 			.fermentsFrom(fs[0], EnumYeast.BREWERS.asStack(), fermentTime)
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
@@ -102,7 +70,7 @@ public class GrcApplesBooze extends GrcModuleBase
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
 
-		GrowthCraftCellar.boozeBuilderFactory.create(appleCiderBooze[2])
+		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[2])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POTENT)
 			.fermentsFrom(fs[1], new ItemStack(Items.glowstone_dust), fermentTime)
 			.fermentsFrom(fs[3], new ItemStack(Items.glowstone_dust), fermentTime)
@@ -110,7 +78,7 @@ public class GrcApplesBooze extends GrcModuleBase
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.080f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
 
-		GrowthCraftCellar.boozeBuilderFactory.create(appleCiderBooze[3])
+		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[3])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
 			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
 			.fermentsFrom(fs[2], new ItemStack(Items.redstone), fermentTime)
@@ -119,7 +87,7 @@ public class GrcApplesBooze extends GrcModuleBase
 				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
 
 		// Silken Nectar - ETHEREAL
-		GrowthCraftCellar.boozeBuilderFactory.create(appleCiderBooze[4])
+		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[4])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.MAGICAL)
 			.fermentsFrom(fs[1], EnumYeast.ETHEREAL.asStack(), fermentTime)
 			.getEffect()
@@ -143,7 +111,7 @@ public class GrcApplesBooze extends GrcModuleBase
 				);
 
 		// Intoxicated - Origin Yeast
-		GrowthCraftCellar.boozeBuilderFactory.create(appleCiderBooze[5])
+		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[5])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
 			.fermentsFrom(fs[2], EnumYeast.ORIGIN.asStack(), fermentTime)
 			.fermentsFrom(fs[3], EnumYeast.ORIGIN.asStack(), fermentTime)
@@ -156,7 +124,7 @@ public class GrcApplesBooze extends GrcModuleBase
 
 		// Poisoned - created from netherrash,
 		// the booze looses all its benefits and effectively becomes poisoned
-		GrowthCraftCellar.boozeBuilderFactory.create(appleCiderBooze[6])
+		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[6])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POISONED)
 			//.fermentsFrom(fs[0], EnumYeast.NETHERRASH.asStack(), fermentTime)
 			//.fermentsFrom(fs[1], EnumYeast.NETHERRASH.asStack(), fermentTime)
@@ -170,15 +138,8 @@ public class GrcApplesBooze extends GrcModuleBase
 	}
 
 	@Override
-	public void register()
+	public void init()
 	{
-		GameRegistry.registerItem(appleCider.getItem(), "grc.appleCider");
-
-		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", null);
-
-		// Ore Dictionary
-		OreDictionary.registerOre("foodApplejuice", appleCider.asStack());
-
 		registerRecipes();
 	}
 }

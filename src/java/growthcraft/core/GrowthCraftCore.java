@@ -25,6 +25,7 @@ import growthcraft.core.util.ItemUtils;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -65,6 +66,7 @@ public class GrowthCraftCore
 	public static GrcCoreBlocks blocks = new GrcCoreBlocks();
 	public static GrcCoreItems items = new GrcCoreItems();
 	public static GrcCoreFluids fluids = new GrcCoreFluids();
+	public static final EventBus CORE_BUS = new EventBus();
 
 	// Constants
 	public static ItemStack EMPTY_BOTTLE;
@@ -125,6 +127,7 @@ public class GrowthCraftCore
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
+		userFluidDictionary.loadUserConfig();
 		CommonProxy.instance.initRenders();
 		AchievementPageGrowthcraft.init();
 
@@ -137,6 +140,7 @@ public class GrowthCraftCore
 			userVinesConfig.addDefault(new BlockKeySchema(BopPlatform.MOD_ID, "ivy", ItemKey.WILDCARD_VALUE));
 		}
 		modules.init();
+		userVinesConfig.loadUserConfig();
 	}
 
 	@EventHandler

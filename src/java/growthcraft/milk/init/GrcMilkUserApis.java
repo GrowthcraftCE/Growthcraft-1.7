@@ -25,8 +25,10 @@ package growthcraft.milk.init;
 
 import java.io.File;
 
-import growthcraft.api.milk.churn.user.UserChurnRecipesConfig;
+import growthcraft.api.core.module.IModule;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.api.core.user.AbstractUserJSONConfig;
+import growthcraft.api.milk.churn.user.UserChurnRecipesConfig;
 
 public class GrcMilkUserApis extends ModuleContainer
 {
@@ -42,5 +44,16 @@ public class GrcMilkUserApis extends ModuleContainer
 	public void setConfigDirectory(File dir)
 	{
 		churnRecipes.setConfigFile(dir, "growthcraft/milk/churn_recipes.json");
+	}
+
+	public void loadConfigs()
+	{
+		for (IModule module : this)
+		{
+			if (module instanceof AbstractUserJSONConfig)
+			{
+				((AbstractUserJSONConfig)module).loadUserConfig();
+			}
+		}
 	}
 }

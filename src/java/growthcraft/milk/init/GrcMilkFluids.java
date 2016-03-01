@@ -174,6 +174,21 @@ public class GrcMilkFluids extends GrcModuleBase
 		CoreRegistry.instance().fluidDictionary().addFluidTags(curds.getFluid(), MilkFluidTags.MILK_CURDS);
 		CoreRegistry.instance().fluidDictionary().addFluidTags(rennet.getFluid(), MilkFluidTags.RENNET);
 		CoreRegistry.instance().fluidDictionary().addFluidTags(whey.getFluid(), MilkFluidTags.WHEY);
+
+		GrowthCraftCellar.boozeBuilderFactory.create(rennet.fluid.getFluid())
+			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.blocks.thistle.asStack(), TickUtils.minutes(1), null)
+			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.items.stomach.asStack(), TickUtils.minutes(1), null);
+
+		GrowthCraftMilk.userApis.churnRecipes.addDefault(
+			cream.fluid.asFluidStack(1000),
+			butterMilk.fluid.asFluidStack(500),
+			GrowthCraftMilk.items.butter.asStack(2),
+			16);
+
+		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
+		{
+			CoreRegistry.instance().fluidDictionary().addFluidTags(pair.getValue().getFluid(), MilkFluidTags.CHEESE);
+		}
 	}
 
 	public List<Fluid> getMilkFluids()
@@ -265,21 +280,6 @@ public class GrcMilkFluids extends GrcModuleBase
 				TickUtils.minutes(1));
 		}
 
-		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
-		{
-			CoreRegistry.instance().fluidDictionary().addFluidTags(pair.getValue().getFluid(), MilkFluidTags.CHEESE);
-		}
-
 		registerFermentations();
-
-		GrowthCraftCellar.boozeBuilderFactory.create(rennet.fluid.getFluid())
-			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.blocks.thistle.asStack(), TickUtils.minutes(1), null)
-			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.items.stomach.asStack(), TickUtils.minutes(1), null);
-
-		GrowthCraftMilk.userApis.churnRecipes.addDefault(
-			cream.fluid.asFluidStack(1000),
-			butterMilk.fluid.asFluidStack(500),
-			GrowthCraftMilk.items.butter.asStack(2),
-			16);
 	}
 }

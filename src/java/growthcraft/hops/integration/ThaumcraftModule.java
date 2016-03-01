@@ -68,9 +68,9 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		for (int i = 0; i < common.length; ++i)
 		{
 			final AspectList list = common[i];
-			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftHops.booze.hopAle.asStack(1, i), list.copy());
-			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.booze.hopAleBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.PLANT, Aspect.MOTION));
-			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.booze.hopAleFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.PLANT, Aspect.MOTION));
+			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftHops.fluids.hopAle.asStack(1, i), list.copy());
+			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.fluids.hopAleBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.PLANT, Aspect.MOTION));
+			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.fluids.hopAleFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.PLANT, Aspect.MOTION));
 		}
 
 		// Lager
@@ -88,9 +88,9 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		for (int i = 0; i < common.length; ++i)
 		{
 			final AspectList list = common[i];
-			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftHops.booze.lager.asStack(1, i), list.copy());
-			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.booze.lagerBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.COLD, Aspect.FLIGHT, Aspect.MOTION));
-			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.booze.lagerFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.COLD, Aspect.FLIGHT, Aspect.MOTION));
+			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftHops.fluids.lager.asStack(1, i), list.copy());
+			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftHops.fluids.lagerBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.COLD, Aspect.FLIGHT, Aspect.MOTION));
+			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftHops.fluids.lagerFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.COLD, Aspect.FLIGHT, Aspect.MOTION));
 		}
 	}
 }

@@ -21,6 +21,7 @@ import growthcraft.bees.common.world.WorldGeneratorBees;
 import growthcraft.bees.creativetab.CreativeTabsGrowthcraftBees;
 import growthcraft.bees.init.GrcBeesFluids;
 import growthcraft.bees.init.GrcBeesItems;
+import growthcraft.bees.init.GrcBeesRecipes;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
@@ -74,6 +75,7 @@ public class GrowthCraftBees
 	private ModuleContainer modules = new ModuleContainer();
 	private UserBeesConfig userBeesConfig = new UserBeesConfig();
 	private UserFlowersConfig userFlowersConfig = new UserFlowersConfig();
+	private GrcBeesRecipes recipes = new GrcBeesRecipes();
 	//private UserHoneyConfig userHoneyConfig = new UserHoneyConfig();
 
 	public static UserBeesConfig getUserBeesConfig()
@@ -102,6 +104,7 @@ public class GrowthCraftBees
 
 		modules.add(items);
 		modules.add(fluids);
+		modules.add(recipes);
 
 		userBeesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/bees.json");
 		modules.add(userBeesConfig);
@@ -199,6 +202,8 @@ public class GrowthCraftBees
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
+		userBeesConfig.loadUserConfig();
+		userFlowersConfig.loadUserConfig();
 		CommonProxy.instance.initRenders();
 		CommonProxy.instance.initSounds();
 

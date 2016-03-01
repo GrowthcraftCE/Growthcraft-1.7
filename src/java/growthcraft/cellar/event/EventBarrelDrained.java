@@ -28,7 +28,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BarrelDrainedEvent extends Event
+public class EventBarrelDrained extends Event
 {
 	public final EntityPlayer player;
 	public final World world;
@@ -37,7 +37,7 @@ public class BarrelDrainedEvent extends Event
 	public final int z;
 	public FluidStack fluid;
 
-	public BarrelDrainedEvent(EntityPlayer pPlayer, World pWorld, int px, int py, int pz, FluidStack pFluid)
+	public EventBarrelDrained(EntityPlayer pPlayer, World pWorld, int px, int py, int pz, FluidStack pFluid)
 	{
 		this.player = pPlayer;
 		this.world = pWorld;

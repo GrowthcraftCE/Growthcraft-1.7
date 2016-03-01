@@ -26,7 +26,7 @@ package growthcraft.cellar.eventhandler;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
-import growthcraft.cellar.event.BarrelDrainedEvent;
+import growthcraft.cellar.event.EventBarrelDrained;
 import growthcraft.cellar.stats.CellarAchievement;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -34,7 +34,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class EventHandlerBarrelDrainedCellar
 {
 	@SubscribeEvent
-	public void handle(BarrelDrainedEvent event)
+	public void handle(EventBarrelDrained event)
 	{
 		if (event.fluid != null && event.player != null)
 		{

@@ -11,7 +11,8 @@ import growthcraft.apples.common.item.ItemAppleSeeds;
 import growthcraft.apples.common.village.ComponentVillageAppleFarm;
 import growthcraft.apples.common.village.VillageHandlerApples;
 import growthcraft.apples.handler.AppleFuelHandler;
-import growthcraft.apples.init.GrcApplesBooze;
+import growthcraft.apples.init.GrcApplesFluids;
+import growthcraft.apples.init.GrcApplesRecipes;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
@@ -55,11 +56,12 @@ public class GrowthCraftApples
 	public static BlockDefinition appleLeaves;
 	public static BlockDefinition appleBlock;
 	public static ItemDefinition appleSeeds;
-	public static GrcApplesBooze booze = new GrcApplesBooze();
+	public static final GrcApplesFluids fluids = new GrcApplesFluids();
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcApplesConfig config = new GrcApplesConfig();
-	private ModuleContainer modules = new ModuleContainer();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcApplesConfig config = new GrcApplesConfig();
+	private final ModuleContainer modules = new ModuleContainer();
+	private final GrcApplesRecipes recipes = new GrcApplesRecipes();
 
 	public static GrcApplesConfig getConfig()
 	{
@@ -75,7 +77,8 @@ public class GrowthCraftApples
 		if (config.enableForestryIntegration) modules.add(new growthcraft.apples.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.apples.integration.ThaumcraftModule());
 
-		modules.add(booze);
+		modules.add(fluids);
+		modules.add(recipes);
 		if (config.debugEnabled) modules.setLogger(logger);
 
 		appleSapling = new BlockDefinition(new BlockAppleSapling());
@@ -148,9 +151,9 @@ public class GrowthCraftApples
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < booze.appleCiderBooze.length; ++i)
+			for (int i = 0; i < fluids.appleCiderBooze.length; ++i)
 			{
-				booze.appleCiderBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				fluids.appleCiderBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}

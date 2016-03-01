@@ -139,11 +139,16 @@ public class GrowthCraftCellar
 		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 
-		userApis.getUserBrewingRecipes().setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
-		userApis.getUserFermentingRecipes().setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/fermenting.json");
-		userApis.getUserHeatSources().setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
-		userApis.getUserPressingRecipes().setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
-		userApis.getUserYeastEntries().setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/yeast.json");
+		userApis.getUserBrewingRecipes()
+			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
+		userApis.getUserFermentingRecipes()
+			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/fermenting.json");
+		userApis.getUserHeatSources()
+			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
+		userApis.getUserPressingRecipes()
+			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
+		userApis.getUserYeastEntries()
+			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/yeast.json");
 
 		registerBoozeModifierFunctions();
 		boozeBuilderFactory = new CellarBoozeBuilderFactory(userApis);
@@ -300,8 +305,9 @@ public class GrowthCraftCellar
 	}
 
 	@EventHandler
-	public void postload(FMLPostInitializationEvent event)
+	public void postLoad(FMLPostInitializationEvent event)
 	{
+		userApis.loadConfigs();
 		packetPipeline.postInitialise();
 		FMLCommonHandler.instance().bus().register(new EventHandlerItemCraftedEventCellar());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerLivingUpdateEventCellar());

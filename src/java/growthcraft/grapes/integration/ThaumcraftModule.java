@@ -74,9 +74,9 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		for (int i = 0; i < common.length; ++i)
 		{
 			final AspectList list = common[i];
-			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftGrapes.booze.grapeWine.asStack(1, i), list.copy());
-			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftGrapes.booze.grapeWineBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.ARMOR, Aspect.HEAL));
-			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftGrapes.booze.grapeWineFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.ARMOR, Aspect.HEAL));
+			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftGrapes.fluids.grapeWine.asStack(1, i), list.copy());
+			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftGrapes.fluids.grapeWineBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.ARMOR, Aspect.HEAL));
+			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftGrapes.fluids.grapeWineFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.ARMOR, Aspect.HEAL));
 		}
 	}
 }

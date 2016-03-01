@@ -18,7 +18,7 @@ import growthcraft.rice.common.item.ItemRiceBall;
 import growthcraft.rice.common.village.ComponentVillageRiceField;
 import growthcraft.rice.common.village.VillageHandlerRice;
 import growthcraft.rice.event.BonemealEventRice;
-import growthcraft.rice.init.GrcRiceBooze;
+import growthcraft.rice.init.GrcRiceFluids;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -57,7 +57,7 @@ public class GrowthCraftRice
 	public static ItemDefinition rice;
 	public static ItemDefinition riceBall;
 
-	public static GrcRiceBooze booze = new GrcRiceBooze();
+	public static GrcRiceFluids fluids = new GrcRiceFluids();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcRiceConfig config = new GrcRiceConfig();
@@ -74,9 +74,9 @@ public class GrowthCraftRice
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
 
+		modules.add(fluids);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.rice.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
-		modules.add(booze);
 
 		if (config.debugEnabled) modules.setLogger(logger);
 
@@ -149,9 +149,9 @@ public class GrowthCraftRice
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < booze.riceSakeBooze.length; ++i)
+			for (int i = 0; i < fluids.riceSakeBooze.length; ++i)
 			{
-				booze.riceSakeBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				fluids.riceSakeBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}

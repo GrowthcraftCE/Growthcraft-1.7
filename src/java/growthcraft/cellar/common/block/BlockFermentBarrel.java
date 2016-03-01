@@ -2,7 +2,7 @@ package growthcraft.cellar.common.block;
 
 import growthcraft.cellar.client.render.RenderFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.event.BarrelDrainedEvent;
+import growthcraft.cellar.event.EventBarrelDrained;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.CellarGuiType;
 import growthcraft.api.core.util.BlockFlags;
@@ -53,7 +53,7 @@ public class BlockFermentBarrel extends BlockCellarContainer
 		final FluidStack available = Utils.playerDrainTank(world, x, y, z, tank, held, player);
 		if (available != null && available.amount > 0)
 		{
-			GrowthCraftCellar.CELLAR_BUS.post(new BarrelDrainedEvent(player, world, x, y, z, available));
+			GrowthCraftCellar.CELLAR_BUS.post(new EventBarrelDrained(player, world, x, y, z, available));
 			return true;
 		}
 		return false;

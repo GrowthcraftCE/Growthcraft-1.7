@@ -101,9 +101,9 @@ public class GrowthCraftMilk
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
+		modules.add(recipes);
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.milk.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.milk.integration.Waila());
-		modules.add(recipes);
 		modules.add(userApis);
 		if (config.debugEnabled)
 		{
@@ -117,7 +117,6 @@ public class GrowthCraftMilk
 		GrowthCraftMilk.creativeTab = new GrcMilkCreativeTabs("grcmilk.CreativeTab");
 
 		modules.preInit();
-
 		MinecraftForge.EVENT_BUS.register(new GrcMilkHandleTextureStitch());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerOnBabyCowDeath());
 		register();
@@ -139,8 +138,8 @@ public class GrowthCraftMilk
 	public void load(FMLInitializationEvent event)
 	{
 		CommonProxy.instance.initRenders();
-
 		modules.init();
+		userApis.loadConfigs();
 	}
 
 	@EventHandler

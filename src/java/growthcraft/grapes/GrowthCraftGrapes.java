@@ -21,7 +21,7 @@ import growthcraft.grapes.common.item.ItemGrapeSeeds;
 import growthcraft.grapes.common.village.ComponentVillageGrapeVineyard;
 import growthcraft.grapes.common.village.VillageHandlerGrapes;
 import growthcraft.grapes.event.BonemealEventGrapes;
-import growthcraft.grapes.init.GrcGrapesBooze;
+import growthcraft.grapes.init.GrcGrapesFluids;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -62,7 +62,7 @@ public class GrowthCraftGrapes
 	public static BlockDefinition grapeBlock;
 	public static ItemDefinition grapes;
 	public static ItemDefinition grapeSeeds;
-	public static GrcGrapesBooze booze = new GrcGrapesBooze();
+	public static GrcGrapesFluids fluids = new GrcGrapesFluids();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcGrapesConfig config = new GrcGrapesConfig();
@@ -79,7 +79,7 @@ public class GrowthCraftGrapes
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
 
-		modules.add(booze);
+		modules.add(fluids);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.grapes.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.grapes.integration.ThaumcraftModule());
 
@@ -170,9 +170,9 @@ public class GrowthCraftGrapes
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < booze.grapeWineBooze.length; ++i)
+			for (int i = 0; i < fluids.grapeWineBooze.length; ++i)
 			{
-				booze.grapeWineBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				fluids.grapeWineBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}

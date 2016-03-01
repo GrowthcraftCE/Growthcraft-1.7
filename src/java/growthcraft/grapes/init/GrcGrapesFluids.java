@@ -49,7 +49,7 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class GrcGrapesBooze extends GrcModuleBase
+public class GrcGrapesFluids extends GrcModuleBase
 {
 	public Booze[] grapeWineBooze;
 	public BlockBoozeDefinition[] grapeWineFluids;

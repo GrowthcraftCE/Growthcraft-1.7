@@ -49,7 +49,7 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class GrcRiceBooze extends GrcModuleBase
+public class GrcRiceFluids extends GrcModuleBase
 {
 	public Booze[] riceSakeBooze;
 	public BlockBoozeDefinition[] riceSakeFluids;

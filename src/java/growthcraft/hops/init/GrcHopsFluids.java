@@ -49,7 +49,7 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class GrcHopsBooze extends GrcModuleBase
+public class GrcHopsFluids extends GrcModuleBase
 {
 	public Booze[] hopAleBooze;
 	public Booze[] lagerBooze;

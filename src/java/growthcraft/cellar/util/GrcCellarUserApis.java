@@ -31,7 +31,9 @@ import growthcraft.api.cellar.heatsource.user.UserHeatSourcesConfig;
 import growthcraft.api.cellar.pressing.user.UserPressingRecipesConfig;
 import growthcraft.api.cellar.yeast.user.UserYeastEntriesConfig;
 import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.module.IModule;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.api.core.user.AbstractUserJSONConfig;
 import growthcraft.core.common.GrcModuleBase;
 
 public class GrcCellarUserApis extends GrcModuleBase
@@ -112,5 +114,16 @@ public class GrcCellarUserApis extends GrcModuleBase
 	public void postInit()
 	{
 		modules.postInit();
+	}
+
+	public void loadConfigs()
+	{
+		for (IModule module : modules)
+		{
+			if (module instanceof AbstractUserJSONConfig)
+			{
+				((AbstractUserJSONConfig)module).loadUserConfig();
+			}
+		}
 	}
 }
