@@ -46,7 +46,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 		this.setLightOpacity(1);
 		this.setStepSound(soundTypeGrass);
 		this.setBlockName("grc.appleLeaves");
-		this.setCreativeTab(null);
+		this.setCreativeTab(GrowthCraftApples.creativeTab);
 	}
 
 	/* Bonemeal? Client side */

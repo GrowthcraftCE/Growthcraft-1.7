@@ -31,6 +31,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -51,6 +52,7 @@ public class GrowthCraftApples
 
 	@Instance(MOD_ID)
 	public static GrowthCraftApples instance;
+	public static CreativeTabs creativeTab;
 
 	public static BlockDefinition appleSapling;
 	public static BlockDefinition appleLeaves;
@@ -74,6 +76,7 @@ public class GrowthCraftApples
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/apples.conf");
 
+		creativeTab = GrowthCraftCore.creativeTab;
 		if (config.enableForestryIntegration) modules.add(new growthcraft.apples.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.apples.integration.ThaumcraftModule());
 
