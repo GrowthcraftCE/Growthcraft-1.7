@@ -125,7 +125,14 @@ public class DeviceFluidSlot
 	public boolean hasMatching(FluidStack stack)
 	{
 		final FluidStack s = get();
-		if (s != null) return stack.isFluidEqual(s);
+		if (stack == null)
+		{
+			return s == null;
+		}
+		else
+		{
+			if (s != null) return stack.isFluidEqual(s);
+		}
 		return true;
 	}
 

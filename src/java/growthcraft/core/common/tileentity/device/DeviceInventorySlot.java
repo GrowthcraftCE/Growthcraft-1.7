@@ -91,12 +91,13 @@ public class DeviceInventorySlot
 	public boolean hasMatching(ItemStack stack)
 	{
 		final ItemStack s = get();
-		if (s != null)
+		if (stack == null)
 		{
-			if (stack.isItemEqual(s))
-			{
-				return true;
-			}
+			return s == null;
+		}
+		else if (stack != null && s != null)
+		{
+			return stack.isItemEqual(s);
 		}
 		return false;
 	}
@@ -110,6 +111,7 @@ public class DeviceInventorySlot
 	public boolean hasMatchingWithCapacity(ItemStack stack)
 	{
 		if (!hasMatching(stack)) return false;
+		if (stack == null) return true;
 		return getAvailableCapacity() >= stack.stackSize;
 	}
 
@@ -122,6 +124,7 @@ public class DeviceInventorySlot
 	 */
 	public boolean hasCapacityFor(ItemStack stack)
 	{
+		if (stack == null) return true;
 		if (hasContent())
 		{
 			if (!hasMatching(stack)) return false;
@@ -137,8 +140,15 @@ public class DeviceInventorySlot
 	{
 		if (hasMatching(stack))
 		{
-			final ItemStack s = get();
-			if (s.stackSize >= stack.stackSize)
+			if (stack != null)
+			{
+				final ItemStack s = get();
+				if (s.stackSize >= stack.stackSize)
+				{
+					return true;
+				}
+			}
+			else
 			{
 				return true;
 			}

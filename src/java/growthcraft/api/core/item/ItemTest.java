@@ -41,8 +41,9 @@ public class ItemTest
 		return true;
 	}
 
-	public static boolean hasEnough(@Nonnull ItemStack expected, @Nullable ItemStack actual)
+	public static boolean hasEnough(@Nullable ItemStack expected, @Nullable ItemStack actual)
 	{
+		if (expected == null) return actual == null;
 		if (actual == null) return false;
 		if (!expected.isItemEqual(actual)) return false;
 		if (actual.stackSize < expected.stackSize) return false;

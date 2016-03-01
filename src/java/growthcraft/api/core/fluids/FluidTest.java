@@ -58,8 +58,9 @@ public class FluidTest
 		return false;
 	}
 
-	public static boolean hasEnough(@Nonnull FluidStack expected, @Nullable FluidStack actual)
+	public static boolean hasEnough(@Nullable FluidStack expected, @Nullable FluidStack actual)
 	{
+		if (expected == null) return actual == null;
 		if (actual == null) return false;
 		if (!expected.isFluidEqual(actual)) return false;
 		if (actual.amount < expected.amount) return false;
