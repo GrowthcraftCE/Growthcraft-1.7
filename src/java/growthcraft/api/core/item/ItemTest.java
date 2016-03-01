@@ -41,11 +41,32 @@ public class ItemTest
 		return true;
 	}
 
+	public static boolean itemMatches(@Nullable ItemStack expected, @Nullable ItemStack actual)
+	{
+		if (expected == null)
+		{
+			return actual == null;
+		}
+		else
+		{
+			if (actual != null)
+			{
+				if (expected.getItemDamage() == ItemKey.WILDCARD_VALUE)
+				{
+					return expected.getItem() == actual.getItem();
+				}
+				else
+				{
+					return expected.isItemEqual(actual);
+				}
+			}
+		}
+		return false;
+	}
+
 	public static boolean hasEnough(@Nullable ItemStack expected, @Nullable ItemStack actual)
 	{
-		if (expected == null) return actual == null;
-		if (actual == null) return false;
-		if (!expected.isItemEqual(actual)) return false;
+		if (!itemMatches(expected, actual)) return false;
 		if (actual.stackSize < expected.stackSize) return false;
 		return true;
 	}
