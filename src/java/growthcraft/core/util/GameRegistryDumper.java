@@ -43,7 +43,11 @@ public class GameRegistryDumper
 						{
 							if (stack != null && stack.getItem() != null)
 							{
-								writer.write("\t" + stack.getItem() + "," + stack.getItemDamage() + "," + stack.getUnlocalizedName() + "," + stack.getDisplayName() + "\n");
+								final Item item = stack.getItem();
+								final int damage = stack.getItemDamage();
+								final String unlocName = stack.getUnlocalizedName();
+								final String displayName = stack.getDisplayName();
+								writer.write("\t" + item + "," + damage + "," + unlocName + "," + displayName + "\n");
 							}
 						}
 					}
@@ -78,7 +82,11 @@ public class GameRegistryDumper
 						{
 							if (stack != null && stack.getItem() != null)
 							{
-								writer.write("\t" + stack.getItem() + "," + stack.getItemDamage() + "," + stack.getUnlocalizedName() + "," + stack.getDisplayName() + "\n");
+								final Item item = stack.getItem();
+								final int dam = stack.getItemDamage();
+								final String unlocName = stack.getUnlocalizedName();
+								final String displayName = stack.getDisplayName();
+								writer.write("\t" + item + "," + dam + "," + unlocName + "," + displayName + "\n");
 							}
 						}
 					}
