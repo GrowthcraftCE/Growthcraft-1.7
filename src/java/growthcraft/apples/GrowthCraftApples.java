@@ -96,10 +96,10 @@ public class GrowthCraftApples
 
 	public void register()
 	{
-		GameRegistry.registerBlock(appleSapling.getBlock(), "grc.appleSapling");
-		GameRegistry.registerBlock(appleLeaves.getBlock(), "grc.appleLeaves");
-		GameRegistry.registerBlock(appleBlock.getBlock(), "grc.appleBlock");
-		GameRegistry.registerItem(appleSeeds.getItem(), "grc.appleSeeds");
+		appleSapling.register("grc.appleSapling");
+		appleLeaves.register("grc.appleLeaves");
+		appleBlock.register("grc.appleBlock");
+		appleSeeds.register("grc.appleSeeds");
 
 		MapGenHelper.registerVillageStructure(ComponentVillageAppleFarm.class, "grc.applefarm");
 
