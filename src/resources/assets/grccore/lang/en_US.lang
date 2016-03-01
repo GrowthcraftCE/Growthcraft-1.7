@@ -9,6 +9,8 @@ tile.grc.ropeBlock.name=Rope
 # Items
 item.grc.rope.name=Rope
 item.grccore.salt.name=Salt
+item.grccore.saltBucket.name=Salt Bucket
+item.grccore.saltBottle.name=Salt Bottle
 
 # Fluids
 fluid.tile.water=Water
