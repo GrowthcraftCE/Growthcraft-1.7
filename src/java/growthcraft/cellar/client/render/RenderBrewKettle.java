@@ -115,7 +115,11 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler
 						tes.setColorOpaque_F(f * r, f * g, f * b);
 						f = te.getFluidAmount(i) * FLUID_HEIGHT / te.getFluidTank(i).getCapacity();
 						renderer.setRenderBounds(2 * d, 0.0D, 2 * d, 14 * d, (double)(0.25F + f), 14 * d);
-						renderer.renderFaceYPos(block, (double)x, (double)y, (double)z, fluid.getIcon());
+						final IIcon icon = fluid.getIcon();
+						if (icon != null)
+						{
+							renderer.renderFaceYPos(block, (double)x, (double)y, (double)z, icon);
+						}
 					}
 				}
 			}
