@@ -25,13 +25,12 @@ package growthcraft.milk.init;
 
 import java.util.Arrays;
 
-import growthcraft.api.core.item.IItemStackComparator;
 import growthcraft.api.core.item.CommonItemStackComparator;
-import growthcraft.milk.common.item.crafting.ShapelessItemComparableRecipe;
-
+import growthcraft.api.core.item.IItemStackComparator;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.item.crafting.ShapelessItemComparableRecipe;
 import growthcraft.milk.common.block.BlockButterChurn;
 import growthcraft.milk.common.block.BlockCheeseBlock;
 import growthcraft.milk.common.block.BlockCheesePress;

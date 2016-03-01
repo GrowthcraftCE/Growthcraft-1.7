@@ -9,6 +9,7 @@ import growthcraft.api.core.schema.BlockKeySchema;
 import growthcraft.api.core.vines.user.UserVinesConfig;
 import growthcraft.core.common.AchievementPageGrowthcraft;
 import growthcraft.core.common.CommonProxy;
+import growthcraft.core.common.item.crafting.ShapelessItemComparableRecipe;
 import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill;
@@ -37,6 +38,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.RecipeSorter;
 
 @Mod(
 	modid = GrowthCraftCore.MOD_ID,
@@ -88,7 +90,7 @@ public class GrowthCraftCore
 	}
 
 	@EventHandler
-	public void preload(FMLPreInitializationEvent event)
+	public void preInit(FMLPreInitializationEvent event)
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
@@ -113,6 +115,8 @@ public class GrowthCraftCore
 		creativeTab = new CreativeTabsGrowthcraft("tabGrowthCraft");
 
 		EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
+
+		RecipeSorter.register("grcShaplessComparable", ShapelessItemComparableRecipe.class, RecipeSorter.Category.SHAPELESS, "");
 
 		modules.preInit();
 		register();

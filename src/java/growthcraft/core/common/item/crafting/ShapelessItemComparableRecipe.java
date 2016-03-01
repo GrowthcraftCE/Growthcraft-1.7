@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.milk.common.item.crafting;
+package growthcraft.core.common.item.crafting;
 
 import java.util.ArrayList;
 import java.util.Iterator;
