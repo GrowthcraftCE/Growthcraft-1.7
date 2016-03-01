@@ -7,6 +7,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.client.event.TextureStitchEvent;
 
+import net.minecraft.block.BlockLiquid;
+
 public class TextureStitchEventCore
 {
 	@SubscribeEvent
@@ -17,7 +19,8 @@ public class TextureStitchEventCore
 		{
 			GrowthCraftCore.liquidSmoothTexture = event.map.registerIcon("grccore:liquidsmooth");
 			GrowthCraftCore.liquidBlobsTexture = event.map.registerIcon("grccore:liquidblob");
-		}
 
+			GrowthCraftCore.fluids.saltWater.getFluid().setIcons(BlockLiquid.getLiquidIcon("water_still"), BlockLiquid.getLiquidIcon("water_flow"));
+		}
 	}
 }
