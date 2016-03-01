@@ -25,7 +25,7 @@ package growthcraft.cellar.integration;
 
 import growthcraft.api.cellar.heatsource.user.UserHeatSourceEntry;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.YeastType;
+import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 
 import thaumcraft.api.ThaumcraftApi;
@@ -59,10 +59,10 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 
 		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.waterBag.asStack(), new AspectList().add(Aspect.BEAST, 1).add(Aspect.VOID, 2).add(Aspect.WATER, 2));
 
-		ThaumcraftApi.registerObjectTag(YeastType.BREWERS.asStack(), new AspectList().add(Aspect.EARTH, 1));
-		ThaumcraftApi.registerObjectTag(YeastType.LAGER.asStack(), new AspectList().add(Aspect.COLD, 1));
-		ThaumcraftApi.registerObjectTag(YeastType.BAYANUS.asStack(), new AspectList().add(Aspect.ENERGY, 1));
-		ThaumcraftApi.registerObjectTag(YeastType.ETHEREAL.asStack(), new AspectList().add(Aspect.MAGIC, 1));
-		ThaumcraftApi.registerObjectTag(YeastType.ORIGIN.asStack(), new AspectList().add(Aspect.DARKNESS, 1));
+		ThaumcraftApi.registerObjectTag(EnumYeast.BREWERS.asStack(), new AspectList().add(Aspect.EARTH, 1));
+		ThaumcraftApi.registerObjectTag(EnumYeast.LAGER.asStack(), new AspectList().add(Aspect.COLD, 1));
+		ThaumcraftApi.registerObjectTag(EnumYeast.BAYANUS.asStack(), new AspectList().add(Aspect.ENERGY, 1));
+		ThaumcraftApi.registerObjectTag(EnumYeast.ETHEREAL.asStack(), new AspectList().add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(EnumYeast.ORIGIN.asStack(), new AspectList().add(Aspect.DARKNESS, 1));
 	}
 }

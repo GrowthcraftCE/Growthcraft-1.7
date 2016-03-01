@@ -44,7 +44,7 @@ import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.BoozeUtils;
-import growthcraft.cellar.util.YeastType;
+import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
@@ -208,7 +208,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		for (Fluid fluid : milks)
 		{
 			final FluidStack milkStack = new FluidStack(fluid, 1);
-			builder.fermentsFrom(milkStack, YeastType.BREWERS.asStack(), fermentTime);
+			builder.fermentsFrom(milkStack, EnumYeast.BREWERS.asStack(), fermentTime);
 			builder.fermentsFrom(milkStack, new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66));
 		}
 
@@ -230,16 +230,16 @@ public class GrcMilkFluids extends GrcModuleBase
 
 		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[3])
 			.tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
-			.fermentsFrom(fs[1], YeastType.ETHEREAL.asStack(), fermentTime)
-			.fermentsFrom(fs[2], YeastType.ETHEREAL.asStack(), fermentTime)
+			.fermentsFrom(fs[1], EnumYeast.ETHEREAL.asStack(), fermentTime)
+			.fermentsFrom(fs[2], EnumYeast.ETHEREAL.asStack(), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.02f), 900)
 				.addEffect(milkEffect);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[4])
 			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
-			.fermentsFrom(fs[1], YeastType.ORIGIN.asStack(), fermentTime)
-			.fermentsFrom(fs[2], YeastType.ORIGIN.asStack(), fermentTime)
+			.fermentsFrom(fs[1], EnumYeast.ORIGIN.asStack(), fermentTime)
+			.fermentsFrom(fs[2], EnumYeast.ORIGIN.asStack(), fermentTime)
 			.getEffect()
 				.setTipsy(0.50f, 900)
 				.addEffect(milkEffect);

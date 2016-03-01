@@ -3,7 +3,6 @@ package growthcraft.cellar.common.item;
 import java.util.List;
 
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.YeastType;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,7 +37,7 @@ public class ItemYeast extends Item
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
-		for (YeastType ytype : YeastType.values())
+		for (EnumYeast ytype : EnumYeast.values())
 		{
 			list.add(ytype.asStack());
 		}
@@ -48,12 +47,12 @@ public class ItemYeast extends Item
 	@Override
 	public void registerIcons(IIconRegister reg)
 	{
-		this.icons = new IIcon[YeastType.length];
-		icons[YeastType.BAYANUS.ordinal()] = reg.registerIcon(getIconString() + "_bayanus");
-		icons[YeastType.BREWERS.ordinal()] = reg.registerIcon(getIconString() + "_brewers");
-		icons[YeastType.ETHEREAL.ordinal()] = reg.registerIcon(getIconString() + "_ethereal");
-		icons[YeastType.LAGER.ordinal()] = reg.registerIcon(getIconString() + "_lager");
-		icons[YeastType.ORIGIN.ordinal()] = reg.registerIcon(getIconString() + "_origin");
+		this.icons = new IIcon[EnumYeast.length];
+		icons[EnumYeast.BAYANUS.ordinal()] = reg.registerIcon(getIconString() + "_bayanus");
+		icons[EnumYeast.BREWERS.ordinal()] = reg.registerIcon(getIconString() + "_brewers");
+		icons[EnumYeast.ETHEREAL.ordinal()] = reg.registerIcon(getIconString() + "_ethereal");
+		icons[EnumYeast.LAGER.ordinal()] = reg.registerIcon(getIconString() + "_lager");
+		icons[EnumYeast.ORIGIN.ordinal()] = reg.registerIcon(getIconString() + "_origin");
 	}
 
 	@SideOnly(Side.CLIENT)

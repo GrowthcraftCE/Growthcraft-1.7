@@ -2,7 +2,7 @@ package growthcraft.grapes.common.block;
 
 import java.util.Random;
 
-import growthcraft.cellar.util.YeastType;
+import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.grapes.client.renderer.RenderGrape;
 import growthcraft.grapes.GrowthCraftGrapes;
@@ -114,7 +114,7 @@ public class BlockGrapeBlock extends Block
 	{
 		if (world.rand.nextInt(bayanusDropRarity) == 0)
 		{
-			ItemUtils.spawnBrokenItemStack(world, x, y, z, YeastType.BAYANUS.asStack(1), rand);
+			ItemUtils.spawnBrokenItemStack(world, x, y, z, EnumYeast.BAYANUS.asStack(1), rand);
 		}
 		super.breakBlock(world, x, y, z, block, meta);
 	}

@@ -38,7 +38,7 @@ import growthcraft.cellar.stats.CellarAchievement;
 import growthcraft.cellar.stats.GrcCellarAchievements;
 import growthcraft.cellar.util.CellarBoozeBuilderFactory;
 import growthcraft.cellar.util.GrcCellarUserApis;
-import growthcraft.cellar.util.YeastType;
+import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -276,11 +276,11 @@ public class GrowthCraftCellar
 
 	private void registerYeast()
 	{
-		CellarRegistry.instance().yeast().addYeast(YeastType.BREWERS.asStack());
-		CellarRegistry.instance().yeast().addYeast(YeastType.LAGER.asStack());
-		CellarRegistry.instance().yeast().addYeast(YeastType.BAYANUS.asStack());
-		CellarRegistry.instance().yeast().addYeast(YeastType.ETHEREAL.asStack());
-		CellarRegistry.instance().yeast().addYeast(YeastType.ORIGIN.asStack());
+		CellarRegistry.instance().yeast().addYeast(EnumYeast.BREWERS.asStack());
+		CellarRegistry.instance().yeast().addYeast(EnumYeast.LAGER.asStack());
+		CellarRegistry.instance().yeast().addYeast(EnumYeast.BAYANUS.asStack());
+		CellarRegistry.instance().yeast().addYeast(EnumYeast.ETHEREAL.asStack());
+		CellarRegistry.instance().yeast().addYeast(EnumYeast.ORIGIN.asStack());
 	}
 
 	@EventHandler
