@@ -23,31 +23,47 @@
  */
 package growthcraft.api.cellar.brewing;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import growthcraft.api.cellar.common.ProcessingRecipe;
 import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.item.ItemTest;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BrewingRecipe extends ProcessingRecipe
 {
-	private ItemStack inputItem;
-	private FluidStack inputFluid;
+	private ItemStack inputItemStack;
+	private FluidStack inputFluidStack;
 
-	public BrewingRecipe(FluidStack inpFluid, ItemStack inpItem, FluidStack f, int t, Residue r)
+	public BrewingRecipe(@Nonnull FluidStack pInputFluid, @Nonnull ItemStack pInputItem, @Nonnull FluidStack pOutputFluid, int pTime, @Nullable Residue pResidue)
 	{
-		super(f, t, r);
-		this.inputItem = inpItem;
-		this.inputFluid = inpFluid;
+		super(pOutputFluid, pTime, pResidue);
+		this.inputItemStack = pInputItem;
+		this.inputFluidStack = pInputFluid;
 	}
 
 	public ItemStack getInputItemStack()
 	{
-		return inputItem;
+		return inputItemStack;
 	}
 
 	public FluidStack getInputFluidStack()
 	{
-		return inputFluid;
+		return inputFluidStack;
+	}
+
+	public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack)
+	{
+		if (fluidStack != null && itemStack != null)
+		{
+			if (!FluidTest.hasEnough(inputFluidStack, fluidStack)) return false;
+			if (!ItemTest.hasEnough(inputItemStack, itemStack)) return false;
+			return true;
+		}
+		return false;
 	}
 }

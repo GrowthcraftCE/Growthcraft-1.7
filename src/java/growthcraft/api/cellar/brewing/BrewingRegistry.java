@@ -1,8 +1,9 @@
 package growthcraft.api.cellar.brewing;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.HashMap;
+import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -11,48 +12,16 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.core.util.HashKey;
 import growthcraft.api.core.item.ItemKey;
-import growthcraft.api.core.item.ItemTest;
-import growthcraft.api.core.fluids.FluidTest;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BrewingRegistry implements IBrewingRegistry
 {
-	public static class BrewingKey extends HashKey
-	{
-		public Fluid fluid;
-		public Item item;
-		public int meta;
-
-		public BrewingKey(@Nonnull Fluid flu, @Nonnull Item ite, int met)
-		{
-			super();
-			this.fluid = flu;
-			this.item = ite;
-			this.meta = met;
-			generateHashCode();
-		}
-
-		public BrewingKey(@Nonnull Fluid flu, @Nonnull ItemStack stack)
-		{
-			this(flu, stack.getItem(), stack.getItemDamage());
-		}
-
-		public void generateHashCode()
-		{
-			this.hash = fluid.hashCode();
-			this.hash = 31 * hash + item.hashCode();
-			this.hash = 31 * hash + meta;
-		}
-	}
-
-	private HashMap<BrewingKey, BrewingRecipe> brewingList = new HashMap<BrewingKey, BrewingRecipe>();
-	private List<ItemKey> brewingIngredients = new ArrayList<ItemKey>();
+	private List<BrewingRecipe> recipes = new ArrayList<BrewingRecipe>();
+	private Set<ItemKey> itemIngredients = new HashSet<ItemKey>();
 	private ILogger logger = NullLogger.INSTANCE;
 
 	private Fluid boozeToKey(Fluid f)
@@ -66,47 +35,43 @@ public class BrewingRegistry implements IBrewingRegistry
 		this.logger = l;
 	}
 
+	private void addRecipe(@Nonnull BrewingRecipe recipe)
+	{
+		final ItemStack is = recipe.getInputItemStack();
+		recipes.add(recipe);
+		itemIngredients.add(new ItemKey(is));
+	}
+
 	@Override
 	public void addBrewing(@Nonnull FluidStack sourceFluid, @Nonnull ItemStack raw, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue)
 	{
-		this.brewingList.put(new BrewingKey(sourceFluid.getFluid(), raw), new BrewingRecipe(sourceFluid, raw, resultFluid, time, residue));
-		this.brewingIngredients.add(new ItemKey(raw));
+		addRecipe(new BrewingRecipe(sourceFluid, raw, resultFluid, time, residue));
 	}
 
-	private BrewingRecipe getAbsoluteBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
+	@Override
+	public BrewingRecipe getBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
 	{
 		if (itemstack == null || fluidstack == null) return null;
 
-		final Fluid f = boozeToKey(fluidstack.getFluid());
-		BrewingRecipe ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), itemstack.getItemDamage()));
-		if (ret == null) ret = brewingList.get(new BrewingKey(f, itemstack.getItem(), ItemKey.WILDCARD_VALUE));
-		return ret;
-	}
-
-	@Override
-	public BrewingRecipe getBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
-	{
-		final BrewingRecipe ret = getAbsoluteBrewingRecipe(fluidstack, itemstack);
-		if (ret != null)
+		for (BrewingRecipe recipe : recipes)
 		{
-			if (!ItemTest.hasEnough(ret.getInputItemStack(), itemstack)) return null;
-			if (!FluidTest.hasEnough(ret.getInputFluidStack(), fluidstack)) return null;
+			if (recipe.matchesRecipe(fluidstack, itemstack)) return recipe;
 		}
-		return ret;
+		return null;
 	}
 
 	@Override
-	public boolean isBrewingRecipe(FluidStack fluidstack, ItemStack itemstack)
+	public boolean isBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
 	{
 		return getBrewingRecipe(fluidstack, itemstack) != null;
 	}
 
 	@Override
-	public boolean isItemBrewingIngredient(ItemStack itemstack)
+	public boolean isItemBrewingIngredient(@Nullable ItemStack itemstack)
 	{
 		if (itemstack == null) return false;
 
-		return brewingIngredients.contains(new ItemKey(itemstack)) ||
-			brewingIngredients.contains(new ItemKey(itemstack.getItem(), ItemKey.WILDCARD_VALUE));
+		return itemIngredients.contains(new ItemKey(itemstack)) ||
+			itemIngredients.contains(new ItemKey(itemstack.getItem(), ItemKey.WILDCARD_VALUE));
 	}
 }
