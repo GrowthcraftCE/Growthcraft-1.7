@@ -79,6 +79,16 @@ public class GrcMilkConfig extends ConfigBase
 	public int cheeseVatWheyToRicottaWheyAmount = 1000;
 
 
+	@ConfigOption(catergory="Cheese", name="Aging Time", desc="How long does it take for cheese to age?")
+	public int cheeseMaxAge = 1200;
+
+	@ConfigOption(catergory="Cheese", name="Slices", desc="How many slices are present in a cheese block?")
+	public int cheeseMaxSlices = 8;
+
+	@ConfigOption(catergory="Cheese", name="Item per Block Slice", desc="How many items are present in a cheese block slice?")
+	public int cheeseItemPerBlockSlice = 8;
+
+
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
 	public boolean enableWailaIntegration = true;
 

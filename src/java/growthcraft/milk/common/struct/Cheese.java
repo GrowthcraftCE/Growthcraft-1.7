@@ -23,9 +23,9 @@
  */
 package growthcraft.milk.common.struct;
 
-import growthcraft.api.core.util.TickUtils;
-import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.EnumCheeseStage;
+import growthcraft.milk.common.item.EnumCheeseType;
+import growthcraft.milk.GrowthCraftMilk;
 
 import io.netty.buffer.ByteBuf;
 
@@ -37,11 +37,11 @@ public class Cheese
 {
 	public boolean needClientUpdate = true;
 
+	private int ageMax = GrowthCraftMilk.getConfig().cheeseMaxAge;
 	private int age;
-	private int ageMax = TickUtils.minutes(1);
-	private int slices = 8;
-	private int slicesMax = 8;
-	private final int cheesePerSlice = 8;
+	private int slicesMax = GrowthCraftMilk.getConfig().cheeseMaxSlices;
+	private int slices = GrowthCraftMilk.getConfig().cheeseMaxSlices;
+	private final int cheesePerSlice = GrowthCraftMilk.getConfig().cheeseItemPerBlockSlice;
 	private EnumCheeseType cheese = EnumCheeseType.CHEDDAR;
 	private EnumCheeseStage cheeseStage = EnumCheeseType.CHEDDAR.stages.get(0);
 
