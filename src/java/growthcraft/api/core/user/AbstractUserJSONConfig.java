@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -103,12 +103,13 @@ public abstract class AbstractUserJSONConfig implements ILoggable, IModule
 	 */
 	protected abstract void loadFromBuffer(BufferedReader buff) throws IllegalStateException;
 
-	public void setConfigFile(File dir, String filename)
+	public AbstractUserJSONConfig setConfigFile(File dir, String filename)
 	{
 		this.targetConfigFile = new File(dir, filename);
 		this.targetDefaultConfigFile = new File(dir, filename + ".default");
 		logger.debug("Config file `%s` was set for `%s`", targetConfigFile, this);
 		logger.debug("DEFAULT Config file `%s` was set for `%s`", targetDefaultConfigFile, this);
+		return this;
 	}
 
 	private void prepareUserConfig() throws IOException
@@ -181,7 +182,7 @@ public abstract class AbstractUserJSONConfig implements ILoggable, IModule
 		}
 	}
 
-	private void loadUserConfig()
+	public void loadUserConfig()
 	{
 		writeDefaultConfigTo(targetDefaultConfigFile);
 		try
@@ -205,10 +206,7 @@ public abstract class AbstractUserJSONConfig implements ILoggable, IModule
 	public void register() {}
 
 	@Override
-	public void init()
-	{
-		loadUserConfig();
-	}
+	public void init() {}
 
 	@Override
 	public void postInit() {}
