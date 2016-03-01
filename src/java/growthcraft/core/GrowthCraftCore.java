@@ -19,13 +19,13 @@ import growthcraft.core.eventhandler.TextureStitchEventCore;
 import growthcraft.core.init.GrcCoreBlocks;
 import growthcraft.core.init.GrcCoreFluids;
 import growthcraft.core.init.GrcCoreItems;
+import growthcraft.core.init.GrcCoreRecipes;
 import growthcraft.core.integration.bop.BopPlatform;
 import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -63,10 +63,10 @@ public class GrowthCraftCore
 
 	public static CreativeTabs creativeTab;
 
-	public static GrcCoreBlocks blocks = new GrcCoreBlocks();
-	public static GrcCoreItems items = new GrcCoreItems();
-	public static GrcCoreFluids fluids = new GrcCoreFluids();
-	public static final EventBus CORE_BUS = new EventBus();
+	public static final GrcCoreBlocks blocks = new GrcCoreBlocks();
+	public static final GrcCoreItems items = new GrcCoreItems();
+	public static final GrcCoreFluids fluids = new GrcCoreFluids();
+	public static final GrcCoreRecipes recipes = new GrcCoreRecipes();
 
 	// Constants
 	public static ItemStack EMPTY_BOTTLE;
@@ -97,6 +97,7 @@ public class GrowthCraftCore
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
+		modules.add(recipes);
 
 		userVinesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/vines.json");
 		userFluidDictionary.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/fluid_dictionary.json");

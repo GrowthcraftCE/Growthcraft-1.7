@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,45 +23,31 @@
  */
 package growthcraft.core.init;
 
-import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
-import growthcraft.core.common.item.ItemBottleSalt;
-import growthcraft.core.common.item.ItemBucketSalt;
-import growthcraft.core.common.item.ItemRope;
-import growthcraft.core.common.item.ItemSalt;
+import growthcraft.core.GrowthCraftCore;
 
-import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.registry.GameRegistry;
 
-public class GrcCoreItems extends GrcModuleBase
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+
+public class GrcCoreRecipes extends GrcModuleBase
 {
-	public ItemDefinition rope;
-	public ItemDefinition salt;
-	public ItemDefinition saltBucket;
-	public ItemDefinition saltBottle;
-
-	@Override
-	public void preInit()
-	{
-		this.rope = new ItemDefinition(new ItemRope());
-		this.salt = new ItemDefinition(new ItemSalt());
-		this.saltBottle = new ItemDefinition(new ItemBottleSalt());
-		this.saltBucket = new ItemDefinition(new ItemBucketSalt());
-	}
-
 	@Override
 	public void register()
 	{
-		rope.register("grc.rope");
-		salt.register("grccore.salt");
-		saltBottle.register("grccore.saltBottle");
-		saltBucket.register("grccore.saltBucket");
-	}
+		final ItemStack saltStack = GrowthCraftCore.items.salt.asStack();
+		GameRegistry.addRecipe(GrowthCraftCore.items.rope.asStack(8), new Object[] {"A", 'A', Items.lead});
+		GameRegistry.addShapelessRecipe(GrowthCraftCore.items.salt.asStack(2), GrowthCraftCore.items.saltBottle.asStack());
+		GameRegistry.addShapelessRecipe(GrowthCraftCore.items.salt.asStack(6), GrowthCraftCore.items.saltBucket.asStack());
+		GameRegistry.addShapelessRecipe(GrowthCraftCore.items.saltBottle.asStack(),
+			Items.glass_bottle,
+			saltStack, saltStack);
+		GameRegistry.addShapelessRecipe(GrowthCraftCore.items.saltBucket.asStack(),
+			Items.bucket,
+			saltStack, saltStack, saltStack, saltStack, saltStack, saltStack);
 
-	@Override
-	public void init()
-	{
-		OreDictionary.registerOre("materialRope", rope.getItem());
-		OreDictionary.registerOre("materialSalt", salt.getItem());
-		OreDictionary.registerOre("foodSalt", salt.getItem());
+		GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBottleItemStack(), GrowthCraftCore.items.saltBottle.asStack(), 0.1F);
+		GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBucketItemStack(), GrowthCraftCore.items.saltBucket.asStack(), 0.2F);
 	}
 }
