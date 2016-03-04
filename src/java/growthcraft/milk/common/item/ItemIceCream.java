@@ -53,7 +53,7 @@ public class ItemIceCream extends ItemFood
 
 	public EnumIceCream getEnumIceCream(ItemStack stack)
 	{
-		return EnumIceCream.VALUES[MathHelper.clamp_int(stack.getItemDamage(), 0, EnumIceCream.VALUES.length)];
+		return EnumIceCream.VALUES[MathHelper.clamp_int(stack.getItemDamage(), 0, EnumIceCream.VALUES.length - 1)];
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class ItemIceCream extends ItemFood
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int meta)
 	{
-		return icons[MathHelper.clamp_int(meta, 0, 1)];
+		return icons[MathHelper.clamp_int(meta, 0, EnumIceCream.VALUES.length - 1)];
 	}
 
 	@SideOnly(Side.CLIENT)
