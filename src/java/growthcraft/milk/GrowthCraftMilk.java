@@ -140,6 +140,7 @@ public class GrowthCraftMilk
 		CommonProxy.instance.initRenders();
 		modules.init();
 		userApis.loadConfigs();
+		CommonProxy.registerWorldGen();
 	}
 
 	@EventHandler

@@ -84,7 +84,7 @@ public class GrcMilkBlocks extends GrcModuleBase
 	public BlockDefinition cheeseVat;
 	public BlockDefinition hangingCurds;
 	public BlockDefinition pancheon;
-	public BlockDefinition thistle;
+	public static BlockDefinition thistle;
 
 	@Override
 	public void preInit()
