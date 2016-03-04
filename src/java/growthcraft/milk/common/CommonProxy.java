@@ -24,6 +24,8 @@
 package growthcraft.milk.common;
 
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.registry.GameRegistry;
+import growthcraft.milk.common.world.WorldGenThistle;
 
 public class CommonProxy
 {
@@ -31,4 +33,8 @@ public class CommonProxy
 	public static CommonProxy instance;
 
 	public void initRenders() {}
+
+	public static void registerWorldGen() {
+		GameRegistry.registerWorldGenerator(new WorldGenThistle(), 0);
+	}
 }
