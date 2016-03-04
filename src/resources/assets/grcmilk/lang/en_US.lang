@@ -75,6 +75,7 @@ tile.grcmilk.HangingCurds.parmesan.dried.name=Drained Parmesan Curds
 tile.grcmilk.HangingCurds.monterey.dried.name=Drained Monterey Curds
 tile.grcmilk.HangingCurds.ricotta.dried.name=Drained Ricotta Curds
 tile.grcmilk.Pancheon.name=Pancheon
+tile.grcmilk.Thistle.name=Thistle
 
 ### Cheese Vat Fluid Tanks
 grcmilk.cheese_vat.fluid_tank.primary=Primary
