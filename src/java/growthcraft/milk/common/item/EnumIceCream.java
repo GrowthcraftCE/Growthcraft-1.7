@@ -31,7 +31,9 @@ import net.minecraft.item.ItemStack;
 public enum EnumIceCream implements IItemStackFactory
 {
 	PLAIN("plain"),
-	CHOCOLATE("chocolate");
+	CHOCOLATE("chocolate"),
+	GRAPE("grape"),
+	APPLE("apple");
 
 	public static final EnumIceCream[] VALUES = values();
 

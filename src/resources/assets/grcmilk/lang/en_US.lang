@@ -16,8 +16,10 @@ item.grcmilk.CheeseCloth.name=Cheese Cloth
 item.grcmilk.Butter.salted.name=Butter (Salted)
 item.grcmilk.Butter.unsalted.name=Butter (Unsalted)
 ## Ice Cream
-item.grcmilk.IceCream.plain.name=Ice Cream (Plain)
+item.grcmilk.IceCream.apple.name=Ice Cream (Apple)
 item.grcmilk.IceCream.chocolate.name=Ice Cream (Chocolate)
+item.grcmilk.IceCream.grape.name=Ice Cream (Grape)
+item.grcmilk.IceCream.plain.name=Ice Cream (Plain)
 item.grcmilk.StarterCulture.name=Starter Culture
 item.grcmilk.Yogurt.name=Yogurt
 ## Other

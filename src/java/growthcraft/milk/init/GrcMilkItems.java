@@ -108,6 +108,24 @@ public class GrcMilkItems extends GrcModuleBase
 			EnumDye.COCOA_BEANS.asStack()
 		));
 
+		// Ice Cream - Grape
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumIceCream.GRAPE.asStack(),
+			GrowthCraftMilk.fluids.cream.bucket.asStack(),
+			Items.milk_bucket,
+			Items.bowl,
+			Items.sugar,
+			"foodGrapes"
+		));
+
+		// Ice Cream - Apple
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumIceCream.APPLE.asStack(),
+			GrowthCraftMilk.fluids.cream.bucket.asStack(),
+			Items.milk_bucket,
+			Items.bowl,
+			Items.sugar,
+			"foodApple"
+		));
+
 		// Cheese Cloth
 		GameRegistry.addRecipe(new ShapedOreRecipe(cheeseCloth.asStack(),
 			"sss",
