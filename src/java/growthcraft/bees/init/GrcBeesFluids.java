@@ -39,6 +39,7 @@ import growthcraft.core.util.FluidFactory;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcBeesFluids extends GrcModuleBase
 {
@@ -57,11 +58,11 @@ public class GrcBeesFluids extends GrcModuleBase
 				.setColor(0xffac01)
 				.setDensity(1420)
 				.setViscosity(73600);
-			honey = FluidFactory.instance().create(honeyFluid);
+			this.honey = FluidFactory.instance().create(honeyFluid);
 		}
-		honeyMeadBooze = new Booze[7];
-		honeyMeadFluids = new BlockBoozeDefinition[honeyMeadBooze.length];
-		honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
+		this.honeyMeadBooze = new Booze[7];
+		this.honeyMeadFluids = new BlockBoozeDefinition[honeyMeadBooze.length];
+		this.honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
 		BoozeRegistryHelper.initializeBoozeFluids("grc.honeyMead", honeyMeadBooze);
 		for (Booze booze : honeyMeadBooze)
 		{
@@ -86,5 +87,17 @@ public class GrcBeesFluids extends GrcModuleBase
 		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle, "grc.honeyMead", null);
 		if (honey != null) CoreRegistry.instance().fluidDictionary().addFluidTags(honey.getFluid(), BeesFluidTag.HONEY);
 		if (ForestryFluids.HONEY.exists()) CoreRegistry.instance().fluidDictionary().addFluidTags(ForestryFluids.HONEY.getFluid(), BeesFluidTag.HONEY);
+	}
+
+	@Override
+	public void init()
+	{
+		if (honey != null)
+		{
+			OreDictionary.registerOre("bottleHoney", honey.asBottleItemStack());
+			OreDictionary.registerOre("bucketHoney", honey.asBucketItemStack());
+			OreDictionary.registerOre("honeyDrop", honey.asBucketItemStack());
+			OreDictionary.registerOre("dropHoney", honey.asBucketItemStack());
+		}
 	}
 }
