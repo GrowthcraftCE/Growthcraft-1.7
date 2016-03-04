@@ -126,6 +126,15 @@ public class GrcMilkItems extends GrcModuleBase
 			"foodApple"
 		));
 
+		// Ice Cream - Honey
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumIceCream.HONEY.asStack(),
+			GrowthCraftMilk.fluids.cream.bucket.asStack(),
+			Items.milk_bucket,
+			Items.bowl,
+			Items.sugar,
+			"honeyDrop"
+		));
+
 		// Cheese Cloth
 		GameRegistry.addRecipe(new ShapedOreRecipe(cheeseCloth.asStack(),
 			"sss",

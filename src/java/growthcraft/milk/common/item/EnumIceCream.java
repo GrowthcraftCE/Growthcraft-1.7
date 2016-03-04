@@ -33,7 +33,8 @@ public enum EnumIceCream implements IItemStackFactory
 	PLAIN("plain"),
 	CHOCOLATE("chocolate"),
 	GRAPE("grape"),
-	APPLE("apple");
+	APPLE("apple"),
+	HONEY("honey");
 
 	public static final EnumIceCream[] VALUES = values();
 
