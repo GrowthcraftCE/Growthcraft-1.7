@@ -27,6 +27,7 @@ import java.util.Random;
 
 import growthcraft.core.logic.FlowerSpread;
 
+import growthcraft.milk.GrowthCraftMilk;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
@@ -40,6 +41,8 @@ public class BlockThistle extends BlockBush
 		super(Material.plants);
 		setTickRandomly(true);
 		setBlockTextureName("grcmilk:thistle/flower_thistle");
+		setBlockName("grcmilk.Thistle");
+		setCreativeTab(GrowthCraftMilk.creativeTab);
 	}
 
 	@Override
