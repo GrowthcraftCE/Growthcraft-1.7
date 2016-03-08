@@ -1,5 +1,6 @@
 package growthcraft.core;
 
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.fluids.user.UserFluidDictionaryConfig;
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.log.GrcLogger;
@@ -110,7 +111,11 @@ public class GrowthCraftCore
 		if (config.enableWailaIntegration) modules.add(new growthcraft.core.integration.Waila());
 		if (config.enableAppleCoreIntegration) modules.add(new growthcraft.core.integration.AppleCore());
 
-		if (config.debugEnabled) modules.setLogger(logger);
+		if (config.debugEnabled)
+		{
+			CoreRegistry.instance().setLogger(logger);
+			modules.setLogger(logger);
+		}
 
 		creativeTab = new CreativeTabsGrowthcraft("tabGrowthCraft");
 
