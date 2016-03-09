@@ -101,6 +101,7 @@ public class GrcMilkHandleTextureStitch
 			GrowthCraftMilk.fluids.rennet.getFluid().setIcons(iconFluidRennetStill, iconFluidRennetFlow);
 			GrowthCraftMilk.fluids.skimMilk.getFluid().setIcons(iconFluidSkimMilkStill, iconFluidSkimMilkFlow);
 			GrowthCraftMilk.fluids.whey.getFluid().setIcons(iconFluidWheyStill, iconFluidWheyFlow);
+			GrowthCraftMilk.fluids.pasteurizedMilk.getFluid().setIcons(iconFluidMilkStill, iconFluidMilkFlow);
 
 			for (FluidFactory.FluidDetails detail : GrowthCraftMilk.fluids.cheeses.values())
 			{

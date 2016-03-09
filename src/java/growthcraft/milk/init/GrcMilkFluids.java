@@ -30,6 +30,7 @@ import java.util.Map;
 
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
+import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.util.ICellarBoozeBuilder;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.effect.IEffect;
@@ -74,6 +75,7 @@ public class GrcMilkFluids extends GrcModuleBase
 	public FluidFactory.FluidDetails rennet;
 	public FluidFactory.FluidDetails skimMilk;
 	public FluidFactory.FluidDetails whey;
+	public FluidFactory.FluidDetails pasteurizedMilk;
 	public Map<EnumCheeseType, FluidFactory.FluidDetails> cheeses = new HashMap<EnumCheeseType, FluidFactory.FluidDetails>();
 	public Map<Fluid, EnumCheeseType> fluidToCheeseType = new HashMap<Fluid, EnumCheeseType>();
 	public Booze[] kumisFluids = new Booze[6];
@@ -114,6 +116,10 @@ public class GrcMilkFluids extends GrcModuleBase
 		this.whey = FluidFactory.instance().create(new GrcFluid("grcmilk.Whey"));
 		whey.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x94a860);
 		whey.block.getBlock().setBlockTextureName("grcmilk:fluids/whey");
+
+		this.pasteurizedMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.PasteurizedMilk"));
+		pasteurizedMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFA);
+		pasteurizedMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 
 		for (EnumCheeseType cheese : EnumCheeseType.VALUES)
 		{
@@ -162,6 +168,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		rennet.registerObjects("grcmilk", "Rennet");
 		skimMilk.registerObjects("grcmilk", "SkimMilk");
 		whey.registerObjects("grcmilk", "Whey");
+		pasteurizedMilk.registerObjects("grcmilk", "PasteurizedMilk");
 
 		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
 		{
@@ -178,6 +185,9 @@ public class GrcMilkFluids extends GrcModuleBase
 		GrowthCraftCellar.boozeBuilderFactory.create(rennet.fluid.getFluid())
 			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.blocks.thistle.asStack(), TickUtils.minutes(1), null)
 			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.items.stomach.asStack(), TickUtils.minutes(1), null);
+
+		GrowthCraftCellar.boozeBuilderFactory.create(pasteurizedMilk.fluid.getFluid())
+			.brewsFrom(skimMilk.fluid.asFluidStack(1000), new ItemStack(Items.sugar), TickUtils.minutes(1), new Residue(GrowthCraftMilk.items.starterCulture.asStack(1), 1.0f));
 
 		GrowthCraftMilk.userApis.churnRecipes.addDefault(
 			cream.fluid.asFluidStack(1000),
