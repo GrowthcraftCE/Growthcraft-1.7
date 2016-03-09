@@ -76,7 +76,8 @@ public class EffectBoozeMilk implements IEffect
 				{
 					final PotionEffect eff = (PotionEffect)e;
 					final int id = eff.getPotionID();
-					if (!blacklist.contains(id))
+					final boolean isCurable = eff.getCurativeItems().size() > 0 && !blacklist.contains(id);
+					if (isCurable)
 					{
 						// to prevent concurrent modifications, cache the
 						// effect ids
