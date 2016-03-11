@@ -1,0 +1,42 @@
+# Blocks
+tile.grc.grapeVine0.name=Tronco de Videira
+tile.grc.grapeVine1.name=Tronco de Videira
+tile.grc.grapeLeaves.name=Folhas de Videira
+tile.grc.grapeBlock.name=Uvas
+
+# Items
+item.grc.grapes.name=Uvas
+item.grc.grapeSeeds.name=Sementes de Uva
+
+# Fluids
+fluid.grc.grapeWine=Vinho de Uva
+fluid.grc.grapeWine0=Vinho de Uva
+fluid.grc.grapeWine1=Vinho de Uva
+fluid.grc.grapeWine2=Vinho de Uva
+fluid.grc.grapeWine3=Vinho de Uva
+fluid.grc.grapeWine4=Ambrosia
+fluid.grc.grapeWine5=Vinho do Porto
+fluid.grc.grapeWine6=Vinho de Uva
+fluid.grc.grapeWine7=Vinho de Uva
+
+# Fluid Buckets
+item.bucket.fluid.grc.grapeWine.name=Balde de Vinho de Uva
+item.bucket.fluid.grc.grapeWine0.name=Balde de Vinho de Uva
+item.bucket.fluid.grc.grapeWine1.name=Balde de Vinho de Uva
+item.bucket.fluid.grc.grapeWine2.name=Balde de Vinho de Uva
+item.bucket.fluid.grc.grapeWine3.name=Balde de Vinho de Uva
+item.bucket.fluid.grc.grapeWine4.name=Balde de Ambrosia
+item.bucket.fluid.grc.grapeWine5.name=Balde de Vinho do Porto
+item.bucket.fluid.grc.grapeWine6.name=Balde de Vinho de Uva
+item.bucket.fluid.grc.grapeWine7.name=Balde de Vinho de Uva
+
+# Fluid Blocks
+tile.fluid.grc.grapeWine.name=Vinho de Uva
+tile.fluid.grc.grapeWine0.name=Vinho de Uva
+tile.fluid.grc.grapeWine1.name=Vinho de Uva
+tile.fluid.grc.grapeWine2.name=Vinho de Uva
+tile.fluid.grc.grapeWine3.name=Vinho de Uva
+tile.fluid.grc.grapeWine4.name=Ambrosia
+tile.fluid.grc.grapeWine5.name=Vinho do Porto
+tile.fluid.grc.grapeWine6.name=Vinho de Uva
+tile.fluid.grc.grapeWine7.name=Vinho de Uva
