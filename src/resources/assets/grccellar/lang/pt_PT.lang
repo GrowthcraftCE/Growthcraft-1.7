@@ -1,0 +1,108 @@
+# Creative Tabs
+itemGroup.tabGrCCellar=Growthcraft Adega
+
+# Blocks
+tile.grc.fruitPress.name=Prensa de Fruta
+tile.grc.fruitPresser.name=Prensa de Fruta
+tile.grc.brewKettle.name=Caldeira de Preparação
+tile.grc.fermentBarrel.name=Barril de Fermentação
+tile.grc.fermentJar.name=Jarro de Cultivo
+
+# Items
+# Please remove this field once all other module translations have been updated,
+# this is no longer used
+item.grc.boozeBucket.name=Balde
+
+item.grc.yeast0.name=Levedura de Cervejaria
+item.grc.yeast1.name=Levedura de Lager
+item.grc.yeast2.name=Levedura de Bayanus
+item.grc.yeast3.name=Levedura Etérea
+item.grc.yeast4.name=Levedura Original
+
+# Water Bags
+item.grc.waterBag0.name=Cantil (Branco)
+item.grc.waterBag1.name=Cantil (Laranja)
+item.grc.waterBag2.name=Cantil (Magenta)
+item.grc.waterBag3.name=Cantil (Azul Claro)
+item.grc.waterBag4.name=Cantil (Amarelo)
+item.grc.waterBag5.name=Cantil (Verde Lima)
+item.grc.waterBag6.name=Cantil (Cor-de-rosa)
+item.grc.waterBag7.name=Cantil (Cinzento)
+item.grc.waterBag8.name=Cantil (Cinzento Claro)
+item.grc.waterBag9.name=Cantil (Azul Ciano)
+item.grc.waterBag10.name=Cantil (Roxo)
+item.grc.waterBag11.name=Cantil (Azul)
+item.grc.waterBag12.name=Cantil (Castanho)
+item.grc.waterBag13.name=Cantil (Verde)
+item.grc.waterBag14.name=Cantil (Vermelho)
+item.grc.waterBag15.name=Cantil (Preto)
+item.grc.waterBag16.name=Cantil
+
+# Containers
+container.grc.fruitPress=Prensa de Fruta
+container.grc.brewKettle=Caldeira de Preparação
+container.grc.fermentBarrel=Barril de Fermentação
+container.grc.fermentJar=Jarro de Cultivo
+
+# Other
+grc.potion.tipsy=Bebedeira
+grc.booze=Booze
+
+# Modifiers
+grc.fluids.tag.chilled=Refrigerado(a)
+grc.fluids.tag.cider=Cidra
+grc.fluids.tag.deadly=Mortal
+grc.fluids.tag.extended=Extendido(a)
+grc.fluids.tag.fermented=Fermentado(a)
+grc.fluids.tag.fortified=Fortificado(a)
+grc.fluids.tag.hopped=Com Lúpulo
+grc.fluids.tag.hyper_extended=Super-extendido(a)
+grc.fluids.tag.intoxicated=Intoxicado(a)
+grc.fluids.tag.magical=Mágico(a)
+grc.fluids.tag.poisoned=Envenenado(a)
+grc.fluids.tag.potent=Potente
+grc.fluids.tag.wine=Vinho
+grc.fluids.tag.young=Novo(a)
+
+# GUI
+gui.grc.empty=Vazio
+gui.grc.discard=Descartar
+gui.grc.switch=Trocar
+gui.grc.cantferment=Não pode ser fermentado.
+
+# Achievements
+achievement.craftBarrel=Tanoeiro
+achievement.craftBarrel.desc=Constrói um barril de fermentação com três tábuas de madeira e seis barras de ferro.
+achievement.fermentBooze=Fermentação É Comigo...
+achievement.fermentBooze.desc=Fermenta uma bebida alcoólica.
+achievement.getDrunk=É Problema de Preparação?
+achievement.getDrunk.desc=Adquir bebedeira V.
+achievement.onTheGo=Está no ir
+achievement.onTheGo.desc=Constrói um Cantil
+
+# Tooltips (Number is a percentage)
+# number is a percentage
+grc.cellar.format.waterBag.name=%s (%s)
+grc.cellar.format.waterBag.contents=Contém: %2$dmB/%3$dmB de %1$s
+grc.cellar.format.tipsy_chance=%d%% de Chance de Ficar Bebado
+grc.cellar.item.booze_bucket.deprecated=Obsoleto, constrói para conseguires um balde melhorado.
+grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETO)
+
+grc.cellar.brew_kettle.brewing_prefix=Preparação :
+grc.cellar.brew_kettle.itemslot.item=Item : %s
+grc.cellar.brew_kettle.itemslot.residue=Resíduo : %s
+grc.cellar.ferment_barrel.progress.prefix=Progresso :
+grc.cellar.ferment_barrel.progress.format=%d%%
+grc.cellar.ferment_barrel.itemslot.modifier=Modificador : %s
+grc.cellar.ferment_jar.itemslot.yeast=%s
+grc.cellar.fruit_press.itemslot.item=Item : %s
+grc.cellar.fruit_press.itemslot.residue=Resíduo : %s
+grc.cellar.fruit_presser.state.invalid=<Inválido>
+grc.cellar.fruit_presser.state.pressed=Prensado
+grc.cellar.fruit_presser.state.unpressed=Solto
+grc.cellar.fruit_presser.state_prefix=Estado :
+
+# Waila Tooltips
+grccellar.waila.option.FruitPressExtras=Extras da Prensa de Fruta
+grccellar.waila.option.BrewKettleExtras=Extras da Caldeira de Preparação
+grccellar.waila.option.FermentBarrelExtras=Extras de Barril de Fermentação
