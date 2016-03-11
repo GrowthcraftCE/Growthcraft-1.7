@@ -77,7 +77,7 @@ tile.grcmilk.Pancheon.name=Pancheon
 ### Cheese Vat Fluid Tanks
 grcmilk.cheese_vat.fluid_tank.primary=Primary
 grcmilk.cheese_vat.fluid_tank.rennet=Rennet
-grcmilk.cheese_vat.fluid_tank.waste=Waste
+grcmilk.cheese_vat.fluid_tank.waste=Waste**
 grcmilk.cheese_vat.fluid_tank.recipe=Secondary
 
 # Fluids
