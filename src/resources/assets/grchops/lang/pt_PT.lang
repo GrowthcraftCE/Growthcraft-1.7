@@ -1,0 +1,72 @@
+# Blocks
+tile.grc.hopVine.name=Vinha de Lúpulo
+
+# Items
+item.grc.hops.name=Lúpulos
+item.grc.hopSeeds.name=Semente de Lúpulo
+
+# Fluids
+fluid.grc.hopAle=Ale
+fluid.grc.hopAle0=Ale
+fluid.grc.hopAle1=Ale
+fluid.grc.hopAle2=Ale
+fluid.grc.hopAle3=Ale
+fluid.grc.hopAle4=Ale
+fluid.grc.hopAle5=Ale
+fluid.grc.hopAle6=Ale
+fluid.grc.hopAle7=Ale
+fluid.grc.hopAle8=Ale
+
+fluid.grc.lager=Lager
+fluid.grc.lager0=Lager
+fluid.grc.lager1=Lager
+fluid.grc.lager2=Lager
+fluid.grc.lager3=Lager
+fluid.grc.lager4=Lager
+fluid.grc.lager5=Lager
+fluid.grc.lager6=Lager
+
+# Fluid Buckets
+item.bucket.fluid.grc.hopAle.name=Balde de Ale
+item.bucket.fluid.grc.hopAle0.name=Balde de Ale
+item.bucket.fluid.grc.hopAle1.name=Balde de Ale
+item.bucket.fluid.grc.hopAle2.name=Balde de Ale
+item.bucket.fluid.grc.hopAle3.name=Balde de Ale
+item.bucket.fluid.grc.hopAle4.name=Balde de Ale
+item.bucket.fluid.grc.hopAle5.name=Balde de Ale
+item.bucket.fluid.grc.hopAle6.name=Balde de Ale
+item.bucket.fluid.grc.hopAle7.name=Balde de Ale
+item.bucket.fluid.grc.hopAle8.name=Balde de Ale
+
+item.bucket.fluid.grc.lager.name=Balde de Lager
+item.bucket.fluid.grc.lager0.name=Balde de Lager
+item.bucket.fluid.grc.lager1.name=Balde de Lager
+item.bucket.fluid.grc.lager2.name=Balde de Lager
+item.bucket.fluid.grc.lager3.name=Balde de Lager
+item.bucket.fluid.grc.lager4.name=Balde de Lager
+item.bucket.fluid.grc.lager5.name=Balde de Lager
+item.bucket.fluid.grc.lager6.name=Balde de Lager
+
+# Fluid Blocks
+tile.fluid.grc.hopAle.name=Ale
+tile.fluid.grc.hopAle0.name=Ale
+tile.fluid.grc.hopAle1.name=Ale
+tile.fluid.grc.hopAle2.name=Ale
+tile.fluid.grc.hopAle3.name=Ale
+tile.fluid.grc.hopAle4.name=Ale
+tile.fluid.grc.hopAle5.name=Ale
+tile.fluid.grc.hopAle6.name=Ale
+tile.fluid.grc.hopAle7.name=Ale
+tile.fluid.grc.hopAle8.name=Ale
+
+tile.fluid.grc.lager.name=Lager
+tile.fluid.grc.lager0.name=Lager
+tile.fluid.grc.lager1.name=Lager
+tile.fluid.grc.lager2.name=Lager
+tile.fluid.grc.lager3.name=Lager
+tile.fluid.grc.lager4.name=Lager
+tile.fluid.grc.lager5.name=Lager
+tile.fluid.grc.lager6.name=Lager
+
+# Fluid Tooltips
+fluid.grc.hopAle4.modifier=Sem Lúpulo, Novo(a)
