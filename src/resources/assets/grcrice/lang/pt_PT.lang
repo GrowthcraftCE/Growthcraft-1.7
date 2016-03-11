@@ -1,0 +1,37 @@
+# Blocks
+tile.grc.paddyField.name=Arrozal
+tile.grc.riceBlock.name=Arroz
+
+# Items
+item.grc.rice.name=Cereal de Arroz
+item.grc.riceBall.name=Onigiri
+
+# Fluids
+fluid.grc.riceSake=Saquê
+fluid.grc.riceSake0=Saquê
+fluid.grc.riceSake1=Saquê
+fluid.grc.riceSake2=Saquê
+fluid.grc.riceSake3=Saquê
+fluid.grc.riceSake4=Saquê Divino
+fluid.grc.riceSake5=Saquê
+fluid.grc.riceSake6=Saquê
+
+# Fluid Buckets
+item.bucket.fluid.grc.riceSake.name=Balde de Saquê
+item.bucket.fluid.grc.riceSake0.name=Balde de Saquê
+item.bucket.fluid.grc.riceSake1.name=Balde de Saquê
+item.bucket.fluid.grc.riceSake2.name=Balde de Saquê
+item.bucket.fluid.grc.riceSake3.name=Balde de Saquê
+item.bucket.fluid.grc.riceSake4.name=Balde de Saquê Divino
+item.bucket.fluid.grc.riceSake5.name=Balde de Saquê
+item.bucket.fluid.grc.riceSake6.name=Balde de Saquê
+
+# Fluid Blocks
+tile.fluid.grc.riceSake.name=Saquê
+tile.fluid.grc.riceSake0.name=Saquê
+tile.fluid.grc.riceSake1.name=Saquê
+tile.fluid.grc.riceSake2.name=Saquê
+tile.fluid.grc.riceSake3.name=Saquê
+tile.fluid.grc.riceSake4.name=Saquê Divino
+tile.fluid.grc.riceSake5.name=Saquê
+tile.fluid.grc.riceSake6.name=Saquê
