@@ -70,7 +70,7 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 		this.recipes = gson.fromJson(reader, UserFermentingRecipes.class);
 	}
 
-	private void addFermentingRecipe(UserFermentingRecipe recipe)
+	private void addRecipe(UserFermentingRecipe recipe)
 	{
 		if (recipe == null)
 		{
@@ -99,7 +99,7 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 		logger.info("Adding Fermenting Recipe {%s}", recipe);
 		for (ItemStack item : recipe.item.getItemStacks())
 		{
-			CellarRegistry.instance().fermenting().addFermentingRecipe(
+			CellarRegistry.instance().fermenting().addRecipe(
 				recipe.output_fluid.asFluidStack(),
 				recipe.input_fluid.asFluidStack(),
 				item,
@@ -116,7 +116,7 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 			if (recipes.data != null)
 			{
 				logger.info("Registering %d user heat sources.", recipes.data.size());
-				for (UserFermentingRecipe recipe : recipes.data) addFermentingRecipe(recipe);
+				for (UserFermentingRecipe recipe : recipes.data) addRecipe(recipe);
 			}
 			else
 			{

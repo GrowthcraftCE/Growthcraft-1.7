@@ -1,12 +1,15 @@
 package growthcraft.api.cellar.fermenting;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.core.item.ItemKey;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -14,21 +17,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class FermentingRegistry implements IFermentingRegistry
 {
-	static class FluidModifierMap extends HashMap<ItemKey, FermentationRecipe>
-	{
-		public static final long serialVersionUID = 1L;
-	}
-
-	static class FluidModifierTree extends HashMap<Fluid, FluidModifierMap>
-	{
-		public static final long serialVersionUID = 1L;
-	}
-
-	// This maps Fluids to Items (in a ItemKey) to FluidStacks
-	// The lookup works like this: First you search for a Booze, then you
-	// look at its modifiers and return its resultant FluidStack
-	// Why didn't I use a List? The linear lookup and the lack of type safety
-	private FluidModifierTree fermentTree = new FluidModifierTree();
+	private List<IFermentationRecipe> recipes = new ArrayList<IFermentationRecipe>();
+	private Set<Fluid> fermentableFluids = new HashSet<Fluid>();
 	private ILogger logger = NullLogger.INSTANCE;
 
 	@Override
@@ -37,46 +27,38 @@ public class FermentingRegistry implements IFermentingRegistry
 		this.logger = l;
 	}
 
-	@Nonnull
-	private Fluid boozeToKey(@Nonnull FluidStack booze)
+	@Override
+	public void addRecipe(@Nonnull IFermentationRecipe recipe)
 	{
-		return CellarRegistry.instance().booze().maybeAlternateBooze(booze.getFluid());
-	}
-
-	@Nonnull
-	private ItemKey stackToKey(@Nonnull ItemStack stack)
-	{
-		return new ItemKey(stack);
+		recipes.add(recipe);
+		final FluidStack fs = recipe.getInputFluidStack();
+		fermentableFluids.add(fs.getFluid());
 	}
 
 	@Override
-	public void addFermentingRecipe(@Nonnull FluidStack result, @Nonnull FluidStack booze, @Nonnull ItemStack fermenter, int time)
+	public void addRecipe(@Nonnull FluidStack result, @Nonnull FluidStack booze, @Nonnull ItemStack fermenter, int time)
 	{
-		final Fluid key = boozeToKey(booze);
-		if (!fermentTree.containsKey(key))
-		{
-			fermentTree.put(key, new FluidModifierMap());
-		}
-		fermentTree.get(key).put(stackToKey(fermenter), new FermentationRecipe(booze, fermenter, result, time, null));
+		addRecipe(new FermentationRecipe(booze, fermenter, result, time));
 	}
 
 	@Override
-	public FermentationRecipe getFermentationRecipe(FluidStack booze, ItemStack fermenter)
+	public IFermentationRecipe findRecipe(@Nullable FluidStack booze, @Nullable ItemStack fermenter)
 	{
 		if (booze == null || fermenter == null) return null;
-
-		final FluidModifierMap map = fermentTree.get(boozeToKey(booze));
-		if (map != null)
+		for (IFermentationRecipe recipe : recipes)
 		{
-			return map.get(stackToKey(fermenter));
+			if (recipe.matchesRecipe(booze, fermenter)) return recipe;
 		}
 		return null;
 	}
 
 	@Override
-	public boolean canFerment(FluidStack booze)
+	public boolean canFerment(@Nullable FluidStack booze)
 	{
-		if (booze == null) return false;
-		return fermentTree.containsKey(boozeToKey(booze));
+		if (FluidTest.isValid(booze))
+		{
+			return fermentableFluids.contains(booze.getFluid());
+		}
+		return false;
 	}
 }

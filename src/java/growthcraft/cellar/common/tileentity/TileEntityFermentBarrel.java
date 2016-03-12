@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.fermenting.FermentationRecipe;
+import growthcraft.api.cellar.fermenting.IFermentationRecipe;
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -9,6 +9,7 @@ import growthcraft.core.common.inventory.GrcInternalInventory;
 
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -40,6 +41,8 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	// Other Vars.
 	protected int time;
 	private int timemax = GrowthCraftCellar.getConfig().fermentTime;
+	private boolean recheckRecipe = true;
+	private IFermentationRecipe activeRecipe;
 
 	@Override
 	protected FluidTank[] createTanks()
@@ -59,9 +62,14 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		return "container.grc.fermentBarrel";
 	}
 
-	private FermentationRecipe getFermentation()
+	protected void markForRecipeRecheck()
 	{
-		return CellarRegistry.instance().fermenting().getFermentationRecipe(getFluidStack(0), getStackInSlot(0));
+		this.recheckRecipe = true;
+	}
+
+	private IFermentationRecipe getWorkingRecipe()
+	{
+		return activeRecipe;
 	}
 
 	public int getTime()
@@ -71,7 +79,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 
 	public int getTimeMax()
 	{
-		final FermentationRecipe result = getFermentation();
+		final IFermentationRecipe result = getWorkingRecipe();
 		if (result != null)
 		{
 			return result.getTime();
@@ -79,11 +87,16 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		return this.timemax;
 	}
 
+	private void resetTime()
+	{
+		this.time = 0;
+	}
+
 	private boolean canFerment()
 	{
 		if (getStackInSlot(0) == null) return false;
 		if (isFluidTankEmpty(0)) return false;
-		return getFermentation() != null;
+		return getWorkingRecipe() != null;
 	}
 
 	public void fermentItem()
@@ -94,10 +107,14 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 			final Item item = fermentItem.getItem();
 			final FluidStack fluidStack = getFluidStack(0);
 
-			final FermentationRecipe recipe = getFermentation();
+			final IFermentationRecipe recipe = getWorkingRecipe();
 			if (recipe != null)
 			{
-				getFluidTank(0).setFluid(recipe.asFluidStack(getFluidStack(0).amount));
+				final FluidStack outputFluidStack = recipe.getOutputFluidStack();
+				if (outputFluidStack != null)
+				{
+					getFluidTank(0).setFluid(FluidUtils.exchangeFluid(getFluidStack(0), outputFluidStack.getFluid()));
+				}
 				final ItemStack fermenter = recipe.getFermentingItemStack();
 				if (fermenter != null)
 				{
@@ -117,16 +134,43 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		return 0;
 	}
 
+	private void refreshRecipe()
+	{
+		final IFermentationRecipe recipe = CellarRegistry.instance().fermenting().findRecipe(getFluidStack(0), getStackInSlot(0));
+		if (recipe != null && recipe != activeRecipe)
+		{
+			if (activeRecipe != null)
+			{
+				resetTime();
+			}
+			activeRecipe = recipe;
+		}
+		else
+		{
+			if (activeRecipe != null)
+			{
+				this.activeRecipe = null;
+				resetTime();
+			}
+		}
+	}
+
 	@Override
 	protected void updateDevice()
 	{
+		if (recheckRecipe)
+		{
+			this.recheckRecipe = false;
+			refreshRecipe();
+		}
+
 		if (canFerment())
 		{
 			this.time++;
 
 			if (time >= getTimeMax())
 			{
-				this.time = 0;
+				resetTime();
 				fermentItem();
 				markForInventoryUpdate();
 			}
@@ -141,9 +185,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		}
 	}
 
-	/************
-	 * INVENTORY
-	 ************/
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
 	{
@@ -162,9 +203,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		return true;
 	}
 
-	/************
-	 * NBT
-	 ************/
 	@Override
 	protected void readTanksFromNBT(NBTTagCompound nbt)
 	{
@@ -192,14 +230,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		nbt.setShort("time", (short)this.time);
 	}
 
-	/************
-	 * PACKETS
-	 ************/
-
-	/**
-	 * @param id - data id
-	 * @param v - value
-	 */
 	@Override
 	public void receiveGUINetworkData(int id, int v)
 	{
@@ -250,5 +280,20 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 			return null;
 		}
 		return doDrain(from, resource.amount, doDrain);
+	}
+
+	@Override
+	protected void markForFluidUpdate()
+	{
+		super.markForFluidUpdate();
+		markForRecipeRecheck();
+	}
+
+
+	@Override
+	public void onInventoryChanged(IInventory inv, int index)
+	{
+		super.onInventoryChanged(inv, index);
+		markForRecipeRecheck();
 	}
 }

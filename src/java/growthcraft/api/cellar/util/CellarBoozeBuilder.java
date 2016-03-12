@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -78,14 +78,14 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 	@Override
 	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time)
 	{
-		CellarRegistry.instance().fermenting().addFermentingRecipe(result, new FluidStack(fluid, result.amount), stack, time);
+		CellarRegistry.instance().fermenting().addRecipe(result, new FluidStack(fluid, result.amount), stack, time);
 		return this;
 	}
 
 	@Override
 	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time)
 	{
-		CellarRegistry.instance().fermenting().addFermentingRecipe(new FluidStack(fluid, src.amount), src, stack, time);
+		CellarRegistry.instance().fermenting().addRecipe(new FluidStack(fluid, src.amount), src, stack, time);
 		return this;
 	}
 

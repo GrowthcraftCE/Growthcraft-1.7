@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,31 +23,64 @@
  */
 package growthcraft.api.cellar.fermenting;
 
-import growthcraft.api.cellar.common.ProcessingRecipe;
-import growthcraft.api.cellar.common.Residue;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.item.ItemTest;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class FermentationRecipe extends ProcessingRecipe
+public class FermentationRecipe implements IFermentationRecipe
 {
-	private FluidStack inputFluid;
-	private ItemStack fermentingItem;
+	private final ItemStack fermentingItem;
+	private final FluidStack inputFluidStack;
+	private final FluidStack outputFluidStack;
+	private final int time;
 
-	public FermentationRecipe(FluidStack src, ItemStack ferm, FluidStack res, int t, Residue r)
+	public FermentationRecipe(@Nonnull FluidStack pInputFluidStack, @Nonnull ItemStack pFermentingItem, @Nonnull FluidStack pOutputFluidStack, int pTime)
 	{
-		super(res, t, r);
-		this.inputFluid = src;
-		this.fermentingItem = ferm;
+		this.fermentingItem = pFermentingItem;
+		this.inputFluidStack = pInputFluidStack;
+		this.outputFluidStack = pOutputFluidStack;
+		this.time = pTime;
 	}
 
+	@Override
 	public FluidStack getInputFluidStack()
 	{
-		return inputFluid;
+		return inputFluidStack;
 	}
 
+	@Override
+	public FluidStack getOutputFluidStack()
+	{
+		return inputFluidStack;
+	}
+
+	@Override
 	public ItemStack getFermentingItemStack()
 	{
 		return fermentingItem;
+	}
+
+	@Override
+	public int getTime()
+	{
+		return time;
+	}
+
+	@Override
+	public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack)
+	{
+		if (FluidTest.isValid(fluidStack) && ItemTest.isValid(itemStack))
+		{
+			if (FluidTest.hasEnough(inputFluidStack, fluidStack))
+			{
+				return ItemTest.hasEnough(fermentingItem, itemStack);
+			}
+		}
+		return false;
 	}
 }

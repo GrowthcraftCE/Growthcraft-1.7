@@ -23,17 +23,16 @@
  */
 package growthcraft.api.cellar.fermenting;
 
-import javax.annotation.Nonnull;
-
-import growthcraft.api.core.log.ILoggable;
+import javax.annotation.Nullable;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public interface IFermentingRegistry extends ILoggable
+public interface IFermentationRecipe
 {
-	void addRecipe(@Nonnull IFermentationRecipe recipe);
-	void addRecipe(FluidStack result, FluidStack booze, ItemStack fermenter, int time);
-	IFermentationRecipe findRecipe(FluidStack booze, ItemStack fermenter);
-	boolean canFerment(FluidStack booze);
+	FluidStack getInputFluidStack();
+	FluidStack getOutputFluidStack();
+	ItemStack getFermentingItemStack();
+	int getTime();
+	boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack);
 }
