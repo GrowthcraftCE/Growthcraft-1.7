@@ -70,7 +70,7 @@ public class DeviceProgressive extends DeviceBase
 		this.timeMax = t;
 	}
 
-	protected boolean resetTime()
+	public boolean resetTime()
 	{
 		if (this.time != 0)
 		{
@@ -84,6 +84,10 @@ public class DeviceProgressive extends DeviceBase
 	public void increaseTime()
 	{
 		time++;
+	}
+
+	public void update()
+	{
 	}
 
 	/**

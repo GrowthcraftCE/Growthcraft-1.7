@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,29 +21,62 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.util;
+package growthcraft.api.cellar.culturing;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.api.cellar.booze.BoozeEffect;
-import growthcraft.api.cellar.common.Residue;
-import growthcraft.api.core.fluids.FluidTag;
+import growthcraft.api.core.fluids.FluidTest;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-/**
- * Now you can make the same awesome we use internally
- */
-public interface ICellarBoozeBuilder
+public class CultureRecipe implements ICultureRecipe
 {
-	public ICellarBoozeBuilder tags(FluidTag... tags);
-	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time, @Nullable Residue residue);
-	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time, @Nullable Residue residue);
-	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time);
-	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time);
-	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nullable Residue residue);
-	public ICellarBoozeBuilder culturesTo(int amount, @Nonnull ItemStack stack, float heat, int time);
-	public BoozeEffect getEffect();
+	private FluidStack inputFluidStack;
+	private ItemStack outputItemStack;
+	private float requiredHeat;
+	private int time;
+
+	public CultureRecipe(@Nonnull FluidStack pInputFluidStack, @Nonnull ItemStack pOutputItemStack, float pRequiredHeat, int pTime)
+	{
+		this.inputFluidStack = pInputFluidStack;
+		this.outputItemStack = pOutputItemStack;
+		this.requiredHeat = pRequiredHeat;
+		this.time = pTime;
+	}
+
+	@Override
+	public ItemStack getOutputItemStack()
+	{
+		return outputItemStack;
+	}
+
+	@Override
+	public FluidStack getInputFluidStack()
+	{
+		return inputFluidStack;
+	}
+
+	@Override
+	public float getRequiredHeat()
+	{
+		return requiredHeat;
+	}
+
+	@Override
+	public int getTime()
+	{
+		return time;
+	}
+
+	@Override
+	public boolean matchesRecipe(@Nullable FluidStack fluid, float heat)
+	{
+		if (FluidTest.hasEnough(inputFluidStack, fluid))
+		{
+			return heat >= requiredHeat;
+		}
+		return false;
+	}
 }

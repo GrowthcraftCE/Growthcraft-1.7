@@ -141,6 +141,8 @@ public class GrowthCraftCellar
 
 		userApis.getUserBrewingRecipes()
 			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
+		userApis.getUserCultureRecipes()
+			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/culturing.json");
 		userApis.getUserFermentingRecipes()
 			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/fermenting.json");
 		userApis.getUserHeatSources()

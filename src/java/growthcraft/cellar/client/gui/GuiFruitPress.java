@@ -84,7 +84,7 @@ public class GuiFruitPress extends GuiCellar
 
 		if (this.te.getFluidAmountScaled(52, 0) > 0)
 		{
-			drawTank(w, h, 89, 17, 16, this.te.getFluidAmountScaled(52, 0), this.te.getFluidStack(0), this.te.getFluidTank(0));
+			drawTank(w, h, 89, 17, 16, 52, this.te.getFluidAmountScaled(52, 0), this.te.getFluidStack(0), this.te.getFluidTank(0));
 			this.mc.getTextureManager().bindTexture(fruitPressResource);
 		}
 	}

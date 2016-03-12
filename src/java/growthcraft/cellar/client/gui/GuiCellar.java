@@ -26,9 +26,9 @@ public class GuiCellar extends GrcGuiContainer
 		this.cellarDevice = cd;
 	}
 
-	protected void drawTank(int w, int h, int wp, int hp, int width, int amount, FluidStack fluidstack, FluidTank _tank)
+	protected void drawTank(int w, int h, int wp, int hp, int width, int height, int amount, FluidStack fluidstack, FluidTank _tank)
 	{
-		drawFluidStack(w, h, wp, hp, width, amount, fluidstack);
+		drawFluidStack(w, h, wp, hp, width, height, amount, fluidstack);
 	}
 
 	protected void addFluidTooltips(FluidStack fluid, List<String> tooltip)

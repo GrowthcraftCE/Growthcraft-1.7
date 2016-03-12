@@ -50,8 +50,8 @@ public class GuiFermentBarrel extends GuiCellar
 			this.button.enabled = false;
 		}
 
-		addTooltipIndex("fluidtank0", 63, 17, 50, 52);
-		if (button != null) addTooltipIndex("discardtank0", 116, 54, 16, 16);
+		addTooltipIndex("fluid_tank.primary", 63, 17, 50, 52);
+		if (button != null) addTooltipIndex("fluid_tank.primary.discard", 116, 54, 16, 16);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class GuiFermentBarrel extends GuiCellar
 		if (i > 0)
 		{
 			final FluidStack fluid = te.getFluidStack(0);
-			drawTank(w, h, 63, 17, 50, i, fluid, te.getFluidTank(0));
+			drawTank(w, h, 63, 17, 50, 52, i, fluid, te.getFluidTank(0));
 			mc.getTextureManager().bindTexture(fermentBarrelResource);
 
 			itemRender.zLevel = 100.0F;
@@ -142,13 +142,13 @@ public class GuiFermentBarrel extends GuiCellar
 	{
 		switch (handle)
 		{
-			case "fluidtank0":
+			case "fluid_tank.primary":
 				if (this.te.isFluidTankFilled(0))
 				{
 					addFermentTooltips(this.te.getFluidStack(0), tooltip);
 				}
 				break;
-			case "discardtank0":
+			case "fluid_tank.primary.discard":
 				tooltip.add(GrcI18n.translate("gui.grc.discard"));
 				break;
 			default:

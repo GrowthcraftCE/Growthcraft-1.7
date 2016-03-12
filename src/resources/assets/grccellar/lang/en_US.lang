@@ -42,7 +42,7 @@ item.grc.waterBag16.name=Water Bag
 container.grc.fruitPress=Fruit Press
 container.grc.brewKettle=Brew Kettle
 container.grc.fermentBarrel=Fermentation Barrel
-container.grc.fermentJar=Culture Jar
+container.grc.CultureJar=Culture Jar
 
 # Other
 grc.potion.tipsy=Tipsy

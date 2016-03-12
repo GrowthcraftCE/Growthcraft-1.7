@@ -29,6 +29,8 @@ import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.booze.IBoozeRegistry;
 import growthcraft.api.cellar.brewing.BrewingRegistry;
 import growthcraft.api.cellar.brewing.IBrewingRegistry;
+import growthcraft.api.cellar.culturing.CulturingRegistry;
+import growthcraft.api.cellar.culturing.ICulturingRegistry;
 import growthcraft.api.cellar.distilling.DistilleryRegistry;
 import growthcraft.api.cellar.distilling.IDistilleryRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
@@ -50,6 +52,7 @@ public class CellarRegistry implements ILoggable
 
 	private final IBoozeRegistry boozeRegistry = new BoozeRegistry();
 	private final IBrewingRegistry brewingRegistry = new BrewingRegistry();
+	private final ICulturingRegistry culturingRegistry = new CulturingRegistry();
 	private final IDistilleryRegistry distilleryRegistry = new DistilleryRegistry();
 	private final IFermentingRegistry fermentingRegistry = new FermentingRegistry();
 	private final IHeatSourceRegistry heatSourceRegistry = new HeatSourceRegistry();
@@ -80,6 +83,7 @@ public class CellarRegistry implements ILoggable
 		this.logger = l;
 		boozeRegistry.setLogger(logger);
 		brewingRegistry.setLogger(logger);
+		culturingRegistry.setLogger(logger);
 		distilleryRegistry.setLogger(logger);
 		fermentingRegistry.setLogger(logger);
 		heatSourceRegistry.setLogger(logger);
@@ -101,6 +105,14 @@ public class CellarRegistry implements ILoggable
 	public IBrewingRegistry brewing()
 	{
 		return brewingRegistry;
+	}
+
+	/**
+	 * @return instance of the CulturingRegistry
+	 */
+	public ICulturingRegistry culturing()
+	{
+		return culturingRegistry;
 	}
 
 	/**

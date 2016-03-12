@@ -43,8 +43,8 @@ public class GuiCultureJar extends GuiCellar
 			buttonList.add(discardButton);
 		}
 
-		addTooltipIndex("fluidtank0", 36, 17, 16, 52);
-		if (discardButton != null) addTooltipIndex("discardtank0", 16, 52, 16, 16);
+		addTooltipIndex("fluid_tank.primary", 36, 17, 16, 58);
+		if (discardButton != null) addTooltipIndex("fluid_tank.primary.discard", 16, 52, 16, 16);
 	}
 
 	@Override
@@ -61,9 +61,41 @@ public class GuiCultureJar extends GuiCellar
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2)
+	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
-		super.drawGuiContainerForegroundLayer(par1, par2);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		mc.getTextureManager().bindTexture(fermentJarResource);
+		final int x = (width - xSize) / 2;
+		final int y = (height - ySize) / 2;
+		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+
+		final int progressWidth = te.getProgressScaled(22);
+		drawTexturedModalRect(x + 55, y + 35, 176, 0, progressWidth, 17);
+
+		final int fluidScaled = te.getFluidAmountScaled(58, 0);
+		if (fluidScaled > 0)
+		{
+			drawTank(x, y, 36, 14, 16, 58, fluidScaled, te.getFluidStack(0), te.getFluidTank(0));
+			mc.getTextureManager().bindTexture(fermentJarResource);
+			// Rule overlay
+			drawTexturedModalRect(x + 36, y + 14, 176, 53, 16, 58);
+		}
+
+		final int iconHeight = te.getHeatScaled(14);
+		final int offY = 14 - iconHeight;
+		drawTexturedModalRect(x + 82, y + 56 + offY, 176, 17 + offY, 14, iconHeight);
+
+		if (!te.isCulturing())
+		{
+			// Red Ring around Yeast Slot
+			drawTexturedModalRect(x + 77, y + 32, 176, 31, 22, 22);
+		}
+	}
+
+	@Override
+	protected void drawGuiContainerForegroundLayer(int x, int y)
+	{
+		super.drawGuiContainerForegroundLayer(x, y);
 
 		if (!te.isFluidTankEmpty(0))
 		{
@@ -73,34 +105,14 @@ public class GuiCultureJar extends GuiCellar
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
-	{
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.getTextureManager().bindTexture(fermentJarResource);
-		final int x = (width - xSize) / 2;
-		final int y = (height - ySize) / 2;
-		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-
-		final int progressWidth = te.getFermentProgressScaled(22);
-		drawTexturedModalRect(x + 55, y + 35, 176, 0, progressWidth, 17);
-
-		final int fluidScaled = te.getFluidAmountScaled(52, 0);
-		if (fluidScaled > 0)
-		{
-			drawTank(x, y, 36, 17, 16, fluidScaled, te.getFluidStack(0), te.getFluidTank(0));
-			mc.getTextureManager().bindTexture(fermentJarResource);
-		}
-	}
-
-	@Override
 	protected void addTooltips(String handle, List<String> tooltip)
 	{
 		switch (handle)
 		{
-			case "fluidtank0":
+			case "fluid_tank.primary":
 				addFluidTooltips(te.getFluidStack(0), tooltip);
 				break;
-			case "discardtank0":
+			case "fluid_tank.primary.discard":
 				tooltip.add(GrcI18n.translate("gui.grc.discard"));
 				break;
 			default:

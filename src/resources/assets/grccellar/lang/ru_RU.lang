@@ -42,7 +42,7 @@ item.grc.waterBag16.name=Water Bag
 container.grc.fruitPress=Плодовый пресс
 container.grc.brewKettle=Сусловарочный котёл
 container.grc.fermentBarrel=Бочка для брожения
-container.grc.fermentJar=Банка для брожения
+container.grc.CultureJar=Банка для брожения
 
 # Other
 grc.potion.tipsy=Опьянение

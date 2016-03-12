@@ -12,7 +12,7 @@ tile.grc.fermentJar.name=Jarro de Cultivo
 container.grc.fruitPress=Esmagador de Frutas
 container.grc.brewKettle=Caldeira de Fabricação
 container.grc.fermentBarrel=Barril de Fermentação
-container.grc.fermentJar=Jarro de Cultivo
+container.grc.CultureJar=Jarro de Cultivo
 
 # Items
 item.grc.yeast0.name=Levedura do Cervejeiro

@@ -83,4 +83,11 @@ public class UserApiCellarBoozeBuilder extends CellarBoozeBuilder
 		this.userApis.getUserPressingRecipes().addDefault(stack, new FluidStack(fluid, amount), time, residue);
 		return this;
 	}
+
+	@Override
+	public ICellarBoozeBuilder culturesTo(int amount, @Nonnull ItemStack stack, float heat, int time)
+	{
+		this.userApis.getUserCultureRecipes().addDefault(new FluidStack(fluid, amount), stack, heat, time);
+		return this;
+	}
 }

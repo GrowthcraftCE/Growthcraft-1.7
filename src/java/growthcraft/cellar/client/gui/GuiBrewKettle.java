@@ -134,13 +134,13 @@ public class GuiBrewKettle extends GuiCellar
 
 		if (this.te.getFluidAmountScaled(52, 0) > 0)
 		{
-			drawTank(w, h, 46, 17, 16, this.te.getFluidAmountScaled(52, 0), this.te.getFluidStack(0), this.te.getFluidTank(0));
+			drawTank(w, h, 46, 17, 16, 52, this.te.getFluidAmountScaled(52, 0), this.te.getFluidStack(0), this.te.getFluidTank(0));
 			this.mc.getTextureManager().bindTexture(brewKettleResource);
 		}
 
 		if (this.te.getFluidAmountScaled(52, 1) > 0)
 		{
-			drawTank(w, h, 114, 17, 16, this.te.getFluidAmountScaled(52, 1), this.te.getFluidStack(1), this.te.getFluidTank(1));
+			drawTank(w, h, 114, 17, 16, 52, this.te.getFluidAmountScaled(52, 1), this.te.getFluidStack(1), this.te.getFluidTank(1));
 			this.mc.getTextureManager().bindTexture(brewKettleResource);
 		}
 	}

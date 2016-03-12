@@ -26,6 +26,7 @@ package growthcraft.cellar.util;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.brewing.user.UserBrewingRecipesConfig;
+import growthcraft.api.cellar.culturing.user.UserCultureRecipesConfig;
 import growthcraft.api.cellar.fermenting.user.UserFermentingRecipesConfig;
 import growthcraft.api.cellar.heatsource.user.UserHeatSourcesConfig;
 import growthcraft.api.cellar.pressing.user.UserPressingRecipesConfig;
@@ -39,6 +40,7 @@ import growthcraft.core.common.GrcModuleBase;
 public class GrcCellarUserApis extends GrcModuleBase
 {
 	private UserBrewingRecipesConfig userBrewingRecipes;
+	private UserCultureRecipesConfig userCultureRecipes;
 	private UserFermentingRecipesConfig userFermentingRecipes;
 	private UserHeatSourcesConfig userHeatSources;
 	private UserPressingRecipesConfig userPressingRecipes;
@@ -49,11 +51,13 @@ public class GrcCellarUserApis extends GrcModuleBase
 	{
 		this.modules = new ModuleContainer();
 		this.userBrewingRecipes = new UserBrewingRecipesConfig();
+		this.userCultureRecipes = new UserCultureRecipesConfig();
 		this.userFermentingRecipes = new UserFermentingRecipesConfig();
 		this.userHeatSources = new UserHeatSourcesConfig();
 		this.userPressingRecipes = new UserPressingRecipesConfig();
 		this.userYeastEntries = new UserYeastEntriesConfig();
 		modules.add(userBrewingRecipes);
+		modules.add(userCultureRecipes);
 		modules.add(userFermentingRecipes);
 		modules.add(userHeatSources);
 		modules.add(userPressingRecipes);
@@ -67,9 +71,19 @@ public class GrcCellarUserApis extends GrcModuleBase
 		modules.setLogger(log);
 	}
 
-	public UserYeastEntriesConfig getUserYeastEntries()
+	public UserBrewingRecipesConfig getUserBrewingRecipes()
 	{
-		return this.userYeastEntries;
+		return this.userBrewingRecipes;
+	}
+
+	public UserCultureRecipesConfig getUserCultureRecipes()
+	{
+		return this.userCultureRecipes;
+	}
+
+	public UserFermentingRecipesConfig getUserFermentingRecipes()
+	{
+		return this.userFermentingRecipes;
 	}
 
 	public UserHeatSourcesConfig getUserHeatSources()
@@ -82,14 +96,9 @@ public class GrcCellarUserApis extends GrcModuleBase
 		return this.userPressingRecipes;
 	}
 
-	public UserBrewingRecipesConfig getUserBrewingRecipes()
+	public UserYeastEntriesConfig getUserYeastEntries()
 	{
-		return this.userBrewingRecipes;
-	}
-
-	public UserFermentingRecipesConfig getUserFermentingRecipes()
-	{
-		return this.userFermentingRecipes;
+		return this.userYeastEntries;
 	}
 
 	@Override

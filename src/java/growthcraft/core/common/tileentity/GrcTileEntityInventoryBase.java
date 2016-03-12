@@ -56,7 +56,7 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase imple
 	protected abstract GrcInternalInventory createInventory();
 	public abstract String getDefaultInventoryName();
 
-	// Call this when you modified the inventory, or your not sure what
+	// Call this when you have modified the inventory, or you're not sure what
 	// kind of update you require
 	@Override
 	public void markForInventoryUpdate()

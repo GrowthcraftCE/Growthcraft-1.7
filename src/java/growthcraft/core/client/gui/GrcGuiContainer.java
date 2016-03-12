@@ -125,7 +125,7 @@ public class GrcGuiContainer extends GuiContainer
 		this.mc.getTextureManager().bindTexture(res);
 	}
 
-	protected void drawFluidStack(int w, int h, int wp, int hp, int width, int amount, FluidStack fluidstack)
+	protected void drawFluidStack(int x, int y, int wp, int hp, int width, int height, int amount, FluidStack fluidstack)
 	{
 		if (fluidstack == null) return;
 
@@ -144,7 +144,7 @@ public class GrcGuiContainer extends GuiContainer
 				final float g = (float)(color >> 8 & 255) / 255.0F;
 				final float b = (float)(color & 255) / 255.0F;
 				GL11.glColor4f(r, g, b, 1.0f);
-				this.drawTexturedModelRectFromIcon(w + wp, h + hp + 52 - amount, icon, width, amount);
+				this.drawTexturedModelRectFromIcon(x + wp, y + hp + height - amount, icon, width, amount);
 				GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 			}
 		}

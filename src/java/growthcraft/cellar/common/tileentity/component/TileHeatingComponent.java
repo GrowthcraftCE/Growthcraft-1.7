@@ -71,6 +71,11 @@ public class TileHeatingComponent implements INBTSerializableContext, IStreamabl
 		return heat;
 	}
 
+	public boolean isHeated()
+	{
+		return heat > 0.0f;
+	}
+
 	private void readFromNBT(@Nonnull NBTTagCompound tag)
 	{
 		this.heat = tag.getFloat("heat");

@@ -184,6 +184,7 @@ public class YeastGenerator extends DeviceProgressive
 		}
 	}
 
+	@Override
 	public void update()
 	{
 		if (canProduceYeast())

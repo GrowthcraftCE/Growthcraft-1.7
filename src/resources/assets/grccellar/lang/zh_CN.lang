@@ -42,7 +42,7 @@ item.grc.waterBag16.name=水袋
 container.grc.fruitPress=榨汁机
 container.grc.brewKettle=酿造锅
 container.grc.fermentBarrel=发酵桶
-container.grc.fermentJar=发酵罐
+container.grc.CultureJar=发酵罐
 
 # Other
 grc.potion.tipsy=微醺

@@ -1,13 +1,41 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015, 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.cellar.common.tileentity;
 
 import java.io.IOException;
 
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
+import growthcraft.cellar.common.tileentity.device.CultureGenerator;
 import growthcraft.cellar.common.tileentity.device.YeastGenerator;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.device.DeviceProgressive;
 import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.ITileHeatedDevice;
+import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 
 import io.netty.buffer.ByteBuf;
 
@@ -19,17 +47,27 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityCultureJar extends TileEntityCellarDevice
+public class TileEntityCultureJar extends TileEntityCellarDevice implements ITileHeatedDevice, ITileProgressiveDevice
 {
 	public static enum CultureJarDataId
 	{
-		TIME,
-		TIME_MAX,
+		YEAST_GEN_TIME,
+		YEAST_GEN_TIME_MAX,
+		CULTURE_GEN_TIME,
+		CULTURE_GEN_TIME_MAX,
 		TANK_FLUID_ID,
 		TANK_FLUID_AMOUNT,
 		UNKNOWN;
 
-		public static final CultureJarDataId[] VALID = new CultureJarDataId[] { TIME, TIME_MAX, TANK_FLUID_ID, TANK_FLUID_AMOUNT };
+		public static final CultureJarDataId[] VALID = new CultureJarDataId[]
+		{
+			YEAST_GEN_TIME,
+			YEAST_GEN_TIME_MAX,
+			CULTURE_GEN_TIME,
+			CULTURE_GEN_TIME_MAX,
+			TANK_FLUID_ID,
+			TANK_FLUID_AMOUNT
+		};
 
 		public static CultureJarDataId fromInt(int i)
 		{
@@ -39,20 +77,58 @@ public class TileEntityCultureJar extends TileEntityCellarDevice
 	}
 
 	private static final int[] accessibleSlots = new int[] { 0 };
+	private TileHeatingComponent heatComponent;
+	private CultureGenerator cultureGen;
 	private YeastGenerator yeastGen;
+	private int jarDeviceState;
 
 	public TileEntityCultureJar()
 	{
 		super();
+		this.heatComponent = new TileHeatingComponent(this);
+		this.cultureGen = new CultureGenerator(this, heatComponent, 0, 0);
 		this.yeastGen = new YeastGenerator(this, 0, 0);
-		this.yeastGen.setTimeMax(GrowthCraftCellar.getConfig().fermentJarTimeMax);
-		this.yeastGen.setConsumption(GrowthCraftCellar.getConfig().fermentJarConsumption);
+		this.yeastGen.setTimeMax(GrowthCraftCellar.getConfig().cultureJarTimeMax);
+		this.yeastGen.setConsumption(GrowthCraftCellar.getConfig().cultureJarConsumption);
+	}
+
+	public boolean isHeated()
+	{
+		return cultureGen.isHeated();
+	}
+
+	public float getHeatMultiplier()
+	{
+		return cultureGen.getHeatMultiplier();
+	}
+
+	public boolean isCulturing()
+	{
+		return jarDeviceState == 1;
+	}
+
+	private DeviceProgressive getActiveDevice()
+	{
+		if (cultureGen.isHeated())
+		{
+			return cultureGen;
+		}
+		return yeastGen;
+	}
+
+	private DeviceProgressive getActiveClientDevice()
+	{
+		if (jarDeviceState == 1)
+		{
+			return cultureGen;
+		}
+		return yeastGen;
 	}
 
 	@Override
 	protected FluidTank[] createTanks()
 	{
-		final int maxTankCap = GrowthCraftCellar.getConfig().fermentJarMaxCap;
+		final int maxTankCap = GrowthCraftCellar.getConfig().cultureJarMaxCap;
 		return new FluidTank[] { new CellarTank(maxTankCap, this) };
 	}
 
@@ -65,7 +141,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice
 	@Override
 	public String getDefaultInventoryName()
 	{
-		return "container.grc.fermentJar";
+		return "container.grc.CultureJar";
 	}
 
 	protected void markForFluidUpdate()
@@ -118,7 +194,24 @@ public class TileEntityCultureJar extends TileEntityCellarDevice
 	@Override
 	protected void updateDevice()
 	{
-		yeastGen.update();
+		heatComponent.update();
+		final int lastState = jarDeviceState;
+		final DeviceProgressive prog = getActiveDevice();
+		if (prog == cultureGen)
+		{
+			this.jarDeviceState = 1;
+			yeastGen.resetTime();
+		}
+		else
+		{
+			this.jarDeviceState = 0;
+			cultureGen.resetTime();
+		}
+		getActiveDevice().update();
+		if (jarDeviceState != lastState)
+		{
+			markForBlockUpdate();
+		}
 	}
 
 	@Override
@@ -126,11 +219,17 @@ public class TileEntityCultureJar extends TileEntityCellarDevice
 	{
 		switch (CultureJarDataId.fromInt(id))
 		{
-			case TIME:
+			case YEAST_GEN_TIME:
 				yeastGen.setTime(v);
 				break;
-			case TIME_MAX:
+			case YEAST_GEN_TIME_MAX:
 				yeastGen.setTimeMax(v);
+				break;
+			case CULTURE_GEN_TIME:
+				cultureGen.setTime(v);
+				break;
+			case CULTURE_GEN_TIME_MAX:
+				cultureGen.setTimeMax(v);
 				break;
 			case TANK_FLUID_ID:
 				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
@@ -148,8 +247,10 @@ public class TileEntityCultureJar extends TileEntityCellarDevice
 	@Override
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
-		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TIME.ordinal(), yeastGen.getTime());
-		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TIME_MAX.ordinal(), yeastGen.getTimeMax());
+		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.YEAST_GEN_TIME.ordinal(), yeastGen.getTime());
+		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.YEAST_GEN_TIME_MAX.ordinal(), yeastGen.getTimeMax());
+		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.CULTURE_GEN_TIME.ordinal(), cultureGen.getTime());
+		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.CULTURE_GEN_TIME_MAX.ordinal(), cultureGen.getTimeMax());
 		final FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
@@ -160,6 +261,8 @@ public class TileEntityCultureJar extends TileEntityCellarDevice
 	{
 		super.readFromNBT(nbt);
 		yeastGen.readFromNBT(nbt, "yeastgen");
+		cultureGen.readFromNBT(nbt, "culture_gen");
+		heatComponent.readFromNBT(nbt, "heat_component");
 	}
 
 	@Override
@@ -167,23 +270,41 @@ public class TileEntityCultureJar extends TileEntityCellarDevice
 	{
 		super.writeToNBT(nbt);
 		yeastGen.writeToNBT(nbt, "yeastgen");
+		cultureGen.writeToNBT(nbt, "culture_gen");
+		heatComponent.writeToNBT(nbt, "heat_component");
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_YeastGen(ByteBuf stream) throws IOException
 	{
+		this.jarDeviceState = stream.readInt();
 		yeastGen.readFromStream(stream);
+		cultureGen.readFromStream(stream);
+		heatComponent.readFromStream(stream);
 		return false;
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
 	public void writeToStream_YeastGen(ByteBuf stream) throws IOException
 	{
+		stream.writeInt(jarDeviceState);
 		yeastGen.writeToStream(stream);
+		cultureGen.writeToStream(stream);
+		heatComponent.writeToStream(stream);
 	}
 
-	public int getFermentProgressScaled(int scale)
+	public int getProgressScaled(int scale)
 	{
-		return yeastGen.getProgressScaled(scale);
+		return getActiveClientDevice().getProgressScaled(scale);
+	}
+
+	public int getHeatScaled(int scale)
+	{
+		return (int)(scale * getHeatMultiplier());
+	}
+
+	public float getDeviceProgress()
+	{
+		return getActiveClientDevice().getProgress();
 	}
 }

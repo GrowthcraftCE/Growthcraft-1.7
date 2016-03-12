@@ -97,6 +97,13 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 	}
 
 	@Override
+	public ICellarBoozeBuilder culturesTo(int amount, @Nonnull ItemStack stack, float heat, int time)
+	{
+		CellarRegistry.instance().culturing().addRecipe(new FluidStack(fluid, amount), stack, heat, time);
+		return this;
+	}
+
+	@Override
 	public BoozeEffect getEffect()
 	{
 		return CellarRegistry.instance().booze().getEffect(fluid);
