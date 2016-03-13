@@ -43,12 +43,20 @@ public class ModuleContainer implements IModule, IFreezable, ILoggable, Iterable
 	private boolean frozen;
 
 	/**
-	 * Returns an iterator for the submodules
+	 * Returns an iterator for the module's submodules
 	 */
 	@Override
 	public Iterator<IModule> iterator()
 	{
 		return subModules.iterator();
+	}
+
+	/**
+	 * @return size of the module container
+	 */
+	public int size()
+	{
+		return subModules.size();
 	}
 
 	/**
