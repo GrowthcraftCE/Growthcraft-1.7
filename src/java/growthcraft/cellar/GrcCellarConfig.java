@@ -48,10 +48,16 @@ public class GrcCellarConfig extends ConfigBase
 
 
 	@ConfigOption(catergory="Brew Kettle", name="Drop items in Brew Kettle", desc="Enable to drop items in brew kettles.")
-	public boolean dropItemsInBrewKettle;
+	public boolean dropItemsInBrewKettle = true;
 
 	@ConfigOption(catergory="Brew Kettle", name="Fluid Capacity", desc="How much fluid can a Brew Kettle hold? (in mB (milli buckets))")
 	public int brewKettleMaxCap = 1000;
+
+	@ConfigOption(catergory="Brew Kettle", name="Fill by Rain", desc="Should the brew kettle fill from rain?")
+	public boolean brewKettleFillsWithRain = true;
+
+	@ConfigOption(catergory="Brew Kettle", name="Rain Fill Amount", desc="How much water is added to the brew kettle per rain tick? (in mB (milli buckets))")
+	public int brewKettleRainFillPerUnit = 10;
 
 
 	@ConfigOption(catergory="Fruit Press", name="Fluid Capacity", desc="How much fluid can a Fruit Press hold? (in mB (milli buckets))")

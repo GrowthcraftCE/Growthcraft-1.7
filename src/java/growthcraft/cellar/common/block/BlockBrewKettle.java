@@ -24,6 +24,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockBrewKettle extends BlockCellarContainer
 {
@@ -31,6 +33,8 @@ public class BlockBrewKettle extends BlockCellarContainer
 	private IIcon[] icons;
 
 	private final boolean dropItemsInBrewKettle = GrowthCraftCellar.getConfig().dropItemsInBrewKettle;
+	private final boolean fillsWithRain = GrowthCraftCellar.getConfig().brewKettleFillsWithRain;
+	private final int rainFillPerUnit = GrowthCraftCellar.getConfig().brewKettleRainFillPerUnit;
 
 	public BlockBrewKettle()
 	{
@@ -40,6 +44,22 @@ public class BlockBrewKettle extends BlockCellarContainer
 		setBlockName("grc.brewKettle");
 		setCreativeTab(GrowthCraftCellar.tab);
 		setGuiType(CellarGuiType.BREW_KETTLE);
+	}
+
+	@Override
+	public void fillWithRain(World world, int x, int y, int z)
+	{
+		if (!world.isRemote)
+		{
+			if (fillsWithRain)
+			{
+				final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
+				if (te != null)
+				{
+					te.fill(ForgeDirection.UP, new FluidStack(FluidRegistry.WATER, rainFillPerUnit), true);
+				}
+			}
+		}
 	}
 
 	@Override
