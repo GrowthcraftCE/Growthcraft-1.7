@@ -86,32 +86,36 @@ grcmilk.cheese_vat.fluid_tank.recipe=Secondary
 
 # Fluids
 ## Tags
+grc.fluids.tag.cheese=Cheese
+grc.fluids.tag.cream=Cream
 grc.fluids.tag.milk=Milk
 grc.fluids.tag.milk_curds=Milk Curds
 grc.fluids.tag.rennet=Rennet
-grc.fluids.tag.cream=Cream
+grc.fluids.tag.whey=Whey
 ## Standard
 ### Fluids
 fluid.grcmilk.ButterMilk=Butter Milk
+fluid.grcmilk.CheeseAppenzeller=Appenzeller Cheese
+fluid.grcmilk.CheeseAsiago=Asiago Cheese
+fluid.grcmilk.CheeseCheddar=Cheddar Cheese
+fluid.grcmilk.CheeseEmmentaler=Swiss Cheese
+fluid.grcmilk.CheeseGorgonzola=Gorgonzola Cheese
+fluid.grcmilk.CheeseMonterey=Monterey Cheese
+fluid.grcmilk.CheeseParmesan=Parmesan Cheese
+fluid.grcmilk.CheeseRicotta=Ricotta Cheese
 fluid.grcmilk.Cream=Cream
 fluid.grcmilk.Curds=Milk Curds
 fluid.grcmilk.Milk=Milk
+fluid.grcmilk.PasteurizedMilk=Pasteurized Milk
 fluid.grcmilk.Rennet=Rennet
 fluid.grcmilk.SkimMilk=Skim Milk
 fluid.grcmilk.Whey=Whey
-fluid.grcmilk.CheeseCheddar=Cheddar Cheese
-fluid.grcmilk.CheeseGorgonzola=Gorgonzola Cheese
-fluid.grcmilk.CheeseEmmentaler=Swiss Cheese
-fluid.grcmilk.CheeseAppenzeller=Appenzeller Cheese
-fluid.grcmilk.CheeseAsiago=Asiago Cheese
-fluid.grcmilk.CheeseParmesan=Parmesan Cheese
-fluid.grcmilk.CheeseMonterey=Monterey Cheese
-fluid.grcmilk.CheeseRicotta=Ricotta Cheese
 ### Blocks
 tile.grcmilk.BlockFluidButterMilk.name=Butter Milk
 tile.grcmilk.BlockFluidCream.name=Cream
 tile.grcmilk.BlockFluidCurds.name=Milk Curds
 tile.grcmilk.BlockFluidMilk.name=Milk
+tile.grcmilk.BlockFluidPasteurizedMilk.name=Pasteurized Milk
 tile.grcmilk.BlockFluidRennet.name=Rennet
 tile.grcmilk.BlockFluidSkimMilk.name=Skim Milk
 tile.grcmilk.BlockFluidWhey.name=Whey
@@ -120,6 +124,7 @@ item.grcmilk.BottleFluidButterMilk.name=Butter Milk Bottle
 item.grcmilk.BottleFluidCream.name=Cream Bottle
 item.grcmilk.BottleFluidCurds.name=Milk Curds Bottle
 item.grcmilk.BottleFluidMilk.name=Milk Bottle
+item.grcmilk.BottleFluidPasteurizedMilk.name=Pasteurized Milk Bottle
 item.grcmilk.BottleFluidRennet.name=Rennet Bottle
 item.grcmilk.BottleFluidSkimMilk.name=Skim Milk Bottle
 item.grcmilk.BottleFluidWhey.name=Whey Bottle
@@ -128,6 +133,7 @@ item.bucket.fluid.grcmilk.ButterMilk.name=Butter Milk Bucket
 item.bucket.fluid.grcmilk.Cream.name=Cream Bucket
 item.bucket.fluid.grcmilk.Curds.name=Milk Curds Bucket
 item.bucket.fluid.grcmilk.Milk.name=Milk Bucket
+item.bucket.fluid.grcmilk.PasteurizedMilk.name=Pasteurized Milk Bucket
 item.bucket.fluid.grcmilk.Rennet.name=Rennet Bucket
 item.bucket.fluid.grcmilk.SkimMilk.name=Skim Milk Bucket
 item.bucket.fluid.grcmilk.Whey.name=Whey Bucket
@@ -159,7 +165,6 @@ item.bucket.fluid.grcmilk.Kumis5.name=Vile Milk Bucket
 
 # Effects
 grc.effect.booze_milk=Removes all effects (Except Tipsy)
-
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s
