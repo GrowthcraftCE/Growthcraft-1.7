@@ -144,7 +144,10 @@ public class DeviceFluidSlot
 	 */
 	public boolean hasMatchingWithCapacity(FluidStack stack)
 	{
-		if (!hasMatching(stack)) return false;
+		if (!isEmpty())
+		{
+			if (!hasMatching(stack)) return false;
+		}
 		return getAvailableCapacity() >= stack.amount;
 	}
 

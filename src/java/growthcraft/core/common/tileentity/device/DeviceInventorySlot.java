@@ -110,8 +110,11 @@ public class DeviceInventorySlot
 	 */
 	public boolean hasMatchingWithCapacity(ItemStack stack)
 	{
-		if (!hasMatching(stack)) return false;
 		if (stack == null) return true;
+		if (!isEmpty())
+		{
+			if (!hasMatching(stack)) return false;
+		}
 		return getAvailableCapacity() >= stack.stackSize;
 	}
 
