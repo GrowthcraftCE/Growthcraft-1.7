@@ -25,6 +25,8 @@ package growthcraft.core.logic;
 
 import java.util.Random;
 
+import growthcraft.api.core.util.BlockFlags;
+
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
@@ -32,6 +34,19 @@ public class FlowerSpread
 {
 	public boolean run(Block block, World world, int x, int y, int z, Random random)
 	{
+		if (random.nextInt(20) == 0)
+		{
+			final int fx = random.nextInt(4) - 2;
+			final int fz = random.nextInt(4) - 2;
+			for (int i = -1; i < 2; ++i)
+			{
+				if (block.canPlaceBlockAt(world, x + fx, y + i, z + fz))
+				{
+					world.setBlock(x + fx, y + i, z + fz, block, 0, BlockFlags.UPDATE_AND_SYNC);
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 }
