@@ -50,7 +50,7 @@ import net.minecraft.world.World;
 public class GrcMilkDataProvider implements IWailaDataProvider
 {
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		final TileEntity te = accessor.getTileEntity();
@@ -66,14 +66,14 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public List<String> getWailaHead(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		return tooltip;
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		final TileEntity te = accessor.getTileEntity();
@@ -123,7 +123,7 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public List<String> getWailaTail(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		return tooltip;
@@ -141,7 +141,7 @@ public class GrcMilkDataProvider implements IWailaDataProvider
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
 	{
 		if (te instanceof TileEntityButterChurn) getButterChurnData((TileEntityButterChurn)te, tag);

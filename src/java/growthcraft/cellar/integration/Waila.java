@@ -41,7 +41,7 @@ public class Waila extends WailaIntegrationBase
 		super(GrowthCraftCellar.MOD_ID);
 	}
 
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public static void register(IWailaRegistrar reg)
 	{
 		final IWailaDataProvider provider = new CellarDataProvider();

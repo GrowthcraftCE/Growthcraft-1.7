@@ -37,7 +37,7 @@ public class MFRModule extends MFRModuleBase
 	}
 
 	@Override
-	@Optional.Method(modid = MFRModuleBase.MOD_ID)
+	@Optional.Method(modid=MFRModuleBase.MOD_ID)
 	protected void integrate()
 	{
 		registerHarvestable(new GrapeFactoryHarvester());

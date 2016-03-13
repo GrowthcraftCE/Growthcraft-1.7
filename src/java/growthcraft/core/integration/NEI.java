@@ -21,7 +21,7 @@ public class NEI
 		return Loader.isModLoaded(MOD_ID);
 	}
 
-	@Optional.Method(modid = MOD_ID)
+	@Optional.Method(modid=MOD_ID)
 	private static void hideItem_API(ItemStack itemStack)
 	{
 		API.hideItem(itemStack);

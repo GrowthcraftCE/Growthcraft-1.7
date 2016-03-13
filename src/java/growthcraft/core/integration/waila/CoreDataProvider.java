@@ -50,21 +50,21 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class CoreDataProvider implements IWailaDataProvider
 {
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		return accessor.getStack();
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public List<String> getWailaHead(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		return tooltip;
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		final Block block = accessor.getBlock();
@@ -108,14 +108,14 @@ public class CoreDataProvider implements IWailaDataProvider
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public List<String> getWailaTail(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		return tooltip;
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
 	{
 		if (te instanceof IFluidHandler) NBTHelper.writeIFluidHandlerToNBT((IFluidHandler)te, tag);

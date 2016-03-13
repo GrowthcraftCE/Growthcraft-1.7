@@ -28,7 +28,7 @@ public class AppleCore extends ModIntegrationBase
 	}
 
 	// abstract the AppleCoreAPI reference into an Optional.Method so that AppleCore is not a hard dependency
-	@Optional.Method(modid = MOD_ID)
+	@Optional.Method(modid=MOD_ID)
 	private static Event.Result validateGrowthTick_AC(Block block, World world, int x, int y, int z, Random random)
 	{
 		return AppleCoreAPI.dispatcher.validatePlantGrowth(block, world, x, y, z, random);
@@ -43,7 +43,7 @@ public class AppleCore extends ModIntegrationBase
 	}
 
 	// abstract the AppleCoreAPI reference into an Optional.Method so that AppleCore is not a hard dependency
-	@Optional.Method(modid = MOD_ID)
+	@Optional.Method(modid=MOD_ID)
 	private static void announceGrowthTick_AC(Block block, World world, int x, int y, int z, int previousMetadata)
 	{
 		AppleCoreAPI.dispatcher.announcePlantGrowth(block, world, x, y, z, previousMetadata);
