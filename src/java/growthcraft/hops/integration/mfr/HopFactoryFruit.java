@@ -23,6 +23,11 @@
  */
 package growthcraft.hops.integration.mfr;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.mfr.AbstractFactoryFruit;
 import growthcraft.hops.common.block.BlockHops;
 import growthcraft.hops.GrowthCraftHops;
@@ -30,6 +35,7 @@ import growthcraft.hops.GrowthCraftHops;
 import powercrystals.minefactoryreloaded.api.ReplacementBlock;
 
 import net.minecraft.world.World;
+import net.minecraft.item.ItemStack;
 
 public class HopFactoryFruit extends AbstractFactoryFruit<BlockHops>
 {
@@ -60,5 +66,18 @@ public class HopFactoryFruit extends AbstractFactoryFruit<BlockHops>
 	public ReplacementBlock getReplacementBlock(World world, int x, int y, int z)
 	{
 		return replacementBlock;
+	}
+
+	@Override
+	public List<ItemStack> getDrops(World world, Random rand, int x, int y, int z)
+	{
+		final List<ItemStack> drops = super.getDrops(world, rand, x, y, z);
+		final List<ItemStack> result = new ArrayList<ItemStack>();
+		for (ItemStack drop : drops)
+		{
+			if (GrowthCraftCore.items.rope.equals(drop.getItem())) continue;
+			result.add(drop);
+		}
+		return result;
 	}
 }
