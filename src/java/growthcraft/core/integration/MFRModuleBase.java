@@ -23,6 +23,11 @@
  */
 package growthcraft.core.integration;
 
+import powercrystals.minefactoryreloaded.api.FactoryRegistry;
+import powercrystals.minefactoryreloaded.api.IFactoryHarvestable;
+
+import cpw.mods.fml.common.Optional;
+
 public class MFRModuleBase extends ModIntegrationBase
 {
 	public static final String MOD_ID = "MineFactoryReloaded";
@@ -30,5 +35,11 @@ public class MFRModuleBase extends ModIntegrationBase
 	public MFRModuleBase(String modid)
 	{
 		super(modid, MOD_ID);
+	}
+
+	@Optional.Method(modid = MOD_ID)
+	protected void registerHarvestable(IFactoryHarvestable harvester)
+	{
+		FactoryRegistry.sendMessage("registerHarvestable", harvester);
 	}
 }

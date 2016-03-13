@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.apples.integration;
+package growthcraft.grapes.integration;
 
-import growthcraft.apples.GrowthCraftApples;
-import growthcraft.apples.integration.mfr.AppleFactoryHarvester;
 import growthcraft.core.integration.MFRModuleBase;
+import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.grapes.integration.mfr.GrapeFactoryHarvester;
 
 import cpw.mods.fml.common.Optional;
 
@@ -33,13 +33,13 @@ public class MFRModule extends MFRModuleBase
 {
 	public MFRModule()
 	{
-		super(GrowthCraftApples.MOD_ID);
+		super(GrowthCraftGrapes.MOD_ID);
 	}
 
 	@Override
 	@Optional.Method(modid = MFRModuleBase.MOD_ID)
 	protected void integrate()
 	{
-		registerHarvestable(new AppleFactoryHarvester());
+		registerHarvestable(new GrapeFactoryHarvester());
 	}
 }

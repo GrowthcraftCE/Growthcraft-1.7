@@ -14,6 +14,7 @@ import growthcraft.apples.handler.AppleFuelHandler;
 import growthcraft.apples.init.GrcApplesFluids;
 import growthcraft.apples.init.GrcApplesRecipes;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.GrowthCraftCore;
@@ -56,7 +57,7 @@ public class GrowthCraftApples
 
 	public static BlockDefinition appleSapling;
 	public static BlockDefinition appleLeaves;
-	public static BlockDefinition appleBlock;
+	public static BlockTypeDefinition<BlockApple> appleBlock;
 	public static ItemDefinition appleSeeds;
 	public static final GrcApplesFluids fluids = new GrcApplesFluids();
 
@@ -73,20 +74,20 @@ public class GrowthCraftApples
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
+		creativeTab = GrowthCraftCore.creativeTab;
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/apples.conf");
 
-		creativeTab = GrowthCraftCore.creativeTab;
-		if (config.enableForestryIntegration) modules.add(new growthcraft.apples.integration.ForestryModule());
-		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.apples.integration.ThaumcraftModule());
-
 		modules.add(fluids);
 		modules.add(recipes);
+		if (config.enableForestryIntegration) modules.add(new growthcraft.apples.integration.ForestryModule());
+		if (config.enableMFRIntegration) modules.add(new growthcraft.apples.integration.MFRModule());
+		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.apples.integration.ThaumcraftModule());
 		if (config.debugEnabled) modules.setLogger(logger);
 
 		appleSapling = new BlockDefinition(new BlockAppleSapling());
 		appleLeaves = new BlockDefinition(new BlockAppleLeaves());
-		appleBlock = new BlockDefinition(new BlockApple());
+		appleBlock = new BlockTypeDefinition<BlockApple>(new BlockApple());
 
 		appleSeeds = new ItemDefinition(new ItemAppleSeeds());
 

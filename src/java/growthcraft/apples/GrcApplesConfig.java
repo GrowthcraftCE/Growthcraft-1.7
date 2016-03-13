@@ -35,6 +35,9 @@ public class GrcApplesConfig extends ConfigBase
 	@ConfigOption(catergory="Integration", name="Enable Forestry Integration", desc="Should we integrate with Forestry (if available)?")
 	public boolean enableForestryIntegration = true;
 
+	@ConfigOption(catergory="Integration", name="Enable MFR Integration", desc="Should we integrate with Mine Factory Reloaded (if available)?")
+	public boolean enableMFRIntegration = true;
+
 	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
 	public boolean enableThaumcraftIntegration = true;
 }

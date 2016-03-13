@@ -63,6 +63,9 @@ archivesBaseName = "growthcraft"
 ext.growthcraftApi = "src/java/growthcraft/api"
 
 // 3rd party APIs
+ext.mfrApi = "api/powercrystals/minefactoryreloaded/api"
+ext.mfrApiExclusionPattern = "**/powercrystals/minefactoryreloaded/api/**"
+
 ext.thaumcraftApi = "api/thaumcraft/api"
 ext.thaumcraftApiExclusionPattern = "**/thaumcraft/api/**"
 
@@ -94,6 +97,7 @@ sourceSets {
             srcDir project.growthcraftApi
             srcDir project.forestryApi
             srcDir project.thaumcraftApi
+            srcDir project.mfrApi
         }
     }
 }
@@ -148,6 +152,7 @@ task sourceJar(type: Jar) {
     from(sourceSets.api.allSource) {
         exclude project.forestryApiExclusionPattern
         exclude project.thaumcraftApiExclusionPattern
+        exclude project.mfrApiExclusionPattern
     }
     classifier = "sources"
 }
@@ -158,6 +163,7 @@ javadoc {
     // exclude 3rd party apis from the javadoc
     exclude project.forestryApiExclusionPattern
     exclude project.thaumcraftApiExclusionPattern
+    exclude project.mfrApiExclusionPattern
 
     failOnError = false
 }
@@ -174,6 +180,7 @@ task deobfJar(type: Jar) {
     from(sourceSets.api.output) {
         exclude project.forestryApiExclusionPattern
         exclude project.thaumcraftApiExclusionPattern
+        exclude project.mfrApiExclusionPattern
     }
     classifier = "dev"
 }
@@ -182,6 +189,7 @@ task apiJar(type: Jar) {
     from(sourceSets.api.output) {
         exclude project.forestryApiExclusionPattern
         exclude project.thaumcraftApiExclusionPattern
+        exclude project.mfrApiExclusionPattern
     }
     classifier = "api"
 }
@@ -193,6 +201,7 @@ jar {
     from(sourceSets.api.output) {
         exclude project.forestryApiExclusionPattern
         exclude project.thaumcraftApiExclusionPattern
+        exclude project.mfrApiExclusionPattern
     }
 
     // Only include the thaumcraft LICENSE

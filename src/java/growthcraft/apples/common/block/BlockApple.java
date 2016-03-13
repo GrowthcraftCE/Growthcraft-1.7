@@ -54,6 +54,12 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 		this.setCreativeTab(null);
 	}
 
+	public boolean isMature(IBlockAccess world, int x, int y, int z)
+	{
+		final int meta = world.getBlockMetadata(x, y, z);
+		return meta >= AppleStage.MATURE;
+	}
+
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
 	{
 		return (float)meta / (float)AppleStage.MATURE;

@@ -46,7 +46,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
-		FMLInterModComms.sendMessage("Thaumcraft", "harvestStandardCrop", GrowthCraftGrapes.grapeBlock.asStack());
+		FMLInterModComms.sendMessage(modID, "harvestStandardCrop", GrowthCraftGrapes.grapeBlock.asStack());
 
 		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapeSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapes.asStack(), new AspectList().add(Aspect.CROP, 1).add(Aspect.HUNGER, 1));

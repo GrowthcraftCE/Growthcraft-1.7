@@ -21,25 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.apples.integration;
+package growthcraft.grapes.integration.mfr;
 
-import growthcraft.apples.GrowthCraftApples;
-import growthcraft.apples.integration.mfr.AppleFactoryHarvester;
-import growthcraft.core.integration.MFRModuleBase;
+import growthcraft.core.integration.mfr.AbstractFactoryHarvestable;
+import growthcraft.grapes.GrowthCraftGrapes;
 
-import cpw.mods.fml.common.Optional;
+import net.minecraft.block.Block;
 
-public class MFRModule extends MFRModuleBase
+public class GrapeFactoryHarvester extends AbstractFactoryHarvestable<Block>
 {
-	public MFRModule()
+	public GrapeFactoryHarvester()
 	{
-		super(GrowthCraftApples.MOD_ID);
-	}
-
-	@Override
-	@Optional.Method(modid = MFRModuleBase.MOD_ID)
-	protected void integrate()
-	{
-		registerHarvestable(new AppleFactoryHarvester());
+		super();
+		setPlant(GrowthCraftGrapes.grapeBlock.getBlock());
 	}
 }

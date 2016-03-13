@@ -21,25 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.apples.integration;
+package growthcraft.hops.integration.mfr;
 
-import growthcraft.apples.GrowthCraftApples;
-import growthcraft.apples.integration.mfr.AppleFactoryHarvester;
-import growthcraft.core.integration.MFRModuleBase;
+import java.util.Map;
 
-import cpw.mods.fml.common.Optional;
+import growthcraft.core.integration.mfr.AbstractFactoryHarvestable;
+import growthcraft.hops.common.block.BlockHops;
+import growthcraft.hops.GrowthCraftHops;
 
-public class MFRModule extends MFRModuleBase
+import powercrystals.minefactoryreloaded.api.HarvestType;
+
+import net.minecraft.world.World;
+
+public class HopFactoryHarvester extends AbstractFactoryHarvestable<BlockHops>
 {
-	public MFRModule()
+	public HopFactoryHarvester()
 	{
-		super(GrowthCraftApples.MOD_ID);
+		super();
+		setPlant(GrowthCraftHops.hopVine.getBlock());
+		setHarvestType(HarvestType.TreeLeaf);
 	}
 
 	@Override
-	@Optional.Method(modid = MFRModuleBase.MOD_ID)
-	protected void integrate()
+	public boolean breakBlock()
 	{
-		registerHarvestable(new AppleFactoryHarvester());
+		return false;
+	}
+
+	@Override
+	public boolean canBeHarvested(World world, Map<String, Boolean> harvesterSettings, int x, int y, int z)
+	{
+		return plantBlock.isMature(world, x, y, z);
+	}
+
+	@Override
+	public void postHarvest(World world, int x, int y, int z)
+	{
+		if (plantBlock != null)
+			plantBlock.removeFruit(world, x, y, z);
 	}
 }

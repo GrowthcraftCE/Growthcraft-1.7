@@ -81,8 +81,8 @@ public class GrowthCraftGrapes
 
 		modules.add(fluids);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.grapes.integration.ForestryModule());
+		if (config.enableMFRIntegration) modules.add(new growthcraft.grapes.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.grapes.integration.ThaumcraftModule());
-
 		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================

@@ -23,8 +23,9 @@
  */
 package growthcraft.core.integration.mfr;
 
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import growthcraft.core.integration.MFRModuleBase;
@@ -32,24 +33,41 @@ import growthcraft.core.integration.MFRModuleBase;
 import powercrystals.minefactoryreloaded.api.HarvestType;
 import powercrystals.minefactoryreloaded.api.IFactoryHarvestable;
 
+import cpw.mods.fml.common.Optional;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 @Optional.Interface(iface="powercrystals.minefactoryreloaded.api.IFactoryHarvestable", modid=MFRModuleBase.MOD_ID)
-public abstract class AbstractFactoryHarvestable implements IFactoryHarvestable
+public abstract class AbstractFactoryHarvestable<TBlock extends Block> implements IFactoryHarvestable
 {
+	protected TBlock plantBlock;
+	protected HarvestType type = HarvestType.Normal;
+
+	public AbstractFactoryHarvestable setPlant(TBlock pBlock)
+	{
+		this.plantBlock = pBlock;
+		return this;
+	}
+
+	@Optional.Method(modid=MFRModuleBase.MOD_ID)
+	public AbstractFactoryHarvestable setHarvestType(HarvestType pType)
+	{
+		this.type = pType;
+		return this;
+	}
+
 	@Override
 	public Block getPlant()
 	{
-		return null;
+		return plantBlock;
 	}
 
 	@Override
 	@Optional.Method(modid=MFRModuleBase.MOD_ID)
 	public HarvestType getHarvestType()
 	{
-		return HarvestType.Normal;
+		return type;
 	}
 
 	@Override
@@ -61,13 +79,15 @@ public abstract class AbstractFactoryHarvestable implements IFactoryHarvestable
 	@Override
 	public boolean canBeHarvested(World world, Map<String, Boolean> harvesterSettings, int x, int y, int z)
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	public List<ItemStack> getDrops(World world, Random rand, Map<String, Boolean> harvesterSettings, int x, int y, int z)
 	{
-		return null;
+		if (plantBlock != null)
+			return plantBlock.getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		return new ArrayList<ItemStack>();
 	}
 
 	@Override
@@ -78,5 +98,6 @@ public abstract class AbstractFactoryHarvestable implements IFactoryHarvestable
 	@Override
 	public void postHarvest(World world, int x, int y, int z)
 	{
+		if (plantBlock != null) world.notifyBlocksOfNeighborChange(x, y, z, plantBlock);
 	}
 }

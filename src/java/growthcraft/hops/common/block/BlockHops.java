@@ -64,6 +64,12 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 		this.setCreativeTab(null);
 	}
 
+	public boolean isMature(IBlockAccess world, int x, int y, int z)
+	{
+		final int meta = world.getBlockMetadata(x, y, z);
+		return meta >= HopsStage.FRUIT;
+	}
+
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
 	{
 		return (float)meta / (float)HopsStage.FRUIT;
@@ -238,6 +244,11 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 		return f;
 	}
 
+	public void removeFruit(World world, int x, int y, int z)
+	{
+		world.setBlockMetadataWithNotify(x, y, z, HopsStage.BIG, BlockFlags.UPDATE_AND_SYNC);
+	}
+
 	/************
 	 * TRIGGERS
 	 ************/
@@ -248,8 +259,8 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 		{
 			if (!world.isRemote)
 			{
-				world.setBlockMetadataWithNotify(x, y, z, HopsStage.BIG, BlockFlags.UPDATE_AND_SYNC);
-				this.dropBlockAsItem(world, x, y, z, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
+				removeFruit(world, x, y, z);
+				dropBlockAsItem(world, x, y, z, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
 			}
 			return true;
 		}

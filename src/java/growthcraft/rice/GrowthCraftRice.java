@@ -5,6 +5,7 @@ import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.eventhandler.PlayerInteractEventPaddy;
 import growthcraft.core.GrowthCraftCore;
@@ -52,7 +53,7 @@ public class GrowthCraftRice
 	@Instance(MOD_ID)
 	public static GrowthCraftRice instance;
 
-	public static BlockDefinition riceBlock;
+	public static BlockTypeDefinition<BlockRice> riceBlock;
 	public static BlockDefinition paddyField;
 	public static ItemDefinition rice;
 	public static ItemDefinition riceBall;
@@ -76,6 +77,7 @@ public class GrowthCraftRice
 
 		modules.add(fluids);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.rice.integration.ForestryModule());
+		if (config.enableMFRIntegration) modules.add(new growthcraft.rice.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
 
 		if (config.debugEnabled) modules.setLogger(logger);
@@ -83,7 +85,7 @@ public class GrowthCraftRice
 		//====================
 		// INIT
 		//====================
-		riceBlock = new BlockDefinition(new BlockRice());
+		riceBlock = new BlockTypeDefinition<BlockRice>(new BlockRice());
 		paddyField = new BlockDefinition(new BlockPaddy());
 
 		rice     = new ItemDefinition(new ItemRice());
