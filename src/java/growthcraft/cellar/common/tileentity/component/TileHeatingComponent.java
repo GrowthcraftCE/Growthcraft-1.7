@@ -62,7 +62,8 @@ public class TileHeatingComponent implements INBTSerializableContext, IStreamabl
 		}
 		else
 		{
-			this.heat -= heatLoss;
+			if (heat > 0)
+				this.heat -= heatLoss;
 		}
 	}
 
