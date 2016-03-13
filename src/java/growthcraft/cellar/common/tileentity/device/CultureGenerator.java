@@ -58,6 +58,12 @@ public class CultureGenerator extends DeviceProgressive
 		return heatComponent.getHeatMultiplier();
 	}
 
+	@Override
+	public void increaseTime()
+	{
+		this.time += 1;
+	}
+
 	public boolean isHeated()
 	{
 		return heatComponent.isHeated();
@@ -69,10 +75,7 @@ public class CultureGenerator extends DeviceProgressive
 		{
 			if (fluidSlot.hasEnough(recipe.getInputFluidStack()))
 			{
-				if (invSlot.hasMatchingWithCapacity(recipe.getOutputItemStack()))
-				{
-					return true;
-				}
+				return invSlot.isEmpty() || invSlot.hasMatchingWithCapacity(recipe.getOutputItemStack());
 			}
 		}
 		return false;
