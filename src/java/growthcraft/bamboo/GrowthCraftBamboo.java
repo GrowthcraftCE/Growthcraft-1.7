@@ -80,10 +80,9 @@ public class GrowthCraftBamboo
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
 
 		modules.add(blocks);
-
 		if (config.enableForestryIntegration) modules.add(new growthcraft.bamboo.integration.ForestryModule());
+		if (config.enableMFRIntegration) modules.add(new growthcraft.bamboo.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bamboo.integration.ThaumcraftModule());
-
 		if (config.debugEnabled) modules.setLogger(logger);
 
 		modules.preInit();

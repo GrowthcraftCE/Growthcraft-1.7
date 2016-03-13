@@ -23,41 +23,42 @@
  */
 package growthcraft.hops.integration.mfr;
 
-import java.util.Map;
-
-import growthcraft.core.integration.mfr.AbstractFactoryHarvestable;
+import growthcraft.core.integration.mfr.AbstractFactoryFruit;
 import growthcraft.hops.common.block.BlockHops;
 import growthcraft.hops.GrowthCraftHops;
 
-import powercrystals.minefactoryreloaded.api.HarvestType;
+import powercrystals.minefactoryreloaded.api.ReplacementBlock;
 
 import net.minecraft.world.World;
 
-public class HopFactoryHarvester extends AbstractFactoryHarvestable<BlockHops>
+public class HopFactoryFruit extends AbstractFactoryFruit<BlockHops>
 {
-	public HopFactoryHarvester()
+	private ReplacementBlock replacementBlock;
+
+	public HopFactoryFruit()
 	{
 		super();
 		setPlant(GrowthCraftHops.hopVine.getBlock());
-		setHarvestType(HarvestType.TreeLeaf);
+		this.replacementBlock = new ReplacementBlock(plantBlock);
+		replacementBlock.setMeta(BlockHops.HopsStage.BIG);
 	}
 
 	@Override
+	@Deprecated
 	public boolean breakBlock()
 	{
 		return false;
 	}
 
 	@Override
-	public boolean canBeHarvested(World world, Map<String, Boolean> harvesterSettings, int x, int y, int z)
+	public boolean canBePicked(World world, int x, int y, int z)
 	{
 		return plantBlock.isMature(world, x, y, z);
 	}
 
 	@Override
-	public void postHarvest(World world, int x, int y, int z)
+	public ReplacementBlock getReplacementBlock(World world, int x, int y, int z)
 	{
-		if (plantBlock != null)
-			plantBlock.removeFruit(world, x, y, z);
+		return replacementBlock;
 	}
 }

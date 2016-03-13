@@ -23,6 +23,7 @@
  */
 package growthcraft.milk.common.block;
 
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.milk.client.render.RenderCheesePress;
 import growthcraft.milk.common.tileentity.TileEntityCheesePress;
@@ -30,10 +31,15 @@ import growthcraft.milk.GrowthCraftMilk;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockCheesePress extends GrcBlockContainer
 {
@@ -44,6 +50,78 @@ public class BlockCheesePress extends GrcBlockContainer
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityCheesePress.class);
 		setBlockTextureName("grcmilk:cheese_press");
+	}
+
+	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+	{
+		return true;
+	}
+
+	public void doRotateBlock(World world, int x, int y, int z, ForgeDirection side)
+	{
+		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) ^ 1, BlockFlags.SYNC);
+	}
+
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z)
+	{
+		super.onBlockAdded(world, x, y, z);
+		this.setDefaultDirection(world, x, y, z);
+	}
+
+	private void setDefaultDirection(World world, int x, int y, int z)
+	{
+		if (!world.isRemote)
+		{
+			final Block block = world.getBlock(x, y, z - 1);
+			final Block block1 = world.getBlock(x, y, z + 1);
+			final Block block2 = world.getBlock(x - 1, y, z);
+			final Block block3 = world.getBlock(x + 1, y, z);
+			byte meta = 3;
+
+			if (block.func_149730_j() && !block1.func_149730_j())
+			{
+				meta = 3;
+			}
+
+			if (block1.func_149730_j() && !block.func_149730_j())
+			{
+				meta = 2;
+			}
+
+			if (block2.func_149730_j() && !block3.func_149730_j())
+			{
+				meta = 5;
+			}
+
+			if (block3.func_149730_j() && !block2.func_149730_j())
+			{
+				meta = 4;
+			}
+
+			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_AND_SYNC);
+		}
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
+	{
+		final int a = MathHelper.floor_double((entity.rotationYaw * 4.0D / 360.0D) + 0.5D) & 3;
+
+		if (a == 0 || a == 2)
+		{
+			world.setBlockMetadataWithNotify(x, y, z, 0, BlockFlags.SYNC);
+		}
+		else if (a == 1 || a == 3)
+		{
+			world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SYNC);
+		}
+
+		if (stack.hasDisplayName())
+		{
+			final TileEntityCheesePress te = getTileEntity(world, x, y, z);
+			te.setGuiDisplayName(stack.getDisplayName());
+		}
 	}
 
 	@Override

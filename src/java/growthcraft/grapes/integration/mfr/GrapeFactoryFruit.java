@@ -21,30 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.apples.integration.mfr;
+package growthcraft.grapes.integration.mfr;
 
-import java.util.Map;
+import growthcraft.core.integration.mfr.AbstractFactoryFruit;
+import growthcraft.grapes.GrowthCraftGrapes;
 
-import growthcraft.apples.GrowthCraftApples;
-import growthcraft.apples.common.block.BlockApple;
-import growthcraft.core.integration.mfr.AbstractFactoryHarvestable;
+import net.minecraft.block.Block;
 
-import powercrystals.minefactoryreloaded.api.HarvestType;
-
-import net.minecraft.world.World;
-
-public class AppleFactoryHarvester extends AbstractFactoryHarvestable<BlockApple>
+public class GrapeFactoryFruit extends AbstractFactoryFruit<Block>
 {
-	public AppleFactoryHarvester()
+	public GrapeFactoryFruit()
 	{
 		super();
-		setPlant(GrowthCraftApples.appleBlock.getBlock());
-		setHarvestType(HarvestType.TreeFruit);
-	}
-
-	@Override
-	public boolean canBeHarvested(World world, Map<String, Boolean> harvesterSettings, int x, int y, int z)
-	{
-		return plantBlock.isMature(world, x, y, z);
+		setPlant(GrowthCraftGrapes.grapeBlock.getBlock());
 	}
 }

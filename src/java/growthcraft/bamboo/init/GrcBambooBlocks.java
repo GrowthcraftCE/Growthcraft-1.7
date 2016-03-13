@@ -47,7 +47,7 @@ import net.minecraft.init.Blocks;
 
 public class GrcBambooBlocks extends GrcModuleBase
 {
-	public BlockDefinition bambooBlock;
+	public BlockTypeDefinition<BlockBamboo> bambooBlock;
 	public BlockTypeDefinition<BlockBambooShoot> bambooShoot;
 	public BlockTypeDefinition<BlockBambooStalk> bambooStalk;
 	public BlockDefinition bambooLeaves;
@@ -64,7 +64,7 @@ public class GrcBambooBlocks extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		bambooBlock      = new BlockDefinition(new BlockBamboo());
+		bambooBlock      = new BlockTypeDefinition<BlockBamboo>(new BlockBamboo());
 		bambooShoot      = new BlockTypeDefinition<BlockBambooShoot>(new BlockBambooShoot());
 		bambooStalk      = new BlockTypeDefinition<BlockBambooStalk>(new BlockBambooStalk());
 		bambooLeaves     = new BlockDefinition(new BlockBambooLeaves());

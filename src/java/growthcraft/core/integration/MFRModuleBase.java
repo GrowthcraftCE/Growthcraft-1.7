@@ -24,9 +24,15 @@
 package growthcraft.core.integration;
 
 import powercrystals.minefactoryreloaded.api.FactoryRegistry;
+import powercrystals.minefactoryreloaded.api.IFactoryFruit;
 import powercrystals.minefactoryreloaded.api.IFactoryHarvestable;
 
 import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class MFRModuleBase extends ModIntegrationBase
 {
@@ -37,9 +43,62 @@ public class MFRModuleBase extends ModIntegrationBase
 		super(modid, MOD_ID);
 	}
 
-	@Optional.Method(modid = MOD_ID)
+	@Optional.Method(modid=MOD_ID)
+	protected void sendMessage(String target, Object value)
+	{
+		logger.info("Sending Message to '%s': '%s' %s", modID, target, value);
+		FactoryRegistry.sendMessage(target, value);
+	}
+
+	@Optional.Method(modid=MOD_ID)
+	protected void registerPlantableSapling(Item seed, Block sapling)
+	{
+		final UniqueIdentifier itemUUID = GameRegistry.findUniqueIdentifierFor(seed);
+		final UniqueIdentifier blockUUID = GameRegistry.findUniqueIdentifierFor(sapling);
+		if (blockUUID != null && itemUUID != null)
+		{
+			final NBTTagCompound tag = new NBTTagCompound();
+			tag.setString("sapling", blockUUID.toString());
+			tag.setString("seed", itemUUID.toString());
+			sendMessage("registerPlantable_Sapling", tag);
+		}
+	}
+
+	@Optional.Method(modid=MOD_ID)
+	protected void registerPlantableSapling(Block sapling)
+	{
+		final UniqueIdentifier uuid = GameRegistry.findUniqueIdentifierFor(sapling);
+		if (uuid != null)
+		{
+			final NBTTagCompound tag = new NBTTagCompound();
+			tag.setString("sapling", uuid.toString());
+			sendMessage("registerPlantable_Sapling", tag);
+		}
+	}
+
+	@Optional.Method(modid=MOD_ID)
+	protected void registerPickableFruit(IFactoryFruit fruit)
+	{
+		sendMessage("registerPickableFruit", fruit);
+	}
+
+	@Optional.Method(modid=MOD_ID)
 	protected void registerHarvestable(IFactoryHarvestable harvester)
 	{
-		FactoryRegistry.sendMessage("registerHarvestable", harvester);
+		sendMessage("registerHarvestable", harvester);
+	}
+
+	@Optional.Method(modid=MOD_ID)
+	protected void registerHarvestableSimple(String type, String str)
+	{
+		sendMessage("registerHarvestable_" + type, str);
+	}
+
+	@Optional.Method(modid=MOD_ID)
+	protected void registerHarvestableLeaves(Block block)
+	{
+		final UniqueIdentifier uuid = GameRegistry.findUniqueIdentifierFor(block);
+		if (uuid != null)
+			registerHarvestableSimple("Leaves", uuid.toString());
 	}
 }

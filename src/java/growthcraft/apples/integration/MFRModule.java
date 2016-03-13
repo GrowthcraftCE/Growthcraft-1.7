@@ -24,7 +24,7 @@
 package growthcraft.apples.integration;
 
 import growthcraft.apples.GrowthCraftApples;
-import growthcraft.apples.integration.mfr.AppleFactoryHarvester;
+import growthcraft.apples.integration.mfr.AppleBlockFactoryFruit;
 import growthcraft.core.integration.MFRModuleBase;
 
 import cpw.mods.fml.common.Optional;
@@ -40,6 +40,8 @@ public class MFRModule extends MFRModuleBase
 	@Optional.Method(modid=MFRModuleBase.MOD_ID)
 	protected void integrate()
 	{
-		registerHarvestable(new AppleFactoryHarvester());
+		registerPickableFruit(new AppleBlockFactoryFruit());
+		registerHarvestableLeaves(GrowthCraftApples.appleLeaves.getBlock());
+		registerPlantableSapling(GrowthCraftApples.appleSapling.getBlock());
 	}
 }

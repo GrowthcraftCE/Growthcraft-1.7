@@ -21,25 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.integration;
+package growthcraft.bamboo.integration.mfr;
 
-import growthcraft.core.integration.MFRModuleBase;
-import growthcraft.grapes.GrowthCraftGrapes;
-import growthcraft.grapes.integration.mfr.GrapeFactoryFruit;
+import growthcraft.core.integration.mfr.AbstractFactoryHarvestable;
+import growthcraft.bamboo.common.block.BlockBambooStalk;
+import growthcraft.bamboo.GrowthCraftBamboo;
 
-import cpw.mods.fml.common.Optional;
+import powercrystals.minefactoryreloaded.api.HarvestType;
 
-public class MFRModule extends MFRModuleBase
+public class BambooFactoryHarvester extends AbstractFactoryHarvestable<BlockBambooStalk>
 {
-	public MFRModule()
+	public BambooFactoryHarvester()
 	{
-		super(GrowthCraftGrapes.MOD_ID);
-	}
-
-	@Override
-	@Optional.Method(modid=MFRModuleBase.MOD_ID)
-	protected void integrate()
-	{
-		registerPickableFruit(new GrapeFactoryFruit());
+		super();
+		setPlant(GrowthCraftBamboo.blocks.bambooStalk.getBlock());
+		setHarvestType(HarvestType.Tree);
 	}
 }

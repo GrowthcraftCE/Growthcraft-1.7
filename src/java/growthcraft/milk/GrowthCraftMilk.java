@@ -102,6 +102,7 @@ public class GrowthCraftMilk
 		modules.add(items);
 		modules.add(fluids);
 		modules.add(recipes);
+		if (config.enableMFRIntegration) modules.add(new growthcraft.milk.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.milk.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.milk.integration.Waila());
 		modules.add(userApis);

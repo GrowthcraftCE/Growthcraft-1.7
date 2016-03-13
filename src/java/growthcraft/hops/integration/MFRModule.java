@@ -25,7 +25,7 @@ package growthcraft.hops.integration;
 
 import growthcraft.core.integration.MFRModuleBase;
 import growthcraft.hops.GrowthCraftHops;
-import growthcraft.hops.integration.mfr.HopFactoryHarvester;
+import growthcraft.hops.integration.mfr.HopFactoryFruit;
 
 import cpw.mods.fml.common.Optional;
 
@@ -40,6 +40,6 @@ public class MFRModule extends MFRModuleBase
 	@Optional.Method(modid=MFRModuleBase.MOD_ID)
 	protected void integrate()
 	{
-		registerHarvestable(new HopFactoryHarvester());
+		registerPickableFruit(new HopFactoryFruit());
 	}
 }

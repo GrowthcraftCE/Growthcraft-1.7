@@ -92,6 +92,9 @@ public class GrcMilkConfig extends ConfigBase
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
 	public boolean enableWailaIntegration = true;
 
+	@ConfigOption(catergory="Integration", name="Enable MFR Integration", desc="Should we integrate with Mine Factory Reloaded (if available)?")
+	public boolean enableMFRIntegration = true;
+
 	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
 	public boolean enableThaumcraftIntegration = true;
 }

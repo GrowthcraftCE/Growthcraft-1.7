@@ -21,25 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.integration;
+package growthcraft.apples.integration.mfr;
 
-import growthcraft.core.integration.MFRModuleBase;
-import growthcraft.grapes.GrowthCraftGrapes;
-import growthcraft.grapes.integration.mfr.GrapeFactoryFruit;
+import growthcraft.apples.GrowthCraftApples;
+import growthcraft.apples.common.block.BlockApple;
+import growthcraft.core.integration.mfr.AbstractFactoryFruit;
 
-import cpw.mods.fml.common.Optional;
+import net.minecraft.world.World;
 
-public class MFRModule extends MFRModuleBase
+public class AppleBlockFactoryFruit extends AbstractFactoryFruit<BlockApple>
 {
-	public MFRModule()
+	public AppleBlockFactoryFruit()
 	{
-		super(GrowthCraftGrapes.MOD_ID);
+		super();
+		setPlant(GrowthCraftApples.appleBlock.getBlock());
 	}
 
 	@Override
-	@Optional.Method(modid=MFRModuleBase.MOD_ID)
-	protected void integrate()
+	public boolean canBePicked(World world, int x, int y, int z)
 	{
-		registerPickableFruit(new GrapeFactoryFruit());
+		return plantBlock.isMature(world, x, y, z);
 	}
 }

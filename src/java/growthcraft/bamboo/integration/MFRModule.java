@@ -21,18 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.integration.mfr;
+package growthcraft.bamboo.integration;
 
-import growthcraft.core.integration.mfr.AbstractFactoryHarvestable;
-import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.core.integration.MFRModuleBase;
+import growthcraft.bamboo.integration.mfr.BambooFactoryHarvester;
 
-import net.minecraft.block.Block;
+import cpw.mods.fml.common.Optional;
 
-public class GrapeFactoryHarvester extends AbstractFactoryHarvestable<Block>
+public class MFRModule extends MFRModuleBase
 {
-	public GrapeFactoryHarvester()
+	public MFRModule()
 	{
-		super();
-		setPlant(GrowthCraftGrapes.grapeBlock.getBlock());
+		super(GrowthCraftBamboo.MOD_ID);
+	}
+
+	@Override
+	@Optional.Method(modid=MFRModuleBase.MOD_ID)
+	protected void integrate()
+	{
+		registerHarvestable(new BambooFactoryHarvester());
+		registerHarvestableLeaves(GrowthCraftBamboo.blocks.bambooLeaves.getBlock());
+		registerPlantableSapling(GrowthCraftBamboo.bambooShootFood.getItem(), GrowthCraftBamboo.blocks.bambooShoot.getBlock());
 	}
 }
