@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.tabGrowthCraftBees=Abelhas do Growthcraft
+itemGroup.tabGrowthCraftBees=Growthcraft Abelhas
 
 # Blocks
 ## Vanilla Bee Boxes
@@ -29,8 +29,8 @@ item.grc.honeyComb.full.name=Favo de Mel
 item.grc.honeyJar.name=Mel
 item.grc.bee.name=Abelha
 item.grcbees.BeesWax.normal.name=Cera de Abelhas
-item.grcbees.BeesWax.red.name=Cera de Abelhas Vermelha
-item.grcbees.BeesWax.black.name=Cera de Abelhas Preta
+item.grcbees.BeesWax.red.name=Cera Vermelha de Abelhas
+item.grcbees.BeesWax.black.name=Cera Preta de Abelhas
 
 # Tooltips
 grc.bees.item.honeyComb.deprecated=Este item tornou-se obsoleto, fabrica-o para conseguires uma versão melhorada.
