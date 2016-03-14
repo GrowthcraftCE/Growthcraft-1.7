@@ -1,5 +1,5 @@
 # Blocks
-tile.grc.hopVine.name=Vinha de Lúpulo
+tile.grc.hopVine.name=Liana de Lúpulo
 
 # Items
 item.grc.hops.name=Lúpulos
@@ -69,4 +69,4 @@ tile.fluid.grc.lager5.name=Lager
 tile.fluid.grc.lager6.name=Lager
 
 # Fluid Tooltips
-fluid.grc.hopAle4.modifier=Sem Lúpulo, Novo(a)
+fluid.grc.hopAle4.modifier=Sem Lúpulo, Novo
