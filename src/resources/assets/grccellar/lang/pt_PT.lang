@@ -9,10 +9,6 @@ tile.grc.fermentBarrel.name=Barril de Fermentação
 tile.grc.fermentJar.name=Jarro de Cultivo
 
 # Items
-# Please remove this field once all other module translations have been updated,
-# this is no longer used
-item.grc.boozeBucket.name=Balde
-
 item.grc.yeast0.name=Levedura de Cervejaria
 item.grc.yeast1.name=Levedura de Lager
 item.grc.yeast2.name=Levedura de Bayanus
@@ -46,7 +42,7 @@ container.grc.fermentJar=Jarro de Cultivo
 
 # Other
 grc.potion.tipsy=Bebedeira
-grc.booze=Booze
+grc.booze=Bebida Alcoólica
 
 # Modifiers
 grc.fluids.tag.chilled=Refrigerado(a)
@@ -76,7 +72,7 @@ achievement.craftBarrel.desc=Constrói um barril de fermentação com três táb
 achievement.fermentBooze=Fermentação É Comigo...
 achievement.fermentBooze.desc=Fermenta uma bebida alcoólica.
 achievement.getDrunk=É Problema de Preparação?
-achievement.getDrunk.desc=Adquir bebedeira V.
+achievement.getDrunk.desc=Adquire bebedeira V.
 achievement.onTheGo=Está no ir
 achievement.onTheGo.desc=Constrói um Cantil
 
@@ -84,7 +80,7 @@ achievement.onTheGo.desc=Constrói um Cantil
 # number is a percentage
 grc.cellar.format.waterBag.name=%s (%s)
 grc.cellar.format.waterBag.contents=Contém: %2$dmB/%3$dmB de %1$s
-grc.cellar.format.tipsy_chance=%d%% de Chance de Ficar Bebado
+grc.cellar.format.tipsy_chance=%d%% de Chance de Ficar Bêbado
 grc.cellar.item.booze_bucket.deprecated=Obsoleto, constrói para conseguires um balde melhorado.
 grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETO)
 
