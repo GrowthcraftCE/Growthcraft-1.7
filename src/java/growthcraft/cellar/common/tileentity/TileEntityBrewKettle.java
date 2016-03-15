@@ -34,7 +34,8 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		TANK1_FLUID_ID,
 		TANK1_FLUID_AMOUNT,
 		TANK2_FLUID_ID,
-		TANK2_FLUID_AMOUNT;
+		TANK2_FLUID_AMOUNT,
+		HEAT_AMOUNT;
 
 		public static final List<BrewKettleDataID> VALUES = Arrays.asList(values());
 	}
@@ -202,6 +203,9 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 			case TANK2_FLUID_AMOUNT:
 				getFluidTank(1).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(1), v));
 				break;
+			case HEAT_AMOUNT:
+				brewKettle.setHeatMultiplier((float)v / (float)0x7FFF);
+				break;
 			default:
 				break;
 		}
@@ -218,6 +222,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		fluid = getFluidStack(1);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK2_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK2_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
+		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.HEAT_AMOUNT.ordinal(), (int)(brewKettle.getHeatMultiplier() * 0x7FFF));
 	}
 
 	@Override

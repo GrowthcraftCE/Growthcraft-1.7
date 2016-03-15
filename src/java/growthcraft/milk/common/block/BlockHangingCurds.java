@@ -145,6 +145,10 @@ public class BlockHangingCurds extends GrcBlockContainer
 		{
 			teHangingCurds.populateDrops(ret);
 		}
+		else
+		{
+			ret.add(new ItemStack(this, 1, metadata));
+		}
 		return ret;
 	}
 

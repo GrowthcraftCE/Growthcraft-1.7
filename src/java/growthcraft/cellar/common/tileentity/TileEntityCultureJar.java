@@ -57,6 +57,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		CULTURE_GEN_TIME_MAX,
 		TANK_FLUID_ID,
 		TANK_FLUID_AMOUNT,
+		HEAT_AMOUNT,
 		UNKNOWN;
 
 		public static final CultureJarDataId[] VALID = new CultureJarDataId[]
@@ -66,7 +67,8 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 			CULTURE_GEN_TIME,
 			CULTURE_GEN_TIME_MAX,
 			TANK_FLUID_ID,
-			TANK_FLUID_AMOUNT
+			TANK_FLUID_AMOUNT,
+			HEAT_AMOUNT
 		};
 
 		public static CultureJarDataId fromInt(int i)
@@ -210,6 +212,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		getActiveDevice().update();
 		if (jarDeviceState != lastState)
 		{
+			GrowthCraftCellar.getLogger().info("Jar changed device state %d, {%s}", jarDeviceState, getActiveDevice());
 			markForBlockUpdate();
 		}
 	}
@@ -238,6 +241,9 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 			case TANK_FLUID_AMOUNT:
 				getFluidTank(0).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(0), v));
 				break;
+			case HEAT_AMOUNT:
+				heatComponent.setHeatMultiplier((float)v / (float)0x7FFF);
+				break;
 			default:
 				// should warn about invalid Data ID
 				break;
@@ -254,6 +260,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		final FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
+		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.HEAT_AMOUNT.ordinal(), (int)(heatComponent.getHeatMultiplier() * 0x7FFF));
 	}
 
 	@Override

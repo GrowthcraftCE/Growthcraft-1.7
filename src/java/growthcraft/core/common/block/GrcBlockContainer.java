@@ -146,6 +146,7 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 		}
 	}
 
+	@Override
 	public boolean rotateBlock(World world, int x, int y, int z, ForgeDirection side)
 	{
 		if (isRotatable(world, x, y, z, side))

@@ -67,6 +67,12 @@ public class TileHeatingComponent implements INBTSerializableContext, IStreamabl
 		}
 	}
 
+	public TileHeatingComponent setHeatMultiplier(float h)
+	{
+		this.heat = h;
+		return this;
+	}
+
 	public float getHeatMultiplier()
 	{
 		return heat;

@@ -44,6 +44,7 @@ public class GrcGuiContainer extends GuiContainer
 	protected List<TooltipIndex> tooltipIndices = new ArrayList<TooltipIndex>();
 	protected List<String> tooltip = new ArrayList<String>();
 	protected TileEntity tileEntity;
+	protected ResourceLocation bindedResource;
 
 	public GrcGuiContainer(Container container, TileEntity te)
 	{
@@ -123,6 +124,7 @@ public class GrcGuiContainer extends GuiContainer
 	protected void bindTexture(ResourceLocation res)
 	{
 		this.mc.getTextureManager().bindTexture(res);
+		this.bindedResource = res;
 	}
 
 	protected void drawFluidStack(int x, int y, int wp, int hp, int width, int height, int amount, FluidStack fluidstack)

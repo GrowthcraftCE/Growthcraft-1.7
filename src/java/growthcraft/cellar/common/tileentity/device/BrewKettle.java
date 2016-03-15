@@ -100,6 +100,12 @@ public class BrewKettle extends DeviceBase
 		return (float)(time / timeMax);
 	}
 
+	public BrewKettle setHeatMultiplier(float h)
+	{
+		heatComponent.setHeatMultiplier(h);
+		return this;
+	}
+
 	public float getHeatMultiplier()
 	{
 		return heatComponent.getHeatMultiplier();
