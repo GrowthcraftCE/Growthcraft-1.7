@@ -10,13 +10,13 @@ item.grcmilk.Cheese.appenzeller.name=Queijo Appenzeller
 item.grcmilk.Cheese.asiago.name=Queijo Asiago
 item.grcmilk.Cheese.parmesan.name=Queijo Parmesão
 item.grcmilk.Cheese.monterey.name=Queijo Monterey
-item.grcmilk.Cheese.ricotta.name=Queijo Ricotta
+item.grcmilk.Cheese.ricotta.name=Queijo Ricota
 item.grcmilk.CheeseCloth.name=Pano de Queijo
 ## Butter
 item.grcmilk.Butter.salted.name=Manteiga (Salgada)
 item.grcmilk.Butter.unsalted.name=Manteiga (Sem Sal)
 ## Ice Cream
-item.grcmilk.IceCream.apple.name=Gelado (Maça)
+item.grcmilk.IceCream.apple.name=Gelado (Maçã)
 item.grcmilk.IceCream.chocolate.name=Gelado (Chocolate)
 item.grcmilk.IceCream.grape.name=Gelado (Uva)
 item.grcmilk.IceCream.honey.name=Gelado (Mel)
@@ -42,8 +42,8 @@ tile.grcmilk.CheeseBlock.appenzeller.unaged.name=Queijo Appenzeller (Não Curado
 tile.grcmilk.CheeseBlock.appenzeller.aged.name=Queijo Appenzeller (Curado)
 tile.grcmilk.CheeseBlock.appenzeller.cut.name=Queijo Appenzeller
 tile.grcmilk.CheeseBlock.asiago.unaged.name=Queijo Asiago (Não Curado)
-tile.grcmilk.CheeseBlock.asiago.aged.name=Asiago Cheese (Curado)
-tile.grcmilk.CheeseBlock.asiago.cut.name=Asiago Cheese
+tile.grcmilk.CheeseBlock.asiago.aged.name=Queijo Asiago (Curado)
+tile.grcmilk.CheeseBlock.asiago.cut.name=Queijo Asiago
 tile.grcmilk.CheeseBlock.parmesan.unaged.name=Queijo Parmesão (Não Curado)
 tile.grcmilk.CheeseBlock.parmesan.aged.name=Queijo Parmesão (Curado)
 tile.grcmilk.CheeseBlock.parmesan.cut.name=Queijo Parmesão
@@ -51,8 +51,8 @@ tile.grcmilk.CheeseBlock.monterey.unwaxed.name=Queijo Monterey (Não Encerado)
 tile.grcmilk.CheeseBlock.monterey.unaged.name=Queijo Monterey (Não Curado)
 tile.grcmilk.CheeseBlock.monterey.aged.name=Queijo Monterey (Curado)
 tile.grcmilk.CheeseBlock.monterey.cut.name=Queijo Monterey
-tile.grcmilk.CheeseBlock.ricotta.unaged.name=Queijo Ricotta (Não Curado)
-tile.grcmilk.CheeseBlock.ricotta.aged.name=Queijo Ricotta (Curado)
+tile.grcmilk.CheeseBlock.ricotta.unaged.name=Queijo Ricota (Não Curado)
+tile.grcmilk.CheeseBlock.ricotta.aged.name=Queijo Ricota (Curado)
 ## Other
 tile.grcmilk.ButterChurn.name=Batedor de Manteiga
 tile.grcmilk.CheeseBlock.name=Bloco de Queijo
@@ -66,7 +66,7 @@ tile.grcmilk.HangingCurds.appenzeller.name=Coalhada de Queijo Appenzeller
 tile.grcmilk.HangingCurds.asiago.name=Coalhada de Queijo Asiago
 tile.grcmilk.HangingCurds.parmesan.name=Coalhada de Queijo Parmesão
 tile.grcmilk.HangingCurds.monterey.name=Coalhada de Queijo Monterey
-tile.grcmilk.HangingCurds.ricotta.name=Coalhada de Queijo Ricotta
+tile.grcmilk.HangingCurds.ricotta.name=Coalhada de Queijo Ricota
 tile.grcmilk.HangingCurds.cheddar.dried.name=Coalhada de Queijo Cheddar Seca
 tile.grcmilk.HangingCurds.gorgonzola.dried.name=Coalhada de Queijo Gorgonzola Seca
 tile.grcmilk.HangingCurds.emmentaler.dried.name=Coalhada de Queijo Suíço Seca
@@ -74,31 +74,27 @@ tile.grcmilk.HangingCurds.appenzeller.dried.name=Coalhada de Queijo Appenzeller 
 tile.grcmilk.HangingCurds.asiago.dried.name=Coalhada de Queijo Asiago Seca
 tile.grcmilk.HangingCurds.parmesan.dried.name=Coalhada de Queijo Parmesão Seca
 tile.grcmilk.HangingCurds.monterey.dried.name=Coalhada de Queijo Monterey Seca
-tile.grcmilk.HangingCurds.ricotta.dried.name=Coalhada de Queijo Ricotta Seca
+tile.grcmilk.HangingCurds.ricotta.dried.name=Coalhada de Queijo Ricota Seca
 tile.grcmilk.Pancheon.name=Francela
 tile.grcmilk.Thistle.name=Flor de Cardo
 
 ### Cheese Vat Fluid Tanks
 grcmilk.cheese_vat.fluid_tank.primary=Primário
 grcmilk.cheese_vat.fluid_tank.rennet=Coalho
-grcmilk.cheese_vat.fluid_tank.waste=Waste**
+grcmilk.cheese_vat.fluid_tank.waste=Resíduo
 grcmilk.cheese_vat.fluid_tank.recipe=Secondário
 
 # Fluids
 ## Tags
+grc.fluids.tag.cheese=Queijo
+grc.fluids.tag.cream=Nata
 grc.fluids.tag.milk=Leite
 grc.fluids.tag.milk_curds=Coalhada de Leite
 grc.fluids.tag.rennet=Coalho
-grc.fluids.tag.cream=Nata
+grc.fluids.tag.whey=Soro
 ## Standard
 ### Fluids
 fluid.grcmilk.ButterMilk=Leitelho
-fluid.grcmilk.Cream=Nata
-fluid.grcmilk.Curds=Coalhada de Leite
-fluid.grcmilk.Milk=Leite
-fluid.grcmilk.Rennet=Coalho
-fluid.grcmilk.SkimMilk=Leite Desnatado
-fluid.grcmilk.Whey=Soro
 fluid.grcmilk.CheeseCheddar=Queijo Cheddar
 fluid.grcmilk.CheeseGorgonzola=Queijo Gorgonzola
 fluid.grcmilk.CheeseEmmentaler=Queijo Suíço
@@ -106,12 +102,20 @@ fluid.grcmilk.CheeseAppenzeller=Queijo Appenzeller
 fluid.grcmilk.CheeseAsiago=Queijo Asiago
 fluid.grcmilk.CheeseParmesan=Queijo Parmesão
 fluid.grcmilk.CheeseMonterey=Queijo Monterey
-fluid.grcmilk.CheeseRicotta=Queijo Ricotta
+fluid.grcmilk.CheeseRicotta=Queijo Ricota
+fluid.grcmilk.Cream=Nata
+fluid.grcmilk.Curds=Coalhada de Leite
+fluid.grcmilk.Milk=Leite
+fluid.grcmilk.PasteurizedMilk=Leite Pastorizado
+fluid.grcmilk.Rennet=Coalho
+fluid.grcmilk.SkimMilk=Leite Desnatado
+fluid.grcmilk.Whey=Soro
 ### Blocks
 tile.grcmilk.BlockFluidButterMilk.name=Leitelho
 tile.grcmilk.BlockFluidCream.name=Nata
 tile.grcmilk.BlockFluidCurds.name=Coalhada de Leite
 tile.grcmilk.BlockFluidMilk.name=Leite
+tile.grcmilk.BlockFluidPasteurizedMilk.name=Leite Pastorizado
 tile.grcmilk.BlockFluidRennet.name=Coalho
 tile.grcmilk.BlockFluidSkimMilk.name=Leite Desnatado
 tile.grcmilk.BlockFluidWhey.name=Soro
@@ -120,6 +124,7 @@ item.grcmilk.BottleFluidButterMilk.name=Frasco de Leitelho
 item.grcmilk.BottleFluidCream.name=Frasco de Nata
 item.grcmilk.BottleFluidCurds.name=Frasco de Coalhada de Leite
 item.grcmilk.BottleFluidMilk.name=Frasco de Leite
+item.grcmilk.BottleFluidPasteurizedMilk.name=Frasco de Leite Pastorizado
 item.grcmilk.BottleFluidRennet.name=Frasco de Coalho
 item.grcmilk.BottleFluidSkimMilk.name=Frasco de Leite Desnatado
 item.grcmilk.BottleFluidWhey.name=Frasco de Soro
@@ -128,6 +133,7 @@ item.bucket.fluid.grcmilk.ButterMilk.name=Balde de Leitelho
 item.bucket.fluid.grcmilk.Cream.name=Balde de Nata
 item.bucket.fluid.grcmilk.Curds.name=Balde de Coalhada de Leite
 item.bucket.fluid.grcmilk.Milk.name=Balde de Leite
+item.bucket.fluid.grcmilk.PasteurizedMilk.name=Balde de Leite Pastorizado
 item.bucket.fluid.grcmilk.Rennet.name=Balde de Coalho
 item.bucket.fluid.grcmilk.SkimMilk.name=Balde de Leite Desnatado
 item.bucket.fluid.grcmilk.Whey.name=Balde de Soro
@@ -159,7 +165,6 @@ item.bucket.fluid.grcmilk.Kumis5.name=Balde de Leite Vil
 
 # Effects
 grc.effect.booze_milk=Remove todos os efeitos (Exceto bebedeira)
-
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s
