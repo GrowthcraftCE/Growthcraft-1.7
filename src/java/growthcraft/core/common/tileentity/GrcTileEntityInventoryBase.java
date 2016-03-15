@@ -41,7 +41,7 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase implements ISidedInventory, ICustomDisplayName, IInventoryWatcher, IInventoryFlagging
 {
-	protected String name;
+	protected String inventoryName;
 	protected GrcInternalInventory inventory;
 	protected boolean needInventoryUpdate;
 	protected Random random = new Random();
@@ -98,19 +98,19 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase imple
 	@Override
 	public String getInventoryName()
 	{
-		return this.hasCustomInventoryName() ? this.name : getDefaultInventoryName();
+		return this.hasCustomInventoryName() ? inventoryName : getDefaultInventoryName();
 	}
 
 	@Override
 	public boolean hasCustomInventoryName()
 	{
-		return this.name != null && this.name.length() > 0;
+		return inventoryName != null && inventoryName.length() > 0;
 	}
 
-
+	@Override
 	public void setGuiDisplayName(String string)
 	{
-		this.name = string;
+		this.inventoryName = string;
 	}
 
 	@Override
@@ -176,10 +176,10 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase imple
 	}
 
 	@Override
-	public void openInventory(){}
+	public void openInventory() {}
 
 	@Override
-	public void closeInventory(){}
+	public void closeInventory() {}
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack itemstack)
@@ -202,31 +202,53 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase imple
 		return true;
 	}
 
+	private void readInventoryFromNBT(NBTTagCompound nbt)
+	{
+		if (nbt.hasKey("items"))
+		{
+			inventory.readFromNBT(nbt, "items");
+		}
+		else if (nbt.hasKey("inventory"))
+		{
+			inventory.readFromNBT(nbt, "inventory");
+		}
+	}
+
+	private void readInventoryNameFromNBT(NBTTagCompound nbt)
+	{
+		if (nbt.hasKey("name"))
+		{
+			this.inventoryName = nbt.getString("name");
+		}
+		else if (nbt.hasKey("inventory_name"))
+		{
+			this.inventoryName = nbt.getString("inventory_name");
+		}
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
+		readInventoryFromNBT(nbt);
+		readInventoryNameFromNBT(nbt);
+	}
 
-		inventory.readFromNBT(nbt, "items");
-
-		if (nbt.hasKey("name"))
-		{
-			this.name = nbt.getString("name");
-		}
+	private void writeInventoryToNBT(NBTTagCompound nbt)
+	{
+		inventory.writeToNBT(nbt, "inventory");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-
-		inventory.writeToNBT(nbt, "items");
-
+		writeInventoryToNBT(nbt);
 		// NAME
 		if (this.hasCustomInventoryName())
 		{
-			nbt.setString("name", this.name);
+			nbt.setString("inventory_name", inventoryName);
 		}
-		nbt.setInteger("BaseInventoryTile.version", 2);
+		nbt.setInteger("inventory_tile_version", 3);
 	}
 }

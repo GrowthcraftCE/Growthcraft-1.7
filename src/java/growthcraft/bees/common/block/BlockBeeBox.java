@@ -138,21 +138,6 @@ public class BlockBeeBox extends GrcBlockContainer
 	}
 
 	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float fx, float fy, float fz, int meta)
-	{
-		return super.onBlockPlaced(world, x, y, z, side, fx, fy, fz, meta);
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
-	{
-		if (stack.hasDisplayName())
-		{
-			((TileEntityBeeBox)world.getTileEntity(x, y, z)).setGuiDisplayName(stack.getDisplayName());
-		}
-	}
-
-	@Override
 	public void breakBlock(World world, int x, int y, int z, Block par5, int par6)
 	{
 		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
