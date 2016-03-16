@@ -100,6 +100,13 @@ public class BBox
 	public float h() { return y1() - y0(); }
 	public float l() { return z1() - z0(); }
 
+	public boolean contains(float px, float py, float pz)
+	{
+		return x0() >= px && x1() <= px &&
+			y0() >= py && y1() <= py &&
+			z0() >= pz && z1() <= pz;
+	}
+
 	public static BBox newCube(float x, float y, float z, float w, float h, float l)
 	{
 		return new BBox(x, y, z, x + w, y + h, z + l);
