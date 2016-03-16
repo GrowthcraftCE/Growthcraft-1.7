@@ -56,7 +56,7 @@ public class BrewKettle extends DeviceBase
 		this.residueSlot = new DeviceInventorySlot(te, residueSlotId);
 		this.inputFluidSlot = new DeviceFluidSlot(te, inputFluidSlotId);
 		this.outputFluidSlot = new DeviceFluidSlot(te, outputFluidSlotId);
-		this.heatComponent = new TileHeatingComponent(te);
+		this.heatComponent = new TileHeatingComponent(te, 0.5f);
 	}
 
 	public void setGrain(float g)

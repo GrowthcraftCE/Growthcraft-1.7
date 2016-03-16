@@ -25,6 +25,7 @@ package growthcraft.cellar.common.tileentity.component;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.heatsource.IHeatSourceBlock;
+import growthcraft.core.util.BlockCheck;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
@@ -38,10 +39,18 @@ public class HeatBlockComponent
 {
 	private TileEntity tileEntity;
 	private ForgeDirection sourceDir = ForgeDirection.DOWN;
+	// Adjacent heating allows the block to accept heat from blocks on the same y axis and directly
+	// adjacent to it
+	private float adjacentHeating;
 
-	public HeatBlockComponent(TileEntity te)
+	/**
+	 * @param te - parent tile entity
+	 * @param adh - adjacent heating rate, set to 0 to disable
+	 */
+	public HeatBlockComponent(TileEntity te, float adh)
 	{
 		this.tileEntity = te;
+		this.adjacentHeating = adh;
 	}
 
 	private World getWorld()
@@ -49,11 +58,11 @@ public class HeatBlockComponent
 		return tileEntity.getWorldObj();
 	}
 
-	public float getHeatMultiplier()
+	public float getHeatMultiplierFromDir(ForgeDirection dir)
 	{
-		final int x = tileEntity.xCoord + sourceDir.offsetX;
-		final int y = tileEntity.yCoord + sourceDir.offsetY;
-		final int z = tileEntity.zCoord + sourceDir.offsetZ;
+		final int x = tileEntity.xCoord + dir.offsetX;
+		final int y = tileEntity.yCoord + dir.offsetY;
+		final int z = tileEntity.zCoord + dir.offsetZ;
 
 		final Block block = getWorld().getBlock(x, y, z);
 		final int meta = getWorld().getBlockMetadata(x, y, z);
@@ -62,5 +71,24 @@ public class HeatBlockComponent
 
 		if (heatSource != null) return heatSource.getHeat(getWorld(), x, y, z);
 		return 0.0f;
+	}
+
+	public float getHeatMultiplierForAdjacent()
+	{
+		if (adjacentHeating > 0)
+		{
+			float heat = 0.0f;
+			for (ForgeDirection dir : BlockCheck.DIR4)
+			{
+				heat += getHeatMultiplierFromDir(dir);
+			}
+			return heat * adjacentHeating;
+		}
+		return 0.0f;
+	}
+
+	public float getHeatMultiplier()
+	{
+		return getHeatMultiplierFromDir(sourceDir) + getHeatMultiplierForAdjacent();
 	}
 }

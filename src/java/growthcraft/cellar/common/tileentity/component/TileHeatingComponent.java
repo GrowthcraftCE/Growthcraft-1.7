@@ -40,10 +40,10 @@ public class TileHeatingComponent implements INBTSerializableContext, IStreamabl
 	private float heatLoss = 0.01f;
 	private float heatGain = 0.01f;
 
-	public TileHeatingComponent(@Nonnull TileEntity te)
+	public TileHeatingComponent(@Nonnull TileEntity te, float adjacentHeating)
 	{
 		this.tileEntity = te;
-		this.heatBlockComponent = new HeatBlockComponent(tileEntity);
+		this.heatBlockComponent = new HeatBlockComponent(tileEntity, adjacentHeating);
 	}
 
 	public void update()

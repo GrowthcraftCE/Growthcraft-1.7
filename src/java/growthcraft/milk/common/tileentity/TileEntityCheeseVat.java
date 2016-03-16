@@ -106,7 +106,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	private DeviceFluidSlot rennetFluidSlot = new DeviceFluidSlot(this, FluidTankType.RENNET.id);
 	private DeviceFluidSlot wasteFluidSlot = new DeviceFluidSlot(this, FluidTankType.WASTE.id);
 	private boolean recheckRecipe;
-	private TileHeatingComponent heatComponent = new TileHeatingComponent(this);
+	private TileHeatingComponent heatComponent = new TileHeatingComponent(this, 0.5f);
 	private CheeseVatState vatState = CheeseVatState.IDLE;
 	private float progress;
 	private int progressMax;
