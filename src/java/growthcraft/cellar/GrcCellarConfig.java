@@ -59,6 +59,9 @@ public class GrcCellarConfig extends ConfigBase
 	@ConfigOption(catergory="Brew Kettle", name="Rain Fill Amount", desc="How much water is added to the brew kettle per rain tick? (in mB (milli buckets))")
 	public int brewKettleRainFillPerUnit = 10;
 
+	@ConfigOption(catergory="Brew Kettle", name="Set fire to fallen living entities", desc="Should the kettle set fire to entities that fall in it (if heated?)")
+	public boolean setFireToFallenLivingEntities;
+
 
 	@ConfigOption(catergory="Fruit Press", name="Fluid Capacity", desc="How much fluid can a Fruit Press hold? (in mB (milli buckets))")
 	public int fruitPressMaxCap = 1000;

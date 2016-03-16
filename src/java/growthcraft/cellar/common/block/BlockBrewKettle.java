@@ -3,6 +3,7 @@ package growthcraft.cellar.common.block;
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.api.core.util.BBox;
 import growthcraft.cellar.client.render.RenderBrewKettle;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -32,8 +33,10 @@ public class BlockBrewKettle extends BlockCellarContainer
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
+	private final BBox kettleContentsBB = BBox.newCube(2, 4, 2, 12, 10, 12).scale(1f / 16f);
 	private final boolean dropItemsInBrewKettle = GrowthCraftCellar.getConfig().dropItemsInBrewKettle;
 	private final boolean fillsWithRain = GrowthCraftCellar.getConfig().brewKettleFillsWithRain;
+	private final boolean setFireToFallenLivingEntities = GrowthCraftCellar.getConfig().setFireToFallenLivingEntities;
 	private final int rainFillPerUnit = GrowthCraftCellar.getConfig().brewKettleRainFillPerUnit;
 
 	public BlockBrewKettle()
@@ -65,16 +68,32 @@ public class BlockBrewKettle extends BlockCellarContainer
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
-		if (dropItemsInBrewKettle)
+		if (!world.isRemote)
 		{
-			if (!world.isRemote)
+			final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
+			if (te != null)
 			{
-				final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
-				if (te != null)
+				if (dropItemsInBrewKettle)
 				{
 					if (entity instanceof EntityItem)
 					{
 						te.tryMergeItemIntoMainSlot(((EntityItem)entity).getEntityItem());
+					}
+				}
+				if (setFireToFallenLivingEntities)
+				{
+					if (entity instanceof EntityLivingBase)
+					{
+						if (te.getHeatMultiplier() >= 0.5f)
+						{
+							final float ex = (float)entity.posX - x;
+							final float ey = (float)entity.posY - y;
+							final float ez = (float)entity.posZ - z;
+							if (kettleContentsBB.contains(ex, ey, ez))
+							{
+								entity.setFire(1);
+							}
+						}
 					}
 				}
 			}
