@@ -42,7 +42,7 @@ container.grc.fermentJar=Jarro de Cultivo
 
 # Other
 grc.potion.tipsy=Bebedeira
-grc.booze=Bebida Alcoólica
+grc.booze=Álcool
 
 # Modifiers
 grc.fluids.tag.chilled=Refrigerado(a)
