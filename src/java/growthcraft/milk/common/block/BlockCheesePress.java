@@ -107,7 +107,6 @@ public class BlockCheesePress extends GrcBlockContainer
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
 		final int a = MathHelper.floor_double((entity.rotationYaw * 4.0D / 360.0D) + 0.5D) & 3;
-
 		if (a == 0 || a == 2)
 		{
 			world.setBlockMetadataWithNotify(x, y, z, 0, BlockFlags.SYNC);
@@ -116,12 +115,7 @@ public class BlockCheesePress extends GrcBlockContainer
 		{
 			world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SYNC);
 		}
-
-		if (stack.hasDisplayName())
-		{
-			final TileEntityCheesePress te = getTileEntity(world, x, y, z);
-			te.setGuiDisplayName(stack.getDisplayName());
-		}
+		setupCustomDisplayName(world, x, y, z, stack);
 	}
 
 	@Override
