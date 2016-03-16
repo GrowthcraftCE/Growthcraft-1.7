@@ -52,17 +52,15 @@ public class BlockBrewKettle extends BlockCellarContainer
 	@Override
 	public void fillWithRain(World world, int x, int y, int z)
 	{
-		if (!world.isRemote)
+		if (fillsWithRain)
 		{
-			if (fillsWithRain)
+			final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
+			if (te != null)
 			{
-				final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
-				if (te != null)
-				{
-					te.fill(ForgeDirection.UP, new FluidStack(FluidRegistry.WATER, rainFillPerUnit), true);
-				}
+				te.fill(ForgeDirection.UP, new FluidStack(FluidRegistry.WATER, rainFillPerUnit), true);
 			}
 		}
+		super.fillWithRain(world, x, y, z);
 	}
 
 	@Override
@@ -77,7 +75,11 @@ public class BlockBrewKettle extends BlockCellarContainer
 				{
 					if (entity instanceof EntityItem)
 					{
-						te.tryMergeItemIntoMainSlot(((EntityItem)entity).getEntityItem());
+						final EntityItem item = (EntityItem)entity;
+						if (te.tryMergeItemIntoMainSlot(item.getEntityItem()) != null)
+						{
+
+						}
 					}
 				}
 				if (setFireToFallenLivingEntities)
