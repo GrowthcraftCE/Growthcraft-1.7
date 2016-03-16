@@ -40,6 +40,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -182,8 +183,23 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 		return wrenchBlock(world, x, y, z, player, is);
 	}
 
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
+	protected void placeBlockByEntityDirection(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
+	{
+		if (isRotatable(world, x, y, z, ForgeDirection.UNKNOWN))
+		{
+			final int l = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+			int meta = 2;
+
+			if (l == 0) meta = 1;
+			else if (l == 1) meta = 2;
+			else if (l == 2) meta = 0;
+			else if (l == 3) meta = 3;
+			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.SYNC);
+		}
+	}
+
+	protected void setupCustomDisplayName(World world, int x, int y, int z, ItemStack stack)
 	{
 		if (stack.hasDisplayName())
 		{
@@ -193,6 +209,13 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 				((ICustomDisplayName)te).setGuiDisplayName(stack.getDisplayName());
 			}
 		}
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
+	{
+		super.onBlockPlacedBy(world, x, y, z, entity, stack);
+		setupCustomDisplayName(world, x, y, z, stack);
 	}
 
 	@Override
