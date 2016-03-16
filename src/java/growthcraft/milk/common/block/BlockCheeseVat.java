@@ -67,6 +67,7 @@ public class BlockCheeseVat extends GrcBlockContainer
 						final double py = y + (1d / 16d);
 						final double pz = z + 0.5d + (random.nextFloat() - 0.5d);
 						world.spawnParticle("smoke", px, py, pz, 0.0D, 1d / 32d, 0.0D);
+						world.playSoundEffect((double)x, (double)y, (double)z, "liquid.lavapop", 0.3f, 0.5f);
 					}
 				}
 			}

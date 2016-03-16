@@ -128,6 +128,7 @@ public class BlockCheesePress extends GrcBlockContainer
 			if (cheesePress != null)
 			{
 				cheesePress.toggle();
+				world.playSoundEffect((double)x, (double)y, (double)z, "random.wood_click", 0.3f, 0.5f);
 				return true;
 			}
 		}

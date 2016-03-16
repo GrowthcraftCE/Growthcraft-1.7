@@ -482,6 +482,11 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		return result;
 	}
 
+	private void playSuccessfulSwordActivationFX()
+	{
+		worldObj.playSoundEffect((double)xCoord, (double)yCoord, (double)zCoord, "random.successful_hit", 0.3f, 0.5f);
+	}
+
 	private boolean doSwordActivation(EntityPlayer _player, ItemStack _stack)
 	{
 		if (!isHeated())
@@ -498,6 +503,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 			{
 				setupProgress(GrowthCraftMilk.getConfig().cheeseVatCurdTime);
 				setVatState(CheeseVatState.PREPARING_CURDS);
+				playSuccessfulSwordActivationFX();
 				return true;
 			}
 		}
@@ -508,6 +514,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 			{
 				setupProgress(GrowthCraftMilk.getConfig().cheeseVatWheyTime);
 				setVatState(CheeseVatState.PREPARING_RICOTTA);
+				playSuccessfulSwordActivationFX();
 				return true;
 			}
 		}
