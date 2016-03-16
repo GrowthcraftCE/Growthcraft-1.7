@@ -47,6 +47,7 @@ import growthcraft.milk.init.GrcMilkUserApis;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.EventBus;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -77,6 +78,9 @@ public class GrowthCraftMilk
 	public static final GrcMilkItems items = new GrcMilkItems();
 	public static final GrcMilkRecipes recipes = new GrcMilkRecipes();
 	public static final GrcMilkUserApis userApis = new GrcMilkUserApis();
+
+	// Events
+	public static final EventBus MILK_BUS = new EventBus();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcMilkConfig config = new GrcMilkConfig();

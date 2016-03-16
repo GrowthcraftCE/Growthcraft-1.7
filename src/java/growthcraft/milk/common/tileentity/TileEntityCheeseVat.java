@@ -54,6 +54,8 @@ import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.tileentity.cheesevat.CheeseVatState;
+import growthcraft.milk.event.EventCheeseVat.EventCheeseVatMadeCheeseFluid;
+import growthcraft.milk.event.EventCheeseVat.EventCheeseVatMadeCurds;
 import growthcraft.milk.GrowthCraftMilk;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -269,6 +271,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 			primaryFluidSlot.set(FluidUtils.exchangeFluid(milkStack, GrowthCraftMilk.fluids.curds.getFluid()));
 			rennetFluidSlot.clear();
 			wasteFluidSlot.fill(GrowthCraftMilk.fluids.whey.fluid.asFluidStack(GrowthCraftMilk.getConfig().cheeseVatMilkToCurdsWheyAmount), true);
+			GrowthCraftMilk.MILK_BUS.post(new EventCheeseVatMadeCurds(this));
 		}
 		return true;
 	}
@@ -283,6 +286,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 				final Fluid fluid = GrowthCraftMilk.fluids.cheeses.get(EnumCheeseType.RICOTTA).getFluid();
 				primaryFluidSlot.set(FluidUtils.exchangeFluid(primaryFluidSlot.get(), fluid));
 				wasteFluidSlot.fill(GrowthCraftMilk.fluids.whey.fluid.asFluidStack(GrowthCraftMilk.getConfig().cheeseVatWheyToRicottaWheyAmount), true);
+				GrowthCraftMilk.MILK_BUS.post(new EventCheeseVatMadeCheeseFluid(this));
 			}
 			return true;
 		}
@@ -342,11 +346,12 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 							{
 								fillFluidTank(tankIndex, stack.copy(), true);
 							}
-							// Currently the cheese vat does not support more than 1 fluid output.
 							tankIndex++;
+							// Currently the cheese vat does not support more than 1 fluid output.
 							break;
 						}
 						markForBlockUpdate();
+						GrowthCraftMilk.MILK_BUS.post(new EventCheeseVatMadeCheeseFluid(this));
 					}
 					return true;
 				}
