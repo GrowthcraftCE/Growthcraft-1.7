@@ -26,11 +26,13 @@ package growthcraft.milk.common.block;
 import java.util.Random;
 
 import growthcraft.core.logic.FlowerSpread;
-
 import growthcraft.milk.GrowthCraftMilk;
+
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
 
 public class BlockThistle extends BlockBush
 {
@@ -56,5 +58,11 @@ public class BlockThistle extends BlockBush
 				spreadLogic.run(this, world, x, y, z, random);
 			}
 		}
+	}
+
+	@Override
+	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
+	{
+		return EnumPlantType.Plains;
 	}
 }
