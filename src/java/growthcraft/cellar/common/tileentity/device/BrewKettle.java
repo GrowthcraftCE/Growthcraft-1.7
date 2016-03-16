@@ -30,6 +30,8 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
+import growthcraft.cellar.event.EventBrewed;
+import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.tileentity.device.DeviceBase;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
@@ -168,6 +170,7 @@ public class BrewKettle extends DeviceBase
 		outputFluidSlot.fill(recipe.asFluidStack(), true);
 		brewingSlot.consume(recipe.getInputItemStack());
 		markForBlockUpdate();
+		GrowthCraftCellar.CELLAR_BUS.post(new EventBrewed(parent, recipe));
 	}
 
 	public void update()

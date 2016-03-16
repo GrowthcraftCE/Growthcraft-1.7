@@ -23,30 +23,23 @@
  */
 package growthcraft.cellar.event;
 
+import growthcraft.api.cellar.brewing.BrewingRecipe;
+
 import cpw.mods.fml.common.eventhandler.Event;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraft.tileentity.TileEntity;
 
 /**
- * Event emitted when a player drains a fermenting barrel
+ * Event emitted when a BrewKettle brews something
  */
-public class EventBarrelDrained extends Event
+public class EventBrewed extends Event
 {
-	public final EntityPlayer player;
-	public final World world;
-	public final int x;
-	public final int y;
-	public final int z;
-	public FluidStack fluid;
+	public final BrewingRecipe recipe;
+	public final TileEntity tile;
 
-	public EventBarrelDrained(EntityPlayer pPlayer, World pWorld, int px, int py, int pz, FluidStack pFluid)
+	public EventBrewed(TileEntity te, BrewingRecipe re)
 	{
-		this.player = pPlayer;
-		this.world = pWorld;
-		this.x = px;
-		this.y = py;
-		this.z = pz;
-		this.fluid = pFluid;
+		super();
+		this.tile = te;
+		this.recipe = re;
 	}
 }
