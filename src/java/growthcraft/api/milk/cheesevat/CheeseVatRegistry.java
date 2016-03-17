@@ -38,6 +38,7 @@ import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.item.ItemTest;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class CheeseVatRegistry implements ICheeseVatRegistry
@@ -70,6 +71,13 @@ public class CheeseVatRegistry implements ICheeseVatRegistry
 	}
 
 	@Override
+	public boolean isFluidIngredient(@Nullable Fluid fluid)
+	{
+		if (!FluidTest.isValid(fluid)) return false;
+		return fluidIngredients.contains(new FluidKey(fluid));
+	}
+
+	@Override
 	public boolean isFluidIngredient(@Nullable FluidStack fluid)
 	{
 		if (!FluidTest.isValid(fluid)) return false;
@@ -84,6 +92,7 @@ public class CheeseVatRegistry implements ICheeseVatRegistry
 	}
 
 	@Override
+	@Nullable
 	public ICheeseVatRecipe findRecipe(@Nonnull List<FluidStack> fluids, @Nonnull List<ItemStack> stacks)
 	{
 		for (ICheeseVatRecipe recipe : recipes)
