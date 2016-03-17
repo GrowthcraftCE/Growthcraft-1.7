@@ -89,3 +89,6 @@ grc.effect.null.desc=Does Nothing
 grc.effect.random_list.head=Applies one of the following:
 grc.effect.remove_potion_effect.format=Removes %s
 grc.effect.weighted_random_list.format=%d%% Chance of
+
+# GUI
+gui.grc.progress.format=%s : %d / %d

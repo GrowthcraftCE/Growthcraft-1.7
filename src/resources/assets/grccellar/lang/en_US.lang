@@ -69,6 +69,7 @@ gui.grc.empty=Empty
 gui.grc.discard=Discard
 gui.grc.switch=Switch
 gui.grc.cantferment=Cannot Ferment.
+gui.grccellar.ferment_barrel.progress_name=Fermenting
 
 # Achievements
 achievement.craftBarrel=Cooper Extraction
