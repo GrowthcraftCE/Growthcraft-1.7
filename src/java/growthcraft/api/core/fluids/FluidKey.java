@@ -60,7 +60,7 @@ public class FluidKey extends HashKey implements IFluidStackFactory
 		this(pfluidStack.getFluid(), pfluidStack.tag);
 	}
 
-	public void generateHashCode()
+	private void generateHashCode()
 	{
 		this.hash = fluid.hashCode();
 		this.hash = 31 * hash + (compoundTag != null ? compoundTag.hashCode() : 0);

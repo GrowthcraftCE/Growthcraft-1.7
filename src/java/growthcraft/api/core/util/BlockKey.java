@@ -67,7 +67,7 @@ public class BlockKey extends HashKey
 		return pBlock == block && (meta == ItemKey.WILDCARD_VALUE || pMeta == meta);
 	}
 
-	public void generateHashCode()
+	private void generateHashCode()
 	{
 		this.hash = block.hashCode();
 		this.hash = 31 * hash + meta;

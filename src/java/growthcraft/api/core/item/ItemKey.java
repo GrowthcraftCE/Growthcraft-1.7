@@ -85,7 +85,7 @@ public class ItemKey extends HashKey implements IItemStackFactory
 		this(stack.getItem(), stack.getItemDamage(), stack.getTagCompound());
 	}
 
-	public void generateHashCode()
+	private void generateHashCode()
 	{
 		this.hash = item.hashCode();
 		this.hash = 31 * hash + meta;
