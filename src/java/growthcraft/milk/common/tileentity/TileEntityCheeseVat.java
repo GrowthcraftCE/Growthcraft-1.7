@@ -443,10 +443,10 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid)
 	{
-		return (FluidTest.hasTags(fluid, MilkFluidTags.MILK) ||
+		return FluidTest.hasTags(fluid, MilkFluidTags.MILK) ||
 			FluidTest.hasTags(fluid, MilkFluidTags.WHEY) ||
 			FluidTest.hasTags(fluid, MilkFluidTags.RENNET) ||
-			MilkRegistry.instance().cheeseVat().isFluidIngredient(fluid));
+			MilkRegistry.instance().cheeseVat().isFluidIngredient(fluid);
 	}
 
 	@Override
