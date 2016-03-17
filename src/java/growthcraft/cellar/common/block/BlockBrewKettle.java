@@ -78,7 +78,7 @@ public class BlockBrewKettle extends BlockCellarContainer
 						final EntityItem item = (EntityItem)entity;
 						if (te.tryMergeItemIntoMainSlot(item.getEntityItem()) != null)
 						{
-
+							world.playSoundEffect((double)x, (double)y, (double)z, "liquid.splash", 0.3f, 0.5f);
 						}
 					}
 				}
