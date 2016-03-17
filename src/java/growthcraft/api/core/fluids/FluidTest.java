@@ -36,6 +36,43 @@ public class FluidTest
 {
 	private FluidTest() {}
 
+	/**
+	 * Determines if a Fluid is invalid, this is a very simple null check.
+	 *
+	 * @param fluid - the fluid to check
+	 * @return true, if the fluid is valid, false otherwise
+	 */
+	public static boolean isValid(@Nullable Fluid fluid)
+	{
+		return fluid != null;
+	}
+
+	/**
+	 * Determines if a FluidStack is valid by checking:
+	 *   if the stack is null, it is invalid
+	 *   if the stack has a null fluid, it is invalid
+	 *   if the stack has an amount less than or equal to 0, it is invalid
+	 *
+	 * @param stack - the fluid stack to check
+	 * @return true, the stack is valid, false otherwise
+	 */
+	public static boolean isValid(@Nullable FluidStack stack)
+	{
+		if (stack == null) return false;
+		if (stack.getFluid() == null) return false;
+		if (stack.amount <= 0) return false;
+		return true;
+	}
+
+	public static boolean hasTags(@Nullable Fluid fluid, FluidTag... tags)
+	{
+		if (FluidTest.isValid(fluid))
+		{
+			return CoreRegistry.instance().fluidDictionary().hasFluidTags(fluid, tags);
+		}
+		return false;
+	}
+
 	public static boolean hasTags(@Nullable FluidStack stack, FluidTag... tags)
 	{
 		if (FluidTest.isValid(stack))
@@ -64,14 +101,6 @@ public class FluidTest
 		if (actual == null) return false;
 		if (!expected.isFluidEqual(actual)) return false;
 		if (actual.amount < expected.amount) return false;
-		return true;
-	}
-
-	public static boolean isValid(@Nullable FluidStack stack)
-	{
-		if (stack == null) return false;
-		if (stack.getFluid() == null) return false;
-		if (stack.amount <= 0) return false;
 		return true;
 	}
 
