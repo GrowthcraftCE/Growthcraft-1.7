@@ -52,7 +52,7 @@ public class ItemKey extends HashKey implements IItemStackFactory
 		super();
 		this.item = pitem;
 		this.meta = pmeta;
-		this.compoundTag = tag;
+		this.compoundTag = NBTHelper.compoundTagPresence(tag);;
 		generateHashCode();
 	}
 
@@ -71,7 +71,7 @@ public class ItemKey extends HashKey implements IItemStackFactory
 		}
 		this.item = pitem;
 		this.meta = pmeta;
-		this.compoundTag = tag;
+		this.compoundTag = NBTHelper.compoundTagPresence(tag);;
 		generateHashCode();
 	}
 

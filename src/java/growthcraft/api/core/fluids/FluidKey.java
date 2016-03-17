@@ -42,11 +42,16 @@ public class FluidKey extends HashKey implements IFluidStackFactory
 	public final Fluid fluid;
 	public final NBTTagCompound compoundTag;
 
+	/**
+	 * @param pFluid - the fluid to set
+	 * @param tag - a tag compound to set
+	 *   If the tag hasNoTags(), the FluidKey will set the compoundTag to null
+	 */
 	public FluidKey(@Nonnull Fluid pfluid, @Nullable NBTTagCompound tag)
 	{
 		super();
 		this.fluid = pfluid;
-		this.compoundTag = tag;
+		this.compoundTag = NBTHelper.compoundTagPresence(tag);
 		generateHashCode();
 	}
 
