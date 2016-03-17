@@ -115,13 +115,13 @@ public class NBTHelper
 	}
 
 	@SuppressWarnings({"unchecked"})
-	public static NBTTagCompound copyCompoundTag(NBTTagCompound tag)
+	public static NBTTagCompound copyCompoundTag(@Nonnull NBTTagCompound tag)
 	{
 		final NBTBase newTag = tag.copy();
 		return (NBTTagCompound)newTag;
 	}
 
-	public static NBTTagCompound openItemStackTag(ItemStack stack)
+	public static NBTTagCompound openItemStackTag(@Nonnull ItemStack stack)
 	{
 		NBTTagCompound tag = stack.getTagCompound();
 		if (tag == null)
@@ -132,7 +132,7 @@ public class NBTHelper
 		return tag;
 	}
 
-	public static NBTTagList writeInventorySlotsToNBT(ItemStack[] invSlots, NBTTagList invTags)
+	public static NBTTagList writeInventorySlotsToNBT(@Nonnull ItemStack[] invSlots, @Nonnull NBTTagList invTags)
 	{
 		for (int i = 0; i < invSlots.length; ++i)
 		{
@@ -147,12 +147,12 @@ public class NBTHelper
 		return invTags;
 	}
 
-	public static NBTTagList writeInventorySlotsToNBT(ItemStack[] invSlots)
+	public static NBTTagList writeInventorySlotsToNBT(@Nonnull ItemStack[] invSlots)
 	{
 		return writeInventorySlotsToNBT(invSlots, new NBTTagList());
 	}
 
-	public static NBTTagList readInventorySlotsFromNBT(ItemStack[] invSlots, NBTTagList tags)
+	public static NBTTagList readInventorySlotsFromNBT(@Nonnull ItemStack[] invSlots, @Nonnull NBTTagList tags)
 	{
 		for (int i = 0; i < tags.tagCount(); ++i)
 		{
@@ -166,7 +166,7 @@ public class NBTHelper
 		return tags;
 	}
 
-	public static NBTTagCompound writeIFluidHandlerToNBT(IFluidHandler fluidHandler, NBTTagCompound tag)
+	public static NBTTagCompound writeIFluidHandlerToNBT(@Nonnull IFluidHandler fluidHandler, @Nonnull NBTTagCompound tag)
 	{
 		final NBTTagList tankTagList = new NBTTagList();
 		int tankId = 0;
@@ -195,7 +195,7 @@ public class NBTHelper
 		return tag;
 	}
 
-	public static NBTTagCompound writeItemStackToNBT(ItemStack itemStack, NBTTagCompound tag)
+	public static NBTTagCompound writeItemStackToNBT(@Nullable ItemStack itemStack, @Nonnull NBTTagCompound tag)
 	{
 		if (itemStack != null)
 		{
@@ -208,12 +208,12 @@ public class NBTHelper
 		return tag;
 	}
 
-	public static NBTTagCompound writeItemStackToNBT(ItemStack itemStack)
+	public static NBTTagCompound writeItemStackToNBT(@Nullable ItemStack itemStack)
 	{
 		return writeItemStackToNBT(itemStack, new NBTTagCompound());
 	}
 
-	public static NBTTagCompound writeEffectsList(NBTTagCompound data, List<IEffect> list)
+	public static NBTTagCompound writeEffectsList(@Nonnull NBTTagCompound data, @Nonnull List<IEffect> list)
 	{
 		data.setInteger("size", list.size());
 		final NBTTagList effectsList = new NBTTagList();
@@ -227,7 +227,7 @@ public class NBTHelper
 		return data;
 	}
 
-	public static void loadEffectsList(List<IEffect> list, NBTTagCompound data)
+	public static void loadEffectsList(@Nonnull List<IEffect> list, @Nonnull NBTTagCompound data)
 	{
 		final int size = data.getInteger("size");
 		final NBTTagList effectsList = (NBTTagList)data.getTag("effects");
@@ -246,7 +246,7 @@ public class NBTHelper
 	 *   Will add `size: int` and `data: NBTTagIntArray` fields
 	 * @param coll - the collection to write
 	 */
-	public static void writeIntegerCollection(NBTTagCompound data, Collection<Integer> coll)
+	public static void writeIntegerCollection(@Nonnull NBTTagCompound data, @Nonnull Collection<Integer> coll)
 	{
 		data.setInteger("size", coll.size());
 		final int[] ary = new int[coll.size()];
@@ -266,7 +266,7 @@ public class NBTHelper
 	 * @param data - tag to read from
 	 *   Expects a `data: NBTTagIntArray` field, `size: int` will be ignored.
 	 */
-	public static void readIntegerCollection(Collection<Integer> coll, NBTTagCompound data)
+	public static void readIntegerCollection(@Nonnull Collection<Integer> coll, @Nonnull NBTTagCompound data)
 	{
 		final NBTBase base = data.getTag("data");
 		if (base instanceof NBTTagIntArray)
