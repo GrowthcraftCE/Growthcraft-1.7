@@ -39,7 +39,6 @@ import growthcraft.api.core.stream.StreamUtils;
 import growthcraft.api.milk.cheesevat.ICheeseVatRecipe;
 import growthcraft.api.milk.MilkFluidTags;
 import growthcraft.api.milk.MilkRegistry;
-import growthcraft.api.milk.util.MilkTest;
 import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.core.common.inventory.AccesibleSlots;
 import growthcraft.core.common.inventory.GrcInternalInventory;
@@ -431,6 +430,25 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		}
 	}
 
+	private boolean primaryTankHasMilk()
+	{
+		return FluidTest.hasTags(primaryFluidSlot.get(), MilkFluidTags.MILK);
+	}
+
+	private boolean primaryTankHasCurds()
+	{
+		return FluidTest.hasTags(primaryFluidSlot.get(), MilkFluidTags.MILK_CURDS);
+	}
+
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid)
+	{
+		return (FluidTest.hasTags(fluid, MilkFluidTags.MILK) ||
+			FluidTest.hasTags(fluid, MilkFluidTags.WHEY) ||
+			FluidTest.hasTags(fluid, MilkFluidTags.RENNET) ||
+			MilkRegistry.instance().cheeseVat().isFluidIngredient(fluid));
+	}
+
 	@Override
 	protected FluidStack doDrain(ForgeDirection dir, int amount, boolean doDrain)
 	{
@@ -445,23 +463,13 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		return doDrain(dir, stack.amount, doDrain);
 	}
 
-	private boolean primaryTankHasMilk()
-	{
-		return FluidTest.hasTags(primaryFluidSlot.get(), MilkFluidTags.MILK);
-	}
-
-	private boolean primaryTankHasCurds()
-	{
-		return FluidTest.hasTags(primaryFluidSlot.get(), MilkFluidTags.MILK_CURDS);
-	}
-
 	@Override
 	protected int doFill(ForgeDirection dir, FluidStack stack, boolean doFill)
 	{
 		if (!isIdle()) return 0;
 		int result = 0;
 
-		if (MilkTest.isMilk(stack) || FluidTest.hasTags(stack, MilkFluidTags.WHEY))
+		if (FluidTest.hasTags(stack, MilkFluidTags.MILK) || FluidTest.hasTags(stack, MilkFluidTags.WHEY))
 		{
 			result = primaryFluidSlot.fill(stack, doFill);
 		}

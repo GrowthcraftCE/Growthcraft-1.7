@@ -46,6 +46,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
@@ -199,6 +200,12 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	{
 		if (outputFluidSlot.hasContent()) return outputFluidSlot;
 		return inputFluidSlot;
+	}
+
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid)
+	{
+		return MilkRegistry.instance().churn().isFluidIngredient(fluid);
 	}
 
 	/**
