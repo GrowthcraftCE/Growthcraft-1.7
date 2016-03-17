@@ -55,6 +55,9 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 		final ItemKeySchema etherealYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 3);
 		etherealYeast.setComment("Ethereal Yeast");
 
+		final ItemKeySchema originYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 4);
+		etherealYeast.setComment("Origin Yeast");
+
 		final UserYeastEntry brewers = new UserYeastEntry(brewersYeast, new ArrayList<String>());
 		brewers.setComment("Brewers yeast is the default yeast, which appears in all other biomes that are filled by the Lager or Ethereal");
 
@@ -62,26 +65,33 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 		lager.setComment("Lager yeast is found in COLD biomes, think snow places!");
 
 		final UserYeastEntry ethereal = new UserYeastEntry(etherealYeast, new ArrayList<String>());
-		ethereal.setComment("Ethereal yeast is found in MAGICAL or MUSHROOM biomes, because its special");
+		ethereal.setComment("Ethereal yeast is found in MAGICAL biomes, because its special");
+
+		final UserYeastEntry origin = new UserYeastEntry(originYeast, new ArrayList<String>());
+		origin.setComment("Origin yeast is found in MUSHROOM biomes.");
 
 		for (BiomeDictionary.Type biomeType : BiomeDictionary.Type.values())
 		{
+			final String biomeTypeName = biomeType.name();
 			switch (biomeType)
 			{
 				case COLD:
-					lager.biome_types.add(biomeType.name());
+					lager.biome_types.add(biomeTypeName);
 					break;
 				case MAGICAL:
+					ethereal.biome_types.add(biomeTypeName);
+					break;
 				case MUSHROOM:
-					ethereal.biome_types.add(biomeType.name());
+					origin.biome_types.add(biomeTypeName);
 					break;
 				default:
-					brewers.biome_types.add(biomeType.name());
+					brewers.biome_types.add(biomeTypeName);
 			}
 		}
 		defaultEntries.data.add(brewers);
-		defaultEntries.data.add(lager);
 		defaultEntries.data.add(ethereal);
+		defaultEntries.data.add(lager);
+		defaultEntries.data.add(origin);
 		defaultEntries.setComment("Default Yeast Config");
 		return gson.toJson(defaultEntries);
 	}
