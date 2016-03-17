@@ -22,11 +22,12 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	public static enum FermentBarrelDataID
 	{
 		TIME,
+		TIME_MAX,
 		TANK_FLUID_ID,
 		TANK_FLUID_AMOUNT,
 		UNKNOWN;
 
-		public static final FermentBarrelDataID[] VALID = new FermentBarrelDataID[] { TIME, TANK_FLUID_ID, TANK_FLUID_AMOUNT };
+		public static final FermentBarrelDataID[] VALID = new FermentBarrelDataID[] { TIME, TIME_MAX, TANK_FLUID_ID, TANK_FLUID_AMOUNT };
 
 		public static FermentBarrelDataID fromInt(int i)
 		{
@@ -79,10 +80,15 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 
 	public int getTimeMax()
 	{
-		final IFermentationRecipe result = getWorkingRecipe();
-		if (result != null)
+		// if this is the server, just return the recipe time
+		// clients will have their timemax synced from the server in the gui
+		if (!worldObj.isRemote)
 		{
-			return result.getTime();
+			final IFermentationRecipe result = getWorkingRecipe();
+			if (result != null)
+			{
+				return result.getTime();
+			}
 		}
 		return this.timemax;
 	}
@@ -126,11 +132,11 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 
 	public int getFermentProgressScaled(int scale)
 	{
-		if (this.canFerment())
+		final int tmx = getTimeMax();
+		if (tmx > 0)
 		{
-			return this.time * scale / getTimeMax();
+			return this.time * scale / tmx;
 		}
-
 		return 0;
 	}
 
@@ -236,7 +242,10 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		switch (FermentBarrelDataID.fromInt(id))
 		{
 			case TIME:
-				time = v;
+				this.time = v;
+				break;
+			case TIME_MAX:
+				this.timemax = v;
 				break;
 			case TANK_FLUID_ID:
 				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
@@ -255,6 +264,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TIME.ordinal(), time);
+		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TIME_MAX.ordinal(), getTimeMax());
 		final FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
