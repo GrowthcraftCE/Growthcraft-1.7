@@ -27,6 +27,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.effect.IEffect;
@@ -95,6 +97,22 @@ public class NBTHelper
 	}
 
 	private NBTHelper() {}
+
+	/**
+	 * Determines if the provided compound tag is nonnull AND actually contains
+	 * tags.
+	 *
+	 * @param tag - compound tag to check
+	 * @return null if the tag was null or empty, the tag otherwise
+	 */
+	public static NBTTagCompound compoundTagPresence(@Nullable NBTTagCompound tag)
+	{
+		if (tag != null && !tag.hasNoTags())
+		{
+			return tag;
+		}
+		return null;
+	}
 
 	@SuppressWarnings({"unchecked"})
 	public static NBTTagCompound copyCompoundTag(NBTTagCompound tag)
