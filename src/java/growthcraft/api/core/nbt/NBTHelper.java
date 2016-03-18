@@ -98,6 +98,16 @@ public class NBTHelper
 
 	private NBTHelper() {}
 
+	public static int getInteger(@Nonnull NBTBase tag)
+	{
+		return tag != null && (tag instanceof NBTBase.NBTPrimitive) ? ((NBTBase.NBTPrimitive)tag).func_150287_d() : 0;
+	}
+
+	public static int getInteger(@Nonnull NBTTagCompound tag, String name)
+	{
+		return getInteger(tag.getTag(name));
+	}
+
 	/**
 	 * Determines if the provided compound tag is nonnull AND actually contains
 	 * tags.
