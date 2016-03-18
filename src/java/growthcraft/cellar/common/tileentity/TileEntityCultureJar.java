@@ -220,6 +220,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 	@Override
 	public void receiveGUINetworkData(int id, int v)
 	{
+		super.receiveGUINetworkData(id, v);
 		switch (CultureJarDataId.fromInt(id))
 		{
 			case YEAST_GEN_TIME:
@@ -253,6 +254,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 	@Override
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
+		super.sendGUINetworkData(container, iCrafting);
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.YEAST_GEN_TIME.ordinal(), yeastGen.getTime());
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.YEAST_GEN_TIME_MAX.ordinal(), yeastGen.getTimeMax());
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.CULTURE_GEN_TIME.ordinal(), cultureGen.getTime());

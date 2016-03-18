@@ -148,6 +148,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	@Override
 	public void receiveGUINetworkData(int id, int v)
 	{
+		super.receiveGUINetworkData(id, v);
 		switch (id)
 		{
 			case FruitPressDataID.TIME:
@@ -172,6 +173,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 	@Override
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
+		super.sendGUINetworkData(container, iCrafting);
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME, fruitPress.getTime());
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME_MAX, fruitPress.getTimeMax());
 		final FluidStack fluid = getFluidStack(0);

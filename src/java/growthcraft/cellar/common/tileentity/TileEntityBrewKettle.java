@@ -178,6 +178,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 	@Override
 	public void receiveGUINetworkData(int id, int v)
 	{
+		super.receiveGUINetworkData(id, v);
 		final BrewKettleDataID dataId = BrewKettleDataID.VALUES.get(id);
 		switch (dataId)
 		{
@@ -214,6 +215,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 	@Override
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
+		super.sendGUINetworkData(container, iCrafting);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME.ordinal(), (int)brewKettle.getTime());
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME_MAX.ordinal(), (int)brewKettle.getTimeMax());
 		FluidStack fluid = getFluidStack(0);
