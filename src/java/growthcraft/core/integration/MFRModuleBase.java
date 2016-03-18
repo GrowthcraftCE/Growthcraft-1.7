@@ -26,6 +26,7 @@ package growthcraft.core.integration;
 import powercrystals.minefactoryreloaded.api.FactoryRegistry;
 import powercrystals.minefactoryreloaded.api.IFactoryFruit;
 import powercrystals.minefactoryreloaded.api.IFactoryHarvestable;
+import powercrystals.minefactoryreloaded.api.IFactoryPlantable;
 
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
@@ -86,6 +87,12 @@ public class MFRModuleBase extends ModIntegrationBase
 	protected void registerHarvestable(IFactoryHarvestable harvester)
 	{
 		sendMessage("registerHarvestable", harvester);
+	}
+
+	@Optional.Method(modid=MOD_ID)
+	protected void registerPlantable(IFactoryPlantable planter)
+	{
+		sendMessage("registerPlantable", planter);
 	}
 
 	@Optional.Method(modid=MOD_ID)
