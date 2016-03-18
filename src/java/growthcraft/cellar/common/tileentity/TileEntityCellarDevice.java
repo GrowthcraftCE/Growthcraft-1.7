@@ -26,6 +26,18 @@ package growthcraft.cellar.common.tileentity;
 import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
 import growthcraft.core.common.tileentity.IGuiNetworkSync;
 
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
+
 public abstract class TileEntityCellarDevice extends GrcTileEntityDeviceBase implements IGuiNetworkSync
 {
+	@Override
+	public void receiveGUINetworkData(int id, int v)
+	{
+	}
+
+	@Override
+	public void sendGUINetworkData(Container container, ICrafting iCrafting)
+	{
+	}
 }
