@@ -1,16 +1,21 @@
 package growthcraft.cellar.common.tileentity;
 
+import java.io.IOException;
+
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.IFermentationRecipe;
 import growthcraft.api.core.fluids.FluidUtils;
+import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.event.EventHandler;
+
+import io.netty.buffer.ByteBuf;
 
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -68,8 +73,31 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		this.recheckRecipe = true;
 	}
 
+	private IFermentationRecipe refreshRecipe()
+	{
+		final IFermentationRecipe recipe = CellarRegistry.instance().fermenting().findRecipe(getFluidStack(0), getStackInSlot(0));
+		if (recipe != null && recipe != activeRecipe)
+		{
+			if (activeRecipe != null)
+			{
+				resetTime();
+			}
+			this.activeRecipe = recipe;
+		}
+		else
+		{
+			if (activeRecipe != null)
+			{
+				this.activeRecipe = null;
+				resetTime();
+			}
+		}
+		return activeRecipe;
+	}
+
 	private IFermentationRecipe getWorkingRecipe()
 	{
+		if (activeRecipe == null) refreshRecipe();
 		return activeRecipe;
 	}
 
@@ -110,9 +138,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		final ItemStack fermentItem = getStackInSlot(0);
 		if (fermentItem != null)
 		{
-			final Item item = fermentItem.getItem();
-			final FluidStack fluidStack = getFluidStack(0);
-
 			final IFermentationRecipe recipe = getWorkingRecipe();
 			if (recipe != null)
 			{
@@ -138,27 +163,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 			return this.time * scale / tmx;
 		}
 		return 0;
-	}
-
-	private void refreshRecipe()
-	{
-		final IFermentationRecipe recipe = CellarRegistry.instance().fermenting().findRecipe(getFluidStack(0), getStackInSlot(0));
-		if (recipe != null && recipe != activeRecipe)
-		{
-			if (activeRecipe != null)
-			{
-				resetTime();
-			}
-			activeRecipe = recipe;
-		}
-		else
-		{
-			if (activeRecipe != null)
-			{
-				this.activeRecipe = null;
-				resetTime();
-			}
-		}
 	}
 
 	@Override
@@ -226,19 +230,22 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		this.time = nbt.getShort("time");
+		this.time = NBTHelper.getInteger(nbt, "time");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setShort("time", (short)this.time);
+		nbt.setInteger("time", time);
 	}
 
 	@Override
 	public void receiveGUINetworkData(int id, int v)
 	{
+		super.receiveGUINetworkData(id, v);
+		// Debugging
+		//GrowthCraftCellar.getLogger().info("Updating Network data id=%d value=%d", id, v);
 		switch (FermentBarrelDataID.fromInt(id))
 		{
 			case TIME:
@@ -263,11 +270,27 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	@Override
 	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
+		super.sendGUINetworkData(container, iCrafting);
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TIME.ordinal(), time);
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TIME_MAX.ordinal(), getTimeMax());
 		final FluidStack fluid = getFluidStack(0);
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
+	}
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	public boolean readFromStream_FermentBarrel(ByteBuf stream) throws IOException
+	{
+		this.time = stream.readInt();
+		this.timemax = stream.readInt();
+		return false;
+	}
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	public void writeToStream_FermentBarrel(ByteBuf stream) throws IOException
+	{
+		stream.writeInt(time);
+		stream.writeInt(getTimeMax());
 	}
 
 	@Override
@@ -298,7 +321,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		super.markForFluidUpdate();
 		markForRecipeRecheck();
 	}
-
 
 	@Override
 	public void onInventoryChanged(IInventory inv, int index)
