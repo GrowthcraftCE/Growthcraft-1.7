@@ -119,6 +119,8 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 			// temporary fix
 
 			renderer.renderAllFaces = true;
+			final double y1 = 0.875D;
+			final double y2 = 1.0D;
 
 			if (ClientProxy.paddyRenderPass == 0)
 			{
@@ -131,8 +133,6 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 
 				double i1 = 0.0D;
 				double i2 = 1.0D;
-				final double y1 = 0.875D;
-				final double y2 = 1.0D;
 				double k1 = 0.0D;
 				double k2 = 1.0D;
 
@@ -242,7 +242,8 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 					tessellator.setColorOpaque_F(f * r, f * g, f * b);
 					final IIcon icon = paddyBlock.getFluidBlock().getBlockTextureFromSide(1);
 					renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-					renderer.renderFaceYPos(block, (double)x, (double)((float)y - 0.0625F), (double)z, icon);
+					final double fy = (double)y - (y2 - y1) * ((double)(7 - meta) / 7d);
+					renderer.renderFaceYPos(block, (double)x, fy, (double)z, icon);
 				}
 			}
 
