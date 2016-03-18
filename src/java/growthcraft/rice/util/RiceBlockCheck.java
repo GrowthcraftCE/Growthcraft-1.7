@@ -65,15 +65,16 @@ public class RiceBlockCheck
 	 * @param x - x coord
 	 * @param y - y coord
 	 * @param z - z coord
+	 * @param amount - metadata, how much water should be present
 	 * @return true, the block is a paddy, false otherwise
 	 */
-	public static boolean isFullPaddy(IBlockAccess world, int x, int y, int z)
+	public static boolean isPaddyWithWater(IBlockAccess world, int x, int y, int z, int amount)
 	{
 		final Block block = world.getBlock(x, y, z);
 		if (isPaddy(block))
 		{
 			final int meta = world.getBlockMetadata(x, y, z);
-			return meta >= GrowthCraftRice.getConfig().paddyFieldMax;
+			return meta >= amount;
 		}
 		return false;
 	}
