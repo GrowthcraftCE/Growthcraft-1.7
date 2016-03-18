@@ -234,9 +234,12 @@ public class GrcContainer extends Container
 		if (tileEntity instanceof IGuiNetworkSync)
 		{
 			final IGuiNetworkSync sync = (IGuiNetworkSync)tileEntity;
-			for (int i = 0; i < crafters.size(); i++)
+			for (Object crafter : crafters)
 			{
-				sync.sendGUINetworkData(this, (ICrafting) crafters.get(i));
+				if (crafter instanceof ICrafting)
+				{
+					sync.sendGUINetworkData(this, (ICrafting)crafter);
+				}
 			}
 		}
 	}
@@ -245,6 +248,7 @@ public class GrcContainer extends Container
 	@Override
 	public void updateProgressBar(int id, int v)
 	{
+		super.updateProgressBar(id, v);
 		if (tileEntity instanceof IGuiNetworkSync)
 		{
 			((IGuiNetworkSync)tileEntity).receiveGUINetworkData(id, v);
