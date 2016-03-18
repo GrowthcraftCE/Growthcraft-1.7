@@ -242,7 +242,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler
 					tessellator.setColorOpaque_F(f * r, f * g, f * b);
 					final IIcon icon = paddyBlock.getFluidBlock().getBlockTextureFromSide(1);
 					renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-					final double fy = (double)y - (y2 - y1) * ((double)(7 - meta) / 7d);
+					final double fy = (double)y - (1d / 32d) - (y2 - y1) * ((double)(7 - meta) / 7d);
 					renderer.renderFaceYPos(block, (double)x, fy, (double)z, icon);
 				}
 			}
