@@ -56,7 +56,7 @@ public class FermentationRecipe implements IFermentationRecipe
 	@Override
 	public FluidStack getOutputFluidStack()
 	{
-		return inputFluidStack;
+		return outputFluidStack;
 	}
 
 	@Override
