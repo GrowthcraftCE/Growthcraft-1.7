@@ -21,27 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.rice.integration;
+package growthcraft.rice.integration.mfr;
 
-import growthcraft.core.integration.MFRModuleBase;
+import growthcraft.core.integration.mfr.AbstractFactoryPlantable;
+import growthcraft.rice.common.block.BlockRice;
 import growthcraft.rice.GrowthCraftRice;
-import growthcraft.rice.integration.mfr.RiceFactoryHarvester;
-import growthcraft.rice.integration.mfr.RiceFactoryPlanter;
+import growthcraft.rice.util.RiceBlockCheck;
 
-import cpw.mods.fml.common.Optional;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
-public class MFRModule extends MFRModuleBase
+public class RiceFactoryPlanter extends AbstractFactoryPlantable<BlockRice>
 {
-	public MFRModule()
+	public RiceFactoryPlanter()
 	{
-		super(GrowthCraftRice.MOD_ID);
+		super(GrowthCraftRice.rice.getItem(), GrowthCraftRice.riceBlock.getBlock());
 	}
 
 	@Override
-	@Optional.Method(modid=MFRModuleBase.MOD_ID)
-	protected void integrate()
+	public boolean canBePlantedHere(World world, int x, int y, int z, ItemStack stack)
 	{
-		registerHarvestable(new RiceFactoryHarvester());
-		registerPlantable(new RiceFactoryPlanter());
+		return super.canBePlantedHere(world, x, y, z, stack) &&
+			RiceBlockCheck.isFullPaddy(world, x, y - 1, z);
 	}
 }
