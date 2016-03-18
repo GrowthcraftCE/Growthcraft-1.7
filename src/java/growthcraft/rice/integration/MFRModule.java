@@ -24,6 +24,7 @@
 package growthcraft.rice.integration;
 
 import growthcraft.core.integration.MFRModuleBase;
+import growthcraft.rice.common.block.BlockRice;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.integration.mfr.RiceFactoryHarvester;
 import growthcraft.rice.integration.mfr.RiceFactoryPlanter;
@@ -43,5 +44,6 @@ public class MFRModule extends MFRModuleBase
 	{
 		registerHarvestable(new RiceFactoryHarvester());
 		registerPlantable(new RiceFactoryPlanter());
+		registerFertilizableCrop(GrowthCraftRice.riceBlock.getBlock(), BlockRice.RiceStage.MATURE);
 	}
 }

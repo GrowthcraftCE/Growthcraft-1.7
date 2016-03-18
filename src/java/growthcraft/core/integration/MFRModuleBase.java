@@ -27,6 +27,7 @@ import powercrystals.minefactoryreloaded.api.FactoryRegistry;
 import powercrystals.minefactoryreloaded.api.IFactoryFruit;
 import powercrystals.minefactoryreloaded.api.IFactoryHarvestable;
 import powercrystals.minefactoryreloaded.api.IFactoryPlantable;
+import powercrystals.minefactoryreloaded.api.FertilizerType;
 
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
@@ -90,13 +91,45 @@ public class MFRModuleBase extends ModIntegrationBase
 	}
 
 	@Optional.Method(modid=MOD_ID)
+	protected void registerFertilizableByType(String type, Object obj)
+	{
+		sendMessage("registerFertilizable_" + type, obj);
+	}
+
+	@Optional.Method(modid=MOD_ID)
+	protected void registerFertilizableCrop(NBTTagCompound tag)
+	{
+		registerFertilizableByType("Crop", tag);
+	}
+
+	@Optional.Method(modid=MOD_ID)
+	protected void registerFertilizableCrop(Block block, int maxGrowth, FertilizerType fertilizerType)
+	{
+		final UniqueIdentifier uuid = GameRegistry.findUniqueIdentifierFor(block);
+		if (uuid != null)
+		{
+			final NBTTagCompound tag = new NBTTagCompound();
+			tag.setString("plant", uuid.toString());
+			tag.setInteger("meta", maxGrowth);
+			tag.setInteger("type", fertilizerType.ordinal());
+			registerFertilizableCrop(tag);
+		}
+	}
+
+	@Optional.Method(modid=MOD_ID)
+	protected void registerFertilizableCrop(Block block, int maxGrowth)
+	{
+		registerFertilizableCrop(block, maxGrowth, FertilizerType.GrowPlant);
+	}
+
+	@Optional.Method(modid=MOD_ID)
 	protected void registerPlantable(IFactoryPlantable planter)
 	{
 		sendMessage("registerPlantable", planter);
 	}
 
 	@Optional.Method(modid=MOD_ID)
-	protected void registerHarvestableSimple(String type, String str)
+	protected void registerHarvestableByType(String type, String str)
 	{
 		sendMessage("registerHarvestable_" + type, str);
 	}
@@ -106,6 +139,6 @@ public class MFRModuleBase extends ModIntegrationBase
 	{
 		final UniqueIdentifier uuid = GameRegistry.findUniqueIdentifierFor(block);
 		if (uuid != null)
-			registerHarvestableSimple("Leaves", uuid.toString());
+			registerHarvestableByType("Leaves", uuid.toString());
 	}
 }
