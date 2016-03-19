@@ -31,25 +31,32 @@ import net.minecraft.item.ItemStack;
 
 public enum EnumBotaniaWoodType
 {
-	LIVING_WOOD;
+	LIVING_WOOD("livingwood"),
+	DREAM_WOOD("dreamwood"),
+	SHIMMER_WOOD("shimmerwoodPlanks");
 
 	public static final EnumBotaniaWoodType[] VALUES = values();
 
+	public final String plankName;
 	public final String name;
 	public final int meta;
 
-	private EnumBotaniaWoodType()
+	/**
+	 * @param pn - plank block name
+	 */
+	private EnumBotaniaWoodType(String pn)
 	{
+		this.plankName = pn;
 		this.name = name().toLowerCase(Locale.ENGLISH);
 		this.meta = ordinal();
 	}
 
 	public ItemStack asPlanksItemStack(int size)
 	{
-		final Block block = GameRegistry.findBlock(BotaniaPlatform.MOD_ID, "planks");
+		final Block block = GameRegistry.findBlock(BotaniaPlatform.MOD_ID, plankName);
 		if (block != null)
 		{
-			final ItemStack result = new ItemStack(block, size, meta);
+			final ItemStack result = new ItemStack(block, size, 0);
 			return result;
 		}
 		return null;
