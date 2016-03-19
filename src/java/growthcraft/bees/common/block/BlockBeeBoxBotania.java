@@ -40,7 +40,6 @@ public class BlockBeeBoxBotania extends BlockBeeBox
 	public BlockBeeBoxBotania()
 	{
 		super();
-		setBlockTextureName("grcextoak:beebox");
 		setHardness(2f);
 		setBlockName("grc.BeeBox.Botania");
 	}

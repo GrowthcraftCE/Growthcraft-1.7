@@ -40,7 +40,6 @@ public class BlockBeeBoxBiomesOPlenty extends BlockBeeBox
 	public BlockBeeBoxBiomesOPlenty()
 	{
 		super();
-		setBlockTextureName("grcextoak:beebox");
 		setHardness(2f);
 		setBlockName("grc.BeeBox.BiomesOPlenty");
 	}

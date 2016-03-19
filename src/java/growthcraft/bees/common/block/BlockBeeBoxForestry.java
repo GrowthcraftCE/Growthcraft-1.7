@@ -45,7 +45,6 @@ public class BlockBeeBoxForestry extends BlockBeeBox
 	public BlockBeeBoxForestry(EnumBeeBoxForestry[] types, int offset, int index, boolean fireproof)
 	{
 		super();
-		setBlockTextureName("grcextoak:beebox");
 		this.beeboxTypes = types;
 		this.metaOffset = offset;
 		this.subIndex = index;
