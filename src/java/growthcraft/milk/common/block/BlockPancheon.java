@@ -39,6 +39,7 @@ public class BlockPancheon extends GrcBlockContainer
 	public BlockPancheon()
 	{
 		super(Material.clay);
+		setHardness(0.6F);
 		setBlockName("grcmilk.Pancheon");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityPancheon.class);

@@ -41,6 +41,8 @@ public class BlockButterChurn extends GrcBlockContainer
 	public BlockButterChurn()
 	{
 		super(Material.wood);
+		setResistance(5.0F);
+		setHardness(2.0F);
 		setBlockName("grcmilk.ButterChurn");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityButterChurn.class);

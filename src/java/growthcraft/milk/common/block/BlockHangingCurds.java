@@ -57,6 +57,7 @@ public class BlockHangingCurds extends GrcBlockContainer
 	public BlockHangingCurds()
 	{
 		super(Material.cake);
+		setHardness(0.5F);
 		setTickRandomly(true);
 		setBlockName("grcmilk.HangingCurds");
 		setCreativeTab(GrowthCraftMilk.creativeTab);

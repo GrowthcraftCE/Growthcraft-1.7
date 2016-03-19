@@ -44,6 +44,8 @@ public class BlockCheeseVat extends GrcBlockContainer
 	public BlockCheeseVat()
 	{
 		super(Material.iron);
+		setResistance(10.0F);
+		setHardness(5.0F);
 		setBlockName("grcmilk.CheeseVat");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityCheeseVat.class);
