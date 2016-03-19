@@ -6,6 +6,7 @@ import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.util.ItemUtils;
+import growthcraft.core.common.item.IFluidItem;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,7 +23,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
-public class ItemBoozeBottle extends ItemFood
+public class ItemBoozeBottle extends ItemFood implements IFluidItem
 {
 	private Fluid[] boozes;
 
@@ -44,25 +45,26 @@ public class ItemBoozeBottle extends ItemFood
 		this.boozes = boozeAry;
 	}
 
-	public Fluid[] getBoozeArray()
+	public Fluid[] getFluidArray()
 	{
 		return this.boozes;
 	}
 
-	public Fluid getBooze(int i)
+	public Fluid getFluidByIndex(int i)
 	{
 		return (i < 0 || i >= boozes.length) ? boozes[0] : boozes[i];
 	}
 
-	public Fluid getBoozeForStack(ItemStack stack)
+	@Override
+	public Fluid getFluid(ItemStack stack)
 	{
 		if (stack == null) return null;
-		return getBooze(stack.getItemDamage());
+		return getFluidByIndex(stack.getItemDamage());
 	}
 
 	public int getColor(ItemStack stack)
 	{
-		final Fluid booze = getBoozeForStack(stack);
+		final Fluid booze = getFluid(stack);
 		if (booze != null) return booze.getColor();
 		return 0xFFFFFF;
 	}
@@ -70,7 +72,7 @@ public class ItemBoozeBottle extends ItemFood
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5)
 	{
-		if (stack.getItemDamage() >= getBoozeArray().length)
+		if (stack.getItemDamage() >= getFluidArray().length)
 		{
 			stack.setItemDamage(0);
 		}
@@ -97,7 +99,7 @@ public class ItemBoozeBottle extends ItemFood
 
 		if (!world.isRemote)
 		{
-			BoozeUtils.addEffects(getBoozeForStack(stack), stack, world, player);
+			BoozeUtils.addEffects(getFluid(stack), stack, world, player);
 		}
 
 		return stack.stackSize <= 0 ? null : stack;
@@ -112,7 +114,7 @@ public class ItemBoozeBottle extends ItemFood
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		super.addInformation(stack, player, list, bool);
-		final Fluid booze = getBoozeForStack(stack);
+		final Fluid booze = getFluid(stack);
 		BoozeUtils.addBottleInformation(booze, stack, player, list, bool);
 	}
 
@@ -152,7 +154,7 @@ public class ItemBoozeBottle extends ItemFood
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack stack, int pass)
 	{
-		return BoozeUtils.hasEffect(getBoozeForStack(stack));
+		return BoozeUtils.hasEffect(getFluid(stack));
 	}
 
 	@Override
@@ -183,7 +185,7 @@ public class ItemBoozeBottle extends ItemFood
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
-		final Fluid booze = getBoozeForStack(stack);
+		final Fluid booze = getFluid(stack);
 		if (booze != null)
 		{
 			return GrcI18n.translate(booze.getUnlocalizedName());
@@ -196,7 +198,7 @@ public class ItemBoozeBottle extends ItemFood
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
-		for (int i = 0; i < getBoozeArray().length; i++)
+		for (int i = 0; i < getFluidArray().length; i++)
 		{
 			list.add(new ItemStack(item, 1, i));
 		}

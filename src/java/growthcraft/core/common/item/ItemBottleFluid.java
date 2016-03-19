@@ -35,7 +35,7 @@ import net.minecraftforge.fluids.Fluid;
 /**
  * Generic fluid bottle for growthcraft fluids
  */
-public class ItemBottleFluid extends Item
+public class ItemBottleFluid extends Item implements IFluidItem
 {
 	private Fluid fluid;
 	// Used to override the fluid color
@@ -53,6 +53,7 @@ public class ItemBottleFluid extends Item
 		this.fluid = flu;
 	}
 
+	@Override
 	public Fluid getFluid(ItemStack stack)
 	{
 		return fluid;

@@ -14,7 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
-public class ItemBucketBooze extends ItemBucketFluid implements IBoozeContainer
+public class ItemBucketBooze extends ItemBucketFluid
 {
 	public ItemBucketBooze(Block block, Fluid buze, CreativeTabs creativeTab)
 	{
@@ -27,17 +27,12 @@ public class ItemBucketBooze extends ItemBucketFluid implements IBoozeContainer
 		this(block, buze, GrowthCraftCellar.tab);
 	}
 
-	public Fluid getBooze(ItemStack stack)
-	{
-		return getFluid(stack);
-	}
-
 	@SideOnly(Side.CLIENT)
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		super.addInformation(stack, player, list, bool);
-		BoozeUtils.addInformation(getBooze(stack), stack, player, list, bool);
+		BoozeUtils.addInformation(getFluid(stack), stack, player, list, bool);
 	}
 }

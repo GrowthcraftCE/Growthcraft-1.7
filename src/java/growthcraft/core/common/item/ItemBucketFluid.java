@@ -39,7 +39,7 @@ import net.minecraftforge.fluids.Fluid;
 /**
  * Generic fluid bucket code
  */
-public class ItemBucketFluid extends ItemBucket
+public class ItemBucketFluid extends ItemBucket implements IFluidItem
 {
 	private Fluid fluid;
 	private int index;
@@ -59,6 +59,7 @@ public class ItemBucketFluid extends ItemBucket
 		this.fluid = flu;
 	}
 
+	@Override
 	public Fluid getFluid(ItemStack _stack)
 	{
 		return fluid;

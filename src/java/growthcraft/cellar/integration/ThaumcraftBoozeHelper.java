@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,26 +31,29 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.cellar.booze.BoozeTag;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.fluids.FluidTag;
+import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.cellar.common.block.BlockFluidBooze;
-import growthcraft.cellar.common.definition.BlockBoozeDefinition;
-import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
-import growthcraft.cellar.common.item.ItemBoozeBottle;
-import growthcraft.cellar.common.item.ItemBucketBooze;
-import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
+import growthcraft.core.common.definition.ItemTypeDefinition;
+import growthcraft.core.common.item.IFluidItem;
+import growthcraft.core.integration.thaumcraft.AspectsHelper;
+import growthcraft.core.util.FluidFactory;
 
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.ThaumcraftApi;
 
 import cpw.mods.fml.common.Optional;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.BlockFluidBase;
 
 public class ThaumcraftBoozeHelper implements ILoggable
 {
@@ -100,7 +103,7 @@ public class ThaumcraftBoozeHelper implements ILoggable
 	}
 
 	@Optional.Method(modid="Thaumcraft")
-	public AspectList setAspectsForBooze(Fluid fluid, AspectList aspects)
+	public AspectList setAspectsForFluid(Fluid fluid, AspectList aspects)
 	{
 		final Collection<FluidTag> tags = CoreRegistry.instance().fluidDictionary().getFluidTags(fluid);
 		for (FluidTag tag : tags)
@@ -122,76 +125,104 @@ public class ThaumcraftBoozeHelper implements ILoggable
 	}
 
 	@Optional.Method(modid="Thaumcraft")
-	public AspectList setAspectsForBoozeBucketContent(Fluid fluid, AspectList aspects)
+	public AspectList setAspectsForFluidBucketContent(Fluid fluid, AspectList aspects)
 	{
-		return setAspectsForBooze(fluid, aspects.add(Aspect.WATER, 4));
+		return setAspectsForFluid(fluid, aspects.add(Aspect.WATER, 4));
 	}
 
 	@Optional.Method(modid="Thaumcraft")
-	public AspectList setAspectsForBoozeBottleContent(Fluid fluid, AspectList aspects)
+	public AspectList setAspectsForFluidBottleContent(Fluid fluid, AspectList aspects)
 	{
-		return setAspectsForBooze(fluid, aspects.add(Aspect.WATER, 2));
+		return setAspectsForFluid(fluid, aspects.add(Aspect.WATER, 2));
 	}
 
 	@Optional.Method(modid="Thaumcraft")
-	public AspectList setAspectsForBoozeBucket(Fluid fluid, AspectList list)
+	public AspectList setAspectsForFluidBucket(Fluid fluid, AspectList list)
 	{
 		list.add(Aspect.METAL, 3);
-		return setAspectsForBoozeBucketContent(fluid, list);
+		return setAspectsForFluidBucketContent(fluid, list);
 	}
 
 	@Optional.Method(modid="Thaumcraft")
-	public AspectList setAspectsForBoozeBottle(Fluid fluid, AspectList list)
+	public AspectList setAspectsForFluidBottle(Fluid fluid, AspectList list)
 	{
 		list.add(Aspect.CRYSTAL, 1);
-		return setAspectsForBoozeBottleContent(fluid, list);
+		return setAspectsForFluidBottleContent(fluid, list);
 	}
 
 	@Optional.Method(modid="Thaumcraft")
-	public void registerAspectsForBucket(ItemBucketBoozeDefinition def, AspectList base)
+	public void registerAspectsForBucket(ItemTypeDefinition<? extends IFluidItem> def, AspectList base)
 	{
-		final ItemBucketBooze bucket = def.getItem();
-		ThaumcraftApi.registerObjectTag(def.asStack(), setAspectsForBoozeBucket(bucket.getBooze(null), base.copy()));
+		final ItemStack stack = def.asStack(1, ItemKey.WILDCARD_VALUE);
+		final Item item = stack.getItem();
+		if (item instanceof IFluidItem)
+		{
+			final IFluidItem bucket = (IFluidItem)item;
+			ThaumcraftApi.registerObjectTag(stack, setAspectsForFluidBucket(bucket.getFluid(stack), base.copy()));
+		}
 	}
 
 	@Optional.Method(modid="Thaumcraft")
-	public void registerAspectsForBuckets(ItemBucketBoozeDefinition[] buckets, AspectList base)
+	public void registerAspectsForBuckets(ItemTypeDefinition<? extends IFluidItem>[] buckets, AspectList base)
 	{
-		for (ItemBucketBoozeDefinition bucket : buckets) registerAspectsForBucket(bucket, base);
+		for (ItemTypeDefinition<? extends IFluidItem> bucket : buckets) registerAspectsForBucket(bucket, base);
 	}
 
 	@Optional.Method(modid="Thaumcraft")
-	public void registerAspectsForFluidBlock(BlockBoozeDefinition def, AspectList base)
+	public void registerAspectsForFluidBlock(BlockTypeDefinition<? extends BlockFluidBase> def, AspectList base)
 	{
-		final BlockFluidBooze block = def.getBlock();
-		ThaumcraftApi.registerObjectTag(def.asStack(), setAspectsForBoozeBucket(block.getFluid(), base.copy()));
+		final Block block = def.getBlock();
+		if (block instanceof BlockFluidBase)
+		{
+			ThaumcraftApi.registerObjectTag(def.asStack(1, ItemKey.WILDCARD_VALUE), setAspectsForFluidBucket(((BlockFluidBase)block).getFluid(), base.copy()));
+		}
 	}
 
 	@Optional.Method(modid="Thaumcraft")
-	public void registerAspectsForFluidBlocks(BlockBoozeDefinition[] blocks, AspectList base)
+	public void registerAspectsForFluidBlocks(BlockTypeDefinition<? extends BlockFluidBase>[] blocks, AspectList base)
 	{
-		for (BlockBoozeDefinition block : blocks) registerAspectsForFluidBlock(block, base);
+		for (BlockTypeDefinition<? extends BlockFluidBase> block : blocks) registerAspectsForFluidBlock(block, base);
 	}
 
 	@Optional.Method(modid="Thaumcraft")
 	public void registerAspectsForBottleStack(ItemStack stack, AspectList base)
 	{
-		final ItemBoozeBottle bottle = (ItemBoozeBottle)stack.getItem();
-		ThaumcraftApi.registerObjectTag(stack, setAspectsForBoozeBottle(bottle.getBoozeForStack(stack), base.copy()));
+		final Item item = stack.getItem();
+		if (item instanceof IFluidItem)
+		{
+			final IFluidItem fluidItem = (IFluidItem)item;
+			final List<ItemStack> subtypes = new ArrayList<ItemStack>();
+			item.getSubItems(item, null, subtypes);
+			for (ItemStack subStack : subtypes)
+			{
+				ThaumcraftApi.registerObjectTag(subStack, setAspectsForFluidBottle(fluidItem.getFluid(subStack), base.copy()));
+			}
+		}
 	}
 
 	@Optional.Method(modid="Thaumcraft")
-	public void registerAspectsForBottle(ItemDefinition def, AspectList base)
+	public void registerAspectsForBottle(ItemTypeDefinition<? extends IFluidItem> def, AspectList base)
 	{
-		if (def.getItem() instanceof ItemBoozeBottle)
+		final ItemStack stack = def.asStack(1, ItemKey.WILDCARD_VALUE);
+		registerAspectsForBottleStack(stack, base);
+	}
+
+	@Optional.Method(modid="Thaumcraft")
+	public void registerAspectsForFluidDetails(FluidFactory.FluidDetails details, AspectList base, Aspect... aspects)
+	{
+		if (details.bottle != null)
 		{
-			final ItemBoozeBottle bottle = (ItemBoozeBottle)def.getItem();
-			final List<ItemStack> subtypes = new ArrayList<ItemStack>();
-			bottle.getSubItems(bottle, null, subtypes);
-			for (ItemStack stack : subtypes)
-			{
-				ThaumcraftApi.registerObjectTag(stack, setAspectsForBoozeBottle(bottle.getBoozeForStack(stack), base.copy()));
-			}
+			registerAspectsForBottle(details.bottle, base.copy());
+		}
+
+		if (details.bucket != null)
+		{
+			registerAspectsForBucket(details.bucket, AspectsHelper.scaleAspects(base.copy(), 3, aspects));
+		}
+
+		if (details.block != null)
+		{
+			registerAspectsForFluidBlock(details.block, AspectsHelper.scaleAspects(base.copy(), 3, aspects));
 		}
 	}
 

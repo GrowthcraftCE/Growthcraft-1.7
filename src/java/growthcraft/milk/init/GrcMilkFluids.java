@@ -67,7 +67,6 @@ public class GrcMilkFluids extends GrcModuleBase
 {
 	private static final String kumisBasename = "grcmilk.Kumis";
 
-	// not an actual Booze, but we use the class since it has the ability to set color
 	public FluidFactory.FluidDetails butterMilk;
 	public FluidFactory.FluidDetails cream;
 	public FluidFactory.FluidDetails milk;
