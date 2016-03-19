@@ -61,7 +61,10 @@ public class BlockBeeBoxBotania extends BlockBeeBox
 		this.icons = new IIcon[4 * EnumBotaniaWoodType.VALUES.length];
 		for (EnumBotaniaWoodType type : EnumBotaniaWoodType.VALUES)
 		{
-			registerBeeBoxIcons(reg, String.format("/botania/%s/", type.name), type.meta);
+			if (type != EnumBotaniaWoodType.SHIMMER_WOOD)
+			{
+				registerBeeBoxIcons(reg, String.format("/botania/%s/", type.name), type.meta);
+			}
 		}
 	}
 }
