@@ -300,6 +300,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		yeastGen.writeToStream(stream);
 		cultureGen.writeToStream(stream);
 		heatComponent.writeToStream(stream);
+		return false;
 	}
 
 	public int getProgressScaled(int scale)

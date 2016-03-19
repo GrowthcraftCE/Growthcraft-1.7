@@ -322,5 +322,6 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	{
 		stream.writeInt(shaftState);
 		stream.writeInt(churns);
+		return false;
 	}
 }
