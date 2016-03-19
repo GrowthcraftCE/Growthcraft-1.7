@@ -135,15 +135,17 @@ public class DeviceBase implements INBTSerializableContext, IStreamable
 	 * @param buf - buffer to read from
 	 */
 	@Override
-	public void readFromStream(ByteBuf buf)
+	public boolean readFromStream(ByteBuf buf)
 	{
+		return false;
 	}
 
 	/**
 	 * @param buf - buffer to write to
 	 */
 	@Override
-	public void writeToStream(ByteBuf buf)
+	public boolean writeToStream(ByteBuf buf)
 	{
+		return false;
 	}
 }

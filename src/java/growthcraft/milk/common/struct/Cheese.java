@@ -23,6 +23,7 @@
  */
 package growthcraft.milk.common.struct;
 
+import growthcraft.api.core.stream.IStreamable;
 import growthcraft.milk.common.item.EnumCheeseStage;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.GrowthCraftMilk;
@@ -33,7 +34,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 
-public class Cheese
+public class Cheese implements IStreamable
 {
 	public boolean needClientUpdate = true;
 
@@ -166,22 +167,26 @@ public class Cheese
 		}
 	}
 
-	public void readFromStream(ByteBuf stream)
+	@Override
+	public boolean readFromStream(ByteBuf stream)
 	{
 		this.cheese = EnumCheeseType.loadFromStream(stream);
 		this.cheeseStage = EnumCheeseStage.loadFromStream(stream);
 		this.age = stream.readInt();
 		this.slices = stream.readInt();
 		this.slicesMax = stream.readInt();
+		return false;
 	}
 
-	public void writeToStream(ByteBuf stream)
+	@Override
+	public boolean writeToStream(ByteBuf stream)
 	{
 		cheese.writeToStream(stream);
 		cheeseStage.writeToStream(stream);
 		stream.writeInt(age);
 		stream.writeInt(slices);
 		stream.writeInt(slicesMax);
+		return false;
 	}
 
 	public void update()

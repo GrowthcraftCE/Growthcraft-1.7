@@ -115,14 +115,16 @@ public class TileHeatingComponent implements INBTSerializableContext, IStreamabl
 	}
 
 	@Override
-	public void readFromStream(ByteBuf stream)
+	public boolean readFromStream(ByteBuf stream)
 	{
 		this.heat = stream.readFloat();
+		return false;
 	}
 
 	@Override
-	public void writeToStream(ByteBuf stream)
+	public boolean writeToStream(ByteBuf stream)
 	{
 		stream.writeFloat(heat);
+		return false;
 	}
 }

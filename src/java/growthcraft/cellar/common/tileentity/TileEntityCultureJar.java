@@ -294,7 +294,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public void writeToStream_YeastGen(ByteBuf stream) throws IOException
+	public boolean writeToStream_YeastGen(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(jarDeviceState);
 		yeastGen.writeToStream(stream);

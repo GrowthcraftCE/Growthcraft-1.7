@@ -320,19 +320,21 @@ public class DeviceBeeBox extends DeviceBase
 	}
 
 	@Override
-	public void readFromStream(ByteBuf buf)
+	public boolean readFromStream(ByteBuf buf)
 	{
 		super.readFromStream(buf);
 		this.bonusTime = buf.readInt();
+		return false;
 	}
 
 	/**
 	 * @param buf - buffer to write to
 	 */
 	@Override
-	public void writeToStream(ByteBuf buf)
+	public boolean writeToStream(ByteBuf buf)
 	{
 		super.writeToStream(buf);
 		buf.writeInt(bonusTime);
+		return false;
 	}
 }

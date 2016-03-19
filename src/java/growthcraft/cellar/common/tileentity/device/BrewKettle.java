@@ -218,25 +218,27 @@ public class BrewKettle extends DeviceBase
 	 * @param buf - buffer to read from
 	 */
 	@Override
-	public void readFromStream(ByteBuf buf)
+	public boolean readFromStream(ByteBuf buf)
 	{
 		super.readFromStream(buf);
 		this.time = buf.readDouble();
 		this.timeMax = buf.readDouble();
 		this.grain = buf.readFloat();
 		heatComponent.readFromStream(buf);
+		return false;
 	}
 
 	/**
 	 * @param buf - buffer to write to
 	 */
 	@Override
-	public void writeToStream(ByteBuf buf)
+	public boolean writeToStream(ByteBuf buf)
 	{
 		super.writeToStream(buf);
 		buf.writeDouble(time);
 		buf.writeDouble(timeMax);
 		buf.writeFloat(grain);
 		heatComponent.writeToStream(buf);
+		return false;
 	}
 }

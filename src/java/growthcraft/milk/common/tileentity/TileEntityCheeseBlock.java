@@ -114,9 +114,10 @@ public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHan
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public void writeToStream_CheeseBlock(ByteBuf stream) throws IOException
+	public boolean writeToStream_CheeseBlock(ByteBuf stream) throws IOException
 	{
 		cheese.writeToStream(stream);
+		return true;
 	}
 
 	@Override

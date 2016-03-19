@@ -51,9 +51,10 @@ public enum EnumCheeseStage
 		return tag;
 	}
 
-	public void writeToStream(ByteBuf stream)
+	public boolean writeToStream(ByteBuf stream)
 	{
 		stream.writeInt(index);
+		return false;
 	}
 
 	/**

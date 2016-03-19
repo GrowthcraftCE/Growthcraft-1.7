@@ -162,7 +162,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public void writeToStream_BrewKettle(ByteBuf stream) throws IOException
+	public boolean writeToStream_BrewKettle(ByteBuf stream) throws IOException
 	{
 		brewKettle.writeToStream(stream);
 	}

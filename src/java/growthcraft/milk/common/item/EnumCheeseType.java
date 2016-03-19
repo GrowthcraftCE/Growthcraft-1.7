@@ -159,9 +159,10 @@ public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 		return tag;
 	}
 
-	public void writeToStream(ByteBuf stream)
+	public boolean writeToStream(ByteBuf stream)
 	{
 		stream.writeInt(meta);
+		return false;
 	}
 
 	/**

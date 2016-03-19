@@ -27,6 +27,6 @@ import io.netty.buffer.ByteBuf;
 
 public interface IStreamable
 {
-	void readFromStream(ByteBuf stream);
-	void writeToStream(ByteBuf stream);
+	boolean readFromStream(ByteBuf stream);
+	boolean writeToStream(ByteBuf stream);
 }

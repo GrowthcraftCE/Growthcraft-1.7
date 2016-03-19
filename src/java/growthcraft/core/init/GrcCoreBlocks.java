@@ -41,9 +41,9 @@ public class GrcCoreBlocks extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		ropeBlock = new BlockDefinition(new BlockRope());
-		fenceRope = new BlockDefinition(new BlockFenceRope(Blocks.fence, "grc.fenceRope"));
-		netherBrickFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.nether_brick_fence, "grc.netherBrickFenceRope"));
+		this.ropeBlock = new BlockDefinition(new BlockRope());
+		this.fenceRope = new BlockDefinition(new BlockFenceRope(Blocks.fence, "grc.fenceRope"));
+		this.netherBrickFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.nether_brick_fence, "grc.netherBrickFenceRope"));
 
 		FenceRopeRegistry.instance().addEntry(Blocks.fence, fenceRope.getBlock());
 		FenceRopeRegistry.instance().addEntry(Blocks.nether_brick_fence, netherBrickFenceRope.getBlock());

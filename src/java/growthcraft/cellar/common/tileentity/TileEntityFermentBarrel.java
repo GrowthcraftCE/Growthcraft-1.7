@@ -287,10 +287,11 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public void writeToStream_FermentBarrel(ByteBuf stream) throws IOException
+	public boolean writeToStream_FermentBarrel(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(time);
 		stream.writeInt(getTimeMax());
+		return false;
 	}
 
 	@Override

@@ -23,14 +23,15 @@
  */
 package growthcraft.milk.common.struct;
 
-import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.api.core.nbt.INBTSerializableContext;
+import growthcraft.api.core.stream.IStreamable;
+import growthcraft.milk.common.item.EnumCheeseType;
 
 import io.netty.buffer.ByteBuf;
 
 import net.minecraft.nbt.NBTTagCompound;
 
-public class CheeseCurd implements INBTSerializableContext
+public class CheeseCurd implements INBTSerializableContext, IStreamable
 {
 	public boolean needClientUpdate;
 	private EnumCheeseType cheese = EnumCheeseType.CHEDDAR;
@@ -96,18 +97,22 @@ public class CheeseCurd implements INBTSerializableContext
 		}
 	}
 
-	public void readFromStream(ByteBuf stream)
+	@Override
+	public boolean readFromStream(ByteBuf stream)
 	{
 		this.cheese = EnumCheeseType.loadFromStream(stream);
 		this.dried = stream.readBoolean();
 		this.age = stream.readInt();
+		return false;
 	}
 
-	public void writeToStream(ByteBuf stream)
+	@Override
+	public boolean writeToStream(ByteBuf stream)
 	{
 		cheese.writeToStream(stream);
 		stream.writeBoolean(dried);
 		stream.writeInt(age);
+		return false;
 	}
 
 	public void update()

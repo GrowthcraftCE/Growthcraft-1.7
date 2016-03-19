@@ -184,11 +184,12 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public void writeToStream_HangingCurds(ByteBuf stream) throws IOException
+	public boolean writeToStream_HangingCurds(ByteBuf stream) throws IOException
 	{
 		cheeseCurd.writeToStream(stream);
 		wheyPulsar.writeToStream(stream);
 		stream.writeInt(serverStep);
+		return true;
 	}
 
 	public ItemStack asItemStack()

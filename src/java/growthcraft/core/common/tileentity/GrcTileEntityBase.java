@@ -34,6 +34,7 @@ import javax.annotation.Nonnull;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
+import growthcraft.api.core.stream.IStreamable;
 import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.event.EventFunction;
 
@@ -50,7 +51,7 @@ import net.minecraft.nbt.NBTTagCompound;
  * copied the code for use in YATM, but I've ported it over to Growthcraft as
  * well.
  */
-public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpdateFlagging
+public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpdateFlagging, IStreamable
 {
 	protected static class HandlerMap extends EnumMap<EventHandler.EventType, List<EventFunction>>
 	{
@@ -66,14 +67,23 @@ public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpda
 
 	protected boolean needBlockUpdate = true;
 
+	@Override
 	public void markForBlockUpdate()
 	{
 		needBlockUpdate = true;
 	}
 
+	public boolean shouldMarkForBlockUpdate()
+	{
+		return true;
+	}
+
 	private void doMarkForUpdate()
 	{
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		if (shouldMarkForBlockUpdate())
+		{
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 	}
 
 	protected void preMarkForUpdate()
@@ -86,7 +96,7 @@ public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpda
 	{
 		if (needBlockUpdate)
 		{
-			needBlockUpdate = false;
+			this.needBlockUpdate = false;
 			preMarkForUpdate();
 			doMarkForUpdate();
 		}
@@ -127,7 +137,8 @@ public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpda
 		return getHandlersMap().get(type);
 	}
 
-	protected void writeToStream(ByteBuf stream)
+	@Override
+	public boolean writeToStream(ByteBuf stream)
 	{
 		final List<EventFunction> handlers = getHandlersFor(EventHandler.EventType.NETWORK_WRITE);
 		if (handlers != null)
@@ -137,6 +148,7 @@ public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpda
 				func.writeToStream(this, stream);
 			}
 		}
+		return false;
 	}
 
 	@Override
@@ -165,7 +177,8 @@ public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpda
 		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 127, data);
 	}
 
-	protected boolean readFromStream(ByteBuf stream)
+	@Override
+	public boolean readFromStream(ByteBuf stream)
 	{
 		boolean shouldUpdate = false;
 		final List<EventFunction> handlers = getHandlersFor(EventHandler.EventType.NETWORK_READ);
@@ -197,5 +210,13 @@ public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpda
 				}
 			}
 		}
+	}
+
+	public void readFromNBTForItem(NBTTagCompound tag)
+	{
+	}
+
+	public void writeToNBTForItem(NBTTagCompound tag)
+	{
 	}
 }

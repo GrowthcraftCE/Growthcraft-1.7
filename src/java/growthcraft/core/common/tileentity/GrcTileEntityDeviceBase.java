@@ -101,9 +101,10 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public void writeToStream_FluidTanks(ByteBuf stream) throws IOException
+	public boolean writeToStream_FluidTanks(ByteBuf stream) throws IOException
 	{
 		tanks.writeToStream(stream);
+		return false;
 	}
 
 	@Override

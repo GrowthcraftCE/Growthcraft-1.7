@@ -318,7 +318,7 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public void writeToStream_ButterChurn(ByteBuf stream) throws IOException
+	public boolean writeToStream_ButterChurn(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(shaftState);
 		stream.writeInt(churns);

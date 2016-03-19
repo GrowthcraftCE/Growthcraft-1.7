@@ -663,7 +663,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public void writeToStream_CheeseVat(ByteBuf stream) throws IOException
+	public boolean writeToStream_CheeseVat(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(progressMax);
 		stream.writeFloat(progress);
@@ -676,5 +676,6 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		{
 			ex.printStackTrace();
 		}
+		return false;
 	}
 }

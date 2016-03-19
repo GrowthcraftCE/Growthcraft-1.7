@@ -116,21 +116,23 @@ public class DeviceProgressive extends DeviceBase
 	 * @param buf - buffer to read from
 	 */
 	@Override
-	public void readFromStream(ByteBuf buf)
+	public boolean readFromStream(ByteBuf buf)
 	{
 		super.readFromStream(buf);
 		this.time = buf.readInt();
 		//this.timeMax = buf.readInt();
+		return false;
 	}
 
 	/**
 	 * @param buf - buffer to write to
 	 */
 	@Override
-	public void writeToStream(ByteBuf buf)
+	public boolean writeToStream(ByteBuf buf)
 	{
 		super.writeToStream(buf);
 		buf.writeInt(time);
 		//buf.writeInt(timeMax);
+		return false;
 	}
 }

@@ -306,8 +306,9 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public void writeToStream_CheesePress(ByteBuf stream) throws IOException
+	public boolean writeToStream_CheesePress(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(screwState);
+		return false;
 	}
 }

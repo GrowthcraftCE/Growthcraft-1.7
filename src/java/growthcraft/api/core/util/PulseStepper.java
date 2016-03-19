@@ -164,20 +164,22 @@ public class PulseStepper implements INBTSerializableContext, IStreamable
 	}
 
 	@Override
-	public void readFromStream(ByteBuf stream)
+	public boolean readFromStream(ByteBuf stream)
 	{
 		this.maxLoops = stream.readInt();
 		this.loops = stream.readInt();
 		this.maxSteps = stream.readInt();
 		this.steps = stream.readInt();
+		return false;
 	}
 
 	@Override
-	public void writeToStream(ByteBuf stream)
+	public boolean writeToStream(ByteBuf stream)
 	{
 		stream.writeInt(maxLoops);
 		stream.writeInt(loops);
 		stream.writeInt(maxSteps);
 		stream.writeInt(steps);
+		return false;
 	}
 }

@@ -194,20 +194,22 @@ public class FluidTanks implements IFluidTanks, INBTSerializableContext, IStream
 	}
 
 	@Override
-	public void readFromStream(ByteBuf stream)
+	public boolean readFromStream(ByteBuf stream)
 	{
 		for (int i = 0; i < tanks.length; i++)
 		{
 			StreamUtils.readFluidTank(stream, tanks[i]);
 		}
+		return false;
 	}
 
 	@Override
-	public void writeToStream(ByteBuf stream)
+	public boolean writeToStream(ByteBuf stream)
 	{
 		for (int i = 0; i < tanks.length; i++)
 		{
 			StreamUtils.writeFluidTank(stream, tanks[i]);
 		}
+		return false;
 	}
 }
