@@ -1,5 +1,7 @@
 package growthcraft.bees;
 
+import java.util.List;
+
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.user.UserBeesConfig;
 import growthcraft.api.bees.user.UserFlowerEntry;
@@ -64,8 +66,12 @@ public class GrowthCraftBees
 
 	public static BlockTypeDefinition<BlockBeeBox> beeBox;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxBamboo;
+	public static BlockTypeDefinition<BlockBeeBox> beeBoxBiomesOPlenty;
+	public static BlockTypeDefinition<BlockBeeBox> beeBoxBotania;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxNether;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxThaumcraft;
+	public static List<BlockTypeDefinition<BlockBeeBox>> beeBoxesForestry;
+	public static List<BlockTypeDefinition<BlockBeeBox>> beeBoxesForestryFireproof;
 	public static BlockDefinition beeHive;
 	public static GrcBeesItems items = new GrcBeesItems();
 	public static GrcBeesFluids fluids = new GrcBeesFluids();
@@ -118,6 +124,8 @@ public class GrowthCraftBees
 		if (config.enableGrcBambooIntegration) modules.add(new growthcraft.bees.integration.GrcBambooModule());
 		if (config.enableGrcNetherIntegration) modules.add(new growthcraft.bees.integration.GrcNetherModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.bees.integration.Waila());
+		if (config.enableBoPIntegration) modules.add(new growthcraft.bees.integration.BoPModule());
+		if (config.enableBotaniaIntegration) modules.add(new growthcraft.bees.integration.BotaniaModule());
 		if (config.enableForestryIntegration) modules.add(new growthcraft.bees.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bees.integration.ThaumcraftModule());
 

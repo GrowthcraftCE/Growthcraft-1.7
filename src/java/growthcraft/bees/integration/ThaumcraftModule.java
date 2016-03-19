@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
  */
 package growthcraft.bees.integration;
 
+import growthcraft.api.core.item.ItemKey;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeBoxThaumcraft;
 import growthcraft.bees.common.block.EnumBeeBoxThaumcraft;
@@ -94,19 +95,6 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeHive.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.BEAST, 1).add(Aspect.ORDER, 1).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBox.asStack(), new int[]{0,1,2,3,4,5}, new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
 
-		if (GrowthCraftBees.beeBoxNether != null)
-		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxNether.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.ENTROPY, 1).add(Aspect.VOID, 1));
-		}
-		if (GrowthCraftBees.beeBoxBamboo != null)
-		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBamboo.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
-		}
-		if (GrowthCraftBees.beeBoxThaumcraft != null)
-		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxThaumcraft.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
-		}
-
 		{
 			final AspectList[] common = new AspectList[]
 			{
@@ -151,6 +139,47 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 				if (fluidBlock != null)
 				{
 					ThaumcraftApi.registerObjectTag(fluidBlock, new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 2).add(Aspect.GREED, 1).add(Aspect.HUNGER, 1));
+				}
+			}
+		}
+
+		if (GrowthCraftBees.beeBoxNether != null)
+		{
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxNether.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.ENTROPY, 1).add(Aspect.VOID, 1));
+		}
+		if (GrowthCraftBees.beeBoxBamboo != null)
+		{
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBamboo.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+		}
+		if (GrowthCraftBees.beeBoxThaumcraft != null)
+		{
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxThaumcraft.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
+		}
+		if (GrowthCraftBees.beeBoxBiomesOPlenty != null)
+		{
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBiomesOPlenty.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+		}
+		if (GrowthCraftBees.beeBoxBotania != null)
+		{
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBotania.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
+		}
+		if (GrowthCraftBees.beeBoxesForestry != null)
+		{
+			for (BlockTypeDefinition<BlockBeeBox> bdef : GrowthCraftBees.beeBoxesForestry)
+			{
+				if (bdef != null)
+				{
+					ThaumcraftApi.registerObjectTag(bdef.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+				}
+			}
+		}
+		if (GrowthCraftBees.beeBoxesForestryFireproof != null)
+		{
+			for (BlockTypeDefinition<BlockBeeBox> bdef : GrowthCraftBees.beeBoxesForestryFireproof)
+			{
+				if (bdef != null)
+				{
+					ThaumcraftApi.registerObjectTag(bdef.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
 				}
 			}
 		}

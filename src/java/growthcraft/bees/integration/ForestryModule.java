@@ -23,10 +23,16 @@
  */
 package growthcraft.bees.integration;
 
+import java.util.ArrayList;
 import com.google.common.collect.ImmutableMap;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.bees.common.block.BlockBeeBox;
+import growthcraft.bees.common.block.BlockBeeBoxForestry;
+import growthcraft.bees.common.block.EnumBeeBoxForestry;
+import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.GrowthCraftBees;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.integration.forestry.ForestryItems;
 import growthcraft.core.integration.ForestryModuleBase;
 
@@ -48,6 +54,62 @@ public class ForestryModule extends ForestryModuleBase
 		if (item != null)
 		{
 			GrowthCraftBees.getUserBeesConfig().addDefault(item).setComment("From Forestry");
+		}
+	}
+
+	@Override
+	protected void doPreInit()
+	{
+		final int beeboxCount = EnumBeeBoxForestry.VALUES.length;
+		GrowthCraftBees.beeBoxesForestry = new ArrayList<BlockTypeDefinition<BlockBeeBox>>();
+		GrowthCraftBees.beeBoxesForestryFireproof = new ArrayList<BlockTypeDefinition<BlockBeeBox>>();
+
+		int i = 0;
+		int offset = 0;
+		for (EnumBeeBoxForestry[] row : EnumBeeBoxForestry.ROWS)
+		{
+			final BlockTypeDefinition<BlockBeeBox> beeBox = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxForestry(row, offset, i, false));
+			final BlockTypeDefinition<BlockBeeBox> beeBoxFP = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxForestry(row, offset, i, true));
+			beeBox.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
+			beeBoxFP.getBlock().setHarvestLevel("axe", 0);
+			GrowthCraftBees.beeBoxesForestry.add(beeBox);
+			GrowthCraftBees.beeBoxesForestryFireproof.add(beeBoxFP);
+			beeBox.register(String.format("grc.BeeBox.Forestry.%d.%s", i, "Normal"), ItemBlockBeeBox.class);
+			beeBoxFP.register(String.format("grc.BeeBox.Forestry.%d.%s", i, "Fireproof"), ItemBlockBeeBox.class);
+			i++;
+			offset += row.length;
+		}
+	}
+
+	@Override
+	protected void doLateRegister()
+	{
+		for (EnumBeeBoxForestry en : EnumBeeBoxForestry.VALUES)
+		{
+			if (en == null) continue;
+
+			{
+				final BlockTypeDefinition<BlockBeeBox> beeBox = GrowthCraftBees.beeBoxesForestry.get(en.row);
+				if (beeBox != null)
+				{
+					final ItemStack planks = en.getForestryPlanksStack();
+					if (planks != null)
+					{
+						GameRegistry.addShapedRecipe(beeBox.asStack(1, en.col), " A ", "A A", "AAA", 'A', planks);
+					}
+				}
+			}
+			{
+				final BlockTypeDefinition<BlockBeeBox> beeBoxFP = GrowthCraftBees.beeBoxesForestryFireproof.get(en.row);
+				if (beeBoxFP != null)
+				{
+					final ItemStack planks = en.getForestryFireproofPlanksStack();
+					if (planks != null)
+					{
+						GameRegistry.addShapedRecipe(beeBoxFP.asStack(1, en.col), " A ", "A A", "AAA", 'A', planks);
+					}
+				}
+			}
 		}
 	}
 
