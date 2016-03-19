@@ -167,9 +167,19 @@ public class BeesRegistry implements IBeesRegistry
 	public boolean isItemBee(@Nullable ItemStack itemstack)
 	{
 		if (itemstack == null) return false;
-		return beesList.contains(new ItemKey(itemstack)) ||
-			beesList.contains(ItemKey.newWoNBT(itemstack)) ||
-			beesList.contains(new ItemKey(itemstack.getItem(), ItemKey.WILDCARD_VALUE));
+		final Item item = itemstack.getItem();
+		final int meta = itemstack.getItemDamage();
+		for (ItemKey key : beesList)
+		{
+			if (item == key.item)
+			{
+				if (key.meta == ItemKey.WILDCARD_VALUE || key.meta == meta)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public IFlowerBlockEntry getFlowerBlockEntry(@Nonnull BlockKey key)

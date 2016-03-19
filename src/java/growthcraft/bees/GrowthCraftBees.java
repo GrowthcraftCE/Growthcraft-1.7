@@ -210,8 +210,6 @@ public class GrowthCraftBees
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		userBeesConfig.loadUserConfig();
-		userFlowersConfig.loadUserConfig();
 		CommonProxy.instance.initRenders();
 		CommonProxy.instance.initSounds();
 
@@ -230,6 +228,8 @@ public class GrowthCraftBees
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event)
 	{
+		userBeesConfig.loadUserConfig();
+		userFlowersConfig.loadUserConfig();
 		postRegisterRecipes();
 
 		modules.postInit();

@@ -82,6 +82,14 @@ public class ForestryModule extends ForestryModuleBase
 	}
 
 	@Override
+	protected void doInit()
+	{
+		maybeAddBee(GameRegistry.findItem(modID, "beeQueenGE"));
+		maybeAddBee(GameRegistry.findItem(modID, "beeDroneGE"));
+		maybeAddBee(GameRegistry.findItem(modID, "beePrincessGE"));
+	}
+
+	@Override
 	protected void doLateRegister()
 	{
 		for (EnumBeeBoxForestry en : EnumBeeBoxForestry.VALUES)
@@ -117,10 +125,6 @@ public class ForestryModule extends ForestryModuleBase
 	@Optional.Method(modid="Forestry")
 	protected void integrate()
 	{
-		maybeAddBee(GameRegistry.findItem(modID, "beeQueenGE"));
-		maybeAddBee(GameRegistry.findItem(modID, "beeDroneGE"));
-		maybeAddBee(GameRegistry.findItem(modID, "beePrincessGE"));
-
 		CellarRegistry.instance().booze().addBoozeAlternative("short.mead", "grc.honeymead0");
 
 		final ItemStack emptyComb = GrowthCraftBees.items.honeyCombEmpty.asStack();
