@@ -165,6 +165,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 	public boolean writeToStream_BrewKettle(ByteBuf stream) throws IOException
 	{
 		brewKettle.writeToStream(stream);
+		return false;
 	}
 
 	/************
