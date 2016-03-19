@@ -56,7 +56,6 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 
 	// the following variables are responsible for step tracking
 	/// This pulse stepper is used to control the 'drip' animation
-	@SideOnly(Side.CLIENT)
 	private PulseStepper animPulsar = new PulseStepper(10, 4);
 
 	/// The server will increment this value whenever it does a drip step
