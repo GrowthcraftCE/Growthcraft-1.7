@@ -24,13 +24,16 @@
 package growthcraft.bees.client.eventhandler;
 
 import growthcraft.bees.GrowthCraftBees;
+import growthcraft.core.client.util.InterpolatedIcon;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.integration.botania.EnumBotaniaWoodType;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.client.event.TextureStitchEvent;
 
 public class GrcBeesHandleTextureStitch
 {
@@ -40,6 +43,28 @@ public class GrcBeesHandleTextureStitch
 	@SideOnly(Side.CLIENT)
 	public IIcon iconFluidHoneyFlow;
 
+	@SideOnly(Side.CLIENT)
+	private void loadShimmerWoodInterpolatedIcons(TextureStitchEvent.Pre event)
+	{
+		if (GrowthCraftBees.beeBoxBotania != null)
+		{
+			final int offset = EnumBotaniaWoodType.SHIMMER_WOOD.meta;
+			final String[] sides = { "bottom", "top", "side", "side_honey" };
+			final IIcon[] icons = GrowthCraftBees.beeBoxBotania.getBlock().getIcons();
+			int i = 0;
+			for (String side : sides)
+			{
+				final String name = String.format("grcbees:beebox/botania/shimmer_wood/%s", side);
+				final TextureAtlasSprite icon = new InterpolatedIcon(name);
+				if (event.map.setTextureEntry(name, icon))
+				{
+					icons[offset * 4 + i] = icon;
+				}
+				i++;
+			}
+		}
+	}
+
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onTextureStitchPre(TextureStitchEvent.Pre event)
@@ -48,6 +73,7 @@ public class GrcBeesHandleTextureStitch
 		{
 			this.iconFluidHoneyStill = event.map.registerIcon("grcbees:fluids/honey_still");
 			this.iconFluidHoneyFlow = event.map.registerIcon("grcbees:fluids/honey_flow");
+			loadShimmerWoodInterpolatedIcons(event);
 		}
 	}
 

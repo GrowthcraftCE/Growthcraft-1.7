@@ -265,6 +265,12 @@ public class BlockBeeBox extends GrcBlockContainer
 		return icons[offset + 2];
 	}
 
+	@SideOnly(Side.CLIENT)
+	public IIcon[] getIcons()
+	{
+		return icons;
+	}
+
 	/************
 	 * RENDERS
 	 ************/
