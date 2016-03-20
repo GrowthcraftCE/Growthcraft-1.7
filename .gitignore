@@ -31,7 +31,6 @@ version.properties
 /.settings/
 /eclipse/
 /debug/
-*.lock
 /.metadata/
 /config/
 /logs/
