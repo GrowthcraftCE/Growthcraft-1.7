@@ -25,7 +25,7 @@ package growthcraft.grains;
 
 import growthcraft.core.ConfigBase;
 
-public class GrcMilkConfig extends ConfigBase
+public class GrcGrainsConfig extends ConfigBase
 {
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
 	public boolean enableWailaIntegration = true;
