@@ -54,6 +54,9 @@ public class StreamUtils
 	}
 
 	/**
+	 * Writes an ASCII string to the stream, the first value will be an integer for the length of the
+	 * string, followed by bytes
+	 *
 	 * @param stream - stream to write to
 	 * @param str - string to write
 	 */
