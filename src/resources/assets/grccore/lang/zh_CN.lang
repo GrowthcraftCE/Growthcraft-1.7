@@ -92,3 +92,6 @@ grc.effect.weighted_random_list.format=grc.effect.weighted_random_list.format
 
 # GUI
 gui.grc.progress.format=gui.grc.progress.format
+
+# Inventory
+grc.inventory.internal=grc.inventory.internal

@@ -92,3 +92,6 @@ grc.effect.weighted_random_list.format=%d%% Chance of
 
 # GUI
 gui.grc.progress.format=%s : %d / %d
+
+# Inventory
+grc.inventory.internal=Inventory
