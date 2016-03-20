@@ -39,8 +39,8 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 		setBlockTextureName("grcbamboo:shoot");
 		final float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-		setCreativeTab(null);
 		setBlockName("grc.bambooShoot");
+		setCreativeTab(null);
 	}
 
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
@@ -72,14 +72,14 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block par5)
 	{
 		super.onNeighborBlockChange(world, x, y, z, par5);
-		this.checkShootChange(world, x, y, z);
+		checkShootChange(world, x, y, z);
 	}
 
 	protected final void checkShootChange(World world, int x, int y, int z)
 	{
-		if (!this.canBlockStay(world, x, y, z))
+		if (!canBlockStay(world, x, y, z))
 		{
-			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+			dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 			world.setBlockToAir(x, y, z);
 		}
 	}
@@ -108,7 +108,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftBamboo.bambooShootFood.getItem();
+		return GrowthCraftBamboo.items.bambooShootFood.getItem();
 	}
 
 	public void growBamboo(World world, int x, int y, int z, Random rand)
@@ -170,18 +170,12 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 		return false;
 	}
 
-	/************
-	 * DROPS
-	 ************/
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
-		return GrowthCraftBamboo.bambooShootFood.getItem();
+		return GrowthCraftBamboo.items.bambooShootFood.getItem();
 	}
 
-	/************
-	 * RENDERS
-	 ************/
 	@Override
 	public int getRenderType()
 	{
@@ -200,9 +194,6 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 		return false;
 	}
 
-	/************
-	 * BOXES
-	 ************/
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{

@@ -37,11 +37,11 @@ public class BlockBambooStalk extends Block
 	public BlockBambooStalk()
 	{
 		super(Material.wood);
-		this.setStepSound(soundTypeWood);
-		this.setHardness(2.0F);
-		this.setTickRandomly(true);
-		this.setCreativeTab(null);
-		this.setBlockName("grc.bambooStalk");
+		setStepSound(soundTypeWood);
+		setHardness(2.0F);
+		setTickRandomly(true);
+		setBlockName("grc.bambooStalk");
+		setCreativeTab(null);
 	}
 
 	@Override
@@ -177,14 +177,11 @@ public class BlockBambooStalk extends Block
 		}
 	}
 
-	/************
-	 * STUFF
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftBamboo.bamboo.getItem();
+		return GrowthCraftBamboo.items.bamboo.getItem();
 	}
 
 	@Override
@@ -234,13 +231,10 @@ public class BlockBambooStalk extends Block
 		return world.getBlock(x, y, z) instanceof BlockDoor;
 	}
 
-	/************
-	 * DROPS
-	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return GrowthCraftBamboo.bamboo.getItem();
+		return GrowthCraftBamboo.items.bamboo.getItem();
 	}
 
 	@Override
@@ -249,9 +243,6 @@ public class BlockBambooStalk extends Block
 		return 1;
 	}
 
-	/************
-	 * TEXTURES
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -272,9 +263,6 @@ public class BlockBambooStalk extends Block
 		return side == 1 ? tex[0] : ( side == 0 ? tex[0] : (meta == 0 ? tex[1] : tex[2]));
 	}
 
-	/************
-	 * RENDERS
-	 ************/
 	@Override
 	public int getRenderType()
 	{
@@ -345,9 +333,6 @@ public class BlockBambooStalk extends Block
 		}
 	}
 
-	/************
-	 * BOXES
-	 ************/
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{

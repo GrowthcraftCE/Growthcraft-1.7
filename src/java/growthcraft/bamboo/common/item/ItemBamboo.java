@@ -1,7 +1,6 @@
 package growthcraft.bamboo.common.item;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,8 +18,8 @@ public class ItemBamboo extends Item
 	public ItemBamboo()
 	{
 		super();
-		this.setUnlocalizedName("grc.bamboo");
-		this.setCreativeTab(GrowthCraftCore.creativeTab);
+		setUnlocalizedName("grc.bamboo");
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
 	/************

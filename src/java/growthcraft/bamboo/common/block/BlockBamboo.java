@@ -1,6 +1,6 @@
 package growthcraft.bamboo.common.block;
 
-import growthcraft.core.GrowthCraftCore;
+import growthcraft.bamboo.GrowthCraftBamboo;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -13,11 +13,11 @@ public class BlockBamboo extends Block
 	public BlockBamboo()
 	{
 		super(Material.wood);
-		this.setStepSound(soundTypeWood);
-		this.setResistance(5.0F);
-		this.setHardness(2.0F);
-		this.setCreativeTab(GrowthCraftCore.creativeTab);
-		this.setBlockName("grc.bambooBlock");
+		setStepSound(soundTypeWood);
+		setResistance(5.0F);
+		setHardness(2.0F);
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
+		setBlockName("grc.bambooBlock");
 	}
 
 	/************

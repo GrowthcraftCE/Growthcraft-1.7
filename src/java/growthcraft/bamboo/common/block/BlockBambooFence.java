@@ -2,7 +2,6 @@ package growthcraft.bamboo.common.block;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.client.renderer.RenderBambooFence;
-import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -24,11 +23,11 @@ public class BlockBambooFence extends BlockFence
 	public BlockBambooFence()
 	{
 		super(null, Material.wood);
-		useNeighborBrightness = true;
+		this.useNeighborBrightness = true;
 		setStepSound(soundTypeWood);
 		setResistance(5.0F);
 		setHardness(2.0F);
-		setCreativeTab(GrowthCraftCore.creativeTab);
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 		setBlockName("grc.bambooFence");
 	}
 

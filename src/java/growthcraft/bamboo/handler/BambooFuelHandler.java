@@ -14,20 +14,20 @@ public class BambooFuelHandler implements IFuelHandler
 		if (fuel != null)
 		{
 			final Item item = fuel.getItem();
-			if (GrowthCraftBamboo.bambooCoal.equals(item))
+			if (GrowthCraftBamboo.items.bambooCoal.equals(item))
 			{
 				return 800;
 			}
-			else if (GrowthCraftBamboo.bambooShootFood.equals(item))
+			else if (GrowthCraftBamboo.items.bambooShootFood.equals(item))
 			{
 				return 100;
 			}
-			else if (GrowthCraftBamboo.blocks.bambooShoot.getItem() == item)
+			else if (GrowthCraftBamboo.blocks.bambooShoot.equals(item))
 			{
 				return 100;
 			}
 			// Alatyami added per GitHub Issue #55
-			else if (GrowthCraftBamboo.blocks.bambooSingleSlab.getItem() == item)
+			else if (GrowthCraftBamboo.blocks.bambooSingleSlab.equals(item))
 			{
 				return 150;
 			}

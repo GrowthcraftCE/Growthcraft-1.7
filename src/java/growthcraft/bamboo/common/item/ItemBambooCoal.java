@@ -1,6 +1,6 @@
 package growthcraft.bamboo.common.item;
 
-import growthcraft.core.GrowthCraftCore;
+import growthcraft.bamboo.GrowthCraftBamboo;
 
 import net.minecraft.item.Item;
 
@@ -11,6 +11,6 @@ public class ItemBambooCoal extends Item
 		super();
 		setUnlocalizedName("grc.bambooCoal");
 		setTextureName("grcbamboo:coal");
-		setCreativeTab(GrowthCraftCore.creativeTab);
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 }

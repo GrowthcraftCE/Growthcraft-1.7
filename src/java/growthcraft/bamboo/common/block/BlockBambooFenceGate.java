@@ -1,6 +1,5 @@
 package growthcraft.bamboo.common.block;
 
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.bamboo.GrowthCraftBamboo;
 
 import cpw.mods.fml.relauncher.Side;
@@ -14,11 +13,11 @@ public class BlockBambooFenceGate extends BlockFenceGate
 	public BlockBambooFenceGate()
 	{
 		super();
-		this.setStepSound(soundTypeWood);
-		this.setHardness(2.0F);
-		this.setResistance(5.0F);
-		this.setBlockName("grc.bambooFenceGate");
-		this.setCreativeTab(GrowthCraftCore.creativeTab);
+		setStepSound(soundTypeWood);
+		setHardness(2.0F);
+		setResistance(5.0F);
+		setBlockName("grc.bambooFenceGate");
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
 	/************
