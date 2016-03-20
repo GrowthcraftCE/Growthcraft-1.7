@@ -191,19 +191,7 @@ public class ThaumcraftBoozeHelper implements ILoggable
 		if (item instanceof IFluidItem)
 		{
 			final IFluidItem fluidItem = (IFluidItem)item;
-			if (item.getHasSubtypes())
-			{
-				final List<ItemStack> subtypes = new ArrayList<ItemStack>();
-				item.getSubItems(item, null, subtypes);
-				for (ItemStack subStack : subtypes)
-				{
-					ThaumcraftApi.registerObjectTag(subStack, setAspectsForFluidBottle(fluidItem.getFluid(subStack), base.copy()));
-				}
-			}
-			else
-			{
-				ThaumcraftApi.registerObjectTag(stack, setAspectsForFluidBottle(fluidItem.getFluid(stack), base.copy()));
-			}
+			ThaumcraftApi.registerObjectTag(stack, setAspectsForFluidBottle(fluidItem.getFluid(stack), base.copy()));
 		}
 	}
 
