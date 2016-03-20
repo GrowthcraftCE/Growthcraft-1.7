@@ -31,6 +31,13 @@ import net.minecraft.item.ItemStack;
 public interface IMultiItemStacks
 {
 	/**
+	 * Returns the expected stack size
+	 *
+	 * @return size
+	 */
+	int getStackSize();
+
+	/**
 	 * Returns a list of item stacks
 	 *
 	 * @return the list of item stacks

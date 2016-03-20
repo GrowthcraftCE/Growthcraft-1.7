@@ -49,6 +49,11 @@ public class OreItemStacks implements IMultiItemStacks
 		this(name, 1);
 	}
 
+	public int getStackSize()
+	{
+		return stackSize;
+	}
+
 	public String getName()
 	{
 		return oreName;

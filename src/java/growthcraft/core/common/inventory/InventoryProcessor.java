@@ -27,6 +27,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.api.core.definition.IMultiItemStacks;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -195,6 +197,33 @@ public class InventoryProcessor
 	}
 
 	/**
+	 * Checks the given inventory and slot for an expected ItemStack
+	 *
+	 * @param inv - inventory to check
+	 * @param expected - itemstack expected
+	 *   If the stack is null, then the slot is expected to be null as well
+	 *   Otherwise it is required
+	 * @param src - slot to check
+	 */
+	public boolean checkSlot(@Nonnull IInventory inv, @Nullable IMultiItemStacks expected, int src)
+	{
+		final ItemStack actual = inv.getStackInSlot(src);
+
+		if (expected == null)
+		{
+			// if the item is not needed, and is not available
+			if (actual != null) return false;
+		}
+		else
+		{
+			if (actual == null) return false;
+			if (!expected.containsItemStack(actual)) return false;
+			if (actual.stackSize < expected.getStackSize()) return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Checks a slice of slots for the given items
 	 *
 	 * @param inv - inventory to check
@@ -203,6 +232,25 @@ public class InventoryProcessor
 	 * @return true, all the items in the filter are present in the inv, false otherwise
 	 */
 	public boolean checkSlots(@Nonnull IInventory inv, @Nonnull ItemStack[] filter, int[] from)
+	{
+		assert filter.length == from.length;
+
+		for (int i = 0; i < filter.length; ++i)
+		{
+			if (!checkSlot(inv, filter[i], from[i])) return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Checks a slice of slots for the given items
+	 *
+	 * @param inv - inventory to check
+	 * @param filter - itemstacks to look for
+	 * @param from - a slice of slots to look in
+	 * @return true, all the items in the filter are present in the inv, false otherwise
+	 */
+	public boolean checkSlots(@Nonnull IInventory inv, @Nonnull IMultiItemStacks[] filter, int[] from)
 	{
 		assert filter.length == from.length;
 
@@ -248,6 +296,28 @@ public class InventoryProcessor
 			if (filter[i] != null)
 			{
 				final ItemStack stack = inv.decrStackSize(from[i], filter[i].stackSize);
+				inv.setInventorySlotContents(to[i], stack);
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * @return true if moved, false otherwise
+	 */
+	public boolean moveToSlots(@Nonnull IInventory inv, @Nonnull IMultiItemStacks[] filter, int[] from, int[] to)
+	{
+		assert filter.length == from.length;
+		assert filter.length == to.length;
+
+		// first ensure that each stack in the input has the item and enough of them
+		if (!checkSlots(inv, filter, from)) return false;
+
+		for (int i = 0; i < filter.length; ++i)
+		{
+			if (filter[i] != null)
+			{
+				final ItemStack stack = inv.decrStackSize(from[i], filter[i].getStackSize());
 				inv.setInventorySlotContents(to[i], stack);
 			}
 		}

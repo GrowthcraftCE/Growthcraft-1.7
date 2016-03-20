@@ -42,6 +42,16 @@ public class MultiItemStacks implements IMultiItemStacks
 	}
 
 	@Override
+	public int getStackSize()
+	{
+		for (ItemStack stack : itemStacks)
+		{
+			return stack.stackSize;
+		}
+		return 0;
+	}
+
+	@Override
 	public List<ItemStack> getItemStacks()
 	{
 		return itemStacks;
