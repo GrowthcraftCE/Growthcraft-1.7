@@ -82,10 +82,13 @@ public class OreItemStacks implements IMultiItemStacks
 	@Override
 	public boolean containsItemStack(@Nullable ItemStack stack)
 	{
-		if (!ItemTest.isValid(stack)) return false;
-		for (ItemStack content : getRawItemStacks())
+		if (ItemTest.isValid(stack))
 		{
-			if (content.isItemEqual(stack)) return true;
+			final int oreId = OreDictionary.getOreID(oreName);
+			for (int i : OreDictionary.getOreIDs(stack))
+			{
+				if (i == oreId) return true;
+			}
 		}
 		return false;
 	}
