@@ -82,4 +82,10 @@ public class GrcFluid extends Fluid implements IDescribable
 			list.add(result);
 		}
 	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("GrcFluid(name=%s, color=%x)", getName(), getColor());
+	}
 }
