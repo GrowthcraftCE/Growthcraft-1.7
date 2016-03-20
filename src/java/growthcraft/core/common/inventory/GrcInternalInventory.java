@@ -23,9 +23,10 @@
  */
 package growthcraft.core.common.inventory;
 
-import growthcraft.api.core.nbt.NBTHelper;
-import growthcraft.core.util.ItemUtils;
 import growthcraft.api.core.nbt.INBTSerializableContext;
+import growthcraft.api.core.nbt.NBTHelper;
+import growthcraft.api.core.nbt.NBTType;
+import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -97,7 +98,7 @@ public class GrcInternalInventory implements IInventory, INBTSerializableContext
 	@Override
 	public void readFromNBT(NBTTagCompound data, String name)
 	{
-		final NBTTagList list = data.getTagList(name, NBTHelper.NBTType.COMPOUND.id);
+		final NBTTagList list = data.getTagList(name, NBTType.COMPOUND.id);
 		if (list != null)
 		{
 			readFromNBT(list);
