@@ -158,7 +158,7 @@ public class GrowthCraftCellar
 		//====================
 		// INIT
 		//====================
-		tab = new CreativeTabsCellar("tabGrCCellar");
+		tab = new CreativeTabsCellar("creative_tab_grccellar");
 
 		yeast = new ItemDefinition(new ItemYeast());
 		waterBag = new ItemDefinition(new ItemWaterBag());
