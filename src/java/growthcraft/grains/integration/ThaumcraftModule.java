@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.milk.integration;
+package growthcraft.grains.integration;
 
 //import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
 //import growthcraft.core.integration.thaumcraft.AspectsHelper;
 import growthcraft.core.integration.ThaumcraftModuleBase;
-import growthcraft.milk.GrowthCraftGrains;
+import growthcraft.grains.GrowthCraftGrains;
 
 //import thaumcraft.api.ThaumcraftApi;
 //import thaumcraft.api.aspects.AspectList;

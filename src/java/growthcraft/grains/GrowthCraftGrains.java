@@ -26,7 +26,7 @@ package growthcraft.grains;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
-import growthcraft.grains.creativetabs.GrcGrainsCreativeTabs;
+import growthcraft.grains.creativetab.GrcGrainsCreativeTabs;
 import growthcraft.grains.init.GrcGrainsBlocks;
 import growthcraft.grains.init.GrcGrainsFluids;
 import growthcraft.grains.init.GrcGrainsItems;
@@ -80,9 +80,8 @@ public class GrowthCraftGrains
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		GrcMilkEffects.init();
 		config.load(event.getModConfigurationDirectory(), "growthcraft/milk.conf");
-		creativeTab = new GrcGrainsCreativeTabs();
+		creativeTab = new GrcGrainsCreativeTabs("creative_tab_grcgrains");
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
