@@ -8,7 +8,7 @@ end
 # This utility script will cross-check all lang files against the en_US one to
 # check for missing entries
 base_lang_name = 'en_US'
-Dir.chdir File.expand_path('../', __dir__) do
+Dir.chdir File.expand_path('../', File.dirname(__FILE__)) do
   root_path = Dir.getwd
   Dir.chdir 'src/resources/assets' do
     modules = ARGV.presence || Dir.glob("./*").select { |d| File.directory?(d) }.map { |d| File.basename(d) }
@@ -40,6 +40,9 @@ Dir.chdir File.expand_path('../', __dir__) do
                   if lang.table.key?(name)
                     if lang.table[name].blank?
                       STDERR.puts "\tERROR: Mapping for `#{name}` is empty!".light_red
+                      everything_ok = false
+                    elsif lang.table[name] == name
+                      STDERR.puts "\tERROR: Mapping for `#{name}` is un-translated!".light_red
                       everything_ok = false
                     end
                   else

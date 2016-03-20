@@ -64,7 +64,7 @@ end
 # check for missing entries
 base_lang_name = 'en_US'
 
-Dir.chdir File.expand_path('../src/resources/assets', __dir__) do
+Dir.chdir File.expand_path('../src/resources/assets', File.dirname(__FILE__)) do
   puts "CD #{Dir.getwd}"
   modules = Dir.glob("*").select { |d| File.directory?(d) }.map { |d| File.basename(d) }.sort
   languages = Dir.glob("**/*.lang").map { |fn| File.basename(fn, ".lang").strip }.uniq.sort
