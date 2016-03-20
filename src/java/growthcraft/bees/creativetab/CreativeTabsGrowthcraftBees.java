@@ -9,9 +9,9 @@ import net.minecraft.item.Item;
 
 public class CreativeTabsGrowthcraftBees extends CreativeTabs
 {
-	public CreativeTabsGrowthcraftBees()
+	public CreativeTabsGrowthcraftBees(String name)
 	{
-		super("tabGrowthCraftBees");
+		super(name);
 	}
 
 	@Override

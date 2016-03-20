@@ -117,7 +117,7 @@ public class GrowthCraftCore
 			modules.setLogger(logger);
 		}
 
-		creativeTab = new CreativeTabsGrowthcraft("tabGrowthCraft");
+		creativeTab = new CreativeTabsGrowthcraft("creative_tab_grccore");
 
 		EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
 

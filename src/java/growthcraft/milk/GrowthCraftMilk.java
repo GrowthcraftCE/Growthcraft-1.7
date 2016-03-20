@@ -119,7 +119,7 @@ public class GrowthCraftMilk
 
 		userApis.setConfigDirectory(event.getModConfigurationDirectory());
 
-		GrowthCraftMilk.creativeTab = new GrcMilkCreativeTabs("grcmilk.CreativeTab");
+		GrowthCraftMilk.creativeTab = new GrcMilkCreativeTabs("creative_tab_grcmilk");
 
 		modules.preInit();
 		MinecraftForge.EVENT_BUS.register(new GrcMilkHandleTextureStitch());

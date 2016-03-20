@@ -135,7 +135,7 @@ public class GrowthCraftBees
 			modules.setLogger(logger);
 		}
 
-		tab = new CreativeTabsGrowthcraftBees();
+		tab = new CreativeTabsGrowthcraftBees("creative_tab_grcbees");
 
 		MinecraftForge.EVENT_BUS.register(new GrcBeesHandleTextureStitch());
 

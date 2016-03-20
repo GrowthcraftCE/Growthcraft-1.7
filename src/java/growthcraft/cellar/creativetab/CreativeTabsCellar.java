@@ -9,9 +9,9 @@ import net.minecraft.item.Item;
 
 public class CreativeTabsCellar extends CreativeTabs
 {
-	public CreativeTabsCellar(String index)
+	public CreativeTabsCellar(String name)
 	{
-		super(index);
+		super(name);
 	}
 
 	@Override
