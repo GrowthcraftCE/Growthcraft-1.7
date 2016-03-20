@@ -79,7 +79,7 @@ public class GrowthCraftBamboo
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bamboo.integration.ThaumcraftModule());
 		if (config.debugEnabled) modules.setLogger(logger);
 
-		creativeTab = new CreativeTabsGrowthcraftBamboo("creative_tab_grccellar");
+		creativeTab = new CreativeTabsGrowthcraftBamboo("creative_tab_grcbamboo");
 		modules.preInit();
 
 		if (config.generateBambooBiome)
