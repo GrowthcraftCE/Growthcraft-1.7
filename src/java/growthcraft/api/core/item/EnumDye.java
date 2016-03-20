@@ -24,6 +24,7 @@
 package growthcraft.api.core.item;
 
 import java.util.Locale;
+import com.google.common.base.CaseFormat;
 
 import growthcraft.api.core.definition.IItemStackFactory;
 
@@ -42,7 +43,7 @@ public enum EnumDye implements IItemStackFactory
 	BLUE,
 	PURPLE,
 	CYAN,
-	SILVER,
+	LIGHT_GRAY,
 	GRAY,
 	PINK,
 	LIME,
@@ -76,5 +77,10 @@ public enum EnumDye implements IItemStackFactory
 	public ItemStack asStack()
 	{
 		return asStack(1);
+	}
+
+	public String getOreName()
+	{
+		return String.format("dye%s", CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name()));
 	}
 }
