@@ -1,7 +1,6 @@
 package growthcraft.bamboo.common.item;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,8 +18,8 @@ public class ItemBambooDoor extends Item
 	{
 		super();
 		this.maxStackSize = 1;
-		this.setCreativeTab(GrowthCraftCore.creativeTab);
-		this.setUnlocalizedName("grc.bambooDoor");
+		setUnlocalizedName("grc.bambooDoor");
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
 	/************

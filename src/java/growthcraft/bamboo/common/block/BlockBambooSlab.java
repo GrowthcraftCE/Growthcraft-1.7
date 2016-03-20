@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,11 +22,11 @@ public class BlockBambooSlab extends BlockSlab
 	{
 		super(par2, Material.wood);
 		this.useNeighborBrightness = true;
-		this.setStepSound(soundTypeWood);
-		this.setResistance(5.0F);
-		this.setHardness(2.0F);
-		this.setCreativeTab(GrowthCraftCore.creativeTab);
-		this.setBlockName("grc.bambooSlab");
+		setStepSound(soundTypeWood);
+		setResistance(5.0F);
+		setHardness(2.0F);
+		setBlockName("grc.bambooSlab");
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
 	/************

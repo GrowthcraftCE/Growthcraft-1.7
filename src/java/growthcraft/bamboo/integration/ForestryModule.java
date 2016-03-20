@@ -43,9 +43,9 @@ public class ForestryModule extends ForestryModuleBase
 	{
 		final int saplingYield = getActiveMode().getIntegerSetting("fermenter.yield.sapling");
 
-		final ItemStack bamboo = GrowthCraftBamboo.bamboo.asStack();
+		final ItemStack bamboo = GrowthCraftBamboo.items.bamboo.asStack();
 		final ItemStack bambooShoot = GrowthCraftBamboo.blocks.bambooShoot.asStack();
-		final ItemStack bambooShootFood = GrowthCraftBamboo.bambooShootFood.asStack();
+		final ItemStack bambooShootFood = GrowthCraftBamboo.items.bambooShootFood.asStack();
 		final ItemStack bambooLeaves = GrowthCraftBamboo.blocks.bambooLeaves.asStack();
 
 		ForestryRecipeUtils.addFermenterRecipes(bamboo, saplingYield, ForestryFluids.BIOMASS.asFluidStack());

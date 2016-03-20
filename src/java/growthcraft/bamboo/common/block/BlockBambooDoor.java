@@ -25,30 +25,24 @@ public class BlockBambooDoor extends BlockDoor
 	public BlockBambooDoor()
 	{
 		super(Material.wood);
-		this.setStepSound(soundTypeWood);
-		this.setHardness(3.0F);
-		this.disableStats();
-		this.setCreativeTab(null);
-		this.setBlockName("grc.bambooDoor");
+		setStepSound(soundTypeWood);
+		setHardness(3.0F);
+		disableStats();
+		setCreativeTab(null);
+		setBlockName("grc.bambooDoor");
 	}
 
-	/************
-	 * STUFF
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, int par2, int par3, int par4)
 	{
-		return GrowthCraftBamboo.bambooDoorItem.getItem();
+		return GrowthCraftBamboo.items.bambooDoorItem.getItem();
 	}
 
-	/************
-	 * DROPS
-	 ************/
 	@Override
 	public Item getItemDropped(int meta, Random par2Random, int par3)
 	{
-		return (meta & 8) != 0 ? null : GrowthCraftBamboo.bambooDoorItem.getItem();
+		return (meta & 8) != 0 ? null : GrowthCraftBamboo.items.bambooDoorItem.getItem();
 	}
 
 	/************

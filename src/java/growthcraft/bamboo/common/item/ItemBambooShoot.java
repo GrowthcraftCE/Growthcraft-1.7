@@ -1,7 +1,6 @@
 package growthcraft.bamboo.common.item;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -25,8 +24,8 @@ public class ItemBambooShoot extends ItemFood implements IPlantable
 	{
 		super(4, 0.6F, false);
 		this.cropBlock = GrowthCraftBamboo.blocks.bambooShoot.getBlock();
-		this.setUnlocalizedName("grc.bambooShootFood");
-		this.setCreativeTab(GrowthCraftCore.creativeTab);
+		setUnlocalizedName("grc.bambooShootFood");
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
 	@Override

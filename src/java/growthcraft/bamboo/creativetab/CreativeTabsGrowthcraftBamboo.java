@@ -21,27 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.bamboo.integration;
+package growthcraft.bamboo.creativetab;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.core.integration.MFRModuleBase;
-import growthcraft.bamboo.integration.mfr.BambooFactoryHarvester;
 
-import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
-public class MFRModule extends MFRModuleBase
+public class CreativeTabsGrowthcraftBamboo extends CreativeTabs
 {
-	public MFRModule()
+	public CreativeTabsGrowthcraftBamboo(String name)
 	{
-		super(GrowthCraftBamboo.MOD_ID);
+		super(name);
 	}
 
 	@Override
-	@Optional.Method(modid=MFRModuleBase.MOD_ID)
-	protected void integrate()
+	@SideOnly(Side.CLIENT)
+	public Item getTabIconItem()
 	{
-		registerHarvestable(new BambooFactoryHarvester());
-		registerHarvestableLeaves(GrowthCraftBamboo.blocks.bambooLeaves.getBlock());
-		registerPlantableSapling(GrowthCraftBamboo.items.bambooShootFood.getItem(), GrowthCraftBamboo.blocks.bambooShoot.getBlock());
+		return GrowthCraftBamboo.items.bamboo.getItem();
 	}
 }

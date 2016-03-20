@@ -123,7 +123,8 @@ public class EntityBambooRaft extends Entity
 			this.setTimeSinceHit(10);
 			this.setDamageTaken(this.getDamageTaken() + par2 * 10.0F);
 			this.setBeenAttacked();
-			final boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getEntity()).capabilities.isCreativeMode;
+			final boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer &&
+				((EntityPlayer)par1DamageSource.getEntity()).capabilities.isCreativeMode;
 
 			if (flag || this.getDamageTaken() > 40.0F)
 			{
@@ -134,7 +135,7 @@ public class EntityBambooRaft extends Entity
 
 				if (!flag)
 				{
-					this.func_145778_a(GrowthCraftBamboo.bambooRaft.getItem(), 1, 0.0F);
+					this.func_145778_a(GrowthCraftBamboo.items.bambooRaft.getItem(), 1, 0.0F);
 				}
 
 				this.setDead();
@@ -422,7 +423,7 @@ public class EntityBambooRaft extends Entity
 
 					for (l = 0; l < 2; ++l)
 					{
-						this.func_145778_a(GrowthCraftBamboo.bamboo.getItem(), 1, 0.0F);
+						this.func_145778_a(GrowthCraftBamboo.items.bamboo.getItem(), 1, 0.0F);
 					}
 				}
 			}
@@ -557,7 +558,7 @@ public class EntityBambooRaft extends Entity
 
 					for (l = 0; l < 2; ++l)
 					{
-						this.func_145778_a(GrowthCraftBamboo.bamboo.getItem(), 1, 0.0F);
+						this.func_145778_a(GrowthCraftBamboo.items.bamboo.getItem(), 1, 0.0F);
 					}
 				}
 

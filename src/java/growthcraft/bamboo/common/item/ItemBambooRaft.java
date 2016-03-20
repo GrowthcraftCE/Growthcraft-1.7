@@ -3,7 +3,7 @@ package growthcraft.bamboo.common.item;
 import java.util.List;
 
 import growthcraft.bamboo.common.entity.EntityBambooRaft;
-import growthcraft.core.GrowthCraftCore;
+import growthcraft.bamboo.GrowthCraftBamboo;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -25,8 +25,8 @@ public class ItemBambooRaft extends ItemBoat
 	{
 		super();
 		this.maxStackSize = 1;
-		this.setUnlocalizedName("grc.bambooRaft");
-		this.setCreativeTab(GrowthCraftCore.creativeTab);
+		setUnlocalizedName("grc.bambooRaft");
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
 	/************
