@@ -26,9 +26,9 @@ package growthcraft.core.util;
 import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.nbt.NBTType;
 import growthcraft.api.core.util.ConstID;
 import growthcraft.api.core.util.ITagFormatter;
-import growthcraft.api.core.nbt.NBTHelper;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -45,8 +45,8 @@ public class TagFormatterFluidHandler implements ITagFormatter
 	public List<String> format(List<String> list, NBTTagCompound tag)
 	{
 		final int tankCount = tag.getInteger("tank_count");
-		final NBTTagList tanks = tag.getTagList("tanks", NBTHelper.NBTType.COMPOUND.id);
-		final NBTTagList tankNames = tag.hasKey("tank_names") ? tag.getTagList("tank_names", NBTHelper.NBTType.STRING.id) : null;
+		final NBTTagList tanks = tag.getTagList("tanks", NBTType.COMPOUND.id);
+		final NBTTagList tankNames = tag.hasKey("tank_names") ? tag.getTagList("tank_names", NBTType.STRING.id) : null;
 		for (int i = 0; i < tankCount; ++i)
 		{
 			final NBTTagCompound tankTag = tanks.getCompoundTagAt(i);
