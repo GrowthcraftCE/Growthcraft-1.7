@@ -33,7 +33,9 @@ import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.item.ItemFoodBottleFluid;
 import growthcraft.core.integration.forestry.ForestryFluids;
 import growthcraft.core.util.FluidFactory;
 
@@ -58,7 +60,9 @@ public class GrcBeesFluids extends GrcModuleBase
 				.setColor(0xffac01)
 				.setDensity(1420)
 				.setViscosity(73600);
-			this.honey = FluidFactory.instance().create(honeyFluid);
+			this.honey = FluidFactory.instance().create(honeyFluid, FluidFactory.FEATURE_ALL_EDIBLE);
+			honey.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(this.honey.getFluid(), 2, 0.2f, false));
+			honey.refreshItemColor();
 		}
 		this.honeyMeadBooze = new Booze[7];
 		this.honeyMeadFluids = new BlockBoozeDefinition[honeyMeadBooze.length];
