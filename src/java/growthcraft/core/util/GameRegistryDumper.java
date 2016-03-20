@@ -21,6 +21,18 @@ public class GameRegistryDumper
 {
 	private GameRegistryDumper() {}
 
+	private static void writeItemStackToFile(ItemStack stack, FileWriter writer) throws IOException
+	{
+		if (stack != null && stack.getItem() != null)
+		{
+			final Item item = stack.getItem();
+			final int damage = stack.getItemDamage();
+			final String unlocName = stack.getUnlocalizedName();
+			final String displayName = stack.getDisplayName();
+			writer.write("\t" + item + "," + damage + "," + unlocName + "," + displayName + "\n");
+		}
+	}
+
 	@SuppressWarnings("rawtypes")
 	public static void dumpBlocks()
 	{
@@ -35,21 +47,21 @@ public class GameRegistryDumper
 				{
 					writer.write("" + Block.getIdFromBlock(obj) + "," + obj.getUnlocalizedName() + "," + obj.getLocalizedName() + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
 
-					final List<ItemStack> sub = new ArrayList<ItemStack>();
-					obj.getSubBlocks(Item.getItemFromBlock(obj), obj.getCreativeTabToDisplayOn(), sub);
-					if (sub.size() > 0)
+					if (Platform.isClient())
 					{
-						for (ItemStack stack : sub)
+						final List<ItemStack> sub = new ArrayList<ItemStack>();
+						obj.getSubBlocks(Item.getItemFromBlock(obj), obj.getCreativeTabToDisplayOn(), sub);
+						if (sub.size() > 0)
 						{
-							if (stack != null && stack.getItem() != null)
+							for (ItemStack stack : sub)
 							{
-								final Item item = stack.getItem();
-								final int damage = stack.getItemDamage();
-								final String unlocName = stack.getUnlocalizedName();
-								final String displayName = stack.getDisplayName();
-								writer.write("\t" + item + "," + damage + "," + unlocName + "," + displayName + "\n");
+								writeItemStackToFile(stack, writer);
 							}
 						}
+					}
+					else
+					{
+						writeItemStackToFile(new ItemStack(obj), writer);
 					}
 				}
 			}
@@ -74,21 +86,24 @@ public class GameRegistryDumper
 				{
 					writer.write("" + Item.getIdFromItem(obj) + "," + obj.getUnlocalizedName() + "," + "?" + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
 
-					final List<ItemStack> sub = new ArrayList<ItemStack>();
-					obj.getSubItems(obj, obj.getCreativeTab(), sub);
-					if (sub.size() > 0)
+					if (Platform.isClient())
 					{
-						for (ItemStack stack : sub)
+						final List<ItemStack> sub = new ArrayList<ItemStack>();
+						obj.getSubItems(obj, obj.getCreativeTab(), sub);
+						if (sub.size() > 0)
 						{
-							if (stack != null && stack.getItem() != null)
+							for (ItemStack stack : sub)
 							{
-								final Item item = stack.getItem();
-								final int dam = stack.getItemDamage();
-								final String unlocName = stack.getUnlocalizedName();
-								final String displayName = stack.getDisplayName();
-								writer.write("\t" + item + "," + dam + "," + unlocName + "," + displayName + "\n");
+								if (stack != null && stack.getItem() != null)
+								{
+									writeItemStackToFile(stack, writer);
+								}
 							}
 						}
+					}
+					else
+					{
+						writeItemStackToFile(new ItemStack(obj), writer);
 					}
 				}
 			}
