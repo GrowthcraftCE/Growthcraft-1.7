@@ -1,19 +1,19 @@
 # Blocks
-tile.grc.grapeVine0.name=Weinrebe Stamm
-tile.grc.grapeVine1.name=Weinrebe Stamm
-tile.grc.grapeLeaves.name=Weinblätter
-tile.grc.grapeBlock.name=Weintraube
+tile.grc.grapeVine0.name=tile.grc.grapeVine0.name
+tile.grc.grapeVine1.name=tile.grc.grapeVine1.name
+tile.grc.grapeLeaves.name=tile.grc.grapeLeaves.name
+tile.grc.grapeBlock.name=tile.grc.grapeBlock.name
 
 # Items
-item.grc.grapes.name=Weintraube
-item.grc.grapeSeeds.name=Traubensamen
+item.grc.grapes.name=item.grc.grapes.name
+item.grc.grapeSeeds.name=item.grc.grapeSeeds.name
 
 # Fluids
-fluid.grc.grapeWine=Wein
-fluid.grc.grapeWine0=Wein
-fluid.grc.grapeWine1=Wein
-fluid.grc.grapeWine2=Wein
-fluid.grc.grapeWine3=Wein
+fluid.grc.grapeWine=fluid.grc.grapeWine
+fluid.grc.grapeWine0=fluid.grc.grapeWine0
+fluid.grc.grapeWine1=fluid.grc.grapeWine1
+fluid.grc.grapeWine2=fluid.grc.grapeWine2
+fluid.grc.grapeWine3=fluid.grc.grapeWine3
 fluid.grc.grapeWine4=fluid.grc.grapeWine4
 fluid.grc.grapeWine5=fluid.grc.grapeWine5
 fluid.grc.grapeWine6=fluid.grc.grapeWine6
@@ -31,11 +31,11 @@ item.bucket.fluid.grc.grapeWine6.name=item.bucket.fluid.grc.grapeWine6.name
 item.bucket.fluid.grc.grapeWine7.name=item.bucket.fluid.grc.grapeWine7.name
 
 # Fluid Blocks
-tile.fluid.grc.grapeWine.name=Wein
-tile.fluid.grc.grapeWine0.name=Wein
-tile.fluid.grc.grapeWine1.name=Wein
-tile.fluid.grc.grapeWine2.name=Wein
-tile.fluid.grc.grapeWine3.name=Wein
+tile.fluid.grc.grapeWine.name=tile.fluid.grc.grapeWine.name
+tile.fluid.grc.grapeWine0.name=tile.fluid.grc.grapeWine0.name
+tile.fluid.grc.grapeWine1.name=tile.fluid.grc.grapeWine1.name
+tile.fluid.grc.grapeWine2.name=tile.fluid.grc.grapeWine2.name
+tile.fluid.grc.grapeWine3.name=tile.fluid.grc.grapeWine3.name
 tile.fluid.grc.grapeWine4.name=tile.fluid.grc.grapeWine4.name
 tile.fluid.grc.grapeWine5.name=tile.fluid.grc.grapeWine5.name
 tile.fluid.grc.grapeWine6.name=tile.fluid.grc.grapeWine6.name

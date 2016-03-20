@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.grcmilk.CreativeTab=Growthcraft Laticínios
+itemGroup.creative_tab_grcmilk=Growthcraft Laticínios
 
 # Items
 ## Cheese
@@ -16,8 +16,11 @@ item.grcmilk.CheeseCloth.name=Morim
 item.grcmilk.Butter.salted.name=Manteiga (Salgada)
 item.grcmilk.Butter.unsalted.name=Manteiga (Sem sal)
 ## Ice Cream
-item.grcmilk.IceCream.plain.name=Sorvete (Sem sabor)
+item.grcmilk.IceCream.apple.name=item.grcmilk.IceCream.apple.name
 item.grcmilk.IceCream.chocolate.name=Sorvete (Chocolate)
+item.grcmilk.IceCream.grape.name=item.grcmilk.IceCream.grape.name
+item.grcmilk.IceCream.honey.name=item.grcmilk.IceCream.honey.name
+item.grcmilk.IceCream.plain.name=Sorvete (Sem sabor)
 item.grcmilk.StarterCulture.name=Starter Culture**
 item.grcmilk.Yogurt.name=Yogurt
 ## Other
@@ -60,19 +63,20 @@ tile.grcmilk.HangingCurds.cheddar.name=Coalhada de Cheddar
 tile.grcmilk.HangingCurds.gorgonzola.name=Coalhada de Gorgonzola
 tile.grcmilk.HangingCurds.emmentaler.name=Coalhada de Queijo Suíço
 tile.grcmilk.HangingCurds.appenzeller.name=Coalhada de Queijo Appenzeller
-tile.grcmilk.HangingCurds.asiago.name=Coalhada de Queijo Asiago 
+tile.grcmilk.HangingCurds.asiago.name=Coalhada de Queijo Asiago
 tile.grcmilk.HangingCurds.parmesan.name=Coalhada de Queijo Parmesão
-tile.grcmilk.HangingCurds.monterey.name=Coalhada de Queijo Monterey 
-tile.grcmilk.HangingCurds.ricotta.name=Coalhada de Ricotta 
-tile.grcmilk.HangingCurds.cheddar.dried.name=Coalhada Seca de Cheddar 
-tile.grcmilk.HangingCurds.gorgonzola.dried.name=Coalhada Seca de Gorgonzola 
-tile.grcmilk.HangingCurds.emmentaler.dried.name=Coalhada Seca de Queijo Suiço 
+tile.grcmilk.HangingCurds.monterey.name=Coalhada de Queijo Monterey
+tile.grcmilk.HangingCurds.ricotta.name=Coalhada de Ricotta
+tile.grcmilk.HangingCurds.cheddar.dried.name=Coalhada Seca de Cheddar
+tile.grcmilk.HangingCurds.gorgonzola.dried.name=Coalhada Seca de Gorgonzola
+tile.grcmilk.HangingCurds.emmentaler.dried.name=Coalhada Seca de Queijo Suiço
 tile.grcmilk.HangingCurds.appenzeller.dried.name=Coalhada Seca de Queijo Appenzeller
-tile.grcmilk.HangingCurds.asiago.dried.name=Coalhada Seca de Queijo Asiago 
-tile.grcmilk.HangingCurds.parmesan.dried.name=Coalhada Seca de Queijo Parmesãon 
-tile.grcmilk.HangingCurds.monterey.dried.name=Coalhada Seca de Queijo Monterey 
-tile.grcmilk.HangingCurds.ricotta.dried.name=Coalhada Seca de Ricotta 
+tile.grcmilk.HangingCurds.asiago.dried.name=Coalhada Seca de Queijo Asiago
+tile.grcmilk.HangingCurds.parmesan.dried.name=Coalhada Seca de Queijo Parmesãon
+tile.grcmilk.HangingCurds.monterey.dried.name=Coalhada Seca de Queijo Monterey
+tile.grcmilk.HangingCurds.ricotta.dried.name=Coalhada Seca de Ricotta
 tile.grcmilk.Pancheon.name=Pancheon
+tile.grcmilk.Thistle.name=tile.grcmilk.Thistle.name
 
 ### Cheese Vat Fluid Tanks
 grcmilk.cheese_vat.fluid_tank.primary=Primary
@@ -82,91 +86,88 @@ grcmilk.cheese_vat.fluid_tank.recipe=Secondary
 
 # Fluids
 ## Tags
+grc.fluids.tag.cheese=grc.fluids.tag.cheese
+grc.fluids.tag.cream=Cream
 grc.fluids.tag.milk=Milk
 grc.fluids.tag.milk_curds=Milk Curds
 grc.fluids.tag.rennet=Rennet
-grc.fluids.tag.cream=Cream
+grc.fluids.tag.whey=grc.fluids.tag.whey
 ## Standard
 ### Fluids
 fluid.grcmilk.ButterMilk=Butter Milk
+fluid.grcmilk.CheeseAppenzeller=Appenzeller Cheese
+fluid.grcmilk.CheeseAsiago=Asiago Cheese
+fluid.grcmilk.CheeseCheddar=Cheddar Cheese
+fluid.grcmilk.CheeseEmmentaler=Swiss Cheese
+fluid.grcmilk.CheeseGorgonzola=Gorgonzola Cheese
+fluid.grcmilk.CheeseMonterey=Monterey Cheese
+fluid.grcmilk.CheeseParmesan=Parmesan Cheese
+fluid.grcmilk.CheeseRicotta=Ricotta Cheese
 fluid.grcmilk.Cream=Cream
 fluid.grcmilk.Curds=Curds
 fluid.grcmilk.Milk=Milk
+fluid.grcmilk.PasteurizedMilk=fluid.grcmilk.PasteurizedMilk
 fluid.grcmilk.Rennet=Rennet
 fluid.grcmilk.SkimMilk=Skim Milk
 fluid.grcmilk.Whey=Whey
-fluid.grcmilk.CheeseCheddar=Cheddar Cheese
-fluid.grcmilk.CheeseGorgonzola=Gorgonzola Cheese
-fluid.grcmilk.CheeseEmmentaler=Swiss Cheese
-fluid.grcmilk.CheeseAppenzeller=Appenzeller Cheese
-fluid.grcmilk.CheeseAsiago=Asiago Cheese
-fluid.grcmilk.CheeseParmesan=Parmesan Cheese
-fluid.grcmilk.CheeseMonterey=Monterey Cheese
-fluid.grcmilk.CheeseRicotta=Ricotta Cheese
 ### Blocks
 tile.grcmilk.BlockFluidButterMilk.name=Butter Milk
 tile.grcmilk.BlockFluidCream.name=Cream
+tile.grcmilk.BlockFluidCurds.name=tile.grcmilk.BlockFluidCurds.name
 tile.grcmilk.BlockFluidMilk.name=Milk
+tile.grcmilk.BlockFluidPasteurizedMilk.name=tile.grcmilk.BlockFluidPasteurizedMilk.name
 tile.grcmilk.BlockFluidRennet.name=Rennet
 tile.grcmilk.BlockFluidSkimMilk.name=Skim Milk
 tile.grcmilk.BlockFluidWhey.name=Whey
 ### Bottles
 item.grcmilk.BottleFluidButterMilk.name=Butter Milk Bottle
 item.grcmilk.BottleFluidCream.name=Cream Bottle
+item.grcmilk.BottleFluidCurds.name=item.grcmilk.BottleFluidCurds.name
 item.grcmilk.BottleFluidMilk.name=Milk Bottle
+item.grcmilk.BottleFluidPasteurizedMilk.name=item.grcmilk.BottleFluidPasteurizedMilk.name
 item.grcmilk.BottleFluidRennet.name=Rennet Bottle
 item.grcmilk.BottleFluidSkimMilk.name=Skim Milk Bottle
 item.grcmilk.BottleFluidWhey.name=Whey Bottle
 ### Buckets
 item.bucket.fluid.grcmilk.ButterMilk.name=Butter Milk Bucket
 item.bucket.fluid.grcmilk.Cream.name=Cream Bucket
+item.bucket.fluid.grcmilk.Curds.name=item.bucket.fluid.grcmilk.Curds.name
 item.bucket.fluid.grcmilk.Milk.name=Milk Bucket
+item.bucket.fluid.grcmilk.PasteurizedMilk.name=item.bucket.fluid.grcmilk.PasteurizedMilk.name
 item.bucket.fluid.grcmilk.Rennet.name=Rennet Bucket
 item.bucket.fluid.grcmilk.SkimMilk.name=Skim Milk Bucket
 item.bucket.fluid.grcmilk.Whey.name=Whey Bucket
 
-## Salt Water
-fluid.grcmilk.SaltWater=Salt Water
-tile.grcmilk.BlockFluidSaltWater.name=Salt Water
-item.grcmilk.BottleFluidSaltWater.name=Salt Water Bottle
-item.bucket.fluid.grcmilk.SaltWater.name=Salt Water Bucket
-
 ## Booze
-fluid.grcmilk.milk=Milk
-fluid.grcmilk.milk0=Milk
-fluid.grcmilk.milk1=Kumis
-fluid.grcmilk.milk2=Kumis
-fluid.grcmilk.milk3=Kumis
-fluid.grcmilk.milk4=Kumis
-fluid.grcmilk.milk5=Kumis
-fluid.grcmilk.milk6=Vile Milk
-fluid.grcmilk.milk6.desc=Even the sweetest of things can become corrupt.
+fluid.grcmilk.Kumis0=fluid.grcmilk.Kumis0
+fluid.grcmilk.Kumis1=fluid.grcmilk.Kumis1
+fluid.grcmilk.Kumis2=fluid.grcmilk.Kumis2
+fluid.grcmilk.Kumis3=fluid.grcmilk.Kumis3
+fluid.grcmilk.Kumis4=fluid.grcmilk.Kumis4
+fluid.grcmilk.Kumis5=fluid.grcmilk.Kumis5
+fluid.grcmilk.Kumis5.desc=fluid.grcmilk.Kumis5.desc
 
 ## Booze Blocks
-tile.fluid.grcmilk.milk.name=Milk
-tile.fluid.grcmilk.milk0.name=Milk
-tile.fluid.grcmilk.milk1.name=Kumis
-tile.fluid.grcmilk.milk2.name=Kumis
-tile.fluid.grcmilk.milk3.name=Kumis
-tile.fluid.grcmilk.milk4.name=Kumis
-tile.fluid.grcmilk.milk5.name=Kumis
-tile.fluid.grcmilk.milk6.name=Vile Milk
+tile.fluid.grcmilk.Kumis0.name=tile.fluid.grcmilk.Kumis0.name
+tile.fluid.grcmilk.Kumis1.name=tile.fluid.grcmilk.Kumis1.name
+tile.fluid.grcmilk.Kumis2.name=tile.fluid.grcmilk.Kumis2.name
+tile.fluid.grcmilk.Kumis3.name=tile.fluid.grcmilk.Kumis3.name
+tile.fluid.grcmilk.Kumis4.name=tile.fluid.grcmilk.Kumis4.name
+tile.fluid.grcmilk.Kumis5.name=tile.fluid.grcmilk.Kumis5.name
 
 ## Booze Bucket
-item.bucket.fluid.grcmilk.milk.name=Milk Bucket
-item.bucket.fluid.grcmilk.milk0.name=Milk Bucket
-item.bucket.fluid.grcmilk.milk1.name=Kumis Bucket
-item.bucket.fluid.grcmilk.milk2.name=Kumis Bucket
-item.bucket.fluid.grcmilk.milk3.name=Kumis Bucket
-item.bucket.fluid.grcmilk.milk4.name=Kumis Bucket
-item.bucket.fluid.grcmilk.milk5.name=Kumis Bucket
-item.bucket.fluid.grcmilk.milk6.name=Vile Milk Bucket
+item.bucket.fluid.grcmilk.Kumis0.name=item.bucket.fluid.grcmilk.Kumis0.name
+item.bucket.fluid.grcmilk.Kumis1.name=item.bucket.fluid.grcmilk.Kumis1.name
+item.bucket.fluid.grcmilk.Kumis2.name=item.bucket.fluid.grcmilk.Kumis2.name
+item.bucket.fluid.grcmilk.Kumis3.name=item.bucket.fluid.grcmilk.Kumis3.name
+item.bucket.fluid.grcmilk.Kumis4.name=item.bucket.fluid.grcmilk.Kumis4.name
+item.bucket.fluid.grcmilk.Kumis5.name=item.bucket.fluid.grcmilk.Kumis5.name
 
 # Effects
 grc.effect.booze_milk=Removes all effects (Except Tipsy)
 
-
 # WAILA
+grcmilk.butter_churn.itemslot.item=grcmilk.butter_churn.itemslot.item
 grcmilk.cheese.aging.prefix=Aging :
 grcmilk.cheese.aging.progress.format= %d%%
 grcmilk.cheese.slices.prefix=Slices :

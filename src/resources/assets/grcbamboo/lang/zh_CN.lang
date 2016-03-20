@@ -1,15 +1,16 @@
 # Blocks
-tile.grc.bambooStalk.name=竹子
 tile.grc.bambooBlock.name=竹子
-tile.grc.bambooLeaves.name=竹叶
+tile.grc.bambooDoor.name=竹门
 tile.grc.bambooFence.name=竹篱
+tile.grc.bambooFenceGate.name=竹篱笆门
+tile.grc.bambooFenceRope.name=tile.grc.bambooFenceRope.name
+tile.grc.bambooLeaves.name=竹叶
+tile.grc.bambooScaffold.name=竹脚手架
 tile.grc.bambooShoot.name=竹笋
 tile.grc.bambooSlab.name=竹板台阶
 tile.grc.bambooStairs.name=竹板楼梯
+tile.grc.bambooStalk.name=竹子
 tile.grc.bambooWall.name=竹板墙壁
-tile.grc.bambooFenceGate.name=竹篱笆门
-tile.grc.bambooScaffold.name=竹脚手架
-tile.grc.bambooDoor.name=竹门
 
 # Items
 item.grc.bamboo.name=竹子

@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.tabGrowthCraftBees=Abeilles Growthcraft
+itemGroup.creative_tab_grcbees=Abeilles Growthcraft
 
 # Blocks
 ## Vanilla Bee Boxes
@@ -20,6 +20,90 @@ tile.grc.BeeBox.Bamboo0.name=Boîte d'abeille en bambou
 tile.grc.BeeBox.Thaumcraft0.name=Boîte d'abeille en bois arcanique
 tile.grc.BeeBox.Thaumcraft1.name=Boîte d'abeille en bois d'argent
 
+## Forestry Bee Boxes - this is just insane...
+### Regular
+tile.grc.BeeBox.Forestry.0.Normal0.name=tile.grc.BeeBox.Forestry.0.Normal0.name
+tile.grc.BeeBox.Forestry.0.Normal1.name=tile.grc.BeeBox.Forestry.0.Normal1.name
+tile.grc.BeeBox.Forestry.0.Normal2.name=tile.grc.BeeBox.Forestry.0.Normal2.name
+tile.grc.BeeBox.Forestry.0.Normal3.name=tile.grc.BeeBox.Forestry.0.Normal3.name
+tile.grc.BeeBox.Forestry.0.Normal4.name=tile.grc.BeeBox.Forestry.0.Normal4.name
+tile.grc.BeeBox.Forestry.0.Normal5.name=tile.grc.BeeBox.Forestry.0.Normal5.name
+tile.grc.BeeBox.Forestry.0.Normal6.name=tile.grc.BeeBox.Forestry.0.Normal6.name
+tile.grc.BeeBox.Forestry.0.Normal7.name=tile.grc.BeeBox.Forestry.0.Normal7.name
+tile.grc.BeeBox.Forestry.0.Normal8.name=tile.grc.BeeBox.Forestry.0.Normal8.name
+tile.grc.BeeBox.Forestry.0.Normal9.name=tile.grc.BeeBox.Forestry.0.Normal9.name
+tile.grc.BeeBox.Forestry.0.Normal10.name=tile.grc.BeeBox.Forestry.0.Normal10.name
+tile.grc.BeeBox.Forestry.0.Normal11.name=tile.grc.BeeBox.Forestry.0.Normal11.name
+tile.grc.BeeBox.Forestry.0.Normal12.name=tile.grc.BeeBox.Forestry.0.Normal12.name
+tile.grc.BeeBox.Forestry.0.Normal13.name=tile.grc.BeeBox.Forestry.0.Normal13.name
+tile.grc.BeeBox.Forestry.0.Normal14.name=tile.grc.BeeBox.Forestry.0.Normal14.name
+tile.grc.BeeBox.Forestry.1.Normal0.name=tile.grc.BeeBox.Forestry.1.Normal0.name
+tile.grc.BeeBox.Forestry.1.Normal1.name=tile.grc.BeeBox.Forestry.1.Normal1.name
+tile.grc.BeeBox.Forestry.1.Normal2.name=tile.grc.BeeBox.Forestry.1.Normal2.name
+tile.grc.BeeBox.Forestry.1.Normal3.name=tile.grc.BeeBox.Forestry.1.Normal3.name
+tile.grc.BeeBox.Forestry.1.Normal4.name=tile.grc.BeeBox.Forestry.1.Normal4.name
+tile.grc.BeeBox.Forestry.1.Normal5.name=tile.grc.BeeBox.Forestry.1.Normal5.name
+tile.grc.BeeBox.Forestry.1.Normal6.name=tile.grc.BeeBox.Forestry.1.Normal6.name
+tile.grc.BeeBox.Forestry.1.Normal7.name=tile.grc.BeeBox.Forestry.1.Normal7.name
+tile.grc.BeeBox.Forestry.1.Normal8.name=tile.grc.BeeBox.Forestry.1.Normal8.name
+tile.grc.BeeBox.Forestry.1.Normal9.name=tile.grc.BeeBox.Forestry.1.Normal9.name
+tile.grc.BeeBox.Forestry.1.Normal10.name=tile.grc.BeeBox.Forestry.1.Normal10.name
+tile.grc.BeeBox.Forestry.1.Normal11.name=tile.grc.BeeBox.Forestry.1.Normal11.name
+tile.grc.BeeBox.Forestry.1.Normal12.name=tile.grc.BeeBox.Forestry.1.Normal12.name
+tile.grc.BeeBox.Forestry.1.Normal13.name=tile.grc.BeeBox.Forestry.1.Normal13.name
+### Fire Proof
+tile.grc.BeeBox.Forestry.0.Fireproof0.name=tile.grc.BeeBox.Forestry.0.Fireproof0.name
+tile.grc.BeeBox.Forestry.0.Fireproof1.name=tile.grc.BeeBox.Forestry.0.Fireproof1.name
+tile.grc.BeeBox.Forestry.0.Fireproof2.name=tile.grc.BeeBox.Forestry.0.Fireproof2.name
+tile.grc.BeeBox.Forestry.0.Fireproof3.name=tile.grc.BeeBox.Forestry.0.Fireproof3.name
+tile.grc.BeeBox.Forestry.0.Fireproof4.name=tile.grc.BeeBox.Forestry.0.Fireproof4.name
+tile.grc.BeeBox.Forestry.0.Fireproof5.name=tile.grc.BeeBox.Forestry.0.Fireproof5.name
+tile.grc.BeeBox.Forestry.0.Fireproof6.name=tile.grc.BeeBox.Forestry.0.Fireproof6.name
+tile.grc.BeeBox.Forestry.0.Fireproof7.name=tile.grc.BeeBox.Forestry.0.Fireproof7.name
+tile.grc.BeeBox.Forestry.0.Fireproof8.name=tile.grc.BeeBox.Forestry.0.Fireproof8.name
+tile.grc.BeeBox.Forestry.0.Fireproof9.name=tile.grc.BeeBox.Forestry.0.Fireproof9.name
+tile.grc.BeeBox.Forestry.0.Fireproof10.name=tile.grc.BeeBox.Forestry.0.Fireproof10.name
+tile.grc.BeeBox.Forestry.0.Fireproof11.name=tile.grc.BeeBox.Forestry.0.Fireproof11.name
+tile.grc.BeeBox.Forestry.0.Fireproof12.name=tile.grc.BeeBox.Forestry.0.Fireproof12.name
+tile.grc.BeeBox.Forestry.0.Fireproof13.name=tile.grc.BeeBox.Forestry.0.Fireproof13.name
+tile.grc.BeeBox.Forestry.0.Fireproof14.name=tile.grc.BeeBox.Forestry.0.Fireproof14.name
+tile.grc.BeeBox.Forestry.1.Fireproof0.name=tile.grc.BeeBox.Forestry.1.Fireproof0.name
+tile.grc.BeeBox.Forestry.1.Fireproof1.name=tile.grc.BeeBox.Forestry.1.Fireproof1.name
+tile.grc.BeeBox.Forestry.1.Fireproof2.name=tile.grc.BeeBox.Forestry.1.Fireproof2.name
+tile.grc.BeeBox.Forestry.1.Fireproof3.name=tile.grc.BeeBox.Forestry.1.Fireproof3.name
+tile.grc.BeeBox.Forestry.1.Fireproof4.name=tile.grc.BeeBox.Forestry.1.Fireproof4.name
+tile.grc.BeeBox.Forestry.1.Fireproof5.name=tile.grc.BeeBox.Forestry.1.Fireproof5.name
+tile.grc.BeeBox.Forestry.1.Fireproof6.name=tile.grc.BeeBox.Forestry.1.Fireproof6.name
+tile.grc.BeeBox.Forestry.1.Fireproof7.name=tile.grc.BeeBox.Forestry.1.Fireproof7.name
+tile.grc.BeeBox.Forestry.1.Fireproof8.name=tile.grc.BeeBox.Forestry.1.Fireproof8.name
+tile.grc.BeeBox.Forestry.1.Fireproof9.name=tile.grc.BeeBox.Forestry.1.Fireproof9.name
+tile.grc.BeeBox.Forestry.1.Fireproof10.name=tile.grc.BeeBox.Forestry.1.Fireproof10.name
+tile.grc.BeeBox.Forestry.1.Fireproof11.name=tile.grc.BeeBox.Forestry.1.Fireproof11.name
+tile.grc.BeeBox.Forestry.1.Fireproof12.name=tile.grc.BeeBox.Forestry.1.Fireproof12.name
+tile.grc.BeeBox.Forestry.1.Fireproof13.name=tile.grc.BeeBox.Forestry.1.Fireproof13.name
+
+## BiomesOPlenty
+tile.grc.BeeBox.BiomesOPlenty0.name=tile.grc.BeeBox.BiomesOPlenty0.name
+tile.grc.BeeBox.BiomesOPlenty1.name=tile.grc.BeeBox.BiomesOPlenty1.name
+tile.grc.BeeBox.BiomesOPlenty2.name=tile.grc.BeeBox.BiomesOPlenty2.name
+tile.grc.BeeBox.BiomesOPlenty3.name=tile.grc.BeeBox.BiomesOPlenty3.name
+tile.grc.BeeBox.BiomesOPlenty4.name=tile.grc.BeeBox.BiomesOPlenty4.name
+tile.grc.BeeBox.BiomesOPlenty5.name=tile.grc.BeeBox.BiomesOPlenty5.name
+tile.grc.BeeBox.BiomesOPlenty6.name=tile.grc.BeeBox.BiomesOPlenty6.name
+tile.grc.BeeBox.BiomesOPlenty7.name=tile.grc.BeeBox.BiomesOPlenty7.name
+tile.grc.BeeBox.BiomesOPlenty8.name=tile.grc.BeeBox.BiomesOPlenty8.name
+tile.grc.BeeBox.BiomesOPlenty9.name=tile.grc.BeeBox.BiomesOPlenty9.name
+tile.grc.BeeBox.BiomesOPlenty10.name=tile.grc.BeeBox.BiomesOPlenty10.name
+tile.grc.BeeBox.BiomesOPlenty11.name=tile.grc.BeeBox.BiomesOPlenty11.name
+tile.grc.BeeBox.BiomesOPlenty12.name=tile.grc.BeeBox.BiomesOPlenty12.name
+tile.grc.BeeBox.BiomesOPlenty13.name=tile.grc.BeeBox.BiomesOPlenty13.name
+tile.grc.BeeBox.BiomesOPlenty14.name=tile.grc.BeeBox.BiomesOPlenty14.name
+
+## Botania
+tile.grc.BeeBox.Botania0.name=tile.grc.BeeBox.Botania0.name
+tile.grc.BeeBox.Botania1.name=tile.grc.BeeBox.Botania1.name
+tile.grc.BeeBox.Botania2.name=tile.grc.BeeBox.Botania2.name
+
 # Other Blocks
 tile.grc.beeHive.name=Ruche d'abeille
 
@@ -28,6 +112,11 @@ item.grc.honeyComb.empty.name=Rayon de miel vide
 item.grc.honeyComb.full.name=Rayon de miel
 item.grc.honeyJar.name=Miel
 item.grc.bee.name=Abeille
+item.grc.FoodBottleFluidHoney.name=item.grc.FoodBottleFluidHoney.name
+item.grc.BucketFluidHoney.name=item.grc.BucketFluidHoney.name
+item.grcbees.BeesWax.normal.name=item.grcbees.BeesWax.normal.name
+item.grcbees.BeesWax.red.name=item.grcbees.BeesWax.red.name
+item.grcbees.BeesWax.black.name=item.grcbees.BeesWax.black.name
 
 # Tooltips
 grc.bees.item.honeyComb.deprecated=This item has been deprecated, craft to get the updated item.
@@ -36,33 +125,44 @@ grc.bees.item.honeyComb.deprecated=This item has been deprecated, craft to get t
 container.grc.beeBox=Boîte d'abeille
 
 # Fluids
+fluid.grc.honey=fluid.grc.honey
 fluid.grc.honeyMead=Hydromel
 fluid.grc.honeyMead0=Hydromel
 fluid.grc.honeyMead1=Hydromel
 fluid.grc.honeyMead2=Hydromel
 fluid.grc.honeyMead3=Hydromel
+fluid.grc.honeyMead4=fluid.grc.honeyMead4
+fluid.grc.honeyMead5=fluid.grc.honeyMead5
+fluid.grc.honeyMead6=fluid.grc.honeyMead6
+
+# Fluid Bottles
+item.grc.BottleFluidHoney.name=item.grc.BottleFluidHoney.name
 
 # Fluid Buckets
+item.bucket.fluid.grc.honey.name=item.bucket.fluid.grc.honey.name
 item.bucket.fluid.grc.honeyMead.name=Seau d'hydromel
 item.bucket.fluid.grc.honeyMead0.name=Seau d'hydromel
 item.bucket.fluid.grc.honeyMead1.name=Seau d'hydromel
 item.bucket.fluid.grc.honeyMead2.name=Seau d'hydromel
 item.bucket.fluid.grc.honeyMead3.name=Seau d'hydromel
+item.bucket.fluid.grc.honeyMead4.name=item.bucket.fluid.grc.honeyMead4.name
+item.bucket.fluid.grc.honeyMead5.name=item.bucket.fluid.grc.honeyMead5.name
+item.bucket.fluid.grc.honeyMead6.name=item.bucket.fluid.grc.honeyMead6.name
 
 # Fluid Blocks
+tile.grc.BlockFluidHoney.name=tile.grc.BlockFluidHoney.name
 tile.fluid.grc.honeyMead.name=Hydromel
 tile.fluid.grc.honeyMead0.name=Hydromel
 tile.fluid.grc.honeyMead1.name=Hydromel
 tile.fluid.grc.honeyMead2.name=Hydromel
 tile.fluid.grc.honeyMead3.name=Hydromel
-
-# Fluid Tooltips
-fluid.grc.honeyMead0.modifier=Nouveau
-fluid.grc.honeyMead1.modifier=Fermenté
-fluid.grc.honeyMead2.modifier=Fermenté, Puissant
-fluid.grc.honeyMead3.modifier=Fermenté, Prolongé
+tile.fluid.grc.honeyMead4.name=tile.fluid.grc.honeyMead4.name
+tile.fluid.grc.honeyMead5.name=tile.fluid.grc.honeyMead5.name
+tile.fluid.grc.honeyMead6.name=tile.fluid.grc.honeyMead6.name
 
 # Other
 grc.bees.bonus_prefix=Bonus :
 grc.bees.bees_prefix=Abeilles :
 grc.bees.honey_prefix=Miel :
+grc.bees.growth_rate_prefix=grc.bees.growth_rate_prefix
+grc.bees.growth_rate_value=grc.bees.growth_rate_value

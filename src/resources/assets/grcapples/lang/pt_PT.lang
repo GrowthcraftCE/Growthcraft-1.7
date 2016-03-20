@@ -1,12 +1,12 @@
-# Blocks 
+# Blocks
 tile.grc.appleBlock.name=Maçã
 tile.grc.appleSapling.name=Rebento de Macieira
 tile.grc.appleLeaves.name=Folhas de Macieira
-# Items 
+# Items
 item.grc.appleSeeds.name=Caroço de Maçã
- 
-# Booze 
-## Fluids 
+
+# Booze
+## Fluids
 fluid.grc.appleCider=Sidra
 fluid.grc.appleCider0=Sidra
 fluid.grc.appleCider1=Sidra
@@ -16,7 +16,7 @@ fluid.grc.appleCider4=Néctar Suave
 fluid.grc.appleCider5=Sidra
 fluid.grc.appleCider6=Sidra
 
-## Fluid Buckets 
+## Fluid Buckets
 item.bucket.fluid.grc.appleCider.name=Balde de Sidra
 item.bucket.fluid.grc.appleCider0.name=Balde de Sidra
 item.bucket.fluid.grc.appleCider1.name=Balde de Sidra 
@@ -26,7 +26,7 @@ item.bucket.fluid.grc.appleCider4.name=Balde de Néctar Suave
 item.bucket.fluid.grc.appleCider5.name=Balde de Sidra
 item.bucket.fluid.grc.appleCider6.name=Balde de Sidra
 
-## Fluid Blocks 
+## Fluid Blocks
 tile.fluid.grc.appleCider.name=Sidra
 tile.fluid.grc.appleCider0.name=Sidra
 tile.fluid.grc.appleCider1.name=Sidra

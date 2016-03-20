@@ -1,17 +1,17 @@
 # Creative Tabs
-itemGroup.creative_tab_grccellar=Growthcraft Keller
+itemGroup.creative_tab_grccellar=itemGroup.creative_tab_grccellar
 
 # Blocks
-tile.grc.fruitPress.name=Fruchtpresse
-tile.grc.fruitPresser.name=Fruchtpresse
-tile.grc.brewKettle.name=Braukessel
-tile.grc.fermentBarrel.name=Reifefass
+tile.grc.fruitPress.name=tile.grc.fruitPress.name
+tile.grc.fruitPresser.name=tile.grc.fruitPresser.name
+tile.grc.brewKettle.name=tile.grc.brewKettle.name
+tile.grc.fermentBarrel.name=tile.grc.fermentBarrel.name
 tile.grc.fermentJar.name=tile.grc.fermentJar.name
 
 # Items
 # Please remove this field once all other module translations have been updated,
 # this is no longer used
-item.grc.boozeBucket.name=Eimer mit
+item.grc.boozeBucket.name=item.grc.boozeBucket.name
 
 item.grc.yeast0.name=item.grc.yeast0.name
 item.grc.yeast1.name=item.grc.yeast1.name
@@ -39,14 +39,14 @@ item.grc.waterBag15.name=item.grc.waterBag15.name
 item.grc.waterBag16.name=item.grc.waterBag16.name
 
 # Containers
-container.grc.fruitPress=Fruchtpresse
-container.grc.brewKettle=Braukessel
-container.grc.fermentBarrel=Reifefass
+container.grc.fruitPress=container.grc.fruitPress
+container.grc.brewKettle=container.grc.brewKettle
+container.grc.fermentBarrel=container.grc.fermentBarrel
 container.grc.CultureJar=container.grc.CultureJar
 
 # Other
-grc.potion.tipsy=Angetrunken
-grc.booze=Alkohol
+grc.potion.tipsy=grc.potion.tipsy
+grc.booze=grc.booze
 
 # Modifiers
 grc.fluids.tag.chilled=grc.fluids.tag.chilled
@@ -65,19 +65,19 @@ grc.fluids.tag.wine=grc.fluids.tag.wine
 grc.fluids.tag.young=grc.fluids.tag.young
 
 # GUI
-gui.grc.empty=Leer
-gui.grc.discard=Leeren
-gui.grc.switch=Tauschen
-gui.grc.cantferment=Kann nicht gären
+gui.grc.empty=gui.grc.empty
+gui.grc.discard=gui.grc.discard
+gui.grc.switch=gui.grc.switch
+gui.grc.cantferment=gui.grc.cantferment
 gui.grccellar.ferment_barrel.progress_name=gui.grccellar.ferment_barrel.progress_name
 
 # Achievements
-achievement.craftBarrel=Ein Fass aufmachen
-achievement.craftBarrel.desc=achievement.craftBarrel.desc=Craft a fermenting barrel with three wooden planks and six iron ingots.
-achievement.fermentBooze=Was soll sich klären, muss erst gären
-achievement.fermentBooze.desc=Stelle Alkohol durch gärung her.
-achievement.getDrunk=Es braut sich etwas zusammen
-achievement.getDrunk.desc=Erreiche Angetrunkenheit V.
+achievement.craftBarrel=achievement.craftBarrel
+achievement.craftBarrel.desc=achievement.craftBarrel.desc
+achievement.fermentBooze=achievement.fermentBooze
+achievement.fermentBooze.desc=achievement.fermentBooze.desc
+achievement.getDrunk=achievement.getDrunk
+achievement.getDrunk.desc=achievement.getDrunk.desc
 achievement.onTheGo=achievement.onTheGo
 achievement.onTheGo.desc=achievement.onTheGo.desc
 

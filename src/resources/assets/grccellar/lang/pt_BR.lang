@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.tabGrCCellar=Growthcraft Adega
+itemGroup.creative_tab_grccellar=Growthcraft Adega
 
 # Blocks
 tile.grc.fruitPress.name=Esmagador de Frutas
@@ -8,13 +8,11 @@ tile.grc.brewKettle.name=Caldeira de Fabricação
 tile.grc.fermentBarrel.name=Barril de Fermentação
 tile.grc.fermentJar.name=Jarro de Cultivo
 
-# Containers
-container.grc.fruitPress=Esmagador de Frutas
-container.grc.brewKettle=Caldeira de Fabricação
-container.grc.fermentBarrel=Barril de Fermentação
-container.grc.CultureJar=Jarro de Cultivo
-
 # Items
+# Please remove this field once all other module translations have been updated,
+# this is no longer used
+item.grc.boozeBucket.name=item.grc.boozeBucket.name
+
 item.grc.yeast0.name=Levedura do Cervejeiro
 item.grc.yeast1.name=Levedura para Lager
 item.grc.yeast2.name=Levedura de Bayanus
@@ -39,6 +37,12 @@ item.grc.waterBag13.name=Cantil (Verde)
 item.grc.waterBag14.name=Cantil (Vermelho)
 item.grc.waterBag15.name=Cantil (Preto)
 item.grc.waterBag16.name=Cantil
+
+# Containers
+container.grc.fruitPress=Esmagador de Frutas
+container.grc.brewKettle=Caldeira de Fabricação
+container.grc.fermentBarrel=Barril de Fermentação
+container.grc.CultureJar=Jarro de Cultivo
 
 # Other
 grc.potion.tipsy=Embriaguez
@@ -65,6 +69,7 @@ gui.grc.empty=Vazio
 gui.grc.discard=Descartar
 gui.grc.switch=Trocar
 gui.grc.cantferment=Não Pode Fermentar
+gui.grccellar.ferment_barrel.progress_name=gui.grccellar.ferment_barrel.progress_name
 
 # Achievements
 achievement.craftBarrel=Fabricação de Barris
@@ -73,6 +78,8 @@ achievement.fermentBooze=É o que eu posso fermentar...
 achievement.fermentBooze.desc=Fermente uma bebida alcóolica
 achievement.getDrunk=O Problema é Fazer?
 achievement.getDrunk.desc=Alcance Embriguez 5
+achievement.onTheGo=achievement.onTheGo
+achievement.onTheGo.desc=achievement.onTheGo.desc
 
 # Tooltips (Number is a percentage)
 # number is a percentage
@@ -81,6 +88,7 @@ grc.cellar.format.waterBag.contents=Contains: %2$dmB/%3$dmB de %1$s
 grc.cellar.format.tipsy_chance=%d%% Chance de Embriaguez
 grc.cellar.item.booze_bucket.deprecated=OBSOLETO, crafte para receber a versão atualizada
 grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETO)
+
 grc.cellar.brew_kettle.brewing_prefix=Brewing :
 grc.cellar.brew_kettle.itemslot.item=Item : %s
 grc.cellar.brew_kettle.itemslot.residue=Residue : %s
@@ -99,4 +107,3 @@ grc.cellar.fruit_presser.state_prefix=State :
 grccellar.waila.option.FruitPressExtras=Extras do Esmagador de Frutas
 grccellar.waila.option.BrewKettleExtras=Extras da Caldeira de Fabricação
 grccellar.waila.option.FermentBarrelExtras=Extras do Barril de Fermentação
-

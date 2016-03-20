@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.grcmilk.CreativeTab=Growthcraft Laticínios
+itemGroup.creative_tab_grcmilk=Growthcraft Laticínios
 
 # Items
 ## Cheese
@@ -95,13 +95,13 @@ grc.fluids.tag.whey=Soro
 ## Standard
 ### Fluids
 fluid.grcmilk.ButterMilk=Leitelho
-fluid.grcmilk.CheeseCheddar=Queijo Cheddar
-fluid.grcmilk.CheeseGorgonzola=Queijo Gorgonzola
-fluid.grcmilk.CheeseEmmentaler=Queijo Suíço
 fluid.grcmilk.CheeseAppenzeller=Queijo Appenzeller
 fluid.grcmilk.CheeseAsiago=Queijo Asiago
-fluid.grcmilk.CheeseParmesan=Queijo Parmesão
+fluid.grcmilk.CheeseCheddar=Queijo Cheddar
+fluid.grcmilk.CheeseEmmentaler=Queijo Suíço
+fluid.grcmilk.CheeseGorgonzola=Queijo Gorgonzola
 fluid.grcmilk.CheeseMonterey=Queijo Monterey
+fluid.grcmilk.CheeseParmesan=Queijo Parmesão
 fluid.grcmilk.CheeseRicotta=Queijo Ricota
 fluid.grcmilk.Cream=Nata
 fluid.grcmilk.Curds=Coalhada de Leite
