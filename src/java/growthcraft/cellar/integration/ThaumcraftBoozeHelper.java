@@ -215,6 +215,11 @@ public class ThaumcraftBoozeHelper implements ILoggable
 			registerAspectsForBottle(details.bottle, base.copy());
 		}
 
+		if (details.foodBottle != null)
+		{
+			registerAspectsForBottle(details.foodBottle, base.copy());
+		}
+
 		if (details.bucket != null)
 		{
 			registerAspectsForBucket(details.bucket, AspectsHelper.scaleAspects(base.copy(), 3, aspects));

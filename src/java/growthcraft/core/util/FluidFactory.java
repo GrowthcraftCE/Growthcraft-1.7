@@ -24,11 +24,13 @@
 package growthcraft.core.util;
 
 import growthcraft.api.core.util.NumUtils;
+import growthcraft.api.core.util.ObjectUtils;
 import growthcraft.core.common.definition.FluidDefinition;
 import growthcraft.core.common.definition.GrcBlockFluidDefinition;
 import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.core.common.item.ItemBucketFluid;
 import growthcraft.core.common.item.ItemBottleFluid;
+import growthcraft.core.common.item.ItemFoodBottleFluid;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.GrowthCraftCore;
 
@@ -49,6 +51,7 @@ public class FluidFactory
 		public FluidDefinition fluid;
 		public GrcBlockFluidDefinition block;
 		public ItemTypeDefinition<ItemBottleFluid> bottle;
+		public ItemTypeDefinition<ItemFoodBottleFluid> foodBottle;
 		public ItemTypeDefinition<ItemBucketFluid> bucket;
 		private int itemColor = 0xFFFFFF;
 
@@ -82,9 +85,29 @@ public class FluidFactory
 			return asBucketItemStack(1);
 		}
 
-		public ItemStack asBottleItemStack(int size)
+		public ItemStack asFoodBottleItemStack(int size)
+		{
+			return foodBottle != null ? foodBottle.asStack(size) : null;
+		}
+
+		public ItemStack asFoodBottleItemStack()
+		{
+			return asFoodBottleItemStack(1);
+		}
+
+		public ItemStack asGenericBottleItemStack(int size)
 		{
 			return bottle != null ? bottle.asStack(size) : null;
+		}
+
+		public ItemStack asGenericBottleItemStack()
+		{
+			return asGenericBottleItemStack(1);
+		}
+
+		public ItemStack asBottleItemStack(int size)
+		{
+			return ObjectUtils.<ItemStack>maybe(asFoodBottleItemStack(size), asGenericBottleItemStack(size));
 		}
 
 		public ItemStack asBottleItemStack()
@@ -94,29 +117,35 @@ public class FluidFactory
 
 		public FluidDetails registerObjects(String prefix, String basename)
 		{
-			if (block != null) block.getBlock().setBlockName(prefix + ".BlockFluid" + basename);
-			if (bottle != null) bottle.getItem().setUnlocalizedName(prefix + ".BottleFluid" + basename);
-			if (bucket != null) bucket.getItem().setUnlocalizedName(prefix + ".BucketFluid" + basename);
-
-			if (block != null) block.register(prefix + ".BlockFluid" + basename);
-			if (bottle != null) bottle.register(prefix + ".BottleFluid" + basename);
-			if (bucket != null) bucket.register(prefix + ".BucketFluid" + basename);
-
-			if (block != null && bucket != null)
+			if (block != null)
 			{
-				EventHandlerBucketFill.instance().register(block.getBlock(), bucket.getItem());
+				block.getBlock().setBlockName(prefix + ".BlockFluid" + basename);
+				block.register(prefix + ".BlockFluid" + basename);
 			}
-
+			if (bottle != null)
+			{
+				bottle.getItem().setUnlocalizedName(prefix + ".BottleFluid" + basename);
+				bottle.register(prefix + ".BottleFluid" + basename);
+				final FluidStack fluidStack = fluid.asFluidStack(GrowthCraftCore.getConfig().bottleCapacity);
+				FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1), GrowthCraftCore.EMPTY_BOTTLE);
+			}
+			if (foodBottle != null)
+			{
+				foodBottle.getItem().setUnlocalizedName(prefix + ".FoodBottleFluid" + basename);
+				foodBottle.register(prefix + ".BottleFluid" + basename);
+				final FluidStack fluidStack = fluid.asFluidStack(GrowthCraftCore.getConfig().bottleCapacity);
+				FluidContainerRegistry.registerFluidContainer(fluidStack, foodBottle.asStack(1), GrowthCraftCore.EMPTY_BOTTLE);
+			}
 			if (bucket != null)
 			{
+				bucket.getItem().setUnlocalizedName(prefix + ".BucketFluid" + basename);
+				bucket.register(prefix + ".BucketFluid" + basename);
 				final FluidStack boozeStack = fluid.asFluidStack(FluidContainerRegistry.BUCKET_VOLUME);
 				FluidContainerRegistry.registerFluidContainer(boozeStack, bucket.asStack(), FluidContainerRegistry.EMPTY_BUCKET);
 			}
-
-			if (bottle != null)
+			if (block != null && bucket != null)
 			{
-				final FluidStack fluidStack = fluid.asFluidStack(GrowthCraftCore.getConfig().bottleCapacity);
-				FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1), GrowthCraftCore.EMPTY_BOTTLE);
+				EventHandlerBucketFill.instance().register(block.getBlock(), bucket.getItem());
 			}
 			return this;
 		}
@@ -125,6 +154,7 @@ public class FluidFactory
 		{
 			if (block != null) block.getBlock().setCreativeTab(tab);
 			if (bottle != null) bottle.getItem().setCreativeTab(tab);
+			if (foodBottle != null) foodBottle.getItem().setCreativeTab(tab);
 			if (bucket != null) bucket.getItem().setCreativeTab(tab);
 			return this;
 		}
@@ -133,6 +163,7 @@ public class FluidFactory
 		{
 			this.itemColor = color;
 			if (bottle != null) bottle.getItem().setColor(color);
+			if (foodBottle != null) foodBottle.getItem().setColor(color);
 			if (bucket != null) bucket.getItem().setColor(color);
 			return this;
 		}
@@ -161,9 +192,11 @@ public class FluidFactory
 
 	public static final int FEATURE_BLOCK = 1;
 	public static final int FEATURE_BOTTLE = 2;
-	public static final int FEATURE_BUCKET = 4;
+	public static final int FEATURE_FOOD_BOTTLE = 4;
+	public static final int FEATURE_BUCKET = 8;
 	public static final int FEATURE_NONE = 0;
-	public static final int FEATURE_ALL = FEATURE_BLOCK | FEATURE_BOTTLE | FEATURE_BUCKET;
+	public static final int FEATURE_ALL_NON_EDIBLE = FEATURE_BLOCK | FEATURE_BOTTLE | FEATURE_BUCKET;
+	public static final int FEATURE_ALL_EDIBLE = FEATURE_BLOCK | FEATURE_FOOD_BOTTLE | FEATURE_BUCKET;
 	private static FluidFactory INSTANCE = new FluidFactory();
 
 	public FluidFactory() {}
@@ -189,7 +222,7 @@ public class FluidFactory
 
 	public FluidDetails create(Fluid fluid)
 	{
-		return create(fluid, FEATURE_ALL);
+		return create(fluid, FEATURE_ALL_NON_EDIBLE);
 	}
 
 	public static FluidFactory instance()
