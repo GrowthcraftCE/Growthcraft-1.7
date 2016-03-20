@@ -209,7 +209,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		spawnHoneyCombs(1);
 	}
 
-	public void decreaseHoney(int count)
+	public boolean decreaseHoney(int count)
 	{
 		boolean shouldMark = false;
 		for (int i = 1; i < getSizeInventory(); ++i)
