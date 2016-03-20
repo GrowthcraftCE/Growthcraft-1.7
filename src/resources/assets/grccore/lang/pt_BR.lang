@@ -3,12 +3,14 @@ itemGroup.tabGrowthCraft=Growthcraft
 
 # Blocks
 tile.grc.fenceRope.name=Cerca Amarrada
+tile.grc.netherBrickFenceRope.name=tile.grc.netherBrickFenceRope.name
 tile.grc.ropeBlock.name=Corda
 
 # Items
 item.grc.rope.name=Corda
 item.grccore.salt.name=Sal
-
+item.grccore.bucketSalt.name=item.grccore.bucketSalt.name
+item.grccore.bottleSalt.name=item.grccore.bottleSalt.name
 
 # Fluids
 fluid.tile.water=Água
@@ -22,6 +24,7 @@ item.bucket.fluid.grccore.SaltWater.name=Balde de Água Salgada
 
 # Other
 achievementPage.pageGrowthCraft=Growthcraft
+
 # Colors
 grc.colour.White=Branco
 grc.colour.Orange=Laranja
@@ -86,3 +89,6 @@ grc.effect.null.desc=Nada
 grc.effect.random_list.head=Acontecer um dos seguintes efeitos:
 grc.effect.remove_potion_effect.format=Remove %s
 grc.effect.weighted_random_list.format=%d%% Chance de
+
+# GUI
+gui.grc.progress.format=gui.grc.progress.format

@@ -1,15 +1,16 @@
 # Blocks
-tile.grc.bambooStalk.name=Bambu
 tile.grc.bambooBlock.name=Bambu
-tile.grc.bambooLeaves.name=Folhas de Bambu
+tile.grc.bambooDoor.name=Porta de Bambu
 tile.grc.bambooFence.name=Cerca de Bambu
+tile.grc.bambooFenceGate.name=Portão de Cerca de Bambu
+tile.grc.bambooFenceRope.name=tile.grc.bambooFenceRope.name
+tile.grc.bambooLeaves.name=Folhas de Bambu
+tile.grc.bambooScaffold.name=Andaime de Bambu
 tile.grc.bambooShoot.name=Broto de Bambu
 tile.grc.bambooSlab.name=Meio-Bloco de Bambu
 tile.grc.bambooStairs.name=Escadas de Bambu
+tile.grc.bambooStalk.name=Bambu
 tile.grc.bambooWall.name=Muro de Bambu
-tile.grc.bambooFenceGate.name=Portão de Cerca de Bambu
-tile.grc.bambooScaffold.name=Andaime de Bambu
-tile.grc.bambooDoor.name=Porta de Bambu
 
 # Items
 item.grc.bamboo.name=Bambu

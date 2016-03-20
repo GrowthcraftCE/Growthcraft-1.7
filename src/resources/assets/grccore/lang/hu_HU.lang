@@ -1,20 +1,20 @@
 # Creative Tabs
-itemGroup.tabGrowthCraft=Growthcraft
+itemGroup.tabGrowthCraft=itemGroup.tabGrowthCraft
 
 # Blocks
-tile.grc.fenceRope.name=Zaun mit Seil
+tile.grc.fenceRope.name=tile.grc.fenceRope.name
 tile.grc.netherBrickFenceRope.name=tile.grc.netherBrickFenceRope.name
-tile.grc.ropeBlock.name=Seil
+tile.grc.ropeBlock.name=tile.grc.ropeBlock.name
 
 # Items
-item.grc.rope.name=Seil
+item.grc.rope.name=item.grc.rope.name
 item.grccore.salt.name=item.grccore.salt.name
 item.grccore.bucketSalt.name=item.grccore.bucketSalt.name
 item.grccore.bottleSalt.name=item.grccore.bottleSalt.name
 
 # Fluids
-fluid.tile.water=Wasser
-fluid.tile.lava=Lava
+fluid.tile.water=fluid.tile.water
+fluid.tile.lava=fluid.tile.lava
 
 ## Salt Water
 fluid.grccore.SaltWater=fluid.grccore.SaltWater
@@ -23,7 +23,7 @@ item.grccore.BottleFluidSaltWater.name=item.grccore.BottleFluidSaltWater.name
 item.bucket.fluid.grccore.SaltWater.name=item.bucket.fluid.grccore.SaltWater.name
 
 # Other
-achievementPage.pageGrowthCraft=Growthcraft
+achievementPage.pageGrowthCraft=achievementPage.pageGrowthCraft
 
 # Colors
 grc.colour.White=grc.colour.White

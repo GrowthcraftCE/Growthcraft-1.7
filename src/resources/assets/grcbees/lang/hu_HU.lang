@@ -1,24 +1,24 @@
 # Creative Tabs
-itemGroup.creative_tab_grcbees=Growthcraft Abelhas
+itemGroup.creative_tab_grcbees=itemGroup.creative_tab_grcbees
 
 # Blocks
 ## Vanilla Bee Boxes
-tile.grc.BeeBox.Minecraft0.name=Apiário de Carvalho
-tile.grc.BeeBox.Minecraft1.name=Apiário de Pinheiro
-tile.grc.BeeBox.Minecraft2.name=Apiário de Eucalipto
-tile.grc.BeeBox.Minecraft3.name=Apiário de Madeira da Selva
-tile.grc.BeeBox.Minecraft4.name=Apiário de Acácia
-tile.grc.BeeBox.Minecraft5.name=Apiário de Carvalho Escuro
+tile.grc.BeeBox.Minecraft0.name=tile.grc.BeeBox.Minecraft0.name
+tile.grc.BeeBox.Minecraft1.name=tile.grc.BeeBox.Minecraft1.name
+tile.grc.BeeBox.Minecraft2.name=tile.grc.BeeBox.Minecraft2.name
+tile.grc.BeeBox.Minecraft3.name=tile.grc.BeeBox.Minecraft3.name
+tile.grc.BeeBox.Minecraft4.name=tile.grc.BeeBox.Minecraft4.name
+tile.grc.BeeBox.Minecraft5.name=tile.grc.BeeBox.Minecraft5.name
 
 ## Growthcraft|Nether Bee Boxes
-tile.grc.BeeBox.Nether0.name=Apiário de Malícia
+tile.grc.BeeBox.Nether0.name=tile.grc.BeeBox.Nether0.name
 
 ## Growthcraft|Bamboo Bee Boxes
-tile.grc.BeeBox.Bamboo0.name=Apiário de Bambu
+tile.grc.BeeBox.Bamboo0.name=tile.grc.BeeBox.Bamboo0.name
 
 ## Thaumcraft Bee Boxes
-tile.grc.BeeBox.Thaumcraft0.name=Apiário de Greatwood
-tile.grc.BeeBox.Thaumcraft1.name=Apiário de Silverwood
+tile.grc.BeeBox.Thaumcraft0.name=tile.grc.BeeBox.Thaumcraft0.name
+tile.grc.BeeBox.Thaumcraft1.name=tile.grc.BeeBox.Thaumcraft1.name
 
 ## Forestry Bee Boxes - this is just insane...
 ### Regular
@@ -105,64 +105,64 @@ tile.grc.BeeBox.Botania1.name=tile.grc.BeeBox.Botania1.name
 tile.grc.BeeBox.Botania2.name=tile.grc.BeeBox.Botania2.name
 
 # Other Blocks
-tile.grc.beeHive.name=Colméia de Abelhas
+tile.grc.beeHive.name=tile.grc.beeHive.name
 
 # Items
-item.grc.honeyComb.empty.name=Favo Vazio
-item.grc.honeyComb.full.name=Favo de Mel
-item.grc.honeyJar.name=Mel
-item.grc.bee.name=Abelha
+item.grc.honeyComb.empty.name=item.grc.honeyComb.empty.name
+item.grc.honeyComb.full.name=item.grc.honeyComb.full.name
+item.grc.honeyJar.name=item.grc.honeyJar.name
+item.grc.bee.name=item.grc.bee.name
 item.grc.FoodBottleFluidHoney.name=item.grc.FoodBottleFluidHoney.name
 item.grc.BucketFluidHoney.name=item.grc.BucketFluidHoney.name
-item.grcbees.BeesWax.normal.name=Cera de Abelha
-item.grcbees.BeesWax.red.name=Cera de Abelha Vermelha
-item.grcbees.BeesWax.black.name=Cera de Abelha Preta
+item.grcbees.BeesWax.normal.name=item.grcbees.BeesWax.normal.name
+item.grcbees.BeesWax.red.name=item.grcbees.BeesWax.red.name
+item.grcbees.BeesWax.black.name=item.grcbees.BeesWax.black.name
 
 # Tooltips
-grc.bees.item.honeyComb.deprecated=Esse item se tornou obsoleto, crafte para conseguir a nova versão.
+grc.bees.item.honeyComb.deprecated=grc.bees.item.honeyComb.deprecated
 
 # Containers
-container.grc.beeBox=Apiário
+container.grc.beeBox=container.grc.beeBox
 
 # Fluids
 fluid.grc.honey=fluid.grc.honey
-fluid.grc.honeyMead=Hidromel
-fluid.grc.honeyMead0=Hidromel
-fluid.grc.honeyMead1=Hidromel
-fluid.grc.honeyMead2=Hidromel
-fluid.grc.honeyMead3=Hidromel
-fluid.grc.honeyMead4=Hidromel
-fluid.grc.honeyMead5=Hidromel
-fluid.grc.honeyMead6=Hidromel
+fluid.grc.honeyMead=fluid.grc.honeyMead
+fluid.grc.honeyMead0=fluid.grc.honeyMead0
+fluid.grc.honeyMead1=fluid.grc.honeyMead1
+fluid.grc.honeyMead2=fluid.grc.honeyMead2
+fluid.grc.honeyMead3=fluid.grc.honeyMead3
+fluid.grc.honeyMead4=fluid.grc.honeyMead4
+fluid.grc.honeyMead5=fluid.grc.honeyMead5
+fluid.grc.honeyMead6=fluid.grc.honeyMead6
 
 # Fluid Bottles
 item.grc.BottleFluidHoney.name=item.grc.BottleFluidHoney.name
 
 # Fluid Buckets
 item.bucket.fluid.grc.honey.name=item.bucket.fluid.grc.honey.name
-item.bucket.fluid.grc.honeyMead.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead0.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead1.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead2.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead3.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead4.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead5.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead6.name=Balde de Hidromel
+item.bucket.fluid.grc.honeyMead.name=item.bucket.fluid.grc.honeyMead.name
+item.bucket.fluid.grc.honeyMead0.name=item.bucket.fluid.grc.honeyMead0.name
+item.bucket.fluid.grc.honeyMead1.name=item.bucket.fluid.grc.honeyMead1.name
+item.bucket.fluid.grc.honeyMead2.name=item.bucket.fluid.grc.honeyMead2.name
+item.bucket.fluid.grc.honeyMead3.name=item.bucket.fluid.grc.honeyMead3.name
+item.bucket.fluid.grc.honeyMead4.name=item.bucket.fluid.grc.honeyMead4.name
+item.bucket.fluid.grc.honeyMead5.name=item.bucket.fluid.grc.honeyMead5.name
+item.bucket.fluid.grc.honeyMead6.name=item.bucket.fluid.grc.honeyMead6.name
 
 # Fluid Blocks
 tile.grc.BlockFluidHoney.name=tile.grc.BlockFluidHoney.name
-tile.fluid.grc.honeyMead.name=Hidromel
-tile.fluid.grc.honeyMead0.name=Hidromel
-tile.fluid.grc.honeyMead1.name=Hidromel
-tile.fluid.grc.honeyMead2.name=Hidromel
-tile.fluid.grc.honeyMead3.name=Hidromel
-tile.fluid.grc.honeyMead4.name=Hidromel
-tile.fluid.grc.honeyMead5.name=Hidromel
-tile.fluid.grc.honeyMead6.name=Hidromel
+tile.fluid.grc.honeyMead.name=tile.fluid.grc.honeyMead.name
+tile.fluid.grc.honeyMead0.name=tile.fluid.grc.honeyMead0.name
+tile.fluid.grc.honeyMead1.name=tile.fluid.grc.honeyMead1.name
+tile.fluid.grc.honeyMead2.name=tile.fluid.grc.honeyMead2.name
+tile.fluid.grc.honeyMead3.name=tile.fluid.grc.honeyMead3.name
+tile.fluid.grc.honeyMead4.name=tile.fluid.grc.honeyMead4.name
+tile.fluid.grc.honeyMead5.name=tile.fluid.grc.honeyMead5.name
+tile.fluid.grc.honeyMead6.name=tile.fluid.grc.honeyMead6.name
 
 # Other
-grc.bees.bonus_prefix=Bonus :
-grc.bees.bees_prefix=Bees :
-grc.bees.honey_prefix=Honey :
-grc.bees.growth_rate_prefix=Growth Rate :
-grc.bees.growth_rate_value=%d%%
+grc.bees.bonus_prefix=grc.bees.bonus_prefix
+grc.bees.bees_prefix=grc.bees.bees_prefix
+grc.bees.honey_prefix=grc.bees.honey_prefix
+grc.bees.growth_rate_prefix=grc.bees.growth_rate_prefix
+grc.bees.growth_rate_value=grc.bees.growth_rate_value

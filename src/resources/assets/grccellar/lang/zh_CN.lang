@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.tabGrCCellar=Growthcraft|地窖
+itemGroup.creative_tab_grccellar=Growthcraft|地窖
 
 # Blocks
 tile.grc.fruitPress.name=榨汁机
@@ -49,21 +49,27 @@ grc.potion.tipsy=微醺
 grc.booze=豪饮
 
 # Modifiers
-grc.fluids.tag.young=低度
-grc.fluids.tag.fermented=发酵
-grc.fluids.tag.extended=后劲
-grc.fluids.tag.potent=高度
-grc.fluids.tag.hyper_extended=较大后劲
-grc.fluids.tag.deadly=致死
-grc.fluids.tag.poisoned=毒性
 grc.fluids.tag.chilled=冷藏
+grc.fluids.tag.cider=grc.fluids.tag.cider
+grc.fluids.tag.deadly=致死
+grc.fluids.tag.extended=后劲
+grc.fluids.tag.fermented=发酵
+grc.fluids.tag.fortified=grc.fluids.tag.fortified
+grc.fluids.tag.hopped=grc.fluids.tag.hopped
+grc.fluids.tag.hyper_extended=较大后劲
 grc.fluids.tag.intoxicated=剧毒
+grc.fluids.tag.magical=grc.fluids.tag.magical
+grc.fluids.tag.poisoned=毒性
+grc.fluids.tag.potent=高度
+grc.fluids.tag.wine=grc.fluids.tag.wine
+grc.fluids.tag.young=低度
 
 # GUI
 gui.grc.empty=清空
 gui.grc.discard=丢弃
 gui.grc.switch=切换
 gui.grc.cantferment=无法发酵。
+gui.grccellar.ferment_barrel.progress_name=gui.grccellar.ferment_barrel.progress_name
 
 # Achievements
 achievement.craftBarrel=萃取桶制造工匠
@@ -72,6 +78,8 @@ achievement.fermentBooze=酵母制作我在行。
 achievement.fermentBooze.desc=酿造酒精饮料。
 achievement.getDrunk=很难酿造嘛？
 achievement.getDrunk.desc=获得效果：微醺 V。
+achievement.onTheGo=achievement.onTheGo
+achievement.onTheGo.desc=achievement.onTheGo.desc
 
 # Tooltips (Number is a percentage)
 # number is a percentage
@@ -99,4 +107,3 @@ grc.cellar.fruit_presser.state_prefix=状态：
 grccellar.waila.option.FruitPressExtras=榨汁机附加信息：
 grccellar.waila.option.BrewKettleExtras=酿造锅附加信息：
 grccellar.waila.option.FermentBarrelExtras=发酵桶附加信息：
-

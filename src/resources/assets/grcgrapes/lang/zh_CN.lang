@@ -14,6 +14,10 @@ fluid.grc.grapeWine0=葡萄酒
 fluid.grc.grapeWine1=葡萄酒
 fluid.grc.grapeWine2=葡萄酒
 fluid.grc.grapeWine3=葡萄酒
+fluid.grc.grapeWine4=fluid.grc.grapeWine4
+fluid.grc.grapeWine5=fluid.grc.grapeWine5
+fluid.grc.grapeWine6=fluid.grc.grapeWine6
+fluid.grc.grapeWine7=fluid.grc.grapeWine7
 
 # Fluid Buckets
 item.bucket.fluid.grc.grapeWine.name=葡萄酒桶
@@ -21,6 +25,10 @@ item.bucket.fluid.grc.grapeWine0.name=葡萄酒桶
 item.bucket.fluid.grc.grapeWine1.name=葡萄酒桶
 item.bucket.fluid.grc.grapeWine2.name=葡萄酒桶
 item.bucket.fluid.grc.grapeWine3.name=葡萄酒桶
+item.bucket.fluid.grc.grapeWine4.name=item.bucket.fluid.grc.grapeWine4.name
+item.bucket.fluid.grc.grapeWine5.name=item.bucket.fluid.grc.grapeWine5.name
+item.bucket.fluid.grc.grapeWine6.name=item.bucket.fluid.grc.grapeWine6.name
+item.bucket.fluid.grc.grapeWine7.name=item.bucket.fluid.grc.grapeWine7.name
 
 # Fluid Blocks
 tile.fluid.grc.grapeWine.name=葡萄酒
@@ -28,9 +36,7 @@ tile.fluid.grc.grapeWine0.name=葡萄酒
 tile.fluid.grc.grapeWine1.name=葡萄酒
 tile.fluid.grc.grapeWine2.name=葡萄酒
 tile.fluid.grc.grapeWine3.name=葡萄酒
-
-# Fluid Tooltips
-fluid.grc.grapeWine0.modifier=轻度
-fluid.grc.grapeWine1.modifier=发酵
-fluid.grc.grapeWine2.modifier=发酵, 高度
-fluid.grc.grapeWine3.modifier=发酵, 后劲
+tile.fluid.grc.grapeWine4.name=tile.fluid.grc.grapeWine4.name
+tile.fluid.grc.grapeWine5.name=tile.fluid.grc.grapeWine5.name
+tile.fluid.grc.grapeWine6.name=tile.fluid.grc.grapeWine6.name
+tile.fluid.grc.grapeWine7.name=tile.fluid.grc.grapeWine7.name

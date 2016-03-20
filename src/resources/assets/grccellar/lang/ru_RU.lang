@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.tabGrCCellar=Growthcraft: Погреб
+itemGroup.creative_tab_grccellar=Growthcraft: Погреб
 
 # Blocks
 tile.grc.fruitPress.name=Плодовый пресс
@@ -49,21 +49,27 @@ grc.potion.tipsy=Опьянение
 grc.booze=Booze
 
 # Modifiers
-grc.fluids.tag.young=Young
-grc.fluids.tag.fermented=Fermented
-grc.fluids.tag.extended=Extended
-grc.fluids.tag.potent=Potent
-grc.fluids.tag.hyper_extended=Hyper Extended
-grc.fluids.tag.deadly=Deadly
-grc.fluids.tag.poisoned=Poisoned
 grc.fluids.tag.chilled=Chilled
+grc.fluids.tag.cider=grc.fluids.tag.cider
+grc.fluids.tag.deadly=Deadly
+grc.fluids.tag.extended=Extended
+grc.fluids.tag.fermented=Fermented
+grc.fluids.tag.fortified=grc.fluids.tag.fortified
+grc.fluids.tag.hopped=grc.fluids.tag.hopped
+grc.fluids.tag.hyper_extended=Hyper Extended
 grc.fluids.tag.intoxicated=Intoxicated
+grc.fluids.tag.magical=grc.fluids.tag.magical
+grc.fluids.tag.poisoned=Poisoned
+grc.fluids.tag.potent=Potent
+grc.fluids.tag.wine=grc.fluids.tag.wine
+grc.fluids.tag.young=Young
 
 # GUI
 gui.grc.empty=Пусто
 gui.grc.discard=Discard
 gui.grc.switch=Переключить
 gui.grc.cantferment=Нельзя начать брожение.
+gui.grccellar.ferment_barrel.progress_name=gui.grccellar.ferment_barrel.progress_name
 
 # Achievements
 achievement.craftBarrel=Добыча алкоголя
@@ -72,8 +78,11 @@ achievement.fermentBooze=Я мог сделать дрожжи.
 achievement.fermentBooze.desc=Сбродите алкогольный напиток.
 achievement.getDrunk=Пивоварение - это проблема?
 achievement.getDrunk.desc=Получите опьянение V.
+achievement.onTheGo=achievement.onTheGo
+achievement.onTheGo.desc=achievement.onTheGo.desc
 
 # Tooltips (Number is a percentage)
+# number is a percentage
 grc.cellar.format.waterBag.name=%s (%s)
 grc.cellar.format.waterBag.contents=Содержит: %1$s (%2$dмВ/%3$dМв)
 grc.cellar.format.tipsy_chance=Шанс опьянения: %d%%

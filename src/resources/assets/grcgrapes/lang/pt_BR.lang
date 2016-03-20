@@ -14,6 +14,21 @@ fluid.grc.grapeWine0=Vinho
 fluid.grc.grapeWine1=Vinho
 fluid.grc.grapeWine2=Vinho
 fluid.grc.grapeWine3=Vinho
+fluid.grc.grapeWine4=fluid.grc.grapeWine4
+fluid.grc.grapeWine5=fluid.grc.grapeWine5
+fluid.grc.grapeWine6=fluid.grc.grapeWine6
+fluid.grc.grapeWine7=fluid.grc.grapeWine7
+
+# Fluid Buckets
+item.bucket.fluid.grc.grapeWine.name=item.bucket.fluid.grc.grapeWine.name
+item.bucket.fluid.grc.grapeWine0.name=item.bucket.fluid.grc.grapeWine0.name
+item.bucket.fluid.grc.grapeWine1.name=item.bucket.fluid.grc.grapeWine1.name
+item.bucket.fluid.grc.grapeWine2.name=item.bucket.fluid.grc.grapeWine2.name
+item.bucket.fluid.grc.grapeWine3.name=item.bucket.fluid.grc.grapeWine3.name
+item.bucket.fluid.grc.grapeWine4.name=item.bucket.fluid.grc.grapeWine4.name
+item.bucket.fluid.grc.grapeWine5.name=item.bucket.fluid.grc.grapeWine5.name
+item.bucket.fluid.grc.grapeWine6.name=item.bucket.fluid.grc.grapeWine6.name
+item.bucket.fluid.grc.grapeWine7.name=item.bucket.fluid.grc.grapeWine7.name
 
 # Fluid Blocks
 tile.fluid.grc.grapeWine.name=Vinho
@@ -21,9 +36,7 @@ tile.fluid.grc.grapeWine0.name=Vinho
 tile.fluid.grc.grapeWine1.name=Vinho
 tile.fluid.grc.grapeWine2.name=Vinho
 tile.fluid.grc.grapeWine3.name=Vinho
-
-# Fluid Tooltips
-fluid.grc.grapeWine0.modifier=Fresco
-fluid.grc.grapeWine1.modifier=Fermentado
-fluid.grc.grapeWine2.modifier=Fermentado, Potente
-fluid.grc.grapeWine3.modifier=Fermentado, Extendido
+tile.fluid.grc.grapeWine4.name=tile.fluid.grc.grapeWine4.name
+tile.fluid.grc.grapeWine5.name=tile.fluid.grc.grapeWine5.name
+tile.fluid.grc.grapeWine6.name=tile.fluid.grc.grapeWine6.name
+tile.fluid.grc.grapeWine7.name=tile.fluid.grc.grapeWine7.name

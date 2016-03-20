@@ -1,17 +1,17 @@
 # Blocks
-tile.grc.paddyField.name=Reisfeld
-tile.grc.riceBlock.name=Reis
+tile.grc.paddyField.name=tile.grc.paddyField.name
+tile.grc.riceBlock.name=tile.grc.riceBlock.name
 
 # Items
-item.grc.rice.name=Reis
-item.grc.riceBall.name=Onigiri
+item.grc.rice.name=item.grc.rice.name
+item.grc.riceBall.name=item.grc.riceBall.name
 
 # Fluids
-fluid.grc.riceSake=Sake
-fluid.grc.riceSake0=Sake
-fluid.grc.riceSake1=Sake
-fluid.grc.riceSake2=Sake
-fluid.grc.riceSake3=Sake
+fluid.grc.riceSake=fluid.grc.riceSake
+fluid.grc.riceSake0=fluid.grc.riceSake0
+fluid.grc.riceSake1=fluid.grc.riceSake1
+fluid.grc.riceSake2=fluid.grc.riceSake2
+fluid.grc.riceSake3=fluid.grc.riceSake3
 fluid.grc.riceSake4=fluid.grc.riceSake4
 fluid.grc.riceSake5=fluid.grc.riceSake5
 fluid.grc.riceSake6=fluid.grc.riceSake6
@@ -27,11 +27,11 @@ item.bucket.fluid.grc.riceSake5.name=item.bucket.fluid.grc.riceSake5.name
 item.bucket.fluid.grc.riceSake6.name=item.bucket.fluid.grc.riceSake6.name
 
 # Fluid Blocks
-tile.fluid.grc.riceSake.name=Sake
-tile.fluid.grc.riceSake0.name=Sake
-tile.fluid.grc.riceSake1.name=Sake
-tile.fluid.grc.riceSake2.name=Sake
-tile.fluid.grc.riceSake3.name=Sake
+tile.fluid.grc.riceSake.name=tile.fluid.grc.riceSake.name
+tile.fluid.grc.riceSake0.name=tile.fluid.grc.riceSake0.name
+tile.fluid.grc.riceSake1.name=tile.fluid.grc.riceSake1.name
+tile.fluid.grc.riceSake2.name=tile.fluid.grc.riceSake2.name
+tile.fluid.grc.riceSake3.name=tile.fluid.grc.riceSake3.name
 tile.fluid.grc.riceSake4.name=tile.fluid.grc.riceSake4.name
 tile.fluid.grc.riceSake5.name=tile.fluid.grc.riceSake5.name
 tile.fluid.grc.riceSake6.name=tile.fluid.grc.riceSake6.name

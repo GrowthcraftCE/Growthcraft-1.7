@@ -1,17 +1,17 @@
 # Blocks
-tile.grc.hopVine.name=Обычный хмель
+tile.grc.hopVine.name=tile.grc.hopVine.name
 
 # Items
-item.grc.hops.name=Обычный хмель
-item.grc.hopSeeds.name=Семена обычного хмеля
+item.grc.hops.name=item.grc.hops.name
+item.grc.hopSeeds.name=item.grc.hopSeeds.name
 
 # Fluids
-fluid.grc.hopAle=Эль
-fluid.grc.hopAle0=Эль
-fluid.grc.hopAle1=Эль
-fluid.grc.hopAle2=Эль
-fluid.grc.hopAle3=Эль
-fluid.grc.hopAle4=Эль
+fluid.grc.hopAle=fluid.grc.hopAle
+fluid.grc.hopAle0=fluid.grc.hopAle0
+fluid.grc.hopAle1=fluid.grc.hopAle1
+fluid.grc.hopAle2=fluid.grc.hopAle2
+fluid.grc.hopAle3=fluid.grc.hopAle3
+fluid.grc.hopAle4=fluid.grc.hopAle4
 fluid.grc.hopAle5=fluid.grc.hopAle5
 fluid.grc.hopAle6=fluid.grc.hopAle6
 fluid.grc.hopAle7=fluid.grc.hopAle7
@@ -27,12 +27,12 @@ fluid.grc.lager5=fluid.grc.lager5
 fluid.grc.lager6=fluid.grc.lager6
 
 # Fluid Buckets
-item.bucket.fluid.grc.hopAle.name=Ведро эля
-item.bucket.fluid.grc.hopAle0.name=Ведро эля
-item.bucket.fluid.grc.hopAle1.name=Ведро эля
-item.bucket.fluid.grc.hopAle2.name=Ведро эля
-item.bucket.fluid.grc.hopAle3.name=Ведро эля
-item.bucket.fluid.grc.hopAle4.name=Ведро эля
+item.bucket.fluid.grc.hopAle.name=item.bucket.fluid.grc.hopAle.name
+item.bucket.fluid.grc.hopAle0.name=item.bucket.fluid.grc.hopAle0.name
+item.bucket.fluid.grc.hopAle1.name=item.bucket.fluid.grc.hopAle1.name
+item.bucket.fluid.grc.hopAle2.name=item.bucket.fluid.grc.hopAle2.name
+item.bucket.fluid.grc.hopAle3.name=item.bucket.fluid.grc.hopAle3.name
+item.bucket.fluid.grc.hopAle4.name=item.bucket.fluid.grc.hopAle4.name
 item.bucket.fluid.grc.hopAle5.name=item.bucket.fluid.grc.hopAle5.name
 item.bucket.fluid.grc.hopAle6.name=item.bucket.fluid.grc.hopAle6.name
 item.bucket.fluid.grc.hopAle7.name=item.bucket.fluid.grc.hopAle7.name
@@ -48,12 +48,12 @@ item.bucket.fluid.grc.lager5.name=item.bucket.fluid.grc.lager5.name
 item.bucket.fluid.grc.lager6.name=item.bucket.fluid.grc.lager6.name
 
 # Fluid Blocks
-tile.fluid.grc.hopAle.name=Эль
-tile.fluid.grc.hopAle0.name=Эль
-tile.fluid.grc.hopAle1.name=Эль
-tile.fluid.grc.hopAle2.name=Эль
-tile.fluid.grc.hopAle3.name=Эль
-tile.fluid.grc.hopAle4.name=Эль
+tile.fluid.grc.hopAle.name=tile.fluid.grc.hopAle.name
+tile.fluid.grc.hopAle0.name=tile.fluid.grc.hopAle0.name
+tile.fluid.grc.hopAle1.name=tile.fluid.grc.hopAle1.name
+tile.fluid.grc.hopAle2.name=tile.fluid.grc.hopAle2.name
+tile.fluid.grc.hopAle3.name=tile.fluid.grc.hopAle3.name
+tile.fluid.grc.hopAle4.name=tile.fluid.grc.hopAle4.name
 tile.fluid.grc.hopAle5.name=tile.fluid.grc.hopAle5.name
 tile.fluid.grc.hopAle6.name=tile.fluid.grc.hopAle6.name
 tile.fluid.grc.hopAle7.name=tile.fluid.grc.hopAle7.name
@@ -69,4 +69,4 @@ tile.fluid.grc.lager5.name=tile.fluid.grc.lager5.name
 tile.fluid.grc.lager6.name=tile.fluid.grc.lager6.name
 
 # Fluid Tooltips
-fluid.grc.hopAle4.modifier=Нехмельной, молодой
+fluid.grc.hopAle4.modifier=fluid.grc.hopAle4.modifier

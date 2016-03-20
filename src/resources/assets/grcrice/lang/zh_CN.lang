@@ -35,12 +35,3 @@ tile.fluid.grc.riceSake3.name=米酒
 tile.fluid.grc.riceSake4.name=Divine Sake
 tile.fluid.grc.riceSake5.name=米酒
 tile.fluid.grc.riceSake6.name=米酒
-
-# Fluid Tooltips
-fluid.grc.riceSake0.modifier=低度
-fluid.grc.riceSake1.modifier=发酵
-fluid.grc.riceSake2.modifier=发酵，高度
-fluid.grc.riceSake3.modifier=发酵，后劲
-fluid.grc.riceSake4.modifier=发酵，较大后劲
-fluid.grc.riceSake5.modifier=发酵，毒性
-fluid.grc.riceSake6.modifier=剧毒

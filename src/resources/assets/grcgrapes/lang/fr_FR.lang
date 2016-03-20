@@ -14,6 +14,10 @@ fluid.grc.grapeWine0=Vin
 fluid.grc.grapeWine1=Vin
 fluid.grc.grapeWine2=Vin
 fluid.grc.grapeWine3=Vin
+fluid.grc.grapeWine4=fluid.grc.grapeWine4
+fluid.grc.grapeWine5=fluid.grc.grapeWine5
+fluid.grc.grapeWine6=fluid.grc.grapeWine6
+fluid.grc.grapeWine7=fluid.grc.grapeWine7
 
 # Fluid Buckets
 item.bucket.fluid.grc.grapeWine.name=Seau de vin
@@ -21,6 +25,10 @@ item.bucket.fluid.grc.grapeWine0.name=Seau de vin
 item.bucket.fluid.grc.grapeWine1.name=Seau de vin
 item.bucket.fluid.grc.grapeWine2.name=Seau de vin
 item.bucket.fluid.grc.grapeWine3.name=Seau de vin
+item.bucket.fluid.grc.grapeWine4.name=item.bucket.fluid.grc.grapeWine4.name
+item.bucket.fluid.grc.grapeWine5.name=item.bucket.fluid.grc.grapeWine5.name
+item.bucket.fluid.grc.grapeWine6.name=item.bucket.fluid.grc.grapeWine6.name
+item.bucket.fluid.grc.grapeWine7.name=item.bucket.fluid.grc.grapeWine7.name
 
 # Fluid Blocks
 tile.fluid.grc.grapeWine.name=Vin
@@ -28,9 +36,7 @@ tile.fluid.grc.grapeWine0.name=Vin
 tile.fluid.grc.grapeWine1.name=Vin
 tile.fluid.grc.grapeWine2.name=Vin
 tile.fluid.grc.grapeWine3.name=Vin
-
-# Fluid Tooltips
-fluid.grc.grapeWine0.modifier=Nouveau
-fluid.grc.grapeWine1.modifier=Fermenté
-fluid.grc.grapeWine2.modifier=Fermenté, Puissant
-fluid.grc.grapeWine3.modifier=Fermenté, Prolongé
+tile.fluid.grc.grapeWine4.name=tile.fluid.grc.grapeWine4.name
+tile.fluid.grc.grapeWine5.name=tile.fluid.grc.grapeWine5.name
+tile.fluid.grc.grapeWine6.name=tile.fluid.grc.grapeWine6.name
+tile.fluid.grc.grapeWine7.name=tile.fluid.grc.grapeWine7.name

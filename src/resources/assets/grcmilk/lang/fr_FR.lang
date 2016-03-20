@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.grcmilk.CreativeTab=Growthcraft Laiterie
+itemGroup.creative_tab_grcmilk=Growthcraft Laiterie
 
 # Items
 ## Cheese
@@ -16,8 +16,11 @@ item.grcmilk.CheeseCloth.name=Etoffe à Fromage
 item.grcmilk.Butter.salted.name=Beurre (Salé)
 item.grcmilk.Butter.unsalted.name=Beurre (Non salé)
 ## Ice Cream
-item.grcmilk.IceCream.plain.name=Crême Glacée (Nature)
+item.grcmilk.IceCream.apple.name=item.grcmilk.IceCream.apple.name
 item.grcmilk.IceCream.chocolate.name=Crême Glacée (Chocolat)
+item.grcmilk.IceCream.grape.name=item.grcmilk.IceCream.grape.name
+item.grcmilk.IceCream.honey.name=item.grcmilk.IceCream.honey.name
+item.grcmilk.IceCream.plain.name=Crême Glacée (Nature)
 item.grcmilk.StarterCulture.name=Levain
 item.grcmilk.Yogurt.name=Yaourt
 ## Other
@@ -73,6 +76,7 @@ tile.grcmilk.HangingCurds.parmesan.dried.name=Parmesan Caillé Egoutté
 tile.grcmilk.HangingCurds.monterey.dried.name=Monterey Caillé Egoutté
 tile.grcmilk.HangingCurds.ricotta.dried.name=Ricotta Caillé Egoutté
 tile.grcmilk.Pancheon.name=Pancheon
+tile.grcmilk.Thistle.name=tile.grcmilk.Thistle.name
 
 ### Cheese Vat Fluid Tanks
 grcmilk.cheese_vat.fluid_tank.primary=Primaire
@@ -82,32 +86,36 @@ grcmilk.cheese_vat.fluid_tank.recipe=Secondaire
 
 # Fluids
 ## Tags
+grc.fluids.tag.cheese=grc.fluids.tag.cheese
+grc.fluids.tag.cream=Crème
 grc.fluids.tag.milk=Lait
 grc.fluids.tag.milk_curds=Lait Caillé
 grc.fluids.tag.rennet=Présure
-grc.fluids.tag.cream=Crème
+grc.fluids.tag.whey=grc.fluids.tag.whey
 ## Standard
 ### Fluids
 fluid.grcmilk.ButterMilk=Lait de Beurre
+fluid.grcmilk.CheeseAppenzeller=Fromage Appenzeller
+fluid.grcmilk.CheeseAsiago=Fromage Asiago
+fluid.grcmilk.CheeseCheddar=Fromage Cheddar
+fluid.grcmilk.CheeseEmmentaler=Fromage Suisse
+fluid.grcmilk.CheeseGorgonzola=Fromage Gorgonzola
+fluid.grcmilk.CheeseMonterey=Fromage Monterey
+fluid.grcmilk.CheeseParmesan=Fromage Parmesan
+fluid.grcmilk.CheeseRicotta=Fromage Ricotta
 fluid.grcmilk.Cream=Crème
 fluid.grcmilk.Curds=Lait Caillé
 fluid.grcmilk.Milk=Lait
+fluid.grcmilk.PasteurizedMilk=fluid.grcmilk.PasteurizedMilk
 fluid.grcmilk.Rennet=Présure
 fluid.grcmilk.SkimMilk=Lait Ecrémé
 fluid.grcmilk.Whey=Petit-Lait
-fluid.grcmilk.CheeseCheddar=Fromage Cheddar
-fluid.grcmilk.CheeseGorgonzola=Fromage Gorgonzola
-fluid.grcmilk.CheeseEmmentaler=Fromage Suisse
-fluid.grcmilk.CheeseAppenzeller=Fromage Appenzeller
-fluid.grcmilk.CheeseAsiago=Fromage Asiago
-fluid.grcmilk.CheeseParmesan=Fromage Parmesan
-fluid.grcmilk.CheeseMonterey=Fromage Monterey
-fluid.grcmilk.CheeseRicotta=Fromage Ricotta
 ### Blocks
 tile.grcmilk.BlockFluidButterMilk.name=Lait de Beurre
 tile.grcmilk.BlockFluidCream.name=Crème
 tile.grcmilk.BlockFluidCurds.name=Lait Caillé
 tile.grcmilk.BlockFluidMilk.name=Lait
+tile.grcmilk.BlockFluidPasteurizedMilk.name=tile.grcmilk.BlockFluidPasteurizedMilk.name
 tile.grcmilk.BlockFluidRennet.name=Présure
 tile.grcmilk.BlockFluidSkimMilk.name=Lait Ecrémé
 tile.grcmilk.BlockFluidWhey.name=Petit-Lait
@@ -116,6 +124,7 @@ item.grcmilk.BottleFluidButterMilk.name=Bouteille de Lait de Beurre
 item.grcmilk.BottleFluidCream.name=Bouteille de Crème
 item.grcmilk.BottleFluidCurds.name=Bouteille de Lait Caillé
 item.grcmilk.BottleFluidMilk.name=Bouteille de Lait
+item.grcmilk.BottleFluidPasteurizedMilk.name=item.grcmilk.BottleFluidPasteurizedMilk.name
 item.grcmilk.BottleFluidRennet.name=Bouteille de Présure
 item.grcmilk.BottleFluidSkimMilk.name=Bouteille de Lait Ecrémé
 item.grcmilk.BottleFluidWhey.name=Bouteille de Petit-Lait
@@ -124,6 +133,7 @@ item.bucket.fluid.grcmilk.ButterMilk.name=Seau de Lait de Beurre
 item.bucket.fluid.grcmilk.Cream.name=Seau de Crème
 item.bucket.fluid.grcmilk.Curds.name=Seau de Lait Caillé
 item.bucket.fluid.grcmilk.Milk.name=Seau de Lait
+item.bucket.fluid.grcmilk.PasteurizedMilk.name=item.bucket.fluid.grcmilk.PasteurizedMilk.name
 item.bucket.fluid.grcmilk.Rennet.name=Seau de Présure
 item.bucket.fluid.grcmilk.SkimMilk.name=Seau de Lait Ecrémé
 item.bucket.fluid.grcmilk.Whey.name=Seau de Petit-Lait
@@ -155,7 +165,6 @@ item.bucket.fluid.grcmilk.Kumis5.name=Seau de Lait Vil
 
 # Effects
 grc.effect.booze_milk=Enlève tous les effets (Sauf l'Ivresse)
-
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s

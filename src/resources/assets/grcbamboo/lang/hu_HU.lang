@@ -1,0 +1,24 @@
+# Blocks
+tile.grc.bambooBlock.name=tile.grc.bambooBlock.name
+tile.grc.bambooDoor.name=tile.grc.bambooDoor.name
+tile.grc.bambooFence.name=tile.grc.bambooFence.name
+tile.grc.bambooFenceGate.name=tile.grc.bambooFenceGate.name
+tile.grc.bambooFenceRope.name=tile.grc.bambooFenceRope.name
+tile.grc.bambooLeaves.name=tile.grc.bambooLeaves.name
+tile.grc.bambooScaffold.name=tile.grc.bambooScaffold.name
+tile.grc.bambooShoot.name=tile.grc.bambooShoot.name
+tile.grc.bambooSlab.name=tile.grc.bambooSlab.name
+tile.grc.bambooStairs.name=tile.grc.bambooStairs.name
+tile.grc.bambooStalk.name=tile.grc.bambooStalk.name
+tile.grc.bambooWall.name=tile.grc.bambooWall.name
+
+# Items
+item.grc.bamboo.name=item.grc.bamboo.name
+item.grc.bambooDoor.name=item.grc.bambooDoor.name
+item.grc.bambooSlab.name=item.grc.bambooSlab.name
+item.grc.bambooRaft.name=item.grc.bambooRaft.name
+item.grc.bambooCoal.name=item.grc.bambooCoal.name
+item.grc.bambooShootFood.name=item.grc.bambooShootFood.name
+
+# Entities
+entity.Growthcraft|Bamboo.bambooRaft.name=entity.Growthcraft|Bamboo.bambooRaft.name
