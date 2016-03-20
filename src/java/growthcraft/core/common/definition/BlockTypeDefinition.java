@@ -77,6 +77,18 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	}
 
 	/**
+	 * Checks if the supplied item is equal to the given, this uses
+	 * == to compare the items
+	 *
+	 * @param other - item to compare to
+	 * @return true if items are equal, false otherwise
+	 */
+	public boolean equals(Item other)
+	{
+		return other == getItem();
+	}
+
+	/**
 	 * Checks if the supplied block is the same as the given, this uses ==
 	 * for comparison
 	 *
