@@ -167,21 +167,6 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		return countHoney() >= size;
 	}
 
-	public void decreaseHoney(int count)
-	{
-		for (int i = 1; i < getSizeInventory(); ++i)
-		{
-			if (count <= 0) break;
-			if (slotHasHoneyComb(i, HoneyCombExpect.FILLED))
-			{
-				final ItemStack stack = getStackInSlot(i);
-				final ItemStack result = BeesRegistry.instance().getEmptyHoneyComb(stack);
-				setInventorySlotContents(i, result != null ? result.copy() : null);
-				count--;
-			}
-		}
-	}
-
 	public ItemStack getBeeStack()
 	{
 		return getStackInSlot(ContainerBeeBox.SlotId.BEE);
@@ -224,23 +209,51 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		spawnHoneyCombs(1);
 	}
 
-	public boolean fillHoneyCombs(int n)
+	public void decreaseHoney(int count)
 	{
 		boolean shouldMark = false;
 		for (int i = 1; i < getSizeInventory(); ++i)
 		{
-			if (n <= 0) break;
-			final ItemStack stack = getStackInSlot(i);
-			if (stack != null && slotHasEmptyComb(i))
+			if (count <= 0) break;
+			if (slotHasHoneyComb(i, HoneyCombExpect.FILLED))
 			{
-				final ItemStack resultStack = BeesRegistry.instance().getFilledHoneyComb(stack).copy();
-				setInventorySlotContents(i, resultStack);
-				n--;
+				final ItemStack stack = getStackInSlot(i);
+				final ItemStack result = BeesRegistry.instance().getEmptyHoneyComb(stack);
+				setInventorySlotContents(i, result != null ? result.copy() : null);
+				count--;
 				shouldMark = true;
 			}
 		}
 		if (shouldMark)
 		{
+			markDirty();
+			markForBlockUpdate();
+			return true;
+		}
+		return false;
+	}
+
+	public boolean fillHoneyCombs(int count)
+	{
+		boolean shouldMark = false;
+		for (int i = 1; i < getSizeInventory(); ++i)
+		{
+			if (count <= 0) break;
+			final ItemStack stack = getStackInSlot(i);
+			if (stack != null && slotHasEmptyComb(i))
+			{
+				final ItemStack resultStack = BeesRegistry.instance().getFilledHoneyComb(stack);
+				if (resultStack != null)
+				{
+					setInventorySlotContents(i, resultStack.copy());
+				}
+				count--;
+				shouldMark = true;
+			}
+		}
+		if (shouldMark)
+		{
+			markDirty();
 			markForBlockUpdate();
 			return true;
 		}
@@ -321,7 +334,6 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 					ItemUtils.addStackToPlayer(GrowthCraftBees.items.honeyJar.asStack(), player, worldObj, xCoord, yCoord, zCoord, false);
 					ItemUtils.consumeStackOnPlayer(stack, player);
 					decreaseHoney(6);
-					markForBlockUpdate();
 					return true;
 				}
 			}
@@ -355,7 +367,6 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 						ItemUtils.addStackToPlayer(result, player, worldObj, xCoord, yCoord, zCoord, false);
 						ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
 						decreaseHoney(2);
-						markForBlockUpdate();
 						return true;
 					}
 				}
@@ -370,7 +381,6 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 						ItemUtils.addStackToPlayer(result, player, worldObj, xCoord, yCoord, zCoord, false);
 						ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
 						decreaseHoney(6);
-						markForBlockUpdate();
 						return true;
 					}
 				}
