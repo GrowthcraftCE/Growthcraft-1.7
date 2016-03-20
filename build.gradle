@@ -63,15 +63,20 @@ archivesBaseName = "growthcraft"
 ext.growthcraftApi = "src/java/growthcraft/api"
 
 // 3rd party APIs
-ext.mfrApi = "api/powercrystals/minefactoryreloaded/api"
-ext.mfrApiExclusionPattern = "**/powercrystals/minefactoryreloaded/api/**"
-
-ext.thaumcraftApi = "api/thaumcraft/api"
-ext.thaumcraftApiExclusionPattern = "**/thaumcraft/api/**"
+ext.cofhApiExclusionPattern = "**/api/cofh/**"
 
 ext.forestryApiRoot = "api/ForestryAPI"
 ext.forestryApi = "api/ForestryAPI/forestry/api"
 ext.forestryApiExclusionPattern = "**/forestry/api/**"
+
+ext.mfrApi = "api/powercrystals/minefactoryreloaded/api"
+ext.mfrApiExclusionPattern = "**/powercrystals/minefactoryreloaded/api/**"
+
+ext.rotaryCraftApi = "api/Reika/RotaryCraft/API"
+ext.rotaryCraftExclusionPattern = "**/api/Reika/RotaryCraft/**"
+
+ext.thaumcraftApi = "api/thaumcraft/api"
+ext.thaumcraftApiExclusionPattern = "**/thaumcraft/api/**"
 
 minecraft {
     version = minecraft_forge_version
@@ -96,8 +101,9 @@ sourceSets {
         java {
             srcDir project.growthcraftApi
             srcDir project.forestryApi
-            srcDir project.thaumcraftApi
             srcDir project.mfrApi
+            srcDir project.rotaryCraftApi
+            srcDir project.thaumcraftApi
         }
     }
 }
@@ -120,7 +126,7 @@ dependencies {
 
     testCompile "junit:junit:4.11"
 }
-/*
+
 runClient {
     if( project.hasProperty("mcUsername") && project.hasProperty("mcPassword") ) {
         args "--username=${project.mcUsername}"
@@ -134,7 +140,7 @@ debugClient {
         args "--username=${project.mcUsername}"
         args "--password=${project.mcPassword}"
     }
-}*/
+}
 
 // --------------------
 // extra jar section
@@ -161,6 +167,7 @@ javadoc {
     // add api classes to javadoc
     source += sourceSets.api.allSource
     // exclude 3rd party apis from the javadoc
+    exclude project.cofhApiExclusionPattern
     exclude project.forestryApiExclusionPattern
     exclude project.thaumcraftApiExclusionPattern
     exclude project.mfrApiExclusionPattern
@@ -176,22 +183,31 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 
 // because the normal output has been made to be obfuscated
 task deobfJar(type: Jar) {
+    classifier = "dev"
+
     from sourceSets.main.output
     from(sourceSets.api.output) {
         exclude project.forestryApiExclusionPattern
         exclude project.thaumcraftApiExclusionPattern
         exclude project.mfrApiExclusionPattern
     }
-    classifier = "dev"
+    // Only include the thaumcraft LICENSE
+    into("thaumcraft/api") {
+        from project.thaumcraftApi + "/LICENSE"
+    }
+    into("forestry/api") {
+        from project.forestryApiRoot + "/LICENSE.txt"
+    }
 }
 
 task apiJar(type: Jar) {
+    classifier = "api"
+
     from(sourceSets.api.output) {
         exclude project.forestryApiExclusionPattern
         exclude project.thaumcraftApiExclusionPattern
         exclude project.mfrApiExclusionPattern
     }
-    classifier = "api"
 }
 
 jar {
