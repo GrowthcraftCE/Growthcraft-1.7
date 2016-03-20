@@ -11,10 +11,11 @@ import growthcraft.core.common.tileentity.GrcTileEntityInventoryBase;
 import growthcraft.core.common.tileentity.IItemHandler;
 import growthcraft.core.util.ItemUtils;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IItemHandler
@@ -30,6 +31,14 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	private static final int[] beeSlotIds = new int[] {0};
 	private static final int[] honeyCombSlotIds = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
 	private DeviceBeeBox beeBox = new DeviceBeeBox(this);
+
+	@Override
+	public void onInventoryChanged(IInventory inv, int index)
+	{
+		super.onInventoryChanged(inv, index);
+		if (index > 0)
+			markForBlockUpdate();
+	}
 
 	@Override
 	public String getDefaultInventoryName()
@@ -215,8 +224,9 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		spawnHoneyCombs(1);
 	}
 
-	public void fillHoneyCombs(int n)
+	public boolean fillHoneyCombs(int n)
 	{
+		boolean shouldMark = false;
 		for (int i = 1; i < getSizeInventory(); ++i)
 		{
 			if (n <= 0) break;
@@ -226,8 +236,15 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 				final ItemStack resultStack = BeesRegistry.instance().getFilledHoneyComb(stack).copy();
 				setInventorySlotContents(i, resultStack);
 				n--;
+				shouldMark = true;
 			}
 		}
+		if (shouldMark)
+		{
+			markForBlockUpdate();
+			return true;
+		}
+		return false;
 	}
 
 	public void fillHoneyComb()
