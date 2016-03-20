@@ -38,6 +38,7 @@ public class GrcInternalInventory implements IInventory, INBTSerializableContext
 {
 	public static final int WILDCARD_SLOT = -1;
 
+	protected String inventoryName;
 	protected ItemStack[] items;
 	protected int maxSize;
 	protected int maxStackSize;
@@ -45,6 +46,7 @@ public class GrcInternalInventory implements IInventory, INBTSerializableContext
 
 	public GrcInternalInventory(Object par, int size, int maxStack)
 	{
+		this.inventoryName = "grc.inventory.internal";
 		this.parent = par;
 		this.maxSize = size;
 		this.maxStackSize = maxStack;
@@ -162,10 +164,16 @@ public class GrcInternalInventory implements IInventory, INBTSerializableContext
 		return false;
 	}
 
+	public GrcInternalInventory setInventoryName(String name)
+	{
+		this.inventoryName = name;
+		return this;
+	}
+
 	@Override
 	public String getInventoryName()
 	{
-		return "grc.inventory.internal";
+		return inventoryName;
 	}
 
 	@Override
