@@ -76,6 +76,11 @@ public class FenceRopeRegistry
 		{
 			return fenceRopeBlock.getMetadata();
 		}
+
+		public boolean matches(BlockKey key)
+		{
+			return fenceBlock.matches(key);
+		}
 	}
 
 	private static final FenceRopeRegistry INSTANCE = new FenceRopeRegistry();
@@ -98,15 +103,17 @@ public class FenceRopeRegistry
 
 	public FenceRopeEntry getEntry(@Nonnull BlockKey key)
 	{
-		return entries.get(key);
+		for (FenceRopeEntry entry : entries.values())
+		{
+			if (entry.matches(key)) return entry;
+		}
+		return null;
 	}
 
 	public FenceRopeEntry getEntry(@Nullable Block block, int meta)
 	{
 		if (block == null) return null;
-		final FenceRopeEntry entry = getEntry(new BlockKey(block, meta));
-		if (entry != null) return entry;
-		return getEntry(new BlockKey(block, ItemKey.WILDCARD_VALUE));
+		return getEntry(new BlockKey(block, meta));
 	}
 
 	public static FenceRopeRegistry instance()

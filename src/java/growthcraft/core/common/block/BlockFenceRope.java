@@ -22,7 +22,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockFenceRope extends Block implements IBlockRope
+public class BlockFenceRope extends GrcBlockBase implements IBlockRope
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;

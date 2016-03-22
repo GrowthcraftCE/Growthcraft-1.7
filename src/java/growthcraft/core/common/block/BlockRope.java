@@ -18,7 +18,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockRope extends Block implements IBlockRope
+public class BlockRope extends GrcBlockBase implements IBlockRope
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;

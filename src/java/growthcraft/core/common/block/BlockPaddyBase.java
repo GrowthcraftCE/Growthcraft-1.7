@@ -22,7 +22,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public abstract class BlockPaddyBase extends Block implements IPaddy
+public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 {
 	public BlockPaddyBase(Material material)
 	{
