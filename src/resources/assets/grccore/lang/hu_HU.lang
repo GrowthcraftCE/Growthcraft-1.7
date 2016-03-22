@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.tabGrowthCraft=itemGroup.tabGrowthCraft
+itemGroup.creative_tab_grccore=itemGroup.creative_tab_grccore
 
 # Blocks
 tile.grc.fenceRope.name=tile.grc.fenceRope.name
