@@ -91,6 +91,12 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 	}
 
 	@Override
+	public int getAmount()
+	{
+		return amount;
+	}
+
+	@Override
 	public List<FluidStack> getFluidStacks()
 	{
 		final List<FluidStack> stacks = new ArrayList<FluidStack>();
