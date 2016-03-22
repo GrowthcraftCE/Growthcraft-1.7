@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.tabGrowthCraft=Growthcraft
+itemGroup.creative_tab_grccore=Growthcraft
 
 # Blocks
 tile.grc.fenceRope.name=Barrière à corde
