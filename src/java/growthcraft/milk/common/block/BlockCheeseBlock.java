@@ -42,7 +42,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -68,36 +67,39 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
+	protected boolean shouldRestoreBlockState(World world, int x, int y, int z, ItemStack stack)
 	{
-		final Item item = stack.getItem();
-		if (item instanceof ItemBlockCheeseBlock)
-		{
-			final ItemBlockCheeseBlock cheeseBlock = (ItemBlockCheeseBlock)item;
-			final TileEntityCheeseBlock teCheeseBlock = getTileEntity(world, x, y, z);
-			if (teCheeseBlock != null)
-			{
-				teCheeseBlock.readFromNBTForItem(cheeseBlock.getTileData(stack));
-			}
-		}
+		return true;
 	}
 
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void getSubBlocks(Item item, CreativeTabs tab, List list)
+	protected boolean dropsTileStack(World world, int x, int y, int z, int metadata, int fortune)
 	{
-		if (item instanceof ItemBlockCheeseBlock)
+		return true;
+	}
+
+	@Override
+	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, int x, int y, int z, int meta)
+	{
+		final TileEntityCheeseBlock te = getTileEntity(world, x, y, z);
+		if (te != null)
 		{
-			final ItemBlockCheeseBlock ib = (ItemBlockCheeseBlock)item;
-			for (EnumCheeseType cheese : EnumCheeseType.VALUES)
-			{
-				if (cheese.hasBlock())
-				{
-					final ItemStack stack = new ItemStack(item, 1, cheese.meta);
-					ib.getTileData(stack);
-					list.add(stack);
-				}
-			}
+			return te.asItemStack();
+		}
+		return new ItemStack(this, 1, meta);
+	}
+
+	@Override
+	protected void getTileItemStackDrops(List<ItemStack> ret, World world, int x, int y, int z, int metadata, int fortune)
+	{
+		final TileEntityCheeseBlock te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			ret.add(te.asItemStack());
+		}
+		else
+		{
+			super.getTileItemStackDrops(ret, world, x, y, z, metadata, fortune);
 		}
 	}
 
@@ -116,13 +118,32 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-
-		final TileEntityCheeseBlock teCheeseBlock = getTileEntity(world, x, y, z);
-		if (teCheeseBlock != null)
+		final TileEntityCheeseBlock te = getTileEntity(world, x, y, z);
+		if (te != null)
 		{
-			teCheeseBlock.populateDrops(ret);
+			te.populateDrops(ret);
 		}
 		return ret;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public void getSubBlocks(Item item, CreativeTabs tab, List list)
+	{
+		if (item instanceof ItemBlockCheeseBlock)
+		{
+			final ItemBlockCheeseBlock ib = (ItemBlockCheeseBlock)item;
+			for (EnumCheeseType cheese : EnumCheeseType.VALUES)
+			{
+				if (cheese.hasBlock())
+				{
+					final ItemStack stack = new ItemStack(item, 1, cheese.meta);
+					ib.getTileTagCompound(stack);
+					list.add(stack);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -171,6 +192,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	private IIcon getIconByTypeAndStage(int side, EnumCheeseType type, EnumCheeseStage stage)
 	{
 		final IIcon[] icons = iconMap.get(type).get(stage);
