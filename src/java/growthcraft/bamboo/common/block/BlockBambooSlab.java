@@ -32,8 +32,8 @@ public class BlockBambooSlab extends BlockSlab
 	/************
 	 * STUFF
 	 ************/
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item item, CreativeTabs tab, List list)
 	{

@@ -82,8 +82,8 @@ public class ItemCheese extends ItemFood
 		return icons[MathHelper.clamp_int(meta, 0, icons.length - 1)];
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubItems(Item item, CreativeTabs ct, List list)
 	{

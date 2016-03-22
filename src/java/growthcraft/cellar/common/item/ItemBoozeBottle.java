@@ -108,8 +108,8 @@ public class ItemBoozeBottle extends ItemFood implements IFluidItem
 	/************
 	 * TOOLTIP
 	 ************/
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
@@ -193,8 +193,8 @@ public class ItemBoozeBottle extends ItemFood implements IFluidItem
 		return super.getItemStackDisplayName(stack);
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{

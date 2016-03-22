@@ -67,8 +67,8 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		return tag != null ? FluidStack.loadFluidStackFromNBT(tag) : null;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[17];
@@ -92,6 +92,7 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
@@ -101,8 +102,8 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int meta)
 	{
 		return this.icons[meta];
@@ -323,8 +324,8 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		return basename;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{

@@ -41,8 +41,8 @@ public class BlockBeeHive extends Block
 	/************
 	 * TICK
 	 ************/
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random random)
 	{
 		if (random.nextInt(24) == 0)
@@ -238,8 +238,8 @@ public class BlockBeeHive extends Block
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
 		return true;

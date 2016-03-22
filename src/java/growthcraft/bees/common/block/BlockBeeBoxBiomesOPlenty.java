@@ -45,6 +45,7 @@ public class BlockBeeBoxBiomesOPlenty extends BlockBeeBox
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
 	{

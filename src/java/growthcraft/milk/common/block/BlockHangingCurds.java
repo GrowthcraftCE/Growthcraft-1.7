@@ -122,6 +122,7 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item item, CreativeTabs tab, List list)
 	{
