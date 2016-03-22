@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,60 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.core.util;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import growthcraft.api.core.item.ItemKey;
+package growthcraft.core.common.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.world.World;
 
-/**
- * As the name implies, this class is used in place of a List for Block keys
- */
-public class BlockKey extends HashKey
+public class GrcBlockBase extends Block
 {
-	public final Block block;
-	public final int meta;
-
-	public BlockKey(@Nonnull Block pBlock, int pMeta)
+	public GrcBlockBase(Material material)
 	{
-		super();
-		this.block = pBlock;
-		this.meta = pMeta;
-		generateHashCode();
+		super(material);
 	}
 
-	public BlockKey(@Nonnull Block pBlock)
+	/**
+	 * Drops the block as an item and replaces it with air
+	 * @param world - world to drop in
+	 * @param x - x Coord
+	 * @param y - y Coord
+	 * @param z - z Coord
+	 */
+	public void fellBlockAsItem(World world, int x, int y, int z)
 	{
-		this(pBlock, 0);
-	}
-
-	public Block getBlock()
-	{
-		return block;
-	}
-
-	public int getMetadata()
-	{
-		return meta;
-	}
-
-	public boolean matches(@Nullable Block pBlock, int pMeta)
-	{
-		if (pBlock == null) return false;
-		return pBlock == block && (meta == ItemKey.WILDCARD_VALUE || pMeta == meta);
-	}
-
-	public boolean matches(@Nonnull BlockKey key)
-	{
-		return matches(key.getBlock(), key.getMetadata());
-	}
-
-	private void generateHashCode()
-	{
-		this.hash = block.hashCode();
-		this.hash = 31 * hash + meta;
+		dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		world.setBlockToAir(x, y, z);
 	}
 }

@@ -23,34 +23,42 @@
  */
 package growthcraft.core.common.block;
 
+import java.util.ArrayList;
 import java.util.Random;
 import javax.annotation.Nonnull;
 
+import growthcraft.api.core.nbt.INBTItemSerializable;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.core.common.item.IItemTileBlock;
 import growthcraft.core.common.tileentity.ICustomDisplayName;
 import growthcraft.core.common.tileentity.IItemHandler;
-import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.core.Utils;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
 /**
  * Base class for machines and the like
  */
-public abstract class GrcBlockContainer extends BlockContainer implements IDroppableBlock, IRotatableBlock, IWrenchable
+public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppableBlock, IRotatableBlock, IWrenchable, ITileEntityProvider
 {
 	protected Random rand = new Random();
 	protected Class<? extends TileEntity> tileEntityType;
@@ -61,26 +69,27 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 		this.isBlockContainer = true;
 	}
 
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z)
+	{
+		super.onBlockAdded(world, x, y, z);
+	}
+
+	@Override
+	public boolean onBlockEventReceived(World world, int x, int y, int z, int code, int value)
+	{
+		super.onBlockEventReceived(world, x, y, z, code, value);
+		final TileEntity te = getTileEntity(world, x, y, z);
+		return te != null ? te.receiveClientEvent(code, value) : false;
+	}
+
 	protected void setTileEntityType(Class<? extends TileEntity> klass)
 	{
 		this.tileEntityType = klass;
 	}
 
-	/**
-	 * Drops the block as an item and replaces it with air
-	 *
-	 * @param world - world to drop in
-	 * @param x - x Coord
-	 * @param y - y Coord
-	 * @param z - z Coord
-	 */
-	public void fellBlockAsItem(World world, int x, int y, int z)
-	{
-		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		world.setBlockToAir(x, y, z);
-	}
-
 	/* IRotatableBlock */
+	@Override
 	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		return false;
@@ -167,8 +176,11 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 			{
 				if (player.isSneaking())
 				{
-					fellBlockAsItem(world, x, y, z);
-					ItemUtils.wrenchUsed(wrench, player, x, y, z);
+					if (!world.isRemote)
+					{
+						fellBlockAsItem(world, x, y, z);
+						ItemUtils.wrenchUsed(wrench, player, x, y, z);
+					}
 					return true;
 				}
 			}
@@ -211,10 +223,43 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 		}
 	}
 
+	protected NBTTagCompound getRestorationTagCompound(World world, int x, int y, int z, ItemStack stack)
+	{
+		final Item item = stack.getItem();
+		if (item instanceof IItemTileBlock)
+		{
+			final IItemTileBlock itb = (IItemTileBlock)item;
+			return itb.getTileTagCompound(stack);
+		}
+		return stack.getTagCompound();
+	}
+
+	protected boolean shouldRestoreBlockState(World world, int x, int y, int z, ItemStack stack)
+	{
+		return false;
+	}
+
+	protected void restoreBlockStateFromStack(World world, int x, int y, int z, ItemStack stack)
+	{
+		if (shouldRestoreBlockState(world, x, y, z, stack))
+		{
+			final TileEntity te = getTileEntity(world, x, y, z);
+			if (te instanceof INBTItemSerializable)
+			{
+				final NBTTagCompound tag = getRestorationTagCompound(world, x, y, z, stack);
+				if (tag != null)
+				{
+					((INBTItemSerializable)te).readFromNBTForItem(tag);
+				}
+			}
+		}
+	}
+
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
 		super.onBlockPlacedBy(world, x, y, z, entity, stack);
+		restoreBlockStateFromStack(world, x, y, z, stack);
 		setupCustomDisplayName(world, x, y, z, stack);
 	}
 
@@ -225,20 +270,54 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 		if (te instanceof IInventory)
 		{
 			final IInventory inventory = (IInventory)te;
-
 			if (inventory != null)
 			{
 				for (int index = 0; index < inventory.getSizeInventory(); ++index)
 				{
 					final ItemStack stack = inventory.getStackInSlot(index);
-
 					ItemUtils.spawnBrokenItemStack(world, x, y, z, stack, rand);
 				}
-
 				world.func_147453_f(x, y, z, block);
 			}
 		}
 		super.breakBlock(world, x, y, z, block, par6);
+		world.removeTileEntity(x, y, z);
+	}
+
+	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, int x, int y, int z, int meta)
+	{
+		return this.createStackedBlock(meta);
+	}
+
+	@Override
+	public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta)
+	{
+		player.addStat(StatList.mineBlockStatArray[getIdFromBlock(this)], 1);
+		player.addExhaustion(0.025F);
+
+		if (this.canSilkHarvest(world, player, x, y, z, meta) && EnchantmentHelper.getSilkTouchModifier(player))
+		{
+			final ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+			final ItemStack itemstack = createHarvestedBlockItemStack(world, player, x, y, z, meta);
+
+			if (itemstack != null)
+			{
+				items.add(itemstack);
+			}
+
+			ForgeEventFactory.fireBlockHarvesting(items, world, this, x, y, z, meta, 0, 1.0f, true, player);
+			for (ItemStack is : items)
+			{
+				this.dropBlockAsItem(world, x, y, z, is);
+			}
+		}
+		else
+		{
+			harvesters.set(player);
+			final int fortune = EnchantmentHelper.getFortuneModifier(player);
+			this.dropBlockAsItem(world, x, y, z, meta, fortune);
+			harvesters.set(null);
+		}
 	}
 
 	protected boolean playerFillTank(World world, int x, int y, int z, IFluidHandler fh, ItemStack is, EntityPlayer player)
@@ -257,27 +336,34 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 		final TileEntity te = world.getTileEntity(x, y, z);
 		if (te instanceof IFluidHandler)
 		{
-			final IFluidHandler fh = (IFluidHandler)te;
-			final ItemStack is = player.inventory.getCurrentItem();
-
-			boolean needUpdate = false;
-
-			if (!player.isSneaking())
+			if (world.isRemote)
 			{
-				// While not sneaking, draining is given priority
-				if (playerDrainTank(world, x, y, z, fh, is, player) ||
-					playerFillTank(world, x, y, z, fh, is, player)) needUpdate = true;
+				return true;
 			}
 			else
 			{
-				// Otherwise filling is given priority
-				if (playerFillTank(world, x, y, z, fh, is, player) ||
-					playerDrainTank(world, x, y, z, fh, is, player)) needUpdate = true;
-			}
-			if (needUpdate)
-			{
-				world.markBlockForUpdate(x, y, z);
-				return true;
+				final IFluidHandler fh = (IFluidHandler)te;
+				final ItemStack is = player.inventory.getCurrentItem();
+
+				boolean needUpdate = false;
+
+				if (!player.isSneaking())
+				{
+					// While not sneaking, draining is given priority
+					if (playerDrainTank(world, x, y, z, fh, is, player) ||
+						playerFillTank(world, x, y, z, fh, is, player)) needUpdate = true;
+				}
+				else
+				{
+					// Otherwise filling is given priority
+					if (playerFillTank(world, x, y, z, fh, is, player) ||
+						playerDrainTank(world, x, y, z, fh, is, player)) needUpdate = true;
+				}
+				if (needUpdate)
+				{
+					world.markBlockForUpdate(x, y, z);
+					return true;
+				}
 			}
 		}
 		return false;
@@ -288,23 +374,30 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 		final TileEntity te = world.getTileEntity(x, y, z);
 		if (te instanceof IItemHandler)
 		{
-			final IItemHandler ih = (IItemHandler)te;
-			final ItemStack is = player.inventory.getCurrentItem();
-
-			boolean needUpdate = false;
-			if (ih.tryPlaceItem(player, is))
+			if (world.isRemote)
 			{
-				needUpdate = true;
-			}
-			else if (ih.tryTakeItem(player, is))
-			{
-				needUpdate = true;
-			}
-
-			if (needUpdate)
-			{
-				world.markBlockForUpdate(x, y, z);
 				return true;
+			}
+			else
+			{
+				final IItemHandler ih = (IItemHandler)te;
+				final ItemStack is = player.inventory.getCurrentItem();
+
+				boolean needUpdate = false;
+				if (ih.tryPlaceItem(player, is))
+				{
+					needUpdate = true;
+				}
+				else if (ih.tryTakeItem(player, is))
+				{
+					needUpdate = true;
+				}
+
+				if (needUpdate)
+				{
+					world.markBlockForUpdate(x, y, z);
+					return true;
+				}
 			}
 		}
 
@@ -314,7 +407,6 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
-		if (world.isRemote) return true;
 		if (tryWrenchItem(player, world, x, y, z)) return true;
 		if (handleIFluidHandler(world, x, y, z, player, meta)) return true;
 		if (handleOnUseItem(world, x, y, z, player, meta)) return true;
@@ -339,6 +431,7 @@ public abstract class GrcBlockContainer extends BlockContainer implements IDropp
 		return null;
 	}
 
+	@Override
 	public TileEntity createNewTileEntity(World world, int unused)
 	{
 		if (tileEntityType != null)

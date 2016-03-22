@@ -19,6 +19,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -41,6 +42,15 @@ public class ItemUtils
 		{
 			hasIToolWrench = true;
 		}
+	}
+
+	public static NBTTagCompound openTagCompound(ItemStack stack)
+	{
+		if (!stack.hasTagCompound())
+		{
+			stack.setTagCompound(new NBTTagCompound());
+		}
+		return stack.getTagCompound();
 	}
 
 	public static ItemStack[] clearInventorySlots(ItemStack[] invSlots, int expectedSize)
