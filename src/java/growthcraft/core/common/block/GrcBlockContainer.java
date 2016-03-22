@@ -24,6 +24,7 @@
 package growthcraft.core.common.block;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javax.annotation.Nonnull;
 
@@ -318,6 +319,55 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 			this.dropBlockAsItem(world, x, y, z, meta, fortune);
 			harvesters.set(null);
 		}
+	}
+
+	protected boolean dropsTileStack(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		return false;
+	}
+
+	private void defaultGetDrops(List<ItemStack> ret, World world, int x, int y, int z, int metadata, int fortune)
+	{
+		final int count = quantityDropped(metadata, fortune, world.rand);
+		for (int i = 0; i < count; ++i)
+		{
+			final Item item = getItemDropped(metadata, world.rand, fortune);
+			if (item != null)
+			{
+				ret.add(new ItemStack(item, 1, damageDropped(metadata)));
+			}
+		}
+	}
+
+	protected void getTileItemStackDrops(List<ItemStack> ret, World world, int x, int y, int z, int metadata, int fortune)
+	{
+		final TileEntity te = getTileEntity(world, x, y, z);
+		if (te instanceof INBTItemSerializable)
+		{
+			final NBTTagCompound tag = new NBTTagCompound();
+			((INBTItemSerializable)te).writeToNBTForItem(tag);
+			final ItemStack stack = new ItemStack(this, 1, metadata);
+			stack.setTagCompound(tag);
+			ret.add(stack);
+		}
+		else
+		{
+			defaultGetDrops(ret, world, x, y, z, metadata, fortune);
+		}
+	}
+
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		if (dropsTileStack(world, x, y, z, metadata, fortune))
+		{
+			getTileItemStackDrops(ret, world, x, y, z, metadata, fortune);
+		}
+		else
+		{
+			defaultGetDrops(ret, world, x, y, z, metadata, fortune);
+		}
+		return ret;
 	}
 
 	protected boolean playerFillTank(World world, int x, int y, int z, IFluidHandler fh, ItemStack is, EntityPlayer player)
