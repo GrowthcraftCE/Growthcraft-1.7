@@ -32,6 +32,7 @@
 * nmarshall23
 
 ## The Translators
+* 3TUSK (Chinese)
 * Ar97x (Portuguese)
 * HanatakeYurii (French)
 * marcoasfonseca (Portuguese)
