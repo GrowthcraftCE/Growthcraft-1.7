@@ -67,7 +67,7 @@ public class GrowthCraftBamboo
 	}
 
 	@EventHandler
-	public void preload(FMLPreInitializationEvent event)
+	public void preInit(FMLPreInitializationEvent event)
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
@@ -177,7 +177,7 @@ public class GrowthCraftBamboo
 	}
 
 	@EventHandler
-	public void load(FMLInitializationEvent event)
+	public void init(FMLInitializationEvent event)
 	{
 		CommonProxy.instance.initRenders();
 		final VillageHandlerBamboo handler = new VillageHandlerBamboo();
@@ -187,7 +187,7 @@ public class GrowthCraftBamboo
 	}
 
 	@EventHandler
-	public void postload(FMLPostInitializationEvent event)
+	public void postInit(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventBamboo());
 
