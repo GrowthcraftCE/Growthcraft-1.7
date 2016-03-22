@@ -29,9 +29,15 @@ import net.minecraft.item.ItemStack;
 
 public class CommonItemStackComparator implements IItemStackComparator
 {
+	/**
+	 * @param expected - the expected item stack
+	 * @param actual - the given or actual item stack being checked
+	 * @return true, the stacks are equal, or has a wildcard, false otherwise
+	 */
 	public boolean equals(@Nonnull ItemStack expected, @Nonnull ItemStack actual)
 	{
 		return actual.getItem() == expected.getItem() &&
-			(expected.getItemDamage() == 32767 || actual.getItemDamage() == expected.getItemDamage());
+			(expected.getItemDamage() == ItemKey.WILDCARD_VALUE ||
+				actual.getItemDamage() == expected.getItemDamage());
 	}
 }
