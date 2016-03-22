@@ -33,9 +33,12 @@ import net.minecraft.nbt.NBTTagCompound;
 public interface IPotionEffectFactoryRegistry extends IClassRegistry<IPotionEffectFactory>, ILoggable
 {
 	/**
-	 * @param data  - nbt data to load
-	 * @param name  - tag to load
-	 * @return name
+	 * Loads a IPotionEffectFactory instance from the given NBT data and key name.
+	 *
+	 * @param data - nbt data to load
+	 * @param name - tag to load
+	 * @return potion effect factory
 	 */
 	IPotionEffectFactory loadPotionEffectFactoryFromNBT(@Nonnull NBTTagCompound data, @Nonnull String name);
+
 }

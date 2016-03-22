@@ -26,12 +26,12 @@ package growthcraft.api.core.schema;
 import java.util.List;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.definition.IItemStackListFactory;
+import growthcraft.api.core.definition.IItemStackListProvider;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemKeySchema extends ItemStackSchema implements IItemStackListFactory, IValidatable
+public class ItemKeySchema extends ItemStackSchema implements IItemStackListProvider, IValidatable
 {
 	public String ore;
 

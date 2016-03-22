@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +23,18 @@
  */
 package growthcraft.api.core.definition;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.item.ItemStack;
 
 public interface ISubItemStackFactory extends IItemStackFactory
 {
-	ItemStack asStack(int size, int meta);
+	/**
+	 * Returns an ItemStack of `size` with damage set to `meta`
+	 *
+	 * @param size - item stack size
+	 * @param meta - item stack damage
+	 * @return item stack
+	 */
+	@Nullable ItemStack asStack(int size, int meta);
 }

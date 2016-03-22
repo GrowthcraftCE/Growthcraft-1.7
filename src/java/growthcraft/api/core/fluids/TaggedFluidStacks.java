@@ -42,6 +42,10 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 	private List<String> tags;
 	private List<FluidTag> fluidTags;
 
+	/**
+	 * @param amt - expected fluid stack size
+	 * @param ptags - fluid tag names
+	 */
 	public TaggedFluidStacks(int amt, @Nonnull String... ptags)
 	{
 		this.amount = amt;
@@ -49,14 +53,30 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 		this.fluidTags = CoreRegistry.instance().fluidTags().expandTagNames(tags);
 	}
 
+	/**
+	 * The tags to filter by
+	 *
+	 * @return tags
+	 */
 	public List<String> getTags()
 	{
 		return tags;
 	}
 
+	/**
+	 * All fluids registered under the tags
+	 *
+	 * @return fluids
+	 */
 	public Collection<Fluid> getFluids()
 	{
 		return CoreRegistry.instance().fluidDictionary().getFluidsByTags(fluidTags);
+	}
+
+	@Override
+	public int getAmount()
+	{
+		return amount;
 	}
 
 	@Override

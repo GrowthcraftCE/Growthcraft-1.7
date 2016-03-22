@@ -29,14 +29,14 @@ import javax.annotation.Nonnull;
 
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.definition.IItemStackFactory;
-import growthcraft.api.core.definition.IItemStackListFactory;
+import growthcraft.api.core.definition.IItemStackListProvider;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory, IValidatable, ICommentable
+public class ItemStackSchema implements IItemStackFactory, IItemStackListProvider, IValidatable, ICommentable
 {
 	public String comment;
 	public String mod_id;

@@ -64,8 +64,7 @@ public class EffectAddPotionEffect extends AbstractEffect
 	}
 
 	/**
-	 * Adds the potion effect to the entity, if the entity is a
-	 * EntityLivingBase
+	 * Adds the potion effect to the entity, if the entity is a EntityLivingBase.
 	 *
 	 * @param world - world that the entity is currently present ing
 	 * @param entity - entity to apply the effect to
