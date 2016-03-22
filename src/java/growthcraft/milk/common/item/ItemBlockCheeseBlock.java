@@ -24,6 +24,7 @@
 package growthcraft.milk.common.item;
 
 import growthcraft.api.core.nbt.NBTHelper;
+import growthcraft.core.common.item.IItemTileBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -31,7 +32,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class ItemBlockCheeseBlock extends ItemBlock
+public class ItemBlockCheeseBlock extends ItemBlock implements IItemTileBlock
 {
 	public ItemBlockCheeseBlock(Block block)
 	{
@@ -39,7 +40,7 @@ public class ItemBlockCheeseBlock extends ItemBlock
 		this.maxStackSize = 1;
 	}
 
-	private NBTTagCompound getTileDataABS(ItemStack stack)
+	private NBTTagCompound getTileTagCompoundABS(ItemStack stack)
 	{
 		final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
 		if (!tag.hasKey("te_cheese_block"))
@@ -53,9 +54,17 @@ public class ItemBlockCheeseBlock extends ItemBlock
 		return tag.getCompoundTag("te_cheese_block");
 	}
 
-	public NBTTagCompound getTileData(ItemStack stack)
+	@Override
+	public void setTileTagCompound(ItemStack stack, NBTTagCompound tileTag)
 	{
-		final NBTTagCompound tag = getTileDataABS(stack);
+		final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
+		tag.setTag("te_cheese_block", tileTag);
+	}
+
+	@Override
+	public NBTTagCompound getTileTagCompound(ItemStack stack)
+	{
+		final NBTTagCompound tag = getTileTagCompoundABS(stack);
 		final EnumCheeseType type = getCheeseType(stack);
 		if (stack.getItemDamage() != type.meta)
 		{
@@ -66,13 +75,13 @@ public class ItemBlockCheeseBlock extends ItemBlock
 
 	public EnumCheeseType getCheeseType(ItemStack stack)
 	{
-		final NBTTagCompound tag = getTileDataABS(stack);
+		final NBTTagCompound tag = getTileTagCompoundABS(stack);
 		return EnumCheeseType.loadFromNBT(tag);
 	}
 
 	public EnumCheeseStage getCheeseStage(ItemStack stack)
 	{
-		final NBTTagCompound tag = getTileDataABS(stack);
+		final NBTTagCompound tag = getTileTagCompoundABS(stack);
 		return EnumCheeseStage.loadFromNBT(tag);
 	}
 
@@ -86,12 +95,12 @@ public class ItemBlockCheeseBlock extends ItemBlock
 
 	public int getSlices(ItemStack stack)
 	{
-		return getTileData(stack).getInteger("slices");
+		return getTileTagCompound(stack).getInteger("slices");
 	}
 
 	public int getSlicesMax(ItemStack stack)
 	{
-		return getTileData(stack).getInteger("slices_max");
+		return getTileTagCompound(stack).getInteger("slices_max");
 	}
 
 	public static NBTTagCompound openNBT(ItemStack stack)
@@ -99,7 +108,7 @@ public class ItemBlockCheeseBlock extends ItemBlock
 		final Item item = stack.getItem();
 		if (item instanceof ItemBlockCheeseBlock)
 		{
-			return ((ItemBlockCheeseBlock)item).getTileData(stack);
+			return ((ItemBlockCheeseBlock)item).getTileTagCompound(stack);
 		}
 		else
 		{
