@@ -224,7 +224,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		}
 	}
 
-	protected NBTTagCompound getRestorationTagCompound(World world, int x, int y, int z, ItemStack stack)
+	protected NBTTagCompound getTileTagCompound(World world, int x, int y, int z, ItemStack stack)
 	{
 		final Item item = stack.getItem();
 		if (item instanceof IItemTileBlock)
@@ -233,6 +233,21 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 			return itb.getTileTagCompound(stack);
 		}
 		return stack.getTagCompound();
+	}
+
+	protected void setTileTagCompound(World world, int x, int y, int z, ItemStack stack, NBTTagCompound tag)
+	{
+		final Item item = stack.getItem();
+		if (item instanceof IItemTileBlock)
+		{
+			final IItemTileBlock itb = (IItemTileBlock)item;
+			itb.setTileTagCompound(stack, tag);
+			return;
+		}
+		else
+		{
+			stack.setTagCompound(tag);
+		}
 	}
 
 	protected boolean shouldRestoreBlockState(World world, int x, int y, int z, ItemStack stack)
@@ -247,7 +262,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 			final TileEntity te = getTileEntity(world, x, y, z);
 			if (te instanceof INBTItemSerializable)
 			{
-				final NBTTagCompound tag = getRestorationTagCompound(world, x, y, z, stack);
+				final NBTTagCompound tag = getTileTagCompound(world, x, y, z, stack);
 				if (tag != null)
 				{
 					((INBTItemSerializable)te).readFromNBTForItem(tag);
@@ -347,7 +362,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 			final NBTTagCompound tag = new NBTTagCompound();
 			((INBTItemSerializable)te).writeToNBTForItem(tag);
 			final ItemStack stack = new ItemStack(this, 1, metadata);
-			stack.setTagCompound(tag);
+			setTileTagCompound(world, x, y, z, stack, tag);
 			ret.add(stack);
 		}
 		else

@@ -54,6 +54,13 @@ public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock
 	}
 
 	@Override
+	public void setTileTagCompound(ItemStack stack, NBTTagCompound tileTag)
+	{
+		final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
+		tag.setTag("te_curd_block", tileTag);
+	}
+
+	@Override
 	public NBTTagCompound getTileTagCompound(ItemStack stack)
 	{
 		final NBTTagCompound tag = getTileDataABS(stack);

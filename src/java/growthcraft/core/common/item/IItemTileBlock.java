@@ -29,4 +29,5 @@ import net.minecraft.item.ItemStack;
 public interface IItemTileBlock
 {
 	NBTTagCompound getTileTagCompound(ItemStack stack);
+	void setTileTagCompound(ItemStack stack, NBTTagCompound tag);
 }
