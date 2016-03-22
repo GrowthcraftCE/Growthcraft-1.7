@@ -69,14 +69,14 @@ public class ComponentVillageGrapeVineyard extends StructureVillagePieces.Villag
 			this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, 2, 7, box);
 			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.blocks.fenceRope.getBlock(), 0, loop, 3, 1, box);
 			this.placeBlockAtCurrentPosition(world, GrowthCraftCore.blocks.fenceRope.getBlock(), 0, loop, 3, 7, box);
-			this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeVine1.getBlock(), 1, loop, 1, 4, box);
-			this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeVine1.getBlock(), 1, loop, 2, 4, box);
+			this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.blocks.grapeVine1.getBlock(), 1, loop, 1, 4, box);
+			this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.blocks.grapeVine1.getBlock(), 1, loop, 2, 4, box);
 			for (loop2 = 2; loop2 <= 6; ++loop2)
 			{
-				this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeLeaves.getBlock(), 0, loop, 3, loop2, box);
+				this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.blocks.grapeLeaves.getBlock(), 0, loop, 3, loop2, box);
 				if (MathHelper.getRandomIntegerInRange(random, 0, 2) != 0 && loop2 != 4)
 				{
-					this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.grapeBlock.getBlock(), 0, loop, 2, loop2, box);
+					this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.blocks.grapeBlock.getBlock(), 0, loop, 2, loop2, box);
 				}
 			}
 		}

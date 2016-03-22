@@ -21,18 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.integration.mfr;
+package growthcraft.grapes.common.item;
 
-import growthcraft.core.integration.mfr.AbstractFactoryFruit;
+import java.util.Locale;
+
 import growthcraft.grapes.GrowthCraftGrapes;
 
-import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
-public class GrapeFactoryFruit extends AbstractFactoryFruit<Block>
+public enum EnumGrapes
 {
-	public GrapeFactoryFruit()
+	PURPLE,
+	GREEN,
+	RED;
+
+	public static final EnumGrapes[] VALUES = values();
+	public final String name;
+	public final int meta;
+
+	private EnumGrapes()
 	{
-		super();
-		setPlant(GrowthCraftGrapes.blocks.grapeBlock.getBlock());
+		this.name = name().toLowerCase(Locale.ENGLISH);
+		this.meta = ordinal();
+	}
+
+	public ItemStack asStack(int size)
+	{
+		return GrowthCraftGrapes.items.grapes.asStack(size, ordinal());
+	}
+
+	public ItemStack asStack()
+	{
+		return asStack(1);
+	}
+
+	public static EnumGrapes get(int index)
+	{
+		if (index >= 0 && index < VALUES.length)
+		{
+			return VALUES[index];
+		}
+		return PURPLE;
 	}
 }

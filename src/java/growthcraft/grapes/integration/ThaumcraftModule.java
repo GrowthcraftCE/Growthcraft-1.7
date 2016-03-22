@@ -23,6 +23,7 @@
  */
 package growthcraft.grapes.integration;
 
+import growthcraft.api.core.item.ItemKey;
 import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
 import growthcraft.core.integration.thaumcraft.AspectsHelper;
 import growthcraft.core.integration.ThaumcraftModuleBase;
@@ -46,10 +47,11 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
-		FMLInterModComms.sendMessage(modID, "harvestStandardCrop", GrowthCraftGrapes.grapeBlock.asStack());
+		FMLInterModComms.sendMessage(modID, "harvestStandardCrop", GrowthCraftGrapes.blocks.grapeBlock.asStack());
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapeSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.grapes.asStack(), new AspectList().add(Aspect.CROP, 1).add(Aspect.HUNGER, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.blocks.grapeLeaves.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.items.grapeSeeds.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftGrapes.items.grapes.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.CROP, 1).add(Aspect.HUNGER, 1));
 
 		final AspectList[] common = new AspectList[]
 		{

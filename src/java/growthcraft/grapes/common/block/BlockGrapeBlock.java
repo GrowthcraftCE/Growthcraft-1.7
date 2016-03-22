@@ -1,9 +1,10 @@
 package growthcraft.grapes.common.block;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import growthcraft.cellar.common.item.EnumYeast;
-import growthcraft.core.util.ItemUtils;
+import growthcraft.core.common.block.GrcBlockBase;
 import growthcraft.grapes.client.renderer.RenderGrape;
 import growthcraft.grapes.GrowthCraftGrapes;
 
@@ -13,12 +14,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class BlockGrapeBlock extends Block
+public class BlockGrapeBlock extends GrcBlockBase
 {
-	protected Random rand = new Random();
 	protected int bayanusDropRarity = GrowthCraftGrapes.getConfig().bayanusDropRarity;
 	protected int grapesDropMin = GrowthCraftGrapes.getConfig().grapesDropMin;
 	protected int grapesDropMax = GrowthCraftGrapes.getConfig().grapesDropMax;
@@ -30,21 +31,8 @@ public class BlockGrapeBlock extends Block
 		setHardness(0.0F);
 		setStepSound(soundTypeGrass);
 		setBlockName("grc.grapeBlock");
-		setCreativeTab(null);
 		setBlockBounds(0.1875F, 0.5F, 0.1875F, 0.8125F, 1.0F, 0.8125F);
-	}
-
-	/**
-	 * Drops the block as an item and replaces it with air
-	 * @param world - world to drop in
-	 * @param x - x Coord
-	 * @param y - y Coord
-	 * @param z - z Coord
-	 */
-	public void fellBlockAsItem(World world, int x, int y, int z)
-	{
-		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		world.setBlockToAir(x, y, z);
+		setCreativeTab(null);
 	}
 
 	/************
@@ -87,7 +75,7 @@ public class BlockGrapeBlock extends Block
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapeLeaves.getBlock() == world.getBlock(x, y + 1, z);
+		return GrowthCraftGrapes.blocks.grapeLeaves.getBlock() == world.getBlock(x, y + 1, z);
 	}
 
 	/************
@@ -97,7 +85,7 @@ public class BlockGrapeBlock extends Block
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapes.getItem();
+		return GrowthCraftGrapes.items.grapes.getItem();
 	}
 
 	@Override
@@ -110,25 +98,35 @@ public class BlockGrapeBlock extends Block
 	 * DROPS
 	 ************/
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
-	{
-		if (world.rand.nextInt(bayanusDropRarity) == 0)
-		{
-			ItemUtils.spawnBrokenItemStack(world, x, y, z, EnumYeast.BAYANUS.asStack(1), rand);
-		}
-		super.breakBlock(world, x, y, z, block, meta);
-	}
-
-	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
-		return GrowthCraftGrapes.grapes.getItem();
+		return GrowthCraftGrapes.items.grapes.getItem();
 	}
 
 	@Override
 	public int quantityDropped(Random random)
 	{
 		return grapesDropMin + random.nextInt(grapesDropMax - grapesDropMin);
+	}
+
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		final int count = quantityDropped(metadata, fortune, world.rand);
+		for(int i = 0; i < count; ++i)
+		{
+			final Item item = getItemDropped(metadata, world.rand, fortune);
+			if (item != null)
+			{
+				ret.add(new ItemStack(item, 1, damageDropped(metadata)));
+			}
+			if (world.rand.nextInt(bayanusDropRarity) == 0)
+			{
+				ret.add(EnumYeast.BAYANUS.asStack(1));
+			}
+		}
+		return ret;
 	}
 
 	/************

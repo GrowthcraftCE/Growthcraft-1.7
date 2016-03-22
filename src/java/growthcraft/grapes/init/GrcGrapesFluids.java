@@ -32,17 +32,17 @@ import growthcraft.api.core.effect.SimplePotionEffectFactory;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
+import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.BoozeUtils;
-import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.grapes.common.item.EnumGrapes;
 import growthcraft.grapes.GrowthCraftGrapes;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -59,9 +59,9 @@ public class GrcGrapesFluids extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		grapeWineBooze = new Booze[8];
-		grapeWineFluids = new BlockBoozeDefinition[grapeWineBooze.length];
-		grapeWineBuckets = new ItemBucketBoozeDefinition[grapeWineBooze.length];
+		this.grapeWineBooze = new Booze[8];
+		this.grapeWineFluids = new BlockBoozeDefinition[grapeWineBooze.length];
+		this.grapeWineBuckets = new ItemBucketBoozeDefinition[grapeWineBooze.length];
 		BoozeRegistryHelper.initializeBoozeFluids("grc.grapeWine", grapeWineBooze);
 		for (Booze booze : grapeWineBooze)
 		{
@@ -73,7 +73,7 @@ public class GrcGrapesFluids extends GrcModuleBase
 		grapeWineBooze[5].setColor(GrowthCraftGrapes.getConfig().portWineColor);
 		grapeWineFluids[5].getBlock().refreshColor();
 
-		grapeWine        = new ItemDefinition(new ItemBoozeBottle(2, -0.3F, grapeWineBooze));
+		this.grapeWine = new ItemDefinition(new ItemBoozeBottle(2, -0.3F, grapeWineBooze));
 	}
 
 	private void registerFermentations()
@@ -88,7 +88,7 @@ public class GrcGrapesFluids extends GrcModuleBase
 		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[0])
 			.tags(BoozeTag.WINE, BoozeTag.YOUNG)
 			.pressesFrom(
-				GrowthCraftGrapes.grapes.asStack(),
+				EnumGrapes.PURPLE.asStack(),
 				TickUtils.seconds(2),
 				40,
 				Residue.newDefault(0.3F));
@@ -169,7 +169,7 @@ public class GrcGrapesFluids extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		GameRegistry.registerItem(grapeWine.getItem(), "grc.grapeWine");
+		grapeWine.register("grc.grapeWine");
 
 		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, grapeWine, "grc.grapeWine", null);
 		registerFermentations();
