@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,5 +33,5 @@ public class NullLogger extends AbstractLogger
 	public static final ILogger INSTANCE = new NullLogger();
 
 	@Override
-	public void log(Level lv, String str, Object... objs) {}
+	public void doLog(Level lv, String str, Object... objs) {}
 }
