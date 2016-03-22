@@ -21,18 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.integration.mfr;
+package growthcraft.grapes.creativetab;
 
-import growthcraft.core.integration.mfr.AbstractFactoryFruit;
 import growthcraft.grapes.GrowthCraftGrapes;
 
-import net.minecraft.block.Block;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
-public class GrapeFactoryFruit extends AbstractFactoryFruit<Block>
+public class CreativeTabsGrowthcraftGrapes extends CreativeTabs
 {
-	public GrapeFactoryFruit()
+	public CreativeTabsGrowthcraftGrapes(String name)
 	{
-		super();
-		setPlant(GrowthCraftGrapes.blocks.grapeBlock.getBlock());
+		super(name);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Item getTabIconItem()
+	{
+		return GrowthCraftGrapes.items.grapes.getItem();
 	}
 }

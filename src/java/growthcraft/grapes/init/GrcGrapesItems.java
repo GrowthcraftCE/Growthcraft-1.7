@@ -21,18 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.integration.mfr;
+package growthcraft.grapes.init;
 
-import growthcraft.core.integration.mfr.AbstractFactoryFruit;
-import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.GrcModuleBase;
+import growthcraft.grapes.common.item.ItemGrapes;
+import growthcraft.grapes.common.item.ItemGrapeSeeds;
 
-import net.minecraft.block.Block;
-
-public class GrapeFactoryFruit extends AbstractFactoryFruit<Block>
+public class GrcGrapesItems extends GrcModuleBase
 {
-	public GrapeFactoryFruit()
+	public ItemDefinition grapes;
+	public ItemDefinition grapeSeeds;
+
+	@Override
+	public void preInit()
 	{
-		super();
-		setPlant(GrowthCraftGrapes.blocks.grapeBlock.getBlock());
+		this.grapes     = new ItemDefinition(new ItemGrapes());
+		this.grapeSeeds = new ItemDefinition(new ItemGrapeSeeds());
+	}
+
+	@Override
+	public void register()
+	{
+		grapes.register("grc.grapes");
+		grapeSeeds.register("grc.grapeSeeds");
 	}
 }

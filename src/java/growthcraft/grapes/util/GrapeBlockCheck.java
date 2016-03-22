@@ -16,8 +16,8 @@ public class GrapeBlockCheck
 	 */
 	public static boolean isGrapeVine(Block block)
 	{
-		return GrowthCraftGrapes.grapeVine0.getBlock() == block ||
-			GrowthCraftGrapes.grapeVine1.getBlock() == block;
+		return GrowthCraftGrapes.blocks.grapeVine0.getBlock() == block ||
+			GrowthCraftGrapes.blocks.grapeVine1.getBlock() == block;
 	}
 
 	/**
@@ -28,6 +28,6 @@ public class GrapeBlockCheck
 	 */
 	public static boolean isGrapeVineTrunk(Block block)
 	{
-		return GrowthCraftGrapes.grapeVine1.getBlock() == block;
+		return GrowthCraftGrapes.blocks.grapeVine1.getBlock() == block;
 	}
 }

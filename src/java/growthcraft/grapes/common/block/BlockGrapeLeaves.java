@@ -37,12 +37,12 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	public BlockGrapeLeaves()
 	{
 		super(Material.leaves, false);
-		this.setTickRandomly(true);
-		this.setHardness(0.2F);
-		this.setLightOpacity(1);
-		this.setStepSound(soundTypeGrass);
-		this.setBlockName("grc.grapeLeaves");
-		this.setCreativeTab(null);
+		setTickRandomly(true);
+		setHardness(0.2F);
+		setLightOpacity(1);
+		setStepSound(soundTypeGrass);
+		setBlockName("grc.grapeLeaves");
+		setCreativeTab(null);
 	}
 
 	private boolean isTrunk(World world, int x, int y, int z)
@@ -112,7 +112,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	private void setGrapeBlock(World world, int x, int y, int z)
 	{
-		world.setBlock(x, y, z, GrowthCraftGrapes.grapeBlock.getBlock(), 0, BlockFlags.UPDATE_AND_SYNC);
+		world.setBlock(x, y, z, GrowthCraftGrapes.blocks.grapeBlock.getBlock(), 0, BlockFlags.UPDATE_AND_SYNC);
 	}
 
 	public boolean growGrapeBlock(World world, int x, int y, int z)
@@ -217,7 +217,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapeSeeds.getItem();
+		return GrowthCraftGrapes.items.grapeSeeds.getItem();
 	}
 
 	@Override

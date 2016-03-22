@@ -46,9 +46,9 @@ public class ForestryModule extends ForestryModuleBase
 		final int juiceAmount = getActiveMode().getIntegerSetting("squeezer.liquid.apple");
 		final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
 
-		final ItemStack grapeSeed = GrowthCraftGrapes.grapeSeeds.asStack();
-		final ItemStack grapes = GrowthCraftGrapes.grapes.asStack();
-		final Block grapeBlock = GrowthCraftGrapes.grapeBlock.getBlock();
+		final ItemStack grapeSeed = GrowthCraftGrapes.items.grapeSeeds.asStack();
+		final ItemStack grapes = GrowthCraftGrapes.items.grapes.asStack();
+		final Block grapeBlock = GrowthCraftGrapes.blocks.grapeBlock.getBlock();
 
 		Backpack.FORESTERS.add(grapeSeed);
 		Backpack.FORESTERS.add(grapes);
