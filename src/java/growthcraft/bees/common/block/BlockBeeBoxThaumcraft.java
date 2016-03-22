@@ -42,6 +42,7 @@ public class BlockBeeBoxThaumcraft extends BlockBeeBox
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
 	{
@@ -49,8 +50,8 @@ public class BlockBeeBoxThaumcraft extends BlockBeeBox
 		list.add(new ItemStack(block, 1, EnumBeeBoxThaumcraft.SILVERWOOD.meta));
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[2 * 4];

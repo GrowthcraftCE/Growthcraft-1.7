@@ -78,6 +78,7 @@ public class BlockBeeBox extends GrcBlockContainer
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
 	{
@@ -224,8 +225,8 @@ public class BlockBeeBox extends GrcBlockContainer
 		return MathHelper.clamp_int(meta, 0, icons.length / 4 - 1) * 4;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
 	{
 		final int meta = world.getBlockMetadata(x, y, z);
@@ -249,8 +250,8 @@ public class BlockBeeBox extends GrcBlockContainer
 		return icons[offset + 2];
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
 		final int offset = calculateIconOffset(meta);

@@ -244,8 +244,8 @@ public class GrcContainer extends Container
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int v)
 	{
 		super.updateProgressBar(id, v);

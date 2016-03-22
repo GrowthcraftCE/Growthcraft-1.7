@@ -164,8 +164,8 @@ public class BlockBambooScaffold extends Block
 	/************
 	 * TEXTURES
 	 ************/
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[2];
@@ -174,8 +174,8 @@ public class BlockBambooScaffold extends Block
 		icons[1] = reg.registerIcon("grcbamboo:scaffold");
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
 		if (side == 1)

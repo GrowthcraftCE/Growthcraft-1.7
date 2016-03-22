@@ -27,8 +27,8 @@ public class ItemBucketBooze extends ItemBucketFluid
 		this(block, buze, GrowthCraftCellar.tab);
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{

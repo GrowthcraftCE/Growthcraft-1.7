@@ -34,6 +34,7 @@ public class ItemYeast extends Item
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
@@ -43,8 +44,8 @@ public class ItemYeast extends Item
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[EnumYeast.length];
@@ -55,8 +56,8 @@ public class ItemYeast extends Item
 		icons[EnumYeast.ORIGIN.ordinal()] = reg.registerIcon(getIconString() + "_origin");
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int meta)
 	{
 		return icons[MathHelper.clamp_int(meta, 0, icons.length - 1)];

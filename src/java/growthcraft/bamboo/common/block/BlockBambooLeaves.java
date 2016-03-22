@@ -160,8 +160,8 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random random)
 	{
 		super.randomDisplayTick(world, x, y, z, random);

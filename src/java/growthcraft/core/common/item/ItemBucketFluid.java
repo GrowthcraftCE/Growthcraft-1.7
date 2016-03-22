@@ -83,16 +83,16 @@ public class ItemBucketFluid extends ItemBucket implements IFluidItem
 		return UnitFormatter.fluidBucketName(getFluid(stack));
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg)
 	{
 		this.bucket = reg.registerIcon("bucket_empty");
 		this.contents = reg.registerIcon("grccore:bucket_contents");
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamageForRenderPass(int par1, int pass)
 	{
 		return pass == 1 ? this.contents : this.bucket;
