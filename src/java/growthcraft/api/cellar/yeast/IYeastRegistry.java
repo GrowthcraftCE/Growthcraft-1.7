@@ -27,6 +27,7 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.api.core.item.WeightedItemStack;
 import growthcraft.api.core.log.ILoggable;
 
 import net.minecraft.item.ItemStack;
@@ -55,9 +56,10 @@ public interface IYeastRegistry extends ILoggable
 	 *       known list.
 	 *
 	 * @param yeast - an item
+	 * @param weight - generation weight
 	 * @param type - the biome type to add
 	 */
-	void addYeastToBiomeType(@Nonnull ItemStack yeast, @Nonnull BiomeDictionary.Type type);
+	void addYeastToBiomeType(@Nonnull ItemStack yeast, int weight, @Nonnull BiomeDictionary.Type type);
 
 	/**
 	 * Maps the given biome name to the yeast item.
@@ -65,9 +67,10 @@ public interface IYeastRegistry extends ILoggable
 	 * MAY produce the yeast item.
 	 *
 	 * @param yeast - an item
+	 * @param weight - generation weight
 	 * @param name - biome name
 	 */
-	void addYeastToBiomeByName(@Nonnull ItemStack yeast, @Nonnull String name);
+	void addYeastToBiomeByName(@Nonnull ItemStack yeast, int weight, @Nonnull String name);
 
 	/**
 	 * Returns a Set of Items that may appear in this biome type
@@ -75,8 +78,8 @@ public interface IYeastRegistry extends ILoggable
 	 * @param type - the biome type
 	 * @return yeast for the biome type,
 	 */
-	Set<ItemStack> getYeastListForBiomeType(@Nonnull BiomeDictionary.Type type);
-	Set<ItemStack> getYeastListForBiomeName(@Nonnull String name);
+	Set<WeightedItemStack> getYeastListForBiomeType(@Nonnull BiomeDictionary.Type type);
+	Set<WeightedItemStack> getYeastListForBiomeName(@Nonnull String name);
 
 	Set<String> getBiomeNamesForYeast(@Nullable ItemStack yeast);
 	Set<BiomeDictionary.Type> getBiomeTypesForYeast(@Nullable ItemStack yeast);

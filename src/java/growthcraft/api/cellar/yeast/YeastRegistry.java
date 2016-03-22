@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,9 +30,10 @@ import java.util.HashSet;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.api.core.item.ItemKey;
+import growthcraft.api.core.item.WeightedItemStack;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.core.item.ItemKey;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -41,8 +42,8 @@ import net.minecraftforge.common.BiomeDictionary;
 public class YeastRegistry implements IYeastRegistry
 {
 	private Set<ItemKey> yeastList = new HashSet<ItemKey>();
-	private Map<BiomeDictionary.Type, Set<ItemStack>> biomeTypeToYeast = new HashMap<BiomeDictionary.Type, Set<ItemStack>>();
-	private Map<String, Set<ItemStack>> biomeNameToYeast = new HashMap<String, Set<ItemStack>>();
+	private Map<BiomeDictionary.Type, Set<WeightedItemStack>> biomeTypeToYeast = new HashMap<BiomeDictionary.Type, Set<WeightedItemStack>>();
+	private Map<String, Set<WeightedItemStack>> biomeNameToYeast = new HashMap<String, Set<WeightedItemStack>>();
 	private Map<ItemKey, Set<BiomeDictionary.Type>> yeastToBiomeType = new HashMap<ItemKey, Set<BiomeDictionary.Type>>();
 	private Map<ItemKey, Set<String>> yeastToBiomeName = new HashMap<ItemKey, Set<String>>();
 	private ILogger logger = NullLogger.INSTANCE;
@@ -73,13 +74,13 @@ public class YeastRegistry implements IYeastRegistry
 	}
 
 	@Override
-	public void addYeastToBiomeType(@Nonnull ItemStack yeast, @Nonnull BiomeDictionary.Type type)
+	public void addYeastToBiomeType(@Nonnull ItemStack yeast, int weight, @Nonnull BiomeDictionary.Type type)
 	{
 		addYeast(yeast);
 		if (!biomeTypeToYeast.containsKey(type))
 		{
 			logger.debug("Initializing biome type to yeast set for %s", type);
-			biomeTypeToYeast.put(type, new HashSet<ItemStack>());
+			biomeTypeToYeast.put(type, new HashSet<WeightedItemStack>());
 		}
 		final ItemKey yeastKey = stackToKey(yeast);
 		if (!yeastToBiomeType.containsKey(yeastKey))
@@ -87,12 +88,12 @@ public class YeastRegistry implements IYeastRegistry
 			logger.debug("Initializing yeast to biome type set for %s", yeast);
 			yeastToBiomeType.put(yeastKey, new HashSet<BiomeDictionary.Type>());
 		}
-		biomeTypeToYeast.get(type).add(yeast);
+		biomeTypeToYeast.get(type).add(new WeightedItemStack(weight, yeast));
 		yeastToBiomeType.get(yeastKey).add(type);
 	}
 
 	@Override
-	public void addYeastToBiomeByName(@Nonnull ItemStack yeast, @Nonnull String name)
+	public void addYeastToBiomeByName(@Nonnull ItemStack yeast, int weight, @Nonnull String name)
 	{
 		addYeast(yeast);
 		final ItemKey yeastKey = stackToKey(yeast);
@@ -105,19 +106,19 @@ public class YeastRegistry implements IYeastRegistry
 		if (!biomeNameToYeast.containsKey(name))
 		{
 			logger.debug("Initializing biome name to yeast set for %s", name);
-			biomeNameToYeast.put(name, new HashSet<ItemStack>());
+			biomeNameToYeast.put(name, new HashSet<WeightedItemStack>());
 		}
-		biomeNameToYeast.get(name).add(yeast);
+		biomeNameToYeast.get(name).add(new WeightedItemStack(weight, yeast));
 	}
 
 	@Override
-	public Set<ItemStack> getYeastListForBiomeType(@Nonnull BiomeDictionary.Type type)
+	public Set<WeightedItemStack> getYeastListForBiomeType(@Nonnull BiomeDictionary.Type type)
 	{
 		return biomeTypeToYeast.get(type);
 	}
 
 	@Override
-	public Set<ItemStack> getYeastListForBiomeName(@Nonnull String type)
+	public Set<WeightedItemStack> getYeastListForBiomeName(@Nonnull String type)
 	{
 		return biomeNameToYeast.get(type);
 	}

@@ -23,14 +23,15 @@
  */
 package growthcraft.cellar.common.tileentity.device;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.yeast.IYeastRegistry;
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.item.WeightedItemStack;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
@@ -38,6 +39,7 @@ import growthcraft.core.common.tileentity.device.DeviceProgressive;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeDictionary;
@@ -47,7 +49,7 @@ public class YeastGenerator extends DeviceProgressive
 	protected int consumption = 1200 / 16;
 	protected DeviceFluidSlot fluidSlot;
 	protected DeviceInventorySlot invSlot;
-	protected List<ItemStack> tempItemList = new ArrayList<ItemStack>();
+	protected Set<WeightedItemStack> tempItemList = new HashSet<WeightedItemStack>();
 
 	/**
 	 * @param te - parent tile entity
@@ -137,7 +139,7 @@ public class YeastGenerator extends DeviceProgressive
 			final IYeastRegistry reg = CellarRegistry.instance().yeast();
 
 			{
-				final Collection<ItemStack> yl = reg.getYeastListForBiomeName(biome.biomeName);
+				final Collection<WeightedItemStack> yl = reg.getYeastListForBiomeName(biome.biomeName);
 				if (yl != null)
 				{
 					tempItemList.addAll(yl);
@@ -146,7 +148,7 @@ public class YeastGenerator extends DeviceProgressive
 
 			for (Type t : BiomeDictionary.getTypesForBiome(biome))
 			{
-				final Collection<ItemStack> yeastList = reg.getYeastListForBiomeType(t);
+				final Collection<WeightedItemStack> yeastList = reg.getYeastListForBiomeType(t);
 				if (yeastList != null)
 				{
 					tempItemList.addAll(yeastList);
@@ -155,9 +157,13 @@ public class YeastGenerator extends DeviceProgressive
 
 			if (tempItemList.size() > 0)
 			{
-				final ItemStack result = tempItemList.get(random.nextInt(tempItemList.size())).copy();
-				invSlot.set(result);
-				consumeFluid();
+				final WeightedItemStack weightedItemStack = (WeightedItemStack)WeightedRandom.getRandomItem(getWorld().rand, tempItemList);
+				if (weightedItemStack != null && weightedItemStack.itemStack != null)
+				{
+					final ItemStack result = weightedItemStack.itemStack.copy();
+					invSlot.set(result);
+					consumeFluid();
+				}
 			}
 		}
 	}

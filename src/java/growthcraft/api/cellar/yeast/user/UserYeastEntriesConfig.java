@@ -58,16 +58,16 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 		final ItemKeySchema originYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 4);
 		etherealYeast.setComment("Origin Yeast");
 
-		final UserYeastEntry brewers = new UserYeastEntry(brewersYeast, new ArrayList<String>());
+		final UserYeastEntry brewers = new UserYeastEntry(brewersYeast, 1, new ArrayList<String>());
 		brewers.setComment("Brewers yeast is the default yeast, which appears in all other biomes that are filled by the Lager or Ethereal");
 
-		final UserYeastEntry lager = new UserYeastEntry(lagerYeast, new ArrayList<String>());
+		final UserYeastEntry lager = new UserYeastEntry(lagerYeast, 10, new ArrayList<String>());
 		lager.setComment("Lager yeast is found in COLD biomes, think snow places!");
 
-		final UserYeastEntry ethereal = new UserYeastEntry(etherealYeast, new ArrayList<String>());
+		final UserYeastEntry ethereal = new UserYeastEntry(etherealYeast, 10, new ArrayList<String>());
 		ethereal.setComment("Ethereal yeast is found in MAGICAL biomes, because its special");
 
-		final UserYeastEntry origin = new UserYeastEntry(originYeast, new ArrayList<String>());
+		final UserYeastEntry origin = new UserYeastEntry(originYeast, 10, new ArrayList<String>());
 		origin.setComment("Origin yeast is found in MUSHROOM biomes.");
 
 		for (BiomeDictionary.Type biomeType : BiomeDictionary.Type.values())
@@ -92,7 +92,7 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 		defaultEntries.data.add(ethereal);
 		defaultEntries.data.add(lager);
 		defaultEntries.data.add(origin);
-		defaultEntries.setComment("Default Yeast Config");
+		defaultEntries.setComment("Default Yeast Config v1.1.0");
 		return gson.toJson(defaultEntries);
 	}
 
@@ -125,7 +125,7 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 					try
 					{
 						final BiomeDictionary.Type biomeType = BiomeUtils.fetchBiomeType(biome);
-						CellarRegistry.instance().yeast().addYeastToBiomeType(itemstack, biomeType);
+						CellarRegistry.instance().yeast().addYeastToBiomeType(itemstack, entry.weight, biomeType);
 						logger.info("Added user yeast {%s} to biome type '%s'", itemstack, biome);
 					}
 					catch (BiomeUtils.BiomeTypeNotFound ex)
@@ -139,7 +139,7 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 			{
 				for (String biomeName : entry.biome_names)
 				{
-					CellarRegistry.instance().yeast().addYeastToBiomeByName(itemstack, biomeName);
+					CellarRegistry.instance().yeast().addYeastToBiomeByName(itemstack, entry.weight, biomeName);
 					logger.info("Added user yeast {%s} to biome '%s'", itemstack, biomeName);
 				}
 			}
