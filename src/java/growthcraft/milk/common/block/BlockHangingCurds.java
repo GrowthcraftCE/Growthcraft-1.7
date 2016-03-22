@@ -23,7 +23,6 @@
  */
 package growthcraft.milk.common.block;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -42,7 +41,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -67,10 +65,10 @@ public class BlockHangingCurds extends GrcBlockContainer
 		setBlockTextureName("grcmilk:hanging_curds");
 	}
 
-	public void fellBlockAsItem(World world, int x, int y, int z)
+	@Override
+	protected boolean shouldRestoreBlockState(World world, int x, int y, int z, ItemStack stack)
 	{
-		dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		world.setBlockToAir(x, y, z);
+		return true;
 	}
 
 	@Override
@@ -93,21 +91,6 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack)
-	{
-		final Item item = stack.getItem();
-		if (item instanceof ItemBlockHangingCurds)
-		{
-			final ItemBlockHangingCurds cheeseBlock = (ItemBlockHangingCurds)item;
-			final TileEntityHangingCurds teHangingCurds = getTileEntity(world, x, y, z);
-			if (teHangingCurds != null)
-			{
-				teHangingCurds.readFromNBTForItem(cheeseBlock.getTileData(stack));
-			}
-		}
-	}
-
-	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item item, CreativeTabs tab, List list)
 	{
@@ -119,7 +102,7 @@ public class BlockHangingCurds extends GrcBlockContainer
 				if (cheese.hasCurdBlock())
 				{
 					final ItemStack stack = new ItemStack(item, 1, cheese.meta);
-					ib.getTileData(stack);
+					ib.getTileTagCompound(stack);
 					list.add(stack);
 				}
 			}
@@ -138,19 +121,14 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, int x, int y, int z, int meta)
 	{
-		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		final TileEntityHangingCurds teHangingCurds = getTileEntity(world, x, y, z);
-		if (teHangingCurds != null)
+		final TileEntityHangingCurds te = getTileEntity(world, x, y, z);
+		if (te != null)
 		{
-			teHangingCurds.populateDrops(ret);
+			return te.asItemStack();
 		}
-		else
-		{
-			ret.add(new ItemStack(this, 1, metadata));
-		}
-		return ret;
+		return new ItemStack(this, 1, meta);
 	}
 
 	@Override

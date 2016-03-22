@@ -24,6 +24,7 @@
 package growthcraft.milk.common.item;
 
 import growthcraft.api.core.nbt.NBTHelper;
+import growthcraft.core.common.item.IItemTileBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -31,7 +32,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class ItemBlockHangingCurds extends ItemBlock
+public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock
 {
 	public ItemBlockHangingCurds(Block block)
 	{
@@ -52,7 +53,8 @@ public class ItemBlockHangingCurds extends ItemBlock
 		return tag.getCompoundTag("te_curd_block");
 	}
 
-	public NBTTagCompound getTileData(ItemStack stack)
+	@Override
+	public NBTTagCompound getTileTagCompound(ItemStack stack)
 	{
 		final NBTTagCompound tag = getTileDataABS(stack);
 		final EnumCheeseType type = getCheeseType(stack);
@@ -71,7 +73,7 @@ public class ItemBlockHangingCurds extends ItemBlock
 
 	public boolean isDried(ItemStack stack)
 	{
-		final NBTTagCompound nbt = getTileData(stack);
+		final NBTTagCompound nbt = getTileTagCompound(stack);
 		if (nbt.hasKey("dried"))
 		{
 			return nbt.getBoolean("dried");
@@ -93,7 +95,7 @@ public class ItemBlockHangingCurds extends ItemBlock
 		final Item item = stack.getItem();
 		if (item instanceof ItemBlockHangingCurds)
 		{
-			return ((ItemBlockHangingCurds)item).getTileData(stack);
+			return ((ItemBlockHangingCurds)item).getTileTagCompound(stack);
 		}
 		else
 		{
