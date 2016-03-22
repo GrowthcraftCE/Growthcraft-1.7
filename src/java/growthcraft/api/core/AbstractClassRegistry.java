@@ -38,7 +38,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public abstract class AbstractClassRegistry<T extends INBTSerializableContext> implements IClassRegistry<T>
 {
 	/**
-	 * Error raised when an attempt is made to register an effect under an existing name
+	 * Error raised when an attempt is made to register a class under an existing name
 	 */
 	public static class ClassRegisteredException extends RuntimeException
 	{
@@ -87,7 +87,7 @@ public abstract class AbstractClassRegistry<T extends INBTSerializableContext> i
 	public T loadObjectFromNBT(@Nonnull NBTTagCompound data, @Nonnull String name)
 	{
 		final NBTTagCompound effectData = data.getCompoundTag(name);
-		final String factoryName = data.getString("__name__");
+		final String factoryName = effectData.getString("__name__");
 		final Class<? extends T> klass = getClass(factoryName);
 
 		T instance = null;

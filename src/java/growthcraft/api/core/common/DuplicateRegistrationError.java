@@ -24,7 +24,7 @@
 package growthcraft.api.core.common;
 
 /**
- * This exception thrown when something was registered more than once
+ * This exception is thrown when something was registered more than once.
  */
 public class DuplicateRegistrationError extends RuntimeException
 {
@@ -38,7 +38,7 @@ public class DuplicateRegistrationError extends RuntimeException
 	public DuplicateRegistrationError() {}
 
 	/**
-	 * Helper method for creating frozen errors for a specified object
+	 * Helper method for creating frozen errors for a specified object.
 	 *
 	 * @param obj - object to generate frozen error for
 	 * @return new frozen error

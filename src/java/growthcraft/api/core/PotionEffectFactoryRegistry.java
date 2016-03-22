@@ -40,6 +40,7 @@ public class PotionEffectFactoryRegistry extends AbstractClassRegistry<IPotionEf
 		this.logger = l;
 	}
 
+	@Override
 	public IPotionEffectFactory loadPotionEffectFactoryFromNBT(@Nonnull NBTTagCompound data, @Nonnull String name)
 	{
 		return loadObjectFromNBT(data, name);

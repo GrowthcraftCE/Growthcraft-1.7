@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,9 +24,16 @@
 package growthcraft.api.core.definition;
 
 import java.util.List;
+import javax.annotation.Nonnull;
+
 import net.minecraft.item.ItemStack;
 
-public interface IItemStackListFactory
+public interface IItemStackListProvider
 {
-	List<ItemStack> getItemStacks();
+	/**
+	 * Returns a list of item stacks.
+	 *
+	 * @return item stacks
+	 */
+	@Nonnull List<ItemStack> getItemStacks();
 }

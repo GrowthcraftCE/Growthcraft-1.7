@@ -39,10 +39,52 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public interface IFluidDictionary extends ILoggable
 {
+	/**
+	 * Associates the fluid with the given tags.
+	 *
+	 * @param fluid - fluid to tag
+	 * @param tags - fluid tags to associate this fluid with
+	 */
 	void addFluidTags(@Nonnull Fluid fluid, @Nonnull FluidTag... tags);
-	Collection<FluidTag> getFluidTags(@Nullable Fluid fluid);
-	Collection<FluidTag> getFluidTags(@Nullable FluidStack fluid);
+
+	/**
+	 * Gets all tags associated with the fluid.
+	 *
+	 * @param fluid - fluid to get tags for
+	 * @return tags
+	 */
+	@Nullable Collection<FluidTag> getFluidTags(@Nullable Fluid fluid);
+
+	/**
+	 * Gets all tags associated with the fluid.
+	 *
+	 * @param fluid - fluid stack to get tags for
+	 * @return tags
+	 */
+	@Nullable Collection<FluidTag> getFluidTags(@Nullable FluidStack fluid);
+
+	/**
+	 * Does the fluid have the given tags?
+	 *
+	 * @param fluid - fluid to check
+	 * @param tags - tags to look for
+	 * @return true, the fluid has ALL the tags specified, false otherwise
+	 */
 	boolean hasFluidTags(@Nonnull Fluid fluid, @Nonnull FluidTag... tags);
-	Collection<Fluid> getFluidsByTags(@Nonnull FluidTag... tags);
-	Collection<Fluid> getFluidsByTags(@Nonnull List<FluidTag> tags);
+
+	/**
+	 * Retrieves all fluids with the specified tags.
+	 *
+	 * @param tags - tags that the fluids SHOULD have
+	 * @return fluids, or null
+	 */
+	@Nonnull Collection<Fluid> getFluidsByTags(@Nonnull FluidTag... tags);
+
+	/**
+	 * Retrieves all fluids with the specified tags.
+	 *
+	 * @param tags - tags that the fluids SHOULD have
+	 * @return fluids, or null
+	 */
+	@Nonnull Collection<Fluid> getFluidsByTags(@Nonnull List<FluidTag> tags);
 }

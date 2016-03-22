@@ -28,25 +28,19 @@ import javax.annotation.Nullable;
 
 import net.minecraft.item.ItemStack;
 
-public interface IMultiItemStacks
+public interface IMultiItemStacks extends IItemStackListProvider
 {
 	/**
-	 * Returns the expected stack size
+	 * Returns the expected `stackSize`
 	 *
 	 * @return size
 	 */
 	int getStackSize();
 
 	/**
-	 * Returns a list of item stacks
-	 *
-	 * @return the list of item stacks
-	 */
-	List<ItemStack> getItemStacks();
-
-	/**
 	 * Determines if the mulit stack contains the specified item stack.
 	 *
+	 * @param stack - the item stack being searched for
 	 * @return true, the multi stack contains this stack
 	 */
 	boolean containsItemStack(@Nullable ItemStack stack);

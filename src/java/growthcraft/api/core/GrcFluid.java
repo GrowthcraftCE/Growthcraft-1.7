@@ -33,7 +33,7 @@ import net.minecraftforge.fluids.Fluid;
 
 /**
  * An extension of the default Forge Fluid class, adding descriptions and color
- * setting
+ * settings
  */
 public class GrcFluid extends Fluid implements IDescribable
 {
@@ -83,6 +83,12 @@ public class GrcFluid extends Fluid implements IDescribable
 		}
 	}
 
+	/**
+	 * Fluids don't produce any useful information when converted to a String.
+	 * This changes that.
+	 *
+	 * @return string
+	 */
 	@Override
 	public String toString()
 	{

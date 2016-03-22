@@ -42,6 +42,16 @@ public class MultiFluidStacks implements IMultiFluidStacks
 	}
 
 	@Override
+	public int getAmount()
+	{
+		for (FluidStack stack : fluidStacks)
+		{
+			return stack.amount;
+		}
+		return 0;
+	}
+
+	@Override
 	public List<FluidStack> getFluidStacks()
 	{
 		return fluidStacks;
