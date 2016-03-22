@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,53 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.yeast.user;
+package growthcraft.api.core.item;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.schema.ICommentable;
-import growthcraft.api.core.schema.ItemKeySchema;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandom;
 
-public class UserYeastEntry implements ICommentable
+public class WeightedItemStack extends WeightedRandom.Item
 {
-	public String comment = "";
-	public ItemKeySchema item;
-	public int weight;
-	public List<String> biome_types;
-	public List<String> biome_names;
+	public final ItemStack itemStack;
+	private ItemKey key;
 
-	public UserYeastEntry(@Nonnull ItemKeySchema i, int w, @Nonnull List<String> biomeTypes, @Nonnull List<String> biomeNames)
+	public WeightedItemStack(int weight, @Nonnull ItemStack stack)
 	{
-		this.item = i;
-		this.weight = w;
-		this.biome_types = biomeTypes;
-		this.biome_names = biomeNames;
-	}
-
-	public UserYeastEntry(@Nonnull ItemKeySchema i, int w, @Nonnull List<String> biomeTypes)
-	{
-		this(i, w, biomeTypes, new ArrayList<String>());
-	}
-
-	public UserYeastEntry() {}
-
-	@Override
-	public String toString()
-	{
-		return String.format("UserYeastEntry(item: `%s`, weight: %d, biome_types: %s, biome_names: %s)", item, weight, biome_types, biome_names);
+		super(weight <= 0 ? 1 : weight);
+		this.itemStack = stack;
+		this.key = new ItemKey(itemStack);
 	}
 
 	@Override
-	public void setComment(String comm)
+	public int hashCode()
 	{
-		this.comment = comm;
+		return key.hashCode();
 	}
 
 	@Override
-	public String getComment()
+	public boolean equals(Object other)
 	{
-		return comment;
+		if (other instanceof WeightedItemStack)
+		{
+			return hashCode() == other.hashCode();
+		}
+		return false;
 	}
 }
