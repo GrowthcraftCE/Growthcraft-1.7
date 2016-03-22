@@ -72,6 +72,37 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
+	protected boolean dropsTileStack(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		return true;
+	}
+
+	@Override
+	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, int x, int y, int z, int meta)
+	{
+		final TileEntityHangingCurds te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			return te.asItemStack();
+		}
+		return new ItemStack(this, 1, meta);
+	}
+
+	@Override
+	protected void getTileItemStackDrops(List<ItemStack> ret, World world, int x, int y, int z, int metadata, int fortune)
+	{
+		final TileEntityHangingCurds te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			ret.add(te.asItemStack());
+		}
+		else
+		{
+			super.getTileItemStackDrops(ret, world, x, y, z, metadata, fortune);
+		}
+	}
+
+	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
 		if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
@@ -118,17 +149,6 @@ public class BlockHangingCurds extends GrcBlockContainer
 			return teHangingCurds.asItemStack();
 		}
 		return super.getPickBlock(target, world, x, y, z, player);
-	}
-
-	@Override
-	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, int x, int y, int z, int meta)
-	{
-		final TileEntityHangingCurds te = getTileEntity(world, x, y, z);
-		if (te != null)
-		{
-			return te.asItemStack();
-		}
-		return new ItemStack(this, 1, meta);
 	}
 
 	@Override
