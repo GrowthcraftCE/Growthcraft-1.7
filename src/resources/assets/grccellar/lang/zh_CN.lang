@@ -50,18 +50,18 @@ grc.booze=豪饮
 
 # Modifiers
 grc.fluids.tag.chilled=冷藏
-grc.fluids.tag.cider=grc.fluids.tag.cider
+grc.fluids.tag.cider=西打酒
 grc.fluids.tag.deadly=致死
 grc.fluids.tag.extended=后劲
 grc.fluids.tag.fermented=发酵
-grc.fluids.tag.fortified=grc.fluids.tag.fortified
-grc.fluids.tag.hopped=grc.fluids.tag.hopped
-grc.fluids.tag.hyper_extended=较大后劲
-grc.fluids.tag.intoxicated=剧毒
-grc.fluids.tag.magical=grc.fluids.tag.magical
-grc.fluids.tag.poisoned=毒性
+grc.fluids.tag.fortified=精馏
+grc.fluids.tag.hopped=含啤酒花
+grc.fluids.tag.hyper_extended=大后劲
+grc.fluids.tag.intoxicated=有剧毒
+grc.fluids.tag.magical=蕴魔
+grc.fluids.tag.poisoned=有毒性
 grc.fluids.tag.potent=高度
-grc.fluids.tag.wine=grc.fluids.tag.wine
+grc.fluids.tag.wine=葡萄酒
 grc.fluids.tag.young=低度
 
 # GUI
@@ -69,7 +69,7 @@ gui.grc.empty=清空
 gui.grc.discard=丢弃
 gui.grc.switch=切换
 gui.grc.cantferment=无法发酵。
-gui.grccellar.ferment_barrel.progress_name=gui.grccellar.ferment_barrel.progress_name
+gui.grccellar.ferment_barrel.progress_name=发酵中
 
 # Achievements
 achievement.craftBarrel=萃取桶制造工匠
@@ -77,9 +77,9 @@ achievement.craftBarrel.desc=使用三块木板和6个铁锭合成发酵桶。
 achievement.fermentBooze=酵母制作我在行。
 achievement.fermentBooze.desc=酿造酒精饮料。
 achievement.getDrunk=很难酿造嘛？
-achievement.getDrunk.desc=获得效果：微醺 V。
-achievement.onTheGo=achievement.onTheGo
-achievement.onTheGo.desc=achievement.onTheGo.desc
+achievement.getDrunk.desc=获得：微醺 V。
+achievement.onTheGo=在路途上
+achievement.onTheGo.desc=合成水袋
 
 # Tooltips (Number is a percentage)
 # number is a percentage
