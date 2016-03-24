@@ -100,9 +100,9 @@ tile.grc.BeeBox.BiomesOPlenty13.name=Jacaranda Bee Box
 tile.grc.BeeBox.BiomesOPlenty14.name=Mahogany Bee Box
 
 ## Botania
-tile.grc.BeeBox.Botania0.name=Living Wood Bee Box
+tile.grc.BeeBox.Botania0.name=Livingwood Bee Box
 tile.grc.BeeBox.Botania1.name=Dreamwood Bee Box
-tile.grc.BeeBox.Botania2.name=Shimmer Wood Bee Box
+tile.grc.BeeBox.Botania2.name=Shimmerwood Bee Box
 
 # Other Blocks
 tile.grc.beeHive.name=Bee Hive
