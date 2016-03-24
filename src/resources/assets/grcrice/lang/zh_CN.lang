@@ -12,7 +12,7 @@ fluid.grc.riceSake0=米酒
 fluid.grc.riceSake1=米酒
 fluid.grc.riceSake2=米酒
 fluid.grc.riceSake3=米酒
-fluid.grc.riceSake4=Divine Sake
+fluid.grc.riceSake4=圣清酒
 fluid.grc.riceSake5=米酒
 fluid.grc.riceSake6=米酒
 
@@ -22,7 +22,7 @@ item.bucket.fluid.grc.riceSake0.name=米酒桶
 item.bucket.fluid.grc.riceSake1.name=米酒桶
 item.bucket.fluid.grc.riceSake2.name=米酒桶
 item.bucket.fluid.grc.riceSake3.name=米酒桶
-item.bucket.fluid.grc.riceSake4.name=Divine Sake Bucket
+item.bucket.fluid.grc.riceSake4.name=圣清酒桶
 item.bucket.fluid.grc.riceSake5.name=米酒桶
 item.bucket.fluid.grc.riceSake6.name=米酒桶
 
@@ -32,6 +32,6 @@ tile.fluid.grc.riceSake0.name=米酒
 tile.fluid.grc.riceSake1.name=米酒
 tile.fluid.grc.riceSake2.name=米酒
 tile.fluid.grc.riceSake3.name=米酒
-tile.fluid.grc.riceSake4.name=Divine Sake
+tile.fluid.grc.riceSake4.name=圣清酒
 tile.fluid.grc.riceSake5.name=米酒
 tile.fluid.grc.riceSake6.name=米酒

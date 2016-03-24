@@ -1,11 +1,11 @@
 # Creative Tabs
-itemGroup.creative_tab_grcbamboo=itemGroup.creative_tab_grcbamboo
+itemGroup.creative_tab_grcbamboo=Growthcraft|竹
 # Blocks
 tile.grc.bambooBlock.name=竹子
 tile.grc.bambooDoor.name=竹门
 tile.grc.bambooFence.name=竹篱
 tile.grc.bambooFenceGate.name=竹篱笆门
-tile.grc.bambooFenceRope.name=tile.grc.bambooFenceRope.name
+tile.grc.bambooFenceRope.name=带有绳子的竹篱
 tile.grc.bambooLeaves.name=竹叶
 tile.grc.bambooScaffold.name=竹脚手架
 tile.grc.bambooShoot.name=竹笋
