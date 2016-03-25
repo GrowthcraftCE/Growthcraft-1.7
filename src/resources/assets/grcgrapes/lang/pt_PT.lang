@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.creative_tab_grcgrapes=itemGroup.creative_tab_grcgrapes
+itemGroup.creative_tab_grcgrapes=Growthcraft Uvas
 
 # Blocks
 tile.grc.grapeVine0.name=Tronco de Videira
@@ -9,8 +9,8 @@ tile.grc.grapeBlock.name=Uvas
 
 # Items
 item.grc.grapes.purple.name=Uvas
-item.grc.grapes.green.name=item.grc.grapes.green.name
-item.grc.grapes.red.name=item.grc.grapes.red.name
+item.grc.grapes.green.name=Uvas Verdes
+item.grc.grapes.red.name=Uvas Vermelhas
 item.grc.grapeSeeds.name=Sementes de Uva
 
 # Fluids
