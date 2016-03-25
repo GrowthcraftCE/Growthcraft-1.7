@@ -135,6 +135,15 @@ public class GrcMilkItems extends GrcModuleBase
 			"honeyDrop"
 		));
 
+		// Ice Cream - Melon
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumIceCream.WATERMELON.asStack(),
+			GrowthCraftMilk.fluids.cream.bucket.asStack(),
+			Items.milk_bucket,
+			Items.bowl,
+			Items.sugar,
+			"foodMelon"
+		));
+
 		// Cheese Cloth
 		GameRegistry.addRecipe(new ShapedOreRecipe(cheeseCloth.asStack(),
 			"sss",
@@ -162,5 +171,7 @@ public class GrcMilkItems extends GrcModuleBase
 		OreDictionary.registerOre("materialStomach", stomach.asStack());
 		OreDictionary.registerOre("materialStarterCulture", starterCulture.asStack());
 		OreDictionary.registerOre("materialCheeseCloth", cheeseCloth.asStack());
+
+		OreDictionary.registerOre("foodMelon", Items.melon);
 	}
 }
