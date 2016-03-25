@@ -89,14 +89,17 @@ public class GameRegistryDumper
 					if (Platform.isClient())
 					{
 						final List<ItemStack> sub = new ArrayList<ItemStack>();
-						obj.getSubItems(obj, obj.getCreativeTab(), sub);
-						if (sub.size() > 0)
+						if (obj.getHasSubtypes())
 						{
-							for (ItemStack stack : sub)
+							obj.getSubItems(obj, obj.getCreativeTab(), sub);
+							if (sub.size() > 0)
 							{
-								if (stack != null && stack.getItem() != null)
+								for (ItemStack stack : sub)
 								{
-									writeItemStackToFile(stack, writer);
+									if (stack != null && stack.getItem() != null)
+									{
+										writeItemStackToFile(stack, writer);
+									}
 								}
 							}
 						}
