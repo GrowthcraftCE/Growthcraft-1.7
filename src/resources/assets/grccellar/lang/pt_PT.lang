@@ -11,7 +11,7 @@ tile.grc.fermentJar.name=Jarro de Cultivo
 # Items
 # Please remove this field once all other module translations have been updated,
 # this is no longer used
-item.grc.boozeBucket.name=item.grc.boozeBucket.name
+item.grc.boozeBucket.name=Balde
 
 item.grc.yeast0.name=Levedura de Cervejaria
 item.grc.yeast1.name=Levedura de Lager
@@ -69,7 +69,7 @@ gui.grc.empty=Vazio
 gui.grc.discard=Descartar
 gui.grc.switch=Trocar
 gui.grc.cantferment=Não pode ser fermentado.
-gui.grccellar.ferment_barrel.progress_name=gui.grccellar.ferment_barrel.progress_name
+gui.grccellar.ferment_barrel.progress_name=A fermentar
 
 # Achievements
 achievement.craftBarrel=Tanoeiro
