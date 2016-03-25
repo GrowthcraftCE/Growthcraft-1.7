@@ -7,31 +7,31 @@ item.grc.appleSeeds.name=Sementes de Maçã
 
 # Booze
 ## Fluids
-fluid.grc.appleCider=Cidra de Maçã
-fluid.grc.appleCider0=Cidra de Maçã
-fluid.grc.appleCider1=Cidra de Maçã
-fluid.grc.appleCider2=Cidra de Maçã
-fluid.grc.appleCider3=Cidra de Maçã
+fluid.grc.appleCider=Sidra de Maçã
+fluid.grc.appleCider0=Sidra de Maçã
+fluid.grc.appleCider1=Sidra de Maçã
+fluid.grc.appleCider2=Sidra de Maçã
+fluid.grc.appleCider3=Sidra de Maçã
 fluid.grc.appleCider4=Néctar Suave
-fluid.grc.appleCider5=Cidra de Maçã
-fluid.grc.appleCider6=Cidra de Maçã
+fluid.grc.appleCider5=Sidra de Maçã
+fluid.grc.appleCider6=Sidra de Maçã
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider.name=Balde de Cidra de Maçã
-item.bucket.fluid.grc.appleCider0.name=Balde de Cidra de Maçã
-item.bucket.fluid.grc.appleCider1.name=Balde de Cidra de Maçã
-item.bucket.fluid.grc.appleCider2.name=Balde de Cidra de Maçã
-item.bucket.fluid.grc.appleCider3.name=Balde de Cidra de Maçã
+item.bucket.fluid.grc.appleCider.name=Balde de Sidra de Maçã
+item.bucket.fluid.grc.appleCider0.name=Balde de Sidra de Maçã
+item.bucket.fluid.grc.appleCider1.name=Balde de Sidra de Maçã
+item.bucket.fluid.grc.appleCider2.name=Balde de Sidra de Maçã
+item.bucket.fluid.grc.appleCider3.name=Balde de Sidra de Maçã
 item.bucket.fluid.grc.appleCider4.name=Balde de Néctar Suave
-item.bucket.fluid.grc.appleCider5.name=Balde de Cidra de Maçã
-item.bucket.fluid.grc.appleCider6.name=Balde de Cidra de Maçã
+item.bucket.fluid.grc.appleCider5.name=Balde de Sidra de Maçã
+item.bucket.fluid.grc.appleCider6.name=Balde de Sidra de Maçã
 
 ## Fluid Blocks
-tile.fluid.grc.appleCider.name=Cidra de Maçã
-tile.fluid.grc.appleCider0.name=Cidra de Maçã
-tile.fluid.grc.appleCider1.name=Cidra de Maçã
-tile.fluid.grc.appleCider2.name=Cidra de Maçã
-tile.fluid.grc.appleCider3.name=Cidra de Maçã
+tile.fluid.grc.appleCider.name=Sidra de Maçã
+tile.fluid.grc.appleCider0.name=Sidra de Maçã
+tile.fluid.grc.appleCider1.name=Sidra de Maçã
+tile.fluid.grc.appleCider2.name=Sidra de Maçã
+tile.fluid.grc.appleCider3.name=Sidra de Maçã
 tile.fluid.grc.appleCider4.name=Néctar Suave
-tile.fluid.grc.appleCider5.name=Cidra de Maçã
-tile.fluid.grc.appleCider6.name=Cidra de Maçã
+tile.fluid.grc.appleCider5.name=Sidra de Maçã
+tile.fluid.grc.appleCider6.name=Sidra de Maçã
