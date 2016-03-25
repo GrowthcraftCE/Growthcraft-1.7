@@ -173,5 +173,6 @@ public class GrcMilkItems extends GrcModuleBase
 		OreDictionary.registerOre("materialCheeseCloth", cheeseCloth.asStack());
 
 		OreDictionary.registerOre("foodMelon", Items.melon);
+		OreDictionary.registerOre("foodFruit", Items.melon);
 	}
 }
