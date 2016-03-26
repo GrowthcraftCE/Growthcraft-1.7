@@ -22,9 +22,15 @@ item.grcmilk.IceCream.grape.name=item.grcmilk.IceCream.grape.name
 item.grcmilk.IceCream.honey.name=item.grcmilk.IceCream.honey.name
 item.grcmilk.IceCream.plain.name=item.grcmilk.IceCream.plain.name
 item.grcmilk.IceCream.watermelon.name=item.grcmilk.IceCream.watermelon.name
-item.grcmilk.StarterCulture.name=item.grcmilk.StarterCulture.name
-item.grcmilk.Yogurt.name=item.grcmilk.Yogurt.name
+## Yogurt
+item.grcmilk.Yogurt.apple.name=item.grcmilk.Yogurt.apple.name
+item.grcmilk.Yogurt.chocolate.name=item.grcmilk.Yogurt.chocolate.name
+item.grcmilk.Yogurt.grape.name=item.grcmilk.Yogurt.grape.name
+item.grcmilk.Yogurt.honey.name=item.grcmilk.Yogurt.honey.name
+item.grcmilk.Yogurt.plain.name=item.grcmilk.Yogurt.plain.name
+item.grcmilk.Yogurt.watermelon.name=item.grcmilk.Yogurt.watermelon.name
 ## Other
+item.grcmilk.StarterCulture.name=item.grcmilk.StarterCulture.name
 item.grcmilk.Stomach.name=item.grcmilk.Stomach.name
 
 # Blocks

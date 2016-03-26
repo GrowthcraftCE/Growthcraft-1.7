@@ -22,9 +22,15 @@ item.grcmilk.IceCream.grape.name=冰淇淋(葡萄)
 item.grcmilk.IceCream.honey.name=冰淇淋(蜂蜜)
 item.grcmilk.IceCream.plain.name=冰淇淋(原味)
 item.grcmilk.IceCream.watermelon.name=item.grcmilk.IceCream.watermelon.name
-item.grcmilk.StarterCulture.name=Starter Culture
-item.grcmilk.Yogurt.name=酸奶
+## Yogurt
+item.grcmilk.Yogurt.apple.name=item.grcmilk.Yogurt.apple.name
+item.grcmilk.Yogurt.chocolate.name=item.grcmilk.Yogurt.chocolate.name
+item.grcmilk.Yogurt.grape.name=item.grcmilk.Yogurt.grape.name
+item.grcmilk.Yogurt.honey.name=item.grcmilk.Yogurt.honey.name
+item.grcmilk.Yogurt.plain.name=酸奶
+item.grcmilk.Yogurt.watermelon.name=item.grcmilk.Yogurt.watermelon.name
 ## Other
+item.grcmilk.StarterCulture.name=Starter Culture
 item.grcmilk.Stomach.name=胃
 
 # Blocks

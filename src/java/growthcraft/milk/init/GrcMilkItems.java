@@ -29,6 +29,7 @@ import growthcraft.core.common.GrcModuleBase;
 import growthcraft.milk.common.item.EnumButter;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.EnumIceCream;
+import growthcraft.milk.common.item.EnumYogurt;
 import growthcraft.milk.common.item.ItemButter;
 import growthcraft.milk.common.item.ItemCheese;
 import growthcraft.milk.common.item.ItemCheeseCloth;
@@ -84,11 +85,51 @@ public class GrcMilkItems extends GrcModuleBase
 		// Salted Butter
 		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumButter.SALTED.asStack(), EnumButter.UNSALTED.asStack(), "foodSalt"));
 
-		// Yogurt
-		GameRegistry.addRecipe(new ShapelessOreRecipe(yogurt.asStack(),
+		// Yogurt - Plain
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumYogurt.PLAIN.asStack(),
 			Items.milk_bucket,
 			starterCulture.asStack(),
 			Items.bowl
+		));
+
+		// Yogurt - Chocolate
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumYogurt.CHOCOLATE.asStack(),
+			Items.milk_bucket,
+			starterCulture.asStack(),
+			Items.bowl,
+			EnumDye.COCOA_BEANS.asStack()
+		));
+
+		// Yogurt - Grape
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumYogurt.GRAPE.asStack(),
+			Items.milk_bucket,
+			starterCulture.asStack(),
+			Items.bowl,
+			"foodGrapes"
+		));
+
+		// Yogurt - Apple
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumYogurt.APPLE.asStack(),
+			Items.milk_bucket,
+			starterCulture.asStack(),
+			Items.bowl,
+			"foodApple"
+		));
+
+		// Yogurt - Honey
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumYogurt.HONEY.asStack(),
+			Items.milk_bucket,
+			starterCulture.asStack(),
+			Items.bowl,
+			"honeyDrop"
+		));
+
+		// Yogurt - Melon
+		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumYogurt.WATERMELON.asStack(),
+			Items.milk_bucket,
+			starterCulture.asStack(),
+			Items.bowl,
+			"foodMelon"
 		));
 
 		// Ice Cream - Plain

@@ -22,9 +22,15 @@ item.grcmilk.IceCream.grape.name=Sorvete (Uva)
 item.grcmilk.IceCream.honey.name=Sorvete (Mel)
 item.grcmilk.IceCream.plain.name=Sorvete (Sem sabor)
 item.grcmilk.IceCream.watermelon.name=Sorvete (Melancia)
-item.grcmilk.StarterCulture.name=Fermento Lácteo
-item.grcmilk.Yogurt.name=Yogurt
+## Yogurt
+item.grcmilk.Yogurt.apple.name=item.grcmilk.Yogurt.apple.name
+item.grcmilk.Yogurt.chocolate.name=item.grcmilk.Yogurt.chocolate.name
+item.grcmilk.Yogurt.grape.name=item.grcmilk.Yogurt.grape.name
+item.grcmilk.Yogurt.honey.name=item.grcmilk.Yogurt.honey.name
+item.grcmilk.Yogurt.plain.name=Yogurt
+item.grcmilk.Yogurt.watermelon.name=item.grcmilk.Yogurt.watermelon.name
 ## Other
+item.grcmilk.StarterCulture.name=Fermento Lácteo
 item.grcmilk.Stomach.name=Estômago
 
 # Blocks
@@ -147,7 +153,6 @@ fluid.grcmilk.Kumis3=Kumis
 fluid.grcmilk.Kumis4=Kumis
 fluid.grcmilk.Kumis5=Kumis
 fluid.grcmilk.Kumis5.desc=Até as coisas mais doces podem tornar-se corruptas.
-
 
 ## Booze Blocks
 tile.fluid.grcmilk.Kumis0.name=Kumis

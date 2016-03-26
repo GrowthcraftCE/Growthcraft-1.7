@@ -22,9 +22,15 @@ item.grcmilk.IceCream.grape.name=Gelado (Uva)
 item.grcmilk.IceCream.honey.name=Gelado (Mel)
 item.grcmilk.IceCream.plain.name=Gelado (Natural)
 item.grcmilk.IceCream.watermelon.name=Gelado (Melancia)
-item.grcmilk.StarterCulture.name=Fermento Lácteo
-item.grcmilk.Yogurt.name=Iogurte
+## Yogurt
+item.grcmilk.Yogurt.apple.name=item.grcmilk.Yogurt.apple.name
+item.grcmilk.Yogurt.chocolate.name=item.grcmilk.Yogurt.chocolate.name
+item.grcmilk.Yogurt.grape.name=item.grcmilk.Yogurt.grape.name
+item.grcmilk.Yogurt.honey.name=item.grcmilk.Yogurt.honey.name
+item.grcmilk.Yogurt.plain.name=Iogurte
+item.grcmilk.Yogurt.watermelon.name=item.grcmilk.Yogurt.watermelon.name
 ## Other
+item.grcmilk.StarterCulture.name=Fermento Lácteo
 item.grcmilk.Stomach.name=Estômago
 
 # Blocks
