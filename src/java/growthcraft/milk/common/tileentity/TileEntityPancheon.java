@@ -36,9 +36,16 @@ public class TileEntityPancheon extends GrcTileEntityFluidsDevice implements ITi
 {
 	private Pancheon pancheon = new Pancheon(this, 0, 2, 1);
 
+	@Override
 	public float getDeviceProgress()
 	{
 		return pancheon.getProgress();
+	}
+
+	@Override
+	public int getDeviceProgressScaled(int scale)
+	{
+		return pancheon.getProgressScaled(scale);
 	}
 
 	/**

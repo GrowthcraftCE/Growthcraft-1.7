@@ -26,4 +26,5 @@ package growthcraft.core.common.tileentity;
 public interface ITileProgressiveDevice
 {
 	float getDeviceProgress();
+	int getDeviceProgressScaled(int scale);
 }

@@ -10,6 +10,7 @@ import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 
 import io.netty.buffer.ByteBuf;
 
@@ -22,7 +23,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityFermentBarrel extends TileEntityCellarDevice
+public class TileEntityFermentBarrel extends TileEntityCellarDevice implements ITileProgressiveDevice
 {
 	public static enum FermentBarrelDataID
 	{
@@ -155,7 +156,19 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 		}
 	}
 
-	public int getFermentProgressScaled(int scale)
+	@Override
+	public float getDeviceProgress()
+	{
+		final int tmx = getTimeMax();
+		if (tmx > 0)
+		{
+			return (float)time / (float)tmx;
+		}
+		return 0.0f;
+	}
+
+	@Override
+	public int getDeviceProgressScaled(int scale)
 	{
 		final int tmx = getTimeMax();
 		if (tmx > 0)

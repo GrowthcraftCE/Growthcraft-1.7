@@ -190,7 +190,7 @@ public class BlockFermentBarrel extends BlockCellarContainer
 		final TileEntityFermentBarrel te = getTileEntity(world, x, y, z);
 		if (te != null)
 		{
-			return te.getFermentProgressScaled(15);
+			return te.getDeviceProgressScaled(15);
 		}
 		return 0;
 	}

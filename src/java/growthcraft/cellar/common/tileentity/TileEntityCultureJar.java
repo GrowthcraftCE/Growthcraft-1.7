@@ -43,6 +43,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -303,18 +304,21 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		return false;
 	}
 
-	public int getProgressScaled(int scale)
-	{
-		return getActiveClientDevice().getProgressScaled(scale);
-	}
-
+	@Override
 	public int getHeatScaled(int scale)
 	{
-		return (int)(scale * getHeatMultiplier());
+		return (int)(scale * MathHelper.clamp_float(getHeatMultiplier(), 0f, 1f));
 	}
 
+	@Override
 	public float getDeviceProgress()
 	{
 		return getActiveClientDevice().getProgress();
+	}
+
+	@Override
+	public int getDeviceProgressScaled(int scale)
+	{
+		return getActiveClientDevice().getProgressScaled(scale);
 	}
 }

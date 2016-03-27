@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.tileentity;
+package growthcraft.core.client.gui.widget;
 
-public interface ITileHeatedDevice
+import growthcraft.core.common.tileentity.ITileHeatedDevice;
+
+import net.minecraft.tileentity.TileEntity;
+
+public class WidgetHeatIcon extends WidgetIconBase
 {
-	boolean isHeated();
-	float getHeatMultiplier();
-	int getHeatScaled(int scale);
+	public WidgetHeatIcon(WidgetManager man, int x, int y, int w, int h)
+	{
+		super(man, x, y, w, h);
+	}
+
+	@Override
+	protected void doDraw(int mx, int my, int x, int y)
+	{
+		final TileEntity tileEntity = manager.gui.getTileEntity();
+		if (tileEntity instanceof ITileHeatedDevice)
+		{
+			final ITileHeatedDevice heatedDevice = (ITileHeatedDevice)tileEntity;
+			if (heatedDevice.isHeated())
+			{
+				final int iconHeight = heatedDevice.getHeatScaled(textureRect.h);
+				final int offY = textureRect.h - iconHeight;
+				manager.gui.drawTexturedModalRect(x, y + offY, textureRect.x, textureRect.y + offY, textureRect.w, iconHeight);
+			}
+		}
+	}
 }

@@ -1,14 +1,36 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015, 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.core.client.gui;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.util.Rectangle;
+import growthcraft.core.client.gui.widget.WidgetManager;
+import growthcraft.core.util.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,111 +45,99 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 @SideOnly(Side.CLIENT)
-public class GrcGuiContainer extends GuiContainer
+public abstract class GrcGuiContainer<C extends Container, T extends TileEntity> extends GuiContainer
 {
-	public static class TooltipIndex
-	{
-		// use this to identify the tooltip index
-		public final String handle;
-		// The rectangle where this tooltip will be displayed
-		public final Rectangle rect;
+	protected T tileEntity;
+	protected ResourceLocation guiResource;
+	protected TooltipManager tooltipManager;
+	protected WidgetManager widgets;
 
-		public TooltipIndex(String h, Rectangle r)
-		{
-			this.handle = h;
-			this.rect = r;
-		}
-	}
-
-	protected List<TooltipIndex> tooltipIndices = new ArrayList<TooltipIndex>();
-	protected List<String> tooltip = new ArrayList<String>();
-	protected TileEntity tileEntity;
-	protected ResourceLocation bindedResource;
-
-	public GrcGuiContainer(Container container, TileEntity te)
+	public GrcGuiContainer(ResourceLocation res, C container, T te)
 	{
 		super(container);
+		this.guiResource = res;
 		this.tileEntity = te;
 	}
 
-	protected void drawInventoryName(int x, int y)
+	public T getTileEntity()
 	{
-		if (tileEntity instanceof IInventory)
-		{
-			final IInventory inv = (IInventory)tileEntity;
-			final String invName = inv.getInventoryName();
-			final String s = inv.hasCustomInventoryName() ? invName : GrcI18n.translate(invName);
-			fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-			fontRendererObj.drawString(GrcI18n.translate("container.inventory"), 8, ySize - 96 + 2, 4210752);
-		}
+		return tileEntity;
+	}
+
+	public FontRenderer getFontRenderer()
+	{
+		return fontRendererObj;
+	}
+
+	public int getGuiX()
+	{
+		return (width - xSize) / 2;
+	}
+
+	public int getGuiY()
+	{
+		return (height - ySize) / 2;
+	}
+
+	public int getXSize()
+	{
+		return xSize;
+	}
+
+	public int getYSize()
+	{
+		return ySize;
+	}
+
+	public void setZLevel(float z)
+	{
+		this.zLevel = z;
+	}
+
+	public void getItemRendererZLevel(float z)
+	{
+		itemRender.zLevel = z;
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int x, int y)
+	public void initGui()
 	{
-		super.drawGuiContainerForegroundLayer(x, y);
-		drawInventoryName(x, y);
-	}
-
-	protected void addTooltipIndex(String handle, Rectangle r)
-	{
-		tooltipIndices.add(new TooltipIndex(handle, r));
-	}
-
-	protected void addTooltipIndex(String handle, int x, int y, int w, int h)
-	{
-		addTooltipIndex(handle, new Rectangle(x, y, w, h));
+		super.initGui();
+		this.tooltipManager = new TooltipManager<C, T>(this);
+		this.widgets = new WidgetManager<C, T>(this);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {}
-
-	// Overwrite this method to add tooltips based on the handle
-	protected void addTooltips(String handle, List<String> tips) {}
-
-	// Overwrite this method to draw tooltips, use the ti to identify which
-	// rectangle you're working with.
-	protected void drawTooltipIndex(TooltipIndex ti, int x, int y)
+	public void drawHoveringText(List l, int x, int y, FontRenderer renderer)
 	{
-		tooltip.clear();
-		addTooltips(ti.handle, tooltip);
-		if (tooltip.size() > 0)
-		{
-			drawText(tooltip, x, y, fontRendererObj);
-		}
+		super.drawHoveringText(l, x, y, renderer);
 	}
 
-	protected void drawTooltip(int x, int y)
+	public void drawHoveringText(List<String> l, int x, int y)
 	{
-		final int gx = x - ((this.width - this.xSize) / 2);
-		final int gy = y - ((this.height - this.ySize) / 2);
-
-		for (TooltipIndex ti : tooltipIndices)
-		{
-			if (ti.rect.contains(gx, gy))
-			{
-				drawTooltipIndex(ti, x, y);
-				break;
-			}
-		}
+		drawHoveringText(l, x, y, fontRendererObj);
 	}
 
 	@Override
-	public void drawScreen(int x, int y, float par3)
+	public void drawGradientRect(int x, int y, int w, int h, int color1, int color2)
 	{
-		super.drawScreen(x, y, par3);
-		drawTooltip(x, y);
+		super.drawGradientRect(x, y, w, h, color1, color2);
 	}
 
-	protected void bindTexture(ResourceLocation res)
+	public void bindTexture(ResourceLocation res)
 	{
-		this.mc.getTextureManager().bindTexture(res);
-		this.bindedResource = res;
+		mc.getTextureManager().bindTexture(res);
 	}
 
-	protected void drawFluidStack(int x, int y, int wp, int hp, int width, int height, int amount, FluidStack fluidstack)
+	public void bindGuiTexture()
+	{
+		bindTexture(guiResource);
+	}
+
+	public void drawFluidStack(int x, int y, int wp, int hp, int width, int height, int amount, FluidStack fluidstack)
 	{
 		if (fluidstack == null) return;
 
@@ -146,87 +156,107 @@ public class GrcGuiContainer extends GuiContainer
 				final float g = (float)(color >> 8 & 255) / 255.0F;
 				final float b = (float)(color & 255) / 255.0F;
 				GL11.glColor4f(r, g, b, 1.0f);
-				this.drawTexturedModelRectFromIcon(x + wp, y + hp + height - amount, icon, width, amount);
+				drawTexturedModelRectFromIcon(x + wp, y + hp + height - amount, icon, width, amount);
 				GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 			}
 		}
 	}
 
-	protected void drawText(List<String> list, int par2, int par3, FontRenderer font)
+	public void drawTank(int w, int h, int wp, int hp, int width, int height, int amount, FluidStack fluidstack, FluidTank _tank)
 	{
-		if (!list.isEmpty())
+		drawFluidStack(w, h, wp, hp, width, height, amount, fluidstack);
+	}
+
+	protected void addFluidTooltips(FluidStack fluid, List<String> tooltip)
+	{
+		if (fluid == null) return;
+		if (fluid.amount <= 0) return;
+
+		tooltip.add(fluid.getLocalizedName());
+
+		final String s = UnitFormatter.fluidModifier(fluid.getFluid());
+		if (s != null) tooltip.add(s);
+	}
+
+	public void addTooltipIndex(String handle, Rectangle r)
+	{
+		tooltipManager.addTooltipIndex(handle, r);
+	}
+
+	public void addTooltipIndex(String handle, int x, int y, int w, int h)
+	{
+		tooltipManager.addTooltipIndex(handle, x, y, w, h);
+	}
+
+	protected void drawInventoryName(int mx, int my)
+	{
+		if (tileEntity instanceof IInventory)
 		{
-			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-			RenderHelper.disableStandardItemLighting();
-			GL11.glDisable(GL11.GL_LIGHTING);
-			GL11.glDisable(GL11.GL_DEPTH_TEST);
-			int k = 0;
-			final Iterator<String> iterator = list.iterator();
-
-			while (iterator.hasNext())
-			{
-				final String s = iterator.next();
-				final int l = font.getStringWidth(s);
-
-				if (l > k)
-				{
-					k = l;
-				}
-			}
-
-			int i1 = par2 + 12;
-			int j1 = par3 - 12;
-			int k1 = 8;
-
-			if (list.size() > 1)
-			{
-				k1 += 2 + (list.size() - 1) * 10;
-			}
-
-			if (i1 + k > this.width)
-			{
-				i1 -= 28 + k;
-			}
-
-			if (j1 + k1 + 6 > this.height)
-			{
-				j1 = this.height - k1 - 6;
-			}
-
-			this.zLevel = 300.0F;
-			itemRender.zLevel = 300.0F;
-			final int l1 = -267386864;
-			this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
-			this.drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
-			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1, l1);
-			this.drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
-			this.drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3, l1, l1);
-			final int i2 = 1347420415;
-			final int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
-			this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3 - 1, i2, j2);
-			this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1 + 3 - 1, i2, j2);
-			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2, i2);
-			this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
-
-			for (int k2 = 0; k2 < list.size(); ++k2)
-			{
-				final String s1 = list.get(k2);
-				font.drawStringWithShadow(s1, i1, j1, -1);
-
-				if (k2 == 0)
-				{
-					j1 += 2;
-				}
-
-				j1 += 10;
-			}
-
-			this.zLevel = 0.0F;
-			itemRender.zLevel = 0.0F;
-			GL11.glEnable(GL11.GL_LIGHTING);
-			GL11.glEnable(GL11.GL_DEPTH_TEST);
-			RenderHelper.enableStandardItemLighting();
-			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+			final IInventory inv = (IInventory)tileEntity;
+			final String invName = inv.getInventoryName();
+			final String s = inv.hasCustomInventoryName() ? invName : GrcI18n.translate(invName);
+			fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
+			fontRendererObj.drawString(GrcI18n.translate("container.inventory"), 8, ySize - 96 + 2, 4210752);
 		}
 	}
+
+	protected void drawWidgets(int mx, int my)
+	{
+		widgets.draw(mx, my);
+	}
+
+	protected void drawWidgetsForeground(int mx, int my)
+	{
+		widgets.drawForeground(mx, my);
+	}
+
+	protected void drawGuiPanel(int mx, int my)
+	{
+		drawTexturedModalRect(getGuiX(), getGuiY(), 0, 0, xSize, ySize);
+	}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float f, int mx, int my)
+	{
+		bindGuiTexture();
+		drawGuiPanel(mx, my);
+		drawWidgets(mx, my);
+		bindGuiTexture();
+	}
+
+	protected void drawTooltips(int mx, int my)
+	{
+		tooltipManager.draw(mx, my);
+	}
+
+	@Override
+	protected void drawGuiContainerForegroundLayer(int mx, int my)
+	{
+		super.drawGuiContainerForegroundLayer(mx, my);
+		drawInventoryName(mx, my);
+		drawWidgetsForeground(mx, my);
+	}
+
+	@Override
+	public void drawScreen(int mx, int my, float par)
+	{
+		super.drawScreen(mx, my, par);
+
+		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		RenderHelper.enableGUIStandardItemLighting();
+
+		GL11.glPushMatrix();
+		{
+			drawTooltips(mx, my);
+		}
+		GL11.glPopMatrix();
+
+		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		RenderHelper.enableStandardItemLighting();
+	}
+
+	// Overwrite this method to add tooltips based on the handle
+	public void addTooltips(String handle, List<String> tips) {}
 }

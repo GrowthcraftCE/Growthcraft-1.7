@@ -13,9 +13,8 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.ITileHeatedDevice;
+import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -25,7 +24,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITileHeatedDevice
+public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITileHeatedDevice, ITileProgressiveDevice
 {
 	public static enum BrewKettleDataID
 	{
@@ -74,6 +73,18 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		return "container.grc.brewKettle";
 	}
 
+	@Override
+	public float getDeviceProgress()
+	{
+		return brewKettle.getProgress();
+	}
+
+	@Override
+	public int getDeviceProgressScaled(int scale)
+	{
+		return brewKettle.getProgressScaled(scale);
+	}
+
 	/************
 	 * UPDATE
 	 ************/
@@ -83,13 +94,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		brewKettle.update();
 	}
 
-	@SideOnly(Side.CLIENT)
-	public int getBrewProgressScaled(int range)
-	{
-		return (int)(brewKettle.getProgress() * range);
-	}
-
-	@SideOnly(Side.CLIENT)
+	@Override
 	public int getHeatScaled(int range)
 	{
 		return (int)(MathHelper.clamp_float(brewKettle.getHeatMultiplier(), 0.0f, 1.0f) * range);

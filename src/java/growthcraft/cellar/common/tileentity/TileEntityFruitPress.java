@@ -5,6 +5,7 @@ import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.common.tileentity.device.FruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -15,7 +16,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityFruitPress extends TileEntityCellarDevice
+public class TileEntityFruitPress extends TileEntityCellarDevice implements ITileProgressiveDevice
 {
 	public static class FruitPressDataID
 	{
@@ -50,9 +51,16 @@ public class TileEntityFruitPress extends TileEntityCellarDevice
 		return "container.grc.fruitPress";
 	}
 
-	public int getPressProgressScaled(int par1)
+	@Override
+	public float getDeviceProgress()
 	{
-		return fruitPress.getProgressScaled(par1);
+		return fruitPress.getProgress();
+	}
+
+	@Override
+	public int getDeviceProgressScaled(int scale)
+	{
+		return fruitPress.getProgressScaled(scale);
 	}
 
 	@Override

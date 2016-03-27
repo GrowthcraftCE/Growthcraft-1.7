@@ -63,6 +63,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -155,6 +156,16 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	@Override
+	public int getDeviceProgressScaled(int scale)
+	{
+		if (progressMax > 0)
+		{
+			return (int)(progress * scale / progressMax);
+		}
+		return 0;
+	}
+
+	@Override
 	public boolean isHeated()
 	{
 		return heatComponent.getHeatMultiplier() > 0;
@@ -164,6 +175,12 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	public float getHeatMultiplier()
 	{
 		return heatComponent.getHeatMultiplier();
+	}
+
+	@Override
+	public int getHeatScaled(int scale)
+	{
+		return (int)(scale * MathHelper.clamp_float(getHeatMultiplier(), 0f, 1f));
 	}
 
 	public void markForRecipeCheck()

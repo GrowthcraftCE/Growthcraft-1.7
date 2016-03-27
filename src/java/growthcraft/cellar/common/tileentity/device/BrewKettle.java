@@ -102,6 +102,11 @@ public class BrewKettle extends DeviceBase
 		return (float)(time / timeMax);
 	}
 
+	public int getProgressScaled(int scale)
+	{
+		return (int)(getProgress() * scale);
+	}
+
 	public BrewKettle setHeatMultiplier(float h)
 	{
 		heatComponent.setHeatMultiplier(h);

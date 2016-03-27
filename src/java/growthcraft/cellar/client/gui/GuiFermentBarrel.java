@@ -23,20 +23,16 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
 @SideOnly(Side.CLIENT)
-public class GuiFermentBarrel extends GuiCellar
+public class GuiFermentBarrel extends GuiCellar<ContainerFermentBarrel, TileEntityFermentBarrel>
 {
-	private final ResourceLocation fermentBarrelResource = GrcCellarResources.INSTANCE.textureGuiFermentBarrel;
-	private TileEntityFermentBarrel te;
 	private GuiButtonDiscard button;
 
 	public GuiFermentBarrel(InventoryPlayer inv, TileEntityFermentBarrel fermentBarrel)
 	{
-		super(new ContainerFermentBarrel(inv, fermentBarrel), fermentBarrel);
-		this.te = fermentBarrel;
+		super(GrcCellarResources.INSTANCE.textureGuiFermentBarrel, new ContainerFermentBarrel(inv, fermentBarrel), fermentBarrel);
 	}
 
 	@Override
@@ -46,14 +42,14 @@ public class GuiFermentBarrel extends GuiCellar
 		super.initGui();
 		if (GrowthCraftCellar.getConfig().enableDiscardButton)
 		{
-			this.button = new GuiButtonDiscard(fermentBarrelResource, 1, this.guiLeft + 116, this.guiTop + 54);
+			this.button = new GuiButtonDiscard(guiResource, 1, this.guiLeft + 116, this.guiTop + 54);
 			this.buttonList.add(this.button);
 			this.button.enabled = false;
 		}
 
-		addTooltipIndex("fluid_tank.primary", 63, 17, 50, 52);
+		addTooltipIndex("fluidtank.primary", 63, 17, 50, 52);
 		addTooltipIndex("progress_indicator", 42, 22, 3, 26);
-		if (button != null) addTooltipIndex("fluid_tank.primary.discard", 116, 54, 16, 16);
+		if (button != null) addTooltipIndex("discard.fluidtank.primary", 116, 54, 16, 16);
 	}
 
 	@Override
@@ -62,59 +58,47 @@ public class GuiFermentBarrel extends GuiCellar
 		super.updateScreen();
 		if (button != null)
 		{
-			this.button.enabled = this.te.isFluidTankFilled(0);
+			this.button.enabled = tileEntity.isFluidTankFilled(0);
 		}
 	}
 
 	@Override
 	protected void actionPerformed(GuiButton butn)
 	{
-		GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButton(this.te.xCoord, this.te.yCoord, this.te.zCoord));
-	}
-
-	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2)
-	{
-		super.drawGuiContainerForegroundLayer(par1, par2);
-
-		if (!this.te.isFluidTankEmpty(0))
-		{
-			final String s = String.valueOf(this.te.getFluidAmount(0));
-			this.fontRendererObj.drawStringWithShadow(s, this.xSize - 62 - this.fontRendererObj.getStringWidth(s), this.ySize - 104, 0xFFFFFF);
-		}
+		GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
+		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(fermentBarrelResource);
-		final int w = (this.width - this.xSize) / 2;
-		final int h = (this.height - this.ySize) / 2;
-		drawTexturedModalRect(w, h, 0, 0, xSize, ySize);
+		bindGuiTexture();
+		final int x = getGuiX();
+		final int y = getGuiY();
 
-		if (te.getTime() > 0)
+		if (tileEntity.getTime() > 0)
 		{
-			int i = te.getFermentProgressScaled(29);
+			int i = tileEntity.getDeviceProgressScaled(29);
 			if (i > 0)
 			{
-				drawTexturedModalRect(w + 39, h + 21 + 29 - i, 188, 29 - i, 9, i);
+				drawTexturedModalRect(x + 39, y + 21 + 29 - i, 188, 29 - i, 9, i);
 			}
 
-			final int k1 = (te.getTime() / 2) % 60;
+			final int k1 = (tileEntity.getTime() / 2) % 60;
 			i = k1 * 29 / 60;
 			if (i > 0)
 			{
-				drawTexturedModalRect(w + 49, h + 20 + 29 - i, 176, 29 - i, 12, i);
+				drawTexturedModalRect(x + 49, y + 20 + 29 - i, 176, 29 - i, 12, i);
 			}
 		}
 
-		final int i = te.getFluidAmountScaled(52, 0);
+		final int i = tileEntity.getFluidAmountScaled(52, 0);
 		if (i > 0)
 		{
-			final FluidStack fluid = te.getFluidStack(0);
-			drawTank(w, h, 63, 17, 50, 52, i, fluid, te.getFluidTank(0));
-			mc.getTextureManager().bindTexture(fermentBarrelResource);
+			final FluidStack fluid = tileEntity.getFluidStack(0);
+			drawTank(x, y, 63, 17, 50, 52, i, fluid, tileEntity.getFluidTank(0));
+			bindGuiTexture();
 
 			itemRender.zLevel = 100.0F;
 
@@ -124,15 +108,15 @@ public class GuiFermentBarrel extends GuiCellar
 			{
 				if (tags.contains(BoozeTag.FERMENTED))
 				{
-					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.nether_wart), w + 114, h + 16);
+					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.nether_wart), x + 114, y + 16);
 				}
 				if (tags.contains(BoozeTag.EXTENDED))
 				{
-					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.redstone), w + 114, h + 32);
+					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.redstone), x + 114, y + 32);
 				}
 				if (tags.contains(BoozeTag.POTENT))
 				{
-					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.glowstone_dust), w + 130, h + 32);
+					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.glowstone_dust), x + 130, y + 32);
 				}
 			}
 			itemRender.zLevel = 0.0F;
@@ -140,23 +124,35 @@ public class GuiFermentBarrel extends GuiCellar
 	}
 
 	@Override
-	protected void addTooltips(String handle, List<String> tooltip)
+	protected void drawGuiContainerForegroundLayer(int par1, int par2)
+	{
+		super.drawGuiContainerForegroundLayer(par1, par2);
+
+		if (!tileEntity.isFluidTankEmpty(0))
+		{
+			final String s = String.valueOf(tileEntity.getFluidAmount(0));
+			this.fontRendererObj.drawStringWithShadow(s, this.xSize - 62 - this.fontRendererObj.getStringWidth(s), this.ySize - 104, 0xFFFFFF);
+		}
+	}
+
+	@Override
+	public void addTooltips(String handle, List<String> tooltip)
 	{
 		switch (handle)
 		{
 			case "progress_indicator":
 				tooltip.add(GrcI18n.translate("gui.grc.progress.format",
 					EnumChatFormatting.GRAY + GrcI18n.translate("gui.grccellar.ferment_barrel.progress_name"),
-					"" + EnumChatFormatting.WHITE + te.getTime(),
-					"" + EnumChatFormatting.GRAY + te.getTimeMax()));
+					"" + EnumChatFormatting.WHITE + tileEntity.getTime(),
+					"" + EnumChatFormatting.GRAY + tileEntity.getTimeMax()));
 				break;
-			case "fluid_tank.primary":
-				if (this.te.isFluidTankFilled(0))
+			case "fluidtank.primary":
+				if (tileEntity.isFluidTankFilled(0))
 				{
-					addFermentTooltips(this.te.getFluidStack(0), tooltip);
+					addFermentTooltips(tileEntity.getFluidStack(0), tooltip);
 				}
 				break;
-			case "fluid_tank.primary.discard":
+			case "discard.fluidtank.primary":
 				tooltip.add(GrcI18n.translate("gui.grc.discard"));
 				break;
 			default:

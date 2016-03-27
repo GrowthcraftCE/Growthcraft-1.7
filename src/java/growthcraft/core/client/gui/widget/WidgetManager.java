@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.tileentity;
+package growthcraft.core.client.gui.widget;
 
-public interface ITileHeatedDevice
+import java.util.ArrayList;
+import java.util.List;
+
+import growthcraft.core.client.gui.GrcGuiContainer;
+import net.minecraft.inventory.Container;
+import net.minecraft.tileentity.TileEntity;
+
+public class WidgetManager<C extends Container, T extends TileEntity>
 {
-	boolean isHeated();
-	float getHeatMultiplier();
-	int getHeatScaled(int scale);
+	public final GrcGuiContainer<C, T> gui;
+	protected List<Widget> widgets = new ArrayList<Widget>();
+
+	public WidgetManager(GrcGuiContainer<C, T> g)
+	{
+		this.gui = g;
+	}
+
+	public WidgetManager add(Widget widget)
+	{
+		widgets.add(widget);
+		return this;
+	}
+
+	public void draw(int mx, int my)
+	{
+		for (Widget widget : widgets)
+		{
+			widget.draw(mx, my);
+		}
+	}
+
+	public void drawForeground(int mx, int my)
+	{
+		for (Widget widget : widgets)
+		{
+			widget.drawForeground(mx, my);
+		}
+	}
 }

@@ -75,14 +75,48 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 		this.needRecipeRecheck = true;
 	}
 
+	private void setupWorkingRecipe()
+	{
+		final ICheesePressRecipe recipe = MilkRegistry.instance().cheesePress().findRecipe(invSlot.get());
+		if (recipe != workingRecipe)
+		{
+			if (workingRecipe != null)
+			{
+				this.time = 0;
+			}
+			this.workingRecipe = recipe;
+		}
+	}
+
+	protected ICheesePressRecipe getWorkingRecipe()
+	{
+		if (workingRecipe == null)
+		{
+			setupWorkingRecipe();
+		}
+		return workingRecipe;
+	}
+
 	@Override
 	public float getDeviceProgress()
 	{
-		if (workingRecipe != null)
+		final ICheesePressRecipe recipe = getWorkingRecipe();
+		if (recipe != null)
 		{
-			return (float)time / (float)workingRecipe.getTimeMax();
+			return (float)time / (float)recipe.getTimeMax();
 		}
 		return 0.0f;
+	}
+
+	@Override
+	public int getDeviceProgressScaled(int scale)
+	{
+		final ICheesePressRecipe recipe = getWorkingRecipe();
+		if (recipe != null)
+		{
+			return time * scale / recipe.getTimeMax();
+		}
+		return 0;
 	}
 
 	public boolean isPressed()
@@ -150,24 +184,12 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 		}
 	}
 
-	private void setupWorkingRecipe()
-	{
-		final ICheesePressRecipe recipe = MilkRegistry.instance().cheesePress().findRecipe(invSlot.get());
-		if (recipe != workingRecipe)
-		{
-			if (workingRecipe != null)
-			{
-				this.time = 0;
-			}
-			workingRecipe = recipe;
-		}
-	}
-
 	private void commitRecipe()
 	{
-		if (workingRecipe != null)
+		final ICheesePressRecipe recipe = getWorkingRecipe();
+		if (recipe != null)
 		{
-			invSlot.set(workingRecipe.getOutputItemStack().copy());
+			invSlot.set(recipe.getOutputItemStack().copy());
 			this.workingRecipe = null;
 		}
 	}
@@ -180,12 +202,13 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 			setupWorkingRecipe();
 		}
 
-		if (workingRecipe != null)
+		final ICheesePressRecipe recipe = getWorkingRecipe();
+		if (recipe != null)
 		{
 			// work can only progress if the cheese press is active.
 			if (isPressed())
 			{
-				if (time < workingRecipe.getTimeMax())
+				if (time < recipe.getTimeMax())
 				{
 					time++;
 				}
