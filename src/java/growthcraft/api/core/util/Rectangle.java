@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -83,8 +83,43 @@ public class Rectangle
 		return this;
 	}
 
+	public Rectangle set(int px, int py, int pw, int ph)
+	{
+		return moveto(px, py).resize(pw, ph);
+	}
+
+	public Rectangle set(Rectangle rect)
+	{
+		return set(rect.x, rect.y, rect.w, rect.h);
+	}
+
 	public boolean contains(int ix, int iy)
 	{
 		return ix >= x && iy >= y && ix < (x + w) && iy < (y + h);
+	}
+
+	public int x1()
+	{
+		return x;
+	}
+
+	public int x2()
+	{
+		return x + w;
+	}
+
+	public int y1()
+	{
+		return y;
+	}
+
+	public int y2()
+	{
+		return y + h;
+	}
+
+	public boolean isEmpty()
+	{
+		return w == 0 || h == 0;
 	}
 }
