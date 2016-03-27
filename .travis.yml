@@ -27,6 +27,7 @@ script: |
 after_script:
   - ls -la build/libs
   - ls -la build/packages
+  - bundle exec ./tools/checksum_builds.rb | tee ./checksums.txt
   - bundle exec ./tools/lang_check.rb
 
 # Deploy the artifacts back to GitHub
@@ -35,6 +36,7 @@ deploy:
   api_key: $GITHUB_OAUTH
   file_glob: true
   file:
+    - "checksums.txt"
     - "build/libs/growthcraft-*-complete.jar"
     - "build/libs/growthcraft-*-api.jar"
     - "build/libs/growthcraft-*-dev.jar"
