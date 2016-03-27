@@ -23,12 +23,12 @@ item.grcmilk.IceCream.honey.name=item.grcmilk.IceCream.honey.name
 item.grcmilk.IceCream.plain.name=Crême Glacée (Nature)
 item.grcmilk.IceCream.watermelon.name=item.grcmilk.IceCream.watermelon.name
 ## Yogurt
-item.grcmilk.Yogurt.apple.name=item.grcmilk.Yogurt.apple.name
-item.grcmilk.Yogurt.chocolate.name=item.grcmilk.Yogurt.chocolate.name
-item.grcmilk.Yogurt.grape.name=item.grcmilk.Yogurt.grape.name
-item.grcmilk.Yogurt.honey.name=item.grcmilk.Yogurt.honey.name
-item.grcmilk.Yogurt.plain.name=Yaourt
-item.grcmilk.Yogurt.watermelon.name=item.grcmilk.Yogurt.watermelon.name
+item.grcmilk.Yogurt.apple.name=Yaourt (Pomme)
+item.grcmilk.Yogurt.chocolate.name=Yaourt (Chocolat)
+item.grcmilk.Yogurt.grape.name=Yaourt (Raisin)
+item.grcmilk.Yogurt.honey.name=Yaourt (Miel)
+item.grcmilk.Yogurt.plain.name=Yaourt (Nature)
+item.grcmilk.Yogurt.watermelon.name=Yaourt (Pastèque)
 ## Other
 item.grcmilk.StarterCulture.name=Levain
 item.grcmilk.Stomach.name=Estomac
