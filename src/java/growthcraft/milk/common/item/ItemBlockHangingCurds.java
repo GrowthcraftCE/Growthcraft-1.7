@@ -23,10 +23,16 @@
  */
 package growthcraft.milk.common.item;
 
+import java.util.List;
+
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.core.common.item.IItemTileBlock;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -46,11 +52,17 @@ public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock
 		if (!tag.hasKey("te_curd_block"))
 		{
 			final NBTTagCompound curdTag = new NBTTagCompound();
-			final EnumCheeseType curd = EnumCheeseType.getSafeById(stack.getItemDamage());
-			curd.writeToNBT(curdTag);
+			final EnumCheeseType cheeseType = EnumCheeseType.getSafeById(stack.getItemDamage());
+			cheeseType.writeToNBT(curdTag);
 			tag.setTag("te_curd_block", curdTag);
 		}
 		return tag.getCompoundTag("te_curd_block");
+	}
+
+	public EnumCheeseType getCheeseType(ItemStack stack)
+	{
+		final NBTTagCompound tag = getTileTagCompoundABS(stack);
+		return EnumCheeseType.loadFromNBT(tag);
 	}
 
 	@Override
@@ -72,12 +84,6 @@ public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock
 		return tag;
 	}
 
-	public EnumCheeseType getCheeseType(ItemStack stack)
-	{
-		final NBTTagCompound tag = getTileTagCompoundABS(stack);
-		return EnumCheeseType.loadFromNBT(tag);
-	}
-
 	public boolean isDried(ItemStack stack)
 	{
 		final NBTTagCompound nbt = getTileTagCompound(stack);
@@ -95,6 +101,30 @@ public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock
 		str += "." + getCheeseType(stack).name;
 		if (isDried(stack)) str += ".dried";
 		return str;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
+	{
+		final NBTTagCompound nbt = getTileTagCompound(stack);
+		if (nbt.hasKey("dried"))
+		{
+			list.add(GrcI18n.translate("grcmilk.hanging_curds.dried"));
+		}
+		else
+		{
+			final int age = nbt.getInteger("age");
+			if (age > 0)
+			{
+				final int ageMax = nbt.getInteger("age_max");
+				final int t = age * 100 / (ageMax > 0 ? ageMax : 1200);
+				list.add(GrcI18n.translate("grcmilk.hanging_curds.drying.prefix") +
+					GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", t));
+			}
+		}
+		super.addInformation(stack, player, list, bool);
 	}
 
 	public static NBTTagCompound openNBT(ItemStack stack)
