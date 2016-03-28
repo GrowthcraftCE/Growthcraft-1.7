@@ -58,11 +58,11 @@ public class BlockHangingCurds extends GrcBlockContainer
 		setHardness(0.5F);
 		setTickRandomly(true);
 		setBlockName("grcmilk.HangingCurds");
-		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityHangingCurds.class);
 		final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 16f, 8f).scale(1f / 16f);
 		setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
 		setBlockTextureName("grcmilk:hanging_curds");
+		setCreativeTab(GrowthCraftMilk.creativeTab);
 	}
 
 	@Override
@@ -186,6 +186,12 @@ public class BlockHangingCurds extends GrcBlockContainer
 				world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.UPDATE_AND_SYNC);
 			}
 		}
+	}
+
+	@Override
+	public int damageDropped(int metadata)
+	{
+		return metadata;
 	}
 
 	@Override

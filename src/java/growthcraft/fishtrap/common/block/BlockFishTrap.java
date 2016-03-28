@@ -4,6 +4,7 @@ import java.util.Random;
 
 import growthcraft.api.fishtrap.FishTrapRegistry;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.core.util.BlockCheck;
 import growthcraft.core.Utils;
 import growthcraft.fishtrap.common.tileentity.TileEntityFishTrap;
@@ -12,25 +13,19 @@ import growthcraft.fishtrap.GrowthCraftFishTrap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.BiomeDictionary;
 
-public class BlockFishTrap extends BlockContainer
+public class BlockFishTrap extends GrcBlockContainer
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
@@ -41,31 +36,47 @@ public class BlockFishTrap extends BlockContainer
 	public BlockFishTrap()
 	{
 		super(Material.wood);
-		this.isBlockContainer = true;
-		this.setTickRandomly(true);
-		this.setHardness(0.4F);
-		this.setStepSound(soundTypeWood);
-		this.setBlockName("grc.fishTrap");
-		this.setCreativeTab(GrowthCraftCore.creativeTab);
+		setTickRandomly(true);
+		setHardness(0.4F);
+		setStepSound(soundTypeWood);
+		setBlockName("grc.fishTrap");
+		setTileEntityType(TileEntityFishTrap.class);
+		setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
-	/************
-	 * TICK
-	 ************/
-	@Override
-	public void updateTick(World world, int x, int y, int z, Random random)
+	private float getCatchRate(World world, int x, int y, int z)
 	{
-		super.updateTick(world, x, y, z, random);
+		final int checkSize = 3;
+		final int i = x - ((checkSize - 1) / 2);
+		final int j = y - ((checkSize - 1) / 2);
+		final int k = z - ((checkSize - 1) / 2);
+		float f = 1.0F;
 
-		final TileEntityFishTrap te = (TileEntityFishTrap)world.getTileEntity(x, y, z);
-
-		if (te != null)
+		for (int loopy = 0; loopy <= checkSize; loopy++)
 		{
-			if (canCatch(world, x, y, z))
+			for (int loopx = 0; loopx <= checkSize; loopx++)
 			{
-				doCatch(world, x, y, z, random, te, false);
+				for (int loopz = 0; loopz <= checkSize; loopz++)
+				{
+					final Block water = world.getBlock(i + loopx, j + loopy, k + loopz);
+					float f1 = 0.0F;
+					//1.038461538461538;
+
+					if (water != null && isWater(water))
+					{
+						//f1 = 1.04F;
+						f1 = 3.0F;
+						//f1 = 17.48F;
+					}
+
+					f1 /= 4.0F;
+
+					f += f1;
+				}
 			}
 		}
+
+		return f;
 	}
 
 	private void doCatch(World world, int x, int y, int z, Random random, TileEntityFishTrap te, boolean debugFlag)
@@ -131,39 +142,20 @@ public class BlockFishTrap extends BlockContainer
 			isWater(world.getBlock(x + 1, y, z));
 	}
 
-	private float getCatchRate(World world, int x, int y, int z)
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random random)
 	{
-		final int checkSize = 3;
-		final int i = x - ((checkSize - 1) / 2);
-		final int j = y - ((checkSize - 1) / 2);
-		final int k = z - ((checkSize - 1) / 2);
-		float f = 1.0F;
+		super.updateTick(world, x, y, z, random);
 
-		for (int loopy = 0; loopy <= checkSize; loopy++)
+		final TileEntityFishTrap te = getTileEntity(world, x, y, z);
+
+		if (te != null)
 		{
-			for (int loopx = 0; loopx <= checkSize; loopx++)
+			if (canCatch(world, x, y, z))
 			{
-				for (int loopz = 0; loopz <= checkSize; loopz++)
-				{
-					final Block water = world.getBlock(i + loopx, j + loopy, k + loopz);
-					float f1 = 0.0F;
-					//1.038461538461538;
-
-					if (water != null && isWater(water))
-					{
-						//f1 = 1.04F;
-						f1 = 3.0F;
-						//f1 = 17.48F;
-					}
-
-					f1 /= 4.0F;
-
-					f += f1;
-				}
+				doCatch(world, x, y, z, random, te, false);
 			}
 		}
-
-		return f;
 	}
 
 	/************
@@ -177,95 +169,6 @@ public class BlockFishTrap extends BlockContainer
 			player.openGui(GrowthCraftFishTrap.instance, 0, world, x, y, z);
 		}
 		return true;
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
-	{
-		if (stack.hasDisplayName())
-		{
-			((TileEntityFishTrap)world.getTileEntity(x, y, z)).setGuiDisplayName(stack.getDisplayName());
-		}
-	}
-
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block par5, int par6)
-	{
-		final TileEntityFishTrap te = (TileEntityFishTrap)world.getTileEntity(x, y, z);
-
-		if (te != null)
-		{
-			for (int index = 0; index < te.getSizeInventory(); ++index)
-			{
-				final ItemStack stack = te.getStackInSlot(index);
-
-				if (stack != null)
-				{
-					final float f = this.rand.nextFloat() * 0.8F + 0.1F;
-					final float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-					final float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-
-					while (stack.stackSize > 0)
-					{
-						int k1 = this.rand.nextInt(21) + 10;
-
-						if (k1 > stack.stackSize)
-						{
-							k1 = stack.stackSize;
-						}
-
-						stack.stackSize -= k1;
-						final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
-
-						if (stack.hasTagCompound())
-						{
-							entityitem.getEntityItem().setTagCompound((NBTTagCompound)stack.getTagCompound().copy());
-						}
-
-						final float f3 = 0.05F;
-						entityitem.motionX = (double)((float)this.rand.nextGaussian() * f3);
-						entityitem.motionY = (double)((float)this.rand.nextGaussian() * f3 + 0.2F);
-						entityitem.motionZ = (double)((float)this.rand.nextGaussian() * f3);
-						world.spawnEntityInWorld(entityitem);
-					}
-				}
-			}
-
-			world.func_147453_f(x, y, z, par5);
-		}
-
-		super.breakBlock(world, x, y, z, par5, par6);
-	}
-
-	/************
-	 * STUFF
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z)
-	{
-		return Item.getItemFromBlock(GrowthCraftFishTrap.fishTrap.getBlock());
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world, int par2)
-	{
-		return new TileEntityFishTrap();
-	}
-
-	/************
-	 * DROPS
-	 ************/
-	@Override
-	public Item getItemDropped(int par1, Random random, int par3)
-	{
-		return GrowthCraftFishTrap.fishTrap.getItem();
-	}
-
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return 1;
 	}
 
 	/************
@@ -326,7 +229,7 @@ public class BlockFishTrap extends BlockContainer
 	@Override
 	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
 	{
-		final TileEntityFishTrap te = (TileEntityFishTrap) world.getTileEntity(x, y, z);
+		final TileEntityFishTrap te = getTileEntity(world, x, y, z);
 		if (te != null)
 		{
 			return Container.calcRedstoneFromInventory(te);

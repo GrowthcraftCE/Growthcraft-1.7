@@ -103,14 +103,9 @@ public class BlockFermentBarrel extends BlockCellarContainer
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
+		super.onBlockPlacedBy(world, x, y, z, entity, stack);
 		final int meta = BlockPistonBase.determineOrientation(world, x, y, z, entity);
 		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_AND_SYNC);
-
-		if (stack.hasDisplayName())
-		{
-			final TileEntityFermentBarrel te = getTileEntity(world, x, y, z);
-			te.setGuiDisplayName(stack.getDisplayName());
-		}
 	}
 
 	@Override

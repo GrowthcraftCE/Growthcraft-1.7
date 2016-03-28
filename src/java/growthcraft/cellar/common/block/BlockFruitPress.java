@@ -99,6 +99,7 @@ public class BlockFruitPress extends BlockCellarContainer
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
+		super.onBlockPlacedBy(world, x, y, z, entity, stack);
 		final int a = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (a == 0 || a == 2)
@@ -111,12 +112,6 @@ public class BlockFruitPress extends BlockCellarContainer
 		}
 
 		world.setBlock(x, y + 1, z, getPresserBlock(), world.getBlockMetadata(x, y, z), BlockFlags.SYNC);
-
-		if (stack.hasDisplayName())
-		{
-			final TileEntityFruitPress te = getTileEntity(world, x, y, z);
-			te.setGuiDisplayName(stack.getDisplayName());
-		}
 	}
 
 	@Override

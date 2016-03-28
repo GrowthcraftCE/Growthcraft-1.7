@@ -103,16 +103,6 @@ public class BlockBrewKettle extends BlockCellarContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
-	{
-		if (stack.hasDisplayName())
-		{
-			final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
-			te.setGuiDisplayName(stack.getDisplayName());
-		}
-	}
-
-	@Override
 	protected boolean playerDrainTank(World world, int x, int y, int z, IFluidHandler fh, ItemStack is, EntityPlayer player)
 	{
 		final FluidStack fs = Utils.playerDrainTank(world, x, y, z, fh, is, player);

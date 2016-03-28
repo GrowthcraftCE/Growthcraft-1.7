@@ -99,6 +99,7 @@ public class BlockBeeHive extends Block
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
+		super.onBlockPlacedBy(world, x, y, z, entity, stack);
 		final int face = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (face == 0)
