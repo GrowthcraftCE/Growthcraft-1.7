@@ -104,6 +104,11 @@ public class Cheese implements IStreamable
 			cheeseStage == EnumCheeseStage.CUT;
 	}
 
+	public boolean isUnwaxed()
+	{
+		return cheeseStage == EnumCheeseStage.UNWAXED;
+	}
+
 	public ItemStack yankSlices(int count, boolean doYank)
 	{
 		final int yankedCount = MathHelper.clamp_int(count, 0, getSlices());
@@ -127,7 +132,7 @@ public class Cheese implements IStreamable
 
 	public boolean tryWaxing(ItemStack stack)
 	{
-		if (getType().canWax(stack))
+		if (isUnwaxed() && getType().canWax(stack))
 		{
 			setStage(EnumCheeseStage.UNAGED);
 			return true;
