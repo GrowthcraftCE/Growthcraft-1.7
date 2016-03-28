@@ -69,6 +69,7 @@ public class CheeseCurd implements INBTSerializableContext, IStreamable
 		cheese.writeToNBT(nbt);
 		nbt.setBoolean("dried", dried);
 		nbt.setInteger("age", age);
+		nbt.setInteger("age_max", ageMax);
 	}
 
 	public void writeToNBT(NBTTagCompound nbt, String name)
