@@ -25,6 +25,7 @@ package growthcraft.milk.common.block;
 
 import java.util.Random;
 
+import growthcraft.api.core.util.BBox;
 import growthcraft.core.logic.FlowerSpread;
 import growthcraft.milk.GrowthCraftMilk;
 
@@ -45,6 +46,8 @@ public class BlockThistle extends BlockBush
 		setBlockTextureName("grcmilk:thistle/flower_thistle");
 		setBlockName("grcmilk.Thistle");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
+		final BBox bb = BBox.newCube(2f, 0f, 2f, 12f, 16f, 12f).scale(1f / 16f);
+		setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
 	}
 
 	@Override
