@@ -23,12 +23,12 @@ item.grcmilk.IceCream.honey.name=Sorvete (Mel)
 item.grcmilk.IceCream.plain.name=Sorvete (Sem sabor)
 item.grcmilk.IceCream.watermelon.name=Sorvete (Melancia)
 ## Yogurt
-item.grcmilk.Yogurt.apple.name=item.grcmilk.Yogurt.apple.name
-item.grcmilk.Yogurt.chocolate.name=item.grcmilk.Yogurt.chocolate.name
-item.grcmilk.Yogurt.grape.name=item.grcmilk.Yogurt.grape.name
-item.grcmilk.Yogurt.honey.name=item.grcmilk.Yogurt.honey.name
-item.grcmilk.Yogurt.plain.name=Yogurt
-item.grcmilk.Yogurt.watermelon.name=item.grcmilk.Yogurt.watermelon.name
+item.grcmilk.Yogurt.apple.name=Iogurte (Maçã)
+item.grcmilk.Yogurt.chocolate.name=Iogurte (Chocolate)
+item.grcmilk.Yogurt.grape.name=Iogurte (Uva)
+item.grcmilk.Yogurt.honey.name=Iogurte (Mel)
+item.grcmilk.Yogurt.plain.name=Iogurte (Natural)
+item.grcmilk.Yogurt.watermelon.name=Iogurte (Melancia)
 ## Other
 item.grcmilk.StarterCulture.name=Fermento Lácteo
 item.grcmilk.Stomach.name=Estômago
