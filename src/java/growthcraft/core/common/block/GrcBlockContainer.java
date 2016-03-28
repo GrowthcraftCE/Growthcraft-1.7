@@ -33,6 +33,7 @@ import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.common.item.IItemTileBlock;
 import growthcraft.core.common.tileentity.ICustomDisplayName;
 import growthcraft.core.common.tileentity.IItemHandler;
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.core.Utils;
 
@@ -232,7 +233,11 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 			final IItemTileBlock itb = (IItemTileBlock)item;
 			return itb.getTileTagCompound(stack);
 		}
-		return stack.getTagCompound();
+		else
+		{
+			GrowthCraftCore.getLogger().error("Cannot get tile tag compound for a non IItemTileBlock: stack=%s block=%s", stack, this);
+		}
+		return null;
 	}
 
 	protected void setTileTagCompound(World world, int x, int y, int z, ItemStack stack, NBTTagCompound tag)
@@ -242,11 +247,10 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		{
 			final IItemTileBlock itb = (IItemTileBlock)item;
 			itb.setTileTagCompound(stack, tag);
-			return;
 		}
 		else
 		{
-			stack.setTagCompound(tag);
+			GrowthCraftCore.getLogger().error("Cannot set tile tag compound for a non IItemTileBlock: stack=%s block=%s", stack, this);
 		}
 	}
 
@@ -267,6 +271,10 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 				{
 					((INBTItemSerializable)te).readFromNBTForItem(tag);
 				}
+			}
+			else
+			{
+				GrowthCraftCore.getLogger().error("Cannot restore tile from stack, the TileEntity does not support INBTItemSerializable: stack=%s block=%s tile=%s", stack, this, te);
 			}
 		}
 	}
