@@ -26,6 +26,7 @@ package growthcraft.milk.common.tileentity;
 import java.util.List;
 import java.io.IOException;
 
+import growthcraft.api.core.nbt.INBTItemSerializable;
 import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.GrcTileEntityBase;
 import growthcraft.core.common.tileentity.IItemHandler;
@@ -40,7 +41,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHandler
+public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHandler, INBTItemSerializable
 {
 	private Cheese cheese = new Cheese();
 
@@ -69,33 +70,47 @@ public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHan
 		return getCheese().getStageId();
 	}
 
+	protected void readCheeseFromNBT(NBTTagCompound nbt)
+	{
+		cheese.readFromNBT(nbt);
+	}
+
 	/**
 	 * When the tileentity is reloaded from an ItemStack
 	 *
 	 * @param nbt  tag compound to read
 	 */
+	@Override
 	public void readFromNBTForItem(NBTTagCompound nbt)
 	{
-		cheese.readFromNBT(nbt);
+		super.readFromNBTForItem(nbt);
+		readCheeseFromNBT(nbt);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		readFromNBTForItem(nbt);
+		readCheeseFromNBT(nbt);
 	}
 
-	public void writeToNBTForItem(NBTTagCompound nbt)
+	protected void writeCheeseToNBT(NBTTagCompound nbt)
 	{
 		cheese.writeToNBT(nbt);
+	}
+
+	@Override
+	public void writeToNBTForItem(NBTTagCompound nbt)
+	{
+		super.writeToNBTForItem(nbt);
+		writeCheeseToNBT(nbt);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		writeToNBTForItem(nbt);
+		writeCheeseToNBT(nbt);
 	}
 
 	public ItemStack asItemStack()

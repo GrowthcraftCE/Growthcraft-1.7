@@ -25,6 +25,7 @@ package growthcraft.milk.common.tileentity;
 
 import java.io.IOException;
 
+import growthcraft.api.core.nbt.INBTItemSerializable;
 import growthcraft.api.core.util.FXHelper;
 import growthcraft.api.core.util.Pair;
 import growthcraft.api.core.util.PulseStepper;
@@ -46,7 +47,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityHangingCurds extends GrcTileEntityBase
+public class TileEntityHangingCurds extends GrcTileEntityBase implements INBTItemSerializable
 {
 	// SpatialRandom instance
 	private SpatialRandom sprand = new SpatialRandom();
@@ -147,30 +148,55 @@ public class TileEntityHangingCurds extends GrcTileEntityBase
 		}
 	}
 
-	public void readFromNBTForItem(NBTTagCompound nbt)
+	protected void readCheeseCurdFromNBT(NBTTagCompound nbt)
 	{
 		cheeseCurd.readFromNBT(nbt);
+	}
+
+	protected void readWheyPulsarFromNBT(NBTTagCompound nbt)
+	{
 		wheyPulsar.readFromNBT(nbt, "whey_pulsar");
+	}
+
+	@Override
+	public void readFromNBTForItem(NBTTagCompound nbt)
+	{
+		super.readFromNBTForItem(nbt);
+		readCheeseCurdFromNBT(nbt);
+		readWheyPulsarFromNBT(nbt);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		readFromNBTForItem(nbt);
+		readCheeseCurdFromNBT(nbt);
+		readWheyPulsarFromNBT(nbt);
 	}
 
-	public void writeToNBTForItem(NBTTagCompound nbt)
+	protected void writeCheeseCurdToNBT(NBTTagCompound nbt)
 	{
 		cheeseCurd.writeToNBT(nbt);
+	}
+
+	protected void writeWheyPulsarToNBT(NBTTagCompound nbt)
+	{
 		wheyPulsar.writeToNBT(nbt, "whey_pulsar");
+	}
+
+	@Override
+	public void writeToNBTForItem(NBTTagCompound nbt)
+	{
+		super.writeToNBTForItem(nbt);
+		writeCheeseCurdToNBT(nbt);
+		writeWheyPulsarToNBT(nbt);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		writeToNBTForItem(nbt);
+		writeWheyPulsarToNBT(nbt);
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
