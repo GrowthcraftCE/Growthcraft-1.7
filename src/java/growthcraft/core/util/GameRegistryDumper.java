@@ -104,19 +104,23 @@ public class GameRegistryDumper
 			while (it.hasNext())
 			{
 				final Block obj = (Block)it.next();
-				if (obj != null)
+				try
 				{
-					writer.write("" + Block.getIdFromBlock(obj) + "," + obj.getUnlocalizedName() + "," + obj.getLocalizedName() + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
+					if (obj != null)
+					{
+						writer.write("" + Block.getIdFromBlock(obj) + "," + obj.getUnlocalizedName() + "," + obj.getLocalizedName() + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
 
-					if (Platform.isClient())
-					{
-						writeItemSubtypes(obj, writer);
-					}
-					else
-					{
-						writeItemStackToFile(new ItemStack(obj), writer);
+						if (Platform.isClient())
+						{
+							writeItemSubtypes(obj, writer);
+						}
+						else
+						{
+							writeItemStackToFile(new ItemStack(obj), writer);
+						}
 					}
 				}
+				catch (NullPointerException ex) {}
 			}
 		}
 		catch (IOException ex)
@@ -135,19 +139,23 @@ public class GameRegistryDumper
 			while (it.hasNext())
 			{
 				final Item obj = (Item)it.next();
-				if (obj != null)
+				try
 				{
-					writer.write("" + Item.getIdFromItem(obj) + "," + obj.getUnlocalizedName() + "," + "?" + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
+					if (obj != null)
+					{
+						writer.write("" + Item.getIdFromItem(obj) + "," + obj.getUnlocalizedName() + "," + "?" + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
 
-					if (Platform.isClient())
-					{
-						writeItemSubtypes(obj, writer);
-					}
-					else
-					{
-						writeItemStackToFile(new ItemStack(obj), writer);
+						if (Platform.isClient())
+						{
+							writeItemSubtypes(obj, writer);
+						}
+						else
+						{
+							writeItemStackToFile(new ItemStack(obj), writer);
+						}
 					}
 				}
+				catch (NullPointerException ex) {}
 			}
 		}
 		catch (IOException ex)
