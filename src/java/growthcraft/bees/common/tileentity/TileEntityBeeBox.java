@@ -175,6 +175,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	private void setBeeStack(ItemStack itemstack)
 	{
 		setInventorySlotContents(ContainerBeeBox.SlotId.BEE, itemstack);
+		markForInventoryUpdate();
 	}
 
 	public void spawnBee()
@@ -199,6 +200,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 			if (stack == null)
 			{
 				setInventorySlotContents(i, GrowthCraftBees.items.honeyCombEmpty.asStack());
+				markForInventoryUpdate();
 				n--;
 			}
 		}
@@ -226,7 +228,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		}
 		if (shouldMark)
 		{
-			markDirty();
+			markForInventoryUpdate();
 			markForBlockUpdate();
 			return true;
 		}
@@ -253,7 +255,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		}
 		if (shouldMark)
 		{
-			markDirty();
+			markForInventoryUpdate();
 			markForBlockUpdate();
 			return true;
 		}
