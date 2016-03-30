@@ -43,7 +43,7 @@ FileUtils.mkdir_p 'build/packages'
 
 # going through each of the existing lib jars and try to create a package set
 # for it
-Dir.glob File.expand_path("build/libs/growthcraft-*.jar", File.dirname(__FILE__)) do |f|
+Dir.glob File.expand_path("../build/libs/growthcraft-*.jar", File.dirname(__FILE__)) do |f|
   # blacklist these jars
   next if f =~ /-(api|javadoc|sources)/
 
