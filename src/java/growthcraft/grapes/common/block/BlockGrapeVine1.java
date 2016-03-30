@@ -3,7 +3,7 @@ package growthcraft.grapes.common.block;
 import java.util.List;
 
 import growthcraft.core.util.BlockCheck;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.grapes.client.renderer.RenderGrapeVine1;
 import growthcraft.grapes.GrowthCraftGrapes;
 
@@ -30,13 +30,13 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase
 	public BlockGrapeVine1()
 	{
 		super();
-		this.setGrowthRateMultiplier(GrowthCraftGrapes.getConfig().grapeVineTrunkGrowthRate);
-		this.setTickRandomly(true);
-		this.setHardness(2.0F);
-		this.setResistance(5.0F);
-		this.setStepSound(soundTypeWood);
-		this.setBlockName("grc.grapeVine1");
-		this.setCreativeTab(null);
+		setGrowthRateMultiplier(GrowthCraftGrapes.getConfig().grapeVineTrunkGrowthRate);
+		setTickRandomly(true);
+		setHardness(2.0F);
+		setResistance(5.0F);
+		setStepSound(soundTypeWood);
+		setBlockName("grc.grapeVine1");
+		setCreativeTab(null);
 	}
 
 	/************
@@ -56,14 +56,14 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase
 		if (BlockCheck.isRope(above))
 		{
 			incrementGrowth(world, x, y, z, meta);
-			world.setBlock(x, y + 1, z, GrowthCraftGrapes.grapeLeaves.getBlock(), 0, BlockFlags.UPDATE_CLIENT);
+			world.setBlock(x, y + 1, z, GrowthCraftGrapes.blocks.grapeLeaves.getBlock(), 0, BlockFlags.UPDATE_AND_SYNC);
 		}
 		else if (world.isAirBlock(x, y + 1, z))
 		{
 			incrementGrowth(world, x, y, z, meta);
-			world.setBlock(x, y + 1, z, this, 0, BlockFlags.UPDATE_CLIENT);
+			world.setBlock(x, y + 1, z, this, 0, BlockFlags.UPDATE_AND_SYNC);
 		}
-		else if (GrowthCraftGrapes.grapeLeaves.getBlock() == above)
+		else if (GrowthCraftGrapes.blocks.grapeLeaves.getBlock() == above)
 		{
 			incrementGrowth(world, x, y, z, meta);
 		}
@@ -97,7 +97,7 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapeSeeds.getItem();
+		return GrowthCraftGrapes.items.grapeSeeds.getItem();
 	}
 
 	/************
@@ -121,6 +121,7 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase
 		return icons[0];
 	}
 
+	@SideOnly(Side.CLIENT)
 	public IIcon getLeafTexture()
 	{
 		graphicFlag = Blocks.leaves.isOpaqueCube();

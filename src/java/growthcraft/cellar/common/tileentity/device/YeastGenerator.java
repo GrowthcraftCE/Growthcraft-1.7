@@ -1,15 +1,45 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.cellar.common.tileentity.device;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.yeast.IYeastRegistry;
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.item.WeightedItemStack;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
+import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
+import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
+import growthcraft.core.common.tileentity.device.DeviceProgressive;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeDictionary;
@@ -17,22 +47,22 @@ import net.minecraftforge.common.BiomeDictionary;
 public class YeastGenerator extends DeviceProgressive
 {
 	protected int consumption = 1200 / 16;
-	protected int fluidSlot;
-	protected int invSlot;
-	protected List<ItemStack> tempItemList = new ArrayList<ItemStack>();
+	protected DeviceFluidSlot fluidSlot;
+	protected DeviceInventorySlot invSlot;
+	protected Set<WeightedItemStack> tempItemList = new HashSet<WeightedItemStack>();
 
 	/**
 	 * @param te - parent tile entity
-	 * @param fs - fluid slot id to use in parent
+	 * @param fluidSlotIndex - fluid slot id to use in parent
 	 *             Fluid will be used from this slot
-	 * @param is - inventory slot id to use in parent
+	 * @param invSlotIndex - inventory slot id to use in parent
 	 *             Yeast will be generated into this slot
 	 */
-	public YeastGenerator(TileEntityCellarDevice te, int fs, int is)
+	public YeastGenerator(TileEntityCellarDevice te, int fluidSlotIndex, int invSlotIndex)
 	{
 		super(te);
-		this.fluidSlot = fs;
-		this.invSlot = is;
+		this.fluidSlot = new DeviceFluidSlot(te, fluidSlotIndex);
+		this.invSlot = new DeviceInventorySlot(te, invSlotIndex);
 		setTimeMax(1200);
 	}
 
@@ -79,20 +109,20 @@ public class YeastGenerator extends DeviceProgressive
 	 */
 	public boolean canProduceYeast()
 	{
-		if (parent.getFluidAmount(0) < consumption) return false;
-		final ItemStack yeastItem = getInventory().getStackInSlot(invSlot);
+		if (fluidSlot.getAmount() < consumption) return false;
+		final ItemStack yeastItem = invSlot.get();
 		// we can ignore null items, this will fallback to the initProduceYeast
 		if (yeastItem != null)
 		{
 			if (!canReplicateYeast(yeastItem)) return false;
 		}
-		return CellarRegistry.instance().booze().hasTags(parent.getFluid(fluidSlot), BoozeTag.YOUNG);
+		return CoreRegistry.instance().fluidDictionary().hasFluidTags(fluidSlot.getFluid(), BoozeTag.YOUNG);
 	}
 
 	public void consumeFluid()
 	{
-		parent.getFluidTank(fluidSlot).drain(consumption, true);
-		parent.markForBlockUpdate();
+		fluidSlot.consume(consumption, true);
+		markForBlockUpdate();
 	}
 
 	/**
@@ -104,33 +134,49 @@ public class YeastGenerator extends DeviceProgressive
 	{
 		tempItemList.clear();
 		final BiomeGenBase biome = getCurrentBiome();
-		final IYeastRegistry reg = CellarRegistry.instance().yeast();
-		for (Type t : BiomeDictionary.getTypesForBiome(biome))
+		if (biome != null)
 		{
-			final List<ItemStack> yeastList = reg.getYeastListForBiomeType(t);
-			if (yeastList != null)
-			{
-				tempItemList.addAll(yeastList);
-			}
-		}
+			final IYeastRegistry reg = CellarRegistry.instance().yeast();
 
-		if (tempItemList.size() > 0)
-		{
-			final ItemStack result = tempItemList.get(random.nextInt(tempItemList.size())).copy();
-			getInventory().setInventorySlotContents(invSlot, result);
-			consumeFluid();
+			{
+				final Collection<WeightedItemStack> yl = reg.getYeastListForBiomeName(biome.biomeName);
+				if (yl != null)
+				{
+					tempItemList.addAll(yl);
+				}
+			}
+
+			for (Type t : BiomeDictionary.getTypesForBiome(biome))
+			{
+				final Collection<WeightedItemStack> yeastList = reg.getYeastListForBiomeType(t);
+				if (yeastList != null)
+				{
+					tempItemList.addAll(yeastList);
+				}
+			}
+
+			if (tempItemList.size() > 0)
+			{
+				final WeightedItemStack weightedItemStack = (WeightedItemStack)WeightedRandom.getRandomItem(getWorld().rand, tempItemList);
+				if (weightedItemStack != null && weightedItemStack.itemStack != null)
+				{
+					final ItemStack result = weightedItemStack.itemStack.copy();
+					invSlot.set(result);
+					consumeFluid();
+				}
+			}
 		}
 	}
 
 	public void produceYeast()
 	{
-		if (getInventory().getStackInSlot(invSlot) == null)
+		if (invSlot.isEmpty())
 		{
 			initProduceYeast();
 		}
 		else
 		{
-			final ItemStack contents = getInventory().getStackInSlot(invSlot);
+			final ItemStack contents = invSlot.get();
 			// ensure that the item is indeed some form of yeast, prevents item duplication
 			// while canProduceYeast will prevent invalid items from popping up
 			// produceYeast is public, and can be called outside the update
@@ -138,12 +184,13 @@ public class YeastGenerator extends DeviceProgressive
 			// item correctness
 			if (canReplicateYeast(contents))
 			{
-				getInventory().setInventorySlotContents(invSlot, ItemUtils.increaseStack(contents));
+				invSlot.set(ItemUtils.increaseStack(contents));
 				consumeFluid();
 			}
 		}
 	}
 
+	@Override
 	public void update()
 	{
 		if (canProduceYeast())

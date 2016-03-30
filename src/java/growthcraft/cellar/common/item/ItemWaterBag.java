@@ -3,6 +3,7 @@ package growthcraft.cellar.common.item;
 import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.util.UnitFormatter;
@@ -66,8 +67,8 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		return tag != null ? FluidStack.loadFluidStackFromNBT(tag) : null;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[17];
@@ -91,6 +92,7 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
@@ -100,11 +102,18 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int meta)
 	{
 		return this.icons[meta];
+	}
+
+	public int getFluidAmount(ItemStack container)
+	{
+		final FluidStack stack = getFluid(container);
+		if (FluidTest.isValid(stack)) return stack.amount;
+		return 0;
 	}
 
 	@Override
@@ -315,8 +324,8 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		return basename;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
@@ -329,5 +338,17 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 			BoozeUtils.addEffectInformation(booze, stack, player, list, bool);
 		}
 		super.addInformation(stack, player, list, bool);
+	}
+
+	@Override
+	public boolean showDurabilityBar(ItemStack stack)
+	{
+		return FluidTest.isValid(getFluid(stack));
+	}
+
+	@Override
+	public double getDurabilityForDisplay(ItemStack stack)
+	{
+		return 1D - ((double)getFluidAmount(stack) / (double)getCapacity(stack));
 	}
 }

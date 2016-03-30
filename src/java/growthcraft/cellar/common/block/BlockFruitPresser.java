@@ -7,7 +7,7 @@ import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.block.IRotatableBlock;
 import growthcraft.core.common.block.IWrenchable;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,11 +34,11 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	{
 		super(Material.piston);
 		this.isBlockContainer = true;
-		this.setHardness(0.5F);
-		this.setStepSound(soundTypePiston);
-		this.setBlockName("grc.fruitPresser");
-		this.setCreativeTab(null);
-		this.setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 0.9375F, 0.8125F);
+		setHardness(0.5F);
+		setStepSound(soundTypePiston);
+		setBlockName("grc.fruitPresser");
+		setCreativeTab(null);
+		setBlockBounds(0.1875F, 0.0F, 0.1875F, 0.8125F, 0.9375F, 0.8125F);
 	}
 
 	public String getPressStateName(int meta)
@@ -110,7 +110,7 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	{
 		super.onBlockAdded(world, x, y, z);
 		final int m = world.getBlockMetadata(x,  y - 1, z);
-		world.setBlockMetadataWithNotify(x, y, z, m, BlockFlags.UPDATE_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, m, BlockFlags.UPDATE_AND_SYNC);
 
 		if (!world.isRemote)
 		{
@@ -122,7 +122,7 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
 		final int m = world.getBlockMetadata(x,  y - 1, z);
-		world.setBlockMetadataWithNotify(x, y, z, m, BlockFlags.UPDATE_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, m, BlockFlags.UPDATE_AND_SYNC);
 
 		if (!world.isRemote)
 		{
@@ -151,12 +151,12 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 
 		if (flag && (meta == 0 || meta == 1))
 		{
-			world.setBlockMetadataWithNotify(x, y, z, meta | 2, BlockFlags.UPDATE_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, meta | 2, BlockFlags.UPDATE_AND_SYNC);
 			world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "tile.piston.out", 0.5F, world.rand.nextFloat() * 0.25F + 0.6F);
 		}
 		else if (!flag && (meta == 2 || meta == 3))
 		{
-			world.setBlockMetadataWithNotify(x, y, z, meta & 1, BlockFlags.UPDATE_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, meta & 1, BlockFlags.UPDATE_AND_SYNC);
 			world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "tile.piston.in", 0.5F, world.rand.nextFloat() * 0.15F + 0.6F);
 		}
 
@@ -169,7 +169,7 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return GrowthCraftCellar.fruitPress.getBlock() == world.getBlock(x, y - 1, z);
+		return GrowthCraftCellar.blocks.fruitPress.getBlock() == world.getBlock(x, y - 1, z);
 	}
 
 	@Override
@@ -196,7 +196,7 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftCellar.fruitPress.getItem();
+		return GrowthCraftCellar.blocks.fruitPress.getItem();
 	}
 
 	@Override

@@ -56,15 +56,30 @@ public class FishTrapEntry extends WeightedRandom.Item
 		return ret;
 	}
 
+	public float getDamage()
+	{
+		return damage;
+	}
+
+	public boolean getEnchanted()
+	{
+		return isEnchantable;
+	}
+
 	public FishTrapEntry setDamage(float f)
 	{
 		this.damage = f;
 		return this;
 	}
 
+	public FishTrapEntry setEnchantable(boolean b)
+	{
+		this.isEnchantable = b;
+		return this;
+	}
+
 	public FishTrapEntry setEnchantable()
 	{
-		this.isEnchantable = true;
-		return this;
+		return setEnchantable(true);
 	}
 }

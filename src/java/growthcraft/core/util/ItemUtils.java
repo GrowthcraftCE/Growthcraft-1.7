@@ -10,12 +10,17 @@ import growthcraft.core.GrowthCraftCore;
 import buildcraft.api.tools.IToolWrench;
 
 import cpw.mods.fml.common.Loader;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -37,6 +42,15 @@ public class ItemUtils
 		{
 			hasIToolWrench = true;
 		}
+	}
+
+	public static NBTTagCompound openTagCompound(ItemStack stack)
+	{
+		if (!stack.hasTagCompound())
+		{
+			stack.setTagCompound(new NBTTagCompound());
+		}
+		return stack.getTagCompound();
 	}
 
 	public static ItemStack[] clearInventorySlots(ItemStack[] invSlots, int expectedSize)
@@ -146,12 +160,25 @@ public class ItemUtils
 		player.inventory.setInventorySlotContents(player.inventory.currentItem, stack);
 	}
 
-	public static void decreaseStackOnPlayer(ItemStack itemstack, @Nonnull EntityPlayer player)
+	/**
+	 * Uses one item on the
+	 */
+	public static ItemStack consumeStackOnPlayer(ItemStack itemstack, @Nonnull EntityPlayer player)
 	{
-		if (player.capabilities.isCreativeMode) return;
-
+		if (player.capabilities.isCreativeMode) return itemstack;
 		final ItemStack result = consumeStack(itemstack);
 		replacePlayerCurrentItem(player, result);
+		return result;
+	}
+
+	public static ItemStack decrPlayerInventorySlot(@Nonnull EntityPlayer player, int slot, int amount)
+	{
+		return player.inventory.decrStackSize(slot, amount);
+	}
+
+	public static ItemStack decrPlayerCurrentInventorySlot(@Nonnull EntityPlayer player, int amount)
+	{
+		return player.inventory.decrStackSize(player.inventory.currentItem, amount);
 	}
 
 	public static void addStackToPlayer(ItemStack itemstack, @Nonnull EntityPlayer player, World world, int x, int y, int z, boolean checkCreative)
@@ -175,19 +202,24 @@ public class ItemUtils
 		addStackToPlayer(itemstack, player, world, (int)player.posX, (int)player.posY, (int)player.posZ, checkCreative);
 	}
 
-	public static void spawnItemStack(World world, int x, int y, int z, ItemStack stack, Random random)
+	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, boolean checkCreative)
+	{
+		addStackToPlayer(itemstack, player, player.worldObj, checkCreative);
+	}
+
+	public static void spawnItemStack(World world, double x, double y, double z, ItemStack stack, Random random)
 	{
 		if (stack != null)
 		{
-			final float f = random.nextFloat() * 0.8F + 0.1F;
-			final float f1 = random.nextFloat() * 0.8F + 0.1F;
-			final float f2 = random.nextFloat() * 0.8F + 0.1F;
+			final double f = random.nextDouble() * 0.8D + 0.1D;
+			final double f1 = random.nextDouble() * 0.8D + 0.1D;
+			final double f2 = random.nextDouble() * 0.8D + 0.1D;
 
-			final EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), stack);
+			final EntityItem entityitem = new EntityItem(world, x + f, y + f1, z + f2, stack);
 			final float f3 = 0.05F;
-			entityitem.motionX = (double)((float)random.nextGaussian() * f3);
-			entityitem.motionY = (double)((float)random.nextGaussian() * f3 + 0.2F);
-			entityitem.motionZ = (double)((float)random.nextGaussian() * f3);
+			entityitem.motionX = random.nextGaussian() * f3;
+			entityitem.motionY = random.nextGaussian() * f3 + 0.2F;
+			entityitem.motionZ = random.nextGaussian() * f3;
 			world.spawnEntityInWorld(entityitem);
 		}
 	}
@@ -210,6 +242,57 @@ public class ItemUtils
 				spawnItemStack(world, x, y, z, entityStack, random);
 			}
 		}
+	}
+
+	public static void spawnItemStackAtEntity(ItemStack stack, Entity entity, Random random)
+	{
+		spawnItemStack(entity.worldObj, entity.posX, entity.posY, entity.posZ, stack, random);
+	}
+
+	public static void spawnItemStackAtTile(ItemStack stack, TileEntity tile, Random random)
+	{
+		spawnItemStack(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord, stack, random);
+	}
+
+	/**
+	 * NOTICE: This method was copied from ForestryMC ItemStackUtil
+	 *
+	 * @param stack - item stack to retrieve block from
+	 * @return block
+	 */
+	public static Block getBlock(ItemStack stack)
+	{
+		if (stack == null) return null;
+		final Item item = stack.getItem();
+		if (item instanceof ItemBlock) return ((ItemBlock)item).field_150939_a;
+		return null;
+	}
+
+	/**
+	 * NOTICE: This method was copied from ForestryMC ItemStackUtil, and modified.
+	 *
+	 * @param block - block to check
+	 * @param stack - item stack to check
+	 * @return true the block matches the provided item stack
+	 */
+	public static boolean equals(Block block, ItemStack stack)
+	{
+		if (stack == null) return false;
+		return block == getBlock(stack);
+	}
+
+	/**
+	 * NOTICE: This method was copied from ForestryMC ItemStackUtil
+	 *
+	 * @param block - block to check
+	 * @param meta - block's metadata
+	 * @param stack - item stack to check
+	 * @return true the block matches the provided item stack
+	 */
+	public static boolean equals(Block block, int meta, ItemStack stack)
+	{
+		if (stack == null) return false;
+		return block == getBlock(stack) && meta == stack.getItemDamage();
 	}
 
 	/**

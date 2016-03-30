@@ -11,18 +11,23 @@ public class GrcCellarConfig extends ConfigBase
 	public int villagerBrewerID = 10;
 
 
+	@ConfigOption(catergory="Events", name="Enable Discard Button", desc="Enable and show the Discard button from certain cellar blocks.")
+	public boolean enableDiscardButton = true;
+
+
 	@ConfigOption(catergory="Booze Fluid", name="Booze blocks use water material", desc="Should Booze blocks behave like water (introduces water bottle bug, but fluids behave like fluids.)?")
 	public boolean boozeIsWater = true;
 
-
-	@ConfigOption(catergory="Booze", name="Bottle Capacity", desc="How much booze does a bottle hold?")
-	public int bottleCapacity = 333;
 
 	@ConfigOption(catergory="Booze", name="Water Bag Capacity", desc="How much booze does a water bag hold (normally 5x a bottle)?")
 	public int waterBagCapacity = 333 * 5;
 
 	@ConfigOption(catergory="Booze", name="Water Bag Dosage", desc="How much booze is used when you drink from water bag (normally 1 bottle)?")
 	public int waterBagDosage = 333;
+
+
+	@ConfigOption(catergory="Booze/Effects", name="Enabled", desc="Should extra booze effects be enabled (does not affect tipsy)?")
+	public boolean boozeEffectsEnabled = true;
 
 
 	@ConfigOption(catergory="Fermenting Barrel", name="Ferment Barrel fermenting time", desc="[Higher -> Slower]")
@@ -33,20 +38,29 @@ public class GrcCellarConfig extends ConfigBase
 
 
 	@ConfigOption(catergory="Fermenting Jar", name="Generation Time", desc="How long does it take for a ferment jar to produce 1 yeast? (number of ticks)")
-	public int fermentJarTimeMax = 1200;
+	public int cultureJarTimeMax = 1200;
 
 	@ConfigOption(catergory="Fermenting Jar", name="Fluid per Yeast", desc="How much fluid is used per yeast? (normally 4 yeast per bucket)")
-	public int fermentJarConsumption = 1000 / 4;
+	public int cultureJarConsumption = 1000 / 4;
 
 	@ConfigOption(catergory="Fermenting Jar", name="Fluid Capacity", desc="How much fluid can a Fermenting Jar hold? (in mB (milli buckets))")
-	public int fermentJarMaxCap = 1000;
+	public int cultureJarMaxCap = 1000;
 
 
 	@ConfigOption(catergory="Brew Kettle", name="Drop items in Brew Kettle", desc="Enable to drop items in brew kettles.")
-	public boolean dropItemsInBrewKettle;
+	public boolean dropItemsInBrewKettle = true;
 
 	@ConfigOption(catergory="Brew Kettle", name="Fluid Capacity", desc="How much fluid can a Brew Kettle hold? (in mB (milli buckets))")
 	public int brewKettleMaxCap = 1000;
+
+	@ConfigOption(catergory="Brew Kettle", name="Fill by Rain", desc="Should the brew kettle fill from rain?")
+	public boolean brewKettleFillsWithRain = true;
+
+	@ConfigOption(catergory="Brew Kettle", name="Rain Fill Amount", desc="How much water is added to the brew kettle per rain tick? (in mB (milli buckets))")
+	public int brewKettleRainFillPerUnit = 10;
+
+	@ConfigOption(catergory="Brew Kettle", name="Set fire to fallen living entities", desc="Should the kettle set fire to entities that fall in it (if heated?)")
+	public boolean setFireToFallenLivingEntities;
 
 
 	@ConfigOption(catergory="Fruit Press", name="Fluid Capacity", desc="How much fluid can a Fruit Press hold? (in mB (milli buckets))")

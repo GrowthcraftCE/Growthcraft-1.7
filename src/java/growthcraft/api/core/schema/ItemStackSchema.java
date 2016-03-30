@@ -27,18 +27,18 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.definition.IItemStackFactory;
-import growthcraft.api.core.definition.IItemStackListFactory;
+import growthcraft.api.core.definition.IItemStackListProvider;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory, IValidatable, ICommentable
+public class ItemStackSchema implements IItemStackFactory, IItemStackListProvider, IValidatable, ICommentable
 {
-	public String comment = "";
+	public String comment;
 	public String mod_id;
 	public String name;
 	public int amount;
@@ -50,6 +50,7 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory
 		this.name = nm;
 		this.amount = amt;
 		this.meta = mt;
+		this.comment = "";
 	}
 
 	public ItemStackSchema(@Nonnull ItemStack stack)
@@ -59,12 +60,14 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory
 		this.name = uuid.name;
 		this.amount = stack.stackSize;
 		this.meta = stack.getItemDamage();
+		this.comment = stack.getDisplayName();
 	}
 
 	public ItemStackSchema()
 	{
 		this.amount = 1;
 		this.meta = ItemKey.WILDCARD_VALUE;
+		this.comment = "";
 	}
 
 	@Override
@@ -111,7 +114,7 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListFactory
 	@Override
 	public String toString()
 	{
-		return "" + mod_id + ":" + name + ":" + meta + " x" + amount;
+		return String.format("Schema<ItemStack>(mod_id: '%s', name: '%s', meta: %d, amount: %d)", mod_id, name, meta, amount);
 	}
 
 	@Override

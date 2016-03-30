@@ -19,7 +19,7 @@ public class ItemRice extends Item
 	{
 		super();
 		this.setUnlocalizedName("grc.rice");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
 	/************

@@ -30,6 +30,8 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
 
+import cpw.mods.fml.common.Optional;
+
 public class ThaumcraftModule extends ThaumcraftModuleBase
 {
 	public ThaumcraftModule()
@@ -38,23 +40,24 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	}
 
 	@Override
+	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooBlock.asStack(), new AspectList().add(Aspect.TREE, 4));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooFence.asStack(), new AspectList().add(Aspect.TREE, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooFenceGate.asStack(), new AspectList().add(Aspect.TREE, 2).add(Aspect.MECHANISM, 1).add(Aspect.MOTION, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooLeaves.asStack(), new AspectList().add(Aspect.PLANT, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooShoot.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 2).add(Aspect.CROP, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooSingleSlab.asStack(), new AspectList().add(Aspect.TREE, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooStairs.asStack(), new AspectList().add(Aspect.TREE, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooWall.asStack(), new AspectList().add(Aspect.TREE, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooScaffold.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.MECHANISM, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooDoor.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.MECHANISM, 1).add(Aspect.MOTION, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooBlock.asStack(), new AspectList().add(Aspect.TREE, 4));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooFence.asStack(), new AspectList().add(Aspect.TREE, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooFenceGate.asStack(), new AspectList().add(Aspect.TREE, 2).add(Aspect.MECHANISM, 1).add(Aspect.MOTION, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooLeaves.asStack(), new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooShoot.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.PLANT, 2).add(Aspect.CROP, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooSingleSlab.asStack(), new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooStairs.asStack(), new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooWall.asStack(), new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooScaffold.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.MECHANISM, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooDoor.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.MECHANISM, 1).add(Aspect.MOTION, 1));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bamboo.asStack(), new AspectList().add(Aspect.TREE, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooDoorItem.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.MOTION, 1).add(Aspect.MECHANISM, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooRaft.asStack(), new AspectList().add(Aspect.TREE, 3).add(Aspect.WATER, 4).add(Aspect.TRAVEL, 4));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooCoal.asStack(), new AspectList().add(Aspect.FIRE, 1).add(Aspect.ENERGY, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.bambooShootFood.asStack(), new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.items.bamboo.asStack(), new AspectList().add(Aspect.TREE, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.items.bambooDoorItem.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.MOTION, 1).add(Aspect.MECHANISM, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.items.bambooRaft.asStack(), new AspectList().add(Aspect.TREE, 3).add(Aspect.WATER, 4).add(Aspect.TRAVEL, 4));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.items.bambooCoal.asStack(), new AspectList().add(Aspect.FIRE, 1).add(Aspect.ENERGY, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.items.bambooShootFood.asStack(), new AspectList().add(Aspect.PLANT, 1));
 	}
 }

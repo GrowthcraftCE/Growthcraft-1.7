@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.tabGrowthCraftBees=Growthcraft Bees
+itemGroup.creative_tab_grcbees=Growthcraft Bees
 
 # Blocks
 ## Vanilla Bee Boxes
@@ -20,6 +20,90 @@ tile.grc.BeeBox.Bamboo0.name=Bamboo Bee Box
 tile.grc.BeeBox.Thaumcraft0.name=Greatwood Bee Box
 tile.grc.BeeBox.Thaumcraft1.name=Silverwood Bee Box
 
+## Forestry Bee Boxes - this is just insane...
+### Regular
+tile.grc.BeeBox.Forestry.0.Normal0.name=Larch Bee Box
+tile.grc.BeeBox.Forestry.0.Normal1.name=Teak Bee Box
+tile.grc.BeeBox.Forestry.0.Normal2.name=Acacia Bee Box
+tile.grc.BeeBox.Forestry.0.Normal3.name=Lime Bee Box
+tile.grc.BeeBox.Forestry.0.Normal4.name=Chestnut Bee Box
+tile.grc.BeeBox.Forestry.0.Normal5.name=Wenge Bee Box
+tile.grc.BeeBox.Forestry.0.Normal6.name=Baobab Bee Box
+tile.grc.BeeBox.Forestry.0.Normal7.name=Sequoia Bee Box
+tile.grc.BeeBox.Forestry.0.Normal8.name=Kapok Bee Box
+tile.grc.BeeBox.Forestry.0.Normal9.name=Ebony Bee Box
+tile.grc.BeeBox.Forestry.0.Normal10.name=Mahogany Bee Box
+tile.grc.BeeBox.Forestry.0.Normal11.name=Balsa Bee Box
+tile.grc.BeeBox.Forestry.0.Normal12.name=Willow Bee Box
+tile.grc.BeeBox.Forestry.0.Normal13.name=Walnut Bee Box
+tile.grc.BeeBox.Forestry.0.Normal14.name=Greenheart Bee Box
+tile.grc.BeeBox.Forestry.1.Normal0.name=Cherry Bee Box
+tile.grc.BeeBox.Forestry.1.Normal1.name=Mahoe Bee Box
+tile.grc.BeeBox.Forestry.1.Normal2.name=Poplar Bee Box
+tile.grc.BeeBox.Forestry.1.Normal3.name=Palm Bee Box
+tile.grc.BeeBox.Forestry.1.Normal4.name=Papaya Bee Box
+tile.grc.BeeBox.Forestry.1.Normal5.name=Pine Bee Box
+tile.grc.BeeBox.Forestry.1.Normal6.name=Plum Bee Box
+tile.grc.BeeBox.Forestry.1.Normal7.name=Maple Bee Box
+tile.grc.BeeBox.Forestry.1.Normal8.name=Citrus Bee Box
+tile.grc.BeeBox.Forestry.1.Normal9.name=Giganteum Bee Box
+tile.grc.BeeBox.Forestry.1.Normal10.name=Ipe Bee Box
+tile.grc.BeeBox.Forestry.1.Normal11.name=Padauk Bee Box
+tile.grc.BeeBox.Forestry.1.Normal12.name=Cocobolo Bee Box
+tile.grc.BeeBox.Forestry.1.Normal13.name=Zebrawood Bee Box
+### Fire Proof
+tile.grc.BeeBox.Forestry.0.Fireproof0.name=Larch Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof1.name=Teak Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof2.name=Acacia Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof3.name=Lime Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof4.name=Chestnut Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof5.name=Wenge Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof6.name=Baobab Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof7.name=Sequoia Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof8.name=Kapok Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof9.name=Ebony Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof10.name=Mahogany Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof11.name=Balsa Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof12.name=Willow Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof13.name=Walnut Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof14.name=Greenheart Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof0.name=Cherry Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof1.name=Mahoe Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof2.name=Poplar Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof3.name=Palm Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof4.name=Papaya Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof5.name=Pine Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof6.name=Plum Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof7.name=Maple Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof8.name=Citrus Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof9.name=Giganteum Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof10.name=Ipe Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof11.name=Padauk Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof12.name=Cocobolo Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof13.name=Zebrawood Bee Box (Fireproof)
+
+## BiomesOPlenty
+tile.grc.BeeBox.BiomesOPlenty0.name=Sacred Oak Bee Box
+tile.grc.BeeBox.BiomesOPlenty1.name=Cherry Bee Box
+tile.grc.BeeBox.BiomesOPlenty2.name=Dark Bee Box
+tile.grc.BeeBox.BiomesOPlenty3.name=Fir Bee Box
+tile.grc.BeeBox.BiomesOPlenty4.name=Ethereal Bee Box
+tile.grc.BeeBox.BiomesOPlenty5.name=Magic Bee Box
+tile.grc.BeeBox.BiomesOPlenty6.name=Mangrove Bee Box
+tile.grc.BeeBox.BiomesOPlenty7.name=Palm Bee Box
+tile.grc.BeeBox.BiomesOPlenty8.name=Redwood Bee Box
+tile.grc.BeeBox.BiomesOPlenty9.name=Willow Bee Box
+tile.grc.BeeBox.BiomesOPlenty10.name=Bamboo Thatch Bee Box
+tile.grc.BeeBox.BiomesOPlenty11.name=Pine Bee Box
+tile.grc.BeeBox.BiomesOPlenty12.name=Hell Bark Bee Box
+tile.grc.BeeBox.BiomesOPlenty13.name=Jacaranda Bee Box
+tile.grc.BeeBox.BiomesOPlenty14.name=Mahogany Bee Box
+
+## Botania
+tile.grc.BeeBox.Botania0.name=Livingwood Bee Box
+tile.grc.BeeBox.Botania1.name=Dreamwood Bee Box
+tile.grc.BeeBox.Botania2.name=Shimmerwood Bee Box
+
 # Other Blocks
 tile.grc.beeHive.name=Bee Hive
 
@@ -28,6 +112,11 @@ item.grc.honeyComb.empty.name=Empty Honeycomb
 item.grc.honeyComb.full.name=Honeycomb
 item.grc.honeyJar.name=Honey
 item.grc.bee.name=Bee
+item.grc.FoodBottleFluidHoney.name=Honey Bottle
+item.grc.BucketFluidHoney.name=Honey Bucket
+item.grcbees.BeesWax.normal.name=Bees Wax
+item.grcbees.BeesWax.red.name=Red Bees Wax
+item.grcbees.BeesWax.black.name=Black Bees Wax
 
 # Tooltips
 grc.bees.item.honeyComb.deprecated=This item has been deprecated, craft to get the updated item.
@@ -36,6 +125,7 @@ grc.bees.item.honeyComb.deprecated=This item has been deprecated, craft to get t
 container.grc.beeBox=Bee Box
 
 # Fluids
+fluid.grc.honey=Honey
 fluid.grc.honeyMead=Mead
 fluid.grc.honeyMead0=Mead
 fluid.grc.honeyMead1=Mead
@@ -45,7 +135,11 @@ fluid.grc.honeyMead4=Mead
 fluid.grc.honeyMead5=Mead
 fluid.grc.honeyMead6=Mead
 
+# Fluid Bottles
+item.grc.BottleFluidHoney.name=Honey
+
 # Fluid Buckets
+item.bucket.fluid.grc.honey.name=Honey Bucket
 item.bucket.fluid.grc.honeyMead.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead0.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead1.name=Mead Bucket
@@ -56,6 +150,7 @@ item.bucket.fluid.grc.honeyMead5.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead6.name=Mead Bucket
 
 # Fluid Blocks
+tile.grc.BlockFluidHoney.name=Honey
 tile.fluid.grc.honeyMead.name=Mead
 tile.fluid.grc.honeyMead0.name=Mead
 tile.fluid.grc.honeyMead1.name=Mead
@@ -69,3 +164,5 @@ tile.fluid.grc.honeyMead6.name=Mead
 grc.bees.bonus_prefix=Bonus :
 grc.bees.bees_prefix=Bees :
 grc.bees.honey_prefix=Honey :
+grc.bees.growth_rate_prefix=Growth Rate :
+grc.bees.growth_rate_value=%d%%

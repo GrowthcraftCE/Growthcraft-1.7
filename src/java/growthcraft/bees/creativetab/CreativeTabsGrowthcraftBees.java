@@ -9,15 +9,15 @@ import net.minecraft.item.Item;
 
 public class CreativeTabsGrowthcraftBees extends CreativeTabs
 {
-	public CreativeTabsGrowthcraftBees()
+	public CreativeTabsGrowthcraftBees(String name)
 	{
-		super("tabGrowthCraftBees");
+		super(name);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem()
 	{
-		return GrowthCraftBees.bee.getItem();
+		return GrowthCraftBees.items.bee.getItem();
 	}
 }

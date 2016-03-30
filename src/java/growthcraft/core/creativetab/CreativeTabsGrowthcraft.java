@@ -8,9 +8,9 @@ import net.minecraft.item.Item;
 
 public class CreativeTabsGrowthcraft extends CreativeTabs
 {
-	public CreativeTabsGrowthcraft(String index)
+	public CreativeTabsGrowthcraft(String name)
 	{
-		super(index);
+		super(name);
 	}
 
 	@Override

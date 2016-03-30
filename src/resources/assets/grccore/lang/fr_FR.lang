@@ -1,21 +1,50 @@
 # Creative Tabs
-itemGroup.tabGrowthCraft=Growthcraft
+itemGroup.creative_tab_grccore=Growthcraft
 
 # Blocks
 tile.grc.fenceRope.name=Barrière à corde
+tile.grc.netherBrickFenceRope.name=tile.grc.netherBrickFenceRope.name
 tile.grc.ropeBlock.name=Corde
 
 # Items
 item.grc.rope.name=Corde
+item.grccore.salt.name=item.grccore.salt.name
+item.grccore.bucketSalt.name=item.grccore.bucketSalt.name
+item.grccore.bottleSalt.name=item.grccore.bottleSalt.name
 
 # Fluids
 fluid.tile.water=Eau
 fluid.tile.lava=Lave
 
+## Salt Water
+fluid.grccore.SaltWater=fluid.grccore.SaltWater
+tile.grccore.BlockFluidSaltWater.name=tile.grccore.BlockFluidSaltWater.name
+item.grccore.BottleFluidSaltWater.name=item.grccore.BottleFluidSaltWater.name
+item.bucket.fluid.grccore.SaltWater.name=item.bucket.fluid.grccore.SaltWater.name
+
 # Other
 achievementPage.pageGrowthCraft=Growthcraft
 
-# Formats and units
+# Colors
+grc.colour.White=grc.colour.White
+grc.colour.Orange=grc.colour.Orange
+grc.colour.Magenta=grc.colour.Magenta
+grc.colour.LightBlue=grc.colour.LightBlue
+grc.colour.Yellow=grc.colour.Yellow
+grc.colour.Lime=grc.colour.Lime
+grc.colour.Pink=grc.colour.Pink
+grc.colour.Gray=grc.colour.Gray
+grc.colour.LightGray=grc.colour.LightGray
+grc.colour.Cyan=grc.colour.Cyan
+grc.colour.Purple=grc.colour.Purple
+grc.colour.Blue=grc.colour.Blue
+grc.colour.Brown=grc.colour.Brown
+grc.colour.Green=grc.colour.Green
+grc.colour.Red=grc.colour.Red
+grc.colour.Black=grc.colour.Black
+grc.colour.Transparent=grc.colour.Transparent
+
+# Formats and Units
 grc.format.value.true=OUI
 grc.format.value.false=NON
 grc.format.state.true=MARCHE
@@ -42,6 +71,27 @@ grc.format.tank.content_suffix=mB de %s
 
 # Waila Tooltips
 grc.format.crop.growth_prefix=Croissance :
-grc.format.crop.progress_format=%d%%
 grc.format.crop.mature=Mature
+grc.format.crop.progress_format=%d%%
 grc.format.paddy.hasFluid=A du fluide :
+grccore.device.heated.multiplier.format=grccore.device.heated.multiplier.format
+grccore.device.heated.prefix=grccore.device.heated.prefix
+grccore.device.heated.state.false=grccore.device.heated.state.false
+grccore.device.progress.format=grccore.device.progress.format
+grccore.device.progress.prefix=grccore.device.progress.prefix
+grccore.waila.option.DisplayFluidContent=Réservoirs de fluide
+grccore.waila.option.DisplayHeated=grccore.waila.option.DisplayHeated
+
+# Effects
+grc.effect.chance.format=grc.effect.chance.format
+grc.effect.list.head=grc.effect.list.head
+grc.effect.null.desc=grc.effect.null.desc
+grc.effect.random_list.head=grc.effect.random_list.head
+grc.effect.remove_potion_effect.format=grc.effect.remove_potion_effect.format
+grc.effect.weighted_random_list.format=grc.effect.weighted_random_list.format
+
+# GUI
+gui.grc.progress.format=gui.grc.progress.format
+
+# Inventory
+grc.inventory.internal=grc.inventory.internal

@@ -4,7 +4,7 @@ import java.util.List;
 
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.util.TagFormatterBeeBox;
-import growthcraft.core.util.NBTHelper;
+import growthcraft.api.core.nbt.NBTHelper;
 
 import cpw.mods.fml.common.Optional;
 
@@ -21,21 +21,21 @@ import net.minecraft.world.World;
 public class BeesDataProvider implements IWailaDataProvider
 {
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		return accessor.getStack();
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public List<String> getWailaHead(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		return tooltip;
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		if (accessor.getTileEntity() instanceof TileEntityBeeBox)
@@ -47,14 +47,14 @@ public class BeesDataProvider implements IWailaDataProvider
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public List<String> getWailaTail(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config)
 	{
 		return tooltip;
 	}
 
 	@Override
-	@Optional.Method(modid = "Waila")
+	@Optional.Method(modid="Waila")
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
 	{
 		if (te instanceof TileEntityBeeBox)
@@ -64,6 +64,7 @@ public class BeesDataProvider implements IWailaDataProvider
 			tag.setInteger("honeycomb_count", beeBox.countCombs());
 			tag.setInteger("honeycomb_max", beeBox.getHoneyCombMax());
 			tag.setInteger("honey_count", beeBox.countHoney());
+			tag.setFloat("growth_rate", beeBox.getGrowthRate());
 			tag.setTag("bee", NBTHelper.writeItemStackToNBT(beeBox.getBeeStack()));
 		}
 		return tag;

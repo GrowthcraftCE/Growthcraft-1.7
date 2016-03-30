@@ -23,16 +23,21 @@
  */
 package growthcraft.api.cellar;
 
+import javax.annotation.Nonnull;
+
 import growthcraft.api.cellar.booze.BoozeRegistry;
 import growthcraft.api.cellar.booze.IBoozeRegistry;
 import growthcraft.api.cellar.brewing.BrewingRegistry;
 import growthcraft.api.cellar.brewing.IBrewingRegistry;
+import growthcraft.api.cellar.culturing.CulturingRegistry;
+import growthcraft.api.cellar.culturing.ICulturingRegistry;
 import growthcraft.api.cellar.distilling.DistilleryRegistry;
 import growthcraft.api.cellar.distilling.IDistilleryRegistry;
 import growthcraft.api.cellar.fermenting.FermentingRegistry;
 import growthcraft.api.cellar.fermenting.IFermentingRegistry;
 import growthcraft.api.cellar.heatsource.HeatSourceRegistry;
 import growthcraft.api.cellar.heatsource.IHeatSourceRegistry;
+import growthcraft.api.cellar.init.CellarEffects;
 import growthcraft.api.cellar.pressing.IPressingRegistry;
 import growthcraft.api.cellar.pressing.PressingRegistry;
 import growthcraft.api.cellar.yeast.IYeastRegistry;
@@ -43,10 +48,11 @@ import growthcraft.api.core.log.NullLogger;
 
 public class CellarRegistry implements ILoggable
 {
-	private static final CellarRegistry INSTANCE = new CellarRegistry();
+	private static final CellarRegistry INSTANCE = new CellarRegistry().initialize();
 
 	private final IBoozeRegistry boozeRegistry = new BoozeRegistry();
 	private final IBrewingRegistry brewingRegistry = new BrewingRegistry();
+	private final ICulturingRegistry culturingRegistry = new CulturingRegistry();
 	private final IDistilleryRegistry distilleryRegistry = new DistilleryRegistry();
 	private final IFermentingRegistry fermentingRegistry = new FermentingRegistry();
 	private final IHeatSourceRegistry heatSourceRegistry = new HeatSourceRegistry();
@@ -62,15 +68,22 @@ public class CellarRegistry implements ILoggable
 		return INSTANCE;
 	}
 
+	private CellarRegistry initialize()
+	{
+		CellarEffects.init();
+		return this;
+	}
+
 	/**
 	 * @param l - logger to set
 	 */
 	@Override
-	public void setLogger(ILogger l)
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
 		boozeRegistry.setLogger(logger);
 		brewingRegistry.setLogger(logger);
+		culturingRegistry.setLogger(logger);
 		distilleryRegistry.setLogger(logger);
 		fermentingRegistry.setLogger(logger);
 		heatSourceRegistry.setLogger(logger);
@@ -92,6 +105,14 @@ public class CellarRegistry implements ILoggable
 	public IBrewingRegistry brewing()
 	{
 		return brewingRegistry;
+	}
+
+	/**
+	 * @return instance of the CulturingRegistry
+	 */
+	public ICulturingRegistry culturing()
+	{
+		return culturingRegistry;
 	}
 
 	/**

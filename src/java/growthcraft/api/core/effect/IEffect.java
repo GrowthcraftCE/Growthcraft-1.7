@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@ package growthcraft.api.core.effect;
 import java.util.Random;
 
 import growthcraft.api.core.description.IDescribable;
+import growthcraft.api.core.nbt.INBTSerializableContext;
 
 import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
@@ -35,7 +36,7 @@ import net.minecraft.entity.Entity;
  * Its meant to solve the problem with constructing complex item effects,
  * where data along just won't cut it.
  */
-public interface IEffect extends IDescribable
+public interface IEffect extends IDescribable, INBTSerializableContext
 {
 	/**
 	 * This method is called when the effect needs to be applied to the

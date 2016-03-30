@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,10 +24,12 @@
 package growthcraft.api.cellar.util;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.booze.BoozeEffect;
-import growthcraft.api.cellar.booze.BoozeTag;
+import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.cellar.common.Residue;
 
 import net.minecraft.item.ItemStack;
@@ -53,21 +55,21 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder tags(BoozeTag... tags)
+	public ICellarBoozeBuilder tags(FluidTag... tags)
 	{
-		CellarRegistry.instance().booze().addTags(fluid, tags);
+		CoreRegistry.instance().fluidDictionary().addFluidTags(fluid, tags);
 		return this;
 	}
 
 	@Override
-	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time, @Nonnull Residue residue)
+	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time, @Nullable Residue residue)
 	{
 		CellarRegistry.instance().brewing().addBrewing(new FluidStack(fluid, result.amount), stack, result, time, residue);
 		return this;
 	}
 
 	@Override
-	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time, @Nonnull Residue residue)
+	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time, @Nullable Residue residue)
 	{
 		CellarRegistry.instance().brewing().addBrewing(src, stack, new FluidStack(fluid, src.amount), time, residue);
 		return this;
@@ -76,21 +78,28 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 	@Override
 	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time)
 	{
-		CellarRegistry.instance().fermenting().addFermentingRecipe(result, new FluidStack(fluid, result.amount), stack, time);
+		CellarRegistry.instance().fermenting().addRecipe(result, new FluidStack(fluid, result.amount), stack, time);
 		return this;
 	}
 
 	@Override
 	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time)
 	{
-		CellarRegistry.instance().fermenting().addFermentingRecipe(new FluidStack(fluid, src.amount), src, stack, time);
+		CellarRegistry.instance().fermenting().addRecipe(new FluidStack(fluid, src.amount), src, stack, time);
 		return this;
 	}
 
 	@Override
-	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nonnull Residue residue)
+	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nullable Residue residue)
 	{
 		CellarRegistry.instance().pressing().addPressingRecipe(stack, new FluidStack(fluid, amount), time, residue);
+		return this;
+	}
+
+	@Override
+	public ICellarBoozeBuilder culturesTo(int amount, @Nonnull ItemStack stack, float heat, int time)
+	{
+		CellarRegistry.instance().culturing().addRecipe(new FluidStack(fluid, amount), stack, heat, time);
 		return this;
 	}
 

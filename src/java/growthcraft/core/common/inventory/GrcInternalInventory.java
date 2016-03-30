@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +23,10 @@
  */
 package growthcraft.core.common.inventory;
 
-import growthcraft.core.util.NBTHelper;
+import growthcraft.api.core.nbt.INBTSerializableContext;
+import growthcraft.api.core.nbt.NBTHelper;
+import growthcraft.api.core.nbt.NBTType;
 import growthcraft.core.util.ItemUtils;
-import growthcraft.core.common.nbt.INbtSerializable;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -33,21 +34,28 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class GrcInternalInventory implements IInventory, INbtSerializable
+public class GrcInternalInventory implements IInventory, INBTSerializableContext
 {
 	public static final int WILDCARD_SLOT = -1;
 
+	protected String inventoryName;
 	protected ItemStack[] items;
 	protected int maxSize;
 	protected int maxStackSize;
-	protected IInventory parent;
+	protected Object parent;
 
-	public GrcInternalInventory(IInventory par, int size)
+	public GrcInternalInventory(Object par, int size, int maxStack)
 	{
+		this.inventoryName = "grc.inventory.internal";
 		this.parent = par;
-		this.maxStackSize = 64;
 		this.maxSize = size;
+		this.maxStackSize = maxStack;
 		this.items = new ItemStack[maxSize];
+	}
+
+	public GrcInternalInventory(Object par, int size)
+	{
+		this(par, size, 64);
 	}
 
 	public int getMaxSize()
@@ -61,9 +69,9 @@ public class GrcInternalInventory implements IInventory, INbtSerializable
 		{
 			((IInventoryWatcher)parent).onInventoryChanged(this, index);
 		}
-		else
+		else if (parent instanceof IInventory)
 		{
-			parent.markDirty();
+			((IInventory)parent).markDirty();
 		}
 	}
 
@@ -92,7 +100,7 @@ public class GrcInternalInventory implements IInventory, INbtSerializable
 	@Override
 	public void readFromNBT(NBTTagCompound data, String name)
 	{
-		final NBTTagList list = data.getTagList(name, NBTHelper.NBTType.COMPOUND);
+		final NBTTagList list = data.getTagList(name, NBTType.COMPOUND.id);
 		if (list != null)
 		{
 			readFromNBT(list);
@@ -156,10 +164,16 @@ public class GrcInternalInventory implements IInventory, INbtSerializable
 		return false;
 	}
 
+	public GrcInternalInventory setInventoryName(String name)
+	{
+		this.inventoryName = name;
+		return this;
+	}
+
 	@Override
 	public String getInventoryName()
 	{
-		return "grc.inventory.internal";
+		return inventoryName;
 	}
 
 	@Override
@@ -183,7 +197,7 @@ public class GrcInternalInventory implements IInventory, INbtSerializable
 				{
 					if (parent instanceof IInventoryWatcher)
 					{
-						((IInventoryWatcher)parent).onItemDiscarded(this, stack, index);
+						((IInventoryWatcher)parent).onItemDiscarded(this, stack, index, discarded);
 					}
 				}
 			}

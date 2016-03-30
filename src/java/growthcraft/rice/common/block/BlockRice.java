@@ -6,7 +6,7 @@ import java.util.Random;
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.common.block.IPaddyCrop;
 import growthcraft.core.integration.AppleCore;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.rice.client.renderer.RenderRice;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.util.RiceBlockCheck;
@@ -49,6 +49,12 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider, I
 		this.setStepSound(soundTypeGrass);
 	}
 
+	public boolean isMature(IBlockAccess world, int x, int y, int z)
+	{
+		final int meta = world.getBlockMetadata(x, y, z);
+		return meta >= RiceStage.MATURE;
+	}
+
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
 	{
 		return (float)meta / (float)RiceStage.MATURE;
@@ -56,7 +62,7 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider, I
 
 	private void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.SEND_TO_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.SYNC);
 		AppleCore.announceGrowthTick(this, world, x, y, z, meta);
 	}
 
@@ -290,8 +296,8 @@ public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider, I
 		{
 			case 0: case 1: i = 0; break;
 			case 2: case 3: i = 1; break;
-			case 4: case 5: case 7: i = 2; break;
-			case 6: i = 3; break;
+			case 4: case 5: i = 2; break;
+			case 6: case 7: i = 3; break;
 			default: i = 2;
 		}
 

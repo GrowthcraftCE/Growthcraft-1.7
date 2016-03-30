@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,22 +22,22 @@ public class BlockBambooSlab extends BlockSlab
 	{
 		super(par2, Material.wood);
 		this.useNeighborBrightness = true;
-		this.setStepSound(soundTypeWood);
-		this.setResistance(5.0F);
-		this.setHardness(2.0F);
-		this.setCreativeTab(GrowthCraftCore.tab);
-		this.setBlockName("grc.bambooSlab");
+		setStepSound(soundTypeWood);
+		setResistance(5.0F);
+		setHardness(2.0F);
+		setBlockName("grc.bambooSlab");
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
 	/************
 	 * STUFF
 	 ************/
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item item, CreativeTabs tab, List list)
 	{
-		if (item != Item.getItemFromBlock(GrowthCraftBamboo.bambooDoubleSlab.getBlock()))
+		if (item != Item.getItemFromBlock(GrowthCraftBamboo.blocks.bambooDoubleSlab.getBlock()))
 		{
 			list.add(new ItemStack(item, 1, 0));
 		}
@@ -53,14 +52,14 @@ public class BlockBambooSlab extends BlockSlab
 	@SideOnly(Side.CLIENT)
 	private static boolean isBlockSingleSlab(Block block)
 	{
-		return block == GrowthCraftBamboo.bambooSingleSlab.getBlock();
+		return block == GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, int par2, int par3, int par4)
 	{
-		return Item.getItemFromBlock(GrowthCraftBamboo.bambooSingleSlab.getBlock());
+		return Item.getItemFromBlock(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock());
 	}
 
 	/************
@@ -69,12 +68,12 @@ public class BlockBambooSlab extends BlockSlab
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return Item.getItemFromBlock(GrowthCraftBamboo.bambooSingleSlab.getBlock());
+		return Item.getItemFromBlock(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock());
 	}
 
 	protected ItemStack createStackedBlock(int par1)
 	{
-		return new ItemStack(GrowthCraftBamboo.bambooSingleSlab.getBlock(), 2, 0);
+		return new ItemStack(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock(), 2, 0);
 	}
 
 	/************
@@ -84,6 +83,6 @@ public class BlockBambooSlab extends BlockSlab
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
-		return GrowthCraftBamboo.bambooBlock.getBlock().getIcon(side, meta);
+		return GrowthCraftBamboo.blocks.bambooBlock.getBlock().getIcon(side, meta);
 	}
 }

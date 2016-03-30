@@ -41,5 +41,5 @@ public interface IPressingRegistry extends ILoggable
 
 	boolean hasPressingRecipe(ItemStack itemstack);
 
-	PressingResult getPressingResult(ItemStack itemstack);
+	PressingRecipe getPressingRecipe(ItemStack itemstack);
 }

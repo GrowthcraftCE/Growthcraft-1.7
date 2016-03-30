@@ -27,6 +27,7 @@ import javax.annotation.Nonnull;
 
 import growthcraft.api.core.definition.ISubItemStackFactory;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -44,6 +45,7 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
 	}
 
 	@Nonnull
+	@Override
 	public ItemStack asStack(int size, int damage)
 	{
 		return new ItemStack(getItem(), size, damage);
@@ -53,5 +55,13 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
 	{
 		if (other == null) return false;
 		return getItem() == other;
+	}
+
+	/**
+	 * @param name - item name
+	 */
+	public void register(String name)
+	{
+		GameRegistry.registerItem(getItem(), name);
 	}
 }

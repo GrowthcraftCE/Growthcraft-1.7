@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
  */
 package growthcraft.bees.integration;
 
+import growthcraft.api.core.item.ItemKey;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeBoxThaumcraft;
 import growthcraft.bees.common.block.EnumBeeBoxThaumcraft;
@@ -37,6 +38,7 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
 
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -75,49 +77,111 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 				GameRegistry.addShapedRecipe(EnumBeeBoxThaumcraft.GREATWOOD.asStack(), " A ", "A A", "AAA", 'A', new ItemStack(blockWoodenDevice, 1, 6));
 				GameRegistry.addShapedRecipe(EnumBeeBoxThaumcraft.SILVERWOOD.asStack(), " A ", "A A", "AAA", 'A', new ItemStack(blockWoodenDevice, 1, 7));
 			}
+			else
+			{
+				logger.warn("Could not find blockWoodenDevice from Thaumcraft, skipping recipes for Thaumcraft Bee Boxes");
+			}
 		}
 	}
 
 	@Override
+	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
-		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyCombEmpty.asStack(), new AspectList().add(Aspect.ORDER, 1).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyCombFilled.asStack(), new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 1).add(Aspect.GREED, 1).add(Aspect.HUNGER, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBees.honeyJar.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.EARTH, 1).add(Aspect.FIRE, 1).add(Aspect.VOID, 1).add(Aspect.GREED, 3).add(Aspect.HUNGER, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBees.bee.asStack(), new AspectList().add(Aspect.BEAST, 1).add(Aspect.AIR, 1).add(Aspect.FLIGHT, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.items.honeyCombEmpty.asStack(), new AspectList().add(Aspect.ORDER, 1).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.items.honeyCombFilled.asStack(), new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 1).add(Aspect.GREED, 1).add(Aspect.HUNGER, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.items.honeyJar.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.EARTH, 1).add(Aspect.FIRE, 1).add(Aspect.VOID, 1).add(Aspect.GREED, 3).add(Aspect.HUNGER, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.items.bee.asStack(), new AspectList().add(Aspect.BEAST, 1).add(Aspect.AIR, 1).add(Aspect.FLIGHT, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeHive.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.BEAST, 1).add(Aspect.ORDER, 1).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBox.asStack(), new int[]{0,1,2,3,4,5}, new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
 
+		{
+			final AspectList[] common = new AspectList[]
+			{
+				new AspectList(),
+				new AspectList().add(Aspect.HEAL, 1),
+				new AspectList().add(Aspect.HEAL, 2),
+				new AspectList().add(Aspect.HEAL, 1),
+				new AspectList().add(Aspect.HEAL, 2),
+				new AspectList().add(Aspect.HEAL, 1).add(Aspect.POISON, 1),
+				new AspectList().add(Aspect.POISON, 1)
+			};
+
+			for (int i = 0; i < common.length; ++i)
+			{
+				final AspectList list = common[i];
+				ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftBees.fluids.honeyMeadBottle.asStack(1, i), list.copy());
+				ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftBees.fluids.honeyMeadBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
+				ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftBees.fluids.honeyMeadFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
+			}
+		}
+
+		if (GrowthCraftBees.fluids.honey != null)
+		{
+			{
+				final ItemStack bottleStack = GrowthCraftBees.fluids.honey.asBottleItemStack();
+				if (bottleStack != null)
+				{
+					ThaumcraftApi.registerObjectTag(bottleStack, new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 2).add(Aspect.GREED, 1).add(Aspect.HUNGER, 1));
+				}
+			}
+
+			{
+				final ItemStack bucketStack = GrowthCraftBees.fluids.honey.asBottleItemStack();
+				if (bucketStack != null)
+				{
+					ThaumcraftApi.registerObjectTag(bucketStack, new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 6).add(Aspect.GREED, 2).add(Aspect.HUNGER, 2));
+				}
+			}
+
+			{
+				final ItemStack fluidBlock = GrowthCraftBees.fluids.honey.asFluidBlockItemStack();
+				if (fluidBlock != null)
+				{
+					ThaumcraftApi.registerObjectTag(fluidBlock, new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 2).add(Aspect.GREED, 1).add(Aspect.HUNGER, 1));
+				}
+			}
+		}
+
 		if (GrowthCraftBees.beeBoxNether != null)
 		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxNether.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.ENTROPY, 1).add(Aspect.VOID, 1));
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxNether.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.ENTROPY, 1).add(Aspect.VOID, 1));
 		}
 		if (GrowthCraftBees.beeBoxBamboo != null)
 		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBamboo.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBamboo.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
 		}
 		if (GrowthCraftBees.beeBoxThaumcraft != null)
 		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxThaumcraft.asStack(), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxThaumcraft.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
 		}
-
-		final AspectList[] common = new AspectList[]
+		if (GrowthCraftBees.beeBoxBiomesOPlenty != null)
 		{
-			new AspectList(),
-			new AspectList().add(Aspect.HEAL, 1),
-			new AspectList().add(Aspect.HEAL, 2),
-			new AspectList().add(Aspect.HEAL, 1),
-			new AspectList().add(Aspect.HEAL, 2),
-			new AspectList().add(Aspect.HEAL, 1).add(Aspect.POISON, 1),
-			new AspectList().add(Aspect.POISON, 1)
-		};
-
-		for (int i = 0; i < common.length; ++i)
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBiomesOPlenty.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+		}
+		if (GrowthCraftBees.beeBoxBotania != null)
 		{
-			final AspectList list = common[i];
-			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftBees.booze.honeyMead.asStack(1, i), list.copy());
-			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftBees.booze.honeyMeadBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
-			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftBees.booze.honeyMeadFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBotania.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
+		}
+		if (GrowthCraftBees.beeBoxesForestry != null)
+		{
+			for (BlockTypeDefinition<BlockBeeBox> bdef : GrowthCraftBees.beeBoxesForestry)
+			{
+				if (bdef != null)
+				{
+					ThaumcraftApi.registerObjectTag(bdef.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+				}
+			}
+		}
+		if (GrowthCraftBees.beeBoxesForestryFireproof != null)
+		{
+			for (BlockTypeDefinition<BlockBeeBox> bdef : GrowthCraftBees.beeBoxesForestryFireproof)
+			{
+				if (bdef != null)
+				{
+					ThaumcraftApi.registerObjectTag(bdef.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+				}
+			}
 		}
 	}
 }

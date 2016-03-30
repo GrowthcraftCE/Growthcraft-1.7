@@ -9,7 +9,7 @@ import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.hops.client.renderer.RenderHops;
 import growthcraft.hops.GrowthCraftHops;
 
@@ -64,6 +64,12 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 		this.setCreativeTab(null);
 	}
 
+	public boolean isMature(IBlockAccess world, int x, int y, int z)
+	{
+		final int meta = world.getBlockMetadata(x, y, z);
+		return meta >= HopsStage.FRUIT;
+	}
+
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
 	{
 		return (float)meta / (float)HopsStage.FRUIT;
@@ -73,13 +79,13 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	{
 		final int previousMetadata = meta;
 		++meta;
-		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.SEND_TO_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.SYNC);
 		AppleCore.announceGrowthTick(this, world, x, y, z, previousMetadata);
 	}
 
 	public void spreadLeaves(World world, int x, int y, int z)
 	{
-		world.setBlock(x, y + 1, z, this, HopsStage.SMALL, BlockFlags.UPDATE_CLIENT);
+		world.setBlock(x, y + 1, z, this, HopsStage.SMALL, BlockFlags.UPDATE_AND_SYNC);
 	}
 
 	public boolean canSpreadLeaves(World world, int x, int y, int z)
@@ -95,7 +101,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	{
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock.getBlock());
+			world.setBlock(x, y, z, GrowthCraftCore.blocks.ropeBlock.getBlock());
 		}
 		else
 		{
@@ -238,6 +244,11 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 		return f;
 	}
 
+	public void removeFruit(World world, int x, int y, int z)
+	{
+		world.setBlockMetadataWithNotify(x, y, z, HopsStage.BIG, BlockFlags.UPDATE_AND_SYNC);
+	}
+
 	/************
 	 * TRIGGERS
 	 ************/
@@ -248,8 +259,8 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 		{
 			if (!world.isRemote)
 			{
-				world.setBlockMetadataWithNotify(x, y, z, HopsStage.BIG, BlockFlags.UPDATE_CLIENT);
-				this.dropBlockAsItem(world, x, y, z, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
+				removeFruit(world, x, y, z);
+				dropBlockAsItem(world, x, y, z, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
 			}
 			return true;
 		}
@@ -341,7 +352,7 @@ public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDat
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		ret.add(GrowthCraftCore.rope.asStack());
+		ret.add(GrowthCraftCore.items.rope.asStack());
 		if (world.getBlockMetadata(x, y, z) >= HopsStage.BIG)
 		{
 			ret.add(GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));

@@ -23,7 +23,9 @@
  */
 package growthcraft.api.core.log;
 
+import javax.annotation.Nonnull;
+
 public interface ILoggable
 {
-	void setLogger(ILogger l);
+	void setLogger(@Nonnull ILogger l);
 }

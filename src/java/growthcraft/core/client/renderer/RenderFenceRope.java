@@ -14,12 +14,24 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderFenceRope implements ISimpleBlockRenderingHandler
 {
-	public static int id = RenderingRegistry.getNextAvailableRenderId();
+	public static final int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+
+	@Override
+	public int getRenderId()
+	{
+		return RENDER_ID;
+	}
+
+	@Override
+	public boolean shouldRender3DInInventory(int modelID)
+	{
+		return true;
+	}
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
-		if (modelID == id)
+		if (modelID == RENDER_ID)
 		{
 			final BlockFenceRope fenceRope = (BlockFenceRope)block;
 			final Tessellator tes = Tessellator.instance;
@@ -139,7 +151,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
-		if (modelId == id)
+		if (modelId == RENDER_ID)
 		{
 			final double d = 0.0625D;
 			renderer.setRenderBounds(6*d, 0.0D, 6*d, 10*d, 1.0D, 10*d);
@@ -305,17 +317,5 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler
 			}
 		}
 		return true;
-	}
-
-	@Override
-	public boolean shouldRender3DInInventory(int modelID)
-	{
-		return true;
-	}
-
-	@Override
-	public int getRenderId()
-	{
-		return id;
 	}
 }

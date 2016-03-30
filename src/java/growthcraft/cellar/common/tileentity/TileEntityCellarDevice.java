@@ -1,216 +1,43 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015, 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.cellar.common.tileentity;
 
-import java.io.IOException;
-
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
 import growthcraft.core.common.tileentity.IGuiNetworkSync;
-import growthcraft.core.common.tileentity.GrcBaseInventoryTile;
-import growthcraft.core.util.StreamUtils;
-
-import io.netty.buffer.ByteBuf;
 
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 
-public abstract class TileEntityCellarDevice extends GrcBaseInventoryTile implements IFluidHandler, IGuiNetworkSync
+public abstract class TileEntityCellarDevice extends GrcTileEntityDeviceBase implements IGuiNetworkSync
 {
-	private CellarTank[] tanks;
-
-	public TileEntityCellarDevice()
+	@Override
+	public void receiveGUINetworkData(int id, int v)
 	{
-		super();
-
-		this.tanks = createTanks();
-	}
-
-	protected abstract CellarTank[] createTanks();
-	public abstract void updateCellarDevice();
-	public abstract void sendGUINetworkData(Container container, ICrafting icrafting);
-	public abstract void receiveGUINetworkData(int id, int value);
-
-	// Call this when you modify a fluid tank outside of its usual methods
-	protected void markForFluidUpdate()
-	{
-		//
 	}
 
 	@Override
-	public void updateEntity()
+	public void sendGUINetworkData(Container container, ICrafting iCrafting)
 	{
-		super.updateEntity();
-
-		if (!this.worldObj.isRemote)
-		{
-			updateCellarDevice();
-		}
-	}
-
-	protected void readTanksFromNBT(NBTTagCompound nbt)
-	{
-		for (int i = 0; i < tanks.length; i++)
-		{
-			tanks[i].setFluid(null);
-			if (nbt.hasKey("Tank" + i))
-			{
-				tanks[i].readFromNBT(nbt.getCompoundTag("Tank" + i));
-			}
-		}
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		super.readFromNBT(nbt);
-		readTanksFromNBT(nbt);
-	}
-
-	protected void writeTanksToNBT(NBTTagCompound nbt)
-	{
-		for (int i = 0; i < tanks.length; i++)
-		{
-			final NBTTagCompound tag = new NBTTagCompound();
-			tanks[i].writeToNBT(tag);
-			nbt.setTag("Tank" + i, tag);
-		}
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
-		super.writeToNBT(nbt);
-		// TANKS
-		writeTanksToNBT(nbt);
-	}
-
-	protected void readTanksFromStream(ByteBuf stream)
-	{
-		for (int i = 0; i < tanks.length; i++)
-		{
-			StreamUtils.readFluidTank(stream, tanks[i]);
-		}
-	}
-
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
-	public boolean readFromStream_FluidTanks(ByteBuf stream) throws IOException
-	{
-		readTanksFromStream(stream);
-		return true;
-	}
-
-	protected void writeTanksToStream(ByteBuf stream)
-	{
-		for (int i = 0; i < tanks.length; i++)
-		{
-			StreamUtils.writeFluidTank(stream, tanks[i]);
-		}
-	}
-
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public void writeToStream_FluidTanks(ByteBuf stream) throws IOException
-	{
-		writeTanksToStream(stream);
-	}
-
-	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid)
-	{
-		return true;
-	}
-
-	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid)
-	{
-		return true;
-	}
-
-	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from)
-	{
-		final FluidTankInfo[] tankInfos = new FluidTankInfo[tanks.length];
-		for (int i = 0; i < tanks.length; ++i)
-		{
-			tankInfos[i] = tanks[i].getInfo();
-		}
-		return tankInfos;
-	}
-
-	public int getFluidAmountScaled(int scalar, int slot)
-	{
-		final int cap = tanks[slot].getCapacity();
-		if (cap <= 0) return 0;
-		return this.getFluidAmount(slot) * scalar / cap;
-	}
-
-	public float getFluidAmountRate(int slot)
-	{
-		final int cap = tanks[slot].getCapacity();
-		if (cap <= 0) return 0;
-		return (float)this.getFluidAmount(slot) / (float)cap;
-	}
-
-	public boolean isFluidTankFilled(int slot)
-	{
-		return this.getFluidAmount(slot) > 0;
-	}
-
-	public boolean isFluidTankFull(int slot)
-	{
-		return this.getFluidAmount(slot) >= tanks[slot].getCapacity();
-	}
-
-	public boolean isFluidTankEmpty(int slot)
-	{
-		return this.getFluidAmount(slot) <= 0;
-	}
-
-	public int getFluidAmount(int slot)
-	{
-		return tanks[slot].getFluidAmount();
-	}
-
-	public CellarTank getFluidTank(int slot)
-	{
-		return tanks[slot];
-	}
-
-	public FluidStack getFluidStack(int slot)
-	{
-		return tanks[slot].getFluid();
-	}
-
-	public void drainFluidTank(int slot, int amount, boolean doDrain)
-	{
-		tanks[slot].drain(amount, doDrain);
-	}
-
-	public void fillFluidTank(int slot, FluidStack fluid, boolean doFill)
-	{
-		tanks[slot].fill(fluid, doFill);
-	}
-
-	public void setFluidStack(int slot, FluidStack stack)
-	{
-		tanks[slot].setFluid(stack);
-		markForFluidUpdate();
-	}
-
-	public Fluid getFluid(int slot)
-	{
-		final FluidStack stack = getFluidStack(slot);
-		if (stack == null) return null;
-		return stack.getFluid();
-	}
-
-	public void clearTank(int slot)
-	{
-		tanks[slot].setFluid(null);
-
-		markForFluidUpdate();
 	}
 }

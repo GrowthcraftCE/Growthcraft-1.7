@@ -1,28 +1,22 @@
 package growthcraft.bees.common.block;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.api.bees.BeesRegistry;
 import growthcraft.bees.client.renderer.RenderBeeBox;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
+import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.core.util.ItemUtils;
-import growthcraft.core.util.AuxFX;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -33,31 +27,25 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockBeeBox extends BlockContainer
+public class BlockBeeBox extends GrcBlockContainer
 {
 	@SideOnly(Side.CLIENT)
 	protected IIcon[] icons;
 
-	private final float honeyCombSpawnRate = GrowthCraftBees.getConfig().beeBoxHoneyCombSpawnRate;
-	private final float honeySpawnRate = GrowthCraftBees.getConfig().beeBoxHoneySpawnRate;
-	private final float beeSpawnRate = GrowthCraftBees.getConfig().beeBoxBeeSpawnRate;
-	private final float flowerSpawnRate = GrowthCraftBees.getConfig().beeBoxFlowerSpawnRate;
 	// bonus
-	private final float bonus = 2.50F;
-	private Random rand = new Random();
 	private int flammability;
 	private int fireSpreadSpeed;
 
 	public BlockBeeBox(Material material)
 	{
 		super(material);
-		this.isBlockContainer = true;
 		setBlockTextureName("grcbees:beebox");
 		setTickRandomly(true);
 		setHardness(2.5F);
 		setStepSound(soundTypeWood);
 		setBlockName("grc.BeeBox.Minecraft");
 		setCreativeTab(GrowthCraftBees.tab);
+		setTileEntityType(TileEntityBeeBox.class);
 	}
 
 	public BlockBeeBox()
@@ -90,6 +78,7 @@ public class BlockBeeBox extends BlockContainer
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
 	{
@@ -99,207 +88,12 @@ public class BlockBeeBox extends BlockContainer
 		}
 	}
 
-	// for lack of a better name, can this BeeBox do any work?
-	private boolean canDoWork(World world, int x, int y, int z)
-	{
-		if (world.canLightningStrikeAt(x, y + 1, z))
-			return false;
-		return world.getBlockLightValue(x, y + 1, z) >= 9;
-	}
-
-	private boolean isBlockFlower(Block block, int meta)
-	{
-		return BeesRegistry.instance().isBlockFlower(block, meta);
-	}
-
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	private void gatherFlowersInRadius(World world, int x, int y, int z, int checkSize, List<List> list)
-	{
-		final int i = x - ((checkSize - 1) / 2);
-		final int k = z - ((checkSize - 1) / 2);
-
-		for (int loopx = 0; loopx < checkSize; loopx++)
-		{
-			for (int loopz = 0; loopz < checkSize; loopz++)
-			{
-				final int fx = i + loopx;
-				final int fy = y;
-				final int fz = k + loopz;
-				if (!world.isAirBlock(fx, fy, fz))
-				{
-					final Block flower = world.getBlock(fx, y, fz);
-					final int fm = world.getBlockMetadata(fx, y, fz);
-					if (flower != null)
-					{
-						if (isBlockFlower(flower, fm))
-						{
-							list.add(Arrays.asList(flower, fm));
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/************
-	 * TICK
-	 ************/
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void updateTick(World world, int x, int y, int z, Random random)
+	public void updateTick(World world, int x, int y, int z, Random rand)
 	{
-		super.updateTick(world, x, y, z, random);
-
-		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
-
-		if (te == null)
-			return;
-
-		if (!canDoWork(world, x, y, z))
-			return;
-
-		if (!te.hasBees())
-			return;
-
-		float f = this.getGrowthRate(world, x, y, z);
-
-		if (te.countCombs() < 27)
-		{
-			if (te.hasMaxBees())
-			{
-				if (random.nextInt((int)(this.honeyCombSpawnRate / f) + 1) == 0)
-				{
-					te.spawnHoneyComb();
-				}
-			}
-			else
-			{
-				if (random.nextInt(5) == 0)
-				{
-					if (random.nextInt((int)(this.beeSpawnRate / f) + 1) == 0)
-					{
-						te.spawnBee();
-					}
-				}
-				else
-				{
-					if (random.nextInt((int)(this.honeyCombSpawnRate / f) + 1) == 0)
-					{
-						te.spawnHoneyComb();
-					}
-				}
-			}
-		}
-		else
-		{
-			if (random.nextInt((int)(this.honeySpawnRate / f) + 1) == 0)
-			{
-				if (te.hasMaxBees())
-				{
-					te.fillHoneyComb();
-				}
-				else
-				{
-					if (random.nextInt(5) == 0)
-					{
-						te.spawnBee();
-					}
-					else
-					{
-						te.fillHoneyComb();
-					}
-				}
-			}
-		}
-
-		f = 7.48F / (2.0F - (0.015625F * te.countBees()));
-		if (te.hasBonus())
-		{
-			f *= this.bonus;
-		}
-
-		if (random.nextInt((int)(this.flowerSpawnRate / f) + 1) == 0)
-		{
-			final int checkSize = 5;
-			final List<List> list = te.flowerList;
-
-			list.clear();
-			gatherFlowersInRadius(world, x, y, z, checkSize, list);
-
-			if (list.size() > 0)
-			{
-				final int i = x - ((checkSize - 1) / 2);
-				final int k = z - ((checkSize - 1) / 2);
-				final int random_x = i + random.nextInt(checkSize);
-				final int random_z = k + random.nextInt(checkSize);
-				final List random_list = list.get(random.nextInt(list.size()));
-				final Block block = (Block)random_list.get(0);
-				if (block != null)
-				{
-					if (block.canPlaceBlockAt(world, random_x, y, random_z))
-					{
-						world.setBlock(random_x, y, random_z, (Block)random_list.get(0), (Integer)random_list.get(1), 3);
-					}
-				}
-			}
-		}
-	}
-
-	private float getGrowthRate(World world, int x, int y, int z)
-	{
-		final int checkSize = 5;
-		final int i = x - ((checkSize - 1) / 2);
-		final int k = z - ((checkSize - 1) / 2);
-		float f = 1.0F;
-
-		for (int loopx = 0; loopx < checkSize; loopx++)
-		{
-			for (int loopz = 0; loopz < checkSize; loopz++)
-			{
-				final Block flower = world.getBlock(i + loopx, y, k + loopz);
-				final int fm = world.getBlockMetadata(i + loopx, y, k + loopz);
-				final Block soil = world.getBlock(i + loopx, y - 1, k + loopz);
-				float f1 = 0.0F;
-
-				if (soil == Blocks.grass)
-				{
-					//f1 = 1.0F;
-					f1 = 0.36F;
-
-					if (isBlockFlower(flower, fm))
-					{
-						//f1 = 3.0F;
-						f1 = 1.08F;
-					}
-				}
-				else if (flower == Blocks.flower_pot && (world.getBlockMetadata(i + loopx, y, k + loopz) == 1 || world.getBlockMetadata(i + loopx, y, k + loopz) == 2))
-				{
-					//f1 = 2.0F;
-					f1 = 0.72F;
-				}
-
-				f1 /= 4.0F;
-
-				f += f1;
-			}
-		}
-
-		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
-
-		if (te != null)
-		{
-			final int bees = te.countBees();
-			final float div = 2.0F - (0.015625F * bees);
-
-			f /= div;
-
-			if (te.hasBonus())
-			{
-				f *= this.bonus;
-			}
-		}
-
-		return f;
+		super.updateTick(world, x, y, z, rand);
+		final TileEntityBeeBox te = getTileEntity(world, x, y, z);
+		if (te != null) te.updateBlockTick();
 	}
 
 	@Override
@@ -326,6 +120,7 @@ public class BlockBeeBox extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
+		if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
 		if (world.isRemote)
 		{
 			return true;
@@ -335,61 +130,10 @@ public class BlockBeeBox extends BlockContainer
 			final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 			if (te != null)
 			{
-				final ItemStack itemstack = player.inventory.getCurrentItem();
-
-				if (itemstack != null)
-				{
-					if (itemstack.getItem() == Items.flower_pot && te.isHoneyEnough())
-					{
-						ItemUtils.addStackToPlayer(GrowthCraftBees.honeyJar.asStack(), player, world, x, y, z, false);
-						ItemUtils.decreaseStackOnPlayer(itemstack, player);
-						te.decreaseHoney(6);
-						te.markDirty();
-						world.markBlockForUpdate(x, y, z);
-						return true;
-					}
-					else if (itemstack.getItem() == Items.dye)
-					{
-						int time = 0;
-						if (itemstack.getItemDamage() == 9)
-						{
-							time = 9600;
-						}
-						else if (itemstack.getItemDamage() == 13)
-						{
-							time = 4800;
-						}
-						if (time > 0)
-						{
-							te.setTime(time);
-							world.playAuxSFX(AuxFX.BONEMEAL, x, y, z, 0);
-							ItemUtils.decreaseStackOnPlayer(itemstack, player);
-							te.markDirty();
-							world.markBlockForUpdate(x, y, z);
-						}
-						return true;
-					}
-				}
 				player.openGui(GrowthCraftBees.instance, 0, world, x, y, z);
 				return true;
 			}
-
 			return false;
-		}
-	}
-
-	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float fx, float fy, float fz, int meta)
-	{
-		return super.onBlockPlaced(world, x, y, z, side, fx, fy, fz, meta);
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
-	{
-		if (stack.hasDisplayName())
-		{
-			((TileEntityBeeBox)world.getTileEntity(x, y, z)).setGuiDisplayName(stack.getDisplayName());
 		}
 	}
 
@@ -404,7 +148,7 @@ public class BlockBeeBox extends BlockContainer
 			{
 				final ItemStack stack = te.getStackInSlot(index);
 
-				ItemUtils.spawnBrokenItemStack(world, x, y, z, stack, rand);
+				ItemUtils.spawnBrokenItemStack(world, x, y, z, stack, world.rand);
 			}
 
 			world.func_147453_f(x, y, z, par5);
@@ -421,16 +165,6 @@ public class BlockBeeBox extends BlockContainer
 	{
 		return ForgeDirection.UP == side;
 	}
-
-	/************
-	 * STUFF
-	 ************/
-	//@Override
-	//@SideOnly(Side.CLIENT)
-	//public Item getItem(World world, int x, int y, int z)
-	//{
-	//	return GrowthCraftBees.beeBox.getItem();
-	//}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int par2)
@@ -491,8 +225,8 @@ public class BlockBeeBox extends BlockContainer
 		return MathHelper.clamp_int(meta, 0, icons.length / 4 - 1) * 4;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
 	{
 		final int meta = world.getBlockMetadata(x, y, z);
@@ -508,7 +242,7 @@ public class BlockBeeBox extends BlockContainer
 		else
 		{
 			final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
-			if (te != null && te.isHoneyEnough())
+			if (te != null && te.isHoneyEnough(6))
 			{
 				return icons[offset + 3];
 			}
@@ -516,8 +250,8 @@ public class BlockBeeBox extends BlockContainer
 		return icons[offset + 2];
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
 		final int offset = calculateIconOffset(meta);
@@ -530,6 +264,12 @@ public class BlockBeeBox extends BlockContainer
 			return icons[offset + 1];
 		}
 		return icons[offset + 2];
+	}
+
+	@SideOnly(Side.CLIENT)
+	public IIcon[] getIcons()
+	{
+		return icons;
 	}
 
 	/************
@@ -566,7 +306,7 @@ public class BlockBeeBox extends BlockContainer
 	@Override
 	public void setBlockBoundsForItemRender()
 	{
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	@Override
@@ -575,23 +315,23 @@ public class BlockBeeBox extends BlockContainer
 	{
 		final float f = 0.0625F;
 		// LEGS
-		this.setBlockBounds(3*f, 0.0F, 3*f, 5*f, 3*f, 5*f);
+		setBlockBounds(3*f, 0.0F, 3*f, 5*f, 3*f, 5*f);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
-		this.setBlockBounds(11*f, 0.0F, 3*f, 13*f, 3*f, 5*f);
+		setBlockBounds(11*f, 0.0F, 3*f, 13*f, 3*f, 5*f);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
-		this.setBlockBounds(3*f, 0.0F, 11*f, 5*f, 3*f, 13*f);
+		setBlockBounds(3*f, 0.0F, 11*f, 5*f, 3*f, 13*f);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
-		this.setBlockBounds(11*f, 0.0F, 11*f, 13*f, 3*f, 13*f);
+		setBlockBounds(11*f, 0.0F, 11*f, 13*f, 3*f, 13*f);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 		// BODY
-		this.setBlockBounds(1*f, 3*f, 1*f, 15*f, 10*f, 15*f);
+		setBlockBounds(1*f, 3*f, 1*f, 15*f, 10*f, 15*f);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 		// ROOF
-		this.setBlockBounds(0.0F, 10*f, 0.0F, 1.0F, 13*f, 1.0F);
+		setBlockBounds(0.0F, 10*f, 0.0F, 1.0F, 13*f, 1.0F);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
-		this.setBlockBounds(2*f, 13*f, 2*f, 14*f, 1.0F, 14*f);
+		setBlockBounds(2*f, 13*f, 2*f, 14*f, 1.0F, 14*f);
 		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
-		this.setBlockBoundsForItemRender();
+		setBlockBoundsForItemRender();
 	}
 
 	/************
@@ -606,7 +346,7 @@ public class BlockBeeBox extends BlockContainer
 	@Override
 	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
 	{
-		final TileEntityBeeBox te = (TileEntityBeeBox) world.getTileEntity(x, y, z);
+		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
 		return te.countHoney() * 15 / 27;
 	}
 }

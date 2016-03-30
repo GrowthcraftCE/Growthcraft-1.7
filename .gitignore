@@ -31,10 +31,10 @@ version.properties
 /.settings/
 /eclipse/
 /debug/
-*.lock
 /.metadata/
 /config/
 /logs/
 options.txt
 /saves/
 /out
+/tmp

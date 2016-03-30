@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
 
 import io.netty.buffer.ByteBuf;
 
-import growthcraft.core.common.tileentity.GrcBaseTile;
+import growthcraft.api.core.stream.IStreamable;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,11 +43,11 @@ public class EventFunction
 		this.method = m;
 	}
 
-	public void writeToStream(GrcBaseTile tile, ByteBuf data)
+	public boolean writeToStream(IStreamable tile, ByteBuf data)
 	{
 		try
 		{
-			this.method.invoke(tile, data);
+			return (Boolean)this.method.invoke(tile, data);
 		}
 		catch (IllegalAccessException e)
 		{
@@ -64,7 +64,7 @@ public class EventFunction
 	}
 
 	@SideOnly (Side.CLIENT)
-	public boolean readFromStream(GrcBaseTile tile, ByteBuf data)
+	public boolean readFromStream(IStreamable tile, ByteBuf data)
 	{
 		try
 		{

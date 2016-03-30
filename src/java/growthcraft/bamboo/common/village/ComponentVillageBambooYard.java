@@ -147,14 +147,14 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 
 		// okay folks, no BIG D jokes here
-		map.put('D', new BlockEntry(GrowthCraftBamboo.bambooDoor.getBlock(), this.getMetadataWithOffset(GrowthCraftBamboo.bambooDoor.getBlock(), 2)));
+		map.put('D', new BlockEntry(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), this.getMetadataWithOffset(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), 2)));
 		// top of the door brought forward
-		map.put('d', new BlockEntry(GrowthCraftBamboo.bambooDoor.getBlock(), this.getMetadataWithOffset(GrowthCraftBamboo.bambooDoor.getBlock(), 8 | 1)));
-		map.put('p', new BlockEntry(GrowthCraftBamboo.bambooBlock.getBlock(), 0));
-		map.put('s', new BlockEntry(GrowthCraftBamboo.bambooSingleSlab.getBlock(), 0));
+		map.put('d', new BlockEntry(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), this.getMetadataWithOffset(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), 8 | 1)));
+		map.put('p', new BlockEntry(GrowthCraftBamboo.blocks.bambooBlock.getBlock(), 0));
+		map.put('s', new BlockEntry(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock(), 0));
 		map.put('t', new BlockEntry(Blocks.torch, 0));
 		map.put('~', new BlockEntry(Blocks.water, 0));
-		map.put('W', new BlockEntry(GrowthCraftBamboo.bambooWall.getBlock(), 0));
+		map.put('W', new BlockEntry(GrowthCraftBamboo.blocks.bambooWall.getBlock(), 0));
 
 		SchemaToVillage.drawSchema(this, world, random, box, bambooYardSchema, map);
 

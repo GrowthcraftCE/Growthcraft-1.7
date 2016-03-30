@@ -1,6 +1,5 @@
 package growthcraft.grapes.common.item;
 
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.BlockCheck;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.common.block.BlockGrapeVine0;
@@ -24,7 +23,7 @@ public class ItemGrapeSeeds extends Item implements IPlantable
 	{
 		super();
 		this.setUnlocalizedName("grc.grapeSeeds");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftGrapes.creativeTab);
 	}
 
 	/************
@@ -39,7 +38,7 @@ public class ItemGrapeSeeds extends Item implements IPlantable
 		}
 		else if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack))
 		{
-			final BlockGrapeVine0 block = GrowthCraftGrapes.grapeVine0.getBlock();
+			final BlockGrapeVine0 block = GrowthCraftGrapes.blocks.grapeVine0.getBlock();
 			if (BlockCheck.canSustainPlant(world, x, y, z, ForgeDirection.UP, block) && world.isAirBlock(x, y + 1, z))
 			{
 				world.setBlock(x, y + 1, z, block);
@@ -76,7 +75,7 @@ public class ItemGrapeSeeds extends Item implements IPlantable
 	@Override
 	public Block getPlant(IBlockAccess world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapeVine0.getBlock();
+		return GrowthCraftGrapes.blocks.grapeVine0.getBlock();
 	}
 
 	@Override

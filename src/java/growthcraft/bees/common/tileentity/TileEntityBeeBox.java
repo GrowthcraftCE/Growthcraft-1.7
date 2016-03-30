@@ -1,19 +1,24 @@
 package growthcraft.bees.common.tileentity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import growthcraft.api.bees.BeesRegistry;
+import growthcraft.api.core.util.AuxFX;
+import growthcraft.api.core.item.EnumDye;
 import growthcraft.bees.common.inventory.ContainerBeeBox;
+import growthcraft.bees.common.tileentity.device.DeviceBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.tileentity.GrcBaseInventoryTile;
+import growthcraft.core.common.tileentity.GrcTileEntityInventoryBase;
+import growthcraft.core.common.tileentity.IItemHandler;
 import growthcraft.core.util.ItemUtils;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityBeeBox extends GrcBaseInventoryTile
+public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IItemHandler
 {
 	public static enum HoneyCombExpect
 	{
@@ -22,15 +27,18 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 		FILLED;
 	}
 
-	private static final int beeBoxVersion = 2;
+	private static final int beeBoxVersion = 3;
 	private static final int[] beeSlotIds = new int[] {0};
 	private static final int[] honeyCombSlotIds = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
+	private DeviceBeeBox beeBox = new DeviceBeeBox(this);
 
-	// Temp variable used by BlockBeeBox for storing flower lists
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public ArrayList<List> flowerList = new ArrayList<List>();
-
-	private int time;
+	@Override
+	public void onInventoryChanged(IInventory inv, int index)
+	{
+		super.onInventoryChanged(inv, index);
+		if (index > 0)
+			markForBlockUpdate();
+	}
 
 	@Override
 	public String getDefaultInventoryName()
@@ -44,31 +52,38 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 		return new GrcInternalInventory(this, 28);
 	}
 
-	/************
-	 * UPDATE
-	 ************/
+	@Override
 	public void updateEntity()
 	{
 		super.updateEntity();
+		if (!worldObj.isRemote) beeBox.update();
+	}
 
-		if (!this.worldObj.isRemote)
+	public void updateBlockTick()
+	{
+		if (worldObj.isRemote)
 		{
-			--this.time;
-			if (this.time <= 0)
-			{
-				this.time = 0;
-			}
+			beeBox.updateClientTick();
+		}
+		else
+		{
+			beeBox.updateTick();
 		}
 	}
 
 	public boolean hasBonus()
 	{
-		return this.time > 0;
+		return beeBox.hasBonus();
+	}
+
+	public float getGrowthRate()
+	{
+		return beeBox.getGrowthRate();
 	}
 
 	public void setTime(int v)
 	{
-		this.time = v;
+		beeBox.setBonusTime(v);
 	}
 
 	public boolean slotHasHoneyComb(int index, HoneyCombExpect expects)
@@ -147,24 +162,9 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 		return countBees() >= 64;
 	}
 
-	public boolean isHoneyEnough()
+	public boolean isHoneyEnough(int size)
 	{
-		return countHoney() >= 6;
-	}
-
-	public void decreaseHoney(int count)
-	{
-		for (int i = 1; i < getSizeInventory(); ++i)
-		{
-			if (count <= 0) break;
-			if (slotHasHoneyComb(i, HoneyCombExpect.FILLED))
-			{
-				final ItemStack stack = getStackInSlot(i);
-				final ItemStack result = BeesRegistry.instance().getEmptyHoneyComb(stack);
-				setInventorySlotContents(i, result != null ? result.copy() : null);
-				count--;
-			}
-		}
+		return countHoney() >= size;
 	}
 
 	public ItemStack getBeeStack()
@@ -182,7 +182,7 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 		final ItemStack beestack = getBeeStack();
 		if (beestack == null)
 		{
-			setBeeStack(GrowthCraftBees.bee.asStack());
+			setBeeStack(GrowthCraftBees.items.bee.asStack());
 		}
 		else
 		{
@@ -198,7 +198,7 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 			final ItemStack stack = getStackInSlot(i);
 			if (stack == null)
 			{
-				setInventorySlotContents(i, GrowthCraftBees.honeyCombEmpty.asStack());
+				setInventorySlotContents(i, GrowthCraftBees.items.honeyCombEmpty.asStack());
 				n--;
 			}
 		}
@@ -209,19 +209,55 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 		spawnHoneyCombs(1);
 	}
 
-	public void fillHoneyCombs(int n)
+	public boolean decreaseHoney(int count)
 	{
+		boolean shouldMark = false;
 		for (int i = 1; i < getSizeInventory(); ++i)
 		{
-			if (n <= 0) break;
+			if (count <= 0) break;
+			if (slotHasHoneyComb(i, HoneyCombExpect.FILLED))
+			{
+				final ItemStack stack = getStackInSlot(i);
+				final ItemStack result = BeesRegistry.instance().getEmptyHoneyComb(stack);
+				setInventorySlotContents(i, result != null ? result.copy() : null);
+				count--;
+				shouldMark = true;
+			}
+		}
+		if (shouldMark)
+		{
+			markDirty();
+			markForBlockUpdate();
+			return true;
+		}
+		return false;
+	}
+
+	public boolean fillHoneyCombs(int count)
+	{
+		boolean shouldMark = false;
+		for (int i = 1; i < getSizeInventory(); ++i)
+		{
+			if (count <= 0) break;
 			final ItemStack stack = getStackInSlot(i);
 			if (stack != null && slotHasEmptyComb(i))
 			{
-				final ItemStack resultStack = BeesRegistry.instance().getFilledHoneyComb(stack).copy();
-				setInventorySlotContents(i, resultStack);
-				n--;
+				final ItemStack resultStack = BeesRegistry.instance().getFilledHoneyComb(stack);
+				if (resultStack != null)
+				{
+					setInventorySlotContents(i, resultStack.copy());
+				}
+				count--;
+				shouldMark = true;
 			}
 		}
+		if (shouldMark)
+		{
+			markDirty();
+			markForBlockUpdate();
+			return true;
+		}
+		return false;
 	}
 
 	public void fillHoneyComb()
@@ -236,30 +272,34 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		this.time = nbt.getShort("time");
+		beeBox.readFromNBT(nbt, "bee_box");
+		if (nbt.hasKey("time"))
+		{
+			beeBox.setBonusTime(nbt.getShort("time"));
+		}
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setShort("time", (short)this.time);
 		nbt.setInteger("BeeBox.version", beeBoxVersion);
+		beeBox.writeToNBT(nbt, "bee_box");
 	}
 
 	/************
 	 * HOPPER
 	 ************/
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack itemstack)
+	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
 		if (index == ContainerBeeBox.SlotId.BEE)
 		{
-			return BeesRegistry.instance().isItemBee(itemstack);
+			return BeesRegistry.instance().isItemBee(stack);
 		}
 		else
 		{
-			return BeesRegistry.instance().isItemHoneyComb(itemstack);
+			return BeesRegistry.instance().isItemHoneyComb(stack);
 		}
 	}
 
@@ -279,5 +319,79 @@ public class TileEntityBeeBox extends GrcBaseInventoryTile
 	public boolean canExtractItem(int index, ItemStack stack, int side)
 	{
 		return true;
+	}
+
+	@Override
+	public boolean tryPlaceItem(EntityPlayer player, ItemStack stack)
+	{
+		if (stack != null)
+		{
+			final Item item = stack.getItem();
+			if (item == Items.flower_pot)
+			{
+				if (isHoneyEnough(6))
+				{
+					ItemUtils.addStackToPlayer(GrowthCraftBees.items.honeyJar.asStack(), player, worldObj, xCoord, yCoord, zCoord, false);
+					ItemUtils.consumeStackOnPlayer(stack, player);
+					decreaseHoney(6);
+					return true;
+				}
+			}
+			else if (item == Items.dye)
+			{
+				int time = 0;
+				if (stack.getItemDamage() == EnumDye.PINK.meta)
+				{
+					time = 9600;
+				}
+				else if (stack.getItemDamage() == EnumDye.MAGENTA.meta)
+				{
+					time = 4800;
+				}
+				if (time > 0)
+				{
+					setTime(time);
+					worldObj.playAuxSFX(AuxFX.BONEMEAL, xCoord, yCoord, zCoord, 0);
+					ItemUtils.consumeStackOnPlayer(stack, player);
+					markForBlockUpdate();
+				}
+				return true;
+			}
+			else if (item == Items.glass_bottle)
+			{
+				if (GrowthCraftBees.fluids.honey != null && isHoneyEnough(2))
+				{
+					final ItemStack result = GrowthCraftBees.fluids.honey.asBottleItemStack();
+					if (result != null)
+					{
+						ItemUtils.addStackToPlayer(result, player, worldObj, xCoord, yCoord, zCoord, false);
+						ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
+						decreaseHoney(2);
+						return true;
+					}
+				}
+			}
+			else if (item == Items.bucket)
+			{
+				if (GrowthCraftBees.fluids.honey != null && isHoneyEnough(6))
+				{
+					final ItemStack result = GrowthCraftBees.fluids.honey.asBucketItemStack();
+					if (result != null)
+					{
+						ItemUtils.addStackToPlayer(result, player, worldObj, xCoord, yCoord, zCoord, false);
+						ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
+						decreaseHoney(6);
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	{
+		return false;
 	}
 }

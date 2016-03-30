@@ -1,7 +1,6 @@
 package growthcraft.bamboo.common.item;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,8 +18,8 @@ public class ItemBambooDoor extends Item
 	{
 		super();
 		this.maxStackSize = 1;
-		this.setCreativeTab(GrowthCraftCore.tab);
-		this.setUnlocalizedName("grc.bambooDoor");
+		setUnlocalizedName("grc.bambooDoor");
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
 	/************
@@ -35,7 +34,7 @@ public class ItemBambooDoor extends Item
 		else
 		{
 			++y;
-			final Block block = GrowthCraftBamboo.bambooDoor.getBlock();
+			final Block block = GrowthCraftBamboo.blocks.bambooDoor.getBlock();
 
 			if (player.canPlayerEdit(x, y, z, side, stack) && player.canPlayerEdit(x, y + 1, z, side, stack))
 			{

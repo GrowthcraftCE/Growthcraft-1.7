@@ -3,7 +3,7 @@ package growthcraft.cellar.util;
 import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.core.util.ITagFormatter;
+import growthcraft.api.core.util.ITagFormatter;
 import growthcraft.core.util.TagFormatterItem;
 import growthcraft.core.util.UnitFormatter;
 
@@ -17,19 +17,19 @@ public class TagFormatterBrewKettle implements ITagFormatter
 	public List<String> format(List<String> list, NBTTagCompound tag)
 	{
 		list.add(EnumChatFormatting.GRAY +
-			GrcI18n.translate("grc.cellar.brewKettle.brewing_prefix") + " " +
+			GrcI18n.translate("grc.cellar.brew_kettle.brewing_prefix") + " " +
 			EnumChatFormatting.WHITE + UnitFormatter.booleanAsValue(tag.getBoolean("can_brew")));
 
 		list.add(EnumChatFormatting.GRAY +
 			GrcI18n.translate(
-				"grc.cellar.brewKettle.itemslot.item",
+				"grc.cellar.brew_kettle.itemslot.item",
 				TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_brew"))
 			)
 		);
 
 		list.add(EnumChatFormatting.GRAY +
 			GrcI18n.translate(
-				"grc.cellar.brewKettle.itemslot.residue",
+				"grc.cellar.brew_kettle.itemslot.residue",
 				TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_residue"))
 			)
 		);

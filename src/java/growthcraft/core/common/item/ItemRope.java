@@ -1,11 +1,12 @@
 package growthcraft.core.common.item;
 
+import growthcraft.api.core.item.ItemKey;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.registry.FenceRopeRegistry.FenceRopeEntry;
+import growthcraft.core.registry.FenceRopeRegistry;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -18,8 +19,9 @@ public class ItemRope extends Item
 	public ItemRope()
 	{
 		super();
-		this.setUnlocalizedName("grc.rope");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		setUnlocalizedName("grc.rope");
+		setCreativeTab(GrowthCraftCore.creativeTab);
+		setTextureName("grccore:rope");
 	}
 
 	/************
@@ -29,56 +31,64 @@ public class ItemRope extends Item
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
 	{
 		final Block block = world.getBlock(x, y, z);
+		final int blockMeta = world.getBlockMetadata(x, y, z);
 
-		if (Blocks.snow_layer == block && (world.getBlockMetadata(x, y, z) & 7) < 1)
+		if (Blocks.snow_layer == block && (blockMeta & 7) < 1)
 		{
 			dir = 1;
 		}
-		else if (Blocks.fence == block)
+		else
 		{
-			if (!player.canPlayerEdit(x, y, z, dir, stack))
+			final FenceRopeEntry entry = FenceRopeRegistry.instance().getEntry(block, blockMeta);
+			if (entry != null)
 			{
-				return false;
-			}
-			else if (stack.stackSize == 0)
-			{
-				return false;
-			}
+				if (!player.canPlayerEdit(x, y, z, dir, stack))
+				{
+					return false;
+				}
+				else if (stack.stackSize == 0)
+				{
+					return false;
+				}
 
-			world.setBlock(x, y, z, GrowthCraftCore.fenceRope.getBlock());
-			--stack.stackSize;
-			return true;
-		}
-		else if (block != Blocks.vine && block != Blocks.tallgrass && block != Blocks.deadbush)
-		{
-			if (dir == 0)
-			{
-				--y;
-			}
+				int targetMeta = entry.getFenceRopeBlockMetadata();
+				if (targetMeta == ItemKey.WILDCARD_VALUE) targetMeta = 0;
 
-			if (dir == 1)
-			{
-				++y;
+				world.setBlock(x, y, z, entry.getFenceRopeBlock(), targetMeta, BlockFlags.UPDATE_AND_SYNC);
+				--stack.stackSize;
+				return true;
 			}
-
-			if (dir == 2)
+			else if (block != Blocks.vine && block != Blocks.tallgrass && block != Blocks.deadbush)
 			{
-				--z;
-			}
+				if (dir == 0)
+				{
+					--y;
+				}
 
-			if (dir == 3)
-			{
-				++z;
-			}
+				if (dir == 1)
+				{
+					++y;
+				}
 
-			if (dir == 4)
-			{
-				--x;
-			}
+				if (dir == 2)
+				{
+					--z;
+				}
 
-			if (dir == 5)
-			{
-				++x;
+				if (dir == 3)
+				{
+					++z;
+				}
+
+				if (dir == 4)
+				{
+					--x;
+				}
+
+				if (dir == 5)
+				{
+					++x;
+				}
 			}
 		}
 
@@ -92,7 +102,7 @@ public class ItemRope extends Item
 		}
 		else
 		{
-			final Block block2 = GrowthCraftCore.ropeBlock.getBlock();
+			final Block block2 = GrowthCraftCore.blocks.ropeBlock.getBlock();
 			if (world.canPlaceEntityOnSide(block2, x, y, z, false, dir, (Entity)null, stack))
 			{
 				final int meta = block2.onBlockPlaced(world, x, y, z, dir, par8, par9, par10, 0);
@@ -112,15 +122,5 @@ public class ItemRope extends Item
 
 			return true;
 		}
-	}
-
-	/************
-	 * TEXTURES
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
-	{
-		this.itemIcon = reg.registerIcon("grccore:rope");
 	}
 }

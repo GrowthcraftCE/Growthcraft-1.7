@@ -2,11 +2,12 @@ package growthcraft.rice;
 
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.api.core.module.ModuleContainer;
-import growthcraft.core.event.PlayerInteractEventPaddy;
+import growthcraft.core.eventhandler.PlayerInteractEventPaddy;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -18,7 +19,7 @@ import growthcraft.rice.common.item.ItemRiceBall;
 import growthcraft.rice.common.village.ComponentVillageRiceField;
 import growthcraft.rice.common.village.VillageHandlerRice;
 import growthcraft.rice.event.BonemealEventRice;
-import growthcraft.rice.init.GrcRiceBooze;
+import growthcraft.rice.init.GrcRiceFluids;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -52,12 +53,12 @@ public class GrowthCraftRice
 	@Instance(MOD_ID)
 	public static GrowthCraftRice instance;
 
-	public static BlockDefinition riceBlock;
+	public static BlockTypeDefinition<BlockRice> riceBlock;
 	public static BlockDefinition paddyField;
 	public static ItemDefinition rice;
 	public static ItemDefinition riceBall;
 
-	public static GrcRiceBooze booze = new GrcRiceBooze();
+	public static GrcRiceFluids fluids = new GrcRiceFluids();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcRiceConfig config = new GrcRiceConfig();
@@ -74,15 +75,17 @@ public class GrowthCraftRice
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
 
+		modules.add(fluids);
+		if (config.enableForestryIntegration) modules.add(new growthcraft.rice.integration.ForestryModule());
+		if (config.enableMFRIntegration) modules.add(new growthcraft.rice.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
-		modules.add(booze);
 
 		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================
 		// INIT
 		//====================
-		riceBlock = new BlockDefinition(new BlockRice());
+		riceBlock = new BlockTypeDefinition<BlockRice>(new BlockRice());
 		paddyField = new BlockDefinition(new BlockPaddy());
 
 		rice     = new ItemDefinition(new ItemRice());
@@ -148,9 +151,9 @@ public class GrowthCraftRice
 	{
 		if (event.map.getTextureType() == 0)
 		{
-			for (int i = 0; i < booze.riceSakeBooze.length; ++i)
+			for (int i = 0; i < fluids.riceSakeBooze.length; ++i)
 			{
-				booze.riceSakeBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
+				fluids.riceSakeBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
 			}
 		}
 	}

@@ -6,7 +6,7 @@ import growthcraft.cellar.client.render.RenderFruitPress;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.CellarGuiType;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,7 +15,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -23,7 +22,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockFruitPress extends BlockCellarContainer implements ICellarFluidHandler
+public class BlockFruitPress extends BlockCellarContainer
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
@@ -41,7 +40,7 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 
 	private Block getPresserBlock()
 	{
-		return GrowthCraftCellar.fruitPresser.getBlock();
+		return GrowthCraftCellar.blocks.fruitPresser.getBlock();
 	}
 
 	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
@@ -51,8 +50,8 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 
 	public void doRotateBlock(World world, int x, int y, int z, ForgeDirection side)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) ^ 1, BlockFlags.SEND_TO_CLIENT);
-		world.setBlockMetadataWithNotify(x, y + 1, z, world.getBlockMetadata(x, y + 1, z) ^ 1, BlockFlags.SEND_TO_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) ^ 1, BlockFlags.SYNC);
+		world.setBlockMetadataWithNotify(x, y + 1, z, world.getBlockMetadata(x, y + 1, z) ^ 1, BlockFlags.SYNC);
 	}
 
 	@Override
@@ -93,31 +92,26 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 				meta = 4;
 			}
 
-			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
+		super.onBlockPlacedBy(world, x, y, z, entity, stack);
 		final int a = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (a == 0 || a == 2)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 0, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 0, BlockFlags.SYNC);
 		}
 		else if (a == 1 || a == 3)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SYNC);
 		}
 
-		world.setBlock(x, y + 1, z, getPresserBlock(), world.getBlockMetadata(x, y, z), BlockFlags.SEND_TO_CLIENT);
-
-		if (stack.hasDisplayName())
-		{
-			final TileEntityFruitPress te = getTileEntity(world, x, y, z);
-			te.setGuiDisplayName(stack.getDisplayName());
-		}
+		world.setBlock(x, y + 1, z, getPresserBlock(), world.getBlockMetadata(x, y, z), BlockFlags.SYNC);
 	}
 
 	@Override
@@ -189,22 +183,6 @@ public class BlockFruitPress extends BlockCellarContainer implements ICellarFlui
 		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) &&
 			super.canPlaceBlockAt(world, x, y, z) &&
 			super.canPlaceBlockAt(world, x, y + 1, z);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z)
-	{
-		return GrowthCraftCellar.fruitPress.getItem();
-	}
-
-	/************
-	 * DROPS
-	 ************/
-	@Override
-	public Item getItemDropped(int par1, Random random, int par3)
-	{
-		return GrowthCraftCellar.fruitPress.getItem();
 	}
 
 	@Override

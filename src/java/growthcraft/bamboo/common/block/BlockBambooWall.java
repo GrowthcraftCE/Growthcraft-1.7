@@ -4,7 +4,6 @@ import java.util.List;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.client.renderer.RenderBambooWall;
-import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,11 +30,11 @@ public class BlockBambooWall extends Block
 	{
 		super(Material.wood);
 		this.useNeighborBrightness = true;
-		this.setStepSound(soundTypeWood);
-		this.setResistance(5.0F / 3.0F);
-		this.setHardness(2.0F);
-		this.setCreativeTab(GrowthCraftCore.tab);
-		this.setBlockName("grc.bambooWall");
+		setStepSound(soundTypeWood);
+		setResistance(5.0F / 3.0F);
+		setHardness(2.0F);
+		setBlockName("grc.bambooWall");
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
 	/************
@@ -54,7 +53,7 @@ public class BlockBambooWall extends Block
 		final Block block = world.getBlock(x, y, z);
 
 		if (this == block ||
-			GrowthCraftBamboo.bambooStalk.getBlock() == block ||
+			GrowthCraftBamboo.blocks.bambooStalk.getBlock() == block ||
 			Blocks.glass_pane == block ||
 			block instanceof BlockFenceGate ||
 			block instanceof BlockFence ||

@@ -23,6 +23,9 @@
  */
 package growthcraft.api.cellar.brewing;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.log.ILoggable;
 
@@ -43,9 +46,9 @@ public interface IBrewingRegistry extends ILoggable
 	 * @param time        - The time needed for the item/block to be brewed.
 	 * @param residue     - The residue that will be produced
 	 */
-	void addBrewing(FluidStack sourceFluid, ItemStack raw, FluidStack resultFluid, int time, Residue residue);
+	void addBrewing(@Nonnull FluidStack sourceFluid, @Nonnull ItemStack raw, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue);
 
-	BrewingResult getBrewingResult(FluidStack fluidstack, ItemStack itemstack);
-	boolean isBrewingRecipe(FluidStack fluidstack, ItemStack itemstack);
+	@Nullable BrewingRecipe getBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack);
+	boolean isBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack);
 	boolean isItemBrewingIngredient(ItemStack itemstack);
 }

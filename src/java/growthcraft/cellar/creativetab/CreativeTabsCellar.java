@@ -6,21 +6,18 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class CreativeTabsCellar extends CreativeTabs
 {
-	private ItemStack icon;
-
-	public CreativeTabsCellar(String index)
+	public CreativeTabsCellar(String name)
 	{
-		super(index);
+		super(name);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem()
 	{
-		return GrowthCraftCellar.fermentBarrel.getItem();
+		return GrowthCraftCellar.blocks.fermentBarrel.getItem();
 	}
 }

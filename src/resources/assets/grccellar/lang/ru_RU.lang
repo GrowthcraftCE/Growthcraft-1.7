@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.tabGrCCellar=Growthcraft: Погреб
+itemGroup.creative_tab_grccellar=Growthcraft: Погреб
 
 # Blocks
 tile.grc.fruitPress.name=Плодовый пресс
@@ -42,28 +42,34 @@ item.grc.waterBag16.name=Water Bag
 container.grc.fruitPress=Плодовый пресс
 container.grc.brewKettle=Сусловарочный котёл
 container.grc.fermentBarrel=Бочка для брожения
-container.grc.fermentJar=Банка для брожения
+container.grc.CultureJar=Банка для брожения
 
 # Other
 grc.potion.tipsy=Опьянение
 grc.booze=Booze
 
 # Modifiers
-grc.booze.modifier.young=Young
-grc.booze.modifier.fermented=Fermented
-grc.booze.modifier.extended=Extended
-grc.booze.modifier.potent=Potent
-grc.booze.modifier.hyper_extended=Hyper Extended
-grc.booze.modifier.deadly=Deadly
-grc.booze.modifier.poisoned=Poisoned
-grc.booze.modifier.chilled=Chilled
-grc.booze.modifier.intoxicated=Intoxicated
+grc.fluids.tag.chilled=Chilled
+grc.fluids.tag.cider=grc.fluids.tag.cider
+grc.fluids.tag.deadly=Deadly
+grc.fluids.tag.extended=Extended
+grc.fluids.tag.fermented=Fermented
+grc.fluids.tag.fortified=grc.fluids.tag.fortified
+grc.fluids.tag.hopped=grc.fluids.tag.hopped
+grc.fluids.tag.hyper_extended=Hyper Extended
+grc.fluids.tag.intoxicated=Intoxicated
+grc.fluids.tag.magical=grc.fluids.tag.magical
+grc.fluids.tag.poisoned=Poisoned
+grc.fluids.tag.potent=Potent
+grc.fluids.tag.wine=grc.fluids.tag.wine
+grc.fluids.tag.young=Young
 
 # GUI
 gui.grc.empty=Пусто
 gui.grc.discard=Discard
 gui.grc.switch=Переключить
 gui.grc.cantferment=Нельзя начать брожение.
+gui.grccellar.ferment_barrel.progress_name=gui.grccellar.ferment_barrel.progress_name
 
 # Achievements
 achievement.craftBarrel=Добыча алкоголя
@@ -72,30 +78,32 @@ achievement.fermentBooze=Я мог сделать дрожжи.
 achievement.fermentBooze.desc=Сбродите алкогольный напиток.
 achievement.getDrunk=Пивоварение - это проблема?
 achievement.getDrunk.desc=Получите опьянение V.
+achievement.onTheGo=achievement.onTheGo
+achievement.onTheGo.desc=achievement.onTheGo.desc
 
 # Tooltips (Number is a percentage)
+# number is a percentage
 grc.cellar.format.waterBag.name=%s (%s)
 grc.cellar.format.waterBag.contents=Содержит: %1$s (%2$dмВ/%3$dМв)
 grc.cellar.format.tipsy_chance=Шанс опьянения: %d%%
 grc.cellar.item.booze_bucket.deprecated=УСТАРЕЛО, положите в сетку создания, чтобы обновить
 grc.cellar.item.booze_bucket.deprecated_suffix= (УСТАРЕЛО)
 
-grc.cellar.brewKettle.brewing_prefix=Варка :
-grc.cellar.brewKettle.itemslot.item=Предмет : %s
-grc.cellar.brewKettle.itemslot.residue=Остаток : %s
-grc.cellar.fermentBarrel.progress_prefix=Прогресс :
-grc.cellar.fermentBarrel.progress_format=%d%%
-grc.cellar.fermentBarrel.itemslot.modifier=Модификатор : %s
-grc.cellar.fermentJar.itemslot.yeast=%s
-grc.cellar.fruitPress.itemslot.item=Предмет : %s
-grc.cellar.fruitPress.itemslot.residue=Остаток : %s
-grc.cellar.fruitPresser.state.invalid=<Invalid>
-grc.cellar.fruitPresser.state.pressed=Pressed
-grc.cellar.fruitPresser.state.unpressed=Unpressed
-grc.cellar.fruitPresser.state_prefix=State :
+grc.cellar.brew_kettle.brewing_prefix=Варка :
+grc.cellar.brew_kettle.itemslot.item=Предмет : %s
+grc.cellar.brew_kettle.itemslot.residue=Остаток : %s
+grc.cellar.ferment_barrel.progress.prefix=Прогресс :
+grc.cellar.ferment_barrel.progress.format=%d%%
+grc.cellar.ferment_barrel.itemslot.modifier=Модификатор : %s
+grc.cellar.ferment_jar.itemslot.yeast=%s
+grc.cellar.fruit_press.itemslot.item=Предмет : %s
+grc.cellar.fruit_press.itemslot.residue=Остаток : %s
+grc.cellar.fruit_presser.state.invalid=<Invalid>
+grc.cellar.fruit_presser.state.pressed=Pressed
+grc.cellar.fruit_presser.state.unpressed=Unpressed
+grc.cellar.fruit_presser.state_prefix=State :
 
 # Waila Tooltips
-grc.cellar.waila.option.DisplayFluidContent=Жидкостные резервуары
-grc.cellar.waila.option.FruitPressExtras=Fruit Press Extras
-grc.cellar.waila.option.BrewKettleExtras=Brew Kettle Extras
-grc.cellar.waila.option.FermentBarrelExtras=Fermentation Barrel Extras
+grccellar.waila.option.FruitPressExtras=Fruit Press Extras
+grccellar.waila.option.BrewKettleExtras=Brew Kettle Extras
+grccellar.waila.option.FermentBarrelExtras=Fermentation Barrel Extras

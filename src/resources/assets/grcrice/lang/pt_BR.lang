@@ -12,6 +12,19 @@ fluid.grc.riceSake0=Sakê
 fluid.grc.riceSake1=Sakê
 fluid.grc.riceSake2=Sakê
 fluid.grc.riceSake3=Sakê
+fluid.grc.riceSake4=Sakê
+fluid.grc.riceSake5=Sakê
+fluid.grc.riceSake6=Sakê
+
+# Fluid Buckets
+item.bucket.fluid.grc.riceSake.name=Balde de Sakê
+item.bucket.fluid.grc.riceSake0.name=Balde de Sakê
+item.bucket.fluid.grc.riceSake1.name=Balde de Sakê
+item.bucket.fluid.grc.riceSake2.name=Balde de Sakê
+item.bucket.fluid.grc.riceSake3.name=Balde de Sakê
+item.bucket.fluid.grc.riceSake4.name=Balde de Sakê
+item.bucket.fluid.grc.riceSake5.name=Balde de Sakê
+item.bucket.fluid.grc.riceSake6.name=Balde de Sakê
 
 # Fluid Blocks
 tile.fluid.grc.riceSake.name=Sakê
@@ -19,9 +32,6 @@ tile.fluid.grc.riceSake0.name=Sakê
 tile.fluid.grc.riceSake1.name=Sakê
 tile.fluid.grc.riceSake2.name=Sakê
 tile.fluid.grc.riceSake3.name=Sakê
-
-# Fluid Tooltips
-fluid.grc.riceSake0.modifier=Fresco
-fluid.grc.riceSake1.modifier=Fermentado
-fluid.grc.riceSake2.modifier=Fermentado, Potente
-fluid.grc.riceSake3.modifier=Fermentado, Extendido
+tile.fluid.grc.riceSake4.name=Sakê
+tile.fluid.grc.riceSake5.name=Sakê
+tile.fluid.grc.riceSake6.name=Sakê

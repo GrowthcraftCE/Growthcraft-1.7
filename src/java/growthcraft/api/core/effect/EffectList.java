@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -40,8 +40,6 @@ import net.minecraft.entity.Entity;
  */
 public class EffectList extends AbstractEffectList
 {
-	private List<String> tempList = new ArrayList<String>();
-
 	/**
 	 * Performs a shallow copy of the EffectList
 	 *
@@ -79,12 +77,12 @@ public class EffectList extends AbstractEffectList
 	 * @param list - list to add description lines to
 	 */
 	@Override
-	public void getDescription(List<String> list)
+	protected void getActualDescription(List<String> list)
 	{
 		addDescriptionHead(list);
 		for (IEffect effect : effects)
 		{
-			tempList.clear();
+			final List<String> tempList = new ArrayList<String>();
 			effect.getDescription(tempList);
 			Describer.addAllIndented(list, tempList);
 		}

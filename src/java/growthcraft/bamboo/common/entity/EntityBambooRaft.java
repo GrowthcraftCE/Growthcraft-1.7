@@ -13,7 +13,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -124,7 +123,8 @@ public class EntityBambooRaft extends Entity
 			this.setTimeSinceHit(10);
 			this.setDamageTaken(this.getDamageTaken() + par2 * 10.0F);
 			this.setBeenAttacked();
-			final boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getEntity()).capabilities.isCreativeMode;
+			final boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer &&
+				((EntityPlayer)par1DamageSource.getEntity()).capabilities.isCreativeMode;
 
 			if (flag || this.getDamageTaken() > 40.0F)
 			{
@@ -135,7 +135,7 @@ public class EntityBambooRaft extends Entity
 
 				if (!flag)
 				{
-					this.func_145778_a(GrowthCraftBamboo.bambooRaft.getItem(), 1, 0.0F);
+					this.func_145778_a(GrowthCraftBamboo.items.bambooRaft.getItem(), 1, 0.0F);
 				}
 
 				this.setDead();
@@ -418,12 +418,12 @@ public class EntityBambooRaft extends Entity
 
 					for (l = 0; l < 3; ++l)
 					{
-						this.func_145778_a(Item.getItemFromBlock(GrowthCraftBamboo.bambooBlock.getBlock()), 1, 0.0F);
+						this.func_145778_a(GrowthCraftBamboo.blocks.bambooBlock.getItem(), 1, 0.0F);
 					}
 
 					for (l = 0; l < 2; ++l)
 					{
-						this.func_145778_a(GrowthCraftBamboo.bamboo.getItem(), 1, 0.0F);
+						this.func_145778_a(GrowthCraftBamboo.items.bamboo.getItem(), 1, 0.0F);
 					}
 				}
 			}
@@ -553,12 +553,12 @@ public class EntityBambooRaft extends Entity
 
 					for (l = 0; l < 3; ++l)
 					{
-						this.func_145778_a(Item.getItemFromBlock(GrowthCraftBamboo.bambooBlock.getBlock()), 1, 0.0F);
+						this.func_145778_a(GrowthCraftBamboo.blocks.bambooBlock.getItem(), 1, 0.0F);
 					}
 
 					for (l = 0; l < 2; ++l)
 					{
-						this.func_145778_a(GrowthCraftBamboo.bamboo.getItem(), 1, 0.0F);
+						this.func_145778_a(GrowthCraftBamboo.items.bamboo.getItem(), 1, 0.0F);
 					}
 				}
 

@@ -13,17 +13,22 @@ cache:
 before_install:
 # ensure we have ruby
 - ruby --version
+- gem install bundler
+- bundle install
 # fetch 3rd party apis and such
 - git submodule update --init
-- chmod +x gradlew
+- chmod +x ./gradlew
 
 install: ./gradlew setupCIWorkspace -S
 
 script: |
-  ./gradlew build &&
-  ruby tools/split_jars.rb &&
-  ls -la build/libs &&
-  ls -la build/packages
+  ./gradlew build && bundle exec ./tools/split_jars.rb
+
+after_script:
+  - ls -la build/libs
+  - ls -la build/packages
+  - bundle exec ./tools/checksum_builds.rb | tee ./checksums.txt
+  - bundle exec ./tools/lang_check.rb
 
 # Deploy the artifacts back to GitHub
 deploy:
@@ -31,6 +36,7 @@ deploy:
   api_key: $GITHUB_OAUTH
   file_glob: true
   file:
+    - "checksums.txt"
     - "build/libs/growthcraft-*-complete.jar"
     - "build/libs/growthcraft-*-api.jar"
     - "build/libs/growthcraft-*-dev.jar"

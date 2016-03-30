@@ -3,7 +3,7 @@ package growthcraft.cellar.util;
 import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.core.util.ITagFormatter;
+import growthcraft.api.core.util.ITagFormatter;
 import growthcraft.core.util.TagFormatterItem;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,13 +17,13 @@ public class TagFormatterFruitPress implements ITagFormatter
 	{
 		list.add(EnumChatFormatting.GRAY +
 			GrcI18n.translate(
-				"grc.cellar.fruitPress.itemslot.item",
+				"grc.cellar.fruit_press.itemslot.item",
 				TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_press"))
 			)
 		);
 		list.add(EnumChatFormatting.GRAY +
 			GrcI18n.translate(
-				"grc.cellar.fruitPress.itemslot.residue",
+				"grc.cellar.fruit_press.itemslot.residue",
 				TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_residue"))
 			)
 		);

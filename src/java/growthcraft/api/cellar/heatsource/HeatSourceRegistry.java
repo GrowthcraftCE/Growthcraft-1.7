@@ -28,7 +28,7 @@ import javax.annotation.Nonnull;
 
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.core.util.ItemKey;
+import growthcraft.api.core.item.ItemKey;
 
 import net.minecraft.block.Block;
 
@@ -51,7 +51,7 @@ public class HeatSourceRegistry implements IHeatSourceRegistry
 	private HeatSourceTree heatSources = new HeatSourceTree();
 
 	@Override
-	public void setLogger(ILogger l)
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
 	}

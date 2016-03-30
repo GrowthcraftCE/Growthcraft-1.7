@@ -3,8 +3,8 @@ package growthcraft.rice.event;
 import java.util.Random;
 
 import growthcraft.rice.GrowthCraftRice;
-import growthcraft.core.util.BlockFlags;
-import growthcraft.core.util.AuxFX;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.AuxFX;
 import growthcraft.rice.util.RiceBlockCheck;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
@@ -43,8 +43,8 @@ public class BonemealEventRice
 					{
 						mminus = 0;
 					}
-					world.setBlockMetadataWithNotify(i, y, k, mplus, BlockFlags.SEND_TO_CLIENT);
-					world.setBlockMetadataWithNotify(i, y - 1, k, mminus, BlockFlags.SEND_TO_CLIENT);
+					world.setBlockMetadataWithNotify(i, y, k, mplus, BlockFlags.SYNC);
+					world.setBlockMetadataWithNotify(i, y - 1, k, mminus, BlockFlags.SYNC);
 					world.playAuxSFX(AuxFX.BONEMEAL, i, y, k, 0);
 					world.notifyBlockChange(i, y, k, Blocks.air);
 					world.notifyBlockChange(i, y - 1, k, Blocks.air);

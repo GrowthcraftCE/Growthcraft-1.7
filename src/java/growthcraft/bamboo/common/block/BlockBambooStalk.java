@@ -37,11 +37,17 @@ public class BlockBambooStalk extends Block
 	public BlockBambooStalk()
 	{
 		super(Material.wood);
-		this.setStepSound(soundTypeWood);
-		this.setHardness(2.0F);
-		this.setTickRandomly(true);
-		this.setCreativeTab(null);
-		this.setBlockName("grc.bambooStalk");
+		setStepSound(soundTypeWood);
+		setHardness(2.0F);
+		setTickRandomly(true);
+		setBlockName("grc.bambooStalk");
+		setCreativeTab(null);
+	}
+
+	@Override
+	public boolean canPlaceTorchOnTop(World world, int x, int y, int z)
+	{
+		return true;
 	}
 
 	/************
@@ -68,7 +74,7 @@ public class BlockBambooStalk extends Block
 				{
 					final byte b = 9;
 					int amount = 10;
-					final BlockBambooShoot bambooShoot = GrowthCraftBamboo.bambooShoot.getBlock();
+					final BlockBambooShoot bambooShoot = GrowthCraftBamboo.blocks.bambooShoot.getBlock();
 
 					for (x1 = x - b; x1 <= x + b; ++x1)
 					{
@@ -171,14 +177,11 @@ public class BlockBambooStalk extends Block
 		}
 	}
 
-	/************
-	 * STUFF
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftBamboo.bamboo.getItem();
+		return GrowthCraftBamboo.items.bamboo.getItem();
 	}
 
 	@Override
@@ -201,7 +204,7 @@ public class BlockBambooStalk extends Block
 
 	public boolean isBambooOnGround(World world, int x, int y, int z)
 	{
-		if (!BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, GrowthCraftBamboo.bambooShoot.getBlock())) return false;
+		if (!BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, GrowthCraftBamboo.blocks.bambooShoot.getBlock())) return false;
 		return this == world.getBlock(x, y, z);
 	}
 
@@ -213,14 +216,14 @@ public class BlockBambooStalk extends Block
 
 	private boolean canFence(IBlockAccess world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooFence.getBlock() ||
+		return world.getBlock(x, y, z) == GrowthCraftBamboo.blocks.bambooFence.getBlock() ||
 			world.getBlock(x, y, z) == Blocks.fence_gate ||
-			world.getBlock(x, y, z) == GrowthCraftBamboo.bambooFenceGate.getBlock();
+			world.getBlock(x, y, z) == GrowthCraftBamboo.blocks.bambooFenceGate.getBlock();
 	}
 
 	private boolean canWall(IBlockAccess world, int x, int y, int z)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftBamboo.bambooWall.getBlock();
+		return world.getBlock(x, y, z) == GrowthCraftBamboo.blocks.bambooWall.getBlock();
 	}
 
 	private boolean canDoor(IBlockAccess world, int x, int y, int z)
@@ -228,13 +231,10 @@ public class BlockBambooStalk extends Block
 		return world.getBlock(x, y, z) instanceof BlockDoor;
 	}
 
-	/************
-	 * DROPS
-	 ************/
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return GrowthCraftBamboo.bamboo.getItem();
+		return GrowthCraftBamboo.items.bamboo.getItem();
 	}
 
 	@Override
@@ -243,9 +243,6 @@ public class BlockBambooStalk extends Block
 		return 1;
 	}
 
-	/************
-	 * TEXTURES
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
@@ -266,9 +263,6 @@ public class BlockBambooStalk extends Block
 		return side == 1 ? tex[0] : ( side == 0 ? tex[0] : (meta == 0 ? tex[1] : tex[2]));
 	}
 
-	/************
-	 * RENDERS
-	 ************/
 	@Override
 	public int getRenderType()
 	{
@@ -339,9 +333,6 @@ public class BlockBambooStalk extends Block
 		}
 	}
 
-	/************
-	 * BOXES
-	 ************/
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{

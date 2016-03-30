@@ -6,7 +6,7 @@ import growthcraft.apples.GrowthCraftApples;
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.client.renderer.RenderBlockFruit;
 import growthcraft.core.integration.AppleCore;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
@@ -54,6 +54,12 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 		this.setCreativeTab(null);
 	}
 
+	public boolean isMature(IBlockAccess world, int x, int y, int z)
+	{
+		final int meta = world.getBlockMetadata(x, y, z);
+		return meta >= AppleStage.MATURE;
+	}
+
 	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
 	{
 		return (float)meta / (float)AppleStage.MATURE;
@@ -61,7 +67,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 
 	void incrementGrowth(World world, int x, int y, int z, int meta)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.SEND_TO_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.SYNC);
 		AppleCore.announceGrowthTick(this, world, x, y, z, meta);
 	}
 
@@ -113,7 +119,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 		if (!this.canBlockStay(world, x, y, z))
 		{
 			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.UPDATE_CLIENT);
+			world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.UPDATE_AND_SYNC);
 		}
 		else
 		{

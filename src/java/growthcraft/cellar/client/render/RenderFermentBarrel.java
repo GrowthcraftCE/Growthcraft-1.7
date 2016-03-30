@@ -40,7 +40,14 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 		{
 			final BlockFermentBarrel fermentBarrel = (BlockFermentBarrel)block;
 			final Tessellator tes = Tessellator.instance;
-			final IIcon[] icons = {fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(1), fermentBarrel.getIconByIndex(1)};
+			final IIcon[] icons = {
+				fermentBarrel.getIconByIndex(0),
+				fermentBarrel.getIconByIndex(0),
+				fermentBarrel.getIconByIndex(0),
+				fermentBarrel.getIconByIndex(0),
+				fermentBarrel.getIconByIndex(1),
+				fermentBarrel.getIconByIndex(1)
+			};
 			final double d = 0.0625D;
 			final float f = 0.125F;
 			renderer.uvRotateEast = 3;
@@ -120,7 +127,12 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler
 		if (modelId == RENDER_ID)
 		{
 			final BlockFermentBarrel fermentBarrel = (BlockFermentBarrel)block;
-			final IIcon[] icon = {fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(1), fermentBarrel.getIconByIndex(2), fermentBarrel.getIconByIndex(3)};
+			final IIcon[] icon = {
+				fermentBarrel.getIconByIndex(0),
+				fermentBarrel.getIconByIndex(1),
+				fermentBarrel.getIconByIndex(2),
+				fermentBarrel.getIconByIndex(3)
+			};
 			final int meta = world.getBlockMetadata(x, y, z);
 			final double d = 0.0625D;
 

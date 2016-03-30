@@ -1,11 +1,12 @@
 # Creative Tabs
-itemGroup.tabGrCCellar=Cave Growthcraft
+itemGroup.creative_tab_grccellar=Cave Growthcraft
 
 # Blocks
 tile.grc.fruitPress.name=Pressoir à fruit
 tile.grc.fruitPresser.name=Pressoir à fruit
 tile.grc.brewKettle.name=Bouilloire de brassage
 tile.grc.fermentBarrel.name=Tonneau de fermentation
+tile.grc.fermentJar.name=tile.grc.fermentJar.name
 
 # Items
 # Please remove this field once all other module translations have been updated,
@@ -18,26 +19,57 @@ item.grc.yeast2.name=Levure de Bayanus
 item.grc.yeast3.name=Levure éthérée
 item.grc.yeast4.name=Levure d'origine
 
+# Water Bags
+item.grc.waterBag0.name=item.grc.waterBag0.name
+item.grc.waterBag1.name=item.grc.waterBag1.name
+item.grc.waterBag2.name=item.grc.waterBag2.name
+item.grc.waterBag3.name=item.grc.waterBag3.name
+item.grc.waterBag4.name=item.grc.waterBag4.name
+item.grc.waterBag5.name=item.grc.waterBag5.name
+item.grc.waterBag6.name=item.grc.waterBag6.name
+item.grc.waterBag7.name=item.grc.waterBag7.name
+item.grc.waterBag8.name=item.grc.waterBag8.name
+item.grc.waterBag9.name=item.grc.waterBag9.name
+item.grc.waterBag10.name=item.grc.waterBag10.name
+item.grc.waterBag11.name=item.grc.waterBag11.name
+item.grc.waterBag12.name=item.grc.waterBag12.name
+item.grc.waterBag13.name=item.grc.waterBag13.name
+item.grc.waterBag14.name=item.grc.waterBag14.name
+item.grc.waterBag15.name=item.grc.waterBag15.name
+item.grc.waterBag16.name=item.grc.waterBag16.name
+
 # Containers
 container.grc.fruitPress=Pressoir à fruit
 container.grc.brewKettle=Bouilloire de brassage
 container.grc.fermentBarrel=Tonneau de fermentation
+container.grc.CultureJar=container.grc.CultureJar
 
 # Other
 grc.potion.tipsy=Pompette
 grc.booze=Picoler
 
 # Modifiers
-grc.booze.modifier.young=Nouveau
-grc.booze.modifier.fermented=Fermenté
-grc.booze.modifier.extended=Prolongé
-grc.booze.modifier.potent=Puissant
+grc.fluids.tag.chilled=grc.fluids.tag.chilled
+grc.fluids.tag.cider=grc.fluids.tag.cider
+grc.fluids.tag.deadly=grc.fluids.tag.deadly
+grc.fluids.tag.extended=Prolongé
+grc.fluids.tag.fermented=Fermenté
+grc.fluids.tag.fortified=grc.fluids.tag.fortified
+grc.fluids.tag.hopped=grc.fluids.tag.hopped
+grc.fluids.tag.hyper_extended=grc.fluids.tag.hyper_extended
+grc.fluids.tag.intoxicated=grc.fluids.tag.intoxicated
+grc.fluids.tag.magical=grc.fluids.tag.magical
+grc.fluids.tag.poisoned=grc.fluids.tag.poisoned
+grc.fluids.tag.potent=Puissant
+grc.fluids.tag.wine=grc.fluids.tag.wine
+grc.fluids.tag.young=Nouveau
 
 # GUI
 gui.grc.empty=Vide
 gui.grc.discard=Rebut
 gui.grc.switch=Basculer
 gui.grc.cantferment=Ne peut Fermenter
+gui.grccellar.ferment_barrel.progress_name=gui.grccellar.ferment_barrel.progress_name
 
 # Achievements
 achievement.craftBarrel=Extraction de tonnelier
@@ -46,28 +78,32 @@ achievement.fermentBooze=C'est la levure je peux faire...
 achievement.fermentBooze.desc=Fermentez une boisson alcolisée.
 achievement.getDrunk=Es-ce menace de désordre ?
 achievement.getDrunk.desc=Acquérez Pompette V.
+achievement.onTheGo=achievement.onTheGo
+achievement.onTheGo.desc=achievement.onTheGo.desc
 
 # Tooltips (Number is a percentage)
 # number is a percentage
+grc.cellar.format.waterBag.name=grc.cellar.format.waterBag.name
+grc.cellar.format.waterBag.contents=grc.cellar.format.waterBag.contents
 grc.cellar.format.tipsy_chance=%d%% Chance d'ivresse
 grc.cellar.item.booze_bucket.deprecated=OBSOLETE, fabriquez une amèlioration de seau
 grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETE)
 
-grc.cellar.brewKettle.brewing_prefix=Brassage :
-grc.cellar.brewKettle.itemslot.item=Élément :
-grc.cellar.brewKettle.itemslot.residue=Résidu :
-grc.cellar.fermentBarrel.progress_prefix=Progrès :
-grc.cellar.fermentBarrel.progress_format=%d%%
-grc.cellar.fermentBarrel.itemslot.modifier=Modificateur :
-grc.cellar.fruitPress.itemslot.item=Élément :
-grc.cellar.fruitPress.itemslot.residue=Residu :
-grc.cellar.fruitPresser.state.invalid=<Non-valide>
-grc.cellar.fruitPresser.state.pressed=Pressé
-grc.cellar.fruitPresser.state.unpressed=Non-pressé
-grc.cellar.fruitPresser.state_prefix=État :
+grc.cellar.brew_kettle.brewing_prefix=Brassage :
+grc.cellar.brew_kettle.itemslot.item=Élément :
+grc.cellar.brew_kettle.itemslot.residue=Résidu :
+grc.cellar.ferment_barrel.progress.prefix=Progrès :
+grc.cellar.ferment_barrel.progress.format=%d%%
+grc.cellar.ferment_barrel.itemslot.modifier=Modificateur :
+grc.cellar.ferment_jar.itemslot.yeast=grc.cellar.ferment_jar.itemslot.yeast
+grc.cellar.fruit_press.itemslot.item=Élément :
+grc.cellar.fruit_press.itemslot.residue=Residu :
+grc.cellar.fruit_presser.state.invalid=<Non-valide>
+grc.cellar.fruit_presser.state.pressed=Pressé
+grc.cellar.fruit_presser.state.unpressed=Non-pressé
+grc.cellar.fruit_presser.state_prefix=État :
 
 # Waila Tooltips
-grc.cellar.waila.option.DisplayFluidContent=Réservoirs de fluide
-grc.cellar.waila.option.FruitPressExtras=Supplément de pressage
-grc.cellar.waila.option.BrewKettleExtras=Supplément de brassage
-grc.cellar.waila.option.FermentBarrelExtras=Supplément de fermentation
+grccellar.waila.option.FruitPressExtras=Supplément de pressage
+grccellar.waila.option.BrewKettleExtras=Supplément de brassage
+grccellar.waila.option.FermentBarrelExtras=Supplément de fermentation

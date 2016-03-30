@@ -1,0 +1,188 @@
+# Creative Tabs
+itemGroup.creative_tab_grcmilk=Growthcraft|乳制品
+
+# Items
+## Cheese
+item.grcmilk.Cheese.cheddar.name=切达干酪
+item.grcmilk.Cheese.gorgonzola.name=古冈左拉干酪
+item.grcmilk.Cheese.emmentaler.name=瑞士奶酪
+item.grcmilk.Cheese.appenzeller.name=阿彭策尔奶酪
+item.grcmilk.Cheese.asiago.name=艾斯阿格奶酪
+item.grcmilk.Cheese.parmesan.name=帕马森干酪
+item.grcmilk.Cheese.monterey.name=Monterey Cheese
+item.grcmilk.Cheese.ricotta.name=里考塔
+item.grcmilk.CheeseCloth.name=奶酪纱布
+## Butter
+item.grcmilk.Butter.salted.name=黄油(加盐)
+item.grcmilk.Butter.unsalted.name=黄油(未加盐)
+## Ice Cream
+item.grcmilk.IceCream.apple.name=冰淇淋(苹果)
+item.grcmilk.IceCream.chocolate.name=冰淇淋(巧克力)
+item.grcmilk.IceCream.grape.name=冰淇淋(葡萄)
+item.grcmilk.IceCream.honey.name=冰淇淋(蜂蜜)
+item.grcmilk.IceCream.plain.name=冰淇淋(原味)
+item.grcmilk.IceCream.watermelon.name=item.grcmilk.IceCream.watermelon.name
+## Yogurt
+item.grcmilk.Yogurt.apple.name=item.grcmilk.Yogurt.apple.name
+item.grcmilk.Yogurt.chocolate.name=item.grcmilk.Yogurt.chocolate.name
+item.grcmilk.Yogurt.grape.name=item.grcmilk.Yogurt.grape.name
+item.grcmilk.Yogurt.honey.name=item.grcmilk.Yogurt.honey.name
+item.grcmilk.Yogurt.plain.name=酸奶
+item.grcmilk.Yogurt.watermelon.name=item.grcmilk.Yogurt.watermelon.name
+## Other
+item.grcmilk.StarterCulture.name=Starter Culture
+item.grcmilk.Stomach.name=胃
+
+# Blocks
+## Cheese
+tile.grcmilk.CheeseBlock.cheddar.unwaxed.name=切达干酪(无皮)
+tile.grcmilk.CheeseBlock.cheddar.unaged.name=切达干酪(鲜)
+tile.grcmilk.CheeseBlock.cheddar.aged.name=切达干酪(陈)
+tile.grcmilk.CheeseBlock.cheddar.cut.name=切达干酪
+tile.grcmilk.CheeseBlock.gorgonzola.unaged.name=古冈左拉干酪(鲜)
+tile.grcmilk.CheeseBlock.gorgonzola.aged.name=古冈左拉干酪(陈)
+tile.grcmilk.CheeseBlock.gorgonzola.cut.name=古冈左拉干酪
+tile.grcmilk.CheeseBlock.emmentaler.unaged.name=瑞士奶酪(鲜)
+tile.grcmilk.CheeseBlock.emmentaler.aged.name=瑞士奶酪(陈)
+tile.grcmilk.CheeseBlock.emmentaler.cut.name=瑞士奶酪
+tile.grcmilk.CheeseBlock.appenzeller.unaged.name=阿彭策尔奶酪(鲜)
+tile.grcmilk.CheeseBlock.appenzeller.aged.name=阿彭策尔奶酪(陈)
+tile.grcmilk.CheeseBlock.appenzeller.cut.name=阿彭策尔奶酪
+tile.grcmilk.CheeseBlock.asiago.unaged.name=艾斯阿格奶酪(鲜)
+tile.grcmilk.CheeseBlock.asiago.aged.name=艾斯阿格奶酪(陈)
+tile.grcmilk.CheeseBlock.asiago.cut.name=艾斯阿格奶酪
+tile.grcmilk.CheeseBlock.parmesan.unaged.name=帕马森干酪(鲜)
+tile.grcmilk.CheeseBlock.parmesan.aged.name=帕马森干酪(陈)
+tile.grcmilk.CheeseBlock.parmesan.cut.name=帕马森干酪
+tile.grcmilk.CheeseBlock.monterey.unwaxed.name=Monterey Cheese(无皮)
+tile.grcmilk.CheeseBlock.monterey.unaged.name=Monterey Cheese(鲜)
+tile.grcmilk.CheeseBlock.monterey.aged.name=Monterey Cheese(陈)
+tile.grcmilk.CheeseBlock.monterey.cut.name=Monterey Cheese
+tile.grcmilk.CheeseBlock.ricotta.unaged.name=里考塔(鲜)
+tile.grcmilk.CheeseBlock.ricotta.aged.name=里考塔(陈)
+## Other
+tile.grcmilk.ButterChurn.name=搅乳器
+tile.grcmilk.CheeseBlock.name=奶酪块
+tile.grcmilk.CheesePress.name=奶酪挤压器
+tile.grcmilk.CheeseVat.name=奶酪缸
+tile.grcmilk.HangingCurds.name=晾晒中的奶酪凝乳
+tile.grcmilk.HangingCurds.cheddar.name=切达奶酪凝乳
+tile.grcmilk.HangingCurds.gorgonzola.name=古冈左拉奶酪凝乳
+tile.grcmilk.HangingCurds.emmentaler.name=瑞士奶酪凝乳
+tile.grcmilk.HangingCurds.appenzeller.name=阿彭策尔奶酪凝乳
+tile.grcmilk.HangingCurds.asiago.name=艾斯阿格奶酪凝乳
+tile.grcmilk.HangingCurds.parmesan.name=帕马森奶酪凝乳
+tile.grcmilk.HangingCurds.monterey.name=Monterey奶酪凝乳
+tile.grcmilk.HangingCurds.ricotta.name=里考塔奶酪凝乳
+tile.grcmilk.HangingCurds.cheddar.dried.name=切达奶酪凝乳(干燥)
+tile.grcmilk.HangingCurds.gorgonzola.dried.name=古冈左拉奶酪凝乳(干燥)
+tile.grcmilk.HangingCurds.emmentaler.dried.name=瑞士奶酪凝乳(干燥)
+tile.grcmilk.HangingCurds.appenzeller.dried.name=阿彭策尔奶酪凝乳(干燥)
+tile.grcmilk.HangingCurds.asiago.dried.name=艾斯阿格奶酪凝乳(干燥)
+tile.grcmilk.HangingCurds.parmesan.dried.name=帕马森奶酪凝乳(干燥)
+tile.grcmilk.HangingCurds.monterey.dried.name=Monterey奶酪凝乳(干燥)
+tile.grcmilk.HangingCurds.ricotta.dried.name=里考塔奶酪凝乳(干燥)
+tile.grcmilk.Pancheon.name=Pancheon
+tile.grcmilk.Thistle.name=Thistle
+
+### Cheese Vat Fluid Tanks
+grcmilk.cheese_vat.fluid_tank.primary=主料
+grcmilk.cheese_vat.fluid_tank.rennet=乳清
+grcmilk.cheese_vat.fluid_tank.waste=废液
+grcmilk.cheese_vat.fluid_tank.recipe=辅料
+
+# Fluids
+## Tags
+grc.fluids.tag.cheese=奶酪
+grc.fluids.tag.cream=奶油
+grc.fluids.tag.milk=牛奶
+grc.fluids.tag.milk_curds=凝乳
+grc.fluids.tag.rennet=凝乳酶
+grc.fluids.tag.whey=乳清
+## Standard
+### Fluids
+fluid.grcmilk.ButterMilk=酪乳
+fluid.grcmilk.CheeseAppenzeller=阿彭策尔奶酪
+fluid.grcmilk.CheeseAsiago=艾斯阿格奶酪
+fluid.grcmilk.CheeseCheddar=切达干酪
+fluid.grcmilk.CheeseEmmentaler=瑞士奶酪
+fluid.grcmilk.CheeseGorgonzola=古冈左拉干酪
+fluid.grcmilk.CheeseMonterey=Monterey Cheese
+fluid.grcmilk.CheeseParmesan=帕马森干酪
+fluid.grcmilk.CheeseRicotta=里考塔
+fluid.grcmilk.Cream=奶油
+fluid.grcmilk.Curds=凝乳
+fluid.grcmilk.Milk=牛奶
+fluid.grcmilk.PasteurizedMilk=巴氏奶
+fluid.grcmilk.Rennet=凝乳酶
+fluid.grcmilk.SkimMilk=脱脂奶
+fluid.grcmilk.Whey=乳清
+### Blocks
+tile.grcmilk.BlockFluidButterMilk.name=酪乳
+tile.grcmilk.BlockFluidCream.name=奶油
+tile.grcmilk.BlockFluidCurds.name=凝乳
+tile.grcmilk.BlockFluidMilk.name=牛奶
+tile.grcmilk.BlockFluidPasteurizedMilk.name=巴氏奶
+tile.grcmilk.BlockFluidRennet.name=凝乳酶
+tile.grcmilk.BlockFluidSkimMilk.name=脱脂奶
+tile.grcmilk.BlockFluidWhey.name=乳清
+### Bottles
+item.grcmilk.BottleFluidButterMilk.name=酪乳瓶
+item.grcmilk.BottleFluidCream.name=奶油瓶
+item.grcmilk.BottleFluidCurds.name=凝乳瓶
+item.grcmilk.BottleFluidMilk.name=牛奶瓶
+item.grcmilk.BottleFluidPasteurizedMilk.name=巴氏奶瓶
+item.grcmilk.BottleFluidRennet.name=凝乳酶瓶
+item.grcmilk.BottleFluidSkimMilk.name=脱脂奶瓶
+item.grcmilk.BottleFluidWhey.name=乳清瓶
+### Buckets
+item.bucket.fluid.grcmilk.ButterMilk.name=酪乳桶
+item.bucket.fluid.grcmilk.Cream.name=奶油桶
+item.bucket.fluid.grcmilk.Curds.name=凝乳桶
+item.bucket.fluid.grcmilk.Milk.name=牛奶桶
+item.bucket.fluid.grcmilk.PasteurizedMilk.name=巴氏奶桶
+item.bucket.fluid.grcmilk.Rennet.name=凝乳酶桶
+item.bucket.fluid.grcmilk.SkimMilk.name=脱脂奶桶
+item.bucket.fluid.grcmilk.Whey.name=乳清桶
+
+## Booze
+fluid.grcmilk.Kumis0=奶酒
+fluid.grcmilk.Kumis1=奶酒
+fluid.grcmilk.Kumis2=奶酒
+fluid.grcmilk.Kumis3=奶酒
+fluid.grcmilk.Kumis4=奶酒
+fluid.grcmilk.Kumis5=腐败的奶
+fluid.grcmilk.Kumis5.desc=即便是最甜的东西也终将会腐烂。
+
+## Booze Blocks
+tile.fluid.grcmilk.Kumis0.name=奶酒
+tile.fluid.grcmilk.Kumis1.name=奶酒
+tile.fluid.grcmilk.Kumis2.name=奶酒
+tile.fluid.grcmilk.Kumis3.name=奶酒
+tile.fluid.grcmilk.Kumis4.name=奶酒
+tile.fluid.grcmilk.Kumis5.name=腐败的奶
+
+## Booze Bucket
+item.bucket.fluid.grcmilk.Kumis0.name=奶酒桶
+item.bucket.fluid.grcmilk.Kumis1.name=奶酒桶
+item.bucket.fluid.grcmilk.Kumis2.name=奶酒桶
+item.bucket.fluid.grcmilk.Kumis3.name=奶酒桶
+item.bucket.fluid.grcmilk.Kumis4.name=奶酒桶
+item.bucket.fluid.grcmilk.Kumis5.name=腐败的奶桶
+
+# Effects
+grc.effect.booze_milk=清除除Tispy外所有药水效果
+
+# WAILA
+grcmilk.butter_churn.itemslot.item=%s
+grcmilk.cheese.aging.prefix=存放：
+grcmilk.cheese.aging.progress.format= %d%%
+grcmilk.cheese.slices.prefix=切片：
+grcmilk.cheese.slices.value.format= %d / %d
+grcmilk.cheese_press.itemslot.item=%s
+grcmilk.cheese_press.pressing.state.false=未挤压
+grcmilk.cheese_press.pressing.state.prefix=状态：
+grcmilk.cheese_press.pressing.state.true=已挤压
+grcmilk.hanging_curds.dried=已晾干
+grcmilk.hanging_curds.drying.prefix=正在晾干：
+grcmilk.hanging_curds.drying.progress.format=%d%%

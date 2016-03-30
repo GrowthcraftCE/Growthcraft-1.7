@@ -3,8 +3,8 @@ package growthcraft.bamboo.common.block;
 import java.util.ArrayList;
 import java.util.Random;
 
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.bamboo.GrowthCraftBamboo;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,12 +31,12 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	public BlockBambooLeaves()
 	{
 		super(Material.leaves, false);
-		this.setLightOpacity(1);
-		this.setStepSound(soundTypeGrass);
-		this.setHardness(0.2F);
-		this.setTickRandomly(true);
-		this.setCreativeTab(GrowthCraftCore.tab);
-		this.setBlockName("grc.bambooLeaves");
+		setLightOpacity(1);
+		setStepSound(soundTypeGrass);
+		setHardness(0.2F);
+		setTickRandomly(true);
+		setBlockName("grc.bambooLeaves");
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
 	private void removeLeaves(World world, int x, int y, int z)
@@ -160,8 +160,8 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random random)
 	{
 		super.randomDisplayTick(world, x, y, z, random);

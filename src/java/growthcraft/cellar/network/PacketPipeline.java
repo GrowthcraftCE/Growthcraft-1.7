@@ -12,6 +12,8 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
 
+import growthcraft.cellar.GrowthCraftCellar;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
@@ -126,8 +128,11 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	public void initialise()
 	{
 		this.channels = NetworkRegistry.INSTANCE.newChannel("GrCCellar", this);
-		this.registerPacket(PacketClearTankButton.class);
-		this.registerPacket(PacketClearTankButtonWByte.class);
+		if (GrowthCraftCellar.getConfig().enableDiscardButton)
+		{
+			this.registerPacket(PacketClearTankButton.class);
+			this.registerPacket(PacketClearTankButtonWByte.class);
+		}
 		this.registerPacket(PacketSwitchTankButton.class);
 	}
 

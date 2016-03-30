@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -40,11 +40,6 @@ import net.minecraft.entity.Entity;
 public class EffectRandomList extends AbstractEffectList
 {
 	/**
-	 * A temporary String list used for descriptions
-	 */
-	private List<String> tempList = new ArrayList<String>();
-
-	/**
 	 * Performs a shallow copy of the EffectList
 	 *
 	 * @return new effect list
@@ -75,10 +70,11 @@ public class EffectRandomList extends AbstractEffectList
 	 * @param list - list to add description lines to
 	 */
 	@Override
-	public void getDescription(List<String> list)
+	protected void getActualDescription(List<String> list)
 	{
 		if (effects.size() > 0)
 		{
+			final List<String> tempList = new ArrayList<String>();
 			list.add(GrcI18n.translate("grc.effect.random_list.head"));
 			for (IEffect effect : effects)
 			{

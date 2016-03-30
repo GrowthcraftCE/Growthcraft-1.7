@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,71 +23,39 @@
  */
 package growthcraft.api.cellar.booze;
 
-import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.fluids.FluidTag;
 
 public class BoozeTag
 {
 	// the booze is young and probably has no effects
-	public static final BoozeTag YOUNG = new BoozeTag("young");
+	public static final FluidTag YOUNG = CoreRegistry.instance().fluidTags().createTag("young");
 	// the booze is fermented
-	public static final BoozeTag FERMENTED = new BoozeTag("fermented");
+	public static final FluidTag FERMENTED = CoreRegistry.instance().fluidTags().createTag("fermented");
 	// the booze has its effect time extended
-	public static final BoozeTag EXTENDED = new BoozeTag("extended");
+	public static final FluidTag EXTENDED = CoreRegistry.instance().fluidTags().createTag("extended");
 	// the booze has a stronger effect, but limited time
-	public static final BoozeTag POTENT = new BoozeTag("potent");
+	public static final FluidTag POTENT = CoreRegistry.instance().fluidTags().createTag("potent");
 	// the booze has the extended + potent effect
-	public static final BoozeTag HYPER_EXTENDED = new BoozeTag("hyper_extended");
+	public static final FluidTag HYPER_EXTENDED = CoreRegistry.instance().fluidTags().createTag("hyper_extended");
 	// the booze WILL kill the player on overdose
-	public static final BoozeTag DEADLY = new BoozeTag("deadly");
+	public static final FluidTag DEADLY = CoreRegistry.instance().fluidTags().createTag("deadly");
 	// the booze is poisoned, most likely by using netherrash
-	public static final BoozeTag POISONED = new BoozeTag("poisoned");
+	public static final FluidTag POISONED = CoreRegistry.instance().fluidTags().createTag("poisoned");
 	// the booze was fermented using Lager yeast
-	public static final BoozeTag CHILLED = new BoozeTag("chilled");
+	public static final FluidTag CHILLED = CoreRegistry.instance().fluidTags().createTag("chilled");
 	// the booze is heavily intoxicating
-	public static final BoozeTag INTOXICATED = new BoozeTag("intoxicated");
+	public static final FluidTag INTOXICATED = CoreRegistry.instance().fluidTags().createTag("intoxicated");
 	// the booze has a base in magic
-	public static final BoozeTag MAGICAL = new BoozeTag("magical");
+	public static final FluidTag MAGICAL = CoreRegistry.instance().fluidTags().createTag("magical");
 	// the booze has been reinforced, (a stronger version of potent)
-	public static final BoozeTag FORTIFIED = new BoozeTag("fortified");
+	public static final FluidTag FORTIFIED = CoreRegistry.instance().fluidTags().createTag("fortified");
 	// the booze has been brewed with hops
-	public static final BoozeTag HOPPED = new BoozeTag("hopped");
+	public static final FluidTag HOPPED = CoreRegistry.instance().fluidTags().createTag("hopped");
+	// the booze is some form of wine
+	public static final FluidTag WINE = CoreRegistry.instance().fluidTags().createTag("wine");
+	// the booze is some form of cider
+	public static final FluidTag CIDER = CoreRegistry.instance().fluidTags().createTag("cider");
 
-	private final String name;
-	private IModifierFunction modifierFunction;
-
-	public BoozeTag(String n)
-	{
-		this.name = n;
-	}
-
-	public String getName()
-	{
-		return name;
-	}
-
-	public String getUnlocalizedName()
-	{
-		return "grc.booze.modifier." + getName();
-	}
-
-	public String getLocalizedName()
-	{
-		return GrcI18n.translate(getUnlocalizedName());
-	}
-
-	public String toString()
-	{
-		return getName();
-	}
-
-	public IModifierFunction getModifierFunction()
-	{
-		return modifierFunction;
-	}
-
-	public BoozeTag setModifierFunction(IModifierFunction func)
-	{
-		this.modifierFunction = func;
-		return this;
-	}
+	private BoozeTag() {}
 }

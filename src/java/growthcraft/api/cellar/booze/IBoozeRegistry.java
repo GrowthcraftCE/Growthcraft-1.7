@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,10 @@
 package growthcraft.api.cellar.booze;
 
 import java.util.Collection;
+import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
+import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.log.ILoggable;
 
 import net.minecraftforge.fluids.Fluid;
@@ -32,12 +35,16 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface IBoozeRegistry extends ILoggable
 {
-	BoozeEntry getBoozeEntry(Fluid fluid);
-	BoozeEntry fetchBoozeEntry(Fluid fluid);
-	BoozeEffect getEffect(Fluid fluid);
-	boolean isFluidBooze(Fluid f);
-	boolean isFluidBooze(FluidStack fluidStack);
-	void registerBooze(Fluid fluid);
+	IModifierFunction getModifierFunction(@Nullable FluidTag fluid);
+	void setModifierFunction(@Nonnull FluidTag fluid, IModifierFunction func);
+
+	Collection<BoozeEntry> getBoozeEntries();
+	void registerBooze(@Nonnull Fluid fluid);
+	BoozeEntry getBoozeEntry(@Nullable Fluid fluid);
+	BoozeEntry fetchBoozeEntry(@Nullable Fluid fluid);
+	BoozeEffect getEffect(@Nullable Fluid fluid);
+	boolean isFluidBooze(@Nullable Fluid f);
+	boolean isFluidBooze(@Nullable FluidStack fluidStack);
 
 	/**
 	 * addBoozeAlternative()
@@ -51,24 +58,17 @@ public interface IBoozeRegistry extends ILoggable
 	 * @param altfluid - The alternate fluid.
 	 * @param fluid    - The main fluid/booze.
 	 **/
-	void addBoozeAlternative(Fluid altfluid, Fluid fluid);
-	void addBoozeAlternative(Fluid altfluid, String fluid);
-	void addBoozeAlternative(String altfluid, String fluid);
+	void addBoozeAlternative(@Nonnull Fluid altfluid, @Nonnull Fluid fluid);
+	void addBoozeAlternative(@Nonnull Fluid altfluid, @Nonnull String fluid);
+	void addBoozeAlternative(@Nonnull String altfluid, @Nonnull String fluid);
 
-	boolean isAlternateBooze(Fluid f);
-	Fluid getAlternateBooze(Fluid f);
+	boolean isAlternateBooze(@Nullable Fluid f);
+	Fluid getAlternateBooze(@Nullable Fluid f);
 
 	/**
 	 * @param f - source fluid
 	 * @return if an alternate booze exists, that will be returned, else returns the fluid passed in
 	 */
-	Fluid maybeAlternateBooze(Fluid f);
-	FluidStack maybeAlternateBoozeStack(FluidStack stack);
-
-	/* Tagging */
-	void addTags(Fluid fluid, BoozeTag... tags);
-	Collection<BoozeTag> getTags(Fluid fluid);
-	Collection<BoozeTag> getTags(FluidStack stack);
-	boolean hasTags(Fluid fluid, BoozeTag... tags);
-	boolean hasTags(FluidStack fluid, BoozeTag... tags);
+	Fluid maybeAlternateBooze(@Nullable Fluid f);
+	FluidStack maybeAlternateBoozeStack(@Nullable FluidStack stack);
 }

@@ -26,12 +26,12 @@ package growthcraft.api.core.schema;
 import java.util.List;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.definition.IItemStackListFactory;
+import growthcraft.api.core.definition.IItemStackListProvider;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemKeySchema extends ItemStackSchema implements IItemStackListFactory, IValidatable
+public class ItemKeySchema extends ItemStackSchema implements IItemStackListProvider, IValidatable
 {
 	public String ore;
 
@@ -91,17 +91,15 @@ public class ItemKeySchema extends ItemStackSchema implements IItemStackListFact
 	@Override
 	public String toString()
 	{
-		String result = "";
+		String result = String.format("Schema<ItemKey>(amount: %d)", amount);
 		if (mod_id != null && name != null)
 		{
-			result += "(" + mod_id + ":" + name + ":" + meta + ")";
+			result += String.format("~(mod_id: '%s', name: '%s', meta: %d)", mod_id, name, meta);
 		}
 		if (ore != null)
 		{
-			if (result.length() > 0) result += ", ";
-			result += "(" + "ore=" + ore + ")";
+			result += String.format("~(ore: '%s')", ore);
 		}
-		result += " x" + amount;
 		return result;
 	}
 

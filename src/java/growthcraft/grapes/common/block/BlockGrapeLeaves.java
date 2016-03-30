@@ -5,7 +5,7 @@ import java.util.Random;
 import growthcraft.core.common.block.IBlockRope;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.grapes.client.renderer.RenderGrapeLeaves;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.util.GrapeBlockCheck;
@@ -37,12 +37,12 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	public BlockGrapeLeaves()
 	{
 		super(Material.leaves, false);
-		this.setTickRandomly(true);
-		this.setHardness(0.2F);
-		this.setLightOpacity(1);
-		this.setStepSound(soundTypeGrass);
-		this.setBlockName("grc.grapeLeaves");
-		this.setCreativeTab(null);
+		setTickRandomly(true);
+		setHardness(0.2F);
+		setLightOpacity(1);
+		setStepSound(soundTypeGrass);
+		setBlockName("grc.grapeLeaves");
+		setCreativeTab(null);
 	}
 
 	private boolean isTrunk(World world, int x, int y, int z)
@@ -112,7 +112,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	private void setGrapeBlock(World world, int x, int y, int z)
 	{
-		world.setBlock(x, y, z, GrowthCraftGrapes.grapeBlock.getBlock(), 0, BlockFlags.UPDATE_CLIENT);
+		world.setBlock(x, y, z, GrowthCraftGrapes.blocks.grapeBlock.getBlock(), 0, BlockFlags.UPDATE_AND_SYNC);
 	}
 
 	public boolean growGrapeBlock(World world, int x, int y, int z)
@@ -143,7 +143,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 				if (canGrowHere(world, x + dir.offsetX, y, z + dir.offsetZ))
 				{
-					world.setBlock(x + dir.offsetX, y, z + dir.offsetZ, this, 0, BlockFlags.UPDATE_CLIENT);
+					world.setBlock(x + dir.offsetX, y, z + dir.offsetZ, this, 0, BlockFlags.UPDATE_AND_SYNC);
 				}
 			}
 		}
@@ -157,7 +157,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	{
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			world.setBlock(x, y, z, GrowthCraftCore.ropeBlock.getBlock());
+			world.setBlock(x, y, z, GrowthCraftCore.blocks.ropeBlock.getBlock());
 		}
 		else
 		{
@@ -217,7 +217,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapeSeeds.getItem();
+		return GrowthCraftGrapes.items.grapeSeeds.getItem();
 	}
 
 	@Override
@@ -248,7 +248,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return GrowthCraftCore.rope.getItem();
+		return GrowthCraftCore.items.rope.getItem();
 	}
 
 	@Override

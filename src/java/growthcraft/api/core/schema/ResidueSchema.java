@@ -29,7 +29,7 @@ import growthcraft.api.cellar.common.Residue;
 
 import net.minecraft.item.ItemStack;
 
-public class ResidueSchema extends ItemStackSchema
+public class ResidueSchema extends ItemKeySchema
 {
 	public float pomace;
 
@@ -55,6 +55,6 @@ public class ResidueSchema extends ItemStackSchema
 	@Override
 	public String toString()
 	{
-		return super.toString() + " @" + pomace;
+		return String.format("%s~(pomace: %.4f)", super.toString(), pomace);
 	}
 }

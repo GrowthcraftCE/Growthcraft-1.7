@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import growthcraft.apples.GrowthCraftApples;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -46,7 +46,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 		this.setLightOpacity(1);
 		this.setStepSound(soundTypeGrass);
 		this.setBlockName("grc.appleLeaves");
-		this.setCreativeTab(null);
+		this.setCreativeTab(GrowthCraftApples.creativeTab);
 	}
 
 	/* Bonemeal? Client side */

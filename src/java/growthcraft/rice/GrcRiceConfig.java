@@ -12,13 +12,6 @@ public class GrcRiceConfig extends ConfigBase
 	public int riceSeedDropRarity = 3;
 
 
-	@ConfigOption(catergory="Brewing", name="Rice Sake brew time", desc="[Higher -> Slower]")
-	public int riceSakeBrewingTime = 20;
-
-	@ConfigOption(catergory="Brewing", name="Rice Sake brew yield", desc="How many milli-buckets are created per rice?")
-	public int riceSakeBrewingYield = 25;
-
-
 	@ConfigOption(catergory="Booze", name="Rice Sake Color", desc="What color should Sake be?")
 	public int riceSakeColor = 0xE9EFF7;
 
@@ -29,6 +22,12 @@ public class GrcRiceConfig extends ConfigBase
 	@ConfigOption(catergory="Village", name="Generate Village Rice Fields", desc="Should we spawn rice fields in villages?")
 	public boolean generateRiceFieldStructure;
 
+
+	@ConfigOption(catergory="Integration", name="Enable Forestry Integration", desc="Should we integrate with Forestry (if available)?")
+	public boolean enableForestryIntegration = true;
+
+	@ConfigOption(catergory="Integration", name="Enable MFR Integration", desc="Should we integrate with Mine Factory Reloaded (if available)?")
+	public boolean enableMFRIntegration = true;
 
 	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
 	public boolean enableThaumcraftIntegration = true;

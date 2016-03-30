@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,20 +29,31 @@ import java.util.Random;
 import growthcraft.api.core.i18n.GrcI18n;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 /**
  * Because sometimes you want an Effect that does ABSOLUTELY NOTHING.
  */
-public class EffectNull implements IEffect
+public class EffectNull extends AbstractEffect
 {
 	@Override
 	public void apply(World world, Entity entity, Random random, Object data) {}
 
 	@Override
-	public void getDescription(List<String> list)
+	protected void getActualDescription(List<String> list)
 	{
 		// Set the description as "Does Nothing."
 		list.add(GrcI18n.translate("grc.effect.null.desc"));
+	}
+
+	@Override
+	protected void readFromNBT(NBTTagCompound data)
+	{
+	}
+
+	@Override
+	protected void writeToNBT(NBTTagCompound data)
+	{
 	}
 }

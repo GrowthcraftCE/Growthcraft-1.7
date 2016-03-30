@@ -1,7 +1,7 @@
 package growthcraft.grapes.common.block;
 
-import growthcraft.core.util.BlockFlags;
-import growthcraft.core.util.RenderType;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.RenderType;
 import growthcraft.grapes.GrowthCraftGrapes;
 
 import cpw.mods.fml.relauncher.Side;
@@ -25,12 +25,12 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase
 	public BlockGrapeVine0()
 	{
 		super();
-		this.setGrowthRateMultiplier(GrowthCraftGrapes.getConfig().grapeVineSeedlingGrowthRate);
-		this.setTickRandomly(true);
-		this.setHardness(0.0F);
-		this.setStepSound(soundTypeGrass);
-		this.setBlockName("grc.grapeVine0");
-		this.setCreativeTab(null);
+		setGrowthRateMultiplier(GrowthCraftGrapes.getConfig().grapeVineSeedlingGrowthRate);
+		setTickRandomly(true);
+		setHardness(0.0F);
+		setStepSound(soundTypeGrass);
+		setBlockName("grc.grapeVine0");
+		setCreativeTab(null);
 	}
 
 	/************
@@ -51,7 +51,7 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase
 		}
 		else
 		{
-			world.setBlock(x, y, z, GrowthCraftGrapes.grapeVine1.getBlock(), 0, BlockFlags.UPDATE_CLIENT);
+			world.setBlock(x, y, z, GrowthCraftGrapes.blocks.grapeVine1.getBlock(), 0, BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
@@ -62,7 +62,7 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftGrapes.grapeSeeds.getItem();
+		return GrowthCraftGrapes.items.grapeSeeds.getItem();
 	}
 
 	/************

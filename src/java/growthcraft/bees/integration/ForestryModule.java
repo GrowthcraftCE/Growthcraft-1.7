@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,38 +23,124 @@
  */
 package growthcraft.bees.integration;
 
-import growthcraft.api.bees.BeesRegistry;
+import java.util.ArrayList;
+import com.google.common.collect.ImmutableMap;
+
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.bees.common.block.BlockBeeBox;
+import growthcraft.bees.common.block.BlockBeeBoxForestry;
+import growthcraft.bees.common.block.EnumBeeBoxForestry;
+import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.core.integration.ModIntegrationBase;
+import growthcraft.core.common.definition.BlockTypeDefinition;
+import growthcraft.core.integration.forestry.ForestryItems;
+import growthcraft.core.integration.ForestryModuleBase;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
+import cpw.mods.fml.common.Optional;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
-public class ForestryModule extends ModIntegrationBase
+public class ForestryModule extends ForestryModuleBase
 {
 	public ForestryModule()
 	{
-		super(GrowthCraftBees.MOD_ID, "Forestry");
+		super(GrowthCraftBees.MOD_ID);
 	}
 
 	private void maybeAddBee(Item item)
 	{
 		if (item != null)
 		{
-			BeesRegistry.instance().addBee(item);
+			GrowthCraftBees.getUserBeesConfig().addDefault(item).setComment("From Forestry");
 		}
 	}
 
 	@Override
-	protected void integrate()
+	protected void doPreInit()
+	{
+		final int beeboxCount = EnumBeeBoxForestry.VALUES.length;
+		GrowthCraftBees.beeBoxesForestry = new ArrayList<BlockTypeDefinition<BlockBeeBox>>();
+		GrowthCraftBees.beeBoxesForestryFireproof = new ArrayList<BlockTypeDefinition<BlockBeeBox>>();
+
+		int i = 0;
+		int offset = 0;
+		for (EnumBeeBoxForestry[] row : EnumBeeBoxForestry.ROWS)
+		{
+			final BlockTypeDefinition<BlockBeeBox> beeBox = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxForestry(row, offset, i, false));
+			final BlockTypeDefinition<BlockBeeBox> beeBoxFP = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxForestry(row, offset, i, true));
+			beeBox.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
+			beeBoxFP.getBlock().setHarvestLevel("axe", 0);
+			GrowthCraftBees.beeBoxesForestry.add(beeBox);
+			GrowthCraftBees.beeBoxesForestryFireproof.add(beeBoxFP);
+			beeBox.register(String.format("grc.BeeBox.Forestry.%d.%s", i, "Normal"), ItemBlockBeeBox.class);
+			beeBoxFP.register(String.format("grc.BeeBox.Forestry.%d.%s", i, "Fireproof"), ItemBlockBeeBox.class);
+			i++;
+			offset += row.length;
+		}
+	}
+
+	@Override
+	protected void doInit()
 	{
 		maybeAddBee(GameRegistry.findItem(modID, "beeQueenGE"));
 		maybeAddBee(GameRegistry.findItem(modID, "beeDroneGE"));
 		maybeAddBee(GameRegistry.findItem(modID, "beePrincessGE"));
+	}
 
+	@Override
+	protected void doLateRegister()
+	{
+		for (EnumBeeBoxForestry en : EnumBeeBoxForestry.VALUES)
+		{
+			if (en == null) continue;
+
+			{
+				final BlockTypeDefinition<BlockBeeBox> beeBox = GrowthCraftBees.beeBoxesForestry.get(en.row);
+				if (beeBox != null)
+				{
+					final ItemStack planks = en.getForestryPlanksStack();
+					if (planks != null)
+					{
+						GameRegistry.addShapedRecipe(beeBox.asStack(1, en.col), " A ", "A A", "AAA", 'A', planks);
+					}
+				}
+			}
+			{
+				final BlockTypeDefinition<BlockBeeBox> beeBoxFP = GrowthCraftBees.beeBoxesForestryFireproof.get(en.row);
+				if (beeBoxFP != null)
+				{
+					final ItemStack planks = en.getForestryFireproofPlanksStack();
+					if (planks != null)
+					{
+						GameRegistry.addShapedRecipe(beeBoxFP.asStack(1, en.col), " A ", "A A", "AAA", 'A', planks);
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	@Optional.Method(modid="Forestry")
+	protected void integrate()
+	{
 		CellarRegistry.instance().booze().addBoozeAlternative("short.mead", "grc.honeymead0");
+
+		final ItemStack emptyComb = GrowthCraftBees.items.honeyCombEmpty.asStack();
+		final ItemStack fullComb = GrowthCraftBees.items.honeyCombFilled.asStack();
+		if (ForestryItems.BEESWAX.exists()) recipes().centrifugeManager.addRecipe(20, emptyComb, ImmutableMap.of(ForestryItems.BEESWAX.asStack(), 1.0f));
+
+		if (ForestryItems.BEESWAX.exists() && ForestryItems.HONEY_DROP.exists() && ForestryItems.HONEYDEW.exists())
+		{
+			recipes().centrifugeManager.addRecipe(20, fullComb,
+				ImmutableMap.of(
+					ForestryItems.BEESWAX.asStack(), 1.0f,
+					ForestryItems.HONEY_DROP.asStack(), 0.9f,
+					ForestryItems.HONEYDEW.asStack(), 0.1f
+				)
+			);
+		}
 	}
 }
 

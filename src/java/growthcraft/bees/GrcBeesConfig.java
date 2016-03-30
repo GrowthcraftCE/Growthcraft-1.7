@@ -26,6 +26,16 @@ public class GrcBeesConfig extends ConfigBase
 	@ConfigOption(catergory="Bee Box", name="Flower spawn rate", desc="[Higher -> Slower]")
 	public float beeBoxFlowerSpawnRate = 6.25f;
 
+	@ConfigOption(catergory="Bee Box", name="Bonus Multiplier", desc="When the bee box has a 'bonus', what is the multiplier?")
+	public float beeBoxBonusMultiplier = 2.5f;
+
+	@ConfigOption(catergory="Bee Box", name="Flower spawn radius", desc="[Higher -> Larger]")
+	public int beeBoxFlowerRadius = 5;
+
+
+	@ConfigOption(catergory="Fluid/Honey", name="Enabled", desc="Should we enable honey fluid and its corresponding items?")
+	public boolean honeyEnabled = true;
+
 
 	@ConfigOption(catergory="Booze", name="Honey Mead Color", desc="What color should honey mead be?")
 	public int honeyMeadColor = 0xA3610C;
@@ -46,6 +56,12 @@ public class GrcBeesConfig extends ConfigBase
 
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
 	public boolean enableWailaIntegration = true;
+
+	@ConfigOption(catergory="Integration", name="Enable BiomesOPlenty Integration", desc="Should we integrate with BiomesOPlenty (if available)?")
+	public boolean enableBoPIntegration = true;
+
+	@ConfigOption(catergory="Integration", name="Enable Botania Integration", desc="Should we integrate with Botania (if available)?")
+	public boolean enableBotaniaIntegration = true;
 
 	@ConfigOption(catergory="Integration", name="Enable Forestry Integration", desc="Should we integrate with Forestry (if available)?")
 	public boolean enableForestryIntegration = true;

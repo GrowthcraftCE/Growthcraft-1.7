@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +26,15 @@ package growthcraft.api.core.util;
 // Helper class for handling tick calculations, moved from YATM
 public class TickUtils
 {
+	public static final int TICKS_PER_DECI_SECOND = 2;
 	public static final int TICKS_PER_SECOND = 20;
 
 	private TickUtils() {}
+
+	public static int deciSeconds(int num)
+	{
+		return TICKS_PER_DECI_SECOND * num;
+	}
 
 	public static int seconds(int num)
 	{

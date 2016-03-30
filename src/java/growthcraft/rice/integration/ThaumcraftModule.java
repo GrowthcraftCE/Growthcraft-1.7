@@ -32,6 +32,7 @@ import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
 
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.event.FMLInterModComms;
 
 public class ThaumcraftModule extends ThaumcraftModuleBase
@@ -42,9 +43,10 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	}
 
 	@Override
+	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
-		FMLInterModComms.sendMessage("Thaumcraft", "harvestStandardCrop", GrowthCraftRice.riceBlock.asStack(1, 7));
+		FMLInterModComms.sendMessage(modID, "harvestStandardCrop", GrowthCraftRice.riceBlock.asStack(1, 7));
 
 		ThaumcraftApi.registerObjectTag(GrowthCraftRice.rice.asStack(), new AspectList().add(Aspect.CROP, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceBall.asStack(), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1).add(Aspect.HUNGER, 1));
@@ -63,9 +65,9 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		for (int i = 0; i < common.length; ++i)
 		{
 			final AspectList list = common[i];
-			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftRice.booze.riceSake.asStack(1, i), list.copy());
-			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftRice.booze.riceSakeBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.FLIGHT, Aspect.MOTION));
-			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftRice.booze.riceSakeFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.FLIGHT, Aspect.MOTION));
+			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftRice.fluids.riceSake.asStack(1, i), list.copy());
+			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftRice.fluids.riceSakeBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.FLIGHT, Aspect.MOTION));
+			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftRice.fluids.riceSakeFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.FLIGHT, Aspect.MOTION));
 		}
 	}
 }

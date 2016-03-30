@@ -23,14 +23,16 @@
  */
 package growthcraft.cellar.integration;
 
-import growthcraft.api.cellar.heatsource.UserHeatSources.UserHeatSourceEntry;
+import growthcraft.api.cellar.heatsource.user.UserHeatSourceEntry;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.YeastType;
+import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.Aspect;
+
+import cpw.mods.fml.common.Optional;
 
 public class ThaumcraftModule extends ThaumcraftModuleBase
 {
@@ -47,19 +49,20 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	}
 
 	@Override
+	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.brewKettle.asStack(), new AspectList().add(Aspect.METAL, 12).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.fermentBarrel.asStack(), new AspectList().add(Aspect.METAL, 6).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.fermentJar.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.VOID, 2).add(Aspect.WATER, 2));
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.fruitPress.asStack(), new AspectList().add(Aspect.METAL, 3).add(Aspect.CRAFT, 2).add(Aspect.MECHANISM, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.blocks.brewKettle.asStack(), new AspectList().add(Aspect.METAL, 12).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.blocks.cultureJar.asStack(), new AspectList().add(Aspect.TREE, 1).add(Aspect.VOID, 2).add(Aspect.WATER, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.blocks.fermentBarrel.asStack(), new AspectList().add(Aspect.METAL, 6).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.blocks.fruitPress.asStack(), new AspectList().add(Aspect.METAL, 3).add(Aspect.CRAFT, 2).add(Aspect.MECHANISM, 2));
 
 		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.waterBag.asStack(), new AspectList().add(Aspect.BEAST, 1).add(Aspect.VOID, 2).add(Aspect.WATER, 2));
 
-		ThaumcraftApi.registerObjectTag(YeastType.BREWERS.asStack(), new AspectList().add(Aspect.EARTH, 1));
-		ThaumcraftApi.registerObjectTag(YeastType.LAGER.asStack(), new AspectList().add(Aspect.COLD, 1));
-		ThaumcraftApi.registerObjectTag(YeastType.BAYANUS.asStack(), new AspectList().add(Aspect.ENERGY, 1));
-		ThaumcraftApi.registerObjectTag(YeastType.ETHEREAL.asStack(), new AspectList().add(Aspect.MAGIC, 1));
-		ThaumcraftApi.registerObjectTag(YeastType.ORIGIN.asStack(), new AspectList().add(Aspect.DARKNESS, 1));
+		ThaumcraftApi.registerObjectTag(EnumYeast.BREWERS.asStack(), new AspectList().add(Aspect.EARTH, 1));
+		ThaumcraftApi.registerObjectTag(EnumYeast.LAGER.asStack(), new AspectList().add(Aspect.COLD, 1));
+		ThaumcraftApi.registerObjectTag(EnumYeast.BAYANUS.asStack(), new AspectList().add(Aspect.ENERGY, 1));
+		ThaumcraftApi.registerObjectTag(EnumYeast.ETHEREAL.asStack(), new AspectList().add(Aspect.MAGIC, 1));
+		ThaumcraftApi.registerObjectTag(EnumYeast.ORIGIN.asStack(), new AspectList().add(Aspect.DARKNESS, 1));
 	}
 }

@@ -3,7 +3,7 @@ package growthcraft.bamboo.common.block;
 import java.util.Random;
 
 import growthcraft.bamboo.client.renderer.RenderBambooScaffold;
-import growthcraft.core.GrowthCraftCore;
+import growthcraft.bamboo.GrowthCraftBamboo;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,11 +29,11 @@ public class BlockBambooScaffold extends Block
 	public BlockBambooScaffold()
 	{
 		super(Material.wood);
-		this.setStepSound(soundTypeWood);
-		this.setResistance(0.2F);
-		this.setHardness(0.5F);
-		this.setCreativeTab(GrowthCraftCore.tab);
-		this.setBlockName("grc.bambooScaffold");
+		setStepSound(soundTypeWood);
+		setResistance(0.2F);
+		setHardness(0.5F);
+		setBlockName("grc.bambooScaffold");
+		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
 	/************
@@ -164,8 +164,8 @@ public class BlockBambooScaffold extends Block
 	/************
 	 * TEXTURES
 	 ************/
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
 		this.icons = new IIcon[2];
@@ -174,8 +174,8 @@ public class BlockBambooScaffold extends Block
 		icons[1] = reg.registerIcon("grcbamboo:scaffold");
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
 		if (side == 1)

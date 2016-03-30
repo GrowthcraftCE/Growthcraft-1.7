@@ -6,6 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
+import javax.annotation.Nonnull;
 
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.ILoggable;
@@ -37,7 +38,8 @@ public abstract class ConfigBase implements ILoggable
 	protected ILogger logger = NullLogger.INSTANCE;
 	protected Configuration config;
 
-	public void setLogger(ILogger l)
+	@Override
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
 	}

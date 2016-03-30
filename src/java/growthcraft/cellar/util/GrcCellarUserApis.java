@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,33 +23,41 @@
  */
 package growthcraft.cellar.util;
 
-import growthcraft.api.cellar.brewing.UserBrewingRecipes;
-import growthcraft.api.cellar.fermenting.UserFermentingRecipes;
-import growthcraft.api.cellar.heatsource.UserHeatSources;
-import growthcraft.api.cellar.pressing.UserPressingRecipes;
-import growthcraft.api.cellar.yeast.UserYeastEntries;
+import javax.annotation.Nonnull;
+
+import growthcraft.api.cellar.brewing.user.UserBrewingRecipesConfig;
+import growthcraft.api.cellar.culturing.user.UserCultureRecipesConfig;
+import growthcraft.api.cellar.fermenting.user.UserFermentingRecipesConfig;
+import growthcraft.api.cellar.heatsource.user.UserHeatSourcesConfig;
+import growthcraft.api.cellar.pressing.user.UserPressingRecipesConfig;
+import growthcraft.api.cellar.yeast.user.UserYeastEntriesConfig;
 import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.module.IModule;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.api.core.user.AbstractUserJSONConfig;
 import growthcraft.core.common.GrcModuleBase;
 
 public class GrcCellarUserApis extends GrcModuleBase
 {
-	private UserBrewingRecipes userBrewingRecipes;
-	private UserFermentingRecipes userFermentingRecipes;
-	private UserHeatSources userHeatSources;
-	private UserPressingRecipes userPressingRecipes;
-	private UserYeastEntries userYeastEntries;
+	private UserBrewingRecipesConfig userBrewingRecipes;
+	private UserCultureRecipesConfig userCultureRecipes;
+	private UserFermentingRecipesConfig userFermentingRecipes;
+	private UserHeatSourcesConfig userHeatSources;
+	private UserPressingRecipesConfig userPressingRecipes;
+	private UserYeastEntriesConfig userYeastEntries;
 	private ModuleContainer modules;
 
 	public GrcCellarUserApis()
 	{
 		this.modules = new ModuleContainer();
-		this.userBrewingRecipes = new UserBrewingRecipes();
-		this.userFermentingRecipes = new UserFermentingRecipes();
-		this.userHeatSources = new UserHeatSources();
-		this.userPressingRecipes = new UserPressingRecipes();
-		this.userYeastEntries = new UserYeastEntries();
+		this.userBrewingRecipes = new UserBrewingRecipesConfig();
+		this.userCultureRecipes = new UserCultureRecipesConfig();
+		this.userFermentingRecipes = new UserFermentingRecipesConfig();
+		this.userHeatSources = new UserHeatSourcesConfig();
+		this.userPressingRecipes = new UserPressingRecipesConfig();
+		this.userYeastEntries = new UserYeastEntriesConfig();
 		modules.add(userBrewingRecipes);
+		modules.add(userCultureRecipes);
 		modules.add(userFermentingRecipes);
 		modules.add(userHeatSources);
 		modules.add(userPressingRecipes);
@@ -57,65 +65,40 @@ public class GrcCellarUserApis extends GrcModuleBase
 	}
 
 	@Override
-	public void setLogger(ILogger log)
+	public void setLogger(@Nonnull ILogger log)
 	{
 		super.setLogger(log);
 		modules.setLogger(log);
 	}
 
-	public GrcCellarUserApis setUserYeastEntries(UserYeastEntries usr)
-	{
-		this.userYeastEntries = usr;
-		return this;
-	}
-
-	public GrcCellarUserApis setUserHeatSources(UserHeatSources usr)
-	{
-		this.userHeatSources = usr;
-		return this;
-	}
-
-	public GrcCellarUserApis setUserPressingRecipes(UserPressingRecipes usr)
-	{
-		this.userPressingRecipes = usr;
-		return this;
-	}
-
-	public GrcCellarUserApis setUserBrewingRecipes(UserBrewingRecipes usr)
-	{
-		this.userBrewingRecipes = usr;
-		return this;
-	}
-
-	public GrcCellarUserApis setUserFermentingRecipes(UserFermentingRecipes usr)
-	{
-		this.userFermentingRecipes = usr;
-		return this;
-	}
-
-	public UserYeastEntries getUserYeastEntries()
-	{
-		return this.userYeastEntries;
-	}
-
-	public UserHeatSources getUserHeatSources()
-	{
-		return this.userHeatSources;
-	}
-
-	public UserPressingRecipes getUserPressingRecipes()
-	{
-		return this.userPressingRecipes;
-	}
-
-	public UserBrewingRecipes getUserBrewingRecipes()
+	public UserBrewingRecipesConfig getUserBrewingRecipes()
 	{
 		return this.userBrewingRecipes;
 	}
 
-	public UserFermentingRecipes getUserFermentingRecipes()
+	public UserCultureRecipesConfig getUserCultureRecipes()
+	{
+		return this.userCultureRecipes;
+	}
+
+	public UserFermentingRecipesConfig getUserFermentingRecipes()
 	{
 		return this.userFermentingRecipes;
+	}
+
+	public UserHeatSourcesConfig getUserHeatSources()
+	{
+		return this.userHeatSources;
+	}
+
+	public UserPressingRecipesConfig getUserPressingRecipes()
+	{
+		return this.userPressingRecipes;
+	}
+
+	public UserYeastEntriesConfig getUserYeastEntries()
+	{
+		return this.userYeastEntries;
 	}
 
 	@Override
@@ -140,5 +123,16 @@ public class GrcCellarUserApis extends GrcModuleBase
 	public void postInit()
 	{
 		modules.postInit();
+	}
+
+	public void loadConfigs()
+	{
+		for (IModule module : modules)
+		{
+			if (module instanceof AbstractUserJSONConfig)
+			{
+				((AbstractUserJSONConfig)module).loadUserConfig();
+			}
+		}
 	}
 }

@@ -2,15 +2,15 @@ package growthcraft.cellar.handler;
 
 import growthcraft.cellar.client.gui.GuiBrewKettle;
 import growthcraft.cellar.client.gui.GuiFermentBarrel;
-import growthcraft.cellar.client.gui.GuiFermentJar;
+import growthcraft.cellar.client.gui.GuiCultureJar;
 import growthcraft.cellar.client.gui.GuiFruitPress;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
-import growthcraft.cellar.common.inventory.ContainerFermentJar;
+import growthcraft.cellar.common.inventory.ContainerCultureJar;
 import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.common.tileentity.TileEntityFermentJar;
+import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -40,9 +40,9 @@ public class GuiHandlerCellar implements IGuiHandler
 			return new ContainerFermentBarrel(player.inventory, (TileEntityFermentBarrel)te);
 		}
 
-		if (te instanceof TileEntityFermentJar)
+		if (te instanceof TileEntityCultureJar)
 		{
-			return new ContainerFermentJar(player.inventory, (TileEntityFermentJar)te);
+			return new ContainerCultureJar(player.inventory, (TileEntityCultureJar)te);
 		}
 
 		return null;
@@ -68,9 +68,9 @@ public class GuiHandlerCellar implements IGuiHandler
 			return new GuiFermentBarrel(player.inventory, (TileEntityFermentBarrel)te);
 		}
 
-		if (te instanceof TileEntityFermentJar)
+		if (te instanceof TileEntityCultureJar)
 		{
-			return new GuiFermentJar(player.inventory, (TileEntityFermentJar)te);
+			return new GuiCultureJar(player.inventory, (TileEntityCultureJar)te);
 		}
 
 		return null;

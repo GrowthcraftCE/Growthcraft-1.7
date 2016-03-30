@@ -5,7 +5,7 @@ import java.util.Random;
 
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.client.renderer.RenderBeeHive;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -41,8 +41,8 @@ public class BlockBeeHive extends Block
 	/************
 	 * TICK
 	 ************/
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random random)
 	{
 		if (random.nextInt(24) == 0)
@@ -92,33 +92,34 @@ public class BlockBeeHive extends Block
 				b0 = 4;
 			}
 
-			world.setBlockMetadataWithNotify(x, y, z, b0, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, b0, BlockFlags.SYNC);
 		}
 	}
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
 	{
+		super.onBlockPlacedBy(world, x, y, z, entity, stack);
 		final int face = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (face == 0)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 2, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 2, BlockFlags.SYNC);
 		}
 
 		if (face == 1)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 5, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 5, BlockFlags.SYNC);
 		}
 
 		if (face == 2)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 3, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 3, BlockFlags.SYNC);
 		}
 
 		if (face == 3)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 4, BlockFlags.SEND_TO_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, 4, BlockFlags.SYNC);
 		}
 	}
 
@@ -164,7 +165,7 @@ public class BlockBeeHive extends Block
 	@Override
 	public Item getItemDropped(int par1, Random rand, int par3)
 	{
-		return GrowthCraftBees.bee.getItem();
+		return GrowthCraftBees.items.bee.getItem();
 	}
 
 	@Override
@@ -184,16 +185,13 @@ public class BlockBeeHive extends Block
 			{
 				for (int i = 0; i < max; i++)
 				{
-					switch (world.rand.nextInt(2))
+					if (world.rand.nextInt(2) == 0)
 					{
-						case 0:
-							this.dropBlockAsItem(world, x, y, z, GrowthCraftBees.honeyCombEmpty.asStack());
-							break;
-						case 1:
-							this.dropBlockAsItem(world, x, y, z, GrowthCraftBees.honeyCombFilled.asStack());
-							break;
-						default:
-							break;
+						dropBlockAsItem(world, x, y, z, GrowthCraftBees.items.honeyCombEmpty.asStack());
+					}
+					else
+					{
+						dropBlockAsItem(world, x, y, z, GrowthCraftBees.items.honeyCombFilled.asStack());
 					}
 				}
 			}
@@ -241,8 +239,8 @@ public class BlockBeeHive extends Block
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
+	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
 		return true;

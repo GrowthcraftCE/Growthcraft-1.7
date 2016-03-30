@@ -23,7 +23,7 @@ public class ItemHopSeeds extends Item implements IPlantable
 	{
 		super();
 		this.setUnlocalizedName("grc.hopSeeds");
-		this.setCreativeTab(GrowthCraftCore.tab);
+		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
 	/************

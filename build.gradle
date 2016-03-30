@@ -63,8 +63,15 @@ archivesBaseName = "growthcraft"
 ext.growthcraftApi = "src/java/growthcraft/api"
 
 // 3rd party APIs
+ext.mfrApi = "api/powercrystals/minefactoryreloaded/api"
+ext.mfrApiExclusionPattern = "**/powercrystals/minefactoryreloaded/api/**"
+
 ext.thaumcraftApi = "api/thaumcraft/api"
 ext.thaumcraftApiExclusionPattern = "**/thaumcraft/api/**"
+
+ext.forestryApiRoot = "api/ForestryAPI"
+ext.forestryApi = "api/ForestryAPI/forestry/api"
+ext.forestryApiExclusionPattern = "**/forestry/api/**"
 
 minecraft {
     version = minecraft_forge_version
@@ -88,7 +95,9 @@ sourceSets {
     api {
         java {
             srcDir project.growthcraftApi
+            srcDir project.forestryApi
             srcDir project.thaumcraftApi
+            srcDir project.mfrApi
         }
     }
 }
@@ -111,7 +120,7 @@ dependencies {
 
     testCompile "junit:junit:4.11"
 }
-
+/*
 runClient {
     if( project.hasProperty("mcUsername") && project.hasProperty("mcPassword") ) {
         args "--username=${project.mcUsername}"
@@ -125,7 +134,7 @@ debugClient {
         args "--username=${project.mcUsername}"
         args "--password=${project.mcPassword}"
     }
-}
+}*/
 
 // --------------------
 // extra jar section
@@ -141,7 +150,9 @@ tasks.withType(JavaCompile) {
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
     from(sourceSets.api.allSource) {
+        exclude project.forestryApiExclusionPattern
         exclude project.thaumcraftApiExclusionPattern
+        exclude project.mfrApiExclusionPattern
     }
     classifier = "sources"
 }
@@ -150,7 +161,9 @@ javadoc {
     // add api classes to javadoc
     source += sourceSets.api.allSource
     // exclude 3rd party apis from the javadoc
+    exclude project.forestryApiExclusionPattern
     exclude project.thaumcraftApiExclusionPattern
+    exclude project.mfrApiExclusionPattern
 
     failOnError = false
 }
@@ -165,14 +178,18 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     from(sourceSets.api.output) {
+        exclude project.forestryApiExclusionPattern
         exclude project.thaumcraftApiExclusionPattern
+        exclude project.mfrApiExclusionPattern
     }
     classifier = "dev"
 }
 
 task apiJar(type: Jar) {
     from(sourceSets.api.output) {
+        exclude project.forestryApiExclusionPattern
         exclude project.thaumcraftApiExclusionPattern
+        exclude project.mfrApiExclusionPattern
     }
     classifier = "api"
 }
@@ -182,12 +199,17 @@ jar {
 
     // add api classes to main package
     from(sourceSets.api.output) {
+        exclude project.forestryApiExclusionPattern
         exclude project.thaumcraftApiExclusionPattern
+        exclude project.mfrApiExclusionPattern
     }
 
     // Only include the thaumcraft LICENSE
     into("thaumcraft/api") {
         from project.thaumcraftApi + "/LICENSE"
+    }
+    into("forestry/api") {
+        from project.forestryApiRoot + "/LICENSE.txt"
     }
 }
 

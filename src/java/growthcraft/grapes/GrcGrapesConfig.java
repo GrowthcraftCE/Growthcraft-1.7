@@ -35,13 +35,6 @@ public class GrcGrapesConfig extends ConfigBase
 	public int vineGrapeDropRarity = 10;
 
 
-	@ConfigOption(catergory="Pressing", name="Grape Wine press time", desc="[Higher -> Slower]")
-	public int grapeWinePressingTime = 20;
-
-	@ConfigOption(catergory="Pressing", name="Grape Wine press yield", desc="How many milli-buckets are created per grape?")
-	public int grapeWinePressingYield = 40;
-
-
 	@ConfigOption(catergory="Booze/Grape Wine", name="Grape Wine Color", desc="What color should Grape wine be?")
 	public int grapeWineColor = 0x550E24;
 
@@ -62,6 +55,12 @@ public class GrcGrapesConfig extends ConfigBase
 	@ConfigOption(catergory="Village", name="Generate Village Grape Vineyards", desc="Controls hop vineyards spawning in villages")
 	public boolean generateGrapeVineyardStructure = true;
 
+
+	@ConfigOption(catergory="Integration", name="Enable Forestry Integration", desc="Should we integrate with Forestry (if available)?")
+	public boolean enableForestryIntegration = true;
+
+	@ConfigOption(catergory="Integration", name="Enable MFR Integration", desc="Should we integrate with Mine Factory Reloaded (if available)?")
+	public boolean enableMFRIntegration = true;
 
 	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
 	public boolean enableThaumcraftIntegration = true;

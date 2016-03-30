@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.core.util.ItemUtils;
-import growthcraft.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.client.ClientProxy;
 import growthcraft.core.client.renderer.RenderPaddy;
 
@@ -22,7 +22,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public abstract class BlockPaddyBase extends Block implements IPaddy
+public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 {
 	public BlockPaddyBase(Material material)
 	{
@@ -41,13 +41,13 @@ public abstract class BlockPaddyBase extends Block implements IPaddy
 		final int meta = world.getBlockMetadata(x, y, z);
 		if (meta > 0)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, meta - 1, BlockFlags.UPDATE_CLIENT);
+			world.setBlockMetadataWithNotify(x, y, z, meta - 1, BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
 	public void fillPaddy(World world, int x, int y, int z)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, getMaxPaddyMeta(world, x, y, z), BlockFlags.UPDATE_CLIENT);
+		world.setBlockMetadataWithNotify(x, y, z, getMaxPaddyMeta(world, x, y, z), BlockFlags.UPDATE_AND_SYNC);
 	}
 
 	/************

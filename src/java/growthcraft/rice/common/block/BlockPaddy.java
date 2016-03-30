@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.common.block.BlockPaddyBase;
 import growthcraft.rice.GrowthCraftRice;
 
@@ -34,6 +35,19 @@ public class BlockPaddy extends BlockPaddyBase
 		this.setStepSound(soundTypeGravel);
 		this.setBlockName("grc.paddyField");
 		this.setCreativeTab(null);
+	}
+
+	@Override
+	public void fillWithRain(World world, int x, int y, int z)
+	{
+		if (world.rand.nextInt(20) == 0)
+		{
+			final int meta = world.getBlockMetadata(x, y, z);
+			if (meta < paddyFieldMax)
+			{
+				world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.UPDATE_AND_SYNC);
+			}
+		}
 	}
 
 	/**

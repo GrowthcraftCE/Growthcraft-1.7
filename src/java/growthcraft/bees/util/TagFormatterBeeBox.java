@@ -3,7 +3,7 @@ package growthcraft.bees.util;
 import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.core.util.ITagFormatter;
+import growthcraft.api.core.util.ITagFormatter;
 import growthcraft.core.util.TagFormatterItem;
 import growthcraft.core.util.UnitFormatter;
 
@@ -29,6 +29,12 @@ public class TagFormatterBeeBox implements ITagFormatter
 				"" + EnumChatFormatting.WHITE + tag.getInteger("honeycomb_max")
 			)
 		);
+
+		if (tag.hasKey("growth_rate"))
+		{
+			list.add(EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.growth_rate_prefix") + " " +
+				EnumChatFormatting.WHITE + GrcI18n.translate("grc.bees.growth_rate_value", (int)(tag.getFloat("growth_rate") * 100)));
+		}
 
 		return list;
 	}

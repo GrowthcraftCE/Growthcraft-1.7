@@ -12,7 +12,7 @@ public class ItemBlockBeeBox extends ItemBlock
 	public ItemBlockBeeBox(Block block)
 	{
 		super(block);
-		this.setHasSubtypes(true);
+		setHasSubtypes(true);
 	}
 
 	@Override

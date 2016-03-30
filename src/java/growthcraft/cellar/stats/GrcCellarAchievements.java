@@ -21,7 +21,7 @@ public class GrcCellarAchievements
 		achievements.put(CellarAchievement.CRAFT_BARREL,
 			(new Achievement("grc.achievement.craftBarrel", "craftBarrel",
 				-4, -4,
-				GrowthCraftCellar.fermentBarrel.getBlock(),
+				GrowthCraftCellar.blocks.fermentBarrel.getBlock(),
 				NO_ACHIEVEMENT)
 			).initIndependentStat().registerStat()
 		);

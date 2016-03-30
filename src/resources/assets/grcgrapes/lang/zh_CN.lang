@@ -1,3 +1,6 @@
+# Creative Tabs
+itemGroup.creative_tab_grcgrapes=Growthcraft|葡萄
+
 # Blocks
 tile.grc.grapeVine0.name=葡萄树干
 tile.grc.grapeVine1.name=葡萄树干
@@ -5,7 +8,9 @@ tile.grc.grapeLeaves.name=葡萄叶
 tile.grc.grapeBlock.name=葡萄
 
 # Items
-item.grc.grapes.name=葡萄
+item.grc.grapes.purple.name=葡萄
+item.grc.grapes.green.name=绿葡萄
+item.grc.grapes.red.name=红葡萄
 item.grc.grapeSeeds.name=葡萄籽
 
 # Fluids
@@ -14,6 +19,10 @@ fluid.grc.grapeWine0=葡萄酒
 fluid.grc.grapeWine1=葡萄酒
 fluid.grc.grapeWine2=葡萄酒
 fluid.grc.grapeWine3=葡萄酒
+fluid.grc.grapeWine4=仙馔密酒
+fluid.grc.grapeWine5=波特酒
+fluid.grc.grapeWine6=葡萄酒
+fluid.grc.grapeWine7=葡萄酒
 
 # Fluid Buckets
 item.bucket.fluid.grc.grapeWine.name=葡萄酒桶
@@ -21,6 +30,10 @@ item.bucket.fluid.grc.grapeWine0.name=葡萄酒桶
 item.bucket.fluid.grc.grapeWine1.name=葡萄酒桶
 item.bucket.fluid.grc.grapeWine2.name=葡萄酒桶
 item.bucket.fluid.grc.grapeWine3.name=葡萄酒桶
+item.bucket.fluid.grc.grapeWine4.name=仙馔密酒桶
+item.bucket.fluid.grc.grapeWine5.name=波特酒桶
+item.bucket.fluid.grc.grapeWine6.name=葡萄酒桶
+item.bucket.fluid.grc.grapeWine7.name=葡萄酒桶
 
 # Fluid Blocks
 tile.fluid.grc.grapeWine.name=葡萄酒
@@ -28,9 +41,7 @@ tile.fluid.grc.grapeWine0.name=葡萄酒
 tile.fluid.grc.grapeWine1.name=葡萄酒
 tile.fluid.grc.grapeWine2.name=葡萄酒
 tile.fluid.grc.grapeWine3.name=葡萄酒
-
-# Fluid Tooltips
-fluid.grc.grapeWine0.modifier=轻度
-fluid.grc.grapeWine1.modifier=发酵
-fluid.grc.grapeWine2.modifier=发酵, 高度
-fluid.grc.grapeWine3.modifier=发酵, 后劲
+tile.fluid.grc.grapeWine4.name=仙馔密酒
+tile.fluid.grc.grapeWine5.name=波特酒
+tile.fluid.grc.grapeWine6.name=葡萄酒
+tile.fluid.grc.grapeWine7.name=葡萄酒

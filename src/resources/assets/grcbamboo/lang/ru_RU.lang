@@ -1,15 +1,18 @@
+# Creative Tabs
+itemGroup.creative_tab_grcbamboo=itemGroup.creative_tab_grcbamboo
 # Blocks
-tile.grc.bambooStalk.name=Бамбук
 tile.grc.bambooBlock.name=Бамбук
-tile.grc.bambooLeaves.name=Бамбуковая листва
+tile.grc.bambooDoor.name=Бамбуковая дверь
 tile.grc.bambooFence.name=Бамбуковый забор
+tile.grc.bambooFenceGate.name=Бамбуковая калитка
+tile.grc.bambooFenceRope.name=tile.grc.bambooFenceRope.name
+tile.grc.bambooLeaves.name=Бамбуковая листва
+tile.grc.bambooScaffold.name=Бамбуковые леса
 tile.grc.bambooShoot.name=Бамбуковый побег
 tile.grc.bambooSlab.name=Бамбуковая плита
 tile.grc.bambooStairs.name=Бамбуковые ступеньки
+tile.grc.bambooStalk.name=Бамбук
 tile.grc.bambooWall.name=Бамбуковая стена
-tile.grc.bambooFenceGate.name=Бамбуковая калитка
-tile.grc.bambooScaffold.name=Бамбуковые леса
-tile.grc.bambooDoor.name=Бамбуковая дверь
 
 # Items
 item.grc.bamboo.name=Бамбук

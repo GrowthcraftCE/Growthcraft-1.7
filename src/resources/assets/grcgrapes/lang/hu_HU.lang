@@ -1,0 +1,47 @@
+# Creative Tabs
+itemGroup.creative_tab_grcgrapes=itemGroup.creative_tab_grcgrapes
+
+# Blocks
+tile.grc.grapeVine0.name=tile.grc.grapeVine0.name
+tile.grc.grapeVine1.name=tile.grc.grapeVine1.name
+tile.grc.grapeLeaves.name=tile.grc.grapeLeaves.name
+tile.grc.grapeBlock.name=tile.grc.grapeBlock.name
+
+# Items
+item.grc.grapes.purple.name=item.grc.grapes.purple.name
+item.grc.grapes.green.name=item.grc.grapes.green.name
+item.grc.grapes.red.name=item.grc.grapes.red.name
+item.grc.grapeSeeds.name=item.grc.grapeSeeds.name
+
+# Fluids
+fluid.grc.grapeWine=fluid.grc.grapeWine
+fluid.grc.grapeWine0=fluid.grc.grapeWine0
+fluid.grc.grapeWine1=fluid.grc.grapeWine1
+fluid.grc.grapeWine2=fluid.grc.grapeWine2
+fluid.grc.grapeWine3=fluid.grc.grapeWine3
+fluid.grc.grapeWine4=fluid.grc.grapeWine4
+fluid.grc.grapeWine5=fluid.grc.grapeWine5
+fluid.grc.grapeWine6=fluid.grc.grapeWine6
+fluid.grc.grapeWine7=fluid.grc.grapeWine7
+
+# Fluid Buckets
+item.bucket.fluid.grc.grapeWine.name=item.bucket.fluid.grc.grapeWine.name
+item.bucket.fluid.grc.grapeWine0.name=item.bucket.fluid.grc.grapeWine0.name
+item.bucket.fluid.grc.grapeWine1.name=item.bucket.fluid.grc.grapeWine1.name
+item.bucket.fluid.grc.grapeWine2.name=item.bucket.fluid.grc.grapeWine2.name
+item.bucket.fluid.grc.grapeWine3.name=item.bucket.fluid.grc.grapeWine3.name
+item.bucket.fluid.grc.grapeWine4.name=item.bucket.fluid.grc.grapeWine4.name
+item.bucket.fluid.grc.grapeWine5.name=item.bucket.fluid.grc.grapeWine5.name
+item.bucket.fluid.grc.grapeWine6.name=item.bucket.fluid.grc.grapeWine6.name
+item.bucket.fluid.grc.grapeWine7.name=item.bucket.fluid.grc.grapeWine7.name
+
+# Fluid Blocks
+tile.fluid.grc.grapeWine.name=tile.fluid.grc.grapeWine.name
+tile.fluid.grc.grapeWine0.name=tile.fluid.grc.grapeWine0.name
+tile.fluid.grc.grapeWine1.name=tile.fluid.grc.grapeWine1.name
+tile.fluid.grc.grapeWine2.name=tile.fluid.grc.grapeWine2.name
+tile.fluid.grc.grapeWine3.name=tile.fluid.grc.grapeWine3.name
+tile.fluid.grc.grapeWine4.name=tile.fluid.grc.grapeWine4.name
+tile.fluid.grc.grapeWine5.name=tile.fluid.grc.grapeWine5.name
+tile.fluid.grc.grapeWine6.name=tile.fluid.grc.grapeWine6.name
+tile.fluid.grc.grapeWine7.name=tile.fluid.grc.grapeWine7.name

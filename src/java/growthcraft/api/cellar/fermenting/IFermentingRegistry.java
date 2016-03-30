@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,8 @@
  */
 package growthcraft.api.cellar.fermenting;
 
+import javax.annotation.Nonnull;
+
 import growthcraft.api.core.log.ILoggable;
 
 import net.minecraft.item.ItemStack;
@@ -30,7 +32,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface IFermentingRegistry extends ILoggable
 {
-	void addFermentingRecipe(FluidStack result, FluidStack booze, ItemStack fermenter, int time);
-	FermentationResult getFermentationResult(FluidStack booze, ItemStack fermenter);
+	void addRecipe(@Nonnull IFermentationRecipe recipe);
+	void addRecipe(FluidStack result, FluidStack booze, ItemStack fermenter, int time);
+	IFermentationRecipe findRecipe(FluidStack booze, ItemStack fermenter);
 	boolean canFerment(FluidStack booze);
 }

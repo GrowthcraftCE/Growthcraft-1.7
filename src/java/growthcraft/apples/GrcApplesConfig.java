@@ -21,13 +21,6 @@ public class GrcApplesConfig extends ConfigBase
 	public int appleSaplingGrowthRate = 7;
 
 
-	@ConfigOption(catergory="Fruit Press", name="Apple Cider press time", desc="[Higher -> Slower]")
-	public int appleCiderPressingTime = 20;
-
-	@ConfigOption(catergory="Fruit Press", name="Apple Cider press yield", desc="How many milli-buckets are created per apple?")
-	public int appleCiderPressYield = 40;
-
-
 	@ConfigOption(catergory="Booze/Apple Cider", name="Color", desc="What color should Apple Cider be?")
 	public int appleCiderColor = 0x855425;
 
@@ -37,6 +30,13 @@ public class GrcApplesConfig extends ConfigBase
 
 	@ConfigOption(catergory="Village", name="Generate Village Apple Farms", desc="Should we spawn Apple Farms in Villages?")
 	public boolean generateAppleFarms;
+
+
+	@ConfigOption(catergory="Integration", name="Enable Forestry Integration", desc="Should we integrate with Forestry (if available)?")
+	public boolean enableForestryIntegration = true;
+
+	@ConfigOption(catergory="Integration", name="Enable MFR Integration", desc="Should we integrate with Mine Factory Reloaded (if available)?")
+	public boolean enableMFRIntegration = true;
 
 	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
 	public boolean enableThaumcraftIntegration = true;

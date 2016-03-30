@@ -1,9 +1,9 @@
 # Blocks
 tile.grc.paddyField.name=Rice Paddy
-tile.grc.riceBlock.name=Paddy Rice
+tile.grc.riceBlock.name=Rice
 
 # Items
-item.grc.rice.name=Paddy Rice Grain
+item.grc.rice.name=Rice Grain
 item.grc.riceBall.name=Onigiri
 
 # Fluids

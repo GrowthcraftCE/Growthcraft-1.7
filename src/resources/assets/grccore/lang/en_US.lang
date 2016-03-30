@@ -1,16 +1,26 @@
 # Creative Tabs
-itemGroup.tabGrowthCraft=Growthcraft
+itemGroup.creative_tab_grccore=Growthcraft
 
 # Blocks
 tile.grc.fenceRope.name=Fence with Rope
+tile.grc.netherBrickFenceRope.name=Nether Brick Fence with Rope
 tile.grc.ropeBlock.name=Rope
 
 # Items
 item.grc.rope.name=Rope
+item.grccore.salt.name=Salt
+item.grccore.bucketSalt.name=Salt Bucket
+item.grccore.bottleSalt.name=Salt Bottle
 
 # Fluids
 fluid.tile.water=Water
 fluid.tile.lava=Lava
+
+## Salt Water
+fluid.grccore.SaltWater=Salt Water
+tile.grccore.BlockFluidSaltWater.name=Salt Water
+item.grccore.BottleFluidSaltWater.name=Salt Water Bottle
+item.bucket.fluid.grccore.SaltWater.name=Salt Water Bucket
 
 # Other
 achievementPage.pageGrowthCraft=Growthcraft
@@ -61,14 +71,27 @@ grc.format.tank.content_suffix=mB of %s
 
 # Waila Tooltips
 grc.format.crop.growth_prefix=Growth :
-grc.format.crop.progress_format=%d%%
 grc.format.crop.mature=Mature
+grc.format.crop.progress_format=%d%%
 grc.format.paddy.hasFluid=Has Fluid :
+grccore.device.heated.multiplier.format= %d%%
+grccore.device.heated.prefix=Heat :
+grccore.device.heated.state.false= <Cold>
+grccore.device.progress.format= %d%%
+grccore.device.progress.prefix=Progress :
+grccore.waila.option.DisplayFluidContent=Fluid Tanks
+grccore.waila.option.DisplayHeated=Heated Devices
 
 # Effects
 grc.effect.chance.format=%d%% Chance of
-grc.effect.null.desc=Does Nothing
 grc.effect.list.head=Applies the following:
+grc.effect.null.desc=Does Nothing
 grc.effect.random_list.head=Applies one of the following:
 grc.effect.remove_potion_effect.format=Removes %s
 grc.effect.weighted_random_list.format=%d%% Chance of
+
+# GUI
+gui.grc.progress.format=%s : %d / %d
+
+# Inventory
+grc.inventory.internal=Inventory

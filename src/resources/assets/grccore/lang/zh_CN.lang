@@ -1,19 +1,48 @@
 # Creative Tabs
-itemGroup.tabGrowthCraft=Growthcraft|核心
+itemGroup.creative_tab_grccore=Growthcraft|核心
 
 # Blocks
 tile.grc.fenceRope.name=围栏绳
+tile.grc.netherBrickFenceRope.name=带有绳子的地狱砖栅栏
 tile.grc.ropeBlock.name=绳子
 
 # Items
 item.grc.rope.name=绳子
+item.grccore.salt.name=盐
+item.grccore.bucketSalt.name=盐水桶
+item.grccore.bottleSalt.name=盐水瓶
 
 # Fluids
 fluid.tile.water=水
 fluid.tile.lava=岩浆
 
+## Salt Water
+fluid.grccore.SaltWater=盐水
+tile.grccore.BlockFluidSaltWater.name=盐水
+item.grccore.BottleFluidSaltWater.name=盐水瓶
+item.bucket.fluid.grccore.SaltWater.name=盐水桶
+
 # Other
 achievementPage.pageGrowthCraft=Growthcraft
+
+# Colors
+grc.colour.White=白
+grc.colour.Orange=橙
+grc.colour.Magenta=品红
+grc.colour.LightBlue=淡蓝
+grc.colour.Yellow=黄
+grc.colour.Lime=黄绿
+grc.colour.Pink=粉
+grc.colour.Gray=灰
+grc.colour.LightGray=淡灰
+grc.colour.Cyan=青
+grc.colour.Purple=紫
+grc.colour.Blue=蓝
+grc.colour.Brown=棕
+grc.colour.Green=绿
+grc.colour.Red=红
+grc.colour.Black=黑
+grc.colour.Transparent=透明
 
 # Formats and Units
 grc.format.value.true=是
@@ -42,12 +71,27 @@ grc.format.tank.content_suffix=mB的%s
 
 # Waila Tooltips
 grc.format.crop.growth_prefix=生长进度：
-grc.format.crop.progress_format=%d%%
 grc.format.crop.mature=成熟
+grc.format.crop.progress_format=%d%%
 grc.format.paddy.hasFluid=内有液体：
+grccore.device.heated.multiplier.format=%d%%
+grccore.device.heated.prefix=热量：
+grccore.device.heated.state.false= <冷却>
+grccore.device.progress.format= %d%%
+grccore.device.progress.prefix=进度：
+grccore.waila.option.DisplayFluidContent=液体储存：
+grccore.waila.option.DisplayHeated=加热的设备
 
 # Effects
+grc.effect.chance.format=有%d%%概率
+grc.effect.list.head=附加以下效果：
 grc.effect.null.desc=无效果
-grc.effect.chance.format=有%d%%概率：
+grc.effect.random_list.head=附加以下任意一个效果：
 grc.effect.remove_potion_effect.format=移除%s
+grc.effect.weighted_random_list.format=有%d%%概率附加：
 
+# GUI
+gui.grc.progress.format=%s：%d / %d
+
+# Inventory
+grc.inventory.internal=物品栏

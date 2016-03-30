@@ -2,36 +2,18 @@ package growthcraft.bamboo;
 
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
-import growthcraft.bamboo.common.block.BlockBamboo;
-import growthcraft.bamboo.common.block.BlockBambooDoor;
-import growthcraft.bamboo.common.block.BlockBambooFence;
-import growthcraft.bamboo.common.block.BlockBambooFenceGate;
-import growthcraft.bamboo.common.block.BlockBambooLeaves;
-import growthcraft.bamboo.common.block.BlockBambooScaffold;
-import growthcraft.bamboo.common.block.BlockBambooShoot;
-import growthcraft.bamboo.common.block.BlockBambooSlab;
-import growthcraft.bamboo.common.block.BlockBambooStairs;
-import growthcraft.bamboo.common.block.BlockBambooStalk;
-import growthcraft.bamboo.common.block.BlockBambooWall;
+import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.bamboo.common.CommonProxy;
 import growthcraft.bamboo.common.entity.EntityBambooRaft;
-import growthcraft.bamboo.common.item.ItemBamboo;
-import growthcraft.bamboo.common.item.ItemBambooCoal;
-import growthcraft.bamboo.common.item.ItemBambooDoor;
-import growthcraft.bamboo.common.item.ItemBambooRaft;
-import growthcraft.bamboo.common.item.ItemBambooShoot;
-import growthcraft.bamboo.common.item.ItemBambooSlab;
 import growthcraft.bamboo.common.village.ComponentVillageBambooYard;
 import growthcraft.bamboo.common.village.VillageHandlerBamboo;
 import growthcraft.bamboo.common.world.BiomeGenBamboo;
 import growthcraft.bamboo.common.world.WorldGeneratorBamboo;
+import growthcraft.bamboo.creativetab.CreativeTabsGrowthcraftBamboo;
 import growthcraft.bamboo.event.BonemealEventBamboo;
 import growthcraft.bamboo.handler.BambooFuelHandler;
-import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.definition.BlockTypeDefinition;
-import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.api.core.module.ModuleContainer;
-import growthcraft.core.integration.NEI;
+import growthcraft.bamboo.init.GrcBambooBlocks;
+import growthcraft.bamboo.init.GrcBambooItems;
 import growthcraft.core.util.MapGenHelper;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -43,7 +25,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
-import net.minecraft.block.BlockSlab;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -69,23 +51,9 @@ public class GrowthCraftBamboo
 	@Instance(MOD_ID)
 	public static GrowthCraftBamboo instance;
 
-	public static BlockDefinition bambooBlock;
-	public static BlockTypeDefinition<BlockBambooShoot> bambooShoot;
-	public static BlockTypeDefinition<BlockBambooStalk> bambooStalk;
-	public static BlockDefinition bambooLeaves;
-	public static BlockDefinition bambooFence;
-	public static BlockDefinition bambooWall;
-	public static BlockDefinition bambooStairs;
-	public static BlockTypeDefinition<BlockSlab> bambooSingleSlab;
-	public static BlockTypeDefinition<BlockSlab> bambooDoubleSlab;
-	public static BlockDefinition bambooDoor;
-	public static BlockDefinition bambooFenceGate;
-	public static BlockDefinition bambooScaffold;
-	public static ItemDefinition bamboo;
-	public static ItemDefinition bambooDoorItem;
-	public static ItemDefinition bambooRaft;
-	public static ItemDefinition bambooCoal;
-	public static ItemDefinition bambooShootFood;
+	public static CreativeTabs creativeTab;
+	public static GrcBambooBlocks blocks = new GrcBambooBlocks();
+	public static GrcBambooItems items = new GrcBambooItems();
 
 	public static BiomeGenBase bambooBiome;
 
@@ -99,36 +67,20 @@ public class GrowthCraftBamboo
 	}
 
 	@EventHandler
-	public void preload(FMLPreInitializationEvent event)
+	public void preInit(FMLPreInitializationEvent event)
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
 
+		modules.add(blocks);
+		modules.add(items);
+		if (config.enableForestryIntegration) modules.add(new growthcraft.bamboo.integration.ForestryModule());
+		if (config.enableMFRIntegration) modules.add(new growthcraft.bamboo.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bamboo.integration.ThaumcraftModule());
-
 		if (config.debugEnabled) modules.setLogger(logger);
 
-		//====================
-		// INIT
-		//====================
-		bambooBlock      = new BlockDefinition(new BlockBamboo());
-		bambooShoot      = new BlockTypeDefinition<BlockBambooShoot>(new BlockBambooShoot());
-		bambooStalk      = new BlockTypeDefinition<BlockBambooStalk>(new BlockBambooStalk());
-		bambooLeaves     = new BlockDefinition(new BlockBambooLeaves());
-		bambooFence      = new BlockDefinition(new BlockBambooFence());
-		bambooWall       = new BlockDefinition(new BlockBambooWall());
-		bambooStairs     = new BlockDefinition(new BlockBambooStairs());
-		bambooSingleSlab = new BlockTypeDefinition<BlockSlab>(new BlockBambooSlab(false));
-		bambooDoubleSlab = new BlockTypeDefinition<BlockSlab>(new BlockBambooSlab(true));
-		bambooDoor       = new BlockDefinition(new BlockBambooDoor());
-		bambooFenceGate  = new BlockDefinition(new BlockBambooFenceGate());
-		bambooScaffold   = new BlockDefinition(new BlockBambooScaffold());
-
-		bamboo = new ItemDefinition(new ItemBamboo());
-		bambooDoorItem = new ItemDefinition(new ItemBambooDoor());
-		bambooRaft = new ItemDefinition(new ItemBambooRaft());
-		bambooCoal = new ItemDefinition(new ItemBambooCoal());
-		bambooShootFood = new ItemDefinition(new ItemBambooShoot());
+		creativeTab = new CreativeTabsGrowthcraftBamboo("creative_tab_grcbamboo");
+		modules.preInit();
 
 		if (config.generateBambooBiome)
 		{
@@ -139,33 +91,12 @@ public class GrowthCraftBamboo
 				.setTemperatureRainfall(0.7F, 0.8F);
 		}
 
-		modules.preInit();
 		register();
 	}
 
 	private void register()
 	{
-		//====================
-		// REGISTRIES
-		//====================
-		GameRegistry.registerBlock(bambooBlock.getBlock(), "grc.bambooBlock");
-		GameRegistry.registerBlock(bambooShoot.getBlock(), "grc.bambooShoot");
-		GameRegistry.registerBlock(bambooStalk.getBlock(), "grc.bambooStalk");
-		GameRegistry.registerBlock(bambooLeaves.getBlock(), "grc.bambooLeaves");
-		GameRegistry.registerBlock(bambooFence.getBlock(), "grc.bambooFence");
-		GameRegistry.registerBlock(bambooWall.getBlock(), "grc.bambooWall");
-		GameRegistry.registerBlock(bambooStairs.getBlock(), "grc.bambooStairs");
-		GameRegistry.registerBlock(bambooSingleSlab.getBlock(), ItemBambooSlab.class, "grc.bambooSingleSlab");
-		GameRegistry.registerBlock(bambooDoubleSlab.getBlock(), ItemBambooSlab.class, "grc.bambooDoubleSlab");
-		GameRegistry.registerBlock(bambooDoor.getBlock(), "grc.bambooDoor");
-		GameRegistry.registerBlock(bambooFenceGate.getBlock(), "grc.bambooFenceGate");
-		GameRegistry.registerBlock(bambooScaffold.getBlock(), "grc.bambooScaffold");
-
-		GameRegistry.registerItem(bamboo.getItem(), "grc.bamboo");
-		GameRegistry.registerItem(bambooDoorItem.getItem(), "grc.bambooDoorItem");
-		GameRegistry.registerItem(bambooRaft.getItem(), "grc.bambooRaft");
-		GameRegistry.registerItem(bambooCoal.getItem(), "grc.bambooCoal");
-		GameRegistry.registerItem(bambooShootFood.getItem(), "grc.bambooShootFood");
+		modules.register();
 
 		if (config.generateBambooBiome)
 		{
@@ -179,32 +110,19 @@ public class GrowthCraftBamboo
 		EntityRegistry.registerModEntity(EntityBambooRaft.class, "bambooRaft", 1, this, 80, 3, true);
 
 		//====================
-		// ADDITIONAL PROPS.
-		//====================
-		Blocks.fire.setFireInfo(bambooBlock.getBlock(), 5, 20);
-		Blocks.fire.setFireInfo(bambooStalk.getBlock(), 5, 4);
-		Blocks.fire.setFireInfo(bambooLeaves.getBlock(), 30, 60);
-		Blocks.fire.setFireInfo(bambooFence.getBlock(), 5, 20);
-		Blocks.fire.setFireInfo(bambooWall.getBlock(), 5, 20);
-		Blocks.fire.setFireInfo(bambooStairs.getBlock(), 5, 20);
-		Blocks.fire.setFireInfo(bambooSingleSlab.getBlock(), 5, 20);
-		Blocks.fire.setFireInfo(bambooDoubleSlab.getBlock(), 5, 20);
-		Blocks.fire.setFireInfo(bambooScaffold.getBlock(), 5, 20);
-
-		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addShapedRecipe(bambooWall.asStack(6), "###", "###", '#', bambooBlock.getBlock());
-		GameRegistry.addShapedRecipe(bambooStairs.asStack(4), "#  ", "## ", "###", '#', bambooBlock.getBlock());
-		GameRegistry.addShapedRecipe(bambooSingleSlab.asStack(6), "###", '#', bambooBlock.getBlock());
-		GameRegistry.addShapedRecipe(bambooDoorItem.asStack(), "##", "##", "##", '#', bambooBlock.getBlock());
-		GameRegistry.addShapedRecipe(bambooRaft.asStack(), "A A", "AAA", 'A', bambooBlock.getBlock());
-		GameRegistry.addShapedRecipe(bambooBlock.asStack(), "A", "A", 'A', bambooSingleSlab.getBlock());
-		GameRegistry.addShapedRecipe(bambooBlock.asStack(), "AA", "AA", 'A', bamboo.getItem());
-		GameRegistry.addShapedRecipe(bambooFence.asStack(3), "AAA", "AAA", 'A', bamboo.getItem());
-		GameRegistry.addShapedRecipe(bambooFenceGate.asStack(), "ABA", "ABA", 'A', bamboo.getItem(), 'B', bambooBlock.getBlock());
-		GameRegistry.addShapedRecipe(bambooScaffold.asStack(16), "BBB", " A ", "A A", 'A', bamboo.getItem(), 'B', bambooBlock.getBlock());
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.torch, 2), new Object[] {"A", "B", 'A', bambooCoal.getItem(), 'B', "stickWood"}));
+		GameRegistry.addShapedRecipe(blocks.bambooWall.asStack(6), "###", "###", '#', blocks.bambooBlock.getBlock());
+		GameRegistry.addShapedRecipe(blocks.bambooStairs.asStack(4), "#  ", "## ", "###", '#', blocks.bambooBlock.getBlock());
+		GameRegistry.addShapedRecipe(blocks.bambooSingleSlab.asStack(6), "###", '#', blocks.bambooBlock.getBlock());
+		GameRegistry.addShapedRecipe(items.bambooDoorItem.asStack(), "##", "##", "##", '#', blocks.bambooBlock.getBlock());
+		GameRegistry.addShapedRecipe(items.bambooRaft.asStack(), "A A", "AAA", 'A', blocks.bambooBlock.getBlock());
+		GameRegistry.addShapedRecipe(blocks.bambooBlock.asStack(), "A", "A", 'A', blocks.bambooSingleSlab.getBlock());
+		GameRegistry.addShapedRecipe(blocks.bambooBlock.asStack(), "AA", "AA", 'A', items.bamboo.getItem());
+		GameRegistry.addShapedRecipe(blocks.bambooFence.asStack(3), "AAA", "AAA", 'A', items.bamboo.getItem());
+		GameRegistry.addShapedRecipe(blocks.bambooFenceGate.asStack(), "ABA", "ABA", 'A', items.bamboo.getItem(), 'B', blocks.bambooBlock.getBlock());
+		GameRegistry.addShapedRecipe(blocks.bambooScaffold.asStack(16), "BBB", " A ", "A A", 'A', items.bamboo.getItem(), 'B', blocks.bambooBlock.getBlock());
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.torch, 2), new Object[] {"A", "B", 'A', items.bambooCoal.getItem(), 'B', "stickWood"}));
 
 		MapGenHelper.registerVillageStructure(ComponentVillageBambooYard.class, "grc.bambooyard");
 
@@ -214,11 +132,7 @@ public class GrowthCraftBamboo
 		// SMELTING
 		//====================
 		GameRegistry.registerFuelHandler(new BambooFuelHandler());
-		GameRegistry.addSmelting(bamboo.getItem(), bambooCoal.asStack(), 0.075f);
-
-		NEI.hideItem(bambooDoor.asStack());
-
-		modules.register();
+		GameRegistry.addSmelting(items.bamboo.getItem(), items.bambooCoal.asStack(), 0.075f);
 	}
 
 	public void registerOres()
@@ -228,42 +142,42 @@ public class GrowthCraftBamboo
 		 */
 
 		// General ore dictionary names
-		OreDictionary.registerOre("stickWood", bamboo.getItem());
-		OreDictionary.registerOre("woodStick", bamboo.getItem());
-		OreDictionary.registerOre("plankWood", bambooBlock.getBlock());
-		OreDictionary.registerOre("woodPlank", bambooBlock.getBlock());
-		OreDictionary.registerOre("slabWood", bambooSingleSlab.getBlock());
-		OreDictionary.registerOre("woodSlab", bambooSingleSlab.getBlock());
-		OreDictionary.registerOre("stairWood", bambooStairs.getBlock());
-		OreDictionary.registerOre("woodStair", bambooStairs.getBlock());
-		OreDictionary.registerOre("leavesTree", bambooLeaves.getBlock());
-		OreDictionary.registerOre("treeLeaves", bambooLeaves.getBlock());
+		OreDictionary.registerOre("stickWood", items.bamboo.getItem());
+		OreDictionary.registerOre("woodStick", items.bamboo.getItem());
+		OreDictionary.registerOre("plankWood", blocks.bambooBlock.getBlock());
+		OreDictionary.registerOre("woodPlank", blocks.bambooBlock.getBlock());
+		OreDictionary.registerOre("slabWood", blocks.bambooSingleSlab.getBlock());
+		OreDictionary.registerOre("woodSlab", blocks.bambooSingleSlab.getBlock());
+		OreDictionary.registerOre("stairWood", blocks.bambooStairs.getBlock());
+		OreDictionary.registerOre("woodStair", blocks.bambooStairs.getBlock());
+		OreDictionary.registerOre("leavesTree", blocks.bambooLeaves.getBlock());
+		OreDictionary.registerOre("treeLeaves", blocks.bambooLeaves.getBlock());
 
 
 		// Bamboo specific
-		OreDictionary.registerOre("cropBamboo", bamboo.getItem());
-		OreDictionary.registerOre("materialBamboo", bamboo.getItem());
-		OreDictionary.registerOre("bamboo", bamboo.getItem());
-		OreDictionary.registerOre("plankBamboo", bambooBlock.getBlock());
-		OreDictionary.registerOre("slabBamboo", bambooSingleSlab.getBlock());
-		OreDictionary.registerOre("stairBamboo", bambooStairs.getBlock());
-		OreDictionary.registerOre("treeBambooLeaves", bambooLeaves.getBlock());
+		OreDictionary.registerOre("cropBamboo", items.bamboo.getItem());
+		OreDictionary.registerOre("materialBamboo", items.bamboo.getItem());
+		OreDictionary.registerOre("bamboo", items.bamboo.getItem());
+		OreDictionary.registerOre("plankBamboo", blocks.bambooBlock.getBlock());
+		OreDictionary.registerOre("slabBamboo", blocks.bambooSingleSlab.getBlock());
+		OreDictionary.registerOre("stairBamboo", blocks.bambooStairs.getBlock());
+		OreDictionary.registerOre("treeBambooLeaves", blocks.bambooLeaves.getBlock());
 
-		OreDictionary.registerOre("foodBambooshoot", bambooShoot.getBlock());
-		OreDictionary.registerOre("foodBambooshoot", bambooShootFood.getItem());
+		OreDictionary.registerOre("foodBambooshoot", blocks.bambooShoot.getBlock());
+		OreDictionary.registerOre("foodBambooshoot", items.bambooShootFood.getItem());
 
 		/*
 		 * For Pam's HarvestCraft
 		 *   Uses the same OreDict. names as HarvestCraft
 		 */
-		OreDictionary.registerOre("cropBambooshoot", bambooShoot.getBlock());
-		OreDictionary.registerOre("listAllveggie", bambooShoot.getBlock());
-		OreDictionary.registerOre("cropBambooshoot", bambooShootFood.getItem());
-		OreDictionary.registerOre("listAllveggie", bambooShootFood.getItem());
+		OreDictionary.registerOre("cropBambooshoot", blocks.bambooShoot.getBlock());
+		OreDictionary.registerOre("listAllveggie", blocks.bambooShoot.getBlock());
+		OreDictionary.registerOre("cropBambooshoot", items.bambooShootFood.getItem());
+		OreDictionary.registerOre("listAllveggie", items.bambooShootFood.getItem());
 	}
 
 	@EventHandler
-	public void load(FMLInitializationEvent event)
+	public void init(FMLInitializationEvent event)
 	{
 		CommonProxy.instance.initRenders();
 		final VillageHandlerBamboo handler = new VillageHandlerBamboo();
@@ -273,7 +187,7 @@ public class GrowthCraftBamboo
 	}
 
 	@EventHandler
-	public void postload(FMLPostInitializationEvent event)
+	public void postInit(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(new BonemealEventBamboo());
 

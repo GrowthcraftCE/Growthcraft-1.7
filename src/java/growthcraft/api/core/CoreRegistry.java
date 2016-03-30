@@ -1,94 +1,74 @@
 package growthcraft.api.core;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.Nonnull;
 
-import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.fluids.FluidDictionary;
+import growthcraft.api.core.fluids.FluidTagsRegistry;
+import growthcraft.api.core.fluids.IFluidDictionary;
+import growthcraft.api.core.fluids.IFluidTagsRegistry;
 import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandom;
-import net.minecraft.world.World;
+import growthcraft.api.core.vines.IVineDropRegistry;
+import growthcraft.api.core.vines.VineDropRegistry;
 
 public class CoreRegistry implements ILoggable
 {
-	public static class VineEntry extends WeightedRandom.Item
-	{
-		private final ItemStack item;
-
-		public VineEntry(ItemStack v, int weight)
-		{
-			super(weight);
-			this.item = v;
-		}
-
-		public ItemStack getItemStack()
-		{
-			return item;
-		}
-	}
-
 	private static final CoreRegistry instance = new CoreRegistry();
 
 	protected ILogger logger = NullLogger.INSTANCE;
-	private final List<VineEntry> vineList = new ArrayList<VineEntry>();
-
-	/**
-	 * @return vine drop list
-	 */
-	public List<VineEntry> getList() { return vineList; }
+	private final IFluidDictionary fluidDictionary = new FluidDictionary();
+	private final IFluidTagsRegistry fluidTagsRegistry = new FluidTagsRegistry();
+	private final IEffectRegistry effectRegistry = new EffectRegistry().initialize();
+	private final IPotionEffectFactoryRegistry potionEffectFactoryRegistry = new PotionEffectFactoryRegistry();
+	private final IVineDropRegistry vineDropRegistry = new VineDropRegistry();
 
 	public static final CoreRegistry instance()
 	{
 		return instance;
 	}
 
-	public void setLogger(ILogger l)
+	@Override
+	public void setLogger(@Nonnull ILogger l)
 	{
 		this.logger = l;
+		fluidTagsRegistry.setLogger(logger);
+		fluidDictionary.setLogger(logger);
+		effectRegistry.setLogger(logger);
+		potionEffectFactoryRegistry.setLogger(logger);
+		vineDropRegistry.setLogger(logger);
 	}
 
-	///////////////////////////////////////////////////////////////////////
-	// VINE DROPS /////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////
-	/**
-	 * addVineDrop()
-	 * Adds a drop to vines.
-	 *
-	 * @param item   - The item/block to be added.
-	 * @param weight - Weight. Used for randoming. Higher numbers means lesser chance.
-	 */
-	public void addVineDrop(ItemStack item, int weight)
+	public ILogger getLogger()
 	{
-		if (weight <= 0)
-		{
-			logger.warn("RARITY/WEIGHT WAS SET TO 0 FOR ITEM: %s, THE WORLD IS CRUMBLING, WHAT HAVE YOU DONE ~ IceDragon. Go set it to 1 or something.", item.getUnlocalizedName());
-			weight = 1;
-		}
-		this.vineList.add(new VineEntry(item, weight));
+		return logger;
 	}
 
-	/**
-	 * @return true if their are any vine drops, false otherwise
-	 */
-	public boolean hasVineDrops()
+	public IEffectRegistry getEffectsRegistry()
 	{
-		return !getList().isEmpty();
+		return effectRegistry;
+	}
+
+	public IPotionEffectFactoryRegistry getPotionEffectFactoryRegistry()
+	{
+		return potionEffectFactoryRegistry;
 	}
 
 	/**
-	 * @param world - The world
-	 * @return itemstack or null
+	 * @return instance of the FluidTagsRegistry
 	 */
-	public ItemStack getVineDropItem(World world)
+	public IFluidTagsRegistry fluidTags()
 	{
-		final List<VineEntry> vineEntries = getList();
-		if (vineEntries.isEmpty()) return null;
+		return fluidTagsRegistry;
+	}
 
-		final VineEntry entry = (VineEntry)WeightedRandom.getRandomItem(world.rand, vineEntries);
-		if (entry == null || entry.getItemStack() == null) return null;
+	public IFluidDictionary fluidDictionary()
+	{
+		return fluidDictionary;
+	}
 
-		return entry.getItemStack().copy();
+	public IVineDropRegistry vineDrops()
+	{
+		return vineDropRegistry;
 	}
 }

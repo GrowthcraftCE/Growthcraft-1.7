@@ -1,0 +1,97 @@
+# Creative Tabs
+itemGroup.creative_tab_grccore=Growthcraft
+
+# Blocks
+tile.grc.fenceRope.name=Cerca com Corda
+tile.grc.netherBrickFenceRope.name=Cerca de Tijolo do Nether com Corda
+tile.grc.ropeBlock.name=Corda
+
+# Items
+item.grc.rope.name=Corda
+item.grccore.salt.name=Sal
+item.grccore.bucketSalt.name=Balde de Sal
+item.grccore.bottleSalt.name=Frasco de Sal
+
+# Fluids
+fluid.tile.water=Água
+fluid.tile.lava=Lava
+
+## Salt Water
+fluid.grccore.SaltWater=Água Salgada
+tile.grccore.BlockFluidSaltWater.name=Água Salgada
+item.grccore.BottleFluidSaltWater.name=Frasco de Água Salgada
+item.bucket.fluid.grccore.SaltWater.name=Balde de Água Salgada
+
+# Other
+achievementPage.pageGrowthCraft=Growthcraft
+
+# Colors
+grc.colour.White=Branco
+grc.colour.Orange=Laranja
+grc.colour.Magenta=Magenta
+grc.colour.LightBlue=Azul Claro
+grc.colour.Yellow=Amarelo
+grc.colour.Lime=Verde Lima
+grc.colour.Pink=Cor-de-rosa
+grc.colour.Gray=Cinzento
+grc.colour.LightGray=Cinzento Claro
+grc.colour.Cyan=Azul Ciano
+grc.colour.Purple=Roxo
+grc.colour.Blue=Azul
+grc.colour.Brown=Castanho
+grc.colour.Green=Verde
+grc.colour.Red=Vermelho
+grc.colour.Black=Preto
+grc.colour.Transparent=Transparente
+
+# Formats and Units
+grc.format.value.true=Sim
+grc.format.value.false=Não
+grc.format.state.true=ON
+grc.format.state.false=OFF
+grc.format.invalid_fluid=<Fluido Inválido>
+# Displayed for items
+grc.format.itemslot.empty=<Vazio>
+grc.format.itemslot.invalid=<Item Inválido>
+
+# Modifier name
+grc.format.booze.name=%2$s %1$s
+
+# When a fluid is not a booze
+grc.format.fluid.name=%1$s
+
+# Name (stack_size)
+grc.format.itemslot.item=%s (x%d)
+# Displayed for tile entities with multiple tanks, %d is the tank index + 1
+grc.format.tank_id=Tanque %d :
+# When the tank is empty
+grc.format.tank.empty=<Vazio>
+# %s is the fluid name
+grc.format.tank.content_suffix=mB de %s
+
+# Waila Tooltips
+grc.format.crop.growth_prefix=Crescido :
+grc.format.crop.mature=Maduro
+grc.format.crop.progress_format=%d%%
+grc.format.paddy.hasFluid=Contém Fluido :
+grccore.device.heated.multiplier.format= %d%%
+grccore.device.heated.prefix=Calor :
+grccore.device.heated.state.false= <Frio>
+grccore.device.progress.format= %d%%
+grccore.device.progress.prefix=Progresso :
+grccore.waila.option.DisplayFluidContent=Tanques de Fluido
+grccore.waila.option.DisplayHeated=Dispositivos Aquecidos
+
+# Effects
+grc.effect.chance.format=%d%% Chance de
+grc.effect.list.head=Aplica as seguintes:
+grc.effect.null.desc=Não faz nada
+grc.effect.random_list.head=Aplica uma das seguintes:
+grc.effect.remove_potion_effect.format=Remove %s
+grc.effect.weighted_random_list.format=%d%% Chance de
+
+# GUI
+gui.grc.progress.format=gui.grc.progress.format
+
+# Inventory
+grc.inventory.internal=grc.inventory.internal
