@@ -196,6 +196,7 @@ public class TileEntityHangingCurds extends GrcTileEntityBase implements INBTIte
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
+		writeCheeseCurdToNBT(nbt);
 		writeWheyPulsarToNBT(nbt);
 	}
 
