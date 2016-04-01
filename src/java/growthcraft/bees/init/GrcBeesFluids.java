@@ -86,7 +86,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		honey.registerObjects("grc", "Honey");
+		if (honey != null) honey.registerObjects("grc", "Honey");
 		GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honeyMead");
 		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle, "grc.honeyMead", null);
 		if (honey != null) CoreRegistry.instance().fluidDictionary().addFluidTags(honey.getFluid(), BeesFluidTag.HONEY);

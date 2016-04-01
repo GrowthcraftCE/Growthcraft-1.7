@@ -287,8 +287,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		setupCustomDisplayName(world, x, y, z, stack);
 	}
 
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int par6)
+	protected void scatterInventory(World world, int x, int y, int z, Block block)
 	{
 		final TileEntity te = getTileEntity(world, x, y, z);
 		if (te instanceof IInventory)
@@ -304,6 +303,12 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 				world.func_147453_f(x, y, z, block);
 			}
 		}
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int par6)
+	{
+		scatterInventory(world, x, y, z, block);
 		super.breakBlock(world, x, y, z, block, par6);
 		world.removeTileEntity(x, y, z);
 	}

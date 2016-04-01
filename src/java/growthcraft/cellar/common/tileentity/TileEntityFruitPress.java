@@ -91,14 +91,14 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 		// if this is the raw item slow
 		if (index == 0)
 		{
-			// only allow extraction from the top or bottom
-			if (side == 0 || side == 1) return true;
+			// only allow extraction from the top
+			if (side == 1) return true;
 		}
 		// else this is the residue slot
 		else
 		{
-			// if its the side, the item can be safely extracted
-			if (side > 1) return true;
+			// extract from sides, or bottom
+			if (side == 0 || side > 1) return true;
 		}
 		return false;
 	}
