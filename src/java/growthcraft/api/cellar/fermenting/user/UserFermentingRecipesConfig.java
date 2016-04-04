@@ -115,7 +115,7 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 		{
 			if (recipes.data != null)
 			{
-				logger.info("Registering %d user heat sources.", recipes.data.size());
+				logger.info("Registering %d fermenting recipes.", recipes.data.size());
 				for (UserFermentingRecipe recipe : recipes.data) addRecipe(recipe);
 			}
 			else
