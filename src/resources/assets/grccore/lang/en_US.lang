@@ -2,6 +2,12 @@
 itemGroup.creative_tab_grccore=Growthcraft
 
 # Blocks
+tile.grc.etfuturum_fence_rope_acacia.name=Acacia Fence with Rope
+tile.grc.etfuturum_fence_rope_birch.name=Birch Fence with Rope
+tile.grc.etfuturum_fence_rope_dark_oak.name=Dark Oak Fence with Rope
+tile.grc.etfuturum_fence_rope_jungle.name=Jungle Fence with Rope
+tile.grc.etfuturum_fence_rope_oak.name=Oak Fence with Rope
+tile.grc.etfuturum_fence_rope_spruce.name=Spruce Fence with Rope
 tile.grc.fenceRope.name=Fence with Rope
 tile.grc.netherBrickFenceRope.name=Nether Brick Fence with Rope
 tile.grc.ropeBlock.name=Rope
