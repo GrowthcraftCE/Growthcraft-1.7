@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -35,20 +35,29 @@ import net.minecraftforge.fluids.FluidStack;
 public interface IBrewingRegistry extends ILoggable
 {
 	/**
-	 * addBrewing()
+	 * Add a new BrewingRecipe
 	 *
-	 * Example Usage:
-	 * 	addBrewing(new FluidStack(FluidRegistry.WATER, 20), new ItemStack(Item.wheat), new FluidStack(hopAle_booze, 20), 37, Residue.newDefault(0.3f));
-	 *
+	 * @param recipe - the recipe to add
+	 */
+	void addRecipe(@Nonnull BrewingRecipe recipe);
+
+	/**
 	 * @param sourceFluid - The source Fluid.
-	 * @param raw         - The source/input ItemStack.
+	 * @param raw         - The source/input ItemStack, or MultiItemStack.
 	 * @param resultFluid - The resulting Fluid.
 	 * @param time        - The time needed for the item/block to be brewed.
 	 * @param residue     - The residue that will be produced
 	 */
-	void addBrewing(@Nonnull FluidStack sourceFluid, @Nonnull ItemStack raw, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue);
+	void addRecipe(@Nonnull FluidStack sourceFluid, @Nonnull Object raw, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue);
 
+	/**
+	 * Get an existing recipe given the ingredients
+	 *
+	 * @param fluidstack - fluid ingredient
+	 * @param itemstack - item ingredient
+	 * @return null, or recipe
+	 */
 	@Nullable BrewingRecipe getBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack);
 	boolean isBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack);
-	boolean isItemBrewingIngredient(ItemStack itemstack);
+	boolean isItemBrewingIngredient(@Nullable ItemStack itemstack);
 }

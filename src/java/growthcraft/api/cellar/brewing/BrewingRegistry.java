@@ -1,9 +1,7 @@
 package growthcraft.api.cellar.brewing;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -12,7 +10,7 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.core.item.ItemKey;
+import growthcraft.api.core.util.MultiStacksUtil;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -21,7 +19,6 @@ import net.minecraftforge.fluids.FluidStack;
 public class BrewingRegistry implements IBrewingRegistry
 {
 	private List<BrewingRecipe> recipes = new ArrayList<BrewingRecipe>();
-	private Set<ItemKey> itemIngredients = new HashSet<ItemKey>();
 	private ILogger logger = NullLogger.INSTANCE;
 
 	private Fluid boozeToKey(Fluid f)
@@ -35,17 +32,17 @@ public class BrewingRegistry implements IBrewingRegistry
 		this.logger = l;
 	}
 
-	private void addRecipe(@Nonnull BrewingRecipe recipe)
+	@Override
+	public void addRecipe(@Nonnull BrewingRecipe recipe)
 	{
-		final ItemStack is = recipe.getInputItemStack();
 		recipes.add(recipe);
-		itemIngredients.add(new ItemKey(is));
+		logger.info("Added Brewing Recipe recipe={%s}", recipe);
 	}
 
 	@Override
-	public void addBrewing(@Nonnull FluidStack sourceFluid, @Nonnull ItemStack raw, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue)
+	public void addRecipe(@Nonnull FluidStack sourceFluid, @Nonnull Object raw, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue)
 	{
-		addRecipe(new BrewingRecipe(sourceFluid, raw, resultFluid, time, residue));
+		addRecipe(new BrewingRecipe(sourceFluid, MultiStacksUtil.toMultiItemStacks(raw), resultFluid, time, residue));
 	}
 
 	@Override
@@ -71,7 +68,10 @@ public class BrewingRegistry implements IBrewingRegistry
 	{
 		if (itemstack == null) return false;
 
-		return itemIngredients.contains(new ItemKey(itemstack)) ||
-			itemIngredients.contains(new ItemKey(itemstack.getItem(), ItemKey.WILDCARD_VALUE));
+		for (BrewingRecipe recipe : recipes)
+		{
+			if (recipe.isItemIngredient(itemstack)) return true;
+		}
+		return false;
 	}
 }

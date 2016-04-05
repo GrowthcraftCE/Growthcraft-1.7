@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,13 @@
  */
 package growthcraft.api.core.schema;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.core.definition.IItemStackListProvider;
+import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.item.OreItemStacks;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -86,6 +89,18 @@ public class ItemKeySchema extends ItemStackSchema implements IItemStackListProv
 	}
 
 	/**
+	 * @return list of multi itemstacks, the list may be empty if it is invalid
+	 */
+	@Override
+	public List<IMultiItemStacks> getMultiItemStacks()
+	{
+		final List<IMultiItemStacks> result = super.getMultiItemStacks();
+		if (ore != null)
+			result.add(new OreItemStacks(ore, amount));
+		return result;
+	}
+
+	/**
 	 * @return string representing the ItemKeySchema
 	 */
 	@Override
@@ -121,5 +136,34 @@ public class ItemKeySchema extends ItemStackSchema implements IItemStackListProv
 	public boolean isInvalid()
 	{
 		return !isValid();
+	}
+
+	public static List<ItemKeySchema> createMulti(Object obj)
+	{
+		final List<ItemKeySchema> result = new ArrayList<ItemKeySchema>();
+		// special handling for OreItemStacks
+		if (obj instanceof OreItemStacks)
+		{
+			final OreItemStacks oreItemStack = (OreItemStacks)obj;
+			result.add(new ItemKeySchema(oreItemStack.getName(), oreItemStack.getStackSize()));
+		}
+		// generic handling
+		else if (obj instanceof IMultiItemStacks)
+		{
+			final IMultiItemStacks multiStack = (IMultiItemStacks)obj;
+			for (ItemStack stack : multiStack.getItemStacks())
+			{
+				result.add(new ItemKeySchema(stack));
+			}
+		}
+		else if (obj instanceof ItemStack)
+		{
+			result.add(new ItemKeySchema((ItemStack)obj));
+		}
+		else
+		{
+			throw new IllegalArgumentException("Wrong type, expected a ItemStack or OreItemStacks, or IMultiItemStacks");
+		}
+		return result;
 	}
 }

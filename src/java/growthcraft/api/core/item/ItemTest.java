@@ -27,6 +27,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.api.core.definition.IMultiItemStacks;
+
 import net.minecraft.item.ItemStack;
 
 public class ItemTest
@@ -39,6 +41,22 @@ public class ItemTest
 		if (stack.getItem() == null) return false;
 		if (stack.stackSize <= 0) return false;
 		return true;
+	}
+
+	public static boolean itemMatches(@Nullable IMultiItemStacks expected, @Nullable ItemStack actual)
+	{
+		if (expected == null || expected.isEmpty())
+		{
+			return actual == null;
+		}
+		else
+		{
+			if (actual != null)
+			{
+				return expected.containsItemStack(actual);
+			}
+		}
+		return false;
 	}
 
 	public static boolean itemMatches(@Nullable ItemStack expected, @Nullable ItemStack actual)
@@ -62,6 +80,13 @@ public class ItemTest
 			}
 		}
 		return false;
+	}
+
+	public static boolean hasEnough(@Nullable IMultiItemStacks expected, @Nullable ItemStack actual)
+	{
+		if (!itemMatches(expected, actual)) return false;
+		if (actual.stackSize < expected.getStackSize()) return false;
+		return true;
 	}
 
 	public static boolean hasEnough(@Nullable ItemStack expected, @Nullable ItemStack actual)

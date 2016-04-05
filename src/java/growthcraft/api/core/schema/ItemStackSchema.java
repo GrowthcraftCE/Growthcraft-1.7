@@ -30,6 +30,8 @@ import javax.annotation.Nonnull;
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.api.core.definition.IItemStackListProvider;
+import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.item.MultiItemStacks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
@@ -108,6 +110,14 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListProvide
 		final List<ItemStack> result = new ArrayList<ItemStack>();
 		final ItemStack stack = asStack();
 		if (stack != null) result.add(stack);
+		return result;
+	}
+
+	public List<IMultiItemStacks> getMultiItemStacks()
+	{
+		final List<IMultiItemStacks> result = new ArrayList<IMultiItemStacks>();
+		final ItemStack stack = asStack();
+		if (stack != null) result.add(new MultiItemStacks(stack));
 		return result;
 	}
 

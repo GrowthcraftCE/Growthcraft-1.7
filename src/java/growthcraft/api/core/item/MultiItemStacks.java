@@ -42,6 +42,12 @@ public class MultiItemStacks implements IMultiItemStacks
 	}
 
 	@Override
+	public boolean isEmpty()
+	{
+		return itemStacks.isEmpty();
+	}
+
+	@Override
 	public int getStackSize()
 	{
 		for (ItemStack stack : itemStacks)

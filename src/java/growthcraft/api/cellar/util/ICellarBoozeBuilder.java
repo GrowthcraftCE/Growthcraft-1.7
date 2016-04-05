@@ -39,8 +39,8 @@ import net.minecraftforge.fluids.FluidStack;
 public interface ICellarBoozeBuilder
 {
 	public ICellarBoozeBuilder tags(FluidTag... tags);
-	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time, @Nullable Residue residue);
-	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time, @Nullable Residue residue);
+	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time, @Nullable Residue residue);
+	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull Object stack, int time, @Nullable Residue residue);
 	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time);
 	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time);
 	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nullable Residue residue);
