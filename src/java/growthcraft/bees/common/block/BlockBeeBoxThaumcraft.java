@@ -24,7 +24,6 @@
 package growthcraft.bees.common.block;
 
 import java.util.List;
-import java.util.Locale;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
