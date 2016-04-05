@@ -26,6 +26,7 @@ package growthcraft.cellar.common.item;
 import java.util.List;
 
 import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
@@ -36,6 +37,7 @@ import growthcraft.cellar.event.EventWaterBag;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,6 +47,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -149,15 +152,25 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem
 		return capacity;
 	}
 
-	@Override
-	public int fill(ItemStack container, FluidStack resource, boolean doFill)
+	public int cappedFill(ItemStack container, FluidStack resource, boolean doFill, int fillCap)
 	{
 		if (resource == null)
 		{
 			return 0;
 		}
 
-		final int amount = Math.min(resource.amount, dosage);
+		if (resource.getFluid() == null)
+		{
+			return 0;
+		}
+
+		// The fluid is too hot to fill with
+		if (resource.getFluid().getTemperature() > 373)
+		{
+			return 0;
+		}
+
+		final int amount = Math.min(resource.amount, fillCap);
 
 		if (!doFill)
 		{
@@ -224,6 +237,12 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem
 
 		container.stackTagCompound.setTag("Fluid", stack.writeToNBT(fluidTag));
 		return filled;
+	}
+
+	@Override
+	public int fill(ItemStack container, FluidStack resource, boolean doFill)
+	{
+		return cappedFill(container, resource, doFill, dosage);
 	}
 
 	@Override
@@ -327,9 +346,47 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem
 		return false;
 	}
 
+	private boolean tryFillByBlock(ItemStack stack, World world, EntityPlayer player)
+	{
+		final MovingObjectPosition pos = this.getMovingObjectPositionFromPlayer(world, player, true);
+
+		if (pos != null)
+		{
+			if (pos.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+			{
+				final int i = pos.blockX;
+				final int j = pos.blockY;
+				final int k = pos.blockZ;
+
+				if (world.canMineBlock(player, i, j, k))
+				{
+					if (player.canPlayerEdit(i, j, k, pos.sideHit, stack))
+					{
+						final Block block = world.getBlock(i, j, k);
+						if (block != null)
+						{
+							final FluidStack fs = FluidUtils.drainFluidBlock(world, i, j, k, false);
+							if (fs != null)
+							{
+								final int amount = cappedFill(stack, fs, true, capacity);
+								if (amount > 0)
+								{
+									FluidUtils.drainFluidBlock(world, i, j, k, true);
+									return true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
+		if (tryFillByBlock(stack, world, player)) return stack;
 		if (hasEnoughToDrink(stack))
 		{
 			player.setItemInUse(stack, this.getMaxItemUseDuration(stack));

@@ -3,13 +3,39 @@ package growthcraft.api.core.fluids;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class FluidUtils
 {
 	private FluidUtils() {}
+
+	public static FluidStack drainFluidBlock(World world, int x, int y, int z, boolean doDrain)
+	{
+		final Block block = world.getBlock(x, y, z);
+		if (block instanceof BlockFluidBase)
+		{
+			final BlockFluidBase bfb = (BlockFluidBase)block;
+			return bfb.drain(world, x, y, z, doDrain);
+		}
+		else if (block == Blocks.lava)
+		{
+			if (doDrain) world.setBlockToAir(x, y, z);
+			return new FluidStack(FluidRegistry.LAVA, FluidContainerRegistry.BUCKET_VOLUME);
+		}
+		else if (block == Blocks.water)
+		{
+			if (doDrain) world.setBlockToAir(x, y, z);
+			return new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME);
+		}
+		return null;
+	}
 
 	public static List<Fluid> getFluidsByNames(List<String> names)
 	{
