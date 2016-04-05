@@ -83,11 +83,12 @@ public class BoozeUtils
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static void addBottleInformation(Fluid booze, ItemStack stack, EntityPlayer player, List list, boolean bool)
+	public static void addBottleInformation(Fluid booze, ItemStack stack, EntityPlayer player, List list, boolean bool, boolean showDetailed)
 	{
 		if (booze == null) return;
 		addInformation(booze, stack, player, list, bool);
-		addEffectInformation(booze, stack, player, list, bool);
+		if (showDetailed)
+			addEffectInformation(booze, stack, player, list, bool);
 	}
 
 	public static boolean hasEffect(Fluid booze)

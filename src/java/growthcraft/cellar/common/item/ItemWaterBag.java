@@ -25,16 +25,23 @@ package growthcraft.cellar.common.item;
 
 import java.util.List;
 
+import growthcraft.api.cellar.booze.BoozeEntry;
+import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.cellar.event.EventWaterBag;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.common.item.GrcItemBase;
+import growthcraft.core.integration.AppleCore;
 import growthcraft.core.lib.GrcCoreState;
 import growthcraft.core.util.UnitFormatter;
-import growthcraft.cellar.event.EventWaterBag;
 
+import squeek.applecore.api.food.IEdible;
+import squeek.applecore.api.food.FoodValues;
+
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -53,7 +60,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
-public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem
+@Optional.Interface(iface="squeek.applecore.api.food.IEdible", modid=AppleCore.MOD_ID)
+public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IEdible
 {
 	protected int capacity;
 	protected int dosage;
@@ -308,12 +316,55 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem
 		return false;
 	}
 
-	protected void applyEffects(ItemStack stack, World world, EntityPlayer player)
+	public BoozeEntry getBoozeEntry(ItemStack stack)
 	{
 		final FluidStack fluidstack = getFluid(stack);
 		if (fluidstack != null)
 		{
-			BoozeUtils.addEffects(fluidstack.getFluid(), stack, world, player);
+			return CellarRegistry.instance().booze().getBoozeEntry(fluidstack.getFluid());
+		}
+		return null;
+	}
+
+	public int getHealAmount(ItemStack stack)
+	{
+		final BoozeEntry entry = getBoozeEntry(stack);
+		if (entry != null)
+		{
+			return entry.getHealAmount();
+		}
+		return 0;
+	}
+
+	public float getSaturation(ItemStack stack)
+	{
+		final BoozeEntry entry = getBoozeEntry(stack);
+		if (entry != null)
+		{
+			return entry.getSaturation();
+		}
+		return 0.0f;
+	}
+
+	@Optional.Method(modid=AppleCore.MOD_ID)
+	@Override
+	public FoodValues getFoodValues(ItemStack stack)
+	{
+		return new FoodValues(getHealAmount(stack), getSaturation(stack));
+	}
+
+	protected void applyEffects(ItemStack stack, World world, EntityPlayer player)
+	{
+		final FluidStack fluidstack = getFluid(stack);
+		final boolean cancelled = GrowthCraftCellar.CELLAR_BUS.post(new EventWaterBag.PreApplyEffects(stack, world, player));
+		if (!cancelled)
+		{
+			if (fluidstack != null)
+			{
+				BoozeUtils.addEffects(fluidstack.getFluid(), stack, world, player);
+				player.getFoodStats().addStats(getHealAmount(stack), getSaturation(stack));
+			}
+			GrowthCraftCellar.CELLAR_BUS.post(new EventWaterBag.PostApplyEffects(stack, world, player));
 		}
 	}
 

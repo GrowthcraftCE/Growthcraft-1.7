@@ -62,4 +62,26 @@ public class EventWaterBag extends Event
 			super(stack, world, ply);
 		}
 	}
+
+	public static class PreApplyEffects extends EventWaterBag
+	{
+		public PreApplyEffects(ItemStack stack, World world, EntityPlayer ply)
+		{
+			super(stack, world, ply);
+		}
+
+		@Override
+		public boolean isCancelable()
+		{
+			return true;
+		}
+	}
+
+	public static class PostApplyEffects extends EventWaterBag
+	{
+		public PostApplyEffects(ItemStack stack, World world, EntityPlayer ply)
+		{
+			super(stack, world, ply);
+		}
+	}
 }

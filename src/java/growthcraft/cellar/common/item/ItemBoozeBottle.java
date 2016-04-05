@@ -2,6 +2,8 @@ package growthcraft.cellar.common.item;
 
 import java.util.List;
 
+import growthcraft.api.cellar.booze.BoozeEntry;
+import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
@@ -34,9 +36,9 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem
 	@SideOnly(Side.CLIENT)
 	private IIcon contents;
 
-	public ItemBoozeBottle(int nut, float sat, Fluid[] boozeAry)
+	public ItemBoozeBottle(Fluid[] boozeAry)
 	{
-		super(nut, sat, false);
+		super(0, 0.0f, false);
 		this.setAlwaysEdible();
 		this.setMaxStackSize(4);
 		this.setHasSubtypes(true);
@@ -62,6 +64,38 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem
 	{
 		if (stack == null) return null;
 		return getFluidByIndex(stack.getItemDamage());
+	}
+
+	public BoozeEntry getBoozeEntry(ItemStack stack)
+	{
+		final Fluid fluid = getFluid(stack);
+		if (fluid != null)
+		{
+			return CellarRegistry.instance().booze().getBoozeEntry(fluid);
+		}
+		return null;
+	}
+
+	@Override
+	public int func_150905_g(ItemStack stack)
+	{
+		final BoozeEntry entry = getBoozeEntry(stack);
+		if (entry != null)
+		{
+			return entry.getHealAmount();
+		}
+		return 0;
+	}
+
+	@Override
+	public float func_150906_h(ItemStack stack)
+	{
+		final BoozeEntry entry = getBoozeEntry(stack);
+		if (entry != null)
+		{
+			return entry.getSaturation();
+		}
+		return 0.0f;
 	}
 
 	public int getColor(ItemStack stack)
@@ -116,12 +150,9 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		super.addInformation(stack, player, list, bool);
-		if (GrcCoreState.showDetailedInformation())
-		{
-			final Fluid booze = getFluid(stack);
-			BoozeUtils.addBottleInformation(booze, stack, player, list, bool);
-		}
-		else
+		final boolean showDetailed = GrcCoreState.showDetailedInformation();
+		BoozeUtils.addBottleInformation(getFluid(stack), stack, player, list, bool, showDetailed);
+		if (!showDetailed)
 		{
 			list.add(EnumChatFormatting.GRAY +
 					GrcI18n.translate("grc.tooltip.detailed_information",

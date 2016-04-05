@@ -69,9 +69,10 @@ public class GrcRiceFluids extends GrcModuleBase
 			booze.setColor(GrowthCraftRice.getConfig().riceSakeColor).setDensity(980);
 		}
 		BoozeRegistryHelper.initializeBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets);
+		BoozeRegistryHelper.setBoozeFoodStats(riceSakeBooze, 1, -0.6f);
 		riceSakeBooze[4].setColor(GrowthCraftRice.getConfig().riceSakeDivineColor);
 		riceSakeFluids[4].getBlock().refreshColor();
-		riceSake = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, riceSakeBooze));
+		riceSake = new ItemDefinition(new ItemBoozeBottle(riceSakeBooze));
 	}
 
 	private void registerRecipes()
