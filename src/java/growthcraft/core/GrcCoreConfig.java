@@ -25,6 +25,12 @@ public class GrcCoreConfig extends ConfigBase
 	@ConfigOption(catergory="Integration", name="Enable Apple Core Integration", desc="Should we integrate with Apple Core (if available)?")
 	public boolean enableAppleCoreIntegration = true;
 
+	@ConfigOption(catergory="Integration", name="Enable Et-Futurum Integration", desc="Should we integrate with Et-Futurum (if available)?")
+	public boolean enableEtfuturumIntegration = true;
+
+	@ConfigOption(catergory="Integration", name="Enable Woodstuff Integration", desc="Should we integrate with Woodstuff (if available)?")
+	public boolean enableWoodstuffIntegration = true;
+
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
 	public boolean enableWailaIntegration = true;
 

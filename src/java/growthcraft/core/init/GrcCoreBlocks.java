@@ -33,6 +33,7 @@ import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.integration.minecraft.EnumMinecraftWoodType;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.registry.FenceRopeRegistry;
+import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -82,15 +83,66 @@ public class GrcCoreBlocks extends GrcModuleBase
 					fp.register(basename);
 					Blocks.fire.setFireInfo(fp.getBlock(), 5, 20);
 					FenceRopeRegistry.instance().addEntry(block, fp.getBlock());
+					NEI.hideItem(fp.asStack());
 				}
 			}
+		}
+	}
+
+	private void initWoodstuff()
+	{
+		final String modId = "woodstuff";
+		if (Loader.isModLoaded(modId))
+		{
+			final String[] names = {
+				// aether
+				"skyrootPlank",
+				// arsmagica2
+				"planksWitchwood",
+				// BiomesOPlenty
+				"planks",
+				// Botania
+				"livingwood",
+				"dreamwood",
+				// dendrology
+				"wood0",
+				// enhancedbiomes
+				"enhancedbiomes.tile.planksEB",
+				// erebus
+				"planks",
+				"planks_scorched",
+				// erebus
+				"planks_varnished",
+				// erebus
+				"petrifiedWoodPlanks",
+				// ExtrabiomesXL
+				"planks",
+				// Forestry
+				"planks",
+				// Highlands
+				"hl_woodPlanks",
+				// Natura
+				"planks",
+				// RidiculousWorld
+				"RidiculousPlanks",
+				// Thaumcraft
+				"blockWoodenDevice",
+				// totemic
+				"redCedarPlank",
+				// TwilightForest
+				"tile.TFTowerStone",
+				// witchery
+				"witchwood",
+			};
+			// TODO
 		}
 	}
 
 	@Override
 	public void init()
 	{
-		initEtfuturum();
+		if (GrowthCraftCore.getConfig().enableEtfuturumIntegration) initEtfuturum();
+		if (GrowthCraftCore.getConfig().enableWoodstuffIntegration) initWoodstuff();
 		NEI.hideItem(fenceRope.asStack());
 		NEI.hideItem(netherBrickFenceRope.asStack());
 		NEI.hideItem(ropeBlock.asStack());
