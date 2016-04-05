@@ -5,8 +5,10 @@ import java.util.List;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
-import growthcraft.core.util.ItemUtils;
+import growthcraft.core.common.item.GrcItemFoodBase;
 import growthcraft.core.common.item.IFluidItem;
+import growthcraft.core.lib.GrcCoreState;
+import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,13 +19,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
-public class ItemBoozeBottle extends ItemFood implements IFluidItem
+public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem
 {
 	private Fluid[] boozes;
 
@@ -114,8 +116,17 @@ public class ItemBoozeBottle extends ItemFood implements IFluidItem
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		super.addInformation(stack, player, list, bool);
-		final Fluid booze = getFluid(stack);
-		BoozeUtils.addBottleInformation(booze, stack, player, list, bool);
+		if (GrcCoreState.showDetailedInformation())
+		{
+			final Fluid booze = getFluid(stack);
+			BoozeUtils.addBottleInformation(booze, stack, player, list, bool);
+		}
+		else
+		{
+			list.add(EnumChatFormatting.GRAY +
+					GrcI18n.translate("grc.tooltip.detailed_information",
+						EnumChatFormatting.WHITE + "SHIFT" + EnumChatFormatting.GRAY));
+		}
 	}
 
 	/************

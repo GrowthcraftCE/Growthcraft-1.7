@@ -31,7 +31,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
@@ -39,7 +38,7 @@ import net.minecraftforge.fluids.Fluid;
 /**
  * Generic fluid bucket code
  */
-public class ItemBucketFluid extends ItemBucket implements IFluidItem
+public class ItemBucketFluid extends GrcItemBucketBase implements IFluidItem
 {
 	private Fluid fluid;
 	private int index;

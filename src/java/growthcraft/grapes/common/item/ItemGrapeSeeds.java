@@ -1,15 +1,15 @@
 package growthcraft.grapes.common.item;
 
+import growthcraft.core.common.item.GrcItemBase;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.common.block.BlockGrapeVine0;
+import growthcraft.grapes.GrowthCraftGrapes;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -17,7 +17,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class ItemGrapeSeeds extends Item implements IPlantable
+public class ItemGrapeSeeds extends GrcItemBase implements IPlantable
 {
 	public ItemGrapeSeeds()
 	{

@@ -26,6 +26,7 @@ package growthcraft.bees.common.item;
 import java.util.List;
 
 import growthcraft.bees.GrowthCraftBees;
+import growthcraft.core.common.item.GrcItemBase;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -36,7 +37,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 
-public class ItemBeesWax extends Item
+public class ItemBeesWax extends GrcItemBase
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;

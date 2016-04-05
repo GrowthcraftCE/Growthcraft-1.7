@@ -23,18 +23,33 @@
  */
 package growthcraft.core.common.item;
 
-import growthcraft.core.GrowthCraftCore;
+import java.util.List;
 
-import net.minecraft.init.Items;
+import growthcraft.api.core.i18n.GrcI18n;
 
-public class ItemBottleSalt extends GrcItemBase
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+public class GrcItemBase extends Item
 {
-	public ItemBottleSalt()
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
-		super();
-		setTextureName("grccore:bottle_salt");
-		setUnlocalizedName("grccore.bottleSalt");
-		setCreativeTab(GrowthCraftCore.creativeTab);
-		setContainerItem(Items.glass_bottle);
+		super.addInformation(stack, player, list, bool);
+		GrcItemBase.addDescription(this, stack, player, list, bool);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public static void addDescription(Item item, ItemStack stack, EntityPlayer player, List list, boolean bool)
+	{
+		final String src = item.getUnlocalizedNameInefficiently(stack) + ".desc";
+		final String tr = ("" + GrcI18n.translate(src)).trim();
+		if (src != tr) list.add(tr);
 	}
 }

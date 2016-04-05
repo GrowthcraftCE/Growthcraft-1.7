@@ -1,10 +1,9 @@
 package growthcraft.bees.common.item;
 
 import growthcraft.bees.GrowthCraftBees;
+import growthcraft.core.common.item.GrcItemBase;
 
-import net.minecraft.item.Item;
-
-public class ItemHoneyCombEmpty extends Item
+public class ItemHoneyCombEmpty extends GrcItemBase
 {
 	public ItemHoneyCombEmpty()
 	{

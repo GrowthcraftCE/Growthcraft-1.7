@@ -23,18 +23,32 @@
  */
 package growthcraft.core.common.item;
 
-import growthcraft.core.GrowthCraftCore;
+import java.util.List;
 
-import net.minecraft.init.Items;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 
-public class ItemBottleSalt extends GrcItemBase
+public class GrcItemFoodBase extends ItemFood
 {
-	public ItemBottleSalt()
+	public GrcItemFoodBase(int hunger, float saturation, boolean isWolfFav)
 	{
-		super();
-		setTextureName("grccore:bottle_salt");
-		setUnlocalizedName("grccore.bottleSalt");
-		setCreativeTab(GrowthCraftCore.creativeTab);
-		setContainerItem(Items.glass_bottle);
+		super(hunger, saturation, isWolfFav);
+	}
+
+	public GrcItemFoodBase(int hunger, boolean isWolfFav)
+	{
+		super(hunger, isWolfFav);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
+	{
+		super.addInformation(stack, player, list, bool);
+		GrcItemBase.addDescription(this, stack, player, list, bool);
 	}
 }

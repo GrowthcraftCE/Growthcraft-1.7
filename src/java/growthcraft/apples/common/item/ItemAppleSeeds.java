@@ -1,6 +1,7 @@
 package growthcraft.apples.common.item;
 
 import growthcraft.apples.GrowthCraftApples;
+import growthcraft.core.common.item.GrcItemBase;
 import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.relauncher.Side;
@@ -10,14 +11,13 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
-public class ItemAppleSeeds extends Item implements IPlantable
+public class ItemAppleSeeds extends GrcItemBase implements IPlantable
 {
 	private Block cropBlock;
 

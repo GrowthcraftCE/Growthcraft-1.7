@@ -1,5 +1,6 @@
 package growthcraft.rice.common.item;
 
+import growthcraft.core.common.item.GrcItemBase;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.util.RiceBlockCheck;
@@ -9,11 +10,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemRice extends Item
+public class ItemRice extends GrcItemBase
 {
 	public ItemRice()
 	{

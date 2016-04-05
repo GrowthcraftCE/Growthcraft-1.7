@@ -3,6 +3,7 @@ package growthcraft.cellar.common.item;
 import java.util.List;
 
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.common.item.GrcItemBase;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -13,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 
-public class ItemYeast extends Item
+public class ItemYeast extends GrcItemBase
 {
 	protected IIcon[] icons;
 

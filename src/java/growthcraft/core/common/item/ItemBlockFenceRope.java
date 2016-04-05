@@ -24,9 +24,8 @@
 package growthcraft.core.common.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 
-public class ItemBlockFenceRope extends ItemBlock
+public class ItemBlockFenceRope extends GrcItemBlockBase
 {
 	public ItemBlockFenceRope(Block block)
 	{

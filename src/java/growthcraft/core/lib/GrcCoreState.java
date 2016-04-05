@@ -21,20 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.item;
+package growthcraft.core.lib;
 
-import growthcraft.core.GrowthCraftCore;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import org.lwjgl.input.Keyboard;
 
-import net.minecraft.init.Items;
-
-public class ItemBottleSalt extends GrcItemBase
+@SideOnly(Side.CLIENT)
+public class GrcCoreState
 {
-	public ItemBottleSalt()
+	private GrcCoreState() {}
+
+	@SideOnly(Side.CLIENT)
+	public static boolean isAltKeyDown()
 	{
-		super();
-		setTextureName("grccore:bottle_salt");
-		setUnlocalizedName("grccore.bottleSalt");
-		setCreativeTab(GrowthCraftCore.creativeTab);
-		setContainerItem(Items.glass_bottle);
+		return Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static boolean isCtrlKeyDown()
+	{
+		if (Minecraft.isRunningOnMac)
+			return Keyboard.isKeyDown(Keyboard.KEY_LMETA) || Keyboard.isKeyDown(Keyboard.KEY_RMETA);
+		return Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public static boolean isShiftKeyDown()
+	{
+		return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
+	}
+
+	/**
+	 * Should we show detailed information on items?
+	 * This is usually toggled via Shift
+	 * @return true show details, false otherwise
+	 */
+	public static boolean showDetailedInformation()
+	{
+		return isShiftKeyDown();
 	}
 }

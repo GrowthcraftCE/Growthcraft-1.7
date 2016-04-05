@@ -2,10 +2,12 @@ package growthcraft.cellar.common.item;
 
 import java.util.List;
 
-import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
+import growthcraft.core.common.item.GrcItemBase;
+import growthcraft.core.lib.GrcCoreState;
 import growthcraft.core.util.UnitFormatter;
 
 import cpw.mods.fml.relauncher.Side;
@@ -17,13 +19,14 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
-public class ItemWaterBag extends Item implements IFluidContainerItem
+public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem
 {
 	protected int capacity;
 	protected int dosage;
@@ -329,15 +332,24 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
+		super.addInformation(stack, player, list, bool);
 		final FluidStack fluidstack = getFluid(stack);
 		if (fluidstack != null)
 		{
-			final String fluidname = UnitFormatter.fluidNameForContainer(fluidstack);
-			list.add(GrcI18n.translate("grc.cellar.format.waterBag.contents", fluidname, fluidstack.amount, getCapacity(stack)));
-			final Fluid booze = fluidstack.getFluid();
-			BoozeUtils.addEffectInformation(booze, stack, player, list, bool);
+			if (GrcCoreState.showDetailedInformation())
+			{
+				final String fluidname = UnitFormatter.fluidNameForContainer(fluidstack);
+				list.add(GrcI18n.translate("grc.cellar.format.waterBag.contents", fluidname, fluidstack.amount, getCapacity(stack)));
+				final Fluid booze = fluidstack.getFluid();
+				BoozeUtils.addEffectInformation(booze, stack, player, list, bool);
+			}
+			else
+			{
+				list.add(EnumChatFormatting.GRAY +
+					GrcI18n.translate("grc.tooltip.detailed_information",
+						EnumChatFormatting.WHITE + "SHIFT" + EnumChatFormatting.GRAY));
+			}
 		}
-		super.addInformation(stack, player, list, bool);
 	}
 
 	@Override

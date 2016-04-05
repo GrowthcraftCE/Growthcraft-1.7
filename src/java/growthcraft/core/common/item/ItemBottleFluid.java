@@ -27,7 +27,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
@@ -35,7 +34,7 @@ import net.minecraftforge.fluids.Fluid;
 /**
  * Generic fluid bottle for growthcraft fluids
  */
-public class ItemBottleFluid extends Item implements IFluidItem
+public class ItemBottleFluid extends GrcItemBase implements IFluidItem
 {
 	private Fluid fluid;
 	// Used to override the fluid color
