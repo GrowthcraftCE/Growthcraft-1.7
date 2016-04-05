@@ -102,3 +102,6 @@ gui.grc.progress.format=gui.grc.progress.format
 
 # Inventory
 grc.inventory.internal=grc.inventory.internal
+
+# Tooltips
+grc.tooltip.detailed_information=grc.tooltip.detailed_information

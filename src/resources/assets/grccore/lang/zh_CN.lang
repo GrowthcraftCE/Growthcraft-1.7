@@ -102,3 +102,6 @@ gui.grc.progress.format=%s：%d / %d
 
 # Inventory
 grc.inventory.internal=物品栏
+
+# Tooltips
+grc.tooltip.detailed_information=grc.tooltip.detailed_information
