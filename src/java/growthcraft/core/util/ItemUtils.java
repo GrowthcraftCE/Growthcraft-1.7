@@ -188,7 +188,7 @@ public class ItemUtils
 		{
 			if (!player.inventory.addItemStackToInventory(itemstack))
 			{
-				world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, itemstack));
+				player.dropPlayerItemWithRandomChoice(itemstack, false);
 			}
 			else if (player instanceof EntityPlayerMP)
 			{
