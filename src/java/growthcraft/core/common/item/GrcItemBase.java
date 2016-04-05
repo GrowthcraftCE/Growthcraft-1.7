@@ -50,6 +50,6 @@ public class GrcItemBase extends Item
 	{
 		final String src = item.getUnlocalizedNameInefficiently(stack) + ".desc";
 		final String tr = ("" + GrcI18n.translate(src)).trim();
-		if (src != tr) list.add(tr);
+		if (!src.equals(tr)) list.add(tr);
 	}
 }
