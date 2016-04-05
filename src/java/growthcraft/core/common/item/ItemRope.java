@@ -52,7 +52,7 @@ public class ItemRope extends Item
 				}
 
 				int targetMeta = entry.getFenceRopeBlockMetadata();
-				if (targetMeta == ItemKey.WILDCARD_VALUE) targetMeta = 0;
+				if (targetMeta == ItemKey.WILDCARD_VALUE) targetMeta = blockMeta;
 
 				world.setBlock(x, y, z, entry.getFenceRopeBlock(), targetMeta, BlockFlags.UPDATE_AND_SYNC);
 				--stack.stackSize;
