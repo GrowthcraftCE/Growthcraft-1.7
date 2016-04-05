@@ -9,6 +9,7 @@ import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.common.item.GrcItemBase;
 import growthcraft.core.lib.GrcCoreState;
 import growthcraft.core.util.UnitFormatter;
+import growthcraft.cellar.event.EventWaterBag;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -282,11 +283,16 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem
 			// This is not an ItemFood, and therefore, NOT FOOD. ;_;
 			//player.getFoodStats().func_151686_a(this, stack);
 
-			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-			if (!world.isRemote)
+			final boolean cancelled = GrowthCraftCellar.CELLAR_BUS.post(new EventWaterBag.PreDrink(stack, world, player));
+			if (!cancelled)
 			{
-				applyEffects(stack, world, player);
-				if (!player.capabilities.isCreativeMode) drain(stack, dosage, true);
+				world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+				if (!world.isRemote)
+				{
+					applyEffects(stack, world, player);
+					if (!player.capabilities.isCreativeMode) drain(stack, dosage, true);
+				}
+				GrowthCraftCellar.CELLAR_BUS.post(new EventWaterBag.PostDrink(stack, world, player));
 			}
 		}
 		return stack;
