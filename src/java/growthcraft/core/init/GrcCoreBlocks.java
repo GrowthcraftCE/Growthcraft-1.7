@@ -30,6 +30,8 @@ import growthcraft.core.common.block.BlockFenceRope;
 import growthcraft.core.common.block.BlockRope;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.item.ItemBlockFenceRope;
+import growthcraft.core.common.item.ItemBlockNaturaFenceRope;
 import growthcraft.core.integration.minecraft.EnumMinecraftWoodType;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.registry.FenceRopeRegistry;
@@ -45,7 +47,9 @@ public class GrcCoreBlocks extends GrcModuleBase
 	public BlockDefinition ropeBlock;
 	public BlockDefinition fenceRope;
 	public BlockDefinition netherBrickFenceRope;
+	public BlockDefinition naturaFenceRope;
 	public Map<EnumMinecraftWoodType, BlockDefinition> etfuturumFenceRopes = new HashMap<EnumMinecraftWoodType, BlockDefinition>();
+	public Map<String, BlockDefinition> woodstuffFenceRopes = new HashMap<String, BlockDefinition>();
 
 	@Override
 	public void preInit()
@@ -61,9 +65,9 @@ public class GrcCoreBlocks extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		fenceRope.register("grc.fenceRope");
+		fenceRope.register("grc.fenceRope", ItemBlockFenceRope.class);
 		ropeBlock.register("grc.ropeBlock");
-		netherBrickFenceRope.register("grc.netherBrickFenceRope");
+		netherBrickFenceRope.register("grc.netherBrickFenceRope", ItemBlockFenceRope.class);
 
 		Blocks.fire.setFireInfo(fenceRope.getBlock(), 5, 20);
 	}
@@ -80,7 +84,7 @@ public class GrcCoreBlocks extends GrcModuleBase
 				{
 					final String basename = "grc.etfuturum_fence_rope_" + ty.name;
 					final BlockDefinition fp = new BlockDefinition(new BlockFenceRope(block, basename));
-					fp.register(basename);
+					fp.register(basename, ItemBlockFenceRope.class);
 					Blocks.fire.setFireInfo(fp.getBlock(), 5, 20);
 					FenceRopeRegistry.instance().addEntry(block, fp.getBlock());
 					NEI.hideItem(fp.asStack());
@@ -138,11 +142,30 @@ public class GrcCoreBlocks extends GrcModuleBase
 		}
 	}
 
+	private void initNatura()
+	{
+		final String modId = "Natura";
+
+		if (Loader.isModLoaded(modId))
+		{
+			final Block block = GameRegistry.findBlock(modId, "Natura.fence");
+			if (block != null)
+			{
+				this.naturaFenceRope = new BlockDefinition(new BlockFenceRope(block, "grc.naturaFenceRope"));
+				naturaFenceRope.register("grc.naturaFenceRope", ItemBlockNaturaFenceRope.class);
+				Blocks.fire.setFireInfo(naturaFenceRope.getBlock(), 5, 20);
+				FenceRopeRegistry.instance().addEntry(block, naturaFenceRope.getBlock());
+				NEI.hideItem(naturaFenceRope.asStack());
+			}
+		}
+	}
+
 	@Override
 	public void init()
 	{
 		if (GrowthCraftCore.getConfig().enableEtfuturumIntegration) initEtfuturum();
 		if (GrowthCraftCore.getConfig().enableWoodstuffIntegration) initWoodstuff();
+		if (GrowthCraftCore.getConfig().enableNaturaIntegration) initNatura();
 		NEI.hideItem(fenceRope.asStack());
 		NEI.hideItem(netherBrickFenceRope.asStack());
 		NEI.hideItem(ropeBlock.asStack());
