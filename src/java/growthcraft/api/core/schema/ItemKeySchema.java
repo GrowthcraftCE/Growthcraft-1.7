@@ -126,7 +126,7 @@ public class ItemKeySchema extends ItemStackSchema implements IItemStackListProv
 	@Override
 	public boolean isValid()
 	{
-		return getItemStacks().size() > 0;
+		return getItemStacks().size() > 0 || ore != null;
 	}
 
 	/**
