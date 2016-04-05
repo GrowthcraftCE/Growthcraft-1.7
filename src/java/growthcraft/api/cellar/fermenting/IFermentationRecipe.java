@@ -25,6 +25,8 @@ package growthcraft.api.cellar.fermenting;
 
 import javax.annotation.Nullable;
 
+import growthcraft.api.core.definition.IMultiItemStacks;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -32,7 +34,7 @@ public interface IFermentationRecipe
 {
 	FluidStack getInputFluidStack();
 	FluidStack getOutputFluidStack();
-	ItemStack getFermentingItemStack();
+	IMultiItemStacks getFermentingItemStack();
 	int getTime();
 	boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack);
 }

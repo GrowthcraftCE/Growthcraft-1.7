@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.util.MultiStacksUtil;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -31,9 +32,9 @@ public class PressingRegistry implements IPressingRegistry
 	}
 
 	@Override
-	public void addRecipe(@Nonnull ItemStack stack, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue)
+	public void addRecipe(@Nonnull Object inputStack, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue)
 	{
-		addRecipe(new PressingRecipe(stack, resultFluid, time, residue));
+		addRecipe(new PressingRecipe(MultiStacksUtil.toMultiItemStacks(inputStack), resultFluid, time, residue));
 	}
 
 	@Override

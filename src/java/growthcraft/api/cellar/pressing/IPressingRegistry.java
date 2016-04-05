@@ -42,7 +42,7 @@ public interface IPressingRegistry extends ILoggable
 	 * @param time - how long it takes to press the item
 	 * @param residue - residue left behind after pressing
 	 */
-	void addRecipe(@Nonnull ItemStack stack, @Nonnull FluidStack result, int time, @Nullable Residue residue);
+	void addRecipe(@Nonnull Object inputStack, @Nonnull FluidStack result, int time, @Nullable Residue residue);
 
 	boolean hasPressingRecipe(ItemStack itemstack);
 

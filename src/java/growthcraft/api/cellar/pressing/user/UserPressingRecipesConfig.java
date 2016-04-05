@@ -27,12 +27,12 @@ import java.io.BufferedReader;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.ResidueSchema;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 /**
@@ -55,14 +55,17 @@ public class UserPressingRecipesConfig extends AbstractUserJSONConfig
 		addDefault(new UserPressingRecipe(itm, fl, tm, res));
 	}
 
-	public void addDefault(ItemStack stack, FluidStack fluid, int time, Residue res)
+	public void addDefault(Object stack, FluidStack fluid, int time, Residue res)
 	{
-		addDefault(
-			new ItemKeySchema(stack),
-			new FluidStackSchema(fluid),
-			time,
-			res == null ? null : new ResidueSchema(res)
-		);
+		for (ItemKeySchema itemKey : ItemKeySchema.createMulti(stack))
+		{
+			addDefault(
+				itemKey,
+				new FluidStackSchema(fluid),
+				time,
+				res == null ? null : new ResidueSchema(res)
+			);
+		}
 	}
 
 	@Override
@@ -116,7 +119,7 @@ public class UserPressingRecipesConfig extends AbstractUserJSONConfig
 		}
 
 		logger.info("Adding pressing recipe {%s}", recipe);
-		for (ItemStack item : recipe.item.getItemStacks())
+		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
 		{
 			CellarRegistry.instance().pressing().addRecipe(item, fluidStack, recipe.time, residue);
 		}

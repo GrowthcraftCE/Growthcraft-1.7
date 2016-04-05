@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,11 +26,11 @@ package growthcraft.api.cellar.fermenting.user;
 import java.io.BufferedReader;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
@@ -48,14 +48,17 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 		addDefault(new UserFermentingRecipe(item, inputFluid, outputFluid, time));
 	}
 
-	public void addDefault(ItemStack stack, FluidStack inputFluid, FluidStack outputFluid, int time)
+	public void addDefault(Object stack, FluidStack inputFluid, FluidStack outputFluid, int time)
 	{
-		addDefault(
-			new ItemKeySchema(stack),
-			new FluidStackSchema(inputFluid),
-			new FluidStackSchema(outputFluid),
-			time
-		);
+		for (ItemKeySchema itemKey : ItemKeySchema.createMulti(stack))
+		{
+			addDefault(
+				itemKey,
+				new FluidStackSchema(inputFluid),
+				new FluidStackSchema(outputFluid),
+				time
+			);
+		}
 	}
 
 	@Override
@@ -97,7 +100,7 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 		}
 
 		logger.info("Adding Fermenting Recipe {%s}", recipe);
-		for (ItemStack item : recipe.item.getItemStacks())
+		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
 		{
 			CellarRegistry.instance().fermenting().addRecipe(
 				recipe.output_fluid.asFluidStack(),

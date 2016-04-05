@@ -90,7 +90,7 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nullable Residue residue)
+	public ICellarBoozeBuilder pressesFrom(@Nonnull Object stack, int time, int amount, @Nullable Residue residue)
 	{
 		CellarRegistry.instance().pressing().addRecipe(stack, new FluidStack(fluid, amount), time, residue);
 		return this;

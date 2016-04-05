@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.IFermentationRecipe;
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.cellar.common.fluids.CellarTank;
@@ -147,10 +148,10 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 				{
 					getFluidTank(0).setFluid(FluidUtils.exchangeFluid(getFluidStack(0), outputFluidStack.getFluid()));
 				}
-				final ItemStack fermenter = recipe.getFermentingItemStack();
-				if (fermenter != null)
+				final IMultiItemStacks fermenter = recipe.getFermentingItemStack();
+				if (fermenter != null && !fermenter.isEmpty())
 				{
-					decrStackSize(0, fermenter.stackSize);
+					decrStackSize(0, fermenter.getStackSize());
 				}
 			}
 		}

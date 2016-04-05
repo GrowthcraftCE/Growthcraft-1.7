@@ -78,7 +78,7 @@ public class UserApiCellarBoozeBuilder extends CellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nullable Residue residue)
+	public ICellarBoozeBuilder pressesFrom(@Nonnull Object stack, int time, int amount, @Nullable Residue residue)
 	{
 		this.userApis.getUserPressingRecipes().addDefault(stack, new FluidStack(fluid, amount), time, residue);
 		return this;

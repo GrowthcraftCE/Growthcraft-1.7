@@ -28,6 +28,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.common.ProcessingRecipe;
 import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.item.ItemTest;
 
 import net.minecraft.item.ItemStack;
@@ -35,15 +36,15 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class PressingRecipe extends ProcessingRecipe
 {
-	private ItemStack inputItemStack;
+	private IMultiItemStacks inputItemStack;
 
-	public PressingRecipe(@Nonnull ItemStack src, @Nonnull FluidStack f, int t, @Nullable Residue r)
+	public PressingRecipe(@Nonnull IMultiItemStacks src, @Nonnull FluidStack f, int t, @Nullable Residue r)
 	{
 		super(f, t, r);
 		this.inputItemStack = src;
 	}
 
-	public ItemStack getInput()
+	public IMultiItemStacks getInput()
 	{
 		return inputItemStack;
 	}
