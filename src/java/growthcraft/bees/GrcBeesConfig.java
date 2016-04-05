@@ -60,6 +60,9 @@ public class GrcBeesConfig extends ConfigBase
 	@ConfigOption(catergory="Integration", name="Enable BiomesOPlenty Integration", desc="Should we integrate with BiomesOPlenty (if available)?")
 	public boolean enableBoPIntegration = true;
 
+	@ConfigOption(catergory="Integration", name="Enable Natura Integration", desc="Should we integrate with Natura (if available)?")
+	public boolean enableNaturaIntegration = true;
+
 	@ConfigOption(catergory="Integration", name="Enable Botania Integration", desc="Should we integrate with Botania (if available)?")
 	public boolean enableBotaniaIntegration = true;
 

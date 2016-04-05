@@ -23,6 +23,8 @@
  */
 package growthcraft.bees.common.block;
 
+import java.util.Locale;
+
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.api.core.definition.IItemStackFactory;
 
@@ -33,10 +35,13 @@ public enum EnumBeeBoxThaumcraft implements IItemStackFactory
 	GREATWOOD,
 	SILVERWOOD;
 
+	public static final EnumBeeBoxThaumcraft[] VALUES = { GREATWOOD, SILVERWOOD };
+	public final String name;
 	public final int meta;
 
 	private EnumBeeBoxThaumcraft()
 	{
+		this.name = name().toLowerCase(Locale.ENGLISH);
 		this.meta = ordinal();
 	}
 

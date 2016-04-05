@@ -66,6 +66,7 @@ public class GrowthCraftBees
 
 	public static BlockTypeDefinition<BlockBeeBox> beeBox;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxBamboo;
+	public static BlockTypeDefinition<BlockBeeBox> beeBoxNatura;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxBiomesOPlenty;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxBotania;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxNether;
@@ -125,6 +126,7 @@ public class GrowthCraftBees
 		if (config.enableGrcNetherIntegration) modules.add(new growthcraft.bees.integration.GrcNetherModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.bees.integration.Waila());
 		if (config.enableBoPIntegration) modules.add(new growthcraft.bees.integration.BoPModule());
+		if (config.enableNaturaIntegration) modules.add(new growthcraft.bees.integration.NaturaModule());
 		if (config.enableBotaniaIntegration) modules.add(new growthcraft.bees.integration.BotaniaModule());
 		if (config.enableForestryIntegration) modules.add(new growthcraft.bees.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bees.integration.ThaumcraftModule());

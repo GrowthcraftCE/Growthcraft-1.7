@@ -24,6 +24,7 @@
 package growthcraft.bees.common.block;
 
 import java.util.List;
+import java.util.Locale;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,6 +40,16 @@ public class BlockBeeBoxThaumcraft extends BlockBeeBox
 	{
 		super();
 		this.setBlockName("grc.BeeBox.Thaumcraft");
+	}
+
+	@Override
+	public String getMetaname(int meta)
+	{
+		if (meta >= 0 && meta < EnumBeeBoxThaumcraft.VALUES.length)
+		{
+			return EnumBeeBoxThaumcraft.VALUES[meta].name;
+		}
+		return super.getMetaname(meta);
 	}
 
 	@Override

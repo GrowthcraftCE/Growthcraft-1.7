@@ -45,6 +45,16 @@ public class BlockBeeBoxBotania extends BlockBeeBox
 	}
 
 	@Override
+	public String getMetaname(int meta)
+	{
+		if (meta >= 0 && meta < EnumBotaniaWoodType.VALUES.length)
+		{
+			return EnumBotaniaWoodType.VALUES[meta].name;
+		}
+		return super.getMetaname(meta);
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)

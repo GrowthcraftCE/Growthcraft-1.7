@@ -155,6 +155,10 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		{
 			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxThaumcraft.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
 		}
+		if (GrowthCraftBees.beeBoxNatura != null)
+		{
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxNatura.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+		}
 		if (GrowthCraftBees.beeBoxBiomesOPlenty != null)
 		{
 			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBiomesOPlenty.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));

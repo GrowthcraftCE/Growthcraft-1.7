@@ -1,5 +1,6 @@
 package growthcraft.bees.common.item;
 
+import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.core.common.item.GrcItemBlockBase;
 
 import net.minecraft.block.Block;
@@ -19,6 +20,10 @@ public class ItemBlockBeeBox extends GrcItemBlockBase
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
+		if (field_150939_a instanceof BlockBeeBox)
+		{
+			return super.getUnlocalizedName(stack) + "." + ((BlockBeeBox)field_150939_a).getMetaname(stack.getItemDamage());
+		}
 		return super.getUnlocalizedName(stack) + stack.getItemDamage();
 	}
 
