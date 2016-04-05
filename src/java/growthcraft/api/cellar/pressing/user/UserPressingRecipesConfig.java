@@ -118,7 +118,7 @@ public class UserPressingRecipesConfig extends AbstractUserJSONConfig
 		logger.info("Adding pressing recipe {%s}", recipe);
 		for (ItemStack item : recipe.item.getItemStacks())
 		{
-			CellarRegistry.instance().pressing().addPressingRecipe(item, fluidStack, recipe.time, residue);
+			CellarRegistry.instance().pressing().addRecipe(item, fluidStack, recipe.time, residue);
 		}
 	}
 

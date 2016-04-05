@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,22 +28,33 @@ import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.common.ProcessingRecipe;
 import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.item.ItemTest;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public class PressingRecipe extends ProcessingRecipe
 {
-	private ItemStack input;
+	private ItemStack inputItemStack;
 
 	public PressingRecipe(@Nonnull ItemStack src, @Nonnull FluidStack f, int t, @Nullable Residue r)
 	{
 		super(f, t, r);
-		this.input = src;
+		this.inputItemStack = src;
 	}
 
 	public ItemStack getInput()
 	{
-		return input;
+		return inputItemStack;
+	}
+
+	public boolean matchesRecipe(@Nullable ItemStack itemStack)
+	{
+		if (itemStack != null)
+		{
+			if (!ItemTest.hasEnough(inputItemStack, itemStack)) return false;
+			return true;
+		}
+		return false;
 	}
 }
