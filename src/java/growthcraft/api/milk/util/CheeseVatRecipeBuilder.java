@@ -91,13 +91,7 @@ public class CheeseVatRecipeBuilder
 
 	public CheeseVatRecipeBuilder register()
 	{
-		for (List<FluidStack> fluids : MultiStacksUtil.expandedFluidStackCombinations(inputFluids))
-		{
-			for (List<ItemStack> items : MultiStacksUtil.expandedItemStackCombinations(inputStacks))
-			{
-				MilkRegistry.instance().cheeseVat().addRecipe(outputFluids, outputStacks, fluids, items);
-			}
-		}
+		MilkRegistry.instance().cheeseVat().addRecipe(outputFluids, outputStacks, inputFluids, inputStacks);
 		return this;
 	}
 
