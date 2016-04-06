@@ -108,15 +108,25 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 	}
 
 	@Override
+	public boolean containsFluid(Fluid expectedFluid)
+	{
+		if (FluidTest.isValid(expectedFluid))
+		{
+			for (Fluid fluid : getFluids())
+			{
+				if (fluid == expectedFluid) return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public boolean containsFluidStack(FluidStack stack)
 	{
 		if (FluidTest.isValid(stack))
 		{
 			final Fluid expected = stack.getFluid();
-			for (Fluid fluid : getFluids())
-			{
-				if (expected == fluid) return true;
-			}
+			return containsFluid(expected);
 		}
 		return false;
 	}
