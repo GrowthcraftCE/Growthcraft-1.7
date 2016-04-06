@@ -96,17 +96,29 @@ public class ItemTest
 		return true;
 	}
 
-	public static boolean isValidAndExpected(@Nonnull List<ItemStack> expectedItems, @Nonnull List<ItemStack> givenItems)
+	@SuppressWarnings({"rawtypes"})
+	public static boolean isValidAndExpected(@Nonnull List expectedItems, @Nonnull List<ItemStack> givenItems)
 	{
 		if (expectedItems.size() != givenItems.size()) return false;
 		for (int i = 0; i < expectedItems.size(); ++i)
 		{
-			final ItemStack expected = expectedItems.get(i);
+			final Object expected = expectedItems.get(i);
 			final ItemStack actual = givenItems.get(i);
 			if (expected != null)
 			{
 				if (!isValid(actual)) return false;
-				if (!expected.isItemEqual(actual)) return false;
+				if (expected instanceof ItemStack)
+				{
+					if (!((ItemStack)expected).isItemEqual(actual)) return false;
+				}
+				else if (expected instanceof IMultiItemStacks)
+				{
+					if (!((IMultiItemStacks)expected).containsItemStack(actual)) return false;
+				}
+				else
+				{
+					return false;
+				}
 			}
 			else
 			{

@@ -28,6 +28,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.definition.IMultiFluidStacks;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -104,6 +105,15 @@ public class FluidTest
 		return true;
 	}
 
+	public static boolean hasEnough(@Nullable IMultiFluidStacks expected, @Nullable FluidStack actual)
+	{
+		if (expected == null) return actual == null;
+		if (actual == null) return false;
+		if (!expected.containsFluidStack(actual)) return false;
+		if (actual.amount < expected.getAmount()) return false;
+		return true;
+	}
+
 	public static boolean isValidAndExpected(@Nonnull FluidStack expected, @Nullable FluidStack stack)
 	{
 		if (isValid(stack))
@@ -122,17 +132,29 @@ public class FluidTest
 		return false;
 	}
 
-	public static boolean isValidAndExpected(@Nonnull List<FluidStack> expectedFluids, @Nonnull List<FluidStack> givenFluids)
+	@SuppressWarnings({"rawtypes"})
+	public static boolean isValidAndExpected(@Nonnull List expectedFluids, @Nonnull List<FluidStack> givenFluids)
 	{
 		if (expectedFluids.size() != givenFluids.size()) return false;
 		for (int i = 0; i < expectedFluids.size(); ++i)
 		{
-			final FluidStack expected = expectedFluids.get(i);
+			final Object expected = expectedFluids.get(i);
 			final FluidStack actual = givenFluids.get(i);
 			if (expected != null)
 			{
 				if (!isValid(actual)) return false;
-				if (!expected.isFluidEqual(actual)) return false;
+				if (expected instanceof IMultiFluidStacks)
+				{
+					if (!((IMultiFluidStacks)expected).containsFluidStack(actual)) return false;
+				}
+				else if (expected instanceof FluidStack)
+				{
+					if (!((FluidStack)expected).isFluidEqual(actual)) return false;
+				}
+				else
+				{
+					return false;
+				}
 			}
 			else
 			{
@@ -142,17 +164,29 @@ public class FluidTest
 		return true;
 	}
 
-	public static boolean hasEnoughAndExpected(@Nonnull List<FluidStack> expectedFluids, @Nonnull List<FluidStack> givenFluids)
+	@SuppressWarnings({"rawtypes"})
+	public static boolean hasEnoughAndExpected(@Nonnull List expectedFluids, @Nonnull List<FluidStack> givenFluids)
 	{
 		if (expectedFluids.size() != givenFluids.size()) return false;
 		for (int i = 0; i < expectedFluids.size(); ++i)
 		{
-			final FluidStack expected = expectedFluids.get(i);
+			final Object expected = expectedFluids.get(i);
 			final FluidStack actual = givenFluids.get(i);
 			if (expected != null)
 			{
 				if (!isValid(actual)) return false;
-				if (!hasEnough(expected, actual)) return false;
+				if (expected instanceof IMultiFluidStacks)
+				{
+					if (!hasEnough((IMultiFluidStacks)expected, actual)) return false;
+				}
+				else if (expected instanceof FluidStack)
+				{
+					if (!hasEnough((FluidStack)expected, actual)) return false;
+				}
+				else
+				{
+					return false;
+				}
 			}
 			else
 			{
