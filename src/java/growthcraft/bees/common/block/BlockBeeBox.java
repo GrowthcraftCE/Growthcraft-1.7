@@ -7,6 +7,7 @@ import growthcraft.bees.client.renderer.RenderBeeBox;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.block.GrcBlockContainer;
+import growthcraft.core.integration.minecraft.EnumMinecraftWoodType;
 import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.relauncher.Side;
@@ -53,6 +54,15 @@ public class BlockBeeBox extends GrcBlockContainer
 		this(Material.wood);
 	}
 
+	public String getMetaname(int meta)
+	{
+		if (meta >= 0 && meta < EnumMinecraftWoodType.VALUES.length)
+		{
+			return EnumMinecraftWoodType.VALUES[meta].name;
+		}
+		return "" + meta;
+	}
+
 	public BlockBeeBox setFlammability(int flam)
 	{
 		this.flammability = flam;
@@ -82,9 +92,9 @@ public class BlockBeeBox extends GrcBlockContainer
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
 	{
-		for (int i = 0; i < 6; ++i)
+		for (EnumMinecraftWoodType woodType : EnumMinecraftWoodType.VALUES)
 		{
-			list.add(new ItemStack(block, 1, i));
+			list.add(new ItemStack(block, 1, woodType.meta));
 		}
 	}
 
@@ -211,12 +221,10 @@ public class BlockBeeBox extends GrcBlockContainer
 	{
 		this.icons = new IIcon[6 * 4];
 
-		registerBeeBoxIcons(reg, "/minecraft/oak/", 0);
-		registerBeeBoxIcons(reg, "/minecraft/spruce/", 1);
-		registerBeeBoxIcons(reg, "/minecraft/birch/", 2);
-		registerBeeBoxIcons(reg, "/minecraft/jungle/", 3);
-		registerBeeBoxIcons(reg, "/minecraft/acacia/", 4);
-		registerBeeBoxIcons(reg, "/minecraft/darkoak/", 5);
+		for (EnumMinecraftWoodType woodType : EnumMinecraftWoodType.VALUES)
+		{
+			registerBeeBoxIcons(reg, String.format("/minecraft/%s/", woodType.name), woodType.meta);
+		}
 	}
 
 	@SideOnly(Side.CLIENT)

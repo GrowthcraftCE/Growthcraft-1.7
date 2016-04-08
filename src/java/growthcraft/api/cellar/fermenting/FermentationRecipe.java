@@ -26,6 +26,7 @@ package growthcraft.api.cellar.fermenting;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.item.ItemTest;
 
@@ -34,12 +35,12 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class FermentationRecipe implements IFermentationRecipe
 {
-	private final ItemStack fermentingItem;
+	private final IMultiItemStacks fermentingItem;
 	private final FluidStack inputFluidStack;
 	private final FluidStack outputFluidStack;
 	private final int time;
 
-	public FermentationRecipe(@Nonnull FluidStack pInputFluidStack, @Nonnull ItemStack pFermentingItem, @Nonnull FluidStack pOutputFluidStack, int pTime)
+	public FermentationRecipe(@Nonnull FluidStack pInputFluidStack, @Nonnull IMultiItemStacks pFermentingItem, @Nonnull FluidStack pOutputFluidStack, int pTime)
 	{
 		this.fermentingItem = pFermentingItem;
 		this.inputFluidStack = pInputFluidStack;
@@ -60,7 +61,7 @@ public class FermentationRecipe implements IFermentationRecipe
 	}
 
 	@Override
-	public ItemStack getFermentingItemStack()
+	public IMultiItemStacks getFermentingItemStack()
 	{
 		return fermentingItem;
 	}

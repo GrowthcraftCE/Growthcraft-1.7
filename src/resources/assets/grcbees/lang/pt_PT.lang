@@ -3,106 +3,123 @@ itemGroup.creative_tab_grcbees=Growthcraft Abelhas
 
 # Blocks
 ## Vanilla Bee Boxes
-tile.grc.BeeBox.Minecraft0.name=Apiário de Carvalho
-tile.grc.BeeBox.Minecraft1.name=Apiário de Abeto
-tile.grc.BeeBox.Minecraft2.name=Apiário de Bétula
-tile.grc.BeeBox.Minecraft3.name=Apiário de Madeira da Selva
-tile.grc.BeeBox.Minecraft4.name=Apiário de Acácia
-tile.grc.BeeBox.Minecraft5.name=Apiário de Carvalho Escuro
+tile.grc.BeeBox.Minecraft.oak.name=Apiário de Carvalho
+tile.grc.BeeBox.Minecraft.spruce.name=Apiário de Abeto
+tile.grc.BeeBox.Minecraft.birch.name=Apiário de Bétula
+tile.grc.BeeBox.Minecraft.jungle.name=Apiário de Madeira da Selva
+tile.grc.BeeBox.Minecraft.acacia.name=Apiário de Acácia
+tile.grc.BeeBox.Minecraft.darkoak.name=Apiário de Carvalho Escuro
 
 ## Growthcraft|Nether Bee Boxes
-tile.grc.BeeBox.Nether0.name=Apiário Malígno
+tile.grc.BeeBox.Nether.0.name=Apiário Malígno
 
 ## Growthcraft|Bamboo Bee Boxes
-tile.grc.BeeBox.Bamboo0.name=Apiário de Bambu
+tile.grc.BeeBox.Bamboo.0.name=Apiário de Bambu
 
 ## Thaumcraft Bee Boxes
-tile.grc.BeeBox.Thaumcraft0.name=Apiário de Greatwood
-tile.grc.BeeBox.Thaumcraft1.name=Apiário de Silverwood
+tile.grc.BeeBox.Thaumcraft.greatwood.name=Apiário de Greatwood
+tile.grc.BeeBox.Thaumcraft.silverwood.name=Apiário de Silverwood
 
 ## Forestry Bee Boxes - this is just insane...
 ### Regular
-tile.grc.BeeBox.Forestry.0.Normal0.name=Larch Bee Box
-tile.grc.BeeBox.Forestry.0.Normal1.name=Teak Bee Box
-tile.grc.BeeBox.Forestry.0.Normal2.name=Acacia Bee Box
-tile.grc.BeeBox.Forestry.0.Normal3.name=Lime Bee Box
-tile.grc.BeeBox.Forestry.0.Normal4.name=Chestnut Bee Box
-tile.grc.BeeBox.Forestry.0.Normal5.name=Wenge Bee Box
-tile.grc.BeeBox.Forestry.0.Normal6.name=Baobab Bee Box
-tile.grc.BeeBox.Forestry.0.Normal7.name=Sequoia Bee Box
-tile.grc.BeeBox.Forestry.0.Normal8.name=Kapok Bee Box
-tile.grc.BeeBox.Forestry.0.Normal9.name=Ebony Bee Box
-tile.grc.BeeBox.Forestry.0.Normal10.name=Mahogany Bee Box
-tile.grc.BeeBox.Forestry.0.Normal11.name=Balsa Bee Box
-tile.grc.BeeBox.Forestry.0.Normal12.name=Willow Bee Box
-tile.grc.BeeBox.Forestry.0.Normal13.name=Walnut Bee Box
-tile.grc.BeeBox.Forestry.0.Normal14.name=Greenheart Bee Box
-tile.grc.BeeBox.Forestry.1.Normal0.name=Cherry Bee Box
-tile.grc.BeeBox.Forestry.1.Normal1.name=Mahoe Bee Box
-tile.grc.BeeBox.Forestry.1.Normal2.name=Poplar Bee Box
-tile.grc.BeeBox.Forestry.1.Normal3.name=Palm Bee Box
-tile.grc.BeeBox.Forestry.1.Normal4.name=Papaya Bee Box
-tile.grc.BeeBox.Forestry.1.Normal5.name=Pine Bee Box
-tile.grc.BeeBox.Forestry.1.Normal6.name=Plum Bee Box
-tile.grc.BeeBox.Forestry.1.Normal7.name=Maple Bee Box
-tile.grc.BeeBox.Forestry.1.Normal8.name=Citrus Bee Box
-tile.grc.BeeBox.Forestry.1.Normal9.name=Giganteum Bee Box
-tile.grc.BeeBox.Forestry.1.Normal10.name=Ipe Bee Box
-tile.grc.BeeBox.Forestry.1.Normal11.name=Padauk Bee Box
-tile.grc.BeeBox.Forestry.1.Normal12.name=Cocobolo Bee Box
-tile.grc.BeeBox.Forestry.1.Normal13.name=Zebrawood Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.larch.name=Larch Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.teak.name=Teak Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.acacia.name=Acacia Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.lime.name=Lime Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.chestnut.name=Chestnut Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.wenge.name=Wenge Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.baobab.name=Baobab Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.sequoia.name=Sequoia Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.kapok.name=Kapok Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.ebony.name=Ebony Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.mahogany.name=Mahogany Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.balsa.name=Balsa Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.willow.name=Willow Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.walnut.name=Walnut Bee Box
+tile.grc.BeeBox.Forestry.0.Normal.greenheart.name=Greenheart Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.cherry.name=Cherry Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.mahoe.name=Mahoe Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.poplar.name=Poplar Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.palm.name=Palm Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.papaya.name=Papaya Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.pine.name=Pine Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.plum.name=Plum Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.maple.name=Maple Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.citrus.name=Citrus Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.giganteum.name=Giganteum Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.ipe.name=Ipe Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.padauk.name=Padauk Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.cocobolo.name=Cocobolo Bee Box
+tile.grc.BeeBox.Forestry.1.Normal.zebrawood.name=Zebrawood Bee Box
 ### Fire Proof
-tile.grc.BeeBox.Forestry.0.Fireproof0.name=Larch Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof1.name=Teak Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof2.name=Acacia Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof3.name=Lime Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof4.name=Chestnut Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof5.name=Wenge Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof6.name=Baobab Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof7.name=Sequoia Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof8.name=Kapok Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof9.name=Ebony Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof10.name=Mahogany Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof11.name=Balsa Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof12.name=Willow Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof13.name=Walnut Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.0.Fireproof14.name=Greenheart Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof0.name=Cherry Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof1.name=Mahoe Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof2.name=Poplar Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof3.name=Palm Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof4.name=Papaya Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof5.name=Pine Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof6.name=Plum Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof7.name=Maple Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof8.name=Citrus Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof9.name=Giganteum Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof10.name=Ipe Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof11.name=Padauk Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof12.name=Cocobolo Bee Box (Fireproof)
-tile.grc.BeeBox.Forestry.1.Fireproof13.name=Zebrawood Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.larch.name=Larch Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.teak.name=Teak Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.acacia.name=Acacia Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.lime.name=Lime Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.chestnut.name=Chestnut Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.wenge.name=Wenge Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.baobab.name=Baobab Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.sequoia.name=Sequoia Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.kapok.name=Kapok Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.ebony.name=Ebony Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.mahogany.name=Mahogany Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.balsa.name=Balsa Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.willow.name=Willow Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.walnut.name=Walnut Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.greenheart.name=Greenheart Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.cherry.name=Cherry Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.mahoe.name=Mahoe Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.poplar.name=Poplar Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.palm.name=Palm Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.papaya.name=Papaya Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.pine.name=Pine Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.plum.name=Plum Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.maple.name=Maple Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.citrus.name=Citrus Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.giganteum.name=Giganteum Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.ipe.name=Ipe Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.padauk.name=Padauk Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.cocobolo.name=Cocobolo Bee Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.zebrawood.name=Zebrawood Bee Box (Fireproof)
 
 ## BiomesOPlenty
-tile.grc.BeeBox.BiomesOPlenty0.name=Apiário de Carvalho Sagrado
-tile.grc.BeeBox.BiomesOPlenty1.name=Apiário de Cerejeira
-tile.grc.BeeBox.BiomesOPlenty2.name=Apiário de Madeira Sombria
-tile.grc.BeeBox.BiomesOPlenty3.name=Apiário de Pinheiro
-tile.grc.BeeBox.BiomesOPlenty4.name=Apiário de Madeira Etérea
-tile.grc.BeeBox.BiomesOPlenty5.name=Apiário de Madeira Mágica
-tile.grc.BeeBox.BiomesOPlenty6.name=Apiário de Mangue
-tile.grc.BeeBox.BiomesOPlenty7.name=Apiário de Palmeira
-tile.grc.BeeBox.BiomesOPlenty8.name=Apiário de Sequoia
-tile.grc.BeeBox.BiomesOPlenty9.name=Apiário de Salgueiro
-tile.grc.BeeBox.BiomesOPlenty10.name=Apiário de Colmo de Bambu
-tile.grc.BeeBox.BiomesOPlenty11.name=Apiário de Pinho
-tile.grc.BeeBox.BiomesOPlenty12.name=Apiário de Casca do Inferno
-tile.grc.BeeBox.BiomesOPlenty13.name=Apiário de Jacarandá
-tile.grc.BeeBox.BiomesOPlenty14.name=Apiário de Mogno
+tile.grc.BeeBox.BiomesOPlenty.sacred_oak.name=Apiário de Carvalho Sagrado
+tile.grc.BeeBox.BiomesOPlenty.cherry.name=Apiário de Cerejeira
+tile.grc.BeeBox.BiomesOPlenty.dark.name=Apiário de Madeira Sombria
+tile.grc.BeeBox.BiomesOPlenty.fir.name=Apiário de Pinheiro
+tile.grc.BeeBox.BiomesOPlenty.ethereal.name=Apiário de Madeira Etérea
+tile.grc.BeeBox.BiomesOPlenty.magic.name=Apiário de Madeira Mágica
+tile.grc.BeeBox.BiomesOPlenty.mangrove.name=Apiário de Mangue
+tile.grc.BeeBox.BiomesOPlenty.palm.name=Apiário de Palmeira
+tile.grc.BeeBox.BiomesOPlenty.redwood.name=Apiário de Sequoia
+tile.grc.BeeBox.BiomesOPlenty.willow.name=Apiário de Salgueiro
+tile.grc.BeeBox.BiomesOPlenty.bamboo_thatching.name=Apiário de Colmo de Bambu
+tile.grc.BeeBox.BiomesOPlenty.pine.name=Apiário de Pinho
+tile.grc.BeeBox.BiomesOPlenty.hell_bark.name=Apiário de Casca do Inferno
+tile.grc.BeeBox.BiomesOPlenty.jacaranda.name=Apiário de Jacarandá
+tile.grc.BeeBox.BiomesOPlenty.mahogany.name=Apiário de Mogno
 
 ## Botania
-tile.grc.BeeBox.Botania0.name=Living Wood Bee Box
-tile.grc.BeeBox.Botania1.name=Dreamwood Bee Box
-tile.grc.BeeBox.Botania2.name=Shimmer Wood Bee Box
+tile.grc.BeeBox.Botania.living_wood.name=Living Wood Bee Box
+tile.grc.BeeBox.Botania.dream_wood.name=Dreamwood Bee Box
+tile.grc.BeeBox.Botania.shimmer_wood.name=Shimmer Wood Bee Box
+tile.grc.BeeBox.Botania.shimmer_wood.desc=tile.grc.BeeBox.Botania.shimmer_wood.desc
+
+## Natura
+tile.grc.BeeBox.Natura.apple.name=tile.grc.BeeBox.Natura.apple.name
+tile.grc.BeeBox.Natura.blood.name=tile.grc.BeeBox.Natura.blood.name
+tile.grc.BeeBox.Natura.bush.name=tile.grc.BeeBox.Natura.bush.name
+tile.grc.BeeBox.Natura.darkwood.name=tile.grc.BeeBox.Natura.darkwood.name
+tile.grc.BeeBox.Natura.eucalyptus.name=tile.grc.BeeBox.Natura.eucalyptus.name
+tile.grc.BeeBox.Natura.fusewood.name=tile.grc.BeeBox.Natura.fusewood.name
+tile.grc.BeeBox.Natura.ghost.name=tile.grc.BeeBox.Natura.ghost.name
+tile.grc.BeeBox.Natura.maple.name=tile.grc.BeeBox.Natura.maple.name
+tile.grc.BeeBox.Natura.purpleheart.name=tile.grc.BeeBox.Natura.purpleheart.name
+tile.grc.BeeBox.Natura.redwood.name=tile.grc.BeeBox.Natura.redwood.name
+tile.grc.BeeBox.Natura.sakura.name=tile.grc.BeeBox.Natura.sakura.name
+tile.grc.BeeBox.Natura.silverbell.name=tile.grc.BeeBox.Natura.silverbell.name
+tile.grc.BeeBox.Natura.tiger.name=tile.grc.BeeBox.Natura.tiger.name
+tile.grc.BeeBox.Natura.willow.name=tile.grc.BeeBox.Natura.willow.name
 
 # Other Blocks
 tile.grc.beeHive.name=Colmeia

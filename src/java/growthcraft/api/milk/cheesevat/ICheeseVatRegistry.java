@@ -27,6 +27,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.api.core.definition.IMultiFluidStacks;
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.log.ILoggable;
 
 import net.minecraft.item.ItemStack;
@@ -38,15 +40,22 @@ public interface ICheeseVatRegistry extends ILoggable
 	/**
 	 * Adds a new CheeseVat recipe
 	 *
+	 * @param recipe - the recipe to add
+	 */
+	void addRecipe(ICheeseVatRecipe recipe);
+
+	/**
+	 * Adds a new CheeseVat recipe
+	 *
 	 * @param outputFluids - fluids to output, currently only supports 1
 	 * @param outputItems - items to output, usually empty
 	 * @param inputFluids - input fluids, maximum 2
 	 * @param inputItems - input items, maximum 3
 	 */
-	void addRecipe(@Nonnull List<FluidStack> outputFluids, @Nonnull List<ItemStack> outputItems, @Nonnull List<FluidStack> inputFluids, @Nonnull List<ItemStack> inputItems);
+	void addRecipe(@Nonnull List<FluidStack> outputFluids, @Nonnull List<ItemStack> outputItems, @Nonnull List<IMultiFluidStacks> inputFluids, @Nonnull List<IMultiItemStacks> inputItems);
 
 	/**
-	 * Determine if the fluid is a valid input fluid
+	 * Determine if the fluid is a valid ingredient
 	 *
 	 * @return true, the fluid is an ingredient, false otherwise
 	 */

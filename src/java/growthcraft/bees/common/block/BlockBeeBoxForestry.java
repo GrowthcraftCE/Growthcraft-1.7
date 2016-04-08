@@ -53,6 +53,16 @@ public class BlockBeeBoxForestry extends BlockBeeBox
 		setBlockName(String.format("grc.BeeBox.Forestry.%d.%s", subIndex, isFireproofFlag ? "Fireproof" : "Normal"));
 	}
 
+	@Override
+	public String getMetaname(int meta)
+	{
+		if (meta >= 0 && meta < beeboxTypes.length)
+		{
+			return beeboxTypes[meta].name;
+		}
+		return super.getMetaname(meta);
+	}
+
 	public EnumBeeBoxForestry getBeeBoxType(World world, int x, int y, int z)
 	{
 		final int meta = world.getBlockMetadata(x, y, z);

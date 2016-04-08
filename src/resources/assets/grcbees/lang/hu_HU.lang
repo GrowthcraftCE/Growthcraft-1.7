@@ -3,106 +3,123 @@ itemGroup.creative_tab_grcbees=itemGroup.creative_tab_grcbees
 
 # Blocks
 ## Vanilla Bee Boxes
-tile.grc.BeeBox.Minecraft0.name=tile.grc.BeeBox.Minecraft0.name
-tile.grc.BeeBox.Minecraft1.name=tile.grc.BeeBox.Minecraft1.name
-tile.grc.BeeBox.Minecraft2.name=tile.grc.BeeBox.Minecraft2.name
-tile.grc.BeeBox.Minecraft3.name=tile.grc.BeeBox.Minecraft3.name
-tile.grc.BeeBox.Minecraft4.name=tile.grc.BeeBox.Minecraft4.name
-tile.grc.BeeBox.Minecraft5.name=tile.grc.BeeBox.Minecraft5.name
+tile.grc.BeeBox.Minecraft.oak.name=tile.grc.BeeBox.Minecraft.oak.name
+tile.grc.BeeBox.Minecraft.spruce.name=tile.grc.BeeBox.Minecraft.spruce.name
+tile.grc.BeeBox.Minecraft.birch.name=tile.grc.BeeBox.Minecraft.birch.name
+tile.grc.BeeBox.Minecraft.jungle.name=tile.grc.BeeBox.Minecraft.jungle.name
+tile.grc.BeeBox.Minecraft.acacia.name=tile.grc.BeeBox.Minecraft.acacia.name
+tile.grc.BeeBox.Minecraft.darkoak.name=tile.grc.BeeBox.Minecraft.darkoak.name
 
 ## Growthcraft|Nether Bee Boxes
-tile.grc.BeeBox.Nether0.name=tile.grc.BeeBox.Nether0.name
+tile.grc.BeeBox.Nether.0.name=tile.grc.BeeBox.Nether.0.name
 
 ## Growthcraft|Bamboo Bee Boxes
-tile.grc.BeeBox.Bamboo0.name=tile.grc.BeeBox.Bamboo0.name
+tile.grc.BeeBox.Bamboo.0.name=tile.grc.BeeBox.Bamboo.0.name
 
 ## Thaumcraft Bee Boxes
-tile.grc.BeeBox.Thaumcraft0.name=tile.grc.BeeBox.Thaumcraft0.name
-tile.grc.BeeBox.Thaumcraft1.name=tile.grc.BeeBox.Thaumcraft1.name
+tile.grc.BeeBox.Thaumcraft.greatwood.name=tile.grc.BeeBox.Thaumcraft.greatwood.name
+tile.grc.BeeBox.Thaumcraft.silverwood.name=tile.grc.BeeBox.Thaumcraft.silverwood.name
 
 ## Forestry Bee Boxes - this is just insane...
 ### Regular
-tile.grc.BeeBox.Forestry.0.Normal0.name=tile.grc.BeeBox.Forestry.0.Normal0.name
-tile.grc.BeeBox.Forestry.0.Normal1.name=tile.grc.BeeBox.Forestry.0.Normal1.name
-tile.grc.BeeBox.Forestry.0.Normal2.name=tile.grc.BeeBox.Forestry.0.Normal2.name
-tile.grc.BeeBox.Forestry.0.Normal3.name=tile.grc.BeeBox.Forestry.0.Normal3.name
-tile.grc.BeeBox.Forestry.0.Normal4.name=tile.grc.BeeBox.Forestry.0.Normal4.name
-tile.grc.BeeBox.Forestry.0.Normal5.name=tile.grc.BeeBox.Forestry.0.Normal5.name
-tile.grc.BeeBox.Forestry.0.Normal6.name=tile.grc.BeeBox.Forestry.0.Normal6.name
-tile.grc.BeeBox.Forestry.0.Normal7.name=tile.grc.BeeBox.Forestry.0.Normal7.name
-tile.grc.BeeBox.Forestry.0.Normal8.name=tile.grc.BeeBox.Forestry.0.Normal8.name
-tile.grc.BeeBox.Forestry.0.Normal9.name=tile.grc.BeeBox.Forestry.0.Normal9.name
-tile.grc.BeeBox.Forestry.0.Normal10.name=tile.grc.BeeBox.Forestry.0.Normal10.name
-tile.grc.BeeBox.Forestry.0.Normal11.name=tile.grc.BeeBox.Forestry.0.Normal11.name
-tile.grc.BeeBox.Forestry.0.Normal12.name=tile.grc.BeeBox.Forestry.0.Normal12.name
-tile.grc.BeeBox.Forestry.0.Normal13.name=tile.grc.BeeBox.Forestry.0.Normal13.name
-tile.grc.BeeBox.Forestry.0.Normal14.name=tile.grc.BeeBox.Forestry.0.Normal14.name
-tile.grc.BeeBox.Forestry.1.Normal0.name=tile.grc.BeeBox.Forestry.1.Normal0.name
-tile.grc.BeeBox.Forestry.1.Normal1.name=tile.grc.BeeBox.Forestry.1.Normal1.name
-tile.grc.BeeBox.Forestry.1.Normal2.name=tile.grc.BeeBox.Forestry.1.Normal2.name
-tile.grc.BeeBox.Forestry.1.Normal3.name=tile.grc.BeeBox.Forestry.1.Normal3.name
-tile.grc.BeeBox.Forestry.1.Normal4.name=tile.grc.BeeBox.Forestry.1.Normal4.name
-tile.grc.BeeBox.Forestry.1.Normal5.name=tile.grc.BeeBox.Forestry.1.Normal5.name
-tile.grc.BeeBox.Forestry.1.Normal6.name=tile.grc.BeeBox.Forestry.1.Normal6.name
-tile.grc.BeeBox.Forestry.1.Normal7.name=tile.grc.BeeBox.Forestry.1.Normal7.name
-tile.grc.BeeBox.Forestry.1.Normal8.name=tile.grc.BeeBox.Forestry.1.Normal8.name
-tile.grc.BeeBox.Forestry.1.Normal9.name=tile.grc.BeeBox.Forestry.1.Normal9.name
-tile.grc.BeeBox.Forestry.1.Normal10.name=tile.grc.BeeBox.Forestry.1.Normal10.name
-tile.grc.BeeBox.Forestry.1.Normal11.name=tile.grc.BeeBox.Forestry.1.Normal11.name
-tile.grc.BeeBox.Forestry.1.Normal12.name=tile.grc.BeeBox.Forestry.1.Normal12.name
-tile.grc.BeeBox.Forestry.1.Normal13.name=tile.grc.BeeBox.Forestry.1.Normal13.name
+tile.grc.BeeBox.Forestry.0.Normal.larch.name=tile.grc.BeeBox.Forestry.0.Normal.larch.name
+tile.grc.BeeBox.Forestry.0.Normal.teak.name=tile.grc.BeeBox.Forestry.0.Normal.teak.name
+tile.grc.BeeBox.Forestry.0.Normal.acacia.name=tile.grc.BeeBox.Forestry.0.Normal.acacia.name
+tile.grc.BeeBox.Forestry.0.Normal.lime.name=tile.grc.BeeBox.Forestry.0.Normal.lime.name
+tile.grc.BeeBox.Forestry.0.Normal.chestnut.name=tile.grc.BeeBox.Forestry.0.Normal.chestnut.name
+tile.grc.BeeBox.Forestry.0.Normal.wenge.name=tile.grc.BeeBox.Forestry.0.Normal.wenge.name
+tile.grc.BeeBox.Forestry.0.Normal.baobab.name=tile.grc.BeeBox.Forestry.0.Normal.baobab.name
+tile.grc.BeeBox.Forestry.0.Normal.sequoia.name=tile.grc.BeeBox.Forestry.0.Normal.sequoia.name
+tile.grc.BeeBox.Forestry.0.Normal.kapok.name=tile.grc.BeeBox.Forestry.0.Normal.kapok.name
+tile.grc.BeeBox.Forestry.0.Normal.ebony.name=tile.grc.BeeBox.Forestry.0.Normal.ebony.name
+tile.grc.BeeBox.Forestry.0.Normal.mahogany.name=tile.grc.BeeBox.Forestry.0.Normal.mahogany.name
+tile.grc.BeeBox.Forestry.0.Normal.balsa.name=tile.grc.BeeBox.Forestry.0.Normal.balsa.name
+tile.grc.BeeBox.Forestry.0.Normal.willow.name=tile.grc.BeeBox.Forestry.0.Normal.willow.name
+tile.grc.BeeBox.Forestry.0.Normal.walnut.name=tile.grc.BeeBox.Forestry.0.Normal.walnut.name
+tile.grc.BeeBox.Forestry.0.Normal.greenheart.name=tile.grc.BeeBox.Forestry.0.Normal.greenheart.name
+tile.grc.BeeBox.Forestry.1.Normal.cherry.name=tile.grc.BeeBox.Forestry.1.Normal.cherry.name
+tile.grc.BeeBox.Forestry.1.Normal.mahoe.name=tile.grc.BeeBox.Forestry.1.Normal.mahoe.name
+tile.grc.BeeBox.Forestry.1.Normal.poplar.name=tile.grc.BeeBox.Forestry.1.Normal.poplar.name
+tile.grc.BeeBox.Forestry.1.Normal.palm.name=tile.grc.BeeBox.Forestry.1.Normal.palm.name
+tile.grc.BeeBox.Forestry.1.Normal.papaya.name=tile.grc.BeeBox.Forestry.1.Normal.papaya.name
+tile.grc.BeeBox.Forestry.1.Normal.pine.name=tile.grc.BeeBox.Forestry.1.Normal.pine.name
+tile.grc.BeeBox.Forestry.1.Normal.plum.name=tile.grc.BeeBox.Forestry.1.Normal.plum.name
+tile.grc.BeeBox.Forestry.1.Normal.maple.name=tile.grc.BeeBox.Forestry.1.Normal.maple.name
+tile.grc.BeeBox.Forestry.1.Normal.citrus.name=tile.grc.BeeBox.Forestry.1.Normal.citrus.name
+tile.grc.BeeBox.Forestry.1.Normal.giganteum.name=tile.grc.BeeBox.Forestry.1.Normal.giganteum.name
+tile.grc.BeeBox.Forestry.1.Normal.ipe.name=tile.grc.BeeBox.Forestry.1.Normal.ipe.name
+tile.grc.BeeBox.Forestry.1.Normal.padauk.name=tile.grc.BeeBox.Forestry.1.Normal.padauk.name
+tile.grc.BeeBox.Forestry.1.Normal.cocobolo.name=tile.grc.BeeBox.Forestry.1.Normal.cocobolo.name
+tile.grc.BeeBox.Forestry.1.Normal.zebrawood.name=tile.grc.BeeBox.Forestry.1.Normal.zebrawood.name
 ### Fire Proof
-tile.grc.BeeBox.Forestry.0.Fireproof0.name=tile.grc.BeeBox.Forestry.0.Fireproof0.name
-tile.grc.BeeBox.Forestry.0.Fireproof1.name=tile.grc.BeeBox.Forestry.0.Fireproof1.name
-tile.grc.BeeBox.Forestry.0.Fireproof2.name=tile.grc.BeeBox.Forestry.0.Fireproof2.name
-tile.grc.BeeBox.Forestry.0.Fireproof3.name=tile.grc.BeeBox.Forestry.0.Fireproof3.name
-tile.grc.BeeBox.Forestry.0.Fireproof4.name=tile.grc.BeeBox.Forestry.0.Fireproof4.name
-tile.grc.BeeBox.Forestry.0.Fireproof5.name=tile.grc.BeeBox.Forestry.0.Fireproof5.name
-tile.grc.BeeBox.Forestry.0.Fireproof6.name=tile.grc.BeeBox.Forestry.0.Fireproof6.name
-tile.grc.BeeBox.Forestry.0.Fireproof7.name=tile.grc.BeeBox.Forestry.0.Fireproof7.name
-tile.grc.BeeBox.Forestry.0.Fireproof8.name=tile.grc.BeeBox.Forestry.0.Fireproof8.name
-tile.grc.BeeBox.Forestry.0.Fireproof9.name=tile.grc.BeeBox.Forestry.0.Fireproof9.name
-tile.grc.BeeBox.Forestry.0.Fireproof10.name=tile.grc.BeeBox.Forestry.0.Fireproof10.name
-tile.grc.BeeBox.Forestry.0.Fireproof11.name=tile.grc.BeeBox.Forestry.0.Fireproof11.name
-tile.grc.BeeBox.Forestry.0.Fireproof12.name=tile.grc.BeeBox.Forestry.0.Fireproof12.name
-tile.grc.BeeBox.Forestry.0.Fireproof13.name=tile.grc.BeeBox.Forestry.0.Fireproof13.name
-tile.grc.BeeBox.Forestry.0.Fireproof14.name=tile.grc.BeeBox.Forestry.0.Fireproof14.name
-tile.grc.BeeBox.Forestry.1.Fireproof0.name=tile.grc.BeeBox.Forestry.1.Fireproof0.name
-tile.grc.BeeBox.Forestry.1.Fireproof1.name=tile.grc.BeeBox.Forestry.1.Fireproof1.name
-tile.grc.BeeBox.Forestry.1.Fireproof2.name=tile.grc.BeeBox.Forestry.1.Fireproof2.name
-tile.grc.BeeBox.Forestry.1.Fireproof3.name=tile.grc.BeeBox.Forestry.1.Fireproof3.name
-tile.grc.BeeBox.Forestry.1.Fireproof4.name=tile.grc.BeeBox.Forestry.1.Fireproof4.name
-tile.grc.BeeBox.Forestry.1.Fireproof5.name=tile.grc.BeeBox.Forestry.1.Fireproof5.name
-tile.grc.BeeBox.Forestry.1.Fireproof6.name=tile.grc.BeeBox.Forestry.1.Fireproof6.name
-tile.grc.BeeBox.Forestry.1.Fireproof7.name=tile.grc.BeeBox.Forestry.1.Fireproof7.name
-tile.grc.BeeBox.Forestry.1.Fireproof8.name=tile.grc.BeeBox.Forestry.1.Fireproof8.name
-tile.grc.BeeBox.Forestry.1.Fireproof9.name=tile.grc.BeeBox.Forestry.1.Fireproof9.name
-tile.grc.BeeBox.Forestry.1.Fireproof10.name=tile.grc.BeeBox.Forestry.1.Fireproof10.name
-tile.grc.BeeBox.Forestry.1.Fireproof11.name=tile.grc.BeeBox.Forestry.1.Fireproof11.name
-tile.grc.BeeBox.Forestry.1.Fireproof12.name=tile.grc.BeeBox.Forestry.1.Fireproof12.name
-tile.grc.BeeBox.Forestry.1.Fireproof13.name=tile.grc.BeeBox.Forestry.1.Fireproof13.name
+tile.grc.BeeBox.Forestry.0.Fireproof.larch.name=tile.grc.BeeBox.Forestry.0.Fireproof.larch.name
+tile.grc.BeeBox.Forestry.0.Fireproof.teak.name=tile.grc.BeeBox.Forestry.0.Fireproof.teak.name
+tile.grc.BeeBox.Forestry.0.Fireproof.acacia.name=tile.grc.BeeBox.Forestry.0.Fireproof.acacia.name
+tile.grc.BeeBox.Forestry.0.Fireproof.lime.name=tile.grc.BeeBox.Forestry.0.Fireproof.lime.name
+tile.grc.BeeBox.Forestry.0.Fireproof.chestnut.name=tile.grc.BeeBox.Forestry.0.Fireproof.chestnut.name
+tile.grc.BeeBox.Forestry.0.Fireproof.wenge.name=tile.grc.BeeBox.Forestry.0.Fireproof.wenge.name
+tile.grc.BeeBox.Forestry.0.Fireproof.baobab.name=tile.grc.BeeBox.Forestry.0.Fireproof.baobab.name
+tile.grc.BeeBox.Forestry.0.Fireproof.sequoia.name=tile.grc.BeeBox.Forestry.0.Fireproof.sequoia.name
+tile.grc.BeeBox.Forestry.0.Fireproof.kapok.name=tile.grc.BeeBox.Forestry.0.Fireproof.kapok.name
+tile.grc.BeeBox.Forestry.0.Fireproof.ebony.name=tile.grc.BeeBox.Forestry.0.Fireproof.ebony.name
+tile.grc.BeeBox.Forestry.0.Fireproof.mahogany.name=tile.grc.BeeBox.Forestry.0.Fireproof.mahogany.name
+tile.grc.BeeBox.Forestry.0.Fireproof.balsa.name=tile.grc.BeeBox.Forestry.0.Fireproof.balsa.name
+tile.grc.BeeBox.Forestry.0.Fireproof.willow.name=tile.grc.BeeBox.Forestry.0.Fireproof.willow.name
+tile.grc.BeeBox.Forestry.0.Fireproof.walnut.name=tile.grc.BeeBox.Forestry.0.Fireproof.walnut.name
+tile.grc.BeeBox.Forestry.0.Fireproof.greenheart.name=tile.grc.BeeBox.Forestry.0.Fireproof.greenheart.name
+tile.grc.BeeBox.Forestry.1.Fireproof.cherry.name=tile.grc.BeeBox.Forestry.1.Fireproof.cherry.name
+tile.grc.BeeBox.Forestry.1.Fireproof.mahoe.name=tile.grc.BeeBox.Forestry.1.Fireproof.mahoe.name
+tile.grc.BeeBox.Forestry.1.Fireproof.poplar.name=tile.grc.BeeBox.Forestry.1.Fireproof.poplar.name
+tile.grc.BeeBox.Forestry.1.Fireproof.palm.name=tile.grc.BeeBox.Forestry.1.Fireproof.palm.name
+tile.grc.BeeBox.Forestry.1.Fireproof.papaya.name=tile.grc.BeeBox.Forestry.1.Fireproof.papaya.name
+tile.grc.BeeBox.Forestry.1.Fireproof.pine.name=tile.grc.BeeBox.Forestry.1.Fireproof.pine.name
+tile.grc.BeeBox.Forestry.1.Fireproof.plum.name=tile.grc.BeeBox.Forestry.1.Fireproof.plum.name
+tile.grc.BeeBox.Forestry.1.Fireproof.maple.name=tile.grc.BeeBox.Forestry.1.Fireproof.maple.name
+tile.grc.BeeBox.Forestry.1.Fireproof.citrus.name=tile.grc.BeeBox.Forestry.1.Fireproof.citrus.name
+tile.grc.BeeBox.Forestry.1.Fireproof.giganteum.name=tile.grc.BeeBox.Forestry.1.Fireproof.giganteum.name
+tile.grc.BeeBox.Forestry.1.Fireproof.ipe.name=tile.grc.BeeBox.Forestry.1.Fireproof.ipe.name
+tile.grc.BeeBox.Forestry.1.Fireproof.padauk.name=tile.grc.BeeBox.Forestry.1.Fireproof.padauk.name
+tile.grc.BeeBox.Forestry.1.Fireproof.cocobolo.name=tile.grc.BeeBox.Forestry.1.Fireproof.cocobolo.name
+tile.grc.BeeBox.Forestry.1.Fireproof.zebrawood.name=tile.grc.BeeBox.Forestry.1.Fireproof.zebrawood.name
 
 ## BiomesOPlenty
-tile.grc.BeeBox.BiomesOPlenty0.name=tile.grc.BeeBox.BiomesOPlenty0.name
-tile.grc.BeeBox.BiomesOPlenty1.name=tile.grc.BeeBox.BiomesOPlenty1.name
-tile.grc.BeeBox.BiomesOPlenty2.name=tile.grc.BeeBox.BiomesOPlenty2.name
-tile.grc.BeeBox.BiomesOPlenty3.name=tile.grc.BeeBox.BiomesOPlenty3.name
-tile.grc.BeeBox.BiomesOPlenty4.name=tile.grc.BeeBox.BiomesOPlenty4.name
-tile.grc.BeeBox.BiomesOPlenty5.name=tile.grc.BeeBox.BiomesOPlenty5.name
-tile.grc.BeeBox.BiomesOPlenty6.name=tile.grc.BeeBox.BiomesOPlenty6.name
-tile.grc.BeeBox.BiomesOPlenty7.name=tile.grc.BeeBox.BiomesOPlenty7.name
-tile.grc.BeeBox.BiomesOPlenty8.name=tile.grc.BeeBox.BiomesOPlenty8.name
-tile.grc.BeeBox.BiomesOPlenty9.name=tile.grc.BeeBox.BiomesOPlenty9.name
-tile.grc.BeeBox.BiomesOPlenty10.name=tile.grc.BeeBox.BiomesOPlenty10.name
-tile.grc.BeeBox.BiomesOPlenty11.name=tile.grc.BeeBox.BiomesOPlenty11.name
-tile.grc.BeeBox.BiomesOPlenty12.name=tile.grc.BeeBox.BiomesOPlenty12.name
-tile.grc.BeeBox.BiomesOPlenty13.name=tile.grc.BeeBox.BiomesOPlenty13.name
-tile.grc.BeeBox.BiomesOPlenty14.name=tile.grc.BeeBox.BiomesOPlenty14.name
+tile.grc.BeeBox.BiomesOPlenty.sacred_oak.name=tile.grc.BeeBox.BiomesOPlenty.sacred_oak.name
+tile.grc.BeeBox.BiomesOPlenty.cherry.name=tile.grc.BeeBox.BiomesOPlenty.cherry.name
+tile.grc.BeeBox.BiomesOPlenty.dark.name=tile.grc.BeeBox.BiomesOPlenty.dark.name
+tile.grc.BeeBox.BiomesOPlenty.fir.name=tile.grc.BeeBox.BiomesOPlenty.fir.name
+tile.grc.BeeBox.BiomesOPlenty.ethereal.name=tile.grc.BeeBox.BiomesOPlenty.ethereal.name
+tile.grc.BeeBox.BiomesOPlenty.magic.name=tile.grc.BeeBox.BiomesOPlenty.magic.name
+tile.grc.BeeBox.BiomesOPlenty.mangrove.name=tile.grc.BeeBox.BiomesOPlenty.mangrove.name
+tile.grc.BeeBox.BiomesOPlenty.palm.name=tile.grc.BeeBox.BiomesOPlenty.palm.name
+tile.grc.BeeBox.BiomesOPlenty.redwood.name=tile.grc.BeeBox.BiomesOPlenty.redwood.name
+tile.grc.BeeBox.BiomesOPlenty.willow.name=tile.grc.BeeBox.BiomesOPlenty.willow.name
+tile.grc.BeeBox.BiomesOPlenty.bamboo_thatching.name=tile.grc.BeeBox.BiomesOPlenty.bamboo_thatching.name
+tile.grc.BeeBox.BiomesOPlenty.pine.name=tile.grc.BeeBox.BiomesOPlenty.pine.name
+tile.grc.BeeBox.BiomesOPlenty.hell_bark.name=tile.grc.BeeBox.BiomesOPlenty.hell_bark.name
+tile.grc.BeeBox.BiomesOPlenty.jacaranda.name=tile.grc.BeeBox.BiomesOPlenty.jacaranda.name
+tile.grc.BeeBox.BiomesOPlenty.mahogany.name=tile.grc.BeeBox.BiomesOPlenty.mahogany.name
 
 ## Botania
-tile.grc.BeeBox.Botania0.name=tile.grc.BeeBox.Botania0.name
-tile.grc.BeeBox.Botania1.name=tile.grc.BeeBox.Botania1.name
-tile.grc.BeeBox.Botania2.name=tile.grc.BeeBox.Botania2.name
+tile.grc.BeeBox.Botania.living_wood.name=tile.grc.BeeBox.Botania.living_wood.name
+tile.grc.BeeBox.Botania.dream_wood.name=tile.grc.BeeBox.Botania.dream_wood.name
+tile.grc.BeeBox.Botania.shimmer_wood.name=tile.grc.BeeBox.Botania.shimmer_wood.name
+tile.grc.BeeBox.Botania.shimmer_wood.desc=tile.grc.BeeBox.Botania.shimmer_wood.desc
+
+## Natura
+tile.grc.BeeBox.Natura.apple.name=tile.grc.BeeBox.Natura.apple.name
+tile.grc.BeeBox.Natura.blood.name=tile.grc.BeeBox.Natura.blood.name
+tile.grc.BeeBox.Natura.bush.name=tile.grc.BeeBox.Natura.bush.name
+tile.grc.BeeBox.Natura.darkwood.name=tile.grc.BeeBox.Natura.darkwood.name
+tile.grc.BeeBox.Natura.eucalyptus.name=tile.grc.BeeBox.Natura.eucalyptus.name
+tile.grc.BeeBox.Natura.fusewood.name=tile.grc.BeeBox.Natura.fusewood.name
+tile.grc.BeeBox.Natura.ghost.name=tile.grc.BeeBox.Natura.ghost.name
+tile.grc.BeeBox.Natura.maple.name=tile.grc.BeeBox.Natura.maple.name
+tile.grc.BeeBox.Natura.purpleheart.name=tile.grc.BeeBox.Natura.purpleheart.name
+tile.grc.BeeBox.Natura.redwood.name=tile.grc.BeeBox.Natura.redwood.name
+tile.grc.BeeBox.Natura.sakura.name=tile.grc.BeeBox.Natura.sakura.name
+tile.grc.BeeBox.Natura.silverbell.name=tile.grc.BeeBox.Natura.silverbell.name
+tile.grc.BeeBox.Natura.tiger.name=tile.grc.BeeBox.Natura.tiger.name
+tile.grc.BeeBox.Natura.willow.name=tile.grc.BeeBox.Natura.willow.name
 
 # Other Blocks
 tile.grc.beeHive.name=tile.grc.beeHive.name

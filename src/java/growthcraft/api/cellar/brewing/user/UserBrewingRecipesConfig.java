@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,12 +27,12 @@ import java.io.BufferedReader;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.ResidueSchema;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 /**
@@ -46,19 +46,23 @@ public class UserBrewingRecipesConfig extends AbstractUserJSONConfig
 	public void addDefault(UserBrewingRecipe recipe)
 	{
 		defaultRecipes.data.add(recipe);
+		logger.info("Added new default brewing recipe={%s}", recipe);
 	}
 
-	public void addDefault(ItemStack stack, FluidStack inp, FluidStack out, Residue residue, int time)
+	public void addDefault(Object stack, FluidStack inp, FluidStack out, Residue residue, int time)
 	{
-		addDefault(
-			new UserBrewingRecipe(
-				new ItemKeySchema(stack),
-				new FluidStackSchema(inp),
-				new FluidStackSchema(out),
-				residue == null ? null : new ResidueSchema(residue),
-				time
-			)
-		);
+		for (ItemKeySchema itemKey : ItemKeySchema.createMulti(stack))
+		{
+			addDefault(
+				new UserBrewingRecipe(
+					itemKey,
+					new FluidStackSchema(inp),
+					new FluidStackSchema(out),
+					residue == null ? null : new ResidueSchema(residue),
+					time
+				)
+			);
+		}
 	}
 
 	@Override
@@ -115,9 +119,9 @@ public class UserBrewingRecipesConfig extends AbstractUserJSONConfig
 		final FluidStack outputFluidStack = recipe.output_fluid.asFluidStack();
 
 		logger.info("Adding user brewing recipe {%s}", recipe);
-		for (ItemStack item : recipe.item.getItemStacks())
+		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
 		{
-			CellarRegistry.instance().brewing().addBrewing(inputFluidStack, item, outputFluidStack, recipe.time, residue);
+			CellarRegistry.instance().brewing().addRecipe(inputFluidStack, item, outputFluidStack, recipe.time, residue);
 		}
 	}
 

@@ -28,6 +28,7 @@ import io.netty.buffer.ByteBuf;
 import growthcraft.api.cellar.brewing.BrewingRecipe;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.cellar.event.EventBrewed;
@@ -36,7 +37,6 @@ import growthcraft.core.common.tileentity.device.DeviceBase;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -135,7 +135,7 @@ public class BrewKettle extends DeviceBase
 		final BrewingRecipe recipe = getBrewingRecipe();
 		if (recipe == null) return null;
 
-		final ItemStack expected = recipe.getInputItemStack();
+		final IMultiItemStacks expected = recipe.getInputItemStack();
 		brewingSlot.hasEnough(expected);
 
 		final FluidStack inputFluid = recipe.getInputFluidStack();

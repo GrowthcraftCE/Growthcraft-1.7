@@ -269,13 +269,26 @@ public class InventoryProcessor
 	 * @param from - a slice of slots to look in
 	 * @return true, all the items in the filter are present in the inv, false otherwise
 	 */
-	public boolean checkSlots(@Nonnull IInventory inv, @Nonnull List<ItemStack> filter, int[] from)
+	@SuppressWarnings({"rawtypes"})
+	public boolean checkSlots(@Nonnull IInventory inv, @Nonnull List filter, int[] from)
 	{
 		assert filter.size() == from.length;
 
 		for (int i = 0; i < filter.size(); ++i)
 		{
-			if (!checkSlot(inv, filter.get(i), from[i])) return false;
+			final Object filterObject = filter.get(i);
+			if (filterObject instanceof IMultiItemStacks)
+			{
+				if (!checkSlot(inv, (IMultiItemStacks)filterObject, from[i])) return false;
+			}
+			else if (filterObject instanceof ItemStack || filterObject == null)
+			{
+				if (!checkSlot(inv, (ItemStack)filterObject, from[i])) return false;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		return true;
 	}
@@ -389,21 +402,31 @@ public class InventoryProcessor
 	 * slots that have been used before.
 	 *
 	 * @param inv - inventory to search
-	 * @param stacks - item stacks to search for
+	 * @param expected - item stacks to search for
 	 * @return slot ids
 	 */
-	public int[] findItemSlots(@Nonnull IInventory inv, @Nonnull List<ItemStack> expected)
+	@SuppressWarnings({"rawtypes"})
+	public int[] findItemSlots(@Nonnull IInventory inv, @Nonnull List expected)
 	{
 		final boolean[] usedSlots = new boolean[inv.getSizeInventory()];
 		final int[] slots = new int[expected.size()];
 		int i = 0;
-		for (ItemStack expectedStack : expected)
+		for (Object expectedStack : expected)
 		{
 			slots[i] = -1;
 			for (int slotIndex = 0; slotIndex < inv.getSizeInventory(); ++slotIndex)
 			{
 				final ItemStack stack = inv.getStackInSlot(slotIndex);
-				if (checkSlot(inv, expectedStack, slotIndex))
+				boolean foundItem = false;
+				if (expectedStack instanceof IMultiItemStacks)
+				{
+					foundItem = checkSlot(inv, (IMultiItemStacks)expectedStack, slotIndex);
+				}
+				else if (expectedStack instanceof ItemStack || expectedStack == null)
+				{
+					foundItem = checkSlot(inv, (ItemStack)expectedStack, slotIndex);
+				}
+				if (foundItem)
 				{
 					if (usedSlots[slotIndex]) continue;
 					usedSlots[slotIndex] = true;
@@ -484,15 +507,23 @@ public class InventoryProcessor
 	 * @param slots - slots to consume from
 	 * @return true, items where consumed, false otherwise
 	 */
-	public boolean consumeItemsInSlots(@Nonnull IInventory inv, @Nonnull List<ItemStack> expected, @Nonnull int[] slots)
+	@SuppressWarnings({"rawtypes"})
+	public boolean consumeItemsInSlots(@Nonnull IInventory inv, @Nonnull List expected, @Nonnull int[] slots)
 	{
 		for (int i = 0; i < slots.length; ++i)
 		{
 			final int slot = slots[i];
-			final ItemStack expectedStack = expected.get(i);
+			final Object expectedStack = expected.get(i);
 			if (expectedStack != null)
 			{
-				inv.decrStackSize(slot, expectedStack.stackSize);
+				if (expectedStack instanceof IMultiItemStacks)
+				{
+					inv.decrStackSize(slot, ((IMultiItemStacks)expectedStack).getStackSize());
+				}
+				else if (expectedStack instanceof ItemStack)
+				{
+					inv.decrStackSize(slot, ((ItemStack)expectedStack).stackSize);
+				}
 			}
 		}
 		return true;
@@ -505,7 +536,8 @@ public class InventoryProcessor
 	 * @param expected - items to consume in inventory
 	 * @return true, items where consumed, false otherwise
 	 */
-	public boolean consumeItems(@Nonnull IInventory inv, @Nonnull List<ItemStack> expected)
+	@SuppressWarnings({"rawtypes"})
+	public boolean consumeItems(@Nonnull IInventory inv, @Nonnull List expected)
 	{
 		final int[] slots = findItemSlots(inv, expected);
 		if (!checkSlots(inv, expected, slots)) return false;

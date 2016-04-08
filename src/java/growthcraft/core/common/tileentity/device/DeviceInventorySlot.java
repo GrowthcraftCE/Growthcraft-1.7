@@ -23,6 +23,7 @@
  */
 package growthcraft.core.common.tileentity.device;
 
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.util.ItemUtils;
 
@@ -103,6 +104,26 @@ public class DeviceInventorySlot
 	}
 
 	/**
+	 * Does the provided multi stack match the one in the slot?
+	 *
+	 * @param stack - multi item stack to test
+	 * @return true, it contains the an item from the stack, false otherwise
+	 */
+	public boolean hasMatching(IMultiItemStacks stack)
+	{
+		final ItemStack s = get();
+		if (stack == null || stack.isEmpty())
+		{
+			return s == null;
+		}
+		else if (stack != null && s != null)
+		{
+			return stack.containsItemStack(s);
+		}
+		return false;
+	}
+
+	/**
 	 * Does the slot have the same item, and the capacity to hold the stack?
 	 *
 	 * @param stack - item stack to test
@@ -159,6 +180,34 @@ public class DeviceInventorySlot
 		return false;
 	}
 
+	/**
+	 * @param stack - item stack to test
+	 * @return true, the item matches and has enough in slot
+	 */
+	public boolean hasEnough(IMultiItemStacks stack)
+	{
+		if (hasMatching(stack))
+		{
+			if (stack != null)
+			{
+				final ItemStack s = get();
+				if (s.stackSize >= stack.getStackSize())
+				{
+					return true;
+				}
+			}
+			else
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @param count - how many items to consume in the slot?
+	 * @param result stack
+	 */
 	public ItemStack consume(int count)
 	{
 		return inventory.decrStackSize(index, count);
@@ -167,6 +216,12 @@ public class DeviceInventorySlot
 	public ItemStack consume(ItemStack stack)
 	{
 		if (hasEnough(stack)) return consume(stack.stackSize);
+		return null;
+	}
+
+	public ItemStack consume(IMultiItemStacks stack)
+	{
+		if (hasEnough(stack)) return consume(stack.getStackSize());
 		return null;
 	}
 

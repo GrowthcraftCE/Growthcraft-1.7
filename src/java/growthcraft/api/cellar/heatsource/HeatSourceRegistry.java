@@ -65,6 +65,7 @@ public class HeatSourceRegistry implements IHeatSourceRegistry
 		}
 		final HeatMap map = heatSources.get(block);
 		map.put(meta, heat);
+		logger.info("Added new HeatSource block=%s", block);
 	}
 
 	@Override

@@ -30,6 +30,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.api.core.definition.IMultiFluidStacks;
 
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class MultiFluidStacks implements IMultiFluidStacks
@@ -55,6 +56,19 @@ public class MultiFluidStacks implements IMultiFluidStacks
 	public List<FluidStack> getFluidStacks()
 	{
 		return fluidStacks;
+	}
+
+	@Override
+	public boolean containsFluid(@Nullable Fluid expectedFluid)
+	{
+		if (FluidTest.isValid(expectedFluid))
+		{
+			for (FluidStack content : getFluidStacks())
+			{
+				if (content.getFluid() == expectedFluid) return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

@@ -131,7 +131,8 @@ public class GrcMilkFluids extends GrcModuleBase
 			fluidToCheeseType.put(fluid, cheese);
 		}
 
-		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, kumisFluids));
+		BoozeRegistryHelper.setBoozeFoodStats(kumisFluids, 1, -0.2f);
+		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(kumisFluids));
 		BoozeRegistryHelper.initializeBoozeFluids(kumisBasename, kumisFluids);
 		for (Booze booze : kumisFluids)
 		{

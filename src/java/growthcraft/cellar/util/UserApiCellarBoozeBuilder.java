@@ -50,14 +50,14 @@ public class UserApiCellarBoozeBuilder extends CellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time, @Nullable Residue residue)
+	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time, @Nullable Residue residue)
 	{
 		this.userApis.getUserBrewingRecipes().addDefault(stack, new FluidStack(fluid, result.amount), result, residue, time);
 		return this;
 	}
 
 	@Override
-	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time, @Nullable Residue residue)
+	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull Object stack, int time, @Nullable Residue residue)
 	{
 		this.userApis.getUserBrewingRecipes().addDefault(stack, src, new FluidStack(fluid, src.amount), residue, time);
 		return this;
@@ -78,7 +78,7 @@ public class UserApiCellarBoozeBuilder extends CellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nullable Residue residue)
+	public ICellarBoozeBuilder pressesFrom(@Nonnull Object stack, int time, int amount, @Nullable Residue residue)
 	{
 		this.userApis.getUserPressingRecipes().addDefault(stack, new FluidStack(fluid, amount), time, residue);
 		return this;

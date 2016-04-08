@@ -42,6 +42,12 @@ public class BlockBeeBoxBamboo extends BlockBeeBox
 	}
 
 	@Override
+	public String getMetaname(int meta)
+	{
+		return "" + meta;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)

@@ -29,6 +29,7 @@ import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
+import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
@@ -72,8 +73,9 @@ public class GrcHopsFluids extends GrcModuleBase
 			booze.setColor(GrowthCraftHops.getConfig().lagerColor).setDensity(1080);
 		}
 		BoozeRegistryHelper.initializeBooze(lagerBooze, lagerFluids, lagerBuckets);
+		BoozeRegistryHelper.setBoozeFoodStats(lagerBooze, 1, -0.6f);
 
-		this.lager = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, lagerBooze));
+		this.lager = new ItemDefinition(new ItemBoozeBottle(lagerBooze));
 
 		this.hopAleBooze = new Booze[9];
 		this.hopAleFluids = new BlockBoozeDefinition[hopAleBooze.length];
@@ -84,8 +86,9 @@ public class GrcHopsFluids extends GrcModuleBase
 			booze.setColor(GrowthCraftHops.getConfig().hopAleColor).setDensity(1080);
 		}
 		BoozeRegistryHelper.initializeBooze(hopAleBooze, hopAleFluids, hopAleBuckets);
+		BoozeRegistryHelper.setBoozeFoodStats(hopAleBooze, 1, -0.6f);
 
-		this.hopAle = new ItemDefinition(new ItemBoozeBottle(5, -0.6F, hopAleBooze));
+		this.hopAle = new ItemDefinition(new ItemBoozeBottle(hopAleBooze));
 	}
 
 	private void registerLager()
@@ -177,7 +180,7 @@ public class GrcHopsFluids extends GrcModuleBase
 			.tags(BoozeTag.YOUNG)
 			.brewsFrom(
 				new FluidStack(FluidRegistry.WATER, 40),
-				new ItemStack(Items.wheat),
+				new OreItemStacks("cropWheat"),
 				TickUtils.minutes(1),
 				Residue.newDefault(0.3F));
 
@@ -185,7 +188,7 @@ public class GrcHopsFluids extends GrcModuleBase
 			.tags(BoozeTag.YOUNG, BoozeTag.HOPPED)
 			.brewsFrom(
 				new FluidStack(hopAleBooze[4], 40),
-				GrowthCraftHops.hops.asStack(),
+				new OreItemStacks("cropHops"),
 				TickUtils.minutes(1),
 				Residue.newDefault(0.0F));
 

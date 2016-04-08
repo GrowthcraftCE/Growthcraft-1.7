@@ -29,11 +29,12 @@ import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectRandomList;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
+import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.apples.GrowthCraftApples;
+import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
-import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
 
@@ -56,7 +57,7 @@ public class GrcApplesRecipes extends GrcModuleBase
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[0])
 			.tags(BoozeTag.CIDER, BoozeTag.YOUNG)
 			.pressesFrom(
-				new ItemStack(Items.apple),
+				new OreItemStacks("foodApple"),
 				TickUtils.seconds(2),
 				40,
 				Residue.newDefault(0.3F)

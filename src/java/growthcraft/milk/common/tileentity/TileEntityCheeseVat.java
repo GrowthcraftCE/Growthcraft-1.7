@@ -31,6 +31,8 @@ import java.util.Locale;
 
 import io.netty.buffer.ByteBuf;
 
+import growthcraft.api.core.definition.IMultiFluidStacks;
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.item.ItemTest;
@@ -329,8 +331,8 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		final ICheeseVatRecipe recipe = MilkRegistry.instance().cheeseVat().findRecipe(fluids, items);
 		if (recipe != null)
 		{
-			final List<ItemStack> inputItems = recipe.getInputItemStacks();
-			final List<FluidStack> inputFluids = recipe.getInputFluidStacks();
+			final List<IMultiItemStacks> inputItems = recipe.getInputItemStacks();
+			final List<IMultiFluidStacks> inputFluids = recipe.getInputFluidStacks();
 			final int[] invSlots = InventoryProcessor.instance().findItemSlots(this, inputItems);
 			if (InventoryProcessor.instance().checkSlots(this, inputItems, invSlots))
 			{

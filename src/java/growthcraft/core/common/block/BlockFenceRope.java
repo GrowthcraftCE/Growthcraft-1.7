@@ -43,12 +43,12 @@ public class BlockFenceRope extends GrcBlockBase implements IBlockRope
 		this(new BlockKey(block), name);
 	}
 
-	private Block getFenceBlock()
+	public Block getFenceBlock()
 	{
 		return fenceBlockKey.getBlock();
 	}
 
-	private int getFenceBlockMetadata()
+	public int getFenceBlockMetadata()
 	{
 		return fenceBlockKey.getMetadata();
 	}

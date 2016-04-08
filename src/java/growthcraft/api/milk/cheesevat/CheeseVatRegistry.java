@@ -24,18 +24,16 @@
 package growthcraft.api.milk.cheesevat;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.api.core.definition.IMultiFluidStacks;
+import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.item.ItemTest;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.core.fluids.FluidKey;
-import growthcraft.api.core.fluids.FluidTest;
-import growthcraft.api.core.item.ItemKey;
-import growthcraft.api.core.item.ItemTest;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -44,8 +42,6 @@ import net.minecraftforge.fluids.FluidStack;
 public class CheeseVatRegistry implements ICheeseVatRegistry
 {
 	private ILogger logger = NullLogger.INSTANCE;
-	private Set<FluidKey> fluidIngredients = new HashSet<FluidKey>();
-	private Set<ItemKey> itemIngredients = new HashSet<ItemKey>();
 	private List<ICheeseVatRecipe> recipes = new ArrayList<ICheeseVatRecipe>();
 
 	@Override
@@ -55,40 +51,50 @@ public class CheeseVatRegistry implements ICheeseVatRegistry
 	}
 
 	@Override
-	public void addRecipe(@Nonnull List<FluidStack> outputFluids, @Nonnull List<ItemStack> outputItems, @Nonnull List<FluidStack> inputFluids, @Nonnull List<ItemStack> inputItems)
+	public void addRecipe(ICheeseVatRecipe recipe)
+	{
+		recipes.add(recipe);
+		logger.info("Added Cheese Vat recipe {%s}", recipe);
+	}
+
+	@Override
+	public void addRecipe(@Nonnull List<FluidStack> outputFluids, @Nonnull List<ItemStack> outputItems, @Nonnull List<IMultiFluidStacks> inputFluids, @Nonnull List<IMultiItemStacks> inputItems)
 	{
 		final ICheeseVatRecipe recipe = new CheeseVatRecipe(outputFluids, outputItems, inputFluids, inputItems);
-		recipes.add(recipe);
-		logger.info("Adding Cheese Vat recipe {%s}", recipe);
-		for (FluidStack stack : inputFluids)
-		{
-			fluidIngredients.add(new FluidKey(stack));
-		}
-		for (ItemStack stack : inputItems)
-		{
-			itemIngredients.add(new ItemKey(stack));
-		}
+		addRecipe(recipe);
 	}
 
 	@Override
 	public boolean isFluidIngredient(@Nullable Fluid fluid)
 	{
 		if (!FluidTest.isValid(fluid)) return false;
-		return fluidIngredients.contains(new FluidKey(fluid));
+		for (ICheeseVatRecipe recipe : recipes)
+		{
+			if (recipe.isFluidIngredient(fluid)) return true;
+		}
+		return false;
 	}
 
 	@Override
 	public boolean isFluidIngredient(@Nullable FluidStack fluid)
 	{
 		if (!FluidTest.isValid(fluid)) return false;
-		return fluidIngredients.contains(new FluidKey(fluid));
+		for (ICheeseVatRecipe recipe : recipes)
+		{
+			if (recipe.isFluidIngredient(fluid)) return true;
+		}
+		return false;
 	}
 
 	@Override
 	public boolean isItemIngredient(@Nullable ItemStack item)
 	{
 		if (!ItemTest.isValid(item)) return false;
-		return itemIngredients.contains(new ItemKey(item));
+		for (ICheeseVatRecipe recipe : recipes)
+		{
+			if (recipe.isItemIngredient(item)) return true;
+		}
+		return false;
 	}
 
 	@Override

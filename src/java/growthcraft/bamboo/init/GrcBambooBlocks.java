@@ -104,6 +104,7 @@ public class GrcBambooBlocks extends GrcModuleBase
 		Blocks.fire.setFireInfo(bambooStalk.getBlock(), 5, 4);
 		Blocks.fire.setFireInfo(bambooLeaves.getBlock(), 30, 60);
 		Blocks.fire.setFireInfo(bambooFence.getBlock(), 5, 20);
+		Blocks.fire.setFireInfo(bambooFenceRope.getBlock(), 5, 20);
 		Blocks.fire.setFireInfo(bambooWall.getBlock(), 5, 20);
 		Blocks.fire.setFireInfo(bambooStairs.getBlock(), 5, 20);
 		Blocks.fire.setFireInfo(bambooSingleSlab.getBlock(), 5, 20);

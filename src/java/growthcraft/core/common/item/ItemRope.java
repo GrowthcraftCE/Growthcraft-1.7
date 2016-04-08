@@ -10,11 +10,10 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemRope extends Item
+public class ItemRope extends GrcItemBase
 {
 	public ItemRope()
 	{
@@ -52,7 +51,7 @@ public class ItemRope extends Item
 				}
 
 				int targetMeta = entry.getFenceRopeBlockMetadata();
-				if (targetMeta == ItemKey.WILDCARD_VALUE) targetMeta = 0;
+				if (targetMeta == ItemKey.WILDCARD_VALUE) targetMeta = blockMeta;
 
 				world.setBlock(x, y, z, entry.getFenceRopeBlock(), targetMeta, BlockFlags.UPDATE_AND_SYNC);
 				--stack.stackSize;

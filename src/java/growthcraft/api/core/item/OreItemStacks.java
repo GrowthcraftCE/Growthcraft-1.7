@@ -49,6 +49,7 @@ public class OreItemStacks implements IMultiItemStacks
 		this(name, 1);
 	}
 
+	@Override
 	public int getStackSize()
 	{
 		return stackSize;
@@ -62,6 +63,12 @@ public class OreItemStacks implements IMultiItemStacks
 	public List<ItemStack> getRawItemStacks()
 	{
 		return OreDictionary.getOres(oreName);
+	}
+
+	@Override
+	public boolean isEmpty()
+	{
+		return getRawItemStacks().isEmpty();
 	}
 
 	@Override

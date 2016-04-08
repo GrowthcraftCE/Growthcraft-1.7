@@ -42,6 +42,16 @@ public class BlockBeeBoxThaumcraft extends BlockBeeBox
 	}
 
 	@Override
+	public String getMetaname(int meta)
+	{
+		if (meta >= 0 && meta < EnumBeeBoxThaumcraft.VALUES.length)
+		{
+			return EnumBeeBoxThaumcraft.VALUES[meta].name;
+		}
+		return super.getMetaname(meta);
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)

@@ -30,23 +30,24 @@ import growthcraft.api.cellar.common.ProcessingRecipe;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.item.ItemTest;
+import growthcraft.api.core.definition.IMultiItemStacks;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BrewingRecipe extends ProcessingRecipe
 {
-	private ItemStack inputItemStack;
+	private IMultiItemStacks inputItemStack;
 	private FluidStack inputFluidStack;
 
-	public BrewingRecipe(@Nonnull FluidStack pInputFluid, @Nonnull ItemStack pInputItem, @Nonnull FluidStack pOutputFluid, int pTime, @Nullable Residue pResidue)
+	public BrewingRecipe(@Nonnull FluidStack pInputFluid, @Nonnull IMultiItemStacks pInputItem, @Nonnull FluidStack pOutputFluid, int pTime, @Nullable Residue pResidue)
 	{
 		super(pOutputFluid, pTime, pResidue);
 		this.inputItemStack = pInputItem;
 		this.inputFluidStack = pInputFluid;
 	}
 
-	public ItemStack getInputItemStack()
+	public IMultiItemStacks getInputItemStack()
 	{
 		return inputItemStack;
 	}
@@ -63,6 +64,15 @@ public class BrewingRecipe extends ProcessingRecipe
 			if (!FluidTest.hasEnough(inputFluidStack, fluidStack)) return false;
 			if (!ItemTest.hasEnough(inputItemStack, itemStack)) return false;
 			return true;
+		}
+		return false;
+	}
+
+	public boolean isItemIngredient(@Nullable ItemStack stack)
+	{
+		if (stack != null)
+		{
+			if (inputItemStack.containsItemStack(stack)) return true;
 		}
 		return false;
 	}

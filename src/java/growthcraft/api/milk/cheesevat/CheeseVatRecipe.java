@@ -25,21 +25,25 @@ package growthcraft.api.milk.cheesevat;
 
 import java.util.List;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
+import growthcraft.api.core.definition.IMultiFluidStacks;
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.item.ItemTest;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class CheeseVatRecipe implements ICheeseVatRecipe
 {
 	private List<FluidStack> outputFluids;
 	private List<ItemStack> outputItems;
-	private List<FluidStack> inputFluids;
-	private List<ItemStack> inputItems;
+	private List<IMultiFluidStacks> inputFluids;
+	private List<IMultiItemStacks> inputItems;
 
-	public CheeseVatRecipe(List<FluidStack> pOutputFluids, List<ItemStack> pOutputItems, List<FluidStack> pInputFluids, List<ItemStack> pInputItems)
+	public CheeseVatRecipe(List<FluidStack> pOutputFluids, List<ItemStack> pOutputItems, List<IMultiFluidStacks> pInputFluids, List<IMultiItemStacks> pInputItems)
 	{
 		this.outputFluids = pOutputFluids;
 		this.outputItems = pOutputItems;
@@ -60,13 +64,13 @@ public class CheeseVatRecipe implements ICheeseVatRecipe
 	}
 
 	@Override
-	public List<FluidStack> getInputFluidStacks()
+	public List<IMultiFluidStacks> getInputFluidStacks()
 	{
 		return inputFluids;
 	}
 
 	@Override
-	public List<ItemStack> getInputItemStacks()
+	public List<IMultiItemStacks> getInputItemStacks()
 	{
 		return inputItems;
 	}
@@ -77,6 +81,36 @@ public class CheeseVatRecipe implements ICheeseVatRecipe
 		if (!FluidTest.isValidAndExpected(inputFluids, fluids)) return false;
 		if (!ItemTest.isValidAndExpected(inputItems, items)) return false;
 		return true;
+	}
+
+	@Override
+	public boolean isFluidIngredient(@Nullable Fluid fluid)
+	{
+		for (IMultiFluidStacks stack : inputFluids)
+		{
+			if (stack.containsFluid(fluid)) return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isFluidIngredient(@Nullable FluidStack fluidStack)
+	{
+		for (IMultiFluidStacks stack : inputFluids)
+		{
+			if (stack.containsFluidStack(fluidStack)) return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isItemIngredient(@Nullable ItemStack itemStack)
+	{
+		for (IMultiItemStacks item : inputItems)
+		{
+			if (item.containsItemStack(itemStack)) return true;
+		}
+		return false;
 	}
 
 	@Override

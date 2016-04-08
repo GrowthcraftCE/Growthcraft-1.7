@@ -9,7 +9,7 @@ item.grcmilk.Cheese.emmentaler.name=瑞士奶酪
 item.grcmilk.Cheese.appenzeller.name=阿彭策尔奶酪
 item.grcmilk.Cheese.asiago.name=艾斯阿格奶酪
 item.grcmilk.Cheese.parmesan.name=帕马森干酪
-item.grcmilk.Cheese.monterey.name=Monterey Cheese
+item.grcmilk.Cheese.monterey.name=蒙特瑞奶酪
 item.grcmilk.Cheese.ricotta.name=里考塔
 item.grcmilk.CheeseCloth.name=奶酪纱布
 ## Butter
@@ -21,16 +21,16 @@ item.grcmilk.IceCream.chocolate.name=冰淇淋(巧克力)
 item.grcmilk.IceCream.grape.name=冰淇淋(葡萄)
 item.grcmilk.IceCream.honey.name=冰淇淋(蜂蜜)
 item.grcmilk.IceCream.plain.name=冰淇淋(原味)
-item.grcmilk.IceCream.watermelon.name=item.grcmilk.IceCream.watermelon.name
+item.grcmilk.IceCream.watermelon.name=冰淇淋(西瓜)
 ## Yogurt
-item.grcmilk.Yogurt.apple.name=item.grcmilk.Yogurt.apple.name
-item.grcmilk.Yogurt.chocolate.name=item.grcmilk.Yogurt.chocolate.name
-item.grcmilk.Yogurt.grape.name=item.grcmilk.Yogurt.grape.name
-item.grcmilk.Yogurt.honey.name=item.grcmilk.Yogurt.honey.name
-item.grcmilk.Yogurt.plain.name=酸奶
-item.grcmilk.Yogurt.watermelon.name=item.grcmilk.Yogurt.watermelon.name
+item.grcmilk.Yogurt.apple.name=酸奶(苹果)
+item.grcmilk.Yogurt.chocolate.name=酸奶(巧克力)
+item.grcmilk.Yogurt.grape.name=酸奶(葡萄)
+item.grcmilk.Yogurt.honey.name=酸奶(蜂蜜)
+item.grcmilk.Yogurt.plain.name=酸奶(原味)
+item.grcmilk.Yogurt.watermelon.name=酸奶(西瓜)
 ## Other
-item.grcmilk.StarterCulture.name=Starter Culture
+item.grcmilk.StarterCulture.name=发酵剂
 item.grcmilk.Stomach.name=胃
 
 # Blocks
@@ -54,10 +54,10 @@ tile.grcmilk.CheeseBlock.asiago.cut.name=艾斯阿格奶酪
 tile.grcmilk.CheeseBlock.parmesan.unaged.name=帕马森干酪(鲜)
 tile.grcmilk.CheeseBlock.parmesan.aged.name=帕马森干酪(陈)
 tile.grcmilk.CheeseBlock.parmesan.cut.name=帕马森干酪
-tile.grcmilk.CheeseBlock.monterey.unwaxed.name=Monterey Cheese(无皮)
-tile.grcmilk.CheeseBlock.monterey.unaged.name=Monterey Cheese(鲜)
-tile.grcmilk.CheeseBlock.monterey.aged.name=Monterey Cheese(陈)
-tile.grcmilk.CheeseBlock.monterey.cut.name=Monterey Cheese
+tile.grcmilk.CheeseBlock.monterey.unwaxed.name=蒙特瑞奶酪(无皮)
+tile.grcmilk.CheeseBlock.monterey.unaged.name=蒙特瑞奶酪(鲜)
+tile.grcmilk.CheeseBlock.monterey.aged.name=蒙特瑞奶酪(陈)
+tile.grcmilk.CheeseBlock.monterey.cut.name=蒙特瑞奶酪
 tile.grcmilk.CheeseBlock.ricotta.unaged.name=里考塔(鲜)
 tile.grcmilk.CheeseBlock.ricotta.aged.name=里考塔(陈)
 ## Other
@@ -107,7 +107,7 @@ fluid.grcmilk.CheeseAsiago=艾斯阿格奶酪
 fluid.grcmilk.CheeseCheddar=切达干酪
 fluid.grcmilk.CheeseEmmentaler=瑞士奶酪
 fluid.grcmilk.CheeseGorgonzola=古冈左拉干酪
-fluid.grcmilk.CheeseMonterey=Monterey Cheese
+fluid.grcmilk.CheeseMonterey=蒙特瑞奶酪
 fluid.grcmilk.CheeseParmesan=帕马森干酪
 fluid.grcmilk.CheeseRicotta=里考塔
 fluid.grcmilk.Cream=奶油

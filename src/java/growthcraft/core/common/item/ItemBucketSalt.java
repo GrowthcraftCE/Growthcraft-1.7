@@ -26,9 +26,8 @@ package growthcraft.core.common.item;
 import growthcraft.core.GrowthCraftCore;
 
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 
-public class ItemBucketSalt extends Item
+public class ItemBucketSalt extends GrcItemBase
 {
 	public ItemBucketSalt()
 	{

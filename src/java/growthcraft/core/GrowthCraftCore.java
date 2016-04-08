@@ -135,7 +135,7 @@ public class GrowthCraftCore
 	}
 
 	@EventHandler
-	public void load(FMLInitializationEvent event)
+	public void init(FMLInitializationEvent event)
 	{
 		userFluidDictionary.loadUserConfig();
 		CommonProxy.instance.initRenders();
@@ -154,7 +154,7 @@ public class GrowthCraftCore
 	}
 
 	@EventHandler
-	public void postLoad(FMLPostInitializationEvent event)
+	public void postInit(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(EventHandlerBucketFill.instance());
 		MinecraftForge.EVENT_BUS.register(EventHandlerSpecialBucketFill.instance());

@@ -73,7 +73,8 @@ public class GrcBeesFluids extends GrcModuleBase
 			booze.setColor(GrowthCraftBees.getConfig().honeyMeadColor).setDensity(1000).setViscosity(1200);
 		}
 		BoozeRegistryHelper.initializeBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets);
-		honeyMeadBottle = new ItemDefinition(new ItemBoozeBottle(6, -0.45F, honeyMeadBooze));
+		BoozeRegistryHelper.setBoozeFoodStats(honeyMeadBooze, 1, -0.45f);
+		honeyMeadBottle = new ItemDefinition(new ItemBoozeBottle(honeyMeadBooze));
 
 		if (honey != null)
 		{

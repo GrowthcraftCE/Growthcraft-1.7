@@ -23,11 +23,10 @@
  */
 package growthcraft.milk.common.item;
 
+import growthcraft.core.common.item.GrcItemBase;
 import growthcraft.milk.GrowthCraftMilk;
 
-import net.minecraft.item.Item;
-
-public class ItemStarterCulture extends Item
+public class ItemStarterCulture extends GrcItemBase
 {
 	public ItemStarterCulture()
 	{

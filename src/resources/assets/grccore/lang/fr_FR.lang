@@ -2,8 +2,15 @@
 itemGroup.creative_tab_grccore=Growthcraft
 
 # Blocks
+tile.grc.etfuturum_fence_rope_acacia.name=tile.grc.etfuturum_fence_rope_acacia.name
+tile.grc.etfuturum_fence_rope_birch.name=tile.grc.etfuturum_fence_rope_birch.name
+tile.grc.etfuturum_fence_rope_dark_oak.name=tile.grc.etfuturum_fence_rope_dark_oak.name
+tile.grc.etfuturum_fence_rope_jungle.name=tile.grc.etfuturum_fence_rope_jungle.name
+tile.grc.etfuturum_fence_rope_oak.name=tile.grc.etfuturum_fence_rope_oak.name
+tile.grc.etfuturum_fence_rope_spruce.name=tile.grc.etfuturum_fence_rope_spruce.name
 tile.grc.fenceRope.name=Barrière à corde
 tile.grc.netherBrickFenceRope.name=tile.grc.netherBrickFenceRope.name
+tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
 tile.grc.ropeBlock.name=Corde
 
 # Items
@@ -95,3 +102,6 @@ gui.grc.progress.format=gui.grc.progress.format
 
 # Inventory
 grc.inventory.internal=grc.inventory.internal
+
+# Tooltips
+grc.tooltip.detailed_information=grc.tooltip.detailed_information

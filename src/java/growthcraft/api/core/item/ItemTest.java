@@ -27,6 +27,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.api.core.definition.IMultiItemStacks;
+
 import net.minecraft.item.ItemStack;
 
 public class ItemTest
@@ -39,6 +41,22 @@ public class ItemTest
 		if (stack.getItem() == null) return false;
 		if (stack.stackSize <= 0) return false;
 		return true;
+	}
+
+	public static boolean itemMatches(@Nullable IMultiItemStacks expected, @Nullable ItemStack actual)
+	{
+		if (expected == null || expected.isEmpty())
+		{
+			return actual == null;
+		}
+		else
+		{
+			if (actual != null)
+			{
+				return expected.containsItemStack(actual);
+			}
+		}
+		return false;
 	}
 
 	public static boolean itemMatches(@Nullable ItemStack expected, @Nullable ItemStack actual)
@@ -64,6 +82,13 @@ public class ItemTest
 		return false;
 	}
 
+	public static boolean hasEnough(@Nullable IMultiItemStacks expected, @Nullable ItemStack actual)
+	{
+		if (!itemMatches(expected, actual)) return false;
+		if (actual.stackSize < expected.getStackSize()) return false;
+		return true;
+	}
+
 	public static boolean hasEnough(@Nullable ItemStack expected, @Nullable ItemStack actual)
 	{
 		if (!itemMatches(expected, actual)) return false;
@@ -71,17 +96,29 @@ public class ItemTest
 		return true;
 	}
 
-	public static boolean isValidAndExpected(@Nonnull List<ItemStack> expectedItems, @Nonnull List<ItemStack> givenItems)
+	@SuppressWarnings({"rawtypes"})
+	public static boolean isValidAndExpected(@Nonnull List expectedItems, @Nonnull List<ItemStack> givenItems)
 	{
 		if (expectedItems.size() != givenItems.size()) return false;
 		for (int i = 0; i < expectedItems.size(); ++i)
 		{
-			final ItemStack expected = expectedItems.get(i);
+			final Object expected = expectedItems.get(i);
 			final ItemStack actual = givenItems.get(i);
 			if (expected != null)
 			{
 				if (!isValid(actual)) return false;
-				if (!expected.isItemEqual(actual)) return false;
+				if (expected instanceof ItemStack)
+				{
+					if (!((ItemStack)expected).isItemEqual(actual)) return false;
+				}
+				else if (expected instanceof IMultiItemStacks)
+				{
+					if (!((IMultiItemStacks)expected).containsItemStack(actual)) return false;
+				}
+				else
+				{
+					return false;
+				}
 			}
 			else
 			{

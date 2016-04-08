@@ -1,15 +1,50 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015, 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.cellar.common.item;
 
 import java.util.List;
 
-import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.cellar.booze.BoozeEntry;
+import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.fluids.FluidUtils;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.cellar.event.EventWaterBag;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
+import growthcraft.core.common.item.GrcItemBase;
+import growthcraft.core.integration.AppleCore;
+import growthcraft.core.lib.GrcCoreState;
 import growthcraft.core.util.UnitFormatter;
 
+import squeek.applecore.api.food.IEdible;
+import squeek.applecore.api.food.FoodValues;
+
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,13 +52,16 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
-public class ItemWaterBag extends Item implements IFluidContainerItem
+@Optional.Interface(iface="squeek.applecore.api.food.IEdible", modid=AppleCore.MOD_ID)
+public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IEdible
 {
 	protected int capacity;
 	protected int dosage;
@@ -122,15 +160,25 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		return capacity;
 	}
 
-	@Override
-	public int fill(ItemStack container, FluidStack resource, boolean doFill)
+	public int cappedFill(ItemStack container, FluidStack resource, boolean doFill, int fillCap)
 	{
 		if (resource == null)
 		{
 			return 0;
 		}
 
-		final int amount = Math.min(resource.amount, dosage);
+		if (resource.getFluid() == null)
+		{
+			return 0;
+		}
+
+		// The fluid is too hot to fill with
+		if (resource.getFluid().getTemperature() > 373)
+		{
+			return 0;
+		}
+
+		final int amount = Math.min(resource.amount, fillCap);
 
 		if (!doFill)
 		{
@@ -200,6 +248,12 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 	}
 
 	@Override
+	public int fill(ItemStack container, FluidStack resource, boolean doFill)
+	{
+		return cappedFill(container, resource, doFill, dosage);
+	}
+
+	@Override
 	public FluidStack drain(ItemStack container, int maxDrain, boolean doDrain)
 	{
 		final int expectedDrain = Math.min(maxDrain, dosage);
@@ -262,12 +316,55 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		return false;
 	}
 
-	protected void applyEffects(ItemStack stack, World world, EntityPlayer player)
+	public BoozeEntry getBoozeEntry(ItemStack stack)
 	{
 		final FluidStack fluidstack = getFluid(stack);
 		if (fluidstack != null)
 		{
-			BoozeUtils.addEffects(fluidstack.getFluid(), stack, world, player);
+			return CellarRegistry.instance().booze().getBoozeEntry(fluidstack.getFluid());
+		}
+		return null;
+	}
+
+	public int getHealAmount(ItemStack stack)
+	{
+		final BoozeEntry entry = getBoozeEntry(stack);
+		if (entry != null)
+		{
+			return entry.getHealAmount();
+		}
+		return 0;
+	}
+
+	public float getSaturation(ItemStack stack)
+	{
+		final BoozeEntry entry = getBoozeEntry(stack);
+		if (entry != null)
+		{
+			return entry.getSaturation();
+		}
+		return 0.0f;
+	}
+
+	@Optional.Method(modid=AppleCore.MOD_ID)
+	@Override
+	public FoodValues getFoodValues(ItemStack stack)
+	{
+		return new FoodValues(getHealAmount(stack), getSaturation(stack));
+	}
+
+	protected void applyEffects(ItemStack stack, World world, EntityPlayer player)
+	{
+		final FluidStack fluidstack = getFluid(stack);
+		final boolean cancelled = GrowthCraftCellar.CELLAR_BUS.post(new EventWaterBag.PreApplyEffects(stack, world, player));
+		if (!cancelled)
+		{
+			if (fluidstack != null)
+			{
+				BoozeUtils.addEffects(fluidstack.getFluid(), stack, world, player);
+				player.getFoodStats().addStats(getHealAmount(stack), getSaturation(stack));
+			}
+			GrowthCraftCellar.CELLAR_BUS.post(new EventWaterBag.PostApplyEffects(stack, world, player));
 		}
 	}
 
@@ -279,11 +376,16 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 			// This is not an ItemFood, and therefore, NOT FOOD. ;_;
 			//player.getFoodStats().func_151686_a(this, stack);
 
-			world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-			if (!world.isRemote)
+			final boolean cancelled = GrowthCraftCellar.CELLAR_BUS.post(new EventWaterBag.PreDrink(stack, world, player));
+			if (!cancelled)
 			{
-				applyEffects(stack, world, player);
-				if (!player.capabilities.isCreativeMode) drain(stack, dosage, true);
+				world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+				if (!world.isRemote)
+				{
+					applyEffects(stack, world, player);
+					if (!player.capabilities.isCreativeMode) drain(stack, dosage, true);
+				}
+				GrowthCraftCellar.CELLAR_BUS.post(new EventWaterBag.PostDrink(stack, world, player));
 			}
 		}
 		return stack;
@@ -295,9 +397,47 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 		return false;
 	}
 
+	private boolean tryFillByBlock(ItemStack stack, World world, EntityPlayer player)
+	{
+		final MovingObjectPosition pos = this.getMovingObjectPositionFromPlayer(world, player, true);
+
+		if (pos != null)
+		{
+			if (pos.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+			{
+				final int i = pos.blockX;
+				final int j = pos.blockY;
+				final int k = pos.blockZ;
+
+				if (world.canMineBlock(player, i, j, k))
+				{
+					if (player.canPlayerEdit(i, j, k, pos.sideHit, stack))
+					{
+						final Block block = world.getBlock(i, j, k);
+						if (block != null)
+						{
+							final FluidStack fs = FluidUtils.drainFluidBlock(world, i, j, k, false);
+							if (fs != null)
+							{
+								final int amount = cappedFill(stack, fs, true, capacity);
+								if (amount > 0)
+								{
+									FluidUtils.drainFluidBlock(world, i, j, k, true);
+									return true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
+		if (tryFillByBlock(stack, world, player)) return stack;
 		if (hasEnoughToDrink(stack))
 		{
 			player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
@@ -329,15 +469,24 @@ public class ItemWaterBag extends Item implements IFluidContainerItem
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
+		super.addInformation(stack, player, list, bool);
 		final FluidStack fluidstack = getFluid(stack);
 		if (fluidstack != null)
 		{
-			final String fluidname = UnitFormatter.fluidNameForContainer(fluidstack);
-			list.add(GrcI18n.translate("grc.cellar.format.waterBag.contents", fluidname, fluidstack.amount, getCapacity(stack)));
-			final Fluid booze = fluidstack.getFluid();
-			BoozeUtils.addEffectInformation(booze, stack, player, list, bool);
+			if (GrcCoreState.showDetailedInformation())
+			{
+				final String fluidname = UnitFormatter.fluidNameForContainer(fluidstack);
+				list.add(GrcI18n.translate("grc.cellar.format.waterBag.contents", fluidname, fluidstack.amount, getCapacity(stack)));
+				final Fluid booze = fluidstack.getFluid();
+				BoozeUtils.addEffectInformation(booze, stack, player, list, bool);
+			}
+			else
+			{
+				list.add(EnumChatFormatting.GRAY +
+					GrcI18n.translate("grc.tooltip.detailed_information",
+						EnumChatFormatting.WHITE + "SHIFT" + EnumChatFormatting.GRAY));
+			}
 		}
-		super.addInformation(stack, player, list, bool);
 	}
 
 	@Override

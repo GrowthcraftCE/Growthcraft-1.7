@@ -24,6 +24,7 @@
 package growthcraft.api.cellar.fermenting;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import growthcraft.api.core.log.ILoggable;
 
@@ -33,7 +34,7 @@ import net.minecraftforge.fluids.FluidStack;
 public interface IFermentingRegistry extends ILoggable
 {
 	void addRecipe(@Nonnull IFermentationRecipe recipe);
-	void addRecipe(FluidStack result, FluidStack booze, ItemStack fermenter, int time);
+	void addRecipe(@Nonnull FluidStack result, @Nonnull FluidStack booze, @Nonnull Object fermenter, int time);
 	IFermentationRecipe findRecipe(FluidStack booze, ItemStack fermenter);
-	boolean canFerment(FluidStack booze);
+	boolean canFerment(@Nullable FluidStack booze);
 }

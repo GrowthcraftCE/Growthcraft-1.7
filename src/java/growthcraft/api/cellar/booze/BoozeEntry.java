@@ -33,6 +33,8 @@ import net.minecraftforge.fluids.Fluid;
 
 public class BoozeEntry
 {
+	private int healAmount;
+	private float saturation;
 	private final Fluid fluid;
 	private final BoozeEffect effect;
 
@@ -40,6 +42,23 @@ public class BoozeEntry
 	{
 		this.fluid = flus;
 		this.effect = new BoozeEffect(fluid);
+	}
+
+	public BoozeEntry setFoodStats(int heal, float sat)
+	{
+		this.healAmount = heal;
+		this.saturation = sat;
+		return this;
+	}
+
+	public int getHealAmount()
+	{
+		return healAmount;
+	}
+
+	public float getSaturation()
+	{
+		return saturation;
 	}
 
 	public BoozeEffect getEffect()

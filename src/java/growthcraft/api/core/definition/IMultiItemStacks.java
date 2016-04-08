@@ -29,6 +29,8 @@ import net.minecraft.item.ItemStack;
 
 public interface IMultiItemStacks extends IItemStackListProvider
 {
+	boolean isEmpty();
+
 	/**
 	 * Returns the expected `stackSize`
 	 *

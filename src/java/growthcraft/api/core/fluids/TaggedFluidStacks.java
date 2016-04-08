@@ -92,14 +92,21 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 	}
 
 	@Override
+	public boolean containsFluid(@Nullable Fluid expectedFluid)
+	{
+		if (!FluidTest.isValid(expectedFluid)) return false;
+		for (Fluid fluid : getFluids())
+		{
+			if (fluid == expectedFluid) return true;
+		}
+		return false;
+	}
+
+	@Override
 	public boolean containsFluidStack(@Nullable FluidStack stack)
 	{
 		if (!FluidTest.isValid(stack)) return false;
 		final Fluid expected = stack.getFluid();
-		for (Fluid content : getFluids())
-		{
-			if (expected == content) return true;
-		}
-		return false;
+		return containsFluid(expected);
 	}
 }

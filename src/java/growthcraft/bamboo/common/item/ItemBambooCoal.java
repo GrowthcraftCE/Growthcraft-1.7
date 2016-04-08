@@ -1,10 +1,9 @@
 package growthcraft.bamboo.common.item;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.core.common.item.GrcItemBase;
 
-import net.minecraft.item.Item;
-
-public class ItemBambooCoal extends Item
+public class ItemBambooCoal extends GrcItemBase
 {
 	public ItemBambooCoal()
 	{

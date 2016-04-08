@@ -29,6 +29,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeEffect;
+import growthcraft.api.cellar.booze.BoozeEntry;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.booze.IBoozeRegistry;
 import growthcraft.api.cellar.CellarRegistry;
@@ -72,6 +73,23 @@ public class BoozeRegistryHelper
 			final BlockFluidBooze boozeBlock = new BlockFluidBooze(boozes[i]);
 			fluidBlocks[i] = new BlockBoozeDefinition(boozeBlock);
 			buckets[i] = new ItemBucketBoozeDefinition(new ItemBucketBooze(boozeBlock, boozes[i]));
+		}
+	}
+
+	public static void setBoozeFoodStats(Fluid booze, int heal, float saturation)
+	{
+		final BoozeEntry entry = CellarRegistry.instance().booze().getBoozeEntry(booze);
+		if (entry != null)
+		{
+			entry.setFoodStats(heal, saturation);
+		}
+	}
+
+	public static void setBoozeFoodStats(Fluid[] boozes, int heal, float saturation)
+	{
+		for (Fluid booze : boozes)
+		{
+			setBoozeFoodStats(booze, heal, saturation);
 		}
 	}
 

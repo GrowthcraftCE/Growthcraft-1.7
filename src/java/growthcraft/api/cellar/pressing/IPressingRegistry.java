@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,9 @@
  */
 package growthcraft.api.cellar.pressing;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.log.ILoggable;
 
@@ -31,13 +34,15 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface IPressingRegistry extends ILoggable
 {
+	void addRecipe(@Nonnull PressingRecipe recipe);
+
 	/**
 	 * @param stack - item stack to press
 	 * @param result - resultant fluid
 	 * @param time - how long it takes to press the item
 	 * @param residue - residue left behind after pressing
 	 */
-	void addPressingRecipe(ItemStack stack, FluidStack result, int time, Residue residue);
+	void addRecipe(@Nonnull Object inputStack, @Nonnull FluidStack result, int time, @Nullable Residue residue);
 
 	boolean hasPressingRecipe(ItemStack itemstack);
 

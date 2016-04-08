@@ -99,7 +99,7 @@ public class OreItemSchema implements IItemStackListProvider, IValidatable, ICom
 	@Override
 	public boolean isValid()
 	{
-		return getOres() != null;
+		return name != null;
 	}
 
 	@Override

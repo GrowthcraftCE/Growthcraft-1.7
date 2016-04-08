@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.util.MultiStacksUtil;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -33,12 +34,13 @@ public class FermentingRegistry implements IFermentingRegistry
 		recipes.add(recipe);
 		final FluidStack fs = recipe.getInputFluidStack();
 		fermentableFluids.add(fs.getFluid());
+		logger.info("Added Fermentation recipe={%s}", recipe);
 	}
 
 	@Override
-	public void addRecipe(@Nonnull FluidStack result, @Nonnull FluidStack booze, @Nonnull ItemStack fermenter, int time)
+	public void addRecipe(@Nonnull FluidStack result, @Nonnull FluidStack booze, @Nonnull Object fermenter, int time)
 	{
-		addRecipe(new FermentationRecipe(booze, fermenter, result, time));
+		addRecipe(new FermentationRecipe(booze, MultiStacksUtil.toMultiItemStacks(fermenter), result, time));
 	}
 
 	@Override

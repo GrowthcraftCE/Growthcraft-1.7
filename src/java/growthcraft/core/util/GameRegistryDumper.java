@@ -30,6 +30,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import growthcraft.core.GrowthCraftCore;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -97,6 +99,7 @@ public class GameRegistryDumper
 	@SuppressWarnings("rawtypes")
 	public static void dumpBlocks()
 	{
+		GrowthCraftCore.getLogger().info("Dumping Blocks");
 		final Iterator it = GameRegistry.Type.BLOCK.getRegistry().iterator();
 
 		try (FileWriter writer = new FileWriter("dumps/GameRegistry_Blocks.txt"))
@@ -120,7 +123,10 @@ public class GameRegistryDumper
 						}
 					}
 				}
-				catch (NullPointerException ex) {}
+				catch (NullPointerException ex)
+				{
+					writer.write("null,,,\n");
+				}
 			}
 		}
 		catch (IOException ex)
@@ -132,6 +138,7 @@ public class GameRegistryDumper
 	@SuppressWarnings("rawtypes")
 	public static void dumpItems()
 	{
+		GrowthCraftCore.getLogger().info("Dumping Items");
 		final Iterator it = GameRegistry.Type.ITEM.getRegistry().iterator();
 
 		try (FileWriter writer = new FileWriter("dumps/GameRegistry_Items.txt"))
@@ -155,7 +162,10 @@ public class GameRegistryDumper
 						}
 					}
 				}
-				catch (NullPointerException ex) {}
+				catch (NullPointerException ex)
+				{
+					writer.write("null,,,\n");
+				}
 			}
 		}
 		catch (IOException ex)
@@ -167,6 +177,7 @@ public class GameRegistryDumper
 	@SuppressWarnings("rawtypes")
 	public static void dumpFluids()
 	{
+		GrowthCraftCore.getLogger().info("Dumping Fluids");
 		final Set<String> fluidKeys = FluidRegistry.getRegisteredFluids().keySet();
 		try (FileWriter writer = new FileWriter("dumps/FluidRegistry_Fluids.txt"))
 		{

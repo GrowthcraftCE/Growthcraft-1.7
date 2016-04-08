@@ -62,16 +62,16 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time, @Nullable Residue residue)
+	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time, @Nullable Residue residue)
 	{
-		CellarRegistry.instance().brewing().addBrewing(new FluidStack(fluid, result.amount), stack, result, time, residue);
+		CellarRegistry.instance().brewing().addRecipe(new FluidStack(fluid, result.amount), stack, result, time, residue);
 		return this;
 	}
 
 	@Override
-	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time, @Nullable Residue residue)
+	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull Object stack, int time, @Nullable Residue residue)
 	{
-		CellarRegistry.instance().brewing().addBrewing(src, stack, new FluidStack(fluid, src.amount), time, residue);
+		CellarRegistry.instance().brewing().addRecipe(src, stack, new FluidStack(fluid, src.amount), time, residue);
 		return this;
 	}
 
@@ -90,9 +90,9 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder pressesFrom(@Nonnull ItemStack stack, int time, int amount, @Nullable Residue residue)
+	public ICellarBoozeBuilder pressesFrom(@Nonnull Object stack, int time, int amount, @Nullable Residue residue)
 	{
-		CellarRegistry.instance().pressing().addPressingRecipe(stack, new FluidStack(fluid, amount), time, residue);
+		CellarRegistry.instance().pressing().addRecipe(stack, new FluidStack(fluid, amount), time, residue);
 		return this;
 	}
 

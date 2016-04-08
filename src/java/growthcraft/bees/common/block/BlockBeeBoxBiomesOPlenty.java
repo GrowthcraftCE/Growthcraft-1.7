@@ -45,6 +45,16 @@ public class BlockBeeBoxBiomesOPlenty extends BlockBeeBox
 	}
 
 	@Override
+	public String getMetaname(int meta)
+	{
+		if (meta >= 0 && meta < EnumBopWoodType.VALUES.length)
+		{
+			return EnumBopWoodType.VALUES[meta].name;
+		}
+		return super.getMetaname(meta);
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item block, CreativeTabs tab, List list)
