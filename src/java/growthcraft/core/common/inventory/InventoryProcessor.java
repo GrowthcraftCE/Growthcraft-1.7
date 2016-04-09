@@ -544,6 +544,35 @@ public class InventoryProcessor
 		return consumeItemsInSlots(inv, expected, slots);
 	}
 
+	/**
+	 * A simple implementation of canInsertItem, this will check that the slot is
+	 * either empty, or has the SAME item to insert.
+	 *
+	 * @return true, the item can be inserted, false otherwise
+	 */
+	public boolean canInsertItem(@Nonnull IInventory inv, @Nullable ItemStack stack, int slot)
+	{
+		final ItemStack expected = inv.getStackInSlot(slot);
+		if (expected != null)
+		{
+			return checkSlot(inv, stack, slot);
+		}
+		return true;
+	}
+
+	/**
+	 * A simple implementation of canExtractItem, this will check that the slot
+	 * contains the expected item.
+	 *
+	 * @return true, the item can be extracted, false otherwise
+	 */
+	public boolean canExtractItem(@Nonnull IInventory inv, @Nullable ItemStack stack, int slot)
+	{
+		final ItemStack expected = inv.getStackInSlot(slot);
+		if (expected == null) return false;
+		return checkSlot(inv, stack, slot);
+	}
+
 	public static InventoryProcessor instance()
 	{
 		return inst;
