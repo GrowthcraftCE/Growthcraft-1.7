@@ -82,7 +82,9 @@ public class InventoryProcessor
 		{
 			if (existing.isItemEqual(item))
 			{
-				final int newSize = MathHelper.clamp_int(existing.stackSize + item.stackSize, 0, existing.getMaxStackSize());
+				//final int maxStackSize = existing.getMaxStackSize();
+				int maxStackSize = inv.getInventoryStackLimit();
+				final int newSize = MathHelper.clamp_int(existing.stackSize + item.stackSize, 0, maxStackSize);
 				if (newSize == existing.stackSize)
 				{
 					return false;
