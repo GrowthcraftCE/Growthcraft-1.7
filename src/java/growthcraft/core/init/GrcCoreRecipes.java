@@ -47,7 +47,11 @@ public class GrcCoreRecipes extends GrcModuleBase
 			Items.bucket,
 			saltStack, saltStack, saltStack, saltStack, saltStack, saltStack);
 
-		GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBottleItemStack(), GrowthCraftCore.items.saltBottle.asStack(), 0.1F);
-		GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBucketItemStack(), GrowthCraftCore.items.saltBucket.asStack(), 0.2F);
+		// BUG https://github.com/GrowthcraftCE/Growthcraft-1.7/issues/306
+		//GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBottleItemStack(), GrowthCraftCore.items.saltBottle.asStack(), 0.1F);
+		//GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBucketItemStack(), GrowthCraftCore.items.saltBucket.asStack(), 0.3F);
+
+		GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBottleItemStack(), GrowthCraftCore.items.salt.asStack(2), 0.1F);
+		GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBucketItemStack(), GrowthCraftCore.items.salt.asStack(6), 0.3F);
 	}
 }
