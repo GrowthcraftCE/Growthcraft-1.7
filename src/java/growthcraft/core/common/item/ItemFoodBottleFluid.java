@@ -35,7 +35,7 @@ import net.minecraftforge.fluids.Fluid;
 /**
  * Generic fluid bottle for growthcraft fluids that are edible
  */
-public class ItemFoodBottleFluid extends ItemFood implements IFluidItem
+public class ItemFoodBottleFluid extends GrcItemFoodBase implements IFluidItem
 {
 	private Fluid fluid;
 	// Used to override the fluid color
