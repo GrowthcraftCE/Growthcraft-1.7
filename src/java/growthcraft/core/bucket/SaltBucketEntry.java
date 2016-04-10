@@ -28,6 +28,7 @@ import javax.annotation.Nonnull;
 import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill.IBucketEntry;
 import growthcraft.core.GrowthCraftCore;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -45,12 +46,15 @@ public class SaltBucketEntry implements IBucketEntry
 	@Override
 	public boolean matches(@Nonnull World world, @Nonnull MovingObjectPosition pos)
 	{
-		if (world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
+		if (world.getBlock() == Blocks.water)
 		{
-			final BiomeGenBase biome = world.getBiomeGenForCoords(pos.blockX, pos.blockZ);
-			if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.OCEAN))
+			if (world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
 			{
-				return true;
+				final BiomeGenBase biome = world.getBiomeGenForCoords(pos.blockX, pos.blockZ);
+				if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.OCEAN))
+				{
+					return true;
+				}
 			}
 		}
 		return false;
