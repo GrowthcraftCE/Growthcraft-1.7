@@ -42,7 +42,7 @@ item.grc.waterBag16.name=Cantil
 container.grc.fruitPress=Prensa de Fruta
 container.grc.brewKettle=Caldeira de Preparação
 container.grc.fermentBarrel=Barril de Fermentação
-container.grc.CultureJar=container.grc.CultureJar
+container.grc.CultureJar=Jarro de Cultivo
 
 # Other
 grc.potion.tipsy=Bebedeira
