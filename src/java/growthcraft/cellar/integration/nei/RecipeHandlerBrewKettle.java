@@ -23,21 +23,109 @@
  */
 package growthcraft.cellar.integration.nei;
 
-import growthcraft.api.core.i18n.GrcI18n;
+import java.util.List;
+import javax.annotation.Nonnull;
 
+import growthcraft.api.cellar.brewing.BrewingRecipe;
+import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.cellar.client.gui.GuiBrewKettle;
+import growthcraft.cellar.client.resource.GrcCellarResources;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.integration.nei.TemplateRenderHelper;
+
+import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.item.ItemStack;
 
 public class RecipeHandlerBrewKettle extends TemplateRecipeHandler
 {
+	public class CachedBrewingRecipe extends CachedRecipe
+	{
+		public BrewingRecipe brewingRecipe;
+		protected PositionedStack ingredient;
+		protected PositionedStack otherStack;
+
+		public CachedBrewingRecipe(@Nonnull BrewingRecipe recipe)
+		{
+			super();
+			this.brewingRecipe = recipe;
+			this.ingredient = new PositionedStack(brewingRecipe.getInputItemStack().getItemStacks(), 75, 24);
+			if (brewingRecipe.hasResidue())
+				this.otherStack = new PositionedStack(brewingRecipe.getResidue().residueItem, 136, 6);
+		}
+
+		@Override
+		public PositionedStack getResult()
+		{
+			return null;
+		}
+
+		@Override
+		public PositionedStack getIngredient()
+		{
+			return ingredient;
+		}
+
+		@Override
+		public PositionedStack getOtherStack()
+		{
+			return otherStack;
+		}
+	}
+
 	@Override
 	public String getGuiTexture()
 	{
-		return null;
+		return GrcCellarResources.INSTANCE.textureGuiBrewKettle.toString();
 	}
 
 	@Override
 	public String getRecipeName()
 	{
 		return GrcI18n.translate("grc.recipe_handler.brew_kettle");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Class<? extends GuiContainer> getGuiClass()
+	{
+		return GuiBrewKettle.class;
+	}
+
+	@Override
+	public void loadUsageRecipes(ItemStack ingredient)
+	{
+		final List<BrewingRecipe> recipes = CellarRegistry.instance().brewing().findRecipes(ingredient);
+		for (BrewingRecipe recipe : recipes)
+		{
+			arecipes.add(new CachedBrewingRecipe(recipe));
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	protected void drawOutputFluidStacks(CachedRecipe recipe)
+	{
+		if (recipe instanceof CachedBrewingRecipe)
+		{
+			final BrewingRecipe brewingRecipe = ((CachedBrewingRecipe)recipe).brewingRecipe;
+			TemplateRenderHelper.drawFluidStack(41, 6, 16, 52, brewingRecipe.getInputFluidStack(), GrowthCraftCellar.getConfig().brewKettleMaxCap);
+			TemplateRenderHelper.drawFluidStack(109, 6, 16, 52, brewingRecipe.getFluidStack(), GrowthCraftCellar.getConfig().brewKettleMaxCap);
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void drawExtras(int recipe)
+	{
+		final CachedRecipe crecipe = arecipes.get(recipe);
+		if (crecipe != null)
+		{
+			drawOutputFluidStacks(crecipe);
+		}
 	}
 }

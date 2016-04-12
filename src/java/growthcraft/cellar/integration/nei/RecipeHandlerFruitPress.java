@@ -30,6 +30,8 @@ import growthcraft.api.cellar.pressing.PressingRecipe;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.cellar.client.gui.GuiFruitPress;
 import growthcraft.cellar.client.resource.GrcCellarResources;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.integration.nei.TemplateRenderHelper;
 
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
@@ -51,9 +53,9 @@ public class RecipeHandlerFruitPress extends TemplateRecipeHandler
 		{
 			super();
 			this.pressingRecipe = recipe;
-			this.ingredient = new PositionedStack(pressingRecipe.getInput().getItemStacks(), 40, 23);
+			this.ingredient = new PositionedStack(pressingRecipe.getInput().getItemStacks(), 40, 24);
 			if (recipe.hasResidue())
-				this.otherStack = new PositionedStack(pressingRecipe.getResidue().residueItem, 111, 4);
+				this.otherStack = new PositionedStack(pressingRecipe.getResidue().residueItem, 111, 6);
 		}
 
 		@Override
@@ -106,7 +108,11 @@ public class RecipeHandlerFruitPress extends TemplateRecipeHandler
 
 	public void drawOutputFluidStack(CachedRecipe recipe)
 	{
-		// TODO
+		if (recipe instanceof CachedPressingRecipe)
+		{
+			final PressingRecipe pressingRecipe = ((CachedPressingRecipe)recipe).pressingRecipe;
+			TemplateRenderHelper.drawFluidStack(63, 17, 16, 52, pressingRecipe.getFluidStack(), GrowthCraftCellar.getConfig().fruitPressMaxCap);
+		}
 	}
 
 	@Override

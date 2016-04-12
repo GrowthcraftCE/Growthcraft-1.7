@@ -37,4 +37,6 @@ public interface IFermentationRecipe
 	IMultiItemStacks getFermentingItemStack();
 	int getTime();
 	boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack);
+	boolean matchesIngredient(@Nullable FluidStack fluidStack);
+	boolean matchesIngredient(@Nullable ItemStack itemStack);
 }

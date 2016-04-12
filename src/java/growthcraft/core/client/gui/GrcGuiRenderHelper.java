@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,23 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.fermenting;
+package growthcraft.core.client.gui;
 
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.IIcon;
 
-import growthcraft.api.core.log.ILoggable;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
-public interface IFermentingRegistry extends ILoggable
+public class GrcGuiRenderHelper
 {
-	void addRecipe(@Nonnull IFermentationRecipe recipe);
-	void addRecipe(@Nonnull FluidStack result, @Nonnull FluidStack booze, @Nonnull Object fermenter, int time);
-	IFermentationRecipe findRecipe(@Nullable FluidStack booze, @Nullable ItemStack fermenter);
-	List<IFermentationRecipe> findRecipes(@Nullable FluidStack fluidstack);
-	List<IFermentationRecipe> findRecipes(@Nullable ItemStack fermenter);
-	boolean canFerment(@Nullable FluidStack booze);
+	private GrcGuiRenderHelper() {}
+
+	public static void drawTexturedModelRectFromIcon(int x, int y, float z, IIcon icon, int w, int h)
+	{
+		final Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV((double)(x + 0), (double)(y + h), (double)z, (double)icon.getMinU(), (double)icon.getMaxV());
+		tessellator.addVertexWithUV((double)(x + w), (double)(y + h), (double)z, (double)icon.getMaxU(), (double)icon.getMaxV());
+		tessellator.addVertexWithUV((double)(x + w), (double)(y + 0), (double)z, (double)icon.getMaxU(), (double)icon.getMinV());
+		tessellator.addVertexWithUV((double)(x + 0), (double)(y + 0), (double)z, (double)icon.getMinU(), (double)icon.getMinV());
+		tessellator.draw();
+	}
 }

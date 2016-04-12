@@ -55,6 +55,36 @@ public class FermentingRegistry implements IFermentingRegistry
 	}
 
 	@Override
+	public List<IFermentationRecipe> findRecipes(@Nullable FluidStack fluid)
+	{
+		final List<IFermentationRecipe> result = new ArrayList<IFermentationRecipe>();
+		if (fluid != null)
+		{
+			for (IFermentationRecipe recipe : recipes)
+			{
+				if (recipe.matchesIngredient(fluid))
+					result.add(recipe);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public List<IFermentationRecipe> findRecipes(@Nullable ItemStack fermenter)
+	{
+		final List<IFermentationRecipe> result = new ArrayList<IFermentationRecipe>();
+		if (fermenter != null)
+		{
+			for (IFermentationRecipe recipe : recipes)
+			{
+				if (recipe.matchesIngredient(fermenter))
+					result.add(recipe);
+			}
+		}
+		return result;
+	}
+
+	@Override
 	public boolean canFerment(@Nullable FluidStack booze)
 	{
 		if (FluidTest.isValid(booze))

@@ -123,16 +123,16 @@ public class BrewKettle extends DeviceBase
 		return getHeatMultiplier() > 0;
 	}
 
-	private BrewingRecipe getBrewingRecipe()
+	private BrewingRecipe findRecipe()
 	{
-		return CellarRegistry.instance().brewing().getBrewingRecipe(inputFluidSlot.get(), brewingSlot.get());
+		return CellarRegistry.instance().brewing().findRecipe(inputFluidSlot.get(), brewingSlot.get());
 	}
 
 	public BrewingRecipe getWorkingRecipe()
 	{
 		if (!isHeated()) return null;
 
-		final BrewingRecipe recipe = getBrewingRecipe();
+		final BrewingRecipe recipe = findRecipe();
 		if (recipe == null) return null;
 
 		final IMultiItemStacks expected = recipe.getInputItemStack();

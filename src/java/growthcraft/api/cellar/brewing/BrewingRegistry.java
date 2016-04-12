@@ -46,7 +46,7 @@ public class BrewingRegistry implements IBrewingRegistry
 	}
 
 	@Override
-	public BrewingRecipe getBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
+	public BrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
 	{
 		if (itemstack == null || fluidstack == null) return null;
 
@@ -58,9 +58,39 @@ public class BrewingRegistry implements IBrewingRegistry
 	}
 
 	@Override
+	public List<BrewingRecipe> findRecipes(@Nullable FluidStack fluid)
+	{
+		final List<BrewingRecipe> result = new ArrayList<BrewingRecipe>();
+		if (fluid != null)
+		{
+			for (BrewingRecipe recipe : recipes)
+			{
+				if (recipe.matchesIngredient(fluid))
+					result.add(recipe);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public List<BrewingRecipe> findRecipes(@Nullable ItemStack fermenter)
+	{
+		final List<BrewingRecipe> result = new ArrayList<BrewingRecipe>();
+		if (fermenter != null)
+		{
+			for (BrewingRecipe recipe : recipes)
+			{
+				if (recipe.matchesIngredient(fermenter))
+					result.add(recipe);
+			}
+		}
+		return result;
+	}
+
+	@Override
 	public boolean isBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
 	{
-		return getBrewingRecipe(fluidstack, itemstack) != null;
+		return findRecipe(fluidstack, itemstack) != null;
 	}
 
 	@Override

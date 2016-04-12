@@ -85,15 +85,33 @@ public class FluidTest
 
 	public static boolean areStacksEqual(@Nullable FluidStack expected, @Nullable FluidStack other)
 	{
-		if (expected != null)
+		if (expected == null)
 		{
-			if (expected.isFluidEqual(other)) return true;
+			return other == null;
 		}
 		else
 		{
-			if (other != null) return true;
+			if (other == null) return false;
+			return expected.isFluidEqual(other);
 		}
-		return false;
+	}
+
+	public static boolean fluidMatches(@Nullable FluidStack expected, @Nullable FluidStack other)
+	{
+		return areStacksEqual(expected, other);
+	}
+
+	public static boolean fluidMatches(@Nullable IMultiFluidStacks expected, @Nullable FluidStack other)
+	{
+		if (expected == null)
+		{
+			return other == null;
+		}
+		else
+		{
+			if (other == null) return false;
+			return expected.containsFluidStack(other);
+		}
 	}
 
 	public static boolean hasEnough(@Nullable FluidStack expected, @Nullable FluidStack actual)

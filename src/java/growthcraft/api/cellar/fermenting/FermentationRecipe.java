@@ -84,4 +84,16 @@ public class FermentationRecipe implements IFermentationRecipe
 		}
 		return false;
 	}
+
+	@Override
+	public boolean matchesIngredient(@Nullable FluidStack fluidStack)
+	{
+		return FluidTest.fluidMatches(inputFluidStack, fluidStack);
+	}
+
+	@Override
+	public boolean matchesIngredient(@Nullable ItemStack stack)
+	{
+		return ItemTest.itemMatches(fermentingItem, stack);
+	}
 }
