@@ -107,3 +107,9 @@ grc.cellar.fruit_presser.state_prefix=State :
 grccellar.waila.option.FruitPressExtras=Fruit Press Extras
 grccellar.waila.option.BrewKettleExtras=Brew Kettle Extras
 grccellar.waila.option.FermentBarrelExtras=Fermentation Barrel Extras
+
+# NEI
+grc.recipe_handler.brew_kettle=Brew Kettle
+grc.recipe_handler.culture_jar=Culture Jar
+grc.recipe_handler.ferment_barrel=Ferment Barrel
+grc.recipe_handler.fruit_press=Fruit Press

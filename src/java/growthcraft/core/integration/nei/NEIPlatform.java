@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,63 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.common;
+package growthcraft.core.integration.nei;
 
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
+import cpw.mods.fml.common.Loader;
 
-public class ProcessingRecipe
+public class NEIPlatform
 {
-	private final int time;
-	private final Residue residue;
-	private final FluidStack fluid;
+	public static final String MOD_ID = "NotEnoughItems";
 
-	public ProcessingRecipe(FluidStack f, int t, Residue r)
-	{
-		this.fluid = f;
-		this.time = t;
-		this.residue = r;
-	}
+	private NEIPlatform() {};
 
-	public Residue getResidue()
+	public static boolean isLoaded()
 	{
-		return residue;
-	}
-
-	public boolean hasResidue()
-	{
-		return residue != null;
-	}
-
-	public int getTime()
-	{
-		return time;
-	}
-
-	public Fluid getFluid()
-	{
-		return fluid.getFluid();
-	}
-
-	public FluidStack getFluidStack()
-	{
-		return fluid;
-	}
-
-	public int getAmount()
-	{
-		return fluid.amount;
-	}
-
-	public FluidStack asFluidStack(int size)
-	{
-		final FluidStack result = fluid.copy();
-		result.amount = size;
-		return result;
-	}
-
-	public FluidStack asFluidStack()
-	{
-		return fluid.copy();
+		return Loader.isModLoaded(MOD_ID);
 	}
 }

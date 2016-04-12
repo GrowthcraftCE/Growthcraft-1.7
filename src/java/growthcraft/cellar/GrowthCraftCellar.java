@@ -133,6 +133,7 @@ public class GrowthCraftCellar
 
 		if (config.enableWailaIntegration) modules.add(new growthcraft.cellar.integration.Waila());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
+		if (config.enableNEIIntegration) modules.add(new growthcraft.cellar.integration.NEIModule());
 		// ALWAYS set the user modules as last, this ensures that other modules are given a chance to setup defaults and such.
 		modules.add(userApis);
 

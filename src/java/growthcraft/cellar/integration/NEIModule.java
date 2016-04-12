@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,35 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.integration;
+package growthcraft.cellar.integration;
 
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.integration.nei.RecipeHandlerBrewKettle;
+import growthcraft.cellar.integration.nei.RecipeHandlerCultureJar;
+import growthcraft.cellar.integration.nei.RecipeHandlerFermentBarrel;
+import growthcraft.cellar.integration.nei.RecipeHandlerFruitPress;
 import growthcraft.core.integration.nei.NEIPlatform;
+import growthcraft.core.integration.NEIModuleBase;
 
 import codechicken.nei.api.API;
 
 import cpw.mods.fml.common.Optional;
-import net.minecraft.item.ItemStack;
 
-public class NEI
+public class NEIModule extends NEIModuleBase
 {
-	private NEI() {}
-
-	/**
-	 * @return true if NEI is available, false otherwise
-	 */
-	public static boolean neiIsAvailable()
+	public NEIModule()
 	{
-		return NEIPlatform.isLoaded();
+		super(GrowthCraftCellar.MOD_ID);
 	}
 
+	@Override
 	@Optional.Method(modid=NEIPlatform.MOD_ID)
-	private static void hideItem_API(ItemStack itemStack)
+	public void integrate()
 	{
-		API.hideItem(itemStack);
-	}
+		API.registerRecipeHandler(new RecipeHandlerBrewKettle());
+		API.registerUsageHandler(new RecipeHandlerBrewKettle());
 
-	public static void hideItem(ItemStack itemStack)
-	{
-		if (neiIsAvailable()) hideItem_API(itemStack);
+		API.registerRecipeHandler(new RecipeHandlerCultureJar());
+		API.registerUsageHandler(new RecipeHandlerCultureJar());
+
+		API.registerRecipeHandler(new RecipeHandlerFermentBarrel());
+		API.registerUsageHandler(new RecipeHandlerFermentBarrel());
+
+		API.registerRecipeHandler(new RecipeHandlerFruitPress());
+		API.registerUsageHandler(new RecipeHandlerFruitPress());
 	}
 }

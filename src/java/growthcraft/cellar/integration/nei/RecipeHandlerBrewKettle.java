@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,63 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.common;
+package growthcraft.cellar.integration.nei;
 
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
+import growthcraft.api.core.i18n.GrcI18n;
 
-public class ProcessingRecipe
+import codechicken.nei.recipe.TemplateRecipeHandler;
+
+public class RecipeHandlerBrewKettle extends TemplateRecipeHandler
 {
-	private final int time;
-	private final Residue residue;
-	private final FluidStack fluid;
-
-	public ProcessingRecipe(FluidStack f, int t, Residue r)
+	@Override
+	public String getGuiTexture()
 	{
-		this.fluid = f;
-		this.time = t;
-		this.residue = r;
+		return null;
 	}
 
-	public Residue getResidue()
+	@Override
+	public String getRecipeName()
 	{
-		return residue;
-	}
-
-	public boolean hasResidue()
-	{
-		return residue != null;
-	}
-
-	public int getTime()
-	{
-		return time;
-	}
-
-	public Fluid getFluid()
-	{
-		return fluid.getFluid();
-	}
-
-	public FluidStack getFluidStack()
-	{
-		return fluid;
-	}
-
-	public int getAmount()
-	{
-		return fluid.amount;
-	}
-
-	public FluidStack asFluidStack(int size)
-	{
-		final FluidStack result = fluid.copy();
-		result.amount = size;
-		return result;
-	}
-
-	public FluidStack asFluidStack()
-	{
-		return fluid.copy();
+		return GrcI18n.translate("grc.recipe_handler.brew_kettle");
 	}
 }
