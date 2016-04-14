@@ -24,27 +24,33 @@
 package growthcraft.core.logic;
 
 import java.util.Random;
+import javax.annotation.Nonnull;
 
 import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.CuboidI;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
 public class FlowerSpread
 {
+	private CuboidI spreadCube;
+
+	public FlowerSpread(@Nonnull CuboidI spread)
+	{
+		this.spreadCube = new CuboidI();
+	}
+
 	public boolean run(Block block, World world, int x, int y, int z, Random random)
 	{
-		if (random.nextInt(20) == 0)
+		final int fx = random.nextInt(spreadCube.w) - spreadCube.x;
+		final int fz = random.nextInt(spreadCube.l) - spreadCube.z;
+		for (int i = spreadCube.y; i <= spreadCube.y2(); ++i)
 		{
-			final int fx = random.nextInt(4) - 2;
-			final int fz = random.nextInt(4) - 2;
-			for (int i = -1; i < 2; ++i)
+			if (block.canPlaceBlockAt(world, x + fx, y + i, z + fz))
 			{
-				if (block.canPlaceBlockAt(world, x + fx, y + i, z + fz))
-				{
-					world.setBlock(x + fx, y + i, z + fz, block, 0, BlockFlags.UPDATE_AND_SYNC);
-					return true;
-				}
+				world.setBlock(x + fx, y + i, z + fz, block, 0, BlockFlags.UPDATE_AND_SYNC);
+				return true;
 			}
 		}
 		return false;
