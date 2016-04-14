@@ -23,48 +23,9 @@
  */
 package growthcraft.core.logic;
 
-import java.util.Random;
-import javax.annotation.Nonnull;
-
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.api.core.util.CuboidI;
-
-import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
-public class FlowerSpread
+public interface ISpreadablePlant
 {
-	private CuboidI spreadCube;
-
-	public FlowerSpread(@Nonnull CuboidI spread)
-	{
-		this.spreadCube = new CuboidI();
-	}
-
-	private boolean canSpreadTo(Block block, World world, int x, int y, int z)
-	{
-		if (block instanceof ISpreadablePlant)
-		{
-			return ((ISpreadablePlant)block).canSpreadTo(world, x, y, z);
-		}
-		else
-		{
-			return block.canPlaceBlockAt(world, x, y, z);
-		}
-	}
-
-	public boolean run(Block block, World world, int x, int y, int z, Random random)
-	{
-		final int fx = random.nextInt(spreadCube.w) - spreadCube.x;
-		final int fz = random.nextInt(spreadCube.l) - spreadCube.z;
-		for (int i = spreadCube.y; i <= spreadCube.y2(); ++i)
-		{
-			if (canSpreadTo(block, world, x + fx, y + i, z + fz))
-			{
-				world.setBlock(x + fx, y + i, z + fz, block, 0, BlockFlags.UPDATE_AND_SYNC);
-				return true;
-			}
-		}
-		return false;
-	}
+	boolean canSpreadTo(World world, int x, int y, int z);
 }
