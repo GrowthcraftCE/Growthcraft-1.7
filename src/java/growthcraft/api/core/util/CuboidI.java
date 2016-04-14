@@ -23,16 +23,36 @@
  */
 package growthcraft.api.core.util;
 
-public class ModelCuboid
+/**
+ * The 3d counterpart to Rectangle
+ */
+public class CuboidI
 {
-	public float x;
-	public float y;
-	public float z;
-	public float w;
-	public float h;
-	public float l;
+	public int x;
+	public int y;
+	public int z;
+	public int w;
+	public int h;
+	public int l;
 
-	public ModelCuboid(float ix, float iy, float iz, float iw, float ih, float il)
+	public CuboidI(int ix, int iy, int iz, int iw, int ih, int il)
+	{
+		set(ix, iy, iz, iw, ih, il);
+	}
+
+	public CuboidI(CuboidI other)
+	{
+		this(other.x, other.y, other.z, other.w, other.h, other.l);
+	}
+
+	public CuboidI() {}
+
+	public CuboidI copy()
+	{
+		return new CuboidI(this);
+	}
+
+	public CuboidI set(int ix, int iy, int iz, int iw, int ih, int il)
 	{
 		this.x = ix;
 		this.y = iy;
@@ -40,21 +60,57 @@ public class ModelCuboid
 		this.w = iw;
 		this.h = ih;
 		this.l = il;
+		return this;
 	}
 
-	public ModelCuboid(ModelCuboid other)
+	public CuboidI set(CuboidI cuboid)
 	{
-		this(other.x, other.y, other.z, other.w, other.h, other.l);
+		set(cuboid.x, cuboid.y, cuboid.z, cuboid.w, cuboid.h, cuboid.l);
+		return this;
 	}
 
-	public ModelCuboid() {}
-
-	public ModelCuboid copy()
+	public boolean contains(int ix, int iy, int iz)
 	{
-		return new ModelCuboid(this);
+		return ix >= x && iy >= y && iz >= z &&
+			ix < (x + w) && iy < (y + h) && iz < (z + l);
 	}
 
-	public ModelCuboid translate(float tx, float ty, float tz)
+	public int x1()
+	{
+		return x;
+	}
+
+	public int x2()
+	{
+		return x + w;
+	}
+
+	public int y1()
+	{
+		return y;
+	}
+
+	public int y2()
+	{
+		return y + h;
+	}
+
+	public int z1()
+	{
+		return z;
+	}
+
+	public int z2()
+	{
+		return z + l;
+	}
+
+	public boolean isEmpty()
+	{
+		return w == 0 || h == 0 || l == 0;
+	}
+
+	public CuboidI translate(int tx, int ty, int tz)
 	{
 		this.x += tx;
 		this.y += ty;
@@ -62,7 +118,7 @@ public class ModelCuboid
 		return this;
 	}
 
-	public ModelCuboid moveto(float tx, float ty, float tz)
+	public CuboidI moveto(int tx, int ty, int tz)
 	{
 		this.x = tx;
 		this.y = ty;
@@ -70,7 +126,7 @@ public class ModelCuboid
 		return this;
 	}
 
-	public ModelCuboid scale(float tx, float ty, float tz)
+	public CuboidI scale(int tx, int ty, int tz)
 	{
 		this.w *= tx;
 		this.h *= ty;
@@ -78,7 +134,7 @@ public class ModelCuboid
 		return this;
 	}
 
-	public ModelCuboid scaleAll(float s)
+	public CuboidI scaleAll(int s)
 	{
 		this.x *= s;
 		this.y *= s;
@@ -89,7 +145,7 @@ public class ModelCuboid
 		return this;
 	}
 
-	public ModelCuboid resize(float tx, float ty, float tz)
+	public CuboidI resize(int tx, int ty, int tz)
 	{
 		this.w = tx;
 		this.h = ty;
@@ -97,7 +153,7 @@ public class ModelCuboid
 		return this;
 	}
 
-	public float[] toBoundsArray(float[] bounds)
+	public int[] toBoundsArray(int[] bounds)
 	{
 		assert bounds.length == 6;
 		bounds[0] = x;
@@ -109,12 +165,12 @@ public class ModelCuboid
 		return bounds;
 	}
 
-	public float[] toBoundsArray()
+	public int[] toBoundsArray()
 	{
-		return toBoundsArray(new float[6]);
+		return toBoundsArray(new int[6]);
 	}
 
-	public float[] toIntArray(float[] target)
+	public int[] toIntArray(int[] target)
 	{
 		assert target.length == 6;
 		target[0] = x;
@@ -126,8 +182,8 @@ public class ModelCuboid
 		return target;
 	}
 
-	public float[] toIntArray()
+	public int[] toIntArray()
 	{
-		return toIntArray(new float[6]);
+		return toIntArray(new int[6]);
 	}
 }
