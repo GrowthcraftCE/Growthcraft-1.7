@@ -26,6 +26,7 @@ package growthcraft.milk.common.block;
 import java.util.Random;
 
 import growthcraft.api.core.util.BBox;
+import growthcraft.api.core.util.CuboidI;
 import growthcraft.core.logic.FlowerSpread;
 import growthcraft.milk.GrowthCraftMilk;
 
@@ -37,7 +38,7 @@ import net.minecraftforge.common.EnumPlantType;
 
 public class BlockThistle extends BlockBush
 {
-	private FlowerSpread spreadLogic = new FlowerSpread();
+	private FlowerSpread spreadLogic;
 
 	public BlockThistle()
 	{
@@ -48,6 +49,7 @@ public class BlockThistle extends BlockBush
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		final BBox bb = BBox.newCube(2f, 0f, 2f, 12f, 16f, 12f).scale(1f / 16f);
 		setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
+		this.spreadLogic = new FlowerSpread(new CuboidI(-2, -1, -2, 4, 2, 4));
 	}
 
 	@Override
@@ -56,7 +58,7 @@ public class BlockThistle extends BlockBush
 		super.updateTick(world, x, y, z, random);
 		if (!world.isRemote)
 		{
-			if (random.nextInt(25) == 0)
+			if (random.nextInt(GrowthCraftMilk.getConfig().thistleSpreadChance) == 0)
 			{
 				spreadLogic.run(this, world, x, y, z, random);
 			}

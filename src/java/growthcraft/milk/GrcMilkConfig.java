@@ -89,6 +89,10 @@ public class GrcMilkConfig extends ConfigBase
 	public int cheeseItemPerBlockSlice = 8;
 
 
+	@ConfigOption(catergory="Thistle", name="Spread Chance", desc="How quickly does thistle spread? [Higher -> Slower]")
+	public int thistleSpreadChance = 10;
+
+
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
 	public boolean enableWailaIntegration = true;
 
