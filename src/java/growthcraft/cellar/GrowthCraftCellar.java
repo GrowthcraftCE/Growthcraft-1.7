@@ -235,7 +235,7 @@ public class GrowthCraftCellar
 		//====================
 		// POTION
 		//====================
-		registerPotions();
+		extendPotionsArray();
 		potionTipsy = (new PotionCellar(config.potionTipsyID, false, 0)).setIconIndex(0, 0).setPotionName("grc.potion.tipsy");
 		EffectTipsy.potionTipsy = potionTipsy;
 		EffectTipsy.achievement = CellarAchievement.GET_DRUNK;
@@ -248,10 +248,8 @@ public class GrowthCraftCellar
 		NEI.hideItem(chievItemDummy.asStack());
 	}
 
-	private void registerPotions()
+	private void extendPotionsArray()
 	{
-		Potion[] potionTypes = null;
-
 		for (Field f : Potion.class.getDeclaredFields())
 		{
 			f.setAccessible(true);
@@ -262,17 +260,19 @@ public class GrowthCraftCellar
 					final Field modfield = Field.class.getDeclaredField("modifiers");
 					modfield.setAccessible(true);
 					modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
-
-					potionTypes = (Potion[])f.get(null);
-					final Potion[] newPotionTypes = new Potion[256];
-					System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
-					f.set(null, newPotionTypes);
+					final Potion[] potionTypes = (Potion[])f.get(null);
+					if (potionTypes.length < 1024)
+					{
+						final Potion[] newPotionTypes = new Potion[1024];
+						System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+						f.set(null, newPotionTypes);
+					}
 				}
 			}
 			catch (Exception e)
 			{
-				System.err.println("Severe error, please report this to the mod author:");
-				System.err.println(e);
+				System.err.println("GrowthCraft|Cellar has encountered a problem with the built-in potionTypes Array, please report this problem to the mod authors.");
+				e.printStackTrace();
 			}
 		}
 	}
