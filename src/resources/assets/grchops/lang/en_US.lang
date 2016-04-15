@@ -27,18 +27,18 @@ fluid.grc.lager5=Lager
 fluid.grc.lager6=Lager
 
 # Fluid Buckets
-item.bucket.fluid.grc.hopAle.name=Wort Bucket
+item.bucket.fluid.grc.hopAle.name=Ale Wort Bucket
 item.bucket.fluid.grc.hopAle0.name=Ale Bucket
 item.bucket.fluid.grc.hopAle1.name=Ale Bucket
 item.bucket.fluid.grc.hopAle2.name=Ale Bucket
-item.bucket.fluid.grc.hopAle3.name=Ale Bucket
+item.bucket.fluid.grc.hopAle3.name=Ale Wort Bucket
 item.bucket.fluid.grc.hopAle4.name=Ale Bucket
 item.bucket.fluid.grc.hopAle5.name=Ale Bucket
 item.bucket.fluid.grc.hopAle6.name=Ale Bucket
 item.bucket.fluid.grc.hopAle7.name=Ale Bucket
 item.bucket.fluid.grc.hopAle8.name=Ale Bucket
 
-item.bucket.fluid.grc.lager.name=Lager Bucket
+item.bucket.fluid.grc.lager.name=Lager Wort Bucket
 item.bucket.fluid.grc.lager0.name=Lager Bucket
 item.bucket.fluid.grc.lager1.name=Lager Bucket
 item.bucket.fluid.grc.lager2.name=Lager Bucket
@@ -48,18 +48,18 @@ item.bucket.fluid.grc.lager5.name=Lager Bucket
 item.bucket.fluid.grc.lager6.name=Lager Bucket
 
 # Fluid Blocks
-tile.fluid.grc.hopAle.name=Ale
+tile.fluid.grc.hopAle.name=Ale Wort
 tile.fluid.grc.hopAle0.name=Ale
 tile.fluid.grc.hopAle1.name=Ale
 tile.fluid.grc.hopAle2.name=Ale
-tile.fluid.grc.hopAle3.name=Ale
+tile.fluid.grc.hopAle3.name=Ale Wort
 tile.fluid.grc.hopAle4.name=Ale
 tile.fluid.grc.hopAle5.name=Ale
 tile.fluid.grc.hopAle6.name=Ale
 tile.fluid.grc.hopAle7.name=Ale
 tile.fluid.grc.hopAle8.name=Ale
 
-tile.fluid.grc.lager.name=Lager
+tile.fluid.grc.lager.name=Lager Wort
 tile.fluid.grc.lager0.name=Lager
 tile.fluid.grc.lager1.name=Lager
 tile.fluid.grc.lager2.name=Lager
