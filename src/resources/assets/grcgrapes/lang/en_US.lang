@@ -14,7 +14,7 @@ item.grc.grapes.red.name=Red Grapes
 item.grc.grapeSeeds.name=Grape Seeds
 
 # Fluids
-fluid.grc.grapeWine=Grape Wine
+fluid.grc.grapeWine=Grape Juice
 fluid.grc.grapeWine0=Grape Wine
 fluid.grc.grapeWine1=Grape Wine
 fluid.grc.grapeWine2=Grape Wine
@@ -25,7 +25,7 @@ fluid.grc.grapeWine6=Grape Wine
 fluid.grc.grapeWine7=Grape Wine
 
 # Fluid Buckets
-item.bucket.fluid.grc.grapeWine.name=Grape Wine Bucket
+item.bucket.fluid.grc.grapeWine.name=Grape Juice Bucket
 item.bucket.fluid.grc.grapeWine0.name=Grape Wine Bucket
 item.bucket.fluid.grc.grapeWine1.name=Grape Wine Bucket
 item.bucket.fluid.grc.grapeWine2.name=Grape Wine Bucket
@@ -36,7 +36,7 @@ item.bucket.fluid.grc.grapeWine6.name=Grape Wine Bucket
 item.bucket.fluid.grc.grapeWine7.name=Grape Wine Bucket
 
 # Fluid Blocks
-tile.fluid.grc.grapeWine.name=Grape Wine
+tile.fluid.grc.grapeWine.name=Grape Juice
 tile.fluid.grc.grapeWine0.name=Grape Wine
 tile.fluid.grc.grapeWine1.name=Grape Wine
 tile.fluid.grc.grapeWine2.name=Grape Wine
