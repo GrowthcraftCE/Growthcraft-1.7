@@ -24,6 +24,7 @@
 package growthcraft.core.integration;
 
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.util.Platform;
 
 import cpw.mods.fml.common.Loader;
 
@@ -129,7 +130,14 @@ public abstract class ModIntegrationBase extends GrcModuleBase
 	 */
 	protected void integrate()
 	{
+	}
 
+	protected void integrateClient()
+	{
+	}
+
+	protected void integrateServer()
+	{
 	}
 
 	public void tryToIntegrate()
@@ -139,6 +147,14 @@ public abstract class ModIntegrationBase extends GrcModuleBase
 			logger.debug("Attemping to integrate with %s.", modID);
 			try
 			{
+				if (Platform.isClient())
+				{
+					integrateClient();
+				}
+				else
+				{
+					integrateServer();
+				}
 				integrate();
 				logger.debug("Successfully integrated with %s.", modID);
 			}

@@ -43,8 +43,9 @@ public class NEIModule extends NEIModuleBase
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	@Optional.Method(modid=NEIPlatform.MOD_ID)
-	public void integrate()
+	public void integrateClient()
 	{
 		API.registerRecipeHandler(new RecipeHandlerBrewKettle());
 		API.registerUsageHandler(new RecipeHandlerBrewKettle());
