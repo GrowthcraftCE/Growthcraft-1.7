@@ -39,7 +39,7 @@ item.grc.waterBag15.name=Water Bag (Black)
 item.grc.waterBag16.name=Water Bag
 
 # Containers
-container.grc.fruitPress=Fruit Press
+container.grc.fruitPress=Mechanical Press
 container.grc.brewKettle=Brew Kettle
 container.grc.fermentBarrel=Fermentation Barrel
 container.grc.CultureJar=Culture Jar
@@ -49,7 +49,7 @@ grc.potion.tipsy=Tipsy
 grc.booze=Booze
 
 # Modifiers
-grc.fluids.tag.chilled=Chilled
+grc.fluids.tag.chilled=Lagered
 grc.fluids.tag.cider=Cider
 grc.fluids.tag.deadly=Deadly
 grc.fluids.tag.extended=Extended
