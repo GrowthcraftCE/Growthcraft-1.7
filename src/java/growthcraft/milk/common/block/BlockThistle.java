@@ -32,12 +32,13 @@ import growthcraft.core.logic.ISpreadablePlant;
 import growthcraft.milk.GrowthCraftMilk;
 
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 
-public class BlockThistle extends BlockBush implements ISpreadablePlant
+public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowable
 {
 	private FlowerSpread spreadLogic;
 
@@ -55,10 +56,24 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant
 	}
 
 	@Override
+	public int tickRate(World world)
+	{
+		return 10;
+	}
+
+	@Override
 	public boolean canSpreadTo(World world, int x, int y, int z)
 	{
-		if (!canPlaceBlockAt(world, x, y, z)) return false;
-		return world.canLightningStrikeAt(x, y, z) && world.getBlockLightValue(x, y, z) >= 7;
+		if (world.isAirBlock(x, y, z) && canBlockStay(world, x, y, z))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	private void runSpread(World world, int x, int y, int z, Random random)
+	{
+		spreadLogic.run(this, 0, world, x, y, z, random);
 	}
 
 	@Override
@@ -69,7 +84,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant
 		{
 			if (random.nextInt(GrowthCraftMilk.getConfig().thistleSpreadChance) == 0)
 			{
-				spreadLogic.run(this, world, x, y, z, random);
+				runSpread(world, x, y, z, random);
 			}
 		}
 	}
@@ -78,5 +93,31 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant
 	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
 	{
 		return EnumPlantType.Plains;
+	}
+
+	/* IGrowable interface
+	 *	Check: http://www.minecraftforge.net/forum/index.php?topic=22571.0
+	 *	if you have no idea what this stuff means
+	 */
+
+	/* Can this accept bonemeal? */
+	@Override
+	public boolean func_149851_a(World world, int x, int y, int z, boolean isClient)
+	{
+		return true;
+	}
+
+	/* SideOnly(Side.SERVER) Can this apply bonemeal effect? */
+	@Override
+	public boolean func_149852_a(World world, Random random, int x, int y, int z)
+	{
+		return true;
+	}
+
+	/* Apply bonemeal effect */
+	@Override
+	public void func_149853_b(World world, Random random, int x, int y, int z)
+	{
+		runSpread(world, x, y, z, random);
 	}
 }
