@@ -34,6 +34,8 @@ import growthcraft.core.integration.NEIModuleBase;
 import codechicken.nei.api.API;
 
 import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class NEIModule extends NEIModuleBase
 {
