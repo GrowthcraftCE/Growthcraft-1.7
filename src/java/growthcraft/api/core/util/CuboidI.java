@@ -186,4 +186,10 @@ public class CuboidI
 	{
 		return toIntArray(new int[6]);
 	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("CuboidI(x: %d, y: %d, z: %d, w: %d, h: %d, l: %d)", x, y, z, w, h, l);
+	}
 }
