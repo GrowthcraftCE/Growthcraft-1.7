@@ -2,8 +2,8 @@
 itemGroup.creative_tab_grccellar=Growthcraft Cellar
 
 # Blocks
-tile.grc.fruitPress.name=Fruit Press
-tile.grc.fruitPresser.name=Fruit Press
+tile.grc.fruitPress.name=Mechanical Press
+tile.grc.fruitPresser.name=Mechanical Press
 tile.grc.brewKettle.name=Brew Kettle
 tile.grc.fermentBarrel.name=Fermentation Barrel
 tile.grc.fermentJar.name=Culture Jar
