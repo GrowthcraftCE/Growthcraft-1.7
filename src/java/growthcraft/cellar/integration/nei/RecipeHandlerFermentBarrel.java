@@ -124,5 +124,7 @@ public class RecipeHandlerFermentBarrel extends TemplateRecipeHandler
 		{
 			drawOutputFluidStack(crecipe);
 		}
+		drawProgressBar(34, 10, 188, 29, 9, 29, 240, TemplateRenderHelper.PROGRESS_UP);
+		drawProgressBar(44, 9, 176, 29, 12, 29, 20, TemplateRenderHelper.PROGRESS_UP);
 	}
 }

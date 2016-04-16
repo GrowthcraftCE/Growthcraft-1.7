@@ -111,7 +111,7 @@ public class RecipeHandlerFruitPress extends TemplateRecipeHandler
 		if (recipe instanceof CachedPressingRecipe)
 		{
 			final PressingRecipe pressingRecipe = ((CachedPressingRecipe)recipe).pressingRecipe;
-			TemplateRenderHelper.drawFluidStack(63, 17, 16, 52, pressingRecipe.getFluidStack(), GrowthCraftCellar.getConfig().fruitPressMaxCap);
+			TemplateRenderHelper.drawFluidStack(80, 11, 16, 52, pressingRecipe.getFluidStack(), GrowthCraftCellar.getConfig().fruitPressMaxCap);
 		}
 	}
 
@@ -123,5 +123,6 @@ public class RecipeHandlerFruitPress extends TemplateRecipeHandler
 		{
 			drawOutputFluidStack(crecipe);
 		}
+		drawProgressBar(58, 8, 176, 0, 25, 16, 40, TemplateRenderHelper.PROGRESS_RIGHT);
 	}
 }

@@ -39,6 +39,11 @@ import net.minecraftforge.fluids.FluidStack;
 @SideOnly(Side.CLIENT)
 public class TemplateRenderHelper
 {
+	public static final int PROGRESS_RIGHT = 0;
+	public static final int PROGRESS_DOWN = 1;
+	public static final int PROGRESS_LEFT = 2;
+	public static final int PROGRESS_UP = 3;
+
 	private TemplateRenderHelper() {}
 
 	public static void drawFluid(int x, int y, int w, int h, Fluid fluid, int amount)

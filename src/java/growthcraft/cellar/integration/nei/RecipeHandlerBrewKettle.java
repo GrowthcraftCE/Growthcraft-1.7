@@ -127,5 +127,6 @@ public class RecipeHandlerBrewKettle extends TemplateRecipeHandler
 		{
 			drawOutputFluidStacks(crecipe);
 		}
+		drawProgressBar(93, 19, 176, 0, 9, 28, 40, TemplateRenderHelper.PROGRESS_DOWN);
 	}
 }
