@@ -38,7 +38,7 @@ public class FlowerSpread
 
 	public FlowerSpread(@Nonnull CuboidI spread)
 	{
-		this.spreadCube = new CuboidI();
+		this.spreadCube = spread;
 	}
 
 	private boolean canSpreadTo(Block block, World world, int x, int y, int z)
