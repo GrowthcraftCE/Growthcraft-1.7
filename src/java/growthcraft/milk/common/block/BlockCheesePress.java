@@ -48,6 +48,7 @@ public class BlockCheesePress extends GrcBlockContainer
 		super(Material.wood);
 		setResistance(5.0F);
 		setHardness(2.0F);
+		setStepSound(soundTypeWood);
 		setBlockName("grcmilk.CheesePress");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityCheesePress.class);
