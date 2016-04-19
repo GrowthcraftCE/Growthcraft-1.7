@@ -234,4 +234,10 @@ public class BlockCheeseBlock extends GrcBlockContainer
 		final EnumCheeseType type = EnumCheeseType.getSafeById(meta);
 		return getIconByTypeAndStage(side, type, type.stages.get(0));
 	}
+
+	@Override
+	public int damageDropped(int metadata)
+	{
+		return metadata;
+	}
 }

@@ -41,6 +41,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -55,7 +56,8 @@ public class BlockHangingCurds extends GrcBlockContainer
 	public BlockHangingCurds()
 	{
 		super(Material.cake);
-		setHardness(0.5F);
+		// make it god awful difficult to break by hand.
+		setHardness(6.0F);
 		setTickRandomly(true);
 		setBlockName("grcmilk.HangingCurds");
 		setTileEntityType(TileEntityHangingCurds.class);
@@ -63,6 +65,13 @@ public class BlockHangingCurds extends GrcBlockContainer
 		setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
 		setBlockTextureName("grcmilk:hanging_curds");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
+	{
+		super.onBlockPlacedBy(world, x, y, z, entity, stack);
+		world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), BlockFlags.NONE);
 	}
 
 	@Override
@@ -155,7 +164,8 @@ public class BlockHangingCurds extends GrcBlockContainer
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return BlockCheck.isBlockPlacableOnSide(world, x, y + 1, z, ForgeDirection.DOWN);
+		return !world.isAirBlock(x, y + 1, z) &&
+			BlockCheck.isBlockPlacableOnSide(world, x, y + 1, z, ForgeDirection.DOWN);
 	}
 
 	@Override
@@ -163,7 +173,6 @@ public class BlockHangingCurds extends GrcBlockContainer
 	{
 		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
 	}
-
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)

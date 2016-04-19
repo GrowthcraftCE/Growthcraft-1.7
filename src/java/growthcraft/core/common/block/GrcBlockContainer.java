@@ -305,17 +305,22 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		}
 	}
 
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int par6)
+	protected boolean shouldScatterInventoryOnBreak(World world, int x, int y, int z)
 	{
-		scatterInventory(world, x, y, z, block);
-		super.breakBlock(world, x, y, z, block, par6);
+		return true;
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+	{
+		if (shouldScatterInventoryOnBreak(world, x, y, z))
+			scatterInventory(world, x, y, z, block);
 		world.removeTileEntity(x, y, z);
 	}
 
 	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, int x, int y, int z, int meta)
 	{
-		return this.createStackedBlock(meta);
+		return createStackedBlock(meta);
 	}
 
 	@Override
@@ -337,14 +342,14 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 			ForgeEventFactory.fireBlockHarvesting(items, world, this, x, y, z, meta, 0, 1.0f, true, player);
 			for (ItemStack is : items)
 			{
-				this.dropBlockAsItem(world, x, y, z, is);
+				dropBlockAsItem(world, x, y, z, is);
 			}
 		}
 		else
 		{
 			harvesters.set(player);
 			final int fortune = EnchantmentHelper.getFortuneModifier(player);
-			this.dropBlockAsItem(world, x, y, z, meta, fortune);
+			dropBlockAsItem(world, x, y, z, meta, fortune);
 			harvesters.set(null);
 		}
 	}
@@ -354,7 +359,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		return false;
 	}
 
-	private void defaultGetDrops(List<ItemStack> ret, World world, int x, int y, int z, int metadata, int fortune)
+	private void getDefaultDrops(List<ItemStack> ret, World world, int x, int y, int z, int metadata, int fortune)
 	{
 		final int count = quantityDropped(metadata, fortune, world.rand);
 		for (int i = 0; i < count; ++i)
@@ -380,7 +385,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		}
 		else
 		{
-			defaultGetDrops(ret, world, x, y, z, metadata, fortune);
+			getDefaultDrops(ret, world, x, y, z, metadata, fortune);
 		}
 	}
 
@@ -393,7 +398,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		}
 		else
 		{
-			defaultGetDrops(ret, world, x, y, z, metadata, fortune);
+			getDefaultDrops(ret, world, x, y, z, metadata, fortune);
 		}
 		return ret;
 	}
