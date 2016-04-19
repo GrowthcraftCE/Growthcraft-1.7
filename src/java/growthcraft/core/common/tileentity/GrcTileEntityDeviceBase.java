@@ -119,33 +119,33 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 		return true;
 	}
 
-	protected abstract FluidStack doDrain(ForgeDirection dir, int amount, boolean doDrain);
-	protected abstract FluidStack doDrain(ForgeDirection dir, FluidStack stack, boolean doDrain);
+	protected abstract FluidStack doDrain(ForgeDirection dir, int amount, boolean shouldDrain);
+	protected abstract FluidStack doDrain(ForgeDirection dir, FluidStack stack, boolean shouldDrain);
 
 	@Override
-	public FluidStack drain(ForgeDirection dir, int amount, boolean doDrain)
+	public FluidStack drain(ForgeDirection dir, int amount, boolean shouldDrain)
 	{
-		final FluidStack result = doDrain(dir, amount, doDrain);
-		if (doDrain && FluidTest.isValid(result)) markForFluidUpdate();
+		final FluidStack result = doDrain(dir, amount, shouldDrain);
+		if (shouldDrain && FluidTest.isValid(result)) markForFluidUpdate();
 		return result;
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection dir, FluidStack stack, boolean doDrain)
+	public FluidStack drain(ForgeDirection dir, FluidStack stack, boolean shouldDrain)
 	{
 		if (!FluidTest.isValid(stack)) return null;
-		final FluidStack result = doDrain(dir, stack, doDrain);
-		if (doDrain && FluidTest.isValid(result)) markForFluidUpdate();
+		final FluidStack result = doDrain(dir, stack, shouldDrain);
+		if (shouldDrain && FluidTest.isValid(result)) markForFluidUpdate();
 		return result;
 	}
 
-	protected abstract int doFill(ForgeDirection dir, FluidStack stack, boolean doFill);
+	protected abstract int doFill(ForgeDirection dir, FluidStack stack, boolean shouldFill);
 
 	@Override
-	public int fill(ForgeDirection dir, FluidStack stack, boolean doFill)
+	public int fill(ForgeDirection dir, FluidStack stack, boolean shouldFill)
 	{
-		final int result = doFill(dir, stack, doFill);
-		if (doFill && result != 0) markForFluidUpdate();
+		final int result = doFill(dir, stack, shouldFill);
+		if (shouldFill && result != 0) markForFluidUpdate();
 		return result;
 	}
 

@@ -173,25 +173,25 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 	}
 
 	@Override
-	protected int doFill(ForgeDirection from, FluidStack resource, boolean doFill)
+	protected int doFill(ForgeDirection from, FluidStack resource, boolean shouldFill)
 	{
-		return fillFluidTank(0, resource, doFill);
+		return fillFluidTank(0, resource, shouldFill);
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection from, int maxDrain, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, int maxDrain, boolean shouldDrain)
 	{
-		return drainFluidTank(0, maxDrain, doDrain);
+		return drainFluidTank(0, maxDrain, shouldDrain);
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection from, FluidStack resource, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, FluidStack resource, boolean shouldDrain)
 	{
 		if (resource == null || !resource.isFluidEqual(getFluidTank(0).getFluid()))
 		{
 			return null;
 		}
-		return doDrain(from, resource.amount, doDrain);
+		return doDrain(from, resource.amount, shouldDrain);
 	}
 
 	@Override
