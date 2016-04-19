@@ -58,62 +58,6 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 		return new FluidTank[] {};
 	}
 
-	protected void readTanksFromNBT(NBTTagCompound nbt)
-	{
-		if (tanks != null)
-			tanks.readFromNBT(nbt);
-	}
-
-	@Override
-	public void readFromNBTForItem(NBTTagCompound nbt)
-	{
-		super.readFromNBTForItem(nbt);
-		readTanksFromNBT(nbt);
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		super.readFromNBT(nbt);
-		readTanksFromNBT(nbt);
-	}
-
-	private void writeTanksToNBT(NBTTagCompound nbt)
-	{
-		if (tanks != null)
-			tanks.writeToNBT(nbt);
-	}
-
-	@Override
-	public void writeToNBTForItem(NBTTagCompound nbt)
-	{
-		super.writeToNBTForItem(nbt);
-		writeTanksToNBT(nbt);
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
-		super.writeToNBT(nbt);
-		writeTanksToNBT(nbt);
-	}
-
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
-	public boolean readFromStream_FluidTanks(ByteBuf stream) throws IOException
-	{
-		if (tanks != null)
-			tanks.readFromStream(stream);
-		return true;
-	}
-
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public boolean writeToStream_FluidTanks(ByteBuf stream) throws IOException
-	{
-		if (tanks != null)
-			tanks.writeToStream(stream);
-		return false;
-	}
-
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid)
 	{
@@ -271,5 +215,61 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	{
 		tanks.clearTank(slot);
 		markForFluidUpdate();
+	}
+
+	protected void readTanksFromNBT(NBTTagCompound nbt)
+	{
+		if (tanks != null)
+			tanks.readFromNBT(nbt);
+	}
+
+	@Override
+	public void readFromNBTForItem(NBTTagCompound nbt)
+	{
+		super.readFromNBTForItem(nbt);
+		readTanksFromNBT(nbt);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		readTanksFromNBT(nbt);
+	}
+
+	private void writeTanksToNBT(NBTTagCompound nbt)
+	{
+		if (tanks != null)
+			tanks.writeToNBT(nbt);
+	}
+
+	@Override
+	public void writeToNBTForItem(NBTTagCompound nbt)
+	{
+		super.writeToNBTForItem(nbt);
+		writeTanksToNBT(nbt);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt)
+	{
+		super.writeToNBT(nbt);
+		writeTanksToNBT(nbt);
+	}
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	public boolean readFromStream_FluidTanks(ByteBuf stream) throws IOException
+	{
+		if (tanks != null)
+			tanks.readFromStream(stream);
+		return true;
+	}
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	public boolean writeToStream_FluidTanks(ByteBuf stream) throws IOException
+	{
+		if (tanks != null)
+			tanks.writeToStream(stream);
+		return false;
 	}
 }
