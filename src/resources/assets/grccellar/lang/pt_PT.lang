@@ -84,7 +84,7 @@ achievement.onTheGo.desc=Constrói um Cantil
 # Tooltips (Number is a percentage)
 # number is a percentage
 grc.cellar.format.waterBag.name=%s (%s)
-grc.cellar.format.waterBag.contents=Contém: %2$dmB/%3$dmB de %1$s
+grc.cellar.format.fluid_container.contents=Contém: %2$dmB/%3$dmB de %1$s
 grc.cellar.format.tipsy_chance=%d%% de Chance de Ficar Bêbado
 grc.cellar.item.booze_bucket.deprecated=Obsoleto, constrói para conseguires um balde melhorado.
 grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETO)

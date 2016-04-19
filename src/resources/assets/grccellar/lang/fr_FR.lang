@@ -84,7 +84,7 @@ achievement.onTheGo.desc=achievement.onTheGo.desc
 # Tooltips (Number is a percentage)
 # number is a percentage
 grc.cellar.format.waterBag.name=grc.cellar.format.waterBag.name
-grc.cellar.format.waterBag.contents=grc.cellar.format.waterBag.contents
+grc.cellar.format.fluid_container.contents=grc.cellar.format.fluid_container.contents
 grc.cellar.format.tipsy_chance=%d%% Chance d'ivresse
 grc.cellar.item.booze_bucket.deprecated=OBSOLETE, fabriquez une amèlioration de seau
 grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETE)

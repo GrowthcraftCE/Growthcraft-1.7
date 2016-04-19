@@ -84,7 +84,7 @@ achievement.onTheGo.desc=achievement.onTheGo.desc
 # Tooltips (Number is a percentage)
 # number is a percentage
 grc.cellar.format.waterBag.name=%s (%s)
-grc.cellar.format.waterBag.contents=Содержит: %1$s (%2$dмВ/%3$dМв)
+grc.cellar.format.fluid_container.contents=Содержит: %1$s (%2$dмВ/%3$dМв)
 grc.cellar.format.tipsy_chance=Шанс опьянения: %d%%
 grc.cellar.item.booze_bucket.deprecated=УСТАРЕЛО, положите в сетку создания, чтобы обновить
 grc.cellar.item.booze_bucket.deprecated_suffix= (УСТАРЕЛО)
