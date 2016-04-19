@@ -35,7 +35,6 @@ import growthcraft.cellar.util.TagFormatterBrewKettle;
 import growthcraft.cellar.util.TagFormatterFermentBarrel;
 import growthcraft.cellar.util.TagFormatterCultureJar;
 import growthcraft.cellar.util.TagFormatterFruitPress;
-import growthcraft.api.core.util.ConstID;
 import growthcraft.api.core.nbt.NBTHelper;
 
 import cpw.mods.fml.common.Optional;
@@ -51,7 +50,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 
 public class CellarDataProvider implements IWailaDataProvider
 {
@@ -142,17 +140,6 @@ public class CellarDataProvider implements IWailaDataProvider
 	private void getFermentBarrelData(TileEntityFermentBarrel fermentBarrel, NBTTagCompound tag)
 	{
 		tag.setTag("item_modifier", NBTHelper.writeItemStackToNBT(fermentBarrel.getStackInSlot(0), new NBTTagCompound()));
-		tag.setInteger("time", fermentBarrel.getTime());
-		tag.setInteger("time_max", fermentBarrel.getTimeMax());
-		final FluidStack fluidStack = fermentBarrel.getFluidStack(0);
-		if (fluidStack != null)
-		{
-			tag.setInteger("booze_id", fluidStack.getFluidID());
-		}
-		else
-		{
-			tag.setInteger("booze_id", ConstID.NO_FLUID);
-		}
 	}
 
 	@Override
