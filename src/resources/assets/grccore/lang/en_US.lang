@@ -18,6 +18,22 @@ item.grc.rope.name=Rope
 item.grccore.salt.name=Salt
 item.grccore.bucketSalt.name=Salt Bucket
 item.grccore.bottleSalt.name=Salt Bottle
+item.grccore.crowbar.black.name=Crowbar (Black)
+item.grccore.crowbar.red.name=Crowbar (Red)
+item.grccore.crowbar.green.name=Crowbar (Green)
+item.grccore.crowbar.brown.name=Crowbar (Brown)
+item.grccore.crowbar.blue.name=Crowbar (Blue)
+item.grccore.crowbar.purple.name=Crowbar (Purple)
+item.grccore.crowbar.cyan.name=Crowbar (Cyan)
+item.grccore.crowbar.light_gray.name=Crowbar (Light Gray)
+item.grccore.crowbar.gray.name=Crowbar (Gray)
+item.grccore.crowbar.pink.name=Crowbar (Pink)
+item.grccore.crowbar.lime.name=Crowbar (Lime)
+item.grccore.crowbar.yellow.name=Crowbar (Yellow)
+item.grccore.crowbar.light_blue.name=Crowbar (Light Blue)
+item.grccore.crowbar.magenta.name=Crowbar (Magenta)
+item.grccore.crowbar.orange.name=Crowbar (Orange)
+item.grccore.crowbar.white.name=Crowbar (White)
 
 # Fluids
 fluid.tile.water=Water
@@ -101,7 +117,7 @@ grc.effect.weighted_random_list.format=%d%% Chance of
 gui.grc.progress.format=%s : %d / %d
 
 # Inventory
-grc.inventory.internal=Inventory
+grc.inventory.internal.name=Inventory
 
 # Tooltips
 grc.tooltip.detailed_information=Hold %s to show detailed Information

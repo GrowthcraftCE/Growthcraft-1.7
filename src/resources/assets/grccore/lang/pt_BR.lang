@@ -18,6 +18,22 @@ item.grc.rope.name=Corda
 item.grccore.salt.name=Sal
 item.grccore.bucketSalt.name=item.grccore.bucketSalt.name
 item.grccore.bottleSalt.name=item.grccore.bottleSalt.name
+item.grccore.crowbar.black.name=item.grccore.crowbar.black.name
+item.grccore.crowbar.red.name=item.grccore.crowbar.red.name
+item.grccore.crowbar.green.name=item.grccore.crowbar.green.name
+item.grccore.crowbar.brown.name=item.grccore.crowbar.brown.name
+item.grccore.crowbar.blue.name=item.grccore.crowbar.blue.name
+item.grccore.crowbar.purple.name=item.grccore.crowbar.purple.name
+item.grccore.crowbar.cyan.name=item.grccore.crowbar.cyan.name
+item.grccore.crowbar.light_gray.name=item.grccore.crowbar.light_gray.name
+item.grccore.crowbar.gray.name=item.grccore.crowbar.gray.name
+item.grccore.crowbar.pink.name=item.grccore.crowbar.pink.name
+item.grccore.crowbar.lime.name=item.grccore.crowbar.lime.name
+item.grccore.crowbar.yellow.name=item.grccore.crowbar.yellow.name
+item.grccore.crowbar.light_blue.name=item.grccore.crowbar.light_blue.name
+item.grccore.crowbar.magenta.name=item.grccore.crowbar.magenta.name
+item.grccore.crowbar.orange.name=item.grccore.crowbar.orange.name
+item.grccore.crowbar.white.name=item.grccore.crowbar.white.name
 
 # Fluids
 fluid.tile.water=Água
@@ -33,23 +49,23 @@ item.bucket.fluid.grccore.SaltWater.name=Balde de Água Salgada
 achievementPage.pageGrowthCraft=Growthcraft
 
 # Colors
-grc.color.White=Branco
-grc.color.Orange=Laranja
-grc.color.Magenta=Magenta
-grc.color.LightBlue=Azul Claro
-grc.color.Yellow=Amarelo
-grc.color.Lime=Lima
-grc.color.Pink=Rosa
-grc.color.Gray=Cinza
-grc.color.LightGray=Cinza Claro
-grc.color.Cyan=Ciano
-grc.color.Purple=Roxo
+grc.color.Black=Preto
 grc.color.Blue=Azul
 grc.color.Brown=Marrom
+grc.color.Cyan=Ciano
+grc.color.Gray=Cinza
 grc.color.Green=Verde
+grc.color.LightBlue=Azul Claro
+grc.color.LightGray=Cinza Claro
+grc.color.Lime=Lima
+grc.color.Magenta=Magenta
+grc.color.Orange=Laranja
+grc.color.Pink=Rosa
+grc.color.Purple=Roxo
 grc.color.Red=Vermelho
-grc.color.Black=Preto
 grc.color.Transparent=Transparente
+grc.color.White=Branco
+grc.color.Yellow=Amarelo
 
 # Formats and Units
 grc.format.value.true=YES
@@ -101,7 +117,7 @@ grc.effect.weighted_random_list.format=%d%% Chance de
 gui.grc.progress.format=gui.grc.progress.format
 
 # Inventory
-grc.inventory.internal=grc.inventory.internal
+grc.inventory.internal.name=grc.inventory.internal.name
 
 # Tooltips
 grc.tooltip.detailed_information=grc.tooltip.detailed_information

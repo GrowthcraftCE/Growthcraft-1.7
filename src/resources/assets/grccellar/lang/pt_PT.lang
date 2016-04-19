@@ -92,8 +92,6 @@ grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETO)
 grc.cellar.brew_kettle.brewing_prefix=Preparação :
 grc.cellar.brew_kettle.itemslot.item=Item : %s
 grc.cellar.brew_kettle.itemslot.residue=Resíduo : %s
-grc.cellar.ferment_barrel.progress.prefix=Progresso :
-grc.cellar.ferment_barrel.progress.format=%d%%
 grc.cellar.ferment_barrel.itemslot.modifier=Modificador : %s
 grc.cellar.ferment_jar.itemslot.yeast=%s
 grc.cellar.fruit_press.itemslot.item=Item : %s
@@ -107,3 +105,9 @@ grc.cellar.fruit_presser.state_prefix=Estado :
 grccellar.waila.option.FruitPressExtras=Extras da Prensa de Fruta
 grccellar.waila.option.BrewKettleExtras=Extras da Caldeira de Preparação
 grccellar.waila.option.FermentBarrelExtras=Extras de Barril de Fermentação
+
+# NEI
+grc.recipe_handler.brew_kettle=grc.recipe_handler.brew_kettle
+grc.recipe_handler.culture_jar=grc.recipe_handler.culture_jar
+grc.recipe_handler.ferment_barrel=grc.recipe_handler.ferment_barrel
+grc.recipe_handler.fruit_press=grc.recipe_handler.fruit_press

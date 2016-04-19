@@ -92,8 +92,6 @@ grc.cellar.item.booze_bucket.deprecated_suffix=grc.cellar.item.booze_bucket.depr
 grc.cellar.brew_kettle.brewing_prefix=grc.cellar.brew_kettle.brewing_prefix
 grc.cellar.brew_kettle.itemslot.item=grc.cellar.brew_kettle.itemslot.item
 grc.cellar.brew_kettle.itemslot.residue=grc.cellar.brew_kettle.itemslot.residue
-grc.cellar.ferment_barrel.progress.prefix=grc.cellar.ferment_barrel.progress.prefix
-grc.cellar.ferment_barrel.progress.format=grc.cellar.ferment_barrel.progress.format
 grc.cellar.ferment_barrel.itemslot.modifier=grc.cellar.ferment_barrel.itemslot.modifier
 grc.cellar.ferment_jar.itemslot.yeast=grc.cellar.ferment_jar.itemslot.yeast
 grc.cellar.fruit_press.itemslot.item=grc.cellar.fruit_press.itemslot.item
@@ -107,3 +105,9 @@ grc.cellar.fruit_presser.state_prefix=grc.cellar.fruit_presser.state_prefix
 grccellar.waila.option.FruitPressExtras=grccellar.waila.option.FruitPressExtras
 grccellar.waila.option.BrewKettleExtras=grccellar.waila.option.BrewKettleExtras
 grccellar.waila.option.FermentBarrelExtras=grccellar.waila.option.FermentBarrelExtras
+
+# NEI
+grc.recipe_handler.brew_kettle=grc.recipe_handler.brew_kettle
+grc.recipe_handler.culture_jar=grc.recipe_handler.culture_jar
+grc.recipe_handler.ferment_barrel=grc.recipe_handler.ferment_barrel
+grc.recipe_handler.fruit_press=grc.recipe_handler.fruit_press

@@ -15,7 +15,6 @@ import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill;
 import growthcraft.core.eventhandler.HarvestDropsEventCore;
-import growthcraft.core.eventhandler.PlayerInteractEventAmazingStick;
 import growthcraft.core.eventhandler.PlayerInteractEventPaddy;
 import growthcraft.core.eventhandler.TextureStitchEventCore;
 import growthcraft.core.init.GrcCoreBlocks;
@@ -23,7 +22,6 @@ import growthcraft.core.init.GrcCoreFluids;
 import growthcraft.core.init.GrcCoreItems;
 import growthcraft.core.init.GrcCoreRecipes;
 import growthcraft.core.integration.bop.BopPlatform;
-import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -141,8 +139,6 @@ public class GrowthCraftCore
 		CommonProxy.instance.initRenders();
 		AchievementPageGrowthcraft.init();
 
-		ItemUtils.init();
-
 		userVinesConfig.addDefault(Blocks.vine);
 		if (BopPlatform.isLoaded())
 		{
@@ -160,10 +156,6 @@ public class GrowthCraftCore
 		MinecraftForge.EVENT_BUS.register(EventHandlerSpecialBucketFill.instance());
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventPaddy());
-		if (config.useAmazingStick)
-		{
-			MinecraftForge.EVENT_BUS.register(new PlayerInteractEventAmazingStick());
-		}
 
 		modules.postInit();
 		if (config.dumpGameRegistry) growthcraft.core.util.GameRegistryDumper.run();

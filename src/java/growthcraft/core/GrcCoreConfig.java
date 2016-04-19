@@ -5,10 +5,6 @@ public class GrcCoreConfig extends ConfigBase
 	@ConfigOption(catergory="Minecraft/Debug", name="Enable Game Registry Dump", desc="Should Growthcraft dump the GameRegistry and FluidRegistry to text files?")
 	public boolean dumpGameRegistry;
 
-	// In case you don't have a wrench you can enable the amazing stick.
-	@ConfigOption(name="Use Amazing Stick", desc="So, I heard you didn't have a wrench, we got you covered")
-	public boolean useAmazingStick;
-
 
 	@ConfigOption(catergory="Salt", name="Bucket Ocean Salt Water", desc="Should we enable the bucket of salt water event handler?")
 	public boolean bucketOfOceanSaltWater;
