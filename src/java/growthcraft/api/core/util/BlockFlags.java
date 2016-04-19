@@ -35,6 +35,7 @@ public final class BlockFlags
 	// Stop the block from re-rendering
 	public static final int SUPRESS_RENDER = 4;
 
+	public static final int NONE = 0;
 	public static final int UPDATE_AND_SYNC = BLOCK_UPDATE | SYNC;
 	public static final int ALL = UPDATE_AND_SYNC | SUPRESS_RENDER;
 
