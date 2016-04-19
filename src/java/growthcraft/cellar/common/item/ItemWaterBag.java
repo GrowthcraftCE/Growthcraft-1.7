@@ -484,7 +484,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 			{
 				list.add(EnumChatFormatting.GRAY +
 					GrcI18n.translate("grc.tooltip.detailed_information",
-						EnumChatFormatting.WHITE + "SHIFT" + EnumChatFormatting.GRAY));
+						EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
 			}
 		}
 	}

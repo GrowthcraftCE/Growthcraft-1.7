@@ -156,7 +156,7 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem
 		{
 			list.add(EnumChatFormatting.GRAY +
 					GrcI18n.translate("grc.tooltip.detailed_information",
-						EnumChatFormatting.WHITE + "SHIFT" + EnumChatFormatting.GRAY));
+						EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
 		}
 	}
 

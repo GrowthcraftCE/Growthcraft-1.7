@@ -31,6 +31,8 @@ import org.lwjgl.input.Keyboard;
 @SideOnly(Side.CLIENT)
 public class GrcCoreState
 {
+	public static final String detailedKey = "SHIFT";
+
 	private GrcCoreState() {}
 
 	@SideOnly(Side.CLIENT)
