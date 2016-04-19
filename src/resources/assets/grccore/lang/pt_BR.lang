@@ -33,23 +33,23 @@ item.bucket.fluid.grccore.SaltWater.name=Balde de Água Salgada
 achievementPage.pageGrowthCraft=Growthcraft
 
 # Colors
-grc.colour.White=Branco
-grc.colour.Orange=Laranja
-grc.colour.Magenta=Magenta
-grc.colour.LightBlue=Azul Claro
-grc.colour.Yellow=Amarelo
-grc.colour.Lime=Lima
-grc.colour.Pink=Rosa
-grc.colour.Gray=Cinza
-grc.colour.LightGray=Cinza Claro
-grc.colour.Cyan=Ciano
-grc.colour.Purple=Roxo
-grc.colour.Blue=Azul
-grc.colour.Brown=Marrom
-grc.colour.Green=Verde
-grc.colour.Red=Vermelho
-grc.colour.Black=Preto
-grc.colour.Transparent=Transparente
+grc.color.White=Branco
+grc.color.Orange=Laranja
+grc.color.Magenta=Magenta
+grc.color.LightBlue=Azul Claro
+grc.color.Yellow=Amarelo
+grc.color.Lime=Lima
+grc.color.Pink=Rosa
+grc.color.Gray=Cinza
+grc.color.LightGray=Cinza Claro
+grc.color.Cyan=Ciano
+grc.color.Purple=Roxo
+grc.color.Blue=Azul
+grc.color.Brown=Marrom
+grc.color.Green=Verde
+grc.color.Red=Vermelho
+grc.color.Black=Preto
+grc.color.Transparent=Transparente
 
 # Formats and Units
 grc.format.value.true=YES

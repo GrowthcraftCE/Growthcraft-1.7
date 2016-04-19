@@ -33,23 +33,23 @@ item.bucket.fluid.grccore.SaltWater.name=item.bucket.fluid.grccore.SaltWater.nam
 achievementPage.pageGrowthCraft=Growthcraft
 
 # Colors
-grc.colour.White=grc.colour.White
-grc.colour.Orange=grc.colour.Orange
-grc.colour.Magenta=grc.colour.Magenta
-grc.colour.LightBlue=grc.colour.LightBlue
-grc.colour.Yellow=grc.colour.Yellow
-grc.colour.Lime=grc.colour.Lime
-grc.colour.Pink=grc.colour.Pink
-grc.colour.Gray=grc.colour.Gray
-grc.colour.LightGray=grc.colour.LightGray
-grc.colour.Cyan=grc.colour.Cyan
-grc.colour.Purple=grc.colour.Purple
-grc.colour.Blue=grc.colour.Blue
-grc.colour.Brown=grc.colour.Brown
-grc.colour.Green=grc.colour.Green
-grc.colour.Red=grc.colour.Red
-grc.colour.Black=grc.colour.Black
-grc.colour.Transparent=grc.colour.Transparent
+grc.color.White=grc.color.White
+grc.color.Orange=grc.color.Orange
+grc.color.Magenta=grc.color.Magenta
+grc.color.LightBlue=grc.color.LightBlue
+grc.color.Yellow=grc.color.Yellow
+grc.color.Lime=grc.color.Lime
+grc.color.Pink=grc.color.Pink
+grc.color.Gray=grc.color.Gray
+grc.color.LightGray=grc.color.LightGray
+grc.color.Cyan=grc.color.Cyan
+grc.color.Purple=grc.color.Purple
+grc.color.Blue=grc.color.Blue
+grc.color.Brown=grc.color.Brown
+grc.color.Green=grc.color.Green
+grc.color.Red=grc.color.Red
+grc.color.Black=grc.color.Black
+grc.color.Transparent=grc.color.Transparent
 
 # Formats and Units
 grc.format.value.true=OUI

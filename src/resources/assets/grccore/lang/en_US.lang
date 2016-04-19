@@ -33,23 +33,23 @@ item.bucket.fluid.grccore.SaltWater.name=Salt Water Bucket
 achievementPage.pageGrowthCraft=Growthcraft
 
 # Colors
-grc.colour.White=White
-grc.colour.Orange=Orange
-grc.colour.Magenta=Magenta
-grc.colour.LightBlue=Light Blue
-grc.colour.Yellow=Yellow
-grc.colour.Lime=Lime
-grc.colour.Pink=Pink
-grc.colour.Gray=Gray
-grc.colour.LightGray=Light Gray
-grc.colour.Cyan=Cyan
-grc.colour.Purple=Purple
-grc.colour.Blue=Blue
-grc.colour.Brown=Brown
-grc.colour.Green=Green
-grc.colour.Red=Red
-grc.colour.Black=Black
-grc.colour.Transparent=Transparent
+grc.color.Black=Black
+grc.color.Blue=Blue
+grc.color.Brown=Brown
+grc.color.Cyan=Cyan
+grc.color.Gray=Gray
+grc.color.Green=Green
+grc.color.LightBlue=Light Blue
+grc.color.LightGray=Light Gray
+grc.color.Lime=Lime
+grc.color.Magenta=Magenta
+grc.color.Orange=Orange
+grc.color.Pink=Pink
+grc.color.Purple=Purple
+grc.color.Red=Red
+grc.color.Transparent=Transparent
+grc.color.White=White
+grc.color.Yellow=Yellow
 
 # Formats and Units
 grc.format.value.true=YES
