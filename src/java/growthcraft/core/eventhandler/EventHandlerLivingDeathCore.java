@@ -21,51 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.bucket;
+package growthcraft.core.eventhandler;
 
-import javax.annotation.Nonnull;
+import java.util.Random;
 
-import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill.IBucketEntry;
-import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.common.item.ItemCrowbar;
 import growthcraft.core.stats.CoreAchievement;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.World;
-import net.minecraftforge.common.BiomeDictionary;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
-public class SaltBucketEntry implements IBucketEntry
+public class EventHandlerLivingDeathCore
 {
-	@Override
-	public ItemStack getItemStack()
-	{
-		return GrowthCraftCore.fluids.saltWater.bucket.asStack();
-	}
+	private Random rng = new Random();
 
-	@Override
-	public boolean matches(@Nonnull World world, @Nonnull MovingObjectPosition pos)
+	@SubscribeEvent
+	public void onLivingEntityDeath(LivingDeathEvent event)
 	{
-		if (world.getBlock(pos.blockX, pos.blockY, pos.blockZ) == Blocks.water)
+		if (event.source instanceof EntityDamageSource)
 		{
-			if (world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
+			final EntityDamageSource source = (EntityDamageSource)event.source;
+			if (source.getEntity() instanceof EntityPlayer)
 			{
-				final BiomeGenBase biome = world.getBiomeGenForCoords(pos.blockX, pos.blockZ);
-				if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.OCEAN))
+				final EntityPlayer player = (EntityPlayer)source.getEntity();
+				final ItemStack heldItem = player.getHeldItem();
+				if (heldItem != null)
 				{
-					return true;
+					if (heldItem.getItem() instanceof ItemCrowbar)
+					{
+						if (event.entityLiving instanceof EntityZombie)
+						{
+							CoreAchievement.HALF_LIFE_CONFIRMED.unlock(player);
+						}
+					}
 				}
 			}
 		}
-		return false;
-	}
-
-	@Override
-	public void commit(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull MovingObjectPosition pos)
-	{
-		world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
-		CoreAchievement.SALTY_SITUATION.unlock(player);
 	}
 }

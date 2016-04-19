@@ -117,7 +117,7 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return super.getUnlocalizedName(stack) + getDye(stack).name;
+		return super.getUnlocalizedName(stack) + "." + getDye(stack).name;
 	}
 
 	@Override

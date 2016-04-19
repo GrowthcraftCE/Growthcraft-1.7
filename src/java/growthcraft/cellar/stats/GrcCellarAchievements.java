@@ -49,7 +49,7 @@ public class GrcCellarAchievements
 
 		for (Achievement a : achievements.values())
 		{
-			AchievementPageGrowthcraft.chievMasterList.add(a);
+			AchievementPageGrowthcraft.masterList.add(a);
 		}
 	}
 

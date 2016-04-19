@@ -121,3 +121,11 @@ grc.inventory.internal.name=Inventory
 
 # Tooltips
 grc.tooltip.detailed_information=Hold %s to show detailed Information
+
+# Achievements
+achievement.trusty_hardware=Trusty Hardware
+achievement.trusty_hardware.desc=Keep out of reach of Endermen.
+achievement.half_life_confirmed=Half-Life Confirmed!
+achievement.half_life_confirmed.desc=Defeat a Zombie with a Crowbar
+achievement.salty_situation=Salty Situation
+achievement.salty_situation.desc=Fill a Bucket with Salt Water

@@ -13,6 +13,8 @@ import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.item.crafting.ShapelessItemComparableRecipe;
 import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
+import growthcraft.core.eventhandler.EventHandlerItemCraftedEventCore;
+import growthcraft.core.eventhandler.EventHandlerLivingDeathCore;
 import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill;
 import growthcraft.core.eventhandler.HarvestDropsEventCore;
 import growthcraft.core.eventhandler.PlayerInteractEventPaddy;
@@ -22,10 +24,12 @@ import growthcraft.core.init.GrcCoreFluids;
 import growthcraft.core.init.GrcCoreItems;
 import growthcraft.core.init.GrcCoreRecipes;
 import growthcraft.core.integration.bop.BopPlatform;
+import growthcraft.core.stats.GrcCoreAchievements;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -61,7 +65,7 @@ public class GrowthCraftCore
 	public static IIcon liquidSmoothTexture;
 	@SideOnly(Side.CLIENT)
 	public static IIcon liquidBlobsTexture;
-
+	public static GrcCoreAchievements achievements;
 	public static CreativeTabs creativeTab;
 
 	public static final GrcCoreBlocks blocks = new GrcCoreBlocks();
@@ -130,6 +134,7 @@ public class GrowthCraftCore
 		MinecraftForge.EVENT_BUS.register(new TextureStitchEventCore());
 
 		modules.register();
+		achievements = new GrcCoreAchievements();
 	}
 
 	@EventHandler
@@ -156,6 +161,8 @@ public class GrowthCraftCore
 		MinecraftForge.EVENT_BUS.register(EventHandlerSpecialBucketFill.instance());
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventPaddy());
+		MinecraftForge.EVENT_BUS.register(new EventHandlerLivingDeathCore());
+		FMLCommonHandler.instance().bus().register(new EventHandlerItemCraftedEventCore());
 
 		modules.postInit();
 		if (config.dumpGameRegistry) growthcraft.core.util.GameRegistryDumper.run();

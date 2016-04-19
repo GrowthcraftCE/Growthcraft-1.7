@@ -21,51 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.bucket;
+package growthcraft.core.stats;
 
-import javax.annotation.Nonnull;
-
-import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill.IBucketEntry;
+import growthcraft.api.core.stats.IAchievement;
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.stats.CoreAchievement;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.World;
-import net.minecraftforge.common.BiomeDictionary;
 
-public class SaltBucketEntry implements IBucketEntry
+public enum CoreAchievement implements IAchievement
 {
+	TRUSTY_HARDWARE,
+	HALF_LIFE_CONFIRMED,
+	SALTY_SITUATION;
+
 	@Override
-	public ItemStack getItemStack()
+	public void unlock(EntityPlayer player)
 	{
-		return GrowthCraftCore.fluids.saltWater.bucket.asStack();
+		GrowthCraftCore.achievements.unlock(this, player);
 	}
 
 	@Override
-	public boolean matches(@Nonnull World world, @Nonnull MovingObjectPosition pos)
+	public void addStat(EntityPlayer player, int n)
 	{
-		if (world.getBlock(pos.blockX, pos.blockY, pos.blockZ) == Blocks.water)
-		{
-			if (world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
-			{
-				final BiomeGenBase biome = world.getBiomeGenForCoords(pos.blockX, pos.blockZ);
-				if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.OCEAN))
-				{
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public void commit(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull MovingObjectPosition pos)
-	{
-		world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
-		CoreAchievement.SALTY_SITUATION.unlock(player);
+		GrowthCraftCore.achievements.addStat(this, player, n);
 	}
 }

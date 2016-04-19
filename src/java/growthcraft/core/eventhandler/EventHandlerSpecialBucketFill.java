@@ -29,6 +29,7 @@ import javax.annotation.Nonnull;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -43,7 +44,7 @@ public class EventHandlerSpecialBucketFill
 	{
 		ItemStack getItemStack();
 		boolean matches(@Nonnull World world, @Nonnull MovingObjectPosition pos);
-		void commit(@Nonnull World world, @Nonnull MovingObjectPosition pos);
+		void commit(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull MovingObjectPosition pos);
 	}
 
 	private static EventHandlerSpecialBucketFill INSTANCE = new EventHandlerSpecialBucketFill();
@@ -59,13 +60,13 @@ public class EventHandlerSpecialBucketFill
 		buckets.add(entry);
 	}
 
-	private ItemStack fillCustomBucket(@Nonnull World world, @Nonnull MovingObjectPosition pos)
+	private ItemStack fillCustomBucket(FillBucketEvent event)
 	{
 		for (IBucketEntry entry : buckets)
 		{
-			if (entry.matches(world, pos))
+			if (entry.matches(event.world, event.target))
 			{
-				entry.commit(world, pos);
+				entry.commit(event.entityPlayer, event.world, event.target);
 				return entry.getItemStack();
 			}
 		}
@@ -75,7 +76,7 @@ public class EventHandlerSpecialBucketFill
 	@SubscribeEvent
 	public void onBucketFill(FillBucketEvent event)
 	{
-		final ItemStack result = fillCustomBucket(event.world, event.target);
+		final ItemStack result = fillCustomBucket(event);
 
 		if (result == null) return;
 

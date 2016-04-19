@@ -23,6 +23,7 @@
  */
 package growthcraft.core.init;
 
+import growthcraft.api.core.item.EnumDye;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
 
@@ -30,6 +31,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class GrcCoreRecipes extends GrcModuleBase
 {
@@ -47,11 +49,26 @@ public class GrcCoreRecipes extends GrcModuleBase
 			Items.bucket,
 			saltStack, saltStack, saltStack, saltStack, saltStack, saltStack);
 
+		for (EnumDye dye : EnumDye.VALUES)
+		{
+			GameRegistry.addRecipe(new ShapedOreRecipe(
+				GrowthCraftCore.items.crowbar.asStack(1, dye.meta),
+				new Object[] {
+					" II",
+					"DI ",
+					"ID ",
+					'I', "ingotIron",
+					'D', dye.getOreName()
+				}
+			));
+		}
+
 		// BUG https://github.com/GrowthcraftCE/Growthcraft-1.7/issues/306
 		//GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBottleItemStack(), GrowthCraftCore.items.saltBottle.asStack(), 0.1F);
 		//GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBucketItemStack(), GrowthCraftCore.items.saltBucket.asStack(), 0.3F);
 
 		GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBottleItemStack(), GrowthCraftCore.items.salt.asStack(2), 0.1F);
 		GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBucketItemStack(), GrowthCraftCore.items.salt.asStack(6), 0.3F);
+
 	}
 }
