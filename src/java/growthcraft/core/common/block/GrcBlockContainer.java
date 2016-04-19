@@ -354,7 +354,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		}
 	}
 
-	protected boolean dropsTileStack(World world, int x, int y, int z, int metadata, int fortune)
+	protected boolean shouldDropTileStack(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		return false;
 	}
@@ -392,7 +392,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
 	{
 		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		if (dropsTileStack(world, x, y, z, metadata, fortune))
+		if (shouldDropTileStack(world, x, y, z, metadata, fortune))
 		{
 			getTileItemStackDrops(ret, world, x, y, z, metadata, fortune);
 		}
