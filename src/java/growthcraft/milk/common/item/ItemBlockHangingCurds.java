@@ -43,7 +43,7 @@ public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock
 	public ItemBlockHangingCurds(Block block)
 	{
 		super(block);
-		this.maxStackSize = 1;
+		setHasSubtypes(true);
 	}
 
 	private NBTTagCompound getTileTagCompoundABS(ItemStack stack)
