@@ -96,6 +96,15 @@ public class FluidTest
 		}
 	}
 
+	public static boolean fluidMatches(@Nullable FluidStack expected, @Nullable Fluid other)
+	{
+		if (expected == null)
+		{
+			return other == null;
+		}
+		return expected.getFluid() == other;
+	}
+
 	public static boolean fluidMatches(@Nullable FluidStack expected, @Nullable FluidStack other)
 	{
 		return areStacksEqual(expected, other);
