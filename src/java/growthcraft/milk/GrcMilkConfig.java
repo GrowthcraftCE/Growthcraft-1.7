@@ -88,6 +88,8 @@ public class GrcMilkConfig extends ConfigBase
 	@ConfigOption(catergory="Cheese", name="Item per Block Slice", desc="How many items are present in a cheese block slice?")
 	public int cheeseItemPerBlockSlice = 8;
 
+	@ConfigOption(catergory="Cheese", name="Ricotta Bowl Count", desc="How many bowls are used in the ricotta recipe?")
+	public int ricottaBowlCount = 4;
 
 	@ConfigOption(catergory="Thistle", name="Spread Chance", desc="How quickly does thistle spread? [Higher -> Slower]")
 	public int thistleSpreadChance = 20;

@@ -23,7 +23,8 @@
  */
 package growthcraft.milk.init;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import growthcraft.api.core.item.CommonItemStackComparator;
 import growthcraft.api.core.item.IItemStackComparator;
@@ -41,6 +42,7 @@ import growthcraft.milk.common.block.BlockThistle;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
+import growthcraft.milk.GrowthCraftMilk;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
@@ -114,9 +116,15 @@ public class GrcMilkBlocks extends GrcModuleBase
 			OreDictionary.registerOre("blockCheese", type.asBlockItemStack());
 		}
 
+		final int ricottaBowlCount = GrowthCraftMilk.getConfig().ricottaBowlCount;
+		final List<ItemStack> ricottaBowlRecipe = new ArrayList<ItemStack>();
+		ricottaBowlRecipe.add(EnumCheeseType.RICOTTA.asCurdItemStack());
+		for (int i = 0; i < ricottaBowlCount; ++i)
+		{
+			ricottaBowlRecipe.add(new ItemStack(Items.bowl, 1));
+		}
 		GameRegistry.addRecipe(new ShapelessItemComparableRecipe(new DriedCurdComparator(),
-			EnumCheeseType.RICOTTA.asStack(),
-			Arrays.asList(new ItemStack(Items.bowl), EnumCheeseType.RICOTTA.asCurdItemStack())
+			EnumCheeseType.RICOTTA.asStack(ricottaBowlCount), ricottaBowlRecipe
 		));
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(cheeseVat.asStack(),
