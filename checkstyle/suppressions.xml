@@ -6,9 +6,10 @@
 
 <suppressions>
   <!-- Ignore 3rd party apis, its the wild west there -->
-  <suppress files="[\\/]api[\\/]invtweaks" checks="."/>
-  <suppress files="[\\/]api[\\/]thaumcraft" checks="."/>
+  <suppress files="[\\/]api[\\/]buildcraft" checks="."/>
   <suppress files="[\\/]api[\\/]ForestryAPI" checks="."/>
-  <suppress files="[\\/]api[\\/]waila" checks="."/>
+  <suppress files="[\\/]api[\\/]invtweaks" checks="."/>
   <suppress files="[\\/]api[\\/]powercrystals[\\/]minefactoryreloaded" checks="."/>
+  <suppress files="[\\/]api[\\/]thaumcraft" checks="."/>
+  <suppress files="[\\/]api[\\/]waila" checks="."/>
 </suppressions>

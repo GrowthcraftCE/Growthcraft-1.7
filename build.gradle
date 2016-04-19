@@ -44,10 +44,11 @@ class StructExtApi {
 ext.thaumcraftApi = "api/thaumcraft/api"
 
 StructExtApi[] apis = [
+    new StructExtApi(name: "buildcraft", api: "api/buildcraft/api", exclusion: "**/buildcraft/api/meh"),
+    new StructExtApi(name: "forestry", api: "api/ForestryAPI/forestry/api", exclusion: "**/forestry/api/**", root: ext.forestryApiRoot),
     new StructExtApi(name: "invtweaks", api: "api/invtweaks/api", exclusion: "**/invtweaks/api/**"),
     new StructExtApi(name: "mfr", api: "api/powercrystals/minefactoryreloaded/api", exclusion: "**/powercrystals/minefactoryreloaded/api/**"),
     new StructExtApi(name: "thaumcraft", api: ext.thaumcraftApi, exclusion: "**/thaumcraft/api/**"),
-    new StructExtApi(name: "forestry", api: "api/ForestryAPI/forestry/api", exclusion: "**/forestry/api/**", root: ext.forestryApiRoot),
     new StructExtApi(name: "waila", api: "api/waila/api", exclusion: "**/waila/api/**")
 ]
 
