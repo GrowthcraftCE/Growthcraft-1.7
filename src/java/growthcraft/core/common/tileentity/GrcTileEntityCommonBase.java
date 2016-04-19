@@ -23,13 +23,46 @@
  */
 package growthcraft.core.common.tileentity;
 
-import growthcraft.core.common.tileentity.device.IFluidTanks;
-
-import net.minecraftforge.fluids.IFluidHandler;
-
-/**
- * Extend this base class if you only need a device with Fluid Tanks
- */
-public abstract class GrcTileEntityFluidsDevice extends GrcTileEntityFullBase implements IFluidHandler, IFluidTanks
+public abstract class GrcTileEntityCommonBase extends GrcTileEntityBase
 {
+	protected boolean needInventoryUpdate;
+
+	protected void updateDevice()
+	{
+	}
+
+	// Call this when you modify a fluid tank outside of its usual methods
+	protected void markForFluidUpdate()
+	{
+		//
+	}
+
+	// Call this when you have modified the inventory, or you're not sure what
+	// kind of update you require
+	public void markForInventoryUpdate()
+	{
+		needInventoryUpdate = true;
+	}
+
+	protected void checkUpdateFlags()
+	{
+		if (needInventoryUpdate)
+		{
+			needInventoryUpdate = false;
+			markDirty();
+		}
+	}
+
+	@Override
+	public void updateEntity()
+	{
+		super.updateEntity();
+
+		checkUpdateFlags();
+
+		if (!worldObj.isRemote)
+		{
+			updateDevice();
+		}
+	}
 }
