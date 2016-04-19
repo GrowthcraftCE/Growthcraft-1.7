@@ -7,6 +7,7 @@ import growthcraft.api.cellar.fermenting.IFermentationRecipe;
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.fluids.FluidUtils;
+import growthcraft.api.core.nbt.INBTItemSerializable;
 import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -26,7 +27,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityFermentBarrel extends TileEntityCellarDevice implements ITileProgressiveDevice
+public class TileEntityFermentBarrel extends TileEntityCellarDevice implements ITileProgressiveDevice, INBTItemSerializable
 {
 	public static enum FermentBarrelDataID
 	{
@@ -242,18 +243,42 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		}
 	}
 
+	private void readFermentTimeFromNBT(NBTTagCompound nbt)
+	{
+		this.time = NBTHelper.getInteger(nbt, "time");
+	}
+
+	@Override
+	public void readFromNBTForItem(NBTTagCompound nbt)
+	{
+		super.readFromNBTForItem(nbt);
+		readFermentTimeFromNBT(nbt);
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		this.time = NBTHelper.getInteger(nbt, "time");
+		readFermentTimeFromNBT(nbt);
+	}
+
+	private void writeFermentTimeToNBT(NBTTagCompound nbt)
+	{
+		nbt.setInteger("time", time);
+	}
+
+	@Override
+	public void writeToNBTForItem(NBTTagCompound nbt)
+	{
+		super.writeToNBTForItem(nbt);
+		writeFermentTimeToNBT(nbt);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setInteger("time", time);
+		writeFermentTimeToNBT(nbt);
 	}
 
 	@Override
