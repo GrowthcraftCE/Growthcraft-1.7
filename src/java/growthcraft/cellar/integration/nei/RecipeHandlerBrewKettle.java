@@ -36,6 +36,7 @@ import growthcraft.core.integration.nei.TemplateRenderHelper;
 
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import codechicken.lib.gui.GuiDraw;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -127,6 +128,7 @@ public class RecipeHandlerBrewKettle extends TemplateRecipeHandler
 		{
 			drawOutputFluidStacks(crecipe);
 		}
+		GuiDraw.changeTexture(getGuiTexture());
 		drawProgressBar(93, 19, 176, 0, 9, 28, 40, TemplateRenderHelper.PROGRESS_DOWN);
 	}
 }

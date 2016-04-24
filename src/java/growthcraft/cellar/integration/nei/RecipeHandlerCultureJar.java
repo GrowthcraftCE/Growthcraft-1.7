@@ -34,6 +34,7 @@ import growthcraft.core.integration.nei.TemplateRenderHelper;
 
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import codechicken.lib.gui.GuiDraw;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -113,5 +114,6 @@ public class RecipeHandlerCultureJar extends TemplateRecipeHandler
 		{
 			drawOutputFluidStack(crecipe);
 		}
+		GuiDraw.changeTexture(getGuiTexture());
 	}
 }

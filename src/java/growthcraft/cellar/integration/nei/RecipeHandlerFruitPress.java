@@ -35,12 +35,12 @@ import growthcraft.core.integration.nei.TemplateRenderHelper;
 
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import codechicken.lib.gui.GuiDraw;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
-
 public class RecipeHandlerFruitPress extends TemplateRecipeHandler
 {
 	public class CachedPressingRecipe extends CachedRecipe
@@ -111,7 +111,7 @@ public class RecipeHandlerFruitPress extends TemplateRecipeHandler
 		if (recipe instanceof CachedPressingRecipe)
 		{
 			final PressingRecipe pressingRecipe = ((CachedPressingRecipe)recipe).pressingRecipe;
-			TemplateRenderHelper.drawFluidStack(80, 11, 16, 52, pressingRecipe.getFluidStack(), GrowthCraftCellar.getConfig().fruitPressMaxCap);
+			TemplateRenderHelper.drawFluidStack(84, 5, 16, 52, pressingRecipe.getFluidStack(), GrowthCraftCellar.getConfig().fruitPressMaxCap);
 		}
 	}
 
@@ -123,6 +123,7 @@ public class RecipeHandlerFruitPress extends TemplateRecipeHandler
 		{
 			drawOutputFluidStack(crecipe);
 		}
-		drawProgressBar(58, 8, 176, 0, 25, 16, 40, TemplateRenderHelper.PROGRESS_RIGHT);
+		GuiDraw.changeTexture(getGuiTexture());
+		drawProgressBar(58, 24, 176, 0, 25, 16, 40, TemplateRenderHelper.PROGRESS_RIGHT);
 	}
 }
