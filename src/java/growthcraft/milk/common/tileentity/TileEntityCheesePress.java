@@ -343,6 +343,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	public boolean readFromStream_CheesePress(ByteBuf stream) throws IOException
 	{
 		this.screwState = stream.readInt();
+		this.time = stream.readInt();
 		return false;
 	}
 
@@ -350,6 +351,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	public boolean writeToStream_CheesePress(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(screwState);
+		stream.writeInt(time);
 		return false;
 	}
 }
