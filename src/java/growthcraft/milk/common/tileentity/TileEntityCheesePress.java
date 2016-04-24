@@ -132,6 +132,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	@Override
 	public void onInventoryChanged(IInventory inv, int index)
 	{
+		super.onInventoryChanged(inv, index);
 		markForRecipeCheck();
 	}
 
@@ -160,9 +161,15 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	}
 
 	@Override
+	public boolean canInsertItem(int index, ItemStack stack, int side)
+	{
+		return isUnpressed() && index == 0;
+	}
+
+	@Override
 	public boolean canExtractItem(int index, ItemStack stack, int side)
 	{
-		return true;
+		return isUnpressed() && index == 0;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -249,17 +256,28 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 		}
 	}
 
-	public void toggle()
+	/**
+	 * Toggles the cheese press state
+	 *
+	 * @param state - true: the press should be active; false: it should inactive
+	 * @return did the state change?
+	 */
+	public boolean toggle(boolean state)
 	{
-		if (screwState == 0)
-		{
-			this.screwState = 1;
-		}
-		else
-		{
-			this.screwState = 0;
-		}
+		final int oldScrewState = screwState;
+		this.screwState = state ? 1 : 0;
 		markForBlockUpdate();
+		return oldScrewState != screwState;
+	}
+
+	/**
+	 * Flip the current press state
+	 *
+	 * @return did the state change? (most likely it will)
+	 */
+	public boolean toggle()
+	{
+		return toggle(screwState == 0);
 	}
 
 	@Override
@@ -267,7 +285,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	{
 		if (ItemTest.isValid(stack))
 		{
-			// Items cannot be added if the slot already has an item AND
+			// Items cannot be added if the user slot already has an item AND
 			// the press is active
 			if (invSlot.isEmpty() && isUnpressed())
 			{

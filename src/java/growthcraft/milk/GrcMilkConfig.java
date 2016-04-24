@@ -79,6 +79,13 @@ public class GrcMilkConfig extends ConfigBase
 	public int cheeseVatWheyToRicottaWheyAmount = 1000;
 
 
+	@ConfigOption(catergory="Device/Cheese Press", name="Redstone Operated", desc="Can the press operate via redstone?")
+	public boolean cheesePressRedstoneOperated = true;
+
+	@ConfigOption(catergory="Device/Cheese Press", name="Hand Operated", desc="Can the press operate via user interaction?")
+	public boolean cheesePressHandOperated = true;
+
+
 	@ConfigOption(catergory="Cheese", name="Aging Time", desc="How long does it take for cheese to age?")
 	public int cheeseMaxAge = 1200;
 
