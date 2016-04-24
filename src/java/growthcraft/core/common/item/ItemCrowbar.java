@@ -44,6 +44,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -146,6 +147,6 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int meta)
 	{
-		return icons[meta];
+		return icons[MathHelper.clamp_int(meta, 0, icons.length - 1)];
 	}
 }
