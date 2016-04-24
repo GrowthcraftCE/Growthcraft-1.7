@@ -36,6 +36,9 @@ public class GrcCellarConfig extends ConfigBase
 	@ConfigOption(catergory="Fermenting Barrel", name="Fluid Capacity", desc="How much fluid can a Fermenting Barrel hold? (in mB (milli buckets))")
 	public int fermentBarrelMaxCap = 3000;
 
+	@ConfigOption(catergory="Fermenting Barrel", name="Use Cached Recipes?", desc="May increase performance, but causes issues with some fluid transport blocks.")
+	public boolean fermentBarrelUseCachedRecipe = true;
+
 
 	@ConfigOption(catergory="Fermenting Jar", name="Generation Time", desc="How long does it take for a ferment jar to produce 1 yeast? (number of ticks)")
 	public int cultureJarTimeMax = 1200;
