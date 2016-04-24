@@ -130,4 +130,21 @@ public class BlockCheeseVat extends GrcBlockContainer
 	{
 		return true;
 	}
+
+	@Override
+	public boolean hasComparatorInputOverride()
+	{
+		return true;
+	}
+
+	@Override
+	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
+	{
+		final TileEntityCheeseVat te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			return te.calcRedstone();
+		}
+		return 0;
+	}
 }

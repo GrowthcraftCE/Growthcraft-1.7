@@ -697,4 +697,9 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		}
 		return false;
 	}
+
+	public int calcRedstone()
+	{
+		return getFluidAmountScaled(15, FluidTankType.PRIMARY.id);
+	}
 }
