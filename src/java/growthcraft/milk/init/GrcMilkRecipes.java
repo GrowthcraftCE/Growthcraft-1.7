@@ -96,7 +96,7 @@ public class GrcMilkRecipes extends GrcModuleBase
 
 	private void registerCheeseVatRecipes()
 	{
-		final String[] saltOres = { "foodSalt", "materialSalt" };
+		final String[] saltOres = { "foodSalt", "materialSalt", "dustSalt" };
 
 		for (String saltOre : saltOres)
 		{
