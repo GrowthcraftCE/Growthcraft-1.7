@@ -49,8 +49,11 @@ public class EventHandlerOnBabyCowDeath
 				if (RandomUtils.thresh(rng, GrowthCraftMilk.getConfig().stomachDropRate))
 				{
 					final int count = RandomUtils.range(rng, GrowthCraftMilk.getConfig().stomachMinDropped, GrowthCraftMilk.getConfig().stomachMaxDropped);
-					final ItemStack stack = GrowthCraftMilk.items.stomach.asStack(count);
-					ItemUtils.spawnItemStackAtEntity(stack, event.entityLiving, rng);
+					if (count > 0)
+					{
+						final ItemStack stack = GrowthCraftMilk.items.stomach.asStack(count);
+						ItemUtils.spawnItemStackAtEntity(stack, event.entityLiving, rng);
+					}
 				}
 			}
 		}
