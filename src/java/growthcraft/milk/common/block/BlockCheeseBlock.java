@@ -140,6 +140,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 				if (cheese.hasBlock())
 				{
 					final ItemStack stack = new ItemStack(item, 1, cheese.meta);
+					// This causes the NBT data to refresh
 					ib.getTileTagCompound(stack);
 					list.add(stack);
 				}
