@@ -79,7 +79,7 @@ public class CheeseVatRecipe implements ICheeseVatRecipe
 	public boolean isMatchingRecipe(@Nonnull List<FluidStack> fluids, @Nonnull List<ItemStack> items)
 	{
 		if (!FluidTest.isValidAndExpected(inputFluids, fluids)) return false;
-		if (!ItemTest.isValidAndExpected(inputItems, items)) return false;
+		if (!ItemTest.containsExpectedItemsUnordered(inputItems, items)) return false;
 		return true;
 	}
 

@@ -333,14 +333,18 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		{
 			final List<IMultiItemStacks> inputItems = recipe.getInputItemStacks();
 			final List<IMultiFluidStacks> inputFluids = recipe.getInputFluidStacks();
+			// locate all the items in the inventory
 			final int[] invSlots = InventoryProcessor.instance().findItemSlots(this, inputItems);
-			if (InventoryProcessor.instance().checkSlots(this, inputItems, invSlots))
+			if (InventoryProcessor.instance().slotsAreValid(this, invSlots) &&
+				InventoryProcessor.instance().checkSlots(this, inputItems, invSlots))
 			{
 				if (FluidTest.hasEnoughAndExpected(inputFluids, fluids))
 				{
 					if (!checkOnly)
 					{
+						// consume items
 						InventoryProcessor.instance().consumeItemsInSlots(this, inputItems, invSlots);
+						// consume all fluids
 						for (int fluidIndex = 0; fluidIndex < fluids.size(); ++fluidIndex)
 						{
 							final FluidStack fluidStack = fluids.get(fluidIndex);
@@ -350,6 +354,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 								drainFluidTank(t.id, fluidStack.amount, true);
 							}
 						}
+						// spawn output item stacks
 						for (ItemStack stack : recipe.getOutputItemStacks())
 						{
 							if (stack != null)
@@ -357,6 +362,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 								ItemUtils.spawnItemStackAtTile(stack.copy(), this, worldObj.rand);
 							}
 						}
+						// fill output fluid tanks
 						int tankIndex = 0;
 						for (FluidStack stack : recipe.getOutputFluidStacks())
 						{
@@ -368,7 +374,9 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 							// Currently the cheese vat does not support more than 1 fluid output.
 							break;
 						}
+						// mark vat for block update
 						markForBlockUpdate();
+						// post event to bus
 						GrowthCraftMilk.MILK_BUS.post(new EventCheeseVatMadeCheeseFluid(this));
 					}
 					return true;

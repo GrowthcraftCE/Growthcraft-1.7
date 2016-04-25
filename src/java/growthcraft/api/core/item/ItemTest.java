@@ -127,4 +127,38 @@ public class ItemTest
 		}
 		return true;
 	}
+
+	@SuppressWarnings({"rawtypes"})
+	public static boolean containsExpectedItemsUnordered(@Nonnull List expectedItems, @Nonnull List<ItemStack> givenItems)
+	{
+		final boolean[] usedSlots = new boolean[givenItems.size()];
+		for (Object expectedStack : expectedItems)
+		{
+			boolean found = false;
+			for (int index = 0; index < usedSlots.length; ++index)
+			{
+				if (usedSlots[index]) continue;
+				if (expectedStack instanceof IMultiItemStacks)
+				{
+					found = itemMatches((IMultiItemStacks)expectedStack, givenItems.get(index));
+				}
+				else if (expectedStack instanceof ItemStack)
+				{
+					found = itemMatches((ItemStack)expectedStack, givenItems.get(index));
+				}
+				else if (expectedStack == null)
+				{
+					found = givenItems.get(index) == null;
+				}
+
+				if (found)
+				{
+					usedSlots[index] = true;
+					break;
+				}
+			}
+			if (!found) return false;
+		}
+		return true;
+	}
 }
