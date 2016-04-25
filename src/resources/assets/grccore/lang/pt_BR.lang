@@ -121,3 +121,11 @@ grc.inventory.internal.name=grc.inventory.internal.name
 
 # Tooltips
 grc.tooltip.detailed_information=grc.tooltip.detailed_information
+
+# Achievements
+achievement.trusty_hardware=achievement.trusty_hardware
+achievement.trusty_hardware.desc=achievement.trusty_hardware.desc
+achievement.half_life_confirmed=achievement.half_life_confirmed
+achievement.half_life_confirmed.desc=achievement.half_life_confirmed.desc
+achievement.salty_situation=achievement.salty_situation
+achievement.salty_situation.desc=achievement.salty_situation.desc

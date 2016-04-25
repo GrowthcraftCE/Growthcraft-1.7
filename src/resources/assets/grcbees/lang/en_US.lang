@@ -143,8 +143,7 @@ container.grc.beeBox=Bee Box
 
 # Fluids
 fluid.grc.honey=Honey
-fluid.grc.honeyMead=Mead Must
-fluid.grc.honeyMead0=Mead
+fluid.grc.honeyMead0=Mead Must
 fluid.grc.honeyMead1=Mead
 fluid.grc.honeyMead2=Mead
 fluid.grc.honeyMead3=Mead
@@ -157,8 +156,7 @@ item.grc.BottleFluidHoney.name=Honey
 
 # Fluid Buckets
 item.bucket.fluid.grc.honey.name=Honey Bucket
-item.bucket.fluid.grc.honeyMead.name=Mead Must Bucket
-item.bucket.fluid.grc.honeyMead0.name=Mead Bucket
+item.bucket.fluid.grc.honeyMead0.name=Mead Must Bucket
 item.bucket.fluid.grc.honeyMead1.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead2.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead3.name=Mead Bucket
@@ -168,8 +166,7 @@ item.bucket.fluid.grc.honeyMead6.name=Mead Bucket
 
 # Fluid Blocks
 tile.grc.BlockFluidHoney.name=Honey
-tile.fluid.grc.honeyMead.name=Mead Must
-tile.fluid.grc.honeyMead0.name=Mead
+tile.fluid.grc.honeyMead0.name=Mead Must
 tile.fluid.grc.honeyMead1.name=Mead
 tile.fluid.grc.honeyMead2.name=Mead
 tile.fluid.grc.honeyMead3.name=Mead

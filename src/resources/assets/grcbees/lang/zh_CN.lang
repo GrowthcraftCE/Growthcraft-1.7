@@ -143,7 +143,6 @@ container.grc.beeBox=蜂箱
 
 # Fluids
 fluid.grc.honey=蜂蜜
-fluid.grc.honeyMead=蜜酒
 fluid.grc.honeyMead0=蜜酒
 fluid.grc.honeyMead1=蜜酒
 fluid.grc.honeyMead2=蜜酒
@@ -157,7 +156,6 @@ item.grc.BottleFluidHoney.name=蜂蜜
 
 # Fluid Buckets
 item.bucket.fluid.grc.honey.name=蜂蜜桶
-item.bucket.fluid.grc.honeyMead.name=蜜酒桶
 item.bucket.fluid.grc.honeyMead0.name=蜜酒桶
 item.bucket.fluid.grc.honeyMead1.name=蜜酒桶
 item.bucket.fluid.grc.honeyMead2.name=蜜酒桶
@@ -168,7 +166,6 @@ item.bucket.fluid.grc.honeyMead6.name=蜜酒桶
 
 # Fluid Blocks
 tile.grc.BlockFluidHoney.name=蜂蜜
-tile.fluid.grc.honeyMead.name=蜜酒
 tile.fluid.grc.honeyMead0.name=蜜酒
 tile.fluid.grc.honeyMead1.name=蜜酒
 tile.fluid.grc.honeyMead2.name=蜜酒

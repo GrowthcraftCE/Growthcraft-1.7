@@ -143,7 +143,6 @@ container.grc.beeBox=Apiário
 
 # Fluids
 fluid.grc.honey=fluid.grc.honey
-fluid.grc.honeyMead=Hidromel
 fluid.grc.honeyMead0=Hidromel
 fluid.grc.honeyMead1=Hidromel
 fluid.grc.honeyMead2=Hidromel
@@ -157,7 +156,6 @@ item.grc.BottleFluidHoney.name=item.grc.BottleFluidHoney.name
 
 # Fluid Buckets
 item.bucket.fluid.grc.honey.name=item.bucket.fluid.grc.honey.name
-item.bucket.fluid.grc.honeyMead.name=Balde de Hidromel
 item.bucket.fluid.grc.honeyMead0.name=Balde de Hidromel
 item.bucket.fluid.grc.honeyMead1.name=Balde de Hidromel
 item.bucket.fluid.grc.honeyMead2.name=Balde de Hidromel
@@ -168,7 +166,6 @@ item.bucket.fluid.grc.honeyMead6.name=Balde de Hidromel
 
 # Fluid Blocks
 tile.grc.BlockFluidHoney.name=tile.grc.BlockFluidHoney.name
-tile.fluid.grc.honeyMead.name=Hidromel
 tile.fluid.grc.honeyMead0.name=Hidromel
 tile.fluid.grc.honeyMead1.name=Hidromel
 tile.fluid.grc.honeyMead2.name=Hidromel

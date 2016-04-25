@@ -7,7 +7,6 @@ item.grc.appleSeeds.name=Apple Core
 
 # Booze
 ## Fluids
-fluid.grc.appleCider=Apple Juice
 fluid.grc.appleCider0=Apple Cider
 fluid.grc.appleCider1=Apple Cider
 fluid.grc.appleCider2=Apple Cider
@@ -17,8 +16,7 @@ fluid.grc.appleCider5=Apple Cider
 fluid.grc.appleCider6=Apple Cider
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider.name=Apple Juice Bucket
-item.bucket.fluid.grc.appleCider0.name=Apple Cider Bucket
+item.bucket.fluid.grc.appleCider0.name=Apple Juice Bucket
 item.bucket.fluid.grc.appleCider1.name=Apple Cider Bucket
 item.bucket.fluid.grc.appleCider2.name=Apple Cider Bucket
 item.bucket.fluid.grc.appleCider3.name=Apple Cider Bucket
@@ -27,8 +25,7 @@ item.bucket.fluid.grc.appleCider5.name=Apple Cider Bucket
 item.bucket.fluid.grc.appleCider6.name=Apple Cider Bucket
 
 ## Fluid Blocks
-tile.fluid.grc.appleCider.name=Apple Juice
-tile.fluid.grc.appleCider0.name=Apple Cider
+tile.fluid.grc.appleCider0.name=Apple Juice
 tile.fluid.grc.appleCider1.name=Apple Cider
 tile.fluid.grc.appleCider2.name=Apple Cider
 tile.fluid.grc.appleCider3.name=Apple Cider

@@ -7,7 +7,6 @@ item.grc.appleSeeds.name=苹果核
 
 # Booze
 ## Fluids
-fluid.grc.appleCider=苹果西打酒
 fluid.grc.appleCider0=苹果西打酒
 fluid.grc.appleCider1=苹果西打酒
 fluid.grc.appleCider2=苹果西打酒
@@ -17,7 +16,6 @@ fluid.grc.appleCider5=苹果西打酒
 fluid.grc.appleCider6=苹果西打酒
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider.name=苹果西打酒桶
 item.bucket.fluid.grc.appleCider0.name=苹果西打酒桶
 item.bucket.fluid.grc.appleCider1.name=苹果西打酒桶
 item.bucket.fluid.grc.appleCider2.name=苹果西打酒桶
@@ -27,7 +25,6 @@ item.bucket.fluid.grc.appleCider5.name=苹果西打酒桶
 item.bucket.fluid.grc.appleCider6.name=苹果西打酒桶
 
 ## Fluid Blocks
-tile.fluid.grc.appleCider.name=苹果西打酒
 tile.fluid.grc.appleCider0.name=苹果西打酒
 tile.fluid.grc.appleCider1.name=苹果西打酒
 tile.fluid.grc.appleCider2.name=苹果西打酒

@@ -6,7 +6,6 @@ item.grc.hops.name=Lúpulo
 item.grc.hopSeeds.name=Sementes de Lúpulo
 
 # Fluids
-fluid.grc.hopAle=Cerveja (Tipo Ale)
 fluid.grc.hopAle0=Cerveja (Tipo Ale)
 fluid.grc.hopAle1=Cerveja (Tipo Ale)
 fluid.grc.hopAle2=Cerveja (Tipo Ale)
@@ -17,7 +16,6 @@ fluid.grc.hopAle6=fluid.grc.hopAle6
 fluid.grc.hopAle7=fluid.grc.hopAle7
 fluid.grc.hopAle8=fluid.grc.hopAle8
 
-fluid.grc.lager=fluid.grc.lager
 fluid.grc.lager0=fluid.grc.lager0
 fluid.grc.lager1=fluid.grc.lager1
 fluid.grc.lager2=fluid.grc.lager2
@@ -27,7 +25,6 @@ fluid.grc.lager5=fluid.grc.lager5
 fluid.grc.lager6=fluid.grc.lager6
 
 # Fluid Buckets
-item.bucket.fluid.grc.hopAle.name=item.bucket.fluid.grc.hopAle.name
 item.bucket.fluid.grc.hopAle0.name=item.bucket.fluid.grc.hopAle0.name
 item.bucket.fluid.grc.hopAle1.name=item.bucket.fluid.grc.hopAle1.name
 item.bucket.fluid.grc.hopAle2.name=item.bucket.fluid.grc.hopAle2.name

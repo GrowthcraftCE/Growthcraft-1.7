@@ -7,8 +7,7 @@ item.grc.rice.name=Rice Grain
 item.grc.riceBall.name=Onigiri
 
 # Fluids
-fluid.grc.riceSake=Sake
-fluid.grc.riceSake0=Sake
+fluid.grc.riceSake0=Sake Moromi
 fluid.grc.riceSake1=Sake
 fluid.grc.riceSake2=Sake
 fluid.grc.riceSake3=Sake
@@ -17,8 +16,7 @@ fluid.grc.riceSake5=Sake
 fluid.grc.riceSake6=Sake
 
 # Fluid Buckets
-item.bucket.fluid.grc.riceSake.name=Sake Moromi Bucket
-item.bucket.fluid.grc.riceSake0.name=Sake Bucket
+item.bucket.fluid.grc.riceSake0.name=Sake Moromi Bucket
 item.bucket.fluid.grc.riceSake1.name=Sake Bucket
 item.bucket.fluid.grc.riceSake2.name=Sake Bucket
 item.bucket.fluid.grc.riceSake3.name=Sake Bucket
@@ -27,8 +25,7 @@ item.bucket.fluid.grc.riceSake5.name=Sake Bucket
 item.bucket.fluid.grc.riceSake6.name=Sake Bucket
 
 # Fluid Blocks
-tile.fluid.grc.riceSake.name=Sake Moromi
-tile.fluid.grc.riceSake0.name=Sake
+tile.fluid.grc.riceSake0.name=Sake Moromi
 tile.fluid.grc.riceSake1.name=Sake
 tile.fluid.grc.riceSake2.name=Sake
 tile.fluid.grc.riceSake3.name=Sake

@@ -7,7 +7,6 @@ item.grc.rice.name=Grãos de Arroz
 item.grc.riceBall.name=Onigiri
 
 # Fluids
-fluid.grc.riceSake=Sakê
 fluid.grc.riceSake0=Sakê
 fluid.grc.riceSake1=Sakê
 fluid.grc.riceSake2=Sakê
@@ -17,7 +16,6 @@ fluid.grc.riceSake5=Sakê
 fluid.grc.riceSake6=Sakê
 
 # Fluid Buckets
-item.bucket.fluid.grc.riceSake.name=Balde de Sakê
 item.bucket.fluid.grc.riceSake0.name=Balde de Sakê
 item.bucket.fluid.grc.riceSake1.name=Balde de Sakê
 item.bucket.fluid.grc.riceSake2.name=Balde de Sakê
@@ -27,7 +25,6 @@ item.bucket.fluid.grc.riceSake5.name=Balde de Sakê
 item.bucket.fluid.grc.riceSake6.name=Balde de Sakê
 
 # Fluid Blocks
-tile.fluid.grc.riceSake.name=Sakê
 tile.fluid.grc.riceSake0.name=Sakê
 tile.fluid.grc.riceSake1.name=Sakê
 tile.fluid.grc.riceSake2.name=Sakê
