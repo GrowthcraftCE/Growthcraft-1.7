@@ -23,6 +23,7 @@
  */
 package growthcraft.core.common.inventory;
 
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -42,6 +43,18 @@ public class InventoryProcessor
 	private static final InventoryProcessor	inst = new InventoryProcessor();
 
 	private InventoryProcessor() {}
+
+	/**
+	 * Is the slot empty?
+	 *
+	 * @param inv - inventory to check
+	 * @param slot - inventory slot to check
+	 * @return true, the slot is empty, false otherwise
+	 */
+	public boolean slotIsEmpty(@Nonnull IInventory inv, int slot)
+	{
+		return inv.getStackInSlot(slot) == null;
+	}
 
 	/**
 	 * Are the provided slots empty?
@@ -405,40 +418,57 @@ public class InventoryProcessor
 	 *
 	 * @param inv - inventory to search
 	 * @param expected - item stacks to search for
+	 * @param slotsSlice - slots to check in, if null, the entire inventory is searched
 	 * @return slot ids
 	 */
 	@SuppressWarnings({"rawtypes"})
-	public int[] findItemSlots(@Nonnull IInventory inv, @Nonnull List expected)
+	public int[] findItemSlots(@Nonnull IInventory inv, @Nonnull List expected, @Nonnull int[] slotsSlice)
 	{
 		final boolean[] usedSlots = new boolean[inv.getSizeInventory()];
 		final int[] slots = new int[expected.size()];
 		int i = 0;
+		final int invSize = slotsSlice != null ? slotsSlice.length : inv.getSizeInventory();
 		for (Object expectedStack : expected)
 		{
 			slots[i] = -1;
-			for (int slotIndex = 0; slotIndex < inv.getSizeInventory(); ++slotIndex)
+			for (int index = 0; index < invSize; ++index)
 			{
-				final ItemStack stack = inv.getStackInSlot(slotIndex);
+				final int slotIndex = slotsSlice != null ? slotsSlice[index] : index;
 				boolean foundItem = false;
 				if (expectedStack instanceof IMultiItemStacks)
 				{
 					foundItem = checkSlot(inv, (IMultiItemStacks)expectedStack, slotIndex);
 				}
-				else if (expectedStack instanceof ItemStack || expectedStack == null)
+				else if (expectedStack instanceof ItemStack)
 				{
 					foundItem = checkSlot(inv, (ItemStack)expectedStack, slotIndex);
 				}
+
 				if (foundItem)
 				{
 					if (usedSlots[slotIndex]) continue;
 					usedSlots[slotIndex] = true;
-					slots[i] = findItemSlot(inv, stack);
+					slots[i] = slotIndex;
 					break;
 				}
 			}
 			i++;
 		}
 		return slots;
+	}
+
+	/**
+	 * Search the inventory for all the items given, this method will skip
+	 * slots that have been used before.
+	 *
+	 * @param inv - inventory to search
+	 * @param expected - item stacks to search for
+	 * @return slot ids
+	 */
+	@SuppressWarnings({"rawtypes"})
+	public int[] findItemSlots(@Nonnull IInventory inv, @Nonnull List expected)
+	{
+		return findItemSlots(inv, expected, null);
 	}
 
 	/**
@@ -499,6 +529,66 @@ public class InventoryProcessor
 			if (inv.getStackInSlot(i) != null) return i;
 		}
 		return -1;
+	}
+
+	/**
+	 * Checks a slice of slots for the given items, unordered
+	 *
+	 * @param inv - inventory to check
+	 * @param filter - itemstacks to look for
+	 * @param from - a slice of slots to look in
+	 * @return true, all the items in the filter are present in the inv, false otherwise
+	 */
+	@SuppressWarnings({"rawtypes"})
+	public boolean checkSlotsUnordered(@Nonnull IInventory inv, @Nonnull List filter, int[] from)
+	{
+		assert filter.size() == from.length;
+		final int[] slots = findItemSlots(inv, filter, from);
+		for (int i : slots)
+		{
+			if (i < 0) return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Checks a slice of slots for the given items, unordered
+	 *
+	 * @param inv - inventory to check
+	 * @param filter - itemstacks to look for
+	 * @param from - a slice of slots to look in
+	 * @return true, all the items in the filter are present in the inv, false otherwise
+	 */
+	public boolean checkSlotsUnordered(@Nonnull IInventory inv, @Nonnull ItemStack[] filter, int[] from)
+	{
+		return checkSlotsUnordered(inv, Arrays.asList(filter), from);
+	}
+
+	/**
+	 * Checks a slice of slots for the given items, unordered
+	 *
+	 * @param inv - inventory to check
+	 * @param filter - itemstacks to look for
+	 * @param from - a slice of slots to look in
+	 * @return true, all the items in the filter are present in the inv, false otherwise
+	 */
+	public boolean checkSlotsUnordered(@Nonnull IInventory inv, @Nonnull IMultiItemStacks[] filter, int[] from)
+	{
+		return checkSlotsUnordered(inv, Arrays.asList(filter), from);
+	}
+
+	/**
+	 * @param inv - not used, but is kept to match the other mtheods
+	 * @param slots - slots to check
+	 * @return true, all slots are valid (0 and above), false otherwise
+	 */
+	public boolean slotsAreValid(@Nonnull IInventory _inv, @Nonnull int[] slots)
+	{
+		for (int slot : slots)
+		{
+			if (slot < 0) return false;
+		}
+		return true;
 	}
 
 	/**
