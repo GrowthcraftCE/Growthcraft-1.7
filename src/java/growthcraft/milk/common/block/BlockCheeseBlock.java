@@ -122,7 +122,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 			te.populateDrops(drops);
 			for (ItemStack stack : drops)
 			{
-				ItemUtils.spawnBrokenItemStack(world, x, y, z, stack, rand);
+				ItemUtils.spawnItemStack(world, x, y, z, stack, rand);
 			}
 		}
 	}
