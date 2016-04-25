@@ -36,9 +36,11 @@ import growthcraft.milk.common.item.EnumCheeseStage;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import growthcraft.milk.GrowthCraftMilk;
+import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -76,7 +78,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	@Override
 	protected boolean shouldDropTileStack(World world, int x, int y, int z, int metadata, int fortune)
 	{
-		return true;
+		return false;
 	}
 
 	@Override
@@ -101,6 +103,27 @@ public class BlockCheeseBlock extends GrcBlockContainer
 		else
 		{
 			super.getTileItemStackDrops(ret, world, x, y, z, metadata, fortune);
+		}
+	}
+
+	@Override
+	protected boolean shouldScatterInventoryOnBreak(World world, int x, int y, int z)
+	{
+		return true;
+	}
+
+	@Override
+	protected void scatterInventory(World world, int x, int y, int z, Block block)
+	{
+		final TileEntityCheeseBlock te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			final List<ItemStack> drops = new ArrayList<ItemStack>();
+			te.populateDrops(drops);
+			for (ItemStack stack : drops)
+			{
+				ItemUtils.spawnBrokenItemStack(world, x, y, z, stack, rand);
+			}
 		}
 	}
 
