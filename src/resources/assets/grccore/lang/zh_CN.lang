@@ -12,6 +12,7 @@ tile.grc.fenceRope.name=围栏绳
 tile.grc.netherBrickFenceRope.name=带有绳子的地狱砖栅栏
 tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
 tile.grc.ropeBlock.name=绳子
+tile.grccore.salt_block.name=tile.grccore.salt_block.name
 
 # Items
 item.grc.rope.name=绳子

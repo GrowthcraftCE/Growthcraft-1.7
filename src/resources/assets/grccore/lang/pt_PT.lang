@@ -12,6 +12,7 @@ tile.grc.fenceRope.name=Cerca com Corda
 tile.grc.netherBrickFenceRope.name=Cerca de Tijolo do Nether com Corda
 tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
 tile.grc.ropeBlock.name=Corda
+tile.grccore.salt_block.name=tile.grccore.salt_block.name
 
 # Items
 item.grc.rope.name=Corda

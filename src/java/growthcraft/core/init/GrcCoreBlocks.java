@@ -28,6 +28,7 @@ import java.util.Map;
 
 import growthcraft.core.common.block.BlockFenceRope;
 import growthcraft.core.common.block.BlockRope;
+import growthcraft.core.common.block.BlockSaltBlock;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.common.item.ItemBlockFenceRope;
@@ -45,6 +46,7 @@ import net.minecraft.init.Blocks;
 public class GrcCoreBlocks extends GrcModuleBase
 {
 	public BlockDefinition ropeBlock;
+	public BlockDefinition saltBlock;
 	public BlockDefinition fenceRope;
 	public BlockDefinition netherBrickFenceRope;
 	public BlockDefinition naturaFenceRope;
@@ -54,6 +56,7 @@ public class GrcCoreBlocks extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
+		this.saltBlock = new BlockDefinition(new BlockSaltBlock());
 		this.ropeBlock = new BlockDefinition(new BlockRope());
 		this.fenceRope = new BlockDefinition(new BlockFenceRope(Blocks.fence, "grc.fenceRope"));
 		this.netherBrickFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.nether_brick_fence, "grc.netherBrickFenceRope"));
@@ -67,6 +70,7 @@ public class GrcCoreBlocks extends GrcModuleBase
 	{
 		fenceRope.register("grc.fenceRope", ItemBlockFenceRope.class);
 		ropeBlock.register("grc.ropeBlock");
+		saltBlock.register("grccore.salt_block");
 		netherBrickFenceRope.register("grc.netherBrickFenceRope", ItemBlockFenceRope.class);
 
 		Blocks.fire.setFireInfo(fenceRope.getBlock(), 5, 20);

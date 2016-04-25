@@ -12,6 +12,7 @@ tile.grc.fenceRope.name=Fence with Rope
 tile.grc.netherBrickFenceRope.name=Fence with Rope (Nether Brick)
 tile.grc.naturaFenceRope.name=Fence with Rope (%s)
 tile.grc.ropeBlock.name=Rope
+tile.grccore.salt_block.name=Salt Block
 
 # Items
 item.grc.rope.name=Rope

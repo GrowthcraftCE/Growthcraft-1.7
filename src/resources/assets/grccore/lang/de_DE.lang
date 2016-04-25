@@ -12,6 +12,7 @@ tile.grc.fenceRope.name=Zaun mit Seil
 tile.grc.netherBrickFenceRope.name=tile.grc.netherBrickFenceRope.name
 tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
 tile.grc.ropeBlock.name=Seil
+tile.grccore.salt_block.name=tile.grccore.salt_block.name
 
 # Items
 item.grc.rope.name=Seil

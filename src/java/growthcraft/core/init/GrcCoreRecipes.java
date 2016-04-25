@@ -42,6 +42,8 @@ public class GrcCoreRecipes extends GrcModuleBase
 		GameRegistry.addRecipe(GrowthCraftCore.items.rope.asStack(8), new Object[] {"A", 'A', Items.lead});
 		GameRegistry.addShapelessRecipe(GrowthCraftCore.items.salt.asStack(2), GrowthCraftCore.items.saltBottle.asStack());
 		GameRegistry.addShapelessRecipe(GrowthCraftCore.items.salt.asStack(6), GrowthCraftCore.items.saltBucket.asStack());
+		GameRegistry.addShapelessRecipe(GrowthCraftCore.items.salt.asStack(9), GrowthCraftCore.blocks.saltBlock.asStack());
+		GameRegistry.addShapelessRecipe(GrowthCraftCore.blocks.saltBlock.asStack(), saltStack, saltStack, saltStack, saltStack, saltStack, saltStack, saltStack, saltStack, saltStack);
 		GameRegistry.addShapelessRecipe(GrowthCraftCore.items.saltBottle.asStack(),
 			Items.glass_bottle,
 			saltStack, saltStack);
@@ -69,6 +71,5 @@ public class GrcCoreRecipes extends GrcModuleBase
 
 		GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBottleItemStack(), GrowthCraftCore.items.salt.asStack(2), 0.1F);
 		GameRegistry.addSmelting(GrowthCraftCore.fluids.saltWater.asBucketItemStack(), GrowthCraftCore.items.salt.asStack(6), 0.3F);
-
 	}
 }
