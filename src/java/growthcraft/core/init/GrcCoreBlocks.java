@@ -42,6 +42,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcCoreBlocks extends GrcModuleBase
 {
@@ -167,6 +168,8 @@ public class GrcCoreBlocks extends GrcModuleBase
 	@Override
 	public void init()
 	{
+		OreDictionary.registerOre("blockSalt", saltBlock.getItem());
+
 		if (GrowthCraftCore.getConfig().enableEtfuturumIntegration) initEtfuturum();
 		if (GrowthCraftCore.getConfig().enableWoodstuffIntegration) initWoodstuff();
 		if (GrowthCraftCore.getConfig().enableNaturaIntegration) initNatura();
