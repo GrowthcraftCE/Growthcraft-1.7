@@ -22,6 +22,7 @@ import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGrowable
 {
@@ -420,4 +421,9 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 		ret.add(new ItemStack(Blocks.leaves, 1, world.getBlockMetadata(x, y, z) & 3));
 		return ret;
 	}
+	
+	@Override
+	public void init()
+	{
+		OreDictionary.registerOre("treeLeaves", appleLeaves.getItem());
 }
