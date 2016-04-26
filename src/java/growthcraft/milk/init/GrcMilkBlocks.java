@@ -154,4 +154,10 @@ public class GrcMilkBlocks extends GrcModuleBase
 			'c', Items.clay_ball
 		));
 	}
+	
+	public void registerOres()
+	{
+		OreDictionary.registerOre("flowerThistle", thistle.getItem());
+		OreDictionary.registerOre("rennetSource", thistle.getItem());
+	}
 }
