@@ -426,4 +426,5 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 	public void init()
 	{
 		OreDictionary.registerOre("treeLeaves", appleLeaves.getItem());
+	}
 }
