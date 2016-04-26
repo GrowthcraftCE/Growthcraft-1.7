@@ -158,5 +158,6 @@ public class GrcMilkBlocks extends GrcModuleBase
 	public void registerOres()
 	{
 		OreDictionary.registerOre("flowerThistle", thistle.getItem());
+		OreDictionary.registerOre("rennetSource", thistle.getItem());
 	}
 }
