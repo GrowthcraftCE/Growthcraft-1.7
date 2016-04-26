@@ -115,13 +115,13 @@ public class GrowthCraftApples
 		OreDictionary.registerOre("saplingTree", appleSapling.getItem());
 		OreDictionary.registerOre("treeSapling", appleSapling.getItem());
 		OreDictionary.registerOre("seedApple", appleSeeds.getItem());
+		OreDictionary.registerOre("treeLeaves", appleLeaves.asStack(1, OreDictionary.WILDCARD_VALUE));
 		// For Pam's HarvestCraft
 		// Uses the same OreDict. names as HarvestCraft
 		OreDictionary.registerOre("listAllseed", appleSeeds.getItem());
 		// Common
 		OreDictionary.registerOre("foodApple", Items.apple);
 		OreDictionary.registerOre("foodFruit", Items.apple);
-
 		//====================
 		// CRAFTING
 		//====================
