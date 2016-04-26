@@ -23,22 +23,59 @@
  */
 package growthcraft.milk.init;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.core.fluids.TaggedFluidStacks;
+import growthcraft.api.core.item.CommonItemStackComparator;
+import growthcraft.api.core.item.IItemStackComparator;
 import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.milk.cheesepress.ICheesePressRecipe;
-import growthcraft.api.milk.util.CheeseVatRecipeBuilder;
 import growthcraft.api.milk.MilkRegistry;
+import growthcraft.api.milk.util.CheeseVatRecipeBuilder;
+import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.item.crafting.ShapelessItemComparableRecipe;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
+import growthcraft.milk.GrowthCraftMilk;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class GrcMilkRecipes extends GrcModuleBase
 {
+	public static class DriedCurdComparator implements IItemStackComparator
+	{
+		private CommonItemStackComparator common = new CommonItemStackComparator();
+
+		public boolean equals(ItemStack expected, ItemStack actual)
+		{
+			if (expected.getItem() instanceof ItemBlockHangingCurds)
+			{
+				if (actual.getItem() instanceof ItemBlockHangingCurds)
+				{
+					final ItemBlockHangingCurds actualCurd = (ItemBlockHangingCurds)actual.getItem();
+					final ItemBlockHangingCurds expectedCurd = (ItemBlockHangingCurds)expected.getItem();
+					if (expectedCurd.getCheeseType(expected) == actualCurd.getCheeseType(actual))
+					{
+						if (actualCurd.isDried(actual)) return true;
+					}
+				}
+				return false;
+			}
+			else
+			{
+				return common.equals(expected, actual);
+			}
+		}
+	}
+
 	public static class DriedCurdsCheesePressRecipe implements ICheesePressRecipe
 	{
 		private ItemStack inputStack;
@@ -92,6 +129,47 @@ public class GrcMilkRecipes extends GrcModuleBase
 		{
 			return String.format("DriedCurdsCheesePressRecipe({%s} / %d = {%s})", getOutputItemStack(), time, getInputItemStack());
 		}
+	}
+
+	private void registerCraftingRecipes()
+	{
+		final int ricottaBowlCount = GrowthCraftMilk.getConfig().ricottaBowlCount;
+		final List<ItemStack> ricottaBowlRecipe = new ArrayList<ItemStack>();
+		ricottaBowlRecipe.add(EnumCheeseType.RICOTTA.asCurdItemStack());
+		for (int i = 0; i < ricottaBowlCount; ++i)
+		{
+			ricottaBowlRecipe.add(new ItemStack(Items.bowl, 1));
+		}
+		GameRegistry.addRecipe(new ShapelessItemComparableRecipe(new DriedCurdComparator(),
+			EnumCheeseType.RICOTTA.asStack(ricottaBowlCount), ricottaBowlRecipe
+		));
+
+		GameRegistry.addRecipe(new ShapelessOreRecipe(GrowthCraftMilk.blocks.cheeseVat.asStack(),
+			GrowthCraftCellar.blocks.brewKettle.asStack()
+		));
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(GrowthCraftMilk.blocks.butterChurn.asStack(),
+			" S ",
+			"P P",
+			"PPP",
+			'S', "stickWood",
+			'P', "plankWood"
+		));
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(GrowthCraftMilk.blocks.cheesePress.asStack(),
+			"iii",
+			"iCi",
+			"ppp",
+			'i', "ingotIron",
+			'C', Blocks.chest,
+			'p', "slabWood"
+		));
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(GrowthCraftMilk.blocks.pancheon.asStack(),
+			"c c",
+			"ccc",
+			'c', Items.clay_ball
+		));
 	}
 
 	private void registerCheeseVatRecipes()
@@ -176,6 +254,7 @@ public class GrcMilkRecipes extends GrcModuleBase
 	@Override
 	public void init()
 	{
+		registerCraftingRecipes();
 		registerCheeseVatRecipes();
 		registerCheesePressRecipes();
 		registerCheeseWaxes();
