@@ -112,6 +112,7 @@ public class GrowthCraftHops
 		//====================
 		OreDictionary.registerOre("cropHops", hops.getItem());
 		OreDictionary.registerOre("materialHops", hops.getItem());
+		OreDictionary.registerOre("conesHops", hops.getItem());
 		OreDictionary.registerOre("seedHops", hopSeeds.getItem());
 		// For Pam's HarvestCraft
 		// Uses the same OreDict. names as HarvestCraft
