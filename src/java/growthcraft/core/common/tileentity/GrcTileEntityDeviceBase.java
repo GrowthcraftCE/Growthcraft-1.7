@@ -182,18 +182,18 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	}
 
 	@Override
-	public FluidStack drainFluidTank(int slot, int amount, boolean doDrain)
+	public FluidStack drainFluidTank(int slot, int amount, boolean shouldDrain)
 	{
-		final FluidStack result = tanks.drainFluidTank(slot, amount, doDrain);
-		if (result != null && result.amount != 0) markForFluidUpdate();
+		final FluidStack result = tanks.drainFluidTank(slot, amount, shouldDrain);
+		if (shouldDrain && FluidTest.isValid(result)) markForFluidUpdate();
 		return result;
 	}
 
 	@Override
-	public int fillFluidTank(int slot, FluidStack fluid, boolean doFill)
+	public int fillFluidTank(int slot, FluidStack fluid, boolean shouldFill)
 	{
-		final int result = tanks.fillFluidTank(slot, fluid, doFill);
-		if (result != 0) markForFluidUpdate();
+		final int result = tanks.fillFluidTank(slot, fluid, shouldFill);
+		if (shouldFill && result != 0) markForFluidUpdate();
 		return result;
 	}
 
