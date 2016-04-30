@@ -56,12 +56,6 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 	}
 
 	@Override
-	public int tickRate(World world)
-	{
-		return 10;
-	}
-
-	@Override
 	public boolean canSpreadTo(World world, int x, int y, int z)
 	{
 		if (world.isAirBlock(x, y, z) && canBlockStay(world, x, y, z))
