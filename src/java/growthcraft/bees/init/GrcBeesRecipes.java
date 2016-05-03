@@ -23,7 +23,9 @@
  */
 package growthcraft.bees.init;
 
+import growthcraft.api.bees.BeesFluidTag;
 import growthcraft.api.cellar.booze.BoozeTag;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
@@ -34,11 +36,12 @@ import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class GrcBeesRecipes extends GrcModuleBase
@@ -126,31 +129,49 @@ public class GrcBeesRecipes extends GrcModuleBase
 			waterBottle, waterBottle, waterBottle,
 			GrowthCraftBees.items.honeyJar.getItem(),
 			Items.bucket);
-
-		if (GrowthCraftBees.fluids.honey != null)
+		
+		if (GrowthCraftBees.fluids.honey != null) 
 		{
 			final ItemStack honeyBottleStack = GrowthCraftBees.fluids.honey.asBottleItemStack();
 			final ItemStack meadBucket = GrowthCraftBees.fluids.honeyMeadBuckets[0].asStack();
-			final ItemStack honeyBucket = GrowthCraftBees.fluids.honey.asBucketItemStack();
+			
 			GameRegistry.addShapelessRecipe(meadBucket,
-				Items.water_bucket,
-				honeyBucket,
-				Items.bucket);
+					Items.water_bucket,
+					honeyBottleStack, honeyBottleStack, honeyBottleStack,
+					Items.bucket);
+			
 			GameRegistry.addShapelessRecipe(meadBucket,
-				Items.water_bucket,
-				honeyBottleStack, honeyBottleStack, honeyBottleStack,
-				Items.bucket);
-			/// Water bottles
-			GameRegistry.addShapelessRecipe(meadBucket,
-				waterBottle, waterBottle, waterBottle,
-				honeyBucket,
-				Items.bucket);
-			GameRegistry.addShapelessRecipe(meadBucket,
-				waterBottle, waterBottle, waterBottle,
-				honeyBottleStack, honeyBottleStack, honeyBottleStack,
-				Items.bucket);
+					waterBottle, waterBottle, waterBottle,
+					honeyBottleStack, honeyBottleStack, honeyBottleStack,
+					Items.bucket);
 		}
 
 		registerRecipes();
+	}
+	
+	@Override
+	public void postInit()
+	{
+		final ItemStack waterBottle = new ItemStack(Items.potionitem, 1, 0);
+		
+		for (Fluid fluid : CoreRegistry.instance().fluidDictionary().getFluidsByTags(BeesFluidTag.HONEY))
+		{
+			final ItemStack honeyBucket = FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 1000), new ItemStack(Items.bucket));
+			final ItemStack meadBucket = GrowthCraftBees.fluids.honeyMeadBuckets[0].asStack();
+			
+			if (honeyBucket != null)
+			{
+				GameRegistry.addShapelessRecipe(meadBucket,
+					Items.water_bucket,
+					honeyBucket,
+					Items.bucket);
+				
+				/// Water bottles
+				GameRegistry.addShapelessRecipe(meadBucket,
+					waterBottle, waterBottle, waterBottle,
+					honeyBucket,
+					Items.bucket);
+			}
+		}
 	}
 }
