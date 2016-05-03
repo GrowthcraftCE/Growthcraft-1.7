@@ -42,6 +42,7 @@ import growthcraft.core.util.FluidFactory;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class GrcBeesFluids extends GrcModuleBase
 {
