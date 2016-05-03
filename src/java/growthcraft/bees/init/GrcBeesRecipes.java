@@ -43,6 +43,8 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import growthcraft.api.core.GrcFluid;
+import growthcraft.api.cellar.common.Residue;
 
 public class GrcBeesRecipes extends GrcModuleBase
 {
