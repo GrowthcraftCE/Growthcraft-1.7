@@ -2,39 +2,39 @@
 itemGroup.creative_tab_grccore=Growthcraft
 
 # Blocks
-tile.grc.etfuturum_fence_rope_acacia.name=tile.grc.etfuturum_fence_rope_acacia.name
-tile.grc.etfuturum_fence_rope_birch.name=tile.grc.etfuturum_fence_rope_birch.name
-tile.grc.etfuturum_fence_rope_dark_oak.name=tile.grc.etfuturum_fence_rope_dark_oak.name
-tile.grc.etfuturum_fence_rope_jungle.name=tile.grc.etfuturum_fence_rope_jungle.name
-tile.grc.etfuturum_fence_rope_oak.name=tile.grc.etfuturum_fence_rope_oak.name
-tile.grc.etfuturum_fence_rope_spruce.name=tile.grc.etfuturum_fence_rope_spruce.name
-tile.grc.fenceRope.name=Cerca Amarrada
-tile.grc.netherBrickFenceRope.name=tile.grc.netherBrickFenceRope.name
-tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
+tile.grc.etfuturum_fence_rope_acacia.name=Cerca com Corda (Acácia)
+tile.grc.etfuturum_fence_rope_birch.name=Cerca com Corda (Eucalipto)
+tile.grc.etfuturum_fence_rope_dark_oak.name=Cerca com Corda (Carvalho Escuro)
+tile.grc.etfuturum_fence_rope_jungle.name=Cerca com Corda (Madeira da Selva)
+tile.grc.etfuturum_fence_rope_oak.name=Cerca com Corda (Carvalho)
+tile.grc.etfuturum_fence_rope_spruce.name=Cerca com Corda (Pinheiro)
+tile.grc.fenceRope.name=Cerca com Corda
+tile.grc.netherBrickFenceRope.name=Cerca com Corda (Tijolos do Nether)
+tile.grc.naturaFenceRope.name=Cerca com Corda (%s)
 tile.grc.ropeBlock.name=Corda
-tile.grccore.salt_block.name=tile.grccore.salt_block.name
+tile.grccore.salt_block.name=Bloco de Sal
 
 # Items
 item.grc.rope.name=Corda
 item.grccore.salt.name=Sal
-item.grccore.bucketSalt.name=item.grccore.bucketSalt.name
-item.grccore.bottleSalt.name=item.grccore.bottleSalt.name
-item.grccore.crowbar.black.name=item.grccore.crowbar.black.name
-item.grccore.crowbar.red.name=item.grccore.crowbar.red.name
-item.grccore.crowbar.green.name=item.grccore.crowbar.green.name
-item.grccore.crowbar.brown.name=item.grccore.crowbar.brown.name
-item.grccore.crowbar.blue.name=item.grccore.crowbar.blue.name
-item.grccore.crowbar.purple.name=item.grccore.crowbar.purple.name
-item.grccore.crowbar.cyan.name=item.grccore.crowbar.cyan.name
-item.grccore.crowbar.light_gray.name=item.grccore.crowbar.light_gray.name
-item.grccore.crowbar.gray.name=item.grccore.crowbar.gray.name
-item.grccore.crowbar.pink.name=item.grccore.crowbar.pink.name
-item.grccore.crowbar.lime.name=item.grccore.crowbar.lime.name
-item.grccore.crowbar.yellow.name=item.grccore.crowbar.yellow.name
-item.grccore.crowbar.light_blue.name=item.grccore.crowbar.light_blue.name
-item.grccore.crowbar.magenta.name=item.grccore.crowbar.magenta.name
-item.grccore.crowbar.orange.name=item.grccore.crowbar.orange.name
-item.grccore.crowbar.white.name=item.grccore.crowbar.white.name
+item.grccore.bucketSalt.name=Balde de Sal
+item.grccore.bottleSalt.name=Garrafa de Sal
+item.grccore.crowbar.black.name=Pé-de-Cabra (Preto)
+item.grccore.crowbar.red.name=Pé-de-Cabra (Vermelho)
+item.grccore.crowbar.green.name=Pé-de-Cabra (Verde)
+item.grccore.crowbar.brown.name=Pé-de-Cabra (Marrom)
+item.grccore.crowbar.blue.name=Pé-de-Cabra (Azul)
+item.grccore.crowbar.purple.name=Pé-de-Cabra (Roxo)
+item.grccore.crowbar.cyan.name=Pé-de-Cabra (Ciano)
+item.grccore.crowbar.light_gray.name=Pé-de-Cabra (Cinza Claro)
+item.grccore.crowbar.gray.name=Pé-de-Cabra (Cinza)
+item.grccore.crowbar.pink.name=Pé-de-Cabra (Rosa)
+item.grccore.crowbar.lime.name=Pé-de-Cabra (Lima)
+item.grccore.crowbar.yellow.name=Pé-de-Cabra (Amarelo)
+item.grccore.crowbar.light_blue.name=Pé-de-Cabra (Azul Claro)
+item.grccore.crowbar.magenta.name=Pé-de-Cabra (Magenta)
+item.grccore.crowbar.orange.name=Pé-de-Cabra (Laranja)
+item.grccore.crowbar.white.name=Pé-de-Cabra (Branco)
 
 # Fluids
 fluid.tile.water=Água
@@ -69,10 +69,10 @@ grc.color.White=Branco
 grc.color.Yellow=Amarelo
 
 # Formats and Units
-grc.format.value.true=YES
-grc.format.value.false=NO
-grc.format.state.true=ON
-grc.format.state.false=OFF
+grc.format.value.true=SIM
+grc.format.value.false=NÃO
+grc.format.state.true=LIGADO
+grc.format.state.false=DESLIGADO
 grc.format.invalid_fluid=<Fluido Inválido>
 # Displayed for items
 grc.format.itemslot.empty=<Vazio>
@@ -87,46 +87,46 @@ grc.format.fluid.name=%1$s
 # Name (stack_size)
 grc.format.itemslot.item=%s (x%d)
 # Displayed for tile entities with multiple tanks, %d is the tank index + 1
-grc.format.tank_id=Tank %d :
+grc.format.tank_id=Tanque %d :
 # When the tank is empty
 grc.format.tank.empty=<Vazio>
 # %s is the fluid name
 grc.format.tank.content_suffix=mB de %s
 
 # Waila Tooltips
-grc.format.crop.growth_prefix=Growth :
+grc.format.crop.growth_prefix=Maturação :
 grc.format.crop.mature=Maduro
 grc.format.crop.progress_format=%d%%
-grc.format.paddy.hasFluid=Has Fluid :
+grc.format.paddy.hasFluid=Irrigado :
 grccore.device.heated.multiplier.format= %d%%
-grccore.device.heated.prefix=Heat :
+grccore.device.heated.prefix=Temperatura :
 grccore.device.heated.state.false=<Frio>
 grccore.device.progress.format= %d%%
-grccore.device.progress.prefix=Progress :
-grccore.waila.option.DisplayFluidContent=Fluid Tanks
-grccore.waila.option.DisplayHeated=Heated Devices
+grccore.device.progress.prefix=Progresso :
+grccore.waila.option.DisplayFluidContent=Tanques de Líquidos
+grccore.waila.option.DisplayHeated=Dispositivos aquecidos
 
 # Effects
 grc.effect.chance.format=%d%% Chance de
 grc.effect.list.head=Acontecer os seguintes efeitos:
 grc.effect.null.desc=Nada
 grc.effect.random_list.head=Acontecer um dos seguintes efeitos:
-grc.effect.remove_potion_effect.format=Remove %s
+grc.effect.remove_potion_effect.format=Remover %s
 grc.effect.weighted_random_list.format=%d%% Chance de
 
 # GUI
-gui.grc.progress.format=gui.grc.progress.format
+gui.grc.progress.format=%s : %d / %d
 
 # Inventory
-grc.inventory.internal.name=grc.inventory.internal.name
+grc.inventory.internal.name=Inventário
 
 # Tooltips
-grc.tooltip.detailed_information=grc.tooltip.detailed_information
+grc.tooltip.detailed_information=Segure %s para mostrar detalhes
 
 # Achievements
-achievement.trusty_hardware=achievement.trusty_hardware
-achievement.trusty_hardware.desc=achievement.trusty_hardware.desc
-achievement.half_life_confirmed=achievement.half_life_confirmed
-achievement.half_life_confirmed.desc=achievement.half_life_confirmed.desc
-achievement.salty_situation=achievement.salty_situation
-achievement.salty_situation.desc=achievement.salty_situation.desc
+achievement.trusty_hardware=Equipamento Confiável
+achievement.trusty_hardware.desc=Mantenha longe de Endermans.
+achievement.half_life_confirmed=Half-life Confirmado!
+achievement.half_life_confirmed.desc=Derrote um Zumbi com um Pé-de-Cabra
+achievement.salty_situation=Situação Salgada
+achievement.salty_situation.desc=Encha um Balde com Água Salgada
