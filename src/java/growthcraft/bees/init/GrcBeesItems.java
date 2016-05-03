@@ -34,6 +34,7 @@ import growthcraft.core.common.GrcModuleBase;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class GrcBeesItems extends GrcModuleBase
@@ -62,6 +63,12 @@ public class GrcBeesItems extends GrcModuleBase
 		honeyJar.register("grc.honeyJar");
 		bee.register("grc.bee");
 		beesWax.register("grcbees.BeesWax");
+		
+		final ItemStack emptyComb = honeyCombEmpty.asStack();
+		GameRegistry.addShapelessRecipe(EnumBeesWax.NORMAL.asStack(),
+			emptyComb, emptyComb, emptyComb,
+			emptyComb, emptyComb, emptyComb,
+			emptyComb, emptyComb, emptyComb);
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumBeesWax.BLACK.asStack(),
 			EnumBeesWax.NORMAL.asStack(), "dyeBlack"));
