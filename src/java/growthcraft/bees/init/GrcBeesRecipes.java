@@ -36,7 +36,6 @@ import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.api.core.GrcFluid;
 import growthcraft.api.cellar.common.Residue;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
