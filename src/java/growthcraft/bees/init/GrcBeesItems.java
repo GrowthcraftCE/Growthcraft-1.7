@@ -87,7 +87,9 @@ public class GrcBeesItems extends GrcModuleBase
 		OreDictionary.registerOre("materialBeeswaxRed", EnumBeesWax.RED.asStack());
 		OreDictionary.registerOre("beeQueen", bee.getItem());
 		OreDictionary.registerOre("materialWaxcomb", honeyCombEmpty.asStack());
+		OreDictionary.registerOre("beeComb", honeyCombEmpty.asStack());
 		OreDictionary.registerOre("materialHoneycomb", honeyCombFilled.asStack());
+		OreDictionary.registerOre("beeComb", honeyCombFilled.asStack());
 		OreDictionary.registerOre("honeyDrop", honeyJar.getItem());
 		OreDictionary.registerOre("dropHoney", honeyJar.getItem());
 		OreDictionary.registerOre("bucketHoney", honeyJar.getItem());
