@@ -45,6 +45,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import growthcraft.api.core.GrcFluid;
 import growthcraft.api.cellar.common.Residue;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class GrcBeesRecipes extends GrcModuleBase
 {
