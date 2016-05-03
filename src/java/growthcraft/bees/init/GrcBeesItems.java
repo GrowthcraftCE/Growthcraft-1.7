@@ -23,18 +23,16 @@
  */
 package growthcraft.bees.init;
 
+import growthcraft.bees.common.item.EnumBeesWax;
 import growthcraft.bees.common.item.ItemBee;
 import growthcraft.bees.common.item.ItemBeesWax;
 import growthcraft.bees.common.item.ItemHoneyCombEmpty;
 import growthcraft.bees.common.item.ItemHoneyCombFilled;
 import growthcraft.bees.common.item.ItemHoneyJar;
-import growthcraft.bees.common.item.EnumBeesWax;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class GrcBeesItems extends GrcModuleBase
 {
@@ -62,12 +60,6 @@ public class GrcBeesItems extends GrcModuleBase
 		honeyJar.register("grc.honeyJar");
 		bee.register("grc.bee");
 		beesWax.register("grcbees.BeesWax");
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumBeesWax.BLACK.asStack(),
-			EnumBeesWax.NORMAL.asStack(), "dyeBlack"));
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumBeesWax.RED.asStack(),
-			EnumBeesWax.NORMAL.asStack(), "dyeRed"));
 	}
 
 	@Override

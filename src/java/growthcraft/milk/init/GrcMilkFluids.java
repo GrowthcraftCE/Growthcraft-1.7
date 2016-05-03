@@ -35,17 +35,18 @@ import growthcraft.api.cellar.util.ICellarBoozeBuilder;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.GrcFluid;
+import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.util.StringUtils;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.api.milk.MilkFluidTags;
 import growthcraft.api.milk.MilkRegistry;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
+import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.BoozeUtils;
-import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
@@ -242,16 +243,16 @@ public class GrcMilkFluids extends GrcModuleBase
 
 		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[1])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT)
-			.fermentsFrom(fs[0], new ItemStack(Items.glowstone_dust), fermentTime)
-			.fermentsFrom(fs[2], new ItemStack(Items.glowstone_dust), fermentTime)
+			.fermentsFrom(fs[0], new OreItemStacks("dustGlowstone"), fermentTime)
+			.fermentsFrom(fs[2], new OreItemStacks("dustGlowstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), 900)
 				.addEffect(milkEffect);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[2])
 			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED)
-			.fermentsFrom(fs[0], new ItemStack(Items.redstone), fermentTime)
-			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
+			.fermentsFrom(fs[0], new OreItemStacks("dustRedstone"), fermentTime)
+			.fermentsFrom(fs[1], new OreItemStacks("dustRedstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.02f), 900)
 				.addEffect(milkEffect);

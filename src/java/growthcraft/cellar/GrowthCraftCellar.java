@@ -280,6 +280,11 @@ public class GrowthCraftCellar
 	private void registerOres()
 	{
 		OreDictionary.registerOre("materialYeast", yeast.getItem());
+		OreDictionary.registerOre("yeastBrewers", EnumYeast.BREWERS.asStack());
+		OreDictionary.registerOre("yeastLager", EnumYeast.LAGER.asStack());
+		OreDictionary.registerOre("yeastBayanus", EnumYeast.BAYANUS.asStack());
+		OreDictionary.registerOre("yeastEthereal", EnumYeast.ETHEREAL.asStack());
+		OreDictionary.registerOre("yeastOrigin", EnumYeast.ORIGIN.asStack());
 	}
 
 	private void registerYeast()
