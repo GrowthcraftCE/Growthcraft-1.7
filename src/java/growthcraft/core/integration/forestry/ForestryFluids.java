@@ -34,7 +34,7 @@ public enum ForestryFluids implements IFluidStackFactory
 	// This is really just vanilla water though ;O
 	MILK("milk"),
 	WATER("water"),
-	HONEY("honey"),
+	HONEY("for.honey"),
 	BIOMASS("biomass"),
 	JUICE("juice"),
 	SEEDOIL("seedoil");
