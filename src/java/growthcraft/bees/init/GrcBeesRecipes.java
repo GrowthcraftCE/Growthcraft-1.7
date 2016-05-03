@@ -150,7 +150,10 @@ public class GrcBeesRecipes extends GrcModuleBase
 		
 	{
 		GrowthCraftCellar.boozeBuilderFactory.create(beeWaste.fluid.getFluid())
-			.brewsFrom(FluidRegistry.WATER), new ItemStack(GrowthCraftBees.ItemHoneyCombEmpty), TickUtils.minutes(1), new Residue(GrowthCraftBees.ItemBeesWax.asStack(1), 1.0f));
+			.brewsFrom(new FluidStack(FluidRegistry.WATER, 250), 
+  			GrowthCraftBees.items.honeyCombEmpty.asStack(), 
+  			TickUtils.minutes(1), 
+  			new Residue(GrowthCraftBees.items.beesWax.asStack(1), 1.0f));
 	}
 
 		registerRecipes();
