@@ -36,7 +36,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import net.minecraftforge.fluids.FluidRegistry
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class GrcBeesItems extends GrcModuleBase
 {
