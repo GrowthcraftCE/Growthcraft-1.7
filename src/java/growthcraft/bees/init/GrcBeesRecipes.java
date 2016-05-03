@@ -36,6 +36,7 @@ import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.api.cellar.common.Residue;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -43,6 +44,7 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class GrcBeesRecipes extends GrcModuleBase
 {
@@ -145,6 +147,14 @@ public class GrcBeesRecipes extends GrcModuleBase
 					honeyBottleStack, honeyBottleStack, honeyBottleStack,
 					Items.bucket);
 		}
+		
+	{
+		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.beeWaste.fluid.getFluid())
+		.brewsFrom(new FluidStack(FluidRegistry.WATER, 250), 
+		GrowthCraftBees.items.honeyCombEmpty.asStack(), 
+		TickUtils.minutes(1), 
+		new Residue(GrowthCraftBees.items.beesWax.asStack(1), 1.0f));
+	}
 
 		registerRecipes();
 	}
