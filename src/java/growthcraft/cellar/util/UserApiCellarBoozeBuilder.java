@@ -64,14 +64,14 @@ public class UserApiCellarBoozeBuilder extends CellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time)
+	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time)
 	{
 		this.userApis.getUserFermentingRecipes().addDefault(stack, new FluidStack(fluid, result.amount), result, time);
 		return this;
 	}
 
 	@Override
-	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time)
+	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull Object stack, int time)
 	{
 		this.userApis.getUserFermentingRecipes().addDefault(stack, src, new FluidStack(fluid, src.amount), time);
 		return this;

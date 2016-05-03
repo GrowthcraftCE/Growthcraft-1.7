@@ -76,14 +76,14 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time)
+	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time)
 	{
 		CellarRegistry.instance().fermenting().addRecipe(result, new FluidStack(fluid, result.amount), stack, time);
 		return this;
 	}
 
 	@Override
-	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time)
+	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull Object stack, int time)
 	{
 		CellarRegistry.instance().fermenting().addRecipe(new FluidStack(fluid, src.amount), src, stack, time);
 		return this;
