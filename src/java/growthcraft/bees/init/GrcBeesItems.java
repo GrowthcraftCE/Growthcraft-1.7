@@ -64,12 +64,6 @@ public class GrcBeesItems extends GrcModuleBase
 		bee.register("grc.bee");
 		beesWax.register("grcbees.BeesWax");
 
-		final ItemStack emptyComb = honeyCombEmpty.asStack();
-		GameRegistry.addShapelessRecipe(EnumBeesWax.NORMAL.asStack(),
-			emptyComb, emptyComb, emptyComb,
-			emptyComb, emptyComb, emptyComb,
-			emptyComb, emptyComb, emptyComb);
-
 		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumBeesWax.BLACK.asStack(),
 			EnumBeesWax.NORMAL.asStack(), "dyeBlack"));
 
