@@ -49,7 +49,7 @@ StructExtApi[] apis = [
     new StructExtApi(name: "invtweaks", api: "api/invtweaks/api", exclusion: "**/invtweaks/api/**"),
     new StructExtApi(name: "mfr", api: "api/powercrystals/minefactoryreloaded/api", exclusion: "**/powercrystals/minefactoryreloaded/api/**"),
     new StructExtApi(name: "thaumcraft", api: ext.thaumcraftApi, exclusion: "**/thaumcraft/api/**"),
-    new StructExtApi(name: "waila", api: "api/waila/api", exclusion: "**/waila/api/**")
+    new StructExtApi(name: "waila", api: "api/mcp/mobius/waila/api", exclusion: "**/mcp/mobius/waila/api/**")
 ]
 
 minecraft {
