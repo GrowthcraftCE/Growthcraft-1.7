@@ -35,6 +35,13 @@ public class GrcBeesConfig extends ConfigBase
 
 	@ConfigOption(catergory="Fluid/Honey", name="Enabled", desc="Should we enable honey fluid and its corresponding items?")
 	public boolean honeyEnabled = true;
+	
+
+	@ConfigOption(catergory="Crafting",name="Alternative WIP Beeswax Recipe", desc="Should we use the brewing kettle for making beeswax? (If enabled, this will let you make it via the brewing kettle instead of workbench).")
+	public boolean useAltBeesWax = false;
+	
+	@ConfigOption(catergory="Crafting",name="Default Beeswax Recipe", desc="Should we use the crafting table for making beeswax? (If enabled, this will let you make it via the workbench instead of the brewing kettle).")
+	public boolean useNormalBeesWax = true;
 
 
 	@ConfigOption(catergory="Booze", name="Honey Mead Color", desc="What color should honey mead be?")
