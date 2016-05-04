@@ -25,7 +25,6 @@ package growthcraft.bees.init;
 
 import growthcraft.api.bees.BeesFluidTag;
 import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
@@ -46,7 +45,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
