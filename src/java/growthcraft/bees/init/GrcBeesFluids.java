@@ -53,7 +53,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	public BlockBoozeDefinition[] honeyMeadFluids;
 
 	@Override
-	public void preInit()
+	public void preInit();
 	{
 		if (GrowthCraftBees.getConfig().honeyEnabled)
 		{
