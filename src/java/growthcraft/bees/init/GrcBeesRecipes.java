@@ -180,7 +180,7 @@ public class GrcBeesRecipes extends GrcModuleBase
 	}
 
 	@Override
-	public void postInit()
+	public void postInit();
 	{
 		final ItemStack waterBottle = new ItemStack(Items.potionitem, 1, 0);
 
