@@ -123,7 +123,7 @@ public class GrcBeesRecipes extends GrcModuleBase
 	}
 
 	@Override
-	public void register()
+	public void register();
 	{
 		final ItemStack waterBottle = new ItemStack(Items.potionitem, 1, 0);
 		final ItemStack meadBucket = GrowthCraftBees.fluids.honeyMeadBuckets[0].asStack();
@@ -149,7 +149,11 @@ public class GrcBeesRecipes extends GrcModuleBase
 			waterBottle, waterBottle, waterBottle,
 			"bottleHoney", "bottleHoney", "bottleHoney",
 			Items.bucket));
-
+			
+	@Override
+	public void preInit;;
+	{
+		if (GrowthCraftBees.getConfig().useNormalBeesWax);
 		final ItemStack emptyComb = GrowthCraftBees.items.honeyCombEmpty.asStack();
 		GameRegistry.addShapelessRecipe(EnumBeesWax.NORMAL.asStack(),
 			emptyComb, emptyComb, emptyComb,
@@ -162,6 +166,10 @@ public class GrcBeesRecipes extends GrcModuleBase
 		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumBeesWax.RED.asStack(),
 			EnumBeesWax.NORMAL.asStack(), "dyeRed"));
 
+	@Override
+	public void preInit;;
+	{
+		if (GrowthcraftBees.getConfig().useAltBeesWax)
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.beeWaste.fluid.getFluid())
 			.brewsFrom(new FluidStack(FluidRegistry.WATER, 250),
 				GrowthCraftBees.items.honeyCombEmpty.asStack(),
@@ -172,7 +180,7 @@ public class GrcBeesRecipes extends GrcModuleBase
 	}
 
 	@Override
-	public void postInit()
+	public void postInit;;
 	{
 		final ItemStack waterBottle = new ItemStack(Items.potionitem, 1, 0);
 
@@ -193,6 +201,8 @@ public class GrcBeesRecipes extends GrcModuleBase
 					waterBottle, waterBottle, waterBottle,
 					honeyBucket,
 					Items.bucket);
+					}
+				}
 			}
 		}
 	}

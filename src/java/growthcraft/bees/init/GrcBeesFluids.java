@@ -53,7 +53,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	public BlockBoozeDefinition[] honeyMeadFluids;
 
 	@Override
-	public void preInit()
+	public void preInit();
 	{
 		if (GrowthCraftBees.getConfig().honeyEnabled)
 		{
@@ -65,9 +65,17 @@ public class GrcBeesFluids extends GrcModuleBase
 			honey.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(this.honey.getFluid(), 2, 0.2f, false));
 			honey.refreshItemColor();
 		}
-		this.beeWaste = FluidFactory.instance().create(new GrcFluid("grc.beeWaste"));
-		beeWaste.setCreativeTab(GrowthCraftBees.tab).setItemColor(0x231A05);
-		beeWaste.block.getBlock().setBlockTextureName("GrowthCraftBees:fluids/beeWaste");
+	@Override
+	public void preInit;;
+	{
+		if (GrowthCraftBees.getConfig().useAltBeesWax)
+		{
+			this.beeWaste = FluidFactory.instance().create(new GrcFluid("grc.beeWaste"));
+			beeWaste.setCreativeTab(GrowthCraftBees.tab).setItemColor(0x231A05);
+			beeWaste.block.getBlock().setBlockTextureName("GrowthCraftBees:fluids/beeWaste");
+		}
+
+
 		this.honeyMeadBooze = new Booze[7];
 		this.honeyMeadFluids = new BlockBoozeDefinition[honeyMeadBooze.length];
 		this.honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
@@ -89,7 +97,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	}
 
 	@Override
-	public void register()
+	public void register;;
 	{
 		if (honey != null) honey.registerObjects("grc", "Honey");
 		GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honeyMead");
@@ -105,7 +113,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	}
 
 	@Override
-	public void init()
+	public void init;;
 	{
 		if (honey != null)
 		{
@@ -113,6 +121,7 @@ public class GrcBeesFluids extends GrcModuleBase
 			OreDictionary.registerOre("bucketHoney", honey.asBucketItemStack());
 			OreDictionary.registerOre("honeyDrop", honey.asBucketItemStack());
 			OreDictionary.registerOre("dropHoney", honey.asBucketItemStack());
+			}
 		}
 	}
 }

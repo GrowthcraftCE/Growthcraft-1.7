@@ -60,6 +60,7 @@ public class GrcBeesItems extends GrcModuleBase
 		honeyJar.register("grc.honeyJar");
 		bee.register("grc.bee");
 		beesWax.register("grcbees.BeesWax");
+
 	}
 
 	@Override
