@@ -169,7 +169,7 @@ public class GrcBeesRecipes extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		if (GrowthcraftBees.getConfig().useAltBeesWax
+		if (GrowthcraftBees.getConfig().useAltBeesWax)
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.beeWaste.fluid.getFluid())
 			.brewsFrom(new FluidStack(FluidRegistry.WATER, 250),
 				GrowthCraftBees.items.honeyCombEmpty.asStack(),
