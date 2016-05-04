@@ -123,7 +123,7 @@ public class GrcBeesRecipes extends GrcModuleBase
 	}
 
 	@Override
-	public void register()
+	public void register();
 	{
 		final ItemStack waterBottle = new ItemStack(Items.potionitem, 1, 0);
 		final ItemStack meadBucket = GrowthCraftBees.fluids.honeyMeadBuckets[0].asStack();
