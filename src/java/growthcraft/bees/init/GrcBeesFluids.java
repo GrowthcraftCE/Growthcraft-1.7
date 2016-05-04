@@ -68,7 +68,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	@Override
 	public void preInit;;
 	{
-		if (GrowthcraftBees.getConfig().useAltBeesWax)
+		if (GrowthCraftBees.getConfig().useAltBeesWax)
 		{
 			this.beeWaste = FluidFactory.instance().create(new GrcFluid("grc.beeWaste"));
 			beeWaste.setCreativeTab(GrowthCraftBees.tab).setItemColor(0x231A05);
