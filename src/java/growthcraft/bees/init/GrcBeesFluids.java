@@ -66,7 +66,7 @@ public class GrcBeesFluids extends GrcModuleBase
 			honey.refreshItemColor();
 		}
 	@Override
-	public void preInit();
+	public void preInit;;
 	{
 		if (GrowthcraftBees.getConfig().useAltBeesWax)
 		{
@@ -97,7 +97,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	}
 
 	@Override
-	public void register();
+	public void register;;
 	{
 		if (honey != null) honey.registerObjects("grc", "Honey");
 		GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honeyMead");
@@ -113,7 +113,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	}
 
 	@Override
-	public void init();
+	public void init;;
 	{
 		if (honey != null)
 		{
@@ -121,6 +121,7 @@ public class GrcBeesFluids extends GrcModuleBase
 			OreDictionary.registerOre("bucketHoney", honey.asBucketItemStack());
 			OreDictionary.registerOre("honeyDrop", honey.asBucketItemStack());
 			OreDictionary.registerOre("dropHoney", honey.asBucketItemStack());
+			}
 		}
 	}
 }
