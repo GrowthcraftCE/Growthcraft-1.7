@@ -65,7 +65,7 @@ public class GrcBeesItems extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		if (GrowthcraftBees.getConfig().useNormalBeeswax
+		if (GrowthcraftBees.getConfig().useNormalBeeswax)
 		final ItemStack emptyComb = honeyCombEmpty.asStack();
 		GameRegistry.addShapelessRecipe(EnumBeesWax.NORMAL.asStack(),
 			emptyComb, emptyComb, emptyComb,
