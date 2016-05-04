@@ -46,7 +46,6 @@ import net.minecraftforge.oredict.OreDictionary;
 public class GrcBeesFluids extends GrcModuleBase
 {
 	public FluidFactory.FluidDetails honey;
-	public FluidFactory.FluidDetails beeWaste;
 	public Booze[] honeyMeadBooze;
 	public ItemDefinition honeyMeadBottle;
 	public ItemBucketBoozeDefinition[] honeyMeadBuckets;
@@ -65,9 +64,6 @@ public class GrcBeesFluids extends GrcModuleBase
 			honey.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(this.honey.getFluid(), 2, 0.2f, false));
 			honey.refreshItemColor();
 		}
-		this.beeWaste = FluidFactory.instance().create(new GrcFluid("grc.beeWaste"));
-		beeWaste.setCreativeTab(GrowthCraftBees.tab).setItemColor(0x231A05);
-		beeWaste.block.getBlock().setBlockTextureName("GrowthCraftBees:fluids/beeWaste");
 		this.honeyMeadBooze = new Booze[7];
 		this.honeyMeadFluids = new BlockBoozeDefinition[honeyMeadBooze.length];
 		this.honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
@@ -91,11 +87,11 @@ public class GrcBeesFluids extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		if (honey != null) honey.registerObjects("grc", "Honey");
 		GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honeyMead");
 		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle, "grc.honeyMead", null);
 		if (honey != null)
 		{
+			honey.registerObjects("grc", "Honey");
 			CoreRegistry.instance().fluidDictionary().addFluidTags(honey.getFluid(), BeesFluidTag.HONEY);
 		}
 		if (ForestryFluids.HONEY.exists())
