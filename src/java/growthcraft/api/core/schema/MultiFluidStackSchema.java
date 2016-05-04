@@ -23,12 +23,16 @@
  */
 package growthcraft.api.core.schema;
 
+import java.util.Set;
+import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.fluids.TaggedFluidStacks;
+import growthcraft.api.core.fluids.MultiFluidStacks;
 import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.fluids.FluidTest;
@@ -39,11 +43,39 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class MultiFluidStackSchema implements ICommentable, IValidatable, IMultiFluidStacks
 {
+	public String name;
 	public List<String> names = new ArrayList<String>();
 	public List<String> inclusion_tags = new ArrayList<String>();
 	public List<String> exclusion_tags = new ArrayList<String>();
 	public String comment = "";
 	public int amount;
+
+	public MultiFluidStackSchema(@Nonnull IMultiFluidStacks fluidStacks)
+	{
+		if (fluidStacks instanceof TaggedFluidStacks)
+		{
+			final TaggedFluidStacks taggedStack = (TaggedFluidStacks)fluidStacks;
+			inclusion_tags.addAll(taggedStack.getTags());
+			exclusion_tags.addAll(taggedStack.getExclusionTags());
+		}
+		else if (fluidStacks instanceof MultiFluidStacks)
+		{
+			names.addAll(((MultiFluidStacks)fluidStacks).getNames());
+		}
+		else
+		{
+			throw new IllegalArgumentException("Expected a TaggedFluidStacks or a MultiFluidStacks");
+		}
+		this.amount = fluidStacks.getAmount();
+	}
+
+	public MultiFluidStackSchema(@Nonnull FluidStack fluidStack)
+	{
+		this.name = fluidStack.getFluid().getName();
+		this.amount = fluidStack.amount;
+	}
+
+	public MultiFluidStackSchema() {}
 
 	@Override
 	public void setComment(String comm)
@@ -72,14 +104,20 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 		return expandTagNames(exclusion_tags);
 	}
 
-	public List<Fluid> getFluids()
+	public Collection<Fluid> getFluidsByTags()
 	{
-		final List<Fluid> result = new ArrayList<Fluid>();
+		final Set<Fluid> result = new HashSet<Fluid>();
 		final Collection<Fluid> fluids = CoreRegistry.instance().fluidDictionary().getFluidsByTags(expandInclusionTags());
 		final Collection<Fluid> exfluids = CoreRegistry.instance().fluidDictionary().getFluidsByTags(expandExclusionTags());
 		result.addAll(fluids);
 		result.removeAll(exfluids);
-		for (String name : names)
+		return result;
+	}
+
+	public Collection<Fluid> getFluidsByNames()
+	{
+		final Set<Fluid> result = new HashSet<Fluid>();
+		if (name != null)
 		{
 			final Fluid fluid = FluidRegistry.getFluid(name);
 			if (fluid != null)
@@ -87,6 +125,22 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 				result.add(fluid);
 			}
 		}
+		for (String fluidName : names)
+		{
+			final Fluid fluid = FluidRegistry.getFluid(fluidName);
+			if (fluid != null)
+			{
+				result.add(fluid);
+			}
+		}
+		return result;
+	}
+
+	public Collection<Fluid> getFluids()
+	{
+		final Set<Fluid> result = new HashSet<Fluid>();
+		result.addAll(getFluidsByTags());
+		result.addAll(getFluidsByNames());
 		return result;
 	}
 
@@ -105,6 +159,19 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 			stacks.add(new FluidStack(fluid, amount));
 		}
 		return stacks;
+	}
+
+	public List<IMultiFluidStacks> getMultiFluidStacks()
+	{
+		final List<IMultiFluidStacks> result = new ArrayList<IMultiFluidStacks>();
+		result.add(new TaggedFluidStacks(amount, inclusion_tags, exclusion_tags));
+		final List<FluidStack> fluidStacks = new ArrayList<FluidStack>();
+		for (Fluid fluid : getFluidsByNames())
+		{
+			fluidStacks.add(new FluidStack(fluid, amount));
+		}
+		result.add(new MultiFluidStacks(fluidStacks));
+		return result;
 	}
 
 	@Override
@@ -131,17 +198,6 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 		return false;
 	}
 
-	public static MultiFluidStackSchema newWithTags(int amount, String... tags)
-	{
-		final MultiFluidStackSchema schema = new MultiFluidStackSchema();
-		for (String tag : tags)
-		{
-			schema.inclusion_tags.add(tag);
-		}
-		schema.amount = amount;
-		return schema;
-	}
-
 	@Override
 	public boolean isValid()
 	{
@@ -158,5 +214,16 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 	public String toString()
 	{
 		return String.format("Schema<MultiFluidStack>(names: %s, inclusion_tags: %s, exclusion_tags: %s, amount: %d)", names, inclusion_tags, exclusion_tags, amount);
+	}
+
+	public static MultiFluidStackSchema newWithTags(int amount, String... tags)
+	{
+		final MultiFluidStackSchema schema = new MultiFluidStackSchema();
+		for (String tag : tags)
+		{
+			schema.inclusion_tags.add(tag);
+		}
+		schema.amount = amount;
+		return schema;
 	}
 }

@@ -35,7 +35,7 @@ import net.minecraftforge.fluids.FluidStack;
 public interface IFermentingRegistry extends ILoggable
 {
 	void addRecipe(@Nonnull IFermentationRecipe recipe);
-	void addRecipe(@Nonnull FluidStack result, @Nonnull FluidStack booze, @Nonnull Object fermenter, int time);
+	void addRecipe(@Nonnull FluidStack result, @Nonnull Object booze, @Nonnull Object fermenter, int time);
 	IFermentationRecipe findRecipe(@Nullable FluidStack booze, @Nullable ItemStack fermenter);
 	List<IFermentationRecipe> findRecipes(@Nullable FluidStack fluidstack);
 	List<IFermentationRecipe> findRecipes(@Nullable ItemStack fermenter);

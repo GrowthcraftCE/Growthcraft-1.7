@@ -23,6 +23,7 @@
  */
 package growthcraft.api.core.fluids;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nonnull;
@@ -37,9 +38,28 @@ public class MultiFluidStacks implements IMultiFluidStacks
 {
 	private List<FluidStack> fluidStacks;
 
+	public MultiFluidStacks(@Nonnull List<FluidStack> stacks)
+	{
+		this.fluidStacks = stacks;
+	}
+
 	public MultiFluidStacks(@Nonnull FluidStack... stacks)
 	{
-		this.fluidStacks = Arrays.asList(stacks);
+		this(Arrays.asList(stacks));
+	}
+
+	public List<String> getNames()
+	{
+		final List<String> result = new ArrayList<String>();
+		for (FluidStack stack : fluidStacks)
+		{
+			final Fluid fluid = stack.getFluid();
+			if (fluid != null)
+			{
+				result.add(fluid.getName());
+			}
+		}
+		return result;
 	}
 
 	@Override

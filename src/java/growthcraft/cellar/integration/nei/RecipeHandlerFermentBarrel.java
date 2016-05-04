@@ -50,7 +50,7 @@ public class RecipeHandlerFermentBarrel extends TemplateRecipeHandler
 	{
 		public IFermentationRecipe fermentationRecipe;
 		public FluidStack outputFluidStack;
-		public FluidStack inputFluidStack;
+		public List<FluidStack> inputFluidStacks;
 
 		protected PositionedStack ingredient;
 		public CachedFermentationRecipe(@Nonnull IFermentationRecipe recipe)
@@ -59,10 +59,9 @@ public class RecipeHandlerFermentBarrel extends TemplateRecipeHandler
 			this.fermentationRecipe = recipe;
 			this.ingredient = new PositionedStack(fermentationRecipe.getFermentingItemStack().getItemStacks(), 38, 42);
 
-			this.inputFluidStack = fermentationRecipe.getInputFluidStack().copy();
-			inputFluidStack.amount = GrowthCraftCellar.getConfig().fermentBarrelMaxCap;
+			this.inputFluidStacks = fermentationRecipe.getInputFluidStack().getFluidStacks();
 
-			this.outputFluidStack = fermentationRecipe.getInputFluidStack().copy();
+			this.outputFluidStack = fermentationRecipe.getOutputFluidStack().copy();
 			outputFluidStack.amount = GrowthCraftCellar.getConfig().fermentBarrelMaxCap;
 		}
 
@@ -112,7 +111,12 @@ public class RecipeHandlerFermentBarrel extends TemplateRecipeHandler
 	{
 		if (recipe instanceof CachedFermentationRecipe)
 		{
-			TemplateRenderHelper.drawFluidStack(58, 6, 50, 52, ((CachedFermentationRecipe)recipe).inputFluidStack, GrowthCraftCellar.getConfig().fermentBarrelMaxCap);
+			final List<FluidStack> stacks = ((CachedFermentationRecipe)recipe).inputFluidStacks;
+			final FluidStack stack = stacks.get((stacks.size() * cycleticks / 20) % stacks.size());
+			if (stack != null)
+			{
+				TemplateRenderHelper.drawFluid(58, 6, 50, 52, stack.getFluid(), 52);
+			}
 			//TemplateRenderHelper.drawFluidStack(58, 6, 50, 52, ((CachedFermentationRecipe)recipe).outputFluidStack, GrowthCraftCellar.getConfig().fermentBarrelMaxCap);
 		}
 	}

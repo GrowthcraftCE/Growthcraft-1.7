@@ -36,9 +36,19 @@ public class MultiItemStacks implements IMultiItemStacks
 {
 	private List<ItemStack> itemStacks;
 
+	public MultiItemStacks(@Nonnull List<ItemStack> stacks)
+	{
+		this.itemStacks = stacks;
+	}
+
 	public MultiItemStacks(@Nonnull ItemStack... stacks)
 	{
-		this.itemStacks = Arrays.asList(stacks);
+		this(Arrays.asList(stacks));
+	}
+
+	public MultiItemStacks copy()
+	{
+		return new MultiItemStacks(itemStacks);
 	}
 
 	@Override

@@ -23,6 +23,7 @@
  */
 package growthcraft.api.cellar.fermenting.user;
 
+import growthcraft.api.core.schema.MultiFluidStackSchema;
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
@@ -31,13 +32,13 @@ public class UserFermentingRecipe implements ICommentable
 {
 	public String comment = "";
 	public ItemKeySchema item;
-	public FluidStackSchema input_fluid;
+	public MultiFluidStackSchema input_fluid;
 	public FluidStackSchema output_fluid;
 	public int time;
 
-	public UserFermentingRecipe(ItemKeySchema i, FluidStackSchema inp_fluid, FluidStackSchema out_fluid, int t)
+	public UserFermentingRecipe(ItemKeySchema itemSchema, MultiFluidStackSchema inp_fluid, FluidStackSchema out_fluid, int t)
 	{
-		this.item = i;
+		this.item = itemSchema;
 		this.input_fluid = inp_fluid;
 		this.output_fluid = out_fluid;
 		this.time = t;
