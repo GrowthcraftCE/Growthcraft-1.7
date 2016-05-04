@@ -162,12 +162,6 @@ public class GrcBeesRecipes extends GrcModuleBase
 		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumBeesWax.RED.asStack(),
 			EnumBeesWax.NORMAL.asStack(), "dyeRed"));
 
-		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.beeWaste.fluid.getFluid())
-			.brewsFrom(new FluidStack(FluidRegistry.WATER, 250),
-				GrowthCraftBees.items.honeyCombEmpty.asStack(),
-				TickUtils.minutes(1),
-				new Residue(GrowthCraftBees.items.beesWax.asStack(1), 1.0f));
-
 		registerRecipes();
 	}
 
