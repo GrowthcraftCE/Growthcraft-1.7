@@ -62,7 +62,7 @@ public class GrcBeesItems extends GrcModuleBase
 		beesWax.register("grcbees.BeesWax");
 
 	@Override
-	public void init();
+	public void init;;
 	{
 		OreDictionary.registerOre("materialWax", beesWax.getItem());
 		OreDictionary.registerOre("materialPressedwax", beesWax.getItem());
@@ -77,5 +77,6 @@ public class GrcBeesItems extends GrcModuleBase
 		OreDictionary.registerOre("honeyDrop", honeyJar.getItem());
 		OreDictionary.registerOre("dropHoney", honeyJar.getItem());
 		OreDictionary.registerOre("bucketHoney", honeyJar.getItem());
+		}
 	}
 }
