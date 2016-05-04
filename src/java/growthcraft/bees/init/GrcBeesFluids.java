@@ -66,7 +66,7 @@ public class GrcBeesFluids extends GrcModuleBase
 			honey.refreshItemColor();
 		}
 	@Override
-	public void preInit()
+	public void preInit();
 	{
 		if (GrowthcraftBees.getConfig().useAltBeesWax)
 		this.beeWaste = FluidFactory.instance().create(new GrcFluid("grc.beeWaste"));
@@ -96,7 +96,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	}
 
 	@Override
-	public void register()
+	public void register();
 	{
 		if (honey != null) honey.registerObjects("grc", "Honey");
 		GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honeyMead");
@@ -112,7 +112,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	}
 
 	@Override
-	public void init()
+	public void init();
 	{
 		if (honey != null)
 		{
