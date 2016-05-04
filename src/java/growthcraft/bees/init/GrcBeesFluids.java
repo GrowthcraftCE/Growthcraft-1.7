@@ -70,10 +70,10 @@ public class GrcBeesFluids extends GrcModuleBase
 	{
 		if (GrowthcraftBees.getConfig().useAltBeesWax)
 		{
-		this.beeWaste = FluidFactory.instance().create(new GrcFluid("grc.beeWaste"));
-		beeWaste.setCreativeTab(GrowthCraftBees.tab).setItemColor(0x231A05);
-		beeWaste.block.getBlock().setBlockTextureName("GrowthCraftBees:fluids/beeWaste");
-	}
+			this.beeWaste = FluidFactory.instance().create(new GrcFluid("grc.beeWaste"));
+			beeWaste.setCreativeTab(GrowthCraftBees.tab).setItemColor(0x231A05);
+			beeWaste.block.getBlock().setBlockTextureName("GrowthCraftBees:fluids/beeWaste");
+		}
 
 
 		this.honeyMeadBooze = new Booze[7];
