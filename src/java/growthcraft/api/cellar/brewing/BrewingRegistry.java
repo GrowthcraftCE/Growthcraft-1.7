@@ -21,11 +21,6 @@ public class BrewingRegistry implements IBrewingRegistry
 	private List<BrewingRecipe> recipes = new ArrayList<BrewingRecipe>();
 	private ILogger logger = NullLogger.INSTANCE;
 
-	private Fluid boozeToKey(Fluid f)
-	{
-		return CellarRegistry.instance().booze().maybeAlternateBooze(f);
-	}
-
 	@Override
 	public void setLogger(@Nonnull ILogger l)
 	{

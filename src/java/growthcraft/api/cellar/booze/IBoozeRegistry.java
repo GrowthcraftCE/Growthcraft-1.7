@@ -45,30 +45,4 @@ public interface IBoozeRegistry extends ILoggable
 	BoozeEffect getEffect(@Nullable Fluid fluid);
 	boolean isFluidBooze(@Nullable Fluid f);
 	boolean isFluidBooze(@Nullable FluidStack fluidStack);
-
-	/**
-	 * addBoozeAlternative()
-	 *
-	 * Adds an alternative fluid to the mod that will act as an alternative for the booze.
-	 * You will almost always want to use this if you dont want to go into the trouble of creating boozes.
-	 *
-	 * Example Usage:
-	 *   addBoozeAlternative("short.mead", "grc.honeymead0");
-	 *
-	 * @param altfluid - The alternate fluid.
-	 * @param fluid    - The main fluid/booze.
-	 **/
-	void addBoozeAlternative(@Nonnull Fluid altfluid, @Nonnull Fluid fluid);
-	void addBoozeAlternative(@Nonnull Fluid altfluid, @Nonnull String fluid);
-	void addBoozeAlternative(@Nonnull String altfluid, @Nonnull String fluid);
-
-	boolean isAlternateBooze(@Nullable Fluid f);
-	Fluid getAlternateBooze(@Nullable Fluid f);
-
-	/**
-	 * @param f - source fluid
-	 * @return if an alternate booze exists, that will be returned, else returns the fluid passed in
-	 */
-	Fluid maybeAlternateBooze(@Nullable Fluid f);
-	FluidStack maybeAlternateBoozeStack(@Nullable FluidStack stack);
 }
