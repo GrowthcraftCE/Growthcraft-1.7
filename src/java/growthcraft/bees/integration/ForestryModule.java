@@ -26,13 +26,16 @@ package growthcraft.bees.integration;
 import java.util.ArrayList;
 import com.google.common.collect.ImmutableMap;
 
-import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.bees.BeesFluidTag;
+import growthcraft.api.cellar.booze.BoozeTag;
+import growthcraft.api.core.CoreRegistry;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeBoxForestry;
 import growthcraft.bees.common.block.EnumBeeBoxForestry;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.definition.BlockTypeDefinition;
+import growthcraft.core.integration.forestry.ForestryFluids;
 import growthcraft.core.integration.forestry.ForestryItems;
 import growthcraft.core.integration.ForestryModuleBase;
 
@@ -125,7 +128,7 @@ public class ForestryModule extends ForestryModuleBase
 	@Optional.Method(modid="Forestry")
 	protected void integrate()
 	{
-		CellarRegistry.instance().booze().addBoozeAlternative("short.mead", "grc.honeymead0");
+		if (ForestryFluids.SHORT_MEAD.exists()) CoreRegistry.instance().fluidDictionary().addFluidTags(ForestryFluids.SHORT_MEAD.getFluid(), BoozeTag.YOUNG, BeesFluidTag.MEAD);
 
 		final ItemStack emptyComb = GrowthCraftBees.items.honeyCombEmpty.asStack();
 		final ItemStack fullComb = GrowthCraftBees.items.honeyCombFilled.asStack();

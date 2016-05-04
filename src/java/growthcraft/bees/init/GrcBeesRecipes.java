@@ -30,6 +30,7 @@ import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
+import growthcraft.api.core.fluids.TaggedFluidStacks;
 import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.bees.common.item.EnumBeesWax;
@@ -63,10 +64,12 @@ public class GrcBeesRecipes extends GrcModuleBase
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.honeyMeadBooze[0])
 			.tags(BoozeTag.YOUNG);
 
+		final TaggedFluidStacks youngMead = new TaggedFluidStacks(1, "young", "mead");
+
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.honeyMeadBooze[1])
 			.tags(BoozeTag.FERMENTED)
-			.fermentsFrom(fs[0], new OreItemStacks("yeastBrewers"), fermentTime)
-			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
+			.fermentsFrom(youngMead, new OreItemStacks("yeastBrewers"), fermentTime)
+			.fermentsFrom(youngMead, new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
 				.addPotionEntry(Potion.regeneration, TickUtils.seconds(90), 0);

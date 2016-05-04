@@ -6,14 +6,12 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.util.MultiStacksUtil;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BrewingRegistry implements IBrewingRegistry

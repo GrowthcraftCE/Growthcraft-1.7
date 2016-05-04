@@ -37,7 +37,8 @@ public enum ForestryFluids implements IFluidStackFactory
 	HONEY("for.honey"),
 	BIOMASS("biomass"),
 	JUICE("juice"),
-	SEEDOIL("seedoil");
+	SEEDOIL("seedoil"),
+	SHORT_MEAD("short.mead");
 
 	public final String name;
 

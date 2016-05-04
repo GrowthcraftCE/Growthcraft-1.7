@@ -12,7 +12,6 @@ import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.fluids.FluidUtils;
 
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BoozeRegistry implements IBoozeRegistry
