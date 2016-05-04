@@ -62,12 +62,12 @@ public class GrcBeesRecipes extends GrcModuleBase
 		}
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.honeyMeadBooze[0])
-			.tags(BoozeTag.YOUNG);
+			.tags(BoozeTag.YOUNG, BeesFluidTag.MEAD);
 
 		final TaggedFluidStacks youngMead = new TaggedFluidStacks(1, "young", "mead");
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.honeyMeadBooze[1])
-			.tags(BoozeTag.FERMENTED)
+			.tags(BoozeTag.FERMENTED, BeesFluidTag.MEAD)
 			.fermentsFrom(youngMead, new OreItemStacks("yeastBrewers"), fermentTime)
 			.fermentsFrom(youngMead, new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
 			.getEffect()
@@ -75,7 +75,7 @@ public class GrcBeesRecipes extends GrcModuleBase
 				.addPotionEntry(Potion.regeneration, TickUtils.seconds(90), 0);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.honeyMeadBooze[2])
-			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT)
+			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT, BeesFluidTag.MEAD)
 			.fermentsFrom(fs[1], new OreItemStacks("dustGlowstone"), fermentTime)
 			.fermentsFrom(fs[3], new OreItemStacks("dustGlowstone"), fermentTime)
 			.getEffect()
@@ -83,7 +83,7 @@ public class GrcBeesRecipes extends GrcModuleBase
 				.addPotionEntry(Potion.regeneration, TickUtils.seconds(90), 0);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.honeyMeadBooze[3])
-			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED)
+			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED, BeesFluidTag.MEAD)
 			.fermentsFrom(fs[1], new OreItemStacks("dustRedstone"), fermentTime)
 			.fermentsFrom(fs[2], new OreItemStacks("dustRedstone"), fermentTime)
 			.getEffect()
@@ -91,7 +91,7 @@ public class GrcBeesRecipes extends GrcModuleBase
 				.addPotionEntry(Potion.regeneration, TickUtils.seconds(90), 0);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.honeyMeadBooze[4])
-			.tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
+			.tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED, BeesFluidTag.MEAD)
 			.fermentsFrom(fs[2], new OreItemStacks("yeastEthereal"), fermentTime)
 			.fermentsFrom(fs[3], new OreItemStacks("yeastEthereal"), fermentTime)
 			.getEffect()
@@ -99,7 +99,7 @@ public class GrcBeesRecipes extends GrcModuleBase
 				.addPotionEntry(Potion.regeneration, TickUtils.seconds(90), 0);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.honeyMeadBooze[5])
-			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
+			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED, BeesFluidTag.MEAD)
 			.fermentsFrom(fs[2], new OreItemStacks("yeastOrigin"), fermentTime)
 			.fermentsFrom(fs[3], new OreItemStacks("yeastOrigin"), fermentTime)
 			.getEffect()
@@ -110,7 +110,7 @@ public class GrcBeesRecipes extends GrcModuleBase
 				);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftBees.fluids.honeyMeadBooze[6])
-			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
+			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED, BeesFluidTag.MEAD)
 			.fermentsFrom(fs[0], new OreItemStacks("yeastPoison", 1), fermentTime)
 			.fermentsFrom(fs[1], new OreItemStacks("yeastPoison", 1), fermentTime)
 			.fermentsFrom(fs[2], new OreItemStacks("yeastPoison", 1), fermentTime)
