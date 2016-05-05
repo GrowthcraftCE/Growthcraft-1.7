@@ -7,7 +7,8 @@ import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.user.UserBeesConfig;
 import growthcraft.api.bees.user.UserFlowerEntry;
 import growthcraft.api.bees.user.UserFlowersConfig;
-import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.fluids.TaggedFluidStacks;
+import growthcraft.api.core.item.recipes.ShapelessMultiRecipe;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
@@ -45,9 +46,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -201,25 +199,16 @@ public class GrowthCraftBees
 		final ItemStack honeyStack = items.honeyCombFilled.asStack();
 		GameRegistry.addShapelessRecipe(items.honeyJar.asStack(),
 			honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);
-		
-		if (fluids.honey != null)
-		{
-			final ItemStack honeyBottleStack = fluids.honey.asBottleItemStack();
-			GameRegistry.addShapelessRecipe(items.honeyJar.asStack(),
-				honeyBottleStack, honeyBottleStack, honeyBottleStack, Items.flower_pot);
-		}
 	}
 
 	private void postRegisterRecipes()
 	{
 		GameRegistry.addRecipe(new ShapedOreRecipe(beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
 	
-		for (Fluid fluid : CoreRegistry.instance().fluidDictionary().getFluidsByTags(BeesFluidTag.HONEY))
-		{
-			final ItemStack honeyBucket = FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 1000), new ItemStack(Items.bucket));
-			if (honeyBucket != null) GameRegistry.addShapelessRecipe(items.honeyJar.asStack(),
-					honeyBucket, Items.flower_pot);
-		}
+		GameRegistry.addRecipe(new ShapelessMultiRecipe(
+				items.honeyJar.asStack(), 
+				new TaggedFluidStacks(999, BeesFluidTag.HONEY.getName()), 
+				Items.flower_pot));
 	}
 
 	@EventHandler

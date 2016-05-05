@@ -25,28 +25,26 @@ package growthcraft.bees.init;
 
 import growthcraft.api.bees.BeesFluidTag;
 import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
 import growthcraft.api.core.fluids.TaggedFluidStacks;
 import growthcraft.api.core.item.OreItemStacks;
+import growthcraft.api.core.item.recipes.ShapelessMultiRecipe;
 import growthcraft.api.core.util.TickUtils;
-import growthcraft.bees.common.item.EnumBeesWax;
 import growthcraft.bees.GrowthCraftBees;
+import growthcraft.bees.common.item.EnumBeesWax;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
-import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
-
-import cpw.mods.fml.common.registry.GameRegistry;
+import growthcraft.core.common.GrcModuleBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class GrcBeesRecipes extends GrcModuleBase
 {
@@ -123,31 +121,6 @@ public class GrcBeesRecipes extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		final ItemStack waterBottle = new ItemStack(Items.potionitem, 1, 0);
-		final ItemStack meadBucket = GrowthCraftBees.fluids.honeyMeadBuckets[0].asStack();
-
-		// Bucket of mead recipes
-		/// Single bucket
-		GameRegistry.addRecipe(new ShapelessOreRecipe(meadBucket,
-			Items.water_bucket,
-			"bucketHoney",
-			Items.bucket));
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(meadBucket,
-			waterBottle, waterBottle, waterBottle,
-			"bucketHoney",
-			Items.bucket));
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(meadBucket,
-			Items.water_bucket,
-			"bottleHoney", "bottleHoney", "bottleHoney",
-			Items.bucket));
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(meadBucket,
-			waterBottle, waterBottle, waterBottle,
-			"bottleHoney", "bottleHoney", "bottleHoney",
-			Items.bucket));
-
 		final ItemStack emptyComb = GrowthCraftBees.items.honeyCombEmpty.asStack();
 		GameRegistry.addShapelessRecipe(EnumBeesWax.NORMAL.asStack(),
 			emptyComb, emptyComb, emptyComb,
@@ -166,26 +139,12 @@ public class GrcBeesRecipes extends GrcModuleBase
 	@Override
 	public void postInit()
 	{
-		final ItemStack waterBottle = new ItemStack(Items.potionitem, 1, 0);
+		final ItemStack meadBucket = GrowthCraftBees.fluids.honeyMeadBuckets[0].asStack();
 
-		for (Fluid fluid : CoreRegistry.instance().fluidDictionary().getFluidsByTags(BeesFluidTag.HONEY))
-		{
-			final ItemStack honeyBucket = FluidContainerRegistry.fillFluidContainer(new FluidStack(fluid, 1000), new ItemStack(Items.bucket));
-			final ItemStack meadBucket = GrowthCraftBees.fluids.honeyMeadBuckets[0].asStack();
-
-			if (honeyBucket != null)
-			{
-				GameRegistry.addShapelessRecipe(meadBucket,
-					Items.water_bucket,
-					honeyBucket,
-					Items.bucket);
-
-				/// Water bottles
-				GameRegistry.addShapelessRecipe(meadBucket,
-					waterBottle, waterBottle, waterBottle,
-					honeyBucket,
-					Items.bucket);
-			}
-		}
+		GameRegistry.addRecipe(new ShapelessMultiRecipe(
+				meadBucket,
+				Items.bucket,
+				new TaggedFluidStacks(999, "honey"),
+				new FluidStack(FluidRegistry.WATER, 1000)));
 	}
 }
