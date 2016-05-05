@@ -191,14 +191,14 @@ public class RecipeHandlerShapedMulti extends TemplateRecipeHandler
 		}
 
 		final ArrayList<Object> items = new ArrayList<Object>();
-		
+
 		for (IItemStackListProvider item : recipe.getInput())
 		{
-			List<ItemStack> stacks = item.getItemStacks();
-			
+			final List<ItemStack> stacks = item.getItemStacks();
+
 			if (stacks.isEmpty())
 				return null;
-			
+
 			items.add(stacks);
 		}
 
