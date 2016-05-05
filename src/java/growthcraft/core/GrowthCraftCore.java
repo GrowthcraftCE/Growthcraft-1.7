@@ -112,6 +112,7 @@ public class GrowthCraftCore
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.core.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.core.integration.Waila());
 		if (config.enableAppleCoreIntegration) modules.add(new growthcraft.core.integration.AppleCore());
+		if (config.enableNEIIntegration) modules.add(new growthcraft.core.integration.nei.NEIModule());
 
 		if (config.debugEnabled)
 		{

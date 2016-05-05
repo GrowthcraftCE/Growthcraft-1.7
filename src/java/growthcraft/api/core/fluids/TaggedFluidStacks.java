@@ -27,12 +27,13 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.definition.IMultiFluidStacks;
-
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -44,6 +45,7 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 	private List<FluidTag> fluidTags;
 	private List<FluidTag> exclusionFluidTags;
 	private List<Fluid> fluidCache;
+	private List<ItemStack> fluidContainers;
 
 	/**
 	 * @param amt - expected fluid stack size
@@ -139,5 +141,16 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 		if (!FluidTest.isValid(stack)) return false;
 		final Fluid expected = stack.getFluid();
 		return containsFluid(expected);
+	}
+
+	@Override
+	public List<ItemStack> getItemStacks()
+	{
+		if (fluidContainers == null)
+		{
+			fluidContainers = FluidUtils.getFluidContainers(getFluidStacks());
+		}
+		
+		return fluidContainers;
 	}
 }

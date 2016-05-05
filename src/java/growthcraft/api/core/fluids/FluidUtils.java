@@ -1,20 +1,81 @@
 package growthcraft.api.core.fluids;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 
 public class FluidUtils
 {
+	private static Map<Fluid, List<FluidContainerData>> fluidData;
+	
 	private FluidUtils() {}
+	
+	public static Map<Fluid, List<FluidContainerData>> getFluidData()
+	{
+		if (fluidData == null)
+		{
+			fluidData = new HashMap<Fluid, List<FluidContainerData>>();
+			for (FluidContainerData data : Arrays.asList(FluidContainerRegistry.getRegisteredFluidContainerData()))
+			{
+				if (!fluidData.containsKey(data.fluid.getFluid()))
+				{
+					fluidData.put(data.fluid.getFluid(), new ArrayList<FluidContainerData>());
+				}
+				fluidData.get(data.fluid.getFluid()).add(data);
+			}
+		}
+		
+		return fluidData;
+	}
+	
+	public static List<ItemStack> getFluidContainers(FluidStack... fluids)
+	{
+		if (fluids.length == 1)
+		{
+			final ArrayList<ItemStack> fluidContainers = new ArrayList<ItemStack>();
+			final FluidStack fluidStack = fluids[0];
+
+			for (FluidContainerData data : getFluidData().get(fluidStack.getFluid()))
+			{
+				if (data.fluid.amount >= fluidStack.amount)
+				{
+					fluidContainers.add(data.filledContainer);
+				}
+			}
+			
+			return fluidContainers;
+		} 
+		else
+		{
+			return getFluidContainers(Arrays.asList(fluids));
+		}
+	}
+	
+	public static List<ItemStack> getFluidContainers(Collection<FluidStack> fluids)
+	{
+		final ArrayList<ItemStack> fluidContainers = new ArrayList<ItemStack>();
+		
+		for (FluidStack fluidStack : fluids)
+		{
+			fluidContainers.addAll(getFluidContainers(fluidStack));
+		}
+		
+		return fluidContainers;
+	}
 
 	public static FluidStack drainFluidBlock(World world, int x, int y, int z, boolean doDrain)
 	{
