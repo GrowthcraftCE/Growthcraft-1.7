@@ -28,15 +28,17 @@ import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.fluids.TaggedFluidStacks;
 import growthcraft.api.core.fluids.MultiFluidStacks;
 import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.fluids.FluidTest;
-
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -49,6 +51,7 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 	public List<String> exclusion_tags = new ArrayList<String>();
 	public String comment = "";
 	public int amount;
+	private List<ItemStack> fluidContainers;
 
 	public MultiFluidStackSchema(@Nonnull IMultiFluidStacks fluidStacks)
 	{
@@ -225,5 +228,16 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 		}
 		schema.amount = amount;
 		return schema;
+	}
+
+	@Override
+	public List<ItemStack> getItemStacks()
+	{
+		if (fluidContainers == null)
+		{
+			fluidContainers = FluidUtils.getFluidContainers(getFluidStacks());
+		}
+		
+		return fluidContainers;
 	}
 }
