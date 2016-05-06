@@ -11,5 +11,5 @@
   <suppress files="[\\/]api[\\/]invtweaks" checks="."/>
   <suppress files="[\\/]api[\\/]powercrystals[\\/]minefactoryreloaded" checks="."/>
   <suppress files="[\\/]api[\\/]thaumcraft" checks="."/>
-  <suppress files="[\\/]api[\\/]mcp/mobius/waila" checks="."/>
+  <suppress files="[\\/]api[\\/]mcp[\\/]mobius[\\/]waila" checks="."/>
 </suppressions>

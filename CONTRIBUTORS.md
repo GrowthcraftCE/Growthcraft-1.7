@@ -16,7 +16,7 @@
 ## Code Monkeys
 * Firedingo
 * IceDragon
-* SimonMeskens
+* Gilberreke
 
 ## The Idea Guys
 * PitchBright
