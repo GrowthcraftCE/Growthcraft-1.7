@@ -144,7 +144,7 @@ public class GrcBeesRecipes extends GrcModuleBase
 		GameRegistry.addRecipe(new ShapelessMultiRecipe(
 				meadBucket,
 				Items.bucket,
-				new TaggedFluidStacks(999, "honey"),
+				new TaggedFluidStacks(1000, "honey"),
 				new FluidStack(FluidRegistry.WATER, 1000)));
 	}
 }
