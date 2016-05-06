@@ -207,7 +207,7 @@ public class GrowthCraftBees
 	
 		GameRegistry.addRecipe(new ShapelessMultiRecipe(
 				items.honeyJar.asStack(), 
-				new TaggedFluidStacks(999, BeesFluidTag.HONEY.getName()), 
+				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()), 
 				Items.flower_pot));
 	}
 

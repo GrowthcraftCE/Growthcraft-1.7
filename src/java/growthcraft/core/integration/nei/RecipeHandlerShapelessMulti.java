@@ -199,12 +199,15 @@ public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler
 				final List<FluidContainerData> fluidData = FluidUtils.getFluidData()
 						.get(fluidStack.getFluid());
 
+				if (fluidData == null)
+					continue;
+				
 				for (FluidContainerData data : fluidData)
 				{
 					final FluidStack fluid = data.fluid;
 
 					final int amount = (int) Math.max(1,
-							Math.ceil(multiStack.getAmount() / fluid.amount));
+							Math.ceil(((double)multiStack.getAmount() - 1) / fluid.amount));
 
 					if (!itemsFluidMap.containsKey(amount))
 						itemsFluidMap.put(amount, new ArrayList<Object>());

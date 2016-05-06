@@ -26,7 +26,7 @@ public class FluidUtils
 	
 	public static Map<Fluid, List<FluidContainerData>> getFluidData()
 	{
-		if (fluidData == null)
+		if (fluidData == null || fluidData.size() == 0)
 		{
 			fluidData = new HashMap<Fluid, List<FluidContainerData>>();
 			for (FluidContainerData data : Arrays.asList(FluidContainerRegistry.getRegisteredFluidContainerData()))
