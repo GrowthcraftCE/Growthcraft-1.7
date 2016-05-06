@@ -1,6 +1,9 @@
 package growthcraft.core;
 
+import java.util.List;
+
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.fluids.user.UserFluidDictionaryConfig;
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.log.GrcLogger;
@@ -25,7 +28,6 @@ import growthcraft.core.init.GrcCoreItems;
 import growthcraft.core.init.GrcCoreRecipes;
 import growthcraft.core.integration.bop.BopPlatform;
 import growthcraft.core.stats.GrcCoreAchievements;
-
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -41,6 +43,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.RecipeSorter;
 
 @Mod(
@@ -123,6 +128,17 @@ public class GrowthCraftCore
 		creativeTab = new CreativeTabsGrowthcraft("creative_tab_grccore");
 
 		EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
+		if (config.changeWaterBottleCapacity)
+		{
+			final List<FluidContainerData> dataList = FluidUtils.getFluidData().get(FluidRegistry.WATER);
+			for (FluidContainerData data : dataList)
+				if (OreDictionary.itemMatches(data.filledContainer, new ItemStack(Items.potionitem, 1, 0), true))
+					data.fluid.amount = config.bottleCapacity;
+			
+			// Reset the fluidData cache, as we are loading it super early here
+			FluidUtils.getFluidData().clear();
+		}
+		if (config.changeWaterBottleContainer) Items.potionitem.setContainerItem(Items.glass_bottle);
 
 		RecipeSorter.register("grcShaplessComparable", ShapelessItemComparableRecipe.class, RecipeSorter.Category.SHAPELESS, "");
 
