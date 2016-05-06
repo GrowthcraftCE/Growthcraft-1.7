@@ -165,7 +165,7 @@ public class ShapelessMultiRecipe implements IRecipe
 							{
 								final int leftover = Math.max(0, aggregateAmount
 										- containerFluid.amount);
-								if (leftover == 0)
+								if (leftover <= 1)
 								{
 									aggregateFluids.remove(fluidStacks);
 								} else
