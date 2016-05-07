@@ -55,6 +55,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	private int timemax = GrowthCraftCellar.getConfig().fermentTime;
 	private boolean shouldUseCachedRecipe = GrowthCraftCellar.getConfig().fermentBarrelUseCachedRecipe;
 	private boolean recheckRecipe = true;
+	private boolean lidOn = true;
 	private IFermentationRecipe activeRecipe;
 
 	@Override
@@ -280,6 +281,10 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	{
 		super.readFromNBTForItem(nbt);
 		readFermentTimeFromNBT(nbt);
+		if (nbt.hasKey("lid_on"))
+		{
+			this.lidOn = nbt.getBoolean("lid_on");
+		}
 	}
 
 	@Override
@@ -299,6 +304,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	{
 		super.writeToNBTForItem(nbt);
 		writeFermentTimeToNBT(nbt);
+		nbt.setBoolean("lid_on", lidOn);
 	}
 
 	@Override
