@@ -24,6 +24,7 @@
 package growthcraft.api.cellar.fermenting.user;
 
 import java.io.BufferedReader;
+import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.definition.IMultiFluidStacks;
@@ -41,17 +42,31 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 	protected UserFermentingRecipes defaultRecipes = new UserFermentingRecipes();
 	protected UserFermentingRecipes recipes;
 
-	public void addDefaultSchemas(ItemKeySchema item, MultiFluidStackSchema inputFluid, FluidStackSchema outputFluid, int time)
+	public void addDefaultSchemas(@Nonnull ItemKeySchema item, @Nonnull MultiFluidStackSchema inputFluid, @Nonnull FluidStackSchema outputFluid, int time)
 	{
 		addDefault(new UserFermentingRecipe(item, inputFluid, outputFluid, time));
 	}
 
-	public void addDefault(UserFermentingRecipe recipe)
+	public void addDefault(@Nonnull UserFermentingRecipe recipe)
 	{
-		defaultRecipes.data.add(recipe);
+		if (recipe != null)
+		{
+			defaultRecipes.data.add(recipe);
+			logger.info("Adding default user fermenting recipe {%s}", recipe);
+		}
+		else
+		{
+			logger.error("We have a problem here, someone tossed a null user recipe at us!");
+			throw new IllegalArgumentException("Oh no you didn't, FIX DAT.");
+		}
 	}
 
-	public void addDefault(Object stack, Object inputFluid, FluidStack outputFluid, int time)
+	/**
+	 * @param stack - any ItemStack or IMultiItemStack
+	 * @param inputFluid - any FluidStack or IMultiFluidStack
+	 * @return
+	 */
+	public void addDefault(@Nonnull Object stack, @Nonnull Object inputFluid, @Nonnull FluidStack outputFluid, int time)
 	{
 		for (ItemKeySchema itemKey : ItemKeySchema.createMulti(stack))
 		{

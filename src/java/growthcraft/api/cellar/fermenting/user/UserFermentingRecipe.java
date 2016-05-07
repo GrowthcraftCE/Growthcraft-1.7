@@ -23,6 +23,8 @@
  */
 package growthcraft.api.cellar.fermenting.user;
 
+import javax.annotation.Nonnull;
+
 import growthcraft.api.core.schema.MultiFluidStackSchema;
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ICommentable;
@@ -36,7 +38,7 @@ public class UserFermentingRecipe implements ICommentable
 	public FluidStackSchema output_fluid;
 	public int time;
 
-	public UserFermentingRecipe(ItemKeySchema itemSchema, MultiFluidStackSchema inp_fluid, FluidStackSchema out_fluid, int t)
+	public UserFermentingRecipe(@Nonnull ItemKeySchema itemSchema, @Nonnull MultiFluidStackSchema inp_fluid, @Nonnull FluidStackSchema out_fluid, int t)
 	{
 		this.item = itemSchema;
 		this.input_fluid = inp_fluid;
@@ -49,7 +51,7 @@ public class UserFermentingRecipe implements ICommentable
 	@Override
 	public String toString()
 	{
-		return String.format("UserFermentingRecipe(`%s` + `%s` / %d = `%s`)", item, input_fluid, time, output_fluid);
+		return String.format("UserFermentingRecipe((`%s` + `%s`) / %d = `%s`)", item, input_fluid, time, output_fluid);
 	}
 
 	@Override
