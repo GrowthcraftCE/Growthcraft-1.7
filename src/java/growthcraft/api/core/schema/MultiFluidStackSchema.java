@@ -51,7 +51,6 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 	public List<String> exclusion_tags = new ArrayList<String>();
 	public String comment = "";
 	public int amount;
-	private List<ItemStack> fluidContainers;
 
 	public MultiFluidStackSchema(@Nonnull IMultiFluidStacks fluidStacks)
 	{
@@ -233,11 +232,6 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 	@Override
 	public List<ItemStack> getItemStacks()
 	{
-		if (fluidContainers == null)
-		{
-			fluidContainers = FluidUtils.getFluidContainers(getFluidStacks());
-		}
-		
-		return fluidContainers;
+		return FluidUtils.getFluidContainers(getFluidStacks());
 	}
 }
