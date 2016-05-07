@@ -171,7 +171,7 @@ item.bucket.fluid.grcmilk.Kumis4.name=Kumis Bucket
 item.bucket.fluid.grcmilk.Kumis5.name=Vile Milk Bucket
 
 # Effects
-grc.effect.booze_milk=Removes all effects (Except Tipsy)
+grc.effect.milk=Removes all effects (Except Tipsy)
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s

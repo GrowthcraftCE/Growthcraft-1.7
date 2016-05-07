@@ -48,11 +48,13 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.item.ItemFoodBottleFluid;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.integration.forestry.ForestryFluids;
 import growthcraft.core.util.FluidFactory;
-import growthcraft.milk.common.effect.EffectBoozeMilk;
+import growthcraft.milk.common.effect.EffectMilk;
 import growthcraft.milk.common.effect.EffectEvilBoozeMilk;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.GrowthCraftMilk;
@@ -88,7 +90,11 @@ public class GrcMilkFluids extends GrcModuleBase
 	{
 		if (GrowthCraftMilk.getConfig().milkEnabled)
 		{
-			this.milk = FluidFactory.instance().create(new GrcFluid("grcmilk.Milk").setDensity(1030).setViscosity(3000), FluidFactory.FEATURE_BOTTLE | FluidFactory.FEATURE_BLOCK);
+			this.milk = FluidFactory.instance().create(
+				new GrcFluid("grcmilk.Milk").setDensity(1030).setViscosity(3000),
+				FluidFactory.FEATURE_FOOD_BOTTLE | FluidFactory.FEATURE_BLOCK);
+			milk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(milk.getFluid(), 2, 0.2f, false));
+			milk.foodBottle.getItem().setEffect(EffectMilk.create(GrowthCraftCellar.potionTipsy));
 			milk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFF);
 			milk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 		}
@@ -215,7 +221,7 @@ public class GrcMilkFluids extends GrcModuleBase
 
 	private void registerFermentations()
 	{
-		final IEffect milkEffect = EffectBoozeMilk.create(GrowthCraftCellar.potionTipsy);
+		final IEffect milkEffect = EffectMilk.create(GrowthCraftCellar.potionTipsy);
 		final IEffect evilMilkEffect = new EffectEvilBoozeMilk();
 
 		final FluidStack[] fs = new FluidStack[kumisFluids.length];

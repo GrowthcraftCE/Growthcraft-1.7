@@ -44,18 +44,18 @@ import net.minecraft.world.World;
  * This is an effect similar to drinking milk, however it can blacklist certain
  * potions effects.
  */
-public class EffectBoozeMilk implements IEffect
+public class EffectMilk implements IEffect
 {
 	// A list of effects that should not be removed by this effect
 	private Set<Integer> blacklist = new HashSet<Integer>();
 
-	public EffectBoozeMilk clearBlacklist()
+	public EffectMilk clearBlacklist()
 	{
 		blacklist.clear();
 		return this;
 	}
 
-	public EffectBoozeMilk blacklistPotions(Potion... potions)
+	public EffectMilk blacklistPotions(Potion... potions)
 	{
 		for (Potion potion : potions)
 		{
@@ -94,19 +94,19 @@ public class EffectBoozeMilk implements IEffect
 
 	public void getDescription(List<String> list)
 	{
-		list.add(GrcI18n.translate("grc.effect.booze_milk"));
+		list.add(GrcI18n.translate("grc.effect.milk"));
 	}
 
 	/**
-	 * Creates a new EffectBoozeMilk, and initializes the blacklist with the
+	 * Creates a new EffectMilk, and initializes the blacklist with the
 	 * given potions
 	 *
 	 * @param potions - list of potions to add to the blacklist
 	 * @return effect
 	 */
-	public static EffectBoozeMilk create(Potion... potions)
+	public static EffectMilk create(Potion... potions)
 	{
-		final EffectBoozeMilk eff = new EffectBoozeMilk();
+		final EffectMilk eff = new EffectMilk();
 		return eff.blacklistPotions(potions);
 	}
 

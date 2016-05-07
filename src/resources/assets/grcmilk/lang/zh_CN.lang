@@ -171,7 +171,7 @@ item.bucket.fluid.grcmilk.Kumis4.name=奶酒桶
 item.bucket.fluid.grcmilk.Kumis5.name=腐败的奶桶
 
 # Effects
-grc.effect.booze_milk=清除除Tispy外所有药水效果
+grc.effect.milk=清除除Tispy外所有药水效果
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s

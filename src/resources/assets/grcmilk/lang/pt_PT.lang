@@ -171,7 +171,7 @@ item.bucket.fluid.grcmilk.Kumis4.name=Balde de Kumis
 item.bucket.fluid.grcmilk.Kumis5.name=Balde de Leite Vil
 
 # Effects
-grc.effect.booze_milk=Remove todos os efeitos (Exceto bebedeira)
+grc.effect.milk=Remove todos os efeitos (Exceto bebedeira)
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s

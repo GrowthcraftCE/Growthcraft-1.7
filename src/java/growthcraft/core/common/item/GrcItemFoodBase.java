@@ -25,14 +25,22 @@ package growthcraft.core.common.item;
 
 import java.util.List;
 
+import growthcraft.api.core.effect.IEffect;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.core.lib.GrcCoreState;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 
 public class GrcItemFoodBase extends ItemFood
 {
+	private IEffect effect;
+
 	public GrcItemFoodBase(int hunger, float saturation, boolean isWolfFav)
 	{
 		super(hunger, saturation, isWolfFav);
@@ -43,12 +51,51 @@ public class GrcItemFoodBase extends ItemFood
 		super(hunger, isWolfFav);
 	}
 
+	public GrcItemFoodBase setEffect(IEffect ef)
+	{
+		this.effect = ef;
+		return this;
+	}
+
+	public IEffect getEffect()
+	{
+		return effect;
+	}
+
+	protected void applyIEffects(ItemStack itemStack, World world, EntityPlayer player)
+	{
+		if (effect != null)
+		{
+			effect.apply(world, player, world.rand, itemStack);
+		}
+	}
+
+	@Override
+	protected void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player)
+	{
+		super.onFoodEaten(itemStack, world, player);
+		applyIEffects(itemStack, world, player);
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean showAdvanced)
 	{
-		super.addInformation(stack, player, list, bool);
-		GrcItemBase.addDescription(this, stack, player, list, bool);
+		super.addInformation(stack, player, list, showAdvanced);
+		GrcItemBase.addDescription(this, stack, player, list, showAdvanced);
+		if (GrcCoreState.showDetailedInformation())
+		{
+			if (effect != null)
+			{
+				effect.getDescription((List<String>)list);
+			}
+		}
+		else
+		{
+			list.add(EnumChatFormatting.GRAY +
+					GrcI18n.translate("grc.tooltip.detailed_information",
+						EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
+		}
 	}
 }

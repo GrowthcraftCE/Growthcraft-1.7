@@ -171,7 +171,7 @@ item.bucket.fluid.grcmilk.Kumis4.name=item.bucket.fluid.grcmilk.Kumis4.name
 item.bucket.fluid.grcmilk.Kumis5.name=item.bucket.fluid.grcmilk.Kumis5.name
 
 # Effects
-grc.effect.booze_milk=grc.effect.booze_milk
+grc.effect.milk=grc.effect.milk
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=grcmilk.butter_churn.itemslot.item
