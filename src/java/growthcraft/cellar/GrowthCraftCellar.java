@@ -250,6 +250,7 @@ public class GrowthCraftCellar
 
 	private void extendPotionsArray()
 	{
+		final int newSize = 1024;
 		for (Field f : Potion.class.getDeclaredFields())
 		{
 			f.setAccessible(true);
@@ -261,9 +262,10 @@ public class GrowthCraftCellar
 					modfield.setAccessible(true);
 					modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
 					final Potion[] potionTypes = (Potion[])f.get(null);
-					if (potionTypes.length < 1024)
+					if (potionTypes.length < newSize)
 					{
-						final Potion[] newPotionTypes = new Potion[1024];
+						logger.info("Resizing PotionTypes array from %d to %d", potionTypes.length, newSize);
+						final Potion[] newPotionTypes = new Potion[newSize];
 						System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
 						f.set(null, newPotionTypes);
 					}
