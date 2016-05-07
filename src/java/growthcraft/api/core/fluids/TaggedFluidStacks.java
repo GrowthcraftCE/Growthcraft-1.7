@@ -45,7 +45,7 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 	private List<FluidTag> fluidTags;
 	private List<FluidTag> exclusionFluidTags;
 	private List<Fluid> fluidCache;
-	private List<ItemStack> fluidContainers;
+	private transient List<ItemStack> fluidContainers;
 
 	/**
 	 * @param amt - expected fluid stack size
@@ -150,7 +150,7 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 		{
 			fluidContainers = FluidUtils.getFluidContainers(getFluidStacks());
 		}
-		
+
 		return fluidContainers;
 	}
 }

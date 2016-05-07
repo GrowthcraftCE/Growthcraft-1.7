@@ -28,16 +28,17 @@ import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import javax.annotation.Nonnull;
 
 import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.fluids.FluidUtils;
-import growthcraft.api.core.fluids.TaggedFluidStacks;
-import growthcraft.api.core.fluids.MultiFluidStacks;
 import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.fluids.FluidUtils;
+import growthcraft.api.core.fluids.MultiFluidStacks;
+import growthcraft.api.core.fluids.TaggedFluidStacks;
+import growthcraft.api.core.util.StringUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -215,7 +216,10 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 	@Override
 	public String toString()
 	{
-		return String.format("Schema<MultiFluidStack>(names: %s, inclusion_tags: %s, exclusion_tags: %s, amount: %d)", names, inclusion_tags, exclusion_tags, amount);
+		return String.format("Schema<MultiFluidStack>(comment: '%s', name: '%s', names: %s, inclusion_tags: %s, exclusion_tags: %s, amount: %d)",
+			StringUtils.inspect(comment),
+			StringUtils.inspect(name),
+			names, inclusion_tags, exclusion_tags, amount);
 	}
 
 	public static MultiFluidStackSchema newWithTags(int amount, String... tags)

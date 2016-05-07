@@ -86,7 +86,7 @@ public abstract class ConfigBase implements ILoggable
 					}
 
 					// Only use this when you need to debug config options
-					logger.debug("ConfigBase<%s> name='%s' key='%s' value=%s", this.toString(), opt.name(), field.getName(), field.get(this).toString());
+					logger.debug("ConfigBase<%s> catergory='%s' name='%s' key='%s' value=%s", opt.catergory(), this.toString(), opt.name(), field.getName(), field.get(this).toString());
 				}
 				catch (IllegalAccessException ex)
 				{

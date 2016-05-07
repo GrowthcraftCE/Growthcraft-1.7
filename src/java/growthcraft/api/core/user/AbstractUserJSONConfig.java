@@ -50,7 +50,10 @@ public abstract class AbstractUserJSONConfig implements ILoggable, IModule
 	public static final String DEFAULT_ENCODING = "UTF-8";
 
 	protected ILogger logger = NullLogger.INSTANCE;
-	protected final Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
+	protected final Gson gson = new GsonBuilder().
+		setPrettyPrinting().
+		serializeNulls().
+		create();
 	private File targetConfigFile;
 	private File targetDefaultConfigFile;
 

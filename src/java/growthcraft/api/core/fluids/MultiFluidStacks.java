@@ -38,7 +38,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class MultiFluidStacks implements IMultiFluidStacks
 {
 	private List<FluidStack> fluidStacks;
-	private List<ItemStack> fluidContainers;
+	private transient List<ItemStack> fluidContainers;
 
 	public MultiFluidStacks(@Nonnull List<FluidStack> stacks)
 	{
@@ -111,7 +111,7 @@ public class MultiFluidStacks implements IMultiFluidStacks
 		{
 			fluidContainers = FluidUtils.getFluidContainers(getFluidStacks());
 		}
-		
+
 		return fluidContainers;
 	}
 }
