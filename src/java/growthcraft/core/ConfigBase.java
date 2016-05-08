@@ -8,9 +8,10 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.util.TagParser;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -24,9 +25,16 @@ public abstract class ConfigBase implements ILoggable
 	@Target(ElementType.FIELD)
 	protected static @interface ConfigOption
 	{
+		// the config option's category
 		String catergory() default Configuration.CATEGORY_GENERAL;
+		// the config option's name
 		String name();
+		// the config option's description
 		String desc() default "";
+		// optional value - usually used for configuring a type checker or parser
+		String opt() default "";
+		// default value for special types
+		String def() default "";
 	}
 
 	private static final String DEFAULT_STR = "; Default : ";
@@ -55,7 +63,17 @@ public abstract class ConfigBase implements ILoggable
 				final Class typeClass = field.getType();
 				try
 				{
-					if (Integer.TYPE.equals(typeClass))
+					if (Byte.TYPE.equals(typeClass))
+					{
+						final byte val = field.getByte(this);
+						field.setShort(this, (byte)config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val).getInt());
+					}
+					else if (Short.TYPE.equals(typeClass))
+					{
+						final short val = field.getShort(this);
+						field.setShort(this, (short)config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val).getInt());
+					}
+					else if (Integer.TYPE.equals(typeClass))
 					{
 						final int val = field.getInt(this);
 						field.setInt(this, config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val).getInt());
@@ -79,6 +97,31 @@ public abstract class ConfigBase implements ILoggable
 					{
 						final String val = (String)field.get(this);
 						field.set(this, config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val).getString());
+					}
+					else if (typeClass.isArray())
+					{
+						if (TagParser.Tag.class.equals(typeClass))
+						{
+							final String val = opt.def();
+							final TagParser parser = opt.opt().equals("scsv") ?
+								TagParser.scsv :
+								(opt.opt().equals("cosv") ? TagParser.cosv : TagParser.csv);
+
+							field.set(this,
+								parser.parse(
+									config.get(
+										opt.catergory(),
+										opt.name(),
+										val,
+										opt.desc() + DEFAULT_STR + val
+									).getString()
+								)
+							);
+						}
+						else
+						{
+							logger.error("Unhandled `Array` type config option: type=%s option=%s", typeClass, opt.name());
+						}
 					}
 					else
 					{
