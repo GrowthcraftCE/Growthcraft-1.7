@@ -27,6 +27,8 @@ import javax.annotation.Nonnull;
 
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectChance;
+import growthcraft.api.core.effect.EffectExtinguish;
+import growthcraft.api.core.effect.EffectIgnite;
 import growthcraft.api.core.effect.EffectList;
 import growthcraft.api.core.effect.EffectNull;
 import growthcraft.api.core.effect.EffectRandomList;
@@ -46,6 +48,8 @@ public class EffectRegistry extends AbstractClassRegistry<IEffect> implements IE
 	{
 		register("add_potion_effect", EffectAddPotionEffect.class);
 		register("chance", EffectChance.class);
+		register("extinguish", EffectExtinguish.class);
+		register("ignite", EffectIgnite.class);
 		register("list", EffectList.class);
 		register("null", EffectNull.class);
 		register("random_list", EffectRandomList.class);
