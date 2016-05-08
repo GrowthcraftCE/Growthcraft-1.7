@@ -82,6 +82,18 @@ public class ItemTest
 		return false;
 	}
 
+	public static boolean areStacksEqual(@Nullable IMultiItemStacks expected, @Nullable ItemStack actual)
+	{
+		if (!itemMatches(expected, actual)) return false;
+		return actual.stackSize == expected.getStackSize();
+	}
+
+	public static boolean areStacksEqual(@Nullable ItemStack expected, @Nullable ItemStack actual)
+	{
+		if (!itemMatches(expected, actual)) return false;
+		return actual.stackSize == expected.stackSize;
+	}
+
 	public static boolean hasEnough(@Nullable IMultiItemStacks expected, @Nullable ItemStack actual)
 	{
 		if (!itemMatches(expected, actual)) return false;
