@@ -127,14 +127,14 @@ tile.grcmilk.BlockFluidRennet.name=Coalho
 tile.grcmilk.BlockFluidSkimMilk.name=Leite Pasteurizado
 tile.grcmilk.BlockFluidWhey.name=Soro de Leite
 ### Bottles
-item.grcmilk.BottleFluidButterMilk.name=Garrafa de Soro Coalhado
+item.grcmilk.FoodBottleFluidButterMilk.name=Garrafa de Soro Coalhado
 item.grcmilk.BottleFluidCream.name=Garrafa de Nata
 item.grcmilk.BottleFluidCurds.name=Garrafa de Coalhada
-item.grcmilk.BottleFluidMilk.name=Garrafa de Leite
+item.grcmilk.FoodBottleFluidMilk.name=Garrafa de Leite
 item.grcmilk.BottleFluidPasteurizedMilk.name=Garrafa de Leite Pasteurizado
 item.grcmilk.BottleFluidRennet.name=Garrafa de Coalho
-item.grcmilk.BottleFluidSkimMilk.name=Garrafa de Leite Desnatado
-item.grcmilk.BottleFluidWhey.name=Garrafa de Soro de Leite
+item.grcmilk.FoodBottleFluidSkimMilk.name=Garrafa de Leite Desnatado
+item.grcmilk.FoodBottleFluidWhey.name=Garrafa de Soro de Leite
 ### Buckets
 item.bucket.fluid.grcmilk.ButterMilk.name=Balde de Soro Coalhado
 item.bucket.fluid.grcmilk.Cream.name=Balde de Nata

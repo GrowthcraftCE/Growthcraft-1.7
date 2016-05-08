@@ -127,14 +127,14 @@ tile.grcmilk.BlockFluidRennet.name=凝乳酶
 tile.grcmilk.BlockFluidSkimMilk.name=脱脂奶
 tile.grcmilk.BlockFluidWhey.name=乳清
 ### Bottles
-item.grcmilk.BottleFluidButterMilk.name=酪乳瓶
+item.grcmilk.FoodBottleFluidButterMilk.name=酪乳瓶
 item.grcmilk.BottleFluidCream.name=奶油瓶
 item.grcmilk.BottleFluidCurds.name=凝乳瓶
-item.grcmilk.BottleFluidMilk.name=牛奶瓶
+item.grcmilk.FoodBottleFluidMilk.name=牛奶瓶
 item.grcmilk.BottleFluidPasteurizedMilk.name=巴氏奶瓶
 item.grcmilk.BottleFluidRennet.name=凝乳酶瓶
-item.grcmilk.BottleFluidSkimMilk.name=脱脂奶瓶
-item.grcmilk.BottleFluidWhey.name=乳清瓶
+item.grcmilk.FoodBottleFluidSkimMilk.name=脱脂奶瓶
+item.grcmilk.FoodBottleFluidWhey.name=乳清瓶
 ### Buckets
 item.bucket.fluid.grcmilk.ButterMilk.name=酪乳桶
 item.bucket.fluid.grcmilk.Cream.name=奶油桶

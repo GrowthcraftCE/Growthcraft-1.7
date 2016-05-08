@@ -127,14 +127,14 @@ tile.grcmilk.BlockFluidRennet.name=tile.grcmilk.BlockFluidRennet.name
 tile.grcmilk.BlockFluidSkimMilk.name=tile.grcmilk.BlockFluidSkimMilk.name
 tile.grcmilk.BlockFluidWhey.name=tile.grcmilk.BlockFluidWhey.name
 ### Bottles
-item.grcmilk.BottleFluidButterMilk.name=item.grcmilk.BottleFluidButterMilk.name
+item.grcmilk.FoodBottleFluidButterMilk.name=item.grcmilk.FoodBottleFluidButterMilk.name
 item.grcmilk.BottleFluidCream.name=item.grcmilk.BottleFluidCream.name
 item.grcmilk.BottleFluidCurds.name=item.grcmilk.BottleFluidCurds.name
-item.grcmilk.BottleFluidMilk.name=item.grcmilk.BottleFluidMilk.name
+item.grcmilk.FoodBottleFluidMilk.name=item.grcmilk.FoodBottleFluidMilk.name
 item.grcmilk.BottleFluidPasteurizedMilk.name=item.grcmilk.BottleFluidPasteurizedMilk.name
 item.grcmilk.BottleFluidRennet.name=item.grcmilk.BottleFluidRennet.name
-item.grcmilk.BottleFluidSkimMilk.name=item.grcmilk.BottleFluidSkimMilk.name
-item.grcmilk.BottleFluidWhey.name=item.grcmilk.BottleFluidWhey.name
+item.grcmilk.FoodBottleFluidSkimMilk.name=item.grcmilk.FoodBottleFluidSkimMilk.name
+item.grcmilk.FoodBottleFluidWhey.name=item.grcmilk.FoodBottleFluidWhey.name
 ### Buckets
 item.bucket.fluid.grcmilk.ButterMilk.name=item.bucket.fluid.grcmilk.ButterMilk.name
 item.bucket.fluid.grcmilk.Cream.name=item.bucket.fluid.grcmilk.Cream.name
