@@ -28,6 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.EnumAction;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
 
@@ -48,6 +49,7 @@ public class ItemFoodBottleFluid extends GrcItemFoodBase implements IFluidItem
 	public ItemFoodBottleFluid(Fluid flu, int healAmount, float saturation, boolean isWolfFavouriteFood)
 	{
 		super(healAmount, saturation, isWolfFavouriteFood);
+		setItemUseAction(EnumAction.drink);
 		setContainerItem(Items.glass_bottle);
 		this.fluid = flu;
 	}

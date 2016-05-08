@@ -34,12 +34,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.EnumAction;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 public class GrcItemFoodBase extends ItemFood
 {
 	private IEffect effect;
+	private EnumAction action = EnumAction.eat;
 
 	public GrcItemFoodBase(int hunger, float saturation, boolean isWolfFav)
 	{
@@ -49,6 +51,18 @@ public class GrcItemFoodBase extends ItemFood
 	public GrcItemFoodBase(int hunger, boolean isWolfFav)
 	{
 		super(hunger, isWolfFav);
+	}
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack)
+	{
+		return action;
+	}
+
+	public GrcItemFoodBase setItemUseAction(EnumAction act)
+	{
+		this.action = act;
+		return this;
 	}
 
 	public GrcItemFoodBase setEffect(IEffect ef)
