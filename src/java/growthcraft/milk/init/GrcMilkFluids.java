@@ -33,6 +33,9 @@ import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.util.ICellarBoozeBuilder;
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.effect.EffectExtinguish;
+import growthcraft.api.core.effect.EffectList;
+import growthcraft.api.core.effect.EffectUtils;
 import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.GrcFluid;
 import growthcraft.api.core.item.OreItemStacks;
@@ -59,12 +62,13 @@ import growthcraft.milk.common.effect.EffectEvilBoozeMilk;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.GrowthCraftMilk;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class GrcMilkFluids extends GrcModuleBase
 {
@@ -88,18 +92,31 @@ public class GrcMilkFluids extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
+		final IEffect milkEffect = EffectMilk.create(GrowthCraftCellar.potionTipsy);
 		if (GrowthCraftMilk.getConfig().milkEnabled)
 		{
 			this.milk = FluidFactory.instance().create(
 				new GrcFluid("grcmilk.Milk").setDensity(1030).setViscosity(3000),
 				FluidFactory.FEATURE_FOOD_BOTTLE | FluidFactory.FEATURE_BLOCK);
-			milk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(milk.getFluid(), 2, 0.2f, false));
-			milk.foodBottle.getItem().setEffect(EffectMilk.create(GrowthCraftCellar.potionTipsy));
+			milk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(milk.getFluid(), 4, 0.3f, false));
+			milk.foodBottle.getItem().setEffect(milkEffect);
 			milk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFF);
 			milk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 		}
 
-		this.butterMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.ButterMilk"));
+		this.butterMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.ButterMilk"), FluidFactory.FEATURE_ALL_EDIBLE);
+		butterMilk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(butterMilk.getFluid(), 6, 0.4f, false));
+		{
+			final EffectList list = new EffectList();
+			list.add(milkEffect);
+			if (GrowthCraftMilk.getConfig().fantasyMilkEffects)
+			{
+				// Idea from here: http://www.altmedicine101.com/buttermilk
+				list.add(new EffectExtinguish());
+				list.add(EffectUtils.createAddPotionEffect(Potion.fireResistance, TickUtils.seconds(15), 0));
+			}
+			butterMilk.foodBottle.getItem().setEffect(list);
+		}
 		butterMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFEE7);
 		butterMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/buttermilk");
 
@@ -115,11 +132,31 @@ public class GrcMilkFluids extends GrcModuleBase
 		rennet.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x877243);
 		rennet.block.getBlock().setBlockTextureName("grcmilk:fluids/rennet");
 
-		this.skimMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.SkimMilk"));
+		this.skimMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.SkimMilk"), FluidFactory.FEATURE_ALL_EDIBLE);
+		skimMilk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(skimMilk.getFluid(), 2, 0.2f, false));
+		{
+			final EffectList list = new EffectList();
+			list.add(milkEffect);
+			if (GrowthCraftMilk.getConfig().fantasyMilkEffects)
+			{
+				list.add(EffectUtils.createAddPotionEffect(Potion.moveSpeed, TickUtils.seconds(15), 0));
+			}
+			skimMilk.foodBottle.getItem().setEffect(list);
+		}
 		skimMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFA);
 		skimMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/skimmilk");
 
-		this.whey = FluidFactory.instance().create(new GrcFluid("grcmilk.Whey"));
+		this.whey = FluidFactory.instance().create(new GrcFluid("grcmilk.Whey"), FluidFactory.FEATURE_ALL_EDIBLE);
+		whey.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(whey.getFluid(), 1, 0.1f, false));
+		{
+			final EffectList list = new EffectList();
+			if (GrowthCraftMilk.getConfig().fantasyMilkEffects)
+			{
+				list.add(EffectUtils.createAddPotionEffect(Potion.damageBoost, TickUtils.seconds(10), 0));
+				list.add(EffectUtils.createAddPotionEffect(Potion.resistance, TickUtils.seconds(10), 0));
+			}
+			whey.foodBottle.getItem().setEffect(list);
+		}
 		whey.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x94a860);
 		whey.block.getBlock().setBlockTextureName("grcmilk:fluids/whey");
 

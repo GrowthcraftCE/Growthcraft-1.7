@@ -30,6 +30,9 @@ public class GrcMilkConfig extends ConfigBase
 	@ConfigOption(catergory="Milk", name="Enabled", desc="Should we enable a fluid for Milk? (you may bork the mod if you don't have an alternative, eg. Forestry's Milk)")
 	public boolean milkEnabled = true;
 
+	@ConfigOption(catergory="Milk", name="Fantasy Milk Effects", desc="Should Skim Milk, Butter Milk have extra effects?")
+	public boolean fantasyMilkEffects;
+
 	@ConfigOption(catergory="Milk", name="Color", desc="What color is milk?")
 	public int milkColor = 0xFFFFFF;
 
