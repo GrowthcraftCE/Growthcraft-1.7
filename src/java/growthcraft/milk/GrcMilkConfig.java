@@ -23,6 +23,7 @@
  */
 package growthcraft.milk;
 
+import growthcraft.api.core.util.TagParser;
 import growthcraft.core.ConfigBase;
 
 public class GrcMilkConfig extends ConfigBase
@@ -100,6 +101,17 @@ public class GrcMilkConfig extends ConfigBase
 
 	@ConfigOption(catergory="Cheese", name="Ricotta Bowl Count", desc="How many bowls are used in the ricotta recipe?")
 	public int ricottaBowlCount = 4;
+
+
+	@ConfigOption(catergory="Thistle/World Gen", name="Enable Biome Dictionary compatability?")
+	public boolean thistleUseBiomeDict = true;
+
+	// Extreme Hills, Extreme Hills Edge, Extreme Hills+
+	@ConfigOption(catergory="Thistle/World Gen", name="Biome IDs", desc="Separate the IDs with ';' (without the quote marks)", opt="scsv", def="3;20;34")
+	public TagParser.Tag[] thistleBiomesIdList;
+
+	@ConfigOption(catergory="Thistle/World Gen", name="Biome Types", desc="Separate the IDs with ';' (without the quote marks)", opt="scsv", def="+MOUNTAIN,HILLS")
+	public TagParser.Tag[] thistleBiomesTypeList;
 
 	@ConfigOption(catergory="Thistle", name="Spread Chance", desc="How quickly does thistle spread? [Higher -> Slower]")
 	public int thistleSpreadChance = 20;

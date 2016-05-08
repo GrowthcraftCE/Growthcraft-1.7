@@ -1,5 +1,6 @@
 package growthcraft.bamboo;
 
+import growthcraft.api.core.util.TagParser;
 import growthcraft.core.ConfigBase;
 
 public class GrcBambooConfig extends ConfigBase
@@ -10,12 +11,15 @@ public class GrcBambooConfig extends ConfigBase
 	@ConfigOption(catergory="World Gen", name="Enable Biome Dictionary compatability?")
 	public boolean useBiomeDict = true;
 
-	@ConfigOption(catergory="World Gen", name="Bamboo Forest biome ID")
+	@ConfigOption(catergory="World Gen", name="Bamboo Forest biome ID", desc="What is the Biome ID for Bamboo Forest?")
 	public int bambooBiomeID = 170;
 
 	// Ocean, Plains, Forest, River, ForestHills, Jungle, JungleHills, JungleEdge,JungleM, JungleEdgeM
-	@ConfigOption(catergory="World Gen", name="Biomes (IDs) That Generate Bamboos", desc="Separate the IDs with ';' (without the quote marks)")
-	public String bambooBiomesList = "0;1;4;7;18;21;22;23;149;151";
+	@ConfigOption(catergory="World Gen", name="Biomes (IDs) That Generate Bamboos", desc="Separate the IDs with ';' (without the quote marks)", opt="scsv", def="0;1;4;7;18;21;22;23;149;151")
+	public TagParser.Tag[] bambooBiomesIdList;
+
+	@ConfigOption(catergory="World Gen", name="Biome Types That Generate Bamboos", desc="Separate the IDs with ';' (without the quote marks)", opt="scsv", def="FOREST;JUNGLE;WATER;PLAINS;-SNOWY")
+	public TagParser.Tag[] bambooBiomesTypeList;
 
 	@ConfigOption(catergory="World Gen", name="Bamboo WorldGen density", desc="How clustered should bamboo generate? [Higher -> Denser]")
 	public int bambooWorldGenDensity = 64;

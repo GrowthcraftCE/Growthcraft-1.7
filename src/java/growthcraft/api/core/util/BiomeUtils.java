@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
  */
 package growthcraft.api.core.util;
 
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 
 public class BiomeUtils
@@ -60,5 +61,42 @@ public class BiomeUtils
 			if (type.name().equals(upcasedName)) return type;
 		}
 		throw new BiomeTypeNotFound("Biome type '" + name + "' not found.");
+	}
+
+	public static boolean testBiomeTypeTags(BiomeGenBase biome, TagParser.Tag[] tags)
+	{
+		if (tags.length == 0)
+		{
+			return false;
+		}
+		boolean hasMatching = false;
+		for (TagParser.Tag tag : tags)
+		{
+			try
+			{
+				final boolean res = BiomeDictionary.isBiomeOfType(biome, fetchBiomeType(tag.value));
+				if (tag.exclude && res) return false;
+				if (tag.must && !res) return false;
+				if (res) hasMatching = true;
+			}
+			catch (BiomeTypeNotFound ex)
+			{
+				ex.printStackTrace();
+				return false;
+			}
+		}
+		return hasMatching;
+	}
+
+	public static boolean testBiomeIdTags(String biomeId, TagParser.Tag[] tags)
+	{
+		for (TagParser.Tag tag : tags)
+		{
+			if (tag.value.equals(biomeId))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

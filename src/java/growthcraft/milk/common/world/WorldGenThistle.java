@@ -1,7 +1,9 @@
 package growthcraft.milk.common.world;
 
-import cpw.mods.fml.common.IWorldGenerator;
+import growthcraft.api.core.util.BiomeUtils;
 import growthcraft.milk.GrowthCraftMilk;
+
+import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -22,11 +24,17 @@ public class WorldGenThistle implements IWorldGenerator
 	{
 		if (world.provider.dimensionId == 0)
 		{
-			final BiomeGenBase b = world.getBiomeGenForCoords(chunkX, chunkZ);
-			if (b.biomeName.matches("Extreme Hills") || b.biomeName.matches("Extreme Hills Edge"))
+			final BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
+			if (GrowthCraftMilk.getConfig().thistleUseBiomeDict)
 			{
-				this.genRandThistle(this.thistle, world, random, chunkX, chunkZ, 10, 64, 255);
+				if (!BiomeUtils.testBiomeTypeTags(biome, GrowthCraftMilk.getConfig().thistleBiomesTypeList)) return;
 			}
+			else
+			{
+				final String biomeId = "" + biome.biomeID;
+				if (!BiomeUtils.testBiomeIdTags(biomeId, GrowthCraftMilk.getConfig().thistleBiomesIdList)) return;
+			}
+			genRandThistle(this.thistle, world, random, chunkX, chunkZ, 10, 64, 255);
 		}
 	}
 
