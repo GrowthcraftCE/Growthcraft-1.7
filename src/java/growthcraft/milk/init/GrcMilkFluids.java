@@ -147,7 +147,7 @@ public class GrcMilkFluids extends GrcModuleBase
 				list.add(new EffectExtinguish());
 				list.add(EffectUtils.createAddPotionEffect(Potion.fireResistance, TickUtils.seconds(15), 0));
 			}
-			butterMilk.foodBottle.getItem().setEffect(list);
+			butterMilk.foodBottle.getItem().setEffect(list).setAlwaysEdible();
 		}
 		butterMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFEE7);
 		butterMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/buttermilk");
