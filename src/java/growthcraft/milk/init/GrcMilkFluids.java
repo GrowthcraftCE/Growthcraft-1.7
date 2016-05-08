@@ -69,6 +69,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcMilkFluids extends GrcModuleBase
 {
@@ -89,8 +90,39 @@ public class GrcMilkFluids extends GrcModuleBase
 	public ItemBucketBoozeDefinition[] kumisFluidBuckets = new ItemBucketBoozeDefinition[kumisFluids.length];
 	public ItemDefinition kumisBottle;
 
-	@Override
-	public void preInit()
+	private void preInitCheeseFluids()
+	{
+		for (EnumCheeseType cheese : EnumCheeseType.VALUES)
+		{
+			final String fluidName = "grcmilk.Cheese" + StringUtils.capitalize(cheese.name);
+			final Fluid fluid = new GrcFluid(fluidName).setColor(cheese.getColor());
+			final FluidFactory.FluidDetails details = FluidFactory.instance().create(fluid, FluidFactory.FEATURE_NONE);
+			cheeses.put(cheese, details);
+			if (details.block != null) details.block.getBlock().setColor(cheese.getColor()).setBlockTextureName("grcmilk:fluids/milk");
+			details.setItemColor(cheese.getColor());
+			fluidToCheeseType.put(fluid, cheese);
+		}
+	}
+
+	private void preInitKumisFluids()
+	{
+		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(kumisFluids));
+		BoozeRegistryHelper.initializeBoozeFluids(kumisBasename, kumisFluids);
+		for (Booze booze : kumisFluids)
+		{
+			booze.setColor(GrowthCraftMilk.getConfig().kumisColor).setDensity(1030).setViscosity(3000);
+		}
+		BoozeRegistryHelper.initializeBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets);
+		BoozeRegistryHelper.setBoozeFoodStats(kumisFluids, 1, -0.2f);
+		kumisFluids[5].setColor(GrowthCraftMilk.getConfig().poisonedKumisColor);
+		kumisFluidBlocks[5].getBlock().refreshColor();
+		for (BlockBoozeDefinition def : kumisFluidBlocks)
+		{
+			def.getBlock().setBlockTextureName("grcmilk:fluids/milk");
+		}
+	}
+
+	private void preInitFluids()
 	{
 		final IEffect milkEffect = EffectMilk.create(GrowthCraftCellar.potionTipsy);
 		if (GrowthCraftMilk.getConfig().milkEnabled)
@@ -99,7 +131,7 @@ public class GrcMilkFluids extends GrcModuleBase
 				new GrcFluid("grcmilk.Milk").setDensity(1030).setViscosity(3000),
 				FluidFactory.FEATURE_FOOD_BOTTLE | FluidFactory.FEATURE_BLOCK);
 			milk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(milk.getFluid(), 4, 0.3f, false));
-			milk.foodBottle.getItem().setEffect(milkEffect);
+			milk.foodBottle.getItem().setEffect(milkEffect).setAlwaysEdible();
 			milk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFF);
 			milk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 		}
@@ -141,7 +173,7 @@ public class GrcMilkFluids extends GrcModuleBase
 			{
 				list.add(EffectUtils.createAddPotionEffect(Potion.moveSpeed, TickUtils.seconds(15), 0));
 			}
-			skimMilk.foodBottle.getItem().setEffect(list);
+			skimMilk.foodBottle.getItem().setEffect(list).setAlwaysEdible();
 		}
 		skimMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFA);
 		skimMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/skimmilk");
@@ -155,7 +187,7 @@ public class GrcMilkFluids extends GrcModuleBase
 				list.add(EffectUtils.createAddPotionEffect(Potion.damageBoost, TickUtils.seconds(10), 0));
 				list.add(EffectUtils.createAddPotionEffect(Potion.resistance, TickUtils.seconds(10), 0));
 			}
-			whey.foodBottle.getItem().setEffect(list);
+			whey.foodBottle.getItem().setEffect(list).setAlwaysEdible();
 		}
 		whey.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x94a860);
 		whey.block.getBlock().setBlockTextureName("grcmilk:fluids/whey");
@@ -164,88 +196,14 @@ public class GrcMilkFluids extends GrcModuleBase
 		pasteurizedMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFA);
 		pasteurizedMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 
-		for (EnumCheeseType cheese : EnumCheeseType.VALUES)
-		{
-			final String fluidName = "grcmilk.Cheese" + StringUtils.capitalize(cheese.name);
-			final Fluid fluid = new GrcFluid(fluidName).setColor(cheese.getColor());
-			final FluidFactory.FluidDetails details = FluidFactory.instance().create(fluid, FluidFactory.FEATURE_NONE);
-			cheeses.put(cheese, details);
-			if (details.block != null) details.block.getBlock().setColor(cheese.getColor()).setBlockTextureName("grcmilk:fluids/milk");
-			details.setItemColor(cheese.getColor());
-			fluidToCheeseType.put(fluid, cheese);
-		}
-
-		BoozeRegistryHelper.setBoozeFoodStats(kumisFluids, 1, -0.2f);
-		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(kumisFluids));
-		BoozeRegistryHelper.initializeBoozeFluids(kumisBasename, kumisFluids);
-		for (Booze booze : kumisFluids)
-		{
-			booze.setColor(GrowthCraftMilk.getConfig().kumisColor).setDensity(1030).setViscosity(3000);
-		}
-		BoozeRegistryHelper.initializeBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets);
-		kumisFluids[5].setColor(GrowthCraftMilk.getConfig().poisonedKumisColor);
-		kumisFluidBlocks[5].getBlock().refreshColor();
-		for (BlockBoozeDefinition def : kumisFluidBlocks)
-		{
-			def.getBlock().setBlockTextureName("grcmilk:fluids/milk");
-		}
+		preInitCheeseFluids();
+		preInitKumisFluids();
 	}
 
 	@Override
-	public void register()
+	public void preInit()
 	{
-		kumisBottle.register("grcmilk.KumisBottle");
-
-		if (milk != null)
-		{
-			milk.registerObjects("grcmilk", "Milk");
-			// ensure that we don't already have some variation of milk present
-			if (FluidRegistry.getFluid("milk") == null)
-			{
-				FluidContainerRegistry.registerFluidContainer(milk.getFluid(), new ItemStack(Items.milk_bucket, 1), new ItemStack(Items.bucket, 1));
-				EventHandlerBucketFill.instance().register(milk.getFluidBlock(), new ItemStack(Items.milk_bucket, 1));
-			}
-		}
-		butterMilk.registerObjects("grcmilk", "ButterMilk");
-		cream.registerObjects("grcmilk", "Cream");
-		curds.registerObjects("grcmilk", "Curds");
-		rennet.registerObjects("grcmilk", "Rennet");
-		skimMilk.registerObjects("grcmilk", "SkimMilk");
-		whey.registerObjects("grcmilk", "Whey");
-		pasteurizedMilk.registerObjects("grcmilk", "PasteurizedMilk");
-
-		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
-		{
-			pair.getValue().registerObjects("grcmilk", "Cheese" + StringUtils.capitalize(pair.getKey().name));
-		}
-
-		BoozeRegistryHelper.registerBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets, kumisBottle, kumisBasename, null);
-
-		CoreRegistry.instance().fluidDictionary().addFluidTags(cream.getFluid(), MilkFluidTags.CREAM);
-		CoreRegistry.instance().fluidDictionary().addFluidTags(curds.getFluid(), MilkFluidTags.MILK_CURDS);
-		CoreRegistry.instance().fluidDictionary().addFluidTags(rennet.getFluid(), MilkFluidTags.RENNET);
-		CoreRegistry.instance().fluidDictionary().addFluidTags(whey.getFluid(), MilkFluidTags.WHEY);
-
-		GrowthCraftCellar.boozeBuilderFactory.create(rennet.fluid.getFluid())
-			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.blocks.thistle.asStack(), TickUtils.minutes(1), null)
-			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.items.stomach.asStack(), TickUtils.minutes(1), null);
-
-		GrowthCraftCellar.boozeBuilderFactory.create(pasteurizedMilk.fluid.getFluid())
-			.brewsFrom(skimMilk.fluid.asFluidStack(250), new ItemStack(Items.sugar), TickUtils.minutes(1), new Residue(GrowthCraftMilk.items.starterCulture.asStack(1), 1.0f));
-
-		GrowthCraftCellar.boozeBuilderFactory.create(skimMilk.getFluid())
-			.culturesTo(250, GrowthCraftMilk.items.starterCulture.asStack(), 0.7f, TickUtils.seconds(10));
-
-		GrowthCraftMilk.userApis.churnRecipes.addDefault(
-			cream.fluid.asFluidStack(1000),
-			butterMilk.fluid.asFluidStack(500),
-			GrowthCraftMilk.items.butter.asStack(2),
-			16);
-
-		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
-		{
-			CoreRegistry.instance().fluidDictionary().addFluidTags(pair.getValue().getFluid(), MilkFluidTags.CHEESE);
-		}
+		preInitFluids();
 	}
 
 	public List<Fluid> getMilkFluids()
@@ -254,6 +212,24 @@ public class GrcMilkFluids extends GrcModuleBase
 		if (milk != null) milks.add(milk.getFluid());
 		if (ForestryFluids.MILK.exists()) milks.add(ForestryFluids.MILK.getFluid());
 		return milks;
+	}
+
+	private void registerOres()
+	{
+		if (milk != null)
+		{
+			OreDictionary.registerOre("bottleMilk", milk.foodBottle.asStack());
+			OreDictionary.registerOre("bucketMilk", Items.milk_bucket);
+			// Milk bucket is the vanilla milk bucket, derp
+			OreDictionary.registerOre("bottleSkimmilk", skimMilk.foodBottle.asStack());
+			OreDictionary.registerOre("bucketSkimmilk", skimMilk.bucket.asStack());
+			OreDictionary.registerOre("bottleButtermilk", butterMilk.foodBottle.asStack());
+			OreDictionary.registerOre("bucketButtermilk", butterMilk.bucket.asStack());
+			OreDictionary.registerOre("bottleWhey", whey.foodBottle.asStack());
+			OreDictionary.registerOre("bucketWhey", whey.bucket.asStack());
+			OreDictionary.registerOre("bottleCream", cream.bottle.asStack());
+			OreDictionary.registerOre("bucketCream", cream.bucket.asStack());
+		}
 	}
 
 	private void registerFermentations()
@@ -324,6 +300,66 @@ public class GrcMilkFluids extends GrcModuleBase
 	}
 
 	@Override
+	public void register()
+	{
+		kumisBottle.register("grcmilk.KumisBottle");
+
+		if (milk != null)
+		{
+			milk.registerObjects("grcmilk", "Milk");
+			// ensure that we don't already have some variation of milk present
+			if (FluidRegistry.getFluid("milk") == null)
+			{
+				FluidContainerRegistry.registerFluidContainer(milk.getFluid(), new ItemStack(Items.milk_bucket, 1), new ItemStack(Items.bucket, 1));
+				EventHandlerBucketFill.instance().register(milk.getFluidBlock(), new ItemStack(Items.milk_bucket, 1));
+			}
+		}
+		butterMilk.registerObjects("grcmilk", "ButterMilk");
+		cream.registerObjects("grcmilk", "Cream");
+		curds.registerObjects("grcmilk", "Curds");
+		rennet.registerObjects("grcmilk", "Rennet");
+		skimMilk.registerObjects("grcmilk", "SkimMilk");
+		whey.registerObjects("grcmilk", "Whey");
+		pasteurizedMilk.registerObjects("grcmilk", "PasteurizedMilk");
+
+		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
+		{
+			pair.getValue().registerObjects("grcmilk", "Cheese" + StringUtils.capitalize(pair.getKey().name));
+		}
+
+		BoozeRegistryHelper.registerBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets, kumisBottle, kumisBasename, null);
+
+		CoreRegistry.instance().fluidDictionary().addFluidTags(cream.getFluid(), MilkFluidTags.CREAM);
+		CoreRegistry.instance().fluidDictionary().addFluidTags(curds.getFluid(), MilkFluidTags.MILK_CURDS);
+		CoreRegistry.instance().fluidDictionary().addFluidTags(rennet.getFluid(), MilkFluidTags.RENNET);
+		CoreRegistry.instance().fluidDictionary().addFluidTags(whey.getFluid(), MilkFluidTags.WHEY);
+
+		GrowthCraftCellar.boozeBuilderFactory.create(rennet.fluid.getFluid())
+			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.blocks.thistle.asStack(), TickUtils.minutes(1), null)
+			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.items.stomach.asStack(), TickUtils.minutes(1), null);
+
+		GrowthCraftCellar.boozeBuilderFactory.create(pasteurizedMilk.fluid.getFluid())
+			.brewsFrom(skimMilk.fluid.asFluidStack(250), new ItemStack(Items.sugar), TickUtils.minutes(1), new Residue(GrowthCraftMilk.items.starterCulture.asStack(1), 1.0f));
+
+		GrowthCraftCellar.boozeBuilderFactory.create(skimMilk.getFluid())
+			.culturesTo(250, GrowthCraftMilk.items.starterCulture.asStack(), 0.7f, TickUtils.seconds(10));
+
+		GrowthCraftMilk.userApis.churnRecipes.addDefault(
+			cream.fluid.asFluidStack(1000),
+			butterMilk.fluid.asFluidStack(500),
+			GrowthCraftMilk.items.butter.asStack(2),
+			16);
+
+		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
+		{
+			CoreRegistry.instance().fluidDictionary().addFluidTags(pair.getValue().getFluid(), MilkFluidTags.CHEESE);
+		}
+
+		registerOres();
+		registerFermentations();
+	}
+
+	@Override
 	public void init()
 	{
 		final List<Fluid> milks = getMilkFluids();
@@ -336,7 +372,5 @@ public class GrcMilkFluids extends GrcModuleBase
 				cream.fluid.asFluidStack(333), skimMilk.fluid.asFluidStack(666),
 				TickUtils.minutes(1));
 		}
-
-		registerFermentations();
 	}
 }
