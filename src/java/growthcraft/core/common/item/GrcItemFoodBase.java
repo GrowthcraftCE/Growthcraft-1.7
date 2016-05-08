@@ -88,7 +88,29 @@ public class GrcItemFoodBase extends ItemFood
 	protected void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		super.onFoodEaten(itemStack, world, player);
-		applyIEffects(itemStack, world, player);
+		if (!world.isRemote)
+		{
+			applyIEffects(itemStack, world, player);
+		}
+	}
+
+	@Override
+	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
+	{
+		if (!player.capabilities.isCreativeMode)
+		{
+			if (!world.isRemote)
+			{
+				final ItemStack result = ItemUtils.consumeStack(stack.splitStack(1));
+				ItemUtils.addStackToPlayer(result, player, world, false);
+			}
+		}
+
+		player.getFoodStats().func_151686_a(this, stack);
+		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+		this.onFoodEaten(stack, world, player);
+
+		return stack.stackSize <= 0 ? null : stack;
 	}
 
 	@Override

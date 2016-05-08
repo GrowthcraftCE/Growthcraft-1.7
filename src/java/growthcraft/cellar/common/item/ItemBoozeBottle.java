@@ -138,27 +138,10 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem
 	}
 
 	@Override
-	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
+	protected void applyIEffects(ItemStack itemStack, World world, EntityPlayer player)
 	{
-		if (!player.capabilities.isCreativeMode)
-		{
-			if (!world.isRemote)
-			{
-				final ItemStack result = ItemUtils.consumeStack(stack.splitStack(1));
-				ItemUtils.addStackToPlayer(result, player, world, false);
-			}
-		}
-
-		player.getFoodStats().func_151686_a(this, stack);
-		world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-		this.onFoodEaten(stack, world, player);
-
-		if (!world.isRemote)
-		{
-			BoozeUtils.addEffects(getFluid(stack), stack, world, player);
-		}
-
-		return stack.stackSize <= 0 ? null : stack;
+		super.applyIEffects(itemStack, world, player);
+		BoozeUtils.addEffects(getFluid(stack), stack, world, player);
 	}
 
 	@Override
