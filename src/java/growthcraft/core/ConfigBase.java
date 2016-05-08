@@ -12,6 +12,7 @@ import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.util.TagParser;
+import growthcraft.api.core.util.StringUtils;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -100,7 +101,7 @@ public abstract class ConfigBase implements ILoggable
 					}
 					else if (typeClass.isArray())
 					{
-						if (TagParser.Tag.class.equals(typeClass))
+						if (TagParser.Tag.class.equals(typeClass.getComponentType()))
 						{
 							final String val = opt.def();
 							final TagParser parser = opt.opt().equals("scsv") ?
@@ -129,7 +130,12 @@ public abstract class ConfigBase implements ILoggable
 					}
 
 					// Only use this when you need to debug config options
-					logger.debug("ConfigBase<%s> catergory='%s' name='%s' key='%s' value=%s", opt.catergory(), this.toString(), opt.name(), field.getName(), field.get(this).toString());
+					logger.info("ConfigBase<%s>{catergory:'%s', name:'%s', key:'%s', value:%s}",
+						this.toString(),
+						opt.catergory(),
+						opt.name(),
+						field.getName(),
+						StringUtils.inspect(field.get(this)));
 				}
 				catch (IllegalAccessException ex)
 				{
