@@ -33,7 +33,6 @@ import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.common.item.GrcItemFoodBase;
 import growthcraft.core.common.item.IFluidItem;
 import growthcraft.core.lib.GrcCoreState;
-import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -141,7 +140,7 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem
 	protected void applyIEffects(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		super.applyIEffects(itemStack, world, player);
-		BoozeUtils.addEffects(getFluid(stack), stack, world, player);
+		BoozeUtils.addEffects(getFluid(itemStack), itemStack, world, player);
 	}
 
 	@Override

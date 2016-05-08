@@ -28,6 +28,7 @@ import java.util.List;
 import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.core.lib.GrcCoreState;
+import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
