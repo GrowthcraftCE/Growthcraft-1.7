@@ -23,6 +23,7 @@
  */
 package growthcraft.core.common.item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import growthcraft.api.core.effect.IEffect;
@@ -121,18 +122,23 @@ public class GrcItemFoodBase extends ItemFood
 	{
 		super.addInformation(stack, player, list, showAdvanced);
 		GrcItemBase.addDescription(this, stack, player, list, showAdvanced);
-		if (GrcCoreState.showDetailedInformation())
+		if (effect != null)
 		{
-			if (effect != null)
+			final List<String> tempList = new ArrayList<String>();
+			effect.getDescription(tempList);
+			if (tempList.size() > 0)
 			{
-				effect.getDescription((List<String>)list);
+				if (GrcCoreState.showDetailedInformation())
+				{
+					list.addAll((List)tempList);
+				}
+				else
+				{
+					list.add(EnumChatFormatting.GRAY +
+							GrcI18n.translate("grc.tooltip.detailed_information",
+								EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
+				}
 			}
-		}
-		else
-		{
-			list.add(EnumChatFormatting.GRAY +
-					GrcI18n.translate("grc.tooltip.detailed_information",
-						EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
 		}
 	}
 }
