@@ -93,6 +93,12 @@ public class InventoryProcessorTest
 	}
 
 	@Test
+	public void test_mergeWithSlots()
+	{
+
+	}
+
+	@Test
 	public void test_clearSlots()
 	{
 		final GrcInternalInventory inv = testInv();
@@ -146,6 +152,12 @@ public class InventoryProcessorTest
 
 	@Test
 	public void test_checkSlot_IMultiItemStacks()
+	{
+
+	}
+
+	@Test
+	public void test_findItemSlots()
 	{
 
 	}
@@ -225,6 +237,12 @@ public class InventoryProcessorTest
 	}
 
 	@Test
+	public void test_checkSlotsUnordered()
+	{
+
+	}
+
+	@Test
 	public void test_slotsAreValid()
 	{
 		final GrcInternalInventory inv = testInv();
@@ -232,6 +250,18 @@ public class InventoryProcessorTest
 		assertTrue(invProc.slotsAreValid(inv, new int[]{0,1,2,3}));
 		assertFalse(invProc.slotsAreValid(inv, new int[]{0,1,2,3,4}));
 		assertFalse(invProc.slotsAreValid(inv, new int[]{0,-1,2,3}));
+	}
+
+	@Test
+	public void test_consumeItemsInSlots()
+	{
+
+	}
+
+	@Test
+	public void test_consumeItems()
+	{
+
 	}
 
 	@Test
