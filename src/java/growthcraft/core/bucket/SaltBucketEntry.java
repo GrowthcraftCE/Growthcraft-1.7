@@ -25,7 +25,7 @@ package growthcraft.core.bucket;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill.IBucketEntry;
+import growthcraft.core.eventhandler.EventHandlerBucketFill.IBucketEntry;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.stats.CoreAchievement;
 
@@ -48,7 +48,7 @@ public class SaltBucketEntry implements IBucketEntry
 	@Override
 	public boolean matches(@Nonnull World world, @Nonnull MovingObjectPosition pos)
 	{
-		if (world.getBlock(pos.blockX, pos.blockY, pos.blockZ) == Blocks.water)
+		if (Blocks.water.equals(world.getBlock(pos.blockX, pos.blockY, pos.blockZ)))
 		{
 			if (world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
 			{

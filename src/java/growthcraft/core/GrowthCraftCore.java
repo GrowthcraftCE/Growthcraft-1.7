@@ -18,7 +18,6 @@ import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.eventhandler.EventHandlerItemCraftedEventCore;
 import growthcraft.core.eventhandler.EventHandlerLivingDeathCore;
-import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill;
 import growthcraft.core.eventhandler.HarvestDropsEventCore;
 import growthcraft.core.eventhandler.PlayerInteractEventPaddy;
 import growthcraft.core.eventhandler.TextureStitchEventCore;
@@ -134,7 +133,7 @@ public class GrowthCraftCore
 			for (FluidContainerData data : dataList)
 				if (OreDictionary.itemMatches(data.filledContainer, new ItemStack(Items.potionitem, 1, 0), true))
 					data.fluid.amount = config.bottleCapacity;
-			
+
 			// Reset the fluidData cache, as we are loading it super early here
 			FluidUtils.getFluidData().clear();
 		}
@@ -175,7 +174,6 @@ public class GrowthCraftCore
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(EventHandlerBucketFill.instance());
-		MinecraftForge.EVENT_BUS.register(EventHandlerSpecialBucketFill.instance());
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventPaddy());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerLivingDeathCore());
