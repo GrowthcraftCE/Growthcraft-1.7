@@ -113,6 +113,9 @@ public class GrcMilkConfig extends ConfigBase
 	@ConfigOption(catergory="Thistle/World Gen", name="Biome Types", desc="Separate the TYPEs with ',' (without the quote marks)\nSeparate batches with ';' (without the quote marks)\n", def="+MOUNTAIN;+HILLS,-SNOWY,-COLD")
 	public TagParser.Tag[][] thistleBiomesTypeList;
 
+	@ConfigOption(catergory="Thistle/World Gen", name="Generate Amount", desc="What is the maximum number of thistle spawned in a chunk?")
+	public int thistleGenAmount = 10;
+
 	@ConfigOption(catergory="Thistle", name="Spread Chance", desc="How quickly does thistle spread? [Higher -> Slower]")
 	public int thistleSpreadChance = 20;
 
