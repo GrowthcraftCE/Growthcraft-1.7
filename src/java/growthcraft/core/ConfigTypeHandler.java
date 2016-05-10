@@ -87,7 +87,7 @@ public abstract class ConfigTypeHandler
 		{
 			final ConfigBase.ConfigOption opt = field.getAnnotation(ConfigBase.ConfigOption.class);
 			final String value = opt.def();
-			final TagParser.Tag[] rows = TagParser.scsv.parse(
+			final String[] rows = TagParser.scsv.parseToArray(
 				config.get(
 					opt.catergory(),
 					opt.name(),
@@ -98,9 +98,9 @@ public abstract class ConfigTypeHandler
 
 			final TagParser.Tag[][] table = new TagParser.Tag[rows.length][];
 			int i = 0;
-			for (TagParser.Tag row : rows)
+			for (String row : rows)
 			{
-				table[i] = TagParser.csv.parse(row.value);
+				table[i] = TagParser.csv.parse(row);
 				i++;
 			}
 			return table;
