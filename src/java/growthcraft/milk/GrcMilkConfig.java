@@ -110,8 +110,8 @@ public class GrcMilkConfig extends ConfigBase
 	@ConfigOption(catergory="Thistle/World Gen", name="Biome IDs", desc="Separate the IDs with ';' (without the quote marks)", opt="scsv", def="3;20;34")
 	public TagParser.Tag[] thistleBiomesIdList;
 
-	@ConfigOption(catergory="Thistle/World Gen", name="Biome Types", desc="Separate the IDs with ';' (without the quote marks)", opt="scsv", def="+MOUNTAIN,HILLS")
-	public TagParser.Tag[] thistleBiomesTypeList;
+	@ConfigOption(catergory="Thistle/World Gen", name="Biome Types", desc="Separate the TYPEs with ',' (without the quote marks)\nSeparate batches with ';' (without the quote marks)\n", def="+MOUNTAIN;+HILLS,-SNOWY,-COLD")
+	public TagParser.Tag[][] thistleBiomesTypeList;
 
 	@ConfigOption(catergory="Thistle", name="Spread Chance", desc="How quickly does thistle spread? [Higher -> Slower]")
 	public int thistleSpreadChance = 20;

@@ -18,8 +18,8 @@ public class GrcBambooConfig extends ConfigBase
 	@ConfigOption(catergory="World Gen", name="Biomes (IDs) That Generate Bamboos", desc="Separate the IDs with ';' (without the quote marks)", opt="scsv", def="0;1;4;7;18;21;22;23;149;151")
 	public TagParser.Tag[] bambooBiomesIdList;
 
-	@ConfigOption(catergory="World Gen", name="Biome Types That Generate Bamboos", desc="Separate the IDs with ';' (without the quote marks)", opt="scsv", def="FOREST;JUNGLE;WATER;PLAINS;-SNOWY")
-	public TagParser.Tag[] bambooBiomesTypeList;
+	@ConfigOption(catergory="World Gen", name="Biome Types That Generate Bamboos", desc="Separate the TYPES with ',' (without the quote marks)\nIf you would like to create a new batch, seperate batches with ';' (without the quote marks)\n", def="FOREST,JUNGLE,WATER,PLAINS,-SNOWY")
+	public TagParser.Tag[][] bambooBiomesTypeList;
 
 	@ConfigOption(catergory="World Gen", name="Bamboo WorldGen density", desc="How clustered should bamboo generate? [Higher -> Denser]")
 	public int bambooWorldGenDensity = 64;

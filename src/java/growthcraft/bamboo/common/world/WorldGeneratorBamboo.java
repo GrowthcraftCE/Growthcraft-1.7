@@ -34,7 +34,7 @@ public class WorldGeneratorBamboo implements IWorldGenerator
 			final BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
 			if (GrowthCraftBamboo.getConfig().useBiomeDict)
 			{
-				if (!BiomeUtils.testBiomeTypeTags(biome, GrowthCraftBamboo.getConfig().bambooBiomesTypeList)) return;
+				if (!BiomeUtils.testBiomeTypeTagsTable(biome, GrowthCraftBamboo.getConfig().bambooBiomesTypeList)) return;
 			}
 			else
 			{
