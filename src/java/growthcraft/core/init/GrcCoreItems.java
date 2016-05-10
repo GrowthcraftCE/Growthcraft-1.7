@@ -68,7 +68,6 @@ public class GrcCoreItems extends GrcModuleBase
 		OreDictionary.registerOre("materialSalt", salt.getItem());
 		OreDictionary.registerOre("foodSalt", salt.getItem());
 		OreDictionary.registerOre("dustSalt", salt.getItem());
-		OreDictionary.registerOre("powderSalt", salt.getItem());
 		OreDictionary.registerOre("lumpSalt", salt.getItem());
 		OreDictionary.registerOre("bottleSalt", saltBottle.getItem());
 		OreDictionary.registerOre("bucketSalt", saltBucket.getItem());
