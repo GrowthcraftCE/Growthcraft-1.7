@@ -88,6 +88,15 @@ public class BiomeUtils
 		return hasMatching;
 	}
 
+	public static boolean testBiomeTypeTagsTable(BiomeGenBase biome, TagParser.Tag[][] tagTable)
+	{
+		for (TagParser.Tag[] row : tagTable)
+		{
+			if (testBiomeTypeTags(biome, row)) return true;
+		}
+		return false;
+	}
+
 	public static boolean testBiomeIdTags(String biomeId, TagParser.Tag[] tags)
 	{
 		for (TagParser.Tag tag : tags)
