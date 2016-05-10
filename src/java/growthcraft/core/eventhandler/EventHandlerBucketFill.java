@@ -127,6 +127,13 @@ public class EventHandlerBucketFill
 	@SubscribeEvent
 	public void onBucketFill(FillBucketEvent event)
 	{
+		if (event.world.isRemote ||
+			event.result != null ||
+			event.getResult() != Result.DEFAULT)
+		{
+			return;
+		}
+
 		final ItemStack result = fillCustomBucket(event);
 
 		if (result != null)
