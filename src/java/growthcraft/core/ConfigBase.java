@@ -1,3 +1,26 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015, 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.core;
 
 import java.io.File;
@@ -11,7 +34,6 @@ import javax.annotation.Nonnull;
 import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.core.util.TagParser;
 import growthcraft.api.core.util.StringUtils;
 
 import net.minecraftforge.common.config.Configuration;
@@ -38,7 +60,7 @@ public abstract class ConfigBase implements ILoggable
 		String def() default "";
 	}
 
-	private static final String DEFAULT_STR = "; Default : ";
+	static final String DEFAULT_STR = "; Default : ";
 
 	// All configs will include a Debug option.
 	@ConfigOption(catergory="Debug", name="Enable Debugging", desc="Should Growthcraft log all its activity for debugging purposes?")
@@ -99,38 +121,26 @@ public abstract class ConfigBase implements ILoggable
 						final String val = (String)field.get(this);
 						field.set(this, config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val).getString());
 					}
-					else if (typeClass.isArray())
-					{
-						if (TagParser.Tag.class.equals(typeClass.getComponentType()))
-						{
-							final String val = opt.def();
-							final TagParser parser = opt.opt().equals("scsv") ?
-								TagParser.scsv :
-								(opt.opt().equals("cosv") ? TagParser.cosv : TagParser.csv);
-
-							field.set(this,
-								parser.parse(
-									config.get(
-										opt.catergory(),
-										opt.name(),
-										val,
-										opt.desc() + DEFAULT_STR + val
-									).getString()
-								)
-							);
-						}
-						else
-						{
-							logger.error("Unhandled `Array` type config option: type=%s option=%s", typeClass, opt.name());
-						}
-					}
 					else
 					{
-						logger.error("Unhandled config option: type=%s option=%s", typeClass, opt.name());
+						boolean found = false;
+						for (ConfigTypeHandler handler : ConfigTypeHandler.handlers)
+						{
+							if (handler.canHandle(field))
+							{
+								field.set(this, handler.handle(field, config));
+								found = true;
+								break;
+							}
+						}
+						if (!found)
+						{
+							logger.error("Unhandled config option: type=%s option=%s", typeClass, opt.name());
+						}
 					}
 
 					// Only use this when you need to debug config options
-					logger.debug("ConfigBase<%s>{catergory:'%s', name:'%s', key:'%s', value:%s}",
+					logger.info("ConfigBase<%s>{catergory:'%s', name:'%s', key:'%s', value:%s}",
 						this.toString(),
 						opt.catergory(),
 						opt.name(),
