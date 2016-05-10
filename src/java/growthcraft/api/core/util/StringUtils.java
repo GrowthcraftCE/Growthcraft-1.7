@@ -23,6 +23,8 @@
  */
 package growthcraft.api.core.util;
 
+import java.util.Arrays;
+
 public class StringUtils
 {
 	private StringUtils() {}
@@ -44,6 +46,17 @@ public class StringUtils
 		if (obj == null)
 		{
 			return "@null";
+		}
+		else if (obj.getClass().isArray())
+		{
+			if (obj.getClass().getComponentType().isArray())
+			{
+				return Arrays.deepToString((Object[][])obj);
+			}
+			else
+			{
+				return Arrays.toString((Object[])obj);
+			}
 		}
 		return obj.toString();
 	}
