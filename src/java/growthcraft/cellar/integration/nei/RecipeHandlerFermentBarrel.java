@@ -112,12 +112,15 @@ public class RecipeHandlerFermentBarrel extends TemplateRecipeHandler
 		if (recipe instanceof CachedFermentationRecipe)
 		{
 			final List<FluidStack> stacks = ((CachedFermentationRecipe)recipe).inputFluidStacks;
-			final FluidStack stack = stacks.get((stacks.size() * cycleticks / 20) % stacks.size());
-			if (stack != null)
+			if (stacks.size() > 0)
 			{
-				TemplateRenderHelper.drawFluid(58, 6, 50, 52, stack.getFluid(), 52);
+				final FluidStack stack = stacks.get((stacks.size() * cycleticks / 20) % stacks.size());
+				if (stack != null)
+				{
+					TemplateRenderHelper.drawFluid(58, 6, 50, 52, stack.getFluid(), 52);
+				}
+				//TemplateRenderHelper.drawFluidStack(58, 6, 50, 52, ((CachedFermentationRecipe)recipe).outputFluidStack, GrowthCraftCellar.getConfig().fermentBarrelMaxCap);
 			}
-			//TemplateRenderHelper.drawFluidStack(58, 6, 50, 52, ((CachedFermentationRecipe)recipe).outputFluidStack, GrowthCraftCellar.getConfig().fermentBarrelMaxCap);
 		}
 	}
 
