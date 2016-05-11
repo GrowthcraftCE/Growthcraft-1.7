@@ -54,7 +54,7 @@ public class GrcApplesRecipes extends GrcModuleBase
 		}
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[0])
-			.tags(BoozeTag.CIDER, BoozeTag.YOUNG)
+			.tags(BoozeTag.YOUNG)
 			.pressesFrom(
 				new OreItemStacks("foodApple"),
 				TickUtils.seconds(2),
