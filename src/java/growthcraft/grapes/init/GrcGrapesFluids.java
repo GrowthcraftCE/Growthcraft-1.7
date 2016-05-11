@@ -87,7 +87,7 @@ public class GrcGrapesFluids extends GrcModuleBase
 		}
 
 		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[0])
-			.tags(BoozeTag.WINE, BoozeTag.YOUNG)
+			.tags(BoozeTag.YOUNG)
 			.pressesFrom(
 				EnumGrapes.PURPLE.asStack(),
 				TickUtils.seconds(2),
