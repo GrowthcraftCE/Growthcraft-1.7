@@ -94,7 +94,8 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench
 	}
 
 	@Override
-	public boolean doesSneakBypassUse(World world, int x, int y, int z, EntityPlayer player) {
+	public boolean doesSneakBypassUse(World world, int x, int y, int z, EntityPlayer player)
+	{
 		return true;
 	}
 

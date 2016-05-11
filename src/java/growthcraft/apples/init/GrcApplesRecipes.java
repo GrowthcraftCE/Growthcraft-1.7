@@ -116,7 +116,7 @@ public class GrcApplesRecipes extends GrcModuleBase
 			.fermentsFrom(fs[2], new OreItemStacks("yeastOrigin"), fermentTime)
 			.fermentsFrom(fs[3], new OreItemStacks("yeastOrigin"), fermentTime)
 			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f * 1.5f), TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f * 2.5f), TickUtils.seconds(45))
 				.addEffect(new EffectWeightedRandomList()
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76444_x.id, TickUtils.seconds(90), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.wither.id, TickUtils.seconds(90), 2)))
