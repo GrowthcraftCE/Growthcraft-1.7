@@ -148,7 +148,7 @@ public abstract class BlockGrapeVineBase extends Block implements IPlantable, IC
 		if (!this.canBlockStay(world, x, y, z))
 		{
 			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.UPDATE_AND_SYNC);
+			world.setBlockToAir(x, y, z);
 		}
 	}
 

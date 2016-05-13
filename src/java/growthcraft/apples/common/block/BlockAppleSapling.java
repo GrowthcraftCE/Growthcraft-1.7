@@ -10,7 +10,6 @@ import growthcraft.api.core.util.BlockFlags;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
@@ -69,7 +68,7 @@ public class BlockAppleSapling extends BlockBush implements IGrowable
 		final int meta = world.getBlockMetadata(x, y, z) & 3;
 		final WorldGenerator generator = new WorldGenAppleTree(true);
 
-		world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.ALL);
+		world.setBlockToAir(x, y, z);
 
 		if (!generator.generate(world, random, x, y, z))
 		{
