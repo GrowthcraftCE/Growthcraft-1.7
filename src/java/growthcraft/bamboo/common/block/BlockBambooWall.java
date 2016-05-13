@@ -4,6 +4,7 @@ import java.util.List;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.client.renderer.RenderBambooWall;
+import growthcraft.core.common.block.GrcBlockBase;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,7 +22,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBambooWall extends Block
+public class BlockBambooWall extends GrcBlockBase
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;

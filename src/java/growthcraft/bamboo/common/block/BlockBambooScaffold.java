@@ -4,6 +4,7 @@ import java.util.Random;
 
 import growthcraft.bamboo.client.renderer.RenderBambooScaffold;
 import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.core.common.block.GrcBlockBase;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,7 +21,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockBambooScaffold extends Block
+public class BlockBambooScaffold extends GrcBlockBase
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;

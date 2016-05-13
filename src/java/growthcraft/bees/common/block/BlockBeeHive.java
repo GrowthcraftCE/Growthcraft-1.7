@@ -3,9 +3,10 @@ package growthcraft.bees.common.block;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.bees.GrowthCraftBees;
-import growthcraft.bees.client.renderer.RenderBeeHive;
 import growthcraft.api.core.util.BlockFlags;
+import growthcraft.bees.client.renderer.RenderBeeHive;
+import growthcraft.bees.GrowthCraftBees;
+import growthcraft.core.common.block.GrcBlockBase;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,7 +24,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBeeHive extends Block
+public class BlockBeeHive extends GrcBlockBase
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;

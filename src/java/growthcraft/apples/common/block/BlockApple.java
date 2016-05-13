@@ -2,11 +2,12 @@ package growthcraft.apples.common.block;
 
 import java.util.Random;
 
-import growthcraft.apples.GrowthCraftApples;
-import growthcraft.core.common.block.ICropDataProvider;
-import growthcraft.core.client.renderer.RenderBlockFruit;
-import growthcraft.core.integration.AppleCore;
 import growthcraft.api.core.util.BlockFlags;
+import growthcraft.apples.GrowthCraftApples;
+import growthcraft.core.client.renderer.RenderBlockFruit;
+import growthcraft.core.common.block.GrcBlockBase;
+import growthcraft.core.common.block.ICropDataProvider;
+import growthcraft.core.integration.AppleCore;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
@@ -23,7 +24,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockApple extends Block implements IGrowable, ICropDataProvider
+public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProvider
 {
 	public static class AppleStage
 	{
@@ -94,19 +95,6 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	public void func_149853_b(World world, Random random, int x, int y, int z)
 	{
 		incrementGrowth(world, x, y, z, world.getBlockMetadata(x, y, z));
-	}
-
-	/**
-	 * Drops the block as an item and replaces it with air
-	 * @param world - world to drop in
-	 * @param x - x Coord
-	 * @param y - y Coord
-	 * @param z - z Coord
-	 */
-	public void fellBlockAsItem(World world, int x, int y, int z)
-	{
-		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		world.setBlockToAir(x, y, z);
 	}
 
 	/************
