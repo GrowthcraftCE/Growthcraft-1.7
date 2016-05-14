@@ -75,19 +75,19 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope
 
 	public boolean canGrowOutwards(World world, int x, int y, int z)
 	{
-		final boolean leavesTotheSouth = world.getBlock(x + 1, y, z) == this;
-		final boolean leavesToTheNorth = world.getBlock(x - 1, y, z) == this;
-		final boolean leavesToTheEast = world.getBlock(x, y, z + 1) == this;
-		final boolean leavesToTheWest = world.getBlock(x, y, z - 1) == this;
+		final boolean leavesTotheSouth = world.getBlock(x, y, z + 1) == this;
+		final boolean leavesToTheNorth = world.getBlock(x, y, z - 1) == this;
+		final boolean leavesToTheEast = world.getBlock(x + 1, y, z) == this;
+		final boolean leavesToTheWest = world.getBlock(x - 1, y, z) == this;
 
 		if (!leavesTotheSouth && !leavesToTheNorth && !leavesToTheEast && !leavesToTheWest) return false;
 
 		for (int i = 1; i <= grapeVineSupportedLength; ++i)
 		{
-			if (leavesTotheSouth && isTrunk(world, x + i, y - 1, z)) return true;
-			if (leavesToTheNorth && isTrunk(world, x - i, y - 1, z)) return true;
-			if (leavesToTheEast && isTrunk(world, x, y - 1, z + i)) return true;
-			if (leavesToTheWest && isTrunk(world, x, y - 1, z - i)) return true;
+			if (leavesTotheSouth && isTrunk(world, x, y - 1, z + i)) return true;
+			if (leavesToTheNorth && isTrunk(world, x, y - 1, z - i)) return true;
+			if (leavesToTheEast && isTrunk(world, x + i, y - 1, z)) return true;
+			if (leavesToTheWest && isTrunk(world, x - i, y - 1, z)) return true;
 		}
 		return false;
 	}
