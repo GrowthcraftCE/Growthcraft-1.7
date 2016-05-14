@@ -204,10 +204,10 @@ public class GrowthCraftBees
 	private void postRegisterRecipes()
 	{
 		GameRegistry.addRecipe(new ShapedOreRecipe(beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
-	
+
 		GameRegistry.addRecipe(new ShapelessMultiRecipe(
-				items.honeyJar.asStack(), 
-				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()), 
+				items.honeyJar.asStack(),
+				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()),
 				Items.flower_pot));
 	}
 
@@ -220,6 +220,7 @@ public class GrowthCraftBees
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerBees());
 
 		final VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
+		VillagerRegistry.instance().registerVillagerId(config.villagerApiaristID);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, new VillageHandlerBees());
 		VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);

@@ -54,6 +54,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -307,6 +308,7 @@ public class GrowthCraftCellar
 		packetPipeline.initialise();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerCellar());
 
+		VillagerRegistry.instance().registerVillagerId(config.villagerBrewerID);
 		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());
 
 		CommonProxy.instance.init();
