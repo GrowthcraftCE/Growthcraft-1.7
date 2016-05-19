@@ -338,7 +338,7 @@ public class GrcMilkFluids extends GrcModuleBase
 			.brewsFrom(
 				new FluidStack(FluidRegistry.WATER, 1000),
 				new OreItemStacks("rennetSource"),
-				TickUtils.minutes(1);
+				TickUtils.minutes(1));
 
 		GrowthCraftCellar.boozeBuilderFactory.create(pasteurizedMilk.fluid.getFluid())
 			.brewsFrom(skimMilk.fluid.asFluidStack(250), new ItemStack(Items.sugar), TickUtils.minutes(1), new Residue(GrowthCraftMilk.items.starterCulture.asStack(1), 1.0f));
