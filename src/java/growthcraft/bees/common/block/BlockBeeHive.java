@@ -3,9 +3,10 @@ package growthcraft.bees.common.block;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.bees.GrowthCraftBees;
-import growthcraft.bees.client.renderer.RenderBeeHive;
 import growthcraft.api.core.util.BlockFlags;
+import growthcraft.bees.client.renderer.RenderBeeHive;
+import growthcraft.bees.GrowthCraftBees;
+import growthcraft.core.common.block.GrcBlockBase;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -15,7 +16,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -24,7 +24,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBeeHive extends Block
+public class BlockBeeHive extends GrcBlockBase
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
@@ -136,8 +136,8 @@ public class BlockBeeHive extends Block
 		super.onNeighborBlockChange(world, x, y, z, par5);
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlock(x, y, z, Blocks.air, 0, 3);
+			dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+			world.setBlockToAir(x, y, z);
 		}
 	}
 

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,16 @@
  */
 package growthcraft.core.common.inventory;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.item.ItemTest;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -42,6 +47,49 @@ public class InventoryProcessor
 	private static final InventoryProcessor	inst = new InventoryProcessor();
 
 	private InventoryProcessor() {}
+
+	/**
+	 * Retrieves the Inventory as a List of ItemStacks
+	 *
+	 * @param inv - inventory to get items from
+	 * @return list of item stacks
+	 */
+	public List<ItemStack> getInventoryList(@Nonnull IInventory inv)
+	{
+		final List<ItemStack> result = new ArrayList<ItemStack>();
+		for (int i = 0; i < inv.getSizeInventory(); ++i)
+		{
+			result.add(inv.getStackInSlot(i));
+		}
+		return result;
+	}
+
+	/**
+	 * Shuffles all items in the inventory
+	 *
+	 * @param inv - inventory to shuffle
+	 */
+	public void shuffleInventory(@Nonnull IInventory inv, @Nonnull Random random)
+	{
+		final List<ItemStack> list = getInventoryList(inv);
+		Collections.shuffle(list, random);
+		for (int i = 0; i < inv.getSizeInventory(); ++i)
+		{
+			inv.setInventorySlotContents(i, list.get(i));
+		}
+	}
+
+	/**
+	 * Is the slot empty?
+	 *
+	 * @param inv - inventory to check
+	 * @param slot - inventory slot to check
+	 * @return true, the slot is empty, false otherwise
+	 */
+	public boolean slotIsEmpty(@Nonnull IInventory inv, int slot)
+	{
+		return inv.getStackInSlot(slot) == null;
+	}
 
 	/**
 	 * Are the provided slots empty?
@@ -60,29 +108,46 @@ public class InventoryProcessor
 	}
 
 	/**
+	 * Are the inventory's slots empty?
+	 *
+	 * @param inv - inventory to check
+	 * @return true, the slots are empty, false otherwise
+	 */
+	public boolean slotsAreEmpty(@Nonnull IInventory inv)
+	{
+		for (int slot = 0; slot < inv.getSizeInventory(); ++slot)
+		{
+			if (inv.getStackInSlot(slot) != null) return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Merges the provided item into the inventory slot
 	 *
 	 * @param inv - inventory to merge in
-	 * @param item - item stack to merge
+	 * @param item - item stack to merge (mutable)
 	 * @param slot - slot to merge in
 	 * @return true, the item was merged, false otherwise
 	 */
 	public boolean mergeWithSlot(@Nonnull IInventory inv, @Nullable ItemStack item, int slot)
 	{
-		if (item == null) return false;
-		if (item.stackSize <= 0) return false;
+		if (!ItemTest.isValid(item)) return false;
 
 		final ItemStack existing = inv.getStackInSlot(slot);
 		if (existing == null || existing.stackSize <= 0)
 		{
 			inv.setInventorySlotContents(slot, item.copy());
-			item.stackSize = 0;
+			item.stackSize -= MathHelper.clamp_int(item.stackSize, 0, item.getMaxStackSize());
 		}
 		else
 		{
 			if (existing.isItemEqual(item))
 			{
-				final int newSize = MathHelper.clamp_int(existing.stackSize + item.stackSize, 0, existing.getMaxStackSize());
+				//final int maxStackSize = existing.getMaxStackSize();
+				final int maxStackSize = inv.getInventoryStackLimit();
+				final int newSize = MathHelper.clamp_int(existing.stackSize + item.stackSize, 0, maxStackSize);
+				// nothing was added!
 				if (newSize == existing.stackSize)
 				{
 					return false;
@@ -148,6 +213,22 @@ public class InventoryProcessor
 		for (int slot : src)
 		{
 			clearedAnything |= inv.getStackInSlotOnClosing(slot) != null;
+		}
+		return clearedAnything;
+	}
+
+	/**
+	 * Attempts to clear ALL inventory slots
+	 *
+	 * @param inv - inventory to clear from
+	 * @return true, IF anything was remove from the slots, false otherwise
+	 */
+	public boolean clearSlots(@Nonnull IInventory inv)
+	{
+		boolean clearedAnything = false;
+		for (int i = 0; i < inv.getSizeInventory(); ++i)
+		{
+			clearedAnything |= inv.getStackInSlotOnClosing(i) != null;
 		}
 		return clearedAnything;
 	}
@@ -403,40 +484,57 @@ public class InventoryProcessor
 	 *
 	 * @param inv - inventory to search
 	 * @param expected - item stacks to search for
+	 * @param slotsSlice - slots to check in, if null, the entire inventory is searched
 	 * @return slot ids
 	 */
 	@SuppressWarnings({"rawtypes"})
-	public int[] findItemSlots(@Nonnull IInventory inv, @Nonnull List expected)
+	public int[] findItemSlots(@Nonnull IInventory inv, @Nonnull List expected, @Nonnull int[] slotsSlice)
 	{
 		final boolean[] usedSlots = new boolean[inv.getSizeInventory()];
 		final int[] slots = new int[expected.size()];
 		int i = 0;
+		final int invSize = slotsSlice != null ? slotsSlice.length : inv.getSizeInventory();
 		for (Object expectedStack : expected)
 		{
 			slots[i] = -1;
-			for (int slotIndex = 0; slotIndex < inv.getSizeInventory(); ++slotIndex)
+			for (int index = 0; index < invSize; ++index)
 			{
-				final ItemStack stack = inv.getStackInSlot(slotIndex);
+				final int slotIndex = slotsSlice != null ? slotsSlice[index] : index;
 				boolean foundItem = false;
 				if (expectedStack instanceof IMultiItemStacks)
 				{
 					foundItem = checkSlot(inv, (IMultiItemStacks)expectedStack, slotIndex);
 				}
-				else if (expectedStack instanceof ItemStack || expectedStack == null)
+				else if (expectedStack instanceof ItemStack)
 				{
 					foundItem = checkSlot(inv, (ItemStack)expectedStack, slotIndex);
 				}
+
 				if (foundItem)
 				{
 					if (usedSlots[slotIndex]) continue;
 					usedSlots[slotIndex] = true;
-					slots[i] = findItemSlot(inv, stack);
+					slots[i] = slotIndex;
 					break;
 				}
 			}
 			i++;
 		}
 		return slots;
+	}
+
+	/**
+	 * Search the inventory for all the items given, this method will skip
+	 * slots that have been used before.
+	 *
+	 * @param inv - inventory to search
+	 * @param expected - item stacks to search for
+	 * @return slot ids
+	 */
+	@SuppressWarnings({"rawtypes"})
+	public int[] findItemSlots(@Nonnull IInventory inv, @Nonnull List expected)
+	{
+		return findItemSlots(inv, expected, null);
 	}
 
 	/**
@@ -500,6 +598,67 @@ public class InventoryProcessor
 	}
 
 	/**
+	 * Checks a slice of slots for the given items, unordered
+	 *
+	 * @param inv - inventory to check
+	 * @param filter - itemstacks to look for
+	 * @param from - a slice of slots to look in
+	 * @return true, all the items in the filter are present in the inv, false otherwise
+	 */
+	@SuppressWarnings({"rawtypes"})
+	public boolean checkSlotsUnordered(@Nonnull IInventory inv, @Nonnull List filter, int[] from)
+	{
+		assert filter.size() == from.length;
+		final int[] slots = findItemSlots(inv, filter, from);
+		for (int i : slots)
+		{
+			if (i < 0) return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Checks a slice of slots for the given items, unordered
+	 *
+	 * @param inv - inventory to check
+	 * @param filter - itemstacks to look for
+	 * @param from - a slice of slots to look in
+	 * @return true, all the items in the filter are present in the inv, false otherwise
+	 */
+	public boolean checkSlotsUnordered(@Nonnull IInventory inv, @Nonnull ItemStack[] filter, int[] from)
+	{
+		return checkSlotsUnordered(inv, Arrays.asList(filter), from);
+	}
+
+	/**
+	 * Checks a slice of slots for the given items, unordered
+	 *
+	 * @param inv - inventory to check
+	 * @param filter - itemstacks to look for
+	 * @param from - a slice of slots to look in
+	 * @return true, all the items in the filter are present in the inv, false otherwise
+	 */
+	public boolean checkSlotsUnordered(@Nonnull IInventory inv, @Nonnull IMultiItemStacks[] filter, int[] from)
+	{
+		return checkSlotsUnordered(inv, Arrays.asList(filter), from);
+	}
+
+	/**
+	 * @param inv - the inventory to check against
+	 * @param slots - slots to check
+	 * @return true, all slots are valid (0 and above), false otherwise
+	 */
+	public boolean slotsAreValid(@Nonnull IInventory inv, @Nonnull int[] slots)
+	{
+		for (int slot : slots)
+		{
+			if (slot < 0) return false;
+			if (slot >= inv.getSizeInventory()) return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Consume items in the inventory.
 	 *
 	 * @param inv - source inventory to consume items from
@@ -542,6 +701,35 @@ public class InventoryProcessor
 		final int[] slots = findItemSlots(inv, expected);
 		if (!checkSlots(inv, expected, slots)) return false;
 		return consumeItemsInSlots(inv, expected, slots);
+	}
+
+	/**
+	 * A simple implementation of canInsertItem, this will check that the slot is
+	 * either empty, or has the SAME item to insert.
+	 *
+	 * @return true, the item can be inserted, false otherwise
+	 */
+	public boolean canInsertItem(@Nonnull IInventory inv, @Nullable ItemStack stack, int slot)
+	{
+		final ItemStack expected = inv.getStackInSlot(slot);
+		if (expected != null)
+		{
+			return checkSlot(inv, stack, slot);
+		}
+		return true;
+	}
+
+	/**
+	 * A simple implementation of canExtractItem, this will check that the slot
+	 * contains the expected item.
+	 *
+	 * @return true, the item can be extracted, false otherwise
+	 */
+	public boolean canExtractItem(@Nonnull IInventory inv, @Nullable ItemStack stack, int slot)
+	{
+		final ItemStack expected = inv.getStackInSlot(slot);
+		if (expected == null) return false;
+		return checkSlot(inv, stack, slot);
 	}
 
 	public static InventoryProcessor instance()

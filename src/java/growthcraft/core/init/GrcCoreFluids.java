@@ -26,9 +26,11 @@ package growthcraft.core.init;
 import growthcraft.api.core.GrcFluid;
 import growthcraft.core.bucket.SaltBucketEntry;
 import growthcraft.core.common.GrcModuleBase;
-import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill;
+import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.FluidFactory;
+
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcCoreFluids extends GrcModuleBase
 {
@@ -51,9 +53,16 @@ public class GrcCoreFluids extends GrcModuleBase
 	@Override
 	public void init()
 	{
+		OreDictionary.registerOre("bottleSaltwater", saltWater.bottle.getItem());
+		OreDictionary.registerOre("bucketSaltwater", saltWater.bucket.getItem());
 		if (GrowthCraftCore.getConfig().bucketOfOceanSaltWater)
 		{
-			EventHandlerSpecialBucketFill.instance().addEntry(new SaltBucketEntry());
+			logger.info("Ocean Salt Water Buckets are ENABLED");
+			EventHandlerBucketFill.instance().addEntry(new SaltBucketEntry());
+		}
+		else
+		{
+			logger.info("Ocean Salt Water Buckets are DISABLED");
 		}
 	}
 }

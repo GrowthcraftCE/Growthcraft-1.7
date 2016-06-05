@@ -14,7 +14,6 @@ item.grc.grapes.red.name=红葡萄
 item.grc.grapeSeeds.name=葡萄籽
 
 # Fluids
-fluid.grc.grapeWine=葡萄酒
 fluid.grc.grapeWine0=葡萄酒
 fluid.grc.grapeWine1=葡萄酒
 fluid.grc.grapeWine2=葡萄酒
@@ -25,7 +24,6 @@ fluid.grc.grapeWine6=葡萄酒
 fluid.grc.grapeWine7=葡萄酒
 
 # Fluid Buckets
-item.bucket.fluid.grc.grapeWine.name=葡萄酒桶
 item.bucket.fluid.grc.grapeWine0.name=葡萄酒桶
 item.bucket.fluid.grc.grapeWine1.name=葡萄酒桶
 item.bucket.fluid.grc.grapeWine2.name=葡萄酒桶
@@ -36,7 +34,6 @@ item.bucket.fluid.grc.grapeWine6.name=葡萄酒桶
 item.bucket.fluid.grc.grapeWine7.name=葡萄酒桶
 
 # Fluid Blocks
-tile.fluid.grc.grapeWine.name=葡萄酒
 tile.fluid.grc.grapeWine0.name=葡萄酒
 tile.fluid.grc.grapeWine1.name=葡萄酒
 tile.fluid.grc.grapeWine2.name=葡萄酒

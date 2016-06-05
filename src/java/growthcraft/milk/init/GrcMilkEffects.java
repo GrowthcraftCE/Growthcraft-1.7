@@ -25,7 +25,7 @@ package growthcraft.milk.init;
 
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.IEffectRegistry;
-import growthcraft.milk.common.effect.EffectBoozeMilk;
+import growthcraft.milk.common.effect.EffectMilk;
 import growthcraft.milk.common.effect.EffectEvilBoozeMilk;
 
 public class GrcMilkEffects
@@ -35,7 +35,7 @@ public class GrcMilkEffects
 	public static void init()
 	{
 		final IEffectRegistry reg = CoreRegistry.instance().getEffectsRegistry();
-		reg.register("booze_milk", EffectBoozeMilk.class);
+		reg.register("booze_milk", EffectMilk.class);
 		reg.register("evil_booze_milk", EffectEvilBoozeMilk.class);
 	}
 }

@@ -37,6 +37,7 @@ public class RandomUtils
 
 	public static int range(Random random, int min, int max)
 	{
+		if (min == max) return min;
 		return min + random.nextInt(max - min);
 	}
 

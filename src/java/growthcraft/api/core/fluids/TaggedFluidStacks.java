@@ -27,12 +27,13 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.definition.IMultiFluidStacks;
-
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -40,7 +41,25 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 {
 	public int amount;
 	private List<String> tags;
+	private List<String> exclusionTags;
 	private List<FluidTag> fluidTags;
+	private List<FluidTag> exclusionFluidTags;
+	private List<Fluid> fluidCache;
+	private transient List<ItemStack> fluidContainers;
+
+	/**
+	 * @param amt - expected fluid stack size
+	 * @param ptags - fluid tag names
+	 * @param pextags - fluid tag names
+	 */
+	public TaggedFluidStacks(int amt, @Nonnull List<String> ptags, @Nonnull List<String> pextags)
+	{
+		this.amount = amt;
+		this.tags = ptags;
+		this.exclusionTags = pextags;
+		this.fluidTags = CoreRegistry.instance().fluidTags().expandTagNames(tags);
+		this.exclusionFluidTags = CoreRegistry.instance().fluidTags().expandTagNames(exclusionTags);
+	}
 
 	/**
 	 * @param amt - expected fluid stack size
@@ -48,9 +67,7 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 	 */
 	public TaggedFluidStacks(int amt, @Nonnull String... ptags)
 	{
-		this.amount = amt;
-		this.tags = Arrays.asList(ptags);
-		this.fluidTags = CoreRegistry.instance().fluidTags().expandTagNames(tags);
+		this(amt, Arrays.asList(ptags), new ArrayList<String>());
 	}
 
 	/**
@@ -64,13 +81,29 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 	}
 
 	/**
+	 * The tags to filter by
+	 *
+	 * @return tags
+	 */
+	public List<String> getExclusionTags()
+	{
+		return exclusionTags;
+	}
+
+	/**
 	 * All fluids registered under the tags
 	 *
 	 * @return fluids
 	 */
 	public Collection<Fluid> getFluids()
 	{
-		return CoreRegistry.instance().fluidDictionary().getFluidsByTags(fluidTags);
+		if (fluidCache == null)
+		{
+			this.fluidCache = new ArrayList<Fluid>();
+			fluidCache.addAll(CoreRegistry.instance().fluidDictionary().getFluidsByTags(fluidTags));
+			fluidCache.removeAll(CoreRegistry.instance().fluidDictionary().getFluidsByTags(exclusionFluidTags));
+		}
+		return fluidCache;
 	}
 
 	@Override
@@ -108,5 +141,16 @@ public class TaggedFluidStacks implements IMultiFluidStacks
 		if (!FluidTest.isValid(stack)) return false;
 		final Fluid expected = stack.getFluid();
 		return containsFluid(expected);
+	}
+
+	@Override
+	public List<ItemStack> getItemStacks()
+	{
+		if (fluidContainers == null)
+		{
+			fluidContainers = FluidUtils.getFluidContainers(getFluidStacks());
+		}
+
+		return fluidContainers;
 	}
 }

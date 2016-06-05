@@ -127,14 +127,14 @@ tile.grcmilk.BlockFluidRennet.name=Présure
 tile.grcmilk.BlockFluidSkimMilk.name=Lait Ecrémé
 tile.grcmilk.BlockFluidWhey.name=Petit-Lait
 ### Bottles
-item.grcmilk.BottleFluidButterMilk.name=Bouteille de Lait de Beurre
+item.grcmilk.FoodBottleFluidButterMilk.name=Bouteille de Lait de Beurre
 item.grcmilk.BottleFluidCream.name=Bouteille de Crème
 item.grcmilk.BottleFluidCurds.name=Bouteille de Lait Caillé
-item.grcmilk.BottleFluidMilk.name=Bouteille de Lait
+item.grcmilk.FoodBottleFluidMilk.name=Bouteille de Lait
 item.grcmilk.BottleFluidPasteurizedMilk.name=item.grcmilk.BottleFluidPasteurizedMilk.name
 item.grcmilk.BottleFluidRennet.name=Bouteille de Présure
-item.grcmilk.BottleFluidSkimMilk.name=Bouteille de Lait Ecrémé
-item.grcmilk.BottleFluidWhey.name=Bouteille de Petit-Lait
+item.grcmilk.FoodBottleFluidSkimMilk.name=Bouteille de Lait Ecrémé
+item.grcmilk.FoodBottleFluidWhey.name=Bouteille de Petit-Lait
 ### Buckets
 item.bucket.fluid.grcmilk.ButterMilk.name=Seau de Lait de Beurre
 item.bucket.fluid.grcmilk.Cream.name=Seau de Crème
@@ -171,7 +171,7 @@ item.bucket.fluid.grcmilk.Kumis4.name=Kumis Bucket
 item.bucket.fluid.grcmilk.Kumis5.name=Seau de Lait Vil
 
 # Effects
-grc.effect.booze_milk=Enlève tous les effets (Sauf l'Ivresse)
+grc.effect.milk=Enlève tous les effets (Sauf l'Ivresse)
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s

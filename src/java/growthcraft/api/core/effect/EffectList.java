@@ -79,12 +79,19 @@ public class EffectList extends AbstractEffectList
 	@Override
 	protected void getActualDescription(List<String> list)
 	{
-		addDescriptionHead(list);
-		for (IEffect effect : effects)
+		if (effects.size() > 1)
 		{
-			final List<String> tempList = new ArrayList<String>();
-			effect.getDescription(tempList);
-			Describer.addAllIndented(list, tempList);
+			addDescriptionHead(list);
+			for (IEffect effect : effects)
+			{
+				final List<String> tempList = new ArrayList<String>();
+				effect.getDescription(tempList);
+				Describer.addAllIndented(list, tempList);
+			}
+		}
+		else if (effects.size() == 1)
+		{
+			effects.get(0).getDescription(list);
 		}
 	}
 }

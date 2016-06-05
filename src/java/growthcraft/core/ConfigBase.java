@@ -1,3 +1,26 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015, 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.core;
 
 import java.io.File;
@@ -8,9 +31,10 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.util.StringUtils;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -24,12 +48,19 @@ public abstract class ConfigBase implements ILoggable
 	@Target(ElementType.FIELD)
 	protected static @interface ConfigOption
 	{
+		// the config option's category
 		String catergory() default Configuration.CATEGORY_GENERAL;
+		// the config option's name
 		String name();
+		// the config option's description
 		String desc() default "";
+		// optional value - usually used for configuring a type checker or parser
+		String opt() default "";
+		// default value for special types
+		String def() default "";
 	}
 
-	private static final String DEFAULT_STR = "; Default : ";
+	static final String DEFAULT_STR = "; Default : ";
 
 	// All configs will include a Debug option.
 	@ConfigOption(catergory="Debug", name="Enable Debugging", desc="Should Growthcraft log all its activity for debugging purposes?")
@@ -55,7 +86,17 @@ public abstract class ConfigBase implements ILoggable
 				final Class typeClass = field.getType();
 				try
 				{
-					if (Integer.TYPE.equals(typeClass))
+					if (Byte.TYPE.equals(typeClass))
+					{
+						final byte val = field.getByte(this);
+						field.setShort(this, (byte)config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val).getInt());
+					}
+					else if (Short.TYPE.equals(typeClass))
+					{
+						final short val = field.getShort(this);
+						field.setShort(this, (short)config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val).getInt());
+					}
+					else if (Integer.TYPE.equals(typeClass))
 					{
 						final int val = field.getInt(this);
 						field.setInt(this, config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val).getInt());
@@ -82,11 +123,29 @@ public abstract class ConfigBase implements ILoggable
 					}
 					else
 					{
-						logger.error("Unhandled config option: type=%s option=%s", typeClass, opt.name());
+						boolean found = false;
+						for (ConfigTypeHandler handler : ConfigTypeHandler.handlers)
+						{
+							if (handler.canHandle(field))
+							{
+								field.set(this, handler.handle(field, config));
+								found = true;
+								break;
+							}
+						}
+						if (!found)
+						{
+							logger.error("Unhandled config option: type=%s option=%s", typeClass, opt.name());
+						}
 					}
 
 					// Only use this when you need to debug config options
-					logger.debug("ConfigBase<%s> name='%s' key='%s' value=%s", this.toString(), opt.name(), field.getName(), field.get(this).toString());
+					logger.info("ConfigBase<%s>{catergory:'%s', name:'%s', key:'%s', value:%s}",
+						this.toString(),
+						opt.catergory(),
+						opt.name(),
+						field.getName(),
+						StringUtils.inspect(field.get(this)));
 				}
 				catch (IllegalAccessException ex)
 				{

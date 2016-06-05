@@ -12,12 +12,29 @@ tile.grc.fenceRope.name=Fence with Rope
 tile.grc.netherBrickFenceRope.name=Fence with Rope (Nether Brick)
 tile.grc.naturaFenceRope.name=Fence with Rope (%s)
 tile.grc.ropeBlock.name=Rope
+tile.grccore.salt_block.name=Salt Block
 
 # Items
 item.grc.rope.name=Rope
 item.grccore.salt.name=Salt
 item.grccore.bucketSalt.name=Salt Bucket
 item.grccore.bottleSalt.name=Salt Bottle
+item.grccore.crowbar.black.name=Crowbar (Black)
+item.grccore.crowbar.red.name=Crowbar (Red)
+item.grccore.crowbar.green.name=Crowbar (Green)
+item.grccore.crowbar.brown.name=Crowbar (Brown)
+item.grccore.crowbar.blue.name=Crowbar (Blue)
+item.grccore.crowbar.purple.name=Crowbar (Purple)
+item.grccore.crowbar.cyan.name=Crowbar (Cyan)
+item.grccore.crowbar.light_gray.name=Crowbar (Light Gray)
+item.grccore.crowbar.gray.name=Crowbar (Gray)
+item.grccore.crowbar.pink.name=Crowbar (Pink)
+item.grccore.crowbar.lime.name=Crowbar (Lime)
+item.grccore.crowbar.yellow.name=Crowbar (Yellow)
+item.grccore.crowbar.light_blue.name=Crowbar (Light Blue)
+item.grccore.crowbar.magenta.name=Crowbar (Magenta)
+item.grccore.crowbar.orange.name=Crowbar (Orange)
+item.grccore.crowbar.white.name=Crowbar (White)
 
 # Fluids
 fluid.tile.water=Water
@@ -33,23 +50,23 @@ item.bucket.fluid.grccore.SaltWater.name=Salt Water Bucket
 achievementPage.pageGrowthCraft=Growthcraft
 
 # Colors
-grc.colour.White=White
-grc.colour.Orange=Orange
-grc.colour.Magenta=Magenta
-grc.colour.LightBlue=Light Blue
-grc.colour.Yellow=Yellow
-grc.colour.Lime=Lime
-grc.colour.Pink=Pink
-grc.colour.Gray=Gray
-grc.colour.LightGray=Light Gray
-grc.colour.Cyan=Cyan
-grc.colour.Purple=Purple
-grc.colour.Blue=Blue
-grc.colour.Brown=Brown
-grc.colour.Green=Green
-grc.colour.Red=Red
-grc.colour.Black=Black
-grc.colour.Transparent=Transparent
+grc.color.Black=Black
+grc.color.Blue=Blue
+grc.color.Brown=Brown
+grc.color.Cyan=Cyan
+grc.color.Gray=Gray
+grc.color.Green=Green
+grc.color.LightBlue=Light Blue
+grc.color.LightGray=Light Gray
+grc.color.Lime=Lime
+grc.color.Magenta=Magenta
+grc.color.Orange=Orange
+grc.color.Pink=Pink
+grc.color.Purple=Purple
+grc.color.Red=Red
+grc.color.Transparent=Transparent
+grc.color.White=White
+grc.color.Yellow=Yellow
 
 # Formats and Units
 grc.format.value.true=YES
@@ -91,6 +108,8 @@ grccore.waila.option.DisplayHeated=Heated Devices
 
 # Effects
 grc.effect.chance.format=%d%% Chance of
+grc.effect.extinguish.desc=Extinguishes Burning
+grc.effect.ignite.desc=Sets Fire for %ds
 grc.effect.list.head=Applies the following:
 grc.effect.null.desc=Does Nothing
 grc.effect.random_list.head=Applies one of the following:
@@ -101,7 +120,15 @@ grc.effect.weighted_random_list.format=%d%% Chance of
 gui.grc.progress.format=%s : %d / %d
 
 # Inventory
-grc.inventory.internal=Inventory
+grc.inventory.internal.name=Inventory
 
 # Tooltips
 grc.tooltip.detailed_information=Hold %s to show detailed Information
+
+# Achievements
+achievement.trusty_hardware=Trusty Hardware
+achievement.trusty_hardware.desc=Keep out of reach of Endermen.
+achievement.half_life_confirmed=Half-Life Confirmed!
+achievement.half_life_confirmed.desc=Defeat a Zombie with a Crowbar
+achievement.salty_situation=Salty Situation
+achievement.salty_situation.desc=Fill a Bucket with Salt Water

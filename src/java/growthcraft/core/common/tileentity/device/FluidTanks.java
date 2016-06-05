@@ -177,6 +177,7 @@ public class FluidTanks implements IFluidTanks, INBTSerializableContext, IStream
 
 	public void writeToNBT(NBTTagCompound nbt)
 	{
+		nbt.setInteger("tank_count", tanks.length);
 		for (int i = 0; i < tanks.length; i++)
 		{
 			final NBTTagCompound tag = new NBTTagCompound();

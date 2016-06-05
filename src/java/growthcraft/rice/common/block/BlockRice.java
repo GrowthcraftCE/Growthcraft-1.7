@@ -3,10 +3,11 @@ package growthcraft.rice.common.block;
 import java.util.ArrayList;
 import java.util.Random;
 
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.core.common.block.GrcBlockBase;
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.common.block.IPaddyCrop;
 import growthcraft.core.integration.AppleCore;
-import growthcraft.api.core.util.BlockFlags;
 import growthcraft.rice.client.renderer.RenderRice;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.util.RiceBlockCheck;
@@ -25,7 +26,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockRice extends Block implements IPaddyCrop, ICropDataProvider, IGrowable
+public class BlockRice extends GrcBlockBase implements IPaddyCrop, ICropDataProvider, IGrowable
 {
 	public static class RiceStage
 	{

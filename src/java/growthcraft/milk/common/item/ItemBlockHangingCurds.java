@@ -43,7 +43,7 @@ public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock
 	public ItemBlockHangingCurds(Block block)
 	{
 		super(block);
-		this.maxStackSize = 1;
+		setHasSubtypes(true);
 	}
 
 	private NBTTagCompound getTileTagCompoundABS(ItemStack stack)
@@ -109,7 +109,7 @@ public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
 	{
 		final NBTTagCompound nbt = getTileTagCompound(stack);
-		if (nbt.hasKey("dried"))
+		if (nbt.hasKey("dried") && nbt.getBoolean("dried"))
 		{
 			list.add(GrcI18n.translate("grcmilk.hanging_curds.dried"));
 		}

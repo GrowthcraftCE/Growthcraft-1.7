@@ -42,6 +42,18 @@ public class BlockFermentBarrel extends BlockCellarContainer
 	}
 
 	@Override
+	protected boolean shouldRestoreBlockState(World world, int x, int y, int z, ItemStack stack)
+	{
+		return true;
+	}
+
+	@Override
+	protected boolean shouldDropTileStack(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		return true;
+	}
+
+	@Override
 	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		return true;

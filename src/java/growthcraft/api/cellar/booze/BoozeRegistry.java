@@ -12,14 +12,12 @@ import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.fluids.FluidUtils;
 
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BoozeRegistry implements IBoozeRegistry
 {
 	private ILogger logger = NullLogger.INSTANCE;
 	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
-	private Map<Fluid, Fluid> altBoozeMap = new HashMap<Fluid, Fluid>();
 	private Map<FluidTag, IModifierFunction> tagModifierFunctions = new HashMap<FluidTag, IModifierFunction>();
 
 	@Override
@@ -121,91 +119,5 @@ public class BoozeRegistry implements IBoozeRegistry
 		{
 			throw new IllegalArgumentException("[Growthcraft|Cellar] The fluid being registered as a Booze is already registered to the CellarRegistry.");
 		}
-	}
-
-	@Override
-	public void addBoozeAlternative(@Nonnull Fluid altfluid, @Nonnull Fluid fluid)
-	{
-		if (FluidUtils.doesFluidExist(altfluid))
-		{
-			if (isFluidBooze(fluid))
-			{
-				logger.info("Aliasing booze %s as %s", fluid.getName(), altfluid.getName());
-				altBoozeMap.put(altfluid, fluid);
-				registerBooze(altfluid, getBoozeEntry(fluid));
-			}
-			else
-			{
-				throw new IllegalArgumentException("[Growthcraft|Cellar] An alternative fluid/booze is being registered to a fluid which is not registered as a booze.");
-			}
-		}
-		else
-		{
-			throw new IllegalArgumentException("[Growthcraft|Cellar] An alternative fluid/booze is being registered which does not exist.");
-		}
-	}
-
-	@Override
-	public void addBoozeAlternative(Fluid altfluid, String fluid)
-	{
-		if (FluidUtils.doesFluidExist(fluid))
-		{
-			addBoozeAlternative(altfluid, FluidRegistry.getFluid(fluid));
-		}
-		else
-		{
-			logger.error("Fluid %s does not exist, cannot add alternative booze!", fluid);
-		}
-	}
-
-	@Override
-	public void addBoozeAlternative(String altfluid, String fluid)
-	{
-		if (!FluidUtils.doesFluidExist(altfluid))
-		{
-			logger.error("Fluid %s does not exist, cannot add alternative booze!", altfluid);
-			return;
-		}
-
-		if (!FluidUtils.doesFluidExist(fluid))
-		{
-			logger.error("Fluid %s does not exist, cannot add alternative booze!", fluid);
-			return;
-		}
-
-		addBoozeAlternative(FluidRegistry.getFluid(altfluid), FluidRegistry.getFluid(fluid));
-	}
-
-	@Override
-	public boolean isAlternateBooze(Fluid f)
-	{
-		if (f == null)
-		{
-			return false;
-		}
-		return altBoozeMap.get(f) != null;
-	}
-
-	@Override
-	public Fluid getAlternateBooze(Fluid f)
-	{
-		if (isAlternateBooze(f))
-		{
-			return altBoozeMap.get(f);
-		}
-		return null;
-	}
-
-	@Override
-	public Fluid maybeAlternateBooze(Fluid f)
-	{
-		final Fluid alt = getAlternateBooze(f);
-		return alt != null ? alt : f;
-	}
-
-	@Override
-	public FluidStack maybeAlternateBoozeStack(FluidStack stack)
-	{
-		return new FluidStack(maybeAlternateBooze(stack.getFluid()), stack.amount);
 	}
 }

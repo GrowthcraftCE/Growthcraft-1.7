@@ -27,10 +27,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.api.cellar.booze.BoozeEffect;
-import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.definition.IMultiFluidStacks;
+import growthcraft.api.core.fluids.FluidTag;
+import growthcraft.api.core.util.MultiStacksUtil;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -76,16 +78,17 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time)
+	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time)
 	{
 		CellarRegistry.instance().fermenting().addRecipe(result, new FluidStack(fluid, result.amount), stack, time);
 		return this;
 	}
 
 	@Override
-	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time)
+	public ICellarBoozeBuilder fermentsFrom(@Nonnull Object srcFluid, @Nonnull Object stack, int time)
 	{
-		CellarRegistry.instance().fermenting().addRecipe(new FluidStack(fluid, src.amount), src, stack, time);
+		final IMultiFluidStacks src = MultiStacksUtil.toMultiFluidStacks(srcFluid);
+		CellarRegistry.instance().fermenting().addRecipe(new FluidStack(fluid, src.getAmount()), src, stack, time);
 		return this;
 	}
 

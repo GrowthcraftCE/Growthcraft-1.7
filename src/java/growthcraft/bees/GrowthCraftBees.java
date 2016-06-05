@@ -2,10 +2,13 @@ package growthcraft.bees;
 
 import java.util.List;
 
+import growthcraft.api.bees.BeesFluidTag;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.user.UserBeesConfig;
 import growthcraft.api.bees.user.UserFlowerEntry;
 import growthcraft.api.bees.user.UserFlowersConfig;
+import growthcraft.api.core.fluids.TaggedFluidStacks;
+import growthcraft.api.core.item.recipes.ShapelessMultiRecipe;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
@@ -29,7 +32,6 @@ import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.integration.bop.BopPlatform;
 import growthcraft.core.util.MapGenHelper;
-
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -197,16 +199,16 @@ public class GrowthCraftBees
 		final ItemStack honeyStack = items.honeyCombFilled.asStack();
 		GameRegistry.addShapelessRecipe(items.honeyJar.asStack(),
 			honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.flower_pot);
-		GameRegistry.addShapelessRecipe(items.honeyJar.asStack(),
-			fluids.honey.asBucketItemStack(), Items.flower_pot);
-		final ItemStack honeyBottleStack = fluids.honey.asBottleItemStack();
-		GameRegistry.addShapelessRecipe(items.honeyJar.asStack(),
-			honeyBottleStack, honeyBottleStack, honeyBottleStack, Items.flower_pot);
 	}
 
 	private void postRegisterRecipes()
 	{
 		GameRegistry.addRecipe(new ShapedOreRecipe(beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
+
+		GameRegistry.addRecipe(new ShapelessMultiRecipe(
+				items.honeyJar.asStack(),
+				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()),
+				Items.flower_pot));
 	}
 
 	@EventHandler
@@ -218,6 +220,7 @@ public class GrowthCraftBees
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerBees());
 
 		final VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
+		VillagerRegistry.instance().registerVillagerId(config.villagerApiaristID);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, new VillageHandlerBees());
 		VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);

@@ -29,6 +29,8 @@ import javax.annotation.Nullable;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.util.CellarBoozeBuilder;
 import growthcraft.api.cellar.util.ICellarBoozeBuilder;
+import growthcraft.api.core.definition.IMultiFluidStacks;
+import growthcraft.api.core.util.MultiStacksUtil;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -64,16 +66,17 @@ public class UserApiCellarBoozeBuilder extends CellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull ItemStack stack, int time)
+	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time)
 	{
 		this.userApis.getUserFermentingRecipes().addDefault(stack, new FluidStack(fluid, result.amount), result, time);
 		return this;
 	}
 
 	@Override
-	public ICellarBoozeBuilder fermentsFrom(@Nonnull FluidStack src, @Nonnull ItemStack stack, int time)
+	public ICellarBoozeBuilder fermentsFrom(@Nonnull Object srcFluid, @Nonnull Object stack, int time)
 	{
-		this.userApis.getUserFermentingRecipes().addDefault(stack, src, new FluidStack(fluid, src.amount), time);
+		final IMultiFluidStacks src = MultiStacksUtil.toMultiFluidStacks(srcFluid);
+		this.userApis.getUserFermentingRecipes().addDefault(stack, src, new FluidStack(fluid, src.getAmount()), time);
 		return this;
 	}
 

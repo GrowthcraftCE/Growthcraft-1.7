@@ -44,6 +44,11 @@ public class ProcessingRecipe
 		return residue;
 	}
 
+	public boolean hasResidue()
+	{
+		return residue != null;
+	}
+
 	public int getTime()
 	{
 		return time;

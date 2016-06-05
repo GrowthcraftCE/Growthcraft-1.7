@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,13 +42,12 @@ import growthcraft.api.cellar.pressing.IPressingRegistry;
 import growthcraft.api.cellar.pressing.PressingRegistry;
 import growthcraft.api.cellar.yeast.IYeastRegistry;
 import growthcraft.api.cellar.yeast.YeastRegistry;
-import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 
-public class CellarRegistry implements ILoggable
+public class CellarRegistry implements ICellarRegistry
 {
-	private static final CellarRegistry INSTANCE = new CellarRegistry().initialize();
+	private static final ICellarRegistry INSTANCE = new CellarRegistry().initialize();
 
 	private final IBoozeRegistry boozeRegistry = new BoozeRegistry();
 	private final IBrewingRegistry brewingRegistry = new BrewingRegistry();
@@ -63,7 +62,7 @@ public class CellarRegistry implements ILoggable
 	/**
 	 * @return current instrance of the CellarRegistry
 	 */
-	public static final CellarRegistry instance()
+	public static final ICellarRegistry instance()
 	{
 		return INSTANCE;
 	}

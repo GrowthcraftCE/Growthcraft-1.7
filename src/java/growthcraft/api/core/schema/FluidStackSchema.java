@@ -26,6 +26,7 @@ package growthcraft.api.core.schema;
 import javax.annotation.Nonnull;
 
 import growthcraft.api.core.definition.IFluidStackFactory;
+import growthcraft.api.core.util.StringUtils;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -91,7 +92,8 @@ public class FluidStackSchema implements IFluidStackFactory, IValidatable, IComm
 	@Override
 	public String toString()
 	{
-		return String.format("Schema<FluidStack>(name: '%s', amount: %d)", name, amount);
+		return String.format("Schema<FluidStack>(comment: '%s', name: '%s', amount: %d)",
+			StringUtils.inspect(comment), name, amount);
 	}
 
 	@Override

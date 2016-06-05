@@ -7,7 +7,6 @@ item.grc.appleSeeds.name=Trognon de pomme
 
 # Booze
 ## Fluids
-fluid.grc.appleCider=Cidre de pomme
 fluid.grc.appleCider0=Cidre de pomme
 fluid.grc.appleCider1=Cidre de pomme
 fluid.grc.appleCider2=Cidre de pomme
@@ -17,7 +16,6 @@ fluid.grc.appleCider5=Cidre de pomme
 fluid.grc.appleCider6=Cidre de pomme
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider.name=Seau de cidre de pomme
 item.bucket.fluid.grc.appleCider0.name=Seau de cidre de pomme
 item.bucket.fluid.grc.appleCider1.name=Seau de cidre de pomme
 item.bucket.fluid.grc.appleCider2.name=Seau de cidre de pomme
@@ -27,7 +25,6 @@ item.bucket.fluid.grc.appleCider5.name=Seau de cidre de pomme
 item.bucket.fluid.grc.appleCider6.name=Seau de cidre de pomme
 
 ## Fluid Blocks
-tile.fluid.grc.appleCider.name=Cidre de pomme
 tile.fluid.grc.appleCider0.name=Cidre de pomme
 tile.fluid.grc.appleCider1.name=Cidre de pomme
 tile.fluid.grc.appleCider2.name=Cidre de pomme

@@ -46,7 +46,7 @@ public class GrcInternalInventory implements IInventory, INBTSerializableContext
 
 	public GrcInternalInventory(Object par, int size, int maxStack)
 	{
-		this.inventoryName = "grc.inventory.internal";
+		this.inventoryName = "grc.inventory.internal.name";
 		this.parent = par;
 		this.maxSize = size;
 		this.maxStackSize = maxStack;

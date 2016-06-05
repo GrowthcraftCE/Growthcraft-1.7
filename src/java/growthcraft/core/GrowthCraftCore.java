@@ -1,6 +1,9 @@
 package growthcraft.core;
 
+import java.util.List;
+
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.fluids.user.UserFluidDictionaryConfig;
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.log.GrcLogger;
@@ -13,9 +16,9 @@ import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.item.crafting.ShapelessItemComparableRecipe;
 import growthcraft.core.creativetab.CreativeTabsGrowthcraft;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
-import growthcraft.core.eventhandler.EventHandlerSpecialBucketFill;
+import growthcraft.core.eventhandler.EventHandlerItemCraftedEventCore;
+import growthcraft.core.eventhandler.EventHandlerLivingDeathCore;
 import growthcraft.core.eventhandler.HarvestDropsEventCore;
-import growthcraft.core.eventhandler.PlayerInteractEventAmazingStick;
 import growthcraft.core.eventhandler.PlayerInteractEventPaddy;
 import growthcraft.core.eventhandler.TextureStitchEventCore;
 import growthcraft.core.init.GrcCoreBlocks;
@@ -23,11 +26,11 @@ import growthcraft.core.init.GrcCoreFluids;
 import growthcraft.core.init.GrcCoreItems;
 import growthcraft.core.init.GrcCoreRecipes;
 import growthcraft.core.integration.bop.BopPlatform;
-import growthcraft.core.util.ItemUtils;
-
+import growthcraft.core.stats.GrcCoreAchievements;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod;
@@ -39,6 +42,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.RecipeSorter;
 
 @Mod(
@@ -63,7 +69,7 @@ public class GrowthCraftCore
 	public static IIcon liquidSmoothTexture;
 	@SideOnly(Side.CLIENT)
 	public static IIcon liquidBlobsTexture;
-
+	public static GrcCoreAchievements achievements;
 	public static CreativeTabs creativeTab;
 
 	public static final GrcCoreBlocks blocks = new GrcCoreBlocks();
@@ -110,6 +116,7 @@ public class GrowthCraftCore
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.core.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.core.integration.Waila());
 		if (config.enableAppleCoreIntegration) modules.add(new growthcraft.core.integration.AppleCore());
+		if (config.enableNEIIntegration) modules.add(new growthcraft.core.integration.nei.NEIModule());
 
 		if (config.debugEnabled)
 		{
@@ -120,6 +127,17 @@ public class GrowthCraftCore
 		creativeTab = new CreativeTabsGrowthcraft("creative_tab_grccore");
 
 		EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
+		if (config.changeWaterBottleCapacity)
+		{
+			final List<FluidContainerData> dataList = FluidUtils.getFluidData().get(FluidRegistry.WATER);
+			for (FluidContainerData data : dataList)
+				if (OreDictionary.itemMatches(data.filledContainer, new ItemStack(Items.potionitem, 1, 0), true))
+					data.fluid.amount = config.bottleCapacity;
+
+			// Reset the fluidData cache, as we are loading it super early here
+			FluidUtils.getFluidData().clear();
+		}
+		if (config.changeWaterBottleContainer) Items.potionitem.setContainerItem(Items.glass_bottle);
 
 		RecipeSorter.register("grcShaplessComparable", ShapelessItemComparableRecipe.class, RecipeSorter.Category.SHAPELESS, "");
 
@@ -132,6 +150,7 @@ public class GrowthCraftCore
 		MinecraftForge.EVENT_BUS.register(new TextureStitchEventCore());
 
 		modules.register();
+		achievements = new GrcCoreAchievements();
 	}
 
 	@EventHandler
@@ -140,8 +159,6 @@ public class GrowthCraftCore
 		userFluidDictionary.loadUserConfig();
 		CommonProxy.instance.initRenders();
 		AchievementPageGrowthcraft.init();
-
-		ItemUtils.init();
 
 		userVinesConfig.addDefault(Blocks.vine);
 		if (BopPlatform.isLoaded())
@@ -157,13 +174,10 @@ public class GrowthCraftCore
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		MinecraftForge.EVENT_BUS.register(EventHandlerBucketFill.instance());
-		MinecraftForge.EVENT_BUS.register(EventHandlerSpecialBucketFill.instance());
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventPaddy());
-		if (config.useAmazingStick)
-		{
-			MinecraftForge.EVENT_BUS.register(new PlayerInteractEventAmazingStick());
-		}
+		MinecraftForge.EVENT_BUS.register(new EventHandlerLivingDeathCore());
+		FMLCommonHandler.instance().bus().register(new EventHandlerItemCraftedEventCore());
 
 		modules.postInit();
 		if (config.dumpGameRegistry) growthcraft.core.util.GameRegistryDumper.run();

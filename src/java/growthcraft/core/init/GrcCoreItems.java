@@ -27,6 +27,7 @@ import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.common.item.ItemBottleSalt;
 import growthcraft.core.common.item.ItemBucketSalt;
+import growthcraft.core.common.item.ItemCrowbar;
 import growthcraft.core.common.item.ItemRope;
 import growthcraft.core.common.item.ItemSalt;
 
@@ -38,6 +39,7 @@ public class GrcCoreItems extends GrcModuleBase
 	public ItemDefinition salt;
 	public ItemDefinition saltBucket;
 	public ItemDefinition saltBottle;
+	public ItemDefinition crowbar;
 
 	@Override
 	public void preInit()
@@ -46,6 +48,7 @@ public class GrcCoreItems extends GrcModuleBase
 		this.salt = new ItemDefinition(new ItemSalt());
 		this.saltBottle = new ItemDefinition(new ItemBottleSalt());
 		this.saltBucket = new ItemDefinition(new ItemBucketSalt());
+		this.crowbar = new ItemDefinition(new ItemCrowbar());
 	}
 
 	@Override
@@ -55,6 +58,7 @@ public class GrcCoreItems extends GrcModuleBase
 		salt.register("grccore.salt");
 		saltBottle.register("grccore.saltBottle");
 		saltBucket.register("grccore.saltBucket");
+		crowbar.register("grccore.crowbar");
 	}
 
 	@Override
@@ -63,5 +67,9 @@ public class GrcCoreItems extends GrcModuleBase
 		OreDictionary.registerOre("materialRope", rope.getItem());
 		OreDictionary.registerOre("materialSalt", salt.getItem());
 		OreDictionary.registerOre("foodSalt", salt.getItem());
+		OreDictionary.registerOre("dustSalt", salt.getItem());
+		OreDictionary.registerOre("lumpSalt", salt.getItem());
+		OreDictionary.registerOre("bottleSalt", saltBottle.getItem());
+		OreDictionary.registerOre("bucketSalt", saltBucket.getItem());
 	}
 }

@@ -2,19 +2,19 @@
 itemGroup.creative_tab_grccellar=Growthcraft Adega
 
 # Blocks
-tile.grc.fruitPress.name=Esmagador de Frutas
-tile.grc.fruitPresser.name=Esmagador de Frutas
-tile.grc.brewKettle.name=Caldeira de Fabricação
+tile.grc.fruitPress.name=Espremedor de Frutas
+tile.grc.fruitPresser.name=Espremedor de Frutas
+tile.grc.brewKettle.name=Caldeira de Praparação
 tile.grc.fermentBarrel.name=Barril de Fermentação
-tile.grc.fermentJar.name=Jarro de Cultivo
+tile.grc.fermentJar.name=Jarro de Cultura
 
 # Items
 # Please remove this field once all other module translations have been updated,
 # this is no longer used
-item.grc.boozeBucket.name=item.grc.boozeBucket.name
+item.grc.boozeBucket.name=Balde
 
 item.grc.yeast0.name=Levedura do Cervejeiro
-item.grc.yeast1.name=Levedura para Lager
+item.grc.yeast1.name=Levedura de Chope
 item.grc.yeast2.name=Levedura de Bayanus
 item.grc.yeast3.name=Levedura Etérea
 item.grc.yeast4.name=Levedura Original
@@ -39,10 +39,10 @@ item.grc.waterBag15.name=Cantil (Preto)
 item.grc.waterBag16.name=Cantil
 
 # Containers
-container.grc.fruitPress=Esmagador de Frutas
-container.grc.brewKettle=Caldeira de Fabricação
+container.grc.fruitPress=Espremedor de Frutas
+container.grc.brewKettle=Caldeira de Preparação
 container.grc.fermentBarrel=Barril de Fermentação
-container.grc.CultureJar=Jarro de Cultivo
+container.grc.CultureJar=Jarro de Cultura
 
 # Other
 grc.potion.tipsy=Embriaguez
@@ -57,7 +57,7 @@ grc.fluids.tag.fermented=Fermentada
 grc.fluids.tag.fortified=Fortificada
 grc.fluids.tag.hopped=Com Lúpulo
 grc.fluids.tag.hyper_extended=Hiper-extendida
-grc.fluids.tag.intoxicated=intoxicante
+grc.fluids.tag.intoxicated=Intoxicante
 grc.fluids.tag.magical=Mágica
 grc.fluids.tag.poisoned=Envenenada
 grc.fluids.tag.potent=Potente
@@ -69,7 +69,7 @@ gui.grc.empty=Vazio
 gui.grc.discard=Descartar
 gui.grc.switch=Trocar
 gui.grc.cantferment=Não Pode Fermentar
-gui.grccellar.ferment_barrel.progress_name=gui.grccellar.ferment_barrel.progress_name
+gui.grccellar.ferment_barrel.progress_name=Fermentando
 
 # Achievements
 achievement.craftBarrel=Fabricação de Barris
@@ -78,32 +78,36 @@ achievement.fermentBooze=É o que eu posso fermentar...
 achievement.fermentBooze.desc=Fermente uma bebida alcóolica
 achievement.getDrunk=O Problema é Fazer?
 achievement.getDrunk.desc=Alcance Embriguez 5
-achievement.onTheGo=achievement.onTheGo
-achievement.onTheGo.desc=achievement.onTheGo.desc
+achievement.onTheGo=Preparando para Viagem
+achievement.onTheGo.desc=Crafte um cantil
 
 # Tooltips (Number is a percentage)
 # number is a percentage
 grc.cellar.format.waterBag.name=%s (%s)
-grc.cellar.format.waterBag.contents=Contains: %2$dmB/%3$dmB de %1$s
+grc.cellar.format.fluid_container.contents=Contém: %2$dmB/%3$dmB de %1$s
 grc.cellar.format.tipsy_chance=%d%% Chance de Embriaguez
 grc.cellar.item.booze_bucket.deprecated=OBSOLETO, crafte para receber a versão atualizada
 grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETO)
 
-grc.cellar.brew_kettle.brewing_prefix=Brewing :
+grc.cellar.brew_kettle.brewing_prefix=Preparando :
 grc.cellar.brew_kettle.itemslot.item=Item : %s
-grc.cellar.brew_kettle.itemslot.residue=Residue : %s
-grc.cellar.ferment_barrel.progress.prefix=Progress :
-grc.cellar.ferment_barrel.progress.format=%d%%
-grc.cellar.ferment_barrel.itemslot.modifier=Modifier : %s
+grc.cellar.brew_kettle.itemslot.residue=Resíduo : %s
+grc.cellar.ferment_barrel.itemslot.modifier=Modificador : %s
 grc.cellar.ferment_jar.itemslot.yeast=%s
 grc.cellar.fruit_press.itemslot.item=Item : %s
-grc.cellar.fruit_press.itemslot.residue=Residue : %s
+grc.cellar.fruit_press.itemslot.residue=Resíduo : %s
 grc.cellar.fruit_presser.state.invalid=<Invalido>
 grc.cellar.fruit_presser.state.pressed=Pressionado
 grc.cellar.fruit_presser.state.unpressed=Solto
-grc.cellar.fruit_presser.state_prefix=State :
+grc.cellar.fruit_presser.state_prefix=Estado :
 
 # Waila Tooltips
-grccellar.waila.option.FruitPressExtras=Extras do Esmagador de Frutas
-grccellar.waila.option.BrewKettleExtras=Extras da Caldeira de Fabricação
+grccellar.waila.option.FruitPressExtras=Extras do Espremedor de Frutas
+grccellar.waila.option.BrewKettleExtras=Extras da Caldeira de Preparação
 grccellar.waila.option.FermentBarrelExtras=Extras do Barril de Fermentação
+
+# NEI
+grc.recipe_handler.brew_kettle=Caldeira de Preparação
+grc.recipe_handler.culture_jar=Jarro de Cultura
+grc.recipe_handler.ferment_barrel=Barril de Fermentação
+grc.recipe_handler.fruit_press=Espremedor de Frutas

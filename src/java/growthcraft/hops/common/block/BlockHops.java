@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.core.common.block.GrcBlockBase;
 import growthcraft.core.common.block.IBlockRope;
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.api.core.util.BlockFlags;
 import growthcraft.hops.client.renderer.RenderHops;
 import growthcraft.hops.GrowthCraftHops;
 
@@ -34,7 +35,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockHops extends Block implements IBlockRope, IPlantable, ICropDataProvider, IGrowable
+public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, ICropDataProvider, IGrowable
 {
 	public static class HopsStage
 	{

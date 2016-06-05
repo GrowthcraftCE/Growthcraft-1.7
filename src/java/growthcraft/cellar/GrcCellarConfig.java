@@ -8,7 +8,7 @@ public class GrcCellarConfig extends ConfigBase
 	public int potionTipsyID = 50;
 
 	@ConfigOption(catergory="Villager", name="Brewer ID")
-	public int villagerBrewerID = 10;
+	public int villagerBrewerID = 6677;
 
 
 	@ConfigOption(catergory="Events", name="Enable Discard Button", desc="Enable and show the Discard button from certain cellar blocks.")
@@ -35,6 +35,9 @@ public class GrcCellarConfig extends ConfigBase
 
 	@ConfigOption(catergory="Fermenting Barrel", name="Fluid Capacity", desc="How much fluid can a Fermenting Barrel hold? (in mB (milli buckets))")
 	public int fermentBarrelMaxCap = 3000;
+
+	@ConfigOption(catergory="Fermenting Barrel", name="Use Cached Recipes?", desc="May increase performance, but causes issues with some fluid transport blocks.")
+	public boolean fermentBarrelUseCachedRecipe = true;
 
 
 	@ConfigOption(catergory="Fermenting Jar", name="Generation Time", desc="How long does it take for a ferment jar to produce 1 yeast? (number of ticks)")
@@ -73,6 +76,9 @@ public class GrcCellarConfig extends ConfigBase
 	@ConfigOption(catergory="Heat Sources", name="Lava Heat", desc="How much heat does lava provide? (this is normally 0.0..1.0)")
 	public float lavaHeatValue = 0.7f;
 
+
+	@ConfigOption(catergory="Integration", name="Enable NEI Integration", desc="Should we integrate with NotEnoughItems (if available)?")
+	public boolean enableNEIIntegration = true;
 
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
 	public boolean enableWailaIntegration = true;

@@ -23,6 +23,7 @@
  */
 package growthcraft.api.cellar.brewing;
 
+import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -57,7 +58,11 @@ public interface IBrewingRegistry extends ILoggable
 	 * @param itemstack - item ingredient
 	 * @return null, or recipe
 	 */
-	@Nullable BrewingRecipe getBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack);
+	@Nullable BrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack);
+
+	List<BrewingRecipe> findRecipes(@Nullable FluidStack fluidstack);
+	List<BrewingRecipe> findRecipes(@Nullable ItemStack fermenter);
+
 	boolean isBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack);
 	boolean isItemBrewingIngredient(@Nullable ItemStack itemstack);
 }

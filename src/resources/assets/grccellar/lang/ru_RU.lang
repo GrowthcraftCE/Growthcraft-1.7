@@ -84,7 +84,7 @@ achievement.onTheGo.desc=achievement.onTheGo.desc
 # Tooltips (Number is a percentage)
 # number is a percentage
 grc.cellar.format.waterBag.name=%s (%s)
-grc.cellar.format.waterBag.contents=Содержит: %1$s (%2$dмВ/%3$dМв)
+grc.cellar.format.fluid_container.contents=Содержит: %1$s (%2$dмВ/%3$dМв)
 grc.cellar.format.tipsy_chance=Шанс опьянения: %d%%
 grc.cellar.item.booze_bucket.deprecated=УСТАРЕЛО, положите в сетку создания, чтобы обновить
 grc.cellar.item.booze_bucket.deprecated_suffix= (УСТАРЕЛО)
@@ -92,8 +92,6 @@ grc.cellar.item.booze_bucket.deprecated_suffix= (УСТАРЕЛО)
 grc.cellar.brew_kettle.brewing_prefix=Варка :
 grc.cellar.brew_kettle.itemslot.item=Предмет : %s
 grc.cellar.brew_kettle.itemslot.residue=Остаток : %s
-grc.cellar.ferment_barrel.progress.prefix=Прогресс :
-grc.cellar.ferment_barrel.progress.format=%d%%
 grc.cellar.ferment_barrel.itemslot.modifier=Модификатор : %s
 grc.cellar.ferment_jar.itemslot.yeast=%s
 grc.cellar.fruit_press.itemslot.item=Предмет : %s
@@ -107,3 +105,9 @@ grc.cellar.fruit_presser.state_prefix=State :
 grccellar.waila.option.FruitPressExtras=Fruit Press Extras
 grccellar.waila.option.BrewKettleExtras=Brew Kettle Extras
 grccellar.waila.option.FermentBarrelExtras=Fermentation Barrel Extras
+
+# NEI
+grc.recipe_handler.brew_kettle=grc.recipe_handler.brew_kettle
+grc.recipe_handler.culture_jar=grc.recipe_handler.culture_jar
+grc.recipe_handler.ferment_barrel=grc.recipe_handler.ferment_barrel
+grc.recipe_handler.fruit_press=grc.recipe_handler.fruit_press

@@ -33,35 +33,43 @@ import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.util.ICellarBoozeBuilder;
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.effect.EffectExtinguish;
+import growthcraft.api.core.effect.EffectList;
+import growthcraft.api.core.effect.EffectUtils;
 import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.GrcFluid;
+import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.util.StringUtils;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.api.milk.MilkFluidTags;
 import growthcraft.api.milk.MilkRegistry;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
+import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.BoozeUtils;
-import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.item.ItemFoodBottleFluid;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.integration.forestry.ForestryFluids;
 import growthcraft.core.util.FluidFactory;
-import growthcraft.milk.common.effect.EffectBoozeMilk;
+import growthcraft.milk.common.effect.EffectMilk;
 import growthcraft.milk.common.effect.EffectEvilBoozeMilk;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.GrowthCraftMilk;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcMilkFluids extends GrcModuleBase
 {
@@ -82,17 +90,65 @@ public class GrcMilkFluids extends GrcModuleBase
 	public ItemBucketBoozeDefinition[] kumisFluidBuckets = new ItemBucketBoozeDefinition[kumisFluids.length];
 	public ItemDefinition kumisBottle;
 
-	@Override
-	public void preInit()
+	private void preInitCheeseFluids()
 	{
+		for (EnumCheeseType cheese : EnumCheeseType.VALUES)
+		{
+			final String fluidName = "grcmilk.Cheese" + StringUtils.capitalize(cheese.name);
+			final Fluid fluid = new GrcFluid(fluidName).setColor(cheese.getColor());
+			final FluidFactory.FluidDetails details = FluidFactory.instance().create(fluid, FluidFactory.FEATURE_NONE);
+			cheeses.put(cheese, details);
+			if (details.block != null) details.block.getBlock().setColor(cheese.getColor()).setBlockTextureName("grcmilk:fluids/milk");
+			details.setItemColor(cheese.getColor());
+			fluidToCheeseType.put(fluid, cheese);
+		}
+	}
+
+	private void preInitKumisFluids()
+	{
+		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(kumisFluids));
+		BoozeRegistryHelper.initializeBoozeFluids(kumisBasename, kumisFluids);
+		for (Booze booze : kumisFluids)
+		{
+			booze.setColor(GrowthCraftMilk.getConfig().kumisColor).setDensity(1030).setViscosity(3000);
+		}
+		BoozeRegistryHelper.initializeBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets);
+		BoozeRegistryHelper.setBoozeFoodStats(kumisFluids, 1, -0.2f);
+		kumisFluids[5].setColor(GrowthCraftMilk.getConfig().poisonedKumisColor);
+		kumisFluidBlocks[5].getBlock().refreshColor();
+		for (BlockBoozeDefinition def : kumisFluidBlocks)
+		{
+			def.getBlock().setBlockTextureName("grcmilk:fluids/milk");
+		}
+	}
+
+	private void preInitFluids()
+	{
+		final IEffect milkEffect = EffectMilk.create(GrowthCraftCellar.potionTipsy);
 		if (GrowthCraftMilk.getConfig().milkEnabled)
 		{
-			this.milk = FluidFactory.instance().create(new GrcFluid("grcmilk.Milk").setDensity(1030).setViscosity(3000), FluidFactory.FEATURE_BOTTLE | FluidFactory.FEATURE_BLOCK);
+			this.milk = FluidFactory.instance().create(
+				new GrcFluid("grcmilk.Milk").setDensity(1030).setViscosity(3000),
+				FluidFactory.FEATURE_FOOD_BOTTLE | FluidFactory.FEATURE_BLOCK);
+			milk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(milk.getFluid(), 4, 0.3f, false));
+			milk.foodBottle.getItem().setEffect(milkEffect).setAlwaysEdible();
 			milk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFF);
 			milk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 		}
 
-		this.butterMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.ButterMilk"));
+		this.butterMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.ButterMilk"), FluidFactory.FEATURE_ALL_EDIBLE);
+		butterMilk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(butterMilk.getFluid(), 6, 0.4f, false));
+		{
+			final EffectList list = new EffectList();
+			list.add(milkEffect);
+			if (GrowthCraftMilk.getConfig().fantasyMilkEffects)
+			{
+				// Idea from here: http://www.altmedicine101.com/buttermilk
+				list.add(new EffectExtinguish());
+				list.add(EffectUtils.createAddPotionEffect(Potion.fireResistance, TickUtils.seconds(15), 0));
+			}
+			butterMilk.foodBottle.getItem().setEffect(list).setAlwaysEdible();
+		}
 		butterMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFEE7);
 		butterMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/buttermilk");
 
@@ -108,11 +164,31 @@ public class GrcMilkFluids extends GrcModuleBase
 		rennet.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x877243);
 		rennet.block.getBlock().setBlockTextureName("grcmilk:fluids/rennet");
 
-		this.skimMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.SkimMilk"));
+		this.skimMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.SkimMilk"), FluidFactory.FEATURE_ALL_EDIBLE);
+		skimMilk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(skimMilk.getFluid(), 2, 0.2f, false));
+		{
+			final EffectList list = new EffectList();
+			list.add(milkEffect);
+			if (GrowthCraftMilk.getConfig().fantasyMilkEffects)
+			{
+				list.add(EffectUtils.createAddPotionEffect(Potion.moveSpeed, TickUtils.seconds(15), 0));
+			}
+			skimMilk.foodBottle.getItem().setEffect(list).setAlwaysEdible();
+		}
 		skimMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFA);
 		skimMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/skimmilk");
 
-		this.whey = FluidFactory.instance().create(new GrcFluid("grcmilk.Whey"));
+		this.whey = FluidFactory.instance().create(new GrcFluid("grcmilk.Whey"), FluidFactory.FEATURE_ALL_EDIBLE);
+		whey.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(whey.getFluid(), 1, 0.1f, false));
+		{
+			final EffectList list = new EffectList();
+			if (GrowthCraftMilk.getConfig().fantasyMilkEffects)
+			{
+				list.add(EffectUtils.createAddPotionEffect(Potion.damageBoost, TickUtils.seconds(10), 0));
+				list.add(EffectUtils.createAddPotionEffect(Potion.resistance, TickUtils.seconds(10), 0));
+			}
+			whey.foodBottle.getItem().setEffect(list).setAlwaysEdible();
+		}
 		whey.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x94a860);
 		whey.block.getBlock().setBlockTextureName("grcmilk:fluids/whey");
 
@@ -120,31 +196,107 @@ public class GrcMilkFluids extends GrcModuleBase
 		pasteurizedMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFA);
 		pasteurizedMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 
-		for (EnumCheeseType cheese : EnumCheeseType.VALUES)
+		preInitCheeseFluids();
+		preInitKumisFluids();
+	}
+
+	@Override
+	public void preInit()
+	{
+		preInitFluids();
+	}
+
+	public List<Fluid> getMilkFluids()
+	{
+		final List<Fluid> milks = new ArrayList<Fluid>();
+		if (milk != null) milks.add(milk.getFluid());
+		if (ForestryFluids.MILK.exists()) milks.add(ForestryFluids.MILK.getFluid());
+		return milks;
+	}
+
+	private void registerOres()
+	{
+		if (milk != null)
 		{
-			final String fluidName = "grcmilk.Cheese" + StringUtils.capitalize(cheese.name);
-			final Fluid fluid = new GrcFluid(fluidName).setColor(cheese.getColor());
-			final FluidFactory.FluidDetails details = FluidFactory.instance().create(fluid, FluidFactory.FEATURE_NONE);
-			cheeses.put(cheese, details);
-			if (details.block != null) details.block.getBlock().setColor(cheese.getColor()).setBlockTextureName("grcmilk:fluids/milk");
-			details.setItemColor(cheese.getColor());
-			fluidToCheeseType.put(fluid, cheese);
+			OreDictionary.registerOre("bottleMilk", milk.foodBottle.asStack());
+			OreDictionary.registerOre("bucketMilk", Items.milk_bucket);
+			// Milk bucket is the vanilla milk bucket, derp
+			OreDictionary.registerOre("bottleSkimmilk", skimMilk.foodBottle.asStack());
+			OreDictionary.registerOre("bucketSkimmilk", skimMilk.bucket.asStack());
+			OreDictionary.registerOre("bottleButtermilk", butterMilk.foodBottle.asStack());
+			OreDictionary.registerOre("bucketButtermilk", butterMilk.bucket.asStack());
+			OreDictionary.registerOre("bottleWhey", whey.foodBottle.asStack());
+			OreDictionary.registerOre("bucketWhey", whey.bucket.asStack());
+			OreDictionary.registerOre("bottleCream", cream.bottle.asStack());
+			OreDictionary.registerOre("bucketCream", cream.bucket.asStack());
+		}
+	}
+
+	private void registerFermentations()
+	{
+		final IEffect milkEffect = EffectMilk.create(GrowthCraftCellar.potionTipsy);
+		final IEffect evilMilkEffect = new EffectEvilBoozeMilk();
+
+		final FluidStack[] fs = new FluidStack[kumisFluids.length];
+		for (int i = 0; i < kumisFluids.length; ++i)
+		{
+			fs[i] = new FluidStack(kumisFluids[i], 1);
 		}
 
-		BoozeRegistryHelper.setBoozeFoodStats(kumisFluids, 1, -0.2f);
-		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(kumisFluids));
-		BoozeRegistryHelper.initializeBoozeFluids(kumisBasename, kumisFluids);
-		for (Booze booze : kumisFluids)
+		final List<Fluid> milks = getMilkFluids();
+
+		final int fermentTime = GrowthCraftCellar.getConfig().fermentTime;
+		final ICellarBoozeBuilder builder = GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[0]);
+		builder
+			.tags(BoozeTag.FERMENTED)
+			.getEffect()
+				.setTipsy(0.10f, 900)
+				.addEffect(milkEffect);
+
+		for (Fluid fluid : milks)
 		{
-			booze.setColor(GrowthCraftMilk.getConfig().kumisColor).setDensity(1030).setViscosity(3000);
+			final FluidStack milkStack = new FluidStack(fluid, 1);
+			builder.fermentsFrom(milkStack, EnumYeast.BREWERS.asStack(), fermentTime);
+			builder.fermentsFrom(milkStack, new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66));
 		}
-		BoozeRegistryHelper.initializeBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets);
-		kumisFluids[5].setColor(GrowthCraftMilk.getConfig().poisonedKumisColor);
-		kumisFluidBlocks[5].getBlock().refreshColor();
-		for (BlockBoozeDefinition def : kumisFluidBlocks)
-		{
-			def.getBlock().setBlockTextureName("grcmilk:fluids/milk");
-		}
+
+		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[1])
+			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT)
+			.fermentsFrom(fs[0], new OreItemStacks("dustGlowstone"), fermentTime)
+			.fermentsFrom(fs[2], new OreItemStacks("dustGlowstone"), fermentTime)
+			.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), 900)
+				.addEffect(milkEffect);
+
+		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[2])
+			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED)
+			.fermentsFrom(fs[0], new OreItemStacks("dustRedstone"), fermentTime)
+			.fermentsFrom(fs[1], new OreItemStacks("dustRedstone"), fermentTime)
+			.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.02f), 900)
+				.addEffect(milkEffect);
+
+		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[3])
+			.tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
+			.fermentsFrom(fs[1], EnumYeast.ETHEREAL.asStack(), fermentTime)
+			.fermentsFrom(fs[2], EnumYeast.ETHEREAL.asStack(), fermentTime)
+			.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.02f), 900)
+				.addEffect(milkEffect);
+
+		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[4])
+			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
+			.fermentsFrom(fs[1], EnumYeast.ORIGIN.asStack(), fermentTime)
+			.fermentsFrom(fs[2], EnumYeast.ORIGIN.asStack(), fermentTime)
+			.getEffect()
+				.setTipsy(0.50f, 900)
+				.addEffect(milkEffect);
+
+		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[5])
+			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
+			.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.02f), 900)
+				.addEffect(evilMilkEffect);
 	}
 
 	@Override
@@ -183,8 +335,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		CoreRegistry.instance().fluidDictionary().addFluidTags(whey.getFluid(), MilkFluidTags.WHEY);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(rennet.fluid.getFluid())
-			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.blocks.thistle.asStack(), TickUtils.minutes(1), null)
-			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), GrowthCraftMilk.items.stomach.asStack(), TickUtils.minutes(1), null);
+			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), new OreItemStacks("rennetSource"), TickUtils.minutes(1), null);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(pasteurizedMilk.fluid.getFluid())
 			.brewsFrom(skimMilk.fluid.asFluidStack(250), new ItemStack(Items.sugar), TickUtils.minutes(1), new Residue(GrowthCraftMilk.items.starterCulture.asStack(1), 1.0f));
@@ -202,81 +353,9 @@ public class GrcMilkFluids extends GrcModuleBase
 		{
 			CoreRegistry.instance().fluidDictionary().addFluidTags(pair.getValue().getFluid(), MilkFluidTags.CHEESE);
 		}
-	}
 
-	public List<Fluid> getMilkFluids()
-	{
-		final List<Fluid> milks = new ArrayList<Fluid>();
-		if (milk != null) milks.add(milk.getFluid());
-		if (ForestryFluids.MILK.exists()) milks.add(ForestryFluids.MILK.getFluid());
-		return milks;
-	}
-
-	private void registerFermentations()
-	{
-		final IEffect milkEffect = EffectBoozeMilk.create(GrowthCraftCellar.potionTipsy);
-		final IEffect evilMilkEffect = new EffectEvilBoozeMilk();
-
-		final FluidStack[] fs = new FluidStack[kumisFluids.length];
-		for (int i = 0; i < kumisFluids.length; ++i)
-		{
-			fs[i] = new FluidStack(kumisFluids[i], 1);
-		}
-
-		final List<Fluid> milks = getMilkFluids();
-
-		final int fermentTime = GrowthCraftCellar.getConfig().fermentTime;
-		final ICellarBoozeBuilder builder = GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[0]);
-		builder
-			.tags(BoozeTag.FERMENTED)
-			.getEffect()
-				.setTipsy(0.10f, 900)
-				.addEffect(milkEffect);
-
-		for (Fluid fluid : milks)
-		{
-			final FluidStack milkStack = new FluidStack(fluid, 1);
-			builder.fermentsFrom(milkStack, EnumYeast.BREWERS.asStack(), fermentTime);
-			builder.fermentsFrom(milkStack, new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66));
-		}
-
-		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[1])
-			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT)
-			.fermentsFrom(fs[0], new ItemStack(Items.glowstone_dust), fermentTime)
-			.fermentsFrom(fs[2], new ItemStack(Items.glowstone_dust), fermentTime)
-			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), 900)
-				.addEffect(milkEffect);
-
-		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[2])
-			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED)
-			.fermentsFrom(fs[0], new ItemStack(Items.redstone), fermentTime)
-			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
-			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.02f), 900)
-				.addEffect(milkEffect);
-
-		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[3])
-			.tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
-			.fermentsFrom(fs[1], EnumYeast.ETHEREAL.asStack(), fermentTime)
-			.fermentsFrom(fs[2], EnumYeast.ETHEREAL.asStack(), fermentTime)
-			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.02f), 900)
-				.addEffect(milkEffect);
-
-		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[4])
-			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
-			.fermentsFrom(fs[1], EnumYeast.ORIGIN.asStack(), fermentTime)
-			.fermentsFrom(fs[2], EnumYeast.ORIGIN.asStack(), fermentTime)
-			.getEffect()
-				.setTipsy(0.50f, 900)
-				.addEffect(milkEffect);
-
-		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[5])
-			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
-			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.02f), 900)
-				.addEffect(evilMilkEffect);
+		registerOres();
+		registerFermentations();
 	}
 
 	@Override
@@ -292,7 +371,5 @@ public class GrcMilkFluids extends GrcModuleBase
 				cream.fluid.asFluidStack(333), skimMilk.fluid.asFluidStack(666),
 				TickUtils.minutes(1));
 		}
-
-		registerFermentations();
 	}
 }

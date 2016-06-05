@@ -97,7 +97,7 @@ public class ModelCuboid
 		return this;
 	}
 
-	public void writeBounds(float[] bounds)
+	public float[] toBoundsArray(float[] bounds)
 	{
 		assert bounds.length == 6;
 		bounds[0] = x;
@@ -106,5 +106,28 @@ public class ModelCuboid
 		bounds[3] = x + w;
 		bounds[4] = y + h;
 		bounds[5] = z + l;
+		return bounds;
+	}
+
+	public float[] toBoundsArray()
+	{
+		return toBoundsArray(new float[6]);
+	}
+
+	public float[] toIntArray(float[] target)
+	{
+		assert target.length == 6;
+		target[0] = x;
+		target[1] = y;
+		target[2] = z;
+		target[3] = w;
+		target[4] = h;
+		target[5] = l;
+		return target;
+	}
+
+	public float[] toIntArray()
+	{
+		return toIntArray(new float[6]);
 	}
 }

@@ -16,7 +16,6 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
@@ -118,7 +117,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 		final int meta = world.getBlockMetadata(x, y, z) & 3;
 		final WorldGenerator generator = new WorldGenBamboo(true);
 
-		world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.ALL);
+		world.setBlockToAir(x, y, z);
 
 		if (!generator.generate(world, rand, x, y, z))
 		{

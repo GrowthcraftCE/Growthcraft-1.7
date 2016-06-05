@@ -6,7 +6,6 @@ item.grc.hops.name=item.grc.hops.name
 item.grc.hopSeeds.name=item.grc.hopSeeds.name
 
 # Fluids
-fluid.grc.hopAle=fluid.grc.hopAle
 fluid.grc.hopAle0=fluid.grc.hopAle0
 fluid.grc.hopAle1=fluid.grc.hopAle1
 fluid.grc.hopAle2=fluid.grc.hopAle2
@@ -17,7 +16,6 @@ fluid.grc.hopAle6=fluid.grc.hopAle6
 fluid.grc.hopAle7=fluid.grc.hopAle7
 fluid.grc.hopAle8=fluid.grc.hopAle8
 
-fluid.grc.lager=fluid.grc.lager
 fluid.grc.lager0=fluid.grc.lager0
 fluid.grc.lager1=fluid.grc.lager1
 fluid.grc.lager2=fluid.grc.lager2
@@ -27,7 +25,6 @@ fluid.grc.lager5=fluid.grc.lager5
 fluid.grc.lager6=fluid.grc.lager6
 
 # Fluid Buckets
-item.bucket.fluid.grc.hopAle.name=item.bucket.fluid.grc.hopAle.name
 item.bucket.fluid.grc.hopAle0.name=item.bucket.fluid.grc.hopAle0.name
 item.bucket.fluid.grc.hopAle1.name=item.bucket.fluid.grc.hopAle1.name
 item.bucket.fluid.grc.hopAle2.name=item.bucket.fluid.grc.hopAle2.name

@@ -23,19 +23,16 @@
  */
 package growthcraft.bees.init;
 
+import growthcraft.bees.common.item.EnumBeesWax;
 import growthcraft.bees.common.item.ItemBee;
 import growthcraft.bees.common.item.ItemBeesWax;
 import growthcraft.bees.common.item.ItemHoneyCombEmpty;
 import growthcraft.bees.common.item.ItemHoneyCombFilled;
 import growthcraft.bees.common.item.ItemHoneyJar;
-import growthcraft.bees.common.item.EnumBeesWax;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class GrcBeesItems extends GrcModuleBase
 {
@@ -63,18 +60,6 @@ public class GrcBeesItems extends GrcModuleBase
 		honeyJar.register("grc.honeyJar");
 		bee.register("grc.bee");
 		beesWax.register("grcbees.BeesWax");
-
-		final ItemStack emptyComb = honeyCombEmpty.asStack();
-		GameRegistry.addShapelessRecipe(EnumBeesWax.NORMAL.asStack(),
-			emptyComb, emptyComb, emptyComb,
-			emptyComb, emptyComb, emptyComb,
-			emptyComb, emptyComb, emptyComb);
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumBeesWax.BLACK.asStack(),
-			EnumBeesWax.NORMAL.asStack(), "dyeBlack"));
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(EnumBeesWax.RED.asStack(),
-			EnumBeesWax.NORMAL.asStack(), "dyeRed"));
 	}
 
 	@Override
@@ -87,7 +72,9 @@ public class GrcBeesItems extends GrcModuleBase
 		OreDictionary.registerOre("materialBeeswaxRed", EnumBeesWax.RED.asStack());
 		OreDictionary.registerOre("beeQueen", bee.getItem());
 		OreDictionary.registerOre("materialWaxcomb", honeyCombEmpty.asStack());
+		OreDictionary.registerOre("beeComb", honeyCombEmpty.asStack());
 		OreDictionary.registerOre("materialHoneycomb", honeyCombFilled.asStack());
+		OreDictionary.registerOre("beeComb", honeyCombFilled.asStack());
 		OreDictionary.registerOre("honeyDrop", honeyJar.getItem());
 		OreDictionary.registerOre("dropHoney", honeyJar.getItem());
 		OreDictionary.registerOre("bucketHoney", honeyJar.getItem());

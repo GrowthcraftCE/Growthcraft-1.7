@@ -2,11 +2,12 @@ package growthcraft.apples.common.block;
 
 import java.util.Random;
 
-import growthcraft.apples.GrowthCraftApples;
-import growthcraft.core.common.block.ICropDataProvider;
-import growthcraft.core.client.renderer.RenderBlockFruit;
-import growthcraft.core.integration.AppleCore;
 import growthcraft.api.core.util.BlockFlags;
+import growthcraft.apples.GrowthCraftApples;
+import growthcraft.core.client.renderer.RenderBlockFruit;
+import growthcraft.core.common.block.GrcBlockBase;
+import growthcraft.core.common.block.ICropDataProvider;
+import growthcraft.core.integration.AppleCore;
 
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
@@ -16,7 +17,6 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
@@ -24,7 +24,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockApple extends Block implements IGrowable, ICropDataProvider
+public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProvider
 {
 	public static class AppleStage
 	{
@@ -97,19 +97,6 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 		incrementGrowth(world, x, y, z, world.getBlockMetadata(x, y, z));
 	}
 
-	/**
-	 * Drops the block as an item and replaces it with air
-	 * @param world - world to drop in
-	 * @param x - x Coord
-	 * @param y - y Coord
-	 * @param z - z Coord
-	 */
-	public void fellBlockAsItem(World world, int x, int y, int z)
-	{
-		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		world.setBlockToAir(x, y, z);
-	}
-
 	/************
 	 * TICK
 	 ************/
@@ -118,8 +105,7 @@ public class BlockApple extends Block implements IGrowable, ICropDataProvider
 	{
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.UPDATE_AND_SYNC);
+			fellBlockAsItem(world, x, y, z);
 		}
 		else
 		{

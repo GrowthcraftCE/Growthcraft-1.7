@@ -42,7 +42,7 @@ item.grc.waterBag16.name=Cantil
 container.grc.fruitPress=Prensa de Fruta
 container.grc.brewKettle=Caldeira de Preparação
 container.grc.fermentBarrel=Barril de Fermentação
-container.grc.CultureJar=container.grc.CultureJar
+container.grc.CultureJar=Jarro de Cultivo
 
 # Other
 grc.potion.tipsy=Bebedeira
@@ -84,7 +84,7 @@ achievement.onTheGo.desc=Constrói um Cantil
 # Tooltips (Number is a percentage)
 # number is a percentage
 grc.cellar.format.waterBag.name=%s (%s)
-grc.cellar.format.waterBag.contents=Contém: %2$dmB/%3$dmB de %1$s
+grc.cellar.format.fluid_container.contents=Contém: %2$dmB/%3$dmB de %1$s
 grc.cellar.format.tipsy_chance=%d%% de Chance de Ficar Bêbado
 grc.cellar.item.booze_bucket.deprecated=Obsoleto, constrói para conseguires um balde melhorado.
 grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETO)
@@ -92,8 +92,6 @@ grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETO)
 grc.cellar.brew_kettle.brewing_prefix=Preparação :
 grc.cellar.brew_kettle.itemslot.item=Item : %s
 grc.cellar.brew_kettle.itemslot.residue=Resíduo : %s
-grc.cellar.ferment_barrel.progress.prefix=Progresso :
-grc.cellar.ferment_barrel.progress.format=%d%%
 grc.cellar.ferment_barrel.itemslot.modifier=Modificador : %s
 grc.cellar.ferment_jar.itemslot.yeast=%s
 grc.cellar.fruit_press.itemslot.item=Item : %s
@@ -107,3 +105,9 @@ grc.cellar.fruit_presser.state_prefix=Estado :
 grccellar.waila.option.FruitPressExtras=Extras da Prensa de Fruta
 grccellar.waila.option.BrewKettleExtras=Extras da Caldeira de Preparação
 grccellar.waila.option.FermentBarrelExtras=Extras de Barril de Fermentação
+
+# NEI
+grc.recipe_handler.brew_kettle=grc.recipe_handler.brew_kettle
+grc.recipe_handler.culture_jar=grc.recipe_handler.culture_jar
+grc.recipe_handler.ferment_barrel=grc.recipe_handler.ferment_barrel
+grc.recipe_handler.fruit_press=grc.recipe_handler.fruit_press

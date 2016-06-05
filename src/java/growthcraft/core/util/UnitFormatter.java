@@ -30,7 +30,6 @@ import javax.annotation.Nullable;
 import com.google.common.base.Joiner;
 
 import growthcraft.api.cellar.booze.BoozeTag;
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.i18n.GrcI18n;
@@ -72,32 +71,24 @@ public class UnitFormatter
 	@Nullable
 	public static String fluidModifier(Fluid fluid)
 	{
-		final Fluid alt = CellarRegistry.instance().booze().maybeAlternateBooze(fluid);
-		if (CellarRegistry.instance().booze().isFluidBooze(alt))
-		{
-			final String modifierSrc = alt.getUnlocalizedName() + ".modifier";
-			String modifierString = GrcI18n.translate(modifierSrc);
+		final String modifierSrc = fluid.getUnlocalizedName() + ".modifier";
+		String modifierString = GrcI18n.translate(modifierSrc);
 
-			// if there is not a modifier defined, create one by joining the tag names
-			if (modifierSrc.equals(modifierString))
+		// if there is not a modifier defined, create one by joining the tag names
+		if (modifierSrc.equals(modifierString))
+		{
+			final Collection<FluidTag> tags = CoreRegistry.instance().fluidDictionary().getFluidTags(fluid);
+			if (tags == null || tags.size() == 0) return null;
+			String str = "";
+			for (FluidTag tag : tags)
 			{
-				final Collection<FluidTag> tags = CoreRegistry.instance().fluidDictionary().getFluidTags(alt);
-				if (tags == null || tags.size() == 0) return null;
-				String str = "";
-				for (FluidTag tag : tags)
-				{
-					if (GrowthCraftCore.getConfig().hidePoisonedBooze && tag == BoozeTag.POISONED) continue;
-					str += ((str.length() == 0) ? "" : ", ") + tag.getLocalizedName();
-				}
-				modifierString = str;
+				if (GrowthCraftCore.getConfig().hidePoisonedBooze && tag == BoozeTag.POISONED) continue;
+				str += ((str.length() == 0) ? "" : ", ") + tag.getLocalizedName();
 			}
+			modifierString = str;
+		}
 
-			return EnumChatFormatting.GREEN + modifierString;
-		}
-		else
-		{
-			return null;
-		}
+		return EnumChatFormatting.GREEN + modifierString;
 	}
 
 	@Nullable
@@ -111,19 +102,18 @@ public class UnitFormatter
 	{
 		if (fluidStack != null)
 		{
-			final FluidStack altStack = CellarRegistry.instance().booze().maybeAlternateBoozeStack(fluidStack);
-			final Fluid fluid = altStack.getFluid();
+			final Fluid fluid = fluidStack.getFluid();
 			final String modifier = fluidModifier(fluid);
 
 			if (modifier != null)
 			{
 				return GrcI18n.translate("grc.format.booze.name",
-					EnumChatFormatting.WHITE + altStack.getLocalizedName(), modifier);
+					EnumChatFormatting.WHITE + fluidStack.getLocalizedName(), modifier);
 			}
 			else
 			{
 				return GrcI18n.translate("grc.format.fluid.name",
-						EnumChatFormatting.WHITE + altStack.getLocalizedName());
+						EnumChatFormatting.WHITE + fluidStack.getLocalizedName());
 			}
 		}
 		return null;

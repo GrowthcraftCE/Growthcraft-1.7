@@ -23,13 +23,65 @@
  */
 package growthcraft.cellar.common.itemblock;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
+import java.util.List;
 
-public class ItemBlockFermentBarrel extends ItemBlock
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.core.common.item.GrcItemTileBlockBase;
+import growthcraft.core.lib.GrcCoreState;
+import growthcraft.core.util.UnitFormatter;
+import growthcraft.cellar.GrowthCraftCellar;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.fluids.FluidStack;
+
+public class ItemBlockFermentBarrel extends GrcItemTileBlockBase
 {
 	public ItemBlockFermentBarrel(Block block)
 	{
 		super(block);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advanced)
+	{
+		super.addInformation(stack, player, list, advanced);
+		final NBTTagCompound tag = getTileTagCompound(stack);
+		if (tag != null)
+		{
+			if (tag.hasKey("Tank0"))
+			{
+				final NBTTagCompound tank = tag.getCompoundTag("Tank0");
+				if (!tank.hasKey("Empty"))
+				{
+					if (GrcCoreState.showDetailedInformation())
+					{
+						final FluidStack fluidStack = FluidStack.loadFluidStackFromNBT(tank);
+						final String fluidName = UnitFormatter.fluidName(fluidStack);
+						if (fluidName != null)
+						{
+							list.add(GrcI18n.translate("grc.cellar.format.fluid_container.contents",
+								fluidName,
+								fluidStack.amount,
+								GrowthCraftCellar.getConfig().fermentBarrelMaxCap));
+						}
+					}
+					else
+					{
+						list.add(EnumChatFormatting.GRAY +
+							GrcI18n.translate("grc.tooltip.detailed_information",
+							EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
+					}
+				}
+			}
+		}
+
 	}
 }

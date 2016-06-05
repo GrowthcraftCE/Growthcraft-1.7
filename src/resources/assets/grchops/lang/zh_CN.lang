@@ -6,7 +6,6 @@ item.grc.hops.name=啤酒花
 item.grc.hopSeeds.name=啤酒花种子
 
 # Fluids
-fluid.grc.hopAle=麦芽酒
 fluid.grc.hopAle0=麦芽酒
 fluid.grc.hopAle1=麦芽酒
 fluid.grc.hopAle2=麦芽酒
@@ -17,7 +16,6 @@ fluid.grc.hopAle6=麦芽酒
 fluid.grc.hopAle7=麦芽酒
 fluid.grc.hopAle8=麦芽酒
 
-fluid.grc.lager=拉格啤酒
 fluid.grc.lager0=拉格啤酒
 fluid.grc.lager1=拉格啤酒
 fluid.grc.lager2=拉格啤酒
@@ -27,7 +25,6 @@ fluid.grc.lager5=拉格啤酒
 fluid.grc.lager6=拉格啤酒
 
 # Fluid Buckets
-item.bucket.fluid.grc.hopAle.name=麦芽酒桶
 item.bucket.fluid.grc.hopAle0.name=麦芽酒桶
 item.bucket.fluid.grc.hopAle1.name=麦芽酒桶
 item.bucket.fluid.grc.hopAle2.name=麦芽酒桶

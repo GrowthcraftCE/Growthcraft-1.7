@@ -234,25 +234,25 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 	}
 
 	@Override
-	protected int doFill(ForgeDirection from, FluidStack resource, boolean doFill)
+	protected int doFill(ForgeDirection from, FluidStack resource, boolean shouldFill)
 	{
-		return fillFluidTank(0, resource, doFill);
+		return fillFluidTank(0, resource, shouldFill);
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection from, int maxDrain, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, int maxDrain, boolean shouldDrain)
 	{
-		return drainFluidTank(1, maxDrain, doDrain);
+		return drainFluidTank(1, maxDrain, shouldDrain);
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection from, FluidStack stack, boolean doDrain)
+	protected FluidStack doDrain(ForgeDirection from, FluidStack stack, boolean shouldDrain)
 	{
 		if (stack == null || !stack.isFluidEqual(getFluidStack(1)))
 		{
 			return null;
 		}
-		return doDrain(from, stack.amount, doDrain);
+		return doDrain(from, stack.amount, shouldDrain);
 	}
 
 	public void switchTanks()

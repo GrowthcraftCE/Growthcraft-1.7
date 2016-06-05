@@ -39,12 +39,12 @@ deploy:
   - "checksums.txt"
   - "build/libs/growthcraft-*-complete.jar"
   - "build/libs/growthcraft-*-api.jar"
-  - "build/libs/growthcraft-*-dev.jar"
+  - "build/libs/growthcraft-*-deobf.jar"
   - "build/libs/growthcraft-*-javadoc.jar"
   - "build/libs/growthcraft-*-sources.jar"
   # separate jars
   - "build/packages/growthcraft-*-complete-*.jar"
-  - "build/packages/growthcraft-*-dev-*.jar"
+  - "build/packages/growthcraft-*-deobf-*.jar"
   skip_cleanup: true
   on:
     tags: true

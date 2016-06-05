@@ -41,23 +41,23 @@ import net.minecraft.util.StatCollector;
  */
 public enum GrcColorPreset
 {
-	White("grc.colour.White", 0xBEBEBE, 0xDBDBDB, 0xFAFAFA),
-	Orange("grc.colour.Orange", 0xF99739, 0xFAAE44, 0xF4DEC3),
-	Magenta("grc.colour.Magenta", 0x821E82, 0xB82AB8, 0xC598C8),
-	LightBlue("grc.colour.LightBlue", 0x628DCB, 0x82ACE7, 0xD8F6FF),
-	Yellow("grc.colour.Yellow", 0xFFF7AA, 0xF8FF4A, 0xFFFFE8),
-	Lime("grc.colour.Lime", 0x7CFF4A, 0xBBFF51, 0xE7F7D7),
-	Pink("grc.colour.Pink", 0xDC8DB5, 0xF8B5D7, 0xF7DEEB),
-	Gray("grc.colour.Gray", 0x7C7C7C, 0xA0A0A0, 0xC9C9C9),
-	LightGray("grc.colour.LightGray", 0x9D9D9D, 0xCDCDCD, 0xEFEFEF),
-	Cyan("grc.colour.Cyan", 0x2F9BA5, 0x51AAC6, 0xAEDDF4),
-	Purple("grc.colour.Purple", 0x8230B2, 0xA453CE, 0xC7A3CC),
-	Blue("grc.colour.Blue", 0x2D29A0, 0x514AFF, 0xDDE6FF),
-	Brown("grc.colour.Brown", 0x724E35, 0xB7967F, 0xE0D2C8),
-	Green("grc.colour.Green", 0x45A021, 0x60E32E, 0xE3F2E3),
-	Red("grc.colour.Red", 0xA50029, 0xFF003C, 0xFFE6ED),
-	Black("grc.colour.Black", 0x2B2B2B, 0x565656, 0x848484),
-	Transparent("grc.colour.Transparent", 0x1B2344, 0x895CA8, 0xD7BBEC);
+	White("grc.color.White", 0xBEBEBE, 0xDBDBDB, 0xFAFAFA),
+	Orange("grc.color.Orange", 0xF99739, 0xFAAE44, 0xF4DEC3),
+	Magenta("grc.color.Magenta", 0x821E82, 0xB82AB8, 0xC598C8),
+	LightBlue("grc.color.LightBlue", 0x628DCB, 0x82ACE7, 0xD8F6FF),
+	Yellow("grc.color.Yellow", 0xFFF7AA, 0xF8FF4A, 0xFFFFE8),
+	Lime("grc.color.Lime", 0x7CFF4A, 0xBBFF51, 0xE7F7D7),
+	Pink("grc.color.Pink", 0xDC8DB5, 0xF8B5D7, 0xF7DEEB),
+	Gray("grc.color.Gray", 0x7C7C7C, 0xA0A0A0, 0xC9C9C9),
+	LightGray("grc.color.LightGray", 0x9D9D9D, 0xCDCDCD, 0xEFEFEF),
+	Cyan("grc.color.Cyan", 0x2F9BA5, 0x51AAC6, 0xAEDDF4),
+	Purple("grc.color.Purple", 0x8230B2, 0xA453CE, 0xC7A3CC),
+	Blue("grc.color.Blue", 0x2D29A0, 0x514AFF, 0xDDE6FF),
+	Brown("grc.color.Brown", 0x724E35, 0xB7967F, 0xE0D2C8),
+	Green("grc.color.Green", 0x45A021, 0x60E32E, 0xE3F2E3),
+	Red("grc.color.Red", 0xA50029, 0xFF003C, 0xFFE6ED),
+	Black("grc.color.Black", 0x2B2B2B, 0x565656, 0x848484),
+	Transparent("grc.color.Transparent", 0x1B2344, 0x895CA8, 0xD7BBEC);
 
 	public static final List<GrcColorPreset> ALL_COLORS = Arrays.asList(White, Orange, Magenta, LightBlue, Yellow, Lime, Pink, Gray, LightGray, Cyan, Purple, Blue, Brown, Green, Red, Black, Transparent);
 	public static final List<GrcColorPreset> VALID_COLORS = Arrays.asList(White, Orange, Magenta, LightBlue, Yellow, Lime, Pink, Gray, LightGray, Cyan, Purple, Blue, Brown, Green, Red, Black);

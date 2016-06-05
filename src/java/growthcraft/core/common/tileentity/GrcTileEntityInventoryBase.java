@@ -23,11 +23,10 @@
  */
 package growthcraft.core.common.tileentity;
 
-import java.util.Random;
-
 import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.inventory.IInventoryWatcher;
 import growthcraft.core.common.inventory.IInventoryFlagging;
+import growthcraft.core.common.inventory.IInventoryWatcher;
+import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,29 +38,27 @@ import net.minecraft.nbt.NBTTagCompound;
 /**
  * Extend this base class if you want a Tile with an `Inventory`
  */
-public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase implements ISidedInventory, ICustomDisplayName, IInventoryWatcher, IInventoryFlagging
+public abstract class GrcTileEntityInventoryBase extends GrcTileEntityCommonBase implements ISidedInventory, ICustomDisplayName, IInventoryWatcher, IInventoryFlagging
 {
+	protected static final int[] NO_SLOTS = new int[]{};
+
 	protected String inventoryName;
 	protected GrcInternalInventory inventory;
-	protected boolean needInventoryUpdate;
-	protected Random random = new Random();
 
 	public GrcTileEntityInventoryBase()
 	{
 		super();
-
 		this.inventory = createInventory();
 	}
 
-	protected abstract GrcInternalInventory createInventory();
-	public abstract String getDefaultInventoryName();
-
-	// Call this when you have modified the inventory, or you're not sure what
-	// kind of update you require
-	@Override
-	public void markForInventoryUpdate()
+	protected GrcInternalInventory createInventory()
 	{
-		needInventoryUpdate = true;
+		return new GrcInternalInventory(this, 0);
+	}
+
+	public String getDefaultInventoryName()
+	{
+		return "grc.inventory.name";
 	}
 
 	@Override
@@ -75,30 +72,13 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase imple
 	{
 		final ItemStack discarded = stack.copy();
 		discarded.stackSize = discardedAmount;
-		ItemUtils.spawnItemStack(worldObj, xCoord, yCoord, zCoord, discarded, random);
-	}
-
-	protected void checkUpdateFlags()
-	{
-		if (needInventoryUpdate)
-		{
-			needInventoryUpdate = false;
-			this.markDirty();
-		}
-	}
-
-	@Override
-	public void updateEntity()
-	{
-		super.updateEntity();
-
-		checkUpdateFlags();
+		ItemUtils.spawnItemStack(worldObj, xCoord, yCoord, zCoord, discarded, worldObj.rand);
 	}
 
 	@Override
 	public String getInventoryName()
 	{
-		return this.hasCustomInventoryName() ? inventoryName : getDefaultInventoryName();
+		return hasCustomInventoryName() ? inventoryName : getDefaultInventoryName();
 	}
 
 	@Override
@@ -168,38 +148,43 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase imple
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		if (this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this)
+		if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
 		{
 			return false;
 		}
-		return player.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		return player.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override
-	public void openInventory() {}
-
-	@Override
-	public void closeInventory() {}
-
-	@Override
-	public boolean isItemValidForSlot(int index, ItemStack itemstack)
+	public void openInventory()
 	{
-		return inventory.isItemValidForSlot(index, itemstack);
 	}
 
 	@Override
-	public boolean canInsertItem(int index, ItemStack stack, int side)
+	public void closeInventory()
 	{
-		return isItemValidForSlot(index, stack);
 	}
 
 	@Override
-	public abstract int[] getAccessibleSlotsFromSide(int side);
+	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
+	{
+		return inventory.isItemValidForSlot(slot, itemstack);
+	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, int side)
+	public boolean canInsertItem(int slot, ItemStack stack, int side)
 	{
-		return true;
+		return InventoryProcessor.instance().canInsertItem(this, stack, slot);
+	}
+
+	public boolean canExtractItem(int slot, ItemStack stack, int side)
+	{
+		return InventoryProcessor.instance().canExtractItem(this, stack, slot);
+	}
+
+	public int[] getAccessibleSlotsFromSide(int side)
+	{
+		return NO_SLOTS;
 	}
 
 	private void readInventoryFromNBT(NBTTagCompound nbt)
@@ -227,6 +212,15 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase imple
 	}
 
 	@Override
+	public void readFromNBTForItem(NBTTagCompound nbt)
+	{
+		super.readFromNBTForItem(nbt);
+		readInventoryFromNBT(nbt);
+		// Do not reload the inventory name from NBT, allow the ItemStack to do that
+		//readInventoryNameFromNBT(nbt);
+	}
+
+	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
@@ -237,6 +231,19 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase imple
 	private void writeInventoryToNBT(NBTTagCompound nbt)
 	{
 		inventory.writeToNBT(nbt, "inventory");
+		// NAME
+		if (hasCustomInventoryName())
+		{
+			nbt.setString("inventory_name", inventoryName);
+		}
+		nbt.setInteger("inventory_tile_version", 3);
+	}
+
+	@Override
+	public void writeToNBTForItem(NBTTagCompound nbt)
+	{
+		super.writeToNBTForItem(nbt);
+		writeInventoryToNBT(nbt);
 	}
 
 	@Override
@@ -244,11 +251,5 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityBase imple
 	{
 		super.writeToNBT(nbt);
 		writeInventoryToNBT(nbt);
-		// NAME
-		if (this.hasCustomInventoryName())
-		{
-			nbt.setString("inventory_name", inventoryName);
-		}
-		nbt.setInteger("inventory_tile_version", 3);
 	}
 }

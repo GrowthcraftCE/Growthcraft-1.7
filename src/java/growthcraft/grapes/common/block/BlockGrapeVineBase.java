@@ -2,10 +2,11 @@ package growthcraft.grapes.common.block;
 
 import java.util.Random;
 
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.core.common.block.GrcBlockBase;
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.api.core.util.BlockFlags;
 import growthcraft.grapes.util.GrapeBlockCheck;
 
 import cpw.mods.fml.common.eventhandler.Event;
@@ -22,7 +23,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public abstract class BlockGrapeVineBase extends Block implements IPlantable, ICropDataProvider, IGrowable
+public abstract class BlockGrapeVineBase extends GrcBlockBase implements IPlantable, ICropDataProvider, IGrowable
 {
 	private ItemStack itemDrop;
 	private float growthRateMultiplier;
@@ -148,7 +149,7 @@ public abstract class BlockGrapeVineBase extends Block implements IPlantable, IC
 		if (!this.canBlockStay(world, x, y, z))
 		{
 			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlock(x, y, z, Blocks.air, 0, BlockFlags.UPDATE_AND_SYNC);
+			world.setBlockToAir(x, y, z);
 		}
 	}
 

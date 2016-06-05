@@ -83,7 +83,7 @@ tile.grcmilk.HangingCurds.parmesan.dried.name=Coalhada Seca de Queijo Parmesãon
 tile.grcmilk.HangingCurds.monterey.dried.name=Coalhada Seca de Queijo Monterey
 tile.grcmilk.HangingCurds.ricotta.dried.name=Coalhada Seca de Ricotta
 tile.grcmilk.Pancheon.name=Queijeira
-tile.grcmilk.Thistle.name=tile.grcmilk.Thistle.name
+tile.grcmilk.Thistle.name=Cardo
 
 ### Cheese Vat Fluid Tanks
 grcmilk.cheese_vat.fluid_tank.primary=Primário
@@ -127,14 +127,14 @@ tile.grcmilk.BlockFluidRennet.name=Coalho
 tile.grcmilk.BlockFluidSkimMilk.name=Leite Pasteurizado
 tile.grcmilk.BlockFluidWhey.name=Soro de Leite
 ### Bottles
-item.grcmilk.BottleFluidButterMilk.name=Garrafa de Soro Coalhado
+item.grcmilk.FoodBottleFluidButterMilk.name=Garrafa de Soro Coalhado
 item.grcmilk.BottleFluidCream.name=Garrafa de Nata
 item.grcmilk.BottleFluidCurds.name=Garrafa de Coalhada
-item.grcmilk.BottleFluidMilk.name=Garrafa de Leite
+item.grcmilk.FoodBottleFluidMilk.name=Garrafa de Leite
 item.grcmilk.BottleFluidPasteurizedMilk.name=Garrafa de Leite Pasteurizado
 item.grcmilk.BottleFluidRennet.name=Garrafa de Coalho
-item.grcmilk.BottleFluidSkimMilk.name=Garrafa de Leite Desnatado
-item.grcmilk.BottleFluidWhey.name=Garrafa de Soro de Leite
+item.grcmilk.FoodBottleFluidSkimMilk.name=Garrafa de Leite Desnatado
+item.grcmilk.FoodBottleFluidWhey.name=Garrafa de Soro de Leite
 ### Buckets
 item.bucket.fluid.grcmilk.ButterMilk.name=Balde de Soro Coalhado
 item.bucket.fluid.grcmilk.Cream.name=Balde de Nata
@@ -151,7 +151,7 @@ fluid.grcmilk.Kumis1=Kumis
 fluid.grcmilk.Kumis2=Kumis
 fluid.grcmilk.Kumis3=Kumis
 fluid.grcmilk.Kumis4=Kumis
-fluid.grcmilk.Kumis5=Kumis
+fluid.grcmilk.Kumis5=Leite Nefasto
 fluid.grcmilk.Kumis5.desc=Até as coisas mais doces podem tornar-se corruptas.
 
 ## Booze Blocks
@@ -160,7 +160,7 @@ tile.fluid.grcmilk.Kumis1.name=Kumis
 tile.fluid.grcmilk.Kumis2.name=Kumis
 tile.fluid.grcmilk.Kumis3.name=Kumis
 tile.fluid.grcmilk.Kumis4.name=Kumis
-tile.fluid.grcmilk.Kumis5.name=Kumis
+tile.fluid.grcmilk.Kumis5.name=Leite Nefasto
 
 ## Booze Bucket
 item.bucket.fluid.grcmilk.Kumis0.name=Balde de Kumis
@@ -168,10 +168,10 @@ item.bucket.fluid.grcmilk.Kumis1.name=Balde de Kumis
 item.bucket.fluid.grcmilk.Kumis2.name=Balde de Kumis
 item.bucket.fluid.grcmilk.Kumis3.name=Balde de Kumis
 item.bucket.fluid.grcmilk.Kumis4.name=Balde de Kumis
-item.bucket.fluid.grcmilk.Kumis5.name=Balde de Kumis
+item.bucket.fluid.grcmilk.Kumis5.name=Balde de Leite Nefasto
 
 # Effects
-grc.effect.booze_milk=Remove todos os efeitos (Exceto Embiaguez)
+grc.effect.milk=Remove todos os efeitos (Exceto Embiaguez)
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s

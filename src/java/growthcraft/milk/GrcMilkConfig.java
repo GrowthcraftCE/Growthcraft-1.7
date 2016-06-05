@@ -23,12 +23,16 @@
  */
 package growthcraft.milk;
 
+import growthcraft.api.core.util.TagParser;
 import growthcraft.core.ConfigBase;
 
 public class GrcMilkConfig extends ConfigBase
 {
 	@ConfigOption(catergory="Milk", name="Enabled", desc="Should we enable a fluid for Milk? (you may bork the mod if you don't have an alternative, eg. Forestry's Milk)")
 	public boolean milkEnabled = true;
+
+	@ConfigOption(catergory="Milk", name="Fantasy Milk Effects", desc="Should Skim Milk, Butter Milk have extra effects?")
+	public boolean fantasyMilkEffects;
 
 	@ConfigOption(catergory="Milk", name="Color", desc="What color is milk?")
 	public int milkColor = 0xFFFFFF;
@@ -79,6 +83,13 @@ public class GrcMilkConfig extends ConfigBase
 	public int cheeseVatWheyToRicottaWheyAmount = 1000;
 
 
+	@ConfigOption(catergory="Device/Cheese Press", name="Redstone Operated", desc="Can the press operate via redstone?")
+	public boolean cheesePressRedstoneOperated = true;
+
+	@ConfigOption(catergory="Device/Cheese Press", name="Hand Operated", desc="Can the press operate via user interaction?")
+	public boolean cheesePressHandOperated = true;
+
+
 	@ConfigOption(catergory="Cheese", name="Aging Time", desc="How long does it take for cheese to age?")
 	public int cheeseMaxAge = 1200;
 
@@ -87,6 +98,26 @@ public class GrcMilkConfig extends ConfigBase
 
 	@ConfigOption(catergory="Cheese", name="Item per Block Slice", desc="How many items are present in a cheese block slice?")
 	public int cheeseItemPerBlockSlice = 8;
+
+	@ConfigOption(catergory="Cheese", name="Ricotta Bowl Count", desc="How many bowls are used in the ricotta recipe?")
+	public int ricottaBowlCount = 4;
+
+
+	@ConfigOption(catergory="Thistle/World Gen", name="Enable Biome Dictionary compatability?")
+	public boolean thistleUseBiomeDict = true;
+
+	// Extreme Hills, Extreme Hills Edge, Extreme Hills+
+	@ConfigOption(catergory="Thistle/World Gen", name="Biome IDs", desc="Separate the IDs with ';' (without the quote marks)", opt="scsv", def="3;20;34")
+	public TagParser.Tag[] thistleBiomesIdList;
+
+	@ConfigOption(catergory="Thistle/World Gen", name="Biome Types", desc="Separate the TYPEs with ',' (without the quote marks)\nSeparate batches with ';' (without the quote marks)\n", def="+MOUNTAIN;+HILLS,-SNOWY,-COLD")
+	public TagParser.Tag[][] thistleBiomesTypeList;
+
+	@ConfigOption(catergory="Thistle/World Gen", name="Generate Amount", desc="What is the maximum number of thistle spawned in a chunk?")
+	public int thistleGenAmount = 10;
+
+	@ConfigOption(catergory="Thistle", name="Spread Chance", desc="How quickly does thistle spread? [Higher -> Slower]")
+	public int thistleSpreadChance = 20;
 
 
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")

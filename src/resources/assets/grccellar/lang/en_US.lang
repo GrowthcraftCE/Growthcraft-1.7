@@ -2,8 +2,8 @@
 itemGroup.creative_tab_grccellar=Growthcraft Cellar
 
 # Blocks
-tile.grc.fruitPress.name=Fruit Press
-tile.grc.fruitPresser.name=Fruit Press
+tile.grc.fruitPress.name=Mechanical Press
+tile.grc.fruitPresser.name=Mechanical Press
 tile.grc.brewKettle.name=Brew Kettle
 tile.grc.fermentBarrel.name=Fermentation Barrel
 tile.grc.fermentJar.name=Culture Jar
@@ -39,7 +39,7 @@ item.grc.waterBag15.name=Water Bag (Black)
 item.grc.waterBag16.name=Water Bag
 
 # Containers
-container.grc.fruitPress=Fruit Press
+container.grc.fruitPress=Mechanical Press
 container.grc.brewKettle=Brew Kettle
 container.grc.fermentBarrel=Fermentation Barrel
 container.grc.CultureJar=Culture Jar
@@ -49,7 +49,7 @@ grc.potion.tipsy=Tipsy
 grc.booze=Booze
 
 # Modifiers
-grc.fluids.tag.chilled=Chilled
+grc.fluids.tag.chilled=Lagered
 grc.fluids.tag.cider=Cider
 grc.fluids.tag.deadly=Deadly
 grc.fluids.tag.extended=Extended
@@ -84,7 +84,7 @@ achievement.onTheGo.desc=Craft a Water Bag
 # Tooltips (Number is a percentage)
 # number is a percentage
 grc.cellar.format.waterBag.name=%s (%s)
-grc.cellar.format.waterBag.contents=Contains: %2$dmB/%3$dmB of %1$s
+grc.cellar.format.fluid_container.contents=Contains: %2$dmB/%3$dmB of %1$s
 grc.cellar.format.tipsy_chance=%d%% Chance of Tipsy
 grc.cellar.item.booze_bucket.deprecated=DEPRECATED, craft to get updated bucket
 grc.cellar.item.booze_bucket.deprecated_suffix= (DEPRECATED)
@@ -92,8 +92,6 @@ grc.cellar.item.booze_bucket.deprecated_suffix= (DEPRECATED)
 grc.cellar.brew_kettle.brewing_prefix=Brewing :
 grc.cellar.brew_kettle.itemslot.item=Item : %s
 grc.cellar.brew_kettle.itemslot.residue=Residue : %s
-grc.cellar.ferment_barrel.progress.prefix=Progress :
-grc.cellar.ferment_barrel.progress.format=%d%%
 grc.cellar.ferment_barrel.itemslot.modifier=Modifier : %s
 grc.cellar.ferment_jar.itemslot.yeast=%s
 grc.cellar.fruit_press.itemslot.item=Item : %s
@@ -107,3 +105,9 @@ grc.cellar.fruit_presser.state_prefix=State :
 grccellar.waila.option.FruitPressExtras=Fruit Press Extras
 grccellar.waila.option.BrewKettleExtras=Brew Kettle Extras
 grccellar.waila.option.FermentBarrelExtras=Fermentation Barrel Extras
+
+# NEI
+grc.recipe_handler.brew_kettle=Brew Kettle
+grc.recipe_handler.culture_jar=Culture Jar
+grc.recipe_handler.ferment_barrel=Ferment Barrel
+grc.recipe_handler.fruit_press=Fruit Press

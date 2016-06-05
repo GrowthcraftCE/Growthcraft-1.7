@@ -7,7 +7,6 @@ item.grc.rice.name=稻米
 item.grc.riceBall.name=饭团
 
 # Fluids
-fluid.grc.riceSake=米酒
 fluid.grc.riceSake0=米酒
 fluid.grc.riceSake1=米酒
 fluid.grc.riceSake2=米酒
@@ -17,7 +16,6 @@ fluid.grc.riceSake5=米酒
 fluid.grc.riceSake6=米酒
 
 # Fluid Buckets
-item.bucket.fluid.grc.riceSake.name=米酒桶
 item.bucket.fluid.grc.riceSake0.name=米酒桶
 item.bucket.fluid.grc.riceSake1.name=米酒桶
 item.bucket.fluid.grc.riceSake2.name=米酒桶
@@ -27,7 +25,6 @@ item.bucket.fluid.grc.riceSake5.name=米酒桶
 item.bucket.fluid.grc.riceSake6.name=米酒桶
 
 # Fluid Blocks
-tile.fluid.grc.riceSake.name=米酒
 tile.fluid.grc.riceSake0.name=米酒
 tile.fluid.grc.riceSake1.name=米酒
 tile.fluid.grc.riceSake2.name=米酒

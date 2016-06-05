@@ -127,14 +127,14 @@ tile.grcmilk.BlockFluidRennet.name=Rennet
 tile.grcmilk.BlockFluidSkimMilk.name=Skim Milk
 tile.grcmilk.BlockFluidWhey.name=Whey
 ### Bottles
-item.grcmilk.BottleFluidButterMilk.name=Butter Milk Bottle
+item.grcmilk.FoodBottleFluidButterMilk.name=Butter Milk Bottle
 item.grcmilk.BottleFluidCream.name=Cream Bottle
 item.grcmilk.BottleFluidCurds.name=Milk Curds Bottle
-item.grcmilk.BottleFluidMilk.name=Milk Bottle
+item.grcmilk.FoodBottleFluidMilk.name=Milk Bottle
 item.grcmilk.BottleFluidPasteurizedMilk.name=Pasteurized Milk Bottle
 item.grcmilk.BottleFluidRennet.name=Rennet Bottle
-item.grcmilk.BottleFluidSkimMilk.name=Skim Milk Bottle
-item.grcmilk.BottleFluidWhey.name=Whey Bottle
+item.grcmilk.FoodBottleFluidSkimMilk.name=Skim Milk Bottle
+item.grcmilk.FoodBottleFluidWhey.name=Whey Bottle
 ### Buckets
 item.bucket.fluid.grcmilk.ButterMilk.name=Butter Milk Bucket
 item.bucket.fluid.grcmilk.Cream.name=Cream Bucket
@@ -171,7 +171,7 @@ item.bucket.fluid.grcmilk.Kumis4.name=Kumis Bucket
 item.bucket.fluid.grcmilk.Kumis5.name=Vile Milk Bucket
 
 # Effects
-grc.effect.booze_milk=Removes all effects (Except Tipsy)
+grc.effect.milk=Removes all effects (Except Tipsy)
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s

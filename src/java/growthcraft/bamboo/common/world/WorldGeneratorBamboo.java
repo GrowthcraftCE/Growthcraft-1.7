@@ -2,15 +2,13 @@ package growthcraft.bamboo.common.world;
 
 import java.util.Random;
 
+import growthcraft.api.core.util.BiomeUtils;
 import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.core.Utils;
 
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
 
 public class WorldGeneratorBamboo implements IWorldGenerator
 {
@@ -33,22 +31,18 @@ public class WorldGeneratorBamboo implements IWorldGenerator
 			final int j = random.nextInt(128);
 			final int k = chunkZ * 16 + random.nextInt(16) + 8;
 
-			boolean flag = true;
+			final BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
 			if (GrowthCraftBamboo.getConfig().useBiomeDict)
 			{
-				final BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
-				flag = (BiomeDictionary.isBiomeOfType(biome, Type.FOREST) ||
-						BiomeDictionary.isBiomeOfType(biome, Type.JUNGLE) ||
-						BiomeDictionary.isBiomeOfType(biome, Type.WATER) ||
-						BiomeDictionary.isBiomeOfType(biome, Type.PLAINS))
-						&& !BiomeDictionary.isBiomeOfType(biome, Type.SNOWY);
+				if (!BiomeUtils.testBiomeTypeTagsTable(biome, GrowthCraftBamboo.getConfig().bambooBiomesTypeList)) return;
 			}
 			else
 			{
-				flag = Utils.isIDInList(world.getBiomeGenForCoords(i, k).biomeID, GrowthCraftBamboo.getConfig().bambooBiomesList);
+				final String biomeId = "" + biome.biomeID;
+				if (!BiomeUtils.testBiomeIdTags(biomeId, GrowthCraftBamboo.getConfig().bambooBiomesIdList)) return;
 			}
 
-			if (flag && random.nextInt(this.rarity) == 0)
+			if (random.nextInt(this.rarity) == 0)
 			{
 				new WorldGenBamboo(true).generateClumps(world, random, i, j, k);
 			}

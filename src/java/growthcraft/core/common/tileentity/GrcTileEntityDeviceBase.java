@@ -50,61 +50,12 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	public GrcTileEntityDeviceBase()
 	{
 		super();
-
 		this.tanks = new FluidTanks(createTanks());
 	}
 
-	protected abstract FluidTank[] createTanks();
-	protected abstract void updateDevice();
-
-	// Call this when you modify a fluid tank outside of its usual methods
-	protected void markForFluidUpdate()
+	protected FluidTank[] createTanks()
 	{
-		//
-	}
-
-	@Override
-	public void updateEntity()
-	{
-		super.updateEntity();
-
-		if (!this.worldObj.isRemote)
-		{
-			updateDevice();
-		}
-	}
-
-	protected void readTanksFromNBT(NBTTagCompound nbt)
-	{
-		tanks.readFromNBT(nbt);
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		super.readFromNBT(nbt);
-		readTanksFromNBT(nbt);
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
-		super.writeToNBT(nbt);
-		tanks.writeToNBT(nbt);
-	}
-
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
-	public boolean readFromStream_FluidTanks(ByteBuf stream) throws IOException
-	{
-		tanks.readFromStream(stream);
-		return true;
-	}
-
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
-	public boolean writeToStream_FluidTanks(ByteBuf stream) throws IOException
-	{
-		tanks.writeToStream(stream);
-		return false;
+		return new FluidTank[] {};
 	}
 
 	@Override
@@ -119,33 +70,43 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 		return true;
 	}
 
-	protected abstract FluidStack doDrain(ForgeDirection dir, int amount, boolean doDrain);
-	protected abstract FluidStack doDrain(ForgeDirection dir, FluidStack stack, boolean doDrain);
+	protected FluidStack doDrain(ForgeDirection dir, int amount, boolean shouldDrain)
+	{
+		return null;
+	}
+
+	protected FluidStack doDrain(ForgeDirection dir, FluidStack stack, boolean shouldDrain)
+	{
+		return null;
+	}
 
 	@Override
-	public FluidStack drain(ForgeDirection dir, int amount, boolean doDrain)
+	public FluidStack drain(ForgeDirection dir, int amount, boolean shouldDrain)
 	{
-		final FluidStack result = doDrain(dir, amount, doDrain);
-		if (doDrain && FluidTest.isValid(result)) markForFluidUpdate();
+		final FluidStack result = doDrain(dir, amount, shouldDrain);
+		if (shouldDrain && FluidTest.isValid(result)) markForFluidUpdate();
 		return result;
 	}
 
 	@Override
-	public FluidStack drain(ForgeDirection dir, FluidStack stack, boolean doDrain)
+	public FluidStack drain(ForgeDirection dir, FluidStack stack, boolean shouldDrain)
 	{
 		if (!FluidTest.isValid(stack)) return null;
-		final FluidStack result = doDrain(dir, stack, doDrain);
-		if (doDrain && FluidTest.isValid(result)) markForFluidUpdate();
+		final FluidStack result = doDrain(dir, stack, shouldDrain);
+		if (shouldDrain && FluidTest.isValid(result)) markForFluidUpdate();
 		return result;
 	}
 
-	protected abstract int doFill(ForgeDirection dir, FluidStack stack, boolean doFill);
+	protected int doFill(ForgeDirection dir, FluidStack stack, boolean shouldFill)
+	{
+		return 0;
+	}
 
 	@Override
-	public int fill(ForgeDirection dir, FluidStack stack, boolean doFill)
+	public int fill(ForgeDirection dir, FluidStack stack, boolean shouldFill)
 	{
-		final int result = doFill(dir, stack, doFill);
-		if (doFill && result != 0) markForFluidUpdate();
+		final int result = doFill(dir, stack, shouldFill);
+		if (shouldFill && result != 0) markForFluidUpdate();
 		return result;
 	}
 
@@ -221,18 +182,18 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	}
 
 	@Override
-	public FluidStack drainFluidTank(int slot, int amount, boolean doDrain)
+	public FluidStack drainFluidTank(int slot, int amount, boolean shouldDrain)
 	{
-		final FluidStack result = tanks.drainFluidTank(slot, amount, doDrain);
-		if (result != null && result.amount != 0) markForFluidUpdate();
+		final FluidStack result = tanks.drainFluidTank(slot, amount, shouldDrain);
+		if (shouldDrain && FluidTest.isValid(result)) markForFluidUpdate();
 		return result;
 	}
 
 	@Override
-	public int fillFluidTank(int slot, FluidStack fluid, boolean doFill)
+	public int fillFluidTank(int slot, FluidStack fluid, boolean shouldFill)
 	{
-		final int result = tanks.fillFluidTank(slot, fluid, doFill);
-		if (result != 0) markForFluidUpdate();
+		final int result = tanks.fillFluidTank(slot, fluid, shouldFill);
+		if (shouldFill && result != 0) markForFluidUpdate();
 		return result;
 	}
 
@@ -254,5 +215,61 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	{
 		tanks.clearTank(slot);
 		markForFluidUpdate();
+	}
+
+	protected void readTanksFromNBT(NBTTagCompound nbt)
+	{
+		if (tanks != null)
+			tanks.readFromNBT(nbt);
+	}
+
+	@Override
+	public void readFromNBTForItem(NBTTagCompound nbt)
+	{
+		super.readFromNBTForItem(nbt);
+		readTanksFromNBT(nbt);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		readTanksFromNBT(nbt);
+	}
+
+	private void writeTanksToNBT(NBTTagCompound nbt)
+	{
+		if (tanks != null)
+			tanks.writeToNBT(nbt);
+	}
+
+	@Override
+	public void writeToNBTForItem(NBTTagCompound nbt)
+	{
+		super.writeToNBTForItem(nbt);
+		writeTanksToNBT(nbt);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt)
+	{
+		super.writeToNBT(nbt);
+		writeTanksToNBT(nbt);
+	}
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	public boolean readFromStream_FluidTanks(ByteBuf stream) throws IOException
+	{
+		if (tanks != null)
+			tanks.readFromStream(stream);
+		return true;
+	}
+
+	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	public boolean writeToStream_FluidTanks(ByteBuf stream) throws IOException
+	{
+		if (tanks != null)
+			tanks.writeToStream(stream);
+		return false;
 	}
 }

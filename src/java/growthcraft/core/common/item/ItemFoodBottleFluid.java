@@ -27,15 +27,15 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.EnumAction;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.Fluid;
 
 /**
  * Generic fluid bottle for growthcraft fluids that are edible
  */
-public class ItemFoodBottleFluid extends ItemFood implements IFluidItem
+public class ItemFoodBottleFluid extends GrcItemFoodBase implements IFluidItem
 {
 	private Fluid fluid;
 	// Used to override the fluid color
@@ -49,6 +49,7 @@ public class ItemFoodBottleFluid extends ItemFood implements IFluidItem
 	public ItemFoodBottleFluid(Fluid flu, int healAmount, float saturation, boolean isWolfFavouriteFood)
 	{
 		super(healAmount, saturation, isWolfFavouriteFood);
+		setItemUseAction(EnumAction.drink);
 		setContainerItem(Items.glass_bottle);
 		this.fluid = flu;
 	}

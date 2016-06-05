@@ -131,9 +131,9 @@ item.grc.honeyJar.name=Honey
 item.grc.bee.name=Bee
 item.grc.FoodBottleFluidHoney.name=Honey Bottle
 item.grc.BucketFluidHoney.name=Honey Bucket
-item.grcbees.BeesWax.normal.name=Bees Wax
-item.grcbees.BeesWax.red.name=Red Bees Wax
-item.grcbees.BeesWax.black.name=Black Bees Wax
+item.grcbees.BeesWax.normal.name=Beeswax
+item.grcbees.BeesWax.red.name=Red Beeswax
+item.grcbees.BeesWax.black.name=Black Beeswax
 
 # Tooltips
 grc.bees.item.honeyComb.deprecated=This item has been deprecated, craft to get the updated item.
@@ -143,8 +143,7 @@ container.grc.beeBox=Bee Box
 
 # Fluids
 fluid.grc.honey=Honey
-fluid.grc.honeyMead=Mead
-fluid.grc.honeyMead0=Mead
+fluid.grc.honeyMead0=Mead Must
 fluid.grc.honeyMead1=Mead
 fluid.grc.honeyMead2=Mead
 fluid.grc.honeyMead3=Mead
@@ -157,8 +156,7 @@ item.grc.BottleFluidHoney.name=Honey
 
 # Fluid Buckets
 item.bucket.fluid.grc.honey.name=Honey Bucket
-item.bucket.fluid.grc.honeyMead.name=Mead Bucket
-item.bucket.fluid.grc.honeyMead0.name=Mead Bucket
+item.bucket.fluid.grc.honeyMead0.name=Mead Must Bucket
 item.bucket.fluid.grc.honeyMead1.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead2.name=Mead Bucket
 item.bucket.fluid.grc.honeyMead3.name=Mead Bucket
@@ -168,14 +166,17 @@ item.bucket.fluid.grc.honeyMead6.name=Mead Bucket
 
 # Fluid Blocks
 tile.grc.BlockFluidHoney.name=Honey
-tile.fluid.grc.honeyMead.name=Mead
-tile.fluid.grc.honeyMead0.name=Mead
+tile.fluid.grc.honeyMead0.name=Mead Must
 tile.fluid.grc.honeyMead1.name=Mead
 tile.fluid.grc.honeyMead2.name=Mead
 tile.fluid.grc.honeyMead3.name=Mead
 tile.fluid.grc.honeyMead4.name=Mead
 tile.fluid.grc.honeyMead5.name=Mead
 tile.fluid.grc.honeyMead6.name=Mead
+
+# Fluid Tags
+grc.fluids.tag.mead=Mead
+grc.fluids.tag.honey=Honey
 
 # Other
 grc.bees.bonus_prefix=Bonus :

@@ -24,12 +24,16 @@
 package growthcraft.api.cellar.fermenting.user;
 
 import java.io.BufferedReader;
+import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ItemKeySchema;
+import growthcraft.api.core.schema.MultiFluidStackSchema;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
+import growthcraft.api.core.util.MultiStacksUtil;
 
 import net.minecraftforge.fluids.FluidStack;
 
@@ -38,23 +42,37 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 	protected UserFermentingRecipes defaultRecipes = new UserFermentingRecipes();
 	protected UserFermentingRecipes recipes;
 
-	public void addDefault(UserFermentingRecipe recipe)
-	{
-		defaultRecipes.data.add(recipe);
-	}
-
-	public void addDefault(ItemKeySchema item, FluidStackSchema inputFluid, FluidStackSchema outputFluid, int time)
+	public void addDefaultSchemas(@Nonnull ItemKeySchema item, @Nonnull MultiFluidStackSchema inputFluid, @Nonnull FluidStackSchema outputFluid, int time)
 	{
 		addDefault(new UserFermentingRecipe(item, inputFluid, outputFluid, time));
 	}
 
-	public void addDefault(Object stack, FluidStack inputFluid, FluidStack outputFluid, int time)
+	public void addDefault(@Nonnull UserFermentingRecipe recipe)
+	{
+		if (recipe != null)
+		{
+			defaultRecipes.data.add(recipe);
+			logger.info("Adding default user fermenting recipe {%s}", recipe);
+		}
+		else
+		{
+			logger.error("We have a problem here, someone tossed a null user recipe at us!");
+			throw new IllegalArgumentException("Oh no you didn't, FIX DAT.");
+		}
+	}
+
+	/**
+	 * @param stack - any ItemStack or IMultiItemStack
+	 * @param inputFluid - any FluidStack or IMultiFluidStack
+	 * @return
+	 */
+	public void addDefault(@Nonnull Object stack, @Nonnull Object inputFluid, @Nonnull FluidStack outputFluid, int time)
 	{
 		for (ItemKeySchema itemKey : ItemKeySchema.createMulti(stack))
 		{
-			addDefault(
+			addDefaultSchemas(
 				itemKey,
-				new FluidStackSchema(inputFluid),
+				new MultiFluidStackSchema(MultiStacksUtil.toMultiFluidStacks(inputFluid)),
 				new FluidStackSchema(outputFluid),
 				time
 			);
@@ -102,12 +120,15 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 		logger.info("Adding Fermenting Recipe {%s}", recipe);
 		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
 		{
-			CellarRegistry.instance().fermenting().addRecipe(
-				recipe.output_fluid.asFluidStack(),
-				recipe.input_fluid.asFluidStack(),
-				item,
-				recipe.time
-			);
+			for (IMultiFluidStacks inputFluid : recipe.input_fluid.getMultiFluidStacks())
+			{
+				CellarRegistry.instance().fermenting().addRecipe(
+					recipe.output_fluid.asFluidStack(),
+					inputFluid,
+					item,
+					recipe.time
+				);
+			}
 		}
 	}
 

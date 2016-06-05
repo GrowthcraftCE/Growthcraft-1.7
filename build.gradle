@@ -1,9 +1,6 @@
-// swiped from BuildCraft
-
 buildscript {
     repositories {
         mavenCentral()
-
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
@@ -19,31 +16,6 @@ buildscript {
     }
 }
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-
-    maven {
-        name = "AppleCore"
-        url = "http://www.ryanliptak.com/maven/"
-    }
-
-    maven {
-        name "ChickenBones"
-        url "http://chickenbones.net/maven/"
-    }
-
-    maven {
-        name "Mobius"
-        url "http://mobiusstrip.eu/maven"
-    }
-
-    ivy {
-        name "BuildCraft"
-        artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
-    }
-}
-
 apply plugin: "forge"
 apply plugin: "checkstyle"
 
@@ -52,7 +24,6 @@ checkstyle {
     configFile = new File(rootDir, "checkstyle/checkstyle.xml")
 }
 
-// No more Java 1.6, we'll be using 1.7 for `switch (String)`
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
@@ -61,20 +32,25 @@ group = "mod.growthcraft"
 archivesBaseName = "growthcraft"
 
 ext.growthcraftApi = "src/java/growthcraft/api"
+ext.forestryApiRoot = "api/ForestryAPI"
 
-// 3rd party APIs
-ext.invtweaksApi = "api/invtweaks/api"
-ext.invtweaksApiExclusionPattern = "**/invtweaks/api/**"
-
-ext.mfrApi = "api/powercrystals/minefactoryreloaded/api"
-ext.mfrApiExclusionPattern = "**/powercrystals/minefactoryreloaded/api/**"
+class StructExtApi {
+    String name
+    String api
+    String exclusion
+    String root = api
+}
 
 ext.thaumcraftApi = "api/thaumcraft/api"
-ext.thaumcraftApiExclusionPattern = "**/thaumcraft/api/**"
 
-ext.forestryApiRoot = "api/ForestryAPI"
-ext.forestryApi = "api/ForestryAPI/forestry/api"
-ext.forestryApiExclusionPattern = "**/forestry/api/**"
+StructExtApi[] apis = [
+    new StructExtApi(name: "buildcraft", api: "api/buildcraft/api", exclusion: "**/buildcraft/api/meh"),
+    new StructExtApi(name: "forestry", api: "api/ForestryAPI/forestry/api", exclusion: "**/forestry/api/**", root: ext.forestryApiRoot),
+    new StructExtApi(name: "invtweaks", api: "api/invtweaks/api", exclusion: "**/invtweaks/api/**"),
+    new StructExtApi(name: "mfr", api: "api/powercrystals/minefactoryreloaded/api", exclusion: "**/powercrystals/minefactoryreloaded/api/**"),
+    new StructExtApi(name: "thaumcraft", api: ext.thaumcraftApi, exclusion: "**/thaumcraft/api/**"),
+    new StructExtApi(name: "waila", api: "api/mcp/mobius/waila/api", exclusion: "**/mcp/mobius/waila/api/**")
+]
 
 minecraft {
     version = minecraft_forge_version
@@ -84,9 +60,7 @@ minecraft {
     replace "@GRC_VERSION@", growthcraft_version
 }
 
-// configure  the source folders
 sourceSets {
-    // this builds everything into the main package
     main {
         java {
             srcDir "src/java"
@@ -98,39 +72,65 @@ sourceSets {
     api {
         java {
             srcDir project.growthcraftApi
-            srcDir project.forestryApi
-            srcDir project.invtweaksApi
-            srcDir project.mfrApi
-            srcDir project.thaumcraftApi
+            for (StructExtApi entry in apis) {
+                srcDir entry.api
+            }
         }
     }
 }
 
 processResources {
-    // replace stuff in mcmod.info, nothing else
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
     from(sourceSets.main.resources.srcDirs) {
         include "mcmod.info"
         expand "version":project.version, "mcversion":project.minecraft.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude "mcmod.info"
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        name "applecore"
+        url "http://www.ryanliptak.com/maven/"
+    }
+    maven {
+        name "chickenbones"
+        url "http://chickenbones.net/maven/"
+    }
+    maven {
+        name = "forge"
+        url = "http://files.minecraftforge.net/maven"
+    }
+    maven {
+        name "mobius"
+        url "http://mobiusstrip.eu/maven"
+    }
+    ivy {
+        name "buildcraft"
+        artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
     }
 }
 
 dependencies {
     compile "applecore:AppleCore:${minecraft_version}-${applecore_version}:api"
-    compile "mcp.mobius.waila:Waila:${waila_version}_${minecraft_version}:dev"
+    //compile "mcp.mobius.waila:Waila:${waila_version}_${minecraft_version}:dev"
     compile "codechicken:CodeChickenLib:${minecraft_version}-${code_chicken_lib_version}:dev"
     compile "codechicken:CodeChickenCore:${minecraft_version}-${code_chicken_core_version}:dev"
     compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
     compile "com.mod-buildcraft:buildcraft:${bc_version}:dev"
-
     testCompile "junit:junit:4.11"
 }
-/*
+
 runClient {
     if( project.hasProperty("mcUsername") && project.hasProperty("mcPassword") ) {
         args "--username=${project.mcUsername}"
         args "--password=${project.mcPassword}"
     }
-
 }
 
 debugClient {
@@ -138,11 +138,7 @@ debugClient {
         args "--username=${project.mcUsername}"
         args "--password=${project.mcPassword}"
     }
-}*/
-
-// --------------------
-// extra jar section
-// -------------------
+}
 
 tasks.withType(JavaCompile) {
     options.compilerArgs += ["-Xlint:all", "-Xlint:deprecation", "-Xlint:-rawtypes", "-Xlint:-unchecked"]
@@ -150,70 +146,55 @@ tasks.withType(JavaCompile) {
     options.encoding = "utf8"
 }
 
-// add a source jar
 task sourceJar(type: Jar) {
     from sourceSets.main.allSource
     from(sourceSets.api.allSource) {
-        exclude project.forestryApiExclusionPattern
-        exclude project.thaumcraftApiExclusionPattern
-        exclude project.mfrApiExclusionPattern
-        exclude project.invtweaksApi
+        for (StructExtApi entry in apis) {
+            exclude entry.exclusion
+        }
     }
     classifier = "sources"
 }
 
 javadoc {
-    // add api classes to javadoc
     source += sourceSets.api.allSource
-    // exclude 3rd party apis from the javadoc
-    exclude project.forestryApiExclusionPattern
-    exclude project.thaumcraftApiExclusionPattern
-    exclude project.mfrApiExclusionPattern
-    exclude project.invtweaksApiExclusionPattern
-
+    for (StructExtApi entry in apis) {
+        exclude entry.exclusion
+    }
     failOnError = false
 }
 
-// add a javadoc jar
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = "javadoc"
     from "build/docs/javadoc"
 }
 
-// because the normal output has been made to be obfuscated
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     from(sourceSets.api.output) {
-        exclude project.forestryApiExclusionPattern
-        exclude project.thaumcraftApiExclusionPattern
-        exclude project.mfrApiExclusionPattern
-        exclude project.invtweaksApiExclusionPattern
+        for (StructExtApi api in apis) {
+            exclude api.exclusion
+        }
     }
-    classifier = "dev"
+    classifier = "deobf"
 }
 
 task apiJar(type: Jar) {
     from(sourceSets.api.output) {
-        exclude project.forestryApiExclusionPattern
-        exclude project.thaumcraftApiExclusionPattern
-        exclude project.mfrApiExclusionPattern
-        exclude project.invtweaksApiExclusionPattern
+        for (StructExtApi api in apis) {
+            exclude api.exclusion
+        }
     }
     classifier = "api"
 }
 
 jar {
     classifier = "complete"
-
-    // add api classes to main package
     from(sourceSets.api.output) {
-        exclude project.forestryApiExclusionPattern
-        exclude project.thaumcraftApiExclusionPattern
-        exclude project.mfrApiExclusionPattern
-        exclude project.invtweaksApiExclusionPattern
+        for (StructExtApi api in apis) {
+            exclude api.exclusion
+        }
     }
-
-    // Only include the thaumcraft LICENSE
     into("thaumcraft/api") {
         from project.thaumcraftApi + "/LICENSE"
     }
@@ -222,5 +203,4 @@ jar {
     }
 }
 
-// make sure all of these happen when we run build
 build.dependsOn sourceJar, javadocJar, deobfJar, apiJar

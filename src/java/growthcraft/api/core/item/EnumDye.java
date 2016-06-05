@@ -59,6 +59,7 @@ public enum EnumDye implements IItemStackFactory
 	public static final EnumDye COCOA_BEANS = BROWN;
 	public static final EnumDye LAPIS_LAZULI = BLUE;
 	public static final EnumDye BONE_MEAL = WHITE;
+	public static final EnumDye[] VALUES = values();
 
 	public final int meta;
 	public final String name;
@@ -82,5 +83,14 @@ public enum EnumDye implements IItemStackFactory
 	public String getOreName()
 	{
 		return String.format("dye%s", CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name()));
+	}
+
+	public static EnumDye getByMeta(int meta)
+	{
+		if (meta < 0 || meta >= VALUES.length)
+		{
+			return BLACK;
+		}
+		return VALUES[meta];
 	}
 }

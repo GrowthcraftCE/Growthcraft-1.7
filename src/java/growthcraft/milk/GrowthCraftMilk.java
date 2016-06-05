@@ -99,8 +99,13 @@ public class GrowthCraftMilk
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
-		GrcMilkEffects.init();
+		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/milk.conf");
+		if (config.debugEnabled)
+		{
+			modules.setLogger(logger);
+			MilkRegistry.instance().setLogger(logger);
+		}
 
 		modules.add(blocks);
 		modules.add(items);
@@ -110,12 +115,8 @@ public class GrowthCraftMilk
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.milk.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.milk.integration.Waila());
 		modules.add(userApis);
-		if (config.debugEnabled)
-		{
-			modules.setLogger(logger);
-			MilkRegistry.instance().setLogger(logger);
-		}
 		modules.freeze();
+		GrcMilkEffects.init();
 
 		userApis.setConfigDirectory(event.getModConfigurationDirectory());
 
@@ -145,7 +146,7 @@ public class GrowthCraftMilk
 		CommonProxy.instance.initRenders();
 		modules.init();
 		userApis.loadConfigs();
-		CommonProxy.registerWorldGen();
+		CommonProxy.instance.registerWorldGen();
 	}
 
 	@EventHandler

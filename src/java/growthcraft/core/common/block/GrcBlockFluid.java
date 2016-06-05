@@ -109,6 +109,7 @@ public class GrcBlockFluid extends BlockFluidClassic
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
 	{
 		return color;

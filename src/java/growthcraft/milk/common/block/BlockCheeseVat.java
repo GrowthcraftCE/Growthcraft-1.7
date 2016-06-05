@@ -46,6 +46,7 @@ public class BlockCheeseVat extends GrcBlockContainer
 		super(Material.iron);
 		setResistance(10.0F);
 		setHardness(5.0F);
+		setStepSound(soundTypeMetal);
 		setBlockName("grcmilk.CheeseVat");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityCheeseVat.class);
@@ -128,5 +129,22 @@ public class BlockCheeseVat extends GrcBlockContainer
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
 		return true;
+	}
+
+	@Override
+	public boolean hasComparatorInputOverride()
+	{
+		return true;
+	}
+
+	@Override
+	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
+	{
+		final TileEntityCheeseVat te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			return te.calcRedstone();
+		}
+		return 0;
 	}
 }

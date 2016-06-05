@@ -12,12 +12,29 @@ tile.grc.fenceRope.name=Забор с верёвкой
 tile.grc.netherBrickFenceRope.name=tile.grc.netherBrickFenceRope.name
 tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
 tile.grc.ropeBlock.name=Верёвка
+tile.grccore.salt_block.name=tile.grccore.salt_block.name
 
 # Items
 item.grc.rope.name=Верёвка
 item.grccore.salt.name=item.grccore.salt.name
 item.grccore.bucketSalt.name=item.grccore.bucketSalt.name
 item.grccore.bottleSalt.name=item.grccore.bottleSalt.name
+item.grccore.crowbar.black.name=item.grccore.crowbar.black.name
+item.grccore.crowbar.red.name=item.grccore.crowbar.red.name
+item.grccore.crowbar.green.name=item.grccore.crowbar.green.name
+item.grccore.crowbar.brown.name=item.grccore.crowbar.brown.name
+item.grccore.crowbar.blue.name=item.grccore.crowbar.blue.name
+item.grccore.crowbar.purple.name=item.grccore.crowbar.purple.name
+item.grccore.crowbar.cyan.name=item.grccore.crowbar.cyan.name
+item.grccore.crowbar.light_gray.name=item.grccore.crowbar.light_gray.name
+item.grccore.crowbar.gray.name=item.grccore.crowbar.gray.name
+item.grccore.crowbar.pink.name=item.grccore.crowbar.pink.name
+item.grccore.crowbar.lime.name=item.grccore.crowbar.lime.name
+item.grccore.crowbar.yellow.name=item.grccore.crowbar.yellow.name
+item.grccore.crowbar.light_blue.name=item.grccore.crowbar.light_blue.name
+item.grccore.crowbar.magenta.name=item.grccore.crowbar.magenta.name
+item.grccore.crowbar.orange.name=item.grccore.crowbar.orange.name
+item.grccore.crowbar.white.name=item.grccore.crowbar.white.name
 
 # Fluids
 fluid.tile.water=Вода
@@ -33,23 +50,23 @@ item.bucket.fluid.grccore.SaltWater.name=item.bucket.fluid.grccore.SaltWater.nam
 achievementPage.pageGrowthCraft=Growthcraft
 
 # Colors
-grc.colour.White=grc.colour.White
-grc.colour.Orange=grc.colour.Orange
-grc.colour.Magenta=grc.colour.Magenta
-grc.colour.LightBlue=grc.colour.LightBlue
-grc.colour.Yellow=grc.colour.Yellow
-grc.colour.Lime=grc.colour.Lime
-grc.colour.Pink=grc.colour.Pink
-grc.colour.Gray=grc.colour.Gray
-grc.colour.LightGray=grc.colour.LightGray
-grc.colour.Cyan=grc.colour.Cyan
-grc.colour.Purple=grc.colour.Purple
-grc.colour.Blue=grc.colour.Blue
-grc.colour.Brown=grc.colour.Brown
-grc.colour.Green=grc.colour.Green
-grc.colour.Red=grc.colour.Red
-grc.colour.Black=grc.colour.Black
-grc.colour.Transparent=grc.colour.Transparent
+grc.color.Black=grc.color.Black
+grc.color.Blue=grc.color.Blue
+grc.color.Brown=grc.color.Brown
+grc.color.Cyan=grc.color.Cyan
+grc.color.Gray=grc.color.Gray
+grc.color.Green=grc.color.Green
+grc.color.LightBlue=grc.color.LightBlue
+grc.color.LightGray=grc.color.LightGray
+grc.color.Lime=grc.color.Lime
+grc.color.Magenta=grc.color.Magenta
+grc.color.Orange=grc.color.Orange
+grc.color.Pink=grc.color.Pink
+grc.color.Purple=grc.color.Purple
+grc.color.Red=grc.color.Red
+grc.color.Transparent=grc.color.Transparent
+grc.color.White=grc.color.White
+grc.color.Yellow=grc.color.Yellow
 
 # Formats and Units
 grc.format.value.true=ДА
@@ -101,7 +118,15 @@ grc.effect.weighted_random_list.format=grc.effect.weighted_random_list.format
 gui.grc.progress.format=gui.grc.progress.format
 
 # Inventory
-grc.inventory.internal=grc.inventory.internal
+grc.inventory.internal.name=grc.inventory.internal.name
 
 # Tooltips
 grc.tooltip.detailed_information=grc.tooltip.detailed_information
+
+# Achievements
+achievement.trusty_hardware=achievement.trusty_hardware
+achievement.trusty_hardware.desc=achievement.trusty_hardware.desc
+achievement.half_life_confirmed=achievement.half_life_confirmed
+achievement.half_life_confirmed.desc=achievement.half_life_confirmed.desc
+achievement.salty_situation=achievement.salty_situation
+achievement.salty_situation.desc=achievement.salty_situation.desc

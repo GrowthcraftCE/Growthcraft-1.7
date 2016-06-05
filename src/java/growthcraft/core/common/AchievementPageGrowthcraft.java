@@ -10,20 +10,20 @@ import net.minecraftforge.common.AchievementPage;
 
 public class AchievementPageGrowthcraft
 {
-	public static List<Achievement> chievMasterList = new ArrayList<Achievement>();
-	public static AchievementPage chievPage;
+	public static List<Achievement> masterList = new ArrayList<Achievement>();
+	public static AchievementPage masterPage;
 
 	private AchievementPageGrowthcraft() {}
 
 	public static void init()
 	{
-		final Achievement[] chievList = new Achievement[chievMasterList.size()];
+		final Achievement[] chievList = new Achievement[masterList.size()];
 		for(int i = 0; i < chievList.length; i++)
 		{
-			chievList[i] = chievMasterList.get(i);
+			chievList[i] = masterList.get(i);
 		}
 
-		chievPage = new AchievementPage(GrcI18n.translate("achievementPage.pageGrowthCraft"), chievList);
-		AchievementPage.registerAchievementPage(chievPage);
+		masterPage = new AchievementPage(GrcI18n.translate("achievementPage.pageGrowthCraft"), chievList);
+		AchievementPage.registerAchievementPage(masterPage);
 	}
 }

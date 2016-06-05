@@ -133,6 +133,7 @@ public class GrowthCraftCellar
 
 		if (config.enableWailaIntegration) modules.add(new growthcraft.cellar.integration.Waila());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
+		if (config.enableNEIIntegration) modules.add(new growthcraft.cellar.integration.NEIModule());
 		// ALWAYS set the user modules as last, this ensures that other modules are given a chance to setup defaults and such.
 		modules.add(userApis);
 
@@ -234,7 +235,7 @@ public class GrowthCraftCellar
 		//====================
 		// POTION
 		//====================
-		registerPotions();
+		extendPotionsArray();
 		potionTipsy = (new PotionCellar(config.potionTipsyID, false, 0)).setIconIndex(0, 0).setPotionName("grc.potion.tipsy");
 		EffectTipsy.potionTipsy = potionTipsy;
 		EffectTipsy.achievement = CellarAchievement.GET_DRUNK;
@@ -247,10 +248,9 @@ public class GrowthCraftCellar
 		NEI.hideItem(chievItemDummy.asStack());
 	}
 
-	private void registerPotions()
+	private void extendPotionsArray()
 	{
-		Potion[] potionTypes = null;
-
+		final int newSize = 1024;
 		for (Field f : Potion.class.getDeclaredFields())
 		{
 			f.setAccessible(true);
@@ -261,17 +261,20 @@ public class GrowthCraftCellar
 					final Field modfield = Field.class.getDeclaredField("modifiers");
 					modfield.setAccessible(true);
 					modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
-
-					potionTypes = (Potion[])f.get(null);
-					final Potion[] newPotionTypes = new Potion[256];
-					System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
-					f.set(null, newPotionTypes);
+					final Potion[] potionTypes = (Potion[])f.get(null);
+					if (potionTypes.length < newSize)
+					{
+						logger.info("Resizing PotionTypes array from %d to %d", potionTypes.length, newSize);
+						final Potion[] newPotionTypes = new Potion[newSize];
+						System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+						f.set(null, newPotionTypes);
+					}
 				}
 			}
 			catch (Exception e)
 			{
-				System.err.println("Severe error, please report this to the mod author:");
-				System.err.println(e);
+				System.err.println("GrowthCraft|Cellar has encountered a problem with the built-in potionTypes Array, please report this problem to the mod authors.");
+				e.printStackTrace();
 			}
 		}
 	}
@@ -279,6 +282,11 @@ public class GrowthCraftCellar
 	private void registerOres()
 	{
 		OreDictionary.registerOre("materialYeast", yeast.getItem());
+		OreDictionary.registerOre("yeastBrewers", EnumYeast.BREWERS.asStack());
+		OreDictionary.registerOre("yeastLager", EnumYeast.LAGER.asStack());
+		OreDictionary.registerOre("yeastBayanus", EnumYeast.BAYANUS.asStack());
+		OreDictionary.registerOre("yeastEthereal", EnumYeast.ETHEREAL.asStack());
+		OreDictionary.registerOre("yeastOrigin", EnumYeast.ORIGIN.asStack());
 	}
 
 	private void registerYeast()
@@ -299,6 +307,7 @@ public class GrowthCraftCellar
 		packetPipeline.initialise();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerCellar());
 
+		VillagerRegistry.instance().registerVillagerId(config.villagerBrewerID);
 		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());
 
 		CommonProxy.instance.init();

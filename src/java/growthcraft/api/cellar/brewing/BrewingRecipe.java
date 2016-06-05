@@ -68,6 +68,16 @@ public class BrewingRecipe extends ProcessingRecipe
 		return false;
 	}
 
+	public boolean matchesIngredient(@Nullable FluidStack fluidStack)
+	{
+		return FluidTest.fluidMatches(inputFluidStack, fluidStack);
+	}
+
+	public boolean matchesIngredient(@Nullable ItemStack stack)
+	{
+		return ItemTest.itemMatches(inputItemStack, stack);
+	}
+
 	public boolean isItemIngredient(@Nullable ItemStack stack)
 	{
 		if (stack != null)

@@ -6,25 +6,18 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.util.MultiStacksUtil;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BrewingRegistry implements IBrewingRegistry
 {
 	private List<BrewingRecipe> recipes = new ArrayList<BrewingRecipe>();
 	private ILogger logger = NullLogger.INSTANCE;
-
-	private Fluid boozeToKey(Fluid f)
-	{
-		return CellarRegistry.instance().booze().maybeAlternateBooze(f);
-	}
 
 	@Override
 	public void setLogger(@Nonnull ILogger l)
@@ -46,7 +39,7 @@ public class BrewingRegistry implements IBrewingRegistry
 	}
 
 	@Override
-	public BrewingRecipe getBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
+	public BrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
 	{
 		if (itemstack == null || fluidstack == null) return null;
 
@@ -58,9 +51,39 @@ public class BrewingRegistry implements IBrewingRegistry
 	}
 
 	@Override
+	public List<BrewingRecipe> findRecipes(@Nullable FluidStack fluid)
+	{
+		final List<BrewingRecipe> result = new ArrayList<BrewingRecipe>();
+		if (fluid != null)
+		{
+			for (BrewingRecipe recipe : recipes)
+			{
+				if (recipe.matchesIngredient(fluid))
+					result.add(recipe);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public List<BrewingRecipe> findRecipes(@Nullable ItemStack fermenter)
+	{
+		final List<BrewingRecipe> result = new ArrayList<BrewingRecipe>();
+		if (fermenter != null)
+		{
+			for (BrewingRecipe recipe : recipes)
+			{
+				if (recipe.matchesIngredient(fermenter))
+					result.add(recipe);
+			}
+		}
+		return result;
+	}
+
+	@Override
 	public boolean isBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
 	{
-		return getBrewingRecipe(fluidstack, itemstack) != null;
+		return findRecipe(fluidstack, itemstack) != null;
 	}
 
 	@Override

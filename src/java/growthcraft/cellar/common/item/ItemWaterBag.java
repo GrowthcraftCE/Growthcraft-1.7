@@ -476,7 +476,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 			if (GrcCoreState.showDetailedInformation())
 			{
 				final String fluidname = UnitFormatter.fluidNameForContainer(fluidstack);
-				list.add(GrcI18n.translate("grc.cellar.format.waterBag.contents", fluidname, fluidstack.amount, getCapacity(stack)));
+				list.add(GrcI18n.translate("grc.cellar.format.fluid_container.contents", fluidname, fluidstack.amount, getCapacity(stack)));
 				final Fluid booze = fluidstack.getFluid();
 				BoozeUtils.addEffectInformation(booze, stack, player, list, bool);
 			}
@@ -484,7 +484,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 			{
 				list.add(EnumChatFormatting.GRAY +
 					GrcI18n.translate("grc.tooltip.detailed_information",
-						EnumChatFormatting.WHITE + "SHIFT" + EnumChatFormatting.GRAY));
+						EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
 			}
 		}
 	}

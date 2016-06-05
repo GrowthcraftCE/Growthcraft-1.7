@@ -36,9 +36,11 @@ import growthcraft.milk.common.item.EnumCheeseStage;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import growthcraft.milk.GrowthCraftMilk;
+import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -59,6 +61,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	{
 		super(Material.cake);
 		setHardness(0.5F);
+		setStepSound(soundTypeCloth);
 		setBlockName("grcmilk.CheeseBlock");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityCheeseBlock.class);
@@ -73,9 +76,9 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	}
 
 	@Override
-	protected boolean dropsTileStack(World world, int x, int y, int z, int metadata, int fortune)
+	protected boolean shouldDropTileStack(World world, int x, int y, int z, int metadata, int fortune)
 	{
-		return true;
+		return false;
 	}
 
 	@Override
@@ -100,6 +103,27 @@ public class BlockCheeseBlock extends GrcBlockContainer
 		else
 		{
 			super.getTileItemStackDrops(ret, world, x, y, z, metadata, fortune);
+		}
+	}
+
+	@Override
+	protected boolean shouldScatterInventoryOnBreak(World world, int x, int y, int z)
+	{
+		return true;
+	}
+
+	@Override
+	protected void scatterInventory(World world, int x, int y, int z, Block block)
+	{
+		final TileEntityCheeseBlock te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			final List<ItemStack> drops = new ArrayList<ItemStack>();
+			te.populateDrops(drops);
+			for (ItemStack stack : drops)
+			{
+				ItemUtils.spawnItemStack(world, x, y, z, stack, rand);
+			}
 		}
 	}
 
@@ -139,6 +163,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 				if (cheese.hasBlock())
 				{
 					final ItemStack stack = new ItemStack(item, 1, cheese.meta);
+					// This causes the NBT data to refresh
 					ib.getTileTagCompound(stack);
 					list.add(stack);
 				}
@@ -232,5 +257,11 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	{
 		final EnumCheeseType type = EnumCheeseType.getSafeById(meta);
 		return getIconByTypeAndStage(side, type, type.stages.get(0));
+	}
+
+	@Override
+	public int damageDropped(int metadata)
+	{
+		return metadata;
 	}
 }

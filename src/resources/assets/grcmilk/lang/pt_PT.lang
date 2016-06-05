@@ -127,14 +127,14 @@ tile.grcmilk.BlockFluidRennet.name=Coalho
 tile.grcmilk.BlockFluidSkimMilk.name=Leite Desnatado
 tile.grcmilk.BlockFluidWhey.name=Soro
 ### Bottles
-item.grcmilk.BottleFluidButterMilk.name=Frasco de Leitelho
+item.grcmilk.FoodBottleFluidButterMilk.name=Frasco de Leitelho
 item.grcmilk.BottleFluidCream.name=Frasco de Nata
 item.grcmilk.BottleFluidCurds.name=Frasco de Coalhada de Leite
-item.grcmilk.BottleFluidMilk.name=Frasco de Leite
+item.grcmilk.FoodBottleFluidMilk.name=Frasco de Leite
 item.grcmilk.BottleFluidPasteurizedMilk.name=Frasco de Leite Pastorizado
 item.grcmilk.BottleFluidRennet.name=Frasco de Coalho
-item.grcmilk.BottleFluidSkimMilk.name=Frasco de Leite Desnatado
-item.grcmilk.BottleFluidWhey.name=Frasco de Soro
+item.grcmilk.FoodBottleFluidSkimMilk.name=Frasco de Leite Desnatado
+item.grcmilk.FoodBottleFluidWhey.name=Frasco de Soro
 ### Buckets
 item.bucket.fluid.grcmilk.ButterMilk.name=Balde de Leitelho
 item.bucket.fluid.grcmilk.Cream.name=Balde de Nata
@@ -171,7 +171,7 @@ item.bucket.fluid.grcmilk.Kumis4.name=Balde de Kumis
 item.bucket.fluid.grcmilk.Kumis5.name=Balde de Leite Vil
 
 # Effects
-grc.effect.booze_milk=Remove todos os efeitos (Exceto bebedeira)
+grc.effect.milk=Remove todos os efeitos (Exceto bebedeira)
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s

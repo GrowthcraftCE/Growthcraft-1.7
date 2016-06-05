@@ -32,7 +32,6 @@ import growthcraft.api.core.effect.SimplePotionEffectFactory;
 import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.apples.GrowthCraftApples;
-import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.common.GrcModuleBase;
@@ -55,7 +54,7 @@ public class GrcApplesRecipes extends GrcModuleBase
 		}
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[0])
-			.tags(BoozeTag.CIDER, BoozeTag.YOUNG)
+			.tags(BoozeTag.YOUNG)
 			.pressesFrom(
 				new OreItemStacks("foodApple"),
 				TickUtils.seconds(2),
@@ -65,7 +64,7 @@ public class GrcApplesRecipes extends GrcModuleBase
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[1])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED)
-			.fermentsFrom(fs[0], EnumYeast.BREWERS.asStack(), fermentTime)
+			.fermentsFrom(fs[0], new OreItemStacks("yeastBrewers"), fermentTime)
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
@@ -73,16 +72,16 @@ public class GrcApplesRecipes extends GrcModuleBase
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[2])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POTENT)
-			.fermentsFrom(fs[1], new ItemStack(Items.glowstone_dust), fermentTime)
-			.fermentsFrom(fs[3], new ItemStack(Items.glowstone_dust), fermentTime)
+			.fermentsFrom(fs[1], new OreItemStacks("dustGlowstone"), fermentTime)
+			.fermentsFrom(fs[3], new OreItemStacks("dustGlowstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.080f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[3])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
-			.fermentsFrom(fs[1], new ItemStack(Items.redstone), fermentTime)
-			.fermentsFrom(fs[2], new ItemStack(Items.redstone), fermentTime)
+			.fermentsFrom(fs[1], new OreItemStacks("dustRedstone"), fermentTime)
+			.fermentsFrom(fs[2], new OreItemStacks("dustRedstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
 				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
@@ -90,7 +89,7 @@ public class GrcApplesRecipes extends GrcModuleBase
 		// Silken Nectar - ETHEREAL
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[4])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.MAGICAL)
-			.fermentsFrom(fs[1], EnumYeast.ETHEREAL.asStack(), fermentTime)
+			.fermentsFrom(fs[1], new OreItemStacks("yeastEthereal"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
 				.addEffect(new EffectRandomList()
@@ -114,10 +113,10 @@ public class GrcApplesRecipes extends GrcModuleBase
 		// Intoxicated - Origin Yeast
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[5])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
-			.fermentsFrom(fs[2], EnumYeast.ORIGIN.asStack(), fermentTime)
-			.fermentsFrom(fs[3], EnumYeast.ORIGIN.asStack(), fermentTime)
+			.fermentsFrom(fs[2], new OreItemStacks("yeastOrigin"), fermentTime)
+			.fermentsFrom(fs[3], new OreItemStacks("yeastOrigin"), fermentTime)
 			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f * 1.5f), TickUtils.seconds(45))
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f * 2.5f), TickUtils.seconds(45))
 				.addEffect(new EffectWeightedRandomList()
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76444_x.id, TickUtils.seconds(90), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.wither.id, TickUtils.seconds(90), 2)))
@@ -127,12 +126,12 @@ public class GrcApplesRecipes extends GrcModuleBase
 		// the booze looses all its benefits and effectively becomes poisoned
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[6])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POISONED)
-			//.fermentsFrom(fs[0], EnumYeast.NETHERRASH.asStack(), fermentTime)
-			//.fermentsFrom(fs[1], EnumYeast.NETHERRASH.asStack(), fermentTime)
-			//.fermentsFrom(fs[2], EnumYeast.NETHERRASH.asStack(), fermentTime)
-			//.fermentsFrom(fs[3], EnumYeast.NETHERRASH.asStack(), fermentTime)
-			//.fermentsFrom(fs[4], EnumYeast.NETHERRASH.asStack(), fermentTime)
-			//.fermentsFrom(fs[5], EnumYeast.NETHERRASH.asStack(), fermentTime)
+			.fermentsFrom(fs[0], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[1], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[2], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[3], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[4], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[5], new OreItemStacks("yeastPoison"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
 				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);

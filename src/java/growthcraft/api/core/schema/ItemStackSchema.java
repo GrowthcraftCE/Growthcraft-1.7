@@ -27,11 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.api.core.definition.IItemStackListProvider;
 import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.item.MultiItemStacks;
+import growthcraft.api.core.util.StringUtils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
@@ -124,7 +125,8 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListProvide
 	@Override
 	public String toString()
 	{
-		return String.format("Schema<ItemStack>(mod_id: '%s', name: '%s', meta: %d, amount: %d)", mod_id, name, meta, amount);
+		return String.format("Schema<ItemStack>(comment: '%s', mod_id: '%s', name: '%s', meta: %d, amount: %d)",
+			StringUtils.inspect(comment), mod_id, name, meta, amount);
 	}
 
 	@Override

@@ -82,6 +82,18 @@ public class ItemTest
 		return false;
 	}
 
+	public static boolean areStacksEqual(@Nullable IMultiItemStacks expected, @Nullable ItemStack actual)
+	{
+		if (!itemMatches(expected, actual)) return false;
+		return actual.stackSize == expected.getStackSize();
+	}
+
+	public static boolean areStacksEqual(@Nullable ItemStack expected, @Nullable ItemStack actual)
+	{
+		if (!itemMatches(expected, actual)) return false;
+		return actual.stackSize == expected.stackSize;
+	}
+
 	public static boolean hasEnough(@Nullable IMultiItemStacks expected, @Nullable ItemStack actual)
 	{
 		if (!itemMatches(expected, actual)) return false;
@@ -124,6 +136,40 @@ public class ItemTest
 			{
 				if (actual != null) return false;
 			}
+		}
+		return true;
+	}
+
+	@SuppressWarnings({"rawtypes"})
+	public static boolean containsExpectedItemsUnordered(@Nonnull List expectedItems, @Nonnull List<ItemStack> givenItems)
+	{
+		final boolean[] usedSlots = new boolean[givenItems.size()];
+		for (Object expectedStack : expectedItems)
+		{
+			boolean found = false;
+			for (int index = 0; index < usedSlots.length; ++index)
+			{
+				if (usedSlots[index]) continue;
+				if (expectedStack instanceof IMultiItemStacks)
+				{
+					found = itemMatches((IMultiItemStacks)expectedStack, givenItems.get(index));
+				}
+				else if (expectedStack instanceof ItemStack)
+				{
+					found = itemMatches((ItemStack)expectedStack, givenItems.get(index));
+				}
+				else if (expectedStack == null)
+				{
+					found = givenItems.get(index) == null;
+				}
+
+				if (found)
+				{
+					usedSlots[index] = true;
+					break;
+				}
+			}
+			if (!found) return false;
 		}
 		return true;
 	}

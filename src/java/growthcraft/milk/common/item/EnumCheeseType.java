@@ -29,6 +29,7 @@ import java.util.List;
 
 import growthcraft.api.core.definition.IFluidStackFactory;
 import growthcraft.api.core.definition.IItemStackFactory;
+import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.item.ItemTest;
 import growthcraft.milk.GrowthCraftMilk;
 
@@ -72,7 +73,7 @@ public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 	public final int meta;
 	public final List<EnumCheeseFeature> features;
 	public final List<EnumCheeseStage> stages;
-	public final List<ItemStack> waxes = new ArrayList<ItemStack>();
+	public final List<IMultiItemStacks> waxes = new ArrayList<IMultiItemStacks>();
 
 	private EnumCheeseType(String n, int c, EnumCheeseFeature[] fets, EnumCheeseStage[] stgs)
 	{
@@ -87,11 +88,11 @@ public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 	{
 		if (ItemTest.isValid(stack))
 		{
-			for (ItemStack wax : waxes)
+			for (IMultiItemStacks wax : waxes)
 			{
-				if (wax.isItemEqual(stack))
+				if (wax.containsItemStack(stack))
 				{
-					return stack.stackSize >= wax.stackSize;
+					return stack.stackSize >= wax.getStackSize();
 				}
 			}
 		}

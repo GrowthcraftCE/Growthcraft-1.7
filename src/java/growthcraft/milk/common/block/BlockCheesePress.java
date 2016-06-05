@@ -35,6 +35,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -48,6 +49,7 @@ public class BlockCheesePress extends GrcBlockContainer
 		super(Material.wood);
 		setResistance(5.0F);
 		setHardness(2.0F);
+		setStepSound(soundTypeWood);
 		setBlockName("grcmilk.CheesePress");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityCheesePress.class);
@@ -124,17 +126,48 @@ public class BlockCheesePress extends GrcBlockContainer
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
 		if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
-		if (!player.isSneaking())
+		if (GrowthCraftMilk.getConfig().cheesePressHandOperated)
 		{
-			final TileEntityCheesePress cheesePress = getTileEntity(world, x, y, z);
-			if (cheesePress != null)
+			if (!player.isSneaking())
 			{
-				cheesePress.toggle();
-				world.playSoundEffect((double)x, (double)y, (double)z, "random.wood_click", 0.3f, 0.5f);
-				return true;
+				final TileEntityCheesePress cheesePress = getTileEntity(world, x, y, z);
+				if (cheesePress != null)
+				{
+					if (cheesePress.toggle())
+					{
+						world.playSoundEffect((double)x, (double)y, (double)z, "random.wood_click", 0.3f, 0.5f);
+					}
+					return true;
+				}
 			}
 		}
 		return false;
+	}
+
+	private void updatePressState(World world, int x, int y, int z)
+	{
+		final boolean isPowered = world.isBlockIndirectlyGettingPowered(x, y, z);
+		final TileEntityCheesePress cheesePress = getTileEntity(world, x, y, z);
+		if (cheesePress != null)
+		{
+			if (cheesePress.toggle(isPowered))
+			{
+				world.playSoundEffect((double)x, (double)y, (double)z, "random.wood_click", 0.3f, 0.5f);
+			}
+		}
+	}
+
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+	{
+		super.onNeighborBlockChange(world, x, y, z, block);
+		if (!world.isRemote)
+		{
+			if (GrowthCraftMilk.getConfig().cheesePressRedstoneOperated)
+			{
+				this.updatePressState(world, x, y, z);
+			}
+		}
 	}
 
 	@Override
@@ -160,5 +193,22 @@ public class BlockCheesePress extends GrcBlockContainer
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
 	{
 		return true;
+	}
+
+	@Override
+	public boolean hasComparatorInputOverride()
+	{
+		return true;
+	}
+
+	@Override
+	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
+	{
+		final TileEntityCheesePress te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			return Container.calcRedstoneFromInventory(te);
+		}
+		return 0;
 	}
 }

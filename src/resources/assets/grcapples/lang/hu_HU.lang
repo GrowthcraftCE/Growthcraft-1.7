@@ -7,7 +7,6 @@ item.grc.appleSeeds.name=Alma csutka
 
 # Booze
 ## Fluids
-fluid.grc.appleCider=Almabor
 fluid.grc.appleCider0=Almabor
 fluid.grc.appleCider1=Almabor
 fluid.grc.appleCider2=Almabor
@@ -17,7 +16,6 @@ fluid.grc.appleCider5=fluid.grc.appleCider5
 fluid.grc.appleCider6=fluid.grc.appleCider6
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider.name=item.bucket.fluid.grc.appleCider.name
 item.bucket.fluid.grc.appleCider0.name=item.bucket.fluid.grc.appleCider0.name
 item.bucket.fluid.grc.appleCider1.name=item.bucket.fluid.grc.appleCider1.name
 item.bucket.fluid.grc.appleCider2.name=item.bucket.fluid.grc.appleCider2.name
@@ -27,7 +25,6 @@ item.bucket.fluid.grc.appleCider5.name=item.bucket.fluid.grc.appleCider5.name
 item.bucket.fluid.grc.appleCider6.name=item.bucket.fluid.grc.appleCider6.name
 
 ## Fluid Blocks
-tile.fluid.grc.appleCider.name=Almabor
 tile.fluid.grc.appleCider0.name=Almabor
 tile.fluid.grc.appleCider1.name=Almabor
 tile.fluid.grc.appleCider2.name=Almabor

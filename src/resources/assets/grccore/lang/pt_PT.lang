@@ -12,12 +12,29 @@ tile.grc.fenceRope.name=Cerca com Corda
 tile.grc.netherBrickFenceRope.name=Cerca de Tijolo do Nether com Corda
 tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
 tile.grc.ropeBlock.name=Corda
+tile.grccore.salt_block.name=tile.grccore.salt_block.name
 
 # Items
 item.grc.rope.name=Corda
 item.grccore.salt.name=Sal
 item.grccore.bucketSalt.name=Balde de Sal
 item.grccore.bottleSalt.name=Frasco de Sal
+item.grccore.crowbar.black.name=item.grccore.crowbar.black.name
+item.grccore.crowbar.red.name=item.grccore.crowbar.red.name
+item.grccore.crowbar.green.name=item.grccore.crowbar.green.name
+item.grccore.crowbar.brown.name=item.grccore.crowbar.brown.name
+item.grccore.crowbar.blue.name=item.grccore.crowbar.blue.name
+item.grccore.crowbar.purple.name=item.grccore.crowbar.purple.name
+item.grccore.crowbar.cyan.name=item.grccore.crowbar.cyan.name
+item.grccore.crowbar.light_gray.name=item.grccore.crowbar.light_gray.name
+item.grccore.crowbar.gray.name=item.grccore.crowbar.gray.name
+item.grccore.crowbar.pink.name=item.grccore.crowbar.pink.name
+item.grccore.crowbar.lime.name=item.grccore.crowbar.lime.name
+item.grccore.crowbar.yellow.name=item.grccore.crowbar.yellow.name
+item.grccore.crowbar.light_blue.name=item.grccore.crowbar.light_blue.name
+item.grccore.crowbar.magenta.name=item.grccore.crowbar.magenta.name
+item.grccore.crowbar.orange.name=item.grccore.crowbar.orange.name
+item.grccore.crowbar.white.name=item.grccore.crowbar.white.name
 
 # Fluids
 fluid.tile.water=Água
@@ -33,23 +50,23 @@ item.bucket.fluid.grccore.SaltWater.name=Balde de Água Salgada
 achievementPage.pageGrowthCraft=Growthcraft
 
 # Colors
-grc.colour.White=Branco
-grc.colour.Orange=Laranja
-grc.colour.Magenta=Magenta
-grc.colour.LightBlue=Azul Claro
-grc.colour.Yellow=Amarelo
-grc.colour.Lime=Verde Lima
-grc.colour.Pink=Cor-de-rosa
-grc.colour.Gray=Cinzento
-grc.colour.LightGray=Cinzento Claro
-grc.colour.Cyan=Azul Ciano
-grc.colour.Purple=Roxo
-grc.colour.Blue=Azul
-grc.colour.Brown=Castanho
-grc.colour.Green=Verde
-grc.colour.Red=Vermelho
-grc.colour.Black=Preto
-grc.colour.Transparent=Transparente
+grc.color.Black=Preto
+grc.color.Blue=Azul
+grc.color.Brown=Castanho
+grc.color.Cyan=Azul Ciano
+grc.color.Gray=Cinzento
+grc.color.Green=Verde
+grc.color.LightBlue=Azul Claro
+grc.color.LightGray=Cinzento Claro
+grc.color.Lime=Verde Lima
+grc.color.Magenta=Magenta
+grc.color.Orange=Laranja
+grc.color.Pink=Cor-de-rosa
+grc.color.Purple=Roxo
+grc.color.Red=Vermelho
+grc.color.Transparent=Transparente
+grc.color.White=Branco
+grc.color.Yellow=Amarelo
 
 # Formats and Units
 grc.format.value.true=Sim
@@ -101,7 +118,15 @@ grc.effect.weighted_random_list.format=%d%% Chance de
 gui.grc.progress.format=gui.grc.progress.format
 
 # Inventory
-grc.inventory.internal=grc.inventory.internal
+grc.inventory.internal.name=grc.inventory.internal.name
 
 # Tooltips
 grc.tooltip.detailed_information=grc.tooltip.detailed_information
+
+# Achievements
+achievement.trusty_hardware=achievement.trusty_hardware
+achievement.trusty_hardware.desc=achievement.trusty_hardware.desc
+achievement.half_life_confirmed=achievement.half_life_confirmed
+achievement.half_life_confirmed.desc=achievement.half_life_confirmed.desc
+achievement.salty_situation=achievement.salty_situation
+achievement.salty_situation.desc=achievement.salty_situation.desc

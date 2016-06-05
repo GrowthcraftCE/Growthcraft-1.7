@@ -106,7 +106,7 @@ public class ItemKeySchema extends ItemStackSchema implements IItemStackListProv
 	@Override
 	public String toString()
 	{
-		String result = String.format("Schema<ItemKey>(amount: %d)", amount);
+		String result = String.format("Schema<ItemKey>(comment: '%s', amount: %d)", comment, amount);
 		if (mod_id != null && name != null)
 		{
 			result += String.format("~(mod_id: '%s', name: '%s', meta: %d)", mod_id, name, meta);

@@ -5,11 +5,14 @@ import java.io.IOException;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.IFermentationRecipe;
 import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.fluids.FluidUtils;
+import growthcraft.api.core.nbt.INBTItemSerializable;
 import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 
@@ -21,10 +24,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityFermentBarrel extends TileEntityCellarDevice implements ITileProgressiveDevice
+public class TileEntityFermentBarrel extends TileEntityCellarDevice implements ITileProgressiveDevice, INBTItemSerializable
 {
 	public static enum FermentBarrelDataID
 	{
@@ -49,7 +53,9 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	// Other Vars.
 	protected int time;
 	private int timemax = GrowthCraftCellar.getConfig().fermentTime;
+	private boolean shouldUseCachedRecipe = GrowthCraftCellar.getConfig().fermentBarrelUseCachedRecipe;
 	private boolean recheckRecipe = true;
+	private boolean lidOn = true;
 	private IFermentationRecipe activeRecipe;
 
 	@Override
@@ -75,9 +81,27 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		this.recheckRecipe = true;
 	}
 
+	/**
+	 * @return time was reset, false otherwise
+	 */
+	protected boolean resetTime()
+	{
+		if (time != 0)
+		{
+			this.time = 0;
+			return true;
+		}
+		return false;
+	}
+
+	private IFermentationRecipe loadRecipe()
+	{
+		return CellarRegistry.instance().fermenting().findRecipe(getFluidStack(0), getStackInSlot(0));
+	}
+
 	private IFermentationRecipe refreshRecipe()
 	{
-		final IFermentationRecipe recipe = CellarRegistry.instance().fermenting().findRecipe(getFluidStack(0), getStackInSlot(0));
+		final IFermentationRecipe recipe = loadRecipe();
 		if (recipe != null && recipe != activeRecipe)
 		{
 			if (activeRecipe != null)
@@ -85,6 +109,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 				resetTime();
 			}
 			this.activeRecipe = recipe;
+			markForInventoryUpdate();
 		}
 		else
 		{
@@ -92,6 +117,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 			{
 				this.activeRecipe = null;
 				resetTime();
+				markForInventoryUpdate();
 			}
 		}
 		return activeRecipe;
@@ -99,8 +125,12 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 
 	private IFermentationRecipe getWorkingRecipe()
 	{
-		if (activeRecipe == null) refreshRecipe();
-		return activeRecipe;
+		if (shouldUseCachedRecipe)
+		{
+			if (activeRecipe == null) refreshRecipe();
+			return activeRecipe;
+		}
+		return loadRecipe();
 	}
 
 	public int getTime()
@@ -121,11 +151,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 			}
 		}
 		return this.timemax;
-	}
-
-	private void resetTime()
-	{
-		this.time = 0;
 	}
 
 	private boolean canFerment()
@@ -203,16 +228,10 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		{
 			if (time != 0)
 			{
-				this.time = 0;
+				resetTime();
 				markForInventoryUpdate();
 			}
 		}
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int index, ItemStack itemstack)
-	{
-		return true;
 	}
 
 	@Override
@@ -222,9 +241,21 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	}
 
 	@Override
+	public boolean isItemValidForSlot(int index, ItemStack itemstack)
+	{
+		return index == 0;
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack stack, int side)
+	{
+		return InventoryProcessor.instance().canInsertItem(this, stack, index);
+	}
+
+	@Override
 	public boolean canExtractItem(int index, ItemStack stack, int side)
 	{
-		return true;
+		return InventoryProcessor.instance().canExtractItem(this, stack, index);
 	}
 
 	@Override
@@ -240,18 +271,47 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		}
 	}
 
+	private void readFermentTimeFromNBT(NBTTagCompound nbt)
+	{
+		this.time = NBTHelper.getInteger(nbt, "time");
+	}
+
+	@Override
+	public void readFromNBTForItem(NBTTagCompound nbt)
+	{
+		super.readFromNBTForItem(nbt);
+		readFermentTimeFromNBT(nbt);
+		if (nbt.hasKey("lid_on"))
+		{
+			this.lidOn = nbt.getBoolean("lid_on");
+		}
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		this.time = NBTHelper.getInteger(nbt, "time");
+		readFermentTimeFromNBT(nbt);
+	}
+
+	private void writeFermentTimeToNBT(NBTTagCompound nbt)
+	{
+		nbt.setInteger("time", time);
+	}
+
+	@Override
+	public void writeToNBTForItem(NBTTagCompound nbt)
+	{
+		super.writeToNBTForItem(nbt);
+		writeFermentTimeToNBT(nbt);
+		nbt.setBoolean("lid_on", lidOn);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		nbt.setInteger("time", time);
+		writeFermentTimeToNBT(nbt);
 	}
 
 	@Override
@@ -309,25 +369,39 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	}
 
 	@Override
-	protected int doFill(ForgeDirection from, FluidStack resource, boolean doFill)
+	public boolean canFill(ForgeDirection from, Fluid fluid)
 	{
-		return fillFluidTank(0, resource, doFill);
+		final FluidStack fluidStack = getFluidStack(0);
+		if (fluidStack == null || fluidStack.getFluid() == null) return true;
+		return FluidTest.fluidMatches(fluidStack, fluid);
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection from, int maxDrain, boolean doDrain)
+	protected int doFill(ForgeDirection from, FluidStack resource, boolean shouldFill)
 	{
-		return drainFluidTank(0, maxDrain, doDrain);
+		return fillFluidTank(0, resource, shouldFill);
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection from, FluidStack resource, boolean doDrain)
+	public boolean canDrain(ForgeDirection from, Fluid fluid)
+	{
+		return FluidTest.fluidMatches(getFluidStack(0), fluid);
+	}
+
+	@Override
+	protected FluidStack doDrain(ForgeDirection from, int maxDrain, boolean shouldDrain)
+	{
+		return drainFluidTank(0, maxDrain, shouldDrain);
+	}
+
+	@Override
+	protected FluidStack doDrain(ForgeDirection from, FluidStack resource, boolean shouldDrain)
 	{
 		if (resource == null || !resource.isFluidEqual(getFluidStack(0)))
 		{
 			return null;
 		}
-		return doDrain(from, resource.amount, doDrain);
+		return doDrain(from, resource.amount, shouldDrain);
 	}
 
 	@Override

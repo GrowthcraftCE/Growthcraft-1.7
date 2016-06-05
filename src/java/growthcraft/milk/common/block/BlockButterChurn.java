@@ -44,6 +44,7 @@ public class BlockButterChurn extends GrcBlockContainer
 		setResistance(5.0F);
 		setHardness(2.0F);
 		setBlockName("grcmilk.ButterChurn");
+		setStepSound(soundTypeWood);
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityButterChurn.class);
 		final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 16f, 8f).scale(1f / 16f);

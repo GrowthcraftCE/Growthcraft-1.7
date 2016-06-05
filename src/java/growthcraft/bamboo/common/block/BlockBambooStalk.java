@@ -5,6 +5,7 @@ import java.util.Random;
 
 import growthcraft.bamboo.client.renderer.RenderBamboo;
 import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.core.common.block.GrcBlockBase;
 import growthcraft.core.util.BlockCheck;
 import growthcraft.core.util.RenderUtils;
 
@@ -26,7 +27,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockBambooStalk extends Block
+public class BlockBambooStalk extends GrcBlockBase
 {
 	@SideOnly(Side.CLIENT)
 	public static IIcon[] tex;
