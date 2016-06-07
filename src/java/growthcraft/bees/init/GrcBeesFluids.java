@@ -74,6 +74,7 @@ public class GrcBeesFluids extends GrcModuleBase
 		}
 		BoozeRegistryHelper.initializeBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets);
 		BoozeRegistryHelper.setBoozeFoodStats(honeyMeadBooze, 1, -0.45f);
+		BoozeRegistryHelper.setBoozeFoodStats(honeyMeadBooze[0], 1, 0.45f);
 		honeyMeadBottle = new ItemDefinition(new ItemBoozeBottle(honeyMeadBooze));
 
 		if (honey != null)

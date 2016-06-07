@@ -70,6 +70,7 @@ public class GrcRiceFluids extends GrcModuleBase
 		}
 		BoozeRegistryHelper.initializeBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets);
 		BoozeRegistryHelper.setBoozeFoodStats(riceSakeBooze, 1, -0.6f);
+		BoozeRegistryHelper.setBoozeFoodStats(riceSakeBooze[0], 1, 0.2f);
 		riceSakeBooze[4].setColor(GrowthCraftRice.getConfig().riceSakeDivineColor);
 		riceSakeFluids[4].getBlock().refreshColor();
 		riceSake = new ItemDefinition(new ItemBoozeBottle(riceSakeBooze));
