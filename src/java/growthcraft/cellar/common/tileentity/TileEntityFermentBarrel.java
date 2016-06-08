@@ -34,11 +34,9 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	{
 		TIME,
 		TIME_MAX,
-		TANK_FLUID_ID,
-		TANK_FLUID_AMOUNT,
 		UNKNOWN;
 
-		public static final FermentBarrelDataID[] VALID = new FermentBarrelDataID[] { TIME, TIME_MAX, TANK_FLUID_ID, TANK_FLUID_AMOUNT };
+		public static final FermentBarrelDataID[] VALID = new FermentBarrelDataID[] { TIME, TIME_MAX };
 
 		public static FermentBarrelDataID fromInt(int i)
 		{
@@ -318,8 +316,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	public void receiveGUINetworkData(int id, int v)
 	{
 		super.receiveGUINetworkData(id, v);
-		// Debugging
-		//GrowthCraftCellar.getLogger().info("Updating Network data id=%d value=%d", id, v);
 		switch (FermentBarrelDataID.fromInt(id))
 		{
 			case TIME:
@@ -327,13 +323,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 				break;
 			case TIME_MAX:
 				this.timemax = v;
-				break;
-			case TANK_FLUID_ID:
-				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
-				if (result != null) getFluidTank(0).setFluid(result);
-				break;
-			case TANK_FLUID_AMOUNT:
-				getFluidTank(0).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(0), v));
 				break;
 			default:
 				// should warn about invalid Data ID
@@ -347,9 +336,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		super.sendGUINetworkData(container, iCrafting);
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TIME.ordinal(), time);
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TIME_MAX.ordinal(), getTimeMax());
-		final FluidStack fluid = getFluidStack(0);
-		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
-		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
 	}
 
 	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
