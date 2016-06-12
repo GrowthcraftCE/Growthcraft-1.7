@@ -114,6 +114,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		}
 		BoozeRegistryHelper.initializeBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets);
 		BoozeRegistryHelper.setBoozeFoodStats(kumisFluids, 1, -0.2f);
+		BoozeRegistryHelper.setBoozeFoodStats(kumisFluids[0], 1, 0.2f);
 		kumisFluids[5].setColor(GrowthCraftMilk.getConfig().poisonedKumisColor);
 		kumisFluidBlocks[5].getBlock().refreshColor();
 		for (BlockBoozeDefinition def : kumisFluidBlocks)

@@ -69,6 +69,8 @@ public class GrcGrapesFluids extends GrcModuleBase
 		}
 		BoozeRegistryHelper.initializeBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets);
 		BoozeRegistryHelper.setBoozeFoodStats(grapeWineBooze, 1, -0.3f);
+		BoozeRegistryHelper.setBoozeFoodStats(grapeWineBooze[0], 1, 0.3f);
+
 		grapeWineBooze[4].setColor(GrowthCraftGrapes.getConfig().ambrosiaColor);
 		grapeWineFluids[4].getBlock().refreshColor();
 		grapeWineBooze[5].setColor(GrowthCraftGrapes.getConfig().portWineColor);

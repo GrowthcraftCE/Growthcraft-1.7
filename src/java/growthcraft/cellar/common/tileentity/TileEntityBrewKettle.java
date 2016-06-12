@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import io.netty.buffer.ByteBuf;
 
-import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -30,10 +29,6 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 	{
 		TIME,
 		TIME_MAX,
-		TANK1_FLUID_ID,
-		TANK1_FLUID_AMOUNT,
-		TANK2_FLUID_ID,
-		TANK2_FLUID_AMOUNT,
 		HEAT_AMOUNT;
 
 		public static final List<BrewKettleDataID> VALUES = Arrays.asList(values());
@@ -194,22 +189,6 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 			case TIME_MAX:
 				brewKettle.setTimeMax(v);
 				break;
-			case TANK1_FLUID_ID:
-			{
-				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
-				if (result != null) getFluidTank(0).setFluid(result);
-			}	break;
-			case TANK1_FLUID_AMOUNT:
-				getFluidTank(0).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(0), v));
-				break;
-			case TANK2_FLUID_ID:
-			{
-				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(1));
-				if (result != null) getFluidTank(1).setFluid(result);
-			}	break;
-			case TANK2_FLUID_AMOUNT:
-				getFluidTank(1).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(1), v));
-				break;
 			case HEAT_AMOUNT:
 				brewKettle.setHeatMultiplier((float)v / (float)0x7FFF);
 				break;
@@ -224,12 +203,6 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		super.sendGUINetworkData(container, iCrafting);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME.ordinal(), (int)brewKettle.getTime());
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME_MAX.ordinal(), (int)brewKettle.getTimeMax());
-		FluidStack fluid = getFluidStack(0);
-		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK1_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
-		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK1_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
-		fluid = getFluidStack(1);
-		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK2_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
-		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TANK2_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
 		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.HEAT_AMOUNT.ordinal(), (int)(brewKettle.getHeatMultiplier() * 0x7FFF));
 	}
 

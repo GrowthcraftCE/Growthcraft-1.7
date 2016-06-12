@@ -73,6 +73,7 @@ public class GrcHopsFluids extends GrcModuleBase
 		}
 		BoozeRegistryHelper.initializeBooze(lagerBooze, lagerFluids, lagerBuckets);
 		BoozeRegistryHelper.setBoozeFoodStats(lagerBooze, 1, -0.6f);
+		BoozeRegistryHelper.setBoozeFoodStats(lagerBooze[0], 1, 0.3f);
 
 		this.lager = new ItemDefinition(new ItemBoozeBottle(lagerBooze));
 
@@ -86,6 +87,8 @@ public class GrcHopsFluids extends GrcModuleBase
 		}
 		BoozeRegistryHelper.initializeBooze(hopAleBooze, hopAleFluids, hopAleBuckets);
 		BoozeRegistryHelper.setBoozeFoodStats(hopAleBooze, 1, -0.6f);
+		BoozeRegistryHelper.setBoozeFoodStats(hopAleBooze[0], 1, 0.3f);
+		BoozeRegistryHelper.setBoozeFoodStats(hopAleBooze[4], 1, 0.3f);
 
 		this.hopAle = new ItemDefinition(new ItemBoozeBottle(hopAleBooze));
 	}

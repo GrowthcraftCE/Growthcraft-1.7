@@ -55,6 +55,7 @@ public class GrcApplesFluids extends GrcModuleBase
 		}
 		BoozeRegistryHelper.initializeBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets);
 		BoozeRegistryHelper.setBoozeFoodStats(appleCiderBooze, 1, -0.3f);
+		BoozeRegistryHelper.setBoozeFoodStats(appleCiderBooze[0], 1, 0.3f);
 
 		appleCiderBooze[4].setColor(GrowthCraftApples.getConfig().silkenNectarColor);
 		appleCiderFluids[4].getBlock().refreshColor();

@@ -25,7 +25,6 @@ package growthcraft.cellar.common.tileentity;
 
 import java.io.IOException;
 
-import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.cellar.common.tileentity.device.CultureGenerator;
@@ -56,8 +55,6 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		YEAST_GEN_TIME_MAX,
 		CULTURE_GEN_TIME,
 		CULTURE_GEN_TIME_MAX,
-		TANK_FLUID_ID,
-		TANK_FLUID_AMOUNT,
 		HEAT_AMOUNT,
 		UNKNOWN;
 
@@ -67,8 +64,6 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 			YEAST_GEN_TIME_MAX,
 			CULTURE_GEN_TIME,
 			CULTURE_GEN_TIME_MAX,
-			TANK_FLUID_ID,
-			TANK_FLUID_AMOUNT,
 			HEAT_AMOUNT
 		};
 
@@ -236,13 +231,6 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 			case CULTURE_GEN_TIME_MAX:
 				cultureGen.setTimeMax(v);
 				break;
-			case TANK_FLUID_ID:
-				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
-				if (result != null) getFluidTank(0).setFluid(result);
-				break;
-			case TANK_FLUID_AMOUNT:
-				getFluidTank(0).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(0), v));
-				break;
 			case HEAT_AMOUNT:
 				heatComponent.setHeatMultiplier((float)v / (float)0x7FFF);
 				break;
@@ -260,9 +248,6 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.YEAST_GEN_TIME_MAX.ordinal(), yeastGen.getTimeMax());
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.CULTURE_GEN_TIME.ordinal(), cultureGen.getTime());
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.CULTURE_GEN_TIME_MAX.ordinal(), cultureGen.getTimeMax());
-		final FluidStack fluid = getFluidStack(0);
-		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TANK_FLUID_ID.ordinal(), fluid != null ? fluid.getFluidID() : 0);
-		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.TANK_FLUID_AMOUNT.ordinal(), fluid != null ? fluid.amount : 0);
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.HEAT_AMOUNT.ordinal(), (int)(heatComponent.getHeatMultiplier() * 0x7FFF));
 	}
 

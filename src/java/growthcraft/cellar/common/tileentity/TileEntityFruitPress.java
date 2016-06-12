@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.tileentity;
 
-import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.common.tileentity.device.FruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -22,8 +21,6 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 	{
 		public static final int TIME = 0;
 		public static final int TIME_MAX = 1;
-		public static final int TANK_FLUID_ID = 2;
-		public static final int TANK_FLUID_AMOUNT = 3;
 
 		private FruitPressDataID() {}
 	}
@@ -165,13 +162,6 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 			case FruitPressDataID.TIME_MAX:
 				fruitPress.setTimeMax(v);
 				break;
-			case FruitPressDataID.TANK_FLUID_ID:
-				final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(0));
-				if (result != null) getFluidTank(0).setFluid(result);
-				break;
-			case FruitPressDataID.TANK_FLUID_AMOUNT:
-				getFluidTank(0).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(0), v));
-				break;
 			default:
 				// should warn about invalid Data ID
 				break;
@@ -184,9 +174,6 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 		super.sendGUINetworkData(container, iCrafting);
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME, fruitPress.getTime());
 		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TIME_MAX, fruitPress.getTimeMax());
-		final FluidStack fluid = getFluidStack(0);
-		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_ID, fluid != null ? fluid.getFluidID() : 0);
-		iCrafting.sendProgressBarUpdate(container, FruitPressDataID.TANK_FLUID_AMOUNT, fluid != null ? fluid.amount : 0);
 	}
 
 	@Override
