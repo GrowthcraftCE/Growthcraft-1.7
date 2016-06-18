@@ -67,9 +67,9 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 			HEAT_AMOUNT
 		};
 
-		public static CultureJarDataId fromInt(int i)
+		public static CultureJarDataId getByOrdinal(int ord)
 		{
-			if (i >= 0 && i <= VALID.length) return VALID[i];
+			if (ord >= 0 && ord < VALID.length) return VALID[ord];
 			return UNKNOWN;
 		}
 	}
@@ -217,7 +217,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 	public void receiveGUINetworkData(int id, int v)
 	{
 		super.receiveGUINetworkData(id, v);
-		switch (CultureJarDataId.fromInt(id))
+		switch (CultureJarDataId.getByOrdinal(id))
 		{
 			case YEAST_GEN_TIME:
 				yeastGen.setTime(v);

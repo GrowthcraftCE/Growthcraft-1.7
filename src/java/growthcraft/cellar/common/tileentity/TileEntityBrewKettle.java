@@ -1,7 +1,5 @@
 package growthcraft.cellar.common.tileentity;
 
-import java.util.Arrays;
-import java.util.List;
 import java.io.IOException;
 
 import io.netty.buffer.ByteBuf;
@@ -29,9 +27,21 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 	{
 		TIME,
 		TIME_MAX,
-		HEAT_AMOUNT;
+		HEAT_AMOUNT,
+		UNKNOWN;
 
-		public static final List<BrewKettleDataID> VALUES = Arrays.asList(values());
+		public static final BrewKettleDataID[] VALUES = new BrewKettleDataID[]
+		{
+			TIME,
+			TIME_MAX,
+			HEAT_AMOUNT
+		};
+
+		public static BrewKettleDataID getByOrdinal(int ord)
+		{
+			if (ord >= 0 && ord < VALUES.length) return VALUES[ord];
+			return UNKNOWN;
+		}
 	}
 
 	private static final int[] rawSlotIDs = new int[] {0, 1};
@@ -180,7 +190,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 	public void receiveGUINetworkData(int id, int v)
 	{
 		super.receiveGUINetworkData(id, v);
-		final BrewKettleDataID dataId = BrewKettleDataID.VALUES.get(id);
+		final BrewKettleDataID dataId = BrewKettleDataID.getByOrdinal(id);
 		switch (dataId)
 		{
 			case TIME:

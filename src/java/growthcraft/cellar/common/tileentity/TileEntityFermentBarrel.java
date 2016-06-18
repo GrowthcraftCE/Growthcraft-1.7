@@ -36,11 +36,15 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		TIME_MAX,
 		UNKNOWN;
 
-		public static final FermentBarrelDataID[] VALID = new FermentBarrelDataID[] { TIME, TIME_MAX };
-
-		public static FermentBarrelDataID fromInt(int i)
+		public static final FermentBarrelDataID[] VALID = new FermentBarrelDataID[]
 		{
-			if (i >= 0 && i <= VALID.length) return VALID[i];
+			TIME,
+			TIME_MAX
+		};
+
+		public static FermentBarrelDataID getByaOrdinal(int ord)
+		{
+			if (ord >= 0 && ord <= VALID.length) return VALID[ord];
 			return UNKNOWN;
 		}
 	}
@@ -316,7 +320,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	public void receiveGUINetworkData(int id, int v)
 	{
 		super.receiveGUINetworkData(id, v);
-		switch (FermentBarrelDataID.fromInt(id))
+		switch (FermentBarrelDataID.getByaOrdinal(id))
 		{
 			case TIME:
 				this.time = v;
