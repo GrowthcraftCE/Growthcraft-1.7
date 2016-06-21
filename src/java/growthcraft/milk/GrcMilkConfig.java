@@ -116,6 +116,9 @@ public class GrcMilkConfig extends ConfigBase
 	@ConfigOption(catergory="Thistle/World Gen", name="Generate Amount", desc="What is the maximum number of thistle spawned in a chunk?")
 	public int thistleGenAmount = 10;
 
+	@ConfigOption(catergory="Thistle/World Gen", name="WorldGen Chance", desc="1/N chance of spawning thistle into a chunk, where N is the value set here. (Set to 0 to spawn maximum number)")
+	public int thistleGenChance = 10;
+
 	@ConfigOption(catergory="Thistle", name="Spread Chance", desc="How quickly does thistle spread? [Higher -> Slower]")
 	public int thistleSpreadChance = 20;
 
