@@ -208,7 +208,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		getActiveDevice().update();
 		if (jarDeviceState != lastState)
 		{
-			GrowthCraftCellar.getLogger().info("Jar changed device state %d, {%s}", jarDeviceState, getActiveDevice());
+			GrowthCraftCellar.getLogger().debug("Jar changed device state %d, {%s}", jarDeviceState, getActiveDevice());
 			markForBlockUpdate();
 		}
 	}

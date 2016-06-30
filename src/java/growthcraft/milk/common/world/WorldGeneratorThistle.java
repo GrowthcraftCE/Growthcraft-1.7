@@ -86,7 +86,6 @@ public class WorldGeneratorThistle implements IWorldGenerator
 				final String biomeId = "" + biome.biomeID;
 				if (!BiomeUtils.testBiomeIdTags(biomeId, GrowthCraftMilk.getConfig().thistleBiomesIdList)) return;
 			}
-			GrowthCraftMilk.getLogger().info("Doing le world gen");
 			genRandThistle(thistle, world, random, chunkX, chunkZ, GrowthCraftMilk.getConfig().thistleGenAmount, 64, 255);
 		}
 	}
