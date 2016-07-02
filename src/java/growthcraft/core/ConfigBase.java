@@ -140,7 +140,7 @@ public abstract class ConfigBase implements ILoggable
 					}
 
 					// Only use this when you need to debug config options
-					logger.info("ConfigBase<%s>{catergory:'%s', name:'%s', key:'%s', value:%s}",
+					logger.debug("ConfigBase<%s>{catergory:'%s', name:'%s', key:'%s', value:%s}",
 						this.toString(),
 						opt.catergory(),
 						opt.name(),
