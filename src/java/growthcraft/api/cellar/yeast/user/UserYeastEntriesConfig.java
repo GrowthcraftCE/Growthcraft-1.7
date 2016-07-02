@@ -126,7 +126,7 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 					{
 						final BiomeDictionary.Type biomeType = BiomeUtils.fetchBiomeType(biome);
 						CellarRegistry.instance().yeast().addYeastToBiomeType(itemstack, entry.weight, biomeType);
-						logger.info("Added user yeast {%s} to biome type '%s'", itemstack, biome);
+						logger.debug("Added user yeast {%s} to biome type '%s'", itemstack, biome);
 					}
 					catch (BiomeUtils.BiomeTypeNotFound ex)
 					{
@@ -140,7 +140,7 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 				for (String biomeName : entry.biome_names)
 				{
 					CellarRegistry.instance().yeast().addYeastToBiomeByName(itemstack, entry.weight, biomeName);
-					logger.info("Added user yeast {%s} to biome '%s'", itemstack, biomeName);
+					logger.debug("Added user yeast {%s} to biome '%s'", itemstack, biomeName);
 				}
 			}
 		}
@@ -153,7 +153,7 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 		{
 			if (entries.data != null)
 			{
-				logger.info("Adding %d yeast entries.", entries.data.size());
+				logger.debug("Adding %d yeast entries.", entries.data.size());
 				for (UserYeastEntry entry : entries.data) addYeastEntry(entry);
 			}
 			else

@@ -91,7 +91,7 @@ public class UserFishTrapConfig extends AbstractUserJSONConfig
 		{
 			if (entries.data != null)
 			{
-				logger.info("Adding %d user fish trap entries.", entries.data.size());
+				logger.debug("Adding %d user fish trap entries.", entries.data.size());
 				for (UserFishTrapEntry entry : entries.data) addFishTrapEntry(entry);
 			}
 			else

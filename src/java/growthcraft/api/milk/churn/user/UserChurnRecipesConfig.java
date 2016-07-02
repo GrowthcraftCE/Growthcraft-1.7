@@ -87,7 +87,7 @@ public class UserChurnRecipesConfig extends AbstractUserJSONConfig
 
 		for (IChurnRecipe churnRecipe : recipe.toChurnRecipes())
 		{
-			logger.info("Adding user churn recipe {%s}", churnRecipe);
+			logger.debug("Adding user churn recipe {%s}", churnRecipe);
 			MilkRegistry.instance().churn().addRecipe(churnRecipe);
 		}
 	}
@@ -99,7 +99,7 @@ public class UserChurnRecipesConfig extends AbstractUserJSONConfig
 		{
 			if (recipes.data != null)
 			{
-				logger.info("Adding %d user brewing recipes.", recipes.data.size());
+				logger.debug("Adding %d user brewing recipes.", recipes.data.size());
 				for (UserChurnRecipe recipe : recipes.data) addChurnRecipe(recipe);
 			}
 			else

@@ -52,7 +52,7 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 		if (recipe != null)
 		{
 			defaultRecipes.data.add(recipe);
-			logger.info("Adding default user fermenting recipe {%s}", recipe);
+			logger.debug("Adding default user fermenting recipe {%s}", recipe);
 		}
 		else
 		{
@@ -117,7 +117,7 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 			return;
 		}
 
-		logger.info("Adding Fermenting Recipe {%s}", recipe);
+		logger.debug("Adding Fermenting Recipe {%s}", recipe);
 		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
 		{
 			for (IMultiFluidStacks inputFluid : recipe.input_fluid.getMultiFluidStacks())
@@ -139,7 +139,7 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 		{
 			if (recipes.data != null)
 			{
-				logger.info("Registering %d fermenting recipes.", recipes.data.size());
+				logger.debug("Registering %d fermenting recipes.", recipes.data.size());
 				for (UserFermentingRecipe recipe : recipes.data) addRecipe(recipe);
 			}
 			else

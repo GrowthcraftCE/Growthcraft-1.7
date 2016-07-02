@@ -100,7 +100,7 @@ public class UserFlowersConfig extends AbstractUserJSONConfig
 		{
 			if (entries.data != null)
 			{
-				logger.info("Adding %d user flower entries.", entries.data.size());
+				logger.debug("Adding %d user flower entries.", entries.data.size());
 				for (UserFlowerEntry entry : entries.data) addFlowerEntry(entry);
 			}
 			else

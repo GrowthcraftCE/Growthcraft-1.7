@@ -57,12 +57,12 @@ public class GrcCoreFluids extends GrcModuleBase
 		OreDictionary.registerOre("bucketSaltwater", saltWater.bucket.getItem());
 		if (GrowthCraftCore.getConfig().bucketOfOceanSaltWater)
 		{
-			logger.info("Ocean Salt Water Buckets are ENABLED");
+			logger.debug("Ocean Salt Water Buckets are ENABLED");
 			EventHandlerBucketFill.instance().addEntry(new SaltBucketEntry());
 		}
 		else
 		{
-			logger.info("Ocean Salt Water Buckets are DISABLED");
+			logger.debug("Ocean Salt Water Buckets are DISABLED");
 		}
 	}
 }

@@ -112,7 +112,7 @@ public class BoozeRegistry implements IBoozeRegistry
 
 		if (!isFluidBooze(fluid))
 		{
-			logger.info("Registering booze %s", fluid.getName());
+			logger.debug("Registering booze %s", fluid.getName());
 			registerBooze(fluid, new BoozeEntry(fluid));
 		}
 		else

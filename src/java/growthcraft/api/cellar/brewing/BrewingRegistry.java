@@ -29,7 +29,7 @@ public class BrewingRegistry implements IBrewingRegistry
 	public void addRecipe(@Nonnull BrewingRecipe recipe)
 	{
 		recipes.add(recipe);
-		logger.info("Added Brewing Recipe recipe={%s}", recipe);
+		logger.debug("Added Brewing Recipe recipe={%s}", recipe);
 	}
 
 	@Override

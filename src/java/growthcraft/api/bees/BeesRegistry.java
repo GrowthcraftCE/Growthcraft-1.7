@@ -53,7 +53,7 @@ public class BeesRegistry implements IBeesRegistry
 	 */
 	public void addBee(@Nonnull Item bee, int meta)
 	{
-		logger.info("Adding Bee {%s}:%d", bee, meta);
+		logger.debug("Adding Bee {%s}:%d", bee, meta);
 		beesList.add(new ItemKey(bee, meta));
 	}
 
@@ -65,7 +65,7 @@ public class BeesRegistry implements IBeesRegistry
 	public void addBee(@Nonnull ItemStack stack)
 	{
 		final ItemKey key = stackToKey(stack);
-		logger.info("Adding Bee {%s}", key);
+		logger.debug("Adding Bee {%s}", key);
 		beesList.add(key);
 	}
 
@@ -81,7 +81,7 @@ public class BeesRegistry implements IBeesRegistry
 
 	protected void addHoneyCombMapping(@Nonnull ItemStack empty, @Nonnull ItemStack full)
 	{
-		logger.info("Adding Honey Comb mapping {%s} - {%s}", empty, full);
+		logger.debug("Adding Honey Comb mapping {%s} - {%s}", empty, full);
 		emptyToFullHoneyComb.put(stackToKey(empty), full);
 		fullToEmptyHoneyComb.put(stackToKey(full), empty);
 	}
@@ -129,7 +129,7 @@ public class BeesRegistry implements IBeesRegistry
 
 	public void addFlower(@Nonnull BlockKey key, @Nonnull IFlowerBlockEntry entry)
 	{
-		logger.info("Adding Flower {%s}:{%s}", key, entry);
+		logger.debug("Adding Flower {%s}:{%s}", key, entry);
 		flowerEntries.put(key, entry);
 	}
 

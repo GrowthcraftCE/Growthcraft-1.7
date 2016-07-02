@@ -48,7 +48,7 @@ public class MFRModuleBase extends ModIntegrationBase
 	@Optional.Method(modid=MOD_ID)
 	protected void sendMessage(String target, Object value)
 	{
-		logger.info("Sending Message to '%s': '%s' %s", modID, target, value);
+		logger.debug("Sending Message to '%s': '%s' %s", modID, target, value);
 		FactoryRegistry.sendMessage(target, value);
 	}
 

@@ -49,7 +49,7 @@ public class CulturingRegistry implements ICulturingRegistry
 	public void addRecipe(@Nonnull ICultureRecipe recipe)
 	{
 		recipes.add(recipe);
-		logger.info("Adding new Culturing Recipe, {%s}.", recipe);
+		logger.debug("Adding new Culturing Recipe, {%s}.", recipe);
 	}
 
 	@Override

@@ -72,7 +72,7 @@ public abstract class AbstractUserJSONConfig implements ILoggable, IModule
 	{
 		try
 		{
-			logger.info("Creating default json-config %s", file);
+			logger.debug("Creating default json-config %s", file);
 			if (file.getParentFile() != null)
 				file.getParentFile().mkdirs();
 

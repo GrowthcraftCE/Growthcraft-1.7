@@ -92,7 +92,7 @@ public class UserCultureRecipesConfig extends AbstractUserJSONConfig
 
 		final FluidStack inputFluidStack = recipe.input_fluid.asFluidStack();
 
-		logger.info("Adding user culturing recipe {%s}", recipe);
+		logger.debug("Adding user culturing recipe {%s}", recipe);
 		CellarRegistry.instance().culturing().addRecipe(inputFluidStack, recipe.output_item.asStack(), recipe.required_heat, recipe.time);
 	}
 
@@ -103,7 +103,7 @@ public class UserCultureRecipesConfig extends AbstractUserJSONConfig
 		{
 			if (recipes.data != null)
 			{
-				logger.info("Adding %d user culturing recipes.", recipes.data.size());
+				logger.debug("Adding %d user culturing recipes.", recipes.data.size());
 				for (UserCultureRecipe recipe : recipes.data) addRecipe(recipe);
 			}
 			else

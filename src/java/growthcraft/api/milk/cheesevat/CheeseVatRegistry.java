@@ -54,7 +54,7 @@ public class CheeseVatRegistry implements ICheeseVatRegistry
 	public void addRecipe(ICheeseVatRecipe recipe)
 	{
 		recipes.add(recipe);
-		logger.info("Added Cheese Vat recipe {%s}", recipe);
+		logger.debug("Added Cheese Vat recipe {%s}", recipe);
 	}
 
 	@Override

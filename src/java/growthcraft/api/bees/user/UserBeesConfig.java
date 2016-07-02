@@ -88,7 +88,7 @@ public class UserBeesConfig extends AbstractUserJSONConfig
 		{
 			if (entries.data != null)
 			{
-				logger.info("Adding %d user bee entries.", entries.data.size());
+				logger.debug("Adding %d user bee entries.", entries.data.size());
 				for (UserBeeEntry entry : entries.data) addBeeEntry(entry);
 			}
 			else

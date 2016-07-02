@@ -56,14 +56,14 @@ public class FluidDictionary implements IFluidDictionary
 	{
 		if (!fluidToTagsMap.containsKey(fluid))
 		{
-			logger.info("Initializing new HashSet for fluid {%s}", fluid);
+			logger.debug("Initializing new HashSet for fluid {%s}", fluid);
 			fluidToTagsMap.put(fluid, new HashSet<FluidTag>());
 		}
 
 		final Set<FluidTag> tagSet = fluidToTagsMap.get(fluid);
 		for (FluidTag tag : tags)
 		{
-			logger.info("Adding tag '%s' to fluid {%s}", tag, fluid);
+			logger.debug("Adding tag '%s' to fluid {%s}", tag, fluid);
 			tagSet.add(tag);
 			if (!tagToFluidsMap.containsKey(tag))
 			{
