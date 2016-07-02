@@ -35,6 +35,7 @@ import growthcraft.milk.common.block.BlockThistle;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
+import growthcraft.milk.GrowthCraftMilk;
 
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -57,7 +58,10 @@ public class GrcMilkBlocks extends GrcModuleBase
 		this.cheeseVat = new BlockDefinition(new BlockCheeseVat());
 		this.hangingCurds = new BlockDefinition(new BlockHangingCurds());
 		this.pancheon = new BlockDefinition(new BlockPancheon());
-		this.thistle = new BlockDefinition(new BlockThistle());
+		if (GrowthCraftMilk.getConfig().thistleEnabled)
+		{
+			this.thistle = new BlockDefinition(new BlockThistle());
+		}
 	}
 
 	private void registerOres()
@@ -67,8 +71,11 @@ public class GrcMilkBlocks extends GrcModuleBase
 			OreDictionary.registerOre("blockCheese", type.asBlockItemStack());
 		}
 
-		OreDictionary.registerOre("flowerThistle", thistle.getItem());
-		OreDictionary.registerOre("rennetSource", thistle.getItem());
+		if (thistle != null)
+		{
+			OreDictionary.registerOre("flowerThistle", thistle.getItem());
+			OreDictionary.registerOre("rennetSource", thistle.getItem());
+		}
 	}
 
 	@Override
@@ -80,8 +87,10 @@ public class GrcMilkBlocks extends GrcModuleBase
 		cheeseVat.register("grcmilk.CheeseVat");
 		hangingCurds.register("grcmilk.HangingCurds", ItemBlockHangingCurds.class);
 		pancheon.register("grcmilk.Pancheon");
-		thistle.register("grcmilk.Thistle");
-
+		if (thistle != null)
+		{
+			thistle.register("grcmilk.Thistle");
+		}
 		registerOres();
 	}
 }

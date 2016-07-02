@@ -103,7 +103,13 @@ public class GrcMilkConfig extends ConfigBase
 	public int ricottaBowlCount = 4;
 
 
-	@ConfigOption(catergory="Thistle/World Gen", name="Enable Biome Dictionary compatability?")
+	@ConfigOption(catergory="Thistle/World Gen", name="Enable Thistle?", desc="Is thistle (the item, block, recipes etc) available?")
+	public boolean thistleEnabled = true;
+
+	@ConfigOption(catergory="Thistle/World Gen", name="Enable Thistle World Gen?", desc="Can thistle spawn in the world?")
+	public boolean thistleWorldGenEnabled = true;
+
+	@ConfigOption(catergory="Thistle/World Gen", name="Enable Biome Dictionary compatability? (Set to false to use Biome IDs instead)")
 	public boolean thistleUseBiomeDict = true;
 
 	// Extreme Hills, Extreme Hills Edge, Extreme Hills+
@@ -131,4 +137,12 @@ public class GrcMilkConfig extends ConfigBase
 
 	@ConfigOption(catergory="Integration", name="Enable Thaumcraft Integration", desc="Should we integrate with Thaumcraft (if available)?")
 	public boolean enableThaumcraftIntegration = true;
+
+	/**
+	 * @return true, thistle is enabled, and allows world gen
+	 */
+	public boolean canThistleGenerate()
+	{
+		return thistleEnabled && thistleWorldGenEnabled;
+	}
 }

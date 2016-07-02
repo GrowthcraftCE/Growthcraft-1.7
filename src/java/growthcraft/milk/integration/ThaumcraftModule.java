@@ -55,7 +55,10 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftMilk.blocks.cheeseVat.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.METAL, 7).add(Aspect.TOOL, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftMilk.blocks.hangingCurds.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.SLIME, 2));
 		ThaumcraftApi.registerObjectTag(GrowthCraftMilk.blocks.pancheon.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.EARTH, 2).add(Aspect.TOOL, 1).add(Aspect.WATER, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftMilk.blocks.thistle.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.PLANT, 1));
+		if (GrowthCraftMilk.blocks.thistle != null)
+		{
+			ThaumcraftApi.registerObjectTag(GrowthCraftMilk.blocks.thistle.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.PLANT, 1));
+		}
 
 		/**
 		 * Items
