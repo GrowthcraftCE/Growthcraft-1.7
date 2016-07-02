@@ -76,9 +76,13 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 		super.updateTick(world, x, y, z, random);
 		if (!world.isRemote)
 		{
-			if (random.nextInt(GrowthCraftMilk.getConfig().thistleSpreadChance) == 0)
+			final int spreadChance = GrowthCraftMilk.getConfig().thistleSpreadChance;
+			if (spreadChance > 0)
 			{
-				runSpread(world, x, y, z, random);
+				if (random.nextInt(spreadChance) == 0)
+				{
+					runSpread(world, x, y, z, random);
+				}
 			}
 		}
 	}
