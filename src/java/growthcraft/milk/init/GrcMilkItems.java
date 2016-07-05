@@ -34,6 +34,7 @@ import growthcraft.milk.common.item.ItemButter;
 import growthcraft.milk.common.item.ItemCheese;
 import growthcraft.milk.common.item.ItemCheeseCloth;
 import growthcraft.milk.common.item.ItemIceCream;
+import growthcraft.milk.common.item.ItemSeedThistle;
 import growthcraft.milk.common.item.ItemStarterCulture;
 import growthcraft.milk.common.item.ItemStomach;
 import growthcraft.milk.common.item.ItemYogurt;
@@ -51,6 +52,7 @@ public class GrcMilkItems extends GrcModuleBase
 	public ItemDefinition cheese;
 	public ItemDefinition cheeseCloth;
 	public ItemDefinition iceCream;
+	public ItemDefinition seedThistle;
 	public ItemDefinition starterCulture;
 	public ItemDefinition stomach;
 	public ItemDefinition yogurt;
@@ -63,6 +65,7 @@ public class GrcMilkItems extends GrcModuleBase
 		this.cheeseCloth = new ItemDefinition(new ItemCheeseCloth());
 		this.iceCream = new ItemDefinition(new ItemIceCream());
 		this.yogurt = new ItemDefinition(new ItemYogurt());
+		this.seedThistle = new ItemDefinition(new ItemSeedThistle());
 		this.stomach = new ItemDefinition(new ItemStomach());
 		this.starterCulture = new ItemDefinition(new ItemStarterCulture());
 	}
@@ -77,6 +80,7 @@ public class GrcMilkItems extends GrcModuleBase
 		yogurt.register("grcmilk.Yogurt");
 		stomach.register("grcmilk.Stomach");
 		starterCulture.register("grcmilk.StarterCulture");
+		seedThistle.register("grcmilk.SeedThistle");
 	}
 
 	@Override
