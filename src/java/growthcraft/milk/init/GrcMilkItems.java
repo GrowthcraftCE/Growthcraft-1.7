@@ -229,6 +229,7 @@ public class GrcMilkItems extends GrcModuleBase
 		OreDictionary.registerOre("foodOffal", stomach.asStack());
 		OreDictionary.registerOre("materialStarterCulture", starterCulture.asStack());
 		OreDictionary.registerOre("materialCheeseCloth", cheeseCloth.asStack());
+		OreDictionary.registerOre("listAllseed", seedThistle.asStack());
 
 		OreDictionary.registerOre("foodMelon", Items.melon);
 		OreDictionary.registerOre("foodFruit", Items.melon);
