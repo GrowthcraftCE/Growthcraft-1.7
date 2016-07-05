@@ -40,6 +40,7 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -156,6 +157,20 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 	public boolean func_149852_a(World world, Random random, int x, int y, int z)
 	{
 		return true;
+	}
+
+	@Override
+	public Item getItemDropped(int meta, Random random, int fortune)
+	{
+		if (meta < ThistleStage.FLOWER)
+		{
+			if (GrowthCraftMilk.items.seedThistle != null)
+			{
+				return GrowthCraftMilk.items.seedThistle.getItem();
+			}
+			return null;
+		}
+		return super.getItemDropped(meta, random, fortune);
 	}
 
 	/* Apply bonemeal effect */
