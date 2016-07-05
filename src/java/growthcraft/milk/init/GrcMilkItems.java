@@ -65,7 +65,10 @@ public class GrcMilkItems extends GrcModuleBase
 		this.cheeseCloth = new ItemDefinition(new ItemCheeseCloth());
 		this.iceCream = new ItemDefinition(new ItemIceCream());
 		this.yogurt = new ItemDefinition(new ItemYogurt());
-		this.seedThistle = new ItemDefinition(new ItemSeedThistle());
+		if (GrowthCraftMilk.getConfig().thistleSeedEnabled)
+		{
+			this.seedThistle = new ItemDefinition(new ItemSeedThistle());
+		}
 		this.stomach = new ItemDefinition(new ItemStomach());
 		this.starterCulture = new ItemDefinition(new ItemStarterCulture());
 	}
@@ -200,7 +203,7 @@ public class GrcMilkItems extends GrcModuleBase
 			's', Items.string
 		));
 
-		if (seedThistle != null)
+		if (seedThistle != null && GrowthCraftMilk.blocks.thistle != null)
 		{
 			GameRegistry.addShapelessRecipe(seedThistle.asStack(2), GrowthCraftMilk.blocks.thistle.getBlock());
 		}

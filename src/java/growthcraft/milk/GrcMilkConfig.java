@@ -103,10 +103,23 @@ public class GrcMilkConfig extends ConfigBase
 	public int ricottaBowlCount = 4;
 
 
-	@ConfigOption(catergory="Thistle/World Gen", name="Enable Thistle?", desc="Is thistle (the item, block, recipes etc) available?")
+	@ConfigOption(catergory="Thistle", name="Enable Thistle?", desc="Is thistle (the item, block, recipes etc) available? (If this is false, you may ignore everything in this section)")
 	public boolean thistleEnabled = true;
 
-	@ConfigOption(catergory="Thistle/World Gen", name="Enable Thistle World Gen?", desc="Can thistle spawn in the world?")
+	@ConfigOption(catergory="Thistle", name="Spread Chance", desc="How quickly does thistle spread? [Higher -> Slower] (Setting to 0 will disable)")
+	public int thistleSpreadChance = 20;
+
+	@ConfigOption(catergory="Thistle", name="Growth Chance", desc="Chance that thistle will advance a stage upon ticking? [Higher -> Less Likely] (Setting to 0 will disable, AppleCore will handle growth if available)")
+	public int thistleGrowthChance = 16;
+
+	@ConfigOption(catergory="Thistle", name="Enable Thistle Seeds?", desc="Should thistle seeds be available?")
+	public boolean thistleSeedEnabled = true;
+
+	@ConfigOption(catergory="Thistle", name="Grass Seed Weight", desc="How likely is it to find a Thistle Seed by breaking grass? [Higher -> More Likely] (Setting to 0 will disable seeds in grass)")
+	public int thistleSeedWeight = 8;
+
+
+	@ConfigOption(catergory="Thistle/World Gen", name="Enable Thistle World Gen?", desc="Can thistle spawn in the world? (This will be disabled, if Thistle was disabled in the Thistle section)")
 	public boolean thistleWorldGenEnabled = true;
 
 	@ConfigOption(catergory="Thistle/World Gen", name="Enable Biome Dictionary compatability? (Set to false to use Biome IDs instead)")
@@ -124,15 +137,6 @@ public class GrcMilkConfig extends ConfigBase
 
 	@ConfigOption(catergory="Thistle/World Gen", name="WorldGen Chance", desc="1/N chance of spawning thistle into a chunk, where N is the value set here. (Set to 0 to spawn maximum number)")
 	public int thistleGenChance = 10;
-
-	@ConfigOption(catergory="Thistle", name="Spread Chance", desc="How quickly does thistle spread? [Higher -> Slower] (Setting to 0 will disable)")
-	public int thistleSpreadChance = 20;
-
-	@ConfigOption(catergory="Thistle", name="Growth Chance", desc="Chance that thistle will advance a stage upon ticking? [Higher -> Less Likely] (Setting to 0 will disable, AppleCore will handle growth if available)")
-	public int thistleGrowthChance = 16;
-
-	@ConfigOption(catergory="Thistle", name="Grass Seed Weight", desc="How likely is it to find a Thistle Seed by breaking grass? [Higher -> More Likely]")
-	public int thistleSeedWeight = 8;
 
 
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
