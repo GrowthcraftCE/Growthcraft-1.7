@@ -174,6 +174,10 @@ tile.fluid.grc.honeyMead4.name=tile.fluid.grc.honeyMead4.name
 tile.fluid.grc.honeyMead5.name=tile.fluid.grc.honeyMead5.name
 tile.fluid.grc.honeyMead6.name=tile.fluid.grc.honeyMead6.name
 
+# Fluid Tags
+grc.fluids.tag.mead=grc.fluids.tag.mead
+grc.fluids.tag.honey=grc.fluids.tag.honey
+
 # Other
 grc.bees.bonus_prefix=grc.bees.bonus_prefix
 grc.bees.bees_prefix=grc.bees.bees_prefix

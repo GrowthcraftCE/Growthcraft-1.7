@@ -108,6 +108,8 @@ grccore.waila.option.DisplayHeated=加热的设备
 
 # Effects
 grc.effect.chance.format=有%d%%概率
+grc.effect.extinguish.desc=grc.effect.extinguish.desc
+grc.effect.ignite.desc=grc.effect.ignite.desc
 grc.effect.list.head=附加以下效果：
 grc.effect.null.desc=无效果
 grc.effect.random_list.head=附加以下任意一个效果：
