@@ -132,6 +132,11 @@ public class GrowthCraftMilk
 	{
 		modules.register();
 
+		if (items.seedThistle != null && config.thistleSeedWeight > 0)
+		{
+			MinecraftForge.addGrassSeed(items.seedThistle.asStack(), config.thistleSeedWeight);
+		}
+
 		GameRegistry.registerTileEntity(TileEntityButterChurn.class, "grcmilk.tileentity.ButterChurn");
 		GameRegistry.registerTileEntity(TileEntityCheeseBlock.class, "grcmilk.tileentity.CheeseBlock");
 		GameRegistry.registerTileEntity(TileEntityCheesePress.class, "grcmilk.tileentity.CheesePress");

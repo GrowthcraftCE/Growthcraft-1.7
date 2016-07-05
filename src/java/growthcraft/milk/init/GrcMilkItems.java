@@ -80,7 +80,10 @@ public class GrcMilkItems extends GrcModuleBase
 		yogurt.register("grcmilk.Yogurt");
 		stomach.register("grcmilk.Stomach");
 		starterCulture.register("grcmilk.StarterCulture");
-		seedThistle.register("grcmilk.SeedThistle");
+		if (seedThistle != null)
+		{
+			seedThistle.register("grcmilk.SeedThistle");
+		}
 	}
 
 	@Override
@@ -196,6 +199,11 @@ public class GrcMilkItems extends GrcModuleBase
 			"sss",
 			's', Items.string
 		));
+
+		if (seedThistle != null)
+		{
+			GameRegistry.addShapelessRecipe(seedThistle.asStack(2), GrowthCraftMilk.blocks.thistle.getBlock());
+		}
 
 		for (EnumIceCream e : EnumIceCream.VALUES)
 		{
