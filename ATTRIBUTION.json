@@ -1290,7 +1290,7 @@
       "authors": []
     },
     "src/resources/assets/grccore/textures/items/crowbar/black.png": {
-      "authors": []
+      "authors": ["icedragon"]
     },
     "src/resources/assets/grccore/textures/items/crowbar/blue.png": {
       "authors": ["icedragon"]
