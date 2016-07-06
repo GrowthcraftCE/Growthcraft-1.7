@@ -29,6 +29,7 @@ script:
 - ls -la build/packages
 - bundle exec ./tools/checksum_builds.rb | tee ./checksums.txt
 - bundle exec ./tools/lang_check.rb
+- bundle exec ./tools/attribution_cross_check.rb
 
 # Deploy the artifacts back to GitHub
 deploy:
