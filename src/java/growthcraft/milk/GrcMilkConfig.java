@@ -119,8 +119,8 @@ public class GrcMilkConfig extends ConfigBase
 	public int thistleSeedWeight = 8;
 
 
-	@ConfigOption(catergory="Thistle/World Gen", name="Enable Thistle World Gen?", desc="Can thistle spawn in the world? (This will be disabled, if Thistle was disabled in the Thistle section)")
-	public boolean thistleWorldGenEnabled = true;
+	@ConfigOption(catergory="Thistle/World Gen", name="Enable Thistle World Gen?", desc="Can thistle spawn in the world? (This will be disabled, if Thistle was disabled in the Thistle section) (WARNING: This thing spreads like wild fire, enable at your own risk)")
+	public boolean thistleWorldGenEnabled = false;
 
 	@ConfigOption(catergory="Thistle/World Gen", name="Enable Biome Dictionary compatability? (Set to false to use Biome IDs instead)")
 	public boolean thistleUseBiomeDict = true;
