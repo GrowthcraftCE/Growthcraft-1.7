@@ -52,6 +52,8 @@
       "links": {
         "github": "https://github.com/HanatakeYurii"
       }
+    },
+    "mangoose": {
     }
   },
   "files": {
@@ -1817,7 +1819,7 @@
       "authors": ["pitch_bright", "hanatake_yurii"]
     },
     "src/resources/assets/grcmilk/textures/items/seeds/seed_thistle.png": {
-      "authors": ["alatyami"]
+      "authors": ["mangoose"]
     },
     "src/resources/assets/grcmilk/textures/items/starter_culture/starter_culture.png": {
       "authors": ["pitch_bright"]
