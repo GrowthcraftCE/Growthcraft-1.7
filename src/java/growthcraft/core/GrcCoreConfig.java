@@ -12,10 +12,10 @@ public class GrcCoreConfig extends ConfigBase
 
 	@ConfigOption(catergory="Fluid Container", name="Bottle Capacity", desc="How much booze does a bottle hold?")
 	public int bottleCapacity = 333;
-	
+
 	@ConfigOption(catergory="Fluid Container", name="Water Bottle Capacity", desc="Change vanilla water bottles to GrowthCraft's capacity?")
 	public boolean changeWaterBottleCapacity;
-	
+
 	@ConfigOption(catergory="Fluid Container", name="Water Bottle Container", desc="Should vanilla water bottles return the bottle on use?")
 	public boolean changeWaterBottleContainer;
 
@@ -41,7 +41,7 @@ public class GrcCoreConfig extends ConfigBase
 
 	@ConfigOption(catergory="Integration", name="Enable Woodstuff Integration", desc="Should we integrate with Woodstuff (if available)?")
 	public boolean enableWoodstuffIntegration = true;
-	
-	@ConfigOption(catergory="Integration", name="Enable NEI Integration", desc="Should we integrate with NotEnoughItems (if available)?")
-	public boolean enableNEIIntegration = true;
+
+	//@ConfigOption(catergory="Integration", name="Enable NEI Integration", desc="Should we integrate with NotEnoughItems (if available)?")
+	//public boolean enableNEIIntegration = true;
 }
