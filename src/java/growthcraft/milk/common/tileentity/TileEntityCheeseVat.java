@@ -255,31 +255,31 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		final int slot = InventoryProcessor.instance().findItemSlot(this, starterCultureStack);
 		if (slot < 0)
 		{
-			GrowthCraftMilk.getLogger().info("No Starter Culture found!");
+			GrowthCraftMilk.getLogger().debug("No Starter Culture found!");
 			return false;
 		}
 
 		final FluidStack milkStack = primaryFluidSlot.get();
 		if (!FluidTest.hasTags(milkStack, MilkFluidTags.MILK))
 		{
-			GrowthCraftMilk.getLogger().info("Primary Fluid is NOT milk.");
+			GrowthCraftMilk.getLogger().debug("Primary Fluid is NOT milk.");
 			return false;
 		}
 		if (!primaryFluidSlot.isFull())
 		{
-			GrowthCraftMilk.getLogger().info("Primary Fluid Tank is NOT full.");
+			GrowthCraftMilk.getLogger().debug("Primary Fluid Tank is NOT full.");
 			return false;
 		}
 
 		final FluidStack rennetStack = rennetFluidSlot.get();
 		if (!FluidTest.hasTags(rennetStack, MilkFluidTags.RENNET))
 		{
-			GrowthCraftMilk.getLogger().info("Rennet contains NON rennet fluid.");
+			GrowthCraftMilk.getLogger().debug("Rennet contains NON rennet fluid.");
 			return false;
 		}
 		if (!rennetFluidSlot.isFull())
 		{
-			GrowthCraftMilk.getLogger().info("Rennet Fluid Tank is NOT full.");
+			GrowthCraftMilk.getLogger().debug("Rennet Fluid Tank is NOT full.");
 			return false;
 		}
 
@@ -526,14 +526,14 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	{
 		if (!isHeated())
 		{
-			GrowthCraftMilk.getLogger().info("Vat is NOT heated.");
+			GrowthCraftMilk.getLogger().debug("Vat is NOT heated.");
 			return false;
 		}
-		GrowthCraftMilk.getLogger().info("Activating Using Sword.");
+		GrowthCraftMilk.getLogger().debug("Activating Using Sword.");
 		final FluidStack milkStack = primaryFluidSlot.get();
 		if (FluidTest.hasTags(milkStack, MilkFluidTags.MILK))
 		{
-			GrowthCraftMilk.getLogger().info("Activating Curd Transition.");
+			GrowthCraftMilk.getLogger().debug("Activating Curd Transition.");
 			if (activateCurdTransition(true))
 			{
 				setupProgress(GrowthCraftMilk.getConfig().cheeseVatCurdTime);
@@ -544,7 +544,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		}
 		else if (FluidTest.hasTags(milkStack, MilkFluidTags.WHEY))
 		{
-			GrowthCraftMilk.getLogger().info("Activating Whey Transition.");
+			GrowthCraftMilk.getLogger().debug("Activating Whey Transition.");
 			if (activateWheyTransition(true))
 			{
 				setupProgress(GrowthCraftMilk.getConfig().cheeseVatWheyTime);

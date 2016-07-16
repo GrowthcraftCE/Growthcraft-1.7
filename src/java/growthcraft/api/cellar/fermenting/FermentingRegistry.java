@@ -48,7 +48,7 @@ public class FermentingRegistry implements IFermentingRegistry
 
 	private void onRecipeAdded(@Nonnull IFermentationRecipe recipe)
 	{
-		logger.info("Added Fermentation recipe={%s}", recipe);
+		logger.debug("Added Fermentation recipe={%s}", recipe);
 	}
 
 	@Override

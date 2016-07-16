@@ -1,0 +1,1993 @@
+{
+  "authors": {
+    "@minecraft": {
+      "note": "Any content marked with this, means it was taken from minecraft directly"
+    },
+    "gwafu": {
+      "aliases": [
+        "Gwafu"
+      ],
+      "links": {
+        "github": "https://github.com/Gwafu"
+      }
+    },
+    "alatyami": {
+      "aliases": [
+        "Alatyami"
+      ],
+      "links": {
+        "github": "https://github.com/Alatyami"
+      }
+    },
+    "pitch_bright": {
+      "aliases": [
+        "PitchBright"
+      ],
+      "links": {
+        "github": "https://github.com/Alatyami"
+      }
+    },
+    "sunconure": {
+      "aliases": [
+        "Sunconure11"
+      ],
+      "links": {
+        "github": "https://github.com/Sunconure11"
+      }
+    },
+    "icedragon": {
+      "aliases": [
+        "IceDragon200",
+        "IceWyvern200"
+      ],
+      "links": {
+        "twitter": "@IceDragon200",
+        "github": "https://github.com/IceDragon200"
+      }
+    },
+    "hanatake_yurii": {
+      "aliases": [
+        "HanatakeYurii"
+      ],
+      "links": {
+        "github": "https://github.com/HanatakeYurii"
+      }
+    },
+    "mangoose": {
+    }
+  },
+  "files": {
+    "src/resources/grc_cellar_logo.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/grc_grapes_logo.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/grc_rice_logo.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/grc_bamboo_logo.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/grc_apples_logo.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/grc_fishtrap_logo.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/grc_core_logo.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/grc_bees_logo.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/grc_milk_logo.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/grc_hops_logo.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcapples/textures/blocks/apples_1.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcapples/textures/blocks/apples_2.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcapples/textures/blocks/apples_3.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcapples/textures/blocks/apple_sapling.png": {
+      "authors": ["@minecraft"]
+    },
+    "src/resources/assets/grcapples/textures/items/apple_seed.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/block.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/door_lower.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/door_upper.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/fence.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/fence_top.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/leaves_opaque.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/leaves.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/plant_color.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/plant_nocolor.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/plant_top.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/scaffold.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/blocks/shoot.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/entity/raft.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/items/bamboo.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/items/coal.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/items/door.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/items/raft.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbamboo/textures/items/shoot.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/bamboo_thatching/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/bamboo_thatching/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/bamboo_thatching/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/bamboo_thatching/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/cherry/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/cherry/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/cherry/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/cherry/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/dark/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/dark/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/dark/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/dark/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/ethereal/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/ethereal/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/ethereal/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/ethereal/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/fir/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/fir/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/fir/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/fir/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/gold/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/gold/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/gold/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/gold/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/hell_bark/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/hell_bark/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/hell_bark/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/hell_bark/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/jacaranda/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/jacaranda/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/jacaranda/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/jacaranda/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/magic/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/magic/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/magic/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/magic/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/mahogany/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/mahogany/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/mahogany/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/mahogany/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/mangrove/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/mangrove/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/mangrove/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/mangrove/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/palm/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/palm/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/palm/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/palm/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/pine/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/pine/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/pine/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/pine/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/redwood/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/redwood/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/redwood/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/redwood/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/sacred_oak/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/sacred_oak/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/sacred_oak/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/sacred_oak/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/willow/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/willow/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/willow/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/biomesoplenty/willow/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/dream_wood/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/dream_wood/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/dream_wood/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/dream_wood/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/living_wood/bottom.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/living_wood/side_honey.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/living_wood/side.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/living_wood/top.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/shimmer_wood/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/shimmer_wood/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/shimmer_wood/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/botania/shimmer_wood/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/acacia/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/acacia/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/acacia/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/acacia/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/balsa/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/balsa/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/balsa/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/balsa/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/baobab/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/baobab/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/baobab/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/baobab/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/cherry/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/cherry/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/cherry/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/cherry/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/chestnut/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/chestnut/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/chestnut/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/chestnut/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/citrus/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/citrus/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/citrus/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/citrus/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/cocobolo/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/cocobolo/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/cocobolo/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/cocobolo/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/ebony/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/ebony/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/ebony/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/ebony/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/giganteum/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/giganteum/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/giganteum/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/giganteum/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/greenheart/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/greenheart/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/greenheart/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/greenheart/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/ipe/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/ipe/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/ipe/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/ipe/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/kapok/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/kapok/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/kapok/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/kapok/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/larch/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/larch/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/larch/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/larch/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/lime/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/lime/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/lime/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/lime/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/mahoe/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/mahoe/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/mahoe/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/mahoe/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/mahogany/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/mahogany/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/mahogany/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/mahogany/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/maple/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/maple/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/maple/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/maple/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/padauk/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/padauk/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/padauk/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/padauk/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/palm/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/palm/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/palm/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/palm/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/papaya/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/papaya/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/papaya/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/papaya/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/pine/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/pine/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/pine/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/pine/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/plum/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/plum/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/plum/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/plum/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/poplar/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/poplar/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/poplar/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/poplar/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/sequoia/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/sequoia/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/sequoia/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/sequoia/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/teak/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/teak/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/teak/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/teak/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/walnut/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/walnut/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/walnut/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/walnut/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/wenge/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/wenge/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/wenge/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/wenge/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/willow/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/willow/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/willow/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/willow/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/zebrawood/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/zebrawood/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/zebrawood/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/forestry/zebrawood/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/grcbamboo/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/grcbamboo/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/grcbamboo/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/grcbamboo/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/grcnether/malice/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/grcnether/malice/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/grcnether/malice/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/grcnether/malice/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/acacia/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/acacia/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/acacia/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/acacia/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/birch/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/birch/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/birch/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/birch/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/darkoak/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/darkoak/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/darkoak/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/darkoak/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/jungle/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/jungle/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/jungle/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/jungle/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/oak/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/oak/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/oak/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/oak/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/spruce/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/spruce/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/spruce/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/minecraft/spruce/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/apple/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/apple/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/apple/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/apple/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/blood/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/blood/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/blood/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/blood/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/bush/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/bush/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/bush/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/bush/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/darkwood/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/darkwood/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/darkwood/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/darkwood/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/eucalyptus/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/eucalyptus/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/eucalyptus/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/eucalyptus/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/fusewood/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/fusewood/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/fusewood/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/fusewood/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/ghost/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/ghost/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/ghost/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/ghost/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/maple/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/maple/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/maple/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/maple/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/purpleheart/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/purpleheart/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/purpleheart/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/purpleheart/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/redwood/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/redwood/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/redwood/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/redwood/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/sakura/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/sakura/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/sakura/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/sakura/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/silverbell/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/silverbell/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/silverbell/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/silverbell/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/tiger/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/tiger/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/tiger/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/tiger/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/willow/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/willow/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/willow/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/natura/willow/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/thaumcraft/greatwood/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/thaumcraft/greatwood/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/thaumcraft/greatwood/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/thaumcraft/greatwood/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/thaumcraft/silverwood/bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/thaumcraft/silverwood/side_honey.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/thaumcraft/silverwood/side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beebox/thaumcraft/silverwood/top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beehive_front.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/beehive_sides.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/fluids/honey_flow.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/blocks/fluids/honey_still.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/entity/apiarist.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grcbees/textures/guis/beebox_gui.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbees/textures/items/bee.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbees/textures/items/bees_wax/black.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcbees/textures/items/bees_wax/normal.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcbees/textures/items/bees_wax/red.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcbees/textures/items/honeycomb_0.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbees/textures/items/honeycomb_1.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbees/textures/items/honeyjar.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcbees/textures/items/slumgum.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcbees/textures/items/wax caps full.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcbees/textures/items/wax caps.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcbutcher/mammothivoryblock.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcbutcher/mammothivoryore.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcbutcher/reptilescales.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccactus/textures/blocks/cactus_stage_0.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccactus/textures/blocks/cactus_stage_1.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccactus/textures/blocks/cactus_stage_2.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccactus/textures/items/agaveSyrup.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccactus/textures/items/cactusfruit.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccactus/textures/items/pricklypearjuice.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccactus/textures/items/seeds_cactusfruit.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccellar/textures/blocks/booze_flow.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/booze_still.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/brewkettle_0.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/brewkettle_1.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/brewkettle_2.png": {
+      "authors": ["gwafu", "icedragon"],
+      "note": "The original texture was created by gwafu and later edited by icedragon."
+    },
+    "src/resources/assets/grccellar/textures/blocks/brewkettle_3.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/ferment_barrel/minecraft/oak/bottom.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/ferment_barrel/minecraft/oak/side_alt.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/ferment_barrel/minecraft/oak/side.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/ferment_barrel/minecraft/oak/top.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/ferment_jar_glass.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/fruitpresser_0.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/fruitpresser_1.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/fruitpresser_2.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/fruit_press_metal_bottom.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/fruit_press_metal_side.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/fruit_press_metal_top.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/fruit_press_wood_bottom.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/fruit_press_wood_side.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/fruit_press_wood_top.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/models/culture_jar.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grccellar/textures/blocks/models/fruit_presser.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/entity/brewer.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/guis/brewkettle_gui.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/guis/fermentbarrel_gui.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/guis/fruitpress_gui.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/guis/gui_ferment_jar.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/guis/potion_tipsy.png": {
+      "authors": ["@minecraft", "gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/items/booze_contents.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/items/booze.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/items/bucket_deprecated.png": {
+      "authors": ["@minecraft", "icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/chievicon_0.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/black.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/blue.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/brown.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/cyan.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/default.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/gray.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/green.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/light_blue.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/light_gray.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/lime.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/magenta.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/orange.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/pink.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/purple.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/red.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/white.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/water_bag/yellow.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccellar/textures/items/yeast_bayanus.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccellar/textures/items/yeast_brewers.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccellar/textures/items/yeast_ethereal.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccellar/textures/items/yeast_lager.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccellar/textures/items/yeast_origin.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccore/textures/blocks/blank.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/blocks/liquidblob.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccore/textures/blocks/liquidsmooth.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccore/textures/blocks/rope_0.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccore/textures/blocks/rope_1.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccore/textures/blocks/rope.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccore/textures/blocks/salt_block.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/bottle_salt.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccore/textures/items/bucket_contents.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccore/textures/items/bucket_salt.png": {
+      "authors": []
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/black.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/blue.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/brown.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/cyan.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/gray.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/green.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/light_blue.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/light_gray.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/lime.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/magenta.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/orange.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/pink.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/purple.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/red.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/white.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/crowbar/yellow.png": {
+      "authors": ["icedragon"]
+    },
+    "src/resources/assets/grccore/textures/items/rope.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grccore/textures/items/salt.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcend/textures/items/endersolution.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcfishtrap/textures/blocks/fishtrap.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcfishtrap/textures/guis/fishtrap_gui.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcgrapes/textures/blocks/grape.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcgrapes/textures/blocks/green_grape.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcgrapes/textures/blocks/leaves_half.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcgrapes/textures/blocks/leaves_opaque.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcgrapes/textures/blocks/leaves.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcgrapes/textures/blocks/red_grape.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcgrapes/textures/blocks/trunk.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcgrapes/textures/blocks/vine_0.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcgrapes/textures/blocks/vine_1.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcgrapes/textures/items/grape_seeds.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcgrapes/textures/items/grapes/green.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcgrapes/textures/items/grapes/purple.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcgrapes/textures/items/grapes/red.png": {
+      "authors": []
+    },
+    "src/resources/assets/grchops/textures/blocks/bine.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grchops/textures/blocks/leaves_hops.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grchops/textures/blocks/leaves_opaque.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grchops/textures/blocks/leaves_opaque_x.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grchops/textures/blocks/leaves.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grchops/textures/blocks/leaves_x.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grchops/textures/items/hop_seeds.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grchops/textures/items/hops.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcmarine/salmonroeidea.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcmarine/salmonroeroll.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcmilk/textures/blocks/butter_churn.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/appenzeller_aged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/appenzeller_aged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/appenzeller_aged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/appenzeller_cut/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/appenzeller_cut/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/appenzeller_cut/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/appenzeller_unaged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/appenzeller_unaged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/appenzeller_unaged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/asiago_aged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/asiago_aged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/asiago_aged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/asiago_cut/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/asiago_cut/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/asiago_cut/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/asiago_unaged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/asiago_unaged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/asiago_unaged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_aged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_aged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_aged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_cut/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_cut/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_cut/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_unaged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_unaged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_unaged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_unwaxed/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_unwaxed/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/cheddar_unwaxed/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/emmentaler_aged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/emmentaler_aged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/emmentaler_aged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/emmentaler_cut/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/emmentaler_cut/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/emmentaler_cut/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/emmentaler_unaged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/emmentaler_unaged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/emmentaler_unaged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/gorgonzola_aged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/gorgonzola_aged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/gorgonzola_aged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/gorgonzola_cut/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/gorgonzola_cut/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/gorgonzola_cut/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/gorgonzola_unaged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/gorgonzola_unaged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/gorgonzola_unaged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_aged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_aged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_aged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_cut/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_cut/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_cut/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_unaged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_unaged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_unaged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_unwaxed/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_unwaxed/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/monterey_unwaxed/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/parmesan_aged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/parmesan_aged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/parmesan_aged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/parmesan_cut/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/parmesan_cut/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/parmesan_cut/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/parmesan_unaged/bottom.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/parmesan_unaged/side.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese/parmesan_unaged/top.png": {
+      "authors": ["pitch_bright", "icedragon"],
+      "note": "Made by pitch_bright, modified by icedragon to fit a block"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese_press.png": {
+      "authors": ["@minecraft"],
+      "note": "Vanilla plank texture"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/cheese_vat.png": {
+      "authors": ["@minecraft"],
+      "note": "Appears to be a cauldron base"
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/buttermilk_flow.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/buttermilk_still.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/cream_flow.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/cream_still.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/milk_flow.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/milk_still.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/rennet_flow.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/rennet_still.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/skimmilk_flow.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/skimmilk_still.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/whey_flow.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/fluids/whey_still.png": {
+      "authors": ["@minecraft", "pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/hanging_curds.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/pancheon.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/thistle/stage1.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/thistle/stage2.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/thistle/stage3.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcmilk/textures/blocks/thistle/stage4.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcmilk/textures/items/butter/butter_salted.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/butter/butter_unsalted.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/cheese/appenzeller.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/cheese/asiago.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/cheese/cheddar.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/cheese_cloth/cheese_cloth.png": {
+      "authors": ["hanatake_yurii"]
+    },
+    "src/resources/assets/grcmilk/textures/items/cheese/emmentaler.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/cheese/gorgonzola.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/cheese/monterey.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/cheese/parmesan.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/cheese/ricotta.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/ice_cream/ice_cream_apple.png": {
+      "authors": ["pitch_bright", "sunconure"],
+      "note": "Based on the plain ice cream texture edited by sunconure"
+    },
+    "src/resources/assets/grcmilk/textures/items/ice_cream/ice_cream_chocolate.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/ice_cream/ice_cream_grape.png": {
+      "authors": ["pitch_bright", "sunconure"],
+      "note": "Based on the plain ice cream texture edited by sunconure"
+    },
+    "src/resources/assets/grcmilk/textures/items/ice_cream/ice_cream_honey.png": {
+      "authors": ["pitch_bright", "sunconure", "hanatake_yurii"],
+      "note": "Based on the plain ice cream texture edited by sunconure and then hanatake_yurii"
+    },
+    "src/resources/assets/grcmilk/textures/items/ice_cream/ice_cream_plain.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/ice_cream/ice_cream_watermelon.png": {
+      "authors": ["pitch_bright", "hanatake_yurii"]
+    },
+    "src/resources/assets/grcmilk/textures/items/seeds/seed_thistle.png": {
+      "authors": ["mangoose"]
+    },
+    "src/resources/assets/grcmilk/textures/items/starter_culture/starter_culture.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/stomach/stomach.png": {
+      "authors": ["sunconure"]
+    },
+    "src/resources/assets/grcmilk/textures/items/yogurt/yogurt_apple.png": {
+      "authors": ["pitch_bright", "killerjdog51"]
+    },
+    "src/resources/assets/grcmilk/textures/items/yogurt/yogurt_chocolate.png": {
+      "authors": ["pitch_bright", "killerjdog51"]
+    },
+    "src/resources/assets/grcmilk/textures/items/yogurt/yogurt_grape.png": {
+      "authors": ["pitch_bright", "killerjdog51"]
+    },
+    "src/resources/assets/grcmilk/textures/items/yogurt/yogurt_honey.png": {
+      "authors": ["pitch_bright", "killerjdog51"]
+    },
+    "src/resources/assets/grcmilk/textures/items/yogurt/yogurt_plain.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/items/yogurt/yogurt_watermelon.png": {
+      "authors": ["pitch_bright", "killerjdog51"]
+    },
+    "src/resources/assets/grcmilk/textures/models/butter_churn/butter_churn.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/appenzeller_aged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/appenzeller_cut.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/appenzeller_unaged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/asiago_aged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/asiago_cut.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/asiago_unaged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/cheddar_aged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/cheddar_cut.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/cheddar_unaged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/cheddar_unwaxed.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/emmentaler_aged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/emmentaler_cut.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/emmentaler_unaged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/gorgonzola_aged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/gorgonzola_cut.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/gorgonzola_unaged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/monterey_aged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/monterey_cut.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/monterey_unaged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/monterey_unwaxed.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/parmesan_aged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/parmesan_cut.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese/parmesan_unaged.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese_press/cheese_press.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese_vat/cheese_vat.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese_vat/layers/curdled_milk_cut.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/cheese_vat/layers/curdled_milk.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/hanging_curds/hanging_curds.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcmilk/textures/models/pancheon/pancheon.png": {
+      "authors": ["pitch_bright"]
+    },
+    "src/resources/assets/grcnether/textures/blocks/soulsquash_face.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcnether/textures/blocks/soulsquash_side.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcnether/textures/blocks/soulsquash_stem_connected.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcnether/textures/blocks/soulsquash_stem_disconnected.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcnether/textures/blocks/soulsquash_top.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcrice/textures/blocks/rice_0.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcrice/textures/blocks/rice_1.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcrice/textures/blocks/rice_2.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcrice/textures/blocks/rice_3.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcrice/textures/blocks/rice_4.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcrice/textures/items/rice_ball.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcrice/textures/items/rice.png": {
+      "authors": ["gwafu"]
+    },
+    "src/resources/assets/grcspices/lavender1.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcspices/lavender2.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcspices/lavender3.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcspices/lavender4.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcspices/lavenderoil.png": {
+      "authors": []
+    },
+    "src/resources/assets/grcspices/lavendersprig.png": {
+      "authors": []
+    }
+  }
+}

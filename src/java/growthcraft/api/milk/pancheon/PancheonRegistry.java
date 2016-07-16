@@ -55,7 +55,7 @@ public class PancheonRegistry implements IPancheonRegistry
 		}
 		else
 		{
-			logger.info("Adding new pancheon recipe {%s}", recipe);
+			logger.debug("Adding new pancheon recipe {%s}", recipe);
 		}
 		recipes.put(fluid, recipe);
 	}

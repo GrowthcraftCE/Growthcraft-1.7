@@ -100,7 +100,7 @@ public class UserVinesConfig extends AbstractUserJSONConfig
 		{
 			if (entries.data != null)
 			{
-				logger.info("Adding %d user vine entries.", entries.data.size());
+				logger.debug("Adding %d user vine entries.", entries.data.size());
 				for (UserVineEntry entry : entries.data) addVineEntry(entry);
 			}
 			else

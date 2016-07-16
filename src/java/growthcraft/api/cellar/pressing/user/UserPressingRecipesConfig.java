@@ -118,7 +118,7 @@ public class UserPressingRecipesConfig extends AbstractUserJSONConfig
 			}
 		}
 
-		logger.info("Adding pressing recipe {%s}", recipe);
+		logger.debug("Adding pressing recipe {%s}", recipe);
 		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
 		{
 			CellarRegistry.instance().pressing().addRecipe(item, fluidStack, recipe.time, residue);
@@ -132,7 +132,7 @@ public class UserPressingRecipesConfig extends AbstractUserJSONConfig
 		{
 			if (recipes.data != null)
 			{
-				logger.info("Adding %d user pressing recipes.", recipes.data.size());
+				logger.debug("Adding %d user pressing recipes.", recipes.data.size());
 				for (UserPressingRecipe recipe : recipes.data) addPressingRecipe(recipe);
 			}
 			else

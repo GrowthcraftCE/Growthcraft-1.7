@@ -33,10 +33,16 @@ public class WorldGeneratorThistle implements IWorldGenerator
 			Blocks.vine == block;
 	}
 
-	private void genRandThistle(WorldGenerator generator, World world, Random rand, int chunk_x, int chunk_z, int chanceToSpawn, int minHeight, int maxHeight)
+	private void genRandThistle(WorldGenerator generator, World world, Random rand, int chunk_x, int chunk_z, int maxToSpawn, int minHeight, int maxHeight)
 	{
-		for (int i = 0; i < chanceToSpawn; ++i)
+		final int genChance = GrowthCraftMilk.getConfig().thistleGenChance;
+		for (int i = 0; i < maxToSpawn; ++i)
 		{
+			if (genChance > 0)
+			{
+				if (rand.nextInt(genChance) != 0) continue;
+			}
+
 			final int x = chunk_x * 16 + rand.nextInt(16);
 			final int z = chunk_z * 16 + rand.nextInt(16);
 			int y = maxHeight;
@@ -80,7 +86,6 @@ public class WorldGeneratorThistle implements IWorldGenerator
 				final String biomeId = "" + biome.biomeID;
 				if (!BiomeUtils.testBiomeIdTags(biomeId, GrowthCraftMilk.getConfig().thistleBiomesIdList)) return;
 			}
-			GrowthCraftMilk.getLogger().info("Doing le world gen");
 			genRandThistle(thistle, world, random, chunkX, chunkZ, GrowthCraftMilk.getConfig().thistleGenAmount, 64, 255);
 		}
 	}

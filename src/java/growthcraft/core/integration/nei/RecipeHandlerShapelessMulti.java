@@ -30,7 +30,7 @@ public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler
 	{
 		public ArrayList<PositionedStack> ingredients;
 		public PositionedStack result;
-		
+
 		public CachedShapelessMultiRecipe()
 		{
 			ingredients = new ArrayList<PositionedStack>();
@@ -182,7 +182,7 @@ public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler
 		{
 			if (item.isEmpty())
 				return null;
-			
+
 			items.add(item.getItemStacks());
 		}
 
@@ -201,7 +201,7 @@ public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler
 
 				if (fluidData == null)
 					continue;
-				
+
 				for (FluidContainerData data : fluidData)
 				{
 					final FluidStack fluid = data.fluid;

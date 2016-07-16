@@ -167,7 +167,7 @@ public class MultiStacksUtil
 			}
 			else
 			{
-				logger.info("Expanded OreItemStack '%s' to %s", oreItemStack.getName(), stacks);
+				logger.debug("Expanded OreItemStack '%s' to %s", oreItemStack.getName(), stacks);
 				list.addAll(stacks);
 			}
 		}
@@ -198,7 +198,7 @@ public class MultiStacksUtil
 			}
 			else
 			{
-				logger.info("Expanded TaggedFluidStacks(tags: %s) to [%s]", taggedFluidStack.getTags(), stacks);
+				logger.debug("Expanded TaggedFluidStacks(tags: %s) to [%s]", taggedFluidStack.getTags(), stacks);
 				list.addAll(stacks);
 			}
 		}

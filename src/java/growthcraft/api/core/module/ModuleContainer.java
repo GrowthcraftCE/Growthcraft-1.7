@@ -66,7 +66,7 @@ public class ModuleContainer implements IModule, IFreezable, ILoggable, Iterable
 	public void freeze()
 	{
 		this.frozen = true;
-		logger.info("ModuleContainer %s has froze, it will error the next time a Module is added.", this);
+		logger.debug("ModuleContainer %s has froze, it will error the next time a Module is added.", this);
 	}
 
 	/**

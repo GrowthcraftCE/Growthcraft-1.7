@@ -34,6 +34,7 @@ import growthcraft.milk.common.item.ItemButter;
 import growthcraft.milk.common.item.ItemCheese;
 import growthcraft.milk.common.item.ItemCheeseCloth;
 import growthcraft.milk.common.item.ItemIceCream;
+import growthcraft.milk.common.item.ItemSeedThistle;
 import growthcraft.milk.common.item.ItemStarterCulture;
 import growthcraft.milk.common.item.ItemStomach;
 import growthcraft.milk.common.item.ItemYogurt;
@@ -51,6 +52,7 @@ public class GrcMilkItems extends GrcModuleBase
 	public ItemDefinition cheese;
 	public ItemDefinition cheeseCloth;
 	public ItemDefinition iceCream;
+	public ItemDefinition seedThistle;
 	public ItemDefinition starterCulture;
 	public ItemDefinition stomach;
 	public ItemDefinition yogurt;
@@ -63,6 +65,10 @@ public class GrcMilkItems extends GrcModuleBase
 		this.cheeseCloth = new ItemDefinition(new ItemCheeseCloth());
 		this.iceCream = new ItemDefinition(new ItemIceCream());
 		this.yogurt = new ItemDefinition(new ItemYogurt());
+		if (GrowthCraftMilk.getConfig().thistleSeedEnabled)
+		{
+			this.seedThistle = new ItemDefinition(new ItemSeedThistle());
+		}
 		this.stomach = new ItemDefinition(new ItemStomach());
 		this.starterCulture = new ItemDefinition(new ItemStarterCulture());
 	}
@@ -77,6 +83,10 @@ public class GrcMilkItems extends GrcModuleBase
 		yogurt.register("grcmilk.Yogurt");
 		stomach.register("grcmilk.Stomach");
 		starterCulture.register("grcmilk.StarterCulture");
+		if (seedThistle != null)
+		{
+			seedThistle.register("grcmilk.SeedThistle");
+		}
 	}
 
 	@Override
@@ -193,6 +203,11 @@ public class GrcMilkItems extends GrcModuleBase
 			's', Items.string
 		));
 
+		if (seedThistle != null && GrowthCraftMilk.blocks.thistle != null)
+		{
+			GameRegistry.addShapelessRecipe(seedThistle.asStack(2), GrowthCraftMilk.blocks.thistle.getBlock());
+		}
+
 		for (EnumIceCream e : EnumIceCream.VALUES)
 		{
 			OreDictionary.registerOre("foodIceCream", e.asStack());
@@ -214,6 +229,11 @@ public class GrcMilkItems extends GrcModuleBase
 		OreDictionary.registerOre("foodOffal", stomach.asStack());
 		OreDictionary.registerOre("materialStarterCulture", starterCulture.asStack());
 		OreDictionary.registerOre("materialCheeseCloth", cheeseCloth.asStack());
+		
+		if (seedThistle != null)
+		{
+			OreDictionary.registerOre("listAllseed", seedThistle.asStack());
+		}
 
 		OreDictionary.registerOre("foodMelon", Items.melon);
 		OreDictionary.registerOre("foodFruit", Items.melon);

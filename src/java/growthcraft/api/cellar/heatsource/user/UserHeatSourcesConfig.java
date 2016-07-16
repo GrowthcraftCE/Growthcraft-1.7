@@ -94,7 +94,7 @@ public class UserHeatSourcesConfig extends AbstractUserJSONConfig
 		{
 			if (entries.data != null)
 			{
-				logger.info("Registering %d heat sources.", entries.data.size());
+				logger.debug("Registering %d heat sources.", entries.data.size());
 				for (UserHeatSourceEntry entry : entries.data) addHeatSource(entry);
 			}
 			else

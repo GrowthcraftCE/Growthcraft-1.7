@@ -46,7 +46,7 @@ public class UserBrewingRecipesConfig extends AbstractUserJSONConfig
 	public void addDefault(UserBrewingRecipe recipe)
 	{
 		defaultRecipes.data.add(recipe);
-		logger.info("Added new default brewing recipe={%s}", recipe);
+		logger.debug("Added new default brewing recipe={%s}", recipe);
 	}
 
 	public void addDefault(Object stack, FluidStack inp, FluidStack out, Residue residue, int time)
@@ -118,7 +118,7 @@ public class UserBrewingRecipesConfig extends AbstractUserJSONConfig
 		final FluidStack inputFluidStack = recipe.input_fluid.asFluidStack();
 		final FluidStack outputFluidStack = recipe.output_fluid.asFluidStack();
 
-		logger.info("Adding user brewing recipe {%s}", recipe);
+		logger.debug("Adding user brewing recipe {%s}", recipe);
 		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
 		{
 			CellarRegistry.instance().brewing().addRecipe(inputFluidStack, item, outputFluidStack, recipe.time, residue);
@@ -132,7 +132,7 @@ public class UserBrewingRecipesConfig extends AbstractUserJSONConfig
 		{
 			if (recipes.data != null)
 			{
-				logger.info("Adding %d user brewing recipes.", recipes.data.size());
+				logger.debug("Adding %d user brewing recipes.", recipes.data.size());
 				for (UserBrewingRecipe recipe : recipes.data) addBrewingRecipe(recipe);
 			}
 			else

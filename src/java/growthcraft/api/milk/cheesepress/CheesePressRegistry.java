@@ -48,7 +48,7 @@ public class CheesePressRegistry implements ICheesePressRegistry
 	@Override
 	public void addRecipe(@Nonnull ICheesePressRecipe recipe)
 	{
-		logger.info("Adding new cheese press recipe {%s}", recipe);
+		logger.debug("Adding new cheese press recipe {%s}", recipe);
 		recipes.add(recipe);
 	}
 

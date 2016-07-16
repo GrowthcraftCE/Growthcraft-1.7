@@ -77,8 +77,8 @@ public class GrcCellarConfig extends ConfigBase
 	public float lavaHeatValue = 0.7f;
 
 
-	@ConfigOption(catergory="Integration", name="Enable NEI Integration", desc="Should we integrate with NotEnoughItems (if available)?")
-	public boolean enableNEIIntegration = true;
+	//@ConfigOption(catergory="Integration", name="Enable NEI Integration", desc="Should we integrate with NotEnoughItems (if available)?")
+	//public boolean enableNEIIntegration = true;
 
 	@ConfigOption(catergory="Integration", name="Enable Waila Integration", desc="Should we integrate with Waila (if available)?")
 	public boolean enableWailaIntegration = true;

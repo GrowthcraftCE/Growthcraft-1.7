@@ -108,6 +108,8 @@ grccore.waila.option.DisplayHeated=grccore.waila.option.DisplayHeated
 
 # Effects
 grc.effect.chance.format=grc.effect.chance.format
+grc.effect.extinguish.desc=grc.effect.extinguish.desc
+grc.effect.ignite.desc=grc.effect.ignite.desc
 grc.effect.list.head=grc.effect.list.head
 grc.effect.null.desc=grc.effect.null.desc
 grc.effect.random_list.head=grc.effect.random_list.head

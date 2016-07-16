@@ -62,7 +62,7 @@ public class ChurnRegistry implements IChurnRegistry
 		}
 		else
 		{
-			logger.info("Adding new churn recipe {%s}", recipe);
+			logger.debug("Adding new churn recipe {%s}", recipe);
 		}
 		fluidIngredients.add(new FluidKey(fluidStack));
 		recipes.put(fluid, recipe);

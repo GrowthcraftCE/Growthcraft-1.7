@@ -94,7 +94,7 @@ public class UserFluidDictionaryConfig extends AbstractUserJSONConfig
 		{
 			if (entries.data != null)
 			{
-				logger.info("Adding %d fluid dictionary entries.", entries.data.size());
+				logger.debug("Adding %d fluid dictionary entries.", entries.data.size());
 				for (UserFluidDictionaryEntry entry : entries.data) addFluidDictionaryEntry(entry);
 			}
 			else

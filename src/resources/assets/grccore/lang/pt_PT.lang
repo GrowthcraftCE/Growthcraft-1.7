@@ -108,6 +108,8 @@ grccore.waila.option.DisplayHeated=Dispositivos Aquecidos
 
 # Effects
 grc.effect.chance.format=%d%% Chance de
+grc.effect.extinguish.desc=grc.effect.extinguish.desc
+grc.effect.ignite.desc=grc.effect.ignite.desc
 grc.effect.list.head=Aplica as seguintes:
 grc.effect.null.desc=Não faz nada
 grc.effect.random_list.head=Aplica uma das seguintes:
