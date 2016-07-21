@@ -1,5 +1,5 @@
 # Creative Tabs
-itemGroup.creative_tab_grcgrapes=itemGroup.creative_tab_grcgrapes
+itemGroup.creative_tab_grcgrapes=Growthcraft: Виноград
 
 # Blocks
 tile.grc.grapeVine0.name=Виноградный ствол
@@ -9,36 +9,39 @@ tile.grc.grapeBlock.name=Обыкновенный виноград
 
 # Items
 item.grc.grapes.purple.name=Обыкновенный виноград
-item.grc.grapes.green.name=item.grc.grapes.green.name
-item.grc.grapes.red.name=item.grc.grapes.red.name
+item.grc.grapes.green.name=Белый виноград
+item.grc.grapes.red.name=Красный виноград
 item.grc.grapeSeeds.name=Семена обыкновенного винограда
 
 # Fluids
+fluid.grc.grapeWine=Виноградное вино
 fluid.grc.grapeWine0=Виноградное вино
 fluid.grc.grapeWine1=Виноградное вино
 fluid.grc.grapeWine2=Виноградное вино
 fluid.grc.grapeWine3=Виноградное вино
-fluid.grc.grapeWine4=fluid.grc.grapeWine4
-fluid.grc.grapeWine5=fluid.grc.grapeWine5
-fluid.grc.grapeWine6=fluid.grc.grapeWine6
-fluid.grc.grapeWine7=fluid.grc.grapeWine7
+fluid.grc.grapeWine4=Амброзия
+fluid.grc.grapeWine5=Портвейн
+fluid.grc.grapeWine6=Виноградное вино
+fluid.grc.grapeWine7=Виноградное вино
 
 # Fluid Buckets
+item.bucket.fluid.grc.grapeWine.name=Ведро виноградного вина
 item.bucket.fluid.grc.grapeWine0.name=Ведро виноградного вина
 item.bucket.fluid.grc.grapeWine1.name=Ведро виноградного вина
 item.bucket.fluid.grc.grapeWine2.name=Ведро виноградного вина
 item.bucket.fluid.grc.grapeWine3.name=Ведро виноградного вина
-item.bucket.fluid.grc.grapeWine4.name=item.bucket.fluid.grc.grapeWine4.name
-item.bucket.fluid.grc.grapeWine5.name=item.bucket.fluid.grc.grapeWine5.name
-item.bucket.fluid.grc.grapeWine6.name=item.bucket.fluid.grc.grapeWine6.name
-item.bucket.fluid.grc.grapeWine7.name=item.bucket.fluid.grc.grapeWine7.name
+item.bucket.fluid.grc.grapeWine4.name=Ведро амброзии
+item.bucket.fluid.grc.grapeWine5.name=Ведро портвейна
+item.bucket.fluid.grc.grapeWine6.name=Ведро виноградного вина
+item.bucket.fluid.grc.grapeWine7.name=Ведро виноградного вина
 
 # Fluid Blocks
+tile.fluid.grc.grapeWine.name=Виноградное вино
 tile.fluid.grc.grapeWine0.name=Виноградное вино
 tile.fluid.grc.grapeWine1.name=Виноградное вино
 tile.fluid.grc.grapeWine2.name=Виноградное вино
 tile.fluid.grc.grapeWine3.name=Виноградное вино
-tile.fluid.grc.grapeWine4.name=tile.fluid.grc.grapeWine4.name
-tile.fluid.grc.grapeWine5.name=tile.fluid.grc.grapeWine5.name
-tile.fluid.grc.grapeWine6.name=tile.fluid.grc.grapeWine6.name
-tile.fluid.grc.grapeWine7.name=tile.fluid.grc.grapeWine7.name
+tile.fluid.grc.grapeWine4.name=Амброзия
+tile.fluid.grc.grapeWine5.name=Портвейн
+tile.fluid.grc.grapeWine6.name=Виноградное вино
+tile.fluid.grc.grapeWine7.name=Виноградное вино
