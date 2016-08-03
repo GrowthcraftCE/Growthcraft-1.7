@@ -82,12 +82,13 @@ public class GrcCoreBlocks extends GrcModuleBase
 		final String modId = "etfuturum";
 		if (Loader.isModLoaded(modId))
 		{
-			for (EnumMinecraftWoodType ty : EnumMinecraftWoodType.VALUES)
+			final String[] woodTypes = { "oak", "spruce", "birch", "jungle", "acacia", "dark_oak" };
+			for (String woodTypeName : woodTypes)
 			{
-				final Block block = GameRegistry.findBlock(modId, "fence_" + ty.name);
+				final Block block = GameRegistry.findBlock(modId, "fence_" + woodTypeName);
 				if (block != null)
 				{
-					final String basename = "grc.etfuturum_fence_rope_" + ty.name;
+					final String basename = "grc.etfuturum_fence_rope_" + woodTypeName;
 					final BlockDefinition fp = new BlockDefinition(new BlockFenceRope(block, basename));
 					fp.register(basename, ItemBlockFenceRope.class);
 					Blocks.fire.setFireInfo(fp.getBlock(), 5, 20);
