@@ -212,6 +212,9 @@ public class GrcMilkFluids extends GrcModuleBase
 		final List<Fluid> milks = new ArrayList<Fluid>();
 		if (milk != null) milks.add(milk.getFluid());
 		if (ForestryFluids.MILK.exists()) milks.add(ForestryFluids.MILK.getFluid());
+		// Automagy Milk
+		final Fluid fluidmilk = FluidRegistry.getFluid("fluidmilk");
+		if (fluidmilk != null) milks.add(fluidmilk);
 		return milks;
 	}
 
