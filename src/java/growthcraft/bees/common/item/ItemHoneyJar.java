@@ -6,10 +6,7 @@ import growthcraft.core.common.item.GrcItemFoodBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class ItemHoneyJar extends GrcItemFoodBase
 {
@@ -22,15 +19,6 @@ public class ItemHoneyJar extends GrcItemFoodBase
 		this.setMaxStackSize(1);
 	}
 
-	public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
-	{
-		super.onEaten(stack, world, player);
-		return new ItemStack(Items.flower_pot);
-	}
-
-	/************
-	 * TEXTURES
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister reg)
