@@ -157,7 +157,14 @@ public class GrcGuiProvider implements IGuiHandler
 			final IInteractionObject iobj = (IInteractionObject)te;
 			final String guiId = iobj.getGuiID();
 			final Class klass = guiMap.get(guiId);
-			return createContainerInstance(klass, player.inventory, te);
+			if (klass != null)
+			{
+				return createContainerInstance(klass, player.inventory, te);
+			}
+			else
+			{
+				logger.error("Missing GUI Class for %s", guiId);
+			}
 		}
 		return null;
 	}

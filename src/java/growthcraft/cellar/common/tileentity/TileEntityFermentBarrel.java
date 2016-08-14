@@ -84,7 +84,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	@Override
 	public String getGuiID()
 	{
-		return "grccellar:ferment_barrrel";
+		return "grccellar:ferment_barrel";
 	}
 
 	@Override
