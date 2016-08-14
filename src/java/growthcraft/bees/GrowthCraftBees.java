@@ -213,12 +213,18 @@ public class GrowthCraftBees
 	private void initVillageHandlers()
 	{
 		final VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
-		VillagerRegistry.instance().registerVillagerId(config.villagerApiaristID);
-		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
+		final int apiaristID = config.villagerApiaristID;
+		if (apiaristID > 0)
+		{
+			VillagerRegistry.instance().registerVillagerId(apiaristID);
+			VillagerRegistry.instance().registerVillageTradeHandler(apiaristID, handler);
+		}
+		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 		if (brewerID > 0)
+		{
 			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, new VillageHandlerBees());
-		VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);
+		}
 		CommonProxy.instance.registerVillagerSkin();
 	}
 
