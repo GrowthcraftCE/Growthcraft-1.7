@@ -77,32 +77,24 @@ public class GrowthCraftCellar
 
 	@Instance(MOD_ID)
 	public static GrowthCraftCellar instance;
-	public static GrcCellarBlocks blocks = new GrcCellarBlocks();
-
+	public static final GrcCellarBlocks blocks = new GrcCellarBlocks();
 	public static CreativeTabs tab;
-
 	public static ItemDefinition yeast;
 	public static ItemDefinition waterBag;
-
 	public static Potion potionTipsy;
-
 	// Achievments
 	public static ItemDefinition chievItemDummy;
 	public static GrcCellarAchievements achievements;
-
 	// Network
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 	public static CellarBoozeBuilderFactory boozeBuilderFactory;
-
 	// Events
 	public static final EventBus CELLAR_BUS = new EventBus();
-
-	public static GrcGuiProvider guiProvider = new GrcGuiProvider(new GrcLogger(MOD_ID + ":GuiProvider"));
-
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcCellarConfig config = new GrcCellarConfig();
-	private GrcCellarUserApis userApis = new GrcCellarUserApis();
-	private ModuleContainer modules = new ModuleContainer();
+	public static final GrcGuiProvider guiProvider = new GrcGuiProvider(new GrcLogger(MOD_ID + ":GuiProvider"));
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcCellarConfig config = new GrcCellarConfig();
+	private final GrcCellarUserApis userApis = new GrcCellarUserApis();
+	private final ModuleContainer modules = new ModuleContainer();
 
 	public static UserHeatSourcesConfig getUserHeatSources()
 	{

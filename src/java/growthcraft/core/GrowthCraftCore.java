@@ -80,11 +80,11 @@ public class GrowthCraftCore
 	// Constants
 	public static ItemStack EMPTY_BOTTLE;
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcCoreConfig config = new GrcCoreConfig();
-	private ModuleContainer modules = new ModuleContainer();
-	private UserFluidDictionaryConfig userFluidDictionary = new UserFluidDictionaryConfig();
-	private UserVinesConfig userVinesConfig = new UserVinesConfig();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcCoreConfig config = new GrcCoreConfig();
+	private final ModuleContainer modules = new ModuleContainer();
+	private final UserFluidDictionaryConfig userFluidDictionary = new UserFluidDictionaryConfig();
+	private final UserVinesConfig userVinesConfig = new UserVinesConfig();
 
 	public static GrcCoreConfig getConfig()
 	{

@@ -40,12 +40,12 @@ public class GrowthCraftFishTrap
 	@Instance(MOD_ID)
 	public static GrowthCraftFishTrap instance;
 	public static BlockDefinition fishTrap;
-	public static GrcGuiProvider guiProvider = new GrcGuiProvider(new GrcLogger(MOD_ID + ":GuiProvider"));
+	public static final GrcGuiProvider guiProvider = new GrcGuiProvider(new GrcLogger(MOD_ID + ":GuiProvider"));
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcFishtrapConfig config = new GrcFishtrapConfig();
-	private ModuleContainer modules = new ModuleContainer();
-	private UserFishTrapConfig userFishTrapConfig = new UserFishTrapConfig();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcFishtrapConfig config = new GrcFishtrapConfig();
+	private final ModuleContainer modules = new ModuleContainer();
+	private final UserFishTrapConfig userFishTrapConfig = new UserFishTrapConfig();
 
 	public static GrcFishtrapConfig getConfig()
 	{

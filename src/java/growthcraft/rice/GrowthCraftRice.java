@@ -58,11 +58,11 @@ public class GrowthCraftRice
 	public static ItemDefinition rice;
 	public static ItemDefinition riceBall;
 
-	public static GrcRiceFluids fluids = new GrcRiceFluids();
+	public static final GrcRiceFluids fluids = new GrcRiceFluids();
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcRiceConfig config = new GrcRiceConfig();
-	private ModuleContainer modules = new ModuleContainer();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcRiceConfig config = new GrcRiceConfig();
+	private final ModuleContainer modules = new ModuleContainer();
 
 	public static GrcRiceConfig getConfig()
 	{

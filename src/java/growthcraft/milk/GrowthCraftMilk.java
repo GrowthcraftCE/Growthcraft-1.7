@@ -82,9 +82,9 @@ public class GrowthCraftMilk
 	// Events
 	public static final EventBus MILK_BUS = new EventBus();
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcMilkConfig config = new GrcMilkConfig();
-	private ModuleContainer modules = new ModuleContainer();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcMilkConfig config = new GrcMilkConfig();
+	private final ModuleContainer modules = new ModuleContainer();
 
 	public static GrcMilkConfig getConfig()
 	{

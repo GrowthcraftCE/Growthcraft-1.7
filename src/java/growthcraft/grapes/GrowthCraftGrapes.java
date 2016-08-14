@@ -52,13 +52,13 @@ public class GrowthCraftGrapes
 	public static GrowthCraftGrapes instance;
 
 	public static CreativeTabs creativeTab;
-	public static GrcGrapesBlocks blocks = new GrcGrapesBlocks();
-	public static GrcGrapesItems items = new GrcGrapesItems();
-	public static GrcGrapesFluids fluids = new GrcGrapesFluids();
+	public static final GrcGrapesBlocks blocks = new GrcGrapesBlocks();
+	public static final GrcGrapesItems items = new GrcGrapesItems();
+	public static final GrcGrapesFluids fluids = new GrcGrapesFluids();
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcGrapesConfig config = new GrcGrapesConfig();
-	private ModuleContainer modules = new ModuleContainer();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcGrapesConfig config = new GrcGrapesConfig();
+	private final ModuleContainer modules = new ModuleContainer();
 
 	public static GrcGrapesConfig getConfig()
 	{

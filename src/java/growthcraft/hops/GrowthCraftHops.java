@@ -55,11 +55,11 @@ public class GrowthCraftHops
 
 	public static ItemDefinition hops;
 	public static ItemDefinition hopSeeds;
-	public static GrcHopsFluids fluids = new GrcHopsFluids();
+	public static final GrcHopsFluids fluids = new GrcHopsFluids();
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcHopsConfig config = new GrcHopsConfig();
-	private ModuleContainer modules = new ModuleContainer();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcHopsConfig config = new GrcHopsConfig();
+	private final ModuleContainer modules = new ModuleContainer();
 
 	public static GrcHopsConfig getConfig()
 	{

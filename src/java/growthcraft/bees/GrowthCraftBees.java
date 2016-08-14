@@ -77,16 +77,16 @@ public class GrowthCraftBees
 	public static List<BlockTypeDefinition<BlockBeeBox>> beeBoxesForestry;
 	public static List<BlockTypeDefinition<BlockBeeBox>> beeBoxesForestryFireproof;
 	public static BlockDefinition beeHive;
-	public static GrcBeesItems items = new GrcBeesItems();
-	public static GrcBeesFluids fluids = new GrcBeesFluids();
-	public static GrcGuiProvider guiProvider = new GrcGuiProvider(new GrcLogger(MOD_ID + ":GuiProvider"));
+	public static final GrcBeesItems items = new GrcBeesItems();
+	public static final GrcBeesFluids fluids = new GrcBeesFluids();
+	public static final GrcGuiProvider guiProvider = new GrcGuiProvider(new GrcLogger(MOD_ID + ":GuiProvider"));
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcBeesConfig config = new GrcBeesConfig();
-	private ModuleContainer modules = new ModuleContainer();
-	private UserBeesConfig userBeesConfig = new UserBeesConfig();
-	private UserFlowersConfig userFlowersConfig = new UserFlowersConfig();
-	private GrcBeesRecipes recipes = new GrcBeesRecipes();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcBeesConfig config = new GrcBeesConfig();
+	private final ModuleContainer modules = new ModuleContainer();
+	private final UserBeesConfig userBeesConfig = new UserBeesConfig();
+	private final UserFlowersConfig userFlowersConfig = new UserFlowersConfig();
+	private final GrcBeesRecipes recipes = new GrcBeesRecipes();
 	//private UserHoneyConfig userHoneyConfig = new UserHoneyConfig();
 
 	public static UserBeesConfig getUserBeesConfig()
