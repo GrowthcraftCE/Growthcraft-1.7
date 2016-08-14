@@ -131,17 +131,21 @@ public class GrowthCraftRice
 		modules.register();
 	}
 
+	private void initVillageHandlers()
+	{
+		final VillageHandlerRice handler = new VillageHandlerRice();
+		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
+		if (brewerID > 0)
+			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, handler);
+		VillagerRegistry.instance().registerVillageCreationHandler(handler);
+	}
+
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
 		PlayerInteractEventPaddy.paddyBlocks.put(Blocks.farmland, paddyField.getBlock());
-
-		CommonProxy.instance.initRenders();
-
-		final VillageHandlerRice handler = new VillageHandlerRice();
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
-		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-
+		CommonProxy.instance.init();
+		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
 

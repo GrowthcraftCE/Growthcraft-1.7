@@ -5,5 +5,5 @@ import growthcraft.apples.common.CommonProxy;
 public class ClientProxy extends CommonProxy
 {
 	@Override
-	public void initRenders() {}
+	public void init() {}
 }

@@ -215,7 +215,9 @@ public class GrowthCraftBees
 		final VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
 		VillagerRegistry.instance().registerVillagerId(config.villagerApiaristID);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, new VillageHandlerBees());
+		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
+		if (brewerID > 0)
+			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, new VillageHandlerBees());
 		VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);
 		CommonProxy.instance.registerVillagerSkin();
 	}
@@ -225,8 +227,7 @@ public class GrowthCraftBees
 	{
 		CommonProxy.instance.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiProvider);
-		if (config.enableApiaristVillageGen)
-			initVillageHandlers();
+		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
 

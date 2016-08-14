@@ -22,6 +22,9 @@ public class GrcHopsConfig extends ConfigBase
 	public int lagerColor = 0x9F7851;
 
 
+	@ConfigOption(catergory="Villager", name="Enabled", desc="Should we register Village Generation, and Villager Trades?")
+	public boolean enableVillageGen = true;
+
 	@ConfigOption(catergory="Village", name="Generate Village Hop Vineyards", desc="Should we spawn Hop Vineyards in villages?")
 	public boolean generateHopVineyardStructure = true;
 

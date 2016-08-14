@@ -125,6 +125,15 @@ public class GrowthCraftGrapes
 		NEI.hideItem(blocks.grapeLeaves.asStack());
 	}
 
+	private void initVillageHandlers()
+	{
+		final VillageHandlerGrapes handler = new VillageHandlerGrapes();
+		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
+		if (brewerID > 0)
+			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, handler);
+		VillagerRegistry.instance().registerVillageCreationHandler(handler);
+	}
+
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
@@ -133,10 +142,7 @@ public class GrowthCraftGrapes
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
 
-		final VillageHandlerGrapes handler = new VillageHandlerGrapes();
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
-		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-
+		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
 

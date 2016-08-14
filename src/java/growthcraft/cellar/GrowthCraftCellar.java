@@ -300,20 +300,24 @@ public class GrowthCraftCellar
 		CellarRegistry.instance().yeast().addYeast(EnumYeast.ORIGIN.asStack());
 	}
 
+	private void initVillageHandlers()
+	{
+		if (config.villagerBrewerID > 0)
+		{
+			VillagerRegistry.instance().registerVillagerId(config.villagerBrewerID);
+		}
+		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());
+	}
+
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
 		registerOres();
 		registerYeast();
-
 		packetPipeline.initialise();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiProvider);
-
-		VillagerRegistry.instance().registerVillagerId(config.villagerBrewerID);
-		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());
-
+		if (config.enableVillageGen) initVillageHandlers();
 		CommonProxy.instance.init();
-
 		modules.init();
 	}
 

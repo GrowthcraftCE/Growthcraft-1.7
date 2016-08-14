@@ -40,8 +40,11 @@ public class ClientProxy extends CommonProxy
 
 	public void registerVillagerSkin()
 	{
-		VillagerRegistry.instance().registerVillagerSkin(GrowthCraftCellar.getConfig().villagerBrewerID,
-			new ResourceLocation("grccellar" , "textures/entity/brewer.png"));
+		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
+		if (brewerID > 0)
+		{
+			VillagerRegistry.instance().registerVillagerSkin(brewerID, new ResourceLocation("grccellar" , "textures/entity/brewer.png"));
+		}
 	}
 
 	public void init()

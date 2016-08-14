@@ -28,6 +28,9 @@ public class GrcApplesConfig extends ConfigBase
 	public int silkenNectarColor = 0xff9500;
 
 
+	@ConfigOption(catergory="Village", name="Enabled", desc="Should we register Village Generation, and Villager Trades?")
+	public boolean enableVillageGen = true;
+
 	@ConfigOption(catergory="Village", name="Generate Village Apple Farms", desc="Should we spawn Apple Farms in Villages?")
 	public boolean generateAppleFarms;
 

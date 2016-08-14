@@ -130,15 +130,20 @@ public class GrowthCraftHops
 		modules.register();
 	}
 
+	private void initVillageHandlers()
+	{
+		final VillageHandlerHops handler = new VillageHandlerHops();
+		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
+		if (brewerID > 0)
+			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, handler);
+		VillagerRegistry.instance().registerVillageCreationHandler(handler);
+	}
+
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.initRenders();
-
-		final VillageHandlerHops handler = new VillageHandlerHops();
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
-		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-
+		CommonProxy.instance.init();
+		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
 

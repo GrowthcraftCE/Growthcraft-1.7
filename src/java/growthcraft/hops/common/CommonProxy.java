@@ -7,5 +7,5 @@ public class CommonProxy
 	@SidedProxy(clientSide="growthcraft.hops.client.ClientProxy", serverSide="growthcraft.hops.common.CommonProxy")
 	public static CommonProxy instance;
 
-	public void initRenders(){}
+	public void init() {}
 }
