@@ -28,8 +28,8 @@ import java.io.IOException;
 
 import growthcraft.api.core.nbt.INBTItemSerializable;
 import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.feature.IItemHandler;
 import growthcraft.core.common.tileentity.GrcTileEntityBase;
-import growthcraft.core.common.tileentity.IItemHandler;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.struct.Cheese;

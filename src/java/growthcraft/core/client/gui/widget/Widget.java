@@ -29,14 +29,17 @@ public class Widget
 {
 	public boolean visible = true;
 	public Rectangle rect;
+	@SuppressWarnings({"rawtypes"})
 	protected WidgetManager manager;
 
+	@SuppressWarnings({"rawtypes"})
 	public Widget(WidgetManager man, Rectangle r)
 	{
 		this.manager = man;
 		this.rect = r;
 	}
 
+	@SuppressWarnings({"rawtypes"})
 	public Widget(WidgetManager man, int x, int y, int w, int h)
 	{
 		this(man, new Rectangle(x, y, w, h));

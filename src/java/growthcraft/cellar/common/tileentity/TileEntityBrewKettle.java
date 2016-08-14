@@ -5,13 +5,16 @@ import java.io.IOException;
 import io.netty.buffer.ByteBuf;
 
 import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.core.common.tileentity.ITileHeatedDevice;
-import growthcraft.core.common.tileentity.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -76,6 +79,18 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 	public String getDefaultInventoryName()
 	{
 		return "container.grc.brewKettle";
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grccellar:brew_kettle";
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerBrewKettle(playerInventory, this);
 	}
 
 	@Override

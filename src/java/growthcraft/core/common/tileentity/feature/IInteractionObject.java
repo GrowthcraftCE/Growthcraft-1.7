@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.tileentity;
+package growthcraft.core.common.tileentity.feature;
 
-import net.minecraft.inventory.ICrafting;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 
-public interface IGuiNetworkSync
+/**
+ * Backport from Minecraft 1.8.9
+ */
+public interface IInteractionObject
 {
-	void sendGUINetworkData(Container container, ICrafting icrafting);
-	void receiveGUINetworkData(int id, int value);
+	Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn);
+	String getGuiID();
 }

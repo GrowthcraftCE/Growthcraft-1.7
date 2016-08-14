@@ -40,6 +40,7 @@ public abstract class ConfigTypeHandler
 	public static class TagHandler extends ConfigTypeHandler
 	{
 		@Override
+		@SuppressWarnings({"rawtypes"})
 		public boolean canHandle(Field field)
 		{
 			final Class typeClass = field.getType();
@@ -70,6 +71,7 @@ public abstract class ConfigTypeHandler
 	public static class TagTableHandler extends ConfigTypeHandler
 	{
 		@Override
+		@SuppressWarnings({"rawtypes"})
 		public boolean canHandle(Field field)
 		{
 			final Class typeClass = field.getType();

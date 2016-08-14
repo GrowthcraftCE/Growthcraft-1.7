@@ -23,14 +23,13 @@
  */
 package growthcraft.cellar.common.block;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.CellarGuiType;
 import growthcraft.core.common.block.GrcBlockContainer;
+import growthcraft.core.common.tileentity.feature.IInteractionObject;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 /**
@@ -38,25 +37,17 @@ import net.minecraft.world.World;
  */
 public abstract class BlockCellarContainer extends GrcBlockContainer
 {
-	protected CellarGuiType guiType = CellarGuiType.NONE;
-
 	public BlockCellarContainer(Material material)
 	{
 		super(material);
 	}
 
-
-	protected BlockCellarContainer setGuiType(@Nonnull CellarGuiType type)
-	{
-		this.guiType = type;
-		return this;
-	}
-
 	protected boolean openGui(EntityPlayer player, World world, int x, int y, int z)
 	{
-		if (guiType != CellarGuiType.NONE)
+		final TileEntity te = getTileEntity(world, x, y, z);
+		if (te instanceof IInteractionObject)
 		{
-			player.openGui(GrowthCraftCellar.instance, guiType.ordinal(), world, x, y, z);
+			player.openGui(GrowthCraftCellar.instance, 0, world, x, y, z);
 			return true;
 		}
 		return false;

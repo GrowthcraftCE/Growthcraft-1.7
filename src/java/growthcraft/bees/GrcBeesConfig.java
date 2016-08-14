@@ -41,6 +41,9 @@ public class GrcBeesConfig extends ConfigBase
 	public int honeyMeadColor = 0xA3610C;
 
 
+	@ConfigOption(catergory="Village", name="Enabled")
+	public boolean enableApiaristVillageGen = true;
+
 	@ConfigOption(catergory="Village", name="Apiarist ID")
 	public int villagerApiaristID = 7766;
 

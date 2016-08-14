@@ -10,14 +10,17 @@ import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.nbt.INBTItemSerializable;
 import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.core.common.tileentity.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 
 import io.netty.buffer.ByteBuf;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
@@ -76,6 +79,18 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	public String getDefaultInventoryName()
 	{
 		return "container.grc.fermentBarrel";
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grccellar:ferment_barrrel";
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerFermentBarrel(playerInventory, this);
 	}
 
 	protected void markForRecipeRecheck()

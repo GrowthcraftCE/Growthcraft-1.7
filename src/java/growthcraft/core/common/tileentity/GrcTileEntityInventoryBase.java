@@ -27,6 +27,7 @@ import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.IInventoryFlagging;
 import growthcraft.core.common.inventory.IInventoryWatcher;
 import growthcraft.core.common.inventory.InventoryProcessor;
+import growthcraft.core.common.tileentity.feature.ICustomDisplayName;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.entity.player.EntityPlayer;

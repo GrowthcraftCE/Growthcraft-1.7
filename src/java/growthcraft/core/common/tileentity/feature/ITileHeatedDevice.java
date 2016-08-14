@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,42 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.definition;
+package growthcraft.core.common.tileentity.feature;
 
-import javax.annotation.Nonnull;
-
-import growthcraft.core.common.block.GrcBlockFluid;
-import growthcraft.core.common.item.ItemGrcBlockFluid;
-
-import net.minecraft.block.material.Material;
-import net.minecraftforge.fluids.Fluid;
-
-public class GrcBlockFluidDefinition extends BlockTypeDefinition<GrcBlockFluid>
+public interface ITileHeatedDevice
 {
-	public GrcBlockFluidDefinition(@Nonnull GrcBlockFluid fluid)
-	{
-		super(fluid);
-	}
-
-	@Override
-	public void register(String name)
-	{
-		super.register(name, ItemGrcBlockFluid.class);
-	}
-
-	public static GrcBlockFluidDefinition create(Fluid fluid, Material mat)
-	{
-		return new GrcBlockFluidDefinition(new GrcBlockFluid(fluid, mat));
-	}
-
-	public static GrcBlockFluidDefinition create(Fluid fluid)
-	{
-		return create(fluid, Material.water);
-	}
-
-	@SuppressWarnings({"rawtypes"})
-	public static GrcBlockFluidDefinition create(FluidTypeDefinition def)
-	{
-		return create(def.getFluid());
-	}
+	boolean isHeated();
+	float getHeatMultiplier();
+	int getHeatScaled(int scale);
 }

@@ -27,7 +27,7 @@ import growthcraft.core.common.inventory.slot.SlotInput;
 import growthcraft.core.common.inventory.slot.SlotPlayer;
 import growthcraft.core.common.inventory.slot.SlotPlayerBackpack;
 import growthcraft.core.common.inventory.slot.SlotPlayerHotbar;
-import growthcraft.core.common.tileentity.IGuiNetworkSync;
+import growthcraft.core.common.tileentity.feature.IGuiNetworkSync;
 import growthcraft.core.util.Platform;
 
 import cpw.mods.fml.relauncher.Side;

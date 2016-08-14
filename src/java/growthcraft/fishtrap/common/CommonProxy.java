@@ -7,5 +7,5 @@ public class CommonProxy
 	@SidedProxy(clientSide="growthcraft.fishtrap.client.ClientProxy", serverSide="growthcraft.fishtrap.common.CommonProxy")
 	public static CommonProxy instance;
 
-	public void initRenders(){}
+	public void init() {}
 }

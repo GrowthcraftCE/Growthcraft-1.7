@@ -6,7 +6,7 @@ import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.api.fishtrap.FishTrapEntry;
 import growthcraft.api.fishtrap.user.UserFishTrapConfig;
 import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.fishtrap.client.gui.GuiHandlerFishTrap;
+import growthcraft.core.GrcGuiProvider;
 import growthcraft.fishtrap.common.block.BlockFishTrap;
 import growthcraft.fishtrap.common.CommonProxy;
 import growthcraft.fishtrap.common.tileentity.TileEntityFishTrap;
@@ -39,8 +39,8 @@ public class GrowthCraftFishTrap
 
 	@Instance(MOD_ID)
 	public static GrowthCraftFishTrap instance;
-
 	public static BlockDefinition fishTrap;
+	public static GrcGuiProvider guiProvider = new GrcGuiProvider(new GrcLogger(MOD_ID + ":GuiProvider"));
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcFishtrapConfig config = new GrcFishtrapConfig();
@@ -120,11 +120,9 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
+		CommonProxy.instance.init();
 		userFishTrapConfig.loadUserConfig();
-		CommonProxy.instance.initRenders();
-
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerFishTrap());
-
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiProvider);
 		modules.init();
 	}
 

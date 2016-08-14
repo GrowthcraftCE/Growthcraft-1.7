@@ -16,6 +16,7 @@ import growthcraft.cellar.common.booze.ModifierFunctionExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionHyperExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionPotent;
 import growthcraft.cellar.common.CommonProxy;
+import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.cellar.common.item.ItemChievDummy;
 import growthcraft.cellar.common.item.ItemWaterBag;
 import growthcraft.cellar.common.item.ItemYeast;
@@ -31,15 +32,14 @@ import growthcraft.cellar.creativetab.CreativeTabsCellar;
 import growthcraft.cellar.eventhandler.EventHandlerCauldronUseItem;
 import growthcraft.cellar.eventhandler.EventHandlerItemCraftedEventCellar;
 import growthcraft.cellar.eventhandler.EventHandlerLivingUpdateEventCellar;
-import growthcraft.cellar.handler.GuiHandlerCellar;
 import growthcraft.cellar.init.GrcCellarBlocks;
 import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.stats.CellarAchievement;
 import growthcraft.cellar.stats.GrcCellarAchievements;
 import growthcraft.cellar.util.CellarBoozeBuilderFactory;
 import growthcraft.cellar.util.GrcCellarUserApis;
-import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.GrcGuiProvider;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
 
@@ -96,6 +96,8 @@ public class GrowthCraftCellar
 
 	// Events
 	public static final EventBus CELLAR_BUS = new EventBus();
+
+	public static GrcGuiProvider guiProvider = new GrcGuiProvider(new GrcLogger(MOD_ID + ":GuiProvider"));
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcCellarConfig config = new GrcCellarConfig();
@@ -305,7 +307,7 @@ public class GrowthCraftCellar
 		registerYeast();
 
 		packetPipeline.initialise();
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerCellar());
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiProvider);
 
 		VillagerRegistry.instance().registerVillagerId(config.villagerBrewerID);
 		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());

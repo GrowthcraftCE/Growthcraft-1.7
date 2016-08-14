@@ -30,7 +30,7 @@ import io.netty.buffer.ByteBuf;
 import growthcraft.api.core.nbt.INBTSerializableContext;
 import growthcraft.api.core.stream.IStreamable;
 import growthcraft.core.common.inventory.IInventoryFlagging;
-import growthcraft.core.common.tileentity.IBlockUpdateFlagging;
+import growthcraft.core.common.tileentity.feature.IBlockUpdateFlagging;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.world.World;

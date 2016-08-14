@@ -24,8 +24,8 @@
 package growthcraft.milk.common.tileentity;
 
 import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
-import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 import growthcraft.milk.common.tileentity.device.Pancheon;
 
 import net.minecraftforge.common.util.ForgeDirection;

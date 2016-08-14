@@ -26,6 +26,7 @@ package growthcraft.cellar.common.tileentity;
 import java.io.IOException;
 
 import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.ContainerCultureJar;
 import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.cellar.common.tileentity.device.CultureGenerator;
 import growthcraft.cellar.common.tileentity.device.YeastGenerator;
@@ -33,11 +34,13 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.device.DeviceProgressive;
 import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.core.common.tileentity.ITileHeatedDevice;
-import growthcraft.core.common.tileentity.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 
 import io.netty.buffer.ByteBuf;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -140,6 +143,18 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 	public String getDefaultInventoryName()
 	{
 		return "container.grc.CultureJar";
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grccellar:culture_jar";
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerCultureJar(playerInventory, this);
 	}
 
 	protected void markForFluidUpdate()

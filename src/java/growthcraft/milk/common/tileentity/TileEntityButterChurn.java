@@ -33,8 +33,8 @@ import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.feature.IItemHandler;
 import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
-import growthcraft.core.common.tileentity.IItemHandler;
 import growthcraft.core.util.ItemUtils;
 
 import io.netty.buffer.ByteBuf;

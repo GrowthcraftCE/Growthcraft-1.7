@@ -35,8 +35,9 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
 import growthcraft.api.core.stream.IStreamable;
-import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.event.EventFunction;
+import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.feature.IBlockUpdateFlagging;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.network.NetworkManager;

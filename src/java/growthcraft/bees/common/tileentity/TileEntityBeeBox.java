@@ -1,24 +1,27 @@
 package growthcraft.bees.common.tileentity;
 
 import growthcraft.api.bees.BeesRegistry;
-import growthcraft.api.core.util.AuxFX;
 import growthcraft.api.core.item.EnumDye;
+import growthcraft.api.core.util.AuxFX;
 import growthcraft.bees.common.inventory.ContainerBeeBox;
 import growthcraft.bees.common.tileentity.device.DeviceBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.feature.IInteractionObject;
+import growthcraft.core.common.tileentity.feature.IItemHandler;
 import growthcraft.core.common.tileentity.GrcTileEntityInventoryBase;
-import growthcraft.core.common.tileentity.IItemHandler;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IItemHandler
+public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IItemHandler, IInteractionObject
 {
 	public static enum HoneyCombExpect
 	{
@@ -31,6 +34,18 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	private static final int[] beeSlotIds = new int[] {0};
 	private static final int[] honeyCombSlotIds = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
 	private DeviceBeeBox beeBox = new DeviceBeeBox(this);
+
+	@Override
+	public String getGuiID()
+	{
+		return "grcbees:bee_box";
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerBeeBox(playerInventory, this);
+	}
 
 	@Override
 	public void onInventoryChanged(IInventory inv, int index)

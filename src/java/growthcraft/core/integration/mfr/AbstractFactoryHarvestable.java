@@ -44,14 +44,14 @@ public abstract class AbstractFactoryHarvestable<TBlock extends Block> implement
 	protected TBlock plantBlock;
 	protected HarvestType type = HarvestType.Normal;
 
-	public AbstractFactoryHarvestable setPlant(TBlock pBlock)
+	public AbstractFactoryHarvestable<TBlock> setPlant(TBlock pBlock)
 	{
 		this.plantBlock = pBlock;
 		return this;
 	}
 
 	@Optional.Method(modid=MFRModuleBase.MOD_ID)
-	public AbstractFactoryHarvestable setHarvestType(HarvestType pType)
+	public AbstractFactoryHarvestable<TBlock> setHarvestType(HarvestType pType)
 	{
 		this.type = pType;
 		return this;

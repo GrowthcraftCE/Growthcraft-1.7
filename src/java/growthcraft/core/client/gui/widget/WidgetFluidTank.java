@@ -34,6 +34,7 @@ public class WidgetFluidTank extends Widget
 	public int numberColor = 0xFFFFFF;
 	public Rectangle ruleRect = new Rectangle();
 
+	@SuppressWarnings({"rawtypes"})
 	public WidgetFluidTank(WidgetManager man, int index, int x, int y, int w, int h)
 	{
 		super(man, x, y, w, h);

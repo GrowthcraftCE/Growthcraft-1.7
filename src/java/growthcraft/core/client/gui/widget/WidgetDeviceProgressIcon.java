@@ -23,7 +23,7 @@
  */
 package growthcraft.core.client.gui.widget;
 
-import growthcraft.core.common.tileentity.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 
 import net.minecraft.tileentity.TileEntity;
 
@@ -39,6 +39,7 @@ public class WidgetDeviceProgressIcon extends WidgetIconBase
 
 	public ProgressDirection progressDirection = ProgressDirection.LEFT_TO_RIGHT;
 
+	@SuppressWarnings({"rawtypes"})
 	public WidgetDeviceProgressIcon(WidgetManager man, int x, int y, int w, int h)
 	{
 		super(man, x, y, w, h);

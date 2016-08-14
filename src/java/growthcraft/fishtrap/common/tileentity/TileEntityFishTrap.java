@@ -1,19 +1,36 @@
 package growthcraft.fishtrap.common.tileentity;
 
+import growthcraft.core.common.tileentity.feature.IInteractionObject;
+import growthcraft.fishtrap.common.inventory.ContainerFishTrap;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityFishTrap extends TileEntity implements IInventory
+public class TileEntityFishTrap extends TileEntity implements IInventory, IInteractionObject
 {
 	// Constants
 	private ItemStack[] invSlots   = new ItemStack[5];
 
 	// Other Vars.
 	private String   name;
+
+	@Override
+	public String getGuiID()
+	{
+		return "grcfishtrap:fish_trap";
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerFishTrap(playerInventory, this);
+	}
 
 	/************
 	 * UPDATE

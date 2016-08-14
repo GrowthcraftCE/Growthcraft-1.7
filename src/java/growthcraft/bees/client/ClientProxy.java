@@ -1,5 +1,6 @@
 package growthcraft.bees.client;
 
+import growthcraft.bees.client.gui.GuiBeeBox;
 import growthcraft.bees.client.renderer.RenderBeeBox;
 import growthcraft.bees.client.renderer.RenderBeeHive;
 import growthcraft.bees.common.CommonProxy;
@@ -11,7 +12,6 @@ import net.minecraft.util.ResourceLocation;
 
 public class ClientProxy extends CommonProxy
 {
-	@Override
 	public void initRenders()
 	{
 		RenderingRegistry.registerBlockHandler(new RenderBeeBox());
@@ -22,5 +22,13 @@ public class ClientProxy extends CommonProxy
 	public void registerVillagerSkin()
 	{
 		VillagerRegistry.instance().registerVillagerSkin(GrowthCraftBees.getConfig().villagerApiaristID, new ResourceLocation("grcbees" , "textures/entity/apiarist.png"));
+	}
+
+	@Override
+	public void init()
+	{
+		super.init();
+		initRenders();
+		GrowthCraftBees.guiProvider.register("grcbees:bee_box", GuiBeeBox.class);
 	}
 }
