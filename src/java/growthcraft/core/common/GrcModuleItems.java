@@ -21,29 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.init;
+package growthcraft.core.common;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.common.GrcModuleItems;
-import growthcraft.grapes.common.item.ItemGrapes;
-import growthcraft.grapes.common.item.ItemGrapeSeeds;
+import growthcraft.core.common.definition.ItemTypeDefinition;
 
-public class GrcGrapesItems extends GrcModuleItems
+import net.minecraft.item.Item;
+
+public class GrcModuleItems extends GrcModuleBase
 {
-	public ItemDefinition grapes;
-	public ItemDefinition grapeSeeds;
+	// All items that had defintions created via the interface
+	public final List<ItemTypeDefinition<? extends Item>> all = new LinkedList<ItemTypeDefinition<? extends Item>>();
 
-	@Override
-	public void preInit()
+	/**
+	 * Creates a basic ItemDefintion from the given item
+	 *
+	 * @param item the item to wrap
+	 * @return definition
+	 */
+	protected ItemDefinition newDefinition(Item item)
 	{
-		this.grapes     = new ItemDefinition(new ItemGrapes());
-		this.grapeSeeds = new ItemDefinition(new ItemGrapeSeeds());
+		final ItemDefinition def = new ItemDefinition(item);
+		all.add(def);
+		return def;
 	}
 
-	@Override
-	public void register()
+	/**
+	 * Creates a ItemTypeDefintion from the given item
+	 *
+	 * @param item the item to wrap and type by
+	 * @return typed definition
+	 */
+	protected <T extends Item> ItemTypeDefinition<T> newTypedDefinition(T item)
 	{
-		grapes.register("grc.grapes");
-		grapeSeeds.register("grc.grapeSeeds");
+		final ItemTypeDefinition<T> def = new ItemTypeDefinition<T>(item);
+		all.add(def);
+		return def;
 	}
 }

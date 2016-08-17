@@ -13,8 +13,6 @@ import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.bees.client.eventhandler.GrcBeesHandleTextureStitch;
-import growthcraft.bees.common.block.BlockBeeBox;
-import growthcraft.bees.common.block.BlockBeeHive;
 import growthcraft.bees.common.CommonProxy;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
@@ -64,19 +62,8 @@ public class GrowthCraftBees
 
 	@Instance(MOD_ID)
 	public static GrowthCraftBees instance;
-
 	public static CreativeTabs tab;
-
-	public static BlockTypeDefinition<BlockBeeBox> beeBox;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxBamboo;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxNatura;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxBiomesOPlenty;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxBotania;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxNether;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxThaumcraft;
-	public static List<BlockTypeDefinition<BlockBeeBox>> beeBoxesForestry;
-	public static List<BlockTypeDefinition<BlockBeeBox>> beeBoxesForestryFireproof;
-	public static BlockDefinition beeHive;
+	public static final GrcBeesBlock blocks = new GrcBeesBlock();
 	public static final GrcBeesItems items = new GrcBeesItems();
 	public static final GrcBeesFluids fluids = new GrcBeesFluids();
 	public static final GrcGuiProvider guiProvider = new GrcGuiProvider(new GrcLogger(MOD_ID + ":GuiProvider"));
@@ -112,7 +99,7 @@ public class GrowthCraftBees
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
-
+		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
 		modules.add(recipes);
@@ -141,18 +128,10 @@ public class GrowthCraftBees
 			modules.setLogger(logger);
 		}
 
+		modules.freeze();
 		tab = new CreativeTabsGrowthcraftBees("creative_tab_grcbees");
 
 		MinecraftForge.EVENT_BUS.register(new GrcBeesHandleTextureStitch());
-
-		initBlocksAndItems();
-	}
-
-	private void initBlocksAndItems()
-	{
-		beeBox  = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBox());
-		beeBox.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
-		beeHive = new BlockDefinition(new BlockBeeHive());
 
 		modules.preInit();
 		register();
@@ -160,10 +139,6 @@ public class GrowthCraftBees
 
 	private void register()
 	{
-		// Bee Boxes
-		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
-		// Bee Hive(s)
-		GameRegistry.registerBlock(beeHive.getBlock(), "grc.beeHive");
 		// TileEntities
 		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);

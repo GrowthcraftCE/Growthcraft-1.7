@@ -29,9 +29,9 @@ import growthcraft.bamboo.common.item.ItemBambooDoor;
 import growthcraft.bamboo.common.item.ItemBambooRaft;
 import growthcraft.bamboo.common.item.ItemBambooShoot;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.GrcModuleItems;
 
-public class GrcBambooItems extends GrcModuleBase
+public class GrcBambooItems extends GrcModuleItems
 {
 	public ItemDefinition bamboo;
 	public ItemDefinition bambooDoorItem;

@@ -21,45 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.cellar.init;
+package growthcraft.bees.init;
 
-import growthcraft.cellar.common.block.BlockBrewKettle;
-import growthcraft.cellar.common.block.BlockCultureJar;
-import growthcraft.cellar.common.block.BlockFermentBarrel;
-import growthcraft.cellar.common.block.BlockFruitPress;
-import growthcraft.cellar.common.block.BlockFruitPresser;
-import growthcraft.cellar.common.itemblock.ItemBlockFermentBarrel;
+import growthcraft.bees.common.block.BlockBeeBox;
+import growthcraft.bees.common.block.BlockBeeHive;
 import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.GrcModuleBlocks;
-import growthcraft.core.integration.NEI;
 
-public class GrcCellarBlocks extends GrcModuleBlocks
+public class GrcBeesBlocks extends GrcModuleBlocks
 {
-	public BlockDefinition brewKettle;
-	public BlockDefinition cultureJar;
-	public BlockDefinition fermentBarrel;
-	public BlockDefinition fruitPress;
-	public BlockDefinition fruitPresser;
+	public BlockTypeDefinition<BlockBeeBox> beeBox;
+	public BlockTypeDefinition<BlockBeeBox> beeBoxBamboo;
+	public BlockTypeDefinition<BlockBeeBox> beeBoxNatura;
+	public BlockTypeDefinition<BlockBeeBox> beeBoxBiomesOPlenty;
+	public BlockTypeDefinition<BlockBeeBox> beeBoxBotania;
+	public BlockTypeDefinition<BlockBeeBox> beeBoxNether;
+	public BlockTypeDefinition<BlockBeeBox> beeBoxThaumcraft;
+	public List<BlockTypeDefinition<BlockBeeBox>> beeBoxesForestry;
+	public List<BlockTypeDefinition<BlockBeeBox>> beeBoxesForestryFireproof;
+	public BlockDefinition beeHive;
 
 	@Override
 	public void preInit()
 	{
-		this.brewKettle    = newDefinition(new BlockBrewKettle());
-		this.cultureJar    = newDefinition(new BlockCultureJar());
-		this.fermentBarrel = newDefinition(new BlockFermentBarrel());
-		this.fruitPress    = newDefinition(new BlockFruitPress());
-		this.fruitPresser  = newDefinition(new BlockFruitPresser());
+		this.beeBox  = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBox());
+		beeBox.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
+		this.beeHive = new BlockDefinition(new BlockBeeHive());
 	}
 
 	@Override
 	public void register()
 	{
-		fruitPress.register("grc.fruitPress");
-		fruitPresser.register("grc.fruitPresser");
-		brewKettle.register("grc.brewKettle");
-		fermentBarrel.register("grc.fermentBarrel", ItemBlockFermentBarrel.class);
-		cultureJar.register("grc.fermentJar");
-
-		NEI.hideItem(fruitPresser.asStack());
+		beeBox.register("grc.beeBox", ItemBlockBeeBox.class);
+		beeHive.register("grc.beeHive");
 	}
 }

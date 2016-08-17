@@ -17,9 +17,6 @@ import growthcraft.cellar.common.booze.ModifierFunctionHyperExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionPotent;
 import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.common.item.EnumYeast;
-import growthcraft.cellar.common.item.ItemChievDummy;
-import growthcraft.cellar.common.item.ItemWaterBag;
-import growthcraft.cellar.common.item.ItemYeast;
 import growthcraft.cellar.common.potion.PotionCellar;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
@@ -33,12 +30,12 @@ import growthcraft.cellar.eventhandler.EventHandlerCauldronUseItem;
 import growthcraft.cellar.eventhandler.EventHandlerItemCraftedEventCellar;
 import growthcraft.cellar.eventhandler.EventHandlerLivingUpdateEventCellar;
 import growthcraft.cellar.init.GrcCellarBlocks;
+import growthcraft.cellar.init.GrcCellarItems;
 import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.stats.CellarAchievement;
 import growthcraft.cellar.stats.GrcCellarAchievements;
 import growthcraft.cellar.util.CellarBoozeBuilderFactory;
 import growthcraft.cellar.util.GrcCellarUserApis;
-import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.GrcGuiProvider;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
@@ -77,13 +74,11 @@ public class GrowthCraftCellar
 
 	@Instance(MOD_ID)
 	public static GrowthCraftCellar instance;
-	public static final GrcCellarBlocks blocks = new GrcCellarBlocks();
 	public static CreativeTabs tab;
-	public static ItemDefinition yeast;
-	public static ItemDefinition waterBag;
+	public static final GrcCellarBlocks blocks = new GrcCellarBlocks();
+	public static final GrcCellarItems items = new GrcCellarItems();
 	public static Potion potionTipsy;
 	// Achievments
-	public static ItemDefinition chievItemDummy;
 	public static GrcCellarAchievements achievements;
 	// Network
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
@@ -112,7 +107,7 @@ public class GrowthCraftCellar
 	}
 
 	@EventHandler
-	public void preload(FMLPreInitializationEvent event)
+	public void preInit(FMLPreInitializationEvent event)
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/cellar.conf");
@@ -124,6 +119,7 @@ public class GrowthCraftCellar
 		}
 
 		modules.add(blocks);
+		modules.add(items);
 
 		if (config.enableWailaIntegration) modules.add(new growthcraft.cellar.integration.Waila());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
@@ -155,10 +151,6 @@ public class GrowthCraftCellar
 		//====================
 		tab = new CreativeTabsCellar("creative_tab_grccellar");
 
-		yeast = new ItemDefinition(new ItemYeast());
-		waterBag = new ItemDefinition(new ItemWaterBag());
-		chievItemDummy = new ItemDefinition(new ItemChievDummy());
-
 		modules.preInit();
 		register();
 	}
@@ -188,10 +180,6 @@ public class GrowthCraftCellar
 		//====================
 		modules.register();
 
-		GameRegistry.registerItem(yeast.getItem(), "grc.yeast");
-		GameRegistry.registerItem(waterBag.getItem(), "grc.waterBag");
-		GameRegistry.registerItem(chievItemDummy.getItem(), "grc.chievItemDummy");
-
 		GameRegistry.registerTileEntity(TileEntityFruitPress.class, "grc.tileentity.fruitPress");
 		GameRegistry.registerTileEntity(TileEntityFruitPresser.class, "grc.tileentity.fruitPresser");
 		GameRegistry.registerTileEntity(TileEntityBrewKettle.class, "grc.tileentity.brewKettle");
@@ -208,23 +196,23 @@ public class GrowthCraftCellar
 		GameRegistry.addRecipe(new ShapedOreRecipe(blocks.fermentBarrel.asStack(), "AAA", "BBB", "AAA", 'B', "plankWood", 'A', "ingotIron"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(blocks.cultureJar.asStack(), "GAG", "G G", "GGG", 'A', "plankWood", 'G', "paneGlass"));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(waterBag.asStack(1, 16), "AAA", "ABA", "AAA", 'A', Items.leather, 'B', "materialRope"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 0), "dyeWhite", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 1), "dyeOrange", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 2), "dyeMagenta", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 3), "dyeLightBlue", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 4), "dyeYellow", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 5), "dyeLime", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 6), "dyePink", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 7), "dyeGray", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 8), "dyeLightGray", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 9), "dyeCyan", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 10), "dyePurple", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 11), "dyeBlue", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 12), "dyeBrown", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 13), "dyeGreen", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 14), "dyeRed", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(waterBag.asStack(1, 15), "dyeBlack", waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapedOreRecipe(items.waterBag.asStack(1, 16), "AAA", "ABA", "AAA", 'A', Items.leather, 'B', "materialRope"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 0), "dyeWhite", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 1), "dyeOrange", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 2), "dyeMagenta", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 3), "dyeLightBlue", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 4), "dyeYellow", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 5), "dyeLime", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 6), "dyePink", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 7), "dyeGray", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 8), "dyeLightGray", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 9), "dyeCyan", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 10), "dyePurple", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 11), "dyeBlue", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 12), "dyeBrown", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 13), "dyeGreen", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 14), "dyeRed", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(items.waterBag.asStack(1, 15), "dyeBlack", items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
 
 		//====================
 		// POTION

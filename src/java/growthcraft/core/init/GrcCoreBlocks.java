@@ -30,7 +30,7 @@ import growthcraft.core.common.block.BlockFenceRope;
 import growthcraft.core.common.block.BlockRope;
 import growthcraft.core.common.block.BlockSaltBlock;
 import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.GrcModuleBlocks;
 import growthcraft.core.common.item.ItemBlockFenceRope;
 import growthcraft.core.common.item.ItemBlockNaturaFenceRope;
 import growthcraft.core.integration.minecraft.EnumMinecraftWoodType;
@@ -44,7 +44,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class GrcCoreBlocks extends GrcModuleBase
+public class GrcCoreBlocks extends GrcModuleBlocks
 {
 	public BlockDefinition ropeBlock;
 	public BlockDefinition saltBlock;
@@ -57,10 +57,10 @@ public class GrcCoreBlocks extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		this.saltBlock = new BlockDefinition(new BlockSaltBlock());
-		this.ropeBlock = new BlockDefinition(new BlockRope());
-		this.fenceRope = new BlockDefinition(new BlockFenceRope(Blocks.fence, "grc.fenceRope"));
-		this.netherBrickFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.nether_brick_fence, "grc.netherBrickFenceRope"));
+		this.saltBlock = newDefinition(new BlockSaltBlock());
+		this.ropeBlock = newDefinition(new BlockRope());
+		this.fenceRope = newDefinition(new BlockFenceRope(Blocks.fence, "grc.fenceRope"));
+		this.netherBrickFenceRope = newDefinition(new BlockFenceRope(Blocks.nether_brick_fence, "grc.netherBrickFenceRope"));
 
 		FenceRopeRegistry.instance().addEntry(Blocks.fence, fenceRope.getBlock());
 		FenceRopeRegistry.instance().addEntry(Blocks.nether_brick_fence, netherBrickFenceRope.getBlock());
@@ -89,7 +89,7 @@ public class GrcCoreBlocks extends GrcModuleBase
 				if (block != null)
 				{
 					final String basename = "grc.etfuturum_fence_rope_" + woodTypeName;
-					final BlockDefinition fp = new BlockDefinition(new BlockFenceRope(block, basename));
+					final BlockDefinition fp = newDefinition(new BlockFenceRope(block, basename));
 					fp.register(basename, ItemBlockFenceRope.class);
 					Blocks.fire.setFireInfo(fp.getBlock(), 5, 20);
 					FenceRopeRegistry.instance().addEntry(block, fp.getBlock());
@@ -157,7 +157,7 @@ public class GrcCoreBlocks extends GrcModuleBase
 			final Block block = GameRegistry.findBlock(modId, "Natura.fence");
 			if (block != null)
 			{
-				this.naturaFenceRope = new BlockDefinition(new BlockFenceRope(block, "grc.naturaFenceRope"));
+				this.naturaFenceRope = newDefinition(new BlockFenceRope(block, "grc.naturaFenceRope"));
 				naturaFenceRope.register("grc.naturaFenceRope", ItemBlockNaturaFenceRope.class);
 				Blocks.fire.setFireInfo(naturaFenceRope.getBlock(), 5, 20);
 				FenceRopeRegistry.instance().addEntry(block, naturaFenceRope.getBlock());

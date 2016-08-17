@@ -21,29 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.init;
+package growthcraft.core.common;
 
-import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.common.GrcModuleItems;
-import growthcraft.grapes.common.item.ItemGrapes;
-import growthcraft.grapes.common.item.ItemGrapeSeeds;
+import java.util.LinkedList;
+import java.util.List;
 
-public class GrcGrapesItems extends GrcModuleItems
+import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
+
+import net.minecraft.block.Block;
+
+public class GrcModuleBlocks extends GrcModuleBase
 {
-	public ItemDefinition grapes;
-	public ItemDefinition grapeSeeds;
+	// All items that had defintions created via the interface
+	public final List<BlockTypeDefinition<? extends Block>> all = new LinkedList<BlockTypeDefinition<? extends Block>>();
 
-	@Override
-	public void preInit()
+	/**
+	 * Creates a basic BlockDefintion from the given block
+	 *
+	 * @param block the block to wrap
+	 * @return definition
+	 */
+	protected BlockDefinition newDefinition(Block block)
 	{
-		this.grapes     = new ItemDefinition(new ItemGrapes());
-		this.grapeSeeds = new ItemDefinition(new ItemGrapeSeeds());
+		final BlockDefinition def = new BlockDefinition(block);
+		all.add(def);
+		return def;
 	}
 
-	@Override
-	public void register()
+	/**
+	 * Creates a BlockTypeDefintion from the given block
+	 *
+	 * @param block the block to wrap and type by
+	 * @return typed definition
+	 */
+	protected <T extends Block> BlockTypeDefinition<T> newTypedDefinition(T block)
 	{
-		grapes.register("grc.grapes");
-		grapeSeeds.register("grc.grapeSeeds");
+		final BlockTypeDefinition<T> def = new BlockTypeDefinition<T>(block);
+		all.add(def);
+		return def;
 	}
 }

@@ -21,29 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.init;
+package growthcraft.rice.init;
 
-import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.common.GrcModuleItems;
-import growthcraft.grapes.common.item.ItemGrapes;
-import growthcraft.grapes.common.item.ItemGrapeSeeds;
+import growthcraft.core.common.GrcModuleBlocks;
+import growthcraft.rice.common.block.BlockPaddy;
+import growthcraft.rice.common.block.BlockRice;
+import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 
-public class GrcGrapesItems extends GrcModuleItems
+public class GrcRiceBlocks extends GrcModuleBase
 {
-	public ItemDefinition grapes;
-	public ItemDefinition grapeSeeds;
+	public BlockTypeDefinition<BlockRice> riceBlock;
+	public BlockDefinition paddyField;
 
 	@Override
 	public void preInit()
 	{
-		this.grapes     = new ItemDefinition(new ItemGrapes());
-		this.grapeSeeds = new ItemDefinition(new ItemGrapeSeeds());
+		this.riceBlock = newTypedDefinition(new BlockRice());
+		this.paddyField = newDefinition(new BlockPaddy());
 	}
 
 	@Override
 	public void register()
 	{
-		grapes.register("grc.grapes");
-		grapeSeeds.register("grc.grapeSeeds");
+		riceBlock.register("grc.riceBlock");
+		paddyField.register("grc.paddyField");
 	}
 }

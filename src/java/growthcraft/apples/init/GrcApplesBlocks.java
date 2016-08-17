@@ -21,45 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.cellar.init;
+package growthcraft.apples.init;
 
-import growthcraft.cellar.common.block.BlockBrewKettle;
-import growthcraft.cellar.common.block.BlockCultureJar;
-import growthcraft.cellar.common.block.BlockFermentBarrel;
-import growthcraft.cellar.common.block.BlockFruitPress;
-import growthcraft.cellar.common.block.BlockFruitPresser;
-import growthcraft.cellar.common.itemblock.ItemBlockFermentBarrel;
+import growthcraft.apples.common.block.BlockApple;
+import growthcraft.apples.common.block.BlockAppleLeaves;
+import growthcraft.apples.common.block.BlockAppleSapling;
 import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.GrcModuleBlocks;
-import growthcraft.core.integration.NEI;
 
-public class GrcCellarBlocks extends GrcModuleBlocks
+import net.minecraft.init.Blocks;
+import net.minecraftforge.oredict.OreDictionary;
+
+public class GrcApplesBlocks extends GrcModuleBlocks
 {
-	public BlockDefinition brewKettle;
-	public BlockDefinition cultureJar;
-	public BlockDefinition fermentBarrel;
-	public BlockDefinition fruitPress;
-	public BlockDefinition fruitPresser;
+	public BlockDefinition appleSapling;
+	public BlockDefinition appleLeaves;
+	public BlockTypeDefinition<BlockApple> appleBlock;
 
 	@Override
 	public void preInit()
 	{
-		this.brewKettle    = newDefinition(new BlockBrewKettle());
-		this.cultureJar    = newDefinition(new BlockCultureJar());
-		this.fermentBarrel = newDefinition(new BlockFermentBarrel());
-		this.fruitPress    = newDefinition(new BlockFruitPress());
-		this.fruitPresser  = newDefinition(new BlockFruitPresser());
+		this.appleSapling = newDefinition(new BlockAppleSapling());
+		this.appleLeaves = newDefinition(new BlockAppleLeaves());
+		this.appleBlock = newTypedDefinition(new BlockApple());
 	}
 
 	@Override
 	public void register()
 	{
-		fruitPress.register("grc.fruitPress");
-		fruitPresser.register("grc.fruitPresser");
-		brewKettle.register("grc.brewKettle");
-		fermentBarrel.register("grc.fermentBarrel", ItemBlockFermentBarrel.class);
-		cultureJar.register("grc.fermentJar");
+		appleSapling.register("grc.appleSapling");
+		appleLeaves.register("grc.appleLeaves");
+		appleBlock.register("grc.appleBlock");
 
-		NEI.hideItem(fruitPresser.asStack());
+		OreDictionary.registerOre("saplingTree", appleSapling.getItem());
+		OreDictionary.registerOre("treeSapling", appleSapling.getItem());
+		OreDictionary.registerOre("treeLeaves", appleLeaves.asStack(1, OreDictionary.WILDCARD_VALUE));
+
+		Blocks.fire.setFireInfo(appleLeaves.getBlock(), 30, 60);
 	}
 }

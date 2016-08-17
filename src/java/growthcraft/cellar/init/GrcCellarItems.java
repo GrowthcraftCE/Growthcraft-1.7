@@ -21,29 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.init;
+package growthcraft.cellar.init;
 
+import growthcraft.cellar.common.item.ItemChievDummy;
+import growthcraft.cellar.common.item.ItemWaterBag;
+import growthcraft.cellar.common.item.ItemYeast;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleItems;
-import growthcraft.grapes.common.item.ItemGrapes;
-import growthcraft.grapes.common.item.ItemGrapeSeeds;
 
-public class GrcGrapesItems extends GrcModuleItems
+public class GrcCellarItems extends GrcModuleItems
 {
-	public ItemDefinition grapes;
-	public ItemDefinition grapeSeeds;
+	public ItemDefinition yeast;
+	public ItemDefinition waterBag;
+	public ItemDefinition chievItemDummy;
 
 	@Override
 	public void preInit()
 	{
-		this.grapes     = new ItemDefinition(new ItemGrapes());
-		this.grapeSeeds = new ItemDefinition(new ItemGrapeSeeds());
+		this.yeast = new ItemDefinition(new ItemYeast());
+		this.waterBag = new ItemDefinition(new ItemWaterBag());
+		this.chievItemDummy = new ItemDefinition(new ItemChievDummy());
 	}
 
 	@Override
 	public void register()
 	{
-		grapes.register("grc.grapes");
-		grapeSeeds.register("grc.grapeSeeds");
+		yeast.register("grc.yeast");
+		waterBag.register("grc.waterBag");
+		chievItemDummy.register("grc.chievItemDummy");
 	}
 }

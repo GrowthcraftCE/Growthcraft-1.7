@@ -4,18 +4,11 @@ import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.definition.BlockTypeDefinition;
-import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.eventhandler.PlayerInteractEventPaddy;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
-import growthcraft.rice.common.block.BlockPaddy;
-import growthcraft.rice.common.block.BlockRice;
 import growthcraft.rice.common.CommonProxy;
-import growthcraft.rice.common.item.ItemRice;
-import growthcraft.rice.common.item.ItemRiceBall;
 import growthcraft.rice.common.village.ComponentVillageRiceField;
 import growthcraft.rice.common.village.VillageHandlerRice;
 import growthcraft.rice.event.BonemealEventRice;
@@ -52,12 +45,8 @@ public class GrowthCraftRice
 
 	@Instance(MOD_ID)
 	public static GrowthCraftRice instance;
-
-	public static BlockTypeDefinition<BlockRice> riceBlock;
-	public static BlockDefinition paddyField;
-	public static ItemDefinition rice;
-	public static ItemDefinition riceBall;
-
+	public static final GrcRiceBlocks blocks = new GrcRiceBlocks();
+	public static final GrcRiceItems items = new GrcRiceItems();
 	public static final GrcRiceFluids fluids = new GrcRiceFluids();
 
 	private final ILogger logger = new GrcLogger(MOD_ID);
@@ -74,38 +63,21 @@ public class GrowthCraftRice
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
-
+		modules.add(blocks);
+		modules.add(items);
 		modules.add(fluids);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.rice.integration.ForestryModule());
 		if (config.enableMFRIntegration) modules.add(new growthcraft.rice.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
-
 		if (config.debugEnabled) modules.setLogger(logger);
-
-		//====================
-		// INIT
-		//====================
-		riceBlock = new BlockTypeDefinition<BlockRice>(new BlockRice());
-		paddyField = new BlockDefinition(new BlockPaddy());
-
-		rice     = new ItemDefinition(new ItemRice());
-		riceBall = new ItemDefinition(new ItemRiceBall());
-
+		modules.freeze();
 		modules.preInit();
 		register();
 	}
 
 	private void register()
 	{
-		//====================
-		// REGISTRIES
-		//====================
-		GameRegistry.registerBlock(riceBlock.getBlock(), "grc.riceBlock");
-		GameRegistry.registerBlock(paddyField.getBlock(), "grc.paddyField");
-
-		GameRegistry.registerItem(rice.getItem(), "grc.rice");
-		GameRegistry.registerItem(riceBall.getItem(), "grc.riceBall");
-
+		modules.register();
 		MinecraftForge.addGrassSeed(rice.asStack(), config.riceSeedDropRarity);
 
 		MapGenHelper.registerVillageStructure(ComponentVillageRiceField.class, "grc.ricefield");
@@ -127,8 +99,6 @@ public class GrowthCraftRice
 		NEI.hideItem(riceBlock.asStack());
 
 		MinecraftForge.EVENT_BUS.register(this);
-
-		modules.register();
 	}
 
 	private void initVillageHandlers()

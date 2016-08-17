@@ -24,7 +24,7 @@
 package growthcraft.milk.init;
 
 import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.GrcModuleBlocks;
 import growthcraft.milk.common.block.BlockButterChurn;
 import growthcraft.milk.common.block.BlockCheeseBlock;
 import growthcraft.milk.common.block.BlockCheesePress;
@@ -39,7 +39,7 @@ import growthcraft.milk.GrowthCraftMilk;
 
 import net.minecraftforge.oredict.OreDictionary;
 
-public class GrcMilkBlocks extends GrcModuleBase
+public class GrcMilkBlocks extends GrcModuleBlocks
 {
 	public BlockDefinition butterChurn;
 	public BlockDefinition cheeseBlock;
@@ -52,15 +52,15 @@ public class GrcMilkBlocks extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		this.butterChurn = new BlockDefinition(new BlockButterChurn());
-		this.cheeseBlock = new BlockDefinition(new BlockCheeseBlock());
-		this.cheesePress = new BlockDefinition(new BlockCheesePress());
-		this.cheeseVat = new BlockDefinition(new BlockCheeseVat());
-		this.hangingCurds = new BlockDefinition(new BlockHangingCurds());
-		this.pancheon = new BlockDefinition(new BlockPancheon());
+		this.butterChurn = newDefinition(new BlockButterChurn());
+		this.cheeseBlock = newDefinition(new BlockCheeseBlock());
+		this.cheesePress = newDefinition(new BlockCheesePress());
+		this.cheeseVat = newDefinition(new BlockCheeseVat());
+		this.hangingCurds = newDefinition(new BlockHangingCurds());
+		this.pancheon = newDefinition(new BlockPancheon());
 		if (GrowthCraftMilk.getConfig().thistleEnabled)
 		{
-			this.thistle = new BlockDefinition(new BlockThistle());
+			this.thistle = newDefinition(new BlockThistle());
 		}
 	}
 
