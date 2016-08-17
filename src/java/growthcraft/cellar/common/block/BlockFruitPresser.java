@@ -2,30 +2,28 @@ package growthcraft.cellar.common.block;
 
 import java.util.Random;
 
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.cellar.client.render.RenderFruitPresser;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.block.IRotatableBlock;
 import growthcraft.core.common.block.IWrenchable;
-import growthcraft.api.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockFruitPresser extends BlockContainer implements IWrenchable, IRotatableBlock
+public class BlockFruitPresser extends BlockCellarContainer implements IWrenchable, IRotatableBlock
 {
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
@@ -34,6 +32,7 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	{
 		super(Material.piston);
 		this.isBlockContainer = true;
+		setTileEntityType(TileEntityFruitPresser.class);
 		setHardness(0.5F);
 		setStepSound(soundTypePiston);
 		setBlockName("grc.fruitPresser");
@@ -61,6 +60,7 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	 ************/
 
 	/* IRotatableBLock */
+	@Override
 	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		final Block below = world.getBlock(x, y - 1, z);
@@ -71,6 +71,7 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 		return false;
 	}
 
+	@Override
 	public boolean rotateBlock(World world, int x, int y, int z, ForgeDirection side)
 	{
 		if (isRotatable(world, x, y, z, side))
@@ -197,12 +198,6 @@ public class BlockFruitPresser extends BlockContainer implements IWrenchable, IR
 	public Item getItem(World world, int x, int y, int z)
 	{
 		return GrowthCraftCellar.blocks.fruitPress.getItem();
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world, int par2)
-	{
-		return new TileEntityFruitPresser();
 	}
 
 	/************
