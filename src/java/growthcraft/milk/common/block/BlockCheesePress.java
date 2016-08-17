@@ -56,6 +56,7 @@ public class BlockCheesePress extends GrcBlockContainer
 		setBlockTextureName("grcmilk:cheese_press");
 	}
 
+	@Override
 	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		return true;

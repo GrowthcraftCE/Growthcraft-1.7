@@ -41,11 +41,13 @@ public class BlockFruitPress extends BlockCellarContainer
 		return GrowthCraftCellar.blocks.fruitPresser.getBlock();
 	}
 
+	@Override
 	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		return true;
 	}
 
+	@Override
 	public void doRotateBlock(World world, int x, int y, int z, ForgeDirection side)
 	{
 		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) ^ 1, BlockFlags.SYNC);
