@@ -44,7 +44,7 @@ public class HopFactoryFruit extends AbstractFactoryFruit<BlockHops>
 	public HopFactoryFruit()
 	{
 		super();
-		setPlant(GrowthCraftHops.hopVine.getBlock());
+		setPlant(GrowthCraftHops.blocks.hopVine.getBlock());
 		this.replacementBlock = new ReplacementBlock(plantBlock);
 		replacementBlock.setMeta(BlockHops.HopsStage.BIG);
 	}

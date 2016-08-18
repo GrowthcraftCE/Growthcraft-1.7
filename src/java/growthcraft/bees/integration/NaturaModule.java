@@ -23,11 +23,9 @@
  */
 package growthcraft.bees.integration;
 
-import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeBoxNatura;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.integration.natura.NaturaPlatform;
 import growthcraft.core.integration.natura.EnumNaturaWoodType;
 import growthcraft.core.integration.ModIntegrationBase;
@@ -45,13 +43,13 @@ public class NaturaModule extends ModIntegrationBase
 	@Override
 	public void doPreInit()
 	{
-		GrowthCraftBees.beeBoxNatura = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxNatura());
+		GrowthCraftBees.blocks.beeBoxNatura = GrowthCraftBees.blocks.newTypedDefinition(new BlockBeeBoxNatura());
 	}
 
 	@Override
 	public void doRegister()
 	{
-		GrowthCraftBees.beeBoxNatura.register("grc.BeeBox.Natura", ItemBlockBeeBox.class);
+		GrowthCraftBees.blocks.beeBoxNatura.register("grc.BeeBox.Natura", ItemBlockBeeBox.class);
 	}
 
 	@Override
@@ -62,7 +60,7 @@ public class NaturaModule extends ModIntegrationBase
 			final ItemStack planks = type.asPlanksItemStack();
 			if (planks != null)
 			{
-				GameRegistry.addShapedRecipe(GrowthCraftBees.beeBoxNatura.asStack(1, type.meta), " A ", "A A", "AAA", 'A', planks);
+				GameRegistry.addShapedRecipe(GrowthCraftBees.blocks.beeBoxNatura.asStack(1, type.meta), " A ", "A A", "AAA", 'A', planks);
 			}
 		}
 	}

@@ -34,7 +34,7 @@ public class AppleBlockFactoryFruit extends AbstractFactoryFruit<BlockApple>
 	public AppleBlockFactoryFruit()
 	{
 		super();
-		setPlant(GrowthCraftApples.appleBlock.getBlock());
+		setPlant(GrowthCraftApples.blocks.appleBlock.getBlock());
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class RiceFactoryPlanter extends AbstractFactoryPlantable<BlockRice>
 {
 	public RiceFactoryPlanter()
 	{
-		super(GrowthCraftRice.rice.getItem(), GrowthCraftRice.riceBlock.getBlock());
+		super(GrowthCraftRice.items.rice.getItem(), GrowthCraftRice.blocks.riceBlock.getBlock());
 	}
 
 	@Override

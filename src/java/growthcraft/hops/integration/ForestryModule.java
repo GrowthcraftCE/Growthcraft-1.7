@@ -47,9 +47,9 @@ public class ForestryModule extends ForestryModuleBase
 		final int saplingYield = getActiveMode().getIntegerSetting("fermenter.yield.sapling");
 		final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
 
-		final ItemStack hopSeed = GrowthCraftHops.hopSeeds.asStack();
-		final ItemStack hops = GrowthCraftHops.hops.asStack();
-		final Block hopVine = GrowthCraftHops.hopVine.getBlock();
+		final ItemStack hopSeed = GrowthCraftHops.items.hopSeeds.asStack();
+		final ItemStack hops = GrowthCraftHops.items.hops.asStack();
+		final Block hopVine = GrowthCraftHops.blocks.hopVine.getBlock();
 
 		Backpack.FORESTERS.add(hopSeed);
 		Backpack.FORESTERS.add(hops);

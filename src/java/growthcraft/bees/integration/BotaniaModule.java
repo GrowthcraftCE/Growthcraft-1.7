@@ -23,11 +23,9 @@
  */
 package growthcraft.bees.integration;
 
-import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeBoxBotania;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.integration.botania.BotaniaPlatform;
 import growthcraft.core.integration.botania.EnumBotaniaWoodType;
 import growthcraft.core.integration.ModIntegrationBase;
@@ -45,13 +43,13 @@ public class BotaniaModule extends ModIntegrationBase
 	@Override
 	public void doPreInit()
 	{
-		GrowthCraftBees.beeBoxBotania = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxBotania());
+		GrowthCraftBees.blocks.beeBoxBotania = GrowthCraftBees.blocks.newTypedDefinition(new BlockBeeBoxBotania());
 	}
 
 	@Override
 	public void doRegister()
 	{
-		GrowthCraftBees.beeBoxBotania.register("grc.BeeBox.Botania", ItemBlockBeeBox.class);
+		GrowthCraftBees.blocks.beeBoxBotania.register("grc.BeeBox.Botania", ItemBlockBeeBox.class);
 	}
 
 	@Override
@@ -62,7 +60,7 @@ public class BotaniaModule extends ModIntegrationBase
 			final ItemStack planks = type.asPlanksItemStack();
 			if (planks != null)
 			{
-				GameRegistry.addShapedRecipe(GrowthCraftBees.beeBoxBotania.asStack(1, type.meta), " A ", "A A", "AAA", 'A', planks);
+				GameRegistry.addShapedRecipe(GrowthCraftBees.blocks.beeBoxBotania.asStack(1, type.meta), " A ", "A A", "AAA", 'A', planks);
 			}
 		}
 	}

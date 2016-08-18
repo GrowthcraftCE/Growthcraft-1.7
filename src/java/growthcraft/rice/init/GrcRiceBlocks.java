@@ -23,13 +23,13 @@
  */
 package growthcraft.rice.init;
 
+import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.GrcModuleBlocks;
 import growthcraft.rice.common.block.BlockPaddy;
 import growthcraft.rice.common.block.BlockRice;
-import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.definition.BlockTypeDefinition;
 
-public class GrcRiceBlocks extends GrcModuleBase
+public class GrcRiceBlocks extends GrcModuleBlocks
 {
 	public BlockTypeDefinition<BlockRice> riceBlock;
 	public BlockDefinition paddyField;

@@ -4,7 +4,6 @@ import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.apples.common.CommonProxy;
-import growthcraft.apples.common.item.ItemAppleSeeds;
 import growthcraft.apples.common.village.ComponentVillageAppleFarm;
 import growthcraft.apples.common.village.VillageHandlerApples;
 import growthcraft.apples.handler.AppleFuelHandler;
@@ -32,7 +31,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(
 	modid = GrowthCraftApples.MOD_ID,

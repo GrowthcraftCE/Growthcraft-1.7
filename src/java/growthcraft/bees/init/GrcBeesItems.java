@@ -45,11 +45,11 @@ public class GrcBeesItems extends GrcModuleItems
 	@Override
 	public void preInit()
 	{
-		this.honeyCombEmpty = new ItemDefinition(new ItemHoneyCombEmpty());
-		this.honeyCombFilled = new ItemDefinition(new ItemHoneyCombFilled());
-		this.honeyJar = new ItemDefinition(new ItemHoneyJar());
-		this.bee = new ItemDefinition(new ItemBee());
-		this.beesWax = new ItemDefinition(new ItemBeesWax());
+		this.honeyCombEmpty = newDefinition(new ItemHoneyCombEmpty());
+		this.honeyCombFilled = newDefinition(new ItemHoneyCombFilled());
+		this.honeyJar = newDefinition(new ItemHoneyJar());
+		this.bee = newDefinition(new ItemBee());
+		this.beesWax = newDefinition(new ItemBeesWax());
 	}
 
 	@Override

@@ -35,14 +35,14 @@ public class GrcCellarAchievements
 		achievements.put(CellarAchievement.GET_DRUNK,
 			(new Achievement("grc.achievement.getDrunk", "getDrunk",
 				0, -4,
-				GrowthCraftCellar.chievItemDummy.asStack(),
+				GrowthCraftCellar.items.chievItemDummy.asStack(),
 				achievements.get(CellarAchievement.FERMENT_BOOZE))
 			).setSpecial().registerStat()
 		);
 		achievements.put(CellarAchievement.ON_THE_GO,
 			(new Achievement("grc.achievement.onTheGo", "onTheGo",
 				2, -4,
-				GrowthCraftCellar.waterBag.asStack(1, 16),
+				GrowthCraftCellar.items.waterBag.asStack(1, 16),
 				NO_ACHIEVEMENT)
 			).registerStat()
 		);

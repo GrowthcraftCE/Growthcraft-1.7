@@ -46,10 +46,10 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
-		FMLInterModComms.sendMessage("Thaumcraft", "harvestClickableCrop", GrowthCraftHops.hopVine.asStack(1, 3));
+		FMLInterModComms.sendMessage("Thaumcraft", "harvestClickableCrop", GrowthCraftHops.blocks.hopVine.asStack(1, 3));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hopSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftHops.hops.asStack(), new AspectList().add(Aspect.CROP, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftHops.items.hopSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftHops.items.hops.asStack(), new AspectList().add(Aspect.CROP, 1));
 
 		// hopAle
 		AspectList[] common = new AspectList[]

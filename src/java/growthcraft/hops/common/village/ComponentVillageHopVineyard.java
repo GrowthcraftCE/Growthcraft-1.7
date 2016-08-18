@@ -74,9 +74,9 @@ public class ComponentVillageHopVineyard extends StructureVillagePieces.Village
 			{
 				this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, loop2, 1, box);
 				this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, loop2, 7, box);
-				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.hopVine.getBlock(), 3, loop, loop2, 2, box);
-				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.hopVine.getBlock(), 3, loop, loop2, 4, box);
-				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.hopVine.getBlock(), 3, loop, loop2, 6, box);
+				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.blocks.hopVine.getBlock(), 3, loop, loop2, 2, box);
+				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.blocks.hopVine.getBlock(), 3, loop, loop2, 4, box);
+				this.placeBlockAtCurrentPosition(world, GrowthCraftHops.blocks.hopVine.getBlock(), 3, loop, loop2, 6, box);
 			}
 		}
 

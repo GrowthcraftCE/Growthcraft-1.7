@@ -36,8 +36,8 @@ public class GrcGrapesItems extends GrcModuleItems
 	@Override
 	public void preInit()
 	{
-		this.grapes     = new ItemDefinition(new ItemGrapes());
-		this.grapeSeeds = new ItemDefinition(new ItemGrapeSeeds());
+		this.grapes     = newDefinition(new ItemGrapes());
+		this.grapeSeeds = newDefinition(new ItemGrapeSeeds());
 	}
 
 	@Override

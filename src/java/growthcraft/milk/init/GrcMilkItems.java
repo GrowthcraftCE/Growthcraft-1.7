@@ -60,17 +60,17 @@ public class GrcMilkItems extends GrcModuleItems
 	@Override
 	public void preInit()
 	{
-		this.butter = new ItemDefinition(new ItemButter());
-		this.cheese = new ItemDefinition(new ItemCheese());
-		this.cheeseCloth = new ItemDefinition(new ItemCheeseCloth());
-		this.iceCream = new ItemDefinition(new ItemIceCream());
-		this.yogurt = new ItemDefinition(new ItemYogurt());
+		this.butter = newDefinition(new ItemButter());
+		this.cheese = newDefinition(new ItemCheese());
+		this.cheeseCloth = newDefinition(new ItemCheeseCloth());
+		this.iceCream = newDefinition(new ItemIceCream());
+		this.yogurt = newDefinition(new ItemYogurt());
 		if (GrowthCraftMilk.getConfig().thistleSeedEnabled)
 		{
-			this.seedThistle = new ItemDefinition(new ItemSeedThistle());
+			this.seedThistle = newDefinition(new ItemSeedThistle());
 		}
-		this.stomach = new ItemDefinition(new ItemStomach());
-		this.starterCulture = new ItemDefinition(new ItemStarterCulture());
+		this.stomach = newDefinition(new ItemStomach());
+		this.starterCulture = newDefinition(new ItemStarterCulture());
 	}
 
 	@Override

@@ -41,7 +41,7 @@ public class ForestryModule extends ForestryModuleBase
 	@Optional.Method(modid="Forestry")
 	protected void integrate()
 	{
-		final ItemStack appleSeed = GrowthCraftApples.appleSeeds.asStack();
+		final ItemStack appleSeed = GrowthCraftApples.items.appleSeeds.asStack();
 		final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
 		if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager.addRecipe(10, new ItemStack[]{appleSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
 		Backpack.FORESTERS.add(appleSeed);

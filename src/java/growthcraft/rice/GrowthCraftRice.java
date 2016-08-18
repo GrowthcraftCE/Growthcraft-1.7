@@ -12,7 +12,9 @@ import growthcraft.rice.common.CommonProxy;
 import growthcraft.rice.common.village.ComponentVillageRiceField;
 import growthcraft.rice.common.village.VillageHandlerRice;
 import growthcraft.rice.event.BonemealEventRice;
+import growthcraft.rice.init.GrcRiceBlocks;
 import growthcraft.rice.init.GrcRiceFluids;
+import growthcraft.rice.init.GrcRiceItems;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -78,25 +80,25 @@ public class GrowthCraftRice
 	private void register()
 	{
 		modules.register();
-		MinecraftForge.addGrassSeed(rice.asStack(), config.riceSeedDropRarity);
+		MinecraftForge.addGrassSeed(items.rice.asStack(), config.riceSeedDropRarity);
 
 		MapGenHelper.registerVillageStructure(ComponentVillageRiceField.class, "grc.ricefield");
 
 		//====================
 		// ORE DICTIONARY
 		//====================
-		OreDictionary.registerOre("cropRice", rice.getItem());
-		OreDictionary.registerOre("seedRice", rice.getItem());
+		OreDictionary.registerOre("cropRice", items.rice.getItem());
+		OreDictionary.registerOre("seedRice", items.rice.getItem());
 		// For Pam's HarvestCraft
 		// Uses the same OreDict. names as HarvestCraft
-		OreDictionary.registerOre("listAllseed", rice.getItem());
+		OreDictionary.registerOre("listAllseed", items.rice.getItem());
 
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addRecipe(new ShapedOreRecipe(riceBall.asStack(1), "###", "###", '#', "cropRice"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(items.riceBall.asStack(1), "###", "###", '#', "cropRice"));
 
-		NEI.hideItem(riceBlock.asStack());
+		NEI.hideItem(blocks.riceBlock.asStack());
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -113,7 +115,7 @@ public class GrowthCraftRice
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		PlayerInteractEventPaddy.paddyBlocks.put(Blocks.farmland, paddyField.getBlock());
+		PlayerInteractEventPaddy.paddyBlocks.put(Blocks.farmland, blocks.paddyField.getBlock());
 		CommonProxy.instance.init();
 		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();

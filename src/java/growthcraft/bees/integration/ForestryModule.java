@@ -64,19 +64,19 @@ public class ForestryModule extends ForestryModuleBase
 	protected void doPreInit()
 	{
 		final int beeboxCount = EnumBeeBoxForestry.VALUES.length;
-		GrowthCraftBees.beeBoxesForestry = new ArrayList<BlockTypeDefinition<BlockBeeBox>>();
-		GrowthCraftBees.beeBoxesForestryFireproof = new ArrayList<BlockTypeDefinition<BlockBeeBox>>();
+		GrowthCraftBees.blocks.beeBoxesForestry = new ArrayList<BlockTypeDefinition<? extends BlockBeeBox>>();
+		GrowthCraftBees.blocks.beeBoxesForestryFireproof = new ArrayList<BlockTypeDefinition<? extends BlockBeeBox>>();
 
 		int i = 0;
 		int offset = 0;
 		for (EnumBeeBoxForestry[] row : EnumBeeBoxForestry.ROWS)
 		{
-			final BlockTypeDefinition<BlockBeeBox> beeBox = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxForestry(row, offset, i, false));
-			final BlockTypeDefinition<BlockBeeBox> beeBoxFP = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxForestry(row, offset, i, true));
+			final BlockTypeDefinition<? extends BlockBeeBox> beeBox = GrowthCraftBees.blocks.newTypedDefinition(new BlockBeeBoxForestry(row, offset, i, false));
+			final BlockTypeDefinition<? extends BlockBeeBox> beeBoxFP = GrowthCraftBees.blocks.newTypedDefinition(new BlockBeeBoxForestry(row, offset, i, true));
 			beeBox.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
 			beeBoxFP.getBlock().setHarvestLevel("axe", 0);
-			GrowthCraftBees.beeBoxesForestry.add(beeBox);
-			GrowthCraftBees.beeBoxesForestryFireproof.add(beeBoxFP);
+			GrowthCraftBees.blocks.beeBoxesForestry.add(beeBox);
+			GrowthCraftBees.blocks.beeBoxesForestryFireproof.add(beeBoxFP);
 			beeBox.register(String.format("grc.BeeBox.Forestry.%d.%s", i, "Normal"), ItemBlockBeeBox.class);
 			beeBoxFP.register(String.format("grc.BeeBox.Forestry.%d.%s", i, "Fireproof"), ItemBlockBeeBox.class);
 			i++;
@@ -100,7 +100,7 @@ public class ForestryModule extends ForestryModuleBase
 			if (en == null) continue;
 
 			{
-				final BlockTypeDefinition<BlockBeeBox> beeBox = GrowthCraftBees.beeBoxesForestry.get(en.row);
+				final BlockTypeDefinition<? extends BlockBeeBox> beeBox = GrowthCraftBees.blocks.beeBoxesForestry.get(en.row);
 				if (beeBox != null)
 				{
 					final ItemStack planks = en.getForestryPlanksStack();
@@ -111,7 +111,7 @@ public class ForestryModule extends ForestryModuleBase
 				}
 			}
 			{
-				final BlockTypeDefinition<BlockBeeBox> beeBoxFP = GrowthCraftBees.beeBoxesForestryFireproof.get(en.row);
+				final BlockTypeDefinition<? extends BlockBeeBox> beeBoxFP = GrowthCraftBees.blocks.beeBoxesForestryFireproof.get(en.row);
 				if (beeBoxFP != null)
 				{
 					final ItemStack planks = en.getForestryFireproofPlanksStack();

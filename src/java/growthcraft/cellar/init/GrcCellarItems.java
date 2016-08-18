@@ -38,9 +38,9 @@ public class GrcCellarItems extends GrcModuleItems
 	@Override
 	public void preInit()
 	{
-		this.yeast = new ItemDefinition(new ItemYeast());
-		this.waterBag = new ItemDefinition(new ItemWaterBag());
-		this.chievItemDummy = new ItemDefinition(new ItemChievDummy());
+		this.yeast = newDefinition(new ItemYeast());
+		this.waterBag = newDefinition(new ItemWaterBag());
+		this.chievItemDummy = newDefinition(new ItemChievDummy());
 	}
 
 	@Override

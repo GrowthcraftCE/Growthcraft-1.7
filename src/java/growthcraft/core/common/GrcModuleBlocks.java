@@ -42,7 +42,7 @@ public class GrcModuleBlocks extends GrcModuleBase
 	 * @param block the block to wrap
 	 * @return definition
 	 */
-	protected BlockDefinition newDefinition(Block block)
+	public BlockDefinition newDefinition(Block block)
 	{
 		final BlockDefinition def = new BlockDefinition(block);
 		all.add(def);
@@ -55,7 +55,7 @@ public class GrcModuleBlocks extends GrcModuleBase
 	 * @param block the block to wrap and type by
 	 * @return typed definition
 	 */
-	protected <T extends Block> BlockTypeDefinition<T> newTypedDefinition(T block)
+	public <T extends Block> BlockTypeDefinition<T> newTypedDefinition(T block)
 	{
 		final BlockTypeDefinition<T> def = new BlockTypeDefinition<T>(block);
 		all.add(def);

@@ -55,8 +55,8 @@ public class GrcBambooBlocks extends GrcModuleBlocks
 	public BlockDefinition bambooFenceRope;
 	public BlockDefinition bambooWall;
 	public BlockDefinition bambooStairs;
-	public BlockTypeDefinition<BlockSlab> bambooSingleSlab;
-	public BlockTypeDefinition<BlockSlab> bambooDoubleSlab;
+	public BlockTypeDefinition<? extends BlockSlab> bambooSingleSlab;
+	public BlockTypeDefinition<? extends BlockSlab> bambooDoubleSlab;
 	public BlockDefinition bambooDoor;
 	public BlockDefinition bambooFenceGate;
 	public BlockDefinition bambooScaffold;

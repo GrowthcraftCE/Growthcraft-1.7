@@ -174,11 +174,8 @@ public class GrowthCraftCellar
 
 	private void register()
 	{
-		addDefaultHeatSources();
-		//====================
-		// REGISTRIES
-		//====================
 		modules.register();
+		addDefaultHeatSources();
 
 		GameRegistry.registerTileEntity(TileEntityFruitPress.class, "grc.tileentity.fruitPress");
 		GameRegistry.registerTileEntity(TileEntityFruitPresser.class, "grc.tileentity.fruitPresser");
@@ -227,7 +224,7 @@ public class GrowthCraftCellar
 		//====================
 		achievements = new GrcCellarAchievements();
 
-		NEI.hideItem(chievItemDummy.asStack());
+		NEI.hideItem(items.chievItemDummy.asStack());
 	}
 
 	private void extendPotionsArray()
@@ -263,7 +260,7 @@ public class GrowthCraftCellar
 
 	private void registerOres()
 	{
-		OreDictionary.registerOre("materialYeast", yeast.getItem());
+		OreDictionary.registerOre("materialYeast", items.yeast.getItem());
 		OreDictionary.registerOre("yeastBrewers", EnumYeast.BREWERS.asStack());
 		OreDictionary.registerOre("yeastLager", EnumYeast.LAGER.asStack());
 		OreDictionary.registerOre("yeastBayanus", EnumYeast.BAYANUS.asStack());

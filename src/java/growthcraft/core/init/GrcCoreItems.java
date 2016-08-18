@@ -44,11 +44,11 @@ public class GrcCoreItems extends GrcModuleItems
 	@Override
 	public void preInit()
 	{
-		this.rope = new ItemDefinition(new ItemRope());
-		this.salt = new ItemDefinition(new ItemSalt());
-		this.saltBottle = new ItemDefinition(new ItemBottleSalt());
-		this.saltBucket = new ItemDefinition(new ItemBucketSalt());
-		this.crowbar = new ItemDefinition(new ItemCrowbar());
+		this.rope = newDefinition(new ItemRope());
+		this.salt = newDefinition(new ItemSalt());
+		this.saltBottle = newDefinition(new ItemBottleSalt());
+		this.saltBucket = newDefinition(new ItemBucketSalt());
+		this.crowbar = newDefinition(new ItemCrowbar());
 	}
 
 	@Override

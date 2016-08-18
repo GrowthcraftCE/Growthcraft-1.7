@@ -42,7 +42,7 @@ public class GrcModuleItems extends GrcModuleBase
 	 * @param item the item to wrap
 	 * @return definition
 	 */
-	protected ItemDefinition newDefinition(Item item)
+	public ItemDefinition newDefinition(Item item)
 	{
 		final ItemDefinition def = new ItemDefinition(item);
 		all.add(def);
@@ -55,7 +55,7 @@ public class GrcModuleItems extends GrcModuleBase
 	 * @param item the item to wrap and type by
 	 * @return typed definition
 	 */
-	protected <T extends Item> ItemTypeDefinition<T> newTypedDefinition(T item)
+	public <T extends Item> ItemTypeDefinition<T> newTypedDefinition(T item)
 	{
 		final ItemTypeDefinition<T> def = new ItemTypeDefinition<T>(item);
 		all.add(def);

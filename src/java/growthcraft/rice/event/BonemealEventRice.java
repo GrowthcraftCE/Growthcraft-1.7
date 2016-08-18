@@ -26,7 +26,7 @@ public class BonemealEventRice
 		{
 			for (int k = z - 1; k <= z + 1; ++k)
 			{
-				final boolean isRiceBlock = (GrowthCraftRice.riceBlock.getBlock() == world.getBlock(i, y, k)) &&
+				final boolean isRiceBlock = (GrowthCraftRice.blocks.riceBlock.getBlock() == world.getBlock(i, y, k)) &&
 					(world.getBlockMetadata(i, y, k) != 7);
 				final boolean isPaddyBelow = RiceBlockCheck.isPaddy(world.getBlock(i, y - 1, k)) &&
 					(world.getBlockMetadata(i, y - 1, k) != 0);
@@ -56,7 +56,7 @@ public class BonemealEventRice
 	@SubscribeEvent
 	public void onUseBonemeal(BonemealEvent event)
 	{
-		if (GrowthCraftRice.riceBlock.getBlock() == event.block)
+		if (GrowthCraftRice.blocks.riceBlock.getBlock() == event.block)
 		{
 			if (!event.world.isRemote)
 			{
