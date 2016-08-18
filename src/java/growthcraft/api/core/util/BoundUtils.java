@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2015, 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,75 @@ package growthcraft.api.core.util;
  */
 public class BoundUtils
 {
+	public static final float[] NORMALIZED_CLAMP = new float[] { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f };
+
 	private BoundUtils() {}
+
+	/**
+	 * Clamps the target bounds using the provided `clamp` bounds
+	 * @param target target bounds to modify
+	 * @param clamp bounds to clamp with
+	 * @return bounds
+	 */
+	public static float[] clampBounds(float[] target, float[] clamp)
+	{
+		assert target.length == 6;
+		if (target[0] < clamp[0]) target[0] = clamp[0];
+		if (target[1] < clamp[1]) target[1] = clamp[1];
+		if (target[2] < clamp[2]) target[2] = clamp[2];
+		if (target[3] > clamp[3]) target[3] = clamp[3];
+		if (target[4] > clamp[4]) target[4] = clamp[4];
+		if (target[5] > clamp[5]) target[5] = clamp[5];
+		return target;
+	}
+
+	/**
+	 * Clamps the target bounds using the NORMALIZED_CLAMP
+	 * @param target target bounds to modify
+	 * @return bounds
+	 */
+	public static float[] clampBounds(float[] target)
+	{
+		return clampBounds(target, NORMALIZED_CLAMP);
+	}
+
+	/**
+	 * Adds the expander
+	 *
+	 * @param target target bounds to modify
+	 * @param expander the bounds to add
+	 * @return bounds
+	 */
+	public static float[] addBounds(float[] target, float[] expander)
+	{
+		assert target.length == 6;
+		target[0] += expander[0];
+		target[1] += expander[1];
+		target[2] += expander[2];
+		target[3] += expander[3];
+		target[4] += expander[4];
+		target[5] += expander[5];
+		return target;
+	}
+
+	/**
+	 * Adds the expander
+	 *
+	 * @param target target bounds to modify
+	 * @param contractor the bounds to add
+	 * @return bounds
+	 */
+	public static float[] subBounds(float[] target, float[] contractor)
+	{
+		assert target.length == 6;
+		target[0] -= contractor[0];
+		target[1] -= contractor[1];
+		target[2] -= contractor[2];
+		target[3] -= contractor[3];
+		target[4] -= contractor[4];
+		target[5] -= contractor[5];
+		return target;
+	}
 
 	/**
 	 * Creates a new 6 element float array for use as a Bounding Box
