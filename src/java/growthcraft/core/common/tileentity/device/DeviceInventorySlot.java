@@ -41,11 +41,21 @@ public class DeviceInventorySlot
 		this.index = idx;
 	}
 
+	/**
+	 * Returns the current item in the slot, if any
+	 *
+	 * @return stack
+	 */
 	public ItemStack get()
 	{
 		return inventory.getStackInSlot(index);
 	}
 
+	/**
+	 * The size of the ItemStack in the slot, if none is present the size is 0
+	 *
+	 * @return size
+	 */
 	public int getSize()
 	{
 		final ItemStack stack = get();
@@ -53,21 +63,48 @@ public class DeviceInventorySlot
 		return stack.stackSize;
 	}
 
+	/**
+	 * Returns the total capacity of the slot.
+	 * If an item occupies the slot then the stack's maxStackSize is returned
+	 *
+	 * @return capacity
+	 */
 	public int getCapacity()
 	{
+		final ItemStack stack = get();
+		if (stack != null)
+		{
+			return stack.getMaxStackSize();
+		}
 		return inventory.getInventoryStackLimit();
 	}
 
+	/**
+	 * Returns the current available capacity, that is the maxCapactity - current size
+	 *
+	 * @return available capacity
+	 */
 	public int getAvailableCapacity()
 	{
 		return getCapacity() - getSize();
 	}
 
+	/**
+	 * Set the stack for this slot
+	 *
+	 * @param newStack the stack to set
+	 */
 	public void set(ItemStack newStack)
 	{
 		inventory.setInventorySlotContents(index, newStack);
 	}
 
+	/**
+	 * Is there any VALID item in this slot, where valid is an item with
+	 * a stackSize greater than 0
+	 *
+	 * @return true there is content, false otherwise
+	 */
 	public boolean hasContent()
 	{
 		return getSize() > 0;
