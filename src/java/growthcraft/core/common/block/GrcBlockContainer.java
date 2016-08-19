@@ -30,6 +30,7 @@ import javax.annotation.Nonnull;
 
 import growthcraft.api.core.nbt.INBTItemSerializable;
 import growthcraft.api.core.util.BlockFlags;
+import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.item.IItemTileBlock;
 import growthcraft.core.common.tileentity.feature.ICustomDisplayName;
 import growthcraft.core.common.tileentity.feature.IItemHandler;
@@ -69,12 +70,6 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 	{
 		super(material);
 		this.isBlockContainer = true;
-	}
-
-	@Override
-	public void onBlockAdded(World world, int x, int y, int z)
-	{
-		super.onBlockAdded(world, x, y, z);
 	}
 
 	@Override
@@ -170,24 +165,45 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		return false;
 	}
 
+	protected void fellBlockFromWrench(World world, int x, int y, int z)
+	{
+		final int metadata = world.getBlockMetadata(x, y, z);
+		final List<ItemStack> drops = new ArrayList<ItemStack>();
+		if (shouldDropTileStack(world, x, y, z, metadata, 0))
+		{
+			GrowthCraftCore.getLogger().info("Dropping Tile As ItemStack");
+			getTileItemStackDrops(drops, world, x, y, z, metadata, 0);
+			for (ItemStack stack : drops)
+			{
+				ItemUtils.spawnItemStack(world, x, y, z, stack, world.rand);
+			}
+			final TileEntity te = getTileEntity(world, x, y, z);
+			if (te instanceof IInventory)
+			{
+				GrowthCraftCore.getLogger().info("Clearing Inventory");
+				InventoryProcessor.instance().clearSlots((IInventory)te);
+			}
+			GrowthCraftCore.getLogger().info("Setting Block To Air");
+			world.setBlockToAir(x, y, z);
+		}
+		else
+		{
+			fellBlockAsItem(world, x, y, z);
+		}
+	}
+
+	@Override
 	public boolean wrenchBlock(World world, int x, int y, int z, EntityPlayer player, ItemStack wrench)
 	{
-		if (player != null)
+		if (player == null) return false;
+		if (!ItemUtils.canWrench(wrench, player, x, y, z)) return false;
+		if (!player.isSneaking()) return false;
+		if (!world.isRemote)
 		{
-			if (ItemUtils.canWrench(wrench, player, x, y, z))
-			{
-				if (player.isSneaking())
-				{
-					if (!world.isRemote)
-					{
-						fellBlockAsItem(world, x, y, z);
-						ItemUtils.wrenchUsed(wrench, player, x, y, z);
-					}
-					return true;
-				}
-			}
+			fellBlockFromWrench(world, x, y, z);
+			ItemUtils.wrenchUsed(wrench, player, x, y, z);
 		}
-		return false;
+		return true;
 	}
 
 	public boolean tryWrenchItem(EntityPlayer player, World world, int x, int y, int z)
