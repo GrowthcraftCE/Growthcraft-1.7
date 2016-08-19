@@ -121,6 +121,16 @@ public class DeviceInventorySlot
 	}
 
 	/**
+	 * Is this slot full?
+	 *
+	 * @return true, the slot is full, false otherwise
+	 */
+	public boolean isFull()
+	{
+		return getAvailableCapacity() <= 0;
+	}
+
+	/**
 	 * Does the provided stack match the one in the slot?
 	 *
 	 * @param stack - item stack to test
