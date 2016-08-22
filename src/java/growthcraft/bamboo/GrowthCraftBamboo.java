@@ -71,14 +71,14 @@ public class GrowthCraftBamboo
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
-
+		if (config.debugEnabled) modules.setLogger(logger);
 		modules.add(blocks);
 		modules.add(items);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.bamboo.integration.ForestryModule());
 		if (config.enableMFRIntegration) modules.add(new growthcraft.bamboo.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bamboo.integration.ThaumcraftModule());
-		if (config.debugEnabled) modules.setLogger(logger);
-
+		modules.add(CommonProxy.instance);
+		modules.freeze();
 		creativeTab = new CreativeTabsGrowthcraftBamboo("creative_tab_grcbamboo");
 		modules.preInit();
 
@@ -179,10 +179,8 @@ public class GrowthCraftBamboo
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.initRenders();
 		final VillageHandlerBamboo handler = new VillageHandlerBamboo();
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-
 		modules.init();
 	}
 

@@ -72,14 +72,14 @@ public class GrowthCraftGrapes
 
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
-
+		if (config.debugEnabled) modules.setLogger(logger);
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.grapes.integration.ForestryModule());
 		if (config.enableMFRIntegration) modules.add(new growthcraft.grapes.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.grapes.integration.ThaumcraftModule());
-		if (config.debugEnabled) modules.setLogger(logger);
+		modules.add(CommonProxy.instance);
 		modules.freeze();
 		creativeTab = new CreativeTabsGrowthcraftGrapes("creative_tab_grcgrapes");
 		modules.preInit();
@@ -137,11 +137,8 @@ public class GrowthCraftGrapes
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.initRenders();
-
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
-
 		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}

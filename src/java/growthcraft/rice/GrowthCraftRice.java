@@ -65,13 +65,14 @@ public class GrowthCraftRice
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
+		if (config.debugEnabled) modules.setLogger(logger);
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.rice.integration.ForestryModule());
 		if (config.enableMFRIntegration) modules.add(new growthcraft.rice.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
-		if (config.debugEnabled) modules.setLogger(logger);
+		modules.add(CommonProxy.instance);
 		modules.freeze();
 		modules.preInit();
 		register();
@@ -116,7 +117,6 @@ public class GrowthCraftRice
 	public void load(FMLInitializationEvent event)
 	{
 		PlayerInteractEventPaddy.paddyBlocks.put(Blocks.farmland, blocks.paddyField.getBlock());
-		CommonProxy.instance.init();
 		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}

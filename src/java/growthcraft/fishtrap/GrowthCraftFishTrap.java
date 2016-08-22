@@ -57,19 +57,13 @@ public class GrowthCraftFishTrap
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
-
+		if (config.debugEnabled) modules.setLogger(logger);
 		userFishTrapConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/fishtrap/entries.json");
 		modules.add(userFishTrapConfig);
-
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.fishtrap.integration.ThaumcraftModule());
-
-		if (config.debugEnabled) modules.setLogger(logger);
-
-		//====================
-		// INIT
-		//====================
+		modules.add(CommonProxy.instance);
+		modules.freeze();
 		fishTrap = new BlockDefinition(new BlockFishTrap());
-
 		modules.preInit();
 		register();
 	}
@@ -120,7 +114,6 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		userFishTrapConfig.loadUserConfig();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiProvider);
 		modules.init();

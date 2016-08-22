@@ -65,13 +65,14 @@ public class GrowthCraftHops
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
+		if (config.debugEnabled) modules.setLogger(logger);
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.hops.integration.ForestryModule());
 		if (config.enableMFRIntegration) modules.add(new growthcraft.hops.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.hops.integration.ThaumcraftModule());
-		if (config.debugEnabled) modules.setLogger(logger);
+		modules.add(CommonProxy.instance);
 		modules.freeze();
 		modules.preInit();
 		register();
@@ -120,7 +121,6 @@ public class GrowthCraftHops
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
