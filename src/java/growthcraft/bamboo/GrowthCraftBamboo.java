@@ -102,7 +102,7 @@ public class GrowthCraftBamboo
 		{
 			//GameRegistry.addBiome(bambooBiome);
 			BiomeManager.addSpawnBiome(bambooBiome);
-			BiomeDictionary.registerBiomeType(bambooBiome, Type.FOREST);
+			BiomeDictionary.registerBiomeType(bambooBiome, Type.DENSE, Type.LUSH, Type.FOREST);
 		}
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBamboo(), 0);
