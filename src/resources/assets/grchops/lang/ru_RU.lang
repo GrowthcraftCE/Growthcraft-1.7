@@ -6,43 +6,46 @@ item.grc.hops.name=Обычный хмель
 item.grc.hopSeeds.name=Семена обычного хмеля
 
 # Fluids
+fluid.grc.hopAle=Эль
 fluid.grc.hopAle0=Эль
 fluid.grc.hopAle1=Эль
 fluid.grc.hopAle2=Эль
 fluid.grc.hopAle3=Эль
 fluid.grc.hopAle4=Эль
-fluid.grc.hopAle5=fluid.grc.hopAle5
-fluid.grc.hopAle6=fluid.grc.hopAle6
-fluid.grc.hopAle7=fluid.grc.hopAle7
-fluid.grc.hopAle8=fluid.grc.hopAle8
+fluid.grc.hopAle5=Эль
+fluid.grc.hopAle6=Эль
+fluid.grc.hopAle7=Эль
+fluid.grc.hopAle8=Эль
 
-fluid.grc.lager0=fluid.grc.lager0
-fluid.grc.lager1=fluid.grc.lager1
-fluid.grc.lager2=fluid.grc.lager2
-fluid.grc.lager3=fluid.grc.lager3
-fluid.grc.lager4=fluid.grc.lager4
-fluid.grc.lager5=fluid.grc.lager5
-fluid.grc.lager6=fluid.grc.lager6
+fluid.grc.lager=Светлое пиво
+fluid.grc.lager0=Светлое пиво
+fluid.grc.lager1=Светлое пиво
+fluid.grc.lager2=Светлое пиво
+fluid.grc.lager3=Светлое пиво
+fluid.grc.lager4=Светлое пиво
+fluid.grc.lager5=Светлое пиво
+fluid.grc.lager6=Светлое пиво
 
 # Fluid Buckets
+item.bucket.fluid.grc.hopAle.name=Ведро эля
 item.bucket.fluid.grc.hopAle0.name=Ведро эля
 item.bucket.fluid.grc.hopAle1.name=Ведро эля
 item.bucket.fluid.grc.hopAle2.name=Ведро эля
 item.bucket.fluid.grc.hopAle3.name=Ведро эля
 item.bucket.fluid.grc.hopAle4.name=Ведро эля
-item.bucket.fluid.grc.hopAle5.name=item.bucket.fluid.grc.hopAle5.name
-item.bucket.fluid.grc.hopAle6.name=item.bucket.fluid.grc.hopAle6.name
-item.bucket.fluid.grc.hopAle7.name=item.bucket.fluid.grc.hopAle7.name
-item.bucket.fluid.grc.hopAle8.name=item.bucket.fluid.grc.hopAle8.name
+item.bucket.fluid.grc.hopAle5.name=Ведро эля
+item.bucket.fluid.grc.hopAle6.name=Ведро эля
+item.bucket.fluid.grc.hopAle7.name=Ведро эля
+item.bucket.fluid.grc.hopAle8.name=Ведро эля
 
-item.bucket.fluid.grc.lager.name=item.bucket.fluid.grc.lager.name
-item.bucket.fluid.grc.lager0.name=item.bucket.fluid.grc.lager0.name
-item.bucket.fluid.grc.lager1.name=item.bucket.fluid.grc.lager1.name
-item.bucket.fluid.grc.lager2.name=item.bucket.fluid.grc.lager2.name
-item.bucket.fluid.grc.lager3.name=item.bucket.fluid.grc.lager3.name
-item.bucket.fluid.grc.lager4.name=item.bucket.fluid.grc.lager4.name
-item.bucket.fluid.grc.lager5.name=item.bucket.fluid.grc.lager5.name
-item.bucket.fluid.grc.lager6.name=item.bucket.fluid.grc.lager6.name
+item.bucket.fluid.grc.lager.name=Ведро светлого пива
+item.bucket.fluid.grc.lager0.name=Ведро светлого пива
+item.bucket.fluid.grc.lager1.name=Ведро светлого пива
+item.bucket.fluid.grc.lager2.name=Ведро светлого пива
+item.bucket.fluid.grc.lager3.name=Ведро светлого пива
+item.bucket.fluid.grc.lager4.name=Ведро светлого пива
+item.bucket.fluid.grc.lager5.name=Ведро светлого пива
+item.bucket.fluid.grc.lager6.name=Ведро светлого пива
 
 # Fluid Blocks
 tile.fluid.grc.hopAle.name=Эль
@@ -51,19 +54,19 @@ tile.fluid.grc.hopAle1.name=Эль
 tile.fluid.grc.hopAle2.name=Эль
 tile.fluid.grc.hopAle3.name=Эль
 tile.fluid.grc.hopAle4.name=Эль
-tile.fluid.grc.hopAle5.name=tile.fluid.grc.hopAle5.name
-tile.fluid.grc.hopAle6.name=tile.fluid.grc.hopAle6.name
-tile.fluid.grc.hopAle7.name=tile.fluid.grc.hopAle7.name
-tile.fluid.grc.hopAle8.name=tile.fluid.grc.hopAle8.name
+tile.fluid.grc.hopAle5.name=Эль
+tile.fluid.grc.hopAle6.name=Эль
+tile.fluid.grc.hopAle7.name=Эль
+tile.fluid.grc.hopAle8.name=Эль
 
-tile.fluid.grc.lager.name=tile.fluid.grc.lager.name
-tile.fluid.grc.lager0.name=tile.fluid.grc.lager0.name
-tile.fluid.grc.lager1.name=tile.fluid.grc.lager1.name
-tile.fluid.grc.lager2.name=tile.fluid.grc.lager2.name
-tile.fluid.grc.lager3.name=tile.fluid.grc.lager3.name
-tile.fluid.grc.lager4.name=tile.fluid.grc.lager4.name
-tile.fluid.grc.lager5.name=tile.fluid.grc.lager5.name
-tile.fluid.grc.lager6.name=tile.fluid.grc.lager6.name
+tile.fluid.grc.lager.name=Светлое пиво
+tile.fluid.grc.lager0.name=Светлое пиво
+tile.fluid.grc.lager1.name=Светлое пиво
+tile.fluid.grc.lager2.name=Светлое пиво
+tile.fluid.grc.lager3.name=Светлое пиво
+tile.fluid.grc.lager4.name=Светлое пиво
+tile.fluid.grc.lager5.name=Светлое пиво
+tile.fluid.grc.lager6.name=Светлое пиво
 
 # Fluid Tooltips
 fluid.grc.hopAle4.modifier=Нехмельной, молодой
