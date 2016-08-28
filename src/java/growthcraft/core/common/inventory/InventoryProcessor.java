@@ -250,8 +250,15 @@ public class InventoryProcessor
 		return null;
 	}
 
+	protected boolean checkItemEquality(ItemStack actual, ItemStack expected)
+	{
+		if (actual == null) return false;
+		if (!expected.isItemEqual(actual)) return false;
+		return true;
+	}
+
 	/**
-	 * Checks the given inventory and slot for an expected ItemStack
+	 * Checks the given inventory and slot for an expected ItemStack, this will ignore stack sizes
 	 *
 	 * @param inv - inventory to check
 	 * @param expected - itemstack expected
@@ -270,8 +277,32 @@ public class InventoryProcessor
 		}
 		else
 		{
-			if (actual == null) return false;
-			if (!expected.isItemEqual(actual)) return false;
+			if (!checkItemEquality(actual, expected)) return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Checks the given inventory and slot for an expected ItemStack
+	 *
+	 * @param inv - inventory to check
+	 * @param expected - itemstack expected
+	 *   If the stack is null, then the slot is expected to be null as well
+	 *   Otherwise it is required
+	 * @param src - slot to check
+	 */
+	public boolean checkSlotAndSize(@Nonnull IInventory inv, @Nullable ItemStack expected, int src)
+	{
+		final ItemStack actual = inv.getStackInSlot(src);
+
+		if (expected == null)
+		{
+			// if the item is not needed, and is not available
+			if (actual != null) return false;
+		}
+		else
+		{
+			if (!checkItemEquality(actual, expected)) return false;
 			if (actual.stackSize < expected.stackSize) return false;
 		}
 		return true;
@@ -286,7 +317,7 @@ public class InventoryProcessor
 	 *   Otherwise it is required
 	 * @param src - slot to check
 	 */
-	public boolean checkSlot(@Nonnull IInventory inv, @Nullable IMultiItemStacks expected, int src)
+	public boolean checkSlotAndSize(@Nonnull IInventory inv, @Nullable IMultiItemStacks expected, int src)
 	{
 		final ItemStack actual = inv.getStackInSlot(src);
 
@@ -312,13 +343,13 @@ public class InventoryProcessor
 	 * @param from - a slice of slots to look in
 	 * @return true, all the items in the filter are present in the inv, false otherwise
 	 */
-	public boolean checkSlots(@Nonnull IInventory inv, @Nonnull ItemStack[] filter, int[] from)
+	public boolean checkSlotsAndSizes(@Nonnull IInventory inv, @Nonnull ItemStack[] filter, int[] from)
 	{
 		assert filter.length == from.length;
 
 		for (int i = 0; i < filter.length; ++i)
 		{
-			if (!checkSlot(inv, filter[i], from[i])) return false;
+			if (!checkSlotAndSize(inv, filter[i], from[i])) return false;
 		}
 		return true;
 	}
@@ -331,13 +362,13 @@ public class InventoryProcessor
 	 * @param from - a slice of slots to look in
 	 * @return true, all the items in the filter are present in the inv, false otherwise
 	 */
-	public boolean checkSlots(@Nonnull IInventory inv, @Nonnull IMultiItemStacks[] filter, int[] from)
+	public boolean checkSlotsAndSizes(@Nonnull IInventory inv, @Nonnull IMultiItemStacks[] filter, int[] from)
 	{
 		assert filter.length == from.length;
 
 		for (int i = 0; i < filter.length; ++i)
 		{
-			if (!checkSlot(inv, filter[i], from[i])) return false;
+			if (!checkSlotAndSize(inv, filter[i], from[i])) return false;
 		}
 		return true;
 	}
@@ -351,7 +382,7 @@ public class InventoryProcessor
 	 * @return true, all the items in the filter are present in the inv, false otherwise
 	 */
 	@SuppressWarnings({"rawtypes"})
-	public boolean checkSlots(@Nonnull IInventory inv, @Nonnull List filter, int[] from)
+	public boolean checkSlotsAndSizes(@Nonnull IInventory inv, @Nonnull List filter, int[] from)
 	{
 		assert filter.size() == from.length;
 
@@ -360,11 +391,11 @@ public class InventoryProcessor
 			final Object filterObject = filter.get(i);
 			if (filterObject instanceof IMultiItemStacks)
 			{
-				if (!checkSlot(inv, (IMultiItemStacks)filterObject, from[i])) return false;
+				if (!checkSlotAndSize(inv, (IMultiItemStacks)filterObject, from[i])) return false;
 			}
 			else if (filterObject instanceof ItemStack || filterObject == null)
 			{
-				if (!checkSlot(inv, (ItemStack)filterObject, from[i])) return false;
+				if (!checkSlotAndSize(inv, (ItemStack)filterObject, from[i])) return false;
 			}
 			else
 			{
@@ -383,7 +414,7 @@ public class InventoryProcessor
 		assert filter.length == to.length;
 
 		// first ensure that each stack in the input has the item and enough of them
-		if (!checkSlots(inv, filter, from)) return false;
+		if (!checkSlotsAndSizes(inv, filter, from)) return false;
 
 		for (int i = 0; i < filter.length; ++i)
 		{
@@ -405,7 +436,7 @@ public class InventoryProcessor
 		assert filter.length == to.length;
 
 		// first ensure that each stack in the input has the item and enough of them
-		if (!checkSlots(inv, filter, from)) return false;
+		if (!checkSlotsAndSizes(inv, filter, from)) return false;
 
 		for (int i = 0; i < filter.length; ++i)
 		{
@@ -430,7 +461,7 @@ public class InventoryProcessor
 	public boolean moveToSlot(@Nonnull IInventory inv, @Nonnull ItemStack filter, int from, int to)
 	{
 		// first ensure that each stack in the input has the item and enough of them
-		if (!checkSlot(inv, filter, from)) return false;
+		if (!checkSlotAndSize(inv, filter, from)) return false;
 
 		final ItemStack stack = inv.decrStackSize(from, filter.stackSize);
 		inv.setInventorySlotContents(to, stack);
@@ -503,11 +534,11 @@ public class InventoryProcessor
 				boolean foundItem = false;
 				if (expectedStack instanceof IMultiItemStacks)
 				{
-					foundItem = checkSlot(inv, (IMultiItemStacks)expectedStack, slotIndex);
+					foundItem = checkSlotAndSize(inv, (IMultiItemStacks)expectedStack, slotIndex);
 				}
 				else if (expectedStack instanceof ItemStack)
 				{
-					foundItem = checkSlot(inv, (ItemStack)expectedStack, slotIndex);
+					foundItem = checkSlotAndSize(inv, (ItemStack)expectedStack, slotIndex);
 				}
 
 				if (foundItem)
@@ -606,7 +637,7 @@ public class InventoryProcessor
 	 * @return true, all the items in the filter are present in the inv, false otherwise
 	 */
 	@SuppressWarnings({"rawtypes"})
-	public boolean checkSlotsUnordered(@Nonnull IInventory inv, @Nonnull List filter, int[] from)
+	public boolean checkSlotsAndSizesUnordered(@Nonnull IInventory inv, @Nonnull List filter, int[] from)
 	{
 		assert filter.size() == from.length;
 		final int[] slots = findItemSlots(inv, filter, from);
@@ -625,9 +656,9 @@ public class InventoryProcessor
 	 * @param from - a slice of slots to look in
 	 * @return true, all the items in the filter are present in the inv, false otherwise
 	 */
-	public boolean checkSlotsUnordered(@Nonnull IInventory inv, @Nonnull ItemStack[] filter, int[] from)
+	public boolean checkSlotsAndSizesUnordered(@Nonnull IInventory inv, @Nonnull ItemStack[] filter, int[] from)
 	{
-		return checkSlotsUnordered(inv, Arrays.asList(filter), from);
+		return checkSlotsAndSizesUnordered(inv, Arrays.asList(filter), from);
 	}
 
 	/**
@@ -638,9 +669,9 @@ public class InventoryProcessor
 	 * @param from - a slice of slots to look in
 	 * @return true, all the items in the filter are present in the inv, false otherwise
 	 */
-	public boolean checkSlotsUnordered(@Nonnull IInventory inv, @Nonnull IMultiItemStacks[] filter, int[] from)
+	public boolean checkSlotsAndSizesUnordered(@Nonnull IInventory inv, @Nonnull IMultiItemStacks[] filter, int[] from)
 	{
-		return checkSlotsUnordered(inv, Arrays.asList(filter), from);
+		return checkSlotsAndSizesUnordered(inv, Arrays.asList(filter), from);
 	}
 
 	/**
@@ -699,7 +730,7 @@ public class InventoryProcessor
 	public boolean consumeItems(@Nonnull IInventory inv, @Nonnull List expected)
 	{
 		final int[] slots = findItemSlots(inv, expected);
-		if (!checkSlots(inv, expected, slots)) return false;
+		if (!checkSlotsAndSizes(inv, expected, slots)) return false;
 		return consumeItemsInSlots(inv, expected, slots);
 	}
 
@@ -729,7 +760,7 @@ public class InventoryProcessor
 	{
 		final ItemStack expected = inv.getStackInSlot(slot);
 		if (expected == null) return false;
-		return checkSlot(inv, stack, slot);
+		return checkSlotAndSize(inv, stack, slot);
 	}
 
 	public static InventoryProcessor instance()

@@ -336,7 +336,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 			// locate all the items in the inventory
 			final int[] invSlots = InventoryProcessor.instance().findItemSlots(this, inputItems);
 			if (InventoryProcessor.instance().slotsAreValid(this, invSlots) &&
-				InventoryProcessor.instance().checkSlots(this, inputItems, invSlots))
+				InventoryProcessor.instance().checkSlotsAndSizes(this, inputItems, invSlots))
 			{
 				if (FluidTest.hasEnoughAndExpected(inputFluids, fluids))
 				{
