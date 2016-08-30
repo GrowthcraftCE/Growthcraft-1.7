@@ -143,7 +143,6 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 	@EventHandler(type=EventHandler.EventType.NBT_READ)
 	public void readFromNBT_FruitPress(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		if (nbt.getInteger("FruitPress_version") > 0)
 		{
 			fruitPress.readFromNBT(nbt, "fruit_press");
@@ -157,7 +156,6 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_FruitPress(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		fruitPress.writeToNBT(nbt, "fruit_press");
 		nbt.setInteger("FruitPress_version", 2);
 	}

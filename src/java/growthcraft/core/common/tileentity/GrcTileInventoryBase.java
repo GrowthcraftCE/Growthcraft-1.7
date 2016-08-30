@@ -224,7 +224,6 @@ public abstract class GrcTileInventoryBase extends GrcTileBase implements ISided
 	@EventHandler(type=EventHandler.EventType.NBT_READ)
 	public void readFromNBT_Inventory(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		readInventoryFromNBT(nbt);
 		readInventoryNameFromNBT(nbt);
 	}

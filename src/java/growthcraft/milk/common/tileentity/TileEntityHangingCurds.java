@@ -194,7 +194,6 @@ public class TileEntityHangingCurds extends GrcTileBase implements INBTItemSeria
 	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_HangingCurds(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		writeCheeseCurdToNBT(nbt);
 		writeWheyPulsarToNBT(nbt);
 	}

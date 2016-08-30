@@ -273,7 +273,6 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 	@EventHandler(type=EventHandler.EventType.NBT_READ)
 	public void readFromNBT_CultureJar(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		yeastGen.readFromNBT(nbt, "yeastgen");
 		cultureGen.readFromNBT(nbt, "culture_gen");
 		heatComponent.readFromNBT(nbt, "heat_component");
