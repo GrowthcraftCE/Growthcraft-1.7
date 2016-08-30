@@ -174,7 +174,7 @@ public class BrewKettle extends DeviceBase
 		inputFluidSlot.consume(recipe.getInputFluidStack(), true);
 		outputFluidSlot.fill(recipe.asFluidStack(), true);
 		brewingSlot.consume(recipe.getInputItemStack());
-		markForBlockUpdate();
+		markDirty();
 		GrowthCraftCellar.CELLAR_BUS.post(new EventBrewed(parent, recipe));
 	}
 
@@ -197,7 +197,7 @@ public class BrewKettle extends DeviceBase
 		}
 		else
 		{
-			if (resetTime()) markForInventoryUpdate();
+			if (resetTime()) markDirty();
 		}
 	}
 

@@ -1,6 +1,8 @@
 package growthcraft.fishtrap.common.tileentity;
 
+import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
+import growthcraft.core.common.tileentity.GrcTileBase;
 import growthcraft.fishtrap.common.inventory.ContainerFishTrap;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,9 +12,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityFishTrap extends TileEntity implements IInventory, IInteractionObject
+public class TileEntityFishTrap extends GrcTileBase implements IInventory, IInteractionObject
 {
 	// Constants
 	private ItemStack[] invSlots   = new ItemStack[5];
@@ -164,13 +165,9 @@ public class TileEntityFishTrap extends TileEntity implements IInventory, IInter
 		return true;
 	}
 
-	/************
-	 * NBT
-	 ************/
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	public void readFromNBT_FishTrap(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		final NBTTagList tags = nbt.getTagList("items", 10);
 		this.invSlots = new ItemStack[this.getSizeInventory()];
 
@@ -190,11 +187,9 @@ public class TileEntityFishTrap extends TileEntity implements IInventory, IInter
 		}
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_FishTrap(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
-
 		final NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < this.invSlots.length; ++i)

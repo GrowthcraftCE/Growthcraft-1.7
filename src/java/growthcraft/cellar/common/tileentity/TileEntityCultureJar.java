@@ -157,11 +157,12 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		return new ContainerCultureJar(playerInventory, this);
 	}
 
-	protected void markForFluidUpdate()
+	@Override
+	protected void markFluidDirty()
 	{
 		// Ferment Jars need to update their rendering state when a fluid
 		// changes, most of the other cellar blocks are unaffected by this
-		markForBlockUpdate();
+		markDirty();
 	}
 
 	@Override
@@ -205,26 +206,29 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 	}
 
 	@Override
-	protected void updateDevice()
+	public void updateEntity()
 	{
-		heatComponent.update();
-		final int lastState = jarDeviceState;
-		final DeviceProgressive prog = getActiveDevice();
-		if (prog == cultureGen)
+		super.updateEntity();
+		if (!worldObj.isRemote)
 		{
-			this.jarDeviceState = 1;
-			yeastGen.resetTime();
-		}
-		else
-		{
-			this.jarDeviceState = 0;
-			cultureGen.resetTime();
-		}
-		getActiveDevice().update();
-		if (jarDeviceState != lastState)
-		{
-			GrowthCraftCellar.getLogger().debug("Jar changed device state %d, {%s}", jarDeviceState, getActiveDevice());
-			markForBlockUpdate();
+			heatComponent.update();
+			final int lastState = jarDeviceState;
+			final DeviceProgressive prog = getActiveDevice();
+			if (prog == cultureGen)
+			{
+				this.jarDeviceState = 1;
+				yeastGen.resetTime();
+			}
+			else
+			{
+				this.jarDeviceState = 0;
+				cultureGen.resetTime();
+			}
+			getActiveDevice().update();
+			if (jarDeviceState != lastState)
+			{
+				markDirty();
+			}
 		}
 	}
 
@@ -266,8 +270,8 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.HEAT_AMOUNT.ordinal(), (int)(heatComponent.getHeatMultiplier() * 0x7FFF));
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	public void readFromNBT_CultureJar(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 		yeastGen.readFromNBT(nbt, "yeastgen");
@@ -275,10 +279,9 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		heatComponent.readFromNBT(nbt, "heat_component");
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_CultureJar(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		yeastGen.writeToNBT(nbt, "yeastgen");
 		cultureGen.writeToNBT(nbt, "culture_gen");
 		heatComponent.writeToNBT(nbt, "heat_component");

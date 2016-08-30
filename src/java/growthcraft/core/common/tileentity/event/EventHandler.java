@@ -38,7 +38,9 @@ public @interface EventHandler
 		GUI_NETWORK_WRITE,
 		GUI_NETWORK_READ,
 		NETWORK_WRITE,
-		NETWORK_READ;
+		NETWORK_READ,
+		NBT_WRITE,
+		NBT_READ;
 	}
 
 	EventType type();

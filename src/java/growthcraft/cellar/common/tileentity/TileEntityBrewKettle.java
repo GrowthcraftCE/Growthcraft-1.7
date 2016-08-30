@@ -68,11 +68,12 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		return new GrcInternalInventory(this, 2);
 	}
 
-	protected void markForFluidUpdate()
+	@Override
+	protected void markFluidDirty()
 	{
 		// Brew Kettles need to update their rendering state when a fluid
 		// changes, most of the other cellar blocks are unaffected by this
-		markForBlockUpdate();
+		markDirty();
 	}
 
 	@Override
@@ -105,13 +106,14 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		return brewKettle.getProgressScaled(scale);
 	}
 
-	/************
-	 * UPDATE
-	 ************/
 	@Override
-	protected void updateDevice()
+	public void updateEntity()
 	{
-		brewKettle.update();
+		super.updateEntity();
+		if (!worldObj.isRemote)
+		{
+			brewKettle.update();
+		}
 	}
 
 	@Override
@@ -151,14 +153,9 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		return side != 0 || index == 1;
 	}
 
-	/************
-	 * NBT
-	 ************/
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	public void readFromNBT_BrewKettle(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
-
 		if (nbt.hasKey("time"))
 		{
 			// Pre 2.5
@@ -171,11 +168,9 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		}
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_BrewKettle(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
-
 		brewKettle.writeToNBT(nbt, "brew_kettle");
 	}
 
@@ -270,6 +265,6 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		this.getFluidTank(0).fill(f1, true);
 		this.getFluidTank(1).fill(f0, true);
 
-		markForBlockUpdate();
+		markDirty();
 	}
 }

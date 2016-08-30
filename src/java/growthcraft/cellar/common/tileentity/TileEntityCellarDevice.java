@@ -26,14 +26,14 @@ package growthcraft.cellar.common.tileentity;
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.core.common.tileentity.feature.IGuiNetworkSync;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
-import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
+import growthcraft.core.common.tileentity.GrcTileDeviceBase;
 
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public abstract class TileEntityCellarDevice extends GrcTileEntityDeviceBase implements IGuiNetworkSync, IInteractionObject
+public abstract class TileEntityCellarDevice extends GrcTileDeviceBase implements IGuiNetworkSync, IInteractionObject
 {
 	@Override
 	public void receiveGUINetworkData(int id, int v)

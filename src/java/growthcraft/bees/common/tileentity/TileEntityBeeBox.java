@@ -7,9 +7,10 @@ import growthcraft.bees.common.inventory.ContainerBeeBox;
 import growthcraft.bees.common.tileentity.device.DeviceBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
 import growthcraft.core.common.tileentity.feature.IItemHandler;
-import growthcraft.core.common.tileentity.GrcTileEntityInventoryBase;
+import growthcraft.core.common.tileentity.GrcTileInventoryBase;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +22,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IItemHandler, IInteractionObject
+public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandler, IInteractionObject
 {
 	public static enum HoneyCombExpect
 	{
@@ -52,7 +53,9 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	{
 		super.onInventoryChanged(inv, index);
 		if (index > 0)
-			markForBlockUpdate();
+		{
+			markDirty();
+		}
 	}
 
 	@Override
@@ -190,7 +193,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	private void setBeeStack(ItemStack itemstack)
 	{
 		setInventorySlotContents(ContainerBeeBox.SlotId.BEE, itemstack);
-		markForInventoryUpdate();
+		markDirty();
 	}
 
 	public void spawnBee()
@@ -215,7 +218,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 			if (stack == null)
 			{
 				setInventorySlotContents(i, GrowthCraftBees.items.honeyCombEmpty.asStack());
-				markForInventoryUpdate();
+				markDirty();
 				n--;
 			}
 		}
@@ -243,8 +246,8 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		}
 		if (shouldMark)
 		{
-			markForInventoryUpdate();
-			markForBlockUpdate();
+			markDirty();
+			markDirty();
 			return true;
 		}
 		return false;
@@ -270,8 +273,8 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		}
 		if (shouldMark)
 		{
-			markForInventoryUpdate();
-			markForBlockUpdate();
+			markDirty();
+			markDirty();
 			return true;
 		}
 		return false;
@@ -282,13 +285,9 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		fillHoneyCombs(1);
 	}
 
-	/************
-	 * NBT
-	 ************/
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	public void readFromNBT_BeeBox(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		beeBox.readFromNBT(nbt, "bee_box");
 		if (nbt.hasKey("time"))
 		{
@@ -296,10 +295,9 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		}
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_BeeBox(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		nbt.setInteger("BeeBox.version", beeBoxVersion);
 		beeBox.writeToNBT(nbt, "bee_box");
 	}
@@ -370,7 +368,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 					setTime(time);
 					worldObj.playAuxSFX(AuxFX.BONEMEAL, xCoord, yCoord, zCoord, 0);
 					ItemUtils.consumeStackOnPlayer(stack, player);
-					markForBlockUpdate();
+					markDirty();
 				}
 				return true;
 			}

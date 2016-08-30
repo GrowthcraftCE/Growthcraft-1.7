@@ -33,7 +33,7 @@ import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.feature.IItemHandler;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
-import growthcraft.core.common.tileentity.GrcTileEntityInventoryBase;
+import growthcraft.core.common.tileentity.GrcTileInventoryBase;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.GrowthCraftMilk;
@@ -48,7 +48,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.inventory.IInventory;
 
-public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements IItemHandler, ITileProgressiveDevice
+public class TileEntityCheesePress extends GrcTileInventoryBase implements IItemHandler, ITileProgressiveDevice
 {
 	private static int[][] accessibleSlots = {
 		{ 0 },
@@ -236,7 +236,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 			if (time != 0)
 			{
 				this.time = 0;
-				markForBlockUpdate();
+				markDirty();
 			}
 		}
 	}
@@ -266,7 +266,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	{
 		final int oldScrewState = screwState;
 		this.screwState = state ? 1 : 0;
-		markForBlockUpdate();
+		markDirty();
 		return oldScrewState != screwState;
 	}
 
@@ -323,18 +323,16 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 		return false;
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	public void readFromNBT_CheesePress(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		this.screwState = nbt.getInteger("screw_state");
 		this.time = nbt.getInteger("time");
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_CheesePress(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		nbt.setInteger("screw_state", screwState);
 		nbt.setInteger("time", time);
 	}

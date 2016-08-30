@@ -122,7 +122,7 @@ public class YeastGenerator extends DeviceProgressive
 	public void consumeFluid()
 	{
 		fluidSlot.consume(consumption, true);
-		markForBlockUpdate();
+		markDirty();
 	}
 
 	/**
@@ -200,12 +200,12 @@ public class YeastGenerator extends DeviceProgressive
 			{
 				resetTime();
 				produceYeast();
-				markForInventoryUpdate();
+				markDirty();
 			}
 		}
 		else
 		{
-			if (resetTime()) markForInventoryUpdate();
+			if (resetTime()) markDirty();
 		}
 	}
 }

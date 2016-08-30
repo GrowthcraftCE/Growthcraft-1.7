@@ -5,6 +5,7 @@ import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.tileentity.device.FruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -76,9 +77,13 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 	}
 
 	@Override
-	protected void updateDevice()
+	public void updateEntity()
 	{
-		fruitPress.update();
+		super.updateEntity();
+		if (!worldObj.isRemote)
+		{
+			fruitPress.update();
+		}
 	}
 
 	@Override
@@ -135,8 +140,8 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 		}
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	public void readFromNBT_FruitPress(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 		if (nbt.getInteger("FruitPress_version") > 0)
@@ -149,8 +154,8 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 		}
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_FruitPress(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
 		fruitPress.writeToNBT(nbt, "fruit_press");

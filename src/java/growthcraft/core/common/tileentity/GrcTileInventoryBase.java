@@ -24,9 +24,9 @@
 package growthcraft.core.common.tileentity;
 
 import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.inventory.IInventoryFlagging;
 import growthcraft.core.common.inventory.IInventoryWatcher;
 import growthcraft.core.common.inventory.InventoryProcessor;
+import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.feature.ICustomDisplayName;
 import growthcraft.core.util.ItemUtils;
 
@@ -39,14 +39,14 @@ import net.minecraft.nbt.NBTTagCompound;
 /**
  * Extend this base class if you want a Tile with an `Inventory`
  */
-public abstract class GrcTileEntityInventoryBase extends GrcTileEntityCommonBase implements ISidedInventory, ICustomDisplayName, IInventoryWatcher, IInventoryFlagging
+public abstract class GrcTileInventoryBase extends GrcTileBase implements ISidedInventory, ICustomDisplayName, IInventoryWatcher
 {
 	protected static final int[] NO_SLOTS = new int[]{};
 
 	protected String inventoryName;
 	protected GrcInternalInventory inventory;
 
-	public GrcTileEntityInventoryBase()
+	public GrcTileInventoryBase()
 	{
 		super();
 		this.inventory = createInventory();
@@ -65,7 +65,7 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityCommonBase
 	@Override
 	public void onInventoryChanged(IInventory inv, int index)
 	{
-		markForInventoryUpdate();
+		markDirty();
 	}
 
 	@Override
@@ -221,8 +221,8 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityCommonBase
 		//readInventoryNameFromNBT(nbt);
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	public void readFromNBT_Inventory(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
 		readInventoryFromNBT(nbt);
@@ -247,10 +247,9 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityCommonBase
 		writeInventoryToNBT(nbt);
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_Inventory(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		writeInventoryToNBT(nbt);
 	}
 }

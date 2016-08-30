@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,62 +23,45 @@
  */
 package growthcraft.core.common.tileentity.event;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import javax.annotation.Nonnull;
 
-import io.netty.buffer.ByteBuf;
+import net.minecraft.tileentity.TileEntity;
 
-import growthcraft.api.core.stream.IStreamable;
-
-import net.minecraft.nbt.NBTTagCompound;
-
-public class EventFunction
+public class TileEventHandlerMap<T extends TileEntity> extends HashMap<Class<? extends T>, EventHandlerMap>
 {
-	private Method method;
+	public static final long serialVersionUID = 1L;
 
-	public EventFunction(@Nonnull Method m)
+	protected void addHandlerEventFunction(@Nonnull EventHandlerMap handlerMap, @Nonnull EventHandler.EventType type, @Nonnull Method method)
 	{
-		this.method = m;
-	}
-
-	private Object invoke2(Object a, Object b)
-	{
-		try
+		if (!handlerMap.containsKey(type))
 		{
-			return this.method.invoke(a, b);
+			handlerMap.put(type, new ArrayList<EventFunction>());
 		}
-		catch (IllegalAccessException e)
+		handlerMap.get(type).add(new EventFunction(method));
+	}
+
+	public EventHandlerMap getEventHandlerMap(Class<? extends T> klass)
+	{
+		EventHandlerMap cached = get(klass);
+		if (cached == null)
 		{
-			throw new IllegalStateException(e);
+			cached = new EventHandlerMap();
+			put(klass, cached);
+			for (Method method : klass.getMethods())
+			{
+				final EventHandler anno = method.getAnnotation(EventHandler.class);
+				if (anno != null) addHandlerEventFunction(cached, anno.type(), method);
+			}
 		}
-		catch (IllegalArgumentException e)
-		{
-			throw new IllegalStateException(e);
-		}
-		catch (InvocationTargetException e)
-		{
-			throw new IllegalStateException(e);
-		}
+		return cached;
 	}
 
-	public void readFromNBT(Object tile, NBTTagCompound nbt)
+	public List<EventFunction> getEventFunctionsForClass(Class<? extends T> klass, EventHandler.EventType type)
 	{
-		invoke2(tile, nbt);
-	}
-
-	public void writeToNBT(Object tile, NBTTagCompound nbt)
-	{
-		invoke2(tile, nbt);
-	}
-
-	public boolean writeToStream(IStreamable tile, ByteBuf data)
-	{
-		return (Boolean)invoke2(tile, data);
-	}
-
-	public boolean readFromStream(IStreamable tile, ByteBuf data)
-	{
-		return (Boolean)invoke2(tile, data);
+		return getEventHandlerMap(klass).get(type);
 	}
 }

@@ -126,7 +126,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 				resetTime();
 			}
 			this.activeRecipe = recipe;
-			markForInventoryUpdate();
+			markDirty();
 		}
 		else
 		{
@@ -134,7 +134,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 			{
 				this.activeRecipe = null;
 				resetTime();
-				markForInventoryUpdate();
+				markDirty();
 			}
 		}
 		return activeRecipe;
@@ -222,31 +222,35 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	}
 
 	@Override
-	protected void updateDevice()
+	public void updateEntity()
 	{
-		if (recheckRecipe)
+		super.updateEntity();
+		if (!worldObj.isRemote)
 		{
-			this.recheckRecipe = false;
-			refreshRecipe();
-		}
-
-		if (canFerment())
-		{
-			this.time++;
-
-			if (time >= getTimeMax())
+			if (recheckRecipe)
 			{
-				resetTime();
-				fermentItem();
-				markForInventoryUpdate();
+				this.recheckRecipe = false;
+				refreshRecipe();
 			}
-		}
-		else
-		{
-			if (time != 0)
+
+			if (canFerment())
 			{
-				resetTime();
-				markForInventoryUpdate();
+				this.time++;
+
+				if (time >= getTimeMax())
+				{
+					resetTime();
+					fermentItem();
+					markDirty();
+				}
+			}
+			else
+			{
+				if (time != 0)
+				{
+					resetTime();
+					markDirty();
+				}
 			}
 		}
 	}
@@ -304,10 +308,9 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		}
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	public void readFromNBT_FermentBarrel(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		readFermentTimeFromNBT(nbt);
 	}
 
@@ -324,10 +327,9 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		nbt.setBoolean("lid_on", lidOn);
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_FermentBarrel(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		writeFermentTimeToNBT(nbt);
 	}
 
@@ -410,9 +412,9 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	}
 
 	@Override
-	protected void markForFluidUpdate()
+	protected void markFluidDirty()
 	{
-		super.markForFluidUpdate();
+		super.markFluidDirty();
 		markForRecipeRecheck();
 	}
 

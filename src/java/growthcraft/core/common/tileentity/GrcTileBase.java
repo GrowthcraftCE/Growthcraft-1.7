@@ -23,21 +23,17 @@
  */
 package growthcraft.core.common.tileentity;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Nonnull;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
 import growthcraft.api.core.stream.IStreamable;
+import growthcraft.api.core.nbt.INBTSerializable;
 import growthcraft.core.common.tileentity.event.EventFunction;
 import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.core.common.tileentity.feature.IBlockUpdateFlagging;
+import growthcraft.core.common.tileentity.event.TileEventHandlerMap;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.network.NetworkManager;
@@ -52,94 +48,17 @@ import net.minecraft.nbt.NBTTagCompound;
  * copied the code for use in YATM, but I've ported it over to Growthcraft as
  * well.
  */
-public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpdateFlagging, IStreamable
+public abstract class GrcTileBase extends TileEntity implements IStreamable, INBTSerializable
 {
-	protected static class HandlerMap extends EnumMap<EventHandler.EventType, List<EventFunction>>
-	{
-		public static final long serialVersionUID = 1L;
-
-		public HandlerMap()
-		{
-			super(EventHandler.EventType.class);
-		}
-	}
-
-	protected static Map<Class<? extends GrcTileEntityBase>, HandlerMap> HANDLERS = new HashMap<Class<? extends GrcTileEntityBase>, HandlerMap>();
-
-	protected boolean needBlockUpdate = true;
-
-	@Override
-	public void markForBlockUpdate()
-	{
-		needBlockUpdate = true;
-	}
-
-	public boolean shouldMarkForBlockUpdate()
-	{
-		return true;
-	}
-
-	private void doMarkForUpdate()
-	{
-		if (shouldMarkForBlockUpdate())
-		{
-			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		}
-	}
-
-	protected void preMarkForUpdate()
-	{
-
-	}
-
-	@Override
-	public void updateEntity()
-	{
-		if (needBlockUpdate)
-		{
-			this.needBlockUpdate = false;
-			preMarkForUpdate();
-			doMarkForUpdate();
-		}
-
-		super.updateEntity();
-	}
-
-	protected void addHandler(@Nonnull HandlerMap handlerMap, @Nonnull EventHandler.EventType type, @Nonnull Method method)
-	{
-		if (!handlerMap.containsKey(type))
-		{
-			handlerMap.put(type, new ArrayList<EventFunction>());
-		}
-		handlerMap.get(type).add(new EventFunction(method));
-	}
-
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	@Nonnull
-	protected HandlerMap getHandlersMap()
-	{
-		final Class klass = getClass();
-		HandlerMap cached = HANDLERS.get(klass);
-		if (cached == null)
-		{
-			cached = new HandlerMap();
-			HANDLERS.put(klass, cached);
-			for (Method method : klass.getMethods())
-			{
-				final EventHandler anno = method.getAnnotation(EventHandler.class);
-				if (anno != null) addHandler(cached, anno.type(), method);
-			}
-		}
-		return cached;
-	}
+	protected static TileEventHandlerMap<GrcTileBase> HANDLERS = new TileEventHandlerMap<GrcTileBase>();
 
 	protected List<EventFunction> getHandlersFor(@Nonnull EventHandler.EventType type)
 	{
-		return getHandlersMap().get(type);
+		return HANDLERS.getEventFunctionsForClass(getClass(), type);
 	}
 
 	@Override
-	public boolean writeToStream(ByteBuf stream)
+	public final boolean writeToStream(ByteBuf stream)
 	{
 		final List<EventFunction> handlers = getHandlersFor(EventHandler.EventType.NETWORK_WRITE);
 		if (handlers != null)
@@ -179,7 +98,7 @@ public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpda
 	}
 
 	@Override
-	public boolean readFromStream(ByteBuf stream)
+	public final boolean readFromStream(ByteBuf stream)
 	{
 		boolean shouldUpdate = false;
 		final List<EventFunction> handlers = getHandlersFor(EventHandler.EventType.NETWORK_READ);
@@ -202,14 +121,16 @@ public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpda
 		if (packet.func_148853_f() == 127)
 		{
 			final NBTTagCompound tag = packet.func_148857_g();
+			boolean dirty = false;
 			if (tag != null)
 			{
 				final ByteBuf stream = Unpooled.copiedBuffer(tag.getByteArray("P"));
 				if (readFromStream(stream))
 				{
-					doMarkForUpdate();
+					dirty = true;
 				}
 			}
+			if (dirty) markDirty();
 		}
 	}
 
@@ -219,5 +140,33 @@ public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpda
 
 	public void writeToNBTForItem(NBTTagCompound tag)
 	{
+	}
+
+	@Override
+	public final void readFromNBT(NBTTagCompound nbt)
+	{
+		super.readFromNBT(nbt);
+		final List<EventFunction> handlers = getHandlersFor(EventHandler.EventType.NBT_READ);
+		if (handlers != null)
+		{
+			for (EventFunction func : handlers)
+			{
+				func.readFromNBT(this, nbt);
+			}
+		}
+	}
+
+	@Override
+	public final void writeToNBT(NBTTagCompound nbt)
+	{
+		super.writeToNBT(nbt);
+		final List<EventFunction> handlers = getHandlersFor(EventHandler.EventType.NBT_WRITE);
+		if (handlers != null)
+		{
+			for (EventFunction func : handlers)
+			{
+				func.writeToNBT(this, nbt);
+			}
+		}
 	}
 }

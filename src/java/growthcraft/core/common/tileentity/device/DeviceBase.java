@@ -29,8 +29,6 @@ import io.netty.buffer.ByteBuf;
 
 import growthcraft.api.core.nbt.INBTSerializableContext;
 import growthcraft.api.core.stream.IStreamable;
-import growthcraft.core.common.inventory.IInventoryFlagging;
-import growthcraft.core.common.tileentity.feature.IBlockUpdateFlagging;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.world.World;
@@ -71,20 +69,9 @@ public class DeviceBase implements INBTSerializableContext, IStreamable
 		return null;
 	}
 
-	protected void markForBlockUpdate()
+	protected void markDirty()
 	{
-		if (parent instanceof IBlockUpdateFlagging)
-		{
-			((IBlockUpdateFlagging)parent).markForBlockUpdate();
-		}
-	}
-
-	protected void markForInventoryUpdate()
-	{
-		if (parent instanceof IInventoryFlagging)
-		{
-			((IInventoryFlagging)parent).markForInventoryUpdate();
-		}
+		parent.markDirty();
 	}
 
 	/**

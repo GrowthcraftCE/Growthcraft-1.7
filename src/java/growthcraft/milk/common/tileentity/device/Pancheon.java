@@ -120,7 +120,7 @@ public class Pancheon extends DeviceProgressive
 		}
 		else
 		{
-			if (resetTime()) markForBlockUpdate();
+			if (resetTime()) markDirty();
 		}
 	}
 }

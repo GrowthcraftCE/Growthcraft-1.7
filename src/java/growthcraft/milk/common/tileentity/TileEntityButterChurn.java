@@ -34,7 +34,7 @@ import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.feature.IItemHandler;
-import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
+import growthcraft.core.common.tileentity.GrcTileDeviceBase;
 import growthcraft.core.util.ItemUtils;
 
 import io.netty.buffer.ByteBuf;
@@ -50,7 +50,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements IItemHandler
+public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHandler
 {
 	public static enum WorkState
 	{
@@ -121,9 +121,6 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	}
 
 	@Override
-	protected void updateDevice() {}
-
-	@Override
 	public void updateEntity()
 	{
 		super.updateEntity();
@@ -182,14 +179,14 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 			{
 				this.shaftState = 0;
 			}
-			markForBlockUpdate();
+			markDirty();
 		}
 		else
 		{
 			if (shaftState != 0)
 			{
 				this.shaftState = 0;
-				markForBlockUpdate();
+				markDirty();
 			}
 			this.churns = 0;
 		}
@@ -293,18 +290,16 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 		return false;
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	public void readFromNBT_ButterChurn(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		this.shaftState = nbt.getInteger("shaft_state");
 		this.churns = nbt.getInteger("churns");
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_ButterChurn(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		nbt.setInteger("shaft_state", shaftState);
 		nbt.setInteger("churns", churns);
 	}
