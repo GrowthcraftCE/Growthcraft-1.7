@@ -52,6 +52,17 @@ public abstract class GrcTileBase extends TileEntity implements IStreamable, INB
 {
 	protected static TileEventHandlerMap<GrcTileBase> HANDLERS = new TileEventHandlerMap<GrcTileBase>();
 
+	public void markForUpdate()
+	{
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	public void markDirtyAndUpdate()
+	{
+		markDirty();
+		markForUpdate();
+	}
+
 	protected List<EventFunction> getHandlersFor(@Nonnull EventHandler.EventType type)
 	{
 		return HANDLERS.getEventFunctionsForClass(getClass(), type);
@@ -130,7 +141,7 @@ public abstract class GrcTileBase extends TileEntity implements IStreamable, INB
 					dirty = true;
 				}
 			}
-			if (dirty) markDirty();
+			if (dirty) markForUpdate();
 		}
 	}
 

@@ -109,7 +109,7 @@ public class TileEntityHangingCurds extends GrcTileBase implements INBTItemSeria
 			if (cheeseCurd.needClientUpdate)
 			{
 				cheeseCurd.needClientUpdate = false;
-				markDirty();
+				markForUpdate();
 			}
 			cheeseCurd.update();
 			if (wheyPulsar.update() == PulseStepper.State.PULSE)
@@ -126,7 +126,7 @@ public class TileEntityHangingCurds extends GrcTileBase implements INBTItemSeria
 				}
 				// regardless of a pancheon being present, the curd SHOULD drip
 				serverStep++;
-				markDirty();
+				markForUpdate();
 			}
 		}
 		else

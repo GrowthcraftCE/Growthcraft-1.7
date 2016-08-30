@@ -266,7 +266,7 @@ public class TileEntityCheesePress extends GrcTileInventoryBase implements IItem
 	{
 		final int oldScrewState = screwState;
 		this.screwState = state ? 1 : 0;
-		markDirty();
+		if (oldScrewState != screwState) markForUpdate();
 		return oldScrewState != screwState;
 	}
 

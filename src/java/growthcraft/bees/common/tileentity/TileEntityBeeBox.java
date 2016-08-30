@@ -54,7 +54,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 		super.onInventoryChanged(inv, index);
 		if (index > 0)
 		{
-			markDirty();
+			markDirtyAndUpdate();
 		}
 	}
 
@@ -193,7 +193,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 	private void setBeeStack(ItemStack itemstack)
 	{
 		setInventorySlotContents(ContainerBeeBox.SlotId.BEE, itemstack);
-		markDirty();
+		markDirtyAndUpdate();
 	}
 
 	public void spawnBee()
@@ -218,7 +218,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 			if (stack == null)
 			{
 				setInventorySlotContents(i, GrowthCraftBees.items.honeyCombEmpty.asStack());
-				markDirty();
+				markDirtyAndUpdate();
 				n--;
 			}
 		}
@@ -246,8 +246,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 		}
 		if (shouldMark)
 		{
-			markDirty();
-			markDirty();
+			markDirtyAndUpdate();
 			return true;
 		}
 		return false;
@@ -273,8 +272,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 		}
 		if (shouldMark)
 		{
-			markDirty();
-			markDirty();
+			markDirtyAndUpdate();
 			return true;
 		}
 		return false;
@@ -368,7 +366,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 					setTime(time);
 					worldObj.playAuxSFX(AuxFX.BONEMEAL, xCoord, yCoord, zCoord, 0);
 					ItemUtils.consumeStackOnPlayer(stack, player);
-					markDirty();
+					markDirtyAndUpdate();
 				}
 				return true;
 			}

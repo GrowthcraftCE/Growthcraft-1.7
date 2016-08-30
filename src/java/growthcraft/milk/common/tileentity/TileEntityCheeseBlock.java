@@ -137,7 +137,6 @@ public class TileEntityCheeseBlock extends GrcTileBase implements IItemHandler, 
 	public void updateEntity()
 	{
 		super.updateEntity();
-
 		if (!worldObj.isRemote)
 		{
 			cheese.update();
@@ -146,7 +145,7 @@ public class TileEntityCheeseBlock extends GrcTileBase implements IItemHandler, 
 				cheese.needClientUpdate = false;
 				if (cheese.hasSlices())
 				{
-					markDirty();
+					markForUpdate();
 				}
 				else
 				{

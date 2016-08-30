@@ -179,14 +179,14 @@ public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHan
 			{
 				this.shaftState = 0;
 			}
-			markDirty();
+			markForUpdate();
 		}
 		else
 		{
 			if (shaftState != 0)
 			{
 				this.shaftState = 0;
-				markDirty();
+				markForUpdate();
 			}
 			this.churns = 0;
 		}

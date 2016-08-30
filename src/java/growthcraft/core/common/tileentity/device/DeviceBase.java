@@ -57,7 +57,7 @@ public class DeviceBase implements INBTSerializableContext, IStreamable
 
 	public int getMetadata()
 	{
-		return getWorld().getBlockMetadata(parent.xCoord, parent.yCoord, parent.zCoord);
+		return parent.getBlockMetadata();
 	}
 
 	public IInventory getInventory()
@@ -67,6 +67,11 @@ public class DeviceBase implements INBTSerializableContext, IStreamable
 			return (IInventory)parent;
 		}
 		return null;
+	}
+
+	protected void markForUpdate()
+	{
+		getWorld().markBlockForUpdate(parent.xCoord, parent.yCoord, parent.zCoord);
 	}
 
 	protected void markDirty()
