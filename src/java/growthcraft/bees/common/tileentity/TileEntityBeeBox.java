@@ -148,7 +148,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 
 	public int countEmptyCombs()
 	{
-		return countCombsOfType(HoneyCombExpect.ANY);
+		return countCombsOfType(HoneyCombExpect.EMPTY);
 	}
 
 	//counts both empty and filled honeycombs
