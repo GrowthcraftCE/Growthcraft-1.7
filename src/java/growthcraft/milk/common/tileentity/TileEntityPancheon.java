@@ -140,6 +140,6 @@ public class TileEntityPancheon extends GrcTileDeviceBase implements ITileProgre
 	protected void markFluidDirty()
 	{
 		super.markFluidDirty();
-		markForUpdate();
+		markDirtyAndUpdate();
 	}
 }

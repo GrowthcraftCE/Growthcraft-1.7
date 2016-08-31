@@ -126,7 +126,7 @@ public class TileEntityHangingCurds extends GrcTileBase implements INBTItemSeria
 				}
 				// regardless of a pancheon being present, the curd SHOULD drip
 				serverStep++;
-				markForUpdate();
+				markDirtyAndUpdate();
 			}
 		}
 		else
