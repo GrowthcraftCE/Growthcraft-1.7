@@ -201,11 +201,16 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 		final ItemStack beestack = getBeeStack();
 		if (beestack == null)
 		{
+			// Put a bee in the slot if we have none currently
 			setBeeStack(GrowthCraftBees.items.bee.asStack());
 		}
 		else
 		{
-			setBeeStack(ItemUtils.increaseStack(beestack));
+			// Ensure that the item in the slot IS a bee, and prevent duplication
+			if (BeesRegistry.instance().isItemBee(beestack))
+			{
+				setBeeStack(ItemUtils.increaseStack(beestack));
+			}
 		}
 	}
 
