@@ -281,8 +281,9 @@ public class TileEntityCheesePress extends GrcTileInventoryBase implements IItem
 	}
 
 	@Override
-	public boolean tryPlaceItem(EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemHandler.Action action, EntityPlayer player, ItemStack stack)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		if (ItemTest.isValid(stack))
 		{
 			// Items cannot be added if the user slot already has an item AND
@@ -305,19 +306,17 @@ public class TileEntityCheesePress extends GrcTileInventoryBase implements IItem
 	}
 
 	@Override
-	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
-		if (!ItemTest.isValid(onHand))
+		if (IItemHandler.Action.LEFT != action) return false;
+		// Items cannot be removed if the cheese press is active
+		if (isUnpressed())
 		{
-			// Items cannot be removed if the cheese press is active
-			if (isUnpressed())
+			final ItemStack result = invSlot.yank();
+			if (result != null)
 			{
-				final ItemStack result = invSlot.yank();
-				if (result != null)
-				{
-					ItemUtils.spawnItemStackAtTile(result, this, worldObj.rand);
-					return true;
-				}
+				ItemUtils.spawnItemStackAtTile(result, this, worldObj.rand);
+				return true;
 			}
 		}
 		return false;

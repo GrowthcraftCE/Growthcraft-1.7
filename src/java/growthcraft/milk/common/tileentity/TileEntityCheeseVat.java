@@ -590,8 +590,9 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase implements IItemHandl
 	}
 
 	@Override
-	public boolean tryPlaceItem(EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemHandler.Action action, EntityPlayer player, ItemStack stack)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		if (!isIdle()) return false;
 		if (!ItemTest.isValid(stack)) return false;
 		final Item item = stack.getItem();
@@ -615,8 +616,9 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase implements IItemHandl
 	}
 
 	@Override
-	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		if (!isIdle()) return false;
 		if (onHand == null)
 		{

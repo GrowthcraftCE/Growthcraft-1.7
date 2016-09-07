@@ -472,7 +472,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		return false;
 	}
 
-	private boolean handleOnUseItem(World world, int x, int y, int z, EntityPlayer player, int meta)
+	protected boolean handleOnUseItem(IItemHandler.Action action, World world, int x, int y, int z, EntityPlayer player)
 	{
 		final TileEntity te = world.getTileEntity(x, y, z);
 		if (te instanceof IItemHandler)
@@ -487,11 +487,11 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 				final ItemStack is = player.inventory.getCurrentItem();
 
 				boolean needUpdate = false;
-				if (ih.tryPlaceItem(player, is))
+				if (ih.tryPlaceItem(action, player, is))
 				{
 					needUpdate = true;
 				}
-				else if (ih.tryTakeItem(player, is))
+				else if (ih.tryTakeItem(action, player, is))
 				{
 					needUpdate = true;
 				}
@@ -508,11 +508,28 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 	}
 
 	@Override
+	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player)
+	{
+		if (!world.isRemote)
+		{
+			final TileEntity te = world.getTileEntity(x, y, z);
+			if (te instanceof IItemHandler)
+			{
+				if (handleOnUseItem(IItemHandler.Action.LEFT, world, x, y, z, player))
+				{
+					return;
+				}
+			}
+		}
+		super.onBlockClicked(world, x, y, z, player);
+	}
+
+	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
 		if (tryWrenchItem(player, world, x, y, z)) return true;
 		if (handleIFluidHandler(world, x, y, z, player, meta)) return true;
-		if (handleOnUseItem(world, x, y, z, player, meta)) return true;
+		if (handleOnUseItem(IItemHandler.Action.RIGHT, world, x, y, z, player)) return true;
 		return false;
 	}
 

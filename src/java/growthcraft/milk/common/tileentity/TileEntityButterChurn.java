@@ -266,7 +266,7 @@ public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHan
 	 * @return false
 	 */
 	@Override
-	public boolean tryPlaceItem(EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemHandler.Action action, EntityPlayer player, ItemStack stack)
 	{
 		return false;
 	}
@@ -279,8 +279,9 @@ public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHan
 	 * @return true, the item was removed, false otherwise
 	 */
 	@Override
-	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		final ItemStack stack = outputInventorySlot.yank();
 		if (stack != null)
 		{

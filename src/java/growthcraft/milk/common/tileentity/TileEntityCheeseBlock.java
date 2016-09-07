@@ -156,14 +156,16 @@ public class TileEntityCheeseBlock extends GrcTileBase implements IItemHandler, 
 	}
 
 	@Override
-	public boolean tryPlaceItem(EntityPlayer player, ItemStack onHand)
+	public boolean tryPlaceItem(IItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		return cheese.tryWaxing(onHand);
 	}
 
 	@Override
-	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		if (cheese.isAged())
 		{
 			final ItemStack stack = cheese.yankSlices(1, true);
