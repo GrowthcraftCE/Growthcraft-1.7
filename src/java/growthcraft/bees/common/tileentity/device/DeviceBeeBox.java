@@ -231,10 +231,8 @@ public class DeviceBeeBox extends DeviceBase
 
 		if (!te.hasMaxBees())
 		{
-			GrowthCraftBees.getLogger().info("Trying to Spawn a Bee device=%s x=%d y=%d z=%d", this, parent.xCoord, parent.yCoord, parent.zCoord);
 			if (random.nextInt((int)(beeSpawnRate / f) + 1) == 0)
 			{
-				GrowthCraftBees.getLogger().info("Spawning a Bee device=%s x=%d y=%d z=%d", this, parent.xCoord, parent.yCoord, parent.zCoord);
 				te.spawnBee();
 			}
 		}
@@ -243,19 +241,16 @@ public class DeviceBeeBox extends DeviceBase
 		final int curCombs = te.countCombs();
 		if (te.countHoney() < maxCombs)
 		{
-			GrowthCraftBees.getLogger().info("Calculating Honey Comb bias device=%s x=%d y=%d z=%d", this, parent.xCoord, parent.yCoord, parent.zCoord);
 			final int bias = honeyCombBias();
 			// If the bias is less than 0, then we should focus on filling with honey
 			boolean shouldFill = bias < 0;
 			if (bias != 0 && curCombs < maxCombs)
 			{
-				GrowthCraftBees.getLogger().info("Combs are biased device=%s x=%d y=%d z=%d", this, parent.xCoord, parent.yCoord, parent.zCoord);
 				// abs the bias, and then clamp it to a range of 6
 				final int biasSpawn = Math.min(MathHelper.abs_int(bias), 6);
 				// if the biasSpawn isn't invalid
 				if (biasSpawn > 0)
 				{
-					GrowthCraftBees.getLogger().info("Trying to flip bias device=%s x=%d y=%d z=%d", this, parent.xCoord, parent.yCoord, parent.zCoord);
 					// the higher the bias, the less likely the operation will flip
 					if (random.nextInt(biasSpawn) == 0)
 					{
@@ -266,21 +261,17 @@ public class DeviceBeeBox extends DeviceBase
 			}
 			if (shouldFill)
 			{
-				GrowthCraftBees.getLogger().info("Trying to fill honey comb device=%s x=%d y=%d z=%d", this, parent.xCoord, parent.yCoord, parent.zCoord);
 				// try to fill a honey comb
 				if (random.nextInt((int)(honeySpawnRate / f) + 1) == 0)
 				{
-					GrowthCraftBees.getLogger().info("Filling honey comb device=%s x=%d y=%d z=%d", this, parent.xCoord, parent.yCoord, parent.zCoord);
 					te.fillHoneyComb();
 				}
 			}
 			else
 			{
-				GrowthCraftBees.getLogger().info("Trying to spawn honey comb device=%s x=%d y=%d z=%d", this, parent.xCoord, parent.yCoord, parent.zCoord);
 				// try to spawn a honey comb
 				if (random.nextInt((int)(honeyCombSpawnRate / f) + 1) == 0)
 				{
-					GrowthCraftBees.getLogger().info("Spawning honey comb device=%s x=%d y=%d z=%d", this, parent.xCoord, parent.yCoord, parent.zCoord);
 					te.spawnHoneyComb();
 				}
 			}
