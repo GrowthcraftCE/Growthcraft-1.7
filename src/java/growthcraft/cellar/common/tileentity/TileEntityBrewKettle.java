@@ -9,7 +9,7 @@ import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 
@@ -153,7 +153,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		return side != 0 || index == 1;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_BrewKettle(NBTTagCompound nbt)
 	{
 		if (nbt.hasKey("time"))
@@ -168,20 +168,20 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		}
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_BrewKettle(NBTTagCompound nbt)
 	{
 		brewKettle.writeToNBT(nbt, "brew_kettle");
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_BrewKettle(ByteBuf stream) throws IOException
 	{
 		brewKettle.readFromStream(stream);
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_BrewKettle(ByteBuf stream) throws IOException
 	{
 		brewKettle.writeToStream(stream);

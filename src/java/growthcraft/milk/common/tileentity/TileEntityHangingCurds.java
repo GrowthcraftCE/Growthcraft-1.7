@@ -31,7 +31,7 @@ import growthcraft.api.core.util.Pair;
 import growthcraft.api.core.util.PulseStepper;
 import growthcraft.api.core.util.SpatialRandom;
 import growthcraft.api.core.util.TickUtils;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.GrcTileBase;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.struct.CheeseCurd;
@@ -166,7 +166,7 @@ public class TileEntityHangingCurds extends GrcTileBase implements INBTItemSeria
 		readWheyPulsarFromNBT(nbt);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_HangingCurds(NBTTagCompound nbt)
 	{
 		readCheeseCurdFromNBT(nbt);
@@ -191,14 +191,14 @@ public class TileEntityHangingCurds extends GrcTileBase implements INBTItemSeria
 		writeWheyPulsarToNBT(nbt);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_HangingCurds(NBTTagCompound nbt)
 	{
 		writeCheeseCurdToNBT(nbt);
 		writeWheyPulsarToNBT(nbt);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_HangingCurds(ByteBuf stream) throws IOException
 	{
 		cheeseCurd.readFromStream(stream);
@@ -207,7 +207,7 @@ public class TileEntityHangingCurds extends GrcTileBase implements INBTItemSeria
 		return true;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_HangingCurds(ByteBuf stream) throws IOException
 	{
 		cheeseCurd.writeToStream(stream);

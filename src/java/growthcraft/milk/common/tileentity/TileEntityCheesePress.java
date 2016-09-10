@@ -30,7 +30,7 @@ import growthcraft.api.milk.cheesepress.ICheesePressRecipe;
 import growthcraft.api.milk.MilkRegistry;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.IItemHandler;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.core.common.tileentity.GrcTileInventoryBase;
@@ -322,21 +322,21 @@ public class TileEntityCheesePress extends GrcTileInventoryBase implements IItem
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_CheesePress(NBTTagCompound nbt)
 	{
 		this.screwState = nbt.getInteger("screw_state");
 		this.time = nbt.getInteger("time");
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_CheesePress(NBTTagCompound nbt)
 	{
 		nbt.setInteger("screw_state", screwState);
 		nbt.setInteger("time", time);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_CheesePress(ByteBuf stream) throws IOException
 	{
 		this.screwState = stream.readInt();
@@ -344,7 +344,7 @@ public class TileEntityCheesePress extends GrcTileInventoryBase implements IItem
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_CheesePress(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(screwState);

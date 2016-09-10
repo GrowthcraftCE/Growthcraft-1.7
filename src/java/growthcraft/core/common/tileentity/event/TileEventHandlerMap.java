@@ -31,37 +31,37 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEventHandlerMap<T extends TileEntity> extends HashMap<Class<? extends T>, EventHandlerMap>
+public class TileEventHandlerMap<T extends TileEntity> extends HashMap<Class<? extends T>, TileEventFunctionMap>
 {
 	public static final long serialVersionUID = 1L;
 
-	protected void addHandlerEventFunction(@Nonnull EventHandlerMap handlerMap, @Nonnull EventHandler.EventType type, @Nonnull Method method)
+	protected void addHandlerEventFunction(@Nonnull TileEventFunctionMap handlerMap, @Nonnull TileEventHandler.EventType type, @Nonnull Method method)
 	{
 		if (!handlerMap.containsKey(type))
 		{
-			handlerMap.put(type, new ArrayList<EventFunction>());
+			handlerMap.put(type, new ArrayList<TileEventFunction>());
 		}
-		handlerMap.get(type).add(new EventFunction(method));
+		handlerMap.get(type).add(new TileEventFunction(method));
 	}
 
-	public EventHandlerMap getEventHandlerMap(Class<? extends T> klass)
+	public TileEventFunctionMap getEventFunctionMap(Class<? extends T> klass)
 	{
-		EventHandlerMap cached = get(klass);
+		TileEventFunctionMap cached = get(klass);
 		if (cached == null)
 		{
-			cached = new EventHandlerMap();
+			cached = new TileEventFunctionMap();
 			put(klass, cached);
 			for (Method method : klass.getMethods())
 			{
-				final EventHandler anno = method.getAnnotation(EventHandler.class);
-				if (anno != null) addHandlerEventFunction(cached, anno.type(), method);
+				final TileEventHandler anno = method.getAnnotation(TileEventHandler.class);
+				if (anno != null) addHandlerEventFunction(cached, anno.event(), method);
 			}
 		}
 		return cached;
 	}
 
-	public List<EventFunction> getEventFunctionsForClass(Class<? extends T> klass, EventHandler.EventType type)
+	public List<TileEventFunction> getEventFunctionsForClass(Class<? extends T> klass, TileEventHandler.EventType type)
 	{
-		return getEventHandlerMap(klass).get(type);
+		return getEventFunctionMap(klass).get(type);
 	}
 }

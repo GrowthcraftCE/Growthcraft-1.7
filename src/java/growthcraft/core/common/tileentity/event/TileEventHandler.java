@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2015 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,62 +23,25 @@
  */
 package growthcraft.core.common.tileentity.event;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import javax.annotation.Nonnull;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import io.netty.buffer.ByteBuf;
-
-import growthcraft.api.core.stream.IStreamable;
-
-import net.minecraft.nbt.NBTTagCompound;
-
-public class EventFunction
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface TileEventHandler
 {
-	private Method method;
-
-	public EventFunction(@Nonnull Method m)
+	public static enum EventType
 	{
-		this.method = m;
+		NULL,
+		GUI_NETWORK_WRITE,
+		GUI_NETWORK_READ,
+		NETWORK_WRITE,
+		NETWORK_READ,
+		NBT_WRITE,
+		NBT_READ;
 	}
 
-	private Object invoke2(Object a, Object b)
-	{
-		try
-		{
-			return this.method.invoke(a, b);
-		}
-		catch (IllegalAccessException e)
-		{
-			throw new IllegalStateException(e);
-		}
-		catch (IllegalArgumentException e)
-		{
-			throw new IllegalStateException(e);
-		}
-		catch (InvocationTargetException e)
-		{
-			throw new IllegalStateException(e);
-		}
-	}
-
-	public void readFromNBT(Object tile, NBTTagCompound nbt)
-	{
-		invoke2(tile, nbt);
-	}
-
-	public void writeToNBT(Object tile, NBTTagCompound nbt)
-	{
-		invoke2(tile, nbt);
-	}
-
-	public boolean writeToStream(IStreamable tile, ByteBuf data)
-	{
-		return (Boolean)invoke2(tile, data);
-	}
-
-	public boolean readFromStream(IStreamable tile, ByteBuf data)
-	{
-		return (Boolean)invoke2(tile, data);
-	}
+	EventType event();
 }

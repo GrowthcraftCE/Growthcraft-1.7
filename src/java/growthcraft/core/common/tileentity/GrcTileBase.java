@@ -31,8 +31,8 @@ import io.netty.buffer.Unpooled;
 
 import growthcraft.api.core.stream.IStreamable;
 import growthcraft.api.core.nbt.INBTSerializable;
-import growthcraft.core.common.tileentity.event.EventFunction;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventFunction;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.event.TileEventHandlerMap;
 
 import net.minecraft.tileentity.TileEntity;
@@ -63,18 +63,18 @@ public abstract class GrcTileBase extends TileEntity implements IStreamable, INB
 		markForUpdate();
 	}
 
-	protected List<EventFunction> getHandlersFor(@Nonnull EventHandler.EventType type)
+	protected List<TileEventFunction> getHandlersFor(@Nonnull TileEventHandler.EventType event)
 	{
-		return HANDLERS.getEventFunctionsForClass(getClass(), type);
+		return HANDLERS.getEventFunctionsForClass(getClass(), event);
 	}
 
 	@Override
 	public final boolean writeToStream(ByteBuf stream)
 	{
-		final List<EventFunction> handlers = getHandlersFor(EventHandler.EventType.NETWORK_WRITE);
+		final List<TileEventFunction> handlers = getHandlersFor(TileEventHandler.EventType.NETWORK_WRITE);
 		if (handlers != null)
 		{
-			for (EventFunction func : handlers)
+			for (TileEventFunction func : handlers)
 			{
 				func.writeToStream(this, stream);
 			}
@@ -112,10 +112,10 @@ public abstract class GrcTileBase extends TileEntity implements IStreamable, INB
 	public final boolean readFromStream(ByteBuf stream)
 	{
 		boolean shouldUpdate = false;
-		final List<EventFunction> handlers = getHandlersFor(EventHandler.EventType.NETWORK_READ);
+		final List<TileEventFunction> handlers = getHandlersFor(TileEventHandler.EventType.NETWORK_READ);
 		if (handlers != null)
 		{
-			for (EventFunction func : handlers)
+			for (TileEventFunction func : handlers)
 			{
 				if (func.readFromStream(this, stream))
 				{
@@ -157,10 +157,10 @@ public abstract class GrcTileBase extends TileEntity implements IStreamable, INB
 	public final void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		final List<EventFunction> handlers = getHandlersFor(EventHandler.EventType.NBT_READ);
+		final List<TileEventFunction> handlers = getHandlersFor(TileEventHandler.EventType.NBT_READ);
 		if (handlers != null)
 		{
-			for (EventFunction func : handlers)
+			for (TileEventFunction func : handlers)
 			{
 				func.readFromNBT(this, nbt);
 			}
@@ -171,10 +171,10 @@ public abstract class GrcTileBase extends TileEntity implements IStreamable, INB
 	public final void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		final List<EventFunction> handlers = getHandlersFor(EventHandler.EventType.NBT_WRITE);
+		final List<TileEventFunction> handlers = getHandlersFor(TileEventHandler.EventType.NBT_WRITE);
 		if (handlers != null)
 		{
-			for (EventFunction func : handlers)
+			for (TileEventFunction func : handlers)
 			{
 				func.writeToNBT(this, nbt);
 			}

@@ -46,7 +46,7 @@ import growthcraft.core.common.inventory.AccesibleSlots;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.IItemHandler;
 import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
 import growthcraft.core.common.tileentity.feature.ITileNamedFluidTanks;
@@ -650,7 +650,7 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase implements IItemHandl
 		tag.setTag("tank_names", tagList.getTag());
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_CheeseVat(NBTTagCompound nbt)
 	{
 		if (nbt.hasKey("progress_max"))
@@ -665,7 +665,7 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase implements IItemHandl
 		this.vatState = CheeseVatState.getStateSafe(nbt.getString("vat_state"));
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_CheeseVat(NBTTagCompound nbt)
 	{
 		nbt.setInteger("progress_max", progressMax);
@@ -674,7 +674,7 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase implements IItemHandl
 		nbt.setString("vat_state", vatState.name);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_CheeseVat(ByteBuf stream) throws IOException
 	{
 		this.progressMax = stream.readInt();
@@ -693,7 +693,7 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase implements IItemHandl
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_CheeseVat(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(progressMax);

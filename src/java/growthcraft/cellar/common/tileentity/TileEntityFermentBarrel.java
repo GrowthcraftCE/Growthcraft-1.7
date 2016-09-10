@@ -14,7 +14,7 @@ import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.InventoryProcessor;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 
 import io.netty.buffer.ByteBuf;
@@ -308,7 +308,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		}
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_FermentBarrel(NBTTagCompound nbt)
 	{
 		readFermentTimeFromNBT(nbt);
@@ -327,7 +327,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		nbt.setBoolean("lid_on", lidOn);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_FermentBarrel(NBTTagCompound nbt)
 	{
 		writeFermentTimeToNBT(nbt);
@@ -359,7 +359,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		iCrafting.sendProgressBarUpdate(container, FermentBarrelDataID.TIME_MAX.ordinal(), getTimeMax());
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_FermentBarrel(ByteBuf stream) throws IOException
 	{
 		this.time = stream.readInt();
@@ -367,7 +367,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_FermentBarrel(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(time);

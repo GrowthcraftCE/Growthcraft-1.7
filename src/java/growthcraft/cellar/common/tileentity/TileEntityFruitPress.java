@@ -5,7 +5,7 @@ import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.tileentity.device.FruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -140,7 +140,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 		}
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_FruitPress(NBTTagCompound nbt)
 	{
 		if (nbt.getInteger("FruitPress_version") > 0)
@@ -153,7 +153,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 		}
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_FruitPress(NBTTagCompound nbt)
 	{
 		fruitPress.writeToNBT(nbt, "fruit_press");

@@ -32,7 +32,7 @@ import growthcraft.core.common.inventory.AccesibleSlots;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.IItemHandler;
 import growthcraft.core.common.tileentity.GrcTileDeviceBase;
 import growthcraft.core.util.ItemUtils;
@@ -291,21 +291,21 @@ public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHan
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_ButterChurn(NBTTagCompound nbt)
 	{
 		this.shaftState = nbt.getInteger("shaft_state");
 		this.churns = nbt.getInteger("churns");
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_ButterChurn(NBTTagCompound nbt)
 	{
 		nbt.setInteger("shaft_state", shaftState);
 		nbt.setInteger("churns", churns);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_ButterChurn(ByteBuf stream) throws IOException
 	{
 		this.shaftState = stream.readInt();
@@ -313,7 +313,7 @@ public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHan
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_ButterChurn(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(shaftState);

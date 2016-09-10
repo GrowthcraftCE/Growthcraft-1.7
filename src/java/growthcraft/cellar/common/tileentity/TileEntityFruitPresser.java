@@ -5,7 +5,7 @@ import java.io.IOException;
 import io.netty.buffer.ByteBuf;
 
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.GrcTileBase;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -47,21 +47,21 @@ public class TileEntityFruitPresser extends GrcTileBase
 		return this.trans;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_FruitPresser(NBTTagCompound nbt)
 	{
 		this.trans = nbt.getFloat("trans");
 		this.transPrev = nbt.getFloat("transprev");
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_FruitPresser(NBTTagCompound nbt)
 	{
 		nbt.setFloat("trans", trans);
 		nbt.setFloat("transprev", transPrev);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_FruitPresser(ByteBuf stream) throws IOException
 	{
 		this.trans = stream.readFloat();
@@ -69,7 +69,7 @@ public class TileEntityFruitPresser extends GrcTileBase
 		return true;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_FruitPresser(ByteBuf stream) throws IOException
 	{
 		stream.writeFloat(trans);

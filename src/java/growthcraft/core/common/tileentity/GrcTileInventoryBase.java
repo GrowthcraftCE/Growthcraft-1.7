@@ -26,7 +26,7 @@ package growthcraft.core.common.tileentity;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.IInventoryWatcher;
 import growthcraft.core.common.inventory.InventoryProcessor;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.ICustomDisplayName;
 import growthcraft.core.util.ItemUtils;
 
@@ -221,7 +221,7 @@ public abstract class GrcTileInventoryBase extends GrcTileBase implements ISided
 		//readInventoryNameFromNBT(nbt);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_Inventory(NBTTagCompound nbt)
 	{
 		readInventoryFromNBT(nbt);
@@ -246,7 +246,7 @@ public abstract class GrcTileInventoryBase extends GrcTileBase implements ISided
 		writeInventoryToNBT(nbt);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_Inventory(NBTTagCompound nbt)
 	{
 		writeInventoryToNBT(nbt);

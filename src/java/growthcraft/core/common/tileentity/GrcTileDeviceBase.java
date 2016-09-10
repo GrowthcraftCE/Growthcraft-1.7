@@ -28,7 +28,7 @@ import java.io.IOException;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.core.common.tileentity.device.FluidTanks;
 import growthcraft.core.common.tileentity.device.IFluidTanks;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 
 import io.netty.buffer.ByteBuf;
 
@@ -234,7 +234,7 @@ public abstract class GrcTileDeviceBase extends GrcTileInventoryBase implements 
 		readTanksFromNBT(nbt);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_DeviceBase(NBTTagCompound nbt)
 	{
 		readTanksFromNBT(nbt);
@@ -253,13 +253,13 @@ public abstract class GrcTileDeviceBase extends GrcTileInventoryBase implements 
 		writeTanksToNBT(nbt);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_DeviceBase(NBTTagCompound nbt)
 	{
 		writeTanksToNBT(nbt);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_FluidTanks(ByteBuf stream) throws IOException
 	{
 		if (tanks != null)
@@ -267,7 +267,7 @@ public abstract class GrcTileDeviceBase extends GrcTileInventoryBase implements 
 		return true;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_FluidTanks(ByteBuf stream) throws IOException
 	{
 		if (tanks != null)

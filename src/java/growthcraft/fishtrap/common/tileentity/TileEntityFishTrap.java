@@ -1,6 +1,6 @@
 package growthcraft.fishtrap.common.tileentity;
 
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
 import growthcraft.core.common.tileentity.GrcTileBase;
 import growthcraft.fishtrap.common.inventory.ContainerFishTrap;
@@ -165,7 +165,7 @@ public class TileEntityFishTrap extends GrcTileBase implements IInventory, IInte
 		return true;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_FishTrap(NBTTagCompound nbt)
 	{
 		final NBTTagList tags = nbt.getTagList("items", 10);
@@ -187,7 +187,7 @@ public class TileEntityFishTrap extends GrcTileBase implements IInventory, IInte
 		}
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_FishTrap(NBTTagCompound nbt)
 	{
 		final NBTTagList nbttaglist = new NBTTagList();

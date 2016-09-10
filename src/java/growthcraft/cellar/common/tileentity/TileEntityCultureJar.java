@@ -33,7 +33,7 @@ import growthcraft.cellar.common.tileentity.device.YeastGenerator;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.device.DeviceProgressive;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 
@@ -270,7 +270,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		iCrafting.sendProgressBarUpdate(container, CultureJarDataId.HEAT_AMOUNT.ordinal(), (int)(heatComponent.getHeatMultiplier() * 0x7FFF));
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_CultureJar(NBTTagCompound nbt)
 	{
 		yeastGen.readFromNBT(nbt, "yeastgen");
@@ -278,7 +278,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		heatComponent.readFromNBT(nbt, "heat_component");
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_CultureJar(NBTTagCompound nbt)
 	{
 		yeastGen.writeToNBT(nbt, "yeastgen");
@@ -286,7 +286,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		heatComponent.writeToNBT(nbt, "heat_component");
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_YeastGen(ByteBuf stream) throws IOException
 	{
 		this.jarDeviceState = stream.readInt();
@@ -296,7 +296,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_YeastGen(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(jarDeviceState);

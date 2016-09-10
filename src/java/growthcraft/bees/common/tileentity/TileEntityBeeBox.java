@@ -7,7 +7,7 @@ import growthcraft.bees.common.inventory.ContainerBeeBox;
 import growthcraft.bees.common.tileentity.device.DeviceBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
 import growthcraft.core.common.tileentity.feature.IItemHandler;
 import growthcraft.core.common.tileentity.GrcTileInventoryBase;
@@ -288,7 +288,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 		fillHoneyCombs(1);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_BeeBox(NBTTagCompound nbt)
 	{
 		beeBox.readFromNBT(nbt, "bee_box");
@@ -298,7 +298,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 		}
 	}
 
-	@EventHandler(type=EventHandler.EventType.NBT_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_BeeBox(NBTTagCompound nbt)
 	{
 		nbt.setInteger("BeeBox.version", beeBoxVersion);
