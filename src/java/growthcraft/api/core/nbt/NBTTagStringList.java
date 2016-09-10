@@ -57,7 +57,7 @@ public class NBTTagStringList
 	/**
 	 * @param list - a string list
 	 */
-	public NBTTagStringList(@Nonnull Collection<Object> list)
+	public NBTTagStringList(@Nonnull Collection<?> list)
 	{
 		this();
 		for (Object obj : list)
