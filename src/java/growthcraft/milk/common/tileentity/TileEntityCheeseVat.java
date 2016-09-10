@@ -36,7 +36,7 @@ import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.item.ItemTest;
-import growthcraft.api.core.nbt.NBTStringTagList;
+import growthcraft.api.core.nbt.NBTTagStringList;
 import growthcraft.api.core.stream.StreamUtils;
 import growthcraft.api.milk.cheesevat.ICheeseVatRecipe;
 import growthcraft.api.milk.MilkFluidTags;
@@ -642,7 +642,7 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase implements IItemHandl
 	@Override
 	public void writeFluidTankNamesToTag(NBTTagCompound tag)
 	{
-		final NBTStringTagList tagList = new NBTStringTagList();
+		final NBTTagStringList tagList = new NBTTagStringList();
 		for (FluidTankType type : FluidTankType.VALUES)
 		{
 			tagList.add(type.getUnlocalizedName());
