@@ -65,7 +65,6 @@ public class GrowthCraftRice
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/rice.conf");
-		if (config.debugEnabled) modules.setLogger(logger);
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
@@ -73,6 +72,7 @@ public class GrowthCraftRice
 		if (config.enableMFRIntegration) modules.add(new growthcraft.rice.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
 		modules.add(CommonProxy.instance);
+		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 		modules.preInit();
 		register();

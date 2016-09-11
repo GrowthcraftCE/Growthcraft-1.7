@@ -72,7 +72,6 @@ public class GrowthCraftGrapes
 
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
-		if (config.debugEnabled) modules.setLogger(logger);
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
@@ -80,6 +79,7 @@ public class GrowthCraftGrapes
 		if (config.enableMFRIntegration) modules.add(new growthcraft.grapes.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.grapes.integration.ThaumcraftModule());
 		modules.add(CommonProxy.instance);
+		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 		creativeTab = new CreativeTabsGrowthcraftGrapes("creative_tab_grcgrapes");
 		modules.preInit();

@@ -71,13 +71,13 @@ public class GrowthCraftBamboo
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
-		if (config.debugEnabled) modules.setLogger(logger);
 		modules.add(blocks);
 		modules.add(items);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.bamboo.integration.ForestryModule());
 		if (config.enableMFRIntegration) modules.add(new growthcraft.bamboo.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bamboo.integration.ThaumcraftModule());
 		modules.add(CommonProxy.instance);
+		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 		creativeTab = new CreativeTabsGrowthcraftBamboo("creative_tab_grcbamboo");
 		modules.preInit();

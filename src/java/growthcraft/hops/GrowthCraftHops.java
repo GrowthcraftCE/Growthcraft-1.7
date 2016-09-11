@@ -65,7 +65,6 @@ public class GrowthCraftHops
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
-		if (config.debugEnabled) modules.setLogger(logger);
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
@@ -73,6 +72,7 @@ public class GrowthCraftHops
 		if (config.enableMFRIntegration) modules.add(new growthcraft.hops.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.hops.integration.ThaumcraftModule());
 		modules.add(CommonProxy.instance);
+		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 		modules.preInit();
 		register();

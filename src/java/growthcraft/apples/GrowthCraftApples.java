@@ -67,7 +67,6 @@ public class GrowthCraftApples
 		creativeTab = GrowthCraftCore.creativeTab;
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/apples.conf");
-		if (config.debugEnabled) modules.setLogger(logger);
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
@@ -76,6 +75,7 @@ public class GrowthCraftApples
 		if (config.enableMFRIntegration) modules.add(new growthcraft.apples.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.apples.integration.ThaumcraftModule());
 		modules.add(CommonProxy.instance);
+		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 		modules.preInit();
 		register();

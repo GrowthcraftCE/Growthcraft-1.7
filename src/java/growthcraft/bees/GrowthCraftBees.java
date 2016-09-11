@@ -96,11 +96,6 @@ public class GrowthCraftBees
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
-		if (config.debugEnabled)
-		{
-			BeesRegistry.instance().setLogger(logger);
-			modules.setLogger(logger);
-		}
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
@@ -124,6 +119,11 @@ public class GrowthCraftBees
 		if (config.enableForestryIntegration) modules.add(new growthcraft.bees.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bees.integration.ThaumcraftModule());
 		modules.add(CommonProxy.instance);
+		if (config.debugEnabled)
+		{
+			BeesRegistry.instance().setLogger(logger);
+			modules.setLogger(logger);
+		}
 		modules.freeze();
 		tab = new CreativeTabsGrowthcraftBees("creative_tab_grcbees");
 

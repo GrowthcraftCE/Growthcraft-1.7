@@ -105,7 +105,6 @@ public class GrowthCraftCore
 		{
 			logger.info("Pre-Initializing %s", MOD_ID);
 			CoreRegistry.instance().setLogger(logger);
-			modules.setLogger(logger);
 		}
 		modules.add(blocks);
 		modules.add(items);
@@ -120,6 +119,7 @@ public class GrowthCraftCore
 		if (config.enableAppleCoreIntegration) modules.add(new growthcraft.core.integration.AppleCore());
 		//if (config.enableNEIIntegration) modules.add(new growthcraft.core.integration.nei.NEIModule());
 		modules.add(CommonProxy.instance);
+		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 		creativeTab = new CreativeTabsGrowthcraft("creative_tab_grccore");
 
