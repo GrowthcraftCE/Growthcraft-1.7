@@ -224,16 +224,28 @@ public class GrcMilkFluids extends GrcModuleBase
 		if (milk != null)
 		{
 			OreDictionary.registerOre("bottleMilk", milk.foodBottle.asStack());
-			OreDictionary.registerOre("bucketMilk", Items.milk_bucket);
-			// Milk bucket is the vanilla milk bucket, derp
+		}
+		// Milk bucket is the vanilla milk bucket, derp
+		OreDictionary.registerOre("bucketMilk", Items.milk_bucket);
+		if (skimMilk != null)
+		{
 			OreDictionary.registerOre("bottleSkimmilk", skimMilk.foodBottle.asStack());
 			OreDictionary.registerOre("bucketSkimmilk", skimMilk.bucket.asStack());
+		}
+		if (butterMilk != null)
+		{
 			OreDictionary.registerOre("bottleButtermilk", butterMilk.foodBottle.asStack());
 			OreDictionary.registerOre("bucketButtermilk", butterMilk.bucket.asStack());
+		}
+		if (whey != null)
+		{
 			OreDictionary.registerOre("bottleWhey", whey.foodBottle.asStack());
 			OreDictionary.registerOre("bucketWhey", whey.bucket.asStack());
 			// https://github.com/GrowthcraftCE/Growthcraft-1.7/issues/419
 			OreDictionary.registerOre("foodStock", whey.foodBottle.asStack());
+		}
+		if (cream != null)
+		{
 			OreDictionary.registerOre("bottleCream", cream.bottle.asStack());
 			OreDictionary.registerOre("bucketCream", cream.bucket.asStack());
 		}
