@@ -232,6 +232,8 @@ public class GrcMilkFluids extends GrcModuleBase
 			OreDictionary.registerOre("bucketButtermilk", butterMilk.bucket.asStack());
 			OreDictionary.registerOre("bottleWhey", whey.foodBottle.asStack());
 			OreDictionary.registerOre("bucketWhey", whey.bucket.asStack());
+			// https://github.com/GrowthcraftCE/Growthcraft-1.7/issues/419
+			OreDictionary.registerOre("foodStock", whey.foodBottle.asStack());
 			OreDictionary.registerOre("bottleCream", cream.bottle.asStack());
 			OreDictionary.registerOre("bucketCream", cream.bucket.asStack());
 		}
