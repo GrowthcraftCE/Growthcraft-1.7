@@ -55,6 +55,24 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
 		this.baitInventory = new InventorySlice(this, baitSlots);
 	}
 
+	@Override
+	public String getGuiID()
+	{
+		return "grcfishtrap:fish_trap";
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerFishTrap(playerInventory, this);
+	}
+
+	@Override
+	public GrcInternalInventory createInventory()
+	{
+		return new GrcInternalInventory(this, 7);
+	}
+
 	/**
 	 * Called after a successful catch, this will remove an item from the stack
 	 * of provided bait
@@ -101,24 +119,10 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
 		return baitSlots.length;
 	}
 
-	@Override
-	public String getGuiID()
-	{
-		return "grcfishtrap:fish_trap";
-	}
-
-	@Override
-	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
-	{
-		return new ContainerFishTrap(playerInventory, this);
-	}
-
-	@Override
-	public GrcInternalInventory createInventory()
-	{
-		return new GrcInternalInventory(this, 7);
-	}
-
+	/**
+	 * The fishtrap does not update on it's own, instead it relies on the
+	 * block for processing.
+	 */
 	@Override
 	public boolean canUpdate()
 	{
@@ -143,6 +147,7 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
 	@Override
 	protected void readInventoryFromNBT(NBTTagCompound nbt)
 	{
+		// Backwards compatability
 		if (nbt.hasKey("items"))
 		{
 			inventory.clear();
