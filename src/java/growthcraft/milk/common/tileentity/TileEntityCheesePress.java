@@ -137,7 +137,7 @@ public class TileEntityCheesePress extends GrcTileInventoryBase implements IItem
 	}
 
 	@Override
-	protected GrcInternalInventory createInventory()
+	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 1, 1);
 	}

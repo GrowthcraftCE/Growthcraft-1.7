@@ -65,7 +65,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 	}
 
 	@Override
-	protected GrcInternalInventory createInventory()
+	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 28);
 	}

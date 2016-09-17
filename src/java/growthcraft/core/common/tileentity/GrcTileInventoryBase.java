@@ -52,9 +52,14 @@ public abstract class GrcTileInventoryBase extends GrcTileBase implements ISided
 		this.inventory = createInventory();
 	}
 
-	protected GrcInternalInventory createInventory()
+	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 0);
+	}
+
+	public GrcInternalInventory getInternalInventory()
+	{
+		return inventory;
 	}
 
 	public String getDefaultInventoryName()
@@ -188,7 +193,7 @@ public abstract class GrcTileInventoryBase extends GrcTileBase implements ISided
 		return NO_SLOTS;
 	}
 
-	private void readInventoryFromNBT(NBTTagCompound nbt)
+	protected void readInventoryFromNBT(NBTTagCompound nbt)
 	{
 		if (nbt.hasKey("items"))
 		{

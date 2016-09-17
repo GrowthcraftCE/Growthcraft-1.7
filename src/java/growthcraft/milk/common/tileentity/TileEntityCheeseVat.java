@@ -220,7 +220,7 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase implements IItemHandl
 	}
 
 	@Override
-	protected GrcInternalInventory createInventory()
+	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 3, 1);
 	}

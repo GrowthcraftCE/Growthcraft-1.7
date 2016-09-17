@@ -202,7 +202,7 @@ public class InventoryProcessorTest
 			assertEquals(0, invProc.findNextPresent(inv));
 
 			// clear inventory and ensure that it doesn't find anything
-			inv.clearInventory();
+			inv.clear();
 			assertEquals(-1, invProc.findNextPresent(inv));
 
 
@@ -225,7 +225,7 @@ public class InventoryProcessorTest
 			assertEquals(0, invProc.findNextPresentFromEnd(inv));
 
 			// clear inventory and ensure that it doesn't find anything
-			inv.clearInventory();
+			inv.clear();
 			assertEquals(-1, invProc.findNextPresentFromEnd(inv));
 
 			inv.setInventorySlotContents(2, apple.copy());

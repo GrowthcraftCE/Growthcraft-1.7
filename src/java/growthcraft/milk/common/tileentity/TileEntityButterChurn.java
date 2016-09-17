@@ -91,7 +91,7 @@ public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHan
 	}
 
 	@Override
-	protected GrcInternalInventory createInventory()
+	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 1);
 	}
