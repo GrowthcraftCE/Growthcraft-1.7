@@ -5,11 +5,7 @@ import growthcraft.core.common.inventory.slot.GrcSlot;
 import growthcraft.core.common.inventory.slot.SlotInput;
 import growthcraft.fishtrap.common.tileentity.TileEntityFishTrap;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
 public class ContainerFishTrap extends GrcContainer
 {

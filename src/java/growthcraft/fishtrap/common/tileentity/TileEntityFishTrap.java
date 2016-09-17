@@ -1,7 +1,8 @@
 package growthcraft.fishtrap.common.tileentity;
 
 import growthcraft.api.core.nbt.NBTType;
-import growthcraft.api.fishtrap.BaitRegistry;
+import growthcraft.api.fishtrap.BaitRegistry.BaitHandle;
+import growthcraft.api.fishtrap.FishTrapRegistry;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.inventory.InventorySlice;
@@ -34,7 +35,18 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
 
 	public float applyBaitModifier(float f)
 	{
-		return f;
+		float result = f;
+		final ItemStack bait = baitInventory.getStackInSlot(0);
+		if (bait != null)
+		{
+			final BaitHandle handle = FishTrapRegistry.instance().findBait(bait);
+			if (handle != null)
+			{
+				result += handle.baseRate;
+				result *= handle.multiplier;
+			}
+		}
+		return result;
 	}
 
 	public int getBaitInventoryOffset()

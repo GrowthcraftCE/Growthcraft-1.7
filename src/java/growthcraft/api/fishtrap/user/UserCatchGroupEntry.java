@@ -35,9 +35,9 @@ public class UserCatchGroupEntry implements ICommentable
 		this.weight = 1;
 	}
 
-	public UserCatchGroupEntry(int weight)
+	public UserCatchGroupEntry(int p_weight)
 	{
-		this.weight = weight;
+		this.weight = p_weight;
 	}
 
 	@Override

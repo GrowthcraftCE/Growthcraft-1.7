@@ -21,39 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.fishtrap;
+package growthcraft.api.fishtrap.user;
 
-import growthcraft.api.core.registry.GenericItemRegistry;
-import growthcraft.api.core.registry.ItemRegistryEntry;
+import growthcraft.api.core.schema.ICommentable;
+import growthcraft.api.core.schema.ItemKeySchema;
 
 import net.minecraft.item.ItemStack;
 
-public class BaitRegistry extends GenericItemRegistry<ItemStack, ItemRegistryEntry<BaitRegistry.BaitHandle>>
+public class UserBaitEntry implements ICommentable
 {
-	public static class BaitHandle
+	public String comment = "";
+	public float base_rate;
+	public float multiplier;
+	public ItemKeySchema item;
+
+	/**
+	 * @param g - item group, can be "treasure", "junk", or "fish"
+	 * @param w - entry weight
+	 * @param stack - item stack
+	 * @param dam - damage variance, how much damage is applied to the item when fished up?
+	 * @param enc - is the item enchanted?
+	 */
+	public UserBaitEntry(ItemStack stack, float base, float mul)
 	{
-		public float baseRate;
-		public float multiplier = 1.0f;
-
-		public BaitHandle() {}
-
-		public BaitHandle(float base, float mul)
-		{
-			this();
-			this.baseRate = base;
-			this.multiplier = mul;
-		}
+		this.item = new ItemKeySchema(stack);
+		this.base_rate = base;
+		this.multiplier = mul;
 	}
 
-	public void add(Object stack, BaitHandle handle)
+	public UserBaitEntry() {}
+
+	@Override
+	public String getComment()
 	{
-		add(new ItemRegistryEntry<BaitHandle>(stack, handle));
+		return comment;
 	}
 
-	public BaitHandle findHandle(ItemStack stack)
+	@Override
+	public void setComment(String com)
 	{
-		final ItemRegistryEntry<BaitHandle> entry = find(stack);
-		if (entry != null) return entry.handle;
-		return null;
+		this.comment = com;
 	}
 }

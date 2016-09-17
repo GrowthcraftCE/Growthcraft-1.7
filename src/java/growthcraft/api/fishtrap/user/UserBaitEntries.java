@@ -21,39 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.fishtrap;
+package growthcraft.api.fishtrap.user;
 
-import growthcraft.api.core.registry.GenericItemRegistry;
-import growthcraft.api.core.registry.ItemRegistryEntry;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.minecraft.item.ItemStack;
+import growthcraft.api.core.schema.ICommentable;
 
-public class BaitRegistry extends GenericItemRegistry<ItemStack, ItemRegistryEntry<BaitRegistry.BaitHandle>>
+public class UserBaitEntries implements ICommentable
 {
-	public static class BaitHandle
+	public String comment = "";
+	public List<UserBaitEntry> data = new ArrayList<UserBaitEntry>();
+
+	@Override
+	public String getComment()
 	{
-		public float baseRate;
-		public float multiplier = 1.0f;
-
-		public BaitHandle() {}
-
-		public BaitHandle(float base, float mul)
-		{
-			this();
-			this.baseRate = base;
-			this.multiplier = mul;
-		}
+		return comment;
 	}
 
-	public void add(Object stack, BaitHandle handle)
+	@Override
+	public void setComment(String com)
 	{
-		add(new ItemRegistryEntry<BaitHandle>(stack, handle));
-	}
-
-	public BaitHandle findHandle(ItemStack stack)
-	{
-		final ItemRegistryEntry<BaitHandle> entry = find(stack);
-		if (entry != null) return entry.handle;
-		return null;
+		this.comment = com;
 	}
 }
