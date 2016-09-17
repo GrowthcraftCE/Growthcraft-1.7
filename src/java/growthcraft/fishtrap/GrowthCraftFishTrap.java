@@ -94,11 +94,11 @@ public class GrowthCraftFishTrap
 		userBaitConfig.addDefault(new ItemStack(Items.rotten_flesh), 0.2f, 1.1f);
 
 		// Catch Groups
-		userCatchGroupConfig.addDefault("junk", 30, "Useless Stuff");
-		userCatchGroupConfig.addDefault("treasure", 50, "Fancy Stuff");
-		userCatchGroupConfig.addDefault("fish", 10, "Fishes");
-		userCatchGroupConfig.addDefault("mineral", 60, "Ingots and other metallic stuff");
-		userCatchGroupConfig.addDefault("legendary", 150, "Stuff you probably would never find on average");
+		userCatchGroupConfig.addDefault("junk", 3, "Useless Stuff");
+		userCatchGroupConfig.addDefault("treasure", 5, "Fancy Stuff");
+		userCatchGroupConfig.addDefault("fish", 1, "Fishes");
+		userCatchGroupConfig.addDefault("mineral", 7, "Ingots and other metallic stuff");
+		userCatchGroupConfig.addDefault("legendary", 10, "Stuff you probably would never find on average");
 
 		// Will use same chances as Fishing Rods
 		// Junk
@@ -125,12 +125,12 @@ public class GrowthCraftFishTrap
 		userFishTrapConfig.addDefault("fish", new FishTrapEntry(new ItemStack(Items.fish, 1, ItemFishFood.FishType.CLOWNFISH.func_150976_a()), 2));
 		userFishTrapConfig.addDefault("fish", new FishTrapEntry(new ItemStack(Items.fish, 1, ItemFishFood.FishType.PUFFERFISH.func_150976_a()), 13));
 		// Minerals
-		userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Blocks.tripwire_hook), 10));
-		userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Items.iron_ingot), 20));
-		userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Items.gold_nugget), 14));
+		userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Blocks.tripwire_hook), 1));
+		userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Items.iron_ingot), 10));
+		userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Items.gold_nugget), 5));
 		// Legendary
-		userFishTrapConfig.addDefault("legendary", new FishTrapEntry(new ItemStack(Items.gold_ingot), 10));
-		userFishTrapConfig.addDefault("legendary", new FishTrapEntry(new ItemStack(Items.diamond), 50));
+		userFishTrapConfig.addDefault("legendary", new FishTrapEntry(new ItemStack(Items.gold_ingot), 1));
+		userFishTrapConfig.addDefault("legendary", new FishTrapEntry(new ItemStack(Items.diamond), 10));
 
 		//====================
 		// CRAFTING
