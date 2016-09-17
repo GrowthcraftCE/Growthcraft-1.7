@@ -62,7 +62,7 @@ public class GrowthCraftFishTrap
 	}
 
 	@EventHandler
-	public void preload(FMLPreInitializationEvent event)
+	public void preInit(FMLPreInitializationEvent event)
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
@@ -127,7 +127,7 @@ public class GrowthCraftFishTrap
 		// Minerals
 		userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Blocks.tripwire_hook), 10));
 		userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Items.iron_ingot), 20));
-		userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Items.gold_nuggest), 14));
+		userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Items.gold_nugget), 14));
 		// Legendary
 		userFishTrapConfig.addDefault("legendary", new FishTrapEntry(new ItemStack(Items.gold_ingot), 10));
 		userFishTrapConfig.addDefault("legendary", new FishTrapEntry(new ItemStack(Items.diamond), 50));
@@ -141,7 +141,7 @@ public class GrowthCraftFishTrap
 	}
 
 	@EventHandler
-	public void load(FMLInitializationEvent event)
+	public void init(FMLInitializationEvent event)
 	{
 		userBaitConfig.loadUserConfig();
 		userCatchGroupConfig.loadUserConfig();
@@ -151,7 +151,7 @@ public class GrowthCraftFishTrap
 	}
 
 	@EventHandler
-	public void postload(FMLPostInitializationEvent event)
+	public void postInit(FMLPostInitializationEvent event)
 	{
 		modules.postInit();
 	}
