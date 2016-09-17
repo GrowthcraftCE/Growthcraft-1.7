@@ -745,7 +745,10 @@ public class InventoryProcessor
 		final ItemStack expected = inv.getStackInSlot(slot);
 		if (expected != null)
 		{
-			return checkSlot(inv, stack, slot);
+			if (!checkSlot(inv, stack, slot)) return false;
+			if (expected.stackSize >= inv.getInventoryStackLimit()) return false;
+			final int estSize = expected.stackSize + stack.stackSize;
+			return estSize <= inv.getInventoryStackLimit();
 		}
 		return true;
 	}
