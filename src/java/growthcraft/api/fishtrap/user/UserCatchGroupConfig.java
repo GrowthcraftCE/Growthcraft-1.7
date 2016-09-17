@@ -24,19 +24,21 @@
 package growthcraft.api.fishtrap.user;
 
 import java.io.BufferedReader;
+import java.util.Map;
 
 import growthcraft.api.core.user.AbstractUserJSONConfig;
-import growthcraft.api.fishtrap.FishTrapEntry;
 import growthcraft.api.fishtrap.FishTrapRegistry;
 
-public class UserFishTrapConfig extends AbstractUserJSONConfig
+public class UserCatchGroupConfig extends AbstractUserJSONConfig
 {
-	private final UserFishTrapEntries defaultEntries = new UserFishTrapEntries();
-	private UserFishTrapEntries entries;
+	private final UserCatchGroupEntries defaultEntries = new UserCatchGroupEntries();
+	private UserCatchGroupEntries entries;
 
-	public void addDefault(String group, FishTrapEntry entry)
+	public void addDefault(String group, int weight, String comment)
 	{
-		defaultEntries.data.add(new UserFishTrapEntry(group, entry));
+		final UserCatchGroupEntry entry = new UserCatchGroupEntry(weight);
+		entry.setComment(comment);
+		defaultEntries.data.put(group, entry);
 	}
 
 	@Override
@@ -48,10 +50,10 @@ public class UserFishTrapConfig extends AbstractUserJSONConfig
 	@Override
 	protected void loadFromBuffer(BufferedReader buff) throws IllegalStateException
 	{
-		this.entries = gson.fromJson(buff, UserFishTrapEntries.class);
+		this.entries = gson.fromJson(buff, UserCatchGroupEntries.class);
 	}
 
-	private void addFishTrapEntry(UserFishTrapEntry entry)
+	private void addCatchGroupEntry(String name, UserCatchGroupEntry entry)
 	{
 		if (entry == null)
 		{
@@ -59,16 +61,14 @@ public class UserFishTrapConfig extends AbstractUserJSONConfig
 			return;
 		}
 
-		if (entry.item == null || entry.item.isInvalid())
+		if (entry.weight <= 0)
 		{
-			logger.error("Invalid item for entry {%s}", entry);
+			logger.error("Invalid weight for entry {%s}", entry);
 			return;
 		}
 
-		for (FishTrapEntry obj : entry.getFishTrapEntries())
-		{
-			FishTrapRegistry.instance().addCatchToGroup(obj, entry.group);
-		}
+		logger.debug("Adding Catch Group %s", name);
+		FishTrapRegistry.instance().addCatchGroup(name, entry.weight);
 	}
 
 	@Override
@@ -78,8 +78,11 @@ public class UserFishTrapConfig extends AbstractUserJSONConfig
 		{
 			if (entries.data != null)
 			{
-				logger.debug("Adding %d user fish trap entries.", entries.data.size());
-				for (UserFishTrapEntry entry : entries.data) addFishTrapEntry(entry);
+				logger.debug("Adding %d user catch groups.", entries.data.size());
+				for (Map.Entry<String, UserCatchGroupEntry> pair : entries.data.entrySet())
+				{
+					addCatchGroupEntry(pair.getKey(), pair.getValue());
+				}
 			}
 			else
 			{
