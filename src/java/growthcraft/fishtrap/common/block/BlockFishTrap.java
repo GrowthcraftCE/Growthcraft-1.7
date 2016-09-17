@@ -3,8 +3,9 @@ package growthcraft.fishtrap.common.block;
 import java.util.Random;
 
 import growthcraft.api.fishtrap.FishTrapRegistry;
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.common.block.GrcBlockContainer;
+import growthcraft.core.common.tileentity.feature.IInteractionObject;
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.BlockCheck;
 import growthcraft.core.Utils;
 import growthcraft.fishtrap.common.tileentity.TileEntityFishTrap;
@@ -18,6 +19,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.IBlockAccess;
@@ -42,6 +44,24 @@ public class BlockFishTrap extends GrcBlockContainer
 		setBlockName("grc.fishTrap");
 		setTileEntityType(TileEntityFishTrap.class);
 		setCreativeTab(GrowthCraftCore.creativeTab);
+	}
+
+	protected boolean openGui(EntityPlayer player, World world, int x, int y, int z)
+	{
+		final TileEntity te = getTileEntity(world, x, y, z);
+		if (te instanceof IInteractionObject)
+		{
+			player.openGui(GrowthCraftFishTrap.instance, 0, world, x, y, z);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
+	{
+		if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
+		return !player.isSneaking() && openGui(player, world, x, y, z);
 	}
 
 	private boolean isWater(Block block)
