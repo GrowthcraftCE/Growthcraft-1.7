@@ -168,10 +168,17 @@ public class InventoryProcessor
 		return true;
 	}
 
+	/**
+	 * Attempts to merge the given ItemStack into the inventory
+	 *
+	 * @param inv inventory to merge to
+	 * @param stack the stack to merge into the inventory
+	 * @param slots the selected slots to merge with
+	 * @param true, the stack was merged somehow, false otherwise
+	 */
 	public boolean mergeWithSlots(@Nonnull IInventory inv, @Nullable ItemStack stack, int[] slots)
 	{
 		if (stack == null) return false;
-
 		boolean anythingMerged = false;
 		for (int slot : slots)
 		{
@@ -184,11 +191,30 @@ public class InventoryProcessor
 	/**
 	 * Attempts to merge the given ItemStack into the inventory
 	 *
+	 * @param inv inventory to merge to
+	 * @param stack the stack to merge into the inventory
+	 * @param true, the stack was merged somehow, false otherwise
+	 */
+	public boolean mergeWithSlots(@Nonnull IInventory inv, @Nullable ItemStack stack)
+	{
+		if (stack == null) return false;
+		boolean anythingMerged = false;
+		for (int i = 0; i < inv.getSizeInventory(); ++i)
+		{
+			if (stack.stackSize <= 0) break;
+			anythingMerged |= mergeWithSlot(inv, stack, i);
+		}
+		return anythingMerged;
+	}
+
+	/**
+	 * Attempts to merge the given ItemStack into the inventory
+	 *
 	 * @param inv - inventory to merge to
 	 * @param stack -
 	 * @param remaining stack OR null if the item was completely expeneded
 	 */
-	public ItemStack mergeWithSlots(@Nonnull IInventory inv, @Nullable ItemStack stack)
+	public ItemStack mergeWithSlotsStack(@Nonnull IInventory inv, @Nullable ItemStack stack)
 	{
 		if (stack == null) return null;
 
