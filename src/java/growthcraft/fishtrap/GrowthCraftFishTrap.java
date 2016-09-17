@@ -56,6 +56,11 @@ public class GrowthCraftFishTrap
 		return instance.config;
 	}
 
+	public static ILogger getLogger()
+	{
+		return instance.logger;
+	}
+
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
