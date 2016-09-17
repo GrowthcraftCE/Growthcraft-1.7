@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) < 2014, Gwafu
+ * Copyright (c) 2015, 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.fishtrap.common.tileentity;
 
 import growthcraft.api.core.nbt.NBTType;
@@ -6,7 +30,6 @@ import growthcraft.api.fishtrap.FishTrapRegistry;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.inventory.InventorySlice;
-import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
 import growthcraft.core.common.tileentity.GrcTileInventoryBase;
 import growthcraft.fishtrap.common.inventory.ContainerFishTrap;
@@ -14,7 +37,6 @@ import growthcraft.fishtrap.common.inventory.ContainerFishTrap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -33,6 +55,21 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
 		this.baitInventory = new InventorySlice(this, baitSlots);
 	}
 
+	/**
+	 * Called after a successful catch, this will remove an item from the stack
+	 * of provided bait
+	 */
+	public void consumeBait()
+	{
+		baitInventory.decrStackSize(0, 1);
+	}
+
+	/**
+	 * Called by the block to modify the catch rate
+	 *
+	 * @param f the current catch rate
+	 * @return result the modified catch rate
+	 */
 	public float applyBaitModifier(float f)
 	{
 		float result = f;
@@ -88,14 +125,13 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
 		return false;
 	}
 
-	public boolean canAddStack(ItemStack stack, int index)
+	/**
+	 * @param stack the stack to add to the invetory
+	 * @return true, the stack was added, false otherwise
+	 */
+	public boolean addStack(ItemStack stack)
 	{
-		return InventoryProcessor.instance().canInsertItem(trapInventory, stack, index);
-	}
-
-	public void addStack(ItemStack stack)
-	{
-		InventoryProcessor.instance().mergeWithSlots(trapInventory, stack);
+		return InventoryProcessor.instance().mergeWithSlots(trapInventory, stack);
 	}
 
 	@Override
