@@ -1,8 +1,13 @@
 package growthcraft.fishtrap.common.tileentity;
 
+import growthcraft.api.core.nbt.NBTType;
+import growthcraft.api.fishtrap.BaitRegistry;
+import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.inventory.InventoryProcessor;
+import growthcraft.core.common.inventory.InventorySlice;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
-import growthcraft.core.common.tileentity.GrcTileBase;
+import growthcraft.core.common.tileentity.GrcTileInventoryBase;
 import growthcraft.fishtrap.common.inventory.ContainerFishTrap;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,13 +18,39 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class TileEntityFishTrap extends GrcTileBase implements IInventory, IInteractionObject
+public class TileEntityFishTrap extends GrcTileInventoryBase implements IInteractionObject
 {
-	// Constants
-	private ItemStack[] invSlots   = new ItemStack[5];
+	private static final int[] trapSlots = new int[] {0,1,2,3,4,5};
+	private static final int[] baitSlots = new int[] {6};
+	public InventorySlice trapInventory;
+	public InventorySlice baitInventory;
 
-	// Other Vars.
-	private String   name;
+	public TileEntityFishTrap()
+	{
+		super();
+		this.trapInventory = new InventorySlice(this, trapSlots);
+		this.baitInventory = new InventorySlice(this, baitSlots);
+	}
+
+	public float applyBaitModifier(float f)
+	{
+		return f;
+	}
+
+	public int getBaitInventoryOffset()
+	{
+		return baitSlots[0];
+	}
+
+	public int getTrapInventorySize()
+	{
+		return trapSlots.length;
+	}
+
+	public int getBaitInventorySize()
+	{
+		return baitSlots.length;
+	}
 
 	@Override
 	public String getGuiID()
@@ -33,9 +64,12 @@ public class TileEntityFishTrap extends GrcTileBase implements IInventory, IInte
 		return new ContainerFishTrap(playerInventory, this);
 	}
 
-	/************
-	 * UPDATE
-	 ************/
+	@Override
+	public GrcInternalInventory createInventory()
+	{
+		return new GrcInternalInventory(this, 7);
+	}
+
 	@Override
 	public boolean canUpdate()
 	{
@@ -44,190 +78,41 @@ public class TileEntityFishTrap extends GrcTileBase implements IInventory, IInte
 
 	public boolean canAddStack(ItemStack stack, int index)
 	{
-		if (this.invSlots[index] == null) return true;
-		if (!this.invSlots[index].isItemEqual(stack)) return false;
-		final int result = this.invSlots[index].stackSize + stack.stackSize;
-		return result <= getInventoryStackLimit() && result <= stack.getMaxStackSize();
+		return InventoryProcessor.instance().canInsertItem(trapInventory, stack, index);
 	}
 
 	public void addStack(ItemStack stack)
 	{
-		for (int loop = 0; loop < this.invSlots.length; loop++)
-		{
-			if (canAddStack(stack, loop))
-			{
-				if (this.invSlots[loop] == null)
-				{
-					this.invSlots[loop] = stack.copy();
-				}
-				else if (this.invSlots[loop].isItemEqual(stack))
-				{
-					this.invSlots[loop].stackSize += stack.stackSize;
-				}
-				break;
-			}
-		}
-	}
-
-	/************
-	 * INVENTORY
-	 ************/
-	@Override
-	public ItemStack getStackInSlot(int index)
-	{
-		return this.invSlots[index];
+		InventoryProcessor.instance().mergeWithSlots(trapInventory, stack);
 	}
 
 	@Override
-	public ItemStack decrStackSize(int index, int par2)
+	public String getDefaultInventoryName()
 	{
-		if (this.invSlots[index] != null)
+		return "container.grc.fishTrap";
+	}
+
+	@Override
+	protected void readInventoryFromNBT(NBTTagCompound nbt)
+	{
+		if (nbt.hasKey("items"))
 		{
-			ItemStack itemstack;
-
-			if (this.invSlots[index].stackSize <= par2)
+			inventory.clear();
+			final NBTTagList tags = nbt.getTagList("items", NBTType.COMPOUND.id);
+			for (int i = 0; i < tags.tagCount(); ++i)
 			{
-				itemstack = this.invSlots[index];
-				this.invSlots[index] = null;
-				return itemstack;
-			}
-			else
-			{
-				itemstack = this.invSlots[index].splitStack(par2);
-
-				if (this.invSlots[index].stackSize == 0)
+				final NBTTagCompound item = tags.getCompoundTagAt(i);
+				final byte b0 = item.getByte("Slot");
+				if (b0 >= 0 && b0 < trapInventory.getSizeInventory())
 				{
-					this.invSlots[index] = null;
+					final ItemStack stack = ItemStack.loadItemStackFromNBT(item);
+					InventoryProcessor.instance().mergeWithSlot(trapInventory, stack, (int)b0);
 				}
-
-				return itemstack;
 			}
 		}
 		else
 		{
-			return null;
+			super.readInventoryFromNBT(nbt);
 		}
-	}
-
-	@Override
-	public ItemStack getStackInSlotOnClosing(int index)
-	{
-		if (this.invSlots[index] != null)
-		{
-			final ItemStack itemstack = this.invSlots[index];
-			this.invSlots[index] = null;
-			return itemstack;
-		}
-		else
-		{
-			return null;
-		}
-	}
-
-	@Override
-	public void setInventorySlotContents(int index, ItemStack itemstack)
-	{
-		this.invSlots[index] = itemstack;
-
-		if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
-		{
-			itemstack.stackSize = this.getInventoryStackLimit();
-		}
-	}
-
-	@Override
-	public int getInventoryStackLimit()
-	{
-		return 64;
-	}
-
-	@Override
-	public int getSizeInventory()
-	{
-		return this.invSlots.length;
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
-	{
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
-	}
-
-	@Override
-	public void openInventory(){}
-
-	@Override
-	public void closeInventory(){}
-
-	@Override
-	public boolean isItemValidForSlot(int index, ItemStack itemstack)
-	{
-		return true;
-	}
-
-	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
-	public void readFromNBT_FishTrap(NBTTagCompound nbt)
-	{
-		final NBTTagList tags = nbt.getTagList("items", 10);
-		this.invSlots = new ItemStack[this.getSizeInventory()];
-
-		for (int i = 0; i < tags.tagCount(); ++i)
-		{
-			final NBTTagCompound nbttagcompound1 = tags.getCompoundTagAt(i);
-			final byte b0 = nbttagcompound1.getByte("Slot");
-			if (b0 >= 0 && b0 < this.invSlots.length)
-			{
-				this.invSlots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
-
-		if (nbt.hasKey("name"))
-		{
-			this.name = nbt.getString("name");
-		}
-	}
-
-	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
-	public void writeToNBT_FishTrap(NBTTagCompound nbt)
-	{
-		final NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < this.invSlots.length; ++i)
-		{
-			if (this.invSlots[i] != null)
-			{
-				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte)i);
-				this.invSlots[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-
-		nbt.setTag("items", nbttaglist);
-
-		if (this.hasCustomInventoryName())
-		{
-			nbt.setString("name", this.name);
-		}
-	}
-
-	/************
-	 * NAMES
-	 ************/
-	@Override
-	public String getInventoryName()
-	{
-		return this.hasCustomInventoryName() ? this.name : "container.grc.fishTrap";
-	}
-
-	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return this.name != null && this.name.length() > 0;
-	}
-
-	public void setGuiDisplayName(String string)
-	{
-		this.name = string;
 	}
 }

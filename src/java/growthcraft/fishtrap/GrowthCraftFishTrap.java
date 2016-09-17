@@ -4,6 +4,7 @@ import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.api.fishtrap.FishTrapEntry;
+import growthcraft.api.fishtrap.user.UserCatchGroupConfig;
 import growthcraft.api.fishtrap.user.UserFishTrapConfig;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.GrcGuiProvider;
@@ -46,6 +47,7 @@ public class GrowthCraftFishTrap
 	private final GrcFishtrapConfig config = new GrcFishtrapConfig();
 	private final ModuleContainer modules = new ModuleContainer();
 	private final UserFishTrapConfig userFishTrapConfig = new UserFishTrapConfig();
+	private final UserCatchGroupConfig userCatchGroupConfig = new UserCatchGroupConfig();
 
 	public static GrcFishtrapConfig getConfig()
 	{
@@ -58,6 +60,7 @@ public class GrowthCraftFishTrap
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
 		userFishTrapConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/fishtrap/entries.json");
+		modules.add(userCatchGroupConfig);
 		modules.add(userFishTrapConfig);
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.fishtrap.integration.ThaumcraftModule());
 		modules.add(CommonProxy.instance);
@@ -114,6 +117,7 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
+		userCatchGroupConfig.loadUserConfig();
 		userFishTrapConfig.loadUserConfig();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiProvider);
 		modules.init();

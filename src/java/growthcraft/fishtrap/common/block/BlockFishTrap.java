@@ -44,8 +44,15 @@ public class BlockFishTrap extends GrcBlockContainer
 		setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
+	private boolean isWater(Block block)
+	{
+		return BlockCheck.isWater(block);
+	}
+
 	private float getCatchRate(World world, int x, int y, int z)
 	{
+		final TileEntityFishTrap te = getTileEntity(world, x, y, z);
+		if (te == null) return 0.0f;
 		final int checkSize = 3;
 		final int i = x - ((checkSize - 1) / 2);
 		final int j = y - ((checkSize - 1) / 2);
@@ -75,25 +82,30 @@ public class BlockFishTrap extends GrcBlockContainer
 				}
 			}
 		}
+		return te.applyBaitModifier(f);
+	}
 
-		return f;
+	private ItemStack pickCatch(World world)
+	{
+		final String catchGroup = FishTrapRegistry.instance().getRandomCatchGroup(world.rand);
+		return FishTrapRegistry.instance().getRandomCatchFromGroup(world.rand, catchGroup);
 	}
 
 	private void doCatch(World world, int x, int y, int z, Random random, TileEntityFishTrap te, boolean debugFlag)
 	{
 		float f = this.getCatchRate(world, x, y, z);
-		boolean flag;
+		boolean isInWaterBiome;
 		if (GrowthCraftFishTrap.getConfig().useBiomeDict)
 		{
 			final BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
-			flag = BiomeDictionary.isBiomeOfType(biome, Type.WATER);
+			isInWaterBiome = BiomeDictionary.isBiomeOfType(biome, Type.WATER);
 		}
 		else
 		{
-			flag = Utils.isIDInList(world.getBiomeGenForCoords(x, z).biomeID, GrowthCraftFishTrap.getConfig().biomesList);
+			isInWaterBiome = Utils.isIDInList(world.getBiomeGenForCoords(x, z).biomeID, GrowthCraftFishTrap.getConfig().biomesList);
 		}
 
-		if (flag)
+		if (isInWaterBiome)
 		{
 			f *= 1 + (75 / 100);
 		}
@@ -106,32 +118,6 @@ public class BlockFishTrap extends GrcBlockContainer
 				te.addStack(item);
 			}
 		}
-	}
-
-	private ItemStack pickCatch(World world)
-	{
-		float f1 = world.rand.nextFloat();
-		final float f2 = 0.1F;
-		final float f3 = 0.05F;
-
-		if (f1 < f2)
-		{
-			return FishTrapRegistry.instance().getJunkList(world);
-		}
-		f1 -= f2;
-
-		if (f1 < f3)
-		{
-			return FishTrapRegistry.instance().getTreasureList(world);
-		}
-		f1 -= f3;
-
-		return FishTrapRegistry.instance().getFishList(world);
-	}
-
-	private boolean isWater(Block block)
-	{
-		return BlockCheck.isWater(block);
 	}
 
 	private boolean canCatch(World world, int x, int y, int z)
