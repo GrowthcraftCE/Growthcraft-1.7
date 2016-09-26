@@ -1,24 +1,28 @@
 package growthcraft.bees.common.tileentity;
 
 import growthcraft.api.bees.BeesRegistry;
-import growthcraft.api.core.util.AuxFX;
 import growthcraft.api.core.item.EnumDye;
+import growthcraft.api.core.util.AuxFX;
 import growthcraft.bees.common.inventory.ContainerBeeBox;
 import growthcraft.bees.common.tileentity.device.DeviceBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.tileentity.GrcTileEntityInventoryBase;
-import growthcraft.core.common.tileentity.IItemHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.IInteractionObject;
+import growthcraft.core.common.tileentity.feature.IItemHandler;
+import growthcraft.core.common.tileentity.GrcTileInventoryBase;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IItemHandler
+public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandler, IInteractionObject
 {
 	public static enum HoneyCombExpect
 	{
@@ -33,11 +37,25 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	private DeviceBeeBox beeBox = new DeviceBeeBox(this);
 
 	@Override
+	public String getGuiID()
+	{
+		return "grcbees:bee_box";
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerBeeBox(playerInventory, this);
+	}
+
+	@Override
 	public void onInventoryChanged(IInventory inv, int index)
 	{
 		super.onInventoryChanged(inv, index);
 		if (index > 0)
-			markForBlockUpdate();
+		{
+			markDirtyAndUpdate();
+		}
 	}
 
 	@Override
@@ -47,7 +65,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	}
 
 	@Override
-	protected GrcInternalInventory createInventory()
+	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 28);
 	}
@@ -130,7 +148,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 
 	public int countEmptyCombs()
 	{
-		return countCombsOfType(HoneyCombExpect.ANY);
+		return countCombsOfType(HoneyCombExpect.EMPTY);
 	}
 
 	//counts both empty and filled honeycombs
@@ -175,7 +193,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	private void setBeeStack(ItemStack itemstack)
 	{
 		setInventorySlotContents(ContainerBeeBox.SlotId.BEE, itemstack);
-		markForInventoryUpdate();
+		markDirtyAndUpdate();
 	}
 
 	public void spawnBee()
@@ -183,11 +201,16 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		final ItemStack beestack = getBeeStack();
 		if (beestack == null)
 		{
+			// Put a bee in the slot if we have none currently
 			setBeeStack(GrowthCraftBees.items.bee.asStack());
 		}
 		else
 		{
-			setBeeStack(ItemUtils.increaseStack(beestack));
+			// Ensure that the item in the slot IS a bee, and prevent duplication
+			if (BeesRegistry.instance().isItemBee(beestack))
+			{
+				setBeeStack(ItemUtils.increaseStack(beestack));
+			}
 		}
 	}
 
@@ -200,7 +223,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 			if (stack == null)
 			{
 				setInventorySlotContents(i, GrowthCraftBees.items.honeyCombEmpty.asStack());
-				markForInventoryUpdate();
+				markDirtyAndUpdate();
 				n--;
 			}
 		}
@@ -228,8 +251,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		}
 		if (shouldMark)
 		{
-			markForInventoryUpdate();
-			markForBlockUpdate();
+			markDirtyAndUpdate();
 			return true;
 		}
 		return false;
@@ -255,8 +277,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		}
 		if (shouldMark)
 		{
-			markForInventoryUpdate();
-			markForBlockUpdate();
+			markDirtyAndUpdate();
 			return true;
 		}
 		return false;
@@ -267,13 +288,9 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		fillHoneyCombs(1);
 	}
 
-	/************
-	 * NBT
-	 ************/
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
+	public void readFromNBT_BeeBox(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		beeBox.readFromNBT(nbt, "bee_box");
 		if (nbt.hasKey("time"))
 		{
@@ -281,10 +298,9 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		}
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_BeeBox(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		nbt.setInteger("BeeBox.version", beeBoxVersion);
 		beeBox.writeToNBT(nbt, "bee_box");
 	}
@@ -324,8 +340,9 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	}
 
 	@Override
-	public boolean tryPlaceItem(EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemHandler.Action action, EntityPlayer player, ItemStack stack)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		if (stack != null)
 		{
 			final Item item = stack.getItem();
@@ -355,7 +372,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 					setTime(time);
 					worldObj.playAuxSFX(AuxFX.BONEMEAL, xCoord, yCoord, zCoord, 0);
 					ItemUtils.consumeStackOnPlayer(stack, player);
-					markForBlockUpdate();
+					markDirtyAndUpdate();
 				}
 				return true;
 			}
@@ -392,7 +409,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	}
 
 	@Override
-	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
 		return false;
 	}

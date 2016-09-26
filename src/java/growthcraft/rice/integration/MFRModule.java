@@ -44,6 +44,6 @@ public class MFRModule extends MFRModuleBase
 	{
 		registerHarvestable(new RiceFactoryHarvester());
 		registerPlantable(new RiceFactoryPlanter());
-		registerFertilizableCrop(GrowthCraftRice.riceBlock.getBlock(), BlockRice.RiceStage.MATURE);
+		registerFertilizableCrop(GrowthCraftRice.blocks.riceBlock.getBlock(), BlockRice.RiceStage.MATURE);
 	}
 }

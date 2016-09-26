@@ -52,13 +52,13 @@ public class GrowthCraftGrapes
 	public static GrowthCraftGrapes instance;
 
 	public static CreativeTabs creativeTab;
-	public static GrcGrapesBlocks blocks = new GrcGrapesBlocks();
-	public static GrcGrapesItems items = new GrcGrapesItems();
-	public static GrcGrapesFluids fluids = new GrcGrapesFluids();
+	public static final GrcGrapesBlocks blocks = new GrcGrapesBlocks();
+	public static final GrcGrapesItems items = new GrcGrapesItems();
+	public static final GrcGrapesFluids fluids = new GrcGrapesFluids();
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcGrapesConfig config = new GrcGrapesConfig();
-	private ModuleContainer modules = new ModuleContainer();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcGrapesConfig config = new GrcGrapesConfig();
+	private final ModuleContainer modules = new ModuleContainer();
 
 	public static GrcGrapesConfig getConfig()
 	{
@@ -72,13 +72,13 @@ public class GrowthCraftGrapes
 
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
-
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.grapes.integration.ForestryModule());
 		if (config.enableMFRIntegration) modules.add(new growthcraft.grapes.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.grapes.integration.ThaumcraftModule());
+		modules.add(CommonProxy.instance);
 		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 		creativeTab = new CreativeTabsGrowthcraftGrapes("creative_tab_grcgrapes");
@@ -125,18 +125,21 @@ public class GrowthCraftGrapes
 		NEI.hideItem(blocks.grapeLeaves.asStack());
 	}
 
+	private void initVillageHandlers()
+	{
+		final VillageHandlerGrapes handler = new VillageHandlerGrapes();
+		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
+		if (brewerID > 0)
+			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, handler);
+		VillagerRegistry.instance().registerVillageCreationHandler(handler);
+	}
+
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.initRenders();
-
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
-
-		final VillageHandlerGrapes handler = new VillageHandlerGrapes();
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
-		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-
+		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
 

@@ -46,10 +46,10 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
-		FMLInterModComms.sendMessage(modID, "harvestStandardCrop", GrowthCraftRice.riceBlock.asStack(1, 7));
+		FMLInterModComms.sendMessage(modID, "harvestStandardCrop", GrowthCraftRice.blocks.riceBlock.asStack(1, 7));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.rice.asStack(), new AspectList().add(Aspect.CROP, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftRice.riceBall.asStack(), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1).add(Aspect.HUNGER, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.items.rice.asStack(), new AspectList().add(Aspect.CROP, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftRice.items.riceBall.asStack(), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1).add(Aspect.HUNGER, 1));
 
 		final AspectList[] common = new AspectList[]
 		{

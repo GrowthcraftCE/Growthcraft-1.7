@@ -7,7 +7,7 @@ Section 2: Added *, curseforge.net and the Growthcraft Community Edition GitHub 
 
 # Updated License
 
->Section 1: This document is Copyright © (2014-2015) "Gwafu" and is the intellectual property of the author.
+>Section 1: This document is Copyright © (2014-2016) "Gwafu" and is the intellectual property of the author.
 >
 >Section 2: Terms regarding file hosting:
 >Only minecraftforum.net, curseforge.net and the Growthcraft Community Edition GitHub repository is able to host any of these materials without the author's consent. You can just simply ask the author to allow you to host it in your website or distribute it.
@@ -24,7 +24,7 @@ Section 2: Added *, curseforge.net and the Growthcraft Community Edition GitHub 
 
 # Orginal License
 
->This document is Copyright © (2014-2015) "Gwafu" and is the intellectual property of the author.
+>This document is Copyright © (2014-2016) "Gwafu" and is the intellectual property of the author.
 >
 >Terms regarding file hosting:
 >Only minecraftforum.net is able to host any of these materials without the author's consent. You can just simply ask the author to allow you to host it in your website or distribute it.

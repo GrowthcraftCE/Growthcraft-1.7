@@ -100,12 +100,12 @@ public class CultureGenerator extends DeviceProgressive
 			{
 				resetTime();
 				produceCulture(activeRecipe);
-				markForInventoryUpdate();
+				markDirty();
 			}
 		}
 		else
 		{
-			if (resetTime()) markForInventoryUpdate();
+			if (resetTime()) markDirty();
 		}
 	}
 }

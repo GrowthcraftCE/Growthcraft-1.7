@@ -42,7 +42,7 @@ public abstract class AbstractFactoryFruit<TBlock extends Block> implements IFac
 {
 	protected TBlock plantBlock;
 
-	public AbstractFactoryFruit setPlant(TBlock pBlock)
+	public AbstractFactoryFruit<TBlock> setPlant(TBlock pBlock)
 	{
 		this.plantBlock = pBlock;
 		return this;

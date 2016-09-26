@@ -47,9 +47,9 @@ public enum EnumBeeBoxThaumcraft implements IItemStackFactory
 
 	public ItemStack asStack(int size)
 	{
-		if (GrowthCraftBees.beeBoxThaumcraft != null)
+		if (GrowthCraftBees.blocks.beeBoxThaumcraft != null)
 		{
-			return GrowthCraftBees.beeBoxThaumcraft.asStack(size, meta);
+			return GrowthCraftBees.blocks.beeBoxThaumcraft.asStack(size, meta);
 		}
 		return null;
 	}

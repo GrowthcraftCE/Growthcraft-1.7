@@ -1,14 +1,16 @@
 package growthcraft.cellar.common.tileentity;
 
+import java.io.IOException;
+
+import io.netty.buffer.ByteBuf;
+
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.GrcTileBase;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityFruitPresser extends TileEntity
+public class TileEntityFruitPresser extends GrcTileBase
 {
 	public float trans;
 	public float transPrev;
@@ -17,19 +19,17 @@ public class TileEntityFruitPresser extends TileEntity
 	private float transMin;
 	private float transMax = 0.4375F;
 
-	/************
-	 * UPDATE
-	 ************/
+	@Override
 	public void updateEntity()
 	{
 		super.updateEntity();
 
-		if (GrowthCraftCellar.blocks.fruitPresser.getBlock() != worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord))
+		if (GrowthCraftCellar.blocks.fruitPresser.getBlock() != getBlockType())
 		{
 			invalidate();
 		}
 
-		final int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
+		final int meta = getBlockMetadata();
 		this.transPrev = this.trans;
 
 		if ((meta == 0 || meta == 1) && this.trans > this.transMin)
@@ -47,40 +47,33 @@ public class TileEntityFruitPresser extends TileEntity
 		return this.trans;
 	}
 
-	/************
-	 * NBT
-	 ************/
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
+	public void readFromNBT_FruitPresser(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		this.trans = nbt.getFloat("trans");
 		this.transPrev = nbt.getFloat("transprev");
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_FruitPresser(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		nbt.setFloat("trans", trans);
 		nbt.setFloat("transprev", transPrev);
 	}
 
-	/************
-	 * PACKETS
-	 ************/
-	@Override
-	public Packet getDescriptionPacket()
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
+	public boolean readFromStream_FruitPresser(ByteBuf stream) throws IOException
 	{
-		final NBTTagCompound nbtTag = new NBTTagCompound();
-		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+		this.trans = stream.readFloat();
+		this.transPrev = stream.readFloat();
+		return true;
 	}
 
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
+	public boolean writeToStream_FruitPresser(ByteBuf stream) throws IOException
 	{
-		readFromNBT(packet.func_148857_g());
-		this.worldObj.func_147479_m(this.xCoord, this.yCoord, this.zCoord);
+		stream.writeFloat(trans);
+		stream.writeFloat(transPrev);
+		return true;
 	}
 }

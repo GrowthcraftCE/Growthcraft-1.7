@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.tileentity;
+package growthcraft.api.fishtrap.user;
 
-public interface ITileHeatedDevice
+import growthcraft.api.core.schema.ICommentable;
+import growthcraft.api.core.schema.ItemKeySchema;
+
+import net.minecraft.item.ItemStack;
+
+public class UserBaitEntry implements ICommentable
 {
-	boolean isHeated();
-	float getHeatMultiplier();
-	int getHeatScaled(int scale);
+	public String comment = "";
+	public float base_rate;
+	public float multiplier;
+	public ItemKeySchema item;
+
+	/**
+	 * @param g - item group, can be "treasure", "junk", or "fish"
+	 * @param w - entry weight
+	 * @param stack - item stack
+	 * @param dam - damage variance, how much damage is applied to the item when fished up?
+	 * @param enc - is the item enchanted?
+	 */
+	public UserBaitEntry(ItemStack stack, float base, float mul)
+	{
+		this.item = new ItemKeySchema(stack);
+		this.base_rate = base;
+		this.multiplier = mul;
+	}
+
+	public UserBaitEntry() {}
+
+	@Override
+	public String getComment()
+	{
+		return comment;
+	}
+
+	@Override
+	public void setComment(String com)
+	{
+		this.comment = com;
+	}
 }

@@ -21,33 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.tileentity;
+package growthcraft.api.fishtrap;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import growthcraft.api.core.registry.GenericItemRegistry;
+import growthcraft.api.core.registry.ItemRegistryEntry;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-public interface IItemHandler
+public class BaitRegistry extends GenericItemRegistry<ItemStack, ItemRegistryEntry<BaitRegistry.BaitHandle>>
 {
-	/**
-	 * Tries to place the item from the player into the target
-	 *
-	 * @param player - the player placing the item
-	 * @param stack - the item stack being placed
-	 * @return true, if something happened, eg. item was inserted, false otherwise
-	 */
-	boolean tryPlaceItem(@Nonnull EntityPlayer player, @Nullable ItemStack stack);
+	public static class BaitHandle
+	{
+		public float baseRate;
+		public float multiplier = 1.0f;
 
-	/**
-	 * Tries to remove an item from the target
-	 * The stack provided is the player's current item stack, this can be safely
-	 * ignored, OR changes the behaviour of the target.
-	 *
-	 * @param player - player taking the item
-	 * @param stack - stack on player's hand currently
-	 * @return true, an item was taken, false otherwise
-	 */
-	boolean tryTakeItem(@Nonnull EntityPlayer player, @Nullable ItemStack stack);
+		public BaitHandle() {}
+
+		public BaitHandle(float base, float mul)
+		{
+			this();
+			this.baseRate = base;
+			this.multiplier = mul;
+		}
+	}
+
+	public void add(Object stack, BaitHandle handle)
+	{
+		add(new ItemRegistryEntry<BaitHandle>(stack, handle));
+	}
+
+	public BaitHandle findHandle(ItemStack stack)
+	{
+		final ItemRegistryEntry<BaitHandle> entry = find(stack);
+		if (entry != null) return entry.handle;
+		return null;
+	}
 }

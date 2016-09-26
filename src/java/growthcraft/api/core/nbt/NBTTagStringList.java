@@ -23,7 +23,7 @@
  */
 package growthcraft.api.core.nbt;
 
-import java.util.List;
+import java.util.Collection;
 import javax.annotation.Nonnull;
 
 import net.minecraft.nbt.NBTTagList;
@@ -32,7 +32,7 @@ import net.minecraft.nbt.NBTTagString;
 /**
  * Utility class for wrapping a NBTTagList for Strings
  */
-public class NBTStringTagList
+public class NBTTagStringList
 {
 	private NBTTagList parent;
 
@@ -41,15 +41,15 @@ public class NBTStringTagList
 	 *
 	 * @param list - the tag list to use as the parent
 	 */
-	public NBTStringTagList(@Nonnull NBTTagList list)
+	public NBTTagStringList(@Nonnull NBTTagList list)
 	{
 		this.parent = list;
 	}
 
 	/**
-	 * Initializes the NBTStringTagList with a default taglist
+	 * Initializes the NBTTagStringList with a default taglist
 	 */
-	public NBTStringTagList()
+	public NBTTagStringList()
 	{
 		this(new NBTTagList());
 	}
@@ -57,12 +57,12 @@ public class NBTStringTagList
 	/**
 	 * @param list - a string list
 	 */
-	public NBTStringTagList(@Nonnull List<String> list)
+	public NBTTagStringList(@Nonnull Collection<?> list)
 	{
 		this();
-		for (String str : list)
+		for (Object obj : list)
 		{
-			add(str);
+			add(obj.toString());
 		}
 	}
 
@@ -81,7 +81,7 @@ public class NBTStringTagList
 	 *
 	 * @param str - the string to add
 	 */
-	public NBTStringTagList add(@Nonnull String str)
+	public NBTTagStringList add(@Nonnull String str)
 	{
 		parent.appendTag(new NBTTagString(str));
 		return this;

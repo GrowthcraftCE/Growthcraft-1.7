@@ -27,9 +27,9 @@ import java.util.List;
 
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.nbt.NBTHelper;
-import growthcraft.core.common.tileentity.ITileProgressiveDevice;
-import growthcraft.core.common.tileentity.ITileHeatedDevice;
-import growthcraft.core.common.tileentity.ITileNamedFluidTanks;
+import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
+import growthcraft.core.common.tileentity.feature.ITileNamedFluidTanks;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.core.util.TagFormatterFluidHandler;
 
 import cpw.mods.fml.common.Optional;

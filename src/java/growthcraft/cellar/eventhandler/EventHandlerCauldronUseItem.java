@@ -53,7 +53,7 @@ public class EventHandlerCauldronUseItem
 
 			if (itemstack == null) return;
 
-			if (GrowthCraftCellar.waterBag.equals(itemstack.getItem()))
+			if (GrowthCraftCellar.items.waterBag.equals(itemstack.getItem()))
 			{
 				final int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
 				if (meta > 0)

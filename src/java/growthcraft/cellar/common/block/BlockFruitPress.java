@@ -5,7 +5,6 @@ import java.util.Random;
 import growthcraft.cellar.client.render.RenderFruitPress;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.CellarGuiType;
 import growthcraft.api.core.util.BlockFlags;
 
 import cpw.mods.fml.relauncher.Side;
@@ -35,7 +34,6 @@ public class BlockFruitPress extends BlockCellarContainer
 		setStepSound(soundTypeWood);
 		setBlockName("grc.fruitPress");
 		setCreativeTab(GrowthCraftCellar.tab);
-		setGuiType(CellarGuiType.FRUIT_PRESS);
 	}
 
 	private Block getPresserBlock()
@@ -43,11 +41,13 @@ public class BlockFruitPress extends BlockCellarContainer
 		return GrowthCraftCellar.blocks.fruitPresser.getBlock();
 	}
 
+	@Override
 	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		return true;
 	}
 
+	@Override
 	public void doRotateBlock(World world, int x, int y, int z, ForgeDirection side)
 	{
 		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) ^ 1, BlockFlags.SYNC);

@@ -37,6 +37,7 @@ import growthcraft.api.core.effect.EffectExtinguish;
 import growthcraft.api.core.effect.EffectList;
 import growthcraft.api.core.effect.EffectUtils;
 import growthcraft.api.core.effect.IEffect;
+import growthcraft.api.core.fluids.TaggedFluidStacks;
 import growthcraft.api.core.GrcFluid;
 import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.util.StringUtils;
@@ -223,14 +224,28 @@ public class GrcMilkFluids extends GrcModuleBase
 		if (milk != null)
 		{
 			OreDictionary.registerOre("bottleMilk", milk.foodBottle.asStack());
-			OreDictionary.registerOre("bucketMilk", Items.milk_bucket);
-			// Milk bucket is the vanilla milk bucket, derp
+		}
+		// Milk bucket is the vanilla milk bucket, derp
+		OreDictionary.registerOre("bucketMilk", Items.milk_bucket);
+		if (skimMilk != null)
+		{
 			OreDictionary.registerOre("bottleSkimmilk", skimMilk.foodBottle.asStack());
 			OreDictionary.registerOre("bucketSkimmilk", skimMilk.bucket.asStack());
+		}
+		if (butterMilk != null)
+		{
 			OreDictionary.registerOre("bottleButtermilk", butterMilk.foodBottle.asStack());
 			OreDictionary.registerOre("bucketButtermilk", butterMilk.bucket.asStack());
+		}
+		if (whey != null)
+		{
 			OreDictionary.registerOre("bottleWhey", whey.foodBottle.asStack());
 			OreDictionary.registerOre("bucketWhey", whey.bucket.asStack());
+			// https://github.com/GrowthcraftCE/Growthcraft-1.7/issues/419
+			OreDictionary.registerOre("foodStock", whey.foodBottle.asStack());
+		}
+		if (cream != null)
+		{
 			OreDictionary.registerOre("bottleCream", cream.bottle.asStack());
 			OreDictionary.registerOre("bucketCream", cream.bucket.asStack());
 		}
@@ -247,8 +262,6 @@ public class GrcMilkFluids extends GrcModuleBase
 			fs[i] = new FluidStack(kumisFluids[i], 1);
 		}
 
-		final List<Fluid> milks = getMilkFluids();
-
 		final int fermentTime = GrowthCraftCellar.getConfig().fermentTime;
 		final ICellarBoozeBuilder builder = GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[0]);
 		builder
@@ -257,12 +270,9 @@ public class GrcMilkFluids extends GrcModuleBase
 				.setTipsy(0.10f, 900)
 				.addEffect(milkEffect);
 
-		for (Fluid fluid : milks)
-		{
-			final FluidStack milkStack = new FluidStack(fluid, 1);
-			builder.fermentsFrom(milkStack, EnumYeast.BREWERS.asStack(), fermentTime);
-			builder.fermentsFrom(milkStack, new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66));
-		}
+		final TaggedFluidStacks milkStacks = new TaggedFluidStacks(1, "milk");
+		builder.fermentsFrom(milkStacks, EnumYeast.BREWERS.asStack(), fermentTime);
+		builder.fermentsFrom(milkStacks, new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66));
 
 		GrowthCraftCellar.boozeBuilderFactory.create(kumisFluids[1])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT)

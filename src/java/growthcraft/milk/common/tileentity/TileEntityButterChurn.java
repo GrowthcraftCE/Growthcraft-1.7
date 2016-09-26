@@ -32,9 +32,9 @@ import growthcraft.core.common.inventory.AccesibleSlots;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
-import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
-import growthcraft.core.common.tileentity.IItemHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.IItemHandler;
+import growthcraft.core.common.tileentity.GrcTileDeviceBase;
 import growthcraft.core.util.ItemUtils;
 
 import io.netty.buffer.ByteBuf;
@@ -50,7 +50,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements IItemHandler
+public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHandler
 {
 	public static enum WorkState
 	{
@@ -91,7 +91,7 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	}
 
 	@Override
-	protected GrcInternalInventory createInventory()
+	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 1);
 	}
@@ -119,9 +119,6 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	{
 		return accessibleSlots.sideContains(side, index);
 	}
-
-	@Override
-	protected void updateDevice() {}
 
 	@Override
 	public void updateEntity()
@@ -182,14 +179,14 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 			{
 				this.shaftState = 0;
 			}
-			markForBlockUpdate();
+			markForUpdate();
 		}
 		else
 		{
 			if (shaftState != 0)
 			{
 				this.shaftState = 0;
-				markForBlockUpdate();
+				markForUpdate();
 			}
 			this.churns = 0;
 		}
@@ -269,7 +266,7 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	 * @return false
 	 */
 	@Override
-	public boolean tryPlaceItem(EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemHandler.Action action, EntityPlayer player, ItemStack stack)
 	{
 		return false;
 	}
@@ -282,8 +279,9 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 	 * @return true, the item was removed, false otherwise
 	 */
 	@Override
-	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		final ItemStack stack = outputInventorySlot.yank();
 		if (stack != null)
 		{
@@ -293,23 +291,21 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 		return false;
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
+	public void readFromNBT_ButterChurn(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		this.shaftState = nbt.getInteger("shaft_state");
 		this.churns = nbt.getInteger("churns");
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_ButterChurn(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		nbt.setInteger("shaft_state", shaftState);
 		nbt.setInteger("churns", churns);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_ButterChurn(ByteBuf stream) throws IOException
 	{
 		this.shaftState = stream.readInt();
@@ -317,7 +313,7 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements II
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_ButterChurn(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(shaftState);

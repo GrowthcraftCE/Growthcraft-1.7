@@ -29,6 +29,7 @@ public class WidgetIconBase extends Widget
 {
 	public final Rectangle textureRect = new Rectangle();
 
+	@SuppressWarnings({"rawtypes"})
 	public WidgetIconBase(WidgetManager man, int x, int y, int w, int h)
 	{
 		super(man, x, y, w, h);

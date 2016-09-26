@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.tileentity;
+package growthcraft.api.fishtrap;
 
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.Container;
+import javax.annotation.Nonnull;
 
-public interface IGuiNetworkSync
+import net.minecraft.util.WeightedRandom;
+
+public class CatchGroupEntry extends WeightedRandom.Item
 {
-	void sendGUINetworkData(Container container, ICrafting icrafting);
-	void receiveGUINetworkData(int id, int value);
+	protected final String name;
+
+	public CatchGroupEntry(@Nonnull String p_name, int weight)
+	{
+		super(weight);
+		this.name = p_name;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return name.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object other)
+	{
+		if (other instanceof CatchGroupEntry)
+		{
+			return this.name.equals(((CatchGroupEntry)other).name);
+		}
+		return false;
+	}
 }

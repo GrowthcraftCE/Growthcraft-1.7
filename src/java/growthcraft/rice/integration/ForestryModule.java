@@ -45,8 +45,8 @@ public class ForestryModule extends ForestryModuleBase
 	{
 		final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
 
-		final ItemStack riceSeed = GrowthCraftRice.rice.asStack();
-		final Block riceBlock = GrowthCraftRice.riceBlock.getBlock();
+		final ItemStack riceSeed = GrowthCraftRice.items.rice.asStack();
+		final Block riceBlock = GrowthCraftRice.blocks.riceBlock.getBlock();
 		if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager.addRecipe(10, new ItemStack[]{riceSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
 		Backpack.FORESTERS.add(riceSeed);
 		addFarmable("farmOrchard", new FarmableBasicGrowthCraft(riceBlock, GrowthCraftRice.getConfig().paddyFieldMax, true, false));

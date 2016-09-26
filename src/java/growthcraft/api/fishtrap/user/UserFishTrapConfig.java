@@ -67,20 +67,7 @@ public class UserFishTrapConfig extends AbstractUserJSONConfig
 
 		for (FishTrapEntry obj : entry.getFishTrapEntries())
 		{
-			switch (entry.group)
-			{
-				case "treasure":
-					FishTrapRegistry.instance().addTrapTreasure(obj);
-					break;
-				case "fish":
-					FishTrapRegistry.instance().addTrapFish(obj);
-					break;
-				case "junk":
-					FishTrapRegistry.instance().addTrapJunk(obj);
-					break;
-				default:
-					logger.error("There is no '%s' group for entry {%s}", entry.group, entry);
-			}
+			FishTrapRegistry.instance().addCatchToGroup(obj, entry.group);
 		}
 	}
 

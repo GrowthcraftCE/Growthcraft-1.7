@@ -40,6 +40,7 @@ public class WidgetManager<C extends Container, T extends TileEntity>
 		this.gui = g;
 	}
 
+	@SuppressWarnings({"rawtypes"})
 	public WidgetManager add(Widget widget)
 	{
 		widgets.add(widget);

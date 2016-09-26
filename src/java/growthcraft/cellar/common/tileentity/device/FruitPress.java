@@ -124,12 +124,12 @@ public class FruitPress extends DeviceProgressive
 			{
 				resetTime();
 				pressItem();
-				markForInventoryUpdate();
+				markDirty();
 			}
 		}
 		else
 		{
-			if (resetTime()) markForInventoryUpdate();
+			if (resetTime()) markDirty();
 		}
 	}
 

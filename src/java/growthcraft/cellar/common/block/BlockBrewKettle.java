@@ -7,7 +7,6 @@ import growthcraft.api.core.util.BBox;
 import growthcraft.cellar.client.render.RenderBrewKettle;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.CellarGuiType;
 import growthcraft.core.Utils;
 
 import cpw.mods.fml.relauncher.Side;
@@ -47,7 +46,6 @@ public class BlockBrewKettle extends BlockCellarContainer
 		setHardness(2.0F);
 		setBlockName("grc.brewKettle");
 		setCreativeTab(GrowthCraftCellar.tab);
-		setGuiType(CellarGuiType.BREW_KETTLE);
 	}
 
 	@Override

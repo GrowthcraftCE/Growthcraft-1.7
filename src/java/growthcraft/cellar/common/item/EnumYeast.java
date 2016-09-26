@@ -47,7 +47,7 @@ public enum EnumYeast implements IItemStackFactory
 	 */
 	public ItemStack asStack(int size)
 	{
-		return GrowthCraftCellar.yeast.asStack(size, ordinal());
+		return GrowthCraftCellar.items.yeast.asStack(size, ordinal());
 	}
 
 	/**

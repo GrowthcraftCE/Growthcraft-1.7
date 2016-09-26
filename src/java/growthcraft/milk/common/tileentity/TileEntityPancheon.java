@@ -24,15 +24,15 @@
 package growthcraft.milk.common.tileentity;
 
 import growthcraft.api.core.fluids.FluidTest;
-import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
-import growthcraft.core.common.tileentity.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.GrcTileDeviceBase;
 import growthcraft.milk.common.tileentity.device.Pancheon;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityPancheon extends GrcTileEntityDeviceBase implements ITileProgressiveDevice, IPancheonTile
+public class TileEntityPancheon extends GrcTileDeviceBase implements ITileProgressiveDevice, IPancheonTile
 {
 	private Pancheon pancheon = new Pancheon(this, 0, 2, 1);
 
@@ -97,9 +97,13 @@ public class TileEntityPancheon extends GrcTileEntityDeviceBase implements ITile
 	}
 
 	@Override
-	protected void updateDevice()
+	public void updateEntity()
 	{
-		pancheon.update();
+		super.updateEntity();
+		if (!worldObj.isRemote)
+		{
+			pancheon.update();
+		}
 	}
 
 	@Override
@@ -133,8 +137,9 @@ public class TileEntityPancheon extends GrcTileEntityDeviceBase implements ITile
 	}
 
 	@Override
-	protected void markForFluidUpdate()
+	protected void markFluidDirty()
 	{
-		markForBlockUpdate();
+		super.markFluidDirty();
+		markDirtyAndUpdate();
 	}
 }

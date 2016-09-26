@@ -225,7 +225,7 @@ public class BlockRice extends GrcBlockBase implements IPaddyCrop, ICropDataProv
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, int x, int y, int z)
 	{
-		return GrowthCraftRice.rice.getItem();
+		return GrowthCraftRice.items.rice.getItem();
 	}
 
 	/************
@@ -234,7 +234,7 @@ public class BlockRice extends GrcBlockBase implements IPaddyCrop, ICropDataProv
 	@Override
 	public Item getItemDropped(int meta, Random random, int par3)
 	{
-		return GrowthCraftRice.rice.getItem();
+		return GrowthCraftRice.items.rice.getItem();
 	}
 
 	@Override
@@ -260,7 +260,7 @@ public class BlockRice extends GrcBlockBase implements IPaddyCrop, ICropDataProv
 			{
 				if (world.rand.nextInt(15) <= metadata)
 				{
-					ret.add(GrowthCraftRice.rice.asStack(1));
+					ret.add(GrowthCraftRice.items.rice.asStack(1));
 				}
 			}
 		}

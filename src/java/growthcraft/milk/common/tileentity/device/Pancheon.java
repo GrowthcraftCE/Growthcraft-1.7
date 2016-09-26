@@ -99,6 +99,8 @@ public class Pancheon extends DeviceProgressive
 
 			final FluidStack bottom = recipe.getBottomOutputFluid();
 			if (bottom != null) this.bottomSlot.fill(bottom, true);
+			markDirty();
+			markForUpdate();
 		}
 	}
 
@@ -120,7 +122,7 @@ public class Pancheon extends DeviceProgressive
 		}
 		else
 		{
-			if (resetTime()) markForBlockUpdate();
+			if (resetTime()) markDirty();
 		}
 	}
 }

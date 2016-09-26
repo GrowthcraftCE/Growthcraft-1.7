@@ -82,9 +82,9 @@ public class GrowthCraftMilk
 	// Events
 	public static final EventBus MILK_BUS = new EventBus();
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcMilkConfig config = new GrcMilkConfig();
-	private ModuleContainer modules = new ModuleContainer();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcMilkConfig config = new GrcMilkConfig();
+	private final ModuleContainer modules = new ModuleContainer();
 
 	public static GrcMilkConfig getConfig()
 	{
@@ -106,7 +106,6 @@ public class GrowthCraftMilk
 			modules.setLogger(logger);
 			MilkRegistry.instance().setLogger(logger);
 		}
-
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
@@ -115,6 +114,7 @@ public class GrowthCraftMilk
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.milk.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.milk.integration.Waila());
 		modules.add(userApis);
+		modules.add(CommonProxy.instance);
 		modules.freeze();
 		GrcMilkEffects.init();
 
@@ -148,10 +148,8 @@ public class GrowthCraftMilk
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.initRenders();
 		modules.init();
 		userApis.loadConfigs();
-		CommonProxy.instance.registerWorldGen();
 	}
 
 	@EventHandler

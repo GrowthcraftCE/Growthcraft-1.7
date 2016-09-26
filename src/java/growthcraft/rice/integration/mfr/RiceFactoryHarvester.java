@@ -36,7 +36,7 @@ public class RiceFactoryHarvester extends AbstractFactoryHarvestable<BlockRice>
 	public RiceFactoryHarvester()
 	{
 		super();
-		setPlant(GrowthCraftRice.riceBlock.getBlock());
+		setPlant(GrowthCraftRice.blocks.riceBlock.getBlock());
 	}
 
 	@Override

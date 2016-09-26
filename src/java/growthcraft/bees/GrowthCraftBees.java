@@ -1,7 +1,5 @@
 package growthcraft.bees;
 
-import java.util.List;
-
 import growthcraft.api.bees.BeesFluidTag;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.user.UserBeesConfig;
@@ -13,25 +11,23 @@ import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.bees.client.eventhandler.GrcBeesHandleTextureStitch;
-import growthcraft.bees.client.gui.GuiHandlerBees;
-import growthcraft.bees.common.block.BlockBeeBox;
-import growthcraft.bees.common.block.BlockBeeHive;
 import growthcraft.bees.common.CommonProxy;
-import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.common.village.ComponentVillageApiarist;
 import growthcraft.bees.common.village.VillageHandlerBees;
 import growthcraft.bees.common.village.VillageHandlerBeesApiarist;
 import growthcraft.bees.common.world.WorldGeneratorBees;
 import growthcraft.bees.creativetab.CreativeTabsGrowthcraftBees;
+import growthcraft.bees.init.GrcBeesBlocks;
 import growthcraft.bees.init.GrcBeesFluids;
 import growthcraft.bees.init.GrcBeesItems;
 import growthcraft.bees.init.GrcBeesRecipes;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.definition.BlockTypeDefinition;
+import growthcraft.core.GrcGuiProvider;
 import growthcraft.core.integration.bop.BopPlatform;
 import growthcraft.core.util.MapGenHelper;
+
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -63,28 +59,18 @@ public class GrowthCraftBees
 
 	@Instance(MOD_ID)
 	public static GrowthCraftBees instance;
-
 	public static CreativeTabs tab;
+	public static final GrcBeesBlocks blocks = new GrcBeesBlocks();
+	public static final GrcBeesItems items = new GrcBeesItems();
+	public static final GrcBeesFluids fluids = new GrcBeesFluids();
+	public static final GrcGuiProvider guiProvider = new GrcGuiProvider(new GrcLogger(MOD_ID + ":GuiProvider"));
 
-	public static BlockTypeDefinition<BlockBeeBox> beeBox;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxBamboo;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxNatura;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxBiomesOPlenty;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxBotania;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxNether;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxThaumcraft;
-	public static List<BlockTypeDefinition<BlockBeeBox>> beeBoxesForestry;
-	public static List<BlockTypeDefinition<BlockBeeBox>> beeBoxesForestryFireproof;
-	public static BlockDefinition beeHive;
-	public static GrcBeesItems items = new GrcBeesItems();
-	public static GrcBeesFluids fluids = new GrcBeesFluids();
-
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcBeesConfig config = new GrcBeesConfig();
-	private ModuleContainer modules = new ModuleContainer();
-	private UserBeesConfig userBeesConfig = new UserBeesConfig();
-	private UserFlowersConfig userFlowersConfig = new UserFlowersConfig();
-	private GrcBeesRecipes recipes = new GrcBeesRecipes();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcBeesConfig config = new GrcBeesConfig();
+	private final ModuleContainer modules = new ModuleContainer();
+	private final UserBeesConfig userBeesConfig = new UserBeesConfig();
+	private final UserFlowersConfig userFlowersConfig = new UserFlowersConfig();
+	private final GrcBeesRecipes recipes = new GrcBeesRecipes();
 	//private UserHoneyConfig userHoneyConfig = new UserHoneyConfig();
 
 	public static UserBeesConfig getUserBeesConfig()
@@ -106,11 +92,11 @@ public class GrowthCraftBees
 	}
 
 	@EventHandler
-	public void preload(FMLPreInitializationEvent event)
+	public void preInit(FMLPreInitializationEvent event)
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
-
+		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
 		modules.add(recipes);
@@ -132,25 +118,16 @@ public class GrowthCraftBees
 		if (config.enableBotaniaIntegration) modules.add(new growthcraft.bees.integration.BotaniaModule());
 		if (config.enableForestryIntegration) modules.add(new growthcraft.bees.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bees.integration.ThaumcraftModule());
-
+		modules.add(CommonProxy.instance);
 		if (config.debugEnabled)
 		{
 			BeesRegistry.instance().setLogger(logger);
 			modules.setLogger(logger);
 		}
-
+		modules.freeze();
 		tab = new CreativeTabsGrowthcraftBees("creative_tab_grcbees");
 
 		MinecraftForge.EVENT_BUS.register(new GrcBeesHandleTextureStitch());
-
-		initBlocksAndItems();
-	}
-
-	private void initBlocksAndItems()
-	{
-		beeBox  = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBox());
-		beeBox.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
-		beeHive = new BlockDefinition(new BlockBeeHive());
 
 		modules.preInit();
 		register();
@@ -158,10 +135,6 @@ public class GrowthCraftBees
 
 	private void register()
 	{
-		// Bee Boxes
-		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
-		// Bee Hive(s)
-		GameRegistry.registerBlock(beeHive.getBlock(), "grc.beeHive");
 		// TileEntities
 		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);
@@ -187,13 +160,10 @@ public class GrowthCraftBees
 
 	private void registerRecipes()
 	{
-		//====================
-		// CRAFTING
-		//====================
 		final BlockDefinition planks = new BlockDefinition(Blocks.planks);
 		for (int i = 0; i < 6; ++i)
 		{
-			GameRegistry.addRecipe(beeBox.asStack(1, i), new Object[] { " A ", "A A", "AAA", 'A', planks.asStack(1, i) });
+			GameRegistry.addRecipe(blocks.beeBox.asStack(1, i), new Object[] { " A ", "A A", "AAA", 'A', planks.asStack(1, i) });
 		}
 
 		final ItemStack honeyStack = items.honeyCombFilled.asStack();
@@ -203,7 +173,7 @@ public class GrowthCraftBees
 
 	private void postRegisterRecipes()
 	{
-		GameRegistry.addRecipe(new ShapedOreRecipe(beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(blocks.beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
 
 		GameRegistry.addRecipe(new ShapelessMultiRecipe(
 				items.honeyJar.asStack(),
@@ -211,27 +181,33 @@ public class GrowthCraftBees
 				Items.flower_pot));
 	}
 
-	@EventHandler
-	public void load(FMLInitializationEvent event)
+	private void initVillageHandlers()
 	{
-		CommonProxy.instance.initRenders();
-		CommonProxy.instance.initSounds();
-
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerBees());
-
 		final VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
-		VillagerRegistry.instance().registerVillagerId(config.villagerApiaristID);
+		final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
+		final int apiaristID = config.villagerApiaristID;
+		if (apiaristID > 0)
+		{
+			VillagerRegistry.instance().registerVillagerId(apiaristID);
+			VillagerRegistry.instance().registerVillageTradeHandler(apiaristID, handler);
+		}
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, new VillageHandlerBees());
-		VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);
+		if (brewerID > 0)
+		{
+			VillagerRegistry.instance().registerVillageTradeHandler(brewerID, new VillageHandlerBees());
+		}
+	}
 
-		CommonProxy.instance.registerVillagerSkin();
-
+	@EventHandler
+	public void init(FMLInitializationEvent event)
+	{
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, guiProvider);
+		if (config.enableVillageGen) initVillageHandlers();
 		modules.init();
 	}
 
 	@EventHandler
-	public void postload(FMLPostInitializationEvent event)
+	public void postInit(FMLPostInitializationEvent event)
 	{
 		userBeesConfig.loadUserConfig();
 		userFlowersConfig.loadUserConfig();

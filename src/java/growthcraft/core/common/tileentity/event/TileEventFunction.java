@@ -31,23 +31,22 @@ import io.netty.buffer.ByteBuf;
 
 import growthcraft.api.core.stream.IStreamable;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.nbt.NBTTagCompound;
 
-public class EventFunction
+public class TileEventFunction
 {
 	private Method method;
 
-	public EventFunction(@Nonnull Method m)
+	public TileEventFunction(@Nonnull Method m)
 	{
 		this.method = m;
 	}
 
-	public boolean writeToStream(IStreamable tile, ByteBuf data)
+	private Object invoke2(Object a, Object b)
 	{
 		try
 		{
-			return (Boolean)this.method.invoke(tile, data);
+			return this.method.invoke(a, b);
 		}
 		catch (IllegalAccessException e)
 		{
@@ -63,24 +62,23 @@ public class EventFunction
 		}
 	}
 
-	@SideOnly (Side.CLIENT)
+	public void readFromNBT(Object tile, NBTTagCompound nbt)
+	{
+		invoke2(tile, nbt);
+	}
+
+	public void writeToNBT(Object tile, NBTTagCompound nbt)
+	{
+		invoke2(tile, nbt);
+	}
+
+	public boolean writeToStream(IStreamable tile, ByteBuf data)
+	{
+		return (Boolean)invoke2(tile, data);
+	}
+
 	public boolean readFromStream(IStreamable tile, ByteBuf data)
 	{
-		try
-		{
-			return (Boolean)this.method.invoke(tile, data);
-		}
-		catch (IllegalAccessException e)
-		{
-			throw new IllegalStateException(e);
-		}
-		catch (IllegalArgumentException e)
-		{
-			throw new IllegalStateException(e);
-		}
-		catch (InvocationTargetException e)
-		{
-			throw new IllegalStateException(e);
-		}
+		return (Boolean)invoke2(tile, data);
 	}
 }

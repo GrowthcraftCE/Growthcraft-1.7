@@ -28,7 +28,7 @@ import java.io.IOException;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.core.common.tileentity.device.FluidTanks;
 import growthcraft.core.common.tileentity.device.IFluidTanks;
-import growthcraft.core.common.tileentity.event.EventHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
 
 import io.netty.buffer.ByteBuf;
 
@@ -43,14 +43,18 @@ import net.minecraftforge.fluids.IFluidHandler;
 /**
  * Extend this base class if you want a base class with an `Inventory` and `Fluid Tanks`
  */
-public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase implements IFluidHandler, IFluidTanks
+public abstract class GrcTileDeviceBase extends GrcTileInventoryBase implements IFluidHandler, IFluidTanks
 {
 	private FluidTanks tanks;
 
-	public GrcTileEntityDeviceBase()
+	public GrcTileDeviceBase()
 	{
 		super();
 		this.tanks = new FluidTanks(createTanks());
+	}
+
+	protected void markFluidDirty()
+	{
 	}
 
 	protected FluidTank[] createTanks()
@@ -84,7 +88,7 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	public FluidStack drain(ForgeDirection dir, int amount, boolean shouldDrain)
 	{
 		final FluidStack result = doDrain(dir, amount, shouldDrain);
-		if (shouldDrain && FluidTest.isValid(result)) markForFluidUpdate();
+		if (shouldDrain && FluidTest.isValid(result)) markFluidDirty();
 		return result;
 	}
 
@@ -93,7 +97,7 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	{
 		if (!FluidTest.isValid(stack)) return null;
 		final FluidStack result = doDrain(dir, stack, shouldDrain);
-		if (shouldDrain && FluidTest.isValid(result)) markForFluidUpdate();
+		if (shouldDrain && FluidTest.isValid(result)) markFluidDirty();
 		return result;
 	}
 
@@ -106,7 +110,7 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	public int fill(ForgeDirection dir, FluidStack stack, boolean shouldFill)
 	{
 		final int result = doFill(dir, stack, shouldFill);
-		if (shouldFill && result != 0) markForFluidUpdate();
+		if (shouldFill && result != 0) markFluidDirty();
 		return result;
 	}
 
@@ -185,7 +189,7 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	public FluidStack drainFluidTank(int slot, int amount, boolean shouldDrain)
 	{
 		final FluidStack result = tanks.drainFluidTank(slot, amount, shouldDrain);
-		if (shouldDrain && FluidTest.isValid(result)) markForFluidUpdate();
+		if (shouldDrain && FluidTest.isValid(result)) markFluidDirty();
 		return result;
 	}
 
@@ -193,7 +197,7 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	public int fillFluidTank(int slot, FluidStack fluid, boolean shouldFill)
 	{
 		final int result = tanks.fillFluidTank(slot, fluid, shouldFill);
-		if (shouldFill && result != 0) markForFluidUpdate();
+		if (shouldFill && result != 0) markFluidDirty();
 		return result;
 	}
 
@@ -201,7 +205,7 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	public void setFluidStack(int slot, FluidStack stack)
 	{
 		tanks.setFluidStack(slot, stack);
-		markForFluidUpdate();
+		markFluidDirty();
 	}
 
 	@Override
@@ -214,7 +218,7 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 	public void clearTank(int slot)
 	{
 		tanks.clearTank(slot);
-		markForFluidUpdate();
+		markFluidDirty();
 	}
 
 	protected void readTanksFromNBT(NBTTagCompound nbt)
@@ -230,10 +234,9 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 		readTanksFromNBT(nbt);
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
+	public void readFromNBT_DeviceBase(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		readTanksFromNBT(nbt);
 	}
 
@@ -250,14 +253,13 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 		writeTanksToNBT(nbt);
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_DeviceBase(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		writeTanksToNBT(nbt);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_FluidTanks(ByteBuf stream) throws IOException
 	{
 		if (tanks != null)
@@ -265,7 +267,7 @@ public abstract class GrcTileEntityDeviceBase extends GrcTileEntityInventoryBase
 		return true;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_FluidTanks(ByteBuf stream) throws IOException
 	{
 		if (tanks != null)

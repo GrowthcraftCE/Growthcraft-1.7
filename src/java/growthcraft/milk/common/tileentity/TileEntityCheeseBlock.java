@@ -27,9 +27,9 @@ import java.util.List;
 import java.io.IOException;
 
 import growthcraft.api.core.nbt.INBTItemSerializable;
-import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.core.common.tileentity.GrcTileEntityBase;
-import growthcraft.core.common.tileentity.IItemHandler;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.IItemHandler;
+import growthcraft.core.common.tileentity.GrcTileBase;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.struct.Cheese;
@@ -41,7 +41,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHandler, INBTItemSerializable
+public class TileEntityCheeseBlock extends GrcTileBase implements IItemHandler, INBTItemSerializable
 {
 	private Cheese cheese = new Cheese();
 
@@ -87,10 +87,9 @@ public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHan
 		readCheeseFromNBT(nbt);
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
+	public void readFromNBT_CheeseBlock(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		readCheeseFromNBT(nbt);
 	}
 
@@ -106,10 +105,9 @@ public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHan
 		writeCheeseToNBT(nbt);
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_CheeseBlock(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		writeCheeseToNBT(nbt);
 	}
 
@@ -121,14 +119,14 @@ public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHan
 		return stack;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_CheeseBlock(ByteBuf stream) throws IOException
 	{
 		cheese.readFromStream(stream);
 		return true;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_CheeseBlock(ByteBuf stream) throws IOException
 	{
 		cheese.writeToStream(stream);
@@ -139,7 +137,6 @@ public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHan
 	public void updateEntity()
 	{
 		super.updateEntity();
-
 		if (!worldObj.isRemote)
 		{
 			cheese.update();
@@ -148,7 +145,7 @@ public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHan
 				cheese.needClientUpdate = false;
 				if (cheese.hasSlices())
 				{
-					markForBlockUpdate();
+					markForUpdate();
 				}
 				else
 				{
@@ -159,14 +156,16 @@ public class TileEntityCheeseBlock extends GrcTileEntityBase implements IItemHan
 	}
 
 	@Override
-	public boolean tryPlaceItem(EntityPlayer player, ItemStack onHand)
+	public boolean tryPlaceItem(IItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		return cheese.tryWaxing(onHand);
 	}
 
 	@Override
-	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		if (cheese.isAged())
 		{
 			final ItemStack stack = cheese.yankSlices(1, true);

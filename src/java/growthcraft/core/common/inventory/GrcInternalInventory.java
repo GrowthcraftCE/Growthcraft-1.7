@@ -81,13 +81,23 @@ public class GrcInternalInventory implements IInventory, INBTSerializableContext
 		onSlotChanged(WILDCARD_SLOT);
 	}
 
-	public void clearInventory()
+	public void clear()
 	{
 		for (int i = 0; i < getMaxSize(); ++i)
 		{
 			items[i] = null;
 		}
 		onSlotChanged(WILDCARD_SLOT);
+	}
+
+	/**
+	 * @deprecated
+	 *   Use #clear instead
+	 */
+	@Deprecated
+	public void clearInventory()
+	{
+		clear();
 	}
 
 	protected void readFromNBT(NBTTagList data)

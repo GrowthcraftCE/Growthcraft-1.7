@@ -52,14 +52,14 @@ public class GrowthCraftBamboo
 	public static GrowthCraftBamboo instance;
 
 	public static CreativeTabs creativeTab;
-	public static GrcBambooBlocks blocks = new GrcBambooBlocks();
-	public static GrcBambooItems items = new GrcBambooItems();
+	public static final GrcBambooBlocks blocks = new GrcBambooBlocks();
+	public static final GrcBambooItems items = new GrcBambooItems();
 
 	public static BiomeGenBase bambooBiome;
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcBambooConfig config = new GrcBambooConfig();
-	private ModuleContainer modules = new ModuleContainer();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcBambooConfig config = new GrcBambooConfig();
+	private final ModuleContainer modules = new ModuleContainer();
 
 	public static GrcBambooConfig getConfig()
 	{
@@ -71,14 +71,14 @@ public class GrowthCraftBamboo
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
-
 		modules.add(blocks);
 		modules.add(items);
 		if (config.enableForestryIntegration) modules.add(new growthcraft.bamboo.integration.ForestryModule());
 		if (config.enableMFRIntegration) modules.add(new growthcraft.bamboo.integration.MFRModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bamboo.integration.ThaumcraftModule());
+		modules.add(CommonProxy.instance);
 		if (config.debugEnabled) modules.setLogger(logger);
-
+		modules.freeze();
 		creativeTab = new CreativeTabsGrowthcraftBamboo("creative_tab_grcbamboo");
 		modules.preInit();
 
@@ -102,7 +102,7 @@ public class GrowthCraftBamboo
 		{
 			//GameRegistry.addBiome(bambooBiome);
 			BiomeManager.addSpawnBiome(bambooBiome);
-			BiomeDictionary.registerBiomeType(bambooBiome, Type.FOREST);
+			BiomeDictionary.registerBiomeType(bambooBiome, Type.DENSE, Type.LUSH, Type.FOREST);
 		}
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBamboo(), 0);
@@ -179,10 +179,8 @@ public class GrowthCraftBamboo
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.initRenders();
 		final VillageHandlerBamboo handler = new VillageHandlerBamboo();
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-
 		modules.init();
 	}
 

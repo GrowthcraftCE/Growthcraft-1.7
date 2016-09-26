@@ -24,7 +24,7 @@
 package growthcraft.core.init;
 
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.GrcModuleItems;
 import growthcraft.core.common.item.ItemBottleSalt;
 import growthcraft.core.common.item.ItemBucketSalt;
 import growthcraft.core.common.item.ItemCrowbar;
@@ -33,7 +33,7 @@ import growthcraft.core.common.item.ItemSalt;
 
 import net.minecraftforge.oredict.OreDictionary;
 
-public class GrcCoreItems extends GrcModuleBase
+public class GrcCoreItems extends GrcModuleItems
 {
 	public ItemDefinition rope;
 	public ItemDefinition salt;
@@ -44,11 +44,11 @@ public class GrcCoreItems extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		this.rope = new ItemDefinition(new ItemRope());
-		this.salt = new ItemDefinition(new ItemSalt());
-		this.saltBottle = new ItemDefinition(new ItemBottleSalt());
-		this.saltBucket = new ItemDefinition(new ItemBucketSalt());
-		this.crowbar = new ItemDefinition(new ItemCrowbar());
+		this.rope = newDefinition(new ItemRope());
+		this.salt = newDefinition(new ItemSalt());
+		this.saltBottle = newDefinition(new ItemBottleSalt());
+		this.saltBucket = newDefinition(new ItemBucketSalt());
+		this.crowbar = newDefinition(new ItemCrowbar());
 	}
 
 	@Override

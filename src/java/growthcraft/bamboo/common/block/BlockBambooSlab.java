@@ -37,7 +37,7 @@ public class BlockBambooSlab extends BlockSlab
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item item, CreativeTabs tab, List list)
 	{
-		if (item != Item.getItemFromBlock(GrowthCraftBamboo.blocks.bambooDoubleSlab.getBlock()))
+		if (GrowthCraftBamboo.blocks.bambooDoubleSlab.getItem() != item)
 		{
 			list.add(new ItemStack(item, 1, 0));
 		}
@@ -59,7 +59,7 @@ public class BlockBambooSlab extends BlockSlab
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World par1World, int par2, int par3, int par4)
 	{
-		return Item.getItemFromBlock(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock());
+		return GrowthCraftBamboo.blocks.bambooSingleSlab.getItem();
 	}
 
 	/************
@@ -68,12 +68,12 @@ public class BlockBambooSlab extends BlockSlab
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3)
 	{
-		return Item.getItemFromBlock(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock());
+		return GrowthCraftBamboo.blocks.bambooSingleSlab.getItem();
 	}
 
 	protected ItemStack createStackedBlock(int par1)
 	{
-		return new ItemStack(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock(), 2, 0);
+		return new ItemStack(GrowthCraftBamboo.blocks.bambooSingleSlab.getItem(), 2, 0);
 	}
 
 	/************

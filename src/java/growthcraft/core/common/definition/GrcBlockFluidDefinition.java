@@ -54,6 +54,7 @@ public class GrcBlockFluidDefinition extends BlockTypeDefinition<GrcBlockFluid>
 		return create(fluid, Material.water);
 	}
 
+	@SuppressWarnings({"rawtypes"})
 	public static GrcBlockFluidDefinition create(FluidTypeDefinition def)
 	{
 		return create(def.getFluid());

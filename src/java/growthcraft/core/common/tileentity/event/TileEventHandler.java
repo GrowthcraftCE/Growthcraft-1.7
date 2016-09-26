@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 IceDragon200
+ * Copyright (c) 2015 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,48 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.tileentity;
+package growthcraft.core.common.tileentity.event;
 
-public abstract class GrcTileEntityCommonBase extends GrcTileEntityBase
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface TileEventHandler
 {
-	protected boolean needInventoryUpdate;
-
-	protected void updateDevice()
+	public static enum EventType
 	{
+		NULL,
+		GUI_NETWORK_WRITE,
+		GUI_NETWORK_READ,
+		NETWORK_WRITE,
+		NETWORK_READ,
+		NBT_WRITE,
+		NBT_READ;
 	}
 
-	// Call this when you modify a fluid tank outside of its usual methods
-	protected void markForFluidUpdate()
-	{
-		//
-	}
-
-	// Call this when you have modified the inventory, or you're not sure what
-	// kind of update you require
-	public void markForInventoryUpdate()
-	{
-		needInventoryUpdate = true;
-	}
-
-	protected void checkUpdateFlags()
-	{
-		if (needInventoryUpdate)
-		{
-			needInventoryUpdate = false;
-			markDirty();
-		}
-	}
-
-	@Override
-	public void updateEntity()
-	{
-		super.updateEntity();
-
-		checkUpdateFlags();
-
-		if (!worldObj.isRemote)
-		{
-			updateDevice();
-		}
-	}
+	EventType event();
 }

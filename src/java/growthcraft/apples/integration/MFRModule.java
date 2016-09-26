@@ -41,7 +41,7 @@ public class MFRModule extends MFRModuleBase
 	protected void integrate()
 	{
 		registerPickableFruit(new AppleBlockFactoryFruit());
-		registerHarvestableLeaves(GrowthCraftApples.appleLeaves.getBlock());
-		registerPlantableSapling(GrowthCraftApples.appleSapling.getBlock());
+		registerHarvestableLeaves(GrowthCraftApples.blocks.appleLeaves.getBlock());
+		registerPlantableSapling(GrowthCraftApples.blocks.appleSapling.getBlock());
 	}
 }

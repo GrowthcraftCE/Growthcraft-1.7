@@ -5,13 +5,16 @@ import java.io.IOException;
 import io.netty.buffer.ByteBuf;
 
 import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.core.common.tileentity.ITileHeatedDevice;
-import growthcraft.core.common.tileentity.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -60,22 +63,35 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 	}
 
 	@Override
-	protected GrcInternalInventory createInventory()
+	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 2);
 	}
 
-	protected void markForFluidUpdate()
+	@Override
+	protected void markFluidDirty()
 	{
 		// Brew Kettles need to update their rendering state when a fluid
 		// changes, most of the other cellar blocks are unaffected by this
-		markForBlockUpdate();
+		markForUpdate();
 	}
 
 	@Override
 	public String getDefaultInventoryName()
 	{
 		return "container.grc.brewKettle";
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grccellar:brew_kettle";
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerBrewKettle(playerInventory, this);
 	}
 
 	@Override
@@ -90,13 +106,14 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		return brewKettle.getProgressScaled(scale);
 	}
 
-	/************
-	 * UPDATE
-	 ************/
 	@Override
-	protected void updateDevice()
+	public void updateEntity()
 	{
-		brewKettle.update();
+		super.updateEntity();
+		if (!worldObj.isRemote)
+		{
+			brewKettle.update();
+		}
 	}
 
 	@Override
@@ -136,14 +153,9 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		return side != 0 || index == 1;
 	}
 
-	/************
-	 * NBT
-	 ************/
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
+	public void readFromNBT_BrewKettle(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
-
 		if (nbt.hasKey("time"))
 		{
 			// Pre 2.5
@@ -156,22 +168,20 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		}
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_BrewKettle(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
-
 		brewKettle.writeToNBT(nbt, "brew_kettle");
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_BrewKettle(ByteBuf stream) throws IOException
 	{
 		brewKettle.readFromStream(stream);
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_BrewKettle(ByteBuf stream) throws IOException
 	{
 		brewKettle.writeToStream(stream);
@@ -254,7 +264,6 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
 		this.clearTank(1);
 		this.getFluidTank(0).fill(f1, true);
 		this.getFluidTank(1).fill(f0, true);
-
-		markForBlockUpdate();
+		markForUpdate();
 	}
 }

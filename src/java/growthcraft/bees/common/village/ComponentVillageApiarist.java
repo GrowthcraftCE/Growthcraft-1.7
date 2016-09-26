@@ -191,7 +191,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		new WeightedRandomChestContent(GrowthCraftBees.items.honeyCombEmpty.asStack(), 1, 3, 5),
 		new WeightedRandomChestContent(GrowthCraftBees.items.honeyCombFilled.asStack(), 1, 3, 5),
 		new WeightedRandomChestContent(GrowthCraftBees.items.honeyJar.asStack(), 1, 1, 10),
-		new WeightedRandomChestContent(GrowthCraftBees.beeBox.asStack(), 1, 2, 5)
+		new WeightedRandomChestContent(GrowthCraftBees.blocks.beeBox.asStack(), 1, 2, 5)
 	};
 
 	// DO NOT REMOVE
@@ -283,8 +283,8 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		map.put('Y', new BlockEntry(Blocks.planks, 2));
 		map.put('B', new BlockEntry(Blocks.planks, 1));
 
-		map.put('H', new BlockEntry(GrowthCraftBees.beeHive.getBlock(), this.getMetadataWithOffset(GrowthCraftBees.beeHive.getBlock(), 3)));
-		map.put('+', new BlockEntry(GrowthCraftBees.beeBox.getBlock(), this.getMetadataWithOffset(GrowthCraftBees.beeBox.getBlock(), random.nextInt(6))));
+		map.put('H', new BlockEntry(GrowthCraftBees.blocks.beeHive.getBlock(), this.getMetadataWithOffset(GrowthCraftBees.blocks.beeHive.getBlock(), 3)));
+		map.put('+', new BlockEntry(GrowthCraftBees.blocks.beeBox.getBlock(), this.getMetadataWithOffset(GrowthCraftBees.blocks.beeBox.getBlock(), random.nextInt(6))));
 
 		SchemaToVillage.drawSchema(this, world, random, box, apiaristExteriorSchema, map, 0, 0, 0);
 

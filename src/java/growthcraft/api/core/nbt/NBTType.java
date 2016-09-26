@@ -44,18 +44,10 @@ public enum NBTType
 	public static final Map<Integer, NBTType> MAPPING = new HashMap<Integer, NBTType>();
 	static
 	{
-		END.register();
-		BYTE.register();
-		SHORT.register();
-		INT.register();
-		LONG.register();
-		FLOAT.register();
-		DOUBLE.register();
-		BYTE_ARRAY.register();
-		STRING.register();
-		LIST.register();
-		COMPOUND.register();
-		INT_ARRAY.register();
+		for (NBTType type : values())
+		{
+			MAPPING.put(type.id, type);
+		}
 	}
 
 	public final int id;
@@ -63,11 +55,6 @@ public enum NBTType
 	private NBTType(int i)
 	{
 		this.id = i;
-	}
-
-	private void register()
-	{
-		MAPPING.put(this.id, this);
 	}
 
 	public static NBTType byId(int id)

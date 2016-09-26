@@ -57,7 +57,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.blocks.fermentBarrel.asStack(), new AspectList().add(Aspect.METAL, 6).add(Aspect.CRAFT, 2).add(Aspect.WATER, 2));
 		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.blocks.fruitPress.asStack(), new AspectList().add(Aspect.METAL, 3).add(Aspect.CRAFT, 2).add(Aspect.MECHANISM, 2));
 
-		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.waterBag.asStack(), new AspectList().add(Aspect.BEAST, 1).add(Aspect.VOID, 2).add(Aspect.WATER, 2));
+		ThaumcraftApi.registerObjectTag(GrowthCraftCellar.items.waterBag.asStack(), new AspectList().add(Aspect.BEAST, 1).add(Aspect.VOID, 2).add(Aspect.WATER, 2));
 
 		ThaumcraftApi.registerObjectTag(EnumYeast.BREWERS.asStack(), new AspectList().add(Aspect.EARTH, 1));
 		ThaumcraftApi.registerObjectTag(EnumYeast.LAGER.asStack(), new AspectList().add(Aspect.COLD, 1));

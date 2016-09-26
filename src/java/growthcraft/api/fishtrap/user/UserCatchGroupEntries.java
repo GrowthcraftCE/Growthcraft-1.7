@@ -21,16 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.tileentity;
+package growthcraft.api.fishtrap.user;
 
-import net.minecraft.nbt.NBTTagCompound;
+import java.util.HashMap;
+import java.util.Map;
 
-public interface ITileNamedFluidTanks
+import growthcraft.api.core.schema.ICommentable;
+
+public class UserCatchGroupEntries implements ICommentable
 {
-	/**
-	 * This should write a NBTTagList to the provided tag under the key "tank_names"
-	 *
-	 * @param tag - tag to write to
-	 */
-	void writeFluidTankNamesToTag(NBTTagCompound tag);
+	public String comment = "";
+	public Map<String, UserCatchGroupEntry> data = new HashMap<String, UserCatchGroupEntry>();
+
+	@Override
+	public String getComment()
+	{
+		return comment;
+	}
+
+	@Override
+	public void setComment(String com)
+	{
+		this.comment = com;
+	}
 }

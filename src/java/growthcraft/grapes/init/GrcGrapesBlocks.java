@@ -25,13 +25,13 @@ package growthcraft.grapes.init;
 
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
-import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.GrcModuleBlocks;
 import growthcraft.grapes.common.block.BlockGrapeBlock;
 import growthcraft.grapes.common.block.BlockGrapeLeaves;
 import growthcraft.grapes.common.block.BlockGrapeVine0;
 import growthcraft.grapes.common.block.BlockGrapeVine1;
 
-public class GrcGrapesBlocks extends GrcModuleBase
+public class GrcGrapesBlocks extends GrcModuleBlocks
 {
 	public BlockTypeDefinition<BlockGrapeVine0> grapeVine0;
 	public BlockTypeDefinition<BlockGrapeVine1> grapeVine1;
@@ -41,10 +41,10 @@ public class GrcGrapesBlocks extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		this.grapeVine0  = new BlockTypeDefinition<BlockGrapeVine0>(new BlockGrapeVine0());
-		this.grapeVine1  = new BlockTypeDefinition<BlockGrapeVine1>(new BlockGrapeVine1());
-		this.grapeLeaves = new BlockTypeDefinition<BlockGrapeLeaves>(new BlockGrapeLeaves());
-		this.grapeBlock  = new BlockDefinition(new BlockGrapeBlock());
+		this.grapeVine0  = newTypedDefinition(new BlockGrapeVine0());
+		this.grapeVine1  = newTypedDefinition(new BlockGrapeVine1());
+		this.grapeLeaves = newTypedDefinition(new BlockGrapeLeaves());
+		this.grapeBlock  = newDefinition(new BlockGrapeBlock());
 	}
 
 	@Override

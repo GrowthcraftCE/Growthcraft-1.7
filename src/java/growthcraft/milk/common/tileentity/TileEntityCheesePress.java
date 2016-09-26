@@ -30,10 +30,10 @@ import growthcraft.api.milk.cheesepress.ICheesePressRecipe;
 import growthcraft.api.milk.MilkRegistry;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
-import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.core.common.tileentity.GrcTileEntityInventoryBase;
-import growthcraft.core.common.tileentity.IItemHandler;
-import growthcraft.core.common.tileentity.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.IItemHandler;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.GrcTileInventoryBase;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.GrowthCraftMilk;
@@ -48,7 +48,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.inventory.IInventory;
 
-public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements IItemHandler, ITileProgressiveDevice
+public class TileEntityCheesePress extends GrcTileInventoryBase implements IItemHandler, ITileProgressiveDevice
 {
 	private static int[][] accessibleSlots = {
 		{ 0 },
@@ -137,7 +137,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	}
 
 	@Override
-	protected GrcInternalInventory createInventory()
+	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 1, 1);
 	}
@@ -236,7 +236,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 			if (time != 0)
 			{
 				this.time = 0;
-				markForBlockUpdate();
+				markDirty();
 			}
 		}
 	}
@@ -266,7 +266,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	{
 		final int oldScrewState = screwState;
 		this.screwState = state ? 1 : 0;
-		markForBlockUpdate();
+		if (oldScrewState != screwState) markForUpdate();
 		return oldScrewState != screwState;
 	}
 
@@ -281,8 +281,9 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	}
 
 	@Override
-	public boolean tryPlaceItem(EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemHandler.Action action, EntityPlayer player, ItemStack stack)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		if (ItemTest.isValid(stack))
 		{
 			// Items cannot be added if the user slot already has an item AND
@@ -305,41 +306,37 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 	}
 
 	@Override
-	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
-		if (!ItemTest.isValid(onHand))
+		if (IItemHandler.Action.LEFT != action) return false;
+		// Items cannot be removed if the cheese press is active
+		if (isUnpressed())
 		{
-			// Items cannot be removed if the cheese press is active
-			if (isUnpressed())
+			final ItemStack result = invSlot.yank();
+			if (result != null)
 			{
-				final ItemStack result = invSlot.yank();
-				if (result != null)
-				{
-					ItemUtils.spawnItemStackAtTile(result, this, worldObj.rand);
-					return true;
-				}
+				ItemUtils.spawnItemStackAtTile(result, this, worldObj.rand);
+				return true;
 			}
 		}
 		return false;
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
+	public void readFromNBT_CheesePress(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		this.screwState = nbt.getInteger("screw_state");
 		this.time = nbt.getInteger("time");
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_CheesePress(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		nbt.setInteger("screw_state", screwState);
 		nbt.setInteger("time", time);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_CheesePress(ByteBuf stream) throws IOException
 	{
 		this.screwState = stream.readInt();
@@ -347,7 +344,7 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_CheesePress(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(screwState);

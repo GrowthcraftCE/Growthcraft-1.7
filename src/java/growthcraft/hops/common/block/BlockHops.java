@@ -261,7 +261,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 			if (!world.isRemote)
 			{
 				removeFruit(world, x, y, z);
-				dropBlockAsItem(world, x, y, z, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
+				dropBlockAsItem(world, x, y, z, GrowthCraftHops.items.hops.asStack(1 + world.rand.nextInt(8)));
 			}
 			return true;
 		}
@@ -315,7 +315,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 	public Item getItem(World world, int x, int y, int z)
 	{
 		final int meta = world.getBlockMetadata(x, y, z);
-		return meta < HopsStage.FRUIT ? GrowthCraftHops.hopSeeds.getItem() : GrowthCraftHops.hops.getItem();
+		return meta < HopsStage.FRUIT ? GrowthCraftHops.items.hopSeeds.getItem() : GrowthCraftHops.items.hops.getItem();
 	}
 
 	@Override
@@ -356,7 +356,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 		ret.add(GrowthCraftCore.items.rope.asStack());
 		if (world.getBlockMetadata(x, y, z) >= HopsStage.BIG)
 		{
-			ret.add(GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
+			ret.add(GrowthCraftHops.items.hops.asStack(1 + world.rand.nextInt(8)));
 		}
 		return ret;
 	}

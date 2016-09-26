@@ -80,11 +80,11 @@ public class GrowthCraftCore
 	// Constants
 	public static ItemStack EMPTY_BOTTLE;
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcCoreConfig config = new GrcCoreConfig();
-	private ModuleContainer modules = new ModuleContainer();
-	private UserFluidDictionaryConfig userFluidDictionary = new UserFluidDictionaryConfig();
-	private UserVinesConfig userVinesConfig = new UserVinesConfig();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcCoreConfig config = new GrcCoreConfig();
+	private final ModuleContainer modules = new ModuleContainer();
+	private final UserFluidDictionaryConfig userFluidDictionary = new UserFluidDictionaryConfig();
+	private final UserVinesConfig userVinesConfig = new UserVinesConfig();
 
 	public static GrcCoreConfig getConfig()
 	{
@@ -101,29 +101,26 @@ public class GrowthCraftCore
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
-		if (config.debugEnabled) logger.info("Pre-Initializing %s", MOD_ID);
-
+		if (config.debugEnabled)
+		{
+			logger.info("Pre-Initializing %s", MOD_ID);
+			CoreRegistry.instance().setLogger(logger);
+		}
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
 		modules.add(recipes);
-
 		userVinesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/vines.json");
 		userFluidDictionary.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/fluid_dictionary.json");
 		modules.add(userVinesConfig);
 		modules.add(userFluidDictionary);
-
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.core.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.core.integration.Waila());
 		if (config.enableAppleCoreIntegration) modules.add(new growthcraft.core.integration.AppleCore());
 		//if (config.enableNEIIntegration) modules.add(new growthcraft.core.integration.nei.NEIModule());
-
-		if (config.debugEnabled)
-		{
-			CoreRegistry.instance().setLogger(logger);
-			modules.setLogger(logger);
-		}
-
+		modules.add(CommonProxy.instance);
+		if (config.debugEnabled) modules.setLogger(logger);
+		modules.freeze();
 		creativeTab = new CreativeTabsGrowthcraft("creative_tab_grccore");
 
 		EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
@@ -157,9 +154,7 @@ public class GrowthCraftCore
 	public void init(FMLInitializationEvent event)
 	{
 		userFluidDictionary.loadUserConfig();
-		CommonProxy.instance.initRenders();
 		AchievementPageGrowthcraft.init();
-
 		userVinesConfig.addDefault(Blocks.vine);
 		if (BopPlatform.isLoaded())
 		{

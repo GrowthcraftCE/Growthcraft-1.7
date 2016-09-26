@@ -31,8 +31,8 @@ import growthcraft.api.core.util.Pair;
 import growthcraft.api.core.util.PulseStepper;
 import growthcraft.api.core.util.SpatialRandom;
 import growthcraft.api.core.util.TickUtils;
-import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.core.common.tileentity.GrcTileEntityBase;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.GrcTileBase;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.struct.CheeseCurd;
 import growthcraft.milk.GrowthCraftMilk;
@@ -47,7 +47,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityHangingCurds extends GrcTileEntityBase implements INBTItemSerializable
+public class TileEntityHangingCurds extends GrcTileBase implements INBTItemSerializable
 {
 	// SpatialRandom instance
 	private SpatialRandom sprand = new SpatialRandom();
@@ -109,7 +109,7 @@ public class TileEntityHangingCurds extends GrcTileEntityBase implements INBTIte
 			if (cheeseCurd.needClientUpdate)
 			{
 				cheeseCurd.needClientUpdate = false;
-				markForBlockUpdate();
+				markForUpdate();
 			}
 			cheeseCurd.update();
 			if (wheyPulsar.update() == PulseStepper.State.PULSE)
@@ -126,7 +126,7 @@ public class TileEntityHangingCurds extends GrcTileEntityBase implements INBTIte
 				}
 				// regardless of a pancheon being present, the curd SHOULD drip
 				serverStep++;
-				markForBlockUpdate();
+				markDirtyAndUpdate();
 			}
 		}
 		else
@@ -166,10 +166,9 @@ public class TileEntityHangingCurds extends GrcTileEntityBase implements INBTIte
 		readWheyPulsarFromNBT(nbt);
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
+	public void readFromNBT_HangingCurds(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		readCheeseCurdFromNBT(nbt);
 		readWheyPulsarFromNBT(nbt);
 	}
@@ -192,15 +191,14 @@ public class TileEntityHangingCurds extends GrcTileEntityBase implements INBTIte
 		writeWheyPulsarToNBT(nbt);
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_HangingCurds(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		writeCheeseCurdToNBT(nbt);
 		writeWheyPulsarToNBT(nbt);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_HangingCurds(ByteBuf stream) throws IOException
 	{
 		cheeseCurd.readFromStream(stream);
@@ -209,7 +207,7 @@ public class TileEntityHangingCurds extends GrcTileEntityBase implements INBTIte
 		return true;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_HangingCurds(ByteBuf stream) throws IOException
 	{
 		cheeseCurd.writeToStream(stream);

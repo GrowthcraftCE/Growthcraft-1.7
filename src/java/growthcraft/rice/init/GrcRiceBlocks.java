@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,10 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.tileentity;
+package growthcraft.rice.init;
 
-public interface ITileProgressiveDevice
+import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
+import growthcraft.core.common.GrcModuleBlocks;
+import growthcraft.rice.common.block.BlockPaddy;
+import growthcraft.rice.common.block.BlockRice;
+
+public class GrcRiceBlocks extends GrcModuleBlocks
 {
-	float getDeviceProgress();
-	int getDeviceProgressScaled(int scale);
+	public BlockTypeDefinition<BlockRice> riceBlock;
+	public BlockDefinition paddyField;
+
+	@Override
+	public void preInit()
+	{
+		this.riceBlock = newTypedDefinition(new BlockRice());
+		this.paddyField = newDefinition(new BlockPaddy());
+	}
+
+	@Override
+	public void register()
+	{
+		riceBlock.register("grc.riceBlock");
+		paddyField.register("grc.paddyField");
+	}
 }

@@ -41,6 +41,7 @@ import growthcraft.core.common.tileentity.device.DeviceBase;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class DeviceBeeBox extends DeviceBase
@@ -204,6 +205,18 @@ public class DeviceBeeBox extends DeviceBase
 		if (bonusTime > 0) bonusTime--;
 	}
 
+	// Honey Comb bias, if the value is less than 0, it means there are more empty combs than
+	// filled, and that the device should focus on filling these combs before creating new ones
+	// Otherwise if the value is greater than or equal to zero, the device should focus on creating
+	// more empty honey combs
+	protected int honeyCombBias()
+	{
+		final TileEntityBeeBox te = getParentTile();
+		final int empty = te.countEmptyCombs();
+		final int filled = te.countHoney();
+		return filled - empty;
+	}
+
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void updateTick()
 	{
@@ -216,51 +229,50 @@ public class DeviceBeeBox extends DeviceBase
 
 		float f = getGrowthRate();
 
-		if (te.countCombs() < 27)
+		if (!te.hasMaxBees())
 		{
-			if (te.hasMaxBees())
+			if (random.nextInt((int)(beeSpawnRate / f) + 1) == 0)
 			{
-				if (random.nextInt((int)(honeyCombSpawnRate / f) + 1) == 0)
+				te.spawnBee();
+			}
+		}
+
+		final int maxCombs = te.getHoneyCombMax();
+		final int curCombs = te.countCombs();
+		if (te.countHoney() < maxCombs)
+		{
+			final int bias = honeyCombBias();
+			// If the bias is less than 0, then we should focus on filling with honey
+			boolean shouldFill = bias < 0;
+			if (bias != 0 && curCombs < maxCombs)
+			{
+				// abs the bias, and then clamp it to a range of 6
+				final int biasSpawn = Math.min(MathHelper.abs_int(bias), 6);
+				// if the biasSpawn isn't invalid
+				if (biasSpawn > 0)
 				{
-					te.spawnHoneyComb();
+					// the higher the bias, the less likely the operation will flip
+					if (random.nextInt(biasSpawn) == 0)
+					{
+						// flip the operation
+						shouldFill = !shouldFill;
+					}
+				}
+			}
+			if (shouldFill)
+			{
+				// try to fill a honey comb
+				if (random.nextInt((int)(honeySpawnRate / f) + 1) == 0)
+				{
+					te.fillHoneyComb();
 				}
 			}
 			else
 			{
-				if (random.nextInt(5) == 0)
+				// try to spawn a honey comb
+				if (random.nextInt((int)(honeyCombSpawnRate / f) + 1) == 0)
 				{
-					if (random.nextInt((int)(beeSpawnRate / f) + 1) == 0)
-					{
-						te.spawnBee();
-					}
-				}
-				else
-				{
-					if (random.nextInt((int)(honeyCombSpawnRate / f) + 1) == 0)
-					{
-						te.spawnHoneyComb();
-					}
-				}
-			}
-		}
-		else
-		{
-			if (random.nextInt((int)(honeySpawnRate / f) + 1) == 0)
-			{
-				if (te.hasMaxBees())
-				{
-					te.fillHoneyComb();
-				}
-				else
-				{
-					if (random.nextInt(5) == 0)
-					{
-						te.spawnBee();
-					}
-					else
-					{
-						te.fillHoneyComb();
-					}
+					te.spawnHoneyComb();
 				}
 			}
 		}

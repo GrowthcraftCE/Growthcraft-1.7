@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,25 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.tileentity.event;
+package growthcraft.api.core.registry;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.LinkedList;
+import java.util.List;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface EventHandler
+public class GenericItemRegistry<ItemType, T extends IItemRegistryEntry<ItemType>>
 {
-	public static enum EventType
+	protected List<T> entries = new LinkedList<T>();
+
+	public void add(T entry)
 	{
-		NULL,
-		GUI_NETWORK_WRITE,
-		GUI_NETWORK_READ,
-		NETWORK_WRITE,
-		NETWORK_READ;
+		entries.add(entry);
 	}
 
-	EventType type();
+	public T find(ItemType item)
+	{
+		if (item == null) return null;
+		for (T entry : entries)
+		{
+			if (entry.matches(item)) return entry;
+		}
+		return null;
+	}
+
+	public boolean contains(ItemType item)
+	{
+		return find(item) != null;
+	}
 }

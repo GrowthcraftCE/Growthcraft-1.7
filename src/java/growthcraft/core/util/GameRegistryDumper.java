@@ -30,12 +30,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import growthcraft.api.core.util.StringUtils;
 import growthcraft.core.GrowthCraftCore;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fluids.FluidRegistry;
 
 /**
@@ -192,10 +195,33 @@ public class GameRegistryDumper
 		}
 	}
 
+	public static void dumpBiomes()
+	{
+		final BiomeGenBase[] biomes = BiomeGenBase.getBiomeGenArray();
+		try (FileWriter writer = new FileWriter("dumps/Biomes_dump.txt"))
+		{
+			writer.write("Biome ID, Name, [TYPES...]\n");
+			for (BiomeGenBase biome : biomes)
+			{
+				if (biome == null) continue;
+				writer.write(String.format("%d,%s,%s\n",
+					biome.biomeID,
+					biome.biomeName,
+					StringUtils.inspect(BiomeDictionary.getTypesForBiome(biome))
+				));
+			}
+		}
+		catch (IOException ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+
 	public static void run()
 	{
 		dumpBlocks();
 		dumpItems();
 		dumpFluids();
+		dumpBiomes();
 	}
 }

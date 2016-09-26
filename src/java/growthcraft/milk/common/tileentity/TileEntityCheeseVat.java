@@ -36,7 +36,7 @@ import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.item.ItemTest;
-import growthcraft.api.core.nbt.NBTStringTagList;
+import growthcraft.api.core.nbt.NBTTagStringList;
 import growthcraft.api.core.stream.StreamUtils;
 import growthcraft.api.milk.cheesevat.ICheeseVatRecipe;
 import growthcraft.api.milk.MilkFluidTags;
@@ -46,12 +46,12 @@ import growthcraft.core.common.inventory.AccesibleSlots;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
-import growthcraft.core.common.tileentity.event.EventHandler;
-import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
-import growthcraft.core.common.tileentity.IItemHandler;
-import growthcraft.core.common.tileentity.ITileHeatedDevice;
-import growthcraft.core.common.tileentity.ITileNamedFluidTanks;
-import growthcraft.core.common.tileentity.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.IItemHandler;
+import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
+import growthcraft.core.common.tileentity.feature.ITileNamedFluidTanks;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.GrcTileDeviceBase;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.tileentity.cheesevat.CheeseVatState;
@@ -71,7 +71,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IItemHandler, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice
+public class TileEntityCheeseVat extends GrcTileDeviceBase implements IItemHandler, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice
 {
 	public static enum FluidTankType
 	{
@@ -128,7 +128,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	private void setVatState(CheeseVatState state)
 	{
 		this.vatState = state;
-		markForBlockUpdate();
+		markDirty();
 	}
 
 	private void goIdle()
@@ -220,7 +220,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	@Override
-	protected GrcInternalInventory createInventory()
+	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 3, 1);
 	}
@@ -336,7 +336,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 			// locate all the items in the inventory
 			final int[] invSlots = InventoryProcessor.instance().findItemSlots(this, inputItems);
 			if (InventoryProcessor.instance().slotsAreValid(this, invSlots) &&
-				InventoryProcessor.instance().checkSlots(this, inputItems, invSlots))
+				InventoryProcessor.instance().checkSlotsAndSizes(this, inputItems, invSlots))
 			{
 				if (FluidTest.hasEnoughAndExpected(inputFluids, fluids))
 				{
@@ -375,7 +375,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 							break;
 						}
 						// mark vat for block update
-						markForBlockUpdate();
+						markDirty();
 						// post event to bus
 						GrowthCraftMilk.MILK_BUS.post(new EventCheeseVatMadeCheeseFluid(this));
 					}
@@ -418,41 +418,45 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	@Override
-	protected void updateDevice()
+	public void updateEntity()
 	{
-		heatComponent.update();
-		if (!isIdle())
+		super.updateEntity();
+		if (!worldObj.isRemote)
 		{
-			if (isHeated())
+			heatComponent.update();
+			if (!isIdle())
 			{
-				if (progress < progressMax)
+				if (isHeated())
 				{
-					progress += 1 * getHeatMultiplier();
+					if (progress < progressMax)
+					{
+						progress += 1 * getHeatMultiplier();
+					}
+					else
+					{
+						onFinishedProgress();
+						goIdle();
+					}
 				}
 				else
 				{
-					onFinishedProgress();
-					goIdle();
+					if (progress > 0)
+					{
+						progress -= 1;
+					}
+					else
+					{
+						goIdle();
+					}
 				}
 			}
 			else
 			{
-				if (progress > 0)
+				if (recheckRecipe)
 				{
-					progress -= 1;
+					this.recheckRecipe = false;
+					if (isHeated()) commitRecipe();
 				}
-				else
-				{
-					goIdle();
-				}
-			}
-		}
-		else
-		{
-			if (recheckRecipe)
-			{
-				this.recheckRecipe = false;
-				if (isHeated()) commitRecipe();
 			}
 		}
 	}
@@ -586,8 +590,9 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	@Override
-	public boolean tryPlaceItem(EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemHandler.Action action, EntityPlayer player, ItemStack stack)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		if (!isIdle()) return false;
 		if (!ItemTest.isValid(stack)) return false;
 		final Item item = stack.getItem();
@@ -611,8 +616,9 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	@Override
-	public boolean tryTakeItem(EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
+		if (IItemHandler.Action.RIGHT != action) return false;
 		if (!isIdle()) return false;
 		if (onHand == null)
 		{
@@ -627,16 +633,16 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	@Override
-	protected void markForFluidUpdate()
+	protected void markFluidDirty()
 	{
-		markForBlockUpdate();
 		markForRecipeCheck();
+		markDirty();
 	}
 
 	@Override
 	public void writeFluidTankNamesToTag(NBTTagCompound tag)
 	{
-		final NBTStringTagList tagList = new NBTStringTagList();
+		final NBTTagStringList tagList = new NBTTagStringList();
 		for (FluidTankType type : FluidTankType.VALUES)
 		{
 			tagList.add(type.getUnlocalizedName());
@@ -644,10 +650,9 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		tag.setTag("tank_names", tagList.getTag());
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
+	public void readFromNBT_CheeseVat(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		if (nbt.hasKey("progress_max"))
 		{
 			this.progressMax = nbt.getInteger("progress_max");
@@ -660,17 +665,16 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		this.vatState = CheeseVatState.getStateSafe(nbt.getString("vat_state"));
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_CheeseVat(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		nbt.setInteger("progress_max", progressMax);
 		nbt.setFloat("progress", progress);
 		heatComponent.writeToNBT(nbt, "heat_component");
 		nbt.setString("vat_state", vatState.name);
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_READ)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_CheeseVat(ByteBuf stream) throws IOException
 	{
 		this.progressMax = stream.readInt();
@@ -689,7 +693,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 		return false;
 	}
 
-	@EventHandler(type=EventHandler.EventType.NETWORK_WRITE)
+	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_CheeseVat(ByteBuf stream) throws IOException
 	{
 		stream.writeInt(progressMax);

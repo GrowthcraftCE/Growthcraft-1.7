@@ -1,11 +1,15 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.tileentity.device.FruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.tileentity.ITileProgressiveDevice;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -37,7 +41,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 	}
 
 	@Override
-	protected GrcInternalInventory createInventory()
+	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 2);
 	}
@@ -46,6 +50,18 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 	public String getDefaultInventoryName()
 	{
 		return "container.grc.fruitPress";
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grccellar:fruit_press";
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerFruitPress(playerInventory, this);
 	}
 
 	@Override
@@ -61,9 +77,13 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 	}
 
 	@Override
-	protected void updateDevice()
+	public void updateEntity()
 	{
-		fruitPress.update();
+		super.updateEntity();
+		if (!worldObj.isRemote)
+		{
+			fruitPress.update();
+		}
 	}
 
 	@Override
@@ -120,10 +140,9 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 		}
 	}
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
+	public void readFromNBT_FruitPress(NBTTagCompound nbt)
 	{
-		super.readFromNBT(nbt);
 		if (nbt.getInteger("FruitPress_version") > 0)
 		{
 			fruitPress.readFromNBT(nbt, "fruit_press");
@@ -134,10 +153,9 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
 		}
 	}
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
+	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
+	public void writeToNBT_FruitPress(NBTTagCompound nbt)
 	{
-		super.writeToNBT(nbt);
 		fruitPress.writeToNBT(nbt, "fruit_press");
 		nbt.setInteger("FruitPress_version", 2);
 	}

@@ -27,7 +27,7 @@ import growthcraft.core.common.inventory.slot.SlotInput;
 import growthcraft.core.common.inventory.slot.SlotPlayer;
 import growthcraft.core.common.inventory.slot.SlotPlayerBackpack;
 import growthcraft.core.common.inventory.slot.SlotPlayerHotbar;
-import growthcraft.core.common.tileentity.IGuiNetworkSync;
+import growthcraft.core.common.tileentity.feature.IGuiNetworkSync;
 import growthcraft.core.util.Platform;
 
 import cpw.mods.fml.relauncher.Side;
@@ -68,7 +68,7 @@ public class GrcContainer extends Container
 		return false;
 	}
 
-	public boolean mergeWithSlotsOfKind(ItemStack stack, Class<? extends Slot> slot)
+	public boolean mergeWithSlotsOfKind(ItemStack stack, Class<? extends Slot> slotClass)
 	{
 		if (stack == null) return false;
 		if (stack.stackSize <= 0) return false;
@@ -78,7 +78,7 @@ public class GrcContainer extends Container
 
 		for (Object sub : inventorySlots)
 		{
-			if (slot.isInstance(sub))
+			if (slotClass.isInstance(sub))
 			{
 				final Slot subSlot = (Slot)sub;
 				if (start < 0)
@@ -90,6 +90,21 @@ public class GrcContainer extends Container
 		}
 		if (start <= -1 || end <= -1) return false;
 
+		boolean merged = false;
+		for (int i = start; i < end; ++i)
+		{
+			// Stop iterating if the stack has been successfully merged
+			if (stack.stackSize <= 0) break;
+			// Get the object at the given index
+			final Object obj = inventorySlots.get(i);
+			// Determine if the slot is the expected (in case the slots are interleaved)
+			if (slotClass.isInstance(obj))
+			{
+				final Slot subSlot = (Slot)obj;
+				// try to merge it
+				merged |= mergeWithSlot(subSlot, stack);
+			}
+		}
 		return mergeItemStack(stack, start, end + 1, false);
 	}
 

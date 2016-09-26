@@ -32,19 +32,21 @@ import growthcraft.api.core.fluids.TaggedFluidStacks;
 import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.item.recipes.ShapelessMultiRecipe;
 import growthcraft.api.core.util.TickUtils;
-import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.common.item.EnumBeesWax;
+import growthcraft.bees.GrowthCraftBees;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeUtils;
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.GrowthCraftCore;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class GrcBeesRecipes extends GrcModuleBase
 {
@@ -140,11 +142,108 @@ public class GrcBeesRecipes extends GrcModuleBase
 	public void postInit()
 	{
 		final ItemStack meadBucket = GrowthCraftBees.fluids.honeyMeadBuckets[0].asStack();
+		final ItemStack meadBottle = GrowthCraftBees.fluids.honeyMeadBottle.asStack();
+		final int bottleCapacity = GrowthCraftCore.getConfig().bottleCapacity;
+
+		// Tagged Fluid compat
+		/// Buckets
+		GameRegistry.addRecipe(new ShapelessMultiRecipe(
+			meadBucket,
+			Items.bucket,
+			new TaggedFluidStacks(1000, "honey"),
+			new FluidStack(FluidRegistry.WATER, 1000)));
 
 		GameRegistry.addRecipe(new ShapelessMultiRecipe(
-				meadBucket,
-				Items.bucket,
-				new TaggedFluidStacks(1000, "honey"),
-				new FluidStack(FluidRegistry.WATER, 1000)));
+			GrowthCraftBees.fluids.honeyMeadBottle.asStack(3),
+			Items.glass_bottle,
+			Items.glass_bottle,
+			Items.glass_bottle,
+			new TaggedFluidStacks(1000, "honey"),
+			new FluidStack(FluidRegistry.WATER, 1000)));
+
+		/// Bottles
+		GameRegistry.addRecipe(new ShapelessMultiRecipe(
+			meadBottle,
+			Items.glass_bottle,
+			new TaggedFluidStacks(bottleCapacity, "honey"),
+			new FluidStack(FluidRegistry.WATER, bottleCapacity)));
+
+		// Ore Dictionary compat
+		/// Buckets
+		GameRegistry.addRecipe(new ShapelessMultiRecipe(
+			meadBucket,
+			Items.bucket,
+			new OreItemStacks("bucketHoney"),
+			new FluidStack(FluidRegistry.WATER, 1000)));
+
+		GameRegistry.addRecipe(new ShapelessMultiRecipe(
+			meadBottle,
+			Items.glass_bottle,
+			new OreItemStacks("bottleHoney"),
+			new FluidStack(FluidRegistry.WATER, bottleCapacity)));
+
+		// Transfer recipes
+		/// To Honey Jar from `bucketHoney`
+		GameRegistry.addRecipe(new ShapelessMultiRecipe(
+			GrowthCraftBees.items.honeyJar.asStack(),
+			Blocks.flower_pot,
+			new TaggedFluidStacks(1000, "honey")
+		));
+
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+			GrowthCraftBees.items.honeyJar.asStack(),
+			Blocks.flower_pot,
+			"bucketHoney"
+		));
+
+		/// To Honey Bucket from `bucketHoney`
+		GameRegistry.addRecipe(new ShapelessMultiRecipe(
+			GrowthCraftBees.fluids.honey.asBucketItemStack(),
+			Items.bucket,
+			new TaggedFluidStacks(1000, "honey")
+		));
+
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+			GrowthCraftBees.fluids.honey.asBucketItemStack(),
+			"bucketHoney",
+			Items.bucket
+		));
+
+		/// To Honey Bottle from `bucketHoney`
+		GameRegistry.addRecipe(new ShapelessMultiRecipe(
+			GrowthCraftBees.fluids.honey.asBottleItemStack(3),
+			Items.glass_bottle,
+			Items.glass_bottle,
+			Items.glass_bottle,
+			new TaggedFluidStacks(1000, "honey")
+		));
+
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+			GrowthCraftBees.fluids.honey.asBottleItemStack(3),
+			Items.glass_bottle,
+			Items.glass_bottle,
+			Items.glass_bottle,
+			"bucketHoney"
+		));
+
+		/// To Honey Bottle from 3 `bottleHoney`
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+			GrowthCraftBees.fluids.honey.asBottleItemStack(3),
+			Items.glass_bottle,
+			Items.glass_bottle,
+			Items.glass_bottle,
+			"bottleHoney",
+			"bottleHoney",
+			"bottleHoney"
+		));
+
+		/// To Honey Bucket from 3 `bottleHoney`
+		GameRegistry.addRecipe(new ShapelessOreRecipe(
+			GrowthCraftBees.fluids.honey.asBucketItemStack(),
+			Items.bucket,
+			"bottleHoney",
+			"bottleHoney",
+			"bottleHoney"
+		));
 	}
 }

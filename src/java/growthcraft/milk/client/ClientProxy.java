@@ -50,8 +50,10 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy
 {
-	public void initRenders()
+	@Override
+	public void init()
 	{
+		super.init();
 		new GrcMilkResources();
 
 		MinecraftForgeClient.registerItemRenderer(GrowthCraftMilk.blocks.cheeseBlock.getItem(), new ItemRendererCheeseBlock());

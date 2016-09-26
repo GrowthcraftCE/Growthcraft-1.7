@@ -4,7 +4,6 @@ import growthcraft.cellar.client.render.RenderFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.event.EventBarrelDrained;
 import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.CellarGuiType;
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.Utils;
 
@@ -38,7 +37,6 @@ public class BlockFermentBarrel extends BlockCellarContainer
 		setBlockName("grc.fermentBarrel");
 		setBlockTextureName("grccellar:ferment_barrel");
 		setCreativeTab(GrowthCraftCellar.tab);
-		setGuiType(CellarGuiType.FERMENT_BARREL);
 	}
 
 	@Override

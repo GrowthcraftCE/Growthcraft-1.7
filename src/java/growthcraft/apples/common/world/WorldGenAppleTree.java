@@ -18,7 +18,7 @@ public class WorldGenAppleTree extends WorldGenerator
 	private final int metaWood      = 0;
 	private final int metaLeaves    = 0;
 	private final Block log         = Blocks.log;
-	private final Block leaves      = GrowthCraftApples.appleLeaves.getBlock();
+	private final Block leaves      = GrowthCraftApples.blocks.appleLeaves.getBlock();
 
 	public WorldGenAppleTree(boolean doblocknotify)
 	{

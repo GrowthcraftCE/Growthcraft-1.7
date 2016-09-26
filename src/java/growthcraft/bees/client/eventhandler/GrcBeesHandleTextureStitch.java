@@ -46,11 +46,11 @@ public class GrcBeesHandleTextureStitch
 	@SideOnly(Side.CLIENT)
 	private void loadShimmerWoodInterpolatedIcons(TextureStitchEvent.Pre event)
 	{
-		if (GrowthCraftBees.beeBoxBotania != null)
+		if (GrowthCraftBees.blocks.beeBoxBotania != null)
 		{
 			final int offset = EnumBotaniaWoodType.SHIMMER_WOOD.meta;
 			final String[] sides = { "bottom", "top", "side", "side_honey" };
-			final IIcon[] icons = GrowthCraftBees.beeBoxBotania.getBlock().getIcons();
+			final IIcon[] icons = GrowthCraftBees.blocks.beeBoxBotania.getBlock().getIcons();
 			int i = 0;
 			for (String side : sides)
 			{

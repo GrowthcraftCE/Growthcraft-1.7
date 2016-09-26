@@ -29,9 +29,9 @@ import growthcraft.bamboo.common.item.ItemBambooDoor;
 import growthcraft.bamboo.common.item.ItemBambooRaft;
 import growthcraft.bamboo.common.item.ItemBambooShoot;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.GrcModuleItems;
 
-public class GrcBambooItems extends GrcModuleBase
+public class GrcBambooItems extends GrcModuleItems
 {
 	public ItemDefinition bamboo;
 	public ItemDefinition bambooDoorItem;
@@ -42,11 +42,11 @@ public class GrcBambooItems extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		this.bamboo = new ItemDefinition(new ItemBamboo());
-		this.bambooDoorItem = new ItemDefinition(new ItemBambooDoor());
-		this.bambooRaft = new ItemDefinition(new ItemBambooRaft());
-		this.bambooCoal = new ItemDefinition(new ItemBambooCoal());
-		this.bambooShootFood = new ItemDefinition(new ItemBambooShoot());
+		this.bamboo = newDefinition(new ItemBamboo());
+		this.bambooDoorItem = newDefinition(new ItemBambooDoor());
+		this.bambooRaft = newDefinition(new ItemBambooRaft());
+		this.bambooCoal = newDefinition(new ItemBambooCoal());
+		this.bambooShootFood = newDefinition(new ItemBambooShoot());
 	}
 
 	@Override

@@ -40,7 +40,7 @@ public class RiceBlockCheck
 	 */
 	public static boolean isPaddy(Block block)
 	{
-		return GrowthCraftRice.paddyField.equals(block);
+		return GrowthCraftRice.blocks.paddyField.equals(block);
 	}
 
 	/**

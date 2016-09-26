@@ -53,23 +53,23 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Override
 	protected void doPreInit()
 	{
-		GrowthCraftBees.beeBoxThaumcraft = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxThaumcraft());
-		GrowthCraftBees.beeBoxThaumcraft.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
+		GrowthCraftBees.blocks.beeBoxThaumcraft = GrowthCraftBees.blocks.newTypedDefinition(new BlockBeeBoxThaumcraft());
+		GrowthCraftBees.blocks.beeBoxThaumcraft.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
 	}
 
 	@Override
 	protected void doRegister()
 	{
-		if (GrowthCraftBees.beeBoxThaumcraft != null)
+		if (GrowthCraftBees.blocks.beeBoxThaumcraft != null)
 		{
-			GameRegistry.registerBlock(GrowthCraftBees.beeBoxThaumcraft.getBlock(), ItemBlockBeeBox.class, "grc.BeeBox.Thaumcraft");
+			GameRegistry.registerBlock(GrowthCraftBees.blocks.beeBoxThaumcraft.getBlock(), ItemBlockBeeBox.class, "grc.BeeBox.Thaumcraft");
 		}
 	}
 
 	@Override
 	protected void doLateRegister()
 	{
-		if (GrowthCraftBees.beeBoxThaumcraft != null)
+		if (GrowthCraftBees.blocks.beeBoxThaumcraft != null)
 		{
 			final Block blockWoodenDevice = GameRegistry.findBlock(modID, "blockWoodenDevice");
 			if (blockWoodenDevice != null)
@@ -92,8 +92,8 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.items.honeyCombFilled.asStack(), new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 1).add(Aspect.GREED, 1).add(Aspect.HUNGER, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.items.honeyJar.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.EARTH, 1).add(Aspect.FIRE, 1).add(Aspect.VOID, 1).add(Aspect.GREED, 3).add(Aspect.HUNGER, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.items.bee.asStack(), new AspectList().add(Aspect.BEAST, 1).add(Aspect.AIR, 1).add(Aspect.FLIGHT, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeHive.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.BEAST, 1).add(Aspect.ORDER, 1).add(Aspect.VOID, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBox.asStack(), new int[]{0,1,2,3,4,5}, new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.blocks.beeHive.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.BEAST, 1).add(Aspect.ORDER, 1).add(Aspect.VOID, 1));
+		ThaumcraftApi.registerObjectTag(GrowthCraftBees.blocks.beeBox.asStack(), new int[]{0,1,2,3,4,5}, new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
 
 		{
 			final AspectList[] common = new AspectList[]
@@ -143,33 +143,33 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 			}
 		}
 
-		if (GrowthCraftBees.beeBoxNether != null)
+		if (GrowthCraftBees.blocks.beeBoxNether != null)
 		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxNether.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.ENTROPY, 1).add(Aspect.VOID, 1));
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.blocks.beeBoxNether.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.ENTROPY, 1).add(Aspect.VOID, 1));
 		}
-		if (GrowthCraftBees.beeBoxBamboo != null)
+		if (GrowthCraftBees.blocks.beeBoxBamboo != null)
 		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBamboo.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.blocks.beeBoxBamboo.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
 		}
-		if (GrowthCraftBees.beeBoxThaumcraft != null)
+		if (GrowthCraftBees.blocks.beeBoxThaumcraft != null)
 		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxThaumcraft.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.blocks.beeBoxThaumcraft.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
 		}
-		if (GrowthCraftBees.beeBoxNatura != null)
+		if (GrowthCraftBees.blocks.beeBoxNatura != null)
 		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxNatura.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.blocks.beeBoxNatura.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
 		}
-		if (GrowthCraftBees.beeBoxBiomesOPlenty != null)
+		if (GrowthCraftBees.blocks.beeBoxBiomesOPlenty != null)
 		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBiomesOPlenty.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.blocks.beeBoxBiomesOPlenty.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
 		}
-		if (GrowthCraftBees.beeBoxBotania != null)
+		if (GrowthCraftBees.blocks.beeBoxBotania != null)
 		{
-			ThaumcraftApi.registerObjectTag(GrowthCraftBees.beeBoxBotania.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
+			ThaumcraftApi.registerObjectTag(GrowthCraftBees.blocks.beeBoxBotania.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1).add(Aspect.MAGIC, 1));
 		}
-		if (GrowthCraftBees.beeBoxesForestry != null)
+		if (GrowthCraftBees.blocks.beeBoxesForestry != null)
 		{
-			for (BlockTypeDefinition<BlockBeeBox> bdef : GrowthCraftBees.beeBoxesForestry)
+			for (BlockTypeDefinition<? extends BlockBeeBox> bdef : GrowthCraftBees.blocks.beeBoxesForestry)
 			{
 				if (bdef != null)
 				{
@@ -177,9 +177,9 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 				}
 			}
 		}
-		if (GrowthCraftBees.beeBoxesForestryFireproof != null)
+		if (GrowthCraftBees.blocks.beeBoxesForestryFireproof != null)
 		{
-			for (BlockTypeDefinition<BlockBeeBox> bdef : GrowthCraftBees.beeBoxesForestryFireproof)
+			for (BlockTypeDefinition<? extends BlockBeeBox> bdef : GrowthCraftBees.blocks.beeBoxesForestryFireproof)
 			{
 				if (bdef != null)
 				{

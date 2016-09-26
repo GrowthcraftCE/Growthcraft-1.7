@@ -30,10 +30,10 @@ import growthcraft.cellar.common.block.BlockFruitPress;
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.itemblock.ItemBlockFermentBarrel;
 import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.GrcModuleBlocks;
 import growthcraft.core.integration.NEI;
 
-public class GrcCellarBlocks extends GrcModuleBase
+public class GrcCellarBlocks extends GrcModuleBlocks
 {
 	public BlockDefinition brewKettle;
 	public BlockDefinition cultureJar;
@@ -44,11 +44,11 @@ public class GrcCellarBlocks extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		this.brewKettle    = new BlockDefinition(new BlockBrewKettle());
-		this.cultureJar    = new BlockDefinition(new BlockCultureJar());
-		this.fermentBarrel = new BlockDefinition(new BlockFermentBarrel());
-		this.fruitPress    = new BlockDefinition(new BlockFruitPress());
-		this.fruitPresser  = new BlockDefinition(new BlockFruitPresser());
+		this.brewKettle    = newDefinition(new BlockBrewKettle());
+		this.cultureJar    = newDefinition(new BlockCultureJar());
+		this.fermentBarrel = newDefinition(new BlockFermentBarrel());
+		this.fruitPress    = newDefinition(new BlockFruitPress());
+		this.fruitPresser  = newDefinition(new BlockFruitPresser());
 	}
 
 	@Override

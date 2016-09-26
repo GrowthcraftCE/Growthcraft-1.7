@@ -21,9 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.common.tileentity;
+package growthcraft.core.common.tileentity.feature;
 
-public interface IBlockUpdateFlagging
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.Container;
+
+public interface IGuiNetworkSync
 {
-	public void markForBlockUpdate();
+	void sendGUINetworkData(Container container, ICrafting icrafting);
+	void receiveGUINetworkData(int id, int value);
 }

@@ -52,6 +52,9 @@ public class GrcGrapesConfig extends ConfigBase
 	public int portWineBrewingYield = 40;
 
 
+	@ConfigOption(catergory="Villager", name="Enabled", desc="Should we register Village Generation, and Villager Trades?")
+	public boolean enableVillageGen = true;
+
 	@ConfigOption(catergory="Village", name="Generate Village Grape Vineyards", desc="Controls hop vineyards spawning in villages")
 	public boolean generateGrapeVineyardStructure = true;
 

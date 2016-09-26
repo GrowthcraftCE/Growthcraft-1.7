@@ -7,6 +7,9 @@ public class GrcCellarConfig extends ConfigBase
 	@ConfigOption(catergory="Potions", name="Potion Tipsy ID")
 	public int potionTipsyID = 50;
 
+	@ConfigOption(catergory="Villager", name="Enabled", desc="Should we register Village Generation, and Villager Trades?")
+	public boolean enableVillageGen = true;
+
 	@ConfigOption(catergory="Villager", name="Brewer ID")
 	public int villagerBrewerID = 6677;
 
