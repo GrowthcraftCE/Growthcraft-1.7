@@ -190,7 +190,7 @@ public class ItemUtils
 
 	public static void spawnItemStack(World world, double x, double y, double z, ItemStack stack, Random random)
 	{
-		if (stack != null)
+		if (stack != null && stack.stackSize > 0)
 		{
 			final double f = random.nextDouble() * 0.8D + 0.1D;
 			final double f1 = random.nextDouble() * 0.8D + 0.1D;
