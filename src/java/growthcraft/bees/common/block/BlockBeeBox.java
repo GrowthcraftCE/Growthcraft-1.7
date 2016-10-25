@@ -8,11 +8,9 @@ import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.core.integration.minecraft.EnumMinecraftWoodType;
-import growthcraft.core.util.ItemUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -124,9 +122,6 @@ public class BlockBeeBox extends GrcBlockContainer
 		}
 	}
 
-	/************
-	 * TRIGGERS
-	 ************/
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
 	{
@@ -148,29 +143,6 @@ public class BlockBeeBox extends GrcBlockContainer
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block par5, int par6)
-	{
-		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
-
-		if (te != null)
-		{
-			for (int index = 0; index < te.getSizeInventory(); ++index)
-			{
-				final ItemStack stack = te.getStackInSlot(index);
-
-				ItemUtils.spawnItemStack(world, x, y, z, stack, world.rand);
-			}
-
-			world.func_147453_f(x, y, z, par5);
-		}
-
-		super.breakBlock(world, x, y, z, par5, par6);
-	}
-
-	/************
-	 * CONDITIONS
-	 ************/
-	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
 	{
 		return ForgeDirection.UP == side;
@@ -182,9 +154,6 @@ public class BlockBeeBox extends GrcBlockContainer
 		return new TileEntityBeeBox();
 	}
 
-	/************
-	 * DROPS
-	 ************/
 	@Override
 	public int damageDropped(int damage)
 	{
@@ -197,9 +166,6 @@ public class BlockBeeBox extends GrcBlockContainer
 		return 1;
 	}
 
-	/************
-	 * TEXTURES
-	 ************/
 	@SideOnly(Side.CLIENT)
 	protected void registerBeeBoxIcons(IIconRegister reg, String basename, int offset)
 	{
@@ -274,9 +240,6 @@ public class BlockBeeBox extends GrcBlockContainer
 		return icons;
 	}
 
-	/************
-	 * RENDERS
-	 ************/
 	@Override
 	public int getRenderType()
 	{
@@ -302,9 +265,6 @@ public class BlockBeeBox extends GrcBlockContainer
 		return true;
 	}
 
-	/************
-	 * BOXES
-	 ************/
 	@Override
 	public void setBlockBoundsForItemRender()
 	{
@@ -336,9 +296,6 @@ public class BlockBeeBox extends GrcBlockContainer
 		setBlockBoundsForItemRender();
 	}
 
-	/************
-	 * COMPARATOR
-	 ************/
 	@Override
 	public boolean hasComparatorInputOverride()
 	{
@@ -349,6 +306,10 @@ public class BlockBeeBox extends GrcBlockContainer
 	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
 	{
 		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(x, y, z);
-		return te.countHoney() * 15 / 27;
+		if (te != null)
+		{
+			return te.countHoney() * 15 / te.getHoneyCombMax();
+		}
+		return 0;
 	}
 }

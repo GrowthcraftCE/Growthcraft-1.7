@@ -90,8 +90,12 @@ Dir.glob File.expand_path("../build/libs/growthcraft-*.jar", File.dirname(__FILE
         %(-C "#{dir}/content" grc_#{packname}_logo.png),
         %(-C "#{dir}/content" assets/grc#{packname})
       ]
-      # core requires the api as well -.-;
-      content << %(-C "#{dir}/content" growthcraft/api) if packname == 'core'
+      if packname == 'core'
+        # core requires the api as well -.-;
+        content << %(-C "#{dir}/content" growthcraft/api)
+        # also the buildcraft api
+        content << %(-C "#{dir}/content" buildcraft)
+      end
       cmd = %(jar #{vflag}cf build/packages/#{filename} ) + content.join(" ")
       sh cmd
     end

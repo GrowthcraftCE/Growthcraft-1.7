@@ -52,7 +52,11 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
 	public void onInventoryChanged(IInventory inv, int index)
 	{
 		super.onInventoryChanged(inv, index);
-		if (index > 0)
+		if (index == 0)
+		{
+			markDirty();
+		}
+		else if (index > 0)
 		{
 			markDirtyAndUpdate();
 		}
