@@ -20,23 +20,23 @@ item.grc.yeast3.name=Эфирные дрожжи
 item.grc.yeast4.name=Обыкновенные дрожжи
 
 # Water Bags
-item.grc.waterBag0.name=Water Bag (White)
-item.grc.waterBag1.name=Water Bag (Orange)
-item.grc.waterBag2.name=Water Bag (Magenta)
-item.grc.waterBag3.name=Water Bag (Light Blue)
-item.grc.waterBag4.name=Water Bag (Yellow)
-item.grc.waterBag5.name=Water Bag (Lime)
-item.grc.waterBag6.name=Water Bag (Pink)
-item.grc.waterBag7.name=Water Bag (Gray)
-item.grc.waterBag8.name=Water Bag (Light Gray)
-item.grc.waterBag9.name=Water Bag (Cyan)
-item.grc.waterBag10.name=Water Bag (Purple)
-item.grc.waterBag11.name=Water Bag (Blue)
-item.grc.waterBag12.name=Water Bag (Brown)
-item.grc.waterBag13.name=Water Bag (Green)
-item.grc.waterBag14.name=Water Bag (Red)
-item.grc.waterBag15.name=Water Bag (Black)
-item.grc.waterBag16.name=Water Bag
+item.grc.waterBag0.name=Фляжка (Белая)
+item.grc.waterBag1.name=Фляжка (Оранжевая)
+item.grc.waterBag2.name=Фляжка (Пурпурная)
+item.grc.waterBag3.name=Фляжка (Голубая)
+item.grc.waterBag4.name=Фляжка (Жёлтая)
+item.grc.waterBag5.name=Фляжка (Лаймовая)
+item.grc.waterBag6.name=Фляжка (Розовая)
+item.grc.waterBag7.name=Фляжка (Серая)
+item.grc.waterBag8.name=Фляжка (Светло-серая)
+item.grc.waterBag9.name=Фляжка (Бирюзовая)
+item.grc.waterBag10.name=Фляжка (Фиолетовая)
+item.grc.waterBag11.name=Фляжка (Синяя)
+item.grc.waterBag12.name=Фляжка (Коричневая)
+item.grc.waterBag13.name=Фляжка (Зелёная)
+item.grc.waterBag14.name=Фляжка (Красная)
+item.grc.waterBag15.name=Фляжка (Чёрная)
+item.grc.waterBag16.name=Фляжка
 
 # Containers
 container.grc.fruitPress=Плодовый пресс
@@ -46,40 +46,40 @@ container.grc.CultureJar=Банка для брожения
 
 # Other
 grc.potion.tipsy=Опьянение
-grc.booze=Booze
+grc.booze=Алкоголь
 
 # Modifiers
-grc.fluids.tag.chilled=Chilled
-grc.fluids.tag.cider=grc.fluids.tag.cider
-grc.fluids.tag.deadly=Deadly
-grc.fluids.tag.extended=Extended
-grc.fluids.tag.fermented=Fermented
-grc.fluids.tag.fortified=grc.fluids.tag.fortified
-grc.fluids.tag.hopped=grc.fluids.tag.hopped
-grc.fluids.tag.hyper_extended=Hyper Extended
-grc.fluids.tag.intoxicated=Intoxicated
-grc.fluids.tag.magical=grc.fluids.tag.magical
-grc.fluids.tag.poisoned=Poisoned
-grc.fluids.tag.potent=Potent
-grc.fluids.tag.wine=grc.fluids.tag.wine
-grc.fluids.tag.young=Young
+grc.fluids.tag.chilled=Лагер
+grc.fluids.tag.cider=Сидр
+grc.fluids.tag.deadly=Смертельный
+grc.fluids.tag.extended=Длительный
+grc.fluids.tag.fermented=Бродящий
+grc.fluids.tag.fortified=Крепленый
+grc.fluids.tag.hopped=Хмельной
+grc.fluids.tag.hyper_extended=Сверхдлительный
+grc.fluids.tag.intoxicated=Опьяняющий
+grc.fluids.tag.magical=Магический
+grc.fluids.tag.poisoned=Отравленный
+grc.fluids.tag.potent=Крепкий
+grc.fluids.tag.wine=Вино
+grc.fluids.tag.young=Молодой
 
 # GUI
 gui.grc.empty=Пусто
-gui.grc.discard=Discard
+gui.grc.discard=Вылить
 gui.grc.switch=Переключить
 gui.grc.cantferment=Нельзя начать брожение.
-gui.grccellar.ferment_barrel.progress_name=gui.grccellar.ferment_barrel.progress_name
+gui.grccellar.ferment_barrel.progress_name=Брожение
 
 # Achievements
 achievement.craftBarrel=Добыча алкоголя
 achievement.craftBarrel.desc=Сделайте бочку для брожения из трёх деревянных досок и шести железных слитков.
-achievement.fermentBooze=Я мог сделать дрожжи.
+achievement.fermentBooze=Это дрожжи, я мог бы сделать...
 achievement.fermentBooze.desc=Сбродите алкогольный напиток.
 achievement.getDrunk=Пивоварение - это проблема?
 achievement.getDrunk.desc=Получите опьянение V.
-achievement.onTheGo=achievement.onTheGo
-achievement.onTheGo.desc=achievement.onTheGo.desc
+achievement.onTheGo=На ходу
+achievement.onTheGo.desc=Сделайте фляжку
 
 # Tooltips (Number is a percentage)
 # number is a percentage
@@ -97,17 +97,17 @@ grc.cellar.ferment_jar.itemslot.yeast=%s
 grc.cellar.fruit_press.itemslot.item=Предмет : %s
 grc.cellar.fruit_press.itemslot.residue=Остаток : %s
 grc.cellar.fruit_presser.state.invalid=<Invalid>
-grc.cellar.fruit_presser.state.pressed=Pressed
-grc.cellar.fruit_presser.state.unpressed=Unpressed
-grc.cellar.fruit_presser.state_prefix=State :
+grc.cellar.fruit_presser.state.pressed=Прессуется
+grc.cellar.fruit_presser.state.unpressed=Не спрессовано
+grc.cellar.fruit_presser.state_prefix=Состояние :
 
 # Waila Tooltips
-grccellar.waila.option.FruitPressExtras=Fruit Press Extras
-grccellar.waila.option.BrewKettleExtras=Brew Kettle Extras
-grccellar.waila.option.FermentBarrelExtras=Fermentation Barrel Extras
+grccellar.waila.option.FruitPressExtras=Плодовый пресс дополнительно
+grccellar.waila.option.BrewKettleExtras=Сусловарочный котёл дополнительно
+grccellar.waila.option.FermentBarrelExtras=Бочка для брожения дополнительно
 
 # NEI
-grc.recipe_handler.brew_kettle=grc.recipe_handler.brew_kettle
-grc.recipe_handler.culture_jar=grc.recipe_handler.culture_jar
-grc.recipe_handler.ferment_barrel=grc.recipe_handler.ferment_barrel
-grc.recipe_handler.fruit_press=grc.recipe_handler.fruit_press
+grc.recipe_handler.brew_kettle=Сусловарочный котёл
+grc.recipe_handler.culture_jar=Банка для брожения
+grc.recipe_handler.ferment_barrel=Бочка для брожения
+grc.recipe_handler.fruit_press=Плодовый пресс
