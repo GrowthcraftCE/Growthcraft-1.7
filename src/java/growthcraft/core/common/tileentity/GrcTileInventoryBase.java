@@ -183,11 +183,13 @@ public abstract class GrcTileInventoryBase extends GrcTileBase implements ISided
 		return InventoryProcessor.instance().canInsertItem(this, stack, slot);
 	}
 
+	@Override
 	public boolean canExtractItem(int slot, ItemStack stack, int side)
 	{
 		return InventoryProcessor.instance().canExtractItem(this, stack, slot);
 	}
 
+	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 	{
 		return NO_SLOTS;
