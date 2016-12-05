@@ -43,16 +43,17 @@ import net.minecraft.nbt.NBTTagList;
 
 public class TileEntityFishTrap extends GrcTileInventoryBase implements IInteractionObject
 {
-	private static final int[] trapSlots = new int[] {0,1,2,3,4,5};
-	private static final int[] baitSlots = new int[] {6};
+	private static final int[] TRAP_SLOTS = new int[] {0,1,2,3,4,5};
+	private static final int[] BAIT_SLOTS = new int[] {6};
+	private static final int[] ACCESSIBLE_SLOTS = new int[] {0,1,2,3,4,5,6};
 	public InventorySlice trapInventory;
 	public InventorySlice baitInventory;
 
 	public TileEntityFishTrap()
 	{
 		super();
-		this.trapInventory = new InventorySlice(this, trapSlots);
-		this.baitInventory = new InventorySlice(this, baitSlots);
+		this.trapInventory = new InventorySlice(this, TRAP_SLOTS);
+		this.baitInventory = new InventorySlice(this, BAIT_SLOTS);
 	}
 
 	@Override
@@ -71,6 +72,34 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
 	public GrcInternalInventory createInventory()
 	{
 		return new GrcInternalInventory(this, 7);
+	}
+
+	@Override
+	public boolean canInsertItem(int slot, ItemStack stack, int facing)
+	{
+		// only insert into the bait slot
+		if (slot == 6) {
+			return super.canInsertItem(slot, stack, facing);
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean canExtractItem(int slot, ItemStack stack, int facing)
+	{
+		// only extract from the loot/trap slots
+		if (slot < 6) {
+			return super.canExtractItem(slot, stack, facing);
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int facing)
+	{
+		return ACCESSIBLE_SLOTS;
 	}
 
 	/**
@@ -106,17 +135,17 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
 
 	public int getBaitInventoryOffset()
 	{
-		return baitSlots[0];
+		return BAIT_SLOTS[0];
 	}
 
 	public int getTrapInventorySize()
 	{
-		return trapSlots.length;
+		return TRAP_SLOTS.length;
 	}
 
 	public int getBaitInventorySize()
 	{
-		return baitSlots.length;
+		return BAIT_SLOTS.length;
 	}
 
 	/**
