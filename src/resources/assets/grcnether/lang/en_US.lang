@@ -1,0 +1,91 @@
+// Creative Tab
+itemGroup.tabGrowthCraftNether=Growthcraft Nether
+
+// Items
+item.grcnether.ectoplasm.desc=It's the spooky stuff
+item.grcnether.ectoplasm.name=Ectoplasm
+item.grcnether.netherMaliceFruit.name=Malice Fruit
+item.grcnether.netherMuertecapFood.name=Muertecap
+item.grcnether.netherPepper.desc=Its like an inferno in your mouth, but hotter
+item.grcnether.netherPepper.name=Ghost Pepper
+item.grcnether.netherRashSpores.desc=It burns, it itches, it spreads and well you know the rest
+item.grcnether.netherRashSpores.name=Nether Rash Spores
+item.grcnether.netherSquashSeeds.desc=Spooky looking seeds
+item.grcnether.netherSquashSeeds.name=Soul Squash Seeds
+item.grcnether.netherGhastPowder.name=Ghast Powder
+
+// Tiles
+tile.grcnether.netherBaalsRot.name=Baal's Rot
+tile.grcnether.netherCinderrot.name=Cinderrot
+tile.grcnether.netherFireLily.name=Fire Lily
+tile.grcnether.netherKnifeBush.name=Knife Bush
+tile.grcnether.netherMaliceFruit.name=Malice Fruit
+tile.grcnether.netherMaliceLeaves.name=Malice Leaves
+tile.grcnether.netherMaliceLog.name=Malice Log
+tile.grcnether.netherMalicePlanks.name=Malice Planks
+tile.grcnether.netherMaliceSapling.name=Malice Sapling
+tile.grcnether.netherMaraLotus.name=Maras Lotus
+tile.grcnether.netherMolochsCompass.name=Moloch's Compass
+tile.grcnether.netherMuertecap.name=Muertecap
+tile.grcnether.netherPaddyField.name=Lava Paddy
+tile.grcnether.netherPepper.name=Ghost Peppers
+tile.grcnether.netherSquash.name=Soul Squash
+tile.grcnether.netherSquashStem.name=Soul Squash Stem
+tile.grcnether.netherStrangleroot.name=Strangleroot
+
+// Booze
+/// Fire Brandy
+fluid.grcnether.fireBrandy=Fire Brandy
+fluid.grcnether.fireBrandy0=Fire Brandy
+fluid.grcnether.fireBrandy1=Fire Brandy
+fluid.grcnether.fireBrandy2=Fire Brandy
+fluid.grcnether.fireBrandy3=Fire Brandy
+
+item.bucket.fluid.grcnether.fireBrandy.name=Fire Brandy Bucket
+item.bucket.fluid.grcnether.fireBrandy0.name=Fire Brandy Bucket
+item.bucket.fluid.grcnether.fireBrandy1.name=Fire Brandy Bucket
+item.bucket.fluid.grcnether.fireBrandy2.name=Fire Brandy Bucket
+item.bucket.fluid.grcnether.fireBrandy3.name=Fire Brandy Bucket
+
+tile.fluid.grcnether.fireBrandy.name=Fire Brandy
+tile.fluid.grcnether.fireBrandy0.name=Fire Brandy
+tile.fluid.grcnether.fireBrandy1.name=Fire Brandy
+tile.fluid.grcnether.fireBrandy2.name=Fire Brandy
+tile.fluid.grcnether.fireBrandy3.name=Fire Brandy
+
+/// Malice Cider
+fluid.grcnether.maliceCider=Malice Cider
+fluid.grcnether.maliceCider0=Malice Cider
+fluid.grcnether.maliceCider1=Malice Cider
+fluid.grcnether.maliceCider2=Malice Cider
+fluid.grcnether.maliceCider3=Malice Cider
+fluid.grcnether.maliceCider4=Amrita
+fluid.grcnether.maliceCider5=Malice Cider
+fluid.grcnether.maliceCider6=Gelid Booze
+fluid.grcnether.maliceCider7=Vile Slop
+
+item.bucket.fluid.grcnether.maliceCider.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider0.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider1.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider2.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider3.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider4.name=Amrita Bucket
+item.bucket.fluid.grcnether.maliceCider5.name=Malice Cider Bucket
+item.bucket.fluid.grcnether.maliceCider6.name=Gelid Booze Bucket
+item.bucket.fluid.grcnether.maliceCider7.name=Vile Slop Bucket
+
+tile.fluid.grcnether.maliceCider.name=Malice Cider
+tile.fluid.grcnether.maliceCider0.name=Malice Cider
+tile.fluid.grcnether.maliceCider1.name=Malice Cider
+tile.fluid.grcnether.maliceCider2.name=Malice Cider
+tile.fluid.grcnether.maliceCider3.name=Malice Cider
+tile.fluid.grcnether.maliceCider4.name=Amrita
+tile.fluid.grcnether.maliceCider5.name=Malice Cider
+tile.fluid.grcnether.maliceCider6.name=Gelid Booze
+tile.fluid.grcnether.maliceCider7.name=Vile Slop
+
+fluid.grcnether.maliceCider7.modifier=Vile
+
+// Death
+death.attack.muetercapFood=%s injested a Muertecap
+death.attack.knifeBush=%s played with knives
