@@ -162,6 +162,25 @@
     "useDependencyInformation": "true"
 },
 {
+    "modid": "Growthcraft|Pipes",
+    "name": "Growthcraft Pipes",
+    "description": "Growthcraft Pipes is a mod which adds basic fluid pipes.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "http://www.minecraftforum.net/topic/1510394-/",
+    "updateUrl": "",
+    "authors": [ "IceDragon" ],
+    "credits": "",
+    //"logoFile": "/grc_apples_logo.png",
+    "logoFile": "",
+    "screenshots": [],
+    "parent": "Growthcraft",
+    "requiredMods": [ "Forge", "Growthcraft", "Growthcraft|Cellar" ],
+    "dependencies": [ "Growthcraft", "Growthcraft|Cellar" ],
+    "dependants": [],
+    "useDependencyInformation": "true"
+},
+{
     "modid": "Growthcraft|Rice",
     "name": "Growthcraft Rice",
     "description": "Growthcraft Rice is a mod which adds a new crop; rice. Alongside it also comes a new brew type; sake.",
