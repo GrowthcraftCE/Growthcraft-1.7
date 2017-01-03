@@ -7,7 +7,7 @@ tile.grc.BeeBox.Minecraft.oak.name=Пчелиный ящик из дуба
 tile.grc.BeeBox.Minecraft.spruce.name=Пчелиный ящик из ели
 tile.grc.BeeBox.Minecraft.birch.name=Пчелиный ящик из берёзы
 tile.grc.BeeBox.Minecraft.jungle.name=Пчелиный ящик из тропического дерева
-tile.grc.BeeBox.Minecraft.acacia.name=Пчелиный ящик из акации
+tile.grc.BeeBox.Minecraft.acacia.name=Пчелиный ящик из древесины акации
 tile.grc.BeeBox.Minecraft.darkoak.name=Пчелиный ящик из тёмного дуба
 
 ## Growthcraft|Nether Bee Boxes
@@ -22,104 +22,104 @@ tile.grc.BeeBox.Thaumcraft.silverwood.name=Пчелиный ящик из сер
 
 ## Forestry Bee Boxes - this is just insane...
 ### Regular
-tile.grc.BeeBox.Forestry.0.Normal.larch.name=tile.grc.BeeBox.Forestry.0.Normal.larch.name
-tile.grc.BeeBox.Forestry.0.Normal.teak.name=tile.grc.BeeBox.Forestry.0.Normal.teak.name
-tile.grc.BeeBox.Forestry.0.Normal.acacia.name=tile.grc.BeeBox.Forestry.0.Normal.acacia.name
-tile.grc.BeeBox.Forestry.0.Normal.lime.name=tile.grc.BeeBox.Forestry.0.Normal.lime.name
-tile.grc.BeeBox.Forestry.0.Normal.chestnut.name=tile.grc.BeeBox.Forestry.0.Normal.chestnut.name
-tile.grc.BeeBox.Forestry.0.Normal.wenge.name=tile.grc.BeeBox.Forestry.0.Normal.wenge.name
-tile.grc.BeeBox.Forestry.0.Normal.baobab.name=tile.grc.BeeBox.Forestry.0.Normal.baobab.name
-tile.grc.BeeBox.Forestry.0.Normal.sequoia.name=tile.grc.BeeBox.Forestry.0.Normal.sequoia.name
-tile.grc.BeeBox.Forestry.0.Normal.kapok.name=tile.grc.BeeBox.Forestry.0.Normal.kapok.name
-tile.grc.BeeBox.Forestry.0.Normal.ebony.name=tile.grc.BeeBox.Forestry.0.Normal.ebony.name
-tile.grc.BeeBox.Forestry.0.Normal.mahogany.name=tile.grc.BeeBox.Forestry.0.Normal.mahogany.name
-tile.grc.BeeBox.Forestry.0.Normal.balsa.name=tile.grc.BeeBox.Forestry.0.Normal.balsa.name
-tile.grc.BeeBox.Forestry.0.Normal.willow.name=tile.grc.BeeBox.Forestry.0.Normal.willow.name
-tile.grc.BeeBox.Forestry.0.Normal.walnut.name=tile.grc.BeeBox.Forestry.0.Normal.walnut.name
-tile.grc.BeeBox.Forestry.0.Normal.greenheart.name=tile.grc.BeeBox.Forestry.0.Normal.greenheart.name
-tile.grc.BeeBox.Forestry.1.Normal.cherry.name=tile.grc.BeeBox.Forestry.1.Normal.cherry.name
-tile.grc.BeeBox.Forestry.1.Normal.mahoe.name=tile.grc.BeeBox.Forestry.1.Normal.mahoe.name
-tile.grc.BeeBox.Forestry.1.Normal.poplar.name=tile.grc.BeeBox.Forestry.1.Normal.poplar.name
-tile.grc.BeeBox.Forestry.1.Normal.palm.name=tile.grc.BeeBox.Forestry.1.Normal.palm.name
-tile.grc.BeeBox.Forestry.1.Normal.papaya.name=tile.grc.BeeBox.Forestry.1.Normal.papaya.name
-tile.grc.BeeBox.Forestry.1.Normal.pine.name=tile.grc.BeeBox.Forestry.1.Normal.pine.name
-tile.grc.BeeBox.Forestry.1.Normal.plum.name=tile.grc.BeeBox.Forestry.1.Normal.plum.name
-tile.grc.BeeBox.Forestry.1.Normal.maple.name=tile.grc.BeeBox.Forestry.1.Normal.maple.name
-tile.grc.BeeBox.Forestry.1.Normal.citrus.name=tile.grc.BeeBox.Forestry.1.Normal.citrus.name
-tile.grc.BeeBox.Forestry.1.Normal.giganteum.name=tile.grc.BeeBox.Forestry.1.Normal.giganteum.name
-tile.grc.BeeBox.Forestry.1.Normal.ipe.name=tile.grc.BeeBox.Forestry.1.Normal.ipe.name
-tile.grc.BeeBox.Forestry.1.Normal.padauk.name=tile.grc.BeeBox.Forestry.1.Normal.padauk.name
-tile.grc.BeeBox.Forestry.1.Normal.cocobolo.name=tile.grc.BeeBox.Forestry.1.Normal.cocobolo.name
-tile.grc.BeeBox.Forestry.1.Normal.zebrawood.name=tile.grc.BeeBox.Forestry.1.Normal.zebrawood.name
+tile.grc.BeeBox.Forestry.0.Normal.larch.name=Пчелиный ящик из лиственницы
+tile.grc.BeeBox.Forestry.0.Normal.teak.name=Пчелиный ящик из тикового дерева
+tile.grc.BeeBox.Forestry.0.Normal.acacia.name=Пчелиный ящик из акации
+tile.grc.BeeBox.Forestry.0.Normal.lime.name=Пчелиный ящик из липы
+tile.grc.BeeBox.Forestry.0.Normal.chestnut.name=Пчелиный ящик из каштана
+tile.grc.BeeBox.Forestry.0.Normal.wenge.name=Пчелиный ящик из дерева венге
+tile.grc.BeeBox.Forestry.0.Normal.baobab.name=Пчелиный ящик из баобаба
+tile.grc.BeeBox.Forestry.0.Normal.sequoia.name=Пчелиный ящик из секвойи
+tile.grc.BeeBox.Forestry.0.Normal.kapok.name=Пчелиный ящик из хлопкового дерева
+tile.grc.BeeBox.Forestry.0.Normal.ebony.name=Пчелиный ящик из мирта
+tile.grc.BeeBox.Forestry.0.Normal.mahogany.name=Пчелиный ящик из красного дерева
+tile.grc.BeeBox.Forestry.0.Normal.balsa.name=Пчелиный ящик из бальзы
+tile.grc.BeeBox.Forestry.0.Normal.willow.name=Пчелиный ящик из ивы
+tile.grc.BeeBox.Forestry.0.Normal.walnut.name=Пчелиный ящик из орехового дерева
+tile.grc.BeeBox.Forestry.0.Normal.greenheart.name=Пчелиный ящик из гринхарта
+tile.grc.BeeBox.Forestry.1.Normal.cherry.name=Пчелиный ящик из вишнёвого дерева
+tile.grc.BeeBox.Forestry.1.Normal.mahoe.name=Пчелиный ящик из гибискуса
+tile.grc.BeeBox.Forestry.1.Normal.poplar.name=Пчелиный ящик из тополя
+tile.grc.BeeBox.Forestry.1.Normal.palm.name=Пчелиный ящик из пальмы
+tile.grc.BeeBox.Forestry.1.Normal.papaya.name=Пчелиный ящик из дынного дерева
+tile.grc.BeeBox.Forestry.1.Normal.pine.name=Пчелиный ящик из сосны
+tile.grc.BeeBox.Forestry.1.Normal.plum.name=Пчелиный ящик из сливового дерева
+tile.grc.BeeBox.Forestry.1.Normal.maple.name=Пчелиный ящик из клёна
+tile.grc.BeeBox.Forestry.1.Normal.citrus.name=Пчелиный ящик из цитрусового дерева
+tile.grc.BeeBox.Forestry.1.Normal.giganteum.name=Пчелиный ящик из гигантской секвойи
+tile.grc.BeeBox.Forestry.1.Normal.ipe.name=Пчелиный ящик из муравьиного дерева
+tile.grc.BeeBox.Forestry.1.Normal.padauk.name=Пчелиный ящик из падука
+tile.grc.BeeBox.Forestry.1.Normal.cocobolo.name=Пчелиный ящик из кокоболо
+tile.grc.BeeBox.Forestry.1.Normal.zebrawood.name=Пчелиный ящик из зебрано
 ### Fire Proof
-tile.grc.BeeBox.Forestry.0.Fireproof.larch.name=tile.grc.BeeBox.Forestry.0.Fireproof.larch.name
-tile.grc.BeeBox.Forestry.0.Fireproof.teak.name=tile.grc.BeeBox.Forestry.0.Fireproof.teak.name
-tile.grc.BeeBox.Forestry.0.Fireproof.acacia.name=tile.grc.BeeBox.Forestry.0.Fireproof.acacia.name
-tile.grc.BeeBox.Forestry.0.Fireproof.lime.name=tile.grc.BeeBox.Forestry.0.Fireproof.lime.name
-tile.grc.BeeBox.Forestry.0.Fireproof.chestnut.name=tile.grc.BeeBox.Forestry.0.Fireproof.chestnut.name
-tile.grc.BeeBox.Forestry.0.Fireproof.wenge.name=tile.grc.BeeBox.Forestry.0.Fireproof.wenge.name
-tile.grc.BeeBox.Forestry.0.Fireproof.baobab.name=tile.grc.BeeBox.Forestry.0.Fireproof.baobab.name
-tile.grc.BeeBox.Forestry.0.Fireproof.sequoia.name=tile.grc.BeeBox.Forestry.0.Fireproof.sequoia.name
-tile.grc.BeeBox.Forestry.0.Fireproof.kapok.name=tile.grc.BeeBox.Forestry.0.Fireproof.kapok.name
-tile.grc.BeeBox.Forestry.0.Fireproof.ebony.name=tile.grc.BeeBox.Forestry.0.Fireproof.ebony.name
-tile.grc.BeeBox.Forestry.0.Fireproof.mahogany.name=tile.grc.BeeBox.Forestry.0.Fireproof.mahogany.name
-tile.grc.BeeBox.Forestry.0.Fireproof.balsa.name=tile.grc.BeeBox.Forestry.0.Fireproof.balsa.name
-tile.grc.BeeBox.Forestry.0.Fireproof.willow.name=tile.grc.BeeBox.Forestry.0.Fireproof.willow.name
-tile.grc.BeeBox.Forestry.0.Fireproof.walnut.name=tile.grc.BeeBox.Forestry.0.Fireproof.walnut.name
-tile.grc.BeeBox.Forestry.0.Fireproof.greenheart.name=tile.grc.BeeBox.Forestry.0.Fireproof.greenheart.name
-tile.grc.BeeBox.Forestry.1.Fireproof.cherry.name=tile.grc.BeeBox.Forestry.1.Fireproof.cherry.name
-tile.grc.BeeBox.Forestry.1.Fireproof.mahoe.name=tile.grc.BeeBox.Forestry.1.Fireproof.mahoe.name
-tile.grc.BeeBox.Forestry.1.Fireproof.poplar.name=tile.grc.BeeBox.Forestry.1.Fireproof.poplar.name
-tile.grc.BeeBox.Forestry.1.Fireproof.palm.name=tile.grc.BeeBox.Forestry.1.Fireproof.palm.name
-tile.grc.BeeBox.Forestry.1.Fireproof.papaya.name=tile.grc.BeeBox.Forestry.1.Fireproof.papaya.name
-tile.grc.BeeBox.Forestry.1.Fireproof.pine.name=tile.grc.BeeBox.Forestry.1.Fireproof.pine.name
-tile.grc.BeeBox.Forestry.1.Fireproof.plum.name=tile.grc.BeeBox.Forestry.1.Fireproof.plum.name
-tile.grc.BeeBox.Forestry.1.Fireproof.maple.name=tile.grc.BeeBox.Forestry.1.Fireproof.maple.name
-tile.grc.BeeBox.Forestry.1.Fireproof.citrus.name=tile.grc.BeeBox.Forestry.1.Fireproof.citrus.name
-tile.grc.BeeBox.Forestry.1.Fireproof.giganteum.name=tile.grc.BeeBox.Forestry.1.Fireproof.giganteum.name
-tile.grc.BeeBox.Forestry.1.Fireproof.ipe.name=tile.grc.BeeBox.Forestry.1.Fireproof.ipe.name
-tile.grc.BeeBox.Forestry.1.Fireproof.padauk.name=tile.grc.BeeBox.Forestry.1.Fireproof.padauk.name
-tile.grc.BeeBox.Forestry.1.Fireproof.cocobolo.name=tile.grc.BeeBox.Forestry.1.Fireproof.cocobolo.name
-tile.grc.BeeBox.Forestry.1.Fireproof.zebrawood.name=tile.grc.BeeBox.Forestry.1.Fireproof.zebrawood.name
+tile.grc.BeeBox.Forestry.0.Fireproof.larch.name=Пчелиный ящик из лиственницы (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.teak.name=Пчелиный ящик из тикового дерева (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.acacia.name=Пчелиный ящик из акации (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.lime.name=Пчелиный ящик из липы (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.chestnut.name=Пчелиный ящик из каштана (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.wenge.name=Пчелиный ящик из дерева венге (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.baobab.name=Пчелиный ящик из баобаба (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.sequoia.name=Пчелиный ящик из секвойи (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.kapok.name=Пчелиный ящик из хлопкового дерева (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.ebony.name=Пчелиный ящик из мирта (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.mahogany.name=Пчелиный ящик из красного дерева (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.balsa.name=Пчелиный ящик из бальзы (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.willow.name=Пчелиный ящик из ивы (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.walnut.name=Пчелиный ящик из орехового дерева (Огнеупорный)
+tile.grc.BeeBox.Forestry.0.Fireproof.greenheart.name=Пчелиный ящик из гринхарта (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.cherry.name=Пчелиный ящик из вишнёвого дерева (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.mahoe.name=Пчелиный ящик из гибискуса (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.poplar.name=Пчелиный ящик из тополя (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.palm.name=Пчелиный ящик из пальмы (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.papaya.name=Пчелиный ящик из дынного дерева (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.pine.name=Пчелиный ящик из сосны (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.plum.name=Пчелиный ящик из сливового дерева (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.maple.name=Пчелиный ящик из клёна (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.citrus.name=Пчелиный ящик из цитрусового дерева (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.giganteum.name=Пчелиный ящик из гигантской секвойи (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.ipe.name=Пчелиный ящик из муравьиного дерева (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.padauk.name=Пчелиный ящик из падука (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.cocobolo.name=Пчелиный ящик из кокоболо (Огнеупорный)
+tile.grc.BeeBox.Forestry.1.Fireproof.zebrawood.name=Пчелиный ящик из зебрано (Огнеупорный)
 
 ## BiomesOPlenty
-tile.grc.BeeBox.BiomesOPlenty.sacred_oak.name=tile.grc.BeeBox.BiomesOPlenty.sacred_oak.name
-tile.grc.BeeBox.BiomesOPlenty.cherry.name=tile.grc.BeeBox.BiomesOPlenty.cherry.name
-tile.grc.BeeBox.BiomesOPlenty.dark.name=tile.grc.BeeBox.BiomesOPlenty.dark.name
-tile.grc.BeeBox.BiomesOPlenty.fir.name=tile.grc.BeeBox.BiomesOPlenty.fir.name
-tile.grc.BeeBox.BiomesOPlenty.ethereal.name=tile.grc.BeeBox.BiomesOPlenty.ethereal.name
-tile.grc.BeeBox.BiomesOPlenty.magic.name=tile.grc.BeeBox.BiomesOPlenty.magic.name
-tile.grc.BeeBox.BiomesOPlenty.mangrove.name=tile.grc.BeeBox.BiomesOPlenty.mangrove.name
-tile.grc.BeeBox.BiomesOPlenty.palm.name=tile.grc.BeeBox.BiomesOPlenty.palm.name
-tile.grc.BeeBox.BiomesOPlenty.redwood.name=tile.grc.BeeBox.BiomesOPlenty.redwood.name
-tile.grc.BeeBox.BiomesOPlenty.willow.name=tile.grc.BeeBox.BiomesOPlenty.willow.name
-tile.grc.BeeBox.BiomesOPlenty.bamboo_thatching.name=tile.grc.BeeBox.BiomesOPlenty.bamboo_thatching.name
-tile.grc.BeeBox.BiomesOPlenty.pine.name=tile.grc.BeeBox.BiomesOPlenty.pine.name
-tile.grc.BeeBox.BiomesOPlenty.hell_bark.name=tile.grc.BeeBox.BiomesOPlenty.hell_bark.name
-tile.grc.BeeBox.BiomesOPlenty.jacaranda.name=tile.grc.BeeBox.BiomesOPlenty.jacaranda.name
-tile.grc.BeeBox.BiomesOPlenty.mahogany.name=tile.grc.BeeBox.BiomesOPlenty.mahogany.name
+tile.grc.BeeBox.BiomesOPlenty.sacred_oak.name=Пчелиный ящик из священного дуба
+tile.grc.BeeBox.BiomesOPlenty.cherry.name=Пчелиный ящик из вишнёвого дерева
+tile.grc.BeeBox.BiomesOPlenty.dark.name=Пчелиный ящик из тёмной древесины
+tile.grc.BeeBox.BiomesOPlenty.fir.name=Пчелиный ящик из пихты
+tile.grc.BeeBox.BiomesOPlenty.ethereal.name=Пчелиный ящик из эфирной древесины
+tile.grc.BeeBox.BiomesOPlenty.magic.name=Пчелиный ящик из магической древесины
+tile.grc.BeeBox.BiomesOPlenty.mangrove.name=Пчелиный ящик из мангрового дерева
+tile.grc.BeeBox.BiomesOPlenty.palm.name=Пчелиный ящик из пальмы
+tile.grc.BeeBox.BiomesOPlenty.redwood.name=Пчелиный ящик из красного дерева
+tile.grc.BeeBox.BiomesOPlenty.willow.name=Пчелиный ящик из ивы
+tile.grc.BeeBox.BiomesOPlenty.bamboo_thatching.name=Пчелиный ящик из бамбукового покрытия
+tile.grc.BeeBox.BiomesOPlenty.pine.name=Пчелиный ящик из сосны
+tile.grc.BeeBox.BiomesOPlenty.hell_bark.name=Пчелиный ящик из адского дерева
+tile.grc.BeeBox.BiomesOPlenty.jacaranda.name=Пчелиный ящик из жакаранды
+tile.grc.BeeBox.BiomesOPlenty.mahogany.name=Пчелиный ящик из махагониевой древесины
 
 ## Botania
-tile.grc.BeeBox.Botania.living_wood.name=tile.grc.BeeBox.Botania.living_wood.name
-tile.grc.BeeBox.Botania.dream_wood.name=tile.grc.BeeBox.Botania.dream_wood.name
-tile.grc.BeeBox.Botania.shimmer_wood.name=tile.grc.BeeBox.Botania.shimmer_wood.name
-tile.grc.BeeBox.Botania.shimmer_wood.desc=tile.grc.BeeBox.Botania.shimmer_wood.desc
+tile.grc.BeeBox.Botania.living_wood.name=Пчелиный ящик из жизнедерева
+tile.grc.BeeBox.Botania.dream_wood.name=Пчелиный ящик из древесины мечтаний
+tile.grc.BeeBox.Botania.shimmer_wood.name=Shimmerwood Bee Box
+tile.grc.BeeBox.Botania.shimmer_wood.desc=ZOMG Colors!
 
 ## Natura
-tile.grc.BeeBox.Natura.apple.name=tile.grc.BeeBox.Natura.apple.name
-tile.grc.BeeBox.Natura.blood.name=tile.grc.BeeBox.Natura.blood.name
-tile.grc.BeeBox.Natura.bush.name=tile.grc.BeeBox.Natura.bush.name
-tile.grc.BeeBox.Natura.darkwood.name=tile.grc.BeeBox.Natura.darkwood.name
-tile.grc.BeeBox.Natura.eucalyptus.name=tile.grc.BeeBox.Natura.eucalyptus.name
-tile.grc.BeeBox.Natura.fusewood.name=tile.grc.BeeBox.Natura.fusewood.name
-tile.grc.BeeBox.Natura.ghost.name=tile.grc.BeeBox.Natura.ghost.name
-tile.grc.BeeBox.Natura.maple.name=tile.grc.BeeBox.Natura.maple.name
-tile.grc.BeeBox.Natura.purpleheart.name=tile.grc.BeeBox.Natura.purpleheart.name
-tile.grc.BeeBox.Natura.redwood.name=tile.grc.BeeBox.Natura.redwood.name
-tile.grc.BeeBox.Natura.sakura.name=tile.grc.BeeBox.Natura.sakura.name
-tile.grc.BeeBox.Natura.silverbell.name=tile.grc.BeeBox.Natura.silverbell.name
-tile.grc.BeeBox.Natura.tiger.name=tile.grc.BeeBox.Natura.tiger.name
-tile.grc.BeeBox.Natura.willow.name=tile.grc.BeeBox.Natura.willow.name
+tile.grc.BeeBox.Natura.apple.name=Apple Bee Box
+tile.grc.BeeBox.Natura.blood.name=Пчелиный ящик из древесины кровавого дерева
+tile.grc.BeeBox.Natura.bush.name=Пчелиный ящик из древесины хмельного дерева
+tile.grc.BeeBox.Natura.darkwood.name=Пчелиный ящик из древесины тёмного дерева
+tile.grc.BeeBox.Natura.eucalyptus.name=Пчелиный ящик из древесины эвкалипта
+tile.grc.BeeBox.Natura.fusewood.name=Пчелиный ящик из древесины плавкого дерева
+tile.grc.BeeBox.Natura.ghost.name=Пчелиный ящик из древесины призрачного дерева
+tile.grc.BeeBox.Natura.maple.name=Пчелиный ящик из древесины клёна
+tile.grc.BeeBox.Natura.purpleheart.name=Пчелиный ящик из древесины щирицы
+tile.grc.BeeBox.Natura.redwood.name=Пчелиный ящик из древесины красного дерева
+tile.grc.BeeBox.Natura.sakura.name=Пчелиный ящик из древесины сакуры
+tile.grc.BeeBox.Natura.silverbell.name=Пчелиный ящик из древесины галезии
+tile.grc.BeeBox.Natura.tiger.name=Пчелиный ящик из древесины тигрового дерева
+tile.grc.BeeBox.Natura.willow.name=Пчелиный ящик из древесины ивы
 
 # Other Blocks
 tile.grc.beeHive.name=Пчелиный улей
@@ -129,11 +129,11 @@ item.grc.honeyComb.empty.name=Пустые медовые соты
 item.grc.honeyComb.full.name=Медовые соты
 item.grc.honeyJar.name=Мёд
 item.grc.bee.name=Пчела
-item.grc.FoodBottleFluidHoney.name=item.grc.FoodBottleFluidHoney.name
-item.grc.BucketFluidHoney.name=item.grc.BucketFluidHoney.name
-item.grcbees.BeesWax.normal.name=item.grcbees.BeesWax.normal.name
-item.grcbees.BeesWax.red.name=item.grcbees.BeesWax.red.name
-item.grcbees.BeesWax.black.name=item.grcbees.BeesWax.black.name
+item.grc.FoodBottleFluidHoney.name=Бутылка мёда
+item.grc.BucketFluidHoney.name=Ведро мёда
+item.grcbees.BeesWax.normal.name=Пчелиный воск
+item.grcbees.BeesWax.red.name=Красный пчелиный воск
+item.grcbees.BeesWax.black.name=Черный пчелиный воск
 
 # Tooltips
 grc.bees.item.honeyComb.deprecated=Этот предмет устарел, положите его в сетку создания, чтобы получить новый.
@@ -142,45 +142,45 @@ grc.bees.item.honeyComb.deprecated=Этот предмет устарел, по�
 container.grc.beeBox=Пчелиный ящик
 
 # Fluids
-fluid.grc.honey=fluid.grc.honey
+fluid.grc.honey=Мёд
 fluid.grc.honeyMead0=Медовуха
 fluid.grc.honeyMead1=Медовуха
 fluid.grc.honeyMead2=Медовуха
 fluid.grc.honeyMead3=Медовуха
-fluid.grc.honeyMead4=fluid.grc.honeyMead4
-fluid.grc.honeyMead5=fluid.grc.honeyMead5
-fluid.grc.honeyMead6=fluid.grc.honeyMead6
+fluid.grc.honeyMead4=Медовуха
+fluid.grc.honeyMead5=Медовуха
+fluid.grc.honeyMead6=Медовуха
 
 # Fluid Bottles
-item.grc.BottleFluidHoney.name=item.grc.BottleFluidHoney.name
+item.grc.BottleFluidHoney.name=Мёд
 
 # Fluid Buckets
-item.bucket.fluid.grc.honey.name=item.bucket.fluid.grc.honey.name
+item.bucket.fluid.grc.honey.name=Ведро мёда
 item.bucket.fluid.grc.honeyMead0.name=Ведро медовухи
 item.bucket.fluid.grc.honeyMead1.name=Ведро медовухи
 item.bucket.fluid.grc.honeyMead2.name=Ведро медовухи
 item.bucket.fluid.grc.honeyMead3.name=Ведро медовухи
-item.bucket.fluid.grc.honeyMead4.name=item.bucket.fluid.grc.honeyMead4.name
-item.bucket.fluid.grc.honeyMead5.name=item.bucket.fluid.grc.honeyMead5.name
-item.bucket.fluid.grc.honeyMead6.name=item.bucket.fluid.grc.honeyMead6.name
+item.bucket.fluid.grc.honeyMead4.name=Ведро медовухи
+item.bucket.fluid.grc.honeyMead5.name=Ведро медовухи
+item.bucket.fluid.grc.honeyMead6.name=Ведро медовухи
 
 # Fluid Blocks
-tile.grc.BlockFluidHoney.name=tile.grc.BlockFluidHoney.name
+tile.grc.BlockFluidHoney.name=Мёд
 tile.fluid.grc.honeyMead0.name=Медовуха
 tile.fluid.grc.honeyMead1.name=Медовуха
 tile.fluid.grc.honeyMead2.name=Медовуха
 tile.fluid.grc.honeyMead3.name=Медовуха
-tile.fluid.grc.honeyMead4.name=tile.fluid.grc.honeyMead4.name
-tile.fluid.grc.honeyMead5.name=tile.fluid.grc.honeyMead5.name
-tile.fluid.grc.honeyMead6.name=tile.fluid.grc.honeyMead6.name
+tile.fluid.grc.honeyMead4.name=Медовуха
+tile.fluid.grc.honeyMead5.name=Медовуха
+tile.fluid.grc.honeyMead6.name=Медовуха
 
 # Fluid Tags
-grc.fluids.tag.mead=grc.fluids.tag.mead
-grc.fluids.tag.honey=grc.fluids.tag.honey
+grc.fluids.tag.mead=Медовуха
+grc.fluids.tag.honey=Мёд
 
 # Other
 grc.bees.bonus_prefix=Бонус :
 grc.bees.bees_prefix=Пчёлы :
 grc.bees.honey_prefix=Мёд :
-grc.bees.growth_rate_prefix=grc.bees.growth_rate_prefix
-grc.bees.growth_rate_value=grc.bees.growth_rate_value
+grc.bees.growth_rate_prefix=Темп роста :
+grc.bees.growth_rate_value=%d%%

@@ -2,71 +2,71 @@
 itemGroup.creative_tab_grccore=Growthcraft
 
 # Blocks
-tile.grc.etfuturum_fence_rope_acacia.name=tile.grc.etfuturum_fence_rope_acacia.name
-tile.grc.etfuturum_fence_rope_birch.name=tile.grc.etfuturum_fence_rope_birch.name
-tile.grc.etfuturum_fence_rope_dark_oak.name=tile.grc.etfuturum_fence_rope_dark_oak.name
-tile.grc.etfuturum_fence_rope_jungle.name=tile.grc.etfuturum_fence_rope_jungle.name
-tile.grc.etfuturum_fence_rope_oak.name=tile.grc.etfuturum_fence_rope_oak.name
-tile.grc.etfuturum_fence_rope_spruce.name=tile.grc.etfuturum_fence_rope_spruce.name
+tile.grc.etfuturum_fence_rope_acacia.name=Забор с верёвкой (Акация)
+tile.grc.etfuturum_fence_rope_birch.name=Забор с верёвкой (Берёзовый)
+tile.grc.etfuturum_fence_rope_dark_oak.name=Забор с верёвкой (Тёмный дуб)
+tile.grc.etfuturum_fence_rope_jungle.name=Забор с верёвкой (Тропический)
+tile.grc.etfuturum_fence_rope_oak.name=Забор с верёвкой (Дубовый)
+tile.grc.etfuturum_fence_rope_spruce.name=Забор с верёвкой (Еловый)
 tile.grc.fenceRope.name=Забор с верёвкой
-tile.grc.netherBrickFenceRope.name=tile.grc.netherBrickFenceRope.name
-tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
+tile.grc.netherBrickFenceRope.name=Забор с верёвкой (Адский)
+tile.grc.naturaFenceRope.name=Забор с верёвкой (%s)
 tile.grc.ropeBlock.name=Верёвка
-tile.grccore.salt_block.name=tile.grccore.salt_block.name
+tile.grccore.salt_block.name=Блок соли
 
 # Items
 item.grc.rope.name=Верёвка
-item.grccore.salt.name=item.grccore.salt.name
-item.grccore.bucketSalt.name=item.grccore.bucketSalt.name
-item.grccore.bottleSalt.name=item.grccore.bottleSalt.name
-item.grccore.crowbar.black.name=item.grccore.crowbar.black.name
-item.grccore.crowbar.red.name=item.grccore.crowbar.red.name
-item.grccore.crowbar.green.name=item.grccore.crowbar.green.name
-item.grccore.crowbar.brown.name=item.grccore.crowbar.brown.name
-item.grccore.crowbar.blue.name=item.grccore.crowbar.blue.name
-item.grccore.crowbar.purple.name=item.grccore.crowbar.purple.name
-item.grccore.crowbar.cyan.name=item.grccore.crowbar.cyan.name
-item.grccore.crowbar.light_gray.name=item.grccore.crowbar.light_gray.name
-item.grccore.crowbar.gray.name=item.grccore.crowbar.gray.name
-item.grccore.crowbar.pink.name=item.grccore.crowbar.pink.name
-item.grccore.crowbar.lime.name=item.grccore.crowbar.lime.name
-item.grccore.crowbar.yellow.name=item.grccore.crowbar.yellow.name
-item.grccore.crowbar.light_blue.name=item.grccore.crowbar.light_blue.name
-item.grccore.crowbar.magenta.name=item.grccore.crowbar.magenta.name
-item.grccore.crowbar.orange.name=item.grccore.crowbar.orange.name
-item.grccore.crowbar.white.name=item.grccore.crowbar.white.name
+item.grccore.salt.name=Соль
+item.grccore.bucketSalt.name=Ведро соли
+item.grccore.bottleSalt.name=Бутылка соли
+item.grccore.crowbar.black.name=Монтировка (Чёрная)
+item.grccore.crowbar.red.name=Монтировка (Красная)
+item.grccore.crowbar.green.name=Монтировка (Зелёная)
+item.grccore.crowbar.brown.name=Монтировка (Коричневая)
+item.grccore.crowbar.blue.name=Монтировка (Синяя)
+item.grccore.crowbar.purple.name=Монтировка (Фиолетовая)
+item.grccore.crowbar.cyan.name=Монтировка (Бирюзовая)
+item.grccore.crowbar.light_gray.name=Монтировка (Светло-серая)
+item.grccore.crowbar.gray.name=Монтировка (Серая)
+item.grccore.crowbar.pink.name=Монтировка (Розовая)
+item.grccore.crowbar.lime.name=Монтировка (Лаймовая)
+item.grccore.crowbar.yellow.name=Монтировка (Жёлтая)
+item.grccore.crowbar.light_blue.name=Монтировка (Голубая)
+item.grccore.crowbar.magenta.name=Монтировка (Пурпурная)
+item.grccore.crowbar.orange.name=Монтировка (Оранжевая)
+item.grccore.crowbar.white.name=Монтировка (Белая)
 
 # Fluids
 fluid.tile.water=Вода
 fluid.tile.lava=Лава
 
 ## Salt Water
-fluid.grccore.SaltWater=fluid.grccore.SaltWater
-tile.grccore.BlockFluidSaltWater.name=tile.grccore.BlockFluidSaltWater.name
-item.grccore.BottleFluidSaltWater.name=item.grccore.BottleFluidSaltWater.name
-item.bucket.fluid.grccore.SaltWater.name=item.bucket.fluid.grccore.SaltWater.name
+fluid.grccore.SaltWater=Солёная вода
+tile.grccore.BlockFluidSaltWater.name=Солёная вода
+item.grccore.BottleFluidSaltWater.name=Бутылка солёной воды
+item.bucket.fluid.grccore.SaltWater.name=Ведро солёной воды
 
 # Other
 achievementPage.pageGrowthCraft=Growthcraft
 
 # Colors
-grc.color.Black=grc.color.Black
-grc.color.Blue=grc.color.Blue
-grc.color.Brown=grc.color.Brown
-grc.color.Cyan=grc.color.Cyan
-grc.color.Gray=grc.color.Gray
-grc.color.Green=grc.color.Green
-grc.color.LightBlue=grc.color.LightBlue
-grc.color.LightGray=grc.color.LightGray
-grc.color.Lime=grc.color.Lime
-grc.color.Magenta=grc.color.Magenta
-grc.color.Orange=grc.color.Orange
-grc.color.Pink=grc.color.Pink
-grc.color.Purple=grc.color.Purple
-grc.color.Red=grc.color.Red
-grc.color.Transparent=grc.color.Transparent
-grc.color.White=grc.color.White
-grc.color.Yellow=grc.color.Yellow
+grc.color.Black=Чёрный
+grc.color.Blue=Синий
+grc.color.Brown=Коричневый
+grc.color.Cyan=Бирюзовый
+grc.color.Gray=Серый
+grc.color.Green=Зелёный
+grc.color.LightBlue=Голубой
+grc.color.LightGray=Светло-серый
+grc.color.Lime=Лаймовый
+grc.color.Magenta=Пурпурный
+grc.color.Orange=Оранжевый
+grc.color.Pink=Розовый
+grc.color.Purple=Фиолетовый
+grc.color.Red=Красный
+grc.color.Transparent=Прозрачный
+grc.color.White=Белый
+grc.color.Yellow=Жёлтый
 
 # Formats and Units
 grc.format.value.true=ДА
@@ -98,37 +98,37 @@ grc.format.crop.growth_prefix=Рост :
 grc.format.crop.mature=Выросло
 grc.format.crop.progress_format=%d%%
 grc.format.paddy.hasFluid=Есть жидкость :
-grccore.device.heated.multiplier.format=grccore.device.heated.multiplier.format
-grccore.device.heated.prefix=grccore.device.heated.prefix
-grccore.device.heated.state.false=grccore.device.heated.state.false
-grccore.device.progress.format=grccore.device.progress.format
-grccore.device.progress.prefix=grccore.device.progress.prefix
+grccore.device.heated.multiplier.format= %d%%
+grccore.device.heated.prefix=Нагрев :
+grccore.device.heated.state.false= <Холодный>
+grccore.device.progress.format= %d%%
+grccore.device.progress.prefix=Прогресс :
 grccore.waila.option.DisplayFluidContent=Жидкостные резервуары
-grccore.waila.option.DisplayHeated=grccore.waila.option.DisplayHeated
+grccore.waila.option.DisplayHeated=Нагретое оборудование
 
 # Effects
-grc.effect.chance.format=grc.effect.chance.format
-grc.effect.extinguish.desc=grc.effect.extinguish.desc
-grc.effect.ignite.desc=grc.effect.ignite.desc
-grc.effect.list.head=grc.effect.list.head
-grc.effect.null.desc=grc.effect.null.desc
-grc.effect.random_list.head=grc.effect.random_list.head
-grc.effect.remove_potion_effect.format=grc.effect.remove_potion_effect.format
-grc.effect.weighted_random_list.format=grc.effect.weighted_random_list.format
+grc.effect.chance.format=%d%% Chance of
+grc.effect.extinguish.desc=Extinguishes Burning
+grc.effect.ignite.desc=Sets Fire for %ds
+grc.effect.list.head=Applies the following:
+grc.effect.null.desc=Does Nothing
+grc.effect.random_list.head=Applies one of the following:
+grc.effect.remove_potion_effect.format=Removes %s
+grc.effect.weighted_random_list.format=%d%% Chance of
 
 # GUI
-gui.grc.progress.format=gui.grc.progress.format
+gui.grc.progress.format=%s : %d / %d
 
 # Inventory
-grc.inventory.internal.name=grc.inventory.internal.name
+grc.inventory.internal.name=Инвентарь
 
 # Tooltips
-grc.tooltip.detailed_information=grc.tooltip.detailed_information
+grc.tooltip.detailed_information=Удерживайте %s, чтобы показать подробную информацию
 
 # Achievements
-achievement.trusty_hardware=achievement.trusty_hardware
-achievement.trusty_hardware.desc=achievement.trusty_hardware.desc
-achievement.half_life_confirmed=achievement.half_life_confirmed
-achievement.half_life_confirmed.desc=achievement.half_life_confirmed.desc
-achievement.salty_situation=achievement.salty_situation
-achievement.salty_situation.desc=achievement.salty_situation.desc
+achievement.trusty_hardware=Надёжное оборудование
+achievement.trusty_hardware.desc=Хранить в местах недоступных для Эндермена.
+achievement.half_life_confirmed=Half-Life подтвержден!
+achievement.half_life_confirmed.desc=Уничтожьте зомби при помощи монтировки
+achievement.salty_situation=Солёная ситуация
+achievement.salty_situation.desc=Наполните ведро солёной водой
