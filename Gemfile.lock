@@ -9,7 +9,7 @@ GEM
       tzinfo (~> 1.1)
     colorize (0.7.7)
     i18n (0.7.0)
-    json (1.8.3)
+    json (1.8.6)
     minitest (5.8.4)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
@@ -23,4 +23,4 @@ DEPENDENCIES
   colorize
 
 BUNDLED WITH
-   1.11.2
+   1.13.7
