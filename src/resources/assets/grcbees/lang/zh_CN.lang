@@ -175,10 +175,10 @@ tile.fluid.grc.honeyMead5.name=蜜酒
 tile.fluid.grc.honeyMead6.name=蜜酒
 
 # Fluid Tags
-grc.fluids.tag.mead=grc.fluids.tag.mead
-grc.fluids.tag.honey=grc.fluids.tag.honey
+grc.fluids.tag.mead=蜜酒
+grc.fluids.tag.honey=蜂蜜
 
-# Other
+# NEI
 grc.bees.bonus_prefix=加成：
 grc.bees.bees_prefix=蜜蜂：
 grc.bees.honey_prefix=蜂蜜数量：

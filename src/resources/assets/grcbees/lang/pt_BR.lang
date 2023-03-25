@@ -175,12 +175,12 @@ tile.fluid.grc.honeyMead5.name=Hidromel
 tile.fluid.grc.honeyMead6.name=Hidromel
 
 # Fluid Tags
-grc.fluids.tag.mead=grc.fluids.tag.mead
-grc.fluids.tag.honey=grc.fluids.tag.honey
+grc.fluids.tag.mead=Hidromel
+grc.fluids.tag.honey=Mel
 
-# Other
-grc.bees.bonus_prefix=Bonus :
-grc.bees.bees_prefix=Abelhas :
-grc.bees.honey_prefix=Mel :
-grc.bees.growth_rate_prefix=Taxa de Crescimento :
+# NEI
+grc.bees.bonus_prefix=Bonus:
+grc.bees.bees_prefix=Abelhas:
+grc.bees.honey_prefix=Mel:
+grc.bees.growth_rate_prefix=Taxa de Crescimento:
 grc.bees.growth_rate_value=%d%%

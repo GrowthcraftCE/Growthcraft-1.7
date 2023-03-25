@@ -39,3 +39,4 @@
 * HanatakeYurii (French)
 * marcoasfonseca (Portuguese)
 * Mazdallier (French)
+* Doenerstyle (German)

@@ -7,28 +7,28 @@ item.grc.rice.name=Reis
 item.grc.riceBall.name=Onigiri
 
 # Fluids
-fluid.grc.riceSake0=Sake
+fluid.grc.riceSake0=Sake Moromi
 fluid.grc.riceSake1=Sake
 fluid.grc.riceSake2=Sake
 fluid.grc.riceSake3=Sake
-fluid.grc.riceSake4=fluid.grc.riceSake4
-fluid.grc.riceSake5=fluid.grc.riceSake5
-fluid.grc.riceSake6=fluid.grc.riceSake6
+fluid.grc.riceSake4=Himmlischer Sake
+fluid.grc.riceSake5=Sake
+fluid.grc.riceSake6=Sake
 
 # Fluid Buckets
-item.bucket.fluid.grc.riceSake0.name=item.bucket.fluid.grc.riceSake0.name
-item.bucket.fluid.grc.riceSake1.name=item.bucket.fluid.grc.riceSake1.name
-item.bucket.fluid.grc.riceSake2.name=item.bucket.fluid.grc.riceSake2.name
-item.bucket.fluid.grc.riceSake3.name=item.bucket.fluid.grc.riceSake3.name
-item.bucket.fluid.grc.riceSake4.name=item.bucket.fluid.grc.riceSake4.name
-item.bucket.fluid.grc.riceSake5.name=item.bucket.fluid.grc.riceSake5.name
-item.bucket.fluid.grc.riceSake6.name=item.bucket.fluid.grc.riceSake6.name
+item.bucket.fluid.grc.riceSake0.name=Eimer mit Sake Moromi
+item.bucket.fluid.grc.riceSake1.name=Eimer mit Sake
+item.bucket.fluid.grc.riceSake2.name=Eimer mit Sake
+item.bucket.fluid.grc.riceSake3.name=Eimer mit Sake
+item.bucket.fluid.grc.riceSake4.name=Eimer mit Himmlischem Sake
+item.bucket.fluid.grc.riceSake5.name=Eimer mit Sake
+item.bucket.fluid.grc.riceSake6.name=Eimer mit Sake
 
 # Fluid Blocks
-tile.fluid.grc.riceSake0.name=Sake
+tile.fluid.grc.riceSake0.name=Sake Moromi
 tile.fluid.grc.riceSake1.name=Sake
 tile.fluid.grc.riceSake2.name=Sake
 tile.fluid.grc.riceSake3.name=Sake
-tile.fluid.grc.riceSake4.name=tile.fluid.grc.riceSake4.name
-tile.fluid.grc.riceSake5.name=tile.fluid.grc.riceSake5.name
-tile.fluid.grc.riceSake6.name=tile.fluid.grc.riceSake6.name
+tile.fluid.grc.riceSake4.name=Himmlischer Sake
+tile.fluid.grc.riceSake5.name=Sake
+tile.fluid.grc.riceSake6.name=Sake

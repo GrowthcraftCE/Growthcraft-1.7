@@ -2,133 +2,133 @@
 itemGroup.creative_tab_grccore=Growthcraft
 
 # Blocks
-tile.grc.etfuturum_fence_rope_acacia.name=tile.grc.etfuturum_fence_rope_acacia.name
-tile.grc.etfuturum_fence_rope_birch.name=tile.grc.etfuturum_fence_rope_birch.name
-tile.grc.etfuturum_fence_rope_dark_oak.name=tile.grc.etfuturum_fence_rope_dark_oak.name
-tile.grc.etfuturum_fence_rope_jungle.name=tile.grc.etfuturum_fence_rope_jungle.name
-tile.grc.etfuturum_fence_rope_oak.name=tile.grc.etfuturum_fence_rope_oak.name
-tile.grc.etfuturum_fence_rope_spruce.name=tile.grc.etfuturum_fence_rope_spruce.name
+tile.grc.etfuturum_fence_rope_acacia.name=Zaun mit Seil (Akazie)
+tile.grc.etfuturum_fence_rope_birch.name=Zaun mit Seil (Birke)
+tile.grc.etfuturum_fence_rope_dark_oak.name=Zaun mit Seil (Schwarzeiche)
+tile.grc.etfuturum_fence_rope_jungle.name=Zaun mit Seil (Dschungel)
+tile.grc.etfuturum_fence_rope_oak.name=Zaun mit Seil (Eiche)
+tile.grc.etfuturum_fence_rope_spruce.name=Zaun mit Seil (Fichte)
 tile.grc.fenceRope.name=Zaun mit Seil
-tile.grc.netherBrickFenceRope.name=tile.grc.netherBrickFenceRope.name
-tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
+tile.grc.netherBrickFenceRope.name=Zaun mit Seil (Netherziegel)
+tile.grc.naturaFenceRope.name=Zaun mit Seil (%s)
 tile.grc.ropeBlock.name=Seil
-tile.grccore.salt_block.name=tile.grccore.salt_block.name
+tile.grccore.salt_block.name=Salzblock
 
 # Items
 item.grc.rope.name=Seil
-item.grccore.salt.name=item.grccore.salt.name
-item.grccore.bucketSalt.name=item.grccore.bucketSalt.name
-item.grccore.bottleSalt.name=item.grccore.bottleSalt.name
-item.grccore.crowbar.black.name=item.grccore.crowbar.black.name
-item.grccore.crowbar.red.name=item.grccore.crowbar.red.name
-item.grccore.crowbar.green.name=item.grccore.crowbar.green.name
-item.grccore.crowbar.brown.name=item.grccore.crowbar.brown.name
-item.grccore.crowbar.blue.name=item.grccore.crowbar.blue.name
-item.grccore.crowbar.purple.name=item.grccore.crowbar.purple.name
-item.grccore.crowbar.cyan.name=item.grccore.crowbar.cyan.name
-item.grccore.crowbar.light_gray.name=item.grccore.crowbar.light_gray.name
-item.grccore.crowbar.gray.name=item.grccore.crowbar.gray.name
-item.grccore.crowbar.pink.name=item.grccore.crowbar.pink.name
-item.grccore.crowbar.lime.name=item.grccore.crowbar.lime.name
-item.grccore.crowbar.yellow.name=item.grccore.crowbar.yellow.name
-item.grccore.crowbar.light_blue.name=item.grccore.crowbar.light_blue.name
-item.grccore.crowbar.magenta.name=item.grccore.crowbar.magenta.name
-item.grccore.crowbar.orange.name=item.grccore.crowbar.orange.name
-item.grccore.crowbar.white.name=item.grccore.crowbar.white.name
+item.grccore.salt.name=Salz
+item.grccore.bucketSalt.name=Eimer mit Salz
+item.grccore.bottleSalt.name=Flasche mit Salz
+item.grccore.crowbar.black.name=Brechstange (Schwarz)
+item.grccore.crowbar.red.name=Brechstange (Rot)
+item.grccore.crowbar.green.name=Brechstange (Grün)
+item.grccore.crowbar.brown.name=Brechstange (Braun)
+item.grccore.crowbar.blue.name=Brechstange (Blau)
+item.grccore.crowbar.purple.name=Brechstange (Lila)
+item.grccore.crowbar.cyan.name=Brechstange (Cyan)
+item.grccore.crowbar.light_gray.name=Brechstange (Hellgrau)
+item.grccore.crowbar.gray.name=Brechstange (Grau)
+item.grccore.crowbar.pink.name=Brechstange (Pink)
+item.grccore.crowbar.lime.name=Brechstange (Lime)
+item.grccore.crowbar.yellow.name=Brechstange (Gelb)
+item.grccore.crowbar.light_blue.name=Brechstange (Hellblue)
+item.grccore.crowbar.magenta.name=Brechstange (Magenta)
+item.grccore.crowbar.orange.name=Brechstange (Orange)
+item.grccore.crowbar.white.name=Brechstange (Weiß)
 
 # Fluids
 fluid.tile.water=Wasser
 fluid.tile.lava=Lava
 
 ## Salt Water
-fluid.grccore.SaltWater=fluid.grccore.SaltWater
-tile.grccore.BlockFluidSaltWater.name=tile.grccore.BlockFluidSaltWater.name
-item.grccore.BottleFluidSaltWater.name=item.grccore.BottleFluidSaltWater.name
-item.bucket.fluid.grccore.SaltWater.name=item.bucket.fluid.grccore.SaltWater.name
+fluid.grccore.SaltWater=Salzwasser
+tile.grccore.BlockFluidSaltWater.name=Salzwasser
+item.grccore.BottleFluidSaltWater.name=Flasche mit Salzwasser
+item.bucket.fluid.grccore.SaltWater.name=Eimer mit Salzwasser
 
 # Other
 achievementPage.pageGrowthCraft=Growthcraft
 
 # Colors
-grc.color.Black=grc.color.Black
-grc.color.Blue=grc.color.Blue
-grc.color.Brown=grc.color.Brown
-grc.color.Cyan=grc.color.Cyan
-grc.color.Gray=grc.color.Gray
-grc.color.Green=grc.color.Green
-grc.color.LightBlue=grc.color.LightBlue
-grc.color.LightGray=grc.color.LightGray
-grc.color.Lime=grc.color.Lime
-grc.color.Magenta=grc.color.Magenta
-grc.color.Orange=grc.color.Orange
-grc.color.Pink=grc.color.Pink
-grc.color.Purple=grc.color.Purple
-grc.color.Red=grc.color.Red
-grc.color.Transparent=grc.color.Transparent
-grc.color.White=grc.color.White
-grc.color.Yellow=grc.color.Yellow
+grc.color.Black=Schwarz
+grc.color.Blue=Blau
+grc.color.Brown=Braun
+grc.color.Cyan=Cyan
+grc.color.Gray=Grau
+grc.color.Green=Grün
+grc.color.LightBlue=Hellblau
+grc.color.LightGray=Hellgrau
+grc.color.Lime=Lime
+grc.color.Magenta=Magenta
+grc.color.Orange=Orange
+grc.color.Pink=Pink
+grc.color.Purple=Lila
+grc.color.Red=Rot
+grc.color.Transparent=Transparent
+grc.color.White=Weiß
+grc.color.Yellow=Gelb
 
 # Formats and Units
-grc.format.value.true=grc.format.value.true
-grc.format.value.false=grc.format.value.false
-grc.format.state.true=grc.format.state.true
-grc.format.state.false=grc.format.state.false
-grc.format.invalid_fluid=grc.format.invalid_fluid
+grc.format.value.true=JA
+grc.format.value.false=NEIN
+grc.format.state.true=AN
+grc.format.state.false=AUS
+grc.format.invalid_fluid=<Ungültige Flüssigkeit>
 # Displayed for items
-grc.format.itemslot.empty=grc.format.itemslot.empty
-grc.format.itemslot.invalid=grc.format.itemslot.invalid
+grc.format.itemslot.empty=<Leer>
+grc.format.itemslot.invalid=<Ungültiger Gegenstand>
 
 # Modifier name
-grc.format.booze.name=grc.format.booze.name
+grc.format.booze.name=%2$s %1$s
 
 # When a fluid is not a booze
-grc.format.fluid.name=grc.format.fluid.name
+grc.format.fluid.name=%1$s
 
 # Name (stack_size)
-grc.format.itemslot.item=grc.format.itemslot.item
+grc.format.itemslot.item=%s (x%d)
 # Displayed for tile entities with multiple tanks, %d is the tank index + 1
-grc.format.tank_id=grc.format.tank_id
+grc.format.tank_id=Tank %d:
 # When the tank is empty
-grc.format.tank.empty=grc.format.tank.empty
+grc.format.tank.empty=<Leer>
 # %s is the fluid name
-grc.format.tank.content_suffix=grc.format.tank.content_suffix
+grc.format.tank.content_suffix=mB von %s
 
 # Waila Tooltips
-grc.format.crop.growth_prefix=grc.format.crop.growth_prefix
-grc.format.crop.mature=grc.format.crop.mature
-grc.format.crop.progress_format=grc.format.crop.progress_format
-grc.format.paddy.hasFluid=grc.format.paddy.hasFluid
-grccore.device.heated.multiplier.format=grccore.device.heated.multiplier.format
-grccore.device.heated.prefix=grccore.device.heated.prefix
-grccore.device.heated.state.false=grccore.device.heated.state.false
-grccore.device.progress.format=grccore.device.progress.format
-grccore.device.progress.prefix=grccore.device.progress.prefix
-grccore.waila.option.DisplayFluidContent=grccore.waila.option.DisplayFluidContent
-grccore.waila.option.DisplayHeated=grccore.waila.option.DisplayHeated
+grc.format.crop.growth_prefix=Wachstum:
+grc.format.crop.mature=Reif
+grc.format.crop.progress_format=%d%%
+grc.format.paddy.hasFluid=Hat Flüssigkeit:
+grccore.device.heated.multiplier.format= %d%%
+grccore.device.heated.prefix=Hitze:
+grccore.device.heated.state.false= <Kalt>
+grccore.device.progress.format= %d%%
+grccore.device.progress.prefix=Fortschritt:
+grccore.waila.option.DisplayFluidContent=Flüssigkeitstanks
+grccore.waila.option.DisplayHeated=Beheizte Geräte
 
 # Effects
-grc.effect.chance.format=grc.effect.chance.format
-grc.effect.extinguish.desc=grc.effect.extinguish.desc
-grc.effect.ignite.desc=grc.effect.ignite.desc
-grc.effect.list.head=grc.effect.list.head
-grc.effect.null.desc=grc.effect.null.desc
-grc.effect.random_list.head=grc.effect.random_list.head
-grc.effect.remove_potion_effect.format=grc.effect.remove_potion_effect.format
-grc.effect.weighted_random_list.format=grc.effect.weighted_random_list.format
+grc.effect.chance.format=%d%% Chance von
+grc.effect.extinguish.desc=Löscht Feuer
+grc.effect.ignite.desc=Legt Feuer für %ds
+grc.effect.list.head=Bewirkt folgendes:
+grc.effect.null.desc=Tut nichts
+grc.effect.random_list.head=Bewirkt eins der folgenden:
+grc.effect.remove_potion_effect.format=Entfernt %s
+grc.effect.weighted_random_list.format=%d%% Chance auf
 
 # GUI
-gui.grc.progress.format=gui.grc.progress.format
+gui.grc.progress.format=%s : %d / %d
 
 # Inventory
-grc.inventory.internal.name=grc.inventory.internal.name
+grc.inventory.internal.name=Inventar
 
 # Tooltips
-grc.tooltip.detailed_information=grc.tooltip.detailed_information
+grc.tooltip.detailed_information=Halte %s für detaillierte Information
 
 # Achievements
-achievement.trusty_hardware=achievement.trusty_hardware
-achievement.trusty_hardware.desc=achievement.trusty_hardware.desc
-achievement.half_life_confirmed=achievement.half_life_confirmed
-achievement.half_life_confirmed.desc=achievement.half_life_confirmed.desc
-achievement.salty_situation=achievement.salty_situation
-achievement.salty_situation.desc=achievement.salty_situation.desc
+achievement.trusty_hardware=Vertrauensvolle Hardware
+achievement.trusty_hardware.desc=Außer Reichweite von Endermen aufbewahren.
+achievement.half_life_confirmed=Half-Life Confirmed!
+achievement.half_life_confirmed.desc=Besiege einen Zombie mit einer Brechstange
+achievement.salty_situation=Salzige Situation
+achievement.salty_situation.desc=Fülle einen Eimer mit Salzwasser

@@ -89,17 +89,17 @@ grc.cellar.format.tipsy_chance=Шанс опьянения: %d%%
 grc.cellar.item.booze_bucket.deprecated=УСТАРЕЛО, положите в сетку создания, чтобы обновить
 grc.cellar.item.booze_bucket.deprecated_suffix= (УСТАРЕЛО)
 
-grc.cellar.brew_kettle.brewing_prefix=Варка :
-grc.cellar.brew_kettle.itemslot.item=Предмет : %s
-grc.cellar.brew_kettle.itemslot.residue=Остаток : %s
-grc.cellar.ferment_barrel.itemslot.modifier=Модификатор : %s
+grc.cellar.brew_kettle.brewing_prefix=Варка:
+grc.cellar.brew_kettle.itemslot.item=Предмет: %s
+grc.cellar.brew_kettle.itemslot.residue=Остаток: %s
+grc.cellar.ferment_barrel.itemslot.modifier=Модификатор: %s
 grc.cellar.ferment_jar.itemslot.yeast=%s
-grc.cellar.fruit_press.itemslot.item=Предмет : %s
-grc.cellar.fruit_press.itemslot.residue=Остаток : %s
+grc.cellar.fruit_press.itemslot.item=Предмет: %s
+grc.cellar.fruit_press.itemslot.residue=Остаток: %s
 grc.cellar.fruit_presser.state.invalid=<Invalid>
 grc.cellar.fruit_presser.state.pressed=Прессуется
 grc.cellar.fruit_presser.state.unpressed=Не спрессовано
-grc.cellar.fruit_presser.state_prefix=Состояние :
+grc.cellar.fruit_presser.state_prefix=Состояние:
 
 # Waila Tooltips
 grccellar.waila.option.FruitPressExtras=Плодовый пресс дополнительно

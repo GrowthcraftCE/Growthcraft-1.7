@@ -87,34 +87,27 @@ grc.format.fluid.name=%1$s
 # Name (stack_size)
 grc.format.itemslot.item=%s (x%d)
 # Displayed for tile entities with multiple tanks, %d is the tank index + 1
-grc.format.tank_id=Резервуар %d :
+grc.format.tank_id=Резервуар %d:
 # When the tank is empty
 grc.format.tank.empty=<Пусто>
 # %s is the fluid name
 grc.format.tank.content_suffix=мВ %s
 
 # Waila Tooltips
-grc.format.crop.growth_prefix=Рост :
+grc.format.crop.growth_prefix=Рост:
 grc.format.crop.mature=Выросло
 grc.format.crop.progress_format=%d%%
-grc.format.paddy.hasFluid=Есть жидкость :
+grc.format.paddy.hasFluid=Есть жидкость:
 grccore.device.heated.multiplier.format= %d%%
-grccore.device.heated.prefix=Нагрев :
+grccore.device.heated.prefix=Нагрев:
 grccore.device.heated.state.false= <Холодный>
 grccore.device.progress.format= %d%%
-grccore.device.progress.prefix=Прогресс :
+grccore.device.progress.prefix=Прогресс:
 grccore.waila.option.DisplayFluidContent=Жидкостные резервуары
 grccore.waila.option.DisplayHeated=Нагретое оборудование
 
 # Effects
-grc.effect.chance.format=%d%% Chance of
-grc.effect.extinguish.desc=Extinguishes Burning
-grc.effect.ignite.desc=Sets Fire for %ds
-grc.effect.list.head=Applies the following:
-grc.effect.null.desc=Does Nothing
-grc.effect.random_list.head=Applies one of the following:
-grc.effect.remove_potion_effect.format=Removes %s
-grc.effect.weighted_random_list.format=%d%% Chance of
+
 
 # GUI
 gui.grc.progress.format=%s : %d / %d
