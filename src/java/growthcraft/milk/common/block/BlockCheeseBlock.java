@@ -47,6 +47,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
@@ -162,10 +163,14 @@ public class BlockCheeseBlock extends GrcBlockContainer
 			{
 				if (cheese.hasBlock())
 				{
-					final ItemStack stack = new ItemStack(item, 1, cheese.meta);
-					// This causes the NBT data to refresh
-					ib.getTileTagCompound(stack);
-					list.add(stack);
+					for (EnumCheeseStage stage : cheese.stages)
+					{
+						final ItemStack stack = new ItemStack(item, 1, cheese.meta);
+						// This causes the NBT data to refresh
+						final NBTTagCompound tag = ib.getTileTagCompound(stack);
+						stage.writeToNBT(tag);
+						list.add(stack);
+					}
 				}
 			}
 		}

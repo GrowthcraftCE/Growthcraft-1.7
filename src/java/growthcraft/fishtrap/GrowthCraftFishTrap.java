@@ -94,26 +94,26 @@ public class GrowthCraftFishTrap
 		userBaitConfig.addDefault(new ItemStack(Items.rotten_flesh), 0.2f, 1.1f);
 
 		// Catch Groups
-		userCatchGroupConfig.addDefault("junk", 3, "Useless Stuff");
-		userCatchGroupConfig.addDefault("treasure", 5, "Fancy Stuff");
-		userCatchGroupConfig.addDefault("fish", 1, "Fishes");
-		userCatchGroupConfig.addDefault("mineral", 7, "Ingots and other metallic stuff");
-		userCatchGroupConfig.addDefault("legendary", 10, "Stuff you probably would never find on average");
+		userCatchGroupConfig.addDefault("junk", 7, "Useless Stuff");
+		userCatchGroupConfig.addDefault("treasure", 2, "Fancy Stuff");
+		userCatchGroupConfig.addDefault("fish", 20, "Fishes");
+		userCatchGroupConfig.addDefault("mineral", 3, "Ingots and other metallic stuff");
+		userCatchGroupConfig.addDefault("legendary", 1, "Stuff you probably would never find on average");
 
 		// Will use same chances as Fishing Rods
 		// Junk
-		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.leather_boots), 10).setDamage(0.9F));
-		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.leather), 10));
-		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.bone), 10));
-		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.potionitem), 10));
+		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.leather_boots), 5).setDamage(0.9F));
+		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.leather), 5));
+		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.bone), 5));
+		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.potionitem), 3));
 		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.string), 5));
 		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.fishing_rod), 2).setDamage(0.9F));
-		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.bowl), 10));
-		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.stick), 5));
-		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.dye, 10), 1));
-		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.rotten_flesh), 10));
+		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.bowl), 5));
+		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.stick), 10));
+		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.dye, 5), 1));
+		userFishTrapConfig.addDefault("junk", new FishTrapEntry(new ItemStack(Items.rotten_flesh), 5));
 		// Treasure
-		userFishTrapConfig.addDefault("treasure", new FishTrapEntry(new ItemStack(Blocks.waterlily), 1));
+		userFishTrapConfig.addDefault("treasure", new FishTrapEntry(new ItemStack(Blocks.waterlily), 3));
 		userFishTrapConfig.addDefault("treasure", new FishTrapEntry(new ItemStack(Items.name_tag), 1));
 		userFishTrapConfig.addDefault("treasure", new FishTrapEntry(new ItemStack(Items.saddle), 1));
 		userFishTrapConfig.addDefault("treasure", new FishTrapEntry(new ItemStack(Items.bow), 1).setDamage(0.25F).setEnchantable());
