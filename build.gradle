@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "https://maven.minecraftforge.net/"
         }
 
         maven {
@@ -12,7 +12,9 @@ buildscript {
         }
     }
     dependencies {
-        classpath "net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT"
+        classpath ('com.anatawa12.forge:ForgeGradle:1.2-1.1.+') {
+            changing = true
+        }
     }
 }
 
@@ -122,7 +124,14 @@ dependencies {
     compile "codechicken:CodeChickenLib:${minecraft_version}-${code_chicken_lib_version}:dev"
     compile "codechicken:CodeChickenCore:${minecraft_version}-${code_chicken_core_version}:dev"
     compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
-    compile "com.mod-buildcraft:buildcraft:${bc_version}:dev"
+    //compile "com.mod-buildcraft:buildcraft:${bc_version}:dev"
+    // downloading BuildCraft jar directly from their website
+    def f = new File("libs/buildcraft-${bc_version}-dev.jar")
+    if( !f.exists() ) {
+        mkdir "libs"
+        new URL("https://www.mod-buildcraft.com/releases/BuildCraft/${bc_version}/buildcraft-${bc_version}-dev.jar").withInputStream{ i -> f.withOutputStream{ it << i }}
+    }
+    implementation files("libs/buildcraft-${bc_version}-dev.jar")
     testCompile "junit:junit:4.11"
 }
 

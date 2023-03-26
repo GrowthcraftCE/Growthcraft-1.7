@@ -1,11 +1,11 @@
 # Creative Tabs
-itemGroup.creative_tab_grcbamboo=itemGroup.creative_tab_grcbamboo
+itemGroup.creative_tab_grcbamboo=Growthcraft Bambus
 # Blocks
 tile.grc.bambooBlock.name=Bambus
 tile.grc.bambooDoor.name=Bambustür
 tile.grc.bambooFence.name=Bambuszaun
-tile.grc.bambooFenceGate.name=Bambuszaun Tor
-tile.grc.bambooFenceRope.name=tile.grc.bambooFenceRope.name
+tile.grc.bambooFenceGate.name=Bambuszauntor
+tile.grc.bambooFenceRope.name=Bambuszauntor mit Seil
 tile.grc.bambooLeaves.name=Bambusblätter
 tile.grc.bambooScaffold.name=Bambus-Gerüst
 tile.grc.bambooShoot.name=Bambusspross

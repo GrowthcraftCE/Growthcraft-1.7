@@ -11,24 +11,18 @@ fluid.grc.appleCider0=Almabor
 fluid.grc.appleCider1=Almabor
 fluid.grc.appleCider2=Almabor
 fluid.grc.appleCider3=Almabor
-fluid.grc.appleCider4=fluid.grc.appleCider4
-fluid.grc.appleCider5=fluid.grc.appleCider5
-fluid.grc.appleCider6=fluid.grc.appleCider6
+
+fluid.grc.appleCider5=Almabor
+fluid.grc.appleCider6=Almabor
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider0.name=item.bucket.fluid.grc.appleCider0.name
-item.bucket.fluid.grc.appleCider1.name=item.bucket.fluid.grc.appleCider1.name
-item.bucket.fluid.grc.appleCider2.name=item.bucket.fluid.grc.appleCider2.name
-item.bucket.fluid.grc.appleCider3.name=item.bucket.fluid.grc.appleCider3.name
-item.bucket.fluid.grc.appleCider4.name=item.bucket.fluid.grc.appleCider4.name
-item.bucket.fluid.grc.appleCider5.name=item.bucket.fluid.grc.appleCider5.name
-item.bucket.fluid.grc.appleCider6.name=item.bucket.fluid.grc.appleCider6.name
+
 
 ## Fluid Blocks
 tile.fluid.grc.appleCider0.name=Almabor
 tile.fluid.grc.appleCider1.name=Almabor
 tile.fluid.grc.appleCider2.name=Almabor
 tile.fluid.grc.appleCider3.name=Almabor
-tile.fluid.grc.appleCider4.name=tile.fluid.grc.appleCider4.name
-tile.fluid.grc.appleCider5.name=tile.fluid.grc.appleCider5.name
-tile.fluid.grc.appleCider6.name=tile.fluid.grc.appleCider6.name
+
+tile.fluid.grc.appleCider5.name=Almabor
+tile.fluid.grc.appleCider6.name=Almabor

@@ -2,39 +2,24 @@
 itemGroup.creative_tab_grccore=Growthcraft|核心
 
 # Blocks
-tile.grc.etfuturum_fence_rope_acacia.name=tile.grc.etfuturum_fence_rope_acacia.name
-tile.grc.etfuturum_fence_rope_birch.name=tile.grc.etfuturum_fence_rope_birch.name
-tile.grc.etfuturum_fence_rope_dark_oak.name=tile.grc.etfuturum_fence_rope_dark_oak.name
-tile.grc.etfuturum_fence_rope_jungle.name=tile.grc.etfuturum_fence_rope_jungle.name
-tile.grc.etfuturum_fence_rope_oak.name=tile.grc.etfuturum_fence_rope_oak.name
-tile.grc.etfuturum_fence_rope_spruce.name=tile.grc.etfuturum_fence_rope_spruce.name
+tile.grc.etfuturum_fence_rope_acacia.name=围栏绳 (Acacia)
+tile.grc.etfuturum_fence_rope_birch.name=围栏绳 (Birch)
+tile.grc.etfuturum_fence_rope_dark_oak.name=围栏绳 (Dark Oak)
+tile.grc.etfuturum_fence_rope_jungle.name=围栏绳 (Jungle)
+tile.grc.etfuturum_fence_rope_oak.name=围栏绳 (Oak)
+tile.grc.etfuturum_fence_rope_spruce.name=围栏绳 (Spruce)
 tile.grc.fenceRope.name=围栏绳
 tile.grc.netherBrickFenceRope.name=带有绳子的地狱砖栅栏
-tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
+tile.grc.naturaFenceRope.name=围栏绳 (%s)
 tile.grc.ropeBlock.name=绳子
-tile.grccore.salt_block.name=tile.grccore.salt_block.name
+
 
 # Items
 item.grc.rope.name=绳子
 item.grccore.salt.name=盐
 item.grccore.bucketSalt.name=盐水桶
 item.grccore.bottleSalt.name=盐水瓶
-item.grccore.crowbar.black.name=item.grccore.crowbar.black.name
-item.grccore.crowbar.red.name=item.grccore.crowbar.red.name
-item.grccore.crowbar.green.name=item.grccore.crowbar.green.name
-item.grccore.crowbar.brown.name=item.grccore.crowbar.brown.name
-item.grccore.crowbar.blue.name=item.grccore.crowbar.blue.name
-item.grccore.crowbar.purple.name=item.grccore.crowbar.purple.name
-item.grccore.crowbar.cyan.name=item.grccore.crowbar.cyan.name
-item.grccore.crowbar.light_gray.name=item.grccore.crowbar.light_gray.name
-item.grccore.crowbar.gray.name=item.grccore.crowbar.gray.name
-item.grccore.crowbar.pink.name=item.grccore.crowbar.pink.name
-item.grccore.crowbar.lime.name=item.grccore.crowbar.lime.name
-item.grccore.crowbar.yellow.name=item.grccore.crowbar.yellow.name
-item.grccore.crowbar.light_blue.name=item.grccore.crowbar.light_blue.name
-item.grccore.crowbar.magenta.name=item.grccore.crowbar.magenta.name
-item.grccore.crowbar.orange.name=item.grccore.crowbar.orange.name
-item.grccore.crowbar.white.name=item.grccore.crowbar.white.name
+
 
 # Fluids
 fluid.tile.water=水
@@ -108,8 +93,7 @@ grccore.waila.option.DisplayHeated=加热的设备
 
 # Effects
 grc.effect.chance.format=有%d%%概率
-grc.effect.extinguish.desc=grc.effect.extinguish.desc
-grc.effect.ignite.desc=grc.effect.ignite.desc
+
 grc.effect.list.head=附加以下效果：
 grc.effect.null.desc=无效果
 grc.effect.random_list.head=附加以下任意一个效果：
@@ -123,12 +107,6 @@ gui.grc.progress.format=%s：%d / %d
 grc.inventory.internal.name=物品栏
 
 # Tooltips
-grc.tooltip.detailed_information=grc.tooltip.detailed_information
+
 
 # Achievements
-achievement.trusty_hardware=achievement.trusty_hardware
-achievement.trusty_hardware.desc=achievement.trusty_hardware.desc
-achievement.half_life_confirmed=achievement.half_life_confirmed
-achievement.half_life_confirmed.desc=achievement.half_life_confirmed.desc
-achievement.salty_situation=achievement.salty_situation
-achievement.salty_situation.desc=achievement.salty_situation.desc

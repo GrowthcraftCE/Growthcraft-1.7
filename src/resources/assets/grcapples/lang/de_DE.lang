@@ -1,7 +1,7 @@
 # Blocks
 tile.grc.appleBlock.name=Apfel
-tile.grc.appleSapling.name=Apfelbaum Setzling
-tile.grc.appleLeaves.name=Apfelbaum Blätter
+tile.grc.appleSapling.name=Apfelbaumsetzling
+tile.grc.appleLeaves.name=Apfelbaumblätter
 # Items
 item.grc.appleSeeds.name=Apfelkern
 
@@ -11,24 +11,24 @@ fluid.grc.appleCider0=Apfelwein
 fluid.grc.appleCider1=Apfelwein
 fluid.grc.appleCider2=Apfelwein
 fluid.grc.appleCider3=Apfelwein
-fluid.grc.appleCider4=fluid.grc.appleCider4
-fluid.grc.appleCider5=fluid.grc.appleCider5
-fluid.grc.appleCider6=fluid.grc.appleCider6
+fluid.grc.appleCider4=Silken Nectar
+fluid.grc.appleCider5=Apfelwein
+fluid.grc.appleCider6=Apfelwein
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider0.name=item.bucket.fluid.grc.appleCider0.name
-item.bucket.fluid.grc.appleCider1.name=item.bucket.fluid.grc.appleCider1.name
-item.bucket.fluid.grc.appleCider2.name=item.bucket.fluid.grc.appleCider2.name
-item.bucket.fluid.grc.appleCider3.name=item.bucket.fluid.grc.appleCider3.name
-item.bucket.fluid.grc.appleCider4.name=item.bucket.fluid.grc.appleCider4.name
-item.bucket.fluid.grc.appleCider5.name=item.bucket.fluid.grc.appleCider5.name
-item.bucket.fluid.grc.appleCider6.name=item.bucket.fluid.grc.appleCider6.name
+item.bucket.fluid.grc.appleCider0.name=Eimer mit Apfelsaft
+item.bucket.fluid.grc.appleCider1.name=Eimer mit Apfelwein
+item.bucket.fluid.grc.appleCider2.name=Eimer mit Apfelwein
+item.bucket.fluid.grc.appleCider3.name=Eimer mit Apfelwein
+item.bucket.fluid.grc.appleCider4.name=Einer mit Silken Nectar
+item.bucket.fluid.grc.appleCider5.name=Eimer mit Apfelwein
+item.bucket.fluid.grc.appleCider6.name=Eimer mit Apfelwein
 
 ## Fluid Blocks
 tile.fluid.grc.appleCider0.name=Apfelwein
 tile.fluid.grc.appleCider1.name=Apfelwein
 tile.fluid.grc.appleCider2.name=Apfelwein
 tile.fluid.grc.appleCider3.name=Apfelwein
-tile.fluid.grc.appleCider4.name=tile.fluid.grc.appleCider4.name
-tile.fluid.grc.appleCider5.name=tile.fluid.grc.appleCider5.name
-tile.fluid.grc.appleCider6.name=tile.fluid.grc.appleCider6.name
+tile.fluid.grc.appleCider4.name=Silken Nectar
+tile.fluid.grc.appleCider5.name=Apfelwein
+tile.fluid.grc.appleCider6.name=Apfelwein

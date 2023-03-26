@@ -176,14 +176,14 @@ grc.effect.milk=Снимает все эффекты (за исключение�
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s
-grcmilk.cheese.aging.prefix=Созревание :
+grcmilk.cheese.aging.prefix=Созревание:
 grcmilk.cheese.aging.progress.format= %d%%
-grcmilk.cheese.slices.prefix=Ломтики :
+grcmilk.cheese.slices.prefix=Ломтики:
 grcmilk.cheese.slices.value.format= %d / %d
 grcmilk.cheese_press.itemslot.item=%s
 grcmilk.cheese_press.pressing.state.false=Не спрессовано
-grcmilk.cheese_press.pressing.state.prefix=Состояние :
+grcmilk.cheese_press.pressing.state.prefix=Состояние:
 grcmilk.cheese_press.pressing.state.true=Прессуется
 grcmilk.hanging_curds.dried=Осушённый
-grcmilk.hanging_curds.drying.prefix=Осушение :
+grcmilk.hanging_curds.drying.prefix=Осушение:
 grcmilk.hanging_curds.drying.progress.format= %d%%

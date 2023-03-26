@@ -1,125 +1,125 @@
 # Creative Tabs
-itemGroup.creative_tab_grcbees=itemGroup.creative_tab_grcbees
+itemGroup.creative_tab_grcbees=Growthcraft Bienen
 
 # Blocks
 ## Vanilla Bee Boxes
-tile.grc.BeeBox.Minecraft.oak.name=tile.grc.BeeBox.Minecraft.oak.name
-tile.grc.BeeBox.Minecraft.spruce.name=tile.grc.BeeBox.Minecraft.spruce.name
-tile.grc.BeeBox.Minecraft.birch.name=tile.grc.BeeBox.Minecraft.birch.name
-tile.grc.BeeBox.Minecraft.jungle.name=tile.grc.BeeBox.Minecraft.jungle.name
-tile.grc.BeeBox.Minecraft.acacia.name=tile.grc.BeeBox.Minecraft.acacia.name
-tile.grc.BeeBox.Minecraft.darkoak.name=tile.grc.BeeBox.Minecraft.darkoak.name
+tile.grc.BeeBox.Minecraft.oak.name=Eichenbienenhaus
+tile.grc.BeeBox.Minecraft.spruce.name=Fichtenbienenhaus
+tile.grc.BeeBox.Minecraft.birch.name=Birkenbienenhaus
+tile.grc.BeeBox.Minecraft.jungle.name=Dschungelbienenhaus
+tile.grc.BeeBox.Minecraft.acacia.name=Akazienbienenhaus
+tile.grc.BeeBox.Minecraft.darkoak.name=Schwarzeichenbienenhaus
 
 ## Growthcraft|Nether Bee Boxes
-tile.grc.BeeBox.Nether.0.name=tile.grc.BeeBox.Nether.0.name
+tile.grc.BeeBox.Nether.0.name=Malice Bienenhaus
 
 ## Growthcraft|Bamboo Bee Boxes
-tile.grc.BeeBox.Bamboo.0.name=tile.grc.BeeBox.Bamboo.0.name
+tile.grc.BeeBox.Bamboo.0.name=Bambusbienenhaus
 
 ## Thaumcraft Bee Boxes
-tile.grc.BeeBox.Thaumcraft.greatwood.name=tile.grc.BeeBox.Thaumcraft.greatwood.name
-tile.grc.BeeBox.Thaumcraft.silverwood.name=tile.grc.BeeBox.Thaumcraft.silverwood.name
+tile.grc.BeeBox.Thaumcraft.greatwood.name=Greatwood Bienenhaus
+tile.grc.BeeBox.Thaumcraft.silverwood.name=Silverwood Bienenhaus
 
 ## Forestry Bee Boxes - this is just insane...
 ### Regular
-tile.grc.BeeBox.Forestry.0.Normal.larch.name=tile.grc.BeeBox.Forestry.0.Normal.larch.name
-tile.grc.BeeBox.Forestry.0.Normal.teak.name=tile.grc.BeeBox.Forestry.0.Normal.teak.name
-tile.grc.BeeBox.Forestry.0.Normal.acacia.name=tile.grc.BeeBox.Forestry.0.Normal.acacia.name
-tile.grc.BeeBox.Forestry.0.Normal.lime.name=tile.grc.BeeBox.Forestry.0.Normal.lime.name
-tile.grc.BeeBox.Forestry.0.Normal.chestnut.name=tile.grc.BeeBox.Forestry.0.Normal.chestnut.name
-tile.grc.BeeBox.Forestry.0.Normal.wenge.name=tile.grc.BeeBox.Forestry.0.Normal.wenge.name
-tile.grc.BeeBox.Forestry.0.Normal.baobab.name=tile.grc.BeeBox.Forestry.0.Normal.baobab.name
-tile.grc.BeeBox.Forestry.0.Normal.sequoia.name=tile.grc.BeeBox.Forestry.0.Normal.sequoia.name
-tile.grc.BeeBox.Forestry.0.Normal.kapok.name=tile.grc.BeeBox.Forestry.0.Normal.kapok.name
-tile.grc.BeeBox.Forestry.0.Normal.ebony.name=tile.grc.BeeBox.Forestry.0.Normal.ebony.name
-tile.grc.BeeBox.Forestry.0.Normal.mahogany.name=tile.grc.BeeBox.Forestry.0.Normal.mahogany.name
-tile.grc.BeeBox.Forestry.0.Normal.balsa.name=tile.grc.BeeBox.Forestry.0.Normal.balsa.name
-tile.grc.BeeBox.Forestry.0.Normal.willow.name=tile.grc.BeeBox.Forestry.0.Normal.willow.name
-tile.grc.BeeBox.Forestry.0.Normal.walnut.name=tile.grc.BeeBox.Forestry.0.Normal.walnut.name
-tile.grc.BeeBox.Forestry.0.Normal.greenheart.name=tile.grc.BeeBox.Forestry.0.Normal.greenheart.name
-tile.grc.BeeBox.Forestry.1.Normal.cherry.name=tile.grc.BeeBox.Forestry.1.Normal.cherry.name
-tile.grc.BeeBox.Forestry.1.Normal.mahoe.name=tile.grc.BeeBox.Forestry.1.Normal.mahoe.name
-tile.grc.BeeBox.Forestry.1.Normal.poplar.name=tile.grc.BeeBox.Forestry.1.Normal.poplar.name
-tile.grc.BeeBox.Forestry.1.Normal.palm.name=tile.grc.BeeBox.Forestry.1.Normal.palm.name
-tile.grc.BeeBox.Forestry.1.Normal.papaya.name=tile.grc.BeeBox.Forestry.1.Normal.papaya.name
-tile.grc.BeeBox.Forestry.1.Normal.pine.name=tile.grc.BeeBox.Forestry.1.Normal.pine.name
-tile.grc.BeeBox.Forestry.1.Normal.plum.name=tile.grc.BeeBox.Forestry.1.Normal.plum.name
-tile.grc.BeeBox.Forestry.1.Normal.maple.name=tile.grc.BeeBox.Forestry.1.Normal.maple.name
-tile.grc.BeeBox.Forestry.1.Normal.citrus.name=tile.grc.BeeBox.Forestry.1.Normal.citrus.name
-tile.grc.BeeBox.Forestry.1.Normal.giganteum.name=tile.grc.BeeBox.Forestry.1.Normal.giganteum.name
-tile.grc.BeeBox.Forestry.1.Normal.ipe.name=tile.grc.BeeBox.Forestry.1.Normal.ipe.name
-tile.grc.BeeBox.Forestry.1.Normal.padauk.name=tile.grc.BeeBox.Forestry.1.Normal.padauk.name
-tile.grc.BeeBox.Forestry.1.Normal.cocobolo.name=tile.grc.BeeBox.Forestry.1.Normal.cocobolo.name
-tile.grc.BeeBox.Forestry.1.Normal.zebrawood.name=tile.grc.BeeBox.Forestry.1.Normal.zebrawood.name
+tile.grc.BeeBox.Forestry.0.Normal.larch.name=Larch Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.teak.name=Teak Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.acacia.name=Acacia Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.lime.name=Lime Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.chestnut.name=Chestnut Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.wenge.name=Wenge Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.baobab.name=Baobab Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.sequoia.name=Sequoia Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.kapok.name=Kapok Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.ebony.name=Ebony Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.mahogany.name=Mahogany Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.balsa.name=Balsa Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.willow.name=Willow Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.walnut.name=Walnut Bienenhaus
+tile.grc.BeeBox.Forestry.0.Normal.greenheart.name=Greenheart Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.cherry.name=Cherry Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.mahoe.name=Mahoe Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.poplar.name=Poplar Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.palm.name=Palm Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.papaya.name=Papaya Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.pine.name=Pine Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.plum.name=Plum Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.maple.name=Ahornbienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.citrus.name=Citrus Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.giganteum.name=Giganteum Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.ipe.name=Ipe Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.padauk.name=Padauk Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.cocobolo.name=Cocobolo Bienenhaus
+tile.grc.BeeBox.Forestry.1.Normal.zebrawood.name=Zebrawood Bienenhaus
 ### Fire Proof
-tile.grc.BeeBox.Forestry.0.Fireproof.larch.name=tile.grc.BeeBox.Forestry.0.Fireproof.larch.name
-tile.grc.BeeBox.Forestry.0.Fireproof.teak.name=tile.grc.BeeBox.Forestry.0.Fireproof.teak.name
-tile.grc.BeeBox.Forestry.0.Fireproof.acacia.name=tile.grc.BeeBox.Forestry.0.Fireproof.acacia.name
-tile.grc.BeeBox.Forestry.0.Fireproof.lime.name=tile.grc.BeeBox.Forestry.0.Fireproof.lime.name
-tile.grc.BeeBox.Forestry.0.Fireproof.chestnut.name=tile.grc.BeeBox.Forestry.0.Fireproof.chestnut.name
-tile.grc.BeeBox.Forestry.0.Fireproof.wenge.name=tile.grc.BeeBox.Forestry.0.Fireproof.wenge.name
-tile.grc.BeeBox.Forestry.0.Fireproof.baobab.name=tile.grc.BeeBox.Forestry.0.Fireproof.baobab.name
-tile.grc.BeeBox.Forestry.0.Fireproof.sequoia.name=tile.grc.BeeBox.Forestry.0.Fireproof.sequoia.name
-tile.grc.BeeBox.Forestry.0.Fireproof.kapok.name=tile.grc.BeeBox.Forestry.0.Fireproof.kapok.name
-tile.grc.BeeBox.Forestry.0.Fireproof.ebony.name=tile.grc.BeeBox.Forestry.0.Fireproof.ebony.name
-tile.grc.BeeBox.Forestry.0.Fireproof.mahogany.name=tile.grc.BeeBox.Forestry.0.Fireproof.mahogany.name
-tile.grc.BeeBox.Forestry.0.Fireproof.balsa.name=tile.grc.BeeBox.Forestry.0.Fireproof.balsa.name
-tile.grc.BeeBox.Forestry.0.Fireproof.willow.name=tile.grc.BeeBox.Forestry.0.Fireproof.willow.name
-tile.grc.BeeBox.Forestry.0.Fireproof.walnut.name=tile.grc.BeeBox.Forestry.0.Fireproof.walnut.name
-tile.grc.BeeBox.Forestry.0.Fireproof.greenheart.name=tile.grc.BeeBox.Forestry.0.Fireproof.greenheart.name
-tile.grc.BeeBox.Forestry.1.Fireproof.cherry.name=tile.grc.BeeBox.Forestry.1.Fireproof.cherry.name
-tile.grc.BeeBox.Forestry.1.Fireproof.mahoe.name=tile.grc.BeeBox.Forestry.1.Fireproof.mahoe.name
-tile.grc.BeeBox.Forestry.1.Fireproof.poplar.name=tile.grc.BeeBox.Forestry.1.Fireproof.poplar.name
-tile.grc.BeeBox.Forestry.1.Fireproof.palm.name=tile.grc.BeeBox.Forestry.1.Fireproof.palm.name
-tile.grc.BeeBox.Forestry.1.Fireproof.papaya.name=tile.grc.BeeBox.Forestry.1.Fireproof.papaya.name
-tile.grc.BeeBox.Forestry.1.Fireproof.pine.name=tile.grc.BeeBox.Forestry.1.Fireproof.pine.name
-tile.grc.BeeBox.Forestry.1.Fireproof.plum.name=tile.grc.BeeBox.Forestry.1.Fireproof.plum.name
-tile.grc.BeeBox.Forestry.1.Fireproof.maple.name=tile.grc.BeeBox.Forestry.1.Fireproof.maple.name
-tile.grc.BeeBox.Forestry.1.Fireproof.citrus.name=tile.grc.BeeBox.Forestry.1.Fireproof.citrus.name
-tile.grc.BeeBox.Forestry.1.Fireproof.giganteum.name=tile.grc.BeeBox.Forestry.1.Fireproof.giganteum.name
-tile.grc.BeeBox.Forestry.1.Fireproof.ipe.name=tile.grc.BeeBox.Forestry.1.Fireproof.ipe.name
-tile.grc.BeeBox.Forestry.1.Fireproof.padauk.name=tile.grc.BeeBox.Forestry.1.Fireproof.padauk.name
-tile.grc.BeeBox.Forestry.1.Fireproof.cocobolo.name=tile.grc.BeeBox.Forestry.1.Fireproof.cocobolo.name
-tile.grc.BeeBox.Forestry.1.Fireproof.zebrawood.name=tile.grc.BeeBox.Forestry.1.Fireproof.zebrawood.name
+tile.grc.BeeBox.Forestry.0.Fireproof.larch.name=Larch Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.teak.name=Teak Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.acacia.name=Akazienbienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.lime.name=Lime Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.chestnut.name=Chestnut Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.wenge.name=Wenge Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.baobab.name=Baobab Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.sequoia.name=Sequoia Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.kapok.name=Kapok Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.ebony.name=Ebony Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.mahogany.name=Mahogany Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.balsa.name=Balsa Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.willow.name=Willow Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.walnut.name=Walnut Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.0.Fireproof.greenheart.name=Greenheart Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.cherry.name=Kirschbienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.mahoe.name=Mahoe Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.poplar.name=Poplar Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.palm.name=Palmbienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.papaya.name=Papaya Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.pine.name=Kieferbienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.plum.name=Plum Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.maple.name=Ahornbienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.citrus.name=Citrus Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.giganteum.name=Giganteum Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.ipe.name=Ipe Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.padauk.name=Padauk Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.cocobolo.name=Cocobolo Bienenhaus(feuerfest)
+tile.grc.BeeBox.Forestry.1.Fireproof.zebrawood.name=Zebrawood Bienenhaus(feuerfest)
 
 ## BiomesOPlenty
-tile.grc.BeeBox.BiomesOPlenty.sacred_oak.name=tile.grc.BeeBox.BiomesOPlenty.sacred_oak.name
-tile.grc.BeeBox.BiomesOPlenty.cherry.name=tile.grc.BeeBox.BiomesOPlenty.cherry.name
-tile.grc.BeeBox.BiomesOPlenty.dark.name=tile.grc.BeeBox.BiomesOPlenty.dark.name
-tile.grc.BeeBox.BiomesOPlenty.fir.name=tile.grc.BeeBox.BiomesOPlenty.fir.name
-tile.grc.BeeBox.BiomesOPlenty.ethereal.name=tile.grc.BeeBox.BiomesOPlenty.ethereal.name
-tile.grc.BeeBox.BiomesOPlenty.magic.name=tile.grc.BeeBox.BiomesOPlenty.magic.name
-tile.grc.BeeBox.BiomesOPlenty.mangrove.name=tile.grc.BeeBox.BiomesOPlenty.mangrove.name
-tile.grc.BeeBox.BiomesOPlenty.palm.name=tile.grc.BeeBox.BiomesOPlenty.palm.name
-tile.grc.BeeBox.BiomesOPlenty.redwood.name=tile.grc.BeeBox.BiomesOPlenty.redwood.name
-tile.grc.BeeBox.BiomesOPlenty.willow.name=tile.grc.BeeBox.BiomesOPlenty.willow.name
-tile.grc.BeeBox.BiomesOPlenty.bamboo_thatching.name=tile.grc.BeeBox.BiomesOPlenty.bamboo_thatching.name
-tile.grc.BeeBox.BiomesOPlenty.pine.name=tile.grc.BeeBox.BiomesOPlenty.pine.name
-tile.grc.BeeBox.BiomesOPlenty.hell_bark.name=tile.grc.BeeBox.BiomesOPlenty.hell_bark.name
-tile.grc.BeeBox.BiomesOPlenty.jacaranda.name=tile.grc.BeeBox.BiomesOPlenty.jacaranda.name
-tile.grc.BeeBox.BiomesOPlenty.mahogany.name=tile.grc.BeeBox.BiomesOPlenty.mahogany.name
+tile.grc.BeeBox.BiomesOPlenty.sacred_oak.name=Himmeleichenbienenhaus
+tile.grc.BeeBox.BiomesOPlenty.cherry.name=Kirschbienenhaus
+tile.grc.BeeBox.BiomesOPlenty.dark.name=Dunkles Bienenhaus
+tile.grc.BeeBox.BiomesOPlenty.fir.name=Tannenbienenhaus
+tile.grc.BeeBox.BiomesOPlenty.ethereal.name=Ethereal Bienenhaus
+tile.grc.BeeBox.BiomesOPlenty.magic.name=Magisches Bienenhaus
+tile.grc.BeeBox.BiomesOPlenty.mangrove.name=Mangrovenbienenhaus
+tile.grc.BeeBox.BiomesOPlenty.palm.name=Palmbienenhaus
+tile.grc.BeeBox.BiomesOPlenty.redwood.name=Mammutbaumbienenhaus
+tile.grc.BeeBox.BiomesOPlenty.willow.name=Weidenbienenhaus
+tile.grc.BeeBox.BiomesOPlenty.bamboo_thatching.name=Bambusbienenhaus
+tile.grc.BeeBox.BiomesOPlenty.pine.name=Pinienbienenhaus
+tile.grc.BeeBox.BiomesOPlenty.hell_bark.name=Höllrindenbienenhaus
+tile.grc.BeeBox.BiomesOPlenty.jacaranda.name=Jacarandabienenhaus
+tile.grc.BeeBox.BiomesOPlenty.mahogany.name=Mahagonibienenhaus
 
 ## Botania
-tile.grc.BeeBox.Botania.living_wood.name=tile.grc.BeeBox.Botania.living_wood.name
-tile.grc.BeeBox.Botania.dream_wood.name=tile.grc.BeeBox.Botania.dream_wood.name
-tile.grc.BeeBox.Botania.shimmer_wood.name=tile.grc.BeeBox.Botania.shimmer_wood.name
-tile.grc.BeeBox.Botania.shimmer_wood.desc=tile.grc.BeeBox.Botania.shimmer_wood.desc
+tile.grc.BeeBox.Botania.living_wood.name=Livingwood Bienenhaus
+tile.grc.BeeBox.Botania.dream_wood.name=Dreamwood Bienenhaus
+tile.grc.BeeBox.Botania.shimmer_wood.name=Shimmerwood Bienenhaus
+tile.grc.BeeBox.Botania.shimmer_wood.desc=ZOMG Farben!
 
 ## Natura
-tile.grc.BeeBox.Natura.apple.name=tile.grc.BeeBox.Natura.apple.name
-tile.grc.BeeBox.Natura.blood.name=tile.grc.BeeBox.Natura.blood.name
-tile.grc.BeeBox.Natura.bush.name=tile.grc.BeeBox.Natura.bush.name
-tile.grc.BeeBox.Natura.darkwood.name=tile.grc.BeeBox.Natura.darkwood.name
-tile.grc.BeeBox.Natura.eucalyptus.name=tile.grc.BeeBox.Natura.eucalyptus.name
-tile.grc.BeeBox.Natura.fusewood.name=tile.grc.BeeBox.Natura.fusewood.name
-tile.grc.BeeBox.Natura.ghost.name=tile.grc.BeeBox.Natura.ghost.name
-tile.grc.BeeBox.Natura.maple.name=tile.grc.BeeBox.Natura.maple.name
-tile.grc.BeeBox.Natura.purpleheart.name=tile.grc.BeeBox.Natura.purpleheart.name
-tile.grc.BeeBox.Natura.redwood.name=tile.grc.BeeBox.Natura.redwood.name
-tile.grc.BeeBox.Natura.sakura.name=tile.grc.BeeBox.Natura.sakura.name
-tile.grc.BeeBox.Natura.silverbell.name=tile.grc.BeeBox.Natura.silverbell.name
-tile.grc.BeeBox.Natura.tiger.name=tile.grc.BeeBox.Natura.tiger.name
-tile.grc.BeeBox.Natura.willow.name=tile.grc.BeeBox.Natura.willow.name
+tile.grc.BeeBox.Natura.apple.name=Apfelbienenhaus
+tile.grc.BeeBox.Natura.blood.name=Blood Wood Bienenhaus
+tile.grc.BeeBox.Natura.bush.name=Hopseed Bienenhaus
+tile.grc.BeeBox.Natura.darkwood.name=Dark Wood Bienenhaus
+tile.grc.BeeBox.Natura.eucalyptus.name=Eukalyptusbienenhaus
+tile.grc.BeeBox.Natura.fusewood.name=Fuse Wood Bienenhaus
+tile.grc.BeeBox.Natura.ghost.name=Ghost Wood Bienenhaus
+tile.grc.BeeBox.Natura.maple.name=Ahornbienenhaus
+tile.grc.BeeBox.Natura.purpleheart.name=Purple Heart Bienenhaus
+tile.grc.BeeBox.Natura.redwood.name=Redwood Bienenhaus
+tile.grc.BeeBox.Natura.sakura.name=Sakura Bienenhaus
+tile.grc.BeeBox.Natura.silverbell.name=Silverbell Bienenhaus
+tile.grc.BeeBox.Natura.tiger.name=Tiger Bienenhaus
+tile.grc.BeeBox.Natura.willow.name=Willow Bienenhaus
 
 # Other Blocks
 tile.grc.beeHive.name=Bienenstock
@@ -129,58 +129,58 @@ item.grc.honeyComb.empty.name=Honigwabe
 item.grc.honeyComb.full.name=Honigwabe
 item.grc.honeyJar.name=Honig
 item.grc.bee.name=Biene
-item.grc.FoodBottleFluidHoney.name=item.grc.FoodBottleFluidHoney.name
-item.grc.BucketFluidHoney.name=item.grc.BucketFluidHoney.name
-item.grcbees.BeesWax.normal.name=item.grcbees.BeesWax.normal.name
-item.grcbees.BeesWax.red.name=item.grcbees.BeesWax.red.name
-item.grcbees.BeesWax.black.name=item.grcbees.BeesWax.black.name
+item.grc.FoodBottleFluidHoney.name=Flasche mit Honig
+item.grc.BucketFluidHoney.name=Eimer mit Honig
+item.grcbees.BeesWax.normal.name=Bienenwachs
+item.grcbees.BeesWax.red.name=Rotes Bienenwachs
+item.grcbees.BeesWax.black.name=Schwarzes Bienenwachs
 
 # Tooltips
-grc.bees.item.honeyComb.deprecated=grc.bees.item.honeyComb.deprecated
+grc.bees.item.honeyComb.deprecated=Dieser Gegenstand ist veraltet. Craften, um den aktuellen Gegenstand zu erhalten.
 
 # Containers
 container.grc.beeBox=Bienenhaus
 
 # Fluids
-fluid.grc.honey=fluid.grc.honey
-fluid.grc.honeyMead0=Met
+fluid.grc.honey=Honig
+fluid.grc.honeyMead0=Mead Must
 fluid.grc.honeyMead1=Met
 fluid.grc.honeyMead2=Met
 fluid.grc.honeyMead3=Met
-fluid.grc.honeyMead4=fluid.grc.honeyMead4
-fluid.grc.honeyMead5=fluid.grc.honeyMead5
-fluid.grc.honeyMead6=fluid.grc.honeyMead6
+fluid.grc.honeyMead4=Met
+fluid.grc.honeyMead5=Met
+fluid.grc.honeyMead6=Met
 
 # Fluid Bottles
-item.grc.BottleFluidHoney.name=item.grc.BottleFluidHoney.name
+item.grc.BottleFluidHoney.name=Honig
 
 # Fluid Buckets
-item.bucket.fluid.grc.honey.name=item.bucket.fluid.grc.honey.name
-item.bucket.fluid.grc.honeyMead0.name=item.bucket.fluid.grc.honeyMead0.name
-item.bucket.fluid.grc.honeyMead1.name=item.bucket.fluid.grc.honeyMead1.name
-item.bucket.fluid.grc.honeyMead2.name=item.bucket.fluid.grc.honeyMead2.name
-item.bucket.fluid.grc.honeyMead3.name=item.bucket.fluid.grc.honeyMead3.name
-item.bucket.fluid.grc.honeyMead4.name=item.bucket.fluid.grc.honeyMead4.name
-item.bucket.fluid.grc.honeyMead5.name=item.bucket.fluid.grc.honeyMead5.name
-item.bucket.fluid.grc.honeyMead6.name=item.bucket.fluid.grc.honeyMead6.name
+item.bucket.fluid.grc.honey.name=Eimer mit Honig
+item.bucket.fluid.grc.honeyMead0.name=Mead Must Bucket
+item.bucket.fluid.grc.honeyMead1.name=Eimer mit Met
+item.bucket.fluid.grc.honeyMead2.name=Eimer mit Met
+item.bucket.fluid.grc.honeyMead3.name=Eimer mit Met
+item.bucket.fluid.grc.honeyMead4.name=Eimer mit Met
+item.bucket.fluid.grc.honeyMead5.name=Eimer mit Met
+item.bucket.fluid.grc.honeyMead6.name=Eimer mit Met
 
 # Fluid Blocks
-tile.grc.BlockFluidHoney.name=tile.grc.BlockFluidHoney.name
-tile.fluid.grc.honeyMead0.name=Met
+tile.grc.BlockFluidHoney.name=Honig
+tile.fluid.grc.honeyMead0.name=Mead Must
 tile.fluid.grc.honeyMead1.name=Met
 tile.fluid.grc.honeyMead2.name=Met
 tile.fluid.grc.honeyMead3.name=Met
-tile.fluid.grc.honeyMead4.name=tile.fluid.grc.honeyMead4.name
-tile.fluid.grc.honeyMead5.name=tile.fluid.grc.honeyMead5.name
-tile.fluid.grc.honeyMead6.name=tile.fluid.grc.honeyMead6.name
+tile.fluid.grc.honeyMead4.name=Met
+tile.fluid.grc.honeyMead5.name=Met
+tile.fluid.grc.honeyMead6.name=Met
 
 # Fluid Tags
-grc.fluids.tag.mead=grc.fluids.tag.mead
-grc.fluids.tag.honey=grc.fluids.tag.honey
+grc.fluids.tag.mead=Met
+grc.fluids.tag.honey=Honig
 
-# Other
-grc.bees.bonus_prefix=grc.bees.bonus_prefix
-grc.bees.bees_prefix=grc.bees.bees_prefix
-grc.bees.honey_prefix=grc.bees.honey_prefix
-grc.bees.growth_rate_prefix=grc.bees.growth_rate_prefix
-grc.bees.growth_rate_value=grc.bees.growth_rate_value
+# NEI
+grc.bees.bonus_prefix=Bonus:
+grc.bees.bees_prefix=Bienen:
+grc.bees.honey_prefix=Honig:
+grc.bees.growth_rate_prefix=Wachstumsrate:
+grc.bees.growth_rate_value=%d%%

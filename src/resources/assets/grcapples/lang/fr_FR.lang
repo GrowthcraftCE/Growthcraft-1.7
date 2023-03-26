@@ -11,7 +11,7 @@ fluid.grc.appleCider0=Cidre de pomme
 fluid.grc.appleCider1=Cidre de pomme
 fluid.grc.appleCider2=Cidre de pomme
 fluid.grc.appleCider3=Cidre de pomme
-fluid.grc.appleCider4=fluid.grc.appleCider4
+
 fluid.grc.appleCider5=Cidre de pomme
 fluid.grc.appleCider6=Cidre de pomme
 
@@ -20,7 +20,7 @@ item.bucket.fluid.grc.appleCider0.name=Seau de cidre de pomme
 item.bucket.fluid.grc.appleCider1.name=Seau de cidre de pomme
 item.bucket.fluid.grc.appleCider2.name=Seau de cidre de pomme
 item.bucket.fluid.grc.appleCider3.name=Seau de cidre de pomme
-item.bucket.fluid.grc.appleCider4.name=item.bucket.fluid.grc.appleCider4.name
+
 item.bucket.fluid.grc.appleCider5.name=Seau de cidre de pomme
 item.bucket.fluid.grc.appleCider6.name=Seau de cidre de pomme
 
@@ -29,6 +29,6 @@ tile.fluid.grc.appleCider0.name=Cidre de pomme
 tile.fluid.grc.appleCider1.name=Cidre de pomme
 tile.fluid.grc.appleCider2.name=Cidre de pomme
 tile.fluid.grc.appleCider3.name=Cidre de pomme
-tile.fluid.grc.appleCider4.name=tile.fluid.grc.appleCider4.name
+
 tile.fluid.grc.appleCider5.name=Cidre de pomme
 tile.fluid.grc.appleCider6.name=Cidre de pomme
