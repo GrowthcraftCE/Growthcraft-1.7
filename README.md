@@ -4,11 +4,11 @@ Growthcraft 2 for Minecraft 1.7.10 (Forge)
 [![Growthcraft Version](https://img.shields.io/badge/Growthcraft-2.7.3-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.7)
 [![](http://cf.way2muchnoise.eu/versions/growthcraft-community-edition_latest.svg)](https://minecraft.curseforge.com/projects/growthcraft-community-edition/)
 [![](http://cf.way2muchnoise.eu/short_growthcraft-community-edition.svg)](https://minecraft.curseforge.com/projects/growthcraft-community-edition/)
-[![Forge Version](https://img.shields.io/badge/Minecraft%20Forge-10.13.4.1566-yellow.svg)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.19.2.html)
+[![Forge Version](https://img.shields.io/badge/Minecraft%20Forge-10.13.4.1566-yellow.svg)](https://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.7.10.html)
 [![Discord Channel](https://img.shields.io/discord/333690296334548994.svg?color=green)](https://discord.gg/Quh76Jn)
 
 This is a community fork of the original GrowthCraft developed by Gwafu.
-The original forum post can be found on the [Minecraft Forums mod page](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1286298-growthcraft-jul-15-2014-proper-1-7-10-release). We have created a [forum post](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10) for [Growthcraft CE](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10) for general discussions, announcements and feedback. Likewise this repository is on [Gitter](https://gitter.im/alatyami/Growthcraft-1.7) and we have an IRC channel on EsperNet (#growthcraft).
+The original forum post can be found on the [Minecraft Forums mod page](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1286298-growthcraft-jul-15-2014-proper-1-7-10-release). We have created a [forum post for Growthcraft CE](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10) for general discussions, announcements and feedback. Likewise this repository is on [Gitter](https://gitter.im/alatyami/Growthcraft-1.7) and we have an IRC channel on EsperNet (#growthcraft).
 
 ## Wiki
 
