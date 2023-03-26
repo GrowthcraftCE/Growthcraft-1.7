@@ -89,17 +89,17 @@ grc.cellar.format.tipsy_chance=%d%% Chance de Embriaguez
 grc.cellar.item.booze_bucket.deprecated=OBSOLETO, crafte para receber a versão atualizada
 grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETO)
 
-grc.cellar.brew_kettle.brewing_prefix=Preparando :
-grc.cellar.brew_kettle.itemslot.item=Item : %s
-grc.cellar.brew_kettle.itemslot.residue=Resíduo : %s
-grc.cellar.ferment_barrel.itemslot.modifier=Modificador : %s
+grc.cellar.brew_kettle.brewing_prefix=Preparando:
+grc.cellar.brew_kettle.itemslot.item=Item: %s
+grc.cellar.brew_kettle.itemslot.residue=Resíduo: %s
+grc.cellar.ferment_barrel.itemslot.modifier=Modificador: %s
 grc.cellar.ferment_jar.itemslot.yeast=%s
-grc.cellar.fruit_press.itemslot.item=Item : %s
-grc.cellar.fruit_press.itemslot.residue=Resíduo : %s
+grc.cellar.fruit_press.itemslot.item=Item: %s
+grc.cellar.fruit_press.itemslot.residue=Resíduo: %s
 grc.cellar.fruit_presser.state.invalid=<Invalido>
 grc.cellar.fruit_presser.state.pressed=Pressionado
 grc.cellar.fruit_presser.state.unpressed=Solto
-grc.cellar.fruit_presser.state_prefix=Estado :
+grc.cellar.fruit_presser.state_prefix=Estado:
 
 # Waila Tooltips
 grccellar.waila.option.FruitPressExtras=Extras do Espremedor de Frutas

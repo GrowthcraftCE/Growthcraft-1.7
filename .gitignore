@@ -15,6 +15,7 @@ Thumbs.db
 /build/
 /run*/
 /ui/
+/libs/
 gradle-app.setting
 #IDEA files from Gradle
 .idea/

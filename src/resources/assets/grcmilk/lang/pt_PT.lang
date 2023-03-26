@@ -32,7 +32,7 @@ item.grcmilk.Yogurt.watermelon.name=Iogurte (Melancia)
 ## Other
 item.grcmilk.StarterCulture.name=Fermento Lácteo
 item.grcmilk.Stomach.name=Estômago
-item.grcmilk.seed_thistle.name=item.grcmilk.seed_thistle.name
+
 
 # Blocks
 ## Cheese
@@ -176,14 +176,14 @@ grc.effect.milk=Remove todos os efeitos (Exceto bebedeira)
 
 # WAILA
 grcmilk.butter_churn.itemslot.item=%s
-grcmilk.cheese.aging.prefix=Curamento :
+grcmilk.cheese.aging.prefix=Curamento:
 grcmilk.cheese.aging.progress.format= %d%%
-grcmilk.cheese.slices.prefix=Fatias :
+grcmilk.cheese.slices.prefix=Fatias:
 grcmilk.cheese.slices.value.format= %d / %d
 grcmilk.cheese_press.itemslot.item=%s
 grcmilk.cheese_press.pressing.state.false=Solto
-grcmilk.cheese_press.pressing.state.prefix=Estado :
+grcmilk.cheese_press.pressing.state.prefix=Estado:
 grcmilk.cheese_press.pressing.state.true=Prensado
 grcmilk.hanging_curds.dried=Seco
-grcmilk.hanging_curds.drying.prefix=Secagem :
+grcmilk.hanging_curds.drying.prefix=Secagem:
 grcmilk.hanging_curds.drying.progress.format= %d%%

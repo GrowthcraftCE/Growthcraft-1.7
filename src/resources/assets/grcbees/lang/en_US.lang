@@ -178,9 +178,9 @@ tile.fluid.grc.honeyMead6.name=Mead
 grc.fluids.tag.mead=Mead
 grc.fluids.tag.honey=Honey
 
-# Other
-grc.bees.bonus_prefix=Bonus :
-grc.bees.bees_prefix=Bees :
-grc.bees.honey_prefix=Honey :
-grc.bees.growth_rate_prefix=Growth Rate :
+# NEI
+grc.bees.bonus_prefix=Bonus:
+grc.bees.bees_prefix=Bees:
+grc.bees.honey_prefix=Honey:
+grc.bees.growth_rate_prefix=Growth Rate:
 grc.bees.growth_rate_value=%d%%

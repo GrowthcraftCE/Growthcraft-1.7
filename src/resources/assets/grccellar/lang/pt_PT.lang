@@ -89,17 +89,17 @@ grc.cellar.format.tipsy_chance=%d%% de Chance de Ficar Bêbado
 grc.cellar.item.booze_bucket.deprecated=Obsoleto, constrói para conseguires um balde melhorado.
 grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETO)
 
-grc.cellar.brew_kettle.brewing_prefix=Preparação :
-grc.cellar.brew_kettle.itemslot.item=Item : %s
-grc.cellar.brew_kettle.itemslot.residue=Resíduo : %s
-grc.cellar.ferment_barrel.itemslot.modifier=Modificador : %s
+grc.cellar.brew_kettle.brewing_prefix=Preparação:
+grc.cellar.brew_kettle.itemslot.item=Item: %s
+grc.cellar.brew_kettle.itemslot.residue=Resíduo: %s
+grc.cellar.ferment_barrel.itemslot.modifier=Modificador: %s
 grc.cellar.ferment_jar.itemslot.yeast=%s
-grc.cellar.fruit_press.itemslot.item=Item : %s
-grc.cellar.fruit_press.itemslot.residue=Resíduo : %s
+grc.cellar.fruit_press.itemslot.item=Item: %s
+grc.cellar.fruit_press.itemslot.residue=Resíduo: %s
 grc.cellar.fruit_presser.state.invalid=<Inválido>
 grc.cellar.fruit_presser.state.pressed=Prensado
 grc.cellar.fruit_presser.state.unpressed=Solto
-grc.cellar.fruit_presser.state_prefix=Estado :
+grc.cellar.fruit_presser.state_prefix=Estado:
 
 # Waila Tooltips
 grccellar.waila.option.FruitPressExtras=Extras da Prensa de Fruta
@@ -107,7 +107,7 @@ grccellar.waila.option.BrewKettleExtras=Extras da Caldeira de Preparação
 grccellar.waila.option.FermentBarrelExtras=Extras de Barril de Fermentação
 
 # NEI
-grc.recipe_handler.brew_kettle=grc.recipe_handler.brew_kettle
-grc.recipe_handler.culture_jar=grc.recipe_handler.culture_jar
-grc.recipe_handler.ferment_barrel=grc.recipe_handler.ferment_barrel
-grc.recipe_handler.fruit_press=grc.recipe_handler.fruit_press
+grc.recipe_handler.brew_kettle=Caldeira de Preparação
+grc.recipe_handler.culture_jar=Jarro de Cultivo
+grc.recipe_handler.ferment_barrel=Barril de Fermentação
+grc.recipe_handler.fruit_press=Prensa de Fruta

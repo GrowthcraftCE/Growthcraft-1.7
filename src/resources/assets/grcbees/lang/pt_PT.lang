@@ -100,26 +100,10 @@ tile.grc.BeeBox.BiomesOPlenty.jacaranda.name=Apiário de Jacarandá
 tile.grc.BeeBox.BiomesOPlenty.mahogany.name=Apiário de Mogno
 
 ## Botania
-tile.grc.BeeBox.Botania.living_wood.name=Living Wood Bee Box
-tile.grc.BeeBox.Botania.dream_wood.name=Dreamwood Bee Box
-tile.grc.BeeBox.Botania.shimmer_wood.name=Shimmer Wood Bee Box
-tile.grc.BeeBox.Botania.shimmer_wood.desc=tile.grc.BeeBox.Botania.shimmer_wood.desc
+
 
 ## Natura
-tile.grc.BeeBox.Natura.apple.name=tile.grc.BeeBox.Natura.apple.name
-tile.grc.BeeBox.Natura.blood.name=tile.grc.BeeBox.Natura.blood.name
-tile.grc.BeeBox.Natura.bush.name=tile.grc.BeeBox.Natura.bush.name
-tile.grc.BeeBox.Natura.darkwood.name=tile.grc.BeeBox.Natura.darkwood.name
-tile.grc.BeeBox.Natura.eucalyptus.name=tile.grc.BeeBox.Natura.eucalyptus.name
-tile.grc.BeeBox.Natura.fusewood.name=tile.grc.BeeBox.Natura.fusewood.name
-tile.grc.BeeBox.Natura.ghost.name=tile.grc.BeeBox.Natura.ghost.name
-tile.grc.BeeBox.Natura.maple.name=tile.grc.BeeBox.Natura.maple.name
-tile.grc.BeeBox.Natura.purpleheart.name=tile.grc.BeeBox.Natura.purpleheart.name
-tile.grc.BeeBox.Natura.redwood.name=tile.grc.BeeBox.Natura.redwood.name
-tile.grc.BeeBox.Natura.sakura.name=tile.grc.BeeBox.Natura.sakura.name
-tile.grc.BeeBox.Natura.silverbell.name=tile.grc.BeeBox.Natura.silverbell.name
-tile.grc.BeeBox.Natura.tiger.name=tile.grc.BeeBox.Natura.tiger.name
-tile.grc.BeeBox.Natura.willow.name=tile.grc.BeeBox.Natura.willow.name
+
 
 # Other Blocks
 tile.grc.beeHive.name=Colmeia
@@ -175,12 +159,12 @@ tile.fluid.grc.honeyMead5.name=Hidromel
 tile.fluid.grc.honeyMead6.name=Hidromel
 
 # Fluid Tags
-grc.fluids.tag.mead=grc.fluids.tag.mead
-grc.fluids.tag.honey=grc.fluids.tag.honey
+grc.fluids.tag.mead=Hidromel
+grc.fluids.tag.honey=Mel
 
-# Other
-grc.bees.bonus_prefix=Bónus :
-grc.bees.bees_prefix=Abelhas :
-grc.bees.honey_prefix=Mel :
-grc.bees.growth_rate_prefix=Velocidade de Crescimento :
+# NEI
+grc.bees.bonus_prefix=Bónus:
+grc.bees.bees_prefix=Abelhas:
+grc.bees.honey_prefix=Mel:
+grc.bees.growth_rate_prefix=Velocidade de Crescimento:
 grc.bees.growth_rate_value=%d%%

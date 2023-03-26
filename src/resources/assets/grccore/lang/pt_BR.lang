@@ -87,29 +87,28 @@ grc.format.fluid.name=%1$s
 # Name (stack_size)
 grc.format.itemslot.item=%s (x%d)
 # Displayed for tile entities with multiple tanks, %d is the tank index + 1
-grc.format.tank_id=Tanque %d :
+grc.format.tank_id=Tanque %d:
 # When the tank is empty
 grc.format.tank.empty=<Vazio>
 # %s is the fluid name
 grc.format.tank.content_suffix=mB de %s
 
 # Waila Tooltips
-grc.format.crop.growth_prefix=Maturação :
+grc.format.crop.growth_prefix=Maturação:
 grc.format.crop.mature=Maduro
 grc.format.crop.progress_format=%d%%
-grc.format.paddy.hasFluid=Irrigado :
+grc.format.paddy.hasFluid=Irrigado:
 grccore.device.heated.multiplier.format= %d%%
-grccore.device.heated.prefix=Temperatura :
+grccore.device.heated.prefix=Temperatura:
 grccore.device.heated.state.false=<Frio>
 grccore.device.progress.format= %d%%
-grccore.device.progress.prefix=Progresso :
+grccore.device.progress.prefix=Progresso:
 grccore.waila.option.DisplayFluidContent=Tanques de Líquidos
 grccore.waila.option.DisplayHeated=Dispositivos aquecidos
 
 # Effects
 grc.effect.chance.format=%d%% Chance de
-grc.effect.extinguish.desc=grc.effect.extinguish.desc
-grc.effect.ignite.desc=grc.effect.ignite.desc
+
 grc.effect.list.head=Acontecer os seguintes efeitos:
 grc.effect.null.desc=Nada
 grc.effect.random_list.head=Acontecer um dos seguintes efeitos:
@@ -128,7 +127,7 @@ grc.tooltip.detailed_information=Segure %s para mostrar detalhes
 # Achievements
 achievement.trusty_hardware=Equipamento Confiável
 achievement.trusty_hardware.desc=Mantenha longe de Endermans.
-achievement.half_life_confirmed=Half-life Confirmado!
+achievement.half_life_confirmed=Half-Life Confirmed!
 achievement.half_life_confirmed.desc=Derrote um Zumbi com um Pé-de-Cabra
 achievement.salty_situation=Situação Salgada
 achievement.salty_situation.desc=Encha um Balde com Água Salgada
