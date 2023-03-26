@@ -34,7 +34,7 @@ group = "mod.growthcraft"
 archivesBaseName = "growthcraft"
 
 ext.growthcraftApi = "src/java/growthcraft/api"
-ext.forestryApiRoot = "api/ForestryAPI"
+//ext.forestryApiRoot = "api/ForestryAPI"
 
 class StructExtApi {
     String name
@@ -43,14 +43,14 @@ class StructExtApi {
     String root = api
 }
 
-ext.thaumcraftApi = "api/thaumcraft/api"
+//ext.thaumcraftApi = "api/thaumcraft/api"
 
 StructExtApi[] apis = [
     new StructExtApi(name: "buildcraft", api: "api/buildcraft/api", exclusion: "**/buildcraft/api/meh"),
-    new StructExtApi(name: "forestry", api: "api/ForestryAPI/forestry/api", exclusion: "**/forestry/api/**", root: ext.forestryApiRoot),
+    //new StructExtApi(name: "forestry", api: "api/ForestryAPI/forestry/api", exclusion: "**/forestry/api/**", root: ext.forestryApiRoot),
     new StructExtApi(name: "invtweaks", api: "api/invtweaks/api", exclusion: "**/invtweaks/api/**"),
     new StructExtApi(name: "mfr", api: "api/powercrystals/minefactoryreloaded/api", exclusion: "**/powercrystals/minefactoryreloaded/api/**"),
-    new StructExtApi(name: "thaumcraft", api: ext.thaumcraftApi, exclusion: "**/thaumcraft/api/**"),
+    //new StructExtApi(name: "thaumcraft", api: ext.thaumcraftApi, exclusion: "**/thaumcraft/api/**"),
     new StructExtApi(name: "waila", api: "api/mcp/mobius/waila/api", exclusion: "**/mcp/mobius/waila/api/**")
 ]
 
@@ -112,6 +112,10 @@ repositories {
         name "mobius"
         url "http://mobiusstrip.eu/maven"
     }
+    maven {
+        name = "CurseMaven"
+        url = "https://cursemaven.com"
+    }
     ivy {
         name "buildcraft"
         artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
@@ -124,14 +128,10 @@ dependencies {
     compile "codechicken:CodeChickenLib:${minecraft_version}-${code_chicken_lib_version}:dev"
     compile "codechicken:CodeChickenCore:${minecraft_version}-${code_chicken_core_version}:dev"
     compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
+    compile "curse.maven:thaumcraft-223628:2227552"
+    compile "curse.maven:forestry-59751:2333823"
     //compile "com.mod-buildcraft:buildcraft:${bc_version}:dev"
-    // downloading BuildCraft jar directly from their website
-    def f = new File("libs/buildcraft-${bc_version}-dev.jar")
-    if( !f.exists() ) {
-        mkdir "libs"
-        new URL("https://www.mod-buildcraft.com/releases/BuildCraft/${bc_version}/buildcraft-${bc_version}-dev.jar").withInputStream{ i -> f.withOutputStream{ it << i }}
-    }
-    implementation files("libs/buildcraft-${bc_version}-dev.jar")
+    compile "curse.maven:buildcraft-61811:2322106"
     testCompile "junit:junit:4.11"
 }
 
@@ -204,12 +204,12 @@ jar {
             exclude api.exclusion
         }
     }
-    into("thaumcraft/api") {
-        from project.thaumcraftApi + "/LICENSE"
-    }
-    into("forestry/api") {
-        from project.forestryApiRoot + "/LICENSE.txt"
-    }
+    //into("thaumcraft/api") {
+    //    from project.thaumcraftApi + "/LICENSE"
+    //}
+    //into("forestry/api") {
+    //    from project.forestryApiRoot + "/LICENSE.txt"
+    //}
 }
 
 build.dependsOn sourceJar, javadocJar, deobfJar, apiJar
