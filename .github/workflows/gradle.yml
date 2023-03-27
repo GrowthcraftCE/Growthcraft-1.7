@@ -9,7 +9,10 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "master" ]
+    branches: 
+      - 'master'
+    tags: 
+      - '*'
   pull_request:
     branches: [ "master" ]
 
