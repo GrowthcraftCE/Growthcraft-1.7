@@ -1,6 +1,5 @@
 	        "modListVersion": 2,
-	        "modList": [
-	                {
+	        "modList": [{
     "modid": "Growthcraft|Apples",
     "name": "Growthcraft Apples",
     "description": "Growthcraft Apples is a mod which changes how apples are farmed in-game. In addition to this, it also adds Apple Ciders as a new product from apples.",
@@ -179,6 +178,6 @@
     "dependencies": [ "Growthcraft", "Growthcraft|Cellar" ],
     "dependants": [],
     "useDependencyInformation": "true"
-	                }
+	                }]
 	        ]
 	}
