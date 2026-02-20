@@ -1,8 +1,0 @@
-{
-  "parent": "grcbees:block/beebox",
-  "textures": {
-    "up": "grcbees:blocks/beebox/minecraft/oak/top",
-    "down": "grcbees:blocks/beebox/minecraft/oak/bottom",
-    "side": "grcbees:blocks/beebox/minecraft/oak/side"
-  }
-}
