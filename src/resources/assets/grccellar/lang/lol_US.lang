@@ -1,0 +1,147 @@
+# Creative Tabs
+itemGroup.creative_tab_grccellar=Growthcraft Hoelz
+
+# Blocks
+tile.grc.fruitPress.name=Smashin Machien
+tile.grc.fruitPresser.name=Smashin Machien
+tile.grc.brewKettle.name=Hot Pot
+tile.grc.fermentBarrel.name=Mai Hoem
+tile.grc.fermentJar.name=Small Buttl
+
+# Items
+# Please remove this field once all other module translations have been updated,
+# this is no longer used
+item.grc.boozeBucket.name=Bukkit
+
+item.grc.yeast0.name=Magyk PowdR
+item.grc.yeast1.name=Cold Magyk PowdR
+item.grc.yeast2.name=Gurp Magyk PowdR
+item.grc.yeast3.name=Speshul PowdR
+item.grc.yeast4.name=mushruum PowdR
+
+# Leather WatR Things
+item.grc.waterBag0.name=Leather WatR Thing (White)
+item.grc.waterBag1.name=Leather WatR Thing (Orange)
+item.grc.waterBag2.name=Leather WatR Thing (Magenta)
+item.grc.waterBag3.name=Leather WatR Thing (Light Blue)
+item.grc.waterBag4.name=Leather WatR Thing (Yellow)
+item.grc.waterBag5.name=Leather WatR Thing (Lime)
+item.grc.waterBag6.name=Leather WatR Thing (Pink)
+item.grc.waterBag7.name=Leather WatR Thing (Gray)
+item.grc.waterBag8.name=Leather WatR Thing (Light Gray)
+item.grc.waterBag9.name=Leather WatR Thing (Cyan)
+item.grc.waterBag10.name=Leather WatR Thing (Purple)
+item.grc.waterBag11.name=Leather WatR Thing (Blue)
+item.grc.waterBag12.name=Leather WatR Thing (Brown)
+item.grc.waterBag13.name=Leather WatR Thing (Green)
+item.grc.waterBag14.name=Leather WatR Thing (Red)
+item.grc.waterBag15.name=Leather WatR Thing (Black)
+item.grc.waterBag16.name=Leather WatR Thing
+
+# Containers
+container.grc.fruitPress=Smashin Machien
+container.grc.brewKettle=Hot Pot
+container.grc.fermentBarrel=Mai Hoem
+container.grc.CultureJar=Small Buttl
+
+# Other
+grc.potion.tipsy=Catnip Intoxicashiun
+grc.booze=Funny WatR
+
+# Modifiers
+grc.fluids.tag.chilled=Cold
+grc.fluids.tag.cider=Mappley
+grc.fluids.tag.deadly=OUCHY
+grc.fluids.tag.extended=Long
+grc.fluids.tag.fermented=Funny
+grc.fluids.tag.fortified=Strongk
+grc.fluids.tag.hopped=Hawpped
+grc.fluids.tag.hyper_extended=HYPEr
+grc.fluids.tag.intoxicated=Intoxiscated
+grc.fluids.tag.magical=Magyk
+grc.fluids.tag.poisoned=Nawt Yum-yum
+grc.fluids.tag.potent=Also Strongk
+grc.fluids.tag.wine=Old Gurps
+grc.fluids.tag.young=Baby
+grc.fluids.tag.infernal=NOPE
+grc.fluids.tag.vodka=Tater
+grc.fluids.tag.eldritch=LOTS OF NOPE
+grc.fluids.tag.whiskey=Hooch
+grc.fluids.tag.pulque=Nawt Mlk
+grc.fluids.tag.rum=Wurm SUGAR!1!
+grc.fluids.tag.kombucha=Gross SalaD
+grc.fluids.tag.arrack=Coconut Flavur
+grc.fluids.tag.malted=Ded Sedz
+grc.fluids.tag.medicinal=Bleugh
+grc.fluids.tag.cocktail=Manee Flavur
+grc.fluids.tag.distilled=Sopir Strongk
+grc.fluids.tag.spiced=Burny
+grc.fluids.tag.filtered=Duznt swear
+grc.fluids.tag.nectar=FlowR SwitZ
+grc.fluids.tag.ancient=Old
+grc.fluids.tag.fruity=Frutti
+grc.fluids.tag.port=Duznt sail
+grc.fluids.tag.vile=Yucky
+grc.fluids.tag.gin=Gin
+grc.fluids.tag.beer=Yucky Barlee
+grc.fluids.tag.sherry=Sherree
+grc.fluids.tag.brandy=Brandee
+grc.fluids.tag.bourbon=Bourbon-bon
+grc.fluids.tag.bloodwine=Edgy Wien
+grc.fluids.tag.vinegar=Vineghur
+grc.fluids.tag.orchestral=Duznt Sing
+grc.fluids.tag.choral=Still Duznt Sing
+grc.fluids.tag.symphonic=No Songz Heer
+grc.fluids.tag.mantric=Holy Songz
+grc.fluids.tag.hymnody=Also Holy Songz
+grc.fluids.tag.operatic=Also Duznt Sing
+grc.fluids.tag.metallic=Groanin
+
+
+# GUI
+gui.grc.empty=Emptee
+gui.grc.discard=Twash
+gui.grc.switch=Swetch
+gui.grc.cantferment=Cant Fermunt.
+gui.grccellar.ferment_barrel.progress_name=Fermentin
+
+# Achievements
+achievement.craftBarrel=Cooper Extracshun
+achievement.craftBarrel.desc=Craft ur hoem.
+achievement.fermentBooze=It's The Yeast I Could Do...
+achievement.fermentBooze.desc=Make a funnee drInk.
+achievement.getDrunk=Is Trouble Brewing?
+achievement.getDrunk.desc=Acquire Tipsy V.
+achievement.onTheGo=On Teh Go
+achievement.onTheGo.desc=Maked a Leather WatR Thing
+
+# Tooltips (Number is a percentage)
+# number is a percentage
+grc.cellar.format.waterBag.name=%s (%s)
+grc.cellar.format.fluid_container.contents=Contains: %2$dmB/%3$dmB ov %1$s
+grc.cellar.format.tipsy_chance=%d%% Chance of Tipsy
+grc.cellar.item.booze_bucket.deprecated=DEPRECATED, pls craft again to get teh updated bukkit
+grc.cellar.item.booze_bucket.deprecated_suffix= (DEPRECATED)
+
+grc.cellar.brew_kettle.brewing_prefix=Brewin :
+grc.cellar.brew_kettle.itemslot.item=Item : %s
+grc.cellar.brew_kettle.itemslot.residue=Residu : %s
+grc.cellar.ferment_barrel.itemslot.modifier=Modifire : %s
+grc.cellar.ferment_jar.itemslot.yeast=%s
+grc.cellar.fruit_press.itemslot.item=Item : %s
+grc.cellar.fruit_press.itemslot.residue=Residu : %s
+grc.cellar.fruit_presser.state.invalid=<Invalid>
+grc.cellar.fruit_presser.state.pressed=Smushed
+grc.cellar.fruit_presser.state.unpressed=Unsmushed
+grc.cellar.fruit_presser.state_prefix=Staet :
+
+# Waila Tooltips
+grccellar.waila.option.FruitPressExtras=Smashin Machien Extras
+grccellar.waila.option.BrewKettleExtras=Hot Pot Extras
+grccellar.waila.option.FermentBarrelExtras=Mai Hoem Extras
+
+# NEI
+grc.recipe_handler.brew_kettle=Hot Pot
+grc.recipe_handler.culture_jar=Small Buttl
+grc.recipe_handler.ferment_barrel=Mai Hoem
+grc.recipe_handler.fruit_press=Smashin Machien

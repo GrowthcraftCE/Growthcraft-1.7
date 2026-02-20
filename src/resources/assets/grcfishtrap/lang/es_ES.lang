@@ -1,0 +1,8 @@
+#Creative Tab
+itemGroup.creative_tab_grcfishtrap=Growthcraft Marine
+
+# Blocks
+tile.grc.fishTrap.name=Fish Trap
+
+# Containers
+container.grc.fishTrap=Fish Trap

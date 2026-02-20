@@ -1,0 +1,210 @@
+# Creative Tabs
+itemGroup.creative_tab_grcbees=Growthcraft NOPES
+
+# Blocks
+## Vanilla Ouchy Boxes
+tile.grc.BeeBox.Minecraft.oak.name=Oak Ouchy Box
+tile.grc.BeeBox.Minecraft.spruce.name=Spruce Ouchy Box
+tile.grc.BeeBox.Minecraft.birch.name=Birch Ouchy Box
+tile.grc.BeeBox.Minecraft.jungle.name=Jungle Ouchy Box
+tile.grc.BeeBox.Minecraft.acacia.name=Acacia Ouchy Box
+tile.grc.BeeBox.Minecraft.darkoak.name=Dark Oak Ouchy Box
+
+## Growthcraft|Nether Ouchy Box
+tile.grc.BeeBox.Nether.0.name=NOPEWOOD Ouchy Box
+tile.grc.BeeBox.Nether.0.desc=This beebox seems to scream at you
+
+## Growthcraft|Bamboo Ouchy Box
+tile.grc.BeeBox.Bamboo.0.name=Scratchin Pole Ouchy Box
+
+## Thaumcraft Ouchy Boxes
+tile.grc.BeeBox.Thaumcraft.greatwood.name=Greatwood Ouchy Box
+tile.grc.BeeBox.Thaumcraft.silverwood.name=Silverwood Ouchy Box
+
+## F&A Ouchy Box
+tile.grc.beeBox.FossilsAndArchaeology.palaeoraphe.name=Palaeoraphe Ouchy Box
+tile.grc.beeBox.FossilsAndArchaeology.palaeoraphe.desc=Welcom to Miocen Park
+
+## AM2 Ouchy Box
+tile.grc.beeBox.ArsMagica2.witchwood.name=Witchwood Ouchy Box
+tile.grc.beeBox.ArsMagica2.witchwood.desc=Magical to the core!
+
+## Totemic Ouchy Box
+tile.grc.beeBox.totemic.redcedar.name=Red Cedar Ouchy Box
+
+## ExtraBiomesXL Ouchy Boxes
+tile.grc.BeeBox.ExtraBiomesXL.redwood.name=Redwood Ouchy Box
+tile.grc.BeeBox.ExtraBiomesXL.fir.name=Fir Ouchy Box
+tile.grc.BeeBox.ExtraBiomesXL.acacia.name=Acacia Ouchy Box
+tile.grc.BeeBox.ExtraBiomesXL.cypress.name=Cypress Ouchy Box
+tile.grc.BeeBox.ExtraBiomesXL.japanese_maple.name=Japanese Maple Ouchy Box
+tile.grc.BeeBox.ExtraBiomesXL.rainbow_eucalyptus.name=Rainbow Eucalyptus Ouchy Box
+tile.grc.BeeBox.ExtraBiomesXL.autumn_wood.name=Autumn Wood Ouchy Box
+tile.grc.BeeBox.ExtraBiomesXL.bald_cypress.name=Bald Cypress Ouchy Box
+tile.grc.BeeBox.ExtraBiomesXL.sakura.name=Sakura Ouchy Box
+
+## Forestry Ouchy Boxes - this is just insane...
+### Regular
+tile.grc.BeeBox.Forestry.0.Normal.larch.name=Larch Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.teak.name=Teak Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.acacia.name=Acacia Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.lime.name=Lime Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.chestnut.name=Chestnut Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.wenge.name=Wenge Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.baobab.name=Baobab Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.sequoia.name=Sequoia Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.kapok.name=Kapok Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.ebony.name=Ebony Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.mahogany.name=Mahogany Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.balsa.name=Balsa Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.willow.name=Willow Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.walnut.name=Walnut Ouchy Box
+tile.grc.BeeBox.Forestry.0.Normal.greenheart.name=Greenheart Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.cherry.name=Cherry Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.mahoe.name=Mahoe Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.poplar.name=Poplar Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.palm.name=Palm Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.papaya.name=Papaya Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.pine.name=Pine Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.plum.name=Plum Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.maple.name=Maple Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.citrus.name=Citrus Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.giganteum.name=Giganteum Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.ipe.name=Ipe Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.padauk.name=Padauk Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.cocobolo.name=Cocobolo Ouchy Box
+tile.grc.BeeBox.Forestry.1.Normal.zebrawood.name=Zebrawood Ouchy Box
+### Fire Proof
+tile.grc.BeeBox.Forestry.0.Fireproof.larch.name=Larch Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.teak.name=Teak Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.acacia.name=Acacia Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.lime.name=Lime Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.chestnut.name=Chestnut Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.wenge.name=Wenge Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.baobab.name=Baobab Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.sequoia.name=Sequoia Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.kapok.name=Kapok Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.ebony.name=Ebony Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.mahogany.name=Mahogany Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.balsa.name=Balsa Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.willow.name=Willow Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.walnut.name=Walnut Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.0.Fireproof.greenheart.name=Greenheart Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.cherry.name=Cherry Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.mahoe.name=Mahoe Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.poplar.name=Poplar Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.palm.name=Palm Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.papaya.name=Papaya Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.pine.name=Pine Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.plum.name=Plum Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.maple.name=Maple Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.citrus.name=Citrus Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.giganteum.name=Giganteum Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.ipe.name=Ipe Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.padauk.name=Padauk Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.cocobolo.name=Cocobolo Ouchy Box (Fireproof)
+tile.grc.BeeBox.Forestry.1.Fireproof.zebrawood.name=Zebrawood Ouchy Box (Fireproof)
+
+## BiomesOPlenty Ouchy Boxes
+tile.grc.BeeBox.BiomesOPlenty.sacred_oak.name=Sacred Oak Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.cherry.name=Cherry Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.dark.name=Dark Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.fir.name=Fir Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.ethereal.name=Ethereal Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.magic.name=Magic Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.mangrove.name=Mangrove Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.palm.name=Palm Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.redwood.name=Redwood Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.willow.name=Willow Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.bamboo_thatching.name=Bamboo Thatch Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.pine.name=Pine Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.hell_bark.name=Hell Bark Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.jacaranda.name=Jacaranda Ouchy Box
+tile.grc.BeeBox.BiomesOPlenty.mahogany.name=Mahogany Ouchy Box
+
+## Botania Ouchy Boxes
+tile.grc.BeeBox.Botania.living_wood.name=Livingwood Ouchy Box
+tile.grc.BeeBox.Botania.dream_wood.name=Dreamwood Ouchy Box
+tile.grc.BeeBox.Botania.shimmer_wood.name=Shimmerwood Ouchy Box
+tile.grc.BeeBox.Botania.shimmer_wood.desc=ZOMG Colors!
+
+## Natura Ouchy Boxes
+tile.grc.BeeBox.Natura.apple.name=Apple Ouchy Box
+tile.grc.BeeBox.Natura.blood.name=Bloodwood Ouchy Box
+tile.grc.BeeBox.Natura.bush.name=Hopseed Ouchy Box
+tile.grc.BeeBox.Natura.darkwood.name=Darkwood Ouchy Box
+tile.grc.BeeBox.Natura.eucalyptus.name=Eucalyptus Ouchy Box
+tile.grc.BeeBox.Natura.fusewood.name=Fusewood Ouchy Box
+tile.grc.BeeBox.Natura.ghost.name=Ghostwood Ouchy Box
+tile.grc.BeeBox.Natura.maple.name=Maple Ouchy Box
+tile.grc.BeeBox.Natura.purpleheart.name=Amaranth Ouchy Box
+tile.grc.BeeBox.Natura.purpleheart.desc=Caress the one, the never-fading
+tile.grc.BeeBox.Natura.redwood.name=Redwood Ouchy Box
+tile.grc.BeeBox.Natura.sakura.name=Sakura Ouchy Box
+tile.grc.BeeBox.Natura.silverbell.name=Silverbell Ouchy Box
+tile.grc.BeeBox.Natura.tiger.name=Tigerwood Ouchy Box
+tile.grc.BeeBox.Natura.willow.name=Willow Ouchy Box
+
+# Other Blocks
+tile.grc.beeHive.name=Nopenest
+
+# Items
+item.grc.honeyComb.empty.name=Empty HunniComb
+item.grc.honeyComb.full.name=HunniComb
+item.grc.honeyJar.name=Hunni
+item.grc.bee.name=A Nope
+item.grc.FoodBottleFluidHoney.name=Hunni Buttl
+item.grc.BukkitFluidHoney.name=Hunni Bukkit
+item.grcbees.BeesWax.normal.name=Chewy Stuff
+item.grcbees.BeesWax.red.name=Red Chewy Stuff
+item.grcbees.BeesWax.black.name=Black Chewy Stuff
+
+# Tooltips
+grc.bees.item.honeyComb.deprecated=This itum haf been deprecuted, pls craft agen.
+
+# Containers
+container.grc.beeBox=Ouchy Box
+
+# Fluids
+fluid.grc.honey=Hunni
+fluid.grc.honeyMead0=Wet Hunni
+fluid.grc.honeyMead1=Funny Wet Hunni
+fluid.grc.honeyMead2=Funny Wet Hunni
+fluid.grc.honeyMead3=Funny Wet Hunni
+fluid.grc.honeyMead4=Funny Wet Hunni
+fluid.grc.honeyMead5=Funny Wet Hunni
+fluid.grc.honeyMead6=Funny Wet Hunni
+
+# Fluid Bottles
+item.grc.BottleFluidHoney.name=Hunni
+
+# Fluid Bukkits
+item.bucket.fluid.grc.honey.name=Hunni Bukkit
+item.bucket.fluid.grc.honeyMead0.name=Wet Hunni Bukkit
+item.bucket.fluid.grc.honeyMead1.name=Funny Wet Hunni Bukkit
+item.bucket.fluid.grc.honeyMead2.name=Funny Wet Hunni Bukkit
+item.bucket.fluid.grc.honeyMead3.name=Funny Wet Hunni Bukkit
+item.bucket.fluid.grc.honeyMead4.name=Funny Wet Hunni Bukkit
+item.bucket.fluid.grc.honeyMead5.name=Funny Wet Hunni Bukkit
+item.bucket.fluid.grc.honeyMead6.name=Funny Wet Hunni Bukkit
+
+# Fluid Blocks
+tile.grc.BlockFluidHoney.name=Hunni
+tile.fluid.grc.honeyMead0.name=Wet Hunni
+tile.fluid.grc.honeyMead1.name=Funny Wet Hunni
+tile.fluid.grc.honeyMead2.name=Funny Wet Hunni
+tile.fluid.grc.honeyMead3.name=Funny Wet Hunni
+tile.fluid.grc.honeyMead4.name=Funny Wet Hunni
+tile.fluid.grc.honeyMead5.name=Funny Wet Hunni
+tile.fluid.grc.honeyMead6.name=Funny Wet Hunni
+
+# Fluid Tags
+grc.fluids.tag.mead=Funny Wet Hunni
+grc.fluids.tag.honey=Hunni
+
+# Other
+grc.bees.bonus_prefix=Bonus :
+grc.bees.bees_prefix=Nopes :
+grc.bees.honey_prefix=Hunni :
+grc.bees.growth_rate_prefix=Growf Raet :
+grc.bees.growth_rate_value=%d%%

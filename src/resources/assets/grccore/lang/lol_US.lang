@@ -1,0 +1,134 @@
+# Creative Tabs
+itemGroup.creative_tab_grccore=Growthcraft
+
+# Blocks
+tile.grc.etfuturum_fence_rope_acacia.name=Fence with Yarn (Acacia)
+tile.grc.etfuturum_fence_rope_birch.name=Fence with Yarn (Birch)
+tile.grc.etfuturum_fence_rope_dark_oak.name=Fence with Yarn (Dark Oak)
+tile.grc.etfuturum_fence_rope_jungle.name=Fence with Yarn (Jungle)
+tile.grc.etfuturum_fence_rope_oak.name=Fence with Yarn (Oak)
+tile.grc.etfuturum_fence_rope_spruce.name=Fence with Yarn (Spruce)
+tile.grc.fenceRope.name=Fence with Yarn
+tile.grc.netherBrickFenceRope.name=Fence with Yarn (Nether Brick)
+tile.grc.naturaFenceRope.name=Fence with Yarn (%s)
+tile.grc.ropeBlock.name=Yarn
+tile.grccore.salt_block.name=Smushed Yucky Powder
+
+# Items
+item.grc.rope.name=Yarn
+item.grccore.salt.name=Yucky Powder
+item.grccore.bucketSalt.name=Yucky Powder in Bukkit
+item.grccore.bottleSalt.name=Yucky Powder in Buttl
+item.grccore.crowbar.black.name=Iron Lifty Thing (Black)
+item.grccore.crowbar.red.name=Iron Lifty Thing (Redish)
+item.grccore.crowbar.green.name=Iron Lifty Thing (Grean)
+item.grccore.crowbar.brown.name=Iron Lifty Thing (Pewp)
+item.grccore.crowbar.blue.name=Iron Lifty Thing (Bloo)
+item.grccore.crowbar.purple.name=Iron Lifty Thing (Parpal)
+item.grccore.crowbar.cyan.name=Iron Lifty Thing (Nyan)
+item.grccore.crowbar.light_gray.name=Iron Lifty Thing (Lit Gray)
+item.grccore.crowbar.gray.name=Iron Lifty Thing (Gray)
+item.grccore.crowbar.pink.name=Iron Lifty Thing (Pingk)
+item.grccore.crowbar.lime.name=Iron Lifty Thing (Lim)
+item.grccore.crowbar.yellow.name=Iron Lifty Thing (Yelo)
+item.grccore.crowbar.light_blue.name=Iron Lifty Thing (Lit Bloo)
+item.grccore.crowbar.magenta.name=Iron Lifty Thing (Magentar)
+item.grccore.crowbar.orange.name=Iron Lifty Thing (Ornge)
+item.grccore.crowbar.white.name=Iron Lifty Thing (Wite)
+
+# Fluids
+fluid.tile.water=WatR
+fluid.tile.lava=Warm
+
+## Salt Water
+fluid.grccore.SaltWater=Yucky WatR
+tile.grccore.BlockFluidSaltWater.name=Yucky WatR
+item.grccore.BottleFluidSaltWater.name=Yucky WatR Buttl
+item.bucket.fluid.grccore.SaltWater.name=Yucky WatR Buckt
+
+# Other
+achievementPage.pageGrowthCraft=Growthcraft
+
+# Colors
+grc.color.Black=Black
+grc.color.Blue=Bloo
+grc.color.Brown=Pewp
+grc.color.Cyan=Nyan
+grc.color.Gray=Gray
+grc.color.Green=Grean
+grc.color.LightBlue=Lit Bloo
+grc.color.LightGray=Lit Gray
+grc.color.Lime=Lim
+grc.color.Magenta=Magentar
+grc.color.Orange=Ornge
+grc.color.Pink=Pingk
+grc.color.Purple=Parpal
+grc.color.Red=Redish
+grc.color.Transparent=See-thru
+grc.color.White=Wite
+grc.color.Yellow=Yelo
+
+# Formats and Units
+grc.format.value.true=YES
+grc.format.value.false=NO
+grc.format.state.true=ON
+grc.format.state.false=OFF
+grc.format.invalid_fluid=<Invalid Fluid>
+# Displayed for items
+grc.format.itemslot.empty=<Empty>
+grc.format.itemslot.invalid=<Invalid Item>
+
+# Modifier name
+grc.format.booze.name=%2$s %1$s
+
+# When a fluid is not a booze
+grc.format.fluid.name=%1$s
+
+# Name (stack_size)
+grc.format.itemslot.item=%s (x%d)
+# Displayed for tile entities with multiple tanks, %d is the tank index + 1
+grc.format.tank_id=Tank %d :
+# When the tank is empty
+grc.format.tank.empty=<Empty>
+# %s is the fluid name
+grc.format.tank.content_suffix=mB of %s
+
+# Waila Tooltips
+grc.format.crop.growth_prefix=Growth :
+grc.format.crop.mature=Mature
+grc.format.crop.progress_format=%d%%
+grc.format.paddy.hasFluid=Has Fluid :
+grccore.device.heated.multiplier.format= %d%%
+grccore.device.heated.prefix=Heat :
+grccore.device.heated.state.false= <Cold>
+grccore.device.progress.format= %d%%
+grccore.device.progress.prefix=Progress :
+grccore.waila.option.DisplayFluidContent=Fluid Tanks
+grccore.waila.option.DisplayHeated=Heated Devices
+
+# Effects
+grc.effect.chance.format=%d%% Chance ov
+grc.effect.extinguish.desc=Stawps fier
+grc.effect.ignite.desc=Sets Fire for %ds
+grc.effect.list.head=Applies teh following:
+grc.effect.null.desc=Does Nothin
+grc.effect.random_list.head=Applies one ov teh fallowing:
+grc.effect.remove_potion_effect.format=Removes %s
+grc.effect.weighted_random_list.format=%d%% Chance ov
+
+# GUI
+gui.grc.progress.format=%s : %d / %d
+
+# Inventory
+grc.inventory.internal.name=Holdin Stuff
+
+# Tooltips
+grc.tooltip.detailed_information=Hold %s to show moar detailed infurmashiun
+
+# Achievements
+achievement.trusty_hardware=Trustee Hardware
+achievement.trusty_hardware.desc=Keep out of reach of Endermen.
+achievement.half_life_confirmed=Half-Life Confirmed!
+achievement.half_life_confirmed.desc=Smash a Zombo with a Iron Lifty Thing
+achievement.salty_situation=Salty Situation
+achievement.salty_situation.desc=Fill a Bukkit with Yucky Water

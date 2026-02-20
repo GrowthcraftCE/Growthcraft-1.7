@@ -1,0 +1,26 @@
+# Creative Tabs
+itemGroup.creative_tab_grcbamboo=Growthcraft Bamboo
+# Blocks
+tile.grc.bambooBlock.name=Bamboo
+tile.grc.bambooDoor.name=Bamboo Door
+tile.grc.bambooFence.name=Bamboo Fence
+tile.grc.bambooFenceGate.name=Bamboo Fence Gate
+tile.grc.bambooFenceRope.name=Bamboo Fence with Rope
+tile.grc.bambooLeaves.name=Bamboo Leaves
+tile.grc.bambooScaffold.name=Bamboo Scaffold
+tile.grc.bambooShoot.name=Bamboo Shoot
+tile.grc.bambooSlab.name=Bamboo Slab
+tile.grc.bambooStairs.name=Bamboo Stairs
+tile.grc.bambooStalk.name=Bamboo
+tile.grc.bambooWall.name=Bamboo Wall
+
+# Items
+item.grc.bamboo.name=Bamboo
+item.grc.bambooDoor.name=Bamboo Door
+item.grc.bambooSlab.name=Bamboo Slab
+item.grc.bambooRaft.name=Bamboo Raft
+item.grc.bambooCoal.name=Bamboo Charcoal
+item.grc.bambooShootFood.name=Bamboo Shoot
+
+# Entities
+entity.Growthcraft|Bamboo.bambooRaft.name=Bamboo Raft

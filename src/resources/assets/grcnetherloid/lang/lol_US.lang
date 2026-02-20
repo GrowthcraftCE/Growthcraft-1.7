@@ -1,0 +1,91 @@
+// Creative Tab
+itemGroup.tabNetherloid=Growthcraft Edgy
+
+// Items
+item.grcnetherloid.ectoplasm.name=Ghostie Goo
+item.grcnetherloid.ectoplasm.desc=It's teh spookeh stuff
+item.grcnetherloid.netherMaliceFruit.name=Froot dat iz not angry
+item.grcnetherloid.netherMuertecapFood.name=Faek Shruum
+item.grcnetherloid.netherPepper.name=Peppur dat iz not a ghostie
+item.grcnetherloid.netherPepper.desc=It burnz ur mouth
+item.grcnetherloid.netherRashSpores.name=Itchy itchy fungus
+item.grcnetherloid.netherRashSpores.desc=MAI SKIN ITCHES
+item.grcnetherloid.netherSquashSeeds.name=Spookeh Gourdie
+item.grcnetherloid.netherSquashSeeds.desc=Spookeh lookin sedz
+item.grcnetherloid.netherGhastPowder.name=Moaneh powdah
+
+// Tiles
+tile.grcnetherloid.netherBaalsRot.name=Moist shruum
+tile.grcnetherloid.netherCinderrot.name=Warm shruum
+tile.grcnetherloid.netherFireLily.name=Magic lava salaD
+tile.grcnetherloid.netherKnifeBush.name=edgy salad
+tile.grcnetherloid.netherMaliceFruit.name=Froot dat iz not angry
+tile.grcnetherloid.netherMaliceLeaves.name=NOPEWOOD salad
+tile.grcnetherloid.netherMaliceLog.name=NOPEWOOD Log
+tile.grcnetherloid.netherMalicePlanks.name=NOPEWOOD Planks
+tile.grcnetherloid.netherMaliceSapling.name=baby nopewood
+tile.grcnetherloid.netherMaraLotus.name=Mystical lava salaD
+tile.grcnetherloid.netherMolochsCompass.name=Magic Shruum Pointer
+tile.grcnetherloid.netherMuertecap.name=Faek Shruum
+tile.grcnetherloid.netherPaddyField.name=Lava Patti
+tile.grcnetherloid.netherPepper.name=Peppurz dat arez not a ghostie
+tile.grcnetherloid.netherSquash.name=Spookie Gourdie
+tile.grcnetherloid.netherSquashStem.name=Spookeh Gourdie Vien
+tile.grcnetherloid.netherStrangleroot.name=Meanie salaD
+
+// Booze
+/// Stuff dat is nawt hawt
+fluid.grc.fireBrandy=Stuff dat is nawt hawt
+fluid.grc.fireBrandy0=Stuff dat is nawt hawt
+fluid.grc.fireBrandy1=Stuff dat is nawt hawt
+fluid.grc.fireBrandy2=Stuff dat is nawt hawt
+fluid.grc.fireBrandy3=Stuff dat is nawt hawt
+
+item.bucket.fluid.grc.fireBrandy.name=Stuff dat is nawt hawt Bukkit
+item.bucket.fluid.grc.fireBrandy0.name=Stuff dat is nawt hawt Bukkit
+item.bucket.fluid.grc.fireBrandy1.name=Stuff dat is nawt hawt Bukkit
+item.bucket.fluid.grc.fireBrandy2.name=Stuff dat is nawt hawt Bukkit
+item.bucket.fluid.grc.fireBrandy3.name=Stuff dat is nawt hawt Bukkit
+
+tile.fluid.grc.fireBrandy.name=Stuff dat is nawt hawt
+tile.fluid.grc.fireBrandy0.name=Stuff dat is nawt hawt
+tile.fluid.grc.fireBrandy1.name=Stuff dat is nawt hawt
+tile.fluid.grc.fireBrandy2.name=Stuff dat is nawt hawt
+tile.fluid.grc.fireBrandy3.name=Stuff dat is nawt hawt
+
+/// Stuff dat is nawt angy
+fluid.grc.maliceCider=Stuff dat is nawt angy
+fluid.grc.maliceCider0=Stuff dat is nawt angy
+fluid.grc.maliceCider1=Stuff dat is nawt angy
+fluid.grc.maliceCider2=Stuff dat is nawt angy
+fluid.grc.maliceCider3=Stuff dat is nawt angy
+fluid.grc.maliceCider4=Nectar
+fluid.grc.maliceCider5=Cold Stuff
+fluid.grc.maliceCider6=Stuff dat is nawt angy
+fluid.grc.maliceCider7=Gross Stuff
+
+item.bucket.fluid.grc.maliceCider.name=Stuff dat is nawt angy Bucket
+item.bucket.fluid.grc.maliceCider0.name=Stuff dat is nawt angy Bukkit
+item.bucket.fluid.grc.maliceCider1.name=Stuff dat is nawt angy Bukkit
+item.bucket.fluid.grc.maliceCider2.name=Stuff dat is nawt angy Bukkit
+item.bucket.fluid.grc.maliceCider3.name=Stuff dat is nawt angy Bukkit
+item.bucket.fluid.grc.maliceCider4.name=Nectar Bukkit
+item.bucket.fluid.grc.maliceCider5.name=Cold Stuff Bukkit
+item.bucket.fluid.grc.maliceCider6.name=Stuff dat is nawt angy Bukkit
+item.bucket.fluid.grc.maliceCider7.name=Gross Stuff Bukkit
+
+tile.fluid.grc.maliceCider.name=Stuff dat is nawt angy
+tile.fluid.grc.maliceCider0.name=Stuff dat is nawt angy
+tile.fluid.grc.maliceCider1.name=Stuff dat is nawt angy
+tile.fluid.grc.maliceCider2.name=Stuff dat is nawt angy
+tile.fluid.grc.maliceCider3.name=Stuff dat is nawt angy
+tile.fluid.grc.maliceCider4.name=Nectar
+tile.fluid.grc.maliceCider5.name=Gelid Booze
+tile.fluid.grc.maliceCider6.name=Stuff dat is nawt angy
+tile.fluid.grc.maliceCider7.name=Gross Stuff
+
+fluid.grcnether.maliceCider7.modifier=Gross
+
+// Death
+death.attack.muetercapFood=%s dieded
+death.attack.knifeBush=%s cut demselves
