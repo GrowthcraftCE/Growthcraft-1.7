@@ -190,3 +190,24 @@
     "useDependencyInformation": "true"
     }]
 }
+
+        "modListVersion": 2,
+        "modList": [{
+                "modid": "${modId}",
+                "name": "${modName}",
+                "description": "A Hegemony of data management using Dominion.",
+                "version": "${modVersion}",
+                "mcversion": "${minecraftVersion}",
+                "url": "https://github.com/OvermindDL1/hegemony",
+                "updateUrl": "",
+                "authorList": ["OvermindDL1"],
+                "credits": "",
+                "logoFile": "",
+                "screenshots": [],
+                "parent": "",
+                "requiredMods": [],
+                "dependencies": [],
+                "dependants": [],
+                "useDependencyInformation": false
+        }]
+}
