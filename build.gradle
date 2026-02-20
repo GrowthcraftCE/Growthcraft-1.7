@@ -47,11 +47,13 @@ ext.thaumcraftApi = "api/thaumcraft/api"
 
 StructExtApi[] apis = [
     new StructExtApi(name: "buildcraft", api: "api/buildcraft/api", exclusion: "**/buildcraft/api/meh"),
+    new StructExtApi(name: "fossilsarcheology", api: "api/fossilsarcheology/api", exclusion: "**/fossilsarcheology/api/**"),	
     new StructExtApi(name: "forestry", api: "api/ForestryAPI/forestry/api", exclusion: "**/forestry/api/**", root: ext.forestryApiRoot),
     new StructExtApi(name: "invtweaks", api: "api/invtweaks/api", exclusion: "**/invtweaks/api/**"),
     new StructExtApi(name: "mfr", api: "api/powercrystals/minefactoryreloaded/api", exclusion: "**/powercrystals/minefactoryreloaded/api/**"),
     new StructExtApi(name: "thaumcraft", api: ext.thaumcraftApi, exclusion: "**/thaumcraft/api/**"),
-    new StructExtApi(name: "waila", api: "api/mcp/mobius/waila/api", exclusion: "**/mcp/mobius/waila/api/**")
+    new StructExtApi(name: "waila", api: "api/mcp/mobius/waila/api", exclusion: "**/mcp/mobius/waila/api/**"),
+    new StructExtApi(name: "extrabiomes", api: "api/extrabiomes/api", exclusion: "**/extrabiomes/api/**")
 ]
 
 minecraft {
