@@ -41,6 +41,11 @@ public class GrcBeesBlocks extends GrcModuleBlocks
 	public BlockTypeDefinition<? extends BlockBeeBox> beeBoxBotania;
 	public BlockTypeDefinition<? extends BlockBeeBox> beeBoxNether;
 	public BlockTypeDefinition<? extends BlockBeeBox> beeBoxThaumcraft;
+	public BlockTypeDefinition<? extends BlockBeeBox> beeBoxFossilsAndArchaeology;
+	public BlockTypeDefinition<? extends BlockBeeBox> beeBoxArsMagica2;
+	public BlockTypeDefinition<? extends BlockBeeBox> beeBoxTotemic;
+	public BlockTypeDefinition<? extends BlockBeeBox> beeBoxExtraBiomesXL;
+	public BlockTypeDefinition<? extends BlockBeeBox> beeBoxHighlands;
 	public List<BlockTypeDefinition<? extends BlockBeeBox>> beeBoxesForestry;
 	public List<BlockTypeDefinition<? extends BlockBeeBox>> beeBoxesForestryFireproof;
 	public BlockDefinition beeHive;
