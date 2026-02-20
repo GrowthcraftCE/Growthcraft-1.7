@@ -1,11 +1,11 @@
 // Add any additional repositories for your dependencies here.
 
 repositories {
+    mavenLocal()
+    mavenCentral()
     flatDir {
        dirs 'libs'
     }
-    mavenLocal()
-    mavenCentral()
     maven {
         name "applecore"
         url "http://www.ryanliptak.com/maven/"

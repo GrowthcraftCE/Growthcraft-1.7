@@ -1,4 +1,4 @@
-package fossilsarcheology.api;
+ package fossilsarcheology.api;
 
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;

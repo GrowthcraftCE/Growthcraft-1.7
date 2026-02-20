@@ -10,6 +10,7 @@ public class ItemBee extends GrcItemBase
 		super();
 		setUnlocalizedName("grc.bee");
 		setCreativeTab(GrowthCraftBees.tab);
-		setTextureName("grcbees:bee");
+		setTextureName("grcbees:bee")
+
 	}
 }
