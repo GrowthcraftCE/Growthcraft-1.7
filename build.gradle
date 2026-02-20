@@ -96,6 +96,9 @@ processResources {
 }
 
 repositories {
+    flatDir {
+       dirs 'libs'
+    }
     mavenLocal()
     mavenCentral()
     maven {
@@ -110,10 +113,17 @@ repositories {
         name = "forge"
         url = "http://files.minecraftforge.net/maven"
     }
-    maven {
-        name "mobius"
-        url "http://mobiusstrip.eu/maven"
+        maven {
+        url "http://dvs1.progwml6.com/files/maven"
     }
+    maven {
+        name = "Mobius Repo"
+        url "http://tehnut.info/maven"
+    }
+    maven {
+        name = "ilexiconn"
+        url = "https://maven.mcmoddev.com/"
+		}
     maven {
         name = "CurseMaven"
         url = "https://cursemaven.com"
@@ -121,8 +131,8 @@ repositories {
     ivy {
         name "buildcraft"
         artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
-    }
-}
+    }		
+  }
 
 dependencies {
     compile "applecore:AppleCore:${minecraft_version}-${applecore_version}:api"
