@@ -1,7 +1,6 @@
 // Add any additional repositories for your dependencies here.
 
 repositories {
-repositories {
     flatDir {
        dirs 'libs'
     }
@@ -39,4 +38,3 @@ repositories {
         artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
     }		
   }
-}

@@ -35,4 +35,14 @@
  */
 dependencies {
     //runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.69-GTNH:dev")
+    compile "applecore:AppleCore:${minecraft_version}-${applecore_version}:api"
+    //compile "mcp.mobius.waila:Waila:${waila_version}_${minecraft_version}:dev"
+    compile "codechicken:CodeChickenLib:${minecraft_version}-${code_chicken_lib_version}:dev"
+    compile "codechicken:CodeChickenCore:${minecraft_version}-${code_chicken_core_version}:dev"
+    compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
+    compile "curse.maven:thaumcraft-223628:2227552"
+    compile "curse.maven:forestry-59751:2333823"
+    //compile "com.mod-buildcraft:buildcraft:${bc_version}:dev"
+    compile "curse.maven:buildcraft-61811:2322106"
+    testCompile "junit:junit:4.11"	
 }
