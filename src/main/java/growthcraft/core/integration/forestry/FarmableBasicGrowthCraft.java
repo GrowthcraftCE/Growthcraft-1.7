@@ -10,77 +10,70 @@
  ******************************************************************************/
 /**
  * NOTICE:
- *   This file has been modified from its original source for use in
- *   Growthcraft CE.
+ * This file has been modified from its original source for use in
+ * Growthcraft CE.
  */
 package growthcraft.core.integration.forestry;
 
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.api.core.util.Point3;
-import growthcraft.core.util.ItemUtils;
-
-import forestry.api.farming.ICrop;
-import forestry.api.farming.IFarmable;
-
-import cpw.mods.fml.common.Optional;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.Optional;
+import forestry.api.farming.ICrop;
+import forestry.api.farming.IFarmable;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.Point3;
+import growthcraft.core.util.ItemUtils;
+
 /**
  * This was taken from Forestry
  */
-@Optional.Interface(iface="forestry.api.farming.IFarmable", modid="ForestryAPI|farming")
-public class FarmableBasicGrowthCraft implements IFarmable
-{
-	private final Block block;
-	private final int matureMeta;
-	private final boolean isRice;
-	private final boolean isGrape;
+@Optional.Interface(iface = "forestry.api.farming.IFarmable", modid = "ForestryAPI|farming")
+public class FarmableBasicGrowthCraft implements IFarmable {
 
-	public FarmableBasicGrowthCraft(Block pblock, int pmatureMeta, boolean pisRice, boolean pisGrape)
-	{
-		this.block = pblock;
-		this.matureMeta = pmatureMeta;
-		this.isRice = pisRice;
-		this.isGrape = pisGrape;
-	}
+    private final Block block;
+    private final int matureMeta;
+    private final boolean isRice;
+    private final boolean isGrape;
 
-	@Override
-	@Optional.Method(modid="ForestryAPI|farming")
-	public boolean isSaplingAt(World world, int x, int y, int z)
-	{
-		return world.getBlock(x, y, z) == block;
-	}
+    public FarmableBasicGrowthCraft(Block pblock, int pmatureMeta, boolean pisRice, boolean pisGrape) {
+        this.block = pblock;
+        this.matureMeta = pmatureMeta;
+        this.isRice = pisRice;
+        this.isGrape = pisGrape;
+    }
 
-	@Override
-	@Optional.Method(modid="ForestryAPI|farming")
-	public ICrop getCropAt(World world, int x, int y, int z)
-	{
-		if (world.getBlock(x, y, z) != block) return null;
-		if (world.getBlockMetadata(x, y, z) != matureMeta) return null;
-		return new CropBasicGrowthCraft(world, block, matureMeta, new Point3(x, y, z), isRice, isGrape);
-	}
+    @Override
+    @Optional.Method(modid = "ForestryAPI|farming")
+    public boolean isSaplingAt(World world, int x, int y, int z) {
+        return world.getBlock(x, y, z) == block;
+    }
 
-	@Override
-	@Optional.Method(modid="ForestryAPI|farming")
-	public boolean isGermling(ItemStack stack)
-	{
-		return ItemUtils.equals(block, stack);
-	}
+    @Override
+    @Optional.Method(modid = "ForestryAPI|farming")
+    public ICrop getCropAt(World world, int x, int y, int z) {
+        if (world.getBlock(x, y, z) != block) return null;
+        if (world.getBlockMetadata(x, y, z) != matureMeta) return null;
+        return new CropBasicGrowthCraft(world, block, matureMeta, new Point3(x, y, z), isRice, isGrape);
+    }
 
-	@Override
-	@Optional.Method(modid="ForestryAPI|farming")
-	public boolean plantSaplingAt(EntityPlayer player, ItemStack germling, World world, int x, int y, int z)
-	{
-		return world.setBlock(x, y, z, block, 0, BlockFlags.SYNC);
-	}
+    @Override
+    @Optional.Method(modid = "ForestryAPI|farming")
+    public boolean isGermling(ItemStack stack) {
+        return ItemUtils.equals(block, stack);
+    }
 
-	@Override
-	@Optional.Method(modid="ForestryAPI|farming")
-	public boolean isWindfall(ItemStack stack)
-	{
-		return false;
-	}
+    @Override
+    @Optional.Method(modid = "ForestryAPI|farming")
+    public boolean plantSaplingAt(EntityPlayer player, ItemStack germling, World world, int x, int y, int z) {
+        return world.setBlock(x, y, z, block, 0, BlockFlags.SYNC);
+    }
+
+    @Override
+    @Optional.Method(modid = "ForestryAPI|farming")
+    public boolean isWindfall(ItemStack stack) {
+        return false;
+    }
 }

@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,123 +19,104 @@
  */
 package growthcraft.milk.common.tileentity;
 
-import growthcraft.api.core.fluids.FluidTest;
-import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
-import growthcraft.core.common.tileentity.GrcTileDeviceBase;
-import growthcraft.milk.common.tileentity.device.Pancheon;
-
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityPancheon extends GrcTileDeviceBase implements ITileProgressiveDevice, IPancheonTile
-{
-	private Pancheon pancheon = new Pancheon(this, 0, 2, 1);
+import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.core.common.tileentity.GrcTileDeviceBase;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
+import growthcraft.milk.common.tileentity.device.Pancheon;
 
-	@Override
-	public float getDeviceProgress()
-	{
-		return pancheon.getProgress();
-	}
+public class TileEntityPancheon extends GrcTileDeviceBase implements ITileProgressiveDevice, IPancheonTile {
 
-	@Override
-	public int getDeviceProgressScaled(int scale)
-	{
-		return pancheon.getProgressScaled(scale);
-	}
+    private final Pancheon pancheon = new Pancheon(this, 0, 2, 1);
 
-	/**
-	 * Pancheons have 3 fluid slots, the first is its `input` slot
-	 * The second slot is its `bottom` output slot
-	 * And the thirs is its `top` slot
-	 * Though the capacity of each is 1000 mB, the pancheon can only contain
-	 * a total of 1000 mB, not 3k
-	 *
-	 * @return fluid tanks
-	 */
-	@Override
-	protected FluidTank[] createTanks()
-	{
-		return new FluidTank[] {
-			new FluidTank(1000),
-			new FluidTank(1000),
-			new FluidTank(1000)
-		};
-	}
+    @Override
+    public float getDeviceProgress() {
+        return pancheon.getProgress();
+    }
 
-	protected int getPresentTankIndex()
-	{
-		for (int i = getTankCount() - 1; i > 0; --i)
-		{
-			if (isFluidTankFilled(i))
-			{
-				return i;
-			}
-		}
-		return 0;
-	}
+    @Override
+    public int getDeviceProgressScaled(int scale) {
+        return pancheon.getProgressScaled(scale);
+    }
 
-	/**
-	 * Pancheon tanks are treated as a Stack.
-	 * When a tank at the end if filled, it will be returned, if its
-	 * empty then it returns the tank before it and so forth.
-	 *
-	 * @return the active fluid tank
-	 */
-	public FluidTank getPresentTank()
-	{
-		return getFluidTank(getPresentTankIndex());
-	}
+    /**
+     * Pancheons have 3 fluid slots, the first is its `input` slot
+     * The second slot is its `bottom` output slot
+     * And the thirs is its `top` slot
+     * Though the capacity of each is 1000 mB, the pancheon can only contain
+     * a total of 1000 mB, not 3k
+     *
+     * @return fluid tanks
+     */
+    @Override
+    protected FluidTank[] createTanks() {
+        return new FluidTank[] { new FluidTank(1000), new FluidTank(1000), new FluidTank(1000) };
+    }
 
-	public boolean outputTanksHaveFluid()
-	{
-		return isFluidTankFilled(1) || isFluidTankFilled(2);
-	}
+    protected int getPresentTankIndex() {
+        for (int i = getTankCount() - 1; i > 0; --i) {
+            if (isFluidTankFilled(i)) {
+                return i;
+            }
+        }
+        return 0;
+    }
 
-	@Override
-	public void updateEntity()
-	{
-		super.updateEntity();
-		if (!worldObj.isRemote)
-		{
-			pancheon.update();
-		}
-	}
+    /**
+     * Pancheon tanks are treated as a Stack.
+     * When a tank at the end if filled, it will be returned, if its
+     * empty then it returns the tank before it and so forth.
+     *
+     * @return the active fluid tank
+     */
+    public FluidTank getPresentTank() {
+        return getFluidTank(getPresentTankIndex());
+    }
 
-	@Override
-	protected FluidStack doDrain(ForgeDirection dir, int amount, boolean doDrain)
-	{
-		return getPresentTank().drain(amount, doDrain);
-	}
+    public boolean outputTanksHaveFluid() {
+        return isFluidTankFilled(1) || isFluidTankFilled(2);
+    }
 
-	@Override
-	protected FluidStack doDrain(ForgeDirection dir, FluidStack stack, boolean doDrain)
-	{
-		/**
-		 * @todo Drain from bottom fluid tank when dir == DOWN
-		 */
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        if (!worldObj.isRemote) {
+            pancheon.update();
+        }
+    }
 
-		if (!FluidTest.isValid(stack)) return null;
-		final FluidTank tank = getPresentTank();
-		final FluidStack expected = tank.getFluid();
-		if (expected != null && expected.isFluidEqual(stack))
-		{
-			return tank.drain(stack.amount, doDrain);
-		}
-		return null;
-	}
+    @Override
+    protected FluidStack doDrain(ForgeDirection dir, int amount, boolean doDrain) {
+        return getPresentTank().drain(amount, doDrain);
+    }
 
-	@Override
-	protected int doFill(ForgeDirection dir, FluidStack stack, boolean doFill)
-	{
-		if (outputTanksHaveFluid()) return 0;
-		return fillFluidTank(0, stack, doFill);
-	}
+    @Override
+    protected FluidStack doDrain(ForgeDirection dir, FluidStack stack, boolean doDrain) {
+        /**
+         * @todo Drain from bottom fluid tank when dir == DOWN
+         */
 
-	@Override
-	protected void markFluidDirty()
-	{
-		super.markFluidDirty();
-		markDirtyAndUpdate();
-	}
+        if (!FluidTest.isValid(stack)) return null;
+        final FluidTank tank = getPresentTank();
+        final FluidStack expected = tank.getFluid();
+        if (expected != null && expected.isFluidEqual(stack)) {
+            return tank.drain(stack.amount, doDrain);
+        }
+        return null;
+    }
+
+    @Override
+    protected int doFill(ForgeDirection dir, FluidStack stack, boolean doFill) {
+        if (outputTanksHaveFluid()) return 0;
+        return fillFluidTank(0, stack, doFill);
+    }
+
+    @Override
+    protected void markFluidDirty() {
+        super.markFluidDirty();
+        markDirtyAndUpdate();
+    }
 }

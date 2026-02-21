@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,23 +22,20 @@ package growthcraft.api.core.util;
 import java.util.List;
 import java.util.Random;
 
-public class RandomUtils
-{
-	private RandomUtils() {}
+public class RandomUtils {
 
-	public static boolean thresh(Random random, float thresh)
-	{
-		return random.nextInt(2000) < (int)(thresh * 2000);
-	}
+    private RandomUtils() {}
 
-	public static int range(Random random, int min, int max)
-	{
-		if (min == max) return min;
-		return min + random.nextInt(max - min);
-	}
+    public static boolean thresh(Random random, float thresh) {
+        return random.nextInt(2000) < (int) (thresh * 2000);
+    }
 
-	public static <T> T sample(Random random, List<T> list)
-	{
-		return list.get(random.nextInt(list.size()));
-	}
+    public static int range(Random random, int min, int max) {
+        if (min == max) return min;
+        return min + random.nextInt(max - min);
+    }
+
+    public static <T> T sample(Random random, List<T> list) {
+        return list.get(random.nextInt(list.size()));
+    }
 }

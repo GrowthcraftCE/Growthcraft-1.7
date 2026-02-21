@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,32 +19,33 @@
  */
 package growthcraft.rice.integration;
 
-import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
-import growthcraft.core.integration.forestry.ForestryFluids;
-import growthcraft.core.integration.ForestryModuleBase;
-import growthcraft.rice.GrowthCraftRice;
-
-import cpw.mods.fml.common.Optional;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-public class ForestryModule extends ForestryModuleBase
-{
-	public ForestryModule()
-	{
-		super(GrowthCraftRice.MOD_ID);
-	}
+import cpw.mods.fml.common.Optional;
+import growthcraft.core.integration.ForestryModuleBase;
+import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
+import growthcraft.core.integration.forestry.ForestryFluids;
+import growthcraft.rice.GrowthCraftRice;
 
-	@Override
-	@Optional.Method(modid="Forestry")
-	protected void integrate()
-	{
-		final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
+public class ForestryModule extends ForestryModuleBase {
 
-		final ItemStack riceSeed = GrowthCraftRice.items.rice.asStack();
-		final Block riceBlock = GrowthCraftRice.blocks.riceBlock.getBlock();
-		if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager.addRecipe(10, new ItemStack[]{riceSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
-		Backpack.FORESTERS.add(riceSeed);
-		addFarmable("farmOrchard", new FarmableBasicGrowthCraft(riceBlock, GrowthCraftRice.getConfig().paddyFieldMax, true, false));
-	}
+    public ForestryModule() {
+        super(GrowthCraftRice.MOD_ID);
+    }
+
+    @Override
+    @Optional.Method(modid = "Forestry")
+    protected void integrate() {
+        final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
+
+        final ItemStack riceSeed = GrowthCraftRice.items.rice.asStack();
+        final Block riceBlock = GrowthCraftRice.blocks.riceBlock.getBlock();
+        if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager
+            .addRecipe(10, new ItemStack[] { riceSeed }, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
+        Backpack.FORESTERS.add(riceSeed);
+        addFarmable(
+            "farmOrchard",
+            new FarmableBasicGrowthCraft(riceBlock, GrowthCraftRice.getConfig().paddyFieldMax, true, false));
+    }
 }

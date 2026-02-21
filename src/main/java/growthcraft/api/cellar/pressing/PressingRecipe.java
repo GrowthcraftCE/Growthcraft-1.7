@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2015, 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,36 +22,31 @@ package growthcraft.api.cellar.pressing;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
 import growthcraft.api.cellar.common.ProcessingRecipe;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.item.ItemTest;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
+public class PressingRecipe extends ProcessingRecipe {
 
-public class PressingRecipe extends ProcessingRecipe
-{
-	private IMultiItemStacks inputItemStack;
+    private final IMultiItemStacks inputItemStack;
 
-	public PressingRecipe(@Nonnull IMultiItemStacks src, @Nonnull FluidStack f, int t, @Nullable Residue r)
-	{
-		super(f, t, r);
-		this.inputItemStack = src;
-	}
+    public PressingRecipe(@Nonnull IMultiItemStacks src, @Nonnull FluidStack f, int t, @Nullable Residue r) {
+        super(f, t, r);
+        this.inputItemStack = src;
+    }
 
-	public IMultiItemStacks getInput()
-	{
-		return inputItemStack;
-	}
+    public IMultiItemStacks getInput() {
+        return inputItemStack;
+    }
 
-	public boolean matchesRecipe(@Nullable ItemStack itemStack)
-	{
-		if (itemStack != null)
-		{
-			if (!ItemTest.hasEnough(inputItemStack, itemStack)) return false;
-			return true;
-		}
-		return false;
-	}
+    public boolean matchesRecipe(@Nullable ItemStack itemStack) {
+        if (itemStack != null) {
+            return ItemTest.hasEnough(inputItemStack, itemStack);
+        }
+        return false;
+    }
 }

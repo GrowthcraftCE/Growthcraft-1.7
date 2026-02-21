@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2015 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,34 +24,29 @@ package growthcraft.api.core.i18n;
  * Forge's StatCollector and a fallback NullTranslator,
  * this will hide the difference between them.
  */
-public class GrcI18n
-{
-	private static ITranslator translator;
+public class GrcI18n {
 
-	private GrcI18n() {}
+    private static ITranslator translator;
 
-	public static void setTranslator(ITranslator tr)
-	{
-		translator = tr;
-	}
+    private GrcI18n() {}
 
-	public static ITranslator getTranslator()
-	{
-		if (translator == null)
-		{
-			// Defaults to the StatCollector version
-			setTranslator(StatCollectorTranslator.INSTANCE);
-		}
-		return translator;
-	}
+    public static ITranslator getTranslator() {
+        if (translator == null) {
+            // Defaults to the StatCollector version
+            setTranslator(StatCollectorTranslator.INSTANCE);
+        }
+        return translator;
+    }
 
-	public static String translate(String str, Object... objs)
-	{
-		return getTranslator().translate(str, objs);
-	}
+    public static void setTranslator(ITranslator tr) {
+        translator = tr;
+    }
 
-	public static String translate(String str)
-	{
-		return getTranslator().translate(str);
-	}
+    public static String translate(String str, Object... objs) {
+        return getTranslator().translate(str, objs);
+    }
+
+    public static String translate(String str) {
+        return getTranslator().translate(str);
+    }
 }

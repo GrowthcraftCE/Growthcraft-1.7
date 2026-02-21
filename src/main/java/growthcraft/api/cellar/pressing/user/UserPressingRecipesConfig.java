@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2015, 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,6 +21,8 @@ package growthcraft.api.cellar.pressing.user;
 
 import java.io.BufferedReader;
 
+import net.minecraftforge.fluids.FluidStack;
+
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.definition.IMultiItemStacks;
@@ -33,112 +31,88 @@ import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.ResidueSchema;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
 
-import net.minecraftforge.fluids.FluidStack;
-
 /**
  * This allows users to define their own pressing recipes using existing items
  * and fluids. Growthcraft WILL NOT create new fluids or items for you, THEY
  * MUST EXIST, or we will not register your recipe.
  */
-public class UserPressingRecipesConfig extends AbstractUserJSONConfig
-{
-	private final UserPressingRecipes defaultRecipes = new UserPressingRecipes();
-	private UserPressingRecipes recipes;
+public class UserPressingRecipesConfig extends AbstractUserJSONConfig {
 
-	public void addDefault(UserPressingRecipe recipe)
-	{
-		defaultRecipes.data.add(recipe);
-	}
+    private final UserPressingRecipes defaultRecipes = new UserPressingRecipes();
+    private UserPressingRecipes recipes;
 
-	public void addDefault(ItemKeySchema itm, FluidStackSchema fl, int tm, ResidueSchema res)
-	{
-		addDefault(new UserPressingRecipe(itm, fl, tm, res));
-	}
+    public void addDefault(UserPressingRecipe recipe) {
+        defaultRecipes.data.add(recipe);
+    }
 
-	public void addDefault(Object stack, FluidStack fluid, int time, Residue res)
-	{
-		for (ItemKeySchema itemKey : ItemKeySchema.createMulti(stack))
-		{
-			addDefault(
-				itemKey,
-				new FluidStackSchema(fluid),
-				time,
-				res == null ? null : new ResidueSchema(res)
-			);
-		}
-	}
+    public void addDefault(ItemKeySchema itm, FluidStackSchema fl, int tm, ResidueSchema res) {
+        addDefault(new UserPressingRecipe(itm, fl, tm, res));
+    }
 
-	@Override
-	protected String getDefault()
-	{
-		return gson.toJson(defaultRecipes);
-	}
+    public void addDefault(Object stack, FluidStack fluid, int time, Residue res) {
+        for (ItemKeySchema itemKey : ItemKeySchema.createMulti(stack)) {
+            addDefault(itemKey, new FluidStackSchema(fluid), time, res == null ? null : new ResidueSchema(res));
+        }
+    }
 
-	@Override
-	protected void loadFromBuffer(BufferedReader reader) throws IllegalStateException
-	{
-		this.recipes = gson.fromJson(reader, UserPressingRecipes.class);
-	}
+    @Override
+    protected String getDefault() {
+        return gson.toJson(defaultRecipes);
+    }
 
-	protected void addPressingRecipe(UserPressingRecipe recipe)
-	{
-		if (recipe == null)
-		{
-			logger.error("NULL RECIPE");
-			return;
-		}
+    @Override
+    protected void loadFromBuffer(BufferedReader reader) throws IllegalStateException {
+        this.recipes = gson.fromJson(reader, UserPressingRecipes.class);
+    }
 
-		if (recipe.item == null || recipe.item.isInvalid())
-		{
-			logger.error("Item is invalid for recipe {%s}", recipe);
-			return;
-		}
+    protected void addPressingRecipe(UserPressingRecipe recipe) {
+        if (recipe == null) {
+            logger.error("NULL RECIPE");
+            return;
+        }
 
-		if (recipe.fluid == null)
-		{
-			logger.error("No result fluid for recipe {%s}", recipe);
-			return;
-		}
+        if (recipe.item == null || recipe.item.isInvalid()) {
+            logger.error("Item is invalid for recipe {%s}", recipe);
+            return;
+        }
 
-		final FluidStack fluidStack = recipe.fluid.asFluidStack();
-		if (fluidStack == null)
-		{
-			logger.error("Invalid fluid for recipe {%s}", recipe);
-			return;
-		}
+        if (recipe.fluid == null) {
+            logger.error("No result fluid for recipe {%s}", recipe);
+            return;
+        }
 
-		Residue residue = null;
-		if (recipe.residue != null)
-		{
-			residue = recipe.residue.asResidue();
-			if (residue == null)
-			{
-				logger.error("Not a valid residue found for {%s}", recipe);
-				return;
-			}
-		}
+        final FluidStack fluidStack = recipe.fluid.asFluidStack();
+        if (fluidStack == null) {
+            logger.error("Invalid fluid for recipe {%s}", recipe);
+            return;
+        }
 
-		logger.debug("Adding pressing recipe {%s}", recipe);
-		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
-		{
-			CellarRegistry.instance().pressing().addRecipe(item, fluidStack, recipe.time, residue);
-		}
-	}
+        Residue residue = null;
+        if (recipe.residue != null) {
+            residue = recipe.residue.asResidue();
+            if (residue == null) {
+                logger.error("Not a valid residue found for {%s}", recipe);
+                return;
+            }
+        }
 
-	@Override
-	public void postInit()
-	{
-		if (recipes != null)
-		{
-			if (recipes.data != null)
-			{
-				logger.debug("Adding %d user pressing recipes.", recipes.data.size());
-				for (UserPressingRecipe recipe : recipes.data) addPressingRecipe(recipe);
-			}
-			else
-			{
-				logger.error("Recipe data is invalid!");
-			}
-		}
-	}
+        logger.debug("Adding pressing recipe {%s}", recipe);
+        for (IMultiItemStacks item : recipe.item.getMultiItemStacks()) {
+            CellarRegistry.instance()
+                .pressing()
+                .addRecipe(item, fluidStack, recipe.time, residue);
+        }
+    }
+
+    @Override
+    public void postInit() {
+        if (recipes != null) {
+            if (recipes.data != null) {
+                logger.debug("Adding %d user pressing recipes.", recipes.data.size());
+                for (UserPressingRecipe recipe : recipes.data) addPressingRecipe(recipe);
+            } else {
+                logger.error("Recipe data is invalid!");
+            }
+        }
+    }
 }

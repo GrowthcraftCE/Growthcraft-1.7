@@ -1,66 +1,58 @@
 package growthcraft.rice.common.item;
 
-import growthcraft.core.common.item.GrcItemBase;
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.rice.GrowthCraftRice;
-import growthcraft.rice.util.RiceBlockCheck;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemRice extends GrcItemBase
-{
-	public ItemRice()
-	{
-		super();
-		this.setUnlocalizedName("grc.rice");
-		this.setCreativeTab(GrowthCraftCore.creativeTab);
-	}
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.common.item.GrcItemBase;
+import growthcraft.rice.GrowthCraftRice;
+import growthcraft.rice.util.RiceBlockCheck;
 
-	/************
-	 * MAIN
-	 ************/
-	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
-	{
-		if (dir != 1)
-		{
-			return false;
-		}
-		else if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack))
-		{
-			final Block soil = world.getBlock(x, y, z);
+public class ItemRice extends GrcItemBase {
 
-			if (soil != null && RiceBlockCheck.isPaddy(soil) && world.isAirBlock(x, y + 1, z) && world.getBlockMetadata(x, y, z) > 0)
-			{
-				world.setBlock(x, y + 1, z, GrowthCraftRice.blocks.riceBlock.getBlock());
-				--stack.stackSize;
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			return false;
-		}
-	}
+    public ItemRice() {
+        super();
+        this.setUnlocalizedName("grc.rice");
+        this.setCreativeTab(GrowthCraftCore.creativeTab);
+    }
 
-	/************
-	 * TEXTURES
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
-	{
-		this.itemIcon = reg.registerIcon("grcrice:rice");
-	}
+    /************
+     * MAIN
+     ************/
+    @Override
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir,
+        float par8, float par9, float par10) {
+        if (dir != 1) {
+            return false;
+        } else if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack)) {
+            final Block soil = world.getBlock(x, y, z);
+
+            if (soil != null && RiceBlockCheck.isPaddy(soil)
+                && world.isAirBlock(x, y + 1, z)
+                && world.getBlockMetadata(x, y, z) > 0) {
+                world.setBlock(x, y + 1, z, GrowthCraftRice.blocks.riceBlock.getBlock());
+                --stack.stackSize;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /************
+     * TEXTURES
+     ************/
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister reg) {
+        this.itemIcon = reg.registerIcon("grcrice:rice");
+    }
 
 }

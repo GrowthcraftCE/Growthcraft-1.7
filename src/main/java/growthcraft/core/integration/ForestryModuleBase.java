@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,102 +22,93 @@ package growthcraft.core.integration;
 import java.util.Collection;
 import java.util.List;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import cpw.mods.fml.common.Optional;
+import forestry.api.core.ForestryAPI;
+import forestry.api.core.IGameMode;
+import forestry.api.farming.Farmables;
+import forestry.api.farming.IFarmable;
+import forestry.api.storage.BackpackManager;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.item.ItemTest;
 import growthcraft.core.integration.forestry.ForestryFluids;
 import growthcraft.core.integration.forestry.ForestryPlatform;
 import growthcraft.core.integration.forestry.recipes.RecipeManagersShims;
 
-import forestry.api.core.ForestryAPI;
-import forestry.api.core.IGameMode;
-import forestry.api.farming.Farmables;
-import forestry.api.farming.IFarmable;
-import forestry.api.storage.BackpackManager;
-
-import cpw.mods.fml.common.Optional;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 /**
  * Helper class for integrating Forestry with Growthcraft, simply extend
  * class and implement the integrate method
  */
-public abstract class ForestryModuleBase extends ModIntegrationBase
-{
-	/**
-	 * Wrapper around the Forestry BackpackManager, safely handles null backpacks.
-	 *
-	 * @example
-	 *   Backpack.MINERS.add(anItemStack);
-	 */
-	public static enum Backpack
-	{
-		MINERS,
-		DIGGERS,
-		FORESTERS,
-		HUNTERS,
-		ADVENTURERS;
+public abstract class ForestryModuleBase extends ModIntegrationBase {
 
-		public final int index;
+    public ForestryModuleBase(String modid) {
+        super(modid, ForestryPlatform.MOD_ID);
+    }
 
-		private Backpack()
-		{
-			this.index = ordinal();
-		}
+    @Optional.Method(modid = "ForestryAPI|core")
+    public IGameMode getActiveMode() {
+        return ForestryAPI.activeMode;
+    }
 
-		@Optional.Method(modid="ForestryAPI|storage")
-		public List<ItemStack> items()
-		{
-			if (BackpackManager.backpackItems == null)
-				return null;
+    public RecipeManagersShims recipes() {
+        return ForestryRecipeUtils.recipes();
+    }
 
-			return BackpackManager.backpackItems[index];
-		}
+    @Optional.Method(modid = "ForestryAPI|farming")
+    public void addFarmable(String ns, IFarmable farmable) {
+        final Collection<IFarmable> farmables = Farmables.farmables.get(ns);
+        if (farmables != null) farmables.add(farmable);
+    }
 
-		public void add(ItemStack stack)
-		{
-			final List<ItemStack> target = items();
-			if (target != null) target.add(stack);
-		}
-	}
+    /**
+     * Wrapper around the Forestry BackpackManager, safely handles null backpacks.
+     *
+     * @example Backpack.MINERS.add(anItemStack);
+     */
+    public enum Backpack {
 
-	public static class ForestryRecipeUtils
-	{
-		public static RecipeManagersShims recipes()
-		{
-			return RecipeManagersShims.instance();
-		}
+        MINERS,
+        DIGGERS,
+        FORESTERS,
+        HUNTERS,
+        ADVENTURERS;
 
-		public static void addFermenterRecipes(ItemStack resource, int fermentationValue, FluidStack output)
-		{
-			if (!ItemTest.isValid(resource)) return;
-			if (!FluidTest.isValid(output)) return;
-			if (ForestryFluids.WATER.exists()) recipes().fermenterManager.addRecipe(resource, fermentationValue, 1.0f, output, ForestryFluids.WATER.asFluidStack());
-			if (ForestryFluids.JUICE.exists()) recipes().fermenterManager.addRecipe(resource, fermentationValue, 1.5f, output, ForestryFluids.JUICE.asFluidStack());
-			if (ForestryFluids.HONEY.exists()) recipes().fermenterManager.addRecipe(resource, fermentationValue, 1.5f, output, ForestryFluids.HONEY.asFluidStack());
-		}
-	}
+        public final int index;
 
-	public ForestryModuleBase(String modid)
-	{
-		super(modid, ForestryPlatform.MOD_ID);
-	}
+        Backpack() {
+            this.index = ordinal();
+        }
 
-	@Optional.Method(modid="ForestryAPI|core")
-	public IGameMode getActiveMode()
-	{
-		return ForestryAPI.activeMode;
-	}
+        @Optional.Method(modid = "ForestryAPI|storage")
+        public List<ItemStack> items() {
+            if (BackpackManager.backpackItems == null) return null;
 
-	public RecipeManagersShims recipes()
-	{
-		return ForestryRecipeUtils.recipes();
-	}
+            return BackpackManager.backpackItems[index];
+        }
 
-	@Optional.Method(modid="ForestryAPI|farming")
-	public void addFarmable(String ns, IFarmable farmable)
-	{
-		final Collection<IFarmable> farmables = Farmables.farmables.get(ns);
-		if (farmables != null) farmables.add(farmable);
-	}
+        public void add(ItemStack stack) {
+            final List<ItemStack> target = items();
+            if (target != null) target.add(stack);
+        }
+    }
+
+    public static class ForestryRecipeUtils {
+
+        public static RecipeManagersShims recipes() {
+            return RecipeManagersShims.instance();
+        }
+
+        public static void addFermenterRecipes(ItemStack resource, int fermentationValue, FluidStack output) {
+            if (!ItemTest.isValid(resource)) return;
+            if (!FluidTest.isValid(output)) return;
+            if (ForestryFluids.WATER.exists()) recipes().fermenterManager
+                .addRecipe(resource, fermentationValue, 1.0f, output, ForestryFluids.WATER.asFluidStack());
+            if (ForestryFluids.JUICE.exists()) recipes().fermenterManager
+                .addRecipe(resource, fermentationValue, 1.5f, output, ForestryFluids.JUICE.asFluidStack());
+            if (ForestryFluids.HONEY.exists()) recipes().fermenterManager
+                .addRecipe(resource, fermentationValue, 1.5f, output, ForestryFluids.HONEY.asFluidStack());
+        }
+    }
 }

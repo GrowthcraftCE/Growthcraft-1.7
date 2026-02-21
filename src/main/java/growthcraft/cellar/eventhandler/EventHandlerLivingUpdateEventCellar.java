@@ -1,39 +1,36 @@
 package growthcraft.cellar.eventhandler;
 
-import growthcraft.cellar.GrowthCraftCellar;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
-public class EventHandlerLivingUpdateEventCellar
-{
-	@SubscribeEvent
-	public void onEntityUpdate(LivingUpdateEvent event)
-	{
-		final EntityLivingBase ent = event.entityLiving;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import growthcraft.cellar.GrowthCraftCellar;
 
-		if (ent.isPotionActive(GrowthCraftCellar.potionTipsy))
-		{
-			if (ent.getActivePotionEffect(GrowthCraftCellar.potionTipsy).getDuration() == 0)
-			{
-				ent.removePotionEffect(GrowthCraftCellar.potionTipsy.id);
-				return;
-			}
+public class EventHandlerLivingUpdateEventCellar {
 
-			final int lvl = ent.getActivePotionEffect(GrowthCraftCellar.potionTipsy).getAmplifier();
+    @SubscribeEvent
+    public void onEntityUpdate(LivingUpdateEvent event) {
+        final EntityLivingBase ent = event.entityLiving;
 
-			if (lvl >= 3)
-			{
-				ent.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 0));
+        if (ent.isPotionActive(GrowthCraftCellar.potionTipsy)) {
+            if (ent.getActivePotionEffect(GrowthCraftCellar.potionTipsy)
+                .getDuration() == 0) {
+                ent.removePotionEffect(GrowthCraftCellar.potionTipsy.id);
+                return;
+            }
 
-				if (lvl >= 4)
-				{
-					ent.addPotionEffect(new PotionEffect(Potion.blindness.id, 100, 0));
-				}
-			}
-		}
-	}
+            final int lvl = ent.getActivePotionEffect(GrowthCraftCellar.potionTipsy)
+                .getAmplifier();
+
+            if (lvl >= 3) {
+                ent.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 0));
+
+                if (lvl >= 4) {
+                    ent.addPotionEffect(new PotionEffect(Potion.blindness.id, 100, 0));
+                }
+            }
+        }
+    }
 }

@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2015, 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,20 +20,26 @@
 package growthcraft.api.cellar.fermenting;
 
 import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import growthcraft.api.core.log.ILoggable;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public interface IFermentingRegistry extends ILoggable
-{
-	void addRecipe(@Nonnull IFermentationRecipe recipe);
-	void addRecipe(@Nonnull FluidStack result, @Nonnull Object booze, @Nonnull Object fermenter, int time);
-	IFermentationRecipe findRecipe(@Nullable FluidStack booze, @Nullable ItemStack fermenter);
-	List<IFermentationRecipe> findRecipes(@Nullable FluidStack fluidstack);
-	List<IFermentationRecipe> findRecipes(@Nullable ItemStack fermenter);
-	boolean canFerment(@Nullable FluidStack booze);
+import growthcraft.api.core.log.ILoggable;
+
+public interface IFermentingRegistry extends ILoggable {
+
+    void addRecipe(@Nonnull IFermentationRecipe recipe);
+
+    void addRecipe(@Nonnull FluidStack result, @Nonnull Object booze, @Nonnull Object fermenter, int time);
+
+    IFermentationRecipe findRecipe(@Nullable FluidStack booze, @Nullable ItemStack fermenter);
+
+    List<IFermentationRecipe> findRecipes(@Nullable FluidStack fluidstack);
+
+    List<IFermentationRecipe> findRecipes(@Nullable ItemStack fermenter);
+
+    boolean canFerment(@Nullable FluidStack booze);
 }

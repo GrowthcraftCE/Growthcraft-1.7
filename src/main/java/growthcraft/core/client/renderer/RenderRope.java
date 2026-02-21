@@ -1,208 +1,269 @@
 package growthcraft.core.client.renderer;
 
-import growthcraft.core.util.RenderUtils;
-import growthcraft.core.common.block.BlockRope;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-public class RenderRope implements ISimpleBlockRenderingHandler
-{
-	public static final int id = RenderingRegistry.getNextAvailableRenderId();
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.core.common.block.BlockRope;
+import growthcraft.core.util.RenderUtils;
 
-	@Override
-	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {}
+public class RenderRope implements ISimpleBlockRenderingHandler {
 
-	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-	{
-		if (modelId == id)
-		{
-			final BlockRope blockRope = (BlockRope)block;
-			final double d = 0.0625D;
-			final Tessellator tessellator = Tessellator.instance;
-			tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
-			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-			final IIcon icon = blockRope.getIconByIndex(0);
+    public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
-			final boolean flag = ((BlockRope)block).canConnectRopeTo(world, x, y, z - 1);
-			final boolean flag1 = ((BlockRope)block).canConnectRopeTo(world, x, y, z + 1);
-			final boolean flag2 = ((BlockRope)block).canConnectRopeTo(world, x - 1, y, z);
-			final boolean flag3 = ((BlockRope)block).canConnectRopeTo(world, x + 1, y, z);
-			final boolean flag4 = ((BlockRope)block).canConnectRopeTo(world, x, y - 1, z);
-			final boolean flag5 = ((BlockRope)block).canConnectRopeTo(world, x, y + 1, z);
+    @Override
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {}
 
-			double minX;
-			double maxX;
-			double minY;
-			double maxY;
-			double minZ;
-			double maxZ;
+    @Override
+    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
+        RenderBlocks renderer) {
+        if (modelId == id) {
+            final BlockRope blockRope = (BlockRope) block;
+            final double d = 0.0625D;
+            final Tessellator tessellator = Tessellator.instance;
+            tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
+            tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+            final IIcon icon = blockRope.getIconByIndex(0);
 
-			double minU;
-			double maxU;
-			final double minV = (double)icon.getInterpolatedV(14);
-			final double maxV = (double)icon.getMaxV();
+            final boolean flag = ((BlockRope) block).canConnectRopeTo(world, x, y, z - 1);
+            final boolean flag1 = ((BlockRope) block).canConnectRopeTo(world, x, y, z + 1);
+            final boolean flag2 = ((BlockRope) block).canConnectRopeTo(world, x - 1, y, z);
+            final boolean flag3 = ((BlockRope) block).canConnectRopeTo(world, x + 1, y, z);
+            final boolean flag4 = ((BlockRope) block).canConnectRopeTo(world, x, y - 1, z);
+            final boolean flag5 = ((BlockRope) block).canConnectRopeTo(world, x, y + 1, z);
 
-			if (flag && flag1)
-			{
-				minX = (double)x + 7*d;
-				maxX = (double)x + 9*d;
-				minY = (double)y + 7*d;
-				maxY = (double)y + 9*d;
-				minZ = (double)z;
-				maxZ = (double)z + 16*d;
+            double minX;
+            double maxX;
+            double minY;
+            double maxY;
+            double minZ;
+            double maxZ;
 
-				minU = (double)icon.getMinU();
-				maxU = (double)icon.getMaxU();
+            double minU;
+            double maxU;
+            final double minV = icon.getInterpolatedV(14);
+            final double maxV = icon.getMaxV();
 
-				RenderUtils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
-			}
-			else
-			{
-				if (flag)
-				{
-					minX = (double)x + 7*d;
-					maxX = (double)x + 9*d;
-					minY = (double)y + 7*d;
-					maxY = (double)y + 9*d;
-					minZ = (double)z;
-					maxZ = (double)z + 8*d;
+            if (flag && flag1) {
+                minX = (double) x + 7 * d;
+                maxX = (double) x + 9 * d;
+                minY = (double) y + 7 * d;
+                maxY = (double) y + 9 * d;
+                minZ = z;
+                maxZ = (double) z + 16 * d;
 
-					minU = (double)icon.getInterpolatedU(8);
-					maxU = (double)icon.getMaxU();
+                minU = icon.getMinU();
+                maxU = icon.getMaxU();
 
-					RenderUtils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
-				}
+                RenderUtils
+                    .drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+            } else {
+                if (flag) {
+                    minX = (double) x + 7 * d;
+                    maxX = (double) x + 9 * d;
+                    minY = (double) y + 7 * d;
+                    maxY = (double) y + 9 * d;
+                    minZ = z;
+                    maxZ = (double) z + 8 * d;
 
-				if (flag1)
-				{
-					minX = (double)x + 7*d;
-					maxX = (double)x + 9*d;
-					minY = (double)y + 7*d;
-					maxY = (double)y + 9*d;
-					minZ = (double)z + 8*d;
-					maxZ = (double)z + 16*d;
+                    minU = icon.getInterpolatedU(8);
+                    maxU = icon.getMaxU();
 
-					minU = (double)icon.getMinU();
-					maxU = (double)icon.getInterpolatedU(8);
+                    RenderUtils.drawCrossSquaresAlongZ(
+                        tessellator,
+                        minX,
+                        maxX,
+                        minY,
+                        maxY,
+                        minZ,
+                        maxZ,
+                        minU,
+                        maxU,
+                        minV,
+                        maxV);
+                }
 
-					RenderUtils.drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
-				}
-			}
+                if (flag1) {
+                    minX = (double) x + 7 * d;
+                    maxX = (double) x + 9 * d;
+                    minY = (double) y + 7 * d;
+                    maxY = (double) y + 9 * d;
+                    minZ = (double) z + 8 * d;
+                    maxZ = (double) z + 16 * d;
 
-			if (flag2 && flag3)
-			{
-				minX = (double)x;
-				maxX = (double)x + 16*d;
-				minY = (double)y + 7*d;
-				maxY = (double)y + 9*d;
-				minZ = (double)z + 7*d;
-				maxZ = (double)z + 9*d;
+                    minU = icon.getMinU();
+                    maxU = icon.getInterpolatedU(8);
 
-				minU = (double)icon.getMinU();
-				maxU = (double)icon.getMaxU();
+                    RenderUtils.drawCrossSquaresAlongZ(
+                        tessellator,
+                        minX,
+                        maxX,
+                        minY,
+                        maxY,
+                        minZ,
+                        maxZ,
+                        minU,
+                        maxU,
+                        minV,
+                        maxV);
+                }
+            }
 
-				RenderUtils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
-			}
-			else
-			{
-				if (flag2)
-				{
-					minX = (double)x;
-					maxX = (double)x + 8*d;
-					minY = (double)y + 7*d;
-					maxY = (double)y + 9*d;
-					minZ = (double)z + 7*d;
-					maxZ = (double)z + 9*d;
+            if (flag2 && flag3) {
+                minX = x;
+                maxX = (double) x + 16 * d;
+                minY = (double) y + 7 * d;
+                maxY = (double) y + 9 * d;
+                minZ = (double) z + 7 * d;
+                maxZ = (double) z + 9 * d;
 
-					minU = (double)icon.getInterpolatedU(8);
-					maxU = (double)icon.getMaxU();
+                minU = icon.getMinU();
+                maxU = icon.getMaxU();
 
-					RenderUtils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
-				}
+                RenderUtils
+                    .drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+            } else {
+                if (flag2) {
+                    minX = x;
+                    maxX = (double) x + 8 * d;
+                    minY = (double) y + 7 * d;
+                    maxY = (double) y + 9 * d;
+                    minZ = (double) z + 7 * d;
+                    maxZ = (double) z + 9 * d;
 
-				if (flag3)
-				{
-					minX = (double)x + 8*d;
-					maxX = (double)x + 16*d;
-					minY = (double)y + 7*d;
-					maxY = (double)y + 9*d;
-					minZ = (double)z + 7*d;
-					maxZ = (double)z + 9*d;
+                    minU = icon.getInterpolatedU(8);
+                    maxU = icon.getMaxU();
 
-					minU = (double)icon.getMinU();
-					maxU = (double)icon.getInterpolatedU(8);
+                    RenderUtils.drawCrossSquaresAlongX(
+                        tessellator,
+                        minX,
+                        maxX,
+                        minY,
+                        maxY,
+                        minZ,
+                        maxZ,
+                        minU,
+                        maxU,
+                        minV,
+                        maxV);
+                }
 
-					RenderUtils.drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
-				}
-			}
+                if (flag3) {
+                    minX = (double) x + 8 * d;
+                    maxX = (double) x + 16 * d;
+                    minY = (double) y + 7 * d;
+                    maxY = (double) y + 9 * d;
+                    minZ = (double) z + 7 * d;
+                    maxZ = (double) z + 9 * d;
 
-			if (flag4 && flag5)
-			{
-				minX = (double)x + 7*d;
-				maxX = (double)x + 9*d;
-				minY = (double)y;
-				maxY = (double)y + 16*d;
-				minZ = (double)z + 7*d;
-				maxZ = (double)z + 9*d;
+                    minU = icon.getMinU();
+                    maxU = icon.getInterpolatedU(8);
 
-				minU = (double)icon.getMinU();
-				maxU = (double)icon.getMaxU();
+                    RenderUtils.drawCrossSquaresAlongX(
+                        tessellator,
+                        minX,
+                        maxX,
+                        minY,
+                        maxY,
+                        minZ,
+                        maxZ,
+                        minU,
+                        maxU,
+                        minV,
+                        maxV);
+                }
+            }
 
-				RenderUtils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
-			}
-			else
-			{
-				if (flag4)
-				{
-					minX = (double)x + 7*d;
-					maxX = (double)x + 9*d;
-					minY = (double)y;
-					maxY = (double)y + 8*d;
-					minZ = (double)z + 7*d;
-					maxZ = (double)z + 9*d;
+            if (flag4 && flag5) {
+                minX = (double) x + 7 * d;
+                maxX = (double) x + 9 * d;
+                minY = y;
+                maxY = (double) y + 16 * d;
+                minZ = (double) z + 7 * d;
+                maxZ = (double) z + 9 * d;
 
-					minU = (double)icon.getInterpolatedU(8);
-					maxU = (double)icon.getMaxU();
+                minU = icon.getMinU();
+                maxU = icon.getMaxU();
 
-					RenderUtils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
-				}
+                RenderUtils.drawCrossSquaresAlongYRotated(
+                    tessellator,
+                    minX,
+                    maxX,
+                    minY,
+                    maxY,
+                    minZ,
+                    maxZ,
+                    minU,
+                    maxU,
+                    minV,
+                    maxV);
+            } else {
+                if (flag4) {
+                    minX = (double) x + 7 * d;
+                    maxX = (double) x + 9 * d;
+                    minY = y;
+                    maxY = (double) y + 8 * d;
+                    minZ = (double) z + 7 * d;
+                    maxZ = (double) z + 9 * d;
 
-				if (flag5)
-				{
-					minX = (double)x + 7*d;
-					maxX = (double)x + 9*d;
-					minY = (double)y + 8*d;
-					maxY = (double)y + 16*d;
-					minZ = (double)z + 7*d;
-					maxZ = (double)z + 9*d;
+                    minU = icon.getInterpolatedU(8);
+                    maxU = icon.getMaxU();
 
-					minU = (double)icon.getMinU();
-					maxU = (double)icon.getInterpolatedU(8);
+                    RenderUtils.drawCrossSquaresAlongYRotated(
+                        tessellator,
+                        minX,
+                        maxX,
+                        minY,
+                        maxY,
+                        minZ,
+                        maxZ,
+                        minU,
+                        maxU,
+                        minV,
+                        maxV);
+                }
 
-					RenderUtils.drawCrossSquaresAlongYRotated(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
-				}
-			}
-		}
+                if (flag5) {
+                    minX = (double) x + 7 * d;
+                    maxX = (double) x + 9 * d;
+                    minY = (double) y + 8 * d;
+                    maxY = (double) y + 16 * d;
+                    minZ = (double) z + 7 * d;
+                    maxZ = (double) z + 9 * d;
 
-		return true;
-	}
+                    minU = icon.getMinU();
+                    maxU = icon.getInterpolatedU(8);
 
-	@Override
-	public boolean shouldRender3DInInventory(int modelID)
-	{
-		return false;
-	}
+                    RenderUtils.drawCrossSquaresAlongYRotated(
+                        tessellator,
+                        minX,
+                        maxX,
+                        minY,
+                        maxY,
+                        minZ,
+                        maxZ,
+                        minU,
+                        maxU,
+                        minV,
+                        maxV);
+                }
+            }
+        }
 
-	@Override
-	public int getRenderId()
-	{
-		return id;
-	}
+        return true;
+    }
+
+    @Override
+    public boolean shouldRender3DInInventory(int modelID) {
+        return false;
+    }
+
+    @Override
+    public int getRenderId() {
+        return id;
+    }
 }

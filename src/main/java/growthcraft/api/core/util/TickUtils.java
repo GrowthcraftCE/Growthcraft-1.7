@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2015, 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,35 +20,30 @@
 package growthcraft.api.core.util;
 
 // Helper class for handling tick calculations, moved from YATM
-public class TickUtils
-{
-	public static final int TICKS_PER_DECI_SECOND = 2;
-	public static final int TICKS_PER_SECOND = 20;
+public class TickUtils {
 
-	private TickUtils() {}
+    public static final int TICKS_PER_DECI_SECOND = 2;
+    public static final int TICKS_PER_SECOND = 20;
 
-	public static int deciSeconds(int num)
-	{
-		return TICKS_PER_DECI_SECOND * num;
-	}
+    private TickUtils() {}
 
-	public static int seconds(int num)
-	{
-		return TICKS_PER_SECOND * num;
-	}
+    public static int deciSeconds(int num) {
+        return TICKS_PER_DECI_SECOND * num;
+    }
 
-	public static int minutes(int num)
-	{
-		return seconds(60 * num);
-	}
+    public static int seconds(int num) {
+        return TICKS_PER_SECOND * num;
+    }
 
-	public static int hours(int num)
-	{
-		return minutes(60 * num);
-	}
+    public static int minutes(int num) {
+        return seconds(60 * num);
+    }
 
-	public static int days(int num)
-	{
-		return hours(24 * num);
-	}
+    public static int hours(int num) {
+        return minutes(60 * num);
+    }
+
+    public static int days(int num) {
+        return hours(24 * num);
+    }
 }

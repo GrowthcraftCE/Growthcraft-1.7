@@ -10,60 +10,55 @@
  ******************************************************************************/
 /**
  * NOTICE:
- *   This file has been modified from its original source for use in
- *   Growthcraft CE.
+ * This file has been modified from its original source for use in
+ * Growthcraft CE.
  */
 package growthcraft.core.integration.forestry;
 
 import java.util.Collection;
 
-import growthcraft.api.core.util.Point3;
-import growthcraft.api.core.util.BlockFlags;
-
-import forestry.api.farming.ICrop;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 import cpw.mods.fml.common.Optional;
-import net.minecraft.block.Block;
-import net.minecraft.world.World;
-import net.minecraft.item.ItemStack;
+import forestry.api.farming.ICrop;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.Point3;
 
 /**
  * This is a copy of Forestry's Crop implementation, modified for Growthcraft
  */
-@Optional.Interface(iface="forestry.api.farming.ICrop", modid="ForestryAPI|farming")
-public abstract class AbstractForestryCrop implements ICrop
-{
-	protected final World world;
-	protected final Point3 position;
+@Optional.Interface(iface = "forestry.api.farming.ICrop", modid = "ForestryAPI|farming")
+public abstract class AbstractForestryCrop implements ICrop {
 
-	public AbstractForestryCrop(World pworld, Point3 pos)
-	{
-		this.world = pworld;
-		this.position = pos;
-	}
+    protected final World world;
+    protected final Point3 position;
 
-	protected final void setBlock(Point3 pos, Block block, int meta)
-	{
-		world.setBlock(pos.x, pos.y, pos.z, block, meta, BlockFlags.SYNC);
-	}
+    public AbstractForestryCrop(World pworld, Point3 pos) {
+        this.world = pworld;
+        this.position = pos;
+    }
 
-	protected final Block getBlock(Point3 pos)
-	{
-		return world.getBlock(pos.x, pos.y, pos.z);
-	}
+    protected final void setBlock(Point3 pos, Block block, int meta) {
+        world.setBlock(pos.x(), pos.y(), pos.z(), block, meta, BlockFlags.SYNC);
+    }
 
-	protected final int getBlockMeta(Point3 pos)
-	{
-		return world.getBlockMetadata(pos.x, pos.y, pos.z);
-	}
+    protected final Block getBlock(Point3 pos) {
+        return world.getBlock(pos.x(), pos.y(), pos.z());
+    }
 
-	protected abstract boolean isCrop(Point3 pos);
-	protected abstract Collection<ItemStack> harvestBlock(Point3 pos);
+    protected final int getBlockMeta(Point3 pos) {
+        return world.getBlockMetadata(pos.x(), pos.y(), pos.z());
+    }
 
-	@Override
-	public Collection<ItemStack> harvest()
-	{
-		if (!isCrop(position)) return null;
-		return harvestBlock(position);
-	}
+    protected abstract boolean isCrop(Point3 pos);
+
+    protected abstract Collection<ItemStack> harvestBlock(Point3 pos);
+
+    @Override
+    public Collection<ItemStack> harvest() {
+        if (!isCrop(position)) return null;
+        return harvestBlock(position);
+    }
 }

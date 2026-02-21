@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,35 +26,35 @@ import javax.annotation.Nullable;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-public interface IMultiFluidStacks extends IItemStackListProvider
-{
-	/**
-	 * Returns the expected FluidStack amount
-	 *
-	 * @return expected fluid amount
-	 */
-	int getAmount();
+public interface IMultiFluidStacks extends IItemStackListProvider {
 
-	/**
-	 * Returns a list of fluid stacks.
-	 *
-	 * @return the list of fluid stacks
-	 */
-	List<FluidStack> getFluidStacks();
+    /**
+     * Returns the expected FluidStack amount
+     *
+     * @return expected fluid amount
+     */
+    int getAmount();
 
-	/**
-	 * Determines if the mulit stack contains the specified fluid.
-	 *
-	 * @param fluid - the fluid to search for.
-	 * @return true, the multi stack contains the fluid, false otherwise
-	 */
-	boolean containsFluid(@Nullable Fluid fluid);
+    /**
+     * Returns a list of fluid stacks.
+     *
+     * @return the list of fluid stacks
+     */
+    List<FluidStack> getFluidStacks();
 
-	/**
-	 * Determines if the mulit stack contains the specified fluid stack.
-	 *
-	 * @param stack - the fluid stack being searched for.
-	 * @return true, the multi stack contains the stack, false otherwise
-	 */
-	boolean containsFluidStack(@Nullable FluidStack stack);
+    /**
+     * Determines if the mulit stack contains the specified fluid.
+     *
+     * @param fluid - the fluid to search for.
+     * @return true, the multi stack contains the fluid, false otherwise
+     */
+    boolean containsFluid(@Nullable Fluid fluid);
+
+    /**
+     * Determines if the mulit stack contains the specified fluid stack.
+     *
+     * @param stack - the fluid stack being searched for.
+     * @return true, the multi stack contains the stack, false otherwise
+     */
+    boolean containsFluidStack(@Nullable FluidStack stack);
 }
