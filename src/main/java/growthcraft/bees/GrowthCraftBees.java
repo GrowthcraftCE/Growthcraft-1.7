@@ -118,6 +118,18 @@ public class GrowthCraftBees
 		if (config.enableBotaniaIntegration) modules.add(new growthcraft.bees.integration.BotaniaModule());
 		if (config.enableForestryIntegration) modules.add(new growthcraft.bees.integration.ForestryModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bees.integration.ThaumcraftModule());
+		if (config.enableFAIntegration) modules.add(new growthcraft.bees.integration.FAModule());
+		if (config.enableAM2Integration) modules.add(new growthcraft.bees.integration.AM2Module());
+		if (config.enableTotemicIntegration) modules.add(new growthcraft.bees.integration.TotemicModule());
+		if (config.enableEBXLIntegration) modules.add(new growthcraft.bees.integration.EBXLModule());
+		if (config.enableHighlandsIntegration) modules.add(new growthcraft.bees.integration.HighlandsModule());
+
+		if (config.debugEnabled)
+		{
+			BeesRegistry.instance().setLogger(logger);
+			modules.setLogger(logger);
+		}
+
 		modules.add(CommonProxy.instance);
 		if (config.debugEnabled)
 		{
