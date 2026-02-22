@@ -45,5 +45,7 @@ dependencies {
     //compile "com.mod-buildcraft:buildcraft:${bc_version}:dev"
     compile "curse.maven:buildcraft-61811:2322106"
     compile "curse.maven:witchery-69673:2234410"
-    testCompile "junit:junit:4.11"	
+    testCompile "junit:junit:4.11"
+    compile "maven.modrinth:unimixins:mc1.7.10-0.2.1"
+    compile "maven.modrinth:etfuturum:mc1.7.10-2.6.2"
 }
