@@ -19,14 +19,13 @@
  */
 package growthcraft.api.core.vines.user;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.block.Block;
-
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.schema.BlockKeySchema;
 import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.util.BlockKey;
+import net.minecraft.block.Block;
+
+import javax.annotation.Nonnull;
 
 public class UserVineEntry implements ICommentable {
 

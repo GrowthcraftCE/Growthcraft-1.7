@@ -19,19 +19,18 @@
  */
 package growthcraft.bees.common.block;
 
-import java.util.Locale;
-
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.bees.GrowthCraftBees;
+import net.minecraft.item.ItemStack;
+
+import java.util.Locale;
 
 public enum EnumBeeBoxThaumcraft implements IItemStackFactory {
 
     GREATWOOD,
     SILVERWOOD;
 
-    public static final EnumBeeBoxThaumcraft[] VALUES = { GREATWOOD, SILVERWOOD };
+    public static final EnumBeeBoxThaumcraft[] VALUES = {GREATWOOD, SILVERWOOD};
     public final String name;
     public final int meta;
 

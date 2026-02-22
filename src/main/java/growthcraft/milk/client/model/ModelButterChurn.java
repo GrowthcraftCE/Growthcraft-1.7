@@ -1,12 +1,10 @@
 package growthcraft.milk.client.model;
 
+import growthcraft.api.core.util.Easing;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-
 import org.lwjgl.opengl.GL11;
-
-import growthcraft.api.core.util.Easing;
 
 /**
  * Butter Churn - PitchBright
@@ -90,15 +88,15 @@ public class ModelButterChurn extends ModelBase {
         {
             GL11.glTranslatef(this.shape1_4.offsetX, this.shape1_4.offsetY, this.shape1_4.offsetZ);
             GL11.glTranslatef(
-                this.shape1_4.rotationPointX * scale,
-                this.shape1_4.rotationPointY * scale,
-                this.shape1_4.rotationPointZ * scale);
+                    this.shape1_4.rotationPointX * scale,
+                    this.shape1_4.rotationPointY * scale,
+                    this.shape1_4.rotationPointZ * scale);
             GL11.glScaled(1.0D, 0.99D, 1.0D);
             GL11.glTranslatef(-this.shape1_4.offsetX, -this.shape1_4.offsetY, -this.shape1_4.offsetZ);
             GL11.glTranslatef(
-                -this.shape1_4.rotationPointX * scale,
-                -this.shape1_4.rotationPointY * scale,
-                -this.shape1_4.rotationPointZ * scale);
+                    -this.shape1_4.rotationPointX * scale,
+                    -this.shape1_4.rotationPointY * scale,
+                    -this.shape1_4.rotationPointZ * scale);
             this.shape1_4.render(scale);
         }
         GL11.glPopMatrix();
@@ -107,15 +105,15 @@ public class ModelButterChurn extends ModelBase {
         {
             GL11.glTranslatef(this.shape1.offsetX, this.shape1.offsetY, this.shape1.offsetZ);
             GL11.glTranslatef(
-                this.shape1.rotationPointX * scale,
-                this.shape1.rotationPointY * scale,
-                this.shape1.rotationPointZ * scale);
+                    this.shape1.rotationPointX * scale,
+                    this.shape1.rotationPointY * scale,
+                    this.shape1.rotationPointZ * scale);
             GL11.glScaled(1.0D, 0.99D, 1.0D);
             GL11.glTranslatef(-this.shape1.offsetX, -this.shape1.offsetY, -this.shape1.offsetZ);
             GL11.glTranslatef(
-                -this.shape1.rotationPointX * scale,
-                -this.shape1.rotationPointY * scale,
-                -this.shape1.rotationPointZ * scale);
+                    -this.shape1.rotationPointX * scale,
+                    -this.shape1.rotationPointY * scale,
+                    -this.shape1.rotationPointZ * scale);
             this.shape1.render(scale);
         }
         GL11.glPopMatrix();
@@ -128,15 +126,15 @@ public class ModelButterChurn extends ModelBase {
         {
             GL11.glTranslatef(this.shape1_2.offsetX, this.shape1_2.offsetY, this.shape1_2.offsetZ);
             GL11.glTranslatef(
-                this.shape1_2.rotationPointX * scale,
-                this.shape1_2.rotationPointY * scale,
-                this.shape1_2.rotationPointZ * scale);
+                    this.shape1_2.rotationPointX * scale,
+                    this.shape1_2.rotationPointY * scale,
+                    this.shape1_2.rotationPointZ * scale);
             GL11.glScaled(1.0D, 0.99D, 1.0D);
             GL11.glTranslatef(-this.shape1_2.offsetX, -this.shape1_2.offsetY, -this.shape1_2.offsetZ);
             GL11.glTranslatef(
-                -this.shape1_2.rotationPointX * scale,
-                -this.shape1_2.rotationPointY * scale,
-                -this.shape1_2.rotationPointZ * scale);
+                    -this.shape1_2.rotationPointX * scale,
+                    -this.shape1_2.rotationPointY * scale,
+                    -this.shape1_2.rotationPointZ * scale);
             this.shape1_2.render(scale);
         }
         GL11.glPopMatrix();
@@ -145,15 +143,15 @@ public class ModelButterChurn extends ModelBase {
         {
             GL11.glTranslatef(this.shape1_1.offsetX, this.shape1_1.offsetY, this.shape1_1.offsetZ);
             GL11.glTranslatef(
-                this.shape1_1.rotationPointX * scale,
-                this.shape1_1.rotationPointY * scale,
-                this.shape1_1.rotationPointZ * scale);
+                    this.shape1_1.rotationPointX * scale,
+                    this.shape1_1.rotationPointY * scale,
+                    this.shape1_1.rotationPointZ * scale);
             GL11.glScaled(1.0D, 0.99D, 1.0D);
             GL11.glTranslatef(-this.shape1_1.offsetX, -this.shape1_1.offsetY, -this.shape1_1.offsetZ);
             GL11.glTranslatef(
-                -this.shape1_1.rotationPointX * scale,
-                -this.shape1_1.rotationPointY * scale,
-                -this.shape1_1.rotationPointZ * scale);
+                    -this.shape1_1.rotationPointX * scale,
+                    -this.shape1_1.rotationPointY * scale,
+                    -this.shape1_1.rotationPointZ * scale);
             this.shape1_1.render(scale);
         }
         GL11.glPopMatrix();
@@ -162,15 +160,15 @@ public class ModelButterChurn extends ModelBase {
         {
             GL11.glTranslatef(this.shape1_5.offsetX, this.shape1_5.offsetY, this.shape1_5.offsetZ);
             GL11.glTranslatef(
-                this.shape1_5.rotationPointX * scale,
-                this.shape1_5.rotationPointY * scale,
-                this.shape1_5.rotationPointZ * scale);
+                    this.shape1_5.rotationPointX * scale,
+                    this.shape1_5.rotationPointY * scale,
+                    this.shape1_5.rotationPointZ * scale);
             GL11.glScaled(1.0D, 0.99D, 1.0D);
             GL11.glTranslatef(-this.shape1_5.offsetX, -this.shape1_5.offsetY, -this.shape1_5.offsetZ);
             GL11.glTranslatef(
-                -this.shape1_5.rotationPointX * scale,
-                -this.shape1_5.rotationPointY * scale,
-                -this.shape1_5.rotationPointZ * scale);
+                    -this.shape1_5.rotationPointX * scale,
+                    -this.shape1_5.rotationPointY * scale,
+                    -this.shape1_5.rotationPointZ * scale);
             this.shape1_5.render(scale);
         }
         GL11.glPopMatrix();
@@ -179,15 +177,15 @@ public class ModelButterChurn extends ModelBase {
         {
             GL11.glTranslatef(this.shape1_6.offsetX, this.shape1_6.offsetY, this.shape1_6.offsetZ);
             GL11.glTranslatef(
-                this.shape1_6.rotationPointX * scale,
-                this.shape1_6.rotationPointY * scale,
-                this.shape1_6.rotationPointZ * scale);
+                    this.shape1_6.rotationPointX * scale,
+                    this.shape1_6.rotationPointY * scale,
+                    this.shape1_6.rotationPointZ * scale);
             GL11.glScaled(1.0D, 0.99D, 1.0D);
             GL11.glTranslatef(-this.shape1_6.offsetX, -this.shape1_6.offsetY, -this.shape1_6.offsetZ);
             GL11.glTranslatef(
-                -this.shape1_6.rotationPointX * scale,
-                -this.shape1_6.rotationPointY * scale,
-                -this.shape1_6.rotationPointZ * scale);
+                    -this.shape1_6.rotationPointX * scale,
+                    -this.shape1_6.rotationPointY * scale,
+                    -this.shape1_6.rotationPointZ * scale);
             this.shape1_6.render(scale);
         }
         GL11.glPopMatrix();
@@ -199,15 +197,15 @@ public class ModelButterChurn extends ModelBase {
         {
             GL11.glTranslatef(this.shape1_7.offsetX, this.shape1_7.offsetY, this.shape1_7.offsetZ);
             GL11.glTranslatef(
-                this.shape1_7.rotationPointX * scale,
-                this.shape1_7.rotationPointY * scale,
-                this.shape1_7.rotationPointZ * scale);
+                    this.shape1_7.rotationPointX * scale,
+                    this.shape1_7.rotationPointY * scale,
+                    this.shape1_7.rotationPointZ * scale);
             GL11.glScaled(1.0D, 0.99D, 1.0D);
             GL11.glTranslatef(-this.shape1_7.offsetX, -this.shape1_7.offsetY, -this.shape1_7.offsetZ);
             GL11.glTranslatef(
-                -this.shape1_7.rotationPointX * scale,
-                -this.shape1_7.rotationPointY * scale,
-                -this.shape1_7.rotationPointZ * scale);
+                    -this.shape1_7.rotationPointX * scale,
+                    -this.shape1_7.rotationPointY * scale,
+                    -this.shape1_7.rotationPointZ * scale);
             this.shape1_7.render(scale);
         }
         GL11.glPopMatrix();

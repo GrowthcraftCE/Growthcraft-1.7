@@ -19,13 +19,9 @@
  */
 package growthcraft.core.util;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
+import cpw.mods.fml.common.registry.GameRegistry;
+import growthcraft.api.core.util.StringUtils;
+import growthcraft.core.GrowthCraftCore;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,9 +29,12 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import growthcraft.api.core.util.StringUtils;
-import growthcraft.core.GrowthCraftCore;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 /**
  * If you really, REALLY need to dump the block registry, then this is your thing.
@@ -43,7 +42,8 @@ import growthcraft.core.GrowthCraftCore;
  */
 public class GameRegistryDumper {
 
-    private GameRegistryDumper() {}
+    private GameRegistryDumper() {
+    }
 
     private static void writeItemStackToFile(ItemStack stack, FileWriter writer) throws IOException {
         if (stack != null && stack.getItem() != null) {
@@ -84,9 +84,9 @@ public class GameRegistryDumper {
     @SuppressWarnings("rawtypes")
     public static void dumpBlocks() {
         GrowthCraftCore.getLogger()
-            .info("Dumping Blocks");
+                .info("Dumping Blocks");
         final Iterator it = GameRegistry.Type.BLOCK.getRegistry()
-            .iterator();
+                .iterator();
 
         try (FileWriter writer = new FileWriter("dumps/GameRegistry_Blocks.txt")) {
             while (it.hasNext()) {
@@ -94,13 +94,13 @@ public class GameRegistryDumper {
                 try {
                     if (obj != null) {
                         writer.write(
-                            Block.getIdFromBlock(obj) + ","
-                                + obj.getUnlocalizedName()
-                                + ","
-                                + obj.getLocalizedName()
-                                + ","
-                                + GameRegistry.findUniqueIdentifierFor(obj)
-                                + "\n");
+                                Block.getIdFromBlock(obj) + ","
+                                        + obj.getUnlocalizedName()
+                                        + ","
+                                        + obj.getLocalizedName()
+                                        + ","
+                                        + GameRegistry.findUniqueIdentifierFor(obj)
+                                        + "\n");
 
                         if (Platform.isClient()) {
                             writeItemSubtypes(obj, writer);
@@ -120,9 +120,9 @@ public class GameRegistryDumper {
     @SuppressWarnings("rawtypes")
     public static void dumpItems() {
         GrowthCraftCore.getLogger()
-            .info("Dumping Items");
+                .info("Dumping Items");
         final Iterator it = GameRegistry.Type.ITEM.getRegistry()
-            .iterator();
+                .iterator();
 
         try (FileWriter writer = new FileWriter("dumps/GameRegistry_Items.txt")) {
             while (it.hasNext()) {
@@ -130,13 +130,13 @@ public class GameRegistryDumper {
                 try {
                     if (obj != null) {
                         writer.write(
-                            Item.getIdFromItem(obj) + ","
-                                + obj.getUnlocalizedName()
-                                + ","
-                                + "?"
-                                + ","
-                                + GameRegistry.findUniqueIdentifierFor(obj)
-                                + "\n");
+                                Item.getIdFromItem(obj) + ","
+                                        + obj.getUnlocalizedName()
+                                        + ","
+                                        + "?"
+                                        + ","
+                                        + GameRegistry.findUniqueIdentifierFor(obj)
+                                        + "\n");
 
                         if (Platform.isClient()) {
                             writeItemSubtypes(obj, writer);
@@ -156,9 +156,9 @@ public class GameRegistryDumper {
     @SuppressWarnings("rawtypes")
     public static void dumpFluids() {
         GrowthCraftCore.getLogger()
-            .info("Dumping Fluids");
+                .info("Dumping Fluids");
         final Set<String> fluidKeys = FluidRegistry.getRegisteredFluids()
-            .keySet();
+                .keySet();
         try (FileWriter writer = new FileWriter("dumps/FluidRegistry_Fluids.txt")) {
             for (String key : fluidKeys) {
                 writer.write(key + "\n");
@@ -175,11 +175,11 @@ public class GameRegistryDumper {
             for (BiomeGenBase biome : biomes) {
                 if (biome == null) continue;
                 writer.write(
-                    String.format(
-                        "%d,%s,%s\n",
-                        biome.biomeID,
-                        biome.biomeName,
-                        StringUtils.inspect(BiomeDictionary.getTypesForBiome(biome))));
+                        String.format(
+                                "%d,%s,%s\n",
+                                biome.biomeID,
+                                biome.biomeName,
+                                StringUtils.inspect(BiomeDictionary.getTypesForBiome(biome))));
             }
         } catch (IOException ex) {
             ex.printStackTrace();

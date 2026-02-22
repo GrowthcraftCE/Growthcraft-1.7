@@ -1,7 +1,5 @@
 package growthcraft.api.core;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.api.core.fluids.FluidDictionary;
 import growthcraft.api.core.fluids.FluidTagsRegistry;
 import growthcraft.api.core.fluids.IFluidDictionary;
@@ -11,6 +9,8 @@ import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.vines.IVineDropRegistry;
 import growthcraft.api.core.vines.VineDropRegistry;
+
+import javax.annotation.Nonnull;
 
 public class CoreRegistry implements ILoggable {
 

@@ -19,21 +19,19 @@
  */
 package growthcraft.api.core.vines;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.NullLogger;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class VineDropRegistry implements IVineDropRegistry {
 
@@ -112,6 +110,6 @@ public class VineDropRegistry implements IVineDropRegistry {
         if (entry == null || entry.getItemStack() == null) return null;
 
         return entry.getItemStack()
-            .copy();
+                .copy();
     }
 }

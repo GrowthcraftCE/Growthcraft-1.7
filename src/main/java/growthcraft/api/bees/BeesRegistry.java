@@ -1,21 +1,19 @@
 package growthcraft.api.bees;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.util.BlockKey;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BeesRegistry implements IBeesRegistry {
 
@@ -171,6 +169,6 @@ public class BeesRegistry implements IBeesRegistry {
 
     public boolean isBlockFlower(@Nullable Block block, int meta) {
         return flowerEntries.containsKey(new BlockKey(block, meta))
-            || flowerEntries.containsKey(new BlockKey(block, ItemKey.WILDCARD_VALUE));
+                || flowerEntries.containsKey(new BlockKey(block, ItemKey.WILDCARD_VALUE));
     }
 }

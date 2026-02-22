@@ -19,28 +19,26 @@
  */
 package growthcraft.api.core.fluids;
 
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.definition.IMultiFluidStacks;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-
-import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.definition.IMultiFluidStacks;
-
 public class TaggedFluidStacks implements IMultiFluidStacks {
 
-    public int amount;
     private final List<String> tags;
     private final List<String> exclusionTags;
     private final List<FluidTag> fluidTags;
     private final List<FluidTag> exclusionFluidTags;
+    public int amount;
     private List<Fluid> fluidCache;
     private transient List<ItemStack> fluidContainers;
 
@@ -54,11 +52,11 @@ public class TaggedFluidStacks implements IMultiFluidStacks {
         this.tags = ptags;
         this.exclusionTags = pextags;
         this.fluidTags = CoreRegistry.instance()
-            .fluidTags()
-            .expandTagNames(tags);
+                .fluidTags()
+                .expandTagNames(tags);
         this.exclusionFluidTags = CoreRegistry.instance()
-            .fluidTags()
-            .expandTagNames(exclusionTags);
+                .fluidTags()
+                .expandTagNames(exclusionTags);
     }
 
     /**
@@ -96,13 +94,13 @@ public class TaggedFluidStacks implements IMultiFluidStacks {
         if (fluidCache == null) {
             this.fluidCache = new ArrayList<Fluid>();
             fluidCache.addAll(
-                CoreRegistry.instance()
-                    .fluidDictionary()
-                    .getFluidsByTags(fluidTags));
+                    CoreRegistry.instance()
+                            .fluidDictionary()
+                            .getFluidsByTags(fluidTags));
             fluidCache.removeAll(
-                CoreRegistry.instance()
-                    .fluidDictionary()
-                    .getFluidsByTags(exclusionFluidTags));
+                    CoreRegistry.instance()
+                            .fluidDictionary()
+                            .getFluidsByTags(exclusionFluidTags));
         }
         return fluidCache;
     }
@@ -139,7 +137,7 @@ public class TaggedFluidStacks implements IMultiFluidStacks {
     }
 
     @Override
-    public List<ItemStack> getItemStacks() {
+    public List<ItemStack> itemStacks() {
         if (fluidContainers == null) {
             fluidContainers = FluidUtils.getFluidContainers(getFluidStacks());
         }

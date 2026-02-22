@@ -27,5 +27,6 @@ public class Easing {
     // doubles, or I duplicate code...
     public static EasingTemplate d = new EasingTemplate();
 
-    private Easing() {}
+    private Easing() {
+    }
 }

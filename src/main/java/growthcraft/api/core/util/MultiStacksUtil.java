@@ -19,14 +19,6 @@
  */
 package growthcraft.api.core.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.MultiFluidStacks;
@@ -35,12 +27,19 @@ import growthcraft.api.core.item.MultiItemStacks;
 import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MultiStacksUtil {
 
     private static ILogger logger = NullLogger.INSTANCE;
 
-    private MultiStacksUtil() {}
+    private MultiStacksUtil() {
+    }
 
     public static void setLogger(@Nonnull ILogger l) {
         logger = l;
@@ -59,7 +58,7 @@ public class MultiStacksUtil {
         for (int i = 0; i < colIndices.length; ++i) {
             colIndices[i] = 0;
             colMax[i] = expandedStacks.get(i)
-                .size();
+                    .size();
         }
 
         final int lastCol = colIndices.length - 1;
@@ -91,7 +90,7 @@ public class MultiStacksUtil {
     public static List<List<ItemStack>> expandedItemStackCombinations(@Nonnull List<IMultiItemStacks> srcList) {
         final List<List<ItemStack>> expandedStacks = new ArrayList<List<ItemStack>>();
         for (IMultiItemStacks stacks : srcList) {
-            expandedStacks.add(stacks.getItemStacks());
+            expandedStacks.add(stacks.itemStacks());
         }
         return MultiStacksUtil.expandedCombinations(expandedStacks);
     }
@@ -128,7 +127,7 @@ public class MultiStacksUtil {
         if (obj instanceof ItemStack) {
             list.add((ItemStack) obj);
         } else if (obj instanceof OreItemStacks oreItemStack) {
-            final List<ItemStack> stacks = oreItemStack.getItemStacks();
+            final List<ItemStack> stacks = oreItemStack.itemStacks();
             if (stacks.isEmpty()) {
                 logger.error("Ore stack '%s' was empty!", oreItemStack.getName());
             } else {
@@ -136,7 +135,7 @@ public class MultiStacksUtil {
                 list.addAll(stacks);
             }
         } else if (obj instanceof IMultiItemStacks) {
-            list.addAll(((IMultiItemStacks) obj).getItemStacks());
+            list.addAll(((IMultiItemStacks) obj).itemStacks());
         } else {
             throw new IllegalArgumentException("Wrong type, expected a ItemStack or IMultiItemStacks");
         }

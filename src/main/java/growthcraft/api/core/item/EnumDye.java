@@ -19,14 +19,12 @@
  */
 package growthcraft.api.core.item;
 
-import java.util.Locale;
-
+import com.google.common.base.CaseFormat;
+import growthcraft.api.core.definition.IItemStackFactory;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import com.google.common.base.CaseFormat;
-
-import growthcraft.api.core.definition.IItemStackFactory;
+import java.util.Locale;
 
 /**
  * Sometimes you honestly can't remember them all, but hey, enum!

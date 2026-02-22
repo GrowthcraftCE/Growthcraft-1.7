@@ -19,17 +19,15 @@
  */
 package growthcraft.api.core.schema;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-
 import growthcraft.api.core.definition.IItemStackListProvider;
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.item.OreItemStacks;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemKeySchema extends ItemStackSchema implements IItemStackListProvider, IValidatable {
 
@@ -60,14 +58,14 @@ public class ItemKeySchema extends ItemStackSchema implements IItemStackListProv
         }
         // generic handling
         else if (obj instanceof IMultiItemStacks multiStack) {
-            for (ItemStack stack : multiStack.getItemStacks()) {
+            for (ItemStack stack : multiStack.itemStacks()) {
                 result.add(new ItemKeySchema(stack));
             }
         } else if (obj instanceof ItemStack) {
             result.add(new ItemKeySchema((ItemStack) obj));
         } else {
             throw new IllegalArgumentException(
-                "Wrong type, expected a ItemStack or OreItemStacks, or IMultiItemStacks");
+                    "Wrong type, expected a ItemStack or OreItemStacks, or IMultiItemStacks");
         }
         return result;
     }
@@ -84,8 +82,8 @@ public class ItemKeySchema extends ItemStackSchema implements IItemStackListProv
      * @return list of itemstacks, the list may be empty if it is invalid
      */
     @Override
-    public List<ItemStack> getItemStacks() {
-        final List<ItemStack> result = super.getItemStacks();
+    public List<ItemStack> itemStacks() {
+        final List<ItemStack> result = super.itemStacks();
         final List<ItemStack> ores = getOres();
         if (ores != null) {
             for (ItemStack item : ores) {
@@ -129,7 +127,7 @@ public class ItemKeySchema extends ItemStackSchema implements IItemStackListProv
      */
     @Override
     public boolean isValid() {
-        return getItemStacks().size() > 0 || ore != null;
+        return itemStacks().size() > 0 || ore != null;
     }
 
     /**

@@ -19,11 +19,6 @@
  */
 package growthcraft.cellar.integration.nei;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.item.ItemStack;
-
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
@@ -35,6 +30,10 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.client.gui.GuiCultureJar;
 import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.core.integration.nei.TemplateRenderHelper;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class RecipeHandlerCultureJar extends TemplateRecipeHandler {
 
@@ -67,12 +66,12 @@ public class RecipeHandlerCultureJar extends TemplateRecipeHandler {
         if (recipe instanceof CachedCultureRecipe) {
             final ICultureRecipe culturingRecipe = ((CachedCultureRecipe) recipe).culturingRecipe;
             TemplateRenderHelper.drawFluidStack(
-                54,
-                6,
-                50,
-                52,
-                culturingRecipe.getInputFluidStack(),
-                GrowthCraftCellar.getConfig().cultureJarMaxCap);
+                    54,
+                    6,
+                    50,
+                    52,
+                    culturingRecipe.inputFluidStack(),
+                    GrowthCraftCellar.getConfig().cultureJarMaxCap);
         }
     }
 
@@ -93,7 +92,7 @@ public class RecipeHandlerCultureJar extends TemplateRecipeHandler {
         public CachedCultureRecipe(@Nonnull ICultureRecipe recipe) {
             super();
             this.culturingRecipe = recipe;
-            this.result = new PositionedStack(culturingRecipe.getOutputItemStack(), 38, 42);
+            this.result = new PositionedStack(culturingRecipe.outputItemStack(), 38, 42);
         }
 
         @Override

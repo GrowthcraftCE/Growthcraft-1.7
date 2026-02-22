@@ -29,7 +29,8 @@ public class Materials {
     public static final Material fireproofLeaves = new MaterialFireproofLeaves(Material.leaves.getMaterialMapColor());
     public static final Material booze = new MaterialBooze(Material.water.getMaterialMapColor());
 
-    private Materials() {}
+    private Materials() {
+    }
 
     static class MaterialDevice extends Material {
 

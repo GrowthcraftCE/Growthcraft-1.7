@@ -19,11 +19,11 @@
  */
 package growthcraft.api.fishtrap.user;
 
-import java.io.BufferedReader;
-import java.util.Map;
-
 import growthcraft.api.core.user.AbstractUserJSONConfig;
 import growthcraft.api.fishtrap.FishTrapRegistry;
+
+import java.io.BufferedReader;
+import java.util.Map;
 
 public class UserCatchGroupConfig extends AbstractUserJSONConfig {
 
@@ -59,7 +59,7 @@ public class UserCatchGroupConfig extends AbstractUserJSONConfig {
 
         logger.debug("Adding Catch Group %s", name);
         FishTrapRegistry.instance()
-            .addCatchGroup(name, entry.weight);
+                .addCatchGroup(name, entry.weight);
     }
 
     @Override

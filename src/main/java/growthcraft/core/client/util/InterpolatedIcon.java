@@ -1,25 +1,23 @@
 // This has been stolen from Botania by IceDragon (blame him if anything goes wrong)
 package growthcraft.core.client.util;
 
-import java.lang.reflect.Field;
-
+import cpw.mods.fml.relauncher.ReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.data.AnimationMetadataSection;
 
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.lang.reflect.Field;
 
 // This is all vanilla code from 1.8, thanks to ganymedes01 porting it to 1.7 :D
 @SideOnly(Side.CLIENT)
 public class InterpolatedIcon extends TextureAtlasSprite {
 
-    private static final String[] obfuscationAnimationMetadata = new String[] { "animationMetadata", "field_110982_k",
-        "j" };
-
-    protected int[][] interpolatedFrameData;
+    private static final String[] obfuscationAnimationMetadata = new String[]{"animationMetadata", "field_110982_k",
+            "j"};
     private final Field fanimationMetadata;
+    protected int[][] interpolatedFrameData;
 
     public InterpolatedIcon(String name) {
         super(name);
@@ -33,7 +31,7 @@ public class InterpolatedIcon extends TextureAtlasSprite {
         final double d0 = 1.0D - tickCounter / (double) animationMetadata.getFrameTimeSingle(frameCounter);
         final int i = animationMetadata.getFrameIndex(frameCounter);
         final int j = animationMetadata.getFrameCount() == 0 ? framesTextureData.size()
-            : animationMetadata.getFrameCount();
+                : animationMetadata.getFrameCount();
         final int k = animationMetadata.getFrameIndex((frameCounter + 1) % j);
 
         if (i != k && k >= 0 && k < framesTextureData.size()) {

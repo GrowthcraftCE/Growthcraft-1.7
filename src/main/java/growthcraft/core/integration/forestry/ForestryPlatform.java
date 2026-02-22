@@ -25,7 +25,8 @@ public class ForestryPlatform {
 
     public static final String MOD_ID = "Forestry";
 
-    private ForestryPlatform() {}
+    private ForestryPlatform() {
+    }
 
     public static boolean isLoaded() {
         return Loader.isModLoaded(MOD_ID);

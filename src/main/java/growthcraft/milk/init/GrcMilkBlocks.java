@@ -19,8 +19,6 @@
  */
 package growthcraft.milk.init;
 
-import net.minecraftforge.oredict.OreDictionary;
-
 import growthcraft.core.common.GrcModuleBlocks;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.milk.GrowthCraftMilk;
@@ -28,6 +26,7 @@ import growthcraft.milk.common.block.*;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcMilkBlocks extends GrcModuleBlocks {
 

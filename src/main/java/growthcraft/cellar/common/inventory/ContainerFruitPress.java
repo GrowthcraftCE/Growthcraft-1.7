@@ -1,10 +1,9 @@
 package growthcraft.cellar.common.inventory;
 
-import net.minecraft.entity.player.InventoryPlayer;
-
 import growthcraft.cellar.common.inventory.slot.SlotFruitPressResidue;
 import growthcraft.cellar.common.inventory.slot.SlotInputPressing;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
+import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerFruitPress extends CellarContainer {
 

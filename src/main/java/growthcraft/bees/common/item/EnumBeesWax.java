@@ -19,13 +19,12 @@
  */
 package growthcraft.bees.common.item;
 
-import java.util.Arrays;
-import java.util.List;
-
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.bees.GrowthCraftBees;
+import net.minecraft.item.ItemStack;
+
+import java.util.Arrays;
+import java.util.List;
 
 public enum EnumBeesWax implements IItemStackFactory {
 

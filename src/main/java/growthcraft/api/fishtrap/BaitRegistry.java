@@ -19,10 +19,9 @@
  */
 package growthcraft.api.fishtrap;
 
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.registry.GenericItemRegistry;
 import growthcraft.api.core.registry.ItemRegistryEntry;
+import net.minecraft.item.ItemStack;
 
 public class BaitRegistry extends GenericItemRegistry<ItemStack, ItemRegistryEntry<BaitRegistry.BaitHandle>> {
 
@@ -41,7 +40,8 @@ public class BaitRegistry extends GenericItemRegistry<ItemStack, ItemRegistryEnt
         public float baseRate;
         public float multiplier = 1.0f;
 
-        public BaitHandle() {}
+        public BaitHandle() {
+        }
 
         public BaitHandle(float base, float mul) {
             this();

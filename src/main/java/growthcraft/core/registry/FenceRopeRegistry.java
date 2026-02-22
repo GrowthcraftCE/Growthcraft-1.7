@@ -19,16 +19,14 @@
  */
 package growthcraft.core.registry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.block.Block;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.util.BlockKey;
+import net.minecraft.block.Block;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class FenceRopeRegistry {
 

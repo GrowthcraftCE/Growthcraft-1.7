@@ -19,8 +19,8 @@
  */
 package growthcraft.core.util;
 
-import java.util.Random;
-
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.common.block.IBlockRope;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
@@ -28,21 +28,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.common.block.IBlockRope;
+import java.util.Random;
 
 public class BlockCheck {
 
     /**
      * 2D directions
      */
-    public static final ForgeDirection[] DIR4 = new ForgeDirection[] { ForgeDirection.NORTH, ForgeDirection.SOUTH,
-        ForgeDirection.WEST, ForgeDirection.EAST };
-    public static final BlockDirection[] DIR8 = new BlockDirection[] { BlockDirection.NORTH, BlockDirection.SOUTH,
-        BlockDirection.WEST, BlockDirection.EAST, BlockDirection.NORTH_WEST, BlockDirection.NORTH_EAST,
-        BlockDirection.SOUTH_WEST, BlockDirection.SOUTH_EAST };
+    public static final ForgeDirection[] DIR4 = new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.SOUTH,
+            ForgeDirection.WEST, ForgeDirection.EAST};
+    public static final BlockDirection[] DIR8 = new BlockDirection[]{BlockDirection.NORTH, BlockDirection.SOUTH,
+            BlockDirection.WEST, BlockDirection.EAST, BlockDirection.NORTH_WEST, BlockDirection.NORTH_EAST,
+            BlockDirection.SOUTH_WEST, BlockDirection.SOUTH_EAST};
 
-    private BlockCheck() {}
+    private BlockCheck() {
+    }
 
     /**
      * Randomly selects a direction from the DIR4 array and returns it
@@ -127,7 +127,7 @@ public class BlockCheck {
      * @return true if the block can be planted, false otherwise
      */
     public static boolean canSustainPlantOn(IBlockAccess world, int x, int y, int z, ForgeDirection dir,
-        IPlantable plant, Block soil) {
+                                            IPlantable plant, Block soil) {
         return soil != null && soil.canSustainPlant(world, x, y, z, dir, plant);
     }
 
@@ -144,7 +144,7 @@ public class BlockCheck {
      * @return true if the block can be planted, false otherwise
      */
     public static boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection dir,
-        IPlantable plant) {
+                                          IPlantable plant) {
         final Block soil = world.getBlock(x, y, z);
         return canSustainPlantOn(world, x, y, z, dir, plant, soil);
     }
@@ -162,7 +162,7 @@ public class BlockCheck {
      * @return block if it can be planted upon, else null
      */
     public static Block getFarmableBlock(IBlockAccess world, int x, int y, int z, ForgeDirection dir,
-        IPlantable plant) {
+                                         IPlantable plant) {
         final Block soil = world.getBlock(x, y, z);
         if (canSustainPlantOn(world, x, y, z, dir, plant, soil)) return soil;
         return null;

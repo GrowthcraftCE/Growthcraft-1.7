@@ -19,8 +19,9 @@
  */
 package growthcraft.core.bucket;
 
-import javax.annotation.Nonnull;
-
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.eventhandler.EventHandlerBucketFill.IBucketEntry;
+import growthcraft.core.stats.CoreAchievement;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -29,9 +30,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.eventhandler.EventHandlerBucketFill.IBucketEntry;
-import growthcraft.core.stats.CoreAchievement;
+import javax.annotation.Nonnull;
 
 public class SaltBucketEntry implements IBucketEntry {
 

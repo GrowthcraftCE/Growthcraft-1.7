@@ -19,17 +19,16 @@
  */
 package growthcraft.core.eventhandler;
 
-import java.util.Random;
-
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import growthcraft.core.common.item.ItemCrowbar;
+import growthcraft.core.stats.CoreAchievement;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import growthcraft.core.common.item.ItemCrowbar;
-import growthcraft.core.stats.CoreAchievement;
+import java.util.Random;
 
 public class EventHandlerLivingDeathCore {
 

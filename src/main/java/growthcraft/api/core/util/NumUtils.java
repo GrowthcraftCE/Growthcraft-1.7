@@ -21,7 +21,8 @@ package growthcraft.api.core.util;
 
 public class NumUtils {
 
-    private NumUtils() {}
+    private NumUtils() {
+    }
 
     public static boolean isFlagged(int src, int flag) {
         return (src & flag) == flag;

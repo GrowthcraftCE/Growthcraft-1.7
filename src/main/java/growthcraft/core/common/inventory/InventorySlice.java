@@ -19,11 +19,11 @@
  */
 package growthcraft.core.common.inventory;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class InventorySlice implements IInventory {
 
@@ -92,7 +92,7 @@ public class InventorySlice implements IInventory {
     public ItemStack mergeStackBang(ItemStack stack) {
         if (stack == null) return null;
         InventoryProcessor.instance()
-            .mergeWithSlots(this, stack);
+                .mergeWithSlots(this, stack);
         return stack.stackSize <= 0 ? null : stack;
     }
 

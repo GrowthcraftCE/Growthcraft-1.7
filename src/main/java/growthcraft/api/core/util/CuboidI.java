@@ -39,7 +39,8 @@ public class CuboidI {
         this(other.x, other.y, other.z, other.w, other.h, other.l);
     }
 
-    public CuboidI() {}
+    public CuboidI() {
+    }
 
     public CuboidI copy() {
         return new CuboidI(this);

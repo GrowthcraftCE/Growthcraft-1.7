@@ -19,13 +19,13 @@
  */
 package growthcraft.grapes.util;
 
-import net.minecraft.block.Block;
-
 import growthcraft.grapes.GrowthCraftGrapes;
+import net.minecraft.block.Block;
 
 public class GrapeBlockCheck {
 
-    private GrapeBlockCheck() {}
+    private GrapeBlockCheck() {
+    }
 
     /**
      * Determines if block is a grape vine.
@@ -35,7 +35,7 @@ public class GrapeBlockCheck {
      */
     public static boolean isGrapeVine(Block block) {
         return GrowthCraftGrapes.blocks.grapeVine0.getBlock() == block
-            || GrowthCraftGrapes.blocks.grapeVine1.getBlock() == block;
+                || GrowthCraftGrapes.blocks.grapeVine1.getBlock() == block;
     }
 
     /**

@@ -19,10 +19,9 @@
  */
 package growthcraft.cellar.event;
 
-import net.minecraft.tileentity.TileEntity;
-
 import cpw.mods.fml.common.eventhandler.Event;
 import growthcraft.api.cellar.brewing.BrewingRecipe;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * Event emitted when a BrewKettle brews something

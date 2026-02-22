@@ -1,7 +1,11 @@
 package growthcraft.grapes.common.block;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.grapes.client.renderer.RenderGrapeVine1;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -13,12 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.core.util.BlockCheck;
-import growthcraft.grapes.GrowthCraftGrapes;
-import growthcraft.grapes.client.renderer.RenderGrapeVine1;
+import java.util.List;
 
 public class BlockGrapeVine1 extends BlockGrapeVineBase {
 
@@ -76,7 +75,7 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         return BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this)
-            || this == world.getBlock(x, y - 1, z);
+                || this == world.getBlock(x, y - 1, z);
     }
 
     /************
@@ -125,9 +124,9 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
      * BOXES
      ************/
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list,
-        Entity entity) {
+                                        Entity entity) {
         final int meta = world.getBlockMetadata(x, y, z);
         final float f = 0.0625F;
 

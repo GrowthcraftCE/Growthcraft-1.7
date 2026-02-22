@@ -19,13 +19,12 @@
  */
 package growthcraft.core;
 
+import growthcraft.api.core.util.TagParser;
+import net.minecraftforge.common.config.Configuration;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraftforge.common.config.Configuration;
-
-import growthcraft.api.core.util.TagParser;
 
 public abstract class ConfigTypeHandler {
 
@@ -43,7 +42,7 @@ public abstract class ConfigTypeHandler {
     public static class TagHandler extends ConfigTypeHandler {
 
         @Override
-        @SuppressWarnings({ "rawtypes" })
+        @SuppressWarnings({"rawtypes"})
         public boolean canHandle(Field field) {
             final Class typeClass = field.getType();
             return typeClass.isArray() && TagParser.Tag.class.equals(typeClass.getComponentType());
@@ -54,20 +53,20 @@ public abstract class ConfigTypeHandler {
             final ConfigBase.ConfigOption opt = field.getAnnotation(ConfigBase.ConfigOption.class);
             final String value = opt.def();
             final TagParser parser = opt.opt()
-                .equals("scsv") ? TagParser.scsv
+                    .equals("scsv") ? TagParser.scsv
                     : (opt.opt()
-                        .equals("cosv") ? TagParser.cosv : TagParser.csv);
+                    .equals("cosv") ? TagParser.cosv : TagParser.csv);
 
             return parser.parse(
-                config.get(opt.catergory(), opt.name(), value, opt.desc() + ConfigBase.DEFAULT_STR + value)
-                    .getString());
+                    config.get(opt.catergory(), opt.name(), value, opt.desc() + ConfigBase.DEFAULT_STR + value)
+                            .getString());
         }
     }
 
     public static class TagTableHandler extends ConfigTypeHandler {
 
         @Override
-        @SuppressWarnings({ "rawtypes" })
+        @SuppressWarnings({"rawtypes"})
         public boolean canHandle(Field field) {
             final Class typeClass = field.getType();
             if (typeClass.isArray()) {
@@ -82,8 +81,8 @@ public abstract class ConfigTypeHandler {
             final ConfigBase.ConfigOption opt = field.getAnnotation(ConfigBase.ConfigOption.class);
             final String value = opt.def();
             final String[] rows = TagParser.scsv.parseToArray(
-                config.get(opt.catergory(), opt.name(), value, opt.desc() + ConfigBase.DEFAULT_STR + value)
-                    .getString());
+                    config.get(opt.catergory(), opt.name(), value, opt.desc() + ConfigBase.DEFAULT_STR + value)
+                            .getString());
 
             final TagParser.Tag[][] table = new TagParser.Tag[rows.length][];
             int i = 0;

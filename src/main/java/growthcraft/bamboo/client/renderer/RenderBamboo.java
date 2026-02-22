@@ -1,5 +1,10 @@
 package growthcraft.bamboo.client.renderer;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.bamboo.common.block.BlockBambooStalk;
+import growthcraft.core.util.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.client.renderer.EntityRenderer;
@@ -8,14 +13,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.bamboo.common.block.BlockBambooStalk;
-import growthcraft.core.util.RenderUtils;
 
 public class RenderBamboo implements ISimpleBlockRenderingHandler {
 
@@ -44,7 +42,7 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == id) {
             final Tessellator tessellator = Tessellator.instance;
             tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
@@ -127,8 +125,8 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler {
 
     private boolean canFence(IBlockAccess world, int x, int y, int z) {
         return world.getBlock(x, y, z) == GrowthCraftBamboo.blocks.bambooFence.getBlock()
-            || world.getBlock(x, y, z) == Blocks.fence_gate
-            || world.getBlock(x, y, z) == GrowthCraftBamboo.blocks.bambooFenceGate.getBlock();
+                || world.getBlock(x, y, z) == Blocks.fence_gate
+                || world.getBlock(x, y, z) == GrowthCraftBamboo.blocks.bambooFenceGate.getBlock();
     }
 
     private boolean canWall(IBlockAccess world, int x, int y, int z) {
@@ -140,7 +138,7 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler {
     }
 
     private void renderFence(RenderBlocks renderer, IBlockAccess world, Block block, int x, int y, int z,
-        RenderUtils.Face m) {
+                             RenderUtils.Face m) {
         renderer.setOverrideBlockTexture(BlockBambooStalk.tex[3]);
         double x1 = x;
         double x2 = x + 1.0D;
@@ -206,7 +204,7 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler {
     }
 
     private void renderWall(RenderBlocks renderer, IBlockAccess world, Block block, int x, int y, int z,
-        RenderUtils.Face m) {
+                            RenderUtils.Face m) {
         renderer.setOverrideBlockTexture(BlockBambooStalk.tex[4]);
         double x1 = x;
         double x2 = x + 1.0D;
@@ -244,7 +242,7 @@ public class RenderBamboo implements ISimpleBlockRenderingHandler {
     }
 
     private void renderDoor(RenderBlocks renderer, IBlockAccess world, Block block, int x, int y, int z,
-        RenderUtils.Face m) {
+                            RenderUtils.Face m) {
         renderer.setOverrideBlockTexture(BlockBambooStalk.tex[4]);
         double x1 = x;
         double x2 = x + 1.0D;

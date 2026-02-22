@@ -1,12 +1,11 @@
 package growthcraft.bamboo.common.block;
 
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.bamboo.GrowthCraftBamboo;
+import net.minecraft.block.BlockFenceGate;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 
 public class BlockBambooFenceGate extends BlockFenceGate {
 
@@ -26,10 +25,11 @@ public class BlockBambooFenceGate extends BlockFenceGate {
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int _meta) {
         return GrowthCraftBamboo.blocks.bambooBlock.getBlock()
-            .getBlockTextureFromSide(side);
+                .getBlockTextureFromSide(side);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister reg) {}
+    public void registerBlockIcons(IIconRegister reg) {
+    }
 }

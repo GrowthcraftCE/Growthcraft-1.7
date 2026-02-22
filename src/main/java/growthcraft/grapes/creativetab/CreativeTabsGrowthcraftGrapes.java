@@ -19,12 +19,11 @@
  */
 package growthcraft.grapes.creativetab;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.grapes.GrowthCraftGrapes;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class CreativeTabsGrowthcraftGrapes extends CreativeTabs {
 

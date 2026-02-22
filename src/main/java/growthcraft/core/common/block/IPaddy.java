@@ -1,10 +1,10 @@
 package growthcraft.core.common.block;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.Block;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.Fluid;
+
+import javax.annotation.Nonnull;
 
 public interface IPaddy {
 

@@ -29,5 +29,6 @@ public class NullLogger extends AbstractLogger {
     public static final ILogger INSTANCE = new NullLogger();
 
     @Override
-    public void doLog(Level lv, String str, Object... objs) {}
+    public void doLog(Level lv, String str, Object... objs) {
+    }
 }

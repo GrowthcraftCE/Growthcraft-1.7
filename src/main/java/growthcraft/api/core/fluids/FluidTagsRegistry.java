@@ -19,18 +19,17 @@
  */
 package growthcraft.api.core.fluids;
 
-import java.util.*;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.api.core.common.DuplicateRegistrationError;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 
+import javax.annotation.Nonnull;
+import java.util.*;
+
 public class FluidTagsRegistry implements IFluidTagsRegistry {
 
-    private ILogger logger = NullLogger.INSTANCE;
     private final Map<String, FluidTag> nameToTag = new HashMap<String, FluidTag>();
+    private ILogger logger = NullLogger.INSTANCE;
 
     @Override
     public void setLogger(@Nonnull ILogger l) {

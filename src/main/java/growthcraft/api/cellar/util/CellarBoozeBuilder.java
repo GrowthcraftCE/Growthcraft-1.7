@@ -19,13 +19,6 @@
  */
 package growthcraft.api.cellar.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.common.Residue;
@@ -33,6 +26,12 @@ import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.util.MultiStacksUtil;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * If you find yourself making some seriously gnarly spaghetti code, this may
@@ -57,34 +56,34 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder {
     @Override
     public ICellarBoozeBuilder tags(FluidTag... tags) {
         CoreRegistry.instance()
-            .fluidDictionary()
-            .addFluidTags(fluid, tags);
+                .fluidDictionary()
+                .addFluidTags(fluid, tags);
         return this;
     }
 
     @Override
     public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time,
-        @Nullable Residue residue) {
+                                       @Nullable Residue residue) {
         CellarRegistry.instance()
-            .brewing()
-            .addRecipe(new FluidStack(fluid, result.amount), stack, result, time, residue);
+                .brewing()
+                .addRecipe(new FluidStack(fluid, result.amount), stack, result, time, residue);
         return this;
     }
 
     @Override
     public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull Object stack, int time,
-        @Nullable Residue residue) {
+                                         @Nullable Residue residue) {
         CellarRegistry.instance()
-            .brewing()
-            .addRecipe(src, stack, new FluidStack(fluid, src.amount), time, residue);
+                .brewing()
+                .addRecipe(src, stack, new FluidStack(fluid, src.amount), time, residue);
         return this;
     }
 
     @Override
     public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time) {
         CellarRegistry.instance()
-            .fermenting()
-            .addRecipe(result, new FluidStack(fluid, result.amount), stack, time);
+                .fermenting()
+                .addRecipe(result, new FluidStack(fluid, result.amount), stack, time);
         return this;
     }
 
@@ -92,31 +91,31 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder {
     public ICellarBoozeBuilder fermentsFrom(@Nonnull Object srcFluid, @Nonnull Object stack, int time) {
         final IMultiFluidStacks src = MultiStacksUtil.toMultiFluidStacks(srcFluid);
         CellarRegistry.instance()
-            .fermenting()
-            .addRecipe(new FluidStack(fluid, src.getAmount()), src, stack, time);
+                .fermenting()
+                .addRecipe(new FluidStack(fluid, src.getAmount()), src, stack, time);
         return this;
     }
 
     @Override
     public ICellarBoozeBuilder pressesFrom(@Nonnull Object stack, int time, int amount, @Nullable Residue residue) {
         CellarRegistry.instance()
-            .pressing()
-            .addRecipe(stack, new FluidStack(fluid, amount), time, residue);
+                .pressing()
+                .addRecipe(stack, new FluidStack(fluid, amount), time, residue);
         return this;
     }
 
     @Override
     public ICellarBoozeBuilder culturesTo(int amount, @Nonnull ItemStack stack, float heat, int time) {
         CellarRegistry.instance()
-            .culturing()
-            .addRecipe(new FluidStack(fluid, amount), stack, heat, time);
+                .culturing()
+                .addRecipe(new FluidStack(fluid, amount), stack, heat, time);
         return this;
     }
 
     @Override
     public BoozeEffect getEffect() {
         return CellarRegistry.instance()
-            .booze()
-            .getEffect(fluid);
+                .booze()
+                .getEffect(fluid);
     }
 }

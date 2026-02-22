@@ -1,8 +1,9 @@
 package growthcraft.core.common.block;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.client.renderer.RenderRope;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,10 +14,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.client.renderer.RenderRope;
+import java.util.List;
+import java.util.Random;
 
 public class BlockRope extends GrcBlockBase implements IBlockRope {
 
@@ -142,9 +141,9 @@ public class BlockRope extends GrcBlockBase implements IBlockRope {
      * BOXES
      ************/
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list,
-        Entity entity) {
+                                        Entity entity) {
         final boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
         final boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
         final boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);

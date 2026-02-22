@@ -1,9 +1,10 @@
 package growthcraft.api.core.item.recipes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-
+import growthcraft.api.core.definition.IItemStackListProvider;
+import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.fluids.FluidUtils;
+import growthcraft.api.core.item.MultiItemStacks;
+import growthcraft.api.core.item.OreItemStacks;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -13,11 +14,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import growthcraft.api.core.definition.IItemStackListProvider;
-import growthcraft.api.core.definition.IMultiItemStacks;
-import growthcraft.api.core.fluids.FluidUtils;
-import growthcraft.api.core.item.MultiItemStacks;
-import growthcraft.api.core.item.OreItemStacks;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class ShapedMultiRecipe implements IRecipe {
 
@@ -176,8 +175,8 @@ public class ShapedMultiRecipe implements IRecipe {
                 if (target instanceof IMultiItemStacks) {
                     boolean matched = false;
 
-                    final Iterator<ItemStack> itr = target.getItemStacks()
-                        .iterator();
+                    final Iterator<ItemStack> itr = target.itemStacks()
+                            .iterator();
                     while (itr.hasNext() && !matched) {
                         matched = OreDictionary.itemMatches(itr.next(), slot, false);
                     }

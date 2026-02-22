@@ -19,16 +19,15 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.List;
-import java.util.Random;
-
+import growthcraft.api.core.i18n.GrcI18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.i18n.GrcI18n;
+import java.util.List;
+import java.util.Random;
 
 /**
  * As its name implies, this Effect will REMOVE a Potion Effect from the target.
@@ -41,7 +40,8 @@ public class EffectRemovePotionEffect extends AbstractEffect {
         this.potionId = potnId;
     }
 
-    public EffectRemovePotionEffect() {}
+    public EffectRemovePotionEffect() {
+    }
 
     public int getPotionID() {
         return potionId;
@@ -72,7 +72,7 @@ public class EffectRemovePotionEffect extends AbstractEffect {
     protected void getActualDescription(List<String> list) {
         final PotionEffect pe = new PotionEffect(getPotionID(), 1000, 0);
         final String potionName = GrcI18n.translate(pe.getEffectName())
-            .trim();
+                .trim();
         list.add(GrcI18n.translate("grc.effect.remove_potion_effect.format", potionName));
     }
 

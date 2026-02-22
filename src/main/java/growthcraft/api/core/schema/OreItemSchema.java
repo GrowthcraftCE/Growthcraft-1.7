@@ -19,13 +19,12 @@
  */
 package growthcraft.api.core.schema;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import growthcraft.api.core.definition.IItemStackListProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import growthcraft.api.core.definition.IItemStackListProvider;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OreItemSchema implements IItemStackListProvider, IValidatable, ICommentable {
 
@@ -42,7 +41,8 @@ public class OreItemSchema implements IItemStackListProvider, IValidatable, ICom
         this.amount = a;
     }
 
-    public OreItemSchema() {}
+    public OreItemSchema() {
+    }
 
     @Override
     public String getComment() {
@@ -66,7 +66,7 @@ public class OreItemSchema implements IItemStackListProvider, IValidatable, ICom
      * @return list with ores, this list may be empty if the ores were invalid
      */
     @Override
-    public List<ItemStack> getItemStacks() {
+    public List<ItemStack> itemStacks() {
         final List<ItemStack> result = new ArrayList<ItemStack>();
         final List<ItemStack> ores = getOres();
         if (ores != null) {

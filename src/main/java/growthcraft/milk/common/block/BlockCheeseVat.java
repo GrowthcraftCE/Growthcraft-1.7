@@ -19,21 +19,20 @@
  */
 package growthcraft.milk.common.block;
 
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.milk.GrowthCraftMilk;
 import growthcraft.milk.client.render.RenderCheeseVat;
 import growthcraft.milk.common.tileentity.TileEntityCheeseVat;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockCheeseVat extends GrcBlockContainer {
 
@@ -73,9 +72,9 @@ public class BlockCheeseVat extends GrcBlockContainer {
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list,
-        Entity entity) {
+                                        Entity entity) {
         final float unit = 1f / 16f;
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, unit, 1.0F);
         super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);

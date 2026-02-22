@@ -1,5 +1,9 @@
 package growthcraft.bamboo.common.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.core.common.item.GrcItemFoodBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,11 +13,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.core.common.item.GrcItemFoodBase;
 
 public class ItemBambooShoot extends GrcItemFoodBase implements IPlantable {
 
@@ -28,7 +27,7 @@ public class ItemBambooShoot extends GrcItemFoodBase implements IPlantable {
 
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir,
-        float par8, float par9, float par10) {
+                             float par8, float par9, float par10) {
         final Block block1 = world.getBlock(x, y, z);
 
         if (block1 == Blocks.snow && (world.getBlockMetadata(x, y, z) & 7) < 1) {
@@ -74,12 +73,12 @@ public class ItemBambooShoot extends GrcItemFoodBase implements IPlantable {
                     }
 
                     world.playSoundEffect(
-                        (float) x + 0.5F,
-                        (float) y + 0.5F,
-                        (float) z + 0.5F,
-                        cropBlock.stepSound.func_150496_b(),
-                        (cropBlock.stepSound.getVolume() + 1.0F) / 2.0F,
-                        cropBlock.stepSound.getPitch() * 0.8F);
+                            (float) x + 0.5F,
+                            (float) y + 0.5F,
+                            (float) z + 0.5F,
+                            cropBlock.stepSound.func_150496_b(),
+                            (cropBlock.stepSound.getVolume() + 1.0F) / 2.0F,
+                            cropBlock.stepSound.getPitch() * 0.8F);
                     --stack.stackSize;
                 }
             }

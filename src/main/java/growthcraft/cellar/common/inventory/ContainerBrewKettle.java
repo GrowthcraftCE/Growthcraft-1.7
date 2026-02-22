@@ -1,10 +1,9 @@
 package growthcraft.cellar.common.inventory;
 
-import net.minecraft.entity.player.InventoryPlayer;
-
 import growthcraft.cellar.common.inventory.slot.SlotBrewKettleResidue;
 import growthcraft.cellar.common.inventory.slot.SlotInputBrewing;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
+import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerBrewKettle extends CellarContainer {
 

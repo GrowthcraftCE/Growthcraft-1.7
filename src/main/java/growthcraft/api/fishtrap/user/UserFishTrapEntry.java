@@ -19,14 +19,13 @@
  */
 package growthcraft.api.fishtrap.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.fishtrap.FishTrapEntry;
+import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserFishTrapEntry implements ICommentable {
 
@@ -56,7 +55,8 @@ public class UserFishTrapEntry implements ICommentable {
         this(g, entry.itemWeight, entry.getItemStack(), entry.getDamage(), entry.getEnchanted());
     }
 
-    public UserFishTrapEntry() {}
+    public UserFishTrapEntry() {
+    }
 
     @Override
     public String getComment() {
@@ -70,7 +70,7 @@ public class UserFishTrapEntry implements ICommentable {
 
     public List<FishTrapEntry> getFishTrapEntries() {
         final List<FishTrapEntry> result = new ArrayList<FishTrapEntry>();
-        for (ItemStack stack : item.getItemStacks()) {
+        for (ItemStack stack : item.itemStacks()) {
             final FishTrapEntry entry = new FishTrapEntry(stack, weight);
             entry.setDamage(damage_variance);
             entry.setEnchantable(enchanted);

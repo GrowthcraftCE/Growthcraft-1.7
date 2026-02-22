@@ -25,7 +25,8 @@ public class BotaniaPlatform {
 
     public static final String MOD_ID = "Botania";
 
-    private BotaniaPlatform() {}
+    private BotaniaPlatform() {
+    }
 
     public static boolean isLoaded() {
         return Loader.isModLoaded(MOD_ID);

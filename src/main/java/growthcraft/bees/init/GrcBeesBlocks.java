@@ -19,14 +19,14 @@
  */
 package growthcraft.bees.init;
 
-import java.util.List;
-
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeHive;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.core.common.GrcModuleBlocks;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
+
+import java.util.List;
 
 public class GrcBeesBlocks extends GrcModuleBlocks {
 
@@ -50,9 +50,9 @@ public class GrcBeesBlocks extends GrcModuleBlocks {
     public void preInit() {
         this.beeBox = newTypedDefinition(new BlockBeeBox());
         beeBox.getBlock()
-            .setFlammability(20)
-            .setFireSpreadSpeed(5)
-            .setHarvestLevel("axe", 0);
+                .setFlammability(20)
+                .setFireSpreadSpeed(5)
+                .setHarvestLevel("axe", 0);
         this.beeHive = newDefinition(new BlockBeeHive());
     }
 

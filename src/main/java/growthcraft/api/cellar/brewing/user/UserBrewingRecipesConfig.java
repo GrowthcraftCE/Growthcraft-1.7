@@ -19,10 +19,6 @@
  */
 package growthcraft.api.cellar.brewing.user;
 
-import java.io.BufferedReader;
-
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.definition.IMultiItemStacks;
@@ -30,6 +26,9 @@ import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.ResidueSchema;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.io.BufferedReader;
 
 /**
  * This allows users to define new brewing recipes.
@@ -47,12 +46,12 @@ public class UserBrewingRecipesConfig extends AbstractUserJSONConfig {
     public void addDefault(Object stack, FluidStack inp, FluidStack out, Residue residue, int time) {
         for (ItemKeySchema itemKey : ItemKeySchema.createMulti(stack)) {
             addDefault(
-                new UserBrewingRecipe(
-                    itemKey,
-                    new FluidStackSchema(inp),
-                    new FluidStackSchema(out),
-                    residue == null ? null : new ResidueSchema(residue),
-                    time));
+                    new UserBrewingRecipe(
+                            itemKey,
+                            new FluidStackSchema(inp),
+                            new FluidStackSchema(out),
+                            residue == null ? null : new ResidueSchema(residue),
+                            time));
         }
     }
 
@@ -102,8 +101,8 @@ public class UserBrewingRecipesConfig extends AbstractUserJSONConfig {
         logger.debug("Adding user brewing recipe {%s}", recipe);
         for (IMultiItemStacks item : recipe.item.getMultiItemStacks()) {
             CellarRegistry.instance()
-                .brewing()
-                .addRecipe(inputFluidStack, item, outputFluidStack, recipe.time, residue);
+                    .brewing()
+                    .addRecipe(inputFluidStack, item, outputFluidStack, recipe.time, residue);
         }
     }
 

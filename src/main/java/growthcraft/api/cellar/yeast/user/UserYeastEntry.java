@@ -19,13 +19,12 @@
  */
 package growthcraft.api.cellar.yeast.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserYeastEntry implements ICommentable {
 
@@ -36,7 +35,7 @@ public class UserYeastEntry implements ICommentable {
     public List<String> biome_names;
 
     public UserYeastEntry(@Nonnull ItemKeySchema i, int w, @Nonnull List<String> biomeTypes,
-        @Nonnull List<String> biomeNames) {
+                          @Nonnull List<String> biomeNames) {
         this.item = i;
         this.weight = w;
         this.biome_types = biomeTypes;
@@ -47,16 +46,17 @@ public class UserYeastEntry implements ICommentable {
         this(i, w, biomeTypes, new ArrayList<String>());
     }
 
-    public UserYeastEntry() {}
+    public UserYeastEntry() {
+    }
 
     @Override
     public String toString() {
         return String.format(
-            "UserYeastEntry(item: `%s`, weight: %d, biome_types: %s, biome_names: %s)",
-            item,
-            weight,
-            biome_types,
-            biome_names);
+                "UserYeastEntry(item: `%s`, weight: %d, biome_types: %s, biome_names: %s)",
+                item,
+                weight,
+                biome_types,
+                biome_names);
     }
 
     @Override

@@ -19,15 +19,15 @@
  */
 package growthcraft.core.integration.forestry.recipes;
 
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.Optional;
 import forestry.api.recipes.IMoistenerManager;
 import forestry.api.recipes.IMoistenerRecipe;
+import net.minecraft.item.ItemStack;
 
 @Optional.Interface(iface = "forestry.api.recipes.IMoistenerManager", modid = "ForestryAPI|recipes")
 public class MoistenerManagerShim extends AbstractManagerShim<IMoistenerRecipe> implements IMoistenerManager {
 
     @Override
-    public void addRecipe(ItemStack resource, ItemStack product, int timePerItem) {}
+    public void addRecipe(ItemStack resource, ItemStack product, int timePerItem) {
+    }
 }

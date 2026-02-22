@@ -36,10 +36,10 @@ public class ThaumcraftModule extends ThaumcraftModuleBase {
     @Optional.Method(modid = "Thaumcraft")
     protected void integrate() {
         ThaumcraftApi.registerObjectTag(
-            GrowthCraftFishTrap.fishTrap.asStack(),
-            new AspectList().add(Aspect.SLIME, 1)
-                .add(Aspect.WATER, 2)
-                .add(Aspect.VOID, 1)
-                .add(Aspect.TRAP, 2));
+                GrowthCraftFishTrap.fishTrap.asStack(),
+                new AspectList().add(Aspect.SLIME, 1)
+                        .add(Aspect.WATER, 2)
+                        .add(Aspect.VOID, 1)
+                        .add(Aspect.TRAP, 2));
     }
 }

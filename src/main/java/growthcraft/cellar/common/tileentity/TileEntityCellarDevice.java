@@ -19,15 +19,14 @@
  */
 package growthcraft.cellar.common.tileentity;
 
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.core.common.tileentity.GrcTileDeviceBase;
 import growthcraft.core.common.tileentity.feature.IGuiNetworkSync;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 public abstract class TileEntityCellarDevice extends GrcTileDeviceBase implements IGuiNetworkSync, IInteractionObject {
 
@@ -42,24 +41,24 @@ public abstract class TileEntityCellarDevice extends GrcTileDeviceBase implement
                     final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(tankIndex));
                     if (result != null) getFluidTank(tankIndex).setFluid(result);
                 }
-                    break;
+                break;
                 // Fluid amounts CAN exceed a 16bit integer, in order to handle the capacity, the value is split across
                 // 2 data points, by high and low bytes
                 // Fluid Amount (LOW Bytes)
                 case 1: {
                     final int t = getFluidAmount(tankIndex);
                     setFluidStack(
-                        tankIndex,
-                        FluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF0000) | v));
+                            tankIndex,
+                            FluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF0000) | v));
                 }
-                    break;
+                break;
                 // Fluid Amount (HIGH Bytes)
                 case 2: {
                     final int t = getFluidAmount(tankIndex);
                     getFluidTank(tankIndex).setFluid(
-                        FluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF) | (v << 16)));
+                            FluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF) | (v << 16)));
                 }
-                    break;
+                break;
                 default:
                     break;
             }

@@ -19,11 +19,10 @@
  */
 package growthcraft.cellar.event;
 
+import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
-
-import cpw.mods.fml.common.eventhandler.Event;
 
 /**
  * Event emitted when a player drains a fermenting barrel

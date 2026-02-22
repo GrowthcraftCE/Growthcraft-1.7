@@ -52,5 +52,6 @@ public class AuxFX {
     public static final int BONEMEAL = 2005;
     public static final int BLOCKDUST = 2006;
 
-    private AuxFX() {}
+    private AuxFX() {
+    }
 }

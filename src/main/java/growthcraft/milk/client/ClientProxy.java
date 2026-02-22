@@ -19,8 +19,6 @@
  */
 package growthcraft.milk.client;
 
-import net.minecraftforge.client.MinecraftForgeClient;
-
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import growthcraft.milk.GrowthCraftMilk;
@@ -31,6 +29,7 @@ import growthcraft.milk.client.renderer.*;
 import growthcraft.milk.client.resource.GrcMilkResources;
 import growthcraft.milk.common.CommonProxy;
 import growthcraft.milk.common.tileentity.*;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy {
 
@@ -40,9 +39,9 @@ public class ClientProxy extends CommonProxy {
         new GrcMilkResources();
 
         MinecraftForgeClient
-            .registerItemRenderer(GrowthCraftMilk.blocks.cheeseBlock.getItem(), new ItemRendererCheeseBlock());
+                .registerItemRenderer(GrowthCraftMilk.blocks.cheeseBlock.getItem(), new ItemRendererCheeseBlock());
         MinecraftForgeClient
-            .registerItemRenderer(GrowthCraftMilk.blocks.hangingCurds.getItem(), new ItemRendererHangingCurds());
+                .registerItemRenderer(GrowthCraftMilk.blocks.hangingCurds.getItem(), new ItemRendererHangingCurds());
 
         RenderingRegistry.registerBlockHandler(new RenderButterChurn());
         RenderingRegistry.registerBlockHandler(new RenderCheeseBlock());
@@ -54,7 +53,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCheesePress.class, new TileEntityCheesePressRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCheeseVat.class, new TileEntityCheeseVatRenderer());
         ClientRegistry
-            .bindTileEntitySpecialRenderer(TileEntityHangingCurds.class, new TileEntityHangingCurdsRenderer());
+                .bindTileEntitySpecialRenderer(TileEntityHangingCurds.class, new TileEntityHangingCurdsRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPancheon.class, new TileEntityPancheonRenderer());
     }
 }

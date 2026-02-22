@@ -1,14 +1,13 @@
 package growthcraft.bamboo.client.renderer;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.core.util.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.core.util.RenderUtils;
 
 public class RenderBambooScaffold implements ISimpleBlockRenderingHandler {
 
@@ -47,7 +46,7 @@ public class RenderBambooScaffold implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == id) {
             final double d = 0.0625D;
             renderer.setOverrideBlockTexture(block.getIcon(1, 0));

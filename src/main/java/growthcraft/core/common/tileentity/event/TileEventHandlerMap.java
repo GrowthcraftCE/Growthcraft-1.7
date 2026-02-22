@@ -19,26 +19,25 @@
  */
 package growthcraft.core.common.tileentity.event;
 
+import net.minecraft.tileentity.TileEntity;
+
+import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import net.minecraft.tileentity.TileEntity;
 
 public class TileEventHandlerMap<T extends TileEntity> extends HashMap<Class<? extends T>, TileEventFunctionMap> {
 
     public static final long serialVersionUID = 1L;
 
     protected void addHandlerEventFunction(@Nonnull TileEventFunctionMap handlerMap,
-        @Nonnull TileEventHandler.EventType type, @Nonnull Method method) {
+                                           @Nonnull TileEventHandler.EventType type, @Nonnull Method method) {
         if (!handlerMap.containsKey(type)) {
             handlerMap.put(type, new ArrayList<TileEventFunction>());
         }
         handlerMap.get(type)
-            .add(new TileEventFunction(method));
+                .add(new TileEventFunction(method));
     }
 
     public TileEventFunctionMap getEventFunctionMap(Class<? extends T> klass) {
@@ -55,7 +54,7 @@ public class TileEventHandlerMap<T extends TileEntity> extends HashMap<Class<? e
     }
 
     public List<TileEventFunction> getEventFunctionsForClass(Class<? extends T> klass,
-        TileEventHandler.EventType type) {
+                                                             TileEventHandler.EventType type) {
         return getEventFunctionMap(klass).get(type);
     }
 }

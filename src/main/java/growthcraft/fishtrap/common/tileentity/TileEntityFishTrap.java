@@ -20,13 +20,6 @@
  */
 package growthcraft.fishtrap.common.tileentity;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-
 import growthcraft.api.core.nbt.NBTType;
 import growthcraft.api.fishtrap.BaitRegistry.BaitHandle;
 import growthcraft.api.fishtrap.FishTrapRegistry;
@@ -36,12 +29,18 @@ import growthcraft.core.common.inventory.InventorySlice;
 import growthcraft.core.common.tileentity.GrcTileInventoryBase;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
 import growthcraft.fishtrap.common.inventory.ContainerFishTrap;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 
 public class TileEntityFishTrap extends GrcTileInventoryBase implements IInteractionObject {
 
-    private static final int[] TRAP_SLOTS = new int[] { 0, 1, 2, 3, 4, 5 };
-    private static final int[] BAIT_SLOTS = new int[] { 6 };
-    private static final int[] ACCESSIBLE_SLOTS = new int[] { 0, 1, 2, 3, 4, 5, 6 };
+    private static final int[] TRAP_SLOTS = new int[]{0, 1, 2, 3, 4, 5};
+    private static final int[] BAIT_SLOTS = new int[]{6};
+    private static final int[] ACCESSIBLE_SLOTS = new int[]{0, 1, 2, 3, 4, 5, 6};
     public InventorySlice trapInventory;
     public InventorySlice baitInventory;
 
@@ -110,7 +109,7 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
         final ItemStack bait = baitInventory.getStackInSlot(0);
         if (bait != null) {
             final BaitHandle handle = FishTrapRegistry.instance()
-                .findBait(bait);
+                    .findBait(bait);
             if (handle != null) {
                 result += handle.baseRate;
                 result *= handle.multiplier;
@@ -146,7 +145,7 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
      */
     public boolean addStack(ItemStack stack) {
         return InventoryProcessor.instance()
-            .mergeWithSlots(trapInventory, stack);
+                .mergeWithSlots(trapInventory, stack);
     }
 
     @Override
@@ -166,7 +165,7 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
                 if (b0 >= 0 && b0 < trapInventory.getSizeInventory()) {
                     final ItemStack stack = ItemStack.loadItemStackFromNBT(item);
                     InventoryProcessor.instance()
-                        .mergeWithSlot(trapInventory, stack, b0);
+                            .mergeWithSlot(trapInventory, stack, b0);
                 }
             }
         } else {

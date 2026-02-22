@@ -19,28 +19,26 @@
  */
 package growthcraft.api.milk.churn;
 
+import growthcraft.api.core.fluids.FluidKey;
+import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-
-import growthcraft.api.core.fluids.FluidKey;
-import growthcraft.api.core.fluids.FluidTest;
-import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.NullLogger;
-
 public class ChurnRegistry implements IChurnRegistry {
 
-    protected ILogger logger = NullLogger.INSTANCE;
     private final Map<Fluid, IChurnRecipe> recipes = new HashMap<Fluid, IChurnRecipe>();
     private final Set<FluidKey> fluidIngredients = new HashSet<FluidKey>();
+    protected ILogger logger = NullLogger.INSTANCE;
 
     @Override
     public void setLogger(@Nonnull ILogger l) {
@@ -62,7 +60,7 @@ public class ChurnRegistry implements IChurnRegistry {
 
     @Override
     public void addRecipe(@Nonnull FluidStack inputFluid, @Nonnull FluidStack outputFluid,
-        @Nullable ItemStack outputItem, int churns) {
+                          @Nullable ItemStack outputItem, int churns) {
         final Fluid fluid = inputFluid.getFluid();
         if (fluid == null) {
             throw new IllegalArgumentException("The provided input fluid is invalid.");

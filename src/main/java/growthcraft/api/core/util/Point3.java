@@ -96,7 +96,7 @@ public record Point3(int x, int y, int z) {
     }
 
     public int[] toArray() {
-        return new int[] { x, y, z };
+        return new int[]{x, y, z};
     }
 
     @Override

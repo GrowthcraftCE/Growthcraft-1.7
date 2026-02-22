@@ -19,9 +19,9 @@
  */
 package growthcraft.api.core.util;
 
-import java.util.List;
-
 import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.List;
 
 /**
  * Allows formatter interfaces, look at TagFormatterFluidHandler for an example

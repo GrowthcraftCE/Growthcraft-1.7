@@ -19,12 +19,11 @@
  */
 package growthcraft.api.core;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.nbt.NBTTagCompound;
-
 import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.log.ILoggable;
+import net.minecraft.nbt.NBTTagCompound;
+
+import javax.annotation.Nonnull;
 
 public interface IEffectRegistry extends IClassRegistry<IEffect>, ILoggable {
 

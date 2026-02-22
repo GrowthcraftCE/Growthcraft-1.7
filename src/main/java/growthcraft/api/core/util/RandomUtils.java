@@ -24,7 +24,8 @@ import java.util.Random;
 
 public class RandomUtils {
 
-    private RandomUtils() {}
+    private RandomUtils() {
+    }
 
     public static boolean thresh(Random random, float thresh) {
         return random.nextInt(2000) < (int) (thresh * 2000);

@@ -19,22 +19,20 @@
  */
 package growthcraft.api.milk.pancheon;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.NullLogger;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PancheonRegistry implements IPancheonRegistry {
 
-    protected ILogger logger = NullLogger.INSTANCE;
     private final Map<Fluid, IPancheonRecipe> recipes = new HashMap<Fluid, IPancheonRecipe>();
+    protected ILogger logger = NullLogger.INSTANCE;
 
     @Override
     public void setLogger(@Nonnull ILogger l) {
@@ -44,7 +42,7 @@ public class PancheonRegistry implements IPancheonRegistry {
     @Override
     public void addRecipe(@Nonnull IPancheonRecipe recipe) {
         final Fluid fluid = recipe.getInputFluid()
-            .getFluid();
+                .getFluid();
         if (recipes.containsKey(fluid)) {
             logger.warn("Overwriting existing pancheon recipe for {%s} with {%s}", recipe.getInputFluid(), recipe);
         } else {
@@ -55,7 +53,7 @@ public class PancheonRegistry implements IPancheonRegistry {
 
     @Override
     public void addRecipe(@Nonnull FluidStack inputStack, @Nonnull FluidStack topOutput,
-        @Nullable FluidStack bottomOutput, int time) {
+                          @Nullable FluidStack bottomOutput, int time) {
         final Fluid fluid = inputStack.getFluid();
         if (fluid == null) {
             throw new IllegalArgumentException("The provided input fluid is invalid.");

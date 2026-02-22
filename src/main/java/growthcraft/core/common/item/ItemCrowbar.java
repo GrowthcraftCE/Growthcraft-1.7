@@ -19,10 +19,11 @@
  */
 package growthcraft.core.common.item;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import buildcraft.api.tools.IToolWrench;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.item.EnumDye;
+import growthcraft.core.GrowthCraftCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockChest;
@@ -37,11 +38,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import buildcraft.api.tools.IToolWrench;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.item.EnumDye;
-import growthcraft.core.GrowthCraftCore;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ItemCrowbar extends GrcItemBase implements IToolWrench {
 
@@ -73,7 +72,7 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench {
 
     @Override
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
-        float hitX, float hitY, float hitZ) {
+                                  float hitX, float hitY, float hitZ) {
         final Block block = world.getBlock(x, y, z);
         if (block == null) return false;
         if (player.isSneaking() != isShiftRotation(block.getClass())) return false;
@@ -119,7 +118,7 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void getSubItems(Item item, CreativeTabs tab, List list) {
         for (EnumDye dye : EnumDye.VALUES) {
             list.add(new ItemStack(item, 1, dye.meta));

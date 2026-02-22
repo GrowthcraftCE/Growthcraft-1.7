@@ -19,15 +19,14 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import growthcraft.api.core.description.Describer;
+import growthcraft.api.core.i18n.GrcI18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.description.Describer;
-import growthcraft.api.core.i18n.GrcI18n;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A variation of the EffectList, this one will randomly apply one of its internal

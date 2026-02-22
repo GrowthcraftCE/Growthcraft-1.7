@@ -19,14 +19,13 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.List;
-import java.util.Random;
-
+import growthcraft.api.core.i18n.GrcI18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.i18n.GrcI18n;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Because sometimes you want an Effect that does ABSOLUTELY NOTHING.
@@ -34,7 +33,8 @@ import growthcraft.api.core.i18n.GrcI18n;
 public class EffectNull extends AbstractEffect {
 
     @Override
-    public void apply(World world, Entity entity, Random random, Object data) {}
+    public void apply(World world, Entity entity, Random random, Object data) {
+    }
 
     @Override
     protected void getActualDescription(List<String> list) {
@@ -43,8 +43,10 @@ public class EffectNull extends AbstractEffect {
     }
 
     @Override
-    protected void readFromNBT(NBTTagCompound data) {}
+    protected void readFromNBT(NBTTagCompound data) {
+    }
 
     @Override
-    protected void writeToNBT(NBTTagCompound data) {}
+    protected void writeToNBT(NBTTagCompound data) {
+    }
 }

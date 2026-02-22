@@ -19,11 +19,10 @@
  */
 package growthcraft.apples.integration.mfr;
 
-import net.minecraft.world.World;
-
 import growthcraft.apples.GrowthCraftApples;
 import growthcraft.apples.common.block.BlockApple;
 import growthcraft.core.integration.mfr.AbstractFactoryFruit;
+import net.minecraft.world.World;
 
 public class AppleBlockFactoryFruit extends AbstractFactoryFruit<BlockApple> {
 

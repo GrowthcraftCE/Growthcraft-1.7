@@ -19,16 +19,15 @@
  */
 package growthcraft.api.core;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.nbt.NBTTagCompound;
-
 import growthcraft.api.core.effect.IPotionEffectFactory;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import net.minecraft.nbt.NBTTagCompound;
+
+import javax.annotation.Nonnull;
 
 public class PotionEffectFactoryRegistry extends AbstractClassRegistry<IPotionEffectFactory>
-    implements IPotionEffectFactoryRegistry {
+        implements IPotionEffectFactoryRegistry {
 
     private ILogger logger = NullLogger.INSTANCE;
 

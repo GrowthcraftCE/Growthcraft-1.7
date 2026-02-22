@@ -21,9 +21,10 @@ package growthcraft.api.core.util;
 
 public class ObjectUtils {
 
-    private ObjectUtils() {}
+    private ObjectUtils() {
+    }
 
-    @SuppressWarnings({ "unchecked" })
+    @SuppressWarnings({"unchecked"})
     public static <T> T maybe(T... objects) {
         for (T object : objects) {
             if (object != null) return object;

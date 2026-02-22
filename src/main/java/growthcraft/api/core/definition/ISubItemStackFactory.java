@@ -19,9 +19,9 @@
  */
 package growthcraft.api.core.definition;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nullable;
 
 public interface ISubItemStackFactory extends IItemStackFactory {
 

@@ -19,9 +19,8 @@
  */
 package growthcraft.api.core.log;
 
-import org.apache.logging.log4j.Level;
-
 import cpw.mods.fml.common.FMLLog;
+import org.apache.logging.log4j.Level;
 
 /**
  * Logger class used for Module level logging

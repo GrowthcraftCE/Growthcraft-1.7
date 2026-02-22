@@ -1,18 +1,16 @@
 package growthcraft.grapes.client.renderer;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.core.util.RenderUtils;
+import growthcraft.grapes.common.block.BlockGrapeLeaves;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.core.util.RenderUtils;
-import growthcraft.grapes.common.block.BlockGrapeLeaves;
 
 public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler {
 
@@ -35,7 +33,7 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == id) {
             final BlockGrapeLeaves grapeLeaves = (BlockGrapeLeaves) block;
             final boolean graphicFlag = !Blocks.leaves.isOpaqueCube();
@@ -139,17 +137,17 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler {
                     maxU = icon.getMaxU();
 
                     RenderUtils.drawCrossSquaresAlongZ(
-                        tessellator,
-                        minX,
-                        maxX,
-                        minY,
-                        maxY,
-                        minZ,
-                        maxZ,
-                        minU,
-                        maxU,
-                        minV,
-                        maxV);
+                            tessellator,
+                            minX,
+                            maxX,
+                            minY,
+                            maxY,
+                            minZ,
+                            maxZ,
+                            minU,
+                            maxU,
+                            minV,
+                            maxV);
                 } else {
                     if (flag) {
                         minX = (double) x + 7 * d;
@@ -163,17 +161,17 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler {
                         maxU = icon.getMaxU();
 
                         RenderUtils.drawCrossSquaresAlongZ(
-                            tessellator,
-                            minX,
-                            maxX,
-                            minY,
-                            maxY,
-                            minZ,
-                            maxZ,
-                            minU,
-                            maxU,
-                            minV,
-                            maxV);
+                                tessellator,
+                                minX,
+                                maxX,
+                                minY,
+                                maxY,
+                                minZ,
+                                maxZ,
+                                minU,
+                                maxU,
+                                minV,
+                                maxV);
                     }
 
                     if (flag1) {
@@ -188,17 +186,17 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler {
                         maxU = icon.getInterpolatedU(8);
 
                         RenderUtils.drawCrossSquaresAlongZ(
-                            tessellator,
-                            minX,
-                            maxX,
-                            minY,
-                            maxY,
-                            minZ,
-                            maxZ,
-                            minU,
-                            maxU,
-                            minV,
-                            maxV);
+                                tessellator,
+                                minX,
+                                maxX,
+                                minY,
+                                maxY,
+                                minZ,
+                                maxZ,
+                                minU,
+                                maxU,
+                                minV,
+                                maxV);
                     }
                 }
 
@@ -214,17 +212,17 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler {
                     maxU = icon.getMaxU();
 
                     RenderUtils.drawCrossSquaresAlongX(
-                        tessellator,
-                        minX,
-                        maxX,
-                        minY,
-                        maxY,
-                        minZ,
-                        maxZ,
-                        minU,
-                        maxU,
-                        minV,
-                        maxV);
+                            tessellator,
+                            minX,
+                            maxX,
+                            minY,
+                            maxY,
+                            minZ,
+                            maxZ,
+                            minU,
+                            maxU,
+                            minV,
+                            maxV);
                 } else {
                     if (flag2) {
                         minX = x;
@@ -238,17 +236,17 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler {
                         maxU = icon.getMaxU();
 
                         RenderUtils.drawCrossSquaresAlongX(
-                            tessellator,
-                            minX,
-                            maxX,
-                            minY,
-                            maxY,
-                            minZ,
-                            maxZ,
-                            minU,
-                            maxU,
-                            minV,
-                            maxV);
+                                tessellator,
+                                minX,
+                                maxX,
+                                minY,
+                                maxY,
+                                minZ,
+                                maxZ,
+                                minU,
+                                maxU,
+                                minV,
+                                maxV);
                     }
 
                     if (flag3) {
@@ -263,17 +261,17 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler {
                         maxU = icon.getInterpolatedU(8);
 
                         RenderUtils.drawCrossSquaresAlongX(
-                            tessellator,
-                            minX,
-                            maxX,
-                            minY,
-                            maxY,
-                            minZ,
-                            maxZ,
-                            minU,
-                            maxU,
-                            minV,
-                            maxV);
+                                tessellator,
+                                minX,
+                                maxX,
+                                minY,
+                                maxY,
+                                minZ,
+                                maxZ,
+                                minU,
+                                maxU,
+                                minV,
+                                maxV);
                     }
                 }
 
@@ -289,17 +287,17 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler {
                     maxU = icon.getMaxU();
 
                     RenderUtils.drawCrossSquaresAlongYRotated(
-                        tessellator,
-                        minX,
-                        maxX,
-                        minY,
-                        maxY,
-                        minZ,
-                        maxZ,
-                        minU,
-                        maxU,
-                        minV,
-                        maxV);
+                            tessellator,
+                            minX,
+                            maxX,
+                            minY,
+                            maxY,
+                            minZ,
+                            maxZ,
+                            minU,
+                            maxU,
+                            minV,
+                            maxV);
                 } else {
                     if (flag4) {
                         minX = (double) x + 7 * d;
@@ -313,17 +311,17 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler {
                         maxU = icon.getMaxU();
 
                         RenderUtils.drawCrossSquaresAlongYRotated(
-                            tessellator,
-                            minX,
-                            maxX,
-                            minY,
-                            maxY,
-                            minZ,
-                            maxZ,
-                            minU,
-                            maxU,
-                            minV,
-                            maxV);
+                                tessellator,
+                                minX,
+                                maxX,
+                                minY,
+                                maxY,
+                                minZ,
+                                maxZ,
+                                minU,
+                                maxU,
+                                minV,
+                                maxV);
                     }
 
                     if (flag5) {
@@ -338,17 +336,17 @@ public class RenderGrapeLeaves implements ISimpleBlockRenderingHandler {
                         maxU = icon.getInterpolatedU(8);
 
                         RenderUtils.drawCrossSquaresAlongYRotated(
-                            tessellator,
-                            minX,
-                            maxX,
-                            minY,
-                            maxY,
-                            minZ,
-                            maxZ,
-                            minU,
-                            maxU,
-                            minV,
-                            maxV);
+                                tessellator,
+                                minX,
+                                maxX,
+                                minY,
+                                maxY,
+                                minZ,
+                                maxZ,
+                                minU,
+                                maxU,
+                                minV,
+                                maxV);
                     }
                 }
 

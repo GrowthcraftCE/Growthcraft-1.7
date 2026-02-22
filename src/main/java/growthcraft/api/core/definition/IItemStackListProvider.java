@@ -19,11 +19,10 @@
  */
 package growthcraft.api.core.definition;
 
-import java.util.List;
+import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
-
-import net.minecraft.item.ItemStack;
+import java.util.List;
 
 public interface IItemStackListProvider {
 
@@ -33,5 +32,5 @@ public interface IItemStackListProvider {
      * @return item stacks
      */
     @Nonnull
-    List<ItemStack> getItemStacks();
+    List<ItemStack> itemStacks();
 }

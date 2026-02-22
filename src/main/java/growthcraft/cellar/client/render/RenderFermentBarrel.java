@@ -1,17 +1,15 @@
 package growthcraft.cellar.client.render;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.cellar.common.block.BlockFermentBarrel;
+import growthcraft.core.util.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.cellar.common.block.BlockFermentBarrel;
-import growthcraft.core.util.RenderUtils;
 
 public class RenderFermentBarrel implements ISimpleBlockRenderingHandler {
 
@@ -36,9 +34,9 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler {
         if (modelID == RENDER_ID) {
             final BlockFermentBarrel fermentBarrel = (BlockFermentBarrel) block;
             final Tessellator tes = Tessellator.instance;
-            final IIcon[] icons = { fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(0),
-                fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(1),
-                fermentBarrel.getIconByIndex(1) };
+            final IIcon[] icons = {fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(0),
+                    fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(1),
+                    fermentBarrel.getIconByIndex(1)};
             final double d = 0.0625D;
             final float f = 0.125F;
             renderer.uvRotateEast = 3;
@@ -105,23 +103,23 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler {
             renderer.setRenderBounds(1 * d, 0.0D, 0.0D, 15 * d, 1.0D, 1.0D);
             GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
             RenderUtils.drawFace(
-                RenderUtils.Face.XPOS,
-                block,
-                renderer,
-                tes,
-                fermentBarrel.getIconByIndex(2),
-                0.0D,
-                0.0D,
-                0.0D);
+                    RenderUtils.Face.XPOS,
+                    block,
+                    renderer,
+                    tes,
+                    fermentBarrel.getIconByIndex(2),
+                    0.0D,
+                    0.0D,
+                    0.0D);
             RenderUtils.drawFace(
-                RenderUtils.Face.XNEG,
-                block,
-                renderer,
-                tes,
-                fermentBarrel.getIconByIndex(3),
-                0.0D,
-                0.0D,
-                0.0D);
+                    RenderUtils.Face.XNEG,
+                    block,
+                    renderer,
+                    tes,
+                    fermentBarrel.getIconByIndex(3),
+                    0.0D,
+                    0.0D,
+                    0.0D);
             GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
             renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
@@ -130,11 +128,11 @@ public class RenderFermentBarrel implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == RENDER_ID) {
             final BlockFermentBarrel fermentBarrel = (BlockFermentBarrel) block;
-            final IIcon[] icon = { fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(1),
-                fermentBarrel.getIconByIndex(2), fermentBarrel.getIconByIndex(3) };
+            final IIcon[] icon = {fermentBarrel.getIconByIndex(0), fermentBarrel.getIconByIndex(1),
+                    fermentBarrel.getIconByIndex(2), fermentBarrel.getIconByIndex(3)};
             final int meta = world.getBlockMetadata(x, y, z);
             final double d = 0.0625D;
 

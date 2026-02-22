@@ -19,13 +19,12 @@
  */
 package growthcraft.core.common.block;
 
-import java.util.Random;
-
+import growthcraft.api.core.util.RandomUtils;
+import growthcraft.core.GrowthCraftCore;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 
-import growthcraft.api.core.util.RandomUtils;
-import growthcraft.core.GrowthCraftCore;
+import java.util.Random;
 
 public class BlockSaltBlock extends GrcBlockBase {
 

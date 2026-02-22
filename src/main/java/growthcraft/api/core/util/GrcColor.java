@@ -19,9 +19,9 @@
  */
 package growthcraft.api.core.util;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.MathHelper;
+
+import javax.annotation.Nonnull;
 
 public class GrcColor {
 
@@ -72,8 +72,8 @@ public class GrcColor {
 
     public int hexRGBA() {
         return (((int) (a * 255) << 24) & 0xFF) | (((int) (r * 255) << 16) & 0xFF)
-            | (((int) (g * 255) << 8) & 0xFF)
-            | (((int) (b * 255)) & 0xFF);
+                | (((int) (g * 255) << 8) & 0xFF)
+                | (((int) (b * 255)) & 0xFF);
     }
 
     public GrcColor set(float pr, float pg, float pb, float pa) {
@@ -111,10 +111,10 @@ public class GrcColor {
     public GrcColor alphaBlend(@Nonnull GrcColor other) {
         final float alpha = other.a;
         return new GrcColor(
-            (alpha >= 1.0f || a <= 0.0f) ? other.r : (alpha > 0 ? ((other.r * alpha) + (r * (1 - alpha))) : r),
-            (alpha >= 1.0f || a <= 0.0f) ? other.g : (alpha > 0 ? ((other.g * alpha) + (g * (1 - alpha))) : g),
-            (alpha >= 1.0f || a <= 0.0f) ? other.b : (alpha > 0 ? ((other.b * alpha) + (b * (1 - alpha))) : b),
-            a < alpha ? alpha : a);
+                (alpha >= 1.0f || a <= 0.0f) ? other.r : (alpha > 0 ? ((other.r * alpha) + (r * (1 - alpha))) : r),
+                (alpha >= 1.0f || a <= 0.0f) ? other.g : (alpha > 0 ? ((other.g * alpha) + (g * (1 - alpha))) : g),
+                (alpha >= 1.0f || a <= 0.0f) ? other.b : (alpha > 0 ? ((other.b * alpha) + (b * (1 - alpha))) : b),
+                a < alpha ? alpha : a);
     }
 
     public GrcColor setRGBA(int pr, int pg, int pb, int pa) {

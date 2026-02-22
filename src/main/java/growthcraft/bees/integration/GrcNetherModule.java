@@ -19,13 +19,12 @@
  */
 package growthcraft.bees.integration;
 
-import net.minecraftforge.oredict.ShapedOreRecipe;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.common.block.BlockBeeBoxNether;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.core.integration.ModIntegrationBase;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class GrcNetherModule extends ModIntegrationBase {
 
@@ -37,16 +36,16 @@ public class GrcNetherModule extends ModIntegrationBase {
     protected void doPreInit() {
         GrowthCraftBees.blocks.beeBoxNether = GrowthCraftBees.blocks.newTypedDefinition(new BlockBeeBoxNether());
         GrowthCraftBees.blocks.beeBoxNether.getBlock()
-            .setHarvestLevel("axe", 0);
+                .setHarvestLevel("axe", 0);
     }
 
     @Override
     protected void doRegister() {
         if (GrowthCraftBees.blocks.beeBoxNether != null) {
             GameRegistry.registerBlock(
-                GrowthCraftBees.blocks.beeBoxNether.getBlock(),
-                ItemBlockBeeBox.class,
-                "grc.BeeBox.Nether");
+                    GrowthCraftBees.blocks.beeBoxNether.getBlock(),
+                    ItemBlockBeeBox.class,
+                    "grc.BeeBox.Nether");
         }
     }
 
@@ -55,13 +54,13 @@ public class GrcNetherModule extends ModIntegrationBase {
         if (GrowthCraftBees.blocks.beeBoxNether != null) {
             // plankMaliceWood is registered by the Growthcraft|Nether module, and is a non-flammable plank
             GameRegistry.addRecipe(
-                new ShapedOreRecipe(
-                    GrowthCraftBees.blocks.beeBoxNether.asStack(),
-                    " A ",
-                    "A A",
-                    "AAA",
-                    'A',
-                    "plankMaliceWood"));
+                    new ShapedOreRecipe(
+                            GrowthCraftBees.blocks.beeBoxNether.asStack(),
+                            " A ",
+                            "A A",
+                            "AAA",
+                            'A',
+                            "plankMaliceWood"));
         }
     }
 }

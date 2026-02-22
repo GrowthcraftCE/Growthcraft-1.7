@@ -35,9 +35,9 @@ public class ThaumcraftModule extends ThaumcraftModuleBase {
     @Optional.Method(modid = "Thaumcraft")
     protected void integrate() {
         ThaumcraftApi.registerObjectTag(
-            GrowthCraftCore.items.rope.asStack(),
-            new AspectList().add(Aspect.CRAFT, 1)
-                .add(Aspect.CLOTH, 1));
+                GrowthCraftCore.items.rope.asStack(),
+                new AspectList().add(Aspect.CRAFT, 1)
+                        .add(Aspect.CLOTH, 1));
         ThaumcraftApi.registerObjectTag(GrowthCraftCore.items.salt.asStack(), new AspectList().add(Aspect.CRYSTAL, 1));
     }
 }

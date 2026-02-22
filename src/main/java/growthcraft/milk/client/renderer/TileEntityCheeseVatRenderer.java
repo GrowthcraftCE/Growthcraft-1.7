@@ -19,16 +19,14 @@
  */
 package growthcraft.milk.client.renderer;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.milk.client.model.ModelCheeseVat;
 import growthcraft.milk.client.resource.GrcMilkResources;
 import growthcraft.milk.common.tileentity.TileEntityCheeseVat;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityCheeseVatRenderer extends TileEntitySpecialRenderer {

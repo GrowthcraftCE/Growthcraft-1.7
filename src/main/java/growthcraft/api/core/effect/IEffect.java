@@ -19,13 +19,12 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.Random;
-
+import growthcraft.api.core.description.IDescribable;
+import growthcraft.api.core.nbt.INBTSerializableContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.description.IDescribable;
-import growthcraft.api.core.nbt.INBTSerializableContext;
+import java.util.Random;
 
 /**
  * This is the main interface for Growthcraft's Effect system.

@@ -19,16 +19,14 @@
  */
 package growthcraft.api.core.fluids;
 
-import java.util.Collection;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.log.ILoggable;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.log.ILoggable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Growthcraft uses so many fluids, the only thing we can do is tag them to

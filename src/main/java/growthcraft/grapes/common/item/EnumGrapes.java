@@ -19,11 +19,10 @@
  */
 package growthcraft.grapes.common.item;
 
-import java.util.Locale;
-
+import growthcraft.grapes.GrowthCraftGrapes;
 import net.minecraft.item.ItemStack;
 
-import growthcraft.grapes.GrowthCraftGrapes;
+import java.util.Locale;
 
 public enum EnumGrapes {
 

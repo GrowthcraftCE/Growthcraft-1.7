@@ -19,8 +19,6 @@
  */
 package growthcraft.bees.integration;
 
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.common.block.BlockBeeBoxNatura;
@@ -28,6 +26,7 @@ import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.core.integration.ModIntegrationBase;
 import growthcraft.core.integration.natura.EnumNaturaWoodType;
 import growthcraft.core.integration.natura.NaturaPlatform;
+import net.minecraft.item.ItemStack;
 
 public class NaturaModule extends ModIntegrationBase {
 
@@ -51,12 +50,12 @@ public class NaturaModule extends ModIntegrationBase {
             final ItemStack planks = type.asPlanksItemStack();
             if (planks != null) {
                 GameRegistry.addShapedRecipe(
-                    GrowthCraftBees.blocks.beeBoxNatura.asStack(1, type.meta),
-                    " A ",
-                    "A A",
-                    "AAA",
-                    'A',
-                    planks);
+                        GrowthCraftBees.blocks.beeBoxNatura.asStack(1, type.meta),
+                        " A ",
+                        "A A",
+                        "AAA",
+                        'A',
+                        planks);
             }
         }
     }

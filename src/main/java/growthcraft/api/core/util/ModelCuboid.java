@@ -41,7 +41,8 @@ public class ModelCuboid {
         this(other.x, other.y, other.z, other.w, other.h, other.l);
     }
 
-    public ModelCuboid() {}
+    public ModelCuboid() {
+    }
 
     public ModelCuboid copy() {
         return new ModelCuboid(this);

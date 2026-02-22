@@ -1,22 +1,20 @@
 package growthcraft.cellar.common.tileentity;
 
-import java.io.IOException;
-
-import net.minecraft.nbt.NBTTagCompound;
-
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.tileentity.GrcTileBase;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.nbt.NBTTagCompound;
+
+import java.io.IOException;
 
 public class TileEntityFruitPresser extends GrcTileBase {
 
+    private final float transSpd = 0.21875F;
+    private final float transMax = 0.4375F;
     public float trans;
     public float transPrev;
-
-    private final float transSpd = 0.21875F;
     private float transMin;
-    private final float transMax = 0.4375F;
 
     @Override
     public void updateEntity() {

@@ -19,12 +19,11 @@
  */
 package growthcraft.apples.integration;
 
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.Optional;
 import growthcraft.apples.GrowthCraftApples;
 import growthcraft.core.integration.ForestryModuleBase;
 import growthcraft.core.integration.forestry.ForestryFluids;
+import net.minecraft.item.ItemStack;
 
 public class ForestryModule extends ForestryModuleBase {
 
@@ -38,7 +37,7 @@ public class ForestryModule extends ForestryModuleBase {
         final ItemStack appleSeed = GrowthCraftApples.items.appleSeeds.asStack();
         final int seedamount = getActiveMode().getIntegerSetting("squeezer.liquid.seed");
         if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager
-            .addRecipe(10, new ItemStack[] { appleSeed }, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
+                .addRecipe(10, new ItemStack[]{appleSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
         Backpack.FORESTERS.add(appleSeed);
     }
 }

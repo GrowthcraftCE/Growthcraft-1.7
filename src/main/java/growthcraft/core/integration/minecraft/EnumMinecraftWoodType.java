@@ -19,10 +19,10 @@
  */
 package growthcraft.core.integration.minecraft;
 
-import java.util.Locale;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+
+import java.util.Locale;
 
 public enum EnumMinecraftWoodType {
 

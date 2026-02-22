@@ -19,9 +19,9 @@
  */
 package growthcraft.api.fishtrap;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.WeightedRandom;
+
+import javax.annotation.Nonnull;
 
 public class CatchGroupEntry extends WeightedRandom.Item {
 

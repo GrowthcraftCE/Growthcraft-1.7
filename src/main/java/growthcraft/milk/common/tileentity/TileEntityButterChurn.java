@@ -19,17 +19,6 @@
  */
 package growthcraft.milk.common.tileentity;
 
-import java.io.IOException;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.api.core.fluids.FluidTest;
@@ -44,28 +33,38 @@ import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.IItemHandler;
 import growthcraft.core.util.ItemUtils;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+
+import java.io.IOException;
 
 public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHandler {
 
     private static final AccesibleSlots accessibleSlots = new AccesibleSlots(
-        new int[][] { { 0 }, {}, { 0 }, { 0 }, { 0 }, { 0 } });
+            new int[][]{{0}, {}, {0}, {0}, {0}, {0}});
+    private final DeviceFluidSlot inputFluidSlot = new DeviceFluidSlot(this, 0);
+    private final DeviceFluidSlot outputFluidSlot = new DeviceFluidSlot(this, 1);
+    private final DeviceInventorySlot outputInventorySlot = new DeviceInventorySlot(this, 0);
     @SideOnly(Side.CLIENT)
     public float animProgress;
     @SideOnly(Side.CLIENT)
     public int animDir;
     private int shaftState;
     private int churns;
-    private final DeviceFluidSlot inputFluidSlot = new DeviceFluidSlot(this, 0);
-    private final DeviceFluidSlot outputFluidSlot = new DeviceFluidSlot(this, 1);
-    private final DeviceInventorySlot outputInventorySlot = new DeviceInventorySlot(this, 0);
 
     @Override
     protected FluidTank[] createTanks() {
-        return new FluidTank[] {
-            // cream
-            new FluidTank(1000),
-            // buttermilk
-            new FluidTank(1000) };
+        return new FluidTank[]{
+                // cream
+                new FluidTank(1000),
+                // buttermilk
+                new FluidTank(1000)};
     }
 
     @Override
@@ -114,8 +113,8 @@ public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHan
         final FluidStack stack = inputFluidSlot.get();
         if (stack != null) {
             final IChurnRecipe recipe = MilkRegistry.instance()
-                .churn()
-                .getRecipe(stack);
+                    .churn()
+                    .getRecipe(stack);
             return recipe;
         }
         return null;
@@ -159,8 +158,8 @@ public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHan
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
         return MilkRegistry.instance()
-            .churn()
-            .isFluidIngredient(fluid);
+                .churn()
+                .isFluidIngredient(fluid);
     }
 
     /**
@@ -205,8 +204,8 @@ public class TileEntityButterChurn extends GrcTileDeviceBase implements IItemHan
         int result = 0;
 
         if (MilkRegistry.instance()
-            .churn()
-            .isFluidIngredient(stack)) {
+                .churn()
+                .isFluidIngredient(stack)) {
             result = inputFluidSlot.fill(stack, doFill);
         }
 

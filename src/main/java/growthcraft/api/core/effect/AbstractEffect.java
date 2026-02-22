@@ -19,11 +19,10 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.List;
-
+import growthcraft.api.core.CoreRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 
-import growthcraft.api.core.CoreRegistry;
+import java.util.List;
 
 /**
  * Because sometimes you want an Effect that does ABSOLUTELY NOTHING.
@@ -56,8 +55,8 @@ public abstract class AbstractEffect implements IEffect {
     public void writeToNBT(NBTTagCompound data, String name) {
         final NBTTagCompound target = new NBTTagCompound();
         final String effectName = CoreRegistry.instance()
-            .getEffectsRegistry()
-            .getName(this.getClass());
+                .getEffectsRegistry()
+                .getName(this.getClass());
         // This is a VERY important field, this is how the effects will reload their correct class.
         target.setString("__name__", effectName);
         writeToNBT(target);

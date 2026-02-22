@@ -19,20 +19,17 @@
  */
 package growthcraft.api.core.user;
 
-import java.io.*;
-
-import javax.annotation.Nonnull;
-
-import net.minecraftforge.common.config.Configuration.UnicodeInputStreamReader;
-
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.module.IModule;
+import net.minecraftforge.common.config.Configuration.UnicodeInputStreamReader;
+
+import javax.annotation.Nonnull;
+import java.io.*;
 
 /**
  * This is a base class for defining JSON config definitions, its purpose
@@ -42,8 +39,8 @@ public abstract class AbstractUserJSONConfig implements ILoggable, IModule {
 
     public static final String DEFAULT_ENCODING = "UTF-8";
     protected final Gson gson = new GsonBuilder().setPrettyPrinting()
-        .serializeNulls()
-        .create();
+            .serializeNulls()
+            .create();
     protected ILogger logger = NullLogger.INSTANCE;
     private File targetConfigFile;
     private File targetDefaultConfigFile;
@@ -62,7 +59,7 @@ public abstract class AbstractUserJSONConfig implements ILoggable, IModule {
         try {
             logger.debug("Creating default json-config %s", file);
             if (file.getParentFile() != null) file.getParentFile()
-                .mkdirs();
+                    .mkdirs();
 
             if (!file.exists()) {
                 if (!file.createNewFile()) {
@@ -99,7 +96,7 @@ public abstract class AbstractUserJSONConfig implements ILoggable, IModule {
     private void prepareUserConfig() throws IOException {
         if (!targetConfigFile.exists()) {
             if (targetConfigFile.getParentFile() != null) targetConfigFile.getParentFile()
-                .mkdirs();
+                    .mkdirs();
 
             if (!targetConfigFile.createNewFile()) {
                 logger.error("Could not create config file `%s`", targetConfigFile);
@@ -110,9 +107,9 @@ public abstract class AbstractUserJSONConfig implements ILoggable, IModule {
                 Files.copy(targetDefaultConfigFile, targetConfigFile);
             } else {
                 logger.error(
-                    "Could not copy default config file `%s` to `%s`",
-                    targetDefaultConfigFile,
-                    targetConfigFile);
+                        "Could not copy default config file `%s` to `%s`",
+                        targetDefaultConfigFile,
+                        targetConfigFile);
             }
         }
     }
@@ -138,12 +135,14 @@ public abstract class AbstractUserJSONConfig implements ILoggable, IModule {
             if (buffer != null) {
                 try {
                     buffer.close();
-                } catch (IOException e) {}
+                } catch (IOException e) {
+                }
             }
             if (input != null) {
                 try {
                     input.close();
-                } catch (IOException e) {}
+                } catch (IOException e) {
+                }
             }
         }
     }
@@ -164,14 +163,18 @@ public abstract class AbstractUserJSONConfig implements ILoggable, IModule {
     }
 
     @Override
-    public void preInit() {}
+    public void preInit() {
+    }
 
     @Override
-    public void register() {}
+    public void register() {
+    }
 
     @Override
-    public void init() {}
+    public void init() {
+    }
 
     @Override
-    public void postInit() {}
+    public void postInit() {
+    }
 }

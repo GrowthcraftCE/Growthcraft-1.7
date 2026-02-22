@@ -19,10 +19,6 @@
  */
 package growthcraft.api.cellar.pressing.user;
 
-import java.io.BufferedReader;
-
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.definition.IMultiItemStacks;
@@ -30,6 +26,9 @@ import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.ResidueSchema;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.io.BufferedReader;
 
 /**
  * This allows users to define their own pressing recipes using existing items
@@ -99,8 +98,8 @@ public class UserPressingRecipesConfig extends AbstractUserJSONConfig {
         logger.debug("Adding pressing recipe {%s}", recipe);
         for (IMultiItemStacks item : recipe.item.getMultiItemStacks()) {
             CellarRegistry.instance()
-                .pressing()
-                .addRecipe(item, fluidStack, recipe.time, residue);
+                    .pressing()
+                    .addRecipe(item, fluidStack, recipe.time, residue);
         }
     }
 

@@ -1,7 +1,8 @@
 package growthcraft.bamboo.common.block;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.bamboo.GrowthCraftBamboo;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.IconFlipped;
@@ -11,13 +12,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.bamboo.GrowthCraftBamboo;
+import java.util.Random;
 
 public class BlockBambooDoor extends BlockDoor {
 
-    private static final String[] doorIconNames = new String[] { "grcbamboo:door_lower", "grcbamboo:door_upper" };
+    private static final String[] doorIconNames = new String[]{"grcbamboo:door_lower", "grcbamboo:door_upper"};
 
     @SideOnly(Side.CLIENT)
     private IIcon[] tex;

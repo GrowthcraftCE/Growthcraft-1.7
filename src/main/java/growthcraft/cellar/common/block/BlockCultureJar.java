@@ -1,14 +1,13 @@
 package growthcraft.cellar.common.block;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.world.IBlockAccess;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.api.core.util.BBox;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.client.render.RenderCultureJar;
 import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
+import net.minecraft.block.material.Material;
+import net.minecraft.world.IBlockAccess;
 
 public class BlockCultureJar extends BlockCellarContainer {
 
@@ -22,7 +21,7 @@ public class BlockCultureJar extends BlockCellarContainer {
         setTileEntityType(TileEntityCultureJar.class);
 
         final BBox bbox = BBox.newCube(6, 0, 6, 4, 6, 4)
-            .scale(1 / 16.0f);
+                .scale(1 / 16.0f);
         setBlockBounds(bbox.x0(), bbox.y0(), bbox.z0(), bbox.x1(), bbox.y1(), bbox.z1());
     }
 

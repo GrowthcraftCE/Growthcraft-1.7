@@ -19,18 +19,17 @@
  */
 package growthcraft.core.integration.mfr;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.common.Optional;
+import growthcraft.core.integration.MFRModuleBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.common.Optional;
-import growthcraft.core.integration.MFRModuleBase;
 import powercrystals.minefactoryreloaded.api.IFactoryFruit;
 import powercrystals.minefactoryreloaded.api.ReplacementBlock;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @Optional.Interface(iface = "powercrystals.minefactoryreloaded.api.IFactoryFruit", modid = MFRModuleBase.MOD_ID)
 public abstract class AbstractFactoryFruit<TBlock extends Block> implements IFactoryFruit {
@@ -71,7 +70,8 @@ public abstract class AbstractFactoryFruit<TBlock extends Block> implements IFac
     }
 
     @Override
-    public void prePick(World world, int x, int y, int z) {}
+    public void prePick(World world, int x, int y, int z) {
+    }
 
     @Override
     public void postPick(World world, int x, int y, int z) {

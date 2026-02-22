@@ -1,8 +1,8 @@
 package growthcraft.bamboo.common.block;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.bamboo.GrowthCraftBamboo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
@@ -12,9 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.bamboo.GrowthCraftBamboo;
+import java.util.List;
+import java.util.Random;
 
 public class BlockBambooSlab extends BlockSlab {
 
@@ -38,7 +37,7 @@ public class BlockBambooSlab extends BlockSlab {
      ************/
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         if (GrowthCraftBamboo.blocks.bambooDoubleSlab.getItem() != item) {
             list.add(new ItemStack(item, 1, 0));
@@ -75,6 +74,6 @@ public class BlockBambooSlab extends BlockSlab {
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
         return GrowthCraftBamboo.blocks.bambooBlock.getBlock()
-            .getIcon(side, meta);
+                .getIcon(side, meta);
     }
 }

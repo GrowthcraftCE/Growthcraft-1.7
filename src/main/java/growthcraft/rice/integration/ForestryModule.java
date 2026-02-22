@@ -19,14 +19,13 @@
  */
 package growthcraft.rice.integration;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.Optional;
 import growthcraft.core.integration.ForestryModuleBase;
 import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
 import growthcraft.core.integration.forestry.ForestryFluids;
 import growthcraft.rice.GrowthCraftRice;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 public class ForestryModule extends ForestryModuleBase {
 
@@ -42,10 +41,10 @@ public class ForestryModule extends ForestryModuleBase {
         final ItemStack riceSeed = GrowthCraftRice.items.rice.asStack();
         final Block riceBlock = GrowthCraftRice.blocks.riceBlock.getBlock();
         if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager
-            .addRecipe(10, new ItemStack[] { riceSeed }, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
+                .addRecipe(10, new ItemStack[]{riceSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
         Backpack.FORESTERS.add(riceSeed);
         addFarmable(
-            "farmOrchard",
-            new FarmableBasicGrowthCraft(riceBlock, GrowthCraftRice.getConfig().paddyFieldMax, true, false));
+                "farmOrchard",
+                new FarmableBasicGrowthCraft(riceBlock, GrowthCraftRice.getConfig().paddyFieldMax, true, false));
     }
 }

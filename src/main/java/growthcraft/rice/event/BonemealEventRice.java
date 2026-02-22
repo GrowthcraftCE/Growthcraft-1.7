@@ -1,18 +1,17 @@
 package growthcraft.rice.event;
 
-import java.util.Random;
-
-import net.minecraft.init.Blocks;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.BonemealEvent;
-
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import growthcraft.api.core.util.AuxFX;
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.util.RiceBlockCheck;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.BonemealEvent;
+
+import java.util.Random;
 
 public class BonemealEventRice {
 
@@ -24,9 +23,9 @@ public class BonemealEventRice {
         for (int i = x - 1; i <= x + 1; ++i) {
             for (int k = z - 1; k <= z + 1; ++k) {
                 final boolean isRiceBlock = (GrowthCraftRice.blocks.riceBlock.getBlock() == world.getBlock(i, y, k))
-                    && (world.getBlockMetadata(i, y, k) != 7);
+                        && (world.getBlockMetadata(i, y, k) != 7);
                 final boolean isPaddyBelow = RiceBlockCheck.isPaddy(world.getBlock(i, y - 1, k))
-                    && (world.getBlockMetadata(i, y - 1, k) != 0);
+                        && (world.getBlockMetadata(i, y - 1, k) != 0);
 
                 if (isRiceBlock && isPaddyBelow) {
                     mplus = world.getBlockMetadata(i, y, k) + r;

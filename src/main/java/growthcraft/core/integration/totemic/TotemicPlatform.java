@@ -25,7 +25,8 @@ public class TotemicPlatform {
 
     public static final String MOD_ID = "totemic";
 
-    private TotemicPlatform() {}
+    private TotemicPlatform() {
+    }
 
     public static boolean isLoaded() {
         return Loader.isModLoaded(MOD_ID);

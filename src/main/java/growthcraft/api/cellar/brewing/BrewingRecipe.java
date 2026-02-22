@@ -19,17 +19,16 @@
  */
 package growthcraft.api.cellar.brewing;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.cellar.common.ProcessingRecipe;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.item.ItemTest;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class BrewingRecipe extends ProcessingRecipe {
 
@@ -37,7 +36,7 @@ public class BrewingRecipe extends ProcessingRecipe {
     private final FluidStack inputFluidStack;
 
     public BrewingRecipe(@Nonnull FluidStack pInputFluid, @Nonnull IMultiItemStacks pInputItem,
-        @Nonnull FluidStack pOutputFluid, int pTime, @Nullable Residue pResidue) {
+                         @Nonnull FluidStack pOutputFluid, int pTime, @Nullable Residue pResidue) {
         super(pOutputFluid, pTime, pResidue);
         this.inputItemStack = pInputItem;
         this.inputFluidStack = pInputFluid;

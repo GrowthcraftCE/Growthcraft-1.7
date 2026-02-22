@@ -19,14 +19,13 @@
  */
 package growthcraft.cellar.common.block;
 
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.common.block.GrcBlockContainer;
+import growthcraft.core.common.tileentity.feature.IInteractionObject;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.common.block.GrcBlockContainer;
-import growthcraft.core.common.tileentity.feature.IInteractionObject;
 
 /**
  * Base class for Cellar machines and the like
@@ -48,7 +47,7 @@ public abstract class BlockCellarContainer extends GrcBlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7,
-        float par8, float par9) {
+                                    float par8, float par9) {
         if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
         return !player.isSneaking() && openGui(player, world, x, y, z);
     }

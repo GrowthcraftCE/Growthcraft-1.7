@@ -19,8 +19,6 @@
  */
 package growthcraft.bees.integration;
 
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.common.block.BlockBeeBoxArsMagica2;
@@ -28,6 +26,7 @@ import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.core.integration.AM2.AM2Platform;
 import growthcraft.core.integration.AM2.EnumAM2WoodType;
 import growthcraft.core.integration.ModIntegrationBase;
+import net.minecraft.item.ItemStack;
 
 public class AM2Module extends ModIntegrationBase {
 
@@ -38,7 +37,7 @@ public class AM2Module extends ModIntegrationBase {
     @Override
     public void doPreInit() {
         GrowthCraftBees.blocks.beeBoxArsMagica2 = GrowthCraftBees.blocks
-            .newTypedDefinition(new BlockBeeBoxArsMagica2());
+                .newTypedDefinition(new BlockBeeBoxArsMagica2());
     }
 
     @Override
@@ -52,12 +51,12 @@ public class AM2Module extends ModIntegrationBase {
             final ItemStack planks = type.asPlanksItemStack();
             if (planks != null) {
                 GameRegistry.addShapedRecipe(
-                    GrowthCraftBees.blocks.beeBoxArsMagica2.asStack(),
-                    " A ",
-                    "A A",
-                    "AAA",
-                    'A',
-                    planks);
+                        GrowthCraftBees.blocks.beeBoxArsMagica2.asStack(),
+                        " A ",
+                        "A A",
+                        "AAA",
+                        'A',
+                        planks);
             }
         }
     }

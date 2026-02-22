@@ -1,8 +1,11 @@
 package growthcraft.core.common.block;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.core.client.ClientProxy;
+import growthcraft.core.client.renderer.RenderPaddy;
+import growthcraft.core.util.ItemUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -15,12 +18,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.core.client.ClientProxy;
-import growthcraft.core.client.renderer.RenderPaddy;
-import growthcraft.core.util.ItemUtils;
+import java.util.List;
+import java.util.Random;
 
 public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy {
 
@@ -61,7 +60,7 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy {
      ************/
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7,
-        float par8, float par9) {
+                                    float par8, float par9) {
         if (world.isRemote) {
             return true;
         } else {
@@ -86,8 +85,8 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy {
 
                             if (!player.capabilities.isCreativeMode) {
                                 player.inventory.setInventorySlotContents(
-                                    player.inventory.currentItem,
-                                    ItemUtils.consumeStack(itemstack));
+                                        player.inventory.currentItem,
+                                        ItemUtils.consumeStack(itemstack));
                             }
 
                             return true;
@@ -104,7 +103,7 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy {
     public void onFallenUpon(World world, int x, int y, int z, Entity entity, float par6) {
         if (!world.isRemote && world.rand.nextFloat() < par6 - 0.5F) {
             if (!(entity instanceof EntityPlayer) && !world.getGameRules()
-                .getGameRuleBooleanValue("mobGriefing")) {
+                    .getGameRuleBooleanValue("mobGriefing")) {
                 return;
             }
 
@@ -174,9 +173,9 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy {
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB axis, List list,
-        Entity entity) {
+                                        Entity entity) {
         final int meta = world.getBlockMetadata(i, j, k);
 
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.875F, 1.0F);

@@ -1,16 +1,15 @@
 package growthcraft.cellar.client.render;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.cellar.common.block.BlockFruitPress;
+import growthcraft.core.util.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.cellar.common.block.BlockFruitPress;
-import growthcraft.core.util.RenderUtils;
 
 public class RenderFruitPress implements ISimpleBlockRenderingHandler {
 
@@ -27,7 +26,7 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler {
     }
 
     private void renderWoodSlatsInv(RenderBlocks r, Block b, IIcon i, Tessellator t, double x1, double x2, double z1,
-        double z2) {
+                                    double z2) {
         r.setRenderBounds(x1, 0.375D, z1, x2, 1.0D, z2);
         RenderUtils.drawInventoryBlock_icon(b, r, i, t);
     }
@@ -116,7 +115,7 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler {
     }
 
     private void renderWoodSlats(RenderBlocks r, Block b, int x, int y, int z, double x1, double x2, double z1,
-        double z2) {
+                                 double z2) {
         r.setRenderBounds(x1, 0.375D, z1, x2, 1.0D, z2);
         r.renderStandardBlock(b, x, y, z);
     }
@@ -135,7 +134,7 @@ public class RenderFruitPress implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == RENDER_ID) {
             final BlockFruitPress fruitPress = (BlockFruitPress) block;
             final int m = world.getBlockMetadata(x, y, z);

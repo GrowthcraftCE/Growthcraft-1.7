@@ -1,16 +1,15 @@
 package growthcraft.bamboo.common.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.core.common.item.GrcItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.core.common.item.GrcItemBase;
 
 public class ItemBambooDoor extends GrcItemBase {
 
@@ -42,17 +41,17 @@ public class ItemBambooDoor extends GrcItemBase {
         }
 
         final int i1 = (world.getBlock(i - b0, j, k - b1)
-            .isNormalCube(world, i - b0, j, k - b1) ? 1 : 0)
-            + (world.getBlock(i - b0, j + 1, k - b1)
+                .isNormalCube(world, i - b0, j, k - b1) ? 1 : 0)
+                + (world.getBlock(i - b0, j + 1, k - b1)
                 .isNormalCube(world, i - b0, j + 1, k - b1) ? 1 : 0);
         final int j1 = (world.getBlock(i + b0, j, k + b1)
-            .isNormalCube(world, i + b0, j, k + b1) ? 1 : 0)
-            + (world.getBlock(i + b0, j + 1, k + b1)
+                .isNormalCube(world, i + b0, j, k + b1) ? 1 : 0)
+                + (world.getBlock(i + b0, j + 1, k + b1)
                 .isNormalCube(world, i + b0, j + 1, k + b1) ? 1 : 0);
         final boolean flag = world.getBlock(i - b0, j, k - b1) == block
-            || world.getBlock(i - b0, j + 1, k - b1) == block;
+                || world.getBlock(i - b0, j + 1, k - b1) == block;
         final boolean flag1 = world.getBlock(i + b0, j, k + b1) == block
-            || world.getBlock(i + b0, j + 1, k + b1) == block;
+                || world.getBlock(i + b0, j + 1, k + b1) == block;
         boolean flag2 = false;
 
         if (flag && !flag1) {
@@ -71,7 +70,7 @@ public class ItemBambooDoor extends GrcItemBase {
      * MAIN
      ************/
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
-        float par8, float par9, float par10) {
+                             float par8, float par9, float par10) {
         if (side != 1) {
             return false;
         } else {
@@ -83,7 +82,7 @@ public class ItemBambooDoor extends GrcItemBase {
                     return false;
                 } else {
                     final int i1 = MathHelper
-                        .floor_double((double) ((player.rotationYaw + 180.0F) * 4.0F / 360.0F) - 0.5D) & 3;
+                            .floor_double((double) ((player.rotationYaw + 180.0F) * 4.0F / 360.0F) - 0.5D) & 3;
                     placeDoorBlock(world, x, y, z, i1, block);
                     --stack.stackSize;
                     return true;

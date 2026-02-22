@@ -1,7 +1,14 @@
 package growthcraft.grapes.common.block;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.common.block.IBlockRope;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.grapes.client.renderer.RenderGrapeLeaves;
+import growthcraft.grapes.util.GrapeBlockCheck;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,15 +21,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.common.block.IBlockRope;
-import growthcraft.core.util.BlockCheck;
-import growthcraft.grapes.GrowthCraftGrapes;
-import growthcraft.grapes.client.renderer.RenderGrapeLeaves;
-import growthcraft.grapes.util.GrapeBlockCheck;
+import java.util.Random;
 
 public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope {
 
@@ -146,7 +145,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope {
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
         if (world.canLightningStrikeAt(x, y + 1, z) && !World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
-            && random.nextInt(15) == 1) {
+                && random.nextInt(15) == 1) {
             final double d0 = (float) x + random.nextFloat();
             final double d1 = (double) y - 0.05D;
             final double d2 = (float) z + random.nextFloat();
@@ -292,7 +291,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope {
         for (int l1 = -1; l1 <= 1; ++l1) {
             for (int i2 = -1; i2 <= 1; ++i2) {
                 final int j2 = world.getBiomeGenForCoords(x + i2, z + l1)
-                    .getBiomeFoliageColor(x + i2, y, z + l1);
+                        .getBiomeFoliageColor(x + i2, y, z + l1);
                 r += (j2 & 16711680) >> 16;
                 g += (j2 & 65280) >> 8;
                 b += j2 & 255;

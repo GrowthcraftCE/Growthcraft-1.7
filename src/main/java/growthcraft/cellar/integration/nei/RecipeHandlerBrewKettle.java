@@ -19,13 +19,6 @@
  */
 package growthcraft.cellar.integration.nei;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.item.ItemStack;
-
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
@@ -38,6 +31,11 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.client.gui.GuiBrewKettle;
 import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.core.integration.nei.TemplateRenderHelper;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class RecipeHandlerBrewKettle extends TemplateRecipeHandler {
 
@@ -60,8 +58,8 @@ public class RecipeHandlerBrewKettle extends TemplateRecipeHandler {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         final List<BrewingRecipe> recipes = CellarRegistry.instance()
-            .brewing()
-            .findRecipes(ingredient);
+                .brewing()
+                .findRecipes(ingredient);
         for (BrewingRecipe recipe : recipes) {
             arecipes.add(new CachedBrewingRecipe(recipe));
         }
@@ -72,19 +70,19 @@ public class RecipeHandlerBrewKettle extends TemplateRecipeHandler {
         if (recipe instanceof CachedBrewingRecipe) {
             final BrewingRecipe brewingRecipe = ((CachedBrewingRecipe) recipe).brewingRecipe;
             TemplateRenderHelper.drawFluidStack(
-                41,
-                6,
-                16,
-                52,
-                brewingRecipe.getInputFluidStack(),
-                GrowthCraftCellar.getConfig().brewKettleMaxCap);
+                    41,
+                    6,
+                    16,
+                    52,
+                    brewingRecipe.getInputFluidStack(),
+                    GrowthCraftCellar.getConfig().brewKettleMaxCap);
             TemplateRenderHelper.drawFluidStack(
-                109,
-                6,
-                16,
-                52,
-                brewingRecipe.getFluidStack(),
-                GrowthCraftCellar.getConfig().brewKettleMaxCap);
+                    109,
+                    6,
+                    16,
+                    52,
+                    brewingRecipe.getFluidStack(),
+                    GrowthCraftCellar.getConfig().brewKettleMaxCap);
         }
     }
 
@@ -109,15 +107,15 @@ public class RecipeHandlerBrewKettle extends TemplateRecipeHandler {
             super();
             this.brewingRecipe = recipe;
             this.ingredient = new PositionedStack(
-                brewingRecipe.getInputItemStack()
-                    .getItemStacks(),
-                75,
-                24);
+                    brewingRecipe.getInputItemStack()
+                            .itemStacks(),
+                    75,
+                    24);
             if (brewingRecipe.hasResidue()) this.otherStack = new PositionedStack(
-                brewingRecipe.getResidue()
-                    .residueItem(),
-                136,
-                6);
+                    brewingRecipe.getResidue()
+                            .residueItem(),
+                    136,
+                    6);
         }
 
         @Override

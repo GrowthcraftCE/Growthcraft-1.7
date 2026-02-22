@@ -1,17 +1,15 @@
 package growthcraft.core.client.renderer;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.core.common.block.BlockFenceRope;
+import growthcraft.core.util.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.core.common.block.BlockFenceRope;
-import growthcraft.core.util.RenderUtils;
 
 public class RenderFenceRope implements ISimpleBlockRenderingHandler {
 
@@ -165,7 +163,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == RENDER_ID) {
             final double d = 0.0625D;
             renderer.setRenderBounds(6 * d, 0.0D, 6 * d, 10 * d, 1.0D, 10 * d);
@@ -288,7 +286,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler {
                 maxU = icon.getMaxU();
 
                 RenderUtils
-                    .drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+                        .drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
             }
 
             if (flag1) {
@@ -303,7 +301,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler {
                 maxU = icon.getInterpolatedU(5);
 
                 RenderUtils
-                    .drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+                        .drawCrossSquaresAlongZ(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
             }
 
             if (flag2) {
@@ -318,7 +316,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler {
                 maxU = icon.getMaxU();
 
                 RenderUtils
-                    .drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+                        .drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
             }
 
             if (flag3) {
@@ -333,7 +331,7 @@ public class RenderFenceRope implements ISimpleBlockRenderingHandler {
                 maxU = icon.getInterpolatedU(5);
 
                 RenderUtils
-                    .drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
+                        .drawCrossSquaresAlongX(tessellator, minX, maxX, minY, maxY, minZ, maxZ, minU, maxU, minV, maxV);
             }
         }
         return true;

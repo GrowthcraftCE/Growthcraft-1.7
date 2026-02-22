@@ -1,13 +1,5 @@
 package growthcraft.core.integration.nei;
 
-import java.util.*;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
-import net.minecraftforge.fluids.FluidStack;
-
 import codechicken.nei.NEIClientUtils;
 import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
@@ -16,11 +8,18 @@ import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.item.recipes.ShapelessMultiRecipe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.*;
 
 public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler {
 
-    public int[][] stackorder = new int[][] { { 0, 0 }, { 1, 0 }, { 0, 1 }, { 1, 1 }, { 0, 2 }, { 1, 2 }, { 2, 0 },
-        { 2, 1 }, { 2, 2 } };
+    public int[][] stackorder = new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {0, 2}, {1, 2}, {2, 0},
+            {2, 1}, {2, 2}};
 
     public String getRecipeName() {
         return NEIClientUtils.translate("recipe.shapeless");
@@ -29,9 +28,8 @@ public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler {
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals("crafting") && getClass() == RecipeHandlerShapelessMulti.class) {
-            @SuppressWarnings("unchecked")
-            final List<IRecipe> allrecipes = CraftingManager.getInstance()
-                .getRecipeList();
+            @SuppressWarnings("unchecked") final List<IRecipe> allrecipes = CraftingManager.getInstance()
+                    .getRecipeList();
             for (IRecipe irecipe : allrecipes) {
                 List<CachedShapelessMultiRecipe> recipes = null;
                 if (irecipe instanceof ShapelessMultiRecipe)
@@ -50,9 +48,8 @@ public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler {
 
     @Override
     public void loadCraftingRecipes(ItemStack result) {
-        @SuppressWarnings("unchecked")
-        final List<IRecipe> allrecipes = CraftingManager.getInstance()
-            .getRecipeList();
+        @SuppressWarnings("unchecked") final List<IRecipe> allrecipes = CraftingManager.getInstance()
+                .getRecipeList();
         for (IRecipe irecipe : allrecipes) {
             if (NEIServerUtils.areStacksSameTypeCrafting(irecipe.getRecipeOutput(), result)) {
                 List<CachedShapelessMultiRecipe> recipes = null;
@@ -70,9 +67,8 @@ public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler {
 
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
-        @SuppressWarnings("unchecked")
-        final List<IRecipe> allrecipes = CraftingManager.getInstance()
-            .getRecipeList();
+        @SuppressWarnings("unchecked") final List<IRecipe> allrecipes = CraftingManager.getInstance()
+                .getRecipeList();
         for (IRecipe irecipe : allrecipes) {
             List<CachedShapelessMultiRecipe> recipes = null;
             if (irecipe instanceof ShapelessMultiRecipe) recipes = shapelessMultiRecipe((ShapelessMultiRecipe) irecipe);
@@ -96,7 +92,7 @@ public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler {
         for (IMultiItemStacks item : multiRecipe.getInput()) {
             if (item.isEmpty()) return null;
 
-            items.add(item.getItemStacks());
+            items.add(item.itemStacks());
         }
 
         ArrayList<ArrayList<Object>> recipes = new ArrayList<ArrayList<Object>>();
@@ -108,7 +104,7 @@ public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler {
 
             for (FluidStack fluidStack : multiStack.getFluidStacks()) {
                 final List<FluidContainerData> fluidData = FluidUtils.getFluidData()
-                    .get(fluidStack.getFluid());
+                        .get(fluidStack.getFluid());
 
                 if (fluidData == null) continue;
 
@@ -116,12 +112,12 @@ public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler {
                     final FluidStack fluid = data.fluid;
 
                     final int amount = (int) Math
-                        .max(1, Math.ceil(((double) multiStack.getAmount() - 1) / fluid.amount));
+                            .max(1, Math.ceil(((double) multiStack.getAmount() - 1) / fluid.amount));
 
                     if (!itemsFluidMap.containsKey(amount)) itemsFluidMap.put(amount, new ArrayList<Object>());
 
                     itemsFluidMap.get(amount)
-                        .add(data.filledContainer);
+                            .add(data.filledContainer);
                 }
             }
 
@@ -192,9 +188,9 @@ public class RecipeHandlerShapelessMulti extends ShapedRecipeHandler {
             ingredients.clear();
             for (int ingred = 0; ingred < items.size(); ingred++) {
                 final PositionedStack stack = new PositionedStack(
-                    items.get(ingred),
-                    25 + stackorder[ingred][0] * 18,
-                    6 + stackorder[ingred][1] * 18);
+                        items.get(ingred),
+                        25 + stackorder[ingred][0] * 18,
+                        6 + stackorder[ingred][1] * 18);
                 stack.setMaxSize(1);
                 ingredients.add(stack);
             }

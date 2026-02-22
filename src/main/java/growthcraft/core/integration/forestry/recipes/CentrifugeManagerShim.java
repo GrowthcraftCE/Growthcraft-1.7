@@ -19,17 +19,17 @@
  */
 package growthcraft.core.integration.forestry.recipes;
 
-import java.util.Map;
-
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.Optional;
 import forestry.api.recipes.ICentrifugeManager;
 import forestry.api.recipes.ICentrifugeRecipe;
+import net.minecraft.item.ItemStack;
+
+import java.util.Map;
 
 @Optional.Interface(iface = "forestry.api.recipes.ICentrifugeManager", modid = "ForestryAPI|recipes")
 public class CentrifugeManagerShim extends AbstractManagerShim<ICentrifugeRecipe> implements ICentrifugeManager {
 
     @Override
-    public void addRecipe(int timePerItem, ItemStack input, Map<ItemStack, Float> products) {}
+    public void addRecipe(int timePerItem, ItemStack input, Map<ItemStack, Float> products) {
+    }
 }

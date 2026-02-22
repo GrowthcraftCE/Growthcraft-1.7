@@ -1,12 +1,11 @@
 package growthcraft.bees.common.world;
 
-import java.util.Random;
-
+import growthcraft.bees.GrowthCraftBees;
+import growthcraft.bees.common.block.BlockBeeHive;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import growthcraft.bees.GrowthCraftBees;
-import growthcraft.bees.common.block.BlockBeeHive;
+import java.util.Random;
 
 public class WorldGenBeeHive extends WorldGenerator {
 

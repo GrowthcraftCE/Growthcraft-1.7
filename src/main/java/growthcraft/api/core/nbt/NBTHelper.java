@@ -19,12 +19,9 @@
  */
 package growthcraft.api.core.nbt;
 
-import java.util.Collection;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.effect.IEffect;
+import growthcraft.api.core.util.ConstID;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,13 +32,15 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.effect.IEffect;
-import growthcraft.api.core.util.ConstID;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.List;
 
 public class NBTHelper {
 
-    private NBTHelper() {}
+    private NBTHelper() {
+    }
 
     public static int getInteger(@Nonnull NBTBase tag) {
         return tag != null && (tag instanceof NBTBase.NBTPrimitive) ? ((NBTBase.NBTPrimitive) tag).func_150287_d() : 0;
@@ -65,7 +64,7 @@ public class NBTHelper {
         return null;
     }
 
-    @SuppressWarnings({ "unchecked" })
+    @SuppressWarnings({"unchecked"})
     public static NBTTagCompound copyCompoundTag(@Nonnull NBTTagCompound tag) {
         final NBTBase newTag = tag.copy();
         return (NBTTagCompound) newTag;
@@ -108,7 +107,7 @@ public class NBTHelper {
     }
 
     public static NBTTagCompound writeIFluidHandlerToNBT(@Nonnull IFluidHandler fluidHandler,
-        @Nonnull NBTTagCompound tag) {
+                                                         @Nonnull NBTTagCompound tag) {
         final NBTTagList tankTagList = new NBTTagList();
         int tankId = 0;
         for (FluidTankInfo tankInfo : fluidHandler.getTankInfo(ForgeDirection.UNKNOWN)) {
@@ -163,8 +162,8 @@ public class NBTHelper {
         for (int i = 0; i < size; ++i) {
             final NBTTagCompound effectData = effectsList.getCompoundTagAt(i);
             final IEffect effect = CoreRegistry.instance()
-                .getEffectsRegistry()
-                .loadEffectFromNBT(effectData, "value");
+                    .getEffectsRegistry()
+                    .loadEffectFromNBT(effectData, "value");
             list.add(effect);
         }
     }

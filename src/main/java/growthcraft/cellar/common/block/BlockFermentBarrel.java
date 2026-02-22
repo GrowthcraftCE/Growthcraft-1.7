@@ -1,5 +1,13 @@
 package growthcraft.cellar.common.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.client.render.RenderFermentBarrel;
+import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
+import growthcraft.cellar.event.EventBarrelDrained;
+import growthcraft.core.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
@@ -13,15 +21,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.client.render.RenderFermentBarrel;
-import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.event.EventBarrelDrained;
-import growthcraft.core.Utils;
 
 public class BlockFermentBarrel extends BlockCellarContainer {
 
@@ -55,7 +54,7 @@ public class BlockFermentBarrel extends BlockCellarContainer {
 
     @Override
     protected boolean playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held,
-        EntityPlayer player) {
+                                      EntityPlayer player) {
         final FluidStack available = Utils.playerDrainTank(world, x, y, z, tank, held, player);
         if (available != null && available.amount > 0) {
             GrowthCraftCellar.CELLAR_BUS.post(new EventBarrelDrained(player, world, x, y, z, available));

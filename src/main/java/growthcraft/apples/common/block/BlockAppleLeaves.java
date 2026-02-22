@@ -1,8 +1,9 @@
 package growthcraft.apples.common.block;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.apples.GrowthCraftApples;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.IGrowable;
@@ -18,10 +19,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.apples.GrowthCraftApples;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGrowable {
 
@@ -125,33 +124,33 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
                                 for (int k2 = -b0; k2 <= b0; ++k2) {
                                     if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1] == l1 - 1) {
                                         if (this.adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
                                         }
 
                                         if (this.adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
                                         }
 
                                         if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] = l1;
                                         }
 
                                         if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] = l1;
                                         }
 
                                         if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + (k2 + k1 - 1)]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1
-                                                + (k2 + k1 - 1)] = l1;
+                                                    + (k2 + k1 - 1)] = l1;
                                         }
 
                                         if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] = l1;
                                         }
                                     }
@@ -177,7 +176,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
         super.randomDisplayTick(world, x, y, z, random);
         if (world.canLightningStrikeAt(x, y + 1, z) && !World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
-            && random.nextInt(15) == 1) {
+                && random.nextInt(15) == 1) {
             final double d0 = (float) x + random.nextFloat();
             final double d1 = (double) y - 0.05D;
             final double d2 = (float) z + random.nextFloat();
@@ -224,11 +223,11 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
     @Override
     public void beginLeavesDecay(World world, int x, int y, int z) {
         world.setBlockMetadataWithNotify(
-            x,
-            y,
-            z,
-            world.getBlockMetadata(x, y, z) | LeavesStage.DECAY_MASK,
-            BlockFlags.SUPRESS_RENDER);
+                x,
+                y,
+                z,
+                world.getBlockMetadata(x, y, z) | LeavesStage.DECAY_MASK,
+                BlockFlags.SUPRESS_RENDER);
     }
 
     @Override
@@ -269,11 +268,11 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 
             if (world.rand.nextInt(random) == 0) {
                 this.dropBlockAsItem(
-                    world,
-                    x,
-                    y,
-                    z,
-                    new ItemStack(this.getItemDropped(meta, world.rand, fortune), 1, 0));
+                        world,
+                        x,
+                        y,
+                        z,
+                        new ItemStack(this.getItemDropped(meta, world.rand, fortune), 1, 0));
             }
         }
     }
@@ -339,7 +338,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
         for (int l1 = -1; l1 <= 1; ++l1) {
             for (int i2 = -1; i2 <= 1; ++i2) {
                 final int j2 = world.getBiomeGenForCoords(x + i2, z + l1)
-                    .getBiomeFoliageColor(x + i2, y, z + l1);
+                        .getBiomeFoliageColor(x + i2, y, z + l1);
                 r += (j2 & 16711680) >> 16;
                 g += (j2 & 65280) >> 8;
                 b += j2 & 255;
@@ -368,6 +367,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 
         public static final int DECAY_MASK = 8;
 
-        private LeavesStage() {}
+        private LeavesStage() {
+        }
     }
 }

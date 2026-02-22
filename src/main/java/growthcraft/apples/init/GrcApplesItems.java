@@ -19,12 +19,11 @@
  */
 package growthcraft.apples.init;
 
-import net.minecraft.init.Items;
-import net.minecraftforge.oredict.OreDictionary;
-
 import growthcraft.apples.common.item.ItemAppleSeeds;
 import growthcraft.core.common.GrcModuleItems;
 import growthcraft.core.common.definition.ItemDefinition;
+import net.minecraft.init.Items;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcApplesItems extends GrcModuleItems {
 

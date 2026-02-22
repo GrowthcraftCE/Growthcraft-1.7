@@ -1,15 +1,13 @@
 package growthcraft.bamboo.client.renderer;
 
+import growthcraft.bamboo.client.model.ModelBambooRaft;
+import growthcraft.bamboo.common.entity.EntityBambooRaft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import growthcraft.bamboo.client.model.ModelBambooRaft;
-import growthcraft.bamboo.common.entity.EntityBambooRaft;
 
 public class RenderBambooRaft extends Render {
 
@@ -39,10 +37,10 @@ public class RenderBambooRaft extends Render {
 
         if (f2 > 0.0F) {
             GL11.glRotatef(
-                MathHelper.sin(f2) * f2 * f3 / 10.0F * (float) entity.getForwardDirection(),
-                1.0F,
-                0.0F,
-                0.0F);
+                    MathHelper.sin(f2) * f2 * f3 / 10.0F * (float) entity.getForwardDirection(),
+                    1.0F,
+                    0.0F,
+                    0.0F);
         }
 
         final float f4 = 0.75F;

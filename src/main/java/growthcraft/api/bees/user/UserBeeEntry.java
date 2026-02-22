@@ -19,10 +19,9 @@
  */
 package growthcraft.api.bees.user;
 
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
+import net.minecraft.item.ItemStack;
 
 public class UserBeeEntry implements ICommentable {
 
@@ -33,7 +32,8 @@ public class UserBeeEntry implements ICommentable {
         this.item = new ItemKeySchema(stack);
     }
 
-    public UserBeeEntry() {}
+    public UserBeeEntry() {
+    }
 
     @Override
     public String getComment() {

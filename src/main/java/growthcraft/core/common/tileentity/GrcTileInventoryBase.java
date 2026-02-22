@@ -19,26 +19,25 @@
  */
 package growthcraft.core.common.tileentity;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.IInventoryWatcher;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.ICustomDisplayName;
 import growthcraft.core.util.ItemUtils;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * Extend this base class if you want a Tile with an `Inventory`
  */
 public abstract class GrcTileInventoryBase extends GrcTileBase
-    implements ISidedInventory, ICustomDisplayName, IInventoryWatcher {
+        implements ISidedInventory, ICustomDisplayName, IInventoryWatcher {
 
-    protected static final int[] NO_SLOTS = new int[] {};
+    protected static final int[] NO_SLOTS = new int[]{};
 
     protected String inventoryName;
     protected GrcInternalInventory inventory;
@@ -139,10 +138,12 @@ public abstract class GrcTileInventoryBase extends GrcTileBase
     }
 
     @Override
-    public void openInventory() {}
+    public void openInventory() {
+    }
 
     @Override
-    public void closeInventory() {}
+    public void closeInventory() {
+    }
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
@@ -152,13 +153,13 @@ public abstract class GrcTileInventoryBase extends GrcTileBase
     @Override
     public boolean canInsertItem(int slot, ItemStack stack, int side) {
         return InventoryProcessor.instance()
-            .canInsertItem(this, stack, slot);
+                .canInsertItem(this, stack, slot);
     }
 
     @Override
     public boolean canExtractItem(int slot, ItemStack stack, int side) {
         return InventoryProcessor.instance()
-            .canExtractItem(this, stack, slot);
+                .canExtractItem(this, stack, slot);
     }
 
     @Override

@@ -1,10 +1,9 @@
 package growthcraft.cellar.common.inventory.slot;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.core.common.inventory.slot.SlotInput;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 
 public class SlotInputPressing extends SlotInput {
 
@@ -15,7 +14,7 @@ public class SlotInputPressing extends SlotInput {
     @Override
     public boolean isItemValid(ItemStack stack) {
         return CellarRegistry.instance()
-            .pressing()
-            .hasPressingRecipe(stack);
+                .pressing()
+                .hasPressingRecipe(stack);
     }
 }

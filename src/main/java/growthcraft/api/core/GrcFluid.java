@@ -19,14 +19,12 @@
  */
 package growthcraft.api.core;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import net.minecraftforge.fluids.Fluid;
-
 import growthcraft.api.core.description.IDescribable;
 import growthcraft.api.core.i18n.GrcI18n;
+import net.minecraftforge.fluids.Fluid;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * An extension of the default Forge Fluid class, adding descriptions and color

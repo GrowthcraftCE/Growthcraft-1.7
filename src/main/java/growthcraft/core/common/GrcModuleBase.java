@@ -19,12 +19,12 @@
  */
 package growthcraft.core.common;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.module.IModule;
+
+import javax.annotation.Nonnull;
 
 public class GrcModuleBase implements IModule, ILoggable {
 
@@ -36,14 +36,18 @@ public class GrcModuleBase implements IModule, ILoggable {
     }
 
     @Override
-    public void preInit() {}
+    public void preInit() {
+    }
 
     @Override
-    public void init() {}
+    public void init() {
+    }
 
     @Override
-    public void register() {}
+    public void register() {
+    }
 
     @Override
-    public void postInit() {}
+    public void postInit() {
+    }
 }

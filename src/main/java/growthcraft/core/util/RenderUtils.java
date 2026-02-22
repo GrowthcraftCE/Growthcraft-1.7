@@ -4,12 +4,12 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
-
 import org.lwjgl.opengl.GL11;
 
 public class RenderUtils {
 
-    private RenderUtils() {}
+    private RenderUtils() {
+    }
 
     public static void resetColor() {
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -37,7 +37,7 @@ public class RenderUtils {
     }
 
     public static void drawCubeFace(Face face, Block block, RenderBlocks renderer, Tessellator tes, IIcon icon,
-        double i, double j, double k) {
+                                    double i, double j, double k) {
         final float f = 0.0F;
         switch (face) {
             case XPOS: {
@@ -89,14 +89,14 @@ public class RenderUtils {
     }
 
     public static void drawFace(Face face, Block block, RenderBlocks renderer, Tessellator tessellator, IIcon icon,
-        double i, double j, double k) {
+                                double i, double j, double k) {
         tessellator.startDrawingQuads();
         drawCubeFace(face, block, renderer, tessellator, icon, i, j, k);
         tessellator.draw();
     }
 
     public static void renderInventoryBlockOverride(Block block, RenderBlocks renderer, IIcon[] icon,
-        Tessellator tessellator) {
+                                                    Tessellator tessellator) {
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         tessellator.startDrawingQuads();
         drawCubeFace(Face.YNEG, block, renderer, tessellator, icon[0], 0.0D, 0.0D, 0.0D);
@@ -110,7 +110,7 @@ public class RenderUtils {
     }
 
     public static void renderInventoryBlockFaces(Block block, int meta, RenderBlocks renderer,
-        Tessellator tessellator) {
+                                                 Tessellator tessellator) {
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         tessellator.startDrawingQuads();
         drawCubeFace(Face.YNEG, block, renderer, tessellator, block.getIcon(0, meta), 0.0D, 0.0D, 0.0D);
@@ -128,7 +128,7 @@ public class RenderUtils {
     }
 
     public static void drawInventoryBlock_icon(Block block, RenderBlocks renderer, IIcon icon,
-        Tessellator tessellator) {
+                                               Tessellator tessellator) {
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         tessellator.startDrawingQuads();
         drawCubeFace(Face.YNEG, block, renderer, tessellator, icon, 0.0D, 0.0D, 0.0D);
@@ -142,7 +142,7 @@ public class RenderUtils {
     }
 
     public static void drawCrossSquaresAlongX(Tessellator tessellator, double minX, double maxX, double minY,
-        double maxY, double minZ, double maxZ, double minU, double maxU, double minV, double maxV) {
+                                              double maxY, double minZ, double maxZ, double minU, double maxU, double minV, double maxV) {
         //
         tessellator.addVertexWithUV(minX, minY, maxZ, maxU, maxV);
         tessellator.addVertexWithUV(minX, maxY, minZ, maxU, minV);
@@ -166,7 +166,7 @@ public class RenderUtils {
     }
 
     public static void drawCrossSquaresAlongY(Tessellator tessellator, double minX, double maxX, double minY,
-        double maxY, double minZ, double maxZ, double minU, double maxU, double minV, double maxV) {
+                                              double maxY, double minZ, double maxZ, double minU, double maxU, double minV, double maxV) {
         //
         tessellator.addVertexWithUV(maxX, minY, minZ, maxU, maxV);
         tessellator.addVertexWithUV(maxX, maxY, minZ, maxU, minV);
@@ -190,7 +190,7 @@ public class RenderUtils {
     }
 
     public static void drawCrossSquaresAlongYRotated(Tessellator tessellator, double minX, double maxX, double minY,
-        double maxY, double minZ, double maxZ, double minU, double maxU, double minV, double maxV) {
+                                                     double maxY, double minZ, double maxZ, double minU, double maxU, double minV, double maxV) {
         //
         tessellator.addVertexWithUV(minX, minY, maxZ, maxU, maxV);
         tessellator.addVertexWithUV(maxX, minY, minZ, maxU, minV);
@@ -214,7 +214,7 @@ public class RenderUtils {
     }
 
     public static void drawCrossSquaresAlongZ(Tessellator tessellator, double minX, double maxX, double minY,
-        double maxY, double minZ, double maxZ, double minU, double maxU, double minV, double maxV) {
+                                              double maxY, double minZ, double maxZ, double minU, double maxU, double minV, double maxV) {
         //
         tessellator.addVertexWithUV(maxX, minY, minZ, maxU, maxV);
         tessellator.addVertexWithUV(minX, maxY, minZ, maxU, minV);
@@ -246,6 +246,6 @@ public class RenderUtils {
         ZPOS,
         ZNEG;
 
-        public static final Face[] FACES = { YNEG, YPOS, ZNEG, ZPOS, XNEG, XPOS };
+        public static final Face[] FACES = {YNEG, YPOS, ZNEG, ZPOS, XNEG, XPOS};
     }
 }

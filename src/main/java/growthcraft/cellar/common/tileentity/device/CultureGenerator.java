@@ -41,7 +41,7 @@ public class CultureGenerator extends DeviceProgressive {
      *                       Culture will be generated into this slot
      */
     public CultureGenerator(TileEntityCellarDevice te, TileHeatingComponent heatComp, int fluidSlotIndex,
-        int invSlotIndex) {
+                            int invSlotIndex) {
         super(te);
         this.heatComponent = heatComp;
         this.fluidSlot = new DeviceFluidSlot(te, fluidSlotIndex);
@@ -64,26 +64,26 @@ public class CultureGenerator extends DeviceProgressive {
 
     private boolean isRecipeValid(ICultureRecipe recipe) {
         if (recipe != null) {
-            if (fluidSlot.hasEnough(recipe.getInputFluidStack())) {
-                return invSlot.isEmpty() || invSlot.hasMatchingWithCapacity(recipe.getOutputItemStack());
+            if (fluidSlot.hasEnough(recipe.inputFluidStack())) {
+                return invSlot.isEmpty() || invSlot.hasMatchingWithCapacity(recipe.outputItemStack());
             }
         }
         return false;
     }
 
     private void produceCulture(ICultureRecipe recipe) {
-        fluidSlot.consume(recipe.getInputFluidStack(), true);
-        invSlot.increaseStack(recipe.getOutputItemStack());
+        fluidSlot.consume(recipe.inputFluidStack(), true);
+        invSlot.increaseStack(recipe.outputItemStack());
     }
 
     @Override
     public void update() {
         final ICultureRecipe activeRecipe = CellarRegistry.instance()
-            .culturing()
-            .findRecipe(fluidSlot.get(), heatComponent.getHeatMultiplier());
+                .culturing()
+                .findRecipe(fluidSlot.get(), heatComponent.getHeatMultiplier());
 
         if (isRecipeValid(activeRecipe)) {
-            setTimeMax(activeRecipe.getTime());
+            setTimeMax(activeRecipe.time());
             increaseTime();
             if (time >= timeMax) {
                 resetTime();

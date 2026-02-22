@@ -19,20 +19,18 @@
  */
 package growthcraft.core;
 
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
+import cpw.mods.fml.common.network.IGuiHandler;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.core.common.tileentity.feature.IInteractionObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-import growthcraft.api.core.log.ILogger;
-import growthcraft.core.common.tileentity.feature.IInteractionObject;
+import javax.annotation.Nonnull;
+import java.lang.reflect.Constructor;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Cross Ported from YATM
@@ -40,7 +38,7 @@ import growthcraft.core.common.tileentity.feature.IInteractionObject;
 public class GrcGuiProvider implements IGuiHandler {
 
     // Leave this Map empty on server, only the client should fill it
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public final Map<String, Class> guiMap = new HashMap<String, Class>();
     protected ILogger logger;
 
@@ -55,7 +53,7 @@ public class GrcGuiProvider implements IGuiHandler {
      * @param guiClass - the Class<Gui> to use, ensure it has a constructor for (InventoryPlayer, TileEntity),
      *                 (IInventory, TileEntity) will work as well
      */
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public void register(String name, Class guiClass) {
         if (guiMap.containsKey(name)) {
             logger.warn("Overwriting Existing Gui mapping: %s with `%s`", name, guiClass);
@@ -68,10 +66,10 @@ public class GrcGuiProvider implements IGuiHandler {
             return "NULL";
         }
         return inventory.getClass()
-            .getName();
+                .getName();
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private Constructor findConstructor(Constructor[] c, InventoryPlayer inventory, Object te) {
         final Class teClass = te.getClass();
         final Class invClass = inventory.getClass();
@@ -86,9 +84,9 @@ public class GrcGuiProvider implements IGuiHandler {
         return null;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private Object createContainerInstance(@Nonnull Class containerClass, @Nonnull InventoryPlayer inventory,
-        Object te) {
+                                           Object te) {
         try {
             final Constructor[] c = containerClass.getConstructors();
             if (c.length == 0) {
@@ -99,8 +97,8 @@ public class GrcGuiProvider implements IGuiHandler {
 
             if (target == null) {
                 throw new IllegalStateException(
-                    "Cannot find " + containerClass
-                        .getName() + "( " + this.typeName(inventory) + ", " + this.typeName(te) + " )");
+                        "Cannot find " + containerClass
+                                .getName() + "( " + this.typeName(inventory) + ", " + this.typeName(te) + " )");
             }
 
             return target.newInstance(inventory, te);
@@ -121,7 +119,7 @@ public class GrcGuiProvider implements IGuiHandler {
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         final TileEntity te = world.getTileEntity(x, y, z);
         if (te instanceof IInteractionObject iobj) {

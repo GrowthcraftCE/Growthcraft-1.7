@@ -19,19 +19,18 @@
  */
 package growthcraft.milk.common.struct;
 
-import net.minecraft.nbt.NBTTagCompound;
-
 import growthcraft.api.core.nbt.INBTSerializableContext;
 import growthcraft.api.core.stream.IStreamable;
 import growthcraft.milk.common.item.EnumCheeseType;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class CheeseCurd implements INBTSerializableContext, IStreamable {
 
+    private final int ageMax = 1200;
     public boolean needClientUpdate;
     private EnumCheeseType cheese = EnumCheeseType.CHEDDAR;
     private int age;
-    private final int ageMax = 1200;
     private boolean dried;
 
     public EnumCheeseType getType() {

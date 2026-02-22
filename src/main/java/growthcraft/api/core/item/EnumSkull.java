@@ -19,12 +19,11 @@
  */
 package growthcraft.api.core.item;
 
-import java.util.Locale;
-
+import growthcraft.api.core.definition.IItemStackFactory;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import growthcraft.api.core.definition.IItemStackFactory;
+import java.util.Locale;
 
 /**
  * Skulls!

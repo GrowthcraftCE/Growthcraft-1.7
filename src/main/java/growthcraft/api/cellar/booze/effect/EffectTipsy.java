@@ -19,9 +19,9 @@
  */
 package growthcraft.api.cellar.booze.effect;
 
-import java.util.List;
-import java.util.Random;
-
+import growthcraft.api.core.effect.AbstractEffect;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.stats.IAchievement;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,9 +32,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.effect.AbstractEffect;
-import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.api.core.stats.IAchievement;
+import java.util.List;
+import java.util.Random;
 
 public class EffectTipsy extends AbstractEffect {
 
@@ -80,7 +79,7 @@ public class EffectTipsy extends AbstractEffect {
             int time = 1200;
             if (entitylb.isPotionActive(potionTipsy)) {
                 amplifier = entitylb.getActivePotionEffect(potionTipsy)
-                    .getAmplifier() + 1;
+                        .getAmplifier() + 1;
                 if (amplifier > 4) {
                     amplifier = 4;
                 }

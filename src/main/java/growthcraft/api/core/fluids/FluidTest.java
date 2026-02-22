@@ -19,20 +19,19 @@
  */
 package growthcraft.api.core.fluids;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.definition.IMultiFluidStacks;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.definition.IMultiFluidStacks;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class FluidTest {
 
-    private FluidTest() {}
+    private FluidTest() {
+    }
 
     /**
      * Determines if a Fluid is invalid, this is a very simple null check.
@@ -62,8 +61,8 @@ public class FluidTest {
     public static boolean hasTags(@Nullable Fluid fluid, FluidTag... tags) {
         if (FluidTest.isValid(fluid)) {
             return CoreRegistry.instance()
-                .fluidDictionary()
-                .hasFluidTags(fluid, tags);
+                    .fluidDictionary()
+                    .hasFluidTags(fluid, tags);
         }
         return false;
     }
@@ -71,8 +70,8 @@ public class FluidTest {
     public static boolean hasTags(@Nullable FluidStack stack, FluidTag... tags) {
         if (FluidTest.isValid(stack)) {
             return CoreRegistry.instance()
-                .fluidDictionary()
-                .hasFluidTags(stack.getFluid(), tags);
+                    .fluidDictionary()
+                    .hasFluidTags(stack.getFluid(), tags);
         }
         return false;
     }
@@ -134,7 +133,7 @@ public class FluidTest {
         return false;
     }
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public static boolean isValidAndExpected(@Nonnull List expectedFluids, @Nonnull List<FluidStack> givenFluids) {
         if (expectedFluids.size() != givenFluids.size()) return false;
         for (int i = 0; i < expectedFluids.size(); ++i) {
@@ -156,7 +155,7 @@ public class FluidTest {
         return true;
     }
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public static boolean hasEnoughAndExpected(@Nonnull List expectedFluids, @Nonnull List<FluidStack> givenFluids) {
         if (expectedFluids.size() != givenFluids.size()) return false;
         for (int i = 0; i < expectedFluids.size(); ++i) {

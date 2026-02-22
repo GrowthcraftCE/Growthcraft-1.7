@@ -19,10 +19,9 @@
  */
 package growthcraft.core.common.tileentity.device;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-
-import io.netty.buffer.ByteBuf;
 
 public class DeviceProgressive extends DeviceBase {
 
@@ -71,7 +70,8 @@ public class DeviceProgressive extends DeviceBase {
         time++;
     }
 
-    public void update() {}
+    public void update() {
+    }
 
     /**
      * @param data - nbt data to read from

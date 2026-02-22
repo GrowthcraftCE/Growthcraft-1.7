@@ -41,17 +41,18 @@ public class UserBrewingRecipe implements ICommentable {
         this.time = tm;
     }
 
-    public UserBrewingRecipe() {}
+    public UserBrewingRecipe() {
+    }
 
     @Override
     public String toString() {
         return String.format(
-            "UserBrewingRecipe(`%s` + `%s` / %d = `%s` & `%s`)",
-            item,
-            input_fluid,
-            time,
-            output_fluid,
-            residue);
+                "UserBrewingRecipe(`%s` + `%s` / %d = `%s` & `%s`)",
+                item,
+                input_fluid,
+                time,
+                output_fluid,
+                residue);
     }
 
     @Override

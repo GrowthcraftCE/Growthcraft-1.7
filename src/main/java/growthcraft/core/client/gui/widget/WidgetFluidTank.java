@@ -19,10 +19,9 @@
  */
 package growthcraft.core.client.gui.widget;
 
-import net.minecraft.tileentity.TileEntity;
-
 import growthcraft.api.core.util.Rectangle;
 import growthcraft.core.common.tileentity.device.IFluidTanks;
+import net.minecraft.tileentity.TileEntity;
 
 public class WidgetFluidTank extends Widget {
 
@@ -30,7 +29,7 @@ public class WidgetFluidTank extends Widget {
     public int numberColor = 0xFFFFFF;
     public Rectangle ruleRect = new Rectangle();
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public WidgetFluidTank(WidgetManager man, int index, int x, int y, int w, int h) {
         super(man, x, y, w, h);
         this.tankIndex = index;
@@ -50,15 +49,15 @@ public class WidgetFluidTank extends Widget {
             final int h = getHeight();
             if (tanks.getFluidAmountScaled(h, tankIndex) > 0) {
                 manager.gui.drawTank(
-                    manager.gui.getGuiX(),
-                    manager.gui.getGuiY(),
-                    getX(),
-                    getY(),
-                    w,
-                    h,
-                    tanks.getFluidAmountScaled(h, tankIndex),
-                    tanks.getFluidStack(tankIndex),
-                    tanks.getFluidTank(tankIndex));
+                        manager.gui.getGuiX(),
+                        manager.gui.getGuiY(),
+                        getX(),
+                        getY(),
+                        w,
+                        h,
+                        tanks.getFluidAmountScaled(h, tankIndex),
+                        tanks.getFluidStack(tankIndex),
+                        tanks.getFluidTank(tankIndex));
             }
             if (!ruleRect.isEmpty()) {
                 manager.gui.bindGuiTexture();
@@ -75,12 +74,12 @@ public class WidgetFluidTank extends Widget {
             if (!tanks.isFluidTankEmpty(tankIndex)) {
                 final String s = String.valueOf(tanks.getFluidAmount(tankIndex));
                 manager.gui.getFontRenderer()
-                    .drawStringWithShadow(
-                        s,
-                        rect.x2() - manager.gui.getFontRenderer()
-                            .getStringWidth(s),
-                        rect.y2() - 8,
-                        numberColor);
+                        .drawStringWithShadow(
+                                s,
+                                rect.x2() - manager.gui.getFontRenderer()
+                                        .getStringWidth(s),
+                                rect.y2() - 8,
+                                numberColor);
             }
         }
     }

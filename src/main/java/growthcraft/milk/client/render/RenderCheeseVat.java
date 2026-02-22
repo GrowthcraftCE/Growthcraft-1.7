@@ -19,17 +19,6 @@
  */
 package growthcraft.milk.client.render;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import growthcraft.api.core.util.BBox;
@@ -38,11 +27,20 @@ import growthcraft.milk.client.model.ModelCheeseVat;
 import growthcraft.milk.client.resource.GrcMilkResources;
 import growthcraft.milk.common.block.BlockCheeseVat;
 import growthcraft.milk.common.tileentity.TileEntityCheeseVat;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import org.lwjgl.opengl.GL11;
 
 public class RenderCheeseVat implements ISimpleBlockRenderingHandler {
 
     private static final BBox fluidBBox = BBox.newCube(1, 1, 1, 14, 14, 14)
-        .scale(ModelCheeseVat.SCALE);
+            .scale(ModelCheeseVat.SCALE);
     public static int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
     @Override
@@ -65,14 +63,14 @@ public class RenderCheeseVat implements ISimpleBlockRenderingHandler {
                 GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
                 GL11.glTranslatef(0.0f, -1.0f, 0.0f);
                 GrcMilkResources.INSTANCE.modelCheeseVat
-                    .render(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ModelCheeseVat.SCALE);
+                        .render(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ModelCheeseVat.SCALE);
             }
             GL11.glPopMatrix();
         }
     }
 
     private void renderFluidLayer(Block block, RenderBlocks renderer, Fluid fluid, double y0, double y1, int x, int y,
-        int z) {
+                                  int z) {
         if (fluid == null) return;
         final IIcon icon = fluid.getIcon();
         if (icon == null) return;
@@ -87,7 +85,7 @@ public class RenderCheeseVat implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == RENDER_ID) {
             if (block instanceof BlockCheeseVat pancheonBlock) {
                 final TileEntityCheeseVat cheeseVatTile = pancheonBlock.getTileEntity(world, x, y, z);
@@ -97,7 +95,7 @@ public class RenderCheeseVat implements ISimpleBlockRenderingHandler {
                         final FluidStack fluid = cheeseVatTile.getFluidStack(i);
                         if (fluid != null) {
                             final float fluidHeight = fluid.amount * fluidBBox.h()
-                                / cheeseVatTile.getVatFluidCapacity();
+                                    / cheeseVatTile.getVatFluidCapacity();
                             renderFluidLayer(block, renderer, fluid.getFluid(), y0, y0 + fluidHeight, x, y, z);
                             y0 += fluidHeight;
                         }

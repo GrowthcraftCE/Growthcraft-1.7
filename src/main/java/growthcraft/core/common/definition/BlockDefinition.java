@@ -19,9 +19,9 @@
  */
 package growthcraft.core.common.definition;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.Block;
+
+import javax.annotation.Nonnull;
 
 public class BlockDefinition extends BlockTypeDefinition<Block> {
 

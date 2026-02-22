@@ -1,7 +1,8 @@
 package growthcraft.milk.common.world;
 
-import java.util.Random;
-
+import cpw.mods.fml.common.IWorldGenerator;
+import growthcraft.api.core.util.BiomeUtils;
+import growthcraft.milk.GrowthCraftMilk;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -9,9 +10,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import cpw.mods.fml.common.IWorldGenerator;
-import growthcraft.api.core.util.BiomeUtils;
-import growthcraft.milk.GrowthCraftMilk;
+import java.util.Random;
 
 /**
  * Created by Firedingo on 25/02/2016.
@@ -29,7 +28,7 @@ public class WorldGeneratorThistle implements IWorldGenerator {
     }
 
     private void genRandThistle(WorldGenerator generator, World world, Random rand, int chunk_x, int chunk_z,
-        int maxToSpawn, int minHeight, int maxHeight) {
+                                int maxToSpawn, int minHeight, int maxHeight) {
         final int genChance = GrowthCraftMilk.getConfig().thistleGenChance;
         for (int i = 0; i < maxToSpawn; ++i) {
             if (genChance > 0) {
@@ -62,7 +61,7 @@ public class WorldGeneratorThistle implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator,
-        IChunkProvider chunkProvider) {
+                         IChunkProvider chunkProvider) {
         if (world.provider.dimensionId == 0) {
             final BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
             if (GrowthCraftMilk.getConfig().thistleUseBiomeDict) {
@@ -73,14 +72,14 @@ public class WorldGeneratorThistle implements IWorldGenerator {
                 if (!BiomeUtils.testBiomeIdTags(biomeId, GrowthCraftMilk.getConfig().thistleBiomesIdList)) return;
             }
             genRandThistle(
-                thistle,
-                world,
-                random,
-                chunkX,
-                chunkZ,
-                GrowthCraftMilk.getConfig().thistleGenAmount,
-                64,
-                255);
+                    thistle,
+                    world,
+                    random,
+                    chunkX,
+                    chunkZ,
+                    GrowthCraftMilk.getConfig().thistleGenAmount,
+                    64,
+                    255);
         }
     }
 }

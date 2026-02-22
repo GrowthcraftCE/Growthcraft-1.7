@@ -1,9 +1,8 @@
 package growthcraft.bees.common.inventory;
 
-import net.minecraft.entity.player.InventoryPlayer;
-
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.core.common.inventory.GrcContainer;
+import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerBeeBox extends GrcContainer {
 
@@ -23,7 +22,7 @@ public class ContainerBeeBox extends GrcContainer {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
                 this.addSlotToContainer(
-                    new SlotHoneyComb(this, teBeeBox, j + i * 9 + SlotId.HONEY_COMB_START, 8 + j * 18, 50 + i * 18));
+                        new SlotHoneyComb(this, teBeeBox, j + i * 9 + SlotId.HONEY_COMB_START, 8 + j * 18, 50 + i * 18));
             }
         }
 
@@ -36,6 +35,7 @@ public class ContainerBeeBox extends GrcContainer {
         public static final int HONEY_COMB_START = 1;
         public static final int HONEY_COMB_END = HONEY_COMB_START + 27;
 
-        private SlotId() {}
+        private SlotId() {
+        }
     }
 }

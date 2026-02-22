@@ -19,14 +19,13 @@
  */
 package growthcraft.cellar.eventhandler;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.util.ItemUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.util.ItemUtils;
 
 public class EventHandlerCauldronUseItem {
 

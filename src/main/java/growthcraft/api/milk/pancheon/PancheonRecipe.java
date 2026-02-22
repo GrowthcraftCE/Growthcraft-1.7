@@ -19,9 +19,8 @@
  */
 package growthcraft.api.milk.pancheon;
 
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.core.fluids.FluidFormatString;
+import net.minecraftforge.fluids.FluidStack;
 
 public class PancheonRecipe implements IPancheonRecipe {
 
@@ -68,10 +67,10 @@ public class PancheonRecipe implements IPancheonRecipe {
     @Override
     public String toString() {
         return String.format(
-            "PancheonRecipe(`%s` / %d = `%s` & `%s`)",
-            FluidFormatString.format(inputFluid),
-            time,
-            FluidFormatString.format(topOutFluid),
-            FluidFormatString.format(bottomOutFluid));
+                "PancheonRecipe(`%s` / %d = `%s` & `%s`)",
+                FluidFormatString.format(inputFluid),
+                time,
+                FluidFormatString.format(topOutFluid),
+                FluidFormatString.format(bottomOutFluid));
     }
 }

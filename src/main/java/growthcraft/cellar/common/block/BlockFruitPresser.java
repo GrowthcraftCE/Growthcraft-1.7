@@ -1,7 +1,13 @@
 package growthcraft.cellar.common.block;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.client.render.RenderFruitPresser;
+import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
+import growthcraft.core.common.block.IRotatableBlock;
+import growthcraft.core.common.block.IWrenchable;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,14 +20,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.client.render.RenderFruitPresser;
-import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
-import growthcraft.core.common.block.IRotatableBlock;
-import growthcraft.core.common.block.IWrenchable;
+import java.util.Random;
 
 public class BlockFruitPresser extends BlockCellarContainer implements IWrenchable, IRotatableBlock {
 
@@ -87,7 +86,7 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7,
-        float par8, float par9) {
+                                    float par8, float par9) {
         if (world.isRemote) return true;
         final Block below = world.getBlock(x, y - 1, z);
         if (below instanceof BlockFruitPress) {
@@ -135,21 +134,21 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
         if (flag && (meta == 0 || meta == 1)) {
             world.setBlockMetadataWithNotify(x, y, z, meta | 2, BlockFlags.UPDATE_AND_SYNC);
             world.playSoundEffect(
-                (double) x + 0.5D,
-                (double) y + 0.5D,
-                (double) z + 0.5D,
-                "tile.piston.out",
-                0.5F,
-                world.rand.nextFloat() * 0.25F + 0.6F);
+                    (double) x + 0.5D,
+                    (double) y + 0.5D,
+                    (double) z + 0.5D,
+                    "tile.piston.out",
+                    0.5F,
+                    world.rand.nextFloat() * 0.25F + 0.6F);
         } else if (!flag && (meta == 2 || meta == 3)) {
             world.setBlockMetadataWithNotify(x, y, z, meta & 1, BlockFlags.UPDATE_AND_SYNC);
             world.playSoundEffect(
-                (double) x + 0.5D,
-                (double) y + 0.5D,
-                (double) z + 0.5D,
-                "tile.piston.in",
-                0.5F,
-                world.rand.nextFloat() * 0.15F + 0.6F);
+                    (double) x + 0.5D,
+                    (double) y + 0.5D,
+                    (double) z + 0.5D,
+                    "tile.piston.in",
+                    0.5F,
+                    world.rand.nextFloat() * 0.15F + 0.6F);
         }
 
         world.markBlockForUpdate(x, y, z);

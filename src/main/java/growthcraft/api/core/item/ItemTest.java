@@ -19,18 +19,17 @@
  */
 package growthcraft.api.core.item;
 
-import java.util.List;
+import growthcraft.api.core.definition.IMultiItemStacks;
+import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-
-import growthcraft.api.core.definition.IMultiItemStacks;
+import java.util.List;
 
 public class ItemTest {
 
-    private ItemTest() {}
+    private ItemTest() {
+    }
 
     public static boolean isValid(@Nonnull ItemStack stack) {
         if (stack == null) return false;
@@ -84,7 +83,7 @@ public class ItemTest {
         return actual.stackSize >= expected.stackSize;
     }
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public static boolean isValidAndExpected(@Nonnull List expectedItems, @Nonnull List<ItemStack> givenItems) {
         if (expectedItems.size() != givenItems.size()) return false;
         for (int i = 0; i < expectedItems.size(); ++i) {
@@ -106,9 +105,9 @@ public class ItemTest {
         return true;
     }
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public static boolean containsExpectedItemsUnordered(@Nonnull List expectedItems,
-        @Nonnull List<ItemStack> givenItems) {
+                                                         @Nonnull List<ItemStack> givenItems) {
         final boolean[] usedSlots = new boolean[givenItems.size()];
         for (Object expectedStack : expectedItems) {
             boolean found = false;

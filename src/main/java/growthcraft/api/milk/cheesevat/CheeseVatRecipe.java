@@ -19,19 +19,17 @@
  */
 package growthcraft.api.milk.cheesevat;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.api.core.item.ItemTest;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class CheeseVatRecipe implements ICheeseVatRecipe {
 
@@ -41,7 +39,7 @@ public class CheeseVatRecipe implements ICheeseVatRecipe {
     private final List<IMultiItemStacks> inputItems;
 
     public CheeseVatRecipe(List<FluidStack> pOutputFluids, List<ItemStack> pOutputItems,
-        List<IMultiFluidStacks> pInputFluids, List<IMultiItemStacks> pInputItems) {
+                           List<IMultiFluidStacks> pInputFluids, List<IMultiItemStacks> pInputItems) {
         this.outputFluids = pOutputFluids;
         this.outputItems = pOutputItems;
         this.inputFluids = pInputFluids;
@@ -101,10 +99,10 @@ public class CheeseVatRecipe implements ICheeseVatRecipe {
     @Override
     public String toString() {
         return String.format(
-            "CheeseVatRecipe(output_fluids: %s, output_items: %s, input_fluids: %s, input_items: %s)",
-            outputFluids,
-            outputItems,
-            inputFluids,
-            inputItems);
+                "CheeseVatRecipe(output_fluids: %s, output_items: %s, input_fluids: %s, input_items: %s)",
+                outputFluids,
+                outputItems,
+                inputFluids,
+                inputItems);
     }
 }

@@ -19,12 +19,11 @@
  */
 package growthcraft.core.common.tileentity.device;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.util.ItemUtils;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 
 public class DeviceInventorySlot {
 
@@ -243,6 +242,6 @@ public class DeviceInventorySlot {
      */
     public ItemStack yank() {
         return InventoryProcessor.instance()
-            .yankSlot(inventory, index);
+                .yankSlot(inventory, index);
     }
 }

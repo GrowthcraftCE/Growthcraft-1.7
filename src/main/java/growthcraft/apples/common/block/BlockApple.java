@@ -1,7 +1,14 @@
 package growthcraft.apples.common.block;
 
-import java.util.Random;
-
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.apples.GrowthCraftApples;
+import growthcraft.core.client.renderer.RenderBlockFruit;
+import growthcraft.core.common.block.GrcBlockBase;
+import growthcraft.core.common.block.ICropDataProvider;
+import growthcraft.core.integration.AppleCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -14,15 +21,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.apples.GrowthCraftApples;
-import growthcraft.core.client.renderer.RenderBlockFruit;
-import growthcraft.core.common.block.GrcBlockBase;
-import growthcraft.core.common.block.ICropDataProvider;
-import growthcraft.core.integration.AppleCore;
+import java.util.Random;
 
 public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProvider {
 
@@ -108,7 +107,7 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
      ************/
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7,
-        float par8, float par9) {
+                                    float par8, float par9) {
         if (world.getBlockMetadata(x, y, z) >= AppleStage.MATURE) {
             if (!world.isRemote) {
                 fellBlockAsItem(world, x, y, z);
@@ -131,7 +130,7 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         return GrowthCraftApples.blocks.appleLeaves.equals(world.getBlock(x, y + 1, z))
-            && (world.getBlockMetadata(x, y + 1, z) & 3) == 0;
+                && (world.getBlockMetadata(x, y + 1, z) & 3) == 0;
     }
 
     /************
@@ -223,12 +222,12 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
             this.setBlockBounds(6 * f, 11 * f, 6 * f, 10 * f, 15 * f, 10 * f);
         } else if (meta == AppleStage.MID) {
             this.setBlockBounds(
-                (float) (5.5 * f),
-                10 * f,
-                (float) (5.5 * f),
-                (float) (10.5 * f),
-                15 * f,
-                (float) (10.5 * f));
+                    (float) (5.5 * f),
+                    10 * f,
+                    (float) (5.5 * f),
+                    (float) (10.5 * f),
+                    15 * f,
+                    (float) (10.5 * f));
         } else {
             this.setBlockBounds(5 * f, 9 * f, 5 * f, 11 * f, 15 * f, 11 * f);
         }
@@ -241,6 +240,7 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
         public static final int MATURE = 2;
         public static final int COUNT = 3;
 
-        private AppleStage() {}
+        private AppleStage() {
+        }
     }
 }

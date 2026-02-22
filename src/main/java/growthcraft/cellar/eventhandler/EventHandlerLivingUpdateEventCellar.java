@@ -1,12 +1,11 @@
 package growthcraft.cellar.eventhandler;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import growthcraft.cellar.GrowthCraftCellar;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import growthcraft.cellar.GrowthCraftCellar;
 
 public class EventHandlerLivingUpdateEventCellar {
 
@@ -16,13 +15,13 @@ public class EventHandlerLivingUpdateEventCellar {
 
         if (ent.isPotionActive(GrowthCraftCellar.potionTipsy)) {
             if (ent.getActivePotionEffect(GrowthCraftCellar.potionTipsy)
-                .getDuration() == 0) {
+                    .getDuration() == 0) {
                 ent.removePotionEffect(GrowthCraftCellar.potionTipsy.id);
                 return;
             }
 
             final int lvl = ent.getActivePotionEffect(GrowthCraftCellar.potionTipsy)
-                .getAmplifier();
+                    .getAmplifier();
 
             if (lvl >= 3) {
                 ent.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 0));

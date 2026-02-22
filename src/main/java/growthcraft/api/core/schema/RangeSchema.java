@@ -30,7 +30,8 @@ public class RangeSchema implements ICommentable {
         this.max = x;
     }
 
-    public RangeSchema() {}
+    public RangeSchema() {
+    }
 
     @Override
     public String getComment() {

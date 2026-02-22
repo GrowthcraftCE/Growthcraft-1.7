@@ -1,25 +1,23 @@
 package growthcraft.api.cellar.booze;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BoozeRegistry implements IBoozeRegistry {
 
-    private ILogger logger = NullLogger.INSTANCE;
     private final Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
     private final Map<FluidTag, IModifierFunction> tagModifierFunctions = new HashMap<FluidTag, IModifierFunction>();
+    private ILogger logger = NullLogger.INSTANCE;
 
     @Override
     public void setLogger(@Nonnull ILogger l) {
@@ -41,7 +39,7 @@ public class BoozeRegistry implements IBoozeRegistry {
     private void ensureFluidIsValid(Fluid fluid) {
         if (!FluidUtils.doesFluidExist(fluid)) {
             throw new IllegalArgumentException(
-                "[Growthcraft|Cellar] The fluid being registered as a Booze is not registered to the FluidRegistry.");
+                    "[Growthcraft|Cellar] The fluid being registered as a Booze is not registered to the FluidRegistry.");
         }
     }
 
@@ -58,7 +56,7 @@ public class BoozeRegistry implements IBoozeRegistry {
         final BoozeEntry entry = getBoozeEntry(fluid);
         if (entry == null) {
             throw new IllegalArgumentException(
-                "[Growthcraft|Cellar] The fluid being tagged does not have a valid booze entry.");
+                    "[Growthcraft|Cellar] The fluid being tagged does not have a valid booze entry.");
         }
         return entry;
     }
@@ -104,7 +102,7 @@ public class BoozeRegistry implements IBoozeRegistry {
             registerBooze(fluid, new BoozeEntry(fluid));
         } else {
             throw new IllegalArgumentException(
-                "[Growthcraft|Cellar] The fluid being registered as a Booze is already registered to the CellarRegistry.");
+                    "[Growthcraft|Cellar] The fluid being registered as a Booze is already registered to the CellarRegistry.");
         }
     }
 }

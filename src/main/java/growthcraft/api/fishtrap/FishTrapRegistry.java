@@ -1,16 +1,14 @@
 package growthcraft.api.fishtrap;
 
-import java.util.*;
-
-import javax.annotation.Nonnull;
-
+import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.log.ILoggable;
-import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.NullLogger;
+import javax.annotation.Nonnull;
+import java.util.*;
 
 public class FishTrapRegistry implements ILoggable {
 
@@ -62,13 +60,13 @@ public class FishTrapRegistry implements ILoggable {
             entriesByGroup.put(group, new LinkedList<FishTrapEntry>());
         }
         entriesByGroup.get(group)
-            .add(entry);
+                .add(entry);
     }
 
     private ItemStack getRandomCatchFromList(Random random, List<FishTrapEntry> list) {
         if (list.isEmpty()) return null;
         return WeightedRandom.getRandomItem(random, list)
-            .getFishable(random);
+                .getFishable(random);
     }
 
     public ItemStack getRandomCatchFromGroup(Random random, String group) {

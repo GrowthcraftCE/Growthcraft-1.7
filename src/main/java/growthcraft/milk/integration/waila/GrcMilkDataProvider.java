@@ -19,15 +19,6 @@
  */
 package growthcraft.milk.integration.waila;
 
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.world.World;
-
 import cpw.mods.fml.common.Optional;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.nbt.NBTHelper;
@@ -40,6 +31,14 @@ import growthcraft.milk.util.TagFormatterCheesePress;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
+
+import java.util.List;
 
 public class GrcMilkDataProvider implements IWailaDataProvider {
 
@@ -59,14 +58,14 @@ public class GrcMilkDataProvider implements IWailaDataProvider {
     @Override
     @Optional.Method(modid = "Waila")
     public List<String> getWailaHead(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
+                                     IWailaConfigHandler config) {
         return tooltip;
     }
 
     @Override
     @Optional.Method(modid = "Waila")
     public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
+                                     IWailaConfigHandler config) {
         final TileEntity te = accessor.getTileEntity();
         final NBTTagCompound nbt = accessor.getNBTData();
         if (te instanceof TileEntityButterChurn) {
@@ -78,17 +77,17 @@ public class GrcMilkDataProvider implements IWailaDataProvider {
         if (te instanceof TileEntityCheeseBlock) {
             if (nbt.getBoolean("is_aged")) {
                 tooltip.add(
-                    EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese.slices.prefix")
-                        + EnumChatFormatting.WHITE
-                        + GrcI18n.translate(
-                            "grcmilk.cheese.slices.value.format",
-                            nbt.getInteger("slices"),
-                            nbt.getInteger("slices_max")));
+                        EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese.slices.prefix")
+                                + EnumChatFormatting.WHITE
+                                + GrcI18n.translate(
+                                "grcmilk.cheese.slices.value.format",
+                                nbt.getInteger("slices"),
+                                nbt.getInteger("slices_max")));
             } else {
                 final float ageProgress = nbt.getFloat("age_progress");
                 final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese.aging.prefix")
-                    + EnumChatFormatting.WHITE
-                    + GrcI18n.translate("grcmilk.cheese.aging.progress.format", (int) (ageProgress * 100));
+                        + EnumChatFormatting.WHITE
+                        + GrcI18n.translate("grcmilk.cheese.aging.progress.format", (int) (ageProgress * 100));
                 tooltip.add(result);
             }
         }
@@ -96,8 +95,8 @@ public class GrcMilkDataProvider implements IWailaDataProvider {
             final float progress = nbt.getFloat("progress");
             if (progress < 1f) {
                 final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.hanging_curds.drying.prefix")
-                    + EnumChatFormatting.WHITE
-                    + GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", (int) (progress * 100));
+                        + EnumChatFormatting.WHITE
+                        + GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", (int) (progress * 100));
                 tooltip.add(result);
             }
             if (nbt.hasKey("dried")) {
@@ -113,7 +112,7 @@ public class GrcMilkDataProvider implements IWailaDataProvider {
     @Override
     @Optional.Method(modid = "Waila")
     public List<String> getWailaTail(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
+                                     IWailaConfigHandler config) {
         return tooltip;
     }
 
@@ -129,26 +128,26 @@ public class GrcMilkDataProvider implements IWailaDataProvider {
     @Override
     @Optional.Method(modid = "Waila")
     public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x,
-        int y, int z) {
+                                     int y, int z) {
         if (te instanceof TileEntityButterChurn) getButterChurnData((TileEntityButterChurn) te, tag);
         if (te instanceof TileEntityCheesePress) getCheesePressData((TileEntityCheesePress) te, tag);
         if (te instanceof TileEntityCheeseBlock cheeseBlock) {
             tag.setBoolean(
-                "is_aged",
-                cheeseBlock.getCheese()
-                    .isAged());
+                    "is_aged",
+                    cheeseBlock.getCheese()
+                            .isAged());
             tag.setFloat(
-                "age_progress",
-                cheeseBlock.getCheese()
-                    .getAgeProgress());
+                    "age_progress",
+                    cheeseBlock.getCheese()
+                            .getAgeProgress());
             tag.setInteger(
-                "slices",
-                cheeseBlock.getCheese()
-                    .getSlices());
+                    "slices",
+                    cheeseBlock.getCheese()
+                            .getSlices());
             tag.setInteger(
-                "slices_max",
-                cheeseBlock.getCheese()
-                    .getSlicesMax());
+                    "slices_max",
+                    cheeseBlock.getCheese()
+                            .getSlicesMax());
         }
         if (te instanceof TileEntityHangingCurds hangingCurds) {
             tag.setFloat("progress", hangingCurds.getProgress());

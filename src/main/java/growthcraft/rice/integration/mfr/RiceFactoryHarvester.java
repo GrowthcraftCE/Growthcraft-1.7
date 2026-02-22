@@ -19,13 +19,12 @@
  */
 package growthcraft.rice.integration.mfr;
 
-import java.util.Map;
-
-import net.minecraft.world.World;
-
 import growthcraft.core.integration.mfr.AbstractFactoryHarvestable;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.common.block.BlockRice;
+import net.minecraft.world.World;
+
+import java.util.Map;
 
 public class RiceFactoryHarvester extends AbstractFactoryHarvestable<BlockRice> {
 

@@ -19,21 +19,19 @@
  */
 package growthcraft.api.core.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.definition.IMultiItemStacks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import growthcraft.api.core.definition.IMultiItemStacks;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OreItemStacks implements IMultiItemStacks {
 
-    public int stackSize;
     private final String oreName;
+    public int stackSize;
 
     public OreItemStacks(@Nonnull String name, int amount) {
         this.oreName = name;
@@ -63,7 +61,7 @@ public class OreItemStacks implements IMultiItemStacks {
     }
 
     @Override
-    public List<ItemStack> getItemStacks() {
+    public List<ItemStack> itemStacks() {
         final List<ItemStack> items = getRawItemStacks();
         final List<ItemStack> result = new ArrayList<ItemStack>();
         for (ItemStack stack : items) {

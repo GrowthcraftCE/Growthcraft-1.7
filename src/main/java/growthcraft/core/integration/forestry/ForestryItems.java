@@ -19,11 +19,10 @@
  */
 package growthcraft.core.integration.forestry;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.api.core.definition.IItemStackFactory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public enum ForestryItems implements IItemStackFactory {
 

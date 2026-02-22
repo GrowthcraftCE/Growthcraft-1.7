@@ -1,8 +1,11 @@
 package growthcraft.grapes.common.block;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.cellar.common.item.EnumYeast;
+import growthcraft.core.common.block.GrcBlockBase;
+import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.grapes.client.renderer.RenderGrape;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,12 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.cellar.common.item.EnumYeast;
-import growthcraft.core.common.block.GrcBlockBase;
-import growthcraft.grapes.GrowthCraftGrapes;
-import growthcraft.grapes.client.renderer.RenderGrape;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockGrapeBlock extends GrcBlockBase {
 
@@ -49,7 +48,7 @@ public class BlockGrapeBlock extends GrcBlockBase {
      ************/
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7,
-        float par8, float par9) {
+                                    float par8, float par9) {
         if (!world.isRemote) {
             fellBlockAsItem(world, x, y, z);
         }

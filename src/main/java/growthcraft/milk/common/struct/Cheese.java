@@ -19,21 +19,20 @@
  */
 package growthcraft.milk.common.struct;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
-
 import growthcraft.api.core.stream.IStreamable;
 import growthcraft.milk.GrowthCraftMilk;
 import growthcraft.milk.common.item.EnumCheeseStage;
 import growthcraft.milk.common.item.EnumCheeseType;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 
 public class Cheese implements IStreamable {
 
     private final int cheesePerSlice = GrowthCraftMilk.getConfig().cheeseItemPerBlockSlice;
-    public boolean needClientUpdate = true;
     private final int ageMax = GrowthCraftMilk.getConfig().cheeseMaxAge;
+    public boolean needClientUpdate = true;
     private int age;
     private int slicesMax = GrowthCraftMilk.getConfig().cheeseMaxSlices;
     private int slices = GrowthCraftMilk.getConfig().cheeseMaxSlices;

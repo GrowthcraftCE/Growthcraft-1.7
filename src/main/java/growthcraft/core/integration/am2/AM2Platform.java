@@ -25,7 +25,8 @@ public class AM2Platform {
 
     public static final String MOD_ID = "arsmagica2";
 
-    private AM2Platform() {}
+    private AM2Platform() {
+    }
 
     public static boolean isLoaded() {
         return Loader.isModLoaded(MOD_ID);

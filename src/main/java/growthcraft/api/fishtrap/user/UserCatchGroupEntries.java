@@ -19,10 +19,10 @@
  */
 package growthcraft.api.fishtrap.user;
 
+import growthcraft.api.core.schema.ICommentable;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import growthcraft.api.core.schema.ICommentable;
 
 public class UserCatchGroupEntries implements ICommentable {
 

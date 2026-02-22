@@ -19,16 +19,15 @@
  */
 package growthcraft.api.milk.churn.user;
 
-import java.io.BufferedReader;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
 import growthcraft.api.milk.MilkRegistry;
 import growthcraft.api.milk.churn.IChurnRecipe;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.io.BufferedReader;
 
 /**
  * This allows users to define new brewing recipes.
@@ -44,11 +43,11 @@ public class UserChurnRecipesConfig extends AbstractUserJSONConfig {
 
     public void addDefault(FluidStack inp, FluidStack out, ItemStack stack, int churns) {
         addDefault(
-            new UserChurnRecipe(
-                new FluidStackSchema(inp),
-                new FluidStackSchema(out),
-                new ItemKeySchema(stack),
-                churns));
+                new UserChurnRecipe(
+                        new FluidStackSchema(inp),
+                        new FluidStackSchema(out),
+                        new ItemKeySchema(stack),
+                        churns));
     }
 
     @Override
@@ -75,8 +74,8 @@ public class UserChurnRecipesConfig extends AbstractUserJSONConfig {
         for (IChurnRecipe churnRecipe : recipe.toChurnRecipes()) {
             logger.debug("Adding user churn recipe {%s}", churnRecipe);
             MilkRegistry.instance()
-                .churn()
-                .addRecipe(churnRecipe);
+                    .churn()
+                    .addRecipe(churnRecipe);
         }
     }
 

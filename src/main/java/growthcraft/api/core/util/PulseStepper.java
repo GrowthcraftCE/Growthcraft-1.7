@@ -19,11 +19,10 @@
  */
 package growthcraft.api.core.util;
 
-import net.minecraft.nbt.NBTTagCompound;
-
 import growthcraft.api.core.nbt.INBTSerializableContext;
 import growthcraft.api.core.stream.IStreamable;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * A simple tick keeping class for loop counting
@@ -87,8 +86,8 @@ public class PulseStepper implements INBTSerializableContext, IStreamable {
 
     /**
      * @return State, if the stepper did not "step", then a State.NONE is returned
-     *         If it only advanced a step, then a State.TICK is returned,
-     *         if it advanced a loop, then a State.PULSE is returned.
+     * If it only advanced a step, then a State.TICK is returned,
+     * if it advanced a loop, then a State.PULSE is returned.
      */
     public State update() {
         if (maxLoops > 0 && loops >= maxLoops) return State.NONE;

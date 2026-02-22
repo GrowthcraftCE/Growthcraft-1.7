@@ -19,17 +19,6 @@
  */
 package growthcraft.bees.common.tileentity.device;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
-
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.IFlowerBlockEntry;
 import growthcraft.api.core.util.BlockFlags;
@@ -38,6 +27,16 @@ import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.core.common.tileentity.device.DeviceBase;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class DeviceBeeBox extends DeviceBase {
 
@@ -47,10 +46,10 @@ public class DeviceBeeBox extends DeviceBase {
     private final float flowerSpawnRate = GrowthCraftBees.getConfig().beeBoxFlowerSpawnRate;
     private final int flowerRadius = GrowthCraftBees.getConfig().beeBoxFlowerRadius;
     private final float bonus = GrowthCraftBees.getConfig().beeBoxBonusMultiplier;
-    // Temp variable used by BlockBeeBox for storing flower lists
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public List<List> flowerList = new ArrayList<List>();
     private final Random random = new Random();
+    // Temp variable used by BlockBeeBox for storing flower lists
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public List<List> flowerList = new ArrayList<List>();
     private int bonusTime;
 
     public DeviceBeeBox(TileEntityBeeBox te) {
@@ -91,10 +90,10 @@ public class DeviceBeeBox extends DeviceBase {
      */
     private boolean isBlockFlower(Block block, int meta) {
         return BeesRegistry.instance()
-            .isBlockFlower(block, meta);
+                .isBlockFlower(block, meta);
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private List<List> gatherFlowersInRadius(World world, int x, int y, int z, int checkSize, List<List> list) {
         final int i = x - ((checkSize - 1) / 2);
         final int k = z - ((checkSize - 1) / 2);
@@ -140,10 +139,10 @@ public class DeviceBeeBox extends DeviceBase {
                         f1 = 1.08F;
                     }
                 } else if (flower == Blocks.flower_pot && (world.getBlockMetadata(i + loopx, y, k + loopz) == 1
-                    || world.getBlockMetadata(i + loopx, y, k + loopz) == 2)) {
-                        // f1 = 2.0F;
-                        f1 = 0.72F;
-                    }
+                        || world.getBlockMetadata(i + loopx, y, k + loopz) == 2)) {
+                    // f1 = 2.0F;
+                    f1 = 0.72F;
+                }
 
                 f1 /= 4.0F;
 
@@ -186,7 +185,7 @@ public class DeviceBeeBox extends DeviceBase {
         return filled - empty;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void updateTick() {
         final TileEntityBeeBox te = getParentTile();
         if (!canDoWork() || !te.hasBees()) return;
@@ -254,7 +253,7 @@ public class DeviceBeeBox extends DeviceBase {
                     final Block block = (Block) randomList.get(0);
                     final int meta = (int) randomList.get(1);
                     final IFlowerBlockEntry entry = BeesRegistry.instance()
-                        .getFlowerBlockEntry(block, meta);
+                            .getFlowerBlockEntry(block, meta);
                     if (entry != null) {
                         if (entry.canPlaceAt(getWorld(), random_x, y, random_z)) {
                             getWorld().setBlock(random_x, y, random_z, block, meta, BlockFlags.SYNC);
@@ -265,7 +264,8 @@ public class DeviceBeeBox extends DeviceBase {
         }
     }
 
-    public void updateClientTick() {}
+    public void updateClientTick() {
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound data) {

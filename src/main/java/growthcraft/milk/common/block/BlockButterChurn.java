@@ -19,11 +19,6 @@
  */
 package growthcraft.milk.common.block;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.api.core.util.BBox;
@@ -31,6 +26,10 @@ import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.milk.GrowthCraftMilk;
 import growthcraft.milk.client.render.RenderButterChurn;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockButterChurn extends GrcBlockContainer {
 
@@ -43,7 +42,7 @@ public class BlockButterChurn extends GrcBlockContainer {
         setCreativeTab(GrowthCraftMilk.creativeTab);
         setTileEntityType(TileEntityButterChurn.class);
         final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 16f, 8f)
-            .scale(1f / 16f);
+                .scale(1f / 16f);
         setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
         setBlockTextureName("grcmilk:butter_churn");
     }
@@ -65,7 +64,7 @@ public class BlockButterChurn extends GrcBlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7,
-        float par8, float par9) {
+                                    float par8, float par9) {
         if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
         if (!player.isSneaking()) {
             return tryChurning(world, x, y, z, player);

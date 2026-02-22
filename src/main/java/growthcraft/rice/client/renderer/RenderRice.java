@@ -1,25 +1,25 @@
 package growthcraft.rice.client.renderer;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.rice.common.block.BlockRice;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.rice.common.block.BlockRice;
-
 public class RenderRice implements ISimpleBlockRenderingHandler {
 
     public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
     @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {}
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+    }
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == id) {
             final int meta = world.getBlockMetadata(x, y, z);
             final Tessellator tessellator = Tessellator.instance;
@@ -68,11 +68,11 @@ public class RenderRice implements ISimpleBlockRenderingHandler {
         final double d2 = z;
 
         renderer.drawCrossedSquares(
-            renderer.getBlockIconFromSideAndMetadata(block, 0, world.getBlockMetadata(x, y, z)),
-            d0,
-            d1,
-            d2,
-            1.0F);
+                renderer.getBlockIconFromSideAndMetadata(block, 0, world.getBlockMetadata(x, y, z)),
+                d0,
+                d1,
+                d2,
+                1.0F);
     }
 
     @Override

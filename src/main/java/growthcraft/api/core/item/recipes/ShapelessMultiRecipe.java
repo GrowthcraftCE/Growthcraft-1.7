@@ -1,7 +1,10 @@
 package growthcraft.api.core.item.recipes;
 
-import java.util.*;
-
+import growthcraft.api.core.definition.IMultiFluidStacks;
+import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.item.MultiItemStacks;
+import growthcraft.api.core.item.OreItemStacks;
+import growthcraft.api.core.util.MultiStacksUtil;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -12,11 +15,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import growthcraft.api.core.definition.IMultiFluidStacks;
-import growthcraft.api.core.definition.IMultiItemStacks;
-import growthcraft.api.core.item.MultiItemStacks;
-import growthcraft.api.core.item.OreItemStacks;
-import growthcraft.api.core.util.MultiStacksUtil;
+import java.util.*;
 
 public class ShapelessMultiRecipe implements IRecipe {
 
@@ -104,8 +103,8 @@ public class ShapelessMultiRecipe implements IRecipe {
                     boolean match = false;
 
                     final IMultiItemStacks next = req.next();
-                    final Iterator<ItemStack> itr = next.getItemStacks()
-                        .iterator();
+                    final Iterator<ItemStack> itr = next.itemStacks()
+                            .iterator();
                     while (itr.hasNext() && !match) {
                         match = OreDictionary.itemMatches(itr.next(), slot, false);
                     }
@@ -122,12 +121,12 @@ public class ShapelessMultiRecipe implements IRecipe {
 
                     if (FluidContainerRegistry.isFilledContainer(slot)) {
                         final FluidStack containerFluid = FluidContainerRegistry.getFluidForFilledItem(slot)
-                            .copy();
+                                .copy();
 
                         for (IMultiFluidStacks fluidStacks : fluids) {
                             final int aggregateAmount = aggregateFluids.containsKey(fluidStacks)
-                                ? aggregateFluids.get(fluidStacks)
-                                : 0;
+                                    ? aggregateFluids.get(fluidStacks)
+                                    : 0;
 
                             if (fluidStacks.containsFluidStack(containerFluid) && aggregateAmount > 0) {
                                 final int leftover = Math.max(0, aggregateAmount - containerFluid.amount);

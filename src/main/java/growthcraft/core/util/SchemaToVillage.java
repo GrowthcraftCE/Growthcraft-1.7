@@ -19,22 +19,23 @@
  */
 package growthcraft.core.util;
 
-import java.util.Map;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
+
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Utility class for drawing Schema String Arrays as structures
  */
 public class SchemaToVillage {
 
-    private SchemaToVillage() {}
+    private SchemaToVillage() {
+    }
 
     public static void drawSchema(IVillage village, World world, Random random, StructureBoundingBox box,
-        String[][] schema, Map<Character, IBlockEntries> map, int offx, int offy, int offz) {
+                                  String[][] schema, Map<Character, IBlockEntries> map, int offx, int offy, int offz) {
         // loop by schema layer
         for (int y = 0; y < schema.length; ++y) {
             final String[] layer = schema[y];
@@ -66,14 +67,14 @@ public class SchemaToVillage {
     }
 
     public static void drawSchema(IVillage village, World world, Random random, StructureBoundingBox box,
-        String[][] schema, Map<Character, IBlockEntries> map) {
+                                  String[][] schema, Map<Character, IBlockEntries> map) {
         drawSchema(village, world, random, box, schema, map, 0, 0, 0);
     }
 
     public interface IVillage {
 
         void placeBlockAtCurrentPositionPub(World world, Block block, int meta, int x, int y, int z,
-            StructureBoundingBox box);
+                                            StructureBoundingBox box);
     }
 
     public interface IBlockEntries {

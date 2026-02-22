@@ -19,19 +19,17 @@
  */
 package growthcraft.api.core.schema;
 
-import java.util.*;
-
-import javax.annotation.Nonnull;
-
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.definition.IMultiFluidStacks;
+import growthcraft.api.core.fluids.*;
+import growthcraft.api.core.util.StringUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.definition.IMultiFluidStacks;
-import growthcraft.api.core.fluids.*;
-import growthcraft.api.core.util.StringUtils;
+import javax.annotation.Nonnull;
+import java.util.*;
 
 public class MultiFluidStackSchema implements ICommentable, IValidatable, IMultiFluidStacks {
 
@@ -56,11 +54,12 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 
     public MultiFluidStackSchema(@Nonnull FluidStack fluidStack) {
         this.name = fluidStack.getFluid()
-            .getName();
+                .getName();
         this.amount = fluidStack.amount;
     }
 
-    public MultiFluidStackSchema() {}
+    public MultiFluidStackSchema() {
+    }
 
     public static MultiFluidStackSchema newWithTags(int amount, String... tags) {
         final MultiFluidStackSchema schema = new MultiFluidStackSchema();
@@ -81,8 +80,8 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 
     private List<FluidTag> expandTagNames(@Nonnull List<String> tagNames) {
         return CoreRegistry.instance()
-            .fluidTags()
-            .expandTagNames(tagNames);
+                .fluidTags()
+                .expandTagNames(tagNames);
     }
 
     public List<FluidTag> expandInclusionTags() {
@@ -96,11 +95,11 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
     public Collection<Fluid> getFluidsByTags() {
         final Set<Fluid> result = new HashSet<Fluid>();
         final Collection<Fluid> fluids = CoreRegistry.instance()
-            .fluidDictionary()
-            .getFluidsByTags(expandInclusionTags());
+                .fluidDictionary()
+                .getFluidsByTags(expandInclusionTags());
         final Collection<Fluid> exfluids = CoreRegistry.instance()
-            .fluidDictionary()
-            .getFluidsByTags(expandExclusionTags());
+                .fluidDictionary()
+                .getFluidsByTags(expandExclusionTags());
         result.addAll(fluids);
         result.removeAll(exfluids);
         return result;
@@ -187,17 +186,17 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
     @Override
     public String toString() {
         return String.format(
-            "Schema<MultiFluidStack>(comment: '%s', name: '%s', names: %s, inclusion_tags: %s, exclusion_tags: %s, amount: %d)",
-            StringUtils.inspect(comment),
-            StringUtils.inspect(name),
-            names,
-            inclusion_tags,
-            exclusion_tags,
-            amount);
+                "Schema<MultiFluidStack>(comment: '%s', name: '%s', names: %s, inclusion_tags: %s, exclusion_tags: %s, amount: %d)",
+                StringUtils.inspect(comment),
+                StringUtils.inspect(name),
+                names,
+                inclusion_tags,
+                exclusion_tags,
+                amount);
     }
 
     @Override
-    public List<ItemStack> getItemStacks() {
+    public List<ItemStack> itemStacks() {
         return FluidUtils.getFluidContainers(getFluidStacks());
     }
 }

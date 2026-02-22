@@ -19,11 +19,10 @@
  */
 package growthcraft.bees.common.block;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public enum EnumBeeBoxForestry {
 
@@ -59,10 +58,10 @@ public enum EnumBeeBoxForestry {
 
     public static final EnumBeeBoxForestry[] VALUES = values();
     public static final EnumBeeBoxForestry[][] ROWS = {
-        { LARCH, TEAK, ACACIA, LIME, CHESTNUT, WENGE, BAOBAB, SEQUOIA, KAPOK, EBONY, MAHOGANY, BALSA, WILLOW, WALNUT,
-            GREENHEART },
-        { CHERRY, MAHOE, POPLAR, PALM, PAPAYA, PINE, PLUM, MAPLE, CITRUS, GIGANTEUM, IPE, PADAUK, COCOBOLO,
-            ZEBRAWOOD } };
+            {LARCH, TEAK, ACACIA, LIME, CHESTNUT, WENGE, BAOBAB, SEQUOIA, KAPOK, EBONY, MAHOGANY, BALSA, WILLOW, WALNUT,
+                    GREENHEART},
+            {CHERRY, MAHOE, POPLAR, PALM, PAPAYA, PINE, PLUM, MAPLE, CITRUS, GIGANTEUM, IPE, PADAUK, COCOBOLO,
+                    ZEBRAWOOD}};
 
     public final String name;
     public final float hardness;

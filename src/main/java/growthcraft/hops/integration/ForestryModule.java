@@ -19,15 +19,14 @@
  */
 package growthcraft.hops.integration;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.Optional;
 import growthcraft.core.integration.ForestryModuleBase;
 import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
 import growthcraft.core.integration.forestry.ForestryFluids;
 import growthcraft.hops.GrowthCraftHops;
 import growthcraft.hops.common.block.BlockHops;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 public class ForestryModule extends ForestryModuleBase {
 
@@ -49,7 +48,7 @@ public class ForestryModule extends ForestryModuleBase {
         Backpack.FORESTERS.add(hops);
 
         if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager
-            .addRecipe(10, new ItemStack[] { hopSeed }, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
+                .addRecipe(10, new ItemStack[]{hopSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
         ForestryRecipeUtils.addFermenterRecipes(hops, saplingYield, ForestryFluids.BIOMASS.asFluidStack());
         addFarmable("farmOrchard", new FarmableBasicGrowthCraft(hopVine, BlockHops.HopsStage.FRUIT, false, false));
     }

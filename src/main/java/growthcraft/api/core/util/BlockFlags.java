@@ -35,5 +35,6 @@ public final class BlockFlags {
     public static final int UPDATE_AND_SYNC = BLOCK_UPDATE | SYNC;
     public static final int ALL = UPDATE_AND_SYNC | SUPRESS_RENDER;
 
-    private BlockFlags() {}
+    private BlockFlags() {
+    }
 }

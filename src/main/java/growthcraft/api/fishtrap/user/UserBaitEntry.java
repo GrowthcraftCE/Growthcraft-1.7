@@ -19,10 +19,9 @@
  */
 package growthcraft.api.fishtrap.user;
 
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
+import net.minecraft.item.ItemStack;
 
 public class UserBaitEntry implements ICommentable {
 
@@ -44,7 +43,8 @@ public class UserBaitEntry implements ICommentable {
         this.multiplier = mul;
     }
 
-    public UserBaitEntry() {}
+    public UserBaitEntry() {
+    }
 
     @Override
     public String getComment() {

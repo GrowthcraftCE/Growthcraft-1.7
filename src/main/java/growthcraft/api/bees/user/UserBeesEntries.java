@@ -19,10 +19,10 @@
  */
 package growthcraft.api.bees.user;
 
+import growthcraft.api.core.schema.ICommentable;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import growthcraft.api.core.schema.ICommentable;
 
 public class UserBeesEntries implements ICommentable {
 

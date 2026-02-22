@@ -19,17 +19,6 @@
  */
 package growthcraft.cellar.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import net.minecraft.init.Items;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.booze.*;
@@ -44,23 +33,33 @@ import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.integration.NEI;
+import net.minecraft.init.Items;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoozeRegistryHelper {
 
-    private BoozeRegistryHelper() {}
+    private BoozeRegistryHelper() {
+    }
 
     public static void initializeBoozeFluids(String basename, Booze[] boozes) {
         for (int i = 0; i < boozes.length; ++i) {
             boozes[i] = new Booze(basename + i);
             FluidRegistry.registerFluid(boozes[i]);
             CellarRegistry.instance()
-                .booze()
-                .registerBooze(boozes[i]);
+                    .booze()
+                    .registerBooze(boozes[i]);
         }
     }
 
     public static void initializeBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks,
-        ItemBucketBoozeDefinition[] buckets) {
+                                       ItemBucketBoozeDefinition[] buckets) {
         for (int i = 0; i < boozes.length; ++i) {
             final BlockFluidBooze boozeBlock = new BlockFluidBooze(boozes[i]);
             fluidBlocks[i] = new BlockBoozeDefinition(boozeBlock);
@@ -70,8 +69,8 @@ public class BoozeRegistryHelper {
 
     public static void setBoozeFoodStats(Fluid booze, int heal, float saturation) {
         final BoozeEntry entry = CellarRegistry.instance()
-            .booze()
-            .getBoozeEntry(booze);
+                .booze()
+                .getBoozeEntry(booze);
         if (entry != null) {
             entry.setFoodStats(heal, saturation);
         }
@@ -84,29 +83,29 @@ public class BoozeRegistryHelper {
     }
 
     public static void registerBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks,
-        ItemBucketBoozeDefinition[] buckets, ItemDefinition bottle, String basename,
-        @Nullable ItemDefinition oldBucket) {
+                                     ItemBucketBoozeDefinition[] buckets, ItemDefinition bottle, String basename,
+                                     @Nullable ItemDefinition oldBucket) {
         for (int i = 0; i < boozes.length; ++i) {
             buckets[i].register(basename + "Bucket." + i);
             fluidBlocks[i].register(basename + "Fluid." + i, ItemBlockFluidBooze.class);
 
             EventHandlerBucketFill.instance()
-                .register(fluidBlocks[i].getBlock(), buckets[i].getItem());
+                    .register(fluidBlocks[i].getBlock(), buckets[i].getItem());
 
             final FluidStack boozeStack = new FluidStack(boozes[i], FluidContainerRegistry.BUCKET_VOLUME);
             FluidContainerRegistry
-                .registerFluidContainer(boozeStack, buckets[i].asStack(), FluidContainerRegistry.EMPTY_BUCKET);
+                    .registerFluidContainer(boozeStack, buckets[i].asStack(), FluidContainerRegistry.EMPTY_BUCKET);
 
             final FluidStack fluidStack = new FluidStack(boozes[i], GrowthCraftCore.getConfig().bottleCapacity);
             FluidContainerRegistry
-                .registerFluidContainer(fluidStack, bottle.asStack(1, i), GrowthCraftCore.EMPTY_BOTTLE);
+                    .registerFluidContainer(fluidStack, bottle.asStack(1, i), GrowthCraftCore.EMPTY_BOTTLE);
 
             GameRegistry.addShapelessRecipe(
-                bottle.asStack(3, i),
-                buckets[i].getItem(),
-                Items.glass_bottle,
-                Items.glass_bottle,
-                Items.glass_bottle);
+                    bottle.asStack(3, i),
+                    buckets[i].getItem(),
+                    Items.glass_bottle,
+                    Items.glass_bottle,
+                    Items.glass_bottle);
             // forward compat recipe
             if (oldBucket != null) {
                 GameRegistry.addShapelessRecipe(buckets[i].asStack(), oldBucket.asStack(1, i));
@@ -117,9 +116,9 @@ public class BoozeRegistryHelper {
 
     public static List<BoozeEffect> getBoozeEffects(Fluid[] boozes) {
         final IBoozeRegistry reg = CellarRegistry.instance()
-            .booze();
+                .booze();
         final IFluidDictionary dict = CoreRegistry.instance()
-            .fluidDictionary();
+                .fluidDictionary();
         final List<BoozeEffect> effects = new ArrayList<BoozeEffect>();
         for (int i = 0; i < boozes.length; ++i) {
             if (dict.hasFluidTags(boozes[i], BoozeTag.FERMENTED)) {

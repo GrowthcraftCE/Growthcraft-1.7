@@ -19,14 +19,6 @@
  */
 package growthcraft.core.common.inventory;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.core.common.inventory.slot.SlotInput;
@@ -35,6 +27,13 @@ import growthcraft.core.common.inventory.slot.SlotPlayerBackpack;
 import growthcraft.core.common.inventory.slot.SlotPlayerHotbar;
 import growthcraft.core.common.tileentity.feature.IGuiNetworkSync;
 import growthcraft.core.util.Platform;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 
 public class GrcContainer extends Container {
 
@@ -167,7 +166,7 @@ public class GrcContainer extends Container {
             for (int col = 0; col < 9; ++col) {
                 final int slotIndex = 9 + col + row * 9;
                 addSlotToContainer(
-                    new SlotPlayerBackpack(playerInventory, slotIndex, x + col * SLOT_W, y + row * SLOT_H));
+                        new SlotPlayerBackpack(playerInventory, slotIndex, x + col * SLOT_W, y + row * SLOT_H));
             }
         }
     }

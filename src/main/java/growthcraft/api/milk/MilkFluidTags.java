@@ -25,23 +25,24 @@ import growthcraft.api.core.fluids.FluidTag;
 public class MilkFluidTags {
 
     public static final FluidTag CHEESE = CoreRegistry.instance()
-        .fluidTags()
-        .createTag("cheese");
+            .fluidTags()
+            .createTag("cheese");
     public static final FluidTag CREAM = CoreRegistry.instance()
-        .fluidTags()
-        .createTag("cream");
+            .fluidTags()
+            .createTag("cream");
     public static final FluidTag MILK = CoreRegistry.instance()
-        .fluidTags()
-        .createTag("milk");
+            .fluidTags()
+            .createTag("milk");
     public static final FluidTag MILK_CURDS = CoreRegistry.instance()
-        .fluidTags()
-        .createTag("milk_curds");
+            .fluidTags()
+            .createTag("milk_curds");
     public static final FluidTag RENNET = CoreRegistry.instance()
-        .fluidTags()
-        .createTag("rennet");
+            .fluidTags()
+            .createTag("rennet");
     public static final FluidTag WHEY = CoreRegistry.instance()
-        .fluidTags()
-        .createTag("whey");
+            .fluidTags()
+            .createTag("whey");
 
-    private MilkFluidTags() {}
+    private MilkFluidTags() {
+    }
 }

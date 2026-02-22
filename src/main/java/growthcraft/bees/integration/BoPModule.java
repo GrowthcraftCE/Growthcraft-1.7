@@ -19,8 +19,6 @@
  */
 package growthcraft.bees.integration;
 
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.common.block.BlockBeeBoxBiomesOPlenty;
@@ -28,6 +26,7 @@ import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.core.integration.ModIntegrationBase;
 import growthcraft.core.integration.bop.BopPlatform;
 import growthcraft.core.integration.bop.EnumBopWoodType;
+import net.minecraft.item.ItemStack;
 
 public class BoPModule extends ModIntegrationBase {
 
@@ -38,7 +37,7 @@ public class BoPModule extends ModIntegrationBase {
     @Override
     public void doPreInit() {
         GrowthCraftBees.blocks.beeBoxBiomesOPlenty = GrowthCraftBees.blocks
-            .newTypedDefinition(new BlockBeeBoxBiomesOPlenty());
+                .newTypedDefinition(new BlockBeeBoxBiomesOPlenty());
     }
 
     @Override
@@ -52,12 +51,12 @@ public class BoPModule extends ModIntegrationBase {
             final ItemStack planks = type.asPlanksItemStack();
             if (planks != null) {
                 GameRegistry.addShapedRecipe(
-                    GrowthCraftBees.blocks.beeBoxBiomesOPlenty.asStack(1, type.meta),
-                    " A ",
-                    "A A",
-                    "AAA",
-                    'A',
-                    planks);
+                        GrowthCraftBees.blocks.beeBoxBiomesOPlenty.asStack(1, type.meta),
+                        " A ",
+                        "A A",
+                        "AAA",
+                        'A',
+                        planks);
             }
         }
     }

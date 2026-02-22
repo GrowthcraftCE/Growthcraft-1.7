@@ -1,8 +1,9 @@
 package growthcraft.bamboo.common.block;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.bamboo.GrowthCraftBamboo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
@@ -16,10 +17,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.bamboo.GrowthCraftBamboo;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockBambooLeaves extends BlockLeavesBase implements IShearable {
 
@@ -91,33 +90,33 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable {
                                 for (k2 = -b0; k2 <= b0; ++k2) {
                                     if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1] == l1 - 1) {
                                         if (this.adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1 - 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
                                         }
 
                                         if (this.adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1 + 1) * j1 + (j2 + k1) * b1 + k2 + k1] = l1;
                                         }
 
                                         if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 - 1) * b1 + k2 + k1] = l1;
                                         }
 
                                         if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1 + 1) * b1 + k2 + k1] = l1;
                                         }
 
                                         if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + (k2 + k1 - 1)]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1
-                                                + (k2 + k1 - 1)] = l1;
+                                                    + (k2 + k1 - 1)] = l1;
                                         }
 
                                         if (this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1]
-                                            == -2) {
+                                                == -2) {
                                             this.adjacentTreeBlocks[(i2 + k1) * j1 + (j2 + k1) * b1 + k2 + k1 + 1] = l1;
                                         }
                                     }
@@ -143,7 +142,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable {
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
         super.randomDisplayTick(world, x, y, z, random);
         if (world.canLightningStrikeAt(x, y + 1, z) && !World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
-            && random.nextInt(15) == 1) {
+                && random.nextInt(15) == 1) {
             final double d0 = (float) x + random.nextFloat();
             final double d1 = (double) y - 0.05D;
             final double d2 = (float) z + random.nextFloat();
@@ -262,7 +261,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable {
         for (int x1 = -1; x1 <= 1; ++x1) {
             for (int z1 = -1; z1 <= 1; ++z1) {
                 final int j2 = world.getBiomeGenForCoords(x + z1, z + x1)
-                    .getBiomeFoliageColor(x + z1, y, z + x1);
+                        .getBiomeFoliageColor(x + z1, y, z + x1);
                 r += (j2 & 16711680) >> 16;
                 g += (j2 & 65280) >> 8;
                 b += j2 & 255;

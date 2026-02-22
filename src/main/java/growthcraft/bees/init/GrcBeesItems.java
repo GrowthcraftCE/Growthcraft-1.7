@@ -19,11 +19,10 @@
  */
 package growthcraft.bees.init;
 
-import net.minecraftforge.oredict.OreDictionary;
-
 import growthcraft.bees.common.item.*;
 import growthcraft.core.common.GrcModuleItems;
 import growthcraft.core.common.definition.ItemDefinition;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcBeesItems extends GrcModuleItems {
 

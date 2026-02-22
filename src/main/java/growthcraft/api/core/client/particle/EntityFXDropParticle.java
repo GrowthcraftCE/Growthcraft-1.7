@@ -1,15 +1,14 @@
 // Copied from Buildcraft core and edited for Growthcraft
 package growthcraft.api.core.client.particle;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidBlock;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class EntityFXDropParticle extends EntityFX {
@@ -20,7 +19,7 @@ public class EntityFXDropParticle extends EntityFX {
     private int bobTimer;
 
     public EntityFXDropParticle(World world, double x, double y, double z, float particleRed, float particleGreen,
-        float particleBlue) {
+                                float particleBlue) {
         super(world, x, y, z, 0.0D, 0.0D, 0.0D);
 
         this.particleRed = particleRed;
@@ -82,7 +81,7 @@ public class EntityFXDropParticle extends EntityFX {
 
         if ((material.isLiquid() || material.isSolid()) && block instanceof IFluidBlock) {
             final double d0 = MathHelper.floor_double(this.posY) + 1
-                - ((IFluidBlock) block).getFilledPercentage(worldObj, x, y, z);
+                    - ((IFluidBlock) block).getFilledPercentage(worldObj, x, y, z);
 
             if (this.posY < d0) {
                 setDead();

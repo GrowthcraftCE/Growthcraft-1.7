@@ -1,7 +1,14 @@
 package growthcraft.cellar.common.tileentity;
 
-import java.io.IOException;
-
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.ContainerBrewKettle;
+import growthcraft.cellar.common.tileentity.device.BrewKettle;
+import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -13,26 +20,18 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.common.fluids.CellarTank;
-import growthcraft.cellar.common.inventory.ContainerBrewKettle;
-import growthcraft.cellar.common.tileentity.device.BrewKettle;
-import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.tileentity.event.TileEventHandler;
-import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
-import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
-import io.netty.buffer.ByteBuf;
+import java.io.IOException;
 
 public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITileHeatedDevice, ITileProgressiveDevice {
 
-    private static final int[] rawSlotIDs = new int[] { 0, 1 };
-    private static final int[] residueSlotIDs = new int[] { 0 };
+    private static final int[] rawSlotIDs = new int[]{0, 1};
+    private static final int[] residueSlotIDs = new int[]{0};
     private final BrewKettle brewKettle = new BrewKettle(this, 0, 1, 0, 1);
 
     @Override
     protected FluidTank[] createTanks() {
         final int maxCap = GrowthCraftCellar.getConfig().brewKettleMaxCap;
-        return new FluidTank[] { new CellarTank(maxCap, this), new CellarTank(maxCap, this) };
+        return new FluidTank[]{new CellarTank(maxCap, this), new CellarTank(maxCap, this)};
     }
 
     @Override
@@ -172,9 +171,9 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
         iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME.ordinal(), (int) brewKettle.getTime());
         iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME_MAX.ordinal(), (int) brewKettle.getTimeMax());
         iCrafting.sendProgressBarUpdate(
-            container,
-            BrewKettleDataID.HEAT_AMOUNT.ordinal(),
-            (int) (brewKettle.getHeatMultiplier() * 0x7FFF));
+                container,
+                BrewKettleDataID.HEAT_AMOUNT.ordinal(),
+                (int) (brewKettle.getHeatMultiplier() * 0x7FFF));
     }
 
     @Override
@@ -200,18 +199,18 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
         FluidStack f1 = null;
         if (this.getFluidStack(0) != null) {
             f0 = this.getFluidStack(0)
-                .copy();
+                    .copy();
         }
         if (this.getFluidStack(1) != null) {
             f1 = this.getFluidStack(1)
-                .copy();
+                    .copy();
         }
         this.clearTank(0);
         this.clearTank(1);
         this.getFluidTank(0)
-            .fill(f1, true);
+                .fill(f1, true);
         this.getFluidTank(1)
-            .fill(f0, true);
+                .fill(f0, true);
         markForUpdate();
     }
 
@@ -222,7 +221,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
         HEAT_AMOUNT,
         UNKNOWN;
 
-        public static final BrewKettleDataID[] VALUES = new BrewKettleDataID[] { TIME, TIME_MAX, HEAT_AMOUNT };
+        public static final BrewKettleDataID[] VALUES = new BrewKettleDataID[]{TIME, TIME_MAX, HEAT_AMOUNT};
 
         public static BrewKettleDataID getByOrdinal(int ord) {
             if (ord >= 0 && ord < VALUES.length) return VALUES[ord];

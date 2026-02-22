@@ -1,8 +1,7 @@
 package growthcraft.grapes;
 
-import net.minecraft.util.MathHelper;
-
 import growthcraft.core.ConfigBase;
+import net.minecraft.util.MathHelper;
 
 public class GrcGrapesConfig extends ConfigBase {
 
@@ -22,15 +21,15 @@ public class GrcGrapesConfig extends ConfigBase {
     public int grapeVineSupportedLength = 3;
 
     @ConfigOption(
-        catergory = "Drops",
-        name = "Grapes drop Minimum",
-        desc = "Minimum number of grapes to drop when a grape block is broken")
+            catergory = "Drops",
+            name = "Grapes drop Minimum",
+            desc = "Minimum number of grapes to drop when a grape block is broken")
     public int grapesDropMin = 1;
 
     @ConfigOption(
-        catergory = "Drops",
-        name = "Grapes drop Maximum",
-        desc = "Maximum number of grapes to drop when a grape block is broken")
+            catergory = "Drops",
+            name = "Grapes drop Maximum",
+            desc = "Maximum number of grapes to drop when a grape block is broken")
     public int grapesDropMax = 2;
 
     @ConfigOption(catergory = "Drops", name = "Bayanus Yeast rarity", desc = "[Higher -> Rarer]")
@@ -55,33 +54,33 @@ public class GrcGrapesConfig extends ConfigBase {
     public int portWineBrewingYield = 40;
 
     @ConfigOption(
-        catergory = "Villager",
-        name = "Enabled",
-        desc = "Should we register Village Generation, and Villager Trades?")
+            catergory = "Villager",
+            name = "Enabled",
+            desc = "Should we register Village Generation, and Villager Trades?")
     public boolean enableVillageGen = true;
 
     @ConfigOption(
-        catergory = "Village",
-        name = "Generate Village Grape Vineyards",
-        desc = "Controls hop vineyards spawning in villages")
+            catergory = "Village",
+            name = "Generate Village Grape Vineyards",
+            desc = "Controls hop vineyards spawning in villages")
     public boolean generateGrapeVineyardStructure = true;
 
     @ConfigOption(
-        catergory = "Integration",
-        name = "Enable Forestry Integration",
-        desc = "Should we integrate with Forestry (if available)?")
+            catergory = "Integration",
+            name = "Enable Forestry Integration",
+            desc = "Should we integrate with Forestry (if available)?")
     public boolean enableForestryIntegration = true;
 
     @ConfigOption(
-        catergory = "Integration",
-        name = "Enable MFR Integration",
-        desc = "Should we integrate with Mine Factory Reloaded (if available)?")
+            catergory = "Integration",
+            name = "Enable MFR Integration",
+            desc = "Should we integrate with Mine Factory Reloaded (if available)?")
     public boolean enableMFRIntegration = true;
 
     @ConfigOption(
-        catergory = "Integration",
-        name = "Enable Thaumcraft Integration",
-        desc = "Should we integrate with Thaumcraft (if available)?")
+            catergory = "Integration",
+            name = "Enable Thaumcraft Integration",
+            desc = "Should we integrate with Thaumcraft (if available)?")
     public boolean enableThaumcraftIntegration = true;
 
     @Override

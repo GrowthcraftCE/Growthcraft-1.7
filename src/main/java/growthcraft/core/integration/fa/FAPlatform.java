@@ -25,7 +25,8 @@ public class FAPlatform {
 
     public static final String MOD_ID = "fossil";
 
-    private FAPlatform() {}
+    private FAPlatform() {
+    }
 
     public static boolean isLoaded() {
         return Loader.isModLoaded(MOD_ID);

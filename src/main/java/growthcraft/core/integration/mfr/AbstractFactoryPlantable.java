@@ -23,7 +23,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
 import powercrystals.minefactoryreloaded.api.IFactoryPlantable;
 import powercrystals.minefactoryreloaded.api.ReplacementBlock;
 
@@ -60,8 +59,10 @@ public abstract class AbstractFactoryPlantable<T extends Block> implements IFact
     }
 
     @Override
-    public void prePlant(World world, int x, int y, int z, ItemStack stack) {}
+    public void prePlant(World world, int x, int y, int z, ItemStack stack) {
+    }
 
     @Override
-    public void postPlant(World world, int x, int y, int z, ItemStack stack) {}
+    public void postPlant(World world, int x, int y, int z, ItemStack stack) {
+    }
 }

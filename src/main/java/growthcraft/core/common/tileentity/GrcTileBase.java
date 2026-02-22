@@ -19,16 +19,6 @@
  */
 package growthcraft.core.common.tileentity;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
-
 import growthcraft.api.core.nbt.INBTSerializable;
 import growthcraft.api.core.stream.IStreamable;
 import growthcraft.core.common.tileentity.event.TileEventFunction;
@@ -36,6 +26,14 @@ import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.event.TileEventHandlerMap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * Extend this base class if you just need a Base tile with the event system.
@@ -121,9 +119,11 @@ public abstract class GrcTileBase extends TileEntity implements IStreamable, INB
         }
     }
 
-    public void readFromNBTForItem(NBTTagCompound tag) {}
+    public void readFromNBTForItem(NBTTagCompound tag) {
+    }
 
-    public void writeToNBTForItem(NBTTagCompound tag) {}
+    public void writeToNBTForItem(NBTTagCompound tag) {
+    }
 
     @Override
     public final void readFromNBT(NBTTagCompound nbt) {

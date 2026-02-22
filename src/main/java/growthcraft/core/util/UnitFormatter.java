@@ -19,21 +19,18 @@
  */
 package growthcraft.core.util;
 
-import java.util.Collection;
-
-import javax.annotation.Nullable;
-
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-
 import com.google.common.base.Joiner;
-
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.fluids.FluidTag;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.core.GrowthCraftCore;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nullable;
+import java.util.Collection;
 
 /**
  * Utility class for formatting data into strings for descriptions, item names
@@ -43,11 +40,12 @@ public class UnitFormatter {
 
     public static final String fractionSeparator = EnumChatFormatting.GRAY + " / ";
 
-    private UnitFormatter() {}
+    private UnitFormatter() {
+    }
 
     public static String fraction(String... args) {
         return Joiner.on(fractionSeparator)
-            .join(args);
+                .join(args);
     }
 
     public static String fractionNum(int a, int b) {
@@ -70,8 +68,8 @@ public class UnitFormatter {
         // if there is not a modifier defined, create one by joining the tag names
         if (modifierSrc.equals(modifierString)) {
             final Collection<FluidTag> tags = CoreRegistry.instance()
-                .fluidDictionary()
-                .getFluidTags(fluid);
+                    .fluidDictionary()
+                    .getFluidTags(fluid);
             if (tags == null || tags.size() == 0) return null;
             String str = "";
             for (FluidTag tag : tags) {
@@ -97,12 +95,12 @@ public class UnitFormatter {
 
             if (modifier != null) {
                 return GrcI18n.translate(
-                    "grc.format.booze.name",
-                    EnumChatFormatting.WHITE + fluidStack.getLocalizedName(),
-                    modifier);
+                        "grc.format.booze.name",
+                        EnumChatFormatting.WHITE + fluidStack.getLocalizedName(),
+                        modifier);
             } else {
                 return GrcI18n
-                    .translate("grc.format.fluid.name", EnumChatFormatting.WHITE + fluidStack.getLocalizedName());
+                        .translate("grc.format.fluid.name", EnumChatFormatting.WHITE + fluidStack.getLocalizedName());
             }
         }
         return null;

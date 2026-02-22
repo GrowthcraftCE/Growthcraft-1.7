@@ -1,16 +1,15 @@
 package growthcraft.bees.client.renderer;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.bees.common.block.BlockBeeBox;
+import growthcraft.core.util.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.bees.common.block.BlockBeeBox;
-import growthcraft.core.util.RenderUtils;
 
 public class RenderBeeBox implements ISimpleBlockRenderingHandler {
 
@@ -22,9 +21,9 @@ public class RenderBeeBox implements ISimpleBlockRenderingHandler {
             final Tessellator tes = Tessellator.instance;
             final int offset = MathHelper.clamp_int(metadata, 0, 5) * 4;
             final BlockBeeBox beeBox = (BlockBeeBox) block;
-            final IIcon[] icons = { beeBox.getIcon(0, metadata), beeBox.getIcon(1, metadata),
-                beeBox.getIcon(2, metadata), beeBox.getIcon(3, metadata), beeBox.getIcon(4, metadata),
-                beeBox.getIcon(5, metadata) };
+            final IIcon[] icons = {beeBox.getIcon(0, metadata), beeBox.getIcon(1, metadata),
+                    beeBox.getIcon(2, metadata), beeBox.getIcon(3, metadata), beeBox.getIcon(4, metadata),
+                    beeBox.getIcon(5, metadata)};
             final double d = 0.0625D;
             // LEGS
             renderer.setRenderBounds(3 * d, 0.0D, 3 * d, 5 * d, 3 * d, 5 * d);
@@ -48,7 +47,7 @@ public class RenderBeeBox implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == id) {
             final double d = 0.0625D;
             // LEGS

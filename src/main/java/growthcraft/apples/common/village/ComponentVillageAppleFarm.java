@@ -1,9 +1,9 @@
 package growthcraft.apples.common.village;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-
+import growthcraft.apples.common.world.WorldGenAppleTree;
+import growthcraft.core.util.SchemaToVillage;
+import growthcraft.core.util.SchemaToVillage.BlockEntry;
+import growthcraft.core.util.SchemaToVillage.IBlockEntries;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -13,37 +13,37 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 
-import growthcraft.apples.common.world.WorldGenAppleTree;
-import growthcraft.core.util.SchemaToVillage;
-import growthcraft.core.util.SchemaToVillage.BlockEntry;
-import growthcraft.core.util.SchemaToVillage.IBlockEntries;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 public class ComponentVillageAppleFarm extends StructureVillagePieces.Village implements SchemaToVillage.IVillage {
 
     // Design by Ar97x
     private static final String[][] appleFarmSchema = {
-        { "x---x x---x", "|         |", "|         |", "|         |", "|         |", "|         |", "|         |",
-            "|         |", "|         |", "|         |", "x---------x" },
-        { "fffffgfffff", "f         f", "f         f", "f         f", "f         f", "f         f", "f         f",
-            "f         f", "f         f", "f         f", "fffffffffff" },
-        { "t   t t   t", "           ", "           ", "           ", "           ", "           ", "           ",
-            "           ", "           ", "           ", "t         t" }, };
+            {"x---x x---x", "|         |", "|         |", "|         |", "|         |", "|         |", "|         |",
+                    "|         |", "|         |", "|         |", "x---------x"},
+            {"fffffgfffff", "f         f", "f         f", "f         f", "f         f", "f         f", "f         f",
+                    "f         f", "f         f", "f         f", "fffffffffff"},
+            {"t   t t   t", "           ", "           ", "           ", "           ", "           ", "           ",
+                    "           ", "           ", "           ", "t         t"},};
 
     // DO NOT REMOVE
-    public ComponentVillageAppleFarm() {}
+    public ComponentVillageAppleFarm() {
+    }
 
     public ComponentVillageAppleFarm(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox,
-        int coordBaseMode) {
+                                     int coordBaseMode) {
         super(startPiece, par2);
         this.coordBaseMode = coordBaseMode;
         this.boundingBox = boundingBox;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public static ComponentVillageAppleFarm buildComponent(Start startPiece, List list, Random random, int x, int y,
-        int z, int coordBaseMode, int par7) {
+                                                           int z, int coordBaseMode, int par7) {
         final StructureBoundingBox structureboundingbox = StructureBoundingBox
-            .getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 11, 11, coordBaseMode);
+                .getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 11, 11, coordBaseMode);
         if (canVillageGoDeeper(structureboundingbox)) {
             if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
                 return new ComponentVillageAppleFarm(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -53,12 +53,12 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
     }
 
     public void placeBlockAtCurrentPositionPub(World world, Block block, int meta, int x, int y, int z,
-        StructureBoundingBox box) {
+                                               StructureBoundingBox box) {
         placeBlockAtCurrentPosition(world, block, meta, x, y, z, box);
     }
 
     protected void placeWorldGenAt(World world, Random random, int tx, int ty, int tz, StructureBoundingBox bb,
-        WorldGenerator generator) {
+                                   WorldGenerator generator) {
         final int x = this.getXWithOffset(tx, tz);
         final int y = this.getYWithOffset(ty);
         final int z = this.getZWithOffset(tx, tz);

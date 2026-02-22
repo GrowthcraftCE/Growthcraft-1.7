@@ -19,21 +19,19 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.description.Describer;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.nbt.NBTHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.description.Describer;
-import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.api.core.nbt.NBTHelper;
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A variation of the EffectRandomList, this version uses weights instead
@@ -230,8 +228,8 @@ public class EffectWeightedRandomList extends AbstractEffect {
             this.itemWeight = data.getInteger("item_weight");
             if (data.hasKey("effect")) {
                 this.effect = CoreRegistry.instance()
-                    .getEffectsRegistry()
-                    .loadEffectFromNBT(data, "effect");
+                        .getEffectsRegistry()
+                        .loadEffectFromNBT(data, "effect");
             }
         }
 
@@ -256,8 +254,8 @@ public class EffectWeightedRandomList extends AbstractEffect {
         public void writeToNBT(NBTTagCompound data, String name) {
             final NBTTagCompound target = new NBTTagCompound();
             final String effectName = CoreRegistry.instance()
-                .getEffectsRegistry()
-                .getName(this.getClass());
+                    .getEffectsRegistry()
+                    .getName(this.getClass());
             // This is a VERY important field, this is how the effects will reload their correct class.
             target.setString("__name__", effectName);
             writeToNBT(target);

@@ -27,10 +27,10 @@
 
 package growthcraft.api.core.util;
 
+import net.minecraft.util.StatCollector;
+
 import java.util.Arrays;
 import java.util.List;
-
-import net.minecraft.util.StatCollector;
 
 /**
  * Pretty much stolen from Applied Energistics 2, thanks AlgorithmX2.
@@ -56,40 +56,40 @@ public enum GrcColorPreset {
     Transparent("grc.color.Transparent", 0x1B2344, 0x895CA8, 0xD7BBEC);
 
     public static final List<GrcColorPreset> ALL_COLORS = Arrays.asList(
-        White,
-        Orange,
-        Magenta,
-        LightBlue,
-        Yellow,
-        Lime,
-        Pink,
-        Gray,
-        LightGray,
-        Cyan,
-        Purple,
-        Blue,
-        Brown,
-        Green,
-        Red,
-        Black,
-        Transparent);
+            White,
+            Orange,
+            Magenta,
+            LightBlue,
+            Yellow,
+            Lime,
+            Pink,
+            Gray,
+            LightGray,
+            Cyan,
+            Purple,
+            Blue,
+            Brown,
+            Green,
+            Red,
+            Black,
+            Transparent);
     public static final List<GrcColorPreset> VALID_COLORS = Arrays.asList(
-        White,
-        Orange,
-        Magenta,
-        LightBlue,
-        Yellow,
-        Lime,
-        Pink,
-        Gray,
-        LightGray,
-        Cyan,
-        Purple,
-        Blue,
-        Brown,
-        Green,
-        Red,
-        Black);
+            White,
+            Orange,
+            Magenta,
+            LightBlue,
+            Yellow,
+            Lime,
+            Pink,
+            Gray,
+            LightGray,
+            Cyan,
+            Purple,
+            Blue,
+            Brown,
+            Green,
+            Red,
+            Black);
 
     /**
      * Unlocalized name for color.
@@ -128,7 +128,7 @@ public enum GrcColorPreset {
 
     /**
      * Logic to see which colours match each other.. special handle for Transparent
-     * 
+     *
      * @param colour - colour to check
      * @return true if either colour is transparent, or if the colours are equal
      */

@@ -19,9 +19,9 @@
  */
 package growthcraft.api.core.item;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class CommonItemStackComparator implements IItemStackComparator {
 
@@ -32,6 +32,6 @@ public class CommonItemStackComparator implements IItemStackComparator {
      */
     public boolean equals(@Nonnull ItemStack expected, @Nonnull ItemStack actual) {
         return actual.getItem() == expected.getItem() && (expected.getItemDamage() == ItemKey.WILDCARD_VALUE
-            || actual.getItemDamage() == expected.getItemDamage());
+                || actual.getItemDamage() == expected.getItemDamage());
     }
 }

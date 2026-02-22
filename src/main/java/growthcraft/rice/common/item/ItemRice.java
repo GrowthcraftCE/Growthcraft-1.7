@@ -1,17 +1,16 @@
 package growthcraft.rice.common.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.common.item.GrcItemBase;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.util.RiceBlockCheck;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ItemRice extends GrcItemBase {
 
@@ -26,15 +25,15 @@ public class ItemRice extends GrcItemBase {
      ************/
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir,
-        float par8, float par9, float par10) {
+                             float par8, float par9, float par10) {
         if (dir != 1) {
             return false;
         } else if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack)) {
             final Block soil = world.getBlock(x, y, z);
 
             if (soil != null && RiceBlockCheck.isPaddy(soil)
-                && world.isAirBlock(x, y + 1, z)
-                && world.getBlockMetadata(x, y, z) > 0) {
+                    && world.isAirBlock(x, y + 1, z)
+                    && world.getBlockMetadata(x, y, z) > 0) {
                 world.setBlock(x, y + 1, z, GrowthCraftRice.blocks.riceBlock.getBlock());
                 --stack.stackSize;
                 return true;

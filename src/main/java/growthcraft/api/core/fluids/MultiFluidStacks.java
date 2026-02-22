@@ -19,18 +19,16 @@
  */
 package growthcraft.api.core.fluids;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.definition.IMultiFluidStacks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.definition.IMultiFluidStacks;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MultiFluidStacks implements IMultiFluidStacks {
 
@@ -89,7 +87,7 @@ public class MultiFluidStacks implements IMultiFluidStacks {
     }
 
     @Override
-    public List<ItemStack> getItemStacks() {
+    public List<ItemStack> itemStacks() {
         if (fluidContainers == null) {
             fluidContainers = FluidUtils.getFluidContainers(getFluidStacks());
         }

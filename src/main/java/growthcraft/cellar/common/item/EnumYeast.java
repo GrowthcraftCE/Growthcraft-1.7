@@ -19,10 +19,9 @@
  */
 package growthcraft.cellar.common.item;
 
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.cellar.GrowthCraftCellar;
+import net.minecraft.item.ItemStack;
 
 public enum EnumYeast implements IItemStackFactory {
 

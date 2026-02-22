@@ -19,13 +19,12 @@
  */
 package growthcraft.api.core.fluids.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import growthcraft.api.core.schema.ICommentable;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import growthcraft.api.core.schema.ICommentable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserFluidDictionaryEntry implements ICommentable {
 

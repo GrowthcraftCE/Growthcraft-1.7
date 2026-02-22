@@ -19,9 +19,6 @@
  */
 package growthcraft.cellar.common.tileentity.device;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.brewing.BrewingRecipe;
 import growthcraft.api.cellar.common.Residue;
@@ -34,20 +31,22 @@ import growthcraft.core.common.tileentity.device.DeviceBase;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.FluidStack;
 
 public class BrewKettle extends DeviceBase {
 
-    private float grain;
-    private double time;
-    private double timeMax;
     private final DeviceInventorySlot brewingSlot;
     private final DeviceInventorySlot residueSlot;
     private final DeviceFluidSlot inputFluidSlot;
     private final DeviceFluidSlot outputFluidSlot;
     private final TileHeatingComponent heatComponent;
+    private float grain;
+    private double time;
+    private double timeMax;
 
     public BrewKettle(TileEntityCellarDevice te, int brewSlotId, int residueSlotId, int inputFluidSlotId,
-        int outputFluidSlotId) {
+                      int outputFluidSlotId) {
         super(te);
         this.brewingSlot = new DeviceInventorySlot(te, brewSlotId);
         this.residueSlot = new DeviceInventorySlot(te, residueSlotId);
@@ -108,8 +107,8 @@ public class BrewKettle extends DeviceBase {
 
     private BrewingRecipe findRecipe() {
         return CellarRegistry.instance()
-            .brewing()
-            .findRecipe(inputFluidSlot.get(), brewingSlot.get());
+                .brewing()
+                .findRecipe(inputFluidSlot.get(), brewingSlot.get());
     }
 
     public BrewingRecipe getWorkingRecipe() {

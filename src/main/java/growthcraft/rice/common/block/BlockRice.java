@@ -1,19 +1,5 @@
 package growthcraft.rice.common.block;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -25,6 +11,19 @@ import growthcraft.core.integration.AppleCore;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.client.renderer.RenderRice;
 import growthcraft.rice.util.RiceBlockCheck;
+import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BlockRice extends GrcBlockBase implements IPaddyCrop, ICropDataProvider, IGrowable {
 
@@ -179,7 +178,7 @@ public class BlockRice extends GrcBlockBase implements IPaddyCrop, ICropDataProv
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z))
-            && this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
+                && this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
     }
 
     /************
@@ -313,6 +312,7 @@ public class BlockRice extends GrcBlockBase implements IPaddyCrop, ICropDataProv
 
         public static final int MATURE = 7;
 
-        private RiceStage() {}
+        private RiceStage() {
+        }
     }
 }

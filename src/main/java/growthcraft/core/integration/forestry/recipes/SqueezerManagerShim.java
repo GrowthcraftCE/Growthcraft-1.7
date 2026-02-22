@@ -19,25 +19,27 @@
  */
 package growthcraft.core.integration.forestry.recipes;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import cpw.mods.fml.common.Optional;
 import forestry.api.recipes.ISqueezerManager;
 import forestry.api.recipes.ISqueezerRecipe;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nullable;
 
 @Optional.Interface(iface = "forestry.api.recipes.ISqueezerManager", modid = "ForestryAPI|recipes")
 public class SqueezerManagerShim extends AbstractManagerShim<ISqueezerRecipe> implements ISqueezerManager {
 
     @Override
-    public void addRecipe(int timePerItem, ItemStack[] resources, FluidStack liquid, ItemStack remnants, int chance) {}
+    public void addRecipe(int timePerItem, ItemStack[] resources, FluidStack liquid, ItemStack remnants, int chance) {
+    }
 
     @Override
-    public void addRecipe(int timePerItem, ItemStack[] resources, FluidStack liquid) {}
+    public void addRecipe(int timePerItem, ItemStack[] resources, FluidStack liquid) {
+    }
 
     @Override
     public void addContainerRecipe(int timePerItem, ItemStack emptyContainer, @Nullable ItemStack remnants,
-        float chance) {}
+                                   float chance) {
+    }
 }

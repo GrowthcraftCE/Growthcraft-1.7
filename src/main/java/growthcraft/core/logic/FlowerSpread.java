@@ -19,15 +19,13 @@
  */
 package growthcraft.core.logic;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.CuboidI;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.api.core.util.CuboidI;
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class FlowerSpread {
 

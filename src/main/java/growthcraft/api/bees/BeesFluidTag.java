@@ -25,11 +25,12 @@ import growthcraft.api.core.fluids.FluidTag;
 public class BeesFluidTag {
 
     public static final FluidTag MEAD = CoreRegistry.instance()
-        .fluidTags()
-        .createTag("mead");
+            .fluidTags()
+            .createTag("mead");
     public static final FluidTag HONEY = CoreRegistry.instance()
-        .fluidTags()
-        .createTag("honey");
+            .fluidTags()
+            .createTag("honey");
 
-    private BeesFluidTag() {}
+    private BeesFluidTag() {
+    }
 }

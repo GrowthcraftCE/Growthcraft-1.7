@@ -1,9 +1,17 @@
 package growthcraft.hops.common.block;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.common.block.GrcBlockBase;
+import growthcraft.core.common.block.IBlockRope;
+import growthcraft.core.common.block.ICropDataProvider;
+import growthcraft.core.integration.AppleCore;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.hops.GrowthCraftHops;
+import growthcraft.hops.client.renderer.RenderHops;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -22,18 +30,9 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.common.block.GrcBlockBase;
-import growthcraft.core.common.block.IBlockRope;
-import growthcraft.core.common.block.ICropDataProvider;
-import growthcraft.core.integration.AppleCore;
-import growthcraft.core.util.BlockCheck;
-import growthcraft.hops.GrowthCraftHops;
-import growthcraft.hops.client.renderer.RenderHops;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, ICropDataProvider, IGrowable {
 
@@ -92,17 +91,17 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 
             if (meta < HopsStage.BIG) {
                 if (allowGrowthResult == Event.Result.ALLOW
-                    || (random.nextInt((int) (this.hopVineGrowthRate / f) + 1) == 0)) {
+                        || (random.nextInt((int) (this.hopVineGrowthRate / f) + 1) == 0)) {
                     incrementGrowth(world, x, y, z, meta);
                 }
             } else if ((meta >= HopsStage.BIG) && canSpreadLeaves(world, x, y, z)) {
                 if (allowGrowthResult == Event.Result.ALLOW
-                    || (random.nextInt((int) (this.hopVineGrowthRate / f) + 1) == 0)) {
+                        || (random.nextInt((int) (this.hopVineGrowthRate / f) + 1) == 0)) {
                     spreadLeaves(world, x, y, z);
                 }
             } else {
                 if (allowGrowthResult == Event.Result.ALLOW
-                    || (random.nextInt((int) (this.hopVineFlowerSpawnRate / f) + 1) == 0)) {
+                        || (random.nextInt((int) (this.hopVineFlowerSpawnRate / f) + 1) == 0)) {
                     incrementGrowth(world, x, y, z, meta);
                 }
             }
@@ -204,7 +203,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
      ************/
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7,
-        float par8, float par9) {
+                                    float par8, float par9) {
         if (world.getBlockMetadata(x, y, z) >= HopsStage.FRUIT) {
             if (!world.isRemote) {
                 removeFruit(world, x, y, z);
@@ -242,8 +241,8 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 
     private boolean isVineRoot(World world, int x, int y, int z) {
         return world.getBlock(x, y, z) == this
-            && BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this)
-            && world.getBlockMetadata(x, y, z) >= HopsStage.BIG;
+                && BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this)
+                && world.getBlockMetadata(x, y, z) >= HopsStage.BIG;
     }
 
     /************
@@ -372,7 +371,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
         for (int l1 = -1; l1 <= 1; ++l1) {
             for (int i2 = -1; i2 <= 1; ++i2) {
                 final int j2 = world.getBiomeGenForCoords(x + i2, z + l1)
-                    .getBiomeFoliageColor(x + i2, y, z + l1);
+                        .getBiomeFoliageColor(x + i2, y, z + l1);
                 r += (j2 & 16711680) >> 16;
                 g += (j2 & 65280) >> 8;
                 b += j2 & 255;
@@ -386,9 +385,9 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
      * BOXES
      ************/
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list,
-        Entity entity) {
+                                        Entity entity) {
         final boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
         final boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
         final boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
@@ -493,6 +492,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
         public static final int BIG = 2;
         public static final int FRUIT = 3;
 
-        private HopsStage() {}
+        private HopsStage() {
+        }
     }
 }

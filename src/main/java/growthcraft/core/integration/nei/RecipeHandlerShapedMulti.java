@@ -1,16 +1,5 @@
 package growthcraft.core.integration.nei;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiCrafting;
-import net.minecraft.inventory.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
-
 import codechicken.core.ReflectionManager;
 import codechicken.nei.NEIClientConfig;
 import codechicken.nei.NEIClientUtils;
@@ -24,6 +13,16 @@ import codechicken.nei.recipe.RecipeInfo;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import growthcraft.api.core.definition.IItemStackListProvider;
 import growthcraft.api.core.item.recipes.ShapedMultiRecipe;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiCrafting;
+import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeHandlerShapedMulti extends TemplateRecipeHandler {
 
@@ -47,7 +46,7 @@ public class RecipeHandlerShapedMulti extends TemplateRecipeHandler {
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals("crafting") && getClass() == RecipeHandlerShapedMulti.class) {
             for (IRecipe irecipe : CraftingManager.getInstance()
-                .getRecipeList()) {
+                    .getRecipeList()) {
                 CachedShapedRecipe recipe = null;
                 if (irecipe instanceof ShapedMultiRecipe) recipe = forgeShapedRecipe((ShapedMultiRecipe) irecipe);
 
@@ -65,7 +64,7 @@ public class RecipeHandlerShapedMulti extends TemplateRecipeHandler {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (IRecipe irecipe : CraftingManager.getInstance()
-            .getRecipeList()) {
+                .getRecipeList()) {
             if (NEIServerUtils.areStacksSameTypeCrafting(irecipe.getRecipeOutput(), result)) {
                 CachedShapedRecipe recipe = null;
                 if (irecipe instanceof ShapedMultiRecipe) recipe = forgeShapedRecipe((ShapedMultiRecipe) irecipe);
@@ -82,7 +81,7 @@ public class RecipeHandlerShapedMulti extends TemplateRecipeHandler {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         for (IRecipe irecipe : CraftingManager.getInstance()
-            .getRecipeList()) {
+                .getRecipeList()) {
             CachedShapedRecipe recipe = null;
             if (irecipe instanceof ShapedMultiRecipe) recipe = forgeShapedRecipe((ShapedMultiRecipe) irecipe);
 
@@ -110,7 +109,7 @@ public class RecipeHandlerShapedMulti extends TemplateRecipeHandler {
         final ArrayList<Object> items = new ArrayList<Object>();
 
         for (IItemStackListProvider item : recipe.getInput()) {
-            final List<ItemStack> stacks = item.getItemStacks();
+            final List<ItemStack> stacks = item.itemStacks();
 
             if (stacks.isEmpty()) return null;
 
@@ -132,7 +131,7 @@ public class RecipeHandlerShapedMulti extends TemplateRecipeHandler {
 
     public boolean hasOverlay(GuiContainer gui, Container container, int recipe) {
         return super.hasOverlay(gui, container, recipe)
-            || isRecipe2x2(recipe) && RecipeInfo.hasDefaultOverlay(gui, "crafting2x2");
+                || isRecipe2x2(recipe) && RecipeInfo.hasDefaultOverlay(gui, "crafting2x2");
     }
 
     @Override
@@ -181,10 +180,10 @@ public class RecipeHandlerShapedMulti extends TemplateRecipeHandler {
                     if (items.get(y * width + x) == null) continue;
 
                     final PositionedStack stack = new PositionedStack(
-                        items.get(y * width + x),
-                        25 + x * 18,
-                        6 + y * 18,
-                        false);
+                            items.get(y * width + x),
+                            25 + x * 18,
+                            6 + y * 18,
+                            false);
                     stack.setMaxSize(1);
                     ingredients.add(stack);
                 }

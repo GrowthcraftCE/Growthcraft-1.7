@@ -19,16 +19,14 @@
  */
 package growthcraft.api.cellar.brewing;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.cellar.common.Residue;
+import growthcraft.api.core.log.ILoggable;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.cellar.common.Residue;
-import growthcraft.api.core.log.ILoggable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public interface IBrewingRegistry extends ILoggable {
 
@@ -47,7 +45,7 @@ public interface IBrewingRegistry extends ILoggable {
      * @param residue     - The residue that will be produced
      */
     void addRecipe(@Nonnull FluidStack sourceFluid, @Nonnull Object raw, @Nonnull FluidStack resultFluid, int time,
-        @Nullable Residue residue);
+                   @Nullable Residue residue);
 
     /**
      * Get an existing recipe given the ingredients

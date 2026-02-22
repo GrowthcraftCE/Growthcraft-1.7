@@ -19,7 +19,8 @@ public class Utils {
     // action
     public static final int DRAIN_CAP = 1000;
 
-    private Utils() {}
+    private Utils() {
+    }
 
     public static void debug(String msg) {
         final boolean flag = true;
@@ -44,7 +45,8 @@ public class Utils {
     public static int parseInt(String string, int defaultValue) {
         try {
             return Integer.parseInt(string.trim());
-        } catch (NumberFormatException ex) {}
+        } catch (NumberFormatException ex) {
+        }
         return defaultValue;
     }
 
@@ -61,7 +63,7 @@ public class Utils {
             j = MathHelper.floor_float((float) amount * exp);
 
             if (j < MathHelper.ceiling_float_int((float) amount * exp)
-                && (float) Math.random() < (float) amount * exp - (float) j) {
+                    && (float) Math.random() < (float) amount * exp - (float) j) {
                 ++j;
             }
 
@@ -72,12 +74,12 @@ public class Utils {
             j = EntityXPOrb.getXPSplit(amount);
             amount -= j;
             player.worldObj.spawnEntityInWorld(
-                new EntityXPOrb(player.worldObj, player.posX, player.posY + 0.5D, player.posZ + 0.5D, j));
+                    new EntityXPOrb(player.worldObj, player.posX, player.posY + 0.5D, player.posZ + 0.5D, j));
         }
     }
 
     public static boolean playerFillTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held,
-        EntityPlayer player) {
+                                         EntityPlayer player) {
         if (held == null) return false;
 
         final ForgeDirection direction = ForgeDirection.UNKNOWN;
@@ -110,12 +112,12 @@ public class Utils {
                         // WARN about invalid container item
                     } else {
                         world.spawnEntityInWorld(
-                            new EntityItem(
-                                world,
-                                (double) x + 0.5D,
-                                (double) y + 1.5D,
-                                (double) z + 0.5D,
-                                containerItem));
+                                new EntityItem(
+                                        world,
+                                        (double) x + 0.5D,
+                                        (double) y + 1.5D,
+                                        (double) z + 0.5D,
+                                        containerItem));
                     }
                 } else if (player instanceof EntityPlayerMP) {
                     ((EntityPlayerMP) player).sendContainerToPlayer(player.inventoryContainer);
@@ -132,7 +134,7 @@ public class Utils {
     }
 
     public static FluidStack playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held,
-        EntityPlayer player, boolean expbool, int amount, float exp) {
+                                             EntityPlayer player, boolean expbool, int amount, float exp) {
         if (held == null) return null;
 
         final ForgeDirection direction = ForgeDirection.UNKNOWN;
@@ -155,7 +157,7 @@ public class Utils {
 
             if (!player.inventory.addItemStackToInventory(filled)) {
                 world.spawnEntityInWorld(
-                    new EntityItem(world, (double) x + 0.5D, (double) y + 1.5D, (double) z + 0.5D, filled));
+                        new EntityItem(world, (double) x + 0.5D, (double) y + 1.5D, (double) z + 0.5D, filled));
             } else if (player instanceof EntityPlayerMP) {
                 ((EntityPlayerMP) player).sendContainerToPlayer(player.inventoryContainer);
             }
@@ -175,7 +177,7 @@ public class Utils {
     }
 
     public static FluidStack playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held,
-        EntityPlayer player) {
+                                             EntityPlayer player) {
         return playerDrainTank(world, x, y, z, tank, held, player, false, 0, 0);
     }
 }

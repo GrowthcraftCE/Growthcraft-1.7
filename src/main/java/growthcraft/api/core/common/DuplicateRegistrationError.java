@@ -30,7 +30,8 @@ public class DuplicateRegistrationError extends RuntimeException {
         super(msg);
     }
 
-    public DuplicateRegistrationError() {}
+    public DuplicateRegistrationError() {
+    }
 
     /**
      * Helper method for creating frozen errors for a specified object.

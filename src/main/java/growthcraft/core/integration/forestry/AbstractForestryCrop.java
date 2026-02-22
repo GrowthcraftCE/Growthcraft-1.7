@@ -15,16 +15,15 @@
  */
 package growthcraft.core.integration.forestry;
 
-import java.util.Collection;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
 import cpw.mods.fml.common.Optional;
 import forestry.api.farming.ICrop;
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.api.core.util.Point3;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
+import java.util.Collection;
 
 /**
  * This is a copy of Forestry's Crop implementation, modified for Growthcraft

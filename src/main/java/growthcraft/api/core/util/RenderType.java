@@ -68,5 +68,6 @@ public class RenderType {
     public static final int DOUBLE_PLANT = 40;
     public static final int GLASS_PANE = 41;
 
-    private RenderType() {}
+    private RenderType() {
+    }
 }

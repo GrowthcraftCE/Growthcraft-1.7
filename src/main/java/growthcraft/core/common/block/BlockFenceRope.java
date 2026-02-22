@@ -1,9 +1,11 @@
 package growthcraft.core.common.block;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.BlockKey;
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.client.renderer.RenderFenceRope;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -15,24 +17,20 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.api.core.util.BlockKey;
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.client.renderer.RenderFenceRope;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class BlockFenceRope extends GrcBlockBase implements IBlockRope {
 
+    private final BlockKey fenceBlockKey;
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
 
-    private final BlockKey fenceBlockKey;
-
     public BlockFenceRope(BlockKey srcKey, String name) {
         super(
-            srcKey.getBlock()
-                .getMaterial());
+                srcKey.getBlock()
+                        .getMaterial());
         this.fenceBlockKey = srcKey;
         setStepSound(soundTypeWood);
         setBlockName(name);
@@ -63,10 +61,10 @@ public class BlockFenceRope extends GrcBlockBase implements IBlockRope {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7,
-        float par8, float par9) {
+                                    float par8, float par9) {
         if (player.inventory.getCurrentItem() != null && GrowthCraftCore.items.rope.equals(
-            player.inventory.getCurrentItem()
-                .getItem())) {
+                player.inventory.getCurrentItem()
+                        .getItem())) {
             return false;
         } else {
             if (!world.isRemote) {
@@ -137,9 +135,9 @@ public class BlockFenceRope extends GrcBlockBase implements IBlockRope {
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list,
-        Entity entity) {
+                                        Entity entity) {
         final boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
         final boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
         final boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);

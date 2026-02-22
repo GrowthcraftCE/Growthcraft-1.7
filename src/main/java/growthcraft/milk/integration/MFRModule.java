@@ -31,5 +31,6 @@ public class MFRModule extends MFRModuleBase {
 
     @Override
     @Optional.Method(modid = MFRModuleBase.MOD_ID)
-    protected void integrate() {}
+    protected void integrate() {
+    }
 }

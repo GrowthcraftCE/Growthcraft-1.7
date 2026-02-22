@@ -28,7 +28,8 @@ import thaumcraft.api.aspects.AspectList;
  */
 public class AspectsHelper {
 
-    private AspectsHelper() {}
+    private AspectsHelper() {
+    }
 
     /**
      * @param list    - Target AspectList

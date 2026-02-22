@@ -1,11 +1,10 @@
 package growthcraft.cellar.common.item;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.core.common.item.GrcItemBase;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 
 public class ItemChievDummy extends GrcItemBase {
 

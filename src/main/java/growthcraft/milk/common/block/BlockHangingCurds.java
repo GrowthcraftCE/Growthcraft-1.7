@@ -19,9 +19,17 @@
  */
 package growthcraft.milk.common.block;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BBox;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.RenderType;
+import growthcraft.core.common.block.GrcBlockContainer;
+import growthcraft.core.util.BlockCheck;
+import growthcraft.milk.GrowthCraftMilk;
+import growthcraft.milk.common.item.EnumCheeseType;
+import growthcraft.milk.common.item.ItemBlockHangingCurds;
+import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -34,17 +42,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BBox;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.api.core.util.RenderType;
-import growthcraft.core.common.block.GrcBlockContainer;
-import growthcraft.core.util.BlockCheck;
-import growthcraft.milk.GrowthCraftMilk;
-import growthcraft.milk.common.item.EnumCheeseType;
-import growthcraft.milk.common.item.ItemBlockHangingCurds;
-import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
+import java.util.List;
+import java.util.Random;
 
 public class BlockHangingCurds extends GrcBlockContainer {
 
@@ -56,7 +55,7 @@ public class BlockHangingCurds extends GrcBlockContainer {
         setBlockName("grcmilk.HangingCurds");
         setTileEntityType(TileEntityHangingCurds.class);
         final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 16f, 8f)
-            .scale(1f / 16f);
+                .scale(1f / 16f);
         setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
         setBlockTextureName("grcmilk:hanging_curds");
         setCreativeTab(GrowthCraftMilk.creativeTab);
@@ -89,7 +88,7 @@ public class BlockHangingCurds extends GrcBlockContainer {
 
     @Override
     protected void getTileItemStackDrops(List<ItemStack> ret, World world, int x, int y, int z, int metadata,
-        int fortune) {
+                                         int fortune) {
         final TileEntityHangingCurds te = getTileEntity(world, x, y, z);
         if (te != null) {
             ret.add(te.asItemStack());
@@ -100,7 +99,7 @@ public class BlockHangingCurds extends GrcBlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7,
-        float par8, float par9) {
+                                    float par8, float par9) {
         if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
         if (!player.isSneaking()) {
             final TileEntityHangingCurds hangingCurd = getTileEntity(world, x, y, z);
@@ -116,7 +115,7 @@ public class BlockHangingCurds extends GrcBlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         if (item instanceof ItemBlockHangingCurds ib) {
             for (EnumCheeseType cheese : EnumCheeseType.VALUES) {
@@ -141,7 +140,7 @@ public class BlockHangingCurds extends GrcBlockContainer {
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         return !world.isAirBlock(x, y + 1, z)
-            && BlockCheck.isBlockPlacableOnSide(world, x, y + 1, z, ForgeDirection.DOWN);
+                && BlockCheck.isBlockPlacableOnSide(world, x, y + 1, z, ForgeDirection.DOWN);
     }
 
     @Override

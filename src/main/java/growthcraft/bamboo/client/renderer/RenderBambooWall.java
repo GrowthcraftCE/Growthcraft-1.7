@@ -1,17 +1,15 @@
 package growthcraft.bamboo.client.renderer;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.bamboo.common.block.BlockBambooWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.bamboo.common.block.BlockBambooWall;
 
 public class RenderBambooWall implements ISimpleBlockRenderingHandler {
 
@@ -67,7 +65,7 @@ public class RenderBambooWall implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == id) {
             double x1 = 0.375D;
             double x2 = 0.625D;
@@ -93,13 +91,13 @@ public class RenderBambooWall implements ISimpleBlockRenderingHandler {
             int metaZpos = world.getBlockMetadata(x, y, z + 1);
 
             final boolean flagXneg = blk.canConnectWallTo(world, x - 1, y, z)
-                || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
+                    || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
             final boolean flagXpos = blk.canConnectWallTo(world, x + 1, y, z)
-                || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
+                    || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
             final boolean flagZneg = blk.canConnectWallTo(world, x, y, z - 1)
-                || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
+                    || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
             final boolean flagZpos = blk.canConnectWallTo(world, x, y, z + 1)
-                || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
+                    || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
 
             // XNEG
             if (flagXneg) {

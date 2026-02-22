@@ -19,14 +19,13 @@
  */
 package growthcraft.milk.common.tileentity;
 
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.core.common.tileentity.GrcTileDeviceBase;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.milk.common.tileentity.device.Pancheon;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 public class TileEntityPancheon extends GrcTileDeviceBase implements ITileProgressiveDevice, IPancheonTile {
 
@@ -53,7 +52,7 @@ public class TileEntityPancheon extends GrcTileDeviceBase implements ITileProgre
      */
     @Override
     protected FluidTank[] createTanks() {
-        return new FluidTank[] { new FluidTank(1000), new FluidTank(1000), new FluidTank(1000) };
+        return new FluidTank[]{new FluidTank(1000), new FluidTank(1000), new FluidTank(1000)};
     }
 
     protected int getPresentTankIndex() {

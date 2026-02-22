@@ -19,19 +19,6 @@
  */
 package growthcraft.cellar.common.tileentity;
 
-import java.io.IOException;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.common.inventory.ContainerCultureJar;
@@ -44,10 +31,22 @@ import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+
+import java.io.IOException;
 
 public class TileEntityCultureJar extends TileEntityCellarDevice implements ITileHeatedDevice, ITileProgressiveDevice {
 
-    private static final int[] accessibleSlots = new int[] { 0 };
+    private static final int[] accessibleSlots = new int[]{0};
     private final TileHeatingComponent heatComponent;
     private final CultureGenerator cultureGen;
     private final YeastGenerator yeastGen;
@@ -91,7 +90,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
     @Override
     protected FluidTank[] createTanks() {
         final int maxTankCap = GrowthCraftCellar.getConfig().cultureJarMaxCap;
-        return new FluidTank[] { new CellarTank(maxTankCap, this) };
+        return new FluidTank[]{new CellarTank(maxTankCap, this)};
     }
 
     @Override
@@ -205,14 +204,14 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
         super.sendGUINetworkData(container, iCrafting);
         iCrafting.sendProgressBarUpdate(container, CultureJarDataId.YEAST_GEN_TIME.ordinal(), yeastGen.getTime());
         iCrafting
-            .sendProgressBarUpdate(container, CultureJarDataId.YEAST_GEN_TIME_MAX.ordinal(), yeastGen.getTimeMax());
+                .sendProgressBarUpdate(container, CultureJarDataId.YEAST_GEN_TIME_MAX.ordinal(), yeastGen.getTimeMax());
         iCrafting.sendProgressBarUpdate(container, CultureJarDataId.CULTURE_GEN_TIME.ordinal(), cultureGen.getTime());
         iCrafting
-            .sendProgressBarUpdate(container, CultureJarDataId.CULTURE_GEN_TIME_MAX.ordinal(), cultureGen.getTimeMax());
+                .sendProgressBarUpdate(container, CultureJarDataId.CULTURE_GEN_TIME_MAX.ordinal(), cultureGen.getTimeMax());
         iCrafting.sendProgressBarUpdate(
-            container,
-            CultureJarDataId.HEAT_AMOUNT.ordinal(),
-            (int) (heatComponent.getHeatMultiplier() * 0x7FFF));
+                container,
+                CultureJarDataId.HEAT_AMOUNT.ordinal(),
+                (int) (heatComponent.getHeatMultiplier() * 0x7FFF));
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NBT_READ)
@@ -271,8 +270,8 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
         HEAT_AMOUNT,
         UNKNOWN;
 
-        public static final CultureJarDataId[] VALID = new CultureJarDataId[] { YEAST_GEN_TIME, YEAST_GEN_TIME_MAX,
-            CULTURE_GEN_TIME, CULTURE_GEN_TIME_MAX, HEAT_AMOUNT };
+        public static final CultureJarDataId[] VALID = new CultureJarDataId[]{YEAST_GEN_TIME, YEAST_GEN_TIME_MAX,
+                CULTURE_GEN_TIME, CULTURE_GEN_TIME_MAX, HEAT_AMOUNT};
 
         public static CultureJarDataId getByOrdinal(int ord) {
             if (ord >= 0 && ord < VALID.length) return VALID[ord];

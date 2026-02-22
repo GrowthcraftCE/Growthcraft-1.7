@@ -19,8 +19,6 @@
  */
 package growthcraft.bees.client;
 
-import net.minecraft.util.ResourceLocation;
-
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import growthcraft.bees.GrowthCraftBees;
@@ -28,6 +26,7 @@ import growthcraft.bees.client.gui.GuiBeeBox;
 import growthcraft.bees.client.renderer.RenderBeeBox;
 import growthcraft.bees.client.renderer.RenderBeeHive;
 import growthcraft.bees.common.CommonProxy;
+import net.minecraft.util.ResourceLocation;
 
 public class ClientProxy extends CommonProxy {
 
@@ -40,7 +39,7 @@ public class ClientProxy extends CommonProxy {
         final int villagerID = GrowthCraftBees.getConfig().villagerApiaristID;
         if (villagerID > 0) {
             VillagerRegistry.instance()
-                .registerVillagerSkin(villagerID, new ResourceLocation("grcbees", "textures/entity/apiarist.png"));
+                    .registerVillagerSkin(villagerID, new ResourceLocation("grcbees", "textures/entity/apiarist.png"));
         }
     }
 

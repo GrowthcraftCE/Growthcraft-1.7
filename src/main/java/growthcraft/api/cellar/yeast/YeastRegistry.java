@@ -19,22 +19,20 @@
  */
 package growthcraft.api.cellar.yeast;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeDictionary;
-
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.item.WeightedItemStack;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class YeastRegistry implements IYeastRegistry {
 
@@ -79,9 +77,9 @@ public class YeastRegistry implements IYeastRegistry {
             yeastToBiomeType.put(yeastKey, new HashSet<BiomeDictionary.Type>());
         }
         biomeTypeToYeast.get(type)
-            .add(new WeightedItemStack(weight, yeast));
+                .add(new WeightedItemStack(weight, yeast));
         yeastToBiomeType.get(yeastKey)
-            .add(type);
+                .add(type);
     }
 
     @Override
@@ -93,13 +91,13 @@ public class YeastRegistry implements IYeastRegistry {
             yeastToBiomeName.put(yeastKey, new HashSet<String>());
         }
         yeastToBiomeName.get(yeastKey)
-            .add(name);
+                .add(name);
         if (!biomeNameToYeast.containsKey(name)) {
             logger.debug("Initializing biome name to yeast set for %s", name);
             biomeNameToYeast.put(name, new HashSet<WeightedItemStack>());
         }
         biomeNameToYeast.get(name)
-            .add(new WeightedItemStack(weight, yeast));
+                .add(new WeightedItemStack(weight, yeast));
     }
 
     @Override

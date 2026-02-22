@@ -19,16 +19,14 @@
  */
 package growthcraft.milk.client.render.item;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
-import org.lwjgl.opengl.GL11;
-
 import growthcraft.core.client.render.item.GrcItemRenderer;
 import growthcraft.milk.client.model.ModelHangingCurds;
 import growthcraft.milk.client.resource.GrcMilkResources;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import org.lwjgl.opengl.GL11;
 
 public class ItemRendererHangingCurds extends GrcItemRenderer {
 
@@ -44,7 +42,7 @@ public class ItemRendererHangingCurds extends GrcItemRenderer {
                 GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
                 GL11.glTranslatef(0.0f, -1.5f, 0.0f);
                 GrcMilkResources.INSTANCE.modelHangingCurds.setCurdColor(cheese.getColor())
-                    .render(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ModelHangingCurds.SCALE);
+                        .render(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ModelHangingCurds.SCALE);
             }
             GL11.glPopMatrix();
         }

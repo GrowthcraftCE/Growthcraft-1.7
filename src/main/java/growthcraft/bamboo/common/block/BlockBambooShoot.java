@@ -1,7 +1,13 @@
 package growthcraft.bamboo.common.block;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.RenderType;
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.bamboo.common.world.WorldGenBamboo;
+import growthcraft.core.common.block.ICropDataProvider;
+import growthcraft.core.util.BlockCheck;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -15,14 +21,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.api.core.util.RenderType;
-import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.bamboo.common.world.WorldGenBamboo;
-import growthcraft.core.common.block.ICropDataProvider;
-import growthcraft.core.util.BlockCheck;
+import java.util.Random;
 
 public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IGrowable {
 
@@ -87,7 +86,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z))
-            && BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
+                && BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
     }
 
     /************

@@ -1,11 +1,10 @@
 package growthcraft.hops.common.item;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.common.item.GrcItemBase;
+import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class ItemHops extends GrcItemBase {
 

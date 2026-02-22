@@ -19,9 +19,6 @@
  */
 package growthcraft.bamboo.init;
 
-import net.minecraft.block.BlockSlab;
-import net.minecraft.init.Blocks;
-
 import growthcraft.bamboo.common.block.*;
 import growthcraft.bamboo.common.item.ItemBambooSlab;
 import growthcraft.core.common.GrcModuleBlocks;
@@ -30,6 +27,8 @@ import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.registry.FenceRopeRegistry;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.init.Blocks;
 
 public class GrcBambooBlocks extends GrcModuleBlocks {
 
@@ -63,7 +62,7 @@ public class GrcBambooBlocks extends GrcModuleBlocks {
         bambooScaffold = newDefinition(new BlockBambooScaffold());
         bambooFenceRope = newDefinition(new BlockFenceRope(bambooFence.getBlock(), "grc.bambooFenceRope"));
         FenceRopeRegistry.instance()
-            .addEntry(bambooFence.getBlock(), bambooFenceRope.getBlock());
+                .addEntry(bambooFence.getBlock(), bambooFenceRope.getBlock());
     }
 
     @Override

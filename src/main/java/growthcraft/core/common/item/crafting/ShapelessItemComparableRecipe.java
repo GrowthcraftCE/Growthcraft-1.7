@@ -19,18 +19,16 @@
  */
 package growthcraft.core.common.item.crafting;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
+import growthcraft.api.core.item.IItemStackComparator;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.item.IItemStackComparator;
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class ShapelessItemComparableRecipe implements IRecipe {
 
@@ -39,7 +37,7 @@ public class ShapelessItemComparableRecipe implements IRecipe {
     private final IItemStackComparator comparator;
 
     public ShapelessItemComparableRecipe(@Nonnull IItemStackComparator pComparator, ItemStack result,
-        List<ItemStack> list) {
+                                         List<ItemStack> list) {
         this.comparator = pComparator;
         this.recipeOutput = result;
         this.recipeItems = list;

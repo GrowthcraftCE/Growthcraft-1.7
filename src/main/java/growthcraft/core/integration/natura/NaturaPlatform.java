@@ -25,7 +25,8 @@ public class NaturaPlatform {
 
     public static final String MOD_ID = "Natura";
 
-    private NaturaPlatform() {}
+    private NaturaPlatform() {
+    }
 
     public static boolean isLoaded() {
         return Loader.isModLoaded(MOD_ID);

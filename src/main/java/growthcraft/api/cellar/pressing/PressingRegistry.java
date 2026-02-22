@@ -1,23 +1,21 @@
 package growthcraft.api.cellar.pressing;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
 import growthcraft.api.core.util.MultiStacksUtil;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PressingRegistry implements IPressingRegistry {
 
-    private ILogger logger = NullLogger.INSTANCE;
     private final List<PressingRecipe> recipes = new ArrayList<PressingRecipe>();
+    private ILogger logger = NullLogger.INSTANCE;
 
     @Override
     public void setLogger(@Nonnull ILogger l) {
@@ -32,7 +30,7 @@ public class PressingRegistry implements IPressingRegistry {
 
     @Override
     public void addRecipe(@Nonnull Object inputStack, @Nonnull FluidStack resultFluid, int time,
-        @Nullable Residue residue) {
+                          @Nullable Residue residue) {
         addRecipe(new PressingRecipe(MultiStacksUtil.toMultiItemStacks(inputStack), resultFluid, time, residue));
     }
 

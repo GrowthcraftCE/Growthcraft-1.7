@@ -1,9 +1,5 @@
 package growthcraft.grapes.event;
 
-import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.event.entity.player.BonemealEvent;
-
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import growthcraft.api.core.util.BlockFlags;
@@ -12,6 +8,9 @@ import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.common.block.BlockGrapeLeaves;
 import growthcraft.grapes.common.block.BlockGrapeVine0;
 import growthcraft.grapes.common.block.BlockGrapeVine1;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 
 public class BonemealEventGrapes {
 
@@ -26,46 +25,46 @@ public class BonemealEventGrapes {
                     vine.incrementGrowth(event.world, event.x, event.y, event.z, meta);
                 } else if (i == 2) {
                     event.world.setBlock(
-                        event.x,
-                        event.y,
-                        event.z,
-                        GrowthCraftGrapes.blocks.grapeVine1.getBlock(),
-                        0,
-                        BlockFlags.ALL);
+                            event.x,
+                            event.y,
+                            event.z,
+                            GrowthCraftGrapes.blocks.grapeVine1.getBlock(),
+                            0,
+                            BlockFlags.ALL);
                 }
             } else if (meta == 1) {
                 if (i == 1) {
                     event.world.setBlock(
-                        event.x,
-                        event.y,
-                        event.z,
-                        GrowthCraftGrapes.blocks.grapeVine1.getBlock(),
-                        0,
-                        BlockFlags.ALL);
+                            event.x,
+                            event.y,
+                            event.z,
+                            GrowthCraftGrapes.blocks.grapeVine1.getBlock(),
+                            0,
+                            BlockFlags.ALL);
                 } else if (i == 2) {
                     if (BlockCheck.isRope(event.world.getBlock(event.x, event.y + 1, event.z))) {
                         event.world.setBlock(
-                            event.x,
-                            event.y,
-                            event.z,
-                            GrowthCraftGrapes.blocks.grapeVine1.getBlock(),
-                            1,
-                            BlockFlags.ALL);
+                                event.x,
+                                event.y,
+                                event.z,
+                                GrowthCraftGrapes.blocks.grapeVine1.getBlock(),
+                                1,
+                                BlockFlags.ALL);
                         event.world.setBlock(
-                            event.x,
-                            event.y + 1,
-                            event.z,
-                            GrowthCraftGrapes.blocks.grapeLeaves.getBlock(),
-                            0,
-                            BlockFlags.ALL);
+                                event.x,
+                                event.y + 1,
+                                event.z,
+                                GrowthCraftGrapes.blocks.grapeLeaves.getBlock(),
+                                0,
+                                BlockFlags.ALL);
                     } else {
                         event.world.setBlock(
-                            event.x,
-                            event.y,
-                            event.z,
-                            GrowthCraftGrapes.blocks.grapeVine1.getBlock(),
-                            0,
-                            BlockFlags.ALL);
+                                event.x,
+                                event.y,
+                                event.z,
+                                GrowthCraftGrapes.blocks.grapeVine1.getBlock(),
+                                0,
+                                BlockFlags.ALL);
                     }
                 }
             }
@@ -80,12 +79,12 @@ public class BonemealEventGrapes {
             if (!event.world.isRemote) {
                 vine.incrementGrowth(event.world, event.x, event.y, event.z, meta);
                 event.world.setBlock(
-                    event.x,
-                    event.y + 1,
-                    event.z,
-                    GrowthCraftGrapes.blocks.grapeLeaves.getBlock(),
-                    0,
-                    BlockFlags.ALL);
+                        event.x,
+                        event.y + 1,
+                        event.z,
+                        GrowthCraftGrapes.blocks.grapeLeaves.getBlock(),
+                        0,
+                        BlockFlags.ALL);
             }
             event.setResult(Result.ALLOW);
         }
@@ -93,23 +92,23 @@ public class BonemealEventGrapes {
             if (!event.world.isRemote) {
                 vine.incrementGrowth(event.world, event.x, event.y, event.z, meta);
                 event.world.setBlock(
-                    event.x,
-                    event.y + 1,
-                    event.z,
-                    GrowthCraftGrapes.blocks.grapeVine1.getBlock(),
-                    0,
-                    BlockFlags.ALL);
+                        event.x,
+                        event.y + 1,
+                        event.z,
+                        GrowthCraftGrapes.blocks.grapeVine1.getBlock(),
+                        0,
+                        BlockFlags.ALL);
             }
             event.setResult(Result.ALLOW);
         } else if (meta == 0
-            && event.world.getBlock(event.x, event.y + 1, event.z) == GrowthCraftGrapes.blocks.grapeLeaves.getBlock()) {
-                if (!event.world.isRemote) {
-                    vine.incrementGrowth(event.world, event.x, event.y, event.z, meta);
-                }
-                event.setResult(Result.ALLOW);
-            } else {
-                event.setResult(Result.DENY);
+                && event.world.getBlock(event.x, event.y + 1, event.z) == GrowthCraftGrapes.blocks.grapeLeaves.getBlock()) {
+            if (!event.world.isRemote) {
+                vine.incrementGrowth(event.world, event.x, event.y, event.z, meta);
             }
+            event.setResult(Result.ALLOW);
+        } else {
+            event.setResult(Result.DENY);
+        }
     }
 
     public boolean growGrapeLeavesOutwards(BonemealEvent event) {
@@ -141,11 +140,11 @@ public class BonemealEventGrapes {
         if (growGrapeLeavesOutwards(event)) {
             event.setResult(Result.ALLOW);
         } else if (GrowthCraftGrapes.blocks.grapeLeaves.getBlock()
-            .growGrapeBlock(event.world, event.x, event.y, event.z)) {
-                event.setResult(Result.ALLOW);
-            } else {
-                event.setResult(Result.DENY);
-            }
+                .growGrapeBlock(event.world, event.x, event.y, event.z)) {
+            event.setResult(Result.ALLOW);
+        } else {
+            event.setResult(Result.DENY);
+        }
     }
 
     @SubscribeEvent

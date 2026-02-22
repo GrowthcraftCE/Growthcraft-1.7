@@ -1,10 +1,10 @@
 package growthcraft.api.fishtrap;
 
-import java.util.Random;
-
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
+
+import java.util.Random;
 
 public class FishTrapEntry extends WeightedRandom.Item {
 

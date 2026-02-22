@@ -23,11 +23,12 @@ import cpw.mods.fml.common.FMLCommonHandler;
 
 public class Platform {
 
-    private Platform() {}
+    private Platform() {
+    }
 
     public static boolean isClient() {
         return FMLCommonHandler.instance()
-            .getEffectiveSide()
-            .isClient();
+                .getEffectiveSide()
+                .isClient();
     }
 }

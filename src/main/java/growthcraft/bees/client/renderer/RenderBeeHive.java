@@ -1,14 +1,13 @@
 package growthcraft.bees.client.renderer;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.core.util.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.core.util.RenderUtils;
 
 public class RenderBeeHive implements ISimpleBlockRenderingHandler {
 
@@ -18,8 +17,8 @@ public class RenderBeeHive implements ISimpleBlockRenderingHandler {
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
         if (modelID == id) {
             final Tessellator tes = Tessellator.instance;
-            final IIcon[] icon = { block.getIcon(1, 0), block.getIcon(1, 0), block.getIcon(1, 0), block.getIcon(1, 0),
-                block.getIcon(1, 0), block.getIcon(0, 0) };
+            final IIcon[] icon = {block.getIcon(1, 0), block.getIcon(1, 0), block.getIcon(1, 0), block.getIcon(1, 0),
+                    block.getIcon(1, 0), block.getIcon(0, 0)};
             final double d = 0.0625D;
 
             renderer.setRenderBounds(4 * d, 0.0D, 4 * d, 12 * d, 14 * d, 12 * d);
@@ -35,7 +34,7 @@ public class RenderBeeHive implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == id) {
             final double d = 0.0625D;
             renderer.setRenderBounds(4 * d, 0.0D, 4 * d, 12 * d, 14 * d, 12 * d);

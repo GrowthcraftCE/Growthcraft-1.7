@@ -1,10 +1,9 @@
 package growthcraft.bees.common.inventory;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.core.common.inventory.slot.SlotInput;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 
 public class SlotHoneyComb extends SlotInput {
 
@@ -19,7 +18,7 @@ public class SlotHoneyComb extends SlotInput {
     public boolean isItemValid(ItemStack stack) {
         // Only if the item is some kind of honey comb
         return BeesRegistry.instance()
-            .isItemHoneyComb(stack);
+                .isItemHoneyComb(stack);
     }
 
     @Override

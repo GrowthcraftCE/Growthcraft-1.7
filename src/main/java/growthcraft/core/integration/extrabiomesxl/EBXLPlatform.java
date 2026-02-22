@@ -25,7 +25,8 @@ public class EBXLPlatform {
 
     public static final String MOD_ID = "ExtrabiomesXL";
 
-    private EBXLPlatform() {}
+    private EBXLPlatform() {
+    }
 
     public static boolean isLoaded() {
         return Loader.isModLoaded(MOD_ID);

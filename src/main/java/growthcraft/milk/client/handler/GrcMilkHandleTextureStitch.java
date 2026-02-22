@@ -19,15 +19,14 @@
  */
 package growthcraft.milk.client.handler;
 
-import net.minecraft.util.IIcon;
-import net.minecraftforge.client.event.TextureStitchEvent;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.FluidFactory;
 import growthcraft.milk.GrowthCraftMilk;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.client.event.TextureStitchEvent;
 
 public class GrcMilkHandleTextureStitch {
 
@@ -86,27 +85,27 @@ public class GrcMilkHandleTextureStitch {
             GrowthCraftMilk.fluids.kumisFluids[5].setIcons(GrowthCraftCore.liquidBlobsTexture);
 
             GrowthCraftMilk.fluids.butterMilk.getFluid()
-                .setIcons(iconFluidButterMilkStill, iconFluidButterMilkFlow);
+                    .setIcons(iconFluidButterMilkStill, iconFluidButterMilkFlow);
             GrowthCraftMilk.fluids.cream.getFluid()
-                .setIcons(iconFluidCreamStill, iconFluidCreamFlow);
+                    .setIcons(iconFluidCreamStill, iconFluidCreamFlow);
             if (GrowthCraftMilk.fluids.milk != null) GrowthCraftMilk.fluids.milk.getFluid()
-                .setIcons(iconFluidMilkStill, iconFluidMilkFlow);
+                    .setIcons(iconFluidMilkStill, iconFluidMilkFlow);
 
             GrowthCraftMilk.fluids.curds.getFluid()
-                .setIcons(iconFluidMilkStill, iconFluidMilkFlow);
+                    .setIcons(iconFluidMilkStill, iconFluidMilkFlow);
             GrowthCraftMilk.fluids.rennet.getFluid()
-                .setIcons(iconFluidRennetStill, iconFluidRennetFlow);
+                    .setIcons(iconFluidRennetStill, iconFluidRennetFlow);
             GrowthCraftMilk.fluids.skimMilk.getFluid()
-                .setIcons(iconFluidSkimMilkStill, iconFluidSkimMilkFlow);
+                    .setIcons(iconFluidSkimMilkStill, iconFluidSkimMilkFlow);
             GrowthCraftMilk.fluids.whey.getFluid()
-                .setIcons(iconFluidWheyStill, iconFluidWheyFlow);
+                    .setIcons(iconFluidWheyStill, iconFluidWheyFlow);
             GrowthCraftMilk.fluids.pasteurizedMilk.getFluid()
-                .setIcons(iconFluidMilkStill, iconFluidMilkFlow);
+                    .setIcons(iconFluidMilkStill, iconFluidMilkFlow);
 
             for (FluidFactory.FluidDetails detail : GrowthCraftMilk.fluids.cheeses.values()) {
                 // this is not a typo, too lazy to make more textures.
                 detail.getFluid()
-                    .setIcons(iconFluidMilkStill, iconFluidMilkFlow);
+                        .setIcons(iconFluidMilkStill, iconFluidMilkFlow);
             }
         }
     }

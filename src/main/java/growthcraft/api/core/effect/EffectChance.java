@@ -19,17 +19,16 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.description.Describer;
+import growthcraft.api.core.i18n.GrcI18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.description.Describer;
-import growthcraft.api.core.i18n.GrcI18n;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Has a random chance of applying its sub effect to the target
@@ -46,7 +45,8 @@ public class EffectChance extends AbstractEffect {
         this.effect = effekt;
     }
 
-    public EffectChance() {}
+    public EffectChance() {
+    }
 
     public float getChance() {
         return chance;
@@ -92,8 +92,8 @@ public class EffectChance extends AbstractEffect {
         this.chance = data.getFloat("chance");
         if (data.hasKey("effect")) {
             this.effect = CoreRegistry.instance()
-                .getEffectsRegistry()
-                .loadEffectFromNBT(data, "effect");
+                    .getEffectsRegistry()
+                    .loadEffectFromNBT(data, "effect");
         }
     }
 

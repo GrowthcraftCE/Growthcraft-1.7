@@ -19,11 +19,10 @@
  */
 package growthcraft.core.integration.forestry;
 
+import growthcraft.api.core.definition.IFluidStackFactory;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-
-import growthcraft.api.core.definition.IFluidStackFactory;
 
 public enum ForestryFluids implements IFluidStackFactory {
 

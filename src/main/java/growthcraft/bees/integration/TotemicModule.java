@@ -19,8 +19,6 @@
  */
 package growthcraft.bees.integration;
 
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.common.block.BlockBeeBoxTotemic;
@@ -28,6 +26,7 @@ import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.core.integration.ModIntegrationBase;
 import growthcraft.core.integration.totemic.EnumTotemicWoodType;
 import growthcraft.core.integration.totemic.TotemicPlatform;
+import net.minecraft.item.ItemStack;
 
 public class TotemicModule extends ModIntegrationBase {
 
@@ -51,7 +50,7 @@ public class TotemicModule extends ModIntegrationBase {
             final ItemStack planks = type.asPlanksItemStack();
             if (planks != null) {
                 GameRegistry
-                    .addShapedRecipe(GrowthCraftBees.blocks.beeBoxTotemic.asStack(), " A ", "A A", "AAA", 'A', planks);
+                        .addShapedRecipe(GrowthCraftBees.blocks.beeBoxTotemic.asStack(), " A ", "A A", "AAA", 'A', planks);
             }
         }
     }

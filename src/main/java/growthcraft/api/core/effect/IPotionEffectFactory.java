@@ -19,14 +19,13 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.Random;
-
+import growthcraft.api.core.description.IDescribable;
+import growthcraft.api.core.nbt.INBTSerializableContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.description.IDescribable;
-import growthcraft.api.core.nbt.INBTSerializableContext;
+import java.util.Random;
 
 /**
  * Objects that implement this interface are expected to create PotionEffects

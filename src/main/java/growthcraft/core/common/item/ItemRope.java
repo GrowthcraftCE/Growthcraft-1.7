@@ -1,16 +1,15 @@
 package growthcraft.core.common.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.registry.FenceRopeRegistry;
 import growthcraft.core.registry.FenceRopeRegistry.FenceRopeEntry;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ItemRope extends GrcItemBase {
 
@@ -26,7 +25,7 @@ public class ItemRope extends GrcItemBase {
      ************/
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir,
-        float par8, float par9, float par10) {
+                             float par8, float par9, float par10) {
         final Block block = world.getBlock(x, y, z);
         final int blockMeta = world.getBlockMetadata(x, y, z);
 
@@ -34,7 +33,7 @@ public class ItemRope extends GrcItemBase {
             dir = 1;
         } else {
             final FenceRopeEntry entry = FenceRopeRegistry.instance()
-                .getEntry(block, blockMeta);
+                    .getEntry(block, blockMeta);
             if (entry != null) {
                 if (!player.canPlayerEdit(x, y, z, dir, stack)) {
                     return false;
@@ -91,12 +90,12 @@ public class ItemRope extends GrcItemBase {
                     }
 
                     world.playSoundEffect(
-                        (float) x + 0.5F,
-                        (float) y + 0.5F,
-                        (float) z + 0.5F,
-                        block2.stepSound.func_150496_b(),
-                        (block2.stepSound.getVolume() + 1.0F) / 2.0F,
-                        block2.stepSound.getPitch() * 0.8F);
+                            (float) x + 0.5F,
+                            (float) y + 0.5F,
+                            (float) z + 0.5F,
+                            block2.stepSound.func_150496_b(),
+                            (block2.stepSound.getVolume() + 1.0F) / 2.0F,
+                            block2.stepSound.getPitch() * 0.8F);
                     --stack.stackSize;
                 }
             }

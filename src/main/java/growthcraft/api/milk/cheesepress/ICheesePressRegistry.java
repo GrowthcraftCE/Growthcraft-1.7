@@ -19,12 +19,11 @@
  */
 package growthcraft.api.milk.cheesepress;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.log.ILoggable;
 import net.minecraft.item.ItemStack;
 
-import growthcraft.api.core.log.ILoggable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public interface ICheesePressRegistry extends ILoggable {
 

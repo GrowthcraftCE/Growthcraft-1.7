@@ -19,13 +19,11 @@
  */
 package growthcraft.cellar.client.render.item;
 
-import net.minecraft.item.ItemStack;
-
-import org.lwjgl.opengl.GL11;
-
 import growthcraft.cellar.client.model.ModelCultureJar;
 import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.core.client.render.item.GrcItemRenderer;
+import net.minecraft.item.ItemStack;
+import org.lwjgl.opengl.GL11;
 
 public class ItemRenderCultureJar extends GrcItemRenderer {
 

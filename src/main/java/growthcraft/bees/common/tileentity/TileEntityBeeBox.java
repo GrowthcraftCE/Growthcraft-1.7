@@ -1,14 +1,5 @@
 package growthcraft.bees.common.tileentity;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.core.item.EnumDye;
 import growthcraft.api.core.util.AuxFX;
@@ -21,13 +12,21 @@ import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
 import growthcraft.core.common.tileentity.feature.IItemHandler;
 import growthcraft.core.util.ItemUtils;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandler, IInteractionObject {
 
     private static final int beeBoxVersion = 3;
-    private static final int[] beeSlotIds = new int[] { 0 };
-    private static final int[] honeyCombSlotIds = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-        18, 19, 20, 21, 22, 23, 24, 25, 26, 27 };
+    private static final int[] beeSlotIds = new int[]{0};
+    private static final int[] honeyCombSlotIds = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+            18, 19, 20, 21, 22, 23, 24, 25, 26, 27};
     private final DeviceBeeBox beeBox = new DeviceBeeBox(this);
 
     @Override
@@ -92,13 +91,13 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
         switch (expects) {
             case EMPTY:
                 return BeesRegistry.instance()
-                    .isItemEmptyHoneyComb(slotItem);
+                        .isItemEmptyHoneyComb(slotItem);
             case FILLED:
                 return BeesRegistry.instance()
-                    .isItemFilledHoneyComb(slotItem);
+                        .isItemFilledHoneyComb(slotItem);
             default:
                 return BeesRegistry.instance()
-                    .isItemHoneyComb(slotItem);
+                        .isItemHoneyComb(slotItem);
         }
     }
 
@@ -172,7 +171,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
         } else {
             // Ensure that the item in the slot IS a bee, and prevent duplication
             if (BeesRegistry.instance()
-                .isItemBee(beestack)) {
+                    .isItemBee(beestack)) {
                 setBeeStack(ItemUtils.increaseStack(beestack));
             }
         }
@@ -201,7 +200,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
             if (slotHasHoneyComb(i, HoneyCombExpect.FILLED)) {
                 final ItemStack stack = getStackInSlot(i);
                 final ItemStack result = BeesRegistry.instance()
-                    .getEmptyHoneyComb(stack);
+                        .getEmptyHoneyComb(stack);
                 setInventorySlotContents(i, result != null ? result.copy() : null);
                 count--;
                 shouldMark = true;
@@ -221,7 +220,7 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
             final ItemStack stack = getStackInSlot(i);
             if (stack != null && slotHasEmptyComb(i)) {
                 final ItemStack resultStack = BeesRegistry.instance()
-                    .getFilledHoneyComb(stack);
+                        .getFilledHoneyComb(stack);
                 if (resultStack != null) {
                     setInventorySlotContents(i, resultStack.copy());
                 }
@@ -261,10 +260,10 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
     public boolean isItemValidForSlot(int index, ItemStack stack) {
         if (index == ContainerBeeBox.SlotId.BEE) {
             return BeesRegistry.instance()
-                .isItemBee(stack);
+                    .isItemBee(stack);
         } else {
             return BeesRegistry.instance()
-                .isItemHoneyComb(stack);
+                    .isItemHoneyComb(stack);
         }
     }
 
@@ -291,13 +290,13 @@ public class TileEntityBeeBox extends GrcTileInventoryBase implements IItemHandl
             if (item == Items.flower_pot) {
                 if (isHoneyEnough(6)) {
                     ItemUtils.addStackToPlayer(
-                        GrowthCraftBees.items.honeyJar.asStack(),
-                        player,
-                        worldObj,
-                        xCoord,
-                        yCoord,
-                        zCoord,
-                        false);
+                            GrowthCraftBees.items.honeyJar.asStack(),
+                            player,
+                            worldObj,
+                            xCoord,
+                            yCoord,
+                            zCoord,
+                            false);
                     ItemUtils.consumeStackOnPlayer(stack, player);
                     decreaseHoney(6);
                     return true;

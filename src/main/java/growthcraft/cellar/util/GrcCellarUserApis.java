@@ -19,8 +19,6 @@
  */
 package growthcraft.cellar.util;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.api.cellar.brewing.user.UserBrewingRecipesConfig;
 import growthcraft.api.cellar.culturing.user.UserCultureRecipesConfig;
 import growthcraft.api.cellar.fermenting.user.UserFermentingRecipesConfig;
@@ -32,6 +30,8 @@ import growthcraft.api.core.module.IModule;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
 import growthcraft.core.common.GrcModuleBase;
+
+import javax.annotation.Nonnull;
 
 public class GrcCellarUserApis extends GrcModuleBase {
 

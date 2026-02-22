@@ -19,14 +19,13 @@
  */
 package growthcraft.api.bees.user;
 
-import java.io.BufferedReader;
-
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+import java.io.BufferedReader;
 
 public class UserBeesConfig extends AbstractUserJSONConfig {
 
@@ -64,9 +63,9 @@ public class UserBeesConfig extends AbstractUserJSONConfig {
             return;
         }
 
-        for (ItemStack stack : entry.item.getItemStacks()) {
+        for (ItemStack stack : entry.item.itemStacks()) {
             BeesRegistry.instance()
-                .addBee(stack);
+                    .addBee(stack);
         }
     }
 

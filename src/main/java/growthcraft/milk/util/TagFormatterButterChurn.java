@@ -19,14 +19,13 @@
  */
 package growthcraft.milk.util;
 
-import java.util.List;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
-
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.util.ITagFormatter;
 import growthcraft.core.util.TagFormatterItem;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+
+import java.util.List;
 
 public class TagFormatterButterChurn implements ITagFormatter {
 
@@ -34,9 +33,9 @@ public class TagFormatterButterChurn implements ITagFormatter {
 
     public List<String> format(List<String> list, NBTTagCompound nbt) {
         list.add(
-            EnumChatFormatting.GRAY + GrcI18n.translate(
-                "grcmilk.butter_churn.itemslot.item",
-                TagFormatterItem.INSTANCE.formatItem(nbt.getCompoundTag("item"))));
+                EnumChatFormatting.GRAY + GrcI18n.translate(
+                        "grcmilk.butter_churn.itemslot.item",
+                        TagFormatterItem.INSTANCE.formatItem(nbt.getCompoundTag("item"))));
         return list;
     }
 }

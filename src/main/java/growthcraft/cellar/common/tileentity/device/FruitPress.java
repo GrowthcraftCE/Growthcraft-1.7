@@ -19,10 +19,6 @@
  */
 package growthcraft.cellar.common.tileentity.device;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.pressing.PressingRecipe;
@@ -31,13 +27,16 @@ import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.common.tileentity.device.DeviceProgressive;
 import growthcraft.core.util.ItemUtils;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.FluidStack;
 
 public class FruitPress extends DeviceProgressive {
 
-    private float pomace;
     private final DeviceFluidSlot fluidSlot;
     private final DeviceInventorySlot inputSlot;
     private final DeviceInventorySlot residueSlot;
+    private float pomace;
     private PressingRecipe currentResult;
 
     /**
@@ -71,8 +70,8 @@ public class FruitPress extends DeviceProgressive {
         if (fluidSlot.isFull()) return false;
 
         final PressingRecipe result = CellarRegistry.instance()
-            .pressing()
-            .getPressingRecipe(primarySlotItem);
+                .pressing()
+                .getPressingRecipe(primarySlotItem);
         if (result == null) return false;
         if (!inputSlot.hasEnough(result.getInput())) return false;
         this.currentResult = result;

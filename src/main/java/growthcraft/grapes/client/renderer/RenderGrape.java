@@ -1,25 +1,25 @@
 package growthcraft.grapes.client.renderer;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.core.util.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.core.util.RenderUtils;
-
 public class RenderGrape implements ISimpleBlockRenderingHandler {
 
     public static final int id = RenderingRegistry.getNextAvailableRenderId();
 
     @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {}
+    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+    }
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == id) {
             final Tessellator tessellator = Tessellator.instance;
             tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
@@ -27,7 +27,7 @@ public class RenderGrape implements ISimpleBlockRenderingHandler {
             final IIcon icon = block.getIcon(0, 0);
             final double d = 0.0625D;
 
-            long random = (long) (x * 3129871L) ^ (long) y * 116129781L ^ (long) z;
+            long random = (x * 3129871L) ^ (long) y * 116129781L ^ (long) z;
             random = random * random * 42317861L + random * 11L;
 
             double minX = (double) x + 3 * d;

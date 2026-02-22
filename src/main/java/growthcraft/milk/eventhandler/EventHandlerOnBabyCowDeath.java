@@ -19,16 +19,15 @@
  */
 package growthcraft.milk.eventhandler;
 
-import java.util.Random;
-
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import growthcraft.api.core.util.RandomUtils;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.milk.GrowthCraftMilk;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+
+import java.util.Random;
 
 // I feel sorry for the baby cows, but cheese is required!
 public class EventHandlerOnBabyCowDeath {
@@ -41,9 +40,9 @@ public class EventHandlerOnBabyCowDeath {
             if (event.entityLiving.isChild()) {
                 if (RandomUtils.thresh(rng, GrowthCraftMilk.getConfig().stomachDropRate)) {
                     final int count = RandomUtils.range(
-                        rng,
-                        GrowthCraftMilk.getConfig().stomachMinDropped,
-                        GrowthCraftMilk.getConfig().stomachMaxDropped);
+                            rng,
+                            GrowthCraftMilk.getConfig().stomachMinDropped,
+                            GrowthCraftMilk.getConfig().stomachMaxDropped);
                     if (count > 0) {
                         if (!event.entity.worldObj.isRemote) {
                             final ItemStack stack = GrowthCraftMilk.items.stomach.asStack(count);

@@ -19,13 +19,6 @@
  */
 package growthcraft.cellar.client.gui;
 
-import java.util.List;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.entity.player.InventoryPlayer;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.api.core.i18n.GrcI18n;
@@ -38,6 +31,11 @@ import growthcraft.cellar.network.PacketClearTankButton;
 import growthcraft.core.client.gui.widget.WidgetDeviceProgressIcon;
 import growthcraft.core.client.gui.widget.WidgetFluidTank;
 import growthcraft.core.client.gui.widget.WidgetHeatIcon;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.entity.player.InventoryPlayer;
+import org.lwjgl.opengl.GL11;
+
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiCultureJar extends GuiCellar<ContainerCultureJar, TileEntityCultureJar> {
@@ -49,15 +47,15 @@ public class GuiCultureJar extends GuiCellar<ContainerCultureJar, TileEntityCult
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void initGui() {
         super.initGui();
         widgets.add(new WidgetFluidTank(widgets, 0, 36, 14, 16, 58).setRuleOverlay(176, 53, 16, 58));
         widgets.add(new WidgetHeatIcon(widgets, 82, 56, 14, 14).setTextureRect(176, 17, 14, 14));
         widgets.add(
-            new WidgetDeviceProgressIcon(widgets, 55, 35, 22, 17)
-                .setProgressDirection(WidgetDeviceProgressIcon.ProgressDirection.LEFT_TO_RIGHT)
-                .setTextureRect(176, 0, 22, 17));
+                new WidgetDeviceProgressIcon(widgets, 55, 35, 22, 17)
+                        .setProgressDirection(WidgetDeviceProgressIcon.ProgressDirection.LEFT_TO_RIGHT)
+                        .setTextureRect(176, 0, 22, 17));
 
         if (GrowthCraftCellar.getConfig().enableDiscardButton) {
             this.discardButton = new GuiButtonDiscard(guiResource, 1, guiLeft + 116, guiTop + 54);
@@ -72,7 +70,7 @@ public class GuiCultureJar extends GuiCellar<ContainerCultureJar, TileEntityCult
     @Override
     protected void actionPerformed(GuiButton butn) {
         GrowthCraftCellar.packetPipeline
-            .sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
+                .sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
     }
 
     @Override

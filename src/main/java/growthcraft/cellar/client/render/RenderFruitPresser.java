@@ -1,16 +1,15 @@
 package growthcraft.cellar.client.render;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.cellar.common.block.BlockFruitPresser;
+import growthcraft.core.util.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.cellar.common.block.BlockFruitPresser;
-import growthcraft.core.util.RenderUtils;
 
 public class RenderFruitPresser implements ISimpleBlockRenderingHandler {
 
@@ -31,9 +30,9 @@ public class RenderFruitPresser implements ISimpleBlockRenderingHandler {
         if (modelID == RENDER_ID) {
             final BlockFruitPresser fruitPresser = (BlockFruitPresser) block;
             final Tessellator tes = Tessellator.instance;
-            final IIcon[] icons = { fruitPresser.getIconByIndex(0), fruitPresser.getIconByIndex(1),
-                fruitPresser.getIconByIndex(2), fruitPresser.getIconByIndex(2), fruitPresser.getIconByIndex(2),
-                fruitPresser.getIconByIndex(2) };
+            final IIcon[] icons = {fruitPresser.getIconByIndex(0), fruitPresser.getIconByIndex(1),
+                    fruitPresser.getIconByIndex(2), fruitPresser.getIconByIndex(2), fruitPresser.getIconByIndex(2),
+                    fruitPresser.getIconByIndex(2)};
             final double d = 0.0625D;
             // Render Machine
             renderer.setRenderBounds(3 * d, 7 * d, 3 * d, 13 * d, 15 * d, 13 * d);
@@ -44,11 +43,11 @@ public class RenderFruitPresser implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == RENDER_ID) {
             final BlockFruitPresser fruitPresser = (BlockFruitPresser) block;
-            final IIcon[] icon = { fruitPresser.getIconByIndex(0), fruitPresser.getIconByIndex(1),
-                fruitPresser.getIconByIndex(2), fruitPresser.getIconByIndex(3) };
+            final IIcon[] icon = {fruitPresser.getIconByIndex(0), fruitPresser.getIconByIndex(1),
+                    fruitPresser.getIconByIndex(2), fruitPresser.getIconByIndex(3)};
             final int m = world.getBlockMetadata(x, y, z);
             final double d = 0.0625D;
 

@@ -19,22 +19,20 @@
  */
 package growthcraft.api.milk.cheesepress;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.item.ItemTest;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CheesePressRegistry implements ICheesePressRegistry {
 
-    private ILogger logger = NullLogger.INSTANCE;
     private final List<ICheesePressRecipe> recipes = new ArrayList<ICheesePressRecipe>();
+    private ILogger logger = NullLogger.INSTANCE;
 
     @Override
     public void setLogger(@Nonnull ILogger l) {

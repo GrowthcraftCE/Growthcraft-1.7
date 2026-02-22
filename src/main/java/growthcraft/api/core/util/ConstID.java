@@ -30,5 +30,6 @@ public final class ConstID {
     // Used for handling non existant items
     public static final int NO_ITEM = 0;
 
-    private ConstID() {}
+    private ConstID() {
+    }
 }

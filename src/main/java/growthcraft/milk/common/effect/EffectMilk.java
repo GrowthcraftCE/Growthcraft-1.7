@@ -19,8 +19,9 @@
  */
 package growthcraft.milk.common.effect;
 
-import java.util.*;
-
+import growthcraft.api.core.effect.IEffect;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.nbt.NBTHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,9 +29,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.effect.IEffect;
-import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.api.core.nbt.NBTHelper;
+import java.util.*;
 
 /**
  * This is an effect similar to drinking milk, however it can blacklist certain
@@ -72,7 +71,7 @@ public class EffectMilk implements IEffect {
                 if (e instanceof PotionEffect eff) {
                     final int id = eff.getPotionID();
                     final boolean isCurable = eff.getCurativeItems()
-                        .size() > 0 && !blacklist.contains(id);
+                            .size() > 0 && !blacklist.contains(id);
                     if (isCurable) {
                         // to prevent concurrent modifications, cache the
                         // effect ids

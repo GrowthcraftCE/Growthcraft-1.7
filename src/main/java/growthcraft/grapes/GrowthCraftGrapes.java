@@ -1,13 +1,5 @@
 package growthcraft.grapes;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -35,12 +27,19 @@ import growthcraft.grapes.event.BonemealEventGrapes;
 import growthcraft.grapes.init.GrcGrapesBlocks;
 import growthcraft.grapes.init.GrcGrapesFluids;
 import growthcraft.grapes.init.GrcGrapesItems;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(
-    modid = GrowthCraftGrapes.MOD_ID,
-    name = GrowthCraftGrapes.MOD_NAME,
-    version = GrowthCraftGrapes.MOD_VERSION,
-    dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
+        modid = GrowthCraftGrapes.MOD_ID,
+        name = GrowthCraftGrapes.MOD_NAME,
+        version = GrowthCraftGrapes.MOD_VERSION,
+        dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
 public class GrowthCraftGrapes {
 
     public static final String MOD_ID = "Growthcraft|Grapes";
@@ -79,15 +78,15 @@ public class GrowthCraftGrapes {
         modules.preInit();
         register();
         blocks.grapeVine1.getBlock()
-            .setItemDrop(items.grapeSeeds.asStack(1));
+                .setItemDrop(items.grapeSeeds.asStack(1));
     }
 
     private void register() {
         modules.register();
 
         CoreRegistry.instance()
-            .vineDrops()
-            .addDropEntry(items.grapes.asStack(), config.vineGrapeDropRarity);
+                .vineDrops()
+                .addDropEntry(items.grapes.asStack(), config.vineGrapeDropRarity);
 
         MapGenHelper.registerVillageStructure(ComponentVillageGrapeVineyard.class, "grc.grapevineyard");
 
@@ -125,17 +124,17 @@ public class GrowthCraftGrapes {
         final VillageHandlerGrapes handler = new VillageHandlerGrapes();
         final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
         if (brewerID > 0) VillagerRegistry.instance()
-            .registerVillageTradeHandler(brewerID, handler);
+                .registerVillageTradeHandler(brewerID, handler);
         VillagerRegistry.instance()
-            .registerVillageCreationHandler(handler);
+                .registerVillageCreationHandler(handler);
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
         ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR)
-            .addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
+                .addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
         ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING)
-            .addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
+                .addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
         if (config.enableVillageGen) initVillageHandlers();
         modules.init();
     }

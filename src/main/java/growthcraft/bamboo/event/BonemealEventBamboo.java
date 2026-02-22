@@ -1,13 +1,12 @@
 package growthcraft.bamboo.event;
 
-import java.util.Random;
-
-import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.BonemealEvent;
-
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import growthcraft.bamboo.GrowthCraftBamboo;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.BonemealEvent;
+
+import java.util.Random;
 
 public class BonemealEventBamboo {
 
@@ -36,7 +35,7 @@ public class BonemealEventBamboo {
                             z = z + rand.nextInt(size * 2 + 1);
 
                             if (event.world.isAirBlock(x, y, z) && GrowthCraftBamboo.blocks.bambooShoot.getBlock()
-                                .canBlockStay(event.world, x, y, z)) {
+                                    .canBlockStay(event.world, x, y, z)) {
                                 event.world.setBlock(x, y, z, GrowthCraftBamboo.blocks.bambooShoot.getBlock(), 0, 3);
                                 flag = true;
                             }
@@ -51,7 +50,7 @@ public class BonemealEventBamboo {
 
     private boolean isBambooOnGround(World world, int x, int y, int z) {
         return GrowthCraftBamboo.blocks.bambooStalk.getBlock()
-            .isBambooOnGround(world, x, y, z);
+                .isBambooOnGround(world, x, y, z);
     }
 
     private int countNearbyValidSoil(World world, int x, int y, int z, int b) {
@@ -64,7 +63,7 @@ public class BonemealEventBamboo {
             for (z1 = z - b; z1 <= z + b; ++z1) {
                 for (y1 = y - 1; y1 <= y + 1; ++y1) {
                     final boolean flag = world.isAirBlock(x1, y1, z1) && GrowthCraftBamboo.blocks.bambooShoot.getBlock()
-                        .canBlockStay(world, x1, y1, z1);
+                            .canBlockStay(world, x1, y1, z1);
                     if (flag) {
                         ++count;
                     }

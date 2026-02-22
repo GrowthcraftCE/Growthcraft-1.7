@@ -19,13 +19,12 @@
  */
 package growthcraft.core.common.definition;
 
-import javax.annotation.Nonnull;
-
+import growthcraft.core.common.block.GrcBlockFluid;
+import growthcraft.core.common.item.ItemGrcBlockFluid;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.Fluid;
 
-import growthcraft.core.common.block.GrcBlockFluid;
-import growthcraft.core.common.item.ItemGrcBlockFluid;
+import javax.annotation.Nonnull;
 
 public class GrcBlockFluidDefinition extends BlockTypeDefinition<GrcBlockFluid> {
 
@@ -41,7 +40,7 @@ public class GrcBlockFluidDefinition extends BlockTypeDefinition<GrcBlockFluid> 
         return create(fluid, Material.water);
     }
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public static GrcBlockFluidDefinition create(FluidTypeDefinition def) {
         return create(def.getFluid());
     }

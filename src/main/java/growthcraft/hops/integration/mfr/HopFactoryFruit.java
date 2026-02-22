@@ -19,18 +19,17 @@
  */
 package growthcraft.hops.integration.mfr;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.mfr.AbstractFactoryFruit;
 import growthcraft.hops.GrowthCraftHops;
 import growthcraft.hops.common.block.BlockHops;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import powercrystals.minefactoryreloaded.api.ReplacementBlock;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class HopFactoryFruit extends AbstractFactoryFruit<BlockHops> {
 

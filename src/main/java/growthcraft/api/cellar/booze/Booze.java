@@ -19,9 +19,9 @@
  */
 package growthcraft.api.cellar.booze;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.api.core.GrcFluid;
+
+import javax.annotation.Nonnull;
 
 public class Booze extends GrcFluid {
 

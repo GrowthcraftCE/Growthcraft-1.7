@@ -19,24 +19,6 @@
  */
 package growthcraft.cellar.common.item;
 
-import java.util.List;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidContainerItem;
-
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -52,8 +34,25 @@ import growthcraft.core.common.item.GrcItemBase;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.core.lib.GrcCoreState;
 import growthcraft.core.util.UnitFormatter;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidContainerItem;
 import squeek.applecore.api.food.FoodValues;
 import squeek.applecore.api.food.IEdible;
+
+import java.util.List;
 
 @Optional.Interface(iface = "squeek.applecore.api.food.IEdible", modid = AppleCore.MOD_ID)
 public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IEdible {
@@ -119,7 +118,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void getSubItems(Item item, CreativeTabs tab, List list) {
         for (int i = 0; i < 17; ++i) {
             list.add(new ItemStack(item, 1, i));
@@ -154,7 +153,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 
         // The fluid is too hot to fill with
         if (resource.getFluid()
-            .getTemperature() > 373) {
+                .getTemperature() > 373) {
             return 0;
         }
 
@@ -166,7 +165,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
             }
 
             final FluidStack stack = FluidStack
-                .loadFluidStackFromNBT(container.stackTagCompound.getCompoundTag("Fluid"));
+                    .loadFluidStackFromNBT(container.stackTagCompound.getCompoundTag("Fluid"));
 
             if (stack == null) {
                 return Math.min(capacity, amount);
@@ -276,8 +275,8 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
         final FluidStack fluidstack = getFluid(stack);
         if (fluidstack != null) {
             return CellarRegistry.instance()
-                .booze()
-                .getBoozeEntry(fluidstack.getFluid());
+                    .booze()
+                    .getBoozeEntry(fluidstack.getFluid());
         }
         return null;
     }
@@ -307,12 +306,12 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
     protected void applyEffects(ItemStack stack, World world, EntityPlayer player) {
         final FluidStack fluidstack = getFluid(stack);
         final boolean cancelled = GrowthCraftCellar.CELLAR_BUS
-            .post(new EventWaterBag.PreApplyEffects(stack, world, player));
+                .post(new EventWaterBag.PreApplyEffects(stack, world, player));
         if (!cancelled) {
             if (fluidstack != null) {
                 BoozeUtils.addEffects(fluidstack.getFluid(), stack, world, player);
                 player.getFoodStats()
-                    .addStats(getHealAmount(stack), getSaturation(stack));
+                        .addStats(getHealAmount(stack), getSaturation(stack));
             }
             GrowthCraftCellar.CELLAR_BUS.post(new EventWaterBag.PostApplyEffects(stack, world, player));
         }
@@ -325,7 +324,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
             // player.getFoodStats().func_151686_a(this, stack);
 
             final boolean cancelled = GrowthCraftCellar.CELLAR_BUS
-                .post(new EventWaterBag.PreDrink(stack, world, player));
+                    .post(new EventWaterBag.PreDrink(stack, world, player));
             if (!cancelled) {
                 world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
                 if (!world.isRemote) {
@@ -340,7 +339,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 
     @Override
     public boolean onItemUse(ItemStack _stack, EntityPlayer _p, World _w, int _x, int _y, int _z, int _d, float _fx,
-        float _fy, float _fz) {
+                             float _fy, float _fz) {
         return false;
     }
 
@@ -400,7 +399,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
         super.addInformation(stack, player, list, bool);
         final FluidStack fluidstack = getFluid(stack);
@@ -408,18 +407,18 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
             if (GrcCoreState.showDetailedInformation()) {
                 final String fluidname = UnitFormatter.fluidNameForContainer(fluidstack);
                 list.add(
-                    GrcI18n.translate(
-                        "grc.cellar.format.fluid_container.contents",
-                        fluidname,
-                        fluidstack.amount,
-                        getCapacity(stack)));
+                        GrcI18n.translate(
+                                "grc.cellar.format.fluid_container.contents",
+                                fluidname,
+                                fluidstack.amount,
+                                getCapacity(stack)));
                 final Fluid booze = fluidstack.getFluid();
                 BoozeUtils.addEffectInformation(booze, stack, player, list, bool);
             } else {
                 list.add(
-                    EnumChatFormatting.GRAY + GrcI18n.translate(
-                        "grc.tooltip.detailed_information",
-                        EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
+                        EnumChatFormatting.GRAY + GrcI18n.translate(
+                                "grc.tooltip.detailed_information",
+                                EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
             }
         }
     }

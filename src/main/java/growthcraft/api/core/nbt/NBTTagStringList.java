@@ -19,12 +19,11 @@
  */
 package growthcraft.api.core.nbt;
 
-import java.util.Collection;
-
-import javax.annotation.Nonnull;
-
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+
+import javax.annotation.Nonnull;
+import java.util.Collection;
 
 /**
  * Utility class for wrapping a NBTTagList for Strings

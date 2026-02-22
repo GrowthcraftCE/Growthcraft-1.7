@@ -39,7 +39,8 @@ public class UserPressingRecipe implements ICommentable {
         this.residue = res;
     }
 
-    public UserPressingRecipe() {}
+    public UserPressingRecipe() {
+    }
 
     @Override
     public String toString() {

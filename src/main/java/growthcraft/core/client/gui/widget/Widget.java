@@ -25,16 +25,16 @@ public class Widget {
 
     public boolean visible = true;
     public Rectangle rect;
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     protected WidgetManager manager;
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public Widget(WidgetManager man, Rectangle r) {
         this.manager = man;
         this.rect = r;
     }
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public Widget(WidgetManager man, int x, int y, int w, int h) {
         this(man, new Rectangle(x, y, w, h));
     }
@@ -101,7 +101,8 @@ public class Widget {
      * @param x  - screen x coordinate to draw to
      * @param y  - screen y coordinate to draw to
      */
-    protected void doDraw(int mx, int my, int x, int y) {}
+    protected void doDraw(int mx, int my, int x, int y) {
+    }
 
     /**
      * @param mx - mouse x coordinate
@@ -109,7 +110,8 @@ public class Widget {
      * @param x  - screen x coordinate to draw to
      * @param y  - screen y coordinate to draw to
      */
-    protected void doDrawForeground(int mx, int my, int x, int y) {}
+    protected void doDrawForeground(int mx, int my, int x, int y) {
+    }
 
     /**
      * @param mx - mouse x coordinate

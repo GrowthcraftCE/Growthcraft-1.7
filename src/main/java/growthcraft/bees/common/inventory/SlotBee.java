@@ -1,10 +1,9 @@
 package growthcraft.bees.common.inventory;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.core.common.inventory.slot.SlotInput;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 
 public class SlotBee extends SlotInput {
 
@@ -18,7 +17,7 @@ public class SlotBee extends SlotInput {
     @Override
     public boolean isItemValid(ItemStack stack) {
         return stack != null && BeesRegistry.instance()
-            .isItemBee(stack);
+                .isItemBee(stack);
     }
 
     @Override

@@ -19,11 +19,12 @@
  */
 package growthcraft.api.cellar.booze;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
+import growthcraft.api.cellar.booze.effect.EffectTipsy;
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.effect.AbstractEffect;
+import growthcraft.api.core.effect.EffectAddPotionEffect;
+import growthcraft.api.core.effect.EffectList;
+import growthcraft.api.core.effect.IEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -31,12 +32,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import growthcraft.api.cellar.booze.effect.EffectTipsy;
-import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.effect.AbstractEffect;
-import growthcraft.api.core.effect.EffectAddPotionEffect;
-import growthcraft.api.core.effect.EffectList;
-import growthcraft.api.core.effect.IEffect;
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Random;
 
 public class BoozeEffect extends AbstractEffect {
 
@@ -48,7 +46,8 @@ public class BoozeEffect extends AbstractEffect {
         this.booze = flu;
     }
 
-    public BoozeEffect() {}
+    public BoozeEffect() {
+    }
 
     public BoozeEffect clearEffects() {
         effects.clear();
@@ -125,12 +124,12 @@ public class BoozeEffect extends AbstractEffect {
         this.tipsyEffect = null;
         if (data.hasKey("tipsy_effect")) {
             this.tipsyEffect = (EffectTipsy) CoreRegistry.instance()
-                .getEffectsRegistry()
-                .loadEffectFromNBT(data, "tipsy_effect");
+                    .getEffectsRegistry()
+                    .loadEffectFromNBT(data, "tipsy_effect");
         }
         this.effects = (BoozeEffectList) CoreRegistry.instance()
-            .getEffectsRegistry()
-            .loadEffectFromNBT(data, "effects");
+                .getEffectsRegistry()
+                .loadEffectFromNBT(data, "effects");
         if (data.hasKey("fluid.name")) {
             this.booze = FluidRegistry.getFluid(data.getString("fluid.name"));
         }

@@ -19,16 +19,15 @@
  */
 package growthcraft.milk.client.resource;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import net.minecraft.util.ResourceLocation;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.milk.client.model.*;
 import growthcraft.milk.common.item.EnumCheeseStage;
 import growthcraft.milk.common.item.EnumCheeseType;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @SideOnly(Side.CLIENT)
 public class GrcMilkResources {
@@ -39,21 +38,21 @@ public class GrcMilkResources {
     // Textures
     /// Model Textures
     public final ResourceLocation textureButterChurn = new ResourceLocation(
-        DOMAIN,
-        "textures/models/butter_churn/butter_churn.png");
+            DOMAIN,
+            "textures/models/butter_churn/butter_churn.png");
     public final Map<EnumCheeseType, Map<EnumCheeseStage, ResourceLocation>> texturesCheeseBlock;
     public final ResourceLocation textureCheesePress = new ResourceLocation(
-        DOMAIN,
-        "textures/models/cheese_press/cheese_press.png");
+            DOMAIN,
+            "textures/models/cheese_press/cheese_press.png");
     public final ResourceLocation textureCheeseVat = new ResourceLocation(
-        DOMAIN,
-        "textures/models/cheese_vat/cheese_vat.png");
+            DOMAIN,
+            "textures/models/cheese_vat/cheese_vat.png");
     public final ResourceLocation textureHangingCurds = new ResourceLocation(
-        DOMAIN,
-        "textures/models/hanging_curds/hanging_curds.png");
+            DOMAIN,
+            "textures/models/hanging_curds/hanging_curds.png");
     public final ResourceLocation texturePancheon = new ResourceLocation(
-        DOMAIN,
-        "textures/models/pancheon/pancheon.png");
+            DOMAIN,
+            "textures/models/pancheon/pancheon.png");
 
     // Models
     public final ModelButterChurn modelButterChurn = new ModelButterChurn();

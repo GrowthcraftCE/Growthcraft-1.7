@@ -19,9 +19,6 @@
  */
 package growthcraft.cellar.client;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.MinecraftForgeClient;
-
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -38,19 +35,21 @@ import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy {
 
     protected void initRenders() {
         MinecraftForgeClient
-            .registerItemRenderer(GrowthCraftCellar.blocks.cultureJar.getItem(), new ItemRenderCultureJar());
+                .registerItemRenderer(GrowthCraftCellar.blocks.cultureJar.getItem(), new ItemRenderCultureJar());
         RenderingRegistry.registerBlockHandler(new RenderBrewKettle());
         RenderingRegistry.registerBlockHandler(new RenderCultureJar());
         RenderingRegistry.registerBlockHandler(new RenderFermentBarrel());
         RenderingRegistry.registerBlockHandler(new RenderFruitPress());
         RenderingRegistry.registerBlockHandler(new RenderFruitPresser());
         ClientRegistry
-            .bindTileEntitySpecialRenderer(TileEntityFruitPresser.class, new TileEntityFruitPresserRenderer());
+                .bindTileEntitySpecialRenderer(TileEntityFruitPresser.class, new TileEntityFruitPresserRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCultureJar.class, new TileEntityCultureJarRenderer());
     }
 
@@ -58,7 +57,7 @@ public class ClientProxy extends CommonProxy {
         final int villagerID = GrowthCraftCellar.getConfig().villagerBrewerID;
         if (villagerID > 0) {
             VillagerRegistry.instance()
-                .registerVillagerSkin(villagerID, new ResourceLocation("grccellar", "textures/entity/brewer.png"));
+                    .registerVillagerSkin(villagerID, new ResourceLocation("grccellar", "textures/entity/brewer.png"));
         }
     }
 

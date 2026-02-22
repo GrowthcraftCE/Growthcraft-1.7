@@ -25,7 +25,8 @@ public class NEIPlatform {
 
     public static final String MOD_ID = "NotEnoughItems";
 
-    private NEIPlatform() {}
+    private NEIPlatform() {
+    }
 
     public static boolean isLoaded() {
         return Loader.isModLoaded(MOD_ID);

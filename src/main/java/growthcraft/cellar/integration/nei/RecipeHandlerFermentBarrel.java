@@ -19,14 +19,6 @@
  */
 package growthcraft.cellar.integration.nei;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
@@ -39,6 +31,12 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.client.gui.GuiFermentBarrel;
 import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.core.integration.nei.TemplateRenderHelper;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class RecipeHandlerFermentBarrel extends TemplateRecipeHandler {
 
@@ -61,8 +59,8 @@ public class RecipeHandlerFermentBarrel extends TemplateRecipeHandler {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         final List<IFermentationRecipe> recipes = CellarRegistry.instance()
-            .fermenting()
-            .findRecipes(ingredient);
+                .fermenting()
+                .findRecipes(ingredient);
         for (IFermentationRecipe recipe : recipes) {
             arecipes.add(new CachedFermentationRecipe(recipe));
         }
@@ -106,16 +104,16 @@ public class RecipeHandlerFermentBarrel extends TemplateRecipeHandler {
             super();
             this.fermentationRecipe = recipe;
             this.ingredient = new PositionedStack(
-                fermentationRecipe.getFermentingItemStack()
-                    .getItemStacks(),
-                38,
-                42);
+                    fermentationRecipe.getFermentingItemStack()
+                            .itemStacks(),
+                    38,
+                    42);
 
             this.inputFluidStacks = fermentationRecipe.getInputFluidStack()
-                .getFluidStacks();
+                    .getFluidStacks();
 
             this.outputFluidStack = fermentationRecipe.getOutputFluidStack()
-                .copy();
+                    .copy();
             outputFluidStack.amount = GrowthCraftCellar.getConfig().fermentBarrelMaxCap;
         }
 

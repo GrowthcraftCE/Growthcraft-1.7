@@ -28,7 +28,8 @@ public class FrozenObjectError extends RuntimeException {
         super(msg);
     }
 
-    public FrozenObjectError() {}
+    public FrozenObjectError() {
+    }
 
     /**
      * Helper method for creating frozen errors for a specified object

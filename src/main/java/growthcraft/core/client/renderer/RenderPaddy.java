@@ -1,19 +1,17 @@
 package growthcraft.core.client.renderer;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.core.client.ClientProxy;
+import growthcraft.core.common.block.BlockPaddyBase;
+import growthcraft.core.util.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.core.client.ClientProxy;
-import growthcraft.core.common.block.BlockPaddyBase;
-import growthcraft.core.util.RenderUtils;
 
 public class RenderPaddy implements ISimpleBlockRenderingHandler {
 
@@ -40,50 +38,50 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler {
             GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
             RenderUtils.drawFace(RenderUtils.Face.YNEG, block, renderer, tes, bottomFaceIcon, 0.0D, 0.0D, 0.0D);
             RenderUtils.drawFace(
-                RenderUtils.Face.YPOS,
-                block,
-                renderer,
-                tes,
-                paddyBlock.getIcon(1, metadata),
-                0.0D,
-                0.0D,
-                0.0D);
+                    RenderUtils.Face.YPOS,
+                    block,
+                    renderer,
+                    tes,
+                    paddyBlock.getIcon(1, metadata),
+                    0.0D,
+                    0.0D,
+                    0.0D);
             RenderUtils.drawFace(
-                RenderUtils.Face.ZNEG,
-                block,
-                renderer,
-                tes,
-                paddyBlock.getIcon(2, metadata),
-                0.0D,
-                0.0D,
-                0.0D);
+                    RenderUtils.Face.ZNEG,
+                    block,
+                    renderer,
+                    tes,
+                    paddyBlock.getIcon(2, metadata),
+                    0.0D,
+                    0.0D,
+                    0.0D);
             RenderUtils.drawFace(
-                RenderUtils.Face.ZPOS,
-                block,
-                renderer,
-                tes,
-                paddyBlock.getIcon(3, metadata),
-                0.0D,
-                0.0D,
-                0.0D);
+                    RenderUtils.Face.ZPOS,
+                    block,
+                    renderer,
+                    tes,
+                    paddyBlock.getIcon(3, metadata),
+                    0.0D,
+                    0.0D,
+                    0.0D);
             RenderUtils.drawFace(
-                RenderUtils.Face.XNEG,
-                block,
-                renderer,
-                tes,
-                paddyBlock.getIcon(4, metadata),
-                0.0D,
-                0.0D,
-                0.0D);
+                    RenderUtils.Face.XNEG,
+                    block,
+                    renderer,
+                    tes,
+                    paddyBlock.getIcon(4, metadata),
+                    0.0D,
+                    0.0D,
+                    0.0D);
             RenderUtils.drawFace(
-                RenderUtils.Face.XPOS,
-                block,
-                renderer,
-                tes,
-                paddyBlock.getIcon(5, metadata),
-                0.0D,
-                0.0D,
-                0.0D);
+                    RenderUtils.Face.XPOS,
+                    block,
+                    renderer,
+                    tes,
+                    paddyBlock.getIcon(5, metadata),
+                    0.0D,
+                    0.0D,
+                    0.0D);
             GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 
             final double thick = 0.125D;
@@ -144,7 +142,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == id) {
             final int meta = world.getBlockMetadata(x, y, z);
             final BlockPaddyBase paddyBlock = (BlockPaddyBase) block;
@@ -263,7 +261,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler {
 
                     tessellator.setColorOpaque_F(f * r, f * g, f * b);
                     final IIcon icon = paddyBlock.getFluidBlock()
-                        .getBlockTextureFromSide(1);
+                            .getBlockTextureFromSide(1);
                     renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
                     final double fy = (double) y - (1d / 32d) - (y2 - y1) * ((double) (7 - meta) / 7d);
                     renderer.renderFaceYPos(block, x, fy, z, icon);
@@ -283,7 +281,7 @@ public class RenderPaddy implements ISimpleBlockRenderingHandler {
         for (int k1 = -1; k1 <= 1; ++k1) {
             for (int l1 = -1; l1 <= 1; ++l1) {
                 final int i2 = world.getBiomeGenForCoords(x + l1, z + k1)
-                    .getWaterColorMultiplier();
+                        .getWaterColorMultiplier();
                 l += (i2 & 16711680) >> 16;
                 i1 += (i2 & 65280) >> 8;
                 j1 += i2 & 255;

@@ -19,10 +19,10 @@
  */
 package growthcraft.api.cellar.distilling;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+
+import javax.annotation.Nonnull;
 
 public class DistilleryRegistry implements IDistilleryRegistry {
 

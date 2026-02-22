@@ -1,11 +1,5 @@
 package growthcraft.rice;
 
-import net.minecraft.init.Blocks;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -32,12 +26,17 @@ import growthcraft.rice.event.BonemealEventRice;
 import growthcraft.rice.init.GrcRiceBlocks;
 import growthcraft.rice.init.GrcRiceFluids;
 import growthcraft.rice.init.GrcRiceItems;
+import net.minecraft.init.Blocks;
+import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(
-    modid = GrowthCraftRice.MOD_ID,
-    name = GrowthCraftRice.MOD_NAME,
-    version = GrowthCraftRice.MOD_VERSION,
-    dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
+        modid = GrowthCraftRice.MOD_ID,
+        name = GrowthCraftRice.MOD_NAME,
+        version = GrowthCraftRice.MOD_VERSION,
+        dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
 public class GrowthCraftRice {
 
     public static final String MOD_ID = "Growthcraft|Rice";
@@ -102,9 +101,9 @@ public class GrowthCraftRice {
         final VillageHandlerRice handler = new VillageHandlerRice();
         final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
         if (brewerID > 0) VillagerRegistry.instance()
-            .registerVillageTradeHandler(brewerID, handler);
+                .registerVillageTradeHandler(brewerID, handler);
         VillagerRegistry.instance()
-            .registerVillageCreationHandler(handler);
+                .registerVillageCreationHandler(handler);
     }
 
     @EventHandler

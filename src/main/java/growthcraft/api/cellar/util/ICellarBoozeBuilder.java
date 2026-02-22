@@ -19,15 +19,14 @@
  */
 package growthcraft.api.cellar.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.fluids.FluidTag;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Now you can make the same awesome we use internally

@@ -19,14 +19,14 @@
  */
 package growthcraft.rice.util;
 
+import growthcraft.rice.GrowthCraftRice;
 import net.minecraft.block.Block;
 import net.minecraft.world.IBlockAccess;
 
-import growthcraft.rice.GrowthCraftRice;
-
 public class RiceBlockCheck {
 
-    private RiceBlockCheck() {}
+    private RiceBlockCheck() {
+    }
 
     /**
      * Determines if block is a normal dirt paddy block

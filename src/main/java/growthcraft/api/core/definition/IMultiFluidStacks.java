@@ -19,12 +19,11 @@
  */
 package growthcraft.api.core.definition;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public interface IMultiFluidStacks extends IItemStackListProvider {
 

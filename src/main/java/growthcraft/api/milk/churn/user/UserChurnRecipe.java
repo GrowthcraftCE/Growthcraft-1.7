@@ -19,17 +19,16 @@
  */
 package growthcraft.api.milk.churn.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.milk.churn.ChurnRecipe;
 import growthcraft.api.milk.churn.IChurnRecipe;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserChurnRecipe implements ICommentable {
 
@@ -40,19 +39,20 @@ public class UserChurnRecipe implements ICommentable {
     public int churns;
 
     public UserChurnRecipe(FluidStackSchema pInputFluid, FluidStackSchema pOutputFluid, ItemKeySchema pOutputItem,
-        int pChurns) {
+                           int pChurns) {
         this.output_item = pOutputItem;
         this.input_fluid = pInputFluid;
         this.output_fluid = pOutputFluid;
         this.churns = pChurns;
     }
 
-    public UserChurnRecipe() {}
+    public UserChurnRecipe() {
+    }
 
     @Override
     public String toString() {
         return String
-            .format("UserChurnRecipe(`%s` / %d = `%s` & `%s`)", input_fluid, churns, output_fluid, output_item);
+                .format("UserChurnRecipe(`%s` / %d = `%s` & `%s`)", input_fluid, churns, output_fluid, output_item);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class UserChurnRecipe implements ICommentable {
         final FluidStack outputFluidStack = output_fluid != null ? output_fluid.asFluidStack() : null;
 
         if (output_item != null && output_item.isValid()) {
-            for (ItemStack stack : output_item.getItemStacks()) {
+            for (ItemStack stack : output_item.itemStacks()) {
                 recipes.add(new ChurnRecipe(inputFluidStack, outputFluidStack, stack, churns));
                 // only the first item is used, everything is dropped.
                 break;

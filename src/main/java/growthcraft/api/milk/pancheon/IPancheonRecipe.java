@@ -19,9 +19,9 @@
  */
 package growthcraft.api.milk.pancheon;
 
-import javax.annotation.Nullable;
-
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nullable;
 
 public interface IPancheonRecipe {
 

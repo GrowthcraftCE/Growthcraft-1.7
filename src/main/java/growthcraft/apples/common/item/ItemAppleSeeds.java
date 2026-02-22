@@ -1,5 +1,10 @@
 package growthcraft.apples.common.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.apples.GrowthCraftApples;
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.common.item.GrcItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,12 +14,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.apples.GrowthCraftApples;
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.common.item.GrcItemBase;
 
 public class ItemAppleSeeds extends GrcItemBase implements IPlantable {
 
@@ -32,7 +31,7 @@ public class ItemAppleSeeds extends GrcItemBase implements IPlantable {
      ************/
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir,
-        float par8, float par9, float par10) {
+                             float par8, float par9, float par10) {
         final Block block = world.getBlock(x, y, z);
         if (block == Blocks.snow_layer && (world.getBlockMetadata(x, y, z) & 7) < 1) {
             dir = 1;
@@ -77,12 +76,12 @@ public class ItemAppleSeeds extends GrcItemBase implements IPlantable {
                     }
 
                     world.playSoundEffect(
-                        (float) x + 0.5F,
-                        (float) y + 0.5F,
-                        (float) z + 0.5F,
-                        cropBlock.stepSound.func_150496_b(),
-                        (cropBlock.stepSound.getVolume() + 1.0F) / 2.0F,
-                        cropBlock.stepSound.getPitch() * 0.8F);
+                            (float) x + 0.5F,
+                            (float) y + 0.5F,
+                            (float) z + 0.5F,
+                            cropBlock.stepSound.func_150496_b(),
+                            (cropBlock.stepSound.getVolume() + 1.0F) / 2.0F,
+                            cropBlock.stepSound.getPitch() * 0.8F);
                     --stack.stackSize;
                 }
             }

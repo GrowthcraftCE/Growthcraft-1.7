@@ -19,13 +19,12 @@
  */
 package growthcraft.core.common;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import net.minecraft.block.Block;
-
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
+import net.minecraft.block.Block;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class GrcModuleBlocks extends GrcModuleBase {
 

@@ -19,24 +19,6 @@
  */
 package growthcraft.milk.common.tileentity;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-
 import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.fluids.FluidTest;
@@ -65,18 +47,35 @@ import growthcraft.milk.common.tileentity.cheesevat.CheeseVatState;
 import growthcraft.milk.event.EventCheeseVat.EventCheeseVatMadeCheeseFluid;
 import growthcraft.milk.event.EventCheeseVat.EventCheeseVatMadeCurds;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class TileEntityCheeseVat extends GrcTileDeviceBase
-    implements IItemHandler, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice {
+        implements IItemHandler, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice {
 
-    private static final FluidTankType[] recipeTanks = { FluidTankType.PRIMARY, FluidTankType.RECIPE };
+    private static final FluidTankType[] recipeTanks = {FluidTankType.PRIMARY, FluidTankType.RECIPE};
     private static final AccesibleSlots accessibleSlots = new AccesibleSlots(
-        new int[][] { { 0, 1, 2 }, { 0, 1, 2 }, { 0, 1, 2 }, { 0, 1, 2 }, { 0, 1, 2 }, { 0, 1, 2 } });
+            new int[][]{{0, 1, 2}, {0, 1, 2}, {0, 1, 2}, {0, 1, 2}, {0, 1, 2}, {0, 1, 2}});
     private final DeviceFluidSlot primaryFluidSlot = new DeviceFluidSlot(this, FluidTankType.PRIMARY.id);
     private final DeviceFluidSlot rennetFluidSlot = new DeviceFluidSlot(this, FluidTankType.RENNET.id);
     private final DeviceFluidSlot wasteFluidSlot = new DeviceFluidSlot(this, FluidTankType.WASTE.id);
-    private boolean recheckRecipe;
     private final TileHeatingComponent heatComponent = new TileHeatingComponent(this, 0.5f);
+    private boolean recheckRecipe;
     private CheeseVatState vatState = CheeseVatState.IDLE;
     private float progress;
     private int progressMax;
@@ -150,20 +149,20 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
 
     @Override
     protected FluidTank[] createTanks() {
-        return new FluidTank[] {
-            // milk
-            new FluidTank(GrowthCraftMilk.getConfig().cheeseVatPrimaryTankCapacity),
-            // rennet
-            new FluidTank(GrowthCraftMilk.getConfig().cheeseVatRennetTankCapacity),
-            // waste
-            new FluidTank(GrowthCraftMilk.getConfig().cheeseVatWasteTankCapacity),
-            // recipe fluid
-            new FluidTank(GrowthCraftMilk.getConfig().cheeseVatRecipeTankCapacity) };
+        return new FluidTank[]{
+                // milk
+                new FluidTank(GrowthCraftMilk.getConfig().cheeseVatPrimaryTankCapacity),
+                // rennet
+                new FluidTank(GrowthCraftMilk.getConfig().cheeseVatRennetTankCapacity),
+                // waste
+                new FluidTank(GrowthCraftMilk.getConfig().cheeseVatWasteTankCapacity),
+                // recipe fluid
+                new FluidTank(GrowthCraftMilk.getConfig().cheeseVatRecipeTankCapacity)};
     }
 
     public int getVatFluidCapacity() {
         return getFluidTank(FluidTankType.PRIMARY.id).getCapacity() + getFluidTank(FluidTankType.WASTE.id).getCapacity()
-            + getFluidTank(FluidTankType.RECIPE.id).getCapacity();
+                + getFluidTank(FluidTankType.RECIPE.id).getCapacity();
     }
 
     @Override
@@ -194,34 +193,34 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
     private boolean activateCurdTransition(boolean checkOnly) {
         final ItemStack starterCultureStack = GrowthCraftMilk.items.starterCulture.asStack();
         final int slot = InventoryProcessor.instance()
-            .findItemSlot(this, starterCultureStack);
+                .findItemSlot(this, starterCultureStack);
         if (slot < 0) {
             GrowthCraftMilk.getLogger()
-                .debug("No Starter Culture found!");
+                    .debug("No Starter Culture found!");
             return false;
         }
 
         final FluidStack milkStack = primaryFluidSlot.get();
         if (!FluidTest.hasTags(milkStack, MilkFluidTags.MILK)) {
             GrowthCraftMilk.getLogger()
-                .debug("Primary Fluid is NOT milk.");
+                    .debug("Primary Fluid is NOT milk.");
             return false;
         }
         if (!primaryFluidSlot.isFull()) {
             GrowthCraftMilk.getLogger()
-                .debug("Primary Fluid Tank is NOT full.");
+                    .debug("Primary Fluid Tank is NOT full.");
             return false;
         }
 
         final FluidStack rennetStack = rennetFluidSlot.get();
         if (!FluidTest.hasTags(rennetStack, MilkFluidTags.RENNET)) {
             GrowthCraftMilk.getLogger()
-                .debug("Rennet contains NON rennet fluid.");
+                    .debug("Rennet contains NON rennet fluid.");
             return false;
         }
         if (!rennetFluidSlot.isFull()) {
             GrowthCraftMilk.getLogger()
-                .debug("Rennet Fluid Tank is NOT full.");
+                    .debug("Rennet Fluid Tank is NOT full.");
             return false;
         }
 
@@ -230,9 +229,9 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
             primaryFluidSlot.set(FluidUtils.exchangeFluid(milkStack, GrowthCraftMilk.fluids.curds.getFluid()));
             rennetFluidSlot.clear();
             wasteFluidSlot.fill(
-                GrowthCraftMilk.fluids.whey.fluid
-                    .asFluidStack(GrowthCraftMilk.getConfig().cheeseVatMilkToCurdsWheyAmount),
-                true);
+                    GrowthCraftMilk.fluids.whey.fluid
+                            .asFluidStack(GrowthCraftMilk.getConfig().cheeseVatMilkToCurdsWheyAmount),
+                    true);
             GrowthCraftMilk.MILK_BUS.post(new EventCheeseVatMadeCurds(this));
         }
         return true;
@@ -243,12 +242,12 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
         if (FluidTest.hasTags(milkStack, MilkFluidTags.WHEY) && primaryFluidSlot.isFull()) {
             if (!checkOnly) {
                 final Fluid fluid = GrowthCraftMilk.fluids.cheeses.get(EnumCheeseType.RICOTTA)
-                    .getFluid();
+                        .getFluid();
                 primaryFluidSlot.set(FluidUtils.exchangeFluid(primaryFluidSlot.get(), fluid));
                 wasteFluidSlot.fill(
-                    GrowthCraftMilk.fluids.whey.fluid
-                        .asFluidStack(GrowthCraftMilk.getConfig().cheeseVatWheyToRicottaWheyAmount),
-                    true);
+                        GrowthCraftMilk.fluids.whey.fluid
+                                .asFluidStack(GrowthCraftMilk.getConfig().cheeseVatWheyToRicottaWheyAmount),
+                        true);
                 GrowthCraftMilk.MILK_BUS.post(new EventCheeseVatMadeCheeseFluid(this));
             }
             return true;
@@ -271,23 +270,23 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
         }
 
         final ICheeseVatRecipe recipe = MilkRegistry.instance()
-            .cheeseVat()
-            .findRecipe(fluids, items);
+                .cheeseVat()
+                .findRecipe(fluids, items);
         if (recipe != null) {
             final List<IMultiItemStacks> inputItems = recipe.getInputItemStacks();
             final List<IMultiFluidStacks> inputFluids = recipe.getInputFluidStacks();
             // locate all the items in the inventory
             final int[] invSlots = InventoryProcessor.instance()
-                .findItemSlots(this, inputItems);
+                    .findItemSlots(this, inputItems);
             if (InventoryProcessor.instance()
-                .slotsAreValid(this, invSlots)
-                && InventoryProcessor.instance()
+                    .slotsAreValid(this, invSlots)
+                    && InventoryProcessor.instance()
                     .checkSlotsAndSizes(this, inputItems, invSlots)) {
                 if (FluidTest.hasEnoughAndExpected(inputFluids, fluids)) {
                     if (!checkOnly) {
                         // consume items
                         InventoryProcessor.instance()
-                            .consumeItemsInSlots(this, inputItems, invSlots);
+                                .consumeItemsInSlots(this, inputItems, invSlots);
                         // consume all fluids
                         for (int fluidIndex = 0; fluidIndex < fluids.size(); ++fluidIndex) {
                             final FluidStack fluidStack = fluids.get(fluidIndex);
@@ -390,8 +389,8 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid) {
         return FluidTest.hasTags(fluid, MilkFluidTags.MILK) || FluidTest.hasTags(fluid, MilkFluidTags.WHEY)
-            || FluidTest.hasTags(fluid, MilkFluidTags.RENNET)
-            || MilkRegistry.instance()
+                || FluidTest.hasTags(fluid, MilkFluidTags.RENNET)
+                || MilkRegistry.instance()
                 .cheeseVat()
                 .isFluidIngredient(fluid);
     }
@@ -420,12 +419,12 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
                 result = rennetFluidSlot.fill(stack, doFill);
             }
         } else if (MilkRegistry.instance()
-            .cheeseVat()
-            .isFluidIngredient(stack)) {
-                if (primaryTankHasCurds()) {
-                    result = fillFluidTank(FluidTankType.RECIPE.id, stack, doFill);
-                }
+                .cheeseVat()
+                .isFluidIngredient(stack)) {
+            if (primaryTankHasCurds()) {
+                result = fillFluidTank(FluidTankType.RECIPE.id, stack, doFill);
             }
+        }
         return result;
     }
 
@@ -436,15 +435,15 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
     private boolean doSwordActivation(EntityPlayer _player, ItemStack _stack) {
         if (!isHeated()) {
             GrowthCraftMilk.getLogger()
-                .debug("Vat is NOT heated.");
+                    .debug("Vat is NOT heated.");
             return false;
         }
         GrowthCraftMilk.getLogger()
-            .debug("Activating Using Sword.");
+                .debug("Activating Using Sword.");
         final FluidStack milkStack = primaryFluidSlot.get();
         if (FluidTest.hasTags(milkStack, MilkFluidTags.MILK)) {
             GrowthCraftMilk.getLogger()
-                .debug("Activating Curd Transition.");
+                    .debug("Activating Curd Transition.");
             if (activateCurdTransition(true)) {
                 setupProgress(GrowthCraftMilk.getConfig().cheeseVatCurdTime);
                 setVatState(CheeseVatState.PREPARING_CURDS);
@@ -453,7 +452,7 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
             }
         } else if (FluidTest.hasTags(milkStack, MilkFluidTags.WHEY)) {
             GrowthCraftMilk.getLogger()
-                .debug("Activating Whey Transition.");
+                    .debug("Activating Whey Transition.");
             if (activateWheyTransition(true)) {
                 setupProgress(GrowthCraftMilk.getConfig().cheeseVatWheyTime);
                 setVatState(CheeseVatState.PREPARING_RICOTTA);
@@ -483,7 +482,7 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
 
     private boolean addItemIngredient(EntityPlayer player, ItemStack stack) {
         final int slot = InventoryProcessor.instance()
-            .findNextEmpty(this);
+                .findNextEmpty(this);
         if (slot == -1) return false;
         final ItemStack result = ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
         setInventorySlotContents(slot, result);
@@ -503,10 +502,10 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
         } else if (GrowthCraftMilk.items.cheeseCloth.equals(item)) {
             return collectCurdInCheeseCloth(player, stack);
         } else if (MilkRegistry.instance()
-            .cheeseVat()
-            .isItemIngredient(stack)) {
-                return addItemIngredient(player, stack);
-            }
+                .cheeseVat()
+                .isItemIngredient(stack)) {
+            return addItemIngredient(player, stack);
+        }
         return false;
     }
 
@@ -516,10 +515,10 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
         if (!isIdle()) return false;
         if (onHand == null) {
             final int slot = InventoryProcessor.instance()
-                .findNextPresentFromEnd(this);
+                    .findNextPresentFromEnd(this);
             if (slot == -1) return false;
             final ItemStack stack = InventoryProcessor.instance()
-                .yankSlot(this, slot);
+                    .yankSlot(this, slot);
             // ItemUtils.addStackToPlayer(stack, player, false);
             ItemUtils.spawnItemStackAtEntity(stack, player, worldObj.rand);
             return true;
@@ -601,7 +600,7 @@ public class TileEntityCheeseVat extends GrcTileDeviceBase
         WASTE,
         RECIPE;
 
-        public static final FluidTankType[] VALUES = new FluidTankType[] { PRIMARY, RENNET, WASTE, RECIPE };
+        public static final FluidTankType[] VALUES = new FluidTankType[]{PRIMARY, RENNET, WASTE, RECIPE};
         public final int id;
         public final String name;
 

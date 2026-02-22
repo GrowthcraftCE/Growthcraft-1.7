@@ -19,8 +19,16 @@
  */
 package growthcraft.cellar.common.item;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.booze.BoozeEntry;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.util.BoozeUtils;
+import growthcraft.core.common.item.GrcItemFoodBase;
+import growthcraft.core.common.item.IFluidItem;
+import growthcraft.core.lib.GrcCoreState;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -34,16 +42,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.booze.BoozeEntry;
-import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.util.BoozeUtils;
-import growthcraft.core.common.item.GrcItemFoodBase;
-import growthcraft.core.common.item.IFluidItem;
-import growthcraft.core.lib.GrcCoreState;
+import java.util.List;
 
 public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem {
 
@@ -84,8 +83,8 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem {
         final Fluid fluid = getFluid(stack);
         if (fluid != null) {
             return CellarRegistry.instance()
-                .booze()
-                .getBoozeEntry(fluid);
+                    .booze()
+                    .getBoozeEntry(fluid);
         }
         return null;
     }
@@ -129,16 +128,16 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
         super.addInformation(stack, player, list, bool);
         final boolean showDetailed = GrcCoreState.showDetailedInformation();
         BoozeUtils.addBottleInformation(getFluid(stack), stack, player, list, bool, showDetailed);
         if (!showDetailed) {
             list.add(
-                EnumChatFormatting.GRAY + GrcI18n.translate(
-                    "grc.tooltip.detailed_information",
-                    EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
+                    EnumChatFormatting.GRAY + GrcI18n.translate(
+                            "grc.tooltip.detailed_information",
+                            EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
         }
     }
 
@@ -205,7 +204,7 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void getSubItems(Item item, CreativeTabs tab, List list) {
         for (int i = 0; i < getFluidArray().length; i++) {
             list.add(new ItemStack(item, 1, i));

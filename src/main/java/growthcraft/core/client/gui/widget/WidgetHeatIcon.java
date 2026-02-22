@@ -19,13 +19,12 @@
  */
 package growthcraft.core.client.gui.widget;
 
-import net.minecraft.tileentity.TileEntity;
-
 import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
+import net.minecraft.tileentity.TileEntity;
 
 public class WidgetHeatIcon extends WidgetIconBase {
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public WidgetHeatIcon(WidgetManager man, int x, int y, int w, int h) {
         super(man, x, y, w, h);
     }
@@ -38,7 +37,7 @@ public class WidgetHeatIcon extends WidgetIconBase {
                 final int iconHeight = heatedDevice.getHeatScaled(textureRect.h);
                 final int offY = textureRect.h - iconHeight;
                 manager.gui
-                    .drawTexturedModalRect(x, y + offY, textureRect.x, textureRect.y + offY, textureRect.w, iconHeight);
+                        .drawTexturedModalRect(x, y + offY, textureRect.x, textureRect.y + offY, textureRect.w, iconHeight);
             }
         }
     }

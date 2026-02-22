@@ -1,10 +1,9 @@
 package growthcraft.apples.handler;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.IFuelHandler;
 import growthcraft.apples.GrowthCraftApples;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 /**
  * Created by Alatyami on 8/30/2015.
@@ -17,7 +16,7 @@ public class AppleFuelHandler implements IFuelHandler {
         if (fuel != null) {
             final Item item = fuel.getItem();
             if (GrowthCraftApples.blocks.appleSapling.getItem()
-                .equals(item)) {
+                    .equals(item)) {
                 return 100;
             }
         }

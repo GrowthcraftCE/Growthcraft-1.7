@@ -19,14 +19,13 @@
  */
 package growthcraft.api.milk.churn;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.log.ILoggable;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.log.ILoggable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public interface IChurnRegistry extends ILoggable {
 
@@ -39,7 +38,7 @@ public interface IChurnRegistry extends ILoggable {
      * @param churns      - how many times must a user churn the fluid to produce results?
      */
     void addRecipe(@Nonnull FluidStack inputFluid, @Nonnull FluidStack outputFluid, @Nullable ItemStack outputItem,
-        int churns);
+                   int churns);
 
     /**
      * Determines if the provided fluid is an input ingredient

@@ -19,17 +19,16 @@
  */
 package growthcraft.core.common.tileentity;
 
-import java.io.IOException;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.*;
-
 import growthcraft.api.core.fluids.FluidTest;
 import growthcraft.core.common.tileentity.device.FluidTanks;
 import growthcraft.core.common.tileentity.device.IFluidTanks;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.*;
+
+import java.io.IOException;
 
 /**
  * Extend this base class if you want a base class with an `Inventory` and `Fluid Tanks`
@@ -43,10 +42,11 @@ public abstract class GrcTileDeviceBase extends GrcTileInventoryBase implements 
         this.tanks = new FluidTanks(createTanks());
     }
 
-    protected void markFluidDirty() {}
+    protected void markFluidDirty() {
+    }
 
     protected FluidTank[] createTanks() {
-        return new FluidTank[] {};
+        return new FluidTank[]{};
     }
 
     @Override

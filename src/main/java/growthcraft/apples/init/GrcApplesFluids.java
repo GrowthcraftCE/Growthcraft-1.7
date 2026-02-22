@@ -19,8 +19,6 @@
  */
 package growthcraft.apples.init;
 
-import net.minecraftforge.oredict.OreDictionary;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.api.cellar.booze.Booze;
 import growthcraft.apples.GrowthCraftApples;
@@ -30,6 +28,7 @@ import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.common.definition.ItemDefinition;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcApplesFluids extends GrcModuleBase {
 
@@ -46,7 +45,7 @@ public class GrcApplesFluids extends GrcModuleBase {
         BoozeRegistryHelper.initializeBoozeFluids("grc.appleCider", appleCiderBooze);
         for (Booze booze : appleCiderBooze) {
             booze.setColor(GrowthCraftApples.getConfig().appleCiderColor)
-                .setDensity(1010);
+                    .setDensity(1010);
         }
         BoozeRegistryHelper.initializeBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets);
         BoozeRegistryHelper.setBoozeFoodStats(appleCiderBooze, 1, -0.3f);
@@ -54,7 +53,7 @@ public class GrcApplesFluids extends GrcModuleBase {
 
         appleCiderBooze[4].setColor(GrowthCraftApples.getConfig().silkenNectarColor);
         appleCiderFluids[4].getBlock()
-            .refreshColor();
+                .refreshColor();
 
         appleCider = new ItemDefinition(new ItemBoozeBottle(appleCiderBooze));
     }
@@ -63,7 +62,7 @@ public class GrcApplesFluids extends GrcModuleBase {
     public void register() {
         GameRegistry.registerItem(appleCider.getItem(), "grc.appleCider");
         BoozeRegistryHelper
-            .registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", null);
+                .registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", null);
         // Ore Dictionary
         OreDictionary.registerOre("foodApplejuice", appleCider.asStack());
     }

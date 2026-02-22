@@ -19,10 +19,9 @@
  */
 package growthcraft.api.bees.user;
 
-import net.minecraft.block.Block;
-
 import growthcraft.api.core.schema.BlockKeySchema;
 import growthcraft.api.core.schema.ICommentable;
+import net.minecraft.block.Block;
 
 public class UserFlowerEntry implements ICommentable {
 
@@ -38,7 +37,8 @@ public class UserFlowerEntry implements ICommentable {
         this.block = new BlockKeySchema(pBlock, meta);
     }
 
-    public UserFlowerEntry() {}
+    public UserFlowerEntry() {
+    }
 
     @Override
     public String getComment() {

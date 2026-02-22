@@ -1,14 +1,14 @@
 package growthcraft.cellar.network;
 
+import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
-
 public class PacketClearTankButton extends AbstractPacketButton {
 
-    public PacketClearTankButton() {}
+    public PacketClearTankButton() {
+    }
 
     public PacketClearTankButton(int x, int y, int z) {
         super(x, y, z);

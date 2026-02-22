@@ -1,12 +1,10 @@
 package growthcraft.milk.client.model;
 
+import growthcraft.api.core.util.GrcColor;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-
 import org.lwjgl.opengl.GL11;
-
-import growthcraft.api.core.util.GrcColor;
 
 /**
  * HangingCheese - Undefined
@@ -15,6 +13,7 @@ import growthcraft.api.core.util.GrcColor;
 public class ModelHangingCurds extends ModelBase {
 
     public static final float SCALE = 1.0f / 16.0f;
+    private final GrcColor curdColor = GrcColor.newWhite();
     public ModelRenderer stick;
     public ModelRenderer curdPart1;
     public ModelRenderer curdPart2;
@@ -28,7 +27,6 @@ public class ModelHangingCurds extends ModelBase {
     public ModelRenderer curdPart10;
     public ModelRenderer curdPart11;
     public ModelRenderer curdPart12;
-    private final GrcColor curdColor = GrcColor.newWhite();
 
     public ModelHangingCurds() {
         this.textureWidth = 32;

@@ -15,15 +15,14 @@
  */
 package growthcraft.core.integration.forestry;
 
-import java.util.Collection;
-import java.util.List;
-
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.api.core.util.Point3;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.api.core.util.Point3;
+import java.util.Collection;
+import java.util.List;
 
 public class CropBasicGrowthCraft extends AbstractForestryCrop {
 
@@ -72,9 +71,9 @@ public class CropBasicGrowthCraft extends AbstractForestryCrop {
     @Override
     public String toString() {
         return String.format(
-            "CropBasicGrowthCraft [ position: [ %s ]; block: %s; meta: %s ]",
-            position.toString(),
-            block.getUnlocalizedName(),
-            meta);
+                "CropBasicGrowthCraft [ position: [ %s ]; block: %s; meta: %s ]",
+                position.toString(),
+                block.getUnlocalizedName(),
+                meta);
     }
 }

@@ -19,8 +19,11 @@
  */
 package growthcraft.milk.common.item;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.nbt.NBTHelper;
+import growthcraft.core.common.item.IItemTileBlock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -28,11 +31,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.api.core.nbt.NBTHelper;
-import growthcraft.core.common.item.IItemTileBlock;
+import java.util.List;
 
 public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock {
 
@@ -101,7 +100,7 @@ public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
         final NBTTagCompound nbt = getTileTagCompound(stack);
         if (nbt.hasKey("dried") && nbt.getBoolean("dried")) {
@@ -112,8 +111,8 @@ public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock {
                 final int ageMax = nbt.getInteger("age_max");
                 final int t = age * 100 / (ageMax > 0 ? ageMax : 1200);
                 list.add(
-                    GrcI18n.translate("grcmilk.hanging_curds.drying.prefix")
-                        + GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", t));
+                        GrcI18n.translate("grcmilk.hanging_curds.drying.prefix")
+                                + GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", t));
             }
         }
         super.addInformation(stack, player, list, bool);

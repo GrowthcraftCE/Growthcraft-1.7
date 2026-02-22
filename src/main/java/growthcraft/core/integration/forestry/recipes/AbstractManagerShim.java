@@ -19,14 +19,14 @@
  */
 package growthcraft.core.integration.forestry.recipes;
 
+import cpw.mods.fml.common.Optional;
+import forestry.api.recipes.ICraftingProvider;
+import forestry.api.recipes.IForestryRecipe;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import cpw.mods.fml.common.Optional;
-import forestry.api.recipes.ICraftingProvider;
-import forestry.api.recipes.IForestryRecipe;
 
 // Forestry API shims, so we don't have to do null checks all over the place.
 @Optional.Interface(iface = "forestry.api.recipes.ICraftingProvider", modid = "ForestryAPI|recipes")

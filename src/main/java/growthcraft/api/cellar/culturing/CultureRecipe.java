@@ -19,47 +19,22 @@
  */
 package growthcraft.api.cellar.culturing;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.fluids.FluidTest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.fluids.FluidTest;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class CultureRecipe implements ICultureRecipe {
+public record CultureRecipe(FluidStack inputFluidStack, ItemStack outputItemStack, float requiredHeat,
+                            int time) implements ICultureRecipe {
 
-    private final FluidStack inputFluidStack;
-    private final ItemStack outputItemStack;
-    private final float requiredHeat;
-    private final int time;
-
-    public CultureRecipe(@Nonnull FluidStack pInputFluidStack, @Nonnull ItemStack pOutputItemStack, float pRequiredHeat,
-        int pTime) {
-        this.inputFluidStack = pInputFluidStack;
-        this.outputItemStack = pOutputItemStack;
-        this.requiredHeat = pRequiredHeat;
-        this.time = pTime;
-    }
-
-    @Override
-    public ItemStack getOutputItemStack() {
-        return outputItemStack;
-    }
-
-    @Override
-    public FluidStack getInputFluidStack() {
-        return inputFluidStack;
-    }
-
-    @Override
-    public float getRequiredHeat() {
-        return requiredHeat;
-    }
-
-    @Override
-    public int getTime() {
-        return time;
+    public CultureRecipe(@Nonnull FluidStack inputFluidStack, @Nonnull ItemStack outputItemStack, float requiredHeat,
+                         int time) {
+        this.inputFluidStack = inputFluidStack;
+        this.outputItemStack = outputItemStack;
+        this.requiredHeat = requiredHeat;
+        this.time = time;
     }
 
     @Override

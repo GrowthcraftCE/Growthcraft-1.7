@@ -19,20 +19,20 @@
  */
 package growthcraft.api.core.description;
 
-import java.util.List;
-
+import growthcraft.api.core.i18n.GrcI18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 
-import growthcraft.api.core.i18n.GrcI18n;
+import java.util.List;
 
 /**
  * A nice way to add descriptions to a list if the Object is an IDescribable
  */
 public class Describer {
 
-    private Describer() {}
+    private Describer() {
+    }
 
     public static void getDescription(List<String> list, Object obj) {
         if (obj instanceof IDescribable) {
@@ -44,7 +44,7 @@ public class Describer {
         if (pe == null) return;
 
         String s = GrcI18n.translate(pe.getEffectName())
-            .trim();
+                .trim();
         final Potion potion = Potion.potionTypes[pe.getPotionID()];
         if (potion != null) {
             if (potion.isBadEffect()) s = EnumChatFormatting.RED + s;
@@ -52,7 +52,7 @@ public class Describer {
 
         if (pe.getAmplifier() > 0) {
             s += " " + GrcI18n.translate("potion.potency." + pe.getAmplifier())
-                .trim();
+                    .trim();
         }
 
         if (pe.getDuration() > 20) {

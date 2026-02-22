@@ -1,12 +1,11 @@
 package growthcraft.core.eventhandler;
 
-import net.minecraft.block.BlockLiquid;
-import net.minecraftforge.client.event.TextureStitchEvent;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.core.GrowthCraftCore;
+import net.minecraft.block.BlockLiquid;
+import net.minecraftforge.client.event.TextureStitchEvent;
 
 public class TextureStitchEventCore {
 
@@ -18,7 +17,7 @@ public class TextureStitchEventCore {
             GrowthCraftCore.liquidBlobsTexture = event.map.registerIcon("grccore:liquidblob");
 
             GrowthCraftCore.fluids.saltWater.getFluid()
-                .setIcons(BlockLiquid.getLiquidIcon("water_still"), BlockLiquid.getLiquidIcon("water_flow"));
+                    .setIcons(BlockLiquid.getLiquidIcon("water_still"), BlockLiquid.getLiquidIcon("water_flow"));
         }
     }
 }

@@ -19,15 +19,14 @@
  */
 package growthcraft.api.cellar.culturing.user;
 
-import java.io.BufferedReader;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.io.BufferedReader;
 
 /**
  * This allows users to define new culturing recipes.
@@ -75,8 +74,8 @@ public class UserCultureRecipesConfig extends AbstractUserJSONConfig {
 
         logger.debug("Adding user culturing recipe {%s}", recipe);
         CellarRegistry.instance()
-            .culturing()
-            .addRecipe(inputFluidStack, recipe.output_item.asStack(), recipe.required_heat, recipe.time);
+                .culturing()
+                .addRecipe(inputFluidStack, recipe.output_item.asStack(), recipe.required_heat, recipe.time);
     }
 
     @Override

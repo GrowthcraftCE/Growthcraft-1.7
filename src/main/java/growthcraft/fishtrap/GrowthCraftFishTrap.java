@@ -1,11 +1,5 @@
 package growthcraft.fishtrap;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemFishFood;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -26,12 +20,17 @@ import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.fishtrap.common.CommonProxy;
 import growthcraft.fishtrap.common.block.BlockFishTrap;
 import growthcraft.fishtrap.common.tileentity.TileEntityFishTrap;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemFishFood;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(
-    modid = GrowthCraftFishTrap.MOD_ID,
-    name = GrowthCraftFishTrap.MOD_NAME,
-    version = GrowthCraftFishTrap.MOD_VERSION,
-    dependencies = "required-after:Growthcraft@@VERSION@")
+        modid = GrowthCraftFishTrap.MOD_ID,
+        name = GrowthCraftFishTrap.MOD_NAME,
+        version = GrowthCraftFishTrap.MOD_VERSION,
+        dependencies = "required-after:Growthcraft@@VERSION@")
 public class GrowthCraftFishTrap {
 
     public static final String MOD_ID = "Growthcraft|Fishtrap";
@@ -62,7 +61,7 @@ public class GrowthCraftFishTrap {
         config.load(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
         userBaitConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/fishtrap/baits.json");
         userCatchGroupConfig
-            .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/fishtrap/catch_groups.json");
+                .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/fishtrap/catch_groups.json");
         userFishTrapConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/fishtrap/entries.json");
         modules.add(userBaitConfig);
         modules.add(userCatchGroupConfig);
@@ -111,27 +110,27 @@ public class GrowthCraftFishTrap {
         userFishTrapConfig.addDefault("treasure", new FishTrapEntry(new ItemStack(Items.name_tag), 1));
         userFishTrapConfig.addDefault("treasure", new FishTrapEntry(new ItemStack(Items.saddle), 1));
         userFishTrapConfig.addDefault(
-            "treasure",
-            new FishTrapEntry(new ItemStack(Items.bow), 1).setDamage(0.25F)
-                .setEnchantable());
+                "treasure",
+                new FishTrapEntry(new ItemStack(Items.bow), 1).setDamage(0.25F)
+                        .setEnchantable());
         userFishTrapConfig.addDefault(
-            "treasure",
-            new FishTrapEntry(new ItemStack(Items.fishing_rod), 1).setDamage(0.25F)
-                .setEnchantable());
+                "treasure",
+                new FishTrapEntry(new ItemStack(Items.fishing_rod), 1).setDamage(0.25F)
+                        .setEnchantable());
         userFishTrapConfig.addDefault("treasure", new FishTrapEntry(new ItemStack(Items.book), 1).setEnchantable());
         // Fishes
         userFishTrapConfig.addDefault(
-            "fish",
-            new FishTrapEntry(new ItemStack(Items.fish, 1, ItemFishFood.FishType.COD.func_150976_a()), 60));
+                "fish",
+                new FishTrapEntry(new ItemStack(Items.fish, 1, ItemFishFood.FishType.COD.func_150976_a()), 60));
         userFishTrapConfig.addDefault(
-            "fish",
-            new FishTrapEntry(new ItemStack(Items.fish, 1, ItemFishFood.FishType.SALMON.func_150976_a()), 25));
+                "fish",
+                new FishTrapEntry(new ItemStack(Items.fish, 1, ItemFishFood.FishType.SALMON.func_150976_a()), 25));
         userFishTrapConfig.addDefault(
-            "fish",
-            new FishTrapEntry(new ItemStack(Items.fish, 1, ItemFishFood.FishType.CLOWNFISH.func_150976_a()), 2));
+                "fish",
+                new FishTrapEntry(new ItemStack(Items.fish, 1, ItemFishFood.FishType.CLOWNFISH.func_150976_a()), 2));
         userFishTrapConfig.addDefault(
-            "fish",
-            new FishTrapEntry(new ItemStack(Items.fish, 1, ItemFishFood.FishType.PUFFERFISH.func_150976_a()), 13));
+                "fish",
+                new FishTrapEntry(new ItemStack(Items.fish, 1, ItemFishFood.FishType.PUFFERFISH.func_150976_a()), 13));
         // Minerals
         userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Blocks.tripwire_hook), 1));
         userFishTrapConfig.addDefault("mineral", new FishTrapEntry(new ItemStack(Items.iron_ingot), 10));
@@ -144,17 +143,17 @@ public class GrowthCraftFishTrap {
         // CRAFTING
         // ====================
         GameRegistry.addRecipe(
-            new ShapedOreRecipe(
-                fishTrap.asStack(1),
-                "ACA",
-                "CBC",
-                "ACA",
-                'A',
-                "plankWood",
-                'B',
-                Items.lead,
-                'C',
-                Items.string));
+                new ShapedOreRecipe(
+                        fishTrap.asStack(1),
+                        "ACA",
+                        "CBC",
+                        "ACA",
+                        'A',
+                        "plankWood",
+                        'B',
+                        Items.lead,
+                        'C',
+                        Items.string));
 
         modules.register();
     }

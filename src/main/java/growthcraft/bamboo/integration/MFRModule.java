@@ -36,7 +36,7 @@ public class MFRModule extends MFRModuleBase {
         registerHarvestable(new BambooFactoryHarvester());
         registerHarvestableLeaves(GrowthCraftBamboo.blocks.bambooLeaves.getBlock());
         registerPlantableSapling(
-            GrowthCraftBamboo.items.bambooShootFood.getItem(),
-            GrowthCraftBamboo.blocks.bambooShoot.getBlock());
+                GrowthCraftBamboo.items.bambooShootFood.getItem(),
+                GrowthCraftBamboo.blocks.bambooShoot.getBlock());
     }
 }

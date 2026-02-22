@@ -1,14 +1,13 @@
 package growthcraft.bamboo.common.world;
 
-import java.util.Random;
-
+import cpw.mods.fml.common.IWorldGenerator;
+import growthcraft.api.core.util.BiomeUtils;
+import growthcraft.bamboo.GrowthCraftBamboo;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 
-import cpw.mods.fml.common.IWorldGenerator;
-import growthcraft.api.core.util.BiomeUtils;
-import growthcraft.bamboo.GrowthCraftBamboo;
+import java.util.Random;
 
 public class WorldGeneratorBamboo implements IWorldGenerator {
 
@@ -16,7 +15,7 @@ public class WorldGeneratorBamboo implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator,
-        IChunkProvider chunkProvider) {
+                         IChunkProvider chunkProvider) {
         if (world.provider.dimensionId == 0) {
             generateSurface(world, random, chunkX, chunkZ);
         }
@@ -24,9 +23,9 @@ public class WorldGeneratorBamboo implements IWorldGenerator {
 
     private void generateSurface(World world, Random random, int chunkX, int chunkZ) {
         if (!world.getWorldInfo()
-            .getTerrainType()
-            .getWorldTypeName()
-            .startsWith("flat")) {
+                .getTerrainType()
+                .getWorldTypeName()
+                .startsWith("flat")) {
             final int i = chunkX * 16 + random.nextInt(16) + 8;
             final int j = random.nextInt(128);
             final int k = chunkZ * 16 + random.nextInt(16) + 8;

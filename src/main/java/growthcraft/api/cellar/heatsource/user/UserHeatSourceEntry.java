@@ -19,11 +19,11 @@
  */
 package growthcraft.api.cellar.heatsource.user;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.schema.ICommentable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserHeatSourceEntry implements ICommentable {
 
@@ -32,7 +32,8 @@ public class UserHeatSourceEntry implements ICommentable {
     public String block_name;
     public Map<Integer, Float> states;
 
-    public UserHeatSourceEntry() {}
+    public UserHeatSourceEntry() {
+    }
 
     public UserHeatSourceEntry(String m, String b, Map<Integer, Float> s) {
         this.mod_id = m;

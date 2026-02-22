@@ -19,14 +19,13 @@
  */
 package growthcraft.milk.util;
 
-import java.util.List;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
-
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.util.ITagFormatter;
 import growthcraft.core.util.TagFormatterItem;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+
+import java.util.List;
 
 public class TagFormatterCheesePress implements ITagFormatter {
 
@@ -34,14 +33,14 @@ public class TagFormatterCheesePress implements ITagFormatter {
 
     public List<String> format(List<String> list, NBTTagCompound nbt) {
         list.add(
-            EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese_press.pressing.state.prefix")
-                + " "
-                + EnumChatFormatting.WHITE
-                + GrcI18n.translate("grcmilk.cheese_press.pressing.state." + nbt.getBoolean("pressed")));
+                EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese_press.pressing.state.prefix")
+                        + " "
+                        + EnumChatFormatting.WHITE
+                        + GrcI18n.translate("grcmilk.cheese_press.pressing.state." + nbt.getBoolean("pressed")));
         list.add(
-            EnumChatFormatting.GRAY + GrcI18n.translate(
-                "grcmilk.cheese_press.itemslot.item",
-                TagFormatterItem.INSTANCE.formatItem(nbt.getCompoundTag("item"))));
+                EnumChatFormatting.GRAY + GrcI18n.translate(
+                        "grcmilk.cheese_press.itemslot.item",
+                        TagFormatterItem.INSTANCE.formatItem(nbt.getCompoundTag("item"))));
         return list;
     }
 }

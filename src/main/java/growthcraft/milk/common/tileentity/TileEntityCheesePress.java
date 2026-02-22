@@ -19,14 +19,6 @@
  */
 package growthcraft.milk.common.tileentity;
 
-import java.io.IOException;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.api.core.item.ItemTest;
@@ -42,18 +34,23 @@ import growthcraft.core.util.ItemUtils;
 import growthcraft.milk.GrowthCraftMilk;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
+
+import java.io.IOException;
 
 public class TileEntityCheesePress extends GrcTileInventoryBase implements IItemHandler, ITileProgressiveDevice {
 
-    private static final int[][] accessibleSlots = { { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 } };
-
+    private static final int[][] accessibleSlots = {{0}, {0}, {0}, {0}, {0}, {0}};
+    private final DeviceInventorySlot invSlot = new DeviceInventorySlot(this, 0);
     @SideOnly(Side.CLIENT)
     public float animProgress;
     @SideOnly(Side.CLIENT)
     public int animDir;
-
     private int screwState;
-    private final DeviceInventorySlot invSlot = new DeviceInventorySlot(this, 0);
     private int time;
     private boolean needRecipeRecheck = true;
     private ICheesePressRecipe workingRecipe;
@@ -64,8 +61,8 @@ public class TileEntityCheesePress extends GrcTileInventoryBase implements IItem
 
     private void setupWorkingRecipe() {
         final ICheesePressRecipe recipe = MilkRegistry.instance()
-            .cheesePress()
-            .findRecipe(invSlot.get());
+                .cheesePress()
+                .findRecipe(invSlot.get());
         if (recipe != workingRecipe) {
             if (workingRecipe != null) {
                 this.time = 0;
@@ -161,8 +158,8 @@ public class TileEntityCheesePress extends GrcTileInventoryBase implements IItem
         final ICheesePressRecipe recipe = getWorkingRecipe();
         if (recipe != null) {
             invSlot.set(
-                recipe.getOutputItemStack()
-                    .copy());
+                    recipe.getOutputItemStack()
+                            .copy());
             this.workingRecipe = null;
         }
     }

@@ -19,9 +19,8 @@
  */
 package growthcraft.api.cellar.heatsource;
 
-import net.minecraft.block.Block;
-
 import growthcraft.api.core.log.ILoggable;
+import net.minecraft.block.Block;
 
 public interface IHeatSourceRegistry extends ILoggable {
 

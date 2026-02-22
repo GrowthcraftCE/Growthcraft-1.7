@@ -38,7 +38,8 @@ public class UserCultureRecipe implements ICommentable {
         this.time = tm;
     }
 
-    public UserCultureRecipe() {}
+    public UserCultureRecipe() {
+    }
 
     @Override
     public String toString() {

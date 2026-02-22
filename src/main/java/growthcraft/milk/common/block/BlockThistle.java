@@ -19,18 +19,6 @@
  */
 package growthcraft.milk.common.block;
 
-import java.util.Random;
-
-import net.minecraft.block.BlockBush;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.common.EnumPlantType;
-
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -41,6 +29,17 @@ import growthcraft.core.integration.AppleCore;
 import growthcraft.core.logic.FlowerSpread;
 import growthcraft.core.logic.ISpreadablePlant;
 import growthcraft.milk.GrowthCraftMilk;
+import net.minecraft.block.BlockBush;
+import net.minecraft.block.IGrowable;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.Item;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
+
+import java.util.Random;
 
 public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowable {
 
@@ -55,7 +54,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
         setStepSound(soundTypeGrass);
         setCreativeTab(GrowthCraftMilk.creativeTab);
         final BBox bb = BBox.newCube(2f, 0f, 2f, 12f, 16f, 12f)
-            .scale(1f / 16f);
+                .scale(1f / 16f);
         setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
         this.spreadLogic = new FlowerSpread(new CuboidI(-1, -1, -1, 2, 2, 2));
     }
@@ -94,7 +93,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
                 }
 
                 if (allowGrowthResult == Event.Result.ALLOW
-                    || (growthChance > 0 && random.nextInt(growthChance) == 0)) {
+                        || (growthChance > 0 && random.nextInt(growthChance) == 0)) {
                     if (meta < ThistleStage.FLOWER) {
                         incrementGrowth(world, x, y, z, meta);
                     }
@@ -179,6 +178,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
         public static final int GROWN = 2;
         public static final int FLOWER = 3;
 
-        private ThistleStage() {}
+        private ThistleStage() {
+        }
     }
 }

@@ -19,31 +19,30 @@
  */
 package growthcraft.milk.client.render;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.world.IBlockAccess;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import growthcraft.api.core.util.BBox;
 import growthcraft.milk.common.block.BlockCheeseBlock;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.world.IBlockAccess;
 
 public class RenderCheeseBlock implements ISimpleBlockRenderingHandler {
 
-    public static int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
     private static final float SCALE = 1f / 16f;
-    private static final BBox[] boxes = { BBox.newCube(5, 0, 5, 6, 8, 6)
-        .scale(SCALE),
-        BBox.newCube(4, 0, 6, 1, 8, 4)
+    private static final BBox[] boxes = {BBox.newCube(5, 0, 5, 6, 8, 6)
             .scale(SCALE),
-        BBox.newCube(11, 0, 6, 1, 8, 4)
-            .scale(SCALE),
-        BBox.newCube(6, 0, 4, 4, 8, 1)
-            .scale(SCALE),
-        BBox.newCube(6, 0, 11, 4, 8, 1)
-            .scale(SCALE) };
+            BBox.newCube(4, 0, 6, 1, 8, 4)
+                    .scale(SCALE),
+            BBox.newCube(11, 0, 6, 1, 8, 4)
+                    .scale(SCALE),
+            BBox.newCube(6, 0, 4, 4, 8, 1)
+                    .scale(SCALE),
+            BBox.newCube(6, 0, 11, 4, 8, 1)
+                    .scale(SCALE)};
+    public static int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
     @Override
     public int getRenderId() {
@@ -57,20 +56,21 @@ public class RenderCheeseBlock implements ISimpleBlockRenderingHandler {
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-        if (modelID == RENDER_ID) {}
+        if (modelID == RENDER_ID) {
+        }
     }
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == RENDER_ID) {
             if (block instanceof BlockCheeseBlock cheeseBlock) {
                 final TileEntityCheeseBlock te = cheeseBlock.getTileEntity(world, x, y, z);
                 if (te != null) {
                     final int slices = te.getCheese()
-                        .getSlices();
+                            .getSlices();
                     final int slicesMax = te.getCheese()
-                        .getSlicesMax();
+                            .getSlicesMax();
                     final float scaleHeight = (float) slices / (float) slicesMax;
                     if (scaleHeight > 0f) {
                         final Tessellator tes = Tessellator.instance;

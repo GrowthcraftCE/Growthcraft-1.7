@@ -1,7 +1,11 @@
 package growthcraft.cellar.common.block;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.client.render.RenderFruitPress;
+import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,12 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.client.render.RenderFruitPress;
-import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
+import java.util.Random;
 
 public class BlockFruitPress extends BlockCellarContainer {
 
@@ -104,7 +103,7 @@ public class BlockFruitPress extends BlockCellarContainer {
         if (player.capabilities.isCreativeMode && (m & 8) != 0 && presserIsAbove(world, x, y, z)) {
             world.func_147480_a(x, y + 1, z, true);
             world.getTileEntity(x, y + 1, z)
-                .invalidate();
+                    .invalidate();
         }
     }
 
@@ -156,7 +155,7 @@ public class BlockFruitPress extends BlockCellarContainer {
         if (y >= 255) return false;
 
         return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && super.canPlaceBlockAt(world, x, y, z)
-            && super.canPlaceBlockAt(world, x, y + 1, z);
+                && super.canPlaceBlockAt(world, x, y + 1, z);
     }
 
     @Override

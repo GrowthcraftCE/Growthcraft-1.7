@@ -19,16 +19,15 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.List;
-import java.util.Random;
-
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.description.Describer;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.description.Describer;
+import java.util.List;
+import java.util.Random;
 
 public class SimplePotionEffectFactory implements IPotionEffectFactory {
 
@@ -91,8 +90,8 @@ public class SimplePotionEffectFactory implements IPotionEffectFactory {
     public void writeToNBT(NBTTagCompound data, String name) {
         final NBTTagCompound target = new NBTTagCompound();
         final String factoryName = CoreRegistry.instance()
-            .getPotionEffectFactoryRegistry()
-            .getName(this.getClass());
+                .getPotionEffectFactoryRegistry()
+                .getName(this.getClass());
 
         target.setString("__name__", factoryName);
         writeToNBT(target);

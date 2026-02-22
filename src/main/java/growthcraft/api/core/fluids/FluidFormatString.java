@@ -24,7 +24,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class FluidFormatString {
 
-    private FluidFormatString() {}
+    private FluidFormatString() {
+    }
 
     public static String format(FluidStack stack) {
         if (stack != null) {

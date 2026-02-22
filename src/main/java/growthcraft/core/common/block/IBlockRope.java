@@ -11,7 +11,7 @@ public interface IBlockRope {
      * @param z     - z coord
      * @return can the rope be connected at this point?
      *
-     *         <pre>
+     * <pre>
      * {@code
      * 	 public boolean canConnectRopeTo(IBlockAccess world, int x, int y, int z)
      *     {

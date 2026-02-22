@@ -19,12 +19,11 @@
  */
 package growthcraft.api.cellar.booze;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
+import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.description.Describer;
+import growthcraft.api.core.effect.IPotionEffectFactory;
+import growthcraft.api.core.fluids.FluidTag;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
@@ -32,11 +31,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.description.Describer;
-import growthcraft.api.core.effect.IPotionEffectFactory;
-import growthcraft.api.core.fluids.FluidTag;
+import javax.annotation.Nonnull;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
 public class BoozePotionEffectFactory implements IPotionEffectFactory {
 
@@ -66,16 +64,16 @@ public class BoozePotionEffectFactory implements IPotionEffectFactory {
 
     public PotionEffect createPotionEffect(World world, Entity entity, Random random, Object data) {
         final Collection<FluidTag> tags = CoreRegistry.instance()
-            .fluidDictionary()
-            .getFluidTags(booze);
+                .fluidDictionary()
+                .getFluidTags(booze);
 
         if (tags != null) {
             int tm = getTime();
             int lv = getLevel();
             for (FluidTag tag : tags) {
                 final IModifierFunction func = CellarRegistry.instance()
-                    .booze()
-                    .getModifierFunction(tag);
+                        .booze()
+                        .getModifierFunction(tag);
                 if (func != null) {
                     tm = func.applyTime(tm);
                     lv = func.applyLevel(lv);
@@ -124,8 +122,8 @@ public class BoozePotionEffectFactory implements IPotionEffectFactory {
     public void writeToNBT(NBTTagCompound data, String name) {
         final NBTTagCompound target = new NBTTagCompound();
         final String factoryName = CoreRegistry.instance()
-            .getPotionEffectFactoryRegistry()
-            .getName(this.getClass());
+                .getPotionEffectFactoryRegistry()
+                .getName(this.getClass());
 
         target.setString("__name__", factoryName);
         writeToNBT(target);

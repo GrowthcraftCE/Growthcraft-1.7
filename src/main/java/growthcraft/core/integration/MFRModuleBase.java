@@ -19,13 +19,12 @@
  */
 package growthcraft.core.integration;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
-
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import powercrystals.minefactoryreloaded.api.*;
 
 public class MFRModuleBase extends ModIntegrationBase {

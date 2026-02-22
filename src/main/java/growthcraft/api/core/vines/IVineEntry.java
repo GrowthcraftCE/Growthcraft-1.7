@@ -19,9 +19,9 @@
  */
 package growthcraft.api.core.vines;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
+
+import javax.annotation.Nullable;
 
 public interface IVineEntry {
 

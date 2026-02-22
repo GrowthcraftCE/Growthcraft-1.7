@@ -24,7 +24,8 @@ import net.minecraft.util.IIcon;
 
 public class GrcGuiRenderHelper {
 
-    private GrcGuiRenderHelper() {}
+    private GrcGuiRenderHelper() {
+    }
 
     public static void drawTexturedModelRectFromIcon(int x, int y, float z, IIcon icon, int w, int h) {
         final Tessellator tessellator = Tessellator.instance;

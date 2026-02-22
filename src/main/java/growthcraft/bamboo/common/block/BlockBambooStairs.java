@@ -1,8 +1,7 @@
 package growthcraft.bamboo.common.block;
 
-import net.minecraft.block.BlockStairs;
-
 import growthcraft.bamboo.GrowthCraftBamboo;
+import net.minecraft.block.BlockStairs;
 
 public class BlockBambooStairs extends BlockStairs {
 

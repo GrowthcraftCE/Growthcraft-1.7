@@ -19,14 +19,6 @@
  */
 package growthcraft.api.core.schema;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
 import growthcraft.api.core.definition.IItemStackFactory;
@@ -35,6 +27,12 @@ import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.item.MultiItemStacks;
 import growthcraft.api.core.util.StringUtils;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemStackSchema implements IItemStackFactory, IItemStackListProvider, IValidatable, ICommentable {
 
@@ -95,7 +93,7 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListProvide
     }
 
     @Override
-    public List<ItemStack> getItemStacks() {
+    public List<ItemStack> itemStacks() {
         final List<ItemStack> result = new ArrayList<ItemStack>();
         final ItemStack stack = asStack();
         if (stack != null) result.add(stack);
@@ -112,12 +110,12 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListProvide
     @Override
     public String toString() {
         return String.format(
-            "Schema<ItemStack>(comment: '%s', mod_id: '%s', name: '%s', meta: %d, amount: %d)",
-            StringUtils.inspect(comment),
-            mod_id,
-            name,
-            meta,
-            amount);
+                "Schema<ItemStack>(comment: '%s', mod_id: '%s', name: '%s', meta: %d, amount: %d)",
+                StringUtils.inspect(comment),
+                mod_id,
+                name,
+                meta,
+                amount);
     }
 
     @Override

@@ -19,10 +19,9 @@
  */
 package growthcraft.api.milk.churn;
 
+import growthcraft.api.core.fluids.FluidFormatString;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-
-import growthcraft.api.core.fluids.FluidFormatString;
 
 public class ChurnRecipe implements IChurnRecipe {
 
@@ -67,10 +66,10 @@ public class ChurnRecipe implements IChurnRecipe {
 
     public String toString() {
         return String.format(
-            "ChurnRecipe(`%s` / %d = `%s` & `%s`)",
-            FluidFormatString.format(inputFluid),
-            churns,
-            FluidFormatString.format(outputFluid),
-            outputItem);
+                "ChurnRecipe(`%s` / %d = `%s` & `%s`)",
+                FluidFormatString.format(inputFluid),
+                churns,
+                FluidFormatString.format(outputFluid),
+                outputItem);
     }
 }

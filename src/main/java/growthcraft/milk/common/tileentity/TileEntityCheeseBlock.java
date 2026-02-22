@@ -19,13 +19,6 @@
  */
 package growthcraft.milk.common.tileentity;
 
-import java.io.IOException;
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-
 import growthcraft.api.core.nbt.INBTItemSerializable;
 import growthcraft.core.common.tileentity.GrcTileBase;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
@@ -35,6 +28,12 @@ import growthcraft.milk.GrowthCraftMilk;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.struct.Cheese;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+
+import java.io.IOException;
+import java.util.List;
 
 public class TileEntityCheeseBlock extends GrcTileBase implements IItemHandler, INBTItemSerializable {
 

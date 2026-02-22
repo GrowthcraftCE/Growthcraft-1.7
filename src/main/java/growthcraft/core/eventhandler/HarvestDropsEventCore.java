@@ -1,13 +1,12 @@
 package growthcraft.core.eventhandler;
 
-import java.util.Random;
-
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import growthcraft.api.core.CoreRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import growthcraft.api.core.CoreRegistry;
+import java.util.Random;
 
 public class HarvestDropsEventCore {
 
@@ -16,28 +15,28 @@ public class HarvestDropsEventCore {
     @SubscribeEvent
     public void onHarvestDrops(HarvestDropsEvent event) {
         if (CoreRegistry.instance()
-            .vineDrops()
-            .isVine(event.block, event.blockMetadata) && !event.isSilkTouching
-            && event.harvester != null) {
+                .vineDrops()
+                .isVine(event.block, event.blockMetadata) && !event.isSilkTouching
+                && event.harvester != null) {
             if (event.harvester.getHeldItem() == null) {
                 doDrops(event);
             } else if (event.harvester.getHeldItem()
-                .getItem() != Items.shears) {
-                    doDrops(event);
-                }
+                    .getItem() != Items.shears) {
+                doDrops(event);
+            }
         }
     }
 
     private void doDrops(HarvestDropsEvent event) {
         if (CoreRegistry.instance()
-            .vineDrops()
-            .hasVineDrops()) {
+                .vineDrops()
+                .hasVineDrops()) {
             if (new Random().nextInt(r) == 0) {
                 event.drops.clear();
                 event.dropChance = 1.0F;
                 final ItemStack stack = CoreRegistry.instance()
-                    .vineDrops()
-                    .getVineDropItem(event.world);
+                        .vineDrops()
+                        .getVineDropItem(event.world);
                 if (stack != null) {
                     final ItemStack result = stack.copy();
                     result.stackSize = event.world.rand.nextInt(stack.stackSize) + 1;

@@ -19,16 +19,14 @@
  */
 package growthcraft.milk.client.renderer;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.milk.client.model.ModelButterChurn;
 import growthcraft.milk.client.resource.GrcMilkResources;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityButterChurnRenderer extends TileEntitySpecialRenderer {
@@ -42,7 +40,7 @@ public class TileEntityButterChurnRenderer extends TileEntitySpecialRenderer {
                 GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
                 this.bindTexture(GrcMilkResources.INSTANCE.textureButterChurn);
                 GrcMilkResources.INSTANCE.modelButterChurn
-                    .render(null, butterChurn.animProgress, butterChurn.animDir, 0.0f, f, 0.0f, ModelButterChurn.SCALE);
+                        .render(null, butterChurn.animProgress, butterChurn.animDir, 0.0f, f, 0.0f, ModelButterChurn.SCALE);
             }
             GL11.glPopMatrix();
         }

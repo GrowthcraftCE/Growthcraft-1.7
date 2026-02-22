@@ -1,8 +1,12 @@
 package growthcraft.cellar.common.block;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BBox;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.client.render.RenderBrewKettle;
+import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
+import growthcraft.core.Utils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -19,18 +23,13 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BBox;
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.client.render.RenderBrewKettle;
-import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
-import growthcraft.core.Utils;
+import java.util.List;
+import java.util.Random;
 
 public class BlockBrewKettle extends BlockCellarContainer {
 
     private final BBox kettleContentsBB = BBox.newCube(2, 4, 2, 12, 10, 12)
-        .scale(1f / 16f);
+            .scale(1f / 16f);
     private final boolean dropItemsInBrewKettle = GrowthCraftCellar.getConfig().dropItemsInBrewKettle;
     private final boolean fillsWithRain = GrowthCraftCellar.getConfig().brewKettleFillsWithRain;
     private final boolean setFireToFallenLivingEntities = GrowthCraftCellar.getConfig().setFireToFallenLivingEntities;
@@ -88,7 +87,7 @@ public class BlockBrewKettle extends BlockCellarContainer {
 
     @Override
     protected boolean playerDrainTank(World world, int x, int y, int z, IFluidHandler fh, ItemStack is,
-        EntityPlayer player) {
+                                      EntityPlayer player) {
         final FluidStack fs = Utils.playerDrainTank(world, x, y, z, fh, is, player);
         return fs != null && fs.amount > 0;
     }
@@ -161,9 +160,9 @@ public class BlockBrewKettle extends BlockCellarContainer {
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list,
-        Entity entity) {
+                                        Entity entity) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.3125F, 1.0F);
         super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
         final float f = 0.125F;

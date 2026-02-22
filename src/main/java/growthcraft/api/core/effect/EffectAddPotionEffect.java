@@ -19,18 +19,16 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
+import growthcraft.api.core.CoreRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.CoreRegistry;
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Random;
 
 /**
  * As its name implies, this Effect, will ADD a Potion Effect to the target.
@@ -43,7 +41,8 @@ public class EffectAddPotionEffect extends AbstractEffect {
         this.potionFactory = factory;
     }
 
-    public EffectAddPotionEffect() {}
+    public EffectAddPotionEffect() {
+    }
 
     /**
      * @return potion factory
@@ -85,8 +84,8 @@ public class EffectAddPotionEffect extends AbstractEffect {
     protected void readFromNBT(NBTTagCompound data) {
         if (data.hasKey("potion_factory")) {
             this.potionFactory = CoreRegistry.instance()
-                .getPotionEffectFactoryRegistry()
-                .loadPotionEffectFactoryFromNBT(data, "potion_factory");
+                    .getPotionEffectFactoryRegistry()
+                    .loadPotionEffectFactoryFromNBT(data, "potion_factory");
         }
     }
 

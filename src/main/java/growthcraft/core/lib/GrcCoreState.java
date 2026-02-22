@@ -19,19 +19,18 @@
  */
 package growthcraft.core.lib;
 
-import net.minecraft.client.Minecraft;
-
-import org.lwjgl.input.Keyboard;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import org.lwjgl.input.Keyboard;
 
 @SideOnly(Side.CLIENT)
 public class GrcCoreState {
 
     public static final String detailedKey = "SHIFT";
 
-    private GrcCoreState() {}
+    private GrcCoreState() {
+    }
 
     @SideOnly(Side.CLIENT)
     public static boolean isAltKeyDown() {

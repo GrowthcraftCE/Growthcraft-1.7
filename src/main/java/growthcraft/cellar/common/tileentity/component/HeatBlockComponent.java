@@ -19,14 +19,13 @@
  */
 package growthcraft.cellar.common.tileentity.component;
 
+import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.heatsource.IHeatSourceBlock;
+import growthcraft.core.util.BlockCheck;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.heatsource.IHeatSourceBlock;
-import growthcraft.core.util.BlockCheck;
 
 /**
  * Component for handling heat source blocks for a tile entity
@@ -61,8 +60,8 @@ public class HeatBlockComponent {
         final int meta = getWorld().getBlockMetadata(x, y, z);
 
         final IHeatSourceBlock heatSource = CellarRegistry.instance()
-            .heatSource()
-            .getHeatSource(block, meta);
+                .heatSource()
+                .getHeatSource(block, meta);
 
         if (heatSource != null) return heatSource.getHeat(getWorld(), x, y, z);
         return 0.0f;

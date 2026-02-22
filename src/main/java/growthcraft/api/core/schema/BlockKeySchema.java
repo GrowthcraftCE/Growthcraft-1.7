@@ -19,11 +19,10 @@
  */
 package growthcraft.api.core.schema;
 
-import net.minecraft.block.Block;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.UniqueIdentifier;
 import growthcraft.api.core.util.BlockKey;
+import net.minecraft.block.Block;
 
 public class BlockKeySchema implements ICommentable, IValidatable {
 

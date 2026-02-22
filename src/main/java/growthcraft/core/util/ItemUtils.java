@@ -1,9 +1,6 @@
 package growthcraft.core.util;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
+import buildcraft.api.tools.IToolWrench;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -17,14 +14,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import buildcraft.api.tools.IToolWrench;
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 /**
  * Utility class for item handling.
  */
 public class ItemUtils {
 
-    private ItemUtils() {}
+    private ItemUtils() {
+    }
 
     public static NBTTagCompound openTagCompound(ItemStack stack) {
         if (!stack.hasTagCompound()) {
@@ -135,7 +134,7 @@ public class ItemUtils {
     }
 
     public static void addStackToPlayer(ItemStack itemstack, @Nonnull EntityPlayer player, World world, int x, int y,
-        int z, boolean checkCreative) {
+                                        int z, boolean checkCreative) {
         final boolean flag = !checkCreative || !player.capabilities.isCreativeMode;
         if (flag) {
             if (!player.inventory.addItemStackToInventory(itemstack)) {
@@ -148,13 +147,13 @@ public class ItemUtils {
 
     public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, World world, boolean checkCreative) {
         addStackToPlayer(
-            itemstack,
-            player,
-            world,
-            (int) player.posX,
-            (int) player.posY,
-            (int) player.posZ,
-            checkCreative);
+                itemstack,
+                player,
+                world,
+                (int) player.posX,
+                (int) player.posY,
+                (int) player.posZ,
+                checkCreative);
     }
 
     public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, boolean checkCreative) {

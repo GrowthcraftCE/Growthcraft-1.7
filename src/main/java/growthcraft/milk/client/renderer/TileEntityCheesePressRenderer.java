@@ -19,16 +19,14 @@
  */
 package growthcraft.milk.client.renderer;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.milk.client.model.ModelCheesePress;
 import growthcraft.milk.client.resource.GrcMilkResources;
 import growthcraft.milk.common.tileentity.TileEntityCheesePress;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityCheesePressRenderer extends TileEntitySpecialRenderer {
@@ -42,7 +40,7 @@ public class TileEntityCheesePressRenderer extends TileEntitySpecialRenderer {
                 GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
                 this.bindTexture(GrcMilkResources.INSTANCE.textureCheesePress);
                 GrcMilkResources.INSTANCE.modelCheesePress
-                    .render(null, cheesePress.animProgress, cheesePress.animDir, 0.0f, f, 0.0f, ModelCheesePress.SCALE);
+                        .render(null, cheesePress.animProgress, cheesePress.animDir, 0.0f, f, 0.0f, ModelCheesePress.SCALE);
             }
             GL11.glPopMatrix();
         }

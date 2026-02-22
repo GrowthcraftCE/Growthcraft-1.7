@@ -19,8 +19,12 @@
  */
 package growthcraft.core.client.gui;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.util.Rectangle;
+import growthcraft.core.client.gui.widget.WidgetManager;
+import growthcraft.core.util.UnitFormatter;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
@@ -33,24 +37,18 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.api.core.util.Rectangle;
-import growthcraft.core.client.gui.widget.WidgetManager;
-import growthcraft.core.util.UnitFormatter;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public abstract class GrcGuiContainer<C extends Container, T extends TileEntity> extends GuiContainer {
 
     protected T tileEntity;
     protected ResourceLocation guiResource;
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     protected TooltipManager tooltipManager;
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     protected WidgetManager widgets;
 
     public GrcGuiContainer(ResourceLocation res, C container, T te) {
@@ -99,7 +97,7 @@ public abstract class GrcGuiContainer<C extends Container, T extends TileEntity>
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public void drawHoveringText(List l, int x, int y, FontRenderer renderer) {
         super.drawHoveringText(l, x, y, renderer);
     }
@@ -115,7 +113,7 @@ public abstract class GrcGuiContainer<C extends Container, T extends TileEntity>
 
     public void bindTexture(ResourceLocation res) {
         mc.getTextureManager()
-            .bindTexture(res);
+                .bindTexture(res);
     }
 
     public void bindGuiTexture() {
@@ -145,7 +143,7 @@ public abstract class GrcGuiContainer<C extends Container, T extends TileEntity>
     }
 
     public void drawTank(int w, int h, int wp, int hp, int width, int height, int amount, FluidStack fluidstack,
-        FluidTank _tank) {
+                         FluidTank _tank) {
         drawFluidStack(w, h, wp, hp, width, height, amount, fluidstack);
     }
 
@@ -227,5 +225,6 @@ public abstract class GrcGuiContainer<C extends Container, T extends TileEntity>
     }
 
     // Overwrite this method to add tooltips based on the handle
-    public void addTooltips(String handle, List<String> tips) {}
+    public void addTooltips(String handle, List<String> tips) {
+    }
 }

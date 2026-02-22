@@ -19,15 +19,15 @@
  */
 package growthcraft.core.integration;
 
-import net.minecraft.item.ItemStack;
-
 import codechicken.nei.api.API;
 import cpw.mods.fml.common.Optional;
 import growthcraft.core.integration.nei.NEIPlatform;
+import net.minecraft.item.ItemStack;
 
 public class NEI {
 
-    private NEI() {}
+    private NEI() {
+    }
 
     /**
      * @return true if NEI is available, false otherwise

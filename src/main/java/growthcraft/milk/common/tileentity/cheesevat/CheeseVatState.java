@@ -19,10 +19,10 @@
  */
 package growthcraft.milk.common.tileentity.cheesevat;
 
-import java.util.Locale;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+
+import java.util.Locale;
 
 public enum CheeseVatState {
 
@@ -32,7 +32,7 @@ public enum CheeseVatState {
     PREPARING_CURDS;
 
     public static final BiMap<String, CheeseVatState> stateMap = HashBiMap.create();
-    private static final CheeseVatState[] VALUES = { IDLE, PREPARING_RICOTTA, PREPARING_CHEESE, PREPARING_CURDS };
+    private static final CheeseVatState[] VALUES = {IDLE, PREPARING_RICOTTA, PREPARING_CHEESE, PREPARING_CURDS};
 
     static {
         for (CheeseVatState state : VALUES) {

@@ -19,17 +19,6 @@
  */
 package growthcraft.core.integration.waila;
 
-import java.util.List;
-
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.world.World;
-import net.minecraftforge.fluids.IFluidHandler;
-
 import cpw.mods.fml.common.Optional;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.nbt.NBTHelper;
@@ -40,6 +29,16 @@ import growthcraft.core.util.TagFormatterFluidHandler;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.IFluidHandler;
+
+import java.util.List;
 
 public class CoreDataProvider implements IWailaDataProvider {
 
@@ -52,14 +51,14 @@ public class CoreDataProvider implements IWailaDataProvider {
     @Override
     @Optional.Method(modid = "Waila")
     public List<String> getWailaHead(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
+                                     IWailaConfigHandler config) {
         return tooltip;
     }
 
     @Override
     @Optional.Method(modid = "Waila")
     public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
+                                     IWailaConfigHandler config) {
         final Block block = accessor.getBlock();
         final TileEntity te = accessor.getTileEntity();
         final NBTTagCompound tag = accessor.getNBTData();
@@ -75,7 +74,7 @@ public class CoreDataProvider implements IWailaDataProvider {
             String result = EnumChatFormatting.GRAY + GrcI18n.translate("grccore.device.heated.prefix");
             if (isHeated) {
                 result += EnumChatFormatting.WHITE
-                    + GrcI18n.translate("grccore.device.heated.multiplier.format", (int) (heat * 100));
+                        + GrcI18n.translate("grccore.device.heated.multiplier.format", (int) (heat * 100));
             } else {
                 result += EnumChatFormatting.WHITE + GrcI18n.translate("grccore.device.heated.state.false");
             }
@@ -86,8 +85,8 @@ public class CoreDataProvider implements IWailaDataProvider {
             final float prog = tag.getFloat("device_progress");
             if (prog > 0) {
                 final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grccore.device.progress.prefix")
-                    + EnumChatFormatting.WHITE
-                    + GrcI18n.translate("grccore.device.progress.format", (int) (prog * 100));
+                        + EnumChatFormatting.WHITE
+                        + GrcI18n.translate("grccore.device.progress.format", (int) (prog * 100));
                 tooltip.add(result);
             }
         }
@@ -97,14 +96,14 @@ public class CoreDataProvider implements IWailaDataProvider {
     @Override
     @Optional.Method(modid = "Waila")
     public List<String> getWailaTail(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
+                                     IWailaConfigHandler config) {
         return tooltip;
     }
 
     @Override
     @Optional.Method(modid = "Waila")
     public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x,
-        int y, int z) {
+                                     int y, int z) {
         if (te instanceof IFluidHandler) NBTHelper.writeIFluidHandlerToNBT((IFluidHandler) te, tag);
         if (te instanceof ITileNamedFluidTanks) ((ITileNamedFluidTanks) te).writeFluidTankNamesToTag(tag);
         if (te instanceof ITileProgressiveDevice device) {

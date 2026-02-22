@@ -20,12 +20,11 @@
  */
 package growthcraft.core.integration.FA;
 
-import java.util.Locale;
-
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import java.util.Locale;
 
 public enum EnumFAWoodType {
 

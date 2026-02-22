@@ -19,19 +19,17 @@
  */
 package growthcraft.api.milk.util;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.core.definition.IMultiFluidStacks;
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.util.MultiStacksUtil;
 import growthcraft.api.milk.MilkRegistry;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CheeseVatRecipeBuilder {
 
@@ -83,8 +81,8 @@ public class CheeseVatRecipeBuilder {
 
     public CheeseVatRecipeBuilder register() {
         MilkRegistry.instance()
-            .cheeseVat()
-            .addRecipe(outputFluids, outputStacks, inputFluids, inputStacks);
+                .cheeseVat()
+                .addRecipe(outputFluids, outputStacks, inputFluids, inputStacks);
         return this;
     }
 }

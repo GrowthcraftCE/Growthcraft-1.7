@@ -19,22 +19,18 @@
  */
 package growthcraft.api.core.item;
 
-import java.util.Arrays;
-import java.util.List;
+import growthcraft.api.core.definition.IMultiItemStacks;
+import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 
-import net.minecraft.item.ItemStack;
+public record MultiItemStacks(List<ItemStack> itemStacks) implements IMultiItemStacks {
 
-import growthcraft.api.core.definition.IMultiItemStacks;
-
-public class MultiItemStacks implements IMultiItemStacks {
-
-    private final List<ItemStack> itemStacks;
-
-    public MultiItemStacks(@Nonnull List<ItemStack> stacks) {
-        this.itemStacks = stacks;
+    public MultiItemStacks(@Nonnull List<ItemStack> itemStacks) {
+        this.itemStacks = itemStacks;
     }
 
     public MultiItemStacks(@Nonnull ItemStack... stacks) {
@@ -59,14 +55,9 @@ public class MultiItemStacks implements IMultiItemStacks {
     }
 
     @Override
-    public List<ItemStack> getItemStacks() {
-        return itemStacks;
-    }
-
-    @Override
     public boolean containsItemStack(@Nullable ItemStack stack) {
         if (!ItemTest.isValid(stack)) return false;
-        for (ItemStack content : getItemStacks()) {
+        for (ItemStack content : itemStacks()) {
             if (content.isItemEqual(stack)) return true;
         }
         return false;

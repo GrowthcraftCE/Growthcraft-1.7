@@ -19,9 +19,12 @@
  */
 package growthcraft.core.common.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.effect.IEffect;
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.core.lib.GrcCoreState;
+import growthcraft.core.util.ItemUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
@@ -29,12 +32,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.effect.IEffect;
-import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.core.lib.GrcCoreState;
-import growthcraft.core.util.ItemUtils;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GrcItemFoodBase extends ItemFood {
 
@@ -92,7 +91,7 @@ public class GrcItemFoodBase extends ItemFood {
         }
 
         player.getFoodStats()
-            .func_151686_a(this, stack);
+                .func_151686_a(this, stack);
         world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
         this.onFoodEaten(stack, world, player);
 
@@ -101,7 +100,7 @@ public class GrcItemFoodBase extends ItemFood {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean showAdvanced) {
         super.addInformation(stack, player, list, showAdvanced);
         GrcItemBase.addDescription(this, stack, player, list, showAdvanced);
@@ -113,9 +112,9 @@ public class GrcItemFoodBase extends ItemFood {
                     list.addAll(tempList);
                 } else {
                     list.add(
-                        EnumChatFormatting.GRAY + GrcI18n.translate(
-                            "grc.tooltip.detailed_information",
-                            EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
+                            EnumChatFormatting.GRAY + GrcI18n.translate(
+                                    "grc.tooltip.detailed_information",
+                                    EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
                 }
             }
         }

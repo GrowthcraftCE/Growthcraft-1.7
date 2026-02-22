@@ -1,12 +1,11 @@
 package growthcraft.cellar.eventhandler;
 
-import net.minecraft.item.Item;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import growthcraft.cellar.common.item.ItemWaterBag;
 import growthcraft.cellar.common.itemblock.ItemBlockFermentBarrel;
 import growthcraft.cellar.stats.CellarAchievement;
+import net.minecraft.item.Item;
 
 public class EventHandlerItemCraftedEventCellar {
 

@@ -19,8 +19,6 @@
  */
 package growthcraft.core.integration;
 
-import net.minecraft.item.Item;
-
 import cpw.mods.fml.common.Optional;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.common.block.GrcBlockContainer;
@@ -31,6 +29,7 @@ import growthcraft.core.integration.waila.CropDataProvider;
 import growthcraft.core.integration.waila.PaddyDataProvider;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
+import net.minecraft.item.Item;
 
 public class Waila extends WailaIntegrationBase {
 

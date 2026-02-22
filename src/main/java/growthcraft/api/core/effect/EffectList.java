@@ -19,15 +19,14 @@
  */
 package growthcraft.api.core.effect;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import growthcraft.api.core.description.Describer;
+import growthcraft.api.core.i18n.GrcI18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.description.Describer;
-import growthcraft.api.core.i18n.GrcI18n;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * An EffectList, as its name implies, is a list of IEffects, when it is applied
@@ -79,7 +78,7 @@ public class EffectList extends AbstractEffectList {
             }
         } else if (effects.size() == 1) {
             effects.get(0)
-                .getDescription(list);
+                    .getDescription(list);
         }
     }
 }

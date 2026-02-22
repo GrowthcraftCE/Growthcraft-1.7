@@ -19,10 +19,9 @@
  */
 package growthcraft.milk.common.item;
 
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.definition.IItemStackFactory;
 import growthcraft.milk.GrowthCraftMilk;
+import net.minecraft.item.ItemStack;
 
 public enum EnumYogurt implements IItemStackFactory {
 

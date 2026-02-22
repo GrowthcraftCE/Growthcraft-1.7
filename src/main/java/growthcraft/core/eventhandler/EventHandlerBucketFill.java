@@ -19,11 +19,9 @@
  */
 package growthcraft.core.eventhandler;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import growthcraft.core.GrowthCraftCore;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -32,9 +30,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import growthcraft.core.GrowthCraftCore;
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventHandlerBucketFill {
 
@@ -48,7 +46,7 @@ public class EventHandlerBucketFill {
     public void addEntry(@Nonnull IBucketEntry entry) {
         buckets.add(entry);
         GrowthCraftCore.getLogger()
-            .debug("Added new Bucket Entry {%s}", entry);
+                .debug("Added new Bucket Entry {%s}", entry);
     }
 
     public EventHandlerBucketFill register(Block block, ItemStack stack) {

@@ -19,13 +19,6 @@
  */
 package growthcraft.core.init;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraftforge.oredict.OreDictionary;
-
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.core.GrowthCraftCore;
@@ -39,6 +32,12 @@ import growthcraft.core.common.item.ItemBlockNaturaFenceRope;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.integration.minecraft.EnumMinecraftWoodType;
 import growthcraft.core.registry.FenceRopeRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GrcCoreBlocks extends GrcModuleBlocks {
 
@@ -56,12 +55,12 @@ public class GrcCoreBlocks extends GrcModuleBlocks {
         this.ropeBlock = newDefinition(new BlockRope());
         this.fenceRope = newDefinition(new BlockFenceRope(Blocks.fence, "grc.fenceRope"));
         this.netherBrickFenceRope = newDefinition(
-            new BlockFenceRope(Blocks.nether_brick_fence, "grc.netherBrickFenceRope"));
+                new BlockFenceRope(Blocks.nether_brick_fence, "grc.netherBrickFenceRope"));
 
         FenceRopeRegistry.instance()
-            .addEntry(Blocks.fence, fenceRope.getBlock());
+                .addEntry(Blocks.fence, fenceRope.getBlock());
         FenceRopeRegistry.instance()
-            .addEntry(Blocks.nether_brick_fence, netherBrickFenceRope.getBlock());
+                .addEntry(Blocks.nether_brick_fence, netherBrickFenceRope.getBlock());
     }
 
     @Override
@@ -77,7 +76,7 @@ public class GrcCoreBlocks extends GrcModuleBlocks {
     private void initEtfuturum() {
         final String modId = "etfuturum";
         if (Loader.isModLoaded(modId)) {
-            final String[] woodTypes = { "oak", "spruce", "birch", "jungle", "acacia", "dark_oak" };
+            final String[] woodTypes = {"oak", "spruce", "birch", "jungle", "acacia", "dark_oak"};
             for (String woodTypeName : woodTypes) {
                 final Block block = GameRegistry.findBlock(modId, "fence_" + woodTypeName);
                 if (block != null) {
@@ -86,7 +85,7 @@ public class GrcCoreBlocks extends GrcModuleBlocks {
                     fp.register(basename, ItemBlockFenceRope.class);
                     Blocks.fire.setFireInfo(fp.getBlock(), 5, 20);
                     FenceRopeRegistry.instance()
-                        .addEntry(block, fp.getBlock());
+                            .addEntry(block, fp.getBlock());
                     NEI.hideItem(fp.asStack());
                 }
             }
@@ -97,42 +96,42 @@ public class GrcCoreBlocks extends GrcModuleBlocks {
         final String modId = "woodstuff";
         if (Loader.isModLoaded(modId)) {
             final String[] names = {
-                // aether
-                "skyrootPlank",
-                // arsmagica2
-                "planksWitchwood",
-                // BiomesOPlenty
-                "planks",
-                // Botania
-                "livingwood", "dreamwood",
-                // dendrology
-                "wood0",
-                // enhancedbiomes
-                "enhancedbiomes.tile.planksEB",
-                // erebus
-                "planks", "planks_scorched",
-                // erebus
-                "planks_varnished",
-                // erebus
-                "petrifiedWoodPlanks",
-                // ExtrabiomesXL
-                "planks",
-                // Forestry
-                "planks",
-                // Highlands
-                "hl_woodPlanks",
-                // Natura
-                "planks",
-                // RidiculousWorld
-                "RidiculousPlanks",
-                // Thaumcraft
-                "blockWoodenDevice",
-                // totemic
-                "redCedarPlank",
-                // TwilightForest
-                "tile.TFTowerStone",
-                // witchery
-                "witchwood", };
+                    // aether
+                    "skyrootPlank",
+                    // arsmagica2
+                    "planksWitchwood",
+                    // BiomesOPlenty
+                    "planks",
+                    // Botania
+                    "livingwood", "dreamwood",
+                    // dendrology
+                    "wood0",
+                    // enhancedbiomes
+                    "enhancedbiomes.tile.planksEB",
+                    // erebus
+                    "planks", "planks_scorched",
+                    // erebus
+                    "planks_varnished",
+                    // erebus
+                    "petrifiedWoodPlanks",
+                    // ExtrabiomesXL
+                    "planks",
+                    // Forestry
+                    "planks",
+                    // Highlands
+                    "hl_woodPlanks",
+                    // Natura
+                    "planks",
+                    // RidiculousWorld
+                    "RidiculousPlanks",
+                    // Thaumcraft
+                    "blockWoodenDevice",
+                    // totemic
+                    "redCedarPlank",
+                    // TwilightForest
+                    "tile.TFTowerStone",
+                    // witchery
+                    "witchwood",};
             // TODO
         }
     }
@@ -147,7 +146,7 @@ public class GrcCoreBlocks extends GrcModuleBlocks {
                 naturaFenceRope.register("grc.naturaFenceRope", ItemBlockNaturaFenceRope.class);
                 Blocks.fire.setFireInfo(naturaFenceRope.getBlock(), 5, 20);
                 FenceRopeRegistry.instance()
-                    .addEntry(block, naturaFenceRope.getBlock());
+                        .addEntry(block, naturaFenceRope.getBlock());
                 NEI.hideItem(naturaFenceRope.asStack());
             }
         }

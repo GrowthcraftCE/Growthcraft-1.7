@@ -19,17 +19,16 @@
  */
 package growthcraft.core.util;
 
-import java.util.List;
-
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.nbt.NBTType;
+import growthcraft.api.core.util.ConstID;
+import growthcraft.api.core.util.ITagFormatter;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.i18n.GrcI18n;
-import growthcraft.api.core.nbt.NBTType;
-import growthcraft.api.core.util.ConstID;
-import growthcraft.api.core.util.ITagFormatter;
+import java.util.List;
 
 /**
  * Tag Formatter for IFluidHandler NBT data
@@ -54,8 +53,8 @@ public class TagFormatterFluidHandler implements ITagFormatter {
                     // If the FluidHandler has multiple tanks, then prefix them as such,
                     // otherwise, display their content like normal
                     content += EnumChatFormatting.GRAY
-                        + GrcI18n.translate("grc.format.tank_id", tankTag.getInteger("tank_id") + 1)
-                        + " ";
+                            + GrcI18n.translate("grc.format.tank_id", tankTag.getInteger("tank_id") + 1)
+                            + " ";
                 }
             }
 
@@ -64,9 +63,9 @@ public class TagFormatterFluidHandler implements ITagFormatter {
                 final FluidStack fluidStack = FluidStack.loadFluidStackFromNBT(tankTag.getCompoundTag("fluid"));
                 final String fluidName = UnitFormatter.fluidNameForContainer(fluidStack);
                 content = content + UnitFormatter.fractionNum(fluidStack.amount, tankTag.getInteger("capacity"))
-                    + EnumChatFormatting.GRAY
-                    + " "
-                    + GrcI18n.translate("grc.format.tank.content_suffix", fluidName);
+                        + EnumChatFormatting.GRAY
+                        + " "
+                        + GrcI18n.translate("grc.format.tank.content_suffix", fluidName);
             } else {
                 content = content + UnitFormatter.noFluid();
             }

@@ -19,8 +19,10 @@
  */
 package growthcraft.cellar.common.item;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.common.item.GrcItemBase;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -28,10 +30,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.common.item.GrcItemBase;
+import java.util.List;
 
 public class ItemYeast extends GrcItemBase {
 
@@ -53,7 +52,7 @@ public class ItemYeast extends GrcItemBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void getSubItems(Item item, CreativeTabs tab, List list) {
         for (EnumYeast ytype : EnumYeast.values()) {
             list.add(ytype.asStack());

@@ -1,11 +1,10 @@
 package growthcraft.cellar.creativetab;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.cellar.GrowthCraftCellar;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class CreativeTabsCellar extends CreativeTabs {
 

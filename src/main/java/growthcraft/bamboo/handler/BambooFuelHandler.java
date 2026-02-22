@@ -1,10 +1,9 @@
 package growthcraft.bamboo.handler;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.IFuelHandler;
 import growthcraft.bamboo.GrowthCraftBamboo;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class BambooFuelHandler implements IFuelHandler {
 

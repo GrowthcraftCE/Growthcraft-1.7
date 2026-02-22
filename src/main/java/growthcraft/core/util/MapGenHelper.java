@@ -24,10 +24,11 @@ import net.minecraft.world.gen.structure.StructureVillagePieces;
 
 public final class MapGenHelper {
 
-    private MapGenHelper() {}
+    private MapGenHelper() {
+    }
 
     public static void registerVillageStructure(Class<? extends StructureVillagePieces.Village> structure,
-        String name) {
+                                                String name) {
         try {
             MapGenStructureIO.func_143031_a(structure, name);
         } catch (Throwable e) {

@@ -19,14 +19,13 @@
  */
 package growthcraft.grapes.integration;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.Optional;
 import growthcraft.core.integration.ForestryModuleBase;
 import growthcraft.core.integration.forestry.FarmableBasicGrowthCraft;
 import growthcraft.core.integration.forestry.ForestryFluids;
 import growthcraft.grapes.GrowthCraftGrapes;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 public class ForestryModule extends ForestryModuleBase {
 
@@ -48,9 +47,9 @@ public class ForestryModule extends ForestryModuleBase {
         Backpack.FORESTERS.add(grapes);
 
         if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager
-            .addRecipe(10, new ItemStack[] { grapeSeed }, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
+                .addRecipe(10, new ItemStack[]{grapeSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
         if (ForestryFluids.JUICE.exists()) recipes().squeezerManager
-            .addRecipe(10, new ItemStack[] { grapes }, ForestryFluids.JUICE.asFluidStack(juiceAmount));
+                .addRecipe(10, new ItemStack[]{grapes}, ForestryFluids.JUICE.asFluidStack(juiceAmount));
         addFarmable("farmOrchard", new FarmableBasicGrowthCraft(grapeBlock, 0, false, true));
     }
 }

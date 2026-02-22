@@ -29,9 +29,10 @@ package growthcraft.api.core.util;
  */
 public class BoundUtils {
 
-    public static final float[] NORMALIZED_CLAMP = new float[] { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f };
+    public static final float[] NORMALIZED_CLAMP = new float[]{0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f};
 
-    private BoundUtils() {}
+    private BoundUtils() {
+    }
 
     /**
      * Clamps the target bounds using the provided `clamp` bounds
@@ -141,7 +142,7 @@ public class BoundUtils {
      * @return target
      */
     public static float[] scaleBounds(float[] target, float scale, float x, float y, float z, float x2, float y2,
-        float z2) {
+                                      float z2) {
         assert target.length == 6;
         target[0] = x * scale;
         target[1] = y * scale;

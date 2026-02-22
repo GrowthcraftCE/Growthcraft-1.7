@@ -19,12 +19,12 @@
  */
 package growthcraft.api.cellar.fermenting.user;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.api.core.schema.FluidStackSchema;
 import growthcraft.api.core.schema.ICommentable;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.schema.MultiFluidStackSchema;
+
+import javax.annotation.Nonnull;
 
 public class UserFermentingRecipe implements ICommentable {
 
@@ -35,14 +35,15 @@ public class UserFermentingRecipe implements ICommentable {
     public int time;
 
     public UserFermentingRecipe(@Nonnull ItemKeySchema itemSchema, @Nonnull MultiFluidStackSchema inp_fluid,
-        @Nonnull FluidStackSchema out_fluid, int t) {
+                                @Nonnull FluidStackSchema out_fluid, int t) {
         this.item = itemSchema;
         this.input_fluid = inp_fluid;
         this.output_fluid = out_fluid;
         this.time = t;
     }
 
-    public UserFermentingRecipe() {}
+    public UserFermentingRecipe() {
+    }
 
     @Override
     public String toString() {

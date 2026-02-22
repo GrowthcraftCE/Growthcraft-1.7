@@ -19,16 +19,14 @@
  */
 package growthcraft.api.core.fluids;
 
-import java.util.*;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.NullLogger;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class FluidDictionary implements IFluidDictionary {
 
@@ -56,7 +54,7 @@ public class FluidDictionary implements IFluidDictionary {
                 tagToFluidsMap.put(tag, new HashSet<Fluid>());
             }
             tagToFluidsMap.get(tag)
-                .add(fluid);
+                    .add(fluid);
         }
     }
 

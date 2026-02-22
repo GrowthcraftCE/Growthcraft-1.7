@@ -1,7 +1,9 @@
 package growthcraft.apples.common.block;
 
-import java.util.Random;
-
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.apples.GrowthCraftApples;
+import growthcraft.apples.common.world.WorldGenAppleTree;
+import growthcraft.core.GrowthCraftCore;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -9,10 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.apples.GrowthCraftApples;
-import growthcraft.apples.common.world.WorldGenAppleTree;
-import growthcraft.core.GrowthCraftCore;
+import java.util.Random;
 
 public class BlockAppleSapling extends BlockBush implements IGrowable {
 

@@ -1,5 +1,12 @@
 package growthcraft.cellar.common.tileentity;
 
+import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.ContainerFruitPress;
+import growthcraft.cellar.common.tileentity.device.FruitPress;
+import growthcraft.core.common.inventory.GrcInternalInventory;
+import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -11,24 +18,16 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.cellar.common.fluids.CellarTank;
-import growthcraft.cellar.common.inventory.ContainerFruitPress;
-import growthcraft.cellar.common.tileentity.device.FruitPress;
-import growthcraft.core.common.inventory.GrcInternalInventory;
-import growthcraft.core.common.tileentity.event.TileEventHandler;
-import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
-
 public class TileEntityFruitPress extends TileEntityCellarDevice implements ITileProgressiveDevice {
 
-    private static final int[] allSlotIds = new int[] { 0, 1 };
-    private static final int[] residueSlotIds = new int[] { 0 };
+    private static final int[] allSlotIds = new int[]{0, 1};
+    private static final int[] residueSlotIds = new int[]{0};
     private final FruitPress fruitPress = new FruitPress(this, 0, 0, 1);
 
     @Override
     protected FluidTank[] createTanks() {
         final int maxCap = GrowthCraftCellar.getConfig().fruitPressMaxCap;
-        return new FluidTank[] { new CellarTank(maxCap, this) };
+        return new FluidTank[]{new CellarTank(maxCap, this)};
     }
 
     @Override
@@ -186,6 +185,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITil
         public static final int TIME = 0;
         public static final int TIME_MAX = 1;
 
-        private FruitPressDataID() {}
+        private FruitPressDataID() {
+        }
     }
 }

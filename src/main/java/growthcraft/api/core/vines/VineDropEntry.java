@@ -19,10 +19,10 @@
  */
 package growthcraft.api.core.vines;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
+
+import javax.annotation.Nonnull;
 
 public class VineDropEntry extends WeightedRandom.Item {
 

@@ -19,16 +19,6 @@
  */
 package growthcraft.cellar.common.tileentity.device;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandom;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
-
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.yeast.IYeastRegistry;
@@ -39,6 +29,15 @@ import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.common.tileentity.device.DeviceProgressive;
 import growthcraft.core.util.ItemUtils;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandom;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class YeastGenerator extends DeviceProgressive {
 
@@ -91,8 +90,8 @@ public class YeastGenerator extends DeviceProgressive {
         if (stack.stackSize >= stack.getMaxStackSize()) return false;
         // prevent item pointless ticking with invalid items
         return CellarRegistry.instance()
-            .yeast()
-            .isYeast(stack);
+                .yeast()
+                .isYeast(stack);
     }
 
     /**
@@ -108,8 +107,8 @@ public class YeastGenerator extends DeviceProgressive {
             if (!canReplicateYeast(yeastItem)) return false;
         }
         return CoreRegistry.instance()
-            .fluidDictionary()
-            .hasFluidTags(fluidSlot.getFluid(), BoozeTag.YOUNG);
+                .fluidDictionary()
+                .hasFluidTags(fluidSlot.getFluid(), BoozeTag.YOUNG);
     }
 
     public void consumeFluid() {
@@ -127,7 +126,7 @@ public class YeastGenerator extends DeviceProgressive {
         final BiomeGenBase biome = getCurrentBiome();
         if (biome != null) {
             final IYeastRegistry reg = CellarRegistry.instance()
-                .yeast();
+                    .yeast();
 
             {
                 final Collection<WeightedItemStack> yl = reg.getYeastListForBiomeName(biome.biomeName);

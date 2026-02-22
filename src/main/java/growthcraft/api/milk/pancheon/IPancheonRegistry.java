@@ -19,12 +19,11 @@
  */
 package growthcraft.api.milk.pancheon;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.log.ILoggable;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.log.ILoggable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public interface IPancheonRegistry extends ILoggable {
 
@@ -37,7 +36,7 @@ public interface IPancheonRegistry extends ILoggable {
      * @param time         - how long does the recipe take to produce its output (in ticks)
      */
     void addRecipe(@Nonnull FluidStack inputStack, @Nonnull FluidStack topOutput, @Nullable FluidStack bottomOutput,
-        int time);
+                   int time);
 
     @Nullable
     IPancheonRecipe getRecipe(@Nullable FluidStack fstack);

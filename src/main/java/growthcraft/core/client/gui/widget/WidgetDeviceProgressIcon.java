@@ -19,15 +19,14 @@
  */
 package growthcraft.core.client.gui.widget;
 
-import net.minecraft.tileentity.TileEntity;
-
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
+import net.minecraft.tileentity.TileEntity;
 
 public class WidgetDeviceProgressIcon extends WidgetIconBase {
 
     public ProgressDirection progressDirection = ProgressDirection.LEFT_TO_RIGHT;
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public WidgetDeviceProgressIcon(WidgetManager man, int x, int y, int w, int h) {
         super(man, x, y, w, h);
     }
@@ -52,25 +51,25 @@ public class WidgetDeviceProgressIcon extends WidgetIconBase {
                 case LEFT_TO_RIGHT: {
                     tw = progDevice.getDeviceProgressScaled(tw);
                 }
-                    break;
+                break;
                 case RIGHT_TO_LEFT: {
                     tw = progDevice.getDeviceProgressScaled(tw);
                     final int offX = textureRect.w - tw;
                     dx += offX;
                     tx += offX;
                 }
-                    break;
+                break;
                 case TOP_TO_BOTTOM: {
                     th = progDevice.getDeviceProgressScaled(th);
                 }
-                    break;
+                break;
                 case BOTTOM_TO_TOP: {
                     th = progDevice.getDeviceProgressScaled(th);
                     final int offY = textureRect.h - th;
                     dy += offY;
                     ty += offY;
                 }
-                    break;
+                break;
                 default:
             }
 

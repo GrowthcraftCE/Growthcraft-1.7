@@ -1,7 +1,5 @@
 package growthcraft.api.core.fluids;
 
-import java.util.*;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -9,11 +7,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 
+import java.util.*;
+
 public class FluidUtils {
 
     private static Map<Fluid, List<FluidContainerData>> fluidData;
 
-    private FluidUtils() {}
+    private FluidUtils() {
+    }
 
     public static Map<Fluid, List<FluidContainerData>> getFluidData() {
         if (fluidData == null || fluidData.size() == 0) {
@@ -23,7 +24,7 @@ public class FluidUtils {
                     fluidData.put(data.fluid.getFluid(), new ArrayList<FluidContainerData>());
                 }
                 fluidData.get(data.fluid.getFluid())
-                    .add(data);
+                        .add(data);
             }
         }
 

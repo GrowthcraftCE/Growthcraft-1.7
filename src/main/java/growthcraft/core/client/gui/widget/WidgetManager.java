@@ -19,13 +19,12 @@
  */
 package growthcraft.core.client.gui.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import growthcraft.core.client.gui.GrcGuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-import growthcraft.core.client.gui.GrcGuiContainer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WidgetManager<C extends Container, T extends TileEntity> {
 
@@ -36,7 +35,7 @@ public class WidgetManager<C extends Container, T extends TileEntity> {
         this.gui = g;
     }
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public WidgetManager add(Widget widget) {
         widgets.add(widget);
         return this;

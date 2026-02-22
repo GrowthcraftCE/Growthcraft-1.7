@@ -19,14 +19,12 @@
  */
 package growthcraft.api.cellar.booze;
 
-import java.util.Collection;
-
-import javax.annotation.Nonnull;
-
-import net.minecraftforge.fluids.Fluid;
-
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.fluids.FluidTag;
+import net.minecraftforge.fluids.Fluid;
+
+import javax.annotation.Nonnull;
+import java.util.Collection;
 
 public class BoozeEntry {
 
@@ -64,19 +62,19 @@ public class BoozeEntry {
 
     public Collection<FluidTag> getTags() {
         return CoreRegistry.instance()
-            .fluidDictionary()
-            .getFluidTags(fluid);
+                .fluidDictionary()
+                .getFluidTags(fluid);
     }
 
     public void addTags(FluidTag... newtags) {
         CoreRegistry.instance()
-            .fluidDictionary()
-            .addFluidTags(fluid, newtags);
+                .fluidDictionary()
+                .addFluidTags(fluid, newtags);
     }
 
     public boolean hasTags(FluidTag... checktags) {
         return CoreRegistry.instance()
-            .fluidDictionary()
-            .hasFluidTags(fluid, checktags);
+                .fluidDictionary()
+                .hasFluidTags(fluid, checktags);
     }
 }

@@ -1,8 +1,11 @@
 package growthcraft.bees.common.block;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.bees.GrowthCraftBees;
+import growthcraft.bees.client.renderer.RenderBeeHive;
+import growthcraft.core.common.block.GrcBlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -17,12 +20,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.bees.GrowthCraftBees;
-import growthcraft.bees.client.renderer.RenderBeeHive;
-import growthcraft.core.common.block.GrcBlockBase;
+import java.util.List;
+import java.util.Random;
 
 public class BlockBeeHive extends GrcBlockBase {
 
@@ -45,13 +44,13 @@ public class BlockBeeHive extends GrcBlockBase {
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
         if (random.nextInt(24) == 0) {
             world.playSound(
-                (float) x + 0.5F,
-                (float) y + 0.5F,
-                (float) z + 0.5F,
-                "grcbees:buzz",
-                1.0F + random.nextFloat(),
-                random.nextFloat() * 0.7F + 0.3F,
-                false);
+                    (float) x + 0.5F,
+                    (float) y + 0.5F,
+                    (float) z + 0.5F,
+                    "grcbees:buzz",
+                    1.0F + random.nextFloat(),
+                    random.nextFloat() * 0.7F + 0.3F,
+                    false);
         }
     }
 
@@ -134,7 +133,7 @@ public class BlockBeeHive extends GrcBlockBase {
             return false;
         }
         return world.getBlock(x, y + 1, z)
-            .isLeaves(world, x, y + 1, z);
+                .isLeaves(world, x, y + 1, z);
     }
 
     /************
@@ -227,9 +226,9 @@ public class BlockBeeHive extends GrcBlockBase {
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list,
-        Entity entity) {
+                                        Entity entity) {
         final float f = 0.0625F;
         this.setBlockBounds(4 * f, 0.0F, 4 * f, 12 * f, 14 * f, 12 * f);
         super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);

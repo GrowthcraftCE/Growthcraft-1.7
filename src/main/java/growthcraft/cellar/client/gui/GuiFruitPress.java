@@ -1,10 +1,5 @@
 package growthcraft.cellar.client.gui;
 
-import java.util.List;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.entity.player.InventoryPlayer;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.api.core.i18n.GrcI18n;
@@ -16,6 +11,10 @@ import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.network.PacketClearTankButton;
 import growthcraft.core.client.gui.widget.WidgetDeviceProgressIcon;
 import growthcraft.core.client.gui.widget.WidgetFluidTank;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.entity.player.InventoryPlayer;
+
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiFruitPress extends GuiCellar<ContainerFruitPress, TileEntityFruitPress> {
@@ -27,14 +26,14 @@ public class GuiFruitPress extends GuiCellar<ContainerFruitPress, TileEntityFrui
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void initGui() {
         super.initGui();
         widgets.add(new WidgetFluidTank(widgets, 0, 89, 17, 16, 52));
         widgets.add(
-            new WidgetDeviceProgressIcon(widgets, 63, 34, 25, 16)
-                .setProgressDirection(WidgetDeviceProgressIcon.ProgressDirection.LEFT_TO_RIGHT)
-                .setTextureRect(176, 0, 25, 16));
+                new WidgetDeviceProgressIcon(widgets, 63, 34, 25, 16)
+                        .setProgressDirection(WidgetDeviceProgressIcon.ProgressDirection.LEFT_TO_RIGHT)
+                        .setTextureRect(176, 0, 25, 16));
         if (GrowthCraftCellar.getConfig().enableDiscardButton) {
             this.discardButton = new GuiButtonDiscard(guiResource, 1, guiLeft + 108, guiTop + 54);
             buttonList.add(discardButton);
@@ -53,7 +52,7 @@ public class GuiFruitPress extends GuiCellar<ContainerFruitPress, TileEntityFrui
 
     protected void actionPerformed(GuiButton butn) {
         GrowthCraftCellar.packetPipeline
-            .sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
+                .sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
     }
 
     @Override

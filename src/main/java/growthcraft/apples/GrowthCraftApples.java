@@ -1,10 +1,5 @@
 package growthcraft.apples;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.MinecraftForge;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -31,12 +26,16 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
+import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(
-    modid = GrowthCraftApples.MOD_ID,
-    name = GrowthCraftApples.MOD_NAME,
-    version = GrowthCraftApples.MOD_VERSION,
-    dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
+        modid = GrowthCraftApples.MOD_ID,
+        name = GrowthCraftApples.MOD_NAME,
+        version = GrowthCraftApples.MOD_VERSION,
+        dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
 public class GrowthCraftApples {
 
     public static final String MOD_ID = "Growthcraft|Apples";
@@ -100,9 +99,9 @@ public class GrowthCraftApples {
         final VillageHandlerApples handler = new VillageHandlerApples();
         final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
         if (brewerID > 0) VillagerRegistry.instance()
-            .registerVillageTradeHandler(brewerID, handler);
+                .registerVillageTradeHandler(brewerID, handler);
         VillagerRegistry.instance()
-            .registerVillageCreationHandler(handler);
+                .registerVillageCreationHandler(handler);
     }
 
     @EventHandler

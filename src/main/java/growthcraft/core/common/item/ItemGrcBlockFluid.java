@@ -19,17 +19,16 @@
  */
 package growthcraft.core.common.item;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.core.common.block.GrcBlockFluid;
+import growthcraft.core.util.UnitFormatter;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.core.common.block.GrcBlockFluid;
-import growthcraft.core.util.UnitFormatter;
+import java.util.List;
 
 public class ItemGrcBlockFluid extends GrcItemBlockBase {
 
@@ -53,7 +52,7 @@ public class ItemGrcBlockFluid extends GrcItemBlockBase {
     }
 
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool) {
         final String modifier = UnitFormatter.fluidModifier(getFluid());
         if (modifier != null) list.add(modifier);
@@ -61,7 +60,7 @@ public class ItemGrcBlockFluid extends GrcItemBlockBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
         super.addInformation(stack, player, list, bool);
         writeModifierTooltip(stack, player, list, bool);

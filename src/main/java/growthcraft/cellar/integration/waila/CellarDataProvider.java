@@ -19,16 +19,6 @@
  */
 package growthcraft.cellar.integration.waila;
 
-import java.util.List;
-
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.world.World;
-
 import cpw.mods.fml.common.Optional;
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.nbt.NBTHelper;
@@ -44,6 +34,15 @@ import growthcraft.cellar.util.TagFormatterFruitPress;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
+
+import java.util.List;
 
 public class CellarDataProvider implements IWailaDataProvider {
 
@@ -56,24 +55,24 @@ public class CellarDataProvider implements IWailaDataProvider {
     @Override
     @Optional.Method(modid = "Waila")
     public List<String> getWailaHead(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
+                                     IWailaConfigHandler config) {
         return tooltip;
     }
 
     @Override
     @Optional.Method(modid = "Waila")
     public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
+                                     IWailaConfigHandler config) {
         final Block block = accessor.getBlock();
         final TileEntity te = accessor.getTileEntity();
         if (block instanceof BlockFruitPresser) {
             tooltip.add(
-                EnumChatFormatting.GRAY + GrcI18n.translate("grc.cellar.fruit_presser.state_prefix")
-                    + " "
-                    + EnumChatFormatting.WHITE
-                    + GrcI18n.translate(
-                        "grc.cellar.fruit_presser.state."
-                            + ((BlockFruitPresser) block).getPressStateName(accessor.getMetadata())));
+                    EnumChatFormatting.GRAY + GrcI18n.translate("grc.cellar.fruit_presser.state_prefix")
+                            + " "
+                            + EnumChatFormatting.WHITE
+                            + GrcI18n.translate(
+                            "grc.cellar.fruit_presser.state."
+                                    + ((BlockFruitPresser) block).getPressStateName(accessor.getMetadata())));
         }
         final NBTTagCompound tag = accessor.getNBTData();
         if (config.getConfig("FermentBarrelExtras")) {
@@ -103,7 +102,7 @@ public class CellarDataProvider implements IWailaDataProvider {
     @Override
     @Optional.Method(modid = "Waila")
     public List<String> getWailaTail(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
+                                     IWailaConfigHandler config) {
         return tooltip;
     }
 
@@ -124,14 +123,14 @@ public class CellarDataProvider implements IWailaDataProvider {
 
     private void getFermentBarrelData(TileEntityFermentBarrel fermentBarrel, NBTTagCompound tag) {
         tag.setTag(
-            "item_modifier",
-            NBTHelper.writeItemStackToNBT(fermentBarrel.getStackInSlot(0), new NBTTagCompound()));
+                "item_modifier",
+                NBTHelper.writeItemStackToNBT(fermentBarrel.getStackInSlot(0), new NBTTagCompound()));
     }
 
     @Override
     @Optional.Method(modid = "Waila")
     public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x,
-        int y, int z) {
+                                     int y, int z) {
         if (te instanceof TileEntityBrewKettle) getBrewKettleData((TileEntityBrewKettle) te, tag);
         if (te instanceof TileEntityFruitPress) getFruitPressData((TileEntityFruitPress) te, tag);
         if (te instanceof TileEntityFermentBarrel) getFermentBarrelData((TileEntityFermentBarrel) te, tag);

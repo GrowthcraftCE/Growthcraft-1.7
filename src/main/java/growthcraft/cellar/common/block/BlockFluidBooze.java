@@ -19,12 +19,11 @@
  */
 package growthcraft.cellar.common.block;
 
-import net.minecraft.block.material.Material;
-import net.minecraftforge.fluids.Fluid;
-
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.block.GrcBlockFluid;
 import growthcraft.core.common.block.Materials;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.Fluid;
 
 public class BlockFluidBooze extends GrcBlockFluid {
 

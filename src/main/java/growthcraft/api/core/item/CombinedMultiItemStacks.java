@@ -1,27 +1,25 @@
 package growthcraft.api.core.item;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.definition.IItemStackListProvider;
+import growthcraft.api.core.definition.IMultiFluidStacks;
+import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.util.MultiStacksUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.definition.IItemStackListProvider;
-import growthcraft.api.core.definition.IMultiFluidStacks;
-import growthcraft.api.core.definition.IMultiItemStacks;
-import growthcraft.api.core.util.MultiStacksUtil;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 public class CombinedMultiItemStacks implements IMultiItemStacks {
 
-    public int stackSize;
     private final List<IItemStackListProvider> itemStacks;
+    public int stackSize;
 
     public CombinedMultiItemStacks(int amount, @Nonnull Object... items) {
         itemStacks = new ArrayList<IItemStackListProvider>();
@@ -65,7 +63,7 @@ public class CombinedMultiItemStacks implements IMultiItemStacks {
         final List<ItemStack> output = new ArrayList<ItemStack>();
 
         for (IItemStackListProvider itemList : itemStacks) {
-            output.addAll(itemList.getItemStacks());
+            output.addAll(itemList.itemStacks());
         }
 
         return output;
@@ -77,7 +75,7 @@ public class CombinedMultiItemStacks implements IMultiItemStacks {
     }
 
     @Override
-    public List<ItemStack> getItemStacks() {
+    public List<ItemStack> itemStacks() {
         final List<ItemStack> items = getRawItemStacks();
         final Set<ItemStack> result = new LinkedHashSet<ItemStack>();
         for (ItemStack stack : items) {
@@ -93,7 +91,7 @@ public class CombinedMultiItemStacks implements IMultiItemStacks {
     @Override
     public boolean containsItemStack(@Nullable ItemStack stack) {
         if (!ItemTest.isValid(stack)) return false;
-        for (ItemStack content : getItemStacks()) {
+        for (ItemStack content : itemStacks()) {
             if (content.isItemEqual(stack)) return true;
         }
         return false;

@@ -19,19 +19,18 @@
  */
 package growthcraft.core.integration.mfr;
 
+import cpw.mods.fml.common.Optional;
+import growthcraft.core.integration.MFRModuleBase;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import powercrystals.minefactoryreloaded.api.HarvestType;
+import powercrystals.minefactoryreloaded.api.IFactoryHarvestable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
-import cpw.mods.fml.common.Optional;
-import growthcraft.core.integration.MFRModuleBase;
-import powercrystals.minefactoryreloaded.api.HarvestType;
-import powercrystals.minefactoryreloaded.api.IFactoryHarvestable;
 
 @Optional.Interface(iface = "powercrystals.minefactoryreloaded.api.IFactoryHarvestable", modid = MFRModuleBase.MOD_ID)
 public abstract class AbstractFactoryHarvestable<TBlock extends Block> implements IFactoryHarvestable {
@@ -73,13 +72,14 @@ public abstract class AbstractFactoryHarvestable<TBlock extends Block> implement
 
     @Override
     public List<ItemStack> getDrops(World world, Random rand, Map<String, Boolean> harvesterSettings, int x, int y,
-        int z) {
+                                    int z) {
         if (plantBlock != null) return plantBlock.getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
         return new ArrayList<ItemStack>();
     }
 
     @Override
-    public void preHarvest(World world, int x, int y, int z) {}
+    public void preHarvest(World world, int x, int y, int z) {
+    }
 
     @Override
     public void postHarvest(World world, int x, int y, int z) {

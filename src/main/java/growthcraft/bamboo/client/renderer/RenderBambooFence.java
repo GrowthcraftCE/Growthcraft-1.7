@@ -1,17 +1,15 @@
 package growthcraft.bamboo.client.renderer;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import growthcraft.bamboo.common.block.BlockBambooFence;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import growthcraft.bamboo.common.block.BlockBambooFence;
 
 public class RenderBambooFence implements ISimpleBlockRenderingHandler {
 
@@ -51,22 +49,22 @@ public class RenderBambooFence implements ISimpleBlockRenderingHandler {
 
                 if (loop == 2) {
                     renderer.setRenderBounds(
-                        0.5F - f2,
-                        1.0F - f2 * 3.0F,
-                        -f2 * 2.0F,
-                        0.5F + f2,
-                        1.0F - f2,
-                        1.0F + f2 * 2.0F);
+                            0.5F - f2,
+                            1.0F - f2 * 3.0F,
+                            -f2 * 2.0F,
+                            0.5F + f2,
+                            1.0F - f2,
+                            1.0F + f2 * 2.0F);
                 }
 
                 if (loop == 3) {
                     renderer.setRenderBounds(
-                        0.5F - f2,
-                        0.5F - f2 * 3.0F,
-                        -f2 * 2.0F,
-                        0.5F + f2,
-                        0.5F - f2,
-                        1.0F + f2 * 2.0F);
+                            0.5F - f2,
+                            0.5F - f2 * 3.0F,
+                            -f2 * 2.0F,
+                            0.5F + f2,
+                            0.5F - f2,
+                            1.0F + f2 * 2.0F);
                 }
 
                 if (loop == 0 || loop == 1) {
@@ -124,7 +122,7 @@ public class RenderBambooFence implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
+                                    RenderBlocks renderer) {
         if (modelId == id) {
             float f = 0.375F;
             float f1 = 0.625F;
@@ -146,26 +144,26 @@ public class RenderBambooFence implements ISimpleBlockRenderingHandler {
             final int metaZpos = world.getBlockMetadata(x, y, z + 1);
 
             if ((blk.canConnectFenceTo(world, x - 1, y, z) || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0))
-                || (blk.canConnectFenceTo(world, x + 1, y, z)
+                    || (blk.canConnectFenceTo(world, x + 1, y, z)
                     || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1))) {
                 flag1 = true;
             }
 
             if ((blk.canConnectFenceTo(world, x, y, z - 1)
-                || (idZneg instanceof BlockStairs && world.getBlockMetadata(x, y, z - 1) == 2))
-                || (blk.canConnectFenceTo(world, x, y, z + 1)
+                    || (idZneg instanceof BlockStairs && world.getBlockMetadata(x, y, z - 1) == 2))
+                    || (blk.canConnectFenceTo(world, x, y, z + 1)
                     || (idZpos instanceof BlockStairs && world.getBlockMetadata(x, y, z + 1) == 3))) {
                 flag2 = true;
             }
 
             final boolean flagXneg = blk.canConnectFenceTo(world, x - 1, y, z)
-                || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
+                    || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
             final boolean flagXpos = blk.canConnectFenceTo(world, x + 1, y, z)
-                || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
+                    || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
             final boolean flagZneg = blk.canConnectFenceTo(world, x, y, z - 1)
-                || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
+                    || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
             final boolean flagZpos = blk.canConnectFenceTo(world, x, y, z + 1)
-                || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
+                    || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
 
             f = 0.4375F;
             f1 = 0.5625F;

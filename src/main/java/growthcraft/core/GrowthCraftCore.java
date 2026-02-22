@@ -1,18 +1,5 @@
 package growthcraft.core;
 
-import java.util.List;
-
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.RecipeSorter;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -42,13 +29,25 @@ import growthcraft.core.init.GrcCoreItems;
 import growthcraft.core.init.GrcCoreRecipes;
 import growthcraft.core.integration.bop.BopPlatform;
 import growthcraft.core.stats.GrcCoreAchievements;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.RecipeSorter;
+
+import java.util.List;
 
 @Mod(
-    modid = GrowthCraftCore.MOD_ID,
-    name = GrowthCraftCore.MOD_NAME,
-    version = GrowthCraftCore.MOD_VERSION,
-    acceptedMinecraftVersions = GrowthCraftCore.MOD_ACC_MINECRAFT,
-    dependencies = GrowthCraftCore.MOD_DEPENDENCIES)
+        modid = GrowthCraftCore.MOD_ID,
+        name = GrowthCraftCore.MOD_NAME,
+        version = GrowthCraftCore.MOD_VERSION,
+        acceptedMinecraftVersions = GrowthCraftCore.MOD_ACC_MINECRAFT,
+        dependencies = GrowthCraftCore.MOD_DEPENDENCIES)
 public class GrowthCraftCore {
 
     public static final String MOD_ID = "Growthcraft";
@@ -92,7 +91,7 @@ public class GrowthCraftCore {
         if (config.debugEnabled) {
             logger.info("Pre-Initializing %s", MOD_ID);
             CoreRegistry.instance()
-                .setLogger(logger);
+                    .setLogger(logger);
         }
         modules.add(blocks);
         modules.add(items);
@@ -100,7 +99,7 @@ public class GrowthCraftCore {
         modules.add(recipes);
         userVinesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/vines.json");
         userFluidDictionary
-            .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/fluid_dictionary.json");
+                .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/fluid_dictionary.json");
         modules.add(userVinesConfig);
         modules.add(userFluidDictionary);
         if (config.enableThaumcraftIntegration) modules.add(new growthcraft.core.integration.ThaumcraftModule());
@@ -115,22 +114,22 @@ public class GrowthCraftCore {
         EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
         if (config.changeWaterBottleCapacity) {
             final List<FluidContainerData> dataList = FluidUtils.getFluidData()
-                .get(FluidRegistry.WATER);
+                    .get(FluidRegistry.WATER);
             for (FluidContainerData data : dataList)
                 if (OreDictionary.itemMatches(data.filledContainer, new ItemStack(Items.potionitem, 1, 0), true))
                     data.fluid.amount = config.bottleCapacity;
 
             // Reset the fluidData cache, as we are loading it super early here
             FluidUtils.getFluidData()
-                .clear();
+                    .clear();
         }
         if (config.changeWaterBottleContainer) Items.potionitem.setContainerItem(Items.glass_bottle);
 
         RecipeSorter.register(
-            "grcShaplessComparable",
-            ShapelessItemComparableRecipe.class,
-            RecipeSorter.Category.SHAPELESS,
-            "");
+                "grcShaplessComparable",
+                ShapelessItemComparableRecipe.class,
+                RecipeSorter.Category.SHAPELESS,
+                "");
 
         modules.preInit();
         register();
@@ -163,8 +162,8 @@ public class GrowthCraftCore {
         MinecraftForge.EVENT_BUS.register(new PlayerInteractEventPaddy());
         MinecraftForge.EVENT_BUS.register(new EventHandlerLivingDeathCore());
         FMLCommonHandler.instance()
-            .bus()
-            .register(new EventHandlerItemCraftedEventCore());
+                .bus()
+                .register(new EventHandlerItemCraftedEventCore());
 
         modules.postInit();
         if (config.dumpGameRegistry) growthcraft.core.util.GameRegistryDumper.run();

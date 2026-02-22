@@ -19,11 +19,10 @@
  */
 package growthcraft.cellar.event;
 
+import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.common.eventhandler.Event;
 
 public class EventWaterBag extends Event {
 

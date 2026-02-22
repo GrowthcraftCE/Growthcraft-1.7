@@ -19,15 +19,6 @@
  */
 package growthcraft.cellar.common.itemblock;
 
-import java.util.List;
-
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.fluids.FluidStack;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.api.core.i18n.GrcI18n;
@@ -35,6 +26,14 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.item.GrcItemTileBlockBase;
 import growthcraft.core.lib.GrcCoreState;
 import growthcraft.core.util.UnitFormatter;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.util.List;
 
 public class ItemBlockFermentBarrel extends GrcItemTileBlockBase {
 
@@ -44,7 +43,7 @@ public class ItemBlockFermentBarrel extends GrcItemTileBlockBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advanced) {
         super.addInformation(stack, player, list, advanced);
         final NBTTagCompound tag = getTileTagCompound(stack);
@@ -57,17 +56,17 @@ public class ItemBlockFermentBarrel extends GrcItemTileBlockBase {
                         final String fluidName = UnitFormatter.fluidName(fluidStack);
                         if (fluidName != null) {
                             list.add(
-                                GrcI18n.translate(
-                                    "grc.cellar.format.fluid_container.contents",
-                                    fluidName,
-                                    fluidStack.amount,
-                                    GrowthCraftCellar.getConfig().fermentBarrelMaxCap));
+                                    GrcI18n.translate(
+                                            "grc.cellar.format.fluid_container.contents",
+                                            fluidName,
+                                            fluidStack.amount,
+                                            GrowthCraftCellar.getConfig().fermentBarrelMaxCap));
                         }
                     } else {
                         list.add(
-                            EnumChatFormatting.GRAY + GrcI18n.translate(
-                                "grc.tooltip.detailed_information",
-                                EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
+                                EnumChatFormatting.GRAY + GrcI18n.translate(
+                                        "grc.tooltip.detailed_information",
+                                        EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
                     }
                 }
             }

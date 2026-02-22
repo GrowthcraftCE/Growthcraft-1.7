@@ -19,12 +19,11 @@
  */
 package growthcraft.bamboo.creativetab;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.bamboo.GrowthCraftBamboo;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class CreativeTabsGrowthcraftBamboo extends CreativeTabs {
 

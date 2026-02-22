@@ -19,15 +19,14 @@
  */
 package growthcraft.api.core.registry;
 
-import net.minecraft.item.ItemStack;
-
 import growthcraft.api.core.definition.IMultiItemStacks;
 import growthcraft.api.core.util.MultiStacksUtil;
+import net.minecraft.item.ItemStack;
 
 public class ItemRegistryEntry<T> implements IItemRegistryEntry<ItemStack> {
 
-    public T handle;
     private final IMultiItemStacks stacks;
+    public T handle;
 
     public ItemRegistryEntry(Object stack, T p_handle) {
         this.handle = p_handle;

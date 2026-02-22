@@ -19,16 +19,15 @@
  */
 package growthcraft.core.common.tileentity.device;
 
-import java.util.Random;
-
+import growthcraft.api.core.nbt.INBTSerializableContext;
+import growthcraft.api.core.stream.IStreamable;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.nbt.INBTSerializableContext;
-import growthcraft.api.core.stream.IStreamable;
-import io.netty.buffer.ByteBuf;
+import java.util.Random;
 
 public class DeviceBase implements INBTSerializableContext, IStreamable {
 
@@ -69,7 +68,8 @@ public class DeviceBase implements INBTSerializableContext, IStreamable {
     /**
      * @param data - nbt data to read from
      */
-    public void readFromNBT(NBTTagCompound data) {}
+    public void readFromNBT(NBTTagCompound data) {
+    }
 
     /**
      * @param data - parent nbt data to read from
@@ -88,7 +88,8 @@ public class DeviceBase implements INBTSerializableContext, IStreamable {
     /**
      * @param data - nbt to write to
      */
-    public void writeToNBT(NBTTagCompound data) {}
+    public void writeToNBT(NBTTagCompound data) {
+    }
 
     /**
      * @param data - nbt to write to

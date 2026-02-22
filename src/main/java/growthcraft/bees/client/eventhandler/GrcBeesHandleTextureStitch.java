@@ -19,10 +19,6 @@
  */
 package growthcraft.bees.client.eventhandler;
 
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.IIcon;
-import net.minecraftforge.client.event.TextureStitchEvent;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,6 +26,9 @@ import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.client.util.InterpolatedIcon;
 import growthcraft.core.integration.botania.EnumBotaniaWoodType;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.IIcon;
+import net.minecraftforge.client.event.TextureStitchEvent;
 
 public class GrcBeesHandleTextureStitch {
 
@@ -43,9 +42,9 @@ public class GrcBeesHandleTextureStitch {
     private void loadShimmerWoodInterpolatedIcons(TextureStitchEvent.Pre event) {
         if (GrowthCraftBees.blocks.beeBoxBotania != null) {
             final int offset = EnumBotaniaWoodType.SHIMMER_WOOD.meta;
-            final String[] sides = { "bottom", "top", "side", "side_honey" };
+            final String[] sides = {"bottom", "top", "side", "side_honey"};
             final IIcon[] icons = GrowthCraftBees.blocks.beeBoxBotania.getBlock()
-                .getIcons();
+                    .getIcons();
             int i = 0;
             for (String side : sides) {
                 final String name = String.format("grcbees:beebox/botania/shimmer_wood/%s", side);
@@ -73,7 +72,7 @@ public class GrcBeesHandleTextureStitch {
     public void onTextureStitchPost(TextureStitchEvent.Post event) {
         if (event.map.getTextureType() == 0) {
             if (GrowthCraftBees.fluids.honey != null) GrowthCraftBees.fluids.honey.getFluid()
-                .setIcons(iconFluidHoneyStill, iconFluidHoneyFlow);
+                    .setIcons(iconFluidHoneyStill, iconFluidHoneyFlow);
             for (int i = 0; i < GrowthCraftBees.fluids.honeyMeadBooze.length; ++i) {
                 GrowthCraftBees.fluids.honeyMeadBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
             }

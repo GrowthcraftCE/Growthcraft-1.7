@@ -1,5 +1,9 @@
 package growthcraft.bamboo.common.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.bamboo.client.renderer.RenderBambooFence;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
@@ -9,11 +13,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.bamboo.client.renderer.RenderBambooFence;
 
 public class BlockBambooFence extends BlockFence {
 
@@ -53,13 +52,13 @@ public class BlockBambooFence extends BlockFence {
         final Block block = world.getBlock(x, y, z);
 
         if (this == block || (block instanceof BlockFence)
-            || (block instanceof BlockFenceGate)
-            || GrowthCraftBamboo.blocks.bambooWall.isSameAs(block)
-            || GrowthCraftBamboo.blocks.bambooStalk.isSameAs(block)) {
+                || (block instanceof BlockFenceGate)
+                || GrowthCraftBamboo.blocks.bambooWall.isSameAs(block)
+                || GrowthCraftBamboo.blocks.bambooStalk.isSameAs(block)) {
             return true;
         } else {
             if (block != null && block.getMaterial()
-                .isOpaque() && block.renderAsNormalBlock()) {
+                    .isOpaque() && block.renderAsNormalBlock()) {
                 return block.getMaterial() != Material.gourd;
             }
         }

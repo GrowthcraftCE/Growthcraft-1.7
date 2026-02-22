@@ -19,14 +19,13 @@
  */
 package growthcraft.milk.common.item;
 
+import growthcraft.api.core.nbt.NBTHelper;
+import growthcraft.core.common.item.IItemTileBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
-import growthcraft.api.core.nbt.NBTHelper;
-import growthcraft.core.common.item.IItemTileBlock;
 
 public class ItemBlockCheeseBlock extends ItemBlock implements IItemTileBlock {
 
@@ -52,7 +51,7 @@ public class ItemBlockCheeseBlock extends ItemBlock implements IItemTileBlock {
             final EnumCheeseType cheese = EnumCheeseType.getSafeById(stack.getItemDamage());
             cheese.writeToNBT(cheeseTag);
             cheese.stages.get(0)
-                .writeToNBT(cheeseTag);
+                    .writeToNBT(cheeseTag);
             tag.setTag("te_cheese_block", cheeseTag);
         }
         return tag.getCompoundTag("te_cheese_block");

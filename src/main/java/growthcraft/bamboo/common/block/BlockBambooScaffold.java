@@ -1,7 +1,10 @@
 package growthcraft.bamboo.common.block;
 
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.bamboo.client.renderer.RenderBambooScaffold;
+import growthcraft.core.common.block.GrcBlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,11 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.bamboo.client.renderer.RenderBambooScaffold;
-import growthcraft.core.common.block.GrcBlockBase;
+import java.util.Random;
 
 public class BlockBambooScaffold extends GrcBlockBase {
 
@@ -47,7 +46,7 @@ public class BlockBambooScaffold extends GrcBlockBase {
      * TRIGGERS
      ************/
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float float7,
-        float float8, float float9) {
+                                    float float8, float float9) {
         final ItemStack itemstack = player.inventory.getCurrentItem();
         if (itemstack != null) {
             if (itemstack.getItem() == Item.getItemFromBlock(this)) {
@@ -105,7 +104,7 @@ public class BlockBambooScaffold extends GrcBlockBase {
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         if (world.getBlock(x, y - 1, z)
-            .isSideSolid(world, x, y - 1, z, ForgeDirection.UP)) return true;
+                .isSideSolid(world, x, y - 1, z, ForgeDirection.UP)) return true;
         return checkSides(world, x, y, z);
     }
 
@@ -118,22 +117,22 @@ public class BlockBambooScaffold extends GrcBlockBase {
         if (!flag && !flag1 && !flag2 && !flag3) return false;
 
         if (flag && world.getBlock(x + 1, y - 1, z)
-            .isSideSolid(world, x + 1, y - 1, z, ForgeDirection.UP)) return true;
+                .isSideSolid(world, x + 1, y - 1, z, ForgeDirection.UP)) return true;
         if (flag1 && world.getBlock(x - 1, y - 1, z)
-            .isSideSolid(world, x - 1, y - 1, z, ForgeDirection.UP)) return true;
+                .isSideSolid(world, x - 1, y - 1, z, ForgeDirection.UP)) return true;
         if (flag2 && world.getBlock(x, y - 1, z + 1)
-            .isSideSolid(world, x, y - 1, z + 1, ForgeDirection.UP)) return true;
+                .isSideSolid(world, x, y - 1, z + 1, ForgeDirection.UP)) return true;
         if (flag3 && world.getBlock(x, y - 1, z - 1)
-            .isSideSolid(world, x, y - 1, z - 1, ForgeDirection.UP)) return true;
+                .isSideSolid(world, x, y - 1, z - 1, ForgeDirection.UP)) return true;
 
         if (flag && world.getBlock(x + 2, y - 1, z)
-            .isSideSolid(world, x + 2, y - 1, z, ForgeDirection.UP)) return true;
+                .isSideSolid(world, x + 2, y - 1, z, ForgeDirection.UP)) return true;
         if (flag1 && world.getBlock(x - 2, y - 1, z)
-            .isSideSolid(world, x - 2, y - 1, z, ForgeDirection.UP)) return true;
+                .isSideSolid(world, x - 2, y - 1, z, ForgeDirection.UP)) return true;
         if (flag2 && world.getBlock(x, y - 1, z + 2)
-            .isSideSolid(world, x, y - 1, z + 2, ForgeDirection.UP)) return true;
+                .isSideSolid(world, x, y - 1, z + 2, ForgeDirection.UP)) return true;
         return flag3 && world.getBlock(x, y - 1, z - 2)
-            .isSideSolid(world, x, y - 1, z - 2, ForgeDirection.UP);
+                .isSideSolid(world, x, y - 1, z - 2, ForgeDirection.UP);
     }
 
     /************
@@ -193,11 +192,11 @@ public class BlockBambooScaffold extends GrcBlockBase {
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
         final float f = 0.125F;
         return AxisAlignedBB.getBoundingBox(
-            x + this.minX + f,
-            y + this.minY,
-            z + this.minZ + f,
-            x + this.maxX - f,
-            y + this.maxY,
-            z + this.maxZ - f);
+                x + this.minX + f,
+                y + this.minY,
+                z + this.minZ + f,
+                x + this.maxX - f,
+                y + this.maxY,
+                z + this.maxZ - f);
     }
 }

@@ -11,14 +11,14 @@ public class GrcFishtrapConfig extends ConfigBase {
     public boolean useBiomeDict = true;
 
     @ConfigOption(
-        catergory = "Fish Trap",
-        name = "Biomes (IDs) That Increases Fish Trap Productivity",
-        desc = "Separate the IDs with ';' (without the quote marks)")
+            catergory = "Fish Trap",
+            name = "Biomes (IDs) That Increases Fish Trap Productivity",
+            desc = "Separate the IDs with ';' (without the quote marks)")
     public String biomesList = "0;7;24";
 
     @ConfigOption(
-        catergory = "Integration",
-        name = "Enable Thaumcraft Integration",
-        desc = "Should we integrate with Thaumcraft (if available)?")
+            catergory = "Integration",
+            name = "Enable Thaumcraft Integration",
+            desc = "Should we integrate with Thaumcraft (if available)?")
     public boolean enableThaumcraftIntegration = true;
 }

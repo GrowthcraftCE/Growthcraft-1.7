@@ -19,14 +19,6 @@
  */
 package growthcraft.milk.common.tileentity;
 
-import java.io.IOException;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidStack;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.api.core.nbt.INBTItemSerializable;
@@ -37,6 +29,13 @@ import growthcraft.milk.GrowthCraftMilk;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.struct.CheeseCurd;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
+
+import java.io.IOException;
 
 public class TileEntityHangingCurds extends GrcTileBase implements INBTItemSerializable {
 
@@ -48,15 +47,12 @@ public class TileEntityHangingCurds extends GrcTileBase implements INBTItemSeria
     // the following variables are responsible for step tracking
     /// This pulse stepper is used to control the 'drip' animation
     private final PulseStepper animPulsar = new PulseStepper(10, 4);
-
+    private final CheeseCurd cheeseCurd = new CheeseCurd();
     /// The server will increment this value whenever it does a drip step
     private int serverStep;
-
     /// Clients will set this value to the serverStep value and proceed with the drip animation
     @SideOnly(Side.CLIENT)
     private int clientStep;
-
-    private final CheeseCurd cheeseCurd = new CheeseCurd();
 
     private IPancheonTile getPancheonTile() {
         for (int i = 1; i < 3; ++i) {

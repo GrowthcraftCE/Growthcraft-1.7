@@ -30,7 +30,8 @@ public class UnexpectedNBTTagType extends RuntimeException {
         super(msg);
     }
 
-    public UnexpectedNBTTagType() {}
+    public UnexpectedNBTTagType() {
+    }
 
     public static UnexpectedNBTTagType createFor(Object expected, Object actual) {
         return new UnexpectedNBTTagType("Wrong NBT Tag type `" + actual + "` (expected `" + expected + "`)");

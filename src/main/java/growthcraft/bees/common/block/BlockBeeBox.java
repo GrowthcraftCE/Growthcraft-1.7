@@ -1,8 +1,12 @@
 package growthcraft.bees.common.block;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.bees.GrowthCraftBees;
+import growthcraft.bees.client.renderer.RenderBeeBox;
+import growthcraft.bees.common.tileentity.TileEntityBeeBox;
+import growthcraft.core.common.block.GrcBlockContainer;
+import growthcraft.core.integration.minecraft.EnumMinecraftWoodType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,13 +22,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.bees.GrowthCraftBees;
-import growthcraft.bees.client.renderer.RenderBeeBox;
-import growthcraft.bees.common.tileentity.TileEntityBeeBox;
-import growthcraft.core.common.block.GrcBlockContainer;
-import growthcraft.core.integration.minecraft.EnumMinecraftWoodType;
+import java.util.List;
+import java.util.Random;
 
 public class BlockBeeBox extends GrcBlockContainer {
 
@@ -79,7 +78,7 @@ public class BlockBeeBox extends GrcBlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void getSubBlocks(Item block, CreativeTabs tab, List list) {
         for (EnumMinecraftWoodType woodType : EnumMinecraftWoodType.VALUES) {
             list.add(new ItemStack(block, 1, woodType.meta));
@@ -101,13 +100,13 @@ public class BlockBeeBox extends GrcBlockContainer {
             if (te != null) {
                 if (te.hasBees()) {
                     world.playSound(
-                        (float) x + 0.5F,
-                        (float) y + 0.5F,
-                        (float) z + 0.5F,
-                        "grcbees:buzz",
-                        1.0F + random.nextFloat(),
-                        random.nextFloat() * 0.7F + 0.3F,
-                        false);
+                            (float) x + 0.5F,
+                            (float) y + 0.5F,
+                            (float) z + 0.5F,
+                            "grcbees:buzz",
+                            1.0F + random.nextFloat(),
+                            random.nextFloat() * 0.7F + 0.3F,
+                            false);
                 }
             }
         }
@@ -115,7 +114,7 @@ public class BlockBeeBox extends GrcBlockContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7,
-        float par8, float par9) {
+                                    float par8, float par9) {
         if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
         if (world.isRemote) {
             return true;
@@ -234,9 +233,9 @@ public class BlockBeeBox extends GrcBlockContainer {
     }
 
     @Override
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list,
-        Entity entity) {
+                                        Entity entity) {
         final float f = 0.0625F;
         // LEGS
         setBlockBounds(3 * f, 0.0F, 3 * f, 5 * f, 3 * f, 5 * f);

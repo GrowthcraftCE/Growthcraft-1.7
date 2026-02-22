@@ -19,13 +19,12 @@
  */
 package growthcraft.bees.integration;
 
-import net.minecraftforge.oredict.ShapedOreRecipe;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.bees.common.block.BlockBeeBoxBamboo;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.core.integration.ModIntegrationBase;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class GrcBambooModule extends ModIntegrationBase {
 
@@ -37,18 +36,18 @@ public class GrcBambooModule extends ModIntegrationBase {
     protected void doPreInit() {
         GrowthCraftBees.blocks.beeBoxBamboo = GrowthCraftBees.blocks.newTypedDefinition(new BlockBeeBoxBamboo());
         GrowthCraftBees.blocks.beeBoxBamboo.getBlock()
-            .setFlammability(20)
-            .setFireSpreadSpeed(5)
-            .setHarvestLevel("axe", 0);
+                .setFlammability(20)
+                .setFireSpreadSpeed(5)
+                .setHarvestLevel("axe", 0);
     }
 
     @Override
     protected void doRegister() {
         if (GrowthCraftBees.blocks.beeBoxBamboo != null) {
             GameRegistry.registerBlock(
-                GrowthCraftBees.blocks.beeBoxBamboo.getBlock(),
-                ItemBlockBeeBox.class,
-                "grc.BeeBox.Bamboo");
+                    GrowthCraftBees.blocks.beeBoxBamboo.getBlock(),
+                    ItemBlockBeeBox.class,
+                    "grc.BeeBox.Bamboo");
         }
     }
 
@@ -57,13 +56,13 @@ public class GrcBambooModule extends ModIntegrationBase {
         // Bamboo
         if (GrowthCraftBees.blocks.beeBoxBamboo != null) {
             GameRegistry.addRecipe(
-                new ShapedOreRecipe(
-                    GrowthCraftBees.blocks.beeBoxBamboo.asStack(),
-                    " A ",
-                    "A A",
-                    "AAA",
-                    'A',
-                    "plankBamboo"));
+                    new ShapedOreRecipe(
+                            GrowthCraftBees.blocks.beeBoxBamboo.asStack(),
+                            " A ",
+                            "A A",
+                            "AAA",
+                            'A',
+                            "plankBamboo"));
         }
     }
 }

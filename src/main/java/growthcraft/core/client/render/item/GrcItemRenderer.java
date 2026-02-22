@@ -19,14 +19,12 @@
  */
 package growthcraft.core.client.render.item;
 
+import growthcraft.core.util.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
-
-import growthcraft.core.util.RenderUtils;
 
 public abstract class GrcItemRenderer implements IItemRenderer {
 

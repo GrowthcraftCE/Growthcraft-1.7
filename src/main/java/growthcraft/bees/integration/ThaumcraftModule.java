@@ -19,9 +19,6 @@
  */
 package growthcraft.bees.integration;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.api.core.item.ItemKey;
@@ -34,6 +31,8 @@ import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 import growthcraft.core.integration.thaumcraft.AspectsHelper;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -47,20 +46,20 @@ public class ThaumcraftModule extends ThaumcraftModuleBase {
     @Override
     protected void doPreInit() {
         GrowthCraftBees.blocks.beeBoxThaumcraft = GrowthCraftBees.blocks
-            .newTypedDefinition(new BlockBeeBoxThaumcraft());
+                .newTypedDefinition(new BlockBeeBoxThaumcraft());
         GrowthCraftBees.blocks.beeBoxThaumcraft.getBlock()
-            .setFlammability(20)
-            .setFireSpreadSpeed(5)
-            .setHarvestLevel("axe", 0);
+                .setFlammability(20)
+                .setFireSpreadSpeed(5)
+                .setHarvestLevel("axe", 0);
     }
 
     @Override
     protected void doRegister() {
         if (GrowthCraftBees.blocks.beeBoxThaumcraft != null) {
             GameRegistry.registerBlock(
-                GrowthCraftBees.blocks.beeBoxThaumcraft.getBlock(),
-                ItemBlockBeeBox.class,
-                "grc.BeeBox.Thaumcraft");
+                    GrowthCraftBees.blocks.beeBoxThaumcraft.getBlock(),
+                    ItemBlockBeeBox.class,
+                    "grc.BeeBox.Thaumcraft");
         }
     }
 
@@ -70,22 +69,22 @@ public class ThaumcraftModule extends ThaumcraftModuleBase {
             final Block blockWoodenDevice = GameRegistry.findBlock(modID, "blockWoodenDevice");
             if (blockWoodenDevice != null) {
                 GameRegistry.addShapedRecipe(
-                    EnumBeeBoxThaumcraft.GREATWOOD.asStack(),
-                    " A ",
-                    "A A",
-                    "AAA",
-                    'A',
-                    new ItemStack(blockWoodenDevice, 1, 6));
+                        EnumBeeBoxThaumcraft.GREATWOOD.asStack(),
+                        " A ",
+                        "A A",
+                        "AAA",
+                        'A',
+                        new ItemStack(blockWoodenDevice, 1, 6));
                 GameRegistry.addShapedRecipe(
-                    EnumBeeBoxThaumcraft.SILVERWOOD.asStack(),
-                    " A ",
-                    "A A",
-                    "AAA",
-                    'A',
-                    new ItemStack(blockWoodenDevice, 1, 7));
+                        EnumBeeBoxThaumcraft.SILVERWOOD.asStack(),
+                        " A ",
+                        "A A",
+                        "AAA",
+                        'A',
+                        new ItemStack(blockWoodenDevice, 1, 7));
             } else {
                 logger.warn(
-                    "Could not find blockWoodenDevice from Thaumcraft, skipping recipes for Thaumcraft Bee Boxes");
+                        "Could not find blockWoodenDevice from Thaumcraft, skipping recipes for Thaumcraft Bee Boxes");
             }
         }
     }
@@ -94,59 +93,59 @@ public class ThaumcraftModule extends ThaumcraftModuleBase {
     @Optional.Method(modid = "Thaumcraft")
     protected void integrate() {
         ThaumcraftApi.registerObjectTag(
-            GrowthCraftBees.items.honeyCombEmpty.asStack(),
-            new AspectList().add(Aspect.ORDER, 1)
-                .add(Aspect.VOID, 1));
+                GrowthCraftBees.items.honeyCombEmpty.asStack(),
+                new AspectList().add(Aspect.ORDER, 1)
+                        .add(Aspect.VOID, 1));
         ThaumcraftApi.registerObjectTag(
-            GrowthCraftBees.items.honeyCombFilled.asStack(),
-            new AspectList().add(Aspect.ORDER, 1)
-                .add(Aspect.SLIME, 1)
-                .add(Aspect.GREED, 1)
-                .add(Aspect.HUNGER, 1));
+                GrowthCraftBees.items.honeyCombFilled.asStack(),
+                new AspectList().add(Aspect.ORDER, 1)
+                        .add(Aspect.SLIME, 1)
+                        .add(Aspect.GREED, 1)
+                        .add(Aspect.HUNGER, 1));
         ThaumcraftApi.registerObjectTag(
-            GrowthCraftBees.items.honeyJar.asStack(),
-            new AspectList().add(Aspect.SLIME, 1)
-                .add(Aspect.EARTH, 1)
-                .add(Aspect.FIRE, 1)
-                .add(Aspect.VOID, 1)
-                .add(Aspect.GREED, 3)
-                .add(Aspect.HUNGER, 1));
+                GrowthCraftBees.items.honeyJar.asStack(),
+                new AspectList().add(Aspect.SLIME, 1)
+                        .add(Aspect.EARTH, 1)
+                        .add(Aspect.FIRE, 1)
+                        .add(Aspect.VOID, 1)
+                        .add(Aspect.GREED, 3)
+                        .add(Aspect.HUNGER, 1));
         ThaumcraftApi.registerObjectTag(
-            GrowthCraftBees.items.bee.asStack(),
-            new AspectList().add(Aspect.BEAST, 1)
-                .add(Aspect.AIR, 1)
-                .add(Aspect.FLIGHT, 1));
+                GrowthCraftBees.items.bee.asStack(),
+                new AspectList().add(Aspect.BEAST, 1)
+                        .add(Aspect.AIR, 1)
+                        .add(Aspect.FLIGHT, 1));
         ThaumcraftApi.registerObjectTag(
-            GrowthCraftBees.blocks.beeHive.asStack(),
-            new AspectList().add(Aspect.SLIME, 1)
-                .add(Aspect.BEAST, 1)
-                .add(Aspect.ORDER, 1)
-                .add(Aspect.VOID, 1));
+                GrowthCraftBees.blocks.beeHive.asStack(),
+                new AspectList().add(Aspect.SLIME, 1)
+                        .add(Aspect.BEAST, 1)
+                        .add(Aspect.ORDER, 1)
+                        .add(Aspect.VOID, 1));
         ThaumcraftApi.registerObjectTag(
-            GrowthCraftBees.blocks.beeBox.asStack(),
-            new int[] { 0, 1, 2, 3, 4, 5 },
-            new AspectList().add(Aspect.TREE, 4)
-                .add(Aspect.VOID, 1));
+                GrowthCraftBees.blocks.beeBox.asStack(),
+                new int[]{0, 1, 2, 3, 4, 5},
+                new AspectList().add(Aspect.TREE, 4)
+                        .add(Aspect.VOID, 1));
 
         {
-            final AspectList[] common = new AspectList[] { new AspectList(), new AspectList().add(Aspect.HEAL, 1),
-                new AspectList().add(Aspect.HEAL, 2), new AspectList().add(Aspect.HEAL, 1),
-                new AspectList().add(Aspect.HEAL, 2), new AspectList().add(Aspect.HEAL, 1)
+            final AspectList[] common = new AspectList[]{new AspectList(), new AspectList().add(Aspect.HEAL, 1),
+                    new AspectList().add(Aspect.HEAL, 2), new AspectList().add(Aspect.HEAL, 1),
+                    new AspectList().add(Aspect.HEAL, 2), new AspectList().add(Aspect.HEAL, 1)
                     .add(Aspect.POISON, 1),
-                new AspectList().add(Aspect.POISON, 1) };
+                    new AspectList().add(Aspect.POISON, 1)};
 
             for (int i = 0; i < common.length; ++i) {
                 final AspectList list = common[i];
                 ThaumcraftBoozeHelper.instance()
-                    .registerAspectsForBottleStack(GrowthCraftBees.fluids.honeyMeadBottle.asStack(1, i), list.copy());
+                        .registerAspectsForBottleStack(GrowthCraftBees.fluids.honeyMeadBottle.asStack(1, i), list.copy());
                 ThaumcraftBoozeHelper.instance()
-                    .registerAspectsForBucket(
-                        GrowthCraftBees.fluids.honeyMeadBuckets[i],
-                        AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
+                        .registerAspectsForBucket(
+                                GrowthCraftBees.fluids.honeyMeadBuckets[i],
+                                AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
                 ThaumcraftBoozeHelper.instance()
-                    .registerAspectsForFluidBlock(
-                        GrowthCraftBees.fluids.honeyMeadFluids[i],
-                        AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
+                        .registerAspectsForFluidBlock(
+                                GrowthCraftBees.fluids.honeyMeadFluids[i],
+                                AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL));
             }
         }
 
@@ -155,11 +154,11 @@ public class ThaumcraftModule extends ThaumcraftModuleBase {
                 final ItemStack bottleStack = GrowthCraftBees.fluids.honey.asBottleItemStack();
                 if (bottleStack != null) {
                     ThaumcraftApi.registerObjectTag(
-                        bottleStack,
-                        new AspectList().add(Aspect.ORDER, 1)
-                            .add(Aspect.SLIME, 2)
-                            .add(Aspect.GREED, 1)
-                            .add(Aspect.HUNGER, 1));
+                            bottleStack,
+                            new AspectList().add(Aspect.ORDER, 1)
+                                    .add(Aspect.SLIME, 2)
+                                    .add(Aspect.GREED, 1)
+                                    .add(Aspect.HUNGER, 1));
                 }
             }
 
@@ -167,11 +166,11 @@ public class ThaumcraftModule extends ThaumcraftModuleBase {
                 final ItemStack bucketStack = GrowthCraftBees.fluids.honey.asBottleItemStack();
                 if (bucketStack != null) {
                     ThaumcraftApi.registerObjectTag(
-                        bucketStack,
-                        new AspectList().add(Aspect.ORDER, 1)
-                            .add(Aspect.SLIME, 6)
-                            .add(Aspect.GREED, 2)
-                            .add(Aspect.HUNGER, 2));
+                            bucketStack,
+                            new AspectList().add(Aspect.ORDER, 1)
+                                    .add(Aspect.SLIME, 6)
+                                    .add(Aspect.GREED, 2)
+                                    .add(Aspect.HUNGER, 2));
                 }
             }
 
@@ -179,61 +178,61 @@ public class ThaumcraftModule extends ThaumcraftModuleBase {
                 final ItemStack fluidBlock = GrowthCraftBees.fluids.honey.asFluidBlockItemStack();
                 if (fluidBlock != null) {
                     ThaumcraftApi.registerObjectTag(
-                        fluidBlock,
-                        new AspectList().add(Aspect.ORDER, 1)
-                            .add(Aspect.SLIME, 2)
-                            .add(Aspect.GREED, 1)
-                            .add(Aspect.HUNGER, 1));
+                            fluidBlock,
+                            new AspectList().add(Aspect.ORDER, 1)
+                                    .add(Aspect.SLIME, 2)
+                                    .add(Aspect.GREED, 1)
+                                    .add(Aspect.HUNGER, 1));
                 }
             }
         }
 
         if (GrowthCraftBees.blocks.beeBoxNether != null) {
             ThaumcraftApi.registerObjectTag(
-                GrowthCraftBees.blocks.beeBoxNether.asStack(1, ItemKey.WILDCARD_VALUE),
-                new AspectList().add(Aspect.TREE, 4)
-                    .add(Aspect.ENTROPY, 1)
-                    .add(Aspect.VOID, 1));
+                    GrowthCraftBees.blocks.beeBoxNether.asStack(1, ItemKey.WILDCARD_VALUE),
+                    new AspectList().add(Aspect.TREE, 4)
+                            .add(Aspect.ENTROPY, 1)
+                            .add(Aspect.VOID, 1));
         }
         if (GrowthCraftBees.blocks.beeBoxBamboo != null) {
             ThaumcraftApi.registerObjectTag(
-                GrowthCraftBees.blocks.beeBoxBamboo.asStack(1, ItemKey.WILDCARD_VALUE),
-                new AspectList().add(Aspect.TREE, 4)
-                    .add(Aspect.VOID, 1));
+                    GrowthCraftBees.blocks.beeBoxBamboo.asStack(1, ItemKey.WILDCARD_VALUE),
+                    new AspectList().add(Aspect.TREE, 4)
+                            .add(Aspect.VOID, 1));
         }
         if (GrowthCraftBees.blocks.beeBoxThaumcraft != null) {
             ThaumcraftApi.registerObjectTag(
-                GrowthCraftBees.blocks.beeBoxThaumcraft.asStack(1, ItemKey.WILDCARD_VALUE),
-                new AspectList().add(Aspect.TREE, 4)
-                    .add(Aspect.VOID, 1)
-                    .add(Aspect.MAGIC, 1));
+                    GrowthCraftBees.blocks.beeBoxThaumcraft.asStack(1, ItemKey.WILDCARD_VALUE),
+                    new AspectList().add(Aspect.TREE, 4)
+                            .add(Aspect.VOID, 1)
+                            .add(Aspect.MAGIC, 1));
         }
         if (GrowthCraftBees.blocks.beeBoxNatura != null) {
             ThaumcraftApi.registerObjectTag(
-                GrowthCraftBees.blocks.beeBoxNatura.asStack(1, ItemKey.WILDCARD_VALUE),
-                new AspectList().add(Aspect.TREE, 4)
-                    .add(Aspect.VOID, 1));
+                    GrowthCraftBees.blocks.beeBoxNatura.asStack(1, ItemKey.WILDCARD_VALUE),
+                    new AspectList().add(Aspect.TREE, 4)
+                            .add(Aspect.VOID, 1));
         }
         if (GrowthCraftBees.blocks.beeBoxBiomesOPlenty != null) {
             ThaumcraftApi.registerObjectTag(
-                GrowthCraftBees.blocks.beeBoxBiomesOPlenty.asStack(1, ItemKey.WILDCARD_VALUE),
-                new AspectList().add(Aspect.TREE, 4)
-                    .add(Aspect.VOID, 1));
+                    GrowthCraftBees.blocks.beeBoxBiomesOPlenty.asStack(1, ItemKey.WILDCARD_VALUE),
+                    new AspectList().add(Aspect.TREE, 4)
+                            .add(Aspect.VOID, 1));
         }
         if (GrowthCraftBees.blocks.beeBoxBotania != null) {
             ThaumcraftApi.registerObjectTag(
-                GrowthCraftBees.blocks.beeBoxBotania.asStack(1, ItemKey.WILDCARD_VALUE),
-                new AspectList().add(Aspect.TREE, 4)
-                    .add(Aspect.VOID, 1)
-                    .add(Aspect.MAGIC, 1));
+                    GrowthCraftBees.blocks.beeBoxBotania.asStack(1, ItemKey.WILDCARD_VALUE),
+                    new AspectList().add(Aspect.TREE, 4)
+                            .add(Aspect.VOID, 1)
+                            .add(Aspect.MAGIC, 1));
         }
         if (GrowthCraftBees.blocks.beeBoxesForestry != null) {
             for (BlockTypeDefinition<? extends BlockBeeBox> bdef : GrowthCraftBees.blocks.beeBoxesForestry) {
                 if (bdef != null) {
                     ThaumcraftApi.registerObjectTag(
-                        bdef.asStack(1, ItemKey.WILDCARD_VALUE),
-                        new AspectList().add(Aspect.TREE, 4)
-                            .add(Aspect.VOID, 1));
+                            bdef.asStack(1, ItemKey.WILDCARD_VALUE),
+                            new AspectList().add(Aspect.TREE, 4)
+                                    .add(Aspect.VOID, 1));
                 }
             }
         }
@@ -241,9 +240,9 @@ public class ThaumcraftModule extends ThaumcraftModuleBase {
             for (BlockTypeDefinition<? extends BlockBeeBox> bdef : GrowthCraftBees.blocks.beeBoxesForestryFireproof) {
                 if (bdef != null) {
                     ThaumcraftApi.registerObjectTag(
-                        bdef.asStack(1, ItemKey.WILDCARD_VALUE),
-                        new AspectList().add(Aspect.TREE, 4)
-                            .add(Aspect.VOID, 1));
+                            bdef.asStack(1, ItemKey.WILDCARD_VALUE),
+                            new AspectList().add(Aspect.TREE, 4)
+                                    .add(Aspect.VOID, 1));
                 }
             }
         }

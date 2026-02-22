@@ -19,15 +19,14 @@
  */
 package growthcraft.core.common.definition;
 
-import javax.annotation.Nonnull;
-
+import cpw.mods.fml.common.registry.GameRegistry;
+import growthcraft.api.core.definition.ISubItemStackFactory;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import growthcraft.api.core.definition.ISubItemStackFactory;
+import javax.annotation.Nonnull;
 
 public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> implements ISubItemStackFactory {
 

@@ -25,7 +25,8 @@ public class TickUtils {
     public static final int TICKS_PER_DECI_SECOND = 2;
     public static final int TICKS_PER_SECOND = 20;
 
-    private TickUtils() {}
+    private TickUtils() {
+    }
 
     public static int deciSeconds(int num) {
         return TICKS_PER_DECI_SECOND * num;

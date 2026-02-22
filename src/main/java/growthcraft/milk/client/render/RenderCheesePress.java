@@ -19,17 +19,15 @@
  */
 package growthcraft.milk.client.render;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.world.IBlockAccess;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import growthcraft.milk.client.model.ModelCheesePress;
 import growthcraft.milk.client.resource.GrcMilkResources;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.world.IBlockAccess;
+import org.lwjgl.opengl.GL11;
 
 public class RenderCheesePress implements ISimpleBlockRenderingHandler {
 
@@ -55,7 +53,7 @@ public class RenderCheesePress implements ISimpleBlockRenderingHandler {
                 GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
                 GL11.glTranslatef(0.0f, -1.0f, 0.0f);
                 GrcMilkResources.INSTANCE.modelCheesePress
-                    .render(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ModelCheesePress.SCALE);
+                        .render(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ModelCheesePress.SCALE);
             }
             GL11.glPopMatrix();
         }
@@ -63,8 +61,9 @@ public class RenderCheesePress implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
-        RenderBlocks renderer) {
-        if (modelId == RENDER_ID) {}
+                                    RenderBlocks renderer) {
+        if (modelId == RENDER_ID) {
+        }
         return true;
     }
 }

@@ -1,7 +1,9 @@
 package growthcraft.grapes.common.item;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.core.common.item.GrcItemFoodBase;
+import growthcraft.grapes.GrowthCraftGrapes;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -9,10 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.core.common.item.GrcItemFoodBase;
-import growthcraft.grapes.GrowthCraftGrapes;
+import java.util.List;
 
 public class ItemGrapes extends GrcItemFoodBase {
 
@@ -54,7 +53,7 @@ public class ItemGrapes extends GrcItemFoodBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void getSubItems(Item item, CreativeTabs ct, List list) {
         for (EnumGrapes en : EnumGrapes.VALUES) {
             list.add(en.asStack());

@@ -19,22 +19,20 @@
  */
 package growthcraft.api.cellar.heatsource;
 
-import java.util.HashMap;
-
-import javax.annotation.Nonnull;
-
-import net.minecraft.block.Block;
-
 import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
+import net.minecraft.block.Block;
+
+import javax.annotation.Nonnull;
+import java.util.HashMap;
 
 public class HeatSourceRegistry implements IHeatSourceRegistry {
 
     public static final float DEFAULT_HEAT = 1.0f;
     public static final float NO_HEAT = 0.0f;
-    private ILogger logger = NullLogger.INSTANCE;
     private final HeatSourceTree heatSources = new HeatSourceTree();
+    private ILogger logger = NullLogger.INSTANCE;
 
     @Override
     public void setLogger(@Nonnull ILogger l) {

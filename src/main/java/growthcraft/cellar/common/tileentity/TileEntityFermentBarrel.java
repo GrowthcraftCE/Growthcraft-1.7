@@ -1,19 +1,5 @@
 package growthcraft.cellar.common.tileentity;
 
-import java.io.IOException;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.fermenting.IFermentationRecipe;
 import growthcraft.api.core.definition.IMultiItemStacks;
@@ -29,23 +15,36 @@ import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+
+import java.io.IOException;
 
 public class TileEntityFermentBarrel extends TileEntityCellarDevice
-    implements ITileProgressiveDevice, INBTItemSerializable {
+        implements ITileProgressiveDevice, INBTItemSerializable {
 
     // Constants
-    private static final int[] accessableSlotIds = new int[] { 0 };
+    private static final int[] accessableSlotIds = new int[]{0};
+    private final boolean shouldUseCachedRecipe = GrowthCraftCellar.getConfig().fermentBarrelUseCachedRecipe;
     // Other Vars.
     protected int time;
     private int timemax = GrowthCraftCellar.getConfig().fermentTime;
-    private final boolean shouldUseCachedRecipe = GrowthCraftCellar.getConfig().fermentBarrelUseCachedRecipe;
     private boolean recheckRecipe = true;
     private boolean lidOn = true;
     private IFermentationRecipe activeRecipe;
 
     @Override
     protected FluidTank[] createTanks() {
-        return new FluidTank[] { new CellarTank(GrowthCraftCellar.getConfig().fermentBarrelMaxCap, this) };
+        return new FluidTank[]{new CellarTank(GrowthCraftCellar.getConfig().fermentBarrelMaxCap, this)};
     }
 
     @Override
@@ -85,8 +84,8 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 
     private IFermentationRecipe loadRecipe() {
         return CellarRegistry.instance()
-            .fermenting()
-            .findRecipe(getFluidStack(0), getStackInSlot(0));
+                .fermenting()
+                .findRecipe(getFluidStack(0), getStackInSlot(0));
     }
 
     private IFermentationRecipe refreshRecipe() {
@@ -211,13 +210,13 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
     @Override
     public boolean canInsertItem(int index, ItemStack stack, int side) {
         return InventoryProcessor.instance()
-            .canInsertItem(this, stack, index);
+                .canInsertItem(this, stack, index);
     }
 
     @Override
     public boolean canExtractItem(int index, ItemStack stack, int side) {
         return InventoryProcessor.instance()
-            .canExtractItem(this, stack, index);
+                .canExtractItem(this, stack, index);
     }
 
     @Override
@@ -348,7 +347,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
         TIME_MAX,
         UNKNOWN;
 
-        public static final FermentBarrelDataID[] VALID = new FermentBarrelDataID[] { TIME, TIME_MAX };
+        public static final FermentBarrelDataID[] VALID = new FermentBarrelDataID[]{TIME, TIME_MAX};
 
         public static FermentBarrelDataID getByaOrdinal(int ord) {
             if (ord >= 0 && ord <= VALID.length) return VALID[ord];

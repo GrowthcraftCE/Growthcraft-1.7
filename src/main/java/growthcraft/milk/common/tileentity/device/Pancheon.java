@@ -19,14 +19,13 @@
  */
 package growthcraft.milk.common.tileentity.device;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.FluidStack;
-
 import growthcraft.api.milk.MilkRegistry;
 import growthcraft.api.milk.pancheon.IPancheonRecipe;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceProgressive;
 import growthcraft.core.common.tileentity.device.IFluidTanks;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.FluidStack;
 
 public class Pancheon extends DeviceProgressive {
 
@@ -58,8 +57,8 @@ public class Pancheon extends DeviceProgressive {
      */
     private IPancheonRecipe getRecipe() {
         return MilkRegistry.instance()
-            .pancheon()
-            .getRecipe(inputSlot.get());
+                .pancheon()
+                .getRecipe(inputSlot.get());
     }
 
     /**

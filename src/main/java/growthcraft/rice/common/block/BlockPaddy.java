@@ -1,9 +1,10 @@
 package growthcraft.rice.common.block;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.core.common.block.BlockPaddyBase;
+import growthcraft.rice.GrowthCraftRice;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,11 +16,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.core.common.block.BlockPaddyBase;
-import growthcraft.rice.GrowthCraftRice;
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class BlockPaddy extends BlockPaddyBase {
 
@@ -70,7 +68,7 @@ public class BlockPaddy extends BlockPaddyBase {
     @Override
     public boolean isBelowFillingFluid(IBlockAccess world, int x, int y, int z) {
         return world.getBlock(x, y + 1, z)
-            .getMaterial() == Material.water;
+                .getMaterial() == Material.water;
     }
 
     /************

@@ -19,11 +19,17 @@
  */
 package growthcraft.milk.common.block;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.api.core.util.BBox;
+import growthcraft.core.common.block.GrcBlockContainer;
+import growthcraft.core.util.ItemUtils;
+import growthcraft.milk.GrowthCraftMilk;
+import growthcraft.milk.client.render.RenderCheeseBlock;
+import growthcraft.milk.common.item.EnumCheeseStage;
+import growthcraft.milk.common.item.EnumCheeseType;
+import growthcraft.milk.common.item.ItemBlockCheeseBlock;
+import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -37,17 +43,10 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import growthcraft.api.core.util.BBox;
-import growthcraft.core.common.block.GrcBlockContainer;
-import growthcraft.core.util.ItemUtils;
-import growthcraft.milk.GrowthCraftMilk;
-import growthcraft.milk.client.render.RenderCheeseBlock;
-import growthcraft.milk.common.item.EnumCheeseStage;
-import growthcraft.milk.common.item.EnumCheeseType;
-import growthcraft.milk.common.item.ItemBlockCheeseBlock;
-import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BlockCheeseBlock extends GrcBlockContainer {
 
@@ -62,7 +61,7 @@ public class BlockCheeseBlock extends GrcBlockContainer {
         setCreativeTab(GrowthCraftMilk.creativeTab);
         setTileEntityType(TileEntityCheeseBlock.class);
         final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 8f, 8f)
-            .scale(1f / 16f);
+                .scale(1f / 16f);
         setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
     }
 
@@ -87,7 +86,7 @@ public class BlockCheeseBlock extends GrcBlockContainer {
 
     @Override
     protected void getTileItemStackDrops(List<ItemStack> ret, World world, int x, int y, int z, int metadata,
-        int fortune) {
+                                         int fortune) {
         final TileEntityCheeseBlock te = getTileEntity(world, x, y, z);
         if (te != null) {
             ret.add(te.asItemStack());
@@ -134,7 +133,7 @@ public class BlockCheeseBlock extends GrcBlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         if (item instanceof ItemBlockCheeseBlock ib) {
             for (EnumCheeseType cheese : EnumCheeseType.VALUES) {
@@ -186,7 +185,7 @@ public class BlockCheeseBlock extends GrcBlockContainer {
                 icons[1] = reg.registerIcon(String.format("%s_%s/top", prefix, stage.name));
                 icons[2] = reg.registerIcon(String.format("%s_%s/side", prefix, stage.name));
                 iconMap.get(type)
-                    .put(stage, icons);
+                        .put(stage, icons);
             }
         }
     }
@@ -194,7 +193,7 @@ public class BlockCheeseBlock extends GrcBlockContainer {
     @SideOnly(Side.CLIENT)
     private IIcon getIconByTypeAndStage(int side, EnumCheeseType type, EnumCheeseStage stage) {
         final IIcon[] icons = iconMap.get(type)
-            .get(stage);
+                .get(stage);
         if (side == 0) {
             return icons[0];
         } else if (side == 1) {
@@ -213,9 +212,9 @@ public class BlockCheeseBlock extends GrcBlockContainer {
         EnumCheeseStage stage = type.stages.get(0);
         if (te != null) {
             type = te.getCheese()
-                .getType();
+                    .getType();
             stage = te.getCheese()
-                .getStage();
+                    .getStage();
         }
         return getIconByTypeAndStage(side, type, stage);
     }

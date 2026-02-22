@@ -19,18 +19,16 @@
  */
 package growthcraft.core.common.inventory;
 
-import java.util.*;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.definition.IMultiItemStacks;
+import growthcraft.api.core.item.ItemTest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
-import growthcraft.api.core.definition.IMultiItemStacks;
-import growthcraft.api.core.item.ItemTest;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 
 /**
  * Utility class for handling some `painful` inventory operations
@@ -39,7 +37,8 @@ public class InventoryProcessor {
 
     private static final InventoryProcessor inst = new InventoryProcessor();
 
-    private InventoryProcessor() {}
+    private InventoryProcessor() {
+    }
 
     public static InventoryProcessor instance() {
         return inst;
@@ -352,7 +351,7 @@ public class InventoryProcessor {
      * @param from   - a slice of slots to look in
      * @return true, all the items in the filter are present in the inv, false otherwise
      */
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public boolean checkSlotsAndSizes(@Nonnull IInventory inv, @Nonnull List filter, int[] from) {
         assert filter.size() == from.length;
 
@@ -467,7 +466,7 @@ public class InventoryProcessor {
      * @param slotsSlice - slots to check in, if null, the entire inventory is searched
      * @return slot ids
      */
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public int[] findItemSlots(@Nonnull IInventory inv, @Nonnull List expected, @Nonnull int[] slotsSlice) {
         final boolean[] usedSlots = new boolean[inv.getSizeInventory()];
         final int[] slots = new int[expected.size()];
@@ -504,7 +503,7 @@ public class InventoryProcessor {
      * @param expected - item stacks to search for
      * @return slot ids
      */
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public int[] findItemSlots(@Nonnull IInventory inv, @Nonnull List expected) {
         return findItemSlots(inv, expected, null);
     }
@@ -569,7 +568,7 @@ public class InventoryProcessor {
      * @param from   - a slice of slots to look in
      * @return true, all the items in the filter are present in the inv, false otherwise
      */
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public boolean checkSlotsAndSizesUnordered(@Nonnull IInventory inv, @Nonnull List filter, int[] from) {
         assert filter.size() == from.length;
         final int[] slots = findItemSlots(inv, filter, from);
@@ -600,7 +599,7 @@ public class InventoryProcessor {
      * @return true, all the items in the filter are present in the inv, false otherwise
      */
     public boolean checkSlotsAndSizesUnordered(@Nonnull IInventory inv, @Nonnull IMultiItemStacks[] filter,
-        int[] from) {
+                                               int[] from) {
         return checkSlotsAndSizesUnordered(inv, Arrays.asList(filter), from);
     }
 
@@ -625,7 +624,7 @@ public class InventoryProcessor {
      * @param slots    - slots to consume from
      * @return true, items where consumed, false otherwise
      */
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public boolean consumeItemsInSlots(@Nonnull IInventory inv, @Nonnull List expected, @Nonnull int[] slots) {
         for (int i = 0; i < slots.length; ++i) {
             final int slot = slots[i];
@@ -648,7 +647,7 @@ public class InventoryProcessor {
      * @param expected - items to consume in inventory
      * @return true, items where consumed, false otherwise
      */
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     public boolean consumeItems(@Nonnull IInventory inv, @Nonnull List expected) {
         final int[] slots = findItemSlots(inv, expected);
         if (!checkSlotsAndSizes(inv, expected, slots)) return false;

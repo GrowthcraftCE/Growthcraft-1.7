@@ -28,7 +28,8 @@ public class GrcI18n {
 
     private static ITranslator translator;
 
-    private GrcI18n() {}
+    private GrcI18n() {
+    }
 
     public static ITranslator getTranslator() {
         if (translator == null) {

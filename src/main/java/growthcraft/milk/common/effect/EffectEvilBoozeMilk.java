@@ -19,16 +19,15 @@
  */
 package growthcraft.milk.common.effect;
 
-import java.util.List;
-import java.util.Random;
-
+import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.effect.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 
-import growthcraft.api.core.CoreRegistry;
-import growthcraft.api.core.effect.*;
+import java.util.List;
+import java.util.Random;
 
 /**
  * If milk removes effects, then evil booze milk will add them.
@@ -53,8 +52,8 @@ public class EffectEvilBoozeMilk implements IEffect {
 
     private void addEvilEffect(float chance, int id, int time, int lv) {
         effects.add(
-            new EffectChance().setChance(chance)
-                .setEffect(new EffectAddPotionEffect().setPotionFactory(new SimplePotionEffectFactory(id, time, lv))));
+                new EffectChance().setChance(chance)
+                        .setEffect(new EffectAddPotionEffect().setPotionFactory(new SimplePotionEffectFactory(id, time, lv))));
     }
 
     @Override
@@ -74,8 +73,8 @@ public class EffectEvilBoozeMilk implements IEffect {
             final NBTTagCompound tag = nbt.getCompoundTag(name);
             if (tag.hasKey("effects")) {
                 this.effects = (EffectList) CoreRegistry.instance()
-                    .getEffectsRegistry()
-                    .loadEffectFromNBT(tag, "effects");
+                        .getEffectsRegistry()
+                        .loadEffectFromNBT(tag, "effects");
             }
         } else {
             // log error

@@ -19,14 +19,13 @@
  */
 package growthcraft.api.core.schema;
 
-import javax.annotation.Nonnull;
-
+import growthcraft.api.core.definition.IFluidStackFactory;
+import growthcraft.api.core.util.StringUtils;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import growthcraft.api.core.definition.IFluidStackFactory;
-import growthcraft.api.core.util.StringUtils;
+import javax.annotation.Nonnull;
 
 public class FluidStackSchema implements IFluidStackFactory, IValidatable, ICommentable {
 
@@ -42,7 +41,7 @@ public class FluidStackSchema implements IFluidStackFactory, IValidatable, IComm
 
     public FluidStackSchema(@Nonnull FluidStack stack) {
         this.name = stack.getFluid()
-            .getName();
+                .getName();
         this.amount = stack.amount;
         this.comment = stack.getLocalizedName();
     }
@@ -81,10 +80,10 @@ public class FluidStackSchema implements IFluidStackFactory, IValidatable, IComm
     @Override
     public String toString() {
         return String.format(
-            "Schema<FluidStack>(comment: '%s', name: '%s', amount: %d)",
-            StringUtils.inspect(comment),
-            name,
-            amount);
+                "Schema<FluidStack>(comment: '%s', name: '%s', amount: %d)",
+                StringUtils.inspect(comment),
+                name,
+                amount);
     }
 
     @Override

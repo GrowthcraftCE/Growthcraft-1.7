@@ -19,13 +19,12 @@
  */
 package growthcraft.core.client.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import growthcraft.api.core.util.Rectangle;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
-import growthcraft.api.core.util.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TooltipManager<C extends Container, T extends TileEntity> {
 
@@ -75,5 +74,6 @@ public class TooltipManager<C extends Container, T extends TileEntity> {
      * @param handle use this to identify the tooltip index
      * @param rect   The rectangle where this tooltip will be displayed
      */
-    public record TooltipIndex(String handle, Rectangle rect) {}
+    public record TooltipIndex(String handle, Rectangle rect) {
+    }
 }

@@ -19,21 +19,19 @@
  */
 package growthcraft.core;
 
+import growthcraft.api.core.log.ILoggable;
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.util.StringUtils;
+import net.minecraftforge.common.config.Configuration;
+
+import javax.annotation.Nonnull;
 import java.io.File;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
-
-import javax.annotation.Nonnull;
-
-import net.minecraftforge.common.config.Configuration;
-
-import growthcraft.api.core.log.ILoggable;
-import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.core.util.StringUtils;
 
 /**
  * Extend this class when you need config for another module, see the other
@@ -44,9 +42,9 @@ public abstract class ConfigBase implements ILoggable {
     static final String DEFAULT_STR = "; Default : ";
     // All configs will include a Debug option.
     @ConfigOption(
-        catergory = "Debug",
-        name = "Enable Debugging",
-        desc = "Should Growthcraft log all its activity for debugging purposes?")
+            catergory = "Debug",
+            name = "Enable Debugging",
+            desc = "Should Growthcraft log all its activity for debugging purposes?")
     public boolean debugEnabled;
     protected ILogger logger = NullLogger.INSTANCE;
     protected Configuration config;
@@ -66,45 +64,45 @@ public abstract class ConfigBase implements ILoggable {
                     if (Byte.TYPE.equals(typeClass)) {
                         final byte val = field.getByte(this);
                         field.setShort(
-                            this,
-                            (byte) config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
-                                .getInt());
+                                this,
+                                (byte) config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
+                                        .getInt());
                     } else if (Short.TYPE.equals(typeClass)) {
                         final short val = field.getShort(this);
                         field.setShort(
-                            this,
-                            (short) config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
-                                .getInt());
+                                this,
+                                (short) config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
+                                        .getInt());
                     } else if (Integer.TYPE.equals(typeClass)) {
                         final int val = field.getInt(this);
                         field.setInt(
-                            this,
-                            config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
-                                .getInt());
+                                this,
+                                config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
+                                        .getInt());
                     } else if (Float.TYPE.equals(typeClass)) {
                         final float val = field.getFloat(this);
                         field.setFloat(
-                            this,
-                            (float) config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
-                                .getDouble());
+                                this,
+                                (float) config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
+                                        .getDouble());
                     } else if (Boolean.TYPE.equals(typeClass)) {
                         final boolean val = field.getBoolean(this);
                         field.setBoolean(
-                            this,
-                            config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
-                                .getBoolean());
+                                this,
+                                config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
+                                        .getBoolean());
                     } else if (Double.TYPE.equals(typeClass)) {
                         final double val = field.getDouble(this);
                         field.setDouble(
-                            this,
-                            config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
-                                .getDouble());
+                                this,
+                                config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
+                                        .getDouble());
                     } else if (String.class.equals(typeClass)) {
                         final String val = (String) field.get(this);
                         field.set(
-                            this,
-                            config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
-                                .getString());
+                                this,
+                                config.get(opt.catergory(), opt.name(), val, opt.desc() + DEFAULT_STR + val)
+                                        .getString());
                     } else {
                         boolean found = false;
                         for (ConfigTypeHandler handler : ConfigTypeHandler.handlers) {
@@ -121,12 +119,12 @@ public abstract class ConfigBase implements ILoggable {
 
                     // Only use this when you need to debug config options
                     logger.debug(
-                        "ConfigBase<%s>{catergory:'%s', name:'%s', key:'%s', value:%s}",
-                        this.toString(),
-                        opt.catergory(),
-                        opt.name(),
-                        field.getName(),
-                        StringUtils.inspect(field.get(this)));
+                            "ConfigBase<%s>{catergory:'%s', name:'%s', key:'%s', value:%s}",
+                            this.toString(),
+                            opt.catergory(),
+                            opt.name(),
+                            field.getName(),
+                            StringUtils.inspect(field.get(this)));
                 } catch (IllegalAccessException ex) {
                     logger.error(ex.toString());
                 }

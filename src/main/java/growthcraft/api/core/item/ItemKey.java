@@ -19,18 +19,17 @@
  */
 package growthcraft.api.core.item;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.api.core.definition.IItemStackFactory;
+import growthcraft.api.core.nbt.NBTHelper;
+import growthcraft.api.core.util.HashKey;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
-import growthcraft.api.core.definition.IItemStackFactory;
-import growthcraft.api.core.nbt.NBTHelper;
-import growthcraft.api.core.util.HashKey;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * As the name implies, this class is used in place of a List for Item keys
@@ -60,7 +59,7 @@ public class ItemKey extends HashKey implements IItemStackFactory {
         final Item pitem = Item.getItemFromBlock(block);
         if (pitem == null) {
             throw new IllegalArgumentException(
-                "Invalid Block given for ItemKey (block=" + block + " meta=" + pmeta + ")");
+                    "Invalid Block given for ItemKey (block=" + block + " meta=" + pmeta + ")");
         }
         this.item = pitem;
         this.meta = pmeta;

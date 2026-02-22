@@ -19,10 +19,9 @@
  */
 package growthcraft.grapes.integration.mfr;
 
-import net.minecraft.block.Block;
-
 import growthcraft.core.integration.mfr.AbstractFactoryFruit;
 import growthcraft.grapes.GrowthCraftGrapes;
+import net.minecraft.block.Block;
 
 public class GrapeFactoryFruit extends AbstractFactoryFruit<Block> {
 

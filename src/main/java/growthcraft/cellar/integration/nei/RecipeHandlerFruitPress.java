@@ -19,11 +19,6 @@
  */
 package growthcraft.cellar.integration.nei;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.item.ItemStack;
-
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
@@ -36,6 +31,10 @@ import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.client.gui.GuiFruitPress;
 import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.core.integration.nei.TemplateRenderHelper;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class RecipeHandlerFruitPress extends TemplateRecipeHandler {
 
@@ -58,8 +57,8 @@ public class RecipeHandlerFruitPress extends TemplateRecipeHandler {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         final PressingRecipe recipe = CellarRegistry.instance()
-            .pressing()
-            .getPressingRecipe(ingredient);
+                .pressing()
+                .getPressingRecipe(ingredient);
         if (recipe != null) {
             arecipes.add(new CachedPressingRecipe(recipe));
         }
@@ -69,12 +68,12 @@ public class RecipeHandlerFruitPress extends TemplateRecipeHandler {
         if (recipe instanceof CachedPressingRecipe) {
             final PressingRecipe pressingRecipe = ((CachedPressingRecipe) recipe).pressingRecipe;
             TemplateRenderHelper.drawFluidStack(
-                84,
-                5,
-                16,
-                52,
-                pressingRecipe.getFluidStack(),
-                GrowthCraftCellar.getConfig().fruitPressMaxCap);
+                    84,
+                    5,
+                    16,
+                    52,
+                    pressingRecipe.getFluidStack(),
+                    GrowthCraftCellar.getConfig().fruitPressMaxCap);
         }
     }
 
@@ -98,15 +97,15 @@ public class RecipeHandlerFruitPress extends TemplateRecipeHandler {
             super();
             this.pressingRecipe = recipe;
             this.ingredient = new PositionedStack(
-                pressingRecipe.getInput()
-                    .getItemStacks(),
-                40,
-                24);
+                    pressingRecipe.getInput()
+                            .itemStacks(),
+                    40,
+                    24);
             if (recipe.hasResidue()) this.otherStack = new PositionedStack(
-                pressingRecipe.getResidue()
-                    .residueItem(),
-                111,
-                6);
+                    pressingRecipe.getResidue()
+                            .residueItem(),
+                    111,
+                    6);
         }
 
         @Override
