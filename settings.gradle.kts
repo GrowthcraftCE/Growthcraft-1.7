@@ -1,4 +1,3 @@
-
 pluginManagement {
     repositories {
         maven {
@@ -17,10 +16,6 @@ pluginManagement {
 }
 
 plugins {
-    id 'com.gtnewhorizons.gtnhsettingsconvention' version '2.0.20'
+    id("com.gtnewhorizons.gtnhsettingsconvention") version("2.0.19")
 }
-
-
-
-rootProject.name = "Growthcraft"
 
