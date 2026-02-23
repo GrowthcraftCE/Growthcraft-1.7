@@ -46,5 +46,5 @@ dependencies {
     compileOnly("powercrystals:MineFactoryReloaded:[1.7.10]2.8.2B1-201:dev")
     compileOnly("mcp.mobius.waila:Waila:1.5.11-RC2-NONEI_1.7.10:dev")
     compileOnly("applecore:AppleCore:1.7.10-3.1.1:deobf")
-    compileOnly("com.mod-buildcraft:buildcraft:7.1.23:dev")   
+    compileOnly("com.mod-buildcraft:buildcraft:7.1.23:dev")
 }
