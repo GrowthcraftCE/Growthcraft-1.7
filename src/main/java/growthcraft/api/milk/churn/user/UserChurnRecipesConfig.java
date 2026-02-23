@@ -43,11 +43,11 @@ public class UserChurnRecipesConfig extends AbstractUserJSONConfig {
 
     public void addDefault(FluidStack inp, FluidStack out, ItemStack stack, int churns) {
         addDefault(
-                new UserChurnRecipe(
-                        new FluidStackSchema(inp),
-                        new FluidStackSchema(out),
-                        new ItemKeySchema(stack),
-                        churns));
+            new UserChurnRecipe(
+                new FluidStackSchema(inp),
+                new FluidStackSchema(out),
+                new ItemKeySchema(stack),
+                churns));
     }
 
     @Override
@@ -74,8 +74,8 @@ public class UserChurnRecipesConfig extends AbstractUserJSONConfig {
         for (IChurnRecipe churnRecipe : recipe.toChurnRecipes()) {
             logger.debug("Adding user churn recipe {%s}", churnRecipe);
             MilkRegistry.instance()
-                    .churn()
-                    .addRecipe(churnRecipe);
+                .churn()
+                .addRecipe(churnRecipe);
         }
     }
 

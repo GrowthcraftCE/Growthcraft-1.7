@@ -52,7 +52,7 @@ public class UserChurnRecipe implements ICommentable {
     @Override
     public String toString() {
         return String
-                .format("UserChurnRecipe(`%s` / %d = `%s` & `%s`)", input_fluid, churns, output_fluid, output_item);
+            .format("UserChurnRecipe(`%s` / %d = `%s` & `%s`)", input_fluid, churns, output_fluid, output_item);
     }
 
     @Override

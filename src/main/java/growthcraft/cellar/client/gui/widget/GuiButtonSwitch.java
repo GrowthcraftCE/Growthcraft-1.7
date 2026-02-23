@@ -25,11 +25,11 @@ public class GuiButtonSwitch extends GuiButton {
     public void drawButton(Minecraft mc, int w, int h) {
         if (this.visible) {
             mc.getTextureManager()
-                    .bindTexture(this.res);
+                .bindTexture(this.res);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.field_146123_n = w >= this.xPosition && h >= this.yPosition
-                    && w < this.xPosition + this.width
-                    && h < this.yPosition + this.height;
+                && w < this.xPosition + this.width
+                && h < this.yPosition + this.height;
             final short y = 182;
             int x = 0;
 

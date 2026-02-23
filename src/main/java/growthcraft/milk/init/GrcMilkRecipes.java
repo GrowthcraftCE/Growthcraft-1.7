@@ -53,42 +53,42 @@ public class GrcMilkRecipes extends GrcModuleBase {
             ricottaBowlRecipe.add(new ItemStack(Items.bowl, 1));
         }
         GameRegistry.addRecipe(
-                new ShapelessItemComparableRecipe(
-                        new DriedCurdComparator(),
-                        EnumCheeseType.RICOTTA.asStack(ricottaBowlCount),
-                        ricottaBowlRecipe));
+            new ShapelessItemComparableRecipe(
+                new DriedCurdComparator(),
+                EnumCheeseType.RICOTTA.asStack(ricottaBowlCount),
+                ricottaBowlRecipe));
 
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        GrowthCraftMilk.blocks.cheeseVat.asStack(),
-                        GrowthCraftCellar.blocks.brewKettle.asStack()));
+            new ShapelessOreRecipe(
+                GrowthCraftMilk.blocks.cheeseVat.asStack(),
+                GrowthCraftCellar.blocks.brewKettle.asStack()));
 
         GameRegistry.addRecipe(
-                new ShapedOreRecipe(
-                        GrowthCraftMilk.blocks.butterChurn.asStack(),
-                        " S ",
-                        "P P",
-                        "PPP",
-                        'S',
-                        "stickWood",
-                        'P',
-                        "plankWood"));
+            new ShapedOreRecipe(
+                GrowthCraftMilk.blocks.butterChurn.asStack(),
+                " S ",
+                "P P",
+                "PPP",
+                'S',
+                "stickWood",
+                'P',
+                "plankWood"));
 
         GameRegistry.addRecipe(
-                new ShapedOreRecipe(
-                        GrowthCraftMilk.blocks.cheesePress.asStack(),
-                        "iii",
-                        "iCi",
-                        "ppp",
-                        'i',
-                        "ingotIron",
-                        'C',
-                        Blocks.chest,
-                        'p',
-                        "slabWood"));
+            new ShapedOreRecipe(
+                GrowthCraftMilk.blocks.cheesePress.asStack(),
+                "iii",
+                "iCi",
+                "ppp",
+                'i',
+                "ingotIron",
+                'C',
+                Blocks.chest,
+                'p',
+                "slabWood"));
 
         GameRegistry.addRecipe(
-                new ShapedOreRecipe(GrowthCraftMilk.blocks.pancheon.asStack(), "c c", "ccc", 'c', Items.clay_ball));
+            new ShapedOreRecipe(GrowthCraftMilk.blocks.pancheon.asStack(), "c c", "ccc", 'c', Items.clay_ball));
     }
 
     private void registerCheeseVatRecipes() {
@@ -96,61 +96,61 @@ public class GrcMilkRecipes extends GrcModuleBase {
 
         for (String saltOre : saltOres) {
             CheeseVatRecipeBuilder.buildRecipe("CHEDDAR Orange Dye Recipe")
-                    .outputFluids(EnumCheeseType.CHEDDAR.asFluidStack(5000))
-                    .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
-                    .inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeOrange", 1))
-                    .register();
+                .outputFluids(EnumCheeseType.CHEDDAR.asFluidStack(5000))
+                .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+                .inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeOrange", 1))
+                .register();
 
             CheeseVatRecipeBuilder.buildRecipe("CHEDDAR Pumpkin Recipe")
-                    .outputFluids(EnumCheeseType.CHEDDAR.asFluidStack(5000))
-                    .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
-                    .inputItems(new OreItemStacks(saltOre, 1), new ItemStack(Blocks.pumpkin))
-                    .register();
+                .outputFluids(EnumCheeseType.CHEDDAR.asFluidStack(5000))
+                .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+                .inputItems(new OreItemStacks(saltOre, 1), new ItemStack(Blocks.pumpkin))
+                .register();
 
             CheeseVatRecipeBuilder.buildRecipe("GORGONZOLA Recipe")
-                    .outputFluids(EnumCheeseType.GORGONZOLA.asFluidStack(5000))
-                    .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
-                    .inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("foodFruit", 1))
-                    .register();
+                .outputFluids(EnumCheeseType.GORGONZOLA.asFluidStack(5000))
+                .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+                .inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("foodFruit", 1))
+                .register();
 
             CheeseVatRecipeBuilder.buildRecipe("EMMENTALER Recipe")
-                    .outputFluids(EnumCheeseType.EMMENTALER.asFluidStack(5000))
-                    .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
-                    .inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("cropWheat", 1))
-                    .register();
+                .outputFluids(EnumCheeseType.EMMENTALER.asFluidStack(5000))
+                .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+                .inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("cropWheat", 1))
+                .register();
 
             CheeseVatRecipeBuilder.buildRecipe("APPENZELLER Wine Recipe")
-                    .outputFluids(EnumCheeseType.APPENZELLER.asFluidStack(5000))
-                    .inputFluids(new TaggedFluidStacks(5000, "milk_curds"), new TaggedFluidStacks(1000, "wine"))
-                    .inputItems(new OreItemStacks(saltOre, 1))
-                    .register();
+                .outputFluids(EnumCheeseType.APPENZELLER.asFluidStack(5000))
+                .inputFluids(new TaggedFluidStacks(5000, "milk_curds"), new TaggedFluidStacks(1000, "wine"))
+                .inputItems(new OreItemStacks(saltOre, 1))
+                .register();
 
             CheeseVatRecipeBuilder.buildRecipe("APPENZELLER Cider Recipe")
-                    .outputFluids(EnumCheeseType.APPENZELLER.asFluidStack(5000))
-                    .inputFluids(new TaggedFluidStacks(5000, "milk_curds"), new TaggedFluidStacks(1000, "cider"))
-                    .inputItems(new OreItemStacks(saltOre, 1))
-                    .register();
+                .outputFluids(EnumCheeseType.APPENZELLER.asFluidStack(5000))
+                .inputFluids(new TaggedFluidStacks(5000, "milk_curds"), new TaggedFluidStacks(1000, "cider"))
+                .inputItems(new OreItemStacks(saltOre, 1))
+                .register();
 
             CheeseVatRecipeBuilder.buildRecipe("ASIAGO Recipe")
-                    .outputFluids(EnumCheeseType.ASIAGO.asFluidStack(5000))
-                    .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
-                    .inputItems(
-                            new OreItemStacks(saltOre, 1),
-                            new OreItemStacks(saltOre, 1),
-                            new OreItemStacks("dyeYellow", 1))
-                    .register();
+                .outputFluids(EnumCheeseType.ASIAGO.asFluidStack(5000))
+                .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+                .inputItems(
+                    new OreItemStacks(saltOre, 1),
+                    new OreItemStacks(saltOre, 1),
+                    new OreItemStacks("dyeYellow", 1))
+                .register();
 
             CheeseVatRecipeBuilder.buildRecipe("PARMESAN Recipe")
-                    .outputFluids(EnumCheeseType.PARMESAN.asFluidStack(5000))
-                    .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
-                    .inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeWhite", 1))
-                    .register();
+                .outputFluids(EnumCheeseType.PARMESAN.asFluidStack(5000))
+                .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+                .inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeWhite", 1))
+                .register();
 
             CheeseVatRecipeBuilder.buildRecipe("MONTEREY Recipe")
-                    .outputFluids(EnumCheeseType.MONTEREY.asFluidStack(5000))
-                    .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
-                    .inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeRed", 1))
-                    .register();
+                .outputFluids(EnumCheeseType.MONTEREY.asFluidStack(5000))
+                .inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+                .inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeRed", 1))
+                .register();
         }
     }
 
@@ -158,8 +158,8 @@ public class GrcMilkRecipes extends GrcModuleBase {
         for (EnumCheeseType type : EnumCheeseType.VALUES) {
             if (type.hasBlock() && type.hasCurdBlock()) {
                 MilkRegistry.instance()
-                        .cheesePress()
-                        .addRecipe(new DriedCurdsCheesePressRecipe(type.asCurdItemStack(), type.asBlockItemStack(), 200));
+                    .cheesePress()
+                    .addRecipe(new DriedCurdsCheesePressRecipe(type.asCurdItemStack(), type.asBlockItemStack(), 200));
             }
         }
     }
@@ -237,10 +237,10 @@ public class GrcMilkRecipes extends GrcModuleBase {
         @Override
         public String toString() {
             return String.format(
-                    "DriedCurdsCheesePressRecipe({%s} / %d = {%s})",
-                    getOutputItemStack(),
-                    time,
-                    getInputItemStack());
+                "DriedCurdsCheesePressRecipe({%s} / %d = {%s})",
+                getOutputItemStack(),
+                time,
+                getInputItemStack());
         }
     }
 }

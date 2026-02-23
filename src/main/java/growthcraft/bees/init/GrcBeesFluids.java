@@ -50,12 +50,12 @@ public class GrcBeesFluids extends GrcModuleBase {
     public void preInit() {
         if (GrowthCraftBees.getConfig().honeyEnabled) {
             final Fluid honeyFluid = new GrcFluid("grc.honey").setColor(0xffac01)
-                    .setDensity(1420)
-                    .setViscosity(73600);
+                .setDensity(1420)
+                .setViscosity(73600);
             this.honey = FluidFactory.instance()
-                    .create(honeyFluid, FluidFactory.FEATURE_ALL_EDIBLE);
+                .create(honeyFluid, FluidFactory.FEATURE_ALL_EDIBLE);
             honey.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(
-                    new ItemFoodBottleFluid(this.honey.getFluid(), 2, 0.2f, false));
+                new ItemFoodBottleFluid(this.honey.getFluid(), 2, 0.2f, false));
             honey.refreshItemColor();
         }
         this.honeyMeadBooze = new Booze[7];
@@ -64,8 +64,8 @@ public class GrcBeesFluids extends GrcModuleBase {
         BoozeRegistryHelper.initializeBoozeFluids("grc.honeyMead", honeyMeadBooze);
         for (Booze booze : honeyMeadBooze) {
             booze.setColor(GrowthCraftBees.getConfig().honeyMeadColor)
-                    .setDensity(1000)
-                    .setViscosity(1200);
+                .setDensity(1000)
+                .setViscosity(1200);
         }
         BoozeRegistryHelper.initializeBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets);
         BoozeRegistryHelper.setBoozeFoodStats(honeyMeadBooze, 1, -0.45f);
@@ -75,7 +75,7 @@ public class GrcBeesFluids extends GrcModuleBase {
         if (honey != null) {
             honey.setCreativeTab(GrowthCraftBees.tab);
             honey.block.getBlock()
-                    .setBlockTextureName("grcbees:fluids/honey");
+                .setBlockTextureName("grcbees:fluids/honey");
             honey.refreshItemColor();
         }
     }
@@ -84,17 +84,17 @@ public class GrcBeesFluids extends GrcModuleBase {
     public void register() {
         GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honeyMead");
         BoozeRegistryHelper
-                .registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle, "grc.honeyMead", null);
+            .registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle, "grc.honeyMead", null);
         if (honey != null) {
             honey.registerObjects("grc", "Honey");
             CoreRegistry.instance()
-                    .fluidDictionary()
-                    .addFluidTags(honey.getFluid(), BeesFluidTag.HONEY);
+                .fluidDictionary()
+                .addFluidTags(honey.getFluid(), BeesFluidTag.HONEY);
         }
         if (ForestryFluids.HONEY.exists()) {
             CoreRegistry.instance()
-                    .fluidDictionary()
-                    .addFluidTags(ForestryFluids.HONEY.getFluid(), BeesFluidTag.HONEY);
+                .fluidDictionary()
+                .addFluidTags(ForestryFluids.HONEY.getFluid(), BeesFluidTag.HONEY);
         }
     }
 

@@ -66,7 +66,7 @@ public class GrcGuiProvider implements IGuiHandler {
             return "NULL";
         }
         return inventory.getClass()
-                .getName();
+            .getName();
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
@@ -97,8 +97,8 @@ public class GrcGuiProvider implements IGuiHandler {
 
             if (target == null) {
                 throw new IllegalStateException(
-                        "Cannot find " + containerClass
-                                .getName() + "( " + this.typeName(inventory) + ", " + this.typeName(te) + " )");
+                    "Cannot find " + containerClass
+                        .getName() + "( " + this.typeName(inventory) + ", " + this.typeName(te) + " )");
             }
 
             return target.newInstance(inventory, te);

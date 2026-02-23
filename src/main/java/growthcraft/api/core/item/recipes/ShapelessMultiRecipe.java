@@ -104,7 +104,7 @@ public class ShapelessMultiRecipe implements IRecipe {
 
                     final IMultiItemStacks next = req.next();
                     final Iterator<ItemStack> itr = next.itemStacks()
-                            .iterator();
+                        .iterator();
                     while (itr.hasNext() && !match) {
                         match = OreDictionary.itemMatches(itr.next(), slot, false);
                     }
@@ -121,12 +121,12 @@ public class ShapelessMultiRecipe implements IRecipe {
 
                     if (FluidContainerRegistry.isFilledContainer(slot)) {
                         final FluidStack containerFluid = FluidContainerRegistry.getFluidForFilledItem(slot)
-                                .copy();
+                            .copy();
 
                         for (IMultiFluidStacks fluidStacks : fluids) {
                             final int aggregateAmount = aggregateFluids.containsKey(fluidStacks)
-                                    ? aggregateFluids.get(fluidStacks)
-                                    : 0;
+                                ? aggregateFluids.get(fluidStacks)
+                                : 0;
 
                             if (fluidStacks.containsFluidStack(containerFluid) && aggregateAmount > 0) {
                                 final int leftover = Math.max(0, aggregateAmount - containerFluid.amount);

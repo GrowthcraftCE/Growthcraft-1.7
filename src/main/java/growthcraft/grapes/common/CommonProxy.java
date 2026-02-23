@@ -25,7 +25,7 @@ import growthcraft.core.common.GrcModuleProxyBase;
 public class CommonProxy extends GrcModuleProxyBase {
 
     @SidedProxy(
-            clientSide = "growthcraft.grapes.client.ClientProxy",
-            serverSide = "growthcraft.grapes.common.CommonProxy")
+        clientSide = "growthcraft.grapes.client.ClientProxy",
+        serverSide = "growthcraft.grapes.common.CommonProxy")
     public static CommonProxy instance;
 }

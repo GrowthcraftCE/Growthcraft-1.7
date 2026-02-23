@@ -56,35 +56,35 @@ public class ThaumcraftBoozeHelper implements ILoggable {
     public ThaumcraftBoozeHelper() {
         this.tagToAspects = new HashMap<FluidTag, AspectModifier>();
         tagToAspects.put(
-                BoozeTag.FERMENTED,
-                new AspectModifier().set(Aspect.POISON, 1)
-                        .set(Aspect.WATER, -1));
+            BoozeTag.FERMENTED,
+            new AspectModifier().set(Aspect.POISON, 1)
+                .set(Aspect.WATER, -1));
         tagToAspects.put(
-                BoozeTag.EXTENDED,
-                new AspectModifier().set(Aspect.ENERGY, 1)
-                        .set(Aspect.WATER, -1));
+            BoozeTag.EXTENDED,
+            new AspectModifier().set(Aspect.ENERGY, 1)
+                .set(Aspect.WATER, -1));
         tagToAspects.put(
-                BoozeTag.POTENT,
-                new AspectModifier().set(Aspect.POISON, 1)
-                        .set(Aspect.WATER, -1));
+            BoozeTag.POTENT,
+            new AspectModifier().set(Aspect.POISON, 1)
+                .set(Aspect.WATER, -1));
         tagToAspects.put(
-                BoozeTag.HYPER_EXTENDED,
-                new AspectModifier().set(Aspect.POISON, 1)
-                        .set(Aspect.ENERGY, 1)
-                        .set(Aspect.WATER, -2));
+            BoozeTag.HYPER_EXTENDED,
+            new AspectModifier().set(Aspect.POISON, 1)
+                .set(Aspect.ENERGY, 1)
+                .set(Aspect.WATER, -2));
         tagToAspects.put(BoozeTag.DEADLY, new AspectModifier().set(Aspect.DEATH, 1));
         tagToAspects.put(
-                BoozeTag.POISONED,
-                new AspectModifier().set(Aspect.POISON, 3)
-                        .set(Aspect.WATER, -3));
+            BoozeTag.POISONED,
+            new AspectModifier().set(Aspect.POISON, 3)
+                .set(Aspect.WATER, -3));
         tagToAspects.put(
-                BoozeTag.CHILLED,
-                new AspectModifier().set(Aspect.COLD, 1)
-                        .set(Aspect.WATER, -1));
+            BoozeTag.CHILLED,
+            new AspectModifier().set(Aspect.COLD, 1)
+                .set(Aspect.WATER, -1));
         tagToAspects.put(
-                BoozeTag.INTOXICATED,
-                new AspectModifier().set(Aspect.POISON, 2)
-                        .set(Aspect.WATER, -3));
+            BoozeTag.INTOXICATED,
+            new AspectModifier().set(Aspect.POISON, 2)
+                .set(Aspect.WATER, -3));
     }
 
     @Optional.Method(modid = "Thaumcraft")
@@ -103,8 +103,8 @@ public class ThaumcraftBoozeHelper implements ILoggable {
     @Optional.Method(modid = "Thaumcraft")
     public AspectList setAspectsForFluid(Fluid fluid, AspectList aspects) {
         final Collection<FluidTag> tags = CoreRegistry.instance()
-                .fluidDictionary()
-                .getFluidTags(fluid);
+            .fluidDictionary()
+            .getFluidTags(fluid);
         for (FluidTag tag : tags) {
             final AspectModifier mod = tagToAspects.get(tag);
             if (mod != null) {
@@ -159,8 +159,8 @@ public class ThaumcraftBoozeHelper implements ILoggable {
         final Block block = def.getBlock();
         if (block instanceof BlockFluidBase) {
             ThaumcraftApi.registerObjectTag(
-                    def.asStack(1, ItemKey.WILDCARD_VALUE),
-                    setAspectsForFluidBucket(((BlockFluidBase) block).getFluid(), base.copy()));
+                def.asStack(1, ItemKey.WILDCARD_VALUE),
+                setAspectsForFluidBucket(((BlockFluidBase) block).getFluid(), base.copy()));
         }
     }
 
@@ -220,7 +220,7 @@ public class ThaumcraftBoozeHelper implements ILoggable {
         @Optional.Method(modid = "Thaumcraft")
         public Iterator<Map.Entry<Aspect, Integer>> iterator() {
             return aspects.entrySet()
-                    .iterator();
+                .iterator();
         }
     }
 }

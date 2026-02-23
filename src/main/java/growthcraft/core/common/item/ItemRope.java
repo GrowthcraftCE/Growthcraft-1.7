@@ -33,7 +33,7 @@ public class ItemRope extends GrcItemBase {
             dir = 1;
         } else {
             final FenceRopeEntry entry = FenceRopeRegistry.instance()
-                    .getEntry(block, blockMeta);
+                .getEntry(block, blockMeta);
             if (entry != null) {
                 if (!player.canPlayerEdit(x, y, z, dir, stack)) {
                     return false;
@@ -90,12 +90,12 @@ public class ItemRope extends GrcItemBase {
                     }
 
                     world.playSoundEffect(
-                            (float) x + 0.5F,
-                            (float) y + 0.5F,
-                            (float) z + 0.5F,
-                            block2.stepSound.func_150496_b(),
-                            (block2.stepSound.getVolume() + 1.0F) / 2.0F,
-                            block2.stepSound.getPitch() * 0.8F);
+                        (float) x + 0.5F,
+                        (float) y + 0.5F,
+                        (float) z + 0.5F,
+                        block2.stepSound.func_150496_b(),
+                        (block2.stepSound.getVolume() + 1.0F) / 2.0F,
+                        block2.stepSound.getPitch() * 0.8F);
                     --stack.stackSize;
                 }
             }

@@ -65,7 +65,7 @@ public class UserBeesConfig extends AbstractUserJSONConfig {
 
         for (ItemStack stack : entry.item.itemStacks()) {
             BeesRegistry.instance()
-                    .addBee(stack);
+                .addBee(stack);
         }
     }
 

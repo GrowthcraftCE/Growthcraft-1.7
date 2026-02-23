@@ -81,8 +81,8 @@ public class CheeseVatRecipeBuilder {
 
     public CheeseVatRecipeBuilder register() {
         MilkRegistry.instance()
-                .cheeseVat()
-                .addRecipe(outputFluids, outputStacks, inputFluids, inputStacks);
+            .cheeseVat()
+            .addRecipe(outputFluids, outputStacks, inputFluids, inputStacks);
         return this;
     }
 }

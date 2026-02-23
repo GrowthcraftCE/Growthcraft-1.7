@@ -52,13 +52,13 @@ public class BlockBambooFence extends BlockFence {
         final Block block = world.getBlock(x, y, z);
 
         if (this == block || (block instanceof BlockFence)
-                || (block instanceof BlockFenceGate)
-                || GrowthCraftBamboo.blocks.bambooWall.isSameAs(block)
-                || GrowthCraftBamboo.blocks.bambooStalk.isSameAs(block)) {
+            || (block instanceof BlockFenceGate)
+            || GrowthCraftBamboo.blocks.bambooWall.isSameAs(block)
+            || GrowthCraftBamboo.blocks.bambooStalk.isSameAs(block)) {
             return true;
         } else {
             if (block != null && block.getMaterial()
-                    .isOpaque() && block.renderAsNormalBlock()) {
+                .isOpaque() && block.renderAsNormalBlock()) {
                 return block.getMaterial() != Material.gourd;
             }
         }

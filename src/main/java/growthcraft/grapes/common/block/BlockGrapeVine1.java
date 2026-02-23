@@ -75,7 +75,7 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         return BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this)
-                || this == world.getBlock(x, y - 1, z);
+            || this == world.getBlock(x, y - 1, z);
     }
 
     /************

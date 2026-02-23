@@ -90,7 +90,7 @@ public class DeviceBeeBox extends DeviceBase {
      */
     private boolean isBlockFlower(Block block, int meta) {
         return BeesRegistry.instance()
-                .isBlockFlower(block, meta);
+            .isBlockFlower(block, meta);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
@@ -139,7 +139,7 @@ public class DeviceBeeBox extends DeviceBase {
                         f1 = 1.08F;
                     }
                 } else if (flower == Blocks.flower_pot && (world.getBlockMetadata(i + loopx, y, k + loopz) == 1
-                        || world.getBlockMetadata(i + loopx, y, k + loopz) == 2)) {
+                    || world.getBlockMetadata(i + loopx, y, k + loopz) == 2)) {
                     // f1 = 2.0F;
                     f1 = 0.72F;
                 }
@@ -253,7 +253,7 @@ public class DeviceBeeBox extends DeviceBase {
                     final Block block = (Block) randomList.get(0);
                     final int meta = (int) randomList.get(1);
                     final IFlowerBlockEntry entry = BeesRegistry.instance()
-                            .getFlowerBlockEntry(block, meta);
+                        .getFlowerBlockEntry(block, meta);
                     if (entry != null) {
                         if (entry.canPlaceAt(getWorld(), random_x, y, random_z)) {
                             getWorld().setBlock(random_x, y, random_z, block, meta, BlockFlags.SYNC);

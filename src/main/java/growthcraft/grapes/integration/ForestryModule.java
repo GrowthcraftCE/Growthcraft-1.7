@@ -47,9 +47,9 @@ public class ForestryModule extends ForestryModuleBase {
         Backpack.FORESTERS.add(grapes);
 
         if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager
-                .addRecipe(10, new ItemStack[]{grapeSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
+            .addRecipe(10, new ItemStack[]{grapeSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
         if (ForestryFluids.JUICE.exists()) recipes().squeezerManager
-                .addRecipe(10, new ItemStack[]{grapes}, ForestryFluids.JUICE.asFluidStack(juiceAmount));
+            .addRecipe(10, new ItemStack[]{grapes}, ForestryFluids.JUICE.asFluidStack(juiceAmount));
         addFarmable("farmOrchard", new FarmableBasicGrowthCraft(grapeBlock, 0, false, true));
     }
 }

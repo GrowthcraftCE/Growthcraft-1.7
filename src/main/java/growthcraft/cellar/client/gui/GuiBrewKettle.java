@@ -38,9 +38,9 @@ public class GuiBrewKettle extends GuiCellar<ContainerBrewKettle, TileEntityBrew
         widgets.add(new WidgetFluidTank(widgets, 0, 46, 17, 16, 52));
         widgets.add(new WidgetFluidTank(widgets, 1, 114, 17, 16, 52));
         widgets.add(
-                new WidgetDeviceProgressIcon(widgets, 98, 30, 9, 28)
-                        .setProgressDirection(WidgetDeviceProgressIcon.ProgressDirection.TOP_TO_BOTTOM)
-                        .setTextureRect(176, 0, 9, 28));
+            new WidgetDeviceProgressIcon(widgets, 98, 30, 9, 28)
+                .setProgressDirection(WidgetDeviceProgressIcon.ProgressDirection.TOP_TO_BOTTOM)
+                .setTextureRect(176, 0, 9, 28));
 
         if (GrowthCraftCellar.getConfig().enableDiscardButton) {
             this.button0 = new GuiButtonDiscard(guiResource, 1, guiLeft + 27, guiTop + 54);
@@ -82,13 +82,13 @@ public class GuiBrewKettle extends GuiCellar<ContainerBrewKettle, TileEntityBrew
     protected void actionPerformed(GuiButton button) {
         if (button0 != null && button == button0) {
             GrowthCraftCellar.packetPipeline.sendToServer(
-                    new PacketClearTankButtonWByte(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, (byte) 0));
+                new PacketClearTankButtonWByte(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, (byte) 0));
         } else if (button1 != null && button == button1) {
             GrowthCraftCellar.packetPipeline.sendToServer(
-                    new PacketClearTankButtonWByte(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, (byte) 1));
+                new PacketClearTankButtonWByte(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, (byte) 1));
         } else if (button == button2) {
             GrowthCraftCellar.packetPipeline
-                    .sendToServer(new PacketSwitchTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
+                .sendToServer(new PacketSwitchTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
         }
     }
 

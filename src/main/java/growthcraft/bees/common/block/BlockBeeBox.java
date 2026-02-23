@@ -100,13 +100,13 @@ public class BlockBeeBox extends GrcBlockContainer {
             if (te != null) {
                 if (te.hasBees()) {
                     world.playSound(
-                            (float) x + 0.5F,
-                            (float) y + 0.5F,
-                            (float) z + 0.5F,
-                            "grcbees:buzz",
-                            1.0F + random.nextFloat(),
-                            random.nextFloat() * 0.7F + 0.3F,
-                            false);
+                        (float) x + 0.5F,
+                        (float) y + 0.5F,
+                        (float) z + 0.5F,
+                        "grcbees:buzz",
+                        1.0F + random.nextFloat(),
+                        random.nextFloat() * 0.7F + 0.3F,
+                        false);
                 }
             }
         }

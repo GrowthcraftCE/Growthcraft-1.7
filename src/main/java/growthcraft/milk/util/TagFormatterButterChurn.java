@@ -33,9 +33,9 @@ public class TagFormatterButterChurn implements ITagFormatter {
 
     public List<String> format(List<String> list, NBTTagCompound nbt) {
         list.add(
-                EnumChatFormatting.GRAY + GrcI18n.translate(
-                        "grcmilk.butter_churn.itemslot.item",
-                        TagFormatterItem.INSTANCE.formatItem(nbt.getCompoundTag("item"))));
+            EnumChatFormatting.GRAY + GrcI18n.translate(
+                "grcmilk.butter_churn.itemslot.item",
+                TagFormatterItem.INSTANCE.formatItem(nbt.getCompoundTag("item"))));
         return list;
     }
 }

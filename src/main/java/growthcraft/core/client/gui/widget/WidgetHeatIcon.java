@@ -37,7 +37,7 @@ public class WidgetHeatIcon extends WidgetIconBase {
                 final int iconHeight = heatedDevice.getHeatScaled(textureRect.h);
                 final int offY = textureRect.h - iconHeight;
                 manager.gui
-                        .drawTexturedModalRect(x, y + offY, textureRect.x, textureRect.y + offY, textureRect.w, iconHeight);
+                    .drawTexturedModalRect(x, y + offY, textureRect.x, textureRect.y + offY, textureRect.w, iconHeight);
             }
         }
     }

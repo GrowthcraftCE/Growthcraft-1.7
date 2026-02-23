@@ -73,119 +73,119 @@ public class GrcMilkItems extends GrcModuleItems {
     public void init() {
         // Salted Butter
         GameRegistry
-                .addRecipe(new ShapelessOreRecipe(EnumButter.SALTED.asStack(), EnumButter.UNSALTED.asStack(), "foodSalt"));
+            .addRecipe(new ShapelessOreRecipe(EnumButter.SALTED.asStack(), EnumButter.UNSALTED.asStack(), "foodSalt"));
 
         // Yogurt - Plain
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumYogurt.PLAIN.asStack(),
-                        Items.milk_bucket,
-                        starterCulture.asStack(),
-                        Items.bowl));
+            new ShapelessOreRecipe(
+                EnumYogurt.PLAIN.asStack(),
+                Items.milk_bucket,
+                starterCulture.asStack(),
+                Items.bowl));
 
         // Yogurt - Chocolate
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumYogurt.CHOCOLATE.asStack(),
-                        Items.milk_bucket,
-                        starterCulture.asStack(),
-                        Items.bowl,
-                        EnumDye.COCOA_BEANS.asStack()));
+            new ShapelessOreRecipe(
+                EnumYogurt.CHOCOLATE.asStack(),
+                Items.milk_bucket,
+                starterCulture.asStack(),
+                Items.bowl,
+                EnumDye.COCOA_BEANS.asStack()));
 
         // Yogurt - Grape
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumYogurt.GRAPE.asStack(),
-                        Items.milk_bucket,
-                        starterCulture.asStack(),
-                        Items.bowl,
-                        "foodGrapes"));
+            new ShapelessOreRecipe(
+                EnumYogurt.GRAPE.asStack(),
+                Items.milk_bucket,
+                starterCulture.asStack(),
+                Items.bowl,
+                "foodGrapes"));
 
         // Yogurt - Apple
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumYogurt.APPLE.asStack(),
-                        Items.milk_bucket,
-                        starterCulture.asStack(),
-                        Items.bowl,
-                        "foodApple"));
+            new ShapelessOreRecipe(
+                EnumYogurt.APPLE.asStack(),
+                Items.milk_bucket,
+                starterCulture.asStack(),
+                Items.bowl,
+                "foodApple"));
 
         // Yogurt - Honey
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumYogurt.HONEY.asStack(),
-                        Items.milk_bucket,
-                        starterCulture.asStack(),
-                        Items.bowl,
-                        "honeyDrop"));
+            new ShapelessOreRecipe(
+                EnumYogurt.HONEY.asStack(),
+                Items.milk_bucket,
+                starterCulture.asStack(),
+                Items.bowl,
+                "honeyDrop"));
 
         // Yogurt - Melon
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumYogurt.WATERMELON.asStack(),
-                        Items.milk_bucket,
-                        starterCulture.asStack(),
-                        Items.bowl,
-                        "foodMelon"));
+            new ShapelessOreRecipe(
+                EnumYogurt.WATERMELON.asStack(),
+                Items.milk_bucket,
+                starterCulture.asStack(),
+                Items.bowl,
+                "foodMelon"));
 
         // Ice Cream - Plain
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumIceCream.PLAIN.asStack(),
-                        GrowthCraftMilk.fluids.cream.bucket.asStack(),
-                        Items.milk_bucket,
-                        Items.bowl,
-                        Items.sugar));
+            new ShapelessOreRecipe(
+                EnumIceCream.PLAIN.asStack(),
+                GrowthCraftMilk.fluids.cream.bucket.asStack(),
+                Items.milk_bucket,
+                Items.bowl,
+                Items.sugar));
 
         // Ice Cream - Chocolate
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumIceCream.CHOCOLATE.asStack(),
-                        GrowthCraftMilk.fluids.cream.bucket.asStack(),
-                        Items.milk_bucket,
-                        Items.bowl,
-                        Items.sugar,
-                        EnumDye.COCOA_BEANS.asStack()));
+            new ShapelessOreRecipe(
+                EnumIceCream.CHOCOLATE.asStack(),
+                GrowthCraftMilk.fluids.cream.bucket.asStack(),
+                Items.milk_bucket,
+                Items.bowl,
+                Items.sugar,
+                EnumDye.COCOA_BEANS.asStack()));
 
         // Ice Cream - Grape
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumIceCream.GRAPE.asStack(),
-                        GrowthCraftMilk.fluids.cream.bucket.asStack(),
-                        Items.milk_bucket,
-                        Items.bowl,
-                        Items.sugar,
-                        "foodGrapes"));
+            new ShapelessOreRecipe(
+                EnumIceCream.GRAPE.asStack(),
+                GrowthCraftMilk.fluids.cream.bucket.asStack(),
+                Items.milk_bucket,
+                Items.bowl,
+                Items.sugar,
+                "foodGrapes"));
 
         // Ice Cream - Apple
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumIceCream.APPLE.asStack(),
-                        GrowthCraftMilk.fluids.cream.bucket.asStack(),
-                        Items.milk_bucket,
-                        Items.bowl,
-                        Items.sugar,
-                        "foodApple"));
+            new ShapelessOreRecipe(
+                EnumIceCream.APPLE.asStack(),
+                GrowthCraftMilk.fluids.cream.bucket.asStack(),
+                Items.milk_bucket,
+                Items.bowl,
+                Items.sugar,
+                "foodApple"));
 
         // Ice Cream - Honey
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumIceCream.HONEY.asStack(),
-                        GrowthCraftMilk.fluids.cream.bucket.asStack(),
-                        Items.milk_bucket,
-                        Items.bowl,
-                        Items.sugar,
-                        "honeyDrop"));
+            new ShapelessOreRecipe(
+                EnumIceCream.HONEY.asStack(),
+                GrowthCraftMilk.fluids.cream.bucket.asStack(),
+                Items.milk_bucket,
+                Items.bowl,
+                Items.sugar,
+                "honeyDrop"));
 
         // Ice Cream - Melon
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        EnumIceCream.WATERMELON.asStack(),
-                        GrowthCraftMilk.fluids.cream.bucket.asStack(),
-                        Items.milk_bucket,
-                        Items.bowl,
-                        Items.sugar,
-                        "foodMelon"));
+            new ShapelessOreRecipe(
+                EnumIceCream.WATERMELON.asStack(),
+                GrowthCraftMilk.fluids.cream.bucket.asStack(),
+                Items.milk_bucket,
+                Items.bowl,
+                Items.sugar,
+                "foodMelon"));
 
         // Cheese Cloth
         GameRegistry.addRecipe(new ShapedOreRecipe(cheeseCloth.asStack(), "sss", "s s", "sss", 's', Items.string));

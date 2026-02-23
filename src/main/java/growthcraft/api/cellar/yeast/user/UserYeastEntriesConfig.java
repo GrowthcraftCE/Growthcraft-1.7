@@ -54,7 +54,7 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig {
 
         final UserYeastEntry brewers = new UserYeastEntry(brewersYeast, 1, new ArrayList<String>());
         brewers.setComment(
-                "Brewers yeast is the default yeast, which appears in all other biomes that are filled by the Lager or Ethereal");
+            "Brewers yeast is the default yeast, which appears in all other biomes that are filled by the Lager or Ethereal");
 
         final UserYeastEntry lager = new UserYeastEntry(lagerYeast, 10, new ArrayList<String>());
         lager.setComment("Lager yeast is found in COLD biomes, think snow places!");
@@ -111,8 +111,8 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig {
                     try {
                         final BiomeDictionary.Type biomeType = BiomeUtils.fetchBiomeType(biome);
                         CellarRegistry.instance()
-                                .yeast()
-                                .addYeastToBiomeType(itemstack, entry.weight, biomeType);
+                            .yeast()
+                            .addYeastToBiomeType(itemstack, entry.weight, biomeType);
                         logger.debug("Added user yeast {%s} to biome type '%s'", itemstack, biome);
                     } catch (BiomeUtils.BiomeTypeNotFound ex) {
                         logger.error("A biome type '%s' for entry {%s} could not be found.", biome, entry);
@@ -123,8 +123,8 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig {
             if (entry.biome_names != null) {
                 for (String biomeName : entry.biome_names) {
                     CellarRegistry.instance()
-                            .yeast()
-                            .addYeastToBiomeByName(itemstack, entry.weight, biomeName);
+                        .yeast()
+                        .addYeastToBiomeByName(itemstack, entry.weight, biomeName);
                     logger.debug("Added user yeast {%s} to biome '%s'", itemstack, biomeName);
                 }
             }

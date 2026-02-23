@@ -21,17 +21,17 @@ public class VillageHandlerBeesApiarist implements IVillageTradeHandler, IVillag
     @SuppressWarnings({"rawtypes", "unchecked"})
     public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random) {
         recipeList.add(
-                new MerchantRecipe(
-                        new ItemStack(Items.emerald, 1 + random.nextInt(2)),
-                        GrowthCraftBees.items.honeyJar.asStack(1, 2)));
+            new MerchantRecipe(
+                new ItemStack(Items.emerald, 1 + random.nextInt(2)),
+                GrowthCraftBees.items.honeyJar.asStack(1, 2)));
         recipeList.add(
-                new MerchantRecipe(
-                        new ItemStack(Items.emerald, 1 + random.nextInt(2)),
-                        GrowthCraftBees.items.honeyCombFilled.asStack(7)));
+            new MerchantRecipe(
+                new ItemStack(Items.emerald, 1 + random.nextInt(2)),
+                GrowthCraftBees.items.honeyCombFilled.asStack(7)));
         recipeList.add(
-                new MerchantRecipe(
-                        new ItemStack(Items.emerald, 1 + random.nextInt(2)),
-                        GrowthCraftBees.items.bee.asStack(3, 5)));
+            new MerchantRecipe(
+                new ItemStack(Items.emerald, 1 + random.nextInt(2)),
+                GrowthCraftBees.items.bee.asStack(3, 5)));
     }
 
     @Override

@@ -153,7 +153,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 
         // The fluid is too hot to fill with
         if (resource.getFluid()
-                .getTemperature() > 373) {
+            .getTemperature() > 373) {
             return 0;
         }
 
@@ -165,7 +165,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
             }
 
             final FluidStack stack = FluidStack
-                    .loadFluidStackFromNBT(container.stackTagCompound.getCompoundTag("Fluid"));
+                .loadFluidStackFromNBT(container.stackTagCompound.getCompoundTag("Fluid"));
 
             if (stack == null) {
                 return Math.min(capacity, amount);
@@ -275,8 +275,8 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
         final FluidStack fluidstack = getFluid(stack);
         if (fluidstack != null) {
             return CellarRegistry.instance()
-                    .booze()
-                    .getBoozeEntry(fluidstack.getFluid());
+                .booze()
+                .getBoozeEntry(fluidstack.getFluid());
         }
         return null;
     }
@@ -306,12 +306,12 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
     protected void applyEffects(ItemStack stack, World world, EntityPlayer player) {
         final FluidStack fluidstack = getFluid(stack);
         final boolean cancelled = GrowthCraftCellar.CELLAR_BUS
-                .post(new EventWaterBag.PreApplyEffects(stack, world, player));
+            .post(new EventWaterBag.PreApplyEffects(stack, world, player));
         if (!cancelled) {
             if (fluidstack != null) {
                 BoozeUtils.addEffects(fluidstack.getFluid(), stack, world, player);
                 player.getFoodStats()
-                        .addStats(getHealAmount(stack), getSaturation(stack));
+                    .addStats(getHealAmount(stack), getSaturation(stack));
             }
             GrowthCraftCellar.CELLAR_BUS.post(new EventWaterBag.PostApplyEffects(stack, world, player));
         }
@@ -324,7 +324,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
             // player.getFoodStats().func_151686_a(this, stack);
 
             final boolean cancelled = GrowthCraftCellar.CELLAR_BUS
-                    .post(new EventWaterBag.PreDrink(stack, world, player));
+                .post(new EventWaterBag.PreDrink(stack, world, player));
             if (!cancelled) {
                 world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
                 if (!world.isRemote) {
@@ -407,18 +407,18 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
             if (GrcCoreState.showDetailedInformation()) {
                 final String fluidname = UnitFormatter.fluidNameForContainer(fluidstack);
                 list.add(
-                        GrcI18n.translate(
-                                "grc.cellar.format.fluid_container.contents",
-                                fluidname,
-                                fluidstack.amount,
-                                getCapacity(stack)));
+                    GrcI18n.translate(
+                        "grc.cellar.format.fluid_container.contents",
+                        fluidname,
+                        fluidstack.amount,
+                        getCapacity(stack)));
                 final Fluid booze = fluidstack.getFluid();
                 BoozeUtils.addEffectInformation(booze, stack, player, list, bool);
             } else {
                 list.add(
-                        EnumChatFormatting.GRAY + GrcI18n.translate(
-                                "grc.tooltip.detailed_information",
-                                EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
+                    EnumChatFormatting.GRAY + GrcI18n.translate(
+                        "grc.tooltip.detailed_information",
+                        EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
             }
         }
     }

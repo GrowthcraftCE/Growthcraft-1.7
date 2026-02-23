@@ -76,8 +76,8 @@ public class UserVinesConfig extends AbstractUserJSONConfig {
         }
 
         CoreRegistry.instance()
-                .vineDrops()
-                .addVineEntry(entry.block.getBlock(), entry.block.meta);
+            .vineDrops()
+            .addVineEntry(entry.block.getBlock(), entry.block.meta);
     }
 
     @Override

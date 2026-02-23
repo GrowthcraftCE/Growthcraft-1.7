@@ -48,8 +48,8 @@ public class ForestryModule extends ForestryModuleBase {
     private void maybeAddBee(Item item) {
         if (item != null) {
             GrowthCraftBees.getUserBeesConfig()
-                    .addDefault(item)
-                    .setComment("From Forestry");
+                .addDefault(item)
+                .setComment("From Forestry");
         }
     }
 
@@ -63,15 +63,15 @@ public class ForestryModule extends ForestryModuleBase {
         int offset = 0;
         for (EnumBeeBoxForestry[] row : EnumBeeBoxForestry.ROWS) {
             final BlockTypeDefinition<? extends BlockBeeBox> beeBox = GrowthCraftBees.blocks
-                    .newTypedDefinition(new BlockBeeBoxForestry(row, offset, i, false));
+                .newTypedDefinition(new BlockBeeBoxForestry(row, offset, i, false));
             final BlockTypeDefinition<? extends BlockBeeBox> beeBoxFP = GrowthCraftBees.blocks
-                    .newTypedDefinition(new BlockBeeBoxForestry(row, offset, i, true));
+                .newTypedDefinition(new BlockBeeBoxForestry(row, offset, i, true));
             beeBox.getBlock()
-                    .setFlammability(20)
-                    .setFireSpreadSpeed(5)
-                    .setHarvestLevel("axe", 0);
+                .setFlammability(20)
+                .setFireSpreadSpeed(5)
+                .setHarvestLevel("axe", 0);
             beeBoxFP.getBlock()
-                    .setHarvestLevel("axe", 0);
+                .setHarvestLevel("axe", 0);
             GrowthCraftBees.blocks.beeBoxesForestry.add(beeBox);
             GrowthCraftBees.blocks.beeBoxesForestryFireproof.add(beeBoxFP);
             beeBox.register(String.format("grc.BeeBox.Forestry.%d.%s", i, "Normal"), ItemBlockBeeBox.class);
@@ -95,7 +95,7 @@ public class ForestryModule extends ForestryModuleBase {
 
             {
                 final BlockTypeDefinition<? extends BlockBeeBox> beeBox = GrowthCraftBees.blocks.beeBoxesForestry
-                        .get(en.row);
+                    .get(en.row);
                 if (beeBox != null) {
                     final ItemStack planks = en.getForestryPlanksStack();
                     if (planks != null) {
@@ -105,7 +105,7 @@ public class ForestryModule extends ForestryModuleBase {
             }
             {
                 final BlockTypeDefinition<? extends BlockBeeBox> beeBoxFP = GrowthCraftBees.blocks.beeBoxesForestryFireproof
-                        .get(en.row);
+                    .get(en.row);
                 if (beeBoxFP != null) {
                     final ItemStack planks = en.getForestryFireproofPlanksStack();
                     if (planks != null) {
@@ -120,25 +120,25 @@ public class ForestryModule extends ForestryModuleBase {
     @Optional.Method(modid = "Forestry")
     protected void integrate() {
         if (ForestryFluids.SHORT_MEAD.exists()) CoreRegistry.instance()
-                .fluidDictionary()
-                .addFluidTags(ForestryFluids.SHORT_MEAD.getFluid(), BoozeTag.YOUNG, BeesFluidTag.MEAD);
+            .fluidDictionary()
+            .addFluidTags(ForestryFluids.SHORT_MEAD.getFluid(), BoozeTag.YOUNG, BeesFluidTag.MEAD);
 
         final ItemStack emptyComb = GrowthCraftBees.items.honeyCombEmpty.asStack();
         final ItemStack fullComb = GrowthCraftBees.items.honeyCombFilled.asStack();
         if (ForestryItems.BEESWAX.exists()) recipes().centrifugeManager
-                .addRecipe(20, emptyComb, ImmutableMap.of(ForestryItems.BEESWAX.asStack(), 1.0f));
+            .addRecipe(20, emptyComb, ImmutableMap.of(ForestryItems.BEESWAX.asStack(), 1.0f));
 
         if (ForestryItems.BEESWAX.exists() && ForestryItems.HONEY_DROP.exists() && ForestryItems.HONEYDEW.exists()) {
             recipes().centrifugeManager.addRecipe(
-                    20,
-                    fullComb,
-                    ImmutableMap.of(
-                            ForestryItems.BEESWAX.asStack(),
-                            1.0f,
-                            ForestryItems.HONEY_DROP.asStack(),
-                            0.9f,
-                            ForestryItems.HONEYDEW.asStack(),
-                            0.1f));
+                20,
+                fullComb,
+                ImmutableMap.of(
+                    ForestryItems.BEESWAX.asStack(),
+                    1.0f,
+                    ForestryItems.HONEY_DROP.asStack(),
+                    0.9f,
+                    ForestryItems.HONEYDEW.asStack(),
+                    0.1f));
         }
     }
 }

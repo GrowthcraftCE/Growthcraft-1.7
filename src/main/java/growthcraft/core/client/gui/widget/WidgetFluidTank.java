@@ -49,15 +49,15 @@ public class WidgetFluidTank extends Widget {
             final int h = getHeight();
             if (tanks.getFluidAmountScaled(h, tankIndex) > 0) {
                 manager.gui.drawTank(
-                        manager.gui.getGuiX(),
-                        manager.gui.getGuiY(),
-                        getX(),
-                        getY(),
-                        w,
-                        h,
-                        tanks.getFluidAmountScaled(h, tankIndex),
-                        tanks.getFluidStack(tankIndex),
-                        tanks.getFluidTank(tankIndex));
+                    manager.gui.getGuiX(),
+                    manager.gui.getGuiY(),
+                    getX(),
+                    getY(),
+                    w,
+                    h,
+                    tanks.getFluidAmountScaled(h, tankIndex),
+                    tanks.getFluidStack(tankIndex),
+                    tanks.getFluidTank(tankIndex));
             }
             if (!ruleRect.isEmpty()) {
                 manager.gui.bindGuiTexture();
@@ -74,12 +74,12 @@ public class WidgetFluidTank extends Widget {
             if (!tanks.isFluidTankEmpty(tankIndex)) {
                 final String s = String.valueOf(tanks.getFluidAmount(tankIndex));
                 manager.gui.getFontRenderer()
-                        .drawStringWithShadow(
-                                s,
-                                rect.x2() - manager.gui.getFontRenderer()
-                                        .getStringWidth(s),
-                                rect.y2() - 8,
-                                numberColor);
+                    .drawStringWithShadow(
+                        s,
+                        rect.x2() - manager.gui.getFontRenderer()
+                            .getStringWidth(s),
+                        rect.y2() - 8,
+                        numberColor);
             }
         }
     }

@@ -18,7 +18,7 @@ public class SlotHoneyComb extends SlotInput {
     public boolean isItemValid(ItemStack stack) {
         // Only if the item is some kind of honey comb
         return BeesRegistry.instance()
-                .isItemHoneyComb(stack);
+            .isItemHoneyComb(stack);
     }
 
     @Override

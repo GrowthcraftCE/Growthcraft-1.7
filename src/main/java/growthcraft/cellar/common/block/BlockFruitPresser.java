@@ -134,21 +134,21 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
         if (flag && (meta == 0 || meta == 1)) {
             world.setBlockMetadataWithNotify(x, y, z, meta | 2, BlockFlags.UPDATE_AND_SYNC);
             world.playSoundEffect(
-                    (double) x + 0.5D,
-                    (double) y + 0.5D,
-                    (double) z + 0.5D,
-                    "tile.piston.out",
-                    0.5F,
-                    world.rand.nextFloat() * 0.25F + 0.6F);
+                (double) x + 0.5D,
+                (double) y + 0.5D,
+                (double) z + 0.5D,
+                "tile.piston.out",
+                0.5F,
+                world.rand.nextFloat() * 0.25F + 0.6F);
         } else if (!flag && (meta == 2 || meta == 3)) {
             world.setBlockMetadataWithNotify(x, y, z, meta & 1, BlockFlags.UPDATE_AND_SYNC);
             world.playSoundEffect(
-                    (double) x + 0.5D,
-                    (double) y + 0.5D,
-                    (double) z + 0.5D,
-                    "tile.piston.in",
-                    0.5F,
-                    world.rand.nextFloat() * 0.15F + 0.6F);
+                (double) x + 0.5D,
+                (double) y + 0.5D,
+                (double) z + 0.5D,
+                "tile.piston.in",
+                0.5F,
+                world.rand.nextFloat() * 0.15F + 0.6F);
         }
 
         world.markBlockForUpdate(x, y, z);

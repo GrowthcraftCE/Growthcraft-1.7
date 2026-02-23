@@ -61,8 +61,8 @@ public class TileEntityCheesePress extends GrcTileInventoryBase implements IItem
 
     private void setupWorkingRecipe() {
         final ICheesePressRecipe recipe = MilkRegistry.instance()
-                .cheesePress()
-                .findRecipe(invSlot.get());
+            .cheesePress()
+            .findRecipe(invSlot.get());
         if (recipe != workingRecipe) {
             if (workingRecipe != null) {
                 this.time = 0;
@@ -158,8 +158,8 @@ public class TileEntityCheesePress extends GrcTileInventoryBase implements IItem
         final ICheesePressRecipe recipe = getWorkingRecipe();
         if (recipe != null) {
             invSlot.set(
-                    recipe.getOutputItemStack()
-                            .copy());
+                recipe.getOutputItemStack()
+                    .copy());
             this.workingRecipe = null;
         }
     }

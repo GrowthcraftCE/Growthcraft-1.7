@@ -37,13 +37,13 @@ public class FAModule extends ModIntegrationBase {
     @Override
     public void doPreInit() {
         GrowthCraftBees.blocks.beeBoxFossilsAndArchaeology = GrowthCraftBees.blocks
-                .newTypedDefinition(new BlockBeeBoxFossilsAndArchaeology());
+            .newTypedDefinition(new BlockBeeBoxFossilsAndArchaeology());
     }
 
     @Override
     public void doRegister() {
         GrowthCraftBees.blocks.beeBoxFossilsAndArchaeology
-                .register("grc.beeBox.FossilsAndArchaeology", ItemBlockBeeBox.class);
+            .register("grc.beeBox.FossilsAndArchaeology", ItemBlockBeeBox.class);
     }
 
     @Override
@@ -52,12 +52,12 @@ public class FAModule extends ModIntegrationBase {
             final ItemStack planks = type.asPlanksItemStack();
             if (planks != null) {
                 GameRegistry.addShapedRecipe(
-                        GrowthCraftBees.blocks.beeBoxFossilsAndArchaeology.asStack(),
-                        " A ",
-                        "A A",
-                        "AAA",
-                        'A',
-                        planks);
+                    GrowthCraftBees.blocks.beeBoxFossilsAndArchaeology.asStack(),
+                    " A ",
+                    "A A",
+                    "AAA",
+                    'A',
+                    planks);
             }
         }
     }

@@ -63,7 +63,7 @@ public class WorldGenAppleTree extends WorldGenerator {
             } else {
                 final Block block2 = world.getBlock(x, y - 1, z);
                 final boolean isSoil = block2
-                        .canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, (BlockSapling) Blocks.sapling);
+                    .canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, (BlockSapling) Blocks.sapling);
 
                 if (isSoil && y < 256 - l - 1) {
                     block2.onPlantGrow(world, x, y - 1, z, x, y, z);
@@ -115,18 +115,18 @@ public class WorldGenAppleTree extends WorldGenerator {
 
     protected boolean func_150523_a(Block block) {
         return block.getMaterial() == Material.air || block.getMaterial() == Material.leaves
-                || block == Blocks.grass
-                || block == Blocks.dirt
-                || block == Blocks.log
-                || block == Blocks.log2
-                || block == Blocks.sapling
-                || block == Blocks.vine;
+            || block == Blocks.grass
+            || block == Blocks.dirt
+            || block == Blocks.log
+            || block == Blocks.log2
+            || block == Blocks.sapling
+            || block == Blocks.vine;
     }
 
     protected boolean isReplaceable(World world, int x, int y, int z) {
         final Block block = world.getBlock(x, y, z);
         return block.isAir(world, x, y, z) || block.isLeaves(world, x, y, z)
-                || block.isWood(world, x, y, z)
-                || func_150523_a(block);
+            || block.isWood(world, x, y, z)
+            || func_150523_a(block);
     }
 }

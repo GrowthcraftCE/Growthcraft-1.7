@@ -45,7 +45,7 @@ public class UnitFormatter {
 
     public static String fraction(String... args) {
         return Joiner.on(fractionSeparator)
-                .join(args);
+            .join(args);
     }
 
     public static String fractionNum(int a, int b) {
@@ -68,8 +68,8 @@ public class UnitFormatter {
         // if there is not a modifier defined, create one by joining the tag names
         if (modifierSrc.equals(modifierString)) {
             final Collection<FluidTag> tags = CoreRegistry.instance()
-                    .fluidDictionary()
-                    .getFluidTags(fluid);
+                .fluidDictionary()
+                .getFluidTags(fluid);
             if (tags == null || tags.size() == 0) return null;
             String str = "";
             for (FluidTag tag : tags) {
@@ -95,12 +95,12 @@ public class UnitFormatter {
 
             if (modifier != null) {
                 return GrcI18n.translate(
-                        "grc.format.booze.name",
-                        EnumChatFormatting.WHITE + fluidStack.getLocalizedName(),
-                        modifier);
+                    "grc.format.booze.name",
+                    EnumChatFormatting.WHITE + fluidStack.getLocalizedName(),
+                    modifier);
             } else {
                 return GrcI18n
-                        .translate("grc.format.fluid.name", EnumChatFormatting.WHITE + fluidStack.getLocalizedName());
+                    .translate("grc.format.fluid.name", EnumChatFormatting.WHITE + fluidStack.getLocalizedName());
             }
         }
         return null;

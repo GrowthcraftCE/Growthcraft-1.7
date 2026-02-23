@@ -58,10 +58,10 @@ public enum EnumBeeBoxForestry {
 
     public static final EnumBeeBoxForestry[] VALUES = values();
     public static final EnumBeeBoxForestry[][] ROWS = {
-            {LARCH, TEAK, ACACIA, LIME, CHESTNUT, WENGE, BAOBAB, SEQUOIA, KAPOK, EBONY, MAHOGANY, BALSA, WILLOW, WALNUT,
-                    GREENHEART},
-            {CHERRY, MAHOE, POPLAR, PALM, PAPAYA, PINE, PLUM, MAPLE, CITRUS, GIGANTEUM, IPE, PADAUK, COCOBOLO,
-                    ZEBRAWOOD}};
+        {LARCH, TEAK, ACACIA, LIME, CHESTNUT, WENGE, BAOBAB, SEQUOIA, KAPOK, EBONY, MAHOGANY, BALSA, WILLOW, WALNUT,
+            GREENHEART},
+        {CHERRY, MAHOE, POPLAR, PALM, PAPAYA, PINE, PLUM, MAPLE, CITRUS, GIGANTEUM, IPE, PADAUK, COCOBOLO,
+            ZEBRAWOOD}};
 
     public final String name;
     public final float hardness;

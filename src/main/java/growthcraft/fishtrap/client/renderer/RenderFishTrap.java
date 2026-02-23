@@ -45,17 +45,17 @@ public class RenderFishTrap implements ISimpleBlockRenderingHandler {
             tes.setColorOpaque_F(f * r, f * g, f * b);
             final float f2 = 1.0F - 0.125F;
             renderer
-                    .renderFaceXPos(block, (float) x - f2, y, z, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
+                .renderFaceXPos(block, (float) x - f2, y, z, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
             renderer
-                    .renderFaceXNeg(block, (float) x + f2, y, z, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
+                .renderFaceXNeg(block, (float) x + f2, y, z, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
             renderer
-                    .renderFaceYPos(block, x, (float) y - f2, z, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
+                .renderFaceYPos(block, x, (float) y - f2, z, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
             renderer
-                    .renderFaceYNeg(block, x, (float) y + f2, z, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
+                .renderFaceYNeg(block, x, (float) y + f2, z, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
             renderer
-                    .renderFaceZPos(block, x, y, (float) z - f2, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
+                .renderFaceZPos(block, x, y, (float) z - f2, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
             renderer
-                    .renderFaceZNeg(block, x, y, (float) z + f2, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
+                .renderFaceZNeg(block, x, y, (float) z + f2, renderer.getBlockIconFromSideAndMetadata(block, 0, meta));
 
             renderer.setOverrideBlockTexture(block.getIcon(0, 0));
             renderer.renderCrossedSquares(block, x, y, z);

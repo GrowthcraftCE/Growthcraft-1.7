@@ -74,7 +74,7 @@ public class CoreDataProvider implements IWailaDataProvider {
             String result = EnumChatFormatting.GRAY + GrcI18n.translate("grccore.device.heated.prefix");
             if (isHeated) {
                 result += EnumChatFormatting.WHITE
-                        + GrcI18n.translate("grccore.device.heated.multiplier.format", (int) (heat * 100));
+                    + GrcI18n.translate("grccore.device.heated.multiplier.format", (int) (heat * 100));
             } else {
                 result += EnumChatFormatting.WHITE + GrcI18n.translate("grccore.device.heated.state.false");
             }
@@ -85,8 +85,8 @@ public class CoreDataProvider implements IWailaDataProvider {
             final float prog = tag.getFloat("device_progress");
             if (prog > 0) {
                 final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grccore.device.progress.prefix")
-                        + EnumChatFormatting.WHITE
-                        + GrcI18n.translate("grccore.device.progress.format", (int) (prog * 100));
+                    + EnumChatFormatting.WHITE
+                    + GrcI18n.translate("grccore.device.progress.format", (int) (prog * 100));
                 tooltip.add(result);
             }
         }

@@ -64,7 +64,7 @@ public class UserBaitConfig extends AbstractUserJSONConfig {
         final BaitRegistry.BaitHandle handle = new BaitRegistry.BaitHandle(entry.base_rate, entry.multiplier);
         for (IMultiItemStacks item : entry.item.getMultiItemStacks()) {
             FishTrapRegistry.instance()
-                    .addBait(item, handle);
+                .addBait(item, handle);
         }
     }
 

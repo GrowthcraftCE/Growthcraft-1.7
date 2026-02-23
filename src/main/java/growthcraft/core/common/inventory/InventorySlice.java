@@ -92,7 +92,7 @@ public class InventorySlice implements IInventory {
     public ItemStack mergeStackBang(ItemStack stack) {
         if (stack == null) return null;
         InventoryProcessor.instance()
-                .mergeWithSlots(this, stack);
+            .mergeWithSlots(this, stack);
         return stack.stackSize <= 0 ? null : stack;
     }
 

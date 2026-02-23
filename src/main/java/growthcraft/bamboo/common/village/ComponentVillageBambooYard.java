@@ -22,21 +22,21 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 
     // Design by Ar97x
     private static final String[][] bambooYardSchema = {{
-            // y: -1
-            "           ", "           ", "           ", "  p     p  ", "     ~     ", "    ~~~    ", "   ~~~~~   ",
-            "    ~~~    ", "     ~     ", "  p     p  ", "           ", "           "},
-            {
-                    // y: 0
-                    "    pDp    ", "ppppp ppppp", "p         p", "p t     t p", "p    s    p", "p   s s   p", "p  s   s  p",
-                    "p   s s   p", "p    s    p", "p t     t p", "p         p", "ppppppppppp"},
-            {
-                    // y: 1
-                    "    WdW    ", "W   W W   W", "           ", "           ", "           ", "           ", "           ",
-                    "           ", "           ", "           ", "           ", "W         W"},
-            {
-                    // y: 2
-                    "    WWW    ", "WWWWW WWWWW", "W         W", "W         W", "W         W", "W         W", "W         W",
-                    "W         W", "W         W", "W         W", "W         W", "WWWWWWWWWWW"},};
+        // y: -1
+        "           ", "           ", "           ", "  p     p  ", "     ~     ", "    ~~~    ", "   ~~~~~   ",
+        "    ~~~    ", "     ~     ", "  p     p  ", "           ", "           "},
+        {
+            // y: 0
+            "    pDp    ", "ppppp ppppp", "p         p", "p t     t p", "p    s    p", "p   s s   p", "p  s   s  p",
+            "p   s s   p", "p    s    p", "p t     t p", "p         p", "ppppppppppp"},
+        {
+            // y: 1
+            "    WdW    ", "W   W W   W", "           ", "           ", "           ", "           ", "           ",
+            "           ", "           ", "           ", "           ", "W         W"},
+        {
+            // y: 2
+            "    WWW    ", "WWWWW WWWWW", "W         W", "W         W", "W         W", "W         W", "W         W",
+            "W         W", "W         W", "W         W", "W         W", "WWWWWWWWWWW"},};
 
     // DO NOT REMOVE
     public ComponentVillageBambooYard() {
@@ -55,7 +55,7 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
         // the height of the structure is 15 blocks, since the maximum height of bamboo is 12~14 blocks (+1 for the
         // water layer)
         final StructureBoundingBox structureboundingbox = StructureBoundingBox
-                .getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 16, 12, coordBaseMode);
+            .getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 16, 12, coordBaseMode);
         if (canVillageGoDeeper(structureboundingbox)) {
             if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
                 return new ComponentVillageBambooYard(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -100,16 +100,16 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 
         // okay folks, no BIG D jokes here
         map.put(
-                'D',
-                new BlockEntry(
-                        GrowthCraftBamboo.blocks.bambooDoor.getBlock(),
-                        this.getMetadataWithOffset(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), 2)));
+            'D',
+            new BlockEntry(
+                GrowthCraftBamboo.blocks.bambooDoor.getBlock(),
+                this.getMetadataWithOffset(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), 2)));
         // top of the door brought forward
         map.put(
-                'd',
-                new BlockEntry(
-                        GrowthCraftBamboo.blocks.bambooDoor.getBlock(),
-                        this.getMetadataWithOffset(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), 8 | 1)));
+            'd',
+            new BlockEntry(
+                GrowthCraftBamboo.blocks.bambooDoor.getBlock(),
+                this.getMetadataWithOffset(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), 8 | 1)));
         map.put('p', new BlockEntry(GrowthCraftBamboo.blocks.bambooBlock.getBlock(), 0));
         map.put('s', new BlockEntry(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock(), 0));
         map.put('t', new BlockEntry(Blocks.torch, 0));

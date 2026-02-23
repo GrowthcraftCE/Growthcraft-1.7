@@ -34,7 +34,7 @@ public class ItemHopSeeds extends GrcItemBase implements IPlantable {
             return false;
         } else if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack)) {
             if (BlockCheck.canSustainPlant(world, x, y, z, ForgeDirection.UP, GrowthCraftHops.blocks.hopVine.getBlock())
-                    && BlockCheck.isRope(world, x, y + 1, z)) {
+                && BlockCheck.isRope(world, x, y + 1, z)) {
                 world.setBlock(x, y + 1, z, GrowthCraftHops.blocks.hopVine.getBlock());
                 --stack.stackSize;
                 return true;

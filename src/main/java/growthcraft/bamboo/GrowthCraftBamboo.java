@@ -36,10 +36,10 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(
-        modid = GrowthCraftBamboo.MOD_ID,
-        name = GrowthCraftBamboo.MOD_NAME,
-        version = GrowthCraftBamboo.MOD_VERSION,
-        dependencies = "required-after:Growthcraft")
+    modid = GrowthCraftBamboo.MOD_ID,
+    name = GrowthCraftBamboo.MOD_NAME,
+    version = GrowthCraftBamboo.MOD_VERSION,
+    dependencies = "required-after:Growthcraft")
 public class GrowthCraftBamboo {
 
     public static final String MOD_ID = "Growthcraft|Bamboo";
@@ -77,9 +77,9 @@ public class GrowthCraftBamboo {
 
         if (config.generateBambooBiome) {
             bambooBiome = (new BiomeGenBamboo(config.bambooBiomeID)).setColor(353825)
-                    .setBiomeName("BambooForest")
-                    .func_76733_a(5159473)
-                    .setTemperatureRainfall(0.7F, 0.8F);
+                .setBiomeName("BambooForest")
+                .func_76733_a(5159473)
+                .setTemperatureRainfall(0.7F, 0.8F);
         }
 
         register();
@@ -103,40 +103,40 @@ public class GrowthCraftBamboo {
         // ====================
         GameRegistry.addShapedRecipe(blocks.bambooWall.asStack(6), "###", "###", '#', blocks.bambooBlock.getBlock());
         GameRegistry
-                .addShapedRecipe(blocks.bambooStairs.asStack(4), "#  ", "## ", "###", '#', blocks.bambooBlock.getBlock());
+            .addShapedRecipe(blocks.bambooStairs.asStack(4), "#  ", "## ", "###", '#', blocks.bambooBlock.getBlock());
         GameRegistry.addShapedRecipe(blocks.bambooSingleSlab.asStack(6), "###", '#', blocks.bambooBlock.getBlock());
         GameRegistry
-                .addShapedRecipe(items.bambooDoorItem.asStack(), "##", "##", "##", '#', blocks.bambooBlock.getBlock());
+            .addShapedRecipe(items.bambooDoorItem.asStack(), "##", "##", "##", '#', blocks.bambooBlock.getBlock());
         GameRegistry.addShapedRecipe(items.bambooRaft.asStack(), "A A", "AAA", 'A', blocks.bambooBlock.getBlock());
         GameRegistry.addShapedRecipe(blocks.bambooBlock.asStack(), "A", "A", 'A', blocks.bambooSingleSlab.getBlock());
         GameRegistry.addShapedRecipe(blocks.bambooBlock.asStack(), "AA", "AA", 'A', items.bamboo.getItem());
         GameRegistry.addShapedRecipe(blocks.bambooFence.asStack(3), "AAA", "AAA", 'A', items.bamboo.getItem());
         GameRegistry.addShapedRecipe(
-                blocks.bambooFenceGate.asStack(),
-                "ABA",
-                "ABA",
-                'A',
-                items.bamboo.getItem(),
-                'B',
-                blocks.bambooBlock.getBlock());
+            blocks.bambooFenceGate.asStack(),
+            "ABA",
+            "ABA",
+            'A',
+            items.bamboo.getItem(),
+            'B',
+            blocks.bambooBlock.getBlock());
         GameRegistry.addShapedRecipe(
-                blocks.bambooScaffold.asStack(16),
-                "BBB",
-                " A ",
-                "A A",
-                'A',
-                items.bamboo.getItem(),
-                'B',
-                blocks.bambooBlock.getBlock());
+            blocks.bambooScaffold.asStack(16),
+            "BBB",
+            " A ",
+            "A A",
+            'A',
+            items.bamboo.getItem(),
+            'B',
+            blocks.bambooBlock.getBlock());
         GameRegistry.addRecipe(
-                new ShapedOreRecipe(
-                        new ItemStack(Blocks.torch, 2),
-                        "A",
-                        "B",
-                        'A',
-                        items.bambooCoal.getItem(),
-                        'B',
-                        "stickWood"));
+            new ShapedOreRecipe(
+                new ItemStack(Blocks.torch, 2),
+                "A",
+                "B",
+                'A',
+                items.bambooCoal.getItem(),
+                'B',
+                "stickWood"));
 
         MapGenHelper.registerVillageStructure(ComponentVillageBambooYard.class, "grc.bambooyard");
 
@@ -192,7 +192,7 @@ public class GrowthCraftBamboo {
     public void init(FMLInitializationEvent event) {
         final VillageHandlerBamboo handler = new VillageHandlerBamboo();
         VillagerRegistry.instance()
-                .registerVillageCreationHandler(handler);
+            .registerVillageCreationHandler(handler);
         modules.init();
     }
 

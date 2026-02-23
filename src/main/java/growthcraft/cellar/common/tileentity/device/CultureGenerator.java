@@ -79,8 +79,8 @@ public class CultureGenerator extends DeviceProgressive {
     @Override
     public void update() {
         final ICultureRecipe activeRecipe = CellarRegistry.instance()
-                .culturing()
-                .findRecipe(fluidSlot.get(), heatComponent.getHeatMultiplier());
+            .culturing()
+            .findRecipe(fluidSlot.get(), heatComponent.getHeatMultiplier());
 
         if (isRecipeValid(activeRecipe)) {
             setTimeMax(activeRecipe.time());

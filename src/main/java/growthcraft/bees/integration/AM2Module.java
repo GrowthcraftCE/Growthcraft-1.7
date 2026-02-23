@@ -37,7 +37,7 @@ public class AM2Module extends ModIntegrationBase {
     @Override
     public void doPreInit() {
         GrowthCraftBees.blocks.beeBoxArsMagica2 = GrowthCraftBees.blocks
-                .newTypedDefinition(new BlockBeeBoxArsMagica2());
+            .newTypedDefinition(new BlockBeeBoxArsMagica2());
     }
 
     @Override
@@ -51,12 +51,12 @@ public class AM2Module extends ModIntegrationBase {
             final ItemStack planks = type.asPlanksItemStack();
             if (planks != null) {
                 GameRegistry.addShapedRecipe(
-                        GrowthCraftBees.blocks.beeBoxArsMagica2.asStack(),
-                        " A ",
-                        "A A",
-                        "AAA",
-                        'A',
-                        planks);
+                    GrowthCraftBees.blocks.beeBoxArsMagica2.asStack(),
+                    " A ",
+                    "A A",
+                    "AAA",
+                    'A',
+                    planks);
             }
         }
     }

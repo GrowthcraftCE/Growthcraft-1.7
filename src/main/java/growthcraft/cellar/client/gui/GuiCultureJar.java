@@ -53,9 +53,9 @@ public class GuiCultureJar extends GuiCellar<ContainerCultureJar, TileEntityCult
         widgets.add(new WidgetFluidTank(widgets, 0, 36, 14, 16, 58).setRuleOverlay(176, 53, 16, 58));
         widgets.add(new WidgetHeatIcon(widgets, 82, 56, 14, 14).setTextureRect(176, 17, 14, 14));
         widgets.add(
-                new WidgetDeviceProgressIcon(widgets, 55, 35, 22, 17)
-                        .setProgressDirection(WidgetDeviceProgressIcon.ProgressDirection.LEFT_TO_RIGHT)
-                        .setTextureRect(176, 0, 22, 17));
+            new WidgetDeviceProgressIcon(widgets, 55, 35, 22, 17)
+                .setProgressDirection(WidgetDeviceProgressIcon.ProgressDirection.LEFT_TO_RIGHT)
+                .setTextureRect(176, 0, 22, 17));
 
         if (GrowthCraftCellar.getConfig().enableDiscardButton) {
             this.discardButton = new GuiButtonDiscard(guiResource, 1, guiLeft + 116, guiTop + 54);
@@ -70,7 +70,7 @@ public class GuiCultureJar extends GuiCellar<ContainerCultureJar, TileEntityCult
     @Override
     protected void actionPerformed(GuiButton butn) {
         GrowthCraftCellar.packetPipeline
-                .sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
+            .sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
     }
 
     @Override

@@ -27,7 +27,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import javax.annotation.Nonnull;
 
 public class PotionEffectFactoryRegistry extends AbstractClassRegistry<IPotionEffectFactory>
-        implements IPotionEffectFactoryRegistry {
+    implements IPotionEffectFactoryRegistry {
 
     private ILogger logger = NullLogger.INSTANCE;
 

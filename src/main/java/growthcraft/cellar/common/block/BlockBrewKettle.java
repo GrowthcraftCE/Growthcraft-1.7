@@ -29,7 +29,7 @@ import java.util.Random;
 public class BlockBrewKettle extends BlockCellarContainer {
 
     private final BBox kettleContentsBB = BBox.newCube(2, 4, 2, 12, 10, 12)
-            .scale(1f / 16f);
+        .scale(1f / 16f);
     private final boolean dropItemsInBrewKettle = GrowthCraftCellar.getConfig().dropItemsInBrewKettle;
     private final boolean fillsWithRain = GrowthCraftCellar.getConfig().brewKettleFillsWithRain;
     private final boolean setFireToFallenLivingEntities = GrowthCraftCellar.getConfig().setFireToFallenLivingEntities;

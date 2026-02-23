@@ -21,12 +21,12 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 
     // Design by Ar97x
     private static final String[][] appleFarmSchema = {
-            {"x---x x---x", "|         |", "|         |", "|         |", "|         |", "|         |", "|         |",
-                    "|         |", "|         |", "|         |", "x---------x"},
-            {"fffffgfffff", "f         f", "f         f", "f         f", "f         f", "f         f", "f         f",
-                    "f         f", "f         f", "f         f", "fffffffffff"},
-            {"t   t t   t", "           ", "           ", "           ", "           ", "           ", "           ",
-                    "           ", "           ", "           ", "t         t"},};
+        {"x---x x---x", "|         |", "|         |", "|         |", "|         |", "|         |", "|         |",
+            "|         |", "|         |", "|         |", "x---------x"},
+        {"fffffgfffff", "f         f", "f         f", "f         f", "f         f", "f         f", "f         f",
+            "f         f", "f         f", "f         f", "fffffffffff"},
+        {"t   t t   t", "           ", "           ", "           ", "           ", "           ", "           ",
+            "           ", "           ", "           ", "t         t"},};
 
     // DO NOT REMOVE
     public ComponentVillageAppleFarm() {
@@ -43,7 +43,7 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
     public static ComponentVillageAppleFarm buildComponent(Start startPiece, List list, Random random, int x, int y,
                                                            int z, int coordBaseMode, int par7) {
         final StructureBoundingBox structureboundingbox = StructureBoundingBox
-                .getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 11, 11, coordBaseMode);
+            .getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 11, 11, coordBaseMode);
         if (canVillageGoDeeper(structureboundingbox)) {
             if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
                 return new ComponentVillageAppleFarm(startPiece, par7, random, structureboundingbox, coordBaseMode);

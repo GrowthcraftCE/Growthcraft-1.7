@@ -242,6 +242,6 @@ public class DeviceInventorySlot {
      */
     public ItemStack yank() {
         return InventoryProcessor.instance()
-                .yankSlot(inventory, index);
+            .yankSlot(inventory, index);
     }
 }

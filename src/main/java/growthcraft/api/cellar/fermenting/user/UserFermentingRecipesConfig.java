@@ -61,10 +61,10 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig {
                            int time) {
         for (ItemKeySchema itemKey : ItemKeySchema.createMulti(stack)) {
             addDefaultSchemas(
-                    itemKey,
-                    new MultiFluidStackSchema(MultiStacksUtil.toMultiFluidStacks(inputFluid)),
-                    new FluidStackSchema(outputFluid),
-                    time);
+                itemKey,
+                new MultiFluidStackSchema(MultiStacksUtil.toMultiFluidStacks(inputFluid)),
+                new FluidStackSchema(outputFluid),
+                time);
         }
     }
 
@@ -103,8 +103,8 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig {
         for (IMultiItemStacks item : recipe.item.getMultiItemStacks()) {
             for (IMultiFluidStacks inputFluid : recipe.input_fluid.getMultiFluidStacks()) {
                 CellarRegistry.instance()
-                        .fermenting()
-                        .addRecipe(recipe.output_fluid.asFluidStack(), inputFluid, item, recipe.time);
+                    .fermenting()
+                    .addRecipe(recipe.output_fluid.asFluidStack(), inputFluid, item, recipe.time);
             }
         }
     }

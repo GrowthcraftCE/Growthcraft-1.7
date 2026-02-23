@@ -73,7 +73,7 @@ public class WorldGenBamboo extends WorldGenAbstractTree {
             } else {
                 final Block soil = world.getBlock(i, j - 1, k);
                 final boolean isSoil = soil != null
-                        && soil.canSustainPlant(world, i, j - 1, k, ForgeDirection.UP, (BlockSapling) Blocks.sapling);
+                    && soil.canSustainPlant(world, i, j - 1, k, ForgeDirection.UP, (BlockSapling) Blocks.sapling);
 
                 int it;
                 Block block;
@@ -93,7 +93,7 @@ public class WorldGenBamboo extends WorldGenAbstractTree {
                                 block = world.getBlock(x, y, z);
 
                                 if ((Math.abs(x2) != 1 || Math.abs(z2) != 1)
-                                        && (block == null || block.canBeReplacedByLeaves(world, x, y, z))) {
+                                    && (block == null || block.canBeReplacedByLeaves(world, x, y, z))) {
                                     this.setBlockAndNotifyAdequately(world, x, y, z, this.leaves, 0);
                                 }
                             }
@@ -170,19 +170,19 @@ public class WorldGenBamboo extends WorldGenAbstractTree {
     @Override
     protected boolean func_150523_a(Block block) {
         return block.getMaterial() == Material.air || block.getMaterial() == Material.leaves
-                || block == Blocks.grass
-                || block == Blocks.dirt
-                || block == Blocks.log
-                || block == Blocks.log2
-                || block == Blocks.sapling
-                || block == Blocks.vine;
+            || block == Blocks.grass
+            || block == Blocks.dirt
+            || block == Blocks.log
+            || block == Blocks.log2
+            || block == Blocks.sapling
+            || block == Blocks.vine;
     }
 
     @Override
     protected boolean isReplaceable(World world, int x, int y, int z) {
         final Block block = world.getBlock(x, y, z);
         return block.isAir(world, x, y, z) || block.isLeaves(world, x, y, z)
-                || block.isWood(world, x, y, z)
-                || func_150523_a(block);
+            || block.isWood(world, x, y, z)
+            || func_150523_a(block);
     }
 }

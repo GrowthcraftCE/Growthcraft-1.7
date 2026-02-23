@@ -78,7 +78,7 @@ public class EffectList extends AbstractEffectList {
             }
         } else if (effects.size() == 1) {
             effects.get(0)
-                    .getDescription(list);
+                .getDescription(list);
         }
     }
 }

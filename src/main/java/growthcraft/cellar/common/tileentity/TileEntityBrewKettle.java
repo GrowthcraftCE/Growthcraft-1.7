@@ -171,9 +171,9 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
         iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME.ordinal(), (int) brewKettle.getTime());
         iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME_MAX.ordinal(), (int) brewKettle.getTimeMax());
         iCrafting.sendProgressBarUpdate(
-                container,
-                BrewKettleDataID.HEAT_AMOUNT.ordinal(),
-                (int) (brewKettle.getHeatMultiplier() * 0x7FFF));
+            container,
+            BrewKettleDataID.HEAT_AMOUNT.ordinal(),
+            (int) (brewKettle.getHeatMultiplier() * 0x7FFF));
     }
 
     @Override
@@ -199,18 +199,18 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITil
         FluidStack f1 = null;
         if (this.getFluidStack(0) != null) {
             f0 = this.getFluidStack(0)
-                    .copy();
+                .copy();
         }
         if (this.getFluidStack(1) != null) {
             f1 = this.getFluidStack(1)
-                    .copy();
+                .copy();
         }
         this.clearTank(0);
         this.clearTank(1);
         this.getFluidTank(0)
-                .fill(f1, true);
+            .fill(f1, true);
         this.getFluidTank(1)
-                .fill(f0, true);
+            .fill(f0, true);
         markForUpdate();
     }
 

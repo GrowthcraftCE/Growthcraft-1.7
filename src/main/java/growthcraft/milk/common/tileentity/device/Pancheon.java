@@ -57,8 +57,8 @@ public class Pancheon extends DeviceProgressive {
      */
     private IPancheonRecipe getRecipe() {
         return MilkRegistry.instance()
-                .pancheon()
-                .getRecipe(inputSlot.get());
+            .pancheon()
+            .getRecipe(inputSlot.get());
     }
 
     /**

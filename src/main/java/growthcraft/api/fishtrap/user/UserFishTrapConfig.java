@@ -57,7 +57,7 @@ public class UserFishTrapConfig extends AbstractUserJSONConfig {
 
         for (FishTrapEntry obj : entry.getFishTrapEntries()) {
             FishTrapRegistry.instance()
-                    .addCatchToGroup(obj, entry.group);
+                .addCatchToGroup(obj, entry.group);
         }
     }
 

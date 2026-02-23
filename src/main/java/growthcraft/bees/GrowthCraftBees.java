@@ -45,10 +45,10 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(
-        modid = GrowthCraftBees.MOD_ID,
-        name = GrowthCraftBees.MOD_NAME,
-        version = GrowthCraftBees.MOD_VERSION,
-        dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@;after:Forestry")
+    modid = GrowthCraftBees.MOD_ID,
+    name = GrowthCraftBees.MOD_NAME,
+    version = GrowthCraftBees.MOD_VERSION,
+    dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@;after:Forestry")
 public class GrowthCraftBees {
 
     public static final String MOD_ID = "Growthcraft|Bees";
@@ -118,14 +118,14 @@ public class GrowthCraftBees {
 
         if (config.debugEnabled) {
             BeesRegistry.instance()
-                    .setLogger(logger);
+                .setLogger(logger);
             modules.setLogger(logger);
         }
 
         modules.add(CommonProxy.instance);
         if (config.debugEnabled) {
             BeesRegistry.instance()
-                    .setLogger(logger);
+                .setLogger(logger);
             modules.setLogger(logger);
         }
         modules.freeze();
@@ -145,20 +145,20 @@ public class GrowthCraftBees {
         modules.register();
         registerRecipes();
         userBeesConfig.addDefault(items.bee.asStack())
-                .setComment("Growthcraft's default bee");
+            .setComment("Growthcraft's default bee");
         BeesRegistry.instance()
-                .addHoneyComb(items.honeyCombEmpty.asStack(), items.honeyCombFilled.asStack());
+            .addHoneyComb(items.honeyCombEmpty.asStack(), items.honeyCombFilled.asStack());
         userFlowersConfig.addDefault(Blocks.red_flower);
         userFlowersConfig.addDefault(Blocks.yellow_flower);
         if (BopPlatform.isLoaded()) {
             userFlowersConfig.addDefault(
-                            new UserFlowerEntry("BiomesOPlenty", "flowers", OreDictionary.WILDCARD_VALUE).setEntryType("forced"))
-                    .setComment(
-                            "BiomesOPlenty flowers require a forced entry, in order for it to be placed by the bee box spawning.");
+                    new UserFlowerEntry("BiomesOPlenty", "flowers", OreDictionary.WILDCARD_VALUE).setEntryType("forced"))
+                .setComment(
+                    "BiomesOPlenty flowers require a forced entry, in order for it to be placed by the bee box spawning.");
             userFlowersConfig.addDefault(
-                            new UserFlowerEntry("BiomesOPlenty", "flowers2", OreDictionary.WILDCARD_VALUE).setEntryType("forced"))
-                    .setComment(
-                            "BiomesOPlenty flowers require a forced entry, in order for it to be placed by the bee box spawning.");
+                    new UserFlowerEntry("BiomesOPlenty", "flowers2", OreDictionary.WILDCARD_VALUE).setEntryType("forced"))
+                .setComment(
+                    "BiomesOPlenty flowers require a forced entry, in order for it to be placed by the bee box spawning.");
         }
     }
 
@@ -170,24 +170,24 @@ public class GrowthCraftBees {
 
         final ItemStack honeyStack = items.honeyCombFilled.asStack();
         GameRegistry.addShapelessRecipe(
-                items.honeyJar.asStack(),
-                honeyStack,
-                honeyStack,
-                honeyStack,
-                honeyStack,
-                honeyStack,
-                honeyStack,
-                Items.flower_pot);
+            items.honeyJar.asStack(),
+            honeyStack,
+            honeyStack,
+            honeyStack,
+            honeyStack,
+            honeyStack,
+            honeyStack,
+            Items.flower_pot);
     }
 
     private void postRegisterRecipes() {
         GameRegistry.addRecipe(new ShapedOreRecipe(blocks.beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
 
         GameRegistry.addRecipe(
-                new ShapelessMultiRecipe(
-                        items.honeyJar.asStack(),
-                        new TaggedFluidStacks(1000, BeesFluidTag.HONEY.name()),
-                        Items.flower_pot));
+            new ShapelessMultiRecipe(
+                items.honeyJar.asStack(),
+                new TaggedFluidStacks(1000, BeesFluidTag.HONEY.name()),
+                Items.flower_pot));
     }
 
     private void initVillageHandlers() {
@@ -196,15 +196,15 @@ public class GrowthCraftBees {
         final int apiaristID = config.villagerApiaristID;
         if (apiaristID > 0) {
             VillagerRegistry.instance()
-                    .registerVillagerId(apiaristID);
+                .registerVillagerId(apiaristID);
             VillagerRegistry.instance()
-                    .registerVillageTradeHandler(apiaristID, handler);
+                .registerVillageTradeHandler(apiaristID, handler);
         }
         VillagerRegistry.instance()
-                .registerVillageCreationHandler(handler);
+            .registerVillageCreationHandler(handler);
         if (brewerID > 0) {
             VillagerRegistry.instance()
-                    .registerVillageTradeHandler(brewerID, new VillageHandlerBees());
+                .registerVillageTradeHandler(brewerID, new VillageHandlerBees());
         }
     }
 

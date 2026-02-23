@@ -61,8 +61,8 @@ public class FluidTest {
     public static boolean hasTags(@Nullable Fluid fluid, FluidTag... tags) {
         if (FluidTest.isValid(fluid)) {
             return CoreRegistry.instance()
-                    .fluidDictionary()
-                    .hasFluidTags(fluid, tags);
+                .fluidDictionary()
+                .hasFluidTags(fluid, tags);
         }
         return false;
     }
@@ -70,8 +70,8 @@ public class FluidTest {
     public static boolean hasTags(@Nullable FluidStack stack, FluidTag... tags) {
         if (FluidTest.isValid(stack)) {
             return CoreRegistry.instance()
-                    .fluidDictionary()
-                    .hasFluidTags(stack.getFluid(), tags);
+                .fluidDictionary()
+                .hasFluidTags(stack.getFluid(), tags);
         }
         return false;
     }

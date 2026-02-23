@@ -51,7 +51,7 @@ public class ItemBlockCheeseBlock extends ItemBlock implements IItemTileBlock {
             final EnumCheeseType cheese = EnumCheeseType.getSafeById(stack.getItemDamage());
             cheese.writeToNBT(cheeseTag);
             cheese.stages.get(0)
-                    .writeToNBT(cheeseTag);
+                .writeToNBT(cheeseTag);
             tag.setTag("te_cheese_block", cheeseTag);
         }
         return tag.getCompoundTag("te_cheese_block");

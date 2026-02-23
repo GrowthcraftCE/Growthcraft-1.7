@@ -92,8 +92,8 @@ public class EffectChance extends AbstractEffect {
         this.chance = data.getFloat("chance");
         if (data.hasKey("effect")) {
             this.effect = CoreRegistry.instance()
-                    .getEffectsRegistry()
-                    .loadEffectFromNBT(data, "effect");
+                .getEffectsRegistry()
+                .loadEffectFromNBT(data, "effect");
         }
     }
 

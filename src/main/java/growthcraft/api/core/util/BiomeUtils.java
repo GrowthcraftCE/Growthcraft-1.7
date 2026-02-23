@@ -42,7 +42,7 @@ public class BiomeUtils {
         // I really shouldn't be doing this, but what choice do you have :(
         for (BiomeDictionary.Type type : BiomeDictionary.Type.values()) {
             if (type.name()
-                    .equals(upcasedName)) return type;
+                .equals(upcasedName)) return type;
         }
         throw new BiomeTypeNotFound("Biome type '" + name + "' not found.");
     }

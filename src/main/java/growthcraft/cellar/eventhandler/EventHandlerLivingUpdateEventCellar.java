@@ -15,13 +15,13 @@ public class EventHandlerLivingUpdateEventCellar {
 
         if (ent.isPotionActive(GrowthCraftCellar.potionTipsy)) {
             if (ent.getActivePotionEffect(GrowthCraftCellar.potionTipsy)
-                    .getDuration() == 0) {
+                .getDuration() == 0) {
                 ent.removePotionEffect(GrowthCraftCellar.potionTipsy.id);
                 return;
             }
 
             final int lvl = ent.getActivePotionEffect(GrowthCraftCellar.potionTipsy)
-                    .getAmplifier();
+                .getAmplifier();
 
             if (lvl >= 3) {
                 ent.addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 0));

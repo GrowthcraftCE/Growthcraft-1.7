@@ -91,13 +91,13 @@ public class RenderBambooWall implements ISimpleBlockRenderingHandler {
             int metaZpos = world.getBlockMetadata(x, y, z + 1);
 
             final boolean flagXneg = blk.canConnectWallTo(world, x - 1, y, z)
-                    || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
+                || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
             final boolean flagXpos = blk.canConnectWallTo(world, x + 1, y, z)
-                    || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
+                || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
             final boolean flagZneg = blk.canConnectWallTo(world, x, y, z - 1)
-                    || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
+                || (idZneg instanceof BlockStairs && (metaZneg & 3) == 2);
             final boolean flagZpos = blk.canConnectWallTo(world, x, y, z + 1)
-                    || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
+                || (idZpos instanceof BlockStairs && (metaZpos & 3) == 3);
 
             // XNEG
             if (flagXneg) {

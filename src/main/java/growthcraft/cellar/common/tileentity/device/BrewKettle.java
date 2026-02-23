@@ -107,8 +107,8 @@ public class BrewKettle extends DeviceBase {
 
     private BrewingRecipe findRecipe() {
         return CellarRegistry.instance()
-                .brewing()
-                .findRecipe(inputFluidSlot.get(), brewingSlot.get());
+            .brewing()
+            .findRecipe(inputFluidSlot.get(), brewingSlot.get());
     }
 
     public BrewingRecipe getWorkingRecipe() {

@@ -41,10 +41,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 
 @Mod(
-        modid = GrowthCraftMilk.MOD_ID,
-        name = GrowthCraftMilk.MOD_NAME,
-        version = GrowthCraftMilk.MOD_VERSION,
-        dependencies = GrowthCraftMilk.MOD_DEPENDENCIES)
+    modid = GrowthCraftMilk.MOD_ID,
+    name = GrowthCraftMilk.MOD_NAME,
+    version = GrowthCraftMilk.MOD_VERSION,
+    dependencies = GrowthCraftMilk.MOD_DEPENDENCIES)
 public class GrowthCraftMilk {
 
     public static final String MOD_ID = "Growthcraft|Milk";
@@ -80,7 +80,7 @@ public class GrowthCraftMilk {
         if (config.debugEnabled) {
             modules.setLogger(logger);
             MilkRegistry.instance()
-                    .setLogger(logger);
+                .setLogger(logger);
         }
         modules.add(blocks);
         modules.add(items);

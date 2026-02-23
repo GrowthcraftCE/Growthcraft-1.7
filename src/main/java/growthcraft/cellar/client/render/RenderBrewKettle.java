@@ -36,8 +36,8 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler {
             final BlockBrewKettle brewKettle = (BlockBrewKettle) block;
             final Tessellator tes = Tessellator.instance;
             final IIcon[] icon = {brewKettle.getIconByIndex(0), brewKettle.getIconByIndex(3),
-                    brewKettle.getIconByIndex(2), brewKettle.getIconByIndex(2), brewKettle.getIconByIndex(2),
-                    brewKettle.getIconByIndex(2)};
+                brewKettle.getIconByIndex(2), brewKettle.getIconByIndex(2), brewKettle.getIconByIndex(2),
+                brewKettle.getIconByIndex(2)};
             renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
             // Outer Kettle
             RenderUtils.renderInventoryBlockOverride(block, renderer, icon, tes);
@@ -47,59 +47,59 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler {
             GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
             // Inner Kettle
             RenderUtils.drawFace(
-                    RenderUtils.Face.ZNEG,
-                    block,
-                    renderer,
-                    tes,
-                    brewKettle.getIconByIndex(2),
-                    0.0D,
-                    0.0D,
-                    0.0F + 1.0F - f);
+                RenderUtils.Face.ZNEG,
+                block,
+                renderer,
+                tes,
+                brewKettle.getIconByIndex(2),
+                0.0D,
+                0.0D,
+                0.0F + 1.0F - f);
             RenderUtils.drawFace(
-                    RenderUtils.Face.ZPOS,
-                    block,
-                    renderer,
-                    tes,
-                    brewKettle.getIconByIndex(2),
-                    0.0D,
-                    0.0D,
-                    0.0F - 1.0F + f);
+                RenderUtils.Face.ZPOS,
+                block,
+                renderer,
+                tes,
+                brewKettle.getIconByIndex(2),
+                0.0D,
+                0.0D,
+                0.0F - 1.0F + f);
             RenderUtils.drawFace(
-                    RenderUtils.Face.XNEG,
-                    block,
-                    renderer,
-                    tes,
-                    brewKettle.getIconByIndex(2),
-                    0.0F + 1.0F - f,
-                    0.0D,
-                    0.0D);
+                RenderUtils.Face.XNEG,
+                block,
+                renderer,
+                tes,
+                brewKettle.getIconByIndex(2),
+                0.0F + 1.0F - f,
+                0.0D,
+                0.0D);
             RenderUtils.drawFace(
-                    RenderUtils.Face.XPOS,
-                    block,
-                    renderer,
-                    tes,
-                    brewKettle.getIconByIndex(2),
-                    0.0F - 1.0F + f,
-                    0.0D,
-                    0.0D);
+                RenderUtils.Face.XPOS,
+                block,
+                renderer,
+                tes,
+                brewKettle.getIconByIndex(2),
+                0.0F - 1.0F + f,
+                0.0D,
+                0.0D);
             RenderUtils.drawFace(
-                    RenderUtils.Face.YPOS,
-                    block,
-                    renderer,
-                    tes,
-                    brewKettle.getIconByIndex(1),
-                    0.0D,
-                    0.0F - 1.0F + 0.25F,
-                    0.0D);
+                RenderUtils.Face.YPOS,
+                block,
+                renderer,
+                tes,
+                brewKettle.getIconByIndex(1),
+                0.0D,
+                0.0F - 1.0F + 0.25F,
+                0.0D);
             RenderUtils.drawFace(
-                    RenderUtils.Face.YNEG,
-                    block,
-                    renderer,
-                    tes,
-                    brewKettle.getIconByIndex(1),
-                    0.0D,
-                    0.0F + 1.0F - 0.75F,
-                    0.0D);
+                RenderUtils.Face.YNEG,
+                block,
+                renderer,
+                tes,
+                brewKettle.getIconByIndex(1),
+                0.0D,
+                0.0F + 1.0F - 0.75F,
+                0.0D);
             GL11.glTranslatef(0.5F, 0.5F, 0.5F);
             renderer.setRenderBounds(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
         }
@@ -152,8 +152,8 @@ public class RenderBrewKettle implements ISimpleBlockRenderingHandler {
                         f = 1.0F;
                         tes.setColorOpaque_F(f * r, f * g, f * b);
                         f = te.getFluidAmount(i) * FLUID_HEIGHT
-                                / te.getFluidTank(i)
-                                .getCapacity();
+                            / te.getFluidTank(i)
+                            .getCapacity();
                         renderer.setRenderBounds(2 * d, 0.0D, 2 * d, 14 * d, 0.25F + f, 14 * d);
                         final IIcon icon = fluid.getIcon();
                         if (icon != null) {

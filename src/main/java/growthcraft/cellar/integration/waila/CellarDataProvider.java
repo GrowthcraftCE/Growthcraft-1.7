@@ -67,12 +67,12 @@ public class CellarDataProvider implements IWailaDataProvider {
         final TileEntity te = accessor.getTileEntity();
         if (block instanceof BlockFruitPresser) {
             tooltip.add(
-                    EnumChatFormatting.GRAY + GrcI18n.translate("grc.cellar.fruit_presser.state_prefix")
-                            + " "
-                            + EnumChatFormatting.WHITE
-                            + GrcI18n.translate(
-                            "grc.cellar.fruit_presser.state."
-                                    + ((BlockFruitPresser) block).getPressStateName(accessor.getMetadata())));
+                EnumChatFormatting.GRAY + GrcI18n.translate("grc.cellar.fruit_presser.state_prefix")
+                    + " "
+                    + EnumChatFormatting.WHITE
+                    + GrcI18n.translate(
+                    "grc.cellar.fruit_presser.state."
+                        + ((BlockFruitPresser) block).getPressStateName(accessor.getMetadata())));
         }
         final NBTTagCompound tag = accessor.getNBTData();
         if (config.getConfig("FermentBarrelExtras")) {
@@ -123,8 +123,8 @@ public class CellarDataProvider implements IWailaDataProvider {
 
     private void getFermentBarrelData(TileEntityFermentBarrel fermentBarrel, NBTTagCompound tag) {
         tag.setTag(
-                "item_modifier",
-                NBTHelper.writeItemStackToNBT(fermentBarrel.getStackInSlot(0), new NBTTagCompound()));
+            "item_modifier",
+            NBTHelper.writeItemStackToNBT(fermentBarrel.getStackInSlot(0), new NBTTagCompound()));
     }
 
     @Override

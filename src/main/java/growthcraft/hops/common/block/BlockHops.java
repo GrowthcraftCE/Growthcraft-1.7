@@ -91,17 +91,17 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 
             if (meta < HopsStage.BIG) {
                 if (allowGrowthResult == Event.Result.ALLOW
-                        || (random.nextInt((int) (this.hopVineGrowthRate / f) + 1) == 0)) {
+                    || (random.nextInt((int) (this.hopVineGrowthRate / f) + 1) == 0)) {
                     incrementGrowth(world, x, y, z, meta);
                 }
             } else if ((meta >= HopsStage.BIG) && canSpreadLeaves(world, x, y, z)) {
                 if (allowGrowthResult == Event.Result.ALLOW
-                        || (random.nextInt((int) (this.hopVineGrowthRate / f) + 1) == 0)) {
+                    || (random.nextInt((int) (this.hopVineGrowthRate / f) + 1) == 0)) {
                     spreadLeaves(world, x, y, z);
                 }
             } else {
                 if (allowGrowthResult == Event.Result.ALLOW
-                        || (random.nextInt((int) (this.hopVineFlowerSpawnRate / f) + 1) == 0)) {
+                    || (random.nextInt((int) (this.hopVineFlowerSpawnRate / f) + 1) == 0)) {
                     incrementGrowth(world, x, y, z, meta);
                 }
             }
@@ -241,8 +241,8 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 
     private boolean isVineRoot(World world, int x, int y, int z) {
         return world.getBlock(x, y, z) == this
-                && BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this)
-                && world.getBlockMetadata(x, y, z) >= HopsStage.BIG;
+            && BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this)
+            && world.getBlockMetadata(x, y, z) >= HopsStage.BIG;
     }
 
     /************
@@ -371,7 +371,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
         for (int l1 = -1; l1 <= 1; ++l1) {
             for (int i2 = -1; i2 <= 1; ++i2) {
                 final int j2 = world.getBiomeGenForCoords(x + i2, z + l1)
-                        .getBiomeFoliageColor(x + i2, y, z + l1);
+                    .getBiomeFoliageColor(x + i2, y, z + l1);
                 r += (j2 & 16711680) >> 16;
                 g += (j2 & 65280) >> 8;
                 b += j2 & 255;

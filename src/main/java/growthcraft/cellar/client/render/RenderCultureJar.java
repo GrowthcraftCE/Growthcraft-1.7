@@ -17,7 +17,7 @@ import net.minecraftforge.fluids.Fluid;
 public class RenderCultureJar implements ISimpleBlockRenderingHandler {
 
     private static final BBox fluidBBox = BBox.newCube(7, 1, 7, 2, 4, 2)
-            .scale(ModelCultureJar.SCALE);
+        .scale(ModelCultureJar.SCALE);
     public static int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
     public int getRenderId() {
@@ -54,12 +54,12 @@ public class RenderCultureJar implements ISimpleBlockRenderingHandler {
                         tes.setColorOpaque_F(tempFloatColor[0], tempFloatColor[1], tempFloatColor[2]);
 
                         renderer.setRenderBounds(
-                                fluidBBox.x0(),
-                                fluidBBox.y0(),
-                                fluidBBox.z0(),
-                                fluidBBox.x1(),
-                                fluidBBox.y0() + (fluidBBox.y1() - fluidBBox.y0()) * fluidRate,
-                                fluidBBox.z1());
+                            fluidBBox.x0(),
+                            fluidBBox.y0(),
+                            fluidBBox.z0(),
+                            fluidBBox.x1(),
+                            fluidBBox.y0() + (fluidBBox.y1() - fluidBBox.y0()) * fluidRate,
+                            fluidBBox.z1());
                         {
                             renderer.renderFaceXNeg(block, x, y, z, icon);
                             renderer.renderFaceXPos(block, x, y, z, icon);

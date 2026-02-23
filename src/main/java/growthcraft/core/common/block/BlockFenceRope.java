@@ -29,8 +29,8 @@ public class BlockFenceRope extends GrcBlockBase implements IBlockRope {
 
     public BlockFenceRope(BlockKey srcKey, String name) {
         super(
-                srcKey.getBlock()
-                        .getMaterial());
+            srcKey.getBlock()
+                .getMaterial());
         this.fenceBlockKey = srcKey;
         setStepSound(soundTypeWood);
         setBlockName(name);
@@ -63,8 +63,8 @@ public class BlockFenceRope extends GrcBlockBase implements IBlockRope {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7,
                                     float par8, float par9) {
         if (player.inventory.getCurrentItem() != null && GrowthCraftCore.items.rope.equals(
-                player.inventory.getCurrentItem()
-                        .getItem())) {
+            player.inventory.getCurrentItem()
+                .getItem())) {
             return false;
         } else {
             if (!world.isRemote) {

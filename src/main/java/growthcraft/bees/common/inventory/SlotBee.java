@@ -17,7 +17,7 @@ public class SlotBee extends SlotInput {
     @Override
     public boolean isItemValid(ItemStack stack) {
         return stack != null && BeesRegistry.instance()
-                .isItemBee(stack);
+            .isItemBee(stack);
     }
 
     @Override

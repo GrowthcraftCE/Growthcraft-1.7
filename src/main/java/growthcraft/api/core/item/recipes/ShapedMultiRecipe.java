@@ -176,7 +176,7 @@ public class ShapedMultiRecipe implements IRecipe {
                     boolean matched = false;
 
                     final Iterator<ItemStack> itr = target.itemStacks()
-                            .iterator();
+                        .iterator();
                     while (itr.hasNext() && !matched) {
                         matched = OreDictionary.itemMatches(itr.next(), slot, false);
                     }

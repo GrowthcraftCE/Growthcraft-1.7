@@ -34,11 +34,11 @@ public class GrcCoreFluids extends GrcModuleBase {
     @Override
     public void preInit() {
         this.saltWater = FluidFactory.instance()
-                .create(new GrcFluid("grccore.SaltWater"));
+            .create(new GrcFluid("grccore.SaltWater"));
         saltWater.setCreativeTab(GrowthCraftCore.creativeTab)
-                .setItemColor(0x2C41F6);
+            .setItemColor(0x2C41F6);
         saltWater.block.getBlock()
-                .setBlockTextureName("minecraft:water");
+            .setBlockTextureName("minecraft:water");
     }
 
     @Override
@@ -53,7 +53,7 @@ public class GrcCoreFluids extends GrcModuleBase {
         if (GrowthCraftCore.getConfig().bucketOfOceanSaltWater) {
             logger.debug("Ocean Salt Water Buckets are ENABLED");
             EventHandlerBucketFill.instance()
-                    .addEntry(new SaltBucketEntry());
+                .addEntry(new SaltBucketEntry());
         } else {
             logger.debug("Ocean Salt Water Buckets are DISABLED");
         }

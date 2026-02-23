@@ -81,7 +81,7 @@ public class EntityFXDropParticle extends EntityFX {
 
         if ((material.isLiquid() || material.isSolid()) && block instanceof IFluidBlock) {
             final double d0 = MathHelper.floor_double(this.posY) + 1
-                    - ((IFluidBlock) block).getFilledPercentage(worldObj, x, y, z);
+                - ((IFluidBlock) block).getFilledPercentage(worldObj, x, y, z);
 
             if (this.posY < d0) {
                 setDead();

@@ -85,8 +85,8 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy {
 
                             if (!player.capabilities.isCreativeMode) {
                                 player.inventory.setInventorySlotContents(
-                                        player.inventory.currentItem,
-                                        ItemUtils.consumeStack(itemstack));
+                                    player.inventory.currentItem,
+                                    ItemUtils.consumeStack(itemstack));
                             }
 
                             return true;
@@ -103,7 +103,7 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy {
     public void onFallenUpon(World world, int x, int y, int z, Entity entity, float par6) {
         if (!world.isRemote && world.rand.nextFloat() < par6 - 0.5F) {
             if (!(entity instanceof EntityPlayer) && !world.getGameRules()
-                    .getGameRuleBooleanValue("mobGriefing")) {
+                .getGameRuleBooleanValue("mobGriefing")) {
                 return;
             }
 

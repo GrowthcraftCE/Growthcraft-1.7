@@ -23,17 +23,17 @@ public class VillageHandlerRice implements IVillageTradeHandler, IVillageCreatio
         // recipeList.add(new MerchantRecipe(new ItemStack(GrowthCraftRice.rice, 18 + random.nextInt(3)), new
         // ItemStack(Item.emerald, 1)));
         recipeList.add(
-                new MerchantRecipe(
-                        new ItemStack(Items.emerald, 1 + random.nextInt(2)),
-                        GrowthCraftRice.fluids.riceSake.asStack(1, 1)));
+            new MerchantRecipe(
+                new ItemStack(Items.emerald, 1 + random.nextInt(2)),
+                GrowthCraftRice.fluids.riceSake.asStack(1, 1)));
         recipeList.add(
-                new MerchantRecipe(
-                        new ItemStack(Items.emerald, 2 + random.nextInt(2)),
-                        GrowthCraftRice.fluids.riceSake.asStack(1, 2)));
+            new MerchantRecipe(
+                new ItemStack(Items.emerald, 2 + random.nextInt(2)),
+                GrowthCraftRice.fluids.riceSake.asStack(1, 2)));
         recipeList.add(
-                new MerchantRecipe(
-                        new ItemStack(Items.emerald, 2 + random.nextInt(2)),
-                        GrowthCraftRice.fluids.riceSake.asStack(1, 3)));
+            new MerchantRecipe(
+                new ItemStack(Items.emerald, 2 + random.nextInt(2)),
+                GrowthCraftRice.fluids.riceSake.asStack(1, 3)));
     }
 
     @Override

@@ -178,7 +178,7 @@ public class BlockRice extends GrcBlockBase implements IPaddyCrop, ICropDataProv
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z))
-                && this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
+            && this.canThisPlantGrowOnThisBlockID(world.getBlock(x, y - 1, z));
     }
 
     /************

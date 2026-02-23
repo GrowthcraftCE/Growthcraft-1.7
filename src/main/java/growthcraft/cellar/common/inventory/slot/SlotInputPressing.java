@@ -14,7 +14,7 @@ public class SlotInputPressing extends SlotInput {
     @Override
     public boolean isItemValid(ItemStack stack) {
         return CellarRegistry.instance()
-                .pressing()
-                .hasPressingRecipe(stack);
+            .pressing()
+            .hasPressingRecipe(stack);
     }
 }

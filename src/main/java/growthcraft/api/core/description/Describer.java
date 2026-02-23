@@ -44,7 +44,7 @@ public class Describer {
         if (pe == null) return;
 
         String s = GrcI18n.translate(pe.getEffectName())
-                .trim();
+            .trim();
         final Potion potion = Potion.potionTypes[pe.getPotionID()];
         if (potion != null) {
             if (potion.isBadEffect()) s = EnumChatFormatting.RED + s;
@@ -52,7 +52,7 @@ public class Describer {
 
         if (pe.getAmplifier() > 0) {
             s += " " + GrcI18n.translate("potion.potency." + pe.getAmplifier())
-                    .trim();
+                .trim();
         }
 
         if (pe.getDuration() > 20) {

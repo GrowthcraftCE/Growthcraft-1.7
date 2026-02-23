@@ -90,8 +90,8 @@ public class YeastGenerator extends DeviceProgressive {
         if (stack.stackSize >= stack.getMaxStackSize()) return false;
         // prevent item pointless ticking with invalid items
         return CellarRegistry.instance()
-                .yeast()
-                .isYeast(stack);
+            .yeast()
+            .isYeast(stack);
     }
 
     /**
@@ -107,8 +107,8 @@ public class YeastGenerator extends DeviceProgressive {
             if (!canReplicateYeast(yeastItem)) return false;
         }
         return CoreRegistry.instance()
-                .fluidDictionary()
-                .hasFluidTags(fluidSlot.getFluid(), BoozeTag.YOUNG);
+            .fluidDictionary()
+            .hasFluidTags(fluidSlot.getFluid(), BoozeTag.YOUNG);
     }
 
     public void consumeFluid() {
@@ -126,7 +126,7 @@ public class YeastGenerator extends DeviceProgressive {
         final BiomeGenBase biome = getCurrentBiome();
         if (biome != null) {
             final IYeastRegistry reg = CellarRegistry.instance()
-                    .yeast();
+                .yeast();
 
             {
                 final Collection<WeightedItemStack> yl = reg.getYeastListForBiomeName(biome.biomeName);

@@ -39,9 +39,9 @@ public class ClientProxy extends CommonProxy {
         new GrcMilkResources();
 
         MinecraftForgeClient
-                .registerItemRenderer(GrowthCraftMilk.blocks.cheeseBlock.getItem(), new ItemRendererCheeseBlock());
+            .registerItemRenderer(GrowthCraftMilk.blocks.cheeseBlock.getItem(), new ItemRendererCheeseBlock());
         MinecraftForgeClient
-                .registerItemRenderer(GrowthCraftMilk.blocks.hangingCurds.getItem(), new ItemRendererHangingCurds());
+            .registerItemRenderer(GrowthCraftMilk.blocks.hangingCurds.getItem(), new ItemRendererHangingCurds());
 
         RenderingRegistry.registerBlockHandler(new RenderButterChurn());
         RenderingRegistry.registerBlockHandler(new RenderCheeseBlock());
@@ -53,7 +53,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCheesePress.class, new TileEntityCheesePressRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCheeseVat.class, new TileEntityCheeseVatRenderer());
         ClientRegistry
-                .bindTileEntitySpecialRenderer(TileEntityHangingCurds.class, new TileEntityHangingCurdsRenderer());
+            .bindTileEntitySpecialRenderer(TileEntityHangingCurds.class, new TileEntityHangingCurdsRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPancheon.class, new TileEntityPancheonRenderer());
     }
 }

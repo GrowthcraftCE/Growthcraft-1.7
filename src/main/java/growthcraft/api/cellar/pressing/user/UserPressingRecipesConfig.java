@@ -98,8 +98,8 @@ public class UserPressingRecipesConfig extends AbstractUserJSONConfig {
         logger.debug("Adding pressing recipe {%s}", recipe);
         for (IMultiItemStacks item : recipe.item.getMultiItemStacks()) {
             CellarRegistry.instance()
-                    .pressing()
-                    .addRecipe(item, fluidStack, recipe.time, residue);
+                .pressing()
+                .addRecipe(item, fluidStack, recipe.time, residue);
         }
     }
 

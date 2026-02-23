@@ -15,7 +15,7 @@ import java.lang.reflect.Field;
 public class InterpolatedIcon extends TextureAtlasSprite {
 
     private static final String[] obfuscationAnimationMetadata = new String[]{"animationMetadata", "field_110982_k",
-            "j"};
+        "j"};
     private final Field fanimationMetadata;
     protected int[][] interpolatedFrameData;
 
@@ -31,7 +31,7 @@ public class InterpolatedIcon extends TextureAtlasSprite {
         final double d0 = 1.0D - tickCounter / (double) animationMetadata.getFrameTimeSingle(frameCounter);
         final int i = animationMetadata.getFrameIndex(frameCounter);
         final int j = animationMetadata.getFrameCount() == 0 ? framesTextureData.size()
-                : animationMetadata.getFrameCount();
+            : animationMetadata.getFrameCount();
         final int k = animationMetadata.getFrameIndex((frameCounter + 1) % j);
 
         if (i != k && k >= 0 && k < framesTextureData.size()) {

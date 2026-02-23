@@ -36,23 +36,23 @@ import java.util.List;
 public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory {
 
     CHEDDAR("cheddar", 0xed9200, new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
-            new EnumCheeseStage[]{EnumCheeseStage.UNWAXED, EnumCheeseStage.UNAGED, EnumCheeseStage.AGED,
-                    EnumCheeseStage.CUT}),
+        new EnumCheeseStage[]{EnumCheeseStage.UNWAXED, EnumCheeseStage.UNAGED, EnumCheeseStage.AGED,
+            EnumCheeseStage.CUT}),
     GORGONZOLA("gorgonzola", 0xeae7de, new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
-            new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
+        new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
     EMMENTALER("emmentaler", 0xddddbc, new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
-            new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
+        new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
     APPENZELLER("appenzeller", 0xf3e2a7, new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
-            new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
+        new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
     ASIAGO("asiago", 0xbfb68d, new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
-            new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
+        new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
     PARMESAN("parmesan", 0xd8d5c6, new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
-            new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
+        new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
     MONTEREY("monterey", 0xf5f5da, new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
-            new EnumCheeseStage[]{EnumCheeseStage.UNWAXED, EnumCheeseStage.UNAGED, EnumCheeseStage.AGED,
-                    EnumCheeseStage.CUT}),
+        new EnumCheeseStage[]{EnumCheeseStage.UNWAXED, EnumCheeseStage.UNAGED, EnumCheeseStage.AGED,
+            EnumCheeseStage.CUT}),
     RICOTTA("ricotta", 0xc8c8c5, new EnumCheeseFeature[]{},
-            new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT});
+        new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT});
 
     public static final EnumCheeseType[] VALUES = values();
 

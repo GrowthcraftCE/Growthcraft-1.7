@@ -71,7 +71,7 @@ public class EffectMilk implements IEffect {
                 if (e instanceof PotionEffect eff) {
                     final int id = eff.getPotionID();
                     final boolean isCurable = eff.getCurativeItems()
-                            .size() > 0 && !blacklist.contains(id);
+                        .size() > 0 && !blacklist.contains(id);
                     if (isCurable) {
                         // to prevent concurrent modifications, cache the
                         // effect ids

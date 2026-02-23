@@ -44,13 +44,13 @@ public class BlockBeeHive extends GrcBlockBase {
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
         if (random.nextInt(24) == 0) {
             world.playSound(
-                    (float) x + 0.5F,
-                    (float) y + 0.5F,
-                    (float) z + 0.5F,
-                    "grcbees:buzz",
-                    1.0F + random.nextFloat(),
-                    random.nextFloat() * 0.7F + 0.3F,
-                    false);
+                (float) x + 0.5F,
+                (float) y + 0.5F,
+                (float) z + 0.5F,
+                "grcbees:buzz",
+                1.0F + random.nextFloat(),
+                random.nextFloat() * 0.7F + 0.3F,
+                false);
         }
     }
 
@@ -133,7 +133,7 @@ public class BlockBeeHive extends GrcBlockBase {
             return false;
         }
         return world.getBlock(x, y + 1, z)
-                .isLeaves(world, x, y + 1, z);
+            .isLeaves(world, x, y + 1, z);
     }
 
     /************

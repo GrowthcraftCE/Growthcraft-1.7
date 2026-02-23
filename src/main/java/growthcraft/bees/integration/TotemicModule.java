@@ -50,7 +50,7 @@ public class TotemicModule extends ModIntegrationBase {
             final ItemStack planks = type.asPlanksItemStack();
             if (planks != null) {
                 GameRegistry
-                        .addShapedRecipe(GrowthCraftBees.blocks.beeBoxTotemic.asStack(), " A ", "A A", "AAA", 'A', planks);
+                    .addShapedRecipe(GrowthCraftBees.blocks.beeBoxTotemic.asStack(), " A ", "A A", "AAA", 'A', planks);
             }
         }
     }

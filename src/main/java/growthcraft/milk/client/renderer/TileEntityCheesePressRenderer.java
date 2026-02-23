@@ -40,7 +40,7 @@ public class TileEntityCheesePressRenderer extends TileEntitySpecialRenderer {
                 GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
                 this.bindTexture(GrcMilkResources.INSTANCE.textureCheesePress);
                 GrcMilkResources.INSTANCE.modelCheesePress
-                        .render(null, cheesePress.animProgress, cheesePress.animDir, 0.0f, f, 0.0f, ModelCheesePress.SCALE);
+                    .render(null, cheesePress.animProgress, cheesePress.animDir, 0.0f, f, 0.0f, ModelCheesePress.SCALE);
             }
             GL11.glPopMatrix();
         }

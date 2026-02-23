@@ -29,19 +29,19 @@ public class PlayerInteractEventPaddy {
                 final Block paddyBlock = paddyBlocks.get(targetBlock);
                 if (paddyBlock != null) {
                     world.setBlock(
-                            event.x,
-                            event.y,
-                            event.z,
-                            paddyBlock,
-                            world.getBlockMetadata(event.x, event.y, event.z),
-                            BlockFlags.UPDATE_AND_SYNC);
+                        event.x,
+                        event.y,
+                        event.z,
+                        paddyBlock,
+                        world.getBlockMetadata(event.x, event.y, event.z),
+                        BlockFlags.UPDATE_AND_SYNC);
                     world.playSoundEffect(
-                            (float) event.x + 0.5F,
-                            (float) event.y + 0.5F,
-                            (float) event.z + 0.5F,
-                            paddyBlock.stepSound.func_150496_b(),
-                            (paddyBlock.stepSound.getVolume() + 1.0F) / 2.0F,
-                            paddyBlock.stepSound.getPitch() * 0.8F);
+                        (float) event.x + 0.5F,
+                        (float) event.y + 0.5F,
+                        (float) event.z + 0.5F,
+                        paddyBlock.stepSound.func_150496_b(),
+                        (paddyBlock.stepSound.getVolume() + 1.0F) / 2.0F,
+                        paddyBlock.stepSound.getPitch() * 0.8F);
 
                     itemstack.damageItem(1, player);
                 }

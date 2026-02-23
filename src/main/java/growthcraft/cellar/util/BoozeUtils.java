@@ -43,16 +43,16 @@ public class BoozeUtils {
 
     public static boolean isFermentedBooze(Fluid booze) {
         return CoreRegistry.instance()
-                .fluidDictionary()
-                .hasFluidTags(booze, BoozeTag.FERMENTED);
+            .fluidDictionary()
+            .hasFluidTags(booze, BoozeTag.FERMENTED);
     }
 
     public static void addEffects(Fluid booze, ItemStack stack, World world, EntityPlayer player) {
         if (booze == null) return;
 
         final BoozeEffect effect = CellarRegistry.instance()
-                .booze()
-                .getEffect(booze);
+            .booze()
+            .getEffect(booze);
         if (effect != null) {
             effect.apply(world, player, world.rand, null);
         }
@@ -71,8 +71,8 @@ public class BoozeUtils {
                                             boolean bool) {
         if (booze == null) return;
         final BoozeEffect effect = CellarRegistry.instance()
-                .booze()
-                .getEffect(booze);
+            .booze()
+            .getEffect(booze);
         if (effect != null) {
             effect.getDescription((List<String>) list);
         }
@@ -88,8 +88,8 @@ public class BoozeUtils {
 
     public static boolean hasEffect(Fluid booze) {
         final BoozeEffect effect = CellarRegistry.instance()
-                .booze()
-                .getEffect(booze);
+            .booze()
+            .getEffect(booze);
         if (effect != null) return effect.isValid();
         return false;
     }

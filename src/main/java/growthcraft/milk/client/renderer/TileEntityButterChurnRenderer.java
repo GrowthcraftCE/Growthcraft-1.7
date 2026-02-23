@@ -40,7 +40,7 @@ public class TileEntityButterChurnRenderer extends TileEntitySpecialRenderer {
                 GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
                 this.bindTexture(GrcMilkResources.INSTANCE.textureButterChurn);
                 GrcMilkResources.INSTANCE.modelButterChurn
-                        .render(null, butterChurn.animProgress, butterChurn.animDir, 0.0f, f, 0.0f, ModelButterChurn.SCALE);
+                    .render(null, butterChurn.animProgress, butterChurn.animDir, 0.0f, f, 0.0f, ModelButterChurn.SCALE);
             }
             GL11.glPopMatrix();
         }

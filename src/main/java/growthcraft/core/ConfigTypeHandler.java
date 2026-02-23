@@ -53,13 +53,13 @@ public abstract class ConfigTypeHandler {
             final ConfigBase.ConfigOption opt = field.getAnnotation(ConfigBase.ConfigOption.class);
             final String value = opt.def();
             final TagParser parser = opt.opt()
-                    .equals("scsv") ? TagParser.scsv
-                    : (opt.opt()
-                    .equals("cosv") ? TagParser.cosv : TagParser.csv);
+                .equals("scsv") ? TagParser.scsv
+                : (opt.opt()
+                .equals("cosv") ? TagParser.cosv : TagParser.csv);
 
             return parser.parse(
-                    config.get(opt.catergory(), opt.name(), value, opt.desc() + ConfigBase.DEFAULT_STR + value)
-                            .getString());
+                config.get(opt.catergory(), opt.name(), value, opt.desc() + ConfigBase.DEFAULT_STR + value)
+                    .getString());
         }
     }
 
@@ -81,8 +81,8 @@ public abstract class ConfigTypeHandler {
             final ConfigBase.ConfigOption opt = field.getAnnotation(ConfigBase.ConfigOption.class);
             final String value = opt.def();
             final String[] rows = TagParser.scsv.parseToArray(
-                    config.get(opt.catergory(), opt.name(), value, opt.desc() + ConfigBase.DEFAULT_STR + value)
-                            .getString());
+                config.get(opt.catergory(), opt.name(), value, opt.desc() + ConfigBase.DEFAULT_STR + value)
+                    .getString());
 
             final TagParser.Tag[][] table = new TagParser.Tag[rows.length][];
             int i = 0;

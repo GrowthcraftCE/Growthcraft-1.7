@@ -19,7 +19,7 @@ public class ItemBlockBeeBox extends GrcItemBlockBase {
     public String getUnlocalizedName(ItemStack stack) {
         if (field_150939_a instanceof BlockBeeBox) {
             return super.getUnlocalizedName(stack) + "."
-                    + ((BlockBeeBox) field_150939_a).getMetaname(stack.getItemDamage());
+                + ((BlockBeeBox) field_150939_a).getMetaname(stack.getItemDamage());
         }
         return super.getUnlocalizedName(stack) + stack.getItemDamage();
     }

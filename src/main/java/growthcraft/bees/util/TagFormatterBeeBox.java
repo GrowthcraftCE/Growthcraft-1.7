@@ -15,30 +15,30 @@ public class TagFormatterBeeBox implements ITagFormatter {
 
     public List<String> format(List<String> list, NBTTagCompound tag) {
         list.add(
-                EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.bonus_prefix")
-                        + " "
-                        + EnumChatFormatting.WHITE
-                        + UnitFormatter.booleanAsValue(tag.getBoolean("has_bonus")));
+            EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.bonus_prefix")
+                + " "
+                + EnumChatFormatting.WHITE
+                + UnitFormatter.booleanAsValue(tag.getBoolean("has_bonus")));
 
         list.add(
-                EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.bees_prefix")
-                        + " "
-                        + TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("bee")));
+            EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.bees_prefix")
+                + " "
+                + TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("bee")));
 
         list.add(
-                EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.honey_prefix")
-                        + " "
-                        + UnitFormatter.fraction(
-                        "" + EnumChatFormatting.WHITE + tag.getInteger("honeycomb_count"),
-                        "" + EnumChatFormatting.YELLOW + tag.getInteger("honey_count"),
-                        "" + EnumChatFormatting.WHITE + tag.getInteger("honeycomb_max")));
+            EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.honey_prefix")
+                + " "
+                + UnitFormatter.fraction(
+                "" + EnumChatFormatting.WHITE + tag.getInteger("honeycomb_count"),
+                "" + EnumChatFormatting.YELLOW + tag.getInteger("honey_count"),
+                "" + EnumChatFormatting.WHITE + tag.getInteger("honeycomb_max")));
 
         if (tag.hasKey("growth_rate")) {
             list.add(
-                    EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.growth_rate_prefix")
-                            + " "
-                            + EnumChatFormatting.WHITE
-                            + GrcI18n.translate("grc.bees.growth_rate_value", (int) (tag.getFloat("growth_rate") * 100)));
+                EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.growth_rate_prefix")
+                    + " "
+                    + EnumChatFormatting.WHITE
+                    + GrcI18n.translate("grc.bees.growth_rate_value", (int) (tag.getFloat("growth_rate") * 100)));
         }
 
         return list;

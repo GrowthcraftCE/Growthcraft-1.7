@@ -54,7 +54,7 @@ public class FluidDictionary implements IFluidDictionary {
                 tagToFluidsMap.put(tag, new HashSet<Fluid>());
             }
             tagToFluidsMap.get(tag)
-                    .add(fluid);
+                .add(fluid);
         }
     }
 

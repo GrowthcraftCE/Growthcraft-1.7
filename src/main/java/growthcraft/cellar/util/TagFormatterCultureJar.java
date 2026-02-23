@@ -14,9 +14,9 @@ public class TagFormatterCultureJar implements ITagFormatter {
 
     public List<String> format(List<String> list, NBTTagCompound tag) {
         list.add(
-                EnumChatFormatting.GRAY + GrcI18n.translate(
-                        "grc.cellar.ferment_jar.itemslot.yeast",
-                        TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_yeast"))));
+            EnumChatFormatting.GRAY + GrcI18n.translate(
+                "grc.cellar.ferment_jar.itemslot.yeast",
+                TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("item_yeast"))));
         return list;
     }
 }

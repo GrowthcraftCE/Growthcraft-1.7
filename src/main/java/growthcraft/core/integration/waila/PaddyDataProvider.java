@@ -40,11 +40,11 @@ public class PaddyDataProvider implements IWailaDataProvider {
         if (block instanceof IPaddy prov) {
             final MovingObjectPosition pos = accessor.getPosition();
             final boolean filledWithFluid = prov
-                    .isFilledWithFluid(accessor.getWorld(), pos.blockX, pos.blockY, pos.blockZ, accessor.getMetadata());
+                .isFilledWithFluid(accessor.getWorld(), pos.blockX, pos.blockY, pos.blockZ, accessor.getMetadata());
             final String content = EnumChatFormatting.GRAY + GrcI18n.translate("grc.format.paddy.hasFluid")
-                    + " "
-                    + EnumChatFormatting.WHITE
-                    + GrcI18n.translate("grc.format.value." + filledWithFluid);
+                + " "
+                + EnumChatFormatting.WHITE
+                + GrcI18n.translate("grc.format.value." + filledWithFluid);
             tooltip.add(content);
         }
         return tooltip;

@@ -50,12 +50,12 @@ public class HighlandsModule extends ModIntegrationBase {
             final ItemStack planks = type.asPlanksItemStack();
             if (planks != null) {
                 GameRegistry.addShapedRecipe(
-                        GrowthCraftBees.blocks.beeBoxHighlands.asStack(1, type.meta),
-                        " A ",
-                        "A A",
-                        "AAA",
-                        'A',
-                        planks);
+                    GrowthCraftBees.blocks.beeBoxHighlands.asStack(1, type.meta),
+                    " A ",
+                    "A A",
+                    "AAA",
+                    'A',
+                    planks);
             }
         }
     }

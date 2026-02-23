@@ -33,10 +33,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(
-        modid = GrowthCraftHops.MOD_ID,
-        name = GrowthCraftHops.MOD_NAME,
-        version = GrowthCraftHops.MOD_VERSION,
-        dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
+    modid = GrowthCraftHops.MOD_ID,
+    name = GrowthCraftHops.MOD_NAME,
+    version = GrowthCraftHops.MOD_VERSION,
+    dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
 public class GrowthCraftHops {
 
     public static final String MOD_ID = "Growthcraft|Hops";
@@ -75,13 +75,13 @@ public class GrowthCraftHops {
     private void register() {
         modules.register();
         CoreRegistry.instance()
-                .vineDrops()
-                .addDropEntry(items.hops.asStack(2), config.hopsVineDropRarity);
+            .vineDrops()
+            .addDropEntry(items.hops.asStack(2), config.hopsVineDropRarity);
 
         ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR)
-                .addItem(new WeightedRandomChestContent(items.hops.asStack(), 1, 2, 10));
+            .addItem(new WeightedRandomChestContent(items.hops.asStack(), 1, 2, 10));
         ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING)
-                .addItem(new WeightedRandomChestContent(items.hops.asStack(), 1, 2, 10));
+            .addItem(new WeightedRandomChestContent(items.hops.asStack(), 1, 2, 10));
 
         MapGenHelper.registerVillageStructure(ComponentVillageHopVineyard.class, "grc.hopvineyard");
 
@@ -110,9 +110,9 @@ public class GrowthCraftHops {
         final VillageHandlerHops handler = new VillageHandlerHops();
         final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
         if (brewerID > 0) VillagerRegistry.instance()
-                .registerVillageTradeHandler(brewerID, handler);
+            .registerVillageTradeHandler(brewerID, handler);
         VillagerRegistry.instance()
-                .registerVillageCreationHandler(handler);
+            .registerVillageCreationHandler(handler);
     }
 
     @EventHandler

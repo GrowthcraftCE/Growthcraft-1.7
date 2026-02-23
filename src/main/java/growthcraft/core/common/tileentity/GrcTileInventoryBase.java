@@ -35,7 +35,7 @@ import net.minecraft.nbt.NBTTagCompound;
  * Extend this base class if you want a Tile with an `Inventory`
  */
 public abstract class GrcTileInventoryBase extends GrcTileBase
-        implements ISidedInventory, ICustomDisplayName, IInventoryWatcher {
+    implements ISidedInventory, ICustomDisplayName, IInventoryWatcher {
 
     protected static final int[] NO_SLOTS = new int[]{};
 
@@ -153,13 +153,13 @@ public abstract class GrcTileInventoryBase extends GrcTileBase
     @Override
     public boolean canInsertItem(int slot, ItemStack stack, int side) {
         return InventoryProcessor.instance()
-                .canInsertItem(this, stack, slot);
+            .canInsertItem(this, stack, slot);
     }
 
     @Override
     public boolean canExtractItem(int slot, ItemStack stack, int side) {
         return InventoryProcessor.instance()
-                .canExtractItem(this, stack, slot);
+            .canExtractItem(this, stack, slot);
     }
 
     @Override

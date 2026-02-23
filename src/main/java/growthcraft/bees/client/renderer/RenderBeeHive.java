@@ -18,7 +18,7 @@ public class RenderBeeHive implements ISimpleBlockRenderingHandler {
         if (modelID == id) {
             final Tessellator tes = Tessellator.instance;
             final IIcon[] icon = {block.getIcon(1, 0), block.getIcon(1, 0), block.getIcon(1, 0), block.getIcon(1, 0),
-                    block.getIcon(1, 0), block.getIcon(0, 0)};
+                block.getIcon(1, 0), block.getIcon(0, 0)};
             final double d = 0.0625D;
 
             renderer.setRenderBounds(4 * d, 0.0D, 4 * d, 12 * d, 14 * d, 12 * d);

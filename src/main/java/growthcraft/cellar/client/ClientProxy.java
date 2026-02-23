@@ -42,14 +42,14 @@ public class ClientProxy extends CommonProxy {
 
     protected void initRenders() {
         MinecraftForgeClient
-                .registerItemRenderer(GrowthCraftCellar.blocks.cultureJar.getItem(), new ItemRenderCultureJar());
+            .registerItemRenderer(GrowthCraftCellar.blocks.cultureJar.getItem(), new ItemRenderCultureJar());
         RenderingRegistry.registerBlockHandler(new RenderBrewKettle());
         RenderingRegistry.registerBlockHandler(new RenderCultureJar());
         RenderingRegistry.registerBlockHandler(new RenderFermentBarrel());
         RenderingRegistry.registerBlockHandler(new RenderFruitPress());
         RenderingRegistry.registerBlockHandler(new RenderFruitPresser());
         ClientRegistry
-                .bindTileEntitySpecialRenderer(TileEntityFruitPresser.class, new TileEntityFruitPresserRenderer());
+            .bindTileEntitySpecialRenderer(TileEntityFruitPresser.class, new TileEntityFruitPresserRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCultureJar.class, new TileEntityCultureJarRenderer());
     }
 
@@ -57,7 +57,7 @@ public class ClientProxy extends CommonProxy {
         final int villagerID = GrowthCraftCellar.getConfig().villagerBrewerID;
         if (villagerID > 0) {
             VillagerRegistry.instance()
-                    .registerVillagerSkin(villagerID, new ResourceLocation("grccellar", "textures/entity/brewer.png"));
+                .registerVillagerSkin(villagerID, new ResourceLocation("grccellar", "textures/entity/brewer.png"));
         }
     }
 

@@ -40,10 +40,10 @@ public class CropDataProvider implements IWailaDataProvider {
         if (block instanceof ICropDataProvider prov) {
             final MovingObjectPosition pos = accessor.getPosition();
             final float growth = prov
-                    .getGrowthProgress(accessor.getWorld(), pos.blockX, pos.blockY, pos.blockZ, accessor.getMetadata());
+                .getGrowthProgress(accessor.getWorld(), pos.blockX, pos.blockY, pos.blockZ, accessor.getMetadata());
             String content = EnumChatFormatting.GRAY + GrcI18n.translate("grc.format.crop.growth_prefix")
-                    + " "
-                    + EnumChatFormatting.WHITE;
+                + " "
+                + EnumChatFormatting.WHITE;
             if (growth >= 1.0f) {
                 content += GrcI18n.translate("grc.format.crop.mature");
             } else {

@@ -28,9 +28,9 @@ public class ComponentVillageHopVineyard extends StructureVillagePieces.Village 
     public static ComponentVillageHopVineyard buildComponent(Start startPiece, List list, Random random, int par3,
                                                              int par4, int par5, int par6, int par7) {
         final StructureBoundingBox structureboundingbox = StructureBoundingBox
-                .getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 9, 9, par6);
+            .getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 9, 9, par6);
         if (canVillageGoDeeper(structureboundingbox)
-                && StructureComponent.findIntersecting(list, structureboundingbox) == null) {
+            && StructureComponent.findIntersecting(list, structureboundingbox) == null) {
             return new ComponentVillageHopVineyard(startPiece, par7, random, structureboundingbox, par6);
         }
         return null;
@@ -65,41 +65,41 @@ public class ComponentVillageHopVineyard extends StructureVillagePieces.Village 
             this.placeBlockAtCurrentPosition(world, GrowthCraftCore.blocks.fenceRope.getBlock(), 0, loop, 6, 7, box);
             for (loop2 = 2; loop2 <= 6; ++loop2) {
                 this.placeBlockAtCurrentPosition(
-                        world,
-                        GrowthCraftCore.blocks.ropeBlock.getBlock(),
-                        0,
-                        loop,
-                        6,
-                        loop2,
-                        box);
+                    world,
+                    GrowthCraftCore.blocks.ropeBlock.getBlock(),
+                    0,
+                    loop,
+                    6,
+                    loop2,
+                    box);
             }
             for (loop2 = 1; loop2 <= 5; ++loop2) {
                 this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, loop2, 1, box);
                 this.placeBlockAtCurrentPosition(world, Blocks.fence, 0, loop, loop2, 7, box);
                 this.placeBlockAtCurrentPosition(
-                        world,
-                        GrowthCraftHops.blocks.hopVine.getBlock(),
-                        3,
-                        loop,
-                        loop2,
-                        2,
-                        box);
+                    world,
+                    GrowthCraftHops.blocks.hopVine.getBlock(),
+                    3,
+                    loop,
+                    loop2,
+                    2,
+                    box);
                 this.placeBlockAtCurrentPosition(
-                        world,
-                        GrowthCraftHops.blocks.hopVine.getBlock(),
-                        3,
-                        loop,
-                        loop2,
-                        4,
-                        box);
+                    world,
+                    GrowthCraftHops.blocks.hopVine.getBlock(),
+                    3,
+                    loop,
+                    loop2,
+                    4,
+                    box);
                 this.placeBlockAtCurrentPosition(
-                        world,
-                        GrowthCraftHops.blocks.hopVine.getBlock(),
-                        3,
-                        loop,
-                        loop2,
-                        6,
-                        box);
+                    world,
+                    GrowthCraftHops.blocks.hopVine.getBlock(),
+                    3,
+                    loop,
+                    loop2,
+                    6,
+                    box);
             }
         }
 

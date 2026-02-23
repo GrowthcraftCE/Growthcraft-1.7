@@ -66,12 +66,12 @@ public class RecipeHandlerCultureJar extends TemplateRecipeHandler {
         if (recipe instanceof CachedCultureRecipe) {
             final ICultureRecipe culturingRecipe = ((CachedCultureRecipe) recipe).culturingRecipe;
             TemplateRenderHelper.drawFluidStack(
-                    54,
-                    6,
-                    50,
-                    52,
-                    culturingRecipe.inputFluidStack(),
-                    GrowthCraftCellar.getConfig().cultureJarMaxCap);
+                54,
+                6,
+                50,
+                52,
+                culturingRecipe.inputFluidStack(),
+                GrowthCraftCellar.getConfig().cultureJarMaxCap);
         }
     }
 

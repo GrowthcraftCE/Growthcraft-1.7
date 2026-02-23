@@ -60,13 +60,13 @@ public class FishTrapRegistry implements ILoggable {
             entriesByGroup.put(group, new LinkedList<FishTrapEntry>());
         }
         entriesByGroup.get(group)
-                .add(entry);
+            .add(entry);
     }
 
     private ItemStack getRandomCatchFromList(Random random, List<FishTrapEntry> list) {
         if (list.isEmpty()) return null;
         return WeightedRandom.getRandomItem(random, list)
-                .getFishable(random);
+            .getFishable(random);
     }
 
     public ItemStack getRandomCatchFromGroup(Random random, String group) {

@@ -23,9 +23,9 @@ public class BonemealEventRice {
         for (int i = x - 1; i <= x + 1; ++i) {
             for (int k = z - 1; k <= z + 1; ++k) {
                 final boolean isRiceBlock = (GrowthCraftRice.blocks.riceBlock.getBlock() == world.getBlock(i, y, k))
-                        && (world.getBlockMetadata(i, y, k) != 7);
+                    && (world.getBlockMetadata(i, y, k) != 7);
                 final boolean isPaddyBelow = RiceBlockCheck.isPaddy(world.getBlock(i, y - 1, k))
-                        && (world.getBlockMetadata(i, y - 1, k) != 0);
+                    && (world.getBlockMetadata(i, y - 1, k) != 0);
 
                 if (isRiceBlock && isPaddyBelow) {
                     mplus = world.getBlockMetadata(i, y, k) + r;

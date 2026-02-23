@@ -28,7 +28,7 @@ public class Platform {
 
     public static boolean isClient() {
         return FMLCommonHandler.instance()
-                .getEffectiveSide()
-                .isClient();
+            .getEffectiveSide()
+            .isClient();
     }
 }

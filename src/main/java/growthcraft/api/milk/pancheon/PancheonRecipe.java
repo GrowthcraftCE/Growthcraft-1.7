@@ -67,10 +67,10 @@ public class PancheonRecipe implements IPancheonRecipe {
     @Override
     public String toString() {
         return String.format(
-                "PancheonRecipe(`%s` / %d = `%s` & `%s`)",
-                FluidFormatString.format(inputFluid),
-                time,
-                FluidFormatString.format(topOutFluid),
-                FluidFormatString.format(bottomOutFluid));
+            "PancheonRecipe(`%s` / %d = `%s` & `%s`)",
+            FluidFormatString.format(inputFluid),
+            time,
+            FluidFormatString.format(topOutFluid),
+            FluidFormatString.format(bottomOutFluid));
     }
 }

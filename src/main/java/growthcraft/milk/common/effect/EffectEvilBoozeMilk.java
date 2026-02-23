@@ -52,8 +52,8 @@ public class EffectEvilBoozeMilk implements IEffect {
 
     private void addEvilEffect(float chance, int id, int time, int lv) {
         effects.add(
-                new EffectChance().setChance(chance)
-                        .setEffect(new EffectAddPotionEffect().setPotionFactory(new SimplePotionEffectFactory(id, time, lv))));
+            new EffectChance().setChance(chance)
+                .setEffect(new EffectAddPotionEffect().setPotionFactory(new SimplePotionEffectFactory(id, time, lv))));
     }
 
     @Override
@@ -73,8 +73,8 @@ public class EffectEvilBoozeMilk implements IEffect {
             final NBTTagCompound tag = nbt.getCompoundTag(name);
             if (tag.hasKey("effects")) {
                 this.effects = (EffectList) CoreRegistry.instance()
-                        .getEffectsRegistry()
-                        .loadEffectFromNBT(tag, "effects");
+                    .getEffectsRegistry()
+                    .loadEffectFromNBT(tag, "effects");
             }
         } else {
             // log error

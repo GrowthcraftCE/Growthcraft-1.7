@@ -37,7 +37,7 @@ public class BoPModule extends ModIntegrationBase {
     @Override
     public void doPreInit() {
         GrowthCraftBees.blocks.beeBoxBiomesOPlenty = GrowthCraftBees.blocks
-                .newTypedDefinition(new BlockBeeBoxBiomesOPlenty());
+            .newTypedDefinition(new BlockBeeBoxBiomesOPlenty());
     }
 
     @Override
@@ -51,12 +51,12 @@ public class BoPModule extends ModIntegrationBase {
             final ItemStack planks = type.asPlanksItemStack();
             if (planks != null) {
                 GameRegistry.addShapedRecipe(
-                        GrowthCraftBees.blocks.beeBoxBiomesOPlenty.asStack(1, type.meta),
-                        " A ",
-                        "A A",
-                        "AAA",
-                        'A',
-                        planks);
+                    GrowthCraftBees.blocks.beeBoxBiomesOPlenty.asStack(1, type.meta),
+                    " A ",
+                    "A A",
+                    "AAA",
+                    'A',
+                    planks);
             }
         }
     }

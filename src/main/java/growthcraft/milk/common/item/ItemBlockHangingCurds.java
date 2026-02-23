@@ -111,8 +111,8 @@ public class ItemBlockHangingCurds extends ItemBlock implements IItemTileBlock {
                 final int ageMax = nbt.getInteger("age_max");
                 final int t = age * 100 / (ageMax > 0 ? ageMax : 1200);
                 list.add(
-                        GrcI18n.translate("grcmilk.hanging_curds.drying.prefix")
-                                + GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", t));
+                    GrcI18n.translate("grcmilk.hanging_curds.drying.prefix")
+                        + GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", t));
             }
         }
         super.addInformation(stack, player, list, bool);

@@ -33,15 +33,15 @@ public class RenderCheeseBlock implements ISimpleBlockRenderingHandler {
 
     private static final float SCALE = 1f / 16f;
     private static final BBox[] boxes = {BBox.newCube(5, 0, 5, 6, 8, 6)
+        .scale(SCALE),
+        BBox.newCube(4, 0, 6, 1, 8, 4)
             .scale(SCALE),
-            BBox.newCube(4, 0, 6, 1, 8, 4)
-                    .scale(SCALE),
-            BBox.newCube(11, 0, 6, 1, 8, 4)
-                    .scale(SCALE),
-            BBox.newCube(6, 0, 4, 4, 8, 1)
-                    .scale(SCALE),
-            BBox.newCube(6, 0, 11, 4, 8, 1)
-                    .scale(SCALE)};
+        BBox.newCube(11, 0, 6, 1, 8, 4)
+            .scale(SCALE),
+        BBox.newCube(6, 0, 4, 4, 8, 1)
+            .scale(SCALE),
+        BBox.newCube(6, 0, 11, 4, 8, 1)
+            .scale(SCALE)};
     public static int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
     @Override
@@ -68,9 +68,9 @@ public class RenderCheeseBlock implements ISimpleBlockRenderingHandler {
                 final TileEntityCheeseBlock te = cheeseBlock.getTileEntity(world, x, y, z);
                 if (te != null) {
                     final int slices = te.getCheese()
-                            .getSlices();
+                        .getSlices();
                     final int slicesMax = te.getCheese()
-                            .getSlicesMax();
+                        .getSlicesMax();
                     final float scaleHeight = (float) slices / (float) slicesMax;
                     if (scaleHeight > 0f) {
                         final Tessellator tes = Tessellator.instance;

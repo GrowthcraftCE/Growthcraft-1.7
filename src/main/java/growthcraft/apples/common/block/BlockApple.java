@@ -130,7 +130,7 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
         return GrowthCraftApples.blocks.appleLeaves.equals(world.getBlock(x, y + 1, z))
-                && (world.getBlockMetadata(x, y + 1, z) & 3) == 0;
+            && (world.getBlockMetadata(x, y + 1, z) & 3) == 0;
     }
 
     /************
@@ -222,12 +222,12 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
             this.setBlockBounds(6 * f, 11 * f, 6 * f, 10 * f, 15 * f, 10 * f);
         } else if (meta == AppleStage.MID) {
             this.setBlockBounds(
-                    (float) (5.5 * f),
-                    10 * f,
-                    (float) (5.5 * f),
-                    (float) (10.5 * f),
-                    15 * f,
-                    (float) (10.5 * f));
+                (float) (5.5 * f),
+                10 * f,
+                (float) (5.5 * f),
+                (float) (10.5 * f),
+                15 * f,
+                (float) (10.5 * f));
         } else {
             this.setBlockBounds(5 * f, 9 * f, 5 * f, 11 * f, 15 * f, 11 * f);
         }

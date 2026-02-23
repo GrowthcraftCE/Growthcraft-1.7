@@ -77,17 +77,17 @@ public class GrcMilkDataProvider implements IWailaDataProvider {
         if (te instanceof TileEntityCheeseBlock) {
             if (nbt.getBoolean("is_aged")) {
                 tooltip.add(
-                        EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese.slices.prefix")
-                                + EnumChatFormatting.WHITE
-                                + GrcI18n.translate(
-                                "grcmilk.cheese.slices.value.format",
-                                nbt.getInteger("slices"),
-                                nbt.getInteger("slices_max")));
+                    EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese.slices.prefix")
+                        + EnumChatFormatting.WHITE
+                        + GrcI18n.translate(
+                        "grcmilk.cheese.slices.value.format",
+                        nbt.getInteger("slices"),
+                        nbt.getInteger("slices_max")));
             } else {
                 final float ageProgress = nbt.getFloat("age_progress");
                 final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese.aging.prefix")
-                        + EnumChatFormatting.WHITE
-                        + GrcI18n.translate("grcmilk.cheese.aging.progress.format", (int) (ageProgress * 100));
+                    + EnumChatFormatting.WHITE
+                    + GrcI18n.translate("grcmilk.cheese.aging.progress.format", (int) (ageProgress * 100));
                 tooltip.add(result);
             }
         }
@@ -95,8 +95,8 @@ public class GrcMilkDataProvider implements IWailaDataProvider {
             final float progress = nbt.getFloat("progress");
             if (progress < 1f) {
                 final String result = EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.hanging_curds.drying.prefix")
-                        + EnumChatFormatting.WHITE
-                        + GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", (int) (progress * 100));
+                    + EnumChatFormatting.WHITE
+                    + GrcI18n.translate("grcmilk.hanging_curds.drying.progress.format", (int) (progress * 100));
                 tooltip.add(result);
             }
             if (nbt.hasKey("dried")) {
@@ -133,21 +133,21 @@ public class GrcMilkDataProvider implements IWailaDataProvider {
         if (te instanceof TileEntityCheesePress) getCheesePressData((TileEntityCheesePress) te, tag);
         if (te instanceof TileEntityCheeseBlock cheeseBlock) {
             tag.setBoolean(
-                    "is_aged",
-                    cheeseBlock.getCheese()
-                            .isAged());
+                "is_aged",
+                cheeseBlock.getCheese()
+                    .isAged());
             tag.setFloat(
-                    "age_progress",
-                    cheeseBlock.getCheese()
-                            .getAgeProgress());
+                "age_progress",
+                cheeseBlock.getCheese()
+                    .getAgeProgress());
             tag.setInteger(
-                    "slices",
-                    cheeseBlock.getCheese()
-                            .getSlices());
+                "slices",
+                cheeseBlock.getCheese()
+                    .getSlices());
             tag.setInteger(
-                    "slices_max",
-                    cheeseBlock.getCheese()
-                            .getSlicesMax());
+                "slices_max",
+                cheeseBlock.getCheese()
+                    .getSlicesMax());
         }
         if (te instanceof TileEntityHangingCurds hangingCurds) {
             tag.setFloat("progress", hangingCurds.getProgress());

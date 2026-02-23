@@ -53,7 +53,7 @@ public class GrcBlockFluid extends BlockFluidClassic {
     public GrcBlockFluid refreshLight() {
         // http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
         final float lum = 0.2126f * (((color >> 16) & 0xFF) / 255.0f) + 0.7152f * (((color >> 8) & 0xFF) / 255.0f)
-                + 0.0722f * ((color & 0xFF) / 255.0f);
+            + 0.0722f * ((color & 0xFF) / 255.0f);
         setLightOpacity((int) ((1f - lum) * 15));
         return this;
     }
@@ -84,16 +84,16 @@ public class GrcBlockFluid extends BlockFluidClassic {
     @Override
     public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
         if (world.getBlock(x, y, z)
-                .getMaterial()
-                .isLiquid()) return false;
+            .getMaterial()
+            .isLiquid()) return false;
         return super.canDisplace(world, x, y, z);
     }
 
     @Override
     public boolean displaceIfPossible(World world, int x, int y, int z) {
         if (world.getBlock(x, y, z)
-                .getMaterial()
-                .isLiquid()) return false;
+            .getMaterial()
+            .isLiquid()) return false;
         return super.displaceIfPossible(world, x, y, z);
     }
 
@@ -109,9 +109,9 @@ public class GrcBlockFluid extends BlockFluidClassic {
         super.randomDisplayTick(world, x, y, z, rand);
 
         if (rand.nextInt(10) == 0 && World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
-                && !world.getBlock(x, y - 2, z)
-                .getMaterial()
-                .blocksMovement()) {
+            && !world.getBlock(x, y - 2, z)
+            .getMaterial()
+            .blocksMovement()) {
             final double px = x + rand.nextFloat();
             final double py = y - 1.05D;
             final double pz = z + rand.nextFloat();

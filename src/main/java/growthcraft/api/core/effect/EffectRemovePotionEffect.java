@@ -72,7 +72,7 @@ public class EffectRemovePotionEffect extends AbstractEffect {
     protected void getActualDescription(List<String> list) {
         final PotionEffect pe = new PotionEffect(getPotionID(), 1000, 0);
         final String potionName = GrcI18n.translate(pe.getEffectName())
-                .trim();
+            .trim();
         list.add(GrcI18n.translate("grc.effect.remove_potion_effect.format", potionName));
     }
 

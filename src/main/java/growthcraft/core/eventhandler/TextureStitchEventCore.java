@@ -17,7 +17,7 @@ public class TextureStitchEventCore {
             GrowthCraftCore.liquidBlobsTexture = event.map.registerIcon("grccore:liquidblob");
 
             GrowthCraftCore.fluids.saltWater.getFluid()
-                    .setIcons(BlockLiquid.getLiquidIcon("water_still"), BlockLiquid.getLiquidIcon("water_flow"));
+                .setIcons(BlockLiquid.getLiquidIcon("water_still"), BlockLiquid.getLiquidIcon("water_flow"));
         }
     }
 }

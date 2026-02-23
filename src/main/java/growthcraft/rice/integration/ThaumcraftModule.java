@@ -42,32 +42,32 @@ public class ThaumcraftModule extends ThaumcraftModuleBase {
 
         ThaumcraftApi.registerObjectTag(GrowthCraftRice.items.rice.asStack(), new AspectList().add(Aspect.CROP, 1));
         ThaumcraftApi.registerObjectTag(
-                GrowthCraftRice.items.riceBall.asStack(),
-                new AspectList().add(Aspect.ENTROPY, 1)
-                        .add(Aspect.PLANT, 1)
-                        .add(Aspect.CRAFT, 1)
-                        .add(Aspect.HUNGER, 1));
+            GrowthCraftRice.items.riceBall.asStack(),
+            new AspectList().add(Aspect.ENTROPY, 1)
+                .add(Aspect.PLANT, 1)
+                .add(Aspect.CRAFT, 1)
+                .add(Aspect.HUNGER, 1));
 
         final AspectList[] common = new AspectList[]{new AspectList(), new AspectList().add(Aspect.FLIGHT, 1),
-                new AspectList().add(Aspect.FLIGHT, 2), new AspectList().add(Aspect.FLIGHT, 1),
-                new AspectList().add(Aspect.MOTION, 2)
-                        .add(Aspect.FLIGHT, 2),
-                new AspectList().add(Aspect.FLIGHT, 3)
-                        .add(Aspect.POISON, 1),
-                new AspectList().add(Aspect.POISON, 2),};
+            new AspectList().add(Aspect.FLIGHT, 2), new AspectList().add(Aspect.FLIGHT, 1),
+            new AspectList().add(Aspect.MOTION, 2)
+                .add(Aspect.FLIGHT, 2),
+            new AspectList().add(Aspect.FLIGHT, 3)
+                .add(Aspect.POISON, 1),
+            new AspectList().add(Aspect.POISON, 2),};
 
         for (int i = 0; i < common.length; ++i) {
             final AspectList list = common[i];
             ThaumcraftBoozeHelper.instance()
-                    .registerAspectsForBottleStack(GrowthCraftRice.fluids.riceSake.asStack(1, i), list.copy());
+                .registerAspectsForBottleStack(GrowthCraftRice.fluids.riceSake.asStack(1, i), list.copy());
             ThaumcraftBoozeHelper.instance()
-                    .registerAspectsForBucket(
-                            GrowthCraftRice.fluids.riceSakeBuckets[i],
-                            AspectsHelper.scaleAspects(list.copy(), 3, Aspect.FLIGHT, Aspect.MOTION));
+                .registerAspectsForBucket(
+                    GrowthCraftRice.fluids.riceSakeBuckets[i],
+                    AspectsHelper.scaleAspects(list.copy(), 3, Aspect.FLIGHT, Aspect.MOTION));
             ThaumcraftBoozeHelper.instance()
-                    .registerAspectsForFluidBlock(
-                            GrowthCraftRice.fluids.riceSakeFluids[i],
-                            AspectsHelper.scaleAspects(list.copy(), 3, Aspect.FLIGHT, Aspect.MOTION));
+                .registerAspectsForFluidBlock(
+                    GrowthCraftRice.fluids.riceSakeFluids[i],
+                    AspectsHelper.scaleAspects(list.copy(), 3, Aspect.FLIGHT, Aspect.MOTION));
         }
     }
 }

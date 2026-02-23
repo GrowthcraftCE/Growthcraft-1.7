@@ -32,11 +32,11 @@ public class EventHandlerBarrelDrainedCellar {
     public void handle(EventBarrelDrained event) {
         if (event.fluid != null && event.player != null) {
             if (CellarRegistry.instance()
-                    .booze()
-                    .isFluidBooze(event.fluid)) {
+                .booze()
+                .isFluidBooze(event.fluid)) {
                 if (CoreRegistry.instance()
-                        .fluidDictionary()
-                        .hasFluidTags(event.fluid.getFluid(), BoozeTag.FERMENTED)) {
+                    .fluidDictionary()
+                    .hasFluidTags(event.fluid.getFluid(), BoozeTag.FERMENTED)) {
                     CellarAchievement.FERMENT_BOOZE.unlock(event.player);
                 }
             }

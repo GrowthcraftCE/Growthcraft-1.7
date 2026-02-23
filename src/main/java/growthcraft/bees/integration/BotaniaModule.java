@@ -50,12 +50,12 @@ public class BotaniaModule extends ModIntegrationBase {
             final ItemStack planks = type.asPlanksItemStack();
             if (planks != null) {
                 GameRegistry.addShapedRecipe(
-                        GrowthCraftBees.blocks.beeBoxBotania.asStack(1, type.meta),
-                        " A ",
-                        "A A",
-                        "AAA",
-                        'A',
-                        planks);
+                    GrowthCraftBees.blocks.beeBoxBotania.asStack(1, type.meta),
+                    " A ",
+                    "A A",
+                    "AAA",
+                    'A',
+                    planks);
             }
         }
     }

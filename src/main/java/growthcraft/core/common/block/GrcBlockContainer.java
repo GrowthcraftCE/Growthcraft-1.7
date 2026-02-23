@@ -57,7 +57,7 @@ import java.util.Random;
  * Base class for machines and the like
  */
 public abstract class GrcBlockContainer extends GrcBlockBase
-        implements IDroppableBlock, IRotatableBlock, IWrenchable, ITileEntityProvider {
+    implements IDroppableBlock, IRotatableBlock, IWrenchable, ITileEntityProvider {
 
     protected Random rand = new Random();
     protected Class<? extends TileEntity> tileEntityType;
@@ -153,7 +153,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase
         final List<ItemStack> drops = new ArrayList<ItemStack>();
         if (shouldDropTileStack(world, x, y, z, metadata, 0)) {
             GrowthCraftCore.getLogger()
-                    .info("Dropping Tile As ItemStack");
+                .info("Dropping Tile As ItemStack");
             getTileItemStackDrops(drops, world, x, y, z, metadata, 0);
             for (ItemStack stack : drops) {
                 ItemUtils.spawnItemStack(world, x, y, z, stack, world.rand);
@@ -161,12 +161,12 @@ public abstract class GrcBlockContainer extends GrcBlockBase
             final TileEntity te = getTileEntity(world, x, y, z);
             if (te instanceof IInventory) {
                 GrowthCraftCore.getLogger()
-                        .info("Clearing Inventory");
+                    .info("Clearing Inventory");
                 InventoryProcessor.instance()
-                        .clearSlots((IInventory) te);
+                    .clearSlots((IInventory) te);
             }
             GrowthCraftCore.getLogger()
-                    .info("Setting Block To Air");
+                .info("Setting Block To Air");
             world.setBlockToAir(x, y, z);
         } else {
             fellBlockAsItem(world, x, y, z);
@@ -221,7 +221,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase
             return itb.getTileTagCompound(stack);
         } else {
             GrowthCraftCore.getLogger()
-                    .error("Cannot get tile tag compound for a non IItemTileBlock: stack=%s block=%s", stack, this);
+                .error("Cannot get tile tag compound for a non IItemTileBlock: stack=%s block=%s", stack, this);
         }
         return null;
     }
@@ -232,7 +232,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase
             itb.setTileTagCompound(stack, tag);
         } else {
             GrowthCraftCore.getLogger()
-                    .error("Cannot set tile tag compound for a non IItemTileBlock: stack=%s block=%s", stack, this);
+                .error("Cannot set tile tag compound for a non IItemTileBlock: stack=%s block=%s", stack, this);
         }
     }
 
@@ -250,11 +250,11 @@ public abstract class GrcBlockContainer extends GrcBlockBase
                 }
             } else {
                 GrowthCraftCore.getLogger()
-                        .error(
-                                "Cannot restore tile from stack, the TileEntity does not support INBTItemSerializable: stack=%s block=%s tile=%s",
-                                stack,
-                                this,
-                                te);
+                    .error(
+                        "Cannot restore tile from stack, the TileEntity does not support INBTItemSerializable: stack=%s block=%s tile=%s",
+                        stack,
+                        this,
+                        te);
             }
         }
     }
@@ -383,11 +383,11 @@ public abstract class GrcBlockContainer extends GrcBlockBase
                 if (!player.isSneaking()) {
                     // While not sneaking, draining is given priority
                     if (playerDrainTank(world, x, y, z, fh, is, player)
-                            || playerFillTank(world, x, y, z, fh, is, player)) needUpdate = true;
+                        || playerFillTank(world, x, y, z, fh, is, player)) needUpdate = true;
                 } else {
                     // Otherwise filling is given priority
                     if (playerFillTank(world, x, y, z, fh, is, player)
-                            || playerDrainTank(world, x, y, z, fh, is, player)) needUpdate = true;
+                        || playerDrainTank(world, x, y, z, fh, is, player)) needUpdate = true;
                 }
                 if (needUpdate) {
                     world.markBlockForUpdate(x, y, z);
@@ -465,12 +465,12 @@ public abstract class GrcBlockContainer extends GrcBlockBase
                 return tileEntityType.newInstance();
             } catch (InstantiationException e) {
                 throw new IllegalStateException(
-                        "Failed to create a new instance of an illegal class " + this.tileEntityType,
-                        e);
+                    "Failed to create a new instance of an illegal class " + this.tileEntityType,
+                    e);
             } catch (IllegalAccessException e) {
                 throw new IllegalStateException(
-                        "Failed to create a new instance of " + this.tileEntityType + ", because lack of permissions",
-                        e);
+                    "Failed to create a new instance of " + this.tileEntityType + ", because lack of permissions",
+                    e);
             }
         }
         return null;

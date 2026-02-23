@@ -54,7 +54,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
         setStepSound(soundTypeGrass);
         setCreativeTab(GrowthCraftMilk.creativeTab);
         final BBox bb = BBox.newCube(2f, 0f, 2f, 12f, 16f, 12f)
-                .scale(1f / 16f);
+            .scale(1f / 16f);
         setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
         this.spreadLogic = new FlowerSpread(new CuboidI(-1, -1, -1, 2, 2, 2));
     }
@@ -93,7 +93,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
                 }
 
                 if (allowGrowthResult == Event.Result.ALLOW
-                        || (growthChance > 0 && random.nextInt(growthChance) == 0)) {
+                    || (growthChance > 0 && random.nextInt(growthChance) == 0)) {
                     if (meta < ThistleStage.FLOWER) {
                         incrementGrowth(world, x, y, z, meta);
                     }

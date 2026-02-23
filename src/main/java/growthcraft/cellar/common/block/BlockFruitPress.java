@@ -103,7 +103,7 @@ public class BlockFruitPress extends BlockCellarContainer {
         if (player.capabilities.isCreativeMode && (m & 8) != 0 && presserIsAbove(world, x, y, z)) {
             world.func_147480_a(x, y + 1, z, true);
             world.getTileEntity(x, y + 1, z)
-                    .invalidate();
+                .invalidate();
         }
     }
 
@@ -155,7 +155,7 @@ public class BlockFruitPress extends BlockCellarContainer {
         if (y >= 255) return false;
 
         return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && super.canPlaceBlockAt(world, x, y, z)
-                && super.canPlaceBlockAt(world, x, y + 1, z);
+            && super.canPlaceBlockAt(world, x, y + 1, z);
     }
 
     @Override

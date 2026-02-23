@@ -60,8 +60,8 @@ public class HeatBlockComponent {
         final int meta = getWorld().getBlockMetadata(x, y, z);
 
         final IHeatSourceBlock heatSource = CellarRegistry.instance()
-                .heatSource()
-                .getHeatSource(block, meta);
+            .heatSource()
+            .getHeatSource(block, meta);
 
         if (heatSource != null) return heatSource.getHeat(getWorld(), x, y, z);
         return 0.0f;

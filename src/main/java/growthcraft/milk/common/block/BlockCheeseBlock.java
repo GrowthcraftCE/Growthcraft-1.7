@@ -61,7 +61,7 @@ public class BlockCheeseBlock extends GrcBlockContainer {
         setCreativeTab(GrowthCraftMilk.creativeTab);
         setTileEntityType(TileEntityCheeseBlock.class);
         final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 8f, 8f)
-                .scale(1f / 16f);
+            .scale(1f / 16f);
         setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
     }
 
@@ -185,7 +185,7 @@ public class BlockCheeseBlock extends GrcBlockContainer {
                 icons[1] = reg.registerIcon(String.format("%s_%s/top", prefix, stage.name));
                 icons[2] = reg.registerIcon(String.format("%s_%s/side", prefix, stage.name));
                 iconMap.get(type)
-                        .put(stage, icons);
+                    .put(stage, icons);
             }
         }
     }
@@ -193,7 +193,7 @@ public class BlockCheeseBlock extends GrcBlockContainer {
     @SideOnly(Side.CLIENT)
     private IIcon getIconByTypeAndStage(int side, EnumCheeseType type, EnumCheeseStage stage) {
         final IIcon[] icons = iconMap.get(type)
-                .get(stage);
+            .get(stage);
         if (side == 0) {
             return icons[0];
         } else if (side == 1) {
@@ -212,9 +212,9 @@ public class BlockCheeseBlock extends GrcBlockContainer {
         EnumCheeseStage stage = type.stages.get(0);
         if (te != null) {
             type = te.getCheese()
-                    .getType();
+                .getType();
             stage = te.getCheese()
-                    .getStage();
+                .getStage();
         }
         return getIconByTypeAndStage(side, type, stage);
     }

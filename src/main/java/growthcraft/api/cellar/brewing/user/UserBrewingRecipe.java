@@ -47,12 +47,12 @@ public class UserBrewingRecipe implements ICommentable {
     @Override
     public String toString() {
         return String.format(
-                "UserBrewingRecipe(`%s` + `%s` / %d = `%s` & `%s`)",
-                item,
-                input_fluid,
-                time,
-                output_fluid,
-                residue);
+            "UserBrewingRecipe(`%s` + `%s` / %d = `%s` & `%s`)",
+            item,
+            input_fluid,
+            time,
+            output_fluid,
+            residue);
     }
 
     @Override

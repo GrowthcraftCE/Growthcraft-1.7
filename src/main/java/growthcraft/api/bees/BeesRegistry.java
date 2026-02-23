@@ -169,6 +169,6 @@ public class BeesRegistry implements IBeesRegistry {
 
     public boolean isBlockFlower(@Nullable Block block, int meta) {
         return flowerEntries.containsKey(new BlockKey(block, meta))
-                || flowerEntries.containsKey(new BlockKey(block, ItemKey.WILDCARD_VALUE));
+            || flowerEntries.containsKey(new BlockKey(block, ItemKey.WILDCARD_VALUE));
     }
 }

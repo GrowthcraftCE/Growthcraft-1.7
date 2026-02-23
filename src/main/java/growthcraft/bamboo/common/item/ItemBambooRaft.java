@@ -38,8 +38,8 @@ public class ItemBambooRaft extends ItemBoat {
         final float f2 = player.prevRotationYaw + (player.rotationYaw - player.prevRotationYaw) * f;
         final double d0 = player.prevPosX + (player.posX - player.prevPosX) * (double) f;
         final double d1 = player.prevPosY + (player.posY - player.prevPosY) * (double) f
-                + 1.62D
-                - (double) player.yOffset;
+            + 1.62D
+            - (double) player.yOffset;
         final double d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) f;
         final Vec3 vec3 = Vec3.createVectorHelper(d0, d1, d2);
         final float f3 = MathHelper.cos(-f2 * 0.017453292F - (float) Math.PI);
@@ -59,9 +59,9 @@ public class ItemBambooRaft extends ItemBoat {
             boolean flag = false;
             final float f9 = 1.0F;
             final List list = world.getEntitiesWithinAABBExcludingEntity(
-                    player,
-                    player.boundingBox.addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3)
-                            .expand(f9, f9, f9));
+                player,
+                player.boundingBox.addCoord(vec32.xCoord * d3, vec32.yCoord * d3, vec32.zCoord * d3)
+                    .expand(f9, f9, f9));
             int i;
 
             for (i = 0; i < list.size(); ++i) {
@@ -90,15 +90,15 @@ public class ItemBambooRaft extends ItemBoat {
                     }
 
                     final EntityBambooRaft raft = new EntityBambooRaft(
-                            world,
-                            (float) i + 0.5F,
-                            (float) j + 1.0F,
-                            (float) k + 0.5F);
+                        world,
+                        (float) i + 0.5F,
+                        (float) j + 1.0F,
+                        (float) k + 0.5F);
                     raft.rotationYaw = (float) (((MathHelper
-                            .floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
+                        .floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 
                     if (!world.getCollidingBoundingBoxes(raft, raft.boundingBox.expand(-0.1D, -0.1D, -0.1D))
-                            .isEmpty()) {
+                        .isEmpty()) {
                         return stack;
                     }
 

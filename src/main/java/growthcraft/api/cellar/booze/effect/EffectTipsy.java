@@ -79,7 +79,7 @@ public class EffectTipsy extends AbstractEffect {
             int time = 1200;
             if (entitylb.isPotionActive(potionTipsy)) {
                 amplifier = entitylb.getActivePotionEffect(potionTipsy)
-                        .getAmplifier() + 1;
+                    .getAmplifier() + 1;
                 if (amplifier > 4) {
                     amplifier = 4;
                 }

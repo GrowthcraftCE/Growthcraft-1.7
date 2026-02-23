@@ -20,7 +20,6 @@
 package growthcraft.core.integration;
 
 import cpw.mods.fml.common.Optional;
-import forestry.api.core.ForestryAPI;
 import forestry.api.core.IGameMode;
 import forestry.api.farming.Farmables;
 import forestry.api.farming.IFarmable;
@@ -103,11 +102,11 @@ public abstract class ForestryModuleBase extends ModIntegrationBase {
             if (!ItemTest.isValid(resource)) return;
             if (!FluidTest.isValid(output)) return;
             if (ForestryFluids.WATER.exists()) recipes().fermenterManager
-                    .addRecipe(resource, fermentationValue, 1.0f, output, ForestryFluids.WATER.asFluidStack());
+                .addRecipe(resource, fermentationValue, 1.0f, output, ForestryFluids.WATER.asFluidStack());
             if (ForestryFluids.JUICE.exists()) recipes().fermenterManager
-                    .addRecipe(resource, fermentationValue, 1.5f, output, ForestryFluids.JUICE.asFluidStack());
+                .addRecipe(resource, fermentationValue, 1.5f, output, ForestryFluids.JUICE.asFluidStack());
             if (ForestryFluids.HONEY.exists()) recipes().fermenterManager
-                    .addRecipe(resource, fermentationValue, 1.5f, output, ForestryFluids.HONEY.asFluidStack());
+                .addRecipe(resource, fermentationValue, 1.5f, output, ForestryFluids.HONEY.asFluidStack());
         }
     }
 }

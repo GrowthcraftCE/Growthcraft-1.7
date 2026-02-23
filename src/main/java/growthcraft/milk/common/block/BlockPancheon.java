@@ -38,7 +38,7 @@ public class BlockPancheon extends GrcBlockContainer {
         setCreativeTab(GrowthCraftMilk.creativeTab);
         setTileEntityType(TileEntityPancheon.class);
         final BBox bb = BBox.newCube(0f, 0f, 0f, 16f, 5f, 16f)
-                .scale(1f / 16f);
+            .scale(1f / 16f);
         setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
         setBlockTextureName("grcmilk:pancheon");
     }

@@ -14,47 +14,47 @@ public class GrcCellarAchievements {
     private static final Achievement NO_ACHIEVEMENT = null;
 
     private final Map<CellarAchievement, Achievement> achievements = new EnumMap<CellarAchievement, Achievement>(
-            CellarAchievement.class);
+        CellarAchievement.class);
 
     public GrcCellarAchievements() {
         achievements.put(
-                CellarAchievement.CRAFT_BARREL,
-                (new Achievement(
-                        "grc.achievement.craftBarrel",
-                        "craftBarrel",
-                        -4,
-                        -4,
-                        GrowthCraftCellar.blocks.fermentBarrel.getBlock(),
-                        NO_ACHIEVEMENT)).initIndependentStat()
-                        .registerStat());
+            CellarAchievement.CRAFT_BARREL,
+            (new Achievement(
+                "grc.achievement.craftBarrel",
+                "craftBarrel",
+                -4,
+                -4,
+                GrowthCraftCellar.blocks.fermentBarrel.getBlock(),
+                NO_ACHIEVEMENT)).initIndependentStat()
+                .registerStat());
         achievements.put(
-                CellarAchievement.FERMENT_BOOZE,
-                (new Achievement(
-                        "grc.achievement.fermentBooze",
-                        "fermentBooze",
-                        -2,
-                        -4,
-                        Items.nether_wart,
-                        achievements.get(CellarAchievement.CRAFT_BARREL))).registerStat());
+            CellarAchievement.FERMENT_BOOZE,
+            (new Achievement(
+                "grc.achievement.fermentBooze",
+                "fermentBooze",
+                -2,
+                -4,
+                Items.nether_wart,
+                achievements.get(CellarAchievement.CRAFT_BARREL))).registerStat());
         achievements.put(
-                CellarAchievement.GET_DRUNK,
-                (new Achievement(
-                        "grc.achievement.getDrunk",
-                        "getDrunk",
-                        0,
-                        -4,
-                        GrowthCraftCellar.items.chievItemDummy.asStack(),
-                        achievements.get(CellarAchievement.FERMENT_BOOZE))).setSpecial()
-                        .registerStat());
+            CellarAchievement.GET_DRUNK,
+            (new Achievement(
+                "grc.achievement.getDrunk",
+                "getDrunk",
+                0,
+                -4,
+                GrowthCraftCellar.items.chievItemDummy.asStack(),
+                achievements.get(CellarAchievement.FERMENT_BOOZE))).setSpecial()
+                .registerStat());
         achievements.put(
-                CellarAchievement.ON_THE_GO,
-                (new Achievement(
-                        "grc.achievement.onTheGo",
-                        "onTheGo",
-                        2,
-                        -4,
-                        GrowthCraftCellar.items.waterBag.asStack(1, 16),
-                        NO_ACHIEVEMENT)).registerStat());
+            CellarAchievement.ON_THE_GO,
+            (new Achievement(
+                "grc.achievement.onTheGo",
+                "onTheGo",
+                2,
+                -4,
+                GrowthCraftCellar.items.waterBag.asStack(1, 16),
+                NO_ACHIEVEMENT)).registerStat());
 
         for (Achievement a : achievements.values()) {
             AchievementPageGrowthcraft.masterList.add(a);

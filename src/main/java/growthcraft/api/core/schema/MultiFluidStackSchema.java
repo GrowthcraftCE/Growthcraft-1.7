@@ -54,7 +54,7 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 
     public MultiFluidStackSchema(@Nonnull FluidStack fluidStack) {
         this.name = fluidStack.getFluid()
-                .getName();
+            .getName();
         this.amount = fluidStack.amount;
     }
 
@@ -80,8 +80,8 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 
     private List<FluidTag> expandTagNames(@Nonnull List<String> tagNames) {
         return CoreRegistry.instance()
-                .fluidTags()
-                .expandTagNames(tagNames);
+            .fluidTags()
+            .expandTagNames(tagNames);
     }
 
     public List<FluidTag> expandInclusionTags() {
@@ -95,11 +95,11 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
     public Collection<Fluid> getFluidsByTags() {
         final Set<Fluid> result = new HashSet<Fluid>();
         final Collection<Fluid> fluids = CoreRegistry.instance()
-                .fluidDictionary()
-                .getFluidsByTags(expandInclusionTags());
+            .fluidDictionary()
+            .getFluidsByTags(expandInclusionTags());
         final Collection<Fluid> exfluids = CoreRegistry.instance()
-                .fluidDictionary()
-                .getFluidsByTags(expandExclusionTags());
+            .fluidDictionary()
+            .getFluidsByTags(expandExclusionTags());
         result.addAll(fluids);
         result.removeAll(exfluids);
         return result;
@@ -186,13 +186,13 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
     @Override
     public String toString() {
         return String.format(
-                "Schema<MultiFluidStack>(comment: '%s', name: '%s', names: %s, inclusion_tags: %s, exclusion_tags: %s, amount: %d)",
-                StringUtils.inspect(comment),
-                StringUtils.inspect(name),
-                names,
-                inclusion_tags,
-                exclusion_tags,
-                amount);
+            "Schema<MultiFluidStack>(comment: '%s', name: '%s', names: %s, inclusion_tags: %s, exclusion_tags: %s, amount: %d)",
+            StringUtils.inspect(comment),
+            StringUtils.inspect(name),
+            names,
+            inclusion_tags,
+            exclusion_tags,
+            amount);
     }
 
     @Override

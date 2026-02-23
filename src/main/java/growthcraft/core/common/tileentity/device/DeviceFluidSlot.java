@@ -54,7 +54,7 @@ public class DeviceFluidSlot {
 
     public int getCapacity() {
         return tanks.getFluidTank(index)
-                .getCapacity();
+            .getCapacity();
     }
 
     public int getAvailableCapacity() {

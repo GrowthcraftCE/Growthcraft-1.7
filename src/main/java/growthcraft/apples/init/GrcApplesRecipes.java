@@ -47,117 +47,117 @@ public class GrcApplesRecipes extends GrcModuleBase {
         }
 
         GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[0])
-                .tags(BoozeTag.YOUNG)
-                .pressesFrom(new OreItemStacks("foodApple"), TickUtils.seconds(2), 40, Residue.newDefault(0.3F));
+            .tags(BoozeTag.YOUNG)
+            .pressesFrom(new OreItemStacks("foodApple"), TickUtils.seconds(2), 40, Residue.newDefault(0.3F));
 
         GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[1])
-                .tags(BoozeTag.CIDER, BoozeTag.FERMENTED)
-                .fermentsFrom(fs[0], new OreItemStacks("yeastBrewers"), fermentTime)
-                .fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int) (fermentTime * 0.66))
-                .getEffect()
-                .setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
-                .addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
+            .tags(BoozeTag.CIDER, BoozeTag.FERMENTED)
+            .fermentsFrom(fs[0], new OreItemStacks("yeastBrewers"), fermentTime)
+            .fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int) (fermentTime * 0.66))
+            .getEffect()
+            .setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
+            .addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
 
         GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[2])
-                .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POTENT)
-                .fermentsFrom(fs[1], new OreItemStacks("dustGlowstone"), fermentTime)
-                .fermentsFrom(fs[3], new OreItemStacks("dustGlowstone"), fermentTime)
-                .getEffect()
-                .setTipsy(BoozeUtils.alcoholToTipsy(0.080f), TickUtils.seconds(45))
-                .addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
+            .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POTENT)
+            .fermentsFrom(fs[1], new OreItemStacks("dustGlowstone"), fermentTime)
+            .fermentsFrom(fs[3], new OreItemStacks("dustGlowstone"), fermentTime)
+            .getEffect()
+            .setTipsy(BoozeUtils.alcoholToTipsy(0.080f), TickUtils.seconds(45))
+            .addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
 
         GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[3])
-                .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
-                .fermentsFrom(fs[1], new OreItemStacks("dustRedstone"), fermentTime)
-                .fermentsFrom(fs[2], new OreItemStacks("dustRedstone"), fermentTime)
-                .getEffect()
-                .setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
-                .addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
+            .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
+            .fermentsFrom(fs[1], new OreItemStacks("dustRedstone"), fermentTime)
+            .fermentsFrom(fs[2], new OreItemStacks("dustRedstone"), fermentTime)
+            .getEffect()
+            .setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
+            .addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
 
         // Silken Nectar - ETHEREAL
         GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[4])
-                .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.MAGICAL)
-                .fermentsFrom(fs[1], new OreItemStacks("yeastEthereal"), fermentTime)
-                .getEffect()
-                .setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
-                .addEffect(
-                        new EffectRandomList()
-                                // This is terrifying, thank heavens for a decent text editor...
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.moveSpeed.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.digSpeed.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.damageBoost.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.heal.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.jump.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.regeneration.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.resistance.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.fireResistance.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.waterBreathing.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.invisibility.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.nightVision.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.field_76434_w.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.field_76444_x.id, TickUtils.minutes(10), 0)))
-                                .add(
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.field_76443_y.id, TickUtils.minutes(10), 0))));
+            .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.MAGICAL)
+            .fermentsFrom(fs[1], new OreItemStacks("yeastEthereal"), fermentTime)
+            .getEffect()
+            .setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
+            .addEffect(
+                new EffectRandomList()
+                    // This is terrifying, thank heavens for a decent text editor...
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.moveSpeed.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.digSpeed.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.damageBoost.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.heal.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.jump.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.regeneration.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.resistance.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.fireResistance.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.waterBreathing.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.invisibility.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.nightVision.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.field_76434_w.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.field_76444_x.id, TickUtils.minutes(10), 0)))
+                    .add(
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.field_76443_y.id, TickUtils.minutes(10), 0))));
 
         // Intoxicated - Origin Yeast
         GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[5])
-                .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
-                .fermentsFrom(fs[2], new OreItemStacks("yeastOrigin"), fermentTime)
-                .fermentsFrom(fs[3], new OreItemStacks("yeastOrigin"), fermentTime)
-                .getEffect()
-                .setTipsy(BoozeUtils.alcoholToTipsy(0.045f * 2.5f), TickUtils.seconds(45))
-                .addEffect(
-                        new EffectWeightedRandomList()
-                                .add(
-                                        8,
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.field_76444_x.id, TickUtils.seconds(90), 2)))
-                                .add(
-                                        2,
-                                        new EffectAddPotionEffect(
-                                                new SimplePotionEffectFactory(Potion.wither.id, TickUtils.seconds(90), 2))));
+            .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
+            .fermentsFrom(fs[2], new OreItemStacks("yeastOrigin"), fermentTime)
+            .fermentsFrom(fs[3], new OreItemStacks("yeastOrigin"), fermentTime)
+            .getEffect()
+            .setTipsy(BoozeUtils.alcoholToTipsy(0.045f * 2.5f), TickUtils.seconds(45))
+            .addEffect(
+                new EffectWeightedRandomList()
+                    .add(
+                        8,
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.field_76444_x.id, TickUtils.seconds(90), 2)))
+                    .add(
+                        2,
+                        new EffectAddPotionEffect(
+                            new SimplePotionEffectFactory(Potion.wither.id, TickUtils.seconds(90), 2))));
 
         // Poisoned - created from netherrash,
         // the booze looses all its benefits and effectively becomes poisoned
         GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[6])
-                .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POISONED)
-                .fermentsFrom(fs[0], new OreItemStacks("yeastPoison"), fermentTime)
-                .fermentsFrom(fs[1], new OreItemStacks("yeastPoison"), fermentTime)
-                .fermentsFrom(fs[2], new OreItemStacks("yeastPoison"), fermentTime)
-                .fermentsFrom(fs[3], new OreItemStacks("yeastPoison"), fermentTime)
-                .fermentsFrom(fs[4], new OreItemStacks("yeastPoison"), fermentTime)
-                .fermentsFrom(fs[5], new OreItemStacks("yeastPoison"), fermentTime)
-                .getEffect()
-                .setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
-                .createPotionEntry(Potion.poison, TickUtils.seconds(90), 0)
-                .toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);
+            .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POISONED)
+            .fermentsFrom(fs[0], new OreItemStacks("yeastPoison"), fermentTime)
+            .fermentsFrom(fs[1], new OreItemStacks("yeastPoison"), fermentTime)
+            .fermentsFrom(fs[2], new OreItemStacks("yeastPoison"), fermentTime)
+            .fermentsFrom(fs[3], new OreItemStacks("yeastPoison"), fermentTime)
+            .fermentsFrom(fs[4], new OreItemStacks("yeastPoison"), fermentTime)
+            .fermentsFrom(fs[5], new OreItemStacks("yeastPoison"), fermentTime)
+            .getEffect()
+            .setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
+            .createPotionEntry(Potion.poison, TickUtils.seconds(90), 0)
+            .toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);
     }
 
     @Override

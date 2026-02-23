@@ -37,7 +37,7 @@ public class TileEventHandlerMap<T extends TileEntity> extends HashMap<Class<? e
             handlerMap.put(type, new ArrayList<TileEventFunction>());
         }
         handlerMap.get(type)
-                .add(new TileEventFunction(method));
+            .add(new TileEventFunction(method));
     }
 
     public TileEventFunctionMap getEventFunctionMap(Class<? extends T> klass) {

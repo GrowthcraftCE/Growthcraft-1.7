@@ -145,7 +145,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope {
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
         if (world.canLightningStrikeAt(x, y + 1, z) && !World.doesBlockHaveSolidTopSurface(world, x, y - 1, z)
-                && random.nextInt(15) == 1) {
+            && random.nextInt(15) == 1) {
             final double d0 = (float) x + random.nextFloat();
             final double d1 = (double) y - 0.05D;
             final double d2 = (float) z + random.nextFloat();
@@ -291,7 +291,7 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope {
         for (int l1 = -1; l1 <= 1; ++l1) {
             for (int i2 = -1; i2 <= 1; ++i2) {
                 final int j2 = world.getBiomeGenForCoords(x + i2, z + l1)
-                        .getBiomeFoliageColor(x + i2, y, z + l1);
+                    .getBiomeFoliageColor(x + i2, y, z + l1);
                 r += (j2 & 16711680) >> 16;
                 g += (j2 & 65280) >> 8;
                 b += j2 & 255;

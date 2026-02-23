@@ -91,7 +91,7 @@ public class GrcItemFoodBase extends ItemFood {
         }
 
         player.getFoodStats()
-                .func_151686_a(this, stack);
+            .func_151686_a(this, stack);
         world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
         this.onFoodEaten(stack, world, player);
 
@@ -112,9 +112,9 @@ public class GrcItemFoodBase extends ItemFood {
                     list.addAll(tempList);
                 } else {
                     list.add(
-                            EnumChatFormatting.GRAY + GrcI18n.translate(
-                                    "grc.tooltip.detailed_information",
-                                    EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
+                        EnumChatFormatting.GRAY + GrcI18n.translate(
+                            "grc.tooltip.detailed_information",
+                            EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
                 }
             }
         }

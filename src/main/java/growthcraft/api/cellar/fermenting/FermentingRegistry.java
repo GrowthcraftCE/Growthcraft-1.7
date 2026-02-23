@@ -53,11 +53,11 @@ public class FermentingRegistry implements IFermentingRegistry {
     @Override
     public void addRecipe(@Nonnull FluidStack result, @Nonnull Object booze, @Nonnull Object fermenter, int time) {
         addRecipe(
-                new FermentationRecipe(
-                        MultiStacksUtil.toMultiFluidStacks(booze),
-                        MultiStacksUtil.toMultiItemStacks(fermenter),
-                        result,
-                        time));
+            new FermentationRecipe(
+                MultiStacksUtil.toMultiFluidStacks(booze),
+                MultiStacksUtil.toMultiItemStacks(fermenter),
+                result,
+                time));
     }
 
     @Override

@@ -30,9 +30,9 @@ public class GuiFermentBarrel extends GuiCellar<ContainerFermentBarrel, TileEnti
 
     public GuiFermentBarrel(InventoryPlayer inv, TileEntityFermentBarrel fermentBarrel) {
         super(
-                GrcCellarResources.INSTANCE.textureGuiFermentBarrel,
-                new ContainerFermentBarrel(inv, fermentBarrel),
-                fermentBarrel);
+            GrcCellarResources.INSTANCE.textureGuiFermentBarrel,
+            new ContainerFermentBarrel(inv, fermentBarrel),
+            fermentBarrel);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class GuiFermentBarrel extends GuiCellar<ContainerFermentBarrel, TileEnti
     @Override
     protected void actionPerformed(GuiButton butn) {
         GrowthCraftCellar.packetPipeline
-                .sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
+            .sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
     }
 
     @Override
@@ -95,32 +95,32 @@ public class GuiFermentBarrel extends GuiCellar<ContainerFermentBarrel, TileEnti
 
             // render active modifiers
             final Collection<FluidTag> tags = CoreRegistry.instance()
-                    .fluidDictionary()
-                    .getFluidTags(fluid);
+                .fluidDictionary()
+                .getFluidTags(fluid);
             if (tags != null) {
                 if (tags.contains(BoozeTag.FERMENTED)) {
                     itemRender.renderItemAndEffectIntoGUI(
-                            fontRendererObj,
-                            mc.renderEngine,
-                            new ItemStack(Items.nether_wart),
-                            x + 114,
-                            y + 16);
+                        fontRendererObj,
+                        mc.renderEngine,
+                        new ItemStack(Items.nether_wart),
+                        x + 114,
+                        y + 16);
                 }
                 if (tags.contains(BoozeTag.EXTENDED)) {
                     itemRender.renderItemAndEffectIntoGUI(
-                            fontRendererObj,
-                            mc.renderEngine,
-                            new ItemStack(Items.redstone),
-                            x + 114,
-                            y + 32);
+                        fontRendererObj,
+                        mc.renderEngine,
+                        new ItemStack(Items.redstone),
+                        x + 114,
+                        y + 32);
                 }
                 if (tags.contains(BoozeTag.POTENT)) {
                     itemRender.renderItemAndEffectIntoGUI(
-                            fontRendererObj,
-                            mc.renderEngine,
-                            new ItemStack(Items.glowstone_dust),
-                            x + 130,
-                            y + 32);
+                        fontRendererObj,
+                        mc.renderEngine,
+                        new ItemStack(Items.glowstone_dust),
+                        x + 130,
+                        y + 32);
                 }
             }
             itemRender.zLevel = 0.0F;
@@ -134,10 +134,10 @@ public class GuiFermentBarrel extends GuiCellar<ContainerFermentBarrel, TileEnti
         if (!tileEntity.isFluidTankEmpty(0)) {
             final String s = String.valueOf(tileEntity.getFluidAmount(0));
             this.fontRendererObj.drawStringWithShadow(
-                    s,
-                    this.xSize - 62 - this.fontRendererObj.getStringWidth(s),
-                    this.ySize - 104,
-                    0xFFFFFF);
+                s,
+                this.xSize - 62 - this.fontRendererObj.getStringWidth(s),
+                this.ySize - 104,
+                0xFFFFFF);
         }
     }
 
@@ -146,11 +146,11 @@ public class GuiFermentBarrel extends GuiCellar<ContainerFermentBarrel, TileEnti
         switch (handle) {
             case "progress_indicator":
                 tooltip.add(
-                        GrcI18n.translate(
-                                "gui.grc.progress.format",
-                                EnumChatFormatting.GRAY + GrcI18n.translate("gui.grccellar.ferment_barrel.progress_name"),
-                                "" + EnumChatFormatting.WHITE + tileEntity.getTime(),
-                                "" + EnumChatFormatting.GRAY + tileEntity.getTimeMax()));
+                    GrcI18n.translate(
+                        "gui.grc.progress.format",
+                        EnumChatFormatting.GRAY + GrcI18n.translate("gui.grccellar.ferment_barrel.progress_name"),
+                        "" + EnumChatFormatting.WHITE + tileEntity.getTime(),
+                        "" + EnumChatFormatting.GRAY + tileEntity.getTimeMax()));
                 break;
             case "fluidtank.primary":
                 if (tileEntity.isFluidTankFilled(0)) {

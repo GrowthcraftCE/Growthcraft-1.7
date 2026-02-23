@@ -166,7 +166,7 @@ public class GrcContainer extends Container {
             for (int col = 0; col < 9; ++col) {
                 final int slotIndex = 9 + col + row * 9;
                 addSlotToContainer(
-                        new SlotPlayerBackpack(playerInventory, slotIndex, x + col * SLOT_W, y + row * SLOT_H));
+                    new SlotPlayerBackpack(playerInventory, slotIndex, x + col * SLOT_W, y + row * SLOT_H));
             }
         }
     }

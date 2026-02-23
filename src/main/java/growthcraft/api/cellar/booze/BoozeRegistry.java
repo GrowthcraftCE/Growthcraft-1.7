@@ -39,7 +39,7 @@ public class BoozeRegistry implements IBoozeRegistry {
     private void ensureFluidIsValid(Fluid fluid) {
         if (!FluidUtils.doesFluidExist(fluid)) {
             throw new IllegalArgumentException(
-                    "[Growthcraft|Cellar] The fluid being registered as a Booze is not registered to the FluidRegistry.");
+                "[Growthcraft|Cellar] The fluid being registered as a Booze is not registered to the FluidRegistry.");
         }
     }
 
@@ -56,7 +56,7 @@ public class BoozeRegistry implements IBoozeRegistry {
         final BoozeEntry entry = getBoozeEntry(fluid);
         if (entry == null) {
             throw new IllegalArgumentException(
-                    "[Growthcraft|Cellar] The fluid being tagged does not have a valid booze entry.");
+                "[Growthcraft|Cellar] The fluid being tagged does not have a valid booze entry.");
         }
         return entry;
     }
@@ -102,7 +102,7 @@ public class BoozeRegistry implements IBoozeRegistry {
             registerBooze(fluid, new BoozeEntry(fluid));
         } else {
             throw new IllegalArgumentException(
-                    "[Growthcraft|Cellar] The fluid being registered as a Booze is already registered to the CellarRegistry.");
+                "[Growthcraft|Cellar] The fluid being registered as a Booze is already registered to the CellarRegistry.");
         }
     }
 }

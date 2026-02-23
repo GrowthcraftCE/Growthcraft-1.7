@@ -14,7 +14,7 @@ public class SlotInputBrewing extends SlotInput {
     @Override
     public boolean isItemValid(ItemStack stack) {
         return CellarRegistry.instance()
-                .brewing()
-                .isItemBrewingIngredient(stack);
+            .brewing()
+            .isItemBrewingIngredient(stack);
     }
 }

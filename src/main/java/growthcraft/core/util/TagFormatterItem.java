@@ -43,7 +43,7 @@ public class TagFormatterItem implements ITagFormatter {
             final ItemStack stack = ItemStack.loadItemStackFromNBT(tag);
             if (stack != null) {
                 return EnumChatFormatting.WHITE
-                        + GrcI18n.translate("grc.format.itemslot.item", stack.getDisplayName(), stack.stackSize);
+                    + GrcI18n.translate("grc.format.itemslot.item", stack.getDisplayName(), stack.stackSize);
             } else {
                 return UnitFormatter.invalidItem();
             }

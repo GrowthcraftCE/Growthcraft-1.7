@@ -46,7 +46,7 @@ public class StreamUtils {
     public static String readStringASCII(ByteBuf stream) throws UnsupportedEncodingException {
         final int len = stream.readInt();
         final byte[] bytes = stream.readBytes(len)
-                .array();
+            .array();
         return new String(bytes, StandardCharsets.US_ASCII);
     }
 

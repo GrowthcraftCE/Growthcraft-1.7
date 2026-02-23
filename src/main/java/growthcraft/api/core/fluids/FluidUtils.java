@@ -24,7 +24,7 @@ public class FluidUtils {
                     fluidData.put(data.fluid.getFluid(), new ArrayList<FluidContainerData>());
                 }
                 fluidData.get(data.fluid.getFluid())
-                        .add(data);
+                    .add(data);
             }
         }
 

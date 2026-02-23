@@ -52,7 +52,7 @@ public class TemplateRenderHelper {
                 final float b = (float) (color & 255) / 255.0F;
                 GL11.glColor4f(r, g, b, 1.0f);
                 GrcGuiRenderHelper
-                        .drawTexturedModelRectFromIcon(x, y + h - amount, GuiDraw.gui.getZLevel(), icon, w, amount);
+                    .drawTexturedModelRectFromIcon(x, y + h - amount, GuiDraw.gui.getZLevel(), icon, w, amount);
                 GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
             }
         }

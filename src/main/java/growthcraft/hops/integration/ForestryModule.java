@@ -48,7 +48,7 @@ public class ForestryModule extends ForestryModuleBase {
         Backpack.FORESTERS.add(hops);
 
         if (ForestryFluids.SEEDOIL.exists()) recipes().squeezerManager
-                .addRecipe(10, new ItemStack[]{hopSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
+            .addRecipe(10, new ItemStack[]{hopSeed}, ForestryFluids.SEEDOIL.asFluidStack(seedamount));
         ForestryRecipeUtils.addFermenterRecipes(hops, saplingYield, ForestryFluids.BIOMASS.asFluidStack());
         addFarmable("farmOrchard", new FarmableBasicGrowthCraft(hopVine, BlockHops.HopsStage.FRUIT, false, false));
     }

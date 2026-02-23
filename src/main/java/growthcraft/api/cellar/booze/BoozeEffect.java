@@ -124,12 +124,12 @@ public class BoozeEffect extends AbstractEffect {
         this.tipsyEffect = null;
         if (data.hasKey("tipsy_effect")) {
             this.tipsyEffect = (EffectTipsy) CoreRegistry.instance()
-                    .getEffectsRegistry()
-                    .loadEffectFromNBT(data, "tipsy_effect");
+                .getEffectsRegistry()
+                .loadEffectFromNBT(data, "tipsy_effect");
         }
         this.effects = (BoozeEffectList) CoreRegistry.instance()
-                .getEffectsRegistry()
-                .loadEffectFromNBT(data, "effects");
+            .getEffectsRegistry()
+            .loadEffectFromNBT(data, "effects");
         if (data.hasKey("fluid.name")) {
             this.booze = FluidRegistry.getFluid(data.getString("fluid.name"));
         }

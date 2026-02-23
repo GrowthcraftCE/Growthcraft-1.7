@@ -48,15 +48,15 @@ public abstract class TileEntityCellarDevice extends GrcTileDeviceBase implement
                 case 1: {
                     final int t = getFluidAmount(tankIndex);
                     setFluidStack(
-                            tankIndex,
-                            FluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF0000) | v));
+                        tankIndex,
+                        FluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF0000) | v));
                 }
                 break;
                 // Fluid Amount (HIGH Bytes)
                 case 2: {
                     final int t = getFluidAmount(tankIndex);
                     getFluidTank(tankIndex).setFluid(
-                            FluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF) | (v << 16)));
+                        FluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF) | (v << 16)));
                 }
                 break;
                 default:

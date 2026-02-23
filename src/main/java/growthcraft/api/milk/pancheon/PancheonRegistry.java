@@ -42,7 +42,7 @@ public class PancheonRegistry implements IPancheonRegistry {
     @Override
     public void addRecipe(@Nonnull IPancheonRecipe recipe) {
         final Fluid fluid = recipe.getInputFluid()
-                .getFluid();
+            .getFluid();
         if (recipes.containsKey(fluid)) {
             logger.warn("Overwriting existing pancheon recipe for {%s} with {%s}", recipe.getInputFluid(), recipe);
         } else {

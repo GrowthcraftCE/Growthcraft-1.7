@@ -56,17 +56,17 @@ public class ItemBlockFermentBarrel extends GrcItemTileBlockBase {
                         final String fluidName = UnitFormatter.fluidName(fluidStack);
                         if (fluidName != null) {
                             list.add(
-                                    GrcI18n.translate(
-                                            "grc.cellar.format.fluid_container.contents",
-                                            fluidName,
-                                            fluidStack.amount,
-                                            GrowthCraftCellar.getConfig().fermentBarrelMaxCap));
+                                GrcI18n.translate(
+                                    "grc.cellar.format.fluid_container.contents",
+                                    fluidName,
+                                    fluidStack.amount,
+                                    GrowthCraftCellar.getConfig().fermentBarrelMaxCap));
                         }
                     } else {
                         list.add(
-                                EnumChatFormatting.GRAY + GrcI18n.translate(
-                                        "grc.tooltip.detailed_information",
-                                        EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
+                            EnumChatFormatting.GRAY + GrcI18n.translate(
+                                "grc.tooltip.detailed_information",
+                                EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
                     }
                 }
             }

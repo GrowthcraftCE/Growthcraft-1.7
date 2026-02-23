@@ -56,10 +56,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 @Mod(
-        modid = GrowthCraftCellar.MOD_ID,
-        name = GrowthCraftCellar.MOD_NAME,
-        version = GrowthCraftCellar.MOD_VERSION,
-        dependencies = "required-after:Growthcraft@@VERSION@")
+    modid = GrowthCraftCellar.MOD_ID,
+    name = GrowthCraftCellar.MOD_NAME,
+    version = GrowthCraftCellar.MOD_VERSION,
+    dependencies = "required-after:Growthcraft@@VERSION@")
 public class GrowthCraftCellar {
 
     public static final String MOD_ID = "Growthcraft|Cellar";
@@ -113,23 +113,23 @@ public class GrowthCraftCellar {
         if (config.debugEnabled) {
             logger.debug("Pre-Initializing %s", MOD_ID);
             CellarRegistry.instance()
-                    .setLogger(logger);
+                .setLogger(logger);
             modules.setLogger(logger);
         }
         modules.freeze();
 
         userApis.getUserBrewingRecipes()
-                .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
+            .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
         userApis.getUserCultureRecipes()
-                .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/culturing.json");
+            .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/culturing.json");
         userApis.getUserFermentingRecipes()
-                .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/fermenting.json");
+            .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/fermenting.json");
         userApis.getUserHeatSources()
-                .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
+            .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
         userApis.getUserPressingRecipes()
-                .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
+            .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
         userApis.getUserYeastEntries()
-                .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/yeast.json");
+            .setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/yeast.json");
 
         registerBoozeModifierFunctions();
         boozeBuilderFactory = new CellarBoozeBuilderFactory(userApis);
@@ -145,26 +145,26 @@ public class GrowthCraftCellar {
 
     private void addDefaultHeatSources() {
         userApis.getUserHeatSources()
-                .addDefault("minecraft", "fire", UserHeatSourceEntry.newWildcardHeat(1.0f))
-                .setComment("Fire!");
+            .addDefault("minecraft", "fire", UserHeatSourceEntry.newWildcardHeat(1.0f))
+            .setComment("Fire!");
         userApis.getUserHeatSources()
-                .addDefault("minecraft", "flowing_lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
-                .setComment("We need to register both states of lava, this when its flowing");
+            .addDefault("minecraft", "flowing_lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
+            .setComment("We need to register both states of lava, this when its flowing");
         userApis.getUserHeatSources()
-                .addDefault("minecraft", "lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
-                .setComment("And when its a still pool.");
+            .addDefault("minecraft", "lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
+            .setComment("And when its a still pool.");
     }
 
     private void registerBoozeModifierFunctions() {
         CellarRegistry.instance()
-                .booze()
-                .setModifierFunction(BoozeTag.POTENT, new ModifierFunctionPotent());
+            .booze()
+            .setModifierFunction(BoozeTag.POTENT, new ModifierFunctionPotent());
         CellarRegistry.instance()
-                .booze()
-                .setModifierFunction(BoozeTag.EXTENDED, new ModifierFunctionExtended());
+            .booze()
+            .setModifierFunction(BoozeTag.EXTENDED, new ModifierFunctionExtended());
         CellarRegistry.instance()
-                .booze()
-                .setModifierFunction(BoozeTag.HYPER_EXTENDED, new ModifierFunctionHyperExtended());
+            .booze()
+            .setModifierFunction(BoozeTag.HYPER_EXTENDED, new ModifierFunctionHyperExtended());
     }
 
     private void register() {
@@ -183,128 +183,128 @@ public class GrowthCraftCellar {
         // CRAFTING
         // ====================
         GameRegistry.addRecipe(
-                new ShapedOreRecipe(
-                        blocks.fruitPress.asStack(),
-                        "ABA",
-                        "CCC",
-                        "AAA",
-                        'A',
-                        "plankWood",
-                        'B',
-                        Blocks.piston,
-                        'C',
-                        "ingotIron"));
+            new ShapedOreRecipe(
+                blocks.fruitPress.asStack(),
+                "ABA",
+                "CCC",
+                "AAA",
+                'A',
+                "plankWood",
+                'B',
+                Blocks.piston,
+                'C',
+                "ingotIron"));
         GameRegistry.addRecipe(new ShapedOreRecipe(blocks.brewKettle.asStack(), "A", 'A', Items.cauldron));
         GameRegistry.addRecipe(
-                new ShapedOreRecipe(
-                        blocks.fermentBarrel.asStack(),
-                        "AAA",
-                        "BBB",
-                        "AAA",
-                        'B',
-                        "plankWood",
-                        'A',
-                        "ingotIron"));
+            new ShapedOreRecipe(
+                blocks.fermentBarrel.asStack(),
+                "AAA",
+                "BBB",
+                "AAA",
+                'B',
+                "plankWood",
+                'A',
+                "ingotIron"));
         GameRegistry.addRecipe(
-                new ShapedOreRecipe(blocks.cultureJar.asStack(), "GAG", "G G", "GGG", 'A', "plankWood", 'G', "paneGlass"));
+            new ShapedOreRecipe(blocks.cultureJar.asStack(), "GAG", "G G", "GGG", 'A', "plankWood", 'G', "paneGlass"));
 
         GameRegistry.addRecipe(
-                new ShapedOreRecipe(
-                        items.waterBag.asStack(1, 16),
-                        "AAA",
-                        "ABA",
-                        "AAA",
-                        'A',
-                        Items.leather,
-                        'B',
-                        "materialRope"));
+            new ShapedOreRecipe(
+                items.waterBag.asStack(1, 16),
+                "AAA",
+                "ABA",
+                "AAA",
+                'A',
+                Items.leather,
+                'B',
+                "materialRope"));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 0),
-                        "dyeWhite",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 0),
+                "dyeWhite",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 1),
-                        "dyeOrange",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 1),
+                "dyeOrange",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 2),
-                        "dyeMagenta",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 2),
+                "dyeMagenta",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 3),
-                        "dyeLightBlue",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 3),
+                "dyeLightBlue",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 4),
-                        "dyeYellow",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 4),
+                "dyeYellow",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 5),
-                        "dyeLime",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 5),
+                "dyeLime",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 6),
-                        "dyePink",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 6),
+                "dyePink",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 7),
-                        "dyeGray",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 7),
+                "dyeGray",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 8),
-                        "dyeLightGray",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 8),
+                "dyeLightGray",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 9),
-                        "dyeCyan",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 9),
+                "dyeCyan",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 10),
-                        "dyePurple",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 10),
+                "dyePurple",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 11),
-                        "dyeBlue",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 11),
+                "dyeBlue",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 12),
-                        "dyeBrown",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 12),
+                "dyeBrown",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 13),
-                        "dyeGreen",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 13),
+                "dyeGreen",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 14),
-                        "dyeRed",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 14),
+                "dyeRed",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
         GameRegistry.addRecipe(
-                new ShapelessOreRecipe(
-                        items.waterBag.asStack(1, 15),
-                        "dyeBlack",
-                        items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
+            new ShapelessOreRecipe(
+                items.waterBag.asStack(1, 15),
+                "dyeBlack",
+                items.waterBag.asStack(1, OreDictionary.WILDCARD_VALUE)));
 
         // ====================
         // POTION
         // ====================
         extendPotionsArray();
         potionTipsy = (new PotionCellar(config.potionTipsyID, false, 0)).setIconIndex(0, 0)
-                .setPotionName("grc.potion.tipsy");
+            .setPotionName("grc.potion.tipsy");
         EffectTipsy.potionTipsy = potionTipsy;
         EffectTipsy.achievement = CellarAchievement.GET_DRUNK;
 
@@ -322,9 +322,9 @@ public class GrowthCraftCellar {
             f.setAccessible(true);
             try {
                 if (f.getName()
-                        .equals("potionTypes")
-                        || f.getName()
-                        .equals("field_76425_a")) {
+                    .equals("potionTypes")
+                    || f.getName()
+                    .equals("field_76425_a")) {
                     final Field modfield = Field.class.getDeclaredField("modifiers");
                     modfield.setAccessible(true);
                     modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
@@ -338,7 +338,7 @@ public class GrowthCraftCellar {
                 }
             } catch (Exception e) {
                 System.err.println(
-                        "GrowthCraft|Cellar has encountered a problem with the built-in potionTypes Array, please report this problem to the mod authors.");
+                    "GrowthCraft|Cellar has encountered a problem with the built-in potionTypes Array, please report this problem to the mod authors.");
                 e.printStackTrace();
             }
         }
@@ -355,29 +355,29 @@ public class GrowthCraftCellar {
 
     private void registerYeast() {
         CellarRegistry.instance()
-                .yeast()
-                .addYeast(EnumYeast.BREWERS.asStack());
+            .yeast()
+            .addYeast(EnumYeast.BREWERS.asStack());
         CellarRegistry.instance()
-                .yeast()
-                .addYeast(EnumYeast.LAGER.asStack());
+            .yeast()
+            .addYeast(EnumYeast.LAGER.asStack());
         CellarRegistry.instance()
-                .yeast()
-                .addYeast(EnumYeast.BAYANUS.asStack());
+            .yeast()
+            .addYeast(EnumYeast.BAYANUS.asStack());
         CellarRegistry.instance()
-                .yeast()
-                .addYeast(EnumYeast.ETHEREAL.asStack());
+            .yeast()
+            .addYeast(EnumYeast.ETHEREAL.asStack());
         CellarRegistry.instance()
-                .yeast()
-                .addYeast(EnumYeast.ORIGIN.asStack());
+            .yeast()
+            .addYeast(EnumYeast.ORIGIN.asStack());
     }
 
     private void initVillageHandlers() {
         if (config.villagerBrewerID > 0) {
             VillagerRegistry.instance()
-                    .registerVillagerId(config.villagerBrewerID);
+                .registerVillagerId(config.villagerBrewerID);
         }
         VillagerRegistry.instance()
-                .registerVillageCreationHandler(new VillageHandlerCellar());
+            .registerVillageCreationHandler(new VillageHandlerCellar());
     }
 
     @EventHandler
@@ -395,8 +395,8 @@ public class GrowthCraftCellar {
         userApis.loadConfigs();
         packetPipeline.postInitialise();
         FMLCommonHandler.instance()
-                .bus()
-                .register(new EventHandlerItemCraftedEventCellar());
+            .bus()
+            .register(new EventHandlerItemCraftedEventCellar());
         MinecraftForge.EVENT_BUS.register(new EventHandlerLivingUpdateEventCellar());
         MinecraftForge.EVENT_BUS.register(new EventHandlerCauldronUseItem());
 
@@ -404,10 +404,10 @@ public class GrowthCraftCellar {
         if (!config.boozeEffectsEnabled) {
             logger.debug("Stripping ALL booze effects except tipsy");
             for (BoozeEntry entry : CellarRegistry.instance()
-                    .booze()
-                    .getBoozeEntries()) {
+                .booze()
+                .getBoozeEntries()) {
                 entry.getEffect()
-                        .clearEffects();
+                    .clearEffects();
             }
         }
     }

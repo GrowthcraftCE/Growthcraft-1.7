@@ -20,14 +20,14 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 
     // Design by Ar97x, with some minor modifications by IceDragon (very minor)
     protected static final String[][] riceFieldSchema = {
-            {"    sss    ", "x   x|x   x", " x-------x ", " |ppppppp| ", " |p~~~~~p| ", " |p~ppp~p| ", " |p~ppp~p| ",
-                    " |p~ppp~p| ", " |p~~~~~p| ", " |ppppppp| ", " x-------x ", "x         x"},
-            {"           ", "x---x x---x", "|         |", "| rrrrrrr |", "| r     r |", "| r rrr r |", "| r rrr r |",
-                    "| r rrr r |", "| r     r |", "| rrrrrrr |", "|         |", "x---------x"},
-            {"           ", "f   fgf   f", "           ", "           ", "           ", "           ", "           ",
-                    "           ", "           ", "           ", "           ", "f         f"},
-            {"           ", "t   t t   t", "           ", "           ", "           ", "           ", "           ",
-                    "           ", "           ", "           ", "           ", "t         t"}};
+        {"    sss    ", "x   x|x   x", " x-------x ", " |ppppppp| ", " |p~~~~~p| ", " |p~ppp~p| ", " |p~ppp~p| ",
+            " |p~ppp~p| ", " |p~~~~~p| ", " |ppppppp| ", " x-------x ", "x         x"},
+        {"           ", "x---x x---x", "|         |", "| rrrrrrr |", "| r     r |", "| r rrr r |", "| r rrr r |",
+            "| r rrr r |", "| r     r |", "| rrrrrrr |", "|         |", "x---------x"},
+        {"           ", "f   fgf   f", "           ", "           ", "           ", "           ", "           ",
+            "           ", "           ", "           ", "           ", "f         f"},
+        {"           ", "t   t t   t", "           ", "           ", "           ", "           ", "           ",
+            "           ", "           ", "           ", "           ", "t         t"}};
 
     // DO NOT REMOVE
     public ComponentVillageRiceField() {
@@ -44,7 +44,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
     public static ComponentVillageRiceField buildComponent(Start startPiece, List list, Random random, int x, int y,
                                                            int z, int coordBaseMode, int par7) {
         final StructureBoundingBox structureboundingbox = StructureBoundingBox
-                .getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 5, 12, coordBaseMode);
+            .getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 5, 12, coordBaseMode);
         if (canVillageGoDeeper(structureboundingbox)) {
             if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
                 return new ComponentVillageRiceField(startPiece, par7, random, structureboundingbox, coordBaseMode);
@@ -80,8 +80,8 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
         map.put('f', new BlockEntry(Blocks.fence));
         map.put('g', new BlockEntry(Blocks.fence_gate, this.getMetadataWithOffset(Blocks.fence_gate, 0)));
         map.put(
-                'p',
-                new BlockEntry(GrowthCraftRice.blocks.paddyField.getBlock(), GrowthCraftRice.getConfig().paddyFieldMax));
+            'p',
+            new BlockEntry(GrowthCraftRice.blocks.paddyField.getBlock(), GrowthCraftRice.getConfig().paddyFieldMax));
         map.put('r', new BlockEntry(GrowthCraftRice.blocks.riceBlock.getBlock(), 6));
         map.put('s', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3)));
         map.put('t', new BlockEntry(Blocks.torch));

@@ -58,7 +58,7 @@ public class MultiStacksUtil {
         for (int i = 0; i < colIndices.length; ++i) {
             colIndices[i] = 0;
             colMax[i] = expandedStacks.get(i)
-                    .size();
+                .size();
         }
 
         final int lastCol = colIndices.length - 1;

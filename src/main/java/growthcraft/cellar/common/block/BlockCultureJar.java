@@ -21,7 +21,7 @@ public class BlockCultureJar extends BlockCellarContainer {
         setTileEntityType(TileEntityCultureJar.class);
 
         final BBox bbox = BBox.newCube(6, 0, 6, 4, 6, 4)
-                .scale(1 / 16.0f);
+            .scale(1 / 16.0f);
         setBlockBounds(bbox.x0(), bbox.y0(), bbox.z0(), bbox.x1(), bbox.y1(), bbox.z1());
     }
 

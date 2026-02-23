@@ -33,10 +33,10 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 @Mod(
-        modid = GrowthCraftRice.MOD_ID,
-        name = GrowthCraftRice.MOD_NAME,
-        version = GrowthCraftRice.MOD_VERSION,
-        dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
+    modid = GrowthCraftRice.MOD_ID,
+    name = GrowthCraftRice.MOD_NAME,
+    version = GrowthCraftRice.MOD_VERSION,
+    dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
 public class GrowthCraftRice {
 
     public static final String MOD_ID = "Growthcraft|Rice";
@@ -101,9 +101,9 @@ public class GrowthCraftRice {
         final VillageHandlerRice handler = new VillageHandlerRice();
         final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
         if (brewerID > 0) VillagerRegistry.instance()
-                .registerVillageTradeHandler(brewerID, handler);
+            .registerVillageTradeHandler(brewerID, handler);
         VillagerRegistry.instance()
-                .registerVillageCreationHandler(handler);
+            .registerVillageCreationHandler(handler);
     }
 
     @EventHandler

@@ -74,6 +74,6 @@ public class BlockBambooSlab extends BlockSlab {
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
         return GrowthCraftBamboo.blocks.bambooBlock.getBlock()
-                .getIcon(side, meta);
+            .getIcon(side, meta);
     }
 }

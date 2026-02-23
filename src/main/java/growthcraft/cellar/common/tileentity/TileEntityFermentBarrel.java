@@ -30,7 +30,7 @@ import net.minecraftforge.fluids.FluidTank;
 import java.io.IOException;
 
 public class TileEntityFermentBarrel extends TileEntityCellarDevice
-        implements ITileProgressiveDevice, INBTItemSerializable {
+    implements ITileProgressiveDevice, INBTItemSerializable {
 
     // Constants
     private static final int[] accessableSlotIds = new int[]{0};
@@ -84,8 +84,8 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
 
     private IFermentationRecipe loadRecipe() {
         return CellarRegistry.instance()
-                .fermenting()
-                .findRecipe(getFluidStack(0), getStackInSlot(0));
+            .fermenting()
+            .findRecipe(getFluidStack(0), getStackInSlot(0));
     }
 
     private IFermentationRecipe refreshRecipe() {
@@ -210,13 +210,13 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice
     @Override
     public boolean canInsertItem(int index, ItemStack stack, int side) {
         return InventoryProcessor.instance()
-                .canInsertItem(this, stack, index);
+            .canInsertItem(this, stack, index);
     }
 
     @Override
     public boolean canExtractItem(int index, ItemStack stack, int side) {
         return InventoryProcessor.instance()
-                .canExtractItem(this, stack, index);
+            .canExtractItem(this, stack, index);
     }
 
     @Override

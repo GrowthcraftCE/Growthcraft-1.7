@@ -62,7 +62,7 @@ public class GrcBambooBlocks extends GrcModuleBlocks {
         bambooScaffold = newDefinition(new BlockBambooScaffold());
         bambooFenceRope = newDefinition(new BlockFenceRope(bambooFence.getBlock(), "grc.bambooFenceRope"));
         FenceRopeRegistry.instance()
-                .addEntry(bambooFence.getBlock(), bambooFenceRope.getBlock());
+            .addEntry(bambooFence.getBlock(), bambooFenceRope.getBlock());
     }
 
     @Override

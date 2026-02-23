@@ -32,6 +32,6 @@ public class CommonItemStackComparator implements IItemStackComparator {
      */
     public boolean equals(@Nonnull ItemStack expected, @Nonnull ItemStack actual) {
         return actual.getItem() == expected.getItem() && (expected.getItemDamage() == ItemKey.WILDCARD_VALUE
-                || actual.getItemDamage() == expected.getItemDamage());
+            || actual.getItemDamage() == expected.getItemDamage());
     }
 }

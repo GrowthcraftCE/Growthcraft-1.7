@@ -69,11 +69,11 @@ public class UserFlowersConfig extends AbstractUserJSONConfig {
         switch (entry.entry_type) {
             case "generic":
                 BeesRegistry.instance()
-                        .addFlower(entry.block.getBlock(), entry.block.meta);
+                    .addFlower(entry.block.getBlock(), entry.block.meta);
                 break;
             case "forced":
                 BeesRegistry.instance()
-                        .addFlower(new ForcedFlowerBlockEntry(entry.block.getBlock(), entry.block.meta));
+                    .addFlower(new ForcedFlowerBlockEntry(entry.block.getBlock(), entry.block.meta));
                 break;
             default:
                 logger.error("Invalid entry_type '%s' for entry {%s}", entry.entry_type, entry);

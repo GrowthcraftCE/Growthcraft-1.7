@@ -22,7 +22,7 @@ public class ContainerBeeBox extends GrcContainer {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
                 this.addSlotToContainer(
-                        new SlotHoneyComb(this, teBeeBox, j + i * 9 + SlotId.HONEY_COMB_START, 8 + j * 18, 50 + i * 18));
+                    new SlotHoneyComb(this, teBeeBox, j + i * 9 + SlotId.HONEY_COMB_START, 8 + j * 18, 50 + i * 18));
             }
         }
 

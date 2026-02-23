@@ -71,9 +71,9 @@ public class CropBasicGrowthCraft extends AbstractForestryCrop {
     @Override
     public String toString() {
         return String.format(
-                "CropBasicGrowthCraft [ position: [ %s ]; block: %s; meta: %s ]",
-                position.toString(),
-                block.getUnlocalizedName(),
-                meta);
+            "CropBasicGrowthCraft [ position: [ %s ]; block: %s; meta: %s ]",
+            position.toString(),
+            block.getUnlocalizedName(),
+            meta);
     }
 }

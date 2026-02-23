@@ -39,14 +39,14 @@ public abstract class AbstractClassRegistry<T extends INBTSerializableContext> i
 
     public String getName(@Nonnull Class<?> klass) {
         return effects.inverse()
-                .get(klass);
+            .get(klass);
     }
 
     public void register(@Nonnull String name, @Nonnull Class<? extends T> klass) {
         if (effects.containsKey(name)) {
             final Class<? extends T> effect = getClass(name);
             throw new ClassRegisteredException(
-                    "Cannot register " + klass + ", Effect " + effect + " is already registered to " + name);
+                "Cannot register " + klass + ", Effect " + effect + " is already registered to " + name);
         } else {
             effects.put(name, klass);
         }
@@ -73,8 +73,8 @@ public abstract class AbstractClassRegistry<T extends INBTSerializableContext> i
             throw new IllegalStateException("Failed to create a new instance of an illegal class " + klass, e);
         } catch (IllegalAccessException e) {
             throw new IllegalStateException(
-                    "Failed to create a new instance of " + klass + ", because lack of permissions",
-                    e);
+                "Failed to create a new instance of " + klass + ", because lack of permissions",
+                e);
         }
 
         instance.readFromNBT(data, name);

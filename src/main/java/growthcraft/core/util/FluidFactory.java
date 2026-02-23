@@ -67,7 +67,7 @@ public class FluidFactory {
             details.bottle = new ItemTypeDefinition<ItemBottleFluid>(new ItemBottleFluid(fluid));
 
         if (NumUtils.isFlagged(features, FEATURE_BUCKET)) details.bucket = new ItemTypeDefinition<ItemBucketFluid>(
-                new ItemBucketFluid(details.block != null ? details.block.getBlock() : null, fluid, null));
+            new ItemBucketFluid(details.block != null ? details.block.getBlock() : null, fluid, null));
 
         details.refreshItemColor();
         details.refreshBlockColor();
@@ -138,68 +138,68 @@ public class FluidFactory {
         public FluidDetails registerObjects(String prefix, String basename) {
             if (block != null) {
                 block.getBlock()
-                        .setBlockName(prefix + ".BlockFluid" + basename);
+                    .setBlockName(prefix + ".BlockFluid" + basename);
                 block.register(prefix + ".BlockFluid" + basename);
             }
             if (bottle != null) {
                 bottle.getItem()
-                        .setUnlocalizedName(prefix + ".BottleFluid" + basename);
+                    .setUnlocalizedName(prefix + ".BottleFluid" + basename);
                 bottle.register(prefix + ".BottleFluid" + basename);
                 final FluidStack fluidStack = fluid.asFluidStack(GrowthCraftCore.getConfig().bottleCapacity);
                 FluidContainerRegistry
-                        .registerFluidContainer(fluidStack, bottle.asStack(1), GrowthCraftCore.EMPTY_BOTTLE);
+                    .registerFluidContainer(fluidStack, bottle.asStack(1), GrowthCraftCore.EMPTY_BOTTLE);
             }
             if (foodBottle != null) {
                 foodBottle.getItem()
-                        .setUnlocalizedName(prefix + ".FoodBottleFluid" + basename);
+                    .setUnlocalizedName(prefix + ".FoodBottleFluid" + basename);
                 foodBottle.register(prefix + ".BottleFluid" + basename);
                 final FluidStack fluidStack = fluid.asFluidStack(GrowthCraftCore.getConfig().bottleCapacity);
                 FluidContainerRegistry
-                        .registerFluidContainer(fluidStack, foodBottle.asStack(1), GrowthCraftCore.EMPTY_BOTTLE);
+                    .registerFluidContainer(fluidStack, foodBottle.asStack(1), GrowthCraftCore.EMPTY_BOTTLE);
             }
             if (bucket != null) {
                 bucket.getItem()
-                        .setUnlocalizedName(prefix + ".BucketFluid" + basename);
+                    .setUnlocalizedName(prefix + ".BucketFluid" + basename);
                 bucket.register(prefix + ".BucketFluid" + basename);
                 final FluidStack boozeStack = fluid.asFluidStack(FluidContainerRegistry.BUCKET_VOLUME);
                 FluidContainerRegistry
-                        .registerFluidContainer(boozeStack, bucket.asStack(), FluidContainerRegistry.EMPTY_BUCKET);
+                    .registerFluidContainer(boozeStack, bucket.asStack(), FluidContainerRegistry.EMPTY_BUCKET);
             }
             if (block != null && bucket != null) {
                 EventHandlerBucketFill.instance()
-                        .register(block.getBlock(), bucket.getItem());
+                    .register(block.getBlock(), bucket.getItem());
             }
             return this;
         }
 
         public FluidDetails setCreativeTab(CreativeTabs tab) {
             if (block != null) block.getBlock()
-                    .setCreativeTab(tab);
+                .setCreativeTab(tab);
             if (bottle != null) bottle.getItem()
-                    .setCreativeTab(tab);
+                .setCreativeTab(tab);
             if (foodBottle != null) foodBottle.getItem()
-                    .setCreativeTab(tab);
+                .setCreativeTab(tab);
             if (bucket != null) bucket.getItem()
-                    .setCreativeTab(tab);
+                .setCreativeTab(tab);
             return this;
         }
 
         public FluidDetails setBlockColor(int color) {
             if (block != null) block.getBlock()
-                    .setColor(color);
+                .setColor(color);
             return this;
         }
 
         public FluidDetails refreshItemColor() {
             return setItemColor(
-                    fluid.getFluid()
-                            .getColor());
+                fluid.getFluid()
+                    .getColor());
         }
 
         public FluidDetails refreshBlockColor() {
             return setBlockColor(
-                    fluid.getFluid()
-                            .getColor());
+                fluid.getFluid()
+                    .getColor());
         }
 
         public int getItemColor() {
@@ -209,11 +209,11 @@ public class FluidFactory {
         public FluidDetails setItemColor(int color) {
             this.itemColor = color;
             if (bottle != null) bottle.getItem()
-                    .setColor(color);
+                .setColor(color);
             if (foodBottle != null) foodBottle.getItem()
-                    .setColor(color);
+                .setColor(color);
             if (bucket != null) bucket.getItem()
-                    .setColor(color);
+                .setColor(color);
             return this;
         }
     }

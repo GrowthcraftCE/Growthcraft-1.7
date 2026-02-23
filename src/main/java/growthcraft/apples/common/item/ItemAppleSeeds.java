@@ -76,12 +76,12 @@ public class ItemAppleSeeds extends GrcItemBase implements IPlantable {
                     }
 
                     world.playSoundEffect(
-                            (float) x + 0.5F,
-                            (float) y + 0.5F,
-                            (float) z + 0.5F,
-                            cropBlock.stepSound.func_150496_b(),
-                            (cropBlock.stepSound.getVolume() + 1.0F) / 2.0F,
-                            cropBlock.stepSound.getPitch() * 0.8F);
+                        (float) x + 0.5F,
+                        (float) y + 0.5F,
+                        (float) z + 0.5F,
+                        cropBlock.stepSound.func_150496_b(),
+                        (cropBlock.stepSound.getVolume() + 1.0F) / 2.0F,
+                        cropBlock.stepSound.getPitch() * 0.8F);
                     --stack.stackSize;
                 }
             }

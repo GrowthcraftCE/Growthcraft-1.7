@@ -83,8 +83,8 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem {
         final Fluid fluid = getFluid(stack);
         if (fluid != null) {
             return CellarRegistry.instance()
-                    .booze()
-                    .getBoozeEntry(fluid);
+                .booze()
+                .getBoozeEntry(fluid);
         }
         return null;
     }
@@ -135,9 +135,9 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem {
         BoozeUtils.addBottleInformation(getFluid(stack), stack, player, list, bool, showDetailed);
         if (!showDetailed) {
             list.add(
-                    EnumChatFormatting.GRAY + GrcI18n.translate(
-                            "grc.tooltip.detailed_information",
-                            EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
+                EnumChatFormatting.GRAY + GrcI18n.translate(
+                    "grc.tooltip.detailed_information",
+                    EnumChatFormatting.WHITE + GrcCoreState.detailedKey + EnumChatFormatting.GRAY));
         }
     }
 

@@ -31,7 +31,7 @@ public class GrcMilkEffects {
 
     public static void init() {
         final IEffectRegistry reg = CoreRegistry.instance()
-                .getEffectsRegistry();
+            .getEffectsRegistry();
         reg.register("booze_milk", EffectMilk.class);
         reg.register("evil_booze_milk", EffectEvilBoozeMilk.class);
     }

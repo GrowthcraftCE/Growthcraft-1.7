@@ -65,7 +65,7 @@ public class ItemKeySchema extends ItemStackSchema implements IItemStackListProv
             result.add(new ItemKeySchema((ItemStack) obj));
         } else {
             throw new IllegalArgumentException(
-                    "Wrong type, expected a ItemStack or OreItemStacks, or IMultiItemStacks");
+                "Wrong type, expected a ItemStack or OreItemStacks, or IMultiItemStacks");
         }
         return result;
     }

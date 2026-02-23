@@ -60,9 +60,9 @@ public class UserFluidDictionaryConfig extends AbstractUserJSONConfig {
         }
 
         final IFluidTagsRegistry fluidTags = CoreRegistry.instance()
-                .fluidTags();
+            .fluidTags();
         final IFluidDictionary fluidDict = CoreRegistry.instance()
-                .fluidDictionary();
+            .fluidDictionary();
         final Fluid fluid = entry.getFluid();
 
         for (String tagName : entry.tags) {

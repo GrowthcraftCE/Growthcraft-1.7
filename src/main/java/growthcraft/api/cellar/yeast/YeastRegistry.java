@@ -77,9 +77,9 @@ public class YeastRegistry implements IYeastRegistry {
             yeastToBiomeType.put(yeastKey, new HashSet<BiomeDictionary.Type>());
         }
         biomeTypeToYeast.get(type)
-                .add(new WeightedItemStack(weight, yeast));
+            .add(new WeightedItemStack(weight, yeast));
         yeastToBiomeType.get(yeastKey)
-                .add(type);
+            .add(type);
     }
 
     @Override
@@ -91,13 +91,13 @@ public class YeastRegistry implements IYeastRegistry {
             yeastToBiomeName.put(yeastKey, new HashSet<String>());
         }
         yeastToBiomeName.get(yeastKey)
-                .add(name);
+            .add(name);
         if (!biomeNameToYeast.containsKey(name)) {
             logger.debug("Initializing biome name to yeast set for %s", name);
             biomeNameToYeast.put(name, new HashSet<WeightedItemStack>());
         }
         biomeNameToYeast.get(name)
-                .add(new WeightedItemStack(weight, yeast));
+            .add(new WeightedItemStack(weight, yeast));
     }
 
     @Override

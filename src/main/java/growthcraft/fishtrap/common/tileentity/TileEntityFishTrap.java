@@ -109,7 +109,7 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
         final ItemStack bait = baitInventory.getStackInSlot(0);
         if (bait != null) {
             final BaitHandle handle = FishTrapRegistry.instance()
-                    .findBait(bait);
+                .findBait(bait);
             if (handle != null) {
                 result += handle.baseRate;
                 result *= handle.multiplier;
@@ -145,7 +145,7 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
      */
     public boolean addStack(ItemStack stack) {
         return InventoryProcessor.instance()
-                .mergeWithSlots(trapInventory, stack);
+            .mergeWithSlots(trapInventory, stack);
     }
 
     @Override
@@ -165,7 +165,7 @@ public class TileEntityFishTrap extends GrcTileInventoryBase implements IInterac
                 if (b0 >= 0 && b0 < trapInventory.getSizeInventory()) {
                     final ItemStack stack = ItemStack.loadItemStackFromNBT(item);
                     InventoryProcessor.instance()
-                            .mergeWithSlot(trapInventory, stack, b0);
+                        .mergeWithSlot(trapInventory, stack, b0);
                 }
             }
         } else {

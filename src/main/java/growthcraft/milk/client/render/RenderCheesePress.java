@@ -53,7 +53,7 @@ public class RenderCheesePress implements ISimpleBlockRenderingHandler {
                 GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
                 GL11.glTranslatef(0.0f, -1.0f, 0.0f);
                 GrcMilkResources.INSTANCE.modelCheesePress
-                        .render(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ModelCheesePress.SCALE);
+                    .render(null, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ModelCheesePress.SCALE);
             }
             GL11.glPopMatrix();
         }

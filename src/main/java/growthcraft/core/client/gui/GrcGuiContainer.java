@@ -113,7 +113,7 @@ public abstract class GrcGuiContainer<C extends Container, T extends TileEntity>
 
     public void bindTexture(ResourceLocation res) {
         mc.getTextureManager()
-                .bindTexture(res);
+            .bindTexture(res);
     }
 
     public void bindGuiTexture() {

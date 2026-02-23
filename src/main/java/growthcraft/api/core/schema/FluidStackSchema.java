@@ -41,7 +41,7 @@ public class FluidStackSchema implements IFluidStackFactory, IValidatable, IComm
 
     public FluidStackSchema(@Nonnull FluidStack stack) {
         this.name = stack.getFluid()
-                .getName();
+            .getName();
         this.amount = stack.amount;
         this.comment = stack.getLocalizedName();
     }
@@ -80,10 +80,10 @@ public class FluidStackSchema implements IFluidStackFactory, IValidatable, IComm
     @Override
     public String toString() {
         return String.format(
-                "Schema<FluidStack>(comment: '%s', name: '%s', amount: %d)",
-                StringUtils.inspect(comment),
-                name,
-                amount);
+            "Schema<FluidStack>(comment: '%s', name: '%s', amount: %d)",
+            StringUtils.inspect(comment),
+            name,
+            amount);
     }
 
     @Override

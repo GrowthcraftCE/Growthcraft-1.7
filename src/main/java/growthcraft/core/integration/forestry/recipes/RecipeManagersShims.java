@@ -27,17 +27,17 @@ public class RecipeManagersShims {
 
     private static RecipeManagersShims INSTANCE;
     public ICarpenterManager carpenterManager = ObjectUtils
-            .maybe(RecipeManagers.carpenterManager, new CarpenterManagerShim());
+        .maybe(RecipeManagers.carpenterManager, new CarpenterManagerShim());
     public ICentrifugeManager centrifugeManager = ObjectUtils
-            .maybe(RecipeManagers.centrifugeManager, new CentrifugeManagerShim());
+        .maybe(RecipeManagers.centrifugeManager, new CentrifugeManagerShim());
     public IFabricatorManager fabricatorManager = ObjectUtils
-            .maybe(RecipeManagers.fabricatorManager, new FabricatorManagerShim());
+        .maybe(RecipeManagers.fabricatorManager, new FabricatorManagerShim());
     public IFermenterManager fermenterManager = ObjectUtils
-            .maybe(RecipeManagers.fermenterManager, new FermenterManagerShim());
+        .maybe(RecipeManagers.fermenterManager, new FermenterManagerShim());
     public IMoistenerManager moistenerManager = ObjectUtils
-            .maybe(RecipeManagers.moistenerManager, new MoistenerManagerShim());
+        .maybe(RecipeManagers.moistenerManager, new MoistenerManagerShim());
     public ISqueezerManager squeezerManager = ObjectUtils
-            .maybe(RecipeManagers.squeezerManager, new SqueezerManagerShim());
+        .maybe(RecipeManagers.squeezerManager, new SqueezerManagerShim());
     public IStillManager stillManager = ObjectUtils.maybe(RecipeManagers.stillManager, new StillManagerShim());
 
     @Optional.Method(modid = "ForestryAPI|recipes")

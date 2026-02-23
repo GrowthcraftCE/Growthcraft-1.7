@@ -59,8 +59,8 @@ public class RecipeHandlerFermentBarrel extends TemplateRecipeHandler {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         final List<IFermentationRecipe> recipes = CellarRegistry.instance()
-                .fermenting()
-                .findRecipes(ingredient);
+            .fermenting()
+            .findRecipes(ingredient);
         for (IFermentationRecipe recipe : recipes) {
             arecipes.add(new CachedFermentationRecipe(recipe));
         }
@@ -104,16 +104,16 @@ public class RecipeHandlerFermentBarrel extends TemplateRecipeHandler {
             super();
             this.fermentationRecipe = recipe;
             this.ingredient = new PositionedStack(
-                    fermentationRecipe.getFermentingItemStack()
-                            .itemStacks(),
-                    38,
-                    42);
+                fermentationRecipe.getFermentingItemStack()
+                    .itemStacks(),
+                38,
+                42);
 
             this.inputFluidStacks = fermentationRecipe.getInputFluidStack()
-                    .getFluidStacks();
+                .getFluidStacks();
 
             this.outputFluidStack = fermentationRecipe.getOutputFluidStack()
-                    .copy();
+                .copy();
             outputFluidStack.amount = GrowthCraftCellar.getConfig().fermentBarrelMaxCap;
         }
 

@@ -88,8 +88,8 @@ public abstract class BlockGrapeVineBase extends GrcBlockBase implements IPlanta
         final boolean flag = this.isGrapeVine(j1) || this.isGrapeVine(k1);
         final boolean flag1 = this.isGrapeVine(l) || this.isGrapeVine(i1);
         final boolean flag2 = this.isGrapeVine(l1) || this.isGrapeVine(i2)
-                || this.isGrapeVine(j2)
-                || this.isGrapeVine(k2);
+            || this.isGrapeVine(j2)
+            || this.isGrapeVine(k2);
         float f = 1.0F;
 
         for (int l2 = x - 1; l2 <= x + 1; ++l2) {

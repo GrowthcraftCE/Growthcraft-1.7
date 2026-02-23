@@ -23,9 +23,9 @@ public class WorldGeneratorBamboo implements IWorldGenerator {
 
     private void generateSurface(World world, Random random, int chunkX, int chunkZ) {
         if (!world.getWorldInfo()
-                .getTerrainType()
-                .getWorldTypeName()
-                .startsWith("flat")) {
+            .getTerrainType()
+            .getWorldTypeName()
+            .startsWith("flat")) {
             final int i = chunkX * 16 + random.nextInt(16) + 8;
             final int j = random.nextInt(128);
             final int k = chunkZ * 16 + random.nextInt(16) + 8;

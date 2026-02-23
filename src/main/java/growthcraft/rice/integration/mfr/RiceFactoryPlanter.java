@@ -35,6 +35,6 @@ public class RiceFactoryPlanter extends AbstractFactoryPlantable<BlockRice> {
     @Override
     public boolean canBePlantedHere(World world, int x, int y, int z, ItemStack stack) {
         return super.canBePlantedHere(world, x, y, z, stack)
-                && RiceBlockCheck.isPaddyWithWater(world, x, y - 1, z, GrowthCraftRice.getConfig().paddyFieldMax);
+            && RiceBlockCheck.isPaddyWithWater(world, x, y - 1, z, GrowthCraftRice.getConfig().paddyFieldMax);
     }
 }

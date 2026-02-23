@@ -39,7 +39,7 @@ public class ClientProxy extends CommonProxy {
         final int villagerID = GrowthCraftBees.getConfig().villagerApiaristID;
         if (villagerID > 0) {
             VillagerRegistry.instance()
-                    .registerVillagerSkin(villagerID, new ResourceLocation("grcbees", "textures/entity/apiarist.png"));
+                .registerVillagerSkin(villagerID, new ResourceLocation("grcbees", "textures/entity/apiarist.png"));
         }
     }
 

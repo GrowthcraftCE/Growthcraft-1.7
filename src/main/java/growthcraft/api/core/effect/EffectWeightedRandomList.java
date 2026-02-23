@@ -228,8 +228,8 @@ public class EffectWeightedRandomList extends AbstractEffect {
             this.itemWeight = data.getInteger("item_weight");
             if (data.hasKey("effect")) {
                 this.effect = CoreRegistry.instance()
-                        .getEffectsRegistry()
-                        .loadEffectFromNBT(data, "effect");
+                    .getEffectsRegistry()
+                    .loadEffectFromNBT(data, "effect");
             }
         }
 
@@ -254,8 +254,8 @@ public class EffectWeightedRandomList extends AbstractEffect {
         public void writeToNBT(NBTTagCompound data, String name) {
             final NBTTagCompound target = new NBTTagCompound();
             final String effectName = CoreRegistry.instance()
-                    .getEffectsRegistry()
-                    .getName(this.getClass());
+                .getEffectsRegistry()
+                .getName(this.getClass());
             // This is a VERY important field, this is how the effects will reload their correct class.
             target.setString("__name__", effectName);
             writeToNBT(target);

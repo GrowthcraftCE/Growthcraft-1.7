@@ -31,7 +31,7 @@ public class StringUtils {
             return str.toUpperCase();
         } else {
             return str.substring(0, 1)
-                    .toUpperCase() + str.substring(1);
+                .toUpperCase() + str.substring(1);
         }
     }
 
@@ -39,10 +39,10 @@ public class StringUtils {
         if (obj == null) {
             return "@null";
         } else if (obj.getClass()
-                .isArray()) {
+            .isArray()) {
             if (obj.getClass()
-                    .getComponentType()
-                    .isArray()) {
+                .getComponentType()
+                .isArray()) {
                 return Arrays.deepToString((Object[][]) obj);
             } else {
                 return Arrays.toString((Object[]) obj);

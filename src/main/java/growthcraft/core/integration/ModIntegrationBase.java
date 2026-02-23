@@ -46,7 +46,7 @@ public abstract class ModIntegrationBase extends GrcModuleBase {
 
     public String getModTag() {
         final ModContainer cont = FMLCommonHandler.instance()
-                .findContainerFor(modID);
+            .findContainerFor(modID);
         return String.format("%s [%s]", modID, cont != null ? cont.getVersion() : "NOT LOADED");
     }
 

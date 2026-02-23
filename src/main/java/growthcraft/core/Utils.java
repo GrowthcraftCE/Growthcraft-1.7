@@ -63,7 +63,7 @@ public class Utils {
             j = MathHelper.floor_float((float) amount * exp);
 
             if (j < MathHelper.ceiling_float_int((float) amount * exp)
-                    && (float) Math.random() < (float) amount * exp - (float) j) {
+                && (float) Math.random() < (float) amount * exp - (float) j) {
                 ++j;
             }
 
@@ -74,7 +74,7 @@ public class Utils {
             j = EntityXPOrb.getXPSplit(amount);
             amount -= j;
             player.worldObj.spawnEntityInWorld(
-                    new EntityXPOrb(player.worldObj, player.posX, player.posY + 0.5D, player.posZ + 0.5D, j));
+                new EntityXPOrb(player.worldObj, player.posX, player.posY + 0.5D, player.posZ + 0.5D, j));
         }
     }
 
@@ -112,12 +112,12 @@ public class Utils {
                         // WARN about invalid container item
                     } else {
                         world.spawnEntityInWorld(
-                                new EntityItem(
-                                        world,
-                                        (double) x + 0.5D,
-                                        (double) y + 1.5D,
-                                        (double) z + 0.5D,
-                                        containerItem));
+                            new EntityItem(
+                                world,
+                                (double) x + 0.5D,
+                                (double) y + 1.5D,
+                                (double) z + 0.5D,
+                                containerItem));
                     }
                 } else if (player instanceof EntityPlayerMP) {
                     ((EntityPlayerMP) player).sendContainerToPlayer(player.inventoryContainer);
@@ -157,7 +157,7 @@ public class Utils {
 
             if (!player.inventory.addItemStackToInventory(filled)) {
                 world.spawnEntityInWorld(
-                        new EntityItem(world, (double) x + 0.5D, (double) y + 1.5D, (double) z + 0.5D, filled));
+                    new EntityItem(world, (double) x + 0.5D, (double) y + 1.5D, (double) z + 0.5D, filled));
             } else if (player instanceof EntityPlayerMP) {
                 ((EntityPlayerMP) player).sendContainerToPlayer(player.inventoryContainer);
             }

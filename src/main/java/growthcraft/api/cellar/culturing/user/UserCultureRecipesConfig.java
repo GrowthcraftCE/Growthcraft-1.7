@@ -74,8 +74,8 @@ public class UserCultureRecipesConfig extends AbstractUserJSONConfig {
 
         logger.debug("Adding user culturing recipe {%s}", recipe);
         CellarRegistry.instance()
-                .culturing()
-                .addRecipe(inputFluidStack, recipe.output_item.asStack(), recipe.required_heat, recipe.time);
+            .culturing()
+            .addRecipe(inputFluidStack, recipe.output_item.asStack(), recipe.required_heat, recipe.time);
     }
 
     @Override

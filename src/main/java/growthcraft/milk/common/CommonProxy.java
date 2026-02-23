@@ -32,7 +32,7 @@ public class CommonProxy extends GrcModuleProxyBase {
 
     protected void registerWorldGen() {
         if (GrowthCraftMilk.getConfig()
-                .canThistleGenerate()) GameRegistry.registerWorldGenerator(new WorldGeneratorThistle(), 0);
+            .canThistleGenerate()) GameRegistry.registerWorldGenerator(new WorldGeneratorThistle(), 0);
     }
 
     @Override

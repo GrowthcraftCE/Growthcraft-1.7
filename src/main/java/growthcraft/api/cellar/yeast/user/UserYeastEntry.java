@@ -52,11 +52,11 @@ public class UserYeastEntry implements ICommentable {
     @Override
     public String toString() {
         return String.format(
-                "UserYeastEntry(item: `%s`, weight: %d, biome_types: %s, biome_names: %s)",
-                item,
-                weight,
-                biome_types,
-                biome_names);
+            "UserYeastEntry(item: `%s`, weight: %d, biome_types: %s, biome_names: %s)",
+            item,
+            weight,
+            biome_types,
+            biome_names);
     }
 
     @Override

@@ -32,10 +32,10 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 
 @Mod(
-        modid = GrowthCraftApples.MOD_ID,
-        name = GrowthCraftApples.MOD_NAME,
-        version = GrowthCraftApples.MOD_VERSION,
-        dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
+    modid = GrowthCraftApples.MOD_ID,
+    name = GrowthCraftApples.MOD_NAME,
+    version = GrowthCraftApples.MOD_VERSION,
+    dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@")
 public class GrowthCraftApples {
 
     public static final String MOD_ID = "Growthcraft|Apples";
@@ -99,9 +99,9 @@ public class GrowthCraftApples {
         final VillageHandlerApples handler = new VillageHandlerApples();
         final int brewerID = GrowthCraftCellar.getConfig().villagerBrewerID;
         if (brewerID > 0) VillagerRegistry.instance()
-                .registerVillageTradeHandler(brewerID, handler);
+            .registerVillageTradeHandler(brewerID, handler);
         VillagerRegistry.instance()
-                .registerVillageCreationHandler(handler);
+            .registerVillageCreationHandler(handler);
     }
 
     @EventHandler

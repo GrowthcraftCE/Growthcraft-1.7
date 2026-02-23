@@ -110,6 +110,6 @@ public class VineDropRegistry implements IVineDropRegistry {
         if (entry == null || entry.getItemStack() == null) return null;
 
         return entry.getItemStack()
-                .copy();
+            .copy();
     }
 }

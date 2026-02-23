@@ -36,10 +36,10 @@ public class BlockCheck {
      * 2D directions
      */
     public static final ForgeDirection[] DIR4 = new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.SOUTH,
-            ForgeDirection.WEST, ForgeDirection.EAST};
+        ForgeDirection.WEST, ForgeDirection.EAST};
     public static final BlockDirection[] DIR8 = new BlockDirection[]{BlockDirection.NORTH, BlockDirection.SOUTH,
-            BlockDirection.WEST, BlockDirection.EAST, BlockDirection.NORTH_WEST, BlockDirection.NORTH_EAST,
-            BlockDirection.SOUTH_WEST, BlockDirection.SOUTH_EAST};
+        BlockDirection.WEST, BlockDirection.EAST, BlockDirection.NORTH_WEST, BlockDirection.NORTH_EAST,
+        BlockDirection.SOUTH_WEST, BlockDirection.SOUTH_EAST};
 
     private BlockCheck() {
     }

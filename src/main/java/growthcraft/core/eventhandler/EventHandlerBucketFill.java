@@ -46,7 +46,7 @@ public class EventHandlerBucketFill {
     public void addEntry(@Nonnull IBucketEntry entry) {
         buckets.add(entry);
         GrowthCraftCore.getLogger()
-                .debug("Added new Bucket Entry {%s}", entry);
+            .debug("Added new Bucket Entry {%s}", entry);
     }
 
     public EventHandlerBucketFill register(Block block, ItemStack stack) {

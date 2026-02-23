@@ -62,19 +62,19 @@ public class BoozeEntry {
 
     public Collection<FluidTag> getTags() {
         return CoreRegistry.instance()
-                .fluidDictionary()
-                .getFluidTags(fluid);
+            .fluidDictionary()
+            .getFluidTags(fluid);
     }
 
     public void addTags(FluidTag... newtags) {
         CoreRegistry.instance()
-                .fluidDictionary()
-                .addFluidTags(fluid, newtags);
+            .fluidDictionary()
+            .addFluidTags(fluid, newtags);
     }
 
     public boolean hasTags(FluidTag... checktags) {
         return CoreRegistry.instance()
-                .fluidDictionary()
-                .hasFluidTags(fluid, checktags);
+            .fluidDictionary()
+            .hasFluidTags(fluid, checktags);
     }
 }

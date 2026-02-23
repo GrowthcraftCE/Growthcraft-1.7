@@ -58,26 +58,26 @@ public class UserHeatSourcesConfig extends AbstractUserJSONConfig {
         if (block != null) {
             if (entry.states == null || entry.states.size() == 0) {
                 logger.warn(
-                        "Block contains invalid states, we will assume a wildcard, but you should probably set this. mod_id='%s' block='%s'",
-                        entry.mod_id,
-                        entry.block_name);
+                    "Block contains invalid states, we will assume a wildcard, but you should probably set this. mod_id='%s' block='%s'",
+                    entry.mod_id,
+                    entry.block_name);
                 CellarRegistry.instance()
-                        .heatSource()
-                        .addHeatSource(block, ItemKey.WILDCARD_VALUE);
+                    .heatSource()
+                    .addHeatSource(block, ItemKey.WILDCARD_VALUE);
             } else {
                 for (Map.Entry<Integer, Float> pair : entry.states.entrySet()) {
                     int key = pair.getKey();
                     if (key < 0) key = ItemKey.WILDCARD_VALUE;
                     CellarRegistry.instance()
-                            .heatSource()
-                            .addHeatSource(block, key, pair.getValue());
+                        .heatSource()
+                        .addHeatSource(block, key, pair.getValue());
                 }
             }
         } else {
             logger.error(
-                    "Block could not be found, and will not be added as heat source. mod_id='%s' block='%s'",
-                    entry.mod_id,
-                    entry.block_name);
+                "Block could not be found, and will not be added as heat source. mod_id='%s' block='%s'",
+                entry.mod_id,
+                entry.block_name);
         }
     }
 

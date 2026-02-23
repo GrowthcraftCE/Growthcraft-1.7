@@ -52,11 +52,11 @@ public class TaggedFluidStacks implements IMultiFluidStacks {
         this.tags = ptags;
         this.exclusionTags = pextags;
         this.fluidTags = CoreRegistry.instance()
-                .fluidTags()
-                .expandTagNames(tags);
+            .fluidTags()
+            .expandTagNames(tags);
         this.exclusionFluidTags = CoreRegistry.instance()
-                .fluidTags()
-                .expandTagNames(exclusionTags);
+            .fluidTags()
+            .expandTagNames(exclusionTags);
     }
 
     /**
@@ -94,13 +94,13 @@ public class TaggedFluidStacks implements IMultiFluidStacks {
         if (fluidCache == null) {
             this.fluidCache = new ArrayList<Fluid>();
             fluidCache.addAll(
-                    CoreRegistry.instance()
-                            .fluidDictionary()
-                            .getFluidsByTags(fluidTags));
+                CoreRegistry.instance()
+                    .fluidDictionary()
+                    .getFluidsByTags(fluidTags));
             fluidCache.removeAll(
-                    CoreRegistry.instance()
-                            .fluidDictionary()
-                            .getFluidsByTags(exclusionFluidTags));
+                CoreRegistry.instance()
+                    .fluidDictionary()
+                    .getFluidsByTags(exclusionFluidTags));
         }
         return fluidCache;
     }

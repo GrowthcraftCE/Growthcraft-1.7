@@ -40,9 +40,9 @@ public class EventHandlerOnBabyCowDeath {
             if (event.entityLiving.isChild()) {
                 if (RandomUtils.thresh(rng, GrowthCraftMilk.getConfig().stomachDropRate)) {
                     final int count = RandomUtils.range(
-                            rng,
-                            GrowthCraftMilk.getConfig().stomachMinDropped,
-                            GrowthCraftMilk.getConfig().stomachMaxDropped);
+                        rng,
+                        GrowthCraftMilk.getConfig().stomachMinDropped,
+                        GrowthCraftMilk.getConfig().stomachMaxDropped);
                     if (count > 0) {
                         if (!event.entity.worldObj.isRemote) {
                             final ItemStack stack = GrowthCraftMilk.items.stomach.asStack(count);

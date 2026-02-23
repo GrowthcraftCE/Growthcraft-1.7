@@ -41,17 +41,17 @@ public class ItemBambooDoor extends GrcItemBase {
         }
 
         final int i1 = (world.getBlock(i - b0, j, k - b1)
-                .isNormalCube(world, i - b0, j, k - b1) ? 1 : 0)
-                + (world.getBlock(i - b0, j + 1, k - b1)
-                .isNormalCube(world, i - b0, j + 1, k - b1) ? 1 : 0);
+            .isNormalCube(world, i - b0, j, k - b1) ? 1 : 0)
+            + (world.getBlock(i - b0, j + 1, k - b1)
+            .isNormalCube(world, i - b0, j + 1, k - b1) ? 1 : 0);
         final int j1 = (world.getBlock(i + b0, j, k + b1)
-                .isNormalCube(world, i + b0, j, k + b1) ? 1 : 0)
-                + (world.getBlock(i + b0, j + 1, k + b1)
-                .isNormalCube(world, i + b0, j + 1, k + b1) ? 1 : 0);
+            .isNormalCube(world, i + b0, j, k + b1) ? 1 : 0)
+            + (world.getBlock(i + b0, j + 1, k + b1)
+            .isNormalCube(world, i + b0, j + 1, k + b1) ? 1 : 0);
         final boolean flag = world.getBlock(i - b0, j, k - b1) == block
-                || world.getBlock(i - b0, j + 1, k - b1) == block;
+            || world.getBlock(i - b0, j + 1, k - b1) == block;
         final boolean flag1 = world.getBlock(i + b0, j, k + b1) == block
-                || world.getBlock(i + b0, j + 1, k + b1) == block;
+            || world.getBlock(i + b0, j + 1, k + b1) == block;
         boolean flag2 = false;
 
         if (flag && !flag1) {
@@ -82,7 +82,7 @@ public class ItemBambooDoor extends GrcItemBase {
                     return false;
                 } else {
                     final int i1 = MathHelper
-                            .floor_double((double) ((player.rotationYaw + 180.0F) * 4.0F / 360.0F) - 0.5D) & 3;
+                        .floor_double((double) ((player.rotationYaw + 180.0F) * 4.0F / 360.0F) - 0.5D) & 3;
                     placeDoorBlock(world, x, y, z, i1, block);
                     --stack.stackSize;
                     return true;

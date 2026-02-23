@@ -59,7 +59,7 @@ public class UserCatchGroupConfig extends AbstractUserJSONConfig {
 
         logger.debug("Adding Catch Group %s", name);
         FishTrapRegistry.instance()
-                .addCatchGroup(name, entry.weight);
+            .addCatchGroup(name, entry.weight);
     }
 
     @Override

@@ -29,9 +29,9 @@ public class ComponentVillageGrapeVineyard extends StructureVillagePieces.Villag
     public static ComponentVillageGrapeVineyard buildComponent(Start startPiece, List list, Random random, int par3,
                                                                int par4, int par5, int par6, int par7) {
         final StructureBoundingBox structureboundingbox = StructureBoundingBox
-                .getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 6, 9, par6);
+            .getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 6, 9, par6);
         if (canVillageGoDeeper(structureboundingbox)
-                && StructureComponent.findIntersecting(list, structureboundingbox) == null) {
+            && StructureComponent.findIntersecting(list, structureboundingbox) == null) {
             return new ComponentVillageGrapeVineyard(startPiece, par7, random, structureboundingbox, par6);
         }
         return null;
@@ -70,22 +70,22 @@ public class ComponentVillageGrapeVineyard extends StructureVillagePieces.Villag
             this.placeBlockAtCurrentPosition(world, GrowthCraftGrapes.blocks.grapeVine1.getBlock(), 1, loop, 2, 4, box);
             for (loop2 = 2; loop2 <= 6; ++loop2) {
                 this.placeBlockAtCurrentPosition(
-                        world,
-                        GrowthCraftGrapes.blocks.grapeLeaves.getBlock(),
-                        0,
-                        loop,
-                        3,
-                        loop2,
-                        box);
+                    world,
+                    GrowthCraftGrapes.blocks.grapeLeaves.getBlock(),
+                    0,
+                    loop,
+                    3,
+                    loop2,
+                    box);
                 if (MathHelper.getRandomIntegerInRange(random, 0, 2) != 0 && loop2 != 4) {
                     this.placeBlockAtCurrentPosition(
-                            world,
-                            GrowthCraftGrapes.blocks.grapeBlock.getBlock(),
-                            0,
-                            loop,
-                            2,
-                            loop2,
-                            box);
+                        world,
+                        GrowthCraftGrapes.blocks.grapeBlock.getBlock(),
+                        0,
+                        loop,
+                        2,
+                        loop2,
+                        box);
                 }
             }
         }

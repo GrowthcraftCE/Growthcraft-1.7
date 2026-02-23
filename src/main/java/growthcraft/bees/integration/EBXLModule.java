@@ -37,7 +37,7 @@ public class EBXLModule extends ModIntegrationBase {
     @Override
     public void doPreInit() {
         GrowthCraftBees.blocks.beeBoxExtraBiomesXL = GrowthCraftBees.blocks
-                .newTypedDefinition(new BlockBeeBoxExtraBiomesXL());
+            .newTypedDefinition(new BlockBeeBoxExtraBiomesXL());
     }
 
     @Override
@@ -51,12 +51,12 @@ public class EBXLModule extends ModIntegrationBase {
             final ItemStack planks = type.asPlanksItemStack();
             if (planks != null) {
                 GameRegistry.addShapedRecipe(
-                        GrowthCraftBees.blocks.beeBoxExtraBiomesXL.asStack(1, type.meta),
-                        " A ",
-                        "A A",
-                        "AAA",
-                        'A',
-                        planks);
+                    GrowthCraftBees.blocks.beeBoxExtraBiomesXL.asStack(1, type.meta),
+                    " A ",
+                    "A A",
+                    "AAA",
+                    'A',
+                    planks);
             }
         }
     }

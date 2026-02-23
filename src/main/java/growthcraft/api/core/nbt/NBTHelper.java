@@ -162,8 +162,8 @@ public class NBTHelper {
         for (int i = 0; i < size; ++i) {
             final NBTTagCompound effectData = effectsList.getCompoundTagAt(i);
             final IEffect effect = CoreRegistry.instance()
-                    .getEffectsRegistry()
-                    .loadEffectFromNBT(effectData, "value");
+                .getEffectsRegistry()
+                .loadEffectFromNBT(effectData, "value");
             list.add(effect);
         }
     }

@@ -38,6 +38,6 @@ public class FXHelper {
         final float particleBlue = (color & 0xFF) / 255.0f;
         final EntityFX fx = new EntityFXDropParticle(world, px, py, pz, particleRed, particleGreen, particleBlue);
         FMLClientHandler.instance()
-                .getClient().effectRenderer.addEffect(fx);
+            .getClient().effectRenderer.addEffect(fx);
     }
 }

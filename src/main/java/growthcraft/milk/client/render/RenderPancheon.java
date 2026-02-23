@@ -39,7 +39,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderPancheon implements ISimpleBlockRenderingHandler {
 
     private static final BBox fluidBBox = BBox.newCube(1, 1, 1, 14, 4, 14)
-            .scale(ModelPancheon.SCALE);
+        .scale(ModelPancheon.SCALE);
     public static int RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
     @Override
@@ -90,16 +90,16 @@ public class RenderPancheon implements ISimpleBlockRenderingHandler {
                     FluidStack fluid = pancheonTile.getFluidStack(0);
                     if (fluid != null) {
                         final float fluidHeight = fluid.amount * fluidBBox.h()
-                                / pancheonTile.getFluidTank(0)
-                                .getCapacity();
+                            / pancheonTile.getFluidTank(0)
+                            .getCapacity();
                         renderFluidLayer(block, renderer, fluid.getFluid(), y0, y0 + fluidHeight, x, y, z);
                     }
 
                     fluid = pancheonTile.getFluidStack(1);
                     if (fluid != null) {
                         final float fluidHeight = fluid.amount * fluidBBox.h()
-                                / pancheonTile.getFluidTank(1)
-                                .getCapacity();
+                            / pancheonTile.getFluidTank(1)
+                            .getCapacity();
                         renderFluidLayer(block, renderer, fluid.getFluid(), y0, y0 + fluidHeight, x, y, z);
                         y0 += fluidHeight;
                     }
@@ -107,8 +107,8 @@ public class RenderPancheon implements ISimpleBlockRenderingHandler {
                     fluid = pancheonTile.getFluidStack(2);
                     if (fluid != null) {
                         final float fluidHeight = fluid.amount * fluidBBox.h()
-                                / pancheonTile.getFluidTank(2)
-                                .getCapacity();
+                            / pancheonTile.getFluidTank(2)
+                            .getCapacity();
                         renderFluidLayer(block, renderer, fluid.getFluid(), y0, y0 + fluidHeight, x, y, z);
                     }
                 }

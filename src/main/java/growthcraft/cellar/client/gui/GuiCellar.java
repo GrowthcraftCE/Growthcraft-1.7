@@ -26,8 +26,8 @@ public class GuiCellar<C extends CellarContainer, T extends TileEntityCellarDevi
 
         addFluidTooltips(fluid, tooltip);
         if (!CellarRegistry.instance()
-                .fermenting()
-                .canFerment(fluid)) {
+            .fermenting()
+            .canFerment(fluid)) {
             tooltip.add("");
             tooltip.add(EnumChatFormatting.RED + GrcI18n.translate("gui.grc.cantferment"));
         }

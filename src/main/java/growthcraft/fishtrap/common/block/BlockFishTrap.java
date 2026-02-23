@@ -89,7 +89,7 @@ public class BlockFishTrap extends GrcBlockContainer {
             isInWaterBiome = BiomeDictionary.isBiomeOfType(biome, Type.WATER);
         } else {
             isInWaterBiome = Utils
-                    .isIDInList(world.getBiomeGenForCoords(x, z).biomeID, GrowthCraftFishTrap.getConfig().biomesList);
+                .isIDInList(world.getBiomeGenForCoords(x, z).biomeID, GrowthCraftFishTrap.getConfig().biomesList);
         }
 
         if (isInWaterBiome) {
@@ -132,39 +132,39 @@ public class BlockFishTrap extends GrcBlockContainer {
 
     protected ItemStack pickCatch(World world, int x, int y, int z) {
         final String catchGroup = FishTrapRegistry.instance()
-                .getRandomCatchGroup(world.rand);
+            .getRandomCatchGroup(world.rand);
         GrowthCraftFishTrap.getLogger()
-                .debug(
-                        "Picking Catch from group=%s x=%d y=%d z=%d dimension=%d",
-                        catchGroup,
-                        x,
-                        y,
-                        z,
-                        world.provider.dimensionId);
+            .debug(
+                "Picking Catch from group=%s x=%d y=%d z=%d dimension=%d",
+                catchGroup,
+                x,
+                y,
+                z,
+                world.provider.dimensionId);
         return FishTrapRegistry.instance()
-                .getRandomCatchFromGroup(world.rand, catchGroup);
+            .getRandomCatchFromGroup(world.rand, catchGroup);
     }
 
     protected void doCatch(World world, int x, int y, int z, TileEntityFishTrap te) {
         final ItemStack item = pickCatch(world, x, y, z);
         if (item != null) {
             GrowthCraftFishTrap.getLogger()
-                    .debug(
-                            "Attempting to add item to inventory x=%d y=%d z=%d dimension=%d item=%s",
-                            x,
-                            y,
-                            z,
-                            world.provider.dimensionId,
-                            item);
+                .debug(
+                    "Attempting to add item to inventory x=%d y=%d z=%d dimension=%d item=%s",
+                    x,
+                    y,
+                    z,
+                    world.provider.dimensionId,
+                    item);
             if (te.addStack(item)) {
                 GrowthCraftFishTrap.getLogger()
-                        .debug(
-                                "Added item to inventory x=%d y=%d z=%d dimension=%d item=%s",
-                                x,
-                                y,
-                                z,
-                                world.provider.dimensionId,
-                                item);
+                    .debug(
+                        "Added item to inventory x=%d y=%d z=%d dimension=%d item=%s",
+                        x,
+                        y,
+                        z,
+                        world.provider.dimensionId,
+                        item);
                 te.consumeBait();
             }
         }
@@ -174,7 +174,7 @@ public class BlockFishTrap extends GrcBlockContainer {
                                 boolean debugFlag) {
         final float f = this.getCatchRate(world, x, y, z);
         GrowthCraftFishTrap.getLogger()
-                .debug("Attempting Catch x=%d y=%d z=%d dimension=%d rate=%f", x, y, z, world.provider.dimensionId, f);
+            .debug("Attempting Catch x=%d y=%d z=%d dimension=%d rate=%f", x, y, z, world.provider.dimensionId, f);
         if (random.nextInt((int) (this.chance / f) + 1) == 0 || debugFlag) {
             doCatch(world, x, y, z, te);
         }
@@ -182,8 +182,8 @@ public class BlockFishTrap extends GrcBlockContainer {
 
     private boolean canCatch(World world, int x, int y, int z) {
         return isWater(world.getBlock(x, y, z - 1)) || isWater(world.getBlock(x, y, z + 1))
-                || isWater(world.getBlock(x - 1, y, z))
-                || isWater(world.getBlock(x + 1, y, z));
+            || isWater(world.getBlock(x - 1, y, z))
+            || isWater(world.getBlock(x + 1, y, z));
     }
 
     @Override
@@ -192,18 +192,18 @@ public class BlockFishTrap extends GrcBlockContainer {
         final TileEntityFishTrap te = getTileEntity(world, x, y, z);
         if (te != null) {
             GrowthCraftFishTrap.getLogger()
-                    .debug(
-                            "Checking if fishtrap can catch x=%d y=%d z=%d dimension=%d",
-                            x,
-                            y,
-                            z,
-                            world.provider.dimensionId);
+                .debug(
+                    "Checking if fishtrap can catch x=%d y=%d z=%d dimension=%d",
+                    x,
+                    y,
+                    z,
+                    world.provider.dimensionId);
             if (canCatch(world, x, y, z)) {
                 attemptCatch(world, x, y, z, random, te, false);
             }
         } else {
             GrowthCraftFishTrap.getLogger()
-                    .warn("Missing TileEntityFishTrap at x=%d y=%d z=%d dimension=%d", x, y, z, world.provider.dimensionId);
+                .warn("Missing TileEntityFishTrap at x=%d y=%d z=%d dimension=%d", x, y, z, world.provider.dimensionId);
         }
     }
 

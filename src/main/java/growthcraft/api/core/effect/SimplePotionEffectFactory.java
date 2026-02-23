@@ -90,8 +90,8 @@ public class SimplePotionEffectFactory implements IPotionEffectFactory {
     public void writeToNBT(NBTTagCompound data, String name) {
         final NBTTagCompound target = new NBTTagCompound();
         final String factoryName = CoreRegistry.instance()
-                .getPotionEffectFactoryRegistry()
-                .getName(this.getClass());
+            .getPotionEffectFactoryRegistry()
+            .getName(this.getClass());
 
         target.setString("__name__", factoryName);
         writeToNBT(target);

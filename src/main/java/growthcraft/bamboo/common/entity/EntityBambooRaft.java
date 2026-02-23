@@ -113,7 +113,7 @@ public class EntityBambooRaft extends Entity {
             this.setDamageTaken(this.getDamageTaken() + par2 * 10.0F);
             this.setBeenAttacked();
             final boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer
-                    && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
+                && ((EntityPlayer) par1DamageSource.getEntity()).capabilities.isCreativeMode;
 
             if (flag || this.getDamageTaken() > 40.0F) {
                 if (this.riddenByEntity != null) {
@@ -217,18 +217,18 @@ public class EntityBambooRaft extends Entity {
 
         for (int i = 0; i < b0; ++i) {
             final double d1 = this.boundingBox.minY
-                    + (this.boundingBox.maxY - this.boundingBox.minY) * (double) (i) / (double) b0
-                    - 0.125D;
+                + (this.boundingBox.maxY - this.boundingBox.minY) * (double) (i) / (double) b0
+                - 0.125D;
             final double d3 = this.boundingBox.minY
-                    + (this.boundingBox.maxY - this.boundingBox.minY) * (double) (i + 1) / (double) b0
-                    - 0.125D;
+                + (this.boundingBox.maxY - this.boundingBox.minY) * (double) (i + 1) / (double) b0
+                - 0.125D;
             final AxisAlignedBB axisalignedbb = AxisAlignedBB.getBoundingBox(
-                    this.boundingBox.minX,
-                    d1,
-                    this.boundingBox.minZ,
-                    this.boundingBox.maxX,
-                    d3,
-                    this.boundingBox.maxZ);
+                this.boundingBox.minX,
+                d1,
+                this.boundingBox.minZ,
+                this.boundingBox.maxX,
+                d3,
+                this.boundingBox.maxZ);
 
             if (this.worldObj.isAABBInMaterial(axisalignedbb, Material.water)) {
                 d0 += 1.0D / (double) b0;
@@ -254,12 +254,12 @@ public class EntityBambooRaft extends Entity {
                     d8 = this.posX - d2 * d5 * 0.8D + d4 * d6;
                     d9 = this.posZ - d4 * d5 * 0.8D - d2 * d6;
                     this.worldObj
-                            .spawnParticle("splash", d8, this.posY - 0.125D, d9, this.motionX, this.motionY, this.motionZ);
+                        .spawnParticle("splash", d8, this.posY - 0.125D, d9, this.motionX, this.motionY, this.motionZ);
                 } else {
                     d8 = this.posX + d2 + d4 * d5 * 0.7D;
                     d9 = this.posZ + d4 - d2 * d5 * 0.7D;
                     this.worldObj
-                            .spawnParticle("splash", d8, this.posY - 0.125D, d9, this.motionX, this.motionY, this.motionZ);
+                        .spawnParticle("splash", d8, this.posY - 0.125D, d9, this.motionX, this.motionY, this.motionZ);
                 }
             }
         }
@@ -275,7 +275,7 @@ public class EntityBambooRaft extends Entity {
                 d12 = MathHelper.wrapAngleTo180_double(this.boatYaw - (double) this.rotationYaw);
                 this.rotationYaw = (float) ((double) this.rotationYaw + d12 / (double) this.boatPosRotationIncrements);
                 this.rotationPitch = (float) ((double) this.rotationPitch
-                        + (this.boatPitch - (double) this.rotationPitch) / (double) this.boatPosRotationIncrements);
+                    + (this.boatPitch - (double) this.rotationPitch) / (double) this.boatPosRotationIncrements);
                 --this.boatPosRotationIncrements;
                 this.setPosition(d2, d4, d11);
                 this.setRotation(this.rotationYaw, this.rotationPitch);
@@ -310,11 +310,11 @@ public class EntityBambooRaft extends Entity {
             if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase entitylivingbase) {
                 final float f = this.riddenByEntity.rotationYaw + -entitylivingbase.moveStrafing * 90.0F;
                 this.motionX += -Math.sin(f * (float) Math.PI / 180.0F) * this.speedMultiplier
-                        * (double) entitylivingbase.moveForward
-                        * 0.05000000074505806D;
+                    * (double) entitylivingbase.moveForward
+                    * 0.05000000074505806D;
                 this.motionZ += Math.cos(f * (float) Math.PI / 180.0F) * this.speedMultiplier
-                        * (double) entitylivingbase.moveForward
-                        * 0.05000000074505806D;
+                    * (double) entitylivingbase.moveForward
+                    * 0.05000000074505806D;
             }
 
             d2 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
@@ -410,8 +410,8 @@ public class EntityBambooRaft extends Entity {
 
             if (!this.worldObj.isRemote) {
                 final List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(
-                        this,
-                        this.boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
+                    this,
+                    this.boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
 
                 if (list != null && !list.isEmpty()) {
                     for (int k1 = 0; k1 < list.size(); ++k1) {
@@ -435,9 +435,9 @@ public class EntityBambooRaft extends Entity {
             final double d0 = Math.cos((double) this.rotationYaw * Math.PI / 180.0D) * 0.4D;
             final double d1 = Math.sin((double) this.rotationYaw * Math.PI / 180.0D) * 0.4D;
             this.riddenByEntity.setPosition(
-                    this.posX + d0,
-                    this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(),
-                    this.posZ + d1);
+                this.posX + d0,
+                this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(),
+                this.posZ + d1);
         }
     }
 
@@ -463,7 +463,7 @@ public class EntityBambooRaft extends Entity {
      */
     public boolean interactFirst(EntityPlayer par1EntityPlayer) {
         if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer
-                && this.riddenByEntity != par1EntityPlayer) {
+            && this.riddenByEntity != par1EntityPlayer) {
             return true;
         } else {
             if (!this.worldObj.isRemote) {
@@ -503,7 +503,7 @@ public class EntityBambooRaft extends Entity {
                 this.fallDistance = 0.0F;
             }
         } else if (this.worldObj.getBlock(i, j - 1, k)
-                .getMaterial() != Material.water && par1 < 0.0D) {
+            .getMaterial() != Material.water && par1 < 0.0D) {
             this.fallDistance = (float) ((double) this.fallDistance - par1);
         }
     }

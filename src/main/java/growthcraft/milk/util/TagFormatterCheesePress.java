@@ -33,14 +33,14 @@ public class TagFormatterCheesePress implements ITagFormatter {
 
     public List<String> format(List<String> list, NBTTagCompound nbt) {
         list.add(
-                EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese_press.pressing.state.prefix")
-                        + " "
-                        + EnumChatFormatting.WHITE
-                        + GrcI18n.translate("grcmilk.cheese_press.pressing.state." + nbt.getBoolean("pressed")));
+            EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese_press.pressing.state.prefix")
+                + " "
+                + EnumChatFormatting.WHITE
+                + GrcI18n.translate("grcmilk.cheese_press.pressing.state." + nbt.getBoolean("pressed")));
         list.add(
-                EnumChatFormatting.GRAY + GrcI18n.translate(
-                        "grcmilk.cheese_press.itemslot.item",
-                        TagFormatterItem.INSTANCE.formatItem(nbt.getCompoundTag("item"))));
+            EnumChatFormatting.GRAY + GrcI18n.translate(
+                "grcmilk.cheese_press.itemslot.item",
+                TagFormatterItem.INSTANCE.formatItem(nbt.getCompoundTag("item"))));
         return list;
     }
 }

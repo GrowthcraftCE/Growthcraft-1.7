@@ -204,14 +204,14 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
         super.sendGUINetworkData(container, iCrafting);
         iCrafting.sendProgressBarUpdate(container, CultureJarDataId.YEAST_GEN_TIME.ordinal(), yeastGen.getTime());
         iCrafting
-                .sendProgressBarUpdate(container, CultureJarDataId.YEAST_GEN_TIME_MAX.ordinal(), yeastGen.getTimeMax());
+            .sendProgressBarUpdate(container, CultureJarDataId.YEAST_GEN_TIME_MAX.ordinal(), yeastGen.getTimeMax());
         iCrafting.sendProgressBarUpdate(container, CultureJarDataId.CULTURE_GEN_TIME.ordinal(), cultureGen.getTime());
         iCrafting
-                .sendProgressBarUpdate(container, CultureJarDataId.CULTURE_GEN_TIME_MAX.ordinal(), cultureGen.getTimeMax());
+            .sendProgressBarUpdate(container, CultureJarDataId.CULTURE_GEN_TIME_MAX.ordinal(), cultureGen.getTimeMax());
         iCrafting.sendProgressBarUpdate(
-                container,
-                CultureJarDataId.HEAT_AMOUNT.ordinal(),
-                (int) (heatComponent.getHeatMultiplier() * 0x7FFF));
+            container,
+            CultureJarDataId.HEAT_AMOUNT.ordinal(),
+            (int) (heatComponent.getHeatMultiplier() * 0x7FFF));
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NBT_READ)
@@ -271,7 +271,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITil
         UNKNOWN;
 
         public static final CultureJarDataId[] VALID = new CultureJarDataId[]{YEAST_GEN_TIME, YEAST_GEN_TIME_MAX,
-                CULTURE_GEN_TIME, CULTURE_GEN_TIME_MAX, HEAT_AMOUNT};
+            CULTURE_GEN_TIME, CULTURE_GEN_TIME_MAX, HEAT_AMOUNT};
 
         public static CultureJarDataId getByOrdinal(int ord) {
             if (ord >= 0 && ord < VALID.length) return VALID[ord];

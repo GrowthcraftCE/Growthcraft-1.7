@@ -59,7 +59,7 @@ public class ItemKey extends HashKey implements IItemStackFactory {
         final Item pitem = Item.getItemFromBlock(block);
         if (pitem == null) {
             throw new IllegalArgumentException(
-                    "Invalid Block given for ItemKey (block=" + block + " meta=" + pmeta + ")");
+                "Invalid Block given for ItemKey (block=" + block + " meta=" + pmeta + ")");
         }
         this.item = pitem;
         this.meta = pmeta;

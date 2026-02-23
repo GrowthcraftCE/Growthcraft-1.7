@@ -68,11 +68,11 @@ public class RenderRice implements ISimpleBlockRenderingHandler {
         final double d2 = z;
 
         renderer.drawCrossedSquares(
-                renderer.getBlockIconFromSideAndMetadata(block, 0, world.getBlockMetadata(x, y, z)),
-                d0,
-                d1,
-                d2,
-                1.0F);
+            renderer.getBlockIconFromSideAndMetadata(block, 0, world.getBlockMetadata(x, y, z)),
+            d0,
+            d1,
+            d2,
+            1.0F);
     }
 
     @Override

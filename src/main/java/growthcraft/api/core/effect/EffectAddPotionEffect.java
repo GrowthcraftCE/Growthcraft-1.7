@@ -84,8 +84,8 @@ public class EffectAddPotionEffect extends AbstractEffect {
     protected void readFromNBT(NBTTagCompound data) {
         if (data.hasKey("potion_factory")) {
             this.potionFactory = CoreRegistry.instance()
-                    .getPotionEffectFactoryRegistry()
-                    .loadPotionEffectFactoryFromNBT(data, "potion_factory");
+                .getPotionEffectFactoryRegistry()
+                .loadPotionEffectFactoryFromNBT(data, "potion_factory");
         }
     }
 

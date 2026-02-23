@@ -66,10 +66,10 @@ public class ChurnRecipe implements IChurnRecipe {
 
     public String toString() {
         return String.format(
-                "ChurnRecipe(`%s` / %d = `%s` & `%s`)",
-                FluidFormatString.format(inputFluid),
-                churns,
-                FluidFormatString.format(outputFluid),
-                outputItem);
+            "ChurnRecipe(`%s` / %d = `%s` & `%s`)",
+            FluidFormatString.format(inputFluid),
+            churns,
+            FluidFormatString.format(outputFluid),
+            outputItem);
     }
 }

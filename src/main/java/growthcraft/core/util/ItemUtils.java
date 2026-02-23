@@ -147,13 +147,13 @@ public class ItemUtils {
 
     public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, World world, boolean checkCreative) {
         addStackToPlayer(
-                itemstack,
-                player,
-                world,
-                (int) player.posX,
-                (int) player.posY,
-                (int) player.posZ,
-                checkCreative);
+            itemstack,
+            player,
+            world,
+            (int) player.posX,
+            (int) player.posY,
+            (int) player.posZ,
+            checkCreative);
     }
 
     public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, boolean checkCreative) {
