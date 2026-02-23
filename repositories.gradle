@@ -3,39 +3,50 @@
 repositories {
     mavenLocal()
     mavenCentral()
-    maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-    }
-    flatDir {
-        dirs 'libs'
-    }
-    maven {
-        name "applecore"
-        url "http://www.ryanliptak.com/maven/"
-    }
-    maven {
-        name "chickenbones"
-        url "http://chickenbones.net/maven/"
-    }
-    maven {
-        name = "forge"
-        url = "http://files.minecraftforge.net/maven"
-    }
-    maven {
-        url "http://dvs1.progwml6.com/files/maven"
-    }
-    maven {
-        name = "Mobius Repo"
-        url "http://tehnut.info/maven"
-    }
-    maven {
-        name = "ilexiconn"
-        url = "https://maven.mcmoddev.com/"
-    }
-    maven {
-        name = "CurseMaven"
-        url = "https://cursemaven.com"
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        forRepositories(fg.repository) // Only add this if you're using ForgeGradle, otherwise remove this line
+        filter {
+            includeGroup "maven.modrinth"
+        }
+        flatDir {
+            dirs 'libs'
+        }
+        flatDir {
+            dirs 'libs'
+        }
+        maven {
+            name "applecore"
+            url "http://www.ryanliptak.com/maven/"
+        }
+        maven {
+            name "chickenbones"
+            url "http://chickenbones.net/maven/"
+        }
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            url "http://dvs1.progwml6.com/files/maven"
+        }
+        maven {
+            name = "Mobius Repo"
+            url "http://tehnut.info/maven"
+        }
+        maven {
+            name = "ilexiconn"
+            url = "https://maven.mcmoddev.com/"
+        }
+        maven {
+            name = "CurseMaven"
+            url = "https://cursemaven.com"
+        }
         ivy {
             name "buildcraft"
             artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
@@ -61,5 +72,4 @@ repositories {
             url "https://beta.cursemaven.com"
         }
     }
-
 }
