@@ -1,6 +1,8 @@
 // Add any additional repositories for your dependencies here.
 
 repositories {
+    mavenLocal()
+    mavenCentral()
     exclusiveContent {
         forRepository {
             maven {
@@ -11,6 +13,10 @@ repositories {
         forRepositories(fg.repository) // Only add this if you're using ForgeGradle, otherwise remove this line
         filter {
             includeGroup "maven.modrinth"
+        }
+        ivy {
+            name "buildcraft"
+            artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
         }
         flatDir {
             dirs 'libs'
@@ -41,10 +47,6 @@ repositories {
         maven {
             name = "CurseMaven"
             url = "https://cursemaven.com"
-        }
-        ivy {
-            name "buildcraft"
-            artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
         }
         maven {
             url = "https://maven.minecraftforge.net/"
