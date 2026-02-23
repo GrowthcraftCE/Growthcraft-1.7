@@ -18,7 +18,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.integration.FA;
+package growthcraft.core.integration.fa;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -28,7 +28,8 @@ import java.util.Locale;
 
 public enum EnumFAWoodType {
 
-    PALAEORAPHE;
+    PALAEORAPHE,
+    ANCIENT;
 
     public static final EnumFAWoodType[] VALUES = values();
 
@@ -41,7 +42,7 @@ public enum EnumFAWoodType {
     }
 
     public ItemStack asPlanksItemStack(int size) {
-        final Block block = GameRegistry.findBlock(FAPlatform.MOD_ID, "palaeoraphePlanks");
+        final Block block = GameRegistry.findBlock(growthcraft.core.integration.FA.FAPlatform.MOD_ID, "palaeoraphePlanks");
         if (block != null) {
             final ItemStack result = new ItemStack(block, size, meta);
             return result;

@@ -18,7 +18,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.integration.AM2;
+package growthcraft.core.integration.am2;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -41,7 +41,7 @@ public enum EnumAM2WoodType {
     }
 
     public ItemStack asPlanksItemStack(int size) {
-        final Block block = GameRegistry.findBlock(AM2Platform.MOD_ID, "planksWitchwood");
+        final Block block = GameRegistry.findBlock(growthcraft.core.integration.AM2.AM2Platform.MOD_ID, "planksWitchwood");
         if (block != null) {
             final ItemStack result = new ItemStack(block, size, meta);
             return result;

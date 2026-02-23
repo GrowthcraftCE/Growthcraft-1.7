@@ -17,7 +17,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.core.integration.FA;
+package growthcraft.core.integration.fa;
 
 import cpw.mods.fml.common.Loader;
 

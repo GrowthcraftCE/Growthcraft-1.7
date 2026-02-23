@@ -1,4 +1,6 @@
 package growthcraft.bees.integration;
 
-public class WitcheryModule {
+import growthcraft.core.integration.ModIntegrationBase;
+
+public class WitcheryModule extends ModIntegrationBase {
 }
