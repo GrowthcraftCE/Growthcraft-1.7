@@ -58,7 +58,7 @@ public class GrowthCraftCore
 {
 	public static final String MOD_ID = "Growthcraft";
 	public static final String MOD_NAME = "Growthcraft";
-	public static final String MOD_VERSION = "@VERSION@";
+	public static final String MOD_VERSION = growthcraft.core.Tags.VERSION;
 	public static final String MOD_ACC_MINECRAFT = "[@GRC_MC_VERSION@]";
 	public static final String MOD_DEPENDENCIES = "required-after:Forge@[10.13.4.1566,);required-after:AppleCore@[1.3.0,);required-after:Forestry@[4.2.8,)";
 

@@ -37,13 +37,13 @@ import net.minecraftforge.oredict.OreDictionary;
 	modid = GrowthCraftHops.MOD_ID,
 	name = GrowthCraftHops.MOD_NAME,
 	version = GrowthCraftHops.MOD_VERSION,
-	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@"
+	dependencies = "required-after:Growthcraft@2;required-after:Growthcraft|Cellar@2"
 )
 public class GrowthCraftHops
 {
 	public static final String MOD_ID = "Growthcraft|Hops";
 	public static final String MOD_NAME = "Growthcraft Hops";
-	public static final String MOD_VERSION = "@VERSION@";
+	public static final String MOD_VERSION = growthcraft.core.Tags.VERSION;
 
 	@Instance(MOD_ID)
 	public static GrowthCraftHops instance;

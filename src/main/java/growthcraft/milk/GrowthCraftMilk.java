@@ -65,7 +65,7 @@ public class GrowthCraftMilk
 {
 	public static final String MOD_ID = "Growthcraft|Milk";
 	public static final String MOD_NAME = "Growthcraft Milk";
-	public static final String MOD_VERSION = "@VERSION@";
+	public static final String MOD_VERSION = growthcraft.core.Tags.VERSION;
 	public static final String MOD_DEPENDENCIES = "required-after:Growthcraft;required-after:Growthcraft|Cellar";
 
 	@Instance(MOD_ID)

@@ -64,13 +64,13 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 	modid = GrowthCraftCellar.MOD_ID,
 	name = GrowthCraftCellar.MOD_NAME,
 	version = GrowthCraftCellar.MOD_VERSION,
-	dependencies = "required-after:Growthcraft@@VERSION@"
+	dependencies = "required-after:Growthcraft@2"
 )
 public class GrowthCraftCellar
 {
 	public static final String MOD_ID = "Growthcraft|Cellar";
 	public static final String MOD_NAME = "Growthcraft Cellar";
-	public static final String MOD_VERSION = "@VERSION@";
+	public static final String MOD_VERSION = growthcraft.core.Tags.VERSION;
 
 	@Instance(MOD_ID)
 	public static GrowthCraftCellar instance;

@@ -46,7 +46,7 @@ public class GrowthCraftBamboo
 {
 	public static final String MOD_ID = "Growthcraft|Bamboo";
 	public static final String MOD_NAME = "Growthcraft Bamboo";
-	public static final String MOD_VERSION = "@VERSION@";
+	public static final String MOD_VERSION = growthcraft.core.Tags.VERSION;
 
 	@Instance(MOD_ID)
 	public static GrowthCraftBamboo instance;

@@ -49,13 +49,13 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 	modid = GrowthCraftBees.MOD_ID,
 	name = GrowthCraftBees.MOD_NAME,
 	version = GrowthCraftBees.MOD_VERSION,
-	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@;after:Forestry"
+	dependencies = "required-after:Growthcraft@2;required-after:Growthcraft|Cellar@2;after:Forestry"
 )
 public class GrowthCraftBees
 {
 	public static final String MOD_ID = "Growthcraft|Bees";
 	public static final String MOD_NAME = "Growthcraft Bees";
-	public static final String MOD_VERSION = "@VERSION@";
+	public static final String MOD_VERSION = growthcraft.core.Tags.VERSION;
 
 	@Instance(MOD_ID)
 	public static GrowthCraftBees instance;

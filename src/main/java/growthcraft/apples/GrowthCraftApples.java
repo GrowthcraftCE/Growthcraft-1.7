@@ -36,13 +36,13 @@ import net.minecraftforge.common.MinecraftForge;
 	modid = GrowthCraftApples.MOD_ID,
 	name = GrowthCraftApples.MOD_NAME,
 	version = GrowthCraftApples.MOD_VERSION,
-	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@"
+	dependencies = "required-after:Growthcraft@2;required-after:Growthcraft|Cellar@2"
 )
 public class GrowthCraftApples
 {
 	public static final String MOD_ID = "Growthcraft|Apples";
 	public static final String MOD_NAME = "Growthcraft Apples";
-	public static final String MOD_VERSION = "@VERSION@";
+	public static final String MOD_VERSION = growthcraft.core.Tags.VERSION;
 
 	@Instance(MOD_ID)
 	public static GrowthCraftApples instance;

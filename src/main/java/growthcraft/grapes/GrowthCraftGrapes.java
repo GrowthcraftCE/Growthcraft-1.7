@@ -40,13 +40,13 @@ import net.minecraftforge.oredict.OreDictionary;
 	modid = GrowthCraftGrapes.MOD_ID,
 	name = GrowthCraftGrapes.MOD_NAME,
 	version = GrowthCraftGrapes.MOD_VERSION,
-	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@"
+	dependencies = "required-after:Growthcraft@2;required-after:Growthcraft|Cellar@2"
 )
 public class GrowthCraftGrapes
 {
 	public static final String MOD_ID = "Growthcraft|Grapes";
 	public static final String MOD_NAME = "Growthcraft Grapes";
-	public static final String MOD_VERSION = "@VERSION@";
+	public static final String MOD_VERSION = growthcraft.core.Tags.VERSION;
 
 	@Instance(MOD_ID)
 	public static GrowthCraftGrapes instance;
