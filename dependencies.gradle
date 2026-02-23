@@ -37,7 +37,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     //runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.69-GTNH:dev")
     compileOnly("com.github.GTNewHorizons:NotEnoughItems:2.7.69-GTNH:dev")
-    // These are all sorely outdates, need to update, but old growthcraft anyway...
+    // These are all sorely outdated, need to update, but old growthcraft anyway...
     compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
     compileOnly("net.sengir.forestry:forestry_1.7.10:4.2.16.64:dev")
     compileOnly("powercrystals:MineFactoryReloaded:[1.7.10]2.8.2B1-201:dev")
