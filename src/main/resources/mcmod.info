@@ -1,10 +1,12 @@
-[
 {
-    "modid": "Growthcraft|Apples",
-    "name": "Growthcraft Apples",
+	"modListVersion": 2,
+	"modList": [
+{
+    "modid": "${modId}|Apples",
+    "name": "${modName} Apples",
     "description": "Growthcraft Apples is a mod which changes how apples are farmed in-game. In addition to this, it also adds Apple Ciders as a new product from apples.",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -18,11 +20,11 @@
     "useDependencyInformation": "true"
 },
 {
-    "modid": "Growthcraft|Bamboo",
-    "name": "Growthcraft Bamboo",
+    "modid": "${modId}|Bamboo",
+    "name": "${modName} Bamboo",
     "description": "Growthcraft Bamboo is a mod which adds a new plant to the game: bamboos, which focuses on construction rather food.",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -36,11 +38,11 @@
     "useDependencyInformation": "true"
 },
 {
-    "modid": "Growthcraft|Bees",
-    "name": "Growthcraft Bees",
+    "modid": "${modId}|Bees",
+    "name": "${modName} Bees",
     "description": "Growthcraft Bees is a mod which adds a new in-game hobby: beekeeping.",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -54,11 +56,11 @@
     "useDependencyInformation": "true"
 },
 {
-    "modid": "Growthcraft|Cellar",
-    "name": "Growthcraft Cellar",
+    "modid": "${modId}|Cellar",
+    "name": "${modName} Cellar",
     "description": "Growthcraft Cellar is a mod which adds a new in-game hobby: brewing alcoholic beverages.",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -72,11 +74,11 @@
     "useDependencyInformation": "true"
 },
 {
-    "modid": "Growthcraft",
-    "name": "Growthcraft",
+    "modid": "${modId}",
+    "name": "${modName}",
     "description": "Growthcraft Core is as a mod which acts a central hub for the other mods. It will provide of resources needed in common by two or more Growthcraft mods.",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -90,11 +92,11 @@
     "useDependencyInformation": "true"
 },
 {
-    "modid": "Growthcraft|Milk",
-    "name": "Growthcraft Milk",
+    "modid": "${modId}|Milk",
+    "name": "${modName} Milk",
     "description": "Growthcraft Milk is a mod which adds new dairy-based products, such as cheese.",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10",
     "updateUrl": "",
     "authors": [ "IceDragon200" ],
@@ -108,11 +110,11 @@
     "useDependencyInformation": "true"
 },
 {
-    "modid": "Growthcraft|Fishtrap",
-    "name": "Growthcraft Fishtrap",
+    "modid": "${modId}|Fishtrap",
+    "name": "${modName} Fishtrap",
     "description": "Growthcraft Fishtrap is a mod which adds a block; Fishtrap, that automatically catches fish (and other stuff) for you! ",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -126,11 +128,11 @@
     "useDependencyInformation": "true"
 },
 {
-    "modid": "Growthcraft|Grapes",
-    "name": "Growthcraft Grapes",
+    "modid": "${modId}|Grapes",
+    "name": "${modName} Grapes",
     "description": "Growthcraft Grapes is a mod which adds a new totally crop to the game: grapes. It also comes with Wine-making.",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -144,11 +146,11 @@
     "useDependencyInformation": "true"
 },
 {
-    "modid": "Growthcraft|Hops",
-    "name": "Growthcraft Hops",
+    "modid": "${modId}|Hops",
+    "name": "${modName} Hops",
     "description": "Growthcraft Hops is a mod which adds a new crop to the game, hops. It also comes with Ale-brewing. ",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -162,11 +164,11 @@
     "useDependencyInformation": "true"
 },
 {
-    "modid": "Growthcraft|Rice",
-    "name": "Growthcraft Rice",
+    "modid": "${modId}|Rice",
+    "name": "${modName} Rice",
     "description": "Growthcraft Rice is a mod which adds a new crop; rice. Alongside it also comes a new brew type; sake.",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
     "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2505072-growthcraft-community-edition-proper-1-7-10",
     "updateUrl": "",
     "authors": [ "Gwafu" ],
@@ -180,3 +182,4 @@
     "useDependencyInformation": "true"
 }
 ]
+}
