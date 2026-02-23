@@ -1,8 +1,6 @@
 // Add any additional repositories for your dependencies here.
 
 repositories {
-    mavenLocal()
-    mavenCentral()
     exclusiveContent {
         forRepository {
             maven {
@@ -13,9 +11,6 @@ repositories {
         forRepositories(fg.repository) // Only add this if you're using ForgeGradle, otherwise remove this line
         filter {
             includeGroup "maven.modrinth"
-        }
-        flatDir {
-            dirs 'libs'
         }
         flatDir {
             dirs 'libs'
