@@ -5,6 +5,7 @@ repositories {
     mavenCentral()
     gradlePluginPortal()
     maven {
+        name = "Modrinth"
         url = "https://api.modrinth.com/maven"
     }
     ivy {
@@ -29,7 +30,7 @@ repositories {
     maven {
         name = "GTMEGA/FalsePattern Maven"
         url = "https://mvn.falsepattern.com/releases/"
-    }	
+    }
     maven {
         name "chickenbones"
         url "http://chickenbones.net/maven/"
