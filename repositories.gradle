@@ -29,8 +29,10 @@ repositories {
         name = "Mobius Repo"
         url "http://tehnut.info/maven"
     }
-    name = "ilexiconn"
-    url = "https://maven.mcmoddev.com/"
+    maven {
+        name = "ilexiconn"
+        url = "https://maven.mcmoddev.com/"
+    }
     maven {
         name = "CurseMaven"
         url = "https://cursemaven.com"
