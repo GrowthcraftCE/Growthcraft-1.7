@@ -1,9 +1,9 @@
 {
-	"buzz": {
-		"category": "block",
-		"sounds": [
-			"buzz1", 
-			"buzz2"
-		]
-	}
+  "buzz": {
+    "category": "block",
+    "sounds": [
+      "buzz1",
+      "buzz2"
+    ]
+  }
 }
