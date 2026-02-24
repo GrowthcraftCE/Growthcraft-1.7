@@ -10,75 +10,70 @@
  ******************************************************************************/
 /**
  * NOTICE:
- *   This file has been modified from its original source for use in
- *   Growthcraft CE.
+ * This file has been modified from its original source for use in
+ * Growthcraft CE.
  */
 package growthcraft.core.integration.forestry;
 
-import java.util.List;
-import java.util.Collection;
-
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.api.core.util.Point3;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class CropBasicGrowthCraft extends AbstractForestryCrop
-{
-	private final Block block;
-	private final int meta;
-	private final boolean isRice;
-	private final boolean isGrape;
+import java.util.Collection;
+import java.util.List;
 
-	public CropBasicGrowthCraft(World pworld, Block pblock, int pmeta, Point3 pos, boolean pisRice, boolean pisGrape)
-	{
-		super(pworld, pos);
-		this.block = pblock;
-		this.meta = pmeta;
-		this.isRice = pisRice;
-		this.isGrape = pisGrape;
-	}
+public class CropBasicGrowthCraft extends AbstractForestryCrop {
 
-	@Override
-	protected boolean isCrop(Point3 pos)
-	{
-		return getBlock(pos) == block && getBlockMeta(pos) == meta;
-	}
+    private final Block block;
+    private final int meta;
+    private final boolean isRice;
+    private final boolean isGrape;
 
-	@Override
-	protected Collection<ItemStack> harvestBlock(Point3 pos)
-	{
-		final List<ItemStack> harvest = block.getDrops(world, pos.x, pos.y, pos.z, meta, 0);
-		if (harvest.size() > 1)
-		{
-			// Hops have rope as first drop.
-			harvest.remove(0);
-		}
+    public CropBasicGrowthCraft(World pworld, Block pblock, int pmeta, Point3 pos, boolean pisRice, boolean pisGrape) {
+        super(pworld, pos);
+        this.block = pblock;
+        this.meta = pmeta;
+        this.isRice = pisRice;
+        this.isGrape = pisGrape;
+    }
 
-		// Need to replace this later
-		//Proxies.common.addBlockDestroyEffects(world, pos.x, pos.y, pos.z, block, 0);
+    @Override
+    protected boolean isCrop(Point3 pos) {
+        return getBlock(pos) == block && getBlockMeta(pos) == meta;
+    }
 
-		if (isGrape)
-		{
-			world.setBlockToAir(pos.x, pos.y, pos.z);
-		}
-		else
-		{
-			world.setBlockMetadataWithNotify(pos.x, pos.y, pos.z, 0, BlockFlags.SYNC);
-		}
+    @Override
+    protected Collection<ItemStack> harvestBlock(Point3 pos) {
+        final List<ItemStack> harvest = block.getDrops(world, pos.x(), pos.y(), pos.z(), meta, 0);
+        if (harvest.size() > 1) {
+            // Hops have rope as first drop.
+            harvest.remove(0);
+        }
 
-		if (isRice) {
-			world.setBlockMetadataWithNotify(pos.x, pos.y - 1, pos.z, 7, BlockFlags.SYNC);
-		}
+        // Need to replace this later
+        // Proxies.common.addBlockDestroyEffects(world, pos.x, pos.y, pos.z, block, 0);
 
-		return harvest;
-	}
+        if (isGrape) {
+            world.setBlockToAir(pos.x(), pos.y(), pos.z());
+        } else {
+            world.setBlockMetadataWithNotify(pos.x(), pos.y(), pos.z(), 0, BlockFlags.SYNC);
+        }
 
-	@Override
-	public String toString()
-	{
-		return String.format("CropBasicGrowthCraft [ position: [ %s ]; block: %s; meta: %s ]", position.toString(), block.getUnlocalizedName(), meta);
-	}
+        if (isRice) {
+            world.setBlockMetadataWithNotify(pos.x(), pos.y() - 1, pos.z(), 7, BlockFlags.SYNC);
+        }
+
+        return harvest;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "CropBasicGrowthCraft [ position: [ %s ]; block: %s; meta: %s ]",
+            position.toString(),
+            block.getUnlocalizedName(),
+            meta);
+    }
 }
