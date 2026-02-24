@@ -1,108 +1,123 @@
 package growthcraft.api.cellar.booze;
 
-import growthcraft.api.core.fluids.FluidTag;
-import growthcraft.api.core.fluids.FluidUtils;
-import growthcraft.api.core.log.ILogger;
-import growthcraft.api.core.log.NullLogger;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class BoozeRegistry implements IBoozeRegistry {
+import growthcraft.api.core.log.ILogger;
+import growthcraft.api.core.log.NullLogger;
+import growthcraft.api.core.fluids.FluidTag;
+import growthcraft.api.core.fluids.FluidUtils;
 
-    private final Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
-    private final Map<FluidTag, IModifierFunction> tagModifierFunctions = new HashMap<FluidTag, IModifierFunction>();
-    private ILogger logger = NullLogger.INSTANCE;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
-    @Override
-    public void setLogger(@Nonnull ILogger l) {
-        this.logger = l;
-    }
+public class BoozeRegistry implements IBoozeRegistry
+{
+	private ILogger logger = NullLogger.INSTANCE;
+	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
+	private Map<FluidTag, IModifierFunction> tagModifierFunctions = new HashMap<FluidTag, IModifierFunction>();
 
-    public IModifierFunction getModifierFunction(@Nullable FluidTag tag) {
-        return tagModifierFunctions.get(tag);
-    }
+	@Override
+	public void setLogger(@Nonnull ILogger l)
+	{
+		this.logger = l;
+	}
 
-    public void setModifierFunction(@Nonnull FluidTag tag, IModifierFunction func) {
-        tagModifierFunctions.put(tag, func);
-    }
+	public IModifierFunction getModifierFunction(@Nullable FluidTag tag)
+	{
+		return tagModifierFunctions.get(tag);
+	}
 
-    public Collection<BoozeEntry> getBoozeEntries() {
-        return boozeMap.values();
-    }
+	public void setModifierFunction(@Nonnull FluidTag tag, IModifierFunction func)
+	{
+		tagModifierFunctions.put(tag, func);
+	}
 
-    private void ensureFluidIsValid(Fluid fluid) {
-        if (!FluidUtils.doesFluidExist(fluid)) {
-            throw new IllegalArgumentException(
-                "[Growthcraft|Cellar] The fluid being registered as a Booze is not registered to the FluidRegistry.");
-        }
-    }
+	public Collection<BoozeEntry> getBoozeEntries()
+	{
+		return boozeMap.values();
+	}
 
-    @Override
-    @Nullable
-    public BoozeEntry getBoozeEntry(Fluid fluid) {
-        if (fluid == null) return null;
-        return boozeMap.get(fluid);
-    }
+	private void ensureFluidIsValid(Fluid fluid)
+	{
+		if (!FluidUtils.doesFluidExist(fluid))
+		{
+			throw new IllegalArgumentException("[Growthcraft|Cellar] The fluid being registered as a Booze is not registered to the FluidRegistry.");
+		}
+	}
 
-    @Override
-    @Nonnull
-    public BoozeEntry fetchBoozeEntry(Fluid fluid) {
-        final BoozeEntry entry = getBoozeEntry(fluid);
-        if (entry == null) {
-            throw new IllegalArgumentException(
-                "[Growthcraft|Cellar] The fluid being tagged does not have a valid booze entry.");
-        }
-        return entry;
-    }
+	@Override
+	@Nullable
+	public BoozeEntry getBoozeEntry(Fluid fluid)
+	{
+		if (fluid == null) return null;
+		return boozeMap.get(fluid);
+	}
 
-    @Override
-    @Nullable
-    public BoozeEffect getEffect(Fluid fluid) {
-        final BoozeEntry entry = getBoozeEntry(fluid);
-        return entry != null ? entry.getEffect() : null;
-    }
+	@Override
+	@Nonnull
+	public BoozeEntry fetchBoozeEntry(Fluid fluid)
+	{
+		final BoozeEntry entry = getBoozeEntry(fluid);
+		if (entry == null)
+		{
+			throw new IllegalArgumentException("[Growthcraft|Cellar] The fluid being tagged does not have a valid booze entry.");
+		}
+		return entry;
+	}
 
-    @Override
-    public boolean isFluidBooze(Fluid f) {
-        if (f == null) return false;
-        return getBoozeEntry(f) != null;
-    }
+	@Override
+	@Nullable
+	public BoozeEffect getEffect(Fluid fluid)
+	{
+		final BoozeEntry entry = getBoozeEntry(fluid);
+		return entry != null ? entry.getEffect() : null;
+	}
 
-    @Override
-    public boolean isFluidBooze(FluidStack fluidStack) {
-        if (fluidStack == null) return false;
-        return isFluidBooze(fluidStack.getFluid());
-    }
+	@Override
+	public boolean isFluidBooze(Fluid f)
+	{
+		if (f == null) return false;
+		return getBoozeEntry(f) != null;
+	}
 
-    protected void registerBooze(@Nonnull Fluid fluid, @Nonnull BoozeEntry entry) {
-        boozeMap.put(fluid, entry);
-    }
+	@Override
+	public boolean isFluidBooze(FluidStack fluidStack)
+	{
+		if (fluidStack == null) return false;
+		return isFluidBooze(fluidStack.getFluid());
+	}
 
-    /**
-     * Registers a Booze to the CellarRegistry.
-     * <p>
-     * Example Usage:
-     * CellarRegistry.instance().registerBooze(new Booze().setColor(0xFFAABB));
-     *
-     * @param fluid - The fluid to be registered.
-     * @param color - The color of the fluid.
-     **/
-    @Override
-    public void registerBooze(@Nonnull Fluid fluid) {
-        ensureFluidIsValid(fluid);
+	protected void registerBooze(@Nonnull Fluid fluid, @Nonnull BoozeEntry entry)
+	{
+		boozeMap.put(fluid, entry);
+	}
 
-        if (!isFluidBooze(fluid)) {
-            logger.debug("Registering booze %s", fluid.getName());
-            registerBooze(fluid, new BoozeEntry(fluid));
-        } else {
-            throw new IllegalArgumentException(
-                "[Growthcraft|Cellar] The fluid being registered as a Booze is already registered to the CellarRegistry.");
-        }
-    }
+	/**
+	 * Registers a Booze to the CellarRegistry.
+	 *
+	 * Example Usage:
+	 * CellarRegistry.instance().registerBooze(new Booze().setColor(0xFFAABB));
+	 *
+	 * @param fluid           - The fluid to be registered.
+	 * @param color           - The color of the fluid.
+	 **/
+	@Override
+	public void registerBooze(@Nonnull Fluid fluid)
+	{
+		ensureFluidIsValid(fluid);
+
+		if (!isFluidBooze(fluid))
+		{
+			logger.debug("Registering booze %s", fluid.getName());
+			registerBooze(fluid, new BoozeEntry(fluid));
+		}
+		else
+		{
+			throw new IllegalArgumentException("[Growthcraft|Cellar] The fluid being registered as a Booze is already registered to the CellarRegistry.");
+		}
+	}
 }

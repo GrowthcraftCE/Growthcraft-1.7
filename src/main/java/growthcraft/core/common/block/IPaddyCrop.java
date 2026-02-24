@@ -1,5 +1,6 @@
 package growthcraft.core.common.block;
 
-public interface IPaddyCrop {
+public interface IPaddyCrop
+{
 
 }

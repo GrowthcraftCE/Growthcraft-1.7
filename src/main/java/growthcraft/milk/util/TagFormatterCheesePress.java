@@ -1,14 +1,18 @@
 /*
  * The MIT License (MIT)
+ *
  * Copyright (c) 2016 IceDragon200
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,28 +23,29 @@
  */
 package growthcraft.milk.util;
 
+import java.util.List;
+
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.util.ITagFormatter;
 import growthcraft.core.util.TagFormatterItem;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 
-import java.util.List;
+public class TagFormatterCheesePress implements ITagFormatter
+{
+	public static final TagFormatterCheesePress INSTANCE = new TagFormatterCheesePress();
 
-public class TagFormatterCheesePress implements ITagFormatter {
-
-    public static final TagFormatterCheesePress INSTANCE = new TagFormatterCheesePress();
-
-    public List<String> format(List<String> list, NBTTagCompound nbt) {
-        list.add(
-            EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese_press.pressing.state.prefix")
-                + " "
-                + EnumChatFormatting.WHITE
-                + GrcI18n.translate("grcmilk.cheese_press.pressing.state." + nbt.getBoolean("pressed")));
-        list.add(
-            EnumChatFormatting.GRAY + GrcI18n.translate(
-                "grcmilk.cheese_press.itemslot.item",
-                TagFormatterItem.INSTANCE.formatItem(nbt.getCompoundTag("item"))));
-        return list;
-    }
+	public List<String> format(List<String> list, NBTTagCompound nbt)
+	{
+		list.add(EnumChatFormatting.GRAY + GrcI18n.translate("grcmilk.cheese_press.pressing.state.prefix") + " " +
+				EnumChatFormatting.WHITE + GrcI18n.translate("grcmilk.cheese_press.pressing.state." + nbt.getBoolean("pressed")));
+		list.add(EnumChatFormatting.GRAY +
+			GrcI18n.translate(
+				"grcmilk.cheese_press.itemslot.item",
+				TagFormatterItem.INSTANCE.formatItem(nbt.getCompoundTag("item"))
+			)
+		);
+		return list;
+	}
 }

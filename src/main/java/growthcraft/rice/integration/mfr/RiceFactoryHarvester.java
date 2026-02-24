@@ -1,14 +1,18 @@
 /*
  * The MIT License (MIT)
+ *
  * Copyright (c) 2016 IceDragon200
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,22 +23,25 @@
  */
 package growthcraft.rice.integration.mfr;
 
-import growthcraft.core.integration.mfr.AbstractFactoryHarvestable;
-import growthcraft.rice.GrowthCraftRice;
-import growthcraft.rice.common.block.BlockRice;
-import net.minecraft.world.World;
-
 import java.util.Map;
 
-public class RiceFactoryHarvester extends AbstractFactoryHarvestable<BlockRice> {
+import growthcraft.core.integration.mfr.AbstractFactoryHarvestable;
+import growthcraft.rice.common.block.BlockRice;
+import growthcraft.rice.GrowthCraftRice;
 
-    public RiceFactoryHarvester() {
-        super();
-        setPlant(GrowthCraftRice.blocks.riceBlock.getBlock());
-    }
+import net.minecraft.world.World;
 
-    @Override
-    public boolean canBeHarvested(World world, Map<String, Boolean> harvesterSettings, int x, int y, int z) {
-        return plantBlock.isMature(world, x, y, z);
-    }
+public class RiceFactoryHarvester extends AbstractFactoryHarvestable<BlockRice>
+{
+	public RiceFactoryHarvester()
+	{
+		super();
+		setPlant(GrowthCraftRice.blocks.riceBlock.getBlock());
+	}
+
+	@Override
+	public boolean canBeHarvested(World world, Map<String, Boolean> harvesterSettings, int x, int y, int z)
+	{
+		return plantBlock.isMature(world, x, y, z);
+	}
 }

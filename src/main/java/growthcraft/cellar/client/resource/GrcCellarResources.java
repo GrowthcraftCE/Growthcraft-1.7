@@ -1,43 +1,35 @@
 package growthcraft.cellar.client.resource;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.cellar.client.model.ModelCultureJar;
 import growthcraft.cellar.client.model.ModelFruitPresser;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.ResourceLocation;
 
 @SideOnly(Side.CLIENT)
-public class GrcCellarResources {
+public class GrcCellarResources
+{
+	public static GrcCellarResources INSTANCE;
 
-    static final String DOMAIN = "grccellar";
-    public static GrcCellarResources INSTANCE;
-    // Textures
-    public final ResourceLocation textureCultureJar = new ResourceLocation(
-        DOMAIN,
-        "textures/blocks/models/culture_jar.png");
-    public final ResourceLocation textureFruitPresser = new ResourceLocation(
-        DOMAIN,
-        "textures/blocks/models/fruit_presser.png");
+	static final String DOMAIN = "grccellar";
 
-    /// Guis
-    public final ResourceLocation textureGuiBrewKettle = new ResourceLocation(
-        DOMAIN,
-        "textures/guis/brewkettle_gui.png");
-    public final ResourceLocation textureGuiFermentBarrel = new ResourceLocation(
-        DOMAIN,
-        "textures/guis/fermentbarrel_gui.png");
-    public final ResourceLocation textureGuiCultureJar = new ResourceLocation(
-        DOMAIN,
-        "textures/guis/gui_ferment_jar.png");
-    public final ResourceLocation textureGuiFruitPress = new ResourceLocation(
-        DOMAIN,
-        "textures/guis/fruitpress_gui.png");
+	// Textures
+	public final ResourceLocation textureCultureJar = new ResourceLocation(DOMAIN, "textures/blocks/models/culture_jar.png");
+	public final ResourceLocation textureFruitPresser = new ResourceLocation(DOMAIN, "textures/blocks/models/fruit_presser.png");
 
-    // Models
-    public final ModelCultureJar modelCultureJar = new ModelCultureJar();
-    public final ModelFruitPresser modelFruitPresser = new ModelFruitPresser();
+	/// Guis
+	public final ResourceLocation textureGuiBrewKettle = new ResourceLocation(DOMAIN, "textures/guis/brewkettle_gui.png");
+	public final ResourceLocation textureGuiFermentBarrel = new ResourceLocation(DOMAIN, "textures/guis/fermentbarrel_gui.png");
+	public final ResourceLocation textureGuiCultureJar = new ResourceLocation(DOMAIN, "textures/guis/gui_ferment_jar.png");
+	public final ResourceLocation textureGuiFruitPress = new ResourceLocation(DOMAIN, "textures/guis/fruitpress_gui.png");
 
-    public GrcCellarResources() {
-        INSTANCE = this;
-    }
+	// Models
+	public final ModelCultureJar modelCultureJar = new ModelCultureJar();
+	public final ModelFruitPresser modelFruitPresser = new ModelFruitPresser();
+
+	public GrcCellarResources()
+	{
+		INSTANCE = this;
+	}
 }

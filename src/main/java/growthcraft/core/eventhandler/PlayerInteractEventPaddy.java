@@ -1,7 +1,11 @@
 package growthcraft.core.eventhandler;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import java.util.HashMap;
+import java.util.Map;
+
 import growthcraft.api.core.util.BlockFlags;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSpade;
@@ -9,43 +13,37 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-import java.util.HashMap;
-import java.util.Map;
+public class PlayerInteractEventPaddy
+{
+	public static Map<Block, Block> paddyBlocks = new HashMap<Block, Block>();
 
-public class PlayerInteractEventPaddy {
+	@SubscribeEvent
+	public void PlayerInteract(PlayerInteractEvent event)
+	{
+		if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
+		{
+			if (event.face != 1) return;
 
-    public static Map<Block, Block> paddyBlocks = new HashMap<Block, Block>();
+			final EntityPlayer player = event.entityPlayer;
+			final ItemStack itemstack = player.getCurrentEquippedItem();
+			if (itemstack != null && itemstack.getItem() instanceof ItemSpade)
+			{
+				final World world = player.worldObj;
+				final Block targetBlock = world.getBlock(event.x, event.y, event.z);
+				final Block paddyBlock = paddyBlocks.get(targetBlock);
+				if (paddyBlock != null)
+				{
+					world.setBlock(event.x, event.y, event.z, paddyBlock, world.getBlockMetadata(event.x, event.y, event.z), BlockFlags.UPDATE_AND_SYNC);
+					world.playSoundEffect((double)((float)event.x + 0.5F),
+						(double)((float)event.y + 0.5F),
+						(double)((float)event.z + 0.5F),
+						paddyBlock.stepSound.func_150496_b(),
+						(paddyBlock.stepSound.getVolume() + 1.0F) / 2.0F,
+						paddyBlock.stepSound.getPitch() * 0.8F);
 
-    @SubscribeEvent
-    public void PlayerInteract(PlayerInteractEvent event) {
-        if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
-            if (event.face != 1) return;
-
-            final EntityPlayer player = event.entityPlayer;
-            final ItemStack itemstack = player.getCurrentEquippedItem();
-            if (itemstack != null && itemstack.getItem() instanceof ItemSpade) {
-                final World world = player.worldObj;
-                final Block targetBlock = world.getBlock(event.x, event.y, event.z);
-                final Block paddyBlock = paddyBlocks.get(targetBlock);
-                if (paddyBlock != null) {
-                    world.setBlock(
-                        event.x,
-                        event.y,
-                        event.z,
-                        paddyBlock,
-                        world.getBlockMetadata(event.x, event.y, event.z),
-                        BlockFlags.UPDATE_AND_SYNC);
-                    world.playSoundEffect(
-                        (float) event.x + 0.5F,
-                        (float) event.y + 0.5F,
-                        (float) event.z + 0.5F,
-                        paddyBlock.stepSound.func_150496_b(),
-                        (paddyBlock.stepSound.getVolume() + 1.0F) / 2.0F,
-                        paddyBlock.stepSound.getPitch() * 0.8F);
-
-                    itemstack.damageItem(1, player);
-                }
-            }
-        }
-    }
+					itemstack.damageItem(1, player);
+				}
+			}
+		}
+	}
 }

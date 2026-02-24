@@ -1,14 +1,18 @@
 /*
  * The MIT License (MIT)
+ *
  * Copyright (c) 2016 IceDragon200
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,184 +23,219 @@
  */
 package growthcraft.api.core.schema;
 
+import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.annotation.Nonnull;
+
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.definition.IMultiFluidStacks;
-import growthcraft.api.core.fluids.*;
+import growthcraft.api.core.fluids.FluidTag;
+import growthcraft.api.core.fluids.FluidTest;
+import growthcraft.api.core.fluids.FluidUtils;
+import growthcraft.api.core.fluids.MultiFluidStacks;
+import growthcraft.api.core.fluids.TaggedFluidStacks;
 import growthcraft.api.core.util.StringUtils;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidRegistry;
 
-import javax.annotation.Nonnull;
-import java.util.*;
+public class MultiFluidStackSchema implements ICommentable, IValidatable, IMultiFluidStacks
+{
+	public String name;
+	public List<String> names = new ArrayList<String>();
+	public List<String> inclusion_tags = new ArrayList<String>();
+	public List<String> exclusion_tags = new ArrayList<String>();
+	public String comment = "";
+	public int amount;
 
-public class MultiFluidStackSchema implements ICommentable, IValidatable, IMultiFluidStacks {
+	public MultiFluidStackSchema(@Nonnull IMultiFluidStacks fluidStacks)
+	{
+		if (fluidStacks instanceof TaggedFluidStacks)
+		{
+			final TaggedFluidStacks taggedStack = (TaggedFluidStacks)fluidStacks;
+			inclusion_tags.addAll(taggedStack.getTags());
+			exclusion_tags.addAll(taggedStack.getExclusionTags());
+		}
+		else if (fluidStacks instanceof MultiFluidStacks)
+		{
+			names.addAll(((MultiFluidStacks)fluidStacks).getNames());
+		}
+		else
+		{
+			throw new IllegalArgumentException("Expected a TaggedFluidStacks or a MultiFluidStacks");
+		}
+		this.amount = fluidStacks.getAmount();
+	}
 
-    public String name;
-    public List<String> names = new ArrayList<String>();
-    public List<String> inclusion_tags = new ArrayList<String>();
-    public List<String> exclusion_tags = new ArrayList<String>();
-    public String comment = "";
-    public int amount;
+	public MultiFluidStackSchema(@Nonnull FluidStack fluidStack)
+	{
+		this.name = fluidStack.getFluid().getName();
+		this.amount = fluidStack.amount;
+	}
 
-    public MultiFluidStackSchema(@Nonnull IMultiFluidStacks fluidStacks) {
-        if (fluidStacks instanceof TaggedFluidStacks taggedStack) {
-            inclusion_tags.addAll(taggedStack.getTags());
-            exclusion_tags.addAll(taggedStack.getExclusionTags());
-        } else if (fluidStacks instanceof MultiFluidStacks) {
-            names.addAll(((MultiFluidStacks) fluidStacks).getNames());
-        } else {
-            throw new IllegalArgumentException("Expected a TaggedFluidStacks or a MultiFluidStacks");
-        }
-        this.amount = fluidStacks.getAmount();
-    }
+	public MultiFluidStackSchema() {}
 
-    public MultiFluidStackSchema(@Nonnull FluidStack fluidStack) {
-        this.name = fluidStack.getFluid()
-            .getName();
-        this.amount = fluidStack.amount;
-    }
+	@Override
+	public void setComment(String comm)
+	{
+		this.comment = comm;
+	}
 
-    public MultiFluidStackSchema() {
-    }
+	@Override
+	public String getComment()
+	{
+		return comment;
+	}
 
-    public static MultiFluidStackSchema newWithTags(int amount, String... tags) {
-        final MultiFluidStackSchema schema = new MultiFluidStackSchema();
-        Collections.addAll(schema.inclusion_tags, tags);
-        schema.amount = amount;
-        return schema;
-    }
+	private List<FluidTag> expandTagNames(@Nonnull List<String> tagNames)
+	{
+		return CoreRegistry.instance().fluidTags().expandTagNames(tagNames);
+	}
 
-    @Override
-    public String getComment() {
-        return comment;
-    }
+	public List<FluidTag> expandInclusionTags()
+	{
+		return expandTagNames(inclusion_tags);
+	}
 
-    @Override
-    public void setComment(String comm) {
-        this.comment = comm;
-    }
+	public List<FluidTag> expandExclusionTags()
+	{
+		return expandTagNames(exclusion_tags);
+	}
 
-    private List<FluidTag> expandTagNames(@Nonnull List<String> tagNames) {
-        return CoreRegistry.instance()
-            .fluidTags()
-            .expandTagNames(tagNames);
-    }
+	public Collection<Fluid> getFluidsByTags()
+	{
+		final Set<Fluid> result = new HashSet<Fluid>();
+		final Collection<Fluid> fluids = CoreRegistry.instance().fluidDictionary().getFluidsByTags(expandInclusionTags());
+		final Collection<Fluid> exfluids = CoreRegistry.instance().fluidDictionary().getFluidsByTags(expandExclusionTags());
+		result.addAll(fluids);
+		result.removeAll(exfluids);
+		return result;
+	}
 
-    public List<FluidTag> expandInclusionTags() {
-        return expandTagNames(inclusion_tags);
-    }
+	public Collection<Fluid> getFluidsByNames()
+	{
+		final Set<Fluid> result = new HashSet<Fluid>();
+		if (name != null)
+		{
+			final Fluid fluid = FluidRegistry.getFluid(name);
+			if (fluid != null)
+			{
+				result.add(fluid);
+			}
+		}
+		for (String fluidName : names)
+		{
+			final Fluid fluid = FluidRegistry.getFluid(fluidName);
+			if (fluid != null)
+			{
+				result.add(fluid);
+			}
+		}
+		return result;
+	}
 
-    public List<FluidTag> expandExclusionTags() {
-        return expandTagNames(exclusion_tags);
-    }
+	public Collection<Fluid> getFluids()
+	{
+		final Set<Fluid> result = new HashSet<Fluid>();
+		result.addAll(getFluidsByTags());
+		result.addAll(getFluidsByNames());
+		return result;
+	}
 
-    public Collection<Fluid> getFluidsByTags() {
-        final Set<Fluid> result = new HashSet<Fluid>();
-        final Collection<Fluid> fluids = CoreRegistry.instance()
-            .fluidDictionary()
-            .getFluidsByTags(expandInclusionTags());
-        final Collection<Fluid> exfluids = CoreRegistry.instance()
-            .fluidDictionary()
-            .getFluidsByTags(expandExclusionTags());
-        result.addAll(fluids);
-        result.removeAll(exfluids);
-        return result;
-    }
+	@Override
+	public int getAmount()
+	{
+		return amount;
+	}
 
-    public Collection<Fluid> getFluidsByNames() {
-        final Set<Fluid> result = new HashSet<Fluid>();
-        if (name != null) {
-            final Fluid fluid = FluidRegistry.getFluid(name);
-            if (fluid != null) {
-                result.add(fluid);
-            }
-        }
-        for (String fluidName : names) {
-            final Fluid fluid = FluidRegistry.getFluid(fluidName);
-            if (fluid != null) {
-                result.add(fluid);
-            }
-        }
-        return result;
-    }
+	@Override
+	public List<FluidStack> getFluidStacks()
+	{
+		final List<FluidStack> stacks = new ArrayList<FluidStack>();
+		for (Fluid fluid : getFluids())
+		{
+			stacks.add(new FluidStack(fluid, amount));
+		}
+		return stacks;
+	}
 
-    public Collection<Fluid> getFluids() {
-        final Set<Fluid> result = new HashSet<Fluid>();
-        result.addAll(getFluidsByTags());
-        result.addAll(getFluidsByNames());
-        return result;
-    }
+	public List<IMultiFluidStacks> getMultiFluidStacks()
+	{
+		final List<IMultiFluidStacks> result = new ArrayList<IMultiFluidStacks>();
+		result.add(new TaggedFluidStacks(amount, inclusion_tags, exclusion_tags));
+		final List<FluidStack> fluidStacks = new ArrayList<FluidStack>();
+		for (Fluid fluid : getFluidsByNames())
+		{
+			fluidStacks.add(new FluidStack(fluid, amount));
+		}
+		result.add(new MultiFluidStacks(fluidStacks));
+		return result;
+	}
 
-    @Override
-    public int getAmount() {
-        return amount;
-    }
+	@Override
+	public boolean containsFluid(Fluid expectedFluid)
+	{
+		if (FluidTest.isValid(expectedFluid))
+		{
+			for (Fluid fluid : getFluids())
+			{
+				if (fluid == expectedFluid) return true;
+			}
+		}
+		return false;
+	}
 
-    @Override
-    public List<FluidStack> getFluidStacks() {
-        final List<FluidStack> stacks = new ArrayList<FluidStack>();
-        for (Fluid fluid : getFluids()) {
-            stacks.add(new FluidStack(fluid, amount));
-        }
-        return stacks;
-    }
+	@Override
+	public boolean containsFluidStack(FluidStack stack)
+	{
+		if (FluidTest.isValid(stack))
+		{
+			final Fluid expected = stack.getFluid();
+			return containsFluid(expected);
+		}
+		return false;
+	}
 
-    public List<IMultiFluidStacks> getMultiFluidStacks() {
-        final List<IMultiFluidStacks> result = new ArrayList<IMultiFluidStacks>();
-        result.add(new TaggedFluidStacks(amount, inclusion_tags, exclusion_tags));
-        final List<FluidStack> fluidStacks = new ArrayList<FluidStack>();
-        for (Fluid fluid : getFluidsByNames()) {
-            fluidStacks.add(new FluidStack(fluid, amount));
-        }
-        result.add(new MultiFluidStacks(fluidStacks));
-        return result;
-    }
+	@Override
+	public boolean isValid()
+	{
+		return !getFluids().isEmpty();
+	}
 
-    @Override
-    public boolean containsFluid(Fluid expectedFluid) {
-        if (FluidTest.isValid(expectedFluid)) {
-            for (Fluid fluid : getFluids()) {
-                if (fluid == expectedFluid) return true;
-            }
-        }
-        return false;
-    }
+	@Override
+	public boolean isInvalid()
+	{
+		return !isValid();
+	}
 
-    @Override
-    public boolean containsFluidStack(FluidStack stack) {
-        if (FluidTest.isValid(stack)) {
-            final Fluid expected = stack.getFluid();
-            return containsFluid(expected);
-        }
-        return false;
-    }
+	@Override
+	public String toString()
+	{
+		return String.format("Schema<MultiFluidStack>(comment: '%s', name: '%s', names: %s, inclusion_tags: %s, exclusion_tags: %s, amount: %d)",
+			StringUtils.inspect(comment),
+			StringUtils.inspect(name),
+			names, inclusion_tags, exclusion_tags, amount);
+	}
 
-    @Override
-    public boolean isValid() {
-        return !getFluids().isEmpty();
-    }
+	public static MultiFluidStackSchema newWithTags(int amount, String... tags)
+	{
+		final MultiFluidStackSchema schema = new MultiFluidStackSchema();
+		for (String tag : tags)
+		{
+			schema.inclusion_tags.add(tag);
+		}
+		schema.amount = amount;
+		return schema;
+	}
 
-    @Override
-    public boolean isInvalid() {
-        return !isValid();
-    }
-
-    @Override
-    public String toString() {
-        return String.format(
-            "Schema<MultiFluidStack>(comment: '%s', name: '%s', names: %s, inclusion_tags: %s, exclusion_tags: %s, amount: %d)",
-            StringUtils.inspect(comment),
-            StringUtils.inspect(name),
-            names,
-            inclusion_tags,
-            exclusion_tags,
-            amount);
-    }
-
-    @Override
-    public List<ItemStack> itemStacks() {
-        return FluidUtils.getFluidContainers(getFluidStacks());
-    }
+	@Override
+	public List<ItemStack> getItemStacks()
+	{
+		return FluidUtils.getFluidContainers(getFluidStacks());
+	}
 }

@@ -1,14 +1,18 @@
 /*
  * The MIT License (MIT)
+ *
  * Copyright (c) 2015, 2016 IceDragon200
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,6 +22,8 @@
  * THE SOFTWARE.
  */
 package growthcraft.cellar.util;
+
+import javax.annotation.Nonnull;
 
 import growthcraft.api.cellar.brewing.user.UserBrewingRecipesConfig;
 import growthcraft.api.cellar.culturing.user.UserCultureRecipesConfig;
@@ -31,89 +37,102 @@ import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
 import growthcraft.core.common.GrcModuleBase;
 
-import javax.annotation.Nonnull;
+public class GrcCellarUserApis extends GrcModuleBase
+{
+	private UserBrewingRecipesConfig userBrewingRecipes;
+	private UserCultureRecipesConfig userCultureRecipes;
+	private UserFermentingRecipesConfig userFermentingRecipes;
+	private UserHeatSourcesConfig userHeatSources;
+	private UserPressingRecipesConfig userPressingRecipes;
+	private UserYeastEntriesConfig userYeastEntries;
+	private ModuleContainer modules;
 
-public class GrcCellarUserApis extends GrcModuleBase {
+	public GrcCellarUserApis()
+	{
+		this.modules = new ModuleContainer();
+		this.userBrewingRecipes = new UserBrewingRecipesConfig();
+		this.userCultureRecipes = new UserCultureRecipesConfig();
+		this.userFermentingRecipes = new UserFermentingRecipesConfig();
+		this.userHeatSources = new UserHeatSourcesConfig();
+		this.userPressingRecipes = new UserPressingRecipesConfig();
+		this.userYeastEntries = new UserYeastEntriesConfig();
+		modules.add(userBrewingRecipes);
+		modules.add(userCultureRecipes);
+		modules.add(userFermentingRecipes);
+		modules.add(userHeatSources);
+		modules.add(userPressingRecipes);
+		modules.add(userYeastEntries);
+	}
 
-    private final UserBrewingRecipesConfig userBrewingRecipes;
-    private final UserCultureRecipesConfig userCultureRecipes;
-    private final UserFermentingRecipesConfig userFermentingRecipes;
-    private final UserHeatSourcesConfig userHeatSources;
-    private final UserPressingRecipesConfig userPressingRecipes;
-    private final UserYeastEntriesConfig userYeastEntries;
-    private final ModuleContainer modules;
+	@Override
+	public void setLogger(@Nonnull ILogger log)
+	{
+		super.setLogger(log);
+		modules.setLogger(log);
+	}
 
-    public GrcCellarUserApis() {
-        this.modules = new ModuleContainer();
-        this.userBrewingRecipes = new UserBrewingRecipesConfig();
-        this.userCultureRecipes = new UserCultureRecipesConfig();
-        this.userFermentingRecipes = new UserFermentingRecipesConfig();
-        this.userHeatSources = new UserHeatSourcesConfig();
-        this.userPressingRecipes = new UserPressingRecipesConfig();
-        this.userYeastEntries = new UserYeastEntriesConfig();
-        modules.add(userBrewingRecipes);
-        modules.add(userCultureRecipes);
-        modules.add(userFermentingRecipes);
-        modules.add(userHeatSources);
-        modules.add(userPressingRecipes);
-        modules.add(userYeastEntries);
-    }
+	public UserBrewingRecipesConfig getUserBrewingRecipes()
+	{
+		return this.userBrewingRecipes;
+	}
 
-    @Override
-    public void setLogger(@Nonnull ILogger log) {
-        super.setLogger(log);
-        modules.setLogger(log);
-    }
+	public UserCultureRecipesConfig getUserCultureRecipes()
+	{
+		return this.userCultureRecipes;
+	}
 
-    public UserBrewingRecipesConfig getUserBrewingRecipes() {
-        return this.userBrewingRecipes;
-    }
+	public UserFermentingRecipesConfig getUserFermentingRecipes()
+	{
+		return this.userFermentingRecipes;
+	}
 
-    public UserCultureRecipesConfig getUserCultureRecipes() {
-        return this.userCultureRecipes;
-    }
+	public UserHeatSourcesConfig getUserHeatSources()
+	{
+		return this.userHeatSources;
+	}
 
-    public UserFermentingRecipesConfig getUserFermentingRecipes() {
-        return this.userFermentingRecipes;
-    }
+	public UserPressingRecipesConfig getUserPressingRecipes()
+	{
+		return this.userPressingRecipes;
+	}
 
-    public UserHeatSourcesConfig getUserHeatSources() {
-        return this.userHeatSources;
-    }
+	public UserYeastEntriesConfig getUserYeastEntries()
+	{
+		return this.userYeastEntries;
+	}
 
-    public UserPressingRecipesConfig getUserPressingRecipes() {
-        return this.userPressingRecipes;
-    }
+	@Override
+	public void preInit()
+	{
+		modules.preInit();
+	}
 
-    public UserYeastEntriesConfig getUserYeastEntries() {
-        return this.userYeastEntries;
-    }
+	@Override
+	public void register()
+	{
+		modules.register();
+	}
 
-    @Override
-    public void preInit() {
-        modules.preInit();
-    }
+	@Override
+	public void init()
+	{
+		modules.init();
+	}
 
-    @Override
-    public void register() {
-        modules.register();
-    }
+	@Override
+	public void postInit()
+	{
+		modules.postInit();
+	}
 
-    @Override
-    public void init() {
-        modules.init();
-    }
-
-    @Override
-    public void postInit() {
-        modules.postInit();
-    }
-
-    public void loadConfigs() {
-        for (IModule module : modules) {
-            if (module instanceof AbstractUserJSONConfig) {
-                ((AbstractUserJSONConfig) module).loadUserConfig();
-            }
-        }
-    }
+	public void loadConfigs()
+	{
+		for (IModule module : modules)
+		{
+			if (module instanceof AbstractUserJSONConfig)
+			{
+				((AbstractUserJSONConfig)module).loadUserConfig();
+			}
+		}
+	}
 }

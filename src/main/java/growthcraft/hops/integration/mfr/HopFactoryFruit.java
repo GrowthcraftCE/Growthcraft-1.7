@@ -1,14 +1,18 @@
 /*
  * The MIT License (MIT)
+ *
  * Copyright (c) 2016 IceDragon200
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,53 +23,61 @@
  */
 package growthcraft.hops.integration.mfr;
 
-import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.integration.mfr.AbstractFactoryFruit;
-import growthcraft.hops.GrowthCraftHops;
-import growthcraft.hops.common.block.BlockHops;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import powercrystals.minefactoryreloaded.api.ReplacementBlock;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class HopFactoryFruit extends AbstractFactoryFruit<BlockHops> {
+import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.integration.mfr.AbstractFactoryFruit;
+import growthcraft.hops.common.block.BlockHops;
+import growthcraft.hops.GrowthCraftHops;
 
-    private final ReplacementBlock replacementBlock;
+import powercrystals.minefactoryreloaded.api.ReplacementBlock;
 
-    public HopFactoryFruit() {
-        super();
-        setPlant(GrowthCraftHops.blocks.hopVine.getBlock());
-        this.replacementBlock = new ReplacementBlock(plantBlock);
-        replacementBlock.setMeta(BlockHops.HopsStage.BIG);
-    }
+import net.minecraft.world.World;
+import net.minecraft.item.ItemStack;
 
-    @Override
-    @Deprecated
-    public boolean breakBlock() {
-        return false;
-    }
+public class HopFactoryFruit extends AbstractFactoryFruit<BlockHops>
+{
+	private ReplacementBlock replacementBlock;
 
-    @Override
-    public boolean canBePicked(World world, int x, int y, int z) {
-        return plantBlock.isMature(world, x, y, z);
-    }
+	public HopFactoryFruit()
+	{
+		super();
+		setPlant(GrowthCraftHops.blocks.hopVine.getBlock());
+		this.replacementBlock = new ReplacementBlock(plantBlock);
+		replacementBlock.setMeta(BlockHops.HopsStage.BIG);
+	}
 
-    @Override
-    public ReplacementBlock getReplacementBlock(World world, int x, int y, int z) {
-        return replacementBlock;
-    }
+	@Override
+	@Deprecated
+	public boolean breakBlock()
+	{
+		return false;
+	}
 
-    @Override
-    public List<ItemStack> getDrops(World world, Random rand, int x, int y, int z) {
-        final List<ItemStack> drops = super.getDrops(world, rand, x, y, z);
-        final List<ItemStack> result = new ArrayList<ItemStack>();
-        for (ItemStack drop : drops) {
-            if (GrowthCraftCore.items.rope.equals(drop.getItem())) continue;
-            result.add(drop);
-        }
-        return result;
-    }
+	@Override
+	public boolean canBePicked(World world, int x, int y, int z)
+	{
+		return plantBlock.isMature(world, x, y, z);
+	}
+
+	@Override
+	public ReplacementBlock getReplacementBlock(World world, int x, int y, int z)
+	{
+		return replacementBlock;
+	}
+
+	@Override
+	public List<ItemStack> getDrops(World world, Random rand, int x, int y, int z)
+	{
+		final List<ItemStack> drops = super.getDrops(world, rand, x, y, z);
+		final List<ItemStack> result = new ArrayList<ItemStack>();
+		for (ItemStack drop : drops)
+		{
+			if (GrowthCraftCore.items.rope.equals(drop.getItem())) continue;
+			result.add(drop);
+		}
+		return result;
+	}
 }

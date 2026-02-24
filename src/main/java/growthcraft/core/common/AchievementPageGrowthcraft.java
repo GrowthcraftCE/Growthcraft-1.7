@@ -1,27 +1,29 @@
 package growthcraft.core.common;
 
-import growthcraft.api.core.i18n.GrcI18n;
-import net.minecraft.stats.Achievement;
-import net.minecraftforge.common.AchievementPage;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class AchievementPageGrowthcraft {
+import growthcraft.api.core.i18n.GrcI18n;
 
-    public static List<Achievement> masterList = new ArrayList<Achievement>();
-    public static AchievementPage masterPage;
+import net.minecraft.stats.Achievement;
+import net.minecraftforge.common.AchievementPage;
 
-    private AchievementPageGrowthcraft() {
-    }
+public class AchievementPageGrowthcraft
+{
+	public static List<Achievement> masterList = new ArrayList<Achievement>();
+	public static AchievementPage masterPage;
 
-    public static void init() {
-        final Achievement[] chievList = new Achievement[masterList.size()];
-        for (int i = 0; i < chievList.length; i++) {
-            chievList[i] = masterList.get(i);
-        }
+	private AchievementPageGrowthcraft() {}
 
-        masterPage = new AchievementPage(GrcI18n.translate("achievementPage.pageGrowthCraft"), chievList);
-        AchievementPage.registerAchievementPage(masterPage);
-    }
+	public static void init()
+	{
+		final Achievement[] chievList = new Achievement[masterList.size()];
+		for(int i = 0; i < chievList.length; i++)
+		{
+			chievList[i] = masterList.get(i);
+		}
+
+		masterPage = new AchievementPage(GrcI18n.translate("achievementPage.pageGrowthCraft"), chievList);
+		AchievementPage.registerAchievementPage(masterPage);
+	}
 }

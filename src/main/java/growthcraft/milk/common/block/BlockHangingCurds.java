@@ -1,14 +1,18 @@
 /*
  * The MIT License (MIT)
+ *
  * Copyright (c) 2016 IceDragon200
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,17 +23,21 @@
  */
 package growthcraft.milk.common.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+import java.util.Random;
+
 import growthcraft.api.core.util.BBox;
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.api.core.util.RenderType;
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.milk.GrowthCraftMilk;
 import growthcraft.milk.common.item.EnumCheeseType;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
+import growthcraft.milk.GrowthCraftMilk;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -42,153 +50,180 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.List;
-import java.util.Random;
+public class BlockHangingCurds extends GrcBlockContainer
+{
+	public BlockHangingCurds()
+	{
+		super(Material.cake);
+		// make it god awful difficult to break by hand.
+		setHardness(6.0F);
+		setTickRandomly(true);
+		setBlockName("grcmilk.HangingCurds");
+		setTileEntityType(TileEntityHangingCurds.class);
+		final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 16f, 8f).scale(1f / 16f);
+		setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
+		setBlockTextureName("grcmilk:hanging_curds");
+		setCreativeTab(GrowthCraftMilk.creativeTab);
+	}
 
-public class BlockHangingCurds extends GrcBlockContainer {
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
+	{
+		super.onBlockPlacedBy(world, x, y, z, entity, stack);
+		world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), BlockFlags.NONE);
+	}
 
-    public BlockHangingCurds() {
-        super(Material.cake);
-        // make it god awful difficult to break by hand.
-        setHardness(6.0F);
-        setTickRandomly(true);
-        setBlockName("grcmilk.HangingCurds");
-        setTileEntityType(TileEntityHangingCurds.class);
-        final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 16f, 8f)
-            .scale(1f / 16f);
-        setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
-        setBlockTextureName("grcmilk:hanging_curds");
-        setCreativeTab(GrowthCraftMilk.creativeTab);
-    }
+	@Override
+	protected boolean shouldRestoreBlockState(World world, int x, int y, int z, ItemStack stack)
+	{
+		return true;
+	}
 
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
-        super.onBlockPlacedBy(world, x, y, z, entity, stack);
-        world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), BlockFlags.NONE);
-    }
+	@Override
+	protected boolean shouldDropTileStack(World world, int x, int y, int z, int metadata, int fortune)
+	{
+		return true;
+	}
 
-    @Override
-    protected boolean shouldRestoreBlockState(World world, int x, int y, int z, ItemStack stack) {
-        return true;
-    }
+	@Override
+	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, int x, int y, int z, int meta)
+	{
+		final TileEntityHangingCurds te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			return te.asItemStack();
+		}
+		return new ItemStack(this, 1, meta);
+	}
 
-    @Override
-    protected boolean shouldDropTileStack(World world, int x, int y, int z, int metadata, int fortune) {
-        return true;
-    }
+	@Override
+	protected void getTileItemStackDrops(List<ItemStack> ret, World world, int x, int y, int z, int metadata, int fortune)
+	{
+		final TileEntityHangingCurds te = getTileEntity(world, x, y, z);
+		if (te != null)
+		{
+			ret.add(te.asItemStack());
+		}
+		else
+		{
+			super.getTileItemStackDrops(ret, world, x, y, z, metadata, fortune);
+		}
+	}
 
-    @Override
-    protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, int x, int y, int z, int meta) {
-        final TileEntityHangingCurds te = getTileEntity(world, x, y, z);
-        if (te != null) {
-            return te.asItemStack();
-        }
-        return new ItemStack(this, 1, meta);
-    }
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
+	{
+		if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
+		if (!player.isSneaking())
+		{
+			final TileEntityHangingCurds hangingCurd = getTileEntity(world, x, y, z);
+			if (hangingCurd != null)
+			{
+				if (hangingCurd.isDried())
+				{
+					fellBlockAsItem(world, x, y, z);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
-    @Override
-    protected void getTileItemStackDrops(List<ItemStack> ret, World world, int x, int y, int z, int metadata,
-                                         int fortune) {
-        final TileEntityHangingCurds te = getTileEntity(world, x, y, z);
-        if (te != null) {
-            ret.add(te.asItemStack());
-        } else {
-            super.getTileItemStackDrops(ret, world, x, y, z, metadata, fortune);
-        }
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public void getSubBlocks(Item item, CreativeTabs tab, List list)
+	{
+		if (item instanceof ItemBlockHangingCurds)
+		{
+			final ItemBlockHangingCurds ib = (ItemBlockHangingCurds)item;
+			for (EnumCheeseType cheese : EnumCheeseType.VALUES)
+			{
+				if (cheese.hasCurdBlock())
+				{
+					final ItemStack stack = new ItemStack(item, 1, cheese.meta);
+					ib.getTileTagCompound(stack);
+					list.add(stack);
+				}
+			}
+		}
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7,
-                                    float par8, float par9) {
-        if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
-        if (!player.isSneaking()) {
-            final TileEntityHangingCurds hangingCurd = getTileEntity(world, x, y, z);
-            if (hangingCurd != null) {
-                if (hangingCurd.isDried()) {
-                    fellBlockAsItem(world, x, y, z);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player)
+	{
+		final TileEntityHangingCurds teHangingCurds = getTileEntity(world, x, y, z);
+		if (teHangingCurds != null)
+		{
+			return teHangingCurds.asItemStack();
+		}
+		return super.getPickBlock(target, world, x, y, z, player);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    public void getSubBlocks(Item item, CreativeTabs tab, List list) {
-        if (item instanceof ItemBlockHangingCurds ib) {
-            for (EnumCheeseType cheese : EnumCheeseType.VALUES) {
-                if (cheese.hasCurdBlock()) {
-                    final ItemStack stack = new ItemStack(item, 1, cheese.meta);
-                    ib.getTileTagCompound(stack);
-                    list.add(stack);
-                }
-            }
-        }
-    }
+	@Override
+	public boolean canBlockStay(World world, int x, int y, int z)
+	{
+		return !world.isAirBlock(x, y + 1, z) &&
+			BlockCheck.isBlockPlacableOnSide(world, x, y + 1, z, ForgeDirection.DOWN);
+	}
 
-    @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z, EntityPlayer player) {
-        final TileEntityHangingCurds teHangingCurds = getTileEntity(world, x, y, z);
-        if (teHangingCurds != null) {
-            return teHangingCurds.asItemStack();
-        }
-        return super.getPickBlock(target, world, x, y, z, player);
-    }
+	@Override
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{
+		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
+	}
 
-    @Override
-    public boolean canBlockStay(World world, int x, int y, int z) {
-        return !world.isAirBlock(x, y + 1, z)
-            && BlockCheck.isBlockPlacableOnSide(world, x, y + 1, z, ForgeDirection.DOWN);
-    }
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+	{
+		if (!this.canBlockStay(world, x, y, z))
+		{
+			fellBlockAsItem(world, x, y, z);
+		}
+	}
 
-    @Override
-    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
-    }
+	@Override
+	public void updateTick(World world, int x, int y, int z, Random random)
+	{
+		super.updateTick(world, x, y, z, random);
+		if (!world.isRemote)
+		{
+			if (!canBlockStay(world, x, y, z))
+			{
+				dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+				world.setBlockToAir(x, y, z);
+			}
+		}
+	}
 
-    @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-        if (!this.canBlockStay(world, x, y, z)) {
-            fellBlockAsItem(world, x, y, z);
-        }
-    }
+	@Override
+	public int damageDropped(int metadata)
+	{
+		return metadata;
+	}
 
-    @Override
-    public void updateTick(World world, int x, int y, int z, Random random) {
-        super.updateTick(world, x, y, z, random);
-        if (!world.isRemote) {
-            if (!canBlockStay(world, x, y, z)) {
-                dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-                world.setBlockToAir(x, y, z);
-            }
-        }
-    }
+	@Override
+	public int getRenderType()
+	{
+		return RenderType.NONE;
+	}
 
-    @Override
-    public int damageDropped(int metadata) {
-        return metadata;
-    }
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
 
-    @Override
-    public int getRenderType() {
-        return RenderType.NONE;
-    }
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
 
-    @Override
-    public boolean isOpaqueCube() {
-        return false;
-    }
-
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
-        return true;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	{
+		return true;
+	}
 }

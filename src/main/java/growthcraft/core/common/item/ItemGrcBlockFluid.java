@@ -1,14 +1,18 @@
 /*
  * The MIT License (MIT)
+ *
  * Copyright (c) 2016 IceDragon200
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,56 +23,66 @@
  */
 package growthcraft.core.common.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
 import growthcraft.core.common.block.GrcBlockFluid;
 import growthcraft.core.util.UnitFormatter;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
-import java.util.List;
+public class ItemGrcBlockFluid extends GrcItemBlockBase
+{
+	protected int color = 0xFFFFFF;
+	protected Fluid fluid;
 
-public class ItemGrcBlockFluid extends GrcItemBlockBase {
+	public ItemGrcBlockFluid(Block block)
+	{
+		super(block);
+		if (block instanceof GrcBlockFluid)
+		{
+			final GrcBlockFluid fluidBlock = (GrcBlockFluid)block;
+			this.color = fluidBlock.getColor();
+			this.fluid = fluidBlock.getFluid();
+		}
+	}
 
-    protected int color = 0xFFFFFF;
-    protected Fluid fluid;
+	public Fluid getFluid()
+	{
+		return this.fluid;
+	}
 
-    public ItemGrcBlockFluid(Block block) {
-        super(block);
-        if (block instanceof GrcBlockFluid fluidBlock) {
-            this.color = fluidBlock.getColor();
-            this.fluid = fluidBlock.getFluid();
-        }
-    }
+	public int getFluidColor()
+	{
+		return this.color;
+	}
 
-    public Fluid getFluid() {
-        return this.fluid;
-    }
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool)
+	{
+		final String modifier = UnitFormatter.fluidModifier(getFluid());
+		if (modifier != null) list.add(modifier);
+	}
 
-    public int getFluidColor() {
-        return this.color;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
+	{
+		super.addInformation(stack, player, list, bool);
+		writeModifierTooltip(stack, player, list, bool);
+	}
 
-    @SideOnly(Side.CLIENT)
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    protected void writeModifierTooltip(ItemStack stack, EntityPlayer player, List list, boolean bool) {
-        final String modifier = UnitFormatter.fluidModifier(getFluid());
-        if (modifier != null) list.add(modifier);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
-        super.addInformation(stack, player, list, bool);
-        writeModifierTooltip(stack, player, list, bool);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack stack, int pass) {
-        return getFluidColor();
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getColorFromItemStack(ItemStack stack, int pass)
+	{
+		return getFluidColor();
+	}
 }
