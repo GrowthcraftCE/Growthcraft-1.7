@@ -34,11 +34,14 @@
  * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-    testImplementation("junit:junit:4.13.2")
     //runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.7.69-GTNH:dev")
-    compileOnly("com.github.GTNewHorizons:NotEnoughItems:2.7.69-GTNH:dev")
-    // These are all sorely outdated, need to update, but old growthcraft anyway...
-    compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
+    compileOnly "codechicken:CodeChickenLib:1.7.10-1.1.3.141:dev"
+    compileOnly "codechicken:CodeChickenCore:1.7.10-1.0.7.48:dev"
+    compileOnly "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
+    compileOnly "curse.maven:thaumcraft-223628:2227552"
+    compileOnly "curse.maven:witchery-69673:2234410"
+    testCompile "junit:junit:4.11"
+    compileOnly "maven.modrinth:etfuturum:2.6.2"
     compileOnly("net.sengir.forestry:forestry_1.7.10:4.2.16.64:dev")
     compileOnly("powercrystals:MineFactoryReloaded:[1.7.10]2.8.2B1-201:dev")
     compileOnly("mcp.mobius.waila:Waila:1.5.11-RC2-NONEI_1.7.10:dev")

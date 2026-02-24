@@ -1,5 +1,76 @@
 // Add any additional repositories for your dependencies here.
 
 repositories {
-
+    mavenLocal()
+    mavenCentral()
+    gradlePluginPortal()
+    maven {
+        url = "https://api.modrinth.com/maven"
+    }
+    ivy {
+        name "buildcraft"
+        artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
+    }
+    flatDir {
+        dirs 'libs'
+    }
+    maven {
+        name "applecore"
+        url "http://www.ryanliptak.com/maven/"
+    }
+    maven {
+        name = "gt"
+        url = "https://gregtech.mechaenetia.com/"
+    }
+    maven {
+        name = "GTNH Maven"
+        url = "https://nexus.gtnewhorizons.com/repository/public/"
+    }
+    maven {
+        name = "GTMEGA/FalsePattern Maven"
+        url = "https://mvn.falsepattern.com/releases/"
+    }
+    maven {
+        name "chickenbones"
+        url "http://chickenbones.net/maven/"
+    }
+    maven {
+        name = "forge"
+        url = "http://files.minecraftforge.net/maven"
+    }
+    maven {
+        url "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        name = "Mobius Repo"
+        url "http://tehnut.info/maven"
+    }
+    maven {
+        name = "ilexiconn"
+        url = "https://maven.mcmoddev.com/"
+    }
+    maven {
+        name = "CurseMaven"
+        url = "https://cursemaven.com"
+    }
+    maven {
+        url = "https://maven.minecraftforge.net/"
+    }
+    gradlePluginPortal() {
+        content {
+            excludeGroup("org.apache.logging.log4j")
+        }
+    }
+    maven {
+        url "https://uncomfortable-fey-midnight145-884fba2b.koyeb.app"
+        content {
+            includeGroup "curse.fetch"
+        }
+    }
+    maven {
+        url "https://jitpack.io"
+    }
+    maven {
+        url "https://beta.cursemaven.com"
+    }
 }
