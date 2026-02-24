@@ -42,7 +42,7 @@ public enum EnumFAWoodType {
     }
 
     public ItemStack asPlanksItemStack(int size) {
-        final Block block = GameRegistry.findBlock(growthcraft.core.integration.FA.FAPlatform.MOD_ID, "palaeoraphePlanks");
+        final Block block = GameRegistry.findBlock(growthcraft.core.integration.fa.FAPlatform.MOD_ID, "palaeoraphePlanks");
         if (block != null) {
             final ItemStack result = new ItemStack(block, size, meta);
             return result;
