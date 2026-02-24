@@ -1,37 +1,43 @@
-.gradle
-.settings
-/.idea/
-/.vscode/
-/run/
-/build/
-/eclipse/
-.classpath
-.project
+#ant stuff
 /bin/
+/download/
+#Remove OS generated garbage
+*/.DS_Store
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+#gradle stuff
+/.gradle
+/build/
+/run*/
+/ui/
+/libs/
+gradle-app.setting
+#IDEA files from Gradle
+.idea/
+/*.iml
+/*.ipr
+/*.iws
+#Vim backups
+*~
+#manual version override
+version.properties
+#eclipse stuffs
+/.classpath
+/.project
+/.settings/
+/eclipse/
+/debug/
+/.metadata/
 /config/
-/crash-reports/
 /logs/
 options.txt
 /saves/
-usernamecache.json
-banned-ips.json
-banned-players.json
-eula.txt
-ops.json
-server.properties
-servers.dat
-usercache.json
-whitelist.json
-/out/
-*.iml
-*.ipr
-*.iws
-*.bat
-*.DS_Store
-!gradlew.bat
-.factorypath
-addon.local.gradle
-addon.local.gradle.kts
-addon.late.local.gradle
-addon.late.local.gradle.kts
+/out
+/tmp
 layout.json
+*.iml
