@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2015 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -31,119 +27,106 @@ import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.common.tileentity.device.DeviceProgressive;
 import growthcraft.core.util.ItemUtils;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 
-public class FruitPress extends DeviceProgressive
-{
-	private float pomace;
-	private DeviceFluidSlot fluidSlot;
-	private DeviceInventorySlot inputSlot;
-	private DeviceInventorySlot residueSlot;
-	private PressingRecipe currentResult;
+public class FruitPress extends DeviceProgressive {
 
-	/**
-	 * @param te - parent tile
-	 * @param fs - fluid tank id
-	 * @param is - input inventory slot id
-	 * @param rs - residue inventory slot id
-	 */
-	public FruitPress(TileEntityCellarDevice te, int fs, int is, int rs)
-	{
-		super(te);
-		this.fluidSlot = new DeviceFluidSlot(te, fs);
-		this.inputSlot = new DeviceInventorySlot(te, is);
-		this.residueSlot = new DeviceInventorySlot(te, rs);
-	}
+    private final DeviceFluidSlot fluidSlot;
+    private final DeviceInventorySlot inputSlot;
+    private final DeviceInventorySlot residueSlot;
+    private float pomace;
+    private PressingRecipe currentResult;
 
-	/**
-	 * @return meta - the metadata for the FruitPresser usually above the fruit press
-	 */
-	public int getPresserMetadata()
-	{
-		return getWorld().getBlockMetadata(parent.xCoord, parent.yCoord + 1, parent.zCoord);
-	}
+    /**
+     * @param te - parent tile
+     * @param fs - fluid tank id
+     * @param is - input inventory slot id
+     * @param rs - residue inventory slot id
+     */
+    public FruitPress(TileEntityCellarDevice te, int fs, int is, int rs) {
+        super(te);
+        this.fluidSlot = new DeviceFluidSlot(te, fs);
+        this.inputSlot = new DeviceInventorySlot(te, is);
+        this.residueSlot = new DeviceInventorySlot(te, rs);
+    }
 
-	private boolean preparePressing()
-	{
-		this.currentResult = null;
-		final ItemStack primarySlotItem = inputSlot.get();
-		if (primarySlotItem == null) return false;
+    /**
+     * @return meta - the metadata for the FruitPresser usually above the fruit press
+     */
+    public int getPresserMetadata() {
+        return getWorld().getBlockMetadata(parent.xCoord, parent.yCoord + 1, parent.zCoord);
+    }
 
-		final int m = getPresserMetadata();
-		if (m < 2) return false;
+    private boolean preparePressing() {
+        this.currentResult = null;
+        final ItemStack primarySlotItem = inputSlot.get();
+        if (primarySlotItem == null) return false;
 
-		if (fluidSlot.isFull()) return false;
+        final int m = getPresserMetadata();
+        if (m < 2) return false;
 
-		final PressingRecipe result = CellarRegistry.instance().pressing().getPressingRecipe(primarySlotItem);
-		if (result == null) return false;
-		if (!inputSlot.hasEnough(result.getInput())) return false;
-		this.currentResult = result;
-		setTimeMax(currentResult.getTime());
+        if (fluidSlot.isFull()) return false;
 
-		if (fluidSlot.isEmpty()) return true;
+        final PressingRecipe result = CellarRegistry.instance()
+            .pressing()
+            .getPressingRecipe(primarySlotItem);
+        if (result == null) return false;
+        if (!inputSlot.hasEnough(result.getInput())) return false;
+        this.currentResult = result;
+        setTimeMax(currentResult.getTime());
 
-		final FluidStack stack = currentResult.getFluidStack();
-		return stack.isFluidEqual(fluidSlot.get());
-	}
+        if (fluidSlot.isEmpty()) return true;
 
-	public void producePomace()
-	{
-		if (currentResult == null) return;
-		final Residue residue = currentResult.getResidue();
-		if (residue != null)
-		{
-			this.pomace = this.pomace + residue.pomaceRate;
-			if (this.pomace >= 1.0F)
-			{
-				this.pomace = this.pomace - 1.0F;
-				final ItemStack residueResult = ItemUtils.mergeStacks(residueSlot.get(), residue.residueItem);
-				if (residueResult != null) residueSlot.set(residueResult);
-			}
-		}
-	}
+        final FluidStack stack = currentResult.getFluidStack();
+        return stack.isFluidEqual(fluidSlot.get());
+    }
 
-	public void pressItem()
-	{
-		if (currentResult == null) return;
-		final ItemStack pressingItem = inputSlot.get();
-		producePomace();
-		final FluidStack fluidstack = currentResult.getFluidStack();
-		fluidSlot.fill(fluidstack, true);
-		inputSlot.consume(currentResult.getInput());
-	}
+    public void producePomace() {
+        if (currentResult == null) return;
+        final Residue residue = currentResult.getResidue();
+        if (residue != null) {
+            this.pomace = this.pomace + residue.pomaceRate();
+            if (this.pomace >= 1.0F) {
+                this.pomace = this.pomace - 1.0F;
+                final ItemStack residueResult = ItemUtils.mergeStacks(residueSlot.get(), residue.residueItem());
+                if (residueResult != null) residueSlot.set(residueResult);
+            }
+        }
+    }
 
-	public void update()
-	{
-		if (preparePressing())
-		{
-			increaseTime();
-			if (getTime() >= getTimeMax())
-			{
-				resetTime();
-				pressItem();
-				markDirty();
-			}
-		}
-		else
-		{
-			if (resetTime()) markDirty();
-		}
-	}
+    public void pressItem() {
+        if (currentResult == null) return;
+        final ItemStack pressingItem = inputSlot.get();
+        producePomace();
+        final FluidStack fluidstack = currentResult.getFluidStack();
+        fluidSlot.fill(fluidstack, true);
+        inputSlot.consume(currentResult.getInput());
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound data)
-	{
-		super.readFromNBT(data);
-		this.pomace = data.getFloat("pomace");
-	}
+    public void update() {
+        if (preparePressing()) {
+            increaseTime();
+            if (getTime() >= getTimeMax()) {
+                resetTime();
+                pressItem();
+                markDirty();
+            }
+        } else {
+            if (resetTime()) markDirty();
+        }
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound data)
-	{
-		super.writeToNBT(data);
-		data.setFloat("pomace", pomace);
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        this.pomace = data.getFloat("pomace");
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound data) {
+        super.writeToNBT(data);
+        data.setFloat("pomace", pomace);
+    }
 }

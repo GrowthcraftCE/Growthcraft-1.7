@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2015 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,15 +19,14 @@
  */
 package growthcraft.core.common.inventory;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import growthcraft.core.common.inventory.slot.SlotInput;
 import growthcraft.core.common.inventory.slot.SlotPlayer;
 import growthcraft.core.common.inventory.slot.SlotPlayerBackpack;
 import growthcraft.core.common.inventory.slot.SlotPlayerHotbar;
 import growthcraft.core.common.tileentity.feature.IGuiNetworkSync;
 import growthcraft.core.util.Platform;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
@@ -40,230 +35,183 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
-public class GrcContainer extends Container
-{
-	protected static final int SLOT_W = 18;
-	protected static final int SLOT_H = 18;
+public class GrcContainer extends Container {
 
-	protected TileEntity tileEntity;
+    protected static final int SLOT_W = 18;
+    protected static final int SLOT_H = 18;
 
-	public GrcContainer(TileEntity te)
-	{
-		super();
-		this.tileEntity = te;
-	}
+    protected TileEntity tileEntity;
 
-	public boolean mergeWithSlot(Slot slot, ItemStack stack)
-	{
-		if (stack == null) return false;
-		if (stack.stackSize <= 0) return false;
+    public GrcContainer(TileEntity te) {
+        super();
+        this.tileEntity = te;
+    }
 
-		if (slot.isItemValid(stack))
-		{
-			if (mergeItemStack(stack, slot.slotNumber, slot.slotNumber + 1, false))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean mergeWithSlot(Slot slot, ItemStack stack) {
+        if (stack == null) return false;
+        if (stack.stackSize <= 0) return false;
 
-	public boolean mergeWithSlotsOfKind(ItemStack stack, Class<? extends Slot> slotClass)
-	{
-		if (stack == null) return false;
-		if (stack.stackSize <= 0) return false;
+        if (slot.isItemValid(stack)) {
+            return mergeItemStack(stack, slot.slotNumber, slot.slotNumber + 1, false);
+        }
+        return false;
+    }
 
-		int start = -1;
-		int end = -1;
+    public boolean mergeWithSlotsOfKind(ItemStack stack, Class<? extends Slot> slotClass) {
+        if (stack == null) return false;
+        if (stack.stackSize <= 0) return false;
 
-		for (Object sub : inventorySlots)
-		{
-			if (slotClass.isInstance(sub))
-			{
-				final Slot subSlot = (Slot)sub;
-				if (start < 0)
-				{
-					start = subSlot.slotNumber;
-				}
-				end = subSlot.slotNumber;
-			}
-		}
-		if (start <= -1 || end <= -1) return false;
+        int start = -1;
+        int end = -1;
 
-		boolean merged = false;
-		for (int i = start; i < end; ++i)
-		{
-			// Stop iterating if the stack has been successfully merged
-			if (stack.stackSize <= 0) break;
-			// Get the object at the given index
-			final Object obj = inventorySlots.get(i);
-			// Determine if the slot is the expected (in case the slots are interleaved)
-			if (slotClass.isInstance(obj))
-			{
-				final Slot subSlot = (Slot)obj;
-				// try to merge it
-				merged |= mergeWithSlot(subSlot, stack);
-			}
-		}
-		return merged;
-	}
+        for (Object sub : inventorySlots) {
+            if (slotClass.isInstance(sub)) {
+                final Slot subSlot = (Slot) sub;
+                if (start < 0) {
+                    start = subSlot.slotNumber;
+                }
+                end = subSlot.slotNumber;
+            }
+        }
+        if (start <= -1 || end <= -1) return false;
 
-	public boolean mergeWithPlayer(ItemStack stack)
-	{
-		return mergeWithSlotsOfKind(stack, SlotPlayer.class);
-	}
+        boolean merged = false;
+        for (int i = start; i < end; ++i) {
+            // Stop iterating if the stack has been successfully merged
+            if (stack.stackSize <= 0) break;
+            // Get the object at the given index
+            final Object obj = inventorySlots.get(i);
+            // Determine if the slot is the expected (in case the slots are interleaved)
+            if (slotClass.isInstance(obj)) {
+                final Slot subSlot = (Slot) obj;
+                // try to merge it
+                merged |= mergeWithSlot(subSlot, stack);
+            }
+        }
+        return merged;
+    }
 
-	public boolean mergeWithPlayerHotbar(ItemStack stack)
-	{
-		return mergeWithSlotsOfKind(stack, SlotPlayerHotbar.class);
-	}
+    public boolean mergeWithPlayer(ItemStack stack) {
+        return mergeWithSlotsOfKind(stack, SlotPlayer.class);
+    }
 
-	public boolean mergeWithPlayerBackpack(ItemStack stack)
-	{
-		return mergeWithSlotsOfKind(stack, SlotPlayerBackpack.class);
-	}
+    public boolean mergeWithPlayerHotbar(ItemStack stack) {
+        return mergeWithSlotsOfKind(stack, SlotPlayerHotbar.class);
+    }
 
-	public boolean mergeWithInput(ItemStack stack)
-	{
-		return mergeWithSlotsOfKind(stack, SlotInput.class);
-	}
+    public boolean mergeWithPlayerBackpack(ItemStack stack) {
+        return mergeWithSlotsOfKind(stack, SlotPlayerBackpack.class);
+    }
 
-	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int index)
-	{
-		if (Platform.isClient())
-		{
-			return null;
-		}
+    public boolean mergeWithInput(ItemStack stack) {
+        return mergeWithSlotsOfKind(stack, SlotInput.class);
+    }
 
-		final Slot s = getSlot(index);
-		ItemStack itemstack = null;
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+        if (Platform.isClient()) {
+            return null;
+        }
 
-		if (s != null && s.getHasStack())
-		{
-			final ItemStack stack = s.getStack();
-			itemstack = stack.copy();
+        final Slot s = getSlot(index);
+        ItemStack itemstack = null;
 
-			boolean wasMerged = false;
+        if (s != null && s.getHasStack()) {
+            final ItemStack stack = s.getStack();
+            itemstack = stack.copy();
 
-			if (s instanceof SlotPlayer)
-			{
-				wasMerged |= mergeWithInput(stack);
-				if (!wasMerged)
-				{
-					if (s instanceof SlotPlayerHotbar)
-					{
-						wasMerged |= mergeWithPlayerBackpack(stack);
-					}
-					else if (s instanceof SlotPlayerBackpack)
-					{
-						wasMerged |= mergeWithPlayerHotbar(stack);
-					}
-				}
-			}
-			else
-			{
-				wasMerged |= mergeWithPlayer(stack);
-			}
+            boolean wasMerged = false;
 
-			if (wasMerged)
-			{
-				s.onSlotChange(stack, itemstack);
-			}
-			else
-			{
-				return null;
-			}
+            if (s instanceof SlotPlayer) {
+                wasMerged |= mergeWithInput(stack);
+                if (!wasMerged) {
+                    if (s instanceof SlotPlayerHotbar) {
+                        wasMerged |= mergeWithPlayerBackpack(stack);
+                    } else if (s instanceof SlotPlayerBackpack) {
+                        wasMerged |= mergeWithPlayerHotbar(stack);
+                    }
+                }
+            } else {
+                wasMerged |= mergeWithPlayer(stack);
+            }
 
-			if (stack.stackSize <= 0)
-			{
-				s.putStack((ItemStack)null);
-			}
-			s.onSlotChanged();
+            if (wasMerged) {
+                s.onSlotChange(stack, itemstack);
+            } else {
+                return null;
+            }
 
-			if (stack.stackSize == itemstack.stackSize)
-			{
-				return null;
-			}
+            if (stack.stackSize <= 0) {
+                s.putStack(null);
+            }
+            s.onSlotChanged();
 
-			s.onPickupFromSlot(player, stack);
-		}
-		return itemstack;
-	}
+            if (stack.stackSize == itemstack.stackSize) {
+                return null;
+            }
 
-	public void bindPlayerHotbar(IInventory playerInventory, int x, int y)
-	{
-		for (int i = 0; i < 9; ++i)
-		{
-			addSlotToContainer(new SlotPlayerHotbar(playerInventory, i, x + i * SLOT_W, y));
-		}
-	}
+            s.onPickupFromSlot(player, stack);
+        }
+        return itemstack;
+    }
 
-	public void bindPlayerBackpack(IInventory playerInventory, int x, int y)
-	{
-		for (int row = 0; row < 3; ++row)
-		{
-			for (int col = 0; col < 9; ++col)
-			{
-				final int slotIndex = 9 + col + row * 9;
-				addSlotToContainer(new SlotPlayerBackpack(playerInventory, slotIndex, x + col * SLOT_W, y + row * SLOT_H));
-			}
-		}
-	}
+    public void bindPlayerHotbar(IInventory playerInventory, int x, int y) {
+        for (int i = 0; i < 9; ++i) {
+            addSlotToContainer(new SlotPlayerHotbar(playerInventory, i, x + i * SLOT_W, y));
+        }
+    }
 
-	public void bindPlayerInventory(IInventory playerInventory, int x, int y)
-	{
-		bindPlayerBackpack(playerInventory, x, y);
-		bindPlayerHotbar(playerInventory, x, y + 58);
-	}
+    public void bindPlayerBackpack(IInventory playerInventory, int x, int y) {
+        for (int row = 0; row < 3; ++row) {
+            for (int col = 0; col < 9; ++col) {
+                final int slotIndex = 9 + col + row * 9;
+                addSlotToContainer(
+                    new SlotPlayerBackpack(playerInventory, slotIndex, x + col * SLOT_W, y + row * SLOT_H));
+            }
+        }
+    }
 
-	@Override
-	public boolean canInteractWith(EntityPlayer player)
-	{
-		if (tileEntity instanceof IInventory)
-		{
-			return ((IInventory)tileEntity).isUseableByPlayer(player);
-		}
-		return false;
-	}
+    public void bindPlayerInventory(IInventory playerInventory, int x, int y) {
+        bindPlayerBackpack(playerInventory, x, y);
+        bindPlayerHotbar(playerInventory, x, y + 58);
+    }
 
-	// crafters
-	@Override
-	public void addCraftingToCrafters(ICrafting iCrafting)
-	{
-		super.addCraftingToCrafters(iCrafting);
-		if (tileEntity instanceof IGuiNetworkSync)
-		{
-			((IGuiNetworkSync)tileEntity).sendGUINetworkData(this, iCrafting);
-		}
-	}
+    @Override
+    public boolean canInteractWith(EntityPlayer player) {
+        if (tileEntity instanceof IInventory) {
+            return ((IInventory) tileEntity).isUseableByPlayer(player);
+        }
+        return false;
+    }
 
-	@Override
-	public void detectAndSendChanges()
-	{
-		super.detectAndSendChanges();
+    // crafters
+    @Override
+    public void addCraftingToCrafters(ICrafting iCrafting) {
+        super.addCraftingToCrafters(iCrafting);
+        if (tileEntity instanceof IGuiNetworkSync) {
+            ((IGuiNetworkSync) tileEntity).sendGUINetworkData(this, iCrafting);
+        }
+    }
 
-		if (tileEntity instanceof IGuiNetworkSync)
-		{
-			final IGuiNetworkSync sync = (IGuiNetworkSync)tileEntity;
-			for (Object crafter : crafters)
-			{
-				if (crafter instanceof ICrafting)
-				{
-					sync.sendGUINetworkData(this, (ICrafting)crafter);
-				}
-			}
-		}
-	}
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int id, int v)
-	{
-		super.updateProgressBar(id, v);
-		if (tileEntity instanceof IGuiNetworkSync)
-		{
-			((IGuiNetworkSync)tileEntity).receiveGUINetworkData(id, v);
-		}
-	}
+        if (tileEntity instanceof IGuiNetworkSync sync) {
+            for (Object crafter : crafters) {
+                if (crafter instanceof ICrafting) {
+                    sync.sendGUINetworkData(this, (ICrafting) crafter);
+                }
+            }
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int id, int v) {
+        super.updateProgressBar(id, v);
+        if (tileEntity instanceof IGuiNetworkSync) {
+            ((IGuiNetworkSync) tileEntity).receiveGUINetworkData(id, v);
+        }
+    }
 }

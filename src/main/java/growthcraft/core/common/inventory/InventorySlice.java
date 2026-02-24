@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2015, 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,105 +19,89 @@
  */
 package growthcraft.core.common.inventory;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-public class InventorySlice implements IInventory
-{
-	private IInventory parent;
-	private int[] accesible;
-	private int maxSize;
+import javax.annotation.Nonnull;
 
-	public InventorySlice(@Nonnull IInventory par, @Nonnull int[] acc)
-	{
-		this.parent = par;
-		this.accesible = acc;
-		this.maxSize = accesible.length;
-	}
+public class InventorySlice implements IInventory {
 
-	public int getSizeInventory()
-	{
-		return maxSize;
-	}
+    private final IInventory parent;
+    private final int[] accesible;
+    private final int maxSize;
 
-	public ItemStack getStackInSlot(int index)
-	{
-		return parent.getStackInSlot(accesible[index]);
-	}
+    public InventorySlice(@Nonnull IInventory par, @Nonnull int[] acc) {
+        this.parent = par;
+        this.accesible = acc;
+        this.maxSize = accesible.length;
+    }
 
-	public ItemStack decrStackSize(int index, int amount)
-	{
-		return parent.decrStackSize(accesible[index], amount);
-	}
+    public int getSizeInventory() {
+        return maxSize;
+    }
 
-	public ItemStack getStackInSlotOnClosing(int index)
-	{
-		return parent.getStackInSlotOnClosing(accesible[index]);
-	}
+    public ItemStack getStackInSlot(int index) {
+        return parent.getStackInSlot(accesible[index]);
+    }
 
-	public void setInventorySlotContents(int index, ItemStack stack)
-	{
-		parent.setInventorySlotContents(accesible[index], stack);
-	}
+    public ItemStack decrStackSize(int index, int amount) {
+        return parent.decrStackSize(accesible[index], amount);
+    }
 
-	public String getInventoryName()
-	{
-		return parent.getInventoryName();
-	}
+    public ItemStack getStackInSlotOnClosing(int index) {
+        return parent.getStackInSlotOnClosing(accesible[index]);
+    }
 
-	public boolean hasCustomInventoryName()
-	{
-		return parent.hasCustomInventoryName();
-	}
+    public void setInventorySlotContents(int index, ItemStack stack) {
+        parent.setInventorySlotContents(accesible[index], stack);
+    }
 
-	public int getInventoryStackLimit()
-	{
-		return parent.getInventoryStackLimit();
-	}
+    public String getInventoryName() {
+        return parent.getInventoryName();
+    }
 
-	public void markDirty()
-	{
-		parent.markDirty();
-	}
+    public boolean hasCustomInventoryName() {
+        return parent.hasCustomInventoryName();
+    }
 
-	public boolean isUseableByPlayer(EntityPlayer player)
-	{
-		return parent.isUseableByPlayer(player);
-	}
+    public int getInventoryStackLimit() {
+        return parent.getInventoryStackLimit();
+    }
 
-	public void openInventory()
-	{
-		parent.openInventory();
-	}
+    public void markDirty() {
+        parent.markDirty();
+    }
 
-	public void closeInventory()
-	{
-		parent.closeInventory();
-	}
+    public boolean isUseableByPlayer(EntityPlayer player) {
+        return parent.isUseableByPlayer(player);
+    }
 
-	public boolean isItemValidForSlot(int index, ItemStack stack)
-	{
-		return parent.isItemValidForSlot(accesible[index], stack);
-	}
+    public void openInventory() {
+        parent.openInventory();
+    }
 
-	public ItemStack mergeStackBang(ItemStack stack)
-	{
-		if (stack == null) return null;
-		InventoryProcessor.instance().mergeWithSlots(this, stack);
-		return stack.stackSize <= 0 ? null : stack;
-	}
+    public void closeInventory() {
+        parent.closeInventory();
+    }
 
-	public ItemStack mergeStack(ItemStack stack)
-	{
-		if (stack != null)
-		{
-			final ItemStack result = stack.copy();
-			mergeStackBang(result);
-			return result.stackSize <= 0 ? null : result;
-		}
-		return null;
-	}
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        return parent.isItemValidForSlot(accesible[index], stack);
+    }
+
+    public ItemStack mergeStackBang(ItemStack stack) {
+        if (stack == null) return null;
+        InventoryProcessor.instance()
+            .mergeWithSlots(this, stack);
+        return stack.stackSize <= 0 ? null : stack;
+    }
+
+    public ItemStack mergeStack(ItemStack stack) {
+        if (stack != null) {
+            final ItemStack result = stack.copy();
+            mergeStackBang(result);
+            return result.stackSize <= 0 ? null : result;
+        }
+        return null;
+    }
 }

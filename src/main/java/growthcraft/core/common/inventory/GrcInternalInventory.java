@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2015, 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,230 +23,187 @@ import growthcraft.api.core.nbt.INBTSerializableContext;
 import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.api.core.nbt.NBTType;
 import growthcraft.core.util.ItemUtils;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 
-public class GrcInternalInventory implements IInventory, INBTSerializableContext
-{
-	public static final int WILDCARD_SLOT = -1;
+public class GrcInternalInventory implements IInventory, INBTSerializableContext {
 
-	protected String inventoryName;
-	protected ItemStack[] items;
-	protected int maxSize;
-	protected int maxStackSize;
-	protected Object parent;
+    public static final int WILDCARD_SLOT = -1;
 
-	public GrcInternalInventory(Object par, int size, int maxStack)
-	{
-		this.inventoryName = "grc.inventory.internal.name";
-		this.parent = par;
-		this.maxSize = size;
-		this.maxStackSize = maxStack;
-		this.items = new ItemStack[maxSize];
-	}
+    protected String inventoryName;
+    protected ItemStack[] items;
+    protected int maxSize;
+    protected int maxStackSize;
+    protected Object parent;
 
-	public GrcInternalInventory(Object par, int size)
-	{
-		this(par, size, 64);
-	}
+    public GrcInternalInventory(Object par, int size, int maxStack) {
+        this.inventoryName = "grc.inventory.internal.name";
+        this.parent = par;
+        this.maxSize = size;
+        this.maxStackSize = maxStack;
+        this.items = new ItemStack[maxSize];
+    }
 
-	public int getMaxSize()
-	{
-		return maxSize;
-	}
+    public GrcInternalInventory(Object par, int size) {
+        this(par, size, 64);
+    }
 
-	protected void onSlotChanged(int index)
-	{
-		if (parent instanceof IInventoryWatcher)
-		{
-			((IInventoryWatcher)parent).onInventoryChanged(this, index);
-		}
-		else if (parent instanceof IInventory)
-		{
-			((IInventory)parent).markDirty();
-		}
-	}
+    public int getMaxSize() {
+        return maxSize;
+    }
 
-	@Override
-	public void markDirty()
-	{
-		onSlotChanged(WILDCARD_SLOT);
-	}
+    protected void onSlotChanged(int index) {
+        if (parent instanceof IInventoryWatcher) {
+            ((IInventoryWatcher) parent).onInventoryChanged(this, index);
+        } else if (parent instanceof IInventory) {
+            ((IInventory) parent).markDirty();
+        }
+    }
 
-	public void clear()
-	{
-		for (int i = 0; i < getMaxSize(); ++i)
-		{
-			items[i] = null;
-		}
-		onSlotChanged(WILDCARD_SLOT);
-	}
+    @Override
+    public void markDirty() {
+        onSlotChanged(WILDCARD_SLOT);
+    }
 
-	/**
-	 * @deprecated
-	 *   Use #clear instead
-	 */
-	@Deprecated
-	public void clearInventory()
-	{
-		clear();
-	}
+    public void clear() {
+        for (int i = 0; i < getMaxSize(); ++i) {
+            items[i] = null;
+        }
+        onSlotChanged(WILDCARD_SLOT);
+    }
 
-	protected void readFromNBT(NBTTagList data)
-	{
-		this.items = ItemUtils.clearInventorySlots(items, getSizeInventory());
-		NBTHelper.readInventorySlotsFromNBT(items, data);
-		onSlotChanged(WILDCARD_SLOT);
-	}
+    /**
+     * @deprecated Use #clear instead
+     */
+    @Deprecated
+    public void clearInventory() {
+        clear();
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound data, String name)
-	{
-		final NBTTagList list = data.getTagList(name, NBTType.COMPOUND.id);
-		if (list != null)
-		{
-			readFromNBT(list);
-		}
-		else
-		{
-			// LOG error
-		}
-	}
+    protected void readFromNBT(NBTTagList data) {
+        this.items = ItemUtils.clearInventorySlots(items, getSizeInventory());
+        NBTHelper.readInventorySlotsFromNBT(items, data);
+        onSlotChanged(WILDCARD_SLOT);
+    }
 
-	protected void writeToNBT(NBTTagList data)
-	{
-		NBTHelper.writeInventorySlotsToNBT(items, data);
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound data, String name) {
+        final NBTTagList list = data.getTagList(name, NBTType.COMPOUND.id);
+        if (list != null) {
+            readFromNBT(list);
+        } else {
+            // LOG error
+        }
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound data, String name)
-	{
-		final NBTTagList invData = new NBTTagList();
-		writeToNBT(invData);
-		data.setTag(name, invData);
-	}
+    protected void writeToNBT(NBTTagList data) {
+        NBTHelper.writeInventorySlotsToNBT(items, data);
+    }
 
-	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack)
-	{
-		return true;
-	}
+    @Override
+    public void writeToNBT(NBTTagCompound data, String name) {
+        final NBTTagList invData = new NBTTagList();
+        writeToNBT(invData);
+        data.setTag(name, invData);
+    }
 
-	@Override
-	public void openInventory()
-	{
-	}
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        return true;
+    }
 
-	@Override
-	public void closeInventory()
-	{
-	}
+    @Override
+    public void openInventory() {
+    }
 
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer _player)
-	{
-		return true;
-	}
+    @Override
+    public void closeInventory() {
+    }
 
-	@Override
-	public int getSizeInventory()
-	{
-		return maxSize;
-	}
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer _player) {
+        return true;
+    }
 
-	@Override
-	public int getInventoryStackLimit()
-	{
-		return maxStackSize;
-	}
+    @Override
+    public int getSizeInventory() {
+        return maxSize;
+    }
 
-	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return false;
-	}
+    @Override
+    public int getInventoryStackLimit() {
+        return maxStackSize;
+    }
 
-	public GrcInternalInventory setInventoryName(String name)
-	{
-		this.inventoryName = name;
-		return this;
-	}
+    @Override
+    public boolean hasCustomInventoryName() {
+        return false;
+    }
 
-	@Override
-	public String getInventoryName()
-	{
-		return inventoryName;
-	}
+    @Override
+    public String getInventoryName() {
+        return inventoryName;
+    }
 
-	@Override
-	public ItemStack getStackInSlot(int index)
-	{
-		return items[index];
-	}
+    public GrcInternalInventory setInventoryName(String name) {
+        this.inventoryName = name;
+        return this;
+    }
 
-	@Override
-	public void setInventorySlotContents(int index, ItemStack stack)
-	{
-		final ItemStack oldStack = items[index];
-		items[index] = stack;
-		if (stack != null)
-		{
-			if (stack.stackSize > getInventoryStackLimit())
-			{
-				final int discarded = stack.stackSize - getInventoryStackLimit();
-				items[index].stackSize = getInventoryStackLimit();
-				if (discarded > 0)
-				{
-					if (parent instanceof IInventoryWatcher)
-					{
-						((IInventoryWatcher)parent).onItemDiscarded(this, stack, index, discarded);
-					}
-				}
-			}
-		}
-		if (oldStack != stack)
-		{
-			onSlotChanged(index);
-		}
-	}
+    @Override
+    public ItemStack getStackInSlot(int index) {
+        return items[index];
+    }
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int index)
-	{
-		final ItemStack stack = items[index];
-		items[index] = null;
-		if (stack != null) onSlotChanged(index);
-		return stack;
-	}
+    @Override
+    public void setInventorySlotContents(int index, ItemStack stack) {
+        final ItemStack oldStack = items[index];
+        items[index] = stack;
+        if (stack != null) {
+            if (stack.stackSize > getInventoryStackLimit()) {
+                final int discarded = stack.stackSize - getInventoryStackLimit();
+                items[index].stackSize = getInventoryStackLimit();
+                if (discarded > 0) {
+                    if (parent instanceof IInventoryWatcher) {
+                        ((IInventoryWatcher) parent).onItemDiscarded(this, stack, index, discarded);
+                    }
+                }
+            }
+        }
+        if (oldStack != stack) {
+            onSlotChanged(index);
+        }
+    }
 
-	@Override
-	public ItemStack decrStackSize(int index, int amount)
-	{
-		if (items[index] != null)
-		{
-			ItemStack itemstack;
+    @Override
+    public ItemStack getStackInSlotOnClosing(int index) {
+        final ItemStack stack = items[index];
+        items[index] = null;
+        if (stack != null) onSlotChanged(index);
+        return stack;
+    }
 
-			if (items[index].stackSize <= amount)
-			{
-				itemstack = items[index];
-				items[index] = null;
-			}
-			else
-			{
-				itemstack = items[index].splitStack(amount);
+    @Override
+    public ItemStack decrStackSize(int index, int amount) {
+        if (items[index] != null) {
+            ItemStack itemstack;
 
-				if (items[index].stackSize <= 0)
-				{
-					items[index] = null;
-				}
-			}
-			onSlotChanged(index);
-			return itemstack;
-		}
-		return null;
-	}
+            if (items[index].stackSize <= amount) {
+                itemstack = items[index];
+                items[index] = null;
+            } else {
+                itemstack = items[index].splitStack(amount);
+
+                if (items[index].stackSize <= 0) {
+                    items[index] = null;
+                }
+            }
+            onSlotChanged(index);
+            return itemstack;
+        }
+        return null;
+    }
 }

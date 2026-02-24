@@ -1,137 +1,112 @@
 package growthcraft.api.fishtrap;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import javax.annotation.Nonnull;
-
+import growthcraft.api.core.log.ILoggable;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.log.NullLogger;
-import growthcraft.api.core.log.ILoggable;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 
-public class FishTrapRegistry implements ILoggable
-{
-	private static final FishTrapRegistry instance = new FishTrapRegistry();
-	private final BaitRegistry baits = new BaitRegistry();
-	private final Set<CatchGroupEntry> catchGroups = new HashSet<CatchGroupEntry>();
-	private final Map<String, List<FishTrapEntry>> entriesByGroup = new HashMap<String, List<FishTrapEntry>>();
-	private ILogger logger = NullLogger.INSTANCE;
+import javax.annotation.Nonnull;
+import java.util.*;
 
-	public static final FishTrapRegistry instance()
-	{
-		return instance;
-	}
+public class FishTrapRegistry implements ILoggable {
 
-	@Override
-	public void setLogger(@Nonnull ILogger l)
-	{
-		this.logger = l;
-	}
+    private static final FishTrapRegistry instance = new FishTrapRegistry();
+    private final BaitRegistry baits = new BaitRegistry();
+    private final Set<CatchGroupEntry> catchGroups = new HashSet<CatchGroupEntry>();
+    private final Map<String, List<FishTrapEntry>> entriesByGroup = new HashMap<String, List<FishTrapEntry>>();
+    private ILogger logger = NullLogger.INSTANCE;
 
-	public void addBait(Object stack, BaitRegistry.BaitHandle handle)
-	{
-		logger.debug("Adding FishTrap Bait `%s`", stack);
-		baits.add(stack, handle);
-	}
+    public static final FishTrapRegistry instance() {
+        return instance;
+    }
 
-	public void addBait(Object stack, float base, float mul)
-	{
-		addBait(stack, new BaitRegistry.BaitHandle(base, mul));
-	}
+    @Override
+    public void setLogger(@Nonnull ILogger l) {
+        this.logger = l;
+    }
 
-	public BaitRegistry.BaitHandle findBait(ItemStack stack)
-	{
-		return baits.findHandle(stack);
-	}
+    public void addBait(Object stack, BaitRegistry.BaitHandle handle) {
+        logger.debug("Adding FishTrap Bait `%s`", stack);
+        baits.add(stack, handle);
+    }
 
-	public void addCatchGroup(String name, int weight)
-	{
-		logger.debug("Adding Catch Group group=`%s` weight=%d", name, weight);
-		catchGroups.add(new CatchGroupEntry(name, weight));
-	}
+    public void addBait(Object stack, float base, float mul) {
+        addBait(stack, new BaitRegistry.BaitHandle(base, mul));
+    }
 
-	public Collection<CatchGroupEntry> getCatchGroups()
-	{
-		return catchGroups;
-	}
+    public BaitRegistry.BaitHandle findBait(ItemStack stack) {
+        return baits.findHandle(stack);
+    }
 
-	public String getRandomCatchGroup(Random random)
-	{
-		final CatchGroupEntry entry = (CatchGroupEntry)WeightedRandom.getRandomItem(random, getCatchGroups());
-		if (entry != null) return entry.getName();
-		return null;
-	}
+    public void addCatchGroup(String name, int weight) {
+        logger.debug("Adding Catch Group group=`%s` weight=%d", name, weight);
+        catchGroups.add(new CatchGroupEntry(name, weight));
+    }
 
-	public void addCatchToGroup(FishTrapEntry entry, String group)
-	{
-		if (!entriesByGroup.containsKey(group))
-		{
-			entriesByGroup.put(group, new LinkedList<FishTrapEntry>());
-		}
-		entriesByGroup.get(group).add(entry);
-	}
+    public Collection<CatchGroupEntry> getCatchGroups() {
+        return catchGroups;
+    }
 
-	private ItemStack getRandomCatchFromList(Random random, List<FishTrapEntry> list)
-	{
-		if (list.isEmpty()) return null;
-		return ((FishTrapEntry)WeightedRandom.getRandomItem(random, list)).getFishable(random);
-	}
+    public String getRandomCatchGroup(Random random) {
+        final CatchGroupEntry entry = WeightedRandom.getRandomItem(random, getCatchGroups());
+        if (entry != null) return entry.getName();
+        return null;
+    }
 
-	public ItemStack getRandomCatchFromGroup(Random random, String group)
-	{
-		final List<FishTrapEntry> list = entriesByGroup.get(group);
-		if (list != null)
-		{
-			return getRandomCatchFromList(random, list);
-		}
-		return null;
-	}
+    public void addCatchToGroup(FishTrapEntry entry, String group) {
+        if (!entriesByGroup.containsKey(group)) {
+            entriesByGroup.put(group, new LinkedList<FishTrapEntry>());
+        }
+        entriesByGroup.get(group)
+            .add(entry);
+    }
 
-	/**
-	 * Use addCatchToGroup instead
-	 */
-	@Deprecated
-	public void addTrapFish(FishTrapEntry entry)
-	{
-		addCatchToGroup(entry, "fish");
-	}
+    private ItemStack getRandomCatchFromList(Random random, List<FishTrapEntry> list) {
+        if (list.isEmpty()) return null;
+        return WeightedRandom.getRandomItem(random, list)
+            .getFishable(random);
+    }
 
-	@Deprecated
-	public void addTrapTreasure(FishTrapEntry entry)
-	{
-		addCatchToGroup(entry, "treasure");
-	}
+    public ItemStack getRandomCatchFromGroup(Random random, String group) {
+        final List<FishTrapEntry> list = entriesByGroup.get(group);
+        if (list != null) {
+            return getRandomCatchFromList(random, list);
+        }
+        return null;
+    }
 
-	@Deprecated
-	public void addTrapJunk(FishTrapEntry entry)
-	{
-		addCatchToGroup(entry, "junk");
-	}
+    /**
+     * Use addCatchToGroup instead
+     */
+    @Deprecated
+    public void addTrapFish(FishTrapEntry entry) {
+        addCatchToGroup(entry, "fish");
+    }
 
-	@Deprecated
-	public ItemStack getFishList(World world)
-	{
-		return getRandomCatchFromGroup(world.rand, "fish");
-	}
+    @Deprecated
+    public void addTrapTreasure(FishTrapEntry entry) {
+        addCatchToGroup(entry, "treasure");
+    }
 
-	@Deprecated
-	public ItemStack getTreasureList(World world)
-	{
-		return getRandomCatchFromGroup(world.rand, "treasure");
-	}
+    @Deprecated
+    public void addTrapJunk(FishTrapEntry entry) {
+        addCatchToGroup(entry, "junk");
+    }
 
-	@Deprecated
-	public ItemStack getJunkList(World world)
-	{
-		return getRandomCatchFromGroup(world.rand, "junk");
-	}
+    @Deprecated
+    public ItemStack getFishList(World world) {
+        return getRandomCatchFromGroup(world.rand, "fish");
+    }
+
+    @Deprecated
+    public ItemStack getTreasureList(World world) {
+        return getRandomCatchFromGroup(world.rand, "treasure");
+    }
+
+    @Deprecated
+    public ItemStack getJunkList(World world) {
+        return getRandomCatchFromGroup(world.rand, "junk");
+    }
 }

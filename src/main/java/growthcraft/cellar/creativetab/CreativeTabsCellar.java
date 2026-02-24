@@ -1,23 +1,20 @@
 package growthcraft.cellar.creativetab;
 
-import growthcraft.cellar.GrowthCraftCellar;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import growthcraft.cellar.GrowthCraftCellar;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class CreativeTabsCellar extends CreativeTabs
-{
-	public CreativeTabsCellar(String name)
-	{
-		super(name);
-	}
+public class CreativeTabsCellar extends CreativeTabs {
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getTabIconItem()
-	{
-		return GrowthCraftCellar.blocks.fermentBarrel.getItem();
-	}
+    public CreativeTabsCellar(String name) {
+        super(name);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Item getTabIconItem() {
+        return GrowthCraftCellar.blocks.fermentBarrel.getItem();
+    }
 }

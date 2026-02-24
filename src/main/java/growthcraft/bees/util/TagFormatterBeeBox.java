@@ -1,41 +1,46 @@
 package growthcraft.bees.util;
 
-import java.util.List;
-
 import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.api.core.util.ITagFormatter;
 import growthcraft.core.util.TagFormatterItem;
 import growthcraft.core.util.UnitFormatter;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 
-public class TagFormatterBeeBox implements ITagFormatter
-{
-	public static final TagFormatterBeeBox INSTANCE = new TagFormatterBeeBox();
+import java.util.List;
 
-	public List<String> format(List<String> list, NBTTagCompound tag)
-	{
-		list.add(EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.bonus_prefix") + " " +
-			EnumChatFormatting.WHITE + UnitFormatter.booleanAsValue(tag.getBoolean("has_bonus")));
+public class TagFormatterBeeBox implements ITagFormatter {
 
-		list.add(EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.bees_prefix") + " " +
-			TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("bee")));
+    public static final TagFormatterBeeBox INSTANCE = new TagFormatterBeeBox();
 
-		list.add(EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.honey_prefix") + " " +
-			UnitFormatter.fraction(
-				"" + EnumChatFormatting.WHITE + tag.getInteger("honeycomb_count"),
-				"" + EnumChatFormatting.YELLOW + tag.getInteger("honey_count"),
-				"" + EnumChatFormatting.WHITE + tag.getInteger("honeycomb_max")
-			)
-		);
+    public List<String> format(List<String> list, NBTTagCompound tag) {
+        list.add(
+            EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.bonus_prefix")
+                + " "
+                + EnumChatFormatting.WHITE
+                + UnitFormatter.booleanAsValue(tag.getBoolean("has_bonus")));
 
-		if (tag.hasKey("growth_rate"))
-		{
-			list.add(EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.growth_rate_prefix") + " " +
-				EnumChatFormatting.WHITE + GrcI18n.translate("grc.bees.growth_rate_value", (int)(tag.getFloat("growth_rate") * 100)));
-		}
+        list.add(
+            EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.bees_prefix")
+                + " "
+                + TagFormatterItem.INSTANCE.formatItem(tag.getCompoundTag("bee")));
 
-		return list;
-	}
+        list.add(
+            EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.honey_prefix")
+                + " "
+                + UnitFormatter.fraction(
+                "" + EnumChatFormatting.WHITE + tag.getInteger("honeycomb_count"),
+                "" + EnumChatFormatting.YELLOW + tag.getInteger("honey_count"),
+                "" + EnumChatFormatting.WHITE + tag.getInteger("honeycomb_max")));
+
+        if (tag.hasKey("growth_rate")) {
+            list.add(
+                EnumChatFormatting.GRAY + GrcI18n.translate("grc.bees.growth_rate_prefix")
+                    + " "
+                    + EnumChatFormatting.WHITE
+                    + GrcI18n.translate("grc.bees.growth_rate_value", (int) (tag.getFloat("growth_rate") * 100)));
+        }
+
+        return list;
+    }
 }

@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,84 +19,72 @@
  */
 package growthcraft.api.core.fluids.user;
 
-import java.io.BufferedReader;
-
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.fluids.FluidTag;
-import growthcraft.api.core.fluids.IFluidTagsRegistry;
 import growthcraft.api.core.fluids.IFluidDictionary;
+import growthcraft.api.core.fluids.IFluidTagsRegistry;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
-
 import net.minecraftforge.fluids.Fluid;
 
-public class UserFluidDictionaryConfig extends AbstractUserJSONConfig
-{
-	private final UserFluidDictionaryEntries defaultEntries = new UserFluidDictionaryEntries();
-	private UserFluidDictionaryEntries entries;
+import java.io.BufferedReader;
 
-	@Override
-	protected String getDefault()
-	{
-		return gson.toJson(defaultEntries);
-	}
+public class UserFluidDictionaryConfig extends AbstractUserJSONConfig {
 
-	@Override
-	protected void loadFromBuffer(BufferedReader reader) throws IllegalStateException
-	{
-		this.entries = gson.fromJson(reader, UserFluidDictionaryEntries.class);
-	}
+    private final UserFluidDictionaryEntries defaultEntries = new UserFluidDictionaryEntries();
+    private UserFluidDictionaryEntries entries;
 
-	private void addFluidDictionaryEntry(UserFluidDictionaryEntry entry)
-	{
-		if (entry == null)
-		{
-			logger.error("Entry was invalid");
-			return;
-		}
+    @Override
+    protected String getDefault() {
+        return gson.toJson(defaultEntries);
+    }
 
-		if (entry.getFluid() == null)
-		{
-			logger.error("Entry fluid is invalid! %s", entry);
-			return;
-		}
+    @Override
+    protected void loadFromBuffer(BufferedReader reader) throws IllegalStateException {
+        this.entries = gson.fromJson(reader, UserFluidDictionaryEntries.class);
+    }
 
-		if (entry.tags == null)
-		{
-			logger.error("Entry tags are invalid! %s", entry);
-			return;
-		}
+    private void addFluidDictionaryEntry(UserFluidDictionaryEntry entry) {
+        if (entry == null) {
+            logger.error("Entry was invalid");
+            return;
+        }
 
-		final IFluidTagsRegistry fluidTags = CoreRegistry.instance().fluidTags();
-		final IFluidDictionary fluidDict = CoreRegistry.instance().fluidDictionary();
-		final Fluid fluid = entry.getFluid();
+        if (entry.getFluid() == null) {
+            logger.error("Entry fluid is invalid! %s", entry);
+            return;
+        }
 
-		for (String tagName : entry.tags)
-		{
-			FluidTag fluidTag = fluidTags.findTag(tagName);
-			if (fluidTag == null)
-			{
-				logger.warn("Creating new FluidTag '%s'", tagName);
-				fluidTag = fluidTags.createTag(tagName);
-			}
-			fluidDict.addFluidTags(fluid, fluidTag);
-		}
-	}
+        if (entry.tags == null) {
+            logger.error("Entry tags are invalid! %s", entry);
+            return;
+        }
 
-	@Override
-	public void init()
-	{
-		super.init();
-		if (entries != null)
-		{
-			if (entries.data != null)
-			{
-				logger.debug("Adding %d fluid dictionary entries.", entries.data.size());
-				for (UserFluidDictionaryEntry entry : entries.data) addFluidDictionaryEntry(entry);
-			}
-			else
-			{
-				logger.error("Invalid fluid dictionary entries data");
-			}
-		}
-	}
+        final IFluidTagsRegistry fluidTags = CoreRegistry.instance()
+            .fluidTags();
+        final IFluidDictionary fluidDict = CoreRegistry.instance()
+            .fluidDictionary();
+        final Fluid fluid = entry.getFluid();
+
+        for (String tagName : entry.tags) {
+            FluidTag fluidTag = fluidTags.findTag(tagName);
+            if (fluidTag == null) {
+                logger.warn("Creating new FluidTag '%s'", tagName);
+                fluidTag = fluidTags.createTag(tagName);
+            }
+            fluidDict.addFluidTags(fluid, fluidTag);
+        }
+    }
+
+    @Override
+    public void init() {
+        super.init();
+        if (entries != null) {
+            if (entries.data != null) {
+                logger.debug("Adding %d fluid dictionary entries.", entries.data.size());
+                for (UserFluidDictionaryEntry entry : entries.data) addFluidDictionaryEntry(entry);
+            } else {
+                logger.error("Invalid fluid dictionary entries data");
+            }
+        }
+    }
 }

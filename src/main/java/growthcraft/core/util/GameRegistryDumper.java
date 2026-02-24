@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2015, 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,17 +19,9 @@
  */
 package growthcraft.core.util;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
+import cpw.mods.fml.common.registry.GameRegistry;
 import growthcraft.api.core.util.StringUtils;
 import growthcraft.core.GrowthCraftCore;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -41,187 +29,167 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 /**
  * If you really, REALLY need to dump the block registry, then this is your thing.
  * Sub blocks are indented by 1 single tab character under their parent block.
  */
-public class GameRegistryDumper
-{
-	private GameRegistryDumper() {}
+public class GameRegistryDumper {
 
-	private static void writeItemStackToFile(ItemStack stack, FileWriter writer) throws IOException
-	{
-		if (stack != null && stack.getItem() != null)
-		{
-			final Item item = stack.getItem();
-			final int damage = stack.getItemDamage();
-			final String unlocName = stack.getUnlocalizedName();
-			final String displayName = stack.getDisplayName();
-			writer.write("\t" + item + "," + damage + "," + unlocName + "," + displayName + "\n");
-		}
-	}
+    private GameRegistryDumper() {
+    }
 
-	private static void writeItemSubtypes(Object obj, FileWriter writer) throws IOException
-	{
-		try
-		{
-			final List<ItemStack> sub = new ArrayList<ItemStack>();
-			if (obj instanceof Item)
-			{
-				final Item item = (Item)obj;
-				if (!item.getHasSubtypes()) return;
-				item.getSubItems(item, item.getCreativeTab(), sub);
-			}
-			else if (obj instanceof Block)
-			{
-				final Block block = (Block)obj;
-				final Item item = Item.getItemFromBlock(block);
-				if (item == null) return;
-				if (!item.getHasSubtypes()) return;
-				block.getSubBlocks(item, block.getCreativeTabToDisplayOn(), sub);
-			}
+    private static void writeItemStackToFile(ItemStack stack, FileWriter writer) throws IOException {
+        if (stack != null && stack.getItem() != null) {
+            final Item item = stack.getItem();
+            final int damage = stack.getItemDamage();
+            final String unlocName = stack.getUnlocalizedName();
+            final String displayName = stack.getDisplayName();
+            writer.write("\t" + item + "," + damage + "," + unlocName + "," + displayName + "\n");
+        }
+    }
 
-			if (sub.size() > 0)
-			{
-				for (ItemStack stack : sub)
-				{
-					if (stack != null && stack.getItem() != null)
-					{
-						writeItemStackToFile(stack, writer);
-					}
-				}
-			}
-		}
-		catch (NullPointerException ex)
-		{
-			ex.printStackTrace();
-			writer.write("\tnull,,,\n");
-		}
-	}
+    private static void writeItemSubtypes(Object obj, FileWriter writer) throws IOException {
+        try {
+            final List<ItemStack> sub = new ArrayList<ItemStack>();
+            if (obj instanceof Item item) {
+                if (!item.getHasSubtypes()) return;
+                item.getSubItems(item, item.getCreativeTab(), sub);
+            } else if (obj instanceof Block block) {
+                final Item item = Item.getItemFromBlock(block);
+                if (item == null) return;
+                if (!item.getHasSubtypes()) return;
+                block.getSubBlocks(item, block.getCreativeTabToDisplayOn(), sub);
+            }
 
-	@SuppressWarnings("rawtypes")
-	public static void dumpBlocks()
-	{
-		GrowthCraftCore.getLogger().info("Dumping Blocks");
-		final Iterator it = GameRegistry.Type.BLOCK.getRegistry().iterator();
+            if (sub.size() > 0) {
+                for (ItemStack stack : sub) {
+                    if (stack != null && stack.getItem() != null) {
+                        writeItemStackToFile(stack, writer);
+                    }
+                }
+            }
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+            writer.write("\tnull,,,\n");
+        }
+    }
 
-		try (FileWriter writer = new FileWriter("dumps/GameRegistry_Blocks.txt"))
-		{
-			while (it.hasNext())
-			{
-				final Block obj = (Block)it.next();
-				try
-				{
-					if (obj != null)
-					{
-						writer.write("" + Block.getIdFromBlock(obj) + "," + obj.getUnlocalizedName() + "," + obj.getLocalizedName() + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
+    @SuppressWarnings("rawtypes")
+    public static void dumpBlocks() {
+        GrowthCraftCore.getLogger()
+            .info("Dumping Blocks");
+        final Iterator it = GameRegistry.Type.BLOCK.getRegistry()
+            .iterator();
 
-						if (Platform.isClient())
-						{
-							writeItemSubtypes(obj, writer);
-						}
-						else
-						{
-							writeItemStackToFile(new ItemStack(obj), writer);
-						}
-					}
-				}
-				catch (NullPointerException ex)
-				{
-					writer.write("null,,,\n");
-				}
-			}
-		}
-		catch (IOException ex)
-		{
-			ex.printStackTrace();
-		}
-	}
+        try (FileWriter writer = new FileWriter("dumps/GameRegistry_Blocks.txt")) {
+            while (it.hasNext()) {
+                final Block obj = (Block) it.next();
+                try {
+                    if (obj != null) {
+                        writer.write(
+                            Block.getIdFromBlock(obj) + ","
+                                + obj.getUnlocalizedName()
+                                + ","
+                                + obj.getLocalizedName()
+                                + ","
+                                + GameRegistry.findUniqueIdentifierFor(obj)
+                                + "\n");
 
-	@SuppressWarnings("rawtypes")
-	public static void dumpItems()
-	{
-		GrowthCraftCore.getLogger().info("Dumping Items");
-		final Iterator it = GameRegistry.Type.ITEM.getRegistry().iterator();
+                        if (Platform.isClient()) {
+                            writeItemSubtypes(obj, writer);
+                        } else {
+                            writeItemStackToFile(new ItemStack(obj), writer);
+                        }
+                    }
+                } catch (NullPointerException ex) {
+                    writer.write("null,,,\n");
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
-		try (FileWriter writer = new FileWriter("dumps/GameRegistry_Items.txt"))
-		{
-			while (it.hasNext())
-			{
-				final Item obj = (Item)it.next();
-				try
-				{
-					if (obj != null)
-					{
-						writer.write("" + Item.getIdFromItem(obj) + "," + obj.getUnlocalizedName() + "," + "?" + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
+    @SuppressWarnings("rawtypes")
+    public static void dumpItems() {
+        GrowthCraftCore.getLogger()
+            .info("Dumping Items");
+        final Iterator it = GameRegistry.Type.ITEM.getRegistry()
+            .iterator();
 
-						if (Platform.isClient())
-						{
-							writeItemSubtypes(obj, writer);
-						}
-						else
-						{
-							writeItemStackToFile(new ItemStack(obj), writer);
-						}
-					}
-				}
-				catch (NullPointerException ex)
-				{
-					writer.write("null,,,\n");
-				}
-			}
-		}
-		catch (IOException ex)
-		{
-			ex.printStackTrace();
-		}
-	}
+        try (FileWriter writer = new FileWriter("dumps/GameRegistry_Items.txt")) {
+            while (it.hasNext()) {
+                final Item obj = (Item) it.next();
+                try {
+                    if (obj != null) {
+                        writer.write(
+                            Item.getIdFromItem(obj) + ","
+                                + obj.getUnlocalizedName()
+                                + ","
+                                + "?"
+                                + ","
+                                + GameRegistry.findUniqueIdentifierFor(obj)
+                                + "\n");
 
-	@SuppressWarnings("rawtypes")
-	public static void dumpFluids()
-	{
-		GrowthCraftCore.getLogger().info("Dumping Fluids");
-		final Set<String> fluidKeys = FluidRegistry.getRegisteredFluids().keySet();
-		try (FileWriter writer = new FileWriter("dumps/FluidRegistry_Fluids.txt"))
-		{
-			for (String key : fluidKeys)
-			{
-				writer.write(key + "\n");
-			}
-		}
-		catch (IOException ex)
-		{
-			ex.printStackTrace();
-		}
-	}
+                        if (Platform.isClient()) {
+                            writeItemSubtypes(obj, writer);
+                        } else {
+                            writeItemStackToFile(new ItemStack(obj), writer);
+                        }
+                    }
+                } catch (NullPointerException ex) {
+                    writer.write("null,,,\n");
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
-	public static void dumpBiomes()
-	{
-		final BiomeGenBase[] biomes = BiomeGenBase.getBiomeGenArray();
-		try (FileWriter writer = new FileWriter("dumps/Biomes_dump.txt"))
-		{
-			writer.write("Biome ID, Name, [TYPES...]\n");
-			for (BiomeGenBase biome : biomes)
-			{
-				if (biome == null) continue;
-				writer.write(String.format("%d,%s,%s\n",
-					biome.biomeID,
-					biome.biomeName,
-					StringUtils.inspect(BiomeDictionary.getTypesForBiome(biome))
-				));
-			}
-		}
-		catch (IOException ex)
-		{
-			ex.printStackTrace();
-		}
-	}
+    @SuppressWarnings("rawtypes")
+    public static void dumpFluids() {
+        GrowthCraftCore.getLogger()
+            .info("Dumping Fluids");
+        final Set<String> fluidKeys = FluidRegistry.getRegisteredFluids()
+            .keySet();
+        try (FileWriter writer = new FileWriter("dumps/FluidRegistry_Fluids.txt")) {
+            for (String key : fluidKeys) {
+                writer.write(key + "\n");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
-	public static void run()
-	{
-		dumpBlocks();
-		dumpItems();
-		dumpFluids();
-		dumpBiomes();
-	}
+    public static void dumpBiomes() {
+        final BiomeGenBase[] biomes = BiomeGenBase.getBiomeGenArray();
+        try (FileWriter writer = new FileWriter("dumps/Biomes_dump.txt")) {
+            writer.write("Biome ID, Name, [TYPES...]\n");
+            for (BiomeGenBase biome : biomes) {
+                if (biome == null) continue;
+                writer.write(
+                    String.format(
+                        "%d,%s,%s\n",
+                        biome.biomeID,
+                        biome.biomeName,
+                        StringUtils.inspect(BiomeDictionary.getTypesForBiome(biome))));
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void run() {
+        dumpBlocks();
+        dumpItems();
+        dumpFluids();
+        dumpBiomes();
+    }
 }

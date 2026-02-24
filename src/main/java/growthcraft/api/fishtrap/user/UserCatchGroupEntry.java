@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,30 +21,26 @@ package growthcraft.api.fishtrap.user;
 
 import growthcraft.api.core.schema.ICommentable;
 
-public class UserCatchGroupEntry implements ICommentable
-{
-	public String comment = "";
-	public int weight;
+public class UserCatchGroupEntry implements ICommentable {
 
-	public UserCatchGroupEntry()
-	{
-		this.weight = 1;
-	}
+    public String comment = "";
+    public int weight;
 
-	public UserCatchGroupEntry(int p_weight)
-	{
-		this.weight = p_weight;
-	}
+    public UserCatchGroupEntry() {
+        this.weight = 1;
+    }
 
-	@Override
-	public String getComment()
-	{
-		return comment;
-	}
+    public UserCatchGroupEntry(int p_weight) {
+        this.weight = p_weight;
+    }
 
-	@Override
-	public void setComment(String com)
-	{
-		this.comment = com;
-	}
+    @Override
+    public String getComment() {
+        return comment;
+    }
+
+    @Override
+    public void setComment(String com) {
+        this.comment = com;
+    }
 }

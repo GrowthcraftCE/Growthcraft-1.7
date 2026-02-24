@@ -1,85 +1,78 @@
 package growthcraft.api.fishtrap;
 
-import java.util.Random;
-
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 
-public class FishTrapEntry extends WeightedRandom.Item
-{
-	private final ItemStack fishable;
-	private float damage;
-	private boolean isEnchantable;
+import java.util.Random;
 
-	public FishTrapEntry(ItemStack fish, int weight)
-	{
-		super(weight);
-		this.fishable = fish;
-	}
+public class FishTrapEntry extends WeightedRandom.Item {
 
-	public ItemStack getItemStack()
-	{
-		return fishable;
-	}
+    private final ItemStack fishable;
+    private float damage;
+    private boolean isEnchantable;
 
-	public ItemStack getFishable(Random random)
-	{
-		final ItemStack ret = this.fishable.copy();
+    public FishTrapEntry(ItemStack fish, int weight) {
+        super(weight);
+        this.fishable = fish;
+    }
 
-		if (this.damage > 0.0F)
-		{
-			final int i = (int)(this.damage * this.fishable.getMaxDamage());
-			int j = ret.getMaxDamage() - random.nextInt(random.nextInt(i) + 1);
-			if (j > i) j = i;
-			if (j < 1) j = 1;
-			ret.setItemDamage(j);
-		}
+    public ItemStack getItemStack() {
+        return fishable;
+    }
 
-		if (this.isEnchantable)
-		{
-			EnchantmentHelper.addRandomEnchantment(random, ret, 30);
-			//1.6.4
-			/*if (ret.getItem() instanceof ItemEnchantedBook)
-			{
-				ItemEnchantedBook item = (ItemEnchantedBook) ret.getItem();
-				Enchantment enchantment = Enchantment.enchantmentsBookList[random.nextInt(Enchantment.enchantmentsBookList.length)];
-				int l = MathHelper.getRandomIntegerInRange(random, enchantment.getMinLevel(), enchantment.getMaxLevel());
-				item.addEnchantment(ret, new EnchantmentData(enchantment, l));
-			}
-			else
-			{
-				EnchantmentHelper.addRandomEnchantment(random, ret, 30);
-			}*/
-		}
+    public ItemStack getFishable(Random random) {
+        final ItemStack ret = this.fishable.copy();
 
-		return ret;
-	}
+        if (this.damage > 0.0F) {
+            final int i = (int) (this.damage * this.fishable.getMaxDamage());
+            int j = ret.getMaxDamage() - random.nextInt(random.nextInt(i) + 1);
+            if (j > i) j = i;
+            if (j < 1) j = 1;
+            ret.setItemDamage(j);
+        }
 
-	public float getDamage()
-	{
-		return damage;
-	}
+        if (this.isEnchantable) {
+            EnchantmentHelper.addRandomEnchantment(random, ret, 30);
+            // 1.6.4
+            /*
+             * if (ret.getItem() instanceof ItemEnchantedBook)
+             * {
+             * ItemEnchantedBook item = (ItemEnchantedBook) ret.getItem();
+             * Enchantment enchantment =
+             * Enchantment.enchantmentsBookList[random.nextInt(Enchantment.enchantmentsBookList.length)];
+             * int l = MathHelper.getRandomIntegerInRange(random, enchantment.getMinLevel(), enchantment.getMaxLevel());
+             * item.addEnchantment(ret, new EnchantmentData(enchantment, l));
+             * }
+             * else
+             * {
+             * EnchantmentHelper.addRandomEnchantment(random, ret, 30);
+             * }
+             */
+        }
 
-	public boolean getEnchanted()
-	{
-		return isEnchantable;
-	}
+        return ret;
+    }
 
-	public FishTrapEntry setDamage(float f)
-	{
-		this.damage = f;
-		return this;
-	}
+    public float getDamage() {
+        return damage;
+    }
 
-	public FishTrapEntry setEnchantable(boolean b)
-	{
-		this.isEnchantable = b;
-		return this;
-	}
+    public FishTrapEntry setDamage(float f) {
+        this.damage = f;
+        return this;
+    }
 
-	public FishTrapEntry setEnchantable()
-	{
-		return setEnchantable(true);
-	}
+    public boolean getEnchanted() {
+        return isEnchantable;
+    }
+
+    public FishTrapEntry setEnchantable(boolean b) {
+        this.isEnchantable = b;
+        return this;
+    }
+
+    public FishTrapEntry setEnchantable() {
+        return setEnchantable(true);
+    }
 }

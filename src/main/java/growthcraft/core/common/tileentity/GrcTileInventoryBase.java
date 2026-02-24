@@ -1,18 +1,14 @@
 /*
  * The MIT License (MIT)
- *
  * Copyright (c) 2015, 2016 IceDragon200
- *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,7 +25,6 @@ import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.ICustomDisplayName;
 import growthcraft.core.util.ItemUtils;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -39,223 +34,186 @@ import net.minecraft.nbt.NBTTagCompound;
 /**
  * Extend this base class if you want a Tile with an `Inventory`
  */
-public abstract class GrcTileInventoryBase extends GrcTileBase implements ISidedInventory, ICustomDisplayName, IInventoryWatcher
-{
-	protected static final int[] NO_SLOTS = new int[]{};
+public abstract class GrcTileInventoryBase extends GrcTileBase
+    implements ISidedInventory, ICustomDisplayName, IInventoryWatcher {
 
-	protected String inventoryName;
-	protected GrcInternalInventory inventory;
+    protected static final int[] NO_SLOTS = new int[]{};
 
-	public GrcTileInventoryBase()
-	{
-		super();
-		this.inventory = createInventory();
-	}
+    protected String inventoryName;
+    protected GrcInternalInventory inventory;
 
-	public GrcInternalInventory createInventory()
-	{
-		return new GrcInternalInventory(this, 0);
-	}
+    public GrcTileInventoryBase() {
+        super();
+        this.inventory = createInventory();
+    }
 
-	public GrcInternalInventory getInternalInventory()
-	{
-		return inventory;
-	}
+    public GrcInternalInventory createInventory() {
+        return new GrcInternalInventory(this, 0);
+    }
 
-	public String getDefaultInventoryName()
-	{
-		return "grc.inventory.name";
-	}
+    public GrcInternalInventory getInternalInventory() {
+        return inventory;
+    }
 
-	@Override
-	public void onInventoryChanged(IInventory inv, int index)
-	{
-		markDirty();
-	}
+    public String getDefaultInventoryName() {
+        return "grc.inventory.name";
+    }
 
-	@Override
-	public void onItemDiscarded(IInventory inv, ItemStack stack, int index, int discardedAmount)
-	{
-		final ItemStack discarded = stack.copy();
-		discarded.stackSize = discardedAmount;
-		ItemUtils.spawnItemStack(worldObj, xCoord, yCoord, zCoord, discarded, worldObj.rand);
-	}
+    @Override
+    public void onInventoryChanged(IInventory inv, int index) {
+        markDirty();
+    }
 
-	@Override
-	public String getInventoryName()
-	{
-		return hasCustomInventoryName() ? inventoryName : getDefaultInventoryName();
-	}
+    @Override
+    public void onItemDiscarded(IInventory inv, ItemStack stack, int index, int discardedAmount) {
+        final ItemStack discarded = stack.copy();
+        discarded.stackSize = discardedAmount;
+        ItemUtils.spawnItemStack(worldObj, xCoord, yCoord, zCoord, discarded, worldObj.rand);
+    }
 
-	@Override
-	public boolean hasCustomInventoryName()
-	{
-		return inventoryName != null && inventoryName.length() > 0;
-	}
+    @Override
+    public String getInventoryName() {
+        return hasCustomInventoryName() ? inventoryName : getDefaultInventoryName();
+    }
 
-	@Override
-	public void setGuiDisplayName(String string)
-	{
-		this.inventoryName = string;
-	}
+    @Override
+    public boolean hasCustomInventoryName() {
+        return inventoryName != null && inventoryName.length() > 0;
+    }
 
-	@Override
-	public ItemStack getStackInSlot(int index)
-	{
-		return inventory.getStackInSlot(index);
-	}
+    @Override
+    public void setGuiDisplayName(String string) {
+        this.inventoryName = string;
+    }
 
-	public ItemStack tryMergeItemIntoSlot(ItemStack itemstack, int index)
-	{
-		final ItemStack result = ItemUtils.mergeStacksBang(getStackInSlot(index), itemstack);
-		if (result != null)
-		{
-			inventory.setInventorySlotContents(index, result);
-		}
-		return result;
-	}
+    @Override
+    public ItemStack getStackInSlot(int index) {
+        return inventory.getStackInSlot(index);
+    }
 
-	// Attempts to merge the given itemstack into the main slot
-	public ItemStack tryMergeItemIntoMainSlot(ItemStack itemstack)
-	{
-		return tryMergeItemIntoSlot(itemstack, 0);
-	}
+    public ItemStack tryMergeItemIntoSlot(ItemStack itemstack, int index) {
+        final ItemStack result = ItemUtils.mergeStacksBang(getStackInSlot(index), itemstack);
+        if (result != null) {
+            inventory.setInventorySlotContents(index, result);
+        }
+        return result;
+    }
 
-	@Override
-	public ItemStack decrStackSize(int index, int par2)
-	{
-		return inventory.decrStackSize(index, par2);
-	}
+    // Attempts to merge the given itemstack into the main slot
+    public ItemStack tryMergeItemIntoMainSlot(ItemStack itemstack) {
+        return tryMergeItemIntoSlot(itemstack, 0);
+    }
 
-	@Override
-	public ItemStack getStackInSlotOnClosing(int index)
-	{
-		return inventory.getStackInSlotOnClosing(index);
-	}
+    @Override
+    public ItemStack decrStackSize(int index, int par2) {
+        return inventory.decrStackSize(index, par2);
+    }
 
-	@Override
-	public void setInventorySlotContents(int index, ItemStack itemstack)
-	{
-		inventory.setInventorySlotContents(index, itemstack);
-	}
+    @Override
+    public ItemStack getStackInSlotOnClosing(int index) {
+        return inventory.getStackInSlotOnClosing(index);
+    }
 
-	@Override
-	public int getInventoryStackLimit()
-	{
-		return inventory.getInventoryStackLimit();
-	}
+    @Override
+    public void setInventorySlotContents(int index, ItemStack itemstack) {
+        inventory.setInventorySlotContents(index, itemstack);
+    }
 
-	@Override
-	public int getSizeInventory()
-	{
-		return inventory.getSizeInventory();
-	}
+    @Override
+    public int getInventoryStackLimit() {
+        return inventory.getInventoryStackLimit();
+    }
 
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer player)
-	{
-		if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
-		{
-			return false;
-		}
-		return player.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64.0D;
-	}
+    @Override
+    public int getSizeInventory() {
+        return inventory.getSizeInventory();
+    }
 
-	@Override
-	public void openInventory()
-	{
-	}
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer player) {
+        if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this) {
+            return false;
+        }
+        return player.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64.0D;
+    }
 
-	@Override
-	public void closeInventory()
-	{
-	}
+    @Override
+    public void openInventory() {
+    }
 
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
-	{
-		return inventory.isItemValidForSlot(slot, itemstack);
-	}
+    @Override
+    public void closeInventory() {
+    }
 
-	@Override
-	public boolean canInsertItem(int slot, ItemStack stack, int side)
-	{
-		return InventoryProcessor.instance().canInsertItem(this, stack, slot);
-	}
+    @Override
+    public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
+        return inventory.isItemValidForSlot(slot, itemstack);
+    }
 
-	@Override
-	public boolean canExtractItem(int slot, ItemStack stack, int side)
-	{
-		return InventoryProcessor.instance().canExtractItem(this, stack, slot);
-	}
+    @Override
+    public boolean canInsertItem(int slot, ItemStack stack, int side) {
+        return InventoryProcessor.instance()
+            .canInsertItem(this, stack, slot);
+    }
 
-	@Override
-	public int[] getAccessibleSlotsFromSide(int side)
-	{
-		return NO_SLOTS;
-	}
+    @Override
+    public boolean canExtractItem(int slot, ItemStack stack, int side) {
+        return InventoryProcessor.instance()
+            .canExtractItem(this, stack, slot);
+    }
 
-	protected void readInventoryFromNBT(NBTTagCompound nbt)
-	{
-		if (nbt.hasKey("items"))
-		{
-			inventory.readFromNBT(nbt, "items");
-		}
-		else if (nbt.hasKey("inventory"))
-		{
-			inventory.readFromNBT(nbt, "inventory");
-		}
-	}
+    @Override
+    public int[] getAccessibleSlotsFromSide(int side) {
+        return NO_SLOTS;
+    }
 
-	private void readInventoryNameFromNBT(NBTTagCompound nbt)
-	{
-		if (nbt.hasKey("name"))
-		{
-			this.inventoryName = nbt.getString("name");
-		}
-		else if (nbt.hasKey("inventory_name"))
-		{
-			this.inventoryName = nbt.getString("inventory_name");
-		}
-	}
+    protected void readInventoryFromNBT(NBTTagCompound nbt) {
+        if (nbt.hasKey("items")) {
+            inventory.readFromNBT(nbt, "items");
+        } else if (nbt.hasKey("inventory")) {
+            inventory.readFromNBT(nbt, "inventory");
+        }
+    }
 
-	@Override
-	public void readFromNBTForItem(NBTTagCompound nbt)
-	{
-		super.readFromNBTForItem(nbt);
-		readInventoryFromNBT(nbt);
-		// Do not reload the inventory name from NBT, allow the ItemStack to do that
-		//readInventoryNameFromNBT(nbt);
-	}
+    private void readInventoryNameFromNBT(NBTTagCompound nbt) {
+        if (nbt.hasKey("name")) {
+            this.inventoryName = nbt.getString("name");
+        } else if (nbt.hasKey("inventory_name")) {
+            this.inventoryName = nbt.getString("inventory_name");
+        }
+    }
 
-	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
-	public void readFromNBT_Inventory(NBTTagCompound nbt)
-	{
-		readInventoryFromNBT(nbt);
-		readInventoryNameFromNBT(nbt);
-	}
+    @Override
+    public void readFromNBTForItem(NBTTagCompound nbt) {
+        super.readFromNBTForItem(nbt);
+        readInventoryFromNBT(nbt);
+        // Do not reload the inventory name from NBT, allow the ItemStack to do that
+        // readInventoryNameFromNBT(nbt);
+    }
 
-	private void writeInventoryToNBT(NBTTagCompound nbt)
-	{
-		inventory.writeToNBT(nbt, "inventory");
-		// NAME
-		if (hasCustomInventoryName())
-		{
-			nbt.setString("inventory_name", inventoryName);
-		}
-		nbt.setInteger("inventory_tile_version", 3);
-	}
+    @TileEventHandler(event = TileEventHandler.EventType.NBT_READ)
+    public void readFromNBT_Inventory(NBTTagCompound nbt) {
+        readInventoryFromNBT(nbt);
+        readInventoryNameFromNBT(nbt);
+    }
 
-	@Override
-	public void writeToNBTForItem(NBTTagCompound nbt)
-	{
-		super.writeToNBTForItem(nbt);
-		writeInventoryToNBT(nbt);
-	}
+    private void writeInventoryToNBT(NBTTagCompound nbt) {
+        inventory.writeToNBT(nbt, "inventory");
+        // NAME
+        if (hasCustomInventoryName()) {
+            nbt.setString("inventory_name", inventoryName);
+        }
+        nbt.setInteger("inventory_tile_version", 3);
+    }
 
-	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
-	public void writeToNBT_Inventory(NBTTagCompound nbt)
-	{
-		writeInventoryToNBT(nbt);
-	}
+    @Override
+    public void writeToNBTForItem(NBTTagCompound nbt) {
+        super.writeToNBTForItem(nbt);
+        writeInventoryToNBT(nbt);
+    }
+
+    @TileEventHandler(event = TileEventHandler.EventType.NBT_WRITE)
+    public void writeToNBT_Inventory(NBTTagCompound nbt) {
+        writeInventoryToNBT(nbt);
+    }
 }
