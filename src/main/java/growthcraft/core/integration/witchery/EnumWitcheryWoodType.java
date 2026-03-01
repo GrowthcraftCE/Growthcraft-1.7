@@ -1,7 +1,6 @@
 package growthcraft.core.integration.witchery;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import growthcraft.core.integration.EBXL.EBXLPlatform;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
