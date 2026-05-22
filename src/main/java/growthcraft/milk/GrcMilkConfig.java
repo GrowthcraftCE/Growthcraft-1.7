@@ -116,7 +116,7 @@ public class GrcMilkConfig extends ConfigBase
 	public boolean thistleSeedEnabled = true;
 
 	@ConfigOption(catergory="Thistle", name="Grass Seed Weight", desc="How likely is it to find a Thistle Seed by breaking grass? [Higher -> More Likely] (Setting to 0 will disable seeds in grass)")
-	public int thistleSeedWeight = 8;
+	public int thistleSeedWeight = 2;
 
 
 	@ConfigOption(catergory="Thistle/World Gen", name="Enable Thistle World Gen?", desc="Can thistle spawn in the world? (This will be disabled, if Thistle was disabled in the Thistle section) (WARNING: This thing spreads like wild fire, enable at your own risk)")
