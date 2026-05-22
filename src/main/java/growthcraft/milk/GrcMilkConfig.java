@@ -107,10 +107,10 @@ public class GrcMilkConfig extends ConfigBase
 	public boolean thistleEnabled = true;
 
 	@ConfigOption(catergory="Thistle", name="Spread Chance", desc="How quickly does thistle spread? [Higher -> Slower] (Setting to 0 will disable)")
-	public int thistleSpreadChance = 20;
+	public int thistleSpreadChance = 64;
 
 	@ConfigOption(catergory="Thistle", name="Growth Chance", desc="Chance that thistle will advance a stage upon ticking? [Higher -> Less Likely] (Setting to 0 will disable, AppleCore will handle growth if available)")
-	public int thistleGrowthChance = 16;
+	public int thistleGrowthChance = 32;
 
 	@ConfigOption(catergory="Thistle", name="Enable Thistle Seeds?", desc="Should thistle seeds be available?")
 	public boolean thistleSeedEnabled = true;
