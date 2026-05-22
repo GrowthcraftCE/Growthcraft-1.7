@@ -49,7 +49,7 @@ public class GrcMilkConfig extends ConfigBase
 	public float stomachDropRate = 0.25f;
 
 	@ConfigOption(catergory="Item/Stomach", name="Min Dropped", desc="What is the minimum number of stomachs dropped?")
-	public int stomachMinDropped = 2;
+	public int stomachMinDropped = 1;
 
 	@ConfigOption(catergory="Item/Stomach", name="Max Dropped", desc="What is the maximum number of stomachs dropped?")
 	public int stomachMaxDropped = 4;
