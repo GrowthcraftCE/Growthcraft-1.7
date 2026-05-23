@@ -54,6 +54,7 @@ public enum EnumIceCream implements IItemStackFactory
     CASSIS("cassis"),
     //Begin listing Thaumcraft content
     MANA_BEAN("mana_bean");
+    //Other forms of cross-talk may be added.
 
 	public static final EnumIceCream[] VALUES = values();
 

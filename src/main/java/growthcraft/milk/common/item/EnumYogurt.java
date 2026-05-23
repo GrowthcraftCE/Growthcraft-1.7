@@ -30,12 +30,31 @@ import net.minecraft.item.ItemStack;
 
 public enum EnumYogurt implements IItemStackFactory
 {
-	PLAIN("plain"),
-	CHOCOLATE("chocolate"),
-	GRAPE("grape"),
-	APPLE("apple"),
-	HONEY("honey"),
-	WATERMELON("watermelon");
+    PLAIN("plain"),
+    CHOCOLATE("chocolate"),
+    GRAPE("grape"),
+    APPLE("apple"),
+    HONEY("honey"),
+    WATERMELON("watermelon"),
+    //Begin listing Et Futurum and additional vanilla related content.
+    SWEET_BERRY("sweet_berry"),
+    GLOW_BERRY("glow_berry"),
+    //Yes, this actually exists.
+    KELP("kelp"),
+    ENCHANTED_APPLE("enchanted_apple"),
+    ENCHANTED_GOLDEN_APPLE("enchanted_golden_apple"),
+    CHORUS_FRUIT("chorus_fruit"),
+    PUMPKIN("pumpkin"),
+    //Begin listing Witchery content
+    ROWAN_BERRY("rowan_berry"),
+    //Begin listing Apple Milk Tea 2 content
+    YUZU("yuzu"),
+    TEA("tea"),
+    MINT("mint"),
+    CASSIS("cassis"),
+    //Begin listing Thaumcraft content
+    MANA_BEAN("mana_bean");
+    //Other forms of cross-talk may be added.
 
 	public static final EnumYogurt[] VALUES = values();
 
