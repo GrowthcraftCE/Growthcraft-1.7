@@ -64,7 +64,13 @@ public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory
 		new EnumCheeseStage[]{EnumCheeseStage.UNWAXED, EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
 	RICOTTA("ricotta", 0xc8c8c5,
 		new EnumCheeseFeature[]{},
-		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT});
+		new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
+    CASU_MARZU("casu_marzu", 0xed9200,
+        new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
+    new EnumCheeseStage[]{EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT}),
+    SAGE_DERBY("sage_derby", 0x4F7942,
+        new EnumCheeseFeature[]{EnumCheeseFeature.HAS_BLOCK},
+        new EnumCheeseStage[]{EnumCheeseStage.UNWAXED, EnumCheeseStage.UNAGED, EnumCheeseStage.AGED, EnumCheeseStage.CUT});
 
 	public static final EnumCheeseType[] VALUES = values();
 
