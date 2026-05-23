@@ -54,7 +54,7 @@ public enum EnumYogurt implements IItemStackFactory
     CASSIS("cassis"),
     //Begin listing Thaumcraft content
     MANA_BEAN("mana_bean");
-    //Other forms of cross-talk may be added.
+    //Other forms of cross-talk may be added later.
 
 	public static final EnumYogurt[] VALUES = values();
 
