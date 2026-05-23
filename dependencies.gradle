@@ -47,4 +47,6 @@ dependencies {
     compileOnly("mcp.mobius.waila:Waila:1.5.11-RC2-NONEI_1.7.10:dev")
     compileOnly("applecore:AppleCore:1.7.10-3.1.1:deobf")
     compileOnly("com.mod-buildcraft:buildcraft:7.1.23:dev")
+    compileOnly "curse.maven:applemilktea2-229325:2341197"
+    compileOnly "curse.maven:the-vegan-option-227309:2456940"
 }
