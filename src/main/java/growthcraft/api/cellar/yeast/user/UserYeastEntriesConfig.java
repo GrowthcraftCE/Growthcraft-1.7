@@ -58,6 +58,12 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 		final ItemKeySchema originYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 4);
 		etherealYeast.setComment("Origin Yeast");
 
+        final ItemKeySchema algolYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 5);
+        algolYeast.setComment("Algol Yeast");
+
+        final ItemKeySchema antaresYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 6);
+        antaresYeast.setComment("Antares Yeast");
+
 		final UserYeastEntry brewers = new UserYeastEntry(brewersYeast, 1, new ArrayList<String>());
 		brewers.setComment("Brewers yeast is the default yeast, which appears in all other biomes that are filled by the Lager or Ethereal");
 
@@ -69,6 +75,12 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 
 		final UserYeastEntry origin = new UserYeastEntry(originYeast, 10, new ArrayList<String>());
 		origin.setComment("Origin yeast is found in MUSHROOM biomes.");
+
+        final UserYeastEntry algol = new UserYeastEntry(algolYeast, 10, new ArrayList<String>());
+        algol.setComment("Algol yeast is found in The Nether.");
+
+        final UserYeastEntry antares = new UserYeastEntry(antaresYeast, 10, new ArrayList<String>());
+        antares.setComment("Antares yeast is found in sandy deserts and mesas.");
 
 		for (BiomeDictionary.Type biomeType : BiomeDictionary.Type.values())
 		{
@@ -84,6 +96,12 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 				case MUSHROOM:
 					origin.biome_types.add(biomeTypeName);
 					break;
+                case NETHER:
+                    algol.biome_types.add(biomeTypeName);
+                    break;
+                case SANDY:
+                    antares.biome_types.add(biomeTypeName);
+                    break;
 				default:
 					brewers.biome_types.add(biomeTypeName);
 			}
