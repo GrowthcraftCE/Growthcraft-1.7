@@ -34,7 +34,8 @@ public enum EnumYeast implements IItemStackFactory
 	LAGER,
 	BAYANUS,
 	ETHEREAL,
-	ORIGIN;
+	ORIGIN,
+    ALGOL;
 
 	public static final int length = values().length;
 
