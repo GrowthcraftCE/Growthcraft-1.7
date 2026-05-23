@@ -161,12 +161,12 @@ public class GrcHopsFluids extends GrcModuleBase
 
 		GrowthCraftCellar.boozeBuilderFactory.create(lagerBooze[6])
 			.tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.POISONED)
-			.fermentsFrom(fs[0], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[1], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[2], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[3], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[4], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[5], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[0], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[1], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[2], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[3], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[4], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[5], new OreItemStacks("yeastAlgol"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
 				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);
@@ -252,17 +252,17 @@ public class GrcHopsFluids extends GrcModuleBase
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.digSpeed.id, TickUtils.minutes(3), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.digSlowdown.id, TickUtils.minutes(3), 2))));
 
-		// Poisoned - Netherrash
+		// Poisoned - Algol
 		// Regardless of what you brewed it with, it will kill the hops in the
 		// booze and poison it.
 		GrowthCraftCellar.boozeBuilderFactory.create(hopAleBooze[8])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
-			.fermentsFrom(fs[1], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[2], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[3], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[5], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[6], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[7], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[1], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[2], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[3], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[5], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[6], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[7], new OreItemStacks("yeastAlgol"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(45))
 				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);

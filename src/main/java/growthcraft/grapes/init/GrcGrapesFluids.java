@@ -158,12 +158,12 @@ public class GrcGrapesFluids extends GrcModuleBase
 
 		GrowthCraftCellar.boozeBuilderFactory.create(grapeWineBooze[7])
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POISONED)
-			.fermentsTo(fs[1], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsTo(fs[2], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsTo(fs[3], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsTo(fs[4], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsTo(fs[5], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsTo(fs[6], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsTo(fs[1], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsTo(fs[2], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsTo(fs[3], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsTo(fs[4], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsTo(fs[5], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsTo(fs[6], new OreItemStacks("yeastAlgol"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
 				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);

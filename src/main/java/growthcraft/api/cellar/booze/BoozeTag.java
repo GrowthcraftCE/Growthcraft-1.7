@@ -40,7 +40,7 @@ public class BoozeTag
 	public static final FluidTag HYPER_EXTENDED = CoreRegistry.instance().fluidTags().createTag("hyper_extended");
 	// the booze WILL kill the player on overdose
 	public static final FluidTag DEADLY = CoreRegistry.instance().fluidTags().createTag("deadly");
-	// the booze is poisoned, most likely by using netherrash
+	// the booze is poisoned, most likely by using algol yeast
 	public static final FluidTag POISONED = CoreRegistry.instance().fluidTags().createTag("poisoned");
 	// the booze was fermented using Lager yeast
 	public static final FluidTag CHILLED = CoreRegistry.instance().fluidTags().createTag("chilled");
