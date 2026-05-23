@@ -78,6 +78,7 @@ public class ItemYeast extends GrcItemBase
 		icons[EnumYeast.ETHEREAL.ordinal()] = reg.registerIcon(getIconString() + "_ethereal");
 		icons[EnumYeast.LAGER.ordinal()] = reg.registerIcon(getIconString() + "_lager");
 		icons[EnumYeast.ORIGIN.ordinal()] = reg.registerIcon(getIconString() + "_origin");
+        icons[EnumYeast.ALGOL.ordinal()] = reg.registerIcon(getIconString() + "_algol");
 	}
 
 	@Override
