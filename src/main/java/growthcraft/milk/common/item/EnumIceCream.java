@@ -52,7 +52,6 @@ public enum EnumIceCream implements IItemStackFactory
     TEA("tea"),
     MINT("mint"),
     CASSIS("cassis"),
-    CAMELLIA_FRUIT("camellia_fruit"),
     //Begin listing Thaumcraft content
     MANA_BEAN("mana_bean");
 
