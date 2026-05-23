@@ -122,16 +122,16 @@ public class GrcApplesRecipes extends GrcModuleBase
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.wither.id, TickUtils.seconds(90), 2)))
 				);
 
-		// Poisoned - created from netherrash,
+		// Poisoned - created from algol yeast,
 		// the booze looses all its benefits and effectively becomes poisoned
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[6])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POISONED)
-			.fermentsFrom(fs[0], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[1], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[2], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[3], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[4], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[5], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[0], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[1], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[2], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[3], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[4], new OreItemStacks("yeastAlgol"), fermentTime)
+			.fermentsFrom(fs[5], new OreItemStacks("yeastAlgol"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
 				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);

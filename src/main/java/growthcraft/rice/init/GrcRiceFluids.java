@@ -138,11 +138,11 @@ public class GrcRiceFluids extends GrcModuleBase
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.jump.id, TickUtils.minutes(3), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.confusion.id, TickUtils.minutes(3), 2))));
 
-		// Poisoned Sake - created from netherrash,
+		// Poisoned Sake - created from algol yeast,
 		// the booze looses all its benefits and effectively becomes poisoned
 		GrowthCraftCellar.boozeBuilderFactory.create(riceSakeBooze[6])
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
-			//.fermentsFrom(fs[1], EnumYeast.NETHERRASH.asStack(), fermentTime)
+			.fermentsFrom(fs[1], EnumYeast.ALGOL.asStack(), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(45))
 				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);
