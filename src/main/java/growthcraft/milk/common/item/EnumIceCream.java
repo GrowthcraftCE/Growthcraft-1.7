@@ -36,7 +36,7 @@ public enum EnumIceCream implements IItemStackFactory
 	APPLE("apple"),
 	HONEY("honey"),
 	WATERMELON("watermelon"),
-    //Begin listing Et Futurum and Vanilla related content.
+    //Begin listing Et Futurum and additional vanilla related content.
     SWEET_BERRY("sweet_berry"),
     GLOW_BERRY("glow_berry"),
     //Yes, this actually exists.
