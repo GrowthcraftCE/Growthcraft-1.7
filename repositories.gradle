@@ -64,9 +64,7 @@ repositories {
         }
     }
     maven {
-        url "https://jitpack.io"
-    }
-    maven {
         url "https://beta.cursemaven.com"
     }
+    maven { url 'https://jitpack.io' }
 }
