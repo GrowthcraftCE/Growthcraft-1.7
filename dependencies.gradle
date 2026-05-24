@@ -48,5 +48,5 @@ dependencies {
     compileOnly("applecore:AppleCore:1.7.10-3.1.1:deobf")
     compileOnly("com.mod-buildcraft:buildcraft:7.1.23:dev")
     compileOnly "curse.maven:the-vegan-option-227309:2456940"
-    implementation 'com.github.defeatedcrow:AppleMilkTea2_1.7.10:-SNAPSHOT'
+    //implementation 'com.github.defeatedcrow:AppleMilkTea2_1.7.10:-SNAPSHOT'
 }
