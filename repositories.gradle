@@ -42,10 +42,6 @@ repositories {
         url "http://dvs1.progwml6.com/files/maven"
     }
     maven {
-        name = "Mobius Repo"
-        url "http://tehnut.info/maven"
-    }
-    maven {
         name = "ilexiconn"
         url = "https://maven.mcmoddev.com/"
     }
