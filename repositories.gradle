@@ -63,4 +63,6 @@ repositories {
         url "https://beta.cursemaven.com"
     }
     maven { url 'https://jitpack.io' }
+
+    maven { url = uri("https://jitpack.io") }
 }
