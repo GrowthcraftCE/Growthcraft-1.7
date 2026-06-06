@@ -1,4 +1,4 @@
-package growthcraft.api.core.effect;
+package growthcraft.core.effect;
 
 import org.junit.Test;
 

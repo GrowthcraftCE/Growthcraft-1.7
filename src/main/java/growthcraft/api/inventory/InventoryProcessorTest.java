@@ -1,4 +1,4 @@
-package growthcraft.core.common.inventory;
+package growthcraft.api.inventory;
 
 import org.junit.Test;
 

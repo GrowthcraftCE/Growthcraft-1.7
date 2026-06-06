@@ -64,6 +64,9 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
         final ItemKeySchema antaresYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 6);
         antaresYeast.setComment("Antares Yeast");
 
+        final ItemKeySchema netherwart = new ItemKeySchema("minecraft", "grc.yeast", 1, 7);
+        netherwart.setComment("Netherwart Culturing Recipe");
+
 		final UserYeastEntry brewers = new UserYeastEntry(brewersYeast, 1, new ArrayList<String>());
 		brewers.setComment("Brewers yeast is the default yeast, which appears in all other biomes that are filled by the Lager or Ethereal");
 
@@ -77,10 +80,13 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 		origin.setComment("Origin yeast is found in MUSHROOM biomes.");
 
         final UserYeastEntry algol = new UserYeastEntry(algolYeast, 10, new ArrayList<String>());
-        algol.setComment("Algol yeast is found in The Nether.");
+        algol.setComment("Algol yeast is found in The Nether. Namely, in fortresses.");
 
         final UserYeastEntry antares = new UserYeastEntry(antaresYeast, 10, new ArrayList<String>());
-        antares.setComment("Antares yeast is found in sandy deserts and mesas.");
+        antares.setComment("Antares yeast is found in dungeons across the worlds.");
+
+        final UserYeastEntry netherwart = new UserYeastEntry(netherwart, 10, new ArrayList<String>());
+        netherwart.setComment("This is alternate way of getting netherwart.");
 
 		for (BiomeDictionary.Type biomeType : BiomeDictionary.Type.values())
 		{
@@ -97,10 +103,7 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 					origin.biome_types.add(biomeTypeName);
 					break;
                 case NETHER:
-                    algol.biome_types.add(biomeTypeName);
-                    break;
-                case SANDY:
-                    antares.biome_types.add(biomeTypeName);
+                    netherwart.biome_types.add(biomeTypeName);
                     break;
 				default:
 					brewers.biome_types.add(biomeTypeName);
@@ -110,7 +113,10 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 		defaultEntries.data.add(ethereal);
 		defaultEntries.data.add(lager);
 		defaultEntries.data.add(origin);
-		defaultEntries.setComment("Default Yeast Config v1.1.0");
+        defaultEntries.data.add(algol);
+        defaultEntries.data.add(antares);
+        defaultEntries.data.add(netherwart);
+		defaultEntries.setComment("Default Yeast Config v1.2.0");
 		return gson.toJson(defaultEntries);
 	}
 

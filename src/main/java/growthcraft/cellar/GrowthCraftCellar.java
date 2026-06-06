@@ -266,6 +266,7 @@ public class GrowthCraftCellar
 		OreDictionary.registerOre("yeastOrigin", EnumYeast.ORIGIN.asStack());
         OreDictionary.registerOre("yeastAlgol", EnumYeast.ALGOL.asStack());
         OreDictionary.registerOre("yeastAntares", EnumYeast.ANTARES.asStack());
+        OreDictionary.registerOre("yeastNetherwart", Items.nether_wart.asStack());
     }
 
 	private void registerYeast()
@@ -277,6 +278,7 @@ public class GrowthCraftCellar
 		CellarRegistry.instance().yeast().addYeast(EnumYeast.ORIGIN.asStack());
         CellarRegistry.instance().yeast().addYeast(EnumYeast.ALGOL.asStack());
         CellarRegistry.instance().yeast().addYeast(EnumYeast.ANTARES.asStack());
+        CellarRegistry.instance().yeast().addYeast(Items.nether_wart.asStack());
 	}
 
 	private void initVillageHandlers()

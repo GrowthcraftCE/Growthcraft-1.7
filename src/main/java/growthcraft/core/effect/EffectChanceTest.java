@@ -1,4 +1,4 @@
-package growthcraft.api.core.effect;
+package growthcraft.core.effect;
 
 import java.util.ArrayList;
 import java.util.List;
