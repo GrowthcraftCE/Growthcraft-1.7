@@ -1,34 +1,33 @@
 package growthcraft.cellar;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
-import growthcraft.api.bees.user.UserBeesConfig;
-import growthcraft.api.bees.user.UserFlowerEntry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.EventBus;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
+import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.booze.BoozeEntry;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.booze.effect.EffectTipsy;
-import growthcraft.api.cellar.CellarRegistry;
-import growthcraft.api.cellar.culturing.user.UserCultureRecipe;
-import growthcraft.api.cellar.culturing.user.UserCultureRecipesConfig;
 import growthcraft.api.cellar.heatsource.user.UserHeatSourceEntry;
 import growthcraft.api.cellar.heatsource.user.UserHeatSourcesConfig;
 import growthcraft.api.cellar.yeast.user.UserYeastEntriesConfig;
-import growthcraft.api.cellar.yeast.user.UserYeastEntry;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.common.booze.ModifierFunctionExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionHyperExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionPotent;
-import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.cellar.common.potion.PotionCellar;
-import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
-import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
-import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
-import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
+import growthcraft.cellar.common.tileentity.*;
 import growthcraft.cellar.common.village.ComponentVillageTavern;
 import growthcraft.cellar.common.village.VillageHandlerCellar;
 import growthcraft.cellar.creativetab.CreativeTabsCellar;
@@ -45,27 +44,17 @@ import growthcraft.cellar.util.GrcCellarUserApis;
 import growthcraft.core.GrcGuiProvider;
 import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
-
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.EventBus;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 @Mod(
 	modid = GrowthCraftCellar.MOD_ID,
