@@ -15,6 +15,7 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.booze.BoozeEntry;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.booze.effect.EffectTipsy;
+import growthcraft.api.cellar.culturing.user.UserCultureRecipesConfig;
 import growthcraft.api.cellar.heatsource.user.UserHeatSourceEntry;
 import growthcraft.api.cellar.heatsource.user.UserHeatSourcesConfig;
 import growthcraft.api.cellar.yeast.user.UserYeastEntriesConfig;
@@ -47,6 +48,7 @@ import growthcraft.core.util.MapGenHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -87,7 +89,7 @@ public class GrowthCraftCellar
 	private final GrcCellarUserApis userApis = new GrcCellarUserApis();
 	private final ModuleContainer modules = new ModuleContainer();
     private final UserYeastEntriesConfig userYeastEntriesConfig = new UserYeastEntriesConfig();
-
+    private final UserCultureRecipesConfig userCultureRecipesConfig = new UserCultureRecipesConfig();
 	public static UserHeatSourcesConfig getUserHeatSources()
 	{
 		return instance.userApis.getUserHeatSources();
@@ -224,6 +226,10 @@ public class GrowthCraftCellar
         //====================
         // MISC RECIPES
         //====================
+
+        //TODO: Create the culture media, a sickly green fluid made from soulsand, magma cream, and sugar.
+        userCultureRecipesConfig.addDefault(1, new ItemStack(Items.nether_wart), 1, 616);
+
 	}
 
 	private void extendPotionsArray()
