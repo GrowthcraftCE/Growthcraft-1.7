@@ -26,11 +26,15 @@ package growthcraft.api.cellar.yeast.user;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 
+import growthcraft.api.bees.user.UserFlowerEntry;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.core.item.ItemKey;
 import growthcraft.api.core.schema.ItemKeySchema;
 import growthcraft.api.core.util.BiomeUtils;
 import growthcraft.api.core.user.AbstractUserJSONConfig;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.BiomeDictionary;
 
@@ -40,8 +44,16 @@ import net.minecraftforge.common.BiomeDictionary;
  */
 public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 {
-	private final UserYeastEntries defaultEntries = new UserYeastEntries();
-	private UserYeastEntries entries;
+
+    //FIXME: Deal with recursion errors
+    public UserYeastEntry addDefault(Item item, UserYeastEntry yeastEntry)
+    {
+        return addDefault(item, yeastEntry);
+    }
+
+	public UserYeastEntries defaultEntries = new UserYeastEntries();
+
+	public UserYeastEntries entries;
 
 	@Override
 	protected String getDefault()
@@ -64,8 +76,8 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
         final ItemKeySchema antaresYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 6);
         antaresYeast.setComment("Antares Yeast");
 
-        final ItemKeySchema netherwart = new ItemKeySchema("minecraft", "grc.yeast", 1, 7);
-        netherwart.setComment("Netherwart Culturing Recipe");
+        final ItemKeySchema netherwart = new ItemKeySchema("minecraft", "nether_wart", 1, 7);
+        netherwart.setComment("Netherwart");
 
 		final UserYeastEntry brewers = new UserYeastEntry(brewersYeast, 1, new ArrayList<String>());
 		brewers.setComment("Brewers yeast is the default yeast, which appears in all other biomes that are filled by the Lager or Ethereal");
@@ -85,8 +97,8 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
         final UserYeastEntry antares = new UserYeastEntry(antaresYeast, 10, new ArrayList<String>());
         antares.setComment("Antares yeast is found in dungeons across the worlds.");
 
-        final UserYeastEntry netherwart = new UserYeastEntry(netherwart, 10, new ArrayList<String>());
-        netherwart.setComment("This is alternate way of getting netherwart.");
+        final UserYeastEntry netherwartEntry = new UserYeastEntry(netherwartEntry, 10, new ArrayList<String>());
+        netherwartEntry.setComment("An alternate way of getting netherwart.");
 
 		for (BiomeDictionary.Type biomeType : BiomeDictionary.Type.values())
 		{
@@ -103,7 +115,7 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 					origin.biome_types.add(biomeTypeName);
 					break;
                 case NETHER:
-                    netherwart.biome_types.add(biomeTypeName);
+                    netherwartEntry.biome_types.add(biomeTypeName);
                     break;
 				default:
 					brewers.biome_types.add(biomeTypeName);
@@ -115,7 +127,7 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 		defaultEntries.data.add(origin);
         defaultEntries.data.add(algol);
         defaultEntries.data.add(antares);
-        defaultEntries.data.add(netherwart);
+        defaultEntries.data.add(netherwartEntry);
 		defaultEntries.setComment("Default Yeast Config v1.2.0");
 		return gson.toJson(defaultEntries);
 	}

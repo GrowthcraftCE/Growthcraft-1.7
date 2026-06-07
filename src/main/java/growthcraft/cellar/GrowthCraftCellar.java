@@ -3,12 +3,18 @@ package growthcraft.cellar;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+import growthcraft.api.bees.user.UserBeesConfig;
+import growthcraft.api.bees.user.UserFlowerEntry;
 import growthcraft.api.cellar.booze.BoozeEntry;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.booze.effect.EffectTipsy;
 import growthcraft.api.cellar.CellarRegistry;
+import growthcraft.api.cellar.culturing.user.UserCultureRecipe;
+import growthcraft.api.cellar.culturing.user.UserCultureRecipesConfig;
 import growthcraft.api.cellar.heatsource.user.UserHeatSourceEntry;
 import growthcraft.api.cellar.heatsource.user.UserHeatSourcesConfig;
+import growthcraft.api.cellar.yeast.user.UserYeastEntriesConfig;
+import growthcraft.api.cellar.yeast.user.UserYeastEntry;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
@@ -54,6 +60,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -90,6 +97,7 @@ public class GrowthCraftCellar
 	private final GrcCellarConfig config = new GrcCellarConfig();
 	private final GrcCellarUserApis userApis = new GrcCellarUserApis();
 	private final ModuleContainer modules = new ModuleContainer();
+    private final UserYeastEntriesConfig userYeastEntriesConfig = new UserYeastEntriesConfig();
 
 	public static UserHeatSourcesConfig getUserHeatSources()
 	{
@@ -223,6 +231,13 @@ public class GrowthCraftCellar
 		achievements = new GrcCellarAchievements();
 
 		NEI.hideItem(items.chievItemDummy.asStack());
+
+        //====================
+        // MISC RECIPES
+        //====================
+
+        //FIXME: This is almost certainly wrong, and probably does not work.
+        userYeastEntriesConfig.addDefault(Items.nether_wart, new UserYeastEntry());
 	}
 
 	private void extendPotionsArray()
@@ -266,7 +281,7 @@ public class GrowthCraftCellar
 		OreDictionary.registerOre("yeastOrigin", EnumYeast.ORIGIN.asStack());
         OreDictionary.registerOre("yeastAlgol", EnumYeast.ALGOL.asStack());
         OreDictionary.registerOre("yeastAntares", EnumYeast.ANTARES.asStack());
-        OreDictionary.registerOre("yeastNetherwart", Items.nether_wart.asStack());
+        OreDictionary.registerOre("yeastNetherwart", Items.nether_wart);
     }
 
 	private void registerYeast()
@@ -278,7 +293,6 @@ public class GrowthCraftCellar
 		CellarRegistry.instance().yeast().addYeast(EnumYeast.ORIGIN.asStack());
         CellarRegistry.instance().yeast().addYeast(EnumYeast.ALGOL.asStack());
         CellarRegistry.instance().yeast().addYeast(EnumYeast.ANTARES.asStack());
-        CellarRegistry.instance().yeast().addYeast(Items.nether_wart.asStack());
 	}
 
 	private void initVillageHandlers()

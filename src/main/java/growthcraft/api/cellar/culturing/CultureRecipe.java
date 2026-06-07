@@ -33,10 +33,10 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class CultureRecipe implements ICultureRecipe
 {
-	private FluidStack inputFluidStack;
-	private ItemStack outputItemStack;
-	private float requiredHeat;
-	private int time;
+	private final FluidStack inputFluidStack;
+	private final ItemStack outputItemStack;
+	private final float requiredHeat;
+	private final int time;
 
 	public CultureRecipe(@Nonnull FluidStack pInputFluidStack, @Nonnull ItemStack pOutputItemStack, float pRequiredHeat, int pTime)
 	{
