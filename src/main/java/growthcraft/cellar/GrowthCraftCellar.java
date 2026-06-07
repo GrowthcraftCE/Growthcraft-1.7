@@ -235,9 +235,6 @@ public class GrowthCraftCellar
         //====================
         // MISC RECIPES
         //====================
-
-        //FIXME: This is almost certainly wrong, and probably does not work.
-        userYeastEntriesConfig.addDefault(Items.nether_wart, new UserYeastEntry());
 	}
 
 	private void extendPotionsArray()

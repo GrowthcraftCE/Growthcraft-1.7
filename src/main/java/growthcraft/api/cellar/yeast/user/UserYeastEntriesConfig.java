@@ -45,15 +45,8 @@ import net.minecraftforge.common.BiomeDictionary;
 public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 {
 
-    //FIXME: Deal with recursion errors
-    public UserYeastEntry addDefault(Item item, UserYeastEntry yeastEntry)
-    {
-        return addDefault(item, yeastEntry);
-    }
-
-	public UserYeastEntries defaultEntries = new UserYeastEntries();
-
-	public UserYeastEntries entries;
+    private final UserYeastEntries defaultEntries = new UserYeastEntries();
+    private UserYeastEntries entries;
 
 	@Override
 	protected String getDefault()
@@ -97,7 +90,8 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
         final UserYeastEntry antares = new UserYeastEntry(antaresYeast, 10, new ArrayList<String>());
         antares.setComment("Antares yeast is found in dungeons across the worlds.");
 
-        final UserYeastEntry netherwartEntry = new UserYeastEntry(netherwartEntry, 10, new ArrayList<String>());
+        //TODO: Figure this fully out. This codebase is ancient.
+        final UserYeastEntry netherwartEntry = new UserYeastEntry(netherwart, 10, new ArrayList<String>());
         netherwartEntry.setComment("An alternate way of getting netherwart.");
 
 		for (BiomeDictionary.Type biomeType : BiomeDictionary.Type.values())
